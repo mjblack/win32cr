@@ -5,7 +5,7 @@ require "./../properties.cr"
 
 module Win32cr::Devices::Enumeration::Pnp
   alias HSWDEVICE = LibC::IntPtrT
-  alias SW_DEVICE_CREATE_CALLBACK = Proc(Win32cr::Devices::Enumeration::Pnp::HSWDEVICE, Win32cr::Foundation::HRESULT, Void*, Win32cr::Foundation::PWSTR, Void)*
+  alias SW_DEVICE_CREATE_CALLBACK = Proc(Win32cr::Devices::Enumeration::Pnp::HSWDEVICE, Win32cr::Foundation::HRESULT, Void*, Win32cr::Foundation::PWSTR, Void)
 
   UPNP_E_ROOT_ELEMENT_EXPECTED = -2147220992_i32
   UPNP_E_DEVICE_ELEMENT_EXPECTED = -2147220991_i32
@@ -89,16 +89,19 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   @[Extern]
-  record SW_DEVICE_CREATE_INFO,
-    cbSize : UInt32,
-    pszInstanceId : Win32cr::Foundation::PWSTR,
-    pszzHardwareIds : Win32cr::Foundation::PWSTR,
-    pszzCompatibleIds : Win32cr::Foundation::PWSTR,
-    pContainerId : LibC::GUID*,
-    capability_flags : UInt32,
-    pszDeviceDescription : Win32cr::Foundation::PWSTR,
-    pszDeviceLocation : Win32cr::Foundation::PWSTR,
-    pSecurityDescriptor : Win32cr::Security::SECURITY_DESCRIPTOR*
+  struct SW_DEVICE_CREATE_INFO
+    property cbSize : UInt32
+    property pszInstanceId : Win32cr::Foundation::PWSTR
+    property pszzHardwareIds : Win32cr::Foundation::PWSTR
+    property pszzCompatibleIds : Win32cr::Foundation::PWSTR
+    property pContainerId : LibC::GUID*
+    property capability_flags : UInt32
+    property pszDeviceDescription : Win32cr::Foundation::PWSTR
+    property pszDeviceLocation : Win32cr::Foundation::PWSTR
+    property pSecurityDescriptor : Win32cr::Security::SECURITY_DESCRIPTOR*
+    def initialize(@cbSize : UInt32, @pszInstanceId : Win32cr::Foundation::PWSTR, @pszzHardwareIds : Win32cr::Foundation::PWSTR, @pszzCompatibleIds : Win32cr::Foundation::PWSTR, @pContainerId : LibC::GUID*, @capability_flags : UInt32, @pszDeviceDescription : Win32cr::Foundation::PWSTR, @pszDeviceLocation : Win32cr::Foundation::PWSTR, @pSecurityDescriptor : Win32cr::Security::SECURITY_DESCRIPTOR*)
+    end
+  end
 
   @[Extern]
   record IUPnPDeviceFinderVtbl,
@@ -117,7 +120,6 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  #@[Com("adda3d55-6f72-4319-bff9-18600a539b10")]
   record IUPnPDeviceFinder, lpVtbl : IUPnPDeviceFinderVtbl* do
     GUID = LibC::GUID.new(0xadda3d55_u32, 0x6f72_u16, 0x4319_u16, StaticArray[0xbf_u8, 0xf9_u8, 0x18_u8, 0x60_u8, 0xa_u8, 0x53_u8, 0x9b_u8, 0x10_u8])
     def query_interface(this : IUPnPDeviceFinder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -169,7 +171,6 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  #@[Com("e3bf6178-694e-459f-a5a6-191ea0ffa1c7")]
   record IUPnPAddressFamilyControl, lpVtbl : IUPnPAddressFamilyControlVtbl* do
     GUID = LibC::GUID.new(0xe3bf6178_u32, 0x694e_u16, 0x459f_u16, StaticArray[0xa5_u8, 0xa6_u8, 0x19_u8, 0x1e_u8, 0xa0_u8, 0xff_u8, 0xa1_u8, 0xc7_u8])
     def query_interface(this : IUPnPAddressFamilyControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -199,7 +200,6 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  #@[Com("0405af4f-8b5c-447c-80f2-b75984a31f3c")]
   record IUPnPHttpHeaderControl, lpVtbl : IUPnPHttpHeaderControlVtbl* do
     GUID = LibC::GUID.new(0x405af4f_u32, 0x8b5c_u16, 0x447c_u16, StaticArray[0x80_u8, 0xf2_u8, 0xb7_u8, 0x59_u8, 0x84_u8, 0xa3_u8, 0x1f_u8, 0x3c_u8])
     def query_interface(this : IUPnPHttpHeaderControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -228,7 +228,6 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  #@[Com("415a984a-88b3-49f3-92af-0508bedf0d6c")]
   record IUPnPDeviceFinderCallback, lpVtbl : IUPnPDeviceFinderCallbackVtbl* do
     GUID = LibC::GUID.new(0x415a984a_u32, 0x88b3_u16, 0x49f3_u16, StaticArray[0x92_u8, 0xaf_u8, 0x5_u8, 0x8_u8, 0xbe_u8, 0xdf_u8, 0xd_u8, 0x6c_u8])
     def query_interface(this : IUPnPDeviceFinderCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -267,7 +266,6 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  #@[Com("3f8c8e9e-9a7a-4dc8-bc41-ff31fa374956")]
   record IUPnPServices, lpVtbl : IUPnPServicesVtbl* do
     GUID = LibC::GUID.new(0x3f8c8e9e_u32, 0x9a7a_u16, 0x4dc8_u16, StaticArray[0xbc_u8, 0x41_u8, 0xff_u8, 0x31_u8, 0xfa_u8, 0x37_u8, 0x49_u8, 0x56_u8])
     def query_interface(this : IUPnPServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -321,7 +319,6 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  #@[Com("a295019c-dc65-47dd-90dc-7fe918a1ab44")]
   record IUPnPService, lpVtbl : IUPnPServiceVtbl* do
     GUID = LibC::GUID.new(0xa295019c_u32, 0xdc65_u16, 0x47dd_u16, StaticArray[0x90_u8, 0xdc_u8, 0x7f_u8, 0xe9_u8, 0x18_u8, 0xa1_u8, 0xab_u8, 0x44_u8])
     def query_interface(this : IUPnPService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -375,7 +372,6 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  #@[Com("4d65fd08-d13e-4274-9c8b-dd8d028c8644")]
   record IUPnPAsyncResult, lpVtbl : IUPnPAsyncResultVtbl* do
     GUID = LibC::GUID.new(0x4d65fd08_u32, 0xd13e_u16, 0x4274_u16, StaticArray[0x9c_u8, 0x8b_u8, 0xdd_u8, 0x8d_u8, 0x2_u8, 0x8c_u8, 0x86_u8, 0x44_u8])
     def query_interface(this : IUPnPAsyncResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -410,7 +406,6 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  #@[Com("098bdaf5-5ec1-49e7-a260-b3a11dd8680c")]
   record IUPnPServiceAsync, lpVtbl : IUPnPServiceAsyncVtbl* do
     GUID = LibC::GUID.new(0x98bdaf5_u32, 0x5ec1_u16, 0x49e7_u16, StaticArray[0xa2_u8, 0x60_u8, 0xb3_u8, 0xa1_u8, 0x1d_u8, 0xd8_u8, 0x68_u8, 0xc_u8])
     def query_interface(this : IUPnPServiceAsync*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -462,7 +457,6 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  #@[Com("31fadca9-ab73-464b-b67d-5c1d0f83c8b8")]
   record IUPnPServiceCallback, lpVtbl : IUPnPServiceCallbackVtbl* do
     GUID = LibC::GUID.new(0x31fadca9_u32, 0xab73_u16, 0x464b_u16, StaticArray[0xb6_u8, 0x7d_u8, 0x5c_u8, 0x1d_u8, 0xf_u8, 0x83_u8, 0xc8_u8, 0xb8_u8])
     def query_interface(this : IUPnPServiceCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -492,7 +486,6 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  #@[Com("38873b37-91bb-49f4-b249-2e8efbb8a816")]
   record IUPnPServiceEnumProperty, lpVtbl : IUPnPServiceEnumPropertyVtbl* do
     GUID = LibC::GUID.new(0x38873b37_u32, 0x91bb_u16, 0x49f4_u16, StaticArray[0xb2_u8, 0x49_u8, 0x2e_u8, 0x8e_u8, 0xfb_u8, 0xb8_u8, 0xa8_u8, 0x16_u8])
     def query_interface(this : IUPnPServiceEnumProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -520,7 +513,6 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  #@[Com("21905529-0a5e-4589-825d-7e6d87ea6998")]
   record IUPnPServiceDocumentAccess, lpVtbl : IUPnPServiceDocumentAccessVtbl* do
     GUID = LibC::GUID.new(0x21905529_u32, 0xa5e_u16, 0x4589_u16, StaticArray[0x82_u8, 0x5d_u8, 0x7e_u8, 0x6d_u8, 0x87_u8, 0xea_u8, 0x69_u8, 0x98_u8])
     def query_interface(this : IUPnPServiceDocumentAccess*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -556,7 +548,6 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  #@[Com("fdbc0c73-bda3-4c66-ac4f-f2d96fdad68c")]
   record IUPnPDevices, lpVtbl : IUPnPDevicesVtbl* do
     GUID = LibC::GUID.new(0xfdbc0c73_u32, 0xbda3_u16, 0x4c66_u16, StaticArray[0xac_u8, 0x4f_u8, 0xf2_u8, 0xd9_u8, 0x6f_u8, 0xda_u8, 0xd6_u8, 0x8c_u8])
     def query_interface(this : IUPnPDevices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -623,7 +614,6 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  #@[Com("3d44d0d1-98c9-4889-acd1-f9d674bf2221")]
   record IUPnPDevice, lpVtbl : IUPnPDeviceVtbl* do
     GUID = LibC::GUID.new(0x3d44d0d1_u32, 0x98c9_u16, 0x4889_u16, StaticArray[0xac_u8, 0xd1_u8, 0xf9_u8, 0xd6_u8, 0x74_u8, 0xbf_u8, 0x22_u8, 0x21_u8])
     def query_interface(this : IUPnPDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -716,7 +706,6 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  #@[Com("e7772804-3287-418e-9072-cf2b47238981")]
   record IUPnPDeviceDocumentAccess, lpVtbl : IUPnPDeviceDocumentAccessVtbl* do
     GUID = LibC::GUID.new(0xe7772804_u32, 0x3287_u16, 0x418e_u16, StaticArray[0x90_u8, 0x72_u8, 0xcf_u8, 0x2b_u8, 0x47_u8, 0x23_u8, 0x89_u8, 0x81_u8])
     def query_interface(this : IUPnPDeviceDocumentAccess*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -743,7 +732,6 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  #@[Com("c4bc4050-6178-4bd1-a4b8-6398321f3247")]
   record IUPnPDeviceDocumentAccessEx, lpVtbl : IUPnPDeviceDocumentAccessExVtbl* do
     GUID = LibC::GUID.new(0xc4bc4050_u32, 0x6178_u16, 0x4bd1_u16, StaticArray[0xa4_u8, 0xb8_u8, 0x63_u8, 0x98_u8, 0x32_u8, 0x1f_u8, 0x32_u8, 0x47_u8])
     def query_interface(this : IUPnPDeviceDocumentAccessEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -780,7 +768,6 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  #@[Com("11d1c1b2-7daa-4c9e-9595-7f82ed206d1e")]
   record IUPnPDescriptionDocument, lpVtbl : IUPnPDescriptionDocumentVtbl* do
     GUID = LibC::GUID.new(0x11d1c1b2_u32, 0x7daa_u16, 0x4c9e_u16, StaticArray[0x95_u8, 0x95_u8, 0x7f_u8, 0x82_u8, 0xed_u8, 0x20_u8, 0x6d_u8, 0x1e_u8])
     def query_interface(this : IUPnPDescriptionDocument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -837,7 +824,6 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  #@[Com("983dfc0b-1796-44df-8975-ca545b620ee5")]
   record IUPnPDeviceFinderAddCallbackWithInterface, lpVtbl : IUPnPDeviceFinderAddCallbackWithInterfaceVtbl* do
     GUID = LibC::GUID.new(0x983dfc0b_u32, 0x1796_u16, 0x44df_u16, StaticArray[0x89_u8, 0x75_u8, 0xca_u8, 0x54_u8, 0x5b_u8, 0x62_u8, 0xe_u8, 0xe5_u8])
     def query_interface(this : IUPnPDeviceFinderAddCallbackWithInterface*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -864,7 +850,6 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  #@[Com("77394c69-5486-40d6-9bc3-4991983e02da")]
   record IUPnPDescriptionDocumentCallback, lpVtbl : IUPnPDescriptionDocumentCallbackVtbl* do
     GUID = LibC::GUID.new(0x77394c69_u32, 0x5486_u16, 0x40d6_u16, StaticArray[0x9b_u8, 0xc3_u8, 0x49_u8, 0x91_u8, 0x98_u8, 0x3e_u8, 0x2_u8, 0xda_u8])
     def query_interface(this : IUPnPDescriptionDocumentCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -892,7 +877,6 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  #@[Com("204810b4-73b2-11d4-bf42-00b0d0118b56")]
   record IUPnPEventSink, lpVtbl : IUPnPEventSinkVtbl* do
     GUID = LibC::GUID.new(0x204810b4_u32, 0x73b2_u16, 0x11d4_u16, StaticArray[0xbf_u8, 0x42_u8, 0x0_u8, 0xb0_u8, 0xd0_u8, 0x11_u8, 0x8b_u8, 0x56_u8])
     def query_interface(this : IUPnPEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -923,7 +907,6 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  #@[Com("204810b5-73b2-11d4-bf42-00b0d0118b56")]
   record IUPnPEventSource, lpVtbl : IUPnPEventSourceVtbl* do
     GUID = LibC::GUID.new(0x204810b5_u32, 0x73b2_u16, 0x11d4_u16, StaticArray[0xbf_u8, 0x42_u8, 0x0_u8, 0xb0_u8, 0xd0_u8, 0x11_u8, 0x8b_u8, 0x56_u8])
     def query_interface(this : IUPnPEventSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -958,7 +941,6 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  #@[Com("204810b6-73b2-11d4-bf42-00b0d0118b56")]
   record IUPnPRegistrar, lpVtbl : IUPnPRegistrarVtbl* do
     GUID = LibC::GUID.new(0x204810b6_u32, 0x73b2_u16, 0x11d4_u16, StaticArray[0xbf_u8, 0x42_u8, 0x0_u8, 0xb0_u8, 0xd0_u8, 0x11_u8, 0x8b_u8, 0x56_u8])
     def query_interface(this : IUPnPRegistrar*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1001,7 +983,6 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  #@[Com("204810b7-73b2-11d4-bf42-00b0d0118b56")]
   record IUPnPReregistrar, lpVtbl : IUPnPReregistrarVtbl* do
     GUID = LibC::GUID.new(0x204810b7_u32, 0x73b2_u16, 0x11d4_u16, StaticArray[0xbf_u8, 0x42_u8, 0x0_u8, 0xb0_u8, 0xd0_u8, 0x11_u8, 0x8b_u8, 0x56_u8])
     def query_interface(this : IUPnPReregistrar*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1032,7 +1013,6 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  #@[Com("204810ba-73b2-11d4-bf42-00b0d0118b56")]
   record IUPnPDeviceControl, lpVtbl : IUPnPDeviceControlVtbl* do
     GUID = LibC::GUID.new(0x204810ba_u32, 0x73b2_u16, 0x11d4_u16, StaticArray[0xbf_u8, 0x42_u8, 0x0_u8, 0xb0_u8, 0xd0_u8, 0x11_u8, 0x8b_u8, 0x56_u8])
     def query_interface(this : IUPnPDeviceControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1062,7 +1042,6 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  #@[Com("204810bb-73b2-11d4-bf42-00b0d0118b56")]
   record IUPnPDeviceControlHttpHeaders, lpVtbl : IUPnPDeviceControlHttpHeadersVtbl* do
     GUID = LibC::GUID.new(0x204810bb_u32, 0x73b2_u16, 0x11d4_u16, StaticArray[0xbf_u8, 0x42_u8, 0x0_u8, 0xb0_u8, 0xd0_u8, 0x11_u8, 0x8b_u8, 0x56_u8])
     def query_interface(this : IUPnPDeviceControlHttpHeaders*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1090,7 +1069,6 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  #@[Com("204810b8-73b2-11d4-bf42-00b0d0118b56")]
   record IUPnPDeviceProvider, lpVtbl : IUPnPDeviceProviderVtbl* do
     GUID = LibC::GUID.new(0x204810b8_u32, 0x73b2_u16, 0x11d4_u16, StaticArray[0xbf_u8, 0x42_u8, 0x0_u8, 0xb0_u8, 0xd0_u8, 0x11_u8, 0x8b_u8, 0x56_u8])
     def query_interface(this : IUPnPDeviceProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1122,7 +1100,6 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  #@[Com("c92eb863-0269-4aff-9c72-75321bba2952")]
   record IUPnPRemoteEndpointInfo, lpVtbl : IUPnPRemoteEndpointInfoVtbl* do
     GUID = LibC::GUID.new(0xc92eb863_u32, 0x269_u16, 0x4aff_u16, StaticArray[0x9c_u8, 0x72_u8, 0x75_u8, 0x32_u8, 0x1b_u8, 0xba_u8, 0x29_u8, 0x52_u8])
     def query_interface(this : IUPnPRemoteEndpointInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

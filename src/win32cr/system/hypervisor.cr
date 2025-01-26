@@ -4,39 +4,39 @@ require "./host_compute_system.cr"
 
 module Win32cr::System::Hypervisor
   alias WHV_PARTITION_HANDLE = LibC::IntPtrT
-  alias WHV_EMULATOR_IO_PORT_CALLBACK = Proc(Void*, Win32cr::System::Hypervisor::WHV_EMULATOR_IO_ACCESS_INFO*, Win32cr::Foundation::HRESULT)*
+  alias WHV_EMULATOR_IO_PORT_CALLBACK = Proc(Void*, Win32cr::System::Hypervisor::WHV_EMULATOR_IO_ACCESS_INFO*, Win32cr::Foundation::HRESULT)
 
-  alias WHV_EMULATOR_MEMORY_CALLBACK = Proc(Void*, Win32cr::System::Hypervisor::WHV_EMULATOR_MEMORY_ACCESS_INFO*, Win32cr::Foundation::HRESULT)*
+  alias WHV_EMULATOR_MEMORY_CALLBACK = Proc(Void*, Win32cr::System::Hypervisor::WHV_EMULATOR_MEMORY_ACCESS_INFO*, Win32cr::Foundation::HRESULT)
 
-  alias WHV_EMULATOR_GET_VIRTUAL_PROCESSOR_REGISTERS_CALLBACK = Proc(Void*, Win32cr::System::Hypervisor::WHV_REGISTER_NAME*, UInt32, Win32cr::System::Hypervisor::WHV_REGISTER_VALUE*, Win32cr::Foundation::HRESULT)*
+  alias WHV_EMULATOR_GET_VIRTUAL_PROCESSOR_REGISTERS_CALLBACK = Proc(Void*, Win32cr::System::Hypervisor::WHV_REGISTER_NAME*, UInt32, Win32cr::System::Hypervisor::WHV_REGISTER_VALUE*, Win32cr::Foundation::HRESULT)
 
-  alias WHV_EMULATOR_SET_VIRTUAL_PROCESSOR_REGISTERS_CALLBACK = Proc(Void*, Win32cr::System::Hypervisor::WHV_REGISTER_NAME*, UInt32, Win32cr::System::Hypervisor::WHV_REGISTER_VALUE*, Win32cr::Foundation::HRESULT)*
+  alias WHV_EMULATOR_SET_VIRTUAL_PROCESSOR_REGISTERS_CALLBACK = Proc(Void*, Win32cr::System::Hypervisor::WHV_REGISTER_NAME*, UInt32, Win32cr::System::Hypervisor::WHV_REGISTER_VALUE*, Win32cr::Foundation::HRESULT)
 
-  alias WHV_EMULATOR_TRANSLATE_GVA_PAGE_CALLBACK = Proc(Void*, UInt64, Win32cr::System::Hypervisor::WHV_TRANSLATE_GVA_FLAGS, Win32cr::System::Hypervisor::WHV_TRANSLATE_GVA_RESULT_CODE*, UInt64*, Win32cr::Foundation::HRESULT)*
+  alias WHV_EMULATOR_TRANSLATE_GVA_PAGE_CALLBACK = Proc(Void*, UInt64, Win32cr::System::Hypervisor::WHV_TRANSLATE_GVA_FLAGS, Win32cr::System::Hypervisor::WHV_TRANSLATE_GVA_RESULT_CODE*, UInt64*, Win32cr::Foundation::HRESULT)
 
-  alias HDV_PCI_DEVICE_INITIALIZE = Proc(Void*, Win32cr::Foundation::HRESULT)*
+  alias HDV_PCI_DEVICE_INITIALIZE = Proc(Void*, Win32cr::Foundation::HRESULT)
 
-  alias HDV_PCI_DEVICE_TEARDOWN = Proc(Void*, Void)*
+  alias HDV_PCI_DEVICE_TEARDOWN = Proc(Void*, Void)
 
-  alias HDV_PCI_DEVICE_SET_CONFIGURATION = Proc(Void*, UInt32, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT)*
+  alias HDV_PCI_DEVICE_SET_CONFIGURATION = Proc(Void*, UInt32, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT)
 
-  alias HDV_PCI_DEVICE_GET_DETAILS = Proc(Void*, Win32cr::System::Hypervisor::HDV_PCI_PNP_ID*, UInt32, UInt32*, Win32cr::Foundation::HRESULT)*
+  alias HDV_PCI_DEVICE_GET_DETAILS = Proc(Void*, Win32cr::System::Hypervisor::HDV_PCI_PNP_ID*, UInt32, UInt32*, Win32cr::Foundation::HRESULT)
 
-  alias HDV_PCI_DEVICE_START = Proc(Void*, Win32cr::Foundation::HRESULT)*
+  alias HDV_PCI_DEVICE_START = Proc(Void*, Win32cr::Foundation::HRESULT)
 
-  alias HDV_PCI_DEVICE_STOP = Proc(Void*, Void)*
+  alias HDV_PCI_DEVICE_STOP = Proc(Void*, Void)
 
-  alias HDV_PCI_READ_CONFIG_SPACE = Proc(Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT)*
+  alias HDV_PCI_READ_CONFIG_SPACE = Proc(Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT)
 
-  alias HDV_PCI_WRITE_CONFIG_SPACE = Proc(Void*, UInt32, UInt32, Win32cr::Foundation::HRESULT)*
+  alias HDV_PCI_WRITE_CONFIG_SPACE = Proc(Void*, UInt32, UInt32, Win32cr::Foundation::HRESULT)
 
-  alias HDV_PCI_READ_INTERCEPTED_MEMORY = Proc(Void*, Win32cr::System::Hypervisor::HDV_PCI_BAR_SELECTOR, UInt64, UInt64, UInt8*, Win32cr::Foundation::HRESULT)*
+  alias HDV_PCI_READ_INTERCEPTED_MEMORY = Proc(Void*, Win32cr::System::Hypervisor::HDV_PCI_BAR_SELECTOR, UInt64, UInt64, UInt8*, Win32cr::Foundation::HRESULT)
 
-  alias HDV_PCI_WRITE_INTERCEPTED_MEMORY = Proc(Void*, Win32cr::System::Hypervisor::HDV_PCI_BAR_SELECTOR, UInt64, UInt64, UInt8*, Win32cr::Foundation::HRESULT)*
+  alias HDV_PCI_WRITE_INTERCEPTED_MEMORY = Proc(Void*, Win32cr::System::Hypervisor::HDV_PCI_BAR_SELECTOR, UInt64, UInt64, UInt8*, Win32cr::Foundation::HRESULT)
 
-  alias GUEST_SYMBOLS_PROVIDER_DEBUG_INFO_CALLBACK = Proc(Win32cr::Foundation::PSTR, Void)*
+  alias GUEST_SYMBOLS_PROVIDER_DEBUG_INFO_CALLBACK = Proc(Win32cr::Foundation::PSTR, Void)
 
-  alias FOUND_IMAGE_CALLBACK = Proc(Void*, Win32cr::System::Hypervisor::DOS_IMAGE_INFO*, Win32cr::Foundation::BOOL)*
+  alias FOUND_IMAGE_CALLBACK = Proc(Void*, Win32cr::System::Hypervisor::DOS_IMAGE_INFO*, Win32cr::Foundation::BOOL)
 
   HVSOCKET_CONNECT_TIMEOUT = 1_u32
   HVSOCKET_CONNECT_TIMEOUT_MAX = 300000_u32
@@ -797,1158 +797,1568 @@ module Win32cr::System::Hypervisor
   end
 
   @[Extern(union: true)]
-  record WHV_CAPABILITY_FEATURES,
-    anonymous : Anonymous_e__Struct_,
-    as_uint64 : UInt64 do
+  struct WHV_CAPABILITY_FEATURES
+    property anonymous : Anonymous_e__Struct_
+    property as_uint64 : UInt64
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt64
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt64
+    def initialize(@_bitfield : UInt64)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uint64 : UInt64)
+    end
   end
 
   @[Extern(union: true)]
-  record WHV_EXTENDED_VM_EXITS,
-    anonymous : Anonymous_e__Struct_,
-    as_uint64 : UInt64 do
+  struct WHV_EXTENDED_VM_EXITS
+    property anonymous : Anonymous_e__Struct_
+    property as_uint64 : UInt64
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt64
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt64
+    def initialize(@_bitfield : UInt64)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uint64 : UInt64)
+    end
   end
 
   @[Extern(union: true)]
-  record WHV_PROCESSOR_FEATURES,
-    anonymous : Anonymous_e__Struct_,
-    as_uint64 : UInt64 do
+  struct WHV_PROCESSOR_FEATURES
+    property anonymous : Anonymous_e__Struct_
+    property as_uint64 : UInt64
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt64
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt64
+    def initialize(@_bitfield : UInt64)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uint64 : UInt64)
+    end
   end
 
   @[Extern(union: true)]
-  record WHV_PROCESSOR_FEATURES1,
-    anonymous : Anonymous_e__Struct_,
-    as_uint64 : UInt64 do
+  struct WHV_PROCESSOR_FEATURES1
+    property anonymous : Anonymous_e__Struct_
+    property as_uint64 : UInt64
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt64
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt64
+    def initialize(@_bitfield : UInt64)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uint64 : UInt64)
+    end
   end
 
   @[Extern]
-  record WHV_PROCESSOR_FEATURES_BANKS,
-    banks_count : UInt32,
-    reserved0 : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct WHV_PROCESSOR_FEATURES_BANKS
+    property banks_count : UInt32
+    property reserved0 : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      as_uint64 : UInt64[2] do
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property as_uint64 : UInt64[2]
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        bank0 : Win32cr::System::Hypervisor::WHV_PROCESSOR_FEATURES,
-        bank1 : Win32cr::System::Hypervisor::WHV_PROCESSOR_FEATURES1
+      struct Anonymous_e__Struct_
+    property bank0 : Win32cr::System::Hypervisor::WHV_PROCESSOR_FEATURES
+    property bank1 : Win32cr::System::Hypervisor::WHV_PROCESSOR_FEATURES1
+    def initialize(@bank0 : Win32cr::System::Hypervisor::WHV_PROCESSOR_FEATURES, @bank1 : Win32cr::System::Hypervisor::WHV_PROCESSOR_FEATURES1)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uint64 : UInt64[2])
+    end
     end
 
+    def initialize(@banks_count : UInt32, @reserved0 : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern(union: true)]
-  record WHV_SYNTHETIC_PROCESSOR_FEATURES,
-    anonymous : Anonymous_e__Struct_,
-    as_uint64 : UInt64 do
+  struct WHV_SYNTHETIC_PROCESSOR_FEATURES
+    property anonymous : Anonymous_e__Struct_
+    property as_uint64 : UInt64
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt64
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt64
+    def initialize(@_bitfield : UInt64)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uint64 : UInt64)
+    end
   end
 
   @[Extern]
-  record WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS,
-    banks_count : UInt32,
-    reserved0 : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS
+    property banks_count : UInt32
+    property reserved0 : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      as_uint64 : UInt64* do
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property as_uint64 : UInt64*
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        bank0 : Win32cr::System::Hypervisor::WHV_SYNTHETIC_PROCESSOR_FEATURES
+      struct Anonymous_e__Struct_
+    property bank0 : Win32cr::System::Hypervisor::WHV_SYNTHETIC_PROCESSOR_FEATURES
+    def initialize(@bank0 : Win32cr::System::Hypervisor::WHV_SYNTHETIC_PROCESSOR_FEATURES)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uint64 : UInt64*)
+    end
     end
 
+    def initialize(@banks_count : UInt32, @reserved0 : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern(union: true)]
-  record WHV_PROCESSOR_XSAVE_FEATURES,
-    anonymous : Anonymous_e__Struct_,
-    as_uint64 : UInt64 do
+  struct WHV_PROCESSOR_XSAVE_FEATURES
+    property anonymous : Anonymous_e__Struct_
+    property as_uint64 : UInt64
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt64
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt64
+    def initialize(@_bitfield : UInt64)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uint64 : UInt64)
+    end
   end
 
   @[Extern(union: true)]
-  record WHV_PROCESSOR_PERFMON_FEATURES,
-    anonymous : Anonymous_e__Struct_,
-    as_uint64 : UInt64 do
+  struct WHV_PROCESSOR_PERFMON_FEATURES
+    property anonymous : Anonymous_e__Struct_
+    property as_uint64 : UInt64
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt64
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt64
+    def initialize(@_bitfield : UInt64)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uint64 : UInt64)
+    end
   end
 
   @[Extern(union: true)]
-  record WHV_X64_MSR_EXIT_BITMAP,
-    as_uint64 : UInt64,
-    anonymous : Anonymous_e__Struct_ do
+  struct WHV_X64_MSR_EXIT_BITMAP
+    property as_uint64 : UInt64
+    property anonymous : Anonymous_e__Struct_
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt64
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt64
+    def initialize(@_bitfield : UInt64)
+    end
+    end
 
+    def initialize(@as_uint64 : UInt64, @anonymous : Anonymous_e__Struct_)
+    end
   end
 
   @[Extern]
-  record WHV_MEMORY_RANGE_ENTRY,
-    guest_address : UInt64,
-    size_in_bytes : UInt64
-
-  @[Extern(union: true)]
-  record WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS,
-    as_uint32 : UInt32,
-    anonymous : Anonymous_e__Struct_ do
-
-    # Nested Type Anonymous_e__Struct_
-    @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt32
-
-  end
-
-  @[Extern]
-  record WHV_ADVISE_GPA_RANGE_POPULATE,
-    flags : Win32cr::System::Hypervisor::WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS,
-    access_type : Win32cr::System::Hypervisor::WHV_MEMORY_ACCESS_TYPE
-
-  @[Extern]
-  record WHV_CAPABILITY_PROCESSOR_FREQUENCY_CAP,
-    _bitfield : UInt32,
-    highest_frequency_mhz : UInt32,
-    nominal_frequency_mhz : UInt32,
-    lowest_frequency_mhz : UInt32,
-    frequency_step_mhz : UInt32
-
-  @[Extern(union: true)]
-  record WHV_SCHEDULER_FEATURES,
-    anonymous : Anonymous_e__Struct_,
-    as_uint64 : UInt64 do
-
-    # Nested Type Anonymous_e__Struct_
-    @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt64
-
+  struct WHV_MEMORY_RANGE_ENTRY
+    property guest_address : UInt64
+    property size_in_bytes : UInt64
+    def initialize(@guest_address : UInt64, @size_in_bytes : UInt64)
+    end
   end
 
   @[Extern(union: true)]
-  record WHV_CAPABILITY,
-    hypervisor_present : Win32cr::Foundation::BOOL,
-    features : Win32cr::System::Hypervisor::WHV_CAPABILITY_FEATURES,
-    extended_vm_exits : Win32cr::System::Hypervisor::WHV_EXTENDED_VM_EXITS,
-    processor_vendor : Win32cr::System::Hypervisor::WHV_PROCESSOR_VENDOR,
-    processor_features : Win32cr::System::Hypervisor::WHV_PROCESSOR_FEATURES,
-    synthetic_processor_features_banks : Win32cr::System::Hypervisor::WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS,
-    processor_xsave_features : Win32cr::System::Hypervisor::WHV_PROCESSOR_XSAVE_FEATURES,
-    processor_cl_flush_size : UInt8,
-    exception_exit_bitmap : UInt64,
-    x64_msr_exit_bitmap : Win32cr::System::Hypervisor::WHV_X64_MSR_EXIT_BITMAP,
-    processor_clock_frequency : UInt64,
-    interrupt_clock_frequency : UInt64,
-    processor_features_banks : Win32cr::System::Hypervisor::WHV_PROCESSOR_FEATURES_BANKS,
-    gpa_range_populate_flags : Win32cr::System::Hypervisor::WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS,
-    processor_frequency_cap : Win32cr::System::Hypervisor::WHV_CAPABILITY_PROCESSOR_FREQUENCY_CAP,
-    processor_perfmon_features : Win32cr::System::Hypervisor::WHV_PROCESSOR_PERFMON_FEATURES,
-    scheduler_features : Win32cr::System::Hypervisor::WHV_SCHEDULER_FEATURES
-
-  @[Extern]
-  record WHV_X64_CPUID_RESULT,
-    function : UInt32,
-    reserved : UInt32[3],
-    eax : UInt32,
-    ebx : UInt32,
-    ecx : UInt32,
-    edx : UInt32
-
-  @[Extern]
-  record WHV_CPUID_OUTPUT,
-    eax : UInt32,
-    ebx : UInt32,
-    ecx : UInt32,
-    edx : UInt32
-
-  @[Extern]
-  record WHV_X64_CPUID_RESULT2,
-    function : UInt32,
-    index : UInt32,
-    vp_index : UInt32,
-    flags : Win32cr::System::Hypervisor::WHV_X64_CPUID_RESULT2_FLAGS,
-    output : Win32cr::System::Hypervisor::WHV_CPUID_OUTPUT,
-    mask : Win32cr::System::Hypervisor::WHV_CPUID_OUTPUT
-
-  @[Extern]
-  record WHV_MSR_ACTION_ENTRY,
-    index : UInt32,
-    read_action : UInt8,
-    write_action : UInt8,
-    reserved : UInt16
-
-  @[Extern(union: true)]
-  record WHV_PARTITION_PROPERTY,
-    extended_vm_exits : Win32cr::System::Hypervisor::WHV_EXTENDED_VM_EXITS,
-    processor_features : Win32cr::System::Hypervisor::WHV_PROCESSOR_FEATURES,
-    synthetic_processor_features_banks : Win32cr::System::Hypervisor::WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS,
-    processor_xsave_features : Win32cr::System::Hypervisor::WHV_PROCESSOR_XSAVE_FEATURES,
-    processor_cl_flush_size : UInt8,
-    processor_count : UInt32,
-    cpuid_exit_list : UInt32*,
-    cpuid_result_list : Win32cr::System::Hypervisor::WHV_X64_CPUID_RESULT*,
-    cpuid_result_list2 : Win32cr::System::Hypervisor::WHV_X64_CPUID_RESULT2*,
-    msr_action_list : Win32cr::System::Hypervisor::WHV_MSR_ACTION_ENTRY*,
-    unimplemented_msr_action : Win32cr::System::Hypervisor::WHV_MSR_ACTION,
-    exception_exit_bitmap : UInt64,
-    local_apic_emulation_mode : Win32cr::System::Hypervisor::WHV_X64_LOCAL_APIC_EMULATION_MODE,
-    separate_security_domain : Win32cr::Foundation::BOOL,
-    nested_virtualization : Win32cr::Foundation::BOOL,
-    x64_msr_exit_bitmap : Win32cr::System::Hypervisor::WHV_X64_MSR_EXIT_BITMAP,
-    processor_clock_frequency : UInt64,
-    interrupt_clock_frequency : UInt64,
-    apic_remote_read : Win32cr::Foundation::BOOL,
-    processor_features_banks : Win32cr::System::Hypervisor::WHV_PROCESSOR_FEATURES_BANKS,
-    reference_time : UInt64,
-    primary_numa_node : UInt16,
-    cpu_reserve : UInt32,
-    cpu_cap : UInt32,
-    cpu_weight : UInt32,
-    cpu_group_id : UInt64,
-    processor_frequency_cap : UInt32,
-    allow_device_assignment : Win32cr::Foundation::BOOL,
-    processor_perfmon_features : Win32cr::System::Hypervisor::WHV_PROCESSOR_PERFMON_FEATURES,
-    disable_smt : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record WHV_TRANSLATE_GVA_RESULT,
-    result_code : Win32cr::System::Hypervisor::WHV_TRANSLATE_GVA_RESULT_CODE,
-    reserved : UInt32
-
-  @[Extern(union: true)]
-  record WHV_ADVISE_GPA_RANGE,
-    populate : Win32cr::System::Hypervisor::WHV_ADVISE_GPA_RANGE_POPULATE
-
-  @[Extern(union: true)]
-  record WHV_ACCESS_GPA_CONTROLS,
-    as_uint64 : UInt64,
-    anonymous : Anonymous_e__Struct_ do
+  struct WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS
+    property as_uint32 : UInt32
+    property anonymous : Anonymous_e__Struct_
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      cache_type : Win32cr::System::Hypervisor::WHV_CACHE_TYPE,
-      reserved : UInt32
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
 
+    def initialize(@as_uint32 : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
+  end
+
+  @[Extern]
+  struct WHV_ADVISE_GPA_RANGE_POPULATE
+    property flags : Win32cr::System::Hypervisor::WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS
+    property access_type : Win32cr::System::Hypervisor::WHV_MEMORY_ACCESS_TYPE
+    def initialize(@flags : Win32cr::System::Hypervisor::WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS, @access_type : Win32cr::System::Hypervisor::WHV_MEMORY_ACCESS_TYPE)
+    end
+  end
+
+  @[Extern]
+  struct WHV_CAPABILITY_PROCESSOR_FREQUENCY_CAP
+    property _bitfield : UInt32
+    property highest_frequency_mhz : UInt32
+    property nominal_frequency_mhz : UInt32
+    property lowest_frequency_mhz : UInt32
+    property frequency_step_mhz : UInt32
+    def initialize(@_bitfield : UInt32, @highest_frequency_mhz : UInt32, @nominal_frequency_mhz : UInt32, @lowest_frequency_mhz : UInt32, @frequency_step_mhz : UInt32)
+    end
   end
 
   @[Extern(union: true)]
-  record WHV_UINT128,
-    anonymous : Anonymous_e__Struct_,
-    dword : UInt32[4] do
+  struct WHV_SCHEDULER_FEATURES
+    property anonymous : Anonymous_e__Struct_
+    property as_uint64 : UInt64
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      low64 : UInt64,
-      high64 : UInt64
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt64
+    def initialize(@_bitfield : UInt64)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uint64 : UInt64)
+    end
   end
 
   @[Extern(union: true)]
-  record WHV_X64_FP_REGISTER,
-    anonymous : Anonymous_e__Struct_,
-    as_uint128 : Win32cr::System::Hypervisor::WHV_UINT128 do
+  struct WHV_CAPABILITY
+    property hypervisor_present : Win32cr::Foundation::BOOL
+    property features : Win32cr::System::Hypervisor::WHV_CAPABILITY_FEATURES
+    property extended_vm_exits : Win32cr::System::Hypervisor::WHV_EXTENDED_VM_EXITS
+    property processor_vendor : Win32cr::System::Hypervisor::WHV_PROCESSOR_VENDOR
+    property processor_features : Win32cr::System::Hypervisor::WHV_PROCESSOR_FEATURES
+    property synthetic_processor_features_banks : Win32cr::System::Hypervisor::WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS
+    property processor_xsave_features : Win32cr::System::Hypervisor::WHV_PROCESSOR_XSAVE_FEATURES
+    property processor_cl_flush_size : UInt8
+    property exception_exit_bitmap : UInt64
+    property x64_msr_exit_bitmap : Win32cr::System::Hypervisor::WHV_X64_MSR_EXIT_BITMAP
+    property processor_clock_frequency : UInt64
+    property interrupt_clock_frequency : UInt64
+    property processor_features_banks : Win32cr::System::Hypervisor::WHV_PROCESSOR_FEATURES_BANKS
+    property gpa_range_populate_flags : Win32cr::System::Hypervisor::WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS
+    property processor_frequency_cap : Win32cr::System::Hypervisor::WHV_CAPABILITY_PROCESSOR_FREQUENCY_CAP
+    property processor_perfmon_features : Win32cr::System::Hypervisor::WHV_PROCESSOR_PERFMON_FEATURES
+    property scheduler_features : Win32cr::System::Hypervisor::WHV_SCHEDULER_FEATURES
+    def initialize(@hypervisor_present : Win32cr::Foundation::BOOL, @features : Win32cr::System::Hypervisor::WHV_CAPABILITY_FEATURES, @extended_vm_exits : Win32cr::System::Hypervisor::WHV_EXTENDED_VM_EXITS, @processor_vendor : Win32cr::System::Hypervisor::WHV_PROCESSOR_VENDOR, @processor_features : Win32cr::System::Hypervisor::WHV_PROCESSOR_FEATURES, @synthetic_processor_features_banks : Win32cr::System::Hypervisor::WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS, @processor_xsave_features : Win32cr::System::Hypervisor::WHV_PROCESSOR_XSAVE_FEATURES, @processor_cl_flush_size : UInt8, @exception_exit_bitmap : UInt64, @x64_msr_exit_bitmap : Win32cr::System::Hypervisor::WHV_X64_MSR_EXIT_BITMAP, @processor_clock_frequency : UInt64, @interrupt_clock_frequency : UInt64, @processor_features_banks : Win32cr::System::Hypervisor::WHV_PROCESSOR_FEATURES_BANKS, @gpa_range_populate_flags : Win32cr::System::Hypervisor::WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS, @processor_frequency_cap : Win32cr::System::Hypervisor::WHV_CAPABILITY_PROCESSOR_FREQUENCY_CAP, @processor_perfmon_features : Win32cr::System::Hypervisor::WHV_PROCESSOR_PERFMON_FEATURES, @scheduler_features : Win32cr::System::Hypervisor::WHV_SCHEDULER_FEATURES)
+    end
+  end
 
-    # Nested Type Anonymous_e__Struct_
-    @[Extern]
-    record Anonymous_e__Struct_,
-      mantissa : UInt64,
-      _bitfield : UInt64
+  @[Extern]
+  struct WHV_X64_CPUID_RESULT
+    property function : UInt32
+    property reserved : UInt32[3]
+    property eax : UInt32
+    property ebx : UInt32
+    property ecx : UInt32
+    property edx : UInt32
+    def initialize(@function : UInt32, @reserved : UInt32[3], @eax : UInt32, @ebx : UInt32, @ecx : UInt32, @edx : UInt32)
+    end
+  end
 
+  @[Extern]
+  struct WHV_CPUID_OUTPUT
+    property eax : UInt32
+    property ebx : UInt32
+    property ecx : UInt32
+    property edx : UInt32
+    def initialize(@eax : UInt32, @ebx : UInt32, @ecx : UInt32, @edx : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WHV_X64_CPUID_RESULT2
+    property function : UInt32
+    property index : UInt32
+    property vp_index : UInt32
+    property flags : Win32cr::System::Hypervisor::WHV_X64_CPUID_RESULT2_FLAGS
+    property output : Win32cr::System::Hypervisor::WHV_CPUID_OUTPUT
+    property mask : Win32cr::System::Hypervisor::WHV_CPUID_OUTPUT
+    def initialize(@function : UInt32, @index : UInt32, @vp_index : UInt32, @flags : Win32cr::System::Hypervisor::WHV_X64_CPUID_RESULT2_FLAGS, @output : Win32cr::System::Hypervisor::WHV_CPUID_OUTPUT, @mask : Win32cr::System::Hypervisor::WHV_CPUID_OUTPUT)
+    end
+  end
+
+  @[Extern]
+  struct WHV_MSR_ACTION_ENTRY
+    property index : UInt32
+    property read_action : UInt8
+    property write_action : UInt8
+    property reserved : UInt16
+    def initialize(@index : UInt32, @read_action : UInt8, @write_action : UInt8, @reserved : UInt16)
+    end
   end
 
   @[Extern(union: true)]
-  record WHV_X64_FP_CONTROL_STATUS_REGISTER,
-    anonymous : Anonymous_e__Struct_,
-    as_uint128 : Win32cr::System::Hypervisor::WHV_UINT128 do
+  struct WHV_PARTITION_PROPERTY
+    property extended_vm_exits : Win32cr::System::Hypervisor::WHV_EXTENDED_VM_EXITS
+    property processor_features : Win32cr::System::Hypervisor::WHV_PROCESSOR_FEATURES
+    property synthetic_processor_features_banks : Win32cr::System::Hypervisor::WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS
+    property processor_xsave_features : Win32cr::System::Hypervisor::WHV_PROCESSOR_XSAVE_FEATURES
+    property processor_cl_flush_size : UInt8
+    property processor_count : UInt32
+    property cpuid_exit_list : UInt32*
+    property cpuid_result_list : Win32cr::System::Hypervisor::WHV_X64_CPUID_RESULT*
+    property cpuid_result_list2 : Win32cr::System::Hypervisor::WHV_X64_CPUID_RESULT2*
+    property msr_action_list : Win32cr::System::Hypervisor::WHV_MSR_ACTION_ENTRY*
+    property unimplemented_msr_action : Win32cr::System::Hypervisor::WHV_MSR_ACTION
+    property exception_exit_bitmap : UInt64
+    property local_apic_emulation_mode : Win32cr::System::Hypervisor::WHV_X64_LOCAL_APIC_EMULATION_MODE
+    property separate_security_domain : Win32cr::Foundation::BOOL
+    property nested_virtualization : Win32cr::Foundation::BOOL
+    property x64_msr_exit_bitmap : Win32cr::System::Hypervisor::WHV_X64_MSR_EXIT_BITMAP
+    property processor_clock_frequency : UInt64
+    property interrupt_clock_frequency : UInt64
+    property apic_remote_read : Win32cr::Foundation::BOOL
+    property processor_features_banks : Win32cr::System::Hypervisor::WHV_PROCESSOR_FEATURES_BANKS
+    property reference_time : UInt64
+    property primary_numa_node : UInt16
+    property cpu_reserve : UInt32
+    property cpu_cap : UInt32
+    property cpu_weight : UInt32
+    property cpu_group_id : UInt64
+    property processor_frequency_cap : UInt32
+    property allow_device_assignment : Win32cr::Foundation::BOOL
+    property processor_perfmon_features : Win32cr::System::Hypervisor::WHV_PROCESSOR_PERFMON_FEATURES
+    property disable_smt : Win32cr::Foundation::BOOL
+    def initialize(@extended_vm_exits : Win32cr::System::Hypervisor::WHV_EXTENDED_VM_EXITS, @processor_features : Win32cr::System::Hypervisor::WHV_PROCESSOR_FEATURES, @synthetic_processor_features_banks : Win32cr::System::Hypervisor::WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS, @processor_xsave_features : Win32cr::System::Hypervisor::WHV_PROCESSOR_XSAVE_FEATURES, @processor_cl_flush_size : UInt8, @processor_count : UInt32, @cpuid_exit_list : UInt32*, @cpuid_result_list : Win32cr::System::Hypervisor::WHV_X64_CPUID_RESULT*, @cpuid_result_list2 : Win32cr::System::Hypervisor::WHV_X64_CPUID_RESULT2*, @msr_action_list : Win32cr::System::Hypervisor::WHV_MSR_ACTION_ENTRY*, @unimplemented_msr_action : Win32cr::System::Hypervisor::WHV_MSR_ACTION, @exception_exit_bitmap : UInt64, @local_apic_emulation_mode : Win32cr::System::Hypervisor::WHV_X64_LOCAL_APIC_EMULATION_MODE, @separate_security_domain : Win32cr::Foundation::BOOL, @nested_virtualization : Win32cr::Foundation::BOOL, @x64_msr_exit_bitmap : Win32cr::System::Hypervisor::WHV_X64_MSR_EXIT_BITMAP, @processor_clock_frequency : UInt64, @interrupt_clock_frequency : UInt64, @apic_remote_read : Win32cr::Foundation::BOOL, @processor_features_banks : Win32cr::System::Hypervisor::WHV_PROCESSOR_FEATURES_BANKS, @reference_time : UInt64, @primary_numa_node : UInt16, @cpu_reserve : UInt32, @cpu_cap : UInt32, @cpu_weight : UInt32, @cpu_group_id : UInt64, @processor_frequency_cap : UInt32, @allow_device_assignment : Win32cr::Foundation::BOOL, @processor_perfmon_features : Win32cr::System::Hypervisor::WHV_PROCESSOR_PERFMON_FEATURES, @disable_smt : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct WHV_TRANSLATE_GVA_RESULT
+    property result_code : Win32cr::System::Hypervisor::WHV_TRANSLATE_GVA_RESULT_CODE
+    property reserved : UInt32
+    def initialize(@result_code : Win32cr::System::Hypervisor::WHV_TRANSLATE_GVA_RESULT_CODE, @reserved : UInt32)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct WHV_ADVISE_GPA_RANGE
+    property populate : Win32cr::System::Hypervisor::WHV_ADVISE_GPA_RANGE_POPULATE
+    def initialize(@populate : Win32cr::System::Hypervisor::WHV_ADVISE_GPA_RANGE_POPULATE)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct WHV_ACCESS_GPA_CONTROLS
+    property as_uint64 : UInt64
+    property anonymous : Anonymous_e__Struct_
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      fp_control : UInt16,
-      fp_status : UInt16,
-      fp_tag : UInt8,
-      reserved : UInt8,
-      last_fp_op : UInt16,
-      anonymous : Anonymous_e__Union_ do
+    struct Anonymous_e__Struct_
+    property cache_type : Win32cr::System::Hypervisor::WHV_CACHE_TYPE
+    property reserved : UInt32
+    def initialize(@cache_type : Win32cr::System::Hypervisor::WHV_CACHE_TYPE, @reserved : UInt32)
+    end
+    end
+
+    def initialize(@as_uint64 : UInt64, @anonymous : Anonymous_e__Struct_)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct WHV_UINT128
+    property anonymous : Anonymous_e__Struct_
+    property dword : UInt32[4]
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property low64 : UInt64
+    property high64 : UInt64
+    def initialize(@low64 : UInt64, @high64 : UInt64)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @dword : UInt32[4])
+    end
+  end
+
+  @[Extern(union: true)]
+  struct WHV_X64_FP_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_uint128 : Win32cr::System::Hypervisor::WHV_UINT128
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property mantissa : UInt64
+    property _bitfield : UInt64
+    def initialize(@mantissa : UInt64, @_bitfield : UInt64)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uint128 : Win32cr::System::Hypervisor::WHV_UINT128)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct WHV_X64_FP_CONTROL_STATUS_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_uint128 : Win32cr::System::Hypervisor::WHV_UINT128
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property fp_control : UInt16
+    property fp_status : UInt16
+    property fp_tag : UInt8
+    property reserved : UInt8
+    property last_fp_op : UInt16
+    property anonymous : Anonymous_e__Union_
 
       # Nested Type Anonymous_e__Union_
       @[Extern(union: true)]
-      record Anonymous_e__Union_,
-        last_fp_rip : UInt64,
-        anonymous : Anonymous_e__Struct_ do
+      struct Anonymous_e__Union_
+    property last_fp_rip : UInt64
+    property anonymous : Anonymous_e__Struct_
 
         # Nested Type Anonymous_e__Struct_
         @[Extern]
-        record Anonymous_e__Struct_,
-          last_fp_eip : UInt32,
-          last_fp_cs : UInt16,
-          reserved2 : UInt16
+        struct Anonymous_e__Struct_
+    property last_fp_eip : UInt32
+    property last_fp_cs : UInt16
+    property reserved2 : UInt16
+    def initialize(@last_fp_eip : UInt32, @last_fp_cs : UInt16, @reserved2 : UInt16)
+    end
+        end
 
+    def initialize(@last_fp_rip : UInt64, @anonymous : Anonymous_e__Struct_)
+    end
       end
 
+    def initialize(@fp_control : UInt16, @fp_status : UInt16, @fp_tag : UInt8, @reserved : UInt8, @last_fp_op : UInt16, @anonymous : Anonymous_e__Union_)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uint128 : Win32cr::System::Hypervisor::WHV_UINT128)
+    end
   end
 
   @[Extern(union: true)]
-  record WHV_X64_XMM_CONTROL_STATUS_REGISTER,
-    anonymous : Anonymous_e__Struct_,
-    as_uint128 : Win32cr::System::Hypervisor::WHV_UINT128 do
+  struct WHV_X64_XMM_CONTROL_STATUS_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_uint128 : Win32cr::System::Hypervisor::WHV_UINT128
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      anonymous : Anonymous_e__Union_,
-      xmm_status_control : UInt32,
-      xmm_status_control_mask : UInt32 do
+    struct Anonymous_e__Struct_
+    property anonymous : Anonymous_e__Union_
+    property xmm_status_control : UInt32
+    property xmm_status_control_mask : UInt32
 
       # Nested Type Anonymous_e__Union_
       @[Extern(union: true)]
-      record Anonymous_e__Union_,
-        last_fp_rdp : UInt64,
-        anonymous : Anonymous_e__Struct_ do
+      struct Anonymous_e__Union_
+    property last_fp_rdp : UInt64
+    property anonymous : Anonymous_e__Struct_
 
         # Nested Type Anonymous_e__Struct_
         @[Extern]
-        record Anonymous_e__Struct_,
-          last_fp_dp : UInt32,
-          last_fp_ds : UInt16,
-          reserved : UInt16
+        struct Anonymous_e__Struct_
+    property last_fp_dp : UInt32
+    property last_fp_ds : UInt16
+    property reserved : UInt16
+    def initialize(@last_fp_dp : UInt32, @last_fp_ds : UInt16, @reserved : UInt16)
+    end
+        end
 
+    def initialize(@last_fp_rdp : UInt64, @anonymous : Anonymous_e__Struct_)
+    end
       end
 
+    def initialize(@anonymous : Anonymous_e__Union_, @xmm_status_control : UInt32, @xmm_status_control_mask : UInt32)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uint128 : Win32cr::System::Hypervisor::WHV_UINT128)
+    end
   end
 
   @[Extern]
-  record WHV_X64_SEGMENT_REGISTER,
-    base : UInt64,
-    limit : UInt32,
-    selector : UInt16,
-    anonymous : Anonymous_e__Union_ do
+  struct WHV_X64_SEGMENT_REGISTER
+    property base : UInt64
+    property limit : UInt32
+    property selector : UInt16
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      attributes : UInt16 do
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property attributes : UInt16
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt16
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @attributes : UInt16)
+    end
     end
 
+    def initialize(@base : UInt64, @limit : UInt32, @selector : UInt16, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record WHV_X64_TABLE_REGISTER,
-    pad : UInt16[3],
-    limit : UInt16,
-    base : UInt64
+  struct WHV_X64_TABLE_REGISTER
+    property pad : UInt16[3]
+    property limit : UInt16
+    property base : UInt64
+    def initialize(@pad : UInt16[3], @limit : UInt16, @base : UInt64)
+    end
+  end
 
   @[Extern(union: true)]
-  record WHV_X64_INTERRUPT_STATE_REGISTER,
-    anonymous : Anonymous_e__Struct_,
-    as_uint64 : UInt64 do
+  struct WHV_X64_INTERRUPT_STATE_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_uint64 : UInt64
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt64
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt64
+    def initialize(@_bitfield : UInt64)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uint64 : UInt64)
+    end
   end
 
   @[Extern(union: true)]
-  record WHV_X64_PENDING_INTERRUPTION_REGISTER,
-    anonymous : Anonymous_e__Struct_,
-    as_uint64 : UInt64 do
+  struct WHV_X64_PENDING_INTERRUPTION_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_uint64 : UInt64
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt32,
-      error_code : UInt32
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    property error_code : UInt32
+    def initialize(@_bitfield : UInt32, @error_code : UInt32)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uint64 : UInt64)
+    end
   end
 
   @[Extern(union: true)]
-  record WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER,
-    anonymous : Anonymous_e__Struct_,
-    as_uint64 : UInt64 do
+  struct WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_uint64 : UInt64
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt64
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt64
+    def initialize(@_bitfield : UInt64)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uint64 : UInt64)
+    end
   end
 
   @[Extern(union: true)]
-  record WHV_X64_PENDING_EXCEPTION_EVENT,
-    anonymous : Anonymous_e__Struct_,
-    as_uint128 : Win32cr::System::Hypervisor::WHV_UINT128 do
+  struct WHV_X64_PENDING_EXCEPTION_EVENT
+    property anonymous : Anonymous_e__Struct_
+    property as_uint128 : Win32cr::System::Hypervisor::WHV_UINT128
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt32,
-      error_code : UInt32,
-      exception_parameter : UInt64
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    property error_code : UInt32
+    property exception_parameter : UInt64
+    def initialize(@_bitfield : UInt32, @error_code : UInt32, @exception_parameter : UInt64)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uint128 : Win32cr::System::Hypervisor::WHV_UINT128)
+    end
   end
 
   @[Extern(union: true)]
-  record WHV_X64_PENDING_EXT_INT_EVENT,
-    anonymous : Anonymous_e__Struct_,
-    as_uint128 : Win32cr::System::Hypervisor::WHV_UINT128 do
+  struct WHV_X64_PENDING_EXT_INT_EVENT
+    property anonymous : Anonymous_e__Struct_
+    property as_uint128 : Win32cr::System::Hypervisor::WHV_UINT128
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt64,
-      reserved2 : UInt64
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt64
+    property reserved2 : UInt64
+    def initialize(@_bitfield : UInt64, @reserved2 : UInt64)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uint128 : Win32cr::System::Hypervisor::WHV_UINT128)
+    end
   end
 
   @[Extern(union: true)]
-  record WHV_INTERNAL_ACTIVITY_REGISTER,
-    anonymous : Anonymous_e__Struct_,
-    as_uint64 : UInt64 do
+  struct WHV_INTERNAL_ACTIVITY_REGISTER
+    property anonymous : Anonymous_e__Struct_
+    property as_uint64 : UInt64
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt64
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt64
+    def initialize(@_bitfield : UInt64)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uint64 : UInt64)
+    end
   end
 
   @[Extern(union: true)]
-  record WHV_X64_PENDING_DEBUG_EXCEPTION,
-    as_uint64 : UInt64,
-    anonymous : Anonymous_e__Struct_ do
+  struct WHV_X64_PENDING_DEBUG_EXCEPTION
+    property as_uint64 : UInt64
+    property anonymous : Anonymous_e__Struct_
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt64
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt64
+    def initialize(@_bitfield : UInt64)
+    end
+    end
 
+    def initialize(@as_uint64 : UInt64, @anonymous : Anonymous_e__Struct_)
+    end
   end
 
   @[Extern]
-  record WHV_SYNIC_SINT_DELIVERABLE_CONTEXT,
-    deliverable_sints : UInt16,
-    reserved1 : UInt16,
-    reserved2 : UInt32
+  struct WHV_SYNIC_SINT_DELIVERABLE_CONTEXT
+    property deliverable_sints : UInt16
+    property reserved1 : UInt16
+    property reserved2 : UInt32
+    def initialize(@deliverable_sints : UInt16, @reserved1 : UInt16, @reserved2 : UInt32)
+    end
+  end
 
   @[Extern(union: true)]
-  record WHV_REGISTER_VALUE,
-    reg128 : Win32cr::System::Hypervisor::WHV_UINT128,
-    reg64 : UInt64,
-    reg32 : UInt32,
-    reg16 : UInt16,
-    reg8 : UInt8,
-    fp : Win32cr::System::Hypervisor::WHV_X64_FP_REGISTER,
-    fp_control_status : Win32cr::System::Hypervisor::WHV_X64_FP_CONTROL_STATUS_REGISTER,
-    xmm_control_status : Win32cr::System::Hypervisor::WHV_X64_XMM_CONTROL_STATUS_REGISTER,
-    segment : Win32cr::System::Hypervisor::WHV_X64_SEGMENT_REGISTER,
-    table : Win32cr::System::Hypervisor::WHV_X64_TABLE_REGISTER,
-    interrupt_state : Win32cr::System::Hypervisor::WHV_X64_INTERRUPT_STATE_REGISTER,
-    pending_interruption : Win32cr::System::Hypervisor::WHV_X64_PENDING_INTERRUPTION_REGISTER,
-    deliverability_notifications : Win32cr::System::Hypervisor::WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER,
-    exception_event : Win32cr::System::Hypervisor::WHV_X64_PENDING_EXCEPTION_EVENT,
-    ext_int_event : Win32cr::System::Hypervisor::WHV_X64_PENDING_EXT_INT_EVENT,
-    internal_activity : Win32cr::System::Hypervisor::WHV_INTERNAL_ACTIVITY_REGISTER,
-    pending_debug_exception : Win32cr::System::Hypervisor::WHV_X64_PENDING_DEBUG_EXCEPTION
+  struct WHV_REGISTER_VALUE
+    property reg128 : Win32cr::System::Hypervisor::WHV_UINT128
+    property reg64 : UInt64
+    property reg32 : UInt32
+    property reg16 : UInt16
+    property reg8 : UInt8
+    property fp : Win32cr::System::Hypervisor::WHV_X64_FP_REGISTER
+    property fp_control_status : Win32cr::System::Hypervisor::WHV_X64_FP_CONTROL_STATUS_REGISTER
+    property xmm_control_status : Win32cr::System::Hypervisor::WHV_X64_XMM_CONTROL_STATUS_REGISTER
+    property segment : Win32cr::System::Hypervisor::WHV_X64_SEGMENT_REGISTER
+    property table : Win32cr::System::Hypervisor::WHV_X64_TABLE_REGISTER
+    property interrupt_state : Win32cr::System::Hypervisor::WHV_X64_INTERRUPT_STATE_REGISTER
+    property pending_interruption : Win32cr::System::Hypervisor::WHV_X64_PENDING_INTERRUPTION_REGISTER
+    property deliverability_notifications : Win32cr::System::Hypervisor::WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER
+    property exception_event : Win32cr::System::Hypervisor::WHV_X64_PENDING_EXCEPTION_EVENT
+    property ext_int_event : Win32cr::System::Hypervisor::WHV_X64_PENDING_EXT_INT_EVENT
+    property internal_activity : Win32cr::System::Hypervisor::WHV_INTERNAL_ACTIVITY_REGISTER
+    property pending_debug_exception : Win32cr::System::Hypervisor::WHV_X64_PENDING_DEBUG_EXCEPTION
+    def initialize(@reg128 : Win32cr::System::Hypervisor::WHV_UINT128, @reg64 : UInt64, @reg32 : UInt32, @reg16 : UInt16, @reg8 : UInt8, @fp : Win32cr::System::Hypervisor::WHV_X64_FP_REGISTER, @fp_control_status : Win32cr::System::Hypervisor::WHV_X64_FP_CONTROL_STATUS_REGISTER, @xmm_control_status : Win32cr::System::Hypervisor::WHV_X64_XMM_CONTROL_STATUS_REGISTER, @segment : Win32cr::System::Hypervisor::WHV_X64_SEGMENT_REGISTER, @table : Win32cr::System::Hypervisor::WHV_X64_TABLE_REGISTER, @interrupt_state : Win32cr::System::Hypervisor::WHV_X64_INTERRUPT_STATE_REGISTER, @pending_interruption : Win32cr::System::Hypervisor::WHV_X64_PENDING_INTERRUPTION_REGISTER, @deliverability_notifications : Win32cr::System::Hypervisor::WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER, @exception_event : Win32cr::System::Hypervisor::WHV_X64_PENDING_EXCEPTION_EVENT, @ext_int_event : Win32cr::System::Hypervisor::WHV_X64_PENDING_EXT_INT_EVENT, @internal_activity : Win32cr::System::Hypervisor::WHV_INTERNAL_ACTIVITY_REGISTER, @pending_debug_exception : Win32cr::System::Hypervisor::WHV_X64_PENDING_DEBUG_EXCEPTION)
+    end
+  end
 
   @[Extern(union: true)]
-  record WHV_X64_VP_EXECUTION_STATE,
-    anonymous : Anonymous_e__Struct_,
-    as_uint16 : UInt16 do
+  struct WHV_X64_VP_EXECUTION_STATE
+    property anonymous : Anonymous_e__Struct_
+    property as_uint16 : UInt16
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt16
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uint16 : UInt16)
+    end
   end
 
   @[Extern]
-  record WHV_VP_EXIT_CONTEXT,
-    execution_state : Win32cr::System::Hypervisor::WHV_X64_VP_EXECUTION_STATE,
-    _bitfield : UInt8,
-    reserved : UInt8,
-    reserved2 : UInt32,
-    cs : Win32cr::System::Hypervisor::WHV_X64_SEGMENT_REGISTER,
-    rip : UInt64,
-    rflags : UInt64
+  struct WHV_VP_EXIT_CONTEXT
+    property execution_state : Win32cr::System::Hypervisor::WHV_X64_VP_EXECUTION_STATE
+    property _bitfield : UInt8
+    property reserved : UInt8
+    property reserved2 : UInt32
+    property cs : Win32cr::System::Hypervisor::WHV_X64_SEGMENT_REGISTER
+    property rip : UInt64
+    property rflags : UInt64
+    def initialize(@execution_state : Win32cr::System::Hypervisor::WHV_X64_VP_EXECUTION_STATE, @_bitfield : UInt8, @reserved : UInt8, @reserved2 : UInt32, @cs : Win32cr::System::Hypervisor::WHV_X64_SEGMENT_REGISTER, @rip : UInt64, @rflags : UInt64)
+    end
+  end
 
   @[Extern(union: true)]
-  record WHV_MEMORY_ACCESS_INFO,
-    anonymous : Anonymous_e__Struct_,
-    as_uint32 : UInt32 do
+  struct WHV_MEMORY_ACCESS_INFO
+    property anonymous : Anonymous_e__Struct_
+    property as_uint32 : UInt32
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt32
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uint32 : UInt32)
+    end
   end
 
   @[Extern]
-  record WHV_MEMORY_ACCESS_CONTEXT,
-    instruction_byte_count : UInt8,
-    reserved : UInt8[3],
-    instruction_bytes : UInt8[16],
-    access_info : Win32cr::System::Hypervisor::WHV_MEMORY_ACCESS_INFO,
-    gpa : UInt64,
-    gva : UInt64
+  struct WHV_MEMORY_ACCESS_CONTEXT
+    property instruction_byte_count : UInt8
+    property reserved : UInt8[3]
+    property instruction_bytes : UInt8[16]
+    property access_info : Win32cr::System::Hypervisor::WHV_MEMORY_ACCESS_INFO
+    property gpa : UInt64
+    property gva : UInt64
+    def initialize(@instruction_byte_count : UInt8, @reserved : UInt8[3], @instruction_bytes : UInt8[16], @access_info : Win32cr::System::Hypervisor::WHV_MEMORY_ACCESS_INFO, @gpa : UInt64, @gva : UInt64)
+    end
+  end
 
   @[Extern(union: true)]
-  record WHV_X64_IO_PORT_ACCESS_INFO,
-    anonymous : Anonymous_e__Struct_,
-    as_uint32 : UInt32 do
+  struct WHV_X64_IO_PORT_ACCESS_INFO
+    property anonymous : Anonymous_e__Struct_
+    property as_uint32 : UInt32
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt32
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uint32 : UInt32)
+    end
   end
 
   @[Extern]
-  record WHV_X64_IO_PORT_ACCESS_CONTEXT,
-    instruction_byte_count : UInt8,
-    reserved : UInt8[3],
-    instruction_bytes : UInt8[16],
-    access_info : Win32cr::System::Hypervisor::WHV_X64_IO_PORT_ACCESS_INFO,
-    port_number : UInt16,
-    reserved2 : UInt16[3],
-    rax : UInt64,
-    rcx : UInt64,
-    rsi : UInt64,
-    rdi : UInt64,
-    ds : Win32cr::System::Hypervisor::WHV_X64_SEGMENT_REGISTER,
-    es : Win32cr::System::Hypervisor::WHV_X64_SEGMENT_REGISTER
+  struct WHV_X64_IO_PORT_ACCESS_CONTEXT
+    property instruction_byte_count : UInt8
+    property reserved : UInt8[3]
+    property instruction_bytes : UInt8[16]
+    property access_info : Win32cr::System::Hypervisor::WHV_X64_IO_PORT_ACCESS_INFO
+    property port_number : UInt16
+    property reserved2 : UInt16[3]
+    property rax : UInt64
+    property rcx : UInt64
+    property rsi : UInt64
+    property rdi : UInt64
+    property ds : Win32cr::System::Hypervisor::WHV_X64_SEGMENT_REGISTER
+    property es : Win32cr::System::Hypervisor::WHV_X64_SEGMENT_REGISTER
+    def initialize(@instruction_byte_count : UInt8, @reserved : UInt8[3], @instruction_bytes : UInt8[16], @access_info : Win32cr::System::Hypervisor::WHV_X64_IO_PORT_ACCESS_INFO, @port_number : UInt16, @reserved2 : UInt16[3], @rax : UInt64, @rcx : UInt64, @rsi : UInt64, @rdi : UInt64, @ds : Win32cr::System::Hypervisor::WHV_X64_SEGMENT_REGISTER, @es : Win32cr::System::Hypervisor::WHV_X64_SEGMENT_REGISTER)
+    end
+  end
 
   @[Extern(union: true)]
-  record WHV_X64_MSR_ACCESS_INFO,
-    anonymous : Anonymous_e__Struct_,
-    as_uint32 : UInt32 do
+  struct WHV_X64_MSR_ACCESS_INFO
+    property anonymous : Anonymous_e__Struct_
+    property as_uint32 : UInt32
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt32
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uint32 : UInt32)
+    end
   end
 
   @[Extern]
-  record WHV_X64_MSR_ACCESS_CONTEXT,
-    access_info : Win32cr::System::Hypervisor::WHV_X64_MSR_ACCESS_INFO,
-    msr_number : UInt32,
-    rax : UInt64,
-    rdx : UInt64
+  struct WHV_X64_MSR_ACCESS_CONTEXT
+    property access_info : Win32cr::System::Hypervisor::WHV_X64_MSR_ACCESS_INFO
+    property msr_number : UInt32
+    property rax : UInt64
+    property rdx : UInt64
+    def initialize(@access_info : Win32cr::System::Hypervisor::WHV_X64_MSR_ACCESS_INFO, @msr_number : UInt32, @rax : UInt64, @rdx : UInt64)
+    end
+  end
 
   @[Extern]
-  record WHV_X64_CPUID_ACCESS_CONTEXT,
-    rax : UInt64,
-    rcx : UInt64,
-    rdx : UInt64,
-    rbx : UInt64,
-    default_result_rax : UInt64,
-    default_result_rcx : UInt64,
-    default_result_rdx : UInt64,
-    default_result_rbx : UInt64
+  struct WHV_X64_CPUID_ACCESS_CONTEXT
+    property rax : UInt64
+    property rcx : UInt64
+    property rdx : UInt64
+    property rbx : UInt64
+    property default_result_rax : UInt64
+    property default_result_rcx : UInt64
+    property default_result_rdx : UInt64
+    property default_result_rbx : UInt64
+    def initialize(@rax : UInt64, @rcx : UInt64, @rdx : UInt64, @rbx : UInt64, @default_result_rax : UInt64, @default_result_rcx : UInt64, @default_result_rdx : UInt64, @default_result_rbx : UInt64)
+    end
+  end
 
   @[Extern(union: true)]
-  record WHV_VP_EXCEPTION_INFO,
-    anonymous : Anonymous_e__Struct_,
-    as_uint32 : UInt32 do
+  struct WHV_VP_EXCEPTION_INFO
+    property anonymous : Anonymous_e__Struct_
+    property as_uint32 : UInt32
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt32
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uint32 : UInt32)
+    end
   end
 
   @[Extern]
-  record WHV_VP_EXCEPTION_CONTEXT,
-    instruction_byte_count : UInt8,
-    reserved : UInt8[3],
-    instruction_bytes : UInt8[16],
-    exception_info : Win32cr::System::Hypervisor::WHV_VP_EXCEPTION_INFO,
-    exception_type : UInt8,
-    reserved2 : UInt8[3],
-    error_code : UInt32,
-    exception_parameter : UInt64
+  struct WHV_VP_EXCEPTION_CONTEXT
+    property instruction_byte_count : UInt8
+    property reserved : UInt8[3]
+    property instruction_bytes : UInt8[16]
+    property exception_info : Win32cr::System::Hypervisor::WHV_VP_EXCEPTION_INFO
+    property exception_type : UInt8
+    property reserved2 : UInt8[3]
+    property error_code : UInt32
+    property exception_parameter : UInt64
+    def initialize(@instruction_byte_count : UInt8, @reserved : UInt8[3], @instruction_bytes : UInt8[16], @exception_info : Win32cr::System::Hypervisor::WHV_VP_EXCEPTION_INFO, @exception_type : UInt8, @reserved2 : UInt8[3], @error_code : UInt32, @exception_parameter : UInt64)
+    end
+  end
 
   @[Extern]
-  record WHV_X64_UNSUPPORTED_FEATURE_CONTEXT,
-    feature_code : Win32cr::System::Hypervisor::WHV_X64_UNSUPPORTED_FEATURE_CODE,
-    reserved : UInt32,
-    feature_parameter : UInt64
+  struct WHV_X64_UNSUPPORTED_FEATURE_CONTEXT
+    property feature_code : Win32cr::System::Hypervisor::WHV_X64_UNSUPPORTED_FEATURE_CODE
+    property reserved : UInt32
+    property feature_parameter : UInt64
+    def initialize(@feature_code : Win32cr::System::Hypervisor::WHV_X64_UNSUPPORTED_FEATURE_CODE, @reserved : UInt32, @feature_parameter : UInt64)
+    end
+  end
 
   @[Extern]
-  record WHV_RUN_VP_CANCELED_CONTEXT,
-    cancel_reason : Win32cr::System::Hypervisor::WHV_RUN_VP_CANCEL_REASON
+  struct WHV_RUN_VP_CANCELED_CONTEXT
+    property cancel_reason : Win32cr::System::Hypervisor::WHV_RUN_VP_CANCEL_REASON
+    def initialize(@cancel_reason : Win32cr::System::Hypervisor::WHV_RUN_VP_CANCEL_REASON)
+    end
+  end
 
   @[Extern]
-  record WHV_X64_INTERRUPTION_DELIVERABLE_CONTEXT,
-    deliverable_type : Win32cr::System::Hypervisor::WHV_X64_PENDING_INTERRUPTION_TYPE
+  struct WHV_X64_INTERRUPTION_DELIVERABLE_CONTEXT
+    property deliverable_type : Win32cr::System::Hypervisor::WHV_X64_PENDING_INTERRUPTION_TYPE
+    def initialize(@deliverable_type : Win32cr::System::Hypervisor::WHV_X64_PENDING_INTERRUPTION_TYPE)
+    end
+  end
 
   @[Extern]
-  record WHV_X64_APIC_EOI_CONTEXT,
-    interrupt_vector : UInt32
+  struct WHV_X64_APIC_EOI_CONTEXT
+    property interrupt_vector : UInt32
+    def initialize(@interrupt_vector : UInt32)
+    end
+  end
 
   @[Extern(union: true)]
-  record WHV_X64_RDTSC_INFO,
-    anonymous : Anonymous_e__Struct_,
-    as_uint64 : UInt64 do
+  struct WHV_X64_RDTSC_INFO
+    property anonymous : Anonymous_e__Struct_
+    property as_uint64 : UInt64
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt64
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt64
+    def initialize(@_bitfield : UInt64)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uint64 : UInt64)
+    end
   end
 
   @[Extern]
-  record WHV_X64_RDTSC_CONTEXT,
-    tsc_aux : UInt64,
-    virtual_offset : UInt64,
-    tsc : UInt64,
-    reference_time : UInt64,
-    rdtsc_info : Win32cr::System::Hypervisor::WHV_X64_RDTSC_INFO
+  struct WHV_X64_RDTSC_CONTEXT
+    property tsc_aux : UInt64
+    property virtual_offset : UInt64
+    property tsc : UInt64
+    property reference_time : UInt64
+    property rdtsc_info : Win32cr::System::Hypervisor::WHV_X64_RDTSC_INFO
+    def initialize(@tsc_aux : UInt64, @virtual_offset : UInt64, @tsc : UInt64, @reference_time : UInt64, @rdtsc_info : Win32cr::System::Hypervisor::WHV_X64_RDTSC_INFO)
+    end
+  end
 
   @[Extern]
-  record WHV_X64_APIC_SMI_CONTEXT,
-    apic_icr : UInt64
+  struct WHV_X64_APIC_SMI_CONTEXT
+    property apic_icr : UInt64
+    def initialize(@apic_icr : UInt64)
+    end
+  end
 
   @[Extern]
-  record WHV_HYPERCALL_CONTEXT,
-    rax : UInt64,
-    rbx : UInt64,
-    rcx : UInt64,
-    rdx : UInt64,
-    r8 : UInt64,
-    rsi : UInt64,
-    rdi : UInt64,
-    reserved0 : UInt64,
-    xmm_registers : Win32cr::System::Hypervisor::WHV_UINT128[6],
-    reserved1 : UInt64[2]
+  struct WHV_HYPERCALL_CONTEXT
+    property rax : UInt64
+    property rbx : UInt64
+    property rcx : UInt64
+    property rdx : UInt64
+    property r8 : UInt64
+    property rsi : UInt64
+    property rdi : UInt64
+    property reserved0 : UInt64
+    property xmm_registers : Win32cr::System::Hypervisor::WHV_UINT128[6]
+    property reserved1 : UInt64[2]
+    def initialize(@rax : UInt64, @rbx : UInt64, @rcx : UInt64, @rdx : UInt64, @r8 : UInt64, @rsi : UInt64, @rdi : UInt64, @reserved0 : UInt64, @xmm_registers : Win32cr::System::Hypervisor::WHV_UINT128[6], @reserved1 : UInt64[2])
+    end
+  end
 
   @[Extern]
-  record WHV_X64_APIC_INIT_SIPI_CONTEXT,
-    apic_icr : UInt64
+  struct WHV_X64_APIC_INIT_SIPI_CONTEXT
+    property apic_icr : UInt64
+    def initialize(@apic_icr : UInt64)
+    end
+  end
 
   @[Extern]
-  record WHV_X64_APIC_WRITE_CONTEXT,
-    type__ : Win32cr::System::Hypervisor::WHV_X64_APIC_WRITE_TYPE,
-    reserved : UInt32,
-    write_value : UInt64
+  struct WHV_X64_APIC_WRITE_CONTEXT
+    property type__ : Win32cr::System::Hypervisor::WHV_X64_APIC_WRITE_TYPE
+    property reserved : UInt32
+    property write_value : UInt64
+    def initialize(@type__ : Win32cr::System::Hypervisor::WHV_X64_APIC_WRITE_TYPE, @reserved : UInt32, @write_value : UInt64)
+    end
+  end
 
   @[Extern]
-  record WHV_RUN_VP_EXIT_CONTEXT,
-    exit_reason : Win32cr::System::Hypervisor::WHV_RUN_VP_EXIT_REASON,
-    reserved : UInt32,
-    vp_context : Win32cr::System::Hypervisor::WHV_VP_EXIT_CONTEXT,
-    anonymous : Anonymous_e__Union_ do
+  struct WHV_RUN_VP_EXIT_CONTEXT
+    property exit_reason : Win32cr::System::Hypervisor::WHV_RUN_VP_EXIT_REASON
+    property reserved : UInt32
+    property vp_context : Win32cr::System::Hypervisor::WHV_VP_EXIT_CONTEXT
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      memory_access : Win32cr::System::Hypervisor::WHV_MEMORY_ACCESS_CONTEXT,
-      io_port_access : Win32cr::System::Hypervisor::WHV_X64_IO_PORT_ACCESS_CONTEXT,
-      msr_access : Win32cr::System::Hypervisor::WHV_X64_MSR_ACCESS_CONTEXT,
-      cpuid_access : Win32cr::System::Hypervisor::WHV_X64_CPUID_ACCESS_CONTEXT,
-      vp_exception : Win32cr::System::Hypervisor::WHV_VP_EXCEPTION_CONTEXT,
-      interrupt_window : Win32cr::System::Hypervisor::WHV_X64_INTERRUPTION_DELIVERABLE_CONTEXT,
-      unsupported_feature : Win32cr::System::Hypervisor::WHV_X64_UNSUPPORTED_FEATURE_CONTEXT,
-      cancel_reason : Win32cr::System::Hypervisor::WHV_RUN_VP_CANCELED_CONTEXT,
-      apic_eoi : Win32cr::System::Hypervisor::WHV_X64_APIC_EOI_CONTEXT,
-      read_tsc : Win32cr::System::Hypervisor::WHV_X64_RDTSC_CONTEXT,
-      apic_smi : Win32cr::System::Hypervisor::WHV_X64_APIC_SMI_CONTEXT,
-      hypercall : Win32cr::System::Hypervisor::WHV_HYPERCALL_CONTEXT,
-      apic_init_sipi : Win32cr::System::Hypervisor::WHV_X64_APIC_INIT_SIPI_CONTEXT,
-      apic_write : Win32cr::System::Hypervisor::WHV_X64_APIC_WRITE_CONTEXT,
-      synic_sint_deliverable : Win32cr::System::Hypervisor::WHV_SYNIC_SINT_DELIVERABLE_CONTEXT
+    struct Anonymous_e__Union_
+    property memory_access : Win32cr::System::Hypervisor::WHV_MEMORY_ACCESS_CONTEXT
+    property io_port_access : Win32cr::System::Hypervisor::WHV_X64_IO_PORT_ACCESS_CONTEXT
+    property msr_access : Win32cr::System::Hypervisor::WHV_X64_MSR_ACCESS_CONTEXT
+    property cpuid_access : Win32cr::System::Hypervisor::WHV_X64_CPUID_ACCESS_CONTEXT
+    property vp_exception : Win32cr::System::Hypervisor::WHV_VP_EXCEPTION_CONTEXT
+    property interrupt_window : Win32cr::System::Hypervisor::WHV_X64_INTERRUPTION_DELIVERABLE_CONTEXT
+    property unsupported_feature : Win32cr::System::Hypervisor::WHV_X64_UNSUPPORTED_FEATURE_CONTEXT
+    property cancel_reason : Win32cr::System::Hypervisor::WHV_RUN_VP_CANCELED_CONTEXT
+    property apic_eoi : Win32cr::System::Hypervisor::WHV_X64_APIC_EOI_CONTEXT
+    property read_tsc : Win32cr::System::Hypervisor::WHV_X64_RDTSC_CONTEXT
+    property apic_smi : Win32cr::System::Hypervisor::WHV_X64_APIC_SMI_CONTEXT
+    property hypercall : Win32cr::System::Hypervisor::WHV_HYPERCALL_CONTEXT
+    property apic_init_sipi : Win32cr::System::Hypervisor::WHV_X64_APIC_INIT_SIPI_CONTEXT
+    property apic_write : Win32cr::System::Hypervisor::WHV_X64_APIC_WRITE_CONTEXT
+    property synic_sint_deliverable : Win32cr::System::Hypervisor::WHV_SYNIC_SINT_DELIVERABLE_CONTEXT
+    def initialize(@memory_access : Win32cr::System::Hypervisor::WHV_MEMORY_ACCESS_CONTEXT, @io_port_access : Win32cr::System::Hypervisor::WHV_X64_IO_PORT_ACCESS_CONTEXT, @msr_access : Win32cr::System::Hypervisor::WHV_X64_MSR_ACCESS_CONTEXT, @cpuid_access : Win32cr::System::Hypervisor::WHV_X64_CPUID_ACCESS_CONTEXT, @vp_exception : Win32cr::System::Hypervisor::WHV_VP_EXCEPTION_CONTEXT, @interrupt_window : Win32cr::System::Hypervisor::WHV_X64_INTERRUPTION_DELIVERABLE_CONTEXT, @unsupported_feature : Win32cr::System::Hypervisor::WHV_X64_UNSUPPORTED_FEATURE_CONTEXT, @cancel_reason : Win32cr::System::Hypervisor::WHV_RUN_VP_CANCELED_CONTEXT, @apic_eoi : Win32cr::System::Hypervisor::WHV_X64_APIC_EOI_CONTEXT, @read_tsc : Win32cr::System::Hypervisor::WHV_X64_RDTSC_CONTEXT, @apic_smi : Win32cr::System::Hypervisor::WHV_X64_APIC_SMI_CONTEXT, @hypercall : Win32cr::System::Hypervisor::WHV_HYPERCALL_CONTEXT, @apic_init_sipi : Win32cr::System::Hypervisor::WHV_X64_APIC_INIT_SIPI_CONTEXT, @apic_write : Win32cr::System::Hypervisor::WHV_X64_APIC_WRITE_CONTEXT, @synic_sint_deliverable : Win32cr::System::Hypervisor::WHV_SYNIC_SINT_DELIVERABLE_CONTEXT)
+    end
+    end
 
+    def initialize(@exit_reason : Win32cr::System::Hypervisor::WHV_RUN_VP_EXIT_REASON, @reserved : UInt32, @vp_context : Win32cr::System::Hypervisor::WHV_VP_EXIT_CONTEXT, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record WHV_INTERRUPT_CONTROL,
-    _bitfield : UInt64,
-    destination : UInt32,
-    vector : UInt32
-
-  @[Extern]
-  record WHV_DOORBELL_MATCH_DATA,
-    guest_address : UInt64,
-    value : UInt64,
-    length : UInt32,
-    _bitfield : UInt32
-
-  @[Extern]
-  record WHV_PARTITION_MEMORY_COUNTERS,
-    mapped4_k_page_count : UInt64,
-    mapped2_m_page_count : UInt64,
-    mapped1_g_page_count : UInt64
-
-  @[Extern]
-  record WHV_PROCESSOR_RUNTIME_COUNTERS,
-    total_runtime100ns : UInt64,
-    hypervisor_runtime100ns : UInt64
-
-  @[Extern]
-  record WHV_PROCESSOR_INTERCEPT_COUNTER,
-    count : UInt64,
-    time100ns : UInt64
-
-  @[Extern]
-  record WHV_PROCESSOR_INTERCEPT_COUNTERS,
-    page_invalidations : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER,
-    control_register_accesses : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER,
-    io_instructions : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER,
-    halt_instructions : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER,
-    cpuid_instructions : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER,
-    msr_accesses : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER,
-    other_intercepts : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER,
-    pending_interrupts : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER,
-    emulated_instructions : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER,
-    debug_register_accesses : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER,
-    page_fault_intercepts : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER,
-    nested_page_fault_intercepts : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER,
-    hypercalls : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER,
-    rdpmc_instructions : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER
-
-  @[Extern]
-  record WHV_PROCESSOR_EVENT_COUNTERS,
-    page_fault_count : UInt64,
-    exception_count : UInt64,
-    interrupt_count : UInt64
-
-  @[Extern]
-  record WHV_PROCESSOR_APIC_COUNTERS,
-    mmio_access_count : UInt64,
-    eoi_access_count : UInt64,
-    tpr_access_count : UInt64,
-    sent_ipi_count : UInt64,
-    self_ipi_count : UInt64
-
-  @[Extern]
-  record WHV_PROCESSOR_SYNTHETIC_FEATURES_COUNTERS,
-    synthetic_interrupts_count : UInt64,
-    long_spin_wait_hypercalls_count : UInt64,
-    other_hypercalls_count : UInt64,
-    synthetic_interrupt_hypercalls_count : UInt64,
-    virtual_interrupt_hypercalls_count : UInt64,
-    virtual_mmu_hypercalls_count : UInt64
-
-  @[Extern]
-  record WHV_SYNIC_EVENT_PARAMETERS,
-    vp_index : UInt32,
-    target_sint : UInt8,
-    reserved : UInt8,
-    flag_number : UInt16
-
-  @[Extern]
-  record WHV_SRIOV_RESOURCE_DESCRIPTOR,
-    pnp_instance_id : UInt16[200],
-    virtual_function_id : Win32cr::Foundation::LUID,
-    virtual_function_index : UInt16,
-    reserved : UInt16
-
-  @[Extern]
-  record WHV_VPCI_DEVICE_NOTIFICATION,
-    notification_type : Win32cr::System::Hypervisor::WHV_VPCI_DEVICE_NOTIFICATION_TYPE,
-    reserved1 : UInt32,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      reserved2 : UInt64
-
+  struct WHV_INTERRUPT_CONTROL
+    property _bitfield : UInt64
+    property destination : UInt32
+    property vector : UInt32
+    def initialize(@_bitfield : UInt64, @destination : UInt32, @vector : UInt32)
+    end
   end
 
   @[Extern]
-  record WHV_VPCI_HARDWARE_IDS,
-    vendor_id : UInt16,
-    device_id : UInt16,
-    revision_id : UInt8,
-    prog_if : UInt8,
-    sub_class : UInt8,
-    base_class : UInt8,
-    sub_vendor_id : UInt16,
-    sub_system_id : UInt16
+  struct WHV_DOORBELL_MATCH_DATA
+    property guest_address : UInt64
+    property value : UInt64
+    property length : UInt32
+    property _bitfield : UInt32
+    def initialize(@guest_address : UInt64, @value : UInt64, @length : UInt32, @_bitfield : UInt32)
+    end
+  end
 
   @[Extern]
-  record WHV_VPCI_PROBED_BARS,
-    value : UInt32[6]
+  struct WHV_PARTITION_MEMORY_COUNTERS
+    property mapped4_k_page_count : UInt64
+    property mapped2_m_page_count : UInt64
+    property mapped1_g_page_count : UInt64
+    def initialize(@mapped4_k_page_count : UInt64, @mapped2_m_page_count : UInt64, @mapped1_g_page_count : UInt64)
+    end
+  end
 
   @[Extern]
-  record WHV_VPCI_MMIO_MAPPING,
-    location : Win32cr::System::Hypervisor::WHV_VPCI_DEVICE_REGISTER_SPACE,
-    flags : Win32cr::System::Hypervisor::WHV_VPCI_MMIO_RANGE_FLAGS,
-    size_in_bytes : UInt64,
-    offset_in_bytes : UInt64,
-    virtual_address : Void*
+  struct WHV_PROCESSOR_RUNTIME_COUNTERS
+    property total_runtime100ns : UInt64
+    property hypervisor_runtime100ns : UInt64
+    def initialize(@total_runtime100ns : UInt64, @hypervisor_runtime100ns : UInt64)
+    end
+  end
 
   @[Extern]
-  record WHV_VPCI_DEVICE_REGISTER,
-    location : Win32cr::System::Hypervisor::WHV_VPCI_DEVICE_REGISTER_SPACE,
-    size_in_bytes : UInt32,
-    offset_in_bytes : UInt64
+  struct WHV_PROCESSOR_INTERCEPT_COUNTER
+    property count : UInt64
+    property time100ns : UInt64
+    def initialize(@count : UInt64, @time100ns : UInt64)
+    end
+  end
 
   @[Extern]
-  record WHV_VPCI_INTERRUPT_TARGET,
-    vector : UInt32,
-    flags : Win32cr::System::Hypervisor::WHV_VPCI_INTERRUPT_TARGET_FLAGS,
-    processor_count : UInt32,
-    processors : UInt32*
+  struct WHV_PROCESSOR_INTERCEPT_COUNTERS
+    property page_invalidations : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER
+    property control_register_accesses : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER
+    property io_instructions : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER
+    property halt_instructions : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER
+    property cpuid_instructions : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER
+    property msr_accesses : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER
+    property other_intercepts : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER
+    property pending_interrupts : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER
+    property emulated_instructions : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER
+    property debug_register_accesses : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER
+    property page_fault_intercepts : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER
+    property nested_page_fault_intercepts : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER
+    property hypercalls : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER
+    property rdpmc_instructions : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER
+    def initialize(@page_invalidations : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER, @control_register_accesses : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER, @io_instructions : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER, @halt_instructions : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER, @cpuid_instructions : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER, @msr_accesses : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER, @other_intercepts : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER, @pending_interrupts : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER, @emulated_instructions : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER, @debug_register_accesses : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER, @page_fault_intercepts : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER, @nested_page_fault_intercepts : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER, @hypercalls : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER, @rdpmc_instructions : Win32cr::System::Hypervisor::WHV_PROCESSOR_INTERCEPT_COUNTER)
+    end
+  end
 
   @[Extern]
-  record WHV_TRIGGER_PARAMETERS,
-    trigger_type : Win32cr::System::Hypervisor::WHV_TRIGGER_TYPE,
-    reserved : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct WHV_PROCESSOR_EVENT_COUNTERS
+    property page_fault_count : UInt64
+    property exception_count : UInt64
+    property interrupt_count : UInt64
+    def initialize(@page_fault_count : UInt64, @exception_count : UInt64, @interrupt_count : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct WHV_PROCESSOR_APIC_COUNTERS
+    property mmio_access_count : UInt64
+    property eoi_access_count : UInt64
+    property tpr_access_count : UInt64
+    property sent_ipi_count : UInt64
+    property self_ipi_count : UInt64
+    def initialize(@mmio_access_count : UInt64, @eoi_access_count : UInt64, @tpr_access_count : UInt64, @sent_ipi_count : UInt64, @self_ipi_count : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct WHV_PROCESSOR_SYNTHETIC_FEATURES_COUNTERS
+    property synthetic_interrupts_count : UInt64
+    property long_spin_wait_hypercalls_count : UInt64
+    property other_hypercalls_count : UInt64
+    property synthetic_interrupt_hypercalls_count : UInt64
+    property virtual_interrupt_hypercalls_count : UInt64
+    property virtual_mmu_hypercalls_count : UInt64
+    def initialize(@synthetic_interrupts_count : UInt64, @long_spin_wait_hypercalls_count : UInt64, @other_hypercalls_count : UInt64, @synthetic_interrupt_hypercalls_count : UInt64, @virtual_interrupt_hypercalls_count : UInt64, @virtual_mmu_hypercalls_count : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct WHV_SYNIC_EVENT_PARAMETERS
+    property vp_index : UInt32
+    property target_sint : UInt8
+    property reserved : UInt8
+    property flag_number : UInt16
+    def initialize(@vp_index : UInt32, @target_sint : UInt8, @reserved : UInt8, @flag_number : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct WHV_SRIOV_RESOURCE_DESCRIPTOR
+    property pnp_instance_id : UInt16[200]
+    property virtual_function_id : Win32cr::Foundation::LUID
+    property virtual_function_index : UInt16
+    property reserved : UInt16
+    def initialize(@pnp_instance_id : UInt16[200], @virtual_function_id : Win32cr::Foundation::LUID, @virtual_function_index : UInt16, @reserved : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct WHV_VPCI_DEVICE_NOTIFICATION
+    property notification_type : Win32cr::System::Hypervisor::WHV_VPCI_DEVICE_NOTIFICATION_TYPE
+    property reserved1 : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      interrupt : Win32cr::System::Hypervisor::WHV_INTERRUPT_CONTROL,
-      synic_event : Win32cr::System::Hypervisor::WHV_SYNIC_EVENT_PARAMETERS,
-      device_interrupt : DeviceInterrupt_e__Struct_ do
+    struct Anonymous_e__Union_
+    property reserved2 : UInt64
+    def initialize(@reserved2 : UInt64)
+    end
+    end
+
+    def initialize(@notification_type : Win32cr::System::Hypervisor::WHV_VPCI_DEVICE_NOTIFICATION_TYPE, @reserved1 : UInt32, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct WHV_VPCI_HARDWARE_IDS
+    property vendor_id : UInt16
+    property device_id : UInt16
+    property revision_id : UInt8
+    property prog_if : UInt8
+    property sub_class : UInt8
+    property base_class : UInt8
+    property sub_vendor_id : UInt16
+    property sub_system_id : UInt16
+    def initialize(@vendor_id : UInt16, @device_id : UInt16, @revision_id : UInt8, @prog_if : UInt8, @sub_class : UInt8, @base_class : UInt8, @sub_vendor_id : UInt16, @sub_system_id : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct WHV_VPCI_PROBED_BARS
+    property value : UInt32[6]
+    def initialize(@value : UInt32[6])
+    end
+  end
+
+  @[Extern]
+  struct WHV_VPCI_MMIO_MAPPING
+    property location : Win32cr::System::Hypervisor::WHV_VPCI_DEVICE_REGISTER_SPACE
+    property flags : Win32cr::System::Hypervisor::WHV_VPCI_MMIO_RANGE_FLAGS
+    property size_in_bytes : UInt64
+    property offset_in_bytes : UInt64
+    property virtual_address : Void*
+    def initialize(@location : Win32cr::System::Hypervisor::WHV_VPCI_DEVICE_REGISTER_SPACE, @flags : Win32cr::System::Hypervisor::WHV_VPCI_MMIO_RANGE_FLAGS, @size_in_bytes : UInt64, @offset_in_bytes : UInt64, @virtual_address : Void*)
+    end
+  end
+
+  @[Extern]
+  struct WHV_VPCI_DEVICE_REGISTER
+    property location : Win32cr::System::Hypervisor::WHV_VPCI_DEVICE_REGISTER_SPACE
+    property size_in_bytes : UInt32
+    property offset_in_bytes : UInt64
+    def initialize(@location : Win32cr::System::Hypervisor::WHV_VPCI_DEVICE_REGISTER_SPACE, @size_in_bytes : UInt32, @offset_in_bytes : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct WHV_VPCI_INTERRUPT_TARGET
+    property vector : UInt32
+    property flags : Win32cr::System::Hypervisor::WHV_VPCI_INTERRUPT_TARGET_FLAGS
+    property processor_count : UInt32
+    property processors : UInt32*
+    def initialize(@vector : UInt32, @flags : Win32cr::System::Hypervisor::WHV_VPCI_INTERRUPT_TARGET_FLAGS, @processor_count : UInt32, @processors : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct WHV_TRIGGER_PARAMETERS
+    property trigger_type : Win32cr::System::Hypervisor::WHV_TRIGGER_TYPE
+    property reserved : UInt32
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property interrupt : Win32cr::System::Hypervisor::WHV_INTERRUPT_CONTROL
+    property synic_event : Win32cr::System::Hypervisor::WHV_SYNIC_EVENT_PARAMETERS
+    property device_interrupt : DeviceInterrupt_e__Struct_
 
       # Nested Type DeviceInterrupt_e__Struct_
       @[Extern]
-      record DeviceInterrupt_e__Struct_,
-        logical_device_id : UInt64,
-        msi_address : UInt64,
-        msi_data : UInt32,
-        reserved : UInt32
+      struct DeviceInterrupt_e__Struct_
+    property logical_device_id : UInt64
+    property msi_address : UInt64
+    property msi_data : UInt32
+    property reserved : UInt32
+    def initialize(@logical_device_id : UInt64, @msi_address : UInt64, @msi_data : UInt32, @reserved : UInt32)
+    end
+      end
 
+    def initialize(@interrupt : Win32cr::System::Hypervisor::WHV_INTERRUPT_CONTROL, @synic_event : Win32cr::System::Hypervisor::WHV_SYNIC_EVENT_PARAMETERS, @device_interrupt : DeviceInterrupt_e__Struct_)
+    end
     end
 
+    def initialize(@trigger_type : Win32cr::System::Hypervisor::WHV_TRIGGER_TYPE, @reserved : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record WHV_VIRTUAL_PROCESSOR_PROPERTY,
-    property_code : Win32cr::System::Hypervisor::WHV_VIRTUAL_PROCESSOR_PROPERTY_CODE,
-    reserved : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct WHV_VIRTUAL_PROCESSOR_PROPERTY
+    property property_code : Win32cr::System::Hypervisor::WHV_VIRTUAL_PROCESSOR_PROPERTY_CODE
+    property reserved : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      numa_node : UInt16,
-      padding : UInt64
+    struct Anonymous_e__Union_
+    property numa_node : UInt16
+    property padding : UInt64
+    def initialize(@numa_node : UInt16, @padding : UInt64)
+    end
+    end
 
+    def initialize(@property_code : Win32cr::System::Hypervisor::WHV_VIRTUAL_PROCESSOR_PROPERTY_CODE, @reserved : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record WHV_NOTIFICATION_PORT_PARAMETERS,
-    notification_port_type : Win32cr::System::Hypervisor::WHV_NOTIFICATION_PORT_TYPE,
-    reserved : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct WHV_NOTIFICATION_PORT_PARAMETERS
+    property notification_port_type : Win32cr::System::Hypervisor::WHV_NOTIFICATION_PORT_TYPE
+    property reserved : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      doorbell : Win32cr::System::Hypervisor::WHV_DOORBELL_MATCH_DATA,
-      event : Event_e__Struct_ do
+    struct Anonymous_e__Union_
+    property doorbell : Win32cr::System::Hypervisor::WHV_DOORBELL_MATCH_DATA
+    property event : Event_e__Struct_
 
       # Nested Type Event_e__Struct_
       @[Extern]
-      record Event_e__Struct_,
-        connection_id : UInt32
+      struct Event_e__Struct_
+    property connection_id : UInt32
+    def initialize(@connection_id : UInt32)
+    end
+      end
 
+    def initialize(@doorbell : Win32cr::System::Hypervisor::WHV_DOORBELL_MATCH_DATA, @event : Event_e__Struct_)
+    end
     end
 
+    def initialize(@notification_port_type : Win32cr::System::Hypervisor::WHV_NOTIFICATION_PORT_TYPE, @reserved : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern(union: true)]
-  record WHV_EMULATOR_STATUS,
-    anonymous : Anonymous_e__Struct_,
-    as_uint32 : UInt32 do
+  struct WHV_EMULATOR_STATUS
+    property anonymous : Anonymous_e__Struct_
+    property as_uint32 : UInt32
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt32
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uint32 : UInt32)
+    end
   end
 
   @[Extern]
-  record WHV_EMULATOR_MEMORY_ACCESS_INFO,
-    gpa_address : UInt64,
-    direction : UInt8,
-    access_size : UInt8,
-    data : UInt8[8]
+  struct WHV_EMULATOR_MEMORY_ACCESS_INFO
+    property gpa_address : UInt64
+    property direction : UInt8
+    property access_size : UInt8
+    property data : UInt8[8]
+    def initialize(@gpa_address : UInt64, @direction : UInt8, @access_size : UInt8, @data : UInt8[8])
+    end
+  end
 
   @[Extern]
-  record WHV_EMULATOR_IO_ACCESS_INFO,
-    direction : UInt8,
-    port : UInt16,
-    access_size : UInt16,
-    data : UInt32
+  struct WHV_EMULATOR_IO_ACCESS_INFO
+    property direction : UInt8
+    property port : UInt16
+    property access_size : UInt16
+    property data : UInt32
+    def initialize(@direction : UInt8, @port : UInt16, @access_size : UInt16, @data : UInt32)
+    end
+  end
 
   @[Extern]
-  record WHV_EMULATOR_CALLBACKS,
-    size : UInt32,
-    reserved : UInt32,
-    w_hv_emulator_io_port_callback : Win32cr::System::Hypervisor::WHV_EMULATOR_IO_PORT_CALLBACK,
-    w_hv_emulator_memory_callback : Win32cr::System::Hypervisor::WHV_EMULATOR_MEMORY_CALLBACK,
-    w_hv_emulator_get_virtual_processor_registers : Win32cr::System::Hypervisor::WHV_EMULATOR_GET_VIRTUAL_PROCESSOR_REGISTERS_CALLBACK,
-    w_hv_emulator_set_virtual_processor_registers : Win32cr::System::Hypervisor::WHV_EMULATOR_SET_VIRTUAL_PROCESSOR_REGISTERS_CALLBACK,
-    w_hv_emulator_translate_gva_page : Win32cr::System::Hypervisor::WHV_EMULATOR_TRANSLATE_GVA_PAGE_CALLBACK
+  struct WHV_EMULATOR_CALLBACKS
+    property size : UInt32
+    property reserved : UInt32
+    property w_hv_emulator_io_port_callback : Win32cr::System::Hypervisor::WHV_EMULATOR_IO_PORT_CALLBACK
+    property w_hv_emulator_memory_callback : Win32cr::System::Hypervisor::WHV_EMULATOR_MEMORY_CALLBACK
+    property w_hv_emulator_get_virtual_processor_registers : Win32cr::System::Hypervisor::WHV_EMULATOR_GET_VIRTUAL_PROCESSOR_REGISTERS_CALLBACK
+    property w_hv_emulator_set_virtual_processor_registers : Win32cr::System::Hypervisor::WHV_EMULATOR_SET_VIRTUAL_PROCESSOR_REGISTERS_CALLBACK
+    property w_hv_emulator_translate_gva_page : Win32cr::System::Hypervisor::WHV_EMULATOR_TRANSLATE_GVA_PAGE_CALLBACK
+    def initialize(@size : UInt32, @reserved : UInt32, @w_hv_emulator_io_port_callback : Win32cr::System::Hypervisor::WHV_EMULATOR_IO_PORT_CALLBACK, @w_hv_emulator_memory_callback : Win32cr::System::Hypervisor::WHV_EMULATOR_MEMORY_CALLBACK, @w_hv_emulator_get_virtual_processor_registers : Win32cr::System::Hypervisor::WHV_EMULATOR_GET_VIRTUAL_PROCESSOR_REGISTERS_CALLBACK, @w_hv_emulator_set_virtual_processor_registers : Win32cr::System::Hypervisor::WHV_EMULATOR_SET_VIRTUAL_PROCESSOR_REGISTERS_CALLBACK, @w_hv_emulator_translate_gva_page : Win32cr::System::Hypervisor::WHV_EMULATOR_TRANSLATE_GVA_PAGE_CALLBACK)
+    end
+  end
 
   @[Extern]
-  record SOCKADDR_HV,
-    family : UInt16,
-    reserved : UInt16,
-    vm_id : LibC::GUID,
-    service_id : LibC::GUID
+  struct SOCKADDR_HV
+    property family : UInt16
+    property reserved : UInt16
+    property vm_id : LibC::GUID
+    property service_id : LibC::GUID
+    def initialize(@family : UInt16, @reserved : UInt16, @vm_id : LibC::GUID, @service_id : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record HVSOCKET_ADDRESS_INFO,
-    system_id : LibC::GUID,
-    virtual_machine_id : LibC::GUID,
-    silo_id : LibC::GUID,
-    flags : UInt32
+  struct HVSOCKET_ADDRESS_INFO
+    property system_id : LibC::GUID
+    property virtual_machine_id : LibC::GUID
+    property silo_id : LibC::GUID
+    property flags : UInt32
+    def initialize(@system_id : LibC::GUID, @virtual_machine_id : LibC::GUID, @silo_id : LibC::GUID, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record VM_GENCOUNTER,
-    generation_count : UInt64,
-    generation_count_high : UInt64
+  struct VM_GENCOUNTER
+    property generation_count : UInt64
+    property generation_count_high : UInt64
+    def initialize(@generation_count : UInt64, @generation_count_high : UInt64)
+    end
+  end
 
   @[Extern]
-  record HDV_PCI_PNP_ID,
-    vendor_id : UInt16,
-    device_id : UInt16,
-    revision_id : UInt8,
-    prog_if : UInt8,
-    sub_class : UInt8,
-    base_class : UInt8,
-    sub_vendor_id : UInt16,
-    sub_system_id : UInt16
+  struct HDV_PCI_PNP_ID
+    property vendor_id : UInt16
+    property device_id : UInt16
+    property revision_id : UInt8
+    property prog_if : UInt8
+    property sub_class : UInt8
+    property base_class : UInt8
+    property sub_vendor_id : UInt16
+    property sub_system_id : UInt16
+    def initialize(@vendor_id : UInt16, @device_id : UInt16, @revision_id : UInt8, @prog_if : UInt8, @sub_class : UInt8, @base_class : UInt8, @sub_vendor_id : UInt16, @sub_system_id : UInt16)
+    end
+  end
 
   @[Extern]
-  record HDV_PCI_DEVICE_INTERFACE,
-    version : Win32cr::System::Hypervisor::HDV_PCI_INTERFACE_VERSION,
-    initialize__ : Win32cr::System::Hypervisor::HDV_PCI_DEVICE_INITIALIZE,
-    teardown : Win32cr::System::Hypervisor::HDV_PCI_DEVICE_TEARDOWN,
-    set_configuration : Win32cr::System::Hypervisor::HDV_PCI_DEVICE_SET_CONFIGURATION,
-    get_details : Win32cr::System::Hypervisor::HDV_PCI_DEVICE_GET_DETAILS,
-    start : Win32cr::System::Hypervisor::HDV_PCI_DEVICE_START,
-    stop : Win32cr::System::Hypervisor::HDV_PCI_DEVICE_STOP,
-    read_config_space : Win32cr::System::Hypervisor::HDV_PCI_READ_CONFIG_SPACE,
-    write_config_space : Win32cr::System::Hypervisor::HDV_PCI_WRITE_CONFIG_SPACE,
-    read_intercepted_memory : Win32cr::System::Hypervisor::HDV_PCI_READ_INTERCEPTED_MEMORY,
-    write_intercepted_memory : Win32cr::System::Hypervisor::HDV_PCI_WRITE_INTERCEPTED_MEMORY
+  struct HDV_PCI_DEVICE_INTERFACE
+    property version : Win32cr::System::Hypervisor::HDV_PCI_INTERFACE_VERSION
+    property initialize__ : Win32cr::System::Hypervisor::HDV_PCI_DEVICE_INITIALIZE
+    property teardown : Win32cr::System::Hypervisor::HDV_PCI_DEVICE_TEARDOWN
+    property set_configuration : Win32cr::System::Hypervisor::HDV_PCI_DEVICE_SET_CONFIGURATION
+    property get_details : Win32cr::System::Hypervisor::HDV_PCI_DEVICE_GET_DETAILS
+    property start : Win32cr::System::Hypervisor::HDV_PCI_DEVICE_START
+    property stop : Win32cr::System::Hypervisor::HDV_PCI_DEVICE_STOP
+    property read_config_space : Win32cr::System::Hypervisor::HDV_PCI_READ_CONFIG_SPACE
+    property write_config_space : Win32cr::System::Hypervisor::HDV_PCI_WRITE_CONFIG_SPACE
+    property read_intercepted_memory : Win32cr::System::Hypervisor::HDV_PCI_READ_INTERCEPTED_MEMORY
+    property write_intercepted_memory : Win32cr::System::Hypervisor::HDV_PCI_WRITE_INTERCEPTED_MEMORY
+    def initialize(@version : Win32cr::System::Hypervisor::HDV_PCI_INTERFACE_VERSION, @initialize__ : Win32cr::System::Hypervisor::HDV_PCI_DEVICE_INITIALIZE, @teardown : Win32cr::System::Hypervisor::HDV_PCI_DEVICE_TEARDOWN, @set_configuration : Win32cr::System::Hypervisor::HDV_PCI_DEVICE_SET_CONFIGURATION, @get_details : Win32cr::System::Hypervisor::HDV_PCI_DEVICE_GET_DETAILS, @start : Win32cr::System::Hypervisor::HDV_PCI_DEVICE_START, @stop : Win32cr::System::Hypervisor::HDV_PCI_DEVICE_STOP, @read_config_space : Win32cr::System::Hypervisor::HDV_PCI_READ_CONFIG_SPACE, @write_config_space : Win32cr::System::Hypervisor::HDV_PCI_WRITE_CONFIG_SPACE, @read_intercepted_memory : Win32cr::System::Hypervisor::HDV_PCI_READ_INTERCEPTED_MEMORY, @write_intercepted_memory : Win32cr::System::Hypervisor::HDV_PCI_WRITE_INTERCEPTED_MEMORY)
+    end
+  end
 
   @[Extern]
-  record GPA_MEMORY_CHUNK,
-    guest_physical_start_page_index : UInt64,
-    page_count : UInt64
+  struct GPA_MEMORY_CHUNK
+    property guest_physical_start_page_index : UInt64
+    property page_count : UInt64
+    def initialize(@guest_physical_start_page_index : UInt64, @page_count : UInt64)
+    end
+  end
 
   @[Extern(union: true)]
-  record GUEST_OS_INFO,
-    as_uint64 : UInt64,
-    closed_source : ClosedSource_e__Struct_,
-    open_source : OpenSource_e__Struct_ do
+  struct GUEST_OS_INFO
+    property as_uint64 : UInt64
+    property closed_source : ClosedSource_e__Struct_
+    property open_source : OpenSource_e__Struct_
 
     # Nested Type OpenSource_e__Struct_
     @[Extern]
-    record OpenSource_e__Struct_,
-      _bitfield : UInt64
+    struct OpenSource_e__Struct_
+    property _bitfield : UInt64
+    def initialize(@_bitfield : UInt64)
+    end
+    end
 
 
     # Nested Type ClosedSource_e__Struct_
     @[Extern]
-    record ClosedSource_e__Struct_,
-      _bitfield : UInt64
+    struct ClosedSource_e__Struct_
+    property _bitfield : UInt64
+    def initialize(@_bitfield : UInt64)
+    end
+    end
 
+    def initialize(@as_uint64 : UInt64, @closed_source : ClosedSource_e__Struct_, @open_source : OpenSource_e__Struct_)
+    end
   end
 
   @[Extern(union: true)]
-  record VIRTUAL_PROCESSOR_REGISTER,
-    reg64 : UInt64,
-    reg32 : UInt32,
-    reg16 : UInt16,
-    reg8 : UInt8,
-    reg128 : Reg128_e__Struct_,
-    x64 : X64_e__Union_ do
+  struct VIRTUAL_PROCESSOR_REGISTER
+    property reg64 : UInt64
+    property reg32 : UInt32
+    property reg16 : UInt16
+    property reg8 : UInt8
+    property reg128 : Reg128_e__Struct_
+    property x64 : X64_e__Union_
 
     # Nested Type X64_e__Union_
     @[Extern(union: true)]
-    record X64_e__Union_,
-      segment : Segment_e__Struct_,
-      table : Table_e__Struct_,
-      fp_control_status : FpControlStatus_e__Struct_,
-      xmm_control_status : XmmControlStatus_e__Struct_ do
+    struct X64_e__Union_
+    property segment : Segment_e__Struct_
+    property table : Table_e__Struct_
+    property fp_control_status : FpControlStatus_e__Struct_
+    property xmm_control_status : XmmControlStatus_e__Struct_
 
       # Nested Type XmmControlStatus_e__Struct_
       @[Extern]
-      record XmmControlStatus_e__Struct_,
-        anonymous : Anonymous_e__Union_,
-        xmm_status_control : UInt32,
-        xmm_status_control_mask : UInt32 do
+      struct XmmControlStatus_e__Struct_
+    property anonymous : Anonymous_e__Union_
+    property xmm_status_control : UInt32
+    property xmm_status_control_mask : UInt32
 
         # Nested Type Anonymous_e__Union_
         @[Extern(union: true)]
-        record Anonymous_e__Union_,
-          last_fp_rdp : UInt64,
-          anonymous : Anonymous_e__Struct_ do
+        struct Anonymous_e__Union_
+    property last_fp_rdp : UInt64
+    property anonymous : Anonymous_e__Struct_
 
           # Nested Type Anonymous_e__Struct_
           @[Extern]
-          record Anonymous_e__Struct_,
-            last_fp_dp : UInt32,
-            last_fp_ds : UInt16
+          struct Anonymous_e__Struct_
+    property last_fp_dp : UInt32
+    property last_fp_ds : UInt16
+    def initialize(@last_fp_dp : UInt32, @last_fp_ds : UInt16)
+    end
+          end
 
+    def initialize(@last_fp_rdp : UInt64, @anonymous : Anonymous_e__Struct_)
+    end
         end
 
+    def initialize(@anonymous : Anonymous_e__Union_, @xmm_status_control : UInt32, @xmm_status_control_mask : UInt32)
+    end
       end
 
 
       # Nested Type FpControlStatus_e__Struct_
       @[Extern]
-      record FpControlStatus_e__Struct_,
-        fp_control : UInt16,
-        fp_status : UInt16,
-        fp_tag : UInt8,
-        reserved : UInt8,
-        last_fp_op : UInt16,
-        anonymous : Anonymous_e__Union_ do
+      struct FpControlStatus_e__Struct_
+    property fp_control : UInt16
+    property fp_status : UInt16
+    property fp_tag : UInt8
+    property reserved : UInt8
+    property last_fp_op : UInt16
+    property anonymous : Anonymous_e__Union_
 
         # Nested Type Anonymous_e__Union_
         @[Extern(union: true)]
-        record Anonymous_e__Union_,
-          last_fp_rip : UInt64,
-          anonymous : Anonymous_e__Struct_ do
+        struct Anonymous_e__Union_
+    property last_fp_rip : UInt64
+    property anonymous : Anonymous_e__Struct_
 
           # Nested Type Anonymous_e__Struct_
           @[Extern]
-          record Anonymous_e__Struct_,
-            last_fp_eip : UInt32,
-            last_fp_cs : UInt16
+          struct Anonymous_e__Struct_
+    property last_fp_eip : UInt32
+    property last_fp_cs : UInt16
+    def initialize(@last_fp_eip : UInt32, @last_fp_cs : UInt16)
+    end
+          end
 
+    def initialize(@last_fp_rip : UInt64, @anonymous : Anonymous_e__Struct_)
+    end
         end
 
+    def initialize(@fp_control : UInt16, @fp_status : UInt16, @fp_tag : UInt8, @reserved : UInt8, @last_fp_op : UInt16, @anonymous : Anonymous_e__Union_)
+    end
       end
 
 
       # Nested Type Segment_e__Struct_
       @[Extern]
-      record Segment_e__Struct_,
-        base : UInt64,
-        limit : UInt32,
-        selector : UInt16,
-        anonymous : Anonymous_e__Union_ do
+      struct Segment_e__Struct_
+    property base : UInt64
+    property limit : UInt32
+    property selector : UInt16
+    property anonymous : Anonymous_e__Union_
 
         # Nested Type Anonymous_e__Union_
         @[Extern(union: true)]
-        record Anonymous_e__Union_,
-          attributes : UInt16,
-          anonymous : Anonymous_e__Struct_ do
+        struct Anonymous_e__Union_
+    property attributes : UInt16
+    property anonymous : Anonymous_e__Struct_
 
           # Nested Type Anonymous_e__Struct_
           @[Extern]
-          record Anonymous_e__Struct_,
-            _bitfield : UInt16
+          struct Anonymous_e__Struct_
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+          end
 
+    def initialize(@attributes : UInt16, @anonymous : Anonymous_e__Struct_)
+    end
         end
 
+    def initialize(@base : UInt64, @limit : UInt32, @selector : UInt16, @anonymous : Anonymous_e__Union_)
+    end
       end
 
 
       # Nested Type Table_e__Struct_
       @[Extern]
-      record Table_e__Struct_,
-        limit : UInt16,
-        base : UInt64
+      struct Table_e__Struct_
+    property limit : UInt16
+    property base : UInt64
+    def initialize(@limit : UInt16, @base : UInt64)
+    end
+      end
 
+    def initialize(@segment : Segment_e__Struct_, @table : Table_e__Struct_, @fp_control_status : FpControlStatus_e__Struct_, @xmm_control_status : XmmControlStatus_e__Struct_)
+    end
     end
 
 
     # Nested Type Reg128_e__Struct_
     @[Extern]
-    record Reg128_e__Struct_,
-      low64 : UInt64,
-      high64 : UInt64
+    struct Reg128_e__Struct_
+    property low64 : UInt64
+    property high64 : UInt64
+    def initialize(@low64 : UInt64, @high64 : UInt64)
+    end
+    end
 
+    def initialize(@reg64 : UInt64, @reg32 : UInt32, @reg16 : UInt16, @reg8 : UInt8, @reg128 : Reg128_e__Struct_, @x64 : X64_e__Union_)
+    end
   end
 
   @[Extern]
-  record DOS_IMAGE_INFO,
-    pdb_name : Win32cr::Foundation::PSTR,
-    image_base_address : UInt64,
-    image_size : UInt32,
-    timestamp : UInt32
+  struct DOS_IMAGE_INFO
+    property pdb_name : Win32cr::Foundation::PSTR
+    property image_base_address : UInt64
+    property image_size : UInt32
+    property timestamp : UInt32
+    def initialize(@pdb_name : Win32cr::Foundation::PSTR, @image_base_address : UInt64, @image_size : UInt32, @timestamp : UInt32)
+    end
+  end
 
   @[Extern]
-  record MODULE_INFO,
-    process_image_name : Win32cr::Foundation::PSTR,
-    image : Win32cr::System::Hypervisor::DOS_IMAGE_INFO
+  struct MODULE_INFO
+    property process_image_name : Win32cr::Foundation::PSTR
+    property image : Win32cr::System::Hypervisor::DOS_IMAGE_INFO
+    def initialize(@process_image_name : Win32cr::Foundation::PSTR, @image : Win32cr::System::Hypervisor::DOS_IMAGE_INFO)
+    end
+  end
 
   @[Link("winhvplatform")]
   @[Link("winhvemulation")]

@@ -10,11 +10,11 @@ require "./../storage/xps/printing.cr"
 require "./direct3_d.cr"
 
 module Win32cr::Graphics::Direct2D
-  alias PD2D1_EFFECT_FACTORY = Proc(Void**, Win32cr::Foundation::HRESULT)*
+  alias PD2D1_EFFECT_FACTORY = Proc(Void**, Win32cr::Foundation::HRESULT)
 
-  alias PD2D1_PROPERTY_SET_FUNCTION = Proc(Void*, UInt8*, UInt32, Win32cr::Foundation::HRESULT)*
+  alias PD2D1_PROPERTY_SET_FUNCTION = Proc(Void*, UInt8*, UInt32, Win32cr::Foundation::HRESULT)
 
-  alias PD2D1_PROPERTY_GET_FUNCTION = Proc(Void*, UInt8*, UInt32, UInt32*, Win32cr::Foundation::HRESULT)*
+  alias PD2D1_PROPERTY_GET_FUNCTION = Proc(Void*, UInt8*, UInt32, UInt32*, Win32cr::Foundation::HRESULT)
 
   D2D1_DEFAULT_FLATTENING_TOLERANCE = 0.25
   CLSID_D2D12DAffineTransform = "6aa97485-6354-4cfc-908c-e4a74f62c96c"
@@ -1280,360 +1280,513 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record D2D1_BITMAP_PROPERTIES,
-    pixelFormat : Win32cr::Graphics::Direct2D::Common::D2D1_PIXEL_FORMAT,
-    dpiX : Float32,
-    dpiY : Float32
+  struct D2D1_BITMAP_PROPERTIES
+    property pixelFormat : Win32cr::Graphics::Direct2D::Common::D2D1_PIXEL_FORMAT
+    property dpiX : Float32
+    property dpiY : Float32
+    def initialize(@pixelFormat : Win32cr::Graphics::Direct2D::Common::D2D1_PIXEL_FORMAT, @dpiX : Float32, @dpiY : Float32)
+    end
+  end
 
   @[Extern]
-  record D2D1_GRADIENT_STOP,
-    position : Float32,
-    color : Win32cr::Graphics::Direct2D::Common::D2D1_COLOR_F
+  struct D2D1_GRADIENT_STOP
+    property position : Float32
+    property color : Win32cr::Graphics::Direct2D::Common::D2D1_COLOR_F
+    def initialize(@position : Float32, @color : Win32cr::Graphics::Direct2D::Common::D2D1_COLOR_F)
+    end
+  end
 
   @[Extern]
-  record D2D1_BRUSH_PROPERTIES,
-    opacity : Float32,
-    transform : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F
+  struct D2D1_BRUSH_PROPERTIES
+    property opacity : Float32
+    property transform : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F
+    def initialize(@opacity : Float32, @transform : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F)
+    end
+  end
 
   @[Extern]
-  record D2D1_BITMAP_BRUSH_PROPERTIES,
-    extendModeX : Win32cr::Graphics::Direct2D::D2D1_EXTEND_MODE,
-    extendModeY : Win32cr::Graphics::Direct2D::D2D1_EXTEND_MODE,
-    interpolationMode : Win32cr::Graphics::Direct2D::D2D1_BITMAP_INTERPOLATION_MODE
+  struct D2D1_BITMAP_BRUSH_PROPERTIES
+    property extendModeX : Win32cr::Graphics::Direct2D::D2D1_EXTEND_MODE
+    property extendModeY : Win32cr::Graphics::Direct2D::D2D1_EXTEND_MODE
+    property interpolationMode : Win32cr::Graphics::Direct2D::D2D1_BITMAP_INTERPOLATION_MODE
+    def initialize(@extendModeX : Win32cr::Graphics::Direct2D::D2D1_EXTEND_MODE, @extendModeY : Win32cr::Graphics::Direct2D::D2D1_EXTEND_MODE, @interpolationMode : Win32cr::Graphics::Direct2D::D2D1_BITMAP_INTERPOLATION_MODE)
+    end
+  end
 
   @[Extern]
-  record D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES,
-    startPoint : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    endPoint : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+  struct D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES
+    property startPoint : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property endPoint : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    def initialize(@startPoint : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @endPoint : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F)
+    end
+  end
 
   @[Extern]
-  record D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES,
-    center : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    gradientOriginOffset : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    radiusX : Float32,
-    radiusY : Float32
+  struct D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES
+    property center : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property gradientOriginOffset : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property radiusX : Float32
+    property radiusY : Float32
+    def initialize(@center : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @gradientOriginOffset : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @radiusX : Float32, @radiusY : Float32)
+    end
+  end
 
   @[Extern]
-  record D2D1_TRIANGLE,
-    point1 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    point2 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    point3 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+  struct D2D1_TRIANGLE
+    property point1 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property point2 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property point3 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    def initialize(@point1 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @point2 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @point3 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F)
+    end
+  end
 
   @[Extern]
-  record D2D1_ARC_SEGMENT,
-    point : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    size : Win32cr::Graphics::Direct2D::Common::D2D_SIZE_F,
-    rotationAngle : Float32,
-    sweepDirection : Win32cr::Graphics::Direct2D::D2D1_SWEEP_DIRECTION,
-    arcSize : Win32cr::Graphics::Direct2D::D2D1_ARC_SIZE
+  struct D2D1_ARC_SEGMENT
+    property point : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property size : Win32cr::Graphics::Direct2D::Common::D2D_SIZE_F
+    property rotationAngle : Float32
+    property sweepDirection : Win32cr::Graphics::Direct2D::D2D1_SWEEP_DIRECTION
+    property arcSize : Win32cr::Graphics::Direct2D::D2D1_ARC_SIZE
+    def initialize(@point : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @size : Win32cr::Graphics::Direct2D::Common::D2D_SIZE_F, @rotationAngle : Float32, @sweepDirection : Win32cr::Graphics::Direct2D::D2D1_SWEEP_DIRECTION, @arcSize : Win32cr::Graphics::Direct2D::D2D1_ARC_SIZE)
+    end
+  end
 
   @[Extern]
-  record D2D1_QUADRATIC_BEZIER_SEGMENT,
-    point1 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    point2 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+  struct D2D1_QUADRATIC_BEZIER_SEGMENT
+    property point1 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property point2 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    def initialize(@point1 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @point2 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F)
+    end
+  end
 
   @[Extern]
-  record D2D1_ELLIPSE,
-    point : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    radiusX : Float32,
-    radiusY : Float32
+  struct D2D1_ELLIPSE
+    property point : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property radiusX : Float32
+    property radiusY : Float32
+    def initialize(@point : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @radiusX : Float32, @radiusY : Float32)
+    end
+  end
 
   @[Extern]
-  record D2D1_ROUNDED_RECT,
-    rect : Win32cr::Graphics::Direct2D::Common::D2D_RECT_F,
-    radiusX : Float32,
-    radiusY : Float32
+  struct D2D1_ROUNDED_RECT
+    property rect : Win32cr::Graphics::Direct2D::Common::D2D_RECT_F
+    property radiusX : Float32
+    property radiusY : Float32
+    def initialize(@rect : Win32cr::Graphics::Direct2D::Common::D2D_RECT_F, @radiusX : Float32, @radiusY : Float32)
+    end
+  end
 
   @[Extern]
-  record D2D1_STROKE_STYLE_PROPERTIES,
-    startCap : Win32cr::Graphics::Direct2D::D2D1_CAP_STYLE,
-    endCap : Win32cr::Graphics::Direct2D::D2D1_CAP_STYLE,
-    dashCap : Win32cr::Graphics::Direct2D::D2D1_CAP_STYLE,
-    lineJoin : Win32cr::Graphics::Direct2D::D2D1_LINE_JOIN,
-    miterLimit : Float32,
-    dashStyle : Win32cr::Graphics::Direct2D::D2D1_DASH_STYLE,
-    dashOffset : Float32
+  struct D2D1_STROKE_STYLE_PROPERTIES
+    property startCap : Win32cr::Graphics::Direct2D::D2D1_CAP_STYLE
+    property endCap : Win32cr::Graphics::Direct2D::D2D1_CAP_STYLE
+    property dashCap : Win32cr::Graphics::Direct2D::D2D1_CAP_STYLE
+    property lineJoin : Win32cr::Graphics::Direct2D::D2D1_LINE_JOIN
+    property miterLimit : Float32
+    property dashStyle : Win32cr::Graphics::Direct2D::D2D1_DASH_STYLE
+    property dashOffset : Float32
+    def initialize(@startCap : Win32cr::Graphics::Direct2D::D2D1_CAP_STYLE, @endCap : Win32cr::Graphics::Direct2D::D2D1_CAP_STYLE, @dashCap : Win32cr::Graphics::Direct2D::D2D1_CAP_STYLE, @lineJoin : Win32cr::Graphics::Direct2D::D2D1_LINE_JOIN, @miterLimit : Float32, @dashStyle : Win32cr::Graphics::Direct2D::D2D1_DASH_STYLE, @dashOffset : Float32)
+    end
+  end
 
   @[Extern]
-  record D2D1_LAYER_PARAMETERS,
-    contentBounds : Win32cr::Graphics::Direct2D::Common::D2D_RECT_F,
-    geometricMask : Void*,
-    maskAntialiasMode : Win32cr::Graphics::Direct2D::D2D1_ANTIALIAS_MODE,
-    maskTransform : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F,
-    opacity : Float32,
-    opacityBrush : Void*,
-    layerOptions : Win32cr::Graphics::Direct2D::D2D1_LAYER_OPTIONS
+  struct D2D1_LAYER_PARAMETERS
+    property contentBounds : Win32cr::Graphics::Direct2D::Common::D2D_RECT_F
+    property geometricMask : Void*
+    property maskAntialiasMode : Win32cr::Graphics::Direct2D::D2D1_ANTIALIAS_MODE
+    property maskTransform : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F
+    property opacity : Float32
+    property opacityBrush : Void*
+    property layerOptions : Win32cr::Graphics::Direct2D::D2D1_LAYER_OPTIONS
+    def initialize(@contentBounds : Win32cr::Graphics::Direct2D::Common::D2D_RECT_F, @geometricMask : Void*, @maskAntialiasMode : Win32cr::Graphics::Direct2D::D2D1_ANTIALIAS_MODE, @maskTransform : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F, @opacity : Float32, @opacityBrush : Void*, @layerOptions : Win32cr::Graphics::Direct2D::D2D1_LAYER_OPTIONS)
+    end
+  end
 
   @[Extern]
-  record D2D1_RENDER_TARGET_PROPERTIES,
-    type__ : Win32cr::Graphics::Direct2D::D2D1_RENDER_TARGET_TYPE,
-    pixelFormat : Win32cr::Graphics::Direct2D::Common::D2D1_PIXEL_FORMAT,
-    dpiX : Float32,
-    dpiY : Float32,
-    usage : Win32cr::Graphics::Direct2D::D2D1_RENDER_TARGET_USAGE,
-    minLevel : Win32cr::Graphics::Direct2D::D2D1_FEATURE_LEVEL
+  struct D2D1_RENDER_TARGET_PROPERTIES
+    property type__ : Win32cr::Graphics::Direct2D::D2D1_RENDER_TARGET_TYPE
+    property pixelFormat : Win32cr::Graphics::Direct2D::Common::D2D1_PIXEL_FORMAT
+    property dpiX : Float32
+    property dpiY : Float32
+    property usage : Win32cr::Graphics::Direct2D::D2D1_RENDER_TARGET_USAGE
+    property minLevel : Win32cr::Graphics::Direct2D::D2D1_FEATURE_LEVEL
+    def initialize(@type__ : Win32cr::Graphics::Direct2D::D2D1_RENDER_TARGET_TYPE, @pixelFormat : Win32cr::Graphics::Direct2D::Common::D2D1_PIXEL_FORMAT, @dpiX : Float32, @dpiY : Float32, @usage : Win32cr::Graphics::Direct2D::D2D1_RENDER_TARGET_USAGE, @minLevel : Win32cr::Graphics::Direct2D::D2D1_FEATURE_LEVEL)
+    end
+  end
 
   @[Extern]
-  record D2D1_HWND_RENDER_TARGET_PROPERTIES,
-    hwnd : Win32cr::Foundation::HWND,
-    pixelSize : Win32cr::Graphics::Direct2D::Common::D2D_SIZE_U,
-    presentOptions : Win32cr::Graphics::Direct2D::D2D1_PRESENT_OPTIONS
+  struct D2D1_HWND_RENDER_TARGET_PROPERTIES
+    property hwnd : Win32cr::Foundation::HWND
+    property pixelSize : Win32cr::Graphics::Direct2D::Common::D2D_SIZE_U
+    property presentOptions : Win32cr::Graphics::Direct2D::D2D1_PRESENT_OPTIONS
+    def initialize(@hwnd : Win32cr::Foundation::HWND, @pixelSize : Win32cr::Graphics::Direct2D::Common::D2D_SIZE_U, @presentOptions : Win32cr::Graphics::Direct2D::D2D1_PRESENT_OPTIONS)
+    end
+  end
 
   @[Extern]
-  record D2D1_DRAWING_STATE_DESCRIPTION,
-    antialiasMode : Win32cr::Graphics::Direct2D::D2D1_ANTIALIAS_MODE,
-    textAntialiasMode : Win32cr::Graphics::Direct2D::D2D1_TEXT_ANTIALIAS_MODE,
-    tag1 : UInt64,
-    tag2 : UInt64,
-    transform : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F
+  struct D2D1_DRAWING_STATE_DESCRIPTION
+    property antialiasMode : Win32cr::Graphics::Direct2D::D2D1_ANTIALIAS_MODE
+    property textAntialiasMode : Win32cr::Graphics::Direct2D::D2D1_TEXT_ANTIALIAS_MODE
+    property tag1 : UInt64
+    property tag2 : UInt64
+    property transform : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F
+    def initialize(@antialiasMode : Win32cr::Graphics::Direct2D::D2D1_ANTIALIAS_MODE, @textAntialiasMode : Win32cr::Graphics::Direct2D::D2D1_TEXT_ANTIALIAS_MODE, @tag1 : UInt64, @tag2 : UInt64, @transform : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F)
+    end
+  end
 
   @[Extern]
-  record D2D1_FACTORY_OPTIONS,
-    debugLevel : Win32cr::Graphics::Direct2D::D2D1_DEBUG_LEVEL
+  struct D2D1_FACTORY_OPTIONS
+    property debugLevel : Win32cr::Graphics::Direct2D::D2D1_DEBUG_LEVEL
+    def initialize(@debugLevel : Win32cr::Graphics::Direct2D::D2D1_DEBUG_LEVEL)
+    end
+  end
 
   @[Extern]
-  record D2D1_BITMAP_PROPERTIES1,
-    pixelFormat : Win32cr::Graphics::Direct2D::Common::D2D1_PIXEL_FORMAT,
-    dpiX : Float32,
-    dpiY : Float32,
-    bitmapOptions : Win32cr::Graphics::Direct2D::D2D1_BITMAP_OPTIONS,
-    colorContext : Void*
+  struct D2D1_BITMAP_PROPERTIES1
+    property pixelFormat : Win32cr::Graphics::Direct2D::Common::D2D1_PIXEL_FORMAT
+    property dpiX : Float32
+    property dpiY : Float32
+    property bitmapOptions : Win32cr::Graphics::Direct2D::D2D1_BITMAP_OPTIONS
+    property colorContext : Void*
+    def initialize(@pixelFormat : Win32cr::Graphics::Direct2D::Common::D2D1_PIXEL_FORMAT, @dpiX : Float32, @dpiY : Float32, @bitmapOptions : Win32cr::Graphics::Direct2D::D2D1_BITMAP_OPTIONS, @colorContext : Void*)
+    end
+  end
 
   @[Extern]
-  record D2D1_MAPPED_RECT,
-    pitch : UInt32,
-    bits : UInt8*
+  struct D2D1_MAPPED_RECT
+    property pitch : UInt32
+    property bits : UInt8*
+    def initialize(@pitch : UInt32, @bits : UInt8*)
+    end
+  end
 
   @[Extern]
-  record D2D1_RENDERING_CONTROLS,
-    bufferPrecision : Win32cr::Graphics::Direct2D::D2D1_BUFFER_PRECISION,
-    tileSize : Win32cr::Graphics::Direct2D::Common::D2D_SIZE_U
+  struct D2D1_RENDERING_CONTROLS
+    property bufferPrecision : Win32cr::Graphics::Direct2D::D2D1_BUFFER_PRECISION
+    property tileSize : Win32cr::Graphics::Direct2D::Common::D2D_SIZE_U
+    def initialize(@bufferPrecision : Win32cr::Graphics::Direct2D::D2D1_BUFFER_PRECISION, @tileSize : Win32cr::Graphics::Direct2D::Common::D2D_SIZE_U)
+    end
+  end
 
   @[Extern]
-  record D2D1_EFFECT_INPUT_DESCRIPTION,
-    effect : Void*,
-    inputIndex : UInt32,
-    inputRectangle : Win32cr::Graphics::Direct2D::Common::D2D_RECT_F
+  struct D2D1_EFFECT_INPUT_DESCRIPTION
+    property effect : Void*
+    property inputIndex : UInt32
+    property inputRectangle : Win32cr::Graphics::Direct2D::Common::D2D_RECT_F
+    def initialize(@effect : Void*, @inputIndex : UInt32, @inputRectangle : Win32cr::Graphics::Direct2D::Common::D2D_RECT_F)
+    end
+  end
 
   @[Extern]
-  record D2D1_POINT_DESCRIPTION,
-    point : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    unitTangentVector : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    endSegment : UInt32,
-    endFigure : UInt32,
-    lengthToEndSegment : Float32
+  struct D2D1_POINT_DESCRIPTION
+    property point : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property unitTangentVector : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property endSegment : UInt32
+    property endFigure : UInt32
+    property lengthToEndSegment : Float32
+    def initialize(@point : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @unitTangentVector : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @endSegment : UInt32, @endFigure : UInt32, @lengthToEndSegment : Float32)
+    end
+  end
 
   @[Extern]
-  record D2D1_IMAGE_BRUSH_PROPERTIES,
-    sourceRectangle : Win32cr::Graphics::Direct2D::Common::D2D_RECT_F,
-    extendModeX : Win32cr::Graphics::Direct2D::D2D1_EXTEND_MODE,
-    extendModeY : Win32cr::Graphics::Direct2D::D2D1_EXTEND_MODE,
-    interpolationMode : Win32cr::Graphics::Direct2D::D2D1_INTERPOLATION_MODE
+  struct D2D1_IMAGE_BRUSH_PROPERTIES
+    property sourceRectangle : Win32cr::Graphics::Direct2D::Common::D2D_RECT_F
+    property extendModeX : Win32cr::Graphics::Direct2D::D2D1_EXTEND_MODE
+    property extendModeY : Win32cr::Graphics::Direct2D::D2D1_EXTEND_MODE
+    property interpolationMode : Win32cr::Graphics::Direct2D::D2D1_INTERPOLATION_MODE
+    def initialize(@sourceRectangle : Win32cr::Graphics::Direct2D::Common::D2D_RECT_F, @extendModeX : Win32cr::Graphics::Direct2D::D2D1_EXTEND_MODE, @extendModeY : Win32cr::Graphics::Direct2D::D2D1_EXTEND_MODE, @interpolationMode : Win32cr::Graphics::Direct2D::D2D1_INTERPOLATION_MODE)
+    end
+  end
 
   @[Extern]
-  record D2D1_BITMAP_BRUSH_PROPERTIES1,
-    extendModeX : Win32cr::Graphics::Direct2D::D2D1_EXTEND_MODE,
-    extendModeY : Win32cr::Graphics::Direct2D::D2D1_EXTEND_MODE,
-    interpolationMode : Win32cr::Graphics::Direct2D::D2D1_INTERPOLATION_MODE
+  struct D2D1_BITMAP_BRUSH_PROPERTIES1
+    property extendModeX : Win32cr::Graphics::Direct2D::D2D1_EXTEND_MODE
+    property extendModeY : Win32cr::Graphics::Direct2D::D2D1_EXTEND_MODE
+    property interpolationMode : Win32cr::Graphics::Direct2D::D2D1_INTERPOLATION_MODE
+    def initialize(@extendModeX : Win32cr::Graphics::Direct2D::D2D1_EXTEND_MODE, @extendModeY : Win32cr::Graphics::Direct2D::D2D1_EXTEND_MODE, @interpolationMode : Win32cr::Graphics::Direct2D::D2D1_INTERPOLATION_MODE)
+    end
+  end
 
   @[Extern]
-  record D2D1_STROKE_STYLE_PROPERTIES1,
-    startCap : Win32cr::Graphics::Direct2D::D2D1_CAP_STYLE,
-    endCap : Win32cr::Graphics::Direct2D::D2D1_CAP_STYLE,
-    dashCap : Win32cr::Graphics::Direct2D::D2D1_CAP_STYLE,
-    lineJoin : Win32cr::Graphics::Direct2D::D2D1_LINE_JOIN,
-    miterLimit : Float32,
-    dashStyle : Win32cr::Graphics::Direct2D::D2D1_DASH_STYLE,
-    dashOffset : Float32,
-    transformType : Win32cr::Graphics::Direct2D::D2D1_STROKE_TRANSFORM_TYPE
+  struct D2D1_STROKE_STYLE_PROPERTIES1
+    property startCap : Win32cr::Graphics::Direct2D::D2D1_CAP_STYLE
+    property endCap : Win32cr::Graphics::Direct2D::D2D1_CAP_STYLE
+    property dashCap : Win32cr::Graphics::Direct2D::D2D1_CAP_STYLE
+    property lineJoin : Win32cr::Graphics::Direct2D::D2D1_LINE_JOIN
+    property miterLimit : Float32
+    property dashStyle : Win32cr::Graphics::Direct2D::D2D1_DASH_STYLE
+    property dashOffset : Float32
+    property transformType : Win32cr::Graphics::Direct2D::D2D1_STROKE_TRANSFORM_TYPE
+    def initialize(@startCap : Win32cr::Graphics::Direct2D::D2D1_CAP_STYLE, @endCap : Win32cr::Graphics::Direct2D::D2D1_CAP_STYLE, @dashCap : Win32cr::Graphics::Direct2D::D2D1_CAP_STYLE, @lineJoin : Win32cr::Graphics::Direct2D::D2D1_LINE_JOIN, @miterLimit : Float32, @dashStyle : Win32cr::Graphics::Direct2D::D2D1_DASH_STYLE, @dashOffset : Float32, @transformType : Win32cr::Graphics::Direct2D::D2D1_STROKE_TRANSFORM_TYPE)
+    end
+  end
 
   @[Extern]
-  record D2D1_LAYER_PARAMETERS1,
-    contentBounds : Win32cr::Graphics::Direct2D::Common::D2D_RECT_F,
-    geometricMask : Void*,
-    maskAntialiasMode : Win32cr::Graphics::Direct2D::D2D1_ANTIALIAS_MODE,
-    maskTransform : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F,
-    opacity : Float32,
-    opacityBrush : Void*,
-    layerOptions : Win32cr::Graphics::Direct2D::D2D1_LAYER_OPTIONS1
+  struct D2D1_LAYER_PARAMETERS1
+    property contentBounds : Win32cr::Graphics::Direct2D::Common::D2D_RECT_F
+    property geometricMask : Void*
+    property maskAntialiasMode : Win32cr::Graphics::Direct2D::D2D1_ANTIALIAS_MODE
+    property maskTransform : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F
+    property opacity : Float32
+    property opacityBrush : Void*
+    property layerOptions : Win32cr::Graphics::Direct2D::D2D1_LAYER_OPTIONS1
+    def initialize(@contentBounds : Win32cr::Graphics::Direct2D::Common::D2D_RECT_F, @geometricMask : Void*, @maskAntialiasMode : Win32cr::Graphics::Direct2D::D2D1_ANTIALIAS_MODE, @maskTransform : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F, @opacity : Float32, @opacityBrush : Void*, @layerOptions : Win32cr::Graphics::Direct2D::D2D1_LAYER_OPTIONS1)
+    end
+  end
 
   @[Extern]
-  record D2D1_DRAWING_STATE_DESCRIPTION1,
-    antialiasMode : Win32cr::Graphics::Direct2D::D2D1_ANTIALIAS_MODE,
-    textAntialiasMode : Win32cr::Graphics::Direct2D::D2D1_TEXT_ANTIALIAS_MODE,
-    tag1 : UInt64,
-    tag2 : UInt64,
-    transform : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F,
-    primitiveBlend : Win32cr::Graphics::Direct2D::D2D1_PRIMITIVE_BLEND,
-    unitMode : Win32cr::Graphics::Direct2D::D2D1_UNIT_MODE
+  struct D2D1_DRAWING_STATE_DESCRIPTION1
+    property antialiasMode : Win32cr::Graphics::Direct2D::D2D1_ANTIALIAS_MODE
+    property textAntialiasMode : Win32cr::Graphics::Direct2D::D2D1_TEXT_ANTIALIAS_MODE
+    property tag1 : UInt64
+    property tag2 : UInt64
+    property transform : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F
+    property primitiveBlend : Win32cr::Graphics::Direct2D::D2D1_PRIMITIVE_BLEND
+    property unitMode : Win32cr::Graphics::Direct2D::D2D1_UNIT_MODE
+    def initialize(@antialiasMode : Win32cr::Graphics::Direct2D::D2D1_ANTIALIAS_MODE, @textAntialiasMode : Win32cr::Graphics::Direct2D::D2D1_TEXT_ANTIALIAS_MODE, @tag1 : UInt64, @tag2 : UInt64, @transform : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F, @primitiveBlend : Win32cr::Graphics::Direct2D::D2D1_PRIMITIVE_BLEND, @unitMode : Win32cr::Graphics::Direct2D::D2D1_UNIT_MODE)
+    end
+  end
 
   @[Extern]
-  record D2D1_PRINT_CONTROL_PROPERTIES,
-    fontSubset : Win32cr::Graphics::Direct2D::D2D1_PRINT_FONT_SUBSET_MODE,
-    rasterDPI : Float32,
-    colorSpace : Win32cr::Graphics::Direct2D::D2D1_COLOR_SPACE
+  struct D2D1_PRINT_CONTROL_PROPERTIES
+    property fontSubset : Win32cr::Graphics::Direct2D::D2D1_PRINT_FONT_SUBSET_MODE
+    property rasterDPI : Float32
+    property colorSpace : Win32cr::Graphics::Direct2D::D2D1_COLOR_SPACE
+    def initialize(@fontSubset : Win32cr::Graphics::Direct2D::D2D1_PRINT_FONT_SUBSET_MODE, @rasterDPI : Float32, @colorSpace : Win32cr::Graphics::Direct2D::D2D1_COLOR_SPACE)
+    end
+  end
 
   @[Extern]
-  record D2D1_CREATION_PROPERTIES,
-    threadingMode : Win32cr::Graphics::Direct2D::D2D1_THREADING_MODE,
-    debugLevel : Win32cr::Graphics::Direct2D::D2D1_DEBUG_LEVEL,
-    options : Win32cr::Graphics::Direct2D::D2D1_DEVICE_CONTEXT_OPTIONS
+  struct D2D1_CREATION_PROPERTIES
+    property threadingMode : Win32cr::Graphics::Direct2D::D2D1_THREADING_MODE
+    property debugLevel : Win32cr::Graphics::Direct2D::D2D1_DEBUG_LEVEL
+    property options : Win32cr::Graphics::Direct2D::D2D1_DEVICE_CONTEXT_OPTIONS
+    def initialize(@threadingMode : Win32cr::Graphics::Direct2D::D2D1_THREADING_MODE, @debugLevel : Win32cr::Graphics::Direct2D::D2D1_DEBUG_LEVEL, @options : Win32cr::Graphics::Direct2D::D2D1_DEVICE_CONTEXT_OPTIONS)
+    end
+  end
 
   @[Extern]
-  record Matrix4x3F,
-    __anonymous_base_d2d1_1helper_l45_c31 : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_4X3_F
+  struct Matrix4x3F
+    property __anonymous_base_d2d1_1helper_l45_c31 : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_4X3_F
+    def initialize(@__anonymous_base_d2d1_1helper_l45_c31 : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_4X3_F)
+    end
+  end
 
   @[Extern]
-  record Matrix4x4F,
-    __anonymous_base_d2d1_1helper_l97_c31 : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_4X4_F
+  struct Matrix4x4F
+    property __anonymous_base_d2d1_1helper_l97_c31 : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_4X4_F
+    def initialize(@__anonymous_base_d2d1_1helper_l97_c31 : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_4X4_F)
+    end
+  end
 
   @[Extern]
-  record Matrix5x4F,
-    __anonymous_base_d2d1_1helper_l472_c31 : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_5X4_F
+  struct Matrix5x4F
+    property __anonymous_base_d2d1_1helper_l472_c31 : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_5X4_F
+    def initialize(@__anonymous_base_d2d1_1helper_l472_c31 : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_5X4_F)
+    end
+  end
 
   @[Extern]
-  record D2D1_PROPERTY_BINDING,
-    propertyName : Win32cr::Foundation::PWSTR,
-    setFunction : Win32cr::Graphics::Direct2D::PD2D1_PROPERTY_SET_FUNCTION,
-    getFunction : Win32cr::Graphics::Direct2D::PD2D1_PROPERTY_GET_FUNCTION
+  struct D2D1_PROPERTY_BINDING
+    property propertyName : Win32cr::Foundation::PWSTR
+    property setFunction : Win32cr::Graphics::Direct2D::PD2D1_PROPERTY_SET_FUNCTION
+    property getFunction : Win32cr::Graphics::Direct2D::PD2D1_PROPERTY_GET_FUNCTION
+    def initialize(@propertyName : Win32cr::Foundation::PWSTR, @setFunction : Win32cr::Graphics::Direct2D::PD2D1_PROPERTY_SET_FUNCTION, @getFunction : Win32cr::Graphics::Direct2D::PD2D1_PROPERTY_GET_FUNCTION)
+    end
+  end
 
   @[Extern]
-  record D2D1_RESOURCE_TEXTURE_PROPERTIES,
-    extents : UInt32*,
-    dimensions : UInt32,
-    bufferPrecision : Win32cr::Graphics::Direct2D::D2D1_BUFFER_PRECISION,
-    channelDepth : Win32cr::Graphics::Direct2D::D2D1_CHANNEL_DEPTH,
-    filter : Win32cr::Graphics::Direct2D::D2D1_FILTER,
-    extendModes : Win32cr::Graphics::Direct2D::D2D1_EXTEND_MODE*
+  struct D2D1_RESOURCE_TEXTURE_PROPERTIES
+    property extents : UInt32*
+    property dimensions : UInt32
+    property bufferPrecision : Win32cr::Graphics::Direct2D::D2D1_BUFFER_PRECISION
+    property channelDepth : Win32cr::Graphics::Direct2D::D2D1_CHANNEL_DEPTH
+    property filter : Win32cr::Graphics::Direct2D::D2D1_FILTER
+    property extendModes : Win32cr::Graphics::Direct2D::D2D1_EXTEND_MODE*
+    def initialize(@extents : UInt32*, @dimensions : UInt32, @bufferPrecision : Win32cr::Graphics::Direct2D::D2D1_BUFFER_PRECISION, @channelDepth : Win32cr::Graphics::Direct2D::D2D1_CHANNEL_DEPTH, @filter : Win32cr::Graphics::Direct2D::D2D1_FILTER, @extendModes : Win32cr::Graphics::Direct2D::D2D1_EXTEND_MODE*)
+    end
+  end
 
   @[Extern]
-  record D2D1_INPUT_ELEMENT_DESC,
-    semanticName : Win32cr::Foundation::PSTR,
-    semanticIndex : UInt32,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    inputSlot : UInt32,
-    alignedByteOffset : UInt32
+  struct D2D1_INPUT_ELEMENT_DESC
+    property semanticName : Win32cr::Foundation::PSTR
+    property semanticIndex : UInt32
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property inputSlot : UInt32
+    property alignedByteOffset : UInt32
+    def initialize(@semanticName : Win32cr::Foundation::PSTR, @semanticIndex : UInt32, @format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @inputSlot : UInt32, @alignedByteOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record D2D1_VERTEX_BUFFER_PROPERTIES,
-    inputCount : UInt32,
-    usage : Win32cr::Graphics::Direct2D::D2D1_VERTEX_USAGE,
-    data : UInt8*,
-    byteWidth : UInt32
+  struct D2D1_VERTEX_BUFFER_PROPERTIES
+    property inputCount : UInt32
+    property usage : Win32cr::Graphics::Direct2D::D2D1_VERTEX_USAGE
+    property data : UInt8*
+    property byteWidth : UInt32
+    def initialize(@inputCount : UInt32, @usage : Win32cr::Graphics::Direct2D::D2D1_VERTEX_USAGE, @data : UInt8*, @byteWidth : UInt32)
+    end
+  end
 
   @[Extern]
-  record D2D1_CUSTOM_VERTEX_BUFFER_PROPERTIES,
-    shaderBufferWithInputSignature : UInt8*,
-    shaderBufferSize : UInt32,
-    inputElements : Win32cr::Graphics::Direct2D::D2D1_INPUT_ELEMENT_DESC*,
-    elementCount : UInt32,
-    stride : UInt32
+  struct D2D1_CUSTOM_VERTEX_BUFFER_PROPERTIES
+    property shaderBufferWithInputSignature : UInt8*
+    property shaderBufferSize : UInt32
+    property inputElements : Win32cr::Graphics::Direct2D::D2D1_INPUT_ELEMENT_DESC*
+    property elementCount : UInt32
+    property stride : UInt32
+    def initialize(@shaderBufferWithInputSignature : UInt8*, @shaderBufferSize : UInt32, @inputElements : Win32cr::Graphics::Direct2D::D2D1_INPUT_ELEMENT_DESC*, @elementCount : UInt32, @stride : UInt32)
+    end
+  end
 
   @[Extern]
-  record D2D1_VERTEX_RANGE,
-    startVertex : UInt32,
-    vertexCount : UInt32
+  struct D2D1_VERTEX_RANGE
+    property startVertex : UInt32
+    property vertexCount : UInt32
+    def initialize(@startVertex : UInt32, @vertexCount : UInt32)
+    end
+  end
 
   @[Extern]
-  record D2D1_BLEND_DESCRIPTION,
-    sourceBlend : Win32cr::Graphics::Direct2D::D2D1_BLEND,
-    destinationBlend : Win32cr::Graphics::Direct2D::D2D1_BLEND,
-    blendOperation : Win32cr::Graphics::Direct2D::D2D1_BLEND_OPERATION,
-    sourceBlendAlpha : Win32cr::Graphics::Direct2D::D2D1_BLEND,
-    destinationBlendAlpha : Win32cr::Graphics::Direct2D::D2D1_BLEND,
-    blendOperationAlpha : Win32cr::Graphics::Direct2D::D2D1_BLEND_OPERATION,
-    blendFactor : Float32[4]
+  struct D2D1_BLEND_DESCRIPTION
+    property sourceBlend : Win32cr::Graphics::Direct2D::D2D1_BLEND
+    property destinationBlend : Win32cr::Graphics::Direct2D::D2D1_BLEND
+    property blendOperation : Win32cr::Graphics::Direct2D::D2D1_BLEND_OPERATION
+    property sourceBlendAlpha : Win32cr::Graphics::Direct2D::D2D1_BLEND
+    property destinationBlendAlpha : Win32cr::Graphics::Direct2D::D2D1_BLEND
+    property blendOperationAlpha : Win32cr::Graphics::Direct2D::D2D1_BLEND_OPERATION
+    property blendFactor : Float32[4]
+    def initialize(@sourceBlend : Win32cr::Graphics::Direct2D::D2D1_BLEND, @destinationBlend : Win32cr::Graphics::Direct2D::D2D1_BLEND, @blendOperation : Win32cr::Graphics::Direct2D::D2D1_BLEND_OPERATION, @sourceBlendAlpha : Win32cr::Graphics::Direct2D::D2D1_BLEND, @destinationBlendAlpha : Win32cr::Graphics::Direct2D::D2D1_BLEND, @blendOperationAlpha : Win32cr::Graphics::Direct2D::D2D1_BLEND_OPERATION, @blendFactor : Float32[4])
+    end
+  end
 
   @[Extern]
-  record D2D1_INPUT_DESCRIPTION,
-    filter : Win32cr::Graphics::Direct2D::D2D1_FILTER,
-    levelOfDetailCount : UInt32
+  struct D2D1_INPUT_DESCRIPTION
+    property filter : Win32cr::Graphics::Direct2D::D2D1_FILTER
+    property levelOfDetailCount : UInt32
+    def initialize(@filter : Win32cr::Graphics::Direct2D::D2D1_FILTER, @levelOfDetailCount : UInt32)
+    end
+  end
 
   @[Extern]
-  record D2D1_FEATURE_DATA_DOUBLES,
-    doublePrecisionFloatShaderOps : Win32cr::Foundation::BOOL
+  struct D2D1_FEATURE_DATA_DOUBLES
+    property doublePrecisionFloatShaderOps : Win32cr::Foundation::BOOL
+    def initialize(@doublePrecisionFloatShaderOps : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record D2D1_FEATURE_DATA_D3D10_X_HARDWARE_OPTIONS,
-    computeShaders_Plus_RawAndStructuredBuffers_Via_Shader_4_x : Win32cr::Foundation::BOOL
+  struct D2D1_FEATURE_DATA_D3D10_X_HARDWARE_OPTIONS
+    property computeShaders_Plus_RawAndStructuredBuffers_Via_Shader_4_x : Win32cr::Foundation::BOOL
+    def initialize(@computeShaders_Plus_RawAndStructuredBuffers_Via_Shader_4_x : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record D2D1_SVG_LENGTH,
-    value : Float32,
-    units : Win32cr::Graphics::Direct2D::D2D1_SVG_LENGTH_UNITS
+  struct D2D1_SVG_LENGTH
+    property value : Float32
+    property units : Win32cr::Graphics::Direct2D::D2D1_SVG_LENGTH_UNITS
+    def initialize(@value : Float32, @units : Win32cr::Graphics::Direct2D::D2D1_SVG_LENGTH_UNITS)
+    end
+  end
 
   @[Extern]
-  record D2D1_SVG_PRESERVE_ASPECT_RATIO,
-    defer : Win32cr::Foundation::BOOL,
-    align : Win32cr::Graphics::Direct2D::D2D1_SVG_ASPECT_ALIGN,
-    meetOrSlice : Win32cr::Graphics::Direct2D::D2D1_SVG_ASPECT_SCALING
+  struct D2D1_SVG_PRESERVE_ASPECT_RATIO
+    property defer : Win32cr::Foundation::BOOL
+    property align : Win32cr::Graphics::Direct2D::D2D1_SVG_ASPECT_ALIGN
+    property meetOrSlice : Win32cr::Graphics::Direct2D::D2D1_SVG_ASPECT_SCALING
+    def initialize(@defer : Win32cr::Foundation::BOOL, @align : Win32cr::Graphics::Direct2D::D2D1_SVG_ASPECT_ALIGN, @meetOrSlice : Win32cr::Graphics::Direct2D::D2D1_SVG_ASPECT_SCALING)
+    end
+  end
 
   @[Extern]
-  record D2D1_SVG_VIEWBOX,
-    x : Float32,
-    y : Float32,
-    width : Float32,
-    height : Float32
+  struct D2D1_SVG_VIEWBOX
+    property x : Float32
+    property y : Float32
+    property width : Float32
+    property height : Float32
+    def initialize(@x : Float32, @y : Float32, @width : Float32, @height : Float32)
+    end
+  end
 
   @[Extern]
-  record D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES,
-    orientation : Win32cr::Graphics::Direct2D::D2D1_ORIENTATION,
-    scaleX : Float32,
-    scaleY : Float32,
-    interpolationMode : Win32cr::Graphics::Direct2D::D2D1_INTERPOLATION_MODE,
-    options : Win32cr::Graphics::Direct2D::D2D1_TRANSFORMED_IMAGE_SOURCE_OPTIONS
+  struct D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES
+    property orientation : Win32cr::Graphics::Direct2D::D2D1_ORIENTATION
+    property scaleX : Float32
+    property scaleY : Float32
+    property interpolationMode : Win32cr::Graphics::Direct2D::D2D1_INTERPOLATION_MODE
+    property options : Win32cr::Graphics::Direct2D::D2D1_TRANSFORMED_IMAGE_SOURCE_OPTIONS
+    def initialize(@orientation : Win32cr::Graphics::Direct2D::D2D1_ORIENTATION, @scaleX : Float32, @scaleY : Float32, @interpolationMode : Win32cr::Graphics::Direct2D::D2D1_INTERPOLATION_MODE, @options : Win32cr::Graphics::Direct2D::D2D1_TRANSFORMED_IMAGE_SOURCE_OPTIONS)
+    end
+  end
 
   @[Extern]
-  record D2D1_INK_POINT,
-    x : Float32,
-    y : Float32,
-    radius : Float32
+  struct D2D1_INK_POINT
+    property x : Float32
+    property y : Float32
+    property radius : Float32
+    def initialize(@x : Float32, @y : Float32, @radius : Float32)
+    end
+  end
 
   @[Extern]
-  record D2D1_INK_BEZIER_SEGMENT,
-    point1 : Win32cr::Graphics::Direct2D::D2D1_INK_POINT,
-    point2 : Win32cr::Graphics::Direct2D::D2D1_INK_POINT,
-    point3 : Win32cr::Graphics::Direct2D::D2D1_INK_POINT
+  struct D2D1_INK_BEZIER_SEGMENT
+    property point1 : Win32cr::Graphics::Direct2D::D2D1_INK_POINT
+    property point2 : Win32cr::Graphics::Direct2D::D2D1_INK_POINT
+    property point3 : Win32cr::Graphics::Direct2D::D2D1_INK_POINT
+    def initialize(@point1 : Win32cr::Graphics::Direct2D::D2D1_INK_POINT, @point2 : Win32cr::Graphics::Direct2D::D2D1_INK_POINT, @point3 : Win32cr::Graphics::Direct2D::D2D1_INK_POINT)
+    end
+  end
 
   @[Extern]
-  record D2D1_INK_STYLE_PROPERTIES,
-    nibShape : Win32cr::Graphics::Direct2D::D2D1_INK_NIB_SHAPE,
-    nibTransform : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F
+  struct D2D1_INK_STYLE_PROPERTIES
+    property nibShape : Win32cr::Graphics::Direct2D::D2D1_INK_NIB_SHAPE
+    property nibTransform : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F
+    def initialize(@nibShape : Win32cr::Graphics::Direct2D::D2D1_INK_NIB_SHAPE, @nibTransform : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F)
+    end
+  end
 
   @[Extern]
-  record D2D1_GRADIENT_MESH_PATCH,
-    point00 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    point01 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    point02 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    point03 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    point10 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    point11 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    point12 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    point13 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    point20 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    point21 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    point22 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    point23 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    point30 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    point31 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    point32 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    point33 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    color00 : Win32cr::Graphics::Direct2D::Common::D2D1_COLOR_F,
-    color03 : Win32cr::Graphics::Direct2D::Common::D2D1_COLOR_F,
-    color30 : Win32cr::Graphics::Direct2D::Common::D2D1_COLOR_F,
-    color33 : Win32cr::Graphics::Direct2D::Common::D2D1_COLOR_F,
-    topEdgeMode : Win32cr::Graphics::Direct2D::D2D1_PATCH_EDGE_MODE,
-    leftEdgeMode : Win32cr::Graphics::Direct2D::D2D1_PATCH_EDGE_MODE,
-    bottomEdgeMode : Win32cr::Graphics::Direct2D::D2D1_PATCH_EDGE_MODE,
-    rightEdgeMode : Win32cr::Graphics::Direct2D::D2D1_PATCH_EDGE_MODE
+  struct D2D1_GRADIENT_MESH_PATCH
+    property point00 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property point01 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property point02 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property point03 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property point10 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property point11 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property point12 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property point13 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property point20 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property point21 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property point22 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property point23 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property point30 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property point31 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property point32 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property point33 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property color00 : Win32cr::Graphics::Direct2D::Common::D2D1_COLOR_F
+    property color03 : Win32cr::Graphics::Direct2D::Common::D2D1_COLOR_F
+    property color30 : Win32cr::Graphics::Direct2D::Common::D2D1_COLOR_F
+    property color33 : Win32cr::Graphics::Direct2D::Common::D2D1_COLOR_F
+    property topEdgeMode : Win32cr::Graphics::Direct2D::D2D1_PATCH_EDGE_MODE
+    property leftEdgeMode : Win32cr::Graphics::Direct2D::D2D1_PATCH_EDGE_MODE
+    property bottomEdgeMode : Win32cr::Graphics::Direct2D::D2D1_PATCH_EDGE_MODE
+    property rightEdgeMode : Win32cr::Graphics::Direct2D::D2D1_PATCH_EDGE_MODE
+    def initialize(@point00 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @point01 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @point02 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @point03 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @point10 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @point11 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @point12 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @point13 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @point20 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @point21 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @point22 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @point23 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @point30 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @point31 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @point32 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @point33 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @color00 : Win32cr::Graphics::Direct2D::Common::D2D1_COLOR_F, @color03 : Win32cr::Graphics::Direct2D::Common::D2D1_COLOR_F, @color30 : Win32cr::Graphics::Direct2D::Common::D2D1_COLOR_F, @color33 : Win32cr::Graphics::Direct2D::Common::D2D1_COLOR_F, @topEdgeMode : Win32cr::Graphics::Direct2D::D2D1_PATCH_EDGE_MODE, @leftEdgeMode : Win32cr::Graphics::Direct2D::D2D1_PATCH_EDGE_MODE, @bottomEdgeMode : Win32cr::Graphics::Direct2D::D2D1_PATCH_EDGE_MODE, @rightEdgeMode : Win32cr::Graphics::Direct2D::D2D1_PATCH_EDGE_MODE)
+    end
+  end
 
   @[Extern]
-  record D2D1_SIMPLE_COLOR_PROFILE,
-    redPrimary : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    greenPrimary : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    bluePrimary : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    whitePointXZ : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F,
-    gamma : Win32cr::Graphics::Direct2D::D2D1_GAMMA1
+  struct D2D1_SIMPLE_COLOR_PROFILE
+    property redPrimary : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property greenPrimary : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property bluePrimary : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property whitePointXZ : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F
+    property gamma : Win32cr::Graphics::Direct2D::D2D1_GAMMA1
+    def initialize(@redPrimary : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @greenPrimary : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @bluePrimary : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @whitePointXZ : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, @gamma : Win32cr::Graphics::Direct2D::D2D1_GAMMA1)
+    end
+  end
 
   @[Extern]
   record ID2D1ResourceVtbl,
@@ -1644,7 +1797,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("2cd90691-12e2-11dc-9fed-001143a055f9")]
   record ID2D1Resource, lpVtbl : ID2D1ResourceVtbl* do
     GUID = LibC::GUID.new(0x2cd90691_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1Resource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1671,7 +1823,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("65019f75-8da2-497c-b32c-dfa34e48ede6")]
   record ID2D1Image, lpVtbl : ID2D1ImageVtbl* do
     GUID = LibC::GUID.new(0x65019f75_u32, 0x8da2_u16, 0x497c_u16, StaticArray[0xb3_u8, 0x2c_u8, 0xdf_u8, 0xa3_u8, 0x4e_u8, 0x48_u8, 0xed_u8, 0xe6_u8])
     def query_interface(this : ID2D1Image*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1705,7 +1856,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("a2296057-ea42-4099-983b-539fb6505426")]
   record ID2D1Bitmap, lpVtbl : ID2D1BitmapVtbl* do
     GUID = LibC::GUID.new(0xa2296057_u32, 0xea42_u16, 0x4099_u16, StaticArray[0x98_u8, 0x3b_u8, 0x53_u8, 0x9f_u8, 0xb6_u8, 0x50_u8, 0x54_u8, 0x26_u8])
     def query_interface(this : ID2D1Bitmap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1757,7 +1907,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("2cd906a7-12e2-11dc-9fed-001143a055f9")]
   record ID2D1GradientStopCollection, lpVtbl : ID2D1GradientStopCollectionVtbl* do
     GUID = LibC::GUID.new(0x2cd906a7_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1GradientStopCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1800,7 +1949,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("2cd906a8-12e2-11dc-9fed-001143a055f9")]
   record ID2D1Brush, lpVtbl : ID2D1BrushVtbl* do
     GUID = LibC::GUID.new(0x2cd906a8_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1Brush*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1851,7 +1999,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("2cd906aa-12e2-11dc-9fed-001143a055f9")]
   record ID2D1BitmapBrush, lpVtbl : ID2D1BitmapBrushVtbl* do
     GUID = LibC::GUID.new(0x2cd906aa_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1BitmapBrush*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1920,7 +2067,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("2cd906a9-12e2-11dc-9fed-001143a055f9")]
   record ID2D1SolidColorBrush, lpVtbl : ID2D1SolidColorBrushVtbl* do
     GUID = LibC::GUID.new(0x2cd906a9_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1SolidColorBrush*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1974,7 +2120,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("2cd906ab-12e2-11dc-9fed-001143a055f9")]
   record ID2D1LinearGradientBrush, lpVtbl : ID2D1LinearGradientBrushVtbl* do
     GUID = LibC::GUID.new(0x2cd906ab_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1LinearGradientBrush*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2041,7 +2186,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("2cd906ac-12e2-11dc-9fed-001143a055f9")]
   record ID2D1RadialGradientBrush, lpVtbl : ID2D1RadialGradientBrushVtbl* do
     GUID = LibC::GUID.new(0x2cd906ac_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1RadialGradientBrush*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2116,7 +2260,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("2cd9069d-12e2-11dc-9fed-001143a055f9")]
   record ID2D1StrokeStyle, lpVtbl : ID2D1StrokeStyleVtbl* do
     GUID = LibC::GUID.new(0x2cd9069d_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1StrokeStyle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2183,7 +2326,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("2cd906a1-12e2-11dc-9fed-001143a055f9")]
   record ID2D1Geometry, lpVtbl : ID2D1GeometryVtbl* do
     GUID = LibC::GUID.new(0x2cd906a1_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1Geometry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2263,7 +2405,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("2cd906a2-12e2-11dc-9fed-001143a055f9")]
   record ID2D1RectangleGeometry, lpVtbl : ID2D1RectangleGeometryVtbl* do
     GUID = LibC::GUID.new(0x2cd906a2_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1RectangleGeometry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2346,7 +2487,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("2cd906a3-12e2-11dc-9fed-001143a055f9")]
   record ID2D1RoundedRectangleGeometry, lpVtbl : ID2D1RoundedRectangleGeometryVtbl* do
     GUID = LibC::GUID.new(0x2cd906a3_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1RoundedRectangleGeometry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2429,7 +2569,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("2cd906a4-12e2-11dc-9fed-001143a055f9")]
   record ID2D1EllipseGeometry, lpVtbl : ID2D1EllipseGeometryVtbl* do
     GUID = LibC::GUID.new(0x2cd906a4_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1EllipseGeometry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2514,7 +2653,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("2cd906a6-12e2-11dc-9fed-001143a055f9")]
   record ID2D1GeometryGroup, lpVtbl : ID2D1GeometryGroupVtbl* do
     GUID = LibC::GUID.new(0x2cd906a6_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1GeometryGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2604,7 +2742,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("2cd906bb-12e2-11dc-9fed-001143a055f9")]
   record ID2D1TransformedGeometry, lpVtbl : ID2D1TransformedGeometryVtbl* do
     GUID = LibC::GUID.new(0x2cd906bb_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1TransformedGeometry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2687,7 +2824,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("2cd9069f-12e2-11dc-9fed-001143a055f9")]
   record ID2D1GeometrySink, lpVtbl : ID2D1GeometrySinkVtbl* do
     GUID = LibC::GUID.new(0x2cd9069f_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1GeometrySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2748,7 +2884,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("2cd906c1-12e2-11dc-9fed-001143a055f9")]
   record ID2D1TessellationSink, lpVtbl : ID2D1TessellationSinkVtbl* do
     GUID = LibC::GUID.new(0x2cd906c1_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1TessellationSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2795,7 +2930,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("2cd906a5-12e2-11dc-9fed-001143a055f9")]
   record ID2D1PathGeometry, lpVtbl : ID2D1PathGeometryVtbl* do
     GUID = LibC::GUID.new(0x2cd906a5_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1PathGeometry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2874,7 +3008,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("2cd906c2-12e2-11dc-9fed-001143a055f9")]
   record ID2D1Mesh, lpVtbl : ID2D1MeshVtbl* do
     GUID = LibC::GUID.new(0x2cd906c2_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1Mesh*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2905,7 +3038,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("2cd9069b-12e2-11dc-9fed-001143a055f9")]
   record ID2D1Layer, lpVtbl : ID2D1LayerVtbl* do
     GUID = LibC::GUID.new(0x2cd9069b_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1Layer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2939,7 +3071,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("28506e39-ebf6-46a1-bb47-fd85565ab957")]
   record ID2D1DrawingStateBlock, lpVtbl : ID2D1DrawingStateBlockVtbl* do
     GUID = LibC::GUID.new(0x28506e39_u32, 0xebf6_u16, 0x46a1_u16, StaticArray[0xbb_u8, 0x47_u8, 0xfd_u8, 0x85_u8, 0x56_u8, 0x5a_u8, 0xb9_u8, 0x57_u8])
     def query_interface(this : ID2D1DrawingStateBlock*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3031,7 +3162,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("2cd90694-12e2-11dc-9fed-001143a055f9")]
   record ID2D1RenderTarget, lpVtbl : ID2D1RenderTargetVtbl* do
     GUID = LibC::GUID.new(0x2cd90694_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1RenderTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3271,7 +3401,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("2cd90695-12e2-11dc-9fed-001143a055f9")]
   record ID2D1BitmapRenderTarget, lpVtbl : ID2D1BitmapRenderTargetVtbl* do
     GUID = LibC::GUID.new(0x2cd90695_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1BitmapRenderTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3516,7 +3645,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("2cd90698-12e2-11dc-9fed-001143a055f9")]
   record ID2D1HwndRenderTarget, lpVtbl : ID2D1HwndRenderTargetVtbl* do
     GUID = LibC::GUID.new(0x2cd90698_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1HwndRenderTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3712,7 +3840,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("e0db51c3-6f77-4bae-b3d5-e47509b35838")]
   record ID2D1GdiInteropRenderTarget, lpVtbl : ID2D1GdiInteropRenderTargetVtbl* do
     GUID = LibC::GUID.new(0xe0db51c3_u32, 0x6f77_u16, 0x4bae_u16, StaticArray[0xb3_u8, 0xd5_u8, 0xe4_u8, 0x75_u8, 0x9_u8, 0xb3_u8, 0x58_u8, 0x38_u8])
     def query_interface(this : ID2D1GdiInteropRenderTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3796,7 +3923,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("1c51bc64-de61-46fd-9899-63a5d8f03950")]
   record ID2D1DCRenderTarget, lpVtbl : ID2D1DCRenderTargetVtbl* do
     GUID = LibC::GUID.new(0x1c51bc64_u32, 0xde61_u16, 0x46fd_u16, StaticArray[0x98_u8, 0x99_u8, 0x63_u8, 0xa5_u8, 0xd8_u8, 0xf0_u8, 0x39_u8, 0x50_u8])
     def query_interface(this : ID2D1DCRenderTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3998,7 +4124,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("06152247-6f50-465a-9245-118bfd3b6007")]
   record ID2D1Factory, lpVtbl : ID2D1FactoryVtbl* do
     GUID = LibC::GUID.new(0x6152247_u32, 0x6f50_u16, 0x465a_u16, StaticArray[0x92_u8, 0x45_u8, 0x11_u8, 0x8b_u8, 0xfd_u8, 0x3b_u8, 0x60_u8, 0x7_u8])
     def query_interface(this : ID2D1Factory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4064,7 +4189,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("82237326-8111-4f7c-bcf4-b5c1175564fe")]
   record ID2D1GdiMetafileSink, lpVtbl : ID2D1GdiMetafileSinkVtbl* do
     GUID = LibC::GUID.new(0x82237326_u32, 0x8111_u16, 0x4f7c_u16, StaticArray[0xbc_u8, 0xf4_u8, 0xb5_u8, 0xc1_u8, 0x17_u8, 0x55_u8, 0x64_u8, 0xfe_u8])
     def query_interface(this : ID2D1GdiMetafileSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4093,7 +4217,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("2f543dc3-cfc1-4211-864f-cfd91c6f3395")]
   record ID2D1GdiMetafile, lpVtbl : ID2D1GdiMetafileVtbl* do
     GUID = LibC::GUID.new(0x2f543dc3_u32, 0xcfc1_u16, 0x4211_u16, StaticArray[0x86_u8, 0x4f_u8, 0xcf_u8, 0xd9_u8, 0x1c_u8, 0x6f_u8, 0x33_u8, 0x95_u8])
     def query_interface(this : ID2D1GdiMetafile*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4150,7 +4273,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("54d7898a-a061-40a7-bec7-e465bcba2c4f")]
   record ID2D1CommandSink, lpVtbl : ID2D1CommandSinkVtbl* do
     GUID = LibC::GUID.new(0x54d7898a_u32, 0xa061_u16, 0x40a7_u16, StaticArray[0xbe_u8, 0xc7_u8, 0xe4_u8, 0x65_u8, 0xbc_u8, 0xba_u8, 0x2c_u8, 0x4f_u8])
     def query_interface(this : ID2D1CommandSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4251,7 +4373,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("b4f34a19-2383-4d76-94f6-ec343657c3dc")]
   record ID2D1CommandList, lpVtbl : ID2D1CommandListVtbl* do
     GUID = LibC::GUID.new(0xb4f34a19_u32, 0x2383_u16, 0x4d76_u16, StaticArray[0x94_u8, 0xf6_u8, 0xec_u8, 0x34_u8, 0x36_u8, 0x57_u8, 0xc3_u8, 0xdc_u8])
     def query_interface(this : ID2D1CommandList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4285,7 +4406,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("2c1d867d-c290-41c8-ae7e-34a98702e9a5")]
   record ID2D1PrintControl, lpVtbl : ID2D1PrintControlVtbl* do
     GUID = LibC::GUID.new(0x2c1d867d_u32, 0xc290_u16, 0x41c8_u16, StaticArray[0xae_u8, 0x7e_u8, 0x34_u8, 0xa9_u8, 0x87_u8, 0x2_u8, 0xe9_u8, 0xa5_u8])
     def query_interface(this : ID2D1PrintControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4329,7 +4449,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("fe9e984d-3f95-407c-b5db-cb94d4e8f87c")]
   record ID2D1ImageBrush, lpVtbl : ID2D1ImageBrushVtbl* do
     GUID = LibC::GUID.new(0xfe9e984d_u32, 0x3f95_u16, 0x407c_u16, StaticArray[0xb5_u8, 0xdb_u8, 0xcb_u8, 0x94_u8, 0xd4_u8, 0xe8_u8, 0xf8_u8, 0x7c_u8])
     def query_interface(this : ID2D1ImageBrush*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4412,7 +4531,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("41343a53-e41a-49a2-91cd-21793bbb62e5")]
   record ID2D1BitmapBrush1, lpVtbl : ID2D1BitmapBrush1Vtbl* do
     GUID = LibC::GUID.new(0x41343a53_u32, 0xe41a_u16, 0x49a2_u16, StaticArray[0x91_u8, 0xcd_u8, 0x21_u8, 0x79_u8, 0x3b_u8, 0xbb_u8, 0x62_u8, 0xe5_u8])
     def query_interface(this : ID2D1BitmapBrush1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4491,7 +4609,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("10a72a66-e91c-43f4-993f-ddf4b82b0b4a")]
   record ID2D1StrokeStyle1, lpVtbl : ID2D1StrokeStyle1Vtbl* do
     GUID = LibC::GUID.new(0x10a72a66_u32, 0xe91c_u16, 0x43f4_u16, StaticArray[0x99_u8, 0x3f_u8, 0xdd_u8, 0xf4_u8, 0xb8_u8, 0x2b_u8, 0xb_u8, 0x4a_u8])
     def query_interface(this : ID2D1StrokeStyle1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4566,7 +4683,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("62baa2d2-ab54-41b7-b872-787e0106a421")]
   record ID2D1PathGeometry1, lpVtbl : ID2D1PathGeometry1Vtbl* do
     GUID = LibC::GUID.new(0x62baa2d2_u32, 0xab54_u16, 0x41b7_u16, StaticArray[0xb8_u8, 0x72_u8, 0x78_u8, 0x7e_u8, 0x1_u8, 0x6_u8, 0xa4_u8, 0x21_u8])
     def query_interface(this : ID2D1PathGeometry1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4657,7 +4773,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("483473d7-cd46-4f9d-9d3a-3112aa80159d")]
   record ID2D1Properties, lpVtbl : ID2D1PropertiesVtbl* do
     GUID = LibC::GUID.new(0x483473d7_u32, 0xcd46_u16, 0x4f9d_u16, StaticArray[0x9d_u8, 0x3a_u8, 0x31_u8, 0x12_u8, 0xaa_u8, 0x80_u8, 0x15_u8, 0x9d_u8])
     def query_interface(this : ID2D1Properties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4729,7 +4844,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("28211a43-7d89-476f-8181-2d6159b220ad")]
   record ID2D1Effect, lpVtbl : ID2D1EffectVtbl* do
     GUID = LibC::GUID.new(0x28211a43_u32, 0x7d89_u16, 0x476f_u16, StaticArray[0x81_u8, 0x81_u8, 0x2d_u8, 0x61_u8, 0x59_u8, 0xb2_u8, 0x20_u8, 0xad_u8])
     def query_interface(this : ID2D1Effect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4813,7 +4927,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("a898a84c-3873-4588-b08b-ebbf978df041")]
   record ID2D1Bitmap1, lpVtbl : ID2D1Bitmap1Vtbl* do
     GUID = LibC::GUID.new(0xa898a84c_u32, 0x3873_u16, 0x4588_u16, StaticArray[0xb0_u8, 0x8b_u8, 0xeb_u8, 0xbf_u8, 0x97_u8, 0x8d_u8, 0xf0_u8, 0x41_u8])
     def query_interface(this : ID2D1Bitmap1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4879,7 +4992,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("1c4820bb-5771-4518-a581-2fe4dd0ec657")]
   record ID2D1ColorContext, lpVtbl : ID2D1ColorContextVtbl* do
     GUID = LibC::GUID.new(0x1c4820bb_u32, 0x5771_u16, 0x4518_u16, StaticArray[0xa5_u8, 0x81_u8, 0x2f_u8, 0xe4_u8, 0xdd_u8, 0xe_u8, 0xc6_u8, 0x57_u8])
     def query_interface(this : ID2D1ColorContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4924,7 +5036,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("ae1572f4-5dd0-4777-998b-9279472ae63b")]
   record ID2D1GradientStopCollection1, lpVtbl : ID2D1GradientStopCollection1Vtbl* do
     GUID = LibC::GUID.new(0xae1572f4_u32, 0x5dd0_u16, 0x4777_u16, StaticArray[0x99_u8, 0x8b_u8, 0x92_u8, 0x79_u8, 0x47_u8, 0x2a_u8, 0xe6_u8, 0x3b_u8])
     def query_interface(this : ID2D1GradientStopCollection1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4984,7 +5095,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("689f1f85-c72e-4e33-8f19-85754efd5ace")]
   record ID2D1DrawingStateBlock1, lpVtbl : ID2D1DrawingStateBlock1Vtbl* do
     GUID = LibC::GUID.new(0x689f1f85_u32, 0xc72e_u16, 0x4e33_u16, StaticArray[0x8f_u8, 0x19_u8, 0x85_u8, 0x75_u8, 0x4e_u8, 0xfd_u8, 0x5a_u8, 0xce_u8])
     def query_interface(this : ID2D1DrawingStateBlock1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5117,7 +5227,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("e8f7fe7a-191c-466d-ad95-975678bda998")]
   record ID2D1DeviceContext, lpVtbl : ID2D1DeviceContextVtbl* do
     GUID = LibC::GUID.new(0xe8f7fe7a_u32, 0x191c_u16, 0x466d_u16, StaticArray[0xad_u8, 0x95_u8, 0x97_u8, 0x56_u8, 0x78_u8, 0xbd_u8, 0xa9_u8, 0x98_u8])
     def query_interface(this : ID2D1DeviceContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5413,7 +5522,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("47dd575d-ac05-4cdd-8049-9b02cd16f44c")]
   record ID2D1Device, lpVtbl : ID2D1DeviceVtbl* do
     GUID = LibC::GUID.new(0x47dd575d_u32, 0xac05_u16, 0x4cdd_u16, StaticArray[0x80_u8, 0x49_u8, 0x9b_u8, 0x2_u8, 0xcd_u8, 0x16_u8, 0xf4_u8, 0x4c_u8])
     def query_interface(this : ID2D1Device*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5478,7 +5586,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("bb12d362-daee-4b9a-aa1d-14ba401cfa1f")]
   record ID2D1Factory1, lpVtbl : ID2D1Factory1Vtbl* do
     GUID = LibC::GUID.new(0xbb12d362_u32, 0xdaee_u16, 0x4b9a_u16, StaticArray[0xaa_u8, 0x1d_u8, 0x14_u8, 0xba_u8, 0x40_u8, 0x1c_u8, 0xfa_u8, 0x1f_u8])
     def query_interface(this : ID2D1Factory1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5576,7 +5683,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("31e6e7bc-e0ff-4d46-8c64-a0a8c41c15d3")]
   record ID2D1Multithread, lpVtbl : ID2D1MultithreadVtbl* do
     GUID = LibC::GUID.new(0x31e6e7bc_u32, 0xe0ff_u16, 0x4d46_u16, StaticArray[0x8c_u8, 0x64_u8, 0xa0_u8, 0xa8_u8, 0xc4_u8, 0x1c_u8, 0x15_u8, 0xd3_u8])
     def query_interface(this : ID2D1Multithread*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5610,7 +5716,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("9b8b1336-00a5-4668-92b7-ced5d8bf9b7b")]
   record ID2D1VertexBuffer, lpVtbl : ID2D1VertexBufferVtbl* do
     GUID = LibC::GUID.new(0x9b8b1336_u32, 0xa5_u16, 0x4668_u16, StaticArray[0x92_u8, 0xb7_u8, 0xce_u8, 0xd5_u8, 0xd8_u8, 0xbf_u8, 0x9b_u8, 0x7b_u8])
     def query_interface(this : ID2D1VertexBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5640,7 +5745,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("688d15c3-02b0-438d-b13a-d1b44c32c39a")]
   record ID2D1ResourceTexture, lpVtbl : ID2D1ResourceTextureVtbl* do
     GUID = LibC::GUID.new(0x688d15c3_u32, 0x2b0_u16, 0x438d_u16, StaticArray[0xb1_u8, 0x3a_u8, 0xd1_u8, 0xb4_u8, 0x4c_u8, 0x32_u8, 0xc3_u8, 0x9a_u8])
     def query_interface(this : ID2D1ResourceTexture*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5670,7 +5774,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("519ae1bd-d19a-420d-b849-364f594776b7")]
   record ID2D1RenderInfo, lpVtbl : ID2D1RenderInfoVtbl* do
     GUID = LibC::GUID.new(0x519ae1bd_u32, 0xd19a_u16, 0x420d_u16, StaticArray[0xb8_u8, 0x49_u8, 0x36_u8, 0x4f_u8, 0x59_u8, 0x47_u8, 0x76_u8, 0xb7_u8])
     def query_interface(this : ID2D1RenderInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5714,7 +5817,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("693ce632-7f2f-45de-93fe-18d88b37aa21")]
   record ID2D1DrawInfo, lpVtbl : ID2D1DrawInfoVtbl* do
     GUID = LibC::GUID.new(0x693ce632_u32, 0x7f2f_u16, 0x45de_u16, StaticArray[0x93_u8, 0xfe_u8, 0x18_u8, 0xd8_u8, 0x8b_u8, 0x37_u8, 0xaa_u8, 0x21_u8])
     def query_interface(this : ID2D1DrawInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5771,7 +5873,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("5598b14b-9fd7-48b7-9bdb-8f0964eb38bc")]
   record ID2D1ComputeInfo, lpVtbl : ID2D1ComputeInfoVtbl* do
     GUID = LibC::GUID.new(0x5598b14b_u32, 0x9fd7_u16, 0x48b7_u16, StaticArray[0x9b_u8, 0xdb_u8, 0x8f_u8, 0x9_u8, 0x64_u8, 0xeb_u8, 0x38_u8, 0xbc_u8])
     def query_interface(this : ID2D1ComputeInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5816,7 +5917,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("b2efe1e7-729f-4102-949f-505fa21bf666")]
   record ID2D1TransformNode, lpVtbl : ID2D1TransformNodeVtbl* do
     GUID = LibC::GUID.new(0xb2efe1e7_u32, 0x729f_u16, 0x4102_u16, StaticArray[0x94_u8, 0x9f_u8, 0x50_u8, 0x5f_u8, 0xa2_u8, 0x1b_u8, 0xf6_u8, 0x66_u8])
     def query_interface(this : ID2D1TransformNode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5851,7 +5951,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("13d29038-c3e6-4034-9081-13b53a417992")]
   record ID2D1TransformGraph, lpVtbl : ID2D1TransformGraphVtbl* do
     GUID = LibC::GUID.new(0x13d29038_u32, 0xc3e6_u16, 0x4034_u16, StaticArray[0x90_u8, 0x81_u8, 0x13_u8, 0xb5_u8, 0x3a_u8, 0x41_u8, 0x79_u8, 0x92_u8])
     def query_interface(this : ID2D1TransformGraph*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5905,7 +6004,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("ef1a287d-342a-4f76-8fdb-da0d6ea9f92b")]
   record ID2D1Transform, lpVtbl : ID2D1TransformVtbl* do
     GUID = LibC::GUID.new(0xef1a287d_u32, 0x342a_u16, 0x4f76_u16, StaticArray[0x8f_u8, 0xdb_u8, 0xda_u8, 0xd_u8, 0x6e_u8, 0xa9_u8, 0xf9_u8, 0x2b_u8])
     def query_interface(this : ID2D1Transform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5945,7 +6043,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("36bfdcb6-9739-435d-a30d-a653beff6a6f")]
   record ID2D1DrawTransform, lpVtbl : ID2D1DrawTransformVtbl* do
     GUID = LibC::GUID.new(0x36bfdcb6_u32, 0x9739_u16, 0x435d_u16, StaticArray[0xa3_u8, 0xd_u8, 0xa6_u8, 0x53_u8, 0xbe_u8, 0xff_u8, 0x6a_u8, 0x6f_u8])
     def query_interface(this : ID2D1DrawTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5989,7 +6086,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("0d85573c-01e3-4f7d-bfd9-0d60608bf3c3")]
   record ID2D1ComputeTransform, lpVtbl : ID2D1ComputeTransformVtbl* do
     GUID = LibC::GUID.new(0xd85573c_u32, 0x1e3_u16, 0x4f7d_u16, StaticArray[0xbf_u8, 0xd9_u8, 0xd_u8, 0x60_u8, 0x60_u8, 0x8b_u8, 0xf3_u8, 0xc3_u8])
     def query_interface(this : ID2D1ComputeTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6031,7 +6127,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("0359dc30-95e6-4568-9055-27720d130e93")]
   record ID2D1AnalysisTransform, lpVtbl : ID2D1AnalysisTransformVtbl* do
     GUID = LibC::GUID.new(0x359dc30_u32, 0x95e6_u16, 0x4568_u16, StaticArray[0x90_u8, 0x55_u8, 0x27_u8, 0x72_u8, 0xd_u8, 0x13_u8, 0xe_u8, 0x93_u8])
     def query_interface(this : ID2D1AnalysisTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6063,7 +6158,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("db1800dd-0c34-4cf9-be90-31cc0a5653e1")]
   record ID2D1SourceTransform, lpVtbl : ID2D1SourceTransformVtbl* do
     GUID = LibC::GUID.new(0xdb1800dd_u32, 0xc34_u16, 0x4cf9_u16, StaticArray[0xbe_u8, 0x90_u8, 0x31_u8, 0xcc_u8, 0xa_u8, 0x56_u8, 0x53_u8, 0xe1_u8])
     def query_interface(this : ID2D1SourceTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6107,7 +6201,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("1a799d8a-69f7-4e4c-9fed-437ccc6684cc")]
   record ID2D1ConcreteTransform, lpVtbl : ID2D1ConcreteTransformVtbl* do
     GUID = LibC::GUID.new(0x1a799d8a_u32, 0x69f7_u16, 0x4e4c_u16, StaticArray[0x9f_u8, 0xed_u8, 0x43_u8, 0x7c_u8, 0xcc_u8, 0x66_u8, 0x84_u8, 0xcc_u8])
     def query_interface(this : ID2D1ConcreteTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6144,7 +6237,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("63ac0b32-ba44-450f-8806-7f4ca1ff2f1b")]
   record ID2D1BlendTransform, lpVtbl : ID2D1BlendTransformVtbl* do
     GUID = LibC::GUID.new(0x63ac0b32_u32, 0xba44_u16, 0x450f_u16, StaticArray[0x88_u8, 0x6_u8, 0x7f_u8, 0x4c_u8, 0xa1_u8, 0xff_u8, 0x2f_u8, 0x1b_u8])
     def query_interface(this : ID2D1BlendTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6189,7 +6281,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("4998735c-3a19-473c-9781-656847e3a347")]
   record ID2D1BorderTransform, lpVtbl : ID2D1BorderTransformVtbl* do
     GUID = LibC::GUID.new(0x4998735c_u32, 0x3a19_u16, 0x473c_u16, StaticArray[0x97_u8, 0x81_u8, 0x65_u8, 0x68_u8, 0x47_u8, 0xe3_u8, 0xa3_u8, 0x47_u8])
     def query_interface(this : ID2D1BorderTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6236,7 +6327,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("3fe6adea-7643-4f53-bd14-a0ce63f24042")]
   record ID2D1OffsetTransform, lpVtbl : ID2D1OffsetTransformVtbl* do
     GUID = LibC::GUID.new(0x3fe6adea_u32, 0x7643_u16, 0x4f53_u16, StaticArray[0xbd_u8, 0x14_u8, 0xa0_u8, 0xce_u8, 0x63_u8, 0xf2_u8, 0x40_u8, 0x42_u8])
     def query_interface(this : ID2D1OffsetTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6271,7 +6361,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("90f732e2-5092-4606-a819-8651970baccd")]
   record ID2D1BoundsAdjustmentTransform, lpVtbl : ID2D1BoundsAdjustmentTransformVtbl* do
     GUID = LibC::GUID.new(0x90f732e2_u32, 0x5092_u16, 0x4606_u16, StaticArray[0xa8_u8, 0x19_u8, 0x86_u8, 0x51_u8, 0x97_u8, 0xb_u8, 0xac_u8, 0xcd_u8])
     def query_interface(this : ID2D1BoundsAdjustmentTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6306,7 +6395,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("a248fd3f-3e6c-4e63-9f03-7f68ecc91db9")]
   record ID2D1EffectImpl, lpVtbl : ID2D1EffectImplVtbl* do
     GUID = LibC::GUID.new(0xa248fd3f_u32, 0x3e6c_u16, 0x4e63_u16, StaticArray[0x9f_u8, 0x3_u8, 0x7f_u8, 0x68_u8, 0xec_u8, 0xc9_u8, 0x1d_u8, 0xb9_u8])
     def query_interface(this : ID2D1EffectImpl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6359,7 +6447,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("3d9f916b-27dc-4ad7-b4f1-64945340f563")]
   record ID2D1EffectContext, lpVtbl : ID2D1EffectContextVtbl* do
     GUID = LibC::GUID.new(0x3d9f916b_u32, 0x27dc_u16, 0x4ad7_u16, StaticArray[0xb4_u8, 0xf1_u8, 0x64_u8, 0x94_u8, 0x53_u8, 0x40_u8, 0xf5_u8, 0x63_u8])
     def query_interface(this : ID2D1EffectContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6446,7 +6533,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("a16907d7-bc02-4801-99e8-8cf7f485f774")]
   record ID2D1GeometryRealization, lpVtbl : ID2D1GeometryRealizationVtbl* do
     GUID = LibC::GUID.new(0xa16907d7_u32, 0xbc02_u16, 0x4801_u16, StaticArray[0x99_u8, 0xe8_u8, 0x8c_u8, 0xf7_u8, 0xf4_u8, 0x85_u8, 0xf7_u8, 0x74_u8])
     def query_interface(this : ID2D1GeometryRealization*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6564,7 +6650,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("d37f57e4-6908-459f-a199-e72f24f79987")]
   record ID2D1DeviceContext1, lpVtbl : ID2D1DeviceContext1Vtbl* do
     GUID = LibC::GUID.new(0xd37f57e4_u32, 0x6908_u16, 0x459f_u16, StaticArray[0xa1_u8, 0x99_u8, 0xe7_u8, 0x2f_u8, 0x24_u8, 0xf7_u8, 0x99_u8, 0x87_u8])
     def query_interface(this : ID2D1DeviceContext1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6872,7 +6957,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("d21768e1-23a4-4823-a14b-7c3eba85d658")]
   record ID2D1Device1, lpVtbl : ID2D1Device1Vtbl* do
     GUID = LibC::GUID.new(0xd21768e1_u32, 0x23a4_u16, 0x4823_u16, StaticArray[0xa1_u8, 0x4b_u8, 0x7c_u8, 0x3e_u8, 0xba_u8, 0x85_u8, 0xd6_u8, 0x58_u8])
     def query_interface(this : ID2D1Device1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6947,7 +7031,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("94f81a73-9212-4376-9c58-b16a3a0d3992")]
   record ID2D1Factory2, lpVtbl : ID2D1Factory2Vtbl* do
     GUID = LibC::GUID.new(0x94f81a73_u32, 0x9212_u16, 0x4376_u16, StaticArray[0x9c_u8, 0x58_u8, 0xb1_u8, 0x6a_u8, 0x3a_u8, 0xd_u8, 0x39_u8, 0x92_u8])
     def query_interface(this : ID2D1Factory2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7071,7 +7154,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("9eb767fd-4269-4467-b8c2-eb30cb305743")]
   record ID2D1CommandSink1, lpVtbl : ID2D1CommandSink1Vtbl* do
     GUID = LibC::GUID.new(0x9eb767fd_u32, 0x4269_u16, 0x4467_u16, StaticArray[0xb8_u8, 0xc2_u8, 0xeb_u8, 0x30_u8, 0xcb_u8, 0x30_u8, 0x57_u8, 0x43_u8])
     def query_interface(this : ID2D1CommandSink1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7175,7 +7257,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("c9cdb0dd-f8c9-4e70-b7c2-301c80292c5e")]
   record ID2D1SvgAttribute, lpVtbl : ID2D1SvgAttributeVtbl* do
     GUID = LibC::GUID.new(0xc9cdb0dd_u32, 0xf8c9_u16, 0x4e70_u16, StaticArray[0xb7_u8, 0xc2_u8, 0x30_u8, 0x1c_u8, 0x80_u8, 0x29_u8, 0x2c_u8, 0x5e_u8])
     def query_interface(this : ID2D1SvgAttribute*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7217,7 +7298,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("d59bab0a-68a2-455b-a5dc-9eb2854e2490")]
   record ID2D1SvgPaint, lpVtbl : ID2D1SvgPaintVtbl* do
     GUID = LibC::GUID.new(0xd59bab0a_u32, 0x68a2_u16, 0x455b_u16, StaticArray[0xa5_u8, 0xdc_u8, 0x9e_u8, 0xb2_u8, 0x85_u8, 0x4e_u8, 0x24_u8, 0x90_u8])
     def query_interface(this : ID2D1SvgPaint*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7279,7 +7359,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("f1c0ca52-92a3-4f00-b4ce-f35691efd9d9")]
   record ID2D1SvgStrokeDashArray, lpVtbl : ID2D1SvgStrokeDashArrayVtbl* do
     GUID = LibC::GUID.new(0xf1c0ca52_u32, 0x92a3_u16, 0x4f00_u16, StaticArray[0xb4_u8, 0xce_u8, 0xf3_u8, 0x56_u8, 0x91_u8, 0xef_u8, 0xd9_u8, 0xd9_u8])
     def query_interface(this : ID2D1SvgStrokeDashArray*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7336,7 +7415,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("9dbe4c0d-3572-4dd9-9825-5530813bb712")]
   record ID2D1SvgPointCollection, lpVtbl : ID2D1SvgPointCollectionVtbl* do
     GUID = LibC::GUID.new(0x9dbe4c0d_u32, 0x3572_u16, 0x4dd9_u16, StaticArray[0x98_u8, 0x25_u8, 0x55_u8, 0x30_u8, 0x81_u8, 0x3b_u8, 0xb7_u8, 0x12_u8])
     def query_interface(this : ID2D1SvgPointCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7392,7 +7470,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("c095e4f4-bb98-43d6-9745-4d1b84ec9888")]
   record ID2D1SvgPathData, lpVtbl : ID2D1SvgPathDataVtbl* do
     GUID = LibC::GUID.new(0xc095e4f4_u32, 0xbb98_u16, 0x43d6_u16, StaticArray[0x97_u8, 0x45_u8, 0x4d_u8, 0x1b_u8, 0x84_u8, 0xec_u8, 0x98_u8, 0x88_u8])
     def query_interface(this : ID2D1SvgPathData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7482,7 +7559,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("ac7b67a6-183e-49c1-a823-0ebe40b0db29")]
   record ID2D1SvgElement, lpVtbl : ID2D1SvgElementVtbl* do
     GUID = LibC::GUID.new(0xac7b67a6_u32, 0x183e_u16, 0x49c1_u16, StaticArray[0xa8_u8, 0x23_u8, 0xe_u8, 0xbe_u8, 0x40_u8, 0xb0_u8, 0xdb_u8, 0x29_u8])
     def query_interface(this : ID2D1SvgElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7610,7 +7686,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("86b88e4d-afa4-4d7b-88e4-68a51c4a0aec")]
   record ID2D1SvgDocument, lpVtbl : ID2D1SvgDocumentVtbl* do
     GUID = LibC::GUID.new(0x86b88e4d_u32, 0xafa4_u16, 0x4d7b_u16, StaticArray[0x88_u8, 0xe4_u8, 0x68_u8, 0xa5_u8, 0x1c_u8, 0x4a_u8, 0xa_u8, 0xec_u8])
     def query_interface(this : ID2D1SvgDocument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7674,7 +7749,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("bae8b344-23fc-4071-8cb5-d05d6f073848")]
   record ID2D1InkStyle, lpVtbl : ID2D1InkStyleVtbl* do
     GUID = LibC::GUID.new(0xbae8b344_u32, 0x23fc_u16, 0x4071_u16, StaticArray[0x8c_u8, 0xb5_u8, 0xd0_u8, 0x5d_u8, 0x6f_u8, 0x7_u8, 0x38_u8, 0x48_u8])
     def query_interface(this : ID2D1InkStyle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7723,7 +7797,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("b499923b-7029-478f-a8b3-432c7c5f5312")]
   record ID2D1Ink, lpVtbl : ID2D1InkVtbl* do
     GUID = LibC::GUID.new(0xb499923b_u32, 0x7029_u16, 0x478f_u16, StaticArray[0xa8_u8, 0xb3_u8, 0x43_u8, 0x2c_u8, 0x7c_u8, 0x5f_u8, 0x53_u8, 0x12_u8])
     def query_interface(this : ID2D1Ink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7782,7 +7855,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("f292e401-c050-4cde-83d7-04962d3b23c2")]
   record ID2D1GradientMesh, lpVtbl : ID2D1GradientMeshVtbl* do
     GUID = LibC::GUID.new(0xf292e401_u32, 0xc050_u16, 0x4cde_u16, StaticArray[0x83_u8, 0xd7_u8, 0x4_u8, 0x96_u8, 0x2d_u8, 0x3b_u8, 0x23_u8, 0xc2_u8])
     def query_interface(this : ID2D1GradientMesh*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7817,7 +7889,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("c9b664e5-74a1-4378-9ac2-eefc37a3f4d8")]
   record ID2D1ImageSource, lpVtbl : ID2D1ImageSourceVtbl* do
     GUID = LibC::GUID.new(0xc9b664e5_u32, 0x74a1_u16, 0x4378_u16, StaticArray[0x9a_u8, 0xc2_u8, 0xee_u8, 0xfc_u8, 0x37_u8, 0xa3_u8, 0xf4_u8, 0xd8_u8])
     def query_interface(this : ID2D1ImageSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7855,7 +7926,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("77395441-1c8f-4555-8683-f50dab0fe792")]
   record ID2D1ImageSourceFromWic, lpVtbl : ID2D1ImageSourceFromWicVtbl* do
     GUID = LibC::GUID.new(0x77395441_u32, 0x1c8f_u16, 0x4555_u16, StaticArray[0x86_u8, 0x83_u8, 0xf5_u8, 0xd_u8, 0xab_u8, 0xf_u8, 0xe7_u8, 0x92_u8])
     def query_interface(this : ID2D1ImageSourceFromWic*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7899,7 +7969,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("7f1f79e5-2796-416c-8f55-700f911445e5")]
   record ID2D1TransformedImageSource, lpVtbl : ID2D1TransformedImageSourceVtbl* do
     GUID = LibC::GUID.new(0x7f1f79e5_u32, 0x2796_u16, 0x416c_u16, StaticArray[0x8f_u8, 0x55_u8, 0x70_u8, 0xf_u8, 0x91_u8, 0x14_u8, 0x45_u8, 0xe5_u8])
     def query_interface(this : ID2D1TransformedImageSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7932,7 +8001,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("53dd9855-a3b0-4d5b-82e1-26e25c5e5797")]
   record ID2D1LookupTable3D, lpVtbl : ID2D1LookupTable3DVtbl* do
     GUID = LibC::GUID.new(0x53dd9855_u32, 0xa3b0_u16, 0x4d5b_u16, StaticArray[0x82_u8, 0xe1_u8, 0x26_u8, 0xe2_u8, 0x5c_u8, 0x5e_u8, 0x57_u8, 0x97_u8])
     def query_interface(this : ID2D1LookupTable3D*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8061,7 +8129,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("394ea6a3-0c34-4321-950b-6ca20f0be6c7")]
   record ID2D1DeviceContext2, lpVtbl : ID2D1DeviceContext2Vtbl* do
     GUID = LibC::GUID.new(0x394ea6a3_u32, 0xc34_u16, 0x4321_u16, StaticArray[0x95_u8, 0xb_u8, 0x6c_u8, 0xa2_u8, 0xf_u8, 0xb_u8, 0xe6_u8, 0xc7_u8])
     def query_interface(this : ID2D1DeviceContext2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8405,7 +8472,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("a44472e1-8dfb-4e60-8492-6e2861c9ca8b")]
   record ID2D1Device2, lpVtbl : ID2D1Device2Vtbl* do
     GUID = LibC::GUID.new(0xa44472e1_u32, 0x8dfb_u16, 0x4e60_u16, StaticArray[0x84_u8, 0x92_u8, 0x6e_u8, 0x28_u8, 0x61_u8, 0xc9_u8, 0xca_u8, 0x8b_u8])
     def query_interface(this : ID2D1Device2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8490,7 +8556,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("0869759f-4f00-413f-b03e-2bda45404d0f")]
   record ID2D1Factory3, lpVtbl : ID2D1Factory3Vtbl* do
     GUID = LibC::GUID.new(0x869759f_u32, 0x4f00_u16, 0x413f_u16, StaticArray[0xb0_u8, 0x3e_u8, 0x2b_u8, 0xda_u8, 0x45_u8, 0x40_u8, 0x4d_u8, 0xf_u8])
     def query_interface(this : ID2D1Factory3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8620,7 +8685,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("3bab440e-417e-47df-a2e2-bc0be6a00916")]
   record ID2D1CommandSink2, lpVtbl : ID2D1CommandSink2Vtbl* do
     GUID = LibC::GUID.new(0x3bab440e_u32, 0x417e_u16, 0x47df_u16, StaticArray[0xa2_u8, 0xe2_u8, 0xbc_u8, 0xb_u8, 0xe6_u8, 0xa0_u8, 0x9_u8, 0x16_u8])
     def query_interface(this : ID2D1CommandSink2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8735,7 +8799,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("2e69f9e8-dd3f-4bf9-95ba-c04f49d788df")]
   record ID2D1GdiMetafile1, lpVtbl : ID2D1GdiMetafile1Vtbl* do
     GUID = LibC::GUID.new(0x2e69f9e8_u32, 0xdd3f_u16, 0x4bf9_u16, StaticArray[0x95_u8, 0xba_u8, 0xc0_u8, 0x4f_u8, 0x49_u8, 0xd7_u8, 0x88_u8, 0xdf_u8])
     def query_interface(this : ID2D1GdiMetafile1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8775,7 +8838,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("fd0ecb6b-91e6-411e-8655-395e760f91b4")]
   record ID2D1GdiMetafileSink1, lpVtbl : ID2D1GdiMetafileSink1Vtbl* do
     GUID = LibC::GUID.new(0xfd0ecb6b_u32, 0x91e6_u16, 0x411e_u16, StaticArray[0x86_u8, 0x55_u8, 0x39_u8, 0x5e_u8, 0x76_u8, 0xf_u8, 0x91_u8, 0xb4_u8])
     def query_interface(this : ID2D1GdiMetafileSink1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8810,7 +8872,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("4dc583bf-3a10-438a-8722-e9765224f1f1")]
   record ID2D1SpriteBatch, lpVtbl : ID2D1SpriteBatchVtbl* do
     GUID = LibC::GUID.new(0x4dc583bf_u32, 0x3a10_u16, 0x438a_u16, StaticArray[0x87_u8, 0x22_u8, 0xe9_u8, 0x76_u8, 0x52_u8, 0x24_u8, 0xf1_u8, 0xf1_u8])
     def query_interface(this : ID2D1SpriteBatch*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8956,7 +9017,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("235a7496-8351-414c-bcd4-6672ab2d8e00")]
   record ID2D1DeviceContext3, lpVtbl : ID2D1DeviceContext3Vtbl* do
     GUID = LibC::GUID.new(0x235a7496_u32, 0x8351_u16, 0x414c_u16, StaticArray[0xbc_u8, 0xd4_u8, 0x66_u8, 0x72_u8, 0xab_u8, 0x2d_u8, 0x8e_u8, 0x0_u8])
     def query_interface(this : ID2D1DeviceContext3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9307,7 +9367,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("852f2087-802c-4037-ab60-ff2e7ee6fc01")]
   record ID2D1Device3, lpVtbl : ID2D1Device3Vtbl* do
     GUID = LibC::GUID.new(0x852f2087_u32, 0x802c_u16, 0x4037_u16, StaticArray[0xab_u8, 0x60_u8, 0xff_u8, 0x2e_u8, 0x7e_u8, 0xe6_u8, 0xfc_u8, 0x1_u8])
     def query_interface(this : ID2D1Device3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9396,7 +9455,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("bd4ec2d2-0662-4bee-ba8e-6f29f032e096")]
   record ID2D1Factory4, lpVtbl : ID2D1Factory4Vtbl* do
     GUID = LibC::GUID.new(0xbd4ec2d2_u32, 0x662_u16, 0x4bee_u16, StaticArray[0xba_u8, 0x8e_u8, 0x6f_u8, 0x29_u8, 0xf0_u8, 0x32_u8, 0xe0_u8, 0x96_u8])
     def query_interface(this : ID2D1Factory4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9530,7 +9588,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("18079135-4cf3-4868-bc8e-06067e6d242d")]
   record ID2D1CommandSink3, lpVtbl : ID2D1CommandSink3Vtbl* do
     GUID = LibC::GUID.new(0x18079135_u32, 0x4cf3_u16, 0x4868_u16, StaticArray[0xbc_u8, 0x8e_u8, 0x6_u8, 0x6_u8, 0x7e_u8, 0x6d_u8, 0x24_u8, 0x2d_u8])
     def query_interface(this : ID2D1CommandSink3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9649,7 +9706,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("af671749-d241-4db8-8e41-dcc2e5c1a438")]
   record ID2D1SvgGlyphStyle, lpVtbl : ID2D1SvgGlyphStyleVtbl* do
     GUID = LibC::GUID.new(0xaf671749_u32, 0xd241_u16, 0x4db8_u16, StaticArray[0x8e_u8, 0x41_u8, 0xdc_u8, 0xc2_u8, 0xe5_u8, 0xc1_u8, 0xa4_u8, 0x38_u8])
     def query_interface(this : ID2D1SvgGlyphStyle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9802,7 +9858,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("8c427831-3d90-4476-b647-c4fae349e4db")]
   record ID2D1DeviceContext4, lpVtbl : ID2D1DeviceContext4Vtbl* do
     GUID = LibC::GUID.new(0x8c427831_u32, 0x3d90_u16, 0x4476_u16, StaticArray[0xb6_u8, 0x47_u8, 0xc4_u8, 0xfa_u8, 0xe3_u8, 0x49_u8, 0xe4_u8, 0xdb_u8])
     def query_interface(this : ID2D1DeviceContext4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10177,7 +10232,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("d7bdb159-5683-4a46-bc9c-72dc720b858b")]
   record ID2D1Device4, lpVtbl : ID2D1Device4Vtbl* do
     GUID = LibC::GUID.new(0xd7bdb159_u32, 0x5683_u16, 0x4a46_u16, StaticArray[0xbc_u8, 0x9c_u8, 0x72_u8, 0xdc_u8, 0x72_u8, 0xb_u8, 0x85_u8, 0x8b_u8])
     def query_interface(this : ID2D1Device4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10276,7 +10330,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("c4349994-838e-4b0f-8cab-44997d9eeacc")]
   record ID2D1Factory5, lpVtbl : ID2D1Factory5Vtbl* do
     GUID = LibC::GUID.new(0xc4349994_u32, 0x838e_u16, 0x4b0f_u16, StaticArray[0x8c_u8, 0xab_u8, 0x44_u8, 0x99_u8, 0x7d_u8, 0x9e_u8, 0xea_u8, 0xcc_u8])
     def query_interface(this : ID2D1Factory5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10414,7 +10467,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("c78a6519-40d6-4218-b2de-beeeb744bb3e")]
   record ID2D1CommandSink4, lpVtbl : ID2D1CommandSink4Vtbl* do
     GUID = LibC::GUID.new(0xc78a6519_u32, 0x40d6_u16, 0x4218_u16, StaticArray[0xb2_u8, 0xde_u8, 0xbe_u8, 0xee_u8, 0xb7_u8, 0x44_u8, 0xbb_u8, 0x3e_u8])
     def query_interface(this : ID2D1CommandSink4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10537,7 +10589,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("1ab42875-c57f-4be9-bd85-9cd78d6f55ee")]
   record ID2D1ColorContext1, lpVtbl : ID2D1ColorContext1Vtbl* do
     GUID = LibC::GUID.new(0x1ab42875_u32, 0xc57f_u16, 0x4be9_u16, StaticArray[0xbd_u8, 0x85_u8, 0x9c_u8, 0xd7_u8, 0x8d_u8, 0x6f_u8, 0x55_u8, 0xee_u8])
     def query_interface(this : ID2D1ColorContext1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10697,7 +10748,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("7836d248-68cc-4df6-b9e8-de991bf62eb7")]
   record ID2D1DeviceContext5, lpVtbl : ID2D1DeviceContext5Vtbl* do
     GUID = LibC::GUID.new(0x7836d248_u32, 0x68cc_u16, 0x4df6_u16, StaticArray[0xb9_u8, 0xe8_u8, 0xde_u8, 0x99_u8, 0x1b_u8, 0xf6_u8, 0x2e_u8, 0xb7_u8])
     def query_interface(this : ID2D1DeviceContext5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11085,7 +11135,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("d55ba0a4-6405-4694-aef5-08ee1a4358b4")]
   record ID2D1Device5, lpVtbl : ID2D1Device5Vtbl* do
     GUID = LibC::GUID.new(0xd55ba0a4_u32, 0x6405_u16, 0x4694_u16, StaticArray[0xae_u8, 0xf5_u8, 0x8_u8, 0xee_u8, 0x1a_u8, 0x43_u8, 0x58_u8, 0xb4_u8])
     def query_interface(this : ID2D1Device5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11188,7 +11237,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("f9976f46-f642-44c1-97ca-da32ea2a2635")]
   record ID2D1Factory6, lpVtbl : ID2D1Factory6Vtbl* do
     GUID = LibC::GUID.new(0xf9976f46_u32, 0xf642_u16, 0x44c1_u16, StaticArray[0x97_u8, 0xca_u8, 0xda_u8, 0x32_u8, 0xea_u8, 0x2a_u8, 0x26_u8, 0x35_u8])
     def query_interface(this : ID2D1Factory6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11330,7 +11378,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("7047dd26-b1e7-44a7-959a-8349e2144fa8")]
   record ID2D1CommandSink5, lpVtbl : ID2D1CommandSink5Vtbl* do
     GUID = LibC::GUID.new(0x7047dd26_u32, 0xb1e7_u16, 0x44a7_u16, StaticArray[0x95_u8, 0x9a_u8, 0x83_u8, 0x49_u8, 0xe2_u8, 0x14_u8, 0x4f_u8, 0xa8_u8])
     def query_interface(this : ID2D1CommandSink5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11566,7 +11613,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("985f7e37-4ed0-4a19-98a3-15b0edfde306")]
   record ID2D1DeviceContext6, lpVtbl : ID2D1DeviceContext6Vtbl* do
     GUID = LibC::GUID.new(0x985f7e37_u32, 0x4ed0_u16, 0x4a19_u16, StaticArray[0x98_u8, 0xa3_u8, 0x15_u8, 0xb0_u8, 0xed_u8, 0xfd_u8, 0xe3_u8, 0x6_u8])
     def query_interface(this : ID2D1DeviceContext6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11958,7 +12004,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("7bfef914-2d75-4bad-be87-e18ddb077b6d")]
   record ID2D1Device6, lpVtbl : ID2D1Device6Vtbl* do
     GUID = LibC::GUID.new(0x7bfef914_u32, 0x2d75_u16, 0x4bad_u16, StaticArray[0xbe_u8, 0x87_u8, 0xe1_u8, 0x8d_u8, 0xdb_u8, 0x7_u8, 0x7b_u8, 0x6d_u8])
     def query_interface(this : ID2D1Device6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12065,7 +12110,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("bdc2bdd3-b96c-4de6-bdf7-99d4745454de")]
   record ID2D1Factory7, lpVtbl : ID2D1Factory7Vtbl* do
     GUID = LibC::GUID.new(0xbdc2bdd3_u32, 0xb96c_u16, 0x4de6_u16, StaticArray[0xbd_u8, 0xf7_u8, 0x99_u8, 0xd4_u8, 0x74_u8, 0x54_u8, 0x54_u8, 0xde_u8])
     def query_interface(this : ID2D1Factory7*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12200,7 +12244,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("84ab595a-fc81-4546-bacd-e8ef4d8abe7a")]
   record ID2D1EffectContext1, lpVtbl : ID2D1EffectContext1Vtbl* do
     GUID = LibC::GUID.new(0x84ab595a_u32, 0xfc81_u16, 0x4546_u16, StaticArray[0xba_u8, 0xcd_u8, 0xe8_u8, 0xef_u8, 0x4d_u8, 0x8a_u8, 0xbe_u8, 0x7a_u8])
     def query_interface(this : ID2D1EffectContext1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12313,7 +12356,6 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  #@[Com("577ad2a0-9fc7-4dda-8b18-dab810140052")]
   record ID2D1EffectContext2, lpVtbl : ID2D1EffectContext2Vtbl* do
     GUID = LibC::GUID.new(0x577ad2a0_u32, 0x9fc7_u16, 0x4dda_u16, StaticArray[0x8b_u8, 0x18_u8, 0xda_u8, 0xb8_u8, 0x10_u8, 0x14_u8, 0x0_u8, 0x52_u8])
     def query_interface(this : ID2D1EffectContext2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

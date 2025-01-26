@@ -6,187 +6,187 @@ require "./../system/io.cr"
 require "./../system/registry.cr"
 
 module Win32cr::Devices::Fax
-  alias PFAXCONNECTFAXSERVERA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::HANDLE*, Win32cr::Foundation::BOOL)*
+  alias PFAXCONNECTFAXSERVERA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::HANDLE*, Win32cr::Foundation::BOOL)
 
-  alias PFAXCONNECTFAXSERVERW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::HANDLE*, Win32cr::Foundation::BOOL)*
+  alias PFAXCONNECTFAXSERVERW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::HANDLE*, Win32cr::Foundation::BOOL)
 
-  alias PFAXCLOSE = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::BOOL)*
+  alias PFAXCLOSE = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::BOOL)
 
-  alias PFAXOPENPORT = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt32, Win32cr::Foundation::HANDLE*, Win32cr::Foundation::BOOL)*
+  alias PFAXOPENPORT = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt32, Win32cr::Foundation::HANDLE*, Win32cr::Foundation::BOOL)
 
-  alias PFAXCOMPLETEJOBPARAMSA = Proc(Win32cr::Devices::Fax::FAX_JOB_PARAMA**, Win32cr::Devices::Fax::FAX_COVERPAGE_INFOA**, Win32cr::Foundation::BOOL)*
+  alias PFAXCOMPLETEJOBPARAMSA = Proc(Win32cr::Devices::Fax::FAX_JOB_PARAMA**, Win32cr::Devices::Fax::FAX_COVERPAGE_INFOA**, Win32cr::Foundation::BOOL)
 
-  alias PFAXCOMPLETEJOBPARAMSW = Proc(Win32cr::Devices::Fax::FAX_JOB_PARAMW**, Win32cr::Devices::Fax::FAX_COVERPAGE_INFOW**, Win32cr::Foundation::BOOL)*
+  alias PFAXCOMPLETEJOBPARAMSW = Proc(Win32cr::Devices::Fax::FAX_JOB_PARAMW**, Win32cr::Devices::Fax::FAX_COVERPAGE_INFOW**, Win32cr::Foundation::BOOL)
 
-  alias PFAXSENDDOCUMENTA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PSTR, Win32cr::Devices::Fax::FAX_JOB_PARAMA*, Win32cr::Devices::Fax::FAX_COVERPAGE_INFOA*, UInt32*, Win32cr::Foundation::BOOL)*
+  alias PFAXSENDDOCUMENTA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PSTR, Win32cr::Devices::Fax::FAX_JOB_PARAMA*, Win32cr::Devices::Fax::FAX_COVERPAGE_INFOA*, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFAXSENDDOCUMENTW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, Win32cr::Devices::Fax::FAX_JOB_PARAMW*, Win32cr::Devices::Fax::FAX_COVERPAGE_INFOW*, UInt32*, Win32cr::Foundation::BOOL)*
+  alias PFAXSENDDOCUMENTW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, Win32cr::Devices::Fax::FAX_JOB_PARAMW*, Win32cr::Devices::Fax::FAX_COVERPAGE_INFOW*, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFAX_RECIPIENT_CALLBACKA = Proc(Win32cr::Foundation::HANDLE, UInt32, Void*, Win32cr::Devices::Fax::FAX_JOB_PARAMA*, Win32cr::Devices::Fax::FAX_COVERPAGE_INFOA*, Win32cr::Foundation::BOOL)*
+  alias PFAX_RECIPIENT_CALLBACKA = Proc(Win32cr::Foundation::HANDLE, UInt32, Void*, Win32cr::Devices::Fax::FAX_JOB_PARAMA*, Win32cr::Devices::Fax::FAX_COVERPAGE_INFOA*, Win32cr::Foundation::BOOL)
 
-  alias PFAX_RECIPIENT_CALLBACKW = Proc(Win32cr::Foundation::HANDLE, UInt32, Void*, Win32cr::Devices::Fax::FAX_JOB_PARAMW*, Win32cr::Devices::Fax::FAX_COVERPAGE_INFOW*, Win32cr::Foundation::BOOL)*
+  alias PFAX_RECIPIENT_CALLBACKW = Proc(Win32cr::Foundation::HANDLE, UInt32, Void*, Win32cr::Devices::Fax::FAX_JOB_PARAMW*, Win32cr::Devices::Fax::FAX_COVERPAGE_INFOW*, Win32cr::Foundation::BOOL)
 
-  alias PFAXSENDDOCUMENTFORBROADCASTA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PSTR, UInt32*, Win32cr::Devices::Fax::PFAX_RECIPIENT_CALLBACKA, Void*, Win32cr::Foundation::BOOL)*
+  alias PFAXSENDDOCUMENTFORBROADCASTA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PSTR, UInt32*, Win32cr::Devices::Fax::PFAX_RECIPIENT_CALLBACKA, Void*, Win32cr::Foundation::BOOL)
 
-  alias PFAXSENDDOCUMENTFORBROADCASTW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Devices::Fax::PFAX_RECIPIENT_CALLBACKW, Void*, Win32cr::Foundation::BOOL)*
+  alias PFAXSENDDOCUMENTFORBROADCASTW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Devices::Fax::PFAX_RECIPIENT_CALLBACKW, Void*, Win32cr::Foundation::BOOL)
 
-  alias PFAXENUMJOBSA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_JOB_ENTRYA**, UInt32*, Win32cr::Foundation::BOOL)*
+  alias PFAXENUMJOBSA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_JOB_ENTRYA**, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFAXENUMJOBSW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_JOB_ENTRYW**, UInt32*, Win32cr::Foundation::BOOL)*
+  alias PFAXENUMJOBSW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_JOB_ENTRYW**, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFAXGETJOBA = Proc(Win32cr::Foundation::HANDLE, UInt32, Win32cr::Devices::Fax::FAX_JOB_ENTRYA**, Win32cr::Foundation::BOOL)*
+  alias PFAXGETJOBA = Proc(Win32cr::Foundation::HANDLE, UInt32, Win32cr::Devices::Fax::FAX_JOB_ENTRYA**, Win32cr::Foundation::BOOL)
 
-  alias PFAXGETJOBW = Proc(Win32cr::Foundation::HANDLE, UInt32, Win32cr::Devices::Fax::FAX_JOB_ENTRYW**, Win32cr::Foundation::BOOL)*
+  alias PFAXGETJOBW = Proc(Win32cr::Foundation::HANDLE, UInt32, Win32cr::Devices::Fax::FAX_JOB_ENTRYW**, Win32cr::Foundation::BOOL)
 
-  alias PFAXSETJOBA = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt32, Win32cr::Devices::Fax::FAX_JOB_ENTRYA*, Win32cr::Foundation::BOOL)*
+  alias PFAXSETJOBA = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt32, Win32cr::Devices::Fax::FAX_JOB_ENTRYA*, Win32cr::Foundation::BOOL)
 
-  alias PFAXSETJOBW = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt32, Win32cr::Devices::Fax::FAX_JOB_ENTRYW*, Win32cr::Foundation::BOOL)*
+  alias PFAXSETJOBW = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt32, Win32cr::Devices::Fax::FAX_JOB_ENTRYW*, Win32cr::Foundation::BOOL)
 
-  alias PFAXGETPAGEDATA = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt8**, UInt32*, UInt32*, UInt32*, Win32cr::Foundation::BOOL)*
+  alias PFAXGETPAGEDATA = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt8**, UInt32*, UInt32*, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFAXGETDEVICESTATUSA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_DEVICE_STATUSA**, Win32cr::Foundation::BOOL)*
+  alias PFAXGETDEVICESTATUSA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_DEVICE_STATUSA**, Win32cr::Foundation::BOOL)
 
-  alias PFAXGETDEVICESTATUSW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_DEVICE_STATUSW**, Win32cr::Foundation::BOOL)*
+  alias PFAXGETDEVICESTATUSW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_DEVICE_STATUSW**, Win32cr::Foundation::BOOL)
 
-  alias PFAXABORT = Proc(Win32cr::Foundation::HANDLE, UInt32, Win32cr::Foundation::BOOL)*
+  alias PFAXABORT = Proc(Win32cr::Foundation::HANDLE, UInt32, Win32cr::Foundation::BOOL)
 
-  alias PFAXGETCONFIGURATIONA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_CONFIGURATIONA**, Win32cr::Foundation::BOOL)*
+  alias PFAXGETCONFIGURATIONA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_CONFIGURATIONA**, Win32cr::Foundation::BOOL)
 
-  alias PFAXGETCONFIGURATIONW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_CONFIGURATIONW**, Win32cr::Foundation::BOOL)*
+  alias PFAXGETCONFIGURATIONW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_CONFIGURATIONW**, Win32cr::Foundation::BOOL)
 
-  alias PFAXSETCONFIGURATIONA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_CONFIGURATIONA*, Win32cr::Foundation::BOOL)*
+  alias PFAXSETCONFIGURATIONA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_CONFIGURATIONA*, Win32cr::Foundation::BOOL)
 
-  alias PFAXSETCONFIGURATIONW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_CONFIGURATIONW*, Win32cr::Foundation::BOOL)*
+  alias PFAXSETCONFIGURATIONW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_CONFIGURATIONW*, Win32cr::Foundation::BOOL)
 
-  alias PFAXGETLOGGINGCATEGORIESA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_LOG_CATEGORYA**, UInt32*, Win32cr::Foundation::BOOL)*
+  alias PFAXGETLOGGINGCATEGORIESA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_LOG_CATEGORYA**, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFAXGETLOGGINGCATEGORIESW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_LOG_CATEGORYW**, UInt32*, Win32cr::Foundation::BOOL)*
+  alias PFAXGETLOGGINGCATEGORIESW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_LOG_CATEGORYW**, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFAXSETLOGGINGCATEGORIESA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_LOG_CATEGORYA*, UInt32, Win32cr::Foundation::BOOL)*
+  alias PFAXSETLOGGINGCATEGORIESA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_LOG_CATEGORYA*, UInt32, Win32cr::Foundation::BOOL)
 
-  alias PFAXSETLOGGINGCATEGORIESW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_LOG_CATEGORYW*, UInt32, Win32cr::Foundation::BOOL)*
+  alias PFAXSETLOGGINGCATEGORIESW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_LOG_CATEGORYW*, UInt32, Win32cr::Foundation::BOOL)
 
-  alias PFAXENUMPORTSA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_PORT_INFOA**, UInt32*, Win32cr::Foundation::BOOL)*
+  alias PFAXENUMPORTSA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_PORT_INFOA**, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFAXENUMPORTSW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_PORT_INFOW**, UInt32*, Win32cr::Foundation::BOOL)*
+  alias PFAXENUMPORTSW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_PORT_INFOW**, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFAXGETPORTA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_PORT_INFOA**, Win32cr::Foundation::BOOL)*
+  alias PFAXGETPORTA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_PORT_INFOA**, Win32cr::Foundation::BOOL)
 
-  alias PFAXGETPORTW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_PORT_INFOW**, Win32cr::Foundation::BOOL)*
+  alias PFAXGETPORTW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_PORT_INFOW**, Win32cr::Foundation::BOOL)
 
-  alias PFAXSETPORTA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_PORT_INFOA*, Win32cr::Foundation::BOOL)*
+  alias PFAXSETPORTA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_PORT_INFOA*, Win32cr::Foundation::BOOL)
 
-  alias PFAXSETPORTW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_PORT_INFOW*, Win32cr::Foundation::BOOL)*
+  alias PFAXSETPORTW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_PORT_INFOW*, Win32cr::Foundation::BOOL)
 
-  alias PFAXENUMROUTINGMETHODSA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_ROUTING_METHODA**, UInt32*, Win32cr::Foundation::BOOL)*
+  alias PFAXENUMROUTINGMETHODSA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_ROUTING_METHODA**, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFAXENUMROUTINGMETHODSW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_ROUTING_METHODW**, UInt32*, Win32cr::Foundation::BOOL)*
+  alias PFAXENUMROUTINGMETHODSW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_ROUTING_METHODW**, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFAXENABLEROUTINGMETHODA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL)*
+  alias PFAXENABLEROUTINGMETHODA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL)
 
-  alias PFAXENABLEROUTINGMETHODW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL)*
+  alias PFAXENABLEROUTINGMETHODW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL)
 
-  alias PFAXENUMGLOBALROUTINGINFOA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_GLOBAL_ROUTING_INFOA**, UInt32*, Win32cr::Foundation::BOOL)*
+  alias PFAXENUMGLOBALROUTINGINFOA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_GLOBAL_ROUTING_INFOA**, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFAXENUMGLOBALROUTINGINFOW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_GLOBAL_ROUTING_INFOW**, UInt32*, Win32cr::Foundation::BOOL)*
+  alias PFAXENUMGLOBALROUTINGINFOW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_GLOBAL_ROUTING_INFOW**, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFAXSETGLOBALROUTINGINFOA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_GLOBAL_ROUTING_INFOA*, Win32cr::Foundation::BOOL)*
+  alias PFAXSETGLOBALROUTINGINFOA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_GLOBAL_ROUTING_INFOA*, Win32cr::Foundation::BOOL)
 
-  alias PFAXSETGLOBALROUTINGINFOW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_GLOBAL_ROUTING_INFOW*, Win32cr::Foundation::BOOL)*
+  alias PFAXSETGLOBALROUTINGINFOW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_GLOBAL_ROUTING_INFOW*, Win32cr::Foundation::BOOL)
 
-  alias PFAXGETROUTINGINFOA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PSTR, UInt8**, UInt32*, Win32cr::Foundation::BOOL)*
+  alias PFAXGETROUTINGINFOA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PSTR, UInt8**, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFAXGETROUTINGINFOW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, UInt8**, UInt32*, Win32cr::Foundation::BOOL)*
+  alias PFAXGETROUTINGINFOW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, UInt8**, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFAXSETROUTINGINFOA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PSTR, UInt8*, UInt32, Win32cr::Foundation::BOOL)*
+  alias PFAXSETROUTINGINFOA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PSTR, UInt8*, UInt32, Win32cr::Foundation::BOOL)
 
-  alias PFAXSETROUTINGINFOW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, UInt8*, UInt32, Win32cr::Foundation::BOOL)*
+  alias PFAXSETROUTINGINFOW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, UInt8*, UInt32, Win32cr::Foundation::BOOL)
 
-  alias PFAXINITIALIZEEVENTQUEUE = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, LibC::UIntPtrT, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::BOOL)*
+  alias PFAXINITIALIZEEVENTQUEUE = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, LibC::UIntPtrT, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::BOOL)
 
-  alias PFAXFREEBUFFER = Proc(Void*, Void)*
+  alias PFAXFREEBUFFER = Proc(Void*, Void)
 
-  alias PFAXSTARTPRINTJOBA = Proc(Win32cr::Foundation::PSTR, Win32cr::Devices::Fax::FAX_PRINT_INFOA*, UInt32*, Win32cr::Devices::Fax::FAX_CONTEXT_INFOA*, Win32cr::Foundation::BOOL)*
+  alias PFAXSTARTPRINTJOBA = Proc(Win32cr::Foundation::PSTR, Win32cr::Devices::Fax::FAX_PRINT_INFOA*, UInt32*, Win32cr::Devices::Fax::FAX_CONTEXT_INFOA*, Win32cr::Foundation::BOOL)
 
-  alias PFAXSTARTPRINTJOBW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Devices::Fax::FAX_PRINT_INFOW*, UInt32*, Win32cr::Devices::Fax::FAX_CONTEXT_INFOW*, Win32cr::Foundation::BOOL)*
+  alias PFAXSTARTPRINTJOBW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Devices::Fax::FAX_PRINT_INFOW*, UInt32*, Win32cr::Devices::Fax::FAX_CONTEXT_INFOW*, Win32cr::Foundation::BOOL)
 
-  alias PFAXPRINTCOVERPAGEA = Proc(Win32cr::Devices::Fax::FAX_CONTEXT_INFOA*, Win32cr::Devices::Fax::FAX_COVERPAGE_INFOA*, Win32cr::Foundation::BOOL)*
+  alias PFAXPRINTCOVERPAGEA = Proc(Win32cr::Devices::Fax::FAX_CONTEXT_INFOA*, Win32cr::Devices::Fax::FAX_COVERPAGE_INFOA*, Win32cr::Foundation::BOOL)
 
-  alias PFAXPRINTCOVERPAGEW = Proc(Win32cr::Devices::Fax::FAX_CONTEXT_INFOW*, Win32cr::Devices::Fax::FAX_COVERPAGE_INFOW*, Win32cr::Foundation::BOOL)*
+  alias PFAXPRINTCOVERPAGEW = Proc(Win32cr::Devices::Fax::FAX_CONTEXT_INFOW*, Win32cr::Devices::Fax::FAX_COVERPAGE_INFOW*, Win32cr::Foundation::BOOL)
 
-  alias PFAXREGISTERSERVICEPROVIDERW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)*
+  alias PFAXREGISTERSERVICEPROVIDERW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)
 
-  alias PFAXUNREGISTERSERVICEPROVIDERW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)*
+  alias PFAXUNREGISTERSERVICEPROVIDERW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)
 
-  alias PFAX_ROUTING_INSTALLATION_CALLBACKW = Proc(Win32cr::Foundation::HANDLE, Void*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)*
+  alias PFAX_ROUTING_INSTALLATION_CALLBACKW = Proc(Win32cr::Foundation::HANDLE, Void*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)
 
-  alias PFAXREGISTERROUTINGEXTENSIONW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Devices::Fax::PFAX_ROUTING_INSTALLATION_CALLBACKW, Void*, Win32cr::Foundation::BOOL)*
+  alias PFAXREGISTERROUTINGEXTENSIONW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Devices::Fax::PFAX_ROUTING_INSTALLATION_CALLBACKW, Void*, Win32cr::Foundation::BOOL)
 
-  alias PFAXACCESSCHECK = Proc(Win32cr::Foundation::HANDLE, UInt32, Win32cr::Foundation::BOOL)*
+  alias PFAXACCESSCHECK = Proc(Win32cr::Foundation::HANDLE, UInt32, Win32cr::Foundation::BOOL)
 
-  alias PFAX_SERVICE_CALLBACK = Proc(Win32cr::Foundation::HANDLE, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Win32cr::Foundation::BOOL)*
+  alias PFAX_SERVICE_CALLBACK = Proc(Win32cr::Foundation::HANDLE, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Win32cr::Foundation::BOOL)
 
-  alias PFAX_LINECALLBACK = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)*
+  alias PFAX_LINECALLBACK = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)
 
-  alias PFAX_SEND_CALLBACK = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt32, UInt32, Win32cr::Foundation::BOOL)*
+  alias PFAX_SEND_CALLBACK = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt32, UInt32, Win32cr::Foundation::BOOL)
 
-  alias PFAXDEVINITIALIZE = Proc(UInt32, Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::PFAX_LINECALLBACK*, Win32cr::Devices::Fax::PFAX_SERVICE_CALLBACK, Win32cr::Foundation::BOOL)*
+  alias PFAXDEVINITIALIZE = Proc(UInt32, Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::PFAX_LINECALLBACK*, Win32cr::Devices::Fax::PFAX_SERVICE_CALLBACK, Win32cr::Foundation::BOOL)
 
-  alias PFAXDEVVIRTUALDEVICECREATION = Proc(UInt32*, UInt16*, UInt32*, Win32cr::Foundation::HANDLE, LibC::UIntPtrT, Win32cr::Foundation::BOOL)*
+  alias PFAXDEVVIRTUALDEVICECREATION = Proc(UInt32*, UInt16*, UInt32*, Win32cr::Foundation::HANDLE, LibC::UIntPtrT, Win32cr::Foundation::BOOL)
 
-  alias PFAXDEVSTARTJOB = Proc(UInt32, UInt32, Win32cr::Foundation::HANDLE*, Win32cr::Foundation::HANDLE, LibC::UIntPtrT, Win32cr::Foundation::BOOL)*
+  alias PFAXDEVSTARTJOB = Proc(UInt32, UInt32, Win32cr::Foundation::HANDLE*, Win32cr::Foundation::HANDLE, LibC::UIntPtrT, Win32cr::Foundation::BOOL)
 
-  alias PFAXDEVENDJOB = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::BOOL)*
+  alias PFAXDEVENDJOB = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::BOOL)
 
-  alias PFAXDEVSEND = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_SEND*, Win32cr::Devices::Fax::PFAX_SEND_CALLBACK, Win32cr::Foundation::BOOL)*
+  alias PFAXDEVSEND = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_SEND*, Win32cr::Devices::Fax::PFAX_SEND_CALLBACK, Win32cr::Foundation::BOOL)
 
-  alias PFAXDEVRECEIVE = Proc(Win32cr::Foundation::HANDLE, UInt32, Win32cr::Devices::Fax::FAX_RECEIVE*, Win32cr::Foundation::BOOL)*
+  alias PFAXDEVRECEIVE = Proc(Win32cr::Foundation::HANDLE, UInt32, Win32cr::Devices::Fax::FAX_RECEIVE*, Win32cr::Foundation::BOOL)
 
-  alias PFAXDEVREPORTSTATUS = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_DEV_STATUS*, UInt32, UInt32*, Win32cr::Foundation::BOOL)*
+  alias PFAXDEVREPORTSTATUS = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_DEV_STATUS*, UInt32, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFAXDEVABORTOPERATION = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::BOOL)*
+  alias PFAXDEVABORTOPERATION = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::BOOL)
 
-  alias PFAXDEVCONFIGURE = Proc(Win32cr::UI::Controls::HPROPSHEETPAGE*, Win32cr::Foundation::BOOL)*
+  alias PFAXDEVCONFIGURE = Proc(Win32cr::UI::Controls::HPROPSHEETPAGE*, Win32cr::Foundation::BOOL)
 
-  alias PFAXDEVSHUTDOWN = Proc(Win32cr::Foundation::HRESULT)*
+  alias PFAXDEVSHUTDOWN = Proc(Win32cr::Foundation::HRESULT)
 
-  alias PFAXROUTEADDFILE = Proc(UInt32, Win32cr::Foundation::PWSTR, LibC::GUID*, Int32)*
+  alias PFAXROUTEADDFILE = Proc(UInt32, Win32cr::Foundation::PWSTR, LibC::GUID*, Int32)
 
-  alias PFAXROUTEDELETEFILE = Proc(UInt32, Win32cr::Foundation::PWSTR, Int32)*
+  alias PFAXROUTEDELETEFILE = Proc(UInt32, Win32cr::Foundation::PWSTR, Int32)
 
-  alias PFAXROUTEGETFILE = Proc(UInt32, UInt32, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::BOOL)*
+  alias PFAXROUTEGETFILE = Proc(UInt32, UInt32, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFAXROUTEENUMFILE = Proc(UInt32, LibC::GUID*, LibC::GUID*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::BOOL)*
+  alias PFAXROUTEENUMFILE = Proc(UInt32, LibC::GUID*, LibC::GUID*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::BOOL)
 
-  alias PFAXROUTEENUMFILES = Proc(UInt32, LibC::GUID*, Win32cr::Devices::Fax::PFAXROUTEENUMFILE, Void*, Win32cr::Foundation::BOOL)*
+  alias PFAXROUTEENUMFILES = Proc(UInt32, LibC::GUID*, Win32cr::Devices::Fax::PFAXROUTEENUMFILE, Void*, Win32cr::Foundation::BOOL)
 
-  alias PFAXROUTEMODIFYROUTINGDATA = Proc(UInt32, Win32cr::Foundation::PWSTR, UInt8*, UInt32, Win32cr::Foundation::BOOL)*
+  alias PFAXROUTEMODIFYROUTINGDATA = Proc(UInt32, Win32cr::Foundation::PWSTR, UInt8*, UInt32, Win32cr::Foundation::BOOL)
 
-  alias PFAXROUTEINITIALIZE = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_ROUTE_CALLBACKROUTINES*, Win32cr::Foundation::BOOL)*
+  alias PFAXROUTEINITIALIZE = Proc(Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::FAX_ROUTE_CALLBACKROUTINES*, Win32cr::Foundation::BOOL)
 
-  alias PFAXROUTEMETHOD = Proc(Win32cr::Devices::Fax::FAX_ROUTE*, Void**, UInt32*, Win32cr::Foundation::BOOL)*
+  alias PFAXROUTEMETHOD = Proc(Win32cr::Devices::Fax::FAX_ROUTE*, Void**, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFAXROUTEDEVICEENABLE = Proc(Win32cr::Foundation::PWSTR, UInt32, Int32, Win32cr::Foundation::BOOL)*
+  alias PFAXROUTEDEVICEENABLE = Proc(Win32cr::Foundation::PWSTR, UInt32, Int32, Win32cr::Foundation::BOOL)
 
-  alias PFAXROUTEDEVICECHANGENOTIFICATION = Proc(UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL)*
+  alias PFAXROUTEDEVICECHANGENOTIFICATION = Proc(UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL)
 
-  alias PFAXROUTEGETROUTINGINFO = Proc(Win32cr::Foundation::PWSTR, UInt32, UInt8*, UInt32*, Win32cr::Foundation::BOOL)*
+  alias PFAXROUTEGETROUTINGINFO = Proc(Win32cr::Foundation::PWSTR, UInt32, UInt8*, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFAXROUTESETROUTINGINFO = Proc(Win32cr::Foundation::PWSTR, UInt32, UInt8*, UInt32, Win32cr::Foundation::BOOL)*
+  alias PFAXROUTESETROUTINGINFO = Proc(Win32cr::Foundation::PWSTR, UInt32, UInt8*, UInt32, Win32cr::Foundation::BOOL)
 
-  alias PFAX_EXT_GET_DATA = Proc(UInt32, Win32cr::Devices::Fax::FAX_ENUM_DEVICE_ID_SOURCE, Win32cr::Foundation::PWSTR, UInt8**, UInt32*, UInt32)*
+  alias PFAX_EXT_GET_DATA = Proc(UInt32, Win32cr::Devices::Fax::FAX_ENUM_DEVICE_ID_SOURCE, Win32cr::Foundation::PWSTR, UInt8**, UInt32*, UInt32)
 
-  alias PFAX_EXT_SET_DATA = Proc(Win32cr::Foundation::HINSTANCE, UInt32, Win32cr::Devices::Fax::FAX_ENUM_DEVICE_ID_SOURCE, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt32)*
+  alias PFAX_EXT_SET_DATA = Proc(Win32cr::Foundation::HINSTANCE, UInt32, Win32cr::Devices::Fax::FAX_ENUM_DEVICE_ID_SOURCE, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt32)
 
-  alias PFAX_EXT_CONFIG_CHANGE = Proc(UInt32, Win32cr::Foundation::PWSTR, UInt8*, UInt32, Win32cr::Foundation::HRESULT)*
+  alias PFAX_EXT_CONFIG_CHANGE = Proc(UInt32, Win32cr::Foundation::PWSTR, UInt8*, UInt32, Win32cr::Foundation::HRESULT)
 
-  alias PFAX_EXT_REGISTER_FOR_EVENTS = Proc(Win32cr::Foundation::HINSTANCE, UInt32, Win32cr::Devices::Fax::FAX_ENUM_DEVICE_ID_SOURCE, Win32cr::Foundation::PWSTR, Win32cr::Devices::Fax::PFAX_EXT_CONFIG_CHANGE, Win32cr::Foundation::HANDLE)*
+  alias PFAX_EXT_REGISTER_FOR_EVENTS = Proc(Win32cr::Foundation::HINSTANCE, UInt32, Win32cr::Devices::Fax::FAX_ENUM_DEVICE_ID_SOURCE, Win32cr::Foundation::PWSTR, Win32cr::Devices::Fax::PFAX_EXT_CONFIG_CHANGE, Win32cr::Foundation::HANDLE)
 
-  alias PFAX_EXT_UNREGISTER_FOR_EVENTS = Proc(Win32cr::Foundation::HANDLE, UInt32)*
+  alias PFAX_EXT_UNREGISTER_FOR_EVENTS = Proc(Win32cr::Foundation::HANDLE, UInt32)
 
-  alias PFAX_EXT_FREE_BUFFER = Proc(Void*, Void)*
+  alias PFAX_EXT_FREE_BUFFER = Proc(Void*, Void)
 
-  alias PFAX_EXT_INITIALIZE_CONFIG = Proc(Win32cr::Devices::Fax::PFAX_EXT_GET_DATA, Win32cr::Devices::Fax::PFAX_EXT_SET_DATA, Win32cr::Devices::Fax::PFAX_EXT_REGISTER_FOR_EVENTS, Win32cr::Devices::Fax::PFAX_EXT_UNREGISTER_FOR_EVENTS, Win32cr::Devices::Fax::PFAX_EXT_FREE_BUFFER, Win32cr::Foundation::HRESULT)*
+  alias PFAX_EXT_INITIALIZE_CONFIG = Proc(Win32cr::Devices::Fax::PFAX_EXT_GET_DATA, Win32cr::Devices::Fax::PFAX_EXT_SET_DATA, Win32cr::Devices::Fax::PFAX_EXT_REGISTER_FOR_EVENTS, Win32cr::Devices::Fax::PFAX_EXT_UNREGISTER_FOR_EVENTS, Win32cr::Devices::Fax::PFAX_EXT_FREE_BUFFER, Win32cr::Foundation::HRESULT)
 
   Prv_default_prefetch_size = 100_u32
   FS_INITIALIZING = 536870912_u32
@@ -768,504 +768,621 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record FAX_LOG_CATEGORYA,
-    name : Win32cr::Foundation::PSTR,
-    category : UInt32,
-    level : UInt32
+  struct FAX_LOG_CATEGORYA
+    property name : Win32cr::Foundation::PSTR
+    property category : UInt32
+    property level : UInt32
+    def initialize(@name : Win32cr::Foundation::PSTR, @category : UInt32, @level : UInt32)
+    end
+  end
 
   @[Extern]
-  record FAX_LOG_CATEGORYW,
-    name : Win32cr::Foundation::PWSTR,
-    category : UInt32,
-    level : UInt32
+  struct FAX_LOG_CATEGORYW
+    property name : Win32cr::Foundation::PWSTR
+    property category : UInt32
+    property level : UInt32
+    def initialize(@name : Win32cr::Foundation::PWSTR, @category : UInt32, @level : UInt32)
+    end
+  end
 
   @[Extern]
-  record FAX_TIME,
-    hour : UInt16,
-    minute : UInt16
+  struct FAX_TIME
+    property hour : UInt16
+    property minute : UInt16
+    def initialize(@hour : UInt16, @minute : UInt16)
+    end
+  end
 
   @[Extern]
-  record FAX_CONFIGURATIONA,
-    size_of_struct : UInt32,
-    retries : UInt32,
-    retry_delay : UInt32,
-    dirty_days : UInt32,
-    branding : Win32cr::Foundation::BOOL,
-    use_device_tsid : Win32cr::Foundation::BOOL,
-    server_cp : Win32cr::Foundation::BOOL,
-    pause_server_queue : Win32cr::Foundation::BOOL,
-    start_cheap_time : Win32cr::Devices::Fax::FAX_TIME,
-    stop_cheap_time : Win32cr::Devices::Fax::FAX_TIME,
-    archive_outgoing_faxes : Win32cr::Foundation::BOOL,
-    archive_directory : Win32cr::Foundation::PSTR,
-    reserved : Win32cr::Foundation::PSTR
+  struct FAX_CONFIGURATIONA
+    property size_of_struct : UInt32
+    property retries : UInt32
+    property retry_delay : UInt32
+    property dirty_days : UInt32
+    property branding : Win32cr::Foundation::BOOL
+    property use_device_tsid : Win32cr::Foundation::BOOL
+    property server_cp : Win32cr::Foundation::BOOL
+    property pause_server_queue : Win32cr::Foundation::BOOL
+    property start_cheap_time : Win32cr::Devices::Fax::FAX_TIME
+    property stop_cheap_time : Win32cr::Devices::Fax::FAX_TIME
+    property archive_outgoing_faxes : Win32cr::Foundation::BOOL
+    property archive_directory : Win32cr::Foundation::PSTR
+    property reserved : Win32cr::Foundation::PSTR
+    def initialize(@size_of_struct : UInt32, @retries : UInt32, @retry_delay : UInt32, @dirty_days : UInt32, @branding : Win32cr::Foundation::BOOL, @use_device_tsid : Win32cr::Foundation::BOOL, @server_cp : Win32cr::Foundation::BOOL, @pause_server_queue : Win32cr::Foundation::BOOL, @start_cheap_time : Win32cr::Devices::Fax::FAX_TIME, @stop_cheap_time : Win32cr::Devices::Fax::FAX_TIME, @archive_outgoing_faxes : Win32cr::Foundation::BOOL, @archive_directory : Win32cr::Foundation::PSTR, @reserved : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record FAX_CONFIGURATIONW,
-    size_of_struct : UInt32,
-    retries : UInt32,
-    retry_delay : UInt32,
-    dirty_days : UInt32,
-    branding : Win32cr::Foundation::BOOL,
-    use_device_tsid : Win32cr::Foundation::BOOL,
-    server_cp : Win32cr::Foundation::BOOL,
-    pause_server_queue : Win32cr::Foundation::BOOL,
-    start_cheap_time : Win32cr::Devices::Fax::FAX_TIME,
-    stop_cheap_time : Win32cr::Devices::Fax::FAX_TIME,
-    archive_outgoing_faxes : Win32cr::Foundation::BOOL,
-    archive_directory : Win32cr::Foundation::PWSTR,
-    reserved : Win32cr::Foundation::PWSTR
+  struct FAX_CONFIGURATIONW
+    property size_of_struct : UInt32
+    property retries : UInt32
+    property retry_delay : UInt32
+    property dirty_days : UInt32
+    property branding : Win32cr::Foundation::BOOL
+    property use_device_tsid : Win32cr::Foundation::BOOL
+    property server_cp : Win32cr::Foundation::BOOL
+    property pause_server_queue : Win32cr::Foundation::BOOL
+    property start_cheap_time : Win32cr::Devices::Fax::FAX_TIME
+    property stop_cheap_time : Win32cr::Devices::Fax::FAX_TIME
+    property archive_outgoing_faxes : Win32cr::Foundation::BOOL
+    property archive_directory : Win32cr::Foundation::PWSTR
+    property reserved : Win32cr::Foundation::PWSTR
+    def initialize(@size_of_struct : UInt32, @retries : UInt32, @retry_delay : UInt32, @dirty_days : UInt32, @branding : Win32cr::Foundation::BOOL, @use_device_tsid : Win32cr::Foundation::BOOL, @server_cp : Win32cr::Foundation::BOOL, @pause_server_queue : Win32cr::Foundation::BOOL, @start_cheap_time : Win32cr::Devices::Fax::FAX_TIME, @stop_cheap_time : Win32cr::Devices::Fax::FAX_TIME, @archive_outgoing_faxes : Win32cr::Foundation::BOOL, @archive_directory : Win32cr::Foundation::PWSTR, @reserved : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record FAX_DEVICE_STATUSA,
-    size_of_struct : UInt32,
-    caller_id : Win32cr::Foundation::PSTR,
-    csid : Win32cr::Foundation::PSTR,
-    current_page : UInt32,
-    device_id : UInt32,
-    device_name : Win32cr::Foundation::PSTR,
-    document_name : Win32cr::Foundation::PSTR,
-    job_type : UInt32,
-    phone_number : Win32cr::Foundation::PSTR,
-    routing_string : Win32cr::Foundation::PSTR,
-    sender_name : Win32cr::Foundation::PSTR,
-    recipient_name : Win32cr::Foundation::PSTR,
-    size : UInt32,
-    start_time : Win32cr::Foundation::FILETIME,
-    status : UInt32,
-    status_string : Win32cr::Foundation::PSTR,
-    submitted_time : Win32cr::Foundation::FILETIME,
-    total_pages : UInt32,
-    tsid : Win32cr::Foundation::PSTR,
-    user_name : Win32cr::Foundation::PSTR
+  struct FAX_DEVICE_STATUSA
+    property size_of_struct : UInt32
+    property caller_id : Win32cr::Foundation::PSTR
+    property csid : Win32cr::Foundation::PSTR
+    property current_page : UInt32
+    property device_id : UInt32
+    property device_name : Win32cr::Foundation::PSTR
+    property document_name : Win32cr::Foundation::PSTR
+    property job_type : UInt32
+    property phone_number : Win32cr::Foundation::PSTR
+    property routing_string : Win32cr::Foundation::PSTR
+    property sender_name : Win32cr::Foundation::PSTR
+    property recipient_name : Win32cr::Foundation::PSTR
+    property size : UInt32
+    property start_time : Win32cr::Foundation::FILETIME
+    property status : UInt32
+    property status_string : Win32cr::Foundation::PSTR
+    property submitted_time : Win32cr::Foundation::FILETIME
+    property total_pages : UInt32
+    property tsid : Win32cr::Foundation::PSTR
+    property user_name : Win32cr::Foundation::PSTR
+    def initialize(@size_of_struct : UInt32, @caller_id : Win32cr::Foundation::PSTR, @csid : Win32cr::Foundation::PSTR, @current_page : UInt32, @device_id : UInt32, @device_name : Win32cr::Foundation::PSTR, @document_name : Win32cr::Foundation::PSTR, @job_type : UInt32, @phone_number : Win32cr::Foundation::PSTR, @routing_string : Win32cr::Foundation::PSTR, @sender_name : Win32cr::Foundation::PSTR, @recipient_name : Win32cr::Foundation::PSTR, @size : UInt32, @start_time : Win32cr::Foundation::FILETIME, @status : UInt32, @status_string : Win32cr::Foundation::PSTR, @submitted_time : Win32cr::Foundation::FILETIME, @total_pages : UInt32, @tsid : Win32cr::Foundation::PSTR, @user_name : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record FAX_DEVICE_STATUSW,
-    size_of_struct : UInt32,
-    caller_id : Win32cr::Foundation::PWSTR,
-    csid : Win32cr::Foundation::PWSTR,
-    current_page : UInt32,
-    device_id : UInt32,
-    device_name : Win32cr::Foundation::PWSTR,
-    document_name : Win32cr::Foundation::PWSTR,
-    job_type : UInt32,
-    phone_number : Win32cr::Foundation::PWSTR,
-    routing_string : Win32cr::Foundation::PWSTR,
-    sender_name : Win32cr::Foundation::PWSTR,
-    recipient_name : Win32cr::Foundation::PWSTR,
-    size : UInt32,
-    start_time : Win32cr::Foundation::FILETIME,
-    status : UInt32,
-    status_string : Win32cr::Foundation::PWSTR,
-    submitted_time : Win32cr::Foundation::FILETIME,
-    total_pages : UInt32,
-    tsid : Win32cr::Foundation::PWSTR,
-    user_name : Win32cr::Foundation::PWSTR
+  struct FAX_DEVICE_STATUSW
+    property size_of_struct : UInt32
+    property caller_id : Win32cr::Foundation::PWSTR
+    property csid : Win32cr::Foundation::PWSTR
+    property current_page : UInt32
+    property device_id : UInt32
+    property device_name : Win32cr::Foundation::PWSTR
+    property document_name : Win32cr::Foundation::PWSTR
+    property job_type : UInt32
+    property phone_number : Win32cr::Foundation::PWSTR
+    property routing_string : Win32cr::Foundation::PWSTR
+    property sender_name : Win32cr::Foundation::PWSTR
+    property recipient_name : Win32cr::Foundation::PWSTR
+    property size : UInt32
+    property start_time : Win32cr::Foundation::FILETIME
+    property status : UInt32
+    property status_string : Win32cr::Foundation::PWSTR
+    property submitted_time : Win32cr::Foundation::FILETIME
+    property total_pages : UInt32
+    property tsid : Win32cr::Foundation::PWSTR
+    property user_name : Win32cr::Foundation::PWSTR
+    def initialize(@size_of_struct : UInt32, @caller_id : Win32cr::Foundation::PWSTR, @csid : Win32cr::Foundation::PWSTR, @current_page : UInt32, @device_id : UInt32, @device_name : Win32cr::Foundation::PWSTR, @document_name : Win32cr::Foundation::PWSTR, @job_type : UInt32, @phone_number : Win32cr::Foundation::PWSTR, @routing_string : Win32cr::Foundation::PWSTR, @sender_name : Win32cr::Foundation::PWSTR, @recipient_name : Win32cr::Foundation::PWSTR, @size : UInt32, @start_time : Win32cr::Foundation::FILETIME, @status : UInt32, @status_string : Win32cr::Foundation::PWSTR, @submitted_time : Win32cr::Foundation::FILETIME, @total_pages : UInt32, @tsid : Win32cr::Foundation::PWSTR, @user_name : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record FAX_JOB_ENTRYA,
-    size_of_struct : UInt32,
-    job_id : UInt32,
-    user_name : Win32cr::Foundation::PSTR,
-    job_type : UInt32,
-    queue_status : UInt32,
-    status : UInt32,
-    size : UInt32,
-    page_count : UInt32,
-    recipient_number : Win32cr::Foundation::PSTR,
-    recipient_name : Win32cr::Foundation::PSTR,
-    tsid : Win32cr::Foundation::PSTR,
-    sender_name : Win32cr::Foundation::PSTR,
-    sender_company : Win32cr::Foundation::PSTR,
-    sender_dept : Win32cr::Foundation::PSTR,
-    billing_code : Win32cr::Foundation::PSTR,
-    schedule_action : UInt32,
-    schedule_time : Win32cr::Foundation::SYSTEMTIME,
-    delivery_report_type : UInt32,
-    delivery_report_address : Win32cr::Foundation::PSTR,
-    document_name : Win32cr::Foundation::PSTR
+  struct FAX_JOB_ENTRYA
+    property size_of_struct : UInt32
+    property job_id : UInt32
+    property user_name : Win32cr::Foundation::PSTR
+    property job_type : UInt32
+    property queue_status : UInt32
+    property status : UInt32
+    property size : UInt32
+    property page_count : UInt32
+    property recipient_number : Win32cr::Foundation::PSTR
+    property recipient_name : Win32cr::Foundation::PSTR
+    property tsid : Win32cr::Foundation::PSTR
+    property sender_name : Win32cr::Foundation::PSTR
+    property sender_company : Win32cr::Foundation::PSTR
+    property sender_dept : Win32cr::Foundation::PSTR
+    property billing_code : Win32cr::Foundation::PSTR
+    property schedule_action : UInt32
+    property schedule_time : Win32cr::Foundation::SYSTEMTIME
+    property delivery_report_type : UInt32
+    property delivery_report_address : Win32cr::Foundation::PSTR
+    property document_name : Win32cr::Foundation::PSTR
+    def initialize(@size_of_struct : UInt32, @job_id : UInt32, @user_name : Win32cr::Foundation::PSTR, @job_type : UInt32, @queue_status : UInt32, @status : UInt32, @size : UInt32, @page_count : UInt32, @recipient_number : Win32cr::Foundation::PSTR, @recipient_name : Win32cr::Foundation::PSTR, @tsid : Win32cr::Foundation::PSTR, @sender_name : Win32cr::Foundation::PSTR, @sender_company : Win32cr::Foundation::PSTR, @sender_dept : Win32cr::Foundation::PSTR, @billing_code : Win32cr::Foundation::PSTR, @schedule_action : UInt32, @schedule_time : Win32cr::Foundation::SYSTEMTIME, @delivery_report_type : UInt32, @delivery_report_address : Win32cr::Foundation::PSTR, @document_name : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record FAX_JOB_ENTRYW,
-    size_of_struct : UInt32,
-    job_id : UInt32,
-    user_name : Win32cr::Foundation::PWSTR,
-    job_type : UInt32,
-    queue_status : UInt32,
-    status : UInt32,
-    size : UInt32,
-    page_count : UInt32,
-    recipient_number : Win32cr::Foundation::PWSTR,
-    recipient_name : Win32cr::Foundation::PWSTR,
-    tsid : Win32cr::Foundation::PWSTR,
-    sender_name : Win32cr::Foundation::PWSTR,
-    sender_company : Win32cr::Foundation::PWSTR,
-    sender_dept : Win32cr::Foundation::PWSTR,
-    billing_code : Win32cr::Foundation::PWSTR,
-    schedule_action : UInt32,
-    schedule_time : Win32cr::Foundation::SYSTEMTIME,
-    delivery_report_type : UInt32,
-    delivery_report_address : Win32cr::Foundation::PWSTR,
-    document_name : Win32cr::Foundation::PWSTR
+  struct FAX_JOB_ENTRYW
+    property size_of_struct : UInt32
+    property job_id : UInt32
+    property user_name : Win32cr::Foundation::PWSTR
+    property job_type : UInt32
+    property queue_status : UInt32
+    property status : UInt32
+    property size : UInt32
+    property page_count : UInt32
+    property recipient_number : Win32cr::Foundation::PWSTR
+    property recipient_name : Win32cr::Foundation::PWSTR
+    property tsid : Win32cr::Foundation::PWSTR
+    property sender_name : Win32cr::Foundation::PWSTR
+    property sender_company : Win32cr::Foundation::PWSTR
+    property sender_dept : Win32cr::Foundation::PWSTR
+    property billing_code : Win32cr::Foundation::PWSTR
+    property schedule_action : UInt32
+    property schedule_time : Win32cr::Foundation::SYSTEMTIME
+    property delivery_report_type : UInt32
+    property delivery_report_address : Win32cr::Foundation::PWSTR
+    property document_name : Win32cr::Foundation::PWSTR
+    def initialize(@size_of_struct : UInt32, @job_id : UInt32, @user_name : Win32cr::Foundation::PWSTR, @job_type : UInt32, @queue_status : UInt32, @status : UInt32, @size : UInt32, @page_count : UInt32, @recipient_number : Win32cr::Foundation::PWSTR, @recipient_name : Win32cr::Foundation::PWSTR, @tsid : Win32cr::Foundation::PWSTR, @sender_name : Win32cr::Foundation::PWSTR, @sender_company : Win32cr::Foundation::PWSTR, @sender_dept : Win32cr::Foundation::PWSTR, @billing_code : Win32cr::Foundation::PWSTR, @schedule_action : UInt32, @schedule_time : Win32cr::Foundation::SYSTEMTIME, @delivery_report_type : UInt32, @delivery_report_address : Win32cr::Foundation::PWSTR, @document_name : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record FAX_PORT_INFOA,
-    size_of_struct : UInt32,
-    device_id : UInt32,
-    state : UInt32,
-    flags : UInt32,
-    rings : UInt32,
-    priority : UInt32,
-    device_name : Win32cr::Foundation::PSTR,
-    tsid : Win32cr::Foundation::PSTR,
-    csid : Win32cr::Foundation::PSTR
+  struct FAX_PORT_INFOA
+    property size_of_struct : UInt32
+    property device_id : UInt32
+    property state : UInt32
+    property flags : UInt32
+    property rings : UInt32
+    property priority : UInt32
+    property device_name : Win32cr::Foundation::PSTR
+    property tsid : Win32cr::Foundation::PSTR
+    property csid : Win32cr::Foundation::PSTR
+    def initialize(@size_of_struct : UInt32, @device_id : UInt32, @state : UInt32, @flags : UInt32, @rings : UInt32, @priority : UInt32, @device_name : Win32cr::Foundation::PSTR, @tsid : Win32cr::Foundation::PSTR, @csid : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record FAX_PORT_INFOW,
-    size_of_struct : UInt32,
-    device_id : UInt32,
-    state : UInt32,
-    flags : UInt32,
-    rings : UInt32,
-    priority : UInt32,
-    device_name : Win32cr::Foundation::PWSTR,
-    tsid : Win32cr::Foundation::PWSTR,
-    csid : Win32cr::Foundation::PWSTR
+  struct FAX_PORT_INFOW
+    property size_of_struct : UInt32
+    property device_id : UInt32
+    property state : UInt32
+    property flags : UInt32
+    property rings : UInt32
+    property priority : UInt32
+    property device_name : Win32cr::Foundation::PWSTR
+    property tsid : Win32cr::Foundation::PWSTR
+    property csid : Win32cr::Foundation::PWSTR
+    def initialize(@size_of_struct : UInt32, @device_id : UInt32, @state : UInt32, @flags : UInt32, @rings : UInt32, @priority : UInt32, @device_name : Win32cr::Foundation::PWSTR, @tsid : Win32cr::Foundation::PWSTR, @csid : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record FAX_ROUTING_METHODA,
-    size_of_struct : UInt32,
-    device_id : UInt32,
-    enabled : Win32cr::Foundation::BOOL,
-    device_name : Win32cr::Foundation::PSTR,
-    guid : Win32cr::Foundation::PSTR,
-    friendly_name : Win32cr::Foundation::PSTR,
-    function_name : Win32cr::Foundation::PSTR,
-    extension_image_name : Win32cr::Foundation::PSTR,
-    extension_friendly_name : Win32cr::Foundation::PSTR
+  struct FAX_ROUTING_METHODA
+    property size_of_struct : UInt32
+    property device_id : UInt32
+    property enabled : Win32cr::Foundation::BOOL
+    property device_name : Win32cr::Foundation::PSTR
+    property guid : Win32cr::Foundation::PSTR
+    property friendly_name : Win32cr::Foundation::PSTR
+    property function_name : Win32cr::Foundation::PSTR
+    property extension_image_name : Win32cr::Foundation::PSTR
+    property extension_friendly_name : Win32cr::Foundation::PSTR
+    def initialize(@size_of_struct : UInt32, @device_id : UInt32, @enabled : Win32cr::Foundation::BOOL, @device_name : Win32cr::Foundation::PSTR, @guid : Win32cr::Foundation::PSTR, @friendly_name : Win32cr::Foundation::PSTR, @function_name : Win32cr::Foundation::PSTR, @extension_image_name : Win32cr::Foundation::PSTR, @extension_friendly_name : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record FAX_ROUTING_METHODW,
-    size_of_struct : UInt32,
-    device_id : UInt32,
-    enabled : Win32cr::Foundation::BOOL,
-    device_name : Win32cr::Foundation::PWSTR,
-    guid : Win32cr::Foundation::PWSTR,
-    friendly_name : Win32cr::Foundation::PWSTR,
-    function_name : Win32cr::Foundation::PWSTR,
-    extension_image_name : Win32cr::Foundation::PWSTR,
-    extension_friendly_name : Win32cr::Foundation::PWSTR
+  struct FAX_ROUTING_METHODW
+    property size_of_struct : UInt32
+    property device_id : UInt32
+    property enabled : Win32cr::Foundation::BOOL
+    property device_name : Win32cr::Foundation::PWSTR
+    property guid : Win32cr::Foundation::PWSTR
+    property friendly_name : Win32cr::Foundation::PWSTR
+    property function_name : Win32cr::Foundation::PWSTR
+    property extension_image_name : Win32cr::Foundation::PWSTR
+    property extension_friendly_name : Win32cr::Foundation::PWSTR
+    def initialize(@size_of_struct : UInt32, @device_id : UInt32, @enabled : Win32cr::Foundation::BOOL, @device_name : Win32cr::Foundation::PWSTR, @guid : Win32cr::Foundation::PWSTR, @friendly_name : Win32cr::Foundation::PWSTR, @function_name : Win32cr::Foundation::PWSTR, @extension_image_name : Win32cr::Foundation::PWSTR, @extension_friendly_name : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record FAX_GLOBAL_ROUTING_INFOA,
-    size_of_struct : UInt32,
-    priority : UInt32,
-    guid : Win32cr::Foundation::PSTR,
-    friendly_name : Win32cr::Foundation::PSTR,
-    function_name : Win32cr::Foundation::PSTR,
-    extension_image_name : Win32cr::Foundation::PSTR,
-    extension_friendly_name : Win32cr::Foundation::PSTR
+  struct FAX_GLOBAL_ROUTING_INFOA
+    property size_of_struct : UInt32
+    property priority : UInt32
+    property guid : Win32cr::Foundation::PSTR
+    property friendly_name : Win32cr::Foundation::PSTR
+    property function_name : Win32cr::Foundation::PSTR
+    property extension_image_name : Win32cr::Foundation::PSTR
+    property extension_friendly_name : Win32cr::Foundation::PSTR
+    def initialize(@size_of_struct : UInt32, @priority : UInt32, @guid : Win32cr::Foundation::PSTR, @friendly_name : Win32cr::Foundation::PSTR, @function_name : Win32cr::Foundation::PSTR, @extension_image_name : Win32cr::Foundation::PSTR, @extension_friendly_name : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record FAX_GLOBAL_ROUTING_INFOW,
-    size_of_struct : UInt32,
-    priority : UInt32,
-    guid : Win32cr::Foundation::PWSTR,
-    friendly_name : Win32cr::Foundation::PWSTR,
-    function_name : Win32cr::Foundation::PWSTR,
-    extension_image_name : Win32cr::Foundation::PWSTR,
-    extension_friendly_name : Win32cr::Foundation::PWSTR
+  struct FAX_GLOBAL_ROUTING_INFOW
+    property size_of_struct : UInt32
+    property priority : UInt32
+    property guid : Win32cr::Foundation::PWSTR
+    property friendly_name : Win32cr::Foundation::PWSTR
+    property function_name : Win32cr::Foundation::PWSTR
+    property extension_image_name : Win32cr::Foundation::PWSTR
+    property extension_friendly_name : Win32cr::Foundation::PWSTR
+    def initialize(@size_of_struct : UInt32, @priority : UInt32, @guid : Win32cr::Foundation::PWSTR, @friendly_name : Win32cr::Foundation::PWSTR, @function_name : Win32cr::Foundation::PWSTR, @extension_image_name : Win32cr::Foundation::PWSTR, @extension_friendly_name : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record FAX_COVERPAGE_INFOA,
-    size_of_struct : UInt32,
-    cover_page_name : Win32cr::Foundation::PSTR,
-    use_server_cover_page : Win32cr::Foundation::BOOL,
-    rec_name : Win32cr::Foundation::PSTR,
-    rec_fax_number : Win32cr::Foundation::PSTR,
-    rec_company : Win32cr::Foundation::PSTR,
-    rec_street_address : Win32cr::Foundation::PSTR,
-    rec_city : Win32cr::Foundation::PSTR,
-    rec_state : Win32cr::Foundation::PSTR,
-    rec_zip : Win32cr::Foundation::PSTR,
-    rec_country : Win32cr::Foundation::PSTR,
-    rec_title : Win32cr::Foundation::PSTR,
-    rec_department : Win32cr::Foundation::PSTR,
-    rec_office_location : Win32cr::Foundation::PSTR,
-    rec_home_phone : Win32cr::Foundation::PSTR,
-    rec_office_phone : Win32cr::Foundation::PSTR,
-    sdr_name : Win32cr::Foundation::PSTR,
-    sdr_fax_number : Win32cr::Foundation::PSTR,
-    sdr_company : Win32cr::Foundation::PSTR,
-    sdr_address : Win32cr::Foundation::PSTR,
-    sdr_title : Win32cr::Foundation::PSTR,
-    sdr_department : Win32cr::Foundation::PSTR,
-    sdr_office_location : Win32cr::Foundation::PSTR,
-    sdr_home_phone : Win32cr::Foundation::PSTR,
-    sdr_office_phone : Win32cr::Foundation::PSTR,
-    note : Win32cr::Foundation::PSTR,
-    subject : Win32cr::Foundation::PSTR,
-    time_sent : Win32cr::Foundation::SYSTEMTIME,
-    page_count : UInt32
+  struct FAX_COVERPAGE_INFOA
+    property size_of_struct : UInt32
+    property cover_page_name : Win32cr::Foundation::PSTR
+    property use_server_cover_page : Win32cr::Foundation::BOOL
+    property rec_name : Win32cr::Foundation::PSTR
+    property rec_fax_number : Win32cr::Foundation::PSTR
+    property rec_company : Win32cr::Foundation::PSTR
+    property rec_street_address : Win32cr::Foundation::PSTR
+    property rec_city : Win32cr::Foundation::PSTR
+    property rec_state : Win32cr::Foundation::PSTR
+    property rec_zip : Win32cr::Foundation::PSTR
+    property rec_country : Win32cr::Foundation::PSTR
+    property rec_title : Win32cr::Foundation::PSTR
+    property rec_department : Win32cr::Foundation::PSTR
+    property rec_office_location : Win32cr::Foundation::PSTR
+    property rec_home_phone : Win32cr::Foundation::PSTR
+    property rec_office_phone : Win32cr::Foundation::PSTR
+    property sdr_name : Win32cr::Foundation::PSTR
+    property sdr_fax_number : Win32cr::Foundation::PSTR
+    property sdr_company : Win32cr::Foundation::PSTR
+    property sdr_address : Win32cr::Foundation::PSTR
+    property sdr_title : Win32cr::Foundation::PSTR
+    property sdr_department : Win32cr::Foundation::PSTR
+    property sdr_office_location : Win32cr::Foundation::PSTR
+    property sdr_home_phone : Win32cr::Foundation::PSTR
+    property sdr_office_phone : Win32cr::Foundation::PSTR
+    property note : Win32cr::Foundation::PSTR
+    property subject : Win32cr::Foundation::PSTR
+    property time_sent : Win32cr::Foundation::SYSTEMTIME
+    property page_count : UInt32
+    def initialize(@size_of_struct : UInt32, @cover_page_name : Win32cr::Foundation::PSTR, @use_server_cover_page : Win32cr::Foundation::BOOL, @rec_name : Win32cr::Foundation::PSTR, @rec_fax_number : Win32cr::Foundation::PSTR, @rec_company : Win32cr::Foundation::PSTR, @rec_street_address : Win32cr::Foundation::PSTR, @rec_city : Win32cr::Foundation::PSTR, @rec_state : Win32cr::Foundation::PSTR, @rec_zip : Win32cr::Foundation::PSTR, @rec_country : Win32cr::Foundation::PSTR, @rec_title : Win32cr::Foundation::PSTR, @rec_department : Win32cr::Foundation::PSTR, @rec_office_location : Win32cr::Foundation::PSTR, @rec_home_phone : Win32cr::Foundation::PSTR, @rec_office_phone : Win32cr::Foundation::PSTR, @sdr_name : Win32cr::Foundation::PSTR, @sdr_fax_number : Win32cr::Foundation::PSTR, @sdr_company : Win32cr::Foundation::PSTR, @sdr_address : Win32cr::Foundation::PSTR, @sdr_title : Win32cr::Foundation::PSTR, @sdr_department : Win32cr::Foundation::PSTR, @sdr_office_location : Win32cr::Foundation::PSTR, @sdr_home_phone : Win32cr::Foundation::PSTR, @sdr_office_phone : Win32cr::Foundation::PSTR, @note : Win32cr::Foundation::PSTR, @subject : Win32cr::Foundation::PSTR, @time_sent : Win32cr::Foundation::SYSTEMTIME, @page_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record FAX_COVERPAGE_INFOW,
-    size_of_struct : UInt32,
-    cover_page_name : Win32cr::Foundation::PWSTR,
-    use_server_cover_page : Win32cr::Foundation::BOOL,
-    rec_name : Win32cr::Foundation::PWSTR,
-    rec_fax_number : Win32cr::Foundation::PWSTR,
-    rec_company : Win32cr::Foundation::PWSTR,
-    rec_street_address : Win32cr::Foundation::PWSTR,
-    rec_city : Win32cr::Foundation::PWSTR,
-    rec_state : Win32cr::Foundation::PWSTR,
-    rec_zip : Win32cr::Foundation::PWSTR,
-    rec_country : Win32cr::Foundation::PWSTR,
-    rec_title : Win32cr::Foundation::PWSTR,
-    rec_department : Win32cr::Foundation::PWSTR,
-    rec_office_location : Win32cr::Foundation::PWSTR,
-    rec_home_phone : Win32cr::Foundation::PWSTR,
-    rec_office_phone : Win32cr::Foundation::PWSTR,
-    sdr_name : Win32cr::Foundation::PWSTR,
-    sdr_fax_number : Win32cr::Foundation::PWSTR,
-    sdr_company : Win32cr::Foundation::PWSTR,
-    sdr_address : Win32cr::Foundation::PWSTR,
-    sdr_title : Win32cr::Foundation::PWSTR,
-    sdr_department : Win32cr::Foundation::PWSTR,
-    sdr_office_location : Win32cr::Foundation::PWSTR,
-    sdr_home_phone : Win32cr::Foundation::PWSTR,
-    sdr_office_phone : Win32cr::Foundation::PWSTR,
-    note : Win32cr::Foundation::PWSTR,
-    subject : Win32cr::Foundation::PWSTR,
-    time_sent : Win32cr::Foundation::SYSTEMTIME,
-    page_count : UInt32
+  struct FAX_COVERPAGE_INFOW
+    property size_of_struct : UInt32
+    property cover_page_name : Win32cr::Foundation::PWSTR
+    property use_server_cover_page : Win32cr::Foundation::BOOL
+    property rec_name : Win32cr::Foundation::PWSTR
+    property rec_fax_number : Win32cr::Foundation::PWSTR
+    property rec_company : Win32cr::Foundation::PWSTR
+    property rec_street_address : Win32cr::Foundation::PWSTR
+    property rec_city : Win32cr::Foundation::PWSTR
+    property rec_state : Win32cr::Foundation::PWSTR
+    property rec_zip : Win32cr::Foundation::PWSTR
+    property rec_country : Win32cr::Foundation::PWSTR
+    property rec_title : Win32cr::Foundation::PWSTR
+    property rec_department : Win32cr::Foundation::PWSTR
+    property rec_office_location : Win32cr::Foundation::PWSTR
+    property rec_home_phone : Win32cr::Foundation::PWSTR
+    property rec_office_phone : Win32cr::Foundation::PWSTR
+    property sdr_name : Win32cr::Foundation::PWSTR
+    property sdr_fax_number : Win32cr::Foundation::PWSTR
+    property sdr_company : Win32cr::Foundation::PWSTR
+    property sdr_address : Win32cr::Foundation::PWSTR
+    property sdr_title : Win32cr::Foundation::PWSTR
+    property sdr_department : Win32cr::Foundation::PWSTR
+    property sdr_office_location : Win32cr::Foundation::PWSTR
+    property sdr_home_phone : Win32cr::Foundation::PWSTR
+    property sdr_office_phone : Win32cr::Foundation::PWSTR
+    property note : Win32cr::Foundation::PWSTR
+    property subject : Win32cr::Foundation::PWSTR
+    property time_sent : Win32cr::Foundation::SYSTEMTIME
+    property page_count : UInt32
+    def initialize(@size_of_struct : UInt32, @cover_page_name : Win32cr::Foundation::PWSTR, @use_server_cover_page : Win32cr::Foundation::BOOL, @rec_name : Win32cr::Foundation::PWSTR, @rec_fax_number : Win32cr::Foundation::PWSTR, @rec_company : Win32cr::Foundation::PWSTR, @rec_street_address : Win32cr::Foundation::PWSTR, @rec_city : Win32cr::Foundation::PWSTR, @rec_state : Win32cr::Foundation::PWSTR, @rec_zip : Win32cr::Foundation::PWSTR, @rec_country : Win32cr::Foundation::PWSTR, @rec_title : Win32cr::Foundation::PWSTR, @rec_department : Win32cr::Foundation::PWSTR, @rec_office_location : Win32cr::Foundation::PWSTR, @rec_home_phone : Win32cr::Foundation::PWSTR, @rec_office_phone : Win32cr::Foundation::PWSTR, @sdr_name : Win32cr::Foundation::PWSTR, @sdr_fax_number : Win32cr::Foundation::PWSTR, @sdr_company : Win32cr::Foundation::PWSTR, @sdr_address : Win32cr::Foundation::PWSTR, @sdr_title : Win32cr::Foundation::PWSTR, @sdr_department : Win32cr::Foundation::PWSTR, @sdr_office_location : Win32cr::Foundation::PWSTR, @sdr_home_phone : Win32cr::Foundation::PWSTR, @sdr_office_phone : Win32cr::Foundation::PWSTR, @note : Win32cr::Foundation::PWSTR, @subject : Win32cr::Foundation::PWSTR, @time_sent : Win32cr::Foundation::SYSTEMTIME, @page_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record FAX_JOB_PARAMA,
-    size_of_struct : UInt32,
-    recipient_number : Win32cr::Foundation::PSTR,
-    recipient_name : Win32cr::Foundation::PSTR,
-    tsid : Win32cr::Foundation::PSTR,
-    sender_name : Win32cr::Foundation::PSTR,
-    sender_company : Win32cr::Foundation::PSTR,
-    sender_dept : Win32cr::Foundation::PSTR,
-    billing_code : Win32cr::Foundation::PSTR,
-    schedule_action : UInt32,
-    schedule_time : Win32cr::Foundation::SYSTEMTIME,
-    delivery_report_type : UInt32,
-    delivery_report_address : Win32cr::Foundation::PSTR,
-    document_name : Win32cr::Foundation::PSTR,
-    call_handle : UInt32,
-    reserved : LibC::UIntPtrT[3]
+  struct FAX_JOB_PARAMA
+    property size_of_struct : UInt32
+    property recipient_number : Win32cr::Foundation::PSTR
+    property recipient_name : Win32cr::Foundation::PSTR
+    property tsid : Win32cr::Foundation::PSTR
+    property sender_name : Win32cr::Foundation::PSTR
+    property sender_company : Win32cr::Foundation::PSTR
+    property sender_dept : Win32cr::Foundation::PSTR
+    property billing_code : Win32cr::Foundation::PSTR
+    property schedule_action : UInt32
+    property schedule_time : Win32cr::Foundation::SYSTEMTIME
+    property delivery_report_type : UInt32
+    property delivery_report_address : Win32cr::Foundation::PSTR
+    property document_name : Win32cr::Foundation::PSTR
+    property call_handle : UInt32
+    property reserved : LibC::UIntPtrT[3]
+    def initialize(@size_of_struct : UInt32, @recipient_number : Win32cr::Foundation::PSTR, @recipient_name : Win32cr::Foundation::PSTR, @tsid : Win32cr::Foundation::PSTR, @sender_name : Win32cr::Foundation::PSTR, @sender_company : Win32cr::Foundation::PSTR, @sender_dept : Win32cr::Foundation::PSTR, @billing_code : Win32cr::Foundation::PSTR, @schedule_action : UInt32, @schedule_time : Win32cr::Foundation::SYSTEMTIME, @delivery_report_type : UInt32, @delivery_report_address : Win32cr::Foundation::PSTR, @document_name : Win32cr::Foundation::PSTR, @call_handle : UInt32, @reserved : LibC::UIntPtrT[3])
+    end
+  end
 
   @[Extern]
-  record FAX_JOB_PARAMW,
-    size_of_struct : UInt32,
-    recipient_number : Win32cr::Foundation::PWSTR,
-    recipient_name : Win32cr::Foundation::PWSTR,
-    tsid : Win32cr::Foundation::PWSTR,
-    sender_name : Win32cr::Foundation::PWSTR,
-    sender_company : Win32cr::Foundation::PWSTR,
-    sender_dept : Win32cr::Foundation::PWSTR,
-    billing_code : Win32cr::Foundation::PWSTR,
-    schedule_action : UInt32,
-    schedule_time : Win32cr::Foundation::SYSTEMTIME,
-    delivery_report_type : UInt32,
-    delivery_report_address : Win32cr::Foundation::PWSTR,
-    document_name : Win32cr::Foundation::PWSTR,
-    call_handle : UInt32,
-    reserved : LibC::UIntPtrT[3]
+  struct FAX_JOB_PARAMW
+    property size_of_struct : UInt32
+    property recipient_number : Win32cr::Foundation::PWSTR
+    property recipient_name : Win32cr::Foundation::PWSTR
+    property tsid : Win32cr::Foundation::PWSTR
+    property sender_name : Win32cr::Foundation::PWSTR
+    property sender_company : Win32cr::Foundation::PWSTR
+    property sender_dept : Win32cr::Foundation::PWSTR
+    property billing_code : Win32cr::Foundation::PWSTR
+    property schedule_action : UInt32
+    property schedule_time : Win32cr::Foundation::SYSTEMTIME
+    property delivery_report_type : UInt32
+    property delivery_report_address : Win32cr::Foundation::PWSTR
+    property document_name : Win32cr::Foundation::PWSTR
+    property call_handle : UInt32
+    property reserved : LibC::UIntPtrT[3]
+    def initialize(@size_of_struct : UInt32, @recipient_number : Win32cr::Foundation::PWSTR, @recipient_name : Win32cr::Foundation::PWSTR, @tsid : Win32cr::Foundation::PWSTR, @sender_name : Win32cr::Foundation::PWSTR, @sender_company : Win32cr::Foundation::PWSTR, @sender_dept : Win32cr::Foundation::PWSTR, @billing_code : Win32cr::Foundation::PWSTR, @schedule_action : UInt32, @schedule_time : Win32cr::Foundation::SYSTEMTIME, @delivery_report_type : UInt32, @delivery_report_address : Win32cr::Foundation::PWSTR, @document_name : Win32cr::Foundation::PWSTR, @call_handle : UInt32, @reserved : LibC::UIntPtrT[3])
+    end
+  end
 
   @[Extern]
-  record FAX_EVENTA,
-    size_of_struct : UInt32,
-    time_stamp : Win32cr::Foundation::FILETIME,
-    device_id : UInt32,
-    event_id : UInt32,
-    job_id : UInt32
+  struct FAX_EVENTA
+    property size_of_struct : UInt32
+    property time_stamp : Win32cr::Foundation::FILETIME
+    property device_id : UInt32
+    property event_id : UInt32
+    property job_id : UInt32
+    def initialize(@size_of_struct : UInt32, @time_stamp : Win32cr::Foundation::FILETIME, @device_id : UInt32, @event_id : UInt32, @job_id : UInt32)
+    end
+  end
 
   @[Extern]
-  record FAX_EVENTW,
-    size_of_struct : UInt32,
-    time_stamp : Win32cr::Foundation::FILETIME,
-    device_id : UInt32,
-    event_id : UInt32,
-    job_id : UInt32
+  struct FAX_EVENTW
+    property size_of_struct : UInt32
+    property time_stamp : Win32cr::Foundation::FILETIME
+    property device_id : UInt32
+    property event_id : UInt32
+    property job_id : UInt32
+    def initialize(@size_of_struct : UInt32, @time_stamp : Win32cr::Foundation::FILETIME, @device_id : UInt32, @event_id : UInt32, @job_id : UInt32)
+    end
+  end
 
   @[Extern]
-  record FAX_PRINT_INFOA,
-    size_of_struct : UInt32,
-    doc_name : Win32cr::Foundation::PSTR,
-    recipient_name : Win32cr::Foundation::PSTR,
-    recipient_number : Win32cr::Foundation::PSTR,
-    sender_name : Win32cr::Foundation::PSTR,
-    sender_company : Win32cr::Foundation::PSTR,
-    sender_dept : Win32cr::Foundation::PSTR,
-    sender_billing_code : Win32cr::Foundation::PSTR,
-    reserved : Win32cr::Foundation::PSTR,
-    dr_email_address : Win32cr::Foundation::PSTR,
-    output_file_name : Win32cr::Foundation::PSTR
+  struct FAX_PRINT_INFOA
+    property size_of_struct : UInt32
+    property doc_name : Win32cr::Foundation::PSTR
+    property recipient_name : Win32cr::Foundation::PSTR
+    property recipient_number : Win32cr::Foundation::PSTR
+    property sender_name : Win32cr::Foundation::PSTR
+    property sender_company : Win32cr::Foundation::PSTR
+    property sender_dept : Win32cr::Foundation::PSTR
+    property sender_billing_code : Win32cr::Foundation::PSTR
+    property reserved : Win32cr::Foundation::PSTR
+    property dr_email_address : Win32cr::Foundation::PSTR
+    property output_file_name : Win32cr::Foundation::PSTR
+    def initialize(@size_of_struct : UInt32, @doc_name : Win32cr::Foundation::PSTR, @recipient_name : Win32cr::Foundation::PSTR, @recipient_number : Win32cr::Foundation::PSTR, @sender_name : Win32cr::Foundation::PSTR, @sender_company : Win32cr::Foundation::PSTR, @sender_dept : Win32cr::Foundation::PSTR, @sender_billing_code : Win32cr::Foundation::PSTR, @reserved : Win32cr::Foundation::PSTR, @dr_email_address : Win32cr::Foundation::PSTR, @output_file_name : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record FAX_PRINT_INFOW,
-    size_of_struct : UInt32,
-    doc_name : Win32cr::Foundation::PWSTR,
-    recipient_name : Win32cr::Foundation::PWSTR,
-    recipient_number : Win32cr::Foundation::PWSTR,
-    sender_name : Win32cr::Foundation::PWSTR,
-    sender_company : Win32cr::Foundation::PWSTR,
-    sender_dept : Win32cr::Foundation::PWSTR,
-    sender_billing_code : Win32cr::Foundation::PWSTR,
-    reserved : Win32cr::Foundation::PWSTR,
-    dr_email_address : Win32cr::Foundation::PWSTR,
-    output_file_name : Win32cr::Foundation::PWSTR
+  struct FAX_PRINT_INFOW
+    property size_of_struct : UInt32
+    property doc_name : Win32cr::Foundation::PWSTR
+    property recipient_name : Win32cr::Foundation::PWSTR
+    property recipient_number : Win32cr::Foundation::PWSTR
+    property sender_name : Win32cr::Foundation::PWSTR
+    property sender_company : Win32cr::Foundation::PWSTR
+    property sender_dept : Win32cr::Foundation::PWSTR
+    property sender_billing_code : Win32cr::Foundation::PWSTR
+    property reserved : Win32cr::Foundation::PWSTR
+    property dr_email_address : Win32cr::Foundation::PWSTR
+    property output_file_name : Win32cr::Foundation::PWSTR
+    def initialize(@size_of_struct : UInt32, @doc_name : Win32cr::Foundation::PWSTR, @recipient_name : Win32cr::Foundation::PWSTR, @recipient_number : Win32cr::Foundation::PWSTR, @sender_name : Win32cr::Foundation::PWSTR, @sender_company : Win32cr::Foundation::PWSTR, @sender_dept : Win32cr::Foundation::PWSTR, @sender_billing_code : Win32cr::Foundation::PWSTR, @reserved : Win32cr::Foundation::PWSTR, @dr_email_address : Win32cr::Foundation::PWSTR, @output_file_name : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record FAX_CONTEXT_INFOA,
-    size_of_struct : UInt32,
-    hDC : Win32cr::Graphics::Gdi::HDC,
-    server_name : Win32cr::Foundation::CHAR[16]
+  struct FAX_CONTEXT_INFOA
+    property size_of_struct : UInt32
+    property hDC : Win32cr::Graphics::Gdi::HDC
+    property server_name : Win32cr::Foundation::CHAR[16]
+    def initialize(@size_of_struct : UInt32, @hDC : Win32cr::Graphics::Gdi::HDC, @server_name : Win32cr::Foundation::CHAR[16])
+    end
+  end
 
   @[Extern]
-  record FAX_CONTEXT_INFOW,
-    size_of_struct : UInt32,
-    hDC : Win32cr::Graphics::Gdi::HDC,
-    server_name : UInt16[16]
+  struct FAX_CONTEXT_INFOW
+    property size_of_struct : UInt32
+    property hDC : Win32cr::Graphics::Gdi::HDC
+    property server_name : UInt16[16]
+    def initialize(@size_of_struct : UInt32, @hDC : Win32cr::Graphics::Gdi::HDC, @server_name : UInt16[16])
+    end
+  end
 
   @[Extern]
-  record FAX_SEND,
-    size_of_struct : UInt32,
-    file_name : Win32cr::Foundation::PWSTR,
-    caller_name : Win32cr::Foundation::PWSTR,
-    caller_number : Win32cr::Foundation::PWSTR,
-    receiver_name : Win32cr::Foundation::PWSTR,
-    receiver_number : Win32cr::Foundation::PWSTR,
-    branding : Win32cr::Foundation::BOOL,
-    call_handle : UInt32,
-    reserved : UInt32[3]
+  struct FAX_SEND
+    property size_of_struct : UInt32
+    property file_name : Win32cr::Foundation::PWSTR
+    property caller_name : Win32cr::Foundation::PWSTR
+    property caller_number : Win32cr::Foundation::PWSTR
+    property receiver_name : Win32cr::Foundation::PWSTR
+    property receiver_number : Win32cr::Foundation::PWSTR
+    property branding : Win32cr::Foundation::BOOL
+    property call_handle : UInt32
+    property reserved : UInt32[3]
+    def initialize(@size_of_struct : UInt32, @file_name : Win32cr::Foundation::PWSTR, @caller_name : Win32cr::Foundation::PWSTR, @caller_number : Win32cr::Foundation::PWSTR, @receiver_name : Win32cr::Foundation::PWSTR, @receiver_number : Win32cr::Foundation::PWSTR, @branding : Win32cr::Foundation::BOOL, @call_handle : UInt32, @reserved : UInt32[3])
+    end
+  end
 
   @[Extern]
-  record FAX_RECEIVE,
-    size_of_struct : UInt32,
-    file_name : Win32cr::Foundation::PWSTR,
-    receiver_name : Win32cr::Foundation::PWSTR,
-    receiver_number : Win32cr::Foundation::PWSTR,
-    reserved : UInt32[4]
+  struct FAX_RECEIVE
+    property size_of_struct : UInt32
+    property file_name : Win32cr::Foundation::PWSTR
+    property receiver_name : Win32cr::Foundation::PWSTR
+    property receiver_number : Win32cr::Foundation::PWSTR
+    property reserved : UInt32[4]
+    def initialize(@size_of_struct : UInt32, @file_name : Win32cr::Foundation::PWSTR, @receiver_name : Win32cr::Foundation::PWSTR, @receiver_number : Win32cr::Foundation::PWSTR, @reserved : UInt32[4])
+    end
+  end
 
   @[Extern]
-  record FAX_DEV_STATUS,
-    size_of_struct : UInt32,
-    status_id : UInt32,
-    string_id : UInt32,
-    page_count : UInt32,
-    csi : Win32cr::Foundation::PWSTR,
-    caller_id : Win32cr::Foundation::PWSTR,
-    routing_info : Win32cr::Foundation::PWSTR,
-    error_code : UInt32,
-    reserved : UInt32[3]
+  struct FAX_DEV_STATUS
+    property size_of_struct : UInt32
+    property status_id : UInt32
+    property string_id : UInt32
+    property page_count : UInt32
+    property csi : Win32cr::Foundation::PWSTR
+    property caller_id : Win32cr::Foundation::PWSTR
+    property routing_info : Win32cr::Foundation::PWSTR
+    property error_code : UInt32
+    property reserved : UInt32[3]
+    def initialize(@size_of_struct : UInt32, @status_id : UInt32, @string_id : UInt32, @page_count : UInt32, @csi : Win32cr::Foundation::PWSTR, @caller_id : Win32cr::Foundation::PWSTR, @routing_info : Win32cr::Foundation::PWSTR, @error_code : UInt32, @reserved : UInt32[3])
+    end
+  end
 
   @[Extern]
-  record FAX_ROUTE_CALLBACKROUTINES,
-    size_of_struct : UInt32,
-    fax_route_add_file : Win32cr::Devices::Fax::PFAXROUTEADDFILE,
-    fax_route_delete_file : Win32cr::Devices::Fax::PFAXROUTEDELETEFILE,
-    fax_route_get_file : Win32cr::Devices::Fax::PFAXROUTEGETFILE,
-    fax_route_enum_files : Win32cr::Devices::Fax::PFAXROUTEENUMFILES,
-    fax_route_modify_routing_data : Win32cr::Devices::Fax::PFAXROUTEMODIFYROUTINGDATA
+  struct FAX_ROUTE_CALLBACKROUTINES
+    property size_of_struct : UInt32
+    property fax_route_add_file : Win32cr::Devices::Fax::PFAXROUTEADDFILE
+    property fax_route_delete_file : Win32cr::Devices::Fax::PFAXROUTEDELETEFILE
+    property fax_route_get_file : Win32cr::Devices::Fax::PFAXROUTEGETFILE
+    property fax_route_enum_files : Win32cr::Devices::Fax::PFAXROUTEENUMFILES
+    property fax_route_modify_routing_data : Win32cr::Devices::Fax::PFAXROUTEMODIFYROUTINGDATA
+    def initialize(@size_of_struct : UInt32, @fax_route_add_file : Win32cr::Devices::Fax::PFAXROUTEADDFILE, @fax_route_delete_file : Win32cr::Devices::Fax::PFAXROUTEDELETEFILE, @fax_route_get_file : Win32cr::Devices::Fax::PFAXROUTEGETFILE, @fax_route_enum_files : Win32cr::Devices::Fax::PFAXROUTEENUMFILES, @fax_route_modify_routing_data : Win32cr::Devices::Fax::PFAXROUTEMODIFYROUTINGDATA)
+    end
+  end
 
   @[Extern]
-  record FAX_ROUTE,
-    size_of_struct : UInt32,
-    job_id : UInt32,
-    elapsed_time : UInt64,
-    receive_time : UInt64,
-    page_count : UInt32,
-    csid : Win32cr::Foundation::PWSTR,
-    tsid : Win32cr::Foundation::PWSTR,
-    caller_id : Win32cr::Foundation::PWSTR,
-    routing_info : Win32cr::Foundation::PWSTR,
-    receiver_name : Win32cr::Foundation::PWSTR,
-    receiver_number : Win32cr::Foundation::PWSTR,
-    device_name : Win32cr::Foundation::PWSTR,
-    device_id : UInt32,
-    routing_info_data : UInt8*,
-    routing_info_data_size : UInt32
+  struct FAX_ROUTE
+    property size_of_struct : UInt32
+    property job_id : UInt32
+    property elapsed_time : UInt64
+    property receive_time : UInt64
+    property page_count : UInt32
+    property csid : Win32cr::Foundation::PWSTR
+    property tsid : Win32cr::Foundation::PWSTR
+    property caller_id : Win32cr::Foundation::PWSTR
+    property routing_info : Win32cr::Foundation::PWSTR
+    property receiver_name : Win32cr::Foundation::PWSTR
+    property receiver_number : Win32cr::Foundation::PWSTR
+    property device_name : Win32cr::Foundation::PWSTR
+    property device_id : UInt32
+    property routing_info_data : UInt8*
+    property routing_info_data_size : UInt32
+    def initialize(@size_of_struct : UInt32, @job_id : UInt32, @elapsed_time : UInt64, @receive_time : UInt64, @page_count : UInt32, @csid : Win32cr::Foundation::PWSTR, @tsid : Win32cr::Foundation::PWSTR, @caller_id : Win32cr::Foundation::PWSTR, @routing_info : Win32cr::Foundation::PWSTR, @receiver_name : Win32cr::Foundation::PWSTR, @receiver_number : Win32cr::Foundation::PWSTR, @device_name : Win32cr::Foundation::PWSTR, @device_id : UInt32, @routing_info_data : UInt8*, @routing_info_data_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record STI_DEV_CAPS,
-    dwGeneric : UInt32
+  struct STI_DEV_CAPS
+    property dwGeneric : UInt32
+    def initialize(@dwGeneric : UInt32)
+    end
+  end
 
   @[Extern]
-  record STI_DEVICE_INFORMATIONW,
-    dwSize : UInt32,
-    device_type : UInt32,
-    szDeviceInternalName : UInt16[128],
-    device_capabilities_a : Win32cr::Devices::Fax::STI_DEV_CAPS,
-    dwHardwareConfiguration : UInt32,
-    pszVendorDescription : Win32cr::Foundation::PWSTR,
-    pszDeviceDescription : Win32cr::Foundation::PWSTR,
-    pszPortName : Win32cr::Foundation::PWSTR,
-    pszPropProvider : Win32cr::Foundation::PWSTR,
-    pszLocalName : Win32cr::Foundation::PWSTR
+  struct STI_DEVICE_INFORMATIONW
+    property dwSize : UInt32
+    property device_type : UInt32
+    property szDeviceInternalName : UInt16[128]
+    property device_capabilities_a : Win32cr::Devices::Fax::STI_DEV_CAPS
+    property dwHardwareConfiguration : UInt32
+    property pszVendorDescription : Win32cr::Foundation::PWSTR
+    property pszDeviceDescription : Win32cr::Foundation::PWSTR
+    property pszPortName : Win32cr::Foundation::PWSTR
+    property pszPropProvider : Win32cr::Foundation::PWSTR
+    property pszLocalName : Win32cr::Foundation::PWSTR
+    def initialize(@dwSize : UInt32, @device_type : UInt32, @szDeviceInternalName : UInt16[128], @device_capabilities_a : Win32cr::Devices::Fax::STI_DEV_CAPS, @dwHardwareConfiguration : UInt32, @pszVendorDescription : Win32cr::Foundation::PWSTR, @pszDeviceDescription : Win32cr::Foundation::PWSTR, @pszPortName : Win32cr::Foundation::PWSTR, @pszPropProvider : Win32cr::Foundation::PWSTR, @pszLocalName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record STI_WIA_DEVICE_INFORMATIONW,
-    dwSize : UInt32,
-    device_type : UInt32,
-    szDeviceInternalName : UInt16[128],
-    device_capabilities_a : Win32cr::Devices::Fax::STI_DEV_CAPS,
-    dwHardwareConfiguration : UInt32,
-    pszVendorDescription : Win32cr::Foundation::PWSTR,
-    pszDeviceDescription : Win32cr::Foundation::PWSTR,
-    pszPortName : Win32cr::Foundation::PWSTR,
-    pszPropProvider : Win32cr::Foundation::PWSTR,
-    pszLocalName : Win32cr::Foundation::PWSTR,
-    pszUiDll : Win32cr::Foundation::PWSTR,
-    pszServer : Win32cr::Foundation::PWSTR
+  struct STI_WIA_DEVICE_INFORMATIONW
+    property dwSize : UInt32
+    property device_type : UInt32
+    property szDeviceInternalName : UInt16[128]
+    property device_capabilities_a : Win32cr::Devices::Fax::STI_DEV_CAPS
+    property dwHardwareConfiguration : UInt32
+    property pszVendorDescription : Win32cr::Foundation::PWSTR
+    property pszDeviceDescription : Win32cr::Foundation::PWSTR
+    property pszPortName : Win32cr::Foundation::PWSTR
+    property pszPropProvider : Win32cr::Foundation::PWSTR
+    property pszLocalName : Win32cr::Foundation::PWSTR
+    property pszUiDll : Win32cr::Foundation::PWSTR
+    property pszServer : Win32cr::Foundation::PWSTR
+    def initialize(@dwSize : UInt32, @device_type : UInt32, @szDeviceInternalName : UInt16[128], @device_capabilities_a : Win32cr::Devices::Fax::STI_DEV_CAPS, @dwHardwareConfiguration : UInt32, @pszVendorDescription : Win32cr::Foundation::PWSTR, @pszDeviceDescription : Win32cr::Foundation::PWSTR, @pszPortName : Win32cr::Foundation::PWSTR, @pszPropProvider : Win32cr::Foundation::PWSTR, @pszLocalName : Win32cr::Foundation::PWSTR, @pszUiDll : Win32cr::Foundation::PWSTR, @pszServer : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record STI_DEVICE_STATUS,
-    dwSize : UInt32,
-    status_mask : UInt32,
-    dwOnlineState : UInt32,
-    dwHardwareStatusCode : UInt32,
-    dwEventHandlingState : UInt32,
-    dwPollingInterval : UInt32
+  struct STI_DEVICE_STATUS
+    property dwSize : UInt32
+    property status_mask : UInt32
+    property dwOnlineState : UInt32
+    property dwHardwareStatusCode : UInt32
+    property dwEventHandlingState : UInt32
+    property dwPollingInterval : UInt32
+    def initialize(@dwSize : UInt32, @status_mask : UInt32, @dwOnlineState : UInt32, @dwHardwareStatusCode : UInt32, @dwEventHandlingState : UInt32, @dwPollingInterval : UInt32)
+    end
+  end
 
   @[Extern]
-  record ERROR_INFOW_,
-    dwSize : UInt32,
-    dwGenericError : UInt32,
-    dwVendorError : UInt32,
-    szExtendedErrorText : UInt16[255]
+  struct ERROR_INFOW_
+    property dwSize : UInt32
+    property dwGenericError : UInt32
+    property dwVendorError : UInt32
+    property szExtendedErrorText : UInt16[255]
+    def initialize(@dwSize : UInt32, @dwGenericError : UInt32, @dwVendorError : UInt32, @szExtendedErrorText : UInt16[255])
+    end
+  end
 
   @[Extern]
-  record STI_DIAG,
-    dwSize : UInt32,
-    dwBasicDiagCode : UInt32,
-    dwVendorDiagCode : UInt32,
-    dwStatusMask : UInt32,
-    sErrorInfo : Win32cr::Devices::Fax::ERROR_INFOW_
+  struct STI_DIAG
+    property dwSize : UInt32
+    property dwBasicDiagCode : UInt32
+    property dwVendorDiagCode : UInt32
+    property dwStatusMask : UInt32
+    property sErrorInfo : Win32cr::Devices::Fax::ERROR_INFOW_
+    def initialize(@dwSize : UInt32, @dwBasicDiagCode : UInt32, @dwVendorDiagCode : UInt32, @dwStatusMask : UInt32, @sErrorInfo : Win32cr::Devices::Fax::ERROR_INFOW_)
+    end
+  end
 
   @[Extern]
-  record STISUBSCRIBE,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwFilter : UInt32,
-    hWndNotify : Win32cr::Foundation::HWND,
-    hEvent : Win32cr::Foundation::HANDLE,
-    uiNotificationMessage : UInt32
+  struct STISUBSCRIBE
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwFilter : UInt32
+    property hWndNotify : Win32cr::Foundation::HWND
+    property hEvent : Win32cr::Foundation::HANDLE
+    property uiNotificationMessage : UInt32
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwFilter : UInt32, @hWndNotify : Win32cr::Foundation::HWND, @hEvent : Win32cr::Foundation::HANDLE, @uiNotificationMessage : UInt32)
+    end
+  end
 
   @[Extern]
-  record STINOTIFY,
-    dwSize : UInt32,
-    guidNotificationCode : LibC::GUID,
-    abNotificationData : UInt8[64]
+  struct STINOTIFY
+    property dwSize : UInt32
+    property guidNotificationCode : LibC::GUID
+    property abNotificationData : UInt8[64]
+    def initialize(@dwSize : UInt32, @guidNotificationCode : LibC::GUID, @abNotificationData : UInt8[64])
+    end
+  end
 
   @[Extern]
-  record STI_USD_CAPS,
-    dwVersion : UInt32,
-    dwGenericCaps : UInt32
+  struct STI_USD_CAPS
+    property dwVersion : UInt32
+    property dwGenericCaps : UInt32
+    def initialize(@dwVersion : UInt32, @dwGenericCaps : UInt32)
+    end
+  end
 
   @[Extern]
   record IFaxJobStatusVtbl,
@@ -1296,7 +1413,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("8b86f485-fd7f-4824-886b-40c5caa617cc")]
   record IFaxJobStatus, lpVtbl : IFaxJobStatusVtbl* do
     GUID = LibC::GUID.new(0x8b86f485_u32, 0xfd7f_u16, 0x4824_u16, StaticArray[0x88_u8, 0x6b_u8, 0x40_u8, 0xc5_u8, 0xca_u8, 0xa6_u8, 0x17_u8, 0xcc_u8])
     def query_interface(this : IFaxJobStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1412,7 +1528,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("475b6469-90a5-4878-a577-17a86e8e3462")]
   record IFaxServer, lpVtbl : IFaxServerVtbl* do
     GUID = LibC::GUID.new(0x475b6469_u32, 0x90a5_u16, 0x4878_u16, StaticArray[0xa5_u8, 0x77_u8, 0x17_u8, 0xa8_u8, 0x6e_u8, 0x8e_u8, 0x34_u8, 0x62_u8])
     def query_interface(this : IFaxServer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1532,7 +1647,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("9fb76f62-4c7e-43a5-b6fd-502893f7e13e")]
   record IFaxDeviceProviders, lpVtbl : IFaxDeviceProvidersVtbl* do
     GUID = LibC::GUID.new(0x9fb76f62_u32, 0x4c7e_u16, 0x43a5_u16, StaticArray[0xb6_u8, 0xfd_u8, 0x50_u8, 0x28_u8, 0x93_u8, 0xf7_u8, 0xe1_u8, 0x3e_u8])
     def query_interface(this : IFaxDeviceProviders*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1584,7 +1698,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("9e46783e-f34f-482e-a360-0416becbbd96")]
   record IFaxDevices, lpVtbl : IFaxDevicesVtbl* do
     GUID = LibC::GUID.new(0x9e46783e_u32, 0xf34f_u16, 0x482e_u16, StaticArray[0xa3_u8, 0x60_u8, 0x4_u8, 0x16_u8, 0xbe_u8, 0xcb_u8, 0xbd_u8, 0x96_u8])
     def query_interface(this : IFaxDevices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1637,7 +1750,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("8148c20f-9d52-45b1-bf96-38fc12713527")]
   record IFaxInboundRouting, lpVtbl : IFaxInboundRoutingVtbl* do
     GUID = LibC::GUID.new(0x8148c20f_u32, 0x9d52_u16, 0x45b1_u16, StaticArray[0xbf_u8, 0x96_u8, 0x38_u8, 0xfc_u8, 0x12_u8, 0x71_u8, 0x35_u8, 0x27_u8])
     def query_interface(this : IFaxInboundRouting*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1686,7 +1798,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("dce3b2a8-a7ab-42bc-9d0a-3149457261a0")]
   record IFaxFolders, lpVtbl : IFaxFoldersVtbl* do
     GUID = LibC::GUID.new(0xdce3b2a8_u32, 0xa7ab_u16, 0x42bc_u16, StaticArray[0x9d_u8, 0xa_u8, 0x31_u8, 0x49_u8, 0x45_u8, 0x72_u8, 0x61_u8, 0xa0_u8])
     def query_interface(this : IFaxFolders*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1739,7 +1850,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("34e64fb9-6b31-4d32-8b27-d286c0c33606")]
   record IFaxLoggingOptions, lpVtbl : IFaxLoggingOptionsVtbl* do
     GUID = LibC::GUID.new(0x34e64fb9_u32, 0x6b31_u16, 0x4d32_u16, StaticArray[0x8b_u8, 0x27_u8, 0xd2_u8, 0x86_u8, 0xc0_u8, 0xc3_u8, 0x36_u8, 0x6_u8])
     def query_interface(this : IFaxLoggingOptions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1789,7 +1899,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("4b106f97-3df5-40f2-bc3c-44cb8115ebdf")]
   record IFaxActivity, lpVtbl : IFaxActivityVtbl* do
     GUID = LibC::GUID.new(0x4b106f97_u32, 0x3df5_u16, 0x40f2_u16, StaticArray[0xbc_u8, 0x3c_u8, 0x44_u8, 0xcb_u8, 0x81_u8, 0x15_u8, 0xeb_u8, 0xdf_u8])
     def query_interface(this : IFaxActivity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1845,7 +1954,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("25dc05a4-9909-41bd-a95b-7e5d1dec1d43")]
   record IFaxOutboundRouting, lpVtbl : IFaxOutboundRoutingVtbl* do
     GUID = LibC::GUID.new(0x25dc05a4_u32, 0x9909_u16, 0x41bd_u16, StaticArray[0xa9_u8, 0x5b_u8, 0x7e_u8, 0x5d_u8, 0x1d_u8, 0xec_u8, 0x1d_u8, 0x43_u8])
     def query_interface(this : IFaxOutboundRouting*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1908,7 +2016,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("378efaeb-5fcb-4afb-b2ee-e16e80614487")]
   record IFaxReceiptOptions, lpVtbl : IFaxReceiptOptionsVtbl* do
     GUID = LibC::GUID.new(0x378efaeb_u32, 0x5fcb_u16, 0x4afb_u16, StaticArray[0xb2_u8, 0xee_u8, 0xe1_u8, 0x6e_u8, 0x80_u8, 0x61_u8, 0x44_u8, 0x87_u8])
     def query_interface(this : IFaxReceiptOptions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2008,7 +2115,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("77b508c1-09c0-47a2-91eb-fce7fdf2690e")]
   record IFaxSecurity, lpVtbl : IFaxSecurityVtbl* do
     GUID = LibC::GUID.new(0x77b508c1_u32, 0x9c0_u16, 0x47a2_u16, StaticArray[0x91_u8, 0xeb_u8, 0xfc_u8, 0xe7_u8, 0xfd_u8, 0xf2_u8, 0x69_u8, 0xe_u8])
     def query_interface(this : IFaxSecurity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2102,7 +2208,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("b207a246-09e3-4a4e-a7dc-fea31d29458f")]
   record IFaxDocument, lpVtbl : IFaxDocumentVtbl* do
     GUID = LibC::GUID.new(0xb207a246_u32, 0x9e3_u16, 0x4a4e_u16, StaticArray[0xa7_u8, 0xdc_u8, 0xfe_u8, 0xa3_u8, 0x1d_u8, 0x29_u8, 0x45_u8, 0x8f_u8])
     def query_interface(this : IFaxDocument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2277,7 +2382,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("0d879d7d-f57a-4cc6-a6f9-3ee5d527b46a")]
   record IFaxSender, lpVtbl : IFaxSenderVtbl* do
     GUID = LibC::GUID.new(0xd879d7d_u32, 0xf57a_u16, 0x4cc6_u16, StaticArray[0xa6_u8, 0xf9_u8, 0x3e_u8, 0xe5_u8, 0xd5_u8, 0x27_u8, 0xb4_u8, 0x6a_u8])
     def query_interface(this : IFaxSender*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2422,7 +2526,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("9a3da3a0-538d-42b6-9444-aaa57d0ce2bc")]
   record IFaxRecipient, lpVtbl : IFaxRecipientVtbl* do
     GUID = LibC::GUID.new(0x9a3da3a0_u32, 0x538d_u16, 0x42b6_u16, StaticArray[0x94_u8, 0x44_u8, 0xaa_u8, 0xa5_u8, 0x7d_u8, 0xc_u8, 0xe2_u8, 0xbc_u8])
     def query_interface(this : IFaxRecipient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2478,7 +2581,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("b9c9de5a-894e-4492-9fa3-08c627c11d5d")]
   record IFaxRecipients, lpVtbl : IFaxRecipientsVtbl* do
     GUID = LibC::GUID.new(0xb9c9de5a_u32, 0x894e_u16, 0x4492_u16, StaticArray[0x9f_u8, 0xa3_u8, 0x8_u8, 0xc6_u8, 0x27_u8, 0xc1_u8, 0x1d_u8, 0x5d_u8])
     def query_interface(this : IFaxRecipients*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2550,7 +2652,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("76062cc7-f714-4fbd-aa06-ed6e4a4b70f3")]
   record IFaxIncomingArchive, lpVtbl : IFaxIncomingArchiveVtbl* do
     GUID = LibC::GUID.new(0x76062cc7_u32, 0xf714_u16, 0x4fbd_u16, StaticArray[0xaa_u8, 0x6_u8, 0xed_u8, 0x6e_u8, 0x4a_u8, 0x4b_u8, 0x70_u8, 0xf3_u8])
     def query_interface(this : IFaxIncomingArchive*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2649,7 +2750,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("902e64ef-8fd8-4b75-9725-6014df161545")]
   record IFaxIncomingQueue, lpVtbl : IFaxIncomingQueueVtbl* do
     GUID = LibC::GUID.new(0x902e64ef_u32, 0x8fd8_u16, 0x4b75_u16, StaticArray[0x97_u8, 0x25_u8, 0x60_u8, 0x14_u8, 0xdf_u8, 0x16_u8, 0x15_u8, 0x45_u8])
     def query_interface(this : IFaxIncomingQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2724,7 +2824,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("c9c28f40-8d80-4e53-810f-9a79919b49fd")]
   record IFaxOutgoingArchive, lpVtbl : IFaxOutgoingArchiveVtbl* do
     GUID = LibC::GUID.new(0xc9c28f40_u32, 0x8d80_u16, 0x4e53_u16, StaticArray[0x81_u8, 0xf_u8, 0x9a_u8, 0x79_u8, 0x91_u8, 0x9b_u8, 0x49_u8, 0xfd_u8])
     def query_interface(this : IFaxOutgoingArchive*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2841,7 +2940,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("80b1df24-d9ac-4333-b373-487cedc80ce5")]
   record IFaxOutgoingQueue, lpVtbl : IFaxOutgoingQueueVtbl* do
     GUID = LibC::GUID.new(0x80b1df24_u32, 0xd9ac_u16, 0x4333_u16, StaticArray[0xb3_u8, 0x73_u8, 0x48_u8, 0x7c_u8, 0xed_u8, 0xc8_u8, 0xc_u8, 0xe5_u8])
     def query_interface(this : IFaxOutgoingQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2958,7 +3056,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("fd73ecc4-6f06-4f52-82a8-f7ba06ae3108")]
   record IFaxIncomingMessageIterator, lpVtbl : IFaxIncomingMessageIteratorVtbl* do
     GUID = LibC::GUID.new(0xfd73ecc4_u32, 0x6f06_u16, 0x4f52_u16, StaticArray[0x82_u8, 0xa8_u8, 0xf7_u8, 0xba_u8, 0x6_u8, 0xae_u8, 0x31_u8, 0x8_u8])
     def query_interface(this : IFaxIncomingMessageIterator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3028,7 +3125,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("7cab88fa-2ef9-4851-b2f3-1d148fed8447")]
   record IFaxIncomingMessage, lpVtbl : IFaxIncomingMessageVtbl* do
     GUID = LibC::GUID.new(0x7cab88fa_u32, 0x2ef9_u16, 0x4851_u16, StaticArray[0xb2_u8, 0xf3_u8, 0x1d_u8, 0x14_u8, 0x8f_u8, 0xed_u8, 0x84_u8, 0x47_u8])
     def query_interface(this : IFaxIncomingMessage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3109,7 +3205,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("2c56d8e6-8c2f-4573-944c-e505f8f5aeed")]
   record IFaxOutgoingJobs, lpVtbl : IFaxOutgoingJobsVtbl* do
     GUID = LibC::GUID.new(0x2c56d8e6_u32, 0x8c2f_u16, 0x4573_u16, StaticArray[0x94_u8, 0x4c_u8, 0xe5_u8, 0x5_u8, 0xf8_u8, 0xf5_u8, 0xae_u8, 0xed_u8])
     def query_interface(this : IFaxOutgoingJobs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3188,7 +3283,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("6356daad-6614-4583-bf7a-3ad67bbfc71c")]
   record IFaxOutgoingJob, lpVtbl : IFaxOutgoingJobVtbl* do
     GUID = LibC::GUID.new(0x6356daad_u32, 0x6614_u16, 0x4583_u16, StaticArray[0xbf_u8, 0x7a_u8, 0x3a_u8, 0xd6_u8, 0x7b_u8, 0xbf_u8, 0xc7_u8, 0x1c_u8])
     def query_interface(this : IFaxOutgoingJob*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3326,7 +3420,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("f5ec5d4f-b840-432f-9980-112fe42a9b7a")]
   record IFaxOutgoingMessageIterator, lpVtbl : IFaxOutgoingMessageIteratorVtbl* do
     GUID = LibC::GUID.new(0xf5ec5d4f_u32, 0xb840_u16, 0x432f_u16, StaticArray[0x99_u8, 0x80_u8, 0x11_u8, 0x2f_u8, 0xe4_u8, 0x2a_u8, 0x9b_u8, 0x7a_u8])
     def query_interface(this : IFaxOutgoingMessageIterator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3402,7 +3495,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("f0ea35de-caa5-4a7c-82c7-2b60ba5f2be2")]
   record IFaxOutgoingMessage, lpVtbl : IFaxOutgoingMessageVtbl* do
     GUID = LibC::GUID.new(0xf0ea35de_u32, 0xcaa5_u16, 0x4a7c_u16, StaticArray[0x82_u8, 0xc7_u8, 0x2b_u8, 0x60_u8, 0xba_u8, 0x5f_u8, 0x2b_u8, 0xe2_u8])
     def query_interface(this : IFaxOutgoingMessage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3501,7 +3593,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("011f04e9-4fd6-4c23-9513-b6b66bb26be9")]
   record IFaxIncomingJobs, lpVtbl : IFaxIncomingJobsVtbl* do
     GUID = LibC::GUID.new(0x11f04e9_u32, 0x4fd6_u16, 0x4c23_u16, StaticArray[0x95_u8, 0x13_u8, 0xb6_u8, 0xb6_u8, 0x6b_u8, 0xb2_u8, 0x6b_u8, 0xe9_u8])
     def query_interface(this : IFaxIncomingJobs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3568,7 +3659,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("207529e6-654a-4916-9f88-4d232ee8a107")]
   record IFaxIncomingJob, lpVtbl : IFaxIncomingJobVtbl* do
     GUID = LibC::GUID.new(0x207529e6_u32, 0x654a_u16, 0x4916_u16, StaticArray[0x9f_u8, 0x88_u8, 0x4d_u8, 0x23_u8, 0x2e_u8, 0xe8_u8, 0xa1_u8, 0x7_u8])
     def query_interface(this : IFaxIncomingJob*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3676,7 +3766,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("290eac63-83ec-449c-8417-f148df8c682a")]
   record IFaxDeviceProvider, lpVtbl : IFaxDeviceProviderVtbl* do
     GUID = LibC::GUID.new(0x290eac63_u32, 0x83ec_u16, 0x449c_u16, StaticArray[0x84_u8, 0x17_u8, 0xf1_u8, 0x48_u8, 0xdf_u8, 0x8c_u8, 0x68_u8, 0x2a_u8])
     def query_interface(this : IFaxDeviceProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3777,7 +3866,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("49306c59-b52e-4867-9df4-ca5841c956d0")]
   record IFaxDevice, lpVtbl : IFaxDeviceVtbl* do
     GUID = LibC::GUID.new(0x49306c59_u32, 0xb52e_u16, 0x4867_u16, StaticArray[0x9d_u8, 0xf4_u8, 0xca_u8, 0x58_u8, 0x41_u8, 0xc9_u8, 0x56_u8, 0xd0_u8])
     def query_interface(this : IFaxDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3902,7 +3990,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("1e29078b-5a69-497b-9592-49b7e7faddb5")]
   record IFaxActivityLogging, lpVtbl : IFaxActivityLoggingVtbl* do
     GUID = LibC::GUID.new(0x1e29078b_u32, 0x5a69_u16, 0x497b_u16, StaticArray[0x95_u8, 0x92_u8, 0x49_u8, 0xb7_u8, 0xe7_u8, 0xfa_u8, 0xdd_u8, 0xb5_u8])
     def query_interface(this : IFaxActivityLogging*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3975,7 +4062,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("0880d965-20e8-42e4-8e17-944f192caad4")]
   record IFaxEventLogging, lpVtbl : IFaxEventLoggingVtbl* do
     GUID = LibC::GUID.new(0x880d965_u32, 0x20e8_u16, 0x42e4_u16, StaticArray[0x8e_u8, 0x17_u8, 0x94_u8, 0x4f_u8, 0x19_u8, 0x2c_u8, 0xaa_u8, 0xd4_u8])
     def query_interface(this : IFaxEventLogging*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4049,7 +4135,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("235cbef7-c2de-4bfd-b8da-75097c82c87f")]
   record IFaxOutboundRoutingGroups, lpVtbl : IFaxOutboundRoutingGroupsVtbl* do
     GUID = LibC::GUID.new(0x235cbef7_u32, 0xc2de_u16, 0x4bfd_u16, StaticArray[0xb8_u8, 0xda_u8, 0x75_u8, 0x9_u8, 0x7c_u8, 0x82_u8, 0xc8_u8, 0x7f_u8])
     def query_interface(this : IFaxOutboundRoutingGroups*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4106,7 +4191,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("ca6289a1-7e25-4f87-9a0b-93365734962c")]
   record IFaxOutboundRoutingGroup, lpVtbl : IFaxOutboundRoutingGroupVtbl* do
     GUID = LibC::GUID.new(0xca6289a1_u32, 0x7e25_u16, 0x4f87_u16, StaticArray[0x9a_u8, 0xb_u8, 0x93_u8, 0x36_u8, 0x57_u8, 0x34_u8, 0x96_u8, 0x2c_u8])
     def query_interface(this : IFaxOutboundRoutingGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4160,7 +4244,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("2f0f813f-4ce9-443e-8ca1-738cfaeee149")]
   record IFaxDeviceIds, lpVtbl : IFaxDeviceIdsVtbl* do
     GUID = LibC::GUID.new(0x2f0f813f_u32, 0x4ce9_u16, 0x443e_u16, StaticArray[0x8c_u8, 0xa1_u8, 0x73_u8, 0x8c_u8, 0xfa_u8, 0xee_u8, 0xe1_u8, 0x49_u8])
     def query_interface(this : IFaxDeviceIds*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4224,7 +4307,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("dcefa1e7-ae7d-4ed6-8521-369edcca5120")]
   record IFaxOutboundRoutingRules, lpVtbl : IFaxOutboundRoutingRulesVtbl* do
     GUID = LibC::GUID.new(0xdcefa1e7_u32, 0xae7d_u16, 0x4ed6_u16, StaticArray[0x85_u8, 0x21_u8, 0x36_u8, 0x9e_u8, 0xdc_u8, 0xca_u8, 0x51_u8, 0x20_u8])
     def query_interface(this : IFaxOutboundRoutingRules*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4295,7 +4377,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("e1f795d5-07c2-469f-b027-acacc23219da")]
   record IFaxOutboundRoutingRule, lpVtbl : IFaxOutboundRoutingRuleVtbl* do
     GUID = LibC::GUID.new(0xe1f795d5_u32, 0x7c2_u16, 0x469f_u16, StaticArray[0xb0_u8, 0x27_u8, 0xac_u8, 0xac_u8, 0xc2_u8, 0x32_u8, 0x19_u8, 0xda_u8])
     def query_interface(this : IFaxOutboundRoutingRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4370,7 +4451,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("2f6c9673-7b26-42de-8eb0-915dcd2a4f4c")]
   record IFaxInboundRoutingExtensions, lpVtbl : IFaxInboundRoutingExtensionsVtbl* do
     GUID = LibC::GUID.new(0x2f6c9673_u32, 0x7b26_u16, 0x42de_u16, StaticArray[0x8e_u8, 0xb0_u8, 0x91_u8, 0x5d_u8, 0xcd_u8, 0x2a_u8, 0x4f_u8, 0x4c_u8])
     def query_interface(this : IFaxInboundRoutingExtensions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4429,7 +4509,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("885b5e08-c26c-4ef9-af83-51580a750be1")]
   record IFaxInboundRoutingExtension, lpVtbl : IFaxInboundRoutingExtensionVtbl* do
     GUID = LibC::GUID.new(0x885b5e08_u32, 0xc26c_u16, 0x4ef9_u16, StaticArray[0xaf_u8, 0x83_u8, 0x51_u8, 0x58_u8, 0xa_u8, 0x75_u8, 0xb_u8, 0xe1_u8])
     def query_interface(this : IFaxInboundRoutingExtension*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4504,7 +4583,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("783fca10-8908-4473-9d69-f67fbea0c6b9")]
   record IFaxInboundRoutingMethods, lpVtbl : IFaxInboundRoutingMethodsVtbl* do
     GUID = LibC::GUID.new(0x783fca10_u32, 0x8908_u16, 0x4473_u16, StaticArray[0x9d_u8, 0x69_u8, 0xf6_u8, 0x7f_u8, 0xbe_u8, 0xa0_u8, 0xc6_u8, 0xb9_u8])
     def query_interface(this : IFaxInboundRoutingMethods*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4561,7 +4639,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("45700061-ad9d-4776-a8c4-64065492cf4b")]
   record IFaxInboundRoutingMethod, lpVtbl : IFaxInboundRoutingMethodVtbl* do
     GUID = LibC::GUID.new(0x45700061_u32, 0xad9d_u16, 0x4776_u16, StaticArray[0xa8_u8, 0xc4_u8, 0x64_u8, 0x6_u8, 0x54_u8, 0x92_u8, 0xcf_u8, 0x4b_u8])
     def query_interface(this : IFaxInboundRoutingMethod*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4666,7 +4743,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("e1347661-f9ef-4d6d-b4a5-c0a068b65cff")]
   record IFaxDocument2, lpVtbl : IFaxDocument2Vtbl* do
     GUID = LibC::GUID.new(0xe1347661_u32, 0xf9ef_u16, 0x4d6d_u16, StaticArray[0xb4_u8, 0xa5_u8, 0xc0_u8, 0xa0_u8, 0x68_u8, 0xb6_u8, 0x5c_u8, 0xff_u8])
     def query_interface(this : IFaxDocument2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4864,7 +4940,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("10f4d0f7-0994-4543-ab6e-506949128c40")]
   record IFaxConfiguration, lpVtbl : IFaxConfigurationVtbl* do
     GUID = LibC::GUID.new(0x10f4d0f7_u32, 0x994_u16, 0x4543_u16, StaticArray[0xab_u8, 0x6e_u8, 0x50_u8, 0x69_u8, 0x49_u8, 0x12_u8, 0x8c_u8, 0x40_u8])
     def query_interface(this : IFaxConfiguration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5059,7 +5134,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("571ced0f-5609-4f40-9176-547e3a72ca7c")]
   record IFaxServer2, lpVtbl : IFaxServer2Vtbl* do
     GUID = LibC::GUID.new(0x571ced0f_u32, 0x5609_u16, 0x4f40_u16, StaticArray[0x91_u8, 0x76_u8, 0x54_u8, 0x7e_u8, 0x3a_u8, 0x72_u8, 0xca_u8, 0x7c_u8])
     def query_interface(this : IFaxServer2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5192,7 +5266,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("7428fbae-841e-47b8-86f4-2288946dca1b")]
   record IFaxAccountSet, lpVtbl : IFaxAccountSetVtbl* do
     GUID = LibC::GUID.new(0x7428fbae_u32, 0x841e_u16, 0x47b8_u16, StaticArray[0x86_u8, 0xf4_u8, 0x22_u8, 0x88_u8, 0x94_u8, 0x6d_u8, 0xca_u8, 0x1b_u8])
     def query_interface(this : IFaxAccountSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5246,7 +5319,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("93ea8162-8be7-42d1-ae7b-ec74e2d989da")]
   record IFaxAccounts, lpVtbl : IFaxAccountsVtbl* do
     GUID = LibC::GUID.new(0x93ea8162_u32, 0x8be7_u16, 0x42d1_u16, StaticArray[0xae_u8, 0x7b_u8, 0xec_u8, 0x74_u8, 0xe2_u8, 0xd9_u8, 0x89_u8, 0xda_u8])
     def query_interface(this : IFaxAccounts*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5298,7 +5370,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("68535b33-5dc4-4086-be26-b76f9b711006")]
   record IFaxAccount, lpVtbl : IFaxAccountVtbl* do
     GUID = LibC::GUID.new(0x68535b33_u32, 0x5dc4_u16, 0x4086_u16, StaticArray[0xbe_u8, 0x26_u8, 0xb7_u8, 0x6f_u8, 0x9b_u8, 0x71_u8, 0x10_u8, 0x6_u8])
     def query_interface(this : IFaxAccount*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5383,7 +5454,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("418a8d96-59a0-4789-b176-edf3dc8fa8f7")]
   record IFaxOutgoingJob2, lpVtbl : IFaxOutgoingJob2Vtbl* do
     GUID = LibC::GUID.new(0x418a8d96_u32, 0x59a0_u16, 0x4789_u16, StaticArray[0xb1_u8, 0x76_u8, 0xed_u8, 0xf3_u8, 0xdc_u8, 0x8f_u8, 0xa8_u8, 0xf7_u8])
     def query_interface(this : IFaxOutgoingJob2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5528,7 +5598,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("6463f89d-23d8-46a9-8f86-c47b77ca7926")]
   record IFaxAccountFolders, lpVtbl : IFaxAccountFoldersVtbl* do
     GUID = LibC::GUID.new(0x6463f89d_u32, 0x23d8_u16, 0x46a9_u16, StaticArray[0x8f_u8, 0x86_u8, 0xc4_u8, 0x7b_u8, 0x77_u8, 0xca_u8, 0x79_u8, 0x26_u8])
     def query_interface(this : IFaxAccountFolders*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5581,7 +5650,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("dd142d92-0186-4a95-a090-cbc3eadba6b4")]
   record IFaxAccountIncomingQueue, lpVtbl : IFaxAccountIncomingQueueVtbl* do
     GUID = LibC::GUID.new(0xdd142d92_u32, 0x186_u16, 0x4a95_u16, StaticArray[0xa0_u8, 0x90_u8, 0xcb_u8, 0xc3_u8, 0xea_u8, 0xdb_u8, 0xa6_u8, 0xb4_u8])
     def query_interface(this : IFaxAccountIncomingQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5628,7 +5696,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("0f1424e9-f22d-4553-b7a5-0d24bd0d7e46")]
   record IFaxAccountOutgoingQueue, lpVtbl : IFaxAccountOutgoingQueueVtbl* do
     GUID = LibC::GUID.new(0xf1424e9_u32, 0xf22d_u16, 0x4553_u16, StaticArray[0xb7_u8, 0xa5_u8, 0xd_u8, 0x24_u8, 0xbd_u8, 0xd_u8, 0x7e_u8, 0x46_u8])
     def query_interface(this : IFaxAccountOutgoingQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5699,7 +5766,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("b37df687-bc88-4b46-b3be-b458b3ea9e7f")]
   record IFaxOutgoingMessage2, lpVtbl : IFaxOutgoingMessage2Vtbl* do
     GUID = LibC::GUID.new(0xb37df687_u32, 0xbc88_u16, 0x4b46_u16, StaticArray[0xb3_u8, 0xbe_u8, 0xb4_u8, 0x58_u8, 0xb3_u8, 0xea_u8, 0x9e_u8, 0x7f_u8])
     def query_interface(this : IFaxOutgoingMessage2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5821,7 +5887,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("a8a5b6ef-e0d6-4aee-955c-91625bec9db4")]
   record IFaxAccountIncomingArchive, lpVtbl : IFaxAccountIncomingArchiveVtbl* do
     GUID = LibC::GUID.new(0xa8a5b6ef_u32, 0xe0d6_u16, 0x4aee_u16, StaticArray[0x95_u8, 0x5c_u8, 0x91_u8, 0x62_u8, 0x5b_u8, 0xec_u8, 0x9d_u8, 0xb4_u8])
     def query_interface(this : IFaxAccountIncomingArchive*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5880,7 +5945,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("5463076d-ec14-491f-926e-b3ceda5e5662")]
   record IFaxAccountOutgoingArchive, lpVtbl : IFaxAccountOutgoingArchiveVtbl* do
     GUID = LibC::GUID.new(0x5463076d_u32, 0xec14_u16, 0x491f_u16, StaticArray[0x92_u8, 0x6e_u8, 0xb3_u8, 0xce_u8, 0xda_u8, 0x5e_u8, 0x56_u8, 0x62_u8])
     def query_interface(this : IFaxAccountOutgoingArchive*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5941,7 +6005,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("17d851f4-d09b-48fc-99c9-8f24c4db9ab1")]
   record IFaxSecurity2, lpVtbl : IFaxSecurity2Vtbl* do
     GUID = LibC::GUID.new(0x17d851f4_u32, 0xd09b_u16, 0x48fc_u16, StaticArray[0x99_u8, 0xc9_u8, 0x8f_u8, 0x24_u8, 0xc4_u8, 0xdb_u8, 0x9a_u8, 0xb1_u8])
     def query_interface(this : IFaxSecurity2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6030,7 +6093,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("f9208503-e2bc-48f3-9ec0-e6236f9b509a")]
   record IFaxIncomingMessage2, lpVtbl : IFaxIncomingMessage2Vtbl* do
     GUID = LibC::GUID.new(0xf9208503_u32, 0xe2bc_u16, 0x48f3_u16, StaticArray[0x9e_u8, 0xc0_u8, 0xe6_u8, 0x23_u8, 0x6f_u8, 0x9b_u8, 0x50_u8, 0x9a_u8])
     def query_interface(this : IFaxIncomingMessage2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6156,7 +6218,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("2e037b27-cf8a-4abd-b1e0-5704943bea6f")]
   record IFaxServerNotify, lpVtbl : IFaxServerNotifyVtbl* do
     GUID = LibC::GUID.new(0x2e037b27_u32, 0xcf8a_u16, 0x4abd_u16, StaticArray[0xb1_u8, 0xe0_u8, 0x57_u8, 0x4_u8, 0x94_u8, 0x3b_u8, 0xea_u8, 0x6f_u8])
     def query_interface(this : IFaxServerNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6221,7 +6282,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("ec9c69b9-5fe7-4805-9467-82fcd96af903")]
   record IFaxServerNotify2_, lpVtbl : IFaxServerNotify2_Vtbl* do
     GUID = LibC::GUID.new(0xec9c69b9_u32, 0x5fe7_u16, 0x4805_u16, StaticArray[0x94_u8, 0x67_u8, 0x82_u8, 0xfc_u8, 0xd9_u8, 0x6a_u8, 0xf9_u8, 0x3_u8])
     def query_interface(this : IFaxServerNotify2_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6338,7 +6398,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("616ca8d6-a77a-4062-abfd-0e471241c7aa")]
   record IFaxServerNotify2, lpVtbl : IFaxServerNotify2Vtbl* do
     GUID = LibC::GUID.new(0x616ca8d6_u32, 0xa77a_u16, 0x4062_u16, StaticArray[0xab_u8, 0xfd_u8, 0xe_u8, 0x47_u8, 0x12_u8, 0x41_u8, 0xc7_u8, 0xaa_u8])
     def query_interface(this : IFaxServerNotify2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6388,7 +6447,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("b9b3bc81-ac1b-46f3-b39d-0adc30e1b788")]
   record IFaxAccountNotify_, lpVtbl : IFaxAccountNotify_Vtbl* do
     GUID = LibC::GUID.new(0xb9b3bc81_u32, 0xac1b_u16, 0x46f3_u16, StaticArray[0xb3_u8, 0x9d_u8, 0xa_u8, 0xdc_u8, 0x30_u8, 0xe1_u8, 0xb7_u8, 0x88_u8])
     def query_interface(this : IFaxAccountNotify_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6460,7 +6518,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("0b5e5bd1-b8a9-47a0-a323-ef4a293ba06a")]
   record IFaxAccountNotify, lpVtbl : IFaxAccountNotifyVtbl* do
     GUID = LibC::GUID.new(0xb5e5bd1_u32, 0xb8a9_u16, 0x47a0_u16, StaticArray[0xa3_u8, 0x23_u8, 0xef_u8, 0x4a_u8, 0x29_u8, 0x3b_u8, 0xa0_u8, 0x6a_u8])
     def query_interface(this : IFaxAccountNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6510,7 +6567,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("641bd880-2dc8-11d0-90ea-00aa0060f86c")]
   record IStillImageW, lpVtbl : IStillImageWVtbl* do
     GUID = LibC::GUID.new(0x641bd880_u32, 0x2dc8_u16, 0x11d0_u16, StaticArray[0x90_u8, 0xea_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x60_u8, 0xf8_u8, 0x6c_u8])
     def query_interface(this : IStillImageW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6595,7 +6651,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("6cfa5a80-2dc8-11d0-90ea-00aa0060f86c")]
   record IStiDevice, lpVtbl : IStiDeviceVtbl* do
     GUID = LibC::GUID.new(0x6cfa5a80_u32, 0x2dc8_u16, 0x11d0_u16, StaticArray[0x90_u8, 0xea_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x60_u8, 0xf8_u8, 0x6c_u8])
     def query_interface(this : IStiDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6680,7 +6735,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("128a9860-52dc-11d0-9edf-444553540000")]
   record IStiDeviceControl, lpVtbl : IStiDeviceControlVtbl* do
     GUID = LibC::GUID.new(0x128a9860_u32, 0x52dc_u16, 0x11d0_u16, StaticArray[0x9e_u8, 0xdf_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IStiDeviceControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6752,7 +6806,6 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  #@[Com("0c9bb460-51ac-11d0-90ea-00aa0060f86c")]
   record IStiUSD, lpVtbl : IStiUSDVtbl* do
     GUID = LibC::GUID.new(0xc9bb460_u32, 0x51ac_u16, 0x11d0_u16, StaticArray[0x90_u8, 0xea_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x60_u8, 0xf8_u8, 0x6c_u8])
     def query_interface(this : IStiUSD*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

@@ -45,40 +45,56 @@ module Win32cr::System::TpmBaseServices
   end
 
   @[Extern]
-  record TBS_CONTEXT_PARAMS,
-    version : UInt32
-
-  @[Extern]
-  record TBS_CONTEXT_PARAMS2,
-    version : UInt32,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      asUINT32 : UInt32 do
-
-      # Nested Type Anonymous_e__Struct_
-      @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
-
+  struct TBS_CONTEXT_PARAMS
+    property version : UInt32
+    def initialize(@version : UInt32)
     end
-
   end
 
   @[Extern]
-  record Tdtpm_wnf_provisioning,
-    status : UInt32,
-    message : UInt8[28]
+  struct TBS_CONTEXT_PARAMS2
+    property version : UInt32
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property asUINT32 : UInt32
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @asUINT32 : UInt32)
+    end
+    end
+
+    def initialize(@version : UInt32, @anonymous : Anonymous_e__Union_)
+    end
+  end
 
   @[Extern]
-  record TPM_DEVICE_INFO,
-    structVersion : UInt32,
-    tpmVersion : UInt32,
-    tpmInterfaceType : UInt32,
-    tpmImpRevision : UInt32
+  struct Tdtpm_wnf_provisioning
+    property status : UInt32
+    property message : UInt8[28]
+    def initialize(@status : UInt32, @message : UInt8[28])
+    end
+  end
+
+  @[Extern]
+  struct TPM_DEVICE_INFO
+    property structVersion : UInt32
+    property tpmVersion : UInt32
+    property tpmInterfaceType : UInt32
+    property tpmImpRevision : UInt32
+    def initialize(@structVersion : UInt32, @tpmVersion : UInt32, @tpmInterfaceType : UInt32, @tpmImpRevision : UInt32)
+    end
+  end
 
   @[Link("tbs")]
   lib C

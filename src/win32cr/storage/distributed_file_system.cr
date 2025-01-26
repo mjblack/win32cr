@@ -51,242 +51,341 @@ module Win32cr::Storage::DistributedFileSystem
   end
 
   @[Extern]
-  record DFS_TARGET_PRIORITY,
-    target_priority_class : Win32cr::Storage::DistributedFileSystem::DFS_TARGET_PRIORITY_CLASS,
-    target_priority_rank : UInt16,
-    reserved : UInt16
+  struct DFS_TARGET_PRIORITY
+    property target_priority_class : Win32cr::Storage::DistributedFileSystem::DFS_TARGET_PRIORITY_CLASS
+    property target_priority_rank : UInt16
+    property reserved : UInt16
+    def initialize(@target_priority_class : Win32cr::Storage::DistributedFileSystem::DFS_TARGET_PRIORITY_CLASS, @target_priority_rank : UInt16, @reserved : UInt16)
+    end
+  end
 
   @[Extern]
-  record DFS_INFO_1,
-    entry_path : Win32cr::Foundation::PWSTR
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record DFS_INFO_1_32,
-    entry_path : UInt32
-  {% end %}
-
-  @[Extern]
-  record DFS_INFO_2,
-    entry_path : Win32cr::Foundation::PWSTR,
-    comment : Win32cr::Foundation::PWSTR,
-    state : UInt32,
-    number_of_storages : UInt32
+  struct DFS_INFO_1
+    property entry_path : Win32cr::Foundation::PWSTR
+    def initialize(@entry_path : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record DFS_INFO_2_32,
-    entry_path : UInt32,
-    comment : UInt32,
-    state : UInt32,
-    number_of_storages : UInt32
+  struct DFS_INFO_1_32
+    property entry_path : UInt32
+    def initialize(@entry_path : UInt32)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record DFS_STORAGE_INFO,
-    state : UInt32,
-    server_name : Win32cr::Foundation::PWSTR,
-    share_name : Win32cr::Foundation::PWSTR
+  struct DFS_INFO_2
+    property entry_path : Win32cr::Foundation::PWSTR
+    property comment : Win32cr::Foundation::PWSTR
+    property state : UInt32
+    property number_of_storages : UInt32
+    def initialize(@entry_path : Win32cr::Foundation::PWSTR, @comment : Win32cr::Foundation::PWSTR, @state : UInt32, @number_of_storages : UInt32)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record DFS_STORAGE_INFO_0_32,
-    state : UInt32,
-    server_name : UInt32,
-    share_name : UInt32
+  struct DFS_INFO_2_32
+    property entry_path : UInt32
+    property comment : UInt32
+    property state : UInt32
+    property number_of_storages : UInt32
+    def initialize(@entry_path : UInt32, @comment : UInt32, @state : UInt32, @number_of_storages : UInt32)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record DFS_STORAGE_INFO_1,
-    state : UInt32,
-    server_name : Win32cr::Foundation::PWSTR,
-    share_name : Win32cr::Foundation::PWSTR,
-    target_priority : Win32cr::Storage::DistributedFileSystem::DFS_TARGET_PRIORITY
-
-  @[Extern]
-  record DFS_INFO_3,
-    entry_path : Win32cr::Foundation::PWSTR,
-    comment : Win32cr::Foundation::PWSTR,
-    state : UInt32,
-    number_of_storages : UInt32,
-    storage : Win32cr::Storage::DistributedFileSystem::DFS_STORAGE_INFO*
+  struct DFS_STORAGE_INFO
+    property state : UInt32
+    property server_name : Win32cr::Foundation::PWSTR
+    property share_name : Win32cr::Foundation::PWSTR
+    def initialize(@state : UInt32, @server_name : Win32cr::Foundation::PWSTR, @share_name : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record DFS_INFO_3_32,
-    entry_path : UInt32,
-    comment : UInt32,
-    state : UInt32,
-    number_of_storages : UInt32,
-    storage : UInt32
+  struct DFS_STORAGE_INFO_0_32
+    property state : UInt32
+    property server_name : UInt32
+    property share_name : UInt32
+    def initialize(@state : UInt32, @server_name : UInt32, @share_name : UInt32)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record DFS_INFO_4,
-    entry_path : Win32cr::Foundation::PWSTR,
-    comment : Win32cr::Foundation::PWSTR,
-    state : UInt32,
-    timeout : UInt32,
-    guid : LibC::GUID,
-    number_of_storages : UInt32,
-    storage : Win32cr::Storage::DistributedFileSystem::DFS_STORAGE_INFO*
+  struct DFS_STORAGE_INFO_1
+    property state : UInt32
+    property server_name : Win32cr::Foundation::PWSTR
+    property share_name : Win32cr::Foundation::PWSTR
+    property target_priority : Win32cr::Storage::DistributedFileSystem::DFS_TARGET_PRIORITY
+    def initialize(@state : UInt32, @server_name : Win32cr::Foundation::PWSTR, @share_name : Win32cr::Foundation::PWSTR, @target_priority : Win32cr::Storage::DistributedFileSystem::DFS_TARGET_PRIORITY)
+    end
+  end
+
+  @[Extern]
+  struct DFS_INFO_3
+    property entry_path : Win32cr::Foundation::PWSTR
+    property comment : Win32cr::Foundation::PWSTR
+    property state : UInt32
+    property number_of_storages : UInt32
+    property storage : Win32cr::Storage::DistributedFileSystem::DFS_STORAGE_INFO*
+    def initialize(@entry_path : Win32cr::Foundation::PWSTR, @comment : Win32cr::Foundation::PWSTR, @state : UInt32, @number_of_storages : UInt32, @storage : Win32cr::Storage::DistributedFileSystem::DFS_STORAGE_INFO*)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record DFS_INFO_4_32,
-    entry_path : UInt32,
-    comment : UInt32,
-    state : UInt32,
-    timeout : UInt32,
-    guid : LibC::GUID,
-    number_of_storages : UInt32,
-    storage : UInt32
+  struct DFS_INFO_3_32
+    property entry_path : UInt32
+    property comment : UInt32
+    property state : UInt32
+    property number_of_storages : UInt32
+    property storage : UInt32
+    def initialize(@entry_path : UInt32, @comment : UInt32, @state : UInt32, @number_of_storages : UInt32, @storage : UInt32)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record DFS_INFO_5,
-    entry_path : Win32cr::Foundation::PWSTR,
-    comment : Win32cr::Foundation::PWSTR,
-    state : UInt32,
-    timeout : UInt32,
-    guid : LibC::GUID,
-    property_flags : UInt32,
-    metadata_size : UInt32,
-    number_of_storages : UInt32
+  struct DFS_INFO_4
+    property entry_path : Win32cr::Foundation::PWSTR
+    property comment : Win32cr::Foundation::PWSTR
+    property state : UInt32
+    property timeout : UInt32
+    property guid : LibC::GUID
+    property number_of_storages : UInt32
+    property storage : Win32cr::Storage::DistributedFileSystem::DFS_STORAGE_INFO*
+    def initialize(@entry_path : Win32cr::Foundation::PWSTR, @comment : Win32cr::Foundation::PWSTR, @state : UInt32, @timeout : UInt32, @guid : LibC::GUID, @number_of_storages : UInt32, @storage : Win32cr::Storage::DistributedFileSystem::DFS_STORAGE_INFO*)
+    end
+  end
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct DFS_INFO_4_32
+    property entry_path : UInt32
+    property comment : UInt32
+    property state : UInt32
+    property timeout : UInt32
+    property guid : LibC::GUID
+    property number_of_storages : UInt32
+    property storage : UInt32
+    def initialize(@entry_path : UInt32, @comment : UInt32, @state : UInt32, @timeout : UInt32, @guid : LibC::GUID, @number_of_storages : UInt32, @storage : UInt32)
+    end
+  end
+  {% end %}
 
   @[Extern]
-  record DFS_INFO_6,
-    entry_path : Win32cr::Foundation::PWSTR,
-    comment : Win32cr::Foundation::PWSTR,
-    state : UInt32,
-    timeout : UInt32,
-    guid : LibC::GUID,
-    property_flags : UInt32,
-    metadata_size : UInt32,
-    number_of_storages : UInt32,
-    storage : Win32cr::Storage::DistributedFileSystem::DFS_STORAGE_INFO_1*
+  struct DFS_INFO_5
+    property entry_path : Win32cr::Foundation::PWSTR
+    property comment : Win32cr::Foundation::PWSTR
+    property state : UInt32
+    property timeout : UInt32
+    property guid : LibC::GUID
+    property property_flags : UInt32
+    property metadata_size : UInt32
+    property number_of_storages : UInt32
+    def initialize(@entry_path : Win32cr::Foundation::PWSTR, @comment : Win32cr::Foundation::PWSTR, @state : UInt32, @timeout : UInt32, @guid : LibC::GUID, @property_flags : UInt32, @metadata_size : UInt32, @number_of_storages : UInt32)
+    end
+  end
 
   @[Extern]
-  record DFS_INFO_7,
-    generation_guid : LibC::GUID
+  struct DFS_INFO_6
+    property entry_path : Win32cr::Foundation::PWSTR
+    property comment : Win32cr::Foundation::PWSTR
+    property state : UInt32
+    property timeout : UInt32
+    property guid : LibC::GUID
+    property property_flags : UInt32
+    property metadata_size : UInt32
+    property number_of_storages : UInt32
+    property storage : Win32cr::Storage::DistributedFileSystem::DFS_STORAGE_INFO_1*
+    def initialize(@entry_path : Win32cr::Foundation::PWSTR, @comment : Win32cr::Foundation::PWSTR, @state : UInt32, @timeout : UInt32, @guid : LibC::GUID, @property_flags : UInt32, @metadata_size : UInt32, @number_of_storages : UInt32, @storage : Win32cr::Storage::DistributedFileSystem::DFS_STORAGE_INFO_1*)
+    end
+  end
 
   @[Extern]
-  record DFS_INFO_8,
-    entry_path : Win32cr::Foundation::PWSTR,
-    comment : Win32cr::Foundation::PWSTR,
-    state : UInt32,
-    timeout : UInt32,
-    guid : LibC::GUID,
-    property_flags : UInt32,
-    metadata_size : UInt32,
-    sd_length_reserved : UInt32,
-    pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR,
-    number_of_storages : UInt32
+  struct DFS_INFO_7
+    property generation_guid : LibC::GUID
+    def initialize(@generation_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record DFS_INFO_9,
-    entry_path : Win32cr::Foundation::PWSTR,
-    comment : Win32cr::Foundation::PWSTR,
-    state : UInt32,
-    timeout : UInt32,
-    guid : LibC::GUID,
-    property_flags : UInt32,
-    metadata_size : UInt32,
-    sd_length_reserved : UInt32,
-    pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR,
-    number_of_storages : UInt32,
-    storage : Win32cr::Storage::DistributedFileSystem::DFS_STORAGE_INFO_1*
+  struct DFS_INFO_8
+    property entry_path : Win32cr::Foundation::PWSTR
+    property comment : Win32cr::Foundation::PWSTR
+    property state : UInt32
+    property timeout : UInt32
+    property guid : LibC::GUID
+    property property_flags : UInt32
+    property metadata_size : UInt32
+    property sd_length_reserved : UInt32
+    property pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR
+    property number_of_storages : UInt32
+    def initialize(@entry_path : Win32cr::Foundation::PWSTR, @comment : Win32cr::Foundation::PWSTR, @state : UInt32, @timeout : UInt32, @guid : LibC::GUID, @property_flags : UInt32, @metadata_size : UInt32, @sd_length_reserved : UInt32, @pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, @number_of_storages : UInt32)
+    end
+  end
 
   @[Extern]
-  record DFS_INFO_50,
-    namespace_major_version : UInt32,
-    namespace_minor_version : UInt32,
-    namespace_capabilities : UInt64
+  struct DFS_INFO_9
+    property entry_path : Win32cr::Foundation::PWSTR
+    property comment : Win32cr::Foundation::PWSTR
+    property state : UInt32
+    property timeout : UInt32
+    property guid : LibC::GUID
+    property property_flags : UInt32
+    property metadata_size : UInt32
+    property sd_length_reserved : UInt32
+    property pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR
+    property number_of_storages : UInt32
+    property storage : Win32cr::Storage::DistributedFileSystem::DFS_STORAGE_INFO_1*
+    def initialize(@entry_path : Win32cr::Foundation::PWSTR, @comment : Win32cr::Foundation::PWSTR, @state : UInt32, @timeout : UInt32, @guid : LibC::GUID, @property_flags : UInt32, @metadata_size : UInt32, @sd_length_reserved : UInt32, @pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, @number_of_storages : UInt32, @storage : Win32cr::Storage::DistributedFileSystem::DFS_STORAGE_INFO_1*)
+    end
+  end
 
   @[Extern]
-  record DFS_INFO_100,
-    comment : Win32cr::Foundation::PWSTR
+  struct DFS_INFO_50
+    property namespace_major_version : UInt32
+    property namespace_minor_version : UInt32
+    property namespace_capabilities : UInt64
+    def initialize(@namespace_major_version : UInt32, @namespace_minor_version : UInt32, @namespace_capabilities : UInt64)
+    end
+  end
 
   @[Extern]
-  record DFS_INFO_101,
-    state : UInt32
+  struct DFS_INFO_100
+    property comment : Win32cr::Foundation::PWSTR
+    def initialize(@comment : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record DFS_INFO_102,
-    timeout : UInt32
+  struct DFS_INFO_101
+    property state : UInt32
+    def initialize(@state : UInt32)
+    end
+  end
 
   @[Extern]
-  record DFS_INFO_103,
-    property_flag_mask : UInt32,
-    property_flags : UInt32
+  struct DFS_INFO_102
+    property timeout : UInt32
+    def initialize(@timeout : UInt32)
+    end
+  end
 
   @[Extern]
-  record DFS_INFO_104,
-    target_priority : Win32cr::Storage::DistributedFileSystem::DFS_TARGET_PRIORITY
+  struct DFS_INFO_103
+    property property_flag_mask : UInt32
+    property property_flags : UInt32
+    def initialize(@property_flag_mask : UInt32, @property_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record DFS_INFO_105,
-    comment : Win32cr::Foundation::PWSTR,
-    state : UInt32,
-    timeout : UInt32,
-    property_flag_mask : UInt32,
-    property_flags : UInt32
+  struct DFS_INFO_104
+    property target_priority : Win32cr::Storage::DistributedFileSystem::DFS_TARGET_PRIORITY
+    def initialize(@target_priority : Win32cr::Storage::DistributedFileSystem::DFS_TARGET_PRIORITY)
+    end
+  end
 
   @[Extern]
-  record DFS_INFO_106,
-    state : UInt32,
-    target_priority : Win32cr::Storage::DistributedFileSystem::DFS_TARGET_PRIORITY
+  struct DFS_INFO_105
+    property comment : Win32cr::Foundation::PWSTR
+    property state : UInt32
+    property timeout : UInt32
+    property property_flag_mask : UInt32
+    property property_flags : UInt32
+    def initialize(@comment : Win32cr::Foundation::PWSTR, @state : UInt32, @timeout : UInt32, @property_flag_mask : UInt32, @property_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record DFS_INFO_107,
-    comment : Win32cr::Foundation::PWSTR,
-    state : UInt32,
-    timeout : UInt32,
-    property_flag_mask : UInt32,
-    property_flags : UInt32,
-    sd_length_reserved : UInt32,
-    pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR
+  struct DFS_INFO_106
+    property state : UInt32
+    property target_priority : Win32cr::Storage::DistributedFileSystem::DFS_TARGET_PRIORITY
+    def initialize(@state : UInt32, @target_priority : Win32cr::Storage::DistributedFileSystem::DFS_TARGET_PRIORITY)
+    end
+  end
 
   @[Extern]
-  record DFS_INFO_150,
-    sd_length_reserved : UInt32,
-    pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR
+  struct DFS_INFO_107
+    property comment : Win32cr::Foundation::PWSTR
+    property state : UInt32
+    property timeout : UInt32
+    property property_flag_mask : UInt32
+    property property_flags : UInt32
+    property sd_length_reserved : UInt32
+    property pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR
+    def initialize(@comment : Win32cr::Foundation::PWSTR, @state : UInt32, @timeout : UInt32, @property_flag_mask : UInt32, @property_flags : UInt32, @sd_length_reserved : UInt32, @pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR)
+    end
+  end
 
   @[Extern]
-  record DFS_INFO_200,
-    ft_dfs_name : Win32cr::Foundation::PWSTR
+  struct DFS_INFO_150
+    property sd_length_reserved : UInt32
+    property pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR
+    def initialize(@sd_length_reserved : UInt32, @pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR)
+    end
+  end
 
   @[Extern]
-  record DFS_INFO_300,
-    flags : UInt32,
-    dfs_name : Win32cr::Foundation::PWSTR
+  struct DFS_INFO_200
+    property ft_dfs_name : Win32cr::Foundation::PWSTR
+    def initialize(@ft_dfs_name : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record DFS_SITENAME_INFO,
-    site_flags : UInt32,
-    site_name : Win32cr::Foundation::PWSTR
+  struct DFS_INFO_300
+    property flags : UInt32
+    property dfs_name : Win32cr::Foundation::PWSTR
+    def initialize(@flags : UInt32, @dfs_name : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record DFS_SITELIST_INFO,
-    cSites : UInt32,
-    site : Win32cr::Storage::DistributedFileSystem::DFS_SITENAME_INFO*
+  struct DFS_SITENAME_INFO
+    property site_flags : UInt32
+    property site_name : Win32cr::Foundation::PWSTR
+    def initialize(@site_flags : UInt32, @site_name : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record DFS_SUPPORTED_NAMESPACE_VERSION_INFO,
-    domain_dfs_major_version : UInt32,
-    domain_dfs_minor_version : UInt32,
-    domain_dfs_capabilities : UInt64,
-    standalone_dfs_major_version : UInt32,
-    standalone_dfs_minor_version : UInt32,
-    standalone_dfs_capabilities : UInt64
+  struct DFS_SITELIST_INFO
+    property cSites : UInt32
+    property site : Win32cr::Storage::DistributedFileSystem::DFS_SITENAME_INFO*
+    def initialize(@cSites : UInt32, @site : Win32cr::Storage::DistributedFileSystem::DFS_SITENAME_INFO*)
+    end
+  end
 
   @[Extern]
-  record DFS_GET_PKT_ENTRY_STATE_ARG,
-    dfs_entry_path_len : UInt16,
-    server_name_len : UInt16,
-    share_name_len : UInt16,
-    level : UInt32,
-    buffer : UInt16*
+  struct DFS_SUPPORTED_NAMESPACE_VERSION_INFO
+    property domain_dfs_major_version : UInt32
+    property domain_dfs_minor_version : UInt32
+    property domain_dfs_capabilities : UInt64
+    property standalone_dfs_major_version : UInt32
+    property standalone_dfs_minor_version : UInt32
+    property standalone_dfs_capabilities : UInt64
+    def initialize(@domain_dfs_major_version : UInt32, @domain_dfs_minor_version : UInt32, @domain_dfs_capabilities : UInt64, @standalone_dfs_major_version : UInt32, @standalone_dfs_minor_version : UInt32, @standalone_dfs_capabilities : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct DFS_GET_PKT_ENTRY_STATE_ARG
+    property dfs_entry_path_len : UInt16
+    property server_name_len : UInt16
+    property share_name_len : UInt16
+    property level : UInt32
+    property buffer : UInt16*
+    def initialize(@dfs_entry_path_len : UInt16, @server_name_len : UInt16, @share_name_len : UInt16, @level : UInt32, @buffer : UInt16*)
+    end
+  end
 
   @[Link("netapi32")]
   lib C

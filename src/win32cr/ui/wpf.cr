@@ -14,35 +14,44 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record MilRectD,
-    left : Float64,
-    top : Float64,
-    right : Float64,
-    bottom : Float64
+  struct MilRectD
+    property left : Float64
+    property top : Float64
+    property right : Float64
+    property bottom : Float64
+    def initialize(@left : Float64, @top : Float64, @right : Float64, @bottom : Float64)
+    end
+  end
 
   @[Extern]
-  record MilPoint2D,
-    x : Float64,
-    y : Float64
+  struct MilPoint2D
+    property x : Float64
+    property y : Float64
+    def initialize(@x : Float64, @y : Float64)
+    end
+  end
 
   @[Extern]
-  record MILMatrixF,
-    _11 : Float64,
-    _12 : Float64,
-    _13 : Float64,
-    _14 : Float64,
-    _21 : Float64,
-    _22 : Float64,
-    _23 : Float64,
-    _24 : Float64,
-    _31 : Float64,
-    _32 : Float64,
-    _33 : Float64,
-    _34 : Float64,
-    _41 : Float64,
-    _42 : Float64,
-    _43 : Float64,
-    _44 : Float64
+  struct MILMatrixF
+    property _11 : Float64
+    property _12 : Float64
+    property _13 : Float64
+    property _14 : Float64
+    property _21 : Float64
+    property _22 : Float64
+    property _23 : Float64
+    property _24 : Float64
+    property _31 : Float64
+    property _32 : Float64
+    property _33 : Float64
+    property _34 : Float64
+    property _41 : Float64
+    property _42 : Float64
+    property _43 : Float64
+    property _44 : Float64
+    def initialize(@_11 : Float64, @_12 : Float64, @_13 : Float64, @_14 : Float64, @_21 : Float64, @_22 : Float64, @_23 : Float64, @_24 : Float64, @_31 : Float64, @_32 : Float64, @_33 : Float64, @_34 : Float64, @_41 : Float64, @_42 : Float64, @_43 : Float64, @_44 : Float64)
+    end
+  end
 
   @[Extern]
   record IMILBitmapEffectConnectorInfoVtbl,
@@ -56,7 +65,6 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  #@[Com("f66d2e4b-b46b-42fc-859e-3da0ecdb3c43")]
   record IMILBitmapEffectConnectorInfo, lpVtbl : IMILBitmapEffectConnectorInfoVtbl* do
     GUID = LibC::GUID.new(0xf66d2e4b_u32, 0xb46b_u16, 0x42fc_u16, StaticArray[0x85_u8, 0x9e_u8, 0x3d_u8, 0xa0_u8, 0xec_u8, 0xdb_u8, 0x3c_u8, 0x43_u8])
     def query_interface(this : IMILBitmapEffectConnectorInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -95,7 +103,6 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  #@[Com("476b538a-c765-4237-ba4a-d6a880ff0cfc")]
   record IMILBitmapEffectConnectionsInfo, lpVtbl : IMILBitmapEffectConnectionsInfoVtbl* do
     GUID = LibC::GUID.new(0x476b538a_u32, 0xc765_u16, 0x4237_u16, StaticArray[0xba_u8, 0x4a_u8, 0xd6_u8, 0xa8_u8, 0x80_u8, 0xff_u8, 0xc_u8, 0xfc_u8])
     def query_interface(this : IMILBitmapEffectConnectionsInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -132,7 +139,6 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  #@[Com("c2b5d861-9b1a-4374-89b0-dec4874d6a81")]
   record IMILBitmapEffectConnections, lpVtbl : IMILBitmapEffectConnectionsVtbl* do
     GUID = LibC::GUID.new(0xc2b5d861_u32, 0x9b1a_u16, 0x4374_u16, StaticArray[0x89_u8, 0xb0_u8, 0xde_u8, 0xc4_u8, 0x87_u8, 0x4d_u8, 0x6a_u8, 0x81_u8])
     def query_interface(this : IMILBitmapEffectConnections*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -164,7 +170,6 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  #@[Com("8a6ff321-c944-4a1b-9944-9954af301258")]
   record IMILBitmapEffect, lpVtbl : IMILBitmapEffectVtbl* do
     GUID = LibC::GUID.new(0x8a6ff321_u32, 0xc944_u16, 0x4a1b_u16, StaticArray[0x99_u8, 0x44_u8, 0x99_u8, 0x54_u8, 0xaf_u8, 0x30_u8, 0x12_u8, 0x58_u8])
     def query_interface(this : IMILBitmapEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -203,7 +208,6 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  #@[Com("cc2468f2-9936-47be-b4af-06b5df5dbcbb")]
   record IMILBitmapEffectImpl, lpVtbl : IMILBitmapEffectImplVtbl* do
     GUID = LibC::GUID.new(0xcc2468f2_u32, 0x9936_u16, 0x47be_u16, StaticArray[0xb4_u8, 0xaf_u8, 0x6_u8, 0xb5_u8, 0xdf_u8, 0x5d_u8, 0xbc_u8, 0xbb_u8])
     def query_interface(this : IMILBitmapEffectImpl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -250,7 +254,6 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  #@[Com("2f952360-698a-4ac6-81a1-bcfdf08eb8e8")]
   record IMILBitmapEffectGroup, lpVtbl : IMILBitmapEffectGroupVtbl* do
     GUID = LibC::GUID.new(0x2f952360_u32, 0x698a_u16, 0x4ac6_u16, StaticArray[0x81_u8, 0xa1_u8, 0xbc_u8, 0xfd_u8, 0xf0_u8, 0x8e_u8, 0xb8_u8, 0xe8_u8])
     def query_interface(this : IMILBitmapEffectGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -285,7 +288,6 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  #@[Com("78fed518-1cfc-4807-8b85-6b6e51398f62")]
   record IMILBitmapEffectGroupImpl, lpVtbl : IMILBitmapEffectGroupImplVtbl* do
     GUID = LibC::GUID.new(0x78fed518_u32, 0x1cfc_u16, 0x4807_u16, StaticArray[0x8b_u8, 0x85_u8, 0x6b_u8, 0x6e_u8, 0x51_u8, 0x39_u8, 0x8f_u8, 0x62_u8])
     def query_interface(this : IMILBitmapEffectGroupImpl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -325,7 +327,6 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  #@[Com("12a2ec7e-2d33-44b2-b334-1abb7846e390")]
   record IMILBitmapEffectRenderContext, lpVtbl : IMILBitmapEffectRenderContextVtbl* do
     GUID = LibC::GUID.new(0x12a2ec7e_u32, 0x2d33_u16, 0x44b2_u16, StaticArray[0xb3_u8, 0x34_u8, 0x1a_u8, 0xbb_u8, 0x78_u8, 0x46_u8, 0xe3_u8, 0x90_u8])
     def query_interface(this : IMILBitmapEffectRenderContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -377,7 +378,6 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  #@[Com("4d25accb-797d-4fd2-b128-dffeff84fcc3")]
   record IMILBitmapEffectRenderContextImpl, lpVtbl : IMILBitmapEffectRenderContextImplVtbl* do
     GUID = LibC::GUID.new(0x4d25accb_u32, 0x797d_u16, 0x4fd2_u16, StaticArray[0xb1_u8, 0x28_u8, 0xdf_u8, 0xfe_u8, 0xff_u8, 0x84_u8, 0xfc_u8, 0xc3_u8])
     def query_interface(this : IMILBitmapEffectRenderContextImpl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -418,7 +418,6 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  #@[Com("33a9df34-a403-4ec7-b07e-bc0682370845")]
   record IMILBitmapEffectFactory, lpVtbl : IMILBitmapEffectFactoryVtbl* do
     GUID = LibC::GUID.new(0x33a9df34_u32, 0xa403_u16, 0x4ec7_u16, StaticArray[0xb0_u8, 0x7e_u8, 0xbc_u8, 0x6_u8, 0x82_u8, 0x37_u8, 0x8_u8, 0x45_u8])
     def query_interface(this : IMILBitmapEffectFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -456,7 +455,6 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  #@[Com("67e31025-3091-4dfc-98d6-dd494551461d")]
   record IMILBitmapEffectPrimitive, lpVtbl : IMILBitmapEffectPrimitiveVtbl* do
     GUID = LibC::GUID.new(0x67e31025_u32, 0x3091_u16, 0x4dfc_u16, StaticArray[0x98_u8, 0xd6_u8, 0xdd_u8, 0x49_u8, 0x45_u8, 0x51_u8, 0x46_u8, 0x1d_u8])
     def query_interface(this : IMILBitmapEffectPrimitive*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -499,7 +497,6 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  #@[Com("ce41e00b-efa6-44e7-b007-dd042e3ae126")]
   record IMILBitmapEffectPrimitiveImpl, lpVtbl : IMILBitmapEffectPrimitiveImplVtbl* do
     GUID = LibC::GUID.new(0xce41e00b_u32, 0xefa6_u16, 0x44e7_u16, StaticArray[0xb0_u8, 0x7_u8, 0xdd_u8, 0x4_u8, 0x2e_u8, 0x3a_u8, 0xe1_u8, 0x26_u8])
     def query_interface(this : IMILBitmapEffectPrimitiveImpl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -532,7 +529,6 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  #@[Com("51ac3dce-67c5-448b-9180-ad3eabddd5dd")]
   record IMILBitmapEffects, lpVtbl : IMILBitmapEffectsVtbl* do
     GUID = LibC::GUID.new(0x51ac3dce_u32, 0x67c5_u16, 0x448b_u16, StaticArray[0x91_u8, 0x80_u8, 0xad_u8, 0x3e_u8, 0xab_u8, 0xdd_u8, 0xd5_u8, 0xdd_u8])
     def query_interface(this : IMILBitmapEffects*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -573,7 +569,6 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  #@[Com("f59567b3-76c1-4d47-ba1e-79f955e350ef")]
   record IMILBitmapEffectConnector, lpVtbl : IMILBitmapEffectConnectorVtbl* do
     GUID = LibC::GUID.new(0xf59567b3_u32, 0x76c1_u16, 0x4d47_u16, StaticArray[0xba_u8, 0x1e_u8, 0x79_u8, 0xf9_u8, 0x55_u8, 0xe3_u8, 0x50_u8, 0xef_u8])
     def query_interface(this : IMILBitmapEffectConnector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -622,7 +617,6 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  #@[Com("a9b4ecaa-7a3c-45e7-8573-f4b81b60dd6c")]
   record IMILBitmapEffectInputConnector, lpVtbl : IMILBitmapEffectInputConnectorVtbl* do
     GUID = LibC::GUID.new(0xa9b4ecaa_u32, 0x7a3c_u16, 0x45e7_u16, StaticArray[0x85_u8, 0x73_u8, 0xf4_u8, 0xb8_u8, 0x1b_u8, 0x60_u8, 0xdd_u8, 0x6c_u8])
     def query_interface(this : IMILBitmapEffectInputConnector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -677,7 +671,6 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  #@[Com("92957aad-841b-4866-82ec-8752468b07fd")]
   record IMILBitmapEffectOutputConnector, lpVtbl : IMILBitmapEffectOutputConnectorVtbl* do
     GUID = LibC::GUID.new(0x92957aad_u32, 0x841b_u16, 0x4866_u16, StaticArray[0x82_u8, 0xec_u8, 0x87_u8, 0x52_u8, 0x46_u8, 0x8b_u8, 0x7_u8, 0xfd_u8])
     def query_interface(this : IMILBitmapEffectOutputConnector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -726,7 +719,6 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  #@[Com("21fae777-8b39-4bfa-9f2d-f3941ed36913")]
   record IMILBitmapEffectOutputConnectorImpl, lpVtbl : IMILBitmapEffectOutputConnectorImplVtbl* do
     GUID = LibC::GUID.new(0x21fae777_u32, 0x8b39_u16, 0x4bfa_u16, StaticArray[0x9f_u8, 0x2d_u8, 0xf3_u8, 0x94_u8, 0x1e_u8, 0xd3_u8, 0x69_u8, 0x13_u8])
     def query_interface(this : IMILBitmapEffectOutputConnectorImpl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -756,7 +748,6 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  #@[Com("20287e9e-86a2-4e15-953d-eb1438a5b842")]
   record IMILBitmapEffectInteriorInputConnector, lpVtbl : IMILBitmapEffectInteriorInputConnectorVtbl* do
     GUID = LibC::GUID.new(0x20287e9e_u32, 0x86a2_u16, 0x4e15_u16, StaticArray[0x95_u8, 0x3d_u8, 0xeb_u8, 0x14_u8, 0x38_u8, 0xa5_u8, 0xb8_u8, 0x42_u8])
     def query_interface(this : IMILBitmapEffectInteriorInputConnector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -783,7 +774,6 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  #@[Com("00bbb6dc-acc9-4bfc-b344-8bee383dfefa")]
   record IMILBitmapEffectInteriorOutputConnector, lpVtbl : IMILBitmapEffectInteriorOutputConnectorVtbl* do
     GUID = LibC::GUID.new(0xbbb6dc_u32, 0xacc9_u16, 0x4bfc_u16, StaticArray[0xb3_u8, 0x44_u8, 0x8b_u8, 0xee_u8, 0x38_u8, 0x3d_u8, 0xfe_u8, 0xfa_u8])
     def query_interface(this : IMILBitmapEffectInteriorOutputConnector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -811,7 +801,6 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  #@[Com("2e880dd8-f8ce-457b-8199-d60bb3d7ef98")]
   record IMILBitmapEffectEvents, lpVtbl : IMILBitmapEffectEventsVtbl* do
     GUID = LibC::GUID.new(0x2e880dd8_u32, 0xf8ce_u16, 0x457b_u16, StaticArray[0x81_u8, 0x99_u8, 0xd6_u8, 0xb_u8, 0xb3_u8, 0xd7_u8, 0xef_u8, 0x98_u8])
     def query_interface(this : IMILBitmapEffectEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

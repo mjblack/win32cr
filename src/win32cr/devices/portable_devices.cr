@@ -1467,10 +1467,13 @@ module Win32cr::Devices::PortableDevices
   end
 
   @[Extern]
-  record WPD_COMMAND_ACCESS_LOOKUP_ENTRY,
-    command : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY,
-    access_type : UInt32,
-    access_property : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY
+  struct WPD_COMMAND_ACCESS_LOOKUP_ENTRY
+    property command : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY
+    property access_type : UInt32
+    property access_property : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY
+    def initialize(@command : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY, @access_type : UInt32, @access_property : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY)
+    end
+  end
 
   @[Extern]
   record IWpdSerializerVtbl,
@@ -1484,7 +1487,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("b32f4002-bb27-45ff-af4f-06631c1e8dad")]
   record IWpdSerializer, lpVtbl : IWpdSerializerVtbl* do
     GUID = LibC::GUID.new(0xb32f4002_u32, 0xbb27_u16, 0x45ff_u16, StaticArray[0xaf_u8, 0x4f_u8, 0x6_u8, 0x63_u8, 0x1c_u8, 0x1e_u8, 0x8d_u8, 0xad_u8])
     def query_interface(this : IWpdSerializer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1559,7 +1561,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("6848f6f2-3155-4f86-b6f5-263eeeab3143")]
   record IPortableDeviceValues, lpVtbl : IPortableDeviceValuesVtbl* do
     GUID = LibC::GUID.new(0x6848f6f2_u32, 0x3155_u16, 0x4f86_u16, StaticArray[0xb6_u8, 0xf5_u8, 0x26_u8, 0x3e_u8, 0xee_u8, 0xab_u8, 0x31_u8, 0x43_u8])
     def query_interface(this : IPortableDeviceValues*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1707,7 +1708,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("dada2357-e0ad-492e-98db-dd61c53ba353")]
   record IPortableDeviceKeyCollection, lpVtbl : IPortableDeviceKeyCollectionVtbl* do
     GUID = LibC::GUID.new(0xdada2357_u32, 0xe0ad_u16, 0x492e_u16, StaticArray[0x98_u8, 0xdb_u8, 0xdd_u8, 0x61_u8, 0xc5_u8, 0x3b_u8, 0xa3_u8, 0x53_u8])
     def query_interface(this : IPortableDeviceKeyCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1752,7 +1752,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("89b2e422-4f1b-4316-bcef-a44afea83eb3")]
   record IPortableDevicePropVariantCollection, lpVtbl : IPortableDevicePropVariantCollectionVtbl* do
     GUID = LibC::GUID.new(0x89b2e422_u32, 0x4f1b_u16, 0x4316_u16, StaticArray[0xbc_u8, 0xef_u8, 0xa4_u8, 0x4a_u8, 0xfe_u8, 0xa8_u8, 0x3e_u8, 0xb3_u8])
     def query_interface(this : IPortableDevicePropVariantCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1801,7 +1800,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("6e3f2d79-4e07-48c4-8208-d8c2e5af4a99")]
   record IPortableDeviceValuesCollection, lpVtbl : IPortableDeviceValuesCollectionVtbl* do
     GUID = LibC::GUID.new(0x6e3f2d79_u32, 0x4e07_u16, 0x48c4_u16, StaticArray[0x82_u8, 0x8_u8, 0xd8_u8, 0xc2_u8, 0xe5_u8, 0xaf_u8, 0x4a_u8, 0x99_u8])
     def query_interface(this : IPortableDeviceValuesCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1846,7 +1844,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("a1567595-4c2f-4574-a6fa-ecef917b9a40")]
   record IPortableDeviceManager, lpVtbl : IPortableDeviceManagerVtbl* do
     GUID = LibC::GUID.new(0xa1567595_u32, 0x4c2f_u16, 0x4574_u16, StaticArray[0xa6_u8, 0xfa_u8, 0xec_u8, 0xef_u8, 0x91_u8, 0x7b_u8, 0x9a_u8, 0x40_u8])
     def query_interface(this : IPortableDeviceManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1899,7 +1896,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("625e2df8-6392-4cf0-9ad1-3cfa5f17775c")]
   record IPortableDevice, lpVtbl : IPortableDeviceVtbl* do
     GUID = LibC::GUID.new(0x625e2df8_u32, 0x6392_u16, 0x4cf0_u16, StaticArray[0x9a_u8, 0xd1_u8, 0x3c_u8, 0xfa_u8, 0x5f_u8, 0x17_u8, 0x77_u8, 0x5c_u8])
     def query_interface(this : IPortableDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1959,7 +1955,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("6a96ed84-7c73-4480-9938-bf5af477d426")]
   record IPortableDeviceContent, lpVtbl : IPortableDeviceContentVtbl* do
     GUID = LibC::GUID.new(0x6a96ed84_u32, 0x7c73_u16, 0x4480_u16, StaticArray[0x99_u8, 0x38_u8, 0xbf_u8, 0x5a_u8, 0xf4_u8, 0x77_u8, 0xd4_u8, 0x26_u8])
     def query_interface(this : IPortableDeviceContent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2023,7 +2018,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("9b4add96-f6bf-4034-8708-eca72bf10554")]
   record IPortableDeviceContent2, lpVtbl : IPortableDeviceContent2Vtbl* do
     GUID = LibC::GUID.new(0x9b4add96_u32, 0xf6bf_u16, 0x4034_u16, StaticArray[0x87_u8, 0x8_u8, 0xec_u8, 0xa7_u8, 0x2b_u8, 0xf1_u8, 0x5_u8, 0x54_u8])
     def query_interface(this : IPortableDeviceContent2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2084,7 +2078,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("10ece955-cf41-4728-bfa0-41eedf1bbf19")]
   record IEnumPortableDeviceObjectIDs, lpVtbl : IEnumPortableDeviceObjectIDsVtbl* do
     GUID = LibC::GUID.new(0x10ece955_u32, 0xcf41_u16, 0x4728_u16, StaticArray[0xbf_u8, 0xa0_u8, 0x41_u8, 0xee_u8, 0xdf_u8, 0x1b_u8, 0xbf_u8, 0x19_u8])
     def query_interface(this : IEnumPortableDeviceObjectIDs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2128,7 +2121,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("7f6d695c-03df-4439-a809-59266beee3a6")]
   record IPortableDeviceProperties, lpVtbl : IPortableDevicePropertiesVtbl* do
     GUID = LibC::GUID.new(0x7f6d695c_u32, 0x3df_u16, 0x4439_u16, StaticArray[0xa8_u8, 0x9_u8, 0x59_u8, 0x26_u8, 0x6b_u8, 0xee_u8, 0xe3_u8, 0xa6_u8])
     def query_interface(this : IPortableDeviceProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2175,7 +2167,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("fd8878ac-d841-4d17-891c-e6829cdb6934")]
   record IPortableDeviceResources, lpVtbl : IPortableDeviceResourcesVtbl* do
     GUID = LibC::GUID.new(0xfd8878ac_u32, 0xd841_u16, 0x4d17_u16, StaticArray[0x89_u8, 0x1c_u8, 0xe6_u8, 0x82_u8, 0x9c_u8, 0xdb_u8, 0x69_u8, 0x34_u8])
     def query_interface(this : IPortableDeviceResources*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2227,7 +2218,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("2c8c6dbf-e3dc-4061-becc-8542e810d126")]
   record IPortableDeviceCapabilities, lpVtbl : IPortableDeviceCapabilitiesVtbl* do
     GUID = LibC::GUID.new(0x2c8c6dbf_u32, 0xe3dc_u16, 0x4061_u16, StaticArray[0xbe_u8, 0xcc_u8, 0x85_u8, 0x42_u8, 0xe8_u8, 0x10_u8, 0xd1_u8, 0x26_u8])
     def query_interface(this : IPortableDeviceCapabilities*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2284,7 +2274,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("a8792a31-f385-493c-a893-40f64eb45f6e")]
   record IPortableDeviceEventCallback, lpVtbl : IPortableDeviceEventCallbackVtbl* do
     GUID = LibC::GUID.new(0xa8792a31_u32, 0xf385_u16, 0x493c_u16, StaticArray[0xa8_u8, 0x93_u8, 0x40_u8, 0xf6_u8, 0x4e_u8, 0xb4_u8, 0x5f_u8, 0x6e_u8])
     def query_interface(this : IPortableDeviceEventCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2323,7 +2312,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("88e04db3-1012-4d64-9996-f703a950d3f4")]
   record IPortableDeviceDataStream, lpVtbl : IPortableDeviceDataStreamVtbl* do
     GUID = LibC::GUID.new(0x88e04db3_u32, 0x1012_u16, 0x4d64_u16, StaticArray[0x99_u8, 0x96_u8, 0xf7_u8, 0x3_u8, 0xa9_u8, 0x50_u8, 0xd3_u8, 0xf4_u8])
     def query_interface(this : IPortableDeviceDataStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2387,7 +2375,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("5e98025f-bfc4-47a2-9a5f-bc900a507c67")]
   record IPortableDeviceUnitsStream, lpVtbl : IPortableDeviceUnitsStreamVtbl* do
     GUID = LibC::GUID.new(0x5e98025f_u32, 0xbfc4_u16, 0x47a2_u16, StaticArray[0x9a_u8, 0x5f_u8, 0xbc_u8, 0x90_u8, 0xa_u8, 0x50_u8, 0x7c_u8, 0x67_u8])
     def query_interface(this : IPortableDeviceUnitsStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2421,7 +2408,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("482b05c0-4056-44ed-9e0f-5e23b009da93")]
   record IPortableDevicePropertiesBulk, lpVtbl : IPortableDevicePropertiesBulkVtbl* do
     GUID = LibC::GUID.new(0x482b05c0_u32, 0x4056_u16, 0x44ed_u16, StaticArray[0x9e_u8, 0xf_u8, 0x5e_u8, 0x23_u8, 0xb0_u8, 0x9_u8, 0xda_u8, 0x93_u8])
     def query_interface(this : IPortableDevicePropertiesBulk*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2462,7 +2448,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("9deacb80-11e8-40e3-a9f3-f557986a7845")]
   record IPortableDevicePropertiesBulkCallback, lpVtbl : IPortableDevicePropertiesBulkCallbackVtbl* do
     GUID = LibC::GUID.new(0x9deacb80_u32, 0x11e8_u16, 0x40e3_u16, StaticArray[0xa9_u8, 0xf3_u8, 0xf5_u8, 0x57_u8, 0x98_u8, 0x6a_u8, 0x78_u8, 0x45_u8])
     def query_interface(this : IPortableDevicePropertiesBulkCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2496,7 +2481,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("a8abc4e9-a84a-47a9-80b3-c5d9b172a961")]
   record IPortableDeviceServiceManager, lpVtbl : IPortableDeviceServiceManagerVtbl* do
     GUID = LibC::GUID.new(0xa8abc4e9_u32, 0xa84a_u16, 0x47a9_u16, StaticArray[0x80_u8, 0xb3_u8, 0xc5_u8, 0xd9_u8, 0xb1_u8, 0x72_u8, 0xa9_u8, 0x61_u8])
     def query_interface(this : IPortableDeviceServiceManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2536,7 +2520,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("d3bd3a44-d7b5-40a9-98b7-2fa4d01dec08")]
   record IPortableDeviceService, lpVtbl : IPortableDeviceServiceVtbl* do
     GUID = LibC::GUID.new(0xd3bd3a44_u32, 0xd7b5_u16, 0x40a9_u16, StaticArray[0x98_u8, 0xb7_u8, 0x2f_u8, 0xa4_u8, 0xd0_u8, 0x1d_u8, 0xec_u8, 0x8_u8])
     def query_interface(this : IPortableDeviceService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2608,7 +2591,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("24dbd89d-413e-43e0-bd5b-197f3c56c886")]
   record IPortableDeviceServiceCapabilities, lpVtbl : IPortableDeviceServiceCapabilitiesVtbl* do
     GUID = LibC::GUID.new(0x24dbd89d_u32, 0x413e_u16, 0x43e0_u16, StaticArray[0xbd_u8, 0x5b_u8, 0x19_u8, 0x7f_u8, 0x3c_u8, 0x56_u8, 0xc8_u8, 0x86_u8])
     def query_interface(this : IPortableDeviceServiceCapabilities*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2682,7 +2664,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("e20333c9-fd34-412d-a381-cc6f2d820df7")]
   record IPortableDeviceServiceMethods, lpVtbl : IPortableDeviceServiceMethodsVtbl* do
     GUID = LibC::GUID.new(0xe20333c9_u32, 0xfd34_u16, 0x412d_u16, StaticArray[0xa3_u8, 0x81_u8, 0xcc_u8, 0x6f_u8, 0x2d_u8, 0x82_u8, 0xd_u8, 0xf7_u8])
     def query_interface(this : IPortableDeviceServiceMethods*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2715,7 +2696,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("c424233c-afce-4828-a756-7ed7a2350083")]
   record IPortableDeviceServiceMethodCallback, lpVtbl : IPortableDeviceServiceMethodCallbackVtbl* do
     GUID = LibC::GUID.new(0xc424233c_u32, 0xafce_u16, 0x4828_u16, StaticArray[0xa7_u8, 0x56_u8, 0x7e_u8, 0xd7_u8, 0xa2_u8, 0x35_u8, 0x0_u8, 0x83_u8])
     def query_interface(this : IPortableDeviceServiceMethodCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2743,7 +2723,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("e56b0534-d9b9-425c-9b99-75f97cb3d7c8")]
   record IPortableDeviceServiceActivation, lpVtbl : IPortableDeviceServiceActivationVtbl* do
     GUID = LibC::GUID.new(0xe56b0534_u32, 0xd9b9_u16, 0x425c_u16, StaticArray[0x9b_u8, 0x99_u8, 0x75_u8, 0xf9_u8, 0x7c_u8, 0xb3_u8, 0xd7_u8, 0xc8_u8])
     def query_interface(this : IPortableDeviceServiceActivation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2773,7 +2752,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("bced49c8-8efe-41ed-960b-61313abd47a9")]
   record IPortableDeviceServiceOpenCallback, lpVtbl : IPortableDeviceServiceOpenCallbackVtbl* do
     GUID = LibC::GUID.new(0xbced49c8_u32, 0x8efe_u16, 0x41ed_u16, StaticArray[0x96_u8, 0xb_u8, 0x61_u8, 0x31_u8, 0x3a_u8, 0xbd_u8, 0x47_u8, 0xa9_u8])
     def query_interface(this : IPortableDeviceServiceOpenCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2800,7 +2778,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("5e1eafc3-e3d7-4132-96fa-759c0f9d1e0f")]
   record IPortableDeviceDispatchFactory, lpVtbl : IPortableDeviceDispatchFactoryVtbl* do
     GUID = LibC::GUID.new(0x5e1eafc3_u32, 0xe3d7_u16, 0x4132_u16, StaticArray[0x96_u8, 0xfa_u8, 0x75_u8, 0x9c_u8, 0xf_u8, 0x9d_u8, 0x1e_u8, 0xf_u8])
     def query_interface(this : IPortableDeviceDispatchFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2832,7 +2809,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("94fc7953-5ca1-483a-8aee-df52e7747d00")]
   record IPortableDeviceWebControl, lpVtbl : IPortableDeviceWebControlVtbl* do
     GUID = LibC::GUID.new(0x94fc7953_u32, 0x5ca1_u16, 0x483a_u16, StaticArray[0x8a_u8, 0xee_u8, 0xdf_u8, 0x52_u8, 0xe7_u8, 0x74_u8, 0x7d_u8, 0x0_u8])
     def query_interface(this : IPortableDeviceWebControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2877,7 +2853,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("bfdef549-9247-454f-bd82-06fe80853faa")]
   record IEnumPortableDeviceConnectors, lpVtbl : IEnumPortableDeviceConnectorsVtbl* do
     GUID = LibC::GUID.new(0xbfdef549_u32, 0x9247_u16, 0x454f_u16, StaticArray[0xbd_u8, 0x82_u8, 0x6_u8, 0xfe_u8, 0x80_u8, 0x85_u8, 0x3f_u8, 0xaa_u8])
     def query_interface(this : IEnumPortableDeviceConnectors*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2918,7 +2893,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("625e2df8-6392-4cf0-9ad1-3cfa5f17775c")]
   record IPortableDeviceConnector, lpVtbl : IPortableDeviceConnectorVtbl* do
     GUID = LibC::GUID.new(0x625e2df8_u32, 0x6392_u16, 0x4cf0_u16, StaticArray[0x9a_u8, 0xd1_u8, 0x3c_u8, 0xfa_u8, 0x5f_u8, 0x17_u8, 0x77_u8, 0x5c_u8])
     def query_interface(this : IPortableDeviceConnector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2960,7 +2934,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("272c9ae0-7161-4ae0-91bd-9f448ee9c427")]
   record IConnectionRequestCallback, lpVtbl : IConnectionRequestCallbackVtbl* do
     GUID = LibC::GUID.new(0x272c9ae0_u32, 0x7161_u16, 0x4ae0_u16, StaticArray[0x91_u8, 0xbd_u8, 0x9f_u8, 0x44_u8, 0x8e_u8, 0xe9_u8, 0xc4_u8, 0x27_u8])
     def query_interface(this : IConnectionRequestCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2988,7 +2961,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("6cfdcab5-fc47-42a5-9241-074b58830e73")]
   record IMediaRadioManager, lpVtbl : IMediaRadioManagerVtbl* do
     GUID = LibC::GUID.new(0x6cfdcab5_u32, 0xfc47_u16, 0x42a5_u16, StaticArray[0x92_u8, 0x41_u8, 0x7_u8, 0x4b_u8, 0x58_u8, 0x83_u8, 0xe_u8, 0x73_u8])
     def query_interface(this : IMediaRadioManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3019,7 +2991,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("e5791fae-5665-4e0c-95be-5fde31644185")]
   record IRadioInstanceCollection, lpVtbl : IRadioInstanceCollectionVtbl* do
     GUID = LibC::GUID.new(0xe5791fae_u32, 0x5665_u16, 0x4e0c_u16, StaticArray[0x95_u8, 0xbe_u8, 0x5f_u8, 0xde_u8, 0x31_u8, 0x64_u8, 0x41_u8, 0x85_u8])
     def query_interface(this : IRadioInstanceCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3055,7 +3026,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("70aa1c9e-f2b4-4c61-86d3-6b9fb75fd1a2")]
   record IRadioInstance, lpVtbl : IRadioInstanceVtbl* do
     GUID = LibC::GUID.new(0x70aa1c9e_u32, 0xf2b4_u16, 0x4c61_u16, StaticArray[0x86_u8, 0xd3_u8, 0x6b_u8, 0x9f_u8, 0xb7_u8, 0x5f_u8, 0xd1_u8, 0xa2_u8])
     def query_interface(this : IRadioInstance*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3102,7 +3072,6 @@ module Win32cr::Devices::PortableDevices
 
 
   @[Extern]
-  #@[Com("89d81f5f-c147-49ed-a11c-77b20c31e7c9")]
   record IMediaRadioManagerNotifySink, lpVtbl : IMediaRadioManagerNotifySinkVtbl* do
     GUID = LibC::GUID.new(0x89d81f5f_u32, 0xc147_u16, 0x49ed_u16, StaticArray[0xa1_u8, 0x1c_u8, 0x77_u8, 0xb2_u8, 0xc_u8, 0x31_u8, 0xe7_u8, 0xc9_u8])
     def query_interface(this : IMediaRadioManagerNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

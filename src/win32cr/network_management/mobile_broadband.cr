@@ -271,87 +271,117 @@ module Win32cr::NetworkManagement::MobileBroadband
   end
 
   @[Extern]
-  record MBN_INTERFACE_CAPS,
-    cellularClass : Win32cr::NetworkManagement::MobileBroadband::MBN_CELLULAR_CLASS,
-    voiceClass : Win32cr::NetworkManagement::MobileBroadband::MBN_VOICE_CLASS,
-    dataClass : UInt32,
-    customDataClass : Win32cr::Foundation::BSTR,
-    gsmBandClass : UInt32,
-    cdmaBandClass : UInt32,
-    customBandClass : Win32cr::Foundation::BSTR,
-    smsCaps : UInt32,
-    controlCaps : UInt32,
-    deviceID : Win32cr::Foundation::BSTR,
-    manufacturer : Win32cr::Foundation::BSTR,
-    model : Win32cr::Foundation::BSTR,
-    firmwareInfo : Win32cr::Foundation::BSTR
+  struct MBN_INTERFACE_CAPS
+    property cellularClass : Win32cr::NetworkManagement::MobileBroadband::MBN_CELLULAR_CLASS
+    property voiceClass : Win32cr::NetworkManagement::MobileBroadband::MBN_VOICE_CLASS
+    property dataClass : UInt32
+    property customDataClass : Win32cr::Foundation::BSTR
+    property gsmBandClass : UInt32
+    property cdmaBandClass : UInt32
+    property customBandClass : Win32cr::Foundation::BSTR
+    property smsCaps : UInt32
+    property controlCaps : UInt32
+    property deviceID : Win32cr::Foundation::BSTR
+    property manufacturer : Win32cr::Foundation::BSTR
+    property model : Win32cr::Foundation::BSTR
+    property firmwareInfo : Win32cr::Foundation::BSTR
+    def initialize(@cellularClass : Win32cr::NetworkManagement::MobileBroadband::MBN_CELLULAR_CLASS, @voiceClass : Win32cr::NetworkManagement::MobileBroadband::MBN_VOICE_CLASS, @dataClass : UInt32, @customDataClass : Win32cr::Foundation::BSTR, @gsmBandClass : UInt32, @cdmaBandClass : UInt32, @customBandClass : Win32cr::Foundation::BSTR, @smsCaps : UInt32, @controlCaps : UInt32, @deviceID : Win32cr::Foundation::BSTR, @manufacturer : Win32cr::Foundation::BSTR, @model : Win32cr::Foundation::BSTR, @firmwareInfo : Win32cr::Foundation::BSTR)
+    end
+  end
 
   @[Extern]
-  record MBN_PROVIDER,
-    providerID : Win32cr::Foundation::BSTR,
-    providerState : UInt32,
-    providerName : Win32cr::Foundation::BSTR,
-    dataClass : UInt32
+  struct MBN_PROVIDER
+    property providerID : Win32cr::Foundation::BSTR
+    property providerState : UInt32
+    property providerName : Win32cr::Foundation::BSTR
+    property dataClass : UInt32
+    def initialize(@providerID : Win32cr::Foundation::BSTR, @providerState : UInt32, @providerName : Win32cr::Foundation::BSTR, @dataClass : UInt32)
+    end
+  end
 
   @[Extern]
-  record MBN_PROVIDER2,
-    provider : Win32cr::NetworkManagement::MobileBroadband::MBN_PROVIDER,
-    cellularClass : Win32cr::NetworkManagement::MobileBroadband::MBN_CELLULAR_CLASS,
-    signalStrength : UInt32,
-    signalError : UInt32
+  struct MBN_PROVIDER2
+    property provider : Win32cr::NetworkManagement::MobileBroadband::MBN_PROVIDER
+    property cellularClass : Win32cr::NetworkManagement::MobileBroadband::MBN_CELLULAR_CLASS
+    property signalStrength : UInt32
+    property signalError : UInt32
+    def initialize(@provider : Win32cr::NetworkManagement::MobileBroadband::MBN_PROVIDER, @cellularClass : Win32cr::NetworkManagement::MobileBroadband::MBN_CELLULAR_CLASS, @signalStrength : UInt32, @signalError : UInt32)
+    end
+  end
 
   @[Extern]
-  record MBN_PIN_INFO,
-    pinState : Win32cr::NetworkManagement::MobileBroadband::MBN_PIN_STATE,
-    pinType : Win32cr::NetworkManagement::MobileBroadband::MBN_PIN_TYPE,
-    attemptsRemaining : UInt32
+  struct MBN_PIN_INFO
+    property pinState : Win32cr::NetworkManagement::MobileBroadband::MBN_PIN_STATE
+    property pinType : Win32cr::NetworkManagement::MobileBroadband::MBN_PIN_TYPE
+    property attemptsRemaining : UInt32
+    def initialize(@pinState : Win32cr::NetworkManagement::MobileBroadband::MBN_PIN_STATE, @pinType : Win32cr::NetworkManagement::MobileBroadband::MBN_PIN_TYPE, @attemptsRemaining : UInt32)
+    end
+  end
 
   @[Extern]
-  record MBN_CONTEXT,
-    contextID : UInt32,
-    contextType : Win32cr::NetworkManagement::MobileBroadband::MBN_CONTEXT_TYPE,
-    accessString : Win32cr::Foundation::BSTR,
-    userName : Win32cr::Foundation::BSTR,
-    password : Win32cr::Foundation::BSTR,
-    compression : Win32cr::NetworkManagement::MobileBroadband::MBN_COMPRESSION,
-    authType : Win32cr::NetworkManagement::MobileBroadband::MBN_AUTH_PROTOCOL
+  struct MBN_CONTEXT
+    property contextID : UInt32
+    property contextType : Win32cr::NetworkManagement::MobileBroadband::MBN_CONTEXT_TYPE
+    property accessString : Win32cr::Foundation::BSTR
+    property userName : Win32cr::Foundation::BSTR
+    property password : Win32cr::Foundation::BSTR
+    property compression : Win32cr::NetworkManagement::MobileBroadband::MBN_COMPRESSION
+    property authType : Win32cr::NetworkManagement::MobileBroadband::MBN_AUTH_PROTOCOL
+    def initialize(@contextID : UInt32, @contextType : Win32cr::NetworkManagement::MobileBroadband::MBN_CONTEXT_TYPE, @accessString : Win32cr::Foundation::BSTR, @userName : Win32cr::Foundation::BSTR, @password : Win32cr::Foundation::BSTR, @compression : Win32cr::NetworkManagement::MobileBroadband::MBN_COMPRESSION, @authType : Win32cr::NetworkManagement::MobileBroadband::MBN_AUTH_PROTOCOL)
+    end
+  end
 
   @[Extern]
-  record MBN_SMS_FILTER,
-    flag : Win32cr::NetworkManagement::MobileBroadband::MBN_SMS_FLAG,
-    messageIndex : UInt32
+  struct MBN_SMS_FILTER
+    property flag : Win32cr::NetworkManagement::MobileBroadband::MBN_SMS_FLAG
+    property messageIndex : UInt32
+    def initialize(@flag : Win32cr::NetworkManagement::MobileBroadband::MBN_SMS_FLAG, @messageIndex : UInt32)
+    end
+  end
 
   @[Extern]
-  record MBN_SMS_STATUS_INFO,
-    flag : UInt32,
-    messageIndex : UInt32
+  struct MBN_SMS_STATUS_INFO
+    property flag : UInt32
+    property messageIndex : UInt32
+    def initialize(@flag : UInt32, @messageIndex : UInt32)
+    end
+  end
 
   @[Extern]
-  record MBN_DEVICE_SERVICE,
-    deviceServiceID : Win32cr::Foundation::BSTR,
-    dataWriteSupported : Int16,
-    dataReadSupported : Int16
+  struct MBN_DEVICE_SERVICE
+    property deviceServiceID : Win32cr::Foundation::BSTR
+    property dataWriteSupported : Int16
+    property dataReadSupported : Int16
+    def initialize(@deviceServiceID : Win32cr::Foundation::BSTR, @dataWriteSupported : Int16, @dataReadSupported : Int16)
+    end
+  end
 
   @[Extern]
-  record Mbnapi_referenceremainingtypes____,
-    bandClass : Win32cr::NetworkManagement::MobileBroadband::MBN_BAND_CLASS,
-    contextConstants : Win32cr::NetworkManagement::MobileBroadband::MBN_CONTEXT_CONSTANTS,
-    ctrlCaps : Win32cr::NetworkManagement::MobileBroadband::MBN_CTRL_CAPS,
-    dataClass : Win32cr::NetworkManagement::MobileBroadband::MBN_DATA_CLASS,
-    interfaceCapsConstants : Win32cr::NetworkManagement::MobileBroadband::MBN_INTERFACE_CAPS_CONSTANTS,
-    pinConstants : Win32cr::NetworkManagement::MobileBroadband::MBN_PIN_CONSTANTS,
-    providerConstants : Win32cr::NetworkManagement::MobileBroadband::MBN_PROVIDER_CONSTANTS,
-    providerState : Win32cr::NetworkManagement::MobileBroadband::MBN_PROVIDER_STATE,
-    registrationConstants : Win32cr::NetworkManagement::MobileBroadband::MBN_REGISTRATION_CONSTANTS,
-    signalConstants : Win32cr::NetworkManagement::MobileBroadband::MBN_SIGNAL_CONSTANTS,
-    smsCaps : Win32cr::NetworkManagement::MobileBroadband::MBN_SMS_CAPS,
-    smsConstants : Win32cr::NetworkManagement::MobileBroadband::WWAEXT_SMS_CONSTANTS,
-    wwaextSmsConstants : Win32cr::NetworkManagement::MobileBroadband::WWAEXT_SMS_CONSTANTS,
-    smsStatusFlag : Win32cr::NetworkManagement::MobileBroadband::MBN_SMS_STATUS_FLAG
+  struct Mbnapi_referenceremainingtypes____
+    property bandClass : Win32cr::NetworkManagement::MobileBroadband::MBN_BAND_CLASS
+    property contextConstants : Win32cr::NetworkManagement::MobileBroadband::MBN_CONTEXT_CONSTANTS
+    property ctrlCaps : Win32cr::NetworkManagement::MobileBroadband::MBN_CTRL_CAPS
+    property dataClass : Win32cr::NetworkManagement::MobileBroadband::MBN_DATA_CLASS
+    property interfaceCapsConstants : Win32cr::NetworkManagement::MobileBroadband::MBN_INTERFACE_CAPS_CONSTANTS
+    property pinConstants : Win32cr::NetworkManagement::MobileBroadband::MBN_PIN_CONSTANTS
+    property providerConstants : Win32cr::NetworkManagement::MobileBroadband::MBN_PROVIDER_CONSTANTS
+    property providerState : Win32cr::NetworkManagement::MobileBroadband::MBN_PROVIDER_STATE
+    property registrationConstants : Win32cr::NetworkManagement::MobileBroadband::MBN_REGISTRATION_CONSTANTS
+    property signalConstants : Win32cr::NetworkManagement::MobileBroadband::MBN_SIGNAL_CONSTANTS
+    property smsCaps : Win32cr::NetworkManagement::MobileBroadband::MBN_SMS_CAPS
+    property smsConstants : Win32cr::NetworkManagement::MobileBroadband::WWAEXT_SMS_CONSTANTS
+    property wwaextSmsConstants : Win32cr::NetworkManagement::MobileBroadband::WWAEXT_SMS_CONSTANTS
+    property smsStatusFlag : Win32cr::NetworkManagement::MobileBroadband::MBN_SMS_STATUS_FLAG
+    def initialize(@bandClass : Win32cr::NetworkManagement::MobileBroadband::MBN_BAND_CLASS, @contextConstants : Win32cr::NetworkManagement::MobileBroadband::MBN_CONTEXT_CONSTANTS, @ctrlCaps : Win32cr::NetworkManagement::MobileBroadband::MBN_CTRL_CAPS, @dataClass : Win32cr::NetworkManagement::MobileBroadband::MBN_DATA_CLASS, @interfaceCapsConstants : Win32cr::NetworkManagement::MobileBroadband::MBN_INTERFACE_CAPS_CONSTANTS, @pinConstants : Win32cr::NetworkManagement::MobileBroadband::MBN_PIN_CONSTANTS, @providerConstants : Win32cr::NetworkManagement::MobileBroadband::MBN_PROVIDER_CONSTANTS, @providerState : Win32cr::NetworkManagement::MobileBroadband::MBN_PROVIDER_STATE, @registrationConstants : Win32cr::NetworkManagement::MobileBroadband::MBN_REGISTRATION_CONSTANTS, @signalConstants : Win32cr::NetworkManagement::MobileBroadband::MBN_SIGNAL_CONSTANTS, @smsCaps : Win32cr::NetworkManagement::MobileBroadband::MBN_SMS_CAPS, @smsConstants : Win32cr::NetworkManagement::MobileBroadband::WWAEXT_SMS_CONSTANTS, @wwaextSmsConstants : Win32cr::NetworkManagement::MobileBroadband::WWAEXT_SMS_CONSTANTS, @smsStatusFlag : Win32cr::NetworkManagement::MobileBroadband::MBN_SMS_STATUS_FLAG)
+    end
+  end
 
   @[Extern]
-  record DummyPinType____,
-    pinType : UInt32
+  struct DummyPinType____
+    property pinType : UInt32
+    def initialize(@pinType : UInt32)
+    end
+  end
 
   @[Extern]
   record IDummyMBNUCMExtVtbl,
@@ -365,7 +395,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-ffff-4bbb-aaee-338e368af6fa")]
   record IDummyMBNUCMExt, lpVtbl : IDummyMBNUCMExtVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0xffff_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IDummyMBNUCMExt*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -407,7 +436,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-200d-4bbb-aaee-338e368af6fa")]
   record IMbnConnection, lpVtbl : IMbnConnectionVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x200d_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnConnection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -455,7 +483,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-200e-4bbb-aaee-338e368af6fa")]
   record IMbnConnectionEvents, lpVtbl : IMbnConnectionEventsVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x200e_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnConnectionEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -501,7 +528,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-2001-4bbb-aaee-338e368af6fa")]
   record IMbnInterface, lpVtbl : IMbnInterfaceVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x2001_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnInterface*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -565,7 +591,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-2002-4bbb-aaee-338e368af6fa")]
   record IMbnInterfaceEvents, lpVtbl : IMbnInterfaceEventsVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x2002_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnInterfaceEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -614,7 +639,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-201b-4bbb-aaee-338e368af6fa")]
   record IMbnInterfaceManager, lpVtbl : IMbnInterfaceManagerVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x201b_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnInterfaceManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -645,7 +669,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-201c-4bbb-aaee-338e368af6fa")]
   record IMbnInterfaceManagerEvents, lpVtbl : IMbnInterfaceManagerEventsVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x201c_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnInterfaceManagerEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -684,7 +707,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-2009-4bbb-aaee-338e368af6fa")]
   record IMbnRegistration, lpVtbl : IMbnRegistrationVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x2009_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnRegistration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -741,7 +763,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-200a-4bbb-aaee-338e368af6fa")]
   record IMbnRegistrationEvents, lpVtbl : IMbnRegistrationEventsVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x200a_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnRegistrationEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -778,7 +799,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-201d-4bbb-aaee-338e368af6fa")]
   record IMbnConnectionManager, lpVtbl : IMbnConnectionManagerVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x201d_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnConnectionManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -809,7 +829,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-201e-4bbb-aaee-338e368af6fa")]
   record IMbnConnectionManagerEvents, lpVtbl : IMbnConnectionManagerEventsVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x201e_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnConnectionManagerEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -841,7 +860,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-2005-4bbb-aaee-338e368af6fa")]
   record IMbnPinManager, lpVtbl : IMbnPinManagerVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x2005_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnPinManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -875,7 +893,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-2006-4bbb-aaee-338e368af6fa")]
   record IMbnPinManagerEvents, lpVtbl : IMbnPinManagerEventsVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x2006_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnPinManagerEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -909,7 +926,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-2008-4bbb-aaee-338e368af6fa")]
   record IMbnPinEvents, lpVtbl : IMbnPinEventsVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x2008_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnPinEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -950,7 +966,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("459ecc43-bcf5-11dc-a8a8-001321f1405f")]
   record IMbnSubscriberInformation, lpVtbl : IMbnSubscriberInformationVtbl* do
     GUID = LibC::GUID.new(0x459ecc43_u32, 0xbcf5_u16, 0x11dc_u16, StaticArray[0xa8_u8, 0xa8_u8, 0x0_u8, 0x13_u8, 0x21_u8, 0xf1_u8, 0x40_u8, 0x5f_u8])
     def query_interface(this : IMbnSubscriberInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -984,7 +999,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-2003-4bbb-aaee-338e368af6fa")]
   record IMbnSignal, lpVtbl : IMbnSignalVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x2003_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnSignal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1014,7 +1028,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-2004-4bbb-aaee-338e368af6fa")]
   record IMbnSignalEvents, lpVtbl : IMbnSignalEventsVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x2004_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnSignalEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1042,7 +1055,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-200b-4bbb-aaee-338e368af6fa")]
   record IMbnConnectionContext, lpVtbl : IMbnConnectionContextVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x200b_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnConnectionContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1073,7 +1085,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-200c-4bbb-aaee-338e368af6fa")]
   record IMbnConnectionContextEvents, lpVtbl : IMbnConnectionContextEventsVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x200c_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnConnectionContextEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1105,7 +1116,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-200f-4bbb-aaee-338e368af6fa")]
   record IMbnConnectionProfileManager, lpVtbl : IMbnConnectionProfileManagerVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x200f_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnConnectionProfileManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1140,7 +1150,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-2010-4bbb-aaee-338e368af6fa")]
   record IMbnConnectionProfile, lpVtbl : IMbnConnectionProfileVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x2010_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnConnectionProfile*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1173,7 +1182,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-2011-4bbb-aaee-338e368af6fa")]
   record IMbnConnectionProfileEvents, lpVtbl : IMbnConnectionProfileEventsVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x2011_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnConnectionProfileEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1205,7 +1213,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-2012-4bbb-aaee-338e368af6fa")]
   record IMbnSmsConfiguration, lpVtbl : IMbnSmsConfigurationVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x2012_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnSmsConfiguration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1250,7 +1257,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-2013-4bbb-aaee-338e368af6fa")]
   record IMbnSmsReadMsgPdu, lpVtbl : IMbnSmsReadMsgPduVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x2013_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnSmsReadMsgPdu*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1293,7 +1299,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-2014-4bbb-aaee-338e368af6fa")]
   record IMbnSmsReadMsgTextCdma, lpVtbl : IMbnSmsReadMsgTextCdmaVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x2014_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnSmsReadMsgTextCdma*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1348,7 +1353,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-2015-4bbb-aaee-338e368af6fa")]
   record IMbnSms, lpVtbl : IMbnSmsVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x2015_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnSms*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1402,7 +1406,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-2016-4bbb-aaee-338e368af6fa")]
   record IMbnSmsEvents, lpVtbl : IMbnSmsEventsVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x2016_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnSmsEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1447,7 +1450,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-2017-4bbb-aaee-338e368af6fa")]
   record IMbnServiceActivation, lpVtbl : IMbnServiceActivationVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x2017_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnServiceActivation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1474,7 +1476,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-2018-4bbb-aaee-338e368af6fa")]
   record IMbnServiceActivationEvents, lpVtbl : IMbnServiceActivationEventsVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x2018_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnServiceActivationEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1501,7 +1502,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-2019-4bbb-aaee-338e368af6fa")]
   record IMbnVendorSpecificOperation, lpVtbl : IMbnVendorSpecificOperationVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x2019_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnVendorSpecificOperation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1529,7 +1529,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-201a-4bbb-aaee-338e368af6fa")]
   record IMbnVendorSpecificEvents, lpVtbl : IMbnVendorSpecificEventsVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x201a_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnVendorSpecificEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1560,7 +1559,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-201f-4bbb-aaee-338e368af6fa")]
   record IMbnConnectionProfileManagerEvents, lpVtbl : IMbnConnectionProfileManagerEventsVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x201f_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnConnectionProfileManagerEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1592,7 +1590,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dccccab6-201f-4bbb-aaee-338e368af6fa")]
   record IMbnRadio, lpVtbl : IMbnRadioVtbl* do
     GUID = LibC::GUID.new(0xdccccab6_u32, 0x201f_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnRadio*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1626,7 +1623,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcdddab6-201f-4bbb-aaee-338e368af6fa")]
   record IMbnRadioEvents, lpVtbl : IMbnRadioEventsVtbl* do
     GUID = LibC::GUID.new(0xdcdddab6_u32, 0x201f_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnRadioEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1661,7 +1657,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-2020-4bbb-aaee-338e368af6fa")]
   record IMbnMultiCarrier, lpVtbl : IMbnMultiCarrierVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x2020_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnMultiCarrier*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1707,7 +1702,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcdddab6-2021-4bbb-aaee-338e368af6fa")]
   record IMbnMultiCarrierEvents, lpVtbl : IMbnMultiCarrierEventsVtbl* do
     GUID = LibC::GUID.new(0xdcdddab6_u32, 0x2021_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnMultiCarrierEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1746,7 +1740,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("5d3ff196-89ee-49d8-8b60-33ffddffc58d")]
   record IMbnDeviceServiceStateEvents, lpVtbl : IMbnDeviceServiceStateEventsVtbl* do
     GUID = LibC::GUID.new(0x5d3ff196_u32, 0x89ee_u16, 0x49d8_u16, StaticArray[0x8b_u8, 0x60_u8, 0x33_u8, 0xff_u8, 0xdd_u8, 0xff_u8, 0xc5_u8, 0x8d_u8])
     def query_interface(this : IMbnDeviceServiceStateEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1773,7 +1766,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("20a26258-6811-4478-ac1d-13324e45e41c")]
   record IMbnDeviceServicesManager, lpVtbl : IMbnDeviceServicesManagerVtbl* do
     GUID = LibC::GUID.new(0x20a26258_u32, 0x6811_u16, 0x4478_u16, StaticArray[0xac_u8, 0x1d_u8, 0x13_u8, 0x32_u8, 0x4e_u8, 0x45_u8, 0xe4_u8, 0x1c_u8])
     def query_interface(this : IMbnDeviceServicesManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1803,7 +1795,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("fc5ac347-1592-4068-80bb-6a57580150d8")]
   record IMbnDeviceServicesContext, lpVtbl : IMbnDeviceServicesContextVtbl* do
     GUID = LibC::GUID.new(0xfc5ac347_u32, 0x1592_u16, 0x4068_u16, StaticArray[0x80_u8, 0xbb_u8, 0x6a_u8, 0x57_u8, 0x58_u8, 0x1_u8, 0x50_u8, 0xd8_u8])
     def query_interface(this : IMbnDeviceServicesContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1849,7 +1840,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("0a900c19-6824-4e97-b76e-cf239d0ca642")]
   record IMbnDeviceServicesEvents, lpVtbl : IMbnDeviceServicesEventsVtbl* do
     GUID = LibC::GUID.new(0xa900c19_u32, 0x6824_u16, 0x4e97_u16, StaticArray[0xb7_u8, 0x6e_u8, 0xcf_u8, 0x23_u8, 0x9d_u8, 0xc_u8, 0xa6_u8, 0x42_u8])
     def query_interface(this : IMbnDeviceServicesEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1917,7 +1907,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("b3bb9a71-dc70-4be9-a4da-7886ae8b191b")]
   record IMbnDeviceService, lpVtbl : IMbnDeviceServiceVtbl* do
     GUID = LibC::GUID.new(0xb3bb9a71_u32, 0xdc70_u16, 0x4be9_u16, StaticArray[0xa4_u8, 0xda_u8, 0x78_u8, 0x86_u8, 0xae_u8, 0x8b_u8, 0x19_u8, 0x1b_u8])
     def query_interface(this : IMbnDeviceService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1987,7 +1976,6 @@ module Win32cr::NetworkManagement::MobileBroadband
 
 
   @[Extern]
-  #@[Com("dcbbbab6-2007-4bbb-aaee-338e368af6fa")]
   record IMbnPin, lpVtbl : IMbnPinVtbl* do
     GUID = LibC::GUID.new(0xdcbbbab6_u32, 0x2007_u16, 0x4bbb_u16, StaticArray[0xaa_u8, 0xee_u8, 0x33_u8, 0x8e_u8, 0x36_u8, 0x8a_u8, 0xf6_u8, 0xfa_u8])
     def query_interface(this : IMbnPin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

@@ -1,21 +1,21 @@
 require "./../foundation.cr"
 
 module Win32cr::System::LibraryLoader
-  alias ENUMRESLANGPROCA = Proc(Win32cr::Foundation::HINSTANCE, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt16, LibC::IntPtrT, Win32cr::Foundation::BOOL)*
+  alias ENUMRESLANGPROCA = Proc(Win32cr::Foundation::HINSTANCE, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt16, LibC::IntPtrT, Win32cr::Foundation::BOOL)
 
-  alias ENUMRESLANGPROCW = Proc(Win32cr::Foundation::HINSTANCE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt16, LibC::IntPtrT, Win32cr::Foundation::BOOL)*
+  alias ENUMRESLANGPROCW = Proc(Win32cr::Foundation::HINSTANCE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt16, LibC::IntPtrT, Win32cr::Foundation::BOOL)
 
-  alias ENUMRESNAMEPROCA = Proc(Win32cr::Foundation::HINSTANCE, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, LibC::IntPtrT, Win32cr::Foundation::BOOL)*
+  alias ENUMRESNAMEPROCA = Proc(Win32cr::Foundation::HINSTANCE, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, LibC::IntPtrT, Win32cr::Foundation::BOOL)
 
-  alias ENUMRESNAMEPROCW = Proc(Win32cr::Foundation::HINSTANCE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, LibC::IntPtrT, Win32cr::Foundation::BOOL)*
+  alias ENUMRESNAMEPROCW = Proc(Win32cr::Foundation::HINSTANCE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, LibC::IntPtrT, Win32cr::Foundation::BOOL)
 
-  alias ENUMRESTYPEPROCA = Proc(Win32cr::Foundation::HINSTANCE, Win32cr::Foundation::PSTR, LibC::IntPtrT, Win32cr::Foundation::BOOL)*
+  alias ENUMRESTYPEPROCA = Proc(Win32cr::Foundation::HINSTANCE, Win32cr::Foundation::PSTR, LibC::IntPtrT, Win32cr::Foundation::BOOL)
 
-  alias ENUMRESTYPEPROCW = Proc(Win32cr::Foundation::HINSTANCE, Win32cr::Foundation::PWSTR, LibC::IntPtrT, Win32cr::Foundation::BOOL)*
+  alias ENUMRESTYPEPROCW = Proc(Win32cr::Foundation::HINSTANCE, Win32cr::Foundation::PWSTR, LibC::IntPtrT, Win32cr::Foundation::BOOL)
 
-  alias PGET_MODULE_HANDLE_EXA = Proc(UInt32, Win32cr::Foundation::PSTR, Win32cr::Foundation::HINSTANCE*, Win32cr::Foundation::BOOL)*
+  alias PGET_MODULE_HANDLE_EXA = Proc(UInt32, Win32cr::Foundation::PSTR, Win32cr::Foundation::HINSTANCE*, Win32cr::Foundation::BOOL)
 
-  alias PGET_MODULE_HANDLE_EXW = Proc(UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HINSTANCE*, Win32cr::Foundation::BOOL)*
+  alias PGET_MODULE_HANDLE_EXW = Proc(UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HINSTANCE*, Win32cr::Foundation::BOOL)
 
   FIND_RESOURCE_DIRECTORY_TYPES = 256_u32
   FIND_RESOURCE_DIRECTORY_NAMES = 512_u32
@@ -51,22 +51,31 @@ module Win32cr::System::LibraryLoader
   end
 
   @[Extern]
-  record ENUMUILANG,
-    num_of_enum_ui_lang : UInt32,
-    size_of_enum_ui_buffer : UInt32,
-    pEnumUIBuffer : UInt16*
+  struct ENUMUILANG
+    property num_of_enum_ui_lang : UInt32
+    property size_of_enum_ui_buffer : UInt32
+    property pEnumUIBuffer : UInt16*
+    def initialize(@num_of_enum_ui_lang : UInt32, @size_of_enum_ui_buffer : UInt32, @pEnumUIBuffer : UInt16*)
+    end
+  end
 
   @[Extern]
-  record REDIRECTION_FUNCTION_DESCRIPTOR,
-    dll_name : Win32cr::Foundation::PSTR,
-    function_name : Win32cr::Foundation::PSTR,
-    redirection_target : Void*
+  struct REDIRECTION_FUNCTION_DESCRIPTOR
+    property dll_name : Win32cr::Foundation::PSTR
+    property function_name : Win32cr::Foundation::PSTR
+    property redirection_target : Void*
+    def initialize(@dll_name : Win32cr::Foundation::PSTR, @function_name : Win32cr::Foundation::PSTR, @redirection_target : Void*)
+    end
+  end
 
   @[Extern]
-  record REDIRECTION_DESCRIPTOR,
-    version : UInt32,
-    function_count : UInt32,
-    redirections : Win32cr::System::LibraryLoader::REDIRECTION_FUNCTION_DESCRIPTOR*
+  struct REDIRECTION_DESCRIPTOR
+    property version : UInt32
+    property function_count : UInt32
+    property redirections : Win32cr::System::LibraryLoader::REDIRECTION_FUNCTION_DESCRIPTOR*
+    def initialize(@version : UInt32, @function_count : UInt32, @redirections : Win32cr::System::LibraryLoader::REDIRECTION_FUNCTION_DESCRIPTOR*)
+    end
+  end
 
   @[Link("kernel32")]
   lib C

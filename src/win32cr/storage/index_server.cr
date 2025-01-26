@@ -190,88 +190,116 @@ module Win32cr::Storage::IndexServer
   end
 
   @[Extern]
-  record CI_STATE,
-    cbStruct : UInt32,
-    cWordList : UInt32,
-    cPersistentIndex : UInt32,
-    cQueries : UInt32,
-    cDocuments : UInt32,
-    cFreshTest : UInt32,
-    dwMergeProgress : UInt32,
-    eState : UInt32,
-    cFilteredDocuments : UInt32,
-    cTotalDocuments : UInt32,
-    cPendingScans : UInt32,
-    dwIndexSize : UInt32,
-    cUniqueKeys : UInt32,
-    cSecQDocuments : UInt32,
-    dwPropCacheSize : UInt32
+  struct CI_STATE
+    property cbStruct : UInt32
+    property cWordList : UInt32
+    property cPersistentIndex : UInt32
+    property cQueries : UInt32
+    property cDocuments : UInt32
+    property cFreshTest : UInt32
+    property dwMergeProgress : UInt32
+    property eState : UInt32
+    property cFilteredDocuments : UInt32
+    property cTotalDocuments : UInt32
+    property cPendingScans : UInt32
+    property dwIndexSize : UInt32
+    property cUniqueKeys : UInt32
+    property cSecQDocuments : UInt32
+    property dwPropCacheSize : UInt32
+    def initialize(@cbStruct : UInt32, @cWordList : UInt32, @cPersistentIndex : UInt32, @cQueries : UInt32, @cDocuments : UInt32, @cFreshTest : UInt32, @dwMergeProgress : UInt32, @eState : UInt32, @cFilteredDocuments : UInt32, @cTotalDocuments : UInt32, @cPendingScans : UInt32, @dwIndexSize : UInt32, @cUniqueKeys : UInt32, @cSecQDocuments : UInt32, @dwPropCacheSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record FULLPROPSPEC,
-    guidPropSet : LibC::GUID,
-    psProperty : Win32cr::System::Com::StructuredStorage::PROPSPEC
+  struct FULLPROPSPEC
+    property guidPropSet : LibC::GUID
+    property psProperty : Win32cr::System::Com::StructuredStorage::PROPSPEC
+    def initialize(@guidPropSet : LibC::GUID, @psProperty : Win32cr::System::Com::StructuredStorage::PROPSPEC)
+    end
+  end
 
   @[Extern]
-  record FILTERREGION,
-    idChunk : UInt32,
-    cwcStart : UInt32,
-    cwcExtent : UInt32
+  struct FILTERREGION
+    property idChunk : UInt32
+    property cwcStart : UInt32
+    property cwcExtent : UInt32
+    def initialize(@idChunk : UInt32, @cwcStart : UInt32, @cwcExtent : UInt32)
+    end
+  end
 
   @[Extern]
-  record STAT_CHUNK,
-    idChunk : UInt32,
-    breakType : Win32cr::Storage::IndexServer::CHUNK_BREAKTYPE,
-    flags : Win32cr::Storage::IndexServer::CHUNKSTATE,
-    locale : UInt32,
-    attribute : Win32cr::Storage::IndexServer::FULLPROPSPEC,
-    idChunkSource : UInt32,
-    cwcStartSource : UInt32,
-    cwcLenSource : UInt32
+  struct STAT_CHUNK
+    property idChunk : UInt32
+    property breakType : Win32cr::Storage::IndexServer::CHUNK_BREAKTYPE
+    property flags : Win32cr::Storage::IndexServer::CHUNKSTATE
+    property locale : UInt32
+    property attribute : Win32cr::Storage::IndexServer::FULLPROPSPEC
+    property idChunkSource : UInt32
+    property cwcStartSource : UInt32
+    property cwcLenSource : UInt32
+    def initialize(@idChunk : UInt32, @breakType : Win32cr::Storage::IndexServer::CHUNK_BREAKTYPE, @flags : Win32cr::Storage::IndexServer::CHUNKSTATE, @locale : UInt32, @attribute : Win32cr::Storage::IndexServer::FULLPROPSPEC, @idChunkSource : UInt32, @cwcStartSource : UInt32, @cwcLenSource : UInt32)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record DBID,
-    uGuid : Uguid_e__union_,
-    eKind : UInt32,
-    uName : Uname_e__union_ do
+  struct DBID
+    property uGuid : Uguid_e__union_
+    property eKind : UInt32
+    property uName : Uname_e__union_
 
     # Nested Type Uname_e__union_
     @[Extern(union: true)]
-    record Uname_e__union_,
-      pwszName : Win32cr::Foundation::PWSTR,
-      ulPropid : UInt32
+    struct Uname_e__union_
+    property pwszName : Win32cr::Foundation::PWSTR
+    property ulPropid : UInt32
+    def initialize(@pwszName : Win32cr::Foundation::PWSTR, @ulPropid : UInt32)
+    end
+    end
 
 
     # Nested Type Uguid_e__union_
     @[Extern(union: true)]
-    record Uguid_e__union_,
-      guid : LibC::GUID,
-      pguid : LibC::GUID*
+    struct Uguid_e__union_
+    property guid : LibC::GUID
+    property pguid : LibC::GUID*
+    def initialize(@guid : LibC::GUID, @pguid : LibC::GUID*)
+    end
+    end
 
+    def initialize(@uGuid : Uguid_e__union_, @eKind : UInt32, @uName : Uname_e__union_)
+    end
   end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record DBID,
-    uGuid : Uguid_e__union_,
-    eKind : UInt32,
-    uName : Uname_e__union_ do
+  struct DBID
+    property uGuid : Uguid_e__union_
+    property eKind : UInt32
+    property uName : Uname_e__union_
 
     # Nested Type Uname_e__union_
     @[Extern(union: true)]
-    record Uname_e__union_,
-      pwszName : Win32cr::Foundation::PWSTR,
-      ulPropid : UInt32
+    struct Uname_e__union_
+    property pwszName : Win32cr::Foundation::PWSTR
+    property ulPropid : UInt32
+    def initialize(@pwszName : Win32cr::Foundation::PWSTR, @ulPropid : UInt32)
+    end
+    end
 
 
     # Nested Type Uguid_e__union_
     @[Extern(union: true)]
-    record Uguid_e__union_,
-      guid : LibC::GUID,
-      pguid : LibC::GUID*
+    struct Uguid_e__union_
+    property guid : LibC::GUID
+    property pguid : LibC::GUID*
+    def initialize(@guid : LibC::GUID, @pguid : LibC::GUID*)
+    end
+    end
 
+    def initialize(@uGuid : Uguid_e__union_, @eKind : UInt32, @uName : Uname_e__union_)
+    end
   end
   {% end %}
 
@@ -288,7 +316,6 @@ module Win32cr::Storage::IndexServer
 
 
   @[Extern]
-  #@[Com("89bcb740-6119-101a-bcb7-00dd010655af")]
   record IFilter, lpVtbl : IFilterVtbl* do
     GUID = LibC::GUID.new(0x89bcb740_u32, 0x6119_u16, 0x101a_u16, StaticArray[0xbc_u8, 0xb7_u8, 0x0_u8, 0xdd_u8, 0x1_u8, 0x6_u8, 0x55_u8, 0xaf_u8])
     def query_interface(this : IFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -328,7 +355,6 @@ module Win32cr::Storage::IndexServer
 
 
   @[Extern]
-  #@[Com("cc906ff0-c058-101a-b554-08002b33b0e6")]
   record IPhraseSink, lpVtbl : IPhraseSinkVtbl* do
     GUID = LibC::GUID.new(0xcc906ff0_u32, 0xc058_u16, 0x101a_u16, StaticArray[0xb5_u8, 0x54_u8, 0x8_u8, 0x0_u8, 0x2b_u8, 0x33_u8, 0xb0_u8, 0xe6_u8])
     def query_interface(this : IPhraseSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

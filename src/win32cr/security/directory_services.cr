@@ -4,17 +4,17 @@ require "./authorization/ui.cr"
 require "./../ui/controls.cr"
 
 module Win32cr::Security::DirectoryServices
-  alias PFNREADOBJECTSECURITY = Proc(Win32cr::Foundation::PWSTR, UInt32, Win32cr::Security::PSECURITY_DESCRIPTOR*, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT)*
+  alias PFNREADOBJECTSECURITY = Proc(Win32cr::Foundation::PWSTR, UInt32, Win32cr::Security::PSECURITY_DESCRIPTOR*, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT)
 
-  alias PFNWRITEOBJECTSECURITY = Proc(Win32cr::Foundation::PWSTR, UInt32, Win32cr::Security::PSECURITY_DESCRIPTOR, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT)*
+  alias PFNWRITEOBJECTSECURITY = Proc(Win32cr::Foundation::PWSTR, UInt32, Win32cr::Security::PSECURITY_DESCRIPTOR, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT)
 
-  alias PFNDSCREATEISECINFO = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Void**, Win32cr::Security::DirectoryServices::PFNREADOBJECTSECURITY, Win32cr::Security::DirectoryServices::PFNWRITEOBJECTSECURITY, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT)*
+  alias PFNDSCREATEISECINFO = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Void**, Win32cr::Security::DirectoryServices::PFNREADOBJECTSECURITY, Win32cr::Security::DirectoryServices::PFNWRITEOBJECTSECURITY, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT)
 
-  alias PFNDSCREATEISECINFOEX = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Void**, Win32cr::Security::DirectoryServices::PFNREADOBJECTSECURITY, Win32cr::Security::DirectoryServices::PFNWRITEOBJECTSECURITY, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT)*
+  alias PFNDSCREATEISECINFOEX = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Void**, Win32cr::Security::DirectoryServices::PFNREADOBJECTSECURITY, Win32cr::Security::DirectoryServices::PFNWRITEOBJECTSECURITY, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT)
 
-  alias PFNDSCREATESECPAGE = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::UI::Controls::HPROPSHEETPAGE*, Win32cr::Security::DirectoryServices::PFNREADOBJECTSECURITY, Win32cr::Security::DirectoryServices::PFNWRITEOBJECTSECURITY, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT)*
+  alias PFNDSCREATESECPAGE = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::UI::Controls::HPROPSHEETPAGE*, Win32cr::Security::DirectoryServices::PFNREADOBJECTSECURITY, Win32cr::Security::DirectoryServices::PFNWRITEOBJECTSECURITY, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT)
 
-  alias PFNDSEDITSECURITY = Proc(Win32cr::Foundation::HWND, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Security::DirectoryServices::PFNREADOBJECTSECURITY, Win32cr::Security::DirectoryServices::PFNWRITEOBJECTSECURITY, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT)*
+  alias PFNDSEDITSECURITY = Proc(Win32cr::Foundation::HWND, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Security::DirectoryServices::PFNREADOBJECTSECURITY, Win32cr::Security::DirectoryServices::PFNWRITEOBJECTSECURITY, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT)
 
   DSSI_READ_ONLY = 1_u32
   DSSI_NO_ACCESS_CHECK = 2_u32

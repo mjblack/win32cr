@@ -50,37 +50,51 @@ module Win32cr::Networking::WebSocket
   end
 
   @[Extern]
-  record WEB_SOCKET_PROPERTY,
-    type__ : Win32cr::Networking::WebSocket::WEB_SOCKET_PROPERTY_TYPE,
-    pvValue : Void*,
-    ulValueSize : UInt32
+  struct WEB_SOCKET_PROPERTY
+    property type__ : Win32cr::Networking::WebSocket::WEB_SOCKET_PROPERTY_TYPE
+    property pvValue : Void*
+    property ulValueSize : UInt32
+    def initialize(@type__ : Win32cr::Networking::WebSocket::WEB_SOCKET_PROPERTY_TYPE, @pvValue : Void*, @ulValueSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record WEB_SOCKET_HTTP_HEADER,
-    pcName : Win32cr::Foundation::PSTR,
-    ulNameLength : UInt32,
-    pcValue : Win32cr::Foundation::PSTR,
-    ulValueLength : UInt32
+  struct WEB_SOCKET_HTTP_HEADER
+    property pcName : Win32cr::Foundation::PSTR
+    property ulNameLength : UInt32
+    property pcValue : Win32cr::Foundation::PSTR
+    property ulValueLength : UInt32
+    def initialize(@pcName : Win32cr::Foundation::PSTR, @ulNameLength : UInt32, @pcValue : Win32cr::Foundation::PSTR, @ulValueLength : UInt32)
+    end
+  end
 
   @[Extern(union: true)]
-  record WEB_SOCKET_BUFFER,
-    data : Data_e__Struct_,
-    close_status : CloseStatus_e__Struct_ do
+  struct WEB_SOCKET_BUFFER
+    property data : Data_e__Struct_
+    property close_status : CloseStatus_e__Struct_
 
     # Nested Type Data_e__Struct_
     @[Extern]
-    record Data_e__Struct_,
-      pbBuffer : UInt8*,
-      ulBufferLength : UInt32
+    struct Data_e__Struct_
+    property pbBuffer : UInt8*
+    property ulBufferLength : UInt32
+    def initialize(@pbBuffer : UInt8*, @ulBufferLength : UInt32)
+    end
+    end
 
 
     # Nested Type CloseStatus_e__Struct_
     @[Extern]
-    record CloseStatus_e__Struct_,
-      pbReason : UInt8*,
-      ulReasonLength : UInt32,
-      usStatus : UInt16
+    struct CloseStatus_e__Struct_
+    property pbReason : UInt8*
+    property ulReasonLength : UInt32
+    property usStatus : UInt16
+    def initialize(@pbReason : UInt8*, @ulReasonLength : UInt32, @usStatus : UInt16)
+    end
+    end
 
+    def initialize(@data : Data_e__Struct_, @close_status : CloseStatus_e__Struct_)
+    end
   end
 
   @[Link("websocket")]

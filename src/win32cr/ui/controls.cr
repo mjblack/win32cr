@@ -12,55 +12,55 @@ module Win32cr::UI::Controls
   alias HTREEITEM = LibC::IntPtrT
   alias HDSA = LibC::IntPtrT
   alias HDPA = LibC::IntPtrT
-  alias LPFNPSPCALLBACKA = Proc(Win32cr::Foundation::HWND, Win32cr::UI::Controls::PSPCB_MESSAGE, Win32cr::UI::Controls::PROPSHEETPAGEA*, UInt32)*
+  alias LPFNPSPCALLBACKA = Proc(Win32cr::Foundation::HWND, Win32cr::UI::Controls::PSPCB_MESSAGE, Win32cr::UI::Controls::PROPSHEETPAGEA*, UInt32)
 
-  alias LPFNPSPCALLBACKW = Proc(Win32cr::Foundation::HWND, Win32cr::UI::Controls::PSPCB_MESSAGE, Win32cr::UI::Controls::PROPSHEETPAGEW*, UInt32)*
+  alias LPFNPSPCALLBACKW = Proc(Win32cr::Foundation::HWND, Win32cr::UI::Controls::PSPCB_MESSAGE, Win32cr::UI::Controls::PROPSHEETPAGEW*, UInt32)
 
-  alias PFNPROPSHEETCALLBACK = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::LPARAM, Int32)*
+  alias PFNPROPSHEETCALLBACK = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::LPARAM, Int32)
 
-  alias LPFNSVADDPROPSHEETPAGE = Proc(Win32cr::UI::Controls::HPROPSHEETPAGE, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)*
+  alias LPFNSVADDPROPSHEETPAGE = Proc(Win32cr::UI::Controls::HPROPSHEETPAGE, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
 
-  alias LPFNADDPROPSHEETPAGES = Proc(Void*, Win32cr::UI::Controls::LPFNSVADDPROPSHEETPAGE, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)*
+  alias LPFNADDPROPSHEETPAGES = Proc(Void*, Win32cr::UI::Controls::LPFNSVADDPROPSHEETPAGE, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
 
-  alias PFNLVCOMPARE = Proc(Win32cr::Foundation::LPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LPARAM, Int32)*
+  alias PFNLVCOMPARE = Proc(Win32cr::Foundation::LPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LPARAM, Int32)
 
-  alias PFNLVGROUPCOMPARE = Proc(Int32, Int32, Void*, Int32)*
+  alias PFNLVGROUPCOMPARE = Proc(Int32, Int32, Void*, Int32)
 
-  alias PFNTVCOMPARE = Proc(Win32cr::Foundation::LPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LPARAM, Int32)*
+  alias PFNTVCOMPARE = Proc(Win32cr::Foundation::LPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LPARAM, Int32)
 
-  alias PFTASKDIALOGCALLBACK = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, LibC::IntPtrT, Win32cr::Foundation::HRESULT)*
+  alias PFTASKDIALOGCALLBACK = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, LibC::IntPtrT, Win32cr::Foundation::HRESULT)
 
-  alias PFNDAENUMCALLBACK = Proc(Void*, Void*, Int32)*
+  alias PFNDAENUMCALLBACK = Proc(Void*, Void*, Int32)
 
-  alias PFNDAENUMCALLBACKCONST = Proc(Void*, Void*, Int32)*
+  alias PFNDAENUMCALLBACKCONST = Proc(Void*, Void*, Int32)
 
-  alias PFNDACOMPARE = Proc(Void*, Void*, Win32cr::Foundation::LPARAM, Int32)*
+  alias PFNDACOMPARE = Proc(Void*, Void*, Win32cr::Foundation::LPARAM, Int32)
 
-  alias PFNDACOMPARECONST = Proc(Void*, Void*, Win32cr::Foundation::LPARAM, Int32)*
+  alias PFNDACOMPARECONST = Proc(Void*, Void*, Win32cr::Foundation::LPARAM, Int32)
 
-  alias PFNDPASTREAM = Proc(Win32cr::UI::Controls::DPASTREAMINFO*, Void*, Void*, Win32cr::Foundation::HRESULT)*
+  alias PFNDPASTREAM = Proc(Win32cr::UI::Controls::DPASTREAMINFO*, Void*, Void*, Win32cr::Foundation::HRESULT)
 
-  alias PFNDPAMERGE = Proc(Win32cr::UI::Controls::DPAMM_MESSAGE, Void*, Void*, Win32cr::Foundation::LPARAM, Void*)*
+  alias PFNDPAMERGE = Proc(Win32cr::UI::Controls::DPAMM_MESSAGE, Void*, Void*, Win32cr::Foundation::LPARAM, Void*)
 
-  alias PFNDPAMERGECONST = Proc(Win32cr::UI::Controls::DPAMM_MESSAGE, Void*, Void*, Win32cr::Foundation::LPARAM, Void*)*
+  alias PFNDPAMERGECONST = Proc(Win32cr::UI::Controls::DPAMM_MESSAGE, Void*, Void*, Win32cr::Foundation::LPARAM, Void*)
 
-  alias DTT_CALLBACK_PROC = Proc(Win32cr::Graphics::Gdi::HDC, UInt16*, Int32, Win32cr::Foundation::RECT*, UInt32, Win32cr::Foundation::LPARAM, Int32)*
+  alias DTT_CALLBACK_PROC = Proc(Win32cr::Graphics::Gdi::HDC, UInt16*, Int32, Win32cr::Foundation::RECT*, UInt32, Win32cr::Foundation::LPARAM, Int32)
 
-  alias LPFNCCSTYLEA = Proc(Win32cr::Foundation::HWND, Win32cr::UI::Controls::CCSTYLEA*, Win32cr::Foundation::BOOL)*
+  alias LPFNCCSTYLEA = Proc(Win32cr::Foundation::HWND, Win32cr::UI::Controls::CCSTYLEA*, Win32cr::Foundation::BOOL)
 
-  alias LPFNCCSTYLEW = Proc(Win32cr::Foundation::HWND, Win32cr::UI::Controls::CCSTYLEW*, Win32cr::Foundation::BOOL)*
+  alias LPFNCCSTYLEW = Proc(Win32cr::Foundation::HWND, Win32cr::UI::Controls::CCSTYLEW*, Win32cr::Foundation::BOOL)
 
-  alias LPFNCCSIZETOTEXTA = Proc(UInt32, UInt32, Win32cr::Graphics::Gdi::HFONT, Win32cr::Foundation::PSTR, Int32)*
+  alias LPFNCCSIZETOTEXTA = Proc(UInt32, UInt32, Win32cr::Graphics::Gdi::HFONT, Win32cr::Foundation::PSTR, Int32)
 
-  alias LPFNCCSIZETOTEXTW = Proc(UInt32, UInt32, Win32cr::Graphics::Gdi::HFONT, Win32cr::Foundation::PWSTR, Int32)*
+  alias LPFNCCSIZETOTEXTW = Proc(UInt32, UInt32, Win32cr::Graphics::Gdi::HFONT, Win32cr::Foundation::PWSTR, Int32)
 
-  alias LPFNCCINFOA = Proc(Win32cr::UI::Controls::CCINFOA*, UInt32)*
+  alias LPFNCCINFOA = Proc(Win32cr::UI::Controls::CCINFOA*, UInt32)
 
-  alias LPFNCCINFOW = Proc(Win32cr::UI::Controls::CCINFOW*, UInt32)*
+  alias LPFNCCINFOW = Proc(Win32cr::UI::Controls::CCINFOW*, UInt32)
 
-  alias EDITWORDBREAKPROCA = Proc(Win32cr::Foundation::PSTR, Int32, Int32, Win32cr::UI::Controls::WORD_BREAK_ACTION, Int32)*
+  alias EDITWORDBREAKPROCA = Proc(Win32cr::Foundation::PSTR, Int32, Int32, Win32cr::UI::Controls::WORD_BREAK_ACTION, Int32)
 
-  alias EDITWORDBREAKPROCW = Proc(Win32cr::Foundation::PWSTR, Int32, Int32, Win32cr::UI::Controls::WORD_BREAK_ACTION, Int32)*
+  alias EDITWORDBREAKPROCW = Proc(Win32cr::Foundation::PWSTR, Int32, Int32, Win32cr::UI::Controls::WORD_BREAK_ACTION, Int32)
 
   TVI_ROOT = -65536_i32
   TVI_FIRST = -65535_i32
@@ -4510,2216 +4510,2959 @@ module Win32cr::UI::Controls
   end
 
   @[Extern]
-  record PROPSHEETPAGEA_V1,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    pszTitle : Win32cr::Foundation::PSTR,
-    pfnDlgProc : Win32cr::UI::WindowsAndMessaging::DLGPROC,
-    lParam : Win32cr::Foundation::LPARAM,
-    pfnCallback : Win32cr::UI::Controls::LPFNPSPCALLBACKA,
-    pcRefParent : UInt32* do
+  struct PROPSHEETPAGEA_V1
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property pszTitle : Win32cr::Foundation::PSTR
+    property pfnDlgProc : Win32cr::UI::WindowsAndMessaging::DLGPROC
+    property lParam : Win32cr::Foundation::LPARAM
+    property pfnCallback : Win32cr::UI::Controls::LPFNPSPCALLBACKA
+    property pcRefParent : UInt32*
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      pszTemplate : Win32cr::Foundation::PSTR,
-      pResource : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*
+    struct Anonymous1_e__Union_
+    property pszTemplate : Win32cr::Foundation::PSTR
+    property pResource : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*
+    def initialize(@pszTemplate : Win32cr::Foundation::PSTR, @pResource : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-      pszIcon : Win32cr::Foundation::PSTR
+    struct Anonymous2_e__Union_
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property pszIcon : Win32cr::Foundation::PSTR
+    def initialize(@hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @pszIcon : Win32cr::Foundation::PSTR)
+    end
+    end
 
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @hInstance : Win32cr::Foundation::HINSTANCE, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @pszTitle : Win32cr::Foundation::PSTR, @pfnDlgProc : Win32cr::UI::WindowsAndMessaging::DLGPROC, @lParam : Win32cr::Foundation::LPARAM, @pfnCallback : Win32cr::UI::Controls::LPFNPSPCALLBACKA, @pcRefParent : UInt32*)
+    end
   end
 
   @[Extern]
-  record PROPSHEETPAGEA_V2,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    pszTitle : Win32cr::Foundation::PSTR,
-    pfnDlgProc : Win32cr::UI::WindowsAndMessaging::DLGPROC,
-    lParam : Win32cr::Foundation::LPARAM,
-    pfnCallback : Win32cr::UI::Controls::LPFNPSPCALLBACKA,
-    pcRefParent : UInt32*,
-    pszHeaderTitle : Win32cr::Foundation::PSTR,
-    pszHeaderSubTitle : Win32cr::Foundation::PSTR do
+  struct PROPSHEETPAGEA_V2
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property pszTitle : Win32cr::Foundation::PSTR
+    property pfnDlgProc : Win32cr::UI::WindowsAndMessaging::DLGPROC
+    property lParam : Win32cr::Foundation::LPARAM
+    property pfnCallback : Win32cr::UI::Controls::LPFNPSPCALLBACKA
+    property pcRefParent : UInt32*
+    property pszHeaderTitle : Win32cr::Foundation::PSTR
+    property pszHeaderSubTitle : Win32cr::Foundation::PSTR
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      pszTemplate : Win32cr::Foundation::PSTR,
-      pResource : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*
+    struct Anonymous1_e__Union_
+    property pszTemplate : Win32cr::Foundation::PSTR
+    property pResource : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*
+    def initialize(@pszTemplate : Win32cr::Foundation::PSTR, @pResource : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-      pszIcon : Win32cr::Foundation::PSTR
+    struct Anonymous2_e__Union_
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property pszIcon : Win32cr::Foundation::PSTR
+    def initialize(@hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @pszIcon : Win32cr::Foundation::PSTR)
+    end
+    end
 
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @hInstance : Win32cr::Foundation::HINSTANCE, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @pszTitle : Win32cr::Foundation::PSTR, @pfnDlgProc : Win32cr::UI::WindowsAndMessaging::DLGPROC, @lParam : Win32cr::Foundation::LPARAM, @pfnCallback : Win32cr::UI::Controls::LPFNPSPCALLBACKA, @pcRefParent : UInt32*, @pszHeaderTitle : Win32cr::Foundation::PSTR, @pszHeaderSubTitle : Win32cr::Foundation::PSTR)
+    end
   end
 
   @[Extern]
-  record PROPSHEETPAGEA_V3,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    pszTitle : Win32cr::Foundation::PSTR,
-    pfnDlgProc : Win32cr::UI::WindowsAndMessaging::DLGPROC,
-    lParam : Win32cr::Foundation::LPARAM,
-    pfnCallback : Win32cr::UI::Controls::LPFNPSPCALLBACKA,
-    pcRefParent : UInt32*,
-    pszHeaderTitle : Win32cr::Foundation::PSTR,
-    pszHeaderSubTitle : Win32cr::Foundation::PSTR,
-    hActCtx : Win32cr::Foundation::HANDLE do
+  struct PROPSHEETPAGEA_V3
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property pszTitle : Win32cr::Foundation::PSTR
+    property pfnDlgProc : Win32cr::UI::WindowsAndMessaging::DLGPROC
+    property lParam : Win32cr::Foundation::LPARAM
+    property pfnCallback : Win32cr::UI::Controls::LPFNPSPCALLBACKA
+    property pcRefParent : UInt32*
+    property pszHeaderTitle : Win32cr::Foundation::PSTR
+    property pszHeaderSubTitle : Win32cr::Foundation::PSTR
+    property hActCtx : Win32cr::Foundation::HANDLE
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      pszTemplate : Win32cr::Foundation::PSTR,
-      pResource : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*
+    struct Anonymous1_e__Union_
+    property pszTemplate : Win32cr::Foundation::PSTR
+    property pResource : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*
+    def initialize(@pszTemplate : Win32cr::Foundation::PSTR, @pResource : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-      pszIcon : Win32cr::Foundation::PSTR
+    struct Anonymous2_e__Union_
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property pszIcon : Win32cr::Foundation::PSTR
+    def initialize(@hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @pszIcon : Win32cr::Foundation::PSTR)
+    end
+    end
 
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @hInstance : Win32cr::Foundation::HINSTANCE, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @pszTitle : Win32cr::Foundation::PSTR, @pfnDlgProc : Win32cr::UI::WindowsAndMessaging::DLGPROC, @lParam : Win32cr::Foundation::LPARAM, @pfnCallback : Win32cr::UI::Controls::LPFNPSPCALLBACKA, @pcRefParent : UInt32*, @pszHeaderTitle : Win32cr::Foundation::PSTR, @pszHeaderSubTitle : Win32cr::Foundation::PSTR, @hActCtx : Win32cr::Foundation::HANDLE)
+    end
   end
 
   @[Extern]
-  record PROPSHEETPAGEA,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    pszTitle : Win32cr::Foundation::PSTR,
-    pfnDlgProc : Win32cr::UI::WindowsAndMessaging::DLGPROC,
-    lParam : Win32cr::Foundation::LPARAM,
-    pfnCallback : Win32cr::UI::Controls::LPFNPSPCALLBACKA,
-    pcRefParent : UInt32*,
-    pszHeaderTitle : Win32cr::Foundation::PSTR,
-    pszHeaderSubTitle : Win32cr::Foundation::PSTR,
-    hActCtx : Win32cr::Foundation::HANDLE,
-    anonymous3 : Anonymous3_e__Union_ do
+  struct PROPSHEETPAGEA
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property pszTitle : Win32cr::Foundation::PSTR
+    property pfnDlgProc : Win32cr::UI::WindowsAndMessaging::DLGPROC
+    property lParam : Win32cr::Foundation::LPARAM
+    property pfnCallback : Win32cr::UI::Controls::LPFNPSPCALLBACKA
+    property pcRefParent : UInt32*
+    property pszHeaderTitle : Win32cr::Foundation::PSTR
+    property pszHeaderSubTitle : Win32cr::Foundation::PSTR
+    property hActCtx : Win32cr::Foundation::HANDLE
+    property anonymous3 : Anonymous3_e__Union_
 
     # Nested Type Anonymous3_e__Union_
     @[Extern(union: true)]
-    record Anonymous3_e__Union_,
-      hbmHeader : Win32cr::Graphics::Gdi::HBITMAP,
-      pszbmHeader : Win32cr::Foundation::PSTR
+    struct Anonymous3_e__Union_
+    property hbmHeader : Win32cr::Graphics::Gdi::HBITMAP
+    property pszbmHeader : Win32cr::Foundation::PSTR
+    def initialize(@hbmHeader : Win32cr::Graphics::Gdi::HBITMAP, @pszbmHeader : Win32cr::Foundation::PSTR)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      pszTemplate : Win32cr::Foundation::PSTR,
-      pResource : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*
+    struct Anonymous1_e__Union_
+    property pszTemplate : Win32cr::Foundation::PSTR
+    property pResource : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*
+    def initialize(@pszTemplate : Win32cr::Foundation::PSTR, @pResource : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-      pszIcon : Win32cr::Foundation::PSTR
+    struct Anonymous2_e__Union_
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property pszIcon : Win32cr::Foundation::PSTR
+    def initialize(@hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @pszIcon : Win32cr::Foundation::PSTR)
+    end
+    end
 
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @hInstance : Win32cr::Foundation::HINSTANCE, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @pszTitle : Win32cr::Foundation::PSTR, @pfnDlgProc : Win32cr::UI::WindowsAndMessaging::DLGPROC, @lParam : Win32cr::Foundation::LPARAM, @pfnCallback : Win32cr::UI::Controls::LPFNPSPCALLBACKA, @pcRefParent : UInt32*, @pszHeaderTitle : Win32cr::Foundation::PSTR, @pszHeaderSubTitle : Win32cr::Foundation::PSTR, @hActCtx : Win32cr::Foundation::HANDLE, @anonymous3 : Anonymous3_e__Union_)
+    end
   end
 
   @[Extern]
-  record PROPSHEETPAGEW_V1,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    pszTitle : Win32cr::Foundation::PWSTR,
-    pfnDlgProc : Win32cr::UI::WindowsAndMessaging::DLGPROC,
-    lParam : Win32cr::Foundation::LPARAM,
-    pfnCallback : Win32cr::UI::Controls::LPFNPSPCALLBACKW,
-    pcRefParent : UInt32* do
+  struct PROPSHEETPAGEW_V1
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property pszTitle : Win32cr::Foundation::PWSTR
+    property pfnDlgProc : Win32cr::UI::WindowsAndMessaging::DLGPROC
+    property lParam : Win32cr::Foundation::LPARAM
+    property pfnCallback : Win32cr::UI::Controls::LPFNPSPCALLBACKW
+    property pcRefParent : UInt32*
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-      pszIcon : Win32cr::Foundation::PWSTR
+    struct Anonymous2_e__Union_
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property pszIcon : Win32cr::Foundation::PWSTR
+    def initialize(@hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @pszIcon : Win32cr::Foundation::PWSTR)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      pszTemplate : Win32cr::Foundation::PWSTR,
-      pResource : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*
+    struct Anonymous1_e__Union_
+    property pszTemplate : Win32cr::Foundation::PWSTR
+    property pResource : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*
+    def initialize(@pszTemplate : Win32cr::Foundation::PWSTR, @pResource : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*)
+    end
+    end
 
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @hInstance : Win32cr::Foundation::HINSTANCE, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @pszTitle : Win32cr::Foundation::PWSTR, @pfnDlgProc : Win32cr::UI::WindowsAndMessaging::DLGPROC, @lParam : Win32cr::Foundation::LPARAM, @pfnCallback : Win32cr::UI::Controls::LPFNPSPCALLBACKW, @pcRefParent : UInt32*)
+    end
   end
 
   @[Extern]
-  record PROPSHEETPAGEW_V2,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    pszTitle : Win32cr::Foundation::PWSTR,
-    pfnDlgProc : Win32cr::UI::WindowsAndMessaging::DLGPROC,
-    lParam : Win32cr::Foundation::LPARAM,
-    pfnCallback : Win32cr::UI::Controls::LPFNPSPCALLBACKW,
-    pcRefParent : UInt32*,
-    pszHeaderTitle : Win32cr::Foundation::PWSTR,
-    pszHeaderSubTitle : Win32cr::Foundation::PWSTR do
+  struct PROPSHEETPAGEW_V2
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property pszTitle : Win32cr::Foundation::PWSTR
+    property pfnDlgProc : Win32cr::UI::WindowsAndMessaging::DLGPROC
+    property lParam : Win32cr::Foundation::LPARAM
+    property pfnCallback : Win32cr::UI::Controls::LPFNPSPCALLBACKW
+    property pcRefParent : UInt32*
+    property pszHeaderTitle : Win32cr::Foundation::PWSTR
+    property pszHeaderSubTitle : Win32cr::Foundation::PWSTR
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-      pszIcon : Win32cr::Foundation::PWSTR
+    struct Anonymous2_e__Union_
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property pszIcon : Win32cr::Foundation::PWSTR
+    def initialize(@hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @pszIcon : Win32cr::Foundation::PWSTR)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      pszTemplate : Win32cr::Foundation::PWSTR,
-      pResource : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*
+    struct Anonymous1_e__Union_
+    property pszTemplate : Win32cr::Foundation::PWSTR
+    property pResource : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*
+    def initialize(@pszTemplate : Win32cr::Foundation::PWSTR, @pResource : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*)
+    end
+    end
 
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @hInstance : Win32cr::Foundation::HINSTANCE, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @pszTitle : Win32cr::Foundation::PWSTR, @pfnDlgProc : Win32cr::UI::WindowsAndMessaging::DLGPROC, @lParam : Win32cr::Foundation::LPARAM, @pfnCallback : Win32cr::UI::Controls::LPFNPSPCALLBACKW, @pcRefParent : UInt32*, @pszHeaderTitle : Win32cr::Foundation::PWSTR, @pszHeaderSubTitle : Win32cr::Foundation::PWSTR)
+    end
   end
 
   @[Extern]
-  record PROPSHEETPAGEW_V3,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    pszTitle : Win32cr::Foundation::PWSTR,
-    pfnDlgProc : Win32cr::UI::WindowsAndMessaging::DLGPROC,
-    lParam : Win32cr::Foundation::LPARAM,
-    pfnCallback : Win32cr::UI::Controls::LPFNPSPCALLBACKW,
-    pcRefParent : UInt32*,
-    pszHeaderTitle : Win32cr::Foundation::PWSTR,
-    pszHeaderSubTitle : Win32cr::Foundation::PWSTR,
-    hActCtx : Win32cr::Foundation::HANDLE do
+  struct PROPSHEETPAGEW_V3
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property pszTitle : Win32cr::Foundation::PWSTR
+    property pfnDlgProc : Win32cr::UI::WindowsAndMessaging::DLGPROC
+    property lParam : Win32cr::Foundation::LPARAM
+    property pfnCallback : Win32cr::UI::Controls::LPFNPSPCALLBACKW
+    property pcRefParent : UInt32*
+    property pszHeaderTitle : Win32cr::Foundation::PWSTR
+    property pszHeaderSubTitle : Win32cr::Foundation::PWSTR
+    property hActCtx : Win32cr::Foundation::HANDLE
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-      pszIcon : Win32cr::Foundation::PWSTR
+    struct Anonymous2_e__Union_
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property pszIcon : Win32cr::Foundation::PWSTR
+    def initialize(@hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @pszIcon : Win32cr::Foundation::PWSTR)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      pszTemplate : Win32cr::Foundation::PWSTR,
-      pResource : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*
+    struct Anonymous1_e__Union_
+    property pszTemplate : Win32cr::Foundation::PWSTR
+    property pResource : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*
+    def initialize(@pszTemplate : Win32cr::Foundation::PWSTR, @pResource : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*)
+    end
+    end
 
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @hInstance : Win32cr::Foundation::HINSTANCE, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @pszTitle : Win32cr::Foundation::PWSTR, @pfnDlgProc : Win32cr::UI::WindowsAndMessaging::DLGPROC, @lParam : Win32cr::Foundation::LPARAM, @pfnCallback : Win32cr::UI::Controls::LPFNPSPCALLBACKW, @pcRefParent : UInt32*, @pszHeaderTitle : Win32cr::Foundation::PWSTR, @pszHeaderSubTitle : Win32cr::Foundation::PWSTR, @hActCtx : Win32cr::Foundation::HANDLE)
+    end
   end
 
   @[Extern]
-  record PROPSHEETPAGEW,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    pszTitle : Win32cr::Foundation::PWSTR,
-    pfnDlgProc : Win32cr::UI::WindowsAndMessaging::DLGPROC,
-    lParam : Win32cr::Foundation::LPARAM,
-    pfnCallback : Win32cr::UI::Controls::LPFNPSPCALLBACKW,
-    pcRefParent : UInt32*,
-    pszHeaderTitle : Win32cr::Foundation::PWSTR,
-    pszHeaderSubTitle : Win32cr::Foundation::PWSTR,
-    hActCtx : Win32cr::Foundation::HANDLE,
-    anonymous3 : Anonymous3_e__Union_ do
+  struct PROPSHEETPAGEW
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property pszTitle : Win32cr::Foundation::PWSTR
+    property pfnDlgProc : Win32cr::UI::WindowsAndMessaging::DLGPROC
+    property lParam : Win32cr::Foundation::LPARAM
+    property pfnCallback : Win32cr::UI::Controls::LPFNPSPCALLBACKW
+    property pcRefParent : UInt32*
+    property pszHeaderTitle : Win32cr::Foundation::PWSTR
+    property pszHeaderSubTitle : Win32cr::Foundation::PWSTR
+    property hActCtx : Win32cr::Foundation::HANDLE
+    property anonymous3 : Anonymous3_e__Union_
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-      pszIcon : Win32cr::Foundation::PWSTR
+    struct Anonymous2_e__Union_
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property pszIcon : Win32cr::Foundation::PWSTR
+    def initialize(@hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @pszIcon : Win32cr::Foundation::PWSTR)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      pszTemplate : Win32cr::Foundation::PWSTR,
-      pResource : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*
+    struct Anonymous1_e__Union_
+    property pszTemplate : Win32cr::Foundation::PWSTR
+    property pResource : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*
+    def initialize(@pszTemplate : Win32cr::Foundation::PWSTR, @pResource : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*)
+    end
+    end
 
 
     # Nested Type Anonymous3_e__Union_
     @[Extern(union: true)]
-    record Anonymous3_e__Union_,
-      hbmHeader : Win32cr::Graphics::Gdi::HBITMAP,
-      pszbmHeader : Win32cr::Foundation::PWSTR
+    struct Anonymous3_e__Union_
+    property hbmHeader : Win32cr::Graphics::Gdi::HBITMAP
+    property pszbmHeader : Win32cr::Foundation::PWSTR
+    def initialize(@hbmHeader : Win32cr::Graphics::Gdi::HBITMAP, @pszbmHeader : Win32cr::Foundation::PWSTR)
+    end
+    end
 
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @hInstance : Win32cr::Foundation::HINSTANCE, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @pszTitle : Win32cr::Foundation::PWSTR, @pfnDlgProc : Win32cr::UI::WindowsAndMessaging::DLGPROC, @lParam : Win32cr::Foundation::LPARAM, @pfnCallback : Win32cr::UI::Controls::LPFNPSPCALLBACKW, @pcRefParent : UInt32*, @pszHeaderTitle : Win32cr::Foundation::PWSTR, @pszHeaderSubTitle : Win32cr::Foundation::PWSTR, @hActCtx : Win32cr::Foundation::HANDLE, @anonymous3 : Anonymous3_e__Union_)
+    end
   end
 
   @[Extern]
-  record PROPSHEETHEADERA_V1,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    hwndParent : Win32cr::Foundation::HWND,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    anonymous1 : Anonymous1_e__Union_,
-    pszCaption : Win32cr::Foundation::PSTR,
-    nPages : UInt32,
-    anonymous2 : Anonymous2_e__Union_,
-    anonymous3 : Anonymous3_e__Union_,
-    pfnCallback : Win32cr::UI::Controls::PFNPROPSHEETCALLBACK do
+  struct PROPSHEETHEADERA_V1
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property hwndParent : Win32cr::Foundation::HWND
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property anonymous1 : Anonymous1_e__Union_
+    property pszCaption : Win32cr::Foundation::PSTR
+    property nPages : UInt32
+    property anonymous2 : Anonymous2_e__Union_
+    property anonymous3 : Anonymous3_e__Union_
+    property pfnCallback : Win32cr::UI::Controls::PFNPROPSHEETCALLBACK
 
     # Nested Type Anonymous3_e__Union_
     @[Extern(union: true)]
-    record Anonymous3_e__Union_,
-      ppsp : Win32cr::UI::Controls::PROPSHEETPAGEA*,
-      phpage : Win32cr::UI::Controls::HPROPSHEETPAGE*
+    struct Anonymous3_e__Union_
+    property ppsp : Win32cr::UI::Controls::PROPSHEETPAGEA*
+    property phpage : Win32cr::UI::Controls::HPROPSHEETPAGE*
+    def initialize(@ppsp : Win32cr::UI::Controls::PROPSHEETPAGEA*, @phpage : Win32cr::UI::Controls::HPROPSHEETPAGE*)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-      pszIcon : Win32cr::Foundation::PSTR
+    struct Anonymous1_e__Union_
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property pszIcon : Win32cr::Foundation::PSTR
+    def initialize(@hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @pszIcon : Win32cr::Foundation::PSTR)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      nStartPage : UInt32,
-      pStartPage : Win32cr::Foundation::PSTR
+    struct Anonymous2_e__Union_
+    property nStartPage : UInt32
+    property pStartPage : Win32cr::Foundation::PSTR
+    def initialize(@nStartPage : UInt32, @pStartPage : Win32cr::Foundation::PSTR)
+    end
+    end
 
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @hwndParent : Win32cr::Foundation::HWND, @hInstance : Win32cr::Foundation::HINSTANCE, @anonymous1 : Anonymous1_e__Union_, @pszCaption : Win32cr::Foundation::PSTR, @nPages : UInt32, @anonymous2 : Anonymous2_e__Union_, @anonymous3 : Anonymous3_e__Union_, @pfnCallback : Win32cr::UI::Controls::PFNPROPSHEETCALLBACK)
+    end
   end
 
   @[Extern]
-  record PROPSHEETHEADERA_V2,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    hwndParent : Win32cr::Foundation::HWND,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    anonymous1 : Anonymous1_e__Union_,
-    pszCaption : Win32cr::Foundation::PSTR,
-    nPages : UInt32,
-    anonymous2 : Anonymous2_e__Union_,
-    anonymous3 : Anonymous3_e__Union_,
-    pfnCallback : Win32cr::UI::Controls::PFNPROPSHEETCALLBACK,
-    anonymous4 : Anonymous4_e__Union_,
-    hplWatermark : Win32cr::Graphics::Gdi::HPALETTE,
-    anonymous5 : Anonymous5_e__Union_ do
+  struct PROPSHEETHEADERA_V2
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property hwndParent : Win32cr::Foundation::HWND
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property anonymous1 : Anonymous1_e__Union_
+    property pszCaption : Win32cr::Foundation::PSTR
+    property nPages : UInt32
+    property anonymous2 : Anonymous2_e__Union_
+    property anonymous3 : Anonymous3_e__Union_
+    property pfnCallback : Win32cr::UI::Controls::PFNPROPSHEETCALLBACK
+    property anonymous4 : Anonymous4_e__Union_
+    property hplWatermark : Win32cr::Graphics::Gdi::HPALETTE
+    property anonymous5 : Anonymous5_e__Union_
 
     # Nested Type Anonymous4_e__Union_
     @[Extern(union: true)]
-    record Anonymous4_e__Union_,
-      hbmWatermark : Win32cr::Graphics::Gdi::HBITMAP,
-      pszbmWatermark : Win32cr::Foundation::PSTR
+    struct Anonymous4_e__Union_
+    property hbmWatermark : Win32cr::Graphics::Gdi::HBITMAP
+    property pszbmWatermark : Win32cr::Foundation::PSTR
+    def initialize(@hbmWatermark : Win32cr::Graphics::Gdi::HBITMAP, @pszbmWatermark : Win32cr::Foundation::PSTR)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      nStartPage : UInt32,
-      pStartPage : Win32cr::Foundation::PSTR
+    struct Anonymous2_e__Union_
+    property nStartPage : UInt32
+    property pStartPage : Win32cr::Foundation::PSTR
+    def initialize(@nStartPage : UInt32, @pStartPage : Win32cr::Foundation::PSTR)
+    end
+    end
 
 
     # Nested Type Anonymous3_e__Union_
     @[Extern(union: true)]
-    record Anonymous3_e__Union_,
-      ppsp : Win32cr::UI::Controls::PROPSHEETPAGEA*,
-      phpage : Win32cr::UI::Controls::HPROPSHEETPAGE*
+    struct Anonymous3_e__Union_
+    property ppsp : Win32cr::UI::Controls::PROPSHEETPAGEA*
+    property phpage : Win32cr::UI::Controls::HPROPSHEETPAGE*
+    def initialize(@ppsp : Win32cr::UI::Controls::PROPSHEETPAGEA*, @phpage : Win32cr::UI::Controls::HPROPSHEETPAGE*)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-      pszIcon : Win32cr::Foundation::PSTR
+    struct Anonymous1_e__Union_
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property pszIcon : Win32cr::Foundation::PSTR
+    def initialize(@hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @pszIcon : Win32cr::Foundation::PSTR)
+    end
+    end
 
 
     # Nested Type Anonymous5_e__Union_
     @[Extern(union: true)]
-    record Anonymous5_e__Union_,
-      hbmHeader : Win32cr::Graphics::Gdi::HBITMAP,
-      pszbmHeader : Win32cr::Foundation::PSTR
+    struct Anonymous5_e__Union_
+    property hbmHeader : Win32cr::Graphics::Gdi::HBITMAP
+    property pszbmHeader : Win32cr::Foundation::PSTR
+    def initialize(@hbmHeader : Win32cr::Graphics::Gdi::HBITMAP, @pszbmHeader : Win32cr::Foundation::PSTR)
+    end
+    end
 
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @hwndParent : Win32cr::Foundation::HWND, @hInstance : Win32cr::Foundation::HINSTANCE, @anonymous1 : Anonymous1_e__Union_, @pszCaption : Win32cr::Foundation::PSTR, @nPages : UInt32, @anonymous2 : Anonymous2_e__Union_, @anonymous3 : Anonymous3_e__Union_, @pfnCallback : Win32cr::UI::Controls::PFNPROPSHEETCALLBACK, @anonymous4 : Anonymous4_e__Union_, @hplWatermark : Win32cr::Graphics::Gdi::HPALETTE, @anonymous5 : Anonymous5_e__Union_)
+    end
   end
 
   @[Extern]
-  record PROPSHEETHEADERW_V1,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    hwndParent : Win32cr::Foundation::HWND,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    anonymous1 : Anonymous1_e__Union_,
-    pszCaption : Win32cr::Foundation::PWSTR,
-    nPages : UInt32,
-    anonymous2 : Anonymous2_e__Union_,
-    anonymous3 : Anonymous3_e__Union_,
-    pfnCallback : Win32cr::UI::Controls::PFNPROPSHEETCALLBACK do
+  struct PROPSHEETHEADERW_V1
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property hwndParent : Win32cr::Foundation::HWND
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property anonymous1 : Anonymous1_e__Union_
+    property pszCaption : Win32cr::Foundation::PWSTR
+    property nPages : UInt32
+    property anonymous2 : Anonymous2_e__Union_
+    property anonymous3 : Anonymous3_e__Union_
+    property pfnCallback : Win32cr::UI::Controls::PFNPROPSHEETCALLBACK
 
     # Nested Type Anonymous3_e__Union_
     @[Extern(union: true)]
-    record Anonymous3_e__Union_,
-      ppsp : Win32cr::UI::Controls::PROPSHEETPAGEW*,
-      phpage : Win32cr::UI::Controls::HPROPSHEETPAGE*
+    struct Anonymous3_e__Union_
+    property ppsp : Win32cr::UI::Controls::PROPSHEETPAGEW*
+    property phpage : Win32cr::UI::Controls::HPROPSHEETPAGE*
+    def initialize(@ppsp : Win32cr::UI::Controls::PROPSHEETPAGEW*, @phpage : Win32cr::UI::Controls::HPROPSHEETPAGE*)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-      pszIcon : Win32cr::Foundation::PWSTR
+    struct Anonymous1_e__Union_
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property pszIcon : Win32cr::Foundation::PWSTR
+    def initialize(@hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @pszIcon : Win32cr::Foundation::PWSTR)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      nStartPage : UInt32,
-      pStartPage : Win32cr::Foundation::PWSTR
+    struct Anonymous2_e__Union_
+    property nStartPage : UInt32
+    property pStartPage : Win32cr::Foundation::PWSTR
+    def initialize(@nStartPage : UInt32, @pStartPage : Win32cr::Foundation::PWSTR)
+    end
+    end
 
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @hwndParent : Win32cr::Foundation::HWND, @hInstance : Win32cr::Foundation::HINSTANCE, @anonymous1 : Anonymous1_e__Union_, @pszCaption : Win32cr::Foundation::PWSTR, @nPages : UInt32, @anonymous2 : Anonymous2_e__Union_, @anonymous3 : Anonymous3_e__Union_, @pfnCallback : Win32cr::UI::Controls::PFNPROPSHEETCALLBACK)
+    end
   end
 
   @[Extern]
-  record PROPSHEETHEADERW_V2,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    hwndParent : Win32cr::Foundation::HWND,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    anonymous1 : Anonymous1_e__Union_,
-    pszCaption : Win32cr::Foundation::PWSTR,
-    nPages : UInt32,
-    anonymous2 : Anonymous2_e__Union_,
-    anonymous3 : Anonymous3_e__Union_,
-    pfnCallback : Win32cr::UI::Controls::PFNPROPSHEETCALLBACK,
-    anonymous4 : Anonymous4_e__Union_,
-    hplWatermark : Win32cr::Graphics::Gdi::HPALETTE,
-    anonymous5 : Anonymous5_e__Union_ do
+  struct PROPSHEETHEADERW_V2
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property hwndParent : Win32cr::Foundation::HWND
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property anonymous1 : Anonymous1_e__Union_
+    property pszCaption : Win32cr::Foundation::PWSTR
+    property nPages : UInt32
+    property anonymous2 : Anonymous2_e__Union_
+    property anonymous3 : Anonymous3_e__Union_
+    property pfnCallback : Win32cr::UI::Controls::PFNPROPSHEETCALLBACK
+    property anonymous4 : Anonymous4_e__Union_
+    property hplWatermark : Win32cr::Graphics::Gdi::HPALETTE
+    property anonymous5 : Anonymous5_e__Union_
 
     # Nested Type Anonymous4_e__Union_
     @[Extern(union: true)]
-    record Anonymous4_e__Union_,
-      hbmWatermark : Win32cr::Graphics::Gdi::HBITMAP,
-      pszbmWatermark : Win32cr::Foundation::PWSTR
+    struct Anonymous4_e__Union_
+    property hbmWatermark : Win32cr::Graphics::Gdi::HBITMAP
+    property pszbmWatermark : Win32cr::Foundation::PWSTR
+    def initialize(@hbmWatermark : Win32cr::Graphics::Gdi::HBITMAP, @pszbmWatermark : Win32cr::Foundation::PWSTR)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      nStartPage : UInt32,
-      pStartPage : Win32cr::Foundation::PWSTR
+    struct Anonymous2_e__Union_
+    property nStartPage : UInt32
+    property pStartPage : Win32cr::Foundation::PWSTR
+    def initialize(@nStartPage : UInt32, @pStartPage : Win32cr::Foundation::PWSTR)
+    end
+    end
 
 
     # Nested Type Anonymous3_e__Union_
     @[Extern(union: true)]
-    record Anonymous3_e__Union_,
-      ppsp : Win32cr::UI::Controls::PROPSHEETPAGEW*,
-      phpage : Win32cr::UI::Controls::HPROPSHEETPAGE*
+    struct Anonymous3_e__Union_
+    property ppsp : Win32cr::UI::Controls::PROPSHEETPAGEW*
+    property phpage : Win32cr::UI::Controls::HPROPSHEETPAGE*
+    def initialize(@ppsp : Win32cr::UI::Controls::PROPSHEETPAGEW*, @phpage : Win32cr::UI::Controls::HPROPSHEETPAGE*)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-      pszIcon : Win32cr::Foundation::PWSTR
+    struct Anonymous1_e__Union_
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property pszIcon : Win32cr::Foundation::PWSTR
+    def initialize(@hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @pszIcon : Win32cr::Foundation::PWSTR)
+    end
+    end
 
 
     # Nested Type Anonymous5_e__Union_
     @[Extern(union: true)]
-    record Anonymous5_e__Union_,
-      hbmHeader : Win32cr::Graphics::Gdi::HBITMAP,
-      pszbmHeader : Win32cr::Foundation::PWSTR
+    struct Anonymous5_e__Union_
+    property hbmHeader : Win32cr::Graphics::Gdi::HBITMAP
+    property pszbmHeader : Win32cr::Foundation::PWSTR
+    def initialize(@hbmHeader : Win32cr::Graphics::Gdi::HBITMAP, @pszbmHeader : Win32cr::Foundation::PWSTR)
+    end
+    end
 
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @hwndParent : Win32cr::Foundation::HWND, @hInstance : Win32cr::Foundation::HINSTANCE, @anonymous1 : Anonymous1_e__Union_, @pszCaption : Win32cr::Foundation::PWSTR, @nPages : UInt32, @anonymous2 : Anonymous2_e__Union_, @anonymous3 : Anonymous3_e__Union_, @pfnCallback : Win32cr::UI::Controls::PFNPROPSHEETCALLBACK, @anonymous4 : Anonymous4_e__Union_, @hplWatermark : Win32cr::Graphics::Gdi::HPALETTE, @anonymous5 : Anonymous5_e__Union_)
+    end
   end
 
   @[Extern]
-  record PSHNOTIFY,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    lParam : Win32cr::Foundation::LPARAM
+  struct PSHNOTIFY
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
 
   @[Extern]
-  record INITCOMMONCONTROLSEX,
-    dwSize : UInt32,
-    dwICC : Win32cr::UI::Controls::INITCOMMONCONTROLSEX_ICC
+  struct INITCOMMONCONTROLSEX
+    property dwSize : UInt32
+    property dwICC : Win32cr::UI::Controls::INITCOMMONCONTROLSEX_ICC
+    def initialize(@dwSize : UInt32, @dwICC : Win32cr::UI::Controls::INITCOMMONCONTROLSEX_ICC)
+    end
+  end
 
   @[Extern]
-  record COLORSCHEME,
-    dwSize : UInt32,
-    clrBtnHighlight : UInt32,
-    clrBtnShadow : UInt32
+  struct COLORSCHEME
+    property dwSize : UInt32
+    property clrBtnHighlight : UInt32
+    property clrBtnShadow : UInt32
+    def initialize(@dwSize : UInt32, @clrBtnHighlight : UInt32, @clrBtnShadow : UInt32)
+    end
+  end
 
   @[Extern]
-  record NMTOOLTIPSCREATED,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    hwndToolTips : Win32cr::Foundation::HWND
+  struct NMTOOLTIPSCREATED
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property hwndToolTips : Win32cr::Foundation::HWND
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @hwndToolTips : Win32cr::Foundation::HWND)
+    end
+  end
 
   @[Extern]
-  record NMMOUSE,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    dwItemSpec : LibC::UIntPtrT,
-    dwItemData : LibC::UIntPtrT,
-    pt : Win32cr::Foundation::POINT,
-    dwHitInfo : Win32cr::Foundation::LPARAM
+  struct NMMOUSE
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property dwItemSpec : LibC::UIntPtrT
+    property dwItemData : LibC::UIntPtrT
+    property pt : Win32cr::Foundation::POINT
+    property dwHitInfo : Win32cr::Foundation::LPARAM
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @dwItemSpec : LibC::UIntPtrT, @dwItemData : LibC::UIntPtrT, @pt : Win32cr::Foundation::POINT, @dwHitInfo : Win32cr::Foundation::LPARAM)
+    end
+  end
 
   @[Extern]
-  record NMOBJECTNOTIFY,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    iItem : Int32,
-    piid : LibC::GUID*,
-    pObject : Void*,
-    hResult : Win32cr::Foundation::HRESULT,
-    dwFlags : UInt32
+  struct NMOBJECTNOTIFY
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property iItem : Int32
+    property piid : LibC::GUID*
+    property pObject : Void*
+    property hResult : Win32cr::Foundation::HRESULT
+    property dwFlags : UInt32
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @iItem : Int32, @piid : LibC::GUID*, @pObject : Void*, @hResult : Win32cr::Foundation::HRESULT, @dwFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record NMKEY,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    nVKey : UInt32,
-    uFlags : UInt32
+  struct NMKEY
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property nVKey : UInt32
+    property uFlags : UInt32
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @nVKey : UInt32, @uFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record NMCHAR,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    ch : UInt32,
-    dwItemPrev : UInt32,
-    dwItemNext : UInt32
+  struct NMCHAR
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property ch : UInt32
+    property dwItemPrev : UInt32
+    property dwItemNext : UInt32
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @ch : UInt32, @dwItemPrev : UInt32, @dwItemNext : UInt32)
+    end
+  end
 
   @[Extern]
-  record NMCUSTOMTEXT,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    hDC : Win32cr::Graphics::Gdi::HDC,
-    lpString : Win32cr::Foundation::PWSTR,
-    nCount : Int32,
-    lpRect : Win32cr::Foundation::RECT*,
-    uFormat : UInt32,
-    fLink : Win32cr::Foundation::BOOL
+  struct NMCUSTOMTEXT
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property hDC : Win32cr::Graphics::Gdi::HDC
+    property lpString : Win32cr::Foundation::PWSTR
+    property nCount : Int32
+    property lpRect : Win32cr::Foundation::RECT*
+    property uFormat : UInt32
+    property fLink : Win32cr::Foundation::BOOL
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @hDC : Win32cr::Graphics::Gdi::HDC, @lpString : Win32cr::Foundation::PWSTR, @nCount : Int32, @lpRect : Win32cr::Foundation::RECT*, @uFormat : UInt32, @fLink : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record NMCUSTOMDRAW,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    dwDrawStage : Win32cr::UI::Controls::NMCUSTOMDRAW_DRAW_STAGE,
-    hdc : Win32cr::Graphics::Gdi::HDC,
-    rc : Win32cr::Foundation::RECT,
-    dwItemSpec : LibC::UIntPtrT,
-    uItemState : UInt32,
-    lItemlParam : Win32cr::Foundation::LPARAM
+  struct NMCUSTOMDRAW
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property dwDrawStage : Win32cr::UI::Controls::NMCUSTOMDRAW_DRAW_STAGE
+    property hdc : Win32cr::Graphics::Gdi::HDC
+    property rc : Win32cr::Foundation::RECT
+    property dwItemSpec : LibC::UIntPtrT
+    property uItemState : UInt32
+    property lItemlParam : Win32cr::Foundation::LPARAM
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @dwDrawStage : Win32cr::UI::Controls::NMCUSTOMDRAW_DRAW_STAGE, @hdc : Win32cr::Graphics::Gdi::HDC, @rc : Win32cr::Foundation::RECT, @dwItemSpec : LibC::UIntPtrT, @uItemState : UInt32, @lItemlParam : Win32cr::Foundation::LPARAM)
+    end
+  end
 
   @[Extern]
-  record NMTTCUSTOMDRAW,
-    nmcd : Win32cr::UI::Controls::NMCUSTOMDRAW,
-    uDrawFlags : UInt32
+  struct NMTTCUSTOMDRAW
+    property nmcd : Win32cr::UI::Controls::NMCUSTOMDRAW
+    property uDrawFlags : UInt32
+    def initialize(@nmcd : Win32cr::UI::Controls::NMCUSTOMDRAW, @uDrawFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record NMCUSTOMSPLITRECTINFO,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    rcClient : Win32cr::Foundation::RECT,
-    rcButton : Win32cr::Foundation::RECT,
-    rcSplit : Win32cr::Foundation::RECT
+  struct NMCUSTOMSPLITRECTINFO
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property rcClient : Win32cr::Foundation::RECT
+    property rcButton : Win32cr::Foundation::RECT
+    property rcSplit : Win32cr::Foundation::RECT
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @rcClient : Win32cr::Foundation::RECT, @rcButton : Win32cr::Foundation::RECT, @rcSplit : Win32cr::Foundation::RECT)
+    end
+  end
 
   @[Extern]
-  record IMAGELISTDRAWPARAMS,
-    cbSize : UInt32,
-    himl : Win32cr::UI::Controls::HIMAGELIST,
-    i : Int32,
-    hdcDst : Win32cr::Graphics::Gdi::HDC,
-    x : Int32,
-    y : Int32,
-    cx : Int32,
-    cy : Int32,
-    xBitmap : Int32,
-    yBitmap : Int32,
-    rgbBk : UInt32,
-    rgbFg : UInt32,
-    fStyle : UInt32,
-    dwRop : UInt32,
-    fState : UInt32,
-    frame : UInt32,
-    crEffect : UInt32
+  struct IMAGELISTDRAWPARAMS
+    property cbSize : UInt32
+    property himl : Win32cr::UI::Controls::HIMAGELIST
+    property i : Int32
+    property hdcDst : Win32cr::Graphics::Gdi::HDC
+    property x : Int32
+    property y : Int32
+    property cx : Int32
+    property cy : Int32
+    property xBitmap : Int32
+    property yBitmap : Int32
+    property rgbBk : UInt32
+    property rgbFg : UInt32
+    property fStyle : UInt32
+    property dwRop : UInt32
+    property fState : UInt32
+    property frame : UInt32
+    property crEffect : UInt32
+    def initialize(@cbSize : UInt32, @himl : Win32cr::UI::Controls::HIMAGELIST, @i : Int32, @hdcDst : Win32cr::Graphics::Gdi::HDC, @x : Int32, @y : Int32, @cx : Int32, @cy : Int32, @xBitmap : Int32, @yBitmap : Int32, @rgbBk : UInt32, @rgbFg : UInt32, @fStyle : UInt32, @dwRop : UInt32, @fState : UInt32, @frame : UInt32, @crEffect : UInt32)
+    end
+  end
 
   @[Extern]
-  record IMAGEINFO,
-    hbmImage : Win32cr::Graphics::Gdi::HBITMAP,
-    hbmMask : Win32cr::Graphics::Gdi::HBITMAP,
-    unused1 : Int32,
-    unused2 : Int32,
-    rcImage : Win32cr::Foundation::RECT
+  struct IMAGEINFO
+    property hbmImage : Win32cr::Graphics::Gdi::HBITMAP
+    property hbmMask : Win32cr::Graphics::Gdi::HBITMAP
+    property unused1 : Int32
+    property unused2 : Int32
+    property rcImage : Win32cr::Foundation::RECT
+    def initialize(@hbmImage : Win32cr::Graphics::Gdi::HBITMAP, @hbmMask : Win32cr::Graphics::Gdi::HBITMAP, @unused1 : Int32, @unused2 : Int32, @rcImage : Win32cr::Foundation::RECT)
+    end
+  end
 
   @[Extern]
-  record HD_TEXTFILTERA,
-    pszText : Win32cr::Foundation::PSTR,
-    cchTextMax : Int32
+  struct HD_TEXTFILTERA
+    property pszText : Win32cr::Foundation::PSTR
+    property cchTextMax : Int32
+    def initialize(@pszText : Win32cr::Foundation::PSTR, @cchTextMax : Int32)
+    end
+  end
 
   @[Extern]
-  record HD_TEXTFILTERW,
-    pszText : Win32cr::Foundation::PWSTR,
-    cchTextMax : Int32
+  struct HD_TEXTFILTERW
+    property pszText : Win32cr::Foundation::PWSTR
+    property cchTextMax : Int32
+    def initialize(@pszText : Win32cr::Foundation::PWSTR, @cchTextMax : Int32)
+    end
+  end
 
   @[Extern]
-  record HDITEMA,
-    mask : Win32cr::UI::Controls::HDI_MASK,
-    cxy : Int32,
-    pszText : Win32cr::Foundation::PSTR,
-    hbm : Win32cr::Graphics::Gdi::HBITMAP,
-    cchTextMax : Int32,
-    fmt : Int32,
-    lParam : Win32cr::Foundation::LPARAM,
-    iImage : Int32,
-    iOrder : Int32,
-    type__ : UInt32,
-    pvFilter : Void*,
-    state : UInt32
+  struct HDITEMA
+    property mask : Win32cr::UI::Controls::HDI_MASK
+    property cxy : Int32
+    property pszText : Win32cr::Foundation::PSTR
+    property hbm : Win32cr::Graphics::Gdi::HBITMAP
+    property cchTextMax : Int32
+    property fmt : Int32
+    property lParam : Win32cr::Foundation::LPARAM
+    property iImage : Int32
+    property iOrder : Int32
+    property type__ : UInt32
+    property pvFilter : Void*
+    property state : UInt32
+    def initialize(@mask : Win32cr::UI::Controls::HDI_MASK, @cxy : Int32, @pszText : Win32cr::Foundation::PSTR, @hbm : Win32cr::Graphics::Gdi::HBITMAP, @cchTextMax : Int32, @fmt : Int32, @lParam : Win32cr::Foundation::LPARAM, @iImage : Int32, @iOrder : Int32, @type__ : UInt32, @pvFilter : Void*, @state : UInt32)
+    end
+  end
 
   @[Extern]
-  record HDITEMW,
-    mask : Win32cr::UI::Controls::HDI_MASK,
-    cxy : Int32,
-    pszText : Win32cr::Foundation::PWSTR,
-    hbm : Win32cr::Graphics::Gdi::HBITMAP,
-    cchTextMax : Int32,
-    fmt : Int32,
-    lParam : Win32cr::Foundation::LPARAM,
-    iImage : Int32,
-    iOrder : Int32,
-    type__ : UInt32,
-    pvFilter : Void*,
-    state : UInt32
+  struct HDITEMW
+    property mask : Win32cr::UI::Controls::HDI_MASK
+    property cxy : Int32
+    property pszText : Win32cr::Foundation::PWSTR
+    property hbm : Win32cr::Graphics::Gdi::HBITMAP
+    property cchTextMax : Int32
+    property fmt : Int32
+    property lParam : Win32cr::Foundation::LPARAM
+    property iImage : Int32
+    property iOrder : Int32
+    property type__ : UInt32
+    property pvFilter : Void*
+    property state : UInt32
+    def initialize(@mask : Win32cr::UI::Controls::HDI_MASK, @cxy : Int32, @pszText : Win32cr::Foundation::PWSTR, @hbm : Win32cr::Graphics::Gdi::HBITMAP, @cchTextMax : Int32, @fmt : Int32, @lParam : Win32cr::Foundation::LPARAM, @iImage : Int32, @iOrder : Int32, @type__ : UInt32, @pvFilter : Void*, @state : UInt32)
+    end
+  end
 
   @[Extern]
-  record HDLAYOUT,
-    prc : Win32cr::Foundation::RECT*,
-    pwpos : Win32cr::UI::WindowsAndMessaging::WINDOWPOS*
+  struct HDLAYOUT
+    property prc : Win32cr::Foundation::RECT*
+    property pwpos : Win32cr::UI::WindowsAndMessaging::WINDOWPOS*
+    def initialize(@prc : Win32cr::Foundation::RECT*, @pwpos : Win32cr::UI::WindowsAndMessaging::WINDOWPOS*)
+    end
+  end
 
   @[Extern]
-  record HDHITTESTINFO,
-    pt : Win32cr::Foundation::POINT,
-    flags : UInt32,
-    iItem : Int32
+  struct HDHITTESTINFO
+    property pt : Win32cr::Foundation::POINT
+    property flags : UInt32
+    property iItem : Int32
+    def initialize(@pt : Win32cr::Foundation::POINT, @flags : UInt32, @iItem : Int32)
+    end
+  end
 
   @[Extern]
-  record NMHEADERA,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    iItem : Int32,
-    iButton : Win32cr::UI::Controls::HEADER_CONTROL_NOTIFICATION_BUTTON,
-    pitem : Win32cr::UI::Controls::HDITEMA*
+  struct NMHEADERA
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property iItem : Int32
+    property iButton : Win32cr::UI::Controls::HEADER_CONTROL_NOTIFICATION_BUTTON
+    property pitem : Win32cr::UI::Controls::HDITEMA*
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @iItem : Int32, @iButton : Win32cr::UI::Controls::HEADER_CONTROL_NOTIFICATION_BUTTON, @pitem : Win32cr::UI::Controls::HDITEMA*)
+    end
+  end
 
   @[Extern]
-  record NMHEADERW,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    iItem : Int32,
-    iButton : Win32cr::UI::Controls::HEADER_CONTROL_NOTIFICATION_BUTTON,
-    pitem : Win32cr::UI::Controls::HDITEMW*
+  struct NMHEADERW
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property iItem : Int32
+    property iButton : Win32cr::UI::Controls::HEADER_CONTROL_NOTIFICATION_BUTTON
+    property pitem : Win32cr::UI::Controls::HDITEMW*
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @iItem : Int32, @iButton : Win32cr::UI::Controls::HEADER_CONTROL_NOTIFICATION_BUTTON, @pitem : Win32cr::UI::Controls::HDITEMW*)
+    end
+  end
 
   @[Extern]
-  record NMHDDISPINFOW,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    iItem : Int32,
-    mask : Win32cr::UI::Controls::HDI_MASK,
-    pszText : Win32cr::Foundation::PWSTR,
-    cchTextMax : Int32,
-    iImage : Int32,
-    lParam : Win32cr::Foundation::LPARAM
+  struct NMHDDISPINFOW
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property iItem : Int32
+    property mask : Win32cr::UI::Controls::HDI_MASK
+    property pszText : Win32cr::Foundation::PWSTR
+    property cchTextMax : Int32
+    property iImage : Int32
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @iItem : Int32, @mask : Win32cr::UI::Controls::HDI_MASK, @pszText : Win32cr::Foundation::PWSTR, @cchTextMax : Int32, @iImage : Int32, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
 
   @[Extern]
-  record NMHDDISPINFOA,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    iItem : Int32,
-    mask : Win32cr::UI::Controls::HDI_MASK,
-    pszText : Win32cr::Foundation::PSTR,
-    cchTextMax : Int32,
-    iImage : Int32,
-    lParam : Win32cr::Foundation::LPARAM
+  struct NMHDDISPINFOA
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property iItem : Int32
+    property mask : Win32cr::UI::Controls::HDI_MASK
+    property pszText : Win32cr::Foundation::PSTR
+    property cchTextMax : Int32
+    property iImage : Int32
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @iItem : Int32, @mask : Win32cr::UI::Controls::HDI_MASK, @pszText : Win32cr::Foundation::PSTR, @cchTextMax : Int32, @iImage : Int32, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
 
   @[Extern]
-  record NMHDFILTERBTNCLICK,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    iItem : Int32,
-    rc : Win32cr::Foundation::RECT
+  struct NMHDFILTERBTNCLICK
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property iItem : Int32
+    property rc : Win32cr::Foundation::RECT
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @iItem : Int32, @rc : Win32cr::Foundation::RECT)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record TBBUTTON,
-    iBitmap : Int32,
-    idCommand : Int32,
-    fsState : UInt8,
-    fsStyle : UInt8,
-    bReserved : UInt8[6],
-    dwData : LibC::UIntPtrT,
-    iString : LibC::IntPtrT
+  struct TBBUTTON
+    property iBitmap : Int32
+    property idCommand : Int32
+    property fsState : UInt8
+    property fsStyle : UInt8
+    property bReserved : UInt8[6]
+    property dwData : LibC::UIntPtrT
+    property iString : LibC::IntPtrT
+    def initialize(@iBitmap : Int32, @idCommand : Int32, @fsState : UInt8, @fsStyle : UInt8, @bReserved : UInt8[6], @dwData : LibC::UIntPtrT, @iString : LibC::IntPtrT)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record COLORMAP,
-    from : UInt32,
-    to : UInt32
-
-  @[Extern]
-  record NMTBCUSTOMDRAW,
-    nmcd : Win32cr::UI::Controls::NMCUSTOMDRAW,
-    hbrMonoDither : Win32cr::Graphics::Gdi::HBRUSH,
-    hbrLines : Win32cr::Graphics::Gdi::HBRUSH,
-    hpenLines : Win32cr::Graphics::Gdi::HPEN,
-    clrText : UInt32,
-    clrMark : UInt32,
-    clrTextHighlight : UInt32,
-    clrBtnFace : UInt32,
-    clrBtnHighlight : UInt32,
-    clrHighlightHotTrack : UInt32,
-    rcText : Win32cr::Foundation::RECT,
-    nStringBkMode : Int32,
-    nHLStringBkMode : Int32,
-    iListGap : Int32
-
-  @[Extern]
-  record TBADDBITMAP,
-    hInst : Win32cr::Foundation::HINSTANCE,
-    nID : LibC::UIntPtrT
-
-  @[Extern]
-  record TBSAVEPARAMSA,
-    hkr : Win32cr::System::Registry::HKEY,
-    pszSubKey : Win32cr::Foundation::PSTR,
-    pszValueName : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record TBSAVEPARAMSW,
-    hkr : Win32cr::System::Registry::HKEY,
-    pszSubKey : Win32cr::Foundation::PWSTR,
-    pszValueName : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record TBINSERTMARK,
-    iButton : Int32,
-    dwFlags : Win32cr::UI::Controls::TBINSERTMARK_FLAGS
-
-  @[Extern]
-  record TBREPLACEBITMAP,
-    hInstOld : Win32cr::Foundation::HINSTANCE,
-    nIDOld : LibC::UIntPtrT,
-    hInstNew : Win32cr::Foundation::HINSTANCE,
-    nIDNew : LibC::UIntPtrT,
-    nButtons : Int32
-
-  @[Extern]
-  record TBBUTTONINFOA,
-    cbSize : UInt32,
-    dwMask : Win32cr::UI::Controls::TBBUTTONINFOW_MASK,
-    idCommand : Int32,
-    iImage : Int32,
-    fsState : UInt8,
-    fsStyle : UInt8,
-    cx : UInt16,
-    lParam : LibC::UIntPtrT,
-    pszText : Win32cr::Foundation::PSTR,
-    cchText : Int32
-
-  @[Extern]
-  record TBBUTTONINFOW,
-    cbSize : UInt32,
-    dwMask : Win32cr::UI::Controls::TBBUTTONINFOW_MASK,
-    idCommand : Int32,
-    iImage : Int32,
-    fsState : UInt8,
-    fsStyle : UInt8,
-    cx : UInt16,
-    lParam : LibC::UIntPtrT,
-    pszText : Win32cr::Foundation::PWSTR,
-    cchText : Int32
-
-  @[Extern]
-  record TBMETRICS,
-    cbSize : UInt32,
-    dwMask : UInt32,
-    cxPad : Int32,
-    cyPad : Int32,
-    cxBarPad : Int32,
-    cyBarPad : Int32,
-    cxButtonSpacing : Int32,
-    cyButtonSpacing : Int32
-
-  @[Extern]
-  record NMTBHOTITEM,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    idOld : Int32,
-    idNew : Int32,
-    dwFlags : Win32cr::UI::Controls::NMTBHOTITEM_FLAGS
-
-  @[Extern]
-  record NMTBSAVE,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    pData : UInt32*,
-    pCurrent : UInt32*,
-    cbData : UInt32,
-    iItem : Int32,
-    cButtons : Int32,
-    tbButton : Win32cr::UI::Controls::TBBUTTON
-
-  @[Extern]
-  record NMTBRESTORE,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    pData : UInt32*,
-    pCurrent : UInt32*,
-    cbData : UInt32,
-    iItem : Int32,
-    cButtons : Int32,
-    cbBytesPerRecord : Int32,
-    tbButton : Win32cr::UI::Controls::TBBUTTON
-
-  @[Extern]
-  record NMTBGETINFOTIPA,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    pszText : Win32cr::Foundation::PSTR,
-    cchTextMax : Int32,
-    iItem : Int32,
-    lParam : Win32cr::Foundation::LPARAM
-
-  @[Extern]
-  record NMTBGETINFOTIPW,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    pszText : Win32cr::Foundation::PWSTR,
-    cchTextMax : Int32,
-    iItem : Int32,
-    lParam : Win32cr::Foundation::LPARAM
-
-  @[Extern]
-  record NMTBDISPINFOA,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    dwMask : Win32cr::UI::Controls::NMTBDISPINFOW_MASK,
-    idCommand : Int32,
-    lParam : LibC::UIntPtrT,
-    iImage : Int32,
-    pszText : Win32cr::Foundation::PSTR,
-    cchText : Int32
-
-  @[Extern]
-  record NMTBDISPINFOW,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    dwMask : Win32cr::UI::Controls::NMTBDISPINFOW_MASK,
-    idCommand : Int32,
-    lParam : LibC::UIntPtrT,
-    iImage : Int32,
-    pszText : Win32cr::Foundation::PWSTR,
-    cchText : Int32
-
-  @[Extern]
-  record NMTOOLBARA,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    iItem : Int32,
-    tbButton : Win32cr::UI::Controls::TBBUTTON,
-    cchText : Int32,
-    pszText : Win32cr::Foundation::PSTR,
-    rcButton : Win32cr::Foundation::RECT
-
-  @[Extern]
-  record NMTOOLBARW,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    iItem : Int32,
-    tbButton : Win32cr::UI::Controls::TBBUTTON,
-    cchText : Int32,
-    pszText : Win32cr::Foundation::PWSTR,
-    rcButton : Win32cr::Foundation::RECT
-
-  @[Extern]
-  record REBARINFO,
-    cbSize : UInt32,
-    fMask : UInt32,
-    himl : Win32cr::UI::Controls::HIMAGELIST
-
-  @[Extern]
-  record REBARBANDINFOA,
-    cbSize : UInt32,
-    fMask : UInt32,
-    fStyle : UInt32,
-    clrFore : UInt32,
-    clrBack : UInt32,
-    lpText : Win32cr::Foundation::PSTR,
-    cch : UInt32,
-    iImage : Int32,
-    hwndChild : Win32cr::Foundation::HWND,
-    cxMinChild : UInt32,
-    cyMinChild : UInt32,
-    cx : UInt32,
-    hbmBack : Win32cr::Graphics::Gdi::HBITMAP,
-    wID : UInt32,
-    cyChild : UInt32,
-    cyMaxChild : UInt32,
-    cyIntegral : UInt32,
-    cxIdeal : UInt32,
-    lParam : Win32cr::Foundation::LPARAM,
-    cxHeader : UInt32,
-    rcChevronLocation : Win32cr::Foundation::RECT,
-    uChevronState : UInt32
-
-  @[Extern]
-  record REBARBANDINFOW,
-    cbSize : UInt32,
-    fMask : UInt32,
-    fStyle : UInt32,
-    clrFore : UInt32,
-    clrBack : UInt32,
-    lpText : Win32cr::Foundation::PWSTR,
-    cch : UInt32,
-    iImage : Int32,
-    hwndChild : Win32cr::Foundation::HWND,
-    cxMinChild : UInt32,
-    cyMinChild : UInt32,
-    cx : UInt32,
-    hbmBack : Win32cr::Graphics::Gdi::HBITMAP,
-    wID : UInt32,
-    cyChild : UInt32,
-    cyMaxChild : UInt32,
-    cyIntegral : UInt32,
-    cxIdeal : UInt32,
-    lParam : Win32cr::Foundation::LPARAM,
-    cxHeader : UInt32,
-    rcChevronLocation : Win32cr::Foundation::RECT,
-    uChevronState : UInt32
-
-  @[Extern]
-  record NMREBARCHILDSIZE,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    uBand : UInt32,
-    wID : UInt32,
-    rcChild : Win32cr::Foundation::RECT,
-    rcBand : Win32cr::Foundation::RECT
-
-  @[Extern]
-  record NMREBAR,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    dwMask : Win32cr::UI::Controls::NMREBAR_MASK_FLAGS,
-    uBand : UInt32,
-    fStyle : UInt32,
-    wID : UInt32,
-    lParam : Win32cr::Foundation::LPARAM
-
-  @[Extern]
-  record NMRBAUTOSIZE,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    fChanged : Win32cr::Foundation::BOOL,
-    rcTarget : Win32cr::Foundation::RECT,
-    rcActual : Win32cr::Foundation::RECT
-
-  @[Extern]
-  record NMREBARCHEVRON,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    uBand : UInt32,
-    wID : UInt32,
-    lParam : Win32cr::Foundation::LPARAM,
-    rc : Win32cr::Foundation::RECT,
-    lParamNM : Win32cr::Foundation::LPARAM
-
-  @[Extern]
-  record NMREBARSPLITTER,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    rcSizing : Win32cr::Foundation::RECT
-
-  @[Extern]
-  record NMREBARAUTOBREAK,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    uBand : UInt32,
-    wID : UInt32,
-    lParam : Win32cr::Foundation::LPARAM,
-    uMsg : UInt32,
-    fStyleCurrent : UInt32,
-    fAutoBreak : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record RBHITTESTINFO,
-    pt : Win32cr::Foundation::POINT,
-    flags : UInt32,
-    iBand : Int32
-
-  @[Extern]
-  record TTTOOLINFOA,
-    cbSize : UInt32,
-    uFlags : Win32cr::UI::Controls::TTTOOLINFO_FLAGS,
-    hwnd : Win32cr::Foundation::HWND,
-    uId : LibC::UIntPtrT,
-    rect : Win32cr::Foundation::RECT,
-    hinst : Win32cr::Foundation::HINSTANCE,
-    lpszText : Win32cr::Foundation::PSTR,
-    lParam : Win32cr::Foundation::LPARAM,
-    lpReserved : Void*
-
-  @[Extern]
-  record TTTOOLINFOW,
-    cbSize : UInt32,
-    uFlags : Win32cr::UI::Controls::TTTOOLINFO_FLAGS,
-    hwnd : Win32cr::Foundation::HWND,
-    uId : LibC::UIntPtrT,
-    rect : Win32cr::Foundation::RECT,
-    hinst : Win32cr::Foundation::HINSTANCE,
-    lpszText : Win32cr::Foundation::PWSTR,
-    lParam : Win32cr::Foundation::LPARAM,
-    lpReserved : Void*
-
-  @[Extern]
-  record TTGETTITLE,
-    dwSize : UInt32,
-    uTitleBitmap : UInt32,
-    cch : UInt32,
-    pszTitle : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record TTHITTESTINFOA,
-    hwnd : Win32cr::Foundation::HWND,
-    pt : Win32cr::Foundation::POINT,
-    ti : Win32cr::UI::Controls::TTTOOLINFOA
-
-  @[Extern]
-  record TTHITTESTINFOW,
-    hwnd : Win32cr::Foundation::HWND,
-    pt : Win32cr::Foundation::POINT,
-    ti : Win32cr::UI::Controls::TTTOOLINFOW
-
-  @[Extern]
-  record NMTTDISPINFOA,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    lpszText : Win32cr::Foundation::PSTR,
-    szText : Win32cr::Foundation::CHAR[80],
-    hinst : Win32cr::Foundation::HINSTANCE,
-    uFlags : UInt32,
-    lParam : Win32cr::Foundation::LPARAM
-
-  @[Extern]
-  record NMTTDISPINFOW,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    lpszText : Win32cr::Foundation::PWSTR,
-    szText : UInt16[80],
-    hinst : Win32cr::Foundation::HINSTANCE,
-    uFlags : UInt32,
-    lParam : Win32cr::Foundation::LPARAM
-
-  @[Extern]
-  record NMTRBTHUMBPOSCHANGING,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    dwPos : UInt32,
-    nReason : Int32
-
-  @[Extern]
-  record DRAGLISTINFO,
-    uNotification : Win32cr::UI::Controls::DRAGLISTINFO_NOTIFICATION_FLAGS,
-    hWnd : Win32cr::Foundation::HWND,
-    ptCursor : Win32cr::Foundation::POINT
-
-  @[Extern]
-  record UDACCEL,
-    nSec : UInt32,
-    nInc : UInt32
-
-  @[Extern]
-  record NMUPDOWN,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    iPos : Int32,
-    iDelta : Int32
-
-  @[Extern]
-  record PBRANGE,
-    iLow : Int32,
-    iHigh : Int32
-
-  @[Extern]
-  record LITEM,
-    mask : UInt32,
-    iLink : Int32,
-    state : UInt32,
-    stateMask : UInt32,
-    szID : UInt16[48],
-    szUrl : UInt16[2084]
-
-  @[Extern]
-  record LHITTESTINFO,
-    pt : Win32cr::Foundation::POINT,
-    item : Win32cr::UI::Controls::LITEM
-
-  @[Extern]
-  record NMLINK,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    item : Win32cr::UI::Controls::LITEM
-
-  @[Extern]
-  record LVITEMA,
-    mask : UInt32,
-    iItem : Int32,
-    iSubItem : Int32,
-    state : UInt32,
-    stateMask : UInt32,
-    pszText : Win32cr::Foundation::PSTR,
-    cchTextMax : Int32,
-    iImage : Int32,
-    lParam : Win32cr::Foundation::LPARAM,
-    iIndent : Int32,
-    iGroupId : Win32cr::UI::Controls::LVITEMA_GROUP_ID,
-    cColumns : UInt32,
-    puColumns : UInt32*,
-    piColFmt : Int32*,
-    iGroup : Int32
-
-  @[Extern]
-  record LVITEMW,
-    mask : UInt32,
-    iItem : Int32,
-    iSubItem : Int32,
-    state : UInt32,
-    stateMask : UInt32,
-    pszText : Win32cr::Foundation::PWSTR,
-    cchTextMax : Int32,
-    iImage : Int32,
-    lParam : Win32cr::Foundation::LPARAM,
-    iIndent : Int32,
-    iGroupId : Win32cr::UI::Controls::LVITEMA_GROUP_ID,
-    cColumns : UInt32,
-    puColumns : UInt32*,
-    piColFmt : Int32*,
-    iGroup : Int32
-
-  @[Extern]
-  record LVFINDINFOA,
-    flags : Win32cr::UI::Controls::LVFINDINFOW_FLAGS,
-    psz : Win32cr::Foundation::PSTR,
-    lParam : Win32cr::Foundation::LPARAM,
-    pt : Win32cr::Foundation::POINT,
-    vkDirection : UInt32
-
-  @[Extern]
-  record LVFINDINFOW,
-    flags : Win32cr::UI::Controls::LVFINDINFOW_FLAGS,
-    psz : Win32cr::Foundation::PWSTR,
-    lParam : Win32cr::Foundation::LPARAM,
-    pt : Win32cr::Foundation::POINT,
-    vkDirection : UInt32
-
-  @[Extern]
-  record LVHITTESTINFO,
-    pt : Win32cr::Foundation::POINT,
-    flags : Win32cr::UI::Controls::LVHITTESTINFO_FLAGS,
-    iItem : Int32,
-    iSubItem : Int32,
-    iGroup : Int32
-
-  @[Extern]
-  record LVCOLUMNA,
-    mask : Win32cr::UI::Controls::LVCOLUMNW_MASK,
-    fmt : Win32cr::UI::Controls::LVCOLUMNW_FORMAT,
-    cx : Int32,
-    pszText : Win32cr::Foundation::PSTR,
-    cchTextMax : Int32,
-    iSubItem : Int32,
-    iImage : Int32,
-    iOrder : Int32,
-    cxMin : Int32,
-    cxDefault : Int32,
-    cxIdeal : Int32
-
-  @[Extern]
-  record LVCOLUMNW,
-    mask : Win32cr::UI::Controls::LVCOLUMNW_MASK,
-    fmt : Win32cr::UI::Controls::LVCOLUMNW_FORMAT,
-    cx : Int32,
-    pszText : Win32cr::Foundation::PWSTR,
-    cchTextMax : Int32,
-    iSubItem : Int32,
-    iImage : Int32,
-    iOrder : Int32,
-    cxMin : Int32,
-    cxDefault : Int32,
-    cxIdeal : Int32
-
-  @[Extern]
-  record LVBKIMAGEA,
-    ulFlags : UInt32,
-    hbm : Win32cr::Graphics::Gdi::HBITMAP,
-    pszImage : Win32cr::Foundation::PSTR,
-    cchImageMax : UInt32,
-    xOffsetPercent : Int32,
-    yOffsetPercent : Int32
-
-  @[Extern]
-  record LVBKIMAGEW,
-    ulFlags : UInt32,
-    hbm : Win32cr::Graphics::Gdi::HBITMAP,
-    pszImage : Win32cr::Foundation::PWSTR,
-    cchImageMax : UInt32,
-    xOffsetPercent : Int32,
-    yOffsetPercent : Int32
-
-  @[Extern]
-  record LVGROUP,
-    cbSize : UInt32,
-    mask : Win32cr::UI::Controls::LVGROUP_MASK,
-    pszHeader : Win32cr::Foundation::PWSTR,
-    cchHeader : Int32,
-    pszFooter : Win32cr::Foundation::PWSTR,
-    cchFooter : Int32,
-    iGroupId : Int32,
-    stateMask : UInt32,
-    state : UInt32,
-    uAlign : UInt32,
-    pszSubtitle : Win32cr::Foundation::PWSTR,
-    cchSubtitle : UInt32,
-    pszTask : Win32cr::Foundation::PWSTR,
-    cchTask : UInt32,
-    pszDescriptionTop : Win32cr::Foundation::PWSTR,
-    cchDescriptionTop : UInt32,
-    pszDescriptionBottom : Win32cr::Foundation::PWSTR,
-    cchDescriptionBottom : UInt32,
-    iTitleImage : Int32,
-    iExtendedImage : Int32,
-    iFirstItem : Int32,
-    cItems : UInt32,
-    pszSubsetTitle : Win32cr::Foundation::PWSTR,
-    cchSubsetTitle : UInt32
-
-  @[Extern]
-  record LVGROUPMETRICS,
-    cbSize : UInt32,
-    mask : UInt32,
-    left : UInt32,
-    top : UInt32,
-    right : UInt32,
-    bottom : UInt32,
-    crLeft : UInt32,
-    crTop : UInt32,
-    crRight : UInt32,
-    crBottom : UInt32,
-    crHeader : UInt32,
-    crFooter : UInt32
-
-  @[Extern]
-  record LVINSERTGROUPSORTED,
-    pfnGroupCompare : Win32cr::UI::Controls::PFNLVGROUPCOMPARE,
-    pvData : Void*,
-    lvGroup : Win32cr::UI::Controls::LVGROUP
-
-  @[Extern]
-  record LVTILEVIEWINFO,
-    cbSize : UInt32,
-    dwMask : UInt32,
-    dwFlags : Win32cr::UI::Controls::LVTILEVIEWINFO_FLAGS,
-    sizeTile : Win32cr::Foundation::SIZE,
-    cLines : Int32,
-    rcLabelMargin : Win32cr::Foundation::RECT
-
-  @[Extern]
-  record LVTILEINFO,
-    cbSize : UInt32,
-    iItem : Int32,
-    cColumns : UInt32,
-    puColumns : UInt32*,
-    piColFmt : Int32*
-
-  @[Extern]
-  record LVINSERTMARK,
-    cbSize : UInt32,
-    dwFlags : UInt32,
-    iItem : Int32,
-    dwReserved : UInt32
-
-  @[Extern]
-  record LVSETINFOTIP,
-    cbSize : UInt32,
-    dwFlags : UInt32,
-    pszText : Win32cr::Foundation::PWSTR,
-    iItem : Int32,
-    iSubItem : Int32
-
-  @[Extern]
-  record LVFOOTERINFO,
-    mask : UInt32,
-    pszText : Win32cr::Foundation::PWSTR,
-    cchTextMax : Int32,
-    cItems : UInt32
-
-  @[Extern]
-  record LVFOOTERITEM,
-    mask : Win32cr::UI::Controls::LVFOOTERITEM_MASK,
-    iItem : Int32,
-    pszText : Win32cr::Foundation::PWSTR,
-    cchTextMax : Int32,
-    state : UInt32,
-    stateMask : UInt32
-
-  @[Extern]
-  record LVITEMINDEX,
-    iItem : Int32,
-    iGroup : Int32
-
-  @[Extern]
-  record NMLISTVIEW,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    iItem : Int32,
-    iSubItem : Int32,
-    uNewState : UInt32,
-    uOldState : UInt32,
-    uChanged : UInt32,
-    ptAction : Win32cr::Foundation::POINT,
-    lParam : Win32cr::Foundation::LPARAM
-
-  @[Extern]
-  record NMITEMACTIVATE,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    iItem : Int32,
-    iSubItem : Int32,
-    uNewState : UInt32,
-    uOldState : UInt32,
-    uChanged : UInt32,
-    ptAction : Win32cr::Foundation::POINT,
-    lParam : Win32cr::Foundation::LPARAM,
-    uKeyFlags : UInt32
-
-  @[Extern]
-  record NMLVCUSTOMDRAW,
-    nmcd : Win32cr::UI::Controls::NMCUSTOMDRAW,
-    clrText : UInt32,
-    clrTextBk : UInt32,
-    iSubItem : Int32,
-    dwItemType : Win32cr::UI::Controls::NMLVCUSTOMDRAW_ITEM_TYPE,
-    clrFace : UInt32,
-    iIconEffect : Int32,
-    iIconPhase : Int32,
-    iPartId : Int32,
-    iStateId : Int32,
-    rcText : Win32cr::Foundation::RECT,
-    uAlign : Win32cr::UI::Controls::NMLVCUSTOMDRAW_ALIGN
-
-  @[Extern]
-  record NMLVCACHEHINT,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    iFrom : Int32,
-    iTo : Int32
-
-  @[Extern]
-  record NMLVFINDITEMA,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    iStart : Int32,
-    lvfi : Win32cr::UI::Controls::LVFINDINFOA
-
-  @[Extern]
-  record NMLVFINDITEMW,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    iStart : Int32,
-    lvfi : Win32cr::UI::Controls::LVFINDINFOW
-
-  @[Extern]
-  record NMLVODSTATECHANGE,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    iFrom : Int32,
-    iTo : Int32,
-    uNewState : UInt32,
-    uOldState : UInt32
-
-  @[Extern]
-  record NMLVDISPINFOA,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    item : Win32cr::UI::Controls::LVITEMA
-
-  @[Extern]
-  record NMLVDISPINFOW,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    item : Win32cr::UI::Controls::LVITEMW
-
-  @[Extern]
-  record NMLVKEYDOWN,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    wVKey : UInt16,
-    flags : UInt32
-
-  @[Extern]
-  record NMLVLINK,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    link : Win32cr::UI::Controls::LITEM,
-    iItem : Int32,
-    iSubItem : Int32
-
-  @[Extern]
-  record NMLVGETINFOTIPA,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    dwFlags : UInt32,
-    pszText : Win32cr::Foundation::PSTR,
-    cchTextMax : Int32,
-    iItem : Int32,
-    iSubItem : Int32,
-    lParam : Win32cr::Foundation::LPARAM
-
-  @[Extern]
-  record NMLVGETINFOTIPW,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    dwFlags : UInt32,
-    pszText : Win32cr::Foundation::PWSTR,
-    cchTextMax : Int32,
-    iItem : Int32,
-    iSubItem : Int32,
-    lParam : Win32cr::Foundation::LPARAM
-
-  @[Extern]
-  record NMLVSCROLL,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    dx : Int32,
-    dy : Int32
-
-  @[Extern]
-  record NMLVEMPTYMARKUP,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    dwFlags : Win32cr::UI::Controls::NMLVEMPTYMARKUP_FLAGS,
-    szMarkup : UInt16[2084]
-
-  @[Extern]
-  record NMTVSTATEIMAGECHANGING,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    hti : Win32cr::UI::Controls::HTREEITEM,
-    iOldStateImageIndex : Int32,
-    iNewStateImageIndex : Int32
-
-  @[Extern]
-  record TVITEMA,
-    mask : Win32cr::UI::Controls::TVITEM_MASK,
-    hItem : Win32cr::UI::Controls::HTREEITEM,
-    state : UInt32,
-    stateMask : UInt32,
-    pszText : Win32cr::Foundation::PSTR,
-    cchTextMax : Int32,
-    iImage : Int32,
-    iSelectedImage : Int32,
-    cChildren : Win32cr::UI::Controls::TVITEMEXW_CHILDREN,
-    lParam : Win32cr::Foundation::LPARAM
-
-  @[Extern]
-  record TVITEMW,
-    mask : Win32cr::UI::Controls::TVITEM_MASK,
-    hItem : Win32cr::UI::Controls::HTREEITEM,
-    state : UInt32,
-    stateMask : UInt32,
-    pszText : Win32cr::Foundation::PWSTR,
-    cchTextMax : Int32,
-    iImage : Int32,
-    iSelectedImage : Int32,
-    cChildren : Win32cr::UI::Controls::TVITEMEXW_CHILDREN,
-    lParam : Win32cr::Foundation::LPARAM
-
-  @[Extern]
-  record TVITEMEXA,
-    mask : Win32cr::UI::Controls::TVITEM_MASK,
-    hItem : Win32cr::UI::Controls::HTREEITEM,
-    state : UInt32,
-    stateMask : UInt32,
-    pszText : Win32cr::Foundation::PSTR,
-    cchTextMax : Int32,
-    iImage : Int32,
-    iSelectedImage : Int32,
-    cChildren : Win32cr::UI::Controls::TVITEMEXW_CHILDREN,
-    lParam : Win32cr::Foundation::LPARAM,
-    iIntegral : Int32,
-    uStateEx : UInt32,
-    hwnd : Win32cr::Foundation::HWND,
-    iExpandedImage : Int32,
-    iReserved : Int32
-
-  @[Extern]
-  record TVITEMEXW,
-    mask : Win32cr::UI::Controls::TVITEM_MASK,
-    hItem : Win32cr::UI::Controls::HTREEITEM,
-    state : UInt32,
-    stateMask : UInt32,
-    pszText : Win32cr::Foundation::PWSTR,
-    cchTextMax : Int32,
-    iImage : Int32,
-    iSelectedImage : Int32,
-    cChildren : Win32cr::UI::Controls::TVITEMEXW_CHILDREN,
-    lParam : Win32cr::Foundation::LPARAM,
-    iIntegral : Int32,
-    uStateEx : UInt32,
-    hwnd : Win32cr::Foundation::HWND,
-    iExpandedImage : Int32,
-    iReserved : Int32
-
-  @[Extern]
-  record TVINSERTSTRUCTA,
-    hParent : Win32cr::UI::Controls::HTREEITEM,
-    hInsertAfter : Win32cr::UI::Controls::HTREEITEM,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      itemex : Win32cr::UI::Controls::TVITEMEXA,
-      item : Win32cr::UI::Controls::TVITEMA
-
+  struct COLORMAP
+    property from : UInt32
+    property to : UInt32
+    def initialize(@from : UInt32, @to : UInt32)
+    end
   end
 
   @[Extern]
-  record TVINSERTSTRUCTW,
-    hParent : Win32cr::UI::Controls::HTREEITEM,
-    hInsertAfter : Win32cr::UI::Controls::HTREEITEM,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      itemex : Win32cr::UI::Controls::TVITEMEXW,
-      item : Win32cr::UI::Controls::TVITEMW
-
+  struct NMTBCUSTOMDRAW
+    property nmcd : Win32cr::UI::Controls::NMCUSTOMDRAW
+    property hbrMonoDither : Win32cr::Graphics::Gdi::HBRUSH
+    property hbrLines : Win32cr::Graphics::Gdi::HBRUSH
+    property hpenLines : Win32cr::Graphics::Gdi::HPEN
+    property clrText : UInt32
+    property clrMark : UInt32
+    property clrTextHighlight : UInt32
+    property clrBtnFace : UInt32
+    property clrBtnHighlight : UInt32
+    property clrHighlightHotTrack : UInt32
+    property rcText : Win32cr::Foundation::RECT
+    property nStringBkMode : Int32
+    property nHLStringBkMode : Int32
+    property iListGap : Int32
+    def initialize(@nmcd : Win32cr::UI::Controls::NMCUSTOMDRAW, @hbrMonoDither : Win32cr::Graphics::Gdi::HBRUSH, @hbrLines : Win32cr::Graphics::Gdi::HBRUSH, @hpenLines : Win32cr::Graphics::Gdi::HPEN, @clrText : UInt32, @clrMark : UInt32, @clrTextHighlight : UInt32, @clrBtnFace : UInt32, @clrBtnHighlight : UInt32, @clrHighlightHotTrack : UInt32, @rcText : Win32cr::Foundation::RECT, @nStringBkMode : Int32, @nHLStringBkMode : Int32, @iListGap : Int32)
+    end
   end
 
   @[Extern]
-  record TVHITTESTINFO,
-    pt : Win32cr::Foundation::POINT,
-    flags : Win32cr::UI::Controls::TVHITTESTINFO_FLAGS,
-    hItem : Win32cr::UI::Controls::HTREEITEM
+  struct TBADDBITMAP
+    property hInst : Win32cr::Foundation::HINSTANCE
+    property nID : LibC::UIntPtrT
+    def initialize(@hInst : Win32cr::Foundation::HINSTANCE, @nID : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record TVGETITEMPARTRECTINFO,
-    hti : Win32cr::UI::Controls::HTREEITEM,
-    prc : Win32cr::Foundation::RECT*,
-    partID : Win32cr::UI::Controls::TVITEMPART
+  struct TBSAVEPARAMSA
+    property hkr : Win32cr::System::Registry::HKEY
+    property pszSubKey : Win32cr::Foundation::PSTR
+    property pszValueName : Win32cr::Foundation::PSTR
+    def initialize(@hkr : Win32cr::System::Registry::HKEY, @pszSubKey : Win32cr::Foundation::PSTR, @pszValueName : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record TVSORTCB,
-    hParent : Win32cr::UI::Controls::HTREEITEM,
-    lpfnCompare : Win32cr::UI::Controls::PFNTVCOMPARE,
-    lParam : Win32cr::Foundation::LPARAM
+  struct TBSAVEPARAMSW
+    property hkr : Win32cr::System::Registry::HKEY
+    property pszSubKey : Win32cr::Foundation::PWSTR
+    property pszValueName : Win32cr::Foundation::PWSTR
+    def initialize(@hkr : Win32cr::System::Registry::HKEY, @pszSubKey : Win32cr::Foundation::PWSTR, @pszValueName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record NMTREEVIEWA,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    action : UInt32,
-    itemOld : Win32cr::UI::Controls::TVITEMA,
-    itemNew : Win32cr::UI::Controls::TVITEMA,
-    ptDrag : Win32cr::Foundation::POINT
+  struct TBINSERTMARK
+    property iButton : Int32
+    property dwFlags : Win32cr::UI::Controls::TBINSERTMARK_FLAGS
+    def initialize(@iButton : Int32, @dwFlags : Win32cr::UI::Controls::TBINSERTMARK_FLAGS)
+    end
+  end
 
   @[Extern]
-  record NMTREEVIEWW,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    action : UInt32,
-    itemOld : Win32cr::UI::Controls::TVITEMW,
-    itemNew : Win32cr::UI::Controls::TVITEMW,
-    ptDrag : Win32cr::Foundation::POINT
+  struct TBREPLACEBITMAP
+    property hInstOld : Win32cr::Foundation::HINSTANCE
+    property nIDOld : LibC::UIntPtrT
+    property hInstNew : Win32cr::Foundation::HINSTANCE
+    property nIDNew : LibC::UIntPtrT
+    property nButtons : Int32
+    def initialize(@hInstOld : Win32cr::Foundation::HINSTANCE, @nIDOld : LibC::UIntPtrT, @hInstNew : Win32cr::Foundation::HINSTANCE, @nIDNew : LibC::UIntPtrT, @nButtons : Int32)
+    end
+  end
 
   @[Extern]
-  record NMTVDISPINFOA,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    item : Win32cr::UI::Controls::TVITEMA
+  struct TBBUTTONINFOA
+    property cbSize : UInt32
+    property dwMask : Win32cr::UI::Controls::TBBUTTONINFOW_MASK
+    property idCommand : Int32
+    property iImage : Int32
+    property fsState : UInt8
+    property fsStyle : UInt8
+    property cx : UInt16
+    property lParam : LibC::UIntPtrT
+    property pszText : Win32cr::Foundation::PSTR
+    property cchText : Int32
+    def initialize(@cbSize : UInt32, @dwMask : Win32cr::UI::Controls::TBBUTTONINFOW_MASK, @idCommand : Int32, @iImage : Int32, @fsState : UInt8, @fsStyle : UInt8, @cx : UInt16, @lParam : LibC::UIntPtrT, @pszText : Win32cr::Foundation::PSTR, @cchText : Int32)
+    end
+  end
 
   @[Extern]
-  record NMTVDISPINFOW,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    item : Win32cr::UI::Controls::TVITEMW
+  struct TBBUTTONINFOW
+    property cbSize : UInt32
+    property dwMask : Win32cr::UI::Controls::TBBUTTONINFOW_MASK
+    property idCommand : Int32
+    property iImage : Int32
+    property fsState : UInt8
+    property fsStyle : UInt8
+    property cx : UInt16
+    property lParam : LibC::UIntPtrT
+    property pszText : Win32cr::Foundation::PWSTR
+    property cchText : Int32
+    def initialize(@cbSize : UInt32, @dwMask : Win32cr::UI::Controls::TBBUTTONINFOW_MASK, @idCommand : Int32, @iImage : Int32, @fsState : UInt8, @fsStyle : UInt8, @cx : UInt16, @lParam : LibC::UIntPtrT, @pszText : Win32cr::Foundation::PWSTR, @cchText : Int32)
+    end
+  end
 
   @[Extern]
-  record NMTVDISPINFOEXA,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    item : Win32cr::UI::Controls::TVITEMEXA
+  struct TBMETRICS
+    property cbSize : UInt32
+    property dwMask : UInt32
+    property cxPad : Int32
+    property cyPad : Int32
+    property cxBarPad : Int32
+    property cyBarPad : Int32
+    property cxButtonSpacing : Int32
+    property cyButtonSpacing : Int32
+    def initialize(@cbSize : UInt32, @dwMask : UInt32, @cxPad : Int32, @cyPad : Int32, @cxBarPad : Int32, @cyBarPad : Int32, @cxButtonSpacing : Int32, @cyButtonSpacing : Int32)
+    end
+  end
 
   @[Extern]
-  record NMTVDISPINFOEXW,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    item : Win32cr::UI::Controls::TVITEMEXW
+  struct NMTBHOTITEM
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property idOld : Int32
+    property idNew : Int32
+    property dwFlags : Win32cr::UI::Controls::NMTBHOTITEM_FLAGS
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @idOld : Int32, @idNew : Int32, @dwFlags : Win32cr::UI::Controls::NMTBHOTITEM_FLAGS)
+    end
+  end
 
   @[Extern]
-  record NMTVKEYDOWN,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    wVKey : UInt16,
-    flags : UInt32
+  struct NMTBSAVE
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property pData : UInt32*
+    property pCurrent : UInt32*
+    property cbData : UInt32
+    property iItem : Int32
+    property cButtons : Int32
+    property tbButton : Win32cr::UI::Controls::TBBUTTON
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @pData : UInt32*, @pCurrent : UInt32*, @cbData : UInt32, @iItem : Int32, @cButtons : Int32, @tbButton : Win32cr::UI::Controls::TBBUTTON)
+    end
+  end
 
   @[Extern]
-  record NMTVCUSTOMDRAW,
-    nmcd : Win32cr::UI::Controls::NMCUSTOMDRAW,
-    clrText : UInt32,
-    clrTextBk : UInt32,
-    iLevel : Int32
+  struct NMTBRESTORE
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property pData : UInt32*
+    property pCurrent : UInt32*
+    property cbData : UInt32
+    property iItem : Int32
+    property cButtons : Int32
+    property cbBytesPerRecord : Int32
+    property tbButton : Win32cr::UI::Controls::TBBUTTON
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @pData : UInt32*, @pCurrent : UInt32*, @cbData : UInt32, @iItem : Int32, @cButtons : Int32, @cbBytesPerRecord : Int32, @tbButton : Win32cr::UI::Controls::TBBUTTON)
+    end
+  end
 
   @[Extern]
-  record NMTVGETINFOTIPA,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    pszText : Win32cr::Foundation::PSTR,
-    cchTextMax : Int32,
-    hItem : Win32cr::UI::Controls::HTREEITEM,
-    lParam : Win32cr::Foundation::LPARAM
+  struct NMTBGETINFOTIPA
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property pszText : Win32cr::Foundation::PSTR
+    property cchTextMax : Int32
+    property iItem : Int32
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @pszText : Win32cr::Foundation::PSTR, @cchTextMax : Int32, @iItem : Int32, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
 
   @[Extern]
-  record NMTVGETINFOTIPW,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    pszText : Win32cr::Foundation::PWSTR,
-    cchTextMax : Int32,
-    hItem : Win32cr::UI::Controls::HTREEITEM,
-    lParam : Win32cr::Foundation::LPARAM
+  struct NMTBGETINFOTIPW
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property pszText : Win32cr::Foundation::PWSTR
+    property cchTextMax : Int32
+    property iItem : Int32
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @pszText : Win32cr::Foundation::PWSTR, @cchTextMax : Int32, @iItem : Int32, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
 
   @[Extern]
-  record NMTVITEMCHANGE,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    uChanged : UInt32,
-    hItem : Win32cr::UI::Controls::HTREEITEM,
-    uStateNew : UInt32,
-    uStateOld : UInt32,
-    lParam : Win32cr::Foundation::LPARAM
+  struct NMTBDISPINFOA
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property dwMask : Win32cr::UI::Controls::NMTBDISPINFOW_MASK
+    property idCommand : Int32
+    property lParam : LibC::UIntPtrT
+    property iImage : Int32
+    property pszText : Win32cr::Foundation::PSTR
+    property cchText : Int32
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @dwMask : Win32cr::UI::Controls::NMTBDISPINFOW_MASK, @idCommand : Int32, @lParam : LibC::UIntPtrT, @iImage : Int32, @pszText : Win32cr::Foundation::PSTR, @cchText : Int32)
+    end
+  end
 
   @[Extern]
-  record NMTVASYNCDRAW,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    pimldp : Win32cr::UI::Controls::IMAGELISTDRAWPARAMS*,
-    hr : Win32cr::Foundation::HRESULT,
-    hItem : Win32cr::UI::Controls::HTREEITEM,
-    lParam : Win32cr::Foundation::LPARAM,
-    dwRetFlags : UInt32,
-    iRetImageIndex : Int32
+  struct NMTBDISPINFOW
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property dwMask : Win32cr::UI::Controls::NMTBDISPINFOW_MASK
+    property idCommand : Int32
+    property lParam : LibC::UIntPtrT
+    property iImage : Int32
+    property pszText : Win32cr::Foundation::PWSTR
+    property cchText : Int32
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @dwMask : Win32cr::UI::Controls::NMTBDISPINFOW_MASK, @idCommand : Int32, @lParam : LibC::UIntPtrT, @iImage : Int32, @pszText : Win32cr::Foundation::PWSTR, @cchText : Int32)
+    end
+  end
 
   @[Extern]
-  record COMBOBOXEXITEMA,
-    mask : Win32cr::UI::Controls::COMBOBOX_EX_ITEM_FLAGS,
-    iItem : LibC::IntPtrT,
-    pszText : Win32cr::Foundation::PSTR,
-    cchTextMax : Int32,
-    iImage : Int32,
-    iSelectedImage : Int32,
-    iOverlay : Int32,
-    iIndent : Int32,
-    lParam : Win32cr::Foundation::LPARAM
+  struct NMTOOLBARA
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property iItem : Int32
+    property tbButton : Win32cr::UI::Controls::TBBUTTON
+    property cchText : Int32
+    property pszText : Win32cr::Foundation::PSTR
+    property rcButton : Win32cr::Foundation::RECT
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @iItem : Int32, @tbButton : Win32cr::UI::Controls::TBBUTTON, @cchText : Int32, @pszText : Win32cr::Foundation::PSTR, @rcButton : Win32cr::Foundation::RECT)
+    end
+  end
 
   @[Extern]
-  record COMBOBOXEXITEMW,
-    mask : Win32cr::UI::Controls::COMBOBOX_EX_ITEM_FLAGS,
-    iItem : LibC::IntPtrT,
-    pszText : Win32cr::Foundation::PWSTR,
-    cchTextMax : Int32,
-    iImage : Int32,
-    iSelectedImage : Int32,
-    iOverlay : Int32,
-    iIndent : Int32,
-    lParam : Win32cr::Foundation::LPARAM
+  struct NMTOOLBARW
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property iItem : Int32
+    property tbButton : Win32cr::UI::Controls::TBBUTTON
+    property cchText : Int32
+    property pszText : Win32cr::Foundation::PWSTR
+    property rcButton : Win32cr::Foundation::RECT
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @iItem : Int32, @tbButton : Win32cr::UI::Controls::TBBUTTON, @cchText : Int32, @pszText : Win32cr::Foundation::PWSTR, @rcButton : Win32cr::Foundation::RECT)
+    end
+  end
 
   @[Extern]
-  record NMCOMBOBOXEXA,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    ceItem : Win32cr::UI::Controls::COMBOBOXEXITEMA
+  struct REBARINFO
+    property cbSize : UInt32
+    property fMask : UInt32
+    property himl : Win32cr::UI::Controls::HIMAGELIST
+    def initialize(@cbSize : UInt32, @fMask : UInt32, @himl : Win32cr::UI::Controls::HIMAGELIST)
+    end
+  end
 
   @[Extern]
-  record NMCOMBOBOXEXW,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    ceItem : Win32cr::UI::Controls::COMBOBOXEXITEMW
+  struct REBARBANDINFOA
+    property cbSize : UInt32
+    property fMask : UInt32
+    property fStyle : UInt32
+    property clrFore : UInt32
+    property clrBack : UInt32
+    property lpText : Win32cr::Foundation::PSTR
+    property cch : UInt32
+    property iImage : Int32
+    property hwndChild : Win32cr::Foundation::HWND
+    property cxMinChild : UInt32
+    property cyMinChild : UInt32
+    property cx : UInt32
+    property hbmBack : Win32cr::Graphics::Gdi::HBITMAP
+    property wID : UInt32
+    property cyChild : UInt32
+    property cyMaxChild : UInt32
+    property cyIntegral : UInt32
+    property cxIdeal : UInt32
+    property lParam : Win32cr::Foundation::LPARAM
+    property cxHeader : UInt32
+    property rcChevronLocation : Win32cr::Foundation::RECT
+    property uChevronState : UInt32
+    def initialize(@cbSize : UInt32, @fMask : UInt32, @fStyle : UInt32, @clrFore : UInt32, @clrBack : UInt32, @lpText : Win32cr::Foundation::PSTR, @cch : UInt32, @iImage : Int32, @hwndChild : Win32cr::Foundation::HWND, @cxMinChild : UInt32, @cyMinChild : UInt32, @cx : UInt32, @hbmBack : Win32cr::Graphics::Gdi::HBITMAP, @wID : UInt32, @cyChild : UInt32, @cyMaxChild : UInt32, @cyIntegral : UInt32, @cxIdeal : UInt32, @lParam : Win32cr::Foundation::LPARAM, @cxHeader : UInt32, @rcChevronLocation : Win32cr::Foundation::RECT, @uChevronState : UInt32)
+    end
+  end
 
   @[Extern]
-  record NMCBEDRAGBEGINW,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    iItemid : Int32,
-    szText : UInt16[260]
+  struct REBARBANDINFOW
+    property cbSize : UInt32
+    property fMask : UInt32
+    property fStyle : UInt32
+    property clrFore : UInt32
+    property clrBack : UInt32
+    property lpText : Win32cr::Foundation::PWSTR
+    property cch : UInt32
+    property iImage : Int32
+    property hwndChild : Win32cr::Foundation::HWND
+    property cxMinChild : UInt32
+    property cyMinChild : UInt32
+    property cx : UInt32
+    property hbmBack : Win32cr::Graphics::Gdi::HBITMAP
+    property wID : UInt32
+    property cyChild : UInt32
+    property cyMaxChild : UInt32
+    property cyIntegral : UInt32
+    property cxIdeal : UInt32
+    property lParam : Win32cr::Foundation::LPARAM
+    property cxHeader : UInt32
+    property rcChevronLocation : Win32cr::Foundation::RECT
+    property uChevronState : UInt32
+    def initialize(@cbSize : UInt32, @fMask : UInt32, @fStyle : UInt32, @clrFore : UInt32, @clrBack : UInt32, @lpText : Win32cr::Foundation::PWSTR, @cch : UInt32, @iImage : Int32, @hwndChild : Win32cr::Foundation::HWND, @cxMinChild : UInt32, @cyMinChild : UInt32, @cx : UInt32, @hbmBack : Win32cr::Graphics::Gdi::HBITMAP, @wID : UInt32, @cyChild : UInt32, @cyMaxChild : UInt32, @cyIntegral : UInt32, @cxIdeal : UInt32, @lParam : Win32cr::Foundation::LPARAM, @cxHeader : UInt32, @rcChevronLocation : Win32cr::Foundation::RECT, @uChevronState : UInt32)
+    end
+  end
 
   @[Extern]
-  record NMCBEDRAGBEGINA,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    iItemid : Int32,
-    szText : Win32cr::Foundation::CHAR[260]
+  struct NMREBARCHILDSIZE
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property uBand : UInt32
+    property wID : UInt32
+    property rcChild : Win32cr::Foundation::RECT
+    property rcBand : Win32cr::Foundation::RECT
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @uBand : UInt32, @wID : UInt32, @rcChild : Win32cr::Foundation::RECT, @rcBand : Win32cr::Foundation::RECT)
+    end
+  end
 
   @[Extern]
-  record NMCBEENDEDITW,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    fChanged : Win32cr::Foundation::BOOL,
-    iNewSelection : Int32,
-    szText : UInt16[260],
-    iWhy : Int32
+  struct NMREBAR
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property dwMask : Win32cr::UI::Controls::NMREBAR_MASK_FLAGS
+    property uBand : UInt32
+    property fStyle : UInt32
+    property wID : UInt32
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @dwMask : Win32cr::UI::Controls::NMREBAR_MASK_FLAGS, @uBand : UInt32, @fStyle : UInt32, @wID : UInt32, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
 
   @[Extern]
-  record NMCBEENDEDITA,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    fChanged : Win32cr::Foundation::BOOL,
-    iNewSelection : Int32,
-    szText : Win32cr::Foundation::CHAR[260],
-    iWhy : Int32
+  struct NMRBAUTOSIZE
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property fChanged : Win32cr::Foundation::BOOL
+    property rcTarget : Win32cr::Foundation::RECT
+    property rcActual : Win32cr::Foundation::RECT
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @fChanged : Win32cr::Foundation::BOOL, @rcTarget : Win32cr::Foundation::RECT, @rcActual : Win32cr::Foundation::RECT)
+    end
+  end
 
   @[Extern]
-  record TCITEMHEADERA,
-    mask : Win32cr::UI::Controls::TCITEMHEADERA_MASK,
-    lpReserved1 : UInt32,
-    lpReserved2 : UInt32,
-    pszText : Win32cr::Foundation::PSTR,
-    cchTextMax : Int32,
-    iImage : Int32
+  struct NMREBARCHEVRON
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property uBand : UInt32
+    property wID : UInt32
+    property lParam : Win32cr::Foundation::LPARAM
+    property rc : Win32cr::Foundation::RECT
+    property lParamNM : Win32cr::Foundation::LPARAM
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @uBand : UInt32, @wID : UInt32, @lParam : Win32cr::Foundation::LPARAM, @rc : Win32cr::Foundation::RECT, @lParamNM : Win32cr::Foundation::LPARAM)
+    end
+  end
 
   @[Extern]
-  record TCITEMHEADERW,
-    mask : Win32cr::UI::Controls::TCITEMHEADERA_MASK,
-    lpReserved1 : UInt32,
-    lpReserved2 : UInt32,
-    pszText : Win32cr::Foundation::PWSTR,
-    cchTextMax : Int32,
-    iImage : Int32
+  struct NMREBARSPLITTER
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property rcSizing : Win32cr::Foundation::RECT
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @rcSizing : Win32cr::Foundation::RECT)
+    end
+  end
 
   @[Extern]
-  record TCITEMA,
-    mask : Win32cr::UI::Controls::TCITEMHEADERA_MASK,
-    dwState : UInt32,
-    dwStateMask : UInt32,
-    pszText : Win32cr::Foundation::PSTR,
-    cchTextMax : Int32,
-    iImage : Int32,
-    lParam : Win32cr::Foundation::LPARAM
+  struct NMREBARAUTOBREAK
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property uBand : UInt32
+    property wID : UInt32
+    property lParam : Win32cr::Foundation::LPARAM
+    property uMsg : UInt32
+    property fStyleCurrent : UInt32
+    property fAutoBreak : Win32cr::Foundation::BOOL
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @uBand : UInt32, @wID : UInt32, @lParam : Win32cr::Foundation::LPARAM, @uMsg : UInt32, @fStyleCurrent : UInt32, @fAutoBreak : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record TCITEMW,
-    mask : Win32cr::UI::Controls::TCITEMHEADERA_MASK,
-    dwState : UInt32,
-    dwStateMask : UInt32,
-    pszText : Win32cr::Foundation::PWSTR,
-    cchTextMax : Int32,
-    iImage : Int32,
-    lParam : Win32cr::Foundation::LPARAM
+  struct RBHITTESTINFO
+    property pt : Win32cr::Foundation::POINT
+    property flags : UInt32
+    property iBand : Int32
+    def initialize(@pt : Win32cr::Foundation::POINT, @flags : UInt32, @iBand : Int32)
+    end
+  end
 
   @[Extern]
-  record TCHITTESTINFO,
-    pt : Win32cr::Foundation::POINT,
-    flags : Win32cr::UI::Controls::TCHITTESTINFO_FLAGS
+  struct TTTOOLINFOA
+    property cbSize : UInt32
+    property uFlags : Win32cr::UI::Controls::TTTOOLINFO_FLAGS
+    property hwnd : Win32cr::Foundation::HWND
+    property uId : LibC::UIntPtrT
+    property rect : Win32cr::Foundation::RECT
+    property hinst : Win32cr::Foundation::HINSTANCE
+    property lpszText : Win32cr::Foundation::PSTR
+    property lParam : Win32cr::Foundation::LPARAM
+    property lpReserved : Void*
+    def initialize(@cbSize : UInt32, @uFlags : Win32cr::UI::Controls::TTTOOLINFO_FLAGS, @hwnd : Win32cr::Foundation::HWND, @uId : LibC::UIntPtrT, @rect : Win32cr::Foundation::RECT, @hinst : Win32cr::Foundation::HINSTANCE, @lpszText : Win32cr::Foundation::PSTR, @lParam : Win32cr::Foundation::LPARAM, @lpReserved : Void*)
+    end
+  end
 
   @[Extern]
-  record NMTCKEYDOWN,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    wVKey : UInt16,
-    flags : UInt32
+  struct TTTOOLINFOW
+    property cbSize : UInt32
+    property uFlags : Win32cr::UI::Controls::TTTOOLINFO_FLAGS
+    property hwnd : Win32cr::Foundation::HWND
+    property uId : LibC::UIntPtrT
+    property rect : Win32cr::Foundation::RECT
+    property hinst : Win32cr::Foundation::HINSTANCE
+    property lpszText : Win32cr::Foundation::PWSTR
+    property lParam : Win32cr::Foundation::LPARAM
+    property lpReserved : Void*
+    def initialize(@cbSize : UInt32, @uFlags : Win32cr::UI::Controls::TTTOOLINFO_FLAGS, @hwnd : Win32cr::Foundation::HWND, @uId : LibC::UIntPtrT, @rect : Win32cr::Foundation::RECT, @hinst : Win32cr::Foundation::HINSTANCE, @lpszText : Win32cr::Foundation::PWSTR, @lParam : Win32cr::Foundation::LPARAM, @lpReserved : Void*)
+    end
+  end
 
   @[Extern]
-  record MCHITTESTINFO,
-    cbSize : UInt32,
-    pt : Win32cr::Foundation::POINT,
-    uHit : UInt32,
-    st : Win32cr::Foundation::SYSTEMTIME,
-    rc : Win32cr::Foundation::RECT,
-    iOffset : Int32,
-    iRow : Int32,
-    iCol : Int32
+  struct TTGETTITLE
+    property dwSize : UInt32
+    property uTitleBitmap : UInt32
+    property cch : UInt32
+    property pszTitle : Win32cr::Foundation::PWSTR
+    def initialize(@dwSize : UInt32, @uTitleBitmap : UInt32, @cch : UInt32, @pszTitle : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record MCGRIDINFO,
-    cbSize : UInt32,
-    dwPart : Win32cr::UI::Controls::MCGRIDINFO_PART,
-    dwFlags : Win32cr::UI::Controls::MCGRIDINFO_FLAGS,
-    iCalendar : Int32,
-    iRow : Int32,
-    iCol : Int32,
-    bSelected : Win32cr::Foundation::BOOL,
-    stStart : Win32cr::Foundation::SYSTEMTIME,
-    stEnd : Win32cr::Foundation::SYSTEMTIME,
-    rc : Win32cr::Foundation::RECT,
-    pszName : Win32cr::Foundation::PWSTR,
-    cchName : LibC::UIntPtrT
+  struct TTHITTESTINFOA
+    property hwnd : Win32cr::Foundation::HWND
+    property pt : Win32cr::Foundation::POINT
+    property ti : Win32cr::UI::Controls::TTTOOLINFOA
+    def initialize(@hwnd : Win32cr::Foundation::HWND, @pt : Win32cr::Foundation::POINT, @ti : Win32cr::UI::Controls::TTTOOLINFOA)
+    end
+  end
 
   @[Extern]
-  record NMSELCHANGE,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    stSelStart : Win32cr::Foundation::SYSTEMTIME,
-    stSelEnd : Win32cr::Foundation::SYSTEMTIME
+  struct TTHITTESTINFOW
+    property hwnd : Win32cr::Foundation::HWND
+    property pt : Win32cr::Foundation::POINT
+    property ti : Win32cr::UI::Controls::TTTOOLINFOW
+    def initialize(@hwnd : Win32cr::Foundation::HWND, @pt : Win32cr::Foundation::POINT, @ti : Win32cr::UI::Controls::TTTOOLINFOW)
+    end
+  end
 
   @[Extern]
-  record NMDAYSTATE,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    stStart : Win32cr::Foundation::SYSTEMTIME,
-    cDayState : Int32,
-    prgDayState : UInt32*
+  struct NMTTDISPINFOA
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property lpszText : Win32cr::Foundation::PSTR
+    property szText : Win32cr::Foundation::CHAR[80]
+    property hinst : Win32cr::Foundation::HINSTANCE
+    property uFlags : UInt32
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @lpszText : Win32cr::Foundation::PSTR, @szText : Win32cr::Foundation::CHAR[80], @hinst : Win32cr::Foundation::HINSTANCE, @uFlags : UInt32, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
 
   @[Extern]
-  record NMVIEWCHANGE,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    dwOldView : UInt32,
-    dwNewView : UInt32
+  struct NMTTDISPINFOW
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property lpszText : Win32cr::Foundation::PWSTR
+    property szText : UInt16[80]
+    property hinst : Win32cr::Foundation::HINSTANCE
+    property uFlags : UInt32
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @lpszText : Win32cr::Foundation::PWSTR, @szText : UInt16[80], @hinst : Win32cr::Foundation::HINSTANCE, @uFlags : UInt32, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
 
   @[Extern]
-  record DATETIMEPICKERINFO,
-    cbSize : UInt32,
-    rcCheck : Win32cr::Foundation::RECT,
-    stateCheck : UInt32,
-    rcButton : Win32cr::Foundation::RECT,
-    stateButton : UInt32,
-    hwndEdit : Win32cr::Foundation::HWND,
-    hwndUD : Win32cr::Foundation::HWND,
-    hwndDropDown : Win32cr::Foundation::HWND
+  struct NMTRBTHUMBPOSCHANGING
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property dwPos : UInt32
+    property nReason : Int32
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @dwPos : UInt32, @nReason : Int32)
+    end
+  end
 
   @[Extern]
-  record NMDATETIMECHANGE,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    dwFlags : UInt32,
-    st : Win32cr::Foundation::SYSTEMTIME
+  struct DRAGLISTINFO
+    property uNotification : Win32cr::UI::Controls::DRAGLISTINFO_NOTIFICATION_FLAGS
+    property hWnd : Win32cr::Foundation::HWND
+    property ptCursor : Win32cr::Foundation::POINT
+    def initialize(@uNotification : Win32cr::UI::Controls::DRAGLISTINFO_NOTIFICATION_FLAGS, @hWnd : Win32cr::Foundation::HWND, @ptCursor : Win32cr::Foundation::POINT)
+    end
+  end
 
   @[Extern]
-  record NMDATETIMESTRINGA,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    pszUserString : Win32cr::Foundation::PSTR,
-    st : Win32cr::Foundation::SYSTEMTIME,
-    dwFlags : UInt32
+  struct UDACCEL
+    property nSec : UInt32
+    property nInc : UInt32
+    def initialize(@nSec : UInt32, @nInc : UInt32)
+    end
+  end
 
   @[Extern]
-  record NMDATETIMESTRINGW,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    pszUserString : Win32cr::Foundation::PWSTR,
-    st : Win32cr::Foundation::SYSTEMTIME,
-    dwFlags : UInt32
+  struct NMUPDOWN
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property iPos : Int32
+    property iDelta : Int32
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @iPos : Int32, @iDelta : Int32)
+    end
+  end
 
   @[Extern]
-  record NMDATETIMEWMKEYDOWNA,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    nVirtKey : Int32,
-    pszFormat : Win32cr::Foundation::PSTR,
-    st : Win32cr::Foundation::SYSTEMTIME
+  struct PBRANGE
+    property iLow : Int32
+    property iHigh : Int32
+    def initialize(@iLow : Int32, @iHigh : Int32)
+    end
+  end
 
   @[Extern]
-  record NMDATETIMEWMKEYDOWNW,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    nVirtKey : Int32,
-    pszFormat : Win32cr::Foundation::PWSTR,
-    st : Win32cr::Foundation::SYSTEMTIME
+  struct LITEM
+    property mask : UInt32
+    property iLink : Int32
+    property state : UInt32
+    property stateMask : UInt32
+    property szID : UInt16[48]
+    property szUrl : UInt16[2084]
+    def initialize(@mask : UInt32, @iLink : Int32, @state : UInt32, @stateMask : UInt32, @szID : UInt16[48], @szUrl : UInt16[2084])
+    end
+  end
 
   @[Extern]
-  record NMDATETIMEFORMATA,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    pszFormat : Win32cr::Foundation::PSTR,
-    st : Win32cr::Foundation::SYSTEMTIME,
-    pszDisplay : Win32cr::Foundation::PSTR,
-    szDisplay : Win32cr::Foundation::CHAR[64]
+  struct LHITTESTINFO
+    property pt : Win32cr::Foundation::POINT
+    property item : Win32cr::UI::Controls::LITEM
+    def initialize(@pt : Win32cr::Foundation::POINT, @item : Win32cr::UI::Controls::LITEM)
+    end
+  end
 
   @[Extern]
-  record NMDATETIMEFORMATW,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    pszFormat : Win32cr::Foundation::PWSTR,
-    st : Win32cr::Foundation::SYSTEMTIME,
-    pszDisplay : Win32cr::Foundation::PWSTR,
-    szDisplay : UInt16[64]
+  struct NMLINK
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property item : Win32cr::UI::Controls::LITEM
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @item : Win32cr::UI::Controls::LITEM)
+    end
+  end
 
   @[Extern]
-  record NMDATETIMEFORMATQUERYA,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    pszFormat : Win32cr::Foundation::PSTR,
-    szMax : Win32cr::Foundation::SIZE
+  struct LVITEMA
+    property mask : UInt32
+    property iItem : Int32
+    property iSubItem : Int32
+    property state : UInt32
+    property stateMask : UInt32
+    property pszText : Win32cr::Foundation::PSTR
+    property cchTextMax : Int32
+    property iImage : Int32
+    property lParam : Win32cr::Foundation::LPARAM
+    property iIndent : Int32
+    property iGroupId : Win32cr::UI::Controls::LVITEMA_GROUP_ID
+    property cColumns : UInt32
+    property puColumns : UInt32*
+    property piColFmt : Int32*
+    property iGroup : Int32
+    def initialize(@mask : UInt32, @iItem : Int32, @iSubItem : Int32, @state : UInt32, @stateMask : UInt32, @pszText : Win32cr::Foundation::PSTR, @cchTextMax : Int32, @iImage : Int32, @lParam : Win32cr::Foundation::LPARAM, @iIndent : Int32, @iGroupId : Win32cr::UI::Controls::LVITEMA_GROUP_ID, @cColumns : UInt32, @puColumns : UInt32*, @piColFmt : Int32*, @iGroup : Int32)
+    end
+  end
 
   @[Extern]
-  record NMDATETIMEFORMATQUERYW,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    pszFormat : Win32cr::Foundation::PWSTR,
-    szMax : Win32cr::Foundation::SIZE
+  struct LVITEMW
+    property mask : UInt32
+    property iItem : Int32
+    property iSubItem : Int32
+    property state : UInt32
+    property stateMask : UInt32
+    property pszText : Win32cr::Foundation::PWSTR
+    property cchTextMax : Int32
+    property iImage : Int32
+    property lParam : Win32cr::Foundation::LPARAM
+    property iIndent : Int32
+    property iGroupId : Win32cr::UI::Controls::LVITEMA_GROUP_ID
+    property cColumns : UInt32
+    property puColumns : UInt32*
+    property piColFmt : Int32*
+    property iGroup : Int32
+    def initialize(@mask : UInt32, @iItem : Int32, @iSubItem : Int32, @state : UInt32, @stateMask : UInt32, @pszText : Win32cr::Foundation::PWSTR, @cchTextMax : Int32, @iImage : Int32, @lParam : Win32cr::Foundation::LPARAM, @iIndent : Int32, @iGroupId : Win32cr::UI::Controls::LVITEMA_GROUP_ID, @cColumns : UInt32, @puColumns : UInt32*, @piColFmt : Int32*, @iGroup : Int32)
+    end
+  end
 
   @[Extern]
-  record NMIPADDRESS,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    iField : Int32,
-    iValue : Int32
+  struct LVFINDINFOA
+    property flags : Win32cr::UI::Controls::LVFINDINFOW_FLAGS
+    property psz : Win32cr::Foundation::PSTR
+    property lParam : Win32cr::Foundation::LPARAM
+    property pt : Win32cr::Foundation::POINT
+    property vkDirection : UInt32
+    def initialize(@flags : Win32cr::UI::Controls::LVFINDINFOW_FLAGS, @psz : Win32cr::Foundation::PSTR, @lParam : Win32cr::Foundation::LPARAM, @pt : Win32cr::Foundation::POINT, @vkDirection : UInt32)
+    end
+  end
 
   @[Extern]
-  record NMPGSCROLL,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    fwKeys : Win32cr::UI::Controls::NMPGSCROLL_KEYS,
-    rcParent : Win32cr::Foundation::RECT,
-    iDir : Win32cr::UI::Controls::NMPGSCROLL_DIR,
-    iXpos : Int32,
-    iYpos : Int32,
-    iScroll : Int32
+  struct LVFINDINFOW
+    property flags : Win32cr::UI::Controls::LVFINDINFOW_FLAGS
+    property psz : Win32cr::Foundation::PWSTR
+    property lParam : Win32cr::Foundation::LPARAM
+    property pt : Win32cr::Foundation::POINT
+    property vkDirection : UInt32
+    def initialize(@flags : Win32cr::UI::Controls::LVFINDINFOW_FLAGS, @psz : Win32cr::Foundation::PWSTR, @lParam : Win32cr::Foundation::LPARAM, @pt : Win32cr::Foundation::POINT, @vkDirection : UInt32)
+    end
+  end
 
   @[Extern]
-  record NMPGCALCSIZE,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    dwFlag : Win32cr::UI::Controls::NMPGCALCSIZE_FLAGS,
-    iWidth : Int32,
-    iHeight : Int32
+  struct LVHITTESTINFO
+    property pt : Win32cr::Foundation::POINT
+    property flags : Win32cr::UI::Controls::LVHITTESTINFO_FLAGS
+    property iItem : Int32
+    property iSubItem : Int32
+    property iGroup : Int32
+    def initialize(@pt : Win32cr::Foundation::POINT, @flags : Win32cr::UI::Controls::LVHITTESTINFO_FLAGS, @iItem : Int32, @iSubItem : Int32, @iGroup : Int32)
+    end
+  end
 
   @[Extern]
-  record NMPGHOTITEM,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    idOld : Int32,
-    idNew : Int32,
-    dwFlags : UInt32
+  struct LVCOLUMNA
+    property mask : Win32cr::UI::Controls::LVCOLUMNW_MASK
+    property fmt : Win32cr::UI::Controls::LVCOLUMNW_FORMAT
+    property cx : Int32
+    property pszText : Win32cr::Foundation::PSTR
+    property cchTextMax : Int32
+    property iSubItem : Int32
+    property iImage : Int32
+    property iOrder : Int32
+    property cxMin : Int32
+    property cxDefault : Int32
+    property cxIdeal : Int32
+    def initialize(@mask : Win32cr::UI::Controls::LVCOLUMNW_MASK, @fmt : Win32cr::UI::Controls::LVCOLUMNW_FORMAT, @cx : Int32, @pszText : Win32cr::Foundation::PSTR, @cchTextMax : Int32, @iSubItem : Int32, @iImage : Int32, @iOrder : Int32, @cxMin : Int32, @cxDefault : Int32, @cxIdeal : Int32)
+    end
+  end
 
   @[Extern]
-  record BUTTON_IMAGELIST,
-    himl : Win32cr::UI::Controls::HIMAGELIST,
-    margin : Win32cr::Foundation::RECT,
-    uAlign : Win32cr::UI::Controls::BUTTON_IMAGELIST_ALIGN
+  struct LVCOLUMNW
+    property mask : Win32cr::UI::Controls::LVCOLUMNW_MASK
+    property fmt : Win32cr::UI::Controls::LVCOLUMNW_FORMAT
+    property cx : Int32
+    property pszText : Win32cr::Foundation::PWSTR
+    property cchTextMax : Int32
+    property iSubItem : Int32
+    property iImage : Int32
+    property iOrder : Int32
+    property cxMin : Int32
+    property cxDefault : Int32
+    property cxIdeal : Int32
+    def initialize(@mask : Win32cr::UI::Controls::LVCOLUMNW_MASK, @fmt : Win32cr::UI::Controls::LVCOLUMNW_FORMAT, @cx : Int32, @pszText : Win32cr::Foundation::PWSTR, @cchTextMax : Int32, @iSubItem : Int32, @iImage : Int32, @iOrder : Int32, @cxMin : Int32, @cxDefault : Int32, @cxIdeal : Int32)
+    end
+  end
 
   @[Extern]
-  record NMBCHOTITEM,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    dwFlags : Win32cr::UI::Controls::NMTBHOTITEM_FLAGS
+  struct LVBKIMAGEA
+    property ulFlags : UInt32
+    property hbm : Win32cr::Graphics::Gdi::HBITMAP
+    property pszImage : Win32cr::Foundation::PSTR
+    property cchImageMax : UInt32
+    property xOffsetPercent : Int32
+    property yOffsetPercent : Int32
+    def initialize(@ulFlags : UInt32, @hbm : Win32cr::Graphics::Gdi::HBITMAP, @pszImage : Win32cr::Foundation::PSTR, @cchImageMax : UInt32, @xOffsetPercent : Int32, @yOffsetPercent : Int32)
+    end
+  end
 
   @[Extern]
-  record BUTTON_SPLITINFO,
-    mask : UInt32,
-    himlGlyph : Win32cr::UI::Controls::HIMAGELIST,
-    uSplitStyle : UInt32,
-    size : Win32cr::Foundation::SIZE
+  struct LVBKIMAGEW
+    property ulFlags : UInt32
+    property hbm : Win32cr::Graphics::Gdi::HBITMAP
+    property pszImage : Win32cr::Foundation::PWSTR
+    property cchImageMax : UInt32
+    property xOffsetPercent : Int32
+    property yOffsetPercent : Int32
+    def initialize(@ulFlags : UInt32, @hbm : Win32cr::Graphics::Gdi::HBITMAP, @pszImage : Win32cr::Foundation::PWSTR, @cchImageMax : UInt32, @xOffsetPercent : Int32, @yOffsetPercent : Int32)
+    end
+  end
 
   @[Extern]
-  record NMBCDROPDOWN,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    rcButton : Win32cr::Foundation::RECT
+  struct LVGROUP
+    property cbSize : UInt32
+    property mask : Win32cr::UI::Controls::LVGROUP_MASK
+    property pszHeader : Win32cr::Foundation::PWSTR
+    property cchHeader : Int32
+    property pszFooter : Win32cr::Foundation::PWSTR
+    property cchFooter : Int32
+    property iGroupId : Int32
+    property stateMask : UInt32
+    property state : UInt32
+    property uAlign : UInt32
+    property pszSubtitle : Win32cr::Foundation::PWSTR
+    property cchSubtitle : UInt32
+    property pszTask : Win32cr::Foundation::PWSTR
+    property cchTask : UInt32
+    property pszDescriptionTop : Win32cr::Foundation::PWSTR
+    property cchDescriptionTop : UInt32
+    property pszDescriptionBottom : Win32cr::Foundation::PWSTR
+    property cchDescriptionBottom : UInt32
+    property iTitleImage : Int32
+    property iExtendedImage : Int32
+    property iFirstItem : Int32
+    property cItems : UInt32
+    property pszSubsetTitle : Win32cr::Foundation::PWSTR
+    property cchSubsetTitle : UInt32
+    def initialize(@cbSize : UInt32, @mask : Win32cr::UI::Controls::LVGROUP_MASK, @pszHeader : Win32cr::Foundation::PWSTR, @cchHeader : Int32, @pszFooter : Win32cr::Foundation::PWSTR, @cchFooter : Int32, @iGroupId : Int32, @stateMask : UInt32, @state : UInt32, @uAlign : UInt32, @pszSubtitle : Win32cr::Foundation::PWSTR, @cchSubtitle : UInt32, @pszTask : Win32cr::Foundation::PWSTR, @cchTask : UInt32, @pszDescriptionTop : Win32cr::Foundation::PWSTR, @cchDescriptionTop : UInt32, @pszDescriptionBottom : Win32cr::Foundation::PWSTR, @cchDescriptionBottom : UInt32, @iTitleImage : Int32, @iExtendedImage : Int32, @iFirstItem : Int32, @cItems : UInt32, @pszSubsetTitle : Win32cr::Foundation::PWSTR, @cchSubsetTitle : UInt32)
+    end
+  end
 
   @[Extern]
-  record EDITBALLOONTIP,
-    cbStruct : UInt32,
-    pszTitle : Win32cr::Foundation::PWSTR,
-    pszText : Win32cr::Foundation::PWSTR,
-    ttiIcon : Win32cr::UI::Controls::EDITBALLOONTIP_ICON
+  struct LVGROUPMETRICS
+    property cbSize : UInt32
+    property mask : UInt32
+    property left : UInt32
+    property top : UInt32
+    property right : UInt32
+    property bottom : UInt32
+    property crLeft : UInt32
+    property crTop : UInt32
+    property crRight : UInt32
+    property crBottom : UInt32
+    property crHeader : UInt32
+    property crFooter : UInt32
+    def initialize(@cbSize : UInt32, @mask : UInt32, @left : UInt32, @top : UInt32, @right : UInt32, @bottom : UInt32, @crLeft : UInt32, @crTop : UInt32, @crRight : UInt32, @crBottom : UInt32, @crHeader : UInt32, @crFooter : UInt32)
+    end
+  end
 
   @[Extern]
-  record NMSEARCHWEB,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    entrypoint : Win32cr::UI::Controls::EC_SEARCHWEB_ENTRYPOINT,
-    hasQueryText : Win32cr::Foundation::BOOL,
-    invokeSucceeded : Win32cr::Foundation::BOOL
+  struct LVINSERTGROUPSORTED
+    property pfnGroupCompare : Win32cr::UI::Controls::PFNLVGROUPCOMPARE
+    property pvData : Void*
+    property lvGroup : Win32cr::UI::Controls::LVGROUP
+    def initialize(@pfnGroupCompare : Win32cr::UI::Controls::PFNLVGROUPCOMPARE, @pvData : Void*, @lvGroup : Win32cr::UI::Controls::LVGROUP)
+    end
+  end
 
   @[Extern]
-  record TASKDIALOG_BUTTON,
-    nButtonID : Int32,
-    pszButtonText : Win32cr::Foundation::PWSTR
+  struct LVTILEVIEWINFO
+    property cbSize : UInt32
+    property dwMask : UInt32
+    property dwFlags : Win32cr::UI::Controls::LVTILEVIEWINFO_FLAGS
+    property sizeTile : Win32cr::Foundation::SIZE
+    property cLines : Int32
+    property rcLabelMargin : Win32cr::Foundation::RECT
+    def initialize(@cbSize : UInt32, @dwMask : UInt32, @dwFlags : Win32cr::UI::Controls::LVTILEVIEWINFO_FLAGS, @sizeTile : Win32cr::Foundation::SIZE, @cLines : Int32, @rcLabelMargin : Win32cr::Foundation::RECT)
+    end
+  end
 
   @[Extern]
-  record TASKDIALOGCONFIG,
-    cbSize : UInt32,
-    hwndParent : Win32cr::Foundation::HWND,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    dwFlags : Win32cr::UI::Controls::TASKDIALOG_FLAGS,
-    dwCommonButtons : Win32cr::UI::Controls::TASKDIALOG_COMMON_BUTTON_FLAGS,
-    pszWindowTitle : Win32cr::Foundation::PWSTR,
-    anonymous1 : Anonymous1_e__Union_,
-    pszMainInstruction : Win32cr::Foundation::PWSTR,
-    pszContent : Win32cr::Foundation::PWSTR,
-    cButtons : UInt32,
-    pButtons : Win32cr::UI::Controls::TASKDIALOG_BUTTON*,
-    nDefaultButton : Int32,
-    cRadioButtons : UInt32,
-    pRadioButtons : Win32cr::UI::Controls::TASKDIALOG_BUTTON*,
-    nDefaultRadioButton : Int32,
-    pszVerificationText : Win32cr::Foundation::PWSTR,
-    pszExpandedInformation : Win32cr::Foundation::PWSTR,
-    pszExpandedControlText : Win32cr::Foundation::PWSTR,
-    pszCollapsedControlText : Win32cr::Foundation::PWSTR,
-    anonymous2 : Anonymous2_e__Union_,
-    pszFooter : Win32cr::Foundation::PWSTR,
-    pfCallback : Win32cr::UI::Controls::PFTASKDIALOGCALLBACK,
-    lpCallbackData : LibC::IntPtrT,
-    cxWidth : UInt32 do
+  struct LVTILEINFO
+    property cbSize : UInt32
+    property iItem : Int32
+    property cColumns : UInt32
+    property puColumns : UInt32*
+    property piColFmt : Int32*
+    def initialize(@cbSize : UInt32, @iItem : Int32, @cColumns : UInt32, @puColumns : UInt32*, @piColFmt : Int32*)
+    end
+  end
+
+  @[Extern]
+  struct LVINSERTMARK
+    property cbSize : UInt32
+    property dwFlags : UInt32
+    property iItem : Int32
+    property dwReserved : UInt32
+    def initialize(@cbSize : UInt32, @dwFlags : UInt32, @iItem : Int32, @dwReserved : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct LVSETINFOTIP
+    property cbSize : UInt32
+    property dwFlags : UInt32
+    property pszText : Win32cr::Foundation::PWSTR
+    property iItem : Int32
+    property iSubItem : Int32
+    def initialize(@cbSize : UInt32, @dwFlags : UInt32, @pszText : Win32cr::Foundation::PWSTR, @iItem : Int32, @iSubItem : Int32)
+    end
+  end
+
+  @[Extern]
+  struct LVFOOTERINFO
+    property mask : UInt32
+    property pszText : Win32cr::Foundation::PWSTR
+    property cchTextMax : Int32
+    property cItems : UInt32
+    def initialize(@mask : UInt32, @pszText : Win32cr::Foundation::PWSTR, @cchTextMax : Int32, @cItems : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct LVFOOTERITEM
+    property mask : Win32cr::UI::Controls::LVFOOTERITEM_MASK
+    property iItem : Int32
+    property pszText : Win32cr::Foundation::PWSTR
+    property cchTextMax : Int32
+    property state : UInt32
+    property stateMask : UInt32
+    def initialize(@mask : Win32cr::UI::Controls::LVFOOTERITEM_MASK, @iItem : Int32, @pszText : Win32cr::Foundation::PWSTR, @cchTextMax : Int32, @state : UInt32, @stateMask : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct LVITEMINDEX
+    property iItem : Int32
+    property iGroup : Int32
+    def initialize(@iItem : Int32, @iGroup : Int32)
+    end
+  end
+
+  @[Extern]
+  struct NMLISTVIEW
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property iItem : Int32
+    property iSubItem : Int32
+    property uNewState : UInt32
+    property uOldState : UInt32
+    property uChanged : UInt32
+    property ptAction : Win32cr::Foundation::POINT
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @iItem : Int32, @iSubItem : Int32, @uNewState : UInt32, @uOldState : UInt32, @uChanged : UInt32, @ptAction : Win32cr::Foundation::POINT, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
+
+  @[Extern]
+  struct NMITEMACTIVATE
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property iItem : Int32
+    property iSubItem : Int32
+    property uNewState : UInt32
+    property uOldState : UInt32
+    property uChanged : UInt32
+    property ptAction : Win32cr::Foundation::POINT
+    property lParam : Win32cr::Foundation::LPARAM
+    property uKeyFlags : UInt32
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @iItem : Int32, @iSubItem : Int32, @uNewState : UInt32, @uOldState : UInt32, @uChanged : UInt32, @ptAction : Win32cr::Foundation::POINT, @lParam : Win32cr::Foundation::LPARAM, @uKeyFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NMLVCUSTOMDRAW
+    property nmcd : Win32cr::UI::Controls::NMCUSTOMDRAW
+    property clrText : UInt32
+    property clrTextBk : UInt32
+    property iSubItem : Int32
+    property dwItemType : Win32cr::UI::Controls::NMLVCUSTOMDRAW_ITEM_TYPE
+    property clrFace : UInt32
+    property iIconEffect : Int32
+    property iIconPhase : Int32
+    property iPartId : Int32
+    property iStateId : Int32
+    property rcText : Win32cr::Foundation::RECT
+    property uAlign : Win32cr::UI::Controls::NMLVCUSTOMDRAW_ALIGN
+    def initialize(@nmcd : Win32cr::UI::Controls::NMCUSTOMDRAW, @clrText : UInt32, @clrTextBk : UInt32, @iSubItem : Int32, @dwItemType : Win32cr::UI::Controls::NMLVCUSTOMDRAW_ITEM_TYPE, @clrFace : UInt32, @iIconEffect : Int32, @iIconPhase : Int32, @iPartId : Int32, @iStateId : Int32, @rcText : Win32cr::Foundation::RECT, @uAlign : Win32cr::UI::Controls::NMLVCUSTOMDRAW_ALIGN)
+    end
+  end
+
+  @[Extern]
+  struct NMLVCACHEHINT
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property iFrom : Int32
+    property iTo : Int32
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @iFrom : Int32, @iTo : Int32)
+    end
+  end
+
+  @[Extern]
+  struct NMLVFINDITEMA
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property iStart : Int32
+    property lvfi : Win32cr::UI::Controls::LVFINDINFOA
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @iStart : Int32, @lvfi : Win32cr::UI::Controls::LVFINDINFOA)
+    end
+  end
+
+  @[Extern]
+  struct NMLVFINDITEMW
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property iStart : Int32
+    property lvfi : Win32cr::UI::Controls::LVFINDINFOW
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @iStart : Int32, @lvfi : Win32cr::UI::Controls::LVFINDINFOW)
+    end
+  end
+
+  @[Extern]
+  struct NMLVODSTATECHANGE
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property iFrom : Int32
+    property iTo : Int32
+    property uNewState : UInt32
+    property uOldState : UInt32
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @iFrom : Int32, @iTo : Int32, @uNewState : UInt32, @uOldState : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NMLVDISPINFOA
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property item : Win32cr::UI::Controls::LVITEMA
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @item : Win32cr::UI::Controls::LVITEMA)
+    end
+  end
+
+  @[Extern]
+  struct NMLVDISPINFOW
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property item : Win32cr::UI::Controls::LVITEMW
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @item : Win32cr::UI::Controls::LVITEMW)
+    end
+  end
+
+  @[Extern]
+  struct NMLVKEYDOWN
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property wVKey : UInt16
+    property flags : UInt32
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @wVKey : UInt16, @flags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NMLVLINK
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property link : Win32cr::UI::Controls::LITEM
+    property iItem : Int32
+    property iSubItem : Int32
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @link : Win32cr::UI::Controls::LITEM, @iItem : Int32, @iSubItem : Int32)
+    end
+  end
+
+  @[Extern]
+  struct NMLVGETINFOTIPA
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property dwFlags : UInt32
+    property pszText : Win32cr::Foundation::PSTR
+    property cchTextMax : Int32
+    property iItem : Int32
+    property iSubItem : Int32
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @dwFlags : UInt32, @pszText : Win32cr::Foundation::PSTR, @cchTextMax : Int32, @iItem : Int32, @iSubItem : Int32, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
+
+  @[Extern]
+  struct NMLVGETINFOTIPW
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property dwFlags : UInt32
+    property pszText : Win32cr::Foundation::PWSTR
+    property cchTextMax : Int32
+    property iItem : Int32
+    property iSubItem : Int32
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @dwFlags : UInt32, @pszText : Win32cr::Foundation::PWSTR, @cchTextMax : Int32, @iItem : Int32, @iSubItem : Int32, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
+
+  @[Extern]
+  struct NMLVSCROLL
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property dx : Int32
+    property dy : Int32
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @dx : Int32, @dy : Int32)
+    end
+  end
+
+  @[Extern]
+  struct NMLVEMPTYMARKUP
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property dwFlags : Win32cr::UI::Controls::NMLVEMPTYMARKUP_FLAGS
+    property szMarkup : UInt16[2084]
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @dwFlags : Win32cr::UI::Controls::NMLVEMPTYMARKUP_FLAGS, @szMarkup : UInt16[2084])
+    end
+  end
+
+  @[Extern]
+  struct NMTVSTATEIMAGECHANGING
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property hti : Win32cr::UI::Controls::HTREEITEM
+    property iOldStateImageIndex : Int32
+    property iNewStateImageIndex : Int32
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @hti : Win32cr::UI::Controls::HTREEITEM, @iOldStateImageIndex : Int32, @iNewStateImageIndex : Int32)
+    end
+  end
+
+  @[Extern]
+  struct TVITEMA
+    property mask : Win32cr::UI::Controls::TVITEM_MASK
+    property hItem : Win32cr::UI::Controls::HTREEITEM
+    property state : UInt32
+    property stateMask : UInt32
+    property pszText : Win32cr::Foundation::PSTR
+    property cchTextMax : Int32
+    property iImage : Int32
+    property iSelectedImage : Int32
+    property cChildren : Win32cr::UI::Controls::TVITEMEXW_CHILDREN
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@mask : Win32cr::UI::Controls::TVITEM_MASK, @hItem : Win32cr::UI::Controls::HTREEITEM, @state : UInt32, @stateMask : UInt32, @pszText : Win32cr::Foundation::PSTR, @cchTextMax : Int32, @iImage : Int32, @iSelectedImage : Int32, @cChildren : Win32cr::UI::Controls::TVITEMEXW_CHILDREN, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
+
+  @[Extern]
+  struct TVITEMW
+    property mask : Win32cr::UI::Controls::TVITEM_MASK
+    property hItem : Win32cr::UI::Controls::HTREEITEM
+    property state : UInt32
+    property stateMask : UInt32
+    property pszText : Win32cr::Foundation::PWSTR
+    property cchTextMax : Int32
+    property iImage : Int32
+    property iSelectedImage : Int32
+    property cChildren : Win32cr::UI::Controls::TVITEMEXW_CHILDREN
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@mask : Win32cr::UI::Controls::TVITEM_MASK, @hItem : Win32cr::UI::Controls::HTREEITEM, @state : UInt32, @stateMask : UInt32, @pszText : Win32cr::Foundation::PWSTR, @cchTextMax : Int32, @iImage : Int32, @iSelectedImage : Int32, @cChildren : Win32cr::UI::Controls::TVITEMEXW_CHILDREN, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
+
+  @[Extern]
+  struct TVITEMEXA
+    property mask : Win32cr::UI::Controls::TVITEM_MASK
+    property hItem : Win32cr::UI::Controls::HTREEITEM
+    property state : UInt32
+    property stateMask : UInt32
+    property pszText : Win32cr::Foundation::PSTR
+    property cchTextMax : Int32
+    property iImage : Int32
+    property iSelectedImage : Int32
+    property cChildren : Win32cr::UI::Controls::TVITEMEXW_CHILDREN
+    property lParam : Win32cr::Foundation::LPARAM
+    property iIntegral : Int32
+    property uStateEx : UInt32
+    property hwnd : Win32cr::Foundation::HWND
+    property iExpandedImage : Int32
+    property iReserved : Int32
+    def initialize(@mask : Win32cr::UI::Controls::TVITEM_MASK, @hItem : Win32cr::UI::Controls::HTREEITEM, @state : UInt32, @stateMask : UInt32, @pszText : Win32cr::Foundation::PSTR, @cchTextMax : Int32, @iImage : Int32, @iSelectedImage : Int32, @cChildren : Win32cr::UI::Controls::TVITEMEXW_CHILDREN, @lParam : Win32cr::Foundation::LPARAM, @iIntegral : Int32, @uStateEx : UInt32, @hwnd : Win32cr::Foundation::HWND, @iExpandedImage : Int32, @iReserved : Int32)
+    end
+  end
+
+  @[Extern]
+  struct TVITEMEXW
+    property mask : Win32cr::UI::Controls::TVITEM_MASK
+    property hItem : Win32cr::UI::Controls::HTREEITEM
+    property state : UInt32
+    property stateMask : UInt32
+    property pszText : Win32cr::Foundation::PWSTR
+    property cchTextMax : Int32
+    property iImage : Int32
+    property iSelectedImage : Int32
+    property cChildren : Win32cr::UI::Controls::TVITEMEXW_CHILDREN
+    property lParam : Win32cr::Foundation::LPARAM
+    property iIntegral : Int32
+    property uStateEx : UInt32
+    property hwnd : Win32cr::Foundation::HWND
+    property iExpandedImage : Int32
+    property iReserved : Int32
+    def initialize(@mask : Win32cr::UI::Controls::TVITEM_MASK, @hItem : Win32cr::UI::Controls::HTREEITEM, @state : UInt32, @stateMask : UInt32, @pszText : Win32cr::Foundation::PWSTR, @cchTextMax : Int32, @iImage : Int32, @iSelectedImage : Int32, @cChildren : Win32cr::UI::Controls::TVITEMEXW_CHILDREN, @lParam : Win32cr::Foundation::LPARAM, @iIntegral : Int32, @uStateEx : UInt32, @hwnd : Win32cr::Foundation::HWND, @iExpandedImage : Int32, @iReserved : Int32)
+    end
+  end
+
+  @[Extern]
+  struct TVINSERTSTRUCTA
+    property hParent : Win32cr::UI::Controls::HTREEITEM
+    property hInsertAfter : Win32cr::UI::Controls::HTREEITEM
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property itemex : Win32cr::UI::Controls::TVITEMEXA
+    property item : Win32cr::UI::Controls::TVITEMA
+    def initialize(@itemex : Win32cr::UI::Controls::TVITEMEXA, @item : Win32cr::UI::Controls::TVITEMA)
+    end
+    end
+
+    def initialize(@hParent : Win32cr::UI::Controls::HTREEITEM, @hInsertAfter : Win32cr::UI::Controls::HTREEITEM, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct TVINSERTSTRUCTW
+    property hParent : Win32cr::UI::Controls::HTREEITEM
+    property hInsertAfter : Win32cr::UI::Controls::HTREEITEM
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property itemex : Win32cr::UI::Controls::TVITEMEXW
+    property item : Win32cr::UI::Controls::TVITEMW
+    def initialize(@itemex : Win32cr::UI::Controls::TVITEMEXW, @item : Win32cr::UI::Controls::TVITEMW)
+    end
+    end
+
+    def initialize(@hParent : Win32cr::UI::Controls::HTREEITEM, @hInsertAfter : Win32cr::UI::Controls::HTREEITEM, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct TVHITTESTINFO
+    property pt : Win32cr::Foundation::POINT
+    property flags : Win32cr::UI::Controls::TVHITTESTINFO_FLAGS
+    property hItem : Win32cr::UI::Controls::HTREEITEM
+    def initialize(@pt : Win32cr::Foundation::POINT, @flags : Win32cr::UI::Controls::TVHITTESTINFO_FLAGS, @hItem : Win32cr::UI::Controls::HTREEITEM)
+    end
+  end
+
+  @[Extern]
+  struct TVGETITEMPARTRECTINFO
+    property hti : Win32cr::UI::Controls::HTREEITEM
+    property prc : Win32cr::Foundation::RECT*
+    property partID : Win32cr::UI::Controls::TVITEMPART
+    def initialize(@hti : Win32cr::UI::Controls::HTREEITEM, @prc : Win32cr::Foundation::RECT*, @partID : Win32cr::UI::Controls::TVITEMPART)
+    end
+  end
+
+  @[Extern]
+  struct TVSORTCB
+    property hParent : Win32cr::UI::Controls::HTREEITEM
+    property lpfnCompare : Win32cr::UI::Controls::PFNTVCOMPARE
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@hParent : Win32cr::UI::Controls::HTREEITEM, @lpfnCompare : Win32cr::UI::Controls::PFNTVCOMPARE, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
+
+  @[Extern]
+  struct NMTREEVIEWA
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property action : UInt32
+    property itemOld : Win32cr::UI::Controls::TVITEMA
+    property itemNew : Win32cr::UI::Controls::TVITEMA
+    property ptDrag : Win32cr::Foundation::POINT
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @action : UInt32, @itemOld : Win32cr::UI::Controls::TVITEMA, @itemNew : Win32cr::UI::Controls::TVITEMA, @ptDrag : Win32cr::Foundation::POINT)
+    end
+  end
+
+  @[Extern]
+  struct NMTREEVIEWW
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property action : UInt32
+    property itemOld : Win32cr::UI::Controls::TVITEMW
+    property itemNew : Win32cr::UI::Controls::TVITEMW
+    property ptDrag : Win32cr::Foundation::POINT
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @action : UInt32, @itemOld : Win32cr::UI::Controls::TVITEMW, @itemNew : Win32cr::UI::Controls::TVITEMW, @ptDrag : Win32cr::Foundation::POINT)
+    end
+  end
+
+  @[Extern]
+  struct NMTVDISPINFOA
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property item : Win32cr::UI::Controls::TVITEMA
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @item : Win32cr::UI::Controls::TVITEMA)
+    end
+  end
+
+  @[Extern]
+  struct NMTVDISPINFOW
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property item : Win32cr::UI::Controls::TVITEMW
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @item : Win32cr::UI::Controls::TVITEMW)
+    end
+  end
+
+  @[Extern]
+  struct NMTVDISPINFOEXA
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property item : Win32cr::UI::Controls::TVITEMEXA
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @item : Win32cr::UI::Controls::TVITEMEXA)
+    end
+  end
+
+  @[Extern]
+  struct NMTVDISPINFOEXW
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property item : Win32cr::UI::Controls::TVITEMEXW
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @item : Win32cr::UI::Controls::TVITEMEXW)
+    end
+  end
+
+  @[Extern]
+  struct NMTVKEYDOWN
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property wVKey : UInt16
+    property flags : UInt32
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @wVKey : UInt16, @flags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NMTVCUSTOMDRAW
+    property nmcd : Win32cr::UI::Controls::NMCUSTOMDRAW
+    property clrText : UInt32
+    property clrTextBk : UInt32
+    property iLevel : Int32
+    def initialize(@nmcd : Win32cr::UI::Controls::NMCUSTOMDRAW, @clrText : UInt32, @clrTextBk : UInt32, @iLevel : Int32)
+    end
+  end
+
+  @[Extern]
+  struct NMTVGETINFOTIPA
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property pszText : Win32cr::Foundation::PSTR
+    property cchTextMax : Int32
+    property hItem : Win32cr::UI::Controls::HTREEITEM
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @pszText : Win32cr::Foundation::PSTR, @cchTextMax : Int32, @hItem : Win32cr::UI::Controls::HTREEITEM, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
+
+  @[Extern]
+  struct NMTVGETINFOTIPW
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property pszText : Win32cr::Foundation::PWSTR
+    property cchTextMax : Int32
+    property hItem : Win32cr::UI::Controls::HTREEITEM
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @pszText : Win32cr::Foundation::PWSTR, @cchTextMax : Int32, @hItem : Win32cr::UI::Controls::HTREEITEM, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
+
+  @[Extern]
+  struct NMTVITEMCHANGE
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property uChanged : UInt32
+    property hItem : Win32cr::UI::Controls::HTREEITEM
+    property uStateNew : UInt32
+    property uStateOld : UInt32
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @uChanged : UInt32, @hItem : Win32cr::UI::Controls::HTREEITEM, @uStateNew : UInt32, @uStateOld : UInt32, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
+
+  @[Extern]
+  struct NMTVASYNCDRAW
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property pimldp : Win32cr::UI::Controls::IMAGELISTDRAWPARAMS*
+    property hr : Win32cr::Foundation::HRESULT
+    property hItem : Win32cr::UI::Controls::HTREEITEM
+    property lParam : Win32cr::Foundation::LPARAM
+    property dwRetFlags : UInt32
+    property iRetImageIndex : Int32
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @pimldp : Win32cr::UI::Controls::IMAGELISTDRAWPARAMS*, @hr : Win32cr::Foundation::HRESULT, @hItem : Win32cr::UI::Controls::HTREEITEM, @lParam : Win32cr::Foundation::LPARAM, @dwRetFlags : UInt32, @iRetImageIndex : Int32)
+    end
+  end
+
+  @[Extern]
+  struct COMBOBOXEXITEMA
+    property mask : Win32cr::UI::Controls::COMBOBOX_EX_ITEM_FLAGS
+    property iItem : LibC::IntPtrT
+    property pszText : Win32cr::Foundation::PSTR
+    property cchTextMax : Int32
+    property iImage : Int32
+    property iSelectedImage : Int32
+    property iOverlay : Int32
+    property iIndent : Int32
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@mask : Win32cr::UI::Controls::COMBOBOX_EX_ITEM_FLAGS, @iItem : LibC::IntPtrT, @pszText : Win32cr::Foundation::PSTR, @cchTextMax : Int32, @iImage : Int32, @iSelectedImage : Int32, @iOverlay : Int32, @iIndent : Int32, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
+
+  @[Extern]
+  struct COMBOBOXEXITEMW
+    property mask : Win32cr::UI::Controls::COMBOBOX_EX_ITEM_FLAGS
+    property iItem : LibC::IntPtrT
+    property pszText : Win32cr::Foundation::PWSTR
+    property cchTextMax : Int32
+    property iImage : Int32
+    property iSelectedImage : Int32
+    property iOverlay : Int32
+    property iIndent : Int32
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@mask : Win32cr::UI::Controls::COMBOBOX_EX_ITEM_FLAGS, @iItem : LibC::IntPtrT, @pszText : Win32cr::Foundation::PWSTR, @cchTextMax : Int32, @iImage : Int32, @iSelectedImage : Int32, @iOverlay : Int32, @iIndent : Int32, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
+
+  @[Extern]
+  struct NMCOMBOBOXEXA
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property ceItem : Win32cr::UI::Controls::COMBOBOXEXITEMA
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @ceItem : Win32cr::UI::Controls::COMBOBOXEXITEMA)
+    end
+  end
+
+  @[Extern]
+  struct NMCOMBOBOXEXW
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property ceItem : Win32cr::UI::Controls::COMBOBOXEXITEMW
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @ceItem : Win32cr::UI::Controls::COMBOBOXEXITEMW)
+    end
+  end
+
+  @[Extern]
+  struct NMCBEDRAGBEGINW
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property iItemid : Int32
+    property szText : UInt16[260]
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @iItemid : Int32, @szText : UInt16[260])
+    end
+  end
+
+  @[Extern]
+  struct NMCBEDRAGBEGINA
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property iItemid : Int32
+    property szText : Win32cr::Foundation::CHAR[260]
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @iItemid : Int32, @szText : Win32cr::Foundation::CHAR[260])
+    end
+  end
+
+  @[Extern]
+  struct NMCBEENDEDITW
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property fChanged : Win32cr::Foundation::BOOL
+    property iNewSelection : Int32
+    property szText : UInt16[260]
+    property iWhy : Int32
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @fChanged : Win32cr::Foundation::BOOL, @iNewSelection : Int32, @szText : UInt16[260], @iWhy : Int32)
+    end
+  end
+
+  @[Extern]
+  struct NMCBEENDEDITA
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property fChanged : Win32cr::Foundation::BOOL
+    property iNewSelection : Int32
+    property szText : Win32cr::Foundation::CHAR[260]
+    property iWhy : Int32
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @fChanged : Win32cr::Foundation::BOOL, @iNewSelection : Int32, @szText : Win32cr::Foundation::CHAR[260], @iWhy : Int32)
+    end
+  end
+
+  @[Extern]
+  struct TCITEMHEADERA
+    property mask : Win32cr::UI::Controls::TCITEMHEADERA_MASK
+    property lpReserved1 : UInt32
+    property lpReserved2 : UInt32
+    property pszText : Win32cr::Foundation::PSTR
+    property cchTextMax : Int32
+    property iImage : Int32
+    def initialize(@mask : Win32cr::UI::Controls::TCITEMHEADERA_MASK, @lpReserved1 : UInt32, @lpReserved2 : UInt32, @pszText : Win32cr::Foundation::PSTR, @cchTextMax : Int32, @iImage : Int32)
+    end
+  end
+
+  @[Extern]
+  struct TCITEMHEADERW
+    property mask : Win32cr::UI::Controls::TCITEMHEADERA_MASK
+    property lpReserved1 : UInt32
+    property lpReserved2 : UInt32
+    property pszText : Win32cr::Foundation::PWSTR
+    property cchTextMax : Int32
+    property iImage : Int32
+    def initialize(@mask : Win32cr::UI::Controls::TCITEMHEADERA_MASK, @lpReserved1 : UInt32, @lpReserved2 : UInt32, @pszText : Win32cr::Foundation::PWSTR, @cchTextMax : Int32, @iImage : Int32)
+    end
+  end
+
+  @[Extern]
+  struct TCITEMA
+    property mask : Win32cr::UI::Controls::TCITEMHEADERA_MASK
+    property dwState : UInt32
+    property dwStateMask : UInt32
+    property pszText : Win32cr::Foundation::PSTR
+    property cchTextMax : Int32
+    property iImage : Int32
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@mask : Win32cr::UI::Controls::TCITEMHEADERA_MASK, @dwState : UInt32, @dwStateMask : UInt32, @pszText : Win32cr::Foundation::PSTR, @cchTextMax : Int32, @iImage : Int32, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
+
+  @[Extern]
+  struct TCITEMW
+    property mask : Win32cr::UI::Controls::TCITEMHEADERA_MASK
+    property dwState : UInt32
+    property dwStateMask : UInt32
+    property pszText : Win32cr::Foundation::PWSTR
+    property cchTextMax : Int32
+    property iImage : Int32
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@mask : Win32cr::UI::Controls::TCITEMHEADERA_MASK, @dwState : UInt32, @dwStateMask : UInt32, @pszText : Win32cr::Foundation::PWSTR, @cchTextMax : Int32, @iImage : Int32, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
+
+  @[Extern]
+  struct TCHITTESTINFO
+    property pt : Win32cr::Foundation::POINT
+    property flags : Win32cr::UI::Controls::TCHITTESTINFO_FLAGS
+    def initialize(@pt : Win32cr::Foundation::POINT, @flags : Win32cr::UI::Controls::TCHITTESTINFO_FLAGS)
+    end
+  end
+
+  @[Extern]
+  struct NMTCKEYDOWN
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property wVKey : UInt16
+    property flags : UInt32
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @wVKey : UInt16, @flags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCHITTESTINFO
+    property cbSize : UInt32
+    property pt : Win32cr::Foundation::POINT
+    property uHit : UInt32
+    property st : Win32cr::Foundation::SYSTEMTIME
+    property rc : Win32cr::Foundation::RECT
+    property iOffset : Int32
+    property iRow : Int32
+    property iCol : Int32
+    def initialize(@cbSize : UInt32, @pt : Win32cr::Foundation::POINT, @uHit : UInt32, @st : Win32cr::Foundation::SYSTEMTIME, @rc : Win32cr::Foundation::RECT, @iOffset : Int32, @iRow : Int32, @iCol : Int32)
+    end
+  end
+
+  @[Extern]
+  struct MCGRIDINFO
+    property cbSize : UInt32
+    property dwPart : Win32cr::UI::Controls::MCGRIDINFO_PART
+    property dwFlags : Win32cr::UI::Controls::MCGRIDINFO_FLAGS
+    property iCalendar : Int32
+    property iRow : Int32
+    property iCol : Int32
+    property bSelected : Win32cr::Foundation::BOOL
+    property stStart : Win32cr::Foundation::SYSTEMTIME
+    property stEnd : Win32cr::Foundation::SYSTEMTIME
+    property rc : Win32cr::Foundation::RECT
+    property pszName : Win32cr::Foundation::PWSTR
+    property cchName : LibC::UIntPtrT
+    def initialize(@cbSize : UInt32, @dwPart : Win32cr::UI::Controls::MCGRIDINFO_PART, @dwFlags : Win32cr::UI::Controls::MCGRIDINFO_FLAGS, @iCalendar : Int32, @iRow : Int32, @iCol : Int32, @bSelected : Win32cr::Foundation::BOOL, @stStart : Win32cr::Foundation::SYSTEMTIME, @stEnd : Win32cr::Foundation::SYSTEMTIME, @rc : Win32cr::Foundation::RECT, @pszName : Win32cr::Foundation::PWSTR, @cchName : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct NMSELCHANGE
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property stSelStart : Win32cr::Foundation::SYSTEMTIME
+    property stSelEnd : Win32cr::Foundation::SYSTEMTIME
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @stSelStart : Win32cr::Foundation::SYSTEMTIME, @stSelEnd : Win32cr::Foundation::SYSTEMTIME)
+    end
+  end
+
+  @[Extern]
+  struct NMDAYSTATE
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property stStart : Win32cr::Foundation::SYSTEMTIME
+    property cDayState : Int32
+    property prgDayState : UInt32*
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @stStart : Win32cr::Foundation::SYSTEMTIME, @cDayState : Int32, @prgDayState : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct NMVIEWCHANGE
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property dwOldView : UInt32
+    property dwNewView : UInt32
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @dwOldView : UInt32, @dwNewView : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DATETIMEPICKERINFO
+    property cbSize : UInt32
+    property rcCheck : Win32cr::Foundation::RECT
+    property stateCheck : UInt32
+    property rcButton : Win32cr::Foundation::RECT
+    property stateButton : UInt32
+    property hwndEdit : Win32cr::Foundation::HWND
+    property hwndUD : Win32cr::Foundation::HWND
+    property hwndDropDown : Win32cr::Foundation::HWND
+    def initialize(@cbSize : UInt32, @rcCheck : Win32cr::Foundation::RECT, @stateCheck : UInt32, @rcButton : Win32cr::Foundation::RECT, @stateButton : UInt32, @hwndEdit : Win32cr::Foundation::HWND, @hwndUD : Win32cr::Foundation::HWND, @hwndDropDown : Win32cr::Foundation::HWND)
+    end
+  end
+
+  @[Extern]
+  struct NMDATETIMECHANGE
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property dwFlags : UInt32
+    property st : Win32cr::Foundation::SYSTEMTIME
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @dwFlags : UInt32, @st : Win32cr::Foundation::SYSTEMTIME)
+    end
+  end
+
+  @[Extern]
+  struct NMDATETIMESTRINGA
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property pszUserString : Win32cr::Foundation::PSTR
+    property st : Win32cr::Foundation::SYSTEMTIME
+    property dwFlags : UInt32
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @pszUserString : Win32cr::Foundation::PSTR, @st : Win32cr::Foundation::SYSTEMTIME, @dwFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NMDATETIMESTRINGW
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property pszUserString : Win32cr::Foundation::PWSTR
+    property st : Win32cr::Foundation::SYSTEMTIME
+    property dwFlags : UInt32
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @pszUserString : Win32cr::Foundation::PWSTR, @st : Win32cr::Foundation::SYSTEMTIME, @dwFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NMDATETIMEWMKEYDOWNA
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property nVirtKey : Int32
+    property pszFormat : Win32cr::Foundation::PSTR
+    property st : Win32cr::Foundation::SYSTEMTIME
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @nVirtKey : Int32, @pszFormat : Win32cr::Foundation::PSTR, @st : Win32cr::Foundation::SYSTEMTIME)
+    end
+  end
+
+  @[Extern]
+  struct NMDATETIMEWMKEYDOWNW
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property nVirtKey : Int32
+    property pszFormat : Win32cr::Foundation::PWSTR
+    property st : Win32cr::Foundation::SYSTEMTIME
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @nVirtKey : Int32, @pszFormat : Win32cr::Foundation::PWSTR, @st : Win32cr::Foundation::SYSTEMTIME)
+    end
+  end
+
+  @[Extern]
+  struct NMDATETIMEFORMATA
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property pszFormat : Win32cr::Foundation::PSTR
+    property st : Win32cr::Foundation::SYSTEMTIME
+    property pszDisplay : Win32cr::Foundation::PSTR
+    property szDisplay : Win32cr::Foundation::CHAR[64]
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @pszFormat : Win32cr::Foundation::PSTR, @st : Win32cr::Foundation::SYSTEMTIME, @pszDisplay : Win32cr::Foundation::PSTR, @szDisplay : Win32cr::Foundation::CHAR[64])
+    end
+  end
+
+  @[Extern]
+  struct NMDATETIMEFORMATW
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property pszFormat : Win32cr::Foundation::PWSTR
+    property st : Win32cr::Foundation::SYSTEMTIME
+    property pszDisplay : Win32cr::Foundation::PWSTR
+    property szDisplay : UInt16[64]
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @pszFormat : Win32cr::Foundation::PWSTR, @st : Win32cr::Foundation::SYSTEMTIME, @pszDisplay : Win32cr::Foundation::PWSTR, @szDisplay : UInt16[64])
+    end
+  end
+
+  @[Extern]
+  struct NMDATETIMEFORMATQUERYA
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property pszFormat : Win32cr::Foundation::PSTR
+    property szMax : Win32cr::Foundation::SIZE
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @pszFormat : Win32cr::Foundation::PSTR, @szMax : Win32cr::Foundation::SIZE)
+    end
+  end
+
+  @[Extern]
+  struct NMDATETIMEFORMATQUERYW
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property pszFormat : Win32cr::Foundation::PWSTR
+    property szMax : Win32cr::Foundation::SIZE
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @pszFormat : Win32cr::Foundation::PWSTR, @szMax : Win32cr::Foundation::SIZE)
+    end
+  end
+
+  @[Extern]
+  struct NMIPADDRESS
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property iField : Int32
+    property iValue : Int32
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @iField : Int32, @iValue : Int32)
+    end
+  end
+
+  @[Extern]
+  struct NMPGSCROLL
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property fwKeys : Win32cr::UI::Controls::NMPGSCROLL_KEYS
+    property rcParent : Win32cr::Foundation::RECT
+    property iDir : Win32cr::UI::Controls::NMPGSCROLL_DIR
+    property iXpos : Int32
+    property iYpos : Int32
+    property iScroll : Int32
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @fwKeys : Win32cr::UI::Controls::NMPGSCROLL_KEYS, @rcParent : Win32cr::Foundation::RECT, @iDir : Win32cr::UI::Controls::NMPGSCROLL_DIR, @iXpos : Int32, @iYpos : Int32, @iScroll : Int32)
+    end
+  end
+
+  @[Extern]
+  struct NMPGCALCSIZE
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property dwFlag : Win32cr::UI::Controls::NMPGCALCSIZE_FLAGS
+    property iWidth : Int32
+    property iHeight : Int32
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @dwFlag : Win32cr::UI::Controls::NMPGCALCSIZE_FLAGS, @iWidth : Int32, @iHeight : Int32)
+    end
+  end
+
+  @[Extern]
+  struct NMPGHOTITEM
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property idOld : Int32
+    property idNew : Int32
+    property dwFlags : UInt32
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @idOld : Int32, @idNew : Int32, @dwFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct BUTTON_IMAGELIST
+    property himl : Win32cr::UI::Controls::HIMAGELIST
+    property margin : Win32cr::Foundation::RECT
+    property uAlign : Win32cr::UI::Controls::BUTTON_IMAGELIST_ALIGN
+    def initialize(@himl : Win32cr::UI::Controls::HIMAGELIST, @margin : Win32cr::Foundation::RECT, @uAlign : Win32cr::UI::Controls::BUTTON_IMAGELIST_ALIGN)
+    end
+  end
+
+  @[Extern]
+  struct NMBCHOTITEM
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property dwFlags : Win32cr::UI::Controls::NMTBHOTITEM_FLAGS
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @dwFlags : Win32cr::UI::Controls::NMTBHOTITEM_FLAGS)
+    end
+  end
+
+  @[Extern]
+  struct BUTTON_SPLITINFO
+    property mask : UInt32
+    property himlGlyph : Win32cr::UI::Controls::HIMAGELIST
+    property uSplitStyle : UInt32
+    property size : Win32cr::Foundation::SIZE
+    def initialize(@mask : UInt32, @himlGlyph : Win32cr::UI::Controls::HIMAGELIST, @uSplitStyle : UInt32, @size : Win32cr::Foundation::SIZE)
+    end
+  end
+
+  @[Extern]
+  struct NMBCDROPDOWN
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property rcButton : Win32cr::Foundation::RECT
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @rcButton : Win32cr::Foundation::RECT)
+    end
+  end
+
+  @[Extern]
+  struct EDITBALLOONTIP
+    property cbStruct : UInt32
+    property pszTitle : Win32cr::Foundation::PWSTR
+    property pszText : Win32cr::Foundation::PWSTR
+    property ttiIcon : Win32cr::UI::Controls::EDITBALLOONTIP_ICON
+    def initialize(@cbStruct : UInt32, @pszTitle : Win32cr::Foundation::PWSTR, @pszText : Win32cr::Foundation::PWSTR, @ttiIcon : Win32cr::UI::Controls::EDITBALLOONTIP_ICON)
+    end
+  end
+
+  @[Extern]
+  struct NMSEARCHWEB
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property entrypoint : Win32cr::UI::Controls::EC_SEARCHWEB_ENTRYPOINT
+    property hasQueryText : Win32cr::Foundation::BOOL
+    property invokeSucceeded : Win32cr::Foundation::BOOL
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @entrypoint : Win32cr::UI::Controls::EC_SEARCHWEB_ENTRYPOINT, @hasQueryText : Win32cr::Foundation::BOOL, @invokeSucceeded : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct TASKDIALOG_BUTTON
+    property nButtonID : Int32
+    property pszButtonText : Win32cr::Foundation::PWSTR
+    def initialize(@nButtonID : Int32, @pszButtonText : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct TASKDIALOGCONFIG
+    property cbSize : UInt32
+    property hwndParent : Win32cr::Foundation::HWND
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property dwFlags : Win32cr::UI::Controls::TASKDIALOG_FLAGS
+    property dwCommonButtons : Win32cr::UI::Controls::TASKDIALOG_COMMON_BUTTON_FLAGS
+    property pszWindowTitle : Win32cr::Foundation::PWSTR
+    property anonymous1 : Anonymous1_e__Union_
+    property pszMainInstruction : Win32cr::Foundation::PWSTR
+    property pszContent : Win32cr::Foundation::PWSTR
+    property cButtons : UInt32
+    property pButtons : Win32cr::UI::Controls::TASKDIALOG_BUTTON*
+    property nDefaultButton : Int32
+    property cRadioButtons : UInt32
+    property pRadioButtons : Win32cr::UI::Controls::TASKDIALOG_BUTTON*
+    property nDefaultRadioButton : Int32
+    property pszVerificationText : Win32cr::Foundation::PWSTR
+    property pszExpandedInformation : Win32cr::Foundation::PWSTR
+    property pszExpandedControlText : Win32cr::Foundation::PWSTR
+    property pszCollapsedControlText : Win32cr::Foundation::PWSTR
+    property anonymous2 : Anonymous2_e__Union_
+    property pszFooter : Win32cr::Foundation::PWSTR
+    property pfCallback : Win32cr::UI::Controls::PFTASKDIALOGCALLBACK
+    property lpCallbackData : LibC::IntPtrT
+    property cxWidth : UInt32
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      hMainIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-      pszMainIcon : Win32cr::Foundation::PWSTR
+    struct Anonymous1_e__Union_
+    property hMainIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property pszMainIcon : Win32cr::Foundation::PWSTR
+    def initialize(@hMainIcon : Win32cr::UI::WindowsAndMessaging::HICON, @pszMainIcon : Win32cr::Foundation::PWSTR)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      hFooterIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-      pszFooterIcon : Win32cr::Foundation::PWSTR
+    struct Anonymous2_e__Union_
+    property hFooterIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property pszFooterIcon : Win32cr::Foundation::PWSTR
+    def initialize(@hFooterIcon : Win32cr::UI::WindowsAndMessaging::HICON, @pszFooterIcon : Win32cr::Foundation::PWSTR)
+    end
+    end
 
+    def initialize(@cbSize : UInt32, @hwndParent : Win32cr::Foundation::HWND, @hInstance : Win32cr::Foundation::HINSTANCE, @dwFlags : Win32cr::UI::Controls::TASKDIALOG_FLAGS, @dwCommonButtons : Win32cr::UI::Controls::TASKDIALOG_COMMON_BUTTON_FLAGS, @pszWindowTitle : Win32cr::Foundation::PWSTR, @anonymous1 : Anonymous1_e__Union_, @pszMainInstruction : Win32cr::Foundation::PWSTR, @pszContent : Win32cr::Foundation::PWSTR, @cButtons : UInt32, @pButtons : Win32cr::UI::Controls::TASKDIALOG_BUTTON*, @nDefaultButton : Int32, @cRadioButtons : UInt32, @pRadioButtons : Win32cr::UI::Controls::TASKDIALOG_BUTTON*, @nDefaultRadioButton : Int32, @pszVerificationText : Win32cr::Foundation::PWSTR, @pszExpandedInformation : Win32cr::Foundation::PWSTR, @pszExpandedControlText : Win32cr::Foundation::PWSTR, @pszCollapsedControlText : Win32cr::Foundation::PWSTR, @anonymous2 : Anonymous2_e__Union_, @pszFooter : Win32cr::Foundation::PWSTR, @pfCallback : Win32cr::UI::Controls::PFTASKDIALOGCALLBACK, @lpCallbackData : LibC::IntPtrT, @cxWidth : UInt32)
+    end
   end
 
   @[Extern]
-  record DPASTREAMINFO,
-    iPos : Int32,
-    pvItem : Void*
+  struct DPASTREAMINFO
+    property iPos : Int32
+    property pvItem : Void*
+    def initialize(@iPos : Int32, @pvItem : Void*)
+    end
+  end
 
   @[Extern]
-  record IMAGELISTSTATS,
-    cbSize : UInt32,
-    cAlloc : Int32,
-    cUsed : Int32,
-    cStandby : Int32
+  struct IMAGELISTSTATS
+    property cbSize : UInt32
+    property cAlloc : Int32
+    property cUsed : Int32
+    property cStandby : Int32
+    def initialize(@cbSize : UInt32, @cAlloc : Int32, @cUsed : Int32, @cStandby : Int32)
+    end
+  end
 
   @[Extern]
-  record TA_TRANSFORM,
-    eTransformType : Win32cr::UI::Controls::TA_TRANSFORM_TYPE,
-    dwTimingFunctionId : UInt32,
-    dwStartTime : UInt32,
-    dwDurationTime : UInt32,
-    eFlags : Win32cr::UI::Controls::TA_TRANSFORM_FLAG
+  struct TA_TRANSFORM
+    property eTransformType : Win32cr::UI::Controls::TA_TRANSFORM_TYPE
+    property dwTimingFunctionId : UInt32
+    property dwStartTime : UInt32
+    property dwDurationTime : UInt32
+    property eFlags : Win32cr::UI::Controls::TA_TRANSFORM_FLAG
+    def initialize(@eTransformType : Win32cr::UI::Controls::TA_TRANSFORM_TYPE, @dwTimingFunctionId : UInt32, @dwStartTime : UInt32, @dwDurationTime : UInt32, @eFlags : Win32cr::UI::Controls::TA_TRANSFORM_FLAG)
+    end
+  end
 
   @[Extern]
-  record TA_TRANSFORM_2D,
-    header : Win32cr::UI::Controls::TA_TRANSFORM,
-    rX : Float32,
-    rY : Float32,
-    rInitialX : Float32,
-    rInitialY : Float32,
-    rOriginX : Float32,
-    rOriginY : Float32
+  struct TA_TRANSFORM_2D
+    property header : Win32cr::UI::Controls::TA_TRANSFORM
+    property rX : Float32
+    property rY : Float32
+    property rInitialX : Float32
+    property rInitialY : Float32
+    property rOriginX : Float32
+    property rOriginY : Float32
+    def initialize(@header : Win32cr::UI::Controls::TA_TRANSFORM, @rX : Float32, @rY : Float32, @rInitialX : Float32, @rInitialY : Float32, @rOriginX : Float32, @rOriginY : Float32)
+    end
+  end
 
   @[Extern]
-  record TA_TRANSFORM_OPACITY,
-    header : Win32cr::UI::Controls::TA_TRANSFORM,
-    rOpacity : Float32,
-    rInitialOpacity : Float32
+  struct TA_TRANSFORM_OPACITY
+    property header : Win32cr::UI::Controls::TA_TRANSFORM
+    property rOpacity : Float32
+    property rInitialOpacity : Float32
+    def initialize(@header : Win32cr::UI::Controls::TA_TRANSFORM, @rOpacity : Float32, @rInitialOpacity : Float32)
+    end
+  end
 
   @[Extern]
-  record TA_TRANSFORM_CLIP,
-    header : Win32cr::UI::Controls::TA_TRANSFORM,
-    rLeft : Float32,
-    rTop : Float32,
-    rRight : Float32,
-    rBottom : Float32,
-    rInitialLeft : Float32,
-    rInitialTop : Float32,
-    rInitialRight : Float32,
-    rInitialBottom : Float32
+  struct TA_TRANSFORM_CLIP
+    property header : Win32cr::UI::Controls::TA_TRANSFORM
+    property rLeft : Float32
+    property rTop : Float32
+    property rRight : Float32
+    property rBottom : Float32
+    property rInitialLeft : Float32
+    property rInitialTop : Float32
+    property rInitialRight : Float32
+    property rInitialBottom : Float32
+    def initialize(@header : Win32cr::UI::Controls::TA_TRANSFORM, @rLeft : Float32, @rTop : Float32, @rRight : Float32, @rBottom : Float32, @rInitialLeft : Float32, @rInitialTop : Float32, @rInitialRight : Float32, @rInitialBottom : Float32)
+    end
+  end
 
   @[Extern]
-  record TA_TIMINGFUNCTION,
-    eTimingFunctionType : Win32cr::UI::Controls::TA_TIMINGFUNCTION_TYPE
+  struct TA_TIMINGFUNCTION
+    property eTimingFunctionType : Win32cr::UI::Controls::TA_TIMINGFUNCTION_TYPE
+    def initialize(@eTimingFunctionType : Win32cr::UI::Controls::TA_TIMINGFUNCTION_TYPE)
+    end
+  end
 
   @[Extern]
-  record TA_CUBIC_BEZIER,
-    header : Win32cr::UI::Controls::TA_TIMINGFUNCTION,
-    rX0 : Float32,
-    rY0 : Float32,
-    rX1 : Float32,
-    rY1 : Float32
+  struct TA_CUBIC_BEZIER
+    property header : Win32cr::UI::Controls::TA_TIMINGFUNCTION
+    property rX0 : Float32
+    property rY0 : Float32
+    property rX1 : Float32
+    property rY1 : Float32
+    def initialize(@header : Win32cr::UI::Controls::TA_TIMINGFUNCTION, @rX0 : Float32, @rY0 : Float32, @rX1 : Float32, @rY1 : Float32)
+    end
+  end
 
   @[Extern]
-  record DTBGOPTS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    rcClip : Win32cr::Foundation::RECT
+  struct DTBGOPTS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property rcClip : Win32cr::Foundation::RECT
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @rcClip : Win32cr::Foundation::RECT)
+    end
+  end
 
   @[Extern]
-  record MARGINS,
-    cxLeftWidth : Int32,
-    cxRightWidth : Int32,
-    cyTopHeight : Int32,
-    cyBottomHeight : Int32
+  struct MARGINS
+    property cxLeftWidth : Int32
+    property cxRightWidth : Int32
+    property cyTopHeight : Int32
+    property cyBottomHeight : Int32
+    def initialize(@cxLeftWidth : Int32, @cxRightWidth : Int32, @cyTopHeight : Int32, @cyBottomHeight : Int32)
+    end
+  end
 
   @[Extern]
-  record INTLIST,
-    iValueCount : Int32,
-    iValues : Int32[402]
+  struct INTLIST
+    property iValueCount : Int32
+    property iValues : Int32[402]
+    def initialize(@iValueCount : Int32, @iValues : Int32[402])
+    end
+  end
 
   @[Extern]
-  record WTA_OPTIONS,
-    dwFlags : UInt32,
-    dwMask : UInt32
+  struct WTA_OPTIONS
+    property dwFlags : UInt32
+    property dwMask : UInt32
+    def initialize(@dwFlags : UInt32, @dwMask : UInt32)
+    end
+  end
 
   @[Extern]
-  record DTTOPTS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    crText : UInt32,
-    crBorder : UInt32,
-    crShadow : UInt32,
-    iTextShadowType : Int32,
-    ptShadowOffset : Win32cr::Foundation::POINT,
-    iBorderSize : Int32,
-    iFontPropId : Int32,
-    iColorPropId : Int32,
-    iStateId : Int32,
-    fApplyOverlay : Win32cr::Foundation::BOOL,
-    iGlowSize : Int32,
-    pfnDrawTextCallback : Win32cr::UI::Controls::DTT_CALLBACK_PROC,
-    lParam : Win32cr::Foundation::LPARAM
+  struct DTTOPTS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property crText : UInt32
+    property crBorder : UInt32
+    property crShadow : UInt32
+    property iTextShadowType : Int32
+    property ptShadowOffset : Win32cr::Foundation::POINT
+    property iBorderSize : Int32
+    property iFontPropId : Int32
+    property iColorPropId : Int32
+    property iStateId : Int32
+    property fApplyOverlay : Win32cr::Foundation::BOOL
+    property iGlowSize : Int32
+    property pfnDrawTextCallback : Win32cr::UI::Controls::DTT_CALLBACK_PROC
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @crText : UInt32, @crBorder : UInt32, @crShadow : UInt32, @iTextShadowType : Int32, @ptShadowOffset : Win32cr::Foundation::POINT, @iBorderSize : Int32, @iFontPropId : Int32, @iColorPropId : Int32, @iStateId : Int32, @fApplyOverlay : Win32cr::Foundation::BOOL, @iGlowSize : Int32, @pfnDrawTextCallback : Win32cr::UI::Controls::DTT_CALLBACK_PROC, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
 
   @[Extern]
-  record BP_ANIMATIONPARAMS,
-    cbSize : UInt32,
-    dwFlags : UInt32,
-    style : Win32cr::UI::Controls::BP_ANIMATIONSTYLE,
-    dwDuration : UInt32
+  struct BP_ANIMATIONPARAMS
+    property cbSize : UInt32
+    property dwFlags : UInt32
+    property style : Win32cr::UI::Controls::BP_ANIMATIONSTYLE
+    property dwDuration : UInt32
+    def initialize(@cbSize : UInt32, @dwFlags : UInt32, @style : Win32cr::UI::Controls::BP_ANIMATIONSTYLE, @dwDuration : UInt32)
+    end
+  end
 
   @[Extern]
-  record BP_PAINTPARAMS,
-    cbSize : UInt32,
-    dwFlags : Win32cr::UI::Controls::BP_PAINTPARAMS_FLAGS,
-    prcExclude : Win32cr::Foundation::RECT*,
-    pBlendFunction : Win32cr::Graphics::Gdi::BLENDFUNCTION*
+  struct BP_PAINTPARAMS
+    property cbSize : UInt32
+    property dwFlags : Win32cr::UI::Controls::BP_PAINTPARAMS_FLAGS
+    property prcExclude : Win32cr::Foundation::RECT*
+    property pBlendFunction : Win32cr::Graphics::Gdi::BLENDFUNCTION*
+    def initialize(@cbSize : UInt32, @dwFlags : Win32cr::UI::Controls::BP_PAINTPARAMS_FLAGS, @prcExclude : Win32cr::Foundation::RECT*, @pBlendFunction : Win32cr::Graphics::Gdi::BLENDFUNCTION*)
+    end
+  end
 
   @[Extern]
-  record CCSTYLEA,
-    flStyle : UInt32,
-    flExtStyle : UInt32,
-    szText : Win32cr::Foundation::CHAR[256],
-    lgid : UInt16,
-    wReserved1 : UInt16
+  struct CCSTYLEA
+    property flStyle : UInt32
+    property flExtStyle : UInt32
+    property szText : Win32cr::Foundation::CHAR[256]
+    property lgid : UInt16
+    property wReserved1 : UInt16
+    def initialize(@flStyle : UInt32, @flExtStyle : UInt32, @szText : Win32cr::Foundation::CHAR[256], @lgid : UInt16, @wReserved1 : UInt16)
+    end
+  end
 
   @[Extern]
-  record CCSTYLEW,
-    flStyle : UInt32,
-    flExtStyle : UInt32,
-    szText : UInt16[256],
-    lgid : UInt16,
-    wReserved1 : UInt16
+  struct CCSTYLEW
+    property flStyle : UInt32
+    property flExtStyle : UInt32
+    property szText : UInt16[256]
+    property lgid : UInt16
+    property wReserved1 : UInt16
+    def initialize(@flStyle : UInt32, @flExtStyle : UInt32, @szText : UInt16[256], @lgid : UInt16, @wReserved1 : UInt16)
+    end
+  end
 
   @[Extern]
-  record CCSTYLEFLAGA,
-    flStyle : UInt32,
-    flStyleMask : UInt32,
-    pszStyle : Win32cr::Foundation::PSTR
+  struct CCSTYLEFLAGA
+    property flStyle : UInt32
+    property flStyleMask : UInt32
+    property pszStyle : Win32cr::Foundation::PSTR
+    def initialize(@flStyle : UInt32, @flStyleMask : UInt32, @pszStyle : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record CCSTYLEFLAGW,
-    flStyle : UInt32,
-    flStyleMask : UInt32,
-    pszStyle : Win32cr::Foundation::PWSTR
+  struct CCSTYLEFLAGW
+    property flStyle : UInt32
+    property flStyleMask : UInt32
+    property pszStyle : Win32cr::Foundation::PWSTR
+    def initialize(@flStyle : UInt32, @flStyleMask : UInt32, @pszStyle : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record CCINFOA,
-    szClass : Win32cr::Foundation::CHAR[32],
-    flOptions : UInt32,
-    szDesc : Win32cr::Foundation::CHAR[32],
-    cxDefault : UInt32,
-    cyDefault : UInt32,
-    flStyleDefault : UInt32,
-    flExtStyleDefault : UInt32,
-    flCtrlTypeMask : UInt32,
-    szTextDefault : Win32cr::Foundation::CHAR[256],
-    cStyleFlags : Int32,
-    aStyleFlags : Win32cr::UI::Controls::CCSTYLEFLAGA*,
-    lpfnStyle : Win32cr::UI::Controls::LPFNCCSTYLEA,
-    lpfnSizeToText : Win32cr::UI::Controls::LPFNCCSIZETOTEXTA,
-    dwReserved1 : UInt32,
-    dwReserved2 : UInt32
+  struct CCINFOA
+    property szClass : Win32cr::Foundation::CHAR[32]
+    property flOptions : UInt32
+    property szDesc : Win32cr::Foundation::CHAR[32]
+    property cxDefault : UInt32
+    property cyDefault : UInt32
+    property flStyleDefault : UInt32
+    property flExtStyleDefault : UInt32
+    property flCtrlTypeMask : UInt32
+    property szTextDefault : Win32cr::Foundation::CHAR[256]
+    property cStyleFlags : Int32
+    property aStyleFlags : Win32cr::UI::Controls::CCSTYLEFLAGA*
+    property lpfnStyle : Win32cr::UI::Controls::LPFNCCSTYLEA
+    property lpfnSizeToText : Win32cr::UI::Controls::LPFNCCSIZETOTEXTA
+    property dwReserved1 : UInt32
+    property dwReserved2 : UInt32
+    def initialize(@szClass : Win32cr::Foundation::CHAR[32], @flOptions : UInt32, @szDesc : Win32cr::Foundation::CHAR[32], @cxDefault : UInt32, @cyDefault : UInt32, @flStyleDefault : UInt32, @flExtStyleDefault : UInt32, @flCtrlTypeMask : UInt32, @szTextDefault : Win32cr::Foundation::CHAR[256], @cStyleFlags : Int32, @aStyleFlags : Win32cr::UI::Controls::CCSTYLEFLAGA*, @lpfnStyle : Win32cr::UI::Controls::LPFNCCSTYLEA, @lpfnSizeToText : Win32cr::UI::Controls::LPFNCCSIZETOTEXTA, @dwReserved1 : UInt32, @dwReserved2 : UInt32)
+    end
+  end
 
   @[Extern]
-  record CCINFOW,
-    szClass : UInt16[32],
-    flOptions : UInt32,
-    szDesc : UInt16[32],
-    cxDefault : UInt32,
-    cyDefault : UInt32,
-    flStyleDefault : UInt32,
-    flExtStyleDefault : UInt32,
-    flCtrlTypeMask : UInt32,
-    cStyleFlags : Int32,
-    aStyleFlags : Win32cr::UI::Controls::CCSTYLEFLAGW*,
-    szTextDefault : UInt16[256],
-    lpfnStyle : Win32cr::UI::Controls::LPFNCCSTYLEW,
-    lpfnSizeToText : Win32cr::UI::Controls::LPFNCCSIZETOTEXTW,
-    dwReserved1 : UInt32,
-    dwReserved2 : UInt32
+  struct CCINFOW
+    property szClass : UInt16[32]
+    property flOptions : UInt32
+    property szDesc : UInt16[32]
+    property cxDefault : UInt32
+    property cyDefault : UInt32
+    property flStyleDefault : UInt32
+    property flExtStyleDefault : UInt32
+    property flCtrlTypeMask : UInt32
+    property cStyleFlags : Int32
+    property aStyleFlags : Win32cr::UI::Controls::CCSTYLEFLAGW*
+    property szTextDefault : UInt16[256]
+    property lpfnStyle : Win32cr::UI::Controls::LPFNCCSTYLEW
+    property lpfnSizeToText : Win32cr::UI::Controls::LPFNCCSIZETOTEXTW
+    property dwReserved1 : UInt32
+    property dwReserved2 : UInt32
+    def initialize(@szClass : UInt16[32], @flOptions : UInt32, @szDesc : UInt16[32], @cxDefault : UInt32, @cyDefault : UInt32, @flStyleDefault : UInt32, @flExtStyleDefault : UInt32, @flCtrlTypeMask : UInt32, @cStyleFlags : Int32, @aStyleFlags : Win32cr::UI::Controls::CCSTYLEFLAGW*, @szTextDefault : UInt16[256], @lpfnStyle : Win32cr::UI::Controls::LPFNCCSTYLEW, @lpfnSizeToText : Win32cr::UI::Controls::LPFNCCSIZETOTEXTW, @dwReserved1 : UInt32, @dwReserved2 : UInt32)
+    end
+  end
 
   @[Extern]
-  record NMHDR,
-    hwndFrom : Win32cr::Foundation::HWND,
-    idFrom : LibC::UIntPtrT,
-    code : UInt32
+  struct NMHDR
+    property hwndFrom : Win32cr::Foundation::HWND
+    property idFrom : LibC::UIntPtrT
+    property code : UInt32
+    def initialize(@hwndFrom : Win32cr::Foundation::HWND, @idFrom : LibC::UIntPtrT, @code : UInt32)
+    end
+  end
 
   @[Extern]
-  record MEASUREITEMSTRUCT,
-    ctl_type : UInt32,
-    ctl_id : UInt32,
-    itemID : UInt32,
-    itemWidth : UInt32,
-    itemHeight : UInt32,
-    itemData : LibC::UIntPtrT
+  struct MEASUREITEMSTRUCT
+    property ctl_type : UInt32
+    property ctl_id : UInt32
+    property itemID : UInt32
+    property itemWidth : UInt32
+    property itemHeight : UInt32
+    property itemData : LibC::UIntPtrT
+    def initialize(@ctl_type : UInt32, @ctl_id : UInt32, @itemID : UInt32, @itemWidth : UInt32, @itemHeight : UInt32, @itemData : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record DRAWITEMSTRUCT,
-    ctl_type : Win32cr::UI::Controls::DRAWITEMSTRUCT_CTL_TYPE,
-    ctl_id : UInt32,
-    itemID : UInt32,
-    itemAction : UInt32,
-    itemState : UInt32,
-    hwndItem : Win32cr::Foundation::HWND,
-    hDC : Win32cr::Graphics::Gdi::HDC,
-    rcItem : Win32cr::Foundation::RECT,
-    itemData : LibC::UIntPtrT
+  struct DRAWITEMSTRUCT
+    property ctl_type : Win32cr::UI::Controls::DRAWITEMSTRUCT_CTL_TYPE
+    property ctl_id : UInt32
+    property itemID : UInt32
+    property itemAction : UInt32
+    property itemState : UInt32
+    property hwndItem : Win32cr::Foundation::HWND
+    property hDC : Win32cr::Graphics::Gdi::HDC
+    property rcItem : Win32cr::Foundation::RECT
+    property itemData : LibC::UIntPtrT
+    def initialize(@ctl_type : Win32cr::UI::Controls::DRAWITEMSTRUCT_CTL_TYPE, @ctl_id : UInt32, @itemID : UInt32, @itemAction : UInt32, @itemState : UInt32, @hwndItem : Win32cr::Foundation::HWND, @hDC : Win32cr::Graphics::Gdi::HDC, @rcItem : Win32cr::Foundation::RECT, @itemData : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record DELETEITEMSTRUCT,
-    ctl_type : Win32cr::UI::Controls::DRAWITEMSTRUCT_CTL_TYPE,
-    ctl_id : UInt32,
-    itemID : UInt32,
-    hwndItem : Win32cr::Foundation::HWND,
-    itemData : LibC::UIntPtrT
+  struct DELETEITEMSTRUCT
+    property ctl_type : Win32cr::UI::Controls::DRAWITEMSTRUCT_CTL_TYPE
+    property ctl_id : UInt32
+    property itemID : UInt32
+    property hwndItem : Win32cr::Foundation::HWND
+    property itemData : LibC::UIntPtrT
+    def initialize(@ctl_type : Win32cr::UI::Controls::DRAWITEMSTRUCT_CTL_TYPE, @ctl_id : UInt32, @itemID : UInt32, @hwndItem : Win32cr::Foundation::HWND, @itemData : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record COMPAREITEMSTRUCT,
-    ctl_type : UInt32,
-    ctl_id : UInt32,
-    hwndItem : Win32cr::Foundation::HWND,
-    itemID1 : UInt32,
-    itemData1 : LibC::UIntPtrT,
-    itemID2 : UInt32,
-    itemData2 : LibC::UIntPtrT,
-    dwLocaleId : UInt32
+  struct COMPAREITEMSTRUCT
+    property ctl_type : UInt32
+    property ctl_id : UInt32
+    property hwndItem : Win32cr::Foundation::HWND
+    property itemID1 : UInt32
+    property itemData1 : LibC::UIntPtrT
+    property itemID2 : UInt32
+    property itemData2 : LibC::UIntPtrT
+    property dwLocaleId : UInt32
+    def initialize(@ctl_type : UInt32, @ctl_id : UInt32, @hwndItem : Win32cr::Foundation::HWND, @itemID1 : UInt32, @itemData1 : LibC::UIntPtrT, @itemID2 : UInt32, @itemData2 : LibC::UIntPtrT, @dwLocaleId : UInt32)
+    end
+  end
 
   @[Extern]
-  record USAGE_PROPERTIES,
-    level : UInt16,
-    page : UInt16,
-    usage : UInt16,
-    logicalMinimum : Int32,
-    logicalMaximum : Int32,
-    unit : UInt16,
-    exponent : UInt16,
-    count : UInt8,
-    physicalMinimum : Int32,
-    physicalMaximum : Int32
+  struct USAGE_PROPERTIES
+    property level : UInt16
+    property page : UInt16
+    property usage : UInt16
+    property logicalMinimum : Int32
+    property logicalMaximum : Int32
+    property unit : UInt16
+    property exponent : UInt16
+    property count : UInt8
+    property physicalMinimum : Int32
+    property physicalMaximum : Int32
+    def initialize(@level : UInt16, @page : UInt16, @usage : UInt16, @logicalMinimum : Int32, @logicalMaximum : Int32, @unit : UInt16, @exponent : UInt16, @count : UInt8, @physicalMinimum : Int32, @physicalMaximum : Int32)
+    end
+  end
 
   @[Extern]
-  record POINTER_TYPE_INFO,
-    type__ : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct POINTER_TYPE_INFO
+    property type__ : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      touchInfo : Win32cr::UI::Input::Pointer::POINTER_TOUCH_INFO,
-      penInfo : Win32cr::UI::Input::Pointer::POINTER_PEN_INFO
+    struct Anonymous_e__Union_
+    property touchInfo : Win32cr::UI::Input::Pointer::POINTER_TOUCH_INFO
+    property penInfo : Win32cr::UI::Input::Pointer::POINTER_PEN_INFO
+    def initialize(@touchInfo : Win32cr::UI::Input::Pointer::POINTER_TOUCH_INFO, @penInfo : Win32cr::UI::Input::Pointer::POINTER_PEN_INFO)
+    end
+    end
 
+    def initialize(@type__ : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record TOUCH_HIT_TESTING_PROXIMITY_EVALUATION,
-    score : UInt16,
-    adjustedPoint : Win32cr::Foundation::POINT
+  struct TOUCH_HIT_TESTING_PROXIMITY_EVALUATION
+    property score : UInt16
+    property adjustedPoint : Win32cr::Foundation::POINT
+    def initialize(@score : UInt16, @adjustedPoint : Win32cr::Foundation::POINT)
+    end
+  end
 
   @[Extern]
-  record TOUCH_HIT_TESTING_INPUT,
-    pointerId : UInt32,
-    point : Win32cr::Foundation::POINT,
-    boundingBox : Win32cr::Foundation::RECT,
-    nonOccludedBoundingBox : Win32cr::Foundation::RECT,
-    orientation : UInt32
+  struct TOUCH_HIT_TESTING_INPUT
+    property pointerId : UInt32
+    property point : Win32cr::Foundation::POINT
+    property boundingBox : Win32cr::Foundation::RECT
+    property nonOccludedBoundingBox : Win32cr::Foundation::RECT
+    property orientation : UInt32
+    def initialize(@pointerId : UInt32, @point : Win32cr::Foundation::POINT, @boundingBox : Win32cr::Foundation::RECT, @nonOccludedBoundingBox : Win32cr::Foundation::RECT, @orientation : UInt32)
+    end
+  end
 
   @[Extern]
-  record COMBOBOXINFO,
-    cbSize : UInt32,
-    rcItem : Win32cr::Foundation::RECT,
-    rcButton : Win32cr::Foundation::RECT,
-    stateButton : Win32cr::UI::Controls::COMBOBOXINFO_BUTTON_STATE,
-    hwndCombo : Win32cr::Foundation::HWND,
-    hwndItem : Win32cr::Foundation::HWND,
-    hwndList : Win32cr::Foundation::HWND
+  struct COMBOBOXINFO
+    property cbSize : UInt32
+    property rcItem : Win32cr::Foundation::RECT
+    property rcButton : Win32cr::Foundation::RECT
+    property stateButton : Win32cr::UI::Controls::COMBOBOXINFO_BUTTON_STATE
+    property hwndCombo : Win32cr::Foundation::HWND
+    property hwndItem : Win32cr::Foundation::HWND
+    property hwndList : Win32cr::Foundation::HWND
+    def initialize(@cbSize : UInt32, @rcItem : Win32cr::Foundation::RECT, @rcButton : Win32cr::Foundation::RECT, @stateButton : Win32cr::UI::Controls::COMBOBOXINFO_BUTTON_STATE, @hwndCombo : Win32cr::Foundation::HWND, @hwndItem : Win32cr::Foundation::HWND, @hwndList : Win32cr::Foundation::HWND)
+    end
+  end
 
   @[Extern]
-  record POINTER_DEVICE_INFO,
-    displayOrientation : UInt32,
-    device : Win32cr::Foundation::HANDLE,
-    pointerDeviceType : Win32cr::UI::Controls::POINTER_DEVICE_TYPE,
-    monitor : Win32cr::Graphics::Gdi::HMONITOR,
-    startingCursorId : UInt32,
-    maxActiveContacts : UInt16,
-    productString : UInt16[520]
+  struct POINTER_DEVICE_INFO
+    property displayOrientation : UInt32
+    property device : Win32cr::Foundation::HANDLE
+    property pointerDeviceType : Win32cr::UI::Controls::POINTER_DEVICE_TYPE
+    property monitor : Win32cr::Graphics::Gdi::HMONITOR
+    property startingCursorId : UInt32
+    property maxActiveContacts : UInt16
+    property productString : UInt16[520]
+    def initialize(@displayOrientation : UInt32, @device : Win32cr::Foundation::HANDLE, @pointerDeviceType : Win32cr::UI::Controls::POINTER_DEVICE_TYPE, @monitor : Win32cr::Graphics::Gdi::HMONITOR, @startingCursorId : UInt32, @maxActiveContacts : UInt16, @productString : UInt16[520])
+    end
+  end
 
   @[Extern]
-  record POINTER_DEVICE_PROPERTY,
-    logicalMin : Int32,
-    logicalMax : Int32,
-    physicalMin : Int32,
-    physicalMax : Int32,
-    unit : UInt32,
-    unitExponent : UInt32,
-    usagePageId : UInt16,
-    usageId : UInt16
+  struct POINTER_DEVICE_PROPERTY
+    property logicalMin : Int32
+    property logicalMax : Int32
+    property physicalMin : Int32
+    property physicalMax : Int32
+    property unit : UInt32
+    property unitExponent : UInt32
+    property usagePageId : UInt16
+    property usageId : UInt16
+    def initialize(@logicalMin : Int32, @logicalMax : Int32, @physicalMin : Int32, @physicalMax : Int32, @unit : UInt32, @unitExponent : UInt32, @usagePageId : UInt16, @usageId : UInt16)
+    end
+  end
 
   @[Extern]
-  record POINTER_DEVICE_CURSOR_INFO,
-    cursorId : UInt32,
-    cursor : Win32cr::UI::Controls::POINTER_DEVICE_CURSOR_TYPE
+  struct POINTER_DEVICE_CURSOR_INFO
+    property cursorId : UInt32
+    property cursor : Win32cr::UI::Controls::POINTER_DEVICE_CURSOR_TYPE
+    def initialize(@cursorId : UInt32, @cursor : Win32cr::UI::Controls::POINTER_DEVICE_CURSOR_TYPE)
+    end
+  end
 
   {% if flag?(:i386) %}
   @[Extern]
-  record TBBUTTON,
-    iBitmap : Int32,
-    idCommand : Int32,
-    fsState : UInt8,
-    fsStyle : UInt8,
-    bReserved : UInt8[2],
-    dwData : LibC::UIntPtrT,
-    iString : LibC::IntPtrT
+  struct TBBUTTON
+    property iBitmap : Int32
+    property idCommand : Int32
+    property fsState : UInt8
+    property fsStyle : UInt8
+    property bReserved : UInt8[2]
+    property dwData : LibC::UIntPtrT
+    property iString : LibC::IntPtrT
+    def initialize(@iBitmap : Int32, @idCommand : Int32, @fsState : UInt8, @fsStyle : UInt8, @bReserved : UInt8[2], @dwData : LibC::UIntPtrT, @iString : LibC::IntPtrT)
+    end
+  end
   {% end %}
 
   @[Extern]
@@ -6759,7 +7502,6 @@ module Win32cr::UI::Controls
 
 
   @[Extern]
-  #@[Com("46eb5926-582e-4017-9fdf-e8998daa0950")]
   record IImageList, lpVtbl : IImageListVtbl* do
     GUID = LibC::GUID.new(0x46eb5926_u32, 0x582e_u16, 0x4017_u16, StaticArray[0x9f_u8, 0xdf_u8, 0xe8_u8, 0x99_u8, 0x8d_u8, 0xaa_u8, 0x9_u8, 0x50_u8])
     def query_interface(this : IImageList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6910,7 +7652,6 @@ module Win32cr::UI::Controls
 
 
   @[Extern]
-  #@[Com("192b9d83-50fc-457b-90a0-2b82a8b5dae1")]
   record IImageList2, lpVtbl : IImageList2Vtbl* do
     GUID = LibC::GUID.new(0x192b9d83_u32, 0x50fc_u16, 0x457b_u16, StaticArray[0x90_u8, 0xa0_u8, 0x2b_u8, 0x82_u8, 0xa8_u8, 0xb5_u8, 0xda_u8, 0xe1_u8])
     def query_interface(this : IImageList2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

@@ -2,7 +2,7 @@ require "./../foundation.cr"
 require "./../graphics/gdi.cr"
 
 module Win32cr::UI::Magnification
-  alias MagImageScalingCallback = Proc(Win32cr::Foundation::HWND, Void*, Win32cr::UI::Magnification::MAGIMAGEHEADER, Void*, Win32cr::UI::Magnification::MAGIMAGEHEADER, Win32cr::Foundation::RECT, Win32cr::Foundation::RECT, Win32cr::Graphics::Gdi::HRGN, Win32cr::Foundation::BOOL)*
+  alias MagImageScalingCallback = Proc(Win32cr::Foundation::HWND, Void*, Win32cr::UI::Magnification::MAGIMAGEHEADER, Void*, Win32cr::UI::Magnification::MAGIMAGEHEADER, Win32cr::Foundation::RECT, Win32cr::Foundation::RECT, Win32cr::Graphics::Gdi::HRGN, Win32cr::Foundation::BOOL)
 
   WC_MAGNIFIERA = "Magnifier"
   WC_MAGNIFIERW = "Magnifier"
@@ -15,21 +15,30 @@ module Win32cr::UI::Magnification
 
 
   @[Extern]
-  record MAGTRANSFORM,
-    v : Float32[9]
+  struct MAGTRANSFORM
+    property v : Float32[9]
+    def initialize(@v : Float32[9])
+    end
+  end
 
   @[Extern]
-  record MAGIMAGEHEADER,
-    width : UInt32,
-    height : UInt32,
-    format : LibC::GUID,
-    stride : UInt32,
-    offset : UInt32,
-    cbSize : LibC::UIntPtrT
+  struct MAGIMAGEHEADER
+    property width : UInt32
+    property height : UInt32
+    property format : LibC::GUID
+    property stride : UInt32
+    property offset : UInt32
+    property cbSize : LibC::UIntPtrT
+    def initialize(@width : UInt32, @height : UInt32, @format : LibC::GUID, @stride : UInt32, @offset : UInt32, @cbSize : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record MAGCOLOREFFECT,
-    transform : Float32[25]
+  struct MAGCOLOREFFECT
+    property transform : Float32[25]
+    def initialize(@transform : Float32[25])
+    end
+  end
 
   @[Link("magnification")]
   lib C

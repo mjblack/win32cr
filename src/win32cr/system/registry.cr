@@ -3,7 +3,7 @@ require "./../security.cr"
 
 module Win32cr::System::Registry
   alias HKEY = LibC::IntPtrT
-  alias PQUERYHANDLER = Proc(Void*, Win32cr::System::Registry::Val_context*, UInt32, Void*, UInt32*, UInt32, UInt32)*
+  alias PQUERYHANDLER = Proc(Void*, Win32cr::System::Registry::Val_context*, UInt32, Void*, UInt32*, UInt32, UInt32)
 
   HKEY_CLASSES_ROOT = -2147483648_i32
   HKEY_CURRENT_USER = -2147483647_i32
@@ -997,59 +997,80 @@ module Win32cr::System::Registry
   end
 
   @[Extern]
-  record Val_context,
-    valuelen : Int32,
-    value_context : Void*,
-    val_buff_ptr : Void*
+  struct Val_context
+    property valuelen : Int32
+    property value_context : Void*
+    property val_buff_ptr : Void*
+    def initialize(@valuelen : Int32, @value_context : Void*, @val_buff_ptr : Void*)
+    end
+  end
 
   @[Extern]
-  record Pvaluea,
-    pv_valuename : Win32cr::Foundation::PSTR,
-    pv_valuelen : Int32,
-    pv_value_context : Void*,
-    pv_type : UInt32
+  struct Pvaluea
+    property pv_valuename : Win32cr::Foundation::PSTR
+    property pv_valuelen : Int32
+    property pv_value_context : Void*
+    property pv_type : UInt32
+    def initialize(@pv_valuename : Win32cr::Foundation::PSTR, @pv_valuelen : Int32, @pv_value_context : Void*, @pv_type : UInt32)
+    end
+  end
 
   @[Extern]
-  record Pvaluew,
-    pv_valuename : Win32cr::Foundation::PWSTR,
-    pv_valuelen : Int32,
-    pv_value_context : Void*,
-    pv_type : UInt32
+  struct Pvaluew
+    property pv_valuename : Win32cr::Foundation::PWSTR
+    property pv_valuelen : Int32
+    property pv_value_context : Void*
+    property pv_type : UInt32
+    def initialize(@pv_valuename : Win32cr::Foundation::PWSTR, @pv_valuelen : Int32, @pv_value_context : Void*, @pv_type : UInt32)
+    end
+  end
 
   @[Extern]
-  record Provider_info,
-    pi_R0_1val : Win32cr::System::Registry::PQUERYHANDLER,
-    pi_R0_allvals : Win32cr::System::Registry::PQUERYHANDLER,
-    pi_R3_1val : Win32cr::System::Registry::PQUERYHANDLER,
-    pi_R3_allvals : Win32cr::System::Registry::PQUERYHANDLER,
-    pi_flags : UInt32,
-    pi_key_context : Void*
+  struct Provider_info
+    property pi_R0_1val : Win32cr::System::Registry::PQUERYHANDLER
+    property pi_R0_allvals : Win32cr::System::Registry::PQUERYHANDLER
+    property pi_R3_1val : Win32cr::System::Registry::PQUERYHANDLER
+    property pi_R3_allvals : Win32cr::System::Registry::PQUERYHANDLER
+    property pi_flags : UInt32
+    property pi_key_context : Void*
+    def initialize(@pi_R0_1val : Win32cr::System::Registry::PQUERYHANDLER, @pi_R0_allvals : Win32cr::System::Registry::PQUERYHANDLER, @pi_R3_1val : Win32cr::System::Registry::PQUERYHANDLER, @pi_R3_allvals : Win32cr::System::Registry::PQUERYHANDLER, @pi_flags : UInt32, @pi_key_context : Void*)
+    end
+  end
 
   @[Extern]
-  record VALENTA,
-    ve_valuename : Win32cr::Foundation::PSTR,
-    ve_valuelen : UInt32,
-    ve_valueptr : LibC::UIntPtrT,
-    ve_type : Win32cr::System::Registry::REG_VALUE_TYPE
+  struct VALENTA
+    property ve_valuename : Win32cr::Foundation::PSTR
+    property ve_valuelen : UInt32
+    property ve_valueptr : LibC::UIntPtrT
+    property ve_type : Win32cr::System::Registry::REG_VALUE_TYPE
+    def initialize(@ve_valuename : Win32cr::Foundation::PSTR, @ve_valuelen : UInt32, @ve_valueptr : LibC::UIntPtrT, @ve_type : Win32cr::System::Registry::REG_VALUE_TYPE)
+    end
+  end
 
   @[Extern]
-  record VALENTW,
-    ve_valuename : Win32cr::Foundation::PWSTR,
-    ve_valuelen : UInt32,
-    ve_valueptr : LibC::UIntPtrT,
-    ve_type : Win32cr::System::Registry::REG_VALUE_TYPE
+  struct VALENTW
+    property ve_valuename : Win32cr::Foundation::PWSTR
+    property ve_valuelen : UInt32
+    property ve_valueptr : LibC::UIntPtrT
+    property ve_type : Win32cr::System::Registry::REG_VALUE_TYPE
+    def initialize(@ve_valuename : Win32cr::Foundation::PWSTR, @ve_valuelen : UInt32, @ve_valueptr : LibC::UIntPtrT, @ve_type : Win32cr::System::Registry::REG_VALUE_TYPE)
+    end
+  end
 
   @[Extern]
-  record DSKTLSYSTEMTIME,
-    wYear : UInt16,
-    wMonth : UInt16,
-    wDayOfWeek : UInt16,
-    wDay : UInt16,
-    wHour : UInt16,
-    wMinute : UInt16,
-    wSecond : UInt16,
-    wMilliseconds : UInt16,
-    wResult : UInt16
+  struct DSKTLSYSTEMTIME
+    property wYear : UInt16
+    property wMonth : UInt16
+    property wDayOfWeek : UInt16
+    property wDay : UInt16
+    property wHour : UInt16
+    property wMinute : UInt16
+    property wSecond : UInt16
+    property wMilliseconds : UInt16
+    property wResult : UInt16
+    def initialize(@wYear : UInt16, @wMonth : UInt16, @wDayOfWeek : UInt16, @wDay : UInt16, @wHour : UInt16, @wMinute : UInt16, @wSecond : UInt16, @wMilliseconds : UInt16, @wResult : UInt16)
+    end
+  end
 
   @[Link("advapi32")]
   lib C

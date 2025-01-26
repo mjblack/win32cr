@@ -92,45 +92,63 @@ module Win32cr::UI::Input::XboxController
   end
 
   @[Extern]
-  record XINPUT_GAMEPAD,
-    wButtons : UInt16,
-    bLeftTrigger : UInt8,
-    bRightTrigger : UInt8,
-    sThumbLX : Int16,
-    sThumbLY : Int16,
-    sThumbRX : Int16,
-    sThumbRY : Int16
+  struct XINPUT_GAMEPAD
+    property wButtons : UInt16
+    property bLeftTrigger : UInt8
+    property bRightTrigger : UInt8
+    property sThumbLX : Int16
+    property sThumbLY : Int16
+    property sThumbRX : Int16
+    property sThumbRY : Int16
+    def initialize(@wButtons : UInt16, @bLeftTrigger : UInt8, @bRightTrigger : UInt8, @sThumbLX : Int16, @sThumbLY : Int16, @sThumbRX : Int16, @sThumbRY : Int16)
+    end
+  end
 
   @[Extern]
-  record XINPUT_STATE,
-    dwPacketNumber : UInt32,
-    gamepad : Win32cr::UI::Input::XboxController::XINPUT_GAMEPAD
+  struct XINPUT_STATE
+    property dwPacketNumber : UInt32
+    property gamepad : Win32cr::UI::Input::XboxController::XINPUT_GAMEPAD
+    def initialize(@dwPacketNumber : UInt32, @gamepad : Win32cr::UI::Input::XboxController::XINPUT_GAMEPAD)
+    end
+  end
 
   @[Extern]
-  record XINPUT_VIBRATION,
-    wLeftMotorSpeed : UInt16,
-    wRightMotorSpeed : UInt16
+  struct XINPUT_VIBRATION
+    property wLeftMotorSpeed : UInt16
+    property wRightMotorSpeed : UInt16
+    def initialize(@wLeftMotorSpeed : UInt16, @wRightMotorSpeed : UInt16)
+    end
+  end
 
   @[Extern]
-  record XINPUT_CAPABILITIES,
-    type__ : UInt8,
-    sub_type : UInt8,
-    flags : UInt16,
-    gamepad : Win32cr::UI::Input::XboxController::XINPUT_GAMEPAD,
-    vibration : Win32cr::UI::Input::XboxController::XINPUT_VIBRATION
+  struct XINPUT_CAPABILITIES
+    property type__ : UInt8
+    property sub_type : UInt8
+    property flags : UInt16
+    property gamepad : Win32cr::UI::Input::XboxController::XINPUT_GAMEPAD
+    property vibration : Win32cr::UI::Input::XboxController::XINPUT_VIBRATION
+    def initialize(@type__ : UInt8, @sub_type : UInt8, @flags : UInt16, @gamepad : Win32cr::UI::Input::XboxController::XINPUT_GAMEPAD, @vibration : Win32cr::UI::Input::XboxController::XINPUT_VIBRATION)
+    end
+  end
 
   @[Extern]
-  record XINPUT_BATTERY_INFORMATION,
-    battery_type : UInt8,
-    battery_level : UInt8
+  struct XINPUT_BATTERY_INFORMATION
+    property battery_type : UInt8
+    property battery_level : UInt8
+    def initialize(@battery_type : UInt8, @battery_level : UInt8)
+    end
+  end
 
   @[Extern]
-  record XINPUT_KEYSTROKE,
-    virtual_key : Win32cr::UI::Input::XboxController::XINPUT_VIRTUAL_KEY,
-    unicode : UInt16,
-    flags : UInt16,
-    user_index : UInt8,
-    hid_code : UInt8
+  struct XINPUT_KEYSTROKE
+    property virtual_key : Win32cr::UI::Input::XboxController::XINPUT_VIRTUAL_KEY
+    property unicode : UInt16
+    property flags : UInt16
+    property user_index : UInt8
+    property hid_code : UInt8
+    def initialize(@virtual_key : Win32cr::UI::Input::XboxController::XINPUT_VIRTUAL_KEY, @unicode : UInt16, @flags : UInt16, @user_index : UInt8, @hid_code : UInt8)
+    end
+  end
 
   @[Link("xinputuap")]
   lib C

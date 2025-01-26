@@ -5,12 +5,15 @@ module Win32cr::System::UserAccessLogging
 
 
   @[Extern]
-  record UAL_DATA_BLOB,
-    size : UInt32,
-    role_guid : LibC::GUID,
-    tenant_id : LibC::GUID,
-    address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE,
-    user_name : UInt16[260]
+  struct UAL_DATA_BLOB
+    property size : UInt32
+    property role_guid : LibC::GUID
+    property tenant_id : LibC::GUID
+    property address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE
+    property user_name : UInt16[260]
+    def initialize(@size : UInt32, @role_guid : LibC::GUID, @tenant_id : LibC::GUID, @address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE, @user_name : UInt16[260])
+    end
+  end
 
   @[Link("ualapi")]
   lib C

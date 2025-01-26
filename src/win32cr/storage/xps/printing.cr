@@ -25,22 +25,28 @@ module Win32cr::Storage::Xps::Printing
   end
 
   @[Extern]
-  record XPS_JOB_STATUS,
-    jobId : UInt32,
-    currentDocument : Int32,
-    currentPage : Int32,
-    currentPageTotal : Int32,
-    completion : Win32cr::Storage::Xps::Printing::XPS_JOB_COMPLETION,
-    jobStatus : Win32cr::Foundation::HRESULT
+  struct XPS_JOB_STATUS
+    property jobId : UInt32
+    property currentDocument : Int32
+    property currentPage : Int32
+    property currentPageTotal : Int32
+    property completion : Win32cr::Storage::Xps::Printing::XPS_JOB_COMPLETION
+    property jobStatus : Win32cr::Foundation::HRESULT
+    def initialize(@jobId : UInt32, @currentDocument : Int32, @currentPage : Int32, @currentPageTotal : Int32, @completion : Win32cr::Storage::Xps::Printing::XPS_JOB_COMPLETION, @jobStatus : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
-  record PrintDocumentPackageStatus,
-    job_id : UInt32,
-    current_document : Int32,
-    current_page : Int32,
-    current_page_total : Int32,
-    completion : Win32cr::Storage::Xps::Printing::PrintDocumentPackageCompletion,
-    package_status : Win32cr::Foundation::HRESULT
+  struct PrintDocumentPackageStatus
+    property job_id : UInt32
+    property current_document : Int32
+    property current_page : Int32
+    property current_page_total : Int32
+    property completion : Win32cr::Storage::Xps::Printing::PrintDocumentPackageCompletion
+    property package_status : Win32cr::Foundation::HRESULT
+    def initialize(@job_id : UInt32, @current_document : Int32, @current_page : Int32, @current_page_total : Int32, @completion : Win32cr::Storage::Xps::Printing::PrintDocumentPackageCompletion, @package_status : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
   record IXpsPrintJobStreamVtbl,
@@ -53,7 +59,6 @@ module Win32cr::Storage::Xps::Printing
 
 
   @[Extern]
-  #@[Com("7a77dc5f-45d6-4dff-9307-d8cb846347ca")]
   record IXpsPrintJobStream, lpVtbl : IXpsPrintJobStreamVtbl* do
     GUID = LibC::GUID.new(0x7a77dc5f_u32, 0x45d6_u16, 0x4dff_u16, StaticArray[0x93_u8, 0x7_u8, 0xd8_u8, 0xcb_u8, 0x84_u8, 0x63_u8, 0x47_u8, 0xca_u8])
     def query_interface(this : IXpsPrintJobStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -87,7 +92,6 @@ module Win32cr::Storage::Xps::Printing
 
 
   @[Extern]
-  #@[Com("5ab89b06-8194-425f-ab3b-d7a96e350161")]
   record IXpsPrintJob, lpVtbl : IXpsPrintJobVtbl* do
     GUID = LibC::GUID.new(0x5ab89b06_u32, 0x8194_u16, 0x425f_u16, StaticArray[0xab_u8, 0x3b_u8, 0xd7_u8, 0xa9_u8, 0x6e_u8, 0x35_u8, 0x1_u8, 0x61_u8])
     def query_interface(this : IXpsPrintJob*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -119,7 +123,6 @@ module Win32cr::Storage::Xps::Printing
 
 
   @[Extern]
-  #@[Com("1b8efec4-3019-4c27-964e-367202156906")]
   record IPrintDocumentPackageTarget, lpVtbl : IPrintDocumentPackageTargetVtbl* do
     GUID = LibC::GUID.new(0x1b8efec4_u32, 0x3019_u16, 0x4c27_u16, StaticArray[0x96_u8, 0x4e_u8, 0x36_u8, 0x72_u8, 0x2_u8, 0x15_u8, 0x69_u8, 0x6_u8])
     def query_interface(this : IPrintDocumentPackageTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -156,7 +159,6 @@ module Win32cr::Storage::Xps::Printing
 
 
   @[Extern]
-  #@[Com("ed90c8ad-5c34-4d05-a1ec-0e8a9b3ad7af")]
   record IPrintDocumentPackageStatusEvent, lpVtbl : IPrintDocumentPackageStatusEventVtbl* do
     GUID = LibC::GUID.new(0xed90c8ad_u32, 0x5c34_u16, 0x4d05_u16, StaticArray[0xa1_u8, 0xec_u8, 0xe_u8, 0x8a_u8, 0x9b_u8, 0x3a_u8, 0xd7_u8, 0xaf_u8])
     def query_interface(this : IPrintDocumentPackageStatusEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -195,7 +197,6 @@ module Win32cr::Storage::Xps::Printing
 
 
   @[Extern]
-  #@[Com("d2959bf7-b31b-4a3d-9600-712eb1335ba4")]
   record IPrintDocumentPackageTargetFactory, lpVtbl : IPrintDocumentPackageTargetFactoryVtbl* do
     GUID = LibC::GUID.new(0xd2959bf7_u32, 0xb31b_u16, 0x4a3d_u16, StaticArray[0x96_u8, 0x0_u8, 0x71_u8, 0x2e_u8, 0xb1_u8, 0x33_u8, 0x5b_u8, 0xa4_u8])
     def query_interface(this : IPrintDocumentPackageTargetFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

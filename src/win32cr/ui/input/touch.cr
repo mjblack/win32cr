@@ -51,43 +51,55 @@ module Win32cr::UI::Input::Touch
   end
 
   @[Extern]
-  record TOUCHINPUT,
-    x : Int32,
-    y : Int32,
-    hSource : Win32cr::Foundation::HANDLE,
-    dwID : UInt32,
-    dwFlags : Win32cr::UI::Input::Touch::TOUCHEVENTF_FLAGS,
-    dwMask : Win32cr::UI::Input::Touch::TOUCHINPUTMASKF_MASK,
-    dwTime : UInt32,
-    dwExtraInfo : LibC::UIntPtrT,
-    cxContact : UInt32,
-    cyContact : UInt32
+  struct TOUCHINPUT
+    property x : Int32
+    property y : Int32
+    property hSource : Win32cr::Foundation::HANDLE
+    property dwID : UInt32
+    property dwFlags : Win32cr::UI::Input::Touch::TOUCHEVENTF_FLAGS
+    property dwMask : Win32cr::UI::Input::Touch::TOUCHINPUTMASKF_MASK
+    property dwTime : UInt32
+    property dwExtraInfo : LibC::UIntPtrT
+    property cxContact : UInt32
+    property cyContact : UInt32
+    def initialize(@x : Int32, @y : Int32, @hSource : Win32cr::Foundation::HANDLE, @dwID : UInt32, @dwFlags : Win32cr::UI::Input::Touch::TOUCHEVENTF_FLAGS, @dwMask : Win32cr::UI::Input::Touch::TOUCHINPUTMASKF_MASK, @dwTime : UInt32, @dwExtraInfo : LibC::UIntPtrT, @cxContact : UInt32, @cyContact : UInt32)
+    end
+  end
 
   @[Extern]
-  record GESTUREINFO,
-    cbSize : UInt32,
-    dwFlags : UInt32,
-    dwID : UInt32,
-    hwndTarget : Win32cr::Foundation::HWND,
-    ptsLocation : Win32cr::Foundation::POINTS,
-    dwInstanceID : UInt32,
-    dwSequenceID : UInt32,
-    ullArguments : UInt64,
-    cbExtraArgs : UInt32
+  struct GESTUREINFO
+    property cbSize : UInt32
+    property dwFlags : UInt32
+    property dwID : UInt32
+    property hwndTarget : Win32cr::Foundation::HWND
+    property ptsLocation : Win32cr::Foundation::POINTS
+    property dwInstanceID : UInt32
+    property dwSequenceID : UInt32
+    property ullArguments : UInt64
+    property cbExtraArgs : UInt32
+    def initialize(@cbSize : UInt32, @dwFlags : UInt32, @dwID : UInt32, @hwndTarget : Win32cr::Foundation::HWND, @ptsLocation : Win32cr::Foundation::POINTS, @dwInstanceID : UInt32, @dwSequenceID : UInt32, @ullArguments : UInt64, @cbExtraArgs : UInt32)
+    end
+  end
 
   @[Extern]
-  record GESTURENOTIFYSTRUCT,
-    cbSize : UInt32,
-    dwFlags : UInt32,
-    hwndTarget : Win32cr::Foundation::HWND,
-    ptsLocation : Win32cr::Foundation::POINTS,
-    dwInstanceID : UInt32
+  struct GESTURENOTIFYSTRUCT
+    property cbSize : UInt32
+    property dwFlags : UInt32
+    property hwndTarget : Win32cr::Foundation::HWND
+    property ptsLocation : Win32cr::Foundation::POINTS
+    property dwInstanceID : UInt32
+    def initialize(@cbSize : UInt32, @dwFlags : UInt32, @hwndTarget : Win32cr::Foundation::HWND, @ptsLocation : Win32cr::Foundation::POINTS, @dwInstanceID : UInt32)
+    end
+  end
 
   @[Extern]
-  record GESTURECONFIG,
-    dwID : Win32cr::UI::Input::Touch::GESTURECONFIG_ID,
-    dwWant : UInt32,
-    dwBlock : UInt32
+  struct GESTURECONFIG
+    property dwID : Win32cr::UI::Input::Touch::GESTURECONFIG_ID
+    property dwWant : UInt32
+    property dwBlock : UInt32
+    def initialize(@dwID : Win32cr::UI::Input::Touch::GESTURECONFIG_ID, @dwWant : UInt32, @dwBlock : UInt32)
+    end
+  end
 
   @[Extern]
   record IManipulationEvents_Vtbl,
@@ -100,7 +112,6 @@ module Win32cr::UI::Input::Touch
 
 
   @[Extern]
-  #@[Com("4f62c8da-9c53-4b22-93df-927a862bbb03")]
   record IManipulationEvents_, lpVtbl : IManipulationEvents_Vtbl* do
     GUID = LibC::GUID.new(0x4f62c8da_u32, 0x9c53_u16, 0x4b22_u16, StaticArray[0x93_u8, 0xdf_u8, 0x92_u8, 0x7a_u8, 0x86_u8, 0x2b_u8, 0xbb_u8, 0x3_u8])
     def query_interface(this : IManipulationEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -181,7 +192,6 @@ module Win32cr::UI::Input::Touch
 
 
   @[Extern]
-  #@[Com("18b00c6d-c5ee-41b1-90a9-9d4a929095ad")]
   record IInertiaProcessor, lpVtbl : IInertiaProcessorVtbl* do
     GUID = LibC::GUID.new(0x18b00c6d_u32, 0xc5ee_u16, 0x41b1_u16, StaticArray[0x90_u8, 0xa9_u8, 0x9d_u8, 0x4a_u8, 0x92_u8, 0x90_u8, 0x95_u8, 0xad_u8])
     def query_interface(this : IInertiaProcessor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -372,7 +382,6 @@ module Win32cr::UI::Input::Touch
 
 
   @[Extern]
-  #@[Com("a22ac519-8300-48a0-bef4-f1be8737dba4")]
   record IManipulationProcessor, lpVtbl : IManipulationProcessorVtbl* do
     GUID = LibC::GUID.new(0xa22ac519_u32, 0x8300_u16, 0x48a0_u16, StaticArray[0xbe_u8, 0xf4_u8, 0xf1_u8, 0xbe_u8, 0x87_u8, 0x37_u8, 0xdb_u8, 0xa4_u8])
     def query_interface(this : IManipulationProcessor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

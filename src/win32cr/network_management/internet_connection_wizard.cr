@@ -1,9 +1,9 @@
 require "./../foundation.cr"
 
 module Win32cr::NetworkManagement::InternetConnectionWizard
-  alias PFNCHECKCONNECTIONWIZARD = Proc(UInt32, UInt32*, UInt32)*
+  alias PFNCHECKCONNECTIONWIZARD = Proc(UInt32, UInt32*, UInt32)
 
-  alias PFNSETSHELLNEXT = Proc(Win32cr::Foundation::PSTR, UInt32)*
+  alias PFNSETSHELLNEXT = Proc(Win32cr::Foundation::PSTR, UInt32)
 
   ICW_REGPATHSETTINGS = "Software\\Microsoft\\Internet Connection Wizard"
   ICW_REGKEYCOMPLETED = "Completed"

@@ -1,39 +1,49 @@
 require "./../foundation.cr"
 
 module Win32cr::System::IO
-  alias LPOVERLAPPED_COMPLETION_ROUTINE = Proc(UInt32, UInt32, Win32cr::System::IO::OVERLAPPED*, Void)*
+  alias LPOVERLAPPED_COMPLETION_ROUTINE = Proc(UInt32, UInt32, Win32cr::System::IO::OVERLAPPED*, Void)
 
 
 
   @[Extern]
-  record OVERLAPPED,
-    internal : LibC::UIntPtrT,
-    internal_high : LibC::UIntPtrT,
-    anonymous : Anonymous_e__Union_,
-    hEvent : Win32cr::Foundation::HANDLE do
+  struct OVERLAPPED
+    property internal : LibC::UIntPtrT
+    property internal_high : LibC::UIntPtrT
+    property anonymous : Anonymous_e__Union_
+    property hEvent : Win32cr::Foundation::HANDLE
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      pointer : Void* do
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property pointer : Void*
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        offset : UInt32,
-        offset_high : UInt32
+      struct Anonymous_e__Struct_
+    property offset : UInt32
+    property offset_high : UInt32
+    def initialize(@offset : UInt32, @offset_high : UInt32)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @pointer : Void*)
+    end
     end
 
+    def initialize(@internal : LibC::UIntPtrT, @internal_high : LibC::UIntPtrT, @anonymous : Anonymous_e__Union_, @hEvent : Win32cr::Foundation::HANDLE)
+    end
   end
 
   @[Extern]
-  record OVERLAPPED_ENTRY,
-    lpCompletionKey : LibC::UIntPtrT,
-    lpOverlapped : Win32cr::System::IO::OVERLAPPED*,
-    internal : LibC::UIntPtrT,
-    dwNumberOfBytesTransferred : UInt32
+  struct OVERLAPPED_ENTRY
+    property lpCompletionKey : LibC::UIntPtrT
+    property lpOverlapped : Win32cr::System::IO::OVERLAPPED*
+    property internal : LibC::UIntPtrT
+    property dwNumberOfBytesTransferred : UInt32
+    def initialize(@lpCompletionKey : LibC::UIntPtrT, @lpOverlapped : Win32cr::System::IO::OVERLAPPED*, @internal : LibC::UIntPtrT, @dwNumberOfBytesTransferred : UInt32)
+    end
+  end
 
   @[Link("kernel32")]
   lib C

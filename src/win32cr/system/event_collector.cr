@@ -95,24 +95,29 @@ module Win32cr::System::EventCollector
   end
 
   @[Extern]
-  record EC_VARIANT,
-    anonymous : Anonymous_e__Union_,
-    count : UInt32,
-    type__ : UInt32 do
+  struct EC_VARIANT
+    property anonymous : Anonymous_e__Union_
+    property count : UInt32
+    property type__ : UInt32
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      boolean_val : Win32cr::Foundation::BOOL,
-      u_int32_val : UInt32,
-      date_time_val : UInt64,
-      string_val : Win32cr::Foundation::PWSTR,
-      binary_val : UInt8*,
-      boolean_arr : Win32cr::Foundation::BOOL*,
-      int32_arr : Int32*,
-      string_arr : Win32cr::Foundation::PWSTR*,
-      property_handle_val : LibC::IntPtrT
+    struct Anonymous_e__Union_
+    property boolean_val : Win32cr::Foundation::BOOL
+    property u_int32_val : UInt32
+    property date_time_val : UInt64
+    property string_val : Win32cr::Foundation::PWSTR
+    property binary_val : UInt8*
+    property boolean_arr : Win32cr::Foundation::BOOL*
+    property int32_arr : Int32*
+    property string_arr : Win32cr::Foundation::PWSTR*
+    property property_handle_val : LibC::IntPtrT
+    def initialize(@boolean_val : Win32cr::Foundation::BOOL, @u_int32_val : UInt32, @date_time_val : UInt64, @string_val : Win32cr::Foundation::PWSTR, @binary_val : UInt8*, @boolean_arr : Win32cr::Foundation::BOOL*, @int32_arr : Int32*, @string_arr : Win32cr::Foundation::PWSTR*, @property_handle_val : LibC::IntPtrT)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Union_, @count : UInt32, @type__ : UInt32)
+    end
   end
 
   @[Link("wecapi")]

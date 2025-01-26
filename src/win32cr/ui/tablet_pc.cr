@@ -10,7 +10,7 @@ module Win32cr::UI::TabletPC
   alias HRECOGNIZER = LibC::IntPtrT
   alias HRECOLATTICE = LibC::IntPtrT
   alias HRECOWORDLIST = LibC::IntPtrT
-  alias PfnRecoCallback = Proc(UInt32, UInt8*, Win32cr::UI::TabletPC::HRECOCONTEXT, Win32cr::Foundation::HRESULT)*
+  alias PfnRecoCallback = Proc(UInt32, UInt8*, Win32cr::UI::TabletPC::HRECOCONTEXT, Win32cr::Foundation::HRESULT)
 
   MICROSOFT_URL_EXPERIENCE_PROPERTY = "Microsoft TIP URL Experience"
   MICROSOFT_TIP_NO_INSERT_BUTTON_PROPERTY = "Microsoft TIP No Insert Option"
@@ -1457,175 +1457,253 @@ module Win32cr::UI::TabletPC
   end
 
   @[Extern]
-  record SYSTEM_EVENT_DATA,
-    bModifier : UInt8,
-    wKey : UInt16,
-    xPos : Int32,
-    yPos : Int32,
-    bCursorMode : UInt8,
-    dwButtonState : UInt32
+  struct SYSTEM_EVENT_DATA
+    property bModifier : UInt8
+    property wKey : UInt16
+    property xPos : Int32
+    property yPos : Int32
+    property bCursorMode : UInt8
+    property dwButtonState : UInt32
+    def initialize(@bModifier : UInt8, @wKey : UInt16, @xPos : Int32, @yPos : Int32, @bCursorMode : UInt8, @dwButtonState : UInt32)
+    end
+  end
 
   @[Extern]
-  record STROKE_RANGE,
-    iStrokeBegin : UInt32,
-    iStrokeEnd : UInt32
+  struct STROKE_RANGE
+    property iStrokeBegin : UInt32
+    property iStrokeEnd : UInt32
+    def initialize(@iStrokeBegin : UInt32, @iStrokeEnd : UInt32)
+    end
+  end
 
   @[Extern]
-  record PROPERTY_METRICS,
-    nLogicalMin : Int32,
-    nLogicalMax : Int32,
-    units : Win32cr::UI::TabletPC::PROPERTY_UNITS,
-    fResolution : Float32
+  struct PROPERTY_METRICS
+    property nLogicalMin : Int32
+    property nLogicalMax : Int32
+    property units : Win32cr::UI::TabletPC::PROPERTY_UNITS
+    property fResolution : Float32
+    def initialize(@nLogicalMin : Int32, @nLogicalMax : Int32, @units : Win32cr::UI::TabletPC::PROPERTY_UNITS, @fResolution : Float32)
+    end
+  end
 
   @[Extern]
-  record PACKET_PROPERTY,
-    guid : LibC::GUID,
-    property_metrics : Win32cr::UI::TabletPC::PROPERTY_METRICS
+  struct PACKET_PROPERTY
+    property guid : LibC::GUID
+    property property_metrics : Win32cr::UI::TabletPC::PROPERTY_METRICS
+    def initialize(@guid : LibC::GUID, @property_metrics : Win32cr::UI::TabletPC::PROPERTY_METRICS)
+    end
+  end
 
   @[Extern]
-  record PACKET_DESCRIPTION,
-    cbPacketSize : UInt32,
-    cPacketProperties : UInt32,
-    pPacketProperties : Win32cr::UI::TabletPC::PACKET_PROPERTY*,
-    cButtons : UInt32,
-    pguidButtons : LibC::GUID*
+  struct PACKET_DESCRIPTION
+    property cbPacketSize : UInt32
+    property cPacketProperties : UInt32
+    property pPacketProperties : Win32cr::UI::TabletPC::PACKET_PROPERTY*
+    property cButtons : UInt32
+    property pguidButtons : LibC::GUID*
+    def initialize(@cbPacketSize : UInt32, @cPacketProperties : UInt32, @pPacketProperties : Win32cr::UI::TabletPC::PACKET_PROPERTY*, @cButtons : UInt32, @pguidButtons : LibC::GUID*)
+    end
+  end
 
   @[Extern]
-  record INKMETRIC,
-    iHeight : Int32,
-    iFontAscent : Int32,
-    iFontDescent : Int32,
-    dwFlags : UInt32,
-    color : UInt32
+  struct INKMETRIC
+    property iHeight : Int32
+    property iFontAscent : Int32
+    property iFontDescent : Int32
+    property dwFlags : UInt32
+    property color : UInt32
+    def initialize(@iHeight : Int32, @iFontAscent : Int32, @iFontDescent : Int32, @dwFlags : UInt32, @color : UInt32)
+    end
+  end
 
   @[Extern]
-  record InkRecoGuide,
-    rectWritingBox : Win32cr::Foundation::RECT,
-    rectDrawnBox : Win32cr::Foundation::RECT,
-    cRows : Int32,
-    cColumns : Int32,
-    midline : Int32
+  struct InkRecoGuide
+    property rectWritingBox : Win32cr::Foundation::RECT
+    property rectDrawnBox : Win32cr::Foundation::RECT
+    property cRows : Int32
+    property cColumns : Int32
+    property midline : Int32
+    def initialize(@rectWritingBox : Win32cr::Foundation::RECT, @rectDrawnBox : Win32cr::Foundation::RECT, @cRows : Int32, @cColumns : Int32, @midline : Int32)
+    end
+  end
 
   @[Extern]
-  record FLICK_POINT,
-    _bitfield : Int32
+  struct FLICK_POINT
+    property _bitfield : Int32
+    def initialize(@_bitfield : Int32)
+    end
+  end
 
   @[Extern]
-  record FLICK_DATA,
-    _bitfield : Int32
+  struct FLICK_DATA
+    property _bitfield : Int32
+    def initialize(@_bitfield : Int32)
+    end
+  end
 
   @[Extern]
-  record IEC_STROKEINFO,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    cursor : Void*,
-    stroke : Void*
+  struct IEC_STROKEINFO
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property cursor : Void*
+    property stroke : Void*
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @cursor : Void*, @stroke : Void*)
+    end
+  end
 
   @[Extern]
-  record IEC_GESTUREINFO,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    cursor : Void*,
-    strokes : Void*,
-    gestures : Win32cr::System::Com::VARIANT
+  struct IEC_GESTUREINFO
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property cursor : Void*
+    property strokes : Void*
+    property gestures : Win32cr::System::Com::VARIANT
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @cursor : Void*, @strokes : Void*, @gestures : Win32cr::System::Com::VARIANT)
+    end
+  end
 
   @[Extern]
-  record IEC_RECOGNITIONRESULTINFO,
-    nmhdr : Win32cr::UI::Controls::NMHDR,
-    recognition_result : Void*
+  struct IEC_RECOGNITIONRESULTINFO
+    property nmhdr : Win32cr::UI::Controls::NMHDR
+    property recognition_result : Void*
+    def initialize(@nmhdr : Win32cr::UI::Controls::NMHDR, @recognition_result : Void*)
+    end
+  end
 
   @[Extern]
-  record StylusInfo,
-    tcid : UInt32,
-    cid : UInt32,
-    bIsInvertedCursor : Win32cr::Foundation::BOOL
+  struct StylusInfo
+    property tcid : UInt32
+    property cid : UInt32
+    property bIsInvertedCursor : Win32cr::Foundation::BOOL
+    def initialize(@tcid : UInt32, @cid : UInt32, @bIsInvertedCursor : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record GESTURE_DATA,
-    gestureId : Int32,
-    recoConfidence : Int32,
-    strokeCount : Int32
+  struct GESTURE_DATA
+    property gestureId : Int32
+    property recoConfidence : Int32
+    property strokeCount : Int32
+    def initialize(@gestureId : Int32, @recoConfidence : Int32, @strokeCount : Int32)
+    end
+  end
 
   @[Extern]
-  record DYNAMIC_RENDERER_CACHED_DATA,
-    strokeId : Int32,
-    dynamicRenderer : Void*
+  struct DYNAMIC_RENDERER_CACHED_DATA
+    property strokeId : Int32
+    property dynamicRenderer : Void*
+    def initialize(@strokeId : Int32, @dynamicRenderer : Void*)
+    end
+  end
 
   @[Extern]
-  record RECO_GUIDE,
-    xOrigin : Int32,
-    yOrigin : Int32,
-    cxBox : Int32,
-    cyBox : Int32,
-    cxBase : Int32,
-    cyBase : Int32,
-    cHorzBox : Int32,
-    cVertBox : Int32,
-    cyMid : Int32
+  struct RECO_GUIDE
+    property xOrigin : Int32
+    property yOrigin : Int32
+    property cxBox : Int32
+    property cyBox : Int32
+    property cxBase : Int32
+    property cyBase : Int32
+    property cHorzBox : Int32
+    property cVertBox : Int32
+    property cyMid : Int32
+    def initialize(@xOrigin : Int32, @yOrigin : Int32, @cxBox : Int32, @cyBox : Int32, @cxBase : Int32, @cyBase : Int32, @cHorzBox : Int32, @cVertBox : Int32, @cyMid : Int32)
+    end
+  end
 
   @[Extern]
-  record RECO_ATTRS,
-    dwRecoCapabilityFlags : UInt32,
-    awcVendorName : UInt16[32],
-    awcFriendlyName : UInt16[64],
-    awLanguageId : UInt16[64]
+  struct RECO_ATTRS
+    property dwRecoCapabilityFlags : UInt32
+    property awcVendorName : UInt16[32]
+    property awcFriendlyName : UInt16[64]
+    property awLanguageId : UInt16[64]
+    def initialize(@dwRecoCapabilityFlags : UInt32, @awcVendorName : UInt16[32], @awcFriendlyName : UInt16[64], @awLanguageId : UInt16[64])
+    end
+  end
 
   @[Extern]
-  record RECO_RANGE,
-    iwcBegin : UInt32,
-    cCount : UInt32
+  struct RECO_RANGE
+    property iwcBegin : UInt32
+    property cCount : UInt32
+    def initialize(@iwcBegin : UInt32, @cCount : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINE_SEGMENT,
-    pt_a : Win32cr::Foundation::POINT,
-    pt_b : Win32cr::Foundation::POINT
+  struct LINE_SEGMENT
+    property pt_a : Win32cr::Foundation::POINT
+    property pt_b : Win32cr::Foundation::POINT
+    def initialize(@pt_a : Win32cr::Foundation::POINT, @pt_b : Win32cr::Foundation::POINT)
+    end
+  end
 
   @[Extern]
-  record LATTICE_METRICS,
-    lsBaseline : Win32cr::UI::TabletPC::LINE_SEGMENT,
-    iMidlineOffset : Int16
+  struct LATTICE_METRICS
+    property lsBaseline : Win32cr::UI::TabletPC::LINE_SEGMENT
+    property iMidlineOffset : Int16
+    def initialize(@lsBaseline : Win32cr::UI::TabletPC::LINE_SEGMENT, @iMidlineOffset : Int16)
+    end
+  end
 
   @[Extern]
-  record RECO_LATTICE_PROPERTY,
-    guidProperty : LibC::GUID,
-    cbPropertyValue : UInt16,
-    pPropertyValue : UInt8*
+  struct RECO_LATTICE_PROPERTY
+    property guidProperty : LibC::GUID
+    property cbPropertyValue : UInt16
+    property pPropertyValue : UInt8*
+    def initialize(@guidProperty : LibC::GUID, @cbPropertyValue : UInt16, @pPropertyValue : UInt8*)
+    end
+  end
 
   @[Extern]
-  record RECO_LATTICE_PROPERTIES,
-    cProperties : UInt32,
-    apProps : Win32cr::UI::TabletPC::RECO_LATTICE_PROPERTY**
+  struct RECO_LATTICE_PROPERTIES
+    property cProperties : UInt32
+    property apProps : Win32cr::UI::TabletPC::RECO_LATTICE_PROPERTY**
+    def initialize(@cProperties : UInt32, @apProps : Win32cr::UI::TabletPC::RECO_LATTICE_PROPERTY**)
+    end
+  end
 
   @[Extern]
-  record RECO_LATTICE_ELEMENT,
-    score : Int32,
-    type__ : UInt16,
-    pData : UInt8*,
-    ulNextColumn : UInt32,
-    ulStrokeNumber : UInt32,
-    epProp : Win32cr::UI::TabletPC::RECO_LATTICE_PROPERTIES
+  struct RECO_LATTICE_ELEMENT
+    property score : Int32
+    property type__ : UInt16
+    property pData : UInt8*
+    property ulNextColumn : UInt32
+    property ulStrokeNumber : UInt32
+    property epProp : Win32cr::UI::TabletPC::RECO_LATTICE_PROPERTIES
+    def initialize(@score : Int32, @type__ : UInt16, @pData : UInt8*, @ulNextColumn : UInt32, @ulStrokeNumber : UInt32, @epProp : Win32cr::UI::TabletPC::RECO_LATTICE_PROPERTIES)
+    end
+  end
 
   @[Extern]
-  record RECO_LATTICE_COLUMN,
-    key : UInt32,
-    cpProp : Win32cr::UI::TabletPC::RECO_LATTICE_PROPERTIES,
-    cStrokes : UInt32,
-    pStrokes : UInt32*,
-    cLatticeElements : UInt32,
-    pLatticeElements : Win32cr::UI::TabletPC::RECO_LATTICE_ELEMENT*
+  struct RECO_LATTICE_COLUMN
+    property key : UInt32
+    property cpProp : Win32cr::UI::TabletPC::RECO_LATTICE_PROPERTIES
+    property cStrokes : UInt32
+    property pStrokes : UInt32*
+    property cLatticeElements : UInt32
+    property pLatticeElements : Win32cr::UI::TabletPC::RECO_LATTICE_ELEMENT*
+    def initialize(@key : UInt32, @cpProp : Win32cr::UI::TabletPC::RECO_LATTICE_PROPERTIES, @cStrokes : UInt32, @pStrokes : UInt32*, @cLatticeElements : UInt32, @pLatticeElements : Win32cr::UI::TabletPC::RECO_LATTICE_ELEMENT*)
+    end
+  end
 
   @[Extern]
-  record RECO_LATTICE,
-    ulColumnCount : UInt32,
-    pLatticeColumns : Win32cr::UI::TabletPC::RECO_LATTICE_COLUMN*,
-    ulPropertyCount : UInt32,
-    pGuidProperties : LibC::GUID*,
-    ulBestResultColumnCount : UInt32,
-    pulBestResultColumns : UInt32*,
-    pulBestResultIndexes : UInt32*
+  struct RECO_LATTICE
+    property ulColumnCount : UInt32
+    property pLatticeColumns : Win32cr::UI::TabletPC::RECO_LATTICE_COLUMN*
+    property ulPropertyCount : UInt32
+    property pGuidProperties : LibC::GUID*
+    property ulBestResultColumnCount : UInt32
+    property pulBestResultColumns : UInt32*
+    property pulBestResultIndexes : UInt32*
+    def initialize(@ulColumnCount : UInt32, @pLatticeColumns : Win32cr::UI::TabletPC::RECO_LATTICE_COLUMN*, @ulPropertyCount : UInt32, @pGuidProperties : LibC::GUID*, @ulBestResultColumnCount : UInt32, @pulBestResultColumns : UInt32*, @pulBestResultIndexes : UInt32*)
+    end
+  end
 
   @[Extern]
-  record CHARACTER_RANGE,
-    wcLow : UInt16,
-    cChars : UInt16
+  struct CHARACTER_RANGE
+    property wcLow : UInt16
+    property cChars : UInt16
+    def initialize(@wcLow : UInt16, @cChars : UInt16)
+    end
+  end
 
   @[Extern]
   record IInkRectangleVtbl,
@@ -1651,7 +1729,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("9794ff82-6071-4717-8a8b-6ac7c64a686e")]
   record IInkRectangle, lpVtbl : IInkRectangleVtbl* do
     GUID = LibC::GUID.new(0x9794ff82_u32, 0x6071_u16, 0x4717_u16, StaticArray[0x8a_u8, 0x8b_u8, 0x6a_u8, 0xc7_u8, 0xc6_u8, 0x4a_u8, 0x68_u8, 0x6e_u8])
     def query_interface(this : IInkRectangle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1729,7 +1806,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("db489209-b7c3-411d-90f6-1548cfff271e")]
   record IInkExtendedProperty, lpVtbl : IInkExtendedPropertyVtbl* do
     GUID = LibC::GUID.new(0xdb489209_u32, 0xb7c3_u16, 0x411d_u16, StaticArray[0x90_u8, 0xf6_u8, 0x15_u8, 0x48_u8, 0xcf_u8, 0xff_u8, 0x27_u8, 0x1e_u8])
     def query_interface(this : IInkExtendedProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1784,7 +1860,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("89f2a8be-95a9-4530-8b8f-88e971e3e25f")]
   record IInkExtendedProperties, lpVtbl : IInkExtendedPropertiesVtbl* do
     GUID = LibC::GUID.new(0x89f2a8be_u32, 0x95a9_u16, 0x4530_u16, StaticArray[0x8b_u8, 0x8f_u8, 0x88_u8, 0xe9_u8, 0x71_u8, 0xe3_u8, 0xe2_u8, 0x5f_u8])
     def query_interface(this : IInkExtendedProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1864,7 +1939,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("bf519b75-0a15-4623-adc9-c00d436a8092")]
   record IInkDrawingAttributes, lpVtbl : IInkDrawingAttributesVtbl* do
     GUID = LibC::GUID.new(0xbf519b75_u32, 0xa15_u16, 0x4623_u16, StaticArray[0xad_u8, 0xc9_u8, 0xc0_u8, 0xd_u8, 0x43_u8, 0x6a_u8, 0x80_u8, 0x92_u8])
     def query_interface(this : IInkDrawingAttributes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1985,7 +2059,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("615f1d43-8703-4565-88e2-8201d2ecd7b7")]
   record IInkTransform, lpVtbl : IInkTransformVtbl* do
     GUID = LibC::GUID.new(0x615f1d43_u32, 0x8703_u16, 0x4565_u16, StaticArray[0x88_u8, 0xe2_u8, 0x82_u8, 0x1_u8, 0xd2_u8, 0xec_u8, 0xd7_u8, 0xb7_u8])
     def query_interface(this : IInkTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2093,7 +2166,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("3bdc0a97-04e5-4e26-b813-18f052d41def")]
   record IInkGesture, lpVtbl : IInkGestureVtbl* do
     GUID = LibC::GUID.new(0x3bdc0a97_u32, 0x4e5_u16, 0x4e26_u16, StaticArray[0xb8_u8, 0x13_u8, 0x18_u8, 0xf0_u8, 0x52_u8, 0xd4_u8, 0x1d_u8, 0xef_u8])
     def query_interface(this : IInkGesture*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2148,7 +2220,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("ad30c630-40c5-4350-8405-9c71012fc558")]
   record IInkCursor, lpVtbl : IInkCursorVtbl* do
     GUID = LibC::GUID.new(0xad30c630_u32, 0x40c5_u16, 0x4350_u16, StaticArray[0x84_u8, 0x5_u8, 0x9c_u8, 0x71_u8, 0x1_u8, 0x2f_u8, 0xc5_u8, 0x58_u8])
     def query_interface(this : IInkCursor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2211,7 +2282,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("a248c1ac-c698-4e06-9e5c-d57f77c7e647")]
   record IInkCursors, lpVtbl : IInkCursorsVtbl* do
     GUID = LibC::GUID.new(0xa248c1ac_u32, 0xc698_u16, 0x4e06_u16, StaticArray[0x9e_u8, 0x5c_u8, 0xd5_u8, 0x7f_u8, 0x77_u8, 0xc7_u8, 0xe6_u8, 0x47_u8])
     def query_interface(this : IInkCursors*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2262,7 +2332,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("85ef9417-1d59-49b2-a13c-702c85430894")]
   record IInkCursorButton, lpVtbl : IInkCursorButtonVtbl* do
     GUID = LibC::GUID.new(0x85ef9417_u32, 0x1d59_u16, 0x49b2_u16, StaticArray[0xa1_u8, 0x3c_u8, 0x70_u8, 0x2c_u8, 0x85_u8, 0x43_u8, 0x8_u8, 0x94_u8])
     def query_interface(this : IInkCursorButton*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2313,7 +2382,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("3671cc40-b624-4671-9fa0-db119d952d54")]
   record IInkCursorButtons, lpVtbl : IInkCursorButtonsVtbl* do
     GUID = LibC::GUID.new(0x3671cc40_u32, 0xb624_u16, 0x4671_u16, StaticArray[0x9f_u8, 0xa0_u8, 0xdb_u8, 0x11_u8, 0x9d_u8, 0x95_u8, 0x2d_u8, 0x54_u8])
     def query_interface(this : IInkCursorButtons*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2367,7 +2435,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("2de25eaa-6ef8-42d5-aee9-185bc81b912d")]
   record IInkTablet, lpVtbl : IInkTabletVtbl* do
     GUID = LibC::GUID.new(0x2de25eaa_u32, 0x6ef8_u16, 0x42d5_u16, StaticArray[0xae_u8, 0xe9_u8, 0x18_u8, 0x5b_u8, 0xc8_u8, 0x1b_u8, 0x91_u8, 0x2d_u8])
     def query_interface(this : IInkTablet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2425,7 +2492,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("90c91ad2-fa36-49d6-9516-ce8d570f6f85")]
   record IInkTablet2, lpVtbl : IInkTablet2Vtbl* do
     GUID = LibC::GUID.new(0x90c91ad2_u32, 0xfa36_u16, 0x49d6_u16, StaticArray[0x95_u8, 0x16_u8, 0xce_u8, 0x8d_u8, 0x57_u8, 0xf_u8, 0x6f_u8, 0x85_u8])
     def query_interface(this : IInkTablet2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2469,7 +2535,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("7e313997-1327-41dd-8ca9-79f24be17250")]
   record IInkTablet3, lpVtbl : IInkTablet3Vtbl* do
     GUID = LibC::GUID.new(0x7e313997_u32, 0x1327_u16, 0x41dd_u16, StaticArray[0x8c_u8, 0xa9_u8, 0x79_u8, 0xf2_u8, 0x4b_u8, 0xe1_u8, 0x72_u8, 0x50_u8])
     def query_interface(this : IInkTablet3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2519,7 +2584,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("112086d9-7779-4535-a699-862b43ac1863")]
   record IInkTablets, lpVtbl : IInkTabletsVtbl* do
     GUID = LibC::GUID.new(0x112086d9_u32, 0x7779_u16, 0x4535_u16, StaticArray[0xa6_u8, 0x99_u8, 0x86_u8, 0x2b_u8, 0x43_u8, 0xac_u8, 0x18_u8, 0x63_u8])
     def query_interface(this : IInkTablets*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2606,7 +2670,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("43242fea-91d1-4a72-963e-fbb91829cfa2")]
   record IInkStrokeDisp, lpVtbl : IInkStrokeDispVtbl* do
     GUID = LibC::GUID.new(0x43242fea_u32, 0x91d1_u16, 0x4a72_u16, StaticArray[0x96_u8, 0x3e_u8, 0xfb_u8, 0xb9_u8, 0x18_u8, 0x29_u8, 0xcf_u8, 0xa2_u8])
     def query_interface(this : IInkStrokeDisp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2764,7 +2827,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("f1f4c9d8-590a-4963-b3ae-1935671bb6f3")]
   record IInkStrokes, lpVtbl : IInkStrokesVtbl* do
     GUID = LibC::GUID.new(0xf1f4c9d8_u32, 0x590a_u16, 0x4963_u16, StaticArray[0xb3_u8, 0xae_u8, 0x19_u8, 0x35_u8, 0x67_u8, 0x1b_u8, 0xb6_u8, 0xf3_u8])
     def query_interface(this : IInkStrokes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2869,7 +2931,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("7e23a88f-c30e-420f-9bdb-28902543f0c1")]
   record IInkCustomStrokes, lpVtbl : IInkCustomStrokesVtbl* do
     GUID = LibC::GUID.new(0x7e23a88f_u32, 0xc30e_u16, 0x420f_u16, StaticArray[0x9b_u8, 0xdb_u8, 0x28_u8, 0x90_u8, 0x25_u8, 0x43_u8, 0xf0_u8, 0xc1_u8])
     def query_interface(this : IInkCustomStrokes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2926,7 +2987,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("f33053ec-5d25-430a-928f-76a6491dde15")]
   record IInkStrokesEvents_, lpVtbl : IInkStrokesEvents_Vtbl* do
     GUID = LibC::GUID.new(0xf33053ec_u32, 0x5d25_u16, 0x430a_u16, StaticArray[0x92_u8, 0x8f_u8, 0x76_u8, 0xa6_u8, 0x49_u8, 0x1d_u8, 0xde_u8, 0x15_u8])
     def query_interface(this : IInkStrokesEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2990,7 +3050,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("9d398fa0-c4e2-4fcd-9973-975caaf47ea6")]
   record IInkDisp, lpVtbl : IInkDispVtbl* do
     GUID = LibC::GUID.new(0x9d398fa0_u32, 0xc4e2_u16, 0x4fcd_u16, StaticArray[0x99_u8, 0x73_u8, 0x97_u8, 0x5c_u8, 0xaa_u8, 0xf4_u8, 0x7e_u8, 0xa6_u8])
     def query_interface(this : IInkDisp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3104,7 +3163,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("427b1865-ca3f-479a-83a9-0f420f2a0073")]
   record IInkEvents_, lpVtbl : IInkEvents_Vtbl* do
     GUID = LibC::GUID.new(0x427b1865_u32, 0xca3f_u16, 0x479a_u16, StaticArray[0x83_u8, 0xa9_u8, 0xf_u8, 0x42_u8, 0xf_u8, 0x2a_u8, 0x0_u8, 0x73_u8])
     def query_interface(this : IInkEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3158,7 +3216,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("e6257a9c-b511-4f4c-a8b0-a7dbc9506b83")]
   record IInkRenderer, lpVtbl : IInkRendererVtbl* do
     GUID = LibC::GUID.new(0xe6257a9c_u32, 0xb511_u16, 0x4f4c_u16, StaticArray[0xa8_u8, 0xb0_u8, 0xa7_u8, 0xdb_u8, 0xc9_u8, 0x50_u8, 0x6b_u8, 0x83_u8])
     def query_interface(this : IInkRenderer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3282,7 +3339,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("f0f060b5-8b1f-4a7c-89ec-880692588a4f")]
   record IInkCollector, lpVtbl : IInkCollectorVtbl* do
     GUID = LibC::GUID.new(0xf0f060b5_u32, 0x8b1f_u16, 0x4a7c_u16, StaticArray[0x89_u8, 0xec_u8, 0x88_u8, 0x6_u8, 0x92_u8, 0x58_u8, 0x8a_u8, 0x4f_u8])
     def query_interface(this : IInkCollector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3441,7 +3497,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("11a583f2-712d-4fea-abcf-ab4af38ea06b")]
   record IInkCollectorEvents_, lpVtbl : IInkCollectorEvents_Vtbl* do
     GUID = LibC::GUID.new(0x11a583f2_u32, 0x712d_u16, 0x4fea_u16, StaticArray[0xab_u8, 0xcf_u8, 0xab_u8, 0x4a_u8, 0xf3_u8, 0x8e_u8, 0xa0_u8, 0x6b_u8])
     def query_interface(this : IInkCollectorEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3534,7 +3589,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("b82a463b-c1c5-45a3-997c-deab5651b67a")]
   record IInkOverlay, lpVtbl : IInkOverlayVtbl* do
     GUID = LibC::GUID.new(0xb82a463b_u32, 0xc1c5_u16, 0x45a3_u16, StaticArray[0x99_u8, 0x7c_u8, 0xde_u8, 0xab_u8, 0x56_u8, 0x51_u8, 0xb6_u8, 0x7a_u8])
     def query_interface(this : IInkOverlay*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3735,7 +3789,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("31179b69-e563-489e-b16f-712f1e8a0651")]
   record IInkOverlayEvents_, lpVtbl : IInkOverlayEvents_Vtbl* do
     GUID = LibC::GUID.new(0x31179b69_u32, 0xe563_u16, 0x489e_u16, StaticArray[0xb1_u8, 0x6f_u8, 0x71_u8, 0x2f_u8, 0x1e_u8, 0x8a_u8, 0x6_u8, 0x51_u8])
     def query_interface(this : IInkOverlayEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3833,7 +3886,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("e85662e0-379a-40d7-9b5c-757d233f9923")]
   record IInkPicture, lpVtbl : IInkPictureVtbl* do
     GUID = LibC::GUID.new(0xe85662e0_u32, 0x379a_u16, 0x40d7_u16, StaticArray[0x9b_u8, 0x5c_u8, 0x75_u8, 0x7d_u8, 0x23_u8, 0x3f_u8, 0x99_u8, 0x23_u8])
     def query_interface(this : IInkPicture*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4049,7 +4101,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("60ff4fee-22ff-4484-acc1-d308d9cd7ea3")]
   record IInkPictureEvents_, lpVtbl : IInkPictureEvents_Vtbl* do
     GUID = LibC::GUID.new(0x60ff4fee_u32, 0x22ff_u16, 0x4484_u16, StaticArray[0xac_u8, 0xc1_u8, 0xd3_u8, 0x8_u8, 0xd9_u8, 0xcd_u8, 0x7e_u8, 0xa3_u8])
     def query_interface(this : IInkPictureEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4095,7 +4146,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("782bf7cf-034b-4396-8a32-3a1833cf6b56")]
   record IInkRecognizer, lpVtbl : IInkRecognizerVtbl* do
     GUID = LibC::GUID.new(0x782bf7cf_u32, 0x34b_u16, 0x4396_u16, StaticArray[0x8a_u8, 0x32_u8, 0x3a_u8, 0x18_u8, 0x33_u8, 0xcf_u8, 0x6b_u8, 0x56_u8])
     def query_interface(this : IInkRecognizer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4157,7 +4207,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("6110118a-3a75-4ad6-b2aa-04b2b72bbe65")]
   record IInkRecognizer2, lpVtbl : IInkRecognizer2Vtbl* do
     GUID = LibC::GUID.new(0x6110118a_u32, 0x3a75_u16, 0x4ad6_u16, StaticArray[0xb2_u8, 0xaa_u8, 0x4_u8, 0xb2_u8, 0xb7_u8, 0x2b_u8, 0xbe_u8, 0x65_u8])
     def query_interface(this : IInkRecognizer2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4206,7 +4255,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("9ccc4f12-b0b7-4a8b-bf58-4aeca4e8cefd")]
   record IInkRecognizers, lpVtbl : IInkRecognizersVtbl* do
     GUID = LibC::GUID.new(0x9ccc4f12_u32, 0xb0b7_u16, 0x4a8b_u16, StaticArray[0xbf_u8, 0x58_u8, 0x4a_u8, 0xec_u8, 0xa4_u8, 0xe8_u8, 0xce_u8, 0xfd_u8])
     def query_interface(this : IInkRecognizers*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4257,7 +4305,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("17bce92f-2e21-47fd-9d33-3c6afbfd8c59")]
   record IInkRecognitionEvents_, lpVtbl : IInkRecognitionEvents_Vtbl* do
     GUID = LibC::GUID.new(0x17bce92f_u32, 0x2e21_u16, 0x47fd_u16, StaticArray[0x9d_u8, 0x33_u8, 0x3c_u8, 0x6a_u8, 0xfb_u8, 0xfd_u8, 0x8c_u8, 0x59_u8])
     def query_interface(this : IInkRecognitionEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4320,7 +4367,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("c68f52f9-32a3-4625-906c-44fc23b40958")]
   record IInkRecognizerContext, lpVtbl : IInkRecognizerContextVtbl* do
     GUID = LibC::GUID.new(0xc68f52f9_u32, 0x32a3_u16, 0x4625_u16, StaticArray[0x90_u8, 0x6c_u8, 0x44_u8, 0xfc_u8, 0x23_u8, 0xb4_u8, 0x9_u8, 0x58_u8])
     def query_interface(this : IInkRecognizerContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4433,7 +4479,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("d6f0e32f-73d8-408e-8e9f-5fea592c363f")]
   record IInkRecognizerContext2, lpVtbl : IInkRecognizerContext2Vtbl* do
     GUID = LibC::GUID.new(0xd6f0e32f_u32, 0x73d8_u16, 0x408e_u16, StaticArray[0x8e_u8, 0x9f_u8, 0x5f_u8, 0xea_u8, 0x59_u8, 0x2c_u8, 0x36_u8, 0x3f_u8])
     def query_interface(this : IInkRecognizerContext2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4485,7 +4530,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("3bc129a8-86cd-45ad-bde8-e0d32d61c16d")]
   record IInkRecognitionResult, lpVtbl : IInkRecognitionResultVtbl* do
     GUID = LibC::GUID.new(0x3bc129a8_u32, 0x86cd_u16, 0x45ad_u16, StaticArray[0xbd_u8, 0xe8_u8, 0xe0_u8, 0xd3_u8, 0x2d_u8, 0x61_u8, 0xc1_u8, 0x6d_u8])
     def query_interface(this : IInkRecognitionResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4560,7 +4604,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("b7e660ad-77e4-429b-adda-873780d1fc4a")]
   record IInkRecognitionAlternate, lpVtbl : IInkRecognitionAlternateVtbl* do
     GUID = LibC::GUID.new(0xb7e660ad_u32, 0x77e4_u16, 0x429b_u16, StaticArray[0xad_u8, 0xda_u8, 0x87_u8, 0x37_u8, 0x80_u8, 0xd1_u8, 0xfc_u8, 0x4a_u8])
     def query_interface(this : IInkRecognitionAlternate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4648,7 +4691,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("286a167f-9f19-4c61-9d53-4f07be622b84")]
   record IInkRecognitionAlternates, lpVtbl : IInkRecognitionAlternatesVtbl* do
     GUID = LibC::GUID.new(0x286a167f_u32, 0x9f19_u16, 0x4c61_u16, StaticArray[0x9d_u8, 0x53_u8, 0x4f_u8, 0x7_u8, 0xbe_u8, 0x62_u8, 0x2b_u8, 0x84_u8])
     def query_interface(this : IInkRecognitionAlternates*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4711,7 +4753,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("d934be07-7b84-4208-9136-83c20994e905")]
   record IInkRecognizerGuide, lpVtbl : IInkRecognizerGuideVtbl* do
     GUID = LibC::GUID.new(0xd934be07_u32, 0x7b84_u16, 0x4208_u16, StaticArray[0x91_u8, 0x36_u8, 0x83_u8, 0xc2_u8, 0x9_u8, 0x94_u8, 0xe9_u8, 0x5_u8])
     def query_interface(this : IInkRecognizerGuide*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4789,7 +4830,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("76ba3491-cb2f-406b-9961-0e0c4cdaaef2")]
   record IInkWordList, lpVtbl : IInkWordListVtbl* do
     GUID = LibC::GUID.new(0x76ba3491_u32, 0xcb2f_u16, 0x406b_u16, StaticArray[0x99_u8, 0x61_u8, 0xe_u8, 0xc_u8, 0x4c_u8, 0xda_u8, 0xae_u8, 0xf2_u8])
     def query_interface(this : IInkWordList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4838,7 +4878,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("14542586-11bf-4f5f-b6e7-49d0744aab6e")]
   record IInkWordList2, lpVtbl : IInkWordList2Vtbl* do
     GUID = LibC::GUID.new(0x14542586_u32, 0x11bf_u16, 0x4f5f_u16, StaticArray[0xb6_u8, 0xe7_u8, 0x49_u8, 0xd0_u8, 0x74_u8, 0x4a_u8, 0xab_u8, 0x6e_u8])
     def query_interface(this : IInkWordList2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4880,7 +4919,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("03f8e511-43a1-11d3-8bb6-0080c7d6bad5")]
   record IInk, lpVtbl : IInkVtbl* do
     GUID = LibC::GUID.new(0x3f8e511_u32, 0x43a1_u16, 0x11d3_u16, StaticArray[0x8b_u8, 0xb6_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd6_u8, 0xba_u8, 0xd5_u8])
     def query_interface(this : IInk*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4921,7 +4959,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("9c1c5ad6-f22f-4de4-b453-a2cc482e7c33")]
   record IInkLineInfo, lpVtbl : IInkLineInfoVtbl* do
     GUID = LibC::GUID.new(0x9c1c5ad6_u32, 0xf22f_u16, 0x4de4_u16, StaticArray[0xb4_u8, 0x53_u8, 0xa2_u8, 0xcc_u8, 0x48_u8, 0x2e_u8, 0x7c_u8, 0x33_u8])
     def query_interface(this : IInkLineInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4966,7 +5003,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("b4563688-98eb-4646-b279-44da14d45748")]
   record ISketchInk, lpVtbl : ISketchInkVtbl* do
     GUID = LibC::GUID.new(0xb4563688_u32, 0x98eb_u16, 0x4646_u16, StaticArray[0xb2_u8, 0x79_u8, 0x44_u8, 0xda_u8, 0x14_u8, 0xd4_u8, 0x57_u8, 0x48_u8])
     def query_interface(this : ISketchInk*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5012,7 +5048,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("5de00405-f9a4-4651-b0c5-c317defd58b9")]
   record IInkDivider, lpVtbl : IInkDividerVtbl* do
     GUID = LibC::GUID.new(0x5de00405_u32, 0xf9a4_u16, 0x4651_u16, StaticArray[0xb0_u8, 0xc5_u8, 0xc3_u8, 0x17_u8, 0xde_u8, 0xfd_u8, 0x58_u8, 0xb9_u8])
     def query_interface(this : IInkDivider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5074,7 +5109,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("2dbec0a7-74c7-4b38-81eb-aa8ef0c24900")]
   record IInkDivisionResult, lpVtbl : IInkDivisionResultVtbl* do
     GUID = LibC::GUID.new(0x2dbec0a7_u32, 0x74c7_u16, 0x4b38_u16, StaticArray[0x81_u8, 0xeb_u8, 0xaa_u8, 0x8e_u8, 0xf0_u8, 0xc2_u8, 0x49_u8, 0x0_u8])
     def query_interface(this : IInkDivisionResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5123,7 +5157,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("85aee342-48b0-4244-9dd5-1ed435410fab")]
   record IInkDivisionUnit, lpVtbl : IInkDivisionUnitVtbl* do
     GUID = LibC::GUID.new(0x85aee342_u32, 0x48b0_u16, 0x4244_u16, StaticArray[0x9d_u8, 0xd5_u8, 0x1e_u8, 0xd4_u8, 0x35_u8, 0x41_u8, 0xf_u8, 0xab_u8])
     def query_interface(this : IInkDivisionUnit*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5177,7 +5210,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("1bb5ddc2-31cc-4135-ab82-2c66c9f00c41")]
   record IInkDivisionUnits, lpVtbl : IInkDivisionUnitsVtbl* do
     GUID = LibC::GUID.new(0x1bb5ddc2_u32, 0x31cc_u16, 0x4135_u16, StaticArray[0xab_u8, 0x82_u8, 0x2c_u8, 0x66_u8, 0xc9_u8, 0xf0_u8, 0xc_u8, 0x41_u8])
     def query_interface(this : IInkDivisionUnits*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5250,7 +5282,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("fa7a4083-5747-4040-a182-0b0e9fd4fac7")]
   record IPenInputPanel, lpVtbl : IPenInputPanelVtbl* do
     GUID = LibC::GUID.new(0xfa7a4083_u32, 0x5747_u16, 0x4040_u16, StaticArray[0xa1_u8, 0x82_u8, 0xb_u8, 0xe_u8, 0x9f_u8, 0xd4_u8, 0xfa_u8, 0xc7_u8])
     def query_interface(this : IPenInputPanel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5364,7 +5395,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("b7e489da-3719-439f-848f-e7acbd820f17")]
   record IPenInputPanelEvents_, lpVtbl : IPenInputPanelEvents_Vtbl* do
     GUID = LibC::GUID.new(0xb7e489da_u32, 0x3719_u16, 0x439f_u16, StaticArray[0x84_u8, 0x8f_u8, 0xe7_u8, 0xac_u8, 0xbd_u8, 0x82_u8, 0xf_u8, 0x17_u8])
     def query_interface(this : IPenInputPanelEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5401,7 +5431,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("56fdea97-ecd6-43e7-aa3a-816be7785860")]
   record IHandwrittenTextInsertion, lpVtbl : IHandwrittenTextInsertionVtbl* do
     GUID = LibC::GUID.new(0x56fdea97_u32, 0xecd6_u16, 0x43e7_u16, StaticArray[0xaa_u8, 0x3a_u8, 0x81_u8, 0x6b_u8, 0xe7_u8, 0x78_u8, 0x58_u8, 0x60_u8])
     def query_interface(this : IHandwrittenTextInsertion*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5442,7 +5471,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("27560408-8e64-4fe1-804e-421201584b31")]
   record ITextInputPanelEventSink, lpVtbl : ITextInputPanelEventSinkVtbl* do
     GUID = LibC::GUID.new(0x27560408_u32, 0x8e64_u16, 0x4fe1_u16, StaticArray[0x80_u8, 0x4e_u8, 0x42_u8, 0x12_u8, 0x1_u8, 0x58_u8, 0x4b_u8, 0x31_u8])
     def query_interface(this : ITextInputPanelEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5526,7 +5554,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("6b6a65a5-6af3-46c2-b6ea-56cd1f80df71")]
   record ITextInputPanel, lpVtbl : ITextInputPanelVtbl* do
     GUID = LibC::GUID.new(0x6b6a65a5_u32, 0x6af3_u16, 0x46c2_u16, StaticArray[0xb6_u8, 0xea_u8, 0x56_u8, 0xcd_u8, 0x1f_u8, 0x80_u8, 0xdf_u8, 0x71_u8])
     def query_interface(this : ITextInputPanel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5628,7 +5655,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("4af81847-fdc4-4fc3-ad0b-422479c1b935")]
   record IInputPanelWindowHandle, lpVtbl : IInputPanelWindowHandleVtbl* do
     GUID = LibC::GUID.new(0x4af81847_u32, 0xfdc4_u16, 0x4fc3_u16, StaticArray[0xad_u8, 0xb_u8, 0x42_u8, 0x24_u8, 0x79_u8, 0xc1_u8, 0xb9_u8, 0x35_u8])
     def query_interface(this : IInputPanelWindowHandle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5664,7 +5690,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("9f424568-1920-48cc-9811-a993cbf5adba")]
   record ITextInputPanelRunInfo, lpVtbl : ITextInputPanelRunInfoVtbl* do
     GUID = LibC::GUID.new(0x9f424568_u32, 0x1920_u16, 0x48cc_u16, StaticArray[0x98_u8, 0x11_u8, 0xa9_u8, 0x93_u8, 0xcb_u8, 0xf5_u8, 0xad_u8, 0xba_u8])
     def query_interface(this : ITextInputPanelRunInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5771,7 +5796,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("f2127a19-fbfb-4aed-8464-3f36d78cfefb")]
   record IInkEdit, lpVtbl : IInkEditVtbl* do
     GUID = LibC::GUID.new(0xf2127a19_u32, 0xfbfb_u16, 0x4aed_u16, StaticArray[0x84_u8, 0x64_u8, 0x3f_u8, 0x36_u8, 0xd7_u8, 0x8c_u8, 0xfe_u8, 0xfb_u8])
     def query_interface(this : IInkEdit*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6041,7 +6065,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("e3b0b797-a72e-46db-a0d7-6c9eba8e9bbc")]
   record IInkEditEvents_, lpVtbl : IInkEditEvents_Vtbl* do
     GUID = LibC::GUID.new(0xe3b0b797_u32, 0xa72e_u16, 0x46db_u16, StaticArray[0xa0_u8, 0xd7_u8, 0x6c_u8, 0x9e_u8, 0xba_u8, 0x8e_u8, 0x9b_u8, 0xbc_u8])
     def query_interface(this : IInkEditEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6097,7 +6120,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("eba615aa-fac6-4738-ba5f-ff09e9fe473e")]
   record IMathInputControl, lpVtbl : IMathInputControlVtbl* do
     GUID = LibC::GUID.new(0xeba615aa_u32, 0xfac6_u16, 0x4738_u16, StaticArray[0xba_u8, 0x5f_u8, 0xff_u8, 0x9_u8, 0xe9_u8, 0xfe_u8, 0x47_u8, 0x3e_u8])
     def query_interface(this : IMathInputControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6187,7 +6209,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("683336b5-a47d-4358-96f9-875a472ae70a")]
   record IMathInputControlEvents_, lpVtbl : IMathInputControlEvents_Vtbl* do
     GUID = LibC::GUID.new(0x683336b5_u32, 0xa47d_u16, 0x4358_u16, StaticArray[0x96_u8, 0xf9_u8, 0x87_u8, 0x5a_u8, 0x47_u8, 0x2a_u8, 0xe7_u8, 0xa_u8])
     def query_interface(this : IMathInputControlEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6253,7 +6274,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("a8bb5d22-3144-4a7b-93cd-f34a16be513a")]
   record IRealTimeStylus, lpVtbl : IRealTimeStylusVtbl* do
     GUID = LibC::GUID.new(0xa8bb5d22_u32, 0x3144_u16, 0x4a7b_u16, StaticArray[0x93_u8, 0xcd_u8, 0xf3_u8, 0x4a_u8, 0x16_u8, 0xbe_u8, 0x51_u8, 0x3a_u8])
     def query_interface(this : IRealTimeStylus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6371,7 +6391,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("b5f2a6cd-3179-4a3e-b9c4-bb5865962be2")]
   record IRealTimeStylus2, lpVtbl : IRealTimeStylus2Vtbl* do
     GUID = LibC::GUID.new(0xb5f2a6cd_u32, 0x3179_u16, 0x4a3e_u16, StaticArray[0xb9_u8, 0xc4_u8, 0xbb_u8, 0x58_u8, 0x65_u8, 0x96_u8, 0x2b_u8, 0xe2_u8])
     def query_interface(this : IRealTimeStylus2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6402,7 +6421,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("d70230a3-6986-4051-b57a-1cf69f4d9db5")]
   record IRealTimeStylus3, lpVtbl : IRealTimeStylus3Vtbl* do
     GUID = LibC::GUID.new(0xd70230a3_u32, 0x6986_u16, 0x4051_u16, StaticArray[0xb5_u8, 0x7a_u8, 0x1c_u8, 0xf6_u8, 0x9f_u8, 0x4d_u8, 0x9d_u8, 0xb5_u8])
     def query_interface(this : IRealTimeStylus3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6433,7 +6451,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("aa87eab8-ab4a-4cea-b5cb-46d84c6a2509")]
   record IRealTimeStylusSynchronization, lpVtbl : IRealTimeStylusSynchronizationVtbl* do
     GUID = LibC::GUID.new(0xaa87eab8_u32, 0xab4a_u16, 0x4cea_u16, StaticArray[0xb5_u8, 0xcb_u8, 0x46_u8, 0xd8_u8, 0x4c_u8, 0x6a_u8, 0x25_u8, 0x9_u8])
     def query_interface(this : IRealTimeStylusSynchronization*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6468,7 +6485,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("a5fd4e2d-c44b-4092-9177-260905eb672b")]
   record IStrokeBuilder, lpVtbl : IStrokeBuilderVtbl* do
     GUID = LibC::GUID.new(0xa5fd4e2d_u32, 0xc44b_u16, 0x4092_u16, StaticArray[0x91_u8, 0x77_u8, 0x26_u8, 0x9_u8, 0x5_u8, 0xeb_u8, 0x67_u8, 0x2b_u8])
     def query_interface(this : IStrokeBuilder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6526,7 +6542,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("a81436d8-4757-4fd1-a185-133f97c6c545")]
   record IStylusPlugin, lpVtbl : IStylusPluginVtbl* do
     GUID = LibC::GUID.new(0xa81436d8_u32, 0x4757_u16, 0x4fd1_u16, StaticArray[0xa1_u8, 0x85_u8, 0x13_u8, 0x3f_u8, 0x97_u8, 0xc6_u8, 0xc5_u8, 0x45_u8])
     def query_interface(this : IStylusPlugin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6617,7 +6632,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("a157b174-482f-4d71-a3f6-3a41ddd11be9")]
   record IStylusSyncPlugin, lpVtbl : IStylusSyncPluginVtbl* do
     GUID = LibC::GUID.new(0xa157b174_u32, 0x482f_u16, 0x4d71_u16, StaticArray[0xa3_u8, 0xf6_u8, 0x3a_u8, 0x41_u8, 0xdd_u8, 0xd1_u8, 0x1b_u8, 0xe9_u8])
     def query_interface(this : IStylusSyncPlugin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6708,7 +6722,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("a7cca85a-31bc-4cd2-aadc-3289a3af11c8")]
   record IStylusAsyncPlugin, lpVtbl : IStylusAsyncPluginVtbl* do
     GUID = LibC::GUID.new(0xa7cca85a_u32, 0x31bc_u16, 0x4cd2_u16, StaticArray[0xaa_u8, 0xdc_u8, 0x32_u8, 0x89_u8, 0xa3_u8, 0xaf_u8, 0x11_u8, 0xc8_u8])
     def query_interface(this : IStylusAsyncPlugin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6797,7 +6810,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("a079468e-7165-46f9-b7af-98ad01a93009")]
   record IDynamicRenderer, lpVtbl : IDynamicRendererVtbl* do
     GUID = LibC::GUID.new(0xa079468e_u32, 0x7165_u16, 0x46f9_u16, StaticArray[0xb7_u8, 0xaf_u8, 0x98_u8, 0xad_u8, 0x1_u8, 0xa9_u8, 0x30_u8, 0x9_u8])
     def query_interface(this : IDynamicRenderer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6871,7 +6883,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("ae9ef86b-7054-45e3-ae22-3174dc8811b7")]
   record IGestureRecognizer, lpVtbl : IGestureRecognizerVtbl* do
     GUID = LibC::GUID.new(0xae9ef86b_u32, 0x7054_u16, 0x45e3_u16, StaticArray[0xae_u8, 0x22_u8, 0x31_u8, 0x74_u8, 0xdc_u8, 0x88_u8, 0x11_u8, 0xb7_u8])
     def query_interface(this : IGestureRecognizer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6914,7 +6925,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("7c6cf46d-8404-46b9-ad33-f5b6036d4007")]
   record ITipAutoCompleteProvider, lpVtbl : ITipAutoCompleteProviderVtbl* do
     GUID = LibC::GUID.new(0x7c6cf46d_u32, 0x8404_u16, 0x46b9_u16, StaticArray[0xad_u8, 0x33_u8, 0xf5_u8, 0xb6_u8, 0x3_u8, 0x6d_u8, 0x40_u8, 0x7_u8])
     def query_interface(this : ITipAutoCompleteProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6948,7 +6958,6 @@ module Win32cr::UI::TabletPC
 
 
   @[Extern]
-  #@[Com("5e078e03-8265-4bbe-9487-d242edbef910")]
   record ITipAutoCompleteClient, lpVtbl : ITipAutoCompleteClientVtbl* do
     GUID = LibC::GUID.new(0x5e078e03_u32, 0x8265_u16, 0x4bbe_u16, StaticArray[0x94_u8, 0x87_u8, 0xd2_u8, 0x42_u8, 0xed_u8, 0xbe_u8, 0xf9_u8, 0x10_u8])
     def query_interface(this : ITipAutoCompleteClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

@@ -4,7 +4,7 @@ require "./../system/com.cr"
 require "./../data/xml/ms_xml.cr"
 
 module Win32cr::Security::ExtensibleAuthenticationProtocol
-  alias NotificationHandler = Proc(LibC::GUID, Void*, Void)*
+  alias NotificationHandler = Proc(LibC::GUID, Void*, Void)
 
   FACILITY_EAP_MESSAGE = 2114_u32
   EAP_GROUP_MASK = 65280_i32
@@ -593,357 +593,486 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
   end
 
   @[Extern]
-  record NgcTicketContext,
-    wszTicket : UInt16[45],
-    hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE,
-    hImpersonateToken : Win32cr::Foundation::HANDLE
+  struct NgcTicketContext
+    property wszTicket : UInt16[45]
+    property hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE
+    property hImpersonateToken : Win32cr::Foundation::HANDLE
+    def initialize(@wszTicket : UInt16[45], @hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, @hImpersonateToken : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record RAS_AUTH_ATTRIBUTE,
-    raaType : Win32cr::Security::ExtensibleAuthenticationProtocol::RAS_AUTH_ATTRIBUTE_TYPE,
-    dwLength : UInt32,
-    value : Void*
+  struct RAS_AUTH_ATTRIBUTE
+    property raaType : Win32cr::Security::ExtensibleAuthenticationProtocol::RAS_AUTH_ATTRIBUTE_TYPE
+    property dwLength : UInt32
+    property value : Void*
+    def initialize(@raaType : Win32cr::Security::ExtensibleAuthenticationProtocol::RAS_AUTH_ATTRIBUTE_TYPE, @dwLength : UInt32, @value : Void*)
+    end
+  end
 
   @[Extern]
-  record PPP_EAP_PACKET,
-    code : UInt8,
-    id : UInt8,
-    length : UInt8[2],
-    data : UInt8*
+  struct PPP_EAP_PACKET
+    property code : UInt8
+    property id : UInt8
+    property length : UInt8[2]
+    property data : UInt8*
+    def initialize(@code : UInt8, @id : UInt8, @length : UInt8[2], @data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record PPP_EAP_INPUT,
-    dwSizeInBytes : UInt32,
-    fFlags : UInt32,
-    fAuthenticator : Win32cr::Foundation::BOOL,
-    pwszIdentity : Win32cr::Foundation::PWSTR,
-    pwszPassword : Win32cr::Foundation::PWSTR,
-    bInitialId : UInt8,
-    pUserAttributes : Win32cr::Security::ExtensibleAuthenticationProtocol::RAS_AUTH_ATTRIBUTE*,
-    fAuthenticationComplete : Win32cr::Foundation::BOOL,
-    dwAuthResultCode : UInt32,
-    hTokenImpersonateUser : Win32cr::Foundation::HANDLE,
-    fSuccessPacketReceived : Win32cr::Foundation::BOOL,
-    fDataReceivedFromInteractiveUI : Win32cr::Foundation::BOOL,
-    pDataFromInteractiveUI : UInt8*,
-    dwSizeOfDataFromInteractiveUI : UInt32,
-    pConnectionData : UInt8*,
-    dwSizeOfConnectionData : UInt32,
-    pUserData : UInt8*,
-    dwSizeOfUserData : UInt32,
-    hReserved : Win32cr::Foundation::HANDLE,
-    guidConnectionId : LibC::GUID,
-    isVpn : Win32cr::Foundation::BOOL
+  struct PPP_EAP_INPUT
+    property dwSizeInBytes : UInt32
+    property fFlags : UInt32
+    property fAuthenticator : Win32cr::Foundation::BOOL
+    property pwszIdentity : Win32cr::Foundation::PWSTR
+    property pwszPassword : Win32cr::Foundation::PWSTR
+    property bInitialId : UInt8
+    property pUserAttributes : Win32cr::Security::ExtensibleAuthenticationProtocol::RAS_AUTH_ATTRIBUTE*
+    property fAuthenticationComplete : Win32cr::Foundation::BOOL
+    property dwAuthResultCode : UInt32
+    property hTokenImpersonateUser : Win32cr::Foundation::HANDLE
+    property fSuccessPacketReceived : Win32cr::Foundation::BOOL
+    property fDataReceivedFromInteractiveUI : Win32cr::Foundation::BOOL
+    property pDataFromInteractiveUI : UInt8*
+    property dwSizeOfDataFromInteractiveUI : UInt32
+    property pConnectionData : UInt8*
+    property dwSizeOfConnectionData : UInt32
+    property pUserData : UInt8*
+    property dwSizeOfUserData : UInt32
+    property hReserved : Win32cr::Foundation::HANDLE
+    property guidConnectionId : LibC::GUID
+    property isVpn : Win32cr::Foundation::BOOL
+    def initialize(@dwSizeInBytes : UInt32, @fFlags : UInt32, @fAuthenticator : Win32cr::Foundation::BOOL, @pwszIdentity : Win32cr::Foundation::PWSTR, @pwszPassword : Win32cr::Foundation::PWSTR, @bInitialId : UInt8, @pUserAttributes : Win32cr::Security::ExtensibleAuthenticationProtocol::RAS_AUTH_ATTRIBUTE*, @fAuthenticationComplete : Win32cr::Foundation::BOOL, @dwAuthResultCode : UInt32, @hTokenImpersonateUser : Win32cr::Foundation::HANDLE, @fSuccessPacketReceived : Win32cr::Foundation::BOOL, @fDataReceivedFromInteractiveUI : Win32cr::Foundation::BOOL, @pDataFromInteractiveUI : UInt8*, @dwSizeOfDataFromInteractiveUI : UInt32, @pConnectionData : UInt8*, @dwSizeOfConnectionData : UInt32, @pUserData : UInt8*, @dwSizeOfUserData : UInt32, @hReserved : Win32cr::Foundation::HANDLE, @guidConnectionId : LibC::GUID, @isVpn : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record PPP_EAP_OUTPUT,
-    dwSizeInBytes : UInt32,
-    action : Win32cr::Security::ExtensibleAuthenticationProtocol::PPP_EAP_ACTION,
-    dwAuthResultCode : UInt32,
-    pUserAttributes : Win32cr::Security::ExtensibleAuthenticationProtocol::RAS_AUTH_ATTRIBUTE*,
-    fInvokeInteractiveUI : Win32cr::Foundation::BOOL,
-    pUIContextData : UInt8*,
-    dwSizeOfUIContextData : UInt32,
-    fSaveConnectionData : Win32cr::Foundation::BOOL,
-    pConnectionData : UInt8*,
-    dwSizeOfConnectionData : UInt32,
-    fSaveUserData : Win32cr::Foundation::BOOL,
-    pUserData : UInt8*,
-    dwSizeOfUserData : UInt32,
-    pNgcKerbTicket : Win32cr::Security::ExtensibleAuthenticationProtocol::NgcTicketContext*,
-    fSaveToCredMan : Win32cr::Foundation::BOOL
+  struct PPP_EAP_OUTPUT
+    property dwSizeInBytes : UInt32
+    property action : Win32cr::Security::ExtensibleAuthenticationProtocol::PPP_EAP_ACTION
+    property dwAuthResultCode : UInt32
+    property pUserAttributes : Win32cr::Security::ExtensibleAuthenticationProtocol::RAS_AUTH_ATTRIBUTE*
+    property fInvokeInteractiveUI : Win32cr::Foundation::BOOL
+    property pUIContextData : UInt8*
+    property dwSizeOfUIContextData : UInt32
+    property fSaveConnectionData : Win32cr::Foundation::BOOL
+    property pConnectionData : UInt8*
+    property dwSizeOfConnectionData : UInt32
+    property fSaveUserData : Win32cr::Foundation::BOOL
+    property pUserData : UInt8*
+    property dwSizeOfUserData : UInt32
+    property pNgcKerbTicket : Win32cr::Security::ExtensibleAuthenticationProtocol::NgcTicketContext*
+    property fSaveToCredMan : Win32cr::Foundation::BOOL
+    def initialize(@dwSizeInBytes : UInt32, @action : Win32cr::Security::ExtensibleAuthenticationProtocol::PPP_EAP_ACTION, @dwAuthResultCode : UInt32, @pUserAttributes : Win32cr::Security::ExtensibleAuthenticationProtocol::RAS_AUTH_ATTRIBUTE*, @fInvokeInteractiveUI : Win32cr::Foundation::BOOL, @pUIContextData : UInt8*, @dwSizeOfUIContextData : UInt32, @fSaveConnectionData : Win32cr::Foundation::BOOL, @pConnectionData : UInt8*, @dwSizeOfConnectionData : UInt32, @fSaveUserData : Win32cr::Foundation::BOOL, @pUserData : UInt8*, @dwSizeOfUserData : UInt32, @pNgcKerbTicket : Win32cr::Security::ExtensibleAuthenticationProtocol::NgcTicketContext*, @fSaveToCredMan : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record PPP_EAP_INFO,
-    dwSizeInBytes : UInt32,
-    dwEapTypeId : UInt32,
-    ras_eap_initialize : LibC::IntPtrT,
-    ras_eap_begin : LibC::IntPtrT,
-    ras_eap_end : LibC::IntPtrT,
-    ras_eap_make_message : LibC::IntPtrT
+  struct PPP_EAP_INFO
+    property dwSizeInBytes : UInt32
+    property dwEapTypeId : UInt32
+    property ras_eap_initialize : LibC::IntPtrT
+    property ras_eap_begin : LibC::IntPtrT
+    property ras_eap_end : LibC::IntPtrT
+    property ras_eap_make_message : LibC::IntPtrT
+    def initialize(@dwSizeInBytes : UInt32, @dwEapTypeId : UInt32, @ras_eap_initialize : LibC::IntPtrT, @ras_eap_begin : LibC::IntPtrT, @ras_eap_end : LibC::IntPtrT, @ras_eap_make_message : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record LEGACY_IDENTITY_UI_PARAMS,
-    eapType : UInt32,
-    dwFlags : UInt32,
-    dwSizeofConnectionData : UInt32,
-    pConnectionData : UInt8*,
-    dwSizeofUserData : UInt32,
-    pUserData : UInt8*,
-    dwSizeofUserDataOut : UInt32,
-    pUserDataOut : UInt8*,
-    pwszIdentity : Win32cr::Foundation::PWSTR,
-    dwError : UInt32
+  struct LEGACY_IDENTITY_UI_PARAMS
+    property eapType : UInt32
+    property dwFlags : UInt32
+    property dwSizeofConnectionData : UInt32
+    property pConnectionData : UInt8*
+    property dwSizeofUserData : UInt32
+    property pUserData : UInt8*
+    property dwSizeofUserDataOut : UInt32
+    property pUserDataOut : UInt8*
+    property pwszIdentity : Win32cr::Foundation::PWSTR
+    property dwError : UInt32
+    def initialize(@eapType : UInt32, @dwFlags : UInt32, @dwSizeofConnectionData : UInt32, @pConnectionData : UInt8*, @dwSizeofUserData : UInt32, @pUserData : UInt8*, @dwSizeofUserDataOut : UInt32, @pUserDataOut : UInt8*, @pwszIdentity : Win32cr::Foundation::PWSTR, @dwError : UInt32)
+    end
+  end
 
   @[Extern]
-  record LEGACY_INTERACTIVE_UI_PARAMS,
-    eapType : UInt32,
-    dwSizeofContextData : UInt32,
-    pContextData : UInt8*,
-    dwSizeofInteractiveUIData : UInt32,
-    pInteractiveUIData : UInt8*,
-    dwError : UInt32
+  struct LEGACY_INTERACTIVE_UI_PARAMS
+    property eapType : UInt32
+    property dwSizeofContextData : UInt32
+    property pContextData : UInt8*
+    property dwSizeofInteractiveUIData : UInt32
+    property pInteractiveUIData : UInt8*
+    property dwError : UInt32
+    def initialize(@eapType : UInt32, @dwSizeofContextData : UInt32, @pContextData : UInt8*, @dwSizeofInteractiveUIData : UInt32, @pInteractiveUIData : UInt8*, @dwError : UInt32)
+    end
+  end
 
   @[Extern]
-  record EAP_TYPE,
-    type__ : UInt8,
-    dwVendorId : UInt32,
-    dwVendorType : UInt32
+  struct EAP_TYPE
+    property type__ : UInt8
+    property dwVendorId : UInt32
+    property dwVendorType : UInt32
+    def initialize(@type__ : UInt8, @dwVendorId : UInt32, @dwVendorType : UInt32)
+    end
+  end
 
   @[Extern]
-  record EAP_METHOD_TYPE,
-    eapType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_TYPE,
-    dwAuthorId : UInt32
+  struct EAP_METHOD_TYPE
+    property eapType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_TYPE
+    property dwAuthorId : UInt32
+    def initialize(@eapType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_TYPE, @dwAuthorId : UInt32)
+    end
+  end
 
   @[Extern]
-  record EAP_METHOD_INFO,
-    eaptype : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE,
-    pwszAuthorName : Win32cr::Foundation::PWSTR,
-    pwszFriendlyName : Win32cr::Foundation::PWSTR,
-    eapProperties : UInt32,
-    pInnerMethodInfo : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_INFO*
+  struct EAP_METHOD_INFO
+    property eaptype : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE
+    property pwszAuthorName : Win32cr::Foundation::PWSTR
+    property pwszFriendlyName : Win32cr::Foundation::PWSTR
+    property eapProperties : UInt32
+    property pInnerMethodInfo : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_INFO*
+    def initialize(@eaptype : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE, @pwszAuthorName : Win32cr::Foundation::PWSTR, @pwszFriendlyName : Win32cr::Foundation::PWSTR, @eapProperties : UInt32, @pInnerMethodInfo : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_INFO*)
+    end
+  end
 
   @[Extern]
-  record EAP_METHOD_INFO_EX,
-    eaptype : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE,
-    pwszAuthorName : Win32cr::Foundation::PWSTR,
-    pwszFriendlyName : Win32cr::Foundation::PWSTR,
-    eapProperties : UInt32,
-    pInnerMethodInfoArray : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_INFO_ARRAY_EX*
+  struct EAP_METHOD_INFO_EX
+    property eaptype : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE
+    property pwszAuthorName : Win32cr::Foundation::PWSTR
+    property pwszFriendlyName : Win32cr::Foundation::PWSTR
+    property eapProperties : UInt32
+    property pInnerMethodInfoArray : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_INFO_ARRAY_EX*
+    def initialize(@eaptype : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE, @pwszAuthorName : Win32cr::Foundation::PWSTR, @pwszFriendlyName : Win32cr::Foundation::PWSTR, @eapProperties : UInt32, @pInnerMethodInfoArray : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_INFO_ARRAY_EX*)
+    end
+  end
 
   @[Extern]
-  record EAP_METHOD_INFO_ARRAY,
-    dwNumberOfMethods : UInt32,
-    pEapMethods : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_INFO*
+  struct EAP_METHOD_INFO_ARRAY
+    property dwNumberOfMethods : UInt32
+    property pEapMethods : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_INFO*
+    def initialize(@dwNumberOfMethods : UInt32, @pEapMethods : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_INFO*)
+    end
+  end
 
   @[Extern]
-  record EAP_METHOD_INFO_ARRAY_EX,
-    dwNumberOfMethods : UInt32,
-    pEapMethods : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_INFO_EX*
+  struct EAP_METHOD_INFO_ARRAY_EX
+    property dwNumberOfMethods : UInt32
+    property pEapMethods : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_INFO_EX*
+    def initialize(@dwNumberOfMethods : UInt32, @pEapMethods : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_INFO_EX*)
+    end
+  end
 
   @[Extern]
-  record EAP_ERROR,
-    dwWinError : UInt32,
-    type__ : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE,
-    dwReasonCode : UInt32,
-    rootCauseGuid : LibC::GUID,
-    repairGuid : LibC::GUID,
-    helpLinkGuid : LibC::GUID,
-    pRootCauseString : Win32cr::Foundation::PWSTR,
-    pRepairString : Win32cr::Foundation::PWSTR
+  struct EAP_ERROR
+    property dwWinError : UInt32
+    property type__ : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE
+    property dwReasonCode : UInt32
+    property rootCauseGuid : LibC::GUID
+    property repairGuid : LibC::GUID
+    property helpLinkGuid : LibC::GUID
+    property pRootCauseString : Win32cr::Foundation::PWSTR
+    property pRepairString : Win32cr::Foundation::PWSTR
+    def initialize(@dwWinError : UInt32, @type__ : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE, @dwReasonCode : UInt32, @rootCauseGuid : LibC::GUID, @repairGuid : LibC::GUID, @helpLinkGuid : LibC::GUID, @pRootCauseString : Win32cr::Foundation::PWSTR, @pRepairString : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record EAP_ATTRIBUTE,
-    eaType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ATTRIBUTE_TYPE,
-    dwLength : UInt32,
-    pValue : UInt8*
+  struct EAP_ATTRIBUTE
+    property eaType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ATTRIBUTE_TYPE
+    property dwLength : UInt32
+    property pValue : UInt8*
+    def initialize(@eaType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ATTRIBUTE_TYPE, @dwLength : UInt32, @pValue : UInt8*)
+    end
+  end
 
   @[Extern]
-  record EAP_ATTRIBUTES,
-    dwNumberOfAttributes : UInt32,
-    pAttribs : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ATTRIBUTE*
+  struct EAP_ATTRIBUTES
+    property dwNumberOfAttributes : UInt32
+    property pAttribs : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ATTRIBUTE*
+    def initialize(@dwNumberOfAttributes : UInt32, @pAttribs : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ATTRIBUTE*)
+    end
+  end
 
   @[Extern]
-  record EAP_CONFIG_INPUT_FIELD_DATA,
-    dwSize : UInt32,
-    type__ : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_CONFIG_INPUT_FIELD_TYPE,
-    dwFlagProps : UInt32,
-    pwszLabel : Win32cr::Foundation::PWSTR,
-    pwszData : Win32cr::Foundation::PWSTR,
-    dwMinDataLength : UInt32,
-    dwMaxDataLength : UInt32
+  struct EAP_CONFIG_INPUT_FIELD_DATA
+    property dwSize : UInt32
+    property type__ : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_CONFIG_INPUT_FIELD_TYPE
+    property dwFlagProps : UInt32
+    property pwszLabel : Win32cr::Foundation::PWSTR
+    property pwszData : Win32cr::Foundation::PWSTR
+    property dwMinDataLength : UInt32
+    property dwMaxDataLength : UInt32
+    def initialize(@dwSize : UInt32, @type__ : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_CONFIG_INPUT_FIELD_TYPE, @dwFlagProps : UInt32, @pwszLabel : Win32cr::Foundation::PWSTR, @pwszData : Win32cr::Foundation::PWSTR, @dwMinDataLength : UInt32, @dwMaxDataLength : UInt32)
+    end
+  end
 
   @[Extern]
-  record EAP_CONFIG_INPUT_FIELD_ARRAY,
-    dwVersion : UInt32,
-    dwNumberOfFields : UInt32,
-    pFields : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_CONFIG_INPUT_FIELD_DATA*
+  struct EAP_CONFIG_INPUT_FIELD_ARRAY
+    property dwVersion : UInt32
+    property dwNumberOfFields : UInt32
+    property pFields : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_CONFIG_INPUT_FIELD_DATA*
+    def initialize(@dwVersion : UInt32, @dwNumberOfFields : UInt32, @pFields : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_CONFIG_INPUT_FIELD_DATA*)
+    end
+  end
 
   @[Extern]
-  record EAP_CRED_EXPIRY_REQ,
-    curCreds : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_CONFIG_INPUT_FIELD_ARRAY,
-    newCreds : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_CONFIG_INPUT_FIELD_ARRAY
+  struct EAP_CRED_EXPIRY_REQ
+    property curCreds : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_CONFIG_INPUT_FIELD_ARRAY
+    property newCreds : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_CONFIG_INPUT_FIELD_ARRAY
+    def initialize(@curCreds : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_CONFIG_INPUT_FIELD_ARRAY, @newCreds : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_CONFIG_INPUT_FIELD_ARRAY)
+    end
+  end
 
   @[Extern(union: true)]
-  record EAP_UI_DATA_FORMAT,
-    credData : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_CONFIG_INPUT_FIELD_ARRAY*,
-    credExpiryData : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_CRED_EXPIRY_REQ*,
-    credLogonData : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_CONFIG_INPUT_FIELD_ARRAY*
+  struct EAP_UI_DATA_FORMAT
+    property credData : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_CONFIG_INPUT_FIELD_ARRAY*
+    property credExpiryData : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_CRED_EXPIRY_REQ*
+    property credLogonData : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_CONFIG_INPUT_FIELD_ARRAY*
+    def initialize(@credData : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_CONFIG_INPUT_FIELD_ARRAY*, @credExpiryData : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_CRED_EXPIRY_REQ*, @credLogonData : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_CONFIG_INPUT_FIELD_ARRAY*)
+    end
+  end
 
   @[Extern]
-  record EAP_INTERACTIVE_UI_DATA,
-    dwVersion : UInt32,
-    dwSize : UInt32,
-    dwDataType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_INTERACTIVE_UI_DATA_TYPE,
-    cbUiData : UInt32,
-    pbUiData : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_UI_DATA_FORMAT
+  struct EAP_INTERACTIVE_UI_DATA
+    property dwVersion : UInt32
+    property dwSize : UInt32
+    property dwDataType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_INTERACTIVE_UI_DATA_TYPE
+    property cbUiData : UInt32
+    property pbUiData : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_UI_DATA_FORMAT
+    def initialize(@dwVersion : UInt32, @dwSize : UInt32, @dwDataType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_INTERACTIVE_UI_DATA_TYPE, @cbUiData : UInt32, @pbUiData : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_UI_DATA_FORMAT)
+    end
+  end
 
   @[Extern]
-  record EAP_METHOD_PROPERTY_VALUE_BOOL,
-    length : UInt32,
-    value : Win32cr::Foundation::BOOL
+  struct EAP_METHOD_PROPERTY_VALUE_BOOL
+    property length : UInt32
+    property value : Win32cr::Foundation::BOOL
+    def initialize(@length : UInt32, @value : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record EAP_METHOD_PROPERTY_VALUE_DWORD,
-    length : UInt32,
-    value : UInt32
+  struct EAP_METHOD_PROPERTY_VALUE_DWORD
+    property length : UInt32
+    property value : UInt32
+    def initialize(@length : UInt32, @value : UInt32)
+    end
+  end
 
   @[Extern]
-  record EAP_METHOD_PROPERTY_VALUE_STRING,
-    length : UInt32,
-    value : UInt8*
+  struct EAP_METHOD_PROPERTY_VALUE_STRING
+    property length : UInt32
+    property value : UInt8*
+    def initialize(@length : UInt32, @value : UInt8*)
+    end
+  end
 
   @[Extern(union: true)]
-  record EAP_METHOD_PROPERTY_VALUE,
-    empvBool : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_PROPERTY_VALUE_BOOL,
-    empvDword : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_PROPERTY_VALUE_DWORD,
-    empvString : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_PROPERTY_VALUE_STRING
+  struct EAP_METHOD_PROPERTY_VALUE
+    property empvBool : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_PROPERTY_VALUE_BOOL
+    property empvDword : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_PROPERTY_VALUE_DWORD
+    property empvString : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_PROPERTY_VALUE_STRING
+    def initialize(@empvBool : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_PROPERTY_VALUE_BOOL, @empvDword : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_PROPERTY_VALUE_DWORD, @empvString : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_PROPERTY_VALUE_STRING)
+    end
+  end
 
   @[Extern]
-  record EAP_METHOD_PROPERTY,
-    eapMethodPropertyType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_PROPERTY_TYPE,
-    eapMethodPropertyValueType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_PROPERTY_VALUE_TYPE,
-    eapMethodPropertyValue : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_PROPERTY_VALUE
+  struct EAP_METHOD_PROPERTY
+    property eapMethodPropertyType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_PROPERTY_TYPE
+    property eapMethodPropertyValueType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_PROPERTY_VALUE_TYPE
+    property eapMethodPropertyValue : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_PROPERTY_VALUE
+    def initialize(@eapMethodPropertyType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_PROPERTY_TYPE, @eapMethodPropertyValueType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_PROPERTY_VALUE_TYPE, @eapMethodPropertyValue : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_PROPERTY_VALUE)
+    end
+  end
 
   @[Extern]
-  record EAP_METHOD_PROPERTY_ARRAY,
-    dwNumberOfProperties : UInt32,
-    pMethodProperty : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_PROPERTY*
+  struct EAP_METHOD_PROPERTY_ARRAY
+    property dwNumberOfProperties : UInt32
+    property pMethodProperty : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_PROPERTY*
+    def initialize(@dwNumberOfProperties : UInt32, @pMethodProperty : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_PROPERTY*)
+    end
+  end
 
   @[Extern]
-  record EAPHOST_IDENTITY_UI_PARAMS,
-    eapMethodType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE,
-    dwFlags : UInt32,
-    dwSizeofConnectionData : UInt32,
-    pConnectionData : UInt8*,
-    dwSizeofUserData : UInt32,
-    pUserData : UInt8*,
-    dwSizeofUserDataOut : UInt32,
-    pUserDataOut : UInt8*,
-    pwszIdentity : Win32cr::Foundation::PWSTR,
-    dwError : UInt32,
-    pEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR*
+  struct EAPHOST_IDENTITY_UI_PARAMS
+    property eapMethodType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE
+    property dwFlags : UInt32
+    property dwSizeofConnectionData : UInt32
+    property pConnectionData : UInt8*
+    property dwSizeofUserData : UInt32
+    property pUserData : UInt8*
+    property dwSizeofUserDataOut : UInt32
+    property pUserDataOut : UInt8*
+    property pwszIdentity : Win32cr::Foundation::PWSTR
+    property dwError : UInt32
+    property pEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR*
+    def initialize(@eapMethodType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE, @dwFlags : UInt32, @dwSizeofConnectionData : UInt32, @pConnectionData : UInt8*, @dwSizeofUserData : UInt32, @pUserData : UInt8*, @dwSizeofUserDataOut : UInt32, @pUserDataOut : UInt8*, @pwszIdentity : Win32cr::Foundation::PWSTR, @dwError : UInt32, @pEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR*)
+    end
+  end
 
   @[Extern]
-  record EAPHOST_INTERACTIVE_UI_PARAMS,
-    dwSizeofContextData : UInt32,
-    pContextData : UInt8*,
-    dwSizeofInteractiveUIData : UInt32,
-    pInteractiveUIData : UInt8*,
-    dwError : UInt32,
-    pEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR*
+  struct EAPHOST_INTERACTIVE_UI_PARAMS
+    property dwSizeofContextData : UInt32
+    property pContextData : UInt8*
+    property dwSizeofInteractiveUIData : UInt32
+    property pInteractiveUIData : UInt8*
+    property dwError : UInt32
+    property pEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR*
+    def initialize(@dwSizeofContextData : UInt32, @pContextData : UInt8*, @dwSizeofInteractiveUIData : UInt32, @pInteractiveUIData : UInt8*, @dwError : UInt32, @pEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR*)
+    end
+  end
 
   @[Extern]
-  record EapUsernamePasswordCredential,
-    username : Win32cr::Foundation::PWSTR,
-    password : Win32cr::Foundation::PWSTR
+  struct EapUsernamePasswordCredential
+    property username : Win32cr::Foundation::PWSTR
+    property password : Win32cr::Foundation::PWSTR
+    def initialize(@username : Win32cr::Foundation::PWSTR, @password : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record EapCertificateCredential,
-    certHash : UInt8[20],
-    password : Win32cr::Foundation::PWSTR
+  struct EapCertificateCredential
+    property certHash : UInt8[20]
+    property password : Win32cr::Foundation::PWSTR
+    def initialize(@certHash : UInt8[20], @password : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record EapSimCredential,
-    iccID : Win32cr::Foundation::PWSTR
+  struct EapSimCredential
+    property iccID : Win32cr::Foundation::PWSTR
+    def initialize(@iccID : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern(union: true)]
-  record EapCredentialTypeData,
-    username_password : Win32cr::Security::ExtensibleAuthenticationProtocol::EapUsernamePasswordCredential,
-    certificate : Win32cr::Security::ExtensibleAuthenticationProtocol::EapCertificateCredential,
-    sim : Win32cr::Security::ExtensibleAuthenticationProtocol::EapSimCredential
+  struct EapCredentialTypeData
+    property username_password : Win32cr::Security::ExtensibleAuthenticationProtocol::EapUsernamePasswordCredential
+    property certificate : Win32cr::Security::ExtensibleAuthenticationProtocol::EapCertificateCredential
+    property sim : Win32cr::Security::ExtensibleAuthenticationProtocol::EapSimCredential
+    def initialize(@username_password : Win32cr::Security::ExtensibleAuthenticationProtocol::EapUsernamePasswordCredential, @certificate : Win32cr::Security::ExtensibleAuthenticationProtocol::EapCertificateCredential, @sim : Win32cr::Security::ExtensibleAuthenticationProtocol::EapSimCredential)
+    end
+  end
 
   @[Extern]
-  record EapCredential,
-    credType : Win32cr::Security::ExtensibleAuthenticationProtocol::EapCredentialType,
-    credData : Win32cr::Security::ExtensibleAuthenticationProtocol::EapCredentialTypeData
+  struct EapCredential
+    property credType : Win32cr::Security::ExtensibleAuthenticationProtocol::EapCredentialType
+    property credData : Win32cr::Security::ExtensibleAuthenticationProtocol::EapCredentialTypeData
+    def initialize(@credType : Win32cr::Security::ExtensibleAuthenticationProtocol::EapCredentialType, @credData : Win32cr::Security::ExtensibleAuthenticationProtocol::EapCredentialTypeData)
+    end
+  end
 
   @[Extern]
-  record EAPHOST_AUTH_INFO,
-    status : Win32cr::Security::ExtensibleAuthenticationProtocol::EAPHOST_AUTH_STATUS,
-    dwErrorCode : UInt32,
-    dwReasonCode : UInt32
+  struct EAPHOST_AUTH_INFO
+    property status : Win32cr::Security::ExtensibleAuthenticationProtocol::EAPHOST_AUTH_STATUS
+    property dwErrorCode : UInt32
+    property dwReasonCode : UInt32
+    def initialize(@status : Win32cr::Security::ExtensibleAuthenticationProtocol::EAPHOST_AUTH_STATUS, @dwErrorCode : UInt32, @dwReasonCode : UInt32)
+    end
+  end
 
   @[Extern]
-  record EapHostPeerMethodResult,
-    fIsSuccess : Win32cr::Foundation::BOOL,
-    dwFailureReasonCode : UInt32,
-    fSaveConnectionData : Win32cr::Foundation::BOOL,
-    dwSizeofConnectionData : UInt32,
-    pConnectionData : UInt8*,
-    fSaveUserData : Win32cr::Foundation::BOOL,
-    dwSizeofUserData : UInt32,
-    pUserData : UInt8*,
-    pAttribArray : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ATTRIBUTES*,
-    isolationState : Win32cr::Security::ExtensibleAuthenticationProtocol::ISOLATION_STATE,
-    pEapMethodInfo : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_INFO*,
-    pEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR*
+  struct EapHostPeerMethodResult
+    property fIsSuccess : Win32cr::Foundation::BOOL
+    property dwFailureReasonCode : UInt32
+    property fSaveConnectionData : Win32cr::Foundation::BOOL
+    property dwSizeofConnectionData : UInt32
+    property pConnectionData : UInt8*
+    property fSaveUserData : Win32cr::Foundation::BOOL
+    property dwSizeofUserData : UInt32
+    property pUserData : UInt8*
+    property pAttribArray : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ATTRIBUTES*
+    property isolationState : Win32cr::Security::ExtensibleAuthenticationProtocol::ISOLATION_STATE
+    property pEapMethodInfo : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_INFO*
+    property pEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR*
+    def initialize(@fIsSuccess : Win32cr::Foundation::BOOL, @dwFailureReasonCode : UInt32, @fSaveConnectionData : Win32cr::Foundation::BOOL, @dwSizeofConnectionData : UInt32, @pConnectionData : UInt8*, @fSaveUserData : Win32cr::Foundation::BOOL, @dwSizeofUserData : UInt32, @pUserData : UInt8*, @pAttribArray : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ATTRIBUTES*, @isolationState : Win32cr::Security::ExtensibleAuthenticationProtocol::ISOLATION_STATE, @pEapMethodInfo : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_INFO*, @pEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR*)
+    end
+  end
 
   @[Extern]
-  record EapPacket,
-    code : UInt8,
-    id : UInt8,
-    length : UInt8[2],
-    data : UInt8*
+  struct EapPacket
+    property code : UInt8
+    property id : UInt8
+    property length : UInt8[2]
+    property data : UInt8*
+    def initialize(@code : UInt8, @id : UInt8, @length : UInt8[2], @data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record EAP_METHOD_AUTHENTICATOR_RESULT,
-    fIsSuccess : Win32cr::Foundation::BOOL,
-    dwFailureReason : UInt32,
-    pAuthAttribs : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ATTRIBUTES*
+  struct EAP_METHOD_AUTHENTICATOR_RESULT
+    property fIsSuccess : Win32cr::Foundation::BOOL
+    property dwFailureReason : UInt32
+    property pAuthAttribs : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ATTRIBUTES*
+    def initialize(@fIsSuccess : Win32cr::Foundation::BOOL, @dwFailureReason : UInt32, @pAuthAttribs : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ATTRIBUTES*)
+    end
+  end
 
   @[Extern]
-  record EapPeerMethodOutput,
-    action : Win32cr::Security::ExtensibleAuthenticationProtocol::EapPeerMethodResponseAction,
-    fAllowNotifications : Win32cr::Foundation::BOOL
+  struct EapPeerMethodOutput
+    property action : Win32cr::Security::ExtensibleAuthenticationProtocol::EapPeerMethodResponseAction
+    property fAllowNotifications : Win32cr::Foundation::BOOL
+    def initialize(@action : Win32cr::Security::ExtensibleAuthenticationProtocol::EapPeerMethodResponseAction, @fAllowNotifications : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record EapPeerMethodResult,
-    fIsSuccess : Win32cr::Foundation::BOOL,
-    dwFailureReasonCode : UInt32,
-    fSaveConnectionData : Win32cr::Foundation::BOOL,
-    dwSizeofConnectionData : UInt32,
-    pConnectionData : UInt8*,
-    fSaveUserData : Win32cr::Foundation::BOOL,
-    dwSizeofUserData : UInt32,
-    pUserData : UInt8*,
-    pAttribArray : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ATTRIBUTES*,
-    pEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR*,
-    pNgcKerbTicket : Win32cr::Security::ExtensibleAuthenticationProtocol::NgcTicketContext*,
-    fSaveToCredMan : Win32cr::Foundation::BOOL
+  struct EapPeerMethodResult
+    property fIsSuccess : Win32cr::Foundation::BOOL
+    property dwFailureReasonCode : UInt32
+    property fSaveConnectionData : Win32cr::Foundation::BOOL
+    property dwSizeofConnectionData : UInt32
+    property pConnectionData : UInt8*
+    property fSaveUserData : Win32cr::Foundation::BOOL
+    property dwSizeofUserData : UInt32
+    property pUserData : UInt8*
+    property pAttribArray : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ATTRIBUTES*
+    property pEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR*
+    property pNgcKerbTicket : Win32cr::Security::ExtensibleAuthenticationProtocol::NgcTicketContext*
+    property fSaveToCredMan : Win32cr::Foundation::BOOL
+    def initialize(@fIsSuccess : Win32cr::Foundation::BOOL, @dwFailureReasonCode : UInt32, @fSaveConnectionData : Win32cr::Foundation::BOOL, @dwSizeofConnectionData : UInt32, @pConnectionData : UInt8*, @fSaveUserData : Win32cr::Foundation::BOOL, @dwSizeofUserData : UInt32, @pUserData : UInt8*, @pAttribArray : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ATTRIBUTES*, @pEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR*, @pNgcKerbTicket : Win32cr::Security::ExtensibleAuthenticationProtocol::NgcTicketContext*, @fSaveToCredMan : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record EAP_PEER_METHOD_ROUTINES,
-    dwVersion : UInt32,
-    pEapType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_TYPE*,
-    eap_peer_initialize : LibC::IntPtrT,
-    eap_peer_get_identity : LibC::IntPtrT,
-    eap_peer_begin_session : LibC::IntPtrT,
-    eap_peer_set_credentials : LibC::IntPtrT,
-    eap_peer_process_request_packet : LibC::IntPtrT,
-    eap_peer_get_response_packet : LibC::IntPtrT,
-    eap_peer_get_result : LibC::IntPtrT,
-    eap_peer_get_ui_context : LibC::IntPtrT,
-    eap_peer_set_ui_context : LibC::IntPtrT,
-    eap_peer_get_response_attributes : LibC::IntPtrT,
-    eap_peer_set_response_attributes : LibC::IntPtrT,
-    eap_peer_end_session : LibC::IntPtrT,
-    eap_peer_shutdown : LibC::IntPtrT
+  struct EAP_PEER_METHOD_ROUTINES
+    property dwVersion : UInt32
+    property pEapType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_TYPE*
+    property eap_peer_initialize : LibC::IntPtrT
+    property eap_peer_get_identity : LibC::IntPtrT
+    property eap_peer_begin_session : LibC::IntPtrT
+    property eap_peer_set_credentials : LibC::IntPtrT
+    property eap_peer_process_request_packet : LibC::IntPtrT
+    property eap_peer_get_response_packet : LibC::IntPtrT
+    property eap_peer_get_result : LibC::IntPtrT
+    property eap_peer_get_ui_context : LibC::IntPtrT
+    property eap_peer_set_ui_context : LibC::IntPtrT
+    property eap_peer_get_response_attributes : LibC::IntPtrT
+    property eap_peer_set_response_attributes : LibC::IntPtrT
+    property eap_peer_end_session : LibC::IntPtrT
+    property eap_peer_shutdown : LibC::IntPtrT
+    def initialize(@dwVersion : UInt32, @pEapType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_TYPE*, @eap_peer_initialize : LibC::IntPtrT, @eap_peer_get_identity : LibC::IntPtrT, @eap_peer_begin_session : LibC::IntPtrT, @eap_peer_set_credentials : LibC::IntPtrT, @eap_peer_process_request_packet : LibC::IntPtrT, @eap_peer_get_response_packet : LibC::IntPtrT, @eap_peer_get_result : LibC::IntPtrT, @eap_peer_get_ui_context : LibC::IntPtrT, @eap_peer_set_ui_context : LibC::IntPtrT, @eap_peer_get_response_attributes : LibC::IntPtrT, @eap_peer_set_response_attributes : LibC::IntPtrT, @eap_peer_end_session : LibC::IntPtrT, @eap_peer_shutdown : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record EAP_AUTHENTICATOR_METHOD_ROUTINES,
-    dwSizeInBytes : UInt32,
-    pEapType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE*,
-    eap_method_authenticator_initialize : LibC::IntPtrT,
-    eap_method_authenticator_begin_session : LibC::IntPtrT,
-    eap_method_authenticator_update_inner_method_params : LibC::IntPtrT,
-    eap_method_authenticator_receive_packet : LibC::IntPtrT,
-    eap_method_authenticator_send_packet : LibC::IntPtrT,
-    eap_method_authenticator_get_attributes : LibC::IntPtrT,
-    eap_method_authenticator_set_attributes : LibC::IntPtrT,
-    eap_method_authenticator_get_result : LibC::IntPtrT,
-    eap_method_authenticator_end_session : LibC::IntPtrT,
-    eap_method_authenticator_shutdown : LibC::IntPtrT
+  struct EAP_AUTHENTICATOR_METHOD_ROUTINES
+    property dwSizeInBytes : UInt32
+    property pEapType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE*
+    property eap_method_authenticator_initialize : LibC::IntPtrT
+    property eap_method_authenticator_begin_session : LibC::IntPtrT
+    property eap_method_authenticator_update_inner_method_params : LibC::IntPtrT
+    property eap_method_authenticator_receive_packet : LibC::IntPtrT
+    property eap_method_authenticator_send_packet : LibC::IntPtrT
+    property eap_method_authenticator_get_attributes : LibC::IntPtrT
+    property eap_method_authenticator_set_attributes : LibC::IntPtrT
+    property eap_method_authenticator_get_result : LibC::IntPtrT
+    property eap_method_authenticator_end_session : LibC::IntPtrT
+    property eap_method_authenticator_shutdown : LibC::IntPtrT
+    def initialize(@dwSizeInBytes : UInt32, @pEapType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE*, @eap_method_authenticator_initialize : LibC::IntPtrT, @eap_method_authenticator_begin_session : LibC::IntPtrT, @eap_method_authenticator_update_inner_method_params : LibC::IntPtrT, @eap_method_authenticator_receive_packet : LibC::IntPtrT, @eap_method_authenticator_send_packet : LibC::IntPtrT, @eap_method_authenticator_get_attributes : LibC::IntPtrT, @eap_method_authenticator_set_attributes : LibC::IntPtrT, @eap_method_authenticator_get_result : LibC::IntPtrT, @eap_method_authenticator_end_session : LibC::IntPtrT, @eap_method_authenticator_shutdown : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
   record IRouterProtocolConfigVtbl,
@@ -955,7 +1084,6 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
 
 
   @[Extern]
-  #@[Com("66a2db16-d706-11d0-a37b-00c04fc9da04")]
   record IRouterProtocolConfig, lpVtbl : IRouterProtocolConfigVtbl* do
     GUID = LibC::GUID.new(0x66a2db16_u32, 0xd706_u16, 0x11d0_u16, StaticArray[0xa3_u8, 0x7b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xda_u8, 0x4_u8])
     def query_interface(this : IRouterProtocolConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -989,7 +1117,6 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
 
 
   @[Extern]
-  #@[Com("66a2db17-d706-11d0-a37b-00c04fc9da04")]
   record IAuthenticationProviderConfig, lpVtbl : IAuthenticationProviderConfigVtbl* do
     GUID = LibC::GUID.new(0x66a2db17_u32, 0xd706_u16, 0x11d0_u16, StaticArray[0xa3_u8, 0x7b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xda_u8, 0x4_u8])
     def query_interface(this : IAuthenticationProviderConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1032,7 +1159,6 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
 
 
   @[Extern]
-  #@[Com("66a2db18-d706-11d0-a37b-00c04fc9da04")]
   record IAccountingProviderConfig, lpVtbl : IAccountingProviderConfigVtbl* do
     GUID = LibC::GUID.new(0x66a2db18_u32, 0xd706_u16, 0x11d0_u16, StaticArray[0xa3_u8, 0x7b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xda_u8, 0x4_u8])
     def query_interface(this : IAccountingProviderConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1075,7 +1201,6 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
 
 
   @[Extern]
-  #@[Com("66a2db19-d706-11d0-a37b-00c04fc9da04")]
   record IEAPProviderConfig, lpVtbl : IEAPProviderConfigVtbl* do
     GUID = LibC::GUID.new(0x66a2db19_u32, 0xd706_u16, 0x11d0_u16, StaticArray[0xa3_u8, 0x7b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xda_u8, 0x4_u8])
     def query_interface(this : IEAPProviderConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1120,7 +1245,6 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
 
 
   @[Extern]
-  #@[Com("d565917a-85c4-4466-856e-671c3742ea9a")]
   record IEAPProviderConfig2, lpVtbl : IEAPProviderConfig2Vtbl* do
     GUID = LibC::GUID.new(0xd565917a_u32, 0x85c4_u16, 0x4466_u16, StaticArray[0x85_u8, 0x6e_u8, 0x67_u8, 0x1c_u8, 0x37_u8, 0x42_u8, 0xea_u8, 0x9a_u8])
     def query_interface(this : IEAPProviderConfig2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1172,7 +1296,6 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
 
 
   @[Extern]
-  #@[Com("b78ecd12-68bb-4f86-9bf0-8438dd3be982")]
   record IEAPProviderConfig3, lpVtbl : IEAPProviderConfig3Vtbl* do
     GUID = LibC::GUID.new(0xb78ecd12_u32, 0x68bb_u16, 0x4f86_u16, StaticArray[0x9b_u8, 0xf0_u8, 0x84_u8, 0x38_u8, 0xdd_u8, 0x3b_u8, 0xe9_u8, 0x82_u8])
     def query_interface(this : IEAPProviderConfig3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

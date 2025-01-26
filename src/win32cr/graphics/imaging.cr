@@ -7,7 +7,7 @@ require "./../ui/windows_and_messaging.cr"
 require "./dxgi/common.cr"
 
 module Win32cr::Graphics::Imaging
-  alias PFNProgressNotification = Proc(Void*, UInt32, Win32cr::Graphics::Imaging::WICProgressOperation, Float64, Win32cr::Foundation::HRESULT)*
+  alias PFNProgressNotification = Proc(Void*, UInt32, Win32cr::Graphics::Imaging::WICProgressOperation, Float64, Win32cr::Foundation::HRESULT)
 
   WINCODEC_SDK_VERSION1 = 566_u32
   WINCODEC_SDK_VERSION2 = 567_u32
@@ -713,128 +713,170 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record WICRect,
-    x : Int32,
-    y : Int32,
-    width : Int32,
-    height : Int32
+  struct WICRect
+    property x : Int32
+    property y : Int32
+    property width : Int32
+    property height : Int32
+    def initialize(@x : Int32, @y : Int32, @width : Int32, @height : Int32)
+    end
+  end
 
   @[Extern]
-  record WICBitmapPattern,
-    position : Win32cr::Foundation::ULARGE_INTEGER,
-    length : UInt32,
-    pattern : UInt8*,
-    mask : UInt8*,
-    end_of_stream : Win32cr::Foundation::BOOL
+  struct WICBitmapPattern
+    property position : Win32cr::Foundation::ULARGE_INTEGER
+    property length : UInt32
+    property pattern : UInt8*
+    property mask : UInt8*
+    property end_of_stream : Win32cr::Foundation::BOOL
+    def initialize(@position : Win32cr::Foundation::ULARGE_INTEGER, @length : UInt32, @pattern : UInt8*, @mask : UInt8*, @end_of_stream : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record WICImageParameters,
-    pixel_format : Win32cr::Graphics::Direct2D::Common::D2D1_PIXEL_FORMAT,
-    dpi_x : Float32,
-    dpi_y : Float32,
-    top : Float32,
-    left : Float32,
-    pixel_width : UInt32,
-    pixel_height : UInt32
+  struct WICImageParameters
+    property pixel_format : Win32cr::Graphics::Direct2D::Common::D2D1_PIXEL_FORMAT
+    property dpi_x : Float32
+    property dpi_y : Float32
+    property top : Float32
+    property left : Float32
+    property pixel_width : UInt32
+    property pixel_height : UInt32
+    def initialize(@pixel_format : Win32cr::Graphics::Direct2D::Common::D2D1_PIXEL_FORMAT, @dpi_x : Float32, @dpi_y : Float32, @top : Float32, @left : Float32, @pixel_width : UInt32, @pixel_height : UInt32)
+    end
+  end
 
   @[Extern]
-  record WICBitmapPlaneDescription,
-    format : LibC::GUID,
-    width : UInt32,
-    height : UInt32
+  struct WICBitmapPlaneDescription
+    property format : LibC::GUID
+    property width : UInt32
+    property height : UInt32
+    def initialize(@format : LibC::GUID, @width : UInt32, @height : UInt32)
+    end
+  end
 
   @[Extern]
-  record WICBitmapPlane,
-    format : LibC::GUID,
-    pbBuffer : UInt8*,
-    cbStride : UInt32,
-    cbBufferSize : UInt32
+  struct WICBitmapPlane
+    property format : LibC::GUID
+    property pbBuffer : UInt8*
+    property cbStride : UInt32
+    property cbBufferSize : UInt32
+    def initialize(@format : LibC::GUID, @pbBuffer : UInt8*, @cbStride : UInt32, @cbBufferSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record WICJpegFrameHeader,
-    width : UInt32,
-    height : UInt32,
-    transfer_matrix : Win32cr::Graphics::Imaging::WICJpegTransferMatrix,
-    scan_type : Win32cr::Graphics::Imaging::WICJpegScanType,
-    cComponents : UInt32,
-    component_identifiers : UInt32,
-    sample_factors : UInt32,
-    quantization_table_indices : UInt32
+  struct WICJpegFrameHeader
+    property width : UInt32
+    property height : UInt32
+    property transfer_matrix : Win32cr::Graphics::Imaging::WICJpegTransferMatrix
+    property scan_type : Win32cr::Graphics::Imaging::WICJpegScanType
+    property cComponents : UInt32
+    property component_identifiers : UInt32
+    property sample_factors : UInt32
+    property quantization_table_indices : UInt32
+    def initialize(@width : UInt32, @height : UInt32, @transfer_matrix : Win32cr::Graphics::Imaging::WICJpegTransferMatrix, @scan_type : Win32cr::Graphics::Imaging::WICJpegScanType, @cComponents : UInt32, @component_identifiers : UInt32, @sample_factors : UInt32, @quantization_table_indices : UInt32)
+    end
+  end
 
   @[Extern]
-  record WICJpegScanHeader,
-    cComponents : UInt32,
-    restart_interval : UInt32,
-    component_selectors : UInt32,
-    huffman_table_indices : UInt32,
-    start_spectral_selection : UInt8,
-    end_spectral_selection : UInt8,
-    successive_approximation_high : UInt8,
-    successive_approximation_low : UInt8
+  struct WICJpegScanHeader
+    property cComponents : UInt32
+    property restart_interval : UInt32
+    property component_selectors : UInt32
+    property huffman_table_indices : UInt32
+    property start_spectral_selection : UInt8
+    property end_spectral_selection : UInt8
+    property successive_approximation_high : UInt8
+    property successive_approximation_low : UInt8
+    def initialize(@cComponents : UInt32, @restart_interval : UInt32, @component_selectors : UInt32, @huffman_table_indices : UInt32, @start_spectral_selection : UInt8, @end_spectral_selection : UInt8, @successive_approximation_high : UInt8, @successive_approximation_low : UInt8)
+    end
+  end
 
   @[Extern]
-  record WICRawCapabilitiesInfo,
-    cbSize : UInt32,
-    codec_major_version : UInt32,
-    codec_minor_version : UInt32,
-    exposure_compensation_support : Win32cr::Graphics::Imaging::WICRawCapabilities,
-    contrast_support : Win32cr::Graphics::Imaging::WICRawCapabilities,
-    rgb_white_point_support : Win32cr::Graphics::Imaging::WICRawCapabilities,
-    named_white_point_support : Win32cr::Graphics::Imaging::WICRawCapabilities,
-    named_white_point_support_mask : UInt32,
-    kelvin_white_point_support : Win32cr::Graphics::Imaging::WICRawCapabilities,
-    gamma_support : Win32cr::Graphics::Imaging::WICRawCapabilities,
-    tint_support : Win32cr::Graphics::Imaging::WICRawCapabilities,
-    saturation_support : Win32cr::Graphics::Imaging::WICRawCapabilities,
-    sharpness_support : Win32cr::Graphics::Imaging::WICRawCapabilities,
-    noise_reduction_support : Win32cr::Graphics::Imaging::WICRawCapabilities,
-    destination_color_profile_support : Win32cr::Graphics::Imaging::WICRawCapabilities,
-    tone_curve_support : Win32cr::Graphics::Imaging::WICRawCapabilities,
-    rotation_support : Win32cr::Graphics::Imaging::WICRawRotationCapabilities,
-    render_mode_support : Win32cr::Graphics::Imaging::WICRawCapabilities
+  struct WICRawCapabilitiesInfo
+    property cbSize : UInt32
+    property codec_major_version : UInt32
+    property codec_minor_version : UInt32
+    property exposure_compensation_support : Win32cr::Graphics::Imaging::WICRawCapabilities
+    property contrast_support : Win32cr::Graphics::Imaging::WICRawCapabilities
+    property rgb_white_point_support : Win32cr::Graphics::Imaging::WICRawCapabilities
+    property named_white_point_support : Win32cr::Graphics::Imaging::WICRawCapabilities
+    property named_white_point_support_mask : UInt32
+    property kelvin_white_point_support : Win32cr::Graphics::Imaging::WICRawCapabilities
+    property gamma_support : Win32cr::Graphics::Imaging::WICRawCapabilities
+    property tint_support : Win32cr::Graphics::Imaging::WICRawCapabilities
+    property saturation_support : Win32cr::Graphics::Imaging::WICRawCapabilities
+    property sharpness_support : Win32cr::Graphics::Imaging::WICRawCapabilities
+    property noise_reduction_support : Win32cr::Graphics::Imaging::WICRawCapabilities
+    property destination_color_profile_support : Win32cr::Graphics::Imaging::WICRawCapabilities
+    property tone_curve_support : Win32cr::Graphics::Imaging::WICRawCapabilities
+    property rotation_support : Win32cr::Graphics::Imaging::WICRawRotationCapabilities
+    property render_mode_support : Win32cr::Graphics::Imaging::WICRawCapabilities
+    def initialize(@cbSize : UInt32, @codec_major_version : UInt32, @codec_minor_version : UInt32, @exposure_compensation_support : Win32cr::Graphics::Imaging::WICRawCapabilities, @contrast_support : Win32cr::Graphics::Imaging::WICRawCapabilities, @rgb_white_point_support : Win32cr::Graphics::Imaging::WICRawCapabilities, @named_white_point_support : Win32cr::Graphics::Imaging::WICRawCapabilities, @named_white_point_support_mask : UInt32, @kelvin_white_point_support : Win32cr::Graphics::Imaging::WICRawCapabilities, @gamma_support : Win32cr::Graphics::Imaging::WICRawCapabilities, @tint_support : Win32cr::Graphics::Imaging::WICRawCapabilities, @saturation_support : Win32cr::Graphics::Imaging::WICRawCapabilities, @sharpness_support : Win32cr::Graphics::Imaging::WICRawCapabilities, @noise_reduction_support : Win32cr::Graphics::Imaging::WICRawCapabilities, @destination_color_profile_support : Win32cr::Graphics::Imaging::WICRawCapabilities, @tone_curve_support : Win32cr::Graphics::Imaging::WICRawCapabilities, @rotation_support : Win32cr::Graphics::Imaging::WICRawRotationCapabilities, @render_mode_support : Win32cr::Graphics::Imaging::WICRawCapabilities)
+    end
+  end
 
   @[Extern]
-  record WICRawToneCurvePoint,
-    input : Float64,
-    output : Float64
+  struct WICRawToneCurvePoint
+    property input : Float64
+    property output : Float64
+    def initialize(@input : Float64, @output : Float64)
+    end
+  end
 
   @[Extern]
-  record WICRawToneCurve,
-    cPoints : UInt32,
-    aPoints : Win32cr::Graphics::Imaging::WICRawToneCurvePoint*
+  struct WICRawToneCurve
+    property cPoints : UInt32
+    property aPoints : Win32cr::Graphics::Imaging::WICRawToneCurvePoint*
+    def initialize(@cPoints : UInt32, @aPoints : Win32cr::Graphics::Imaging::WICRawToneCurvePoint*)
+    end
+  end
 
   @[Extern]
-  record WICDdsParameters,
-    width : UInt32,
-    height : UInt32,
-    depth : UInt32,
-    mip_levels : UInt32,
-    array_size : UInt32,
-    dxgi_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    dimension : Win32cr::Graphics::Imaging::WICDdsDimension,
-    alpha_mode : Win32cr::Graphics::Imaging::WICDdsAlphaMode
+  struct WICDdsParameters
+    property width : UInt32
+    property height : UInt32
+    property depth : UInt32
+    property mip_levels : UInt32
+    property array_size : UInt32
+    property dxgi_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property dimension : Win32cr::Graphics::Imaging::WICDdsDimension
+    property alpha_mode : Win32cr::Graphics::Imaging::WICDdsAlphaMode
+    def initialize(@width : UInt32, @height : UInt32, @depth : UInt32, @mip_levels : UInt32, @array_size : UInt32, @dxgi_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @dimension : Win32cr::Graphics::Imaging::WICDdsDimension, @alpha_mode : Win32cr::Graphics::Imaging::WICDdsAlphaMode)
+    end
+  end
 
   @[Extern]
-  record WICDdsFormatInfo,
-    dxgi_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    bytes_per_block : UInt32,
-    block_width : UInt32,
-    block_height : UInt32
+  struct WICDdsFormatInfo
+    property dxgi_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property bytes_per_block : UInt32
+    property block_width : UInt32
+    property block_height : UInt32
+    def initialize(@dxgi_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @bytes_per_block : UInt32, @block_width : UInt32, @block_height : UInt32)
+    end
+  end
 
   @[Extern]
-  record WICMetadataPattern,
-    position : Win32cr::Foundation::ULARGE_INTEGER,
-    length : UInt32,
-    pattern : UInt8*,
-    mask : UInt8*,
-    data_offset : Win32cr::Foundation::ULARGE_INTEGER
+  struct WICMetadataPattern
+    property position : Win32cr::Foundation::ULARGE_INTEGER
+    property length : UInt32
+    property pattern : UInt8*
+    property mask : UInt8*
+    property data_offset : Win32cr::Foundation::ULARGE_INTEGER
+    def initialize(@position : Win32cr::Foundation::ULARGE_INTEGER, @length : UInt32, @pattern : UInt8*, @mask : UInt8*, @data_offset : Win32cr::Foundation::ULARGE_INTEGER)
+    end
+  end
 
   @[Extern]
-  record WICMetadataHeader,
-    position : Win32cr::Foundation::ULARGE_INTEGER,
-    length : UInt32,
-    header : UInt8*,
-    data_offset : Win32cr::Foundation::ULARGE_INTEGER
+  struct WICMetadataHeader
+    property position : Win32cr::Foundation::ULARGE_INTEGER
+    property length : UInt32
+    property header : UInt8*
+    property data_offset : Win32cr::Foundation::ULARGE_INTEGER
+    def initialize(@position : Win32cr::Foundation::ULARGE_INTEGER, @length : UInt32, @header : UInt8*, @data_offset : Win32cr::Foundation::ULARGE_INTEGER)
+    end
+  end
 
   @[Extern]
   record IWICPaletteVtbl,
@@ -854,7 +896,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("00000040-a8f2-4877-ba0a-fd2b6645fb94")]
   record IWICPalette, lpVtbl : IWICPaletteVtbl* do
     GUID = LibC::GUID.new(0x40_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
     def query_interface(this : IWICPalette*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -912,7 +953,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("00000120-a8f2-4877-ba0a-fd2b6645fb94")]
   record IWICBitmapSource, lpVtbl : IWICBitmapSourceVtbl* do
     GUID = LibC::GUID.new(0x120_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
     def query_interface(this : IWICBitmapSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -957,7 +997,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("00000301-a8f2-4877-ba0a-fd2b6645fb94")]
   record IWICFormatConverter, lpVtbl : IWICFormatConverterVtbl* do
     GUID = LibC::GUID.new(0x301_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
     def query_interface(this : IWICFormatConverter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1008,7 +1047,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("bebee9cb-83b0-4dcc-8132-b0aaa55eac96")]
   record IWICPlanarFormatConverter, lpVtbl : IWICPlanarFormatConverterVtbl* do
     GUID = LibC::GUID.new(0xbebee9cb_u32, 0x83b0_u16, 0x4dcc_u16, StaticArray[0x81_u8, 0x32_u8, 0xb0_u8, 0xaa_u8, 0xa5_u8, 0x5e_u8, 0xac_u8, 0x96_u8])
     def query_interface(this : IWICPlanarFormatConverter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1058,7 +1096,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("00000302-a8f2-4877-ba0a-fd2b6645fb94")]
   record IWICBitmapScaler, lpVtbl : IWICBitmapScalerVtbl* do
     GUID = LibC::GUID.new(0x302_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
     def query_interface(this : IWICBitmapScaler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1105,7 +1142,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("e4fbcf03-223d-4e81-9333-d635556dd1b5")]
   record IWICBitmapClipper, lpVtbl : IWICBitmapClipperVtbl* do
     GUID = LibC::GUID.new(0xe4fbcf03_u32, 0x223d_u16, 0x4e81_u16, StaticArray[0x93_u8, 0x33_u8, 0xd6_u8, 0x35_u8, 0x55_u8, 0x6d_u8, 0xd1_u8, 0xb5_u8])
     def query_interface(this : IWICBitmapClipper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1152,7 +1188,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("5009834f-2d6a-41ce-9e1b-17c5aff7a782")]
   record IWICBitmapFlipRotator, lpVtbl : IWICBitmapFlipRotatorVtbl* do
     GUID = LibC::GUID.new(0x5009834f_u32, 0x2d6a_u16, 0x41ce_u16, StaticArray[0x9e_u8, 0x1b_u8, 0x17_u8, 0xc5_u8, 0xaf_u8, 0xf7_u8, 0xa7_u8, 0x82_u8])
     def query_interface(this : IWICBitmapFlipRotator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1197,7 +1232,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("00000123-a8f2-4877-ba0a-fd2b6645fb94")]
   record IWICBitmapLock, lpVtbl : IWICBitmapLockVtbl* do
     GUID = LibC::GUID.new(0x123_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
     def query_interface(this : IWICBitmapLock*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1240,7 +1274,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("00000121-a8f2-4877-ba0a-fd2b6645fb94")]
   record IWICBitmap, lpVtbl : IWICBitmapVtbl* do
     GUID = LibC::GUID.new(0x121_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
     def query_interface(this : IWICBitmap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1293,7 +1326,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("3c613a02-34b2-44ea-9a7c-45aea9c6fd6d")]
   record IWICColorContext, lpVtbl : IWICColorContextVtbl* do
     GUID = LibC::GUID.new(0x3c613a02_u32, 0x34b2_u16, 0x44ea_u16, StaticArray[0x9a_u8, 0x7c_u8, 0x45_u8, 0xae_u8, 0xa9_u8, 0xc6_u8, 0xfd_u8, 0x6d_u8])
     def query_interface(this : IWICColorContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1340,7 +1372,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("b66f034f-d0e2-40ab-b436-6de39e321a94")]
   record IWICColorTransform, lpVtbl : IWICColorTransformVtbl* do
     GUID = LibC::GUID.new(0xb66f034f_u32, 0xd0e2_u16, 0x40ab_u16, StaticArray[0xb4_u8, 0x36_u8, 0x6d_u8, 0xe3_u8, 0x9e_u8, 0x32_u8, 0x1a_u8, 0x94_u8])
     def query_interface(this : IWICColorTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1383,7 +1414,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("b84e2c09-78c9-4ac4-8bd3-524ae1663a2f")]
   record IWICFastMetadataEncoder, lpVtbl : IWICFastMetadataEncoderVtbl* do
     GUID = LibC::GUID.new(0xb84e2c09_u32, 0x78c9_u16, 0x4ac4_u16, StaticArray[0x8b_u8, 0xd3_u8, 0x52_u8, 0x4a_u8, 0xe1_u8, 0x66_u8, 0x3a_u8, 0x2f_u8])
     def query_interface(this : IWICFastMetadataEncoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1427,7 +1457,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("135ff860-22b7-4ddf-b0f6-218f4f299a43")]
   record IWICStream, lpVtbl : IWICStreamVtbl* do
     GUID = LibC::GUID.new(0x135ff860_u32, 0x22b7_u16, 0x4ddf_u16, StaticArray[0xb0_u8, 0xf6_u8, 0x21_u8, 0x8f_u8, 0x4f_u8, 0x29_u8, 0x9a_u8, 0x43_u8])
     def query_interface(this : IWICStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1499,7 +1528,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("dc2bb46d-3f07-481e-8625-220c4aedbb33")]
   record IWICEnumMetadataItem, lpVtbl : IWICEnumMetadataItemVtbl* do
     GUID = LibC::GUID.new(0xdc2bb46d_u32, 0x3f07_u16, 0x481e_u16, StaticArray[0x86_u8, 0x25_u8, 0x22_u8, 0xc_u8, 0x4a_u8, 0xed_u8, 0xbb_u8, 0x33_u8])
     def query_interface(this : IWICEnumMetadataItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1538,7 +1566,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("30989668-e1c9-4597-b395-458eedb808df")]
   record IWICMetadataQueryReader, lpVtbl : IWICMetadataQueryReaderVtbl* do
     GUID = LibC::GUID.new(0x30989668_u32, 0xe1c9_u16, 0x4597_u16, StaticArray[0xb3_u8, 0x95_u8, 0x45_u8, 0x8e_u8, 0xed_u8, 0xb8_u8, 0x8_u8, 0xdf_u8])
     def query_interface(this : IWICMetadataQueryReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1579,7 +1606,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("a721791a-0def-4d06-bd91-2118bf1db10b")]
   record IWICMetadataQueryWriter, lpVtbl : IWICMetadataQueryWriterVtbl* do
     GUID = LibC::GUID.new(0xa721791a_u32, 0xdef_u16, 0x4d06_u16, StaticArray[0xbd_u8, 0x91_u8, 0x21_u8, 0x18_u8, 0xbf_u8, 0x1d_u8, 0xb1_u8, 0xb_u8])
     def query_interface(this : IWICMetadataQueryWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1630,7 +1656,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("00000103-a8f2-4877-ba0a-fd2b6645fb94")]
   record IWICBitmapEncoder, lpVtbl : IWICBitmapEncoderVtbl* do
     GUID = LibC::GUID.new(0x103_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
     def query_interface(this : IWICBitmapEncoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1694,7 +1719,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("00000105-a8f2-4877-ba0a-fd2b6645fb94")]
   record IWICBitmapFrameEncode, lpVtbl : IWICBitmapFrameEncodeVtbl* do
     GUID = LibC::GUID.new(0x105_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
     def query_interface(this : IWICBitmapFrameEncode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1752,7 +1776,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("f928b7b8-2221-40c1-b72e-7e82f1974d1a")]
   record IWICPlanarBitmapFrameEncode, lpVtbl : IWICPlanarBitmapFrameEncodeVtbl* do
     GUID = LibC::GUID.new(0xf928b7b8_u32, 0x2221_u16, 0x40c1_u16, StaticArray[0xb7_u8, 0x2e_u8, 0x7e_u8, 0x82_u8, 0xf1_u8, 0x97_u8, 0x4d_u8, 0x1a_u8])
     def query_interface(this : IWICPlanarBitmapFrameEncode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1792,7 +1815,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("9edde9e7-8dee-47ea-99df-e6faf2ed44bf")]
   record IWICBitmapDecoder, lpVtbl : IWICBitmapDecoderVtbl* do
     GUID = LibC::GUID.new(0x9edde9e7_u32, 0x8dee_u16, 0x47ea_u16, StaticArray[0x99_u8, 0xdf_u8, 0xe6_u8, 0xfa_u8, 0xf2_u8, 0xed_u8, 0x44_u8, 0xbf_u8])
     def query_interface(this : IWICBitmapDecoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1852,7 +1874,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("3b16811b-6a43-4ec9-b713-3d5a0c13b940")]
   record IWICBitmapSourceTransform, lpVtbl : IWICBitmapSourceTransformVtbl* do
     GUID = LibC::GUID.new(0x3b16811b_u32, 0x6a43_u16, 0x4ec9_u16, StaticArray[0xb7_u8, 0x13_u8, 0x3d_u8, 0x5a_u8, 0xc_u8, 0x13_u8, 0xb9_u8, 0x40_u8])
     def query_interface(this : IWICBitmapSourceTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1889,7 +1910,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("3aff9cce-be95-4303-b927-e7d16ff4a613")]
   record IWICPlanarBitmapSourceTransform, lpVtbl : IWICPlanarBitmapSourceTransformVtbl* do
     GUID = LibC::GUID.new(0x3aff9cce_u32, 0xbe95_u16, 0x4303_u16, StaticArray[0xb9_u8, 0x27_u8, 0xe7_u8, 0xd1_u8, 0x6f_u8, 0xf4_u8, 0xa6_u8, 0x13_u8])
     def query_interface(this : IWICPlanarBitmapSourceTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1926,7 +1946,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("3b16811b-6a43-4ec9-a813-3d930c13b940")]
   record IWICBitmapFrameDecode, lpVtbl : IWICBitmapFrameDecodeVtbl* do
     GUID = LibC::GUID.new(0x3b16811b_u32, 0x6a43_u16, 0x4ec9_u16, StaticArray[0xa8_u8, 0x13_u8, 0x3d_u8, 0x93_u8, 0xc_u8, 0x13_u8, 0xb9_u8, 0x40_u8])
     def query_interface(this : IWICBitmapFrameDecode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1976,7 +1995,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("daac296f-7aa5-4dbf-8d15-225c5976f891")]
   record IWICProgressiveLevelControl, lpVtbl : IWICProgressiveLevelControlVtbl* do
     GUID = LibC::GUID.new(0xdaac296f_u32, 0x7aa5_u16, 0x4dbf_u16, StaticArray[0x8d_u8, 0x15_u8, 0x22_u8, 0x5c_u8, 0x59_u8, 0x76_u8, 0xf8_u8, 0x91_u8])
     def query_interface(this : IWICProgressiveLevelControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2009,7 +2027,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("4776f9cd-9517-45fa-bf24-e89c5ec5c60c")]
   record IWICProgressCallback, lpVtbl : IWICProgressCallbackVtbl* do
     GUID = LibC::GUID.new(0x4776f9cd_u32, 0x9517_u16, 0x45fa_u16, StaticArray[0xbf_u8, 0x24_u8, 0xe8_u8, 0x9c_u8, 0x5e_u8, 0xc5_u8, 0xc6_u8, 0xc_u8])
     def query_interface(this : IWICProgressCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2036,7 +2053,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("64c1024e-c3cf-4462-8078-88c2b11c46d9")]
   record IWICBitmapCodecProgressNotification, lpVtbl : IWICBitmapCodecProgressNotificationVtbl* do
     GUID = LibC::GUID.new(0x64c1024e_u32, 0xc3cf_u16, 0x4462_u16, StaticArray[0x80_u8, 0x78_u8, 0x88_u8, 0xc2_u8, 0xb1_u8, 0x1c_u8, 0x46_u8, 0xd9_u8])
     def query_interface(this : IWICBitmapCodecProgressNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2070,7 +2086,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("23bc3f0a-698b-4357-886b-f24d50671334")]
   record IWICComponentInfo, lpVtbl : IWICComponentInfoVtbl* do
     GUID = LibC::GUID.new(0x23bc3f0a_u32, 0x698b_u16, 0x4357_u16, StaticArray[0x88_u8, 0x6b_u8, 0xf2_u8, 0x4d_u8, 0x50_u8, 0x67_u8, 0x13_u8, 0x34_u8])
     def query_interface(this : IWICComponentInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2127,7 +2142,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("9f34fb65-13f4-4f15-bc57-3726b5e53d9f")]
   record IWICFormatConverterInfo, lpVtbl : IWICFormatConverterInfoVtbl* do
     GUID = LibC::GUID.new(0x9f34fb65_u32, 0x13f4_u16, 0x4f15_u16, StaticArray[0xbc_u8, 0x57_u8, 0x37_u8, 0x26_u8, 0xb5_u8, 0xe5_u8, 0x3d_u8, 0x9f_u8])
     def query_interface(this : IWICFormatConverterInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2200,7 +2214,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("e87a44c4-b76e-4c47-8b09-298eb12a2714")]
   record IWICBitmapCodecInfo, lpVtbl : IWICBitmapCodecInfoVtbl* do
     GUID = LibC::GUID.new(0xe87a44c4_u32, 0xb76e_u16, 0x4c47_u16, StaticArray[0x8b_u8, 0x9_u8, 0x29_u8, 0x8e_u8, 0xb1_u8, 0x2a_u8, 0x27_u8, 0x14_u8])
     def query_interface(this : IWICBitmapCodecInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2304,7 +2317,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("94c9b4ee-a09f-4f92-8a1e-4a9bce7e76fb")]
   record IWICBitmapEncoderInfo, lpVtbl : IWICBitmapEncoderInfoVtbl* do
     GUID = LibC::GUID.new(0x94c9b4ee_u32, 0xa09f_u16, 0x4f92_u16, StaticArray[0x8a_u8, 0x1e_u8, 0x4a_u8, 0x9b_u8, 0xce_u8, 0x7e_u8, 0x76_u8, 0xfb_u8])
     def query_interface(this : IWICBitmapEncoderInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2413,7 +2425,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("d8cd007f-d08f-4191-9bfc-236ea7f0e4b5")]
   record IWICBitmapDecoderInfo, lpVtbl : IWICBitmapDecoderInfoVtbl* do
     GUID = LibC::GUID.new(0xd8cd007f_u32, 0xd08f_u16, 0x4191_u16, StaticArray[0x9b_u8, 0xfc_u8, 0x23_u8, 0x6e_u8, 0xa7_u8, 0xf0_u8, 0xe4_u8, 0xb5_u8])
     def query_interface(this : IWICBitmapDecoderInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2518,7 +2529,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("e8eda601-3d48-431a-ab44-69059be88bbe")]
   record IWICPixelFormatInfo, lpVtbl : IWICPixelFormatInfoVtbl* do
     GUID = LibC::GUID.new(0xe8eda601_u32, 0x3d48_u16, 0x431a_u16, StaticArray[0xab_u8, 0x44_u8, 0x69_u8, 0x5_u8, 0x9b_u8, 0xe8_u8, 0x8b_u8, 0xbe_u8])
     def query_interface(this : IWICPixelFormatInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2595,7 +2605,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("a9db33a2-af5f-43c7-b679-74f5984b5aa4")]
   record IWICPixelFormatInfo2, lpVtbl : IWICPixelFormatInfo2Vtbl* do
     GUID = LibC::GUID.new(0xa9db33a2_u32, 0xaf5f_u16, 0x43c7_u16, StaticArray[0xb6_u8, 0x79_u8, 0x74_u8, 0xf5_u8, 0x98_u8, 0x4b_u8, 0x5a_u8, 0xa4_u8])
     def query_interface(this : IWICPixelFormatInfo2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2688,7 +2697,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("ec5ec8a9-c395-4314-9c77-54d7a935ff70")]
   record IWICImagingFactory, lpVtbl : IWICImagingFactoryVtbl* do
     GUID = LibC::GUID.new(0xec5ec8a9_u32, 0xc395_u16, 0x4314_u16, StaticArray[0x9c_u8, 0x77_u8, 0x54_u8, 0xd7_u8, 0xa9_u8, 0x35_u8, 0xff_u8, 0x70_u8])
     def query_interface(this : IWICImagingFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2787,7 +2795,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("95c75a6e-3e8c-4ec2-85a8-aebcc551e59b")]
   record IWICDevelopRawNotificationCallback, lpVtbl : IWICDevelopRawNotificationCallbackVtbl* do
     GUID = LibC::GUID.new(0x95c75a6e_u32, 0x3e8c_u16, 0x4ec2_u16, StaticArray[0x85_u8, 0xa8_u8, 0xae_u8, 0xbc_u8, 0xc5_u8, 0x51_u8, 0xe5_u8, 0x9b_u8])
     def query_interface(this : IWICDevelopRawNotificationCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2853,7 +2860,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("fbec5e44-f7be-4b65-b7f8-c0c81fef026d")]
   record IWICDevelopRaw, lpVtbl : IWICDevelopRawVtbl* do
     GUID = LibC::GUID.new(0xfbec5e44_u32, 0xf7be_u16, 0x4b65_u16, StaticArray[0xb7_u8, 0xf8_u8, 0xc0_u8, 0xc8_u8, 0x1f_u8, 0xef_u8, 0x2_u8, 0x6d_u8])
     def query_interface(this : IWICDevelopRaw*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2998,7 +3004,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("409cd537-8532-40cb-9774-e2feb2df4e9c")]
   record IWICDdsDecoder, lpVtbl : IWICDdsDecoderVtbl* do
     GUID = LibC::GUID.new(0x409cd537_u32, 0x8532_u16, 0x40cb_u16, StaticArray[0x97_u8, 0x74_u8, 0xe2_u8, 0xfe_u8, 0xb2_u8, 0xdf_u8, 0x4e_u8, 0x9c_u8])
     def query_interface(this : IWICDdsDecoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3030,7 +3035,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("5cacdb4c-407e-41b3-b936-d0f010cd6732")]
   record IWICDdsEncoder, lpVtbl : IWICDdsEncoderVtbl* do
     GUID = LibC::GUID.new(0x5cacdb4c_u32, 0x407e_u16, 0x41b3_u16, StaticArray[0xb9_u8, 0x36_u8, 0xd0_u8, 0xf0_u8, 0x10_u8, 0xcd_u8, 0x67_u8, 0x32_u8])
     def query_interface(this : IWICDdsEncoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3065,7 +3069,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("3d4c0c61-18a4-41e4-bd80-481a4fc9f464")]
   record IWICDdsFrameDecode, lpVtbl : IWICDdsFrameDecodeVtbl* do
     GUID = LibC::GUID.new(0x3d4c0c61_u32, 0x18a4_u16, 0x41e4_u16, StaticArray[0xbd_u8, 0x80_u8, 0x48_u8, 0x1a_u8, 0x4f_u8, 0xc9_u8, 0xf4_u8, 0x64_u8])
     def query_interface(this : IWICDdsFrameDecode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3107,7 +3110,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("8939f66e-c46a-4c21-a9d1-98b327ce1679")]
   record IWICJpegFrameDecode, lpVtbl : IWICJpegFrameDecodeVtbl* do
     GUID = LibC::GUID.new(0x8939f66e_u32, 0xc46a_u16, 0x4c21_u16, StaticArray[0xa9_u8, 0xd1_u8, 0x98_u8, 0xb3_u8, 0x27_u8, 0xce_u8, 0x16_u8, 0x79_u8])
     def query_interface(this : IWICJpegFrameDecode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3164,7 +3166,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("2f0c601f-d2c6-468c-abfa-49495d983ed1")]
   record IWICJpegFrameEncode, lpVtbl : IWICJpegFrameEncodeVtbl* do
     GUID = LibC::GUID.new(0x2f0c601f_u32, 0xd2c6_u16, 0x468c_u16, StaticArray[0xab_u8, 0xfa_u8, 0x49_u8, 0x49_u8, 0x5d_u8, 0x98_u8, 0x3e_u8, 0xd1_u8])
     def query_interface(this : IWICJpegFrameEncode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3203,7 +3204,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("feaa2a8d-b3f3-43e4-b25c-d1de990a1ae1")]
   record IWICMetadataBlockReader, lpVtbl : IWICMetadataBlockReaderVtbl* do
     GUID = LibC::GUID.new(0xfeaa2a8d_u32, 0xb3f3_u16, 0x43e4_u16, StaticArray[0xb2_u8, 0x5c_u8, 0xd1_u8, 0xde_u8, 0x99_u8, 0xa_u8, 0x1a_u8, 0xe1_u8])
     def query_interface(this : IWICMetadataBlockReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3247,7 +3247,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("08fb9676-b444-41e8-8dbe-6a53a542bff1")]
   record IWICMetadataBlockWriter, lpVtbl : IWICMetadataBlockWriterVtbl* do
     GUID = LibC::GUID.new(0x8fb9676_u32, 0xb444_u16, 0x41e8_u16, StaticArray[0x8d_u8, 0xbe_u8, 0x6a_u8, 0x53_u8, 0xa5_u8, 0x42_u8, 0xbf_u8, 0xf1_u8])
     def query_interface(this : IWICMetadataBlockWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3303,7 +3302,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("9204fe99-d8fc-4fd5-a001-9536b067a899")]
   record IWICMetadataReader, lpVtbl : IWICMetadataReaderVtbl* do
     GUID = LibC::GUID.new(0x9204fe99_u32, 0xd8fc_u16, 0x4fd5_u16, StaticArray[0xa0_u8, 0x1_u8, 0x95_u8, 0x36_u8, 0xb0_u8, 0x67_u8, 0xa8_u8, 0x99_u8])
     def query_interface(this : IWICMetadataReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3354,7 +3352,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("f7836e16-3be0-470b-86bb-160d0aecd7de")]
   record IWICMetadataWriter, lpVtbl : IWICMetadataWriterVtbl* do
     GUID = LibC::GUID.new(0xf7836e16_u32, 0x3be0_u16, 0x470b_u16, StaticArray[0x86_u8, 0xbb_u8, 0x16_u8, 0xd_u8, 0xa_u8, 0xec_u8, 0xd7_u8, 0xde_u8])
     def query_interface(this : IWICMetadataWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3411,7 +3408,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("449494bc-b468-4927-96d7-ba90d31ab505")]
   record IWICStreamProvider, lpVtbl : IWICStreamProviderVtbl* do
     GUID = LibC::GUID.new(0x449494bc_u32, 0xb468_u16, 0x4927_u16, StaticArray[0x96_u8, 0xd7_u8, 0xba_u8, 0x90_u8, 0xd3_u8, 0x1a_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IWICStreamProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3453,7 +3449,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("00675040-6908-45f8-86a3-49c7dfd6d9ad")]
   record IWICPersistStream, lpVtbl : IWICPersistStreamVtbl* do
     GUID = LibC::GUID.new(0x675040_u32, 0x6908_u16, 0x45f8_u16, StaticArray[0x86_u8, 0xa3_u8, 0x49_u8, 0xc7_u8, 0xdf_u8, 0xd6_u8, 0xd9_u8, 0xad_u8])
     def query_interface(this : IWICPersistStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3512,7 +3507,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("aba958bf-c672-44d1-8d61-ce6df2e682c2")]
   record IWICMetadataHandlerInfo, lpVtbl : IWICMetadataHandlerInfoVtbl* do
     GUID = LibC::GUID.new(0xaba958bf_u32, 0xc672_u16, 0x44d1_u16, StaticArray[0x8d_u8, 0x61_u8, 0xce_u8, 0x6d_u8, 0xf2_u8, 0xe6_u8, 0x82_u8, 0xc2_u8])
     def query_interface(this : IWICMetadataHandlerInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3598,7 +3592,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("eebf1f5b-07c1-4447-a3ab-22acaf78a804")]
   record IWICMetadataReaderInfo, lpVtbl : IWICMetadataReaderInfoVtbl* do
     GUID = LibC::GUID.new(0xeebf1f5b_u32, 0x7c1_u16, 0x4447_u16, StaticArray[0xa3_u8, 0xab_u8, 0x22_u8, 0xac_u8, 0xaf_u8, 0x78_u8, 0xa8_u8, 0x4_u8])
     def query_interface(this : IWICMetadataReaderInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3692,7 +3685,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("b22e3fba-3925-4323-b5c1-9ebfc430f236")]
   record IWICMetadataWriterInfo, lpVtbl : IWICMetadataWriterInfoVtbl* do
     GUID = LibC::GUID.new(0xb22e3fba_u32, 0x3925_u16, 0x4323_u16, StaticArray[0xb5_u8, 0xc1_u8, 0x9e_u8, 0xbf_u8, 0xc4_u8, 0x30_u8, 0xf2_u8, 0x36_u8])
     def query_interface(this : IWICMetadataWriterInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3798,7 +3790,6 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  #@[Com("412d0c3a-9650-44fa-af5b-dd2a06c8e8fb")]
   record IWICComponentFactory, lpVtbl : IWICComponentFactoryVtbl* do
     GUID = LibC::GUID.new(0x412d0c3a_u32, 0x9650_u16, 0x44fa_u16, StaticArray[0xaf_u8, 0x5b_u8, 0xdd_u8, 0x2a_u8, 0x6_u8, 0xc8_u8, 0xe8_u8, 0xfb_u8])
     def query_interface(this : IWICComponentFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

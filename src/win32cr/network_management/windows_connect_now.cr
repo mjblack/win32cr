@@ -332,17 +332,23 @@ module Win32cr::NetworkManagement::WindowsConnectNow
   end
 
   @[Extern]
-  record WCN_VALUE_TYPE_PRIMARY_DEVICE_TYPE,
-    category : UInt16,
-    sub_category_oui : UInt32,
-    sub_category : UInt16
+  struct WCN_VALUE_TYPE_PRIMARY_DEVICE_TYPE
+    property category : UInt16
+    property sub_category_oui : UInt32
+    property sub_category : UInt16
+    def initialize(@category : UInt16, @sub_category_oui : UInt32, @sub_category : UInt16)
+    end
+  end
 
   @[Extern]
-  record WCN_VENDOR_EXTENSION_SPEC,
-    vendor_id : UInt32,
-    sub_type : UInt32,
-    index : UInt32,
-    flags : UInt32
+  struct WCN_VENDOR_EXTENSION_SPEC
+    property vendor_id : UInt32
+    property sub_type : UInt32
+    property index : UInt32
+    property flags : UInt32
+    def initialize(@vendor_id : UInt32, @sub_type : UInt32, @index : UInt32, @flags : UInt32)
+    end
+  end
 
   @[Extern]
   record IWCNDeviceVtbl,
@@ -363,7 +369,6 @@ module Win32cr::NetworkManagement::WindowsConnectNow
 
 
   @[Extern]
-  #@[Com("c100be9c-d33a-4a4b-bf23-bbef4663d017")]
   record IWCNDevice, lpVtbl : IWCNDeviceVtbl* do
     GUID = LibC::GUID.new(0xc100be9c_u32, 0xd33a_u16, 0x4a4b_u16, StaticArray[0xbf_u8, 0x23_u8, 0xbb_u8, 0xef_u8, 0x46_u8, 0x63_u8, 0xd0_u8, 0x17_u8])
     def query_interface(this : IWCNDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -421,7 +426,6 @@ module Win32cr::NetworkManagement::WindowsConnectNow
 
 
   @[Extern]
-  #@[Com("c100be9f-d33a-4a4b-bf23-bbef4663d017")]
   record IWCNConnectNotify, lpVtbl : IWCNConnectNotifyVtbl* do
     GUID = LibC::GUID.new(0xc100be9f_u32, 0xd33a_u16, 0x4a4b_u16, StaticArray[0xbf_u8, 0x23_u8, 0xbb_u8, 0xef_u8, 0x46_u8, 0x63_u8, 0xd0_u8, 0x17_u8])
     def query_interface(this : IWCNConnectNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

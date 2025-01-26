@@ -3,67 +3,67 @@ require "./../foundation.cr"
 
 module Win32cr::Graphics::OpenGL
   alias HGLRC = LibC::IntPtrT
-  alias PFNGLARRAYELEMENTEXTPROC = Proc(Int32, Void)*
+  alias PFNGLARRAYELEMENTEXTPROC = Proc(Int32, Void)
 
-  alias PFNGLDRAWARRAYSEXTPROC = Proc(UInt32, Int32, Int32, Void)*
+  alias PFNGLDRAWARRAYSEXTPROC = Proc(UInt32, Int32, Int32, Void)
 
-  alias PFNGLVERTEXPOINTEREXTPROC = Proc(Int32, UInt32, Int32, Int32, Void*, Void)*
+  alias PFNGLVERTEXPOINTEREXTPROC = Proc(Int32, UInt32, Int32, Int32, Void*, Void)
 
-  alias PFNGLNORMALPOINTEREXTPROC = Proc(UInt32, Int32, Int32, Void*, Void)*
+  alias PFNGLNORMALPOINTEREXTPROC = Proc(UInt32, Int32, Int32, Void*, Void)
 
-  alias PFNGLCOLORPOINTEREXTPROC = Proc(Int32, UInt32, Int32, Int32, Void*, Void)*
+  alias PFNGLCOLORPOINTEREXTPROC = Proc(Int32, UInt32, Int32, Int32, Void*, Void)
 
-  alias PFNGLINDEXPOINTEREXTPROC = Proc(UInt32, Int32, Int32, Void*, Void)*
+  alias PFNGLINDEXPOINTEREXTPROC = Proc(UInt32, Int32, Int32, Void*, Void)
 
-  alias PFNGLTEXCOORDPOINTEREXTPROC = Proc(Int32, UInt32, Int32, Int32, Void*, Void)*
+  alias PFNGLTEXCOORDPOINTEREXTPROC = Proc(Int32, UInt32, Int32, Int32, Void*, Void)
 
-  alias PFNGLEDGEFLAGPOINTEREXTPROC = Proc(Int32, Int32, UInt8*, Void)*
+  alias PFNGLEDGEFLAGPOINTEREXTPROC = Proc(Int32, Int32, UInt8*, Void)
 
-  alias PFNGLGETPOINTERVEXTPROC = Proc(UInt32, Void**, Void)*
+  alias PFNGLGETPOINTERVEXTPROC = Proc(UInt32, Void**, Void)
 
-  alias PFNGLARRAYELEMENTARRAYEXTPROC = Proc(UInt32, Int32, Void*, Void)*
+  alias PFNGLARRAYELEMENTARRAYEXTPROC = Proc(UInt32, Int32, Void*, Void)
 
-  alias PFNGLDRAWRANGEELEMENTSWINPROC = Proc(UInt32, UInt32, UInt32, Int32, UInt32, Void*, Void)*
+  alias PFNGLDRAWRANGEELEMENTSWINPROC = Proc(UInt32, UInt32, UInt32, Int32, UInt32, Void*, Void)
 
-  alias PFNGLADDSWAPHINTRECTWINPROC = Proc(Int32, Int32, Int32, Int32, Void)*
+  alias PFNGLADDSWAPHINTRECTWINPROC = Proc(Int32, Int32, Int32, Int32, Void)
 
-  alias PFNGLCOLORTABLEEXTPROC = Proc(UInt32, UInt32, Int32, UInt32, UInt32, Void*, Void)*
+  alias PFNGLCOLORTABLEEXTPROC = Proc(UInt32, UInt32, Int32, UInt32, UInt32, Void*, Void)
 
-  alias PFNGLCOLORSUBTABLEEXTPROC = Proc(UInt32, Int32, Int32, UInt32, UInt32, Void*, Void)*
+  alias PFNGLCOLORSUBTABLEEXTPROC = Proc(UInt32, Int32, Int32, UInt32, UInt32, Void*, Void)
 
-  alias PFNGLGETCOLORTABLEEXTPROC = Proc(UInt32, UInt32, UInt32, Void*, Void)*
+  alias PFNGLGETCOLORTABLEEXTPROC = Proc(UInt32, UInt32, UInt32, Void*, Void)
 
-  alias PFNGLGETCOLORTABLEPARAMETERIVEXTPROC = Proc(UInt32, UInt32, Int32*, Void)*
+  alias PFNGLGETCOLORTABLEPARAMETERIVEXTPROC = Proc(UInt32, UInt32, Int32*, Void)
 
-  alias PFNGLGETCOLORTABLEPARAMETERFVEXTPROC = Proc(UInt32, UInt32, Float32*, Void)*
+  alias PFNGLGETCOLORTABLEPARAMETERFVEXTPROC = Proc(UInt32, UInt32, Float32*, Void)
 
-  alias GLUquadricErrorProc = Proc(UInt32, Void)*
+  alias GLUquadricErrorProc = Proc(UInt32, Void)
 
-  alias GLUtessBeginProc = Proc(UInt32, Void)*
+  alias GLUtessBeginProc = Proc(UInt32, Void)
 
-  alias GLUtessEdgeFlagProc = Proc(UInt8, Void)*
+  alias GLUtessEdgeFlagProc = Proc(UInt8, Void)
 
-  alias GLUtessVertexProc = Proc(Void*, Void)*
+  alias GLUtessVertexProc = Proc(Void*, Void)
 
-  alias GLUtessEndProc = Proc(Void)*
+  alias GLUtessEndProc = Proc(Void)
 
-  alias GLUtessErrorProc = Proc(UInt32, Void)*
+  alias GLUtessErrorProc = Proc(UInt32, Void)
 
-  alias GLUtessCombineProc = Proc(Float64*, Void**, Float32*, Void**, Void)*
+  alias GLUtessCombineProc = Proc(Float64*, Void**, Float32*, Void**, Void)
 
-  alias GLUtessBeginDataProc = Proc(UInt32, Void*, Void)*
+  alias GLUtessBeginDataProc = Proc(UInt32, Void*, Void)
 
-  alias GLUtessEdgeFlagDataProc = Proc(UInt8, Void*, Void)*
+  alias GLUtessEdgeFlagDataProc = Proc(UInt8, Void*, Void)
 
-  alias GLUtessVertexDataProc = Proc(Void*, Void*, Void)*
+  alias GLUtessVertexDataProc = Proc(Void*, Void*, Void)
 
-  alias GLUtessEndDataProc = Proc(Void*, Void)*
+  alias GLUtessEndDataProc = Proc(Void*, Void)
 
-  alias GLUtessErrorDataProc = Proc(UInt32, Void*, Void)*
+  alias GLUtessErrorDataProc = Proc(UInt32, Void*, Void)
 
-  alias GLUtessCombineDataProc = Proc(Float64*, Void**, Float32*, Void**, Void*, Void)*
+  alias GLUtessCombineDataProc = Proc(Float64*, Void**, Float32*, Void**, Void*, Void)
 
-  alias GLUnurbsErrorProc = Proc(UInt32, Void)*
+  alias GLUnurbsErrorProc = Proc(UInt32, Void)
 
   GL_VERSION_1_1 = 1_u32
   GL_ACCUM = 256_u32
@@ -802,85 +802,112 @@ module Win32cr::Graphics::OpenGL
   end
 
   @[Extern]
-  record PIXELFORMATDESCRIPTOR,
-    nSize : UInt16,
-    nVersion : UInt16,
-    dwFlags : Win32cr::Graphics::OpenGL::PFD_FLAGS,
-    iPixelType : Win32cr::Graphics::OpenGL::PFD_PIXEL_TYPE,
-    cColorBits : UInt8,
-    cRedBits : UInt8,
-    cRedShift : UInt8,
-    cGreenBits : UInt8,
-    cGreenShift : UInt8,
-    cBlueBits : UInt8,
-    cBlueShift : UInt8,
-    cAlphaBits : UInt8,
-    cAlphaShift : UInt8,
-    cAccumBits : UInt8,
-    cAccumRedBits : UInt8,
-    cAccumGreenBits : UInt8,
-    cAccumBlueBits : UInt8,
-    cAccumAlphaBits : UInt8,
-    cDepthBits : UInt8,
-    cStencilBits : UInt8,
-    cAuxBuffers : UInt8,
-    iLayerType : Win32cr::Graphics::OpenGL::PFD_LAYER_TYPE,
-    bReserved : UInt8,
-    dwLayerMask : UInt32,
-    dwVisibleMask : UInt32,
-    dwDamageMask : UInt32
+  struct PIXELFORMATDESCRIPTOR
+    property nSize : UInt16
+    property nVersion : UInt16
+    property dwFlags : Win32cr::Graphics::OpenGL::PFD_FLAGS
+    property iPixelType : Win32cr::Graphics::OpenGL::PFD_PIXEL_TYPE
+    property cColorBits : UInt8
+    property cRedBits : UInt8
+    property cRedShift : UInt8
+    property cGreenBits : UInt8
+    property cGreenShift : UInt8
+    property cBlueBits : UInt8
+    property cBlueShift : UInt8
+    property cAlphaBits : UInt8
+    property cAlphaShift : UInt8
+    property cAccumBits : UInt8
+    property cAccumRedBits : UInt8
+    property cAccumGreenBits : UInt8
+    property cAccumBlueBits : UInt8
+    property cAccumAlphaBits : UInt8
+    property cDepthBits : UInt8
+    property cStencilBits : UInt8
+    property cAuxBuffers : UInt8
+    property iLayerType : Win32cr::Graphics::OpenGL::PFD_LAYER_TYPE
+    property bReserved : UInt8
+    property dwLayerMask : UInt32
+    property dwVisibleMask : UInt32
+    property dwDamageMask : UInt32
+    def initialize(@nSize : UInt16, @nVersion : UInt16, @dwFlags : Win32cr::Graphics::OpenGL::PFD_FLAGS, @iPixelType : Win32cr::Graphics::OpenGL::PFD_PIXEL_TYPE, @cColorBits : UInt8, @cRedBits : UInt8, @cRedShift : UInt8, @cGreenBits : UInt8, @cGreenShift : UInt8, @cBlueBits : UInt8, @cBlueShift : UInt8, @cAlphaBits : UInt8, @cAlphaShift : UInt8, @cAccumBits : UInt8, @cAccumRedBits : UInt8, @cAccumGreenBits : UInt8, @cAccumBlueBits : UInt8, @cAccumAlphaBits : UInt8, @cDepthBits : UInt8, @cStencilBits : UInt8, @cAuxBuffers : UInt8, @iLayerType : Win32cr::Graphics::OpenGL::PFD_LAYER_TYPE, @bReserved : UInt8, @dwLayerMask : UInt32, @dwVisibleMask : UInt32, @dwDamageMask : UInt32)
+    end
+  end
 
   @[Extern]
-  record EMRPIXELFORMAT,
-    emr : Win32cr::Graphics::Gdi::EMR,
-    pfd : Win32cr::Graphics::OpenGL::PIXELFORMATDESCRIPTOR
+  struct EMRPIXELFORMAT
+    property emr : Win32cr::Graphics::Gdi::EMR
+    property pfd : Win32cr::Graphics::OpenGL::PIXELFORMATDESCRIPTOR
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @pfd : Win32cr::Graphics::OpenGL::PIXELFORMATDESCRIPTOR)
+    end
+  end
 
   @[Extern]
-  record POINTFLOAT,
-    x : Float32,
-    y : Float32
+  struct POINTFLOAT
+    property x : Float32
+    property y : Float32
+    def initialize(@x : Float32, @y : Float32)
+    end
+  end
 
   @[Extern]
-  record GLYPHMETRICSFLOAT,
-    gmfBlackBoxX : Float32,
-    gmfBlackBoxY : Float32,
-    gmfptGlyphOrigin : Win32cr::Graphics::OpenGL::POINTFLOAT,
-    gmfCellIncX : Float32,
-    gmfCellIncY : Float32
+  struct GLYPHMETRICSFLOAT
+    property gmfBlackBoxX : Float32
+    property gmfBlackBoxY : Float32
+    property gmfptGlyphOrigin : Win32cr::Graphics::OpenGL::POINTFLOAT
+    property gmfCellIncX : Float32
+    property gmfCellIncY : Float32
+    def initialize(@gmfBlackBoxX : Float32, @gmfBlackBoxY : Float32, @gmfptGlyphOrigin : Win32cr::Graphics::OpenGL::POINTFLOAT, @gmfCellIncX : Float32, @gmfCellIncY : Float32)
+    end
+  end
 
   @[Extern]
-  record LAYERPLANEDESCRIPTOR,
-    nSize : UInt16,
-    nVersion : UInt16,
-    dwFlags : UInt32,
-    iPixelType : UInt8,
-    cColorBits : UInt8,
-    cRedBits : UInt8,
-    cRedShift : UInt8,
-    cGreenBits : UInt8,
-    cGreenShift : UInt8,
-    cBlueBits : UInt8,
-    cBlueShift : UInt8,
-    cAlphaBits : UInt8,
-    cAlphaShift : UInt8,
-    cAccumBits : UInt8,
-    cAccumRedBits : UInt8,
-    cAccumGreenBits : UInt8,
-    cAccumBlueBits : UInt8,
-    cAccumAlphaBits : UInt8,
-    cDepthBits : UInt8,
-    cStencilBits : UInt8,
-    cAuxBuffers : UInt8,
-    iLayerPlane : UInt8,
-    bReserved : UInt8,
-    crTransparent : UInt32
+  struct LAYERPLANEDESCRIPTOR
+    property nSize : UInt16
+    property nVersion : UInt16
+    property dwFlags : UInt32
+    property iPixelType : UInt8
+    property cColorBits : UInt8
+    property cRedBits : UInt8
+    property cRedShift : UInt8
+    property cGreenBits : UInt8
+    property cGreenShift : UInt8
+    property cBlueBits : UInt8
+    property cBlueShift : UInt8
+    property cAlphaBits : UInt8
+    property cAlphaShift : UInt8
+    property cAccumBits : UInt8
+    property cAccumRedBits : UInt8
+    property cAccumGreenBits : UInt8
+    property cAccumBlueBits : UInt8
+    property cAccumAlphaBits : UInt8
+    property cDepthBits : UInt8
+    property cStencilBits : UInt8
+    property cAuxBuffers : UInt8
+    property iLayerPlane : UInt8
+    property bReserved : UInt8
+    property crTransparent : UInt32
+    def initialize(@nSize : UInt16, @nVersion : UInt16, @dwFlags : UInt32, @iPixelType : UInt8, @cColorBits : UInt8, @cRedBits : UInt8, @cRedShift : UInt8, @cGreenBits : UInt8, @cGreenShift : UInt8, @cBlueBits : UInt8, @cBlueShift : UInt8, @cAlphaBits : UInt8, @cAlphaShift : UInt8, @cAccumBits : UInt8, @cAccumRedBits : UInt8, @cAccumGreenBits : UInt8, @cAccumBlueBits : UInt8, @cAccumAlphaBits : UInt8, @cDepthBits : UInt8, @cStencilBits : UInt8, @cAuxBuffers : UInt8, @iLayerPlane : UInt8, @bReserved : UInt8, @crTransparent : UInt32)
+    end
+  end
 
   @[Extern]
-  record GLUnurbs
+  struct GLUnurbs
+    def initialize()
+    end
+  end
+
   @[Extern]
-  record GLUquadric
+  struct GLUquadric
+    def initialize()
+    end
+  end
+
   @[Extern]
-  record GLUtesselator
+  struct GLUtesselator
+    def initialize()
+    end
+  end
+
   @[Link("gdi32")]
   @[Link("opengl32")]
   @[Link("glu32")]

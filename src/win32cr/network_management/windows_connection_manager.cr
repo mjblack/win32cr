@@ -1,7 +1,7 @@
 require "./../foundation.cr"
 
 module Win32cr::NetworkManagement::WindowsConnectionManager
-  alias ONDEMAND_NOTIFICATION_CALLBACK = Proc(Void*, Void)*
+  alias ONDEMAND_NOTIFICATION_CALLBACK = Proc(Void*, Void)
 
   WCM_API_VERSION_1_0 = 1_u32
   WCM_API_VERSION = 1_u32
@@ -45,67 +45,97 @@ module Win32cr::NetworkManagement::WindowsConnectionManager
   end
 
   @[Extern]
-  record WCM_POLICY_VALUE,
-    fValue : Win32cr::Foundation::BOOL,
-    fIsGroupPolicy : Win32cr::Foundation::BOOL
+  struct WCM_POLICY_VALUE
+    property fValue : Win32cr::Foundation::BOOL
+    property fIsGroupPolicy : Win32cr::Foundation::BOOL
+    def initialize(@fValue : Win32cr::Foundation::BOOL, @fIsGroupPolicy : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record WCM_PROFILE_INFO,
-    strProfileName : UInt16[256],
-    adapter_guid : LibC::GUID,
-    media : Win32cr::NetworkManagement::WindowsConnectionManager::WCM_MEDIA_TYPE
+  struct WCM_PROFILE_INFO
+    property strProfileName : UInt16[256]
+    property adapter_guid : LibC::GUID
+    property media : Win32cr::NetworkManagement::WindowsConnectionManager::WCM_MEDIA_TYPE
+    def initialize(@strProfileName : UInt16[256], @adapter_guid : LibC::GUID, @media : Win32cr::NetworkManagement::WindowsConnectionManager::WCM_MEDIA_TYPE)
+    end
+  end
 
   @[Extern]
-  record WCM_PROFILE_INFO_LIST,
-    dwNumberOfItems : UInt32,
-    profile_info : Win32cr::NetworkManagement::WindowsConnectionManager::WCM_PROFILE_INFO*
+  struct WCM_PROFILE_INFO_LIST
+    property dwNumberOfItems : UInt32
+    property profile_info : Win32cr::NetworkManagement::WindowsConnectionManager::WCM_PROFILE_INFO*
+    def initialize(@dwNumberOfItems : UInt32, @profile_info : Win32cr::NetworkManagement::WindowsConnectionManager::WCM_PROFILE_INFO*)
+    end
+  end
 
   @[Extern]
-  record WCM_CONNECTION_COST_DATA,
-    connection_cost : UInt32,
-    cost_source : Win32cr::NetworkManagement::WindowsConnectionManager::WCM_CONNECTION_COST_SOURCE
+  struct WCM_CONNECTION_COST_DATA
+    property connection_cost : UInt32
+    property cost_source : Win32cr::NetworkManagement::WindowsConnectionManager::WCM_CONNECTION_COST_SOURCE
+    def initialize(@connection_cost : UInt32, @cost_source : Win32cr::NetworkManagement::WindowsConnectionManager::WCM_CONNECTION_COST_SOURCE)
+    end
+  end
 
   @[Extern]
-  record WCM_TIME_INTERVAL,
-    wYear : UInt16,
-    wMonth : UInt16,
-    wDay : UInt16,
-    wHour : UInt16,
-    wMinute : UInt16,
-    wSecond : UInt16,
-    wMilliseconds : UInt16
+  struct WCM_TIME_INTERVAL
+    property wYear : UInt16
+    property wMonth : UInt16
+    property wDay : UInt16
+    property wHour : UInt16
+    property wMinute : UInt16
+    property wSecond : UInt16
+    property wMilliseconds : UInt16
+    def initialize(@wYear : UInt16, @wMonth : UInt16, @wDay : UInt16, @wHour : UInt16, @wMinute : UInt16, @wSecond : UInt16, @wMilliseconds : UInt16)
+    end
+  end
 
   @[Extern]
-  record WCM_USAGE_DATA,
-    usage_in_megabytes : UInt32,
-    last_sync_time : Win32cr::Foundation::FILETIME
+  struct WCM_USAGE_DATA
+    property usage_in_megabytes : UInt32
+    property last_sync_time : Win32cr::Foundation::FILETIME
+    def initialize(@usage_in_megabytes : UInt32, @last_sync_time : Win32cr::Foundation::FILETIME)
+    end
+  end
 
   @[Extern]
-  record WCM_BILLING_CYCLE_INFO,
-    start_date : Win32cr::Foundation::FILETIME,
-    duration : Win32cr::NetworkManagement::WindowsConnectionManager::WCM_TIME_INTERVAL,
-    reset : Win32cr::Foundation::BOOL
+  struct WCM_BILLING_CYCLE_INFO
+    property start_date : Win32cr::Foundation::FILETIME
+    property duration : Win32cr::NetworkManagement::WindowsConnectionManager::WCM_TIME_INTERVAL
+    property reset : Win32cr::Foundation::BOOL
+    def initialize(@start_date : Win32cr::Foundation::FILETIME, @duration : Win32cr::NetworkManagement::WindowsConnectionManager::WCM_TIME_INTERVAL, @reset : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record WCM_DATAPLAN_STATUS,
-    usage_data : Win32cr::NetworkManagement::WindowsConnectionManager::WCM_USAGE_DATA,
-    data_limit_in_megabytes : UInt32,
-    inbound_bandwidth_in_kbps : UInt32,
-    outbound_bandwidth_in_kbps : UInt32,
-    billing_cycle : Win32cr::NetworkManagement::WindowsConnectionManager::WCM_BILLING_CYCLE_INFO,
-    max_transfer_size_in_megabytes : UInt32,
-    reserved : UInt32
+  struct WCM_DATAPLAN_STATUS
+    property usage_data : Win32cr::NetworkManagement::WindowsConnectionManager::WCM_USAGE_DATA
+    property data_limit_in_megabytes : UInt32
+    property inbound_bandwidth_in_kbps : UInt32
+    property outbound_bandwidth_in_kbps : UInt32
+    property billing_cycle : Win32cr::NetworkManagement::WindowsConnectionManager::WCM_BILLING_CYCLE_INFO
+    property max_transfer_size_in_megabytes : UInt32
+    property reserved : UInt32
+    def initialize(@usage_data : Win32cr::NetworkManagement::WindowsConnectionManager::WCM_USAGE_DATA, @data_limit_in_megabytes : UInt32, @inbound_bandwidth_in_kbps : UInt32, @outbound_bandwidth_in_kbps : UInt32, @billing_cycle : Win32cr::NetworkManagement::WindowsConnectionManager::WCM_BILLING_CYCLE_INFO, @max_transfer_size_in_megabytes : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record NET_INTERFACE_CONTEXT,
-    interface_index : UInt32,
-    configuration_name : Win32cr::Foundation::PWSTR
+  struct NET_INTERFACE_CONTEXT
+    property interface_index : UInt32
+    property configuration_name : Win32cr::Foundation::PWSTR
+    def initialize(@interface_index : UInt32, @configuration_name : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record NET_INTERFACE_CONTEXT_TABLE,
-    interface_context_handle : Win32cr::Foundation::HANDLE,
-    number_of_entries : UInt32,
-    interface_context_array : Win32cr::NetworkManagement::WindowsConnectionManager::NET_INTERFACE_CONTEXT*
+  struct NET_INTERFACE_CONTEXT_TABLE
+    property interface_context_handle : Win32cr::Foundation::HANDLE
+    property number_of_entries : UInt32
+    property interface_context_array : Win32cr::NetworkManagement::WindowsConnectionManager::NET_INTERFACE_CONTEXT*
+    def initialize(@interface_context_handle : Win32cr::Foundation::HANDLE, @number_of_entries : UInt32, @interface_context_array : Win32cr::NetworkManagement::WindowsConnectionManager::NET_INTERFACE_CONTEXT*)
+    end
+  end
 
   @[Link("wcmapi")]
   @[Link("ondemandconnroutehelper")]

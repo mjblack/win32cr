@@ -76,38 +76,55 @@ module Win32cr::UI::Shell::Common
   end
 
   @[Extern]
-  record SHITEMID,
-    cb : UInt16,
-    abID : UInt8*
-
-  @[Extern]
-  record ITEMIDLIST,
-    mkid : Win32cr::UI::Shell::Common::SHITEMID
-
-  @[Extern]
-  record STRRET,
-    uType : UInt32,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      pOleStr : Win32cr::Foundation::PWSTR,
-      uOffset : UInt32,
-      cStr : UInt8[260]
-
+  struct SHITEMID
+    property cb : UInt16
+    property abID : UInt8*
+    def initialize(@cb : UInt16, @abID : UInt8*)
+    end
   end
 
   @[Extern]
-  record SHELLDETAILS,
-    fmt : Int32,
-    cxChar : Int32,
-    str : Win32cr::UI::Shell::Common::STRRET
+  struct ITEMIDLIST
+    property mkid : Win32cr::UI::Shell::Common::SHITEMID
+    def initialize(@mkid : Win32cr::UI::Shell::Common::SHITEMID)
+    end
+  end
 
   @[Extern]
-  record COMDLG_FILTERSPEC,
-    pszName : Win32cr::Foundation::PWSTR,
-    pszSpec : Win32cr::Foundation::PWSTR
+  struct STRRET
+    property uType : UInt32
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property pOleStr : Win32cr::Foundation::PWSTR
+    property uOffset : UInt32
+    property cStr : UInt8[260]
+    def initialize(@pOleStr : Win32cr::Foundation::PWSTR, @uOffset : UInt32, @cStr : UInt8[260])
+    end
+    end
+
+    def initialize(@uType : UInt32, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct SHELLDETAILS
+    property fmt : Int32
+    property cxChar : Int32
+    property str : Win32cr::UI::Shell::Common::STRRET
+    def initialize(@fmt : Int32, @cxChar : Int32, @str : Win32cr::UI::Shell::Common::STRRET)
+    end
+  end
+
+  @[Extern]
+  struct COMDLG_FILTERSPEC
+    property pszName : Win32cr::Foundation::PWSTR
+    property pszSpec : Win32cr::Foundation::PWSTR
+    def initialize(@pszName : Win32cr::Foundation::PWSTR, @pszSpec : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
   record IObjectArrayVtbl,
@@ -119,7 +136,6 @@ module Win32cr::UI::Shell::Common
 
 
   @[Extern]
-  #@[Com("92ca9dcd-5622-4bba-a805-5e9f541bd8c9")]
   record IObjectArray, lpVtbl : IObjectArrayVtbl* do
     GUID = LibC::GUID.new(0x92ca9dcd_u32, 0x5622_u16, 0x4bba_u16, StaticArray[0xa8_u8, 0x5_u8, 0x5e_u8, 0x9f_u8, 0x54_u8, 0x1b_u8, 0xd8_u8, 0xc9_u8])
     def query_interface(this : IObjectArray*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -154,7 +170,6 @@ module Win32cr::UI::Shell::Common
 
 
   @[Extern]
-  #@[Com("5632b1a4-e38a-400a-928a-d4cd63230295")]
   record IObjectCollection, lpVtbl : IObjectCollectionVtbl* do
     GUID = LibC::GUID.new(0x5632b1a4_u32, 0xe38a_u16, 0x400a_u16, StaticArray[0x92_u8, 0x8a_u8, 0xd4_u8, 0xcd_u8, 0x63_u8, 0x23_u8, 0x2_u8, 0x95_u8])
     def query_interface(this : IObjectCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

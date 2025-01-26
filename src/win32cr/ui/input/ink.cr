@@ -22,7 +22,6 @@ module Win32cr::UI::Input::Ink
 
 
   @[Extern]
-  #@[Com("fabea3fc-b108-45b6-a9fc-8d08fa9f85cf")]
   record IInkCommitRequestHandler, lpVtbl : IInkCommitRequestHandlerVtbl* do
     GUID = LibC::GUID.new(0xfabea3fc_u32, 0xb108_u16, 0x45b6_u16, StaticArray[0xa9_u8, 0xfc_u8, 0x8d_u8, 0x8_u8, 0xfa_u8, 0x9f_u8, 0x85_u8, 0xcf_u8])
     def query_interface(this : IInkCommitRequestHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -53,7 +52,6 @@ module Win32cr::UI::Input::Ink
 
 
   @[Extern]
-  #@[Com("73f3c0d9-2e8b-48f3-895e-20cbd27b723b")]
   record IInkPresenterDesktop, lpVtbl : IInkPresenterDesktopVtbl* do
     GUID = LibC::GUID.new(0x73f3c0d9_u32, 0x2e8b_u16, 0x48f3_u16, StaticArray[0x89_u8, 0x5e_u8, 0x20_u8, 0xcb_u8, 0xd2_u8, 0x7b_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : IInkPresenterDesktop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -92,7 +90,6 @@ module Win32cr::UI::Input::Ink
 
 
   @[Extern]
-  #@[Com("ccda0a9a-1b78-4632-bb96-97800662e26c")]
   record IInkHostWorkItem, lpVtbl : IInkHostWorkItemVtbl* do
     GUID = LibC::GUID.new(0xccda0a9a_u32, 0x1b78_u16, 0x4632_u16, StaticArray[0xbb_u8, 0x96_u8, 0x97_u8, 0x80_u8, 0x6_u8, 0x62_u8, 0xe2_u8, 0x6c_u8])
     def query_interface(this : IInkHostWorkItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -121,7 +118,6 @@ module Win32cr::UI::Input::Ink
 
 
   @[Extern]
-  #@[Com("4ce7d875-a981-4140-a1ff-ad93258e8d59")]
   record IInkDesktopHost, lpVtbl : IInkDesktopHostVtbl* do
     GUID = LibC::GUID.new(0x4ce7d875_u32, 0xa981_u16, 0x4140_u16, StaticArray[0xa1_u8, 0xff_u8, 0xad_u8, 0x93_u8, 0x25_u8, 0x8e_u8, 0x8d_u8, 0x59_u8])
     def query_interface(this : IInkDesktopHost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -154,7 +150,6 @@ module Win32cr::UI::Input::Ink
 
 
   @[Extern]
-  #@[Com("407fb1de-f85a-4150-97cf-b7fb274fb4f8")]
   record IInkD2DRenderer, lpVtbl : IInkD2DRendererVtbl* do
     GUID = LibC::GUID.new(0x407fb1de_u32, 0xf85a_u16, 0x4150_u16, StaticArray[0x97_u8, 0xcf_u8, 0xb7_u8, 0xfb_u8, 0x27_u8, 0x4f_u8, 0xb4_u8, 0xf8_u8])
     def query_interface(this : IInkD2DRenderer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -181,7 +176,6 @@ module Win32cr::UI::Input::Ink
 
 
   @[Extern]
-  #@[Com("0a95dcd9-4578-4b71-b20b-bf664d4bfeee")]
   record IInkD2DRenderer2, lpVtbl : IInkD2DRenderer2Vtbl* do
     GUID = LibC::GUID.new(0xa95dcd9_u32, 0x4578_u16, 0x4b71_u16, StaticArray[0xb2_u8, 0xb_u8, 0xbf_u8, 0x66_u8, 0x4d_u8, 0x4b_u8, 0xfe_u8, 0xee_u8])
     def query_interface(this : IInkD2DRenderer2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

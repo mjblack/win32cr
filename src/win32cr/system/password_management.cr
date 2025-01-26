@@ -4,20 +4,32 @@ module Win32cr::System::PasswordManagement
 
 
   @[Extern]
-  record CYPHER_BLOCK,
-    data : Win32cr::Foundation::CHAR[8]
+  struct CYPHER_BLOCK
+    property data : Win32cr::Foundation::CHAR[8]
+    def initialize(@data : Win32cr::Foundation::CHAR[8])
+    end
+  end
 
   @[Extern]
-  record LM_OWF_PASSWORD,
-    data : Win32cr::System::PasswordManagement::CYPHER_BLOCK[2]
+  struct LM_OWF_PASSWORD
+    property data : Win32cr::System::PasswordManagement::CYPHER_BLOCK[2]
+    def initialize(@data : Win32cr::System::PasswordManagement::CYPHER_BLOCK[2])
+    end
+  end
 
   @[Extern]
-  record SAMPR_ENCRYPTED_USER_PASSWORD,
-    buffer : UInt8[516]
+  struct SAMPR_ENCRYPTED_USER_PASSWORD
+    property buffer : UInt8[516]
+    def initialize(@buffer : UInt8[516])
+    end
+  end
 
   @[Extern]
-  record ENCRYPTED_LM_OWF_PASSWORD,
-    data : Win32cr::System::PasswordManagement::CYPHER_BLOCK[2]
+  struct ENCRYPTED_LM_OWF_PASSWORD
+    property data : Win32cr::System::PasswordManagement::CYPHER_BLOCK[2]
+    def initialize(@data : Win32cr::System::PasswordManagement::CYPHER_BLOCK[2])
+    end
+  end
 
   @[Link("advapi32")]
   lib C

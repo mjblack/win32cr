@@ -20,7 +20,6 @@ module Win32cr::System::WinRT::Printing
 
 
   @[Extern]
-  #@[Com("9ca31010-1484-4587-b26b-dddf9f9caecd")]
   record IPrinting3DManagerInterop, lpVtbl : IPrinting3DManagerInteropVtbl* do
     GUID = LibC::GUID.new(0x9ca31010_u32, 0x1484_u16, 0x4587_u16, StaticArray[0xb2_u8, 0x6b_u8, 0xdd_u8, 0xdf_u8, 0x9f_u8, 0x9c_u8, 0xae_u8, 0xcd_u8])
     def query_interface(this : IPrinting3DManagerInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -63,7 +62,6 @@ module Win32cr::System::WinRT::Printing
 
 
   @[Extern]
-  #@[Com("c5435a42-8d43-4e7b-a68a-ef311e392087")]
   record IPrintManagerInterop, lpVtbl : IPrintManagerInteropVtbl* do
     GUID = LibC::GUID.new(0xc5435a42_u32, 0x8d43_u16, 0x4e7b_u16, StaticArray[0xa6_u8, 0x8a_u8, 0xef_u8, 0x31_u8, 0x1e_u8, 0x39_u8, 0x20_u8, 0x87_u8])
     def query_interface(this : IPrintManagerInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -106,7 +104,6 @@ module Win32cr::System::WinRT::Printing
 
 
   @[Extern]
-  #@[Com("04097374-77b8-47f6-8167-aae29d4cf84b")]
   record IPrintWorkflowXpsReceiver, lpVtbl : IPrintWorkflowXpsReceiverVtbl* do
     GUID = LibC::GUID.new(0x4097374_u32, 0x77b8_u16, 0x47f6_u16, StaticArray[0x81_u8, 0x67_u8, 0xaa_u8, 0xe2_u8, 0x9d_u8, 0x4c_u8, 0xf8_u8, 0x4b_u8])
     def query_interface(this : IPrintWorkflowXpsReceiver*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -150,7 +147,6 @@ module Win32cr::System::WinRT::Printing
 
 
   @[Extern]
-  #@[Com("023bcc0c-dfab-4a61-b074-490c6995580d")]
   record IPrintWorkflowXpsReceiver2, lpVtbl : IPrintWorkflowXpsReceiver2Vtbl* do
     GUID = LibC::GUID.new(0x23bcc0c_u32, 0xdfab_u16, 0x4a61_u16, StaticArray[0xb0_u8, 0x74_u8, 0x49_u8, 0xc_u8, 0x69_u8, 0x95_u8, 0x58_u8, 0xd_u8])
     def query_interface(this : IPrintWorkflowXpsReceiver2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -193,7 +189,6 @@ module Win32cr::System::WinRT::Printing
 
 
   @[Extern]
-  #@[Com("68c9e477-993e-4052-8ac6-454eff58db9d")]
   record IPrintWorkflowObjectModelSourceFileContentNative, lpVtbl : IPrintWorkflowObjectModelSourceFileContentNativeVtbl* do
     GUID = LibC::GUID.new(0x68c9e477_u32, 0x993e_u16, 0x4052_u16, StaticArray[0x8a_u8, 0xc6_u8, 0x45_u8, 0x4e_u8, 0xff_u8, 0x58_u8, 0xdb_u8, 0x9d_u8])
     def query_interface(this : IPrintWorkflowObjectModelSourceFileContentNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -223,7 +218,6 @@ module Win32cr::System::WinRT::Printing
 
 
   @[Extern]
-  #@[Com("7d96bc74-9b54-4ca1-ad3a-979c3d44ddac")]
   record IPrintWorkflowXpsObjectModelTargetPackageNative, lpVtbl : IPrintWorkflowXpsObjectModelTargetPackageNativeVtbl* do
     GUID = LibC::GUID.new(0x7d96bc74_u32, 0x9b54_u16, 0x4ca1_u16, StaticArray[0xad_u8, 0x3a_u8, 0x97_u8, 0x9c_u8, 0x3d_u8, 0x44_u8, 0xdd_u8, 0xac_u8])
     def query_interface(this : IPrintWorkflowXpsObjectModelTargetPackageNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -252,7 +246,6 @@ module Win32cr::System::WinRT::Printing
 
 
   @[Extern]
-  #@[Com("c056be0a-9ee2-450a-9823-964f0006f2bb")]
   record IPrintWorkflowConfigurationNative, lpVtbl : IPrintWorkflowConfigurationNativeVtbl* do
     GUID = LibC::GUID.new(0xc056be0a_u32, 0x9ee2_u16, 0x450a_u16, StaticArray[0x98_u8, 0x23_u8, 0x96_u8, 0x4f_u8, 0x0_u8, 0x6_u8, 0xf2_u8, 0xbb_u8])
     def query_interface(this : IPrintWorkflowConfigurationNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

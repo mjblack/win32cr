@@ -6,9 +6,9 @@ require "./dxgi.cr"
 require "./../security.cr"
 
 module Win32cr::Graphics::Direct3D11
-  alias PFN_D3D11_CREATE_DEVICE = Proc(Void*, Win32cr::Graphics::Direct3D::D3D_DRIVER_TYPE, Win32cr::Foundation::HINSTANCE, UInt32, Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, UInt32, UInt32, Void**, Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, Void**, Win32cr::Foundation::HRESULT)*
+  alias PFN_D3D11_CREATE_DEVICE = Proc(Void*, Win32cr::Graphics::Direct3D::D3D_DRIVER_TYPE, Win32cr::Foundation::HINSTANCE, UInt32, Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, UInt32, UInt32, Void**, Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, Void**, Win32cr::Foundation::HRESULT)
 
-  alias PFN_D3D11_CREATE_DEVICE_AND_SWAP_CHAIN = Proc(Void*, Win32cr::Graphics::Direct3D::D3D_DRIVER_TYPE, Win32cr::Foundation::HINSTANCE, UInt32, Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, UInt32, UInt32, Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC*, Void**, Void**, Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, Void**, Win32cr::Foundation::HRESULT)*
+  alias PFN_D3D11_CREATE_DEVICE_AND_SWAP_CHAIN = Proc(Void*, Win32cr::Graphics::Direct3D::D3D_DRIVER_TYPE, Win32cr::Foundation::HINSTANCE, UInt32, Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, UInt32, UInt32, Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC*, Void**, Void**, Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, Void**, Win32cr::Foundation::HRESULT)
 
   D3D11_16BIT_INDEX_STRIP_CUT_VALUE = 65535_u32
   D3D11_32BIT_INDEX_STRIP_CUT_VALUE = 4294967295_u32
@@ -2703,1599 +2703,2211 @@ module Win32cr::Graphics::Direct3D11
   end
 
   @[Extern]
-  record D3D11_INPUT_ELEMENT_DESC,
-    semantic_name : Win32cr::Foundation::PSTR,
-    semantic_index : UInt32,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    input_slot : UInt32,
-    aligned_byte_offset : UInt32,
-    input_slot_class : Win32cr::Graphics::Direct3D11::D3D11_INPUT_CLASSIFICATION,
-    instance_data_step_rate : UInt32
+  struct D3D11_INPUT_ELEMENT_DESC
+    property semantic_name : Win32cr::Foundation::PSTR
+    property semantic_index : UInt32
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property input_slot : UInt32
+    property aligned_byte_offset : UInt32
+    property input_slot_class : Win32cr::Graphics::Direct3D11::D3D11_INPUT_CLASSIFICATION
+    property instance_data_step_rate : UInt32
+    def initialize(@semantic_name : Win32cr::Foundation::PSTR, @semantic_index : UInt32, @format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @input_slot : UInt32, @aligned_byte_offset : UInt32, @input_slot_class : Win32cr::Graphics::Direct3D11::D3D11_INPUT_CLASSIFICATION, @instance_data_step_rate : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_SO_DECLARATION_ENTRY,
-    stream : UInt32,
-    semantic_name : Win32cr::Foundation::PSTR,
-    semantic_index : UInt32,
-    start_component : UInt8,
-    component_count : UInt8,
-    output_slot : UInt8
+  struct D3D11_SO_DECLARATION_ENTRY
+    property stream : UInt32
+    property semantic_name : Win32cr::Foundation::PSTR
+    property semantic_index : UInt32
+    property start_component : UInt8
+    property component_count : UInt8
+    property output_slot : UInt8
+    def initialize(@stream : UInt32, @semantic_name : Win32cr::Foundation::PSTR, @semantic_index : UInt32, @start_component : UInt8, @component_count : UInt8, @output_slot : UInt8)
+    end
+  end
 
   @[Extern]
-  record D3D11_VIEWPORT,
-    top_left_x : Float32,
-    top_left_y : Float32,
-    width : Float32,
-    height : Float32,
-    min_depth : Float32,
-    max_depth : Float32
+  struct D3D11_VIEWPORT
+    property top_left_x : Float32
+    property top_left_y : Float32
+    property width : Float32
+    property height : Float32
+    property min_depth : Float32
+    property max_depth : Float32
+    def initialize(@top_left_x : Float32, @top_left_y : Float32, @width : Float32, @height : Float32, @min_depth : Float32, @max_depth : Float32)
+    end
+  end
 
   @[Extern]
-  record D3D11_DRAW_INSTANCED_INDIRECT_ARGS,
-    vertex_count_per_instance : UInt32,
-    instance_count : UInt32,
-    start_vertex_location : UInt32,
-    start_instance_location : UInt32
+  struct D3D11_DRAW_INSTANCED_INDIRECT_ARGS
+    property vertex_count_per_instance : UInt32
+    property instance_count : UInt32
+    property start_vertex_location : UInt32
+    property start_instance_location : UInt32
+    def initialize(@vertex_count_per_instance : UInt32, @instance_count : UInt32, @start_vertex_location : UInt32, @start_instance_location : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_DRAW_INDEXED_INSTANCED_INDIRECT_ARGS,
-    index_count_per_instance : UInt32,
-    instance_count : UInt32,
-    start_index_location : UInt32,
-    base_vertex_location : Int32,
-    start_instance_location : UInt32
+  struct D3D11_DRAW_INDEXED_INSTANCED_INDIRECT_ARGS
+    property index_count_per_instance : UInt32
+    property instance_count : UInt32
+    property start_index_location : UInt32
+    property base_vertex_location : Int32
+    property start_instance_location : UInt32
+    def initialize(@index_count_per_instance : UInt32, @instance_count : UInt32, @start_index_location : UInt32, @base_vertex_location : Int32, @start_instance_location : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_BOX,
-    left : UInt32,
-    top : UInt32,
-    front : UInt32,
-    right : UInt32,
-    bottom : UInt32,
-    back : UInt32
+  struct D3D11_BOX
+    property left : UInt32
+    property top : UInt32
+    property front : UInt32
+    property right : UInt32
+    property bottom : UInt32
+    property back : UInt32
+    def initialize(@left : UInt32, @top : UInt32, @front : UInt32, @right : UInt32, @bottom : UInt32, @back : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_DEPTH_STENCILOP_DESC,
-    stencil_fail_op : Win32cr::Graphics::Direct3D11::D3D11_STENCIL_OP,
-    stencil_depth_fail_op : Win32cr::Graphics::Direct3D11::D3D11_STENCIL_OP,
-    stencil_pass_op : Win32cr::Graphics::Direct3D11::D3D11_STENCIL_OP,
-    stencil_func : Win32cr::Graphics::Direct3D11::D3D11_COMPARISON_FUNC
+  struct D3D11_DEPTH_STENCILOP_DESC
+    property stencil_fail_op : Win32cr::Graphics::Direct3D11::D3D11_STENCIL_OP
+    property stencil_depth_fail_op : Win32cr::Graphics::Direct3D11::D3D11_STENCIL_OP
+    property stencil_pass_op : Win32cr::Graphics::Direct3D11::D3D11_STENCIL_OP
+    property stencil_func : Win32cr::Graphics::Direct3D11::D3D11_COMPARISON_FUNC
+    def initialize(@stencil_fail_op : Win32cr::Graphics::Direct3D11::D3D11_STENCIL_OP, @stencil_depth_fail_op : Win32cr::Graphics::Direct3D11::D3D11_STENCIL_OP, @stencil_pass_op : Win32cr::Graphics::Direct3D11::D3D11_STENCIL_OP, @stencil_func : Win32cr::Graphics::Direct3D11::D3D11_COMPARISON_FUNC)
+    end
+  end
 
   @[Extern]
-  record D3D11_DEPTH_STENCIL_DESC,
-    depth_enable : Win32cr::Foundation::BOOL,
-    depth_write_mask : Win32cr::Graphics::Direct3D11::D3D11_DEPTH_WRITE_MASK,
-    depth_func : Win32cr::Graphics::Direct3D11::D3D11_COMPARISON_FUNC,
-    stencil_enable : Win32cr::Foundation::BOOL,
-    stencil_read_mask : UInt8,
-    stencil_write_mask : UInt8,
-    front_face : Win32cr::Graphics::Direct3D11::D3D11_DEPTH_STENCILOP_DESC,
-    back_face : Win32cr::Graphics::Direct3D11::D3D11_DEPTH_STENCILOP_DESC
+  struct D3D11_DEPTH_STENCIL_DESC
+    property depth_enable : Win32cr::Foundation::BOOL
+    property depth_write_mask : Win32cr::Graphics::Direct3D11::D3D11_DEPTH_WRITE_MASK
+    property depth_func : Win32cr::Graphics::Direct3D11::D3D11_COMPARISON_FUNC
+    property stencil_enable : Win32cr::Foundation::BOOL
+    property stencil_read_mask : UInt8
+    property stencil_write_mask : UInt8
+    property front_face : Win32cr::Graphics::Direct3D11::D3D11_DEPTH_STENCILOP_DESC
+    property back_face : Win32cr::Graphics::Direct3D11::D3D11_DEPTH_STENCILOP_DESC
+    def initialize(@depth_enable : Win32cr::Foundation::BOOL, @depth_write_mask : Win32cr::Graphics::Direct3D11::D3D11_DEPTH_WRITE_MASK, @depth_func : Win32cr::Graphics::Direct3D11::D3D11_COMPARISON_FUNC, @stencil_enable : Win32cr::Foundation::BOOL, @stencil_read_mask : UInt8, @stencil_write_mask : UInt8, @front_face : Win32cr::Graphics::Direct3D11::D3D11_DEPTH_STENCILOP_DESC, @back_face : Win32cr::Graphics::Direct3D11::D3D11_DEPTH_STENCILOP_DESC)
+    end
+  end
 
   @[Extern]
-  record D3D11_RENDER_TARGET_BLEND_DESC,
-    blend_enable : Win32cr::Foundation::BOOL,
-    src_blend : Win32cr::Graphics::Direct3D11::D3D11_BLEND,
-    dest_blend : Win32cr::Graphics::Direct3D11::D3D11_BLEND,
-    blend_op : Win32cr::Graphics::Direct3D11::D3D11_BLEND_OP,
-    src_blend_alpha : Win32cr::Graphics::Direct3D11::D3D11_BLEND,
-    dest_blend_alpha : Win32cr::Graphics::Direct3D11::D3D11_BLEND,
-    blend_op_alpha : Win32cr::Graphics::Direct3D11::D3D11_BLEND_OP,
-    render_target_write_mask : UInt8
+  struct D3D11_RENDER_TARGET_BLEND_DESC
+    property blend_enable : Win32cr::Foundation::BOOL
+    property src_blend : Win32cr::Graphics::Direct3D11::D3D11_BLEND
+    property dest_blend : Win32cr::Graphics::Direct3D11::D3D11_BLEND
+    property blend_op : Win32cr::Graphics::Direct3D11::D3D11_BLEND_OP
+    property src_blend_alpha : Win32cr::Graphics::Direct3D11::D3D11_BLEND
+    property dest_blend_alpha : Win32cr::Graphics::Direct3D11::D3D11_BLEND
+    property blend_op_alpha : Win32cr::Graphics::Direct3D11::D3D11_BLEND_OP
+    property render_target_write_mask : UInt8
+    def initialize(@blend_enable : Win32cr::Foundation::BOOL, @src_blend : Win32cr::Graphics::Direct3D11::D3D11_BLEND, @dest_blend : Win32cr::Graphics::Direct3D11::D3D11_BLEND, @blend_op : Win32cr::Graphics::Direct3D11::D3D11_BLEND_OP, @src_blend_alpha : Win32cr::Graphics::Direct3D11::D3D11_BLEND, @dest_blend_alpha : Win32cr::Graphics::Direct3D11::D3D11_BLEND, @blend_op_alpha : Win32cr::Graphics::Direct3D11::D3D11_BLEND_OP, @render_target_write_mask : UInt8)
+    end
+  end
 
   @[Extern]
-  record D3D11_BLEND_DESC,
-    alpha_to_coverage_enable : Win32cr::Foundation::BOOL,
-    independent_blend_enable : Win32cr::Foundation::BOOL,
-    render_target : Win32cr::Graphics::Direct3D11::D3D11_RENDER_TARGET_BLEND_DESC[8]
+  struct D3D11_BLEND_DESC
+    property alpha_to_coverage_enable : Win32cr::Foundation::BOOL
+    property independent_blend_enable : Win32cr::Foundation::BOOL
+    property render_target : Win32cr::Graphics::Direct3D11::D3D11_RENDER_TARGET_BLEND_DESC[8]
+    def initialize(@alpha_to_coverage_enable : Win32cr::Foundation::BOOL, @independent_blend_enable : Win32cr::Foundation::BOOL, @render_target : Win32cr::Graphics::Direct3D11::D3D11_RENDER_TARGET_BLEND_DESC[8])
+    end
+  end
 
   @[Extern]
-  record D3D11_RASTERIZER_DESC,
-    fill_mode : Win32cr::Graphics::Direct3D11::D3D11_FILL_MODE,
-    cull_mode : Win32cr::Graphics::Direct3D11::D3D11_CULL_MODE,
-    front_counter_clockwise : Win32cr::Foundation::BOOL,
-    depth_bias : Int32,
-    depth_bias_clamp : Float32,
-    slope_scaled_depth_bias : Float32,
-    depth_clip_enable : Win32cr::Foundation::BOOL,
-    scissor_enable : Win32cr::Foundation::BOOL,
-    multisample_enable : Win32cr::Foundation::BOOL,
-    antialiased_line_enable : Win32cr::Foundation::BOOL
+  struct D3D11_RASTERIZER_DESC
+    property fill_mode : Win32cr::Graphics::Direct3D11::D3D11_FILL_MODE
+    property cull_mode : Win32cr::Graphics::Direct3D11::D3D11_CULL_MODE
+    property front_counter_clockwise : Win32cr::Foundation::BOOL
+    property depth_bias : Int32
+    property depth_bias_clamp : Float32
+    property slope_scaled_depth_bias : Float32
+    property depth_clip_enable : Win32cr::Foundation::BOOL
+    property scissor_enable : Win32cr::Foundation::BOOL
+    property multisample_enable : Win32cr::Foundation::BOOL
+    property antialiased_line_enable : Win32cr::Foundation::BOOL
+    def initialize(@fill_mode : Win32cr::Graphics::Direct3D11::D3D11_FILL_MODE, @cull_mode : Win32cr::Graphics::Direct3D11::D3D11_CULL_MODE, @front_counter_clockwise : Win32cr::Foundation::BOOL, @depth_bias : Int32, @depth_bias_clamp : Float32, @slope_scaled_depth_bias : Float32, @depth_clip_enable : Win32cr::Foundation::BOOL, @scissor_enable : Win32cr::Foundation::BOOL, @multisample_enable : Win32cr::Foundation::BOOL, @antialiased_line_enable : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record D3D11_SUBRESOURCE_DATA,
-    pSysMem : Void*,
-    sys_mem_pitch : UInt32,
-    sys_mem_slice_pitch : UInt32
+  struct D3D11_SUBRESOURCE_DATA
+    property pSysMem : Void*
+    property sys_mem_pitch : UInt32
+    property sys_mem_slice_pitch : UInt32
+    def initialize(@pSysMem : Void*, @sys_mem_pitch : UInt32, @sys_mem_slice_pitch : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_MAPPED_SUBRESOURCE,
-    pData : Void*,
-    row_pitch : UInt32,
-    depth_pitch : UInt32
+  struct D3D11_MAPPED_SUBRESOURCE
+    property pData : Void*
+    property row_pitch : UInt32
+    property depth_pitch : UInt32
+    def initialize(@pData : Void*, @row_pitch : UInt32, @depth_pitch : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_BUFFER_DESC,
-    byte_width : UInt32,
-    usage : Win32cr::Graphics::Direct3D11::D3D11_USAGE,
-    bind_flags : Win32cr::Graphics::Direct3D11::D3D11_BIND_FLAG,
-    cpu_access_flags : Win32cr::Graphics::Direct3D11::D3D11_CPU_ACCESS_FLAG,
-    misc_flags : Win32cr::Graphics::Direct3D11::D3D11_RESOURCE_MISC_FLAG,
-    structure_byte_stride : UInt32
+  struct D3D11_BUFFER_DESC
+    property byte_width : UInt32
+    property usage : Win32cr::Graphics::Direct3D11::D3D11_USAGE
+    property bind_flags : Win32cr::Graphics::Direct3D11::D3D11_BIND_FLAG
+    property cpu_access_flags : Win32cr::Graphics::Direct3D11::D3D11_CPU_ACCESS_FLAG
+    property misc_flags : Win32cr::Graphics::Direct3D11::D3D11_RESOURCE_MISC_FLAG
+    property structure_byte_stride : UInt32
+    def initialize(@byte_width : UInt32, @usage : Win32cr::Graphics::Direct3D11::D3D11_USAGE, @bind_flags : Win32cr::Graphics::Direct3D11::D3D11_BIND_FLAG, @cpu_access_flags : Win32cr::Graphics::Direct3D11::D3D11_CPU_ACCESS_FLAG, @misc_flags : Win32cr::Graphics::Direct3D11::D3D11_RESOURCE_MISC_FLAG, @structure_byte_stride : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEXTURE1D_DESC,
-    width : UInt32,
-    mip_levels : UInt32,
-    array_size : UInt32,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    usage : Win32cr::Graphics::Direct3D11::D3D11_USAGE,
-    bind_flags : Win32cr::Graphics::Direct3D11::D3D11_BIND_FLAG,
-    cpu_access_flags : Win32cr::Graphics::Direct3D11::D3D11_CPU_ACCESS_FLAG,
-    misc_flags : Win32cr::Graphics::Direct3D11::D3D11_RESOURCE_MISC_FLAG
+  struct D3D11_TEXTURE1D_DESC
+    property width : UInt32
+    property mip_levels : UInt32
+    property array_size : UInt32
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property usage : Win32cr::Graphics::Direct3D11::D3D11_USAGE
+    property bind_flags : Win32cr::Graphics::Direct3D11::D3D11_BIND_FLAG
+    property cpu_access_flags : Win32cr::Graphics::Direct3D11::D3D11_CPU_ACCESS_FLAG
+    property misc_flags : Win32cr::Graphics::Direct3D11::D3D11_RESOURCE_MISC_FLAG
+    def initialize(@width : UInt32, @mip_levels : UInt32, @array_size : UInt32, @format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @usage : Win32cr::Graphics::Direct3D11::D3D11_USAGE, @bind_flags : Win32cr::Graphics::Direct3D11::D3D11_BIND_FLAG, @cpu_access_flags : Win32cr::Graphics::Direct3D11::D3D11_CPU_ACCESS_FLAG, @misc_flags : Win32cr::Graphics::Direct3D11::D3D11_RESOURCE_MISC_FLAG)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEXTURE2D_DESC,
-    width : UInt32,
-    height : UInt32,
-    mip_levels : UInt32,
-    array_size : UInt32,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    sample_desc : Win32cr::Graphics::Dxgi::Common::DXGI_SAMPLE_DESC,
-    usage : Win32cr::Graphics::Direct3D11::D3D11_USAGE,
-    bind_flags : Win32cr::Graphics::Direct3D11::D3D11_BIND_FLAG,
-    cpu_access_flags : Win32cr::Graphics::Direct3D11::D3D11_CPU_ACCESS_FLAG,
-    misc_flags : Win32cr::Graphics::Direct3D11::D3D11_RESOURCE_MISC_FLAG
+  struct D3D11_TEXTURE2D_DESC
+    property width : UInt32
+    property height : UInt32
+    property mip_levels : UInt32
+    property array_size : UInt32
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property sample_desc : Win32cr::Graphics::Dxgi::Common::DXGI_SAMPLE_DESC
+    property usage : Win32cr::Graphics::Direct3D11::D3D11_USAGE
+    property bind_flags : Win32cr::Graphics::Direct3D11::D3D11_BIND_FLAG
+    property cpu_access_flags : Win32cr::Graphics::Direct3D11::D3D11_CPU_ACCESS_FLAG
+    property misc_flags : Win32cr::Graphics::Direct3D11::D3D11_RESOURCE_MISC_FLAG
+    def initialize(@width : UInt32, @height : UInt32, @mip_levels : UInt32, @array_size : UInt32, @format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @sample_desc : Win32cr::Graphics::Dxgi::Common::DXGI_SAMPLE_DESC, @usage : Win32cr::Graphics::Direct3D11::D3D11_USAGE, @bind_flags : Win32cr::Graphics::Direct3D11::D3D11_BIND_FLAG, @cpu_access_flags : Win32cr::Graphics::Direct3D11::D3D11_CPU_ACCESS_FLAG, @misc_flags : Win32cr::Graphics::Direct3D11::D3D11_RESOURCE_MISC_FLAG)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEXTURE3D_DESC,
-    width : UInt32,
-    height : UInt32,
-    depth : UInt32,
-    mip_levels : UInt32,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    usage : Win32cr::Graphics::Direct3D11::D3D11_USAGE,
-    bind_flags : Win32cr::Graphics::Direct3D11::D3D11_BIND_FLAG,
-    cpu_access_flags : Win32cr::Graphics::Direct3D11::D3D11_CPU_ACCESS_FLAG,
-    misc_flags : Win32cr::Graphics::Direct3D11::D3D11_RESOURCE_MISC_FLAG
+  struct D3D11_TEXTURE3D_DESC
+    property width : UInt32
+    property height : UInt32
+    property depth : UInt32
+    property mip_levels : UInt32
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property usage : Win32cr::Graphics::Direct3D11::D3D11_USAGE
+    property bind_flags : Win32cr::Graphics::Direct3D11::D3D11_BIND_FLAG
+    property cpu_access_flags : Win32cr::Graphics::Direct3D11::D3D11_CPU_ACCESS_FLAG
+    property misc_flags : Win32cr::Graphics::Direct3D11::D3D11_RESOURCE_MISC_FLAG
+    def initialize(@width : UInt32, @height : UInt32, @depth : UInt32, @mip_levels : UInt32, @format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @usage : Win32cr::Graphics::Direct3D11::D3D11_USAGE, @bind_flags : Win32cr::Graphics::Direct3D11::D3D11_BIND_FLAG, @cpu_access_flags : Win32cr::Graphics::Direct3D11::D3D11_CPU_ACCESS_FLAG, @misc_flags : Win32cr::Graphics::Direct3D11::D3D11_RESOURCE_MISC_FLAG)
+    end
+  end
 
   @[Extern]
-  record D3D11_BUFFER_SRV,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_ do
+  struct D3D11_BUFFER_SRV
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      first_element : UInt32,
-      element_offset : UInt32
+    struct Anonymous1_e__Union_
+    property first_element : UInt32
+    property element_offset : UInt32
+    def initialize(@first_element : UInt32, @element_offset : UInt32)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      num_elements : UInt32,
-      element_width : UInt32
+    struct Anonymous2_e__Union_
+    property num_elements : UInt32
+    property element_width : UInt32
+    def initialize(@num_elements : UInt32, @element_width : UInt32)
+    end
+    end
 
+    def initialize(@anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_)
+    end
   end
 
   @[Extern]
-  record D3D11_BUFFEREX_SRV,
-    first_element : UInt32,
-    num_elements : UInt32,
-    flags : UInt32
+  struct D3D11_BUFFEREX_SRV
+    property first_element : UInt32
+    property num_elements : UInt32
+    property flags : UInt32
+    def initialize(@first_element : UInt32, @num_elements : UInt32, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX1D_SRV,
-    most_detailed_mip : UInt32,
-    mip_levels : UInt32
+  struct D3D11_TEX1D_SRV
+    property most_detailed_mip : UInt32
+    property mip_levels : UInt32
+    def initialize(@most_detailed_mip : UInt32, @mip_levels : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX1D_ARRAY_SRV,
-    most_detailed_mip : UInt32,
-    mip_levels : UInt32,
-    first_array_slice : UInt32,
-    array_size : UInt32
+  struct D3D11_TEX1D_ARRAY_SRV
+    property most_detailed_mip : UInt32
+    property mip_levels : UInt32
+    property first_array_slice : UInt32
+    property array_size : UInt32
+    def initialize(@most_detailed_mip : UInt32, @mip_levels : UInt32, @first_array_slice : UInt32, @array_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX2D_SRV,
-    most_detailed_mip : UInt32,
-    mip_levels : UInt32
+  struct D3D11_TEX2D_SRV
+    property most_detailed_mip : UInt32
+    property mip_levels : UInt32
+    def initialize(@most_detailed_mip : UInt32, @mip_levels : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX2D_ARRAY_SRV,
-    most_detailed_mip : UInt32,
-    mip_levels : UInt32,
-    first_array_slice : UInt32,
-    array_size : UInt32
+  struct D3D11_TEX2D_ARRAY_SRV
+    property most_detailed_mip : UInt32
+    property mip_levels : UInt32
+    property first_array_slice : UInt32
+    property array_size : UInt32
+    def initialize(@most_detailed_mip : UInt32, @mip_levels : UInt32, @first_array_slice : UInt32, @array_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX3D_SRV,
-    most_detailed_mip : UInt32,
-    mip_levels : UInt32
+  struct D3D11_TEX3D_SRV
+    property most_detailed_mip : UInt32
+    property mip_levels : UInt32
+    def initialize(@most_detailed_mip : UInt32, @mip_levels : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEXCUBE_SRV,
-    most_detailed_mip : UInt32,
-    mip_levels : UInt32
+  struct D3D11_TEXCUBE_SRV
+    property most_detailed_mip : UInt32
+    property mip_levels : UInt32
+    def initialize(@most_detailed_mip : UInt32, @mip_levels : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEXCUBE_ARRAY_SRV,
-    most_detailed_mip : UInt32,
-    mip_levels : UInt32,
-    first2_d_array_face : UInt32,
-    num_cubes : UInt32
+  struct D3D11_TEXCUBE_ARRAY_SRV
+    property most_detailed_mip : UInt32
+    property mip_levels : UInt32
+    property first2_d_array_face : UInt32
+    property num_cubes : UInt32
+    def initialize(@most_detailed_mip : UInt32, @mip_levels : UInt32, @first2_d_array_face : UInt32, @num_cubes : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX2DMS_SRV,
-    unused_field_nothing_to_define : UInt32
+  struct D3D11_TEX2DMS_SRV
+    property unused_field_nothing_to_define : UInt32
+    def initialize(@unused_field_nothing_to_define : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX2DMS_ARRAY_SRV,
-    first_array_slice : UInt32,
-    array_size : UInt32
+  struct D3D11_TEX2DMS_ARRAY_SRV
+    property first_array_slice : UInt32
+    property array_size : UInt32
+    def initialize(@first_array_slice : UInt32, @array_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_SHADER_RESOURCE_VIEW_DESC,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    view_dimension : Win32cr::Graphics::Direct3D::D3D_SRV_DIMENSION,
-    anonymous : Anonymous_e__Union_ do
+  struct D3D11_SHADER_RESOURCE_VIEW_DESC
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property view_dimension : Win32cr::Graphics::Direct3D::D3D_SRV_DIMENSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      buffer : Win32cr::Graphics::Direct3D11::D3D11_BUFFER_SRV,
-      texture1_d : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_SRV,
-      texture1_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_ARRAY_SRV,
-      texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_SRV,
-      texture2_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_ARRAY_SRV,
-      texture2_dms : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_SRV,
-      texture2_dms_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_ARRAY_SRV,
-      texture3_d : Win32cr::Graphics::Direct3D11::D3D11_TEX3D_SRV,
-      texture_cube : Win32cr::Graphics::Direct3D11::D3D11_TEXCUBE_SRV,
-      texture_cube_array : Win32cr::Graphics::Direct3D11::D3D11_TEXCUBE_ARRAY_SRV,
-      buffer_ex : Win32cr::Graphics::Direct3D11::D3D11_BUFFEREX_SRV
+    struct Anonymous_e__Union_
+    property buffer : Win32cr::Graphics::Direct3D11::D3D11_BUFFER_SRV
+    property texture1_d : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_SRV
+    property texture1_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_ARRAY_SRV
+    property texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_SRV
+    property texture2_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_ARRAY_SRV
+    property texture2_dms : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_SRV
+    property texture2_dms_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_ARRAY_SRV
+    property texture3_d : Win32cr::Graphics::Direct3D11::D3D11_TEX3D_SRV
+    property texture_cube : Win32cr::Graphics::Direct3D11::D3D11_TEXCUBE_SRV
+    property texture_cube_array : Win32cr::Graphics::Direct3D11::D3D11_TEXCUBE_ARRAY_SRV
+    property buffer_ex : Win32cr::Graphics::Direct3D11::D3D11_BUFFEREX_SRV
+    def initialize(@buffer : Win32cr::Graphics::Direct3D11::D3D11_BUFFER_SRV, @texture1_d : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_SRV, @texture1_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_ARRAY_SRV, @texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_SRV, @texture2_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_ARRAY_SRV, @texture2_dms : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_SRV, @texture2_dms_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_ARRAY_SRV, @texture3_d : Win32cr::Graphics::Direct3D11::D3D11_TEX3D_SRV, @texture_cube : Win32cr::Graphics::Direct3D11::D3D11_TEXCUBE_SRV, @texture_cube_array : Win32cr::Graphics::Direct3D11::D3D11_TEXCUBE_ARRAY_SRV, @buffer_ex : Win32cr::Graphics::Direct3D11::D3D11_BUFFEREX_SRV)
+    end
+    end
 
+    def initialize(@format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @view_dimension : Win32cr::Graphics::Direct3D::D3D_SRV_DIMENSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record D3D11_BUFFER_RTV,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_ do
+  struct D3D11_BUFFER_RTV
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      num_elements : UInt32,
-      element_width : UInt32
+    struct Anonymous2_e__Union_
+    property num_elements : UInt32
+    property element_width : UInt32
+    def initialize(@num_elements : UInt32, @element_width : UInt32)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      first_element : UInt32,
-      element_offset : UInt32
+    struct Anonymous1_e__Union_
+    property first_element : UInt32
+    property element_offset : UInt32
+    def initialize(@first_element : UInt32, @element_offset : UInt32)
+    end
+    end
 
+    def initialize(@anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_)
+    end
   end
 
   @[Extern]
-  record D3D11_TEX1D_RTV,
-    mip_slice : UInt32
+  struct D3D11_TEX1D_RTV
+    property mip_slice : UInt32
+    def initialize(@mip_slice : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX1D_ARRAY_RTV,
-    mip_slice : UInt32,
-    first_array_slice : UInt32,
-    array_size : UInt32
+  struct D3D11_TEX1D_ARRAY_RTV
+    property mip_slice : UInt32
+    property first_array_slice : UInt32
+    property array_size : UInt32
+    def initialize(@mip_slice : UInt32, @first_array_slice : UInt32, @array_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX2D_RTV,
-    mip_slice : UInt32
+  struct D3D11_TEX2D_RTV
+    property mip_slice : UInt32
+    def initialize(@mip_slice : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX2DMS_RTV,
-    unused_field_nothing_to_define : UInt32
+  struct D3D11_TEX2DMS_RTV
+    property unused_field_nothing_to_define : UInt32
+    def initialize(@unused_field_nothing_to_define : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX2D_ARRAY_RTV,
-    mip_slice : UInt32,
-    first_array_slice : UInt32,
-    array_size : UInt32
+  struct D3D11_TEX2D_ARRAY_RTV
+    property mip_slice : UInt32
+    property first_array_slice : UInt32
+    property array_size : UInt32
+    def initialize(@mip_slice : UInt32, @first_array_slice : UInt32, @array_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX2DMS_ARRAY_RTV,
-    first_array_slice : UInt32,
-    array_size : UInt32
+  struct D3D11_TEX2DMS_ARRAY_RTV
+    property first_array_slice : UInt32
+    property array_size : UInt32
+    def initialize(@first_array_slice : UInt32, @array_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX3D_RTV,
-    mip_slice : UInt32,
-    first_w_slice : UInt32,
-    w_size : UInt32
+  struct D3D11_TEX3D_RTV
+    property mip_slice : UInt32
+    property first_w_slice : UInt32
+    property w_size : UInt32
+    def initialize(@mip_slice : UInt32, @first_w_slice : UInt32, @w_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_RENDER_TARGET_VIEW_DESC,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    view_dimension : Win32cr::Graphics::Direct3D11::D3D11_RTV_DIMENSION,
-    anonymous : Anonymous_e__Union_ do
+  struct D3D11_RENDER_TARGET_VIEW_DESC
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property view_dimension : Win32cr::Graphics::Direct3D11::D3D11_RTV_DIMENSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      buffer : Win32cr::Graphics::Direct3D11::D3D11_BUFFER_RTV,
-      texture1_d : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_RTV,
-      texture1_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_ARRAY_RTV,
-      texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_RTV,
-      texture2_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_ARRAY_RTV,
-      texture2_dms : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_RTV,
-      texture2_dms_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_ARRAY_RTV,
-      texture3_d : Win32cr::Graphics::Direct3D11::D3D11_TEX3D_RTV
+    struct Anonymous_e__Union_
+    property buffer : Win32cr::Graphics::Direct3D11::D3D11_BUFFER_RTV
+    property texture1_d : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_RTV
+    property texture1_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_ARRAY_RTV
+    property texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_RTV
+    property texture2_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_ARRAY_RTV
+    property texture2_dms : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_RTV
+    property texture2_dms_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_ARRAY_RTV
+    property texture3_d : Win32cr::Graphics::Direct3D11::D3D11_TEX3D_RTV
+    def initialize(@buffer : Win32cr::Graphics::Direct3D11::D3D11_BUFFER_RTV, @texture1_d : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_RTV, @texture1_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_ARRAY_RTV, @texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_RTV, @texture2_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_ARRAY_RTV, @texture2_dms : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_RTV, @texture2_dms_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_ARRAY_RTV, @texture3_d : Win32cr::Graphics::Direct3D11::D3D11_TEX3D_RTV)
+    end
+    end
 
+    def initialize(@format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @view_dimension : Win32cr::Graphics::Direct3D11::D3D11_RTV_DIMENSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record D3D11_TEX1D_DSV,
-    mip_slice : UInt32
+  struct D3D11_TEX1D_DSV
+    property mip_slice : UInt32
+    def initialize(@mip_slice : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX1D_ARRAY_DSV,
-    mip_slice : UInt32,
-    first_array_slice : UInt32,
-    array_size : UInt32
+  struct D3D11_TEX1D_ARRAY_DSV
+    property mip_slice : UInt32
+    property first_array_slice : UInt32
+    property array_size : UInt32
+    def initialize(@mip_slice : UInt32, @first_array_slice : UInt32, @array_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX2D_DSV,
-    mip_slice : UInt32
+  struct D3D11_TEX2D_DSV
+    property mip_slice : UInt32
+    def initialize(@mip_slice : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX2D_ARRAY_DSV,
-    mip_slice : UInt32,
-    first_array_slice : UInt32,
-    array_size : UInt32
+  struct D3D11_TEX2D_ARRAY_DSV
+    property mip_slice : UInt32
+    property first_array_slice : UInt32
+    property array_size : UInt32
+    def initialize(@mip_slice : UInt32, @first_array_slice : UInt32, @array_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX2DMS_DSV,
-    unused_field_nothing_to_define : UInt32
+  struct D3D11_TEX2DMS_DSV
+    property unused_field_nothing_to_define : UInt32
+    def initialize(@unused_field_nothing_to_define : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX2DMS_ARRAY_DSV,
-    first_array_slice : UInt32,
-    array_size : UInt32
+  struct D3D11_TEX2DMS_ARRAY_DSV
+    property first_array_slice : UInt32
+    property array_size : UInt32
+    def initialize(@first_array_slice : UInt32, @array_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_DEPTH_STENCIL_VIEW_DESC,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    view_dimension : Win32cr::Graphics::Direct3D11::D3D11_DSV_DIMENSION,
-    flags : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct D3D11_DEPTH_STENCIL_VIEW_DESC
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property view_dimension : Win32cr::Graphics::Direct3D11::D3D11_DSV_DIMENSION
+    property flags : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      texture1_d : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_DSV,
-      texture1_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_ARRAY_DSV,
-      texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_DSV,
-      texture2_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_ARRAY_DSV,
-      texture2_dms : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_DSV,
-      texture2_dms_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_ARRAY_DSV
+    struct Anonymous_e__Union_
+    property texture1_d : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_DSV
+    property texture1_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_ARRAY_DSV
+    property texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_DSV
+    property texture2_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_ARRAY_DSV
+    property texture2_dms : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_DSV
+    property texture2_dms_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_ARRAY_DSV
+    def initialize(@texture1_d : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_DSV, @texture1_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_ARRAY_DSV, @texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_DSV, @texture2_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_ARRAY_DSV, @texture2_dms : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_DSV, @texture2_dms_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_ARRAY_DSV)
+    end
+    end
 
+    def initialize(@format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @view_dimension : Win32cr::Graphics::Direct3D11::D3D11_DSV_DIMENSION, @flags : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record D3D11_BUFFER_UAV,
-    first_element : UInt32,
-    num_elements : UInt32,
-    flags : UInt32
+  struct D3D11_BUFFER_UAV
+    property first_element : UInt32
+    property num_elements : UInt32
+    property flags : UInt32
+    def initialize(@first_element : UInt32, @num_elements : UInt32, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX1D_UAV,
-    mip_slice : UInt32
+  struct D3D11_TEX1D_UAV
+    property mip_slice : UInt32
+    def initialize(@mip_slice : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX1D_ARRAY_UAV,
-    mip_slice : UInt32,
-    first_array_slice : UInt32,
-    array_size : UInt32
+  struct D3D11_TEX1D_ARRAY_UAV
+    property mip_slice : UInt32
+    property first_array_slice : UInt32
+    property array_size : UInt32
+    def initialize(@mip_slice : UInt32, @first_array_slice : UInt32, @array_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX2D_UAV,
-    mip_slice : UInt32
+  struct D3D11_TEX2D_UAV
+    property mip_slice : UInt32
+    def initialize(@mip_slice : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX2D_ARRAY_UAV,
-    mip_slice : UInt32,
-    first_array_slice : UInt32,
-    array_size : UInt32
+  struct D3D11_TEX2D_ARRAY_UAV
+    property mip_slice : UInt32
+    property first_array_slice : UInt32
+    property array_size : UInt32
+    def initialize(@mip_slice : UInt32, @first_array_slice : UInt32, @array_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX3D_UAV,
-    mip_slice : UInt32,
-    first_w_slice : UInt32,
-    w_size : UInt32
+  struct D3D11_TEX3D_UAV
+    property mip_slice : UInt32
+    property first_w_slice : UInt32
+    property w_size : UInt32
+    def initialize(@mip_slice : UInt32, @first_w_slice : UInt32, @w_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_UNORDERED_ACCESS_VIEW_DESC,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    view_dimension : Win32cr::Graphics::Direct3D11::D3D11_UAV_DIMENSION,
-    anonymous : Anonymous_e__Union_ do
+  struct D3D11_UNORDERED_ACCESS_VIEW_DESC
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property view_dimension : Win32cr::Graphics::Direct3D11::D3D11_UAV_DIMENSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      buffer : Win32cr::Graphics::Direct3D11::D3D11_BUFFER_UAV,
-      texture1_d : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_UAV,
-      texture1_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_ARRAY_UAV,
-      texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_UAV,
-      texture2_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_ARRAY_UAV,
-      texture3_d : Win32cr::Graphics::Direct3D11::D3D11_TEX3D_UAV
+    struct Anonymous_e__Union_
+    property buffer : Win32cr::Graphics::Direct3D11::D3D11_BUFFER_UAV
+    property texture1_d : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_UAV
+    property texture1_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_ARRAY_UAV
+    property texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_UAV
+    property texture2_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_ARRAY_UAV
+    property texture3_d : Win32cr::Graphics::Direct3D11::D3D11_TEX3D_UAV
+    def initialize(@buffer : Win32cr::Graphics::Direct3D11::D3D11_BUFFER_UAV, @texture1_d : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_UAV, @texture1_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_ARRAY_UAV, @texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_UAV, @texture2_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_ARRAY_UAV, @texture3_d : Win32cr::Graphics::Direct3D11::D3D11_TEX3D_UAV)
+    end
+    end
 
+    def initialize(@format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @view_dimension : Win32cr::Graphics::Direct3D11::D3D11_UAV_DIMENSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record D3D11_SAMPLER_DESC,
-    filter : Win32cr::Graphics::Direct3D11::D3D11_FILTER,
-    address_u : Win32cr::Graphics::Direct3D11::D3D11_TEXTURE_ADDRESS_MODE,
-    address_v : Win32cr::Graphics::Direct3D11::D3D11_TEXTURE_ADDRESS_MODE,
-    address_w : Win32cr::Graphics::Direct3D11::D3D11_TEXTURE_ADDRESS_MODE,
-    mip_lod_bias : Float32,
-    max_anisotropy : UInt32,
-    comparison_func : Win32cr::Graphics::Direct3D11::D3D11_COMPARISON_FUNC,
-    border_color : Float32[4],
-    min_lod : Float32,
-    max_lod : Float32
+  struct D3D11_SAMPLER_DESC
+    property filter : Win32cr::Graphics::Direct3D11::D3D11_FILTER
+    property address_u : Win32cr::Graphics::Direct3D11::D3D11_TEXTURE_ADDRESS_MODE
+    property address_v : Win32cr::Graphics::Direct3D11::D3D11_TEXTURE_ADDRESS_MODE
+    property address_w : Win32cr::Graphics::Direct3D11::D3D11_TEXTURE_ADDRESS_MODE
+    property mip_lod_bias : Float32
+    property max_anisotropy : UInt32
+    property comparison_func : Win32cr::Graphics::Direct3D11::D3D11_COMPARISON_FUNC
+    property border_color : Float32[4]
+    property min_lod : Float32
+    property max_lod : Float32
+    def initialize(@filter : Win32cr::Graphics::Direct3D11::D3D11_FILTER, @address_u : Win32cr::Graphics::Direct3D11::D3D11_TEXTURE_ADDRESS_MODE, @address_v : Win32cr::Graphics::Direct3D11::D3D11_TEXTURE_ADDRESS_MODE, @address_w : Win32cr::Graphics::Direct3D11::D3D11_TEXTURE_ADDRESS_MODE, @mip_lod_bias : Float32, @max_anisotropy : UInt32, @comparison_func : Win32cr::Graphics::Direct3D11::D3D11_COMPARISON_FUNC, @border_color : Float32[4], @min_lod : Float32, @max_lod : Float32)
+    end
+  end
 
   @[Extern]
-  record D3D11_QUERY_DESC,
-    query : Win32cr::Graphics::Direct3D11::D3D11_QUERY,
-    misc_flags : UInt32
+  struct D3D11_QUERY_DESC
+    property query : Win32cr::Graphics::Direct3D11::D3D11_QUERY
+    property misc_flags : UInt32
+    def initialize(@query : Win32cr::Graphics::Direct3D11::D3D11_QUERY, @misc_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_QUERY_DATA_TIMESTAMP_DISJOINT,
-    frequency : UInt64,
-    disjoint : Win32cr::Foundation::BOOL
+  struct D3D11_QUERY_DATA_TIMESTAMP_DISJOINT
+    property frequency : UInt64
+    property disjoint : Win32cr::Foundation::BOOL
+    def initialize(@frequency : UInt64, @disjoint : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record D3D11_QUERY_DATA_PIPELINE_STATISTICS,
-    ia_vertices : UInt64,
-    ia_primitives : UInt64,
-    vs_invocations : UInt64,
-    gs_invocations : UInt64,
-    gs_primitives : UInt64,
-    c_invocations : UInt64,
-    c_primitives : UInt64,
-    ps_invocations : UInt64,
-    hs_invocations : UInt64,
-    ds_invocations : UInt64,
-    cs_invocations : UInt64
+  struct D3D11_QUERY_DATA_PIPELINE_STATISTICS
+    property ia_vertices : UInt64
+    property ia_primitives : UInt64
+    property vs_invocations : UInt64
+    property gs_invocations : UInt64
+    property gs_primitives : UInt64
+    property c_invocations : UInt64
+    property c_primitives : UInt64
+    property ps_invocations : UInt64
+    property hs_invocations : UInt64
+    property ds_invocations : UInt64
+    property cs_invocations : UInt64
+    def initialize(@ia_vertices : UInt64, @ia_primitives : UInt64, @vs_invocations : UInt64, @gs_invocations : UInt64, @gs_primitives : UInt64, @c_invocations : UInt64, @c_primitives : UInt64, @ps_invocations : UInt64, @hs_invocations : UInt64, @ds_invocations : UInt64, @cs_invocations : UInt64)
+    end
+  end
 
   @[Extern]
-  record D3D11_QUERY_DATA_SO_STATISTICS,
-    num_primitives_written : UInt64,
-    primitives_storage_needed : UInt64
+  struct D3D11_QUERY_DATA_SO_STATISTICS
+    property num_primitives_written : UInt64
+    property primitives_storage_needed : UInt64
+    def initialize(@num_primitives_written : UInt64, @primitives_storage_needed : UInt64)
+    end
+  end
 
   @[Extern]
-  record D3D11_COUNTER_DESC,
-    counter : Win32cr::Graphics::Direct3D11::D3D11_COUNTER,
-    misc_flags : UInt32
+  struct D3D11_COUNTER_DESC
+    property counter : Win32cr::Graphics::Direct3D11::D3D11_COUNTER
+    property misc_flags : UInt32
+    def initialize(@counter : Win32cr::Graphics::Direct3D11::D3D11_COUNTER, @misc_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_COUNTER_INFO,
-    last_device_dependent_counter : Win32cr::Graphics::Direct3D11::D3D11_COUNTER,
-    num_simultaneous_counters : UInt32,
-    num_detectable_parallel_units : UInt8
+  struct D3D11_COUNTER_INFO
+    property last_device_dependent_counter : Win32cr::Graphics::Direct3D11::D3D11_COUNTER
+    property num_simultaneous_counters : UInt32
+    property num_detectable_parallel_units : UInt8
+    def initialize(@last_device_dependent_counter : Win32cr::Graphics::Direct3D11::D3D11_COUNTER, @num_simultaneous_counters : UInt32, @num_detectable_parallel_units : UInt8)
+    end
+  end
 
   @[Extern]
-  record D3D11_CLASS_INSTANCE_DESC,
-    instance_id : UInt32,
-    instance_index : UInt32,
-    type_id : UInt32,
-    constant_buffer : UInt32,
-    base_constant_buffer_offset : UInt32,
-    base_texture : UInt32,
-    base_sampler : UInt32,
-    created : Win32cr::Foundation::BOOL
+  struct D3D11_CLASS_INSTANCE_DESC
+    property instance_id : UInt32
+    property instance_index : UInt32
+    property type_id : UInt32
+    property constant_buffer : UInt32
+    property base_constant_buffer_offset : UInt32
+    property base_texture : UInt32
+    property base_sampler : UInt32
+    property created : Win32cr::Foundation::BOOL
+    def initialize(@instance_id : UInt32, @instance_index : UInt32, @type_id : UInt32, @constant_buffer : UInt32, @base_constant_buffer_offset : UInt32, @base_texture : UInt32, @base_sampler : UInt32, @created : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record D3D11_FEATURE_DATA_THREADING,
-    driver_concurrent_creates : Win32cr::Foundation::BOOL,
-    driver_command_lists : Win32cr::Foundation::BOOL
+  struct D3D11_FEATURE_DATA_THREADING
+    property driver_concurrent_creates : Win32cr::Foundation::BOOL
+    property driver_command_lists : Win32cr::Foundation::BOOL
+    def initialize(@driver_concurrent_creates : Win32cr::Foundation::BOOL, @driver_command_lists : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record D3D11_FEATURE_DATA_DOUBLES,
-    double_precision_float_shader_ops : Win32cr::Foundation::BOOL
+  struct D3D11_FEATURE_DATA_DOUBLES
+    property double_precision_float_shader_ops : Win32cr::Foundation::BOOL
+    def initialize(@double_precision_float_shader_ops : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record D3D11_FEATURE_DATA_FORMAT_SUPPORT,
-    in_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    out_format_support : UInt32
+  struct D3D11_FEATURE_DATA_FORMAT_SUPPORT
+    property in_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property out_format_support : UInt32
+    def initialize(@in_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @out_format_support : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_FEATURE_DATA_FORMAT_SUPPORT2,
-    in_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    out_format_support2 : UInt32
+  struct D3D11_FEATURE_DATA_FORMAT_SUPPORT2
+    property in_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property out_format_support2 : UInt32
+    def initialize(@in_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @out_format_support2 : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_FEATURE_DATA_D3D10_X_HARDWARE_OPTIONS,
-    compute_shaders_plus_raw_and_structured_buffers_via_shader_4_x : Win32cr::Foundation::BOOL
+  struct D3D11_FEATURE_DATA_D3D10_X_HARDWARE_OPTIONS
+    property compute_shaders_plus_raw_and_structured_buffers_via_shader_4_x : Win32cr::Foundation::BOOL
+    def initialize(@compute_shaders_plus_raw_and_structured_buffers_via_shader_4_x : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record D3D11_FEATURE_DATA_D3D11_OPTIONS,
-    output_merger_logic_op : Win32cr::Foundation::BOOL,
-    uav_only_rendering_forced_sample_count : Win32cr::Foundation::BOOL,
-    discard_ap_is_seen_by_driver : Win32cr::Foundation::BOOL,
-    flags_for_update_and_copy_seen_by_driver : Win32cr::Foundation::BOOL,
-    clear_view : Win32cr::Foundation::BOOL,
-    copy_with_overlap : Win32cr::Foundation::BOOL,
-    constant_buffer_partial_update : Win32cr::Foundation::BOOL,
-    constant_buffer_offsetting : Win32cr::Foundation::BOOL,
-    map_no_overwrite_on_dynamic_constant_buffer : Win32cr::Foundation::BOOL,
-    map_no_overwrite_on_dynamic_buffer_srv : Win32cr::Foundation::BOOL,
-    multisample_rtv_with_forced_sample_count_one : Win32cr::Foundation::BOOL,
-    sad4_shader_instructions : Win32cr::Foundation::BOOL,
-    extended_doubles_shader_instructions : Win32cr::Foundation::BOOL,
-    extended_resource_sharing : Win32cr::Foundation::BOOL
+  struct D3D11_FEATURE_DATA_D3D11_OPTIONS
+    property output_merger_logic_op : Win32cr::Foundation::BOOL
+    property uav_only_rendering_forced_sample_count : Win32cr::Foundation::BOOL
+    property discard_ap_is_seen_by_driver : Win32cr::Foundation::BOOL
+    property flags_for_update_and_copy_seen_by_driver : Win32cr::Foundation::BOOL
+    property clear_view : Win32cr::Foundation::BOOL
+    property copy_with_overlap : Win32cr::Foundation::BOOL
+    property constant_buffer_partial_update : Win32cr::Foundation::BOOL
+    property constant_buffer_offsetting : Win32cr::Foundation::BOOL
+    property map_no_overwrite_on_dynamic_constant_buffer : Win32cr::Foundation::BOOL
+    property map_no_overwrite_on_dynamic_buffer_srv : Win32cr::Foundation::BOOL
+    property multisample_rtv_with_forced_sample_count_one : Win32cr::Foundation::BOOL
+    property sad4_shader_instructions : Win32cr::Foundation::BOOL
+    property extended_doubles_shader_instructions : Win32cr::Foundation::BOOL
+    property extended_resource_sharing : Win32cr::Foundation::BOOL
+    def initialize(@output_merger_logic_op : Win32cr::Foundation::BOOL, @uav_only_rendering_forced_sample_count : Win32cr::Foundation::BOOL, @discard_ap_is_seen_by_driver : Win32cr::Foundation::BOOL, @flags_for_update_and_copy_seen_by_driver : Win32cr::Foundation::BOOL, @clear_view : Win32cr::Foundation::BOOL, @copy_with_overlap : Win32cr::Foundation::BOOL, @constant_buffer_partial_update : Win32cr::Foundation::BOOL, @constant_buffer_offsetting : Win32cr::Foundation::BOOL, @map_no_overwrite_on_dynamic_constant_buffer : Win32cr::Foundation::BOOL, @map_no_overwrite_on_dynamic_buffer_srv : Win32cr::Foundation::BOOL, @multisample_rtv_with_forced_sample_count_one : Win32cr::Foundation::BOOL, @sad4_shader_instructions : Win32cr::Foundation::BOOL, @extended_doubles_shader_instructions : Win32cr::Foundation::BOOL, @extended_resource_sharing : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record D3D11_FEATURE_DATA_ARCHITECTURE_INFO,
-    tile_based_deferred_renderer : Win32cr::Foundation::BOOL
+  struct D3D11_FEATURE_DATA_ARCHITECTURE_INFO
+    property tile_based_deferred_renderer : Win32cr::Foundation::BOOL
+    def initialize(@tile_based_deferred_renderer : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record D3D11_FEATURE_DATA_D3D9_OPTIONS,
-    full_non_pow2_texture_support : Win32cr::Foundation::BOOL
+  struct D3D11_FEATURE_DATA_D3D9_OPTIONS
+    property full_non_pow2_texture_support : Win32cr::Foundation::BOOL
+    def initialize(@full_non_pow2_texture_support : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record D3D11_FEATURE_DATA_D3D9_SHADOW_SUPPORT,
-    supports_depth_as_texture_with_less_equal_comparison_filter : Win32cr::Foundation::BOOL
+  struct D3D11_FEATURE_DATA_D3D9_SHADOW_SUPPORT
+    property supports_depth_as_texture_with_less_equal_comparison_filter : Win32cr::Foundation::BOOL
+    def initialize(@supports_depth_as_texture_with_less_equal_comparison_filter : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record D3D11_FEATURE_DATA_SHADER_MIN_PRECISION_SUPPORT,
-    pixel_shader_min_precision : UInt32,
-    all_other_shader_stages_min_precision : UInt32
+  struct D3D11_FEATURE_DATA_SHADER_MIN_PRECISION_SUPPORT
+    property pixel_shader_min_precision : UInt32
+    property all_other_shader_stages_min_precision : UInt32
+    def initialize(@pixel_shader_min_precision : UInt32, @all_other_shader_stages_min_precision : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_FEATURE_DATA_D3D11_OPTIONS1,
-    tiled_resources_tier : Win32cr::Graphics::Direct3D11::D3D11_TILED_RESOURCES_TIER,
-    min_max_filtering : Win32cr::Foundation::BOOL,
-    clear_view_also_supports_depth_only_formats : Win32cr::Foundation::BOOL,
-    map_on_default_buffers : Win32cr::Foundation::BOOL
+  struct D3D11_FEATURE_DATA_D3D11_OPTIONS1
+    property tiled_resources_tier : Win32cr::Graphics::Direct3D11::D3D11_TILED_RESOURCES_TIER
+    property min_max_filtering : Win32cr::Foundation::BOOL
+    property clear_view_also_supports_depth_only_formats : Win32cr::Foundation::BOOL
+    property map_on_default_buffers : Win32cr::Foundation::BOOL
+    def initialize(@tiled_resources_tier : Win32cr::Graphics::Direct3D11::D3D11_TILED_RESOURCES_TIER, @min_max_filtering : Win32cr::Foundation::BOOL, @clear_view_also_supports_depth_only_formats : Win32cr::Foundation::BOOL, @map_on_default_buffers : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record D3D11_FEATURE_DATA_D3D9_SIMPLE_INSTANCING_SUPPORT,
-    simple_instancing_supported : Win32cr::Foundation::BOOL
+  struct D3D11_FEATURE_DATA_D3D9_SIMPLE_INSTANCING_SUPPORT
+    property simple_instancing_supported : Win32cr::Foundation::BOOL
+    def initialize(@simple_instancing_supported : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record D3D11_FEATURE_DATA_MARKER_SUPPORT,
-    profile : Win32cr::Foundation::BOOL
+  struct D3D11_FEATURE_DATA_MARKER_SUPPORT
+    property profile : Win32cr::Foundation::BOOL
+    def initialize(@profile : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record D3D11_FEATURE_DATA_D3D9_OPTIONS1,
-    full_non_pow2_texture_supported : Win32cr::Foundation::BOOL,
-    depth_as_texture_with_less_equal_comparison_filter_supported : Win32cr::Foundation::BOOL,
-    simple_instancing_supported : Win32cr::Foundation::BOOL,
-    texture_cube_face_render_target_with_non_cube_depth_stencil_supported : Win32cr::Foundation::BOOL
+  struct D3D11_FEATURE_DATA_D3D9_OPTIONS1
+    property full_non_pow2_texture_supported : Win32cr::Foundation::BOOL
+    property depth_as_texture_with_less_equal_comparison_filter_supported : Win32cr::Foundation::BOOL
+    property simple_instancing_supported : Win32cr::Foundation::BOOL
+    property texture_cube_face_render_target_with_non_cube_depth_stencil_supported : Win32cr::Foundation::BOOL
+    def initialize(@full_non_pow2_texture_supported : Win32cr::Foundation::BOOL, @depth_as_texture_with_less_equal_comparison_filter_supported : Win32cr::Foundation::BOOL, @simple_instancing_supported : Win32cr::Foundation::BOOL, @texture_cube_face_render_target_with_non_cube_depth_stencil_supported : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record D3D11_FEATURE_DATA_D3D11_OPTIONS2,
-    ps_specified_stencil_ref_supported : Win32cr::Foundation::BOOL,
-    typed_uav_load_additional_formats : Win32cr::Foundation::BOOL,
-    ro_vs_supported : Win32cr::Foundation::BOOL,
-    conservative_rasterization_tier : Win32cr::Graphics::Direct3D11::D3D11_CONSERVATIVE_RASTERIZATION_TIER,
-    tiled_resources_tier : Win32cr::Graphics::Direct3D11::D3D11_TILED_RESOURCES_TIER,
-    map_on_default_textures : Win32cr::Foundation::BOOL,
-    standard_swizzle : Win32cr::Foundation::BOOL,
-    unified_memory_architecture : Win32cr::Foundation::BOOL
+  struct D3D11_FEATURE_DATA_D3D11_OPTIONS2
+    property ps_specified_stencil_ref_supported : Win32cr::Foundation::BOOL
+    property typed_uav_load_additional_formats : Win32cr::Foundation::BOOL
+    property ro_vs_supported : Win32cr::Foundation::BOOL
+    property conservative_rasterization_tier : Win32cr::Graphics::Direct3D11::D3D11_CONSERVATIVE_RASTERIZATION_TIER
+    property tiled_resources_tier : Win32cr::Graphics::Direct3D11::D3D11_TILED_RESOURCES_TIER
+    property map_on_default_textures : Win32cr::Foundation::BOOL
+    property standard_swizzle : Win32cr::Foundation::BOOL
+    property unified_memory_architecture : Win32cr::Foundation::BOOL
+    def initialize(@ps_specified_stencil_ref_supported : Win32cr::Foundation::BOOL, @typed_uav_load_additional_formats : Win32cr::Foundation::BOOL, @ro_vs_supported : Win32cr::Foundation::BOOL, @conservative_rasterization_tier : Win32cr::Graphics::Direct3D11::D3D11_CONSERVATIVE_RASTERIZATION_TIER, @tiled_resources_tier : Win32cr::Graphics::Direct3D11::D3D11_TILED_RESOURCES_TIER, @map_on_default_textures : Win32cr::Foundation::BOOL, @standard_swizzle : Win32cr::Foundation::BOOL, @unified_memory_architecture : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record D3D11_FEATURE_DATA_D3D11_OPTIONS3,
-    vp_and_rt_array_index_from_any_shader_feeding_rasterizer : Win32cr::Foundation::BOOL
+  struct D3D11_FEATURE_DATA_D3D11_OPTIONS3
+    property vp_and_rt_array_index_from_any_shader_feeding_rasterizer : Win32cr::Foundation::BOOL
+    def initialize(@vp_and_rt_array_index_from_any_shader_feeding_rasterizer : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record D3D11_FEATURE_DATA_GPU_VIRTUAL_ADDRESS_SUPPORT,
-    max_gpu_virtual_address_bits_per_resource : UInt32,
-    max_gpu_virtual_address_bits_per_process : UInt32
+  struct D3D11_FEATURE_DATA_GPU_VIRTUAL_ADDRESS_SUPPORT
+    property max_gpu_virtual_address_bits_per_resource : UInt32
+    property max_gpu_virtual_address_bits_per_process : UInt32
+    def initialize(@max_gpu_virtual_address_bits_per_resource : UInt32, @max_gpu_virtual_address_bits_per_process : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_FEATURE_DATA_SHADER_CACHE,
-    support_flags : UInt32
+  struct D3D11_FEATURE_DATA_SHADER_CACHE
+    property support_flags : UInt32
+    def initialize(@support_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_FEATURE_DATA_DISPLAYABLE,
-    displayable_texture : Win32cr::Foundation::BOOL,
-    shared_resource_tier : Win32cr::Graphics::Direct3D11::D3D11_SHARED_RESOURCE_TIER
+  struct D3D11_FEATURE_DATA_DISPLAYABLE
+    property displayable_texture : Win32cr::Foundation::BOOL
+    property shared_resource_tier : Win32cr::Graphics::Direct3D11::D3D11_SHARED_RESOURCE_TIER
+    def initialize(@displayable_texture : Win32cr::Foundation::BOOL, @shared_resource_tier : Win32cr::Graphics::Direct3D11::D3D11_SHARED_RESOURCE_TIER)
+    end
+  end
 
   @[Extern]
-  record D3D11_FEATURE_DATA_D3D11_OPTIONS5,
-    shared_resource_tier : Win32cr::Graphics::Direct3D11::D3D11_SHARED_RESOURCE_TIER
+  struct D3D11_FEATURE_DATA_D3D11_OPTIONS5
+    property shared_resource_tier : Win32cr::Graphics::Direct3D11::D3D11_SHARED_RESOURCE_TIER
+    def initialize(@shared_resource_tier : Win32cr::Graphics::Direct3D11::D3D11_SHARED_RESOURCE_TIER)
+    end
+  end
 
   @[Extern]
-  record CD3D11_VIDEO_DEFAULT
-  @[Extern]
-  record D3D11_VIDEO_DECODER_DESC,
-    guid : LibC::GUID,
-    sample_width : UInt32,
-    sample_height : UInt32,
-    output_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+  struct CD3D11_VIDEO_DEFAULT
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record D3D11_VIDEO_DECODER_CONFIG,
-    guidConfigBitstreamEncryption : LibC::GUID,
-    guidConfigMBcontrolEncryption : LibC::GUID,
-    guidConfigResidDiffEncryption : LibC::GUID,
-    config_bitstream_raw : UInt32,
-    config_m_bcontrol_raster_order : UInt32,
-    config_resid_diff_host : UInt32,
-    config_spatial_resid8 : UInt32,
-    config_resid8_subtraction : UInt32,
-    config_spatial_host8or9_clipping : UInt32,
-    config_spatial_resid_interleaved : UInt32,
-    config_intra_resid_unsigned : UInt32,
-    config_resid_diff_accelerator : UInt32,
-    config_host_inverse_scan : UInt32,
-    config_specific_idct : UInt32,
-    config4_grouped_coefs : UInt32,
-    config_min_render_target_buff_count : UInt16,
-    config_decoder_specific : UInt16
+  struct D3D11_VIDEO_DECODER_DESC
+    property guid : LibC::GUID
+    property sample_width : UInt32
+    property sample_height : UInt32
+    property output_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    def initialize(@guid : LibC::GUID, @sample_width : UInt32, @sample_height : UInt32, @output_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT)
+    end
+  end
 
   @[Extern]
-  record D3D11_AES_CTR_IV,
-    iv : UInt64,
-    count : UInt64
+  struct D3D11_VIDEO_DECODER_CONFIG
+    property guidConfigBitstreamEncryption : LibC::GUID
+    property guidConfigMBcontrolEncryption : LibC::GUID
+    property guidConfigResidDiffEncryption : LibC::GUID
+    property config_bitstream_raw : UInt32
+    property config_m_bcontrol_raster_order : UInt32
+    property config_resid_diff_host : UInt32
+    property config_spatial_resid8 : UInt32
+    property config_resid8_subtraction : UInt32
+    property config_spatial_host8or9_clipping : UInt32
+    property config_spatial_resid_interleaved : UInt32
+    property config_intra_resid_unsigned : UInt32
+    property config_resid_diff_accelerator : UInt32
+    property config_host_inverse_scan : UInt32
+    property config_specific_idct : UInt32
+    property config4_grouped_coefs : UInt32
+    property config_min_render_target_buff_count : UInt16
+    property config_decoder_specific : UInt16
+    def initialize(@guidConfigBitstreamEncryption : LibC::GUID, @guidConfigMBcontrolEncryption : LibC::GUID, @guidConfigResidDiffEncryption : LibC::GUID, @config_bitstream_raw : UInt32, @config_m_bcontrol_raster_order : UInt32, @config_resid_diff_host : UInt32, @config_spatial_resid8 : UInt32, @config_resid8_subtraction : UInt32, @config_spatial_host8or9_clipping : UInt32, @config_spatial_resid_interleaved : UInt32, @config_intra_resid_unsigned : UInt32, @config_resid_diff_accelerator : UInt32, @config_host_inverse_scan : UInt32, @config_specific_idct : UInt32, @config4_grouped_coefs : UInt32, @config_min_render_target_buff_count : UInt16, @config_decoder_specific : UInt16)
+    end
+  end
 
   @[Extern]
-  record D3D11_ENCRYPTED_BLOCK_INFO,
-    num_encrypted_bytes_at_beginning : UInt32,
-    num_bytes_in_skip_pattern : UInt32,
-    num_bytes_in_encrypt_pattern : UInt32
+  struct D3D11_AES_CTR_IV
+    property iv : UInt64
+    property count : UInt64
+    def initialize(@iv : UInt64, @count : UInt64)
+    end
+  end
 
   @[Extern]
-  record D3D11_VIDEO_DECODER_BUFFER_DESC,
-    buffer_type : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_DECODER_BUFFER_TYPE,
-    buffer_index : UInt32,
-    data_offset : UInt32,
-    data_size : UInt32,
-    first_m_baddress : UInt32,
-    num_m_bs_in_buffer : UInt32,
-    width : UInt32,
-    height : UInt32,
-    stride : UInt32,
-    reserved_bits : UInt32,
-    pIV : Void*,
-    iv_size : UInt32,
-    partial_encryption : Win32cr::Foundation::BOOL,
-    encrypted_block_info : Win32cr::Graphics::Direct3D11::D3D11_ENCRYPTED_BLOCK_INFO
+  struct D3D11_ENCRYPTED_BLOCK_INFO
+    property num_encrypted_bytes_at_beginning : UInt32
+    property num_bytes_in_skip_pattern : UInt32
+    property num_bytes_in_encrypt_pattern : UInt32
+    def initialize(@num_encrypted_bytes_at_beginning : UInt32, @num_bytes_in_skip_pattern : UInt32, @num_bytes_in_encrypt_pattern : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_VIDEO_DECODER_EXTENSION,
-    function : UInt32,
-    pPrivateInputData : Void*,
-    private_input_data_size : UInt32,
-    pPrivateOutputData : Void*,
-    private_output_data_size : UInt32,
-    resource_count : UInt32,
-    ppResourceList : Void**
+  struct D3D11_VIDEO_DECODER_BUFFER_DESC
+    property buffer_type : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_DECODER_BUFFER_TYPE
+    property buffer_index : UInt32
+    property data_offset : UInt32
+    property data_size : UInt32
+    property first_m_baddress : UInt32
+    property num_m_bs_in_buffer : UInt32
+    property width : UInt32
+    property height : UInt32
+    property stride : UInt32
+    property reserved_bits : UInt32
+    property pIV : Void*
+    property iv_size : UInt32
+    property partial_encryption : Win32cr::Foundation::BOOL
+    property encrypted_block_info : Win32cr::Graphics::Direct3D11::D3D11_ENCRYPTED_BLOCK_INFO
+    def initialize(@buffer_type : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_DECODER_BUFFER_TYPE, @buffer_index : UInt32, @data_offset : UInt32, @data_size : UInt32, @first_m_baddress : UInt32, @num_m_bs_in_buffer : UInt32, @width : UInt32, @height : UInt32, @stride : UInt32, @reserved_bits : UInt32, @pIV : Void*, @iv_size : UInt32, @partial_encryption : Win32cr::Foundation::BOOL, @encrypted_block_info : Win32cr::Graphics::Direct3D11::D3D11_ENCRYPTED_BLOCK_INFO)
+    end
+  end
 
   @[Extern]
-  record D3D11_VIDEO_PROCESSOR_CAPS,
-    device_caps : UInt32,
-    feature_caps : UInt32,
-    filter_caps : UInt32,
-    input_format_caps : UInt32,
-    auto_stream_caps : UInt32,
-    stereo_caps : UInt32,
-    rate_conversion_caps_count : UInt32,
-    max_input_streams : UInt32,
-    max_stream_states : UInt32
+  struct D3D11_VIDEO_DECODER_EXTENSION
+    property function : UInt32
+    property pPrivateInputData : Void*
+    property private_input_data_size : UInt32
+    property pPrivateOutputData : Void*
+    property private_output_data_size : UInt32
+    property resource_count : UInt32
+    property ppResourceList : Void**
+    def initialize(@function : UInt32, @pPrivateInputData : Void*, @private_input_data_size : UInt32, @pPrivateOutputData : Void*, @private_output_data_size : UInt32, @resource_count : UInt32, @ppResourceList : Void**)
+    end
+  end
 
   @[Extern]
-  record D3D11_VIDEO_PROCESSOR_RATE_CONVERSION_CAPS,
-    past_frames : UInt32,
-    future_frames : UInt32,
-    processor_caps : UInt32,
-    i_telecine_caps : UInt32,
-    custom_rate_count : UInt32
+  struct D3D11_VIDEO_PROCESSOR_CAPS
+    property device_caps : UInt32
+    property feature_caps : UInt32
+    property filter_caps : UInt32
+    property input_format_caps : UInt32
+    property auto_stream_caps : UInt32
+    property stereo_caps : UInt32
+    property rate_conversion_caps_count : UInt32
+    property max_input_streams : UInt32
+    property max_stream_states : UInt32
+    def initialize(@device_caps : UInt32, @feature_caps : UInt32, @filter_caps : UInt32, @input_format_caps : UInt32, @auto_stream_caps : UInt32, @stereo_caps : UInt32, @rate_conversion_caps_count : UInt32, @max_input_streams : UInt32, @max_stream_states : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_VIDEO_CONTENT_PROTECTION_CAPS,
-    caps : UInt32,
-    key_exchange_type_count : UInt32,
-    block_alignment_size : UInt32,
-    protected_memory_size : UInt64
+  struct D3D11_VIDEO_PROCESSOR_RATE_CONVERSION_CAPS
+    property past_frames : UInt32
+    property future_frames : UInt32
+    property processor_caps : UInt32
+    property i_telecine_caps : UInt32
+    property custom_rate_count : UInt32
+    def initialize(@past_frames : UInt32, @future_frames : UInt32, @processor_caps : UInt32, @i_telecine_caps : UInt32, @custom_rate_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_VIDEO_PROCESSOR_CUSTOM_RATE,
-    custom_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL,
-    output_frames : UInt32,
-    input_interlaced : Win32cr::Foundation::BOOL,
-    input_frames_or_fields : UInt32
+  struct D3D11_VIDEO_CONTENT_PROTECTION_CAPS
+    property caps : UInt32
+    property key_exchange_type_count : UInt32
+    property block_alignment_size : UInt32
+    property protected_memory_size : UInt64
+    def initialize(@caps : UInt32, @key_exchange_type_count : UInt32, @block_alignment_size : UInt32, @protected_memory_size : UInt64)
+    end
+  end
 
   @[Extern]
-  record D3D11_VIDEO_PROCESSOR_FILTER_RANGE,
-    minimum : Int32,
-    maximum : Int32,
-    default : Int32,
-    multiplier : Float32
+  struct D3D11_VIDEO_PROCESSOR_CUSTOM_RATE
+    property custom_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL
+    property output_frames : UInt32
+    property input_interlaced : Win32cr::Foundation::BOOL
+    property input_frames_or_fields : UInt32
+    def initialize(@custom_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL, @output_frames : UInt32, @input_interlaced : Win32cr::Foundation::BOOL, @input_frames_or_fields : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_VIDEO_PROCESSOR_CONTENT_DESC,
-    input_frame_format : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_FRAME_FORMAT,
-    input_frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL,
-    input_width : UInt32,
-    input_height : UInt32,
-    output_frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL,
-    output_width : UInt32,
-    output_height : UInt32,
-    usage : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_USAGE
+  struct D3D11_VIDEO_PROCESSOR_FILTER_RANGE
+    property minimum : Int32
+    property maximum : Int32
+    property default : Int32
+    property multiplier : Float32
+    def initialize(@minimum : Int32, @maximum : Int32, @default : Int32, @multiplier : Float32)
+    end
+  end
 
   @[Extern]
-  record D3D11_VIDEO_COLOR_RGBA,
-    r : Float32,
-    g : Float32,
-    b : Float32,
-    a : Float32
+  struct D3D11_VIDEO_PROCESSOR_CONTENT_DESC
+    property input_frame_format : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_FRAME_FORMAT
+    property input_frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL
+    property input_width : UInt32
+    property input_height : UInt32
+    property output_frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL
+    property output_width : UInt32
+    property output_height : UInt32
+    property usage : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_USAGE
+    def initialize(@input_frame_format : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_FRAME_FORMAT, @input_frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL, @input_width : UInt32, @input_height : UInt32, @output_frame_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL, @output_width : UInt32, @output_height : UInt32, @usage : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_USAGE)
+    end
+  end
 
   @[Extern]
-  record D3D11_VIDEO_COLOR_YCbCrA,
-    y : Float32,
-    cb : Float32,
-    cr : Float32,
-    a : Float32
+  struct D3D11_VIDEO_COLOR_RGBA
+    property r : Float32
+    property g : Float32
+    property b : Float32
+    property a : Float32
+    def initialize(@r : Float32, @g : Float32, @b : Float32, @a : Float32)
+    end
+  end
 
   @[Extern]
-  record D3D11_VIDEO_COLOR,
-    anonymous : Anonymous_e__Union_ do
+  struct D3D11_VIDEO_COLOR_YCbCrA
+    property y : Float32
+    property cb : Float32
+    property cr : Float32
+    property a : Float32
+    def initialize(@y : Float32, @cb : Float32, @cr : Float32, @a : Float32)
+    end
+  end
+
+  @[Extern]
+  struct D3D11_VIDEO_COLOR
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      y_cb_cr : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_COLOR_YCbCrA,
-      rgba : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_COLOR_RGBA
+    struct Anonymous_e__Union_
+    property y_cb_cr : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_COLOR_YCbCrA
+    property rgba : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_COLOR_RGBA
+    def initialize(@y_cb_cr : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_COLOR_YCbCrA, @rgba : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_COLOR_RGBA)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record D3D11_VIDEO_PROCESSOR_COLOR_SPACE,
-    _bitfield : UInt32
+  struct D3D11_VIDEO_PROCESSOR_COLOR_SPACE
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_VIDEO_PROCESSOR_STREAM,
-    enable : Win32cr::Foundation::BOOL,
-    output_index : UInt32,
-    input_frame_or_field : UInt32,
-    past_frames : UInt32,
-    future_frames : UInt32,
-    ppPastSurfaces : Void**,
-    pInputSurface : Void*,
-    ppFutureSurfaces : Void**,
-    ppPastSurfacesRight : Void**,
-    pInputSurfaceRight : Void*,
-    ppFutureSurfacesRight : Void**
+  struct D3D11_VIDEO_PROCESSOR_STREAM
+    property enable : Win32cr::Foundation::BOOL
+    property output_index : UInt32
+    property input_frame_or_field : UInt32
+    property past_frames : UInt32
+    property future_frames : UInt32
+    property ppPastSurfaces : Void**
+    property pInputSurface : Void*
+    property ppFutureSurfaces : Void**
+    property ppPastSurfacesRight : Void**
+    property pInputSurfaceRight : Void*
+    property ppFutureSurfacesRight : Void**
+    def initialize(@enable : Win32cr::Foundation::BOOL, @output_index : UInt32, @input_frame_or_field : UInt32, @past_frames : UInt32, @future_frames : UInt32, @ppPastSurfaces : Void**, @pInputSurface : Void*, @ppFutureSurfaces : Void**, @ppPastSurfacesRight : Void**, @pInputSurfaceRight : Void*, @ppFutureSurfacesRight : Void**)
+    end
+  end
 
   @[Extern]
-  record D3D11_OMAC,
-    omac : UInt8[16]
+  struct D3D11_OMAC
+    property omac : UInt8[16]
+    def initialize(@omac : UInt8[16])
+    end
+  end
 
   @[Extern]
-  record D3D11_AUTHENTICATED_QUERY_INPUT,
-    query_type : LibC::GUID,
-    hChannel : Win32cr::Foundation::HANDLE,
-    sequence_number : UInt32
+  struct D3D11_AUTHENTICATED_QUERY_INPUT
+    property query_type : LibC::GUID
+    property hChannel : Win32cr::Foundation::HANDLE
+    property sequence_number : UInt32
+    def initialize(@query_type : LibC::GUID, @hChannel : Win32cr::Foundation::HANDLE, @sequence_number : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_AUTHENTICATED_QUERY_OUTPUT,
-    omac : Win32cr::Graphics::Direct3D11::D3D11_OMAC,
-    query_type : LibC::GUID,
-    hChannel : Win32cr::Foundation::HANDLE,
-    sequence_number : UInt32,
-    return_code : Win32cr::Foundation::HRESULT
+  struct D3D11_AUTHENTICATED_QUERY_OUTPUT
+    property omac : Win32cr::Graphics::Direct3D11::D3D11_OMAC
+    property query_type : LibC::GUID
+    property hChannel : Win32cr::Foundation::HANDLE
+    property sequence_number : UInt32
+    property return_code : Win32cr::Foundation::HRESULT
+    def initialize(@omac : Win32cr::Graphics::Direct3D11::D3D11_OMAC, @query_type : LibC::GUID, @hChannel : Win32cr::Foundation::HANDLE, @sequence_number : UInt32, @return_code : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern(union: true)]
-  record D3D11_AUTHENTICATED_PROTECTION_FLAGS,
-    flags : Flags_e__Struct_,
-    value : UInt32 do
+  struct D3D11_AUTHENTICATED_PROTECTION_FLAGS
+    property flags : Flags_e__Struct_
+    property value : UInt32
 
     # Nested Type Flags_e__Struct_
     @[Extern]
-    record Flags_e__Struct_,
-      _bitfield : UInt32
+    struct Flags_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
 
+    def initialize(@flags : Flags_e__Struct_, @value : UInt32)
+    end
   end
 
   @[Extern]
-  record D3D11_AUTHENTICATED_QUERY_PROTECTION_OUTPUT,
-    output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT,
-    protection_flags : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_PROTECTION_FLAGS
+  struct D3D11_AUTHENTICATED_QUERY_PROTECTION_OUTPUT
+    property output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT
+    property protection_flags : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_PROTECTION_FLAGS
+    def initialize(@output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT, @protection_flags : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_PROTECTION_FLAGS)
+    end
+  end
 
   @[Extern]
-  record D3D11_AUTHENTICATED_QUERY_CHANNEL_TYPE_OUTPUT,
-    output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT,
-    channel_type : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_CHANNEL_TYPE
+  struct D3D11_AUTHENTICATED_QUERY_CHANNEL_TYPE_OUTPUT
+    property output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT
+    property channel_type : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_CHANNEL_TYPE
+    def initialize(@output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT, @channel_type : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_CHANNEL_TYPE)
+    end
+  end
 
   @[Extern]
-  record D3D11_AUTHENTICATED_QUERY_DEVICE_HANDLE_OUTPUT,
-    output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT,
-    device_handle : Win32cr::Foundation::HANDLE
+  struct D3D11_AUTHENTICATED_QUERY_DEVICE_HANDLE_OUTPUT
+    property output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT
+    property device_handle : Win32cr::Foundation::HANDLE
+    def initialize(@output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT, @device_handle : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record D3D11_AUTHENTICATED_QUERY_CRYPTO_SESSION_INPUT,
-    input : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_INPUT,
-    decoder_handle : Win32cr::Foundation::HANDLE
+  struct D3D11_AUTHENTICATED_QUERY_CRYPTO_SESSION_INPUT
+    property input : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_INPUT
+    property decoder_handle : Win32cr::Foundation::HANDLE
+    def initialize(@input : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_INPUT, @decoder_handle : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record D3D11_AUTHENTICATED_QUERY_CRYPTO_SESSION_OUTPUT,
-    output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT,
-    decoder_handle : Win32cr::Foundation::HANDLE,
-    crypto_session_handle : Win32cr::Foundation::HANDLE,
-    device_handle : Win32cr::Foundation::HANDLE
+  struct D3D11_AUTHENTICATED_QUERY_CRYPTO_SESSION_OUTPUT
+    property output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT
+    property decoder_handle : Win32cr::Foundation::HANDLE
+    property crypto_session_handle : Win32cr::Foundation::HANDLE
+    property device_handle : Win32cr::Foundation::HANDLE
+    def initialize(@output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT, @decoder_handle : Win32cr::Foundation::HANDLE, @crypto_session_handle : Win32cr::Foundation::HANDLE, @device_handle : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_COUNT_OUTPUT,
-    output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT,
-    restricted_shared_resource_process_count : UInt32
+  struct D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_COUNT_OUTPUT
+    property output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT
+    property restricted_shared_resource_process_count : UInt32
+    def initialize(@output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT, @restricted_shared_resource_process_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_INPUT,
-    input : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_INPUT,
-    process_index : UInt32
+  struct D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_INPUT
+    property input : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_INPUT
+    property process_index : UInt32
+    def initialize(@input : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_INPUT, @process_index : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_OUTPUT,
-    output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT,
-    process_index : UInt32,
-    process_identifier : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE,
-    process_handle : Win32cr::Foundation::HANDLE
+  struct D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_OUTPUT
+    property output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT
+    property process_index : UInt32
+    property process_identifier : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE
+    property process_handle : Win32cr::Foundation::HANDLE
+    def initialize(@output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT, @process_index : UInt32, @process_identifier : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE, @process_handle : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record D3D11_AUTHENTICATED_QUERY_UNRESTRICTED_PROTECTED_SHARED_RESOURCE_COUNT_OUTPUT,
-    output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT,
-    unrestricted_protected_shared_resource_count : UInt32
+  struct D3D11_AUTHENTICATED_QUERY_UNRESTRICTED_PROTECTED_SHARED_RESOURCE_COUNT_OUTPUT
+    property output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT
+    property unrestricted_protected_shared_resource_count : UInt32
+    def initialize(@output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT, @unrestricted_protected_shared_resource_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_COUNT_INPUT,
-    input : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_INPUT,
-    device_handle : Win32cr::Foundation::HANDLE,
-    crypto_session_handle : Win32cr::Foundation::HANDLE
+  struct D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_COUNT_INPUT
+    property input : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_INPUT
+    property device_handle : Win32cr::Foundation::HANDLE
+    property crypto_session_handle : Win32cr::Foundation::HANDLE
+    def initialize(@input : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_INPUT, @device_handle : Win32cr::Foundation::HANDLE, @crypto_session_handle : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_COUNT_OUTPUT,
-    output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT,
-    device_handle : Win32cr::Foundation::HANDLE,
-    crypto_session_handle : Win32cr::Foundation::HANDLE,
-    output_id_count : UInt32
+  struct D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_COUNT_OUTPUT
+    property output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT
+    property device_handle : Win32cr::Foundation::HANDLE
+    property crypto_session_handle : Win32cr::Foundation::HANDLE
+    property output_id_count : UInt32
+    def initialize(@output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT, @device_handle : Win32cr::Foundation::HANDLE, @crypto_session_handle : Win32cr::Foundation::HANDLE, @output_id_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_INPUT,
-    input : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_INPUT,
-    device_handle : Win32cr::Foundation::HANDLE,
-    crypto_session_handle : Win32cr::Foundation::HANDLE,
-    output_id_index : UInt32
+  struct D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_INPUT
+    property input : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_INPUT
+    property device_handle : Win32cr::Foundation::HANDLE
+    property crypto_session_handle : Win32cr::Foundation::HANDLE
+    property output_id_index : UInt32
+    def initialize(@input : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_INPUT, @device_handle : Win32cr::Foundation::HANDLE, @crypto_session_handle : Win32cr::Foundation::HANDLE, @output_id_index : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_OUTPUT,
-    output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT,
-    device_handle : Win32cr::Foundation::HANDLE,
-    crypto_session_handle : Win32cr::Foundation::HANDLE,
-    output_id_index : UInt32,
-    output_id : UInt64
+  struct D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_OUTPUT
+    property output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT
+    property device_handle : Win32cr::Foundation::HANDLE
+    property crypto_session_handle : Win32cr::Foundation::HANDLE
+    property output_id_index : UInt32
+    property output_id : UInt64
+    def initialize(@output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT, @device_handle : Win32cr::Foundation::HANDLE, @crypto_session_handle : Win32cr::Foundation::HANDLE, @output_id_index : UInt32, @output_id : UInt64)
+    end
+  end
 
   @[Extern]
-  record D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_OUTPUT,
-    output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT,
-    bus_type : Win32cr::Graphics::Direct3D11::D3D11_BUS_TYPE,
-    accessible_in_contiguous_blocks : Win32cr::Foundation::BOOL,
-    accessible_in_non_contiguous_blocks : Win32cr::Foundation::BOOL
+  struct D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_OUTPUT
+    property output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT
+    property bus_type : Win32cr::Graphics::Direct3D11::D3D11_BUS_TYPE
+    property accessible_in_contiguous_blocks : Win32cr::Foundation::BOOL
+    property accessible_in_non_contiguous_blocks : Win32cr::Foundation::BOOL
+    def initialize(@output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT, @bus_type : Win32cr::Graphics::Direct3D11::D3D11_BUS_TYPE, @accessible_in_contiguous_blocks : Win32cr::Foundation::BOOL, @accessible_in_non_contiguous_blocks : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ENCRYPTION_GUID_COUNT_OUTPUT,
-    output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT,
-    encryption_guid_count : UInt32
+  struct D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ENCRYPTION_GUID_COUNT_OUTPUT
+    property output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT
+    property encryption_guid_count : UInt32
+    def initialize(@output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT, @encryption_guid_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ENCRYPTION_GUID_INPUT,
-    input : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_INPUT,
-    encryption_guid_index : UInt32
+  struct D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ENCRYPTION_GUID_INPUT
+    property input : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_INPUT
+    property encryption_guid_index : UInt32
+    def initialize(@input : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_INPUT, @encryption_guid_index : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ENCRYPTION_GUID_OUTPUT,
-    output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT,
-    encryption_guid_index : UInt32,
-    encryption_guid : LibC::GUID
+  struct D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ENCRYPTION_GUID_OUTPUT
+    property output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT
+    property encryption_guid_index : UInt32
+    property encryption_guid : LibC::GUID
+    def initialize(@output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT, @encryption_guid_index : UInt32, @encryption_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record D3D11_AUTHENTICATED_QUERY_CURRENT_ACCESSIBILITY_ENCRYPTION_OUTPUT,
-    output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT,
-    encryption_guid : LibC::GUID
+  struct D3D11_AUTHENTICATED_QUERY_CURRENT_ACCESSIBILITY_ENCRYPTION_OUTPUT
+    property output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT
+    property encryption_guid : LibC::GUID
+    def initialize(@output : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_QUERY_OUTPUT, @encryption_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record D3D11_AUTHENTICATED_CONFIGURE_INPUT,
-    omac : Win32cr::Graphics::Direct3D11::D3D11_OMAC,
-    configure_type : LibC::GUID,
-    hChannel : Win32cr::Foundation::HANDLE,
-    sequence_number : UInt32
+  struct D3D11_AUTHENTICATED_CONFIGURE_INPUT
+    property omac : Win32cr::Graphics::Direct3D11::D3D11_OMAC
+    property configure_type : LibC::GUID
+    property hChannel : Win32cr::Foundation::HANDLE
+    property sequence_number : UInt32
+    def initialize(@omac : Win32cr::Graphics::Direct3D11::D3D11_OMAC, @configure_type : LibC::GUID, @hChannel : Win32cr::Foundation::HANDLE, @sequence_number : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_AUTHENTICATED_CONFIGURE_OUTPUT,
-    omac : Win32cr::Graphics::Direct3D11::D3D11_OMAC,
-    configure_type : LibC::GUID,
-    hChannel : Win32cr::Foundation::HANDLE,
-    sequence_number : UInt32,
-    return_code : Win32cr::Foundation::HRESULT
+  struct D3D11_AUTHENTICATED_CONFIGURE_OUTPUT
+    property omac : Win32cr::Graphics::Direct3D11::D3D11_OMAC
+    property configure_type : LibC::GUID
+    property hChannel : Win32cr::Foundation::HANDLE
+    property sequence_number : UInt32
+    property return_code : Win32cr::Foundation::HRESULT
+    def initialize(@omac : Win32cr::Graphics::Direct3D11::D3D11_OMAC, @configure_type : LibC::GUID, @hChannel : Win32cr::Foundation::HANDLE, @sequence_number : UInt32, @return_code : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
-  record D3D11_AUTHENTICATED_CONFIGURE_INITIALIZE_INPUT,
-    parameters : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_CONFIGURE_INPUT,
-    start_sequence_query : UInt32,
-    start_sequence_configure : UInt32
+  struct D3D11_AUTHENTICATED_CONFIGURE_INITIALIZE_INPUT
+    property parameters : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_CONFIGURE_INPUT
+    property start_sequence_query : UInt32
+    property start_sequence_configure : UInt32
+    def initialize(@parameters : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_CONFIGURE_INPUT, @start_sequence_query : UInt32, @start_sequence_configure : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_AUTHENTICATED_CONFIGURE_PROTECTION_INPUT,
-    parameters : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_CONFIGURE_INPUT,
-    protections : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_PROTECTION_FLAGS
+  struct D3D11_AUTHENTICATED_CONFIGURE_PROTECTION_INPUT
+    property parameters : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_CONFIGURE_INPUT
+    property protections : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_PROTECTION_FLAGS
+    def initialize(@parameters : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_CONFIGURE_INPUT, @protections : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_PROTECTION_FLAGS)
+    end
+  end
 
   @[Extern]
-  record D3D11_AUTHENTICATED_CONFIGURE_CRYPTO_SESSION_INPUT,
-    parameters : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_CONFIGURE_INPUT,
-    decoder_handle : Win32cr::Foundation::HANDLE,
-    crypto_session_handle : Win32cr::Foundation::HANDLE,
-    device_handle : Win32cr::Foundation::HANDLE
+  struct D3D11_AUTHENTICATED_CONFIGURE_CRYPTO_SESSION_INPUT
+    property parameters : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_CONFIGURE_INPUT
+    property decoder_handle : Win32cr::Foundation::HANDLE
+    property crypto_session_handle : Win32cr::Foundation::HANDLE
+    property device_handle : Win32cr::Foundation::HANDLE
+    def initialize(@parameters : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_CONFIGURE_INPUT, @decoder_handle : Win32cr::Foundation::HANDLE, @crypto_session_handle : Win32cr::Foundation::HANDLE, @device_handle : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record D3D11_AUTHENTICATED_CONFIGURE_SHARED_RESOURCE_INPUT,
-    parameters : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_CONFIGURE_INPUT,
-    process_type : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE,
-    process_handle : Win32cr::Foundation::HANDLE,
-    allow_access : Win32cr::Foundation::BOOL
+  struct D3D11_AUTHENTICATED_CONFIGURE_SHARED_RESOURCE_INPUT
+    property parameters : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_CONFIGURE_INPUT
+    property process_type : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE
+    property process_handle : Win32cr::Foundation::HANDLE
+    property allow_access : Win32cr::Foundation::BOOL
+    def initialize(@parameters : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_CONFIGURE_INPUT, @process_type : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE, @process_handle : Win32cr::Foundation::HANDLE, @allow_access : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record D3D11_AUTHENTICATED_CONFIGURE_ACCESSIBLE_ENCRYPTION_INPUT,
-    parameters : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_CONFIGURE_INPUT,
-    encryption_guid : LibC::GUID
+  struct D3D11_AUTHENTICATED_CONFIGURE_ACCESSIBLE_ENCRYPTION_INPUT
+    property parameters : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_CONFIGURE_INPUT
+    property encryption_guid : LibC::GUID
+    def initialize(@parameters : Win32cr::Graphics::Direct3D11::D3D11_AUTHENTICATED_CONFIGURE_INPUT, @encryption_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX2D_VDOV,
-    array_slice : UInt32
+  struct D3D11_TEX2D_VDOV
+    property array_slice : UInt32
+    def initialize(@array_slice : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC,
-    decode_profile : LibC::GUID,
-    view_dimension : Win32cr::Graphics::Direct3D11::D3D11_VDOV_DIMENSION,
-    anonymous : Anonymous_e__Union_ do
+  struct D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC
+    property decode_profile : LibC::GUID
+    property view_dimension : Win32cr::Graphics::Direct3D11::D3D11_VDOV_DIMENSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_VDOV
+    struct Anonymous_e__Union_
+    property texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_VDOV
+    def initialize(@texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_VDOV)
+    end
+    end
 
+    def initialize(@decode_profile : LibC::GUID, @view_dimension : Win32cr::Graphics::Direct3D11::D3D11_VDOV_DIMENSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record D3D11_TEX2D_VPIV,
-    mip_slice : UInt32,
-    array_slice : UInt32
+  struct D3D11_TEX2D_VPIV
+    property mip_slice : UInt32
+    property array_slice : UInt32
+    def initialize(@mip_slice : UInt32, @array_slice : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC,
-    four_cc : UInt32,
-    view_dimension : Win32cr::Graphics::Direct3D11::D3D11_VPIV_DIMENSION,
-    anonymous : Anonymous_e__Union_ do
+  struct D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC
+    property four_cc : UInt32
+    property view_dimension : Win32cr::Graphics::Direct3D11::D3D11_VPIV_DIMENSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_VPIV
+    struct Anonymous_e__Union_
+    property texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_VPIV
+    def initialize(@texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_VPIV)
+    end
+    end
 
+    def initialize(@four_cc : UInt32, @view_dimension : Win32cr::Graphics::Direct3D11::D3D11_VPIV_DIMENSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record D3D11_TEX2D_VPOV,
-    mip_slice : UInt32
+  struct D3D11_TEX2D_VPOV
+    property mip_slice : UInt32
+    def initialize(@mip_slice : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX2D_ARRAY_VPOV,
-    mip_slice : UInt32,
-    first_array_slice : UInt32,
-    array_size : UInt32
+  struct D3D11_TEX2D_ARRAY_VPOV
+    property mip_slice : UInt32
+    property first_array_slice : UInt32
+    property array_size : UInt32
+    def initialize(@mip_slice : UInt32, @first_array_slice : UInt32, @array_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC,
-    view_dimension : Win32cr::Graphics::Direct3D11::D3D11_VPOV_DIMENSION,
-    anonymous : Anonymous_e__Union_ do
+  struct D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC
+    property view_dimension : Win32cr::Graphics::Direct3D11::D3D11_VPOV_DIMENSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_VPOV,
-      texture2_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_ARRAY_VPOV
+    struct Anonymous_e__Union_
+    property texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_VPOV
+    property texture2_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_ARRAY_VPOV
+    def initialize(@texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_VPOV, @texture2_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_ARRAY_VPOV)
+    end
+    end
 
+    def initialize(@view_dimension : Win32cr::Graphics::Direct3D11::D3D11_VPOV_DIMENSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record D3D11_MESSAGE,
-    category : Win32cr::Graphics::Direct3D11::D3D11_MESSAGE_CATEGORY,
-    severity : Win32cr::Graphics::Direct3D11::D3D11_MESSAGE_SEVERITY,
-    id : Win32cr::Graphics::Direct3D11::D3D11_MESSAGE_ID,
-    pDescription : UInt8*,
-    description_byte_length : LibC::UIntPtrT
+  struct D3D11_MESSAGE
+    property category : Win32cr::Graphics::Direct3D11::D3D11_MESSAGE_CATEGORY
+    property severity : Win32cr::Graphics::Direct3D11::D3D11_MESSAGE_SEVERITY
+    property id : Win32cr::Graphics::Direct3D11::D3D11_MESSAGE_ID
+    property pDescription : UInt8*
+    property description_byte_length : LibC::UIntPtrT
+    def initialize(@category : Win32cr::Graphics::Direct3D11::D3D11_MESSAGE_CATEGORY, @severity : Win32cr::Graphics::Direct3D11::D3D11_MESSAGE_SEVERITY, @id : Win32cr::Graphics::Direct3D11::D3D11_MESSAGE_ID, @pDescription : UInt8*, @description_byte_length : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record D3D11_INFO_QUEUE_FILTER_DESC,
-    num_categories : UInt32,
-    pCategoryList : Win32cr::Graphics::Direct3D11::D3D11_MESSAGE_CATEGORY*,
-    num_severities : UInt32,
-    pSeverityList : Win32cr::Graphics::Direct3D11::D3D11_MESSAGE_SEVERITY*,
-    num_i_ds : UInt32,
-    pIDList : Win32cr::Graphics::Direct3D11::D3D11_MESSAGE_ID*
+  struct D3D11_INFO_QUEUE_FILTER_DESC
+    property num_categories : UInt32
+    property pCategoryList : Win32cr::Graphics::Direct3D11::D3D11_MESSAGE_CATEGORY*
+    property num_severities : UInt32
+    property pSeverityList : Win32cr::Graphics::Direct3D11::D3D11_MESSAGE_SEVERITY*
+    property num_i_ds : UInt32
+    property pIDList : Win32cr::Graphics::Direct3D11::D3D11_MESSAGE_ID*
+    def initialize(@num_categories : UInt32, @pCategoryList : Win32cr::Graphics::Direct3D11::D3D11_MESSAGE_CATEGORY*, @num_severities : UInt32, @pSeverityList : Win32cr::Graphics::Direct3D11::D3D11_MESSAGE_SEVERITY*, @num_i_ds : UInt32, @pIDList : Win32cr::Graphics::Direct3D11::D3D11_MESSAGE_ID*)
+    end
+  end
 
   @[Extern]
-  record D3D11_INFO_QUEUE_FILTER,
-    allow_list : Win32cr::Graphics::Direct3D11::D3D11_INFO_QUEUE_FILTER_DESC,
-    deny_list : Win32cr::Graphics::Direct3D11::D3D11_INFO_QUEUE_FILTER_DESC
+  struct D3D11_INFO_QUEUE_FILTER
+    property allow_list : Win32cr::Graphics::Direct3D11::D3D11_INFO_QUEUE_FILTER_DESC
+    property deny_list : Win32cr::Graphics::Direct3D11::D3D11_INFO_QUEUE_FILTER_DESC
+    def initialize(@allow_list : Win32cr::Graphics::Direct3D11::D3D11_INFO_QUEUE_FILTER_DESC, @deny_list : Win32cr::Graphics::Direct3D11::D3D11_INFO_QUEUE_FILTER_DESC)
+    end
+  end
 
   @[Extern]
-  record D3D11_RENDER_TARGET_BLEND_DESC1,
-    blend_enable : Win32cr::Foundation::BOOL,
-    logic_op_enable : Win32cr::Foundation::BOOL,
-    src_blend : Win32cr::Graphics::Direct3D11::D3D11_BLEND,
-    dest_blend : Win32cr::Graphics::Direct3D11::D3D11_BLEND,
-    blend_op : Win32cr::Graphics::Direct3D11::D3D11_BLEND_OP,
-    src_blend_alpha : Win32cr::Graphics::Direct3D11::D3D11_BLEND,
-    dest_blend_alpha : Win32cr::Graphics::Direct3D11::D3D11_BLEND,
-    blend_op_alpha : Win32cr::Graphics::Direct3D11::D3D11_BLEND_OP,
-    logic_op : Win32cr::Graphics::Direct3D11::D3D11_LOGIC_OP,
-    render_target_write_mask : UInt8
+  struct D3D11_RENDER_TARGET_BLEND_DESC1
+    property blend_enable : Win32cr::Foundation::BOOL
+    property logic_op_enable : Win32cr::Foundation::BOOL
+    property src_blend : Win32cr::Graphics::Direct3D11::D3D11_BLEND
+    property dest_blend : Win32cr::Graphics::Direct3D11::D3D11_BLEND
+    property blend_op : Win32cr::Graphics::Direct3D11::D3D11_BLEND_OP
+    property src_blend_alpha : Win32cr::Graphics::Direct3D11::D3D11_BLEND
+    property dest_blend_alpha : Win32cr::Graphics::Direct3D11::D3D11_BLEND
+    property blend_op_alpha : Win32cr::Graphics::Direct3D11::D3D11_BLEND_OP
+    property logic_op : Win32cr::Graphics::Direct3D11::D3D11_LOGIC_OP
+    property render_target_write_mask : UInt8
+    def initialize(@blend_enable : Win32cr::Foundation::BOOL, @logic_op_enable : Win32cr::Foundation::BOOL, @src_blend : Win32cr::Graphics::Direct3D11::D3D11_BLEND, @dest_blend : Win32cr::Graphics::Direct3D11::D3D11_BLEND, @blend_op : Win32cr::Graphics::Direct3D11::D3D11_BLEND_OP, @src_blend_alpha : Win32cr::Graphics::Direct3D11::D3D11_BLEND, @dest_blend_alpha : Win32cr::Graphics::Direct3D11::D3D11_BLEND, @blend_op_alpha : Win32cr::Graphics::Direct3D11::D3D11_BLEND_OP, @logic_op : Win32cr::Graphics::Direct3D11::D3D11_LOGIC_OP, @render_target_write_mask : UInt8)
+    end
+  end
 
   @[Extern]
-  record D3D11_BLEND_DESC1,
-    alpha_to_coverage_enable : Win32cr::Foundation::BOOL,
-    independent_blend_enable : Win32cr::Foundation::BOOL,
-    render_target : Win32cr::Graphics::Direct3D11::D3D11_RENDER_TARGET_BLEND_DESC1[8]
+  struct D3D11_BLEND_DESC1
+    property alpha_to_coverage_enable : Win32cr::Foundation::BOOL
+    property independent_blend_enable : Win32cr::Foundation::BOOL
+    property render_target : Win32cr::Graphics::Direct3D11::D3D11_RENDER_TARGET_BLEND_DESC1[8]
+    def initialize(@alpha_to_coverage_enable : Win32cr::Foundation::BOOL, @independent_blend_enable : Win32cr::Foundation::BOOL, @render_target : Win32cr::Graphics::Direct3D11::D3D11_RENDER_TARGET_BLEND_DESC1[8])
+    end
+  end
 
   @[Extern]
-  record D3D11_RASTERIZER_DESC1,
-    fill_mode : Win32cr::Graphics::Direct3D11::D3D11_FILL_MODE,
-    cull_mode : Win32cr::Graphics::Direct3D11::D3D11_CULL_MODE,
-    front_counter_clockwise : Win32cr::Foundation::BOOL,
-    depth_bias : Int32,
-    depth_bias_clamp : Float32,
-    slope_scaled_depth_bias : Float32,
-    depth_clip_enable : Win32cr::Foundation::BOOL,
-    scissor_enable : Win32cr::Foundation::BOOL,
-    multisample_enable : Win32cr::Foundation::BOOL,
-    antialiased_line_enable : Win32cr::Foundation::BOOL,
-    forced_sample_count : UInt32
+  struct D3D11_RASTERIZER_DESC1
+    property fill_mode : Win32cr::Graphics::Direct3D11::D3D11_FILL_MODE
+    property cull_mode : Win32cr::Graphics::Direct3D11::D3D11_CULL_MODE
+    property front_counter_clockwise : Win32cr::Foundation::BOOL
+    property depth_bias : Int32
+    property depth_bias_clamp : Float32
+    property slope_scaled_depth_bias : Float32
+    property depth_clip_enable : Win32cr::Foundation::BOOL
+    property scissor_enable : Win32cr::Foundation::BOOL
+    property multisample_enable : Win32cr::Foundation::BOOL
+    property antialiased_line_enable : Win32cr::Foundation::BOOL
+    property forced_sample_count : UInt32
+    def initialize(@fill_mode : Win32cr::Graphics::Direct3D11::D3D11_FILL_MODE, @cull_mode : Win32cr::Graphics::Direct3D11::D3D11_CULL_MODE, @front_counter_clockwise : Win32cr::Foundation::BOOL, @depth_bias : Int32, @depth_bias_clamp : Float32, @slope_scaled_depth_bias : Float32, @depth_clip_enable : Win32cr::Foundation::BOOL, @scissor_enable : Win32cr::Foundation::BOOL, @multisample_enable : Win32cr::Foundation::BOOL, @antialiased_line_enable : Win32cr::Foundation::BOOL, @forced_sample_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_VIDEO_DECODER_SUB_SAMPLE_MAPPING_BLOCK,
-    clear_size : UInt32,
-    encrypted_size : UInt32
+  struct D3D11_VIDEO_DECODER_SUB_SAMPLE_MAPPING_BLOCK
+    property clear_size : UInt32
+    property encrypted_size : UInt32
+    def initialize(@clear_size : UInt32, @encrypted_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_VIDEO_DECODER_BUFFER_DESC1,
-    buffer_type : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_DECODER_BUFFER_TYPE,
-    data_offset : UInt32,
-    data_size : UInt32,
-    pIV : Void*,
-    iv_size : UInt32,
-    pSubSampleMappingBlock : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_DECODER_SUB_SAMPLE_MAPPING_BLOCK*,
-    sub_sample_mapping_count : UInt32
+  struct D3D11_VIDEO_DECODER_BUFFER_DESC1
+    property buffer_type : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_DECODER_BUFFER_TYPE
+    property data_offset : UInt32
+    property data_size : UInt32
+    property pIV : Void*
+    property iv_size : UInt32
+    property pSubSampleMappingBlock : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_DECODER_SUB_SAMPLE_MAPPING_BLOCK*
+    property sub_sample_mapping_count : UInt32
+    def initialize(@buffer_type : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_DECODER_BUFFER_TYPE, @data_offset : UInt32, @data_size : UInt32, @pIV : Void*, @iv_size : UInt32, @pSubSampleMappingBlock : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_DECODER_SUB_SAMPLE_MAPPING_BLOCK*, @sub_sample_mapping_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_VIDEO_DECODER_BEGIN_FRAME_CRYPTO_SESSION,
-    pCryptoSession : Void*,
-    blob_size : UInt32,
-    pBlob : Void*,
-    pKeyInfoId : LibC::GUID*,
-    private_data_size : UInt32,
-    pPrivateData : Void*
+  struct D3D11_VIDEO_DECODER_BEGIN_FRAME_CRYPTO_SESSION
+    property pCryptoSession : Void*
+    property blob_size : UInt32
+    property pBlob : Void*
+    property pKeyInfoId : LibC::GUID*
+    property private_data_size : UInt32
+    property pPrivateData : Void*
+    def initialize(@pCryptoSession : Void*, @blob_size : UInt32, @pBlob : Void*, @pKeyInfoId : LibC::GUID*, @private_data_size : UInt32, @pPrivateData : Void*)
+    end
+  end
 
   @[Extern]
-  record D3D11_VIDEO_PROCESSOR_STREAM_BEHAVIOR_HINT,
-    enable : Win32cr::Foundation::BOOL,
-    width : UInt32,
-    height : UInt32,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+  struct D3D11_VIDEO_PROCESSOR_STREAM_BEHAVIOR_HINT
+    property enable : Win32cr::Foundation::BOOL
+    property width : UInt32
+    property height : UInt32
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    def initialize(@enable : Win32cr::Foundation::BOOL, @width : UInt32, @height : UInt32, @format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT)
+    end
+  end
 
   @[Extern]
-  record D3D11_KEY_EXCHANGE_HW_PROTECTION_INPUT_DATA,
-    private_data_size : UInt32,
-    hw_protection_data_size : UInt32,
-    pbInput : UInt8[4]
+  struct D3D11_KEY_EXCHANGE_HW_PROTECTION_INPUT_DATA
+    property private_data_size : UInt32
+    property hw_protection_data_size : UInt32
+    property pbInput : UInt8[4]
+    def initialize(@private_data_size : UInt32, @hw_protection_data_size : UInt32, @pbInput : UInt8[4])
+    end
+  end
 
   @[Extern]
-  record D3D11_KEY_EXCHANGE_HW_PROTECTION_OUTPUT_DATA,
-    private_data_size : UInt32,
-    max_hw_protection_data_size : UInt32,
-    hw_protection_data_size : UInt32,
-    transport_time : UInt64,
-    execution_time : UInt64,
-    pbOutput : UInt8[4]
+  struct D3D11_KEY_EXCHANGE_HW_PROTECTION_OUTPUT_DATA
+    property private_data_size : UInt32
+    property max_hw_protection_data_size : UInt32
+    property hw_protection_data_size : UInt32
+    property transport_time : UInt64
+    property execution_time : UInt64
+    property pbOutput : UInt8[4]
+    def initialize(@private_data_size : UInt32, @max_hw_protection_data_size : UInt32, @hw_protection_data_size : UInt32, @transport_time : UInt64, @execution_time : UInt64, @pbOutput : UInt8[4])
+    end
+  end
 
   @[Extern]
-  record D3D11_KEY_EXCHANGE_HW_PROTECTION_DATA,
-    hw_protection_function_id : UInt32,
-    pInputData : Win32cr::Graphics::Direct3D11::D3D11_KEY_EXCHANGE_HW_PROTECTION_INPUT_DATA*,
-    pOutputData : Win32cr::Graphics::Direct3D11::D3D11_KEY_EXCHANGE_HW_PROTECTION_OUTPUT_DATA*,
-    status : Win32cr::Foundation::HRESULT
+  struct D3D11_KEY_EXCHANGE_HW_PROTECTION_DATA
+    property hw_protection_function_id : UInt32
+    property pInputData : Win32cr::Graphics::Direct3D11::D3D11_KEY_EXCHANGE_HW_PROTECTION_INPUT_DATA*
+    property pOutputData : Win32cr::Graphics::Direct3D11::D3D11_KEY_EXCHANGE_HW_PROTECTION_OUTPUT_DATA*
+    property status : Win32cr::Foundation::HRESULT
+    def initialize(@hw_protection_function_id : UInt32, @pInputData : Win32cr::Graphics::Direct3D11::D3D11_KEY_EXCHANGE_HW_PROTECTION_INPUT_DATA*, @pOutputData : Win32cr::Graphics::Direct3D11::D3D11_KEY_EXCHANGE_HW_PROTECTION_OUTPUT_DATA*, @status : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
-  record D3D11_VIDEO_SAMPLE_DESC,
-    width : UInt32,
-    height : UInt32,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE
+  struct D3D11_VIDEO_SAMPLE_DESC
+    property width : UInt32
+    property height : UInt32
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE
+    def initialize(@width : UInt32, @height : UInt32, @format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @color_space : Win32cr::Graphics::Dxgi::Common::DXGI_COLOR_SPACE_TYPE)
+    end
+  end
 
   @[Extern]
-  record D3D11_TILED_RESOURCE_COORDINATE,
-    x : UInt32,
-    y : UInt32,
-    z : UInt32,
-    subresource : UInt32
+  struct D3D11_TILED_RESOURCE_COORDINATE
+    property x : UInt32
+    property y : UInt32
+    property z : UInt32
+    property subresource : UInt32
+    def initialize(@x : UInt32, @y : UInt32, @z : UInt32, @subresource : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TILE_REGION_SIZE,
-    num_tiles : UInt32,
-    bUseBox : Win32cr::Foundation::BOOL,
-    width : UInt32,
-    height : UInt16,
-    depth : UInt16
+  struct D3D11_TILE_REGION_SIZE
+    property num_tiles : UInt32
+    property bUseBox : Win32cr::Foundation::BOOL
+    property width : UInt32
+    property height : UInt16
+    property depth : UInt16
+    def initialize(@num_tiles : UInt32, @bUseBox : Win32cr::Foundation::BOOL, @width : UInt32, @height : UInt16, @depth : UInt16)
+    end
+  end
 
   @[Extern]
-  record D3D11_SUBRESOURCE_TILING,
-    width_in_tiles : UInt32,
-    height_in_tiles : UInt16,
-    depth_in_tiles : UInt16,
-    start_tile_index_in_overall_resource : UInt32
+  struct D3D11_SUBRESOURCE_TILING
+    property width_in_tiles : UInt32
+    property height_in_tiles : UInt16
+    property depth_in_tiles : UInt16
+    property start_tile_index_in_overall_resource : UInt32
+    def initialize(@width_in_tiles : UInt32, @height_in_tiles : UInt16, @depth_in_tiles : UInt16, @start_tile_index_in_overall_resource : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TILE_SHAPE,
-    width_in_texels : UInt32,
-    height_in_texels : UInt32,
-    depth_in_texels : UInt32
+  struct D3D11_TILE_SHAPE
+    property width_in_texels : UInt32
+    property height_in_texels : UInt32
+    property depth_in_texels : UInt32
+    def initialize(@width_in_texels : UInt32, @height_in_texels : UInt32, @depth_in_texels : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_PACKED_MIP_DESC,
-    num_standard_mips : UInt8,
-    num_packed_mips : UInt8,
-    num_tiles_for_packed_mips : UInt32,
-    start_tile_index_in_overall_resource : UInt32
+  struct D3D11_PACKED_MIP_DESC
+    property num_standard_mips : UInt8
+    property num_packed_mips : UInt8
+    property num_tiles_for_packed_mips : UInt32
+    property start_tile_index_in_overall_resource : UInt32
+    def initialize(@num_standard_mips : UInt8, @num_packed_mips : UInt8, @num_tiles_for_packed_mips : UInt32, @start_tile_index_in_overall_resource : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEXTURE2D_DESC1,
-    width : UInt32,
-    height : UInt32,
-    mip_levels : UInt32,
-    array_size : UInt32,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    sample_desc : Win32cr::Graphics::Dxgi::Common::DXGI_SAMPLE_DESC,
-    usage : Win32cr::Graphics::Direct3D11::D3D11_USAGE,
-    bind_flags : Win32cr::Graphics::Direct3D11::D3D11_BIND_FLAG,
-    cpu_access_flags : Win32cr::Graphics::Direct3D11::D3D11_CPU_ACCESS_FLAG,
-    misc_flags : Win32cr::Graphics::Direct3D11::D3D11_RESOURCE_MISC_FLAG,
-    texture_layout : Win32cr::Graphics::Direct3D11::D3D11_TEXTURE_LAYOUT
+  struct D3D11_TEXTURE2D_DESC1
+    property width : UInt32
+    property height : UInt32
+    property mip_levels : UInt32
+    property array_size : UInt32
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property sample_desc : Win32cr::Graphics::Dxgi::Common::DXGI_SAMPLE_DESC
+    property usage : Win32cr::Graphics::Direct3D11::D3D11_USAGE
+    property bind_flags : Win32cr::Graphics::Direct3D11::D3D11_BIND_FLAG
+    property cpu_access_flags : Win32cr::Graphics::Direct3D11::D3D11_CPU_ACCESS_FLAG
+    property misc_flags : Win32cr::Graphics::Direct3D11::D3D11_RESOURCE_MISC_FLAG
+    property texture_layout : Win32cr::Graphics::Direct3D11::D3D11_TEXTURE_LAYOUT
+    def initialize(@width : UInt32, @height : UInt32, @mip_levels : UInt32, @array_size : UInt32, @format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @sample_desc : Win32cr::Graphics::Dxgi::Common::DXGI_SAMPLE_DESC, @usage : Win32cr::Graphics::Direct3D11::D3D11_USAGE, @bind_flags : Win32cr::Graphics::Direct3D11::D3D11_BIND_FLAG, @cpu_access_flags : Win32cr::Graphics::Direct3D11::D3D11_CPU_ACCESS_FLAG, @misc_flags : Win32cr::Graphics::Direct3D11::D3D11_RESOURCE_MISC_FLAG, @texture_layout : Win32cr::Graphics::Direct3D11::D3D11_TEXTURE_LAYOUT)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEXTURE3D_DESC1,
-    width : UInt32,
-    height : UInt32,
-    depth : UInt32,
-    mip_levels : UInt32,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    usage : Win32cr::Graphics::Direct3D11::D3D11_USAGE,
-    bind_flags : Win32cr::Graphics::Direct3D11::D3D11_BIND_FLAG,
-    cpu_access_flags : Win32cr::Graphics::Direct3D11::D3D11_CPU_ACCESS_FLAG,
-    misc_flags : Win32cr::Graphics::Direct3D11::D3D11_RESOURCE_MISC_FLAG,
-    texture_layout : Win32cr::Graphics::Direct3D11::D3D11_TEXTURE_LAYOUT
+  struct D3D11_TEXTURE3D_DESC1
+    property width : UInt32
+    property height : UInt32
+    property depth : UInt32
+    property mip_levels : UInt32
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property usage : Win32cr::Graphics::Direct3D11::D3D11_USAGE
+    property bind_flags : Win32cr::Graphics::Direct3D11::D3D11_BIND_FLAG
+    property cpu_access_flags : Win32cr::Graphics::Direct3D11::D3D11_CPU_ACCESS_FLAG
+    property misc_flags : Win32cr::Graphics::Direct3D11::D3D11_RESOURCE_MISC_FLAG
+    property texture_layout : Win32cr::Graphics::Direct3D11::D3D11_TEXTURE_LAYOUT
+    def initialize(@width : UInt32, @height : UInt32, @depth : UInt32, @mip_levels : UInt32, @format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @usage : Win32cr::Graphics::Direct3D11::D3D11_USAGE, @bind_flags : Win32cr::Graphics::Direct3D11::D3D11_BIND_FLAG, @cpu_access_flags : Win32cr::Graphics::Direct3D11::D3D11_CPU_ACCESS_FLAG, @misc_flags : Win32cr::Graphics::Direct3D11::D3D11_RESOURCE_MISC_FLAG, @texture_layout : Win32cr::Graphics::Direct3D11::D3D11_TEXTURE_LAYOUT)
+    end
+  end
 
   @[Extern]
-  record D3D11_RASTERIZER_DESC2,
-    fill_mode : Win32cr::Graphics::Direct3D11::D3D11_FILL_MODE,
-    cull_mode : Win32cr::Graphics::Direct3D11::D3D11_CULL_MODE,
-    front_counter_clockwise : Win32cr::Foundation::BOOL,
-    depth_bias : Int32,
-    depth_bias_clamp : Float32,
-    slope_scaled_depth_bias : Float32,
-    depth_clip_enable : Win32cr::Foundation::BOOL,
-    scissor_enable : Win32cr::Foundation::BOOL,
-    multisample_enable : Win32cr::Foundation::BOOL,
-    antialiased_line_enable : Win32cr::Foundation::BOOL,
-    forced_sample_count : UInt32,
-    conservative_raster : Win32cr::Graphics::Direct3D11::D3D11_CONSERVATIVE_RASTERIZATION_MODE
+  struct D3D11_RASTERIZER_DESC2
+    property fill_mode : Win32cr::Graphics::Direct3D11::D3D11_FILL_MODE
+    property cull_mode : Win32cr::Graphics::Direct3D11::D3D11_CULL_MODE
+    property front_counter_clockwise : Win32cr::Foundation::BOOL
+    property depth_bias : Int32
+    property depth_bias_clamp : Float32
+    property slope_scaled_depth_bias : Float32
+    property depth_clip_enable : Win32cr::Foundation::BOOL
+    property scissor_enable : Win32cr::Foundation::BOOL
+    property multisample_enable : Win32cr::Foundation::BOOL
+    property antialiased_line_enable : Win32cr::Foundation::BOOL
+    property forced_sample_count : UInt32
+    property conservative_raster : Win32cr::Graphics::Direct3D11::D3D11_CONSERVATIVE_RASTERIZATION_MODE
+    def initialize(@fill_mode : Win32cr::Graphics::Direct3D11::D3D11_FILL_MODE, @cull_mode : Win32cr::Graphics::Direct3D11::D3D11_CULL_MODE, @front_counter_clockwise : Win32cr::Foundation::BOOL, @depth_bias : Int32, @depth_bias_clamp : Float32, @slope_scaled_depth_bias : Float32, @depth_clip_enable : Win32cr::Foundation::BOOL, @scissor_enable : Win32cr::Foundation::BOOL, @multisample_enable : Win32cr::Foundation::BOOL, @antialiased_line_enable : Win32cr::Foundation::BOOL, @forced_sample_count : UInt32, @conservative_raster : Win32cr::Graphics::Direct3D11::D3D11_CONSERVATIVE_RASTERIZATION_MODE)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX2D_SRV1,
-    most_detailed_mip : UInt32,
-    mip_levels : UInt32,
-    plane_slice : UInt32
+  struct D3D11_TEX2D_SRV1
+    property most_detailed_mip : UInt32
+    property mip_levels : UInt32
+    property plane_slice : UInt32
+    def initialize(@most_detailed_mip : UInt32, @mip_levels : UInt32, @plane_slice : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX2D_ARRAY_SRV1,
-    most_detailed_mip : UInt32,
-    mip_levels : UInt32,
-    first_array_slice : UInt32,
-    array_size : UInt32,
-    plane_slice : UInt32
+  struct D3D11_TEX2D_ARRAY_SRV1
+    property most_detailed_mip : UInt32
+    property mip_levels : UInt32
+    property first_array_slice : UInt32
+    property array_size : UInt32
+    property plane_slice : UInt32
+    def initialize(@most_detailed_mip : UInt32, @mip_levels : UInt32, @first_array_slice : UInt32, @array_size : UInt32, @plane_slice : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_SHADER_RESOURCE_VIEW_DESC1,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    view_dimension : Win32cr::Graphics::Direct3D::D3D_SRV_DIMENSION,
-    anonymous : Anonymous_e__Union_ do
+  struct D3D11_SHADER_RESOURCE_VIEW_DESC1
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property view_dimension : Win32cr::Graphics::Direct3D::D3D_SRV_DIMENSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      buffer : Win32cr::Graphics::Direct3D11::D3D11_BUFFER_SRV,
-      texture1_d : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_SRV,
-      texture1_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_ARRAY_SRV,
-      texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_SRV1,
-      texture2_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_ARRAY_SRV1,
-      texture2_dms : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_SRV,
-      texture2_dms_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_ARRAY_SRV,
-      texture3_d : Win32cr::Graphics::Direct3D11::D3D11_TEX3D_SRV,
-      texture_cube : Win32cr::Graphics::Direct3D11::D3D11_TEXCUBE_SRV,
-      texture_cube_array : Win32cr::Graphics::Direct3D11::D3D11_TEXCUBE_ARRAY_SRV,
-      buffer_ex : Win32cr::Graphics::Direct3D11::D3D11_BUFFEREX_SRV
+    struct Anonymous_e__Union_
+    property buffer : Win32cr::Graphics::Direct3D11::D3D11_BUFFER_SRV
+    property texture1_d : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_SRV
+    property texture1_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_ARRAY_SRV
+    property texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_SRV1
+    property texture2_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_ARRAY_SRV1
+    property texture2_dms : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_SRV
+    property texture2_dms_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_ARRAY_SRV
+    property texture3_d : Win32cr::Graphics::Direct3D11::D3D11_TEX3D_SRV
+    property texture_cube : Win32cr::Graphics::Direct3D11::D3D11_TEXCUBE_SRV
+    property texture_cube_array : Win32cr::Graphics::Direct3D11::D3D11_TEXCUBE_ARRAY_SRV
+    property buffer_ex : Win32cr::Graphics::Direct3D11::D3D11_BUFFEREX_SRV
+    def initialize(@buffer : Win32cr::Graphics::Direct3D11::D3D11_BUFFER_SRV, @texture1_d : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_SRV, @texture1_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_ARRAY_SRV, @texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_SRV1, @texture2_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_ARRAY_SRV1, @texture2_dms : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_SRV, @texture2_dms_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_ARRAY_SRV, @texture3_d : Win32cr::Graphics::Direct3D11::D3D11_TEX3D_SRV, @texture_cube : Win32cr::Graphics::Direct3D11::D3D11_TEXCUBE_SRV, @texture_cube_array : Win32cr::Graphics::Direct3D11::D3D11_TEXCUBE_ARRAY_SRV, @buffer_ex : Win32cr::Graphics::Direct3D11::D3D11_BUFFEREX_SRV)
+    end
+    end
 
+    def initialize(@format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @view_dimension : Win32cr::Graphics::Direct3D::D3D_SRV_DIMENSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record D3D11_TEX2D_RTV1,
-    mip_slice : UInt32,
-    plane_slice : UInt32
+  struct D3D11_TEX2D_RTV1
+    property mip_slice : UInt32
+    property plane_slice : UInt32
+    def initialize(@mip_slice : UInt32, @plane_slice : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX2D_ARRAY_RTV1,
-    mip_slice : UInt32,
-    first_array_slice : UInt32,
-    array_size : UInt32,
-    plane_slice : UInt32
+  struct D3D11_TEX2D_ARRAY_RTV1
+    property mip_slice : UInt32
+    property first_array_slice : UInt32
+    property array_size : UInt32
+    property plane_slice : UInt32
+    def initialize(@mip_slice : UInt32, @first_array_slice : UInt32, @array_size : UInt32, @plane_slice : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_RENDER_TARGET_VIEW_DESC1,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    view_dimension : Win32cr::Graphics::Direct3D11::D3D11_RTV_DIMENSION,
-    anonymous : Anonymous_e__Union_ do
+  struct D3D11_RENDER_TARGET_VIEW_DESC1
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property view_dimension : Win32cr::Graphics::Direct3D11::D3D11_RTV_DIMENSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      buffer : Win32cr::Graphics::Direct3D11::D3D11_BUFFER_RTV,
-      texture1_d : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_RTV,
-      texture1_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_ARRAY_RTV,
-      texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_RTV1,
-      texture2_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_ARRAY_RTV1,
-      texture2_dms : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_RTV,
-      texture2_dms_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_ARRAY_RTV,
-      texture3_d : Win32cr::Graphics::Direct3D11::D3D11_TEX3D_RTV
+    struct Anonymous_e__Union_
+    property buffer : Win32cr::Graphics::Direct3D11::D3D11_BUFFER_RTV
+    property texture1_d : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_RTV
+    property texture1_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_ARRAY_RTV
+    property texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_RTV1
+    property texture2_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_ARRAY_RTV1
+    property texture2_dms : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_RTV
+    property texture2_dms_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_ARRAY_RTV
+    property texture3_d : Win32cr::Graphics::Direct3D11::D3D11_TEX3D_RTV
+    def initialize(@buffer : Win32cr::Graphics::Direct3D11::D3D11_BUFFER_RTV, @texture1_d : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_RTV, @texture1_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_ARRAY_RTV, @texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_RTV1, @texture2_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_ARRAY_RTV1, @texture2_dms : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_RTV, @texture2_dms_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2DMS_ARRAY_RTV, @texture3_d : Win32cr::Graphics::Direct3D11::D3D11_TEX3D_RTV)
+    end
+    end
 
+    def initialize(@format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @view_dimension : Win32cr::Graphics::Direct3D11::D3D11_RTV_DIMENSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record D3D11_TEX2D_UAV1,
-    mip_slice : UInt32,
-    plane_slice : UInt32
+  struct D3D11_TEX2D_UAV1
+    property mip_slice : UInt32
+    property plane_slice : UInt32
+    def initialize(@mip_slice : UInt32, @plane_slice : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_TEX2D_ARRAY_UAV1,
-    mip_slice : UInt32,
-    first_array_slice : UInt32,
-    array_size : UInt32,
-    plane_slice : UInt32
+  struct D3D11_TEX2D_ARRAY_UAV1
+    property mip_slice : UInt32
+    property first_array_slice : UInt32
+    property array_size : UInt32
+    property plane_slice : UInt32
+    def initialize(@mip_slice : UInt32, @first_array_slice : UInt32, @array_size : UInt32, @plane_slice : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_UNORDERED_ACCESS_VIEW_DESC1,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    view_dimension : Win32cr::Graphics::Direct3D11::D3D11_UAV_DIMENSION,
-    anonymous : Anonymous_e__Union_ do
+  struct D3D11_UNORDERED_ACCESS_VIEW_DESC1
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property view_dimension : Win32cr::Graphics::Direct3D11::D3D11_UAV_DIMENSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      buffer : Win32cr::Graphics::Direct3D11::D3D11_BUFFER_UAV,
-      texture1_d : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_UAV,
-      texture1_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_ARRAY_UAV,
-      texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_UAV1,
-      texture2_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_ARRAY_UAV1,
-      texture3_d : Win32cr::Graphics::Direct3D11::D3D11_TEX3D_UAV
+    struct Anonymous_e__Union_
+    property buffer : Win32cr::Graphics::Direct3D11::D3D11_BUFFER_UAV
+    property texture1_d : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_UAV
+    property texture1_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_ARRAY_UAV
+    property texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_UAV1
+    property texture2_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_ARRAY_UAV1
+    property texture3_d : Win32cr::Graphics::Direct3D11::D3D11_TEX3D_UAV
+    def initialize(@buffer : Win32cr::Graphics::Direct3D11::D3D11_BUFFER_UAV, @texture1_d : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_UAV, @texture1_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX1D_ARRAY_UAV, @texture2_d : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_UAV1, @texture2_d_array : Win32cr::Graphics::Direct3D11::D3D11_TEX2D_ARRAY_UAV1, @texture3_d : Win32cr::Graphics::Direct3D11::D3D11_TEX3D_UAV)
+    end
+    end
 
+    def initialize(@format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @view_dimension : Win32cr::Graphics::Direct3D11::D3D11_UAV_DIMENSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record D3D11_QUERY_DESC1,
-    query : Win32cr::Graphics::Direct3D11::D3D11_QUERY,
-    misc_flags : UInt32,
-    context_type : Win32cr::Graphics::Direct3D11::D3D11_CONTEXT_TYPE
+  struct D3D11_QUERY_DESC1
+    property query : Win32cr::Graphics::Direct3D11::D3D11_QUERY
+    property misc_flags : UInt32
+    property context_type : Win32cr::Graphics::Direct3D11::D3D11_CONTEXT_TYPE
+    def initialize(@query : Win32cr::Graphics::Direct3D11::D3D11_QUERY, @misc_flags : UInt32, @context_type : Win32cr::Graphics::Direct3D11::D3D11_CONTEXT_TYPE)
+    end
+  end
 
   @[Extern]
-  record D3D11_FEATURE_DATA_VIDEO_DECODER_HISTOGRAM,
-    decoder_desc : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_DECODER_DESC,
-    components : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAGS,
-    bin_count : UInt32,
-    counter_bit_depth : UInt32
+  struct D3D11_FEATURE_DATA_VIDEO_DECODER_HISTOGRAM
+    property decoder_desc : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_DECODER_DESC
+    property components : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAGS
+    property bin_count : UInt32
+    property counter_bit_depth : UInt32
+    def initialize(@decoder_desc : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_DECODER_DESC, @components : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAGS, @bin_count : UInt32, @counter_bit_depth : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_VIDEO_DECODER_BUFFER_DESC2,
-    buffer_type : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_DECODER_BUFFER_TYPE,
-    data_offset : UInt32,
-    data_size : UInt32,
-    pIV : Void*,
-    iv_size : UInt32,
-    pSubSampleMappingBlock : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_DECODER_SUB_SAMPLE_MAPPING_BLOCK*,
-    sub_sample_mapping_count : UInt32,
-    cBlocksStripeEncrypted : UInt32,
-    cBlocksStripeClear : UInt32
+  struct D3D11_VIDEO_DECODER_BUFFER_DESC2
+    property buffer_type : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_DECODER_BUFFER_TYPE
+    property data_offset : UInt32
+    property data_size : UInt32
+    property pIV : Void*
+    property iv_size : UInt32
+    property pSubSampleMappingBlock : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_DECODER_SUB_SAMPLE_MAPPING_BLOCK*
+    property sub_sample_mapping_count : UInt32
+    property cBlocksStripeEncrypted : UInt32
+    property cBlocksStripeClear : UInt32
+    def initialize(@buffer_type : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_DECODER_BUFFER_TYPE, @data_offset : UInt32, @data_size : UInt32, @pIV : Void*, @iv_size : UInt32, @pSubSampleMappingBlock : Win32cr::Graphics::Direct3D11::D3D11_VIDEO_DECODER_SUB_SAMPLE_MAPPING_BLOCK*, @sub_sample_mapping_count : UInt32, @cBlocksStripeEncrypted : UInt32, @cBlocksStripeClear : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_FEATURE_DATA_D3D11_OPTIONS4,
-    extended_nv12_shared_texture_supported : Win32cr::Foundation::BOOL
+  struct D3D11_FEATURE_DATA_D3D11_OPTIONS4
+    property extended_nv12_shared_texture_supported : Win32cr::Foundation::BOOL
+    def initialize(@extended_nv12_shared_texture_supported : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record D3D11_SIGNATURE_PARAMETER_DESC,
-    semantic_name : Win32cr::Foundation::PSTR,
-    semantic_index : UInt32,
-    register : UInt32,
-    system_value_type : Win32cr::Graphics::Direct3D::D3D_NAME,
-    component_type : Win32cr::Graphics::Direct3D::D3D_REGISTER_COMPONENT_TYPE,
-    mask : UInt8,
-    read_write_mask : UInt8,
-    stream : UInt32,
-    min_precision : Win32cr::Graphics::Direct3D::D3D_MIN_PRECISION
+  struct D3D11_SIGNATURE_PARAMETER_DESC
+    property semantic_name : Win32cr::Foundation::PSTR
+    property semantic_index : UInt32
+    property register : UInt32
+    property system_value_type : Win32cr::Graphics::Direct3D::D3D_NAME
+    property component_type : Win32cr::Graphics::Direct3D::D3D_REGISTER_COMPONENT_TYPE
+    property mask : UInt8
+    property read_write_mask : UInt8
+    property stream : UInt32
+    property min_precision : Win32cr::Graphics::Direct3D::D3D_MIN_PRECISION
+    def initialize(@semantic_name : Win32cr::Foundation::PSTR, @semantic_index : UInt32, @register : UInt32, @system_value_type : Win32cr::Graphics::Direct3D::D3D_NAME, @component_type : Win32cr::Graphics::Direct3D::D3D_REGISTER_COMPONENT_TYPE, @mask : UInt8, @read_write_mask : UInt8, @stream : UInt32, @min_precision : Win32cr::Graphics::Direct3D::D3D_MIN_PRECISION)
+    end
+  end
 
   @[Extern]
-  record D3D11_SHADER_BUFFER_DESC,
-    name : Win32cr::Foundation::PSTR,
-    type__ : Win32cr::Graphics::Direct3D::D3D_CBUFFER_TYPE,
-    variables : UInt32,
-    size : UInt32,
-    uFlags : UInt32
+  struct D3D11_SHADER_BUFFER_DESC
+    property name : Win32cr::Foundation::PSTR
+    property type__ : Win32cr::Graphics::Direct3D::D3D_CBUFFER_TYPE
+    property variables : UInt32
+    property size : UInt32
+    property uFlags : UInt32
+    def initialize(@name : Win32cr::Foundation::PSTR, @type__ : Win32cr::Graphics::Direct3D::D3D_CBUFFER_TYPE, @variables : UInt32, @size : UInt32, @uFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_SHADER_VARIABLE_DESC,
-    name : Win32cr::Foundation::PSTR,
-    start_offset : UInt32,
-    size : UInt32,
-    uFlags : UInt32,
-    default_value : Void*,
-    start_texture : UInt32,
-    texture_size : UInt32,
-    start_sampler : UInt32,
-    sampler_size : UInt32
+  struct D3D11_SHADER_VARIABLE_DESC
+    property name : Win32cr::Foundation::PSTR
+    property start_offset : UInt32
+    property size : UInt32
+    property uFlags : UInt32
+    property default_value : Void*
+    property start_texture : UInt32
+    property texture_size : UInt32
+    property start_sampler : UInt32
+    property sampler_size : UInt32
+    def initialize(@name : Win32cr::Foundation::PSTR, @start_offset : UInt32, @size : UInt32, @uFlags : UInt32, @default_value : Void*, @start_texture : UInt32, @texture_size : UInt32, @start_sampler : UInt32, @sampler_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_SHADER_TYPE_DESC,
-    class__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_CLASS,
-    type__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_TYPE,
-    rows : UInt32,
-    columns : UInt32,
-    elements : UInt32,
-    members : UInt32,
-    offset : UInt32,
-    name : Win32cr::Foundation::PSTR
+  struct D3D11_SHADER_TYPE_DESC
+    property class__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_CLASS
+    property type__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_TYPE
+    property rows : UInt32
+    property columns : UInt32
+    property elements : UInt32
+    property members : UInt32
+    property offset : UInt32
+    property name : Win32cr::Foundation::PSTR
+    def initialize(@class__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_CLASS, @type__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_TYPE, @rows : UInt32, @columns : UInt32, @elements : UInt32, @members : UInt32, @offset : UInt32, @name : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record D3D11_SHADER_DESC,
-    version : UInt32,
-    creator : Win32cr::Foundation::PSTR,
-    flags : UInt32,
-    constant_buffers : UInt32,
-    bound_resources : UInt32,
-    input_parameters : UInt32,
-    output_parameters : UInt32,
-    instruction_count : UInt32,
-    temp_register_count : UInt32,
-    temp_array_count : UInt32,
-    def_count : UInt32,
-    dcl_count : UInt32,
-    texture_normal_instructions : UInt32,
-    texture_load_instructions : UInt32,
-    texture_comp_instructions : UInt32,
-    texture_bias_instructions : UInt32,
-    texture_gradient_instructions : UInt32,
-    float_instruction_count : UInt32,
-    int_instruction_count : UInt32,
-    uint_instruction_count : UInt32,
-    static_flow_control_count : UInt32,
-    dynamic_flow_control_count : UInt32,
-    macro_instruction_count : UInt32,
-    array_instruction_count : UInt32,
-    cut_instruction_count : UInt32,
-    emit_instruction_count : UInt32,
-    gs_output_topology : Win32cr::Graphics::Direct3D::D3D_PRIMITIVE_TOPOLOGY,
-    gs_max_output_vertex_count : UInt32,
-    input_primitive : Win32cr::Graphics::Direct3D::D3D_PRIMITIVE,
-    patch_constant_parameters : UInt32,
-    cGSInstanceCount : UInt32,
-    cControlPoints : UInt32,
-    hs_output_primitive : Win32cr::Graphics::Direct3D::D3D_TESSELLATOR_OUTPUT_PRIMITIVE,
-    hs_partitioning : Win32cr::Graphics::Direct3D::D3D_TESSELLATOR_PARTITIONING,
-    tessellator_domain : Win32cr::Graphics::Direct3D::D3D_TESSELLATOR_DOMAIN,
-    cBarrierInstructions : UInt32,
-    cInterlockedInstructions : UInt32,
-    cTextureStoreInstructions : UInt32
+  struct D3D11_SHADER_DESC
+    property version : UInt32
+    property creator : Win32cr::Foundation::PSTR
+    property flags : UInt32
+    property constant_buffers : UInt32
+    property bound_resources : UInt32
+    property input_parameters : UInt32
+    property output_parameters : UInt32
+    property instruction_count : UInt32
+    property temp_register_count : UInt32
+    property temp_array_count : UInt32
+    property def_count : UInt32
+    property dcl_count : UInt32
+    property texture_normal_instructions : UInt32
+    property texture_load_instructions : UInt32
+    property texture_comp_instructions : UInt32
+    property texture_bias_instructions : UInt32
+    property texture_gradient_instructions : UInt32
+    property float_instruction_count : UInt32
+    property int_instruction_count : UInt32
+    property uint_instruction_count : UInt32
+    property static_flow_control_count : UInt32
+    property dynamic_flow_control_count : UInt32
+    property macro_instruction_count : UInt32
+    property array_instruction_count : UInt32
+    property cut_instruction_count : UInt32
+    property emit_instruction_count : UInt32
+    property gs_output_topology : Win32cr::Graphics::Direct3D::D3D_PRIMITIVE_TOPOLOGY
+    property gs_max_output_vertex_count : UInt32
+    property input_primitive : Win32cr::Graphics::Direct3D::D3D_PRIMITIVE
+    property patch_constant_parameters : UInt32
+    property cGSInstanceCount : UInt32
+    property cControlPoints : UInt32
+    property hs_output_primitive : Win32cr::Graphics::Direct3D::D3D_TESSELLATOR_OUTPUT_PRIMITIVE
+    property hs_partitioning : Win32cr::Graphics::Direct3D::D3D_TESSELLATOR_PARTITIONING
+    property tessellator_domain : Win32cr::Graphics::Direct3D::D3D_TESSELLATOR_DOMAIN
+    property cBarrierInstructions : UInt32
+    property cInterlockedInstructions : UInt32
+    property cTextureStoreInstructions : UInt32
+    def initialize(@version : UInt32, @creator : Win32cr::Foundation::PSTR, @flags : UInt32, @constant_buffers : UInt32, @bound_resources : UInt32, @input_parameters : UInt32, @output_parameters : UInt32, @instruction_count : UInt32, @temp_register_count : UInt32, @temp_array_count : UInt32, @def_count : UInt32, @dcl_count : UInt32, @texture_normal_instructions : UInt32, @texture_load_instructions : UInt32, @texture_comp_instructions : UInt32, @texture_bias_instructions : UInt32, @texture_gradient_instructions : UInt32, @float_instruction_count : UInt32, @int_instruction_count : UInt32, @uint_instruction_count : UInt32, @static_flow_control_count : UInt32, @dynamic_flow_control_count : UInt32, @macro_instruction_count : UInt32, @array_instruction_count : UInt32, @cut_instruction_count : UInt32, @emit_instruction_count : UInt32, @gs_output_topology : Win32cr::Graphics::Direct3D::D3D_PRIMITIVE_TOPOLOGY, @gs_max_output_vertex_count : UInt32, @input_primitive : Win32cr::Graphics::Direct3D::D3D_PRIMITIVE, @patch_constant_parameters : UInt32, @cGSInstanceCount : UInt32, @cControlPoints : UInt32, @hs_output_primitive : Win32cr::Graphics::Direct3D::D3D_TESSELLATOR_OUTPUT_PRIMITIVE, @hs_partitioning : Win32cr::Graphics::Direct3D::D3D_TESSELLATOR_PARTITIONING, @tessellator_domain : Win32cr::Graphics::Direct3D::D3D_TESSELLATOR_DOMAIN, @cBarrierInstructions : UInt32, @cInterlockedInstructions : UInt32, @cTextureStoreInstructions : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_SHADER_INPUT_BIND_DESC,
-    name : Win32cr::Foundation::PSTR,
-    type__ : Win32cr::Graphics::Direct3D::D3D_SHADER_INPUT_TYPE,
-    bind_point : UInt32,
-    bind_count : UInt32,
-    uFlags : UInt32,
-    return_type : Win32cr::Graphics::Direct3D::D3D_RESOURCE_RETURN_TYPE,
-    dimension : Win32cr::Graphics::Direct3D::D3D_SRV_DIMENSION,
-    num_samples : UInt32
+  struct D3D11_SHADER_INPUT_BIND_DESC
+    property name : Win32cr::Foundation::PSTR
+    property type__ : Win32cr::Graphics::Direct3D::D3D_SHADER_INPUT_TYPE
+    property bind_point : UInt32
+    property bind_count : UInt32
+    property uFlags : UInt32
+    property return_type : Win32cr::Graphics::Direct3D::D3D_RESOURCE_RETURN_TYPE
+    property dimension : Win32cr::Graphics::Direct3D::D3D_SRV_DIMENSION
+    property num_samples : UInt32
+    def initialize(@name : Win32cr::Foundation::PSTR, @type__ : Win32cr::Graphics::Direct3D::D3D_SHADER_INPUT_TYPE, @bind_point : UInt32, @bind_count : UInt32, @uFlags : UInt32, @return_type : Win32cr::Graphics::Direct3D::D3D_RESOURCE_RETURN_TYPE, @dimension : Win32cr::Graphics::Direct3D::D3D_SRV_DIMENSION, @num_samples : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_LIBRARY_DESC,
-    creator : Win32cr::Foundation::PSTR,
-    flags : UInt32,
-    function_count : UInt32
+  struct D3D11_LIBRARY_DESC
+    property creator : Win32cr::Foundation::PSTR
+    property flags : UInt32
+    property function_count : UInt32
+    def initialize(@creator : Win32cr::Foundation::PSTR, @flags : UInt32, @function_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_FUNCTION_DESC,
-    version : UInt32,
-    creator : Win32cr::Foundation::PSTR,
-    flags : UInt32,
-    constant_buffers : UInt32,
-    bound_resources : UInt32,
-    instruction_count : UInt32,
-    temp_register_count : UInt32,
-    temp_array_count : UInt32,
-    def_count : UInt32,
-    dcl_count : UInt32,
-    texture_normal_instructions : UInt32,
-    texture_load_instructions : UInt32,
-    texture_comp_instructions : UInt32,
-    texture_bias_instructions : UInt32,
-    texture_gradient_instructions : UInt32,
-    float_instruction_count : UInt32,
-    int_instruction_count : UInt32,
-    uint_instruction_count : UInt32,
-    static_flow_control_count : UInt32,
-    dynamic_flow_control_count : UInt32,
-    macro_instruction_count : UInt32,
-    array_instruction_count : UInt32,
-    mov_instruction_count : UInt32,
-    movc_instruction_count : UInt32,
-    conversion_instruction_count : UInt32,
-    bitwise_instruction_count : UInt32,
-    min_feature_level : Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL,
-    required_feature_flags : UInt64,
-    name : Win32cr::Foundation::PSTR,
-    function_parameter_count : Int32,
-    has_return : Win32cr::Foundation::BOOL,
-    has10_level9_vertex_shader : Win32cr::Foundation::BOOL,
-    has10_level9_pixel_shader : Win32cr::Foundation::BOOL
+  struct D3D11_FUNCTION_DESC
+    property version : UInt32
+    property creator : Win32cr::Foundation::PSTR
+    property flags : UInt32
+    property constant_buffers : UInt32
+    property bound_resources : UInt32
+    property instruction_count : UInt32
+    property temp_register_count : UInt32
+    property temp_array_count : UInt32
+    property def_count : UInt32
+    property dcl_count : UInt32
+    property texture_normal_instructions : UInt32
+    property texture_load_instructions : UInt32
+    property texture_comp_instructions : UInt32
+    property texture_bias_instructions : UInt32
+    property texture_gradient_instructions : UInt32
+    property float_instruction_count : UInt32
+    property int_instruction_count : UInt32
+    property uint_instruction_count : UInt32
+    property static_flow_control_count : UInt32
+    property dynamic_flow_control_count : UInt32
+    property macro_instruction_count : UInt32
+    property array_instruction_count : UInt32
+    property mov_instruction_count : UInt32
+    property movc_instruction_count : UInt32
+    property conversion_instruction_count : UInt32
+    property bitwise_instruction_count : UInt32
+    property min_feature_level : Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL
+    property required_feature_flags : UInt64
+    property name : Win32cr::Foundation::PSTR
+    property function_parameter_count : Int32
+    property has_return : Win32cr::Foundation::BOOL
+    property has10_level9_vertex_shader : Win32cr::Foundation::BOOL
+    property has10_level9_pixel_shader : Win32cr::Foundation::BOOL
+    def initialize(@version : UInt32, @creator : Win32cr::Foundation::PSTR, @flags : UInt32, @constant_buffers : UInt32, @bound_resources : UInt32, @instruction_count : UInt32, @temp_register_count : UInt32, @temp_array_count : UInt32, @def_count : UInt32, @dcl_count : UInt32, @texture_normal_instructions : UInt32, @texture_load_instructions : UInt32, @texture_comp_instructions : UInt32, @texture_bias_instructions : UInt32, @texture_gradient_instructions : UInt32, @float_instruction_count : UInt32, @int_instruction_count : UInt32, @uint_instruction_count : UInt32, @static_flow_control_count : UInt32, @dynamic_flow_control_count : UInt32, @macro_instruction_count : UInt32, @array_instruction_count : UInt32, @mov_instruction_count : UInt32, @movc_instruction_count : UInt32, @conversion_instruction_count : UInt32, @bitwise_instruction_count : UInt32, @min_feature_level : Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL, @required_feature_flags : UInt64, @name : Win32cr::Foundation::PSTR, @function_parameter_count : Int32, @has_return : Win32cr::Foundation::BOOL, @has10_level9_vertex_shader : Win32cr::Foundation::BOOL, @has10_level9_pixel_shader : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record D3D11_PARAMETER_DESC,
-    name : Win32cr::Foundation::PSTR,
-    semantic_name : Win32cr::Foundation::PSTR,
-    type__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_TYPE,
-    class__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_CLASS,
-    rows : UInt32,
-    columns : UInt32,
-    interpolation_mode : Win32cr::Graphics::Direct3D::D3D_INTERPOLATION_MODE,
-    flags : Win32cr::Graphics::Direct3D::D3D_PARAMETER_FLAGS,
-    first_in_register : UInt32,
-    first_in_component : UInt32,
-    first_out_register : UInt32,
-    first_out_component : UInt32
+  struct D3D11_PARAMETER_DESC
+    property name : Win32cr::Foundation::PSTR
+    property semantic_name : Win32cr::Foundation::PSTR
+    property type__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_TYPE
+    property class__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_CLASS
+    property rows : UInt32
+    property columns : UInt32
+    property interpolation_mode : Win32cr::Graphics::Direct3D::D3D_INTERPOLATION_MODE
+    property flags : Win32cr::Graphics::Direct3D::D3D_PARAMETER_FLAGS
+    property first_in_register : UInt32
+    property first_in_component : UInt32
+    property first_out_register : UInt32
+    property first_out_component : UInt32
+    def initialize(@name : Win32cr::Foundation::PSTR, @semantic_name : Win32cr::Foundation::PSTR, @type__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_TYPE, @class__ : Win32cr::Graphics::Direct3D::D3D_SHADER_VARIABLE_CLASS, @rows : UInt32, @columns : UInt32, @interpolation_mode : Win32cr::Graphics::Direct3D::D3D_INTERPOLATION_MODE, @flags : Win32cr::Graphics::Direct3D::D3D_PARAMETER_FLAGS, @first_in_register : UInt32, @first_in_component : UInt32, @first_out_register : UInt32, @first_out_component : UInt32)
+    end
+  end
 
   @[Extern]
-  record D3D11_VERTEX_SHADER_TRACE_DESC,
-    invocation : UInt64
+  struct D3D11_VERTEX_SHADER_TRACE_DESC
+    property invocation : UInt64
+    def initialize(@invocation : UInt64)
+    end
+  end
 
   @[Extern]
-  record D3D11_HULL_SHADER_TRACE_DESC,
-    invocation : UInt64
+  struct D3D11_HULL_SHADER_TRACE_DESC
+    property invocation : UInt64
+    def initialize(@invocation : UInt64)
+    end
+  end
 
   @[Extern]
-  record D3D11_DOMAIN_SHADER_TRACE_DESC,
-    invocation : UInt64
+  struct D3D11_DOMAIN_SHADER_TRACE_DESC
+    property invocation : UInt64
+    def initialize(@invocation : UInt64)
+    end
+  end
 
   @[Extern]
-  record D3D11_GEOMETRY_SHADER_TRACE_DESC,
-    invocation : UInt64
+  struct D3D11_GEOMETRY_SHADER_TRACE_DESC
+    property invocation : UInt64
+    def initialize(@invocation : UInt64)
+    end
+  end
 
   @[Extern]
-  record D3D11_PIXEL_SHADER_TRACE_DESC,
-    invocation : UInt64,
-    x : Int32,
-    y : Int32,
-    sample_mask : UInt64
+  struct D3D11_PIXEL_SHADER_TRACE_DESC
+    property invocation : UInt64
+    property x : Int32
+    property y : Int32
+    property sample_mask : UInt64
+    def initialize(@invocation : UInt64, @x : Int32, @y : Int32, @sample_mask : UInt64)
+    end
+  end
 
   @[Extern]
-  record D3D11_COMPUTE_SHADER_TRACE_DESC,
-    invocation : UInt64,
-    thread_id_in_group : UInt32[3],
-    thread_group_id : UInt32[3]
+  struct D3D11_COMPUTE_SHADER_TRACE_DESC
+    property invocation : UInt64
+    property thread_id_in_group : UInt32[3]
+    property thread_group_id : UInt32[3]
+    def initialize(@invocation : UInt64, @thread_id_in_group : UInt32[3], @thread_group_id : UInt32[3])
+    end
+  end
 
   @[Extern]
-  record D3D11_SHADER_TRACE_DESC,
-    type__ : Win32cr::Graphics::Direct3D11::D3D11_SHADER_TYPE,
-    flags : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct D3D11_SHADER_TRACE_DESC
+    property type__ : Win32cr::Graphics::Direct3D11::D3D11_SHADER_TYPE
+    property flags : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      vertex_shader_trace_desc : Win32cr::Graphics::Direct3D11::D3D11_VERTEX_SHADER_TRACE_DESC,
-      hull_shader_trace_desc : Win32cr::Graphics::Direct3D11::D3D11_HULL_SHADER_TRACE_DESC,
-      domain_shader_trace_desc : Win32cr::Graphics::Direct3D11::D3D11_DOMAIN_SHADER_TRACE_DESC,
-      geometry_shader_trace_desc : Win32cr::Graphics::Direct3D11::D3D11_GEOMETRY_SHADER_TRACE_DESC,
-      pixel_shader_trace_desc : Win32cr::Graphics::Direct3D11::D3D11_PIXEL_SHADER_TRACE_DESC,
-      compute_shader_trace_desc : Win32cr::Graphics::Direct3D11::D3D11_COMPUTE_SHADER_TRACE_DESC
+    struct Anonymous_e__Union_
+    property vertex_shader_trace_desc : Win32cr::Graphics::Direct3D11::D3D11_VERTEX_SHADER_TRACE_DESC
+    property hull_shader_trace_desc : Win32cr::Graphics::Direct3D11::D3D11_HULL_SHADER_TRACE_DESC
+    property domain_shader_trace_desc : Win32cr::Graphics::Direct3D11::D3D11_DOMAIN_SHADER_TRACE_DESC
+    property geometry_shader_trace_desc : Win32cr::Graphics::Direct3D11::D3D11_GEOMETRY_SHADER_TRACE_DESC
+    property pixel_shader_trace_desc : Win32cr::Graphics::Direct3D11::D3D11_PIXEL_SHADER_TRACE_DESC
+    property compute_shader_trace_desc : Win32cr::Graphics::Direct3D11::D3D11_COMPUTE_SHADER_TRACE_DESC
+    def initialize(@vertex_shader_trace_desc : Win32cr::Graphics::Direct3D11::D3D11_VERTEX_SHADER_TRACE_DESC, @hull_shader_trace_desc : Win32cr::Graphics::Direct3D11::D3D11_HULL_SHADER_TRACE_DESC, @domain_shader_trace_desc : Win32cr::Graphics::Direct3D11::D3D11_DOMAIN_SHADER_TRACE_DESC, @geometry_shader_trace_desc : Win32cr::Graphics::Direct3D11::D3D11_GEOMETRY_SHADER_TRACE_DESC, @pixel_shader_trace_desc : Win32cr::Graphics::Direct3D11::D3D11_PIXEL_SHADER_TRACE_DESC, @compute_shader_trace_desc : Win32cr::Graphics::Direct3D11::D3D11_COMPUTE_SHADER_TRACE_DESC)
+    end
+    end
 
+    def initialize(@type__ : Win32cr::Graphics::Direct3D11::D3D11_SHADER_TYPE, @flags : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record D3D11_TRACE_STATS,
-    trace_desc : Win32cr::Graphics::Direct3D11::D3D11_SHADER_TRACE_DESC,
-    num_invocations_in_stamp : UInt8,
-    target_stamp_index : UInt8,
-    num_trace_steps : UInt32,
-    input_mask : UInt8[32],
-    output_mask : UInt8[32],
-    num_temps : UInt16,
-    max_indexable_temp_index : UInt16,
-    indexable_temp_size : UInt16[4096],
-    immediate_constant_buffer_size : UInt16,
-    pixel_position : UInt32[8],
-    pixel_coverage_mask : UInt64[4],
-    pixel_discarded_mask : UInt64[4],
-    pixel_coverage_mask_after_shader : UInt64[4],
-    pixel_coverage_mask_after_a2_c_sample_mask : UInt64[4],
-    pixel_coverage_mask_after_a2_c_sample_mask_depth : UInt64[4],
-    pixel_coverage_mask_after_a2_c_sample_mask_depth_stencil : UInt64[4],
-    ps_outputs_depth : Win32cr::Foundation::BOOL,
-    ps_outputs_mask : Win32cr::Foundation::BOOL,
-    gs_input_primitive : Win32cr::Graphics::Direct3D11::D3D11_TRACE_GS_INPUT_PRIMITIVE,
-    gs_inputs_primitive_id : Win32cr::Foundation::BOOL,
-    hs_output_patch_constant_mask : UInt8[32],
-    ds_input_patch_constant_mask : UInt8[32]
+  struct D3D11_TRACE_STATS
+    property trace_desc : Win32cr::Graphics::Direct3D11::D3D11_SHADER_TRACE_DESC
+    property num_invocations_in_stamp : UInt8
+    property target_stamp_index : UInt8
+    property num_trace_steps : UInt32
+    property input_mask : UInt8[32]
+    property output_mask : UInt8[32]
+    property num_temps : UInt16
+    property max_indexable_temp_index : UInt16
+    property indexable_temp_size : UInt16[4096]
+    property immediate_constant_buffer_size : UInt16
+    property pixel_position : UInt32[8]
+    property pixel_coverage_mask : UInt64[4]
+    property pixel_discarded_mask : UInt64[4]
+    property pixel_coverage_mask_after_shader : UInt64[4]
+    property pixel_coverage_mask_after_a2_c_sample_mask : UInt64[4]
+    property pixel_coverage_mask_after_a2_c_sample_mask_depth : UInt64[4]
+    property pixel_coverage_mask_after_a2_c_sample_mask_depth_stencil : UInt64[4]
+    property ps_outputs_depth : Win32cr::Foundation::BOOL
+    property ps_outputs_mask : Win32cr::Foundation::BOOL
+    property gs_input_primitive : Win32cr::Graphics::Direct3D11::D3D11_TRACE_GS_INPUT_PRIMITIVE
+    property gs_inputs_primitive_id : Win32cr::Foundation::BOOL
+    property hs_output_patch_constant_mask : UInt8[32]
+    property ds_input_patch_constant_mask : UInt8[32]
+    def initialize(@trace_desc : Win32cr::Graphics::Direct3D11::D3D11_SHADER_TRACE_DESC, @num_invocations_in_stamp : UInt8, @target_stamp_index : UInt8, @num_trace_steps : UInt32, @input_mask : UInt8[32], @output_mask : UInt8[32], @num_temps : UInt16, @max_indexable_temp_index : UInt16, @indexable_temp_size : UInt16[4096], @immediate_constant_buffer_size : UInt16, @pixel_position : UInt32[8], @pixel_coverage_mask : UInt64[4], @pixel_discarded_mask : UInt64[4], @pixel_coverage_mask_after_shader : UInt64[4], @pixel_coverage_mask_after_a2_c_sample_mask : UInt64[4], @pixel_coverage_mask_after_a2_c_sample_mask_depth : UInt64[4], @pixel_coverage_mask_after_a2_c_sample_mask_depth_stencil : UInt64[4], @ps_outputs_depth : Win32cr::Foundation::BOOL, @ps_outputs_mask : Win32cr::Foundation::BOOL, @gs_input_primitive : Win32cr::Graphics::Direct3D11::D3D11_TRACE_GS_INPUT_PRIMITIVE, @gs_inputs_primitive_id : Win32cr::Foundation::BOOL, @hs_output_patch_constant_mask : UInt8[32], @ds_input_patch_constant_mask : UInt8[32])
+    end
+  end
 
   @[Extern]
-  record D3D11_TRACE_VALUE,
-    bits : UInt32[4],
-    valid_mask : UInt8
+  struct D3D11_TRACE_VALUE
+    property bits : UInt32[4]
+    property valid_mask : UInt8
+    def initialize(@bits : UInt32[4], @valid_mask : UInt8)
+    end
+  end
 
   @[Extern]
-  record D3D11_TRACE_REGISTER,
-    reg_type : Win32cr::Graphics::Direct3D11::D3D11_TRACE_REGISTER_TYPE,
-    anonymous : Anonymous_e__Union_,
-    operand_index : UInt8,
-    flags : UInt8 do
+  struct D3D11_TRACE_REGISTER
+    property reg_type : Win32cr::Graphics::Direct3D11::D3D11_TRACE_REGISTER_TYPE
+    property anonymous : Anonymous_e__Union_
+    property operand_index : UInt8
+    property flags : UInt8
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      index1_d : UInt16,
-      index2_d : UInt16[2]
+    struct Anonymous_e__Union_
+    property index1_d : UInt16
+    property index2_d : UInt16[2]
+    def initialize(@index1_d : UInt16, @index2_d : UInt16[2])
+    end
+    end
 
+    def initialize(@reg_type : Win32cr::Graphics::Direct3D11::D3D11_TRACE_REGISTER_TYPE, @anonymous : Anonymous_e__Union_, @operand_index : UInt8, @flags : UInt8)
+    end
   end
 
   @[Extern]
-  record D3D11_TRACE_STEP,
-    id : UInt32,
-    instruction_active : Win32cr::Foundation::BOOL,
-    num_registers_written : UInt8,
-    num_registers_read : UInt8,
-    misc_operations : UInt16,
-    opcode_type : UInt32,
-    current_global_cycle : UInt64
+  struct D3D11_TRACE_STEP
+    property id : UInt32
+    property instruction_active : Win32cr::Foundation::BOOL
+    property num_registers_written : UInt8
+    property num_registers_read : UInt8
+    property misc_operations : UInt16
+    property opcode_type : UInt32
+    property current_global_cycle : UInt64
+    def initialize(@id : UInt32, @instruction_active : Win32cr::Foundation::BOOL, @num_registers_written : UInt8, @num_registers_read : UInt8, @misc_operations : UInt16, @opcode_type : UInt32, @current_global_cycle : UInt64)
+    end
+  end
 
   @[Extern]
-  record D3DX11_FFT_DESC,
-    num_dimensions : UInt32,
-    element_lengths : UInt32[32],
-    dimension_mask : UInt32,
-    type__ : Win32cr::Graphics::Direct3D11::D3DX11_FFT_DATA_TYPE
+  struct D3DX11_FFT_DESC
+    property num_dimensions : UInt32
+    property element_lengths : UInt32[32]
+    property dimension_mask : UInt32
+    property type__ : Win32cr::Graphics::Direct3D11::D3DX11_FFT_DATA_TYPE
+    def initialize(@num_dimensions : UInt32, @element_lengths : UInt32[32], @dimension_mask : UInt32, @type__ : Win32cr::Graphics::Direct3D11::D3DX11_FFT_DATA_TYPE)
+    end
+  end
 
   @[Extern]
-  record D3DX11_FFT_BUFFER_INFO,
-    num_temp_buffer_sizes : UInt32,
-    temp_buffer_float_sizes : UInt32[4],
-    num_precompute_buffer_sizes : UInt32,
-    precompute_buffer_float_sizes : UInt32[4]
+  struct D3DX11_FFT_BUFFER_INFO
+    property num_temp_buffer_sizes : UInt32
+    property temp_buffer_float_sizes : UInt32[4]
+    property num_precompute_buffer_sizes : UInt32
+    property precompute_buffer_float_sizes : UInt32[4]
+    def initialize(@num_temp_buffer_sizes : UInt32, @temp_buffer_float_sizes : UInt32[4], @num_precompute_buffer_sizes : UInt32, @precompute_buffer_float_sizes : UInt32[4])
+    end
+  end
 
   @[Extern]
   record ID3D11DeviceChildVtbl,
@@ -4309,7 +4921,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("1841e5c8-16b0-489b-bcc8-44cfb0d5deae")]
   record ID3D11DeviceChild, lpVtbl : ID3D11DeviceChildVtbl* do
     GUID = LibC::GUID.new(0x1841e5c8_u32, 0x16b0_u16, 0x489b_u16, StaticArray[0xbc_u8, 0xc8_u8, 0x44_u8, 0xcf_u8, 0xb0_u8, 0xd5_u8, 0xde_u8, 0xae_u8])
     def query_interface(this : ID3D11DeviceChild*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4349,7 +4960,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("03823efb-8d8f-4e1c-9aa2-f64bb2cbfdf1")]
   record ID3D11DepthStencilState, lpVtbl : ID3D11DepthStencilStateVtbl* do
     GUID = LibC::GUID.new(0x3823efb_u32, 0x8d8f_u16, 0x4e1c_u16, StaticArray[0x9a_u8, 0xa2_u8, 0xf6_u8, 0x4b_u8, 0xb2_u8, 0xcb_u8, 0xfd_u8, 0xf1_u8])
     def query_interface(this : ID3D11DepthStencilState*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4392,7 +5002,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("75b68faa-347d-4159-8f45-a0640f01cd9a")]
   record ID3D11BlendState, lpVtbl : ID3D11BlendStateVtbl* do
     GUID = LibC::GUID.new(0x75b68faa_u32, 0x347d_u16, 0x4159_u16, StaticArray[0x8f_u8, 0x45_u8, 0xa0_u8, 0x64_u8, 0xf_u8, 0x1_u8, 0xcd_u8, 0x9a_u8])
     def query_interface(this : ID3D11BlendState*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4435,7 +5044,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("9bb4ab81-ab1a-4d8f-b506-fc04200b6ee7")]
   record ID3D11RasterizerState, lpVtbl : ID3D11RasterizerStateVtbl* do
     GUID = LibC::GUID.new(0x9bb4ab81_u32, 0xab1a_u16, 0x4d8f_u16, StaticArray[0xb5_u8, 0x6_u8, 0xfc_u8, 0x4_u8, 0x20_u8, 0xb_u8, 0x6e_u8, 0xe7_u8])
     def query_interface(this : ID3D11RasterizerState*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4480,7 +5088,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("dc8e63f3-d12b-4952-b47b-5e45026a862d")]
   record ID3D11Resource, lpVtbl : ID3D11ResourceVtbl* do
     GUID = LibC::GUID.new(0xdc8e63f3_u32, 0xd12b_u16, 0x4952_u16, StaticArray[0xb4_u8, 0x7b_u8, 0x5e_u8, 0x45_u8, 0x2_u8, 0x6a_u8, 0x86_u8, 0x2d_u8])
     def query_interface(this : ID3D11Resource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4532,7 +5139,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("48570b85-d1ee-4fcd-a250-eb350722b037")]
   record ID3D11Buffer, lpVtbl : ID3D11BufferVtbl* do
     GUID = LibC::GUID.new(0x48570b85_u32, 0xd1ee_u16, 0x4fcd_u16, StaticArray[0xa2_u8, 0x50_u8, 0xeb_u8, 0x35_u8, 0x7_u8, 0x22_u8, 0xb0_u8, 0x37_u8])
     def query_interface(this : ID3D11Buffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4587,7 +5193,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("f8fb5c27-c6b3-4f75-a4c8-439af2ef564c")]
   record ID3D11Texture1D, lpVtbl : ID3D11Texture1DVtbl* do
     GUID = LibC::GUID.new(0xf8fb5c27_u32, 0xc6b3_u16, 0x4f75_u16, StaticArray[0xa4_u8, 0xc8_u8, 0x43_u8, 0x9a_u8, 0xf2_u8, 0xef_u8, 0x56_u8, 0x4c_u8])
     def query_interface(this : ID3D11Texture1D*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4642,7 +5247,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("6f15aaf2-d208-4e89-9ab4-489535d34f9c")]
   record ID3D11Texture2D, lpVtbl : ID3D11Texture2DVtbl* do
     GUID = LibC::GUID.new(0x6f15aaf2_u32, 0xd208_u16, 0x4e89_u16, StaticArray[0x9a_u8, 0xb4_u8, 0x48_u8, 0x95_u8, 0x35_u8, 0xd3_u8, 0x4f_u8, 0x9c_u8])
     def query_interface(this : ID3D11Texture2D*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4697,7 +5301,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("037e866e-f56d-4357-a8af-9dabbe6e250e")]
   record ID3D11Texture3D, lpVtbl : ID3D11Texture3DVtbl* do
     GUID = LibC::GUID.new(0x37e866e_u32, 0xf56d_u16, 0x4357_u16, StaticArray[0xa8_u8, 0xaf_u8, 0x9d_u8, 0xab_u8, 0xbe_u8, 0x6e_u8, 0x25_u8, 0xe_u8])
     def query_interface(this : ID3D11Texture3D*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4749,7 +5352,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("839d1216-bb2e-412b-b7f4-a9dbebe08ed1")]
   record ID3D11View, lpVtbl : ID3D11ViewVtbl* do
     GUID = LibC::GUID.new(0x839d1216_u32, 0xbb2e_u16, 0x412b_u16, StaticArray[0xb7_u8, 0xf4_u8, 0xa9_u8, 0xdb_u8, 0xeb_u8, 0xe0_u8, 0x8e_u8, 0xd1_u8])
     def query_interface(this : ID3D11View*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4793,7 +5395,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("b0e06fe0-8192-4e1a-b1ca-36d7414710b2")]
   record ID3D11ShaderResourceView, lpVtbl : ID3D11ShaderResourceViewVtbl* do
     GUID = LibC::GUID.new(0xb0e06fe0_u32, 0x8192_u16, 0x4e1a_u16, StaticArray[0xb1_u8, 0xca_u8, 0x36_u8, 0xd7_u8, 0x41_u8, 0x47_u8, 0x10_u8, 0xb2_u8])
     def query_interface(this : ID3D11ShaderResourceView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4840,7 +5441,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("dfdba067-0b8d-4865-875b-d7b4516cc164")]
   record ID3D11RenderTargetView, lpVtbl : ID3D11RenderTargetViewVtbl* do
     GUID = LibC::GUID.new(0xdfdba067_u32, 0xb8d_u16, 0x4865_u16, StaticArray[0x87_u8, 0x5b_u8, 0xd7_u8, 0xb4_u8, 0x51_u8, 0x6c_u8, 0xc1_u8, 0x64_u8])
     def query_interface(this : ID3D11RenderTargetView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4887,7 +5487,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("9fdac92a-1876-48c3-afad-25b94f84a9b6")]
   record ID3D11DepthStencilView, lpVtbl : ID3D11DepthStencilViewVtbl* do
     GUID = LibC::GUID.new(0x9fdac92a_u32, 0x1876_u16, 0x48c3_u16, StaticArray[0xaf_u8, 0xad_u8, 0x25_u8, 0xb9_u8, 0x4f_u8, 0x84_u8, 0xa9_u8, 0xb6_u8])
     def query_interface(this : ID3D11DepthStencilView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4934,7 +5533,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("28acf509-7f5c-48f6-8611-f316010a6380")]
   record ID3D11UnorderedAccessView, lpVtbl : ID3D11UnorderedAccessViewVtbl* do
     GUID = LibC::GUID.new(0x28acf509_u32, 0x7f5c_u16, 0x48f6_u16, StaticArray[0x86_u8, 0x11_u8, 0xf3_u8, 0x16_u8, 0x1_u8, 0xa_u8, 0x63_u8, 0x80_u8])
     def query_interface(this : ID3D11UnorderedAccessView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4979,7 +5577,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("3b301d64-d678-4289-8897-22f8928b72f3")]
   record ID3D11VertexShader, lpVtbl : ID3D11VertexShaderVtbl* do
     GUID = LibC::GUID.new(0x3b301d64_u32, 0xd678_u16, 0x4289_u16, StaticArray[0x88_u8, 0x97_u8, 0x22_u8, 0xf8_u8, 0x92_u8, 0x8b_u8, 0x72_u8, 0xf3_u8])
     def query_interface(this : ID3D11VertexShader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5018,7 +5615,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("8e5c6061-628a-4c8e-8264-bbe45cb3d5dd")]
   record ID3D11HullShader, lpVtbl : ID3D11HullShaderVtbl* do
     GUID = LibC::GUID.new(0x8e5c6061_u32, 0x628a_u16, 0x4c8e_u16, StaticArray[0x82_u8, 0x64_u8, 0xbb_u8, 0xe4_u8, 0x5c_u8, 0xb3_u8, 0xd5_u8, 0xdd_u8])
     def query_interface(this : ID3D11HullShader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5057,7 +5653,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("f582c508-0f36-490c-9977-31eece268cfa")]
   record ID3D11DomainShader, lpVtbl : ID3D11DomainShaderVtbl* do
     GUID = LibC::GUID.new(0xf582c508_u32, 0xf36_u16, 0x490c_u16, StaticArray[0x99_u8, 0x77_u8, 0x31_u8, 0xee_u8, 0xce_u8, 0x26_u8, 0x8c_u8, 0xfa_u8])
     def query_interface(this : ID3D11DomainShader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5096,7 +5691,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("38325b96-effb-4022-ba02-2e795b70275c")]
   record ID3D11GeometryShader, lpVtbl : ID3D11GeometryShaderVtbl* do
     GUID = LibC::GUID.new(0x38325b96_u32, 0xeffb_u16, 0x4022_u16, StaticArray[0xba_u8, 0x2_u8, 0x2e_u8, 0x79_u8, 0x5b_u8, 0x70_u8, 0x27_u8, 0x5c_u8])
     def query_interface(this : ID3D11GeometryShader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5135,7 +5729,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("ea82e40d-51dc-4f33-93d4-db7c9125ae8c")]
   record ID3D11PixelShader, lpVtbl : ID3D11PixelShaderVtbl* do
     GUID = LibC::GUID.new(0xea82e40d_u32, 0x51dc_u16, 0x4f33_u16, StaticArray[0x93_u8, 0xd4_u8, 0xdb_u8, 0x7c_u8, 0x91_u8, 0x25_u8, 0xae_u8, 0x8c_u8])
     def query_interface(this : ID3D11PixelShader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5174,7 +5767,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("4f5b196e-c2bd-495e-bd01-1fded38e4969")]
   record ID3D11ComputeShader, lpVtbl : ID3D11ComputeShaderVtbl* do
     GUID = LibC::GUID.new(0x4f5b196e_u32, 0xc2bd_u16, 0x495e_u16, StaticArray[0xbd_u8, 0x1_u8, 0x1f_u8, 0xde_u8, 0xd3_u8, 0x8e_u8, 0x49_u8, 0x69_u8])
     def query_interface(this : ID3D11ComputeShader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5213,7 +5805,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("e4819ddc-4cf0-4025-bd26-5de82a3e07b7")]
   record ID3D11InputLayout, lpVtbl : ID3D11InputLayoutVtbl* do
     GUID = LibC::GUID.new(0xe4819ddc_u32, 0x4cf0_u16, 0x4025_u16, StaticArray[0xbd_u8, 0x26_u8, 0x5d_u8, 0xe8_u8, 0x2a_u8, 0x3e_u8, 0x7_u8, 0xb7_u8])
     def query_interface(this : ID3D11InputLayout*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5253,7 +5844,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("da6fea51-564c-4487-9810-f0d0f9b4e3a5")]
   record ID3D11SamplerState, lpVtbl : ID3D11SamplerStateVtbl* do
     GUID = LibC::GUID.new(0xda6fea51_u32, 0x564c_u16, 0x4487_u16, StaticArray[0x98_u8, 0x10_u8, 0xf0_u8, 0xd0_u8, 0xf9_u8, 0xb4_u8, 0xe3_u8, 0xa5_u8])
     def query_interface(this : ID3D11SamplerState*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5296,7 +5886,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("4b35d0cd-1e15-4258-9c98-1b1333f6dd3b")]
   record ID3D11Asynchronous, lpVtbl : ID3D11AsynchronousVtbl* do
     GUID = LibC::GUID.new(0x4b35d0cd_u32, 0x1e15_u16, 0x4258_u16, StaticArray[0x9c_u8, 0x98_u8, 0x1b_u8, 0x13_u8, 0x33_u8, 0xf6_u8, 0xdd_u8, 0x3b_u8])
     def query_interface(this : ID3D11Asynchronous*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5340,7 +5929,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("d6c00747-87b7-425e-b84d-44d108560afd")]
   record ID3D11Query, lpVtbl : ID3D11QueryVtbl* do
     GUID = LibC::GUID.new(0xd6c00747_u32, 0x87b7_u16, 0x425e_u16, StaticArray[0xb8_u8, 0x4d_u8, 0x44_u8, 0xd1_u8, 0x8_u8, 0x56_u8, 0xa_u8, 0xfd_u8])
     def query_interface(this : ID3D11Query*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5387,7 +5975,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("9eb576dd-9f77-4d86-81aa-8bab5fe490e2")]
   record ID3D11Predicate, lpVtbl : ID3D11PredicateVtbl* do
     GUID = LibC::GUID.new(0x9eb576dd_u32, 0x9f77_u16, 0x4d86_u16, StaticArray[0x81_u8, 0xaa_u8, 0x8b_u8, 0xab_u8, 0x5f_u8, 0xe4_u8, 0x90_u8, 0xe2_u8])
     def query_interface(this : ID3D11Predicate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5434,7 +6021,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("6e8c49fb-a371-4770-b440-29086022b741")]
   record ID3D11Counter, lpVtbl : ID3D11CounterVtbl* do
     GUID = LibC::GUID.new(0x6e8c49fb_u32, 0xa371_u16, 0x4770_u16, StaticArray[0xb4_u8, 0x40_u8, 0x29_u8, 0x8_u8, 0x60_u8, 0x22_u8, 0xb7_u8, 0x41_u8])
     def query_interface(this : ID3D11Counter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5483,7 +6069,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("a6cd7faa-b0b7-4a2f-9436-8662a65797cb")]
   record ID3D11ClassInstance, lpVtbl : ID3D11ClassInstanceVtbl* do
     GUID = LibC::GUID.new(0xa6cd7faa_u32, 0xb0b7_u16, 0x4a2f_u16, StaticArray[0x94_u8, 0x36_u8, 0x86_u8, 0x62_u8, 0xa6_u8, 0x57_u8, 0x97_u8, 0xcb_u8])
     def query_interface(this : ID3D11ClassInstance*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5536,7 +6121,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("ddf57cba-9543-46e4-a12b-f207a0fe7fed")]
   record ID3D11ClassLinkage, lpVtbl : ID3D11ClassLinkageVtbl* do
     GUID = LibC::GUID.new(0xddf57cba_u32, 0x9543_u16, 0x46e4_u16, StaticArray[0xa1_u8, 0x2b_u8, 0xf2_u8, 0x7_u8, 0xa0_u8, 0xfe_u8, 0x7f_u8, 0xed_u8])
     def query_interface(this : ID3D11ClassLinkage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5582,7 +6166,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("a24bc4d1-769e-43f7-8013-98ff566c18e2")]
   record ID3D11CommandList, lpVtbl : ID3D11CommandListVtbl* do
     GUID = LibC::GUID.new(0xa24bc4d1_u32, 0x769e_u16, 0x43f7_u16, StaticArray[0x80_u8, 0x13_u8, 0x98_u8, 0xff_u8, 0x56_u8, 0x6c_u8, 0x18_u8, 0xe2_u8])
     def query_interface(this : ID3D11CommandList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5732,7 +6315,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("c0bfa96c-e089-44fb-8eaf-26f8796190da")]
   record ID3D11DeviceContext, lpVtbl : ID3D11DeviceContextVtbl* do
     GUID = LibC::GUID.new(0xc0bfa96c_u32, 0xe089_u16, 0x44fb_u16, StaticArray[0x8e_u8, 0xaf_u8, 0x26_u8, 0xf8_u8, 0x79_u8, 0x61_u8, 0x90_u8, 0xda_u8])
     def query_interface(this : ID3D11DeviceContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6097,7 +6679,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("3c9c5b51-995d-48d1-9b8d-fa5caeded65c")]
   record ID3D11VideoDecoder, lpVtbl : ID3D11VideoDecoderVtbl* do
     GUID = LibC::GUID.new(0x3c9c5b51_u32, 0x995d_u16, 0x48d1_u16, StaticArray[0x9b_u8, 0x8d_u8, 0xfa_u8, 0x5c_u8, 0xae_u8, 0xde_u8, 0xd6_u8, 0x5c_u8])
     def query_interface(this : ID3D11VideoDecoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6148,7 +6729,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("31627037-53ab-4200-9061-05faa9ab45f9")]
   record ID3D11VideoProcessorEnumerator, lpVtbl : ID3D11VideoProcessorEnumeratorVtbl* do
     GUID = LibC::GUID.new(0x31627037_u32, 0x53ab_u16, 0x4200_u16, StaticArray[0x90_u8, 0x61_u8, 0x5_u8, 0xfa_u8, 0xa9_u8, 0xab_u8, 0x45_u8, 0xf9_u8])
     def query_interface(this : ID3D11VideoProcessorEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6207,7 +6787,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("1d7b0652-185f-41c6-85ce-0c5be3d4ae6c")]
   record ID3D11VideoProcessor, lpVtbl : ID3D11VideoProcessorVtbl* do
     GUID = LibC::GUID.new(0x1d7b0652_u32, 0x185f_u16, 0x41c6_u16, StaticArray[0x85_u8, 0xce_u8, 0xc_u8, 0x5b_u8, 0xe3_u8, 0xd4_u8, 0xae_u8, 0x6c_u8])
     def query_interface(this : ID3D11VideoProcessor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6255,7 +6834,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("3015a308-dcbd-47aa-a747-192486d14d4a")]
   record ID3D11AuthenticatedChannel, lpVtbl : ID3D11AuthenticatedChannelVtbl* do
     GUID = LibC::GUID.new(0x3015a308_u32, 0xdcbd_u16, 0x47aa_u16, StaticArray[0xa7_u8, 0x47_u8, 0x19_u8, 0x24_u8, 0x86_u8, 0xd1_u8, 0x4d_u8, 0x4a_u8])
     def query_interface(this : ID3D11AuthenticatedChannel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6308,7 +6886,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("9b32f9ad-bdcc-40a6-a39d-d5c865845720")]
   record ID3D11CryptoSession, lpVtbl : ID3D11CryptoSessionVtbl* do
     GUID = LibC::GUID.new(0x9b32f9ad_u32, 0xbdcc_u16, 0x40a6_u16, StaticArray[0xa3_u8, 0x9d_u8, 0xd5_u8, 0xc8_u8, 0x65_u8, 0x84_u8, 0x57_u8, 0x20_u8])
     def query_interface(this : ID3D11CryptoSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6364,7 +6941,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("c2931aea-2a85-4f20-860f-fba1fd256e18")]
   record ID3D11VideoDecoderOutputView, lpVtbl : ID3D11VideoDecoderOutputViewVtbl* do
     GUID = LibC::GUID.new(0xc2931aea_u32, 0x2a85_u16, 0x4f20_u16, StaticArray[0x86_u8, 0xf_u8, 0xfb_u8, 0xa1_u8, 0xfd_u8, 0x25_u8, 0x6e_u8, 0x18_u8])
     def query_interface(this : ID3D11VideoDecoderOutputView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6411,7 +6987,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("11ec5a5f-51dc-4945-ab34-6e8c21300ea5")]
   record ID3D11VideoProcessorInputView, lpVtbl : ID3D11VideoProcessorInputViewVtbl* do
     GUID = LibC::GUID.new(0x11ec5a5f_u32, 0x51dc_u16, 0x4945_u16, StaticArray[0xab_u8, 0x34_u8, 0x6e_u8, 0x8c_u8, 0x21_u8, 0x30_u8, 0xe_u8, 0xa5_u8])
     def query_interface(this : ID3D11VideoProcessorInputView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6458,7 +7033,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("a048285e-25a9-4527-bd93-d68b68c44254")]
   record ID3D11VideoProcessorOutputView, lpVtbl : ID3D11VideoProcessorOutputViewVtbl* do
     GUID = LibC::GUID.new(0xa048285e_u32, 0x25a9_u16, 0x4527_u16, StaticArray[0xbd_u8, 0x93_u8, 0xd6_u8, 0x8b_u8, 0x68_u8, 0xc4_u8, 0x42_u8, 0x54_u8])
     def query_interface(this : ID3D11VideoProcessorOutputView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6561,7 +7135,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("61f21c45-3c0e-4a74-9cea-67100d9ad5e4")]
   record ID3D11VideoContext, lpVtbl : ID3D11VideoContextVtbl* do
     GUID = LibC::GUID.new(0x61f21c45_u32, 0x3c0e_u16, 0x4a74_u16, StaticArray[0x9c_u8, 0xea_u8, 0x67_u8, 0x10_u8, 0xd_u8, 0x9a_u8, 0xd5_u8, 0xe4_u8])
     def query_interface(this : ID3D11VideoContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6787,7 +7360,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("10ec4d5b-975a-4689-b9e4-d0aac30fe333")]
   record ID3D11VideoDevice, lpVtbl : ID3D11VideoDeviceVtbl* do
     GUID = LibC::GUID.new(0x10ec4d5b_u32, 0x975a_u16, 0x4689_u16, StaticArray[0xb9_u8, 0xe4_u8, 0xd0_u8, 0xaa_u8, 0xc3_u8, 0xf_u8, 0xe3_u8, 0x33_u8])
     def query_interface(this : ID3D11VideoDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6901,7 +7473,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("db6f6ddb-ac77-4e88-8253-819df9bbf140")]
   record ID3D11Device, lpVtbl : ID3D11DeviceVtbl* do
     GUID = LibC::GUID.new(0xdb6f6ddb_u32, 0xac77_u16, 0x4e88_u16, StaticArray[0x82_u8, 0x53_u8, 0x81_u8, 0x9d_u8, 0xf9_u8, 0xbb_u8, 0xf1_u8, 0x40_u8])
     def query_interface(this : ID3D11Device*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7053,7 +7624,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("79cf2233-7536-4948-9d36-1e4692dc5760")]
   record ID3D11Debug, lpVtbl : ID3D11DebugVtbl* do
     GUID = LibC::GUID.new(0x79cf2233_u32, 0x7536_u16, 0x4948_u16, StaticArray[0x9d_u8, 0x36_u8, 0x1e_u8, 0x46_u8, 0x92_u8, 0xdc_u8, 0x57_u8, 0x60_u8])
     def query_interface(this : ID3D11Debug*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7105,7 +7675,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("1ef337e3-58e7-4f83-a692-db221f5ed47e")]
   record ID3D11SwitchToRef, lpVtbl : ID3D11SwitchToRefVtbl* do
     GUID = LibC::GUID.new(0x1ef337e3_u32, 0x58e7_u16, 0x4f83_u16, StaticArray[0xa6_u8, 0x92_u8, 0xdb_u8, 0x22_u8, 0x1f_u8, 0x5e_u8, 0xd4_u8, 0x7e_u8])
     def query_interface(this : ID3D11SwitchToRef*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7136,7 +7705,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("1911c771-1587-413e-a7e0-fb26c3de0268")]
   record ID3D11TracingDevice, lpVtbl : ID3D11TracingDeviceVtbl* do
     GUID = LibC::GUID.new(0x1911c771_u32, 0x1587_u16, 0x413e_u16, StaticArray[0xa7_u8, 0xe0_u8, 0xfb_u8, 0x26_u8, 0xc3_u8, 0xde_u8, 0x2_u8, 0x68_u8])
     def query_interface(this : ID3D11TracingDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7166,7 +7734,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("193dacdf-0db2-4c05-a55c-ef06cac56fd9")]
   record ID3D11RefTrackingOptions, lpVtbl : ID3D11RefTrackingOptionsVtbl* do
     GUID = LibC::GUID.new(0x193dacdf_u32, 0xdb2_u16, 0x4c05_u16, StaticArray[0xa5_u8, 0x5c_u8, 0xef_u8, 0x6_u8, 0xca_u8, 0xc5_u8, 0x6f_u8, 0xd9_u8])
     def query_interface(this : ID3D11RefTrackingOptions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7193,7 +7760,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("03916615-c644-418c-9bf4-75db5be63ca0")]
   record ID3D11RefDefaultTrackingOptions, lpVtbl : ID3D11RefDefaultTrackingOptionsVtbl* do
     GUID = LibC::GUID.new(0x3916615_u32, 0xc644_u16, 0x418c_u16, StaticArray[0x9b_u8, 0xf4_u8, 0x75_u8, 0xdb_u8, 0x5b_u8, 0xe6_u8, 0x3c_u8, 0xa0_u8])
     def query_interface(this : ID3D11RefDefaultTrackingOptions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7254,7 +7820,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("6543dbb6-1b48-42f5-ab82-e97ec74326f6")]
   record ID3D11InfoQueue, lpVtbl : ID3D11InfoQueueVtbl* do
     GUID = LibC::GUID.new(0x6543dbb6_u32, 0x1b48_u16, 0x42f5_u16, StaticArray[0xab_u8, 0x82_u8, 0xe9_u8, 0x7e_u8, 0xc7_u8, 0x43_u8, 0x26_u8, 0xf6_u8])
     def query_interface(this : ID3D11InfoQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7388,7 +7953,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("cc86fabe-da55-401d-85e7-e3c9de2877e9")]
   record ID3D11BlendState1, lpVtbl : ID3D11BlendState1Vtbl* do
     GUID = LibC::GUID.new(0xcc86fabe_u32, 0xda55_u16, 0x401d_u16, StaticArray[0x85_u8, 0xe7_u8, 0xe3_u8, 0xc9_u8, 0xde_u8, 0x28_u8, 0x77_u8, 0xe9_u8])
     def query_interface(this : ID3D11BlendState1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7435,7 +7999,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("1217d7a6-5039-418c-b042-9cbe256afd6e")]
   record ID3D11RasterizerState1, lpVtbl : ID3D11RasterizerState1Vtbl* do
     GUID = LibC::GUID.new(0x1217d7a6_u32, 0x5039_u16, 0x418c_u16, StaticArray[0xb0_u8, 0x42_u8, 0x9c_u8, 0xbe_u8, 0x25_u8, 0x6a_u8, 0xfd_u8, 0x6e_u8])
     def query_interface(this : ID3D11RasterizerState1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7480,7 +8043,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("5c1e0d8a-7c23-48f9-8c59-a92958ceff11")]
   record ID3DDeviceContextState, lpVtbl : ID3DDeviceContextStateVtbl* do
     GUID = LibC::GUID.new(0x5c1e0d8a_u32, 0x7c23_u16, 0x48f9_u16, StaticArray[0x8c_u8, 0x59_u8, 0xa9_u8, 0x29_u8, 0x58_u8, 0xce_u8, 0xff_u8, 0x11_u8])
     def query_interface(this : ID3DDeviceContextState*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7646,7 +8208,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("bb2c6faa-b5fb-4082-8e6b-388b8cfa90e1")]
   record ID3D11DeviceContext1, lpVtbl : ID3D11DeviceContext1Vtbl* do
     GUID = LibC::GUID.new(0xbb2c6faa_u32, 0xb5fb_u16, 0x4082_u16, StaticArray[0x8e_u8, 0x6b_u8, 0x38_u8, 0x8b_u8, 0x8c_u8, 0xfa_u8, 0x90_u8, 0xe1_u8])
     def query_interface(this : ID3D11DeviceContext1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8138,7 +8699,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("a7f026da-a5f8-4487-a564-15e34357651e")]
   record ID3D11VideoContext1, lpVtbl : ID3D11VideoContext1Vtbl* do
     GUID = LibC::GUID.new(0xa7f026da_u32, 0xa5f8_u16, 0x4487_u16, StaticArray[0xa5_u8, 0x64_u8, 0x15_u8, 0xe3_u8, 0x43_u8, 0x57_u8, 0x65_u8, 0x1e_u8])
     def query_interface(this : ID3D11VideoContext1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8410,7 +8970,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("29da1d51-1321-4454-804b-f5fc9f861f0f")]
   record ID3D11VideoDevice1, lpVtbl : ID3D11VideoDevice1Vtbl* do
     GUID = LibC::GUID.new(0x29da1d51_u32, 0x1321_u16, 0x4454_u16, StaticArray[0x80_u8, 0x4b_u8, 0xf5_u8, 0xfc_u8, 0x9f_u8, 0x86_u8, 0x1f_u8, 0xf_u8])
     def query_interface(this : ID3D11VideoDevice1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8507,7 +9066,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("465217f2-5568-43cf-b5b9-f61d54531ca1")]
   record ID3D11VideoProcessorEnumerator1, lpVtbl : ID3D11VideoProcessorEnumerator1Vtbl* do
     GUID = LibC::GUID.new(0x465217f2_u32, 0x5568_u16, 0x43cf_u16, StaticArray[0xb5_u8, 0xb9_u8, 0xf6_u8, 0x1d_u8, 0x54_u8, 0x53_u8, 0x1c_u8, 0xa1_u8])
     def query_interface(this : ID3D11VideoProcessorEnumerator1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8610,7 +9168,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("a04bfb29-08ef-43d6-a49c-a9bdbdcbe686")]
   record ID3D11Device1, lpVtbl : ID3D11Device1Vtbl* do
     GUID = LibC::GUID.new(0xa04bfb29_u32, 0x8ef_u16, 0x43d6_u16, StaticArray[0xa4_u8, 0x9c_u8, 0xa9_u8, 0xbd_u8, 0xbd_u8, 0xcb_u8, 0xe6_u8, 0x86_u8])
     def query_interface(this : ID3D11Device1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8778,7 +9335,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("b2daad8b-03d4-4dbf-95eb-32ab4b63d0ab")]
   record ID3DUserDefinedAnnotation, lpVtbl : ID3DUserDefinedAnnotationVtbl* do
     GUID = LibC::GUID.new(0xb2daad8b_u32, 0x3d4_u16, 0x4dbf_u16, StaticArray[0x95_u8, 0xeb_u8, 0x32_u8, 0xab_u8, 0x4b_u8, 0x63_u8, 0xd0_u8, 0xab_u8])
     def query_interface(this : ID3DUserDefinedAnnotation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8954,7 +9510,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("420d5b32-b90c-4da4-bef0-359f6a24a83a")]
   record ID3D11DeviceContext2, lpVtbl : ID3D11DeviceContext2Vtbl* do
     GUID = LibC::GUID.new(0x420d5b32_u32, 0xb90c_u16, 0x4da4_u16, StaticArray[0xbe_u8, 0xf0_u8, 0x35_u8, 0x9f_u8, 0x6a_u8, 0x24_u8, 0xa8_u8, 0x3a_u8])
     def query_interface(this : ID3D11DeviceContext2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9451,7 +10006,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("9d06dffa-d1e5-4d07-83a8-1bb123f2f841")]
   record ID3D11Device2, lpVtbl : ID3D11Device2Vtbl* do
     GUID = LibC::GUID.new(0x9d06dffa_u32, 0xd1e5_u16, 0x4d07_u16, StaticArray[0x83_u8, 0xa8_u8, 0x1b_u8, 0xb1_u8, 0x23_u8, 0xf2_u8, 0xf8_u8, 0x41_u8])
     def query_interface(this : ID3D11Device2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9636,7 +10190,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("51218251-1e33-4617-9ccb-4d3a4367e7bb")]
   record ID3D11Texture2D1, lpVtbl : ID3D11Texture2D1Vtbl* do
     GUID = LibC::GUID.new(0x51218251_u32, 0x1e33_u16, 0x4617_u16, StaticArray[0x9c_u8, 0xcb_u8, 0x4d_u8, 0x3a_u8, 0x43_u8, 0x67_u8, 0xe7_u8, 0xbb_u8])
     def query_interface(this : ID3D11Texture2D1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9695,7 +10248,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("0c711683-2853-4846-9bb0-f3e60639e46a")]
   record ID3D11Texture3D1, lpVtbl : ID3D11Texture3D1Vtbl* do
     GUID = LibC::GUID.new(0xc711683_u32, 0x2853_u16, 0x4846_u16, StaticArray[0x9b_u8, 0xb0_u8, 0xf3_u8, 0xe6_u8, 0x6_u8, 0x39_u8, 0xe4_u8, 0x6a_u8])
     def query_interface(this : ID3D11Texture3D1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9752,7 +10304,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("6fbd02fb-209f-46c4-b059-2ed15586a6ac")]
   record ID3D11RasterizerState2, lpVtbl : ID3D11RasterizerState2Vtbl* do
     GUID = LibC::GUID.new(0x6fbd02fb_u32, 0x209f_u16, 0x46c4_u16, StaticArray[0xb0_u8, 0x59_u8, 0x2e_u8, 0xd1_u8, 0x55_u8, 0x86_u8, 0xa6_u8, 0xac_u8])
     def query_interface(this : ID3D11RasterizerState2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9803,7 +10354,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("91308b87-9040-411d-8c67-c39253ce3802")]
   record ID3D11ShaderResourceView1, lpVtbl : ID3D11ShaderResourceView1Vtbl* do
     GUID = LibC::GUID.new(0x91308b87_u32, 0x9040_u16, 0x411d_u16, StaticArray[0x8c_u8, 0x67_u8, 0xc3_u8, 0x92_u8, 0x53_u8, 0xce_u8, 0x38_u8, 0x2_u8])
     def query_interface(this : ID3D11ShaderResourceView1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9854,7 +10404,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("ffbe2e23-f011-418a-ac56-5ceed7c5b94b")]
   record ID3D11RenderTargetView1, lpVtbl : ID3D11RenderTargetView1Vtbl* do
     GUID = LibC::GUID.new(0xffbe2e23_u32, 0xf011_u16, 0x418a_u16, StaticArray[0xac_u8, 0x56_u8, 0x5c_u8, 0xee_u8, 0xd7_u8, 0xc5_u8, 0xb9_u8, 0x4b_u8])
     def query_interface(this : ID3D11RenderTargetView1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9905,7 +10454,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("7b3b6153-a886-4544-ab37-6537c8500403")]
   record ID3D11UnorderedAccessView1, lpVtbl : ID3D11UnorderedAccessView1Vtbl* do
     GUID = LibC::GUID.new(0x7b3b6153_u32, 0xa886_u16, 0x4544_u16, StaticArray[0xab_u8, 0x37_u8, 0x65_u8, 0x37_u8, 0xc8_u8, 0x50_u8, 0x4_u8, 0x3_u8])
     def query_interface(this : ID3D11UnorderedAccessView1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9956,7 +10504,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("631b4766-36dc-461d-8db6-c47e13e60916")]
   record ID3D11Query1, lpVtbl : ID3D11Query1Vtbl* do
     GUID = LibC::GUID.new(0x631b4766_u32, 0x36dc_u16, 0x461d_u16, StaticArray[0x8d_u8, 0xb6_u8, 0xc4_u8, 0x7e_u8, 0x13_u8, 0xe6_u8, 0x9_u8, 0x16_u8])
     def query_interface(this : ID3D11Query1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10144,7 +10691,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("b4e3c01d-e79e-4637-91b2-510e9f4c9b8f")]
   record ID3D11DeviceContext3, lpVtbl : ID3D11DeviceContext3Vtbl* do
     GUID = LibC::GUID.new(0xb4e3c01d_u32, 0xe79e_u16, 0x4637_u16, StaticArray[0x91_u8, 0xb2_u8, 0x51_u8, 0xe_u8, 0x9f_u8, 0x4c_u8, 0x9b_u8, 0x8f_u8])
     def query_interface(this : ID3D11DeviceContext3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10606,7 +11152,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("affde9d1-1df7-4bb7-8a34-0f46251dab80")]
   record ID3D11Fence, lpVtbl : ID3D11FenceVtbl* do
     GUID = LibC::GUID.new(0xaffde9d1_u32, 0x1df7_u16, 0x4bb7_u16, StaticArray[0x8a_u8, 0x34_u8, 0xf_u8, 0x46_u8, 0x25_u8, 0x1d_u8, 0xab_u8, 0x80_u8])
     def query_interface(this : ID3D11Fence*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10796,7 +11341,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("917600da-f58c-4c33-98d8-3e15b390fa24")]
   record ID3D11DeviceContext4, lpVtbl : ID3D11DeviceContext4Vtbl* do
     GUID = LibC::GUID.new(0x917600da_u32, 0xf58c_u16, 0x4c33_u16, StaticArray[0x98_u8, 0xd8_u8, 0x3e_u8, 0x15_u8, 0xb3_u8, 0x90_u8, 0xfa_u8, 0x24_u8])
     def query_interface(this : ID3D11DeviceContext4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11319,7 +11863,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("a05c8c37-d2c6-4732-b3a0-9ce0b0dc9ae6")]
   record ID3D11Device3, lpVtbl : ID3D11Device3Vtbl* do
     GUID = LibC::GUID.new(0xa05c8c37_u32, 0xd2c6_u16, 0x4732_u16, StaticArray[0xb3_u8, 0xa0_u8, 0x9c_u8, 0xe0_u8, 0xb0_u8, 0xdc_u8, 0x9a_u8, 0xe6_u8])
     def query_interface(this : ID3D11Device3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11592,7 +12135,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("8992ab71-02e6-4b8d-ba48-b056dcda42c4")]
   record ID3D11Device4, lpVtbl : ID3D11Device4Vtbl* do
     GUID = LibC::GUID.new(0x8992ab71_u32, 0x2e6_u16, 0x4b8d_u16, StaticArray[0xba_u8, 0x48_u8, 0xb0_u8, 0x56_u8, 0xdc_u8, 0xda_u8, 0x42_u8, 0xc4_u8])
     def query_interface(this : ID3D11Device4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11873,7 +12415,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("8ffde202-a0e7-45df-9e01-e837801b5ea0")]
   record ID3D11Device5, lpVtbl : ID3D11Device5Vtbl* do
     GUID = LibC::GUID.new(0x8ffde202_u32, 0xa0e7_u16, 0x45df_u16, StaticArray[0x9e_u8, 0x1_u8, 0xe8_u8, 0x37_u8, 0x80_u8, 0x1b_u8, 0x5e_u8, 0xa0_u8])
     def query_interface(this : ID3D11Device5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12098,7 +12639,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("9b7e4e00-342c-4106-a19f-4f2704f689f0")]
   record ID3D11Multithread, lpVtbl : ID3D11MultithreadVtbl* do
     GUID = LibC::GUID.new(0x9b7e4e00_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D11Multithread*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12213,7 +12753,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("c4e7374c-6243-4d1b-ae87-52b4f740e261")]
   record ID3D11VideoContext2, lpVtbl : ID3D11VideoContext2Vtbl* do
     GUID = LibC::GUID.new(0xc4e7374c_u32, 0x6243_u16, 0x4d1b_u16, StaticArray[0xae_u8, 0x87_u8, 0x52_u8, 0xb4_u8, 0xf7_u8, 0x40_u8, 0xe2_u8, 0x61_u8])
     def query_interface(this : ID3D11VideoContext2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12499,7 +13038,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("59c0cb01-35f0-4a70-8f67-87905c906a53")]
   record ID3D11VideoDevice2, lpVtbl : ID3D11VideoDevice2Vtbl* do
     GUID = LibC::GUID.new(0x59c0cb01_u32, 0x35f0_u16, 0x4a70_u16, StaticArray[0x8f_u8, 0x67_u8, 0x87_u8, 0x90_u8, 0x5c_u8, 0x90_u8, 0x6a_u8, 0x53_u8])
     def query_interface(this : ID3D11VideoDevice2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12673,7 +13211,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("a9e2faa0-cb39-418f-a0b7-d8aad4de672e")]
   record ID3D11VideoContext3, lpVtbl : ID3D11VideoContext3Vtbl* do
     GUID = LibC::GUID.new(0xa9e2faa0_u32, 0xcb39_u16, 0x418f_u16, StaticArray[0xa0_u8, 0xb7_u8, 0xd8_u8, 0xaa_u8, 0xd4_u8, 0xde_u8, 0x67_u8, 0x2e_u8])
     def query_interface(this : ID3D11VideoContext3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12950,7 +13487,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("6e6ffa6a-9bae-4613-a51e-91652d508c21")]
   record ID3D11ShaderReflectionType, lpVtbl : ID3D11ShaderReflectionTypeVtbl* do
     GUID = LibC::GUID.new(0x6e6ffa6a_u32, 0x9bae_u16, 0x4613_u16, StaticArray[0xa5_u8, 0x1e_u8, 0x91_u8, 0x65_u8, 0x2d_u8, 0x50_u8, 0x8c_u8, 0x21_u8])
     def get_desc(this : ID3D11ShaderReflectionType*, pDesc : Win32cr::Graphics::Direct3D11::D3D11_SHADER_TYPE_DESC*) : Win32cr::Foundation::HRESULT
@@ -12998,7 +13534,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("51f23923-f3e5-4bd1-91cb-606177d8db4c")]
   record ID3D11ShaderReflectionVariable, lpVtbl : ID3D11ShaderReflectionVariableVtbl* do
     GUID = LibC::GUID.new(0x51f23923_u32, 0xf3e5_u16, 0x4bd1_u16, StaticArray[0x91_u8, 0xcb_u8, 0x60_u8, 0x61_u8, 0x77_u8, 0xd8_u8, 0xdb_u8, 0x4c_u8])
     def get_desc(this : ID3D11ShaderReflectionVariable*, pDesc : Win32cr::Graphics::Direct3D11::D3D11_SHADER_VARIABLE_DESC*) : Win32cr::Foundation::HRESULT
@@ -13024,7 +13559,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("eb62d63d-93dd-4318-8ae8-c6f83ad371b8")]
   record ID3D11ShaderReflectionConstantBuffer, lpVtbl : ID3D11ShaderReflectionConstantBufferVtbl* do
     GUID = LibC::GUID.new(0xeb62d63d_u32, 0x93dd_u16, 0x4318_u16, StaticArray[0x8a_u8, 0xe8_u8, 0xc6_u8, 0xf8_u8, 0x3a_u8, 0xd3_u8, 0x71_u8, 0xb8_u8])
     def get_desc(this : ID3D11ShaderReflectionConstantBuffer*, pDesc : Win32cr::Graphics::Direct3D11::D3D11_SHADER_BUFFER_DESC*) : Win32cr::Foundation::HRESULT
@@ -13066,7 +13600,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("8d536ca1-0cca-4956-a837-786963755584")]
   record ID3D11ShaderReflection, lpVtbl : ID3D11ShaderReflectionVtbl* do
     GUID = LibC::GUID.new(0x8d536ca1_u32, 0xcca_u16, 0x4956_u16, StaticArray[0xa8_u8, 0x37_u8, 0x78_u8, 0x69_u8, 0x63_u8, 0x75_u8, 0x55_u8, 0x84_u8])
     def query_interface(this : ID3D11ShaderReflection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13148,7 +13681,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("54384f1b-5b3e-4bb7-ae01-60ba3097cbb6")]
   record ID3D11LibraryReflection, lpVtbl : ID3D11LibraryReflectionVtbl* do
     GUID = LibC::GUID.new(0x54384f1b_u32, 0x5b3e_u16, 0x4bb7_u16, StaticArray[0xae_u8, 0x1_u8, 0x60_u8, 0xba_u8, 0x30_u8, 0x97_u8, 0xcb_u8, 0xb6_u8])
     def query_interface(this : ID3D11LibraryReflection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13181,7 +13713,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("207bcecb-d683-4a06-a8a3-9b149b9f73a4")]
   record ID3D11FunctionReflection, lpVtbl : ID3D11FunctionReflectionVtbl* do
     GUID = LibC::GUID.new(0x207bcecb_u32, 0xd683_u16, 0x4a06_u16, StaticArray[0xa8_u8, 0xa3_u8, 0x9b_u8, 0x14_u8, 0x9b_u8, 0x9f_u8, 0x73_u8, 0xa4_u8])
     def get_desc(this : ID3D11FunctionReflection*, pDesc : Win32cr::Graphics::Direct3D11::D3D11_FUNCTION_DESC*) : Win32cr::Foundation::HRESULT
@@ -13214,7 +13745,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("42757488-334f-47fe-982e-1a65d08cc462")]
   record ID3D11FunctionParameterReflection, lpVtbl : ID3D11FunctionParameterReflectionVtbl* do
     GUID = LibC::GUID.new(0x42757488_u32, 0x334f_u16, 0x47fe_u16, StaticArray[0x98_u8, 0x2e_u8, 0x1a_u8, 0x65_u8, 0xd0_u8, 0x8c_u8, 0xc4_u8, 0x62_u8])
     def get_desc(this : ID3D11FunctionParameterReflection*, pDesc : Win32cr::Graphics::Direct3D11::D3D11_PARAMETER_DESC*) : Win32cr::Foundation::HRESULT
@@ -13241,7 +13771,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("469e07f7-045a-48d5-aa12-68a478cdf75d")]
   record ID3D11ModuleInstance, lpVtbl : ID3D11ModuleInstanceVtbl* do
     GUID = LibC::GUID.new(0x469e07f7_u32, 0x45a_u16, 0x48d5_u16, StaticArray[0xaa_u8, 0x12_u8, 0x68_u8, 0xa4_u8, 0x78_u8, 0xcd_u8, 0xf7_u8, 0x5d_u8])
     def query_interface(this : ID3D11ModuleInstance*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13295,7 +13824,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("cac701ee-80fc-4122-8242-10b39c8cec34")]
   record ID3D11Module, lpVtbl : ID3D11ModuleVtbl* do
     GUID = LibC::GUID.new(0xcac701ee_u32, 0x80fc_u16, 0x4122_u16, StaticArray[0x82_u8, 0x42_u8, 0x10_u8, 0xb3_u8, 0x9c_u8, 0x8c_u8, 0xec_u8, 0x34_u8])
     def query_interface(this : ID3D11Module*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13324,7 +13852,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("59a6cd0e-e10d-4c1f-88c0-63aba1daf30e")]
   record ID3D11Linker, lpVtbl : ID3D11LinkerVtbl* do
     GUID = LibC::GUID.new(0x59a6cd0e_u32, 0xe10d_u16, 0x4c1f_u16, StaticArray[0x88_u8, 0xc0_u8, 0x63_u8, 0xab_u8, 0xa1_u8, 0xda_u8, 0xf3_u8, 0xe_u8])
     def query_interface(this : ID3D11Linker*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13356,7 +13883,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("d80dd70c-8d2f-4751-94a1-03c79b3556db")]
   record ID3D11LinkingNode, lpVtbl : ID3D11LinkingNodeVtbl* do
     GUID = LibC::GUID.new(0xd80dd70c_u32, 0x8d2f_u16, 0x4751_u16, StaticArray[0x94_u8, 0xa1_u8, 0x3_u8, 0xc7_u8, 0x9b_u8, 0x35_u8, 0x56_u8, 0xdb_u8])
     def query_interface(this : ID3D11LinkingNode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13387,7 +13913,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("54133220-1ce8-43d3-8236-9855c5ceecff")]
   record ID3D11FunctionLinkingGraph, lpVtbl : ID3D11FunctionLinkingGraphVtbl* do
     GUID = LibC::GUID.new(0x54133220_u32, 0x1ce8_u16, 0x43d3_u16, StaticArray[0x82_u8, 0x36_u8, 0x98_u8, 0x55_u8, 0xc5_u8, 0xce_u8, 0xec_u8, 0xff_u8])
     def query_interface(this : ID3D11FunctionLinkingGraph*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13442,7 +13967,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("36b013e6-2811-4845-baa7-d623fe0df104")]
   record ID3D11ShaderTrace, lpVtbl : ID3D11ShaderTraceVtbl* do
     GUID = LibC::GUID.new(0x36b013e6_u32, 0x2811_u16, 0x4845_u16, StaticArray[0xba_u8, 0xa7_u8, 0xd6_u8, 0x23_u8, 0xfe_u8, 0xd_u8, 0xf1_u8, 0x4_u8])
     def query_interface(this : ID3D11ShaderTrace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13490,7 +14014,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("1fbad429-66ab-41cc-9617-667ac10e4459")]
   record ID3D11ShaderTraceFactory, lpVtbl : ID3D11ShaderTraceFactoryVtbl* do
     GUID = LibC::GUID.new(0x1fbad429_u32, 0x66ab_u16, 0x41cc_u16, StaticArray[0x96_u8, 0x17_u8, 0x66_u8, 0x7a_u8, 0xc1_u8, 0xe_u8, 0x44_u8, 0x59_u8])
     def query_interface(this : ID3D11ShaderTraceFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13519,7 +14042,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("5089b68f-e71d-4d38-be8e-f363b95a9405")]
   record ID3DX11Scan, lpVtbl : ID3DX11ScanVtbl* do
     GUID = LibC::GUID.new(0x5089b68f_u32, 0xe71d_u16, 0x4d38_u16, StaticArray[0xbe_u8, 0x8e_u8, 0xf3_u8, 0x63_u8, 0xb9_u8, 0x5a_u8, 0x94_u8, 0x5_u8])
     def query_interface(this : ID3DX11Scan*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13553,7 +14075,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("a915128c-d954-4c79-bfe1-64db923194d6")]
   record ID3DX11SegmentedScan, lpVtbl : ID3DX11SegmentedScanVtbl* do
     GUID = LibC::GUID.new(0xa915128c_u32, 0xd954_u16, 0x4c79_u16, StaticArray[0xbf_u8, 0xe1_u8, 0x64_u8, 0xdb_u8, 0x92_u8, 0x31_u8, 0x94_u8, 0xd6_u8])
     def query_interface(this : ID3DX11SegmentedScan*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13589,7 +14110,6 @@ module Win32cr::Graphics::Direct3D11
 
 
   @[Extern]
-  #@[Com("b3f7a938-4c93-4310-a675-b30d6de50553")]
   record ID3DX11FFT, lpVtbl : ID3DX11FFTVtbl* do
     GUID = LibC::GUID.new(0xb3f7a938_u32, 0x4c93_u16, 0x4310_u16, StaticArray[0xa6_u8, 0x75_u8, 0xb3_u8, 0xd_u8, 0x6d_u8, 0xe5_u8, 0x5_u8, 0x53_u8])
     def query_interface(this : ID3DX11FFT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

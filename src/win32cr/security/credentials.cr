@@ -3,13 +3,13 @@ require "./../graphics/gdi.cr"
 require "./../ui/windows_and_messaging.cr"
 
 module Win32cr::Security::Credentials
-  alias LPOCNCONNPROCA = Proc(LibC::UIntPtrT, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Void*, LibC::UIntPtrT)*
+  alias LPOCNCONNPROCA = Proc(LibC::UIntPtrT, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Void*, LibC::UIntPtrT)
 
-  alias LPOCNCONNPROCW = Proc(LibC::UIntPtrT, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void*, LibC::UIntPtrT)*
+  alias LPOCNCONNPROCW = Proc(LibC::UIntPtrT, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void*, LibC::UIntPtrT)
 
-  alias LPOCNCHKPROC = Proc(LibC::UIntPtrT, LibC::UIntPtrT, Void*, Win32cr::Foundation::BOOL)*
+  alias LPOCNCHKPROC = Proc(LibC::UIntPtrT, LibC::UIntPtrT, Void*, Win32cr::Foundation::BOOL)
 
-  alias LPOCNDSCPROC = Proc(LibC::UIntPtrT, LibC::UIntPtrT, Void*, Void)*
+  alias LPOCNDSCPROC = Proc(LibC::UIntPtrT, LibC::UIntPtrT, Void*, Void)
 
   CRED_MAX_CREDENTIAL_BLOB_SIZE = 2560_u32
   CRED_MAX_USERNAME_LENGTH = 513_u32
@@ -315,356 +315,458 @@ module Win32cr::Security::Credentials
   end
 
   @[Extern]
-  record KeyCredentialManagerInfo,
-    containerId : LibC::GUID
-
-  @[Extern]
-  record SecHandle,
-    dwLower : LibC::UIntPtrT,
-    dwUpper : LibC::UIntPtrT
-
-  @[Extern]
-  record CREDENTIAL_ATTRIBUTEA,
-    keyword : Win32cr::Foundation::PSTR,
-    flags : UInt32,
-    value_size : UInt32,
-    value : UInt8*
-
-  @[Extern]
-  record CREDENTIAL_ATTRIBUTEW,
-    keyword : Win32cr::Foundation::PWSTR,
-    flags : UInt32,
-    value_size : UInt32,
-    value : UInt8*
-
-  @[Extern]
-  record CREDENTIALA,
-    flags : Win32cr::Security::Credentials::CRED_FLAGS,
-    type__ : Win32cr::Security::Credentials::CRED_TYPE,
-    target_name : Win32cr::Foundation::PSTR,
-    comment : Win32cr::Foundation::PSTR,
-    last_written : Win32cr::Foundation::FILETIME,
-    credential_blob_size : UInt32,
-    credential_blob : UInt8*,
-    persist : Win32cr::Security::Credentials::CRED_PERSIST,
-    attribute_count : UInt32,
-    attributes : Win32cr::Security::Credentials::CREDENTIAL_ATTRIBUTEA*,
-    target_alias : Win32cr::Foundation::PSTR,
-    user_name : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record CREDENTIALW,
-    flags : Win32cr::Security::Credentials::CRED_FLAGS,
-    type__ : Win32cr::Security::Credentials::CRED_TYPE,
-    target_name : Win32cr::Foundation::PWSTR,
-    comment : Win32cr::Foundation::PWSTR,
-    last_written : Win32cr::Foundation::FILETIME,
-    credential_blob_size : UInt32,
-    credential_blob : UInt8*,
-    persist : Win32cr::Security::Credentials::CRED_PERSIST,
-    attribute_count : UInt32,
-    attributes : Win32cr::Security::Credentials::CREDENTIAL_ATTRIBUTEW*,
-    target_alias : Win32cr::Foundation::PWSTR,
-    user_name : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record CREDENTIAL_TARGET_INFORMATIONA,
-    target_name : Win32cr::Foundation::PSTR,
-    netbios_server_name : Win32cr::Foundation::PSTR,
-    dns_server_name : Win32cr::Foundation::PSTR,
-    netbios_domain_name : Win32cr::Foundation::PSTR,
-    dns_domain_name : Win32cr::Foundation::PSTR,
-    dns_tree_name : Win32cr::Foundation::PSTR,
-    package_name : Win32cr::Foundation::PSTR,
-    flags : UInt32,
-    cred_type_count : UInt32,
-    cred_types : UInt32*
-
-  @[Extern]
-  record CREDENTIAL_TARGET_INFORMATIONW,
-    target_name : Win32cr::Foundation::PWSTR,
-    netbios_server_name : Win32cr::Foundation::PWSTR,
-    dns_server_name : Win32cr::Foundation::PWSTR,
-    netbios_domain_name : Win32cr::Foundation::PWSTR,
-    dns_domain_name : Win32cr::Foundation::PWSTR,
-    dns_tree_name : Win32cr::Foundation::PWSTR,
-    package_name : Win32cr::Foundation::PWSTR,
-    flags : UInt32,
-    cred_type_count : UInt32,
-    cred_types : UInt32*
-
-  @[Extern]
-  record CERT_CREDENTIAL_INFO,
-    cbSize : UInt32,
-    rgbHashOfCert : UInt8[20]
-
-  @[Extern]
-  record USERNAME_TARGET_CREDENTIAL_INFO,
-    user_name : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record BINARY_BLOB_CREDENTIAL_INFO,
-    cbBlob : UInt32,
-    pbBlob : UInt8*
-
-  @[Extern]
-  record CREDUI_INFOA,
-    cbSize : UInt32,
-    hwndParent : Win32cr::Foundation::HWND,
-    pszMessageText : Win32cr::Foundation::PSTR,
-    pszCaptionText : Win32cr::Foundation::PSTR,
-    hbmBanner : Win32cr::Graphics::Gdi::HBITMAP
-
-  @[Extern]
-  record CREDUI_INFOW,
-    cbSize : UInt32,
-    hwndParent : Win32cr::Foundation::HWND,
-    pszMessageText : Win32cr::Foundation::PWSTR,
-    pszCaptionText : Win32cr::Foundation::PWSTR,
-    hbmBanner : Win32cr::Graphics::Gdi::HBITMAP
-
-  @[Extern]
-  record SCARD_IO_REQUEST,
-    dwProtocol : UInt32,
-    cbPciLength : UInt32
-
-  @[Extern]
-  record SCARD_T0_COMMAND,
-    bCla : UInt8,
-    bIns : UInt8,
-    bP1 : UInt8,
-    bP2 : UInt8,
-    bP3 : UInt8
-
-  @[Extern]
-  record SCARD_T0_REQUEST,
-    ioRequest : Win32cr::Security::Credentials::SCARD_IO_REQUEST,
-    bSw1 : UInt8,
-    bSw2 : UInt8,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      cmd_bytes : Win32cr::Security::Credentials::SCARD_T0_COMMAND,
-      rgbHeader : UInt8[5]
-
+  struct KeyCredentialManagerInfo
+    property containerId : LibC::GUID
+    def initialize(@containerId : LibC::GUID)
+    end
   end
 
   @[Extern]
-  record SCARD_T1_REQUEST,
-    ioRequest : Win32cr::Security::Credentials::SCARD_IO_REQUEST
+  struct SecHandle
+    property dwLower : LibC::UIntPtrT
+    property dwUpper : LibC::UIntPtrT
+    def initialize(@dwLower : LibC::UIntPtrT, @dwUpper : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record SCARD_READERSTATEA,
-    szReader : Win32cr::Foundation::PSTR,
-    pvUserData : Void*,
-    dwCurrentState : Win32cr::Security::Credentials::SCARD_STATE,
-    dwEventState : Win32cr::Security::Credentials::SCARD_STATE,
-    cbAtr : UInt32,
-    rgbAtr : UInt8[36]
+  struct CREDENTIAL_ATTRIBUTEA
+    property keyword : Win32cr::Foundation::PSTR
+    property flags : UInt32
+    property value_size : UInt32
+    property value : UInt8*
+    def initialize(@keyword : Win32cr::Foundation::PSTR, @flags : UInt32, @value_size : UInt32, @value : UInt8*)
+    end
+  end
 
   @[Extern]
-  record SCARD_READERSTATEW,
-    szReader : Win32cr::Foundation::PWSTR,
-    pvUserData : Void*,
-    dwCurrentState : Win32cr::Security::Credentials::SCARD_STATE,
-    dwEventState : Win32cr::Security::Credentials::SCARD_STATE,
-    cbAtr : UInt32,
-    rgbAtr : UInt8[36]
+  struct CREDENTIAL_ATTRIBUTEW
+    property keyword : Win32cr::Foundation::PWSTR
+    property flags : UInt32
+    property value_size : UInt32
+    property value : UInt8*
+    def initialize(@keyword : Win32cr::Foundation::PWSTR, @flags : UInt32, @value_size : UInt32, @value : UInt8*)
+    end
+  end
 
   @[Extern]
-  record SCARD_ATRMASK,
-    cbAtr : UInt32,
-    rgbAtr : UInt8[36],
-    rgbMask : UInt8[36]
+  struct CREDENTIALA
+    property flags : Win32cr::Security::Credentials::CRED_FLAGS
+    property type__ : Win32cr::Security::Credentials::CRED_TYPE
+    property target_name : Win32cr::Foundation::PSTR
+    property comment : Win32cr::Foundation::PSTR
+    property last_written : Win32cr::Foundation::FILETIME
+    property credential_blob_size : UInt32
+    property credential_blob : UInt8*
+    property persist : Win32cr::Security::Credentials::CRED_PERSIST
+    property attribute_count : UInt32
+    property attributes : Win32cr::Security::Credentials::CREDENTIAL_ATTRIBUTEA*
+    property target_alias : Win32cr::Foundation::PSTR
+    property user_name : Win32cr::Foundation::PSTR
+    def initialize(@flags : Win32cr::Security::Credentials::CRED_FLAGS, @type__ : Win32cr::Security::Credentials::CRED_TYPE, @target_name : Win32cr::Foundation::PSTR, @comment : Win32cr::Foundation::PSTR, @last_written : Win32cr::Foundation::FILETIME, @credential_blob_size : UInt32, @credential_blob : UInt8*, @persist : Win32cr::Security::Credentials::CRED_PERSIST, @attribute_count : UInt32, @attributes : Win32cr::Security::Credentials::CREDENTIAL_ATTRIBUTEA*, @target_alias : Win32cr::Foundation::PSTR, @user_name : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record OPENCARD_SEARCH_CRITERIAA,
-    dwStructSize : UInt32,
-    lpstrGroupNames : Win32cr::Foundation::PSTR,
-    nMaxGroupNames : UInt32,
-    rgguidInterfaces : LibC::GUID*,
-    cguidInterfaces : UInt32,
-    lpstrCardNames : Win32cr::Foundation::PSTR,
-    nMaxCardNames : UInt32,
-    lpfnCheck : Win32cr::Security::Credentials::LPOCNCHKPROC,
-    lpfnConnect : Win32cr::Security::Credentials::LPOCNCONNPROCA,
-    lpfnDisconnect : Win32cr::Security::Credentials::LPOCNDSCPROC,
-    pvUserData : Void*,
-    dwShareMode : UInt32,
-    dwPreferredProtocols : UInt32
+  struct CREDENTIALW
+    property flags : Win32cr::Security::Credentials::CRED_FLAGS
+    property type__ : Win32cr::Security::Credentials::CRED_TYPE
+    property target_name : Win32cr::Foundation::PWSTR
+    property comment : Win32cr::Foundation::PWSTR
+    property last_written : Win32cr::Foundation::FILETIME
+    property credential_blob_size : UInt32
+    property credential_blob : UInt8*
+    property persist : Win32cr::Security::Credentials::CRED_PERSIST
+    property attribute_count : UInt32
+    property attributes : Win32cr::Security::Credentials::CREDENTIAL_ATTRIBUTEW*
+    property target_alias : Win32cr::Foundation::PWSTR
+    property user_name : Win32cr::Foundation::PWSTR
+    def initialize(@flags : Win32cr::Security::Credentials::CRED_FLAGS, @type__ : Win32cr::Security::Credentials::CRED_TYPE, @target_name : Win32cr::Foundation::PWSTR, @comment : Win32cr::Foundation::PWSTR, @last_written : Win32cr::Foundation::FILETIME, @credential_blob_size : UInt32, @credential_blob : UInt8*, @persist : Win32cr::Security::Credentials::CRED_PERSIST, @attribute_count : UInt32, @attributes : Win32cr::Security::Credentials::CREDENTIAL_ATTRIBUTEW*, @target_alias : Win32cr::Foundation::PWSTR, @user_name : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record OPENCARD_SEARCH_CRITERIAW,
-    dwStructSize : UInt32,
-    lpstrGroupNames : Win32cr::Foundation::PWSTR,
-    nMaxGroupNames : UInt32,
-    rgguidInterfaces : LibC::GUID*,
-    cguidInterfaces : UInt32,
-    lpstrCardNames : Win32cr::Foundation::PWSTR,
-    nMaxCardNames : UInt32,
-    lpfnCheck : Win32cr::Security::Credentials::LPOCNCHKPROC,
-    lpfnConnect : Win32cr::Security::Credentials::LPOCNCONNPROCW,
-    lpfnDisconnect : Win32cr::Security::Credentials::LPOCNDSCPROC,
-    pvUserData : Void*,
-    dwShareMode : UInt32,
-    dwPreferredProtocols : UInt32
+  struct CREDENTIAL_TARGET_INFORMATIONA
+    property target_name : Win32cr::Foundation::PSTR
+    property netbios_server_name : Win32cr::Foundation::PSTR
+    property dns_server_name : Win32cr::Foundation::PSTR
+    property netbios_domain_name : Win32cr::Foundation::PSTR
+    property dns_domain_name : Win32cr::Foundation::PSTR
+    property dns_tree_name : Win32cr::Foundation::PSTR
+    property package_name : Win32cr::Foundation::PSTR
+    property flags : UInt32
+    property cred_type_count : UInt32
+    property cred_types : UInt32*
+    def initialize(@target_name : Win32cr::Foundation::PSTR, @netbios_server_name : Win32cr::Foundation::PSTR, @dns_server_name : Win32cr::Foundation::PSTR, @netbios_domain_name : Win32cr::Foundation::PSTR, @dns_domain_name : Win32cr::Foundation::PSTR, @dns_tree_name : Win32cr::Foundation::PSTR, @package_name : Win32cr::Foundation::PSTR, @flags : UInt32, @cred_type_count : UInt32, @cred_types : UInt32*)
+    end
+  end
 
   @[Extern]
-  record OPENCARDNAME_EXA,
-    dwStructSize : UInt32,
-    hSCardContext : LibC::UIntPtrT,
-    hwndOwner : Win32cr::Foundation::HWND,
-    dwFlags : UInt32,
-    lpstrTitle : Win32cr::Foundation::PSTR,
-    lpstrSearchDesc : Win32cr::Foundation::PSTR,
-    hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-    pOpenCardSearchCriteria : Win32cr::Security::Credentials::OPENCARD_SEARCH_CRITERIAA*,
-    lpfnConnect : Win32cr::Security::Credentials::LPOCNCONNPROCA,
-    pvUserData : Void*,
-    dwShareMode : UInt32,
-    dwPreferredProtocols : UInt32,
-    lpstrRdr : Win32cr::Foundation::PSTR,
-    nMaxRdr : UInt32,
-    lpstrCard : Win32cr::Foundation::PSTR,
-    nMaxCard : UInt32,
-    dwActiveProtocol : UInt32,
-    hCardHandle : LibC::UIntPtrT
+  struct CREDENTIAL_TARGET_INFORMATIONW
+    property target_name : Win32cr::Foundation::PWSTR
+    property netbios_server_name : Win32cr::Foundation::PWSTR
+    property dns_server_name : Win32cr::Foundation::PWSTR
+    property netbios_domain_name : Win32cr::Foundation::PWSTR
+    property dns_domain_name : Win32cr::Foundation::PWSTR
+    property dns_tree_name : Win32cr::Foundation::PWSTR
+    property package_name : Win32cr::Foundation::PWSTR
+    property flags : UInt32
+    property cred_type_count : UInt32
+    property cred_types : UInt32*
+    def initialize(@target_name : Win32cr::Foundation::PWSTR, @netbios_server_name : Win32cr::Foundation::PWSTR, @dns_server_name : Win32cr::Foundation::PWSTR, @netbios_domain_name : Win32cr::Foundation::PWSTR, @dns_domain_name : Win32cr::Foundation::PWSTR, @dns_tree_name : Win32cr::Foundation::PWSTR, @package_name : Win32cr::Foundation::PWSTR, @flags : UInt32, @cred_type_count : UInt32, @cred_types : UInt32*)
+    end
+  end
 
   @[Extern]
-  record OPENCARDNAME_EXW,
-    dwStructSize : UInt32,
-    hSCardContext : LibC::UIntPtrT,
-    hwndOwner : Win32cr::Foundation::HWND,
-    dwFlags : UInt32,
-    lpstrTitle : Win32cr::Foundation::PWSTR,
-    lpstrSearchDesc : Win32cr::Foundation::PWSTR,
-    hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-    pOpenCardSearchCriteria : Win32cr::Security::Credentials::OPENCARD_SEARCH_CRITERIAW*,
-    lpfnConnect : Win32cr::Security::Credentials::LPOCNCONNPROCW,
-    pvUserData : Void*,
-    dwShareMode : UInt32,
-    dwPreferredProtocols : UInt32,
-    lpstrRdr : Win32cr::Foundation::PWSTR,
-    nMaxRdr : UInt32,
-    lpstrCard : Win32cr::Foundation::PWSTR,
-    nMaxCard : UInt32,
-    dwActiveProtocol : UInt32,
-    hCardHandle : LibC::UIntPtrT
+  struct CERT_CREDENTIAL_INFO
+    property cbSize : UInt32
+    property rgbHashOfCert : UInt8[20]
+    def initialize(@cbSize : UInt32, @rgbHashOfCert : UInt8[20])
+    end
+  end
 
   @[Extern]
-  record READER_SEL_REQUEST,
-    dwShareMode : UInt32,
-    dwPreferredProtocols : UInt32,
-    match_type : Win32cr::Security::Credentials::READER_SEL_REQUEST_MATCH_TYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct USERNAME_TARGET_CREDENTIAL_INFO
+    property user_name : Win32cr::Foundation::PWSTR
+    def initialize(@user_name : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct BINARY_BLOB_CREDENTIAL_INFO
+    property cbBlob : UInt32
+    property pbBlob : UInt8*
+    def initialize(@cbBlob : UInt32, @pbBlob : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct CREDUI_INFOA
+    property cbSize : UInt32
+    property hwndParent : Win32cr::Foundation::HWND
+    property pszMessageText : Win32cr::Foundation::PSTR
+    property pszCaptionText : Win32cr::Foundation::PSTR
+    property hbmBanner : Win32cr::Graphics::Gdi::HBITMAP
+    def initialize(@cbSize : UInt32, @hwndParent : Win32cr::Foundation::HWND, @pszMessageText : Win32cr::Foundation::PSTR, @pszCaptionText : Win32cr::Foundation::PSTR, @hbmBanner : Win32cr::Graphics::Gdi::HBITMAP)
+    end
+  end
+
+  @[Extern]
+  struct CREDUI_INFOW
+    property cbSize : UInt32
+    property hwndParent : Win32cr::Foundation::HWND
+    property pszMessageText : Win32cr::Foundation::PWSTR
+    property pszCaptionText : Win32cr::Foundation::PWSTR
+    property hbmBanner : Win32cr::Graphics::Gdi::HBITMAP
+    def initialize(@cbSize : UInt32, @hwndParent : Win32cr::Foundation::HWND, @pszMessageText : Win32cr::Foundation::PWSTR, @pszCaptionText : Win32cr::Foundation::PWSTR, @hbmBanner : Win32cr::Graphics::Gdi::HBITMAP)
+    end
+  end
+
+  @[Extern]
+  struct SCARD_IO_REQUEST
+    property dwProtocol : UInt32
+    property cbPciLength : UInt32
+    def initialize(@dwProtocol : UInt32, @cbPciLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SCARD_T0_COMMAND
+    property bCla : UInt8
+    property bIns : UInt8
+    property bP1 : UInt8
+    property bP2 : UInt8
+    property bP3 : UInt8
+    def initialize(@bCla : UInt8, @bIns : UInt8, @bP1 : UInt8, @bP2 : UInt8, @bP3 : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct SCARD_T0_REQUEST
+    property ioRequest : Win32cr::Security::Credentials::SCARD_IO_REQUEST
+    property bSw1 : UInt8
+    property bSw2 : UInt8
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      reader_and_container_parameter : ReaderAndContainerParameter_e__Struct_,
-      serial_number_parameter : SerialNumberParameter_e__Struct_ do
+    struct Anonymous_e__Union_
+    property cmd_bytes : Win32cr::Security::Credentials::SCARD_T0_COMMAND
+    property rgbHeader : UInt8[5]
+    def initialize(@cmd_bytes : Win32cr::Security::Credentials::SCARD_T0_COMMAND, @rgbHeader : UInt8[5])
+    end
+    end
+
+    def initialize(@ioRequest : Win32cr::Security::Credentials::SCARD_IO_REQUEST, @bSw1 : UInt8, @bSw2 : UInt8, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct SCARD_T1_REQUEST
+    property ioRequest : Win32cr::Security::Credentials::SCARD_IO_REQUEST
+    def initialize(@ioRequest : Win32cr::Security::Credentials::SCARD_IO_REQUEST)
+    end
+  end
+
+  @[Extern]
+  struct SCARD_READERSTATEA
+    property szReader : Win32cr::Foundation::PSTR
+    property pvUserData : Void*
+    property dwCurrentState : Win32cr::Security::Credentials::SCARD_STATE
+    property dwEventState : Win32cr::Security::Credentials::SCARD_STATE
+    property cbAtr : UInt32
+    property rgbAtr : UInt8[36]
+    def initialize(@szReader : Win32cr::Foundation::PSTR, @pvUserData : Void*, @dwCurrentState : Win32cr::Security::Credentials::SCARD_STATE, @dwEventState : Win32cr::Security::Credentials::SCARD_STATE, @cbAtr : UInt32, @rgbAtr : UInt8[36])
+    end
+  end
+
+  @[Extern]
+  struct SCARD_READERSTATEW
+    property szReader : Win32cr::Foundation::PWSTR
+    property pvUserData : Void*
+    property dwCurrentState : Win32cr::Security::Credentials::SCARD_STATE
+    property dwEventState : Win32cr::Security::Credentials::SCARD_STATE
+    property cbAtr : UInt32
+    property rgbAtr : UInt8[36]
+    def initialize(@szReader : Win32cr::Foundation::PWSTR, @pvUserData : Void*, @dwCurrentState : Win32cr::Security::Credentials::SCARD_STATE, @dwEventState : Win32cr::Security::Credentials::SCARD_STATE, @cbAtr : UInt32, @rgbAtr : UInt8[36])
+    end
+  end
+
+  @[Extern]
+  struct SCARD_ATRMASK
+    property cbAtr : UInt32
+    property rgbAtr : UInt8[36]
+    property rgbMask : UInt8[36]
+    def initialize(@cbAtr : UInt32, @rgbAtr : UInt8[36], @rgbMask : UInt8[36])
+    end
+  end
+
+  @[Extern]
+  struct OPENCARD_SEARCH_CRITERIAA
+    property dwStructSize : UInt32
+    property lpstrGroupNames : Win32cr::Foundation::PSTR
+    property nMaxGroupNames : UInt32
+    property rgguidInterfaces : LibC::GUID*
+    property cguidInterfaces : UInt32
+    property lpstrCardNames : Win32cr::Foundation::PSTR
+    property nMaxCardNames : UInt32
+    property lpfnCheck : Win32cr::Security::Credentials::LPOCNCHKPROC
+    property lpfnConnect : Win32cr::Security::Credentials::LPOCNCONNPROCA
+    property lpfnDisconnect : Win32cr::Security::Credentials::LPOCNDSCPROC
+    property pvUserData : Void*
+    property dwShareMode : UInt32
+    property dwPreferredProtocols : UInt32
+    def initialize(@dwStructSize : UInt32, @lpstrGroupNames : Win32cr::Foundation::PSTR, @nMaxGroupNames : UInt32, @rgguidInterfaces : LibC::GUID*, @cguidInterfaces : UInt32, @lpstrCardNames : Win32cr::Foundation::PSTR, @nMaxCardNames : UInt32, @lpfnCheck : Win32cr::Security::Credentials::LPOCNCHKPROC, @lpfnConnect : Win32cr::Security::Credentials::LPOCNCONNPROCA, @lpfnDisconnect : Win32cr::Security::Credentials::LPOCNDSCPROC, @pvUserData : Void*, @dwShareMode : UInt32, @dwPreferredProtocols : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct OPENCARD_SEARCH_CRITERIAW
+    property dwStructSize : UInt32
+    property lpstrGroupNames : Win32cr::Foundation::PWSTR
+    property nMaxGroupNames : UInt32
+    property rgguidInterfaces : LibC::GUID*
+    property cguidInterfaces : UInt32
+    property lpstrCardNames : Win32cr::Foundation::PWSTR
+    property nMaxCardNames : UInt32
+    property lpfnCheck : Win32cr::Security::Credentials::LPOCNCHKPROC
+    property lpfnConnect : Win32cr::Security::Credentials::LPOCNCONNPROCW
+    property lpfnDisconnect : Win32cr::Security::Credentials::LPOCNDSCPROC
+    property pvUserData : Void*
+    property dwShareMode : UInt32
+    property dwPreferredProtocols : UInt32
+    def initialize(@dwStructSize : UInt32, @lpstrGroupNames : Win32cr::Foundation::PWSTR, @nMaxGroupNames : UInt32, @rgguidInterfaces : LibC::GUID*, @cguidInterfaces : UInt32, @lpstrCardNames : Win32cr::Foundation::PWSTR, @nMaxCardNames : UInt32, @lpfnCheck : Win32cr::Security::Credentials::LPOCNCHKPROC, @lpfnConnect : Win32cr::Security::Credentials::LPOCNCONNPROCW, @lpfnDisconnect : Win32cr::Security::Credentials::LPOCNDSCPROC, @pvUserData : Void*, @dwShareMode : UInt32, @dwPreferredProtocols : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct OPENCARDNAME_EXA
+    property dwStructSize : UInt32
+    property hSCardContext : LibC::UIntPtrT
+    property hwndOwner : Win32cr::Foundation::HWND
+    property dwFlags : UInt32
+    property lpstrTitle : Win32cr::Foundation::PSTR
+    property lpstrSearchDesc : Win32cr::Foundation::PSTR
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property pOpenCardSearchCriteria : Win32cr::Security::Credentials::OPENCARD_SEARCH_CRITERIAA*
+    property lpfnConnect : Win32cr::Security::Credentials::LPOCNCONNPROCA
+    property pvUserData : Void*
+    property dwShareMode : UInt32
+    property dwPreferredProtocols : UInt32
+    property lpstrRdr : Win32cr::Foundation::PSTR
+    property nMaxRdr : UInt32
+    property lpstrCard : Win32cr::Foundation::PSTR
+    property nMaxCard : UInt32
+    property dwActiveProtocol : UInt32
+    property hCardHandle : LibC::UIntPtrT
+    def initialize(@dwStructSize : UInt32, @hSCardContext : LibC::UIntPtrT, @hwndOwner : Win32cr::Foundation::HWND, @dwFlags : UInt32, @lpstrTitle : Win32cr::Foundation::PSTR, @lpstrSearchDesc : Win32cr::Foundation::PSTR, @hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @pOpenCardSearchCriteria : Win32cr::Security::Credentials::OPENCARD_SEARCH_CRITERIAA*, @lpfnConnect : Win32cr::Security::Credentials::LPOCNCONNPROCA, @pvUserData : Void*, @dwShareMode : UInt32, @dwPreferredProtocols : UInt32, @lpstrRdr : Win32cr::Foundation::PSTR, @nMaxRdr : UInt32, @lpstrCard : Win32cr::Foundation::PSTR, @nMaxCard : UInt32, @dwActiveProtocol : UInt32, @hCardHandle : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct OPENCARDNAME_EXW
+    property dwStructSize : UInt32
+    property hSCardContext : LibC::UIntPtrT
+    property hwndOwner : Win32cr::Foundation::HWND
+    property dwFlags : UInt32
+    property lpstrTitle : Win32cr::Foundation::PWSTR
+    property lpstrSearchDesc : Win32cr::Foundation::PWSTR
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property pOpenCardSearchCriteria : Win32cr::Security::Credentials::OPENCARD_SEARCH_CRITERIAW*
+    property lpfnConnect : Win32cr::Security::Credentials::LPOCNCONNPROCW
+    property pvUserData : Void*
+    property dwShareMode : UInt32
+    property dwPreferredProtocols : UInt32
+    property lpstrRdr : Win32cr::Foundation::PWSTR
+    property nMaxRdr : UInt32
+    property lpstrCard : Win32cr::Foundation::PWSTR
+    property nMaxCard : UInt32
+    property dwActiveProtocol : UInt32
+    property hCardHandle : LibC::UIntPtrT
+    def initialize(@dwStructSize : UInt32, @hSCardContext : LibC::UIntPtrT, @hwndOwner : Win32cr::Foundation::HWND, @dwFlags : UInt32, @lpstrTitle : Win32cr::Foundation::PWSTR, @lpstrSearchDesc : Win32cr::Foundation::PWSTR, @hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @pOpenCardSearchCriteria : Win32cr::Security::Credentials::OPENCARD_SEARCH_CRITERIAW*, @lpfnConnect : Win32cr::Security::Credentials::LPOCNCONNPROCW, @pvUserData : Void*, @dwShareMode : UInt32, @dwPreferredProtocols : UInt32, @lpstrRdr : Win32cr::Foundation::PWSTR, @nMaxRdr : UInt32, @lpstrCard : Win32cr::Foundation::PWSTR, @nMaxCard : UInt32, @dwActiveProtocol : UInt32, @hCardHandle : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct READER_SEL_REQUEST
+    property dwShareMode : UInt32
+    property dwPreferredProtocols : UInt32
+    property match_type : Win32cr::Security::Credentials::READER_SEL_REQUEST_MATCH_TYPE
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property reader_and_container_parameter : ReaderAndContainerParameter_e__Struct_
+    property serial_number_parameter : SerialNumberParameter_e__Struct_
 
       # Nested Type ReaderAndContainerParameter_e__Struct_
       @[Extern]
-      record ReaderAndContainerParameter_e__Struct_,
-        cbReaderNameOffset : UInt32,
-        cchReaderNameLength : UInt32,
-        cbContainerNameOffset : UInt32,
-        cchContainerNameLength : UInt32,
-        dwDesiredCardModuleVersion : UInt32,
-        dwCspFlags : UInt32
+      struct ReaderAndContainerParameter_e__Struct_
+    property cbReaderNameOffset : UInt32
+    property cchReaderNameLength : UInt32
+    property cbContainerNameOffset : UInt32
+    property cchContainerNameLength : UInt32
+    property dwDesiredCardModuleVersion : UInt32
+    property dwCspFlags : UInt32
+    def initialize(@cbReaderNameOffset : UInt32, @cchReaderNameLength : UInt32, @cbContainerNameOffset : UInt32, @cchContainerNameLength : UInt32, @dwDesiredCardModuleVersion : UInt32, @dwCspFlags : UInt32)
+    end
+      end
 
 
       # Nested Type SerialNumberParameter_e__Struct_
       @[Extern]
-      record SerialNumberParameter_e__Struct_,
-        cbSerialNumberOffset : UInt32,
-        cbSerialNumberLength : UInt32,
-        dwDesiredCardModuleVersion : UInt32
+      struct SerialNumberParameter_e__Struct_
+    property cbSerialNumberOffset : UInt32
+    property cbSerialNumberLength : UInt32
+    property dwDesiredCardModuleVersion : UInt32
+    def initialize(@cbSerialNumberOffset : UInt32, @cbSerialNumberLength : UInt32, @dwDesiredCardModuleVersion : UInt32)
+    end
+      end
 
+    def initialize(@reader_and_container_parameter : ReaderAndContainerParameter_e__Struct_, @serial_number_parameter : SerialNumberParameter_e__Struct_)
+    end
     end
 
+    def initialize(@dwShareMode : UInt32, @dwPreferredProtocols : UInt32, @match_type : Win32cr::Security::Credentials::READER_SEL_REQUEST_MATCH_TYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record READER_SEL_RESPONSE,
-    cbReaderNameOffset : UInt32,
-    cchReaderNameLength : UInt32,
-    cbCardNameOffset : UInt32,
-    cchCardNameLength : UInt32
+  struct READER_SEL_RESPONSE
+    property cbReaderNameOffset : UInt32
+    property cchReaderNameLength : UInt32
+    property cbCardNameOffset : UInt32
+    property cchCardNameLength : UInt32
+    def initialize(@cbReaderNameOffset : UInt32, @cchReaderNameLength : UInt32, @cbCardNameOffset : UInt32, @cchCardNameLength : UInt32)
+    end
+  end
 
   @[Extern]
-  record OPENCARDNAMEA,
-    dwStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hSCardContext : LibC::UIntPtrT,
-    lpstrGroupNames : Win32cr::Foundation::PSTR,
-    nMaxGroupNames : UInt32,
-    lpstrCardNames : Win32cr::Foundation::PSTR,
-    nMaxCardNames : UInt32,
-    rgguidInterfaces : LibC::GUID*,
-    cguidInterfaces : UInt32,
-    lpstrRdr : Win32cr::Foundation::PSTR,
-    nMaxRdr : UInt32,
-    lpstrCard : Win32cr::Foundation::PSTR,
-    nMaxCard : UInt32,
-    lpstrTitle : Win32cr::Foundation::PSTR,
-    dwFlags : UInt32,
-    pvUserData : Void*,
-    dwShareMode : UInt32,
-    dwPreferredProtocols : UInt32,
-    dwActiveProtocol : UInt32,
-    lpfnConnect : Win32cr::Security::Credentials::LPOCNCONNPROCA,
-    lpfnCheck : Win32cr::Security::Credentials::LPOCNCHKPROC,
-    lpfnDisconnect : Win32cr::Security::Credentials::LPOCNDSCPROC,
-    hCardHandle : LibC::UIntPtrT
+  struct OPENCARDNAMEA
+    property dwStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hSCardContext : LibC::UIntPtrT
+    property lpstrGroupNames : Win32cr::Foundation::PSTR
+    property nMaxGroupNames : UInt32
+    property lpstrCardNames : Win32cr::Foundation::PSTR
+    property nMaxCardNames : UInt32
+    property rgguidInterfaces : LibC::GUID*
+    property cguidInterfaces : UInt32
+    property lpstrRdr : Win32cr::Foundation::PSTR
+    property nMaxRdr : UInt32
+    property lpstrCard : Win32cr::Foundation::PSTR
+    property nMaxCard : UInt32
+    property lpstrTitle : Win32cr::Foundation::PSTR
+    property dwFlags : UInt32
+    property pvUserData : Void*
+    property dwShareMode : UInt32
+    property dwPreferredProtocols : UInt32
+    property dwActiveProtocol : UInt32
+    property lpfnConnect : Win32cr::Security::Credentials::LPOCNCONNPROCA
+    property lpfnCheck : Win32cr::Security::Credentials::LPOCNCHKPROC
+    property lpfnDisconnect : Win32cr::Security::Credentials::LPOCNDSCPROC
+    property hCardHandle : LibC::UIntPtrT
+    def initialize(@dwStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hSCardContext : LibC::UIntPtrT, @lpstrGroupNames : Win32cr::Foundation::PSTR, @nMaxGroupNames : UInt32, @lpstrCardNames : Win32cr::Foundation::PSTR, @nMaxCardNames : UInt32, @rgguidInterfaces : LibC::GUID*, @cguidInterfaces : UInt32, @lpstrRdr : Win32cr::Foundation::PSTR, @nMaxRdr : UInt32, @lpstrCard : Win32cr::Foundation::PSTR, @nMaxCard : UInt32, @lpstrTitle : Win32cr::Foundation::PSTR, @dwFlags : UInt32, @pvUserData : Void*, @dwShareMode : UInt32, @dwPreferredProtocols : UInt32, @dwActiveProtocol : UInt32, @lpfnConnect : Win32cr::Security::Credentials::LPOCNCONNPROCA, @lpfnCheck : Win32cr::Security::Credentials::LPOCNCHKPROC, @lpfnDisconnect : Win32cr::Security::Credentials::LPOCNDSCPROC, @hCardHandle : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record OPENCARDNAMEW,
-    dwStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hSCardContext : LibC::UIntPtrT,
-    lpstrGroupNames : Win32cr::Foundation::PWSTR,
-    nMaxGroupNames : UInt32,
-    lpstrCardNames : Win32cr::Foundation::PWSTR,
-    nMaxCardNames : UInt32,
-    rgguidInterfaces : LibC::GUID*,
-    cguidInterfaces : UInt32,
-    lpstrRdr : Win32cr::Foundation::PWSTR,
-    nMaxRdr : UInt32,
-    lpstrCard : Win32cr::Foundation::PWSTR,
-    nMaxCard : UInt32,
-    lpstrTitle : Win32cr::Foundation::PWSTR,
-    dwFlags : UInt32,
-    pvUserData : Void*,
-    dwShareMode : UInt32,
-    dwPreferredProtocols : UInt32,
-    dwActiveProtocol : UInt32,
-    lpfnConnect : Win32cr::Security::Credentials::LPOCNCONNPROCW,
-    lpfnCheck : Win32cr::Security::Credentials::LPOCNCHKPROC,
-    lpfnDisconnect : Win32cr::Security::Credentials::LPOCNDSCPROC,
-    hCardHandle : LibC::UIntPtrT
+  struct OPENCARDNAMEW
+    property dwStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hSCardContext : LibC::UIntPtrT
+    property lpstrGroupNames : Win32cr::Foundation::PWSTR
+    property nMaxGroupNames : UInt32
+    property lpstrCardNames : Win32cr::Foundation::PWSTR
+    property nMaxCardNames : UInt32
+    property rgguidInterfaces : LibC::GUID*
+    property cguidInterfaces : UInt32
+    property lpstrRdr : Win32cr::Foundation::PWSTR
+    property nMaxRdr : UInt32
+    property lpstrCard : Win32cr::Foundation::PWSTR
+    property nMaxCard : UInt32
+    property lpstrTitle : Win32cr::Foundation::PWSTR
+    property dwFlags : UInt32
+    property pvUserData : Void*
+    property dwShareMode : UInt32
+    property dwPreferredProtocols : UInt32
+    property dwActiveProtocol : UInt32
+    property lpfnConnect : Win32cr::Security::Credentials::LPOCNCONNPROCW
+    property lpfnCheck : Win32cr::Security::Credentials::LPOCNCHKPROC
+    property lpfnDisconnect : Win32cr::Security::Credentials::LPOCNDSCPROC
+    property hCardHandle : LibC::UIntPtrT
+    def initialize(@dwStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hSCardContext : LibC::UIntPtrT, @lpstrGroupNames : Win32cr::Foundation::PWSTR, @nMaxGroupNames : UInt32, @lpstrCardNames : Win32cr::Foundation::PWSTR, @nMaxCardNames : UInt32, @rgguidInterfaces : LibC::GUID*, @cguidInterfaces : UInt32, @lpstrRdr : Win32cr::Foundation::PWSTR, @nMaxRdr : UInt32, @lpstrCard : Win32cr::Foundation::PWSTR, @nMaxCard : UInt32, @lpstrTitle : Win32cr::Foundation::PWSTR, @dwFlags : UInt32, @pvUserData : Void*, @dwShareMode : UInt32, @dwPreferredProtocols : UInt32, @dwActiveProtocol : UInt32, @lpfnConnect : Win32cr::Security::Credentials::LPOCNCONNPROCW, @lpfnCheck : Win32cr::Security::Credentials::LPOCNCHKPROC, @lpfnDisconnect : Win32cr::Security::Credentials::LPOCNDSCPROC, @hCardHandle : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record SecPkgContext_ClientCreds,
-    auth_buffer_len : UInt32,
-    auth_buffer : UInt8*
+  struct SecPkgContext_ClientCreds
+    property auth_buffer_len : UInt32
+    property auth_buffer : UInt8*
+    def initialize(@auth_buffer_len : UInt32, @auth_buffer : UInt8*)
+    end
+  end
 
   @[Extern]
-  record CREDSSP_CRED,
-    type__ : Win32cr::Security::Credentials::CREDSPP_SUBMIT_TYPE,
-    pSchannelCred : Void*,
-    pSpnegoCred : Void*
+  struct CREDSSP_CRED
+    property type__ : Win32cr::Security::Credentials::CREDSPP_SUBMIT_TYPE
+    property pSchannelCred : Void*
+    property pSpnegoCred : Void*
+    def initialize(@type__ : Win32cr::Security::Credentials::CREDSPP_SUBMIT_TYPE, @pSchannelCred : Void*, @pSpnegoCred : Void*)
+    end
+  end
 
   @[Extern]
-  record CREDSSP_CRED_EX,
-    type__ : Win32cr::Security::Credentials::CREDSPP_SUBMIT_TYPE,
-    version : UInt32,
-    flags : UInt32,
-    reserved : UInt32,
-    cred : Win32cr::Security::Credentials::CREDSSP_CRED
+  struct CREDSSP_CRED_EX
+    property type__ : Win32cr::Security::Credentials::CREDSPP_SUBMIT_TYPE
+    property version : UInt32
+    property flags : UInt32
+    property reserved : UInt32
+    property cred : Win32cr::Security::Credentials::CREDSSP_CRED
+    def initialize(@type__ : Win32cr::Security::Credentials::CREDSPP_SUBMIT_TYPE, @version : UInt32, @flags : UInt32, @reserved : UInt32, @cred : Win32cr::Security::Credentials::CREDSSP_CRED)
+    end
+  end
 
   @[Link("keycredmgr")]
   @[Link("advapi32")]

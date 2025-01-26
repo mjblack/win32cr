@@ -10,103 +10,139 @@ module Win32cr::Security::DiagnosticDataQuery
   end
 
   @[Extern]
-  record DIAGNOSTIC_DATA_RECORD,
-    rowId : Int64,
-    timestamp : UInt64,
-    eventKeywords : UInt64,
-    fullEventName : Win32cr::Foundation::PWSTR,
-    providerGroupGuid : Win32cr::Foundation::PWSTR,
-    producerName : Win32cr::Foundation::PWSTR,
-    privacyTags : Int32*,
-    privacyTagCount : UInt32,
-    categoryIds : Int32*,
-    categoryIdCount : UInt32,
-    isCoreData : Win32cr::Foundation::BOOL,
-    extra1 : Win32cr::Foundation::PWSTR,
-    extra2 : Win32cr::Foundation::PWSTR,
-    extra3 : Win32cr::Foundation::PWSTR
+  struct DIAGNOSTIC_DATA_RECORD
+    property rowId : Int64
+    property timestamp : UInt64
+    property eventKeywords : UInt64
+    property fullEventName : Win32cr::Foundation::PWSTR
+    property providerGroupGuid : Win32cr::Foundation::PWSTR
+    property producerName : Win32cr::Foundation::PWSTR
+    property privacyTags : Int32*
+    property privacyTagCount : UInt32
+    property categoryIds : Int32*
+    property categoryIdCount : UInt32
+    property isCoreData : Win32cr::Foundation::BOOL
+    property extra1 : Win32cr::Foundation::PWSTR
+    property extra2 : Win32cr::Foundation::PWSTR
+    property extra3 : Win32cr::Foundation::PWSTR
+    def initialize(@rowId : Int64, @timestamp : UInt64, @eventKeywords : UInt64, @fullEventName : Win32cr::Foundation::PWSTR, @providerGroupGuid : Win32cr::Foundation::PWSTR, @producerName : Win32cr::Foundation::PWSTR, @privacyTags : Int32*, @privacyTagCount : UInt32, @categoryIds : Int32*, @categoryIdCount : UInt32, @isCoreData : Win32cr::Foundation::BOOL, @extra1 : Win32cr::Foundation::PWSTR, @extra2 : Win32cr::Foundation::PWSTR, @extra3 : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record DIAGNOSTIC_DATA_SEARCH_CRITERIA,
-    producerNames : Win32cr::Foundation::PWSTR*,
-    producerNameCount : UInt32,
-    textToMatch : Win32cr::Foundation::PWSTR,
-    categoryIds : Int32*,
-    categoryIdCount : UInt32,
-    privacyTags : Int32*,
-    privacyTagCount : UInt32,
-    coreDataOnly : Win32cr::Foundation::BOOL
+  struct DIAGNOSTIC_DATA_SEARCH_CRITERIA
+    property producerNames : Win32cr::Foundation::PWSTR*
+    property producerNameCount : UInt32
+    property textToMatch : Win32cr::Foundation::PWSTR
+    property categoryIds : Int32*
+    property categoryIdCount : UInt32
+    property privacyTags : Int32*
+    property privacyTagCount : UInt32
+    property coreDataOnly : Win32cr::Foundation::BOOL
+    def initialize(@producerNames : Win32cr::Foundation::PWSTR*, @producerNameCount : UInt32, @textToMatch : Win32cr::Foundation::PWSTR, @categoryIds : Int32*, @categoryIdCount : UInt32, @privacyTags : Int32*, @privacyTagCount : UInt32, @coreDataOnly : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record DIAGNOSTIC_DATA_EVENT_TAG_DESCRIPTION,
-    privacyTag : Int32,
-    name : Win32cr::Foundation::PWSTR,
-    description : Win32cr::Foundation::PWSTR
+  struct DIAGNOSTIC_DATA_EVENT_TAG_DESCRIPTION
+    property privacyTag : Int32
+    property name : Win32cr::Foundation::PWSTR
+    property description : Win32cr::Foundation::PWSTR
+    def initialize(@privacyTag : Int32, @name : Win32cr::Foundation::PWSTR, @description : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record DIAGNOSTIC_DATA_EVENT_PRODUCER_DESCRIPTION,
-    name : Win32cr::Foundation::PWSTR
+  struct DIAGNOSTIC_DATA_EVENT_PRODUCER_DESCRIPTION
+    property name : Win32cr::Foundation::PWSTR
+    def initialize(@name : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record DIAGNOSTIC_DATA_EVENT_CATEGORY_DESCRIPTION,
-    id : Int32,
-    name : Win32cr::Foundation::PWSTR
+  struct DIAGNOSTIC_DATA_EVENT_CATEGORY_DESCRIPTION
+    property id : Int32
+    property name : Win32cr::Foundation::PWSTR
+    def initialize(@id : Int32, @name : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record DIAGNOSTIC_DATA_EVENT_TAG_STATS,
-    privacyTag : Int32,
-    eventCount : UInt32
+  struct DIAGNOSTIC_DATA_EVENT_TAG_STATS
+    property privacyTag : Int32
+    property eventCount : UInt32
+    def initialize(@privacyTag : Int32, @eventCount : UInt32)
+    end
+  end
 
   @[Extern]
-  record DIAGNOSTIC_DATA_EVENT_BINARY_STATS,
-    moduleName : Win32cr::Foundation::PWSTR,
-    friendlyModuleName : Win32cr::Foundation::PWSTR,
-    eventCount : UInt32,
-    uploadSizeBytes : UInt64
+  struct DIAGNOSTIC_DATA_EVENT_BINARY_STATS
+    property moduleName : Win32cr::Foundation::PWSTR
+    property friendlyModuleName : Win32cr::Foundation::PWSTR
+    property eventCount : UInt32
+    property uploadSizeBytes : UInt64
+    def initialize(@moduleName : Win32cr::Foundation::PWSTR, @friendlyModuleName : Win32cr::Foundation::PWSTR, @eventCount : UInt32, @uploadSizeBytes : UInt64)
+    end
+  end
 
   @[Extern]
-  record DIAGNOSTIC_DATA_GENERAL_STATS,
-    optInLevel : UInt32,
-    transcriptSizeBytes : UInt64,
-    oldestEventTimestamp : UInt64,
-    totalEventCountLast24Hours : UInt32,
-    averageDailyEvents : Float32
+  struct DIAGNOSTIC_DATA_GENERAL_STATS
+    property optInLevel : UInt32
+    property transcriptSizeBytes : UInt64
+    property oldestEventTimestamp : UInt64
+    property totalEventCountLast24Hours : UInt32
+    property averageDailyEvents : Float32
+    def initialize(@optInLevel : UInt32, @transcriptSizeBytes : UInt64, @oldestEventTimestamp : UInt64, @totalEventCountLast24Hours : UInt32, @averageDailyEvents : Float32)
+    end
+  end
 
   @[Extern]
-  record DIAGNOSTIC_DATA_EVENT_TRANSCRIPT_CONFIGURATION,
-    hoursOfHistoryToKeep : UInt32,
-    maxStoreMegabytes : UInt32,
-    requestedMaxStoreMegabytes : UInt32
+  struct DIAGNOSTIC_DATA_EVENT_TRANSCRIPT_CONFIGURATION
+    property hoursOfHistoryToKeep : UInt32
+    property maxStoreMegabytes : UInt32
+    property requestedMaxStoreMegabytes : UInt32
+    def initialize(@hoursOfHistoryToKeep : UInt32, @maxStoreMegabytes : UInt32, @requestedMaxStoreMegabytes : UInt32)
+    end
+  end
 
   @[Extern]
-  record DIAGNOSTIC_REPORT_PARAMETER,
-    name : UInt16[129],
-    value : UInt16[260]
+  struct DIAGNOSTIC_REPORT_PARAMETER
+    property name : UInt16[129]
+    property value : UInt16[260]
+    def initialize(@name : UInt16[129], @value : UInt16[260])
+    end
+  end
 
   @[Extern]
-  record DIAGNOSTIC_REPORT_SIGNATURE,
-    eventName : UInt16[65],
-    parameters : Win32cr::Security::DiagnosticDataQuery::DIAGNOSTIC_REPORT_PARAMETER[10]
+  struct DIAGNOSTIC_REPORT_SIGNATURE
+    property eventName : UInt16[65]
+    property parameters : Win32cr::Security::DiagnosticDataQuery::DIAGNOSTIC_REPORT_PARAMETER[10]
+    def initialize(@eventName : UInt16[65], @parameters : Win32cr::Security::DiagnosticDataQuery::DIAGNOSTIC_REPORT_PARAMETER[10])
+    end
+  end
 
   @[Extern]
-  record DIAGNOSTIC_REPORT_DATA,
-    signature : Win32cr::Security::DiagnosticDataQuery::DIAGNOSTIC_REPORT_SIGNATURE,
-    bucketId : LibC::GUID,
-    reportId : LibC::GUID,
-    creationTime : Win32cr::Foundation::FILETIME,
-    sizeInBytes : UInt64,
-    cabId : Win32cr::Foundation::PWSTR,
-    reportStatus : UInt32,
-    reportIntegratorId : LibC::GUID,
-    fileNames : Win32cr::Foundation::PWSTR*,
-    fileCount : UInt32,
-    friendlyEventName : Win32cr::Foundation::PWSTR,
-    applicationName : Win32cr::Foundation::PWSTR,
-    applicationPath : Win32cr::Foundation::PWSTR,
-    description : Win32cr::Foundation::PWSTR,
-    bucketIdString : Win32cr::Foundation::PWSTR,
-    legacyBucketId : UInt64,
-    reportKey : Win32cr::Foundation::PWSTR
+  struct DIAGNOSTIC_REPORT_DATA
+    property signature : Win32cr::Security::DiagnosticDataQuery::DIAGNOSTIC_REPORT_SIGNATURE
+    property bucketId : LibC::GUID
+    property reportId : LibC::GUID
+    property creationTime : Win32cr::Foundation::FILETIME
+    property sizeInBytes : UInt64
+    property cabId : Win32cr::Foundation::PWSTR
+    property reportStatus : UInt32
+    property reportIntegratorId : LibC::GUID
+    property fileNames : Win32cr::Foundation::PWSTR*
+    property fileCount : UInt32
+    property friendlyEventName : Win32cr::Foundation::PWSTR
+    property applicationName : Win32cr::Foundation::PWSTR
+    property applicationPath : Win32cr::Foundation::PWSTR
+    property description : Win32cr::Foundation::PWSTR
+    property bucketIdString : Win32cr::Foundation::PWSTR
+    property legacyBucketId : UInt64
+    property reportKey : Win32cr::Foundation::PWSTR
+    def initialize(@signature : Win32cr::Security::DiagnosticDataQuery::DIAGNOSTIC_REPORT_SIGNATURE, @bucketId : LibC::GUID, @reportId : LibC::GUID, @creationTime : Win32cr::Foundation::FILETIME, @sizeInBytes : UInt64, @cabId : Win32cr::Foundation::PWSTR, @reportStatus : UInt32, @reportIntegratorId : LibC::GUID, @fileNames : Win32cr::Foundation::PWSTR*, @fileCount : UInt32, @friendlyEventName : Win32cr::Foundation::PWSTR, @applicationName : Win32cr::Foundation::PWSTR, @applicationPath : Win32cr::Foundation::PWSTR, @description : Win32cr::Foundation::PWSTR, @bucketIdString : Win32cr::Foundation::PWSTR, @legacyBucketId : UInt64, @reportKey : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Link("diagnosticdataquery")]
   lib C

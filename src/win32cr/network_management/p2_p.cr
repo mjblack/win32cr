@@ -5,15 +5,15 @@ require "./../security/cryptography.cr"
 require "./../system/io.cr"
 
 module Win32cr::NetworkManagement::P2P
-  alias PFNPEER_VALIDATE_RECORD = Proc(Void*, Void*, Win32cr::NetworkManagement::P2P::PEER_RECORD*, Win32cr::NetworkManagement::P2P::PEER_RECORD_CHANGE_TYPE, Win32cr::Foundation::HRESULT)*
+  alias PFNPEER_VALIDATE_RECORD = Proc(Void*, Void*, Win32cr::NetworkManagement::P2P::PEER_RECORD*, Win32cr::NetworkManagement::P2P::PEER_RECORD_CHANGE_TYPE, Win32cr::Foundation::HRESULT)
 
-  alias PFNPEER_SECURE_RECORD = Proc(Void*, Void*, Win32cr::NetworkManagement::P2P::PEER_RECORD*, Win32cr::NetworkManagement::P2P::PEER_RECORD_CHANGE_TYPE, Win32cr::NetworkManagement::P2P::PEER_DATA**, Win32cr::Foundation::HRESULT)*
+  alias PFNPEER_SECURE_RECORD = Proc(Void*, Void*, Win32cr::NetworkManagement::P2P::PEER_RECORD*, Win32cr::NetworkManagement::P2P::PEER_RECORD_CHANGE_TYPE, Win32cr::NetworkManagement::P2P::PEER_DATA**, Win32cr::Foundation::HRESULT)
 
-  alias PFNPEER_FREE_SECURITY_DATA = Proc(Void*, Void*, Win32cr::NetworkManagement::P2P::PEER_DATA*, Win32cr::Foundation::HRESULT)*
+  alias PFNPEER_FREE_SECURITY_DATA = Proc(Void*, Void*, Win32cr::NetworkManagement::P2P::PEER_DATA*, Win32cr::Foundation::HRESULT)
 
-  alias PFNPEER_ON_PASSWORD_AUTH_FAILED = Proc(Void*, Void*, Win32cr::Foundation::HRESULT)*
+  alias PFNPEER_ON_PASSWORD_AUTH_FAILED = Proc(Void*, Void*, Win32cr::Foundation::HRESULT)
 
-  alias DRT_BOOTSTRAP_RESOLVE_CALLBACK = Proc(Win32cr::Foundation::HRESULT, Void*, Win32cr::Networking::WinSock::SOCKET_ADDRESS_LIST*, Win32cr::Foundation::BOOL, Void)*
+  alias DRT_BOOTSTRAP_RESOLVE_CALLBACK = Proc(Win32cr::Foundation::HRESULT, Void*, Win32cr::Networking::WinSock::SOCKET_ADDRESS_LIST*, Win32cr::Foundation::BOOL, Void)
 
   NS_PNRPNAME = 38_u32
   NS_PNRPCLOUD = 39_u32
@@ -348,584 +348,796 @@ module Win32cr::NetworkManagement::P2P
   end
 
   @[Extern]
-  record PNRP_CLOUD_ID,
-    address_family : Int32,
-    scope : Win32cr::NetworkManagement::P2P::PNRP_SCOPE,
-    scope_id : UInt32
-
-  @[Extern]
-  record PNRPINFO_V1,
-    dwSize : UInt32,
-    lpwszIdentity : Win32cr::Foundation::PWSTR,
-    nMaxResolve : UInt32,
-    dwTimeout : UInt32,
-    dwLifetime : UInt32,
-    enResolveCriteria : Win32cr::NetworkManagement::P2P::PNRP_RESOLVE_CRITERIA,
-    dwFlags : UInt32,
-    saHint : Win32cr::Networking::WinSock::SOCKET_ADDRESS,
-    enNameState : Win32cr::NetworkManagement::P2P::PNRP_REGISTERED_ID_STATE
-
-  @[Extern]
-  record PNRPINFO_V2,
-    dwSize : UInt32,
-    lpwszIdentity : Win32cr::Foundation::PWSTR,
-    nMaxResolve : UInt32,
-    dwTimeout : UInt32,
-    dwLifetime : UInt32,
-    enResolveCriteria : Win32cr::NetworkManagement::P2P::PNRP_RESOLVE_CRITERIA,
-    dwFlags : UInt32,
-    saHint : Win32cr::Networking::WinSock::SOCKET_ADDRESS,
-    enNameState : Win32cr::NetworkManagement::P2P::PNRP_REGISTERED_ID_STATE,
-    enExtendedPayloadType : Win32cr::NetworkManagement::P2P::PNRP_EXTENDED_PAYLOAD_TYPE,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      blobPayload : Win32cr::System::Com::BLOB,
-      pwszPayload : Win32cr::Foundation::PWSTR
-
+  struct PNRP_CLOUD_ID
+    property address_family : Int32
+    property scope : Win32cr::NetworkManagement::P2P::PNRP_SCOPE
+    property scope_id : UInt32
+    def initialize(@address_family : Int32, @scope : Win32cr::NetworkManagement::P2P::PNRP_SCOPE, @scope_id : UInt32)
+    end
   end
 
   @[Extern]
-  record PNRPCLOUDINFO,
-    dwSize : UInt32,
-    cloud : Win32cr::NetworkManagement::P2P::PNRP_CLOUD_ID,
-    enCloudState : Win32cr::NetworkManagement::P2P::PNRP_CLOUD_STATE,
-    enCloudFlags : Win32cr::NetworkManagement::P2P::PNRP_CLOUD_FLAGS
-
-  @[Extern]
-  record PEER_VERSION_DATA,
-    wVersion : UInt16,
-    wHighestVersion : UInt16
-
-  @[Extern]
-  record PEER_DATA,
-    cbData : UInt32,
-    pbData : UInt8*
-
-  @[Extern]
-  record PEER_RECORD,
-    dwSize : UInt32,
-    type__ : LibC::GUID,
-    id : LibC::GUID,
-    dwVersion : UInt32,
-    dwFlags : UInt32,
-    pwzCreatorId : Win32cr::Foundation::PWSTR,
-    pwzModifiedById : Win32cr::Foundation::PWSTR,
-    pwzAttributes : Win32cr::Foundation::PWSTR,
-    ftCreation : Win32cr::Foundation::FILETIME,
-    ftExpiration : Win32cr::Foundation::FILETIME,
-    ftLastModified : Win32cr::Foundation::FILETIME,
-    securityData : Win32cr::NetworkManagement::P2P::PEER_DATA,
-    data : Win32cr::NetworkManagement::P2P::PEER_DATA
-
-  @[Extern]
-  record PEER_ADDRESS,
-    dwSize : UInt32,
-    sin6 : Win32cr::Networking::WinSock::SOCKADDR_IN6
-
-  @[Extern]
-  record PEER_CONNECTION_INFO,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    ullConnectionId : UInt64,
-    ullNodeId : UInt64,
-    pwzPeerId : Win32cr::Foundation::PWSTR,
-    address : Win32cr::NetworkManagement::P2P::PEER_ADDRESS
-
-  @[Extern]
-  record PEER_EVENT_INCOMING_DATA,
-    dwSize : UInt32,
-    ullConnectionId : UInt64,
-    type__ : LibC::GUID,
-    data : Win32cr::NetworkManagement::P2P::PEER_DATA
-
-  @[Extern]
-  record PEER_EVENT_RECORD_CHANGE_DATA,
-    dwSize : UInt32,
-    changeType : Win32cr::NetworkManagement::P2P::PEER_RECORD_CHANGE_TYPE,
-    recordId : LibC::GUID,
-    recordType : LibC::GUID
-
-  @[Extern]
-  record PEER_EVENT_CONNECTION_CHANGE_DATA,
-    dwSize : UInt32,
-    status : Win32cr::NetworkManagement::P2P::PEER_CONNECTION_STATUS,
-    ullConnectionId : UInt64,
-    ullNodeId : UInt64,
-    ullNextConnectionId : UInt64,
-    hrConnectionFailedReason : Win32cr::Foundation::HRESULT
-
-  @[Extern]
-  record PEER_EVENT_SYNCHRONIZED_DATA,
-    dwSize : UInt32,
-    recordType : LibC::GUID
-
-  @[Extern]
-  record PEER_GRAPH_PROPERTIES,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwScope : UInt32,
-    dwMaxRecordSize : UInt32,
-    pwzGraphId : Win32cr::Foundation::PWSTR,
-    pwzCreatorId : Win32cr::Foundation::PWSTR,
-    pwzFriendlyName : Win32cr::Foundation::PWSTR,
-    pwzComment : Win32cr::Foundation::PWSTR,
-    ulPresenceLifetime : UInt32,
-    cPresenceMax : UInt32
-
-  @[Extern]
-  record PEER_NODE_INFO,
-    dwSize : UInt32,
-    ullNodeId : UInt64,
-    pwzPeerId : Win32cr::Foundation::PWSTR,
-    cAddresses : UInt32,
-    pAddresses : Win32cr::NetworkManagement::P2P::PEER_ADDRESS*,
-    pwzAttributes : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record PEER_EVENT_NODE_CHANGE_DATA,
-    dwSize : UInt32,
-    changeType : Win32cr::NetworkManagement::P2P::PEER_NODE_CHANGE_TYPE,
-    ullNodeId : UInt64,
-    pwzPeerId : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record PEER_GRAPH_EVENT_REGISTRATION,
-    eventType : Win32cr::NetworkManagement::P2P::PEER_GRAPH_EVENT_TYPE,
-    pType : LibC::GUID*
-
-  @[Extern]
-  record PEER_GRAPH_EVENT_DATA,
-    eventType : Win32cr::NetworkManagement::P2P::PEER_GRAPH_EVENT_TYPE,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      dwStatus : Win32cr::NetworkManagement::P2P::PEER_GRAPH_STATUS_FLAGS,
-      incomingData : Win32cr::NetworkManagement::P2P::PEER_EVENT_INCOMING_DATA,
-      recordChangeData : Win32cr::NetworkManagement::P2P::PEER_EVENT_RECORD_CHANGE_DATA,
-      connectionChangeData : Win32cr::NetworkManagement::P2P::PEER_EVENT_CONNECTION_CHANGE_DATA,
-      nodeChangeData : Win32cr::NetworkManagement::P2P::PEER_EVENT_NODE_CHANGE_DATA,
-      synchronizedData : Win32cr::NetworkManagement::P2P::PEER_EVENT_SYNCHRONIZED_DATA
-
+  struct PNRPINFO_V1
+    property dwSize : UInt32
+    property lpwszIdentity : Win32cr::Foundation::PWSTR
+    property nMaxResolve : UInt32
+    property dwTimeout : UInt32
+    property dwLifetime : UInt32
+    property enResolveCriteria : Win32cr::NetworkManagement::P2P::PNRP_RESOLVE_CRITERIA
+    property dwFlags : UInt32
+    property saHint : Win32cr::Networking::WinSock::SOCKET_ADDRESS
+    property enNameState : Win32cr::NetworkManagement::P2P::PNRP_REGISTERED_ID_STATE
+    def initialize(@dwSize : UInt32, @lpwszIdentity : Win32cr::Foundation::PWSTR, @nMaxResolve : UInt32, @dwTimeout : UInt32, @dwLifetime : UInt32, @enResolveCriteria : Win32cr::NetworkManagement::P2P::PNRP_RESOLVE_CRITERIA, @dwFlags : UInt32, @saHint : Win32cr::Networking::WinSock::SOCKET_ADDRESS, @enNameState : Win32cr::NetworkManagement::P2P::PNRP_REGISTERED_ID_STATE)
+    end
   end
 
   @[Extern]
-  record PEER_SECURITY_INTERFACE,
-    dwSize : UInt32,
-    pwzSspFilename : Win32cr::Foundation::PWSTR,
-    pwzPackageName : Win32cr::Foundation::PWSTR,
-    cbSecurityInfo : UInt32,
-    pbSecurityInfo : UInt8*,
-    pvContext : Void*,
-    pfnValidateRecord : Win32cr::NetworkManagement::P2P::PFNPEER_VALIDATE_RECORD,
-    pfnSecureRecord : Win32cr::NetworkManagement::P2P::PFNPEER_SECURE_RECORD,
-    pfnFreeSecurityData : Win32cr::NetworkManagement::P2P::PFNPEER_FREE_SECURITY_DATA,
-    pfnAuthFailed : Win32cr::NetworkManagement::P2P::PFNPEER_ON_PASSWORD_AUTH_FAILED
-
-  @[Extern]
-  record PEER_CREDENTIAL_INFO,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    pwzFriendlyName : Win32cr::Foundation::PWSTR,
-    pPublicKey : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*,
-    pwzIssuerPeerName : Win32cr::Foundation::PWSTR,
-    pwzIssuerFriendlyName : Win32cr::Foundation::PWSTR,
-    ftValidityStart : Win32cr::Foundation::FILETIME,
-    ftValidityEnd : Win32cr::Foundation::FILETIME,
-    cRoles : UInt32,
-    pRoles : LibC::GUID*
-
-  @[Extern]
-  record PEER_MEMBER,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    pwzIdentity : Win32cr::Foundation::PWSTR,
-    pwzAttributes : Win32cr::Foundation::PWSTR,
-    ullNodeId : UInt64,
-    cAddresses : UInt32,
-    pAddresses : Win32cr::NetworkManagement::P2P::PEER_ADDRESS*,
-    pCredentialInfo : Win32cr::NetworkManagement::P2P::PEER_CREDENTIAL_INFO*
-
-  @[Extern]
-  record PEER_INVITATION_INFO,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    pwzCloudName : Win32cr::Foundation::PWSTR,
-    dwScope : UInt32,
-    dwCloudFlags : UInt32,
-    pwzGroupPeerName : Win32cr::Foundation::PWSTR,
-    pwzIssuerPeerName : Win32cr::Foundation::PWSTR,
-    pwzSubjectPeerName : Win32cr::Foundation::PWSTR,
-    pwzGroupFriendlyName : Win32cr::Foundation::PWSTR,
-    pwzIssuerFriendlyName : Win32cr::Foundation::PWSTR,
-    pwzSubjectFriendlyName : Win32cr::Foundation::PWSTR,
-    ftValidityStart : Win32cr::Foundation::FILETIME,
-    ftValidityEnd : Win32cr::Foundation::FILETIME,
-    cRoles : UInt32,
-    pRoles : LibC::GUID*,
-    cClassifiers : UInt32,
-    ppwzClassifiers : Win32cr::Foundation::PWSTR*,
-    pSubjectPublicKey : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*,
-    authScheme : Win32cr::NetworkManagement::P2P::PEER_GROUP_AUTHENTICATION_SCHEME
-
-  @[Extern]
-  record PEER_GROUP_PROPERTIES,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    pwzCloud : Win32cr::Foundation::PWSTR,
-    pwzClassifier : Win32cr::Foundation::PWSTR,
-    pwzGroupPeerName : Win32cr::Foundation::PWSTR,
-    pwzCreatorPeerName : Win32cr::Foundation::PWSTR,
-    pwzFriendlyName : Win32cr::Foundation::PWSTR,
-    pwzComment : Win32cr::Foundation::PWSTR,
-    ulMemberDataLifetime : UInt32,
-    ulPresenceLifetime : UInt32,
-    dwAuthenticationSchemes : UInt32,
-    pwzGroupPassword : Win32cr::Foundation::PWSTR,
-    groupPasswordRole : LibC::GUID
-
-  @[Extern]
-  record PEER_EVENT_MEMBER_CHANGE_DATA,
-    dwSize : UInt32,
-    changeType : Win32cr::NetworkManagement::P2P::PEER_MEMBER_CHANGE_TYPE,
-    pwzIdentity : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record PEER_GROUP_EVENT_REGISTRATION,
-    eventType : Win32cr::NetworkManagement::P2P::PEER_GROUP_EVENT_TYPE,
-    pType : LibC::GUID*
-
-  @[Extern]
-  record PEER_GROUP_EVENT_DATA,
-    eventType : Win32cr::NetworkManagement::P2P::PEER_GROUP_EVENT_TYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct PNRPINFO_V2
+    property dwSize : UInt32
+    property lpwszIdentity : Win32cr::Foundation::PWSTR
+    property nMaxResolve : UInt32
+    property dwTimeout : UInt32
+    property dwLifetime : UInt32
+    property enResolveCriteria : Win32cr::NetworkManagement::P2P::PNRP_RESOLVE_CRITERIA
+    property dwFlags : UInt32
+    property saHint : Win32cr::Networking::WinSock::SOCKET_ADDRESS
+    property enNameState : Win32cr::NetworkManagement::P2P::PNRP_REGISTERED_ID_STATE
+    property enExtendedPayloadType : Win32cr::NetworkManagement::P2P::PNRP_EXTENDED_PAYLOAD_TYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      dwStatus : Win32cr::NetworkManagement::P2P::PEER_GROUP_STATUS,
-      incomingData : Win32cr::NetworkManagement::P2P::PEER_EVENT_INCOMING_DATA,
-      recordChangeData : Win32cr::NetworkManagement::P2P::PEER_EVENT_RECORD_CHANGE_DATA,
-      connectionChangeData : Win32cr::NetworkManagement::P2P::PEER_EVENT_CONNECTION_CHANGE_DATA,
-      memberChangeData : Win32cr::NetworkManagement::P2P::PEER_EVENT_MEMBER_CHANGE_DATA,
-      hrConnectionFailedReason : Win32cr::Foundation::HRESULT
+    struct Anonymous_e__Union_
+    property blobPayload : Win32cr::System::Com::BLOB
+    property pwszPayload : Win32cr::Foundation::PWSTR
+    def initialize(@blobPayload : Win32cr::System::Com::BLOB, @pwszPayload : Win32cr::Foundation::PWSTR)
+    end
+    end
 
+    def initialize(@dwSize : UInt32, @lpwszIdentity : Win32cr::Foundation::PWSTR, @nMaxResolve : UInt32, @dwTimeout : UInt32, @dwLifetime : UInt32, @enResolveCriteria : Win32cr::NetworkManagement::P2P::PNRP_RESOLVE_CRITERIA, @dwFlags : UInt32, @saHint : Win32cr::Networking::WinSock::SOCKET_ADDRESS, @enNameState : Win32cr::NetworkManagement::P2P::PNRP_REGISTERED_ID_STATE, @enExtendedPayloadType : Win32cr::NetworkManagement::P2P::PNRP_EXTENDED_PAYLOAD_TYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record PEER_NAME_PAIR,
-    dwSize : UInt32,
-    pwzPeerName : Win32cr::Foundation::PWSTR,
-    pwzFriendlyName : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record PEER_APPLICATION,
-    id : LibC::GUID,
-    data : Win32cr::NetworkManagement::P2P::PEER_DATA,
-    pwzDescription : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record PEER_OBJECT,
-    id : LibC::GUID,
-    data : Win32cr::NetworkManagement::P2P::PEER_DATA,
-    dwPublicationScope : UInt32
-
-  @[Extern]
-  record PEER_CONTACT,
-    pwzPeerName : Win32cr::Foundation::PWSTR,
-    pwzNickName : Win32cr::Foundation::PWSTR,
-    pwzDisplayName : Win32cr::Foundation::PWSTR,
-    pwzEmailAddress : Win32cr::Foundation::PWSTR,
-    fWatch : Win32cr::Foundation::BOOL,
-    watcher_permissions : Win32cr::NetworkManagement::P2P::PEER_WATCH_PERMISSION,
-    credentials : Win32cr::NetworkManagement::P2P::PEER_DATA
-
-  @[Extern]
-  record PEER_ENDPOINT,
-    address : Win32cr::NetworkManagement::P2P::PEER_ADDRESS,
-    pwzEndpointName : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record PEER_PEOPLE_NEAR_ME,
-    pwzNickName : Win32cr::Foundation::PWSTR,
-    endpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT,
-    id : LibC::GUID
-
-  @[Extern]
-  record PEER_INVITATION,
-    applicationId : LibC::GUID,
-    applicationData : Win32cr::NetworkManagement::P2P::PEER_DATA,
-    pwzMessage : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record PEER_INVITATION_RESPONSE,
-    action : Win32cr::NetworkManagement::P2P::PEER_INVITATION_RESPONSE_TYPE,
-    pwzMessage : Win32cr::Foundation::PWSTR,
-    hrExtendedInfo : Win32cr::Foundation::HRESULT
-
-  @[Extern]
-  record PEER_APP_LAUNCH_INFO,
-    pContact : Win32cr::NetworkManagement::P2P::PEER_CONTACT*,
-    pEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*,
-    pInvitation : Win32cr::NetworkManagement::P2P::PEER_INVITATION*
-
-  @[Extern]
-  record PEER_APPLICATION_REGISTRATION_INFO,
-    application : Win32cr::NetworkManagement::P2P::PEER_APPLICATION,
-    pwzApplicationToLaunch : Win32cr::Foundation::PWSTR,
-    pwzApplicationArguments : Win32cr::Foundation::PWSTR,
-    dwPublicationScope : UInt32
-
-  @[Extern]
-  record PEER_PRESENCE_INFO,
-    status : Win32cr::NetworkManagement::P2P::PEER_PRESENCE_STATUS,
-    pwzDescriptiveText : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record PEER_COLLAB_EVENT_REGISTRATION,
-    eventType : Win32cr::NetworkManagement::P2P::PEER_COLLAB_EVENT_TYPE,
-    pInstance : LibC::GUID*
-
-  @[Extern]
-  record PEER_EVENT_WATCHLIST_CHANGED_DATA,
-    pContact : Win32cr::NetworkManagement::P2P::PEER_CONTACT*,
-    changeType : Win32cr::NetworkManagement::P2P::PEER_CHANGE_TYPE
-
-  @[Extern]
-  record PEER_EVENT_PRESENCE_CHANGED_DATA,
-    pContact : Win32cr::NetworkManagement::P2P::PEER_CONTACT*,
-    pEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*,
-    changeType : Win32cr::NetworkManagement::P2P::PEER_CHANGE_TYPE,
-    pPresenceInfo : Win32cr::NetworkManagement::P2P::PEER_PRESENCE_INFO*
-
-  @[Extern]
-  record PEER_EVENT_APPLICATION_CHANGED_DATA,
-    pContact : Win32cr::NetworkManagement::P2P::PEER_CONTACT*,
-    pEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*,
-    changeType : Win32cr::NetworkManagement::P2P::PEER_CHANGE_TYPE,
-    pApplication : Win32cr::NetworkManagement::P2P::PEER_APPLICATION*
-
-  @[Extern]
-  record PEER_EVENT_OBJECT_CHANGED_DATA,
-    pContact : Win32cr::NetworkManagement::P2P::PEER_CONTACT*,
-    pEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*,
-    changeType : Win32cr::NetworkManagement::P2P::PEER_CHANGE_TYPE,
-    pObject : Win32cr::NetworkManagement::P2P::PEER_OBJECT*
-
-  @[Extern]
-  record PEER_EVENT_ENDPOINT_CHANGED_DATA,
-    pContact : Win32cr::NetworkManagement::P2P::PEER_CONTACT*,
-    pEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*
-
-  @[Extern]
-  record PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA,
-    changeType : Win32cr::NetworkManagement::P2P::PEER_CHANGE_TYPE,
-    pPeopleNearMe : Win32cr::NetworkManagement::P2P::PEER_PEOPLE_NEAR_ME*
-
-  @[Extern]
-  record PEER_EVENT_REQUEST_STATUS_CHANGED_DATA,
-    pEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*,
-    hrChange : Win32cr::Foundation::HRESULT
-
-  @[Extern]
-  record PEER_COLLAB_EVENT_DATA,
-    eventType : Win32cr::NetworkManagement::P2P::PEER_COLLAB_EVENT_TYPE,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      watchListChangedData : Win32cr::NetworkManagement::P2P::PEER_EVENT_WATCHLIST_CHANGED_DATA,
-      presenceChangedData : Win32cr::NetworkManagement::P2P::PEER_EVENT_PRESENCE_CHANGED_DATA,
-      applicationChangedData : Win32cr::NetworkManagement::P2P::PEER_EVENT_APPLICATION_CHANGED_DATA,
-      objectChangedData : Win32cr::NetworkManagement::P2P::PEER_EVENT_OBJECT_CHANGED_DATA,
-      endpointChangedData : Win32cr::NetworkManagement::P2P::PEER_EVENT_ENDPOINT_CHANGED_DATA,
-      peopleNearMeChangedData : Win32cr::NetworkManagement::P2P::PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA,
-      requestStatusChangedData : Win32cr::NetworkManagement::P2P::PEER_EVENT_REQUEST_STATUS_CHANGED_DATA
-
+  struct PNRPCLOUDINFO
+    property dwSize : UInt32
+    property cloud : Win32cr::NetworkManagement::P2P::PNRP_CLOUD_ID
+    property enCloudState : Win32cr::NetworkManagement::P2P::PNRP_CLOUD_STATE
+    property enCloudFlags : Win32cr::NetworkManagement::P2P::PNRP_CLOUD_FLAGS
+    def initialize(@dwSize : UInt32, @cloud : Win32cr::NetworkManagement::P2P::PNRP_CLOUD_ID, @enCloudState : Win32cr::NetworkManagement::P2P::PNRP_CLOUD_STATE, @enCloudFlags : Win32cr::NetworkManagement::P2P::PNRP_CLOUD_FLAGS)
+    end
   end
 
   @[Extern]
-  record PEER_PNRP_ENDPOINT_INFO,
-    pwzPeerName : Win32cr::Foundation::PWSTR,
-    cAddresses : UInt32,
-    ppAddresses : Win32cr::Networking::WinSock::SOCKADDR**,
-    pwzComment : Win32cr::Foundation::PWSTR,
-    payload : Win32cr::NetworkManagement::P2P::PEER_DATA
+  struct PEER_VERSION_DATA
+    property wVersion : UInt16
+    property wHighestVersion : UInt16
+    def initialize(@wVersion : UInt16, @wHighestVersion : UInt16)
+    end
+  end
 
   @[Extern]
-  record PEER_PNRP_CLOUD_INFO,
-    pwzCloudName : Win32cr::Foundation::PWSTR,
-    dwScope : Win32cr::NetworkManagement::P2P::PNRP_SCOPE,
-    dwScopeId : UInt32
+  struct PEER_DATA
+    property cbData : UInt32
+    property pbData : UInt8*
+    def initialize(@cbData : UInt32, @pbData : UInt8*)
+    end
+  end
 
   @[Extern]
-  record PEER_PNRP_REGISTRATION_INFO,
-    pwzCloudName : Win32cr::Foundation::PWSTR,
-    pwzPublishingIdentity : Win32cr::Foundation::PWSTR,
-    cAddresses : UInt32,
-    ppAddresses : Win32cr::Networking::WinSock::SOCKADDR**,
-    wPort : UInt16,
-    pwzComment : Win32cr::Foundation::PWSTR,
-    payload : Win32cr::NetworkManagement::P2P::PEER_DATA
+  struct PEER_RECORD
+    property dwSize : UInt32
+    property type__ : LibC::GUID
+    property id : LibC::GUID
+    property dwVersion : UInt32
+    property dwFlags : UInt32
+    property pwzCreatorId : Win32cr::Foundation::PWSTR
+    property pwzModifiedById : Win32cr::Foundation::PWSTR
+    property pwzAttributes : Win32cr::Foundation::PWSTR
+    property ftCreation : Win32cr::Foundation::FILETIME
+    property ftExpiration : Win32cr::Foundation::FILETIME
+    property ftLastModified : Win32cr::Foundation::FILETIME
+    property securityData : Win32cr::NetworkManagement::P2P::PEER_DATA
+    property data : Win32cr::NetworkManagement::P2P::PEER_DATA
+    def initialize(@dwSize : UInt32, @type__ : LibC::GUID, @id : LibC::GUID, @dwVersion : UInt32, @dwFlags : UInt32, @pwzCreatorId : Win32cr::Foundation::PWSTR, @pwzModifiedById : Win32cr::Foundation::PWSTR, @pwzAttributes : Win32cr::Foundation::PWSTR, @ftCreation : Win32cr::Foundation::FILETIME, @ftExpiration : Win32cr::Foundation::FILETIME, @ftLastModified : Win32cr::Foundation::FILETIME, @securityData : Win32cr::NetworkManagement::P2P::PEER_DATA, @data : Win32cr::NetworkManagement::P2P::PEER_DATA)
+    end
+  end
 
   @[Extern]
-  record DRT_DATA,
-    cb : UInt32,
-    pb : UInt8*
+  struct PEER_ADDRESS
+    property dwSize : UInt32
+    property sin6 : Win32cr::Networking::WinSock::SOCKADDR_IN6
+    def initialize(@dwSize : UInt32, @sin6 : Win32cr::Networking::WinSock::SOCKADDR_IN6)
+    end
+  end
 
   @[Extern]
-  record DRT_REGISTRATION,
-    key : Win32cr::NetworkManagement::P2P::DRT_DATA,
-    appData : Win32cr::NetworkManagement::P2P::DRT_DATA
+  struct PEER_CONNECTION_INFO
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property ullConnectionId : UInt64
+    property ullNodeId : UInt64
+    property pwzPeerId : Win32cr::Foundation::PWSTR
+    property address : Win32cr::NetworkManagement::P2P::PEER_ADDRESS
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @ullConnectionId : UInt64, @ullNodeId : UInt64, @pwzPeerId : Win32cr::Foundation::PWSTR, @address : Win32cr::NetworkManagement::P2P::PEER_ADDRESS)
+    end
+  end
 
   @[Extern]
-  record DRT_SECURITY_PROVIDER,
-    pvContext : Void*,
-    attach : LibC::IntPtrT,
-    detach : LibC::IntPtrT,
-    register_key : LibC::IntPtrT,
-    unregister_key : LibC::IntPtrT,
-    validate_and_unpack_payload : LibC::IntPtrT,
-    secure_and_pack_payload : LibC::IntPtrT,
-    free_data : LibC::IntPtrT,
-    encrypt_data : LibC::IntPtrT,
-    decrypt_data : LibC::IntPtrT,
-    get_serialized_credential : LibC::IntPtrT,
-    validate_remote_credential : LibC::IntPtrT,
-    sign_data : LibC::IntPtrT,
-    verify_data : LibC::IntPtrT
+  struct PEER_EVENT_INCOMING_DATA
+    property dwSize : UInt32
+    property ullConnectionId : UInt64
+    property type__ : LibC::GUID
+    property data : Win32cr::NetworkManagement::P2P::PEER_DATA
+    def initialize(@dwSize : UInt32, @ullConnectionId : UInt64, @type__ : LibC::GUID, @data : Win32cr::NetworkManagement::P2P::PEER_DATA)
+    end
+  end
 
   @[Extern]
-  record DRT_BOOTSTRAP_PROVIDER,
-    pvContext : Void*,
-    attach : LibC::IntPtrT,
-    detach : LibC::IntPtrT,
-    init_resolve : LibC::IntPtrT,
-    issue_resolve : LibC::IntPtrT,
-    end_resolve : LibC::IntPtrT,
-    register : LibC::IntPtrT,
-    unregister : LibC::IntPtrT
+  struct PEER_EVENT_RECORD_CHANGE_DATA
+    property dwSize : UInt32
+    property changeType : Win32cr::NetworkManagement::P2P::PEER_RECORD_CHANGE_TYPE
+    property recordId : LibC::GUID
+    property recordType : LibC::GUID
+    def initialize(@dwSize : UInt32, @changeType : Win32cr::NetworkManagement::P2P::PEER_RECORD_CHANGE_TYPE, @recordId : LibC::GUID, @recordType : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record DRT_SETTINGS,
-    dwSize : UInt32,
-    cbKey : UInt32,
-    bProtocolMajorVersion : UInt8,
-    bProtocolMinorVersion : UInt8,
-    ulMaxRoutingAddresses : UInt32,
-    pwzDrtInstancePrefix : Win32cr::Foundation::PWSTR,
-    hTransport : Void*,
-    pSecurityProvider : Win32cr::NetworkManagement::P2P::DRT_SECURITY_PROVIDER*,
-    pBootstrapProvider : Win32cr::NetworkManagement::P2P::DRT_BOOTSTRAP_PROVIDER*,
-    eSecurityMode : Win32cr::NetworkManagement::P2P::DRT_SECURITY_MODE
+  struct PEER_EVENT_CONNECTION_CHANGE_DATA
+    property dwSize : UInt32
+    property status : Win32cr::NetworkManagement::P2P::PEER_CONNECTION_STATUS
+    property ullConnectionId : UInt64
+    property ullNodeId : UInt64
+    property ullNextConnectionId : UInt64
+    property hrConnectionFailedReason : Win32cr::Foundation::HRESULT
+    def initialize(@dwSize : UInt32, @status : Win32cr::NetworkManagement::P2P::PEER_CONNECTION_STATUS, @ullConnectionId : UInt64, @ullNodeId : UInt64, @ullNextConnectionId : UInt64, @hrConnectionFailedReason : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
-  record DRT_SEARCH_INFO,
-    dwSize : UInt32,
-    fIterative : Win32cr::Foundation::BOOL,
-    fAllowCurrentInstanceMatch : Win32cr::Foundation::BOOL,
-    fAnyMatchInRange : Win32cr::Foundation::BOOL,
-    cMaxEndpoints : UInt32,
-    pMaximumKey : Win32cr::NetworkManagement::P2P::DRT_DATA*,
-    pMinimumKey : Win32cr::NetworkManagement::P2P::DRT_DATA*
+  struct PEER_EVENT_SYNCHRONIZED_DATA
+    property dwSize : UInt32
+    property recordType : LibC::GUID
+    def initialize(@dwSize : UInt32, @recordType : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record DRT_ADDRESS,
-    socketAddress : Win32cr::Networking::WinSock::SOCKADDR_STORAGE,
-    flags : UInt32,
-    nearness : Int32,
-    latency : UInt32
+  struct PEER_GRAPH_PROPERTIES
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwScope : UInt32
+    property dwMaxRecordSize : UInt32
+    property pwzGraphId : Win32cr::Foundation::PWSTR
+    property pwzCreatorId : Win32cr::Foundation::PWSTR
+    property pwzFriendlyName : Win32cr::Foundation::PWSTR
+    property pwzComment : Win32cr::Foundation::PWSTR
+    property ulPresenceLifetime : UInt32
+    property cPresenceMax : UInt32
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwScope : UInt32, @dwMaxRecordSize : UInt32, @pwzGraphId : Win32cr::Foundation::PWSTR, @pwzCreatorId : Win32cr::Foundation::PWSTR, @pwzFriendlyName : Win32cr::Foundation::PWSTR, @pwzComment : Win32cr::Foundation::PWSTR, @ulPresenceLifetime : UInt32, @cPresenceMax : UInt32)
+    end
+  end
 
   @[Extern]
-  record DRT_ADDRESS_LIST,
-    address_count : UInt32,
-    address_list : Win32cr::NetworkManagement::P2P::DRT_ADDRESS*
+  struct PEER_NODE_INFO
+    property dwSize : UInt32
+    property ullNodeId : UInt64
+    property pwzPeerId : Win32cr::Foundation::PWSTR
+    property cAddresses : UInt32
+    property pAddresses : Win32cr::NetworkManagement::P2P::PEER_ADDRESS*
+    property pwzAttributes : Win32cr::Foundation::PWSTR
+    def initialize(@dwSize : UInt32, @ullNodeId : UInt64, @pwzPeerId : Win32cr::Foundation::PWSTR, @cAddresses : UInt32, @pAddresses : Win32cr::NetworkManagement::P2P::PEER_ADDRESS*, @pwzAttributes : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record DRT_SEARCH_RESULT,
-    dwSize : UInt32,
-    type__ : Win32cr::NetworkManagement::P2P::DRT_MATCH_TYPE,
-    pvContext : Void*,
-    registration : Win32cr::NetworkManagement::P2P::DRT_REGISTRATION
+  struct PEER_EVENT_NODE_CHANGE_DATA
+    property dwSize : UInt32
+    property changeType : Win32cr::NetworkManagement::P2P::PEER_NODE_CHANGE_TYPE
+    property ullNodeId : UInt64
+    property pwzPeerId : Win32cr::Foundation::PWSTR
+    def initialize(@dwSize : UInt32, @changeType : Win32cr::NetworkManagement::P2P::PEER_NODE_CHANGE_TYPE, @ullNodeId : UInt64, @pwzPeerId : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record DRT_EVENT_DATA,
-    type__ : Win32cr::NetworkManagement::P2P::DRT_EVENT_TYPE,
-    hr : Win32cr::Foundation::HRESULT,
-    pvContext : Void*,
-    anonymous : Anonymous_e__Union_ do
+  struct PEER_GRAPH_EVENT_REGISTRATION
+    property eventType : Win32cr::NetworkManagement::P2P::PEER_GRAPH_EVENT_TYPE
+    property pType : LibC::GUID*
+    def initialize(@eventType : Win32cr::NetworkManagement::P2P::PEER_GRAPH_EVENT_TYPE, @pType : LibC::GUID*)
+    end
+  end
+
+  @[Extern]
+  struct PEER_GRAPH_EVENT_DATA
+    property eventType : Win32cr::NetworkManagement::P2P::PEER_GRAPH_EVENT_TYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      leafsetKeyChange : Leafsetkeychange_e__struct_,
-      registrationStateChange : Registrationstatechange_e__struct_,
-      statusChange : Statuschange_e__struct_ do
+    struct Anonymous_e__Union_
+    property dwStatus : Win32cr::NetworkManagement::P2P::PEER_GRAPH_STATUS_FLAGS
+    property incomingData : Win32cr::NetworkManagement::P2P::PEER_EVENT_INCOMING_DATA
+    property recordChangeData : Win32cr::NetworkManagement::P2P::PEER_EVENT_RECORD_CHANGE_DATA
+    property connectionChangeData : Win32cr::NetworkManagement::P2P::PEER_EVENT_CONNECTION_CHANGE_DATA
+    property nodeChangeData : Win32cr::NetworkManagement::P2P::PEER_EVENT_NODE_CHANGE_DATA
+    property synchronizedData : Win32cr::NetworkManagement::P2P::PEER_EVENT_SYNCHRONIZED_DATA
+    def initialize(@dwStatus : Win32cr::NetworkManagement::P2P::PEER_GRAPH_STATUS_FLAGS, @incomingData : Win32cr::NetworkManagement::P2P::PEER_EVENT_INCOMING_DATA, @recordChangeData : Win32cr::NetworkManagement::P2P::PEER_EVENT_RECORD_CHANGE_DATA, @connectionChangeData : Win32cr::NetworkManagement::P2P::PEER_EVENT_CONNECTION_CHANGE_DATA, @nodeChangeData : Win32cr::NetworkManagement::P2P::PEER_EVENT_NODE_CHANGE_DATA, @synchronizedData : Win32cr::NetworkManagement::P2P::PEER_EVENT_SYNCHRONIZED_DATA)
+    end
+    end
+
+    def initialize(@eventType : Win32cr::NetworkManagement::P2P::PEER_GRAPH_EVENT_TYPE, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct PEER_SECURITY_INTERFACE
+    property dwSize : UInt32
+    property pwzSspFilename : Win32cr::Foundation::PWSTR
+    property pwzPackageName : Win32cr::Foundation::PWSTR
+    property cbSecurityInfo : UInt32
+    property pbSecurityInfo : UInt8*
+    property pvContext : Void*
+    property pfnValidateRecord : Win32cr::NetworkManagement::P2P::PFNPEER_VALIDATE_RECORD
+    property pfnSecureRecord : Win32cr::NetworkManagement::P2P::PFNPEER_SECURE_RECORD
+    property pfnFreeSecurityData : Win32cr::NetworkManagement::P2P::PFNPEER_FREE_SECURITY_DATA
+    property pfnAuthFailed : Win32cr::NetworkManagement::P2P::PFNPEER_ON_PASSWORD_AUTH_FAILED
+    def initialize(@dwSize : UInt32, @pwzSspFilename : Win32cr::Foundation::PWSTR, @pwzPackageName : Win32cr::Foundation::PWSTR, @cbSecurityInfo : UInt32, @pbSecurityInfo : UInt8*, @pvContext : Void*, @pfnValidateRecord : Win32cr::NetworkManagement::P2P::PFNPEER_VALIDATE_RECORD, @pfnSecureRecord : Win32cr::NetworkManagement::P2P::PFNPEER_SECURE_RECORD, @pfnFreeSecurityData : Win32cr::NetworkManagement::P2P::PFNPEER_FREE_SECURITY_DATA, @pfnAuthFailed : Win32cr::NetworkManagement::P2P::PFNPEER_ON_PASSWORD_AUTH_FAILED)
+    end
+  end
+
+  @[Extern]
+  struct PEER_CREDENTIAL_INFO
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property pwzFriendlyName : Win32cr::Foundation::PWSTR
+    property pPublicKey : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*
+    property pwzIssuerPeerName : Win32cr::Foundation::PWSTR
+    property pwzIssuerFriendlyName : Win32cr::Foundation::PWSTR
+    property ftValidityStart : Win32cr::Foundation::FILETIME
+    property ftValidityEnd : Win32cr::Foundation::FILETIME
+    property cRoles : UInt32
+    property pRoles : LibC::GUID*
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @pwzFriendlyName : Win32cr::Foundation::PWSTR, @pPublicKey : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, @pwzIssuerPeerName : Win32cr::Foundation::PWSTR, @pwzIssuerFriendlyName : Win32cr::Foundation::PWSTR, @ftValidityStart : Win32cr::Foundation::FILETIME, @ftValidityEnd : Win32cr::Foundation::FILETIME, @cRoles : UInt32, @pRoles : LibC::GUID*)
+    end
+  end
+
+  @[Extern]
+  struct PEER_MEMBER
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property pwzIdentity : Win32cr::Foundation::PWSTR
+    property pwzAttributes : Win32cr::Foundation::PWSTR
+    property ullNodeId : UInt64
+    property cAddresses : UInt32
+    property pAddresses : Win32cr::NetworkManagement::P2P::PEER_ADDRESS*
+    property pCredentialInfo : Win32cr::NetworkManagement::P2P::PEER_CREDENTIAL_INFO*
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @pwzIdentity : Win32cr::Foundation::PWSTR, @pwzAttributes : Win32cr::Foundation::PWSTR, @ullNodeId : UInt64, @cAddresses : UInt32, @pAddresses : Win32cr::NetworkManagement::P2P::PEER_ADDRESS*, @pCredentialInfo : Win32cr::NetworkManagement::P2P::PEER_CREDENTIAL_INFO*)
+    end
+  end
+
+  @[Extern]
+  struct PEER_INVITATION_INFO
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property pwzCloudName : Win32cr::Foundation::PWSTR
+    property dwScope : UInt32
+    property dwCloudFlags : UInt32
+    property pwzGroupPeerName : Win32cr::Foundation::PWSTR
+    property pwzIssuerPeerName : Win32cr::Foundation::PWSTR
+    property pwzSubjectPeerName : Win32cr::Foundation::PWSTR
+    property pwzGroupFriendlyName : Win32cr::Foundation::PWSTR
+    property pwzIssuerFriendlyName : Win32cr::Foundation::PWSTR
+    property pwzSubjectFriendlyName : Win32cr::Foundation::PWSTR
+    property ftValidityStart : Win32cr::Foundation::FILETIME
+    property ftValidityEnd : Win32cr::Foundation::FILETIME
+    property cRoles : UInt32
+    property pRoles : LibC::GUID*
+    property cClassifiers : UInt32
+    property ppwzClassifiers : Win32cr::Foundation::PWSTR*
+    property pSubjectPublicKey : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*
+    property authScheme : Win32cr::NetworkManagement::P2P::PEER_GROUP_AUTHENTICATION_SCHEME
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @pwzCloudName : Win32cr::Foundation::PWSTR, @dwScope : UInt32, @dwCloudFlags : UInt32, @pwzGroupPeerName : Win32cr::Foundation::PWSTR, @pwzIssuerPeerName : Win32cr::Foundation::PWSTR, @pwzSubjectPeerName : Win32cr::Foundation::PWSTR, @pwzGroupFriendlyName : Win32cr::Foundation::PWSTR, @pwzIssuerFriendlyName : Win32cr::Foundation::PWSTR, @pwzSubjectFriendlyName : Win32cr::Foundation::PWSTR, @ftValidityStart : Win32cr::Foundation::FILETIME, @ftValidityEnd : Win32cr::Foundation::FILETIME, @cRoles : UInt32, @pRoles : LibC::GUID*, @cClassifiers : UInt32, @ppwzClassifiers : Win32cr::Foundation::PWSTR*, @pSubjectPublicKey : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, @authScheme : Win32cr::NetworkManagement::P2P::PEER_GROUP_AUTHENTICATION_SCHEME)
+    end
+  end
+
+  @[Extern]
+  struct PEER_GROUP_PROPERTIES
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property pwzCloud : Win32cr::Foundation::PWSTR
+    property pwzClassifier : Win32cr::Foundation::PWSTR
+    property pwzGroupPeerName : Win32cr::Foundation::PWSTR
+    property pwzCreatorPeerName : Win32cr::Foundation::PWSTR
+    property pwzFriendlyName : Win32cr::Foundation::PWSTR
+    property pwzComment : Win32cr::Foundation::PWSTR
+    property ulMemberDataLifetime : UInt32
+    property ulPresenceLifetime : UInt32
+    property dwAuthenticationSchemes : UInt32
+    property pwzGroupPassword : Win32cr::Foundation::PWSTR
+    property groupPasswordRole : LibC::GUID
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @pwzCloud : Win32cr::Foundation::PWSTR, @pwzClassifier : Win32cr::Foundation::PWSTR, @pwzGroupPeerName : Win32cr::Foundation::PWSTR, @pwzCreatorPeerName : Win32cr::Foundation::PWSTR, @pwzFriendlyName : Win32cr::Foundation::PWSTR, @pwzComment : Win32cr::Foundation::PWSTR, @ulMemberDataLifetime : UInt32, @ulPresenceLifetime : UInt32, @dwAuthenticationSchemes : UInt32, @pwzGroupPassword : Win32cr::Foundation::PWSTR, @groupPasswordRole : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct PEER_EVENT_MEMBER_CHANGE_DATA
+    property dwSize : UInt32
+    property changeType : Win32cr::NetworkManagement::P2P::PEER_MEMBER_CHANGE_TYPE
+    property pwzIdentity : Win32cr::Foundation::PWSTR
+    def initialize(@dwSize : UInt32, @changeType : Win32cr::NetworkManagement::P2P::PEER_MEMBER_CHANGE_TYPE, @pwzIdentity : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct PEER_GROUP_EVENT_REGISTRATION
+    property eventType : Win32cr::NetworkManagement::P2P::PEER_GROUP_EVENT_TYPE
+    property pType : LibC::GUID*
+    def initialize(@eventType : Win32cr::NetworkManagement::P2P::PEER_GROUP_EVENT_TYPE, @pType : LibC::GUID*)
+    end
+  end
+
+  @[Extern]
+  struct PEER_GROUP_EVENT_DATA
+    property eventType : Win32cr::NetworkManagement::P2P::PEER_GROUP_EVENT_TYPE
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property dwStatus : Win32cr::NetworkManagement::P2P::PEER_GROUP_STATUS
+    property incomingData : Win32cr::NetworkManagement::P2P::PEER_EVENT_INCOMING_DATA
+    property recordChangeData : Win32cr::NetworkManagement::P2P::PEER_EVENT_RECORD_CHANGE_DATA
+    property connectionChangeData : Win32cr::NetworkManagement::P2P::PEER_EVENT_CONNECTION_CHANGE_DATA
+    property memberChangeData : Win32cr::NetworkManagement::P2P::PEER_EVENT_MEMBER_CHANGE_DATA
+    property hrConnectionFailedReason : Win32cr::Foundation::HRESULT
+    def initialize(@dwStatus : Win32cr::NetworkManagement::P2P::PEER_GROUP_STATUS, @incomingData : Win32cr::NetworkManagement::P2P::PEER_EVENT_INCOMING_DATA, @recordChangeData : Win32cr::NetworkManagement::P2P::PEER_EVENT_RECORD_CHANGE_DATA, @connectionChangeData : Win32cr::NetworkManagement::P2P::PEER_EVENT_CONNECTION_CHANGE_DATA, @memberChangeData : Win32cr::NetworkManagement::P2P::PEER_EVENT_MEMBER_CHANGE_DATA, @hrConnectionFailedReason : Win32cr::Foundation::HRESULT)
+    end
+    end
+
+    def initialize(@eventType : Win32cr::NetworkManagement::P2P::PEER_GROUP_EVENT_TYPE, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct PEER_NAME_PAIR
+    property dwSize : UInt32
+    property pwzPeerName : Win32cr::Foundation::PWSTR
+    property pwzFriendlyName : Win32cr::Foundation::PWSTR
+    def initialize(@dwSize : UInt32, @pwzPeerName : Win32cr::Foundation::PWSTR, @pwzFriendlyName : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct PEER_APPLICATION
+    property id : LibC::GUID
+    property data : Win32cr::NetworkManagement::P2P::PEER_DATA
+    property pwzDescription : Win32cr::Foundation::PWSTR
+    def initialize(@id : LibC::GUID, @data : Win32cr::NetworkManagement::P2P::PEER_DATA, @pwzDescription : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct PEER_OBJECT
+    property id : LibC::GUID
+    property data : Win32cr::NetworkManagement::P2P::PEER_DATA
+    property dwPublicationScope : UInt32
+    def initialize(@id : LibC::GUID, @data : Win32cr::NetworkManagement::P2P::PEER_DATA, @dwPublicationScope : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PEER_CONTACT
+    property pwzPeerName : Win32cr::Foundation::PWSTR
+    property pwzNickName : Win32cr::Foundation::PWSTR
+    property pwzDisplayName : Win32cr::Foundation::PWSTR
+    property pwzEmailAddress : Win32cr::Foundation::PWSTR
+    property fWatch : Win32cr::Foundation::BOOL
+    property watcher_permissions : Win32cr::NetworkManagement::P2P::PEER_WATCH_PERMISSION
+    property credentials : Win32cr::NetworkManagement::P2P::PEER_DATA
+    def initialize(@pwzPeerName : Win32cr::Foundation::PWSTR, @pwzNickName : Win32cr::Foundation::PWSTR, @pwzDisplayName : Win32cr::Foundation::PWSTR, @pwzEmailAddress : Win32cr::Foundation::PWSTR, @fWatch : Win32cr::Foundation::BOOL, @watcher_permissions : Win32cr::NetworkManagement::P2P::PEER_WATCH_PERMISSION, @credentials : Win32cr::NetworkManagement::P2P::PEER_DATA)
+    end
+  end
+
+  @[Extern]
+  struct PEER_ENDPOINT
+    property address : Win32cr::NetworkManagement::P2P::PEER_ADDRESS
+    property pwzEndpointName : Win32cr::Foundation::PWSTR
+    def initialize(@address : Win32cr::NetworkManagement::P2P::PEER_ADDRESS, @pwzEndpointName : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct PEER_PEOPLE_NEAR_ME
+    property pwzNickName : Win32cr::Foundation::PWSTR
+    property endpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT
+    property id : LibC::GUID
+    def initialize(@pwzNickName : Win32cr::Foundation::PWSTR, @endpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT, @id : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct PEER_INVITATION
+    property applicationId : LibC::GUID
+    property applicationData : Win32cr::NetworkManagement::P2P::PEER_DATA
+    property pwzMessage : Win32cr::Foundation::PWSTR
+    def initialize(@applicationId : LibC::GUID, @applicationData : Win32cr::NetworkManagement::P2P::PEER_DATA, @pwzMessage : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct PEER_INVITATION_RESPONSE
+    property action : Win32cr::NetworkManagement::P2P::PEER_INVITATION_RESPONSE_TYPE
+    property pwzMessage : Win32cr::Foundation::PWSTR
+    property hrExtendedInfo : Win32cr::Foundation::HRESULT
+    def initialize(@action : Win32cr::NetworkManagement::P2P::PEER_INVITATION_RESPONSE_TYPE, @pwzMessage : Win32cr::Foundation::PWSTR, @hrExtendedInfo : Win32cr::Foundation::HRESULT)
+    end
+  end
+
+  @[Extern]
+  struct PEER_APP_LAUNCH_INFO
+    property pContact : Win32cr::NetworkManagement::P2P::PEER_CONTACT*
+    property pEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*
+    property pInvitation : Win32cr::NetworkManagement::P2P::PEER_INVITATION*
+    def initialize(@pContact : Win32cr::NetworkManagement::P2P::PEER_CONTACT*, @pEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*, @pInvitation : Win32cr::NetworkManagement::P2P::PEER_INVITATION*)
+    end
+  end
+
+  @[Extern]
+  struct PEER_APPLICATION_REGISTRATION_INFO
+    property application : Win32cr::NetworkManagement::P2P::PEER_APPLICATION
+    property pwzApplicationToLaunch : Win32cr::Foundation::PWSTR
+    property pwzApplicationArguments : Win32cr::Foundation::PWSTR
+    property dwPublicationScope : UInt32
+    def initialize(@application : Win32cr::NetworkManagement::P2P::PEER_APPLICATION, @pwzApplicationToLaunch : Win32cr::Foundation::PWSTR, @pwzApplicationArguments : Win32cr::Foundation::PWSTR, @dwPublicationScope : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PEER_PRESENCE_INFO
+    property status : Win32cr::NetworkManagement::P2P::PEER_PRESENCE_STATUS
+    property pwzDescriptiveText : Win32cr::Foundation::PWSTR
+    def initialize(@status : Win32cr::NetworkManagement::P2P::PEER_PRESENCE_STATUS, @pwzDescriptiveText : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct PEER_COLLAB_EVENT_REGISTRATION
+    property eventType : Win32cr::NetworkManagement::P2P::PEER_COLLAB_EVENT_TYPE
+    property pInstance : LibC::GUID*
+    def initialize(@eventType : Win32cr::NetworkManagement::P2P::PEER_COLLAB_EVENT_TYPE, @pInstance : LibC::GUID*)
+    end
+  end
+
+  @[Extern]
+  struct PEER_EVENT_WATCHLIST_CHANGED_DATA
+    property pContact : Win32cr::NetworkManagement::P2P::PEER_CONTACT*
+    property changeType : Win32cr::NetworkManagement::P2P::PEER_CHANGE_TYPE
+    def initialize(@pContact : Win32cr::NetworkManagement::P2P::PEER_CONTACT*, @changeType : Win32cr::NetworkManagement::P2P::PEER_CHANGE_TYPE)
+    end
+  end
+
+  @[Extern]
+  struct PEER_EVENT_PRESENCE_CHANGED_DATA
+    property pContact : Win32cr::NetworkManagement::P2P::PEER_CONTACT*
+    property pEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*
+    property changeType : Win32cr::NetworkManagement::P2P::PEER_CHANGE_TYPE
+    property pPresenceInfo : Win32cr::NetworkManagement::P2P::PEER_PRESENCE_INFO*
+    def initialize(@pContact : Win32cr::NetworkManagement::P2P::PEER_CONTACT*, @pEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*, @changeType : Win32cr::NetworkManagement::P2P::PEER_CHANGE_TYPE, @pPresenceInfo : Win32cr::NetworkManagement::P2P::PEER_PRESENCE_INFO*)
+    end
+  end
+
+  @[Extern]
+  struct PEER_EVENT_APPLICATION_CHANGED_DATA
+    property pContact : Win32cr::NetworkManagement::P2P::PEER_CONTACT*
+    property pEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*
+    property changeType : Win32cr::NetworkManagement::P2P::PEER_CHANGE_TYPE
+    property pApplication : Win32cr::NetworkManagement::P2P::PEER_APPLICATION*
+    def initialize(@pContact : Win32cr::NetworkManagement::P2P::PEER_CONTACT*, @pEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*, @changeType : Win32cr::NetworkManagement::P2P::PEER_CHANGE_TYPE, @pApplication : Win32cr::NetworkManagement::P2P::PEER_APPLICATION*)
+    end
+  end
+
+  @[Extern]
+  struct PEER_EVENT_OBJECT_CHANGED_DATA
+    property pContact : Win32cr::NetworkManagement::P2P::PEER_CONTACT*
+    property pEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*
+    property changeType : Win32cr::NetworkManagement::P2P::PEER_CHANGE_TYPE
+    property pObject : Win32cr::NetworkManagement::P2P::PEER_OBJECT*
+    def initialize(@pContact : Win32cr::NetworkManagement::P2P::PEER_CONTACT*, @pEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*, @changeType : Win32cr::NetworkManagement::P2P::PEER_CHANGE_TYPE, @pObject : Win32cr::NetworkManagement::P2P::PEER_OBJECT*)
+    end
+  end
+
+  @[Extern]
+  struct PEER_EVENT_ENDPOINT_CHANGED_DATA
+    property pContact : Win32cr::NetworkManagement::P2P::PEER_CONTACT*
+    property pEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*
+    def initialize(@pContact : Win32cr::NetworkManagement::P2P::PEER_CONTACT*, @pEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*)
+    end
+  end
+
+  @[Extern]
+  struct PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA
+    property changeType : Win32cr::NetworkManagement::P2P::PEER_CHANGE_TYPE
+    property pPeopleNearMe : Win32cr::NetworkManagement::P2P::PEER_PEOPLE_NEAR_ME*
+    def initialize(@changeType : Win32cr::NetworkManagement::P2P::PEER_CHANGE_TYPE, @pPeopleNearMe : Win32cr::NetworkManagement::P2P::PEER_PEOPLE_NEAR_ME*)
+    end
+  end
+
+  @[Extern]
+  struct PEER_EVENT_REQUEST_STATUS_CHANGED_DATA
+    property pEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*
+    property hrChange : Win32cr::Foundation::HRESULT
+    def initialize(@pEndpoint : Win32cr::NetworkManagement::P2P::PEER_ENDPOINT*, @hrChange : Win32cr::Foundation::HRESULT)
+    end
+  end
+
+  @[Extern]
+  struct PEER_COLLAB_EVENT_DATA
+    property eventType : Win32cr::NetworkManagement::P2P::PEER_COLLAB_EVENT_TYPE
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property watchListChangedData : Win32cr::NetworkManagement::P2P::PEER_EVENT_WATCHLIST_CHANGED_DATA
+    property presenceChangedData : Win32cr::NetworkManagement::P2P::PEER_EVENT_PRESENCE_CHANGED_DATA
+    property applicationChangedData : Win32cr::NetworkManagement::P2P::PEER_EVENT_APPLICATION_CHANGED_DATA
+    property objectChangedData : Win32cr::NetworkManagement::P2P::PEER_EVENT_OBJECT_CHANGED_DATA
+    property endpointChangedData : Win32cr::NetworkManagement::P2P::PEER_EVENT_ENDPOINT_CHANGED_DATA
+    property peopleNearMeChangedData : Win32cr::NetworkManagement::P2P::PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA
+    property requestStatusChangedData : Win32cr::NetworkManagement::P2P::PEER_EVENT_REQUEST_STATUS_CHANGED_DATA
+    def initialize(@watchListChangedData : Win32cr::NetworkManagement::P2P::PEER_EVENT_WATCHLIST_CHANGED_DATA, @presenceChangedData : Win32cr::NetworkManagement::P2P::PEER_EVENT_PRESENCE_CHANGED_DATA, @applicationChangedData : Win32cr::NetworkManagement::P2P::PEER_EVENT_APPLICATION_CHANGED_DATA, @objectChangedData : Win32cr::NetworkManagement::P2P::PEER_EVENT_OBJECT_CHANGED_DATA, @endpointChangedData : Win32cr::NetworkManagement::P2P::PEER_EVENT_ENDPOINT_CHANGED_DATA, @peopleNearMeChangedData : Win32cr::NetworkManagement::P2P::PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA, @requestStatusChangedData : Win32cr::NetworkManagement::P2P::PEER_EVENT_REQUEST_STATUS_CHANGED_DATA)
+    end
+    end
+
+    def initialize(@eventType : Win32cr::NetworkManagement::P2P::PEER_COLLAB_EVENT_TYPE, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct PEER_PNRP_ENDPOINT_INFO
+    property pwzPeerName : Win32cr::Foundation::PWSTR
+    property cAddresses : UInt32
+    property ppAddresses : Win32cr::Networking::WinSock::SOCKADDR**
+    property pwzComment : Win32cr::Foundation::PWSTR
+    property payload : Win32cr::NetworkManagement::P2P::PEER_DATA
+    def initialize(@pwzPeerName : Win32cr::Foundation::PWSTR, @cAddresses : UInt32, @ppAddresses : Win32cr::Networking::WinSock::SOCKADDR**, @pwzComment : Win32cr::Foundation::PWSTR, @payload : Win32cr::NetworkManagement::P2P::PEER_DATA)
+    end
+  end
+
+  @[Extern]
+  struct PEER_PNRP_CLOUD_INFO
+    property pwzCloudName : Win32cr::Foundation::PWSTR
+    property dwScope : Win32cr::NetworkManagement::P2P::PNRP_SCOPE
+    property dwScopeId : UInt32
+    def initialize(@pwzCloudName : Win32cr::Foundation::PWSTR, @dwScope : Win32cr::NetworkManagement::P2P::PNRP_SCOPE, @dwScopeId : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PEER_PNRP_REGISTRATION_INFO
+    property pwzCloudName : Win32cr::Foundation::PWSTR
+    property pwzPublishingIdentity : Win32cr::Foundation::PWSTR
+    property cAddresses : UInt32
+    property ppAddresses : Win32cr::Networking::WinSock::SOCKADDR**
+    property wPort : UInt16
+    property pwzComment : Win32cr::Foundation::PWSTR
+    property payload : Win32cr::NetworkManagement::P2P::PEER_DATA
+    def initialize(@pwzCloudName : Win32cr::Foundation::PWSTR, @pwzPublishingIdentity : Win32cr::Foundation::PWSTR, @cAddresses : UInt32, @ppAddresses : Win32cr::Networking::WinSock::SOCKADDR**, @wPort : UInt16, @pwzComment : Win32cr::Foundation::PWSTR, @payload : Win32cr::NetworkManagement::P2P::PEER_DATA)
+    end
+  end
+
+  @[Extern]
+  struct DRT_DATA
+    property cb : UInt32
+    property pb : UInt8*
+    def initialize(@cb : UInt32, @pb : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct DRT_REGISTRATION
+    property key : Win32cr::NetworkManagement::P2P::DRT_DATA
+    property appData : Win32cr::NetworkManagement::P2P::DRT_DATA
+    def initialize(@key : Win32cr::NetworkManagement::P2P::DRT_DATA, @appData : Win32cr::NetworkManagement::P2P::DRT_DATA)
+    end
+  end
+
+  @[Extern]
+  struct DRT_SECURITY_PROVIDER
+    property pvContext : Void*
+    property attach : LibC::IntPtrT
+    property detach : LibC::IntPtrT
+    property register_key : LibC::IntPtrT
+    property unregister_key : LibC::IntPtrT
+    property validate_and_unpack_payload : LibC::IntPtrT
+    property secure_and_pack_payload : LibC::IntPtrT
+    property free_data : LibC::IntPtrT
+    property encrypt_data : LibC::IntPtrT
+    property decrypt_data : LibC::IntPtrT
+    property get_serialized_credential : LibC::IntPtrT
+    property validate_remote_credential : LibC::IntPtrT
+    property sign_data : LibC::IntPtrT
+    property verify_data : LibC::IntPtrT
+    def initialize(@pvContext : Void*, @attach : LibC::IntPtrT, @detach : LibC::IntPtrT, @register_key : LibC::IntPtrT, @unregister_key : LibC::IntPtrT, @validate_and_unpack_payload : LibC::IntPtrT, @secure_and_pack_payload : LibC::IntPtrT, @free_data : LibC::IntPtrT, @encrypt_data : LibC::IntPtrT, @decrypt_data : LibC::IntPtrT, @get_serialized_credential : LibC::IntPtrT, @validate_remote_credential : LibC::IntPtrT, @sign_data : LibC::IntPtrT, @verify_data : LibC::IntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct DRT_BOOTSTRAP_PROVIDER
+    property pvContext : Void*
+    property attach : LibC::IntPtrT
+    property detach : LibC::IntPtrT
+    property init_resolve : LibC::IntPtrT
+    property issue_resolve : LibC::IntPtrT
+    property end_resolve : LibC::IntPtrT
+    property register : LibC::IntPtrT
+    property unregister : LibC::IntPtrT
+    def initialize(@pvContext : Void*, @attach : LibC::IntPtrT, @detach : LibC::IntPtrT, @init_resolve : LibC::IntPtrT, @issue_resolve : LibC::IntPtrT, @end_resolve : LibC::IntPtrT, @register : LibC::IntPtrT, @unregister : LibC::IntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct DRT_SETTINGS
+    property dwSize : UInt32
+    property cbKey : UInt32
+    property bProtocolMajorVersion : UInt8
+    property bProtocolMinorVersion : UInt8
+    property ulMaxRoutingAddresses : UInt32
+    property pwzDrtInstancePrefix : Win32cr::Foundation::PWSTR
+    property hTransport : Void*
+    property pSecurityProvider : Win32cr::NetworkManagement::P2P::DRT_SECURITY_PROVIDER*
+    property pBootstrapProvider : Win32cr::NetworkManagement::P2P::DRT_BOOTSTRAP_PROVIDER*
+    property eSecurityMode : Win32cr::NetworkManagement::P2P::DRT_SECURITY_MODE
+    def initialize(@dwSize : UInt32, @cbKey : UInt32, @bProtocolMajorVersion : UInt8, @bProtocolMinorVersion : UInt8, @ulMaxRoutingAddresses : UInt32, @pwzDrtInstancePrefix : Win32cr::Foundation::PWSTR, @hTransport : Void*, @pSecurityProvider : Win32cr::NetworkManagement::P2P::DRT_SECURITY_PROVIDER*, @pBootstrapProvider : Win32cr::NetworkManagement::P2P::DRT_BOOTSTRAP_PROVIDER*, @eSecurityMode : Win32cr::NetworkManagement::P2P::DRT_SECURITY_MODE)
+    end
+  end
+
+  @[Extern]
+  struct DRT_SEARCH_INFO
+    property dwSize : UInt32
+    property fIterative : Win32cr::Foundation::BOOL
+    property fAllowCurrentInstanceMatch : Win32cr::Foundation::BOOL
+    property fAnyMatchInRange : Win32cr::Foundation::BOOL
+    property cMaxEndpoints : UInt32
+    property pMaximumKey : Win32cr::NetworkManagement::P2P::DRT_DATA*
+    property pMinimumKey : Win32cr::NetworkManagement::P2P::DRT_DATA*
+    def initialize(@dwSize : UInt32, @fIterative : Win32cr::Foundation::BOOL, @fAllowCurrentInstanceMatch : Win32cr::Foundation::BOOL, @fAnyMatchInRange : Win32cr::Foundation::BOOL, @cMaxEndpoints : UInt32, @pMaximumKey : Win32cr::NetworkManagement::P2P::DRT_DATA*, @pMinimumKey : Win32cr::NetworkManagement::P2P::DRT_DATA*)
+    end
+  end
+
+  @[Extern]
+  struct DRT_ADDRESS
+    property socketAddress : Win32cr::Networking::WinSock::SOCKADDR_STORAGE
+    property flags : UInt32
+    property nearness : Int32
+    property latency : UInt32
+    def initialize(@socketAddress : Win32cr::Networking::WinSock::SOCKADDR_STORAGE, @flags : UInt32, @nearness : Int32, @latency : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DRT_ADDRESS_LIST
+    property address_count : UInt32
+    property address_list : Win32cr::NetworkManagement::P2P::DRT_ADDRESS*
+    def initialize(@address_count : UInt32, @address_list : Win32cr::NetworkManagement::P2P::DRT_ADDRESS*)
+    end
+  end
+
+  @[Extern]
+  struct DRT_SEARCH_RESULT
+    property dwSize : UInt32
+    property type__ : Win32cr::NetworkManagement::P2P::DRT_MATCH_TYPE
+    property pvContext : Void*
+    property registration : Win32cr::NetworkManagement::P2P::DRT_REGISTRATION
+    def initialize(@dwSize : UInt32, @type__ : Win32cr::NetworkManagement::P2P::DRT_MATCH_TYPE, @pvContext : Void*, @registration : Win32cr::NetworkManagement::P2P::DRT_REGISTRATION)
+    end
+  end
+
+  @[Extern]
+  struct DRT_EVENT_DATA
+    property type__ : Win32cr::NetworkManagement::P2P::DRT_EVENT_TYPE
+    property hr : Win32cr::Foundation::HRESULT
+    property pvContext : Void*
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property leafsetKeyChange : Leafsetkeychange_e__struct_
+    property registrationStateChange : Registrationstatechange_e__struct_
+    property statusChange : Statuschange_e__struct_
 
       # Nested Type Statuschange_e__struct_
       @[Extern]
-      record Statuschange_e__struct_,
-        status : Win32cr::NetworkManagement::P2P::DRT_STATUS,
-        bootstrapAddresses : Bootstrapaddresses_e__struct_ do
+      struct Statuschange_e__struct_
+    property status : Win32cr::NetworkManagement::P2P::DRT_STATUS
+    property bootstrapAddresses : Bootstrapaddresses_e__struct_
 
         # Nested Type Bootstrapaddresses_e__struct_
         @[Extern]
-        record Bootstrapaddresses_e__struct_,
-          cntAddress : UInt32,
-          pAddresses : Win32cr::Networking::WinSock::SOCKADDR_STORAGE*
+        struct Bootstrapaddresses_e__struct_
+    property cntAddress : UInt32
+    property pAddresses : Win32cr::Networking::WinSock::SOCKADDR_STORAGE*
+    def initialize(@cntAddress : UInt32, @pAddresses : Win32cr::Networking::WinSock::SOCKADDR_STORAGE*)
+    end
+        end
 
+    def initialize(@status : Win32cr::NetworkManagement::P2P::DRT_STATUS, @bootstrapAddresses : Bootstrapaddresses_e__struct_)
+    end
       end
 
 
       # Nested Type Leafsetkeychange_e__struct_
       @[Extern]
-      record Leafsetkeychange_e__struct_,
-        change : Win32cr::NetworkManagement::P2P::DRT_LEAFSET_KEY_CHANGE_TYPE,
-        localKey : Win32cr::NetworkManagement::P2P::DRT_DATA,
-        remoteKey : Win32cr::NetworkManagement::P2P::DRT_DATA
+      struct Leafsetkeychange_e__struct_
+    property change : Win32cr::NetworkManagement::P2P::DRT_LEAFSET_KEY_CHANGE_TYPE
+    property localKey : Win32cr::NetworkManagement::P2P::DRT_DATA
+    property remoteKey : Win32cr::NetworkManagement::P2P::DRT_DATA
+    def initialize(@change : Win32cr::NetworkManagement::P2P::DRT_LEAFSET_KEY_CHANGE_TYPE, @localKey : Win32cr::NetworkManagement::P2P::DRT_DATA, @remoteKey : Win32cr::NetworkManagement::P2P::DRT_DATA)
+    end
+      end
 
 
       # Nested Type Registrationstatechange_e__struct_
       @[Extern]
-      record Registrationstatechange_e__struct_,
-        state : Win32cr::NetworkManagement::P2P::DRT_REGISTRATION_STATE,
-        localKey : Win32cr::NetworkManagement::P2P::DRT_DATA
+      struct Registrationstatechange_e__struct_
+    property state : Win32cr::NetworkManagement::P2P::DRT_REGISTRATION_STATE
+    property localKey : Win32cr::NetworkManagement::P2P::DRT_DATA
+    def initialize(@state : Win32cr::NetworkManagement::P2P::DRT_REGISTRATION_STATE, @localKey : Win32cr::NetworkManagement::P2P::DRT_DATA)
+    end
+      end
 
+    def initialize(@leafsetKeyChange : Leafsetkeychange_e__struct_, @registrationStateChange : Registrationstatechange_e__struct_, @statusChange : Statuschange_e__struct_)
+    end
     end
 
+    def initialize(@type__ : Win32cr::NetworkManagement::P2P::DRT_EVENT_TYPE, @hr : Win32cr::Foundation::HRESULT, @pvContext : Void*, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record PEERDIST_PUBLICATION_OPTIONS,
-    dwVersion : UInt32,
-    dwFlags : UInt32
+  struct PEERDIST_PUBLICATION_OPTIONS
+    property dwVersion : UInt32
+    property dwFlags : UInt32
+    def initialize(@dwVersion : UInt32, @dwFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record PEERDIST_CONTENT_TAG,
-    data : UInt8[16]
+  struct PEERDIST_CONTENT_TAG
+    property data : UInt8[16]
+    def initialize(@data : UInt8[16])
+    end
+  end
 
   @[Extern]
-  record PEERDIST_RETRIEVAL_OPTIONS,
-    cbSize : UInt32,
-    dwContentInfoMinVersion : UInt32,
-    dwContentInfoMaxVersion : UInt32,
-    dwReserved : UInt32
+  struct PEERDIST_RETRIEVAL_OPTIONS
+    property cbSize : UInt32
+    property dwContentInfoMinVersion : UInt32
+    property dwContentInfoMaxVersion : UInt32
+    property dwReserved : UInt32
+    def initialize(@cbSize : UInt32, @dwContentInfoMinVersion : UInt32, @dwContentInfoMaxVersion : UInt32, @dwReserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record PEERDIST_STATUS_INFO,
-    cbSize : UInt32,
-    status : Win32cr::NetworkManagement::P2P::PEERDIST_STATUS,
-    dwMinVer : Win32cr::NetworkManagement::P2P::PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE,
-    dwMaxVer : Win32cr::NetworkManagement::P2P::PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE
+  struct PEERDIST_STATUS_INFO
+    property cbSize : UInt32
+    property status : Win32cr::NetworkManagement::P2P::PEERDIST_STATUS
+    property dwMinVer : Win32cr::NetworkManagement::P2P::PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE
+    property dwMaxVer : Win32cr::NetworkManagement::P2P::PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE
+    def initialize(@cbSize : UInt32, @status : Win32cr::NetworkManagement::P2P::PEERDIST_STATUS, @dwMinVer : Win32cr::NetworkManagement::P2P::PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE, @dwMaxVer : Win32cr::NetworkManagement::P2P::PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE)
+    end
+  end
 
   @[Extern]
-  record PEERDIST_CLIENT_BASIC_INFO,
-    fFlashCrowd : Win32cr::Foundation::BOOL
+  struct PEERDIST_CLIENT_BASIC_INFO
+    property fFlashCrowd : Win32cr::Foundation::BOOL
+    def initialize(@fFlashCrowd : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Link("p2pgraph")]
   @[Link("p2p")]

@@ -16,7 +16,6 @@ module Win32cr::System::WinRT::Display
 
 
   @[Extern]
-  #@[Com("64338358-366a-471b-bd56-dd8ef48e439b")]
   record IDisplayDeviceInterop, lpVtbl : IDisplayDeviceInteropVtbl* do
     GUID = LibC::GUID.new(0x64338358_u32, 0x366a_u16, 0x471b_u16, StaticArray[0xbd_u8, 0x56_u8, 0xdd_u8, 0x8e_u8, 0xf4_u8, 0x8e_u8, 0x43_u8, 0x9b_u8])
     def query_interface(this : IDisplayDeviceInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -47,7 +46,6 @@ module Win32cr::System::WinRT::Display
 
 
   @[Extern]
-  #@[Com("a6ba4205-e59e-4e71-b25b-4e436d21ee3d")]
   record IDisplayPathInterop, lpVtbl : IDisplayPathInteropVtbl* do
     GUID = LibC::GUID.new(0xa6ba4205_u32, 0xe59e_u16, 0x4e71_u16, StaticArray[0xb2_u8, 0x5b_u8, 0x4e_u8, 0x43_u8, 0x6d_u8, 0x21_u8, 0xee_u8, 0x3d_u8])
     def query_interface(this : IDisplayPathInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

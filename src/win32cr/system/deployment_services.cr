@@ -3,21 +3,21 @@ require "./registry.cr"
 require "./com.cr"
 
 module Win32cr::System::DeploymentServices
-  alias PFN_WdsCliTraceFunction = Proc(Win32cr::Foundation::PWSTR, Int8*, Void)*
+  alias PFN_WdsCliTraceFunction = Proc(Win32cr::Foundation::PWSTR, Int8*, Void)
 
-  alias PFN_WdsCliCallback = Proc(Win32cr::System::DeploymentServices::PFN_WDS_CLI_CALLBACK_MESSAGE_ID, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Void*, Void)*
+  alias PFN_WdsCliCallback = Proc(Win32cr::System::DeploymentServices::PFN_WDS_CLI_CALLBACK_MESSAGE_ID, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Void*, Void)
 
-  alias PFN_WdsTransportClientSessionStart = Proc(Win32cr::Foundation::HANDLE, Void*, Win32cr::Foundation::ULARGE_INTEGER*, Void)*
+  alias PFN_WdsTransportClientSessionStart = Proc(Win32cr::Foundation::HANDLE, Void*, Win32cr::Foundation::ULARGE_INTEGER*, Void)
 
-  alias PFN_WdsTransportClientSessionStartEx = Proc(Win32cr::Foundation::HANDLE, Void*, Win32cr::System::DeploymentServices::TRANSPORTCLIENT_SESSION_INFO*, Void)*
+  alias PFN_WdsTransportClientSessionStartEx = Proc(Win32cr::Foundation::HANDLE, Void*, Win32cr::System::DeploymentServices::TRANSPORTCLIENT_SESSION_INFO*, Void)
 
-  alias PFN_WdsTransportClientReceiveMetadata = Proc(Win32cr::Foundation::HANDLE, Void*, Void*, UInt32, Void)*
+  alias PFN_WdsTransportClientReceiveMetadata = Proc(Win32cr::Foundation::HANDLE, Void*, Void*, UInt32, Void)
 
-  alias PFN_WdsTransportClientReceiveContents = Proc(Win32cr::Foundation::HANDLE, Void*, Void*, UInt32, Win32cr::Foundation::ULARGE_INTEGER*, Void)*
+  alias PFN_WdsTransportClientReceiveContents = Proc(Win32cr::Foundation::HANDLE, Void*, Void*, UInt32, Win32cr::Foundation::ULARGE_INTEGER*, Void)
 
-  alias PFN_WdsTransportClientSessionComplete = Proc(Win32cr::Foundation::HANDLE, Void*, UInt32, Void)*
+  alias PFN_WdsTransportClientSessionComplete = Proc(Win32cr::Foundation::HANDLE, Void*, UInt32, Void)
 
-  alias PFN_WdsTransportClientSessionNegotiate = Proc(Win32cr::Foundation::HANDLE, Void*, Win32cr::System::DeploymentServices::TRANSPORTCLIENT_SESSION_INFO*, Win32cr::Foundation::HANDLE, Void)*
+  alias PFN_WdsTransportClientSessionNegotiate = Proc(Win32cr::Foundation::HANDLE, Void*, Win32cr::System::DeploymentServices::TRANSPORTCLIENT_SESSION_INFO*, Win32cr::Foundation::HANDLE, Void)
 
   WDS_CLI_TRANSFER_ASYNCHRONOUS = 1_u32
   WDS_CLI_NO_SPARSE_FILE = 2_u32
@@ -377,140 +377,189 @@ module Win32cr::System::DeploymentServices
   end
 
   @[Extern]
-  record WDS_CLI_CRED,
-    pwszUserName : Win32cr::Foundation::PWSTR,
-    pwszDomain : Win32cr::Foundation::PWSTR,
-    pwszPassword : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record PXE_DHCP_OPTION,
-    option_type : UInt8,
-    option_length : UInt8,
-    option_value : UInt8*
-
-  @[Extern]
-  record PXE_DHCP_MESSAGE,
-    operation : UInt8,
-    hardware_address_type : UInt8,
-    hardware_address_length : UInt8,
-    hop_count : UInt8,
-    transaction_id : UInt32,
-    seconds_since_boot : UInt16,
-    reserved : UInt16,
-    client_ip_address : UInt32,
-    your_ip_address : UInt32,
-    bootstrap_server_address : UInt32,
-    relay_agent_ip_address : UInt32,
-    hardware_address : UInt8[16],
-    host_name : UInt8[64],
-    boot_file_name : UInt8[128],
-    anonymous : Anonymous_e__Union_,
-    option : Win32cr::System::DeploymentServices::PXE_DHCP_OPTION do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      bMagicCookie : UInt8[4],
-      uMagicCookie : UInt32
-
+  struct WDS_CLI_CRED
+    property pwszUserName : Win32cr::Foundation::PWSTR
+    property pwszDomain : Win32cr::Foundation::PWSTR
+    property pwszPassword : Win32cr::Foundation::PWSTR
+    def initialize(@pwszUserName : Win32cr::Foundation::PWSTR, @pwszDomain : Win32cr::Foundation::PWSTR, @pwszPassword : Win32cr::Foundation::PWSTR)
+    end
   end
 
   @[Extern]
-  record PXE_DHCPV6_OPTION,
-    option_code : UInt16,
-    data_length : UInt16,
-    data : UInt8*
-
-  @[Extern]
-  record PXE_DHCPV6_MESSAGE_HEADER,
-    message_type : UInt8,
-    message : UInt8*
-
-  @[Extern]
-  record PXE_DHCPV6_MESSAGE,
-    message_type : UInt8,
-    transaction_id_byte1 : UInt8,
-    transaction_id_byte2 : UInt8,
-    transaction_id_byte3 : UInt8,
-    options : Win32cr::System::DeploymentServices::PXE_DHCPV6_OPTION*
-
-  @[Extern]
-  record PXE_DHCPV6_RELAY_MESSAGE,
-    message_type : UInt8,
-    hop_count : UInt8,
-    link_address : UInt8[16],
-    peer_address : UInt8[16],
-    options : Win32cr::System::DeploymentServices::PXE_DHCPV6_OPTION*
-
-  @[Extern]
-  record PXE_PROVIDER,
-    uSizeOfStruct : UInt32,
-    pwszName : Win32cr::Foundation::PWSTR,
-    pwszFilePath : Win32cr::Foundation::PWSTR,
-    bIsCritical : Win32cr::Foundation::BOOL,
-    uIndex : UInt32
-
-  @[Extern]
-  record PXE_ADDRESS,
-    uFlags : UInt32,
-    anonymous : Anonymous_e__Union_,
-    uAddrLen : UInt32,
-    uPort : UInt16 do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      bAddress : UInt8[16],
-      uIpAddress : UInt32
-
+  struct PXE_DHCP_OPTION
+    property option_type : UInt8
+    property option_length : UInt8
+    property option_value : UInt8*
+    def initialize(@option_type : UInt8, @option_length : UInt8, @option_value : UInt8*)
+    end
   end
 
   @[Extern]
-  record PXE_DHCPV6_NESTED_RELAY_MESSAGE,
-    pRelayMessage : Win32cr::System::DeploymentServices::PXE_DHCPV6_RELAY_MESSAGE*,
-    cbRelayMessage : UInt32,
-    pInterfaceIdOption : Void*,
-    cbInterfaceIdOption : UInt16
+  struct PXE_DHCP_MESSAGE
+    property operation : UInt8
+    property hardware_address_type : UInt8
+    property hardware_address_length : UInt8
+    property hop_count : UInt8
+    property transaction_id : UInt32
+    property seconds_since_boot : UInt16
+    property reserved : UInt16
+    property client_ip_address : UInt32
+    property your_ip_address : UInt32
+    property bootstrap_server_address : UInt32
+    property relay_agent_ip_address : UInt32
+    property hardware_address : UInt8[16]
+    property host_name : UInt8[64]
+    property boot_file_name : UInt8[128]
+    property anonymous : Anonymous_e__Union_
+    property option : Win32cr::System::DeploymentServices::PXE_DHCP_OPTION
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property bMagicCookie : UInt8[4]
+    property uMagicCookie : UInt32
+    def initialize(@bMagicCookie : UInt8[4], @uMagicCookie : UInt32)
+    end
+    end
+
+    def initialize(@operation : UInt8, @hardware_address_type : UInt8, @hardware_address_length : UInt8, @hop_count : UInt8, @transaction_id : UInt32, @seconds_since_boot : UInt16, @reserved : UInt16, @client_ip_address : UInt32, @your_ip_address : UInt32, @bootstrap_server_address : UInt32, @relay_agent_ip_address : UInt32, @hardware_address : UInt8[16], @host_name : UInt8[64], @boot_file_name : UInt8[128], @anonymous : Anonymous_e__Union_, @option : Win32cr::System::DeploymentServices::PXE_DHCP_OPTION)
+    end
+  end
 
   @[Extern]
-  record WDS_TRANSPORTPROVIDER_INIT_PARAMS,
-    ulLength : UInt32,
-    ulMcServerVersion : UInt32,
-    hRegistryKey : Win32cr::System::Registry::HKEY,
-    hProvider : Win32cr::Foundation::HANDLE
+  struct PXE_DHCPV6_OPTION
+    property option_code : UInt16
+    property data_length : UInt16
+    property data : UInt8*
+    def initialize(@option_code : UInt16, @data_length : UInt16, @data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record WDS_TRANSPORTPROVIDER_SETTINGS,
-    ulLength : UInt32,
-    ulProviderVersion : UInt32
+  struct PXE_DHCPV6_MESSAGE_HEADER
+    property message_type : UInt8
+    property message : UInt8*
+    def initialize(@message_type : UInt8, @message : UInt8*)
+    end
+  end
 
   @[Extern]
-  record TRANSPORTCLIENT_SESSION_INFO,
-    ulStructureLength : UInt32,
-    ullFileSize : Win32cr::Foundation::ULARGE_INTEGER,
-    ulBlockSize : UInt32
+  struct PXE_DHCPV6_MESSAGE
+    property message_type : UInt8
+    property transaction_id_byte1 : UInt8
+    property transaction_id_byte2 : UInt8
+    property transaction_id_byte3 : UInt8
+    property options : Win32cr::System::DeploymentServices::PXE_DHCPV6_OPTION*
+    def initialize(@message_type : UInt8, @transaction_id_byte1 : UInt8, @transaction_id_byte2 : UInt8, @transaction_id_byte3 : UInt8, @options : Win32cr::System::DeploymentServices::PXE_DHCPV6_OPTION*)
+    end
+  end
 
   @[Extern]
-  record WDS_TRANSPORTCLIENT_REQUEST,
-    ulLength : UInt32,
-    ulApiVersion : UInt32,
-    ulAuthLevel : Win32cr::System::DeploymentServices::WDS_TRANSPORTCLIENT_REQUEST_AUTH_LEVEL,
-    pwszServer : Win32cr::Foundation::PWSTR,
-    pwszNamespace : Win32cr::Foundation::PWSTR,
-    pwszObjectName : Win32cr::Foundation::PWSTR,
-    ulCacheSize : UInt32,
-    ulProtocol : UInt32,
-    pvProtocolData : Void*,
-    ulProtocolDataLength : UInt32
+  struct PXE_DHCPV6_RELAY_MESSAGE
+    property message_type : UInt8
+    property hop_count : UInt8
+    property link_address : UInt8[16]
+    property peer_address : UInt8[16]
+    property options : Win32cr::System::DeploymentServices::PXE_DHCPV6_OPTION*
+    def initialize(@message_type : UInt8, @hop_count : UInt8, @link_address : UInt8[16], @peer_address : UInt8[16], @options : Win32cr::System::DeploymentServices::PXE_DHCPV6_OPTION*)
+    end
+  end
 
   @[Extern]
-  record WDS_TRANSPORTCLIENT_CALLBACKS,
-    session_start : Win32cr::System::DeploymentServices::PFN_WdsTransportClientSessionStart,
-    session_start_ex : Win32cr::System::DeploymentServices::PFN_WdsTransportClientSessionStartEx,
-    receive_contents : Win32cr::System::DeploymentServices::PFN_WdsTransportClientReceiveContents,
-    receive_metadata : Win32cr::System::DeploymentServices::PFN_WdsTransportClientReceiveMetadata,
-    session_complete : Win32cr::System::DeploymentServices::PFN_WdsTransportClientSessionComplete,
-    session_negotiate : Win32cr::System::DeploymentServices::PFN_WdsTransportClientSessionNegotiate
+  struct PXE_PROVIDER
+    property uSizeOfStruct : UInt32
+    property pwszName : Win32cr::Foundation::PWSTR
+    property pwszFilePath : Win32cr::Foundation::PWSTR
+    property bIsCritical : Win32cr::Foundation::BOOL
+    property uIndex : UInt32
+    def initialize(@uSizeOfStruct : UInt32, @pwszName : Win32cr::Foundation::PWSTR, @pwszFilePath : Win32cr::Foundation::PWSTR, @bIsCritical : Win32cr::Foundation::BOOL, @uIndex : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PXE_ADDRESS
+    property uFlags : UInt32
+    property anonymous : Anonymous_e__Union_
+    property uAddrLen : UInt32
+    property uPort : UInt16
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property bAddress : UInt8[16]
+    property uIpAddress : UInt32
+    def initialize(@bAddress : UInt8[16], @uIpAddress : UInt32)
+    end
+    end
+
+    def initialize(@uFlags : UInt32, @anonymous : Anonymous_e__Union_, @uAddrLen : UInt32, @uPort : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct PXE_DHCPV6_NESTED_RELAY_MESSAGE
+    property pRelayMessage : Win32cr::System::DeploymentServices::PXE_DHCPV6_RELAY_MESSAGE*
+    property cbRelayMessage : UInt32
+    property pInterfaceIdOption : Void*
+    property cbInterfaceIdOption : UInt16
+    def initialize(@pRelayMessage : Win32cr::System::DeploymentServices::PXE_DHCPV6_RELAY_MESSAGE*, @cbRelayMessage : UInt32, @pInterfaceIdOption : Void*, @cbInterfaceIdOption : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct WDS_TRANSPORTPROVIDER_INIT_PARAMS
+    property ulLength : UInt32
+    property ulMcServerVersion : UInt32
+    property hRegistryKey : Win32cr::System::Registry::HKEY
+    property hProvider : Win32cr::Foundation::HANDLE
+    def initialize(@ulLength : UInt32, @ulMcServerVersion : UInt32, @hRegistryKey : Win32cr::System::Registry::HKEY, @hProvider : Win32cr::Foundation::HANDLE)
+    end
+  end
+
+  @[Extern]
+  struct WDS_TRANSPORTPROVIDER_SETTINGS
+    property ulLength : UInt32
+    property ulProviderVersion : UInt32
+    def initialize(@ulLength : UInt32, @ulProviderVersion : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct TRANSPORTCLIENT_SESSION_INFO
+    property ulStructureLength : UInt32
+    property ullFileSize : Win32cr::Foundation::ULARGE_INTEGER
+    property ulBlockSize : UInt32
+    def initialize(@ulStructureLength : UInt32, @ullFileSize : Win32cr::Foundation::ULARGE_INTEGER, @ulBlockSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WDS_TRANSPORTCLIENT_REQUEST
+    property ulLength : UInt32
+    property ulApiVersion : UInt32
+    property ulAuthLevel : Win32cr::System::DeploymentServices::WDS_TRANSPORTCLIENT_REQUEST_AUTH_LEVEL
+    property pwszServer : Win32cr::Foundation::PWSTR
+    property pwszNamespace : Win32cr::Foundation::PWSTR
+    property pwszObjectName : Win32cr::Foundation::PWSTR
+    property ulCacheSize : UInt32
+    property ulProtocol : UInt32
+    property pvProtocolData : Void*
+    property ulProtocolDataLength : UInt32
+    def initialize(@ulLength : UInt32, @ulApiVersion : UInt32, @ulAuthLevel : Win32cr::System::DeploymentServices::WDS_TRANSPORTCLIENT_REQUEST_AUTH_LEVEL, @pwszServer : Win32cr::Foundation::PWSTR, @pwszNamespace : Win32cr::Foundation::PWSTR, @pwszObjectName : Win32cr::Foundation::PWSTR, @ulCacheSize : UInt32, @ulProtocol : UInt32, @pvProtocolData : Void*, @ulProtocolDataLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WDS_TRANSPORTCLIENT_CALLBACKS
+    property session_start : Win32cr::System::DeploymentServices::PFN_WdsTransportClientSessionStart
+    property session_start_ex : Win32cr::System::DeploymentServices::PFN_WdsTransportClientSessionStartEx
+    property receive_contents : Win32cr::System::DeploymentServices::PFN_WdsTransportClientReceiveContents
+    property receive_metadata : Win32cr::System::DeploymentServices::PFN_WdsTransportClientReceiveMetadata
+    property session_complete : Win32cr::System::DeploymentServices::PFN_WdsTransportClientSessionComplete
+    property session_negotiate : Win32cr::System::DeploymentServices::PFN_WdsTransportClientSessionNegotiate
+    def initialize(@session_start : Win32cr::System::DeploymentServices::PFN_WdsTransportClientSessionStart, @session_start_ex : Win32cr::System::DeploymentServices::PFN_WdsTransportClientSessionStartEx, @receive_contents : Win32cr::System::DeploymentServices::PFN_WdsTransportClientReceiveContents, @receive_metadata : Win32cr::System::DeploymentServices::PFN_WdsTransportClientReceiveMetadata, @session_complete : Win32cr::System::DeploymentServices::PFN_WdsTransportClientSessionComplete, @session_negotiate : Win32cr::System::DeploymentServices::PFN_WdsTransportClientSessionNegotiate)
+    end
+  end
 
   @[Extern]
   record IWdsTransportCacheableVtbl,
@@ -528,7 +577,6 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  #@[Com("46ad894b-0bab-47dc-84b2-7b553f1d8f80")]
   record IWdsTransportCacheable, lpVtbl : IWdsTransportCacheableVtbl* do
     GUID = LibC::GUID.new(0x46ad894b_u32, 0xbab_u16, 0x47dc_u16, StaticArray[0x84_u8, 0xb2_u8, 0x7b_u8, 0x55_u8, 0x3f_u8, 0x1d_u8, 0x8f_u8, 0x80_u8])
     def query_interface(this : IWdsTransportCacheable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -582,7 +630,6 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  #@[Com("b8ba4b1a-2ff4-43ab-996c-b2b10a91a6eb")]
   record IWdsTransportCollection, lpVtbl : IWdsTransportCollectionVtbl* do
     GUID = LibC::GUID.new(0xb8ba4b1a_u32, 0x2ff4_u16, 0x43ab_u16, StaticArray[0x99_u8, 0x6c_u8, 0xb2_u8, 0xb1_u8, 0xa_u8, 0x91_u8, 0xa6_u8, 0xeb_u8])
     def query_interface(this : IWdsTransportCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -631,7 +678,6 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  #@[Com("5b0d35f5-1b13-4afd-b878-6526dc340b5d")]
   record IWdsTransportManager, lpVtbl : IWdsTransportManagerVtbl* do
     GUID = LibC::GUID.new(0x5b0d35f5_u32, 0x1b13_u16, 0x4afd_u16, StaticArray[0xb8_u8, 0x78_u8, 0x65_u8, 0x26_u8, 0xdc_u8, 0x34_u8, 0xb_u8, 0x5d_u8])
     def query_interface(this : IWdsTransportManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -678,7 +724,6 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  #@[Com("09ccd093-830d-4344-a30a-73ae8e8fca90")]
   record IWdsTransportServer, lpVtbl : IWdsTransportServerVtbl* do
     GUID = LibC::GUID.new(0x9ccd093_u32, 0x830d_u16, 0x4344_u16, StaticArray[0xa3_u8, 0xa_u8, 0x73_u8, 0xae_u8, 0x8e_u8, 0x8f_u8, 0xca_u8, 0x90_u8])
     def query_interface(this : IWdsTransportServer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -738,7 +783,6 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  #@[Com("256e999f-6df4-4538-81b9-857b9ab8fb47")]
   record IWdsTransportServer2, lpVtbl : IWdsTransportServer2Vtbl* do
     GUID = LibC::GUID.new(0x256e999f_u32, 0x6df4_u16, 0x4538_u16, StaticArray[0x81_u8, 0xb9_u8, 0x85_u8, 0x7b_u8, 0x9a_u8, 0xb8_u8, 0xfb_u8, 0x47_u8])
     def query_interface(this : IWdsTransportServer2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -800,7 +844,6 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  #@[Com("f7238425-efa8-40a4-aef9-c98d969c0b75")]
   record IWdsTransportSetupManager, lpVtbl : IWdsTransportSetupManagerVtbl* do
     GUID = LibC::GUID.new(0xf7238425_u32, 0xefa8_u16, 0x40a4_u16, StaticArray[0xae_u8, 0xf9_u8, 0xc9_u8, 0x8d_u8, 0x96_u8, 0x9c_u8, 0xb_u8, 0x75_u8])
     def query_interface(this : IWdsTransportSetupManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -861,7 +904,6 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  #@[Com("02be79da-7e9e-4366-8b6e-2aa9a91be47f")]
   record IWdsTransportSetupManager2, lpVtbl : IWdsTransportSetupManager2Vtbl* do
     GUID = LibC::GUID.new(0x2be79da_u32, 0x7e9e_u16, 0x4366_u16, StaticArray[0x8b_u8, 0x6e_u8, 0x2a_u8, 0xa9_u8, 0xa9_u8, 0x1b_u8, 0xe4_u8, 0x7f_u8])
     def query_interface(this : IWdsTransportSetupManager2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -930,7 +972,6 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  #@[Com("84cc4779-42dd-4792-891e-1321d6d74b44")]
   record IWdsTransportConfigurationManager, lpVtbl : IWdsTransportConfigurationManagerVtbl* do
     GUID = LibC::GUID.new(0x84cc4779_u32, 0x42dd_u16, 0x4792_u16, StaticArray[0x89_u8, 0x1e_u8, 0x13_u8, 0x21_u8, 0xd6_u8, 0xd7_u8, 0x4b_u8, 0x44_u8])
     def query_interface(this : IWdsTransportConfigurationManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1006,7 +1047,6 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  #@[Com("d0d85caf-a153-4f1d-a9dd-96f431c50717")]
   record IWdsTransportConfigurationManager2, lpVtbl : IWdsTransportConfigurationManager2Vtbl* do
     GUID = LibC::GUID.new(0xd0d85caf_u32, 0xa153_u16, 0x4f1d_u16, StaticArray[0xa9_u8, 0xdd_u8, 0x96_u8, 0xf4_u8, 0x31_u8, 0xc5_u8, 0x7_u8, 0x17_u8])
     def query_interface(this : IWdsTransportConfigurationManager2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1078,7 +1118,6 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  #@[Com("3e22d9f6-3777-4d98-83e1-f98696717ba3")]
   record IWdsTransportNamespaceManager, lpVtbl : IWdsTransportNamespaceManagerVtbl* do
     GUID = LibC::GUID.new(0x3e22d9f6_u32, 0x3777_u16, 0x4d98_u16, StaticArray[0x83_u8, 0xe1_u8, 0xf9_u8, 0x86_u8, 0x96_u8, 0x71_u8, 0x7b_u8, 0xa3_u8])
     def query_interface(this : IWdsTransportNamespaceManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1127,7 +1166,6 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  #@[Com("1327a7c8-ae8a-4fb3-8150-136227c37e9a")]
   record IWdsTransportTftpManager, lpVtbl : IWdsTransportTftpManagerVtbl* do
     GUID = LibC::GUID.new(0x1327a7c8_u32, 0xae8a_u16, 0x4fb3_u16, StaticArray[0x81_u8, 0x50_u8, 0x13_u8, 0x62_u8, 0x27_u8, 0xc3_u8, 0x7e_u8, 0x9a_u8])
     def query_interface(this : IWdsTransportTftpManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1185,7 +1223,6 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  #@[Com("b9468578-9f2b-48cc-b27a-a60799c2750c")]
   record IWdsTransportServicePolicy, lpVtbl : IWdsTransportServicePolicyVtbl* do
     GUID = LibC::GUID.new(0xb9468578_u32, 0x9f2b_u16, 0x48cc_u16, StaticArray[0xb2_u8, 0x7a_u8, 0xa6_u8, 0x7_u8, 0x99_u8, 0xc2_u8, 0x75_u8, 0xc_u8])
     def query_interface(this : IWdsTransportServicePolicy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1294,7 +1331,6 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  #@[Com("65c19e5c-aa7e-4b91-8944-91e0e5572797")]
   record IWdsTransportServicePolicy2, lpVtbl : IWdsTransportServicePolicy2Vtbl* do
     GUID = LibC::GUID.new(0x65c19e5c_u32, 0xaa7e_u16, 0x4b91_u16, StaticArray[0x89_u8, 0x44_u8, 0x91_u8, 0xe0_u8, 0xe5_u8, 0x57_u8, 0x27_u8, 0x97_u8])
     def query_interface(this : IWdsTransportServicePolicy2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1407,7 +1443,6 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  #@[Com("13b33efc-7856-4f61-9a59-8de67b6b87b6")]
   record IWdsTransportDiagnosticsPolicy, lpVtbl : IWdsTransportDiagnosticsPolicyVtbl* do
     GUID = LibC::GUID.new(0x13b33efc_u32, 0x7856_u16, 0x4f61_u16, StaticArray[0x9a_u8, 0x59_u8, 0x8d_u8, 0xe6_u8, 0x7b_u8, 0x6b_u8, 0x87_u8, 0xb6_u8])
     def query_interface(this : IWdsTransportDiagnosticsPolicy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1482,7 +1517,6 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  #@[Com("4e5753cf-68ec-4504-a951-4a003266606b")]
   record IWdsTransportMulticastSessionPolicy, lpVtbl : IWdsTransportMulticastSessionPolicyVtbl* do
     GUID = LibC::GUID.new(0x4e5753cf_u32, 0x68ec_u16, 0x4504_u16, StaticArray[0xa9_u8, 0x51_u8, 0x4a_u8, 0x0_u8, 0x32_u8, 0x66_u8, 0x60_u8, 0x6b_u8])
     def query_interface(this : IWdsTransportMulticastSessionPolicy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1578,7 +1612,6 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  #@[Com("fa561f57-fbef-4ed3-b056-127cb1b33b84")]
   record IWdsTransportNamespace, lpVtbl : IWdsTransportNamespaceVtbl* do
     GUID = LibC::GUID.new(0xfa561f57_u32, 0xfbef_u16, 0x4ed3_u16, StaticArray[0xb0_u8, 0x56_u8, 0x12_u8, 0x7c_u8, 0xb1_u8, 0xb3_u8, 0x3b_u8, 0x84_u8])
     def query_interface(this : IWdsTransportNamespace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1701,7 +1734,6 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  #@[Com("ad931a72-c4bd-4c41-8fbc-59c9c748df9e")]
   record IWdsTransportNamespaceAutoCast, lpVtbl : IWdsTransportNamespaceAutoCastVtbl* do
     GUID = LibC::GUID.new(0xad931a72_u32, 0xc4bd_u16, 0x4c41_u16, StaticArray[0x8f_u8, 0xbc_u8, 0x59_u8, 0xc9_u8, 0xc7_u8, 0x48_u8, 0xdf_u8, 0x9e_u8])
     def query_interface(this : IWdsTransportNamespaceAutoCast*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1825,7 +1857,6 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  #@[Com("3840cecf-d76c-416e-a4cc-31c741d2874b")]
   record IWdsTransportNamespaceScheduledCast, lpVtbl : IWdsTransportNamespaceScheduledCastVtbl* do
     GUID = LibC::GUID.new(0x3840cecf_u32, 0xd76c_u16, 0x416e_u16, StaticArray[0xa4_u8, 0xcc_u8, 0x31_u8, 0xc7_u8, 0x41_u8, 0xd2_u8, 0x87_u8, 0x4b_u8])
     def query_interface(this : IWdsTransportNamespaceScheduledCast*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1952,7 +1983,6 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  #@[Com("013e6e4c-e6a7-4fb5-b7ff-d9f5da805c31")]
   record IWdsTransportNamespaceScheduledCastManualStart, lpVtbl : IWdsTransportNamespaceScheduledCastManualStartVtbl* do
     GUID = LibC::GUID.new(0x13e6e4c_u32, 0xe6a7_u16, 0x4fb5_u16, StaticArray[0xb7_u8, 0xff_u8, 0xd9_u8, 0xf5_u8, 0xda_u8, 0x80_u8, 0x5c_u8, 0x31_u8])
     def query_interface(this : IWdsTransportNamespaceScheduledCastManualStart*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2083,7 +2113,6 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  #@[Com("d606af3d-ea9c-4219-961e-7491d618d9b9")]
   record IWdsTransportNamespaceScheduledCastAutoStart, lpVtbl : IWdsTransportNamespaceScheduledCastAutoStartVtbl* do
     GUID = LibC::GUID.new(0xd606af3d_u32, 0xea9c_u16, 0x4219_u16, StaticArray[0x96_u8, 0x1e_u8, 0x74_u8, 0x91_u8, 0xd6_u8, 0x18_u8, 0xd9_u8, 0xb9_u8])
     def query_interface(this : IWdsTransportNamespaceScheduledCastAutoStart*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2205,7 +2234,6 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  #@[Com("d405d711-0296-4ab4-a860-ac7d32e65798")]
   record IWdsTransportContent, lpVtbl : IWdsTransportContentVtbl* do
     GUID = LibC::GUID.new(0xd405d711_u32, 0x296_u16, 0x4ab4_u16, StaticArray[0xa8_u8, 0x60_u8, 0xac_u8, 0x7d_u8, 0x32_u8, 0xe6_u8, 0x57_u8, 0x98_u8])
     def query_interface(this : IWdsTransportContent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2267,7 +2295,6 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  #@[Com("f4efea88-65b1-4f30-a4b9-2793987796fb")]
   record IWdsTransportSession, lpVtbl : IWdsTransportSessionVtbl* do
     GUID = LibC::GUID.new(0xf4efea88_u32, 0x65b1_u16, 0x4f30_u16, StaticArray[0xa4_u8, 0xb9_u8, 0x27_u8, 0x93_u8, 0x98_u8, 0x77_u8, 0x96_u8, 0xfb_u8])
     def query_interface(this : IWdsTransportSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2342,7 +2369,6 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  #@[Com("b5dbc93a-cabe-46ca-837f-3e44e93c6545")]
   record IWdsTransportClient, lpVtbl : IWdsTransportClientVtbl* do
     GUID = LibC::GUID.new(0xb5dbc93a_u32, 0xcabe_u16, 0x46ca_u16, StaticArray[0x83_u8, 0x7f_u8, 0x3e_u8, 0x44_u8, 0xe9_u8, 0x3c_u8, 0x65_u8, 0x45_u8])
     def query_interface(this : IWdsTransportClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2424,7 +2450,6 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  #@[Com("b022d3ae-884d-4d85-b146-53320e76ef62")]
   record IWdsTransportTftpClient, lpVtbl : IWdsTransportTftpClientVtbl* do
     GUID = LibC::GUID.new(0xb022d3ae_u32, 0x884d_u16, 0x4d85_u16, StaticArray[0xb1_u8, 0x46_u8, 0x53_u8, 0x32_u8, 0xe_u8, 0x76_u8, 0xef_u8, 0x62_u8])
     def query_interface(this : IWdsTransportTftpClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2488,7 +2513,6 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  #@[Com("b9489f24-f219-4acf-aad7-265c7c08a6ae")]
   record IWdsTransportContentProvider, lpVtbl : IWdsTransportContentProviderVtbl* do
     GUID = LibC::GUID.new(0xb9489f24_u32, 0xf219_u16, 0x4acf_u16, StaticArray[0xaa_u8, 0xd7_u8, 0x26_u8, 0x5c_u8, 0x7c_u8, 0x8_u8, 0xa6_u8, 0xae_u8])
     def query_interface(this : IWdsTransportContentProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

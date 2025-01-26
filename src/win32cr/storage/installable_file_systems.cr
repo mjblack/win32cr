@@ -146,177 +146,231 @@ module Win32cr::Storage::InstallableFileSystems
   end
 
   @[Extern]
-  record FILTER_FULL_INFORMATION,
-    next_entry_offset : UInt32,
-    frame_id : UInt32,
-    number_of_instances : UInt32,
-    filter_name_length : UInt16,
-    filter_name_buffer : UInt16*
+  struct FILTER_FULL_INFORMATION
+    property next_entry_offset : UInt32
+    property frame_id : UInt32
+    property number_of_instances : UInt32
+    property filter_name_length : UInt16
+    property filter_name_buffer : UInt16*
+    def initialize(@next_entry_offset : UInt32, @frame_id : UInt32, @number_of_instances : UInt32, @filter_name_length : UInt16, @filter_name_buffer : UInt16*)
+    end
+  end
 
   @[Extern]
-  record FILTER_AGGREGATE_BASIC_INFORMATION,
-    next_entry_offset : UInt32,
-    flags : UInt32,
-    type__ : Type_e__Union_ do
+  struct FILTER_AGGREGATE_BASIC_INFORMATION
+    property next_entry_offset : UInt32
+    property flags : UInt32
+    property type__ : Type_e__Union_
 
     # Nested Type Type_e__Union_
     @[Extern(union: true)]
-    record Type_e__Union_,
-      mini_filter : MiniFilter_e__Struct_,
-      legacy_filter : LegacyFilter_e__Struct_ do
+    struct Type_e__Union_
+    property mini_filter : MiniFilter_e__Struct_
+    property legacy_filter : LegacyFilter_e__Struct_
 
       # Nested Type MiniFilter_e__Struct_
       @[Extern]
-      record MiniFilter_e__Struct_,
-        frame_id : UInt32,
-        number_of_instances : UInt32,
-        filter_name_length : UInt16,
-        filter_name_buffer_offset : UInt16,
-        filter_altitude_length : UInt16,
-        filter_altitude_buffer_offset : UInt16
+      struct MiniFilter_e__Struct_
+    property frame_id : UInt32
+    property number_of_instances : UInt32
+    property filter_name_length : UInt16
+    property filter_name_buffer_offset : UInt16
+    property filter_altitude_length : UInt16
+    property filter_altitude_buffer_offset : UInt16
+    def initialize(@frame_id : UInt32, @number_of_instances : UInt32, @filter_name_length : UInt16, @filter_name_buffer_offset : UInt16, @filter_altitude_length : UInt16, @filter_altitude_buffer_offset : UInt16)
+    end
+      end
 
 
       # Nested Type LegacyFilter_e__Struct_
       @[Extern]
-      record LegacyFilter_e__Struct_,
-        filter_name_length : UInt16,
-        filter_name_buffer_offset : UInt16
+      struct LegacyFilter_e__Struct_
+    property filter_name_length : UInt16
+    property filter_name_buffer_offset : UInt16
+    def initialize(@filter_name_length : UInt16, @filter_name_buffer_offset : UInt16)
+    end
+      end
 
+    def initialize(@mini_filter : MiniFilter_e__Struct_, @legacy_filter : LegacyFilter_e__Struct_)
+    end
     end
 
+    def initialize(@next_entry_offset : UInt32, @flags : UInt32, @type__ : Type_e__Union_)
+    end
   end
 
   @[Extern]
-  record FILTER_AGGREGATE_STANDARD_INFORMATION,
-    next_entry_offset : UInt32,
-    flags : UInt32,
-    type__ : Type_e__Union_ do
+  struct FILTER_AGGREGATE_STANDARD_INFORMATION
+    property next_entry_offset : UInt32
+    property flags : UInt32
+    property type__ : Type_e__Union_
 
     # Nested Type Type_e__Union_
     @[Extern(union: true)]
-    record Type_e__Union_,
-      mini_filter : MiniFilter_e__Struct_,
-      legacy_filter : LegacyFilter_e__Struct_ do
+    struct Type_e__Union_
+    property mini_filter : MiniFilter_e__Struct_
+    property legacy_filter : LegacyFilter_e__Struct_
 
       # Nested Type MiniFilter_e__Struct_
       @[Extern]
-      record MiniFilter_e__Struct_,
-        flags : UInt32,
-        frame_id : UInt32,
-        number_of_instances : UInt32,
-        filter_name_length : UInt16,
-        filter_name_buffer_offset : UInt16,
-        filter_altitude_length : UInt16,
-        filter_altitude_buffer_offset : UInt16
+      struct MiniFilter_e__Struct_
+    property flags : UInt32
+    property frame_id : UInt32
+    property number_of_instances : UInt32
+    property filter_name_length : UInt16
+    property filter_name_buffer_offset : UInt16
+    property filter_altitude_length : UInt16
+    property filter_altitude_buffer_offset : UInt16
+    def initialize(@flags : UInt32, @frame_id : UInt32, @number_of_instances : UInt32, @filter_name_length : UInt16, @filter_name_buffer_offset : UInt16, @filter_altitude_length : UInt16, @filter_altitude_buffer_offset : UInt16)
+    end
+      end
 
 
       # Nested Type LegacyFilter_e__Struct_
       @[Extern]
-      record LegacyFilter_e__Struct_,
-        flags : UInt32,
-        filter_name_length : UInt16,
-        filter_name_buffer_offset : UInt16,
-        filter_altitude_length : UInt16,
-        filter_altitude_buffer_offset : UInt16
+      struct LegacyFilter_e__Struct_
+    property flags : UInt32
+    property filter_name_length : UInt16
+    property filter_name_buffer_offset : UInt16
+    property filter_altitude_length : UInt16
+    property filter_altitude_buffer_offset : UInt16
+    def initialize(@flags : UInt32, @filter_name_length : UInt16, @filter_name_buffer_offset : UInt16, @filter_altitude_length : UInt16, @filter_altitude_buffer_offset : UInt16)
+    end
+      end
 
+    def initialize(@mini_filter : MiniFilter_e__Struct_, @legacy_filter : LegacyFilter_e__Struct_)
+    end
     end
 
+    def initialize(@next_entry_offset : UInt32, @flags : UInt32, @type__ : Type_e__Union_)
+    end
   end
 
   @[Extern]
-  record FILTER_VOLUME_BASIC_INFORMATION,
-    filter_volume_name_length : UInt16,
-    filter_volume_name : UInt16*
+  struct FILTER_VOLUME_BASIC_INFORMATION
+    property filter_volume_name_length : UInt16
+    property filter_volume_name : UInt16*
+    def initialize(@filter_volume_name_length : UInt16, @filter_volume_name : UInt16*)
+    end
+  end
 
   @[Extern]
-  record FILTER_VOLUME_STANDARD_INFORMATION,
-    next_entry_offset : UInt32,
-    flags : UInt32,
-    frame_id : UInt32,
-    file_system_type : Win32cr::Storage::InstallableFileSystems::FLT_FILESYSTEM_TYPE,
-    filter_volume_name_length : UInt16,
-    filter_volume_name : UInt16*
+  struct FILTER_VOLUME_STANDARD_INFORMATION
+    property next_entry_offset : UInt32
+    property flags : UInt32
+    property frame_id : UInt32
+    property file_system_type : Win32cr::Storage::InstallableFileSystems::FLT_FILESYSTEM_TYPE
+    property filter_volume_name_length : UInt16
+    property filter_volume_name : UInt16*
+    def initialize(@next_entry_offset : UInt32, @flags : UInt32, @frame_id : UInt32, @file_system_type : Win32cr::Storage::InstallableFileSystems::FLT_FILESYSTEM_TYPE, @filter_volume_name_length : UInt16, @filter_volume_name : UInt16*)
+    end
+  end
 
   @[Extern]
-  record INSTANCE_BASIC_INFORMATION,
-    next_entry_offset : UInt32,
-    instance_name_length : UInt16,
-    instance_name_buffer_offset : UInt16
+  struct INSTANCE_BASIC_INFORMATION
+    property next_entry_offset : UInt32
+    property instance_name_length : UInt16
+    property instance_name_buffer_offset : UInt16
+    def initialize(@next_entry_offset : UInt32, @instance_name_length : UInt16, @instance_name_buffer_offset : UInt16)
+    end
+  end
 
   @[Extern]
-  record INSTANCE_PARTIAL_INFORMATION,
-    next_entry_offset : UInt32,
-    instance_name_length : UInt16,
-    instance_name_buffer_offset : UInt16,
-    altitude_length : UInt16,
-    altitude_buffer_offset : UInt16
+  struct INSTANCE_PARTIAL_INFORMATION
+    property next_entry_offset : UInt32
+    property instance_name_length : UInt16
+    property instance_name_buffer_offset : UInt16
+    property altitude_length : UInt16
+    property altitude_buffer_offset : UInt16
+    def initialize(@next_entry_offset : UInt32, @instance_name_length : UInt16, @instance_name_buffer_offset : UInt16, @altitude_length : UInt16, @altitude_buffer_offset : UInt16)
+    end
+  end
 
   @[Extern]
-  record INSTANCE_FULL_INFORMATION,
-    next_entry_offset : UInt32,
-    instance_name_length : UInt16,
-    instance_name_buffer_offset : UInt16,
-    altitude_length : UInt16,
-    altitude_buffer_offset : UInt16,
-    volume_name_length : UInt16,
-    volume_name_buffer_offset : UInt16,
-    filter_name_length : UInt16,
-    filter_name_buffer_offset : UInt16
+  struct INSTANCE_FULL_INFORMATION
+    property next_entry_offset : UInt32
+    property instance_name_length : UInt16
+    property instance_name_buffer_offset : UInt16
+    property altitude_length : UInt16
+    property altitude_buffer_offset : UInt16
+    property volume_name_length : UInt16
+    property volume_name_buffer_offset : UInt16
+    property filter_name_length : UInt16
+    property filter_name_buffer_offset : UInt16
+    def initialize(@next_entry_offset : UInt32, @instance_name_length : UInt16, @instance_name_buffer_offset : UInt16, @altitude_length : UInt16, @altitude_buffer_offset : UInt16, @volume_name_length : UInt16, @volume_name_buffer_offset : UInt16, @filter_name_length : UInt16, @filter_name_buffer_offset : UInt16)
+    end
+  end
 
   @[Extern]
-  record INSTANCE_AGGREGATE_STANDARD_INFORMATION,
-    next_entry_offset : UInt32,
-    flags : UInt32,
-    type__ : Type_e__Union_ do
+  struct INSTANCE_AGGREGATE_STANDARD_INFORMATION
+    property next_entry_offset : UInt32
+    property flags : UInt32
+    property type__ : Type_e__Union_
 
     # Nested Type Type_e__Union_
     @[Extern(union: true)]
-    record Type_e__Union_,
-      mini_filter : MiniFilter_e__Struct_,
-      legacy_filter : LegacyFilter_e__Struct_ do
+    struct Type_e__Union_
+    property mini_filter : MiniFilter_e__Struct_
+    property legacy_filter : LegacyFilter_e__Struct_
 
       # Nested Type MiniFilter_e__Struct_
       @[Extern]
-      record MiniFilter_e__Struct_,
-        flags : UInt32,
-        frame_id : UInt32,
-        volume_file_system_type : Win32cr::Storage::InstallableFileSystems::FLT_FILESYSTEM_TYPE,
-        instance_name_length : UInt16,
-        instance_name_buffer_offset : UInt16,
-        altitude_length : UInt16,
-        altitude_buffer_offset : UInt16,
-        volume_name_length : UInt16,
-        volume_name_buffer_offset : UInt16,
-        filter_name_length : UInt16,
-        filter_name_buffer_offset : UInt16,
-        supported_features : UInt32
+      struct MiniFilter_e__Struct_
+    property flags : UInt32
+    property frame_id : UInt32
+    property volume_file_system_type : Win32cr::Storage::InstallableFileSystems::FLT_FILESYSTEM_TYPE
+    property instance_name_length : UInt16
+    property instance_name_buffer_offset : UInt16
+    property altitude_length : UInt16
+    property altitude_buffer_offset : UInt16
+    property volume_name_length : UInt16
+    property volume_name_buffer_offset : UInt16
+    property filter_name_length : UInt16
+    property filter_name_buffer_offset : UInt16
+    property supported_features : UInt32
+    def initialize(@flags : UInt32, @frame_id : UInt32, @volume_file_system_type : Win32cr::Storage::InstallableFileSystems::FLT_FILESYSTEM_TYPE, @instance_name_length : UInt16, @instance_name_buffer_offset : UInt16, @altitude_length : UInt16, @altitude_buffer_offset : UInt16, @volume_name_length : UInt16, @volume_name_buffer_offset : UInt16, @filter_name_length : UInt16, @filter_name_buffer_offset : UInt16, @supported_features : UInt32)
+    end
+      end
 
 
       # Nested Type LegacyFilter_e__Struct_
       @[Extern]
-      record LegacyFilter_e__Struct_,
-        flags : UInt32,
-        altitude_length : UInt16,
-        altitude_buffer_offset : UInt16,
-        volume_name_length : UInt16,
-        volume_name_buffer_offset : UInt16,
-        filter_name_length : UInt16,
-        filter_name_buffer_offset : UInt16,
-        supported_features : UInt32
+      struct LegacyFilter_e__Struct_
+    property flags : UInt32
+    property altitude_length : UInt16
+    property altitude_buffer_offset : UInt16
+    property volume_name_length : UInt16
+    property volume_name_buffer_offset : UInt16
+    property filter_name_length : UInt16
+    property filter_name_buffer_offset : UInt16
+    property supported_features : UInt32
+    def initialize(@flags : UInt32, @altitude_length : UInt16, @altitude_buffer_offset : UInt16, @volume_name_length : UInt16, @volume_name_buffer_offset : UInt16, @filter_name_length : UInt16, @filter_name_buffer_offset : UInt16, @supported_features : UInt32)
+    end
+      end
 
+    def initialize(@mini_filter : MiniFilter_e__Struct_, @legacy_filter : LegacyFilter_e__Struct_)
+    end
     end
 
+    def initialize(@next_entry_offset : UInt32, @flags : UInt32, @type__ : Type_e__Union_)
+    end
   end
 
   @[Extern]
-  record FILTER_MESSAGE_HEADER,
-    reply_length : UInt32,
-    message_id : UInt64
+  struct FILTER_MESSAGE_HEADER
+    property reply_length : UInt32
+    property message_id : UInt64
+    def initialize(@reply_length : UInt32, @message_id : UInt64)
+    end
+  end
 
   @[Extern]
-  record FILTER_REPLY_HEADER,
-    status : Win32cr::Foundation::NTSTATUS,
-    message_id : UInt64
+  struct FILTER_REPLY_HEADER
+    property status : Win32cr::Foundation::NTSTATUS
+    property message_id : UInt64
+    def initialize(@status : Win32cr::Foundation::NTSTATUS, @message_id : UInt64)
+    end
+  end
 
   @[Link("fltlib")]
   lib C

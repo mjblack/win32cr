@@ -58,90 +58,135 @@ module Win32cr::Security::NetworkAccessProtection
   end
 
   @[Extern]
-  record CountedString,
-    length : UInt16,
-    string : Win32cr::Foundation::PWSTR
+  struct CountedString
+    property length : UInt16
+    property string : Win32cr::Foundation::PWSTR
+    def initialize(@length : UInt16, @string : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record IsolationInfo,
-    isolationState : Win32cr::Security::NetworkAccessProtection::IsolationState,
-    probEndTime : Win32cr::Foundation::FILETIME,
-    failureUrl : Win32cr::Security::NetworkAccessProtection::CountedString
+  struct IsolationInfo
+    property isolationState : Win32cr::Security::NetworkAccessProtection::IsolationState
+    property probEndTime : Win32cr::Foundation::FILETIME
+    property failureUrl : Win32cr::Security::NetworkAccessProtection::CountedString
+    def initialize(@isolationState : Win32cr::Security::NetworkAccessProtection::IsolationState, @probEndTime : Win32cr::Foundation::FILETIME, @failureUrl : Win32cr::Security::NetworkAccessProtection::CountedString)
+    end
+  end
 
   @[Extern]
-  record IsolationInfoEx,
-    isolationState : Win32cr::Security::NetworkAccessProtection::IsolationState,
-    extendedIsolationState : Win32cr::Security::NetworkAccessProtection::ExtendedIsolationState,
-    probEndTime : Win32cr::Foundation::FILETIME,
-    failureUrl : Win32cr::Security::NetworkAccessProtection::CountedString
+  struct IsolationInfoEx
+    property isolationState : Win32cr::Security::NetworkAccessProtection::IsolationState
+    property extendedIsolationState : Win32cr::Security::NetworkAccessProtection::ExtendedIsolationState
+    property probEndTime : Win32cr::Foundation::FILETIME
+    property failureUrl : Win32cr::Security::NetworkAccessProtection::CountedString
+    def initialize(@isolationState : Win32cr::Security::NetworkAccessProtection::IsolationState, @extendedIsolationState : Win32cr::Security::NetworkAccessProtection::ExtendedIsolationState, @probEndTime : Win32cr::Foundation::FILETIME, @failureUrl : Win32cr::Security::NetworkAccessProtection::CountedString)
+    end
+  end
 
   @[Extern]
-  record FailureCategoryMapping,
-    mappingCompliance : Win32cr::Foundation::BOOL[5]
+  struct FailureCategoryMapping
+    property mappingCompliance : Win32cr::Foundation::BOOL[5]
+    def initialize(@mappingCompliance : Win32cr::Foundation::BOOL[5])
+    end
+  end
 
   @[Extern]
-  record CorrelationId,
-    connId : LibC::GUID,
-    timeStamp : Win32cr::Foundation::FILETIME
+  struct CorrelationId
+    property connId : LibC::GUID
+    property timeStamp : Win32cr::Foundation::FILETIME
+    def initialize(@connId : LibC::GUID, @timeStamp : Win32cr::Foundation::FILETIME)
+    end
+  end
 
   @[Extern]
-  record ResultCodes,
-    count : UInt16,
-    results : Win32cr::Foundation::HRESULT*
+  struct ResultCodes
+    property count : UInt16
+    property results : Win32cr::Foundation::HRESULT*
+    def initialize(@count : UInt16, @results : Win32cr::Foundation::HRESULT*)
+    end
+  end
 
   @[Extern]
-  record Ipv4Address,
-    addr : UInt8[4]
+  struct Ipv4Address
+    property addr : UInt8[4]
+    def initialize(@addr : UInt8[4])
+    end
+  end
 
   @[Extern]
-  record Ipv6Address,
-    addr : UInt8[16]
+  struct Ipv6Address
+    property addr : UInt8[16]
+    def initialize(@addr : UInt8[16])
+    end
+  end
 
   @[Extern]
-  record FixupInfo,
-    state : Win32cr::Security::NetworkAccessProtection::FixupState,
-    percentage : UInt8,
-    resultCodes : Win32cr::Security::NetworkAccessProtection::ResultCodes,
-    fixupMsgId : UInt32
+  struct FixupInfo
+    property state : Win32cr::Security::NetworkAccessProtection::FixupState
+    property percentage : UInt8
+    property resultCodes : Win32cr::Security::NetworkAccessProtection::ResultCodes
+    property fixupMsgId : UInt32
+    def initialize(@state : Win32cr::Security::NetworkAccessProtection::FixupState, @percentage : UInt8, @resultCodes : Win32cr::Security::NetworkAccessProtection::ResultCodes, @fixupMsgId : UInt32)
+    end
+  end
 
   @[Extern]
-  record SystemHealthAgentState,
-    id : UInt32,
-    shaResultCodes : Win32cr::Security::NetworkAccessProtection::ResultCodes,
-    failureCategory : Win32cr::Security::NetworkAccessProtection::FailureCategory,
-    fixupInfo : Win32cr::Security::NetworkAccessProtection::FixupInfo
+  struct SystemHealthAgentState
+    property id : UInt32
+    property shaResultCodes : Win32cr::Security::NetworkAccessProtection::ResultCodes
+    property failureCategory : Win32cr::Security::NetworkAccessProtection::FailureCategory
+    property fixupInfo : Win32cr::Security::NetworkAccessProtection::FixupInfo
+    def initialize(@id : UInt32, @shaResultCodes : Win32cr::Security::NetworkAccessProtection::ResultCodes, @failureCategory : Win32cr::Security::NetworkAccessProtection::FailureCategory, @fixupInfo : Win32cr::Security::NetworkAccessProtection::FixupInfo)
+    end
+  end
 
   @[Extern]
-  record SoHAttribute,
-    type__ : UInt16,
-    size : UInt16,
-    value : UInt8*
+  struct SoHAttribute
+    property type__ : UInt16
+    property size : UInt16
+    property value : UInt8*
+    def initialize(@type__ : UInt16, @size : UInt16, @value : UInt8*)
+    end
+  end
 
   @[Extern]
-  record SoH,
-    count : UInt16,
-    attributes : Win32cr::Security::NetworkAccessProtection::SoHAttribute*
+  struct SoH
+    property count : UInt16
+    property attributes : Win32cr::Security::NetworkAccessProtection::SoHAttribute*
+    def initialize(@count : UInt16, @attributes : Win32cr::Security::NetworkAccessProtection::SoHAttribute*)
+    end
+  end
 
   @[Extern]
-  record NetworkSoH,
-    size : UInt16,
-    data : UInt8*
+  struct NetworkSoH
+    property size : UInt16
+    property data : UInt8*
+    def initialize(@size : UInt16, @data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record PrivateData,
-    size : UInt16,
-    data : UInt8*
+  struct PrivateData
+    property size : UInt16
+    property data : UInt8*
+    def initialize(@size : UInt16, @data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record NapComponentRegistrationInfo,
-    id : UInt32,
-    friendlyName : Win32cr::Security::NetworkAccessProtection::CountedString,
-    description : Win32cr::Security::NetworkAccessProtection::CountedString,
-    version : Win32cr::Security::NetworkAccessProtection::CountedString,
-    vendorName : Win32cr::Security::NetworkAccessProtection::CountedString,
-    infoClsid : LibC::GUID,
-    configClsid : LibC::GUID,
-    registrationDate : Win32cr::Foundation::FILETIME,
-    componentType : UInt32
+  struct NapComponentRegistrationInfo
+    property id : UInt32
+    property friendlyName : Win32cr::Security::NetworkAccessProtection::CountedString
+    property description : Win32cr::Security::NetworkAccessProtection::CountedString
+    property version : Win32cr::Security::NetworkAccessProtection::CountedString
+    property vendorName : Win32cr::Security::NetworkAccessProtection::CountedString
+    property infoClsid : LibC::GUID
+    property configClsid : LibC::GUID
+    property registrationDate : Win32cr::Foundation::FILETIME
+    property componentType : UInt32
+    def initialize(@id : UInt32, @friendlyName : Win32cr::Security::NetworkAccessProtection::CountedString, @description : Win32cr::Security::NetworkAccessProtection::CountedString, @version : Win32cr::Security::NetworkAccessProtection::CountedString, @vendorName : Win32cr::Security::NetworkAccessProtection::CountedString, @infoClsid : LibC::GUID, @configClsid : LibC::GUID, @registrationDate : Win32cr::Foundation::FILETIME, @componentType : UInt32)
+    end
+  end
 
 end

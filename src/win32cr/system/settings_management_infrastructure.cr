@@ -123,7 +123,6 @@ module Win32cr::System::SettingsManagementInfrastructure
 
 
   @[Extern]
-  #@[Com("9f7d7bb7-20b3-11da-81a5-0030f1642e3c")]
   record IItemEnumerator, lpVtbl : IItemEnumeratorVtbl* do
     GUID = LibC::GUID.new(0x9f7d7bb7_u32, 0x20b3_u16, 0x11da_u16, StaticArray[0x81_u8, 0xa5_u8, 0x0_u8, 0x30_u8, 0xf1_u8, 0x64_u8, 0x2e_u8, 0x3c_u8])
     def query_interface(this : IItemEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -159,7 +158,6 @@ module Win32cr::System::SettingsManagementInfrastructure
 
 
   @[Extern]
-  #@[Com("9f7d7bb6-20b3-11da-81a5-0030f1642e3c")]
   record ISettingsIdentity, lpVtbl : ISettingsIdentityVtbl* do
     GUID = LibC::GUID.new(0x9f7d7bb6_u32, 0x20b3_u16, 0x11da_u16, StaticArray[0x81_u8, 0xa5_u8, 0x0_u8, 0x30_u8, 0xf1_u8, 0x64_u8, 0x2e_u8, 0x3c_u8])
     def query_interface(this : ISettingsIdentity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -215,7 +213,6 @@ module Win32cr::System::SettingsManagementInfrastructure
 
 
   @[Extern]
-  #@[Com("9f7d7bb8-20b3-11da-81a5-0030f1642e3c")]
   record ITargetInfo, lpVtbl : ITargetInfoVtbl* do
     GUID = LibC::GUID.new(0x9f7d7bb8_u32, 0x20b3_u16, 0x11da_u16, StaticArray[0x81_u8, 0xa5_u8, 0x0_u8, 0x30_u8, 0xf1_u8, 0x64_u8, 0x2e_u8, 0x3c_u8])
     def query_interface(this : ITargetInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -317,7 +314,6 @@ module Win32cr::System::SettingsManagementInfrastructure
 
 
   @[Extern]
-  #@[Com("9f7d7bb9-20b3-11da-81a5-0030f1642e3c")]
   record ISettingsEngine, lpVtbl : ISettingsEngineVtbl* do
     GUID = LibC::GUID.new(0x9f7d7bb9_u32, 0x20b3_u16, 0x11da_u16, StaticArray[0x81_u8, 0xa5_u8, 0x0_u8, 0x30_u8, 0xf1_u8, 0x64_u8, 0x2e_u8, 0x3c_u8])
     def query_interface(this : ISettingsEngine*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -410,7 +406,6 @@ module Win32cr::System::SettingsManagementInfrastructure
 
 
   @[Extern]
-  #@[Com("9f7d7bbb-20b3-11da-81a5-0030f1642e3c")]
   record ISettingsItem, lpVtbl : ISettingsItemVtbl* do
     GUID = LibC::GUID.new(0x9f7d7bbb_u32, 0x20b3_u16, 0x11da_u16, StaticArray[0x81_u8, 0xa5_u8, 0x0_u8, 0x30_u8, 0xf1_u8, 0x64_u8, 0x2e_u8, 0x3c_u8])
     def query_interface(this : ISettingsItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -506,7 +501,6 @@ module Win32cr::System::SettingsManagementInfrastructure
 
 
   @[Extern]
-  #@[Com("9f7d7bba-20b3-11da-81a5-0030f1642e3c")]
   record ISettingsNamespace, lpVtbl : ISettingsNamespaceVtbl* do
     GUID = LibC::GUID.new(0x9f7d7bba_u32, 0x20b3_u16, 0x11da_u16, StaticArray[0x81_u8, 0xa5_u8, 0x0_u8, 0x30_u8, 0xf1_u8, 0x64_u8, 0x2e_u8, 0x3c_u8])
     def query_interface(this : ISettingsNamespace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -556,7 +550,6 @@ module Win32cr::System::SettingsManagementInfrastructure
 
 
   @[Extern]
-  #@[Com("9f7d7bbc-20b3-11da-81a5-0030f1642e3c")]
   record ISettingsResult, lpVtbl : ISettingsResultVtbl* do
     GUID = LibC::GUID.new(0x9f7d7bbc_u32, 0x20b3_u16, 0x11da_u16, StaticArray[0x81_u8, 0xa5_u8, 0x0_u8, 0x30_u8, 0xf1_u8, 0x64_u8, 0x2e_u8, 0x3c_u8])
     def query_interface(this : ISettingsResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -604,7 +597,6 @@ module Win32cr::System::SettingsManagementInfrastructure
 
 
   @[Extern]
-  #@[Com("9f7d7bbd-20b3-11da-81a5-0030f1642e3c")]
   record ISettingsContext, lpVtbl : ISettingsContextVtbl* do
     GUID = LibC::GUID.new(0x9f7d7bbd_u32, 0x20b3_u16, 0x11da_u16, StaticArray[0x81_u8, 0xa5_u8, 0x0_u8, 0x30_u8, 0xf1_u8, 0x64_u8, 0x2e_u8, 0x3c_u8])
     def query_interface(this : ISettingsContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

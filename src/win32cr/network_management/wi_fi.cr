@@ -5,105 +5,105 @@ require "./../system/com.cr"
 require "./../system/remote_desktop.cr"
 
 module Win32cr::NetworkManagement::WiFi
-  alias WLAN_NOTIFICATION_CALLBACK = Proc(Win32cr::NetworkManagement::WiFi::L2_NOTIFICATION_DATA*, Void*, Void)*
+  alias WLAN_NOTIFICATION_CALLBACK = Proc(Win32cr::NetworkManagement::WiFi::L2_NOTIFICATION_DATA*, Void*, Void)
 
-  alias WFD_OPEN_SESSION_COMPLETE_CALLBACK = Proc(Win32cr::Foundation::HANDLE, Void*, LibC::GUID, UInt32, UInt32, Void)*
+  alias WFD_OPEN_SESSION_COMPLETE_CALLBACK = Proc(Win32cr::Foundation::HANDLE, Void*, LibC::GUID, UInt32, UInt32, Void)
 
-  alias DOT11EXT_ALLOCATE_BUFFER = Proc(UInt32, Void**, UInt32)*
+  alias DOT11EXT_ALLOCATE_BUFFER = Proc(UInt32, Void**, UInt32)
 
-  alias DOT11EXT_FREE_BUFFER = Proc(Void*, Void)*
+  alias DOT11EXT_FREE_BUFFER = Proc(Void*, Void)
 
-  alias DOT11EXT_SET_PROFILE_CUSTOM_USER_DATA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt32, UInt32, Void*, UInt32)*
+  alias DOT11EXT_SET_PROFILE_CUSTOM_USER_DATA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt32, UInt32, Void*, UInt32)
 
-  alias DOT11EXT_GET_PROFILE_CUSTOM_USER_DATA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt32, UInt32*, Void**, UInt32)*
+  alias DOT11EXT_GET_PROFILE_CUSTOM_USER_DATA = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt32, UInt32*, Void**, UInt32)
 
-  alias DOT11EXT_SET_CURRENT_PROFILE = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_CONNECTIVITY_PROFILE*, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_SECURITY_PROFILE*, UInt32)*
+  alias DOT11EXT_SET_CURRENT_PROFILE = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_CONNECTIVITY_PROFILE*, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_SECURITY_PROFILE*, UInt32)
 
-  alias DOT11EXT_SEND_UI_REQUEST = Proc(Win32cr::Foundation::HANDLE, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_UI_REQUEST*, UInt32)*
+  alias DOT11EXT_SEND_UI_REQUEST = Proc(Win32cr::Foundation::HANDLE, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_UI_REQUEST*, UInt32)
 
-  alias DOT11EXT_PRE_ASSOCIATE_COMPLETION = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt32, UInt32, UInt32)*
+  alias DOT11EXT_PRE_ASSOCIATE_COMPLETION = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt32, UInt32, UInt32)
 
-  alias DOT11EXT_POST_ASSOCIATE_COMPLETION = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt8**, UInt32, UInt32, UInt32)*
+  alias DOT11EXT_POST_ASSOCIATE_COMPLETION = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt8**, UInt32, UInt32, UInt32)
 
-  alias DOT11EXT_SEND_NOTIFICATION = Proc(Win32cr::Foundation::HANDLE, Win32cr::NetworkManagement::WiFi::L2_NOTIFICATION_DATA*, UInt32)*
+  alias DOT11EXT_SEND_NOTIFICATION = Proc(Win32cr::Foundation::HANDLE, Win32cr::NetworkManagement::WiFi::L2_NOTIFICATION_DATA*, UInt32)
 
-  alias DOT11EXT_SEND_PACKET = Proc(Win32cr::Foundation::HANDLE, UInt32, Void*, Win32cr::Foundation::HANDLE, UInt32)*
+  alias DOT11EXT_SEND_PACKET = Proc(Win32cr::Foundation::HANDLE, UInt32, Void*, Win32cr::Foundation::HANDLE, UInt32)
 
-  alias DOT11EXT_SET_ETHERTYPE_HANDLING = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt32, Win32cr::NetworkManagement::WiFi::DOT11_PRIVACY_EXEMPTION*, UInt32, UInt16*, UInt32)*
+  alias DOT11EXT_SET_ETHERTYPE_HANDLING = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt32, Win32cr::NetworkManagement::WiFi::DOT11_PRIVACY_EXEMPTION*, UInt32, UInt16*, UInt32)
 
-  alias DOT11EXT_SET_AUTH_ALGORITHM = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt32)*
+  alias DOT11EXT_SET_AUTH_ALGORITHM = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt32)
 
-  alias DOT11EXT_SET_UNICAST_CIPHER_ALGORITHM = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt32)*
+  alias DOT11EXT_SET_UNICAST_CIPHER_ALGORITHM = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt32)
 
-  alias DOT11EXT_SET_MULTICAST_CIPHER_ALGORITHM = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt32)*
+  alias DOT11EXT_SET_MULTICAST_CIPHER_ALGORITHM = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt32)
 
-  alias DOT11EXT_SET_DEFAULT_KEY = Proc(Win32cr::Foundation::HANDLE, Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_DEFAULT_KEY_VALUE*, Win32cr::NetworkManagement::WiFi::DOT11_DIRECTION, UInt32)*
+  alias DOT11EXT_SET_DEFAULT_KEY = Proc(Win32cr::Foundation::HANDLE, Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_DEFAULT_KEY_VALUE*, Win32cr::NetworkManagement::WiFi::DOT11_DIRECTION, UInt32)
 
-  alias DOT11EXT_SET_KEY_MAPPING_KEY = Proc(Win32cr::Foundation::HANDLE, Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_KEY_MAPPING_KEY_VALUE*, UInt32)*
+  alias DOT11EXT_SET_KEY_MAPPING_KEY = Proc(Win32cr::Foundation::HANDLE, Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_KEY_MAPPING_KEY_VALUE*, UInt32)
 
-  alias DOT11EXT_SET_DEFAULT_KEY_ID = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt32)*
+  alias DOT11EXT_SET_DEFAULT_KEY_ID = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt32)
 
-  alias DOT11EXT_SET_EXCLUDE_UNENCRYPTED = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::BOOL, UInt32)*
+  alias DOT11EXT_SET_EXCLUDE_UNENCRYPTED = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::BOOL, UInt32)
 
-  alias DOT11EXT_NIC_SPECIFIC_EXTENSION = Proc(Win32cr::Foundation::HANDLE, UInt32, Void*, UInt32*, Void*, UInt32)*
+  alias DOT11EXT_NIC_SPECIFIC_EXTENSION = Proc(Win32cr::Foundation::HANDLE, UInt32, Void*, UInt32*, Void*, UInt32)
 
-  alias DOT11EXT_ONEX_START = Proc(Win32cr::Foundation::HANDLE, Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ATTRIBUTES*, UInt32)*
+  alias DOT11EXT_ONEX_START = Proc(Win32cr::Foundation::HANDLE, Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ATTRIBUTES*, UInt32)
 
-  alias DOT11EXT_ONEX_STOP = Proc(Win32cr::Foundation::HANDLE, UInt32)*
+  alias DOT11EXT_ONEX_STOP = Proc(Win32cr::Foundation::HANDLE, UInt32)
 
-  alias DOT11EXT_PROCESS_ONEX_PACKET = Proc(Win32cr::Foundation::HANDLE, UInt32, Void*, UInt32)*
+  alias DOT11EXT_PROCESS_ONEX_PACKET = Proc(Win32cr::Foundation::HANDLE, UInt32, Void*, UInt32)
 
-  alias DOT11EXT_REQUEST_VIRTUAL_STATION = Proc(Win32cr::Foundation::HANDLE, Void*, UInt32)*
+  alias DOT11EXT_REQUEST_VIRTUAL_STATION = Proc(Win32cr::Foundation::HANDLE, Void*, UInt32)
 
-  alias DOT11EXT_RELEASE_VIRTUAL_STATION = Proc(Win32cr::Foundation::HANDLE, Void*, UInt32)*
+  alias DOT11EXT_RELEASE_VIRTUAL_STATION = Proc(Win32cr::Foundation::HANDLE, Void*, UInt32)
 
-  alias DOT11EXT_QUERY_VIRTUAL_STATION_PROPERTIES = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::BOOL*, LibC::GUID*, Void*, UInt32)*
+  alias DOT11EXT_QUERY_VIRTUAL_STATION_PROPERTIES = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::BOOL*, LibC::GUID*, Void*, UInt32)
 
-  alias DOT11EXT_SET_VIRTUAL_STATION_AP_PROPERTIES = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt32, Win32cr::NetworkManagement::WiFi::DOT11EXT_VIRTUAL_STATION_AP_PROPERTY*, Void*, UInt32)*
+  alias DOT11EXT_SET_VIRTUAL_STATION_AP_PROPERTIES = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt32, Win32cr::NetworkManagement::WiFi::DOT11EXT_VIRTUAL_STATION_AP_PROPERTY*, Void*, UInt32)
 
-  alias DOT11EXTIHV_GET_VERSION_INFO = Proc(Win32cr::NetworkManagement::WiFi::DOT11_IHV_VERSION_INFO*, UInt32)*
+  alias DOT11EXTIHV_GET_VERSION_INFO = Proc(Win32cr::NetworkManagement::WiFi::DOT11_IHV_VERSION_INFO*, UInt32)
 
-  alias DOT11EXTIHV_INIT_SERVICE = Proc(UInt32, Win32cr::NetworkManagement::WiFi::DOT11EXT_APIS*, Void*, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_HANDLERS*, UInt32)*
+  alias DOT11EXTIHV_INIT_SERVICE = Proc(UInt32, Win32cr::NetworkManagement::WiFi::DOT11EXT_APIS*, Void*, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_HANDLERS*, UInt32)
 
-  alias DOT11EXTIHV_INIT_VIRTUAL_STATION = Proc(Win32cr::NetworkManagement::WiFi::DOT11EXT_VIRTUAL_STATION_APIS*, Void*, UInt32)*
+  alias DOT11EXTIHV_INIT_VIRTUAL_STATION = Proc(Win32cr::NetworkManagement::WiFi::DOT11EXT_VIRTUAL_STATION_APIS*, Void*, UInt32)
 
-  alias DOT11EXTIHV_DEINIT_SERVICE = Proc(Void)*
+  alias DOT11EXTIHV_DEINIT_SERVICE = Proc(Void)
 
-  alias DOT11EXTIHV_INIT_ADAPTER = Proc(Win32cr::NetworkManagement::WiFi::DOT11_ADAPTER*, Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE*, UInt32)*
+  alias DOT11EXTIHV_INIT_ADAPTER = Proc(Win32cr::NetworkManagement::WiFi::DOT11_ADAPTER*, Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE*, UInt32)
 
-  alias DOT11EXTIHV_DEINIT_ADAPTER = Proc(Win32cr::Foundation::HANDLE, Void)*
+  alias DOT11EXTIHV_DEINIT_ADAPTER = Proc(Win32cr::Foundation::HANDLE, Void)
 
-  alias DOT11EXTIHV_PERFORM_PRE_ASSOCIATE = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_PROFILE_PARAMS*, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_CONNECTIVITY_PROFILE*, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_SECURITY_PROFILE*, Win32cr::NetworkManagement::WiFi::DOT11_BSS_LIST*, UInt32*, UInt32)*
+  alias DOT11EXTIHV_PERFORM_PRE_ASSOCIATE = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_PROFILE_PARAMS*, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_CONNECTIVITY_PROFILE*, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_SECURITY_PROFILE*, Win32cr::NetworkManagement::WiFi::DOT11_BSS_LIST*, UInt32*, UInt32)
 
-  alias DOT11EXTIHV_ADAPTER_RESET = Proc(Win32cr::Foundation::HANDLE, UInt32)*
+  alias DOT11EXTIHV_ADAPTER_RESET = Proc(Win32cr::Foundation::HANDLE, UInt32)
 
-  alias DOT11EXTIHV_PERFORM_POST_ASSOCIATE = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::NetworkManagement::WiFi::DOT11_PORT_STATE*, UInt32, Win32cr::NetworkManagement::WiFi::DOT11_ASSOCIATION_COMPLETION_PARAMETERS*, UInt32)*
+  alias DOT11EXTIHV_PERFORM_POST_ASSOCIATE = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::NetworkManagement::WiFi::DOT11_PORT_STATE*, UInt32, Win32cr::NetworkManagement::WiFi::DOT11_ASSOCIATION_COMPLETION_PARAMETERS*, UInt32)
 
-  alias DOT11EXTIHV_STOP_POST_ASSOCIATE = Proc(Win32cr::Foundation::HANDLE, UInt8**, UInt32, UInt32)*
+  alias DOT11EXTIHV_STOP_POST_ASSOCIATE = Proc(Win32cr::Foundation::HANDLE, UInt8**, UInt32, UInt32)
 
-  alias DOT11EXTIHV_VALIDATE_PROFILE = Proc(Win32cr::Foundation::HANDLE, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_PROFILE_PARAMS*, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_CONNECTIVITY_PROFILE*, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_SECURITY_PROFILE*, UInt32*, UInt32)*
+  alias DOT11EXTIHV_VALIDATE_PROFILE = Proc(Win32cr::Foundation::HANDLE, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_PROFILE_PARAMS*, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_CONNECTIVITY_PROFILE*, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_SECURITY_PROFILE*, UInt32*, UInt32)
 
-  alias DOT11EXTIHV_PERFORM_CAPABILITY_MATCH = Proc(Win32cr::Foundation::HANDLE, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_PROFILE_PARAMS*, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_CONNECTIVITY_PROFILE*, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_SECURITY_PROFILE*, Win32cr::NetworkManagement::WiFi::DOT11_BSS_LIST*, UInt32*, UInt32)*
+  alias DOT11EXTIHV_PERFORM_CAPABILITY_MATCH = Proc(Win32cr::Foundation::HANDLE, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_PROFILE_PARAMS*, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_CONNECTIVITY_PROFILE*, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_SECURITY_PROFILE*, Win32cr::NetworkManagement::WiFi::DOT11_BSS_LIST*, UInt32*, UInt32)
 
-  alias DOT11EXTIHV_CREATE_DISCOVERY_PROFILES = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::BOOL, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_PROFILE_PARAMS*, Win32cr::NetworkManagement::WiFi::DOT11_BSS_LIST*, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_DISCOVERY_PROFILE_LIST*, UInt32*, UInt32)*
+  alias DOT11EXTIHV_CREATE_DISCOVERY_PROFILES = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::BOOL, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_PROFILE_PARAMS*, Win32cr::NetworkManagement::WiFi::DOT11_BSS_LIST*, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_DISCOVERY_PROFILE_LIST*, UInt32*, UInt32)
 
-  alias DOT11EXTIHV_PROCESS_SESSION_CHANGE = Proc(UInt32, Win32cr::System::RemoteDesktop::WTSSESSION_NOTIFICATION*, UInt32)*
+  alias DOT11EXTIHV_PROCESS_SESSION_CHANGE = Proc(UInt32, Win32cr::System::RemoteDesktop::WTSSESSION_NOTIFICATION*, UInt32)
 
-  alias DOT11EXTIHV_RECEIVE_INDICATION = Proc(Win32cr::Foundation::HANDLE, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_INDICATION_TYPE, UInt32, Void*, UInt32)*
+  alias DOT11EXTIHV_RECEIVE_INDICATION = Proc(Win32cr::Foundation::HANDLE, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_INDICATION_TYPE, UInt32, Void*, UInt32)
 
-  alias DOT11EXTIHV_RECEIVE_PACKET = Proc(Win32cr::Foundation::HANDLE, UInt32, Void*, UInt32)*
+  alias DOT11EXTIHV_RECEIVE_PACKET = Proc(Win32cr::Foundation::HANDLE, UInt32, Void*, UInt32)
 
-  alias DOT11EXTIHV_SEND_PACKET_COMPLETION = Proc(Win32cr::Foundation::HANDLE, UInt32)*
+  alias DOT11EXTIHV_SEND_PACKET_COMPLETION = Proc(Win32cr::Foundation::HANDLE, UInt32)
 
-  alias DOT11EXTIHV_IS_UI_REQUEST_PENDING = Proc(LibC::GUID, Win32cr::Foundation::BOOL*, UInt32)*
+  alias DOT11EXTIHV_IS_UI_REQUEST_PENDING = Proc(LibC::GUID, Win32cr::Foundation::BOOL*, UInt32)
 
-  alias DOT11EXTIHV_PROCESS_UI_RESPONSE = Proc(LibC::GUID, UInt32, Void*, UInt32)*
+  alias DOT11EXTIHV_PROCESS_UI_RESPONSE = Proc(LibC::GUID, UInt32, Void*, UInt32)
 
-  alias DOT11EXTIHV_QUERY_UI_REQUEST = Proc(Win32cr::Foundation::HANDLE, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_CONNECTION_PHASE, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_UI_REQUEST**, UInt32)*
+  alias DOT11EXTIHV_QUERY_UI_REQUEST = Proc(Win32cr::Foundation::HANDLE, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_CONNECTION_PHASE, Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_UI_REQUEST**, UInt32)
 
-  alias DOT11EXTIHV_ONEX_INDICATE_RESULT = Proc(Win32cr::Foundation::HANDLE, Win32cr::NetworkManagement::WiFi::DOT11_MSONEX_RESULT, Win32cr::NetworkManagement::WiFi::DOT11_MSONEX_RESULT_PARAMS*, UInt32)*
+  alias DOT11EXTIHV_ONEX_INDICATE_RESULT = Proc(Win32cr::Foundation::HANDLE, Win32cr::NetworkManagement::WiFi::DOT11_MSONEX_RESULT, Win32cr::NetworkManagement::WiFi::DOT11_MSONEX_RESULT_PARAMS*, UInt32)
 
-  alias DOT11EXTIHV_CONTROL = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt8*, UInt32, UInt8*, UInt32*, UInt32)*
+  alias DOT11EXTIHV_CONTROL = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt8*, UInt32, UInt8*, UInt32*, UInt32)
 
   L2_REASON_CODE_DOT11_AC_BASE = 131072_u32
   L2_REASON_CODE_DOT11_MSM_BASE = 196608_u32
@@ -1475,2340 +1475,3175 @@ module Win32cr::NetworkManagement::WiFi
   end
 
   @[Extern]
-  record DOT11_SSID,
-    uSSIDLength : UInt32,
-    ucSSID : UInt8[32]
-
-  @[Extern]
-  record DOT11_AUTH_CIPHER_PAIR,
-    auth_algo_id : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM,
-    cipher_algo_id : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM
-
-  @[Extern]
-  record DOT11_OI,
-    oi_length : UInt16,
-    oi : UInt8[5]
-
-  @[Extern]
-  record DOT11_ACCESSNETWORKOPTIONS,
-    access_network_type : UInt8,
-    internet : UInt8,
-    asra : UInt8,
-    esr : UInt8,
-    uesa : UInt8
-
-  @[Extern]
-  record DOT11_VENUEINFO,
-    venue_group : UInt8,
-    venue_type : UInt8
-
-  @[Extern]
-  record DOT11_BSSID_LIST,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uNumOfEntries : UInt32,
-    uTotalNumOfEntries : UInt32,
-    bssi_ds : UInt8[6]
-
-  @[Extern]
-  record DOT11_RATE_SET,
-    uRateSetLength : UInt32,
-    ucRateSet : UInt8[126]
-
-  @[Extern]
-  record DOT11_WFD_SESSION_INFO,
-    uSessionInfoLength : UInt16,
-    ucSessionInfo : UInt8[144]
-
-  @[Extern]
-  record DOT11_OFFLOAD_CAPABILITY,
-    uReserved : UInt32,
-    uFlags : UInt32,
-    uSupportedWEPAlgorithms : UInt32,
-    uNumOfReplayWindows : UInt32,
-    uMaxWEPKeyMappingLength : UInt32,
-    uSupportedAuthAlgorithms : UInt32,
-    uMaxAuthKeyMappingLength : UInt32
-
-  @[Extern]
-  record DOT11_CURRENT_OFFLOAD_CAPABILITY,
-    uReserved : UInt32,
-    uFlags : UInt32
-
-  @[Extern]
-  record DOT11_IV48_COUNTER,
-    uIV32Counter : UInt32,
-    usIV16Counter : UInt16
-
-  @[Extern]
-  record DOT11_WEP_OFFLOAD,
-    uReserved : UInt32,
-    hOffloadContext : Win32cr::Foundation::HANDLE,
-    hOffload : Win32cr::Foundation::HANDLE,
-    dot11OffloadType : Win32cr::NetworkManagement::WiFi::DOT11_OFFLOAD_TYPE,
-    dwAlgorithm : UInt32,
-    bRowIsOutbound : Win32cr::Foundation::BOOLEAN,
-    bUseDefault : Win32cr::Foundation::BOOLEAN,
-    uFlags : UInt32,
-    ucMacAddress : UInt8[6],
-    uNumOfRWsOnPeer : UInt32,
-    uNumOfRWsOnMe : UInt32,
-    dot11IV48Counters : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER[16],
-    usDot11RWBitMaps : UInt16[16],
-    usKeyLength : UInt16,
-    ucKey : UInt8*
-
-  @[Extern]
-  record DOT11_WEP_UPLOAD,
-    uReserved : UInt32,
-    dot11OffloadType : Win32cr::NetworkManagement::WiFi::DOT11_OFFLOAD_TYPE,
-    hOffload : Win32cr::Foundation::HANDLE,
-    uNumOfRWsUsed : UInt32,
-    dot11IV48Counters : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER[16],
-    usDot11RWBitMaps : UInt16[16]
-
-  @[Extern]
-  record DOT11_DEFAULT_WEP_OFFLOAD,
-    uReserved : UInt32,
-    hOffloadContext : Win32cr::Foundation::HANDLE,
-    hOffload : Win32cr::Foundation::HANDLE,
-    dwIndex : UInt32,
-    dot11OffloadType : Win32cr::NetworkManagement::WiFi::DOT11_OFFLOAD_TYPE,
-    dwAlgorithm : UInt32,
-    uFlags : UInt32,
-    dot11KeyDirection : Win32cr::NetworkManagement::WiFi::DOT11_KEY_DIRECTION,
-    ucMacAddress : UInt8[6],
-    uNumOfRWsOnMe : UInt32,
-    dot11IV48Counters : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER[16],
-    usDot11RWBitMaps : UInt16[16],
-    usKeyLength : UInt16,
-    ucKey : UInt8*
-
-  @[Extern]
-  record DOT11_DEFAULT_WEP_UPLOAD,
-    uReserved : UInt32,
-    dot11OffloadType : Win32cr::NetworkManagement::WiFi::DOT11_OFFLOAD_TYPE,
-    hOffload : Win32cr::Foundation::HANDLE,
-    uNumOfRWsUsed : UInt32,
-    dot11IV48Counters : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER[16],
-    usDot11RWBitMaps : UInt16[16]
-
-  @[Extern]
-  record DOT11_OPERATION_MODE_CAPABILITY,
-    uReserved : UInt32,
-    uMajorVersion : UInt32,
-    uMinorVersion : UInt32,
-    uNumOfTXBuffers : UInt32,
-    uNumOfRXBuffers : UInt32,
-    uOpModeCapability : UInt32
-
-  @[Extern]
-  record DOT11_CURRENT_OPERATION_MODE,
-    uReserved : UInt32,
-    uCurrentOpMode : UInt32
-
-  @[Extern]
-  record DOT11_SCAN_REQUEST,
-    dot11BSSType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE,
-    dot11BSSID : UInt8[6],
-    dot11SSID : Win32cr::NetworkManagement::WiFi::DOT11_SSID,
-    dot11ScanType : Win32cr::NetworkManagement::WiFi::DOT11_SCAN_TYPE,
-    bRestrictedScan : Win32cr::Foundation::BOOLEAN,
-    bUseRequestIE : Win32cr::Foundation::BOOLEAN,
-    uRequestIDsOffset : UInt32,
-    uNumOfRequestIDs : UInt32,
-    uPhyTypesOffset : UInt32,
-    uNumOfPhyTypes : UInt32,
-    uIEsOffset : UInt32,
-    uIEsLength : UInt32,
-    ucBuffer : UInt8*
-
-  @[Extern]
-  record DOT11_PHY_TYPE_INFO,
-    dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE,
-    bUseParameters : Win32cr::Foundation::BOOLEAN,
-    uProbeDelay : UInt32,
-    uMinChannelTime : UInt32,
-    uMaxChannelTime : UInt32,
-    ch_description_type : Win32cr::NetworkManagement::WiFi::CH_DESCRIPTION_TYPE,
-    uChannelListSize : UInt32,
-    ucChannelListBuffer : UInt8*
-
-  @[Extern]
-  record DOT11_SCAN_REQUEST_V2,
-    dot11BSSType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE,
-    dot11BSSID : UInt8[6],
-    dot11ScanType : Win32cr::NetworkManagement::WiFi::DOT11_SCAN_TYPE,
-    bRestrictedScan : Win32cr::Foundation::BOOLEAN,
-    udot11SSIDsOffset : UInt32,
-    uNumOfdot11SSIDs : UInt32,
-    bUseRequestIE : Win32cr::Foundation::BOOLEAN,
-    uRequestIDsOffset : UInt32,
-    uNumOfRequestIDs : UInt32,
-    uPhyTypeInfosOffset : UInt32,
-    uNumOfPhyTypeInfos : UInt32,
-    uIEsOffset : UInt32,
-    uIEsLength : UInt32,
-    ucBuffer : UInt8*
-
-  @[Extern]
-  record DOT11_PHY_TYPE_LIST,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uNumOfEntries : UInt32,
-    uTotalNumOfEntries : UInt32,
-    dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE*
-
-  @[Extern]
-  record DOT11_BSS_DESCRIPTION,
-    uReserved : UInt32,
-    dot11BSSID : UInt8[6],
-    dot11BSSType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE,
-    usBeaconPeriod : UInt16,
-    ullTimestamp : UInt64,
-    usCapabilityInformation : UInt16,
-    uBufferLength : UInt32,
-    ucBuffer : UInt8*
-
-  @[Extern]
-  record DOT11_JOIN_REQUEST,
-    uJoinFailureTimeout : UInt32,
-    operational_rate_set : Win32cr::NetworkManagement::WiFi::DOT11_RATE_SET,
-    uChCenterFrequency : UInt32,
-    dot11BSSDescription : Win32cr::NetworkManagement::WiFi::DOT11_BSS_DESCRIPTION
-
-  @[Extern]
-  record DOT11_START_REQUEST,
-    uStartFailureTimeout : UInt32,
-    operational_rate_set : Win32cr::NetworkManagement::WiFi::DOT11_RATE_SET,
-    uChCenterFrequency : UInt32,
-    dot11BSSDescription : Win32cr::NetworkManagement::WiFi::DOT11_BSS_DESCRIPTION
-
-  @[Extern]
-  record DOT11_UPDATE_IE,
-    dot11UpdateIEOp : Win32cr::NetworkManagement::WiFi::DOT11_UPDATE_IE_OP,
-    uBufferLength : UInt32,
-    ucBuffer : UInt8*
-
-  @[Extern]
-  record DOT11_RESET_REQUEST,
-    dot11ResetType : Win32cr::NetworkManagement::WiFi::DOT11_RESET_TYPE,
-    dot11MacAddress : UInt8[6],
-    bSetDefaultMIB : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record DOT11_OPTIONAL_CAPABILITY,
-    uReserved : UInt32,
-    bDot11PCF : Win32cr::Foundation::BOOLEAN,
-    bDot11PCFMPDUTransferToPC : Win32cr::Foundation::BOOLEAN,
-    bStrictlyOrderedServiceClass : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record DOT11_CURRENT_OPTIONAL_CAPABILITY,
-    uReserved : UInt32,
-    bDot11CFPollable : Win32cr::Foundation::BOOLEAN,
-    bDot11PCF : Win32cr::Foundation::BOOLEAN,
-    bDot11PCFMPDUTransferToPC : Win32cr::Foundation::BOOLEAN,
-    bStrictlyOrderedServiceClass : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record DOT11_POWER_MGMT_MODE,
-    dot11PowerMode : Win32cr::NetworkManagement::WiFi::DOT11_POWER_MODE,
-    uPowerSaveLevel : UInt32,
-    usListenInterval : UInt16,
-    usAID : UInt16,
-    bReceiveDTIMs : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record DOT11_COUNTERS_ENTRY,
-    uTransmittedFragmentCount : UInt32,
-    uMulticastTransmittedFrameCount : UInt32,
-    uFailedCount : UInt32,
-    uRetryCount : UInt32,
-    uMultipleRetryCount : UInt32,
-    uFrameDuplicateCount : UInt32,
-    uRTSSuccessCount : UInt32,
-    uRTSFailureCount : UInt32,
-    uACKFailureCount : UInt32,
-    uReceivedFragmentCount : UInt32,
-    uMulticastReceivedFrameCount : UInt32,
-    uFCSErrorCount : UInt32,
-    uTransmittedFrameCount : UInt32
-
-  @[Extern]
-  record DOT11_SUPPORTED_PHY_TYPES,
-    uNumOfEntries : UInt32,
-    uTotalNumOfEntries : UInt32,
-    dot11PHYType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE*
-
-  @[Extern]
-  record DOT11_SUPPORTED_POWER_LEVELS,
-    uNumOfSupportedPowerLevels : UInt32,
-    uTxPowerLevelValues : UInt32[8]
-
-  @[Extern]
-  record DOT11_REG_DOMAIN_VALUE,
-    uRegDomainsSupportIndex : UInt32,
-    uRegDomainsSupportValue : UInt32
-
-  @[Extern]
-  record DOT11_REG_DOMAINS_SUPPORT_VALUE,
-    uNumOfEntries : UInt32,
-    uTotalNumOfEntries : UInt32,
-    dot11RegDomainValue : Win32cr::NetworkManagement::WiFi::DOT11_REG_DOMAIN_VALUE*
-
-  @[Extern]
-  record DOT11_SUPPORTED_ANTENNA,
-    uAntennaListIndex : UInt32,
-    bSupportedAntenna : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record DOT11_SUPPORTED_ANTENNA_LIST,
-    uNumOfEntries : UInt32,
-    uTotalNumOfEntries : UInt32,
-    dot11SupportedAntenna : Win32cr::NetworkManagement::WiFi::DOT11_SUPPORTED_ANTENNA*
-
-  @[Extern]
-  record DOT11_DIVERSITY_SELECTION_RX,
-    uAntennaListIndex : UInt32,
-    bDiversitySelectionRX : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record DOT11_DIVERSITY_SELECTION_RX_LIST,
-    uNumOfEntries : UInt32,
-    uTotalNumOfEntries : UInt32,
-    dot11DiversitySelectionRx : Win32cr::NetworkManagement::WiFi::DOT11_DIVERSITY_SELECTION_RX*
-
-  @[Extern]
-  record DOT11_SUPPORTED_DATA_RATES_VALUE,
-    ucSupportedTxDataRatesValue : UInt8[8],
-    ucSupportedRxDataRatesValue : UInt8[8]
-
-  @[Extern]
-  record DOT11_SUPPORTED_DATA_RATES_VALUE_V2,
-    ucSupportedTxDataRatesValue : UInt8[255],
-    ucSupportedRxDataRatesValue : UInt8[255]
-
-  @[Extern]
-  record DOT11_MULTI_DOMAIN_CAPABILITY_ENTRY,
-    uMultiDomainCapabilityIndex : UInt32,
-    uFirstChannelNumber : UInt32,
-    uNumberOfChannels : UInt32,
-    lMaximumTransmitPowerLevel : Int32
-
-  @[Extern]
-  record DOT11_MD_CAPABILITY_ENTRY_LIST,
-    uNumOfEntries : UInt32,
-    uTotalNumOfEntries : UInt32,
-    dot11MDCapabilityEntry : Win32cr::NetworkManagement::WiFi::DOT11_MULTI_DOMAIN_CAPABILITY_ENTRY*
-
-  @[Extern]
-  record DOT11_HOPPING_PATTERN_ENTRY,
-    uHoppingPatternIndex : UInt32,
-    uRandomTableFieldNumber : UInt32
-
-  @[Extern]
-  record DOT11_HOPPING_PATTERN_ENTRY_LIST,
-    uNumOfEntries : UInt32,
-    uTotalNumOfEntries : UInt32,
-    dot11HoppingPatternEntry : Win32cr::NetworkManagement::WiFi::DOT11_HOPPING_PATTERN_ENTRY*
-
-  @[Extern]
-  record DOT11_WPA_TSC,
-    uReserved : UInt32,
-    dot11OffloadType : Win32cr::NetworkManagement::WiFi::DOT11_OFFLOAD_TYPE,
-    hOffload : Win32cr::Foundation::HANDLE,
-    dot11IV48Counter : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER
-
-  @[Extern]
-  record DOT11_RSSI_RANGE,
-    dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE,
-    uRSSIMin : UInt32,
-    uRSSIMax : UInt32
-
-  @[Extern]
-  record DOT11_NIC_SPECIFIC_EXTENSION,
-    uBufferLength : UInt32,
-    uTotalBufferLength : UInt32,
-    ucBuffer : UInt8*
-
-  @[Extern]
-  record DOT11_AP_JOIN_REQUEST,
-    uJoinFailureTimeout : UInt32,
-    operational_rate_set : Win32cr::NetworkManagement::WiFi::DOT11_RATE_SET,
-    uChCenterFrequency : UInt32,
-    dot11BSSDescription : Win32cr::NetworkManagement::WiFi::DOT11_BSS_DESCRIPTION
-
-  @[Extern]
-  record DOT11_RECV_SENSITIVITY,
-    ucDataRate : UInt8,
-    lRSSIMin : Int32,
-    lRSSIMax : Int32
-
-  @[Extern]
-  record DOT11_RECV_SENSITIVITY_LIST,
-    anonymous : Anonymous_e__Union_,
-    uNumOfEntries : UInt32,
-    uTotalNumOfEntries : UInt32,
-    dot11RecvSensitivity : Win32cr::NetworkManagement::WiFi::DOT11_RECV_SENSITIVITY* do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE,
-      uPhyId : UInt32
-
+  struct DOT11_SSID
+    property uSSIDLength : UInt32
+    property ucSSID : UInt8[32]
+    def initialize(@uSSIDLength : UInt32, @ucSSID : UInt8[32])
+    end
   end
 
   @[Extern]
-  record DOT11_WME_AC_PARAMETERS,
-    ucAccessCategoryIndex : UInt8,
-    ucAIFSN : UInt8,
-    ucECWmin : UInt8,
-    ucECWmax : UInt8,
-    usTXOPLimit : UInt16
+  struct DOT11_AUTH_CIPHER_PAIR
+    property auth_algo_id : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM
+    property cipher_algo_id : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM
+    def initialize(@auth_algo_id : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM, @cipher_algo_id : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM)
+    end
+  end
 
   @[Extern]
-  record DOT11_WME_AC_PARAMTERS_LIST_,
-    uNumOfEntries : UInt32,
-    uTotalNumOfEntries : UInt32,
-    dot11WMEACParameters : Win32cr::NetworkManagement::WiFi::DOT11_WME_AC_PARAMETERS*
+  struct DOT11_OI
+    property oi_length : UInt16
+    property oi : UInt8[5]
+    def initialize(@oi_length : UInt16, @oi : UInt8[5])
+    end
+  end
 
   @[Extern]
-  record DOT11_WME_UPDATE_IE,
-    uParamElemMinBeaconIntervals : UInt32,
-    uWMEInfoElemOffset : UInt32,
-    uWMEInfoElemLength : UInt32,
-    uWMEParamElemOffset : UInt32,
-    uWMEParamElemLength : UInt32,
-    ucBuffer : UInt8*
+  struct DOT11_ACCESSNETWORKOPTIONS
+    property access_network_type : UInt8
+    property internet : UInt8
+    property asra : UInt8
+    property esr : UInt8
+    property uesa : UInt8
+    def initialize(@access_network_type : UInt8, @internet : UInt8, @asra : UInt8, @esr : UInt8, @uesa : UInt8)
+    end
+  end
 
   @[Extern]
-  record DOT11_QOS_TX_DURATION,
-    uNominalMSDUSize : UInt32,
-    uMinPHYRate : UInt32,
-    uDuration : UInt32
+  struct DOT11_VENUEINFO
+    property venue_group : UInt8
+    property venue_type : UInt8
+    def initialize(@venue_group : UInt8, @venue_type : UInt8)
+    end
+  end
 
   @[Extern]
-  record DOT11_QOS_TX_MEDIUM_TIME,
-    dot11PeerAddress : UInt8[6],
-    ucQoSPriority : UInt8,
-    uMediumTimeAdmited : UInt32
+  struct DOT11_BSSID_LIST
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uNumOfEntries : UInt32
+    property uTotalNumOfEntries : UInt32
+    property bssi_ds : UInt8[6]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @bssi_ds : UInt8[6])
+    end
+  end
 
   @[Extern]
-  record DOT11_SUPPORTED_OFDM_FREQUENCY,
-    uCenterFrequency : UInt32
+  struct DOT11_RATE_SET
+    property uRateSetLength : UInt32
+    property ucRateSet : UInt8[126]
+    def initialize(@uRateSetLength : UInt32, @ucRateSet : UInt8[126])
+    end
+  end
 
   @[Extern]
-  record DOT11_SUPPORTED_OFDM_FREQUENCY_LIST,
-    uNumOfEntries : UInt32,
-    uTotalNumOfEntries : UInt32,
-    dot11SupportedOFDMFrequency : Win32cr::NetworkManagement::WiFi::DOT11_SUPPORTED_OFDM_FREQUENCY*
+  struct DOT11_WFD_SESSION_INFO
+    property uSessionInfoLength : UInt16
+    property ucSessionInfo : UInt8[144]
+    def initialize(@uSessionInfoLength : UInt16, @ucSessionInfo : UInt8[144])
+    end
+  end
 
   @[Extern]
-  record DOT11_SUPPORTED_DSSS_CHANNEL,
-    uChannel : UInt32
+  struct DOT11_OFFLOAD_CAPABILITY
+    property uReserved : UInt32
+    property uFlags : UInt32
+    property uSupportedWEPAlgorithms : UInt32
+    property uNumOfReplayWindows : UInt32
+    property uMaxWEPKeyMappingLength : UInt32
+    property uSupportedAuthAlgorithms : UInt32
+    property uMaxAuthKeyMappingLength : UInt32
+    def initialize(@uReserved : UInt32, @uFlags : UInt32, @uSupportedWEPAlgorithms : UInt32, @uNumOfReplayWindows : UInt32, @uMaxWEPKeyMappingLength : UInt32, @uSupportedAuthAlgorithms : UInt32, @uMaxAuthKeyMappingLength : UInt32)
+    end
+  end
 
   @[Extern]
-  record DOT11_SUPPORTED_DSSS_CHANNEL_LIST,
-    uNumOfEntries : UInt32,
-    uTotalNumOfEntries : UInt32,
-    dot11SupportedDSSSChannel : Win32cr::NetworkManagement::WiFi::DOT11_SUPPORTED_DSSS_CHANNEL*
+  struct DOT11_CURRENT_OFFLOAD_CAPABILITY
+    property uReserved : UInt32
+    property uFlags : UInt32
+    def initialize(@uReserved : UInt32, @uFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record DOT11_BYTE_ARRAY,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uNumOfBytes : UInt32,
-    uTotalNumOfBytes : UInt32,
-    ucBuffer : UInt8*
+  struct DOT11_IV48_COUNTER
+    property uIV32Counter : UInt32
+    property usIV16Counter : UInt16
+    def initialize(@uIV32Counter : UInt32, @usIV16Counter : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WEP_OFFLOAD
+    property uReserved : UInt32
+    property hOffloadContext : Win32cr::Foundation::HANDLE
+    property hOffload : Win32cr::Foundation::HANDLE
+    property dot11OffloadType : Win32cr::NetworkManagement::WiFi::DOT11_OFFLOAD_TYPE
+    property dwAlgorithm : UInt32
+    property bRowIsOutbound : Win32cr::Foundation::BOOLEAN
+    property bUseDefault : Win32cr::Foundation::BOOLEAN
+    property uFlags : UInt32
+    property ucMacAddress : UInt8[6]
+    property uNumOfRWsOnPeer : UInt32
+    property uNumOfRWsOnMe : UInt32
+    property dot11IV48Counters : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER[16]
+    property usDot11RWBitMaps : UInt16[16]
+    property usKeyLength : UInt16
+    property ucKey : UInt8*
+    def initialize(@uReserved : UInt32, @hOffloadContext : Win32cr::Foundation::HANDLE, @hOffload : Win32cr::Foundation::HANDLE, @dot11OffloadType : Win32cr::NetworkManagement::WiFi::DOT11_OFFLOAD_TYPE, @dwAlgorithm : UInt32, @bRowIsOutbound : Win32cr::Foundation::BOOLEAN, @bUseDefault : Win32cr::Foundation::BOOLEAN, @uFlags : UInt32, @ucMacAddress : UInt8[6], @uNumOfRWsOnPeer : UInt32, @uNumOfRWsOnMe : UInt32, @dot11IV48Counters : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER[16], @usDot11RWBitMaps : UInt16[16], @usKeyLength : UInt16, @ucKey : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WEP_UPLOAD
+    property uReserved : UInt32
+    property dot11OffloadType : Win32cr::NetworkManagement::WiFi::DOT11_OFFLOAD_TYPE
+    property hOffload : Win32cr::Foundation::HANDLE
+    property uNumOfRWsUsed : UInt32
+    property dot11IV48Counters : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER[16]
+    property usDot11RWBitMaps : UInt16[16]
+    def initialize(@uReserved : UInt32, @dot11OffloadType : Win32cr::NetworkManagement::WiFi::DOT11_OFFLOAD_TYPE, @hOffload : Win32cr::Foundation::HANDLE, @uNumOfRWsUsed : UInt32, @dot11IV48Counters : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER[16], @usDot11RWBitMaps : UInt16[16])
+    end
+  end
+
+  @[Extern]
+  struct DOT11_DEFAULT_WEP_OFFLOAD
+    property uReserved : UInt32
+    property hOffloadContext : Win32cr::Foundation::HANDLE
+    property hOffload : Win32cr::Foundation::HANDLE
+    property dwIndex : UInt32
+    property dot11OffloadType : Win32cr::NetworkManagement::WiFi::DOT11_OFFLOAD_TYPE
+    property dwAlgorithm : UInt32
+    property uFlags : UInt32
+    property dot11KeyDirection : Win32cr::NetworkManagement::WiFi::DOT11_KEY_DIRECTION
+    property ucMacAddress : UInt8[6]
+    property uNumOfRWsOnMe : UInt32
+    property dot11IV48Counters : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER[16]
+    property usDot11RWBitMaps : UInt16[16]
+    property usKeyLength : UInt16
+    property ucKey : UInt8*
+    def initialize(@uReserved : UInt32, @hOffloadContext : Win32cr::Foundation::HANDLE, @hOffload : Win32cr::Foundation::HANDLE, @dwIndex : UInt32, @dot11OffloadType : Win32cr::NetworkManagement::WiFi::DOT11_OFFLOAD_TYPE, @dwAlgorithm : UInt32, @uFlags : UInt32, @dot11KeyDirection : Win32cr::NetworkManagement::WiFi::DOT11_KEY_DIRECTION, @ucMacAddress : UInt8[6], @uNumOfRWsOnMe : UInt32, @dot11IV48Counters : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER[16], @usDot11RWBitMaps : UInt16[16], @usKeyLength : UInt16, @ucKey : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_DEFAULT_WEP_UPLOAD
+    property uReserved : UInt32
+    property dot11OffloadType : Win32cr::NetworkManagement::WiFi::DOT11_OFFLOAD_TYPE
+    property hOffload : Win32cr::Foundation::HANDLE
+    property uNumOfRWsUsed : UInt32
+    property dot11IV48Counters : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER[16]
+    property usDot11RWBitMaps : UInt16[16]
+    def initialize(@uReserved : UInt32, @dot11OffloadType : Win32cr::NetworkManagement::WiFi::DOT11_OFFLOAD_TYPE, @hOffload : Win32cr::Foundation::HANDLE, @uNumOfRWsUsed : UInt32, @dot11IV48Counters : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER[16], @usDot11RWBitMaps : UInt16[16])
+    end
+  end
+
+  @[Extern]
+  struct DOT11_OPERATION_MODE_CAPABILITY
+    property uReserved : UInt32
+    property uMajorVersion : UInt32
+    property uMinorVersion : UInt32
+    property uNumOfTXBuffers : UInt32
+    property uNumOfRXBuffers : UInt32
+    property uOpModeCapability : UInt32
+    def initialize(@uReserved : UInt32, @uMajorVersion : UInt32, @uMinorVersion : UInt32, @uNumOfTXBuffers : UInt32, @uNumOfRXBuffers : UInt32, @uOpModeCapability : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_CURRENT_OPERATION_MODE
+    property uReserved : UInt32
+    property uCurrentOpMode : UInt32
+    def initialize(@uReserved : UInt32, @uCurrentOpMode : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_SCAN_REQUEST
+    property dot11BSSType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE
+    property dot11BSSID : UInt8[6]
+    property dot11SSID : Win32cr::NetworkManagement::WiFi::DOT11_SSID
+    property dot11ScanType : Win32cr::NetworkManagement::WiFi::DOT11_SCAN_TYPE
+    property bRestrictedScan : Win32cr::Foundation::BOOLEAN
+    property bUseRequestIE : Win32cr::Foundation::BOOLEAN
+    property uRequestIDsOffset : UInt32
+    property uNumOfRequestIDs : UInt32
+    property uPhyTypesOffset : UInt32
+    property uNumOfPhyTypes : UInt32
+    property uIEsOffset : UInt32
+    property uIEsLength : UInt32
+    property ucBuffer : UInt8*
+    def initialize(@dot11BSSType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, @dot11BSSID : UInt8[6], @dot11SSID : Win32cr::NetworkManagement::WiFi::DOT11_SSID, @dot11ScanType : Win32cr::NetworkManagement::WiFi::DOT11_SCAN_TYPE, @bRestrictedScan : Win32cr::Foundation::BOOLEAN, @bUseRequestIE : Win32cr::Foundation::BOOLEAN, @uRequestIDsOffset : UInt32, @uNumOfRequestIDs : UInt32, @uPhyTypesOffset : UInt32, @uNumOfPhyTypes : UInt32, @uIEsOffset : UInt32, @uIEsLength : UInt32, @ucBuffer : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_PHY_TYPE_INFO
+    property dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE
+    property bUseParameters : Win32cr::Foundation::BOOLEAN
+    property uProbeDelay : UInt32
+    property uMinChannelTime : UInt32
+    property uMaxChannelTime : UInt32
+    property ch_description_type : Win32cr::NetworkManagement::WiFi::CH_DESCRIPTION_TYPE
+    property uChannelListSize : UInt32
+    property ucChannelListBuffer : UInt8*
+    def initialize(@dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE, @bUseParameters : Win32cr::Foundation::BOOLEAN, @uProbeDelay : UInt32, @uMinChannelTime : UInt32, @uMaxChannelTime : UInt32, @ch_description_type : Win32cr::NetworkManagement::WiFi::CH_DESCRIPTION_TYPE, @uChannelListSize : UInt32, @ucChannelListBuffer : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_SCAN_REQUEST_V2
+    property dot11BSSType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE
+    property dot11BSSID : UInt8[6]
+    property dot11ScanType : Win32cr::NetworkManagement::WiFi::DOT11_SCAN_TYPE
+    property bRestrictedScan : Win32cr::Foundation::BOOLEAN
+    property udot11SSIDsOffset : UInt32
+    property uNumOfdot11SSIDs : UInt32
+    property bUseRequestIE : Win32cr::Foundation::BOOLEAN
+    property uRequestIDsOffset : UInt32
+    property uNumOfRequestIDs : UInt32
+    property uPhyTypeInfosOffset : UInt32
+    property uNumOfPhyTypeInfos : UInt32
+    property uIEsOffset : UInt32
+    property uIEsLength : UInt32
+    property ucBuffer : UInt8*
+    def initialize(@dot11BSSType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, @dot11BSSID : UInt8[6], @dot11ScanType : Win32cr::NetworkManagement::WiFi::DOT11_SCAN_TYPE, @bRestrictedScan : Win32cr::Foundation::BOOLEAN, @udot11SSIDsOffset : UInt32, @uNumOfdot11SSIDs : UInt32, @bUseRequestIE : Win32cr::Foundation::BOOLEAN, @uRequestIDsOffset : UInt32, @uNumOfRequestIDs : UInt32, @uPhyTypeInfosOffset : UInt32, @uNumOfPhyTypeInfos : UInt32, @uIEsOffset : UInt32, @uIEsLength : UInt32, @ucBuffer : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_PHY_TYPE_LIST
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uNumOfEntries : UInt32
+    property uTotalNumOfEntries : UInt32
+    property dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE*
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_BSS_DESCRIPTION
+    property uReserved : UInt32
+    property dot11BSSID : UInt8[6]
+    property dot11BSSType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE
+    property usBeaconPeriod : UInt16
+    property ullTimestamp : UInt64
+    property usCapabilityInformation : UInt16
+    property uBufferLength : UInt32
+    property ucBuffer : UInt8*
+    def initialize(@uReserved : UInt32, @dot11BSSID : UInt8[6], @dot11BSSType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, @usBeaconPeriod : UInt16, @ullTimestamp : UInt64, @usCapabilityInformation : UInt16, @uBufferLength : UInt32, @ucBuffer : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_JOIN_REQUEST
+    property uJoinFailureTimeout : UInt32
+    property operational_rate_set : Win32cr::NetworkManagement::WiFi::DOT11_RATE_SET
+    property uChCenterFrequency : UInt32
+    property dot11BSSDescription : Win32cr::NetworkManagement::WiFi::DOT11_BSS_DESCRIPTION
+    def initialize(@uJoinFailureTimeout : UInt32, @operational_rate_set : Win32cr::NetworkManagement::WiFi::DOT11_RATE_SET, @uChCenterFrequency : UInt32, @dot11BSSDescription : Win32cr::NetworkManagement::WiFi::DOT11_BSS_DESCRIPTION)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_START_REQUEST
+    property uStartFailureTimeout : UInt32
+    property operational_rate_set : Win32cr::NetworkManagement::WiFi::DOT11_RATE_SET
+    property uChCenterFrequency : UInt32
+    property dot11BSSDescription : Win32cr::NetworkManagement::WiFi::DOT11_BSS_DESCRIPTION
+    def initialize(@uStartFailureTimeout : UInt32, @operational_rate_set : Win32cr::NetworkManagement::WiFi::DOT11_RATE_SET, @uChCenterFrequency : UInt32, @dot11BSSDescription : Win32cr::NetworkManagement::WiFi::DOT11_BSS_DESCRIPTION)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_UPDATE_IE
+    property dot11UpdateIEOp : Win32cr::NetworkManagement::WiFi::DOT11_UPDATE_IE_OP
+    property uBufferLength : UInt32
+    property ucBuffer : UInt8*
+    def initialize(@dot11UpdateIEOp : Win32cr::NetworkManagement::WiFi::DOT11_UPDATE_IE_OP, @uBufferLength : UInt32, @ucBuffer : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_RESET_REQUEST
+    property dot11ResetType : Win32cr::NetworkManagement::WiFi::DOT11_RESET_TYPE
+    property dot11MacAddress : UInt8[6]
+    property bSetDefaultMIB : Win32cr::Foundation::BOOLEAN
+    def initialize(@dot11ResetType : Win32cr::NetworkManagement::WiFi::DOT11_RESET_TYPE, @dot11MacAddress : UInt8[6], @bSetDefaultMIB : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_OPTIONAL_CAPABILITY
+    property uReserved : UInt32
+    property bDot11PCF : Win32cr::Foundation::BOOLEAN
+    property bDot11PCFMPDUTransferToPC : Win32cr::Foundation::BOOLEAN
+    property bStrictlyOrderedServiceClass : Win32cr::Foundation::BOOLEAN
+    def initialize(@uReserved : UInt32, @bDot11PCF : Win32cr::Foundation::BOOLEAN, @bDot11PCFMPDUTransferToPC : Win32cr::Foundation::BOOLEAN, @bStrictlyOrderedServiceClass : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_CURRENT_OPTIONAL_CAPABILITY
+    property uReserved : UInt32
+    property bDot11CFPollable : Win32cr::Foundation::BOOLEAN
+    property bDot11PCF : Win32cr::Foundation::BOOLEAN
+    property bDot11PCFMPDUTransferToPC : Win32cr::Foundation::BOOLEAN
+    property bStrictlyOrderedServiceClass : Win32cr::Foundation::BOOLEAN
+    def initialize(@uReserved : UInt32, @bDot11CFPollable : Win32cr::Foundation::BOOLEAN, @bDot11PCF : Win32cr::Foundation::BOOLEAN, @bDot11PCFMPDUTransferToPC : Win32cr::Foundation::BOOLEAN, @bStrictlyOrderedServiceClass : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_POWER_MGMT_MODE
+    property dot11PowerMode : Win32cr::NetworkManagement::WiFi::DOT11_POWER_MODE
+    property uPowerSaveLevel : UInt32
+    property usListenInterval : UInt16
+    property usAID : UInt16
+    property bReceiveDTIMs : Win32cr::Foundation::BOOLEAN
+    def initialize(@dot11PowerMode : Win32cr::NetworkManagement::WiFi::DOT11_POWER_MODE, @uPowerSaveLevel : UInt32, @usListenInterval : UInt16, @usAID : UInt16, @bReceiveDTIMs : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_COUNTERS_ENTRY
+    property uTransmittedFragmentCount : UInt32
+    property uMulticastTransmittedFrameCount : UInt32
+    property uFailedCount : UInt32
+    property uRetryCount : UInt32
+    property uMultipleRetryCount : UInt32
+    property uFrameDuplicateCount : UInt32
+    property uRTSSuccessCount : UInt32
+    property uRTSFailureCount : UInt32
+    property uACKFailureCount : UInt32
+    property uReceivedFragmentCount : UInt32
+    property uMulticastReceivedFrameCount : UInt32
+    property uFCSErrorCount : UInt32
+    property uTransmittedFrameCount : UInt32
+    def initialize(@uTransmittedFragmentCount : UInt32, @uMulticastTransmittedFrameCount : UInt32, @uFailedCount : UInt32, @uRetryCount : UInt32, @uMultipleRetryCount : UInt32, @uFrameDuplicateCount : UInt32, @uRTSSuccessCount : UInt32, @uRTSFailureCount : UInt32, @uACKFailureCount : UInt32, @uReceivedFragmentCount : UInt32, @uMulticastReceivedFrameCount : UInt32, @uFCSErrorCount : UInt32, @uTransmittedFrameCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_SUPPORTED_PHY_TYPES
+    property uNumOfEntries : UInt32
+    property uTotalNumOfEntries : UInt32
+    property dot11PHYType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE*
+    def initialize(@uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11PHYType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_SUPPORTED_POWER_LEVELS
+    property uNumOfSupportedPowerLevels : UInt32
+    property uTxPowerLevelValues : UInt32[8]
+    def initialize(@uNumOfSupportedPowerLevels : UInt32, @uTxPowerLevelValues : UInt32[8])
+    end
+  end
+
+  @[Extern]
+  struct DOT11_REG_DOMAIN_VALUE
+    property uRegDomainsSupportIndex : UInt32
+    property uRegDomainsSupportValue : UInt32
+    def initialize(@uRegDomainsSupportIndex : UInt32, @uRegDomainsSupportValue : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_REG_DOMAINS_SUPPORT_VALUE
+    property uNumOfEntries : UInt32
+    property uTotalNumOfEntries : UInt32
+    property dot11RegDomainValue : Win32cr::NetworkManagement::WiFi::DOT11_REG_DOMAIN_VALUE*
+    def initialize(@uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11RegDomainValue : Win32cr::NetworkManagement::WiFi::DOT11_REG_DOMAIN_VALUE*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_SUPPORTED_ANTENNA
+    property uAntennaListIndex : UInt32
+    property bSupportedAntenna : Win32cr::Foundation::BOOLEAN
+    def initialize(@uAntennaListIndex : UInt32, @bSupportedAntenna : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_SUPPORTED_ANTENNA_LIST
+    property uNumOfEntries : UInt32
+    property uTotalNumOfEntries : UInt32
+    property dot11SupportedAntenna : Win32cr::NetworkManagement::WiFi::DOT11_SUPPORTED_ANTENNA*
+    def initialize(@uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11SupportedAntenna : Win32cr::NetworkManagement::WiFi::DOT11_SUPPORTED_ANTENNA*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_DIVERSITY_SELECTION_RX
+    property uAntennaListIndex : UInt32
+    property bDiversitySelectionRX : Win32cr::Foundation::BOOLEAN
+    def initialize(@uAntennaListIndex : UInt32, @bDiversitySelectionRX : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_DIVERSITY_SELECTION_RX_LIST
+    property uNumOfEntries : UInt32
+    property uTotalNumOfEntries : UInt32
+    property dot11DiversitySelectionRx : Win32cr::NetworkManagement::WiFi::DOT11_DIVERSITY_SELECTION_RX*
+    def initialize(@uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11DiversitySelectionRx : Win32cr::NetworkManagement::WiFi::DOT11_DIVERSITY_SELECTION_RX*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_SUPPORTED_DATA_RATES_VALUE
+    property ucSupportedTxDataRatesValue : UInt8[8]
+    property ucSupportedRxDataRatesValue : UInt8[8]
+    def initialize(@ucSupportedTxDataRatesValue : UInt8[8], @ucSupportedRxDataRatesValue : UInt8[8])
+    end
+  end
+
+  @[Extern]
+  struct DOT11_SUPPORTED_DATA_RATES_VALUE_V2
+    property ucSupportedTxDataRatesValue : UInt8[255]
+    property ucSupportedRxDataRatesValue : UInt8[255]
+    def initialize(@ucSupportedTxDataRatesValue : UInt8[255], @ucSupportedRxDataRatesValue : UInt8[255])
+    end
+  end
+
+  @[Extern]
+  struct DOT11_MULTI_DOMAIN_CAPABILITY_ENTRY
+    property uMultiDomainCapabilityIndex : UInt32
+    property uFirstChannelNumber : UInt32
+    property uNumberOfChannels : UInt32
+    property lMaximumTransmitPowerLevel : Int32
+    def initialize(@uMultiDomainCapabilityIndex : UInt32, @uFirstChannelNumber : UInt32, @uNumberOfChannels : UInt32, @lMaximumTransmitPowerLevel : Int32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_MD_CAPABILITY_ENTRY_LIST
+    property uNumOfEntries : UInt32
+    property uTotalNumOfEntries : UInt32
+    property dot11MDCapabilityEntry : Win32cr::NetworkManagement::WiFi::DOT11_MULTI_DOMAIN_CAPABILITY_ENTRY*
+    def initialize(@uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11MDCapabilityEntry : Win32cr::NetworkManagement::WiFi::DOT11_MULTI_DOMAIN_CAPABILITY_ENTRY*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_HOPPING_PATTERN_ENTRY
+    property uHoppingPatternIndex : UInt32
+    property uRandomTableFieldNumber : UInt32
+    def initialize(@uHoppingPatternIndex : UInt32, @uRandomTableFieldNumber : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_HOPPING_PATTERN_ENTRY_LIST
+    property uNumOfEntries : UInt32
+    property uTotalNumOfEntries : UInt32
+    property dot11HoppingPatternEntry : Win32cr::NetworkManagement::WiFi::DOT11_HOPPING_PATTERN_ENTRY*
+    def initialize(@uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11HoppingPatternEntry : Win32cr::NetworkManagement::WiFi::DOT11_HOPPING_PATTERN_ENTRY*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WPA_TSC
+    property uReserved : UInt32
+    property dot11OffloadType : Win32cr::NetworkManagement::WiFi::DOT11_OFFLOAD_TYPE
+    property hOffload : Win32cr::Foundation::HANDLE
+    property dot11IV48Counter : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER
+    def initialize(@uReserved : UInt32, @dot11OffloadType : Win32cr::NetworkManagement::WiFi::DOT11_OFFLOAD_TYPE, @hOffload : Win32cr::Foundation::HANDLE, @dot11IV48Counter : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_RSSI_RANGE
+    property dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE
+    property uRSSIMin : UInt32
+    property uRSSIMax : UInt32
+    def initialize(@dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE, @uRSSIMin : UInt32, @uRSSIMax : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_NIC_SPECIFIC_EXTENSION
+    property uBufferLength : UInt32
+    property uTotalBufferLength : UInt32
+    property ucBuffer : UInt8*
+    def initialize(@uBufferLength : UInt32, @uTotalBufferLength : UInt32, @ucBuffer : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_AP_JOIN_REQUEST
+    property uJoinFailureTimeout : UInt32
+    property operational_rate_set : Win32cr::NetworkManagement::WiFi::DOT11_RATE_SET
+    property uChCenterFrequency : UInt32
+    property dot11BSSDescription : Win32cr::NetworkManagement::WiFi::DOT11_BSS_DESCRIPTION
+    def initialize(@uJoinFailureTimeout : UInt32, @operational_rate_set : Win32cr::NetworkManagement::WiFi::DOT11_RATE_SET, @uChCenterFrequency : UInt32, @dot11BSSDescription : Win32cr::NetworkManagement::WiFi::DOT11_BSS_DESCRIPTION)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_RECV_SENSITIVITY
+    property ucDataRate : UInt8
+    property lRSSIMin : Int32
+    property lRSSIMax : Int32
+    def initialize(@ucDataRate : UInt8, @lRSSIMin : Int32, @lRSSIMax : Int32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_RECV_SENSITIVITY_LIST
+    property anonymous : Anonymous_e__Union_
+    property uNumOfEntries : UInt32
+    property uTotalNumOfEntries : UInt32
+    property dot11RecvSensitivity : Win32cr::NetworkManagement::WiFi::DOT11_RECV_SENSITIVITY*
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE
+    property uPhyId : UInt32
+    def initialize(@dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE, @uPhyId : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Union_, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11RecvSensitivity : Win32cr::NetworkManagement::WiFi::DOT11_RECV_SENSITIVITY*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WME_AC_PARAMETERS
+    property ucAccessCategoryIndex : UInt8
+    property ucAIFSN : UInt8
+    property ucECWmin : UInt8
+    property ucECWmax : UInt8
+    property usTXOPLimit : UInt16
+    def initialize(@ucAccessCategoryIndex : UInt8, @ucAIFSN : UInt8, @ucECWmin : UInt8, @ucECWmax : UInt8, @usTXOPLimit : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WME_AC_PARAMTERS_LIST_
+    property uNumOfEntries : UInt32
+    property uTotalNumOfEntries : UInt32
+    property dot11WMEACParameters : Win32cr::NetworkManagement::WiFi::DOT11_WME_AC_PARAMETERS*
+    def initialize(@uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11WMEACParameters : Win32cr::NetworkManagement::WiFi::DOT11_WME_AC_PARAMETERS*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WME_UPDATE_IE
+    property uParamElemMinBeaconIntervals : UInt32
+    property uWMEInfoElemOffset : UInt32
+    property uWMEInfoElemLength : UInt32
+    property uWMEParamElemOffset : UInt32
+    property uWMEParamElemLength : UInt32
+    property ucBuffer : UInt8*
+    def initialize(@uParamElemMinBeaconIntervals : UInt32, @uWMEInfoElemOffset : UInt32, @uWMEInfoElemLength : UInt32, @uWMEParamElemOffset : UInt32, @uWMEParamElemLength : UInt32, @ucBuffer : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_QOS_TX_DURATION
+    property uNominalMSDUSize : UInt32
+    property uMinPHYRate : UInt32
+    property uDuration : UInt32
+    def initialize(@uNominalMSDUSize : UInt32, @uMinPHYRate : UInt32, @uDuration : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_QOS_TX_MEDIUM_TIME
+    property dot11PeerAddress : UInt8[6]
+    property ucQoSPriority : UInt8
+    property uMediumTimeAdmited : UInt32
+    def initialize(@dot11PeerAddress : UInt8[6], @ucQoSPriority : UInt8, @uMediumTimeAdmited : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_SUPPORTED_OFDM_FREQUENCY
+    property uCenterFrequency : UInt32
+    def initialize(@uCenterFrequency : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_SUPPORTED_OFDM_FREQUENCY_LIST
+    property uNumOfEntries : UInt32
+    property uTotalNumOfEntries : UInt32
+    property dot11SupportedOFDMFrequency : Win32cr::NetworkManagement::WiFi::DOT11_SUPPORTED_OFDM_FREQUENCY*
+    def initialize(@uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11SupportedOFDMFrequency : Win32cr::NetworkManagement::WiFi::DOT11_SUPPORTED_OFDM_FREQUENCY*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_SUPPORTED_DSSS_CHANNEL
+    property uChannel : UInt32
+    def initialize(@uChannel : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_SUPPORTED_DSSS_CHANNEL_LIST
+    property uNumOfEntries : UInt32
+    property uTotalNumOfEntries : UInt32
+    property dot11SupportedDSSSChannel : Win32cr::NetworkManagement::WiFi::DOT11_SUPPORTED_DSSS_CHANNEL*
+    def initialize(@uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11SupportedDSSSChannel : Win32cr::NetworkManagement::WiFi::DOT11_SUPPORTED_DSSS_CHANNEL*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_BYTE_ARRAY
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uNumOfBytes : UInt32
+    property uTotalNumOfBytes : UInt32
+    property ucBuffer : UInt8*
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfBytes : UInt32, @uTotalNumOfBytes : UInt32, @ucBuffer : UInt8*)
+    end
+  end
 
   @[Extern(union: true)]
-  record DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO,
-    uChCenterFrequency : UInt32,
-    fhss : FHSS_e__Struct_ do
+  struct DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO
+    property uChCenterFrequency : UInt32
+    property fhss : FHSS_e__Struct_
 
     # Nested Type FHSS_e__Struct_
     @[Extern]
-    record FHSS_e__Struct_,
-      uHopPattern : UInt32,
-      uHopSet : UInt32,
-      uDwellTime : UInt32
+    struct FHSS_e__Struct_
+    property uHopPattern : UInt32
+    property uHopSet : UInt32
+    property uDwellTime : UInt32
+    def initialize(@uHopPattern : UInt32, @uHopSet : UInt32, @uDwellTime : UInt32)
+    end
+    end
 
+    def initialize(@uChCenterFrequency : UInt32, @fhss : FHSS_e__Struct_)
+    end
   end
 
   @[Extern]
-  record DOT11_BSS_ENTRY,
-    uPhyId : UInt32,
-    phy_specific_info : Win32cr::NetworkManagement::WiFi::DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO,
-    dot11BSSID : UInt8[6],
-    dot11BSSType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE,
-    lRSSI : Int32,
-    uLinkQuality : UInt32,
-    bInRegDomain : Win32cr::Foundation::BOOLEAN,
-    usBeaconPeriod : UInt16,
-    ullTimestamp : UInt64,
-    ullHostTimestamp : UInt64,
-    usCapabilityInformation : UInt16,
-    uBufferLength : UInt32,
-    ucBuffer : UInt8*
+  struct DOT11_BSS_ENTRY
+    property uPhyId : UInt32
+    property phy_specific_info : Win32cr::NetworkManagement::WiFi::DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO
+    property dot11BSSID : UInt8[6]
+    property dot11BSSType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE
+    property lRSSI : Int32
+    property uLinkQuality : UInt32
+    property bInRegDomain : Win32cr::Foundation::BOOLEAN
+    property usBeaconPeriod : UInt16
+    property ullTimestamp : UInt64
+    property ullHostTimestamp : UInt64
+    property usCapabilityInformation : UInt16
+    property uBufferLength : UInt32
+    property ucBuffer : UInt8*
+    def initialize(@uPhyId : UInt32, @phy_specific_info : Win32cr::NetworkManagement::WiFi::DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO, @dot11BSSID : UInt8[6], @dot11BSSType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, @lRSSI : Int32, @uLinkQuality : UInt32, @bInRegDomain : Win32cr::Foundation::BOOLEAN, @usBeaconPeriod : UInt16, @ullTimestamp : UInt64, @ullHostTimestamp : UInt64, @usCapabilityInformation : UInt16, @uBufferLength : UInt32, @ucBuffer : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DOT11_SSID_LIST,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uNumOfEntries : UInt32,
-    uTotalNumOfEntries : UInt32,
-    ssi_ds : Win32cr::NetworkManagement::WiFi::DOT11_SSID*
+  struct DOT11_SSID_LIST
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uNumOfEntries : UInt32
+    property uTotalNumOfEntries : UInt32
+    property ssi_ds : Win32cr::NetworkManagement::WiFi::DOT11_SSID*
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @ssi_ds : Win32cr::NetworkManagement::WiFi::DOT11_SSID*)
+    end
+  end
 
   @[Extern]
-  record DOT11_MAC_ADDRESS_LIST,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uNumOfEntries : UInt32,
-    uTotalNumOfEntries : UInt32,
-    mac_addrs : UInt8[6]
+  struct DOT11_MAC_ADDRESS_LIST
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uNumOfEntries : UInt32
+    property uTotalNumOfEntries : UInt32
+    property mac_addrs : UInt8[6]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @mac_addrs : UInt8[6])
+    end
+  end
 
   @[Extern]
-  record DOT11_PMKID_ENTRY,
-    bssid : UInt8[6],
-    pmkid : UInt8[16],
-    uFlags : UInt32
+  struct DOT11_PMKID_ENTRY
+    property bssid : UInt8[6]
+    property pmkid : UInt8[16]
+    property uFlags : UInt32
+    def initialize(@bssid : UInt8[6], @pmkid : UInt8[16], @uFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record DOT11_PMKID_LIST,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uNumOfEntries : UInt32,
-    uTotalNumOfEntries : UInt32,
-    pmki_ds : Win32cr::NetworkManagement::WiFi::DOT11_PMKID_ENTRY*
+  struct DOT11_PMKID_LIST
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uNumOfEntries : UInt32
+    property uTotalNumOfEntries : UInt32
+    property pmki_ds : Win32cr::NetworkManagement::WiFi::DOT11_PMKID_ENTRY*
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @pmki_ds : Win32cr::NetworkManagement::WiFi::DOT11_PMKID_ENTRY*)
+    end
+  end
 
   @[Extern]
-  record DOT11_PHY_FRAME_STATISTICS,
-    ullTransmittedFrameCount : UInt64,
-    ullMulticastTransmittedFrameCount : UInt64,
-    ullFailedCount : UInt64,
-    ullRetryCount : UInt64,
-    ullMultipleRetryCount : UInt64,
-    ullMaxTXLifetimeExceededCount : UInt64,
-    ullTransmittedFragmentCount : UInt64,
-    ullRTSSuccessCount : UInt64,
-    ullRTSFailureCount : UInt64,
-    ullACKFailureCount : UInt64,
-    ullReceivedFrameCount : UInt64,
-    ullMulticastReceivedFrameCount : UInt64,
-    ullPromiscuousReceivedFrameCount : UInt64,
-    ullMaxRXLifetimeExceededCount : UInt64,
-    ullFrameDuplicateCount : UInt64,
-    ullReceivedFragmentCount : UInt64,
-    ullPromiscuousReceivedFragmentCount : UInt64,
-    ullFCSErrorCount : UInt64
+  struct DOT11_PHY_FRAME_STATISTICS
+    property ullTransmittedFrameCount : UInt64
+    property ullMulticastTransmittedFrameCount : UInt64
+    property ullFailedCount : UInt64
+    property ullRetryCount : UInt64
+    property ullMultipleRetryCount : UInt64
+    property ullMaxTXLifetimeExceededCount : UInt64
+    property ullTransmittedFragmentCount : UInt64
+    property ullRTSSuccessCount : UInt64
+    property ullRTSFailureCount : UInt64
+    property ullACKFailureCount : UInt64
+    property ullReceivedFrameCount : UInt64
+    property ullMulticastReceivedFrameCount : UInt64
+    property ullPromiscuousReceivedFrameCount : UInt64
+    property ullMaxRXLifetimeExceededCount : UInt64
+    property ullFrameDuplicateCount : UInt64
+    property ullReceivedFragmentCount : UInt64
+    property ullPromiscuousReceivedFragmentCount : UInt64
+    property ullFCSErrorCount : UInt64
+    def initialize(@ullTransmittedFrameCount : UInt64, @ullMulticastTransmittedFrameCount : UInt64, @ullFailedCount : UInt64, @ullRetryCount : UInt64, @ullMultipleRetryCount : UInt64, @ullMaxTXLifetimeExceededCount : UInt64, @ullTransmittedFragmentCount : UInt64, @ullRTSSuccessCount : UInt64, @ullRTSFailureCount : UInt64, @ullACKFailureCount : UInt64, @ullReceivedFrameCount : UInt64, @ullMulticastReceivedFrameCount : UInt64, @ullPromiscuousReceivedFrameCount : UInt64, @ullMaxRXLifetimeExceededCount : UInt64, @ullFrameDuplicateCount : UInt64, @ullReceivedFragmentCount : UInt64, @ullPromiscuousReceivedFragmentCount : UInt64, @ullFCSErrorCount : UInt64)
+    end
+  end
 
   @[Extern]
-  record DOT11_MAC_FRAME_STATISTICS,
-    ullTransmittedFrameCount : UInt64,
-    ullReceivedFrameCount : UInt64,
-    ullTransmittedFailureFrameCount : UInt64,
-    ullReceivedFailureFrameCount : UInt64,
-    ullWEPExcludedCount : UInt64,
-    ullTKIPLocalMICFailures : UInt64,
-    ullTKIPReplays : UInt64,
-    ullTKIPICVErrorCount : UInt64,
-    ullCCMPReplays : UInt64,
-    ullCCMPDecryptErrors : UInt64,
-    ullWEPUndecryptableCount : UInt64,
-    ullWEPICVErrorCount : UInt64,
-    ullDecryptSuccessCount : UInt64,
-    ullDecryptFailureCount : UInt64
+  struct DOT11_MAC_FRAME_STATISTICS
+    property ullTransmittedFrameCount : UInt64
+    property ullReceivedFrameCount : UInt64
+    property ullTransmittedFailureFrameCount : UInt64
+    property ullReceivedFailureFrameCount : UInt64
+    property ullWEPExcludedCount : UInt64
+    property ullTKIPLocalMICFailures : UInt64
+    property ullTKIPReplays : UInt64
+    property ullTKIPICVErrorCount : UInt64
+    property ullCCMPReplays : UInt64
+    property ullCCMPDecryptErrors : UInt64
+    property ullWEPUndecryptableCount : UInt64
+    property ullWEPICVErrorCount : UInt64
+    property ullDecryptSuccessCount : UInt64
+    property ullDecryptFailureCount : UInt64
+    def initialize(@ullTransmittedFrameCount : UInt64, @ullReceivedFrameCount : UInt64, @ullTransmittedFailureFrameCount : UInt64, @ullReceivedFailureFrameCount : UInt64, @ullWEPExcludedCount : UInt64, @ullTKIPLocalMICFailures : UInt64, @ullTKIPReplays : UInt64, @ullTKIPICVErrorCount : UInt64, @ullCCMPReplays : UInt64, @ullCCMPDecryptErrors : UInt64, @ullWEPUndecryptableCount : UInt64, @ullWEPICVErrorCount : UInt64, @ullDecryptSuccessCount : UInt64, @ullDecryptFailureCount : UInt64)
+    end
+  end
 
   @[Extern]
-  record DOT11_STATISTICS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    ullFourWayHandshakeFailures : UInt64,
-    ullTKIPCounterMeasuresInvoked : UInt64,
-    ullReserved : UInt64,
-    mac_ucast_counters : Win32cr::NetworkManagement::WiFi::DOT11_MAC_FRAME_STATISTICS,
-    mac_mcast_counters : Win32cr::NetworkManagement::WiFi::DOT11_MAC_FRAME_STATISTICS,
-    phy_counters : Win32cr::NetworkManagement::WiFi::DOT11_PHY_FRAME_STATISTICS*
+  struct DOT11_STATISTICS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property ullFourWayHandshakeFailures : UInt64
+    property ullTKIPCounterMeasuresInvoked : UInt64
+    property ullReserved : UInt64
+    property mac_ucast_counters : Win32cr::NetworkManagement::WiFi::DOT11_MAC_FRAME_STATISTICS
+    property mac_mcast_counters : Win32cr::NetworkManagement::WiFi::DOT11_MAC_FRAME_STATISTICS
+    property phy_counters : Win32cr::NetworkManagement::WiFi::DOT11_PHY_FRAME_STATISTICS*
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @ullFourWayHandshakeFailures : UInt64, @ullTKIPCounterMeasuresInvoked : UInt64, @ullReserved : UInt64, @mac_ucast_counters : Win32cr::NetworkManagement::WiFi::DOT11_MAC_FRAME_STATISTICS, @mac_mcast_counters : Win32cr::NetworkManagement::WiFi::DOT11_MAC_FRAME_STATISTICS, @phy_counters : Win32cr::NetworkManagement::WiFi::DOT11_PHY_FRAME_STATISTICS*)
+    end
+  end
 
   @[Extern]
-  record DOT11_PRIVACY_EXEMPTION,
-    usEtherType : UInt16,
-    usExemptionActionType : UInt16,
-    usExemptionPacketType : UInt16
+  struct DOT11_PRIVACY_EXEMPTION
+    property usEtherType : UInt16
+    property usExemptionActionType : UInt16
+    property usExemptionPacketType : UInt16
+    def initialize(@usEtherType : UInt16, @usExemptionActionType : UInt16, @usExemptionPacketType : UInt16)
+    end
+  end
 
   @[Extern]
-  record DOT11_PRIVACY_EXEMPTION_LIST,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uNumOfEntries : UInt32,
-    uTotalNumOfEntries : UInt32,
-    privacy_exemption_entries : Win32cr::NetworkManagement::WiFi::DOT11_PRIVACY_EXEMPTION*
+  struct DOT11_PRIVACY_EXEMPTION_LIST
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uNumOfEntries : UInt32
+    property uTotalNumOfEntries : UInt32
+    property privacy_exemption_entries : Win32cr::NetworkManagement::WiFi::DOT11_PRIVACY_EXEMPTION*
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @privacy_exemption_entries : Win32cr::NetworkManagement::WiFi::DOT11_PRIVACY_EXEMPTION*)
+    end
+  end
 
   @[Extern]
-  record DOT11_AUTH_ALGORITHM_LIST,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uNumOfEntries : UInt32,
-    uTotalNumOfEntries : UInt32,
-    algorithm_ids : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM*
+  struct DOT11_AUTH_ALGORITHM_LIST
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uNumOfEntries : UInt32
+    property uTotalNumOfEntries : UInt32
+    property algorithm_ids : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM*
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @algorithm_ids : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM*)
+    end
+  end
 
   @[Extern]
-  record DOT11_AUTH_CIPHER_PAIR_LIST,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uNumOfEntries : UInt32,
-    uTotalNumOfEntries : UInt32,
-    auth_cipher_pairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*
+  struct DOT11_AUTH_CIPHER_PAIR_LIST
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uNumOfEntries : UInt32
+    property uTotalNumOfEntries : UInt32
+    property auth_cipher_pairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @auth_cipher_pairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*)
+    end
+  end
 
   @[Extern]
-  record DOT11_CIPHER_ALGORITHM_LIST,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uNumOfEntries : UInt32,
-    uTotalNumOfEntries : UInt32,
-    algorithm_ids : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM*
+  struct DOT11_CIPHER_ALGORITHM_LIST
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uNumOfEntries : UInt32
+    property uTotalNumOfEntries : UInt32
+    property algorithm_ids : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM*
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @algorithm_ids : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM*)
+    end
+  end
 
   @[Extern]
-  record DOT11_CIPHER_DEFAULT_KEY_VALUE,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uKeyIndex : UInt32,
-    algorithm_id : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM,
-    mac_addr : UInt8[6],
-    bDelete : Win32cr::Foundation::BOOLEAN,
-    bStatic : Win32cr::Foundation::BOOLEAN,
-    usKeyLength : UInt16,
-    ucKey : UInt8*
+  struct DOT11_CIPHER_DEFAULT_KEY_VALUE
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uKeyIndex : UInt32
+    property algorithm_id : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM
+    property mac_addr : UInt8[6]
+    property bDelete : Win32cr::Foundation::BOOLEAN
+    property bStatic : Win32cr::Foundation::BOOLEAN
+    property usKeyLength : UInt16
+    property ucKey : UInt8*
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uKeyIndex : UInt32, @algorithm_id : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM, @mac_addr : UInt8[6], @bDelete : Win32cr::Foundation::BOOLEAN, @bStatic : Win32cr::Foundation::BOOLEAN, @usKeyLength : UInt16, @ucKey : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DOT11_KEY_ALGO_TKIP_MIC,
-    ucIV48Counter : UInt8[6],
-    ulTKIPKeyLength : UInt32,
-    ulMICKeyLength : UInt32,
-    ucTKIPMICKeys : UInt8*
+  struct DOT11_KEY_ALGO_TKIP_MIC
+    property ucIV48Counter : UInt8[6]
+    property ulTKIPKeyLength : UInt32
+    property ulMICKeyLength : UInt32
+    property ucTKIPMICKeys : UInt8*
+    def initialize(@ucIV48Counter : UInt8[6], @ulTKIPKeyLength : UInt32, @ulMICKeyLength : UInt32, @ucTKIPMICKeys : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DOT11_KEY_ALGO_CCMP,
-    ucIV48Counter : UInt8[6],
-    ulCCMPKeyLength : UInt32,
-    ucCCMPKey : UInt8*
+  struct DOT11_KEY_ALGO_CCMP
+    property ucIV48Counter : UInt8[6]
+    property ulCCMPKeyLength : UInt32
+    property ucCCMPKey : UInt8*
+    def initialize(@ucIV48Counter : UInt8[6], @ulCCMPKeyLength : UInt32, @ucCCMPKey : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DOT11_KEY_ALGO_GCMP,
-    ucIV48Counter : UInt8[6],
-    ulGCMPKeyLength : UInt32,
-    ucGCMPKey : UInt8*
+  struct DOT11_KEY_ALGO_GCMP
+    property ucIV48Counter : UInt8[6]
+    property ulGCMPKeyLength : UInt32
+    property ucGCMPKey : UInt8*
+    def initialize(@ucIV48Counter : UInt8[6], @ulGCMPKeyLength : UInt32, @ucGCMPKey : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DOT11_KEY_ALGO_GCMP_256,
-    ucIV48Counter : UInt8[6],
-    ulGCMP256KeyLength : UInt32,
-    ucGCMP256Key : UInt8*
+  struct DOT11_KEY_ALGO_GCMP_256
+    property ucIV48Counter : UInt8[6]
+    property ulGCMP256KeyLength : UInt32
+    property ucGCMP256Key : UInt8*
+    def initialize(@ucIV48Counter : UInt8[6], @ulGCMP256KeyLength : UInt32, @ucGCMP256Key : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DOT11_KEY_ALGO_BIP,
-    ucIPN : UInt8[6],
-    ulBIPKeyLength : UInt32,
-    ucBIPKey : UInt8*
+  struct DOT11_KEY_ALGO_BIP
+    property ucIPN : UInt8[6]
+    property ulBIPKeyLength : UInt32
+    property ucBIPKey : UInt8*
+    def initialize(@ucIPN : UInt8[6], @ulBIPKeyLength : UInt32, @ucBIPKey : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DOT11_KEY_ALGO_BIP_GMAC_256,
-    ucIPN : UInt8[6],
-    ulBIPGmac256KeyLength : UInt32,
-    ucBIPGmac256Key : UInt8*
+  struct DOT11_KEY_ALGO_BIP_GMAC_256
+    property ucIPN : UInt8[6]
+    property ulBIPGmac256KeyLength : UInt32
+    property ucBIPGmac256Key : UInt8*
+    def initialize(@ucIPN : UInt8[6], @ulBIPGmac256KeyLength : UInt32, @ucBIPGmac256Key : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DOT11_CIPHER_KEY_MAPPING_KEY_VALUE,
-    peer_mac_addr : UInt8[6],
-    algorithm_id : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM,
-    direction : Win32cr::NetworkManagement::WiFi::DOT11_DIRECTION,
-    bDelete : Win32cr::Foundation::BOOLEAN,
-    bStatic : Win32cr::Foundation::BOOLEAN,
-    usKeyLength : UInt16,
-    ucKey : UInt8*
+  struct DOT11_CIPHER_KEY_MAPPING_KEY_VALUE
+    property peer_mac_addr : UInt8[6]
+    property algorithm_id : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM
+    property direction : Win32cr::NetworkManagement::WiFi::DOT11_DIRECTION
+    property bDelete : Win32cr::Foundation::BOOLEAN
+    property bStatic : Win32cr::Foundation::BOOLEAN
+    property usKeyLength : UInt16
+    property ucKey : UInt8*
+    def initialize(@peer_mac_addr : UInt8[6], @algorithm_id : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM, @direction : Win32cr::NetworkManagement::WiFi::DOT11_DIRECTION, @bDelete : Win32cr::Foundation::BOOLEAN, @bStatic : Win32cr::Foundation::BOOLEAN, @usKeyLength : UInt16, @ucKey : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DOT11_ASSOCIATION_INFO_EX,
-    peer_mac_address : UInt8[6],
-    bssid : UInt8[6],
-    usCapabilityInformation : UInt16,
-    usListenInterval : UInt16,
-    ucPeerSupportedRates : UInt8[255],
-    usAssociationID : UInt16,
-    dot11AssociationState : Win32cr::NetworkManagement::WiFi::DOT11_ASSOCIATION_STATE,
-    dot11PowerMode : Win32cr::NetworkManagement::WiFi::DOT11_POWER_MODE,
-    liAssociationUpTime : Win32cr::Foundation::LARGE_INTEGER,
-    ullNumOfTxPacketSuccesses : UInt64,
-    ullNumOfTxPacketFailures : UInt64,
-    ullNumOfRxPacketSuccesses : UInt64,
-    ullNumOfRxPacketFailures : UInt64
+  struct DOT11_ASSOCIATION_INFO_EX
+    property peer_mac_address : UInt8[6]
+    property bssid : UInt8[6]
+    property usCapabilityInformation : UInt16
+    property usListenInterval : UInt16
+    property ucPeerSupportedRates : UInt8[255]
+    property usAssociationID : UInt16
+    property dot11AssociationState : Win32cr::NetworkManagement::WiFi::DOT11_ASSOCIATION_STATE
+    property dot11PowerMode : Win32cr::NetworkManagement::WiFi::DOT11_POWER_MODE
+    property liAssociationUpTime : Win32cr::Foundation::LARGE_INTEGER
+    property ullNumOfTxPacketSuccesses : UInt64
+    property ullNumOfTxPacketFailures : UInt64
+    property ullNumOfRxPacketSuccesses : UInt64
+    property ullNumOfRxPacketFailures : UInt64
+    def initialize(@peer_mac_address : UInt8[6], @bssid : UInt8[6], @usCapabilityInformation : UInt16, @usListenInterval : UInt16, @ucPeerSupportedRates : UInt8[255], @usAssociationID : UInt16, @dot11AssociationState : Win32cr::NetworkManagement::WiFi::DOT11_ASSOCIATION_STATE, @dot11PowerMode : Win32cr::NetworkManagement::WiFi::DOT11_POWER_MODE, @liAssociationUpTime : Win32cr::Foundation::LARGE_INTEGER, @ullNumOfTxPacketSuccesses : UInt64, @ullNumOfTxPacketFailures : UInt64, @ullNumOfRxPacketSuccesses : UInt64, @ullNumOfRxPacketFailures : UInt64)
+    end
+  end
 
   @[Extern]
-  record DOT11_ASSOCIATION_INFO_LIST,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uNumOfEntries : UInt32,
-    uTotalNumOfEntries : UInt32,
-    dot11AssocInfo : Win32cr::NetworkManagement::WiFi::DOT11_ASSOCIATION_INFO_EX*
+  struct DOT11_ASSOCIATION_INFO_LIST
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uNumOfEntries : UInt32
+    property uTotalNumOfEntries : UInt32
+    property dot11AssocInfo : Win32cr::NetworkManagement::WiFi::DOT11_ASSOCIATION_INFO_EX*
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11AssocInfo : Win32cr::NetworkManagement::WiFi::DOT11_ASSOCIATION_INFO_EX*)
+    end
+  end
 
   @[Extern]
-  record DOT11_PHY_ID_LIST,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uNumOfEntries : UInt32,
-    uTotalNumOfEntries : UInt32,
-    dot11PhyId : UInt32*
+  struct DOT11_PHY_ID_LIST
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uNumOfEntries : UInt32
+    property uTotalNumOfEntries : UInt32
+    property dot11PhyId : UInt32*
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @dot11PhyId : UInt32*)
+    end
+  end
 
   @[Extern]
-  record DOT11_EXTSTA_CAPABILITY,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uScanSSIDListSize : UInt32,
-    uDesiredBSSIDListSize : UInt32,
-    uDesiredSSIDListSize : UInt32,
-    uExcludedMacAddressListSize : UInt32,
-    uPrivacyExemptionListSize : UInt32,
-    uKeyMappingTableSize : UInt32,
-    uDefaultKeyTableSize : UInt32,
-    uWEPKeyValueMaxLength : UInt32,
-    uPMKIDCacheSize : UInt32,
-    uMaxNumPerSTADefaultKeyTables : UInt32
+  struct DOT11_EXTSTA_CAPABILITY
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uScanSSIDListSize : UInt32
+    property uDesiredBSSIDListSize : UInt32
+    property uDesiredSSIDListSize : UInt32
+    property uExcludedMacAddressListSize : UInt32
+    property uPrivacyExemptionListSize : UInt32
+    property uKeyMappingTableSize : UInt32
+    property uDefaultKeyTableSize : UInt32
+    property uWEPKeyValueMaxLength : UInt32
+    property uPMKIDCacheSize : UInt32
+    property uMaxNumPerSTADefaultKeyTables : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uScanSSIDListSize : UInt32, @uDesiredBSSIDListSize : UInt32, @uDesiredSSIDListSize : UInt32, @uExcludedMacAddressListSize : UInt32, @uPrivacyExemptionListSize : UInt32, @uKeyMappingTableSize : UInt32, @uDefaultKeyTableSize : UInt32, @uWEPKeyValueMaxLength : UInt32, @uPMKIDCacheSize : UInt32, @uMaxNumPerSTADefaultKeyTables : UInt32)
+    end
+  end
 
   @[Extern]
-  record DOT11_DATA_RATE_MAPPING_ENTRY,
-    ucDataRateIndex : UInt8,
-    ucDataRateFlag : UInt8,
-    usDataRateValue : UInt16
+  struct DOT11_DATA_RATE_MAPPING_ENTRY
+    property ucDataRateIndex : UInt8
+    property ucDataRateFlag : UInt8
+    property usDataRateValue : UInt16
+    def initialize(@ucDataRateIndex : UInt8, @ucDataRateFlag : UInt8, @usDataRateValue : UInt16)
+    end
+  end
 
   @[Extern]
-  record DOT11_DATA_RATE_MAPPING_TABLE,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uDataRateMappingLength : UInt32,
-    data_rate_mapping_entries : Win32cr::NetworkManagement::WiFi::DOT11_DATA_RATE_MAPPING_ENTRY[126]
+  struct DOT11_DATA_RATE_MAPPING_TABLE
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uDataRateMappingLength : UInt32
+    property data_rate_mapping_entries : Win32cr::NetworkManagement::WiFi::DOT11_DATA_RATE_MAPPING_ENTRY[126]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uDataRateMappingLength : UInt32, @data_rate_mapping_entries : Win32cr::NetworkManagement::WiFi::DOT11_DATA_RATE_MAPPING_ENTRY[126])
+    end
+  end
 
   @[Extern]
-  record DOT11_COUNTRY_OR_REGION_STRING_LIST,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uNumOfEntries : UInt32,
-    uTotalNumOfEntries : UInt32,
-    country_or_region_strings : UInt8[3]
+  struct DOT11_COUNTRY_OR_REGION_STRING_LIST
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uNumOfEntries : UInt32
+    property uTotalNumOfEntries : UInt32
+    property country_or_region_strings : UInt8[3]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @country_or_region_strings : UInt8[3])
+    end
+  end
 
   @[Extern]
-  record DOT11_PORT_STATE_NOTIFICATION,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    peer_mac : UInt8[6],
-    bOpen : Win32cr::Foundation::BOOLEAN
+  struct DOT11_PORT_STATE_NOTIFICATION
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property peer_mac : UInt8[6]
+    property bOpen : Win32cr::Foundation::BOOLEAN
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @peer_mac : UInt8[6], @bOpen : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record DOT11_IBSS_PARAMS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    bJoinOnly : Win32cr::Foundation::BOOLEAN,
-    uIEsOffset : UInt32,
-    uIEsLength : UInt32
+  struct DOT11_IBSS_PARAMS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property bJoinOnly : Win32cr::Foundation::BOOLEAN
+    property uIEsOffset : UInt32
+    property uIEsLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @bJoinOnly : Win32cr::Foundation::BOOLEAN, @uIEsOffset : UInt32, @uIEsLength : UInt32)
+    end
+  end
 
   @[Extern]
-  record DOT11_QOS_PARAMS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    ucEnabledQoSProtocolFlags : UInt8
+  struct DOT11_QOS_PARAMS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property ucEnabledQoSProtocolFlags : UInt8
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @ucEnabledQoSProtocolFlags : UInt8)
+    end
+  end
 
   @[Extern]
-  record DOT11_ASSOCIATION_PARAMS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    bssid : UInt8[6],
-    uAssocRequestIEsOffset : UInt32,
-    uAssocRequestIEsLength : UInt32
+  struct DOT11_ASSOCIATION_PARAMS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property bssid : UInt8[6]
+    property uAssocRequestIEsOffset : UInt32
+    property uAssocRequestIEsLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @bssid : UInt8[6], @uAssocRequestIEsOffset : UInt32, @uAssocRequestIEsLength : UInt32)
+    end
+  end
 
   @[Extern]
-  record DOT11_FRAGMENT_DESCRIPTOR,
-    uOffset : UInt32,
-    uLength : UInt32
+  struct DOT11_FRAGMENT_DESCRIPTOR
+    property uOffset : UInt32
+    property uLength : UInt32
+    def initialize(@uOffset : UInt32, @uLength : UInt32)
+    end
+  end
 
   @[Extern]
-  record DOT11_PER_MSDU_COUNTERS,
-    uTransmittedFragmentCount : UInt32,
-    uRetryCount : UInt32,
-    uRTSSuccessCount : UInt32,
-    uRTSFailureCount : UInt32,
-    uACKFailureCount : UInt32
+  struct DOT11_PER_MSDU_COUNTERS
+    property uTransmittedFragmentCount : UInt32
+    property uRetryCount : UInt32
+    property uRTSSuccessCount : UInt32
+    property uRTSFailureCount : UInt32
+    property uACKFailureCount : UInt32
+    def initialize(@uTransmittedFragmentCount : UInt32, @uRetryCount : UInt32, @uRTSSuccessCount : UInt32, @uRTSFailureCount : UInt32, @uACKFailureCount : UInt32)
+    end
+  end
 
   @[Extern]
-  record DOT11_HRDSSS_PHY_ATTRIBUTES,
-    bShortPreambleOptionImplemented : Win32cr::Foundation::BOOLEAN,
-    bPBCCOptionImplemented : Win32cr::Foundation::BOOLEAN,
-    bChannelAgilityPresent : Win32cr::Foundation::BOOLEAN,
-    uHRCCAModeSupported : UInt32
+  struct DOT11_HRDSSS_PHY_ATTRIBUTES
+    property bShortPreambleOptionImplemented : Win32cr::Foundation::BOOLEAN
+    property bPBCCOptionImplemented : Win32cr::Foundation::BOOLEAN
+    property bChannelAgilityPresent : Win32cr::Foundation::BOOLEAN
+    property uHRCCAModeSupported : UInt32
+    def initialize(@bShortPreambleOptionImplemented : Win32cr::Foundation::BOOLEAN, @bPBCCOptionImplemented : Win32cr::Foundation::BOOLEAN, @bChannelAgilityPresent : Win32cr::Foundation::BOOLEAN, @uHRCCAModeSupported : UInt32)
+    end
+  end
 
   @[Extern]
-  record DOT11_OFDM_PHY_ATTRIBUTES,
-    uFrequencyBandsSupported : UInt32
+  struct DOT11_OFDM_PHY_ATTRIBUTES
+    property uFrequencyBandsSupported : UInt32
+    def initialize(@uFrequencyBandsSupported : UInt32)
+    end
+  end
 
   @[Extern]
-  record DOT11_ERP_PHY_ATTRIBUTES,
-    hrdsss_attributes : Win32cr::NetworkManagement::WiFi::DOT11_HRDSSS_PHY_ATTRIBUTES,
-    bERPPBCCOptionImplemented : Win32cr::Foundation::BOOLEAN,
-    bDSSSOFDMOptionImplemented : Win32cr::Foundation::BOOLEAN,
-    bShortSlotTimeOptionImplemented : Win32cr::Foundation::BOOLEAN
+  struct DOT11_ERP_PHY_ATTRIBUTES
+    property hrdsss_attributes : Win32cr::NetworkManagement::WiFi::DOT11_HRDSSS_PHY_ATTRIBUTES
+    property bERPPBCCOptionImplemented : Win32cr::Foundation::BOOLEAN
+    property bDSSSOFDMOptionImplemented : Win32cr::Foundation::BOOLEAN
+    property bShortSlotTimeOptionImplemented : Win32cr::Foundation::BOOLEAN
+    def initialize(@hrdsss_attributes : Win32cr::NetworkManagement::WiFi::DOT11_HRDSSS_PHY_ATTRIBUTES, @bERPPBCCOptionImplemented : Win32cr::Foundation::BOOLEAN, @bDSSSOFDMOptionImplemented : Win32cr::Foundation::BOOLEAN, @bShortSlotTimeOptionImplemented : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record DOT11_PHY_ATTRIBUTES,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    phy_type : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE,
-    bHardwarePhyState : Win32cr::Foundation::BOOLEAN,
-    bSoftwarePhyState : Win32cr::Foundation::BOOLEAN,
-    bCFPollable : Win32cr::Foundation::BOOLEAN,
-    uMPDUMaxLength : UInt32,
-    temp_type : Win32cr::NetworkManagement::WiFi::DOT11_TEMP_TYPE,
-    diversity_support : Win32cr::NetworkManagement::WiFi::DOT11_DIVERSITY_SUPPORT,
-    phy_specific_attributes : PhySpecificAttributes_e__Union_,
-    uNumberSupportedPowerLevels : UInt32,
-    tx_power_levels : UInt32[8],
-    uNumDataRateMappingEntries : UInt32,
-    data_rate_mapping_entries : Win32cr::NetworkManagement::WiFi::DOT11_DATA_RATE_MAPPING_ENTRY[126],
-    supported_data_rates_value : Win32cr::NetworkManagement::WiFi::DOT11_SUPPORTED_DATA_RATES_VALUE_V2 do
+  struct DOT11_PHY_ATTRIBUTES
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property phy_type : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE
+    property bHardwarePhyState : Win32cr::Foundation::BOOLEAN
+    property bSoftwarePhyState : Win32cr::Foundation::BOOLEAN
+    property bCFPollable : Win32cr::Foundation::BOOLEAN
+    property uMPDUMaxLength : UInt32
+    property temp_type : Win32cr::NetworkManagement::WiFi::DOT11_TEMP_TYPE
+    property diversity_support : Win32cr::NetworkManagement::WiFi::DOT11_DIVERSITY_SUPPORT
+    property phy_specific_attributes : PhySpecificAttributes_e__Union_
+    property uNumberSupportedPowerLevels : UInt32
+    property tx_power_levels : UInt32[8]
+    property uNumDataRateMappingEntries : UInt32
+    property data_rate_mapping_entries : Win32cr::NetworkManagement::WiFi::DOT11_DATA_RATE_MAPPING_ENTRY[126]
+    property supported_data_rates_value : Win32cr::NetworkManagement::WiFi::DOT11_SUPPORTED_DATA_RATES_VALUE_V2
 
     # Nested Type PhySpecificAttributes_e__Union_
     @[Extern(union: true)]
-    record PhySpecificAttributes_e__Union_,
-      hrdsss_attributes : Win32cr::NetworkManagement::WiFi::DOT11_HRDSSS_PHY_ATTRIBUTES,
-      ofdm_attributes : Win32cr::NetworkManagement::WiFi::DOT11_OFDM_PHY_ATTRIBUTES,
-      erp_attributes : Win32cr::NetworkManagement::WiFi::DOT11_ERP_PHY_ATTRIBUTES
+    struct PhySpecificAttributes_e__Union_
+    property hrdsss_attributes : Win32cr::NetworkManagement::WiFi::DOT11_HRDSSS_PHY_ATTRIBUTES
+    property ofdm_attributes : Win32cr::NetworkManagement::WiFi::DOT11_OFDM_PHY_ATTRIBUTES
+    property erp_attributes : Win32cr::NetworkManagement::WiFi::DOT11_ERP_PHY_ATTRIBUTES
+    def initialize(@hrdsss_attributes : Win32cr::NetworkManagement::WiFi::DOT11_HRDSSS_PHY_ATTRIBUTES, @ofdm_attributes : Win32cr::NetworkManagement::WiFi::DOT11_OFDM_PHY_ATTRIBUTES, @erp_attributes : Win32cr::NetworkManagement::WiFi::DOT11_ERP_PHY_ATTRIBUTES)
+    end
+    end
 
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @phy_type : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE, @bHardwarePhyState : Win32cr::Foundation::BOOLEAN, @bSoftwarePhyState : Win32cr::Foundation::BOOLEAN, @bCFPollable : Win32cr::Foundation::BOOLEAN, @uMPDUMaxLength : UInt32, @temp_type : Win32cr::NetworkManagement::WiFi::DOT11_TEMP_TYPE, @diversity_support : Win32cr::NetworkManagement::WiFi::DOT11_DIVERSITY_SUPPORT, @phy_specific_attributes : PhySpecificAttributes_e__Union_, @uNumberSupportedPowerLevels : UInt32, @tx_power_levels : UInt32[8], @uNumDataRateMappingEntries : UInt32, @data_rate_mapping_entries : Win32cr::NetworkManagement::WiFi::DOT11_DATA_RATE_MAPPING_ENTRY[126], @supported_data_rates_value : Win32cr::NetworkManagement::WiFi::DOT11_SUPPORTED_DATA_RATES_VALUE_V2)
+    end
   end
 
   @[Extern]
-  record DOT11_EXTSTA_ATTRIBUTES,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uScanSSIDListSize : UInt32,
-    uDesiredBSSIDListSize : UInt32,
-    uDesiredSSIDListSize : UInt32,
-    uExcludedMacAddressListSize : UInt32,
-    uPrivacyExemptionListSize : UInt32,
-    uKeyMappingTableSize : UInt32,
-    uDefaultKeyTableSize : UInt32,
-    uWEPKeyValueMaxLength : UInt32,
-    uPMKIDCacheSize : UInt32,
-    uMaxNumPerSTADefaultKeyTables : UInt32,
-    bStrictlyOrderedServiceClassImplemented : Win32cr::Foundation::BOOLEAN,
-    ucSupportedQoSProtocolFlags : UInt8,
-    bSafeModeImplemented : Win32cr::Foundation::BOOLEAN,
-    uNumSupportedCountryOrRegionStrings : UInt32,
-    pSupportedCountryOrRegionStrings : UInt8*,
-    uInfraNumSupportedUcastAlgoPairs : UInt32,
-    pInfraSupportedUcastAlgoPairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*,
-    uInfraNumSupportedMcastAlgoPairs : UInt32,
-    pInfraSupportedMcastAlgoPairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*,
-    uAdhocNumSupportedUcastAlgoPairs : UInt32,
-    pAdhocSupportedUcastAlgoPairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*,
-    uAdhocNumSupportedMcastAlgoPairs : UInt32,
-    pAdhocSupportedMcastAlgoPairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*,
-    bAutoPowerSaveMode : Win32cr::Foundation::BOOLEAN,
-    uMaxNetworkOffloadListSize : UInt32,
-    bMFPCapable : Win32cr::Foundation::BOOLEAN,
-    uInfraNumSupportedMcastMgmtAlgoPairs : UInt32,
-    pInfraSupportedMcastMgmtAlgoPairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*,
-    bNeighborReportSupported : Win32cr::Foundation::BOOLEAN,
-    bAPChannelReportSupported : Win32cr::Foundation::BOOLEAN,
-    bActionFramesSupported : Win32cr::Foundation::BOOLEAN,
-    bANQPQueryOffloadSupported : Win32cr::Foundation::BOOLEAN,
-    bHESSIDConnectionSupported : Win32cr::Foundation::BOOLEAN
+  struct DOT11_EXTSTA_ATTRIBUTES
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uScanSSIDListSize : UInt32
+    property uDesiredBSSIDListSize : UInt32
+    property uDesiredSSIDListSize : UInt32
+    property uExcludedMacAddressListSize : UInt32
+    property uPrivacyExemptionListSize : UInt32
+    property uKeyMappingTableSize : UInt32
+    property uDefaultKeyTableSize : UInt32
+    property uWEPKeyValueMaxLength : UInt32
+    property uPMKIDCacheSize : UInt32
+    property uMaxNumPerSTADefaultKeyTables : UInt32
+    property bStrictlyOrderedServiceClassImplemented : Win32cr::Foundation::BOOLEAN
+    property ucSupportedQoSProtocolFlags : UInt8
+    property bSafeModeImplemented : Win32cr::Foundation::BOOLEAN
+    property uNumSupportedCountryOrRegionStrings : UInt32
+    property pSupportedCountryOrRegionStrings : UInt8*
+    property uInfraNumSupportedUcastAlgoPairs : UInt32
+    property pInfraSupportedUcastAlgoPairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*
+    property uInfraNumSupportedMcastAlgoPairs : UInt32
+    property pInfraSupportedMcastAlgoPairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*
+    property uAdhocNumSupportedUcastAlgoPairs : UInt32
+    property pAdhocSupportedUcastAlgoPairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*
+    property uAdhocNumSupportedMcastAlgoPairs : UInt32
+    property pAdhocSupportedMcastAlgoPairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*
+    property bAutoPowerSaveMode : Win32cr::Foundation::BOOLEAN
+    property uMaxNetworkOffloadListSize : UInt32
+    property bMFPCapable : Win32cr::Foundation::BOOLEAN
+    property uInfraNumSupportedMcastMgmtAlgoPairs : UInt32
+    property pInfraSupportedMcastMgmtAlgoPairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*
+    property bNeighborReportSupported : Win32cr::Foundation::BOOLEAN
+    property bAPChannelReportSupported : Win32cr::Foundation::BOOLEAN
+    property bActionFramesSupported : Win32cr::Foundation::BOOLEAN
+    property bANQPQueryOffloadSupported : Win32cr::Foundation::BOOLEAN
+    property bHESSIDConnectionSupported : Win32cr::Foundation::BOOLEAN
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uScanSSIDListSize : UInt32, @uDesiredBSSIDListSize : UInt32, @uDesiredSSIDListSize : UInt32, @uExcludedMacAddressListSize : UInt32, @uPrivacyExemptionListSize : UInt32, @uKeyMappingTableSize : UInt32, @uDefaultKeyTableSize : UInt32, @uWEPKeyValueMaxLength : UInt32, @uPMKIDCacheSize : UInt32, @uMaxNumPerSTADefaultKeyTables : UInt32, @bStrictlyOrderedServiceClassImplemented : Win32cr::Foundation::BOOLEAN, @ucSupportedQoSProtocolFlags : UInt8, @bSafeModeImplemented : Win32cr::Foundation::BOOLEAN, @uNumSupportedCountryOrRegionStrings : UInt32, @pSupportedCountryOrRegionStrings : UInt8*, @uInfraNumSupportedUcastAlgoPairs : UInt32, @pInfraSupportedUcastAlgoPairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*, @uInfraNumSupportedMcastAlgoPairs : UInt32, @pInfraSupportedMcastAlgoPairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*, @uAdhocNumSupportedUcastAlgoPairs : UInt32, @pAdhocSupportedUcastAlgoPairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*, @uAdhocNumSupportedMcastAlgoPairs : UInt32, @pAdhocSupportedMcastAlgoPairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*, @bAutoPowerSaveMode : Win32cr::Foundation::BOOLEAN, @uMaxNetworkOffloadListSize : UInt32, @bMFPCapable : Win32cr::Foundation::BOOLEAN, @uInfraNumSupportedMcastMgmtAlgoPairs : UInt32, @pInfraSupportedMcastMgmtAlgoPairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*, @bNeighborReportSupported : Win32cr::Foundation::BOOLEAN, @bAPChannelReportSupported : Win32cr::Foundation::BOOLEAN, @bActionFramesSupported : Win32cr::Foundation::BOOLEAN, @bANQPQueryOffloadSupported : Win32cr::Foundation::BOOLEAN, @bHESSIDConnectionSupported : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record DOT11_RECV_EXTENSION_INFO,
-    uVersion : UInt32,
-    pvReserved : Void*,
-    dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE,
-    uChCenterFrequency : UInt32,
-    lRSSI : Int32,
-    lRSSIMin : Int32,
-    lRSSIMax : Int32,
-    uRSSI : UInt32,
-    ucPriority : UInt8,
-    ucDataRate : UInt8,
-    ucPeerMacAddress : UInt8[6],
-    dwExtendedStatus : UInt32,
-    hWEPOffloadContext : Win32cr::Foundation::HANDLE,
-    hAuthOffloadContext : Win32cr::Foundation::HANDLE,
-    usWEPAppliedMask : UInt16,
-    usWPAMSDUPriority : UInt16,
-    dot11LowestIV48Counter : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER,
-    usDot11LeftRWBitMap : UInt16,
-    dot11HighestIV48Counter : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER,
-    usDot11RightRWBitMap : UInt16,
-    usNumberOfMPDUsReceived : UInt16,
-    usNumberOfFragments : UInt16,
-    pNdisPackets : Void**
+  struct DOT11_RECV_EXTENSION_INFO
+    property uVersion : UInt32
+    property pvReserved : Void*
+    property dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE
+    property uChCenterFrequency : UInt32
+    property lRSSI : Int32
+    property lRSSIMin : Int32
+    property lRSSIMax : Int32
+    property uRSSI : UInt32
+    property ucPriority : UInt8
+    property ucDataRate : UInt8
+    property ucPeerMacAddress : UInt8[6]
+    property dwExtendedStatus : UInt32
+    property hWEPOffloadContext : Win32cr::Foundation::HANDLE
+    property hAuthOffloadContext : Win32cr::Foundation::HANDLE
+    property usWEPAppliedMask : UInt16
+    property usWPAMSDUPriority : UInt16
+    property dot11LowestIV48Counter : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER
+    property usDot11LeftRWBitMap : UInt16
+    property dot11HighestIV48Counter : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER
+    property usDot11RightRWBitMap : UInt16
+    property usNumberOfMPDUsReceived : UInt16
+    property usNumberOfFragments : UInt16
+    property pNdisPackets : Void**
+    def initialize(@uVersion : UInt32, @pvReserved : Void*, @dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE, @uChCenterFrequency : UInt32, @lRSSI : Int32, @lRSSIMin : Int32, @lRSSIMax : Int32, @uRSSI : UInt32, @ucPriority : UInt8, @ucDataRate : UInt8, @ucPeerMacAddress : UInt8[6], @dwExtendedStatus : UInt32, @hWEPOffloadContext : Win32cr::Foundation::HANDLE, @hAuthOffloadContext : Win32cr::Foundation::HANDLE, @usWEPAppliedMask : UInt16, @usWPAMSDUPriority : UInt16, @dot11LowestIV48Counter : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER, @usDot11LeftRWBitMap : UInt16, @dot11HighestIV48Counter : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER, @usDot11RightRWBitMap : UInt16, @usNumberOfMPDUsReceived : UInt16, @usNumberOfFragments : UInt16, @pNdisPackets : Void**)
+    end
+  end
 
   @[Extern]
-  record DOT11_RECV_EXTENSION_INFO_V2,
-    uVersion : UInt32,
-    pvReserved : Void*,
-    dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE,
-    uChCenterFrequency : UInt32,
-    lRSSI : Int32,
-    uRSSI : UInt32,
-    ucPriority : UInt8,
-    ucDataRate : UInt8,
-    ucPeerMacAddress : UInt8[6],
-    dwExtendedStatus : UInt32,
-    hWEPOffloadContext : Win32cr::Foundation::HANDLE,
-    hAuthOffloadContext : Win32cr::Foundation::HANDLE,
-    usWEPAppliedMask : UInt16,
-    usWPAMSDUPriority : UInt16,
-    dot11LowestIV48Counter : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER,
-    usDot11LeftRWBitMap : UInt16,
-    dot11HighestIV48Counter : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER,
-    usDot11RightRWBitMap : UInt16,
-    usNumberOfMPDUsReceived : UInt16,
-    usNumberOfFragments : UInt16,
-    pNdisPackets : Void**
+  struct DOT11_RECV_EXTENSION_INFO_V2
+    property uVersion : UInt32
+    property pvReserved : Void*
+    property dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE
+    property uChCenterFrequency : UInt32
+    property lRSSI : Int32
+    property uRSSI : UInt32
+    property ucPriority : UInt8
+    property ucDataRate : UInt8
+    property ucPeerMacAddress : UInt8[6]
+    property dwExtendedStatus : UInt32
+    property hWEPOffloadContext : Win32cr::Foundation::HANDLE
+    property hAuthOffloadContext : Win32cr::Foundation::HANDLE
+    property usWEPAppliedMask : UInt16
+    property usWPAMSDUPriority : UInt16
+    property dot11LowestIV48Counter : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER
+    property usDot11LeftRWBitMap : UInt16
+    property dot11HighestIV48Counter : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER
+    property usDot11RightRWBitMap : UInt16
+    property usNumberOfMPDUsReceived : UInt16
+    property usNumberOfFragments : UInt16
+    property pNdisPackets : Void**
+    def initialize(@uVersion : UInt32, @pvReserved : Void*, @dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE, @uChCenterFrequency : UInt32, @lRSSI : Int32, @uRSSI : UInt32, @ucPriority : UInt8, @ucDataRate : UInt8, @ucPeerMacAddress : UInt8[6], @dwExtendedStatus : UInt32, @hWEPOffloadContext : Win32cr::Foundation::HANDLE, @hAuthOffloadContext : Win32cr::Foundation::HANDLE, @usWEPAppliedMask : UInt16, @usWPAMSDUPriority : UInt16, @dot11LowestIV48Counter : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER, @usDot11LeftRWBitMap : UInt16, @dot11HighestIV48Counter : Win32cr::NetworkManagement::WiFi::DOT11_IV48_COUNTER, @usDot11RightRWBitMap : UInt16, @usNumberOfMPDUsReceived : UInt16, @usNumberOfFragments : UInt16, @pNdisPackets : Void**)
+    end
+  end
 
   @[Extern]
-  record DOT11_STATUS_INDICATION,
-    uStatusType : UInt32,
-    ndisStatus : Int32
+  struct DOT11_STATUS_INDICATION
+    property uStatusType : UInt32
+    property ndisStatus : Int32
+    def initialize(@uStatusType : UInt32, @ndisStatus : Int32)
+    end
+  end
 
   @[Extern]
-  record DOT11_MPDU_MAX_LENGTH_INDICATION,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uPhyId : UInt32,
-    uMPDUMaxLength : UInt32
+  struct DOT11_MPDU_MAX_LENGTH_INDICATION
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uPhyId : UInt32
+    property uMPDUMaxLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uPhyId : UInt32, @uMPDUMaxLength : UInt32)
+    end
+  end
 
   @[Extern]
-  record DOT11_ASSOCIATION_START_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    mac_addr : UInt8[6],
-    ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID,
-    uIHVDataOffset : UInt32,
-    uIHVDataSize : UInt32
+  struct DOT11_ASSOCIATION_START_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property mac_addr : UInt8[6]
+    property ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID
+    property uIHVDataOffset : UInt32
+    property uIHVDataSize : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @mac_addr : UInt8[6], @ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID, @uIHVDataOffset : UInt32, @uIHVDataSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record DOT11_ENCAP_ENTRY,
-    usEtherType : UInt16,
-    usEncapType : UInt16
+  struct DOT11_ENCAP_ENTRY
+    property usEtherType : UInt16
+    property usEncapType : UInt16
+    def initialize(@usEtherType : UInt16, @usEncapType : UInt16)
+    end
+  end
 
   @[Extern]
-  record DOT11_ASSOCIATION_COMPLETION_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    mac_addr : UInt8[6],
-    uStatus : UInt32,
-    bReAssocReq : Win32cr::Foundation::BOOLEAN,
-    bReAssocResp : Win32cr::Foundation::BOOLEAN,
-    uAssocReqOffset : UInt32,
-    uAssocReqSize : UInt32,
-    uAssocRespOffset : UInt32,
-    uAssocRespSize : UInt32,
-    uBeaconOffset : UInt32,
-    uBeaconSize : UInt32,
-    uIHVDataOffset : UInt32,
-    uIHVDataSize : UInt32,
-    auth_algo : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM,
-    unicast_cipher : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM,
-    multicast_cipher : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM,
-    uActivePhyListOffset : UInt32,
-    uActivePhyListSize : UInt32,
-    bFourAddressSupported : Win32cr::Foundation::BOOLEAN,
-    bPortAuthorized : Win32cr::Foundation::BOOLEAN,
-    ucActiveQoSProtocol : UInt8,
-    ds_info : Win32cr::NetworkManagement::WiFi::DOT11_DS_INFO,
-    uEncapTableOffset : UInt32,
-    uEncapTableSize : UInt32,
-    multicast_mgmt_cipher : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM,
-    uAssocComebackTime : UInt32
+  struct DOT11_ASSOCIATION_COMPLETION_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property mac_addr : UInt8[6]
+    property uStatus : UInt32
+    property bReAssocReq : Win32cr::Foundation::BOOLEAN
+    property bReAssocResp : Win32cr::Foundation::BOOLEAN
+    property uAssocReqOffset : UInt32
+    property uAssocReqSize : UInt32
+    property uAssocRespOffset : UInt32
+    property uAssocRespSize : UInt32
+    property uBeaconOffset : UInt32
+    property uBeaconSize : UInt32
+    property uIHVDataOffset : UInt32
+    property uIHVDataSize : UInt32
+    property auth_algo : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM
+    property unicast_cipher : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM
+    property multicast_cipher : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM
+    property uActivePhyListOffset : UInt32
+    property uActivePhyListSize : UInt32
+    property bFourAddressSupported : Win32cr::Foundation::BOOLEAN
+    property bPortAuthorized : Win32cr::Foundation::BOOLEAN
+    property ucActiveQoSProtocol : UInt8
+    property ds_info : Win32cr::NetworkManagement::WiFi::DOT11_DS_INFO
+    property uEncapTableOffset : UInt32
+    property uEncapTableSize : UInt32
+    property multicast_mgmt_cipher : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM
+    property uAssocComebackTime : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @mac_addr : UInt8[6], @uStatus : UInt32, @bReAssocReq : Win32cr::Foundation::BOOLEAN, @bReAssocResp : Win32cr::Foundation::BOOLEAN, @uAssocReqOffset : UInt32, @uAssocReqSize : UInt32, @uAssocRespOffset : UInt32, @uAssocRespSize : UInt32, @uBeaconOffset : UInt32, @uBeaconSize : UInt32, @uIHVDataOffset : UInt32, @uIHVDataSize : UInt32, @auth_algo : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM, @unicast_cipher : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM, @multicast_cipher : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM, @uActivePhyListOffset : UInt32, @uActivePhyListSize : UInt32, @bFourAddressSupported : Win32cr::Foundation::BOOLEAN, @bPortAuthorized : Win32cr::Foundation::BOOLEAN, @ucActiveQoSProtocol : UInt8, @ds_info : Win32cr::NetworkManagement::WiFi::DOT11_DS_INFO, @uEncapTableOffset : UInt32, @uEncapTableSize : UInt32, @multicast_mgmt_cipher : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM, @uAssocComebackTime : UInt32)
+    end
+  end
 
   @[Extern]
-  record DOT11_CONNECTION_START_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    bss_type : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE,
-    adhoc_bssid : UInt8[6],
-    adhoc_ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID
+  struct DOT11_CONNECTION_START_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property bss_type : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE
+    property adhoc_bssid : UInt8[6]
+    property adhoc_ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @bss_type : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, @adhoc_bssid : UInt8[6], @adhoc_ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID)
+    end
+  end
 
   @[Extern]
-  record DOT11_CONNECTION_COMPLETION_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uStatus : UInt32
+  struct DOT11_CONNECTION_COMPLETION_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uStatus : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uStatus : UInt32)
+    end
+  end
 
   @[Extern]
-  record DOT11_ROAMING_START_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    adhoc_bssid : UInt8[6],
-    adhoc_ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID,
-    uRoamingReason : UInt32
+  struct DOT11_ROAMING_START_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property adhoc_bssid : UInt8[6]
+    property adhoc_ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID
+    property uRoamingReason : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @adhoc_bssid : UInt8[6], @adhoc_ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID, @uRoamingReason : UInt32)
+    end
+  end
 
   @[Extern]
-  record DOT11_ROAMING_COMPLETION_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uStatus : UInt32
+  struct DOT11_ROAMING_COMPLETION_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uStatus : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uStatus : UInt32)
+    end
+  end
 
   @[Extern]
-  record DOT11_DISASSOCIATION_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    mac_addr : UInt8[6],
-    uReason : UInt32,
-    uIHVDataOffset : UInt32,
-    uIHVDataSize : UInt32
+  struct DOT11_DISASSOCIATION_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property mac_addr : UInt8[6]
+    property uReason : UInt32
+    property uIHVDataOffset : UInt32
+    property uIHVDataSize : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @mac_addr : UInt8[6], @uReason : UInt32, @uIHVDataOffset : UInt32, @uIHVDataSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record DOT11_TKIPMIC_FAILURE_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    bDefaultKeyFailure : Win32cr::Foundation::BOOLEAN,
-    uKeyIndex : UInt32,
-    peer_mac : UInt8[6]
+  struct DOT11_TKIPMIC_FAILURE_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property bDefaultKeyFailure : Win32cr::Foundation::BOOLEAN
+    property uKeyIndex : UInt32
+    property peer_mac : UInt8[6]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @bDefaultKeyFailure : Win32cr::Foundation::BOOLEAN, @uKeyIndex : UInt32, @peer_mac : UInt8[6])
+    end
+  end
 
   @[Extern]
-  record DOT11_PMKID_CANDIDATE_LIST_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uCandidateListSize : UInt32,
-    uCandidateListOffset : UInt32
+  struct DOT11_PMKID_CANDIDATE_LIST_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uCandidateListSize : UInt32
+    property uCandidateListOffset : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uCandidateListSize : UInt32, @uCandidateListOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record DOT11_BSSID_CANDIDATE,
-    bssid : UInt8[6],
-    uFlags : UInt32
+  struct DOT11_BSSID_CANDIDATE
+    property bssid : UInt8[6]
+    property uFlags : UInt32
+    def initialize(@bssid : UInt8[6], @uFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record DOT11_PHY_STATE_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uPhyId : UInt32,
-    bHardwarePhyState : Win32cr::Foundation::BOOLEAN,
-    bSoftwarePhyState : Win32cr::Foundation::BOOLEAN
+  struct DOT11_PHY_STATE_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uPhyId : UInt32
+    property bHardwarePhyState : Win32cr::Foundation::BOOLEAN
+    property bSoftwarePhyState : Win32cr::Foundation::BOOLEAN
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uPhyId : UInt32, @bHardwarePhyState : Win32cr::Foundation::BOOLEAN, @bSoftwarePhyState : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record DOT11_LINK_QUALITY_ENTRY,
-    peer_mac_addr : UInt8[6],
-    ucLinkQuality : UInt8
+  struct DOT11_LINK_QUALITY_ENTRY
+    property peer_mac_addr : UInt8[6]
+    property ucLinkQuality : UInt8
+    def initialize(@peer_mac_addr : UInt8[6], @ucLinkQuality : UInt8)
+    end
+  end
 
   @[Extern]
-  record DOT11_LINK_QUALITY_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uLinkQualityListSize : UInt32,
-    uLinkQualityListOffset : UInt32
+  struct DOT11_LINK_QUALITY_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uLinkQualityListSize : UInt32
+    property uLinkQualityListOffset : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uLinkQualityListSize : UInt32, @uLinkQualityListOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record DOT11_EXTSTA_SEND_CONTEXT,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    usExemptionActionType : UInt16,
-    uPhyId : UInt32,
-    uDelayedSleepValue : UInt32,
-    pvMediaSpecificInfo : Void*,
-    uSendFlags : UInt32
+  struct DOT11_EXTSTA_SEND_CONTEXT
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property usExemptionActionType : UInt16
+    property uPhyId : UInt32
+    property uDelayedSleepValue : UInt32
+    property pvMediaSpecificInfo : Void*
+    property uSendFlags : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @usExemptionActionType : UInt16, @uPhyId : UInt32, @uDelayedSleepValue : UInt32, @pvMediaSpecificInfo : Void*, @uSendFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record DOT11_EXTSTA_RECV_CONTEXT,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uReceiveFlags : UInt32,
-    uPhyId : UInt32,
-    uChCenterFrequency : UInt32,
-    usNumberOfMPDUsReceived : UInt16,
-    lRSSI : Int32,
-    ucDataRate : UInt8,
-    uSizeMediaSpecificInfo : UInt32,
-    pvMediaSpecificInfo : Void*,
-    ullTimestamp : UInt64
+  struct DOT11_EXTSTA_RECV_CONTEXT
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uReceiveFlags : UInt32
+    property uPhyId : UInt32
+    property uChCenterFrequency : UInt32
+    property usNumberOfMPDUsReceived : UInt16
+    property lRSSI : Int32
+    property ucDataRate : UInt8
+    property uSizeMediaSpecificInfo : UInt32
+    property pvMediaSpecificInfo : Void*
+    property ullTimestamp : UInt64
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uReceiveFlags : UInt32, @uPhyId : UInt32, @uChCenterFrequency : UInt32, @usNumberOfMPDUsReceived : UInt16, @lRSSI : Int32, @ucDataRate : UInt8, @uSizeMediaSpecificInfo : UInt32, @pvMediaSpecificInfo : Void*, @ullTimestamp : UInt64)
+    end
+  end
 
   @[Extern]
-  record DOT11_EXTAP_ATTRIBUTES,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uScanSSIDListSize : UInt32,
-    uDesiredSSIDListSize : UInt32,
-    uPrivacyExemptionListSize : UInt32,
-    uAssociationTableSize : UInt32,
-    uDefaultKeyTableSize : UInt32,
-    uWEPKeyValueMaxLength : UInt32,
-    bStrictlyOrderedServiceClassImplemented : Win32cr::Foundation::BOOLEAN,
-    uNumSupportedCountryOrRegionStrings : UInt32,
-    pSupportedCountryOrRegionStrings : UInt8*,
-    uInfraNumSupportedUcastAlgoPairs : UInt32,
-    pInfraSupportedUcastAlgoPairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*,
-    uInfraNumSupportedMcastAlgoPairs : UInt32,
-    pInfraSupportedMcastAlgoPairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*
+  struct DOT11_EXTAP_ATTRIBUTES
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uScanSSIDListSize : UInt32
+    property uDesiredSSIDListSize : UInt32
+    property uPrivacyExemptionListSize : UInt32
+    property uAssociationTableSize : UInt32
+    property uDefaultKeyTableSize : UInt32
+    property uWEPKeyValueMaxLength : UInt32
+    property bStrictlyOrderedServiceClassImplemented : Win32cr::Foundation::BOOLEAN
+    property uNumSupportedCountryOrRegionStrings : UInt32
+    property pSupportedCountryOrRegionStrings : UInt8*
+    property uInfraNumSupportedUcastAlgoPairs : UInt32
+    property pInfraSupportedUcastAlgoPairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*
+    property uInfraNumSupportedMcastAlgoPairs : UInt32
+    property pInfraSupportedMcastAlgoPairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uScanSSIDListSize : UInt32, @uDesiredSSIDListSize : UInt32, @uPrivacyExemptionListSize : UInt32, @uAssociationTableSize : UInt32, @uDefaultKeyTableSize : UInt32, @uWEPKeyValueMaxLength : UInt32, @bStrictlyOrderedServiceClassImplemented : Win32cr::Foundation::BOOLEAN, @uNumSupportedCountryOrRegionStrings : UInt32, @pSupportedCountryOrRegionStrings : UInt8*, @uInfraNumSupportedUcastAlgoPairs : UInt32, @pInfraSupportedUcastAlgoPairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*, @uInfraNumSupportedMcastAlgoPairs : UInt32, @pInfraSupportedMcastAlgoPairs : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*)
+    end
+  end
 
   @[Extern]
-  record DOT11_INCOMING_ASSOC_STARTED_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    peer_mac_addr : UInt8[6]
+  struct DOT11_INCOMING_ASSOC_STARTED_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property peer_mac_addr : UInt8[6]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @peer_mac_addr : UInt8[6])
+    end
+  end
 
   @[Extern]
-  record DOT11_INCOMING_ASSOC_REQUEST_RECEIVED_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    peer_mac_addr : UInt8[6],
-    bReAssocReq : Win32cr::Foundation::BOOLEAN,
-    uAssocReqOffset : UInt32,
-    uAssocReqSize : UInt32
+  struct DOT11_INCOMING_ASSOC_REQUEST_RECEIVED_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property peer_mac_addr : UInt8[6]
+    property bReAssocReq : Win32cr::Foundation::BOOLEAN
+    property uAssocReqOffset : UInt32
+    property uAssocReqSize : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @peer_mac_addr : UInt8[6], @bReAssocReq : Win32cr::Foundation::BOOLEAN, @uAssocReqOffset : UInt32, @uAssocReqSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record DOT11_INCOMING_ASSOC_COMPLETION_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    peer_mac_addr : UInt8[6],
-    uStatus : UInt32,
-    ucErrorSource : UInt8,
-    bReAssocReq : Win32cr::Foundation::BOOLEAN,
-    bReAssocResp : Win32cr::Foundation::BOOLEAN,
-    uAssocReqOffset : UInt32,
-    uAssocReqSize : UInt32,
-    uAssocRespOffset : UInt32,
-    uAssocRespSize : UInt32,
-    auth_algo : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM,
-    unicast_cipher : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM,
-    multicast_cipher : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM,
-    uActivePhyListOffset : UInt32,
-    uActivePhyListSize : UInt32,
-    uBeaconOffset : UInt32,
-    uBeaconSize : UInt32
+  struct DOT11_INCOMING_ASSOC_COMPLETION_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property peer_mac_addr : UInt8[6]
+    property uStatus : UInt32
+    property ucErrorSource : UInt8
+    property bReAssocReq : Win32cr::Foundation::BOOLEAN
+    property bReAssocResp : Win32cr::Foundation::BOOLEAN
+    property uAssocReqOffset : UInt32
+    property uAssocReqSize : UInt32
+    property uAssocRespOffset : UInt32
+    property uAssocRespSize : UInt32
+    property auth_algo : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM
+    property unicast_cipher : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM
+    property multicast_cipher : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM
+    property uActivePhyListOffset : UInt32
+    property uActivePhyListSize : UInt32
+    property uBeaconOffset : UInt32
+    property uBeaconSize : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @peer_mac_addr : UInt8[6], @uStatus : UInt32, @ucErrorSource : UInt8, @bReAssocReq : Win32cr::Foundation::BOOLEAN, @bReAssocResp : Win32cr::Foundation::BOOLEAN, @uAssocReqOffset : UInt32, @uAssocReqSize : UInt32, @uAssocRespOffset : UInt32, @uAssocRespSize : UInt32, @auth_algo : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM, @unicast_cipher : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM, @multicast_cipher : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM, @uActivePhyListOffset : UInt32, @uActivePhyListSize : UInt32, @uBeaconOffset : UInt32, @uBeaconSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record DOT11_STOP_AP_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    ulReason : UInt32
+  struct DOT11_STOP_AP_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property ulReason : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @ulReason : UInt32)
+    end
+  end
 
   @[Extern]
-  record DOT11_PHY_FREQUENCY_ADOPTED_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    ulPhyId : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct DOT11_PHY_FREQUENCY_ADOPTED_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property ulPhyId : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      ulChannel : UInt32,
-      ulFrequency : UInt32
+    struct Anonymous_e__Union_
+    property ulChannel : UInt32
+    property ulFrequency : UInt32
+    def initialize(@ulChannel : UInt32, @ulFrequency : UInt32)
+    end
+    end
 
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @ulPhyId : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record DOT11_CAN_SUSTAIN_AP_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    ulReason : UInt32
-
-  @[Extern]
-  record DOT11_AVAILABLE_CHANNEL_LIST,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uNumOfEntries : UInt32,
-    uTotalNumOfEntries : UInt32,
-    uChannelNumber : UInt32*
-
-  @[Extern]
-  record DOT11_AVAILABLE_FREQUENCY_LIST,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uNumOfEntries : UInt32,
-    uTotalNumOfEntries : UInt32,
-    uFrequencyValue : UInt32*
-
-  @[Extern]
-  record DOT11_DISASSOCIATE_PEER_REQUEST,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    peer_mac_addr : UInt8[6],
-    usReason : UInt16
-
-  @[Extern]
-  record DOT11_INCOMING_ASSOC_DECISION,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    peer_mac_addr : UInt8[6],
-    bAccept : Win32cr::Foundation::BOOLEAN,
-    usReasonCode : UInt16,
-    uAssocResponseIEsOffset : UInt32,
-    uAssocResponseIEsLength : UInt32
-
-  @[Extern]
-  record DOT11_INCOMING_ASSOC_DECISION_V2,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    peer_mac_addr : UInt8[6],
-    bAccept : Win32cr::Foundation::BOOLEAN,
-    usReasonCode : UInt16,
-    uAssocResponseIEsOffset : UInt32,
-    uAssocResponseIEsLength : UInt32,
-    wfd_status : UInt8
-
-  @[Extern]
-  record DOT11_ADDITIONAL_IE,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uBeaconIEsOffset : UInt32,
-    uBeaconIEsLength : UInt32,
-    uResponseIEsOffset : UInt32,
-    uResponseIEsLength : UInt32
-
-  @[Extern]
-  record DOT11_PEER_STATISTICS,
-    ullDecryptSuccessCount : UInt64,
-    ullDecryptFailureCount : UInt64,
-    ullTxPacketSuccessCount : UInt64,
-    ullTxPacketFailureCount : UInt64,
-    ullRxPacketSuccessCount : UInt64,
-    ullRxPacketFailureCount : UInt64
-
-  @[Extern]
-  record DOT11_PEER_INFO,
-    mac_address : UInt8[6],
-    usCapabilityInformation : UInt16,
-    auth_algo : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM,
-    unicast_cipher_algo : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM,
-    multicast_cipher_algo : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM,
-    bWpsEnabled : Win32cr::Foundation::BOOLEAN,
-    usListenInterval : UInt16,
-    ucSupportedRates : UInt8[255],
-    usAssociationID : UInt16,
-    association_state : Win32cr::NetworkManagement::WiFi::DOT11_ASSOCIATION_STATE,
-    power_mode : Win32cr::NetworkManagement::WiFi::DOT11_POWER_MODE,
-    liAssociationUpTime : Win32cr::Foundation::LARGE_INTEGER,
-    statistics : Win32cr::NetworkManagement::WiFi::DOT11_PEER_STATISTICS
-
-  @[Extern]
-  record DOT11_PEER_INFO_LIST,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uNumOfEntries : UInt32,
-    uTotalNumOfEntries : UInt32,
-    peer_info : Win32cr::NetworkManagement::WiFi::DOT11_PEER_INFO*
-
-  @[Extern]
-  record DOT11_VWIFI_COMBINATION,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uNumInfrastructure : UInt32,
-    uNumAdhoc : UInt32,
-    uNumSoftAP : UInt32
-
-  @[Extern]
-  record DOT11_VWIFI_COMBINATION_V2,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uNumInfrastructure : UInt32,
-    uNumAdhoc : UInt32,
-    uNumSoftAP : UInt32,
-    uNumVirtualStation : UInt32
-
-  @[Extern]
-  record DOT11_VWIFI_COMBINATION_V3,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uNumInfrastructure : UInt32,
-    uNumAdhoc : UInt32,
-    uNumSoftAP : UInt32,
-    uNumVirtualStation : UInt32,
-    uNumWFDGroup : UInt32
-
-  @[Extern]
-  record DOT11_VWIFI_ATTRIBUTES,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uTotalNumOfEntries : UInt32,
-    combinations : Win32cr::NetworkManagement::WiFi::DOT11_VWIFI_COMBINATION*
-
-  @[Extern]
-  record DOT11_MAC_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uOpmodeMask : UInt32
-
-  @[Extern]
-  record DOT11_MAC_INFO,
-    uReserved : UInt32,
-    uNdisPortNumber : UInt32,
-    mac_addr : UInt8[6]
-
-  @[Extern]
-  record DOT11_WFD_ATTRIBUTES,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uNumConcurrentGORole : UInt32,
-    uNumConcurrentClientRole : UInt32,
-    wps_versions_supported : UInt32,
-    bServiceDiscoverySupported : Win32cr::Foundation::BOOLEAN,
-    bClientDiscoverabilitySupported : Win32cr::Foundation::BOOLEAN,
-    bInfrastructureManagementSupported : Win32cr::Foundation::BOOLEAN,
-    uMaxSecondaryDeviceTypeListSize : UInt32,
-    device_address : UInt8[6],
-    uInterfaceAddressListCount : UInt32,
-    pInterfaceAddressList : UInt8*,
-    uNumSupportedCountryOrRegionStrings : UInt32,
-    pSupportedCountryOrRegionStrings : UInt8*,
-    uDiscoveryFilterListSize : UInt32,
-    uGORoleClientTableSize : UInt32
-
-  @[Extern]
-  record DOT11_WFD_DEVICE_TYPE,
-    category_id : UInt16,
-    sub_category_id : UInt16,
-    oui : UInt8[4]
-
-  @[Extern]
-  record DOT11_WPS_DEVICE_NAME,
-    uDeviceNameLength : UInt32,
-    ucDeviceName : UInt8[32]
-
-  @[Extern]
-  record DOT11_WFD_CONFIGURATION_TIMEOUT,
-    go_timeout : UInt8,
-    client_timeout : UInt8
-
-  @[Extern]
-  record DOT11_WFD_GROUP_ID,
-    device_address : UInt8[6],
-    ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID
-
-  @[Extern]
-  record DOT11_WFD_GO_INTENT,
-    _bitfield : UInt8
-
-  @[Extern]
-  record DOT11_WFD_CHANNEL,
-    country_region_string : UInt8[3],
-    operating_class : UInt8,
-    channel_number : UInt8
-
-  @[Extern]
-  record WFDSVC_CONNECTION_CAPABILITY,
-    bNew : Win32cr::Foundation::BOOLEAN,
-    bClient : Win32cr::Foundation::BOOLEAN,
-    bGO : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record DOT11_WFD_SERVICE_HASH_LIST,
-    service_hash_count : UInt16,
-    service_hash : UInt8[6]
-
-  @[Extern]
-  record DOT11_WFD_ADVERTISEMENT_ID,
-    advertisement_id : UInt32,
-    service_address : UInt8[6]
-
-  @[Extern]
-  record DOT11_WFD_SESSION_ID,
-    session_id : UInt32,
-    session_address : UInt8[6]
-
-  @[Extern]
-  record DOT11_WFD_ADVERTISED_SERVICE_DESCRIPTOR,
-    advertisement_id : UInt32,
-    config_methods : UInt16,
-    service_name_length : UInt8,
-    service_name : UInt8[255]
-
-  @[Extern]
-  record DOT11_WFD_ADVERTISED_SERVICE_LIST,
-    service_count : UInt16,
-    advertised_service : Win32cr::NetworkManagement::WiFi::DOT11_WFD_ADVERTISED_SERVICE_DESCRIPTOR*
-
-  @[Extern]
-  record DOT11_WFD_DISCOVER_COMPLETE_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    status : Int32,
-    uNumOfEntries : UInt32,
-    uTotalNumOfEntries : UInt32,
-    uListOffset : UInt32,
-    uListLength : UInt32
-
-  @[Extern]
-  record DOT11_GO_NEGOTIATION_REQUEST_SEND_COMPLETE_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    peer_device_address : UInt8[6],
-    dialog_token : UInt8,
-    status : Int32,
-    uIEsOffset : UInt32,
-    uIEsLength : UInt32
-
-  @[Extern]
-  record DOT11_RECEIVED_GO_NEGOTIATION_REQUEST_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    peer_device_address : UInt8[6],
-    dialog_token : UInt8,
-    request_context : Void*,
-    uIEsOffset : UInt32,
-    uIEsLength : UInt32
-
-  @[Extern]
-  record DOT11_GO_NEGOTIATION_RESPONSE_SEND_COMPLETE_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    peer_device_address : UInt8[6],
-    dialog_token : UInt8,
-    status : Int32,
-    uIEsOffset : UInt32,
-    uIEsLength : UInt32
-
-  @[Extern]
-  record DOT11_RECEIVED_GO_NEGOTIATION_RESPONSE_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    peer_device_address : UInt8[6],
-    dialog_token : UInt8,
-    response_context : Void*,
-    uIEsOffset : UInt32,
-    uIEsLength : UInt32
-
-  @[Extern]
-  record DOT11_GO_NEGOTIATION_CONFIRMATION_SEND_COMPLETE_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    peer_device_address : UInt8[6],
-    dialog_token : UInt8,
-    status : Int32,
-    uIEsOffset : UInt32,
-    uIEsLength : UInt32
-
-  @[Extern]
-  record DOT11_RECEIVED_GO_NEGOTIATION_CONFIRMATION_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    peer_device_address : UInt8[6],
-    dialog_token : UInt8,
-    uIEsOffset : UInt32,
-    uIEsLength : UInt32
-
-  @[Extern]
-  record DOT11_INVITATION_REQUEST_SEND_COMPLETE_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    peer_device_address : UInt8[6],
-    receiver_address : UInt8[6],
-    dialog_token : UInt8,
-    status : Int32,
-    uIEsOffset : UInt32,
-    uIEsLength : UInt32
-
-  @[Extern]
-  record DOT11_RECEIVED_INVITATION_REQUEST_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    transmitter_device_address : UInt8[6],
-    bssid : UInt8[6],
-    dialog_token : UInt8,
-    request_context : Void*,
-    uIEsOffset : UInt32,
-    uIEsLength : UInt32
-
-  @[Extern]
-  record DOT11_INVITATION_RESPONSE_SEND_COMPLETE_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    receiver_device_address : UInt8[6],
-    dialog_token : UInt8,
-    status : Int32,
-    uIEsOffset : UInt32,
-    uIEsLength : UInt32
-
-  @[Extern]
-  record DOT11_RECEIVED_INVITATION_RESPONSE_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    transmitter_device_address : UInt8[6],
-    bssid : UInt8[6],
-    dialog_token : UInt8,
-    uIEsOffset : UInt32,
-    uIEsLength : UInt32
-
-  @[Extern]
-  record DOT11_PROVISION_DISCOVERY_REQUEST_SEND_COMPLETE_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    peer_device_address : UInt8[6],
-    receiver_address : UInt8[6],
-    dialog_token : UInt8,
-    status : Int32,
-    uIEsOffset : UInt32,
-    uIEsLength : UInt32
-
-  @[Extern]
-  record DOT11_RECEIVED_PROVISION_DISCOVERY_REQUEST_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    transmitter_device_address : UInt8[6],
-    bssid : UInt8[6],
-    dialog_token : UInt8,
-    request_context : Void*,
-    uIEsOffset : UInt32,
-    uIEsLength : UInt32
-
-  @[Extern]
-  record DOT11_PROVISION_DISCOVERY_RESPONSE_SEND_COMPLETE_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    receiver_device_address : UInt8[6],
-    dialog_token : UInt8,
-    status : Int32,
-    uIEsOffset : UInt32,
-    uIEsLength : UInt32
-
-  @[Extern]
-  record DOT11_RECEIVED_PROVISION_DISCOVERY_RESPONSE_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    transmitter_device_address : UInt8[6],
-    bssid : UInt8[6],
-    dialog_token : UInt8,
-    uIEsOffset : UInt32,
-    uIEsLength : UInt32
-
-  @[Extern]
-  record DOT11_ANQP_QUERY_COMPLETE_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    status : Win32cr::NetworkManagement::WiFi::DOT11_ANQP_QUERY_RESULT,
-    hContext : Win32cr::Foundation::HANDLE,
-    uResponseLength : UInt32
-
-  @[Extern]
-  record DOT11_WFD_DEVICE_CAPABILITY_CONFIG,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    bServiceDiscoveryEnabled : Win32cr::Foundation::BOOLEAN,
-    bClientDiscoverabilityEnabled : Win32cr::Foundation::BOOLEAN,
-    bConcurrentOperationSupported : Win32cr::Foundation::BOOLEAN,
-    bInfrastructureManagementEnabled : Win32cr::Foundation::BOOLEAN,
-    bDeviceLimitReached : Win32cr::Foundation::BOOLEAN,
-    bInvitationProcedureEnabled : Win32cr::Foundation::BOOLEAN,
-    wps_versions_enabled : UInt32
-
-  @[Extern]
-  record DOT11_WFD_GROUP_OWNER_CAPABILITY_CONFIG,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    bPersistentGroupEnabled : Win32cr::Foundation::BOOLEAN,
-    bIntraBSSDistributionSupported : Win32cr::Foundation::BOOLEAN,
-    bCrossConnectionSupported : Win32cr::Foundation::BOOLEAN,
-    bPersistentReconnectSupported : Win32cr::Foundation::BOOLEAN,
-    bGroupFormationEnabled : Win32cr::Foundation::BOOLEAN,
-    uMaximumGroupLimit : UInt32
-
-  @[Extern]
-  record DOT11_WFD_GROUP_OWNER_CAPABILITY_CONFIG_V2,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    bPersistentGroupEnabled : Win32cr::Foundation::BOOLEAN,
-    bIntraBSSDistributionSupported : Win32cr::Foundation::BOOLEAN,
-    bCrossConnectionSupported : Win32cr::Foundation::BOOLEAN,
-    bPersistentReconnectSupported : Win32cr::Foundation::BOOLEAN,
-    bGroupFormationEnabled : Win32cr::Foundation::BOOLEAN,
-    uMaximumGroupLimit : UInt32,
-    bEapolKeyIpAddressAllocationSupported : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record DOT11_WFD_DEVICE_INFO,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    device_address : UInt8[6],
-    config_methods : UInt16,
-    primary_device_type : Win32cr::NetworkManagement::WiFi::DOT11_WFD_DEVICE_TYPE,
-    device_name : Win32cr::NetworkManagement::WiFi::DOT11_WPS_DEVICE_NAME
-
-  @[Extern]
-  record DOT11_WFD_SECONDARY_DEVICE_TYPE_LIST,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uNumOfEntries : UInt32,
-    uTotalNumOfEntries : UInt32,
-    secondary_device_types : Win32cr::NetworkManagement::WiFi::DOT11_WFD_DEVICE_TYPE*
-
-  @[Extern]
-  record DOT11_WFD_DISCOVER_DEVICE_FILTER,
-    device_id : UInt8[6],
-    ucBitmask : UInt8,
-    group_ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID
-
-  @[Extern]
-  record DOT11_WFD_DISCOVER_REQUEST,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    discover_type : Win32cr::NetworkManagement::WiFi::DOT11_WFD_DISCOVER_TYPE,
-    scan_type : Win32cr::NetworkManagement::WiFi::DOT11_WFD_SCAN_TYPE,
-    uDiscoverTimeout : UInt32,
-    uDeviceFilterListOffset : UInt32,
-    uNumDeviceFilters : UInt32,
-    uIEsOffset : UInt32,
-    uIEsLength : UInt32,
-    bForceScanLegacyNetworks : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record DOT11_WFD_DEVICE_ENTRY,
-    uPhyId : UInt32,
-    phy_specific_info : Win32cr::NetworkManagement::WiFi::DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO,
-    dot11BSSID : UInt8[6],
-    dot11BSSType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE,
-    transmitter_address : UInt8[6],
-    lRSSI : Int32,
-    uLinkQuality : UInt32,
-    usBeaconPeriod : UInt16,
-    ullTimestamp : UInt64,
-    ullBeaconHostTimestamp : UInt64,
-    ullProbeResponseHostTimestamp : UInt64,
-    usCapabilityInformation : UInt16,
-    uBeaconIEsOffset : UInt32,
-    uBeaconIEsLength : UInt32,
-    uProbeResponseIEsOffset : UInt32,
-    uProbeResponseIEsLength : UInt32
-
-  @[Extern]
-  record DOT11_WFD_ADDITIONAL_IE,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    uBeaconIEsOffset : UInt32,
-    uBeaconIEsLength : UInt32,
-    uProbeResponseIEsOffset : UInt32,
-    uProbeResponseIEsLength : UInt32,
-    uDefaultRequestIEsOffset : UInt32,
-    uDefaultRequestIEsLength : UInt32
-
-  @[Extern]
-  record DOT11_SEND_GO_NEGOTIATION_REQUEST_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    peer_device_address : UInt8[6],
-    dialog_token : UInt8,
-    uSendTimeout : UInt32,
-    group_owner_intent : Win32cr::NetworkManagement::WiFi::DOT11_WFD_GO_INTENT,
-    minimum_config_timeout : Win32cr::NetworkManagement::WiFi::DOT11_WFD_CONFIGURATION_TIMEOUT,
-    intended_interface_address : UInt8[6],
-    group_capability : UInt8,
-    uIEsOffset : UInt32,
-    uIEsLength : UInt32
-
-  @[Extern]
-  record DOT11_SEND_GO_NEGOTIATION_RESPONSE_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    peer_device_address : UInt8[6],
-    dialog_token : UInt8,
-    request_context : Void*,
-    uSendTimeout : UInt32,
-    status : UInt8,
-    group_owner_intent : Win32cr::NetworkManagement::WiFi::DOT11_WFD_GO_INTENT,
-    minimum_config_timeout : Win32cr::NetworkManagement::WiFi::DOT11_WFD_CONFIGURATION_TIMEOUT,
-    intended_interface_address : UInt8[6],
-    group_capability : UInt8,
-    group_id : Win32cr::NetworkManagement::WiFi::DOT11_WFD_GROUP_ID,
-    bUseGroupID : Win32cr::Foundation::BOOLEAN,
-    uIEsOffset : UInt32,
-    uIEsLength : UInt32
-
-  @[Extern]
-  record DOT11_SEND_GO_NEGOTIATION_CONFIRMATION_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    peer_device_address : UInt8[6],
-    dialog_token : UInt8,
-    response_context : Void*,
-    uSendTimeout : UInt32,
-    status : UInt8,
-    group_capability : UInt8,
-    group_id : Win32cr::NetworkManagement::WiFi::DOT11_WFD_GROUP_ID,
-    bUseGroupID : Win32cr::Foundation::BOOLEAN,
-    uIEsOffset : UInt32,
-    uIEsLength : UInt32
-
-  @[Extern]
-  record DOT11_WFD_INVITATION_FLAGS,
-    _bitfield : UInt8
-
-  @[Extern]
-  record DOT11_SEND_INVITATION_REQUEST_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    dialog_token : UInt8,
-    peer_device_address : UInt8[6],
-    uSendTimeout : UInt32,
-    minimum_config_timeout : Win32cr::NetworkManagement::WiFi::DOT11_WFD_CONFIGURATION_TIMEOUT,
-    invitation_flags : Win32cr::NetworkManagement::WiFi::DOT11_WFD_INVITATION_FLAGS,
-    group_bssid : UInt8[6],
-    bUseGroupBSSID : Win32cr::Foundation::BOOLEAN,
-    operating_channel : Win32cr::NetworkManagement::WiFi::DOT11_WFD_CHANNEL,
-    bUseSpecifiedOperatingChannel : Win32cr::Foundation::BOOLEAN,
-    group_id : Win32cr::NetworkManagement::WiFi::DOT11_WFD_GROUP_ID,
-    bLocalGO : Win32cr::Foundation::BOOLEAN,
-    uIEsOffset : UInt32,
-    uIEsLength : UInt32
-
-  @[Extern]
-  record DOT11_SEND_INVITATION_RESPONSE_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    receiver_device_address : UInt8[6],
-    dialog_token : UInt8,
-    request_context : Void*,
-    uSendTimeout : UInt32,
-    status : UInt8,
-    minimum_config_timeout : Win32cr::NetworkManagement::WiFi::DOT11_WFD_CONFIGURATION_TIMEOUT,
-    group_bssid : UInt8[6],
-    bUseGroupBSSID : Win32cr::Foundation::BOOLEAN,
-    operating_channel : Win32cr::NetworkManagement::WiFi::DOT11_WFD_CHANNEL,
-    bUseSpecifiedOperatingChannel : Win32cr::Foundation::BOOLEAN,
-    uIEsOffset : UInt32,
-    uIEsLength : UInt32
-
-  @[Extern]
-  record DOT11_SEND_PROVISION_DISCOVERY_REQUEST_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    dialog_token : UInt8,
-    peer_device_address : UInt8[6],
-    uSendTimeout : UInt32,
-    group_capability : UInt8,
-    group_id : Win32cr::NetworkManagement::WiFi::DOT11_WFD_GROUP_ID,
-    bUseGroupID : Win32cr::Foundation::BOOLEAN,
-    uIEsOffset : UInt32,
-    uIEsLength : UInt32
-
-  @[Extern]
-  record DOT11_SEND_PROVISION_DISCOVERY_RESPONSE_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    receiver_device_address : UInt8[6],
-    dialog_token : UInt8,
-    request_context : Void*,
-    uSendTimeout : UInt32,
-    uIEsOffset : UInt32,
-    uIEsLength : UInt32
-
-  @[Extern]
-  record DOT11_WFD_DEVICE_LISTEN_CHANNEL,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    channel_number : UInt8
-
-  @[Extern]
-  record DOT11_WFD_GROUP_START_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    advertised_operating_channel : Win32cr::NetworkManagement::WiFi::DOT11_WFD_CHANNEL
-
-  @[Extern]
-  record DOT11_WFD_GROUP_JOIN_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    go_operating_channel : Win32cr::NetworkManagement::WiFi::DOT11_WFD_CHANNEL,
-    go_config_time : UInt32,
-    bInGroupFormation : Win32cr::Foundation::BOOLEAN,
-    bWaitForWPSReady : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record DOT11_POWER_MGMT_AUTO_MODE_ENABLED_INFO,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    bEnabled : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record DOT11_POWER_MGMT_MODE_STATUS_INFO,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    power_save_mode : Win32cr::NetworkManagement::WiFi::DOT11_POWER_MODE,
-    uPowerSaveLevel : UInt32,
-    reason : Win32cr::NetworkManagement::WiFi::DOT11_POWER_MODE_REASON
-
-  @[Extern]
-  record DOT11_CHANNEL_HINT,
-    dot11_phy_type : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE,
-    uChannelNumber : UInt32
-
-  @[Extern]
-  record DOT11_OFFLOAD_NETWORK,
-    ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID,
-    unicast_cipher : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM,
-    auth_algo : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM,
-    dot11_channel_hints : Win32cr::NetworkManagement::WiFi::DOT11_CHANNEL_HINT[4]
-
-  @[Extern]
-  record DOT11_OFFLOAD_NETWORK_LIST_INFO,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    ulFlags : UInt32,
-    fast_scan_period : UInt32,
-    fast_scan_iterations : UInt32,
-    slow_scan_period : UInt32,
-    uNumOfEntries : UInt32,
-    offloadNetworkList : Win32cr::NetworkManagement::WiFi::DOT11_OFFLOAD_NETWORK*
-
-  @[Extern]
-  record DOT11_OFFLOAD_NETWORK_STATUS_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    status : Int32
-
-  @[Extern]
-  record DOT11_MANUFACTURING_TEST,
-    dot11ManufacturingTestType : Win32cr::NetworkManagement::WiFi::DOT11_MANUFACTURING_TEST_TYPE,
-    uBufferLength : UInt32,
-    ucBuffer : UInt8*
-
-  @[Extern]
-  record DOT11_MANUFACTURING_SELF_TEST_SET_PARAMS,
-    self_test_type : Win32cr::NetworkManagement::WiFi::DOT11_MANUFACTURING_SELF_TEST_TYPE,
-    uTestID : UInt32,
-    uPinBitMask : UInt32,
-    pvContext : Void*,
-    uBufferLength : UInt32,
-    ucBufferIn : UInt8*
-
-  @[Extern]
-  record DOT11_MANUFACTURING_SELF_TEST_QUERY_RESULTS,
-    self_test_type : Win32cr::NetworkManagement::WiFi::DOT11_MANUFACTURING_SELF_TEST_TYPE,
-    uTestID : UInt32,
-    bResult : Win32cr::Foundation::BOOLEAN,
-    uPinFailedBitMask : UInt32,
-    pvContext : Void*,
-    uBytesWrittenOut : UInt32,
-    ucBufferOut : UInt8*
-
-  @[Extern]
-  record DOT11_MANUFACTURING_FUNCTIONAL_TEST_RX,
-    bEnabled : Win32cr::Foundation::BOOLEAN,
-    dot11_band : Win32cr::NetworkManagement::WiFi::DOT11_BAND,
-    uChannel : UInt32,
-    power_level : Int32
-
-  @[Extern]
-  record DOT11_MANUFACTURING_FUNCTIONAL_TEST_TX,
-    bEnable : Win32cr::Foundation::BOOLEAN,
-    bOpenLoop : Win32cr::Foundation::BOOLEAN,
-    dot11_band : Win32cr::NetworkManagement::WiFi::DOT11_BAND,
-    uChannel : UInt32,
-    uSetPowerLevel : UInt32,
-    adc_power_level : Int32
-
-  @[Extern]
-  record DOT11_MANUFACTURING_FUNCTIONAL_TEST_QUERY_ADC,
-    dot11_band : Win32cr::NetworkManagement::WiFi::DOT11_BAND,
-    uChannel : UInt32,
-    adc_power_level : Int32
-
-  @[Extern]
-  record DOT11_MANUFACTURING_TEST_SET_DATA,
-    uKey : UInt32,
-    uOffset : UInt32,
-    uBufferLength : UInt32,
-    ucBufferIn : UInt8*
-
-  @[Extern]
-  record DOT11_MANUFACTURING_TEST_QUERY_DATA,
-    uKey : UInt32,
-    uOffset : UInt32,
-    uBufferLength : UInt32,
-    uBytesRead : UInt32,
-    ucBufferOut : UInt8*
-
-  @[Extern]
-  record DOT11_MANUFACTURING_TEST_SLEEP,
-    uSleepTime : UInt32,
-    pvContext : Void*
-
-  @[Extern]
-  record DOT11_MANUFACTURING_CALLBACK_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    dot11ManufacturingCallbackType : Win32cr::NetworkManagement::WiFi::DOT11_MANUFACTURING_CALLBACK_TYPE,
-    uStatus : UInt32,
-    pvContext : Void*
-
-  @[Extern]
-  record L2_NOTIFICATION_DATA,
-    notification_source : UInt32,
-    notification_code : UInt32,
-    interface_guid : LibC::GUID,
-    dwDataSize : UInt32,
-    pData : Void*
-
-  @[Extern]
-  record WLAN_PROFILE_INFO,
-    strProfileName : UInt16[256],
-    dwFlags : UInt32
-
-  @[Extern]
-  record DOT11_NETWORK,
-    dot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID,
-    dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE
-
-  @[Extern]
-  record WLAN_RAW_DATA,
-    dwDataSize : UInt32,
-    data_blob : UInt8*
-
-  @[Extern]
-  record WLAN_RAW_DATA_LIST,
-    dwTotalSize : UInt32,
-    dwNumberOfItems : UInt32,
-    data_list : Anonymous_e__Struct_* do
+  struct DOT11_CAN_SUSTAIN_AP_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property ulReason : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @ulReason : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_AVAILABLE_CHANNEL_LIST
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uNumOfEntries : UInt32
+    property uTotalNumOfEntries : UInt32
+    property uChannelNumber : UInt32*
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @uChannelNumber : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_AVAILABLE_FREQUENCY_LIST
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uNumOfEntries : UInt32
+    property uTotalNumOfEntries : UInt32
+    property uFrequencyValue : UInt32*
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @uFrequencyValue : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_DISASSOCIATE_PEER_REQUEST
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property peer_mac_addr : UInt8[6]
+    property usReason : UInt16
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @peer_mac_addr : UInt8[6], @usReason : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_INCOMING_ASSOC_DECISION
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property peer_mac_addr : UInt8[6]
+    property bAccept : Win32cr::Foundation::BOOLEAN
+    property usReasonCode : UInt16
+    property uAssocResponseIEsOffset : UInt32
+    property uAssocResponseIEsLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @peer_mac_addr : UInt8[6], @bAccept : Win32cr::Foundation::BOOLEAN, @usReasonCode : UInt16, @uAssocResponseIEsOffset : UInt32, @uAssocResponseIEsLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_INCOMING_ASSOC_DECISION_V2
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property peer_mac_addr : UInt8[6]
+    property bAccept : Win32cr::Foundation::BOOLEAN
+    property usReasonCode : UInt16
+    property uAssocResponseIEsOffset : UInt32
+    property uAssocResponseIEsLength : UInt32
+    property wfd_status : UInt8
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @peer_mac_addr : UInt8[6], @bAccept : Win32cr::Foundation::BOOLEAN, @usReasonCode : UInt16, @uAssocResponseIEsOffset : UInt32, @uAssocResponseIEsLength : UInt32, @wfd_status : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_ADDITIONAL_IE
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uBeaconIEsOffset : UInt32
+    property uBeaconIEsLength : UInt32
+    property uResponseIEsOffset : UInt32
+    property uResponseIEsLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uBeaconIEsOffset : UInt32, @uBeaconIEsLength : UInt32, @uResponseIEsOffset : UInt32, @uResponseIEsLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_PEER_STATISTICS
+    property ullDecryptSuccessCount : UInt64
+    property ullDecryptFailureCount : UInt64
+    property ullTxPacketSuccessCount : UInt64
+    property ullTxPacketFailureCount : UInt64
+    property ullRxPacketSuccessCount : UInt64
+    property ullRxPacketFailureCount : UInt64
+    def initialize(@ullDecryptSuccessCount : UInt64, @ullDecryptFailureCount : UInt64, @ullTxPacketSuccessCount : UInt64, @ullTxPacketFailureCount : UInt64, @ullRxPacketSuccessCount : UInt64, @ullRxPacketFailureCount : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_PEER_INFO
+    property mac_address : UInt8[6]
+    property usCapabilityInformation : UInt16
+    property auth_algo : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM
+    property unicast_cipher_algo : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM
+    property multicast_cipher_algo : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM
+    property bWpsEnabled : Win32cr::Foundation::BOOLEAN
+    property usListenInterval : UInt16
+    property ucSupportedRates : UInt8[255]
+    property usAssociationID : UInt16
+    property association_state : Win32cr::NetworkManagement::WiFi::DOT11_ASSOCIATION_STATE
+    property power_mode : Win32cr::NetworkManagement::WiFi::DOT11_POWER_MODE
+    property liAssociationUpTime : Win32cr::Foundation::LARGE_INTEGER
+    property statistics : Win32cr::NetworkManagement::WiFi::DOT11_PEER_STATISTICS
+    def initialize(@mac_address : UInt8[6], @usCapabilityInformation : UInt16, @auth_algo : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM, @unicast_cipher_algo : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM, @multicast_cipher_algo : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM, @bWpsEnabled : Win32cr::Foundation::BOOLEAN, @usListenInterval : UInt16, @ucSupportedRates : UInt8[255], @usAssociationID : UInt16, @association_state : Win32cr::NetworkManagement::WiFi::DOT11_ASSOCIATION_STATE, @power_mode : Win32cr::NetworkManagement::WiFi::DOT11_POWER_MODE, @liAssociationUpTime : Win32cr::Foundation::LARGE_INTEGER, @statistics : Win32cr::NetworkManagement::WiFi::DOT11_PEER_STATISTICS)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_PEER_INFO_LIST
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uNumOfEntries : UInt32
+    property uTotalNumOfEntries : UInt32
+    property peer_info : Win32cr::NetworkManagement::WiFi::DOT11_PEER_INFO*
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @peer_info : Win32cr::NetworkManagement::WiFi::DOT11_PEER_INFO*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_VWIFI_COMBINATION
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uNumInfrastructure : UInt32
+    property uNumAdhoc : UInt32
+    property uNumSoftAP : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumInfrastructure : UInt32, @uNumAdhoc : UInt32, @uNumSoftAP : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_VWIFI_COMBINATION_V2
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uNumInfrastructure : UInt32
+    property uNumAdhoc : UInt32
+    property uNumSoftAP : UInt32
+    property uNumVirtualStation : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumInfrastructure : UInt32, @uNumAdhoc : UInt32, @uNumSoftAP : UInt32, @uNumVirtualStation : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_VWIFI_COMBINATION_V3
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uNumInfrastructure : UInt32
+    property uNumAdhoc : UInt32
+    property uNumSoftAP : UInt32
+    property uNumVirtualStation : UInt32
+    property uNumWFDGroup : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumInfrastructure : UInt32, @uNumAdhoc : UInt32, @uNumSoftAP : UInt32, @uNumVirtualStation : UInt32, @uNumWFDGroup : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_VWIFI_ATTRIBUTES
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uTotalNumOfEntries : UInt32
+    property combinations : Win32cr::NetworkManagement::WiFi::DOT11_VWIFI_COMBINATION*
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uTotalNumOfEntries : UInt32, @combinations : Win32cr::NetworkManagement::WiFi::DOT11_VWIFI_COMBINATION*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_MAC_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uOpmodeMask : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uOpmodeMask : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_MAC_INFO
+    property uReserved : UInt32
+    property uNdisPortNumber : UInt32
+    property mac_addr : UInt8[6]
+    def initialize(@uReserved : UInt32, @uNdisPortNumber : UInt32, @mac_addr : UInt8[6])
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WFD_ATTRIBUTES
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uNumConcurrentGORole : UInt32
+    property uNumConcurrentClientRole : UInt32
+    property wps_versions_supported : UInt32
+    property bServiceDiscoverySupported : Win32cr::Foundation::BOOLEAN
+    property bClientDiscoverabilitySupported : Win32cr::Foundation::BOOLEAN
+    property bInfrastructureManagementSupported : Win32cr::Foundation::BOOLEAN
+    property uMaxSecondaryDeviceTypeListSize : UInt32
+    property device_address : UInt8[6]
+    property uInterfaceAddressListCount : UInt32
+    property pInterfaceAddressList : UInt8*
+    property uNumSupportedCountryOrRegionStrings : UInt32
+    property pSupportedCountryOrRegionStrings : UInt8*
+    property uDiscoveryFilterListSize : UInt32
+    property uGORoleClientTableSize : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumConcurrentGORole : UInt32, @uNumConcurrentClientRole : UInt32, @wps_versions_supported : UInt32, @bServiceDiscoverySupported : Win32cr::Foundation::BOOLEAN, @bClientDiscoverabilitySupported : Win32cr::Foundation::BOOLEAN, @bInfrastructureManagementSupported : Win32cr::Foundation::BOOLEAN, @uMaxSecondaryDeviceTypeListSize : UInt32, @device_address : UInt8[6], @uInterfaceAddressListCount : UInt32, @pInterfaceAddressList : UInt8*, @uNumSupportedCountryOrRegionStrings : UInt32, @pSupportedCountryOrRegionStrings : UInt8*, @uDiscoveryFilterListSize : UInt32, @uGORoleClientTableSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WFD_DEVICE_TYPE
+    property category_id : UInt16
+    property sub_category_id : UInt16
+    property oui : UInt8[4]
+    def initialize(@category_id : UInt16, @sub_category_id : UInt16, @oui : UInt8[4])
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WPS_DEVICE_NAME
+    property uDeviceNameLength : UInt32
+    property ucDeviceName : UInt8[32]
+    def initialize(@uDeviceNameLength : UInt32, @ucDeviceName : UInt8[32])
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WFD_CONFIGURATION_TIMEOUT
+    property go_timeout : UInt8
+    property client_timeout : UInt8
+    def initialize(@go_timeout : UInt8, @client_timeout : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WFD_GROUP_ID
+    property device_address : UInt8[6]
+    property ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID
+    def initialize(@device_address : UInt8[6], @ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WFD_GO_INTENT
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WFD_CHANNEL
+    property country_region_string : UInt8[3]
+    property operating_class : UInt8
+    property channel_number : UInt8
+    def initialize(@country_region_string : UInt8[3], @operating_class : UInt8, @channel_number : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct WFDSVC_CONNECTION_CAPABILITY
+    property bNew : Win32cr::Foundation::BOOLEAN
+    property bClient : Win32cr::Foundation::BOOLEAN
+    property bGO : Win32cr::Foundation::BOOLEAN
+    def initialize(@bNew : Win32cr::Foundation::BOOLEAN, @bClient : Win32cr::Foundation::BOOLEAN, @bGO : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WFD_SERVICE_HASH_LIST
+    property service_hash_count : UInt16
+    property service_hash : UInt8[6]
+    def initialize(@service_hash_count : UInt16, @service_hash : UInt8[6])
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WFD_ADVERTISEMENT_ID
+    property advertisement_id : UInt32
+    property service_address : UInt8[6]
+    def initialize(@advertisement_id : UInt32, @service_address : UInt8[6])
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WFD_SESSION_ID
+    property session_id : UInt32
+    property session_address : UInt8[6]
+    def initialize(@session_id : UInt32, @session_address : UInt8[6])
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WFD_ADVERTISED_SERVICE_DESCRIPTOR
+    property advertisement_id : UInt32
+    property config_methods : UInt16
+    property service_name_length : UInt8
+    property service_name : UInt8[255]
+    def initialize(@advertisement_id : UInt32, @config_methods : UInt16, @service_name_length : UInt8, @service_name : UInt8[255])
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WFD_ADVERTISED_SERVICE_LIST
+    property service_count : UInt16
+    property advertised_service : Win32cr::NetworkManagement::WiFi::DOT11_WFD_ADVERTISED_SERVICE_DESCRIPTOR*
+    def initialize(@service_count : UInt16, @advertised_service : Win32cr::NetworkManagement::WiFi::DOT11_WFD_ADVERTISED_SERVICE_DESCRIPTOR*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WFD_DISCOVER_COMPLETE_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property status : Int32
+    property uNumOfEntries : UInt32
+    property uTotalNumOfEntries : UInt32
+    property uListOffset : UInt32
+    property uListLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @status : Int32, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @uListOffset : UInt32, @uListLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_GO_NEGOTIATION_REQUEST_SEND_COMPLETE_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property peer_device_address : UInt8[6]
+    property dialog_token : UInt8
+    property status : Int32
+    property uIEsOffset : UInt32
+    property uIEsLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @peer_device_address : UInt8[6], @dialog_token : UInt8, @status : Int32, @uIEsOffset : UInt32, @uIEsLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_RECEIVED_GO_NEGOTIATION_REQUEST_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property peer_device_address : UInt8[6]
+    property dialog_token : UInt8
+    property request_context : Void*
+    property uIEsOffset : UInt32
+    property uIEsLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @peer_device_address : UInt8[6], @dialog_token : UInt8, @request_context : Void*, @uIEsOffset : UInt32, @uIEsLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_GO_NEGOTIATION_RESPONSE_SEND_COMPLETE_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property peer_device_address : UInt8[6]
+    property dialog_token : UInt8
+    property status : Int32
+    property uIEsOffset : UInt32
+    property uIEsLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @peer_device_address : UInt8[6], @dialog_token : UInt8, @status : Int32, @uIEsOffset : UInt32, @uIEsLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_RECEIVED_GO_NEGOTIATION_RESPONSE_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property peer_device_address : UInt8[6]
+    property dialog_token : UInt8
+    property response_context : Void*
+    property uIEsOffset : UInt32
+    property uIEsLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @peer_device_address : UInt8[6], @dialog_token : UInt8, @response_context : Void*, @uIEsOffset : UInt32, @uIEsLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_GO_NEGOTIATION_CONFIRMATION_SEND_COMPLETE_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property peer_device_address : UInt8[6]
+    property dialog_token : UInt8
+    property status : Int32
+    property uIEsOffset : UInt32
+    property uIEsLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @peer_device_address : UInt8[6], @dialog_token : UInt8, @status : Int32, @uIEsOffset : UInt32, @uIEsLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_RECEIVED_GO_NEGOTIATION_CONFIRMATION_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property peer_device_address : UInt8[6]
+    property dialog_token : UInt8
+    property uIEsOffset : UInt32
+    property uIEsLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @peer_device_address : UInt8[6], @dialog_token : UInt8, @uIEsOffset : UInt32, @uIEsLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_INVITATION_REQUEST_SEND_COMPLETE_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property peer_device_address : UInt8[6]
+    property receiver_address : UInt8[6]
+    property dialog_token : UInt8
+    property status : Int32
+    property uIEsOffset : UInt32
+    property uIEsLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @peer_device_address : UInt8[6], @receiver_address : UInt8[6], @dialog_token : UInt8, @status : Int32, @uIEsOffset : UInt32, @uIEsLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_RECEIVED_INVITATION_REQUEST_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property transmitter_device_address : UInt8[6]
+    property bssid : UInt8[6]
+    property dialog_token : UInt8
+    property request_context : Void*
+    property uIEsOffset : UInt32
+    property uIEsLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @transmitter_device_address : UInt8[6], @bssid : UInt8[6], @dialog_token : UInt8, @request_context : Void*, @uIEsOffset : UInt32, @uIEsLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_INVITATION_RESPONSE_SEND_COMPLETE_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property receiver_device_address : UInt8[6]
+    property dialog_token : UInt8
+    property status : Int32
+    property uIEsOffset : UInt32
+    property uIEsLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @receiver_device_address : UInt8[6], @dialog_token : UInt8, @status : Int32, @uIEsOffset : UInt32, @uIEsLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_RECEIVED_INVITATION_RESPONSE_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property transmitter_device_address : UInt8[6]
+    property bssid : UInt8[6]
+    property dialog_token : UInt8
+    property uIEsOffset : UInt32
+    property uIEsLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @transmitter_device_address : UInt8[6], @bssid : UInt8[6], @dialog_token : UInt8, @uIEsOffset : UInt32, @uIEsLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_PROVISION_DISCOVERY_REQUEST_SEND_COMPLETE_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property peer_device_address : UInt8[6]
+    property receiver_address : UInt8[6]
+    property dialog_token : UInt8
+    property status : Int32
+    property uIEsOffset : UInt32
+    property uIEsLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @peer_device_address : UInt8[6], @receiver_address : UInt8[6], @dialog_token : UInt8, @status : Int32, @uIEsOffset : UInt32, @uIEsLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_RECEIVED_PROVISION_DISCOVERY_REQUEST_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property transmitter_device_address : UInt8[6]
+    property bssid : UInt8[6]
+    property dialog_token : UInt8
+    property request_context : Void*
+    property uIEsOffset : UInt32
+    property uIEsLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @transmitter_device_address : UInt8[6], @bssid : UInt8[6], @dialog_token : UInt8, @request_context : Void*, @uIEsOffset : UInt32, @uIEsLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_PROVISION_DISCOVERY_RESPONSE_SEND_COMPLETE_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property receiver_device_address : UInt8[6]
+    property dialog_token : UInt8
+    property status : Int32
+    property uIEsOffset : UInt32
+    property uIEsLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @receiver_device_address : UInt8[6], @dialog_token : UInt8, @status : Int32, @uIEsOffset : UInt32, @uIEsLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_RECEIVED_PROVISION_DISCOVERY_RESPONSE_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property transmitter_device_address : UInt8[6]
+    property bssid : UInt8[6]
+    property dialog_token : UInt8
+    property uIEsOffset : UInt32
+    property uIEsLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @transmitter_device_address : UInt8[6], @bssid : UInt8[6], @dialog_token : UInt8, @uIEsOffset : UInt32, @uIEsLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_ANQP_QUERY_COMPLETE_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property status : Win32cr::NetworkManagement::WiFi::DOT11_ANQP_QUERY_RESULT
+    property hContext : Win32cr::Foundation::HANDLE
+    property uResponseLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @status : Win32cr::NetworkManagement::WiFi::DOT11_ANQP_QUERY_RESULT, @hContext : Win32cr::Foundation::HANDLE, @uResponseLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WFD_DEVICE_CAPABILITY_CONFIG
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property bServiceDiscoveryEnabled : Win32cr::Foundation::BOOLEAN
+    property bClientDiscoverabilityEnabled : Win32cr::Foundation::BOOLEAN
+    property bConcurrentOperationSupported : Win32cr::Foundation::BOOLEAN
+    property bInfrastructureManagementEnabled : Win32cr::Foundation::BOOLEAN
+    property bDeviceLimitReached : Win32cr::Foundation::BOOLEAN
+    property bInvitationProcedureEnabled : Win32cr::Foundation::BOOLEAN
+    property wps_versions_enabled : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @bServiceDiscoveryEnabled : Win32cr::Foundation::BOOLEAN, @bClientDiscoverabilityEnabled : Win32cr::Foundation::BOOLEAN, @bConcurrentOperationSupported : Win32cr::Foundation::BOOLEAN, @bInfrastructureManagementEnabled : Win32cr::Foundation::BOOLEAN, @bDeviceLimitReached : Win32cr::Foundation::BOOLEAN, @bInvitationProcedureEnabled : Win32cr::Foundation::BOOLEAN, @wps_versions_enabled : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WFD_GROUP_OWNER_CAPABILITY_CONFIG
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property bPersistentGroupEnabled : Win32cr::Foundation::BOOLEAN
+    property bIntraBSSDistributionSupported : Win32cr::Foundation::BOOLEAN
+    property bCrossConnectionSupported : Win32cr::Foundation::BOOLEAN
+    property bPersistentReconnectSupported : Win32cr::Foundation::BOOLEAN
+    property bGroupFormationEnabled : Win32cr::Foundation::BOOLEAN
+    property uMaximumGroupLimit : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @bPersistentGroupEnabled : Win32cr::Foundation::BOOLEAN, @bIntraBSSDistributionSupported : Win32cr::Foundation::BOOLEAN, @bCrossConnectionSupported : Win32cr::Foundation::BOOLEAN, @bPersistentReconnectSupported : Win32cr::Foundation::BOOLEAN, @bGroupFormationEnabled : Win32cr::Foundation::BOOLEAN, @uMaximumGroupLimit : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WFD_GROUP_OWNER_CAPABILITY_CONFIG_V2
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property bPersistentGroupEnabled : Win32cr::Foundation::BOOLEAN
+    property bIntraBSSDistributionSupported : Win32cr::Foundation::BOOLEAN
+    property bCrossConnectionSupported : Win32cr::Foundation::BOOLEAN
+    property bPersistentReconnectSupported : Win32cr::Foundation::BOOLEAN
+    property bGroupFormationEnabled : Win32cr::Foundation::BOOLEAN
+    property uMaximumGroupLimit : UInt32
+    property bEapolKeyIpAddressAllocationSupported : Win32cr::Foundation::BOOLEAN
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @bPersistentGroupEnabled : Win32cr::Foundation::BOOLEAN, @bIntraBSSDistributionSupported : Win32cr::Foundation::BOOLEAN, @bCrossConnectionSupported : Win32cr::Foundation::BOOLEAN, @bPersistentReconnectSupported : Win32cr::Foundation::BOOLEAN, @bGroupFormationEnabled : Win32cr::Foundation::BOOLEAN, @uMaximumGroupLimit : UInt32, @bEapolKeyIpAddressAllocationSupported : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WFD_DEVICE_INFO
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property device_address : UInt8[6]
+    property config_methods : UInt16
+    property primary_device_type : Win32cr::NetworkManagement::WiFi::DOT11_WFD_DEVICE_TYPE
+    property device_name : Win32cr::NetworkManagement::WiFi::DOT11_WPS_DEVICE_NAME
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @device_address : UInt8[6], @config_methods : UInt16, @primary_device_type : Win32cr::NetworkManagement::WiFi::DOT11_WFD_DEVICE_TYPE, @device_name : Win32cr::NetworkManagement::WiFi::DOT11_WPS_DEVICE_NAME)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WFD_SECONDARY_DEVICE_TYPE_LIST
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uNumOfEntries : UInt32
+    property uTotalNumOfEntries : UInt32
+    property secondary_device_types : Win32cr::NetworkManagement::WiFi::DOT11_WFD_DEVICE_TYPE*
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uNumOfEntries : UInt32, @uTotalNumOfEntries : UInt32, @secondary_device_types : Win32cr::NetworkManagement::WiFi::DOT11_WFD_DEVICE_TYPE*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WFD_DISCOVER_DEVICE_FILTER
+    property device_id : UInt8[6]
+    property ucBitmask : UInt8
+    property group_ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID
+    def initialize(@device_id : UInt8[6], @ucBitmask : UInt8, @group_ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WFD_DISCOVER_REQUEST
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property discover_type : Win32cr::NetworkManagement::WiFi::DOT11_WFD_DISCOVER_TYPE
+    property scan_type : Win32cr::NetworkManagement::WiFi::DOT11_WFD_SCAN_TYPE
+    property uDiscoverTimeout : UInt32
+    property uDeviceFilterListOffset : UInt32
+    property uNumDeviceFilters : UInt32
+    property uIEsOffset : UInt32
+    property uIEsLength : UInt32
+    property bForceScanLegacyNetworks : Win32cr::Foundation::BOOLEAN
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @discover_type : Win32cr::NetworkManagement::WiFi::DOT11_WFD_DISCOVER_TYPE, @scan_type : Win32cr::NetworkManagement::WiFi::DOT11_WFD_SCAN_TYPE, @uDiscoverTimeout : UInt32, @uDeviceFilterListOffset : UInt32, @uNumDeviceFilters : UInt32, @uIEsOffset : UInt32, @uIEsLength : UInt32, @bForceScanLegacyNetworks : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WFD_DEVICE_ENTRY
+    property uPhyId : UInt32
+    property phy_specific_info : Win32cr::NetworkManagement::WiFi::DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO
+    property dot11BSSID : UInt8[6]
+    property dot11BSSType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE
+    property transmitter_address : UInt8[6]
+    property lRSSI : Int32
+    property uLinkQuality : UInt32
+    property usBeaconPeriod : UInt16
+    property ullTimestamp : UInt64
+    property ullBeaconHostTimestamp : UInt64
+    property ullProbeResponseHostTimestamp : UInt64
+    property usCapabilityInformation : UInt16
+    property uBeaconIEsOffset : UInt32
+    property uBeaconIEsLength : UInt32
+    property uProbeResponseIEsOffset : UInt32
+    property uProbeResponseIEsLength : UInt32
+    def initialize(@uPhyId : UInt32, @phy_specific_info : Win32cr::NetworkManagement::WiFi::DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO, @dot11BSSID : UInt8[6], @dot11BSSType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, @transmitter_address : UInt8[6], @lRSSI : Int32, @uLinkQuality : UInt32, @usBeaconPeriod : UInt16, @ullTimestamp : UInt64, @ullBeaconHostTimestamp : UInt64, @ullProbeResponseHostTimestamp : UInt64, @usCapabilityInformation : UInt16, @uBeaconIEsOffset : UInt32, @uBeaconIEsLength : UInt32, @uProbeResponseIEsOffset : UInt32, @uProbeResponseIEsLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WFD_ADDITIONAL_IE
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property uBeaconIEsOffset : UInt32
+    property uBeaconIEsLength : UInt32
+    property uProbeResponseIEsOffset : UInt32
+    property uProbeResponseIEsLength : UInt32
+    property uDefaultRequestIEsOffset : UInt32
+    property uDefaultRequestIEsLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @uBeaconIEsOffset : UInt32, @uBeaconIEsLength : UInt32, @uProbeResponseIEsOffset : UInt32, @uProbeResponseIEsLength : UInt32, @uDefaultRequestIEsOffset : UInt32, @uDefaultRequestIEsLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_SEND_GO_NEGOTIATION_REQUEST_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property peer_device_address : UInt8[6]
+    property dialog_token : UInt8
+    property uSendTimeout : UInt32
+    property group_owner_intent : Win32cr::NetworkManagement::WiFi::DOT11_WFD_GO_INTENT
+    property minimum_config_timeout : Win32cr::NetworkManagement::WiFi::DOT11_WFD_CONFIGURATION_TIMEOUT
+    property intended_interface_address : UInt8[6]
+    property group_capability : UInt8
+    property uIEsOffset : UInt32
+    property uIEsLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @peer_device_address : UInt8[6], @dialog_token : UInt8, @uSendTimeout : UInt32, @group_owner_intent : Win32cr::NetworkManagement::WiFi::DOT11_WFD_GO_INTENT, @minimum_config_timeout : Win32cr::NetworkManagement::WiFi::DOT11_WFD_CONFIGURATION_TIMEOUT, @intended_interface_address : UInt8[6], @group_capability : UInt8, @uIEsOffset : UInt32, @uIEsLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_SEND_GO_NEGOTIATION_RESPONSE_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property peer_device_address : UInt8[6]
+    property dialog_token : UInt8
+    property request_context : Void*
+    property uSendTimeout : UInt32
+    property status : UInt8
+    property group_owner_intent : Win32cr::NetworkManagement::WiFi::DOT11_WFD_GO_INTENT
+    property minimum_config_timeout : Win32cr::NetworkManagement::WiFi::DOT11_WFD_CONFIGURATION_TIMEOUT
+    property intended_interface_address : UInt8[6]
+    property group_capability : UInt8
+    property group_id : Win32cr::NetworkManagement::WiFi::DOT11_WFD_GROUP_ID
+    property bUseGroupID : Win32cr::Foundation::BOOLEAN
+    property uIEsOffset : UInt32
+    property uIEsLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @peer_device_address : UInt8[6], @dialog_token : UInt8, @request_context : Void*, @uSendTimeout : UInt32, @status : UInt8, @group_owner_intent : Win32cr::NetworkManagement::WiFi::DOT11_WFD_GO_INTENT, @minimum_config_timeout : Win32cr::NetworkManagement::WiFi::DOT11_WFD_CONFIGURATION_TIMEOUT, @intended_interface_address : UInt8[6], @group_capability : UInt8, @group_id : Win32cr::NetworkManagement::WiFi::DOT11_WFD_GROUP_ID, @bUseGroupID : Win32cr::Foundation::BOOLEAN, @uIEsOffset : UInt32, @uIEsLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_SEND_GO_NEGOTIATION_CONFIRMATION_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property peer_device_address : UInt8[6]
+    property dialog_token : UInt8
+    property response_context : Void*
+    property uSendTimeout : UInt32
+    property status : UInt8
+    property group_capability : UInt8
+    property group_id : Win32cr::NetworkManagement::WiFi::DOT11_WFD_GROUP_ID
+    property bUseGroupID : Win32cr::Foundation::BOOLEAN
+    property uIEsOffset : UInt32
+    property uIEsLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @peer_device_address : UInt8[6], @dialog_token : UInt8, @response_context : Void*, @uSendTimeout : UInt32, @status : UInt8, @group_capability : UInt8, @group_id : Win32cr::NetworkManagement::WiFi::DOT11_WFD_GROUP_ID, @bUseGroupID : Win32cr::Foundation::BOOLEAN, @uIEsOffset : UInt32, @uIEsLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WFD_INVITATION_FLAGS
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_SEND_INVITATION_REQUEST_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property dialog_token : UInt8
+    property peer_device_address : UInt8[6]
+    property uSendTimeout : UInt32
+    property minimum_config_timeout : Win32cr::NetworkManagement::WiFi::DOT11_WFD_CONFIGURATION_TIMEOUT
+    property invitation_flags : Win32cr::NetworkManagement::WiFi::DOT11_WFD_INVITATION_FLAGS
+    property group_bssid : UInt8[6]
+    property bUseGroupBSSID : Win32cr::Foundation::BOOLEAN
+    property operating_channel : Win32cr::NetworkManagement::WiFi::DOT11_WFD_CHANNEL
+    property bUseSpecifiedOperatingChannel : Win32cr::Foundation::BOOLEAN
+    property group_id : Win32cr::NetworkManagement::WiFi::DOT11_WFD_GROUP_ID
+    property bLocalGO : Win32cr::Foundation::BOOLEAN
+    property uIEsOffset : UInt32
+    property uIEsLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @dialog_token : UInt8, @peer_device_address : UInt8[6], @uSendTimeout : UInt32, @minimum_config_timeout : Win32cr::NetworkManagement::WiFi::DOT11_WFD_CONFIGURATION_TIMEOUT, @invitation_flags : Win32cr::NetworkManagement::WiFi::DOT11_WFD_INVITATION_FLAGS, @group_bssid : UInt8[6], @bUseGroupBSSID : Win32cr::Foundation::BOOLEAN, @operating_channel : Win32cr::NetworkManagement::WiFi::DOT11_WFD_CHANNEL, @bUseSpecifiedOperatingChannel : Win32cr::Foundation::BOOLEAN, @group_id : Win32cr::NetworkManagement::WiFi::DOT11_WFD_GROUP_ID, @bLocalGO : Win32cr::Foundation::BOOLEAN, @uIEsOffset : UInt32, @uIEsLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_SEND_INVITATION_RESPONSE_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property receiver_device_address : UInt8[6]
+    property dialog_token : UInt8
+    property request_context : Void*
+    property uSendTimeout : UInt32
+    property status : UInt8
+    property minimum_config_timeout : Win32cr::NetworkManagement::WiFi::DOT11_WFD_CONFIGURATION_TIMEOUT
+    property group_bssid : UInt8[6]
+    property bUseGroupBSSID : Win32cr::Foundation::BOOLEAN
+    property operating_channel : Win32cr::NetworkManagement::WiFi::DOT11_WFD_CHANNEL
+    property bUseSpecifiedOperatingChannel : Win32cr::Foundation::BOOLEAN
+    property uIEsOffset : UInt32
+    property uIEsLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @receiver_device_address : UInt8[6], @dialog_token : UInt8, @request_context : Void*, @uSendTimeout : UInt32, @status : UInt8, @minimum_config_timeout : Win32cr::NetworkManagement::WiFi::DOT11_WFD_CONFIGURATION_TIMEOUT, @group_bssid : UInt8[6], @bUseGroupBSSID : Win32cr::Foundation::BOOLEAN, @operating_channel : Win32cr::NetworkManagement::WiFi::DOT11_WFD_CHANNEL, @bUseSpecifiedOperatingChannel : Win32cr::Foundation::BOOLEAN, @uIEsOffset : UInt32, @uIEsLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_SEND_PROVISION_DISCOVERY_REQUEST_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property dialog_token : UInt8
+    property peer_device_address : UInt8[6]
+    property uSendTimeout : UInt32
+    property group_capability : UInt8
+    property group_id : Win32cr::NetworkManagement::WiFi::DOT11_WFD_GROUP_ID
+    property bUseGroupID : Win32cr::Foundation::BOOLEAN
+    property uIEsOffset : UInt32
+    property uIEsLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @dialog_token : UInt8, @peer_device_address : UInt8[6], @uSendTimeout : UInt32, @group_capability : UInt8, @group_id : Win32cr::NetworkManagement::WiFi::DOT11_WFD_GROUP_ID, @bUseGroupID : Win32cr::Foundation::BOOLEAN, @uIEsOffset : UInt32, @uIEsLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_SEND_PROVISION_DISCOVERY_RESPONSE_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property receiver_device_address : UInt8[6]
+    property dialog_token : UInt8
+    property request_context : Void*
+    property uSendTimeout : UInt32
+    property uIEsOffset : UInt32
+    property uIEsLength : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @receiver_device_address : UInt8[6], @dialog_token : UInt8, @request_context : Void*, @uSendTimeout : UInt32, @uIEsOffset : UInt32, @uIEsLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WFD_DEVICE_LISTEN_CHANNEL
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property channel_number : UInt8
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @channel_number : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WFD_GROUP_START_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property advertised_operating_channel : Win32cr::NetworkManagement::WiFi::DOT11_WFD_CHANNEL
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @advertised_operating_channel : Win32cr::NetworkManagement::WiFi::DOT11_WFD_CHANNEL)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_WFD_GROUP_JOIN_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property go_operating_channel : Win32cr::NetworkManagement::WiFi::DOT11_WFD_CHANNEL
+    property go_config_time : UInt32
+    property bInGroupFormation : Win32cr::Foundation::BOOLEAN
+    property bWaitForWPSReady : Win32cr::Foundation::BOOLEAN
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @go_operating_channel : Win32cr::NetworkManagement::WiFi::DOT11_WFD_CHANNEL, @go_config_time : UInt32, @bInGroupFormation : Win32cr::Foundation::BOOLEAN, @bWaitForWPSReady : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_POWER_MGMT_AUTO_MODE_ENABLED_INFO
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property bEnabled : Win32cr::Foundation::BOOLEAN
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @bEnabled : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_POWER_MGMT_MODE_STATUS_INFO
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property power_save_mode : Win32cr::NetworkManagement::WiFi::DOT11_POWER_MODE
+    property uPowerSaveLevel : UInt32
+    property reason : Win32cr::NetworkManagement::WiFi::DOT11_POWER_MODE_REASON
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @power_save_mode : Win32cr::NetworkManagement::WiFi::DOT11_POWER_MODE, @uPowerSaveLevel : UInt32, @reason : Win32cr::NetworkManagement::WiFi::DOT11_POWER_MODE_REASON)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_CHANNEL_HINT
+    property dot11_phy_type : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE
+    property uChannelNumber : UInt32
+    def initialize(@dot11_phy_type : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE, @uChannelNumber : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_OFFLOAD_NETWORK
+    property ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID
+    property unicast_cipher : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM
+    property auth_algo : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM
+    property dot11_channel_hints : Win32cr::NetworkManagement::WiFi::DOT11_CHANNEL_HINT[4]
+    def initialize(@ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID, @unicast_cipher : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM, @auth_algo : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM, @dot11_channel_hints : Win32cr::NetworkManagement::WiFi::DOT11_CHANNEL_HINT[4])
+    end
+  end
+
+  @[Extern]
+  struct DOT11_OFFLOAD_NETWORK_LIST_INFO
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property ulFlags : UInt32
+    property fast_scan_period : UInt32
+    property fast_scan_iterations : UInt32
+    property slow_scan_period : UInt32
+    property uNumOfEntries : UInt32
+    property offloadNetworkList : Win32cr::NetworkManagement::WiFi::DOT11_OFFLOAD_NETWORK*
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @ulFlags : UInt32, @fast_scan_period : UInt32, @fast_scan_iterations : UInt32, @slow_scan_period : UInt32, @uNumOfEntries : UInt32, @offloadNetworkList : Win32cr::NetworkManagement::WiFi::DOT11_OFFLOAD_NETWORK*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_OFFLOAD_NETWORK_STATUS_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property status : Int32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @status : Int32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_MANUFACTURING_TEST
+    property dot11ManufacturingTestType : Win32cr::NetworkManagement::WiFi::DOT11_MANUFACTURING_TEST_TYPE
+    property uBufferLength : UInt32
+    property ucBuffer : UInt8*
+    def initialize(@dot11ManufacturingTestType : Win32cr::NetworkManagement::WiFi::DOT11_MANUFACTURING_TEST_TYPE, @uBufferLength : UInt32, @ucBuffer : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_MANUFACTURING_SELF_TEST_SET_PARAMS
+    property self_test_type : Win32cr::NetworkManagement::WiFi::DOT11_MANUFACTURING_SELF_TEST_TYPE
+    property uTestID : UInt32
+    property uPinBitMask : UInt32
+    property pvContext : Void*
+    property uBufferLength : UInt32
+    property ucBufferIn : UInt8*
+    def initialize(@self_test_type : Win32cr::NetworkManagement::WiFi::DOT11_MANUFACTURING_SELF_TEST_TYPE, @uTestID : UInt32, @uPinBitMask : UInt32, @pvContext : Void*, @uBufferLength : UInt32, @ucBufferIn : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_MANUFACTURING_SELF_TEST_QUERY_RESULTS
+    property self_test_type : Win32cr::NetworkManagement::WiFi::DOT11_MANUFACTURING_SELF_TEST_TYPE
+    property uTestID : UInt32
+    property bResult : Win32cr::Foundation::BOOLEAN
+    property uPinFailedBitMask : UInt32
+    property pvContext : Void*
+    property uBytesWrittenOut : UInt32
+    property ucBufferOut : UInt8*
+    def initialize(@self_test_type : Win32cr::NetworkManagement::WiFi::DOT11_MANUFACTURING_SELF_TEST_TYPE, @uTestID : UInt32, @bResult : Win32cr::Foundation::BOOLEAN, @uPinFailedBitMask : UInt32, @pvContext : Void*, @uBytesWrittenOut : UInt32, @ucBufferOut : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_MANUFACTURING_FUNCTIONAL_TEST_RX
+    property bEnabled : Win32cr::Foundation::BOOLEAN
+    property dot11_band : Win32cr::NetworkManagement::WiFi::DOT11_BAND
+    property uChannel : UInt32
+    property power_level : Int32
+    def initialize(@bEnabled : Win32cr::Foundation::BOOLEAN, @dot11_band : Win32cr::NetworkManagement::WiFi::DOT11_BAND, @uChannel : UInt32, @power_level : Int32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_MANUFACTURING_FUNCTIONAL_TEST_TX
+    property bEnable : Win32cr::Foundation::BOOLEAN
+    property bOpenLoop : Win32cr::Foundation::BOOLEAN
+    property dot11_band : Win32cr::NetworkManagement::WiFi::DOT11_BAND
+    property uChannel : UInt32
+    property uSetPowerLevel : UInt32
+    property adc_power_level : Int32
+    def initialize(@bEnable : Win32cr::Foundation::BOOLEAN, @bOpenLoop : Win32cr::Foundation::BOOLEAN, @dot11_band : Win32cr::NetworkManagement::WiFi::DOT11_BAND, @uChannel : UInt32, @uSetPowerLevel : UInt32, @adc_power_level : Int32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_MANUFACTURING_FUNCTIONAL_TEST_QUERY_ADC
+    property dot11_band : Win32cr::NetworkManagement::WiFi::DOT11_BAND
+    property uChannel : UInt32
+    property adc_power_level : Int32
+    def initialize(@dot11_band : Win32cr::NetworkManagement::WiFi::DOT11_BAND, @uChannel : UInt32, @adc_power_level : Int32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_MANUFACTURING_TEST_SET_DATA
+    property uKey : UInt32
+    property uOffset : UInt32
+    property uBufferLength : UInt32
+    property ucBufferIn : UInt8*
+    def initialize(@uKey : UInt32, @uOffset : UInt32, @uBufferLength : UInt32, @ucBufferIn : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_MANUFACTURING_TEST_QUERY_DATA
+    property uKey : UInt32
+    property uOffset : UInt32
+    property uBufferLength : UInt32
+    property uBytesRead : UInt32
+    property ucBufferOut : UInt8*
+    def initialize(@uKey : UInt32, @uOffset : UInt32, @uBufferLength : UInt32, @uBytesRead : UInt32, @ucBufferOut : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_MANUFACTURING_TEST_SLEEP
+    property uSleepTime : UInt32
+    property pvContext : Void*
+    def initialize(@uSleepTime : UInt32, @pvContext : Void*)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_MANUFACTURING_CALLBACK_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property dot11ManufacturingCallbackType : Win32cr::NetworkManagement::WiFi::DOT11_MANUFACTURING_CALLBACK_TYPE
+    property uStatus : UInt32
+    property pvContext : Void*
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @dot11ManufacturingCallbackType : Win32cr::NetworkManagement::WiFi::DOT11_MANUFACTURING_CALLBACK_TYPE, @uStatus : UInt32, @pvContext : Void*)
+    end
+  end
+
+  @[Extern]
+  struct L2_NOTIFICATION_DATA
+    property notification_source : UInt32
+    property notification_code : UInt32
+    property interface_guid : LibC::GUID
+    property dwDataSize : UInt32
+    property pData : Void*
+    def initialize(@notification_source : UInt32, @notification_code : UInt32, @interface_guid : LibC::GUID, @dwDataSize : UInt32, @pData : Void*)
+    end
+  end
+
+  @[Extern]
+  struct WLAN_PROFILE_INFO
+    property strProfileName : UInt16[256]
+    property dwFlags : UInt32
+    def initialize(@strProfileName : UInt16[256], @dwFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOT11_NETWORK
+    property dot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID
+    property dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE
+    def initialize(@dot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID, @dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE)
+    end
+  end
+
+  @[Extern]
+  struct WLAN_RAW_DATA
+    property dwDataSize : UInt32
+    property data_blob : UInt8*
+    def initialize(@dwDataSize : UInt32, @data_blob : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct WLAN_RAW_DATA_LIST
+    property dwTotalSize : UInt32
+    property dwNumberOfItems : UInt32
+    property data_list : Anonymous_e__Struct_*
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      dwDataOffset : UInt32,
-      dwDataSize : UInt32
+    struct Anonymous_e__Struct_
+    property dwDataOffset : UInt32
+    property dwDataSize : UInt32
+    def initialize(@dwDataOffset : UInt32, @dwDataSize : UInt32)
+    end
+    end
 
+    def initialize(@dwTotalSize : UInt32, @dwNumberOfItems : UInt32, @data_list : Anonymous_e__Struct_*)
+    end
   end
 
   @[Extern]
-  record WLAN_RATE_SET,
-    uRateSetLength : UInt32,
-    usRateSet : UInt16[126]
+  struct WLAN_RATE_SET
+    property uRateSetLength : UInt32
+    property usRateSet : UInt16[126]
+    def initialize(@uRateSetLength : UInt32, @usRateSet : UInt16[126])
+    end
+  end
 
   @[Extern]
-  record WLAN_AVAILABLE_NETWORK,
-    strProfileName : UInt16[256],
-    dot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID,
-    dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE,
-    uNumberOfBssids : UInt32,
-    bNetworkConnectable : Win32cr::Foundation::BOOL,
-    wlanNotConnectableReason : UInt32,
-    uNumberOfPhyTypes : UInt32,
-    dot11PhyTypes : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE[8],
-    bMorePhyTypes : Win32cr::Foundation::BOOL,
-    wlanSignalQuality : UInt32,
-    bSecurityEnabled : Win32cr::Foundation::BOOL,
-    dot11DefaultAuthAlgorithm : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM,
-    dot11DefaultCipherAlgorithm : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM,
-    dwFlags : UInt32,
-    dwReserved : UInt32
+  struct WLAN_AVAILABLE_NETWORK
+    property strProfileName : UInt16[256]
+    property dot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID
+    property dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE
+    property uNumberOfBssids : UInt32
+    property bNetworkConnectable : Win32cr::Foundation::BOOL
+    property wlanNotConnectableReason : UInt32
+    property uNumberOfPhyTypes : UInt32
+    property dot11PhyTypes : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE[8]
+    property bMorePhyTypes : Win32cr::Foundation::BOOL
+    property wlanSignalQuality : UInt32
+    property bSecurityEnabled : Win32cr::Foundation::BOOL
+    property dot11DefaultAuthAlgorithm : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM
+    property dot11DefaultCipherAlgorithm : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM
+    property dwFlags : UInt32
+    property dwReserved : UInt32
+    def initialize(@strProfileName : UInt16[256], @dot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID, @dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, @uNumberOfBssids : UInt32, @bNetworkConnectable : Win32cr::Foundation::BOOL, @wlanNotConnectableReason : UInt32, @uNumberOfPhyTypes : UInt32, @dot11PhyTypes : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE[8], @bMorePhyTypes : Win32cr::Foundation::BOOL, @wlanSignalQuality : UInt32, @bSecurityEnabled : Win32cr::Foundation::BOOL, @dot11DefaultAuthAlgorithm : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM, @dot11DefaultCipherAlgorithm : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM, @dwFlags : UInt32, @dwReserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record WLAN_AVAILABLE_NETWORK_V2,
-    strProfileName : UInt16[256],
-    dot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID,
-    dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE,
-    uNumberOfBssids : UInt32,
-    bNetworkConnectable : Win32cr::Foundation::BOOL,
-    wlanNotConnectableReason : UInt32,
-    uNumberOfPhyTypes : UInt32,
-    dot11PhyTypes : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE[8],
-    bMorePhyTypes : Win32cr::Foundation::BOOL,
-    wlanSignalQuality : UInt32,
-    bSecurityEnabled : Win32cr::Foundation::BOOL,
-    dot11DefaultAuthAlgorithm : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM,
-    dot11DefaultCipherAlgorithm : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM,
-    dwFlags : UInt32,
-    access_network_options : Win32cr::NetworkManagement::WiFi::DOT11_ACCESSNETWORKOPTIONS,
-    dot11HESSID : UInt8[6],
-    venue_info : Win32cr::NetworkManagement::WiFi::DOT11_VENUEINFO,
-    dwReserved : UInt32
+  struct WLAN_AVAILABLE_NETWORK_V2
+    property strProfileName : UInt16[256]
+    property dot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID
+    property dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE
+    property uNumberOfBssids : UInt32
+    property bNetworkConnectable : Win32cr::Foundation::BOOL
+    property wlanNotConnectableReason : UInt32
+    property uNumberOfPhyTypes : UInt32
+    property dot11PhyTypes : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE[8]
+    property bMorePhyTypes : Win32cr::Foundation::BOOL
+    property wlanSignalQuality : UInt32
+    property bSecurityEnabled : Win32cr::Foundation::BOOL
+    property dot11DefaultAuthAlgorithm : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM
+    property dot11DefaultCipherAlgorithm : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM
+    property dwFlags : UInt32
+    property access_network_options : Win32cr::NetworkManagement::WiFi::DOT11_ACCESSNETWORKOPTIONS
+    property dot11HESSID : UInt8[6]
+    property venue_info : Win32cr::NetworkManagement::WiFi::DOT11_VENUEINFO
+    property dwReserved : UInt32
+    def initialize(@strProfileName : UInt16[256], @dot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID, @dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, @uNumberOfBssids : UInt32, @bNetworkConnectable : Win32cr::Foundation::BOOL, @wlanNotConnectableReason : UInt32, @uNumberOfPhyTypes : UInt32, @dot11PhyTypes : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE[8], @bMorePhyTypes : Win32cr::Foundation::BOOL, @wlanSignalQuality : UInt32, @bSecurityEnabled : Win32cr::Foundation::BOOL, @dot11DefaultAuthAlgorithm : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM, @dot11DefaultCipherAlgorithm : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM, @dwFlags : UInt32, @access_network_options : Win32cr::NetworkManagement::WiFi::DOT11_ACCESSNETWORKOPTIONS, @dot11HESSID : UInt8[6], @venue_info : Win32cr::NetworkManagement::WiFi::DOT11_VENUEINFO, @dwReserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record WLAN_BSS_ENTRY,
-    dot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID,
-    uPhyId : UInt32,
-    dot11Bssid : UInt8[6],
-    dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE,
-    dot11BssPhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE,
-    lRssi : Int32,
-    uLinkQuality : UInt32,
-    bInRegDomain : Win32cr::Foundation::BOOLEAN,
-    usBeaconPeriod : UInt16,
-    ullTimestamp : UInt64,
-    ullHostTimestamp : UInt64,
-    usCapabilityInformation : UInt16,
-    ulChCenterFrequency : UInt32,
-    wlanRateSet : Win32cr::NetworkManagement::WiFi::WLAN_RATE_SET,
-    ulIeOffset : UInt32,
-    ulIeSize : UInt32
+  struct WLAN_BSS_ENTRY
+    property dot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID
+    property uPhyId : UInt32
+    property dot11Bssid : UInt8[6]
+    property dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE
+    property dot11BssPhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE
+    property lRssi : Int32
+    property uLinkQuality : UInt32
+    property bInRegDomain : Win32cr::Foundation::BOOLEAN
+    property usBeaconPeriod : UInt16
+    property ullTimestamp : UInt64
+    property ullHostTimestamp : UInt64
+    property usCapabilityInformation : UInt16
+    property ulChCenterFrequency : UInt32
+    property wlanRateSet : Win32cr::NetworkManagement::WiFi::WLAN_RATE_SET
+    property ulIeOffset : UInt32
+    property ulIeSize : UInt32
+    def initialize(@dot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID, @uPhyId : UInt32, @dot11Bssid : UInt8[6], @dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, @dot11BssPhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE, @lRssi : Int32, @uLinkQuality : UInt32, @bInRegDomain : Win32cr::Foundation::BOOLEAN, @usBeaconPeriod : UInt16, @ullTimestamp : UInt64, @ullHostTimestamp : UInt64, @usCapabilityInformation : UInt16, @ulChCenterFrequency : UInt32, @wlanRateSet : Win32cr::NetworkManagement::WiFi::WLAN_RATE_SET, @ulIeOffset : UInt32, @ulIeSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record WLAN_BSS_LIST,
-    dwTotalSize : UInt32,
-    dwNumberOfItems : UInt32,
-    wlanBssEntries : Win32cr::NetworkManagement::WiFi::WLAN_BSS_ENTRY*
+  struct WLAN_BSS_LIST
+    property dwTotalSize : UInt32
+    property dwNumberOfItems : UInt32
+    property wlanBssEntries : Win32cr::NetworkManagement::WiFi::WLAN_BSS_ENTRY*
+    def initialize(@dwTotalSize : UInt32, @dwNumberOfItems : UInt32, @wlanBssEntries : Win32cr::NetworkManagement::WiFi::WLAN_BSS_ENTRY*)
+    end
+  end
 
   @[Extern]
-  record WLAN_INTERFACE_INFO,
-    interface_guid : LibC::GUID,
-    strInterfaceDescription : UInt16[256],
-    isState : Win32cr::NetworkManagement::WiFi::WLAN_INTERFACE_STATE
+  struct WLAN_INTERFACE_INFO
+    property interface_guid : LibC::GUID
+    property strInterfaceDescription : UInt16[256]
+    property isState : Win32cr::NetworkManagement::WiFi::WLAN_INTERFACE_STATE
+    def initialize(@interface_guid : LibC::GUID, @strInterfaceDescription : UInt16[256], @isState : Win32cr::NetworkManagement::WiFi::WLAN_INTERFACE_STATE)
+    end
+  end
 
   @[Extern]
-  record WLAN_ASSOCIATION_ATTRIBUTES,
-    dot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID,
-    dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE,
-    dot11Bssid : UInt8[6],
-    dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE,
-    uDot11PhyIndex : UInt32,
-    wlanSignalQuality : UInt32,
-    ulRxRate : UInt32,
-    ulTxRate : UInt32
+  struct WLAN_ASSOCIATION_ATTRIBUTES
+    property dot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID
+    property dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE
+    property dot11Bssid : UInt8[6]
+    property dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE
+    property uDot11PhyIndex : UInt32
+    property wlanSignalQuality : UInt32
+    property ulRxRate : UInt32
+    property ulTxRate : UInt32
+    def initialize(@dot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID, @dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, @dot11Bssid : UInt8[6], @dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE, @uDot11PhyIndex : UInt32, @wlanSignalQuality : UInt32, @ulRxRate : UInt32, @ulTxRate : UInt32)
+    end
+  end
 
   @[Extern]
-  record WLAN_SECURITY_ATTRIBUTES,
-    bSecurityEnabled : Win32cr::Foundation::BOOL,
-    bOneXEnabled : Win32cr::Foundation::BOOL,
-    dot11AuthAlgorithm : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM,
-    dot11CipherAlgorithm : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM
+  struct WLAN_SECURITY_ATTRIBUTES
+    property bSecurityEnabled : Win32cr::Foundation::BOOL
+    property bOneXEnabled : Win32cr::Foundation::BOOL
+    property dot11AuthAlgorithm : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM
+    property dot11CipherAlgorithm : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM
+    def initialize(@bSecurityEnabled : Win32cr::Foundation::BOOL, @bOneXEnabled : Win32cr::Foundation::BOOL, @dot11AuthAlgorithm : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM, @dot11CipherAlgorithm : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM)
+    end
+  end
 
   @[Extern]
-  record WLAN_CONNECTION_ATTRIBUTES,
-    isState : Win32cr::NetworkManagement::WiFi::WLAN_INTERFACE_STATE,
-    wlanConnectionMode : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_MODE,
-    strProfileName : UInt16[256],
-    wlanAssociationAttributes : Win32cr::NetworkManagement::WiFi::WLAN_ASSOCIATION_ATTRIBUTES,
-    wlanSecurityAttributes : Win32cr::NetworkManagement::WiFi::WLAN_SECURITY_ATTRIBUTES
+  struct WLAN_CONNECTION_ATTRIBUTES
+    property isState : Win32cr::NetworkManagement::WiFi::WLAN_INTERFACE_STATE
+    property wlanConnectionMode : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_MODE
+    property strProfileName : UInt16[256]
+    property wlanAssociationAttributes : Win32cr::NetworkManagement::WiFi::WLAN_ASSOCIATION_ATTRIBUTES
+    property wlanSecurityAttributes : Win32cr::NetworkManagement::WiFi::WLAN_SECURITY_ATTRIBUTES
+    def initialize(@isState : Win32cr::NetworkManagement::WiFi::WLAN_INTERFACE_STATE, @wlanConnectionMode : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_MODE, @strProfileName : UInt16[256], @wlanAssociationAttributes : Win32cr::NetworkManagement::WiFi::WLAN_ASSOCIATION_ATTRIBUTES, @wlanSecurityAttributes : Win32cr::NetworkManagement::WiFi::WLAN_SECURITY_ATTRIBUTES)
+    end
+  end
 
   @[Extern]
-  record WLAN_PHY_RADIO_STATE,
-    dwPhyIndex : UInt32,
-    dot11SoftwareRadioState : Win32cr::NetworkManagement::WiFi::DOT11_RADIO_STATE,
-    dot11HardwareRadioState : Win32cr::NetworkManagement::WiFi::DOT11_RADIO_STATE
+  struct WLAN_PHY_RADIO_STATE
+    property dwPhyIndex : UInt32
+    property dot11SoftwareRadioState : Win32cr::NetworkManagement::WiFi::DOT11_RADIO_STATE
+    property dot11HardwareRadioState : Win32cr::NetworkManagement::WiFi::DOT11_RADIO_STATE
+    def initialize(@dwPhyIndex : UInt32, @dot11SoftwareRadioState : Win32cr::NetworkManagement::WiFi::DOT11_RADIO_STATE, @dot11HardwareRadioState : Win32cr::NetworkManagement::WiFi::DOT11_RADIO_STATE)
+    end
+  end
 
   @[Extern]
-  record WLAN_RADIO_STATE,
-    dwNumberOfPhys : UInt32,
-    phy_radio_state : Win32cr::NetworkManagement::WiFi::WLAN_PHY_RADIO_STATE[64]
+  struct WLAN_RADIO_STATE
+    property dwNumberOfPhys : UInt32
+    property phy_radio_state : Win32cr::NetworkManagement::WiFi::WLAN_PHY_RADIO_STATE[64]
+    def initialize(@dwNumberOfPhys : UInt32, @phy_radio_state : Win32cr::NetworkManagement::WiFi::WLAN_PHY_RADIO_STATE[64])
+    end
+  end
 
   @[Extern]
-  record WLAN_INTERFACE_CAPABILITY,
-    interfaceType : Win32cr::NetworkManagement::WiFi::WLAN_INTERFACE_TYPE,
-    bDot11DSupported : Win32cr::Foundation::BOOL,
-    dwMaxDesiredSsidListSize : UInt32,
-    dwMaxDesiredBssidListSize : UInt32,
-    dwNumberOfSupportedPhys : UInt32,
-    dot11PhyTypes : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE[64]
+  struct WLAN_INTERFACE_CAPABILITY
+    property interfaceType : Win32cr::NetworkManagement::WiFi::WLAN_INTERFACE_TYPE
+    property bDot11DSupported : Win32cr::Foundation::BOOL
+    property dwMaxDesiredSsidListSize : UInt32
+    property dwMaxDesiredBssidListSize : UInt32
+    property dwNumberOfSupportedPhys : UInt32
+    property dot11PhyTypes : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE[64]
+    def initialize(@interfaceType : Win32cr::NetworkManagement::WiFi::WLAN_INTERFACE_TYPE, @bDot11DSupported : Win32cr::Foundation::BOOL, @dwMaxDesiredSsidListSize : UInt32, @dwMaxDesiredBssidListSize : UInt32, @dwNumberOfSupportedPhys : UInt32, @dot11PhyTypes : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE[64])
+    end
+  end
 
   @[Extern]
-  record WLAN_AUTH_CIPHER_PAIR_LIST,
-    dwNumberOfItems : UInt32,
-    pAuthCipherPairList : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*
+  struct WLAN_AUTH_CIPHER_PAIR_LIST
+    property dwNumberOfItems : UInt32
+    property pAuthCipherPairList : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*
+    def initialize(@dwNumberOfItems : UInt32, @pAuthCipherPairList : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_CIPHER_PAIR*)
+    end
+  end
 
   @[Extern]
-  record WLAN_COUNTRY_OR_REGION_STRING_LIST,
-    dwNumberOfItems : UInt32,
-    pCountryOrRegionStringList : UInt8[3]
+  struct WLAN_COUNTRY_OR_REGION_STRING_LIST
+    property dwNumberOfItems : UInt32
+    property pCountryOrRegionStringList : UInt8[3]
+    def initialize(@dwNumberOfItems : UInt32, @pCountryOrRegionStringList : UInt8[3])
+    end
+  end
 
   @[Extern]
-  record WLAN_PROFILE_INFO_LIST,
-    dwNumberOfItems : UInt32,
-    dwIndex : UInt32,
-    profile_info : Win32cr::NetworkManagement::WiFi::WLAN_PROFILE_INFO*
+  struct WLAN_PROFILE_INFO_LIST
+    property dwNumberOfItems : UInt32
+    property dwIndex : UInt32
+    property profile_info : Win32cr::NetworkManagement::WiFi::WLAN_PROFILE_INFO*
+    def initialize(@dwNumberOfItems : UInt32, @dwIndex : UInt32, @profile_info : Win32cr::NetworkManagement::WiFi::WLAN_PROFILE_INFO*)
+    end
+  end
 
   @[Extern]
-  record WLAN_AVAILABLE_NETWORK_LIST,
-    dwNumberOfItems : UInt32,
-    dwIndex : UInt32,
-    network : Win32cr::NetworkManagement::WiFi::WLAN_AVAILABLE_NETWORK*
+  struct WLAN_AVAILABLE_NETWORK_LIST
+    property dwNumberOfItems : UInt32
+    property dwIndex : UInt32
+    property network : Win32cr::NetworkManagement::WiFi::WLAN_AVAILABLE_NETWORK*
+    def initialize(@dwNumberOfItems : UInt32, @dwIndex : UInt32, @network : Win32cr::NetworkManagement::WiFi::WLAN_AVAILABLE_NETWORK*)
+    end
+  end
 
   @[Extern]
-  record WLAN_AVAILABLE_NETWORK_LIST_V2,
-    dwNumberOfItems : UInt32,
-    dwIndex : UInt32,
-    network : Win32cr::NetworkManagement::WiFi::WLAN_AVAILABLE_NETWORK_V2*
+  struct WLAN_AVAILABLE_NETWORK_LIST_V2
+    property dwNumberOfItems : UInt32
+    property dwIndex : UInt32
+    property network : Win32cr::NetworkManagement::WiFi::WLAN_AVAILABLE_NETWORK_V2*
+    def initialize(@dwNumberOfItems : UInt32, @dwIndex : UInt32, @network : Win32cr::NetworkManagement::WiFi::WLAN_AVAILABLE_NETWORK_V2*)
+    end
+  end
 
   @[Extern]
-  record WLAN_INTERFACE_INFO_LIST,
-    dwNumberOfItems : UInt32,
-    dwIndex : UInt32,
-    interface_info : Win32cr::NetworkManagement::WiFi::WLAN_INTERFACE_INFO*
+  struct WLAN_INTERFACE_INFO_LIST
+    property dwNumberOfItems : UInt32
+    property dwIndex : UInt32
+    property interface_info : Win32cr::NetworkManagement::WiFi::WLAN_INTERFACE_INFO*
+    def initialize(@dwNumberOfItems : UInt32, @dwIndex : UInt32, @interface_info : Win32cr::NetworkManagement::WiFi::WLAN_INTERFACE_INFO*)
+    end
+  end
 
   @[Extern]
-  record DOT11_NETWORK_LIST,
-    dwNumberOfItems : UInt32,
-    dwIndex : UInt32,
-    network : Win32cr::NetworkManagement::WiFi::DOT11_NETWORK*
+  struct DOT11_NETWORK_LIST
+    property dwNumberOfItems : UInt32
+    property dwIndex : UInt32
+    property network : Win32cr::NetworkManagement::WiFi::DOT11_NETWORK*
+    def initialize(@dwNumberOfItems : UInt32, @dwIndex : UInt32, @network : Win32cr::NetworkManagement::WiFi::DOT11_NETWORK*)
+    end
+  end
 
   @[Extern]
-  record WLAN_CONNECTION_PARAMETERS,
-    wlanConnectionMode : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_MODE,
-    strProfile : Win32cr::Foundation::PWSTR,
-    pDot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID*,
-    pDesiredBssidList : Win32cr::NetworkManagement::WiFi::DOT11_BSSID_LIST*,
-    dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE,
-    dwFlags : UInt32
+  struct WLAN_CONNECTION_PARAMETERS
+    property wlanConnectionMode : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_MODE
+    property strProfile : Win32cr::Foundation::PWSTR
+    property pDot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID*
+    property pDesiredBssidList : Win32cr::NetworkManagement::WiFi::DOT11_BSSID_LIST*
+    property dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE
+    property dwFlags : UInt32
+    def initialize(@wlanConnectionMode : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_MODE, @strProfile : Win32cr::Foundation::PWSTR, @pDot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID*, @pDesiredBssidList : Win32cr::NetworkManagement::WiFi::DOT11_BSSID_LIST*, @dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, @dwFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record WLAN_CONNECTION_PARAMETERS_V2,
-    wlanConnectionMode : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_MODE,
-    strProfile : Win32cr::Foundation::PWSTR,
-    pDot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID*,
-    pDot11Hessid : UInt8*,
-    pDesiredBssidList : Win32cr::NetworkManagement::WiFi::DOT11_BSSID_LIST*,
-    dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE,
-    dwFlags : UInt32,
-    pDot11AccessNetworkOptions : Win32cr::NetworkManagement::WiFi::DOT11_ACCESSNETWORKOPTIONS*
+  struct WLAN_CONNECTION_PARAMETERS_V2
+    property wlanConnectionMode : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_MODE
+    property strProfile : Win32cr::Foundation::PWSTR
+    property pDot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID*
+    property pDot11Hessid : UInt8*
+    property pDesiredBssidList : Win32cr::NetworkManagement::WiFi::DOT11_BSSID_LIST*
+    property dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE
+    property dwFlags : UInt32
+    property pDot11AccessNetworkOptions : Win32cr::NetworkManagement::WiFi::DOT11_ACCESSNETWORKOPTIONS*
+    def initialize(@wlanConnectionMode : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_MODE, @strProfile : Win32cr::Foundation::PWSTR, @pDot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID*, @pDot11Hessid : UInt8*, @pDesiredBssidList : Win32cr::NetworkManagement::WiFi::DOT11_BSSID_LIST*, @dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, @dwFlags : UInt32, @pDot11AccessNetworkOptions : Win32cr::NetworkManagement::WiFi::DOT11_ACCESSNETWORKOPTIONS*)
+    end
+  end
 
   @[Extern]
-  record WLAN_MSM_NOTIFICATION_DATA,
-    wlanConnectionMode : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_MODE,
-    strProfileName : UInt16[256],
-    dot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID,
-    dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE,
-    dot11MacAddr : UInt8[6],
-    bSecurityEnabled : Win32cr::Foundation::BOOL,
-    bFirstPeer : Win32cr::Foundation::BOOL,
-    bLastPeer : Win32cr::Foundation::BOOL,
-    wlanReasonCode : UInt32
+  struct WLAN_MSM_NOTIFICATION_DATA
+    property wlanConnectionMode : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_MODE
+    property strProfileName : UInt16[256]
+    property dot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID
+    property dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE
+    property dot11MacAddr : UInt8[6]
+    property bSecurityEnabled : Win32cr::Foundation::BOOL
+    property bFirstPeer : Win32cr::Foundation::BOOL
+    property bLastPeer : Win32cr::Foundation::BOOL
+    property wlanReasonCode : UInt32
+    def initialize(@wlanConnectionMode : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_MODE, @strProfileName : UInt16[256], @dot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID, @dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, @dot11MacAddr : UInt8[6], @bSecurityEnabled : Win32cr::Foundation::BOOL, @bFirstPeer : Win32cr::Foundation::BOOL, @bLastPeer : Win32cr::Foundation::BOOL, @wlanReasonCode : UInt32)
+    end
+  end
 
   @[Extern]
-  record WLAN_CONNECTION_NOTIFICATION_DATA,
-    wlanConnectionMode : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_MODE,
-    strProfileName : UInt16[256],
-    dot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID,
-    dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE,
-    bSecurityEnabled : Win32cr::Foundation::BOOL,
-    wlanReasonCode : UInt32,
-    dwFlags : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_NOTIFICATION_FLAGS,
-    strProfileXml : UInt16*
+  struct WLAN_CONNECTION_NOTIFICATION_DATA
+    property wlanConnectionMode : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_MODE
+    property strProfileName : UInt16[256]
+    property dot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID
+    property dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE
+    property bSecurityEnabled : Win32cr::Foundation::BOOL
+    property wlanReasonCode : UInt32
+    property dwFlags : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_NOTIFICATION_FLAGS
+    property strProfileXml : UInt16*
+    def initialize(@wlanConnectionMode : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_MODE, @strProfileName : UInt16[256], @dot11Ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID, @dot11BssType : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, @bSecurityEnabled : Win32cr::Foundation::BOOL, @wlanReasonCode : UInt32, @dwFlags : Win32cr::NetworkManagement::WiFi::WLAN_CONNECTION_NOTIFICATION_FLAGS, @strProfileXml : UInt16*)
+    end
+  end
 
   @[Extern]
-  record WLAN_DEVICE_SERVICE_NOTIFICATION_DATA,
-    device_service : LibC::GUID,
-    dwOpCode : UInt32,
-    dwDataSize : UInt32,
-    data_blob : UInt8*
+  struct WLAN_DEVICE_SERVICE_NOTIFICATION_DATA
+    property device_service : LibC::GUID
+    property dwOpCode : UInt32
+    property dwDataSize : UInt32
+    property data_blob : UInt8*
+    def initialize(@device_service : LibC::GUID, @dwOpCode : UInt32, @dwDataSize : UInt32, @data_blob : UInt8*)
+    end
+  end
 
   @[Extern]
-  record WLAN_PHY_FRAME_STATISTICS,
-    ullTransmittedFrameCount : UInt64,
-    ullMulticastTransmittedFrameCount : UInt64,
-    ullFailedCount : UInt64,
-    ullRetryCount : UInt64,
-    ullMultipleRetryCount : UInt64,
-    ullMaxTXLifetimeExceededCount : UInt64,
-    ullTransmittedFragmentCount : UInt64,
-    ullRTSSuccessCount : UInt64,
-    ullRTSFailureCount : UInt64,
-    ullACKFailureCount : UInt64,
-    ullReceivedFrameCount : UInt64,
-    ullMulticastReceivedFrameCount : UInt64,
-    ullPromiscuousReceivedFrameCount : UInt64,
-    ullMaxRXLifetimeExceededCount : UInt64,
-    ullFrameDuplicateCount : UInt64,
-    ullReceivedFragmentCount : UInt64,
-    ullPromiscuousReceivedFragmentCount : UInt64,
-    ullFCSErrorCount : UInt64
+  struct WLAN_PHY_FRAME_STATISTICS
+    property ullTransmittedFrameCount : UInt64
+    property ullMulticastTransmittedFrameCount : UInt64
+    property ullFailedCount : UInt64
+    property ullRetryCount : UInt64
+    property ullMultipleRetryCount : UInt64
+    property ullMaxTXLifetimeExceededCount : UInt64
+    property ullTransmittedFragmentCount : UInt64
+    property ullRTSSuccessCount : UInt64
+    property ullRTSFailureCount : UInt64
+    property ullACKFailureCount : UInt64
+    property ullReceivedFrameCount : UInt64
+    property ullMulticastReceivedFrameCount : UInt64
+    property ullPromiscuousReceivedFrameCount : UInt64
+    property ullMaxRXLifetimeExceededCount : UInt64
+    property ullFrameDuplicateCount : UInt64
+    property ullReceivedFragmentCount : UInt64
+    property ullPromiscuousReceivedFragmentCount : UInt64
+    property ullFCSErrorCount : UInt64
+    def initialize(@ullTransmittedFrameCount : UInt64, @ullMulticastTransmittedFrameCount : UInt64, @ullFailedCount : UInt64, @ullRetryCount : UInt64, @ullMultipleRetryCount : UInt64, @ullMaxTXLifetimeExceededCount : UInt64, @ullTransmittedFragmentCount : UInt64, @ullRTSSuccessCount : UInt64, @ullRTSFailureCount : UInt64, @ullACKFailureCount : UInt64, @ullReceivedFrameCount : UInt64, @ullMulticastReceivedFrameCount : UInt64, @ullPromiscuousReceivedFrameCount : UInt64, @ullMaxRXLifetimeExceededCount : UInt64, @ullFrameDuplicateCount : UInt64, @ullReceivedFragmentCount : UInt64, @ullPromiscuousReceivedFragmentCount : UInt64, @ullFCSErrorCount : UInt64)
+    end
+  end
 
   @[Extern]
-  record WLAN_MAC_FRAME_STATISTICS,
-    ullTransmittedFrameCount : UInt64,
-    ullReceivedFrameCount : UInt64,
-    ullWEPExcludedCount : UInt64,
-    ullTKIPLocalMICFailures : UInt64,
-    ullTKIPReplays : UInt64,
-    ullTKIPICVErrorCount : UInt64,
-    ullCCMPReplays : UInt64,
-    ullCCMPDecryptErrors : UInt64,
-    ullWEPUndecryptableCount : UInt64,
-    ullWEPICVErrorCount : UInt64,
-    ullDecryptSuccessCount : UInt64,
-    ullDecryptFailureCount : UInt64
+  struct WLAN_MAC_FRAME_STATISTICS
+    property ullTransmittedFrameCount : UInt64
+    property ullReceivedFrameCount : UInt64
+    property ullWEPExcludedCount : UInt64
+    property ullTKIPLocalMICFailures : UInt64
+    property ullTKIPReplays : UInt64
+    property ullTKIPICVErrorCount : UInt64
+    property ullCCMPReplays : UInt64
+    property ullCCMPDecryptErrors : UInt64
+    property ullWEPUndecryptableCount : UInt64
+    property ullWEPICVErrorCount : UInt64
+    property ullDecryptSuccessCount : UInt64
+    property ullDecryptFailureCount : UInt64
+    def initialize(@ullTransmittedFrameCount : UInt64, @ullReceivedFrameCount : UInt64, @ullWEPExcludedCount : UInt64, @ullTKIPLocalMICFailures : UInt64, @ullTKIPReplays : UInt64, @ullTKIPICVErrorCount : UInt64, @ullCCMPReplays : UInt64, @ullCCMPDecryptErrors : UInt64, @ullWEPUndecryptableCount : UInt64, @ullWEPICVErrorCount : UInt64, @ullDecryptSuccessCount : UInt64, @ullDecryptFailureCount : UInt64)
+    end
+  end
 
   @[Extern]
-  record WLAN_STATISTICS,
-    ullFourWayHandshakeFailures : UInt64,
-    ullTKIPCounterMeasuresInvoked : UInt64,
-    ullReserved : UInt64,
-    mac_ucast_counters : Win32cr::NetworkManagement::WiFi::WLAN_MAC_FRAME_STATISTICS,
-    mac_mcast_counters : Win32cr::NetworkManagement::WiFi::WLAN_MAC_FRAME_STATISTICS,
-    dwNumberOfPhys : UInt32,
-    phy_counters : Win32cr::NetworkManagement::WiFi::WLAN_PHY_FRAME_STATISTICS*
+  struct WLAN_STATISTICS
+    property ullFourWayHandshakeFailures : UInt64
+    property ullTKIPCounterMeasuresInvoked : UInt64
+    property ullReserved : UInt64
+    property mac_ucast_counters : Win32cr::NetworkManagement::WiFi::WLAN_MAC_FRAME_STATISTICS
+    property mac_mcast_counters : Win32cr::NetworkManagement::WiFi::WLAN_MAC_FRAME_STATISTICS
+    property dwNumberOfPhys : UInt32
+    property phy_counters : Win32cr::NetworkManagement::WiFi::WLAN_PHY_FRAME_STATISTICS*
+    def initialize(@ullFourWayHandshakeFailures : UInt64, @ullTKIPCounterMeasuresInvoked : UInt64, @ullReserved : UInt64, @mac_ucast_counters : Win32cr::NetworkManagement::WiFi::WLAN_MAC_FRAME_STATISTICS, @mac_mcast_counters : Win32cr::NetworkManagement::WiFi::WLAN_MAC_FRAME_STATISTICS, @dwNumberOfPhys : UInt32, @phy_counters : Win32cr::NetworkManagement::WiFi::WLAN_PHY_FRAME_STATISTICS*)
+    end
+  end
 
   @[Extern]
-  record WLAN_DEVICE_SERVICE_GUID_LIST,
-    dwNumberOfItems : UInt32,
-    dwIndex : UInt32,
-    device_service : LibC::GUID*
+  struct WLAN_DEVICE_SERVICE_GUID_LIST
+    property dwNumberOfItems : UInt32
+    property dwIndex : UInt32
+    property device_service : LibC::GUID*
+    def initialize(@dwNumberOfItems : UInt32, @dwIndex : UInt32, @device_service : LibC::GUID*)
+    end
+  end
 
   @[Extern]
-  record WFD_GROUP_ID,
-    device_address : UInt8[6],
-    group_ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID
+  struct WFD_GROUP_ID
+    property device_address : UInt8[6]
+    property group_ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID
+    def initialize(@device_address : UInt8[6], @group_ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID)
+    end
+  end
 
   @[Extern]
-  record WLAN_HOSTED_NETWORK_PEER_STATE,
-    peer_mac_address : UInt8[6],
-    peer_auth_state : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_PEER_AUTH_STATE
+  struct WLAN_HOSTED_NETWORK_PEER_STATE
+    property peer_mac_address : UInt8[6]
+    property peer_auth_state : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_PEER_AUTH_STATE
+    def initialize(@peer_mac_address : UInt8[6], @peer_auth_state : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_PEER_AUTH_STATE)
+    end
+  end
 
   @[Extern]
-  record WLAN_HOSTED_NETWORK_RADIO_STATE,
-    dot11SoftwareRadioState : Win32cr::NetworkManagement::WiFi::DOT11_RADIO_STATE,
-    dot11HardwareRadioState : Win32cr::NetworkManagement::WiFi::DOT11_RADIO_STATE
+  struct WLAN_HOSTED_NETWORK_RADIO_STATE
+    property dot11SoftwareRadioState : Win32cr::NetworkManagement::WiFi::DOT11_RADIO_STATE
+    property dot11HardwareRadioState : Win32cr::NetworkManagement::WiFi::DOT11_RADIO_STATE
+    def initialize(@dot11SoftwareRadioState : Win32cr::NetworkManagement::WiFi::DOT11_RADIO_STATE, @dot11HardwareRadioState : Win32cr::NetworkManagement::WiFi::DOT11_RADIO_STATE)
+    end
+  end
 
   @[Extern]
-  record WLAN_HOSTED_NETWORK_STATE_CHANGE,
-    old_state : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_STATE,
-    new_state : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_STATE,
-    state_change_reason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON
+  struct WLAN_HOSTED_NETWORK_STATE_CHANGE
+    property old_state : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_STATE
+    property new_state : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_STATE
+    property state_change_reason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON
+    def initialize(@old_state : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_STATE, @new_state : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_STATE, @state_change_reason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON)
+    end
+  end
 
   @[Extern]
-  record WLAN_HOSTED_NETWORK_DATA_PEER_STATE_CHANGE,
-    old_state : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_PEER_STATE,
-    new_state : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_PEER_STATE,
-    peer_state_change_reason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON
+  struct WLAN_HOSTED_NETWORK_DATA_PEER_STATE_CHANGE
+    property old_state : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_PEER_STATE
+    property new_state : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_PEER_STATE
+    property peer_state_change_reason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON
+    def initialize(@old_state : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_PEER_STATE, @new_state : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_PEER_STATE, @peer_state_change_reason : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_REASON)
+    end
+  end
 
   @[Extern]
-  record WLAN_HOSTED_NETWORK_CONNECTION_SETTINGS,
-    hostedNetworkSSID : Win32cr::NetworkManagement::WiFi::DOT11_SSID,
-    dwMaxNumberOfPeers : UInt32
+  struct WLAN_HOSTED_NETWORK_CONNECTION_SETTINGS
+    property hostedNetworkSSID : Win32cr::NetworkManagement::WiFi::DOT11_SSID
+    property dwMaxNumberOfPeers : UInt32
+    def initialize(@hostedNetworkSSID : Win32cr::NetworkManagement::WiFi::DOT11_SSID, @dwMaxNumberOfPeers : UInt32)
+    end
+  end
 
   @[Extern]
-  record WLAN_HOSTED_NETWORK_SECURITY_SETTINGS,
-    dot11AuthAlgo : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM,
-    dot11CipherAlgo : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM
+  struct WLAN_HOSTED_NETWORK_SECURITY_SETTINGS
+    property dot11AuthAlgo : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM
+    property dot11CipherAlgo : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM
+    def initialize(@dot11AuthAlgo : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM, @dot11CipherAlgo : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM)
+    end
+  end
 
   @[Extern]
-  record WLAN_HOSTED_NETWORK_STATUS,
-    hosted_network_state : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_STATE,
-    ip_device_id : LibC::GUID,
-    wlanHostedNetworkBSSID : UInt8[6],
-    dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE,
-    ulChannelFrequency : UInt32,
-    dwNumberOfPeers : UInt32,
-    peer_list : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_PEER_STATE*
+  struct WLAN_HOSTED_NETWORK_STATUS
+    property hosted_network_state : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_STATE
+    property ip_device_id : LibC::GUID
+    property wlanHostedNetworkBSSID : UInt8[6]
+    property dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE
+    property ulChannelFrequency : UInt32
+    property dwNumberOfPeers : UInt32
+    property peer_list : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_PEER_STATE*
+    def initialize(@hosted_network_state : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_STATE, @ip_device_id : LibC::GUID, @wlanHostedNetworkBSSID : UInt8[6], @dot11PhyType : Win32cr::NetworkManagement::WiFi::DOT11_PHY_TYPE, @ulChannelFrequency : UInt32, @dwNumberOfPeers : UInt32, @peer_list : Win32cr::NetworkManagement::WiFi::WLAN_HOSTED_NETWORK_PEER_STATE*)
+    end
+  end
 
   @[Extern]
-  record ONEX_VARIABLE_BLOB,
-    dwSize : UInt32,
-    dwOffset : UInt32
+  struct ONEX_VARIABLE_BLOB
+    property dwSize : UInt32
+    property dwOffset : UInt32
+    def initialize(@dwSize : UInt32, @dwOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record ONEX_AUTH_PARAMS,
-    fUpdatePending : Win32cr::Foundation::BOOL,
-    oneXConnProfile : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB,
-    authIdentity : Win32cr::NetworkManagement::WiFi::ONEX_AUTH_IDENTITY,
-    dwQuarantineState : UInt32,
-    _bitfield : UInt32,
-    dwSessionId : UInt32,
-    hUserToken : Win32cr::Foundation::HANDLE,
-    one_x_user_profile : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB,
-    identity : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB,
-    user_name : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB,
-    domain : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB
+  struct ONEX_AUTH_PARAMS
+    property fUpdatePending : Win32cr::Foundation::BOOL
+    property oneXConnProfile : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB
+    property authIdentity : Win32cr::NetworkManagement::WiFi::ONEX_AUTH_IDENTITY
+    property dwQuarantineState : UInt32
+    property _bitfield : UInt32
+    property dwSessionId : UInt32
+    property hUserToken : Win32cr::Foundation::HANDLE
+    property one_x_user_profile : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB
+    property identity : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB
+    property user_name : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB
+    property domain : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB
+    def initialize(@fUpdatePending : Win32cr::Foundation::BOOL, @oneXConnProfile : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB, @authIdentity : Win32cr::NetworkManagement::WiFi::ONEX_AUTH_IDENTITY, @dwQuarantineState : UInt32, @_bitfield : UInt32, @dwSessionId : UInt32, @hUserToken : Win32cr::Foundation::HANDLE, @one_x_user_profile : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB, @identity : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB, @user_name : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB, @domain : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB)
+    end
+  end
 
   @[Extern]
-  record ONEX_EAP_ERROR,
-    dwWinError : UInt32,
-    type__ : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE,
-    dwReasonCode : UInt32,
-    rootCauseGuid : LibC::GUID,
-    repairGuid : LibC::GUID,
-    helpLinkGuid : LibC::GUID,
-    _bitfield : UInt32,
-    root_cause_string : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB,
-    repair_string : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB
+  struct ONEX_EAP_ERROR
+    property dwWinError : UInt32
+    property type__ : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE
+    property dwReasonCode : UInt32
+    property rootCauseGuid : LibC::GUID
+    property repairGuid : LibC::GUID
+    property helpLinkGuid : LibC::GUID
+    property _bitfield : UInt32
+    property root_cause_string : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB
+    property repair_string : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB
+    def initialize(@dwWinError : UInt32, @type__ : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE, @dwReasonCode : UInt32, @rootCauseGuid : LibC::GUID, @repairGuid : LibC::GUID, @helpLinkGuid : LibC::GUID, @_bitfield : UInt32, @root_cause_string : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB, @repair_string : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB)
+    end
+  end
 
   @[Extern]
-  record ONEX_STATUS,
-    authStatus : Win32cr::NetworkManagement::WiFi::ONEX_AUTH_STATUS,
-    dwReason : UInt32,
-    dwError : UInt32
+  struct ONEX_STATUS
+    property authStatus : Win32cr::NetworkManagement::WiFi::ONEX_AUTH_STATUS
+    property dwReason : UInt32
+    property dwError : UInt32
+    def initialize(@authStatus : Win32cr::NetworkManagement::WiFi::ONEX_AUTH_STATUS, @dwReason : UInt32, @dwError : UInt32)
+    end
+  end
 
   @[Extern]
-  record ONEX_RESULT_UPDATE_DATA,
-    oneXStatus : Win32cr::NetworkManagement::WiFi::ONEX_STATUS,
-    backend_support : Win32cr::NetworkManagement::WiFi::ONEX_EAP_METHOD_BACKEND_SUPPORT,
-    fBackendEngaged : Win32cr::Foundation::BOOL,
-    _bitfield : UInt32,
-    authParams : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB,
-    eapError : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB
+  struct ONEX_RESULT_UPDATE_DATA
+    property oneXStatus : Win32cr::NetworkManagement::WiFi::ONEX_STATUS
+    property backend_support : Win32cr::NetworkManagement::WiFi::ONEX_EAP_METHOD_BACKEND_SUPPORT
+    property fBackendEngaged : Win32cr::Foundation::BOOL
+    property _bitfield : UInt32
+    property authParams : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB
+    property eapError : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB
+    def initialize(@oneXStatus : Win32cr::NetworkManagement::WiFi::ONEX_STATUS, @backend_support : Win32cr::NetworkManagement::WiFi::ONEX_EAP_METHOD_BACKEND_SUPPORT, @fBackendEngaged : Win32cr::Foundation::BOOL, @_bitfield : UInt32, @authParams : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB, @eapError : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB)
+    end
+  end
 
   @[Extern]
-  record ONEX_USER_INFO,
-    authIdentity : Win32cr::NetworkManagement::WiFi::ONEX_AUTH_IDENTITY,
-    _bitfield : UInt32,
-    user_name : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB,
-    domain_name : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB
+  struct ONEX_USER_INFO
+    property authIdentity : Win32cr::NetworkManagement::WiFi::ONEX_AUTH_IDENTITY
+    property _bitfield : UInt32
+    property user_name : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB
+    property domain_name : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB
+    def initialize(@authIdentity : Win32cr::NetworkManagement::WiFi::ONEX_AUTH_IDENTITY, @_bitfield : UInt32, @user_name : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB, @domain_name : Win32cr::NetworkManagement::WiFi::ONEX_VARIABLE_BLOB)
+    end
+  end
 
   @[Extern]
-  record DOT11_ADAPTER,
-    gAdapterId : LibC::GUID,
-    pszDescription : Win32cr::Foundation::PWSTR,
-    dot11_current_op_mode : Win32cr::NetworkManagement::WiFi::DOT11_CURRENT_OPERATION_MODE
+  struct DOT11_ADAPTER
+    property gAdapterId : LibC::GUID
+    property pszDescription : Win32cr::Foundation::PWSTR
+    property dot11_current_op_mode : Win32cr::NetworkManagement::WiFi::DOT11_CURRENT_OPERATION_MODE
+    def initialize(@gAdapterId : LibC::GUID, @pszDescription : Win32cr::Foundation::PWSTR, @dot11_current_op_mode : Win32cr::NetworkManagement::WiFi::DOT11_CURRENT_OPERATION_MODE)
+    end
+  end
 
   @[Extern]
-  record DOT11_BSS_LIST,
-    uNumOfBytes : UInt32,
-    pucBuffer : UInt8*
+  struct DOT11_BSS_LIST
+    property uNumOfBytes : UInt32
+    property pucBuffer : UInt8*
+    def initialize(@uNumOfBytes : UInt32, @pucBuffer : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DOT11_PORT_STATE,
-    peer_mac_address : UInt8[6],
-    uSessionId : UInt32,
-    bPortControlled : Win32cr::Foundation::BOOL,
-    bPortAuthorized : Win32cr::Foundation::BOOL
+  struct DOT11_PORT_STATE
+    property peer_mac_address : UInt8[6]
+    property uSessionId : UInt32
+    property bPortControlled : Win32cr::Foundation::BOOL
+    property bPortAuthorized : Win32cr::Foundation::BOOL
+    def initialize(@peer_mac_address : UInt8[6], @uSessionId : UInt32, @bPortControlled : Win32cr::Foundation::BOOL, @bPortAuthorized : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record DOT11_SECURITY_PACKET_HEADER,
-    peer_mac : UInt8[6],
-    usEtherType : UInt16,
-    data : UInt8*
+  struct DOT11_SECURITY_PACKET_HEADER
+    property peer_mac : UInt8[6]
+    property usEtherType : UInt16
+    property data : UInt8*
+    def initialize(@peer_mac : UInt8[6], @usEtherType : UInt16, @data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DOT11_MSSECURITY_SETTINGS,
-    dot11AuthAlgorithm : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM,
-    dot11CipherAlgorithm : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM,
-    fOneXEnabled : Win32cr::Foundation::BOOL,
-    eapMethodType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE,
-    dwEapConnectionDataLen : UInt32,
-    pEapConnectionData : UInt8*
+  struct DOT11_MSSECURITY_SETTINGS
+    property dot11AuthAlgorithm : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM
+    property dot11CipherAlgorithm : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM
+    property fOneXEnabled : Win32cr::Foundation::BOOL
+    property eapMethodType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE
+    property dwEapConnectionDataLen : UInt32
+    property pEapConnectionData : UInt8*
+    def initialize(@dot11AuthAlgorithm : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM, @dot11CipherAlgorithm : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM, @fOneXEnabled : Win32cr::Foundation::BOOL, @eapMethodType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE, @dwEapConnectionDataLen : UInt32, @pEapConnectionData : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DOT11EXT_IHV_SSID_LIST,
-    ulCount : UInt32,
-    ssi_ds : Win32cr::NetworkManagement::WiFi::DOT11_SSID*
+  struct DOT11EXT_IHV_SSID_LIST
+    property ulCount : UInt32
+    property ssi_ds : Win32cr::NetworkManagement::WiFi::DOT11_SSID*
+    def initialize(@ulCount : UInt32, @ssi_ds : Win32cr::NetworkManagement::WiFi::DOT11_SSID*)
+    end
+  end
 
   @[Extern]
-  record DOT11EXT_IHV_PROFILE_PARAMS,
-    pSsidList : Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_SSID_LIST*,
-    bss_type : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE,
-    pMSSecuritySettings : Win32cr::NetworkManagement::WiFi::DOT11_MSSECURITY_SETTINGS*
+  struct DOT11EXT_IHV_PROFILE_PARAMS
+    property pSsidList : Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_SSID_LIST*
+    property bss_type : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE
+    property pMSSecuritySettings : Win32cr::NetworkManagement::WiFi::DOT11_MSSECURITY_SETTINGS*
+    def initialize(@pSsidList : Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_SSID_LIST*, @bss_type : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, @pMSSecuritySettings : Win32cr::NetworkManagement::WiFi::DOT11_MSSECURITY_SETTINGS*)
+    end
+  end
 
   @[Extern]
-  record DOT11EXT_IHV_PARAMS,
-    dot11ExtIhvProfileParams : Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_PROFILE_PARAMS,
-    wstrProfileName : UInt16[256],
-    dwProfileTypeFlags : UInt32,
-    interfaceGuid : LibC::GUID
+  struct DOT11EXT_IHV_PARAMS
+    property dot11ExtIhvProfileParams : Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_PROFILE_PARAMS
+    property wstrProfileName : UInt16[256]
+    property dwProfileTypeFlags : UInt32
+    property interfaceGuid : LibC::GUID
+    def initialize(@dot11ExtIhvProfileParams : Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_PROFILE_PARAMS, @wstrProfileName : UInt16[256], @dwProfileTypeFlags : UInt32, @interfaceGuid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record DOT11_IHV_VERSION_INFO,
-    dwVerMin : UInt32,
-    dwVerMax : UInt32
+  struct DOT11_IHV_VERSION_INFO
+    property dwVerMin : UInt32
+    property dwVerMax : UInt32
+    def initialize(@dwVerMin : UInt32, @dwVerMax : UInt32)
+    end
+  end
 
   @[Extern]
-  record DOT11EXT_IHV_UI_REQUEST,
-    dwSessionId : UInt32,
-    guidUIRequest : LibC::GUID,
-    ui_page_clsid : LibC::GUID,
-    dwByteCount : UInt32,
-    pvUIRequest : UInt8*
+  struct DOT11EXT_IHV_UI_REQUEST
+    property dwSessionId : UInt32
+    property guidUIRequest : LibC::GUID
+    property ui_page_clsid : LibC::GUID
+    property dwByteCount : UInt32
+    property pvUIRequest : UInt8*
+    def initialize(@dwSessionId : UInt32, @guidUIRequest : LibC::GUID, @ui_page_clsid : LibC::GUID, @dwByteCount : UInt32, @pvUIRequest : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DOT11_EAP_RESULT,
-    dwFailureReasonCode : UInt32,
-    pAttribArray : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ATTRIBUTES*
+  struct DOT11_EAP_RESULT
+    property dwFailureReasonCode : UInt32
+    property pAttribArray : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ATTRIBUTES*
+    def initialize(@dwFailureReasonCode : UInt32, @pAttribArray : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ATTRIBUTES*)
+    end
+  end
 
   @[Extern]
-  record DOT11_MSONEX_RESULT_PARAMS,
-    dot11_onex_auth_status : Win32cr::NetworkManagement::WiFi::ONEX_AUTH_STATUS,
-    dot11_one_x_reason_code : Win32cr::NetworkManagement::WiFi::ONEX_REASON_CODE,
-    pbMPPESendKey : UInt8*,
-    dwMPPESendKeyLen : UInt32,
-    pbMPPERecvKey : UInt8*,
-    dwMPPERecvKeyLen : UInt32,
-    pDot11EapResult : Win32cr::NetworkManagement::WiFi::DOT11_EAP_RESULT*
+  struct DOT11_MSONEX_RESULT_PARAMS
+    property dot11_onex_auth_status : Win32cr::NetworkManagement::WiFi::ONEX_AUTH_STATUS
+    property dot11_one_x_reason_code : Win32cr::NetworkManagement::WiFi::ONEX_REASON_CODE
+    property pbMPPESendKey : UInt8*
+    property dwMPPESendKeyLen : UInt32
+    property pbMPPERecvKey : UInt8*
+    property dwMPPERecvKeyLen : UInt32
+    property pDot11EapResult : Win32cr::NetworkManagement::WiFi::DOT11_EAP_RESULT*
+    def initialize(@dot11_onex_auth_status : Win32cr::NetworkManagement::WiFi::ONEX_AUTH_STATUS, @dot11_one_x_reason_code : Win32cr::NetworkManagement::WiFi::ONEX_REASON_CODE, @pbMPPESendKey : UInt8*, @dwMPPESendKeyLen : UInt32, @pbMPPERecvKey : UInt8*, @dwMPPERecvKeyLen : UInt32, @pDot11EapResult : Win32cr::NetworkManagement::WiFi::DOT11_EAP_RESULT*)
+    end
+  end
 
   @[Extern]
-  record DOT11EXT_IHV_CONNECTIVITY_PROFILE,
-    pszXmlFragmentIhvConnectivity : Win32cr::Foundation::PWSTR
+  struct DOT11EXT_IHV_CONNECTIVITY_PROFILE
+    property pszXmlFragmentIhvConnectivity : Win32cr::Foundation::PWSTR
+    def initialize(@pszXmlFragmentIhvConnectivity : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record DOT11EXT_IHV_SECURITY_PROFILE,
-    pszXmlFragmentIhvSecurity : Win32cr::Foundation::PWSTR,
-    bUseMSOnex : Win32cr::Foundation::BOOL
+  struct DOT11EXT_IHV_SECURITY_PROFILE
+    property pszXmlFragmentIhvSecurity : Win32cr::Foundation::PWSTR
+    property bUseMSOnex : Win32cr::Foundation::BOOL
+    def initialize(@pszXmlFragmentIhvSecurity : Win32cr::Foundation::PWSTR, @bUseMSOnex : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record DOT11EXT_IHV_DISCOVERY_PROFILE,
-    ihv_connectivity_profile : Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_CONNECTIVITY_PROFILE,
-    ihv_security_profile : Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_SECURITY_PROFILE
+  struct DOT11EXT_IHV_DISCOVERY_PROFILE
+    property ihv_connectivity_profile : Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_CONNECTIVITY_PROFILE
+    property ihv_security_profile : Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_SECURITY_PROFILE
+    def initialize(@ihv_connectivity_profile : Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_CONNECTIVITY_PROFILE, @ihv_security_profile : Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_SECURITY_PROFILE)
+    end
+  end
 
   @[Extern]
-  record DOT11EXT_IHV_DISCOVERY_PROFILE_LIST,
-    dwCount : UInt32,
-    pIhvDiscoveryProfiles : Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_DISCOVERY_PROFILE*
+  struct DOT11EXT_IHV_DISCOVERY_PROFILE_LIST
+    property dwCount : UInt32
+    property pIhvDiscoveryProfiles : Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_DISCOVERY_PROFILE*
+    def initialize(@dwCount : UInt32, @pIhvDiscoveryProfiles : Win32cr::NetworkManagement::WiFi::DOT11EXT_IHV_DISCOVERY_PROFILE*)
+    end
+  end
 
   @[Extern]
-  record DOT11EXT_VIRTUAL_STATION_AP_PROPERTY,
-    dot11SSID : Win32cr::NetworkManagement::WiFi::DOT11_SSID,
-    dot11AuthAlgo : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM,
-    dot11CipherAlgo : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM,
-    bIsPassPhrase : Win32cr::Foundation::BOOL,
-    dwKeyLength : UInt32,
-    ucKeyData : UInt8[64]
+  struct DOT11EXT_VIRTUAL_STATION_AP_PROPERTY
+    property dot11SSID : Win32cr::NetworkManagement::WiFi::DOT11_SSID
+    property dot11AuthAlgo : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM
+    property dot11CipherAlgo : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM
+    property bIsPassPhrase : Win32cr::Foundation::BOOL
+    property dwKeyLength : UInt32
+    property ucKeyData : UInt8[64]
+    def initialize(@dot11SSID : Win32cr::NetworkManagement::WiFi::DOT11_SSID, @dot11AuthAlgo : Win32cr::NetworkManagement::WiFi::DOT11_AUTH_ALGORITHM, @dot11CipherAlgo : Win32cr::NetworkManagement::WiFi::DOT11_CIPHER_ALGORITHM, @bIsPassPhrase : Win32cr::Foundation::BOOL, @dwKeyLength : UInt32, @ucKeyData : UInt8[64])
+    end
+  end
 
   @[Extern]
-  record WDIAG_IHV_WLAN_ID,
-    strProfileName : UInt16[256],
-    ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID,
-    bss_type : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE,
-    dwFlags : UInt32,
-    dwReasonCode : UInt32
+  struct WDIAG_IHV_WLAN_ID
+    property strProfileName : UInt16[256]
+    property ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID
+    property bss_type : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE
+    property dwFlags : UInt32
+    property dwReasonCode : UInt32
+    def initialize(@strProfileName : UInt16[256], @ssid : Win32cr::NetworkManagement::WiFi::DOT11_SSID, @bss_type : Win32cr::NetworkManagement::WiFi::DOT11_BSS_TYPE, @dwFlags : UInt32, @dwReasonCode : UInt32)
+    end
+  end
 
   @[Extern]
-  record DOT11EXT_APIS,
-    dot11_ext_allocate_buffer : Win32cr::NetworkManagement::WiFi::DOT11EXT_ALLOCATE_BUFFER,
-    dot11_ext_free_buffer : Win32cr::NetworkManagement::WiFi::DOT11EXT_FREE_BUFFER,
-    dot11_ext_set_profile_custom_user_data : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_PROFILE_CUSTOM_USER_DATA,
-    dot11_ext_get_profile_custom_user_data : Win32cr::NetworkManagement::WiFi::DOT11EXT_GET_PROFILE_CUSTOM_USER_DATA,
-    dot11_ext_set_current_profile : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_CURRENT_PROFILE,
-    dot11_ext_send_ui_request : Win32cr::NetworkManagement::WiFi::DOT11EXT_SEND_UI_REQUEST,
-    dot11_ext_pre_associate_completion : Win32cr::NetworkManagement::WiFi::DOT11EXT_PRE_ASSOCIATE_COMPLETION,
-    dot11_ext_post_associate_completion : Win32cr::NetworkManagement::WiFi::DOT11EXT_POST_ASSOCIATE_COMPLETION,
-    dot11_ext_send_notification : Win32cr::NetworkManagement::WiFi::DOT11EXT_SEND_NOTIFICATION,
-    dot11_ext_send_packet : Win32cr::NetworkManagement::WiFi::DOT11EXT_SEND_PACKET,
-    dot11_ext_set_ether_type_handling : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_ETHERTYPE_HANDLING,
-    dot11_ext_set_auth_algorithm : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_AUTH_ALGORITHM,
-    dot11_ext_set_unicast_cipher_algorithm : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_UNICAST_CIPHER_ALGORITHM,
-    dot11_ext_set_multicast_cipher_algorithm : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_MULTICAST_CIPHER_ALGORITHM,
-    dot11_ext_set_default_key : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_DEFAULT_KEY,
-    dot11_ext_set_key_mapping_key : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_KEY_MAPPING_KEY,
-    dot11_ext_set_default_key_id : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_DEFAULT_KEY_ID,
-    dot11_ext_nic_specific_extension : Win32cr::NetworkManagement::WiFi::DOT11EXT_NIC_SPECIFIC_EXTENSION,
-    dot11_ext_set_exclude_unencrypted : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_EXCLUDE_UNENCRYPTED,
-    dot11_ext_start_one_x : Win32cr::NetworkManagement::WiFi::DOT11EXT_ONEX_START,
-    dot11_ext_stop_one_x : Win32cr::NetworkManagement::WiFi::DOT11EXT_ONEX_STOP,
-    dot11_ext_process_security_packet : Win32cr::NetworkManagement::WiFi::DOT11EXT_PROCESS_ONEX_PACKET
+  struct DOT11EXT_APIS
+    property dot11_ext_allocate_buffer : Win32cr::NetworkManagement::WiFi::DOT11EXT_ALLOCATE_BUFFER
+    property dot11_ext_free_buffer : Win32cr::NetworkManagement::WiFi::DOT11EXT_FREE_BUFFER
+    property dot11_ext_set_profile_custom_user_data : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_PROFILE_CUSTOM_USER_DATA
+    property dot11_ext_get_profile_custom_user_data : Win32cr::NetworkManagement::WiFi::DOT11EXT_GET_PROFILE_CUSTOM_USER_DATA
+    property dot11_ext_set_current_profile : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_CURRENT_PROFILE
+    property dot11_ext_send_ui_request : Win32cr::NetworkManagement::WiFi::DOT11EXT_SEND_UI_REQUEST
+    property dot11_ext_pre_associate_completion : Win32cr::NetworkManagement::WiFi::DOT11EXT_PRE_ASSOCIATE_COMPLETION
+    property dot11_ext_post_associate_completion : Win32cr::NetworkManagement::WiFi::DOT11EXT_POST_ASSOCIATE_COMPLETION
+    property dot11_ext_send_notification : Win32cr::NetworkManagement::WiFi::DOT11EXT_SEND_NOTIFICATION
+    property dot11_ext_send_packet : Win32cr::NetworkManagement::WiFi::DOT11EXT_SEND_PACKET
+    property dot11_ext_set_ether_type_handling : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_ETHERTYPE_HANDLING
+    property dot11_ext_set_auth_algorithm : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_AUTH_ALGORITHM
+    property dot11_ext_set_unicast_cipher_algorithm : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_UNICAST_CIPHER_ALGORITHM
+    property dot11_ext_set_multicast_cipher_algorithm : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_MULTICAST_CIPHER_ALGORITHM
+    property dot11_ext_set_default_key : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_DEFAULT_KEY
+    property dot11_ext_set_key_mapping_key : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_KEY_MAPPING_KEY
+    property dot11_ext_set_default_key_id : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_DEFAULT_KEY_ID
+    property dot11_ext_nic_specific_extension : Win32cr::NetworkManagement::WiFi::DOT11EXT_NIC_SPECIFIC_EXTENSION
+    property dot11_ext_set_exclude_unencrypted : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_EXCLUDE_UNENCRYPTED
+    property dot11_ext_start_one_x : Win32cr::NetworkManagement::WiFi::DOT11EXT_ONEX_START
+    property dot11_ext_stop_one_x : Win32cr::NetworkManagement::WiFi::DOT11EXT_ONEX_STOP
+    property dot11_ext_process_security_packet : Win32cr::NetworkManagement::WiFi::DOT11EXT_PROCESS_ONEX_PACKET
+    def initialize(@dot11_ext_allocate_buffer : Win32cr::NetworkManagement::WiFi::DOT11EXT_ALLOCATE_BUFFER, @dot11_ext_free_buffer : Win32cr::NetworkManagement::WiFi::DOT11EXT_FREE_BUFFER, @dot11_ext_set_profile_custom_user_data : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_PROFILE_CUSTOM_USER_DATA, @dot11_ext_get_profile_custom_user_data : Win32cr::NetworkManagement::WiFi::DOT11EXT_GET_PROFILE_CUSTOM_USER_DATA, @dot11_ext_set_current_profile : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_CURRENT_PROFILE, @dot11_ext_send_ui_request : Win32cr::NetworkManagement::WiFi::DOT11EXT_SEND_UI_REQUEST, @dot11_ext_pre_associate_completion : Win32cr::NetworkManagement::WiFi::DOT11EXT_PRE_ASSOCIATE_COMPLETION, @dot11_ext_post_associate_completion : Win32cr::NetworkManagement::WiFi::DOT11EXT_POST_ASSOCIATE_COMPLETION, @dot11_ext_send_notification : Win32cr::NetworkManagement::WiFi::DOT11EXT_SEND_NOTIFICATION, @dot11_ext_send_packet : Win32cr::NetworkManagement::WiFi::DOT11EXT_SEND_PACKET, @dot11_ext_set_ether_type_handling : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_ETHERTYPE_HANDLING, @dot11_ext_set_auth_algorithm : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_AUTH_ALGORITHM, @dot11_ext_set_unicast_cipher_algorithm : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_UNICAST_CIPHER_ALGORITHM, @dot11_ext_set_multicast_cipher_algorithm : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_MULTICAST_CIPHER_ALGORITHM, @dot11_ext_set_default_key : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_DEFAULT_KEY, @dot11_ext_set_key_mapping_key : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_KEY_MAPPING_KEY, @dot11_ext_set_default_key_id : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_DEFAULT_KEY_ID, @dot11_ext_nic_specific_extension : Win32cr::NetworkManagement::WiFi::DOT11EXT_NIC_SPECIFIC_EXTENSION, @dot11_ext_set_exclude_unencrypted : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_EXCLUDE_UNENCRYPTED, @dot11_ext_start_one_x : Win32cr::NetworkManagement::WiFi::DOT11EXT_ONEX_START, @dot11_ext_stop_one_x : Win32cr::NetworkManagement::WiFi::DOT11EXT_ONEX_STOP, @dot11_ext_process_security_packet : Win32cr::NetworkManagement::WiFi::DOT11EXT_PROCESS_ONEX_PACKET)
+    end
+  end
 
   @[Extern]
-  record DOT11EXT_IHV_HANDLERS,
-    dot11_ext_ihv_deinit_service : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_DEINIT_SERVICE,
-    dot11_ext_ihv_init_adapter : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_INIT_ADAPTER,
-    dot11_ext_ihv_deinit_adapter : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_DEINIT_ADAPTER,
-    dot11_ext_ihv_perform_pre_associate : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_PERFORM_PRE_ASSOCIATE,
-    dot11_ext_ihv_adapter_reset : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_ADAPTER_RESET,
-    dot11_ext_ihv_perform_post_associate : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_PERFORM_POST_ASSOCIATE,
-    dot11_ext_ihv_stop_post_associate : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_STOP_POST_ASSOCIATE,
-    dot11_ext_ihv_validate_profile : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_VALIDATE_PROFILE,
-    dot11_ext_ihv_perform_capability_match : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_PERFORM_CAPABILITY_MATCH,
-    dot11_ext_ihv_create_discovery_profiles : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_CREATE_DISCOVERY_PROFILES,
-    dot11_ext_ihv_process_session_change : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_PROCESS_SESSION_CHANGE,
-    dot11_ext_ihv_receive_indication : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_RECEIVE_INDICATION,
-    dot11_ext_ihv_receive_packet : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_RECEIVE_PACKET,
-    dot11_ext_ihv_send_packet_completion : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_SEND_PACKET_COMPLETION,
-    dot11_ext_ihv_is_ui_request_pending : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_IS_UI_REQUEST_PENDING,
-    dot11_ext_ihv_process_ui_response : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_PROCESS_UI_RESPONSE,
-    dot11_ext_ihv_query_ui_request : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_QUERY_UI_REQUEST,
-    dot11_ext_ihv_onex_indicate_result : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_ONEX_INDICATE_RESULT,
-    dot11_ext_ihv_control : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_CONTROL
+  struct DOT11EXT_IHV_HANDLERS
+    property dot11_ext_ihv_deinit_service : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_DEINIT_SERVICE
+    property dot11_ext_ihv_init_adapter : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_INIT_ADAPTER
+    property dot11_ext_ihv_deinit_adapter : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_DEINIT_ADAPTER
+    property dot11_ext_ihv_perform_pre_associate : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_PERFORM_PRE_ASSOCIATE
+    property dot11_ext_ihv_adapter_reset : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_ADAPTER_RESET
+    property dot11_ext_ihv_perform_post_associate : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_PERFORM_POST_ASSOCIATE
+    property dot11_ext_ihv_stop_post_associate : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_STOP_POST_ASSOCIATE
+    property dot11_ext_ihv_validate_profile : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_VALIDATE_PROFILE
+    property dot11_ext_ihv_perform_capability_match : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_PERFORM_CAPABILITY_MATCH
+    property dot11_ext_ihv_create_discovery_profiles : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_CREATE_DISCOVERY_PROFILES
+    property dot11_ext_ihv_process_session_change : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_PROCESS_SESSION_CHANGE
+    property dot11_ext_ihv_receive_indication : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_RECEIVE_INDICATION
+    property dot11_ext_ihv_receive_packet : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_RECEIVE_PACKET
+    property dot11_ext_ihv_send_packet_completion : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_SEND_PACKET_COMPLETION
+    property dot11_ext_ihv_is_ui_request_pending : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_IS_UI_REQUEST_PENDING
+    property dot11_ext_ihv_process_ui_response : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_PROCESS_UI_RESPONSE
+    property dot11_ext_ihv_query_ui_request : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_QUERY_UI_REQUEST
+    property dot11_ext_ihv_onex_indicate_result : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_ONEX_INDICATE_RESULT
+    property dot11_ext_ihv_control : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_CONTROL
+    def initialize(@dot11_ext_ihv_deinit_service : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_DEINIT_SERVICE, @dot11_ext_ihv_init_adapter : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_INIT_ADAPTER, @dot11_ext_ihv_deinit_adapter : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_DEINIT_ADAPTER, @dot11_ext_ihv_perform_pre_associate : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_PERFORM_PRE_ASSOCIATE, @dot11_ext_ihv_adapter_reset : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_ADAPTER_RESET, @dot11_ext_ihv_perform_post_associate : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_PERFORM_POST_ASSOCIATE, @dot11_ext_ihv_stop_post_associate : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_STOP_POST_ASSOCIATE, @dot11_ext_ihv_validate_profile : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_VALIDATE_PROFILE, @dot11_ext_ihv_perform_capability_match : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_PERFORM_CAPABILITY_MATCH, @dot11_ext_ihv_create_discovery_profiles : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_CREATE_DISCOVERY_PROFILES, @dot11_ext_ihv_process_session_change : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_PROCESS_SESSION_CHANGE, @dot11_ext_ihv_receive_indication : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_RECEIVE_INDICATION, @dot11_ext_ihv_receive_packet : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_RECEIVE_PACKET, @dot11_ext_ihv_send_packet_completion : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_SEND_PACKET_COMPLETION, @dot11_ext_ihv_is_ui_request_pending : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_IS_UI_REQUEST_PENDING, @dot11_ext_ihv_process_ui_response : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_PROCESS_UI_RESPONSE, @dot11_ext_ihv_query_ui_request : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_QUERY_UI_REQUEST, @dot11_ext_ihv_onex_indicate_result : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_ONEX_INDICATE_RESULT, @dot11_ext_ihv_control : Win32cr::NetworkManagement::WiFi::DOT11EXTIHV_CONTROL)
+    end
+  end
 
   @[Extern]
-  record DOT11EXT_VIRTUAL_STATION_APIS,
-    dot11_ext_request_virtual_station : Win32cr::NetworkManagement::WiFi::DOT11EXT_REQUEST_VIRTUAL_STATION,
-    dot11_ext_release_virtual_station : Win32cr::NetworkManagement::WiFi::DOT11EXT_RELEASE_VIRTUAL_STATION,
-    dot11_ext_query_virtual_station_properties : Win32cr::NetworkManagement::WiFi::DOT11EXT_QUERY_VIRTUAL_STATION_PROPERTIES,
-    dot11_ext_set_virtual_station_ap_properties : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_VIRTUAL_STATION_AP_PROPERTIES
+  struct DOT11EXT_VIRTUAL_STATION_APIS
+    property dot11_ext_request_virtual_station : Win32cr::NetworkManagement::WiFi::DOT11EXT_REQUEST_VIRTUAL_STATION
+    property dot11_ext_release_virtual_station : Win32cr::NetworkManagement::WiFi::DOT11EXT_RELEASE_VIRTUAL_STATION
+    property dot11_ext_query_virtual_station_properties : Win32cr::NetworkManagement::WiFi::DOT11EXT_QUERY_VIRTUAL_STATION_PROPERTIES
+    property dot11_ext_set_virtual_station_ap_properties : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_VIRTUAL_STATION_AP_PROPERTIES
+    def initialize(@dot11_ext_request_virtual_station : Win32cr::NetworkManagement::WiFi::DOT11EXT_REQUEST_VIRTUAL_STATION, @dot11_ext_release_virtual_station : Win32cr::NetworkManagement::WiFi::DOT11EXT_RELEASE_VIRTUAL_STATION, @dot11_ext_query_virtual_station_properties : Win32cr::NetworkManagement::WiFi::DOT11EXT_QUERY_VIRTUAL_STATION_PROPERTIES, @dot11_ext_set_virtual_station_ap_properties : Win32cr::NetworkManagement::WiFi::DOT11EXT_SET_VIRTUAL_STATION_AP_PROPERTIES)
+    end
+  end
 
   @[Extern]
   record IDot11AdHocManagerVtbl,
@@ -3823,7 +4658,6 @@ module Win32cr::NetworkManagement::WiFi
 
 
   @[Extern]
-  #@[Com("8f10cc26-cf0d-42a0-acbe-e2de7007384d")]
   record IDot11AdHocManager, lpVtbl : IDot11AdHocManagerVtbl* do
     GUID = LibC::GUID.new(0x8f10cc26_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
     def query_interface(this : IDot11AdHocManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3865,7 +4699,6 @@ module Win32cr::NetworkManagement::WiFi
 
 
   @[Extern]
-  #@[Com("8f10cc27-cf0d-42a0-acbe-e2de7007384d")]
   record IDot11AdHocManagerNotificationSink, lpVtbl : IDot11AdHocManagerNotificationSinkVtbl* do
     GUID = LibC::GUID.new(0x8f10cc27_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
     def query_interface(this : IDot11AdHocManagerNotificationSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3904,7 +4737,6 @@ module Win32cr::NetworkManagement::WiFi
 
 
   @[Extern]
-  #@[Com("8f10cc28-cf0d-42a0-acbe-e2de7007384d")]
   record IEnumDot11AdHocNetworks, lpVtbl : IEnumDot11AdHocNetworksVtbl* do
     GUID = LibC::GUID.new(0x8f10cc28_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
     def query_interface(this : IEnumDot11AdHocNetworks*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3951,7 +4783,6 @@ module Win32cr::NetworkManagement::WiFi
 
 
   @[Extern]
-  #@[Com("8f10cc29-cf0d-42a0-acbe-e2de7007384d")]
   record IDot11AdHocNetwork, lpVtbl : IDot11AdHocNetworkVtbl* do
     GUID = LibC::GUID.new(0x8f10cc29_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
     def query_interface(this : IDot11AdHocNetwork*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4012,7 +4843,6 @@ module Win32cr::NetworkManagement::WiFi
 
 
   @[Extern]
-  #@[Com("8f10cc2a-cf0d-42a0-acbe-e2de7007384d")]
   record IDot11AdHocNetworkNotificationSink, lpVtbl : IDot11AdHocNetworkNotificationSinkVtbl* do
     GUID = LibC::GUID.new(0x8f10cc2a_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
     def query_interface(this : IDot11AdHocNetworkNotificationSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4050,7 +4880,6 @@ module Win32cr::NetworkManagement::WiFi
 
 
   @[Extern]
-  #@[Com("8f10cc2b-cf0d-42a0-acbe-e2de7007384d")]
   record IDot11AdHocInterface, lpVtbl : IDot11AdHocInterfaceVtbl* do
     GUID = LibC::GUID.new(0x8f10cc2b_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
     def query_interface(this : IDot11AdHocInterface*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4104,7 +4933,6 @@ module Win32cr::NetworkManagement::WiFi
 
 
   @[Extern]
-  #@[Com("8f10cc2c-cf0d-42a0-acbe-e2de7007384d")]
   record IEnumDot11AdHocInterfaces, lpVtbl : IEnumDot11AdHocInterfacesVtbl* do
     GUID = LibC::GUID.new(0x8f10cc2c_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
     def query_interface(this : IEnumDot11AdHocInterfaces*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4143,7 +4971,6 @@ module Win32cr::NetworkManagement::WiFi
 
 
   @[Extern]
-  #@[Com("8f10cc2d-cf0d-42a0-acbe-e2de7007384d")]
   record IEnumDot11AdHocSecuritySettings, lpVtbl : IEnumDot11AdHocSecuritySettingsVtbl* do
     GUID = LibC::GUID.new(0x8f10cc2d_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
     def query_interface(this : IEnumDot11AdHocSecuritySettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4180,7 +5007,6 @@ module Win32cr::NetworkManagement::WiFi
 
 
   @[Extern]
-  #@[Com("8f10cc2e-cf0d-42a0-acbe-e2de7007384d")]
   record IDot11AdHocSecuritySettings, lpVtbl : IDot11AdHocSecuritySettingsVtbl* do
     GUID = LibC::GUID.new(0x8f10cc2e_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
     def query_interface(this : IDot11AdHocSecuritySettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4210,7 +5036,6 @@ module Win32cr::NetworkManagement::WiFi
 
 
   @[Extern]
-  #@[Com("8f10cc2f-cf0d-42a0-acbe-e2de7007384d")]
   record IDot11AdHocInterfaceNotificationSink, lpVtbl : IDot11AdHocInterfaceNotificationSinkVtbl* do
     GUID = LibC::GUID.new(0x8f10cc2f_u32, 0xcf0d_u16, 0x42a0_u16, StaticArray[0xac_u8, 0xbe_u8, 0xe2_u8, 0xde_u8, 0x70_u8, 0x7_u8, 0x38_u8, 0x4d_u8])
     def query_interface(this : IDot11AdHocInterfaceNotificationSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

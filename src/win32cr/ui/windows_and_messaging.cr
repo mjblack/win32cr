@@ -9,33 +9,33 @@ module Win32cr::UI::WindowsAndMessaging
   alias HMENU = LibC::IntPtrT
   alias HCURSOR = LibC::IntPtrT
   alias HACCEL = LibC::IntPtrT
-  alias WNDPROC = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LRESULT)*
+  alias WNDPROC = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LRESULT)
 
-  alias DLGPROC = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, LibC::IntPtrT)*
+  alias DLGPROC = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, LibC::IntPtrT)
 
-  alias TIMERPROC = Proc(Win32cr::Foundation::HWND, UInt32, LibC::UIntPtrT, UInt32, Void)*
+  alias TIMERPROC = Proc(Win32cr::Foundation::HWND, UInt32, LibC::UIntPtrT, UInt32, Void)
 
-  alias WNDENUMPROC = Proc(Win32cr::Foundation::HWND, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)*
+  alias WNDENUMPROC = Proc(Win32cr::Foundation::HWND, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
 
-  alias HOOKPROC = Proc(Int32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LRESULT)*
+  alias HOOKPROC = Proc(Int32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LRESULT)
 
-  alias SENDASYNCPROC = Proc(Win32cr::Foundation::HWND, UInt32, LibC::UIntPtrT, Win32cr::Foundation::LRESULT, Void)*
+  alias SENDASYNCPROC = Proc(Win32cr::Foundation::HWND, UInt32, LibC::UIntPtrT, Win32cr::Foundation::LRESULT, Void)
 
-  alias PROPENUMPROCA = Proc(Win32cr::Foundation::HWND, Win32cr::Foundation::PSTR, Win32cr::Foundation::HANDLE, Win32cr::Foundation::BOOL)*
+  alias PROPENUMPROCA = Proc(Win32cr::Foundation::HWND, Win32cr::Foundation::PSTR, Win32cr::Foundation::HANDLE, Win32cr::Foundation::BOOL)
 
-  alias PROPENUMPROCW = Proc(Win32cr::Foundation::HWND, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HANDLE, Win32cr::Foundation::BOOL)*
+  alias PROPENUMPROCW = Proc(Win32cr::Foundation::HWND, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HANDLE, Win32cr::Foundation::BOOL)
 
-  alias PROPENUMPROCEXA = Proc(Win32cr::Foundation::HWND, Win32cr::Foundation::PSTR, Win32cr::Foundation::HANDLE, LibC::UIntPtrT, Win32cr::Foundation::BOOL)*
+  alias PROPENUMPROCEXA = Proc(Win32cr::Foundation::HWND, Win32cr::Foundation::PSTR, Win32cr::Foundation::HANDLE, LibC::UIntPtrT, Win32cr::Foundation::BOOL)
 
-  alias PROPENUMPROCEXW = Proc(Win32cr::Foundation::HWND, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HANDLE, LibC::UIntPtrT, Win32cr::Foundation::BOOL)*
+  alias PROPENUMPROCEXW = Proc(Win32cr::Foundation::HWND, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HANDLE, LibC::UIntPtrT, Win32cr::Foundation::BOOL)
 
-  alias NAMEENUMPROCA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)*
+  alias NAMEENUMPROCA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
 
-  alias NAMEENUMPROCW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)*
+  alias NAMEENUMPROCW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
 
-  alias PREGISTERCLASSNAMEW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOLEAN)*
+  alias PREGISTERCLASSNAMEW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOLEAN)
 
-  alias MSGBOXCALLBACK = Proc(Win32cr::UI::Shell::HELPINFO*, Void)*
+  alias MSGBOXCALLBACK = Proc(Win32cr::UI::Shell::HELPINFO*, Void)
 
   WM_DEVICECHANGE = 537_u32
   BSM_VXDS = 1_u32
@@ -2459,647 +2459,863 @@ module Win32cr::UI::WindowsAndMessaging
   end
 
   @[Extern]
-  record MESSAGE_RESOURCE_ENTRY,
-    length : UInt16,
-    flags : UInt16,
-    text : UInt8*
-
-  @[Extern]
-  record MESSAGE_RESOURCE_BLOCK,
-    low_id : UInt32,
-    high_id : UInt32,
-    offset_to_entries : UInt32
-
-  @[Extern]
-  record MESSAGE_RESOURCE_DATA,
-    number_of_blocks : UInt32,
-    blocks : Win32cr::UI::WindowsAndMessaging::MESSAGE_RESOURCE_BLOCK*
-
-  @[Extern]
-  record CBT_CREATEWNDA,
-    lpcs : Win32cr::UI::WindowsAndMessaging::CREATESTRUCTA*,
-    hwndInsertAfter : Win32cr::Foundation::HWND
-
-  @[Extern]
-  record CBT_CREATEWNDW,
-    lpcs : Win32cr::UI::WindowsAndMessaging::CREATESTRUCTW*,
-    hwndInsertAfter : Win32cr::Foundation::HWND
-
-  @[Extern]
-  record CBTACTIVATESTRUCT,
-    fMouse : Win32cr::Foundation::BOOL,
-    hWndActive : Win32cr::Foundation::HWND
-
-  @[Extern]
-  record SHELLHOOKINFO,
-    hwnd : Win32cr::Foundation::HWND,
-    rc : Win32cr::Foundation::RECT
-
-  @[Extern]
-  record EVENTMSG,
-    message : UInt32,
-    paramL : UInt32,
-    paramH : UInt32,
-    time : UInt32,
-    hwnd : Win32cr::Foundation::HWND
-
-  @[Extern]
-  record CWPSTRUCT,
-    lParam : Win32cr::Foundation::LPARAM,
-    wParam : Win32cr::Foundation::WPARAM,
-    message : UInt32,
-    hwnd : Win32cr::Foundation::HWND
-
-  @[Extern]
-  record CWPRETSTRUCT,
-    lResult : Win32cr::Foundation::LRESULT,
-    lParam : Win32cr::Foundation::LPARAM,
-    wParam : Win32cr::Foundation::WPARAM,
-    message : UInt32,
-    hwnd : Win32cr::Foundation::HWND
-
-  @[Extern]
-  record KBDLLHOOKSTRUCT,
-    vkCode : UInt32,
-    scanCode : UInt32,
-    flags : Win32cr::UI::WindowsAndMessaging::KBDLLHOOKSTRUCT_FLAGS,
-    time : UInt32,
-    dwExtraInfo : LibC::UIntPtrT
-
-  @[Extern]
-  record MSLLHOOKSTRUCT,
-    pt : Win32cr::Foundation::POINT,
-    mouseData : Win32cr::UI::WindowsAndMessaging::MOUSEHOOKSTRUCTEX_MOUSE_DATA,
-    flags : UInt32,
-    time : UInt32,
-    dwExtraInfo : LibC::UIntPtrT
-
-  @[Extern]
-  record DEBUGHOOKINFO,
-    idThread : UInt32,
-    idThreadInstaller : UInt32,
-    lParam : Win32cr::Foundation::LPARAM,
-    wParam : Win32cr::Foundation::WPARAM,
-    code : Int32
-
-  @[Extern]
-  record MOUSEHOOKSTRUCT,
-    pt : Win32cr::Foundation::POINT,
-    hwnd : Win32cr::Foundation::HWND,
-    wHitTestCode : UInt32,
-    dwExtraInfo : LibC::UIntPtrT
-
-  @[Extern]
-  record MOUSEHOOKSTRUCTEX,
-    __anonymous_base_winuser_l1166_c46 : Win32cr::UI::WindowsAndMessaging::MOUSEHOOKSTRUCT,
-    mouseData : Win32cr::UI::WindowsAndMessaging::MOUSEHOOKSTRUCTEX_MOUSE_DATA
-
-  @[Extern]
-  record HARDWAREHOOKSTRUCT,
-    hwnd : Win32cr::Foundation::HWND,
-    message : UInt32,
-    wParam : Win32cr::Foundation::WPARAM,
-    lParam : Win32cr::Foundation::LPARAM
-
-  @[Extern]
-  record WNDCLASSEXA,
-    cbSize : UInt32,
-    style : Win32cr::UI::WindowsAndMessaging::WNDCLASS_STYLES,
-    lpfnWndProc : Win32cr::UI::WindowsAndMessaging::WNDPROC,
-    cbClsExtra : Int32,
-    cbWndExtra : Int32,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-    hCursor : Win32cr::UI::WindowsAndMessaging::HCURSOR,
-    hbrBackground : Win32cr::Graphics::Gdi::HBRUSH,
-    lpszMenuName : Win32cr::Foundation::PSTR,
-    lpszClassName : Win32cr::Foundation::PSTR,
-    hIconSm : Win32cr::UI::WindowsAndMessaging::HICON
-
-  @[Extern]
-  record WNDCLASSEXW,
-    cbSize : UInt32,
-    style : Win32cr::UI::WindowsAndMessaging::WNDCLASS_STYLES,
-    lpfnWndProc : Win32cr::UI::WindowsAndMessaging::WNDPROC,
-    cbClsExtra : Int32,
-    cbWndExtra : Int32,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-    hCursor : Win32cr::UI::WindowsAndMessaging::HCURSOR,
-    hbrBackground : Win32cr::Graphics::Gdi::HBRUSH,
-    lpszMenuName : Win32cr::Foundation::PWSTR,
-    lpszClassName : Win32cr::Foundation::PWSTR,
-    hIconSm : Win32cr::UI::WindowsAndMessaging::HICON
-
-  @[Extern]
-  record WNDCLASSA,
-    style : Win32cr::UI::WindowsAndMessaging::WNDCLASS_STYLES,
-    lpfnWndProc : Win32cr::UI::WindowsAndMessaging::WNDPROC,
-    cbClsExtra : Int32,
-    cbWndExtra : Int32,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-    hCursor : Win32cr::UI::WindowsAndMessaging::HCURSOR,
-    hbrBackground : Win32cr::Graphics::Gdi::HBRUSH,
-    lpszMenuName : Win32cr::Foundation::PSTR,
-    lpszClassName : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record WNDCLASSW,
-    style : Win32cr::UI::WindowsAndMessaging::WNDCLASS_STYLES,
-    lpfnWndProc : Win32cr::UI::WindowsAndMessaging::WNDPROC,
-    cbClsExtra : Int32,
-    cbWndExtra : Int32,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-    hCursor : Win32cr::UI::WindowsAndMessaging::HCURSOR,
-    hbrBackground : Win32cr::Graphics::Gdi::HBRUSH,
-    lpszMenuName : Win32cr::Foundation::PWSTR,
-    lpszClassName : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record MSG,
-    hwnd : Win32cr::Foundation::HWND,
-    message : UInt32,
-    wParam : Win32cr::Foundation::WPARAM,
-    lParam : Win32cr::Foundation::LPARAM,
-    time : UInt32,
-    pt : Win32cr::Foundation::POINT
-
-  @[Extern]
-  record MINMAXINFO,
-    ptReserved : Win32cr::Foundation::POINT,
-    ptMaxSize : Win32cr::Foundation::POINT,
-    ptMaxPosition : Win32cr::Foundation::POINT,
-    ptMinTrackSize : Win32cr::Foundation::POINT,
-    ptMaxTrackSize : Win32cr::Foundation::POINT
-
-  @[Extern]
-  record MDINEXTMENU,
-    hmenuIn : Win32cr::UI::WindowsAndMessaging::HMENU,
-    hmenuNext : Win32cr::UI::WindowsAndMessaging::HMENU,
-    hwndNext : Win32cr::Foundation::HWND
-
-  @[Extern]
-  record WINDOWPOS,
-    hwnd : Win32cr::Foundation::HWND,
-    hwndInsertAfter : Win32cr::Foundation::HWND,
-    x : Int32,
-    y : Int32,
-    cx : Int32,
-    cy : Int32,
-    flags : Win32cr::UI::WindowsAndMessaging::SET_WINDOW_POS_FLAGS
-
-  @[Extern]
-  record NCCALCSIZE_PARAMS,
-    rgrc : Win32cr::Foundation::RECT[3],
-    lppos : Win32cr::UI::WindowsAndMessaging::WINDOWPOS*
-
-  @[Extern]
-  record ACCEL,
-    fVirt : UInt8,
-    key : UInt16,
-    cmd : UInt16
-
-  @[Extern]
-  record CREATESTRUCTA,
-    lpCreateParams : Void*,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    hMenu : Win32cr::UI::WindowsAndMessaging::HMENU,
-    hwndParent : Win32cr::Foundation::HWND,
-    cy : Int32,
-    cx : Int32,
-    y : Int32,
-    x : Int32,
-    style : Int32,
-    lpszName : Win32cr::Foundation::PSTR,
-    lpszClass : Win32cr::Foundation::PSTR,
-    dwExStyle : UInt32
-
-  @[Extern]
-  record CREATESTRUCTW,
-    lpCreateParams : Void*,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    hMenu : Win32cr::UI::WindowsAndMessaging::HMENU,
-    hwndParent : Win32cr::Foundation::HWND,
-    cy : Int32,
-    cx : Int32,
-    y : Int32,
-    x : Int32,
-    style : Int32,
-    lpszName : Win32cr::Foundation::PWSTR,
-    lpszClass : Win32cr::Foundation::PWSTR,
-    dwExStyle : UInt32
-
-  @[Extern]
-  record WINDOWPLACEMENT,
-    length : UInt32,
-    flags : Win32cr::UI::WindowsAndMessaging::WINDOWPLACEMENT_FLAGS,
-    showCmd : Win32cr::UI::WindowsAndMessaging::SHOW_WINDOW_CMD,
-    ptMinPosition : Win32cr::Foundation::POINT,
-    ptMaxPosition : Win32cr::Foundation::POINT,
-    rcNormalPosition : Win32cr::Foundation::RECT
-
-  @[Extern]
-  record STYLESTRUCT,
-    styleOld : UInt32,
-    styleNew : UInt32
-
-  @[Extern]
-  record UPDATELAYEREDWINDOWINFO,
-    cbSize : UInt32,
-    hdcDst : Win32cr::Graphics::Gdi::HDC,
-    pptDst : Win32cr::Foundation::POINT*,
-    psize : Win32cr::Foundation::SIZE*,
-    hdcSrc : Win32cr::Graphics::Gdi::HDC,
-    pptSrc : Win32cr::Foundation::POINT*,
-    crKey : UInt32,
-    pblend : Win32cr::Graphics::Gdi::BLENDFUNCTION*,
-    dwFlags : Win32cr::UI::WindowsAndMessaging::UPDATE_LAYERED_WINDOW_FLAGS,
-    prcDirty : Win32cr::Foundation::RECT*
-
-  @[Extern]
-  record FLASHWINFO,
-    cbSize : UInt32,
-    hwnd : Win32cr::Foundation::HWND,
-    dwFlags : Win32cr::UI::WindowsAndMessaging::FLASHWINFO_FLAGS,
-    uCount : UInt32,
-    dwTimeout : UInt32
-
-  @[Extern]
-  record DLGTEMPLATE,
-    style : UInt32,
-    dwExtendedStyle : UInt32,
-    cdit : UInt16,
-    x : Int16,
-    y : Int16,
-    cx : Int16,
-    cy : Int16
-
-  @[Extern]
-  record DLGITEMTEMPLATE,
-    style : UInt32,
-    dwExtendedStyle : UInt32,
-    x : Int16,
-    y : Int16,
-    cx : Int16,
-    cy : Int16,
-    id : UInt16
-
-  @[Extern]
-  record TPMPARAMS,
-    cbSize : UInt32,
-    rcExclude : Win32cr::Foundation::RECT
-
-  @[Extern]
-  record MENUINFO,
-    cbSize : UInt32,
-    fMask : Win32cr::UI::WindowsAndMessaging::MENUINFO_MASK,
-    dwStyle : Win32cr::UI::WindowsAndMessaging::MENUINFO_STYLE,
-    cyMax : UInt32,
-    hbrBack : Win32cr::Graphics::Gdi::HBRUSH,
-    dwContextHelpID : UInt32,
-    dwMenuData : LibC::UIntPtrT
-
-  @[Extern]
-  record MENUGETOBJECTINFO,
-    dwFlags : Win32cr::UI::WindowsAndMessaging::MENUGETOBJECTINFO_FLAGS,
-    uPos : UInt32,
-    hmenu : Win32cr::UI::WindowsAndMessaging::HMENU,
-    riid : Void*,
-    pvObj : Void*
-
-  @[Extern]
-  record MENUITEMINFOA,
-    cbSize : UInt32,
-    fMask : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_MASK,
-    fType : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_TYPE,
-    fState : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_STATE,
-    wID : UInt32,
-    hSubMenu : Win32cr::UI::WindowsAndMessaging::HMENU,
-    hbmpChecked : Win32cr::Graphics::Gdi::HBITMAP,
-    hbmpUnchecked : Win32cr::Graphics::Gdi::HBITMAP,
-    dwItemData : LibC::UIntPtrT,
-    dwTypeData : Win32cr::Foundation::PSTR,
-    cch : UInt32,
-    hbmpItem : Win32cr::Graphics::Gdi::HBITMAP
-
-  @[Extern]
-  record MENUITEMINFOW,
-    cbSize : UInt32,
-    fMask : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_MASK,
-    fType : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_TYPE,
-    fState : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_STATE,
-    wID : UInt32,
-    hSubMenu : Win32cr::UI::WindowsAndMessaging::HMENU,
-    hbmpChecked : Win32cr::Graphics::Gdi::HBITMAP,
-    hbmpUnchecked : Win32cr::Graphics::Gdi::HBITMAP,
-    dwItemData : LibC::UIntPtrT,
-    dwTypeData : Win32cr::Foundation::PWSTR,
-    cch : UInt32,
-    hbmpItem : Win32cr::Graphics::Gdi::HBITMAP
-
-  @[Extern]
-  record DROPSTRUCT,
-    hwndSource : Win32cr::Foundation::HWND,
-    hwndSink : Win32cr::Foundation::HWND,
-    wFmt : UInt32,
-    dwData : LibC::UIntPtrT,
-    ptDrop : Win32cr::Foundation::POINT,
-    dwControlData : UInt32
-
-  @[Extern]
-  record MSGBOXPARAMSA,
-    cbSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpszText : Win32cr::Foundation::PSTR,
-    lpszCaption : Win32cr::Foundation::PSTR,
-    dwStyle : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE,
-    lpszIcon : Win32cr::Foundation::PSTR,
-    dwContextHelpId : LibC::UIntPtrT,
-    lpfnMsgBoxCallback : Win32cr::UI::WindowsAndMessaging::MSGBOXCALLBACK,
-    dwLanguageId : UInt32
-
-  @[Extern]
-  record MSGBOXPARAMSW,
-    cbSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpszText : Win32cr::Foundation::PWSTR,
-    lpszCaption : Win32cr::Foundation::PWSTR,
-    dwStyle : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE,
-    lpszIcon : Win32cr::Foundation::PWSTR,
-    dwContextHelpId : LibC::UIntPtrT,
-    lpfnMsgBoxCallback : Win32cr::UI::WindowsAndMessaging::MSGBOXCALLBACK,
-    dwLanguageId : UInt32
-
-  @[Extern]
-  record MENUITEMTEMPLATEHEADER,
-    versionNumber : UInt16,
-    offset : UInt16
-
-  @[Extern]
-  record MENUITEMTEMPLATE,
-    mtOption : UInt16,
-    mtID : UInt16,
-    mtString : UInt16*
-
-  @[Extern]
-  record ICONINFO,
-    fIcon : Win32cr::Foundation::BOOL,
-    xHotspot : UInt32,
-    yHotspot : UInt32,
-    hbmMask : Win32cr::Graphics::Gdi::HBITMAP,
-    hbmColor : Win32cr::Graphics::Gdi::HBITMAP
-
-  @[Extern]
-  record CURSORSHAPE,
-    xHotSpot : Int32,
-    yHotSpot : Int32,
-    cx : Int32,
-    cy : Int32,
-    cbWidth : Int32,
-    planes : UInt8,
-    bits_pixel : UInt8
-
-  @[Extern]
-  record ICONINFOEXA,
-    cbSize : UInt32,
-    fIcon : Win32cr::Foundation::BOOL,
-    xHotspot : UInt32,
-    yHotspot : UInt32,
-    hbmMask : Win32cr::Graphics::Gdi::HBITMAP,
-    hbmColor : Win32cr::Graphics::Gdi::HBITMAP,
-    wResID : UInt16,
-    szModName : Win32cr::Foundation::CHAR[260],
-    szResName : Win32cr::Foundation::CHAR[260]
-
-  @[Extern]
-  record ICONINFOEXW,
-    cbSize : UInt32,
-    fIcon : Win32cr::Foundation::BOOL,
-    xHotspot : UInt32,
-    yHotspot : UInt32,
-    hbmMask : Win32cr::Graphics::Gdi::HBITMAP,
-    hbmColor : Win32cr::Graphics::Gdi::HBITMAP,
-    wResID : UInt16,
-    szModName : UInt16[260],
-    szResName : UInt16[260]
-
-  @[Extern]
-  record SCROLLINFO,
-    cbSize : UInt32,
-    fMask : Win32cr::UI::WindowsAndMessaging::SCROLLINFO_MASK,
-    nMin : Int32,
-    nMax : Int32,
-    nPage : UInt32,
-    nPos : Int32,
-    nTrackPos : Int32
-
-  @[Extern]
-  record MDICREATESTRUCTA,
-    szClass : Win32cr::Foundation::PSTR,
-    szTitle : Win32cr::Foundation::PSTR,
-    hOwner : Win32cr::Foundation::HANDLE,
-    x : Int32,
-    y : Int32,
-    cx : Int32,
-    cy : Int32,
-    style : Win32cr::UI::WindowsAndMessaging::WINDOW_STYLE,
-    lParam : Win32cr::Foundation::LPARAM
-
-  @[Extern]
-  record MDICREATESTRUCTW,
-    szClass : Win32cr::Foundation::PWSTR,
-    szTitle : Win32cr::Foundation::PWSTR,
-    hOwner : Win32cr::Foundation::HANDLE,
-    x : Int32,
-    y : Int32,
-    cx : Int32,
-    cy : Int32,
-    style : Win32cr::UI::WindowsAndMessaging::WINDOW_STYLE,
-    lParam : Win32cr::Foundation::LPARAM
-
-  @[Extern]
-  record CLIENTCREATESTRUCT,
-    hWindowMenu : Win32cr::Foundation::HANDLE,
-    idFirstChild : UInt32
-
-  @[Extern]
-  record TouchPredictionParameters,
-    cbSize : UInt32,
-    dwLatency : UInt32,
-    dwSampleTime : UInt32,
-    bUseHWTimeStamp : UInt32
-
-  @[Extern]
-  record NONCLIENTMETRICSA,
-    cbSize : UInt32,
-    iBorderWidth : Int32,
-    iScrollWidth : Int32,
-    iScrollHeight : Int32,
-    iCaptionWidth : Int32,
-    iCaptionHeight : Int32,
-    lfCaptionFont : Win32cr::Graphics::Gdi::LOGFONTA,
-    iSmCaptionWidth : Int32,
-    iSmCaptionHeight : Int32,
-    lfSmCaptionFont : Win32cr::Graphics::Gdi::LOGFONTA,
-    iMenuWidth : Int32,
-    iMenuHeight : Int32,
-    lfMenuFont : Win32cr::Graphics::Gdi::LOGFONTA,
-    lfStatusFont : Win32cr::Graphics::Gdi::LOGFONTA,
-    lfMessageFont : Win32cr::Graphics::Gdi::LOGFONTA,
-    iPaddedBorderWidth : Int32
-
-  @[Extern]
-  record NONCLIENTMETRICSW,
-    cbSize : UInt32,
-    iBorderWidth : Int32,
-    iScrollWidth : Int32,
-    iScrollHeight : Int32,
-    iCaptionWidth : Int32,
-    iCaptionHeight : Int32,
-    lfCaptionFont : Win32cr::Graphics::Gdi::LOGFONTW,
-    iSmCaptionWidth : Int32,
-    iSmCaptionHeight : Int32,
-    lfSmCaptionFont : Win32cr::Graphics::Gdi::LOGFONTW,
-    iMenuWidth : Int32,
-    iMenuHeight : Int32,
-    lfMenuFont : Win32cr::Graphics::Gdi::LOGFONTW,
-    lfStatusFont : Win32cr::Graphics::Gdi::LOGFONTW,
-    lfMessageFont : Win32cr::Graphics::Gdi::LOGFONTW,
-    iPaddedBorderWidth : Int32
-
-  @[Extern]
-  record MINIMIZEDMETRICS,
-    cbSize : UInt32,
-    iWidth : Int32,
-    iHorzGap : Int32,
-    iVertGap : Int32,
-    iArrange : Win32cr::UI::WindowsAndMessaging::MINIMIZEDMETRICS_ARRANGE
-
-  @[Extern]
-  record ICONMETRICSA,
-    cbSize : UInt32,
-    iHorzSpacing : Int32,
-    iVertSpacing : Int32,
-    iTitleWrap : Int32,
-    lfFont : Win32cr::Graphics::Gdi::LOGFONTA
-
-  @[Extern]
-  record ICONMETRICSW,
-    cbSize : UInt32,
-    iHorzSpacing : Int32,
-    iVertSpacing : Int32,
-    iTitleWrap : Int32,
-    lfFont : Win32cr::Graphics::Gdi::LOGFONTW
-
-  @[Extern]
-  record ANIMATIONINFO,
-    cbSize : UInt32,
-    iMinAnimate : Int32
-
-  @[Extern]
-  record AUDIODESCRIPTION,
-    cbSize : UInt32,
-    enabled : Win32cr::Foundation::BOOL,
-    locale : UInt32
-
-  @[Extern]
-  record GUITHREADINFO,
-    cbSize : UInt32,
-    flags : Win32cr::UI::WindowsAndMessaging::GUITHREADINFO_FLAGS,
-    hwndActive : Win32cr::Foundation::HWND,
-    hwndFocus : Win32cr::Foundation::HWND,
-    hwndCapture : Win32cr::Foundation::HWND,
-    hwndMenuOwner : Win32cr::Foundation::HWND,
-    hwndMoveSize : Win32cr::Foundation::HWND,
-    hwndCaret : Win32cr::Foundation::HWND,
-    rcCaret : Win32cr::Foundation::RECT
-
-  @[Extern]
-  record CURSORINFO,
-    cbSize : UInt32,
-    flags : Win32cr::UI::WindowsAndMessaging::CURSORINFO_FLAGS,
-    hCursor : Win32cr::UI::WindowsAndMessaging::HCURSOR,
-    ptScreenPos : Win32cr::Foundation::POINT
-
-  @[Extern]
-  record WINDOWINFO,
-    cbSize : UInt32,
-    rcWindow : Win32cr::Foundation::RECT,
-    rcClient : Win32cr::Foundation::RECT,
-    dwStyle : UInt32,
-    dwExStyle : UInt32,
-    dwWindowStatus : UInt32,
-    cxWindowBorders : UInt32,
-    cyWindowBorders : UInt32,
-    atomWindowType : UInt16,
-    wCreatorVersion : UInt16
-
-  @[Extern]
-  record TITLEBARINFO,
-    cbSize : UInt32,
-    rcTitleBar : Win32cr::Foundation::RECT,
-    rgstate : UInt32[6]
-
-  @[Extern]
-  record TITLEBARINFOEX,
-    cbSize : UInt32,
-    rcTitleBar : Win32cr::Foundation::RECT,
-    rgstate : UInt32[6],
-    rgrect : Win32cr::Foundation::RECT[6]
-
-  @[Extern]
-  record MENUBARINFO,
-    cbSize : UInt32,
-    rcBar : Win32cr::Foundation::RECT,
-    hMenu : Win32cr::UI::WindowsAndMessaging::HMENU,
-    hwndMenu : Win32cr::Foundation::HWND,
-    _bitfield : Int32
-
-  @[Extern]
-  record SCROLLBARINFO,
-    cbSize : UInt32,
-    rcScrollBar : Win32cr::Foundation::RECT,
-    dxyLineButton : Int32,
-    xyThumbTop : Int32,
-    xyThumbBottom : Int32,
-    reserved : Int32,
-    rgstate : UInt32[6]
-
-  @[Extern]
-  record ALTTABINFO,
-    cbSize : UInt32,
-    cItems : Int32,
-    cColumns : Int32,
-    cRows : Int32,
-    iColFocus : Int32,
-    iRowFocus : Int32,
-    cxItem : Int32,
-    cyItem : Int32,
-    ptStart : Win32cr::Foundation::POINT
-
-  @[Extern]
-  record CHANGEFILTERSTRUCT,
-    cbSize : UInt32,
-    ext_status : Win32cr::UI::WindowsAndMessaging::MSGFLTINFO_STATUS
-
-  @[Extern]
-  record IndexedResourceQualifier,
-    name : Win32cr::Foundation::PWSTR,
-    value : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record MrmResourceIndexerHandle,
-    handle : Void*
-
-  @[Extern]
-  record MrmResourceIndexerMessage,
-    severity : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerMessageSeverity,
-    id : UInt32,
-    text : Win32cr::Foundation::PWSTR
+  struct MESSAGE_RESOURCE_ENTRY
+    property length : UInt16
+    property flags : UInt16
+    property text : UInt8*
+    def initialize(@length : UInt16, @flags : UInt16, @text : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct MESSAGE_RESOURCE_BLOCK
+    property low_id : UInt32
+    property high_id : UInt32
+    property offset_to_entries : UInt32
+    def initialize(@low_id : UInt32, @high_id : UInt32, @offset_to_entries : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MESSAGE_RESOURCE_DATA
+    property number_of_blocks : UInt32
+    property blocks : Win32cr::UI::WindowsAndMessaging::MESSAGE_RESOURCE_BLOCK*
+    def initialize(@number_of_blocks : UInt32, @blocks : Win32cr::UI::WindowsAndMessaging::MESSAGE_RESOURCE_BLOCK*)
+    end
+  end
+
+  @[Extern]
+  struct CBT_CREATEWNDA
+    property lpcs : Win32cr::UI::WindowsAndMessaging::CREATESTRUCTA*
+    property hwndInsertAfter : Win32cr::Foundation::HWND
+    def initialize(@lpcs : Win32cr::UI::WindowsAndMessaging::CREATESTRUCTA*, @hwndInsertAfter : Win32cr::Foundation::HWND)
+    end
+  end
+
+  @[Extern]
+  struct CBT_CREATEWNDW
+    property lpcs : Win32cr::UI::WindowsAndMessaging::CREATESTRUCTW*
+    property hwndInsertAfter : Win32cr::Foundation::HWND
+    def initialize(@lpcs : Win32cr::UI::WindowsAndMessaging::CREATESTRUCTW*, @hwndInsertAfter : Win32cr::Foundation::HWND)
+    end
+  end
+
+  @[Extern]
+  struct CBTACTIVATESTRUCT
+    property fMouse : Win32cr::Foundation::BOOL
+    property hWndActive : Win32cr::Foundation::HWND
+    def initialize(@fMouse : Win32cr::Foundation::BOOL, @hWndActive : Win32cr::Foundation::HWND)
+    end
+  end
+
+  @[Extern]
+  struct SHELLHOOKINFO
+    property hwnd : Win32cr::Foundation::HWND
+    property rc : Win32cr::Foundation::RECT
+    def initialize(@hwnd : Win32cr::Foundation::HWND, @rc : Win32cr::Foundation::RECT)
+    end
+  end
+
+  @[Extern]
+  struct EVENTMSG
+    property message : UInt32
+    property paramL : UInt32
+    property paramH : UInt32
+    property time : UInt32
+    property hwnd : Win32cr::Foundation::HWND
+    def initialize(@message : UInt32, @paramL : UInt32, @paramH : UInt32, @time : UInt32, @hwnd : Win32cr::Foundation::HWND)
+    end
+  end
+
+  @[Extern]
+  struct CWPSTRUCT
+    property lParam : Win32cr::Foundation::LPARAM
+    property wParam : Win32cr::Foundation::WPARAM
+    property message : UInt32
+    property hwnd : Win32cr::Foundation::HWND
+    def initialize(@lParam : Win32cr::Foundation::LPARAM, @wParam : Win32cr::Foundation::WPARAM, @message : UInt32, @hwnd : Win32cr::Foundation::HWND)
+    end
+  end
+
+  @[Extern]
+  struct CWPRETSTRUCT
+    property lResult : Win32cr::Foundation::LRESULT
+    property lParam : Win32cr::Foundation::LPARAM
+    property wParam : Win32cr::Foundation::WPARAM
+    property message : UInt32
+    property hwnd : Win32cr::Foundation::HWND
+    def initialize(@lResult : Win32cr::Foundation::LRESULT, @lParam : Win32cr::Foundation::LPARAM, @wParam : Win32cr::Foundation::WPARAM, @message : UInt32, @hwnd : Win32cr::Foundation::HWND)
+    end
+  end
+
+  @[Extern]
+  struct KBDLLHOOKSTRUCT
+    property vkCode : UInt32
+    property scanCode : UInt32
+    property flags : Win32cr::UI::WindowsAndMessaging::KBDLLHOOKSTRUCT_FLAGS
+    property time : UInt32
+    property dwExtraInfo : LibC::UIntPtrT
+    def initialize(@vkCode : UInt32, @scanCode : UInt32, @flags : Win32cr::UI::WindowsAndMessaging::KBDLLHOOKSTRUCT_FLAGS, @time : UInt32, @dwExtraInfo : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct MSLLHOOKSTRUCT
+    property pt : Win32cr::Foundation::POINT
+    property mouseData : Win32cr::UI::WindowsAndMessaging::MOUSEHOOKSTRUCTEX_MOUSE_DATA
+    property flags : UInt32
+    property time : UInt32
+    property dwExtraInfo : LibC::UIntPtrT
+    def initialize(@pt : Win32cr::Foundation::POINT, @mouseData : Win32cr::UI::WindowsAndMessaging::MOUSEHOOKSTRUCTEX_MOUSE_DATA, @flags : UInt32, @time : UInt32, @dwExtraInfo : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct DEBUGHOOKINFO
+    property idThread : UInt32
+    property idThreadInstaller : UInt32
+    property lParam : Win32cr::Foundation::LPARAM
+    property wParam : Win32cr::Foundation::WPARAM
+    property code : Int32
+    def initialize(@idThread : UInt32, @idThreadInstaller : UInt32, @lParam : Win32cr::Foundation::LPARAM, @wParam : Win32cr::Foundation::WPARAM, @code : Int32)
+    end
+  end
+
+  @[Extern]
+  struct MOUSEHOOKSTRUCT
+    property pt : Win32cr::Foundation::POINT
+    property hwnd : Win32cr::Foundation::HWND
+    property wHitTestCode : UInt32
+    property dwExtraInfo : LibC::UIntPtrT
+    def initialize(@pt : Win32cr::Foundation::POINT, @hwnd : Win32cr::Foundation::HWND, @wHitTestCode : UInt32, @dwExtraInfo : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct MOUSEHOOKSTRUCTEX
+    property __anonymous_base_winuser_l1166_c46 : Win32cr::UI::WindowsAndMessaging::MOUSEHOOKSTRUCT
+    property mouseData : Win32cr::UI::WindowsAndMessaging::MOUSEHOOKSTRUCTEX_MOUSE_DATA
+    def initialize(@__anonymous_base_winuser_l1166_c46 : Win32cr::UI::WindowsAndMessaging::MOUSEHOOKSTRUCT, @mouseData : Win32cr::UI::WindowsAndMessaging::MOUSEHOOKSTRUCTEX_MOUSE_DATA)
+    end
+  end
+
+  @[Extern]
+  struct HARDWAREHOOKSTRUCT
+    property hwnd : Win32cr::Foundation::HWND
+    property message : UInt32
+    property wParam : Win32cr::Foundation::WPARAM
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@hwnd : Win32cr::Foundation::HWND, @message : UInt32, @wParam : Win32cr::Foundation::WPARAM, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
+
+  @[Extern]
+  struct WNDCLASSEXA
+    property cbSize : UInt32
+    property style : Win32cr::UI::WindowsAndMessaging::WNDCLASS_STYLES
+    property lpfnWndProc : Win32cr::UI::WindowsAndMessaging::WNDPROC
+    property cbClsExtra : Int32
+    property cbWndExtra : Int32
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property hCursor : Win32cr::UI::WindowsAndMessaging::HCURSOR
+    property hbrBackground : Win32cr::Graphics::Gdi::HBRUSH
+    property lpszMenuName : Win32cr::Foundation::PSTR
+    property lpszClassName : Win32cr::Foundation::PSTR
+    property hIconSm : Win32cr::UI::WindowsAndMessaging::HICON
+    def initialize(@cbSize : UInt32, @style : Win32cr::UI::WindowsAndMessaging::WNDCLASS_STYLES, @lpfnWndProc : Win32cr::UI::WindowsAndMessaging::WNDPROC, @cbClsExtra : Int32, @cbWndExtra : Int32, @hInstance : Win32cr::Foundation::HINSTANCE, @hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @hCursor : Win32cr::UI::WindowsAndMessaging::HCURSOR, @hbrBackground : Win32cr::Graphics::Gdi::HBRUSH, @lpszMenuName : Win32cr::Foundation::PSTR, @lpszClassName : Win32cr::Foundation::PSTR, @hIconSm : Win32cr::UI::WindowsAndMessaging::HICON)
+    end
+  end
+
+  @[Extern]
+  struct WNDCLASSEXW
+    property cbSize : UInt32
+    property style : Win32cr::UI::WindowsAndMessaging::WNDCLASS_STYLES
+    property lpfnWndProc : Win32cr::UI::WindowsAndMessaging::WNDPROC
+    property cbClsExtra : Int32
+    property cbWndExtra : Int32
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property hCursor : Win32cr::UI::WindowsAndMessaging::HCURSOR
+    property hbrBackground : Win32cr::Graphics::Gdi::HBRUSH
+    property lpszMenuName : Win32cr::Foundation::PWSTR
+    property lpszClassName : Win32cr::Foundation::PWSTR
+    property hIconSm : Win32cr::UI::WindowsAndMessaging::HICON
+    def initialize(@cbSize : UInt32, @style : Win32cr::UI::WindowsAndMessaging::WNDCLASS_STYLES, @lpfnWndProc : Win32cr::UI::WindowsAndMessaging::WNDPROC, @cbClsExtra : Int32, @cbWndExtra : Int32, @hInstance : Win32cr::Foundation::HINSTANCE, @hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @hCursor : Win32cr::UI::WindowsAndMessaging::HCURSOR, @hbrBackground : Win32cr::Graphics::Gdi::HBRUSH, @lpszMenuName : Win32cr::Foundation::PWSTR, @lpszClassName : Win32cr::Foundation::PWSTR, @hIconSm : Win32cr::UI::WindowsAndMessaging::HICON)
+    end
+  end
+
+  @[Extern]
+  struct WNDCLASSA
+    property style : Win32cr::UI::WindowsAndMessaging::WNDCLASS_STYLES
+    property lpfnWndProc : Win32cr::UI::WindowsAndMessaging::WNDPROC
+    property cbClsExtra : Int32
+    property cbWndExtra : Int32
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property hCursor : Win32cr::UI::WindowsAndMessaging::HCURSOR
+    property hbrBackground : Win32cr::Graphics::Gdi::HBRUSH
+    property lpszMenuName : Win32cr::Foundation::PSTR
+    property lpszClassName : Win32cr::Foundation::PSTR
+    def initialize(@style : Win32cr::UI::WindowsAndMessaging::WNDCLASS_STYLES, @lpfnWndProc : Win32cr::UI::WindowsAndMessaging::WNDPROC, @cbClsExtra : Int32, @cbWndExtra : Int32, @hInstance : Win32cr::Foundation::HINSTANCE, @hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @hCursor : Win32cr::UI::WindowsAndMessaging::HCURSOR, @hbrBackground : Win32cr::Graphics::Gdi::HBRUSH, @lpszMenuName : Win32cr::Foundation::PSTR, @lpszClassName : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct WNDCLASSW
+    property style : Win32cr::UI::WindowsAndMessaging::WNDCLASS_STYLES
+    property lpfnWndProc : Win32cr::UI::WindowsAndMessaging::WNDPROC
+    property cbClsExtra : Int32
+    property cbWndExtra : Int32
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property hCursor : Win32cr::UI::WindowsAndMessaging::HCURSOR
+    property hbrBackground : Win32cr::Graphics::Gdi::HBRUSH
+    property lpszMenuName : Win32cr::Foundation::PWSTR
+    property lpszClassName : Win32cr::Foundation::PWSTR
+    def initialize(@style : Win32cr::UI::WindowsAndMessaging::WNDCLASS_STYLES, @lpfnWndProc : Win32cr::UI::WindowsAndMessaging::WNDPROC, @cbClsExtra : Int32, @cbWndExtra : Int32, @hInstance : Win32cr::Foundation::HINSTANCE, @hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @hCursor : Win32cr::UI::WindowsAndMessaging::HCURSOR, @hbrBackground : Win32cr::Graphics::Gdi::HBRUSH, @lpszMenuName : Win32cr::Foundation::PWSTR, @lpszClassName : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct MSG
+    property hwnd : Win32cr::Foundation::HWND
+    property message : UInt32
+    property wParam : Win32cr::Foundation::WPARAM
+    property lParam : Win32cr::Foundation::LPARAM
+    property time : UInt32
+    property pt : Win32cr::Foundation::POINT
+    def initialize(@hwnd : Win32cr::Foundation::HWND, @message : UInt32, @wParam : Win32cr::Foundation::WPARAM, @lParam : Win32cr::Foundation::LPARAM, @time : UInt32, @pt : Win32cr::Foundation::POINT)
+    end
+  end
+
+  @[Extern]
+  struct MINMAXINFO
+    property ptReserved : Win32cr::Foundation::POINT
+    property ptMaxSize : Win32cr::Foundation::POINT
+    property ptMaxPosition : Win32cr::Foundation::POINT
+    property ptMinTrackSize : Win32cr::Foundation::POINT
+    property ptMaxTrackSize : Win32cr::Foundation::POINT
+    def initialize(@ptReserved : Win32cr::Foundation::POINT, @ptMaxSize : Win32cr::Foundation::POINT, @ptMaxPosition : Win32cr::Foundation::POINT, @ptMinTrackSize : Win32cr::Foundation::POINT, @ptMaxTrackSize : Win32cr::Foundation::POINT)
+    end
+  end
+
+  @[Extern]
+  struct MDINEXTMENU
+    property hmenuIn : Win32cr::UI::WindowsAndMessaging::HMENU
+    property hmenuNext : Win32cr::UI::WindowsAndMessaging::HMENU
+    property hwndNext : Win32cr::Foundation::HWND
+    def initialize(@hmenuIn : Win32cr::UI::WindowsAndMessaging::HMENU, @hmenuNext : Win32cr::UI::WindowsAndMessaging::HMENU, @hwndNext : Win32cr::Foundation::HWND)
+    end
+  end
+
+  @[Extern]
+  struct WINDOWPOS
+    property hwnd : Win32cr::Foundation::HWND
+    property hwndInsertAfter : Win32cr::Foundation::HWND
+    property x : Int32
+    property y : Int32
+    property cx : Int32
+    property cy : Int32
+    property flags : Win32cr::UI::WindowsAndMessaging::SET_WINDOW_POS_FLAGS
+    def initialize(@hwnd : Win32cr::Foundation::HWND, @hwndInsertAfter : Win32cr::Foundation::HWND, @x : Int32, @y : Int32, @cx : Int32, @cy : Int32, @flags : Win32cr::UI::WindowsAndMessaging::SET_WINDOW_POS_FLAGS)
+    end
+  end
+
+  @[Extern]
+  struct NCCALCSIZE_PARAMS
+    property rgrc : Win32cr::Foundation::RECT[3]
+    property lppos : Win32cr::UI::WindowsAndMessaging::WINDOWPOS*
+    def initialize(@rgrc : Win32cr::Foundation::RECT[3], @lppos : Win32cr::UI::WindowsAndMessaging::WINDOWPOS*)
+    end
+  end
+
+  @[Extern]
+  struct ACCEL
+    property fVirt : UInt8
+    property key : UInt16
+    property cmd : UInt16
+    def initialize(@fVirt : UInt8, @key : UInt16, @cmd : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct CREATESTRUCTA
+    property lpCreateParams : Void*
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property hMenu : Win32cr::UI::WindowsAndMessaging::HMENU
+    property hwndParent : Win32cr::Foundation::HWND
+    property cy : Int32
+    property cx : Int32
+    property y : Int32
+    property x : Int32
+    property style : Int32
+    property lpszName : Win32cr::Foundation::PSTR
+    property lpszClass : Win32cr::Foundation::PSTR
+    property dwExStyle : UInt32
+    def initialize(@lpCreateParams : Void*, @hInstance : Win32cr::Foundation::HINSTANCE, @hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, @hwndParent : Win32cr::Foundation::HWND, @cy : Int32, @cx : Int32, @y : Int32, @x : Int32, @style : Int32, @lpszName : Win32cr::Foundation::PSTR, @lpszClass : Win32cr::Foundation::PSTR, @dwExStyle : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CREATESTRUCTW
+    property lpCreateParams : Void*
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property hMenu : Win32cr::UI::WindowsAndMessaging::HMENU
+    property hwndParent : Win32cr::Foundation::HWND
+    property cy : Int32
+    property cx : Int32
+    property y : Int32
+    property x : Int32
+    property style : Int32
+    property lpszName : Win32cr::Foundation::PWSTR
+    property lpszClass : Win32cr::Foundation::PWSTR
+    property dwExStyle : UInt32
+    def initialize(@lpCreateParams : Void*, @hInstance : Win32cr::Foundation::HINSTANCE, @hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, @hwndParent : Win32cr::Foundation::HWND, @cy : Int32, @cx : Int32, @y : Int32, @x : Int32, @style : Int32, @lpszName : Win32cr::Foundation::PWSTR, @lpszClass : Win32cr::Foundation::PWSTR, @dwExStyle : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WINDOWPLACEMENT
+    property length : UInt32
+    property flags : Win32cr::UI::WindowsAndMessaging::WINDOWPLACEMENT_FLAGS
+    property showCmd : Win32cr::UI::WindowsAndMessaging::SHOW_WINDOW_CMD
+    property ptMinPosition : Win32cr::Foundation::POINT
+    property ptMaxPosition : Win32cr::Foundation::POINT
+    property rcNormalPosition : Win32cr::Foundation::RECT
+    def initialize(@length : UInt32, @flags : Win32cr::UI::WindowsAndMessaging::WINDOWPLACEMENT_FLAGS, @showCmd : Win32cr::UI::WindowsAndMessaging::SHOW_WINDOW_CMD, @ptMinPosition : Win32cr::Foundation::POINT, @ptMaxPosition : Win32cr::Foundation::POINT, @rcNormalPosition : Win32cr::Foundation::RECT)
+    end
+  end
+
+  @[Extern]
+  struct STYLESTRUCT
+    property styleOld : UInt32
+    property styleNew : UInt32
+    def initialize(@styleOld : UInt32, @styleNew : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct UPDATELAYEREDWINDOWINFO
+    property cbSize : UInt32
+    property hdcDst : Win32cr::Graphics::Gdi::HDC
+    property pptDst : Win32cr::Foundation::POINT*
+    property psize : Win32cr::Foundation::SIZE*
+    property hdcSrc : Win32cr::Graphics::Gdi::HDC
+    property pptSrc : Win32cr::Foundation::POINT*
+    property crKey : UInt32
+    property pblend : Win32cr::Graphics::Gdi::BLENDFUNCTION*
+    property dwFlags : Win32cr::UI::WindowsAndMessaging::UPDATE_LAYERED_WINDOW_FLAGS
+    property prcDirty : Win32cr::Foundation::RECT*
+    def initialize(@cbSize : UInt32, @hdcDst : Win32cr::Graphics::Gdi::HDC, @pptDst : Win32cr::Foundation::POINT*, @psize : Win32cr::Foundation::SIZE*, @hdcSrc : Win32cr::Graphics::Gdi::HDC, @pptSrc : Win32cr::Foundation::POINT*, @crKey : UInt32, @pblend : Win32cr::Graphics::Gdi::BLENDFUNCTION*, @dwFlags : Win32cr::UI::WindowsAndMessaging::UPDATE_LAYERED_WINDOW_FLAGS, @prcDirty : Win32cr::Foundation::RECT*)
+    end
+  end
+
+  @[Extern]
+  struct FLASHWINFO
+    property cbSize : UInt32
+    property hwnd : Win32cr::Foundation::HWND
+    property dwFlags : Win32cr::UI::WindowsAndMessaging::FLASHWINFO_FLAGS
+    property uCount : UInt32
+    property dwTimeout : UInt32
+    def initialize(@cbSize : UInt32, @hwnd : Win32cr::Foundation::HWND, @dwFlags : Win32cr::UI::WindowsAndMessaging::FLASHWINFO_FLAGS, @uCount : UInt32, @dwTimeout : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DLGTEMPLATE
+    property style : UInt32
+    property dwExtendedStyle : UInt32
+    property cdit : UInt16
+    property x : Int16
+    property y : Int16
+    property cx : Int16
+    property cy : Int16
+    def initialize(@style : UInt32, @dwExtendedStyle : UInt32, @cdit : UInt16, @x : Int16, @y : Int16, @cx : Int16, @cy : Int16)
+    end
+  end
+
+  @[Extern]
+  struct DLGITEMTEMPLATE
+    property style : UInt32
+    property dwExtendedStyle : UInt32
+    property x : Int16
+    property y : Int16
+    property cx : Int16
+    property cy : Int16
+    property id : UInt16
+    def initialize(@style : UInt32, @dwExtendedStyle : UInt32, @x : Int16, @y : Int16, @cx : Int16, @cy : Int16, @id : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct TPMPARAMS
+    property cbSize : UInt32
+    property rcExclude : Win32cr::Foundation::RECT
+    def initialize(@cbSize : UInt32, @rcExclude : Win32cr::Foundation::RECT)
+    end
+  end
+
+  @[Extern]
+  struct MENUINFO
+    property cbSize : UInt32
+    property fMask : Win32cr::UI::WindowsAndMessaging::MENUINFO_MASK
+    property dwStyle : Win32cr::UI::WindowsAndMessaging::MENUINFO_STYLE
+    property cyMax : UInt32
+    property hbrBack : Win32cr::Graphics::Gdi::HBRUSH
+    property dwContextHelpID : UInt32
+    property dwMenuData : LibC::UIntPtrT
+    def initialize(@cbSize : UInt32, @fMask : Win32cr::UI::WindowsAndMessaging::MENUINFO_MASK, @dwStyle : Win32cr::UI::WindowsAndMessaging::MENUINFO_STYLE, @cyMax : UInt32, @hbrBack : Win32cr::Graphics::Gdi::HBRUSH, @dwContextHelpID : UInt32, @dwMenuData : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct MENUGETOBJECTINFO
+    property dwFlags : Win32cr::UI::WindowsAndMessaging::MENUGETOBJECTINFO_FLAGS
+    property uPos : UInt32
+    property hmenu : Win32cr::UI::WindowsAndMessaging::HMENU
+    property riid : Void*
+    property pvObj : Void*
+    def initialize(@dwFlags : Win32cr::UI::WindowsAndMessaging::MENUGETOBJECTINFO_FLAGS, @uPos : UInt32, @hmenu : Win32cr::UI::WindowsAndMessaging::HMENU, @riid : Void*, @pvObj : Void*)
+    end
+  end
+
+  @[Extern]
+  struct MENUITEMINFOA
+    property cbSize : UInt32
+    property fMask : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_MASK
+    property fType : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_TYPE
+    property fState : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_STATE
+    property wID : UInt32
+    property hSubMenu : Win32cr::UI::WindowsAndMessaging::HMENU
+    property hbmpChecked : Win32cr::Graphics::Gdi::HBITMAP
+    property hbmpUnchecked : Win32cr::Graphics::Gdi::HBITMAP
+    property dwItemData : LibC::UIntPtrT
+    property dwTypeData : Win32cr::Foundation::PSTR
+    property cch : UInt32
+    property hbmpItem : Win32cr::Graphics::Gdi::HBITMAP
+    def initialize(@cbSize : UInt32, @fMask : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_MASK, @fType : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_TYPE, @fState : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_STATE, @wID : UInt32, @hSubMenu : Win32cr::UI::WindowsAndMessaging::HMENU, @hbmpChecked : Win32cr::Graphics::Gdi::HBITMAP, @hbmpUnchecked : Win32cr::Graphics::Gdi::HBITMAP, @dwItemData : LibC::UIntPtrT, @dwTypeData : Win32cr::Foundation::PSTR, @cch : UInt32, @hbmpItem : Win32cr::Graphics::Gdi::HBITMAP)
+    end
+  end
+
+  @[Extern]
+  struct MENUITEMINFOW
+    property cbSize : UInt32
+    property fMask : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_MASK
+    property fType : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_TYPE
+    property fState : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_STATE
+    property wID : UInt32
+    property hSubMenu : Win32cr::UI::WindowsAndMessaging::HMENU
+    property hbmpChecked : Win32cr::Graphics::Gdi::HBITMAP
+    property hbmpUnchecked : Win32cr::Graphics::Gdi::HBITMAP
+    property dwItemData : LibC::UIntPtrT
+    property dwTypeData : Win32cr::Foundation::PWSTR
+    property cch : UInt32
+    property hbmpItem : Win32cr::Graphics::Gdi::HBITMAP
+    def initialize(@cbSize : UInt32, @fMask : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_MASK, @fType : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_TYPE, @fState : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_STATE, @wID : UInt32, @hSubMenu : Win32cr::UI::WindowsAndMessaging::HMENU, @hbmpChecked : Win32cr::Graphics::Gdi::HBITMAP, @hbmpUnchecked : Win32cr::Graphics::Gdi::HBITMAP, @dwItemData : LibC::UIntPtrT, @dwTypeData : Win32cr::Foundation::PWSTR, @cch : UInt32, @hbmpItem : Win32cr::Graphics::Gdi::HBITMAP)
+    end
+  end
+
+  @[Extern]
+  struct DROPSTRUCT
+    property hwndSource : Win32cr::Foundation::HWND
+    property hwndSink : Win32cr::Foundation::HWND
+    property wFmt : UInt32
+    property dwData : LibC::UIntPtrT
+    property ptDrop : Win32cr::Foundation::POINT
+    property dwControlData : UInt32
+    def initialize(@hwndSource : Win32cr::Foundation::HWND, @hwndSink : Win32cr::Foundation::HWND, @wFmt : UInt32, @dwData : LibC::UIntPtrT, @ptDrop : Win32cr::Foundation::POINT, @dwControlData : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MSGBOXPARAMSA
+    property cbSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpszText : Win32cr::Foundation::PSTR
+    property lpszCaption : Win32cr::Foundation::PSTR
+    property dwStyle : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE
+    property lpszIcon : Win32cr::Foundation::PSTR
+    property dwContextHelpId : LibC::UIntPtrT
+    property lpfnMsgBoxCallback : Win32cr::UI::WindowsAndMessaging::MSGBOXCALLBACK
+    property dwLanguageId : UInt32
+    def initialize(@cbSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hInstance : Win32cr::Foundation::HINSTANCE, @lpszText : Win32cr::Foundation::PSTR, @lpszCaption : Win32cr::Foundation::PSTR, @dwStyle : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE, @lpszIcon : Win32cr::Foundation::PSTR, @dwContextHelpId : LibC::UIntPtrT, @lpfnMsgBoxCallback : Win32cr::UI::WindowsAndMessaging::MSGBOXCALLBACK, @dwLanguageId : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MSGBOXPARAMSW
+    property cbSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpszText : Win32cr::Foundation::PWSTR
+    property lpszCaption : Win32cr::Foundation::PWSTR
+    property dwStyle : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE
+    property lpszIcon : Win32cr::Foundation::PWSTR
+    property dwContextHelpId : LibC::UIntPtrT
+    property lpfnMsgBoxCallback : Win32cr::UI::WindowsAndMessaging::MSGBOXCALLBACK
+    property dwLanguageId : UInt32
+    def initialize(@cbSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hInstance : Win32cr::Foundation::HINSTANCE, @lpszText : Win32cr::Foundation::PWSTR, @lpszCaption : Win32cr::Foundation::PWSTR, @dwStyle : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE, @lpszIcon : Win32cr::Foundation::PWSTR, @dwContextHelpId : LibC::UIntPtrT, @lpfnMsgBoxCallback : Win32cr::UI::WindowsAndMessaging::MSGBOXCALLBACK, @dwLanguageId : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MENUITEMTEMPLATEHEADER
+    property versionNumber : UInt16
+    property offset : UInt16
+    def initialize(@versionNumber : UInt16, @offset : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct MENUITEMTEMPLATE
+    property mtOption : UInt16
+    property mtID : UInt16
+    property mtString : UInt16*
+    def initialize(@mtOption : UInt16, @mtID : UInt16, @mtString : UInt16*)
+    end
+  end
+
+  @[Extern]
+  struct ICONINFO
+    property fIcon : Win32cr::Foundation::BOOL
+    property xHotspot : UInt32
+    property yHotspot : UInt32
+    property hbmMask : Win32cr::Graphics::Gdi::HBITMAP
+    property hbmColor : Win32cr::Graphics::Gdi::HBITMAP
+    def initialize(@fIcon : Win32cr::Foundation::BOOL, @xHotspot : UInt32, @yHotspot : UInt32, @hbmMask : Win32cr::Graphics::Gdi::HBITMAP, @hbmColor : Win32cr::Graphics::Gdi::HBITMAP)
+    end
+  end
+
+  @[Extern]
+  struct CURSORSHAPE
+    property xHotSpot : Int32
+    property yHotSpot : Int32
+    property cx : Int32
+    property cy : Int32
+    property cbWidth : Int32
+    property planes : UInt8
+    property bits_pixel : UInt8
+    def initialize(@xHotSpot : Int32, @yHotSpot : Int32, @cx : Int32, @cy : Int32, @cbWidth : Int32, @planes : UInt8, @bits_pixel : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct ICONINFOEXA
+    property cbSize : UInt32
+    property fIcon : Win32cr::Foundation::BOOL
+    property xHotspot : UInt32
+    property yHotspot : UInt32
+    property hbmMask : Win32cr::Graphics::Gdi::HBITMAP
+    property hbmColor : Win32cr::Graphics::Gdi::HBITMAP
+    property wResID : UInt16
+    property szModName : Win32cr::Foundation::CHAR[260]
+    property szResName : Win32cr::Foundation::CHAR[260]
+    def initialize(@cbSize : UInt32, @fIcon : Win32cr::Foundation::BOOL, @xHotspot : UInt32, @yHotspot : UInt32, @hbmMask : Win32cr::Graphics::Gdi::HBITMAP, @hbmColor : Win32cr::Graphics::Gdi::HBITMAP, @wResID : UInt16, @szModName : Win32cr::Foundation::CHAR[260], @szResName : Win32cr::Foundation::CHAR[260])
+    end
+  end
+
+  @[Extern]
+  struct ICONINFOEXW
+    property cbSize : UInt32
+    property fIcon : Win32cr::Foundation::BOOL
+    property xHotspot : UInt32
+    property yHotspot : UInt32
+    property hbmMask : Win32cr::Graphics::Gdi::HBITMAP
+    property hbmColor : Win32cr::Graphics::Gdi::HBITMAP
+    property wResID : UInt16
+    property szModName : UInt16[260]
+    property szResName : UInt16[260]
+    def initialize(@cbSize : UInt32, @fIcon : Win32cr::Foundation::BOOL, @xHotspot : UInt32, @yHotspot : UInt32, @hbmMask : Win32cr::Graphics::Gdi::HBITMAP, @hbmColor : Win32cr::Graphics::Gdi::HBITMAP, @wResID : UInt16, @szModName : UInt16[260], @szResName : UInt16[260])
+    end
+  end
+
+  @[Extern]
+  struct SCROLLINFO
+    property cbSize : UInt32
+    property fMask : Win32cr::UI::WindowsAndMessaging::SCROLLINFO_MASK
+    property nMin : Int32
+    property nMax : Int32
+    property nPage : UInt32
+    property nPos : Int32
+    property nTrackPos : Int32
+    def initialize(@cbSize : UInt32, @fMask : Win32cr::UI::WindowsAndMessaging::SCROLLINFO_MASK, @nMin : Int32, @nMax : Int32, @nPage : UInt32, @nPos : Int32, @nTrackPos : Int32)
+    end
+  end
+
+  @[Extern]
+  struct MDICREATESTRUCTA
+    property szClass : Win32cr::Foundation::PSTR
+    property szTitle : Win32cr::Foundation::PSTR
+    property hOwner : Win32cr::Foundation::HANDLE
+    property x : Int32
+    property y : Int32
+    property cx : Int32
+    property cy : Int32
+    property style : Win32cr::UI::WindowsAndMessaging::WINDOW_STYLE
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@szClass : Win32cr::Foundation::PSTR, @szTitle : Win32cr::Foundation::PSTR, @hOwner : Win32cr::Foundation::HANDLE, @x : Int32, @y : Int32, @cx : Int32, @cy : Int32, @style : Win32cr::UI::WindowsAndMessaging::WINDOW_STYLE, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
+
+  @[Extern]
+  struct MDICREATESTRUCTW
+    property szClass : Win32cr::Foundation::PWSTR
+    property szTitle : Win32cr::Foundation::PWSTR
+    property hOwner : Win32cr::Foundation::HANDLE
+    property x : Int32
+    property y : Int32
+    property cx : Int32
+    property cy : Int32
+    property style : Win32cr::UI::WindowsAndMessaging::WINDOW_STYLE
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@szClass : Win32cr::Foundation::PWSTR, @szTitle : Win32cr::Foundation::PWSTR, @hOwner : Win32cr::Foundation::HANDLE, @x : Int32, @y : Int32, @cx : Int32, @cy : Int32, @style : Win32cr::UI::WindowsAndMessaging::WINDOW_STYLE, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
+
+  @[Extern]
+  struct CLIENTCREATESTRUCT
+    property hWindowMenu : Win32cr::Foundation::HANDLE
+    property idFirstChild : UInt32
+    def initialize(@hWindowMenu : Win32cr::Foundation::HANDLE, @idFirstChild : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct TouchPredictionParameters
+    property cbSize : UInt32
+    property dwLatency : UInt32
+    property dwSampleTime : UInt32
+    property bUseHWTimeStamp : UInt32
+    def initialize(@cbSize : UInt32, @dwLatency : UInt32, @dwSampleTime : UInt32, @bUseHWTimeStamp : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NONCLIENTMETRICSA
+    property cbSize : UInt32
+    property iBorderWidth : Int32
+    property iScrollWidth : Int32
+    property iScrollHeight : Int32
+    property iCaptionWidth : Int32
+    property iCaptionHeight : Int32
+    property lfCaptionFont : Win32cr::Graphics::Gdi::LOGFONTA
+    property iSmCaptionWidth : Int32
+    property iSmCaptionHeight : Int32
+    property lfSmCaptionFont : Win32cr::Graphics::Gdi::LOGFONTA
+    property iMenuWidth : Int32
+    property iMenuHeight : Int32
+    property lfMenuFont : Win32cr::Graphics::Gdi::LOGFONTA
+    property lfStatusFont : Win32cr::Graphics::Gdi::LOGFONTA
+    property lfMessageFont : Win32cr::Graphics::Gdi::LOGFONTA
+    property iPaddedBorderWidth : Int32
+    def initialize(@cbSize : UInt32, @iBorderWidth : Int32, @iScrollWidth : Int32, @iScrollHeight : Int32, @iCaptionWidth : Int32, @iCaptionHeight : Int32, @lfCaptionFont : Win32cr::Graphics::Gdi::LOGFONTA, @iSmCaptionWidth : Int32, @iSmCaptionHeight : Int32, @lfSmCaptionFont : Win32cr::Graphics::Gdi::LOGFONTA, @iMenuWidth : Int32, @iMenuHeight : Int32, @lfMenuFont : Win32cr::Graphics::Gdi::LOGFONTA, @lfStatusFont : Win32cr::Graphics::Gdi::LOGFONTA, @lfMessageFont : Win32cr::Graphics::Gdi::LOGFONTA, @iPaddedBorderWidth : Int32)
+    end
+  end
+
+  @[Extern]
+  struct NONCLIENTMETRICSW
+    property cbSize : UInt32
+    property iBorderWidth : Int32
+    property iScrollWidth : Int32
+    property iScrollHeight : Int32
+    property iCaptionWidth : Int32
+    property iCaptionHeight : Int32
+    property lfCaptionFont : Win32cr::Graphics::Gdi::LOGFONTW
+    property iSmCaptionWidth : Int32
+    property iSmCaptionHeight : Int32
+    property lfSmCaptionFont : Win32cr::Graphics::Gdi::LOGFONTW
+    property iMenuWidth : Int32
+    property iMenuHeight : Int32
+    property lfMenuFont : Win32cr::Graphics::Gdi::LOGFONTW
+    property lfStatusFont : Win32cr::Graphics::Gdi::LOGFONTW
+    property lfMessageFont : Win32cr::Graphics::Gdi::LOGFONTW
+    property iPaddedBorderWidth : Int32
+    def initialize(@cbSize : UInt32, @iBorderWidth : Int32, @iScrollWidth : Int32, @iScrollHeight : Int32, @iCaptionWidth : Int32, @iCaptionHeight : Int32, @lfCaptionFont : Win32cr::Graphics::Gdi::LOGFONTW, @iSmCaptionWidth : Int32, @iSmCaptionHeight : Int32, @lfSmCaptionFont : Win32cr::Graphics::Gdi::LOGFONTW, @iMenuWidth : Int32, @iMenuHeight : Int32, @lfMenuFont : Win32cr::Graphics::Gdi::LOGFONTW, @lfStatusFont : Win32cr::Graphics::Gdi::LOGFONTW, @lfMessageFont : Win32cr::Graphics::Gdi::LOGFONTW, @iPaddedBorderWidth : Int32)
+    end
+  end
+
+  @[Extern]
+  struct MINIMIZEDMETRICS
+    property cbSize : UInt32
+    property iWidth : Int32
+    property iHorzGap : Int32
+    property iVertGap : Int32
+    property iArrange : Win32cr::UI::WindowsAndMessaging::MINIMIZEDMETRICS_ARRANGE
+    def initialize(@cbSize : UInt32, @iWidth : Int32, @iHorzGap : Int32, @iVertGap : Int32, @iArrange : Win32cr::UI::WindowsAndMessaging::MINIMIZEDMETRICS_ARRANGE)
+    end
+  end
+
+  @[Extern]
+  struct ICONMETRICSA
+    property cbSize : UInt32
+    property iHorzSpacing : Int32
+    property iVertSpacing : Int32
+    property iTitleWrap : Int32
+    property lfFont : Win32cr::Graphics::Gdi::LOGFONTA
+    def initialize(@cbSize : UInt32, @iHorzSpacing : Int32, @iVertSpacing : Int32, @iTitleWrap : Int32, @lfFont : Win32cr::Graphics::Gdi::LOGFONTA)
+    end
+  end
+
+  @[Extern]
+  struct ICONMETRICSW
+    property cbSize : UInt32
+    property iHorzSpacing : Int32
+    property iVertSpacing : Int32
+    property iTitleWrap : Int32
+    property lfFont : Win32cr::Graphics::Gdi::LOGFONTW
+    def initialize(@cbSize : UInt32, @iHorzSpacing : Int32, @iVertSpacing : Int32, @iTitleWrap : Int32, @lfFont : Win32cr::Graphics::Gdi::LOGFONTW)
+    end
+  end
+
+  @[Extern]
+  struct ANIMATIONINFO
+    property cbSize : UInt32
+    property iMinAnimate : Int32
+    def initialize(@cbSize : UInt32, @iMinAnimate : Int32)
+    end
+  end
+
+  @[Extern]
+  struct AUDIODESCRIPTION
+    property cbSize : UInt32
+    property enabled : Win32cr::Foundation::BOOL
+    property locale : UInt32
+    def initialize(@cbSize : UInt32, @enabled : Win32cr::Foundation::BOOL, @locale : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct GUITHREADINFO
+    property cbSize : UInt32
+    property flags : Win32cr::UI::WindowsAndMessaging::GUITHREADINFO_FLAGS
+    property hwndActive : Win32cr::Foundation::HWND
+    property hwndFocus : Win32cr::Foundation::HWND
+    property hwndCapture : Win32cr::Foundation::HWND
+    property hwndMenuOwner : Win32cr::Foundation::HWND
+    property hwndMoveSize : Win32cr::Foundation::HWND
+    property hwndCaret : Win32cr::Foundation::HWND
+    property rcCaret : Win32cr::Foundation::RECT
+    def initialize(@cbSize : UInt32, @flags : Win32cr::UI::WindowsAndMessaging::GUITHREADINFO_FLAGS, @hwndActive : Win32cr::Foundation::HWND, @hwndFocus : Win32cr::Foundation::HWND, @hwndCapture : Win32cr::Foundation::HWND, @hwndMenuOwner : Win32cr::Foundation::HWND, @hwndMoveSize : Win32cr::Foundation::HWND, @hwndCaret : Win32cr::Foundation::HWND, @rcCaret : Win32cr::Foundation::RECT)
+    end
+  end
+
+  @[Extern]
+  struct CURSORINFO
+    property cbSize : UInt32
+    property flags : Win32cr::UI::WindowsAndMessaging::CURSORINFO_FLAGS
+    property hCursor : Win32cr::UI::WindowsAndMessaging::HCURSOR
+    property ptScreenPos : Win32cr::Foundation::POINT
+    def initialize(@cbSize : UInt32, @flags : Win32cr::UI::WindowsAndMessaging::CURSORINFO_FLAGS, @hCursor : Win32cr::UI::WindowsAndMessaging::HCURSOR, @ptScreenPos : Win32cr::Foundation::POINT)
+    end
+  end
+
+  @[Extern]
+  struct WINDOWINFO
+    property cbSize : UInt32
+    property rcWindow : Win32cr::Foundation::RECT
+    property rcClient : Win32cr::Foundation::RECT
+    property dwStyle : UInt32
+    property dwExStyle : UInt32
+    property dwWindowStatus : UInt32
+    property cxWindowBorders : UInt32
+    property cyWindowBorders : UInt32
+    property atomWindowType : UInt16
+    property wCreatorVersion : UInt16
+    def initialize(@cbSize : UInt32, @rcWindow : Win32cr::Foundation::RECT, @rcClient : Win32cr::Foundation::RECT, @dwStyle : UInt32, @dwExStyle : UInt32, @dwWindowStatus : UInt32, @cxWindowBorders : UInt32, @cyWindowBorders : UInt32, @atomWindowType : UInt16, @wCreatorVersion : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct TITLEBARINFO
+    property cbSize : UInt32
+    property rcTitleBar : Win32cr::Foundation::RECT
+    property rgstate : UInt32[6]
+    def initialize(@cbSize : UInt32, @rcTitleBar : Win32cr::Foundation::RECT, @rgstate : UInt32[6])
+    end
+  end
+
+  @[Extern]
+  struct TITLEBARINFOEX
+    property cbSize : UInt32
+    property rcTitleBar : Win32cr::Foundation::RECT
+    property rgstate : UInt32[6]
+    property rgrect : Win32cr::Foundation::RECT[6]
+    def initialize(@cbSize : UInt32, @rcTitleBar : Win32cr::Foundation::RECT, @rgstate : UInt32[6], @rgrect : Win32cr::Foundation::RECT[6])
+    end
+  end
+
+  @[Extern]
+  struct MENUBARINFO
+    property cbSize : UInt32
+    property rcBar : Win32cr::Foundation::RECT
+    property hMenu : Win32cr::UI::WindowsAndMessaging::HMENU
+    property hwndMenu : Win32cr::Foundation::HWND
+    property _bitfield : Int32
+    def initialize(@cbSize : UInt32, @rcBar : Win32cr::Foundation::RECT, @hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, @hwndMenu : Win32cr::Foundation::HWND, @_bitfield : Int32)
+    end
+  end
+
+  @[Extern]
+  struct SCROLLBARINFO
+    property cbSize : UInt32
+    property rcScrollBar : Win32cr::Foundation::RECT
+    property dxyLineButton : Int32
+    property xyThumbTop : Int32
+    property xyThumbBottom : Int32
+    property reserved : Int32
+    property rgstate : UInt32[6]
+    def initialize(@cbSize : UInt32, @rcScrollBar : Win32cr::Foundation::RECT, @dxyLineButton : Int32, @xyThumbTop : Int32, @xyThumbBottom : Int32, @reserved : Int32, @rgstate : UInt32[6])
+    end
+  end
+
+  @[Extern]
+  struct ALTTABINFO
+    property cbSize : UInt32
+    property cItems : Int32
+    property cColumns : Int32
+    property cRows : Int32
+    property iColFocus : Int32
+    property iRowFocus : Int32
+    property cxItem : Int32
+    property cyItem : Int32
+    property ptStart : Win32cr::Foundation::POINT
+    def initialize(@cbSize : UInt32, @cItems : Int32, @cColumns : Int32, @cRows : Int32, @iColFocus : Int32, @iRowFocus : Int32, @cxItem : Int32, @cyItem : Int32, @ptStart : Win32cr::Foundation::POINT)
+    end
+  end
+
+  @[Extern]
+  struct CHANGEFILTERSTRUCT
+    property cbSize : UInt32
+    property ext_status : Win32cr::UI::WindowsAndMessaging::MSGFLTINFO_STATUS
+    def initialize(@cbSize : UInt32, @ext_status : Win32cr::UI::WindowsAndMessaging::MSGFLTINFO_STATUS)
+    end
+  end
+
+  @[Extern]
+  struct IndexedResourceQualifier
+    property name : Win32cr::Foundation::PWSTR
+    property value : Win32cr::Foundation::PWSTR
+    def initialize(@name : Win32cr::Foundation::PWSTR, @value : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct MrmResourceIndexerHandle
+    property handle : Void*
+    def initialize(@handle : Void*)
+    end
+  end
+
+  @[Extern]
+  struct MrmResourceIndexerMessage
+    property severity : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerMessageSeverity
+    property id : UInt32
+    property text : Win32cr::Foundation::PWSTR
+    def initialize(@severity : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerMessageSeverity, @id : UInt32, @text : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Link("user32")]
   @[Link("mrmsupport")]

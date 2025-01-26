@@ -264,539 +264,711 @@ module Win32cr::Storage::Vhd
   end
 
   @[Extern]
-  record VIRTUAL_STORAGE_TYPE,
-    device_id : UInt32,
-    vendor_id : LibC::GUID
+  struct VIRTUAL_STORAGE_TYPE
+    property device_id : UInt32
+    property vendor_id : LibC::GUID
+    def initialize(@device_id : UInt32, @vendor_id : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record OPEN_VIRTUAL_DISK_PARAMETERS,
-    version : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_VERSION,
-    anonymous : Anonymous_e__Union_ do
+  struct OPEN_VIRTUAL_DISK_PARAMETERS
+    property version : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_VERSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      version1 : Version1_e__Struct_,
-      version2 : Version2_e__Struct_,
-      version3 : Version3_e__Struct_ do
+    struct Anonymous_e__Union_
+    property version1 : Version1_e__Struct_
+    property version2 : Version2_e__Struct_
+    property version3 : Version3_e__Struct_
 
       # Nested Type Version3_e__Struct_
       @[Extern]
-      record Version3_e__Struct_,
-        get_info_only : Win32cr::Foundation::BOOL,
-        read_only : Win32cr::Foundation::BOOL,
-        resiliency_guid : LibC::GUID,
-        snapshot_id : LibC::GUID
+      struct Version3_e__Struct_
+    property get_info_only : Win32cr::Foundation::BOOL
+    property read_only : Win32cr::Foundation::BOOL
+    property resiliency_guid : LibC::GUID
+    property snapshot_id : LibC::GUID
+    def initialize(@get_info_only : Win32cr::Foundation::BOOL, @read_only : Win32cr::Foundation::BOOL, @resiliency_guid : LibC::GUID, @snapshot_id : LibC::GUID)
+    end
+      end
 
 
       # Nested Type Version1_e__Struct_
       @[Extern]
-      record Version1_e__Struct_,
-        rw_depth : UInt32
+      struct Version1_e__Struct_
+    property rw_depth : UInt32
+    def initialize(@rw_depth : UInt32)
+    end
+      end
 
 
       # Nested Type Version2_e__Struct_
       @[Extern]
-      record Version2_e__Struct_,
-        get_info_only : Win32cr::Foundation::BOOL,
-        read_only : Win32cr::Foundation::BOOL,
-        resiliency_guid : LibC::GUID
+      struct Version2_e__Struct_
+    property get_info_only : Win32cr::Foundation::BOOL
+    property read_only : Win32cr::Foundation::BOOL
+    property resiliency_guid : LibC::GUID
+    def initialize(@get_info_only : Win32cr::Foundation::BOOL, @read_only : Win32cr::Foundation::BOOL, @resiliency_guid : LibC::GUID)
+    end
+      end
 
+    def initialize(@version1 : Version1_e__Struct_, @version2 : Version2_e__Struct_, @version3 : Version3_e__Struct_)
+    end
     end
 
+    def initialize(@version : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_VERSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record CREATE_VIRTUAL_DISK_PARAMETERS,
-    version : Win32cr::Storage::Vhd::CREATE_VIRTUAL_DISK_VERSION,
-    anonymous : Anonymous_e__Union_ do
+  struct CREATE_VIRTUAL_DISK_PARAMETERS
+    property version : Win32cr::Storage::Vhd::CREATE_VIRTUAL_DISK_VERSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      version1 : Version1_e__Struct_,
-      version2 : Version2_e__Struct_,
-      version3 : Version3_e__Struct_,
-      version4 : Version4_e__Struct_ do
+    struct Anonymous_e__Union_
+    property version1 : Version1_e__Struct_
+    property version2 : Version2_e__Struct_
+    property version3 : Version3_e__Struct_
+    property version4 : Version4_e__Struct_
 
       # Nested Type Version4_e__Struct_
       @[Extern]
-      record Version4_e__Struct_,
-        unique_id : LibC::GUID,
-        maximum_size : UInt64,
-        block_size_in_bytes : UInt32,
-        sector_size_in_bytes : UInt32,
-        physical_sector_size_in_bytes : UInt32,
-        parent_path : Win32cr::Foundation::PWSTR,
-        source_path : Win32cr::Foundation::PWSTR,
-        open_flags : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_FLAG,
-        parent_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE,
-        source_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE,
-        resiliency_guid : LibC::GUID,
-        source_limit_path : Win32cr::Foundation::PWSTR,
-        backing_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE,
-        pmem_address_abstraction_type : LibC::GUID,
-        data_alignment : UInt64
+      struct Version4_e__Struct_
+    property unique_id : LibC::GUID
+    property maximum_size : UInt64
+    property block_size_in_bytes : UInt32
+    property sector_size_in_bytes : UInt32
+    property physical_sector_size_in_bytes : UInt32
+    property parent_path : Win32cr::Foundation::PWSTR
+    property source_path : Win32cr::Foundation::PWSTR
+    property open_flags : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_FLAG
+    property parent_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
+    property source_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
+    property resiliency_guid : LibC::GUID
+    property source_limit_path : Win32cr::Foundation::PWSTR
+    property backing_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
+    property pmem_address_abstraction_type : LibC::GUID
+    property data_alignment : UInt64
+    def initialize(@unique_id : LibC::GUID, @maximum_size : UInt64, @block_size_in_bytes : UInt32, @sector_size_in_bytes : UInt32, @physical_sector_size_in_bytes : UInt32, @parent_path : Win32cr::Foundation::PWSTR, @source_path : Win32cr::Foundation::PWSTR, @open_flags : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_FLAG, @parent_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE, @source_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE, @resiliency_guid : LibC::GUID, @source_limit_path : Win32cr::Foundation::PWSTR, @backing_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE, @pmem_address_abstraction_type : LibC::GUID, @data_alignment : UInt64)
+    end
+      end
 
 
       # Nested Type Version2_e__Struct_
       @[Extern]
-      record Version2_e__Struct_,
-        unique_id : LibC::GUID,
-        maximum_size : UInt64,
-        block_size_in_bytes : UInt32,
-        sector_size_in_bytes : UInt32,
-        physical_sector_size_in_bytes : UInt32,
-        parent_path : Win32cr::Foundation::PWSTR,
-        source_path : Win32cr::Foundation::PWSTR,
-        open_flags : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_FLAG,
-        parent_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE,
-        source_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE,
-        resiliency_guid : LibC::GUID
+      struct Version2_e__Struct_
+    property unique_id : LibC::GUID
+    property maximum_size : UInt64
+    property block_size_in_bytes : UInt32
+    property sector_size_in_bytes : UInt32
+    property physical_sector_size_in_bytes : UInt32
+    property parent_path : Win32cr::Foundation::PWSTR
+    property source_path : Win32cr::Foundation::PWSTR
+    property open_flags : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_FLAG
+    property parent_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
+    property source_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
+    property resiliency_guid : LibC::GUID
+    def initialize(@unique_id : LibC::GUID, @maximum_size : UInt64, @block_size_in_bytes : UInt32, @sector_size_in_bytes : UInt32, @physical_sector_size_in_bytes : UInt32, @parent_path : Win32cr::Foundation::PWSTR, @source_path : Win32cr::Foundation::PWSTR, @open_flags : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_FLAG, @parent_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE, @source_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE, @resiliency_guid : LibC::GUID)
+    end
+      end
 
 
       # Nested Type Version3_e__Struct_
       @[Extern]
-      record Version3_e__Struct_,
-        unique_id : LibC::GUID,
-        maximum_size : UInt64,
-        block_size_in_bytes : UInt32,
-        sector_size_in_bytes : UInt32,
-        physical_sector_size_in_bytes : UInt32,
-        parent_path : Win32cr::Foundation::PWSTR,
-        source_path : Win32cr::Foundation::PWSTR,
-        open_flags : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_FLAG,
-        parent_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE,
-        source_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE,
-        resiliency_guid : LibC::GUID,
-        source_limit_path : Win32cr::Foundation::PWSTR,
-        backing_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
+      struct Version3_e__Struct_
+    property unique_id : LibC::GUID
+    property maximum_size : UInt64
+    property block_size_in_bytes : UInt32
+    property sector_size_in_bytes : UInt32
+    property physical_sector_size_in_bytes : UInt32
+    property parent_path : Win32cr::Foundation::PWSTR
+    property source_path : Win32cr::Foundation::PWSTR
+    property open_flags : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_FLAG
+    property parent_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
+    property source_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
+    property resiliency_guid : LibC::GUID
+    property source_limit_path : Win32cr::Foundation::PWSTR
+    property backing_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
+    def initialize(@unique_id : LibC::GUID, @maximum_size : UInt64, @block_size_in_bytes : UInt32, @sector_size_in_bytes : UInt32, @physical_sector_size_in_bytes : UInt32, @parent_path : Win32cr::Foundation::PWSTR, @source_path : Win32cr::Foundation::PWSTR, @open_flags : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_FLAG, @parent_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE, @source_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE, @resiliency_guid : LibC::GUID, @source_limit_path : Win32cr::Foundation::PWSTR, @backing_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE)
+    end
+      end
 
 
       # Nested Type Version1_e__Struct_
       @[Extern]
-      record Version1_e__Struct_,
-        unique_id : LibC::GUID,
-        maximum_size : UInt64,
-        block_size_in_bytes : UInt32,
-        sector_size_in_bytes : UInt32,
-        parent_path : Win32cr::Foundation::PWSTR,
-        source_path : Win32cr::Foundation::PWSTR
+      struct Version1_e__Struct_
+    property unique_id : LibC::GUID
+    property maximum_size : UInt64
+    property block_size_in_bytes : UInt32
+    property sector_size_in_bytes : UInt32
+    property parent_path : Win32cr::Foundation::PWSTR
+    property source_path : Win32cr::Foundation::PWSTR
+    def initialize(@unique_id : LibC::GUID, @maximum_size : UInt64, @block_size_in_bytes : UInt32, @sector_size_in_bytes : UInt32, @parent_path : Win32cr::Foundation::PWSTR, @source_path : Win32cr::Foundation::PWSTR)
+    end
+      end
 
+    def initialize(@version1 : Version1_e__Struct_, @version2 : Version2_e__Struct_, @version3 : Version3_e__Struct_, @version4 : Version4_e__Struct_)
+    end
     end
 
+    def initialize(@version : Win32cr::Storage::Vhd::CREATE_VIRTUAL_DISK_VERSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record ATTACH_VIRTUAL_DISK_PARAMETERS,
-    version : Win32cr::Storage::Vhd::ATTACH_VIRTUAL_DISK_VERSION,
-    anonymous : Anonymous_e__Union_ do
+  struct ATTACH_VIRTUAL_DISK_PARAMETERS
+    property version : Win32cr::Storage::Vhd::ATTACH_VIRTUAL_DISK_VERSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      version1 : Version1_e__Struct_,
-      version2 : Version2_e__Struct_ do
+    struct Anonymous_e__Union_
+    property version1 : Version1_e__Struct_
+    property version2 : Version2_e__Struct_
 
       # Nested Type Version2_e__Struct_
       @[Extern]
-      record Version2_e__Struct_,
-        restricted_offset : UInt64,
-        restricted_length : UInt64
+      struct Version2_e__Struct_
+    property restricted_offset : UInt64
+    property restricted_length : UInt64
+    def initialize(@restricted_offset : UInt64, @restricted_length : UInt64)
+    end
+      end
 
 
       # Nested Type Version1_e__Struct_
       @[Extern]
-      record Version1_e__Struct_,
-        reserved : UInt32
+      struct Version1_e__Struct_
+    property reserved : UInt32
+    def initialize(@reserved : UInt32)
+    end
+      end
 
+    def initialize(@version1 : Version1_e__Struct_, @version2 : Version2_e__Struct_)
+    end
     end
 
+    def initialize(@version : Win32cr::Storage::Vhd::ATTACH_VIRTUAL_DISK_VERSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record STORAGE_DEPENDENCY_INFO_TYPE_1,
-    dependency_type_flags : Win32cr::Storage::Vhd::DEPENDENT_DISK_FLAG,
-    provider_specific_flags : UInt32,
-    virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
-
-  @[Extern]
-  record STORAGE_DEPENDENCY_INFO_TYPE_2,
-    dependency_type_flags : Win32cr::Storage::Vhd::DEPENDENT_DISK_FLAG,
-    provider_specific_flags : UInt32,
-    virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE,
-    ancestor_level : UInt32,
-    dependency_device_name : Win32cr::Foundation::PWSTR,
-    host_volume_name : Win32cr::Foundation::PWSTR,
-    dependent_volume_name : Win32cr::Foundation::PWSTR,
-    dependent_volume_relative_path : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record STORAGE_DEPENDENCY_INFO,
-    version : Win32cr::Storage::Vhd::STORAGE_DEPENDENCY_INFO_VERSION,
-    number_entries : UInt32,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      version1_entries : Win32cr::Storage::Vhd::STORAGE_DEPENDENCY_INFO_TYPE_1*,
-      version2_entries : Win32cr::Storage::Vhd::STORAGE_DEPENDENCY_INFO_TYPE_2*
-
+  struct STORAGE_DEPENDENCY_INFO_TYPE_1
+    property dependency_type_flags : Win32cr::Storage::Vhd::DEPENDENT_DISK_FLAG
+    property provider_specific_flags : UInt32
+    property virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
+    def initialize(@dependency_type_flags : Win32cr::Storage::Vhd::DEPENDENT_DISK_FLAG, @provider_specific_flags : UInt32, @virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE)
+    end
   end
 
   @[Extern]
-  record GET_VIRTUAL_DISK_INFO,
-    version : Win32cr::Storage::Vhd::GET_VIRTUAL_DISK_INFO_VERSION,
-    anonymous : Anonymous_e__Union_ do
+  struct STORAGE_DEPENDENCY_INFO_TYPE_2
+    property dependency_type_flags : Win32cr::Storage::Vhd::DEPENDENT_DISK_FLAG
+    property provider_specific_flags : UInt32
+    property virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
+    property ancestor_level : UInt32
+    property dependency_device_name : Win32cr::Foundation::PWSTR
+    property host_volume_name : Win32cr::Foundation::PWSTR
+    property dependent_volume_name : Win32cr::Foundation::PWSTR
+    property dependent_volume_relative_path : Win32cr::Foundation::PWSTR
+    def initialize(@dependency_type_flags : Win32cr::Storage::Vhd::DEPENDENT_DISK_FLAG, @provider_specific_flags : UInt32, @virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE, @ancestor_level : UInt32, @dependency_device_name : Win32cr::Foundation::PWSTR, @host_volume_name : Win32cr::Foundation::PWSTR, @dependent_volume_name : Win32cr::Foundation::PWSTR, @dependent_volume_relative_path : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct STORAGE_DEPENDENCY_INFO
+    property version : Win32cr::Storage::Vhd::STORAGE_DEPENDENCY_INFO_VERSION
+    property number_entries : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      size : Size_e__Struct_,
-      identifier : LibC::GUID,
-      parent_location : ParentLocation_e__Struct_,
-      parent_identifier : LibC::GUID,
-      parent_timestamp : UInt32,
-      virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE,
-      provider_subtype : UInt32,
-      is4k_aligned : Win32cr::Foundation::BOOL,
-      is_loaded : Win32cr::Foundation::BOOL,
-      physical_disk : PhysicalDisk_e__Struct_,
-      vhd_physical_sector_size : UInt32,
-      smallest_safe_virtual_size : UInt64,
-      fragmentation_percentage : UInt32,
-      virtual_disk_id : LibC::GUID,
-      change_tracking_state : ChangeTrackingState_e__Struct_ do
+    struct Anonymous_e__Union_
+    property version1_entries : Win32cr::Storage::Vhd::STORAGE_DEPENDENCY_INFO_TYPE_1*
+    property version2_entries : Win32cr::Storage::Vhd::STORAGE_DEPENDENCY_INFO_TYPE_2*
+    def initialize(@version1_entries : Win32cr::Storage::Vhd::STORAGE_DEPENDENCY_INFO_TYPE_1*, @version2_entries : Win32cr::Storage::Vhd::STORAGE_DEPENDENCY_INFO_TYPE_2*)
+    end
+    end
+
+    def initialize(@version : Win32cr::Storage::Vhd::STORAGE_DEPENDENCY_INFO_VERSION, @number_entries : UInt32, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct GET_VIRTUAL_DISK_INFO
+    property version : Win32cr::Storage::Vhd::GET_VIRTUAL_DISK_INFO_VERSION
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property size : Size_e__Struct_
+    property identifier : LibC::GUID
+    property parent_location : ParentLocation_e__Struct_
+    property parent_identifier : LibC::GUID
+    property parent_timestamp : UInt32
+    property virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
+    property provider_subtype : UInt32
+    property is4k_aligned : Win32cr::Foundation::BOOL
+    property is_loaded : Win32cr::Foundation::BOOL
+    property physical_disk : PhysicalDisk_e__Struct_
+    property vhd_physical_sector_size : UInt32
+    property smallest_safe_virtual_size : UInt64
+    property fragmentation_percentage : UInt32
+    property virtual_disk_id : LibC::GUID
+    property change_tracking_state : ChangeTrackingState_e__Struct_
 
       # Nested Type PhysicalDisk_e__Struct_
       @[Extern]
-      record PhysicalDisk_e__Struct_,
-        logical_sector_size : UInt32,
-        physical_sector_size : UInt32,
-        is_remote : Win32cr::Foundation::BOOL
+      struct PhysicalDisk_e__Struct_
+    property logical_sector_size : UInt32
+    property physical_sector_size : UInt32
+    property is_remote : Win32cr::Foundation::BOOL
+    def initialize(@logical_sector_size : UInt32, @physical_sector_size : UInt32, @is_remote : Win32cr::Foundation::BOOL)
+    end
+      end
 
 
       # Nested Type Size_e__Struct_
       @[Extern]
-      record Size_e__Struct_,
-        virtual_size : UInt64,
-        physical_size : UInt64,
-        block_size : UInt32,
-        sector_size : UInt32
+      struct Size_e__Struct_
+    property virtual_size : UInt64
+    property physical_size : UInt64
+    property block_size : UInt32
+    property sector_size : UInt32
+    def initialize(@virtual_size : UInt64, @physical_size : UInt64, @block_size : UInt32, @sector_size : UInt32)
+    end
+      end
 
 
       # Nested Type ChangeTrackingState_e__Struct_
       @[Extern]
-      record ChangeTrackingState_e__Struct_,
-        enabled : Win32cr::Foundation::BOOL,
-        newer_changes : Win32cr::Foundation::BOOL,
-        most_recent_id : UInt16*
+      struct ChangeTrackingState_e__Struct_
+    property enabled : Win32cr::Foundation::BOOL
+    property newer_changes : Win32cr::Foundation::BOOL
+    property most_recent_id : UInt16*
+    def initialize(@enabled : Win32cr::Foundation::BOOL, @newer_changes : Win32cr::Foundation::BOOL, @most_recent_id : UInt16*)
+    end
+      end
 
 
       # Nested Type ParentLocation_e__Struct_
       @[Extern]
-      record ParentLocation_e__Struct_,
-        parent_resolved : Win32cr::Foundation::BOOL,
-        parent_location_buffer : UInt16*
+      struct ParentLocation_e__Struct_
+    property parent_resolved : Win32cr::Foundation::BOOL
+    property parent_location_buffer : UInt16*
+    def initialize(@parent_resolved : Win32cr::Foundation::BOOL, @parent_location_buffer : UInt16*)
+    end
+      end
 
+    def initialize(@size : Size_e__Struct_, @identifier : LibC::GUID, @parent_location : ParentLocation_e__Struct_, @parent_identifier : LibC::GUID, @parent_timestamp : UInt32, @virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE, @provider_subtype : UInt32, @is4k_aligned : Win32cr::Foundation::BOOL, @is_loaded : Win32cr::Foundation::BOOL, @physical_disk : PhysicalDisk_e__Struct_, @vhd_physical_sector_size : UInt32, @smallest_safe_virtual_size : UInt64, @fragmentation_percentage : UInt32, @virtual_disk_id : LibC::GUID, @change_tracking_state : ChangeTrackingState_e__Struct_)
+    end
     end
 
+    def initialize(@version : Win32cr::Storage::Vhd::GET_VIRTUAL_DISK_INFO_VERSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record SET_VIRTUAL_DISK_INFO,
-    version : Win32cr::Storage::Vhd::SET_VIRTUAL_DISK_INFO_VERSION,
-    anonymous : Anonymous_e__Union_ do
+  struct SET_VIRTUAL_DISK_INFO
+    property version : Win32cr::Storage::Vhd::SET_VIRTUAL_DISK_INFO_VERSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      parent_file_path : Win32cr::Foundation::PWSTR,
-      unique_identifier : LibC::GUID,
-      parent_path_with_depth_info : ParentPathWithDepthInfo_e__Struct_,
-      vhd_physical_sector_size : UInt32,
-      virtual_disk_id : LibC::GUID,
-      change_tracking_enabled : Win32cr::Foundation::BOOL,
-      parent_locator : ParentLocator_e__Struct_ do
+    struct Anonymous_e__Union_
+    property parent_file_path : Win32cr::Foundation::PWSTR
+    property unique_identifier : LibC::GUID
+    property parent_path_with_depth_info : ParentPathWithDepthInfo_e__Struct_
+    property vhd_physical_sector_size : UInt32
+    property virtual_disk_id : LibC::GUID
+    property change_tracking_enabled : Win32cr::Foundation::BOOL
+    property parent_locator : ParentLocator_e__Struct_
 
       # Nested Type ParentPathWithDepthInfo_e__Struct_
       @[Extern]
-      record ParentPathWithDepthInfo_e__Struct_,
-        child_depth : UInt32,
-        parent_file_path : Win32cr::Foundation::PWSTR
+      struct ParentPathWithDepthInfo_e__Struct_
+    property child_depth : UInt32
+    property parent_file_path : Win32cr::Foundation::PWSTR
+    def initialize(@child_depth : UInt32, @parent_file_path : Win32cr::Foundation::PWSTR)
+    end
+      end
 
 
       # Nested Type ParentLocator_e__Struct_
       @[Extern]
-      record ParentLocator_e__Struct_,
-        linkage_id : LibC::GUID,
-        parent_file_path : Win32cr::Foundation::PWSTR
+      struct ParentLocator_e__Struct_
+    property linkage_id : LibC::GUID
+    property parent_file_path : Win32cr::Foundation::PWSTR
+    def initialize(@linkage_id : LibC::GUID, @parent_file_path : Win32cr::Foundation::PWSTR)
+    end
+      end
 
+    def initialize(@parent_file_path : Win32cr::Foundation::PWSTR, @unique_identifier : LibC::GUID, @parent_path_with_depth_info : ParentPathWithDepthInfo_e__Struct_, @vhd_physical_sector_size : UInt32, @virtual_disk_id : LibC::GUID, @change_tracking_enabled : Win32cr::Foundation::BOOL, @parent_locator : ParentLocator_e__Struct_)
+    end
     end
 
+    def initialize(@version : Win32cr::Storage::Vhd::SET_VIRTUAL_DISK_INFO_VERSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record VIRTUAL_DISK_PROGRESS,
-    operation_status : UInt32,
-    current_value : UInt64,
-    completion_value : UInt64
+  struct VIRTUAL_DISK_PROGRESS
+    property operation_status : UInt32
+    property current_value : UInt64
+    property completion_value : UInt64
+    def initialize(@operation_status : UInt32, @current_value : UInt64, @completion_value : UInt64)
+    end
+  end
 
   @[Extern]
-  record COMPACT_VIRTUAL_DISK_PARAMETERS,
-    version : Win32cr::Storage::Vhd::COMPACT_VIRTUAL_DISK_VERSION,
-    anonymous : Anonymous_e__Union_ do
+  struct COMPACT_VIRTUAL_DISK_PARAMETERS
+    property version : Win32cr::Storage::Vhd::COMPACT_VIRTUAL_DISK_VERSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      version1 : Version1_e__Struct_ do
+    struct Anonymous_e__Union_
+    property version1 : Version1_e__Struct_
 
       # Nested Type Version1_e__Struct_
       @[Extern]
-      record Version1_e__Struct_,
-        reserved : UInt32
+      struct Version1_e__Struct_
+    property reserved : UInt32
+    def initialize(@reserved : UInt32)
+    end
+      end
 
+    def initialize(@version1 : Version1_e__Struct_)
+    end
     end
 
+    def initialize(@version : Win32cr::Storage::Vhd::COMPACT_VIRTUAL_DISK_VERSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record MERGE_VIRTUAL_DISK_PARAMETERS,
-    version : Win32cr::Storage::Vhd::MERGE_VIRTUAL_DISK_VERSION,
-    anonymous : Anonymous_e__Union_ do
+  struct MERGE_VIRTUAL_DISK_PARAMETERS
+    property version : Win32cr::Storage::Vhd::MERGE_VIRTUAL_DISK_VERSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      version1 : Version1_e__Struct_,
-      version2 : Version2_e__Struct_ do
+    struct Anonymous_e__Union_
+    property version1 : Version1_e__Struct_
+    property version2 : Version2_e__Struct_
 
       # Nested Type Version2_e__Struct_
       @[Extern]
-      record Version2_e__Struct_,
-        merge_source_depth : UInt32,
-        merge_target_depth : UInt32
+      struct Version2_e__Struct_
+    property merge_source_depth : UInt32
+    property merge_target_depth : UInt32
+    def initialize(@merge_source_depth : UInt32, @merge_target_depth : UInt32)
+    end
+      end
 
 
       # Nested Type Version1_e__Struct_
       @[Extern]
-      record Version1_e__Struct_,
-        merge_depth : UInt32
+      struct Version1_e__Struct_
+    property merge_depth : UInt32
+    def initialize(@merge_depth : UInt32)
+    end
+      end
 
+    def initialize(@version1 : Version1_e__Struct_, @version2 : Version2_e__Struct_)
+    end
     end
 
+    def initialize(@version : Win32cr::Storage::Vhd::MERGE_VIRTUAL_DISK_VERSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record EXPAND_VIRTUAL_DISK_PARAMETERS,
-    version : Win32cr::Storage::Vhd::EXPAND_VIRTUAL_DISK_VERSION,
-    anonymous : Anonymous_e__Union_ do
+  struct EXPAND_VIRTUAL_DISK_PARAMETERS
+    property version : Win32cr::Storage::Vhd::EXPAND_VIRTUAL_DISK_VERSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      version1 : Version1_e__Struct_ do
+    struct Anonymous_e__Union_
+    property version1 : Version1_e__Struct_
 
       # Nested Type Version1_e__Struct_
       @[Extern]
-      record Version1_e__Struct_,
-        new_size : UInt64
+      struct Version1_e__Struct_
+    property new_size : UInt64
+    def initialize(@new_size : UInt64)
+    end
+      end
 
+    def initialize(@version1 : Version1_e__Struct_)
+    end
     end
 
+    def initialize(@version : Win32cr::Storage::Vhd::EXPAND_VIRTUAL_DISK_VERSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record RESIZE_VIRTUAL_DISK_PARAMETERS,
-    version : Win32cr::Storage::Vhd::RESIZE_VIRTUAL_DISK_VERSION,
-    anonymous : Anonymous_e__Union_ do
+  struct RESIZE_VIRTUAL_DISK_PARAMETERS
+    property version : Win32cr::Storage::Vhd::RESIZE_VIRTUAL_DISK_VERSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      version1 : Version1_e__Struct_ do
+    struct Anonymous_e__Union_
+    property version1 : Version1_e__Struct_
 
       # Nested Type Version1_e__Struct_
       @[Extern]
-      record Version1_e__Struct_,
-        new_size : UInt64
+      struct Version1_e__Struct_
+    property new_size : UInt64
+    def initialize(@new_size : UInt64)
+    end
+      end
 
+    def initialize(@version1 : Version1_e__Struct_)
+    end
     end
 
+    def initialize(@version : Win32cr::Storage::Vhd::RESIZE_VIRTUAL_DISK_VERSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record MIRROR_VIRTUAL_DISK_PARAMETERS,
-    version : Win32cr::Storage::Vhd::MIRROR_VIRTUAL_DISK_VERSION,
-    anonymous : Anonymous_e__Union_ do
+  struct MIRROR_VIRTUAL_DISK_PARAMETERS
+    property version : Win32cr::Storage::Vhd::MIRROR_VIRTUAL_DISK_VERSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      version1 : Version1_e__Struct_ do
+    struct Anonymous_e__Union_
+    property version1 : Version1_e__Struct_
 
       # Nested Type Version1_e__Struct_
       @[Extern]
-      record Version1_e__Struct_,
-        mirror_virtual_disk_path : Win32cr::Foundation::PWSTR
+      struct Version1_e__Struct_
+    property mirror_virtual_disk_path : Win32cr::Foundation::PWSTR
+    def initialize(@mirror_virtual_disk_path : Win32cr::Foundation::PWSTR)
+    end
+      end
 
+    def initialize(@version1 : Version1_e__Struct_)
+    end
     end
 
+    def initialize(@version : Win32cr::Storage::Vhd::MIRROR_VIRTUAL_DISK_VERSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record QUERY_CHANGES_VIRTUAL_DISK_RANGE,
-    byte_offset : UInt64,
-    byte_length : UInt64,
-    reserved : UInt64
+  struct QUERY_CHANGES_VIRTUAL_DISK_RANGE
+    property byte_offset : UInt64
+    property byte_length : UInt64
+    property reserved : UInt64
+    def initialize(@byte_offset : UInt64, @byte_length : UInt64, @reserved : UInt64)
+    end
+  end
 
   @[Extern]
-  record TAKE_SNAPSHOT_VHDSET_PARAMETERS,
-    version : Win32cr::Storage::Vhd::TAKE_SNAPSHOT_VHDSET_VERSION,
-    anonymous : Anonymous_e__Union_ do
+  struct TAKE_SNAPSHOT_VHDSET_PARAMETERS
+    property version : Win32cr::Storage::Vhd::TAKE_SNAPSHOT_VHDSET_VERSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      version1 : Version1_e__Struct_ do
+    struct Anonymous_e__Union_
+    property version1 : Version1_e__Struct_
 
       # Nested Type Version1_e__Struct_
       @[Extern]
-      record Version1_e__Struct_,
-        snapshot_id : LibC::GUID
+      struct Version1_e__Struct_
+    property snapshot_id : LibC::GUID
+    def initialize(@snapshot_id : LibC::GUID)
+    end
+      end
 
+    def initialize(@version1 : Version1_e__Struct_)
+    end
     end
 
+    def initialize(@version : Win32cr::Storage::Vhd::TAKE_SNAPSHOT_VHDSET_VERSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record DELETE_SNAPSHOT_VHDSET_PARAMETERS,
-    version : Win32cr::Storage::Vhd::DELETE_SNAPSHOT_VHDSET_VERSION,
-    anonymous : Anonymous_e__Union_ do
+  struct DELETE_SNAPSHOT_VHDSET_PARAMETERS
+    property version : Win32cr::Storage::Vhd::DELETE_SNAPSHOT_VHDSET_VERSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      version1 : Version1_e__Struct_ do
+    struct Anonymous_e__Union_
+    property version1 : Version1_e__Struct_
 
       # Nested Type Version1_e__Struct_
       @[Extern]
-      record Version1_e__Struct_,
-        snapshot_id : LibC::GUID
+      struct Version1_e__Struct_
+    property snapshot_id : LibC::GUID
+    def initialize(@snapshot_id : LibC::GUID)
+    end
+      end
 
+    def initialize(@version1 : Version1_e__Struct_)
+    end
     end
 
+    def initialize(@version : Win32cr::Storage::Vhd::DELETE_SNAPSHOT_VHDSET_VERSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record MODIFY_VHDSET_PARAMETERS,
-    version : Win32cr::Storage::Vhd::MODIFY_VHDSET_VERSION,
-    anonymous : Anonymous_e__Union_ do
+  struct MODIFY_VHDSET_PARAMETERS
+    property version : Win32cr::Storage::Vhd::MODIFY_VHDSET_VERSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      snapshot_path : SnapshotPath_e__Struct_,
-      snapshot_id : LibC::GUID,
-      default_file_path : Win32cr::Foundation::PWSTR do
+    struct Anonymous_e__Union_
+    property snapshot_path : SnapshotPath_e__Struct_
+    property snapshot_id : LibC::GUID
+    property default_file_path : Win32cr::Foundation::PWSTR
 
       # Nested Type SnapshotPath_e__Struct_
       @[Extern]
-      record SnapshotPath_e__Struct_,
-        snapshot_id : LibC::GUID,
-        snapshot_file_path : Win32cr::Foundation::PWSTR
+      struct SnapshotPath_e__Struct_
+    property snapshot_id : LibC::GUID
+    property snapshot_file_path : Win32cr::Foundation::PWSTR
+    def initialize(@snapshot_id : LibC::GUID, @snapshot_file_path : Win32cr::Foundation::PWSTR)
+    end
+      end
 
+    def initialize(@snapshot_path : SnapshotPath_e__Struct_, @snapshot_id : LibC::GUID, @default_file_path : Win32cr::Foundation::PWSTR)
+    end
     end
 
+    def initialize(@version : Win32cr::Storage::Vhd::MODIFY_VHDSET_VERSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record APPLY_SNAPSHOT_VHDSET_PARAMETERS,
-    version : Win32cr::Storage::Vhd::APPLY_SNAPSHOT_VHDSET_VERSION,
-    anonymous : Anonymous_e__Union_ do
+  struct APPLY_SNAPSHOT_VHDSET_PARAMETERS
+    property version : Win32cr::Storage::Vhd::APPLY_SNAPSHOT_VHDSET_VERSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      version1 : Version1_e__Struct_ do
+    struct Anonymous_e__Union_
+    property version1 : Version1_e__Struct_
 
       # Nested Type Version1_e__Struct_
       @[Extern]
-      record Version1_e__Struct_,
-        snapshot_id : LibC::GUID,
-        leaf_snapshot_id : LibC::GUID
+      struct Version1_e__Struct_
+    property snapshot_id : LibC::GUID
+    property leaf_snapshot_id : LibC::GUID
+    def initialize(@snapshot_id : LibC::GUID, @leaf_snapshot_id : LibC::GUID)
+    end
+      end
 
+    def initialize(@version1 : Version1_e__Struct_)
+    end
     end
 
+    def initialize(@version : Win32cr::Storage::Vhd::APPLY_SNAPSHOT_VHDSET_VERSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record RAW_SCSI_VIRTUAL_DISK_PARAMETERS,
-    version : Win32cr::Storage::Vhd::RAW_SCSI_VIRTUAL_DISK_VERSION,
-    anonymous : Anonymous_e__Union_ do
+  struct RAW_SCSI_VIRTUAL_DISK_PARAMETERS
+    property version : Win32cr::Storage::Vhd::RAW_SCSI_VIRTUAL_DISK_VERSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      version1 : Version1_e__Struct_ do
+    struct Anonymous_e__Union_
+    property version1 : Version1_e__Struct_
 
       # Nested Type Version1_e__Struct_
       @[Extern]
-      record Version1_e__Struct_,
-        rsvd_handle : Win32cr::Foundation::BOOL,
-        data_in : UInt8,
-        cdb_length : UInt8,
-        sense_info_length : UInt8,
-        srb_flags : UInt32,
-        data_transfer_length : UInt32,
-        data_buffer : Void*,
-        sense_info : UInt8*,
-        cdb : UInt8*
+      struct Version1_e__Struct_
+    property rsvd_handle : Win32cr::Foundation::BOOL
+    property data_in : UInt8
+    property cdb_length : UInt8
+    property sense_info_length : UInt8
+    property srb_flags : UInt32
+    property data_transfer_length : UInt32
+    property data_buffer : Void*
+    property sense_info : UInt8*
+    property cdb : UInt8*
+    def initialize(@rsvd_handle : Win32cr::Foundation::BOOL, @data_in : UInt8, @cdb_length : UInt8, @sense_info_length : UInt8, @srb_flags : UInt32, @data_transfer_length : UInt32, @data_buffer : Void*, @sense_info : UInt8*, @cdb : UInt8*)
+    end
+      end
 
+    def initialize(@version1 : Version1_e__Struct_)
+    end
     end
 
+    def initialize(@version : Win32cr::Storage::Vhd::RAW_SCSI_VIRTUAL_DISK_VERSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record RAW_SCSI_VIRTUAL_DISK_RESPONSE,
-    version : Win32cr::Storage::Vhd::RAW_SCSI_VIRTUAL_DISK_VERSION,
-    anonymous : Anonymous_e__Union_ do
+  struct RAW_SCSI_VIRTUAL_DISK_RESPONSE
+    property version : Win32cr::Storage::Vhd::RAW_SCSI_VIRTUAL_DISK_VERSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      version1 : Version1_e__Struct_ do
+    struct Anonymous_e__Union_
+    property version1 : Version1_e__Struct_
 
       # Nested Type Version1_e__Struct_
       @[Extern]
-      record Version1_e__Struct_,
-        scsi_status : UInt8,
-        sense_info_length : UInt8,
-        data_transfer_length : UInt32
+      struct Version1_e__Struct_
+    property scsi_status : UInt8
+    property sense_info_length : UInt8
+    property data_transfer_length : UInt32
+    def initialize(@scsi_status : UInt8, @sense_info_length : UInt8, @data_transfer_length : UInt32)
+    end
+      end
 
+    def initialize(@version1 : Version1_e__Struct_)
+    end
     end
 
+    def initialize(@version : Win32cr::Storage::Vhd::RAW_SCSI_VIRTUAL_DISK_VERSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record FORK_VIRTUAL_DISK_PARAMETERS,
-    version : Win32cr::Storage::Vhd::FORK_VIRTUAL_DISK_VERSION,
-    anonymous : Anonymous_e__Union_ do
+  struct FORK_VIRTUAL_DISK_PARAMETERS
+    property version : Win32cr::Storage::Vhd::FORK_VIRTUAL_DISK_VERSION
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      version1 : Version1_e__Struct_ do
+    struct Anonymous_e__Union_
+    property version1 : Version1_e__Struct_
 
       # Nested Type Version1_e__Struct_
       @[Extern]
-      record Version1_e__Struct_,
-        forked_virtual_disk_path : Win32cr::Foundation::PWSTR
+      struct Version1_e__Struct_
+    property forked_virtual_disk_path : Win32cr::Foundation::PWSTR
+    def initialize(@forked_virtual_disk_path : Win32cr::Foundation::PWSTR)
+    end
+      end
 
+    def initialize(@version1 : Version1_e__Struct_)
+    end
     end
 
+    def initialize(@version : Win32cr::Storage::Vhd::FORK_VIRTUAL_DISK_VERSION, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Link("virtdisk")]

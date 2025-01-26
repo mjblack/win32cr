@@ -1,7 +1,7 @@
 require "./../foundation.cr"
 
 module Win32cr::System::RestartManager
-  alias RM_WRITE_STATUS_CALLBACK = Proc(UInt32, Void)*
+  alias RM_WRITE_STATUS_CALLBACK = Proc(UInt32, Void)
 
   CCH_RM_SESSION_KEY = 32_u32
   CCH_RM_MAX_APP_NAME = 255_u32
@@ -54,34 +54,45 @@ module Win32cr::System::RestartManager
   end
 
   @[Extern]
-  record RM_UNIQUE_PROCESS,
-    dwProcessId : UInt32,
-    process_start_time : Win32cr::Foundation::FILETIME
+  struct RM_UNIQUE_PROCESS
+    property dwProcessId : UInt32
+    property process_start_time : Win32cr::Foundation::FILETIME
+    def initialize(@dwProcessId : UInt32, @process_start_time : Win32cr::Foundation::FILETIME)
+    end
+  end
 
   @[Extern]
-  record RM_PROCESS_INFO,
-    process : Win32cr::System::RestartManager::RM_UNIQUE_PROCESS,
-    strAppName : UInt16[256],
-    strServiceShortName : UInt16[64],
-    application_type : Win32cr::System::RestartManager::RM_APP_TYPE,
-    app_status : UInt32,
-    ts_session_id : UInt32,
-    bRestartable : Win32cr::Foundation::BOOL
+  struct RM_PROCESS_INFO
+    property process : Win32cr::System::RestartManager::RM_UNIQUE_PROCESS
+    property strAppName : UInt16[256]
+    property strServiceShortName : UInt16[64]
+    property application_type : Win32cr::System::RestartManager::RM_APP_TYPE
+    property app_status : UInt32
+    property ts_session_id : UInt32
+    property bRestartable : Win32cr::Foundation::BOOL
+    def initialize(@process : Win32cr::System::RestartManager::RM_UNIQUE_PROCESS, @strAppName : UInt16[256], @strServiceShortName : UInt16[64], @application_type : Win32cr::System::RestartManager::RM_APP_TYPE, @app_status : UInt32, @ts_session_id : UInt32, @bRestartable : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record RM_FILTER_INFO,
-    filter_action : Win32cr::System::RestartManager::RM_FILTER_ACTION,
-    filter_trigger : Win32cr::System::RestartManager::RM_FILTER_TRIGGER,
-    cbNextOffset : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct RM_FILTER_INFO
+    property filter_action : Win32cr::System::RestartManager::RM_FILTER_ACTION
+    property filter_trigger : Win32cr::System::RestartManager::RM_FILTER_TRIGGER
+    property cbNextOffset : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      strFilename : Win32cr::Foundation::PWSTR,
-      process : Win32cr::System::RestartManager::RM_UNIQUE_PROCESS,
-      strServiceShortName : Win32cr::Foundation::PWSTR
+    struct Anonymous_e__Union_
+    property strFilename : Win32cr::Foundation::PWSTR
+    property process : Win32cr::System::RestartManager::RM_UNIQUE_PROCESS
+    property strServiceShortName : Win32cr::Foundation::PWSTR
+    def initialize(@strFilename : Win32cr::Foundation::PWSTR, @process : Win32cr::System::RestartManager::RM_UNIQUE_PROCESS, @strServiceShortName : Win32cr::Foundation::PWSTR)
+    end
+    end
 
+    def initialize(@filter_action : Win32cr::System::RestartManager::RM_FILTER_ACTION, @filter_trigger : Win32cr::System::RestartManager::RM_FILTER_TRIGGER, @cbNextOffset : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Link("rstrtmgr")]

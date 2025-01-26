@@ -3,7 +3,7 @@ require "./../security.cr"
 
 module Win32cr::System::Console
   alias HPCON = LibC::IntPtrT
-  alias PHANDLER_ROUTINE = Proc(UInt32, Win32cr::Foundation::BOOL)*
+  alias PHANDLER_ROUTINE = Proc(UInt32, Win32cr::Foundation::BOOL)
 
   CONSOLE_TEXTMODE_BUFFER = 1_u32
   ATTACH_PARENT_PROCESS = 4294967295_u32
@@ -99,140 +99,197 @@ module Win32cr::System::Console
   end
 
   @[Extern]
-  record COORD,
-    x : Int16,
-    y : Int16
+  struct COORD
+    property x : Int16
+    property y : Int16
+    def initialize(@x : Int16, @y : Int16)
+    end
+  end
 
   @[Extern]
-  record SMALL_RECT,
-    left : Int16,
-    top : Int16,
-    right : Int16,
-    bottom : Int16
+  struct SMALL_RECT
+    property left : Int16
+    property top : Int16
+    property right : Int16
+    property bottom : Int16
+    def initialize(@left : Int16, @top : Int16, @right : Int16, @bottom : Int16)
+    end
+  end
 
   @[Extern]
-  record KEY_EVENT_RECORD,
-    bKeyDown : Win32cr::Foundation::BOOL,
-    wRepeatCount : UInt16,
-    wVirtualKeyCode : UInt16,
-    wVirtualScanCode : UInt16,
-    uChar : Uchar_e__union_,
-    dwControlKeyState : UInt32 do
+  struct KEY_EVENT_RECORD
+    property bKeyDown : Win32cr::Foundation::BOOL
+    property wRepeatCount : UInt16
+    property wVirtualKeyCode : UInt16
+    property wVirtualScanCode : UInt16
+    property uChar : Uchar_e__union_
+    property dwControlKeyState : UInt32
 
     # Nested Type Uchar_e__union_
     @[Extern(union: true)]
-    record Uchar_e__union_,
-      unicode_char : UInt16,
-      ascii_char : Win32cr::Foundation::CHAR
+    struct Uchar_e__union_
+    property unicode_char : UInt16
+    property ascii_char : Win32cr::Foundation::CHAR
+    def initialize(@unicode_char : UInt16, @ascii_char : Win32cr::Foundation::CHAR)
+    end
+    end
 
+    def initialize(@bKeyDown : Win32cr::Foundation::BOOL, @wRepeatCount : UInt16, @wVirtualKeyCode : UInt16, @wVirtualScanCode : UInt16, @uChar : Uchar_e__union_, @dwControlKeyState : UInt32)
+    end
   end
 
   @[Extern]
-  record MOUSE_EVENT_RECORD,
-    dwMousePosition : Win32cr::System::Console::COORD,
-    dwButtonState : UInt32,
-    dwControlKeyState : UInt32,
-    dwEventFlags : UInt32
+  struct MOUSE_EVENT_RECORD
+    property dwMousePosition : Win32cr::System::Console::COORD
+    property dwButtonState : UInt32
+    property dwControlKeyState : UInt32
+    property dwEventFlags : UInt32
+    def initialize(@dwMousePosition : Win32cr::System::Console::COORD, @dwButtonState : UInt32, @dwControlKeyState : UInt32, @dwEventFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record WINDOW_BUFFER_SIZE_RECORD,
-    dwSize : Win32cr::System::Console::COORD
+  struct WINDOW_BUFFER_SIZE_RECORD
+    property dwSize : Win32cr::System::Console::COORD
+    def initialize(@dwSize : Win32cr::System::Console::COORD)
+    end
+  end
 
   @[Extern]
-  record MENU_EVENT_RECORD,
-    dwCommandId : UInt32
+  struct MENU_EVENT_RECORD
+    property dwCommandId : UInt32
+    def initialize(@dwCommandId : UInt32)
+    end
+  end
 
   @[Extern]
-  record FOCUS_EVENT_RECORD,
-    bSetFocus : Win32cr::Foundation::BOOL
+  struct FOCUS_EVENT_RECORD
+    property bSetFocus : Win32cr::Foundation::BOOL
+    def initialize(@bSetFocus : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record INPUT_RECORD,
-    event_type : UInt16,
-    event : Event_e__Union_ do
+  struct INPUT_RECORD
+    property event_type : UInt16
+    property event : Event_e__Union_
 
     # Nested Type Event_e__Union_
     @[Extern(union: true)]
-    record Event_e__Union_,
-      key_event : Win32cr::System::Console::KEY_EVENT_RECORD,
-      mouse_event : Win32cr::System::Console::MOUSE_EVENT_RECORD,
-      window_buffer_size_event : Win32cr::System::Console::WINDOW_BUFFER_SIZE_RECORD,
-      menu_event : Win32cr::System::Console::MENU_EVENT_RECORD,
-      focus_event : Win32cr::System::Console::FOCUS_EVENT_RECORD
+    struct Event_e__Union_
+    property key_event : Win32cr::System::Console::KEY_EVENT_RECORD
+    property mouse_event : Win32cr::System::Console::MOUSE_EVENT_RECORD
+    property window_buffer_size_event : Win32cr::System::Console::WINDOW_BUFFER_SIZE_RECORD
+    property menu_event : Win32cr::System::Console::MENU_EVENT_RECORD
+    property focus_event : Win32cr::System::Console::FOCUS_EVENT_RECORD
+    def initialize(@key_event : Win32cr::System::Console::KEY_EVENT_RECORD, @mouse_event : Win32cr::System::Console::MOUSE_EVENT_RECORD, @window_buffer_size_event : Win32cr::System::Console::WINDOW_BUFFER_SIZE_RECORD, @menu_event : Win32cr::System::Console::MENU_EVENT_RECORD, @focus_event : Win32cr::System::Console::FOCUS_EVENT_RECORD)
+    end
+    end
 
+    def initialize(@event_type : UInt16, @event : Event_e__Union_)
+    end
   end
 
   @[Extern]
-  record CHAR_INFO,
-    char : Char_e__Union_,
-    attributes : UInt16 do
+  struct CHAR_INFO
+    property char : Char_e__Union_
+    property attributes : UInt16
 
     # Nested Type Char_e__Union_
     @[Extern(union: true)]
-    record Char_e__Union_,
-      unicode_char : UInt16,
-      ascii_char : Win32cr::Foundation::CHAR
+    struct Char_e__Union_
+    property unicode_char : UInt16
+    property ascii_char : Win32cr::Foundation::CHAR
+    def initialize(@unicode_char : UInt16, @ascii_char : Win32cr::Foundation::CHAR)
+    end
+    end
 
+    def initialize(@char : Char_e__Union_, @attributes : UInt16)
+    end
   end
 
   @[Extern]
-  record CONSOLE_FONT_INFO,
-    nFont : UInt32,
-    dwFontSize : Win32cr::System::Console::COORD
+  struct CONSOLE_FONT_INFO
+    property nFont : UInt32
+    property dwFontSize : Win32cr::System::Console::COORD
+    def initialize(@nFont : UInt32, @dwFontSize : Win32cr::System::Console::COORD)
+    end
+  end
 
   @[Extern]
-  record CONSOLE_READCONSOLE_CONTROL,
-    nLength : UInt32,
-    nInitialChars : UInt32,
-    dwCtrlWakeupMask : UInt32,
-    dwControlKeyState : UInt32
+  struct CONSOLE_READCONSOLE_CONTROL
+    property nLength : UInt32
+    property nInitialChars : UInt32
+    property dwCtrlWakeupMask : UInt32
+    property dwControlKeyState : UInt32
+    def initialize(@nLength : UInt32, @nInitialChars : UInt32, @dwCtrlWakeupMask : UInt32, @dwControlKeyState : UInt32)
+    end
+  end
 
   @[Extern]
-  record CONSOLE_CURSOR_INFO,
-    dwSize : UInt32,
-    bVisible : Win32cr::Foundation::BOOL
+  struct CONSOLE_CURSOR_INFO
+    property dwSize : UInt32
+    property bVisible : Win32cr::Foundation::BOOL
+    def initialize(@dwSize : UInt32, @bVisible : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record CONSOLE_SCREEN_BUFFER_INFO,
-    dwSize : Win32cr::System::Console::COORD,
-    dwCursorPosition : Win32cr::System::Console::COORD,
-    wAttributes : Win32cr::System::Console::CONSOLE_CHARACTER_ATTRIBUTES,
-    srWindow : Win32cr::System::Console::SMALL_RECT,
-    dwMaximumWindowSize : Win32cr::System::Console::COORD
+  struct CONSOLE_SCREEN_BUFFER_INFO
+    property dwSize : Win32cr::System::Console::COORD
+    property dwCursorPosition : Win32cr::System::Console::COORD
+    property wAttributes : Win32cr::System::Console::CONSOLE_CHARACTER_ATTRIBUTES
+    property srWindow : Win32cr::System::Console::SMALL_RECT
+    property dwMaximumWindowSize : Win32cr::System::Console::COORD
+    def initialize(@dwSize : Win32cr::System::Console::COORD, @dwCursorPosition : Win32cr::System::Console::COORD, @wAttributes : Win32cr::System::Console::CONSOLE_CHARACTER_ATTRIBUTES, @srWindow : Win32cr::System::Console::SMALL_RECT, @dwMaximumWindowSize : Win32cr::System::Console::COORD)
+    end
+  end
 
   @[Extern]
-  record CONSOLE_SCREEN_BUFFER_INFOEX,
-    cbSize : UInt32,
-    dwSize : Win32cr::System::Console::COORD,
-    dwCursorPosition : Win32cr::System::Console::COORD,
-    wAttributes : Win32cr::System::Console::CONSOLE_CHARACTER_ATTRIBUTES,
-    srWindow : Win32cr::System::Console::SMALL_RECT,
-    dwMaximumWindowSize : Win32cr::System::Console::COORD,
-    wPopupAttributes : UInt16,
-    bFullscreenSupported : Win32cr::Foundation::BOOL,
-    color_table : UInt32[16]
+  struct CONSOLE_SCREEN_BUFFER_INFOEX
+    property cbSize : UInt32
+    property dwSize : Win32cr::System::Console::COORD
+    property dwCursorPosition : Win32cr::System::Console::COORD
+    property wAttributes : Win32cr::System::Console::CONSOLE_CHARACTER_ATTRIBUTES
+    property srWindow : Win32cr::System::Console::SMALL_RECT
+    property dwMaximumWindowSize : Win32cr::System::Console::COORD
+    property wPopupAttributes : UInt16
+    property bFullscreenSupported : Win32cr::Foundation::BOOL
+    property color_table : UInt32[16]
+    def initialize(@cbSize : UInt32, @dwSize : Win32cr::System::Console::COORD, @dwCursorPosition : Win32cr::System::Console::COORD, @wAttributes : Win32cr::System::Console::CONSOLE_CHARACTER_ATTRIBUTES, @srWindow : Win32cr::System::Console::SMALL_RECT, @dwMaximumWindowSize : Win32cr::System::Console::COORD, @wPopupAttributes : UInt16, @bFullscreenSupported : Win32cr::Foundation::BOOL, @color_table : UInt32[16])
+    end
+  end
 
   @[Extern]
-  record CONSOLE_FONT_INFOEX,
-    cbSize : UInt32,
-    nFont : UInt32,
-    dwFontSize : Win32cr::System::Console::COORD,
-    font_family : UInt32,
-    font_weight : UInt32,
-    face_name : UInt16[32]
+  struct CONSOLE_FONT_INFOEX
+    property cbSize : UInt32
+    property nFont : UInt32
+    property dwFontSize : Win32cr::System::Console::COORD
+    property font_family : UInt32
+    property font_weight : UInt32
+    property face_name : UInt16[32]
+    def initialize(@cbSize : UInt32, @nFont : UInt32, @dwFontSize : Win32cr::System::Console::COORD, @font_family : UInt32, @font_weight : UInt32, @face_name : UInt16[32])
+    end
+  end
 
   @[Extern]
-  record CONSOLE_SELECTION_INFO,
-    dwFlags : UInt32,
-    dwSelectionAnchor : Win32cr::System::Console::COORD,
-    srSelection : Win32cr::System::Console::SMALL_RECT
+  struct CONSOLE_SELECTION_INFO
+    property dwFlags : UInt32
+    property dwSelectionAnchor : Win32cr::System::Console::COORD
+    property srSelection : Win32cr::System::Console::SMALL_RECT
+    def initialize(@dwFlags : UInt32, @dwSelectionAnchor : Win32cr::System::Console::COORD, @srSelection : Win32cr::System::Console::SMALL_RECT)
+    end
+  end
 
   @[Extern]
-  record CONSOLE_HISTORY_INFO,
-    cbSize : UInt32,
-    history_buffer_size : UInt32,
-    number_of_history_buffers : UInt32,
-    dwFlags : UInt32
+  struct CONSOLE_HISTORY_INFO
+    property cbSize : UInt32
+    property history_buffer_size : UInt32
+    property number_of_history_buffers : UInt32
+    property dwFlags : UInt32
+    def initialize(@cbSize : UInt32, @history_buffer_size : UInt32, @number_of_history_buffers : UInt32, @dwFlags : UInt32)
+    end
+  end
 
   @[Link("kernel32")]
   lib C

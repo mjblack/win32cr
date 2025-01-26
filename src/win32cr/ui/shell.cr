@@ -23,25 +23,25 @@ module Win32cr::UI::Shell
   alias ShFindChangeNotificationHandle = LibC::IntPtrT
   alias HDROP = LibC::IntPtrT
   alias HPSXA = LibC::IntPtrT
-  alias SUBCLASSPROC = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, LibC::UIntPtrT, LibC::UIntPtrT, Win32cr::Foundation::LRESULT)*
+  alias SUBCLASSPROC = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, LibC::UIntPtrT, LibC::UIntPtrT, Win32cr::Foundation::LRESULT)
 
-  alias BFFCALLBACK = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LPARAM, Int32)*
+  alias BFFCALLBACK = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LPARAM, Int32)
 
-  alias LPFNDFMCALLBACK = Proc(Void*, Win32cr::Foundation::HWND, Void*, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT)*
+  alias LPFNDFMCALLBACK = Proc(Void*, Win32cr::Foundation::HWND, Void*, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT)
 
-  alias LPFNVIEWCALLBACK = Proc(Void*, Void*, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT)*
+  alias LPFNVIEWCALLBACK = Proc(Void*, Void*, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT)
 
-  alias PFNCANSHAREFOLDERW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT)*
+  alias PFNCANSHAREFOLDERW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT)
 
-  alias PFNSHOWSHAREFOLDERUIW = Proc(Win32cr::Foundation::HWND, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT)*
+  alias PFNSHOWSHAREFOLDERUIW = Proc(Win32cr::Foundation::HWND, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT)
 
-  alias DLLGETVERSIONPROC = Proc(Win32cr::UI::Shell::DLLVERSIONINFO*, Win32cr::Foundation::HRESULT)*
+  alias DLLGETVERSIONPROC = Proc(Win32cr::UI::Shell::DLLVERSIONINFO*, Win32cr::Foundation::HRESULT)
 
-  alias APPLET_PROC = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LPARAM, Int32)*
+  alias APPLET_PROC = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LPARAM, Int32)
 
-  alias PAPPSTATE_CHANGE_ROUTINE = Proc(Win32cr::Foundation::BOOLEAN, Void*, Void)*
+  alias PAPPSTATE_CHANGE_ROUTINE = Proc(Win32cr::Foundation::BOOLEAN, Void*, Void)
 
-  alias PAPPCONSTRAIN_CHANGE_ROUTINE = Proc(Win32cr::Foundation::BOOLEAN, Void*, Void)*
+  alias PAPPCONSTRAIN_CHANGE_ROUTINE = Proc(Win32cr::Foundation::BOOLEAN, Void*, Void)
 
   HLINK_E_FIRST = -2147221248_i32
   HLINK_S_FIRST = 262400_i32
@@ -4550,1559 +4550,2054 @@ module Win32cr::UI::Shell
   end
 
   @[Extern]
-  record APPSTATE_REGISTRATION_
-  @[Extern]
-  record APPCONSTRAIN_REGISTRATION_
-  @[Extern]
-  record APPCATEGORYINFO,
-    locale : UInt32,
-    pszDescription : Win32cr::Foundation::PWSTR,
-    app_category_id : LibC::GUID
-
-  @[Extern]
-  record APPCATEGORYINFOLIST,
-    cCategory : UInt32,
-    pCategoryInfo : Win32cr::UI::Shell::APPCATEGORYINFO*
-
-  @[Extern]
-  record HELPINFO,
-    cbSize : UInt32,
-    iContextType : Int32,
-    iCtrlId : Int32,
-    hItemHandle : Win32cr::Foundation::HANDLE,
-    dwContextId : LibC::UIntPtrT,
-    mouse_pos : Win32cr::Foundation::POINT
-
-  @[Extern]
-  record MULTIKEYHELPA,
-    mkSize : UInt32,
-    mkKeylist : Win32cr::Foundation::CHAR,
-    szKeyphrase : Win32cr::Foundation::CHAR*
-
-  @[Extern]
-  record MULTIKEYHELPW,
-    mkSize : UInt32,
-    mkKeylist : UInt16,
-    szKeyphrase : UInt16*
-
-  @[Extern]
-  record HELPWININFOA,
-    wStructSize : Int32,
-    x : Int32,
-    y : Int32,
-    dx : Int32,
-    dy : Int32,
-    wMax : Int32,
-    rgchMember : Win32cr::Foundation::CHAR[2]
-
-  @[Extern]
-  record HELPWININFOW,
-    wStructSize : Int32,
-    x : Int32,
-    y : Int32,
-    dx : Int32,
-    dy : Int32,
-    wMax : Int32,
-    rgchMember : UInt16[2]
-
-  @[Extern]
-  record CMINVOKECOMMANDINFO,
-    cbSize : UInt32,
-    fMask : UInt32,
-    hwnd : Win32cr::Foundation::HWND,
-    lpVerb : Win32cr::Foundation::PSTR,
-    lpParameters : Win32cr::Foundation::PSTR,
-    lpDirectory : Win32cr::Foundation::PSTR,
-    nShow : Int32,
-    dwHotKey : UInt32,
-    hIcon : Win32cr::Foundation::HANDLE
-
-  @[Extern]
-  record CMINVOKECOMMANDINFOEX,
-    cbSize : UInt32,
-    fMask : UInt32,
-    hwnd : Win32cr::Foundation::HWND,
-    lpVerb : Win32cr::Foundation::PSTR,
-    lpParameters : Win32cr::Foundation::PSTR,
-    lpDirectory : Win32cr::Foundation::PSTR,
-    nShow : Int32,
-    dwHotKey : UInt32,
-    hIcon : Win32cr::Foundation::HANDLE,
-    lpTitle : Win32cr::Foundation::PSTR,
-    lpVerbW : Win32cr::Foundation::PWSTR,
-    lpParametersW : Win32cr::Foundation::PWSTR,
-    lpDirectoryW : Win32cr::Foundation::PWSTR,
-    lpTitleW : Win32cr::Foundation::PWSTR,
-    ptInvoke : Win32cr::Foundation::POINT
-
-  @[Extern]
-  record CMINVOKECOMMANDINFOEX_REMOTE,
-    cbSize : UInt32,
-    fMask : UInt32,
-    hwnd : Win32cr::Foundation::HWND,
-    lpVerbString : Win32cr::Foundation::PSTR,
-    lpParameters : Win32cr::Foundation::PSTR,
-    lpDirectory : Win32cr::Foundation::PSTR,
-    nShow : Int32,
-    dwHotKey : UInt32,
-    lpTitle : Win32cr::Foundation::PSTR,
-    lpVerbWString : Win32cr::Foundation::PWSTR,
-    lpParametersW : Win32cr::Foundation::PWSTR,
-    lpDirectoryW : Win32cr::Foundation::PWSTR,
-    lpTitleW : Win32cr::Foundation::PWSTR,
-    ptInvoke : Win32cr::Foundation::POINT,
-    lpVerbInt : UInt32,
-    lpVerbWInt : UInt32
-
-  @[Extern]
-  record PERSIST_FOLDER_TARGET_INFO,
-    pidlTargetFolder : Win32cr::UI::Shell::Common::ITEMIDLIST*,
-    szTargetParsingName : UInt16[260],
-    szNetworkProvider : UInt16[260],
-    dwAttributes : UInt32,
-    csidl : Int32
-
-  @[Extern]
-  record EXTRASEARCH,
-    guidSearch : LibC::GUID,
-    wszFriendlyName : UInt16[80],
-    wszUrl : UInt16[2084]
-
-  @[Extern]
-  record FOLDERSETTINGS,
-    view_mode : UInt32,
-    fFlags : UInt32
-
-  @[Extern]
-  record SV2CVW2_PARAMS,
-    cbSize : UInt32,
-    psvPrev : Void*,
-    pfs : Win32cr::UI::Shell::FOLDERSETTINGS*,
-    psbOwner : Void*,
-    prcView : Win32cr::Foundation::RECT*,
-    pvid : LibC::GUID*,
-    hwndView : Win32cr::Foundation::HWND
-
-  @[Extern]
-  record SORTCOLUMN,
-    propkey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY,
-    direction : Win32cr::UI::Shell::SORTDIRECTION
-
-  @[Extern]
-  record CM_COLUMNINFO,
-    cbSize : UInt32,
-    dwMask : UInt32,
-    dwState : UInt32,
-    uWidth : UInt32,
-    uDefaultWidth : UInt32,
-    uIdealWidth : UInt32,
-    wszName : UInt16[80]
-
-  @[Extern]
-  record SHELL_ITEM_RESOURCE,
-    guidType : LibC::GUID,
-    szName : UInt16[260]
-
-  @[Extern]
-  record CATEGORY_INFO,
-    cif : Win32cr::UI::Shell::CATEGORYINFO_FLAGS,
-    wszName : UInt16[260]
-
-  @[Extern]
-  record SHDRAGIMAGE,
-    sizeDragImage : Win32cr::Foundation::SIZE,
-    ptOffset : Win32cr::Foundation::POINT,
-    hbmpDragImage : Win32cr::Graphics::Gdi::HBITMAP,
-    crColorKey : UInt32
-
-  @[Extern]
-  record DESKBANDINFO,
-    dwMask : UInt32,
-    ptMinSize : Win32cr::Foundation::POINTL,
-    ptMaxSize : Win32cr::Foundation::POINTL,
-    ptIntegral : Win32cr::Foundation::POINTL,
-    ptActual : Win32cr::Foundation::POINTL,
-    wszTitle : UInt16[256],
-    dwModeFlags : UInt32,
-    crBkgnd : UInt32
-
-  @[Extern]
-  record THUMBBUTTON,
-    dwMask : Win32cr::UI::Shell::THUMBBUTTONMASK,
-    iId : UInt32,
-    iBitmap : UInt32,
-    hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-    szTip : UInt16[260],
-    dwFlags : Win32cr::UI::Shell::THUMBBUTTONFLAGS
-
-  @[Extern]
-  record BANDSITEINFO,
-    dwMask : UInt32,
-    dwState : UInt32,
-    dwStyle : UInt32
-
-  @[Extern]
-  record DELEGATEITEMID,
-    cbSize : UInt16,
-    wOuter : UInt16,
-    cbInner : UInt16,
-    rgb : UInt8*
-
-  @[Extern]
-  record SMDATA,
-    dwMask : UInt32,
-    dwFlags : UInt32,
-    hmenu : Win32cr::UI::WindowsAndMessaging::HMENU,
-    hwnd : Win32cr::Foundation::HWND,
-    uId : UInt32,
-    uIdParent : UInt32,
-    uIdAncestor : UInt32,
-    punk : Void*,
-    pidlFolder : Win32cr::UI::Shell::Common::ITEMIDLIST*,
-    pidlItem : Win32cr::UI::Shell::Common::ITEMIDLIST*,
-    psf : Void*,
-    pvUserData : Void*
-
-  @[Extern]
-  record SMINFO,
-    dwMask : UInt32,
-    dwType : UInt32,
-    dwFlags : UInt32,
-    iIcon : Int32
-
-  @[Extern]
-  record SMCSHCHANGENOTIFYSTRUCT,
-    lEvent : Int32,
-    pidl1 : Win32cr::UI::Shell::Common::ITEMIDLIST*,
-    pidl2 : Win32cr::UI::Shell::Common::ITEMIDLIST*
-
-  @[Extern]
-  record KNOWNFOLDER_DEFINITION,
-    category : Win32cr::UI::Shell::KF_CATEGORY,
-    pszName : Win32cr::Foundation::PWSTR,
-    pszDescription : Win32cr::Foundation::PWSTR,
-    fidParent : LibC::GUID,
-    pszRelativePath : Win32cr::Foundation::PWSTR,
-    pszParsingName : Win32cr::Foundation::PWSTR,
-    pszTooltip : Win32cr::Foundation::PWSTR,
-    pszLocalizedName : Win32cr::Foundation::PWSTR,
-    pszIcon : Win32cr::Foundation::PWSTR,
-    pszSecurity : Win32cr::Foundation::PWSTR,
-    dwAttributes : UInt32,
-    kfdFlags : UInt32,
-    ftidType : LibC::GUID
-
-  @[Extern]
-  record PREVIEWHANDLERFRAMEINFO,
-    haccel : Win32cr::UI::WindowsAndMessaging::HACCEL,
-    cAccelEntries : UInt32
-
-  @[Extern]
-  record BANNER_NOTIFICATION,
-    event : Win32cr::UI::Shell::BANNER_NOTIFICATION_EVENT,
-    providerIdentity : Win32cr::Foundation::PWSTR,
-    contentId : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record NSTCCUSTOMDRAW,
-    psi : Void*,
-    uItemState : UInt32,
-    nstcis : UInt32,
-    pszText : Win32cr::Foundation::PWSTR,
-    iImage : Int32,
-    himl : Win32cr::UI::Controls::HIMAGELIST,
-    iLevel : Int32,
-    iIndent : Int32
-
-  @[Extern]
-  record DATABLOCK_HEADER,
-    cbSize : UInt32,
-    dwSignature : UInt32
-
-  @[Extern]
-  record NT_CONSOLE_PROPS,
-    dbh : Win32cr::UI::Shell::DATABLOCK_HEADER,
-    wFillAttribute : UInt16,
-    wPopupFillAttribute : UInt16,
-    dwScreenBufferSize : Win32cr::System::Console::COORD,
-    dwWindowSize : Win32cr::System::Console::COORD,
-    dwWindowOrigin : Win32cr::System::Console::COORD,
-    nFont : UInt32,
-    nInputBufferSize : UInt32,
-    dwFontSize : Win32cr::System::Console::COORD,
-    uFontFamily : UInt32,
-    uFontWeight : UInt32,
-    face_name : UInt16[32],
-    uCursorSize : UInt32,
-    bFullScreen : Win32cr::Foundation::BOOL,
-    bQuickEdit : Win32cr::Foundation::BOOL,
-    bInsertMode : Win32cr::Foundation::BOOL,
-    bAutoPosition : Win32cr::Foundation::BOOL,
-    uHistoryBufferSize : UInt32,
-    uNumberOfHistoryBuffers : UInt32,
-    bHistoryNoDup : Win32cr::Foundation::BOOL,
-    color_table : UInt32[16]
-
-  @[Extern]
-  record NT_FE_CONSOLE_PROPS,
-    dbh : Win32cr::UI::Shell::DATABLOCK_HEADER,
-    uCodePage : UInt32
-
-  @[Extern]
-  record EXP_DARWIN_LINK,
-    dbh : Win32cr::UI::Shell::DATABLOCK_HEADER,
-    szDarwinID : Win32cr::Foundation::CHAR[260],
-    szwDarwinID : UInt16[260]
-
-  @[Extern]
-  record EXP_SPECIAL_FOLDER,
-    cbSize : UInt32,
-    dwSignature : UInt32,
-    idSpecialFolder : UInt32,
-    cbOffset : UInt32
-
-  @[Extern]
-  record EXP_SZ_LINK,
-    cbSize : UInt32,
-    dwSignature : UInt32,
-    szTarget : Win32cr::Foundation::CHAR[260],
-    swzTarget : UInt16[260]
-
-  @[Extern]
-  record EXP_PROPERTYSTORAGE,
-    cbSize : UInt32,
-    dwSignature : UInt32,
-    abPropertyStorage : UInt8*
-
-  @[Extern]
-  record SHFOLDERCUSTOMSETTINGS,
-    dwSize : UInt32,
-    dwMask : UInt32,
-    pvid : LibC::GUID*,
-    pszWebViewTemplate : Win32cr::Foundation::PWSTR,
-    cchWebViewTemplate : UInt32,
-    pszWebViewTemplateVersion : Win32cr::Foundation::PWSTR,
-    pszInfoTip : Win32cr::Foundation::PWSTR,
-    cchInfoTip : UInt32,
-    pclsid : LibC::GUID*,
-    dwFlags : UInt32,
-    pszIconFile : Win32cr::Foundation::PWSTR,
-    cchIconFile : UInt32,
-    iIconIndex : Int32,
-    pszLogo : Win32cr::Foundation::PWSTR,
-    cchLogo : UInt32
-
-  @[Extern]
-  record BROWSEINFOA,
-    hwndOwner : Win32cr::Foundation::HWND,
-    pidlRoot : Win32cr::UI::Shell::Common::ITEMIDLIST*,
-    pszDisplayName : Win32cr::Foundation::PSTR,
-    lpszTitle : Win32cr::Foundation::PSTR,
-    ulFlags : UInt32,
-    lpfn : Win32cr::UI::Shell::BFFCALLBACK,
-    lParam : Win32cr::Foundation::LPARAM,
-    iImage : Int32
-
-  @[Extern]
-  record BROWSEINFOW,
-    hwndOwner : Win32cr::Foundation::HWND,
-    pidlRoot : Win32cr::UI::Shell::Common::ITEMIDLIST*,
-    pszDisplayName : Win32cr::Foundation::PWSTR,
-    lpszTitle : Win32cr::Foundation::PWSTR,
-    ulFlags : UInt32,
-    lpfn : Win32cr::UI::Shell::BFFCALLBACK,
-    lParam : Win32cr::Foundation::LPARAM,
-    iImage : Int32
-
-  @[Extern]
-  record NRESARRAY,
-    cItems : UInt32,
-    nr : Win32cr::NetworkManagement::WNet::NETRESOURCEA*
-
-  @[Extern]
-  record CIDA,
-    cidl : UInt32,
-    aoffset : UInt32*
-
-  @[Extern]
-  record FILEDESCRIPTORA,
-    dwFlags : UInt32,
-    clsid : LibC::GUID,
-    sizel : Win32cr::Foundation::SIZE,
-    pointl : Win32cr::Foundation::POINTL,
-    dwFileAttributes : UInt32,
-    ftCreationTime : Win32cr::Foundation::FILETIME,
-    ftLastAccessTime : Win32cr::Foundation::FILETIME,
-    ftLastWriteTime : Win32cr::Foundation::FILETIME,
-    nFileSizeHigh : UInt32,
-    nFileSizeLow : UInt32,
-    cFileName : Win32cr::Foundation::CHAR[260]
-
-  @[Extern]
-  record FILEDESCRIPTORW,
-    dwFlags : UInt32,
-    clsid : LibC::GUID,
-    sizel : Win32cr::Foundation::SIZE,
-    pointl : Win32cr::Foundation::POINTL,
-    dwFileAttributes : UInt32,
-    ftCreationTime : Win32cr::Foundation::FILETIME,
-    ftLastAccessTime : Win32cr::Foundation::FILETIME,
-    ftLastWriteTime : Win32cr::Foundation::FILETIME,
-    nFileSizeHigh : UInt32,
-    nFileSizeLow : UInt32,
-    cFileName : UInt16[260]
-
-  @[Extern]
-  record FILEGROUPDESCRIPTORA,
-    cItems : UInt32,
-    fgd : Win32cr::UI::Shell::FILEDESCRIPTORA*
-
-  @[Extern]
-  record FILEGROUPDESCRIPTORW,
-    cItems : UInt32,
-    fgd : Win32cr::UI::Shell::FILEDESCRIPTORW*
-
-  @[Extern]
-  record DROPFILES,
-    pFiles : UInt32,
-    pt : Win32cr::Foundation::POINT,
-    fNC : Win32cr::Foundation::BOOL,
-    fWide : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record FILE_ATTRIBUTES_ARRAY,
-    cItems : UInt32,
-    dwSumFileAttributes : UInt32,
-    dwProductFileAttributes : UInt32,
-    rgdwFileAttributes : UInt32*
-
-  @[Extern]
-  record DROPDESCRIPTION,
-    type__ : Win32cr::UI::Shell::DROPIMAGETYPE,
-    szMessage : UInt16[260],
-    szInsert : UInt16[260]
-
-  @[Extern]
-  record SHChangeNotifyEntry,
-    pidl : Win32cr::UI::Shell::Common::ITEMIDLIST*,
-    fRecursive : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record SHARDAPPIDINFO,
-    psi : Void*,
-    pszAppID : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record SHARDAPPIDINFOIDLIST,
-    pidl : Win32cr::UI::Shell::Common::ITEMIDLIST*,
-    pszAppID : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record SHARDAPPIDINFOLINK,
-    psl : Void*,
-    pszAppID : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record SHChangeDWORDAsIDList,
-    cb : UInt16,
-    dwItem1 : UInt32,
-    dwItem2 : UInt32,
-    cbZero : UInt16
-
-  @[Extern]
-  record SHChangeUpdateImageIDList,
-    cb : UInt16,
-    iIconIndex : Int32,
-    iCurIndex : Int32,
-    uFlags : UInt32,
-    dwProcessID : UInt32,
-    szName : UInt16[260],
-    cbZero : UInt16
-
-  @[Extern]
-  record SHDESCRIPTIONID,
-    dwDescriptionId : Win32cr::UI::Shell::SHDID_ID,
-    clsid : LibC::GUID
-
-  @[Extern]
-  record AUTO_SCROLL_DATA,
-    iNextSample : Int32,
-    dwLastScroll : UInt32,
-    bFull : Win32cr::Foundation::BOOL,
-    pts : Win32cr::Foundation::POINT[3],
-    dwTimes : UInt32[3]
-
-  @[Extern]
-  record CABINETSTATE,
-    cLength : UInt16,
-    nVersion : UInt16,
-    _bitfield : Int32,
-    fMenuEnumFilter : UInt32
-
-  @[Extern]
-  record OPENASINFO,
-    pcszFile : Win32cr::Foundation::PWSTR,
-    pcszClass : Win32cr::Foundation::PWSTR,
-    oaifInFlags : Win32cr::UI::Shell::OPEN_AS_INFO_FLAGS
-
-  @[Extern]
-  record QCMINFO_IDMAP_PLACEMENT,
-    id : UInt32,
-    fFlags : UInt32
-
-  @[Extern]
-  record QCMINFO_IDMAP,
-    nMaxIds : UInt32,
-    pIdList : Win32cr::UI::Shell::QCMINFO_IDMAP_PLACEMENT*
-
-  @[Extern]
-  record QCMINFO,
-    hmenu : Win32cr::UI::WindowsAndMessaging::HMENU,
-    indexMenu : UInt32,
-    idCmdFirst : UInt32,
-    idCmdLast : UInt32,
-    pIdMap : Win32cr::UI::Shell::QCMINFO_IDMAP*
-
-  @[Extern]
-  record DETAILSINFO,
-    pidl : Win32cr::UI::Shell::Common::ITEMIDLIST*,
-    fmt : Int32,
-    cxChar : Int32,
-    str : Win32cr::UI::Shell::Common::STRRET,
-    iImage : Int32
-
-  @[Extern]
-  record SFVM_PROPPAGE_DATA,
-    dwReserved : UInt32,
-    pfn : Win32cr::UI::Controls::LPFNSVADDPROPSHEETPAGE,
-    lParam : Win32cr::Foundation::LPARAM
-
-  @[Extern]
-  record SFVM_HELPTOPIC_DATA,
-    wszHelpFile : UInt16[260],
-    wszHelpTopic : UInt16[260]
-
-  @[Extern]
-  record ITEMSPACING,
-    cxSmall : Int32,
-    cySmall : Int32,
-    cxLarge : Int32,
-    cyLarge : Int32
-
-  @[Extern]
-  record SFV_CREATE,
-    cbSize : UInt32,
-    pshf : Void*,
-    psvOuter : Void*,
-    psfvcb : Void*
-
-  @[Extern]
-  record DEFCONTEXTMENU,
-    hwnd : Win32cr::Foundation::HWND,
-    pcmcb : Void*,
-    pidlFolder : Win32cr::UI::Shell::Common::ITEMIDLIST*,
-    psf : Void*,
-    cidl : UInt32,
-    apidl : Win32cr::UI::Shell::Common::ITEMIDLIST**,
-    punkAssociationInfo : Void*,
-    cKeys : UInt32,
-    aKeys : Win32cr::System::Registry::HKEY*
-
-  @[Extern]
-  record DFMICS,
-    cbSize : UInt32,
-    fMask : UInt32,
-    lParam : Win32cr::Foundation::LPARAM,
-    idCmdFirst : UInt32,
-    idDefMax : UInt32,
-    pici : Win32cr::UI::Shell::CMINVOKECOMMANDINFO*,
-    punkSite : Void*
-
-  @[Extern]
-  record CSFV,
-    cbSize : UInt32,
-    pshf : Void*,
-    psvOuter : Void*,
-    pidl : Win32cr::UI::Shell::Common::ITEMIDLIST*,
-    lEvents : Int32,
-    pfnCallback : Win32cr::UI::Shell::LPFNVIEWCALLBACK,
-    fvm : Win32cr::UI::Shell::FOLDERVIEWMODE
-
-  @[Extern]
-  record SHELLSTATEA,
-    _bitfield1 : Int32,
-    dwWin95Unused : UInt32,
-    uWin95Unused : UInt32,
-    lParamSort : Int32,
-    iSortDirection : Int32,
-    version : UInt32,
-    uNotUsed : UInt32,
-    _bitfield2 : Int32
-
-  @[Extern]
-  record SHELLSTATEW,
-    _bitfield1 : Int32,
-    dwWin95Unused : UInt32,
-    uWin95Unused : UInt32,
-    lParamSort : Int32,
-    iSortDirection : Int32,
-    version : UInt32,
-    uNotUsed : UInt32,
-    _bitfield2 : Int32
-
-  @[Extern]
-  record SHELLFLAGSTATE,
-    _bitfield : Int32
-
-  @[Extern]
-  record BANDINFOSFB,
-    dwMask : UInt32,
-    dwStateMask : UInt32,
-    dwState : UInt32,
-    crBkgnd : UInt32,
-    crBtnLt : UInt32,
-    crBtnDk : UInt32,
-    wViewMode : UInt16,
-    wAlign : UInt16,
-    psf : Void*,
-    pidl : Win32cr::UI::Shell::Common::ITEMIDLIST*
-
-  @[Extern]
-  record SHCOLUMNINFO,
-    scid : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY,
-    vt : UInt16,
-    fmt : UInt32,
-    cChars : UInt32,
-    csFlags : UInt32,
-    wszTitle : UInt16[80],
-    wszDescription : UInt16[128]
-
-  @[Extern]
-  record SHCOLUMNINIT,
-    dwFlags : UInt32,
-    dwReserved : UInt32,
-    wszFolder : UInt16[260]
-
-  @[Extern]
-  record SHCOLUMNDATA,
-    dwFlags : UInt32,
-    dwFileAttributes : UInt32,
-    dwReserved : UInt32,
-    pwszExt : Win32cr::Foundation::PWSTR,
-    wszFile : UInt16[260]
-
-  @[Extern]
-  record SHChangeProductKeyAsIDList,
-    cb : UInt16,
-    wszProductKey : UInt16[39],
-    cbZero : UInt16
-
-  @[Extern]
-  record TBINFO,
-    cbuttons : UInt32,
-    uFlags : UInt32
-
-  @[Extern]
-  record SFV_SETITEMPOS,
-    pidl : Win32cr::UI::Shell::Common::ITEMIDLIST*,
-    pt : Win32cr::Foundation::POINT
-
-  @[Extern]
-  record AASHELLMENUFILENAME,
-    cbTotal : Int16,
-    rgbReserved : UInt8[12],
-    szFileName : UInt16*
-
-  @[Extern]
-  record AASHELLMENUITEM,
-    lpReserved1 : Void*,
-    iReserved : Int32,
-    uiReserved : UInt32,
-    lpName : Win32cr::UI::Shell::AASHELLMENUFILENAME*,
-    psz : Win32cr::Foundation::PWSTR
+  struct APPSTATE_REGISTRATION_
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct APPCONSTRAIN_REGISTRATION_
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct APPCATEGORYINFO
+    property locale : UInt32
+    property pszDescription : Win32cr::Foundation::PWSTR
+    property app_category_id : LibC::GUID
+    def initialize(@locale : UInt32, @pszDescription : Win32cr::Foundation::PWSTR, @app_category_id : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct APPCATEGORYINFOLIST
+    property cCategory : UInt32
+    property pCategoryInfo : Win32cr::UI::Shell::APPCATEGORYINFO*
+    def initialize(@cCategory : UInt32, @pCategoryInfo : Win32cr::UI::Shell::APPCATEGORYINFO*)
+    end
+  end
+
+  @[Extern]
+  struct HELPINFO
+    property cbSize : UInt32
+    property iContextType : Int32
+    property iCtrlId : Int32
+    property hItemHandle : Win32cr::Foundation::HANDLE
+    property dwContextId : LibC::UIntPtrT
+    property mouse_pos : Win32cr::Foundation::POINT
+    def initialize(@cbSize : UInt32, @iContextType : Int32, @iCtrlId : Int32, @hItemHandle : Win32cr::Foundation::HANDLE, @dwContextId : LibC::UIntPtrT, @mouse_pos : Win32cr::Foundation::POINT)
+    end
+  end
+
+  @[Extern]
+  struct MULTIKEYHELPA
+    property mkSize : UInt32
+    property mkKeylist : Win32cr::Foundation::CHAR
+    property szKeyphrase : Win32cr::Foundation::CHAR*
+    def initialize(@mkSize : UInt32, @mkKeylist : Win32cr::Foundation::CHAR, @szKeyphrase : Win32cr::Foundation::CHAR*)
+    end
+  end
+
+  @[Extern]
+  struct MULTIKEYHELPW
+    property mkSize : UInt32
+    property mkKeylist : UInt16
+    property szKeyphrase : UInt16*
+    def initialize(@mkSize : UInt32, @mkKeylist : UInt16, @szKeyphrase : UInt16*)
+    end
+  end
+
+  @[Extern]
+  struct HELPWININFOA
+    property wStructSize : Int32
+    property x : Int32
+    property y : Int32
+    property dx : Int32
+    property dy : Int32
+    property wMax : Int32
+    property rgchMember : Win32cr::Foundation::CHAR[2]
+    def initialize(@wStructSize : Int32, @x : Int32, @y : Int32, @dx : Int32, @dy : Int32, @wMax : Int32, @rgchMember : Win32cr::Foundation::CHAR[2])
+    end
+  end
+
+  @[Extern]
+  struct HELPWININFOW
+    property wStructSize : Int32
+    property x : Int32
+    property y : Int32
+    property dx : Int32
+    property dy : Int32
+    property wMax : Int32
+    property rgchMember : UInt16[2]
+    def initialize(@wStructSize : Int32, @x : Int32, @y : Int32, @dx : Int32, @dy : Int32, @wMax : Int32, @rgchMember : UInt16[2])
+    end
+  end
+
+  @[Extern]
+  struct CMINVOKECOMMANDINFO
+    property cbSize : UInt32
+    property fMask : UInt32
+    property hwnd : Win32cr::Foundation::HWND
+    property lpVerb : Win32cr::Foundation::PSTR
+    property lpParameters : Win32cr::Foundation::PSTR
+    property lpDirectory : Win32cr::Foundation::PSTR
+    property nShow : Int32
+    property dwHotKey : UInt32
+    property hIcon : Win32cr::Foundation::HANDLE
+    def initialize(@cbSize : UInt32, @fMask : UInt32, @hwnd : Win32cr::Foundation::HWND, @lpVerb : Win32cr::Foundation::PSTR, @lpParameters : Win32cr::Foundation::PSTR, @lpDirectory : Win32cr::Foundation::PSTR, @nShow : Int32, @dwHotKey : UInt32, @hIcon : Win32cr::Foundation::HANDLE)
+    end
+  end
+
+  @[Extern]
+  struct CMINVOKECOMMANDINFOEX
+    property cbSize : UInt32
+    property fMask : UInt32
+    property hwnd : Win32cr::Foundation::HWND
+    property lpVerb : Win32cr::Foundation::PSTR
+    property lpParameters : Win32cr::Foundation::PSTR
+    property lpDirectory : Win32cr::Foundation::PSTR
+    property nShow : Int32
+    property dwHotKey : UInt32
+    property hIcon : Win32cr::Foundation::HANDLE
+    property lpTitle : Win32cr::Foundation::PSTR
+    property lpVerbW : Win32cr::Foundation::PWSTR
+    property lpParametersW : Win32cr::Foundation::PWSTR
+    property lpDirectoryW : Win32cr::Foundation::PWSTR
+    property lpTitleW : Win32cr::Foundation::PWSTR
+    property ptInvoke : Win32cr::Foundation::POINT
+    def initialize(@cbSize : UInt32, @fMask : UInt32, @hwnd : Win32cr::Foundation::HWND, @lpVerb : Win32cr::Foundation::PSTR, @lpParameters : Win32cr::Foundation::PSTR, @lpDirectory : Win32cr::Foundation::PSTR, @nShow : Int32, @dwHotKey : UInt32, @hIcon : Win32cr::Foundation::HANDLE, @lpTitle : Win32cr::Foundation::PSTR, @lpVerbW : Win32cr::Foundation::PWSTR, @lpParametersW : Win32cr::Foundation::PWSTR, @lpDirectoryW : Win32cr::Foundation::PWSTR, @lpTitleW : Win32cr::Foundation::PWSTR, @ptInvoke : Win32cr::Foundation::POINT)
+    end
+  end
+
+  @[Extern]
+  struct CMINVOKECOMMANDINFOEX_REMOTE
+    property cbSize : UInt32
+    property fMask : UInt32
+    property hwnd : Win32cr::Foundation::HWND
+    property lpVerbString : Win32cr::Foundation::PSTR
+    property lpParameters : Win32cr::Foundation::PSTR
+    property lpDirectory : Win32cr::Foundation::PSTR
+    property nShow : Int32
+    property dwHotKey : UInt32
+    property lpTitle : Win32cr::Foundation::PSTR
+    property lpVerbWString : Win32cr::Foundation::PWSTR
+    property lpParametersW : Win32cr::Foundation::PWSTR
+    property lpDirectoryW : Win32cr::Foundation::PWSTR
+    property lpTitleW : Win32cr::Foundation::PWSTR
+    property ptInvoke : Win32cr::Foundation::POINT
+    property lpVerbInt : UInt32
+    property lpVerbWInt : UInt32
+    def initialize(@cbSize : UInt32, @fMask : UInt32, @hwnd : Win32cr::Foundation::HWND, @lpVerbString : Win32cr::Foundation::PSTR, @lpParameters : Win32cr::Foundation::PSTR, @lpDirectory : Win32cr::Foundation::PSTR, @nShow : Int32, @dwHotKey : UInt32, @lpTitle : Win32cr::Foundation::PSTR, @lpVerbWString : Win32cr::Foundation::PWSTR, @lpParametersW : Win32cr::Foundation::PWSTR, @lpDirectoryW : Win32cr::Foundation::PWSTR, @lpTitleW : Win32cr::Foundation::PWSTR, @ptInvoke : Win32cr::Foundation::POINT, @lpVerbInt : UInt32, @lpVerbWInt : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PERSIST_FOLDER_TARGET_INFO
+    property pidlTargetFolder : Win32cr::UI::Shell::Common::ITEMIDLIST*
+    property szTargetParsingName : UInt16[260]
+    property szNetworkProvider : UInt16[260]
+    property dwAttributes : UInt32
+    property csidl : Int32
+    def initialize(@pidlTargetFolder : Win32cr::UI::Shell::Common::ITEMIDLIST*, @szTargetParsingName : UInt16[260], @szNetworkProvider : UInt16[260], @dwAttributes : UInt32, @csidl : Int32)
+    end
+  end
+
+  @[Extern]
+  struct EXTRASEARCH
+    property guidSearch : LibC::GUID
+    property wszFriendlyName : UInt16[80]
+    property wszUrl : UInt16[2084]
+    def initialize(@guidSearch : LibC::GUID, @wszFriendlyName : UInt16[80], @wszUrl : UInt16[2084])
+    end
+  end
+
+  @[Extern]
+  struct FOLDERSETTINGS
+    property view_mode : UInt32
+    property fFlags : UInt32
+    def initialize(@view_mode : UInt32, @fFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SV2CVW2_PARAMS
+    property cbSize : UInt32
+    property psvPrev : Void*
+    property pfs : Win32cr::UI::Shell::FOLDERSETTINGS*
+    property psbOwner : Void*
+    property prcView : Win32cr::Foundation::RECT*
+    property pvid : LibC::GUID*
+    property hwndView : Win32cr::Foundation::HWND
+    def initialize(@cbSize : UInt32, @psvPrev : Void*, @pfs : Win32cr::UI::Shell::FOLDERSETTINGS*, @psbOwner : Void*, @prcView : Win32cr::Foundation::RECT*, @pvid : LibC::GUID*, @hwndView : Win32cr::Foundation::HWND)
+    end
+  end
+
+  @[Extern]
+  struct SORTCOLUMN
+    property propkey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY
+    property direction : Win32cr::UI::Shell::SORTDIRECTION
+    def initialize(@propkey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY, @direction : Win32cr::UI::Shell::SORTDIRECTION)
+    end
+  end
+
+  @[Extern]
+  struct CM_COLUMNINFO
+    property cbSize : UInt32
+    property dwMask : UInt32
+    property dwState : UInt32
+    property uWidth : UInt32
+    property uDefaultWidth : UInt32
+    property uIdealWidth : UInt32
+    property wszName : UInt16[80]
+    def initialize(@cbSize : UInt32, @dwMask : UInt32, @dwState : UInt32, @uWidth : UInt32, @uDefaultWidth : UInt32, @uIdealWidth : UInt32, @wszName : UInt16[80])
+    end
+  end
+
+  @[Extern]
+  struct SHELL_ITEM_RESOURCE
+    property guidType : LibC::GUID
+    property szName : UInt16[260]
+    def initialize(@guidType : LibC::GUID, @szName : UInt16[260])
+    end
+  end
+
+  @[Extern]
+  struct CATEGORY_INFO
+    property cif : Win32cr::UI::Shell::CATEGORYINFO_FLAGS
+    property wszName : UInt16[260]
+    def initialize(@cif : Win32cr::UI::Shell::CATEGORYINFO_FLAGS, @wszName : UInt16[260])
+    end
+  end
+
+  @[Extern]
+  struct SHDRAGIMAGE
+    property sizeDragImage : Win32cr::Foundation::SIZE
+    property ptOffset : Win32cr::Foundation::POINT
+    property hbmpDragImage : Win32cr::Graphics::Gdi::HBITMAP
+    property crColorKey : UInt32
+    def initialize(@sizeDragImage : Win32cr::Foundation::SIZE, @ptOffset : Win32cr::Foundation::POINT, @hbmpDragImage : Win32cr::Graphics::Gdi::HBITMAP, @crColorKey : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DESKBANDINFO
+    property dwMask : UInt32
+    property ptMinSize : Win32cr::Foundation::POINTL
+    property ptMaxSize : Win32cr::Foundation::POINTL
+    property ptIntegral : Win32cr::Foundation::POINTL
+    property ptActual : Win32cr::Foundation::POINTL
+    property wszTitle : UInt16[256]
+    property dwModeFlags : UInt32
+    property crBkgnd : UInt32
+    def initialize(@dwMask : UInt32, @ptMinSize : Win32cr::Foundation::POINTL, @ptMaxSize : Win32cr::Foundation::POINTL, @ptIntegral : Win32cr::Foundation::POINTL, @ptActual : Win32cr::Foundation::POINTL, @wszTitle : UInt16[256], @dwModeFlags : UInt32, @crBkgnd : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct THUMBBUTTON
+    property dwMask : Win32cr::UI::Shell::THUMBBUTTONMASK
+    property iId : UInt32
+    property iBitmap : UInt32
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property szTip : UInt16[260]
+    property dwFlags : Win32cr::UI::Shell::THUMBBUTTONFLAGS
+    def initialize(@dwMask : Win32cr::UI::Shell::THUMBBUTTONMASK, @iId : UInt32, @iBitmap : UInt32, @hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @szTip : UInt16[260], @dwFlags : Win32cr::UI::Shell::THUMBBUTTONFLAGS)
+    end
+  end
+
+  @[Extern]
+  struct BANDSITEINFO
+    property dwMask : UInt32
+    property dwState : UInt32
+    property dwStyle : UInt32
+    def initialize(@dwMask : UInt32, @dwState : UInt32, @dwStyle : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DELEGATEITEMID
+    property cbSize : UInt16
+    property wOuter : UInt16
+    property cbInner : UInt16
+    property rgb : UInt8*
+    def initialize(@cbSize : UInt16, @wOuter : UInt16, @cbInner : UInt16, @rgb : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct SMDATA
+    property dwMask : UInt32
+    property dwFlags : UInt32
+    property hmenu : Win32cr::UI::WindowsAndMessaging::HMENU
+    property hwnd : Win32cr::Foundation::HWND
+    property uId : UInt32
+    property uIdParent : UInt32
+    property uIdAncestor : UInt32
+    property punk : Void*
+    property pidlFolder : Win32cr::UI::Shell::Common::ITEMIDLIST*
+    property pidlItem : Win32cr::UI::Shell::Common::ITEMIDLIST*
+    property psf : Void*
+    property pvUserData : Void*
+    def initialize(@dwMask : UInt32, @dwFlags : UInt32, @hmenu : Win32cr::UI::WindowsAndMessaging::HMENU, @hwnd : Win32cr::Foundation::HWND, @uId : UInt32, @uIdParent : UInt32, @uIdAncestor : UInt32, @punk : Void*, @pidlFolder : Win32cr::UI::Shell::Common::ITEMIDLIST*, @pidlItem : Win32cr::UI::Shell::Common::ITEMIDLIST*, @psf : Void*, @pvUserData : Void*)
+    end
+  end
+
+  @[Extern]
+  struct SMINFO
+    property dwMask : UInt32
+    property dwType : UInt32
+    property dwFlags : UInt32
+    property iIcon : Int32
+    def initialize(@dwMask : UInt32, @dwType : UInt32, @dwFlags : UInt32, @iIcon : Int32)
+    end
+  end
+
+  @[Extern]
+  struct SMCSHCHANGENOTIFYSTRUCT
+    property lEvent : Int32
+    property pidl1 : Win32cr::UI::Shell::Common::ITEMIDLIST*
+    property pidl2 : Win32cr::UI::Shell::Common::ITEMIDLIST*
+    def initialize(@lEvent : Int32, @pidl1 : Win32cr::UI::Shell::Common::ITEMIDLIST*, @pidl2 : Win32cr::UI::Shell::Common::ITEMIDLIST*)
+    end
+  end
+
+  @[Extern]
+  struct KNOWNFOLDER_DEFINITION
+    property category : Win32cr::UI::Shell::KF_CATEGORY
+    property pszName : Win32cr::Foundation::PWSTR
+    property pszDescription : Win32cr::Foundation::PWSTR
+    property fidParent : LibC::GUID
+    property pszRelativePath : Win32cr::Foundation::PWSTR
+    property pszParsingName : Win32cr::Foundation::PWSTR
+    property pszTooltip : Win32cr::Foundation::PWSTR
+    property pszLocalizedName : Win32cr::Foundation::PWSTR
+    property pszIcon : Win32cr::Foundation::PWSTR
+    property pszSecurity : Win32cr::Foundation::PWSTR
+    property dwAttributes : UInt32
+    property kfdFlags : UInt32
+    property ftidType : LibC::GUID
+    def initialize(@category : Win32cr::UI::Shell::KF_CATEGORY, @pszName : Win32cr::Foundation::PWSTR, @pszDescription : Win32cr::Foundation::PWSTR, @fidParent : LibC::GUID, @pszRelativePath : Win32cr::Foundation::PWSTR, @pszParsingName : Win32cr::Foundation::PWSTR, @pszTooltip : Win32cr::Foundation::PWSTR, @pszLocalizedName : Win32cr::Foundation::PWSTR, @pszIcon : Win32cr::Foundation::PWSTR, @pszSecurity : Win32cr::Foundation::PWSTR, @dwAttributes : UInt32, @kfdFlags : UInt32, @ftidType : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct PREVIEWHANDLERFRAMEINFO
+    property haccel : Win32cr::UI::WindowsAndMessaging::HACCEL
+    property cAccelEntries : UInt32
+    def initialize(@haccel : Win32cr::UI::WindowsAndMessaging::HACCEL, @cAccelEntries : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct BANNER_NOTIFICATION
+    property event : Win32cr::UI::Shell::BANNER_NOTIFICATION_EVENT
+    property providerIdentity : Win32cr::Foundation::PWSTR
+    property contentId : Win32cr::Foundation::PWSTR
+    def initialize(@event : Win32cr::UI::Shell::BANNER_NOTIFICATION_EVENT, @providerIdentity : Win32cr::Foundation::PWSTR, @contentId : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct NSTCCUSTOMDRAW
+    property psi : Void*
+    property uItemState : UInt32
+    property nstcis : UInt32
+    property pszText : Win32cr::Foundation::PWSTR
+    property iImage : Int32
+    property himl : Win32cr::UI::Controls::HIMAGELIST
+    property iLevel : Int32
+    property iIndent : Int32
+    def initialize(@psi : Void*, @uItemState : UInt32, @nstcis : UInt32, @pszText : Win32cr::Foundation::PWSTR, @iImage : Int32, @himl : Win32cr::UI::Controls::HIMAGELIST, @iLevel : Int32, @iIndent : Int32)
+    end
+  end
+
+  @[Extern]
+  struct DATABLOCK_HEADER
+    property cbSize : UInt32
+    property dwSignature : UInt32
+    def initialize(@cbSize : UInt32, @dwSignature : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NT_CONSOLE_PROPS
+    property dbh : Win32cr::UI::Shell::DATABLOCK_HEADER
+    property wFillAttribute : UInt16
+    property wPopupFillAttribute : UInt16
+    property dwScreenBufferSize : Win32cr::System::Console::COORD
+    property dwWindowSize : Win32cr::System::Console::COORD
+    property dwWindowOrigin : Win32cr::System::Console::COORD
+    property nFont : UInt32
+    property nInputBufferSize : UInt32
+    property dwFontSize : Win32cr::System::Console::COORD
+    property uFontFamily : UInt32
+    property uFontWeight : UInt32
+    property face_name : UInt16[32]
+    property uCursorSize : UInt32
+    property bFullScreen : Win32cr::Foundation::BOOL
+    property bQuickEdit : Win32cr::Foundation::BOOL
+    property bInsertMode : Win32cr::Foundation::BOOL
+    property bAutoPosition : Win32cr::Foundation::BOOL
+    property uHistoryBufferSize : UInt32
+    property uNumberOfHistoryBuffers : UInt32
+    property bHistoryNoDup : Win32cr::Foundation::BOOL
+    property color_table : UInt32[16]
+    def initialize(@dbh : Win32cr::UI::Shell::DATABLOCK_HEADER, @wFillAttribute : UInt16, @wPopupFillAttribute : UInt16, @dwScreenBufferSize : Win32cr::System::Console::COORD, @dwWindowSize : Win32cr::System::Console::COORD, @dwWindowOrigin : Win32cr::System::Console::COORD, @nFont : UInt32, @nInputBufferSize : UInt32, @dwFontSize : Win32cr::System::Console::COORD, @uFontFamily : UInt32, @uFontWeight : UInt32, @face_name : UInt16[32], @uCursorSize : UInt32, @bFullScreen : Win32cr::Foundation::BOOL, @bQuickEdit : Win32cr::Foundation::BOOL, @bInsertMode : Win32cr::Foundation::BOOL, @bAutoPosition : Win32cr::Foundation::BOOL, @uHistoryBufferSize : UInt32, @uNumberOfHistoryBuffers : UInt32, @bHistoryNoDup : Win32cr::Foundation::BOOL, @color_table : UInt32[16])
+    end
+  end
+
+  @[Extern]
+  struct NT_FE_CONSOLE_PROPS
+    property dbh : Win32cr::UI::Shell::DATABLOCK_HEADER
+    property uCodePage : UInt32
+    def initialize(@dbh : Win32cr::UI::Shell::DATABLOCK_HEADER, @uCodePage : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct EXP_DARWIN_LINK
+    property dbh : Win32cr::UI::Shell::DATABLOCK_HEADER
+    property szDarwinID : Win32cr::Foundation::CHAR[260]
+    property szwDarwinID : UInt16[260]
+    def initialize(@dbh : Win32cr::UI::Shell::DATABLOCK_HEADER, @szDarwinID : Win32cr::Foundation::CHAR[260], @szwDarwinID : UInt16[260])
+    end
+  end
+
+  @[Extern]
+  struct EXP_SPECIAL_FOLDER
+    property cbSize : UInt32
+    property dwSignature : UInt32
+    property idSpecialFolder : UInt32
+    property cbOffset : UInt32
+    def initialize(@cbSize : UInt32, @dwSignature : UInt32, @idSpecialFolder : UInt32, @cbOffset : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct EXP_SZ_LINK
+    property cbSize : UInt32
+    property dwSignature : UInt32
+    property szTarget : Win32cr::Foundation::CHAR[260]
+    property swzTarget : UInt16[260]
+    def initialize(@cbSize : UInt32, @dwSignature : UInt32, @szTarget : Win32cr::Foundation::CHAR[260], @swzTarget : UInt16[260])
+    end
+  end
+
+  @[Extern]
+  struct EXP_PROPERTYSTORAGE
+    property cbSize : UInt32
+    property dwSignature : UInt32
+    property abPropertyStorage : UInt8*
+    def initialize(@cbSize : UInt32, @dwSignature : UInt32, @abPropertyStorage : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct SHFOLDERCUSTOMSETTINGS
+    property dwSize : UInt32
+    property dwMask : UInt32
+    property pvid : LibC::GUID*
+    property pszWebViewTemplate : Win32cr::Foundation::PWSTR
+    property cchWebViewTemplate : UInt32
+    property pszWebViewTemplateVersion : Win32cr::Foundation::PWSTR
+    property pszInfoTip : Win32cr::Foundation::PWSTR
+    property cchInfoTip : UInt32
+    property pclsid : LibC::GUID*
+    property dwFlags : UInt32
+    property pszIconFile : Win32cr::Foundation::PWSTR
+    property cchIconFile : UInt32
+    property iIconIndex : Int32
+    property pszLogo : Win32cr::Foundation::PWSTR
+    property cchLogo : UInt32
+    def initialize(@dwSize : UInt32, @dwMask : UInt32, @pvid : LibC::GUID*, @pszWebViewTemplate : Win32cr::Foundation::PWSTR, @cchWebViewTemplate : UInt32, @pszWebViewTemplateVersion : Win32cr::Foundation::PWSTR, @pszInfoTip : Win32cr::Foundation::PWSTR, @cchInfoTip : UInt32, @pclsid : LibC::GUID*, @dwFlags : UInt32, @pszIconFile : Win32cr::Foundation::PWSTR, @cchIconFile : UInt32, @iIconIndex : Int32, @pszLogo : Win32cr::Foundation::PWSTR, @cchLogo : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct BROWSEINFOA
+    property hwndOwner : Win32cr::Foundation::HWND
+    property pidlRoot : Win32cr::UI::Shell::Common::ITEMIDLIST*
+    property pszDisplayName : Win32cr::Foundation::PSTR
+    property lpszTitle : Win32cr::Foundation::PSTR
+    property ulFlags : UInt32
+    property lpfn : Win32cr::UI::Shell::BFFCALLBACK
+    property lParam : Win32cr::Foundation::LPARAM
+    property iImage : Int32
+    def initialize(@hwndOwner : Win32cr::Foundation::HWND, @pidlRoot : Win32cr::UI::Shell::Common::ITEMIDLIST*, @pszDisplayName : Win32cr::Foundation::PSTR, @lpszTitle : Win32cr::Foundation::PSTR, @ulFlags : UInt32, @lpfn : Win32cr::UI::Shell::BFFCALLBACK, @lParam : Win32cr::Foundation::LPARAM, @iImage : Int32)
+    end
+  end
+
+  @[Extern]
+  struct BROWSEINFOW
+    property hwndOwner : Win32cr::Foundation::HWND
+    property pidlRoot : Win32cr::UI::Shell::Common::ITEMIDLIST*
+    property pszDisplayName : Win32cr::Foundation::PWSTR
+    property lpszTitle : Win32cr::Foundation::PWSTR
+    property ulFlags : UInt32
+    property lpfn : Win32cr::UI::Shell::BFFCALLBACK
+    property lParam : Win32cr::Foundation::LPARAM
+    property iImage : Int32
+    def initialize(@hwndOwner : Win32cr::Foundation::HWND, @pidlRoot : Win32cr::UI::Shell::Common::ITEMIDLIST*, @pszDisplayName : Win32cr::Foundation::PWSTR, @lpszTitle : Win32cr::Foundation::PWSTR, @ulFlags : UInt32, @lpfn : Win32cr::UI::Shell::BFFCALLBACK, @lParam : Win32cr::Foundation::LPARAM, @iImage : Int32)
+    end
+  end
+
+  @[Extern]
+  struct NRESARRAY
+    property cItems : UInt32
+    property nr : Win32cr::NetworkManagement::WNet::NETRESOURCEA*
+    def initialize(@cItems : UInt32, @nr : Win32cr::NetworkManagement::WNet::NETRESOURCEA*)
+    end
+  end
+
+  @[Extern]
+  struct CIDA
+    property cidl : UInt32
+    property aoffset : UInt32*
+    def initialize(@cidl : UInt32, @aoffset : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct FILEDESCRIPTORA
+    property dwFlags : UInt32
+    property clsid : LibC::GUID
+    property sizel : Win32cr::Foundation::SIZE
+    property pointl : Win32cr::Foundation::POINTL
+    property dwFileAttributes : UInt32
+    property ftCreationTime : Win32cr::Foundation::FILETIME
+    property ftLastAccessTime : Win32cr::Foundation::FILETIME
+    property ftLastWriteTime : Win32cr::Foundation::FILETIME
+    property nFileSizeHigh : UInt32
+    property nFileSizeLow : UInt32
+    property cFileName : Win32cr::Foundation::CHAR[260]
+    def initialize(@dwFlags : UInt32, @clsid : LibC::GUID, @sizel : Win32cr::Foundation::SIZE, @pointl : Win32cr::Foundation::POINTL, @dwFileAttributes : UInt32, @ftCreationTime : Win32cr::Foundation::FILETIME, @ftLastAccessTime : Win32cr::Foundation::FILETIME, @ftLastWriteTime : Win32cr::Foundation::FILETIME, @nFileSizeHigh : UInt32, @nFileSizeLow : UInt32, @cFileName : Win32cr::Foundation::CHAR[260])
+    end
+  end
+
+  @[Extern]
+  struct FILEDESCRIPTORW
+    property dwFlags : UInt32
+    property clsid : LibC::GUID
+    property sizel : Win32cr::Foundation::SIZE
+    property pointl : Win32cr::Foundation::POINTL
+    property dwFileAttributes : UInt32
+    property ftCreationTime : Win32cr::Foundation::FILETIME
+    property ftLastAccessTime : Win32cr::Foundation::FILETIME
+    property ftLastWriteTime : Win32cr::Foundation::FILETIME
+    property nFileSizeHigh : UInt32
+    property nFileSizeLow : UInt32
+    property cFileName : UInt16[260]
+    def initialize(@dwFlags : UInt32, @clsid : LibC::GUID, @sizel : Win32cr::Foundation::SIZE, @pointl : Win32cr::Foundation::POINTL, @dwFileAttributes : UInt32, @ftCreationTime : Win32cr::Foundation::FILETIME, @ftLastAccessTime : Win32cr::Foundation::FILETIME, @ftLastWriteTime : Win32cr::Foundation::FILETIME, @nFileSizeHigh : UInt32, @nFileSizeLow : UInt32, @cFileName : UInt16[260])
+    end
+  end
+
+  @[Extern]
+  struct FILEGROUPDESCRIPTORA
+    property cItems : UInt32
+    property fgd : Win32cr::UI::Shell::FILEDESCRIPTORA*
+    def initialize(@cItems : UInt32, @fgd : Win32cr::UI::Shell::FILEDESCRIPTORA*)
+    end
+  end
+
+  @[Extern]
+  struct FILEGROUPDESCRIPTORW
+    property cItems : UInt32
+    property fgd : Win32cr::UI::Shell::FILEDESCRIPTORW*
+    def initialize(@cItems : UInt32, @fgd : Win32cr::UI::Shell::FILEDESCRIPTORW*)
+    end
+  end
+
+  @[Extern]
+  struct DROPFILES
+    property pFiles : UInt32
+    property pt : Win32cr::Foundation::POINT
+    property fNC : Win32cr::Foundation::BOOL
+    property fWide : Win32cr::Foundation::BOOL
+    def initialize(@pFiles : UInt32, @pt : Win32cr::Foundation::POINT, @fNC : Win32cr::Foundation::BOOL, @fWide : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct FILE_ATTRIBUTES_ARRAY
+    property cItems : UInt32
+    property dwSumFileAttributes : UInt32
+    property dwProductFileAttributes : UInt32
+    property rgdwFileAttributes : UInt32*
+    def initialize(@cItems : UInt32, @dwSumFileAttributes : UInt32, @dwProductFileAttributes : UInt32, @rgdwFileAttributes : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct DROPDESCRIPTION
+    property type__ : Win32cr::UI::Shell::DROPIMAGETYPE
+    property szMessage : UInt16[260]
+    property szInsert : UInt16[260]
+    def initialize(@type__ : Win32cr::UI::Shell::DROPIMAGETYPE, @szMessage : UInt16[260], @szInsert : UInt16[260])
+    end
+  end
+
+  @[Extern]
+  struct SHChangeNotifyEntry
+    property pidl : Win32cr::UI::Shell::Common::ITEMIDLIST*
+    property fRecursive : Win32cr::Foundation::BOOL
+    def initialize(@pidl : Win32cr::UI::Shell::Common::ITEMIDLIST*, @fRecursive : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct SHARDAPPIDINFO
+    property psi : Void*
+    property pszAppID : Win32cr::Foundation::PWSTR
+    def initialize(@psi : Void*, @pszAppID : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct SHARDAPPIDINFOIDLIST
+    property pidl : Win32cr::UI::Shell::Common::ITEMIDLIST*
+    property pszAppID : Win32cr::Foundation::PWSTR
+    def initialize(@pidl : Win32cr::UI::Shell::Common::ITEMIDLIST*, @pszAppID : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct SHARDAPPIDINFOLINK
+    property psl : Void*
+    property pszAppID : Win32cr::Foundation::PWSTR
+    def initialize(@psl : Void*, @pszAppID : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct SHChangeDWORDAsIDList
+    property cb : UInt16
+    property dwItem1 : UInt32
+    property dwItem2 : UInt32
+    property cbZero : UInt16
+    def initialize(@cb : UInt16, @dwItem1 : UInt32, @dwItem2 : UInt32, @cbZero : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct SHChangeUpdateImageIDList
+    property cb : UInt16
+    property iIconIndex : Int32
+    property iCurIndex : Int32
+    property uFlags : UInt32
+    property dwProcessID : UInt32
+    property szName : UInt16[260]
+    property cbZero : UInt16
+    def initialize(@cb : UInt16, @iIconIndex : Int32, @iCurIndex : Int32, @uFlags : UInt32, @dwProcessID : UInt32, @szName : UInt16[260], @cbZero : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct SHDESCRIPTIONID
+    property dwDescriptionId : Win32cr::UI::Shell::SHDID_ID
+    property clsid : LibC::GUID
+    def initialize(@dwDescriptionId : Win32cr::UI::Shell::SHDID_ID, @clsid : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct AUTO_SCROLL_DATA
+    property iNextSample : Int32
+    property dwLastScroll : UInt32
+    property bFull : Win32cr::Foundation::BOOL
+    property pts : Win32cr::Foundation::POINT[3]
+    property dwTimes : UInt32[3]
+    def initialize(@iNextSample : Int32, @dwLastScroll : UInt32, @bFull : Win32cr::Foundation::BOOL, @pts : Win32cr::Foundation::POINT[3], @dwTimes : UInt32[3])
+    end
+  end
+
+  @[Extern]
+  struct CABINETSTATE
+    property cLength : UInt16
+    property nVersion : UInt16
+    property _bitfield : Int32
+    property fMenuEnumFilter : UInt32
+    def initialize(@cLength : UInt16, @nVersion : UInt16, @_bitfield : Int32, @fMenuEnumFilter : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct OPENASINFO
+    property pcszFile : Win32cr::Foundation::PWSTR
+    property pcszClass : Win32cr::Foundation::PWSTR
+    property oaifInFlags : Win32cr::UI::Shell::OPEN_AS_INFO_FLAGS
+    def initialize(@pcszFile : Win32cr::Foundation::PWSTR, @pcszClass : Win32cr::Foundation::PWSTR, @oaifInFlags : Win32cr::UI::Shell::OPEN_AS_INFO_FLAGS)
+    end
+  end
+
+  @[Extern]
+  struct QCMINFO_IDMAP_PLACEMENT
+    property id : UInt32
+    property fFlags : UInt32
+    def initialize(@id : UInt32, @fFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct QCMINFO_IDMAP
+    property nMaxIds : UInt32
+    property pIdList : Win32cr::UI::Shell::QCMINFO_IDMAP_PLACEMENT*
+    def initialize(@nMaxIds : UInt32, @pIdList : Win32cr::UI::Shell::QCMINFO_IDMAP_PLACEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct QCMINFO
+    property hmenu : Win32cr::UI::WindowsAndMessaging::HMENU
+    property indexMenu : UInt32
+    property idCmdFirst : UInt32
+    property idCmdLast : UInt32
+    property pIdMap : Win32cr::UI::Shell::QCMINFO_IDMAP*
+    def initialize(@hmenu : Win32cr::UI::WindowsAndMessaging::HMENU, @indexMenu : UInt32, @idCmdFirst : UInt32, @idCmdLast : UInt32, @pIdMap : Win32cr::UI::Shell::QCMINFO_IDMAP*)
+    end
+  end
+
+  @[Extern]
+  struct DETAILSINFO
+    property pidl : Win32cr::UI::Shell::Common::ITEMIDLIST*
+    property fmt : Int32
+    property cxChar : Int32
+    property str : Win32cr::UI::Shell::Common::STRRET
+    property iImage : Int32
+    def initialize(@pidl : Win32cr::UI::Shell::Common::ITEMIDLIST*, @fmt : Int32, @cxChar : Int32, @str : Win32cr::UI::Shell::Common::STRRET, @iImage : Int32)
+    end
+  end
+
+  @[Extern]
+  struct SFVM_PROPPAGE_DATA
+    property dwReserved : UInt32
+    property pfn : Win32cr::UI::Controls::LPFNSVADDPROPSHEETPAGE
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@dwReserved : UInt32, @pfn : Win32cr::UI::Controls::LPFNSVADDPROPSHEETPAGE, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
+
+  @[Extern]
+  struct SFVM_HELPTOPIC_DATA
+    property wszHelpFile : UInt16[260]
+    property wszHelpTopic : UInt16[260]
+    def initialize(@wszHelpFile : UInt16[260], @wszHelpTopic : UInt16[260])
+    end
+  end
+
+  @[Extern]
+  struct ITEMSPACING
+    property cxSmall : Int32
+    property cySmall : Int32
+    property cxLarge : Int32
+    property cyLarge : Int32
+    def initialize(@cxSmall : Int32, @cySmall : Int32, @cxLarge : Int32, @cyLarge : Int32)
+    end
+  end
+
+  @[Extern]
+  struct SFV_CREATE
+    property cbSize : UInt32
+    property pshf : Void*
+    property psvOuter : Void*
+    property psfvcb : Void*
+    def initialize(@cbSize : UInt32, @pshf : Void*, @psvOuter : Void*, @psfvcb : Void*)
+    end
+  end
+
+  @[Extern]
+  struct DEFCONTEXTMENU
+    property hwnd : Win32cr::Foundation::HWND
+    property pcmcb : Void*
+    property pidlFolder : Win32cr::UI::Shell::Common::ITEMIDLIST*
+    property psf : Void*
+    property cidl : UInt32
+    property apidl : Win32cr::UI::Shell::Common::ITEMIDLIST**
+    property punkAssociationInfo : Void*
+    property cKeys : UInt32
+    property aKeys : Win32cr::System::Registry::HKEY*
+    def initialize(@hwnd : Win32cr::Foundation::HWND, @pcmcb : Void*, @pidlFolder : Win32cr::UI::Shell::Common::ITEMIDLIST*, @psf : Void*, @cidl : UInt32, @apidl : Win32cr::UI::Shell::Common::ITEMIDLIST**, @punkAssociationInfo : Void*, @cKeys : UInt32, @aKeys : Win32cr::System::Registry::HKEY*)
+    end
+  end
+
+  @[Extern]
+  struct DFMICS
+    property cbSize : UInt32
+    property fMask : UInt32
+    property lParam : Win32cr::Foundation::LPARAM
+    property idCmdFirst : UInt32
+    property idDefMax : UInt32
+    property pici : Win32cr::UI::Shell::CMINVOKECOMMANDINFO*
+    property punkSite : Void*
+    def initialize(@cbSize : UInt32, @fMask : UInt32, @lParam : Win32cr::Foundation::LPARAM, @idCmdFirst : UInt32, @idDefMax : UInt32, @pici : Win32cr::UI::Shell::CMINVOKECOMMANDINFO*, @punkSite : Void*)
+    end
+  end
+
+  @[Extern]
+  struct CSFV
+    property cbSize : UInt32
+    property pshf : Void*
+    property psvOuter : Void*
+    property pidl : Win32cr::UI::Shell::Common::ITEMIDLIST*
+    property lEvents : Int32
+    property pfnCallback : Win32cr::UI::Shell::LPFNVIEWCALLBACK
+    property fvm : Win32cr::UI::Shell::FOLDERVIEWMODE
+    def initialize(@cbSize : UInt32, @pshf : Void*, @psvOuter : Void*, @pidl : Win32cr::UI::Shell::Common::ITEMIDLIST*, @lEvents : Int32, @pfnCallback : Win32cr::UI::Shell::LPFNVIEWCALLBACK, @fvm : Win32cr::UI::Shell::FOLDERVIEWMODE)
+    end
+  end
+
+  @[Extern]
+  struct SHELLSTATEA
+    property _bitfield1 : Int32
+    property dwWin95Unused : UInt32
+    property uWin95Unused : UInt32
+    property lParamSort : Int32
+    property iSortDirection : Int32
+    property version : UInt32
+    property uNotUsed : UInt32
+    property _bitfield2 : Int32
+    def initialize(@_bitfield1 : Int32, @dwWin95Unused : UInt32, @uWin95Unused : UInt32, @lParamSort : Int32, @iSortDirection : Int32, @version : UInt32, @uNotUsed : UInt32, @_bitfield2 : Int32)
+    end
+  end
+
+  @[Extern]
+  struct SHELLSTATEW
+    property _bitfield1 : Int32
+    property dwWin95Unused : UInt32
+    property uWin95Unused : UInt32
+    property lParamSort : Int32
+    property iSortDirection : Int32
+    property version : UInt32
+    property uNotUsed : UInt32
+    property _bitfield2 : Int32
+    def initialize(@_bitfield1 : Int32, @dwWin95Unused : UInt32, @uWin95Unused : UInt32, @lParamSort : Int32, @iSortDirection : Int32, @version : UInt32, @uNotUsed : UInt32, @_bitfield2 : Int32)
+    end
+  end
+
+  @[Extern]
+  struct SHELLFLAGSTATE
+    property _bitfield : Int32
+    def initialize(@_bitfield : Int32)
+    end
+  end
+
+  @[Extern]
+  struct BANDINFOSFB
+    property dwMask : UInt32
+    property dwStateMask : UInt32
+    property dwState : UInt32
+    property crBkgnd : UInt32
+    property crBtnLt : UInt32
+    property crBtnDk : UInt32
+    property wViewMode : UInt16
+    property wAlign : UInt16
+    property psf : Void*
+    property pidl : Win32cr::UI::Shell::Common::ITEMIDLIST*
+    def initialize(@dwMask : UInt32, @dwStateMask : UInt32, @dwState : UInt32, @crBkgnd : UInt32, @crBtnLt : UInt32, @crBtnDk : UInt32, @wViewMode : UInt16, @wAlign : UInt16, @psf : Void*, @pidl : Win32cr::UI::Shell::Common::ITEMIDLIST*)
+    end
+  end
+
+  @[Extern]
+  struct SHCOLUMNINFO
+    property scid : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY
+    property vt : UInt16
+    property fmt : UInt32
+    property cChars : UInt32
+    property csFlags : UInt32
+    property wszTitle : UInt16[80]
+    property wszDescription : UInt16[128]
+    def initialize(@scid : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY, @vt : UInt16, @fmt : UInt32, @cChars : UInt32, @csFlags : UInt32, @wszTitle : UInt16[80], @wszDescription : UInt16[128])
+    end
+  end
+
+  @[Extern]
+  struct SHCOLUMNINIT
+    property dwFlags : UInt32
+    property dwReserved : UInt32
+    property wszFolder : UInt16[260]
+    def initialize(@dwFlags : UInt32, @dwReserved : UInt32, @wszFolder : UInt16[260])
+    end
+  end
+
+  @[Extern]
+  struct SHCOLUMNDATA
+    property dwFlags : UInt32
+    property dwFileAttributes : UInt32
+    property dwReserved : UInt32
+    property pwszExt : Win32cr::Foundation::PWSTR
+    property wszFile : UInt16[260]
+    def initialize(@dwFlags : UInt32, @dwFileAttributes : UInt32, @dwReserved : UInt32, @pwszExt : Win32cr::Foundation::PWSTR, @wszFile : UInt16[260])
+    end
+  end
+
+  @[Extern]
+  struct SHChangeProductKeyAsIDList
+    property cb : UInt16
+    property wszProductKey : UInt16[39]
+    property cbZero : UInt16
+    def initialize(@cb : UInt16, @wszProductKey : UInt16[39], @cbZero : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct TBINFO
+    property cbuttons : UInt32
+    property uFlags : UInt32
+    def initialize(@cbuttons : UInt32, @uFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SFV_SETITEMPOS
+    property pidl : Win32cr::UI::Shell::Common::ITEMIDLIST*
+    property pt : Win32cr::Foundation::POINT
+    def initialize(@pidl : Win32cr::UI::Shell::Common::ITEMIDLIST*, @pt : Win32cr::Foundation::POINT)
+    end
+  end
+
+  @[Extern]
+  struct AASHELLMENUFILENAME
+    property cbTotal : Int16
+    property rgbReserved : UInt8[12]
+    property szFileName : UInt16*
+    def initialize(@cbTotal : Int16, @rgbReserved : UInt8[12], @szFileName : UInt16*)
+    end
+  end
+
+  @[Extern]
+  struct AASHELLMENUITEM
+    property lpReserved1 : Void*
+    property iReserved : Int32
+    property uiReserved : UInt32
+    property lpName : Win32cr::UI::Shell::AASHELLMENUFILENAME*
+    property psz : Win32cr::Foundation::PWSTR
+    def initialize(@lpReserved1 : Void*, @iReserved : Int32, @uiReserved : UInt32, @lpName : Win32cr::UI::Shell::AASHELLMENUFILENAME*, @psz : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record DRAGINFOA,
-    uSize : UInt32,
-    pt : Win32cr::Foundation::POINT,
-    fNC : Win32cr::Foundation::BOOL,
-    lpFileList : Win32cr::Foundation::PSTR,
-    grfKeyState : UInt32
-  {% end %}
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record DRAGINFOW,
-    uSize : UInt32,
-    pt : Win32cr::Foundation::POINT,
-    fNC : Win32cr::Foundation::BOOL,
-    lpFileList : Win32cr::Foundation::PWSTR,
-    grfKeyState : UInt32
-  {% end %}
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record APPBARDATA,
-    cbSize : UInt32,
-    hWnd : Win32cr::Foundation::HWND,
-    uCallbackMessage : UInt32,
-    uEdge : UInt32,
-    rc : Win32cr::Foundation::RECT,
-    lParam : Win32cr::Foundation::LPARAM
-  {% end %}
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record SHFILEOPSTRUCTA,
-    hwnd : Win32cr::Foundation::HWND,
-    wFunc : UInt32,
-    pFrom : Int8*,
-    pTo : Int8*,
-    fFlags : UInt16,
-    fAnyOperationsAborted : Win32cr::Foundation::BOOL,
-    hNameMappings : Void*,
-    lpszProgressTitle : Win32cr::Foundation::PSTR
-  {% end %}
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record SHFILEOPSTRUCTW,
-    hwnd : Win32cr::Foundation::HWND,
-    wFunc : UInt32,
-    pFrom : Win32cr::Foundation::PWSTR,
-    pTo : Win32cr::Foundation::PWSTR,
-    fFlags : UInt16,
-    fAnyOperationsAborted : Win32cr::Foundation::BOOL,
-    hNameMappings : Void*,
-    lpszProgressTitle : Win32cr::Foundation::PWSTR
-  {% end %}
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record SHNAMEMAPPINGA,
-    pszOldPath : Win32cr::Foundation::PSTR,
-    pszNewPath : Win32cr::Foundation::PSTR,
-    cchOldPath : Int32,
-    cchNewPath : Int32
-  {% end %}
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record SHNAMEMAPPINGW,
-    pszOldPath : Win32cr::Foundation::PWSTR,
-    pszNewPath : Win32cr::Foundation::PWSTR,
-    cchOldPath : Int32,
-    cchNewPath : Int32
-  {% end %}
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record SHELLEXECUTEINFOA,
-    cbSize : UInt32,
-    fMask : UInt32,
-    hwnd : Win32cr::Foundation::HWND,
-    lpVerb : Win32cr::Foundation::PSTR,
-    lpFile : Win32cr::Foundation::PSTR,
-    lpParameters : Win32cr::Foundation::PSTR,
-    lpDirectory : Win32cr::Foundation::PSTR,
-    nShow : Int32,
-    hInstApp : Win32cr::Foundation::HINSTANCE,
-    lpIDList : Void*,
-    lpClass : Win32cr::Foundation::PSTR,
-    hkeyClass : Win32cr::System::Registry::HKEY,
-    dwHotKey : UInt32,
-    anonymous : Anonymous_e__Union_,
-    hProcess : Win32cr::Foundation::HANDLE do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      hIcon : Win32cr::Foundation::HANDLE,
-      hMonitor : Win32cr::Foundation::HANDLE
-
+  struct DRAGINFOA
+    property uSize : UInt32
+    property pt : Win32cr::Foundation::POINT
+    property fNC : Win32cr::Foundation::BOOL
+    property lpFileList : Win32cr::Foundation::PSTR
+    property grfKeyState : UInt32
+    def initialize(@uSize : UInt32, @pt : Win32cr::Foundation::POINT, @fNC : Win32cr::Foundation::BOOL, @lpFileList : Win32cr::Foundation::PSTR, @grfKeyState : UInt32)
+    end
   end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SHELLEXECUTEINFOW,
-    cbSize : UInt32,
-    fMask : UInt32,
-    hwnd : Win32cr::Foundation::HWND,
-    lpVerb : Win32cr::Foundation::PWSTR,
-    lpFile : Win32cr::Foundation::PWSTR,
-    lpParameters : Win32cr::Foundation::PWSTR,
-    lpDirectory : Win32cr::Foundation::PWSTR,
-    nShow : Int32,
-    hInstApp : Win32cr::Foundation::HINSTANCE,
-    lpIDList : Void*,
-    lpClass : Win32cr::Foundation::PWSTR,
-    hkeyClass : Win32cr::System::Registry::HKEY,
-    dwHotKey : UInt32,
-    anonymous : Anonymous_e__Union_,
-    hProcess : Win32cr::Foundation::HANDLE do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      hIcon : Win32cr::Foundation::HANDLE,
-      hMonitor : Win32cr::Foundation::HANDLE
-
+  struct DRAGINFOW
+    property uSize : UInt32
+    property pt : Win32cr::Foundation::POINT
+    property fNC : Win32cr::Foundation::BOOL
+    property lpFileList : Win32cr::Foundation::PWSTR
+    property grfKeyState : UInt32
+    def initialize(@uSize : UInt32, @pt : Win32cr::Foundation::POINT, @fNC : Win32cr::Foundation::BOOL, @lpFileList : Win32cr::Foundation::PWSTR, @grfKeyState : UInt32)
+    end
   end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SHCREATEPROCESSINFOW,
-    cbSize : UInt32,
-    fMask : UInt32,
-    hwnd : Win32cr::Foundation::HWND,
-    pszFile : Win32cr::Foundation::PWSTR,
-    pszParameters : Win32cr::Foundation::PWSTR,
-    pszCurrentDirectory : Win32cr::Foundation::PWSTR,
-    hUserToken : Win32cr::Foundation::HANDLE,
-    lpProcessAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*,
-    lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*,
-    bInheritHandles : Win32cr::Foundation::BOOL,
-    dwCreationFlags : UInt32,
-    lpStartupInfo : Win32cr::System::Threading::STARTUPINFOW*,
-    lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*
-  {% end %}
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record ASSOCIATIONELEMENT,
-    ac : Win32cr::UI::Shell::ASSOCCLASS,
-    hkClass : Win32cr::System::Registry::HKEY,
-    pszClass : Win32cr::Foundation::PWSTR
-  {% end %}
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record SHQUERYRBINFO,
-    cbSize : UInt32,
-    i64Size : Int64,
-    i64NumItems : Int64
-  {% end %}
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record NOTIFYICONDATAA,
-    cbSize : UInt32,
-    hWnd : Win32cr::Foundation::HWND,
-    uID : UInt32,
-    uFlags : Win32cr::UI::Shell::NOTIFY_ICON_DATA_FLAGS,
-    uCallbackMessage : UInt32,
-    hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-    szTip : Win32cr::Foundation::CHAR[128],
-    dwState : UInt32,
-    dwStateMask : UInt32,
-    szInfo : Win32cr::Foundation::CHAR[256],
-    anonymous : Anonymous_e__Union_,
-    szInfoTitle : Win32cr::Foundation::CHAR[64],
-    dwInfoFlags : UInt32,
-    guidItem : LibC::GUID,
-    hBalloonIcon : Win32cr::UI::WindowsAndMessaging::HICON do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      uTimeout : UInt32,
-      uVersion : UInt32
-
+  struct APPBARDATA
+    property cbSize : UInt32
+    property hWnd : Win32cr::Foundation::HWND
+    property uCallbackMessage : UInt32
+    property uEdge : UInt32
+    property rc : Win32cr::Foundation::RECT
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@cbSize : UInt32, @hWnd : Win32cr::Foundation::HWND, @uCallbackMessage : UInt32, @uEdge : UInt32, @rc : Win32cr::Foundation::RECT, @lParam : Win32cr::Foundation::LPARAM)
+    end
   end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record NOTIFYICONDATAW,
-    cbSize : UInt32,
-    hWnd : Win32cr::Foundation::HWND,
-    uID : UInt32,
-    uFlags : Win32cr::UI::Shell::NOTIFY_ICON_DATA_FLAGS,
-    uCallbackMessage : UInt32,
-    hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-    szTip : UInt16[128],
-    dwState : UInt32,
-    dwStateMask : UInt32,
-    szInfo : UInt16[256],
-    anonymous : Anonymous_e__Union_,
-    szInfoTitle : UInt16[64],
-    dwInfoFlags : UInt32,
-    guidItem : LibC::GUID,
-    hBalloonIcon : Win32cr::UI::WindowsAndMessaging::HICON do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      uTimeout : UInt32,
-      uVersion : UInt32
-
+  struct SHFILEOPSTRUCTA
+    property hwnd : Win32cr::Foundation::HWND
+    property wFunc : UInt32
+    property pFrom : Int8*
+    property pTo : Int8*
+    property fFlags : UInt16
+    property fAnyOperationsAborted : Win32cr::Foundation::BOOL
+    property hNameMappings : Void*
+    property lpszProgressTitle : Win32cr::Foundation::PSTR
+    def initialize(@hwnd : Win32cr::Foundation::HWND, @wFunc : UInt32, @pFrom : Int8*, @pTo : Int8*, @fFlags : UInt16, @fAnyOperationsAborted : Win32cr::Foundation::BOOL, @hNameMappings : Void*, @lpszProgressTitle : Win32cr::Foundation::PSTR)
+    end
   end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record NOTIFYICONIDENTIFIER,
-    cbSize : UInt32,
-    hWnd : Win32cr::Foundation::HWND,
-    uID : UInt32,
-    guidItem : LibC::GUID
+  struct SHFILEOPSTRUCTW
+    property hwnd : Win32cr::Foundation::HWND
+    property wFunc : UInt32
+    property pFrom : Win32cr::Foundation::PWSTR
+    property pTo : Win32cr::Foundation::PWSTR
+    property fFlags : UInt16
+    property fAnyOperationsAborted : Win32cr::Foundation::BOOL
+    property hNameMappings : Void*
+    property lpszProgressTitle : Win32cr::Foundation::PWSTR
+    def initialize(@hwnd : Win32cr::Foundation::HWND, @wFunc : UInt32, @pFrom : Win32cr::Foundation::PWSTR, @pTo : Win32cr::Foundation::PWSTR, @fFlags : UInt16, @fAnyOperationsAborted : Win32cr::Foundation::BOOL, @hNameMappings : Void*, @lpszProgressTitle : Win32cr::Foundation::PWSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SHFILEINFOA,
-    hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-    iIcon : Int32,
-    dwAttributes : UInt32,
-    szDisplayName : Win32cr::Foundation::CHAR[260],
-    szTypeName : Win32cr::Foundation::CHAR[80]
+  struct SHNAMEMAPPINGA
+    property pszOldPath : Win32cr::Foundation::PSTR
+    property pszNewPath : Win32cr::Foundation::PSTR
+    property cchOldPath : Int32
+    property cchNewPath : Int32
+    def initialize(@pszOldPath : Win32cr::Foundation::PSTR, @pszNewPath : Win32cr::Foundation::PSTR, @cchOldPath : Int32, @cchNewPath : Int32)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SHFILEINFOW,
-    hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-    iIcon : Int32,
-    dwAttributes : UInt32,
-    szDisplayName : UInt16[260],
-    szTypeName : UInt16[80]
+  struct SHNAMEMAPPINGW
+    property pszOldPath : Win32cr::Foundation::PWSTR
+    property pszNewPath : Win32cr::Foundation::PWSTR
+    property cchOldPath : Int32
+    property cchNewPath : Int32
+    def initialize(@pszOldPath : Win32cr::Foundation::PWSTR, @pszNewPath : Win32cr::Foundation::PWSTR, @cchOldPath : Int32, @cchNewPath : Int32)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SHSTOCKICONINFO,
-    cbSize : UInt32,
-    hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-    iSysImageIndex : Int32,
-    iIcon : Int32,
-    szPath : UInt16[260]
+  struct SHELLEXECUTEINFOA
+    property cbSize : UInt32
+    property fMask : UInt32
+    property hwnd : Win32cr::Foundation::HWND
+    property lpVerb : Win32cr::Foundation::PSTR
+    property lpFile : Win32cr::Foundation::PSTR
+    property lpParameters : Win32cr::Foundation::PSTR
+    property lpDirectory : Win32cr::Foundation::PSTR
+    property nShow : Int32
+    property hInstApp : Win32cr::Foundation::HINSTANCE
+    property lpIDList : Void*
+    property lpClass : Win32cr::Foundation::PSTR
+    property hkeyClass : Win32cr::System::Registry::HKEY
+    property dwHotKey : UInt32
+    property anonymous : Anonymous_e__Union_
+    property hProcess : Win32cr::Foundation::HANDLE
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property hIcon : Win32cr::Foundation::HANDLE
+    property hMonitor : Win32cr::Foundation::HANDLE
+    def initialize(@hIcon : Win32cr::Foundation::HANDLE, @hMonitor : Win32cr::Foundation::HANDLE)
+    end
+    end
+
+    def initialize(@cbSize : UInt32, @fMask : UInt32, @hwnd : Win32cr::Foundation::HWND, @lpVerb : Win32cr::Foundation::PSTR, @lpFile : Win32cr::Foundation::PSTR, @lpParameters : Win32cr::Foundation::PSTR, @lpDirectory : Win32cr::Foundation::PSTR, @nShow : Int32, @hInstApp : Win32cr::Foundation::HINSTANCE, @lpIDList : Void*, @lpClass : Win32cr::Foundation::PSTR, @hkeyClass : Win32cr::System::Registry::HKEY, @dwHotKey : UInt32, @anonymous : Anonymous_e__Union_, @hProcess : Win32cr::Foundation::HANDLE)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record OPEN_PRINTER_PROPS_INFOA,
-    dwSize : UInt32,
-    pszSheetName : Win32cr::Foundation::PSTR,
-    uSheetIndex : UInt32,
-    dwFlags : UInt32,
-    bModal : Win32cr::Foundation::BOOL
+  struct SHELLEXECUTEINFOW
+    property cbSize : UInt32
+    property fMask : UInt32
+    property hwnd : Win32cr::Foundation::HWND
+    property lpVerb : Win32cr::Foundation::PWSTR
+    property lpFile : Win32cr::Foundation::PWSTR
+    property lpParameters : Win32cr::Foundation::PWSTR
+    property lpDirectory : Win32cr::Foundation::PWSTR
+    property nShow : Int32
+    property hInstApp : Win32cr::Foundation::HINSTANCE
+    property lpIDList : Void*
+    property lpClass : Win32cr::Foundation::PWSTR
+    property hkeyClass : Win32cr::System::Registry::HKEY
+    property dwHotKey : UInt32
+    property anonymous : Anonymous_e__Union_
+    property hProcess : Win32cr::Foundation::HANDLE
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property hIcon : Win32cr::Foundation::HANDLE
+    property hMonitor : Win32cr::Foundation::HANDLE
+    def initialize(@hIcon : Win32cr::Foundation::HANDLE, @hMonitor : Win32cr::Foundation::HANDLE)
+    end
+    end
+
+    def initialize(@cbSize : UInt32, @fMask : UInt32, @hwnd : Win32cr::Foundation::HWND, @lpVerb : Win32cr::Foundation::PWSTR, @lpFile : Win32cr::Foundation::PWSTR, @lpParameters : Win32cr::Foundation::PWSTR, @lpDirectory : Win32cr::Foundation::PWSTR, @nShow : Int32, @hInstApp : Win32cr::Foundation::HINSTANCE, @lpIDList : Void*, @lpClass : Win32cr::Foundation::PWSTR, @hkeyClass : Win32cr::System::Registry::HKEY, @dwHotKey : UInt32, @anonymous : Anonymous_e__Union_, @hProcess : Win32cr::Foundation::HANDLE)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record OPEN_PRINTER_PROPS_INFOW,
-    dwSize : UInt32,
-    pszSheetName : Win32cr::Foundation::PWSTR,
-    uSheetIndex : UInt32,
-    dwFlags : UInt32,
-    bModal : Win32cr::Foundation::BOOL
+  struct SHCREATEPROCESSINFOW
+    property cbSize : UInt32
+    property fMask : UInt32
+    property hwnd : Win32cr::Foundation::HWND
+    property pszFile : Win32cr::Foundation::PWSTR
+    property pszParameters : Win32cr::Foundation::PWSTR
+    property pszCurrentDirectory : Win32cr::Foundation::PWSTR
+    property hUserToken : Win32cr::Foundation::HANDLE
+    property lpProcessAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*
+    property lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*
+    property bInheritHandles : Win32cr::Foundation::BOOL
+    property dwCreationFlags : UInt32
+    property lpStartupInfo : Win32cr::System::Threading::STARTUPINFOW*
+    property lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*
+    def initialize(@cbSize : UInt32, @fMask : UInt32, @hwnd : Win32cr::Foundation::HWND, @pszFile : Win32cr::Foundation::PWSTR, @pszParameters : Win32cr::Foundation::PWSTR, @pszCurrentDirectory : Win32cr::Foundation::PWSTR, @hUserToken : Win32cr::Foundation::HANDLE, @lpProcessAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, @lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, @bInheritHandles : Win32cr::Foundation::BOOL, @dwCreationFlags : UInt32, @lpStartupInfo : Win32cr::System::Threading::STARTUPINFOW*, @lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct ASSOCIATIONELEMENT
+    property ac : Win32cr::UI::Shell::ASSOCCLASS
+    property hkClass : Win32cr::System::Registry::HKEY
+    property pszClass : Win32cr::Foundation::PWSTR
+    def initialize(@ac : Win32cr::UI::Shell::ASSOCCLASS, @hkClass : Win32cr::System::Registry::HKEY, @pszClass : Win32cr::Foundation::PWSTR)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct SHQUERYRBINFO
+    property cbSize : UInt32
+    property i64Size : Int64
+    property i64NumItems : Int64
+    def initialize(@cbSize : UInt32, @i64Size : Int64, @i64NumItems : Int64)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct NOTIFYICONDATAA
+    property cbSize : UInt32
+    property hWnd : Win32cr::Foundation::HWND
+    property uID : UInt32
+    property uFlags : Win32cr::UI::Shell::NOTIFY_ICON_DATA_FLAGS
+    property uCallbackMessage : UInt32
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property szTip : Win32cr::Foundation::CHAR[128]
+    property dwState : UInt32
+    property dwStateMask : UInt32
+    property szInfo : Win32cr::Foundation::CHAR[256]
+    property anonymous : Anonymous_e__Union_
+    property szInfoTitle : Win32cr::Foundation::CHAR[64]
+    property dwInfoFlags : UInt32
+    property guidItem : LibC::GUID
+    property hBalloonIcon : Win32cr::UI::WindowsAndMessaging::HICON
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property uTimeout : UInt32
+    property uVersion : UInt32
+    def initialize(@uTimeout : UInt32, @uVersion : UInt32)
+    end
+    end
+
+    def initialize(@cbSize : UInt32, @hWnd : Win32cr::Foundation::HWND, @uID : UInt32, @uFlags : Win32cr::UI::Shell::NOTIFY_ICON_DATA_FLAGS, @uCallbackMessage : UInt32, @hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @szTip : Win32cr::Foundation::CHAR[128], @dwState : UInt32, @dwStateMask : UInt32, @szInfo : Win32cr::Foundation::CHAR[256], @anonymous : Anonymous_e__Union_, @szInfoTitle : Win32cr::Foundation::CHAR[64], @dwInfoFlags : UInt32, @guidItem : LibC::GUID, @hBalloonIcon : Win32cr::UI::WindowsAndMessaging::HICON)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct NOTIFYICONDATAW
+    property cbSize : UInt32
+    property hWnd : Win32cr::Foundation::HWND
+    property uID : UInt32
+    property uFlags : Win32cr::UI::Shell::NOTIFY_ICON_DATA_FLAGS
+    property uCallbackMessage : UInt32
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property szTip : UInt16[128]
+    property dwState : UInt32
+    property dwStateMask : UInt32
+    property szInfo : UInt16[256]
+    property anonymous : Anonymous_e__Union_
+    property szInfoTitle : UInt16[64]
+    property dwInfoFlags : UInt32
+    property guidItem : LibC::GUID
+    property hBalloonIcon : Win32cr::UI::WindowsAndMessaging::HICON
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property uTimeout : UInt32
+    property uVersion : UInt32
+    def initialize(@uTimeout : UInt32, @uVersion : UInt32)
+    end
+    end
+
+    def initialize(@cbSize : UInt32, @hWnd : Win32cr::Foundation::HWND, @uID : UInt32, @uFlags : Win32cr::UI::Shell::NOTIFY_ICON_DATA_FLAGS, @uCallbackMessage : UInt32, @hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @szTip : UInt16[128], @dwState : UInt32, @dwStateMask : UInt32, @szInfo : UInt16[256], @anonymous : Anonymous_e__Union_, @szInfoTitle : UInt16[64], @dwInfoFlags : UInt32, @guidItem : LibC::GUID, @hBalloonIcon : Win32cr::UI::WindowsAndMessaging::HICON)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct NOTIFYICONIDENTIFIER
+    property cbSize : UInt32
+    property hWnd : Win32cr::Foundation::HWND
+    property uID : UInt32
+    property guidItem : LibC::GUID
+    def initialize(@cbSize : UInt32, @hWnd : Win32cr::Foundation::HWND, @uID : UInt32, @guidItem : LibC::GUID)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct SHFILEINFOA
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property iIcon : Int32
+    property dwAttributes : UInt32
+    property szDisplayName : Win32cr::Foundation::CHAR[260]
+    property szTypeName : Win32cr::Foundation::CHAR[80]
+    def initialize(@hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @iIcon : Int32, @dwAttributes : UInt32, @szDisplayName : Win32cr::Foundation::CHAR[260], @szTypeName : Win32cr::Foundation::CHAR[80])
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct SHFILEINFOW
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property iIcon : Int32
+    property dwAttributes : UInt32
+    property szDisplayName : UInt16[260]
+    property szTypeName : UInt16[80]
+    def initialize(@hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @iIcon : Int32, @dwAttributes : UInt32, @szDisplayName : UInt16[260], @szTypeName : UInt16[80])
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct SHSTOCKICONINFO
+    property cbSize : UInt32
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property iSysImageIndex : Int32
+    property iIcon : Int32
+    property szPath : UInt16[260]
+    def initialize(@cbSize : UInt32, @hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @iSysImageIndex : Int32, @iIcon : Int32, @szPath : UInt16[260])
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct OPEN_PRINTER_PROPS_INFOA
+    property dwSize : UInt32
+    property pszSheetName : Win32cr::Foundation::PSTR
+    property uSheetIndex : UInt32
+    property dwFlags : UInt32
+    property bModal : Win32cr::Foundation::BOOL
+    def initialize(@dwSize : UInt32, @pszSheetName : Win32cr::Foundation::PSTR, @uSheetIndex : UInt32, @dwFlags : UInt32, @bModal : Win32cr::Foundation::BOOL)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct OPEN_PRINTER_PROPS_INFOW
+    property dwSize : UInt32
+    property pszSheetName : Win32cr::Foundation::PWSTR
+    property uSheetIndex : UInt32
+    property dwFlags : UInt32
+    property bModal : Win32cr::Foundation::BOOL
+    def initialize(@dwSize : UInt32, @pszSheetName : Win32cr::Foundation::PWSTR, @uSheetIndex : UInt32, @dwFlags : UInt32, @bModal : Win32cr::Foundation::BOOL)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record NC_ADDRESS,
-    pAddrInfo : NET_ADDRESS_INFO*,
-    port_number : UInt16,
-    prefix_length : UInt8 do
+  struct NC_ADDRESS
+    property pAddrInfo : NET_ADDRESS_INFO*
+    property port_number : UInt16
+    property prefix_length : UInt8
 
     # Nested Type NET_ADDRESS_INFO
     @[Extern]
-    record NET_ADDRESS_INFO
+    struct NET_ADDRESS_INFO
+    def initialize()
+    end
+    end
+
+    def initialize(@pAddrInfo : NET_ADDRESS_INFO*, @port_number : UInt16, @prefix_length : UInt8)
+    end
   end
 
   @[Extern]
-  record PARSEDURLA,
-    cbSize : UInt32,
-    pszProtocol : Win32cr::Foundation::PSTR,
-    cchProtocol : UInt32,
-    pszSuffix : Win32cr::Foundation::PSTR,
-    cchSuffix : UInt32,
-    nScheme : UInt32
+  struct PARSEDURLA
+    property cbSize : UInt32
+    property pszProtocol : Win32cr::Foundation::PSTR
+    property cchProtocol : UInt32
+    property pszSuffix : Win32cr::Foundation::PSTR
+    property cchSuffix : UInt32
+    property nScheme : UInt32
+    def initialize(@cbSize : UInt32, @pszProtocol : Win32cr::Foundation::PSTR, @cchProtocol : UInt32, @pszSuffix : Win32cr::Foundation::PSTR, @cchSuffix : UInt32, @nScheme : UInt32)
+    end
+  end
 
   @[Extern]
-  record PARSEDURLW,
-    cbSize : UInt32,
-    pszProtocol : Win32cr::Foundation::PWSTR,
-    cchProtocol : UInt32,
-    pszSuffix : Win32cr::Foundation::PWSTR,
-    cchSuffix : UInt32,
-    nScheme : UInt32
+  struct PARSEDURLW
+    property cbSize : UInt32
+    property pszProtocol : Win32cr::Foundation::PWSTR
+    property cchProtocol : UInt32
+    property pszSuffix : Win32cr::Foundation::PWSTR
+    property cchSuffix : UInt32
+    property nScheme : UInt32
+    def initialize(@cbSize : UInt32, @pszProtocol : Win32cr::Foundation::PWSTR, @cchProtocol : UInt32, @pszSuffix : Win32cr::Foundation::PWSTR, @cchSuffix : UInt32, @nScheme : UInt32)
+    end
+  end
 
   @[Extern]
-  record QITAB,
-    piid : LibC::GUID*,
-    dwOffset : UInt32
+  struct QITAB
+    property piid : LibC::GUID*
+    property dwOffset : UInt32
+    def initialize(@piid : LibC::GUID*, @dwOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record DLLVERSIONINFO,
-    cbSize : UInt32,
-    dwMajorVersion : UInt32,
-    dwMinorVersion : UInt32,
-    dwBuildNumber : UInt32,
-    dwPlatformID : UInt32
+  struct DLLVERSIONINFO
+    property cbSize : UInt32
+    property dwMajorVersion : UInt32
+    property dwMinorVersion : UInt32
+    property dwBuildNumber : UInt32
+    property dwPlatformID : UInt32
+    def initialize(@cbSize : UInt32, @dwMajorVersion : UInt32, @dwMinorVersion : UInt32, @dwBuildNumber : UInt32, @dwPlatformID : UInt32)
+    end
+  end
 
   @[Extern]
-  record DLLVERSIONINFO2,
-    info1 : Win32cr::UI::Shell::DLLVERSIONINFO,
-    dwFlags : UInt32,
-    ullVersion : UInt64
+  struct DLLVERSIONINFO2
+    property info1 : Win32cr::UI::Shell::DLLVERSIONINFO
+    property dwFlags : UInt32
+    property ullVersion : UInt64
+    def initialize(@info1 : Win32cr::UI::Shell::DLLVERSIONINFO, @dwFlags : UInt32, @ullVersion : UInt64)
+    end
+  end
 
   @[Extern]
-  record APPINFODATA,
-    cbSize : UInt32,
-    dwMask : UInt32,
-    pszDisplayName : Win32cr::Foundation::PWSTR,
-    pszVersion : Win32cr::Foundation::PWSTR,
-    pszPublisher : Win32cr::Foundation::PWSTR,
-    pszProductID : Win32cr::Foundation::PWSTR,
-    pszRegisteredOwner : Win32cr::Foundation::PWSTR,
-    pszRegisteredCompany : Win32cr::Foundation::PWSTR,
-    pszLanguage : Win32cr::Foundation::PWSTR,
-    pszSupportUrl : Win32cr::Foundation::PWSTR,
-    pszSupportTelephone : Win32cr::Foundation::PWSTR,
-    pszHelpLink : Win32cr::Foundation::PWSTR,
-    pszInstallLocation : Win32cr::Foundation::PWSTR,
-    pszInstallSource : Win32cr::Foundation::PWSTR,
-    pszInstallDate : Win32cr::Foundation::PWSTR,
-    pszContact : Win32cr::Foundation::PWSTR,
-    pszComments : Win32cr::Foundation::PWSTR,
-    pszImage : Win32cr::Foundation::PWSTR,
-    pszReadmeUrl : Win32cr::Foundation::PWSTR,
-    pszUpdateInfoUrl : Win32cr::Foundation::PWSTR
+  struct APPINFODATA
+    property cbSize : UInt32
+    property dwMask : UInt32
+    property pszDisplayName : Win32cr::Foundation::PWSTR
+    property pszVersion : Win32cr::Foundation::PWSTR
+    property pszPublisher : Win32cr::Foundation::PWSTR
+    property pszProductID : Win32cr::Foundation::PWSTR
+    property pszRegisteredOwner : Win32cr::Foundation::PWSTR
+    property pszRegisteredCompany : Win32cr::Foundation::PWSTR
+    property pszLanguage : Win32cr::Foundation::PWSTR
+    property pszSupportUrl : Win32cr::Foundation::PWSTR
+    property pszSupportTelephone : Win32cr::Foundation::PWSTR
+    property pszHelpLink : Win32cr::Foundation::PWSTR
+    property pszInstallLocation : Win32cr::Foundation::PWSTR
+    property pszInstallSource : Win32cr::Foundation::PWSTR
+    property pszInstallDate : Win32cr::Foundation::PWSTR
+    property pszContact : Win32cr::Foundation::PWSTR
+    property pszComments : Win32cr::Foundation::PWSTR
+    property pszImage : Win32cr::Foundation::PWSTR
+    property pszReadmeUrl : Win32cr::Foundation::PWSTR
+    property pszUpdateInfoUrl : Win32cr::Foundation::PWSTR
+    def initialize(@cbSize : UInt32, @dwMask : UInt32, @pszDisplayName : Win32cr::Foundation::PWSTR, @pszVersion : Win32cr::Foundation::PWSTR, @pszPublisher : Win32cr::Foundation::PWSTR, @pszProductID : Win32cr::Foundation::PWSTR, @pszRegisteredOwner : Win32cr::Foundation::PWSTR, @pszRegisteredCompany : Win32cr::Foundation::PWSTR, @pszLanguage : Win32cr::Foundation::PWSTR, @pszSupportUrl : Win32cr::Foundation::PWSTR, @pszSupportTelephone : Win32cr::Foundation::PWSTR, @pszHelpLink : Win32cr::Foundation::PWSTR, @pszInstallLocation : Win32cr::Foundation::PWSTR, @pszInstallSource : Win32cr::Foundation::PWSTR, @pszInstallDate : Win32cr::Foundation::PWSTR, @pszContact : Win32cr::Foundation::PWSTR, @pszComments : Win32cr::Foundation::PWSTR, @pszImage : Win32cr::Foundation::PWSTR, @pszReadmeUrl : Win32cr::Foundation::PWSTR, @pszUpdateInfoUrl : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record SLOWAPPINFO,
-    ullSize : UInt64,
-    ftLastUsed : Win32cr::Foundation::FILETIME,
-    iTimesUsed : Int32,
-    pszImage : Win32cr::Foundation::PWSTR
+  struct SLOWAPPINFO
+    property ullSize : UInt64
+    property ftLastUsed : Win32cr::Foundation::FILETIME
+    property iTimesUsed : Int32
+    property pszImage : Win32cr::Foundation::PWSTR
+    def initialize(@ullSize : UInt64, @ftLastUsed : Win32cr::Foundation::FILETIME, @iTimesUsed : Int32, @pszImage : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record PUBAPPINFO,
-    cbSize : UInt32,
-    dwMask : UInt32,
-    pszSource : Win32cr::Foundation::PWSTR,
-    stAssigned : Win32cr::Foundation::SYSTEMTIME,
-    stPublished : Win32cr::Foundation::SYSTEMTIME,
-    stScheduled : Win32cr::Foundation::SYSTEMTIME,
-    stExpire : Win32cr::Foundation::SYSTEMTIME
+  struct PUBAPPINFO
+    property cbSize : UInt32
+    property dwMask : UInt32
+    property pszSource : Win32cr::Foundation::PWSTR
+    property stAssigned : Win32cr::Foundation::SYSTEMTIME
+    property stPublished : Win32cr::Foundation::SYSTEMTIME
+    property stScheduled : Win32cr::Foundation::SYSTEMTIME
+    property stExpire : Win32cr::Foundation::SYSTEMTIME
+    def initialize(@cbSize : UInt32, @dwMask : UInt32, @pszSource : Win32cr::Foundation::PWSTR, @stAssigned : Win32cr::Foundation::SYSTEMTIME, @stPublished : Win32cr::Foundation::SYSTEMTIME, @stScheduled : Win32cr::Foundation::SYSTEMTIME, @stExpire : Win32cr::Foundation::SYSTEMTIME)
+    end
+  end
 
   @[Extern]
-  record CREDENTIAL_PROVIDER_FIELD_DESCRIPTOR,
-    dwFieldID : UInt32,
-    cpft : Win32cr::UI::Shell::CREDENTIAL_PROVIDER_FIELD_TYPE,
-    pszLabel : Win32cr::Foundation::PWSTR,
-    guidFieldType : LibC::GUID
+  struct CREDENTIAL_PROVIDER_FIELD_DESCRIPTOR
+    property dwFieldID : UInt32
+    property cpft : Win32cr::UI::Shell::CREDENTIAL_PROVIDER_FIELD_TYPE
+    property pszLabel : Win32cr::Foundation::PWSTR
+    property guidFieldType : LibC::GUID
+    def initialize(@dwFieldID : UInt32, @cpft : Win32cr::UI::Shell::CREDENTIAL_PROVIDER_FIELD_TYPE, @pszLabel : Win32cr::Foundation::PWSTR, @guidFieldType : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record CREDENTIAL_PROVIDER_CREDENTIAL_SERIALIZATION,
-    ulAuthenticationPackage : UInt32,
-    clsidCredentialProvider : LibC::GUID,
-    cbSerialization : UInt32,
-    rgbSerialization : UInt8*
+  struct CREDENTIAL_PROVIDER_CREDENTIAL_SERIALIZATION
+    property ulAuthenticationPackage : UInt32
+    property clsidCredentialProvider : LibC::GUID
+    property cbSerialization : UInt32
+    property rgbSerialization : UInt8*
+    def initialize(@ulAuthenticationPackage : UInt32, @clsidCredentialProvider : LibC::GUID, @cbSerialization : UInt32, @rgbSerialization : UInt8*)
+    end
+  end
 
   @[Extern]
-  record SYNCMGR_CONFLICT_ID_INFO,
-    pblobID : Win32cr::System::Com::BYTE_BLOB*,
-    pblobExtra : Win32cr::System::Com::BYTE_BLOB*
+  struct SYNCMGR_CONFLICT_ID_INFO
+    property pblobID : Win32cr::System::Com::BYTE_BLOB*
+    property pblobExtra : Win32cr::System::Com::BYTE_BLOB*
+    def initialize(@pblobID : Win32cr::System::Com::BYTE_BLOB*, @pblobExtra : Win32cr::System::Com::BYTE_BLOB*)
+    end
+  end
 
   @[Extern]
-  record CONFIRM_CONFLICT_ITEM,
-    pShellItem : Void*,
-    pszOriginalName : Win32cr::Foundation::PWSTR,
-    pszAlternateName : Win32cr::Foundation::PWSTR,
-    pszLocationShort : Win32cr::Foundation::PWSTR,
-    pszLocationFull : Win32cr::Foundation::PWSTR,
-    nType : Win32cr::UI::Shell::SYNCMGR_CONFLICT_ITEM_TYPE
+  struct CONFIRM_CONFLICT_ITEM
+    property pShellItem : Void*
+    property pszOriginalName : Win32cr::Foundation::PWSTR
+    property pszAlternateName : Win32cr::Foundation::PWSTR
+    property pszLocationShort : Win32cr::Foundation::PWSTR
+    property pszLocationFull : Win32cr::Foundation::PWSTR
+    property nType : Win32cr::UI::Shell::SYNCMGR_CONFLICT_ITEM_TYPE
+    def initialize(@pShellItem : Void*, @pszOriginalName : Win32cr::Foundation::PWSTR, @pszAlternateName : Win32cr::Foundation::PWSTR, @pszLocationShort : Win32cr::Foundation::PWSTR, @pszLocationFull : Win32cr::Foundation::PWSTR, @nType : Win32cr::UI::Shell::SYNCMGR_CONFLICT_ITEM_TYPE)
+    end
+  end
 
   @[Extern]
-  record CONFIRM_CONFLICT_RESULT_INFO,
-    pszNewName : Win32cr::Foundation::PWSTR,
-    iItemIndex : UInt32
+  struct CONFIRM_CONFLICT_RESULT_INFO
+    property pszNewName : Win32cr::Foundation::PWSTR
+    property iItemIndex : UInt32
+    def initialize(@pszNewName : Win32cr::Foundation::PWSTR, @iItemIndex : UInt32)
+    end
+  end
 
   @[Extern]
-  record WTS_THUMBNAILID,
-    rgbKey : UInt8[16]
+  struct WTS_THUMBNAILID
+    property rgbKey : UInt8[16]
+    def initialize(@rgbKey : UInt8[16])
+    end
+  end
 
   @[Extern]
-  record SYNCMGRPROGRESSITEM,
-    cbSize : UInt32,
-    mask : UInt32,
-    lpcStatusText : Win32cr::Foundation::PWSTR,
-    dwStatusType : UInt32,
-    iProgValue : Int32,
-    iMaxValue : Int32
+  struct SYNCMGRPROGRESSITEM
+    property cbSize : UInt32
+    property mask : UInt32
+    property lpcStatusText : Win32cr::Foundation::PWSTR
+    property dwStatusType : UInt32
+    property iProgValue : Int32
+    property iMaxValue : Int32
+    def initialize(@cbSize : UInt32, @mask : UInt32, @lpcStatusText : Win32cr::Foundation::PWSTR, @dwStatusType : UInt32, @iProgValue : Int32, @iMaxValue : Int32)
+    end
+  end
 
   @[Extern]
-  record SYNCMGRLOGERRORINFO,
-    cbSize : UInt32,
-    mask : UInt32,
-    dwSyncMgrErrorFlags : UInt32,
-    error_id : LibC::GUID,
-    item_id : LibC::GUID
+  struct SYNCMGRLOGERRORINFO
+    property cbSize : UInt32
+    property mask : UInt32
+    property dwSyncMgrErrorFlags : UInt32
+    property error_id : LibC::GUID
+    property item_id : LibC::GUID
+    def initialize(@cbSize : UInt32, @mask : UInt32, @dwSyncMgrErrorFlags : UInt32, @error_id : LibC::GUID, @item_id : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record SYNCMGRITEM,
-    cbSize : UInt32,
-    dwFlags : UInt32,
-    item_id : LibC::GUID,
-    dwItemState : UInt32,
-    hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-    wszItemName : UInt16[128],
-    ftLastUpdate : Win32cr::Foundation::FILETIME
+  struct SYNCMGRITEM
+    property cbSize : UInt32
+    property dwFlags : UInt32
+    property item_id : LibC::GUID
+    property dwItemState : UInt32
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property wszItemName : UInt16[128]
+    property ftLastUpdate : Win32cr::Foundation::FILETIME
+    def initialize(@cbSize : UInt32, @dwFlags : UInt32, @item_id : LibC::GUID, @dwItemState : UInt32, @hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @wszItemName : UInt16[128], @ftLastUpdate : Win32cr::Foundation::FILETIME)
+    end
+  end
 
   @[Extern]
-  record SYNCMGRHANDLERINFO,
-    cbSize : UInt32,
-    hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-    sync_mgr_handler_flags : UInt32,
-    wszHandlerName : UInt16[32]
+  struct SYNCMGRHANDLERINFO
+    property cbSize : UInt32
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property sync_mgr_handler_flags : UInt32
+    property wszHandlerName : UInt16[32]
+    def initialize(@cbSize : UInt32, @hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @sync_mgr_handler_flags : UInt32, @wszHandlerName : UInt16[32])
+    end
+  end
 
   @[Extern]
-  record WINDOWDATA,
-    dwWindowID : UInt32,
-    uiCP : UInt32,
-    pidl : Win32cr::UI::Shell::Common::ITEMIDLIST*,
-    lpszUrl : Win32cr::Foundation::PWSTR,
-    lpszUrlLocation : Win32cr::Foundation::PWSTR,
-    lpszTitle : Win32cr::Foundation::PWSTR
+  struct WINDOWDATA
+    property dwWindowID : UInt32
+    property uiCP : UInt32
+    property pidl : Win32cr::UI::Shell::Common::ITEMIDLIST*
+    property lpszUrl : Win32cr::Foundation::PWSTR
+    property lpszUrlLocation : Win32cr::Foundation::PWSTR
+    property lpszTitle : Win32cr::Foundation::PWSTR
+    def initialize(@dwWindowID : UInt32, @uiCP : UInt32, @pidl : Win32cr::UI::Shell::Common::ITEMIDLIST*, @lpszUrl : Win32cr::Foundation::PWSTR, @lpszUrlLocation : Win32cr::Foundation::PWSTR, @lpszTitle : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record HLITEM,
-    uHLID : UInt32,
-    pwzFriendlyName : Win32cr::Foundation::PWSTR
+  struct HLITEM
+    property uHLID : UInt32
+    property pwzFriendlyName : Win32cr::Foundation::PWSTR
+    def initialize(@uHLID : UInt32, @pwzFriendlyName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record HLTBINFO,
-    uDockType : UInt32,
-    rcTbPos : Win32cr::Foundation::RECT
+  struct HLTBINFO
+    property uDockType : UInt32
+    property rcTbPos : Win32cr::Foundation::RECT
+    def initialize(@uDockType : UInt32, @rcTbPos : Win32cr::Foundation::RECT)
+    end
+  end
 
   @[Extern]
-  record HLBWINFO,
-    cbSize : UInt32,
-    grfHLBWIF : UInt32,
-    rcFramePos : Win32cr::Foundation::RECT,
-    rcDocPos : Win32cr::Foundation::RECT,
-    hltbinfo : Win32cr::UI::Shell::HLTBINFO
+  struct HLBWINFO
+    property cbSize : UInt32
+    property grfHLBWIF : UInt32
+    property rcFramePos : Win32cr::Foundation::RECT
+    property rcDocPos : Win32cr::Foundation::RECT
+    property hltbinfo : Win32cr::UI::Shell::HLTBINFO
+    def initialize(@cbSize : UInt32, @grfHLBWIF : UInt32, @rcFramePos : Win32cr::Foundation::RECT, @rcDocPos : Win32cr::Foundation::RECT, @hltbinfo : Win32cr::UI::Shell::HLTBINFO)
+    end
+  end
 
   @[Extern]
-  record BASEBROWSERDATAXP,
-    _hwnd : Win32cr::Foundation::HWND,
-    _ptl : Void*,
-    _phlf : Void*,
-    _pauto_wb2 : Void*,
-    _pauto_eds : Void*,
-    _pauto_ss : Void*,
-    _e_secure_lock_icon : Int32,
-    _bitfield : UInt32,
-    _u_activate_state : UInt32,
-    _pidl_view_state : Win32cr::UI::Shell::Common::ITEMIDLIST*,
-    _pct_view : Void*,
-    _pidl_cur : Win32cr::UI::Shell::Common::ITEMIDLIST*,
-    _psv : Void*,
-    _psf : Void*,
-    _hwnd_view : Win32cr::Foundation::HWND,
-    _psz_title_cur : Win32cr::Foundation::PWSTR,
-    _pidl_pending : Win32cr::UI::Shell::Common::ITEMIDLIST*,
-    _psv_pending : Void*,
-    _psf_pending : Void*,
-    _hwnd_view_pending : Win32cr::Foundation::HWND,
-    _psz_title_pending : Win32cr::Foundation::PWSTR,
-    _f_is_view_mshtml : Win32cr::Foundation::BOOL,
-    _f_privacy_impacted : Win32cr::Foundation::BOOL,
-    _clsid_view : LibC::GUID,
-    _clsid_view_pending : LibC::GUID,
-    _hwnd_frame : Win32cr::Foundation::HWND
+  struct BASEBROWSERDATAXP
+    property _hwnd : Win32cr::Foundation::HWND
+    property _ptl : Void*
+    property _phlf : Void*
+    property _pauto_wb2 : Void*
+    property _pauto_eds : Void*
+    property _pauto_ss : Void*
+    property _e_secure_lock_icon : Int32
+    property _bitfield : UInt32
+    property _u_activate_state : UInt32
+    property _pidl_view_state : Win32cr::UI::Shell::Common::ITEMIDLIST*
+    property _pct_view : Void*
+    property _pidl_cur : Win32cr::UI::Shell::Common::ITEMIDLIST*
+    property _psv : Void*
+    property _psf : Void*
+    property _hwnd_view : Win32cr::Foundation::HWND
+    property _psz_title_cur : Win32cr::Foundation::PWSTR
+    property _pidl_pending : Win32cr::UI::Shell::Common::ITEMIDLIST*
+    property _psv_pending : Void*
+    property _psf_pending : Void*
+    property _hwnd_view_pending : Win32cr::Foundation::HWND
+    property _psz_title_pending : Win32cr::Foundation::PWSTR
+    property _f_is_view_mshtml : Win32cr::Foundation::BOOL
+    property _f_privacy_impacted : Win32cr::Foundation::BOOL
+    property _clsid_view : LibC::GUID
+    property _clsid_view_pending : LibC::GUID
+    property _hwnd_frame : Win32cr::Foundation::HWND
+    def initialize(@_hwnd : Win32cr::Foundation::HWND, @_ptl : Void*, @_phlf : Void*, @_pauto_wb2 : Void*, @_pauto_eds : Void*, @_pauto_ss : Void*, @_e_secure_lock_icon : Int32, @_bitfield : UInt32, @_u_activate_state : UInt32, @_pidl_view_state : Win32cr::UI::Shell::Common::ITEMIDLIST*, @_pct_view : Void*, @_pidl_cur : Win32cr::UI::Shell::Common::ITEMIDLIST*, @_psv : Void*, @_psf : Void*, @_hwnd_view : Win32cr::Foundation::HWND, @_psz_title_cur : Win32cr::Foundation::PWSTR, @_pidl_pending : Win32cr::UI::Shell::Common::ITEMIDLIST*, @_psv_pending : Void*, @_psf_pending : Void*, @_hwnd_view_pending : Win32cr::Foundation::HWND, @_psz_title_pending : Win32cr::Foundation::PWSTR, @_f_is_view_mshtml : Win32cr::Foundation::BOOL, @_f_privacy_impacted : Win32cr::Foundation::BOOL, @_clsid_view : LibC::GUID, @_clsid_view_pending : LibC::GUID, @_hwnd_frame : Win32cr::Foundation::HWND)
+    end
+  end
 
   @[Extern]
-  record BASEBROWSERDATALH,
-    _hwnd : Win32cr::Foundation::HWND,
-    _ptl : Void*,
-    _phlf : Void*,
-    _pauto_wb2 : Void*,
-    _pauto_eds : Void*,
-    _pauto_ss : Void*,
-    _e_secure_lock_icon : Int32,
-    _bitfield : UInt32,
-    _u_activate_state : UInt32,
-    _pidl_view_state : Win32cr::UI::Shell::Common::ITEMIDLIST*,
-    _pct_view : Void*,
-    _pidl_cur : Win32cr::UI::Shell::Common::ITEMIDLIST*,
-    _psv : Void*,
-    _psf : Void*,
-    _hwnd_view : Win32cr::Foundation::HWND,
-    _psz_title_cur : Win32cr::Foundation::PWSTR,
-    _pidl_pending : Win32cr::UI::Shell::Common::ITEMIDLIST*,
-    _psv_pending : Void*,
-    _psf_pending : Void*,
-    _hwnd_view_pending : Win32cr::Foundation::HWND,
-    _psz_title_pending : Win32cr::Foundation::PWSTR,
-    _f_is_view_mshtml : Win32cr::Foundation::BOOL,
-    _f_privacy_impacted : Win32cr::Foundation::BOOL,
-    _clsid_view : LibC::GUID,
-    _clsid_view_pending : LibC::GUID,
-    _hwnd_frame : Win32cr::Foundation::HWND,
-    _l_phishing_filter_status : Int32
+  struct BASEBROWSERDATALH
+    property _hwnd : Win32cr::Foundation::HWND
+    property _ptl : Void*
+    property _phlf : Void*
+    property _pauto_wb2 : Void*
+    property _pauto_eds : Void*
+    property _pauto_ss : Void*
+    property _e_secure_lock_icon : Int32
+    property _bitfield : UInt32
+    property _u_activate_state : UInt32
+    property _pidl_view_state : Win32cr::UI::Shell::Common::ITEMIDLIST*
+    property _pct_view : Void*
+    property _pidl_cur : Win32cr::UI::Shell::Common::ITEMIDLIST*
+    property _psv : Void*
+    property _psf : Void*
+    property _hwnd_view : Win32cr::Foundation::HWND
+    property _psz_title_cur : Win32cr::Foundation::PWSTR
+    property _pidl_pending : Win32cr::UI::Shell::Common::ITEMIDLIST*
+    property _psv_pending : Void*
+    property _psf_pending : Void*
+    property _hwnd_view_pending : Win32cr::Foundation::HWND
+    property _psz_title_pending : Win32cr::Foundation::PWSTR
+    property _f_is_view_mshtml : Win32cr::Foundation::BOOL
+    property _f_privacy_impacted : Win32cr::Foundation::BOOL
+    property _clsid_view : LibC::GUID
+    property _clsid_view_pending : LibC::GUID
+    property _hwnd_frame : Win32cr::Foundation::HWND
+    property _l_phishing_filter_status : Int32
+    def initialize(@_hwnd : Win32cr::Foundation::HWND, @_ptl : Void*, @_phlf : Void*, @_pauto_wb2 : Void*, @_pauto_eds : Void*, @_pauto_ss : Void*, @_e_secure_lock_icon : Int32, @_bitfield : UInt32, @_u_activate_state : UInt32, @_pidl_view_state : Win32cr::UI::Shell::Common::ITEMIDLIST*, @_pct_view : Void*, @_pidl_cur : Win32cr::UI::Shell::Common::ITEMIDLIST*, @_psv : Void*, @_psf : Void*, @_hwnd_view : Win32cr::Foundation::HWND, @_psz_title_cur : Win32cr::Foundation::PWSTR, @_pidl_pending : Win32cr::UI::Shell::Common::ITEMIDLIST*, @_psv_pending : Void*, @_psf_pending : Void*, @_hwnd_view_pending : Win32cr::Foundation::HWND, @_psz_title_pending : Win32cr::Foundation::PWSTR, @_f_is_view_mshtml : Win32cr::Foundation::BOOL, @_f_privacy_impacted : Win32cr::Foundation::BOOL, @_clsid_view : LibC::GUID, @_clsid_view_pending : LibC::GUID, @_hwnd_frame : Win32cr::Foundation::HWND, @_l_phishing_filter_status : Int32)
+    end
+  end
 
   @[Extern]
-  record FOLDERSETDATA,
-    _fs : Win32cr::UI::Shell::FOLDERSETTINGS,
-    _vid_restore : LibC::GUID,
-    _dw_view_priority : UInt32
+  struct FOLDERSETDATA
+    property _fs : Win32cr::UI::Shell::FOLDERSETTINGS
+    property _vid_restore : LibC::GUID
+    property _dw_view_priority : UInt32
+    def initialize(@_fs : Win32cr::UI::Shell::FOLDERSETTINGS, @_vid_restore : LibC::GUID, @_dw_view_priority : UInt32)
+    end
+  end
 
   @[Extern]
-  record TOOLBARITEM,
-    ptbar : Void*,
-    rcBorderTool : Win32cr::Foundation::RECT,
-    pwszItem : Win32cr::Foundation::PWSTR,
-    fShow : Win32cr::Foundation::BOOL,
-    hMon : Win32cr::Graphics::Gdi::HMONITOR
+  struct TOOLBARITEM
+    property ptbar : Void*
+    property rcBorderTool : Win32cr::Foundation::RECT
+    property pwszItem : Win32cr::Foundation::PWSTR
+    property fShow : Win32cr::Foundation::BOOL
+    property hMon : Win32cr::Graphics::Gdi::HMONITOR
+    def initialize(@ptbar : Void*, @rcBorderTool : Win32cr::Foundation::RECT, @pwszItem : Win32cr::Foundation::PWSTR, @fShow : Win32cr::Foundation::BOOL, @hMon : Win32cr::Graphics::Gdi::HMONITOR)
+    end
+  end
 
   @[Extern]
-  record CPLINFO,
-    idIcon : Int32,
-    idName : Int32,
-    idInfo : Int32,
-    lData : LibC::IntPtrT
+  struct CPLINFO
+    property idIcon : Int32
+    property idName : Int32
+    property idInfo : Int32
+    property lData : LibC::IntPtrT
+    def initialize(@idIcon : Int32, @idName : Int32, @idInfo : Int32, @lData : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record NEWCPLINFOA,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwHelpContext : UInt32,
-    lData : LibC::IntPtrT,
-    hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-    szName : Win32cr::Foundation::CHAR[32],
-    szInfo : Win32cr::Foundation::CHAR[64],
-    szHelpFile : Win32cr::Foundation::CHAR[128]
+  struct NEWCPLINFOA
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwHelpContext : UInt32
+    property lData : LibC::IntPtrT
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property szName : Win32cr::Foundation::CHAR[32]
+    property szInfo : Win32cr::Foundation::CHAR[64]
+    property szHelpFile : Win32cr::Foundation::CHAR[128]
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwHelpContext : UInt32, @lData : LibC::IntPtrT, @hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @szName : Win32cr::Foundation::CHAR[32], @szInfo : Win32cr::Foundation::CHAR[64], @szHelpFile : Win32cr::Foundation::CHAR[128])
+    end
+  end
 
   @[Extern]
-  record NEWCPLINFOW,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwHelpContext : UInt32,
-    lData : LibC::IntPtrT,
-    hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-    szName : UInt16[32],
-    szInfo : UInt16[64],
-    szHelpFile : UInt16[128]
+  struct NEWCPLINFOW
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwHelpContext : UInt32
+    property lData : LibC::IntPtrT
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property szName : UInt16[32]
+    property szInfo : UInt16[64]
+    property szHelpFile : UInt16[128]
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwHelpContext : UInt32, @lData : LibC::IntPtrT, @hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @szName : UInt16[32], @szInfo : UInt16[64], @szHelpFile : UInt16[128])
+    end
+  end
 
   @[Extern]
-  record PROFILEINFOA,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    lpUserName : Win32cr::Foundation::PSTR,
-    lpProfilePath : Win32cr::Foundation::PSTR,
-    lpDefaultPath : Win32cr::Foundation::PSTR,
-    lpServerName : Win32cr::Foundation::PSTR,
-    lpPolicyPath : Win32cr::Foundation::PSTR,
-    hProfile : Win32cr::Foundation::HANDLE
+  struct PROFILEINFOA
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property lpUserName : Win32cr::Foundation::PSTR
+    property lpProfilePath : Win32cr::Foundation::PSTR
+    property lpDefaultPath : Win32cr::Foundation::PSTR
+    property lpServerName : Win32cr::Foundation::PSTR
+    property lpPolicyPath : Win32cr::Foundation::PSTR
+    property hProfile : Win32cr::Foundation::HANDLE
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @lpUserName : Win32cr::Foundation::PSTR, @lpProfilePath : Win32cr::Foundation::PSTR, @lpDefaultPath : Win32cr::Foundation::PSTR, @lpServerName : Win32cr::Foundation::PSTR, @lpPolicyPath : Win32cr::Foundation::PSTR, @hProfile : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record PROFILEINFOW,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    lpUserName : Win32cr::Foundation::PWSTR,
-    lpProfilePath : Win32cr::Foundation::PWSTR,
-    lpDefaultPath : Win32cr::Foundation::PWSTR,
-    lpServerName : Win32cr::Foundation::PWSTR,
-    lpPolicyPath : Win32cr::Foundation::PWSTR,
-    hProfile : Win32cr::Foundation::HANDLE
+  struct PROFILEINFOW
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property lpUserName : Win32cr::Foundation::PWSTR
+    property lpProfilePath : Win32cr::Foundation::PWSTR
+    property lpDefaultPath : Win32cr::Foundation::PWSTR
+    property lpServerName : Win32cr::Foundation::PWSTR
+    property lpPolicyPath : Win32cr::Foundation::PWSTR
+    property hProfile : Win32cr::Foundation::HANDLE
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @lpUserName : Win32cr::Foundation::PWSTR, @lpProfilePath : Win32cr::Foundation::PWSTR, @lpDefaultPath : Win32cr::Foundation::PWSTR, @lpServerName : Win32cr::Foundation::PWSTR, @lpPolicyPath : Win32cr::Foundation::PWSTR, @hProfile : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record Urlinvokecommandinfoa,
-    dwcbSize : UInt32,
-    dwFlags : UInt32,
-    hwndParent : Win32cr::Foundation::HWND,
-    pcszVerb : Win32cr::Foundation::PSTR
+  struct Urlinvokecommandinfoa
+    property dwcbSize : UInt32
+    property dwFlags : UInt32
+    property hwndParent : Win32cr::Foundation::HWND
+    property pcszVerb : Win32cr::Foundation::PSTR
+    def initialize(@dwcbSize : UInt32, @dwFlags : UInt32, @hwndParent : Win32cr::Foundation::HWND, @pcszVerb : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record Urlinvokecommandinfow,
-    dwcbSize : UInt32,
-    dwFlags : UInt32,
-    hwndParent : Win32cr::Foundation::HWND,
-    pcszVerb : Win32cr::Foundation::PWSTR
+  struct Urlinvokecommandinfow
+    property dwcbSize : UInt32
+    property dwFlags : UInt32
+    property hwndParent : Win32cr::Foundation::HWND
+    property pcszVerb : Win32cr::Foundation::PWSTR
+    def initialize(@dwcbSize : UInt32, @dwFlags : UInt32, @hwndParent : Win32cr::Foundation::HWND, @pcszVerb : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   {% if flag?(:i386) %}
   @[Extern]
-  record DRAGINFOA,
-    uSize : UInt32,
-    pt : Win32cr::Foundation::POINT,
-    fNC : Win32cr::Foundation::BOOL,
-    lpFileList : Win32cr::Foundation::PSTR,
-    grfKeyState : UInt32
+  struct DRAGINFOA
+    property uSize : UInt32
+    property pt : Win32cr::Foundation::POINT
+    property fNC : Win32cr::Foundation::BOOL
+    property lpFileList : Win32cr::Foundation::PSTR
+    property grfKeyState : UInt32
+    def initialize(@uSize : UInt32, @pt : Win32cr::Foundation::POINT, @fNC : Win32cr::Foundation::BOOL, @lpFileList : Win32cr::Foundation::PSTR, @grfKeyState : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record DRAGINFOW,
-    uSize : UInt32,
-    pt : Win32cr::Foundation::POINT,
-    fNC : Win32cr::Foundation::BOOL,
-    lpFileList : Win32cr::Foundation::PWSTR,
-    grfKeyState : UInt32
+  struct DRAGINFOW
+    property uSize : UInt32
+    property pt : Win32cr::Foundation::POINT
+    property fNC : Win32cr::Foundation::BOOL
+    property lpFileList : Win32cr::Foundation::PWSTR
+    property grfKeyState : UInt32
+    def initialize(@uSize : UInt32, @pt : Win32cr::Foundation::POINT, @fNC : Win32cr::Foundation::BOOL, @lpFileList : Win32cr::Foundation::PWSTR, @grfKeyState : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record APPBARDATA,
-    cbSize : UInt32,
-    hWnd : Win32cr::Foundation::HWND,
-    uCallbackMessage : UInt32,
-    uEdge : UInt32,
-    rc : Win32cr::Foundation::RECT,
-    lParam : Win32cr::Foundation::LPARAM
+  struct APPBARDATA
+    property cbSize : UInt32
+    property hWnd : Win32cr::Foundation::HWND
+    property uCallbackMessage : UInt32
+    property uEdge : UInt32
+    property rc : Win32cr::Foundation::RECT
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@cbSize : UInt32, @hWnd : Win32cr::Foundation::HWND, @uCallbackMessage : UInt32, @uEdge : UInt32, @rc : Win32cr::Foundation::RECT, @lParam : Win32cr::Foundation::LPARAM)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SHFILEOPSTRUCTA,
-    hwnd : Win32cr::Foundation::HWND,
-    wFunc : UInt32,
-    pFrom : Int8*,
-    pTo : Int8*,
-    fFlags : UInt16,
-    fAnyOperationsAborted : Win32cr::Foundation::BOOL,
-    hNameMappings : Void*,
-    lpszProgressTitle : Win32cr::Foundation::PSTR
+  struct SHFILEOPSTRUCTA
+    property hwnd : Win32cr::Foundation::HWND
+    property wFunc : UInt32
+    property pFrom : Int8*
+    property pTo : Int8*
+    property fFlags : UInt16
+    property fAnyOperationsAborted : Win32cr::Foundation::BOOL
+    property hNameMappings : Void*
+    property lpszProgressTitle : Win32cr::Foundation::PSTR
+    def initialize(@hwnd : Win32cr::Foundation::HWND, @wFunc : UInt32, @pFrom : Int8*, @pTo : Int8*, @fFlags : UInt16, @fAnyOperationsAborted : Win32cr::Foundation::BOOL, @hNameMappings : Void*, @lpszProgressTitle : Win32cr::Foundation::PSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SHFILEOPSTRUCTW,
-    hwnd : Win32cr::Foundation::HWND,
-    wFunc : UInt32,
-    pFrom : Win32cr::Foundation::PWSTR,
-    pTo : Win32cr::Foundation::PWSTR,
-    fFlags : UInt16,
-    fAnyOperationsAborted : Win32cr::Foundation::BOOL,
-    hNameMappings : Void*,
-    lpszProgressTitle : Win32cr::Foundation::PWSTR
+  struct SHFILEOPSTRUCTW
+    property hwnd : Win32cr::Foundation::HWND
+    property wFunc : UInt32
+    property pFrom : Win32cr::Foundation::PWSTR
+    property pTo : Win32cr::Foundation::PWSTR
+    property fFlags : UInt16
+    property fAnyOperationsAborted : Win32cr::Foundation::BOOL
+    property hNameMappings : Void*
+    property lpszProgressTitle : Win32cr::Foundation::PWSTR
+    def initialize(@hwnd : Win32cr::Foundation::HWND, @wFunc : UInt32, @pFrom : Win32cr::Foundation::PWSTR, @pTo : Win32cr::Foundation::PWSTR, @fFlags : UInt16, @fAnyOperationsAborted : Win32cr::Foundation::BOOL, @hNameMappings : Void*, @lpszProgressTitle : Win32cr::Foundation::PWSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SHNAMEMAPPINGA,
-    pszOldPath : Win32cr::Foundation::PSTR,
-    pszNewPath : Win32cr::Foundation::PSTR,
-    cchOldPath : Int32,
-    cchNewPath : Int32
+  struct SHNAMEMAPPINGA
+    property pszOldPath : Win32cr::Foundation::PSTR
+    property pszNewPath : Win32cr::Foundation::PSTR
+    property cchOldPath : Int32
+    property cchNewPath : Int32
+    def initialize(@pszOldPath : Win32cr::Foundation::PSTR, @pszNewPath : Win32cr::Foundation::PSTR, @cchOldPath : Int32, @cchNewPath : Int32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SHNAMEMAPPINGW,
-    pszOldPath : Win32cr::Foundation::PWSTR,
-    pszNewPath : Win32cr::Foundation::PWSTR,
-    cchOldPath : Int32,
-    cchNewPath : Int32
+  struct SHNAMEMAPPINGW
+    property pszOldPath : Win32cr::Foundation::PWSTR
+    property pszNewPath : Win32cr::Foundation::PWSTR
+    property cchOldPath : Int32
+    property cchNewPath : Int32
+    def initialize(@pszOldPath : Win32cr::Foundation::PWSTR, @pszNewPath : Win32cr::Foundation::PWSTR, @cchOldPath : Int32, @cchNewPath : Int32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SHELLEXECUTEINFOA,
-    cbSize : UInt32,
-    fMask : UInt32,
-    hwnd : Win32cr::Foundation::HWND,
-    lpVerb : Win32cr::Foundation::PSTR,
-    lpFile : Win32cr::Foundation::PSTR,
-    lpParameters : Win32cr::Foundation::PSTR,
-    lpDirectory : Win32cr::Foundation::PSTR,
-    nShow : Int32,
-    hInstApp : Win32cr::Foundation::HINSTANCE,
-    lpIDList : Void*,
-    lpClass : Win32cr::Foundation::PSTR,
-    hkeyClass : Win32cr::System::Registry::HKEY,
-    dwHotKey : UInt32,
-    anonymous : Anonymous_e__Union_,
-    hProcess : Win32cr::Foundation::HANDLE do
+  struct SHELLEXECUTEINFOA
+    property cbSize : UInt32
+    property fMask : UInt32
+    property hwnd : Win32cr::Foundation::HWND
+    property lpVerb : Win32cr::Foundation::PSTR
+    property lpFile : Win32cr::Foundation::PSTR
+    property lpParameters : Win32cr::Foundation::PSTR
+    property lpDirectory : Win32cr::Foundation::PSTR
+    property nShow : Int32
+    property hInstApp : Win32cr::Foundation::HINSTANCE
+    property lpIDList : Void*
+    property lpClass : Win32cr::Foundation::PSTR
+    property hkeyClass : Win32cr::System::Registry::HKEY
+    property dwHotKey : UInt32
+    property anonymous : Anonymous_e__Union_
+    property hProcess : Win32cr::Foundation::HANDLE
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      hIcon : Win32cr::Foundation::HANDLE,
-      hMonitor : Win32cr::Foundation::HANDLE
+    struct Anonymous_e__Union_
+    property hIcon : Win32cr::Foundation::HANDLE
+    property hMonitor : Win32cr::Foundation::HANDLE
+    def initialize(@hIcon : Win32cr::Foundation::HANDLE, @hMonitor : Win32cr::Foundation::HANDLE)
+    end
+    end
 
+    def initialize(@cbSize : UInt32, @fMask : UInt32, @hwnd : Win32cr::Foundation::HWND, @lpVerb : Win32cr::Foundation::PSTR, @lpFile : Win32cr::Foundation::PSTR, @lpParameters : Win32cr::Foundation::PSTR, @lpDirectory : Win32cr::Foundation::PSTR, @nShow : Int32, @hInstApp : Win32cr::Foundation::HINSTANCE, @lpIDList : Void*, @lpClass : Win32cr::Foundation::PSTR, @hkeyClass : Win32cr::System::Registry::HKEY, @dwHotKey : UInt32, @anonymous : Anonymous_e__Union_, @hProcess : Win32cr::Foundation::HANDLE)
+    end
   end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SHELLEXECUTEINFOW,
-    cbSize : UInt32,
-    fMask : UInt32,
-    hwnd : Win32cr::Foundation::HWND,
-    lpVerb : Win32cr::Foundation::PWSTR,
-    lpFile : Win32cr::Foundation::PWSTR,
-    lpParameters : Win32cr::Foundation::PWSTR,
-    lpDirectory : Win32cr::Foundation::PWSTR,
-    nShow : Int32,
-    hInstApp : Win32cr::Foundation::HINSTANCE,
-    lpIDList : Void*,
-    lpClass : Win32cr::Foundation::PWSTR,
-    hkeyClass : Win32cr::System::Registry::HKEY,
-    dwHotKey : UInt32,
-    anonymous : Anonymous_e__Union_,
-    hProcess : Win32cr::Foundation::HANDLE do
+  struct SHELLEXECUTEINFOW
+    property cbSize : UInt32
+    property fMask : UInt32
+    property hwnd : Win32cr::Foundation::HWND
+    property lpVerb : Win32cr::Foundation::PWSTR
+    property lpFile : Win32cr::Foundation::PWSTR
+    property lpParameters : Win32cr::Foundation::PWSTR
+    property lpDirectory : Win32cr::Foundation::PWSTR
+    property nShow : Int32
+    property hInstApp : Win32cr::Foundation::HINSTANCE
+    property lpIDList : Void*
+    property lpClass : Win32cr::Foundation::PWSTR
+    property hkeyClass : Win32cr::System::Registry::HKEY
+    property dwHotKey : UInt32
+    property anonymous : Anonymous_e__Union_
+    property hProcess : Win32cr::Foundation::HANDLE
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      hIcon : Win32cr::Foundation::HANDLE,
-      hMonitor : Win32cr::Foundation::HANDLE
+    struct Anonymous_e__Union_
+    property hIcon : Win32cr::Foundation::HANDLE
+    property hMonitor : Win32cr::Foundation::HANDLE
+    def initialize(@hIcon : Win32cr::Foundation::HANDLE, @hMonitor : Win32cr::Foundation::HANDLE)
+    end
+    end
 
+    def initialize(@cbSize : UInt32, @fMask : UInt32, @hwnd : Win32cr::Foundation::HWND, @lpVerb : Win32cr::Foundation::PWSTR, @lpFile : Win32cr::Foundation::PWSTR, @lpParameters : Win32cr::Foundation::PWSTR, @lpDirectory : Win32cr::Foundation::PWSTR, @nShow : Int32, @hInstApp : Win32cr::Foundation::HINSTANCE, @lpIDList : Void*, @lpClass : Win32cr::Foundation::PWSTR, @hkeyClass : Win32cr::System::Registry::HKEY, @dwHotKey : UInt32, @anonymous : Anonymous_e__Union_, @hProcess : Win32cr::Foundation::HANDLE)
+    end
   end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SHCREATEPROCESSINFOW,
-    cbSize : UInt32,
-    fMask : UInt32,
-    hwnd : Win32cr::Foundation::HWND,
-    pszFile : Win32cr::Foundation::PWSTR,
-    pszParameters : Win32cr::Foundation::PWSTR,
-    pszCurrentDirectory : Win32cr::Foundation::PWSTR,
-    hUserToken : Win32cr::Foundation::HANDLE,
-    lpProcessAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*,
-    lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*,
-    bInheritHandles : Win32cr::Foundation::BOOL,
-    dwCreationFlags : UInt32,
-    lpStartupInfo : Win32cr::System::Threading::STARTUPINFOW*,
-    lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*
+  struct SHCREATEPROCESSINFOW
+    property cbSize : UInt32
+    property fMask : UInt32
+    property hwnd : Win32cr::Foundation::HWND
+    property pszFile : Win32cr::Foundation::PWSTR
+    property pszParameters : Win32cr::Foundation::PWSTR
+    property pszCurrentDirectory : Win32cr::Foundation::PWSTR
+    property hUserToken : Win32cr::Foundation::HANDLE
+    property lpProcessAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*
+    property lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*
+    property bInheritHandles : Win32cr::Foundation::BOOL
+    property dwCreationFlags : UInt32
+    property lpStartupInfo : Win32cr::System::Threading::STARTUPINFOW*
+    property lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*
+    def initialize(@cbSize : UInt32, @fMask : UInt32, @hwnd : Win32cr::Foundation::HWND, @pszFile : Win32cr::Foundation::PWSTR, @pszParameters : Win32cr::Foundation::PWSTR, @pszCurrentDirectory : Win32cr::Foundation::PWSTR, @hUserToken : Win32cr::Foundation::HANDLE, @lpProcessAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, @lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, @bInheritHandles : Win32cr::Foundation::BOOL, @dwCreationFlags : UInt32, @lpStartupInfo : Win32cr::System::Threading::STARTUPINFOW*, @lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record ASSOCIATIONELEMENT,
-    ac : Win32cr::UI::Shell::ASSOCCLASS,
-    hkClass : Win32cr::System::Registry::HKEY,
-    pszClass : Win32cr::Foundation::PWSTR
+  struct ASSOCIATIONELEMENT
+    property ac : Win32cr::UI::Shell::ASSOCCLASS
+    property hkClass : Win32cr::System::Registry::HKEY
+    property pszClass : Win32cr::Foundation::PWSTR
+    def initialize(@ac : Win32cr::UI::Shell::ASSOCCLASS, @hkClass : Win32cr::System::Registry::HKEY, @pszClass : Win32cr::Foundation::PWSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SHQUERYRBINFO,
-    cbSize : UInt32,
-    i64Size : Int64,
-    i64NumItems : Int64
+  struct SHQUERYRBINFO
+    property cbSize : UInt32
+    property i64Size : Int64
+    property i64NumItems : Int64
+    def initialize(@cbSize : UInt32, @i64Size : Int64, @i64NumItems : Int64)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record NOTIFYICONDATAA,
-    cbSize : UInt32,
-    hWnd : Win32cr::Foundation::HWND,
-    uID : UInt32,
-    uFlags : Win32cr::UI::Shell::NOTIFY_ICON_DATA_FLAGS,
-    uCallbackMessage : UInt32,
-    hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-    szTip : Win32cr::Foundation::CHAR[128],
-    dwState : UInt32,
-    dwStateMask : UInt32,
-    szInfo : Win32cr::Foundation::CHAR[256],
-    anonymous : Anonymous_e__Union_,
-    szInfoTitle : Win32cr::Foundation::CHAR[64],
-    dwInfoFlags : UInt32,
-    guidItem : LibC::GUID,
-    hBalloonIcon : Win32cr::UI::WindowsAndMessaging::HICON do
+  struct NOTIFYICONDATAA
+    property cbSize : UInt32
+    property hWnd : Win32cr::Foundation::HWND
+    property uID : UInt32
+    property uFlags : Win32cr::UI::Shell::NOTIFY_ICON_DATA_FLAGS
+    property uCallbackMessage : UInt32
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property szTip : Win32cr::Foundation::CHAR[128]
+    property dwState : UInt32
+    property dwStateMask : UInt32
+    property szInfo : Win32cr::Foundation::CHAR[256]
+    property anonymous : Anonymous_e__Union_
+    property szInfoTitle : Win32cr::Foundation::CHAR[64]
+    property dwInfoFlags : UInt32
+    property guidItem : LibC::GUID
+    property hBalloonIcon : Win32cr::UI::WindowsAndMessaging::HICON
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      uTimeout : UInt32,
-      uVersion : UInt32
+    struct Anonymous_e__Union_
+    property uTimeout : UInt32
+    property uVersion : UInt32
+    def initialize(@uTimeout : UInt32, @uVersion : UInt32)
+    end
+    end
 
+    def initialize(@cbSize : UInt32, @hWnd : Win32cr::Foundation::HWND, @uID : UInt32, @uFlags : Win32cr::UI::Shell::NOTIFY_ICON_DATA_FLAGS, @uCallbackMessage : UInt32, @hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @szTip : Win32cr::Foundation::CHAR[128], @dwState : UInt32, @dwStateMask : UInt32, @szInfo : Win32cr::Foundation::CHAR[256], @anonymous : Anonymous_e__Union_, @szInfoTitle : Win32cr::Foundation::CHAR[64], @dwInfoFlags : UInt32, @guidItem : LibC::GUID, @hBalloonIcon : Win32cr::UI::WindowsAndMessaging::HICON)
+    end
   end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record NOTIFYICONDATAW,
-    cbSize : UInt32,
-    hWnd : Win32cr::Foundation::HWND,
-    uID : UInt32,
-    uFlags : Win32cr::UI::Shell::NOTIFY_ICON_DATA_FLAGS,
-    uCallbackMessage : UInt32,
-    hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-    szTip : UInt16[128],
-    dwState : UInt32,
-    dwStateMask : UInt32,
-    szInfo : UInt16[256],
-    anonymous : Anonymous_e__Union_,
-    szInfoTitle : UInt16[64],
-    dwInfoFlags : UInt32,
-    guidItem : LibC::GUID,
-    hBalloonIcon : Win32cr::UI::WindowsAndMessaging::HICON do
+  struct NOTIFYICONDATAW
+    property cbSize : UInt32
+    property hWnd : Win32cr::Foundation::HWND
+    property uID : UInt32
+    property uFlags : Win32cr::UI::Shell::NOTIFY_ICON_DATA_FLAGS
+    property uCallbackMessage : UInt32
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property szTip : UInt16[128]
+    property dwState : UInt32
+    property dwStateMask : UInt32
+    property szInfo : UInt16[256]
+    property anonymous : Anonymous_e__Union_
+    property szInfoTitle : UInt16[64]
+    property dwInfoFlags : UInt32
+    property guidItem : LibC::GUID
+    property hBalloonIcon : Win32cr::UI::WindowsAndMessaging::HICON
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      uTimeout : UInt32,
-      uVersion : UInt32
+    struct Anonymous_e__Union_
+    property uTimeout : UInt32
+    property uVersion : UInt32
+    def initialize(@uTimeout : UInt32, @uVersion : UInt32)
+    end
+    end
 
+    def initialize(@cbSize : UInt32, @hWnd : Win32cr::Foundation::HWND, @uID : UInt32, @uFlags : Win32cr::UI::Shell::NOTIFY_ICON_DATA_FLAGS, @uCallbackMessage : UInt32, @hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @szTip : UInt16[128], @dwState : UInt32, @dwStateMask : UInt32, @szInfo : UInt16[256], @anonymous : Anonymous_e__Union_, @szInfoTitle : UInt16[64], @dwInfoFlags : UInt32, @guidItem : LibC::GUID, @hBalloonIcon : Win32cr::UI::WindowsAndMessaging::HICON)
+    end
   end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record NOTIFYICONIDENTIFIER,
-    cbSize : UInt32,
-    hWnd : Win32cr::Foundation::HWND,
-    uID : UInt32,
-    guidItem : LibC::GUID
+  struct NOTIFYICONIDENTIFIER
+    property cbSize : UInt32
+    property hWnd : Win32cr::Foundation::HWND
+    property uID : UInt32
+    property guidItem : LibC::GUID
+    def initialize(@cbSize : UInt32, @hWnd : Win32cr::Foundation::HWND, @uID : UInt32, @guidItem : LibC::GUID)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SHFILEINFOA,
-    hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-    iIcon : Int32,
-    dwAttributes : UInt32,
-    szDisplayName : Win32cr::Foundation::CHAR[260],
-    szTypeName : Win32cr::Foundation::CHAR[80]
+  struct SHFILEINFOA
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property iIcon : Int32
+    property dwAttributes : UInt32
+    property szDisplayName : Win32cr::Foundation::CHAR[260]
+    property szTypeName : Win32cr::Foundation::CHAR[80]
+    def initialize(@hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @iIcon : Int32, @dwAttributes : UInt32, @szDisplayName : Win32cr::Foundation::CHAR[260], @szTypeName : Win32cr::Foundation::CHAR[80])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SHFILEINFOW,
-    hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-    iIcon : Int32,
-    dwAttributes : UInt32,
-    szDisplayName : UInt16[260],
-    szTypeName : UInt16[80]
+  struct SHFILEINFOW
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property iIcon : Int32
+    property dwAttributes : UInt32
+    property szDisplayName : UInt16[260]
+    property szTypeName : UInt16[80]
+    def initialize(@hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @iIcon : Int32, @dwAttributes : UInt32, @szDisplayName : UInt16[260], @szTypeName : UInt16[80])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SHSTOCKICONINFO,
-    cbSize : UInt32,
-    hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-    iSysImageIndex : Int32,
-    iIcon : Int32,
-    szPath : UInt16[260]
+  struct SHSTOCKICONINFO
+    property cbSize : UInt32
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property iSysImageIndex : Int32
+    property iIcon : Int32
+    property szPath : UInt16[260]
+    def initialize(@cbSize : UInt32, @hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @iSysImageIndex : Int32, @iIcon : Int32, @szPath : UInt16[260])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record OPEN_PRINTER_PROPS_INFOA,
-    dwSize : UInt32,
-    pszSheetName : Win32cr::Foundation::PSTR,
-    uSheetIndex : UInt32,
-    dwFlags : UInt32,
-    bModal : Win32cr::Foundation::BOOL
+  struct OPEN_PRINTER_PROPS_INFOA
+    property dwSize : UInt32
+    property pszSheetName : Win32cr::Foundation::PSTR
+    property uSheetIndex : UInt32
+    property dwFlags : UInt32
+    property bModal : Win32cr::Foundation::BOOL
+    def initialize(@dwSize : UInt32, @pszSheetName : Win32cr::Foundation::PSTR, @uSheetIndex : UInt32, @dwFlags : UInt32, @bModal : Win32cr::Foundation::BOOL)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record OPEN_PRINTER_PROPS_INFOW,
-    dwSize : UInt32,
-    pszSheetName : Win32cr::Foundation::PWSTR,
-    uSheetIndex : UInt32,
-    dwFlags : UInt32,
-    bModal : Win32cr::Foundation::BOOL
+  struct OPEN_PRINTER_PROPS_INFOW
+    property dwSize : UInt32
+    property pszSheetName : Win32cr::Foundation::PWSTR
+    property uSheetIndex : UInt32
+    property dwFlags : UInt32
+    property bModal : Win32cr::Foundation::BOOL
+    def initialize(@dwSize : UInt32, @pszSheetName : Win32cr::Foundation::PWSTR, @uSheetIndex : UInt32, @dwFlags : UInt32, @bModal : Win32cr::Foundation::BOOL)
+    end
+  end
   {% end %}
 
   @[Extern]
@@ -6114,7 +6609,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("99180163-da16-101a-935c-444553540000")]
   record INotifyReplica, lpVtbl : INotifyReplicaVtbl* do
     GUID = LibC::GUID.new(0x99180163_u32, 0xda16_u16, 0x101a_u16, StaticArray[0x93_u8, 0x5c_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : INotifyReplica*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6143,7 +6637,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("000214e4-0000-0000-c000-000000000046")]
   record IContextMenu, lpVtbl : IContextMenuVtbl* do
     GUID = LibC::GUID.new(0x214e4_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IContextMenu*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6179,7 +6672,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("000214f4-0000-0000-c000-000000000046")]
   record IContextMenu2, lpVtbl : IContextMenu2Vtbl* do
     GUID = LibC::GUID.new(0x214f4_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IContextMenu2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6219,7 +6711,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("bcfce0a0-ec17-11d0-8d10-00a0c90f2719")]
   record IContextMenu3, lpVtbl : IContextMenu3Vtbl* do
     GUID = LibC::GUID.new(0xbcfce0a0_u32, 0xec17_u16, 0x11d0_u16, StaticArray[0x8d_u8, 0x10_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xf_u8, 0x27_u8, 0x19_u8])
     def query_interface(this : IContextMenu3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6264,7 +6755,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("7f9185b0-cb92-43c5-80a9-92277a4f7b54")]
   record IExecuteCommand, lpVtbl : IExecuteCommandVtbl* do
     GUID = LibC::GUID.new(0x7f9185b0_u32, 0xcb92_u16, 0x43c5_u16, StaticArray[0x80_u8, 0xa9_u8, 0x92_u8, 0x27_u8, 0x7a_u8, 0x4f_u8, 0x7b_u8, 0x54_u8])
     def query_interface(this : IExecuteCommand*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6310,7 +6800,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("000214ea-0000-0000-c000-000000000046")]
   record IPersistFolder, lpVtbl : IPersistFolderVtbl* do
     GUID = LibC::GUID.new(0x214ea_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IPersistFolder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6344,7 +6833,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("85788d00-6807-11d0-b810-00c04fd706ec")]
   record IRunnableTask, lpVtbl : IRunnableTaskVtbl* do
     GUID = LibC::GUID.new(0x85788d00_u32, 0x6807_u16, 0x11d0_u16, StaticArray[0xb8_u8, 0x10_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0x6_u8, 0xec_u8])
     def query_interface(this : IRunnableTask*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6386,7 +6874,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("6ccb7be0-6807-11d0-b810-00c04fd706ec")]
   record IShellTaskScheduler, lpVtbl : IShellTaskSchedulerVtbl* do
     GUID = LibC::GUID.new(0x6ccb7be0_u32, 0x6807_u16, 0x11d0_u16, StaticArray[0xb8_u8, 0x10_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0x6_u8, 0xec_u8])
     def query_interface(this : IShellTaskScheduler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6424,7 +6911,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("1ac3d9f0-175c-11d1-95be-00609797ea4f")]
   record IPersistFolder2, lpVtbl : IPersistFolder2Vtbl* do
     GUID = LibC::GUID.new(0x1ac3d9f0_u32, 0x175c_u16, 0x11d1_u16, StaticArray[0x95_u8, 0xbe_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0x97_u8, 0xea_u8, 0x4f_u8])
     def query_interface(this : IPersistFolder2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6461,7 +6947,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("cef04fdf-fe72-11d2-87a5-00c04f6837cf")]
   record IPersistFolder3, lpVtbl : IPersistFolder3Vtbl* do
     GUID = LibC::GUID.new(0xcef04fdf_u32, 0xfe72_u16, 0x11d2_u16, StaticArray[0x87_u8, 0xa5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x68_u8, 0x37_u8, 0xcf_u8])
     def query_interface(this : IPersistFolder3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6502,7 +6987,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("1079acfc-29bd-11d3-8e0d-00c04f6837d5")]
   record IPersistIDList, lpVtbl : IPersistIDListVtbl* do
     GUID = LibC::GUID.new(0x1079acfc_u32, 0x29bd_u16, 0x11d3_u16, StaticArray[0x8e_u8, 0xd_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x68_u8, 0x37_u8, 0xd5_u8])
     def query_interface(this : IPersistIDList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6538,7 +7022,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("000214f2-0000-0000-c000-000000000046")]
   record IEnumIDList, lpVtbl : IEnumIDListVtbl* do
     GUID = LibC::GUID.new(0x214f2_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IEnumIDList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6577,7 +7060,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("d0191542-7954-4908-bc06-b2360bbe45ba")]
   record IEnumFullIDList, lpVtbl : IEnumFullIDListVtbl* do
     GUID = LibC::GUID.new(0xd0191542_u32, 0x7954_u16, 0x4908_u16, StaticArray[0xbc_u8, 0x6_u8, 0xb2_u8, 0x36_u8, 0xb_u8, 0xbe_u8, 0x45_u8, 0xba_u8])
     def query_interface(this : IEnumFullIDList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6614,7 +7096,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("d97b5aac-c792-433c-975d-35c4eadc7a9d")]
   record IFileSyncMergeHandler, lpVtbl : IFileSyncMergeHandlerVtbl* do
     GUID = LibC::GUID.new(0xd97b5aac_u32, 0xc792_u16, 0x433c_u16, StaticArray[0x97_u8, 0x5d_u8, 0x35_u8, 0xc4_u8, 0xea_u8, 0xdc_u8, 0x7a_u8, 0x9d_u8])
     def query_interface(this : IFileSyncMergeHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6645,7 +7126,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("6a9d9026-0e6e-464c-b000-42ecc07de673")]
   record IObjectWithFolderEnumMode, lpVtbl : IObjectWithFolderEnumModeVtbl* do
     GUID = LibC::GUID.new(0x6a9d9026_u32, 0xe6e_u16, 0x464c_u16, StaticArray[0xb0_u8, 0x0_u8, 0x42_u8, 0xec_u8, 0xc0_u8, 0x7d_u8, 0xe6_u8, 0x73_u8])
     def query_interface(this : IObjectWithFolderEnumMode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6676,7 +7156,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("67efed0e-e827-4408-b493-78f3982b685c")]
   record IParseAndCreateItem, lpVtbl : IParseAndCreateItemVtbl* do
     GUID = LibC::GUID.new(0x67efed0e_u32, 0xe827_u16, 0x4408_u16, StaticArray[0xb4_u8, 0x93_u8, 0x78_u8, 0xf3_u8, 0x98_u8, 0x2b_u8, 0x68_u8, 0x5c_u8])
     def query_interface(this : IParseAndCreateItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6715,7 +7194,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("000214e6-0000-0000-c000-000000000046")]
   record IShellFolder, lpVtbl : IShellFolderVtbl* do
     GUID = LibC::GUID.new(0x214e6_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IShellFolder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6772,7 +7250,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("0e700be1-9db6-11d1-a1ce-00c04fd75d13")]
   record IEnumExtraSearch, lpVtbl : IEnumExtraSearchVtbl* do
     GUID = LibC::GUID.new(0xe700be1_u32, 0x9db6_u16, 0x11d1_u16, StaticArray[0xa1_u8, 0xce_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0x5d_u8, 0x13_u8])
     def query_interface(this : IEnumExtraSearch*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6824,7 +7301,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("93f2f68c-1d1b-11d3-a30e-00c04f79abd1")]
   record IShellFolder2, lpVtbl : IShellFolder2Vtbl* do
     GUID = LibC::GUID.new(0x93f2f68c_u32, 0x1d1b_u16, 0x11d3_u16, StaticArray[0xa3_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xab_u8, 0xd1_u8])
     def query_interface(this : IShellFolder2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6911,7 +7387,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("000214e3-0000-0000-c000-000000000046")]
   record IShellView, lpVtbl : IShellViewVtbl* do
     GUID = LibC::GUID.new(0x214e3_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IShellView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6990,7 +7465,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("88e39e80-3578-11cf-ae69-08002b2e1262")]
   record IShellView2, lpVtbl : IShellView2Vtbl* do
     GUID = LibC::GUID.new(0x88e39e80_u32, 0x3578_u16, 0x11cf_u16, StaticArray[0xae_u8, 0x69_u8, 0x8_u8, 0x0_u8, 0x2b_u8, 0x2e_u8, 0x12_u8, 0x62_u8])
     def query_interface(this : IShellView2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7078,7 +7552,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("cde725b0-ccc9-4519-917e-325d72fab4ce")]
   record IFolderView, lpVtbl : IFolderViewVtbl* do
     GUID = LibC::GUID.new(0xcde725b0_u32, 0xccc9_u16, 0x4519_u16, StaticArray[0x91_u8, 0x7e_u8, 0x32_u8, 0x5d_u8, 0x72_u8, 0xfa_u8, 0xb4_u8, 0xce_u8])
     def query_interface(this : IFolderView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7182,7 +7655,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("1af3a467-214f-4298-908e-06b03e0b39f9")]
   record IFolderView2, lpVtbl : IFolderView2Vtbl* do
     GUID = LibC::GUID.new(0x1af3a467_u32, 0x214f_u16, 0x4298_u16, StaticArray[0x90_u8, 0x8e_u8, 0x6_u8, 0xb0_u8, 0x3e_u8, 0xb_u8, 0x39_u8, 0xf9_u8])
     def query_interface(this : IFolderView2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7329,7 +7801,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("ae8c987d-8797-4ed3-be72-2a47dd938db0")]
   record IFolderViewSettings, lpVtbl : IFolderViewSettingsVtbl* do
     GUID = LibC::GUID.new(0xae8c987d_u32, 0x8797_u16, 0x4ed3_u16, StaticArray[0xbe_u8, 0x72_u8, 0x2a_u8, 0x47_u8, 0xdd_u8, 0x93_u8, 0x8d_u8, 0xb0_u8])
     def query_interface(this : IFolderViewSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7374,7 +7845,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("6e0f9881-42a8-4f2a-97f8-8af4e026d92d")]
   record IInitializeNetworkFolder, lpVtbl : IInitializeNetworkFolderVtbl* do
     GUID = LibC::GUID.new(0x6e0f9881_u32, 0x42a8_u16, 0x4f2a_u16, StaticArray[0x97_u8, 0xf8_u8, 0x8a_u8, 0xf4_u8, 0xe0_u8, 0x26_u8, 0xd9_u8, 0x2d_u8])
     def query_interface(this : IInitializeNetworkFolder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7403,7 +7873,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("ceb38218-c971-47bb-a703-f0bc99ccdb81")]
   record INetworkFolderInternal, lpVtbl : INetworkFolderInternalVtbl* do
     GUID = LibC::GUID.new(0xceb38218_u32, 0xc971_u16, 0x47bb_u16, StaticArray[0xa7_u8, 0x3_u8, 0xf0_u8, 0xbc_u8, 0x99_u8, 0xcc_u8, 0xdb_u8, 0x81_u8])
     def query_interface(this : INetworkFolderInternal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7438,7 +7907,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("196bf9a5-b346-4ef0-aa1e-5dcdb76768b1")]
   record IPreviewHandlerVisuals, lpVtbl : IPreviewHandlerVisualsVtbl* do
     GUID = LibC::GUID.new(0x196bf9a5_u32, 0xb346_u16, 0x4ef0_u16, StaticArray[0xaa_u8, 0x1e_u8, 0x5d_u8, 0xcd_u8, 0xb7_u8, 0x67_u8, 0x68_u8, 0xb1_u8])
     def query_interface(this : IPreviewHandlerVisuals*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7473,7 +7941,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("000214f1-0000-0000-c000-000000000046")]
   record ICommDlgBrowser, lpVtbl : ICommDlgBrowserVtbl* do
     GUID = LibC::GUID.new(0x214f1_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : ICommDlgBrowser*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7511,7 +7978,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("10339516-2894-11d2-9039-00c04f8eeb3e")]
   record ICommDlgBrowser2, lpVtbl : ICommDlgBrowser2Vtbl* do
     GUID = LibC::GUID.new(0x10339516_u32, 0x2894_u16, 0x11d2_u16, StaticArray[0x90_u8, 0x39_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xeb_u8, 0x3e_u8])
     def query_interface(this : ICommDlgBrowser2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7557,7 +8023,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("d8ec27bb-3f3b-4042-b10a-4acfd924d453")]
   record IColumnManager, lpVtbl : IColumnManagerVtbl* do
     GUID = LibC::GUID.new(0xd8ec27bb_u32, 0x3f3b_u16, 0x4042_u16, StaticArray[0xb1_u8, 0xa_u8, 0x4a_u8, 0xcf_u8, 0xd9_u8, 0x24_u8, 0xd4_u8, 0x53_u8])
     def query_interface(this : IColumnManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7596,7 +8061,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("c0a651f5-b48b-11d2-b5ed-006097c686f6")]
   record IFolderFilterSite, lpVtbl : IFolderFilterSiteVtbl* do
     GUID = LibC::GUID.new(0xc0a651f5_u32, 0xb48b_u16, 0x11d2_u16, StaticArray[0xb5_u8, 0xed_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xc6_u8, 0x86_u8, 0xf6_u8])
     def query_interface(this : IFolderFilterSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7624,7 +8088,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("9cc22886-dc8e-11d2-b1d0-00c04f8eeb3e")]
   record IFolderFilter, lpVtbl : IFolderFilterVtbl* do
     GUID = LibC::GUID.new(0x9cc22886_u32, 0xdc8e_u16, 0x11d2_u16, StaticArray[0xb1_u8, 0xd0_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xeb_u8, 0x3e_u8])
     def query_interface(this : IFolderFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7654,7 +8117,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("f1db8392-7331-11d0-8c99-00a0c92dbfe8")]
   record IInputObjectSite, lpVtbl : IInputObjectSiteVtbl* do
     GUID = LibC::GUID.new(0xf1db8392_u32, 0x7331_u16, 0x11d0_u16, StaticArray[0x8c_u8, 0x99_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x2d_u8, 0xbf_u8, 0xe8_u8])
     def query_interface(this : IInputObjectSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7683,7 +8145,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("68284faa-6a48-11d0-8c78-00c04fd918b4")]
   record IInputObject, lpVtbl : IInputObjectVtbl* do
     GUID = LibC::GUID.new(0x68284faa_u32, 0x6a48_u16, 0x11d0_u16, StaticArray[0x8c_u8, 0x78_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0xb4_u8])
     def query_interface(this : IInputObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7719,7 +8180,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("6915c085-510b-44cd-94af-28dfa56cf92b")]
   record IInputObject2, lpVtbl : IInputObject2Vtbl* do
     GUID = LibC::GUID.new(0x6915c085_u32, 0x510b_u16, 0x44cd_u16, StaticArray[0x94_u8, 0xaf_u8, 0x28_u8, 0xdf_u8, 0xa5_u8, 0x6c_u8, 0xf9_u8, 0x2b_u8])
     def query_interface(this : IInputObject2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7755,7 +8215,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("000214e5-0000-0000-c000-000000000046")]
   record IShellIcon, lpVtbl : IShellIconVtbl* do
     GUID = LibC::GUID.new(0x214e5_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IShellIcon*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7796,7 +8255,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("000214e2-0000-0000-c000-000000000046")]
   record IShellBrowser, lpVtbl : IShellBrowserVtbl* do
     GUID = LibC::GUID.new(0x214e2_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IShellBrowser*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7866,7 +8324,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("cb728b20-f786-11ce-92ad-00aa00a74cd0")]
   record IProfferService, lpVtbl : IProfferServiceVtbl* do
     GUID = LibC::GUID.new(0xcb728b20_u32, 0xf786_u16, 0x11ce_u16, StaticArray[0x92_u8, 0xad_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa7_u8, 0x4c_u8, 0xd0_u8])
     def query_interface(this : IProfferService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7896,7 +8353,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("4a073526-6103-4e21-b7bc-f519d1524e5d")]
   record IGetServiceIds, lpVtbl : IGetServiceIdsVtbl* do
     GUID = LibC::GUID.new(0x4a073526_u32, 0x6103_u16, 0x4e21_u16, StaticArray[0xb7_u8, 0xbc_u8, 0xf5_u8, 0x19_u8, 0xd1_u8, 0x52_u8, 0x4e_u8, 0x5d_u8])
     def query_interface(this : IGetServiceIds*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7927,7 +8383,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("43826d1e-e718-42ee-bc55-a1e261c37bfe")]
   record IShellItem, lpVtbl : IShellItemVtbl* do
     GUID = LibC::GUID.new(0x43826d1e_u32, 0xe718_u16, 0x42ee_u16, StaticArray[0xbc_u8, 0x55_u8, 0xa1_u8, 0xe2_u8, 0x61_u8, 0xc3_u8, 0x7b_u8, 0xfe_u8])
     def query_interface(this : IShellItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7983,7 +8438,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("7e9fb0d3-919f-4307-ab2e-9b1860310c93")]
   record IShellItem2, lpVtbl : IShellItem2Vtbl* do
     GUID = LibC::GUID.new(0x7e9fb0d3_u32, 0x919f_u16, 0x4307_u16, StaticArray[0xab_u8, 0x2e_u8, 0x9b_u8, 0x18_u8, 0x60_u8, 0x31_u8, 0xc_u8, 0x93_u8])
     def query_interface(this : IShellItem2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8061,7 +8515,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("bcc18b79-ba16-442f-80c4-8a59c30c463b")]
   record IShellItemImageFactory, lpVtbl : IShellItemImageFactoryVtbl* do
     GUID = LibC::GUID.new(0xbcc18b79_u32, 0xba16_u16, 0x442f_u16, StaticArray[0x80_u8, 0xc4_u8, 0x8a_u8, 0x59_u8, 0xc3_u8, 0xc_u8, 0x46_u8, 0x3b_u8])
     def query_interface(this : IShellItemImageFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8091,7 +8544,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("70629033-e363-4a28-a567-0db78006e6d7")]
   record IEnumShellItems, lpVtbl : IEnumShellItemsVtbl* do
     GUID = LibC::GUID.new(0x70629033_u32, 0xe363_u16, 0x4a28_u16, StaticArray[0xa5_u8, 0x67_u8, 0xd_u8, 0xb7_u8, 0x80_u8, 0x6_u8, 0xe6_u8, 0xd7_u8])
     def query_interface(this : IEnumShellItems*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8133,7 +8585,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("d594d0d8-8da7-457b-b3b4-ce5dbaac0b88")]
   record ITransferAdviseSink, lpVtbl : ITransferAdviseSinkVtbl* do
     GUID = LibC::GUID.new(0xd594d0d8_u32, 0x8da7_u16, 0x457b_u16, StaticArray[0xb3_u8, 0xb4_u8, 0xce_u8, 0x5d_u8, 0xba_u8, 0xac_u8, 0xb_u8, 0x88_u8])
     def query_interface(this : ITransferAdviseSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8190,7 +8641,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("00adb003-bde9-45c6-8e29-d09f9353e108")]
   record ITransferSource, lpVtbl : ITransferSourceVtbl* do
     GUID = LibC::GUID.new(0xadb003_u32, 0xbde9_u16, 0x45c6_u16, StaticArray[0x8e_u8, 0x29_u8, 0xd0_u8, 0x9f_u8, 0x93_u8, 0x53_u8, 0xe1_u8, 0x8_u8])
     def query_interface(this : ITransferSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8256,7 +8706,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("2dd81fe3-a83c-4da9-a330-47249d345ba1")]
   record IEnumResources, lpVtbl : IEnumResourcesVtbl* do
     GUID = LibC::GUID.new(0x2dd81fe3_u32, 0xa83c_u16, 0x4da9_u16, StaticArray[0xa3_u8, 0x30_u8, 0x47_u8, 0x24_u8, 0x9d_u8, 0x34_u8, 0x5b_u8, 0xa1_u8])
     def query_interface(this : IEnumResources*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8301,7 +8750,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("ff5693be-2ce0-4d48-b5c5-40817d1acdb9")]
   record IShellItemResources, lpVtbl : IShellItemResourcesVtbl* do
     GUID = LibC::GUID.new(0xff5693be_u32, 0x2ce0_u16, 0x4d48_u16, StaticArray[0xb5_u8, 0xc5_u8, 0x40_u8, 0x81_u8, 0x7d_u8, 0x1a_u8, 0xcd_u8, 0xb9_u8])
     def query_interface(this : IShellItemResources*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8357,7 +8805,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("48addd32-3ca5-4124-abe3-b5a72531b207")]
   record ITransferDestination, lpVtbl : ITransferDestinationVtbl* do
     GUID = LibC::GUID.new(0x48addd32_u32, 0x3ca5_u16, 0x4124_u16, StaticArray[0xab_u8, 0xe3_u8, 0xb5_u8, 0xa7_u8, 0x25_u8, 0x31_u8, 0xb2_u8, 0x7_u8])
     def query_interface(this : ITransferDestination*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8405,7 +8852,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("04b0f1a7-9490-44bc-96e1-4296a31252e2")]
   record IFileOperationProgressSink, lpVtbl : IFileOperationProgressSinkVtbl* do
     GUID = LibC::GUID.new(0x4b0f1a7_u32, 0x9490_u16, 0x44bc_u16, StaticArray[0x96_u8, 0xe1_u8, 0x42_u8, 0x96_u8, 0xa3_u8, 0x12_u8, 0x52_u8, 0xe2_u8])
     def query_interface(this : IFileOperationProgressSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8483,7 +8929,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("b63ea76d-1f85-456f-a19c-48159efa858b")]
   record IShellItemArray, lpVtbl : IShellItemArrayVtbl* do
     GUID = LibC::GUID.new(0xb63ea76d_u32, 0x1f85_u16, 0x456f_u16, StaticArray[0xa1_u8, 0x9c_u8, 0x48_u8, 0x15_u8, 0x9e_u8, 0xfa_u8, 0x85_u8, 0x8b_u8])
     def query_interface(this : IShellItemArray*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8528,7 +8973,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("7f73be3f-fb79-493c-a6c7-7ee14e245841")]
   record IInitializeWithItem, lpVtbl : IInitializeWithItemVtbl* do
     GUID = LibC::GUID.new(0x7f73be3f_u32, 0xfb79_u16, 0x493c_u16, StaticArray[0xa6_u8, 0xc7_u8, 0x7e_u8, 0xe1_u8, 0x4e_u8, 0x24_u8, 0x58_u8, 0x41_u8])
     def query_interface(this : IInitializeWithItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8556,7 +9000,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("1c9cd5bb-98e9-4491-a60f-31aacc72b83c")]
   record IObjectWithSelection, lpVtbl : IObjectWithSelectionVtbl* do
     GUID = LibC::GUID.new(0x1c9cd5bb_u32, 0x98e9_u16, 0x4491_u16, StaticArray[0xa6_u8, 0xf_u8, 0x31_u8, 0xaa_u8, 0xcc_u8, 0x72_u8, 0xb8_u8, 0x3c_u8])
     def query_interface(this : IObjectWithSelection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8586,7 +9029,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("321a6a6a-d61f-4bf3-97ae-14be2986bb36")]
   record IObjectWithBackReferences, lpVtbl : IObjectWithBackReferencesVtbl* do
     GUID = LibC::GUID.new(0x321a6a6a_u32, 0xd61f_u16, 0x4bf3_u16, StaticArray[0x97_u8, 0xae_u8, 0x14_u8, 0xbe_u8, 0x29_u8, 0x86_u8, 0xbb_u8, 0x36_u8])
     def query_interface(this : IObjectWithBackReferences*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8618,7 +9060,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("9af64809-5864-4c26-a720-c1f78c086ee3")]
   record ICategoryProvider, lpVtbl : ICategoryProviderVtbl* do
     GUID = LibC::GUID.new(0x9af64809_u32, 0x5864_u16, 0x4c26_u16, StaticArray[0xa7_u8, 0x20_u8, 0xc1_u8, 0xf7_u8, 0x8c_u8, 0x8_u8, 0x6e_u8, 0xe3_u8])
     def query_interface(this : ICategoryProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8663,7 +9104,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("a3b14589-9174-49a8-89a3-06a1ae2b9ba7")]
   record ICategorizer, lpVtbl : ICategorizerVtbl* do
     GUID = LibC::GUID.new(0xa3b14589_u32, 0x9174_u16, 0x49a8_u16, StaticArray[0x89_u8, 0xa3_u8, 0x6_u8, 0xa1_u8, 0xae_u8, 0x2b_u8, 0x9b_u8, 0xa7_u8])
     def query_interface(this : ICategorizer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8703,7 +9143,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("4657278b-411b-11d2-839a-00c04fd918d0")]
   record IDropTargetHelper, lpVtbl : IDropTargetHelperVtbl* do
     GUID = LibC::GUID.new(0x4657278b_u32, 0x411b_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x9a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0xd0_u8])
     def query_interface(this : IDropTargetHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8743,7 +9182,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("de5bf786-477a-11d2-839d-00c04fd918d0")]
   record IDragSourceHelper, lpVtbl : IDragSourceHelperVtbl* do
     GUID = LibC::GUID.new(0xde5bf786_u32, 0x477a_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x9d_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0xd0_u8])
     def query_interface(this : IDragSourceHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8790,7 +9228,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("000214ee-0000-0000-c000-000000000046")]
   record IShellLinkA, lpVtbl : IShellLinkAVtbl* do
     GUID = LibC::GUID.new(0x214ee_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IShellLinkA*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8885,7 +9322,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("000214f9-0000-0000-c000-000000000046")]
   record IShellLinkW, lpVtbl : IShellLinkWVtbl* do
     GUID = LibC::GUID.new(0x214f9_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IShellLinkW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8967,7 +9403,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("45e2b4ae-b1c3-11d0-b92f-00a0c90312e1")]
   record IShellLinkDataList, lpVtbl : IShellLinkDataListVtbl* do
     GUID = LibC::GUID.new(0x45e2b4ae_u32, 0xb1c3_u16, 0x11d0_u16, StaticArray[0xb9_u8, 0x2f_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0x12_u8, 0xe1_u8])
     def query_interface(this : IShellLinkDataList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9006,7 +9441,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("5cd52983-9449-11d2-963a-00c04f79adf0")]
   record IResolveShellLink, lpVtbl : IResolveShellLinkVtbl* do
     GUID = LibC::GUID.new(0x5cd52983_u32, 0x9449_u16, 0x11d2_u16, StaticArray[0x96_u8, 0x3a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xad_u8, 0xf0_u8])
     def query_interface(this : IResolveShellLink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9034,7 +9468,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("49ff1172-eadc-446d-9285-156453a6431c")]
   record IActionProgressDialog, lpVtbl : IActionProgressDialogVtbl* do
     GUID = LibC::GUID.new(0x49ff1172_u32, 0xeadc_u16, 0x446d_u16, StaticArray[0x92_u8, 0x85_u8, 0x15_u8, 0x64_u8, 0x53_u8, 0xa6_u8, 0x43_u8, 0x1c_u8])
     def query_interface(this : IActionProgressDialog*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9069,7 +9502,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("49ff1173-eadc-446d-9285-156453a6431c")]
   record IActionProgress, lpVtbl : IActionProgressVtbl* do
     GUID = LibC::GUID.new(0x49ff1173_u32, 0xeadc_u16, 0x446d_u16, StaticArray[0x92_u8, 0x85_u8, 0x15_u8, 0x64_u8, 0x53_u8, 0xa6_u8, 0x43_u8, 0x1c_u8])
     def query_interface(this : IActionProgress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9111,7 +9543,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("000214e8-0000-0000-c000-000000000046")]
   record IShellExtInit, lpVtbl : IShellExtInitVtbl* do
     GUID = LibC::GUID.new(0x214e8_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IShellExtInit*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9139,7 +9570,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("000214e9-0000-0000-c000-000000000046")]
   record IShellPropSheetExt, lpVtbl : IShellPropSheetExtVtbl* do
     GUID = LibC::GUID.new(0x214e9_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IShellPropSheetExt*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9169,7 +9599,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("000214fe-0000-0000-c000-000000000046")]
   record IRemoteComputer, lpVtbl : IRemoteComputerVtbl* do
     GUID = LibC::GUID.new(0x214fe_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IRemoteComputer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9196,7 +9625,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("7307055c-b24a-486b-9f25-163e597a28a9")]
   record IQueryContinue, lpVtbl : IQueryContinueVtbl* do
     GUID = LibC::GUID.new(0x7307055c_u32, 0xb24a_u16, 0x486b_u16, StaticArray[0x9f_u8, 0x25_u8, 0x16_u8, 0x3e_u8, 0x59_u8, 0x7a_u8, 0x28_u8, 0xa9_u8])
     def query_interface(this : IQueryContinue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9223,7 +9651,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("f279b885-0ae9-4b85-ac06-ddecf9408941")]
   record IObjectWithCancelEvent, lpVtbl : IObjectWithCancelEventVtbl* do
     GUID = LibC::GUID.new(0xf279b885_u32, 0xae9_u16, 0x4b85_u16, StaticArray[0xac_u8, 0x6_u8, 0xdd_u8, 0xec_u8, 0xf9_u8, 0x40_u8, 0x89_u8, 0x41_u8])
     def query_interface(this : IObjectWithCancelEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9254,7 +9681,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("ba9711ba-5893-4787-a7e1-41277151550b")]
   record IUserNotification, lpVtbl : IUserNotificationVtbl* do
     GUID = LibC::GUID.new(0xba9711ba_u32, 0x5893_u16, 0x4787_u16, StaticArray[0xa7_u8, 0xe1_u8, 0x41_u8, 0x27_u8, 0x71_u8, 0x51_u8, 0x55_u8, 0xb_u8])
     def query_interface(this : IUserNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9294,7 +9720,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("1df0d7f1-b267-4d28-8b10-12e23202a5c4")]
   record IItemNameLimits, lpVtbl : IItemNameLimitsVtbl* do
     GUID = LibC::GUID.new(0x1df0d7f1_u32, 0xb267_u16, 0x4d28_u16, StaticArray[0x8b_u8, 0x10_u8, 0x12_u8, 0xe2_u8, 0x32_u8, 0x2_u8, 0xa5_u8, 0xc4_u8])
     def query_interface(this : IItemNameLimits*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9335,7 +9760,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("a0ffbc28-5482-4366-be27-3e81e78e06c2")]
   record ISearchFolderItemFactory, lpVtbl : ISearchFolderItemFactoryVtbl* do
     GUID = LibC::GUID.new(0xa0ffbc28_u32, 0x5482_u16, 0x4366_u16, StaticArray[0xbe_u8, 0x27_u8, 0x3e_u8, 0x81_u8, 0xe7_u8, 0x8e_u8, 0x6_u8, 0xc2_u8])
     def query_interface(this : ISearchFolderItemFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9396,7 +9820,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("bb2e617c-0920-11d1-9a0b-00c04fc2d6c1")]
   record IExtractImage, lpVtbl : IExtractImageVtbl* do
     GUID = LibC::GUID.new(0xbb2e617c_u32, 0x920_u16, 0x11d1_u16, StaticArray[0x9a_u8, 0xb_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xd6_u8, 0xc1_u8])
     def query_interface(this : IExtractImage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9428,7 +9851,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("953bb1ee-93b4-11d1-98a3-00c04fb687da")]
   record IExtractImage2, lpVtbl : IExtractImage2Vtbl* do
     GUID = LibC::GUID.new(0x953bb1ee_u32, 0x93b4_u16, 0x11d1_u16, StaticArray[0x98_u8, 0xa3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x87_u8, 0xda_u8])
     def query_interface(this : IExtractImage2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9461,7 +9883,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("e35b4b2e-00da-4bc1-9f13-38bc11f5d417")]
   record IThumbnailHandlerFactory, lpVtbl : IThumbnailHandlerFactoryVtbl* do
     GUID = LibC::GUID.new(0xe35b4b2e_u32, 0xda_u16, 0x4bc1_u16, StaticArray[0x9f_u8, 0x13_u8, 0x38_u8, 0xbc_u8, 0x11_u8, 0xf5_u8, 0xd4_u8, 0x17_u8])
     def query_interface(this : IThumbnailHandlerFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9489,7 +9910,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("b3a4b685-b685-4805-99d9-5dead2873236")]
   record IParentAndItem, lpVtbl : IParentAndItemVtbl* do
     GUID = LibC::GUID.new(0xb3a4b685_u32, 0xb685_u16, 0x4805_u16, StaticArray[0x99_u8, 0xd9_u8, 0x5d_u8, 0xea_u8, 0xd2_u8, 0x87_u8, 0x32_u8, 0x36_u8])
     def query_interface(this : IParentAndItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9523,7 +9943,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("012dd920-7b26-11d0-8ca9-00a0c92dbfe8")]
   record IDockingWindow, lpVtbl : IDockingWindowVtbl* do
     GUID = LibC::GUID.new(0x12dd920_u32, 0x7b26_u16, 0x11d0_u16, StaticArray[0x8c_u8, 0xa9_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x2d_u8, 0xbf_u8, 0xe8_u8])
     def query_interface(this : IDockingWindow*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9567,7 +9986,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("eb0fe172-1a3a-11d0-89b3-00a0c90a90ac")]
   record IDeskBand, lpVtbl : IDeskBandVtbl* do
     GUID = LibC::GUID.new(0xeb0fe172_u32, 0x1a3a_u16, 0x11d0_u16, StaticArray[0x89_u8, 0xb3_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0x90_u8, 0xac_u8])
     def query_interface(this : IDeskBand*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9609,7 +10027,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("77e425fc-cbf9-4307-ba6a-bb5727745661")]
   record IDeskBandInfo, lpVtbl : IDeskBandInfoVtbl* do
     GUID = LibC::GUID.new(0x77e425fc_u32, 0xcbf9_u16, 0x4307_u16, StaticArray[0xba_u8, 0x6a_u8, 0xbb_u8, 0x57_u8, 0x27_u8, 0x74_u8, 0x56_u8, 0x61_u8])
     def query_interface(this : IDeskBandInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9640,7 +10057,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("56fdf342-fd6d-11d0-958a-006097c9a090")]
   record ITaskbarList, lpVtbl : ITaskbarListVtbl* do
     GUID = LibC::GUID.new(0x56fdf342_u32, 0xfd6d_u16, 0x11d0_u16, StaticArray[0x95_u8, 0x8a_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xc9_u8, 0xa0_u8, 0x90_u8])
     def query_interface(this : ITaskbarList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9684,7 +10100,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("602d4995-b13a-429b-a66e-1935e44f4317")]
   record ITaskbarList2, lpVtbl : ITaskbarList2Vtbl* do
     GUID = LibC::GUID.new(0x602d4995_u32, 0xb13a_u16, 0x429b_u16, StaticArray[0xa6_u8, 0x6e_u8, 0x19_u8, 0x35_u8, 0xe4_u8, 0x4f_u8, 0x43_u8, 0x17_u8])
     def query_interface(this : ITaskbarList2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9743,7 +10158,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("ea1afb91-9e28-4b86-90e9-9e9f8a5eefaf")]
   record ITaskbarList3, lpVtbl : ITaskbarList3Vtbl* do
     GUID = LibC::GUID.new(0xea1afb91_u32, 0x9e28_u16, 0x4b86_u16, StaticArray[0x90_u8, 0xe9_u8, 0x9e_u8, 0x9f_u8, 0x8a_u8, 0x5e_u8, 0xef_u8, 0xaf_u8])
     def query_interface(this : ITaskbarList3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9839,7 +10253,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("c43dc798-95d1-4bea-9030-bb99e2983a1a")]
   record ITaskbarList4, lpVtbl : ITaskbarList4Vtbl* do
     GUID = LibC::GUID.new(0xc43dc798_u32, 0x95d1_u16, 0x4bea_u16, StaticArray[0x90_u8, 0x30_u8, 0xbb_u8, 0x99_u8, 0xe2_u8, 0x98_u8, 0x3a_u8, 0x1a_u8])
     def query_interface(this : ITaskbarList4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9923,7 +10336,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("361bbdc7-e6ee-4e13-be58-58e2240c810f")]
   record IExplorerBrowserEvents, lpVtbl : IExplorerBrowserEventsVtbl* do
     GUID = LibC::GUID.new(0x361bbdc7_u32, 0xe6ee_u16, 0x4e13_u16, StaticArray[0xbe_u8, 0x58_u8, 0x58_u8, 0xe2_u8, 0x24_u8, 0xc_u8, 0x81_u8, 0xf_u8])
     def query_interface(this : IExplorerBrowserEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9973,7 +10385,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("dfd3b6b5-c10c-4be9-85f6-a66969f402f6")]
   record IExplorerBrowser, lpVtbl : IExplorerBrowserVtbl* do
     GUID = LibC::GUID.new(0xdfd3b6b5_u32, 0xc10c_u16, 0x4be9_u16, StaticArray[0x85_u8, 0xf6_u8, 0xa6_u8, 0x69_u8, 0x69_u8, 0xf4_u8, 0x2_u8, 0xf6_u8])
     def query_interface(this : IExplorerBrowser*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10045,7 +10456,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("2c1c7e2e-2d0e-4059-831e-1e6f82335c2e")]
   record IEnumObjects, lpVtbl : IEnumObjectsVtbl* do
     GUID = LibC::GUID.new(0x2c1c7e2e_u32, 0x2d0e_u16, 0x4059_u16, StaticArray[0x83_u8, 0x1e_u8, 0x1e_u8, 0x6f_u8, 0x82_u8, 0x33_u8, 0x5c_u8, 0x2e_u8])
     def query_interface(this : IEnumObjects*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10091,7 +10501,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("0c9fb851-e5c9-43eb-a370-f0677b13874c")]
   record IOperationsProgressDialog, lpVtbl : IOperationsProgressDialogVtbl* do
     GUID = LibC::GUID.new(0xc9fb851_u32, 0xe5c9_u16, 0x43eb_u16, StaticArray[0xa3_u8, 0x70_u8, 0xf0_u8, 0x67_u8, 0x7b_u8, 0x13_u8, 0x87_u8, 0x4c_u8])
     def query_interface(this : IOperationsProgressDialog*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10149,7 +10558,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("f5b0bf81-8cb5-4b1b-9449-1a159e0c733c")]
   record IIOCancelInformation, lpVtbl : IIOCancelInformationVtbl* do
     GUID = LibC::GUID.new(0xf5b0bf81_u32, 0x8cb5_u16, 0x4b1b_u16, StaticArray[0x94_u8, 0x49_u8, 0x1a_u8, 0x15_u8, 0x9e_u8, 0xc_u8, 0x73_u8, 0x3c_u8])
     def query_interface(this : IIOCancelInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10198,7 +10606,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("947aab5f-0a5c-4c13-b4d6-4bf7836fc9f8")]
   record IFileOperation, lpVtbl : IFileOperationVtbl* do
     GUID = LibC::GUID.new(0x947aab5f_u32, 0xa5c_u16, 0x4c13_u16, StaticArray[0xb4_u8, 0xd6_u8, 0x4b_u8, 0xf7_u8, 0x83_u8, 0x6f_u8, 0xc9_u8, 0xf8_u8])
     def query_interface(this : IFileOperation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10302,7 +10709,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("cd8f23c1-8f61-4916-909d-55bdd0918753")]
   record IFileOperation2, lpVtbl : IFileOperation2Vtbl* do
     GUID = LibC::GUID.new(0xcd8f23c1_u32, 0x8f61_u16, 0x4916_u16, StaticArray[0x90_u8, 0x9d_u8, 0x55_u8, 0xbd_u8, 0xd0_u8, 0x91_u8, 0x87_u8, 0x53_u8])
     def query_interface(this : IFileOperation2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10389,7 +10795,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("a6087428-3be3-4d73-b308-7c04a540bf1a")]
   record IObjectProvider, lpVtbl : IObjectProviderVtbl* do
     GUID = LibC::GUID.new(0xa6087428_u32, 0x3be3_u16, 0x4d73_u16, StaticArray[0xb3_u8, 0x8_u8, 0x7c_u8, 0x4_u8, 0xa5_u8, 0x40_u8, 0xbf_u8, 0x1a_u8])
     def query_interface(this : IObjectProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10419,7 +10824,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("d92995f8-cf5e-4a76-bf59-ead39ea2b97e")]
   record INamespaceWalkCB, lpVtbl : INamespaceWalkCBVtbl* do
     GUID = LibC::GUID.new(0xd92995f8_u32, 0xcf5e_u16, 0x4a76_u16, StaticArray[0xbf_u8, 0x59_u8, 0xea_u8, 0xd3_u8, 0x9e_u8, 0xa2_u8, 0xb9_u8, 0x7e_u8])
     def query_interface(this : INamespaceWalkCB*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10459,7 +10863,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("7ac7492b-c38e-438a-87db-68737844ff70")]
   record INamespaceWalkCB2, lpVtbl : INamespaceWalkCB2Vtbl* do
     GUID = LibC::GUID.new(0x7ac7492b_u32, 0xc38e_u16, 0x438a_u16, StaticArray[0x87_u8, 0xdb_u8, 0x68_u8, 0x73_u8, 0x78_u8, 0x44_u8, 0xff_u8, 0x70_u8])
     def query_interface(this : INamespaceWalkCB2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10499,7 +10902,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("57ced8a7-3f4a-432c-9350-30f24483f74f")]
   record INamespaceWalk, lpVtbl : INamespaceWalkVtbl* do
     GUID = LibC::GUID.new(0x57ced8a7_u32, 0x3f4a_u16, 0x432c_u16, StaticArray[0x93_u8, 0x50_u8, 0x30_u8, 0xf2_u8, 0x44_u8, 0x83_u8, 0xf7_u8, 0x4f_u8])
     def query_interface(this : INamespaceWalk*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10536,7 +10938,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("4cf504b0-de96-11d0-8b3f-00a0c911e8e5")]
   record IBandSite, lpVtbl : IBandSiteVtbl* do
     GUID = LibC::GUID.new(0x4cf504b0_u32, 0xde96_u16, 0x11d0_u16, StaticArray[0x8b_u8, 0x3f_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0xe8_u8, 0xe5_u8])
     def query_interface(this : IBandSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10584,7 +10985,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("b4db1657-70d7-485e-8e3e-6fcb5a5c1802")]
   record IModalWindow, lpVtbl : IModalWindowVtbl* do
     GUID = LibC::GUID.new(0xb4db1657_u32, 0x70d7_u16, 0x485e_u16, StaticArray[0x8e_u8, 0x3e_u8, 0x6f_u8, 0xcb_u8, 0x5a_u8, 0x5c_u8, 0x18_u8, 0x2_u8])
     def query_interface(this : IModalWindow*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10611,7 +11011,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("0811aebe-0b87-4c54-9e72-548cf649016b")]
   record IContextMenuSite, lpVtbl : IContextMenuSiteVtbl* do
     GUID = LibC::GUID.new(0x811aebe_u32, 0xb87_u16, 0x4c54_u16, StaticArray[0x9e_u8, 0x72_u8, 0x54_u8, 0x8c_u8, 0xf6_u8, 0x49_u8, 0x1_u8, 0x6b_u8])
     def query_interface(this : IContextMenuSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10639,7 +11038,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("568804cd-cbd7-11d0-9816-00c04fd91972")]
   record IMenuBand, lpVtbl : IMenuBandVtbl* do
     GUID = LibC::GUID.new(0x568804cd_u32, 0xcbd7_u16, 0x11d0_u16, StaticArray[0x98_u8, 0x16_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x19_u8, 0x72_u8])
     def query_interface(this : IMenuBand*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10670,7 +11068,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("a9521922-0812-4d44-9ec3-7fd38c726f3d")]
   record IRegTreeItem, lpVtbl : IRegTreeItemVtbl* do
     GUID = LibC::GUID.new(0xa9521922_u32, 0x812_u16, 0x4d44_u16, StaticArray[0x9e_u8, 0xc3_u8, 0x7f_u8, 0xd3_u8, 0x8c_u8, 0x72_u8, 0x6f_u8, 0x3d_u8])
     def query_interface(this : IRegTreeItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10704,7 +11101,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("eb0fe173-1a3a-11d0-89b3-00a0c90a90ac")]
   record IDeskBar, lpVtbl : IDeskBarVtbl* do
     GUID = LibC::GUID.new(0xeb0fe173_u32, 0x1a3a_u16, 0x11d0_u16, StaticArray[0x89_u8, 0xb3_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0x90_u8, 0xac_u8])
     def query_interface(this : IDeskBar*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10750,7 +11146,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("d1e7afeb-6a2e-11d0-8c78-00c04fd918b4")]
   record IMenuPopup, lpVtbl : IMenuPopupVtbl* do
     GUID = LibC::GUID.new(0xd1e7afeb_u32, 0x6a2e_u16, 0x11d0_u16, StaticArray[0x8c_u8, 0x78_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0xb4_u8])
     def query_interface(this : IMenuPopup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10802,7 +11197,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("64a1cbf0-3a1a-4461-9158-376969693950")]
   record IFileIsInUse, lpVtbl : IFileIsInUseVtbl* do
     GUID = LibC::GUID.new(0x64a1cbf0_u32, 0x3a1a_u16, 0x4461_u16, StaticArray[0x91_u8, 0x58_u8, 0x37_u8, 0x69_u8, 0x69_u8, 0x69_u8, 0x39_u8, 0x50_u8])
     def query_interface(this : IFileIsInUse*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10847,7 +11241,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("973510db-7d7f-452b-8975-74a85828d354")]
   record IFileDialogEvents, lpVtbl : IFileDialogEventsVtbl* do
     GUID = LibC::GUID.new(0x973510db_u32, 0x7d7f_u16, 0x452b_u16, StaticArray[0x89_u8, 0x75_u8, 0x74_u8, 0xa8_u8, 0x58_u8, 0x28_u8, 0xd3_u8, 0x54_u8])
     def query_interface(this : IFileDialogEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10915,7 +11308,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("42f85136-db7e-439c-85f1-e4075d135fc8")]
   record IFileDialog, lpVtbl : IFileDialogVtbl* do
     GUID = LibC::GUID.new(0x42f85136_u32, 0xdb7e_u16, 0x439c_u16, StaticArray[0x85_u8, 0xf1_u8, 0xe4_u8, 0x7_u8, 0x5d_u8, 0x13_u8, 0x5f_u8, 0xc8_u8])
     def query_interface(this : IFileDialog*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11039,7 +11431,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("84bccd23-5fde-4cdb-aea4-af64b83d78ab")]
   record IFileSaveDialog, lpVtbl : IFileSaveDialogVtbl* do
     GUID = LibC::GUID.new(0x84bccd23_u32, 0x5fde_u16, 0x4cdb_u16, StaticArray[0xae_u8, 0xa4_u8, 0xaf_u8, 0x64_u8, 0xb8_u8, 0x3d_u8, 0x78_u8, 0xab_u8])
     def query_interface(this : IFileSaveDialog*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11175,7 +11566,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("d57c7288-d4ad-4768-be02-9d969532d960")]
   record IFileOpenDialog, lpVtbl : IFileOpenDialogVtbl* do
     GUID = LibC::GUID.new(0xd57c7288_u32, 0xd4ad_u16, 0x4768_u16, StaticArray[0xbe_u8, 0x2_u8, 0x9d_u8, 0x96_u8, 0x95_u8, 0x32_u8, 0xd9_u8, 0x60_u8])
     def query_interface(this : IFileOpenDialog*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11303,7 +11693,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("e6fdd21a-163f-4975-9c8c-a69f1ba37034")]
   record IFileDialogCustomize, lpVtbl : IFileDialogCustomizeVtbl* do
     GUID = LibC::GUID.new(0xe6fdd21a_u32, 0x163f_u16, 0x4975_u16, StaticArray[0x9c_u8, 0x8c_u8, 0xa6_u8, 0x9f_u8, 0x1b_u8, 0xa3_u8, 0x70_u8, 0x34_u8])
     def query_interface(this : IFileDialogCustomize*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11413,7 +11802,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("4e530b0a-e611-4c77-a3ac-9031d022281b")]
   record IApplicationAssociationRegistration, lpVtbl : IApplicationAssociationRegistrationVtbl* do
     GUID = LibC::GUID.new(0x4e530b0a_u32, 0xe611_u16, 0x4c77_u16, StaticArray[0xa3_u8, 0xac_u8, 0x90_u8, 0x31_u8, 0xd0_u8, 0x22_u8, 0x28_u8, 0x1b_u8])
     def query_interface(this : IApplicationAssociationRegistration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11455,7 +11843,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("add8ba80-002b-11d0-8f0f-00c04fd7d062")]
   record IDelegateFolder, lpVtbl : IDelegateFolderVtbl* do
     GUID = LibC::GUID.new(0xadd8ba80_u32, 0x2b_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xf_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0xd0_u8, 0x62_u8])
     def query_interface(this : IDelegateFolder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11482,7 +11869,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("10df43c8-1dbe-11d3-8b34-006097df5bd4")]
   record IBrowserFrameOptions, lpVtbl : IBrowserFrameOptionsVtbl* do
     GUID = LibC::GUID.new(0x10df43c8_u32, 0x1dbe_u16, 0x11d3_u16, StaticArray[0x8b_u8, 0x34_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xdf_u8, 0x5b_u8, 0xd4_u8])
     def query_interface(this : IBrowserFrameOptions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11509,7 +11895,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("d2bc4c84-3f72-4a52-a604-7bcbf3982cbb")]
   record INewWindowManager, lpVtbl : INewWindowManagerVtbl* do
     GUID = LibC::GUID.new(0xd2bc4c84_u32, 0x3f72_u16, 0x4a52_u16, StaticArray[0xa6_u8, 0x4_u8, 0x7b_u8, 0xcb_u8, 0xf3_u8, 0x98_u8, 0x2c_u8, 0xbb_u8])
     def query_interface(this : INewWindowManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11547,7 +11932,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("73db1241-1e85-4581-8e4f-a81e1d0f8c57")]
   record IAttachmentExecute, lpVtbl : IAttachmentExecuteVtbl* do
     GUID = LibC::GUID.new(0x73db1241_u32, 0x1e85_u16, 0x4581_u16, StaticArray[0x8e_u8, 0x4f_u8, 0xa8_u8, 0x1e_u8, 0x1d_u8, 0xf_u8, 0x8c_u8, 0x57_u8])
     def query_interface(this : IAttachmentExecute*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11607,7 +11991,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("4ca300a1-9b8d-11d1-8b22-00c04fd918d0")]
   record IShellMenuCallback, lpVtbl : IShellMenuCallbackVtbl* do
     GUID = LibC::GUID.new(0x4ca300a1_u32, 0x9b8d_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x22_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0xd0_u8])
     def query_interface(this : IShellMenuCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11642,7 +12025,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("ee1f7637-e138-11d1-8379-00c04fd918d0")]
   record IShellMenu, lpVtbl : IShellMenuVtbl* do
     GUID = LibC::GUID.new(0xee1f7637_u32, 0xe138_u16, 0x11d1_u16, StaticArray[0x83_u8, 0x79_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0xd0_u8])
     def query_interface(this : IShellMenu*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11701,7 +12083,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("3aa7af7e-9b36-420c-a8e3-f77d4674a488")]
   record IKnownFolder, lpVtbl : IKnownFolderVtbl* do
     GUID = LibC::GUID.new(0x3aa7af7e_u32, 0x9b36_u16, 0x420c_u16, StaticArray[0xa8_u8, 0xe3_u8, 0xf7_u8, 0x7d_u8, 0x46_u8, 0x74_u8, 0xa4_u8, 0x88_u8])
     def query_interface(this : IKnownFolder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11761,7 +12142,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("8be2d872-86aa-4d47-b776-32cca40c7018")]
   record IKnownFolderManager, lpVtbl : IKnownFolderManagerVtbl* do
     GUID = LibC::GUID.new(0x8be2d872_u32, 0x86aa_u16, 0x4d47_u16, StaticArray[0xb7_u8, 0x76_u8, 0x32_u8, 0xcc_u8, 0xa4_u8, 0xc_u8, 0x70_u8, 0x18_u8])
     def query_interface(this : IKnownFolderManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11821,7 +12201,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("b4cd448a-9c86-4466-9201-2e62105b87ae")]
   record ISharingConfigurationManager, lpVtbl : ISharingConfigurationManagerVtbl* do
     GUID = LibC::GUID.new(0xb4cd448a_u32, 0x9c86_u16, 0x4466_u16, StaticArray[0x92_u8, 0x1_u8, 0x2e_u8, 0x62_u8, 0x10_u8, 0x5b_u8, 0x87_u8, 0xae_u8])
     def query_interface(this : ISharingConfigurationManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11867,7 +12246,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("a73ce67a-8ab1-44f1-8d43-d2fcbf6b1cd0")]
   record IRelatedItem, lpVtbl : IRelatedItemVtbl* do
     GUID = LibC::GUID.new(0xa73ce67a_u32, 0x8ab1_u16, 0x44f1_u16, StaticArray[0x8d_u8, 0x43_u8, 0xd2_u8, 0xfc_u8, 0xbf_u8, 0x6b_u8, 0x1c_u8, 0xd0_u8])
     def query_interface(this : IRelatedItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11898,7 +12276,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("7d903fca-d6f9-4810-8332-946c0177e247")]
   record IIdentityName, lpVtbl : IIdentityNameVtbl* do
     GUID = LibC::GUID.new(0x7d903fca_u32, 0xd6f9_u16, 0x4810_u16, StaticArray[0x83_u8, 0x32_u8, 0x94_u8, 0x6c_u8, 0x1_u8, 0x77_u8, 0xe2_u8, 0x47_u8])
     def query_interface(this : IIdentityName*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11929,7 +12306,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("3c5a1c94-c951-4cb7-bb6d-3b93f30cce93")]
   record IDelegateItem, lpVtbl : IDelegateItemVtbl* do
     GUID = LibC::GUID.new(0x3c5a1c94_u32, 0xc951_u16, 0x4cb7_u16, StaticArray[0xbb_u8, 0x6d_u8, 0x3b_u8, 0x93_u8, 0xf3_u8, 0xc_u8, 0xce_u8, 0x93_u8])
     def query_interface(this : IDelegateItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11960,7 +12336,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("240a7174-d653-4a1d-a6d3-d4943cfbfe3d")]
   record ICurrentItem, lpVtbl : ICurrentItemVtbl* do
     GUID = LibC::GUID.new(0x240a7174_u32, 0xd653_u16, 0x4a1d_u16, StaticArray[0xa6_u8, 0xd3_u8, 0xd4_u8, 0x94_u8, 0x3c_u8, 0xfb_u8, 0xfe_u8, 0x3d_u8])
     def query_interface(this : ICurrentItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11991,7 +12366,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("77f295d5-2d6f-4e19-b8ae-322f3e721ab5")]
   record ITransferMediumItem, lpVtbl : ITransferMediumItemVtbl* do
     GUID = LibC::GUID.new(0x77f295d5_u32, 0x2d6f_u16, 0x4e19_u16, StaticArray[0xb8_u8, 0xae_u8, 0x32_u8, 0x2f_u8, 0x3e_u8, 0x72_u8, 0x1a_u8, 0xb5_u8])
     def query_interface(this : ITransferMediumItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12022,7 +12396,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("c6fd5997-9f6b-4888-8703-94e80e8cde3f")]
   record IDisplayItem, lpVtbl : IDisplayItemVtbl* do
     GUID = LibC::GUID.new(0xc6fd5997_u32, 0x9f6b_u16, 0x4888_u16, StaticArray[0x87_u8, 0x3_u8, 0x94_u8, 0xe8_u8, 0xe_u8, 0x8c_u8, 0xde_u8, 0x3f_u8])
     def query_interface(this : IDisplayItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12053,7 +12426,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("9d264146-a94f-4195-9f9f-3bb12ce0c955")]
   record IViewStateIdentityItem, lpVtbl : IViewStateIdentityItemVtbl* do
     GUID = LibC::GUID.new(0x9d264146_u32, 0xa94f_u16, 0x4195_u16, StaticArray[0x9f_u8, 0x9f_u8, 0x3b_u8, 0xb1_u8, 0x2c_u8, 0xe0_u8, 0xc9_u8, 0x55_u8])
     def query_interface(this : IViewStateIdentityItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12084,7 +12456,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("36149969-0a8f-49c8-8b00-4aecb20222fb")]
   record IPreviewItem, lpVtbl : IPreviewItemVtbl* do
     GUID = LibC::GUID.new(0x36149969_u32, 0xa8f_u16, 0x49c8_u16, StaticArray[0x8b_u8, 0x0_u8, 0x4a_u8, 0xec_u8, 0xb2_u8, 0x2_u8, 0x22_u8, 0xfb_u8])
     def query_interface(this : IPreviewItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12114,7 +12485,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("8a87781b-39a7-4a1f-aab3-a39b9c34a7d9")]
   record IDestinationStreamFactory, lpVtbl : IDestinationStreamFactoryVtbl* do
     GUID = LibC::GUID.new(0x8a87781b_u32, 0x39a7_u16, 0x4a1f_u16, StaticArray[0xaa_u8, 0xb3_u8, 0xa3_u8, 0x9b_u8, 0x9c_u8, 0x34_u8, 0xa7_u8, 0xd9_u8])
     def query_interface(this : IDestinationStreamFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12147,7 +12517,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("f6ef6140-e26f-4d82-bac4-e9ba5fd239a8")]
   record ICreateProcessInputs, lpVtbl : ICreateProcessInputsVtbl* do
     GUID = LibC::GUID.new(0xf6ef6140_u32, 0xe26f_u16, 0x4d82_u16, StaticArray[0xba_u8, 0xc4_u8, 0xe9_u8, 0xba_u8, 0x5f_u8, 0xd2_u8, 0x39_u8, 0xa8_u8])
     def query_interface(this : ICreateProcessInputs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12192,7 +12561,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("c2b937a9-3110-4398-8a56-f34c6342d244")]
   record ICreatingProcess, lpVtbl : ICreatingProcessVtbl* do
     GUID = LibC::GUID.new(0xc2b937a9_u32, 0x3110_u16, 0x4398_u16, StaticArray[0x8a_u8, 0x56_u8, 0xf3_u8, 0x4c_u8, 0x63_u8, 0x42_u8, 0xd2_u8, 0x44_u8])
     def query_interface(this : ICreatingProcess*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12220,7 +12588,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("1791e8f6-21c7-4340-882a-a6a93e3fd73b")]
   record ILaunchUIContext, lpVtbl : ILaunchUIContextVtbl* do
     GUID = LibC::GUID.new(0x1791e8f6_u32, 0x21c7_u16, 0x4340_u16, StaticArray[0x88_u8, 0x2a_u8, 0xa6_u8, 0xa9_u8, 0x3e_u8, 0x3f_u8, 0xd7_u8, 0x3b_u8])
     def query_interface(this : ILaunchUIContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12250,7 +12617,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("0d12c4c8-a3d9-4e24-94c1-0e20c5a956c4")]
   record ILaunchUIContextProvider, lpVtbl : ILaunchUIContextProviderVtbl* do
     GUID = LibC::GUID.new(0xd12c4c8_u32, 0xa3d9_u16, 0x4e24_u16, StaticArray[0x94_u8, 0xc1_u8, 0xe_u8, 0x20_u8, 0xc5_u8, 0xa9_u8, 0x56_u8, 0xc4_u8])
     def query_interface(this : ILaunchUIContextProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12278,7 +12644,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("dcb07fdc-3bb5-451c-90be-966644fed7b0")]
   record INewMenuClient, lpVtbl : INewMenuClientVtbl* do
     GUID = LibC::GUID.new(0xdcb07fdc_u32, 0x3bb5_u16, 0x451c_u16, StaticArray[0x90_u8, 0xbe_u8, 0x96_u8, 0x66_u8, 0x44_u8, 0xfe_u8, 0xd7_u8, 0xb0_u8])
     def query_interface(this : INewMenuClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12308,7 +12673,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("71c0d2bc-726d-45cc-a6c0-2e31c1db2159")]
   record IInitializeWithBindCtx, lpVtbl : IInitializeWithBindCtxVtbl* do
     GUID = LibC::GUID.new(0x71c0d2bc_u32, 0x726d_u16, 0x45cc_u16, StaticArray[0xa6_u8, 0xc0_u8, 0x2e_u8, 0x31_u8, 0xc1_u8, 0xdb_u8, 0x21_u8, 0x59_u8])
     def query_interface(this : IInitializeWithBindCtx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12336,7 +12700,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("2659b475-eeb8-48b7-8f07-b378810f48cf")]
   record IShellItemFilter, lpVtbl : IShellItemFilterVtbl* do
     GUID = LibC::GUID.new(0x2659b475_u32, 0xeeb8_u16, 0x48b7_u16, StaticArray[0x8f_u8, 0x7_u8, 0xb3_u8, 0x78_u8, 0x81_u8, 0xf_u8, 0x48_u8, 0xcf_u8])
     def query_interface(this : IShellItemFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12384,7 +12747,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("028212a3-b627-47e9-8856-c14265554e4f")]
   record INameSpaceTreeControl, lpVtbl : INameSpaceTreeControlVtbl* do
     GUID = LibC::GUID.new(0x28212a3_u32, 0xb627_u16, 0x47e9_u16, StaticArray[0x88_u8, 0x56_u8, 0xc1_u8, 0x42_u8, 0x65_u8, 0x55_u8, 0x4e_u8, 0x4f_u8])
     def query_interface(this : INameSpaceTreeControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12465,7 +12827,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("e9701183-e6b3-4ff2-8568-813615fec7be")]
   record INameSpaceTreeControlFolderCapabilities, lpVtbl : INameSpaceTreeControlFolderCapabilitiesVtbl* do
     GUID = LibC::GUID.new(0xe9701183_u32, 0xe6b3_u16, 0x4ff2_u16, StaticArray[0x85_u8, 0x68_u8, 0x81_u8, 0x36_u8, 0x15_u8, 0xfe_u8, 0xc7_u8, 0xbe_u8])
     def query_interface(this : INameSpaceTreeControlFolderCapabilities*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12498,7 +12859,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("8895b1c6-b41f-4c1c-a562-0d564250836f")]
   record IPreviewHandler, lpVtbl : IPreviewHandlerVtbl* do
     GUID = LibC::GUID.new(0x8895b1c6_u32, 0xb41f_u16, 0x4c1c_u16, StaticArray[0xa5_u8, 0x62_u8, 0xd_u8, 0x56_u8, 0x42_u8, 0x50_u8, 0x83_u8, 0x6f_u8])
     def query_interface(this : IPreviewHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12544,7 +12904,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("fec87aaf-35f9-447a-adb7-20234491401a")]
   record IPreviewHandlerFrame, lpVtbl : IPreviewHandlerFrameVtbl* do
     GUID = LibC::GUID.new(0xfec87aaf_u32, 0x35f9_u16, 0x447a_u16, StaticArray[0xad_u8, 0xb7_u8, 0x20_u8, 0x23_u8, 0x44_u8, 0x91_u8, 0x40_u8, 0x1a_u8])
     def query_interface(this : IPreviewHandlerFrame*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12574,7 +12933,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("e07010ec-bc17-44c0-97b0-46c7c95b9edc")]
   record IExplorerPaneVisibility, lpVtbl : IExplorerPaneVisibilityVtbl* do
     GUID = LibC::GUID.new(0xe07010ec_u32, 0xbc17_u16, 0x44c0_u16, StaticArray[0x97_u8, 0xb0_u8, 0x46_u8, 0xc7_u8, 0xc9_u8, 0x5b_u8, 0x9e_u8, 0xdc_u8])
     def query_interface(this : IExplorerPaneVisibility*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12601,7 +12959,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("3409e930-5a39-11d1-83fa-00a0c90dc849")]
   record IContextMenuCB, lpVtbl : IContextMenuCBVtbl* do
     GUID = LibC::GUID.new(0x3409e930_u32, 0x5a39_u16, 0x11d1_u16, StaticArray[0x83_u8, 0xfa_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0xc8_u8, 0x49_u8])
     def query_interface(this : IContextMenuCB*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12633,7 +12990,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("41ded17d-d6b3-4261-997d-88c60e4b1d58")]
   record IDefaultExtractIconInit, lpVtbl : IDefaultExtractIconInitVtbl* do
     GUID = LibC::GUID.new(0x41ded17d_u32, 0xd6b3_u16, 0x4261_u16, StaticArray[0x99_u8, 0x7d_u8, 0x88_u8, 0xc6_u8, 0xe_u8, 0x4b_u8, 0x1d_u8, 0x58_u8])
     def query_interface(this : IDefaultExtractIconInit*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12682,7 +13038,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("a08ce4d0-fa25-44ab-b57c-c7b1c323e0b9")]
   record IExplorerCommand, lpVtbl : IExplorerCommandVtbl* do
     GUID = LibC::GUID.new(0xa08ce4d0_u32, 0xfa25_u16, 0x44ab_u16, StaticArray[0xb5_u8, 0x7c_u8, 0xc7_u8, 0xb1_u8, 0xc3_u8, 0x23_u8, 0xe0_u8, 0xb9_u8])
     def query_interface(this : IExplorerCommand*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12730,7 +13085,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("bddacb60-7657-47ae-8445-d23e1acf82ae")]
   record IExplorerCommandState, lpVtbl : IExplorerCommandStateVtbl* do
     GUID = LibC::GUID.new(0xbddacb60_u32, 0x7657_u16, 0x47ae_u16, StaticArray[0x84_u8, 0x45_u8, 0xd2_u8, 0x3e_u8, 0x1a_u8, 0xcf_u8, 0x82_u8, 0xae_u8])
     def query_interface(this : IExplorerCommandState*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12757,7 +13111,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("85075acf-231f-40ea-9610-d26b7b58f638")]
   record IInitializeCommand, lpVtbl : IInitializeCommandVtbl* do
     GUID = LibC::GUID.new(0x85075acf_u32, 0x231f_u16, 0x40ea_u16, StaticArray[0x96_u8, 0x10_u8, 0xd2_u8, 0x6b_u8, 0x7b_u8, 0x58_u8, 0xf6_u8, 0x38_u8])
     def query_interface(this : IInitializeCommand*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12787,7 +13140,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("a88826f8-186f-4987-aade-ea0cef8fbfe8")]
   record IEnumExplorerCommand, lpVtbl : IEnumExplorerCommandVtbl* do
     GUID = LibC::GUID.new(0xa88826f8_u32, 0x186f_u16, 0x4987_u16, StaticArray[0xaa_u8, 0xde_u8, 0xea_u8, 0xc_u8, 0xef_u8, 0x8f_u8, 0xbf_u8, 0xe8_u8])
     def query_interface(this : IEnumExplorerCommand*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12824,7 +13176,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("64961751-0835-43c0-8ffe-d57686530e64")]
   record IExplorerCommandProvider, lpVtbl : IExplorerCommandProviderVtbl* do
     GUID = LibC::GUID.new(0x64961751_u32, 0x835_u16, 0x43c0_u16, StaticArray[0x8f_u8, 0xfe_u8, 0xd5_u8, 0x76_u8, 0x86_u8, 0x53_u8, 0xe_u8, 0x64_u8])
     def query_interface(this : IExplorerCommandProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12856,7 +13207,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("d11ad862-66de-4df4-bf6c-1f5621996af1")]
   record IOpenControlPanel, lpVtbl : IOpenControlPanelVtbl* do
     GUID = LibC::GUID.new(0xd11ad862_u32, 0x66de_u16, 0x4df4_u16, StaticArray[0xbf_u8, 0x6c_u8, 0x1f_u8, 0x56_u8, 0x21_u8, 0x99_u8, 0x6a_u8, 0xf1_u8])
     def query_interface(this : IOpenControlPanel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12890,7 +13240,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("01e18d10-4d8b-11d2-855d-006008059367")]
   record IFileSystemBindData, lpVtbl : IFileSystemBindDataVtbl* do
     GUID = LibC::GUID.new(0x1e18d10_u32, 0x4d8b_u16, 0x11d2_u16, StaticArray[0x85_u8, 0x5d_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x5_u8, 0x93_u8, 0x67_u8])
     def query_interface(this : IFileSystemBindData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12925,7 +13274,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("3acf075f-71db-4afa-81f0-3fc4fdf2a5b8")]
   record IFileSystemBindData2, lpVtbl : IFileSystemBindData2Vtbl* do
     GUID = LibC::GUID.new(0x3acf075f_u32, 0x71db_u16, 0x4afa_u16, StaticArray[0x81_u8, 0xf0_u8, 0x3f_u8, 0xc4_u8, 0xfd_u8, 0xf2_u8, 0xa5_u8, 0xb8_u8])
     def query_interface(this : IFileSystemBindData2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12975,7 +13323,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("6332debf-87b5-4670-90c0-5e57b408a49e")]
   record ICustomDestinationList, lpVtbl : ICustomDestinationListVtbl* do
     GUID = LibC::GUID.new(0x6332debf_u32, 0x87b5_u16, 0x4670_u16, StaticArray[0x90_u8, 0xc0_u8, 0x5e_u8, 0x57_u8, 0xb4_u8, 0x8_u8, 0xa4_u8, 0x9e_u8])
     def query_interface(this : ICustomDestinationList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13028,7 +13375,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("12337d35-94c6-48a0-bce7-6a9c69d4d600")]
   record IApplicationDestinations, lpVtbl : IApplicationDestinationsVtbl* do
     GUID = LibC::GUID.new(0x12337d35_u32, 0x94c6_u16, 0x48a0_u16, StaticArray[0xbc_u8, 0xe7_u8, 0x6a_u8, 0x9c_u8, 0x69_u8, 0xd4_u8, 0xd6_u8, 0x0_u8])
     def query_interface(this : IApplicationDestinations*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13062,7 +13408,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("3c594f9f-9f30-47a1-979a-c9e83d3d0a06")]
   record IApplicationDocumentLists, lpVtbl : IApplicationDocumentListsVtbl* do
     GUID = LibC::GUID.new(0x3c594f9f_u32, 0x9f30_u16, 0x47a1_u16, StaticArray[0x97_u8, 0x9a_u8, 0xc9_u8, 0xe8_u8, 0x3d_u8, 0x3d_u8, 0xa_u8, 0x6_u8])
     def query_interface(this : IApplicationDocumentLists*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13093,7 +13438,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("36db0196-9665-46d1-9ba7-d3709eecf9ed")]
   record IObjectWithAppUserModelID, lpVtbl : IObjectWithAppUserModelIDVtbl* do
     GUID = LibC::GUID.new(0x36db0196_u32, 0x9665_u16, 0x46d1_u16, StaticArray[0x9b_u8, 0xa7_u8, 0xd3_u8, 0x70_u8, 0x9e_u8, 0xec_u8, 0xf9_u8, 0xed_u8])
     def query_interface(this : IObjectWithAppUserModelID*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13124,7 +13468,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("71e806fb-8dee-46fc-bf8c-7748a8a1ae13")]
   record IObjectWithProgID, lpVtbl : IObjectWithProgIDVtbl* do
     GUID = LibC::GUID.new(0x71e806fb_u32, 0x8dee_u16, 0x46fc_u16, StaticArray[0xbf_u8, 0x8c_u8, 0x77_u8, 0x48_u8, 0xa8_u8, 0xa1_u8, 0xae_u8, 0x13_u8])
     def query_interface(this : IObjectWithProgID*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13154,7 +13497,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("6589b6d2-5f8d-4b9e-b7e0-23cdd9717d8c")]
   record IUpdateIDList, lpVtbl : IUpdateIDListVtbl* do
     GUID = LibC::GUID.new(0x6589b6d2_u32, 0x5f8d_u16, 0x4b9e_u16, StaticArray[0xb7_u8, 0xe0_u8, 0x23_u8, 0xcd_u8, 0xd9_u8, 0x71_u8, 0x7d_u8, 0x8c_u8])
     def query_interface(this : IUpdateIDList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13196,7 +13538,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("b92b56a9-8b55-4e14-9a89-0199bbb6f93b")]
   record IDesktopWallpaper, lpVtbl : IDesktopWallpaperVtbl* do
     GUID = LibC::GUID.new(0xb92b56a9_u32, 0x8b55_u16, 0x4e14_u16, StaticArray[0x9a_u8, 0x89_u8, 0x1_u8, 0x99_u8, 0xbb_u8, 0xb6_u8, 0xf9_u8, 0x3b_u8])
     def query_interface(this : IDesktopWallpaper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13269,7 +13610,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("7a3bd1d9-35a9-4fb3-a467-f48cac35e2d0")]
   record IHomeGroup, lpVtbl : IHomeGroupVtbl* do
     GUID = LibC::GUID.new(0x7a3bd1d9_u32, 0x35a9_u16, 0x4fb3_u16, StaticArray[0xa4_u8, 0x67_u8, 0xf4_u8, 0x8c_u8, 0xac_u8, 0x35_u8, 0xe2_u8, 0xd0_u8])
     def query_interface(this : IHomeGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13299,7 +13639,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("c3e12eb5-7d8d-44f8-b6dd-0e77b34d6de4")]
   record IInitializeWithPropertyStore, lpVtbl : IInitializeWithPropertyStoreVtbl* do
     GUID = LibC::GUID.new(0xc3e12eb5_u32, 0x7d8d_u16, 0x44f8_u16, StaticArray[0xb6_u8, 0xdd_u8, 0xe_u8, 0x77_u8, 0xb3_u8, 0x4d_u8, 0x6d_u8, 0xe4_u8])
     def query_interface(this : IInitializeWithPropertyStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13326,7 +13665,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("f0ee7333-e6fc-479b-9f25-a860c234a38e")]
   record IOpenSearchSource, lpVtbl : IOpenSearchSourceVtbl* do
     GUID = LibC::GUID.new(0xf0ee7333_u32, 0xe6fc_u16, 0x479b_u16, StaticArray[0x9f_u8, 0x25_u8, 0xa8_u8, 0x60_u8, 0xc2_u8, 0x34_u8, 0xa3_u8, 0x8e_u8])
     def query_interface(this : IOpenSearchSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13369,7 +13707,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("11a66efa-382e-451a-9234-1e0e12ef3085")]
   record IShellLibrary, lpVtbl : IShellLibraryVtbl* do
     GUID = LibC::GUID.new(0x11a66efa_u32, 0x382e_u16, 0x451a_u16, StaticArray[0x92_u8, 0x34_u8, 0x1e_u8, 0xe_u8, 0x12_u8, 0xef_u8, 0x30_u8, 0x85_u8])
     def query_interface(this : IShellLibrary*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13447,7 +13784,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("7690aa79-f8fc-4615-a327-36f7d18f5d91")]
   record IDefaultFolderMenuInitialize, lpVtbl : IDefaultFolderMenuInitializeVtbl* do
     GUID = LibC::GUID.new(0x7690aa79_u32, 0xf8fc_u16, 0x4615_u16, StaticArray[0xa3_u8, 0x27_u8, 0x36_u8, 0xf7_u8, 0xd1_u8, 0x8f_u8, 0x5d_u8, 0x91_u8])
     def query_interface(this : IDefaultFolderMenuInitialize*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13485,7 +13821,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("2e941141-7f97-4756-ba1d-9decde894a3d")]
   record IApplicationActivationManager, lpVtbl : IApplicationActivationManagerVtbl* do
     GUID = LibC::GUID.new(0x2e941141_u32, 0x7f97_u16, 0x4756_u16, StaticArray[0xba_u8, 0x1d_u8, 0x9d_u8, 0xec_u8, 0xde_u8, 0x89_u8, 0x4a_u8, 0x3d_u8])
     def query_interface(this : IApplicationActivationManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13520,7 +13855,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("a5cd92ff-29be-454c-8d04-d82879fb3f1b")]
   record IVirtualDesktopManager, lpVtbl : IVirtualDesktopManagerVtbl* do
     GUID = LibC::GUID.new(0xa5cd92ff_u32, 0x29be_u16, 0x454c_u16, StaticArray[0x8d_u8, 0x4_u8, 0xd8_u8, 0x28_u8, 0x79_u8, 0xfb_u8, 0x3f_u8, 0x1b_u8])
     def query_interface(this : IVirtualDesktopManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13554,7 +13888,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("92218cab-ecaa-4335-8133-807fd234c2ee")]
   record IAssocHandlerInvoker, lpVtbl : IAssocHandlerInvokerVtbl* do
     GUID = LibC::GUID.new(0x92218cab_u32, 0xecaa_u16, 0x4335_u16, StaticArray[0x81_u8, 0x33_u8, 0x80_u8, 0x7f_u8, 0xd2_u8, 0x34_u8, 0xc2_u8, 0xee_u8])
     def query_interface(this : IAssocHandlerInvoker*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13590,7 +13923,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("f04061ac-1659-4a3f-a954-775aa57fc083")]
   record IAssocHandler, lpVtbl : IAssocHandlerVtbl* do
     GUID = LibC::GUID.new(0xf04061ac_u32, 0x1659_u16, 0x4a3f_u16, StaticArray[0xa9_u8, 0x54_u8, 0x77_u8, 0x5a_u8, 0xa5_u8, 0x7f_u8, 0xc0_u8, 0x83_u8])
     def query_interface(this : IAssocHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13635,7 +13967,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("973810ae-9599-4b88-9e4d-6ee98c9552da")]
   record IEnumAssocHandlers, lpVtbl : IEnumAssocHandlersVtbl* do
     GUID = LibC::GUID.new(0x973810ae_u32, 0x9599_u16, 0x4b88_u16, StaticArray[0x9e_u8, 0x4d_u8, 0x6e_u8, 0xe9_u8, 0x8c_u8, 0x95_u8, 0x52_u8, 0xda_u8])
     def query_interface(this : IEnumAssocHandlers*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13663,7 +13994,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("3d25f6d6-4b2a-433c-9184-7c33ad35d001")]
   record IDataObjectProvider, lpVtbl : IDataObjectProviderVtbl* do
     GUID = LibC::GUID.new(0x3d25f6d6_u32, 0x4b2a_u16, 0x433c_u16, StaticArray[0x91_u8, 0x84_u8, 0x7c_u8, 0x33_u8, 0xad_u8, 0x35_u8, 0xd0_u8, 0x1_u8])
     def query_interface(this : IDataObjectProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13694,7 +14024,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("3a3dcd6c-3eab-43dc-bcde-45671ce800c8")]
   record IDataTransferManagerInterop, lpVtbl : IDataTransferManagerInteropVtbl* do
     GUID = LibC::GUID.new(0x3a3dcd6c_u32, 0x3eab_u16, 0x43dc_u16, StaticArray[0xbc_u8, 0xde_u8, 0x45_u8, 0x67_u8, 0x1c_u8, 0xe8_u8, 0x0_u8, 0xc8_u8])
     def query_interface(this : IDataTransferManagerInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13725,7 +14054,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("226c537b-1e76-4d9e-a760-33db29922f18")]
   record IFrameworkInputPaneHandler, lpVtbl : IFrameworkInputPaneHandlerVtbl* do
     GUID = LibC::GUID.new(0x226c537b_u32, 0x1e76_u16, 0x4d9e_u16, StaticArray[0xa7_u8, 0x60_u8, 0x33_u8, 0xdb_u8, 0x29_u8, 0x92_u8, 0x2f_u8, 0x18_u8])
     def query_interface(this : IFrameworkInputPaneHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13758,7 +14086,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("5752238b-24f0-495a-82f1-2fd593056796")]
   record IFrameworkInputPane, lpVtbl : IFrameworkInputPaneVtbl* do
     GUID = LibC::GUID.new(0x5752238b_u32, 0x24f0_u16, 0x495a_u16, StaticArray[0x82_u8, 0xf1_u8, 0x2f_u8, 0xd5_u8, 0x93_u8, 0x5_u8, 0x67_u8, 0x96_u8])
     def query_interface(this : IFrameworkInputPane*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13795,7 +14122,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("6584ce6b-7d82-49c2-89c9-c6bc02ba8c38")]
   record IAppVisibilityEvents, lpVtbl : IAppVisibilityEventsVtbl* do
     GUID = LibC::GUID.new(0x6584ce6b_u32, 0x7d82_u16, 0x49c2_u16, StaticArray[0x89_u8, 0xc9_u8, 0xc6_u8, 0xbc_u8, 0x2_u8, 0xba_u8, 0x8c_u8, 0x38_u8])
     def query_interface(this : IAppVisibilityEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13828,7 +14154,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("2246ea2d-caea-4444-a3c4-6de827e44313")]
   record IAppVisibility, lpVtbl : IAppVisibilityVtbl* do
     GUID = LibC::GUID.new(0x2246ea2d_u32, 0xcaea_u16, 0x4444_u16, StaticArray[0xa3_u8, 0xc4_u8, 0x6d_u8, 0xe8_u8, 0x27_u8, 0xe4_u8, 0x43_u8, 0x13_u8])
     def query_interface(this : IAppVisibility*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13864,7 +14189,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("1bb12a62-2ad8-432b-8ccf-0c2c52afcd5b")]
   record IPackageExecutionStateChangeNotification, lpVtbl : IPackageExecutionStateChangeNotificationVtbl* do
     GUID = LibC::GUID.new(0x1bb12a62_u32, 0x2ad8_u16, 0x432b_u16, StaticArray[0x8c_u8, 0xcf_u8, 0xc_u8, 0x2c_u8, 0x52_u8, 0xaf_u8, 0xcd_u8, 0x5b_u8])
     def query_interface(this : IPackageExecutionStateChangeNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13905,7 +14229,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("f27c3930-8029-4ad1-94e3-3dba417810c1")]
   record IPackageDebugSettings, lpVtbl : IPackageDebugSettingsVtbl* do
     GUID = LibC::GUID.new(0xf27c3930_u32, 0x8029_u16, 0x4ad1_u16, StaticArray[0x94_u8, 0xe3_u8, 0x3d_u8, 0xba_u8, 0x41_u8, 0x78_u8, 0x10_u8, 0xc1_u8])
     def query_interface(this : IPackageDebugSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13989,7 +14312,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("6e3194bb-ab82-4d22-93f5-fabda40e7b16")]
   record IPackageDebugSettings2, lpVtbl : IPackageDebugSettings2Vtbl* do
     GUID = LibC::GUID.new(0x6e3194bb_u32, 0xab82_u16, 0x4d22_u16, StaticArray[0x93_u8, 0xf5_u8, 0xfa_u8, 0xbd_u8, 0xa4_u8, 0xe_u8, 0x7b_u8, 0x16_u8])
     def query_interface(this : IPackageDebugSettings2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14063,7 +14385,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("52b83a42-2543-416a-81d9-c0de7969c8b3")]
   record ISuspensionDependencyManager, lpVtbl : ISuspensionDependencyManagerVtbl* do
     GUID = LibC::GUID.new(0x52b83a42_u32, 0x2543_u16, 0x416a_u16, StaticArray[0x81_u8, 0xd9_u8, 0xc0_u8, 0xde_u8, 0x79_u8, 0x69_u8, 0xc8_u8, 0xb3_u8])
     def query_interface(this : ISuspensionDependencyManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14096,7 +14417,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("18b21aa9-e184-4ff0-9f5e-f882d03771b3")]
   record IExecuteCommandApplicationHostEnvironment, lpVtbl : IExecuteCommandApplicationHostEnvironmentVtbl* do
     GUID = LibC::GUID.new(0x18b21aa9_u32, 0xe184_u16, 0x4ff0_u16, StaticArray[0x9f_u8, 0x5e_u8, 0xf8_u8, 0x82_u8, 0xd0_u8, 0x37_u8, 0x71_u8, 0xb3_u8])
     def query_interface(this : IExecuteCommandApplicationHostEnvironment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14123,7 +14443,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("4b6832a2-5f04-4c9d-b89d-727a15d103e7")]
   record IExecuteCommandHost, lpVtbl : IExecuteCommandHostVtbl* do
     GUID = LibC::GUID.new(0x4b6832a2_u32, 0x5f04_u16, 0x4c9d_u16, StaticArray[0xb8_u8, 0x9d_u8, 0x72_u8, 0x7a_u8, 0x15_u8, 0xd1_u8, 0x3_u8, 0xe7_u8])
     def query_interface(this : IExecuteCommandHost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14155,7 +14474,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("2a3dee9a-e31d-46d6-8508-bcc597db3557")]
   record IApplicationDesignModeSettings, lpVtbl : IApplicationDesignModeSettingsVtbl* do
     GUID = LibC::GUID.new(0x2a3dee9a_u32, 0xe31d_u16, 0x46d6_u16, StaticArray[0x85_u8, 0x8_u8, 0xbc_u8, 0xc5_u8, 0x97_u8, 0xdb_u8, 0x35_u8, 0x57_u8])
     def query_interface(this : IApplicationDesignModeSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14209,7 +14527,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("490514e1-675a-4d6e-a58d-e54901b4ca2f")]
   record IApplicationDesignModeSettings2, lpVtbl : IApplicationDesignModeSettings2Vtbl* do
     GUID = LibC::GUID.new(0x490514e1_u32, 0x675a_u16, 0x4d6e_u16, StaticArray[0xa5_u8, 0x8d_u8, 0xe5_u8, 0x49_u8, 0x1_u8, 0xb4_u8, 0xca_u8, 0x2f_u8])
     def query_interface(this : IApplicationDesignModeSettings2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14272,7 +14589,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("266fbc7e-490d-46ed-a96b-2274db252003")]
   record ILaunchTargetMonitor, lpVtbl : ILaunchTargetMonitorVtbl* do
     GUID = LibC::GUID.new(0x266fbc7e_u32, 0x490d_u16, 0x46ed_u16, StaticArray[0xa9_u8, 0x6b_u8, 0x22_u8, 0x74_u8, 0xdb_u8, 0x25_u8, 0x20_u8, 0x3_u8])
     def query_interface(this : ILaunchTargetMonitor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14300,7 +14616,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("e5aa01f7-1fb8-4830-8720-4e6734cbd5f3")]
   record ILaunchSourceViewSizePreference, lpVtbl : ILaunchSourceViewSizePreferenceVtbl* do
     GUID = LibC::GUID.new(0xe5aa01f7_u32, 0x1fb8_u16, 0x4830_u16, StaticArray[0x87_u8, 0x20_u8, 0x4e_u8, 0x67_u8, 0x34_u8, 0xcb_u8, 0xd5_u8, 0xf3_u8])
     def query_interface(this : ILaunchSourceViewSizePreference*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14330,7 +14645,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("2f0666c6-12f7-4360-b511-a394a0553725")]
   record ILaunchTargetViewSizePreference, lpVtbl : ILaunchTargetViewSizePreferenceVtbl* do
     GUID = LibC::GUID.new(0x2f0666c6_u32, 0x12f7_u16, 0x4360_u16, StaticArray[0xb5_u8, 0x11_u8, 0xa3_u8, 0x94_u8, 0xa0_u8, 0x55_u8, 0x37_u8, 0x25_u8])
     def query_interface(this : ILaunchTargetViewSizePreference*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14357,7 +14671,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("989191ac-28ff-4cf0-9584-e0d078bc2396")]
   record ILaunchSourceAppUserModelId, lpVtbl : ILaunchSourceAppUserModelIdVtbl* do
     GUID = LibC::GUID.new(0x989191ac_u32, 0x28ff_u16, 0x4cf0_u16, StaticArray[0x95_u8, 0x84_u8, 0xe0_u8, 0xd0_u8, 0x78_u8, 0xbc_u8, 0x23_u8, 0x96_u8])
     def query_interface(this : ILaunchSourceAppUserModelId*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14384,7 +14697,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("3e68d4bd-7135-4d10-8018-9fb6d9f33fa1")]
   record IInitializeWithWindow, lpVtbl : IInitializeWithWindowVtbl* do
     GUID = LibC::GUID.new(0x3e68d4bd_u32, 0x7135_u16, 0x4d10_u16, StaticArray[0x80_u8, 0x18_u8, 0x9f_u8, 0xb6_u8, 0xd9_u8, 0xf3_u8, 0x3f_u8, 0xa1_u8])
     def query_interface(this : IInitializeWithWindow*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14413,7 +14725,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("997706ef-f880-453b-8118-39e1a2d2655a")]
   record IHandlerInfo, lpVtbl : IHandlerInfoVtbl* do
     GUID = LibC::GUID.new(0x997706ef_u32, 0xf880_u16, 0x453b_u16, StaticArray[0x81_u8, 0x18_u8, 0x39_u8, 0xe1_u8, 0xa2_u8, 0xd2_u8, 0x65_u8, 0x5a_u8])
     def query_interface(this : IHandlerInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14449,7 +14760,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("31cca04c-04d3-4ea9-90de-97b15e87a532")]
   record IHandlerInfo2, lpVtbl : IHandlerInfo2Vtbl* do
     GUID = LibC::GUID.new(0x31cca04c_u32, 0x4d3_u16, 0x4ea9_u16, StaticArray[0x90_u8, 0xde_u8, 0x97_u8, 0xb1_u8, 0x5e_u8, 0x87_u8, 0xa5_u8, 0x32_u8])
     def query_interface(this : IHandlerInfo2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14486,7 +14796,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("35094a87-8bb1-4237-96c6-c417eebdb078")]
   record IHandlerActivationHost, lpVtbl : IHandlerActivationHostVtbl* do
     GUID = LibC::GUID.new(0x35094a87_u32, 0x8bb1_u16, 0x4237_u16, StaticArray[0x96_u8, 0xc6_u8, 0xc4_u8, 0x17_u8, 0xee_u8, 0xbd_u8, 0xb0_u8, 0x78_u8])
     def query_interface(this : IHandlerActivationHost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14520,7 +14829,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("abad189d-9fa3-4278-b3ca-8ca448a88dcb")]
   record IAppActivationUIInfo, lpVtbl : IAppActivationUIInfoVtbl* do
     GUID = LibC::GUID.new(0xabad189d_u32, 0x9fa3_u16, 0x4278_u16, StaticArray[0xb3_u8, 0xca_u8, 0x8c_u8, 0xa4_u8, 0x48_u8, 0xa8_u8, 0x8d_u8, 0xcb_u8])
     def query_interface(this : IAppActivationUIInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14559,7 +14867,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("99eacba7-e073-43b6-a896-55afe48a0833")]
   record IContactManagerInterop, lpVtbl : IContactManagerInteropVtbl* do
     GUID = LibC::GUID.new(0x99eacba7_u32, 0xe073_u16, 0x43b6_u16, StaticArray[0xa8_u8, 0x96_u8, 0x55_u8, 0xaf_u8, 0xe4_u8, 0x8a_u8, 0x8_u8, 0x33_u8])
     def query_interface(this : IContactManagerInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14588,7 +14895,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("0c6c4200-c589-11d0-999a-00c04fd655e1")]
   record IShellIconOverlayIdentifier, lpVtbl : IShellIconOverlayIdentifierVtbl* do
     GUID = LibC::GUID.new(0xc6c4200_u32, 0xc589_u16, 0x11d0_u16, StaticArray[0x99_u8, 0x9a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd6_u8, 0x55_u8, 0xe1_u8])
     def query_interface(this : IShellIconOverlayIdentifier*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14621,7 +14927,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("8d7b2ba7-db05-46a8-823c-d2b6de08ee91")]
   record IBannerNotificationHandler, lpVtbl : IBannerNotificationHandlerVtbl* do
     GUID = LibC::GUID.new(0x8d7b2ba7_u32, 0xdb05_u16, 0x46a8_u16, StaticArray[0x82_u8, 0x3c_u8, 0xd2_u8, 0xb6_u8, 0xde_u8, 0x8_u8, 0xee_u8, 0x91_u8])
     def query_interface(this : IBannerNotificationHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14650,7 +14955,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("6dfc60fb-f2e9-459b-beb5-288f1a7c7d54")]
   record ISortColumnArray, lpVtbl : ISortColumnArrayVtbl* do
     GUID = LibC::GUID.new(0x6dfc60fb_u32, 0xf2e9_u16, 0x459b_u16, StaticArray[0xbe_u8, 0xb5_u8, 0x28_u8, 0x8f_u8, 0x1a_u8, 0x7c_u8, 0x7d_u8, 0x54_u8])
     def query_interface(this : ISortColumnArray*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14688,7 +14992,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("75bd59aa-f23b-4963-aba4-0b355752a91b")]
   record IPropertyKeyStore, lpVtbl : IPropertyKeyStoreVtbl* do
     GUID = LibC::GUID.new(0x75bd59aa_u32, 0xf23b_u16, 0x4963_u16, StaticArray[0xab_u8, 0xa4_u8, 0xb_u8, 0x35_u8, 0x57_u8, 0x52_u8, 0xa9_u8, 0x1b_u8])
     def query_interface(this : IPropertyKeyStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14731,7 +15034,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("c7b236ce-ee80-11d0-985f-006008059382")]
   record IQueryCodePage, lpVtbl : IQueryCodePageVtbl* do
     GUID = LibC::GUID.new(0xc7b236ce_u32, 0xee80_u16, 0x11d0_u16, StaticArray[0x98_u8, 0x5f_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x5_u8, 0x93_u8, 0x82_u8])
     def query_interface(this : IQueryCodePage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14762,7 +15064,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("3cc974d2-b302-4d36-ad3e-06d93f695d3f")]
   record IFolderViewOptions, lpVtbl : IFolderViewOptionsVtbl* do
     GUID = LibC::GUID.new(0x3cc974d2_u32, 0xb302_u16, 0x4d36_u16, StaticArray[0xad_u8, 0x3e_u8, 0x6_u8, 0xd9_u8, 0x3f_u8, 0x69_u8, 0x5d_u8, 0x3f_u8])
     def query_interface(this : IFolderViewOptions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14809,7 +15110,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("ec39fa88-f8af-41c5-8421-38bed28f4673")]
   record IShellView3, lpVtbl : IShellView3Vtbl* do
     GUID = LibC::GUID.new(0xec39fa88_u32, 0xf8af_u16, 0x41c5_u16, StaticArray[0x84_u8, 0x21_u8, 0x38_u8, 0xbe_u8, 0xd2_u8, 0x8f_u8, 0x46_u8, 0x73_u8])
     def query_interface(this : IShellView3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14888,7 +15188,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("6af6e03f-d664-4ef4-9626-f7e0ed36755e")]
   record ISearchBoxInfo, lpVtbl : ISearchBoxInfoVtbl* do
     GUID = LibC::GUID.new(0x6af6e03f_u32, 0xd664_u16, 0x4ef4_u16, StaticArray[0x96_u8, 0x26_u8, 0xf7_u8, 0xe0_u8, 0xed_u8, 0x36_u8, 0x75_u8, 0x5e_u8])
     def query_interface(this : ISearchBoxInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14925,7 +15224,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("e693cf68-d967-4112-8763-99172aee5e5a")]
   record IVisualProperties, lpVtbl : IVisualPropertiesVtbl* do
     GUID = LibC::GUID.new(0xe693cf68_u32, 0xd967_u16, 0x4112_u16, StaticArray[0x87_u8, 0x63_u8, 0x99_u8, 0x17_u8, 0x2a_u8, 0xee_u8, 0x5e_u8, 0x5a_u8])
     def query_interface(this : IVisualProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14981,7 +15279,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("c8ad25a1-3294-41ee-8165-71174bd01c57")]
   record ICommDlgBrowser3, lpVtbl : ICommDlgBrowser3Vtbl* do
     GUID = LibC::GUID.new(0xc8ad25a1_u32, 0x3294_u16, 0x41ee_u16, StaticArray[0x81_u8, 0x65_u8, 0x71_u8, 0x17_u8, 0x4b_u8, 0xd0_u8, 0x1c_u8, 0x57_u8])
     def query_interface(this : ICommDlgBrowser3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15032,7 +15329,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("a561e69a-b4b8-4113-91a5-64c6bcca3430")]
   record IUserAccountChangeCallback, lpVtbl : IUserAccountChangeCallbackVtbl* do
     GUID = LibC::GUID.new(0xa561e69a_u32, 0xb4b8_u16, 0x4113_u16, StaticArray[0x91_u8, 0xa5_u8, 0x64_u8, 0xc6_u8, 0xbc_u8, 0xca_u8, 0x34_u8, 0x30_u8])
     def query_interface(this : IUserAccountChangeCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15073,7 +15369,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("fe0b6665-e0ca-49b9-a178-2b5cb48d92a5")]
   record IStreamAsync, lpVtbl : IStreamAsyncVtbl* do
     GUID = LibC::GUID.new(0xfe0b6665_u32, 0xe0ca_u16, 0x49b9_u16, StaticArray[0xa1_u8, 0x78_u8, 0x2b_u8, 0x5c_u8, 0xb4_u8, 0x8d_u8, 0x92_u8, 0xa5_u8])
     def query_interface(this : IStreamAsync*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15142,7 +15437,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("8a68fdda-1fdc-4c20-8ceb-416643b5a625")]
   record IStreamUnbufferedInfo, lpVtbl : IStreamUnbufferedInfoVtbl* do
     GUID = LibC::GUID.new(0x8a68fdda_u32, 0x1fdc_u16, 0x4c20_u16, StaticArray[0x8c_u8, 0xeb_u8, 0x41_u8, 0x66_u8, 0x43_u8, 0xb5_u8, 0xa6_u8, 0x25_u8])
     def query_interface(this : IStreamUnbufferedInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15171,7 +15465,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("83e07d0d-0c5f-4163-bf1a-60b274051e40")]
   record IDragSourceHelper2, lpVtbl : IDragSourceHelper2Vtbl* do
     GUID = LibC::GUID.new(0x83e07d0d_u32, 0xc5f_u16, 0x4163_u16, StaticArray[0xbf_u8, 0x1a_u8, 0x60_u8, 0xb2_u8, 0x74_u8, 0x5_u8, 0x1e_u8, 0x40_u8])
     def query_interface(this : IDragSourceHelper2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15206,7 +15499,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("c1fb73d0-ec3a-4ba2-b512-8cdb9187b6d1")]
   record IHWEventHandler, lpVtbl : IHWEventHandlerVtbl* do
     GUID = LibC::GUID.new(0xc1fb73d0_u32, 0xec3a_u16, 0x4ba2_u16, StaticArray[0xb5_u8, 0x12_u8, 0x8c_u8, 0xdb_u8, 0x91_u8, 0x87_u8, 0xb6_u8, 0xd1_u8])
     def query_interface(this : IHWEventHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15242,7 +15534,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("cfcc809f-295d-42e8-9ffc-424b33c487e6")]
   record IHWEventHandler2, lpVtbl : IHWEventHandler2Vtbl* do
     GUID = LibC::GUID.new(0xcfcc809f_u32, 0x295d_u16, 0x42e8_u16, StaticArray[0x9f_u8, 0xfc_u8, 0x42_u8, 0x4b_u8, 0x33_u8, 0xc4_u8, 0x87_u8, 0xe6_u8])
     def query_interface(this : IHWEventHandler2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15278,7 +15569,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("ddefe873-6997-4e68-be26-39b633adbe12")]
   record IQueryCancelAutoPlay, lpVtbl : IQueryCancelAutoPlayVtbl* do
     GUID = LibC::GUID.new(0xddefe873_u32, 0x6997_u16, 0x4e68_u16, StaticArray[0xbe_u8, 0x26_u8, 0x39_u8, 0xb6_u8, 0x33_u8, 0xad_u8, 0xbe_u8, 0x12_u8])
     def query_interface(this : IQueryCancelAutoPlay*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15305,7 +15595,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("dc2601d7-059e-42fc-a09d-2afd21b6d5f7")]
   record IDynamicHWHandler, lpVtbl : IDynamicHWHandlerVtbl* do
     GUID = LibC::GUID.new(0xdc2601d7_u32, 0x59e_u16, 0x42fc_u16, StaticArray[0xa0_u8, 0x9d_u8, 0x2a_u8, 0xfd_u8, 0x21_u8, 0xb6_u8, 0xd5_u8, 0xf7_u8])
     def query_interface(this : IDynamicHWHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15334,7 +15623,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("19108294-0441-4aff-8013-fa0a730b0bea")]
   record IUserNotificationCallback, lpVtbl : IUserNotificationCallbackVtbl* do
     GUID = LibC::GUID.new(0x19108294_u32, 0x441_u16, 0x4aff_u16, StaticArray[0x80_u8, 0x13_u8, 0xfa_u8, 0xa_u8, 0x73_u8, 0xb_u8, 0xb_u8, 0xea_u8])
     def query_interface(this : IUserNotificationCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15371,7 +15659,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("215913cc-57eb-4fab-ab5a-e5fa7bea2a6c")]
   record IUserNotification2, lpVtbl : IUserNotification2Vtbl* do
     GUID = LibC::GUID.new(0x215913cc_u32, 0x57eb_u16, 0x4fab_u16, StaticArray[0xab_u8, 0x5a_u8, 0xe5_u8, 0xfa_u8, 0x7b_u8, 0xea_u8, 0x2a_u8, 0x6c_u8])
     def query_interface(this : IUserNotification2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15418,7 +15705,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("79d16de4-abee-4021-8d9d-9169b261d657")]
   record IDeskBand2, lpVtbl : IDeskBand2Vtbl* do
     GUID = LibC::GUID.new(0x79d16de4_u32, 0xabee_u16, 0x4021_u16, StaticArray[0x8d_u8, 0x9d_u8, 0x91_u8, 0x69_u8, 0xb2_u8, 0x61_u8, 0xd6_u8, 0x57_u8])
     def query_interface(this : IDeskBand2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15469,7 +15755,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("4cd19ada-25a5-4a32-b3b7-347bee5be36b")]
   record IStartMenuPinnedList, lpVtbl : IStartMenuPinnedListVtbl* do
     GUID = LibC::GUID.new(0x4cd19ada_u32, 0x25a5_u16, 0x4a32_u16, StaticArray[0xb3_u8, 0xb7_u8, 0x34_u8, 0x7b_u8, 0xee_u8, 0x5b_u8, 0xe3_u8, 0x6b_u8])
     def query_interface(this : IStartMenuPinnedList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15498,7 +15783,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("3d73a659-e5d0-4d42-afc0-5121ba425c8d")]
   record ICDBurn, lpVtbl : ICDBurnVtbl* do
     GUID = LibC::GUID.new(0x3d73a659_u32, 0xe5d0_u16, 0x4d42_u16, StaticArray[0xaf_u8, 0xc0_u8, 0x51_u8, 0x21_u8, 0xba_u8, 0x42_u8, 0x5c_u8, 0x8d_u8])
     def query_interface(this : ICDBurn*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15533,7 +15817,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("88960f5b-422f-4e7b-8013-73415381c3c3")]
   record IWizardSite, lpVtbl : IWizardSiteVtbl* do
     GUID = LibC::GUID.new(0x88960f5b_u32, 0x422f_u16, 0x4e7b_u16, StaticArray[0x80_u8, 0x13_u8, 0x73_u8, 0x41_u8, 0x53_u8, 0x81_u8, 0xc3_u8, 0xc3_u8])
     def query_interface(this : IWizardSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15568,7 +15851,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("c02ea696-86cc-491e-9b23-74394a0444a8")]
   record IWizardExtension, lpVtbl : IWizardExtensionVtbl* do
     GUID = LibC::GUID.new(0xc02ea696_u32, 0x86cc_u16, 0x491e_u16, StaticArray[0x9b_u8, 0x23_u8, 0x74_u8, 0x39_u8, 0x4a_u8, 0x4_u8, 0x44_u8, 0xa8_u8])
     def query_interface(this : IWizardExtension*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15605,7 +15887,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("0e6b3f66-98d1-48c0-a222-fbde74e2fbc5")]
   record IWebWizardExtension, lpVtbl : IWebWizardExtensionVtbl* do
     GUID = LibC::GUID.new(0xe6b3f66_u32, 0x98d1_u16, 0x48c0_u16, StaticArray[0xa2_u8, 0x22_u8, 0xfb_u8, 0xde_u8, 0x74_u8, 0xe2_u8, 0xfb_u8, 0xc5_u8])
     def query_interface(this : IWebWizardExtension*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15648,7 +15929,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("aa9198bb-ccec-472d-beed-19a4f6733f7a")]
   record IPublishingWizard, lpVtbl : IPublishingWizardVtbl* do
     GUID = LibC::GUID.new(0xaa9198bb_u32, 0xccec_u16, 0x472d_u16, StaticArray[0xbe_u8, 0xed_u8, 0x19_u8, 0xa4_u8, 0xf6_u8, 0x73_u8, 0x3f_u8, 0x7a_u8])
     def query_interface(this : IPublishingWizard*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15687,7 +15967,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("1ea58f02-d55a-411d-b09e-9e65ac21605b")]
   record IFolderViewHost, lpVtbl : IFolderViewHostVtbl* do
     GUID = LibC::GUID.new(0x1ea58f02_u32, 0xd55a_u16, 0x411d_u16, StaticArray[0xb0_u8, 0x9e_u8, 0x9e_u8, 0x65_u8, 0xac_u8, 0x21_u8, 0x60_u8, 0x5b_u8])
     def query_interface(this : IFolderViewHost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15714,7 +15993,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("95a391c5-9ed4-4c28-8401-ab9e06719e11")]
   record IAccessibleObject, lpVtbl : IAccessibleObjectVtbl* do
     GUID = LibC::GUID.new(0x95a391c5_u32, 0x9ed4_u16, 0x4c28_u16, StaticArray[0x84_u8, 0x1_u8, 0xab_u8, 0x9e_u8, 0x6_u8, 0x71_u8, 0x9e_u8, 0x11_u8])
     def query_interface(this : IAccessibleObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15745,7 +16023,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("96e5ae6d-6ae1-4b1c-900c-c6480eaa8828")]
   record IResultsFolder, lpVtbl : IResultsFolderVtbl* do
     GUID = LibC::GUID.new(0x96e5ae6d_u32, 0x6ae1_u16, 0x4b1c_u16, StaticArray[0x90_u8, 0xc_u8, 0xc6_u8, 0x48_u8, 0xe_u8, 0xaa_u8, 0x88_u8, 0x28_u8])
     def query_interface(this : IResultsFolder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15785,7 +16062,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("3cd141f4-3c6a-11d2-bcaa-00c04fd929db")]
   record IAutoCompleteDropDown, lpVtbl : IAutoCompleteDropDownVtbl* do
     GUID = LibC::GUID.new(0x3cd141f4_u32, 0x3c6a_u16, 0x11d2_u16, StaticArray[0xbc_u8, 0xaa_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x29_u8, 0xdb_u8])
     def query_interface(this : IAutoCompleteDropDown*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15815,7 +16091,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("2271dcca-74fc-4414-8fb7-c56b05ace2d7")]
   record ICDBurnExt, lpVtbl : ICDBurnExtVtbl* do
     GUID = LibC::GUID.new(0x2271dcca_u32, 0x74fc_u16, 0x4414_u16, StaticArray[0x8f_u8, 0xb7_u8, 0xc5_u8, 0x6b_u8, 0x5_u8, 0xac_u8, 0xe2_u8, 0xd7_u8])
     def query_interface(this : ICDBurnExt*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15842,7 +16117,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("61e00d45-8fff-4e60-924e-6537b61612dd")]
   record IEnumReadyCallback, lpVtbl : IEnumReadyCallbackVtbl* do
     GUID = LibC::GUID.new(0x61e00d45_u32, 0x8fff_u16, 0x4e60_u16, StaticArray[0x92_u8, 0x4e_u8, 0x65_u8, 0x37_u8, 0xb6_u8, 0x16_u8, 0x12_u8, 0xdd_u8])
     def query_interface(this : IEnumReadyCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15870,7 +16144,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("8c8bf236-1aec-495f-9894-91d57c3c686f")]
   record IEnumerableView, lpVtbl : IEnumerableViewVtbl* do
     GUID = LibC::GUID.new(0x8c8bf236_u32, 0x1aec_u16, 0x495f_u16, StaticArray[0x98_u8, 0x94_u8, 0x91_u8, 0xd5_u8, 0x7c_u8, 0x3c_u8, 0x68_u8, 0x6f_u8])
     def query_interface(this : IEnumerableView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15900,7 +16173,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("d2b57227-3d23-4b95-93c0-492bd454c356")]
   record IInsertItem, lpVtbl : IInsertItemVtbl* do
     GUID = LibC::GUID.new(0xd2b57227_u32, 0x3d23_u16, 0x4b95_u16, StaticArray[0x93_u8, 0xc0_u8, 0x49_u8, 0x2b_u8, 0xd4_u8, 0x54_u8, 0xc3_u8, 0x56_u8])
     def query_interface(this : IInsertItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15930,7 +16202,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("47c01f95-e185-412c-b5c5-4f27df965aea")]
   record IFolderBandPriv, lpVtbl : IFolderBandPrivVtbl* do
     GUID = LibC::GUID.new(0x47c01f95_u32, 0xe185_u16, 0x412c_u16, StaticArray[0xb5_u8, 0xc5_u8, 0x4f_u8, 0x27_u8, 0xdf_u8, 0x96_u8, 0x5a_u8, 0xea_u8])
     def query_interface(this : IFolderBandPriv*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15966,7 +16237,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("505f1513-6b3e-4892-a272-59f8889a4d3e")]
   record IImageRecompress, lpVtbl : IImageRecompressVtbl* do
     GUID = LibC::GUID.new(0x505f1513_u32, 0x6b3e_u16, 0x4892_u16, StaticArray[0xa2_u8, 0x72_u8, 0x59_u8, 0xf8_u8, 0x88_u8, 0x9a_u8, 0x4d_u8, 0x3e_u8])
     def query_interface(this : IImageRecompress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15996,7 +16266,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("36116642-d713-4b97-9b83-7484a9d00433")]
   record IFileDialogControlEvents, lpVtbl : IFileDialogControlEventsVtbl* do
     GUID = LibC::GUID.new(0x36116642_u32, 0xd713_u16, 0x4b97_u16, StaticArray[0x9b_u8, 0x83_u8, 0x74_u8, 0x84_u8, 0xa9_u8, 0xd0_u8, 0x4_u8, 0x33_u8])
     def query_interface(this : IFileDialogControlEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16057,7 +16326,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("61744fc7-85b5-4791-a9b0-272276309b13")]
   record IFileDialog2, lpVtbl : IFileDialog2Vtbl* do
     GUID = LibC::GUID.new(0x61744fc7_u32, 0x85b5_u16, 0x4791_u16, StaticArray[0xa9_u8, 0xb0_u8, 0x27_u8, 0x22_u8, 0x76_u8, 0x30_u8, 0x9b_u8, 0x13_u8])
     def query_interface(this : IFileDialog2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16159,7 +16427,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("1f76a169-f994-40ac-8fc8-0959e8874710")]
   record IApplicationAssociationRegistrationUI, lpVtbl : IApplicationAssociationRegistrationUIVtbl* do
     GUID = LibC::GUID.new(0x1f76a169_u32, 0xf994_u16, 0x40ac_u16, StaticArray[0x8f_u8, 0xc8_u8, 0x9_u8, 0x59_u8, 0xe8_u8, 0x87_u8, 0x47_u8, 0x10_u8])
     def query_interface(this : IApplicationAssociationRegistrationUI*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16186,7 +16453,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("fce4bde0-4b68-4b80-8e9c-7426315a7388")]
   record IShellRunDll, lpVtbl : IShellRunDllVtbl* do
     GUID = LibC::GUID.new(0xfce4bde0_u32, 0x4b68_u16, 0x4b80_u16, StaticArray[0x8e_u8, 0x9c_u8, 0x74_u8, 0x26_u8, 0x31_u8, 0x5a_u8, 0x73_u8, 0x88_u8])
     def query_interface(this : IShellRunDll*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16213,7 +16479,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("76e54780-ad74-48e3-a695-3ba9a0aff10d")]
   record IPreviousVersionsInfo, lpVtbl : IPreviousVersionsInfoVtbl* do
     GUID = LibC::GUID.new(0x76e54780_u32, 0xad74_u16, 0x48e3_u16, StaticArray[0xa6_u8, 0x95_u8, 0x3b_u8, 0xa9_u8, 0xa0_u8, 0xaf_u8, 0xf1_u8, 0xd_u8])
     def query_interface(this : IPreviousVersionsInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16241,7 +16506,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("05edda5c-98a3-4717-8adb-c5e7da991eb1")]
   record IUseToBrowseItem, lpVtbl : IUseToBrowseItemVtbl* do
     GUID = LibC::GUID.new(0x5edda5c_u32, 0x98a3_u16, 0x4717_u16, StaticArray[0x8a_u8, 0xdb_u8, 0xc5_u8, 0xe7_u8, 0xda_u8, 0x99_u8, 0x1e_u8, 0xb1_u8])
     def query_interface(this : IUseToBrowseItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16293,7 +16557,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("7cc7aed8-290e-49bc-8945-c1401cc9306c")]
   record INameSpaceTreeControl2, lpVtbl : INameSpaceTreeControl2Vtbl* do
     GUID = LibC::GUID.new(0x7cc7aed8_u32, 0x290e_u16, 0x49bc_u16, StaticArray[0x89_u8, 0x45_u8, 0xc1_u8, 0x40_u8, 0x1c_u8, 0xc9_u8, 0x30_u8, 0x6c_u8])
     def query_interface(this : INameSpaceTreeControl2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16403,7 +16666,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("93d77985-b3d8-4484-8318-672cdda002ce")]
   record INameSpaceTreeControlEvents, lpVtbl : INameSpaceTreeControlEventsVtbl* do
     GUID = LibC::GUID.new(0x93d77985_u32, 0xb3d8_u16, 0x4484_u16, StaticArray[0x83_u8, 0x18_u8, 0x67_u8, 0x2c_u8, 0xdd_u8, 0xa0_u8, 0x2_u8, 0xce_u8])
     def query_interface(this : INameSpaceTreeControlEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16486,7 +16748,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("f9c665d6-c2f2-4c19-bf33-8322d7352f51")]
   record INameSpaceTreeControlDropHandler, lpVtbl : INameSpaceTreeControlDropHandlerVtbl* do
     GUID = LibC::GUID.new(0xf9c665d6_u32, 0xc2f2_u16, 0x4c19_u16, StaticArray[0xbf_u8, 0x33_u8, 0x83_u8, 0x22_u8, 0xd7_u8, 0x35_u8, 0x2f_u8, 0x51_u8])
     def query_interface(this : INameSpaceTreeControlDropHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16530,7 +16791,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("71f312de-43ed-4190-8477-e9536b82350b")]
   record INameSpaceTreeAccessible, lpVtbl : INameSpaceTreeAccessibleVtbl* do
     GUID = LibC::GUID.new(0x71f312de_u32, 0x43ed_u16, 0x4190_u16, StaticArray[0x84_u8, 0x77_u8, 0xe9_u8, 0x53_u8, 0x6b_u8, 0x82_u8, 0x35_u8, 0xb_u8])
     def query_interface(this : INameSpaceTreeAccessible*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16566,7 +16826,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("2d3ba758-33ee-42d5-bb7b-5f3431d86c78")]
   record INameSpaceTreeControlCustomDraw, lpVtbl : INameSpaceTreeControlCustomDrawVtbl* do
     GUID = LibC::GUID.new(0x2d3ba758_u32, 0x33ee_u16, 0x42d5_u16, StaticArray[0xbb_u8, 0x7b_u8, 0x5f_u8, 0x34_u8, 0x31_u8, 0xd8_u8, 0x6c_u8, 0x78_u8])
     def query_interface(this : INameSpaceTreeControlCustomDraw*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16605,7 +16864,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("6d67e846-5b9c-4db8-9cbc-dde12f4254f1")]
   record ITrayDeskBand, lpVtbl : ITrayDeskBandVtbl* do
     GUID = LibC::GUID.new(0x6d67e846_u32, 0x5b9c_u16, 0x4db8_u16, StaticArray[0x9c_u8, 0xbc_u8, 0xdd_u8, 0xe1_u8, 0x2f_u8, 0x42_u8, 0x54_u8, 0xf1_u8])
     def query_interface(this : ITrayDeskBand*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16643,7 +16901,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("b9075c7c-d48e-403f-ab99-d6c77a1084ac")]
   record IBandHost, lpVtbl : IBandHostVtbl* do
     GUID = LibC::GUID.new(0xb9075c7c_u32, 0xd48e_u16, 0x403f_u16, StaticArray[0xab_u8, 0x99_u8, 0xd6_u8, 0xc7_u8, 0x7a_u8, 0x10_u8, 0x84_u8, 0xac_u8])
     def query_interface(this : IBandHost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16676,7 +16933,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("0df60d92-6818-46d6-b358-d66170dde466")]
   record IComputerInfoChangeNotify, lpVtbl : IComputerInfoChangeNotifyVtbl* do
     GUID = LibC::GUID.new(0xdf60d92_u32, 0x6818_u16, 0x46d6_u16, StaticArray[0xb3_u8, 0x58_u8, 0xd6_u8, 0x61_u8, 0x70_u8, 0xdd_u8, 0xe4_u8, 0x66_u8])
     def query_interface(this : IComputerInfoChangeNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16703,7 +16959,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("c1646bc4-f298-4f91-a204-eb2dd1709d1a")]
   record IDesktopGadget, lpVtbl : IDesktopGadgetVtbl* do
     GUID = LibC::GUID.new(0xc1646bc4_u32, 0xf298_u16, 0x4f91_u16, StaticArray[0xa2_u8, 0x4_u8, 0xeb_u8, 0x2d_u8, 0xd1_u8, 0x70_u8, 0x9d_u8, 0x1a_u8])
     def query_interface(this : IDesktopGadget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16730,7 +16985,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("157733fd-a592-42e5-b594-248468c5a81b")]
   record IAccessibilityDockingServiceCallback, lpVtbl : IAccessibilityDockingServiceCallbackVtbl* do
     GUID = LibC::GUID.new(0x157733fd_u32, 0xa592_u16, 0x42e5_u16, StaticArray[0xb5_u8, 0x94_u8, 0x24_u8, 0x84_u8, 0x68_u8, 0xc5_u8, 0xa8_u8, 0x1b_u8])
     def query_interface(this : IAccessibilityDockingServiceCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16759,7 +17013,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("8849dc22-cedf-4c95-998d-051419dd3f76")]
   record IAccessibilityDockingService, lpVtbl : IAccessibilityDockingServiceVtbl* do
     GUID = LibC::GUID.new(0x8849dc22_u32, 0xcedf_u16, 0x4c95_u16, StaticArray[0x99_u8, 0x8d_u8, 0x5_u8, 0x14_u8, 0x19_u8, 0xdd_u8, 0x3f_u8, 0x76_u8])
     def query_interface(this : IAccessibilityDockingService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16795,7 +17048,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("5efb46d7-47c0-4b68-acda-ded47c90ec91")]
   record IStorageProviderBanners, lpVtbl : IStorageProviderBannersVtbl* do
     GUID = LibC::GUID.new(0x5efb46d7_u32, 0x47c0_u16, 0x4b68_u16, StaticArray[0xac_u8, 0xda_u8, 0xde_u8, 0xd4_u8, 0x7c_u8, 0x90_u8, 0xec_u8, 0x91_u8])
     def query_interface(this : IStorageProviderBanners*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16831,7 +17083,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("7bf992a9-af7a-4dba-b2e5-4d080b1ecbc6")]
   record IStorageProviderCopyHook, lpVtbl : IStorageProviderCopyHookVtbl* do
     GUID = LibC::GUID.new(0x7bf992a9_u32, 0xaf7a_u16, 0x4dba_u16, StaticArray[0xb2_u8, 0xe5_u8, 0x4d_u8, 0x8_u8, 0xb_u8, 0x1e_u8, 0xcb_u8, 0xc6_u8])
     def query_interface(this : IStorageProviderCopyHook*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16886,7 +17137,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("eab22ac1-30c1-11cf-a7eb-0000c05bae0b")]
   record IWebBrowser, lpVtbl : IWebBrowserVtbl* do
     GUID = LibC::GUID.new(0xeab22ac1_u32, 0x30c1_u16, 0x11cf_u16, StaticArray[0xa7_u8, 0xeb_u8, 0x0_u8, 0x0_u8, 0xc0_u8, 0x5b_u8, 0xae_u8, 0xb_u8])
     def query_interface(this : IWebBrowser*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17000,7 +17250,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("eab22ac2-30c1-11cf-a7eb-0000c05bae0b")]
   record DWebBrowserEvents, lpVtbl : DWebBrowserEventsVtbl* do
     GUID = LibC::GUID.new(0xeab22ac2_u32, 0x30c1_u16, 0x11cf_u16, StaticArray[0xa7_u8, 0xeb_u8, 0x0_u8, 0x0_u8, 0xc0_u8, 0x5b_u8, 0xae_u8, 0xb_u8])
     def query_interface(this : DWebBrowserEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17084,7 +17333,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("0002df05-0000-0000-c000-000000000046")]
   record IWebBrowserApp, lpVtbl : IWebBrowserAppVtbl* do
     GUID = LibC::GUID.new(0x2df05_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IWebBrowserApp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17322,7 +17570,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("d30c1661-cdaf-11d0-8a3e-00c04fc9e26e")]
   record IWebBrowser2, lpVtbl : IWebBrowser2Vtbl* do
     GUID = LibC::GUID.new(0xd30c1661_u32, 0xcdaf_u16, 0x11d0_u16, StaticArray[0x8a_u8, 0x3e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xe2_u8, 0x6e_u8])
     def query_interface(this : IWebBrowser2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17553,7 +17800,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("34a715a0-6587-11d0-924a-0020afc7ac4d")]
   record DWebBrowserEvents2, lpVtbl : DWebBrowserEvents2Vtbl* do
     GUID = LibC::GUID.new(0x34a715a0_u32, 0x6587_u16, 0x11d0_u16, StaticArray[0x92_u8, 0x4a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xc7_u8, 0xac_u8, 0x4d_u8])
     def query_interface(this : DWebBrowserEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17592,7 +17838,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("fe4106e0-399a-11d0-a48c-00a0c90a8f39")]
   record DShellWindowsEvents, lpVtbl : DShellWindowsEventsVtbl* do
     GUID = LibC::GUID.new(0xfe4106e0_u32, 0x399a_u16, 0x11d0_u16, StaticArray[0xa4_u8, 0x8c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0x8f_u8, 0x39_u8])
     def query_interface(this : DShellWindowsEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17642,7 +17887,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("85cb6900-4d95-11cf-960c-0080c7f4ee85")]
   record IShellWindows, lpVtbl : IShellWindowsVtbl* do
     GUID = LibC::GUID.new(0x85cb6900_u32, 0x4d95_u16, 0x11cf_u16, StaticArray[0x96_u8, 0xc_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xf4_u8, 0xee_u8, 0x85_u8])
     def query_interface(this : IShellWindows*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17727,7 +17971,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("729fe2f8-1ea8-11d1-8f85-00c04fc2fbe1")]
   record IShellUIHelper, lpVtbl : IShellUIHelperVtbl* do
     GUID = LibC::GUID.new(0x729fe2f8_u32, 0x1ea8_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x85_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xfb_u8, 0xe1_u8])
     def query_interface(this : IShellUIHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17834,7 +18077,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("a7fe6eda-1932-4281-b881-87b31b8bc52c")]
   record IShellUIHelper2, lpVtbl : IShellUIHelper2Vtbl* do
     GUID = LibC::GUID.new(0xa7fe6eda_u32, 0x1932_u16, 0x4281_u16, StaticArray[0xb8_u8, 0x81_u8, 0x87_u8, 0xb3_u8, 0x1b_u8, 0x8b_u8, 0xc5_u8, 0x2c_u8])
     def query_interface(this : IShellUIHelper2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18002,7 +18244,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("528df2ec-d419-40bc-9b6d-dcdbf9c1b25d")]
   record IShellUIHelper3, lpVtbl : IShellUIHelper3Vtbl* do
     GUID = LibC::GUID.new(0x528df2ec_u32, 0xd419_u16, 0x40bc_u16, StaticArray[0x9b_u8, 0x6d_u8, 0xdc_u8, 0xdb_u8, 0xf9_u8, 0xc1_u8, 0xb2_u8, 0x5d_u8])
     def query_interface(this : IShellUIHelper3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18227,7 +18468,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("b36e6a53-8073-499e-824c-d776330a333e")]
   record IShellUIHelper4, lpVtbl : IShellUIHelper4Vtbl* do
     GUID = LibC::GUID.new(0xb36e6a53_u32, 0x8073_u16, 0x499e_u16, StaticArray[0x82_u8, 0x4c_u8, 0xd7_u8, 0x76_u8, 0x33_u8, 0xa_u8, 0x33_u8, 0x3e_u8])
     def query_interface(this : IShellUIHelper4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18513,7 +18753,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("a2a08b09-103d-4d3f-b91c-ea455ca82efa")]
   record IShellUIHelper5, lpVtbl : IShellUIHelper5Vtbl* do
     GUID = LibC::GUID.new(0xa2a08b09_u32, 0x103d_u16, 0x4d3f_u16, StaticArray[0xb9_u8, 0x1c_u8, 0xea_u8, 0x45_u8, 0x5c_u8, 0xa8_u8, 0x2e_u8, 0xfa_u8])
     def query_interface(this : IShellUIHelper5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18834,7 +19073,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("987a573e-46ee-4e89-96ab-ddf7f8fdc98c")]
   record IShellUIHelper6, lpVtbl : IShellUIHelper6Vtbl* do
     GUID = LibC::GUID.new(0x987a573e_u32, 0x46ee_u16, 0x4e89_u16, StaticArray[0x96_u8, 0xab_u8, 0xdd_u8, 0xf7_u8, 0xf8_u8, 0xfd_u8, 0xc9_u8, 0x8c_u8])
     def query_interface(this : IShellUIHelper6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19206,7 +19444,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("60e567c8-9573-4ab2-a264-637c6c161cb1")]
   record IShellUIHelper7, lpVtbl : IShellUIHelper7Vtbl* do
     GUID = LibC::GUID.new(0x60e567c8_u32, 0x9573_u16, 0x4ab2_u16, StaticArray[0xa2_u8, 0x64_u8, 0x63_u8, 0x7c_u8, 0x6c_u8, 0x16_u8, 0x1c_u8, 0xb1_u8])
     def query_interface(this : IShellUIHelper7*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19612,7 +19849,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("66debcf2-05b0-4f07-b49b-b96241a65db2")]
   record IShellUIHelper8, lpVtbl : IShellUIHelper8Vtbl* do
     GUID = LibC::GUID.new(0x66debcf2_u32, 0x5b0_u16, 0x4f07_u16, StaticArray[0xb4_u8, 0x9b_u8, 0xb9_u8, 0x62_u8, 0x41_u8, 0xa6_u8, 0x5d_u8, 0xb2_u8])
     def query_interface(this : IShellUIHelper8*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20040,7 +20276,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("6cdf73b0-7f2f-451f-bc0f-63e0f3284e54")]
   record IShellUIHelper9, lpVtbl : IShellUIHelper9Vtbl* do
     GUID = LibC::GUID.new(0x6cdf73b0_u32, 0x7f2f_u16, 0x451f_u16, StaticArray[0xbc_u8, 0xf_u8, 0x63_u8, 0xe0_u8, 0xf3_u8, 0x28_u8, 0x4e_u8, 0x54_u8])
     def query_interface(this : IShellUIHelper9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20373,7 +20608,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("55136806-b2de-11d1-b9f2-00a0c98bc547")]
   record DShellNameSpaceEvents, lpVtbl : DShellNameSpaceEventsVtbl* do
     GUID = LibC::GUID.new(0x55136806_u32, 0xb2de_u16, 0x11d1_u16, StaticArray[0xb9_u8, 0xf2_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x8b_u8, 0xc5_u8, 0x47_u8])
     def query_interface(this : DShellNameSpaceEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20425,7 +20659,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("55136804-b2de-11d1-b9f2-00a0c98bc547")]
   record IShellFavoritesNameSpace, lpVtbl : IShellFavoritesNameSpaceVtbl* do
     GUID = LibC::GUID.new(0x55136804_u32, 0xb2de_u16, 0x11d1_u16, StaticArray[0xb9_u8, 0xf2_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x8b_u8, 0xc5_u8, 0x47_u8])
     def query_interface(this : IShellFavoritesNameSpace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20537,7 +20770,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("e572d3c9-37be-4ae2-825d-d521763e3108")]
   record IShellNameSpace, lpVtbl : IShellNameSpaceVtbl* do
     GUID = LibC::GUID.new(0xe572d3c9_u32, 0x37be_u16, 0x4ae2_u16, StaticArray[0x82_u8, 0x5d_u8, 0xd5_u8, 0x21_u8, 0x76_u8, 0x3e_u8, 0x31_u8, 0x8_u8])
     def query_interface(this : IShellNameSpace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20692,7 +20924,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("f3470f24-15fd-11d2-bb2e-00805ff7efca")]
   record IScriptErrorList, lpVtbl : IScriptErrorListVtbl* do
     GUID = LibC::GUID.new(0xf3470f24_u32, 0x15fd_u16, 0x11d2_u16, StaticArray[0xbb_u8, 0x2e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xf7_u8, 0xef_u8, 0xca_u8])
     def query_interface(this : IScriptErrorList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20774,7 +21005,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("9ba05970-f6a8-11cf-a442-00a0c90a8f39")]
   record IFolderViewOC, lpVtbl : IFolderViewOCVtbl* do
     GUID = LibC::GUID.new(0x9ba05970_u32, 0xf6a8_u16, 0x11cf_u16, StaticArray[0xa4_u8, 0x42_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0x8f_u8, 0x39_u8])
     def query_interface(this : IFolderViewOC*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20816,7 +21046,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("62112aa2-ebe4-11cf-a5fb-0020afe7292d")]
   record DShellFolderViewEvents, lpVtbl : DShellFolderViewEventsVtbl* do
     GUID = LibC::GUID.new(0x62112aa2_u32, 0xebe4_u16, 0x11cf_u16, StaticArray[0xa5_u8, 0xfb_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xe7_u8, 0x29_u8, 0x2d_u8])
     def query_interface(this : DShellFolderViewEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20857,7 +21086,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("4a3df050-23bd-11d2-939f-00a0c91eedba")]
   record DFConstraint, lpVtbl : DFConstraintVtbl* do
     GUID = LibC::GUID.new(0x4a3df050_u32, 0x23bd_u16, 0x11d2_u16, StaticArray[0x93_u8, 0x9f_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x1e_u8, 0xed_u8, 0xba_u8])
     def query_interface(this : DFConstraint*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20919,7 +21147,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("fac32c80-cbe4-11ce-8350-444553540000")]
   record FolderItem, lpVtbl : FolderItemVtbl* do
     GUID = LibC::GUID.new(0xfac32c80_u32, 0xcbe4_u16, 0x11ce_u16, StaticArray[0x83_u8, 0x50_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : FolderItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21014,7 +21241,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("744129e0-cbe5-11ce-8350-444553540000")]
   record FolderItems, lpVtbl : FolderItemsVtbl* do
     GUID = LibC::GUID.new(0x744129e0_u32, 0xcbe5_u16, 0x11ce_u16, StaticArray[0x83_u8, 0x50_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : FolderItems*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21072,7 +21298,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("08ec3e00-50b0-11cf-960c-0080c7f4ee85")]
   record FolderItemVerb, lpVtbl : FolderItemVerbVtbl* do
     GUID = LibC::GUID.new(0x8ec3e00_u32, 0x50b0_u16, 0x11cf_u16, StaticArray[0x96_u8, 0xc_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xf4_u8, 0xee_u8, 0x85_u8])
     def query_interface(this : FolderItemVerb*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21128,7 +21353,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("1f8352c0-50b0-11cf-960c-0080c7f4ee85")]
   record FolderItemVerbs, lpVtbl : FolderItemVerbsVtbl* do
     GUID = LibC::GUID.new(0x1f8352c0_u32, 0x50b0_u16, 0x11cf_u16, StaticArray[0x96_u8, 0xc_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xf4_u8, 0xee_u8, 0x85_u8])
     def query_interface(this : FolderItemVerbs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21192,7 +21416,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("bbcbde60-c3ff-11ce-8350-444553540000")]
   record Folder, lpVtbl : FolderVtbl* do
     GUID = LibC::GUID.new(0xbbcbde60_u32, 0xc3ff_u16, 0x11ce_u16, StaticArray[0x83_u8, 0x50_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : Folder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21276,7 +21499,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("f0d2d8ef-3890-11d2-bf8b-00c04fb93661")]
   record Folder2, lpVtbl : Folder2Vtbl* do
     GUID = LibC::GUID.new(0xf0d2d8ef_u32, 0x3890_u16, 0x11d2_u16, StaticArray[0xbf_u8, 0x8b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x36_u8, 0x61_u8])
     def query_interface(this : Folder2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21377,7 +21599,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("a7ae5f64-c4d7-4d7f-9307-4d24ee54b841")]
   record Folder3, lpVtbl : Folder3Vtbl* do
     GUID = LibC::GUID.new(0xa7ae5f64_u32, 0xc4d7_u16, 0x4d7f_u16, StaticArray[0x93_u8, 0x7_u8, 0x4d_u8, 0x24_u8, 0xee_u8, 0x54_u8, 0xb8_u8, 0x41_u8])
     def query_interface(this : Folder3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21486,7 +21707,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("edc817aa-92b8-11d1-b075-00c04fc33aa5")]
   record FolderItem2, lpVtbl : FolderItem2Vtbl* do
     GUID = LibC::GUID.new(0xedc817aa_u32, 0x92b8_u16, 0x11d1_u16, StaticArray[0xb0_u8, 0x75_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x3a_u8, 0xa5_u8])
     def query_interface(this : FolderItem2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21588,7 +21808,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("c94f0ad0-f363-11d2-a327-00c04f8eec7f")]
   record FolderItems2, lpVtbl : FolderItems2Vtbl* do
     GUID = LibC::GUID.new(0xc94f0ad0_u32, 0xf363_u16, 0x11d2_u16, StaticArray[0xa3_u8, 0x27_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xec_u8, 0x7f_u8])
     def query_interface(this : FolderItems2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21653,7 +21872,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("eaa7c309-bbec-49d5-821d-64d966cb667f")]
   record FolderItems3, lpVtbl : FolderItems3Vtbl* do
     GUID = LibC::GUID.new(0xeaa7c309_u32, 0xbbec_u16, 0x49d5_u16, StaticArray[0x82_u8, 0x1d_u8, 0x64_u8, 0xd9_u8, 0x66_u8, 0xcb_u8, 0x66_u8, 0x7f_u8])
     def query_interface(this : FolderItems3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21732,7 +21950,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("88a05c00-f000-11ce-8350-444553540000")]
   record IShellLinkDual, lpVtbl : IShellLinkDualVtbl* do
     GUID = LibC::GUID.new(0x88a05c00_u32, 0xf000_u16, 0x11ce_u16, StaticArray[0x83_u8, 0x50_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IShellLinkDual*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21836,7 +22053,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("317ee249-f12e-11d2-b1e4-00c04f8eeb3e")]
   record IShellLinkDual2, lpVtbl : IShellLinkDual2Vtbl* do
     GUID = LibC::GUID.new(0x317ee249_u32, 0xf12e_u16, 0x11d2_u16, StaticArray[0xb1_u8, 0xe4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xeb_u8, 0x3e_u8])
     def query_interface(this : IShellLinkDual2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21935,7 +22151,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("e7a1af80-4d96-11cf-960c-0080c7f4ee85")]
   record IShellFolderViewDual, lpVtbl : IShellFolderViewDualVtbl* do
     GUID = LibC::GUID.new(0xe7a1af80_u32, 0x4d96_u16, 0x11cf_u16, StaticArray[0x96_u8, 0xc_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xf4_u8, 0xee_u8, 0x85_u8])
     def query_interface(this : IShellFolderViewDual*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22013,7 +22228,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("31c147b6-0ade-4a3c-b514-ddf932ef6d17")]
   record IShellFolderViewDual2, lpVtbl : IShellFolderViewDual2Vtbl* do
     GUID = LibC::GUID.new(0x31c147b6_u32, 0xade_u16, 0x4a3c_u16, StaticArray[0xb5_u8, 0x14_u8, 0xdd_u8, 0xf9_u8, 0x32_u8, 0xef_u8, 0x6d_u8, 0x17_u8])
     def query_interface(this : IShellFolderViewDual2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22109,7 +22323,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("29ec8e6c-46d3-411f-baaa-611a6c9cac66")]
   record IShellFolderViewDual3, lpVtbl : IShellFolderViewDual3Vtbl* do
     GUID = LibC::GUID.new(0x29ec8e6c_u32, 0x46d3_u16, 0x411f_u16, StaticArray[0xba_u8, 0xaa_u8, 0x61_u8, 0x1a_u8, 0x6c_u8, 0x9c_u8, 0xac_u8, 0x66_u8])
     def query_interface(this : IShellFolderViewDual3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22234,7 +22447,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("d8f015c0-c278-11ce-a49e-444553540000")]
   record IShellDispatch, lpVtbl : IShellDispatchVtbl* do
     GUID = LibC::GUID.new(0xd8f015c0_u32, 0xc278_u16, 0x11ce_u16, StaticArray[0xa4_u8, 0x9e_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IShellDispatch*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22374,7 +22586,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("a4c6892c-3ba9-11d2-9dea-00c04fb16162")]
   record IShellDispatch2, lpVtbl : IShellDispatch2Vtbl* do
     GUID = LibC::GUID.new(0xa4c6892c_u32, 0x3ba9_u16, 0x11d2_u16, StaticArray[0x9d_u8, 0xea_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb1_u8, 0x61_u8, 0x62_u8])
     def query_interface(this : IShellDispatch2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22542,7 +22753,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("177160ca-bb5a-411c-841d-bd38facdeaa0")]
   record IShellDispatch3, lpVtbl : IShellDispatch3Vtbl* do
     GUID = LibC::GUID.new(0x177160ca_u32, 0xbb5a_u16, 0x411c_u16, StaticArray[0x84_u8, 0x1d_u8, 0xbd_u8, 0x38_u8, 0xfa_u8, 0xcd_u8, 0xea_u8, 0xa0_u8])
     def query_interface(this : IShellDispatch3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22717,7 +22927,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("efd84b2d-4bcf-4298-be25-eb542a59fbda")]
   record IShellDispatch4, lpVtbl : IShellDispatch4Vtbl* do
     GUID = LibC::GUID.new(0xefd84b2d_u32, 0x4bcf_u16, 0x4298_u16, StaticArray[0xbe_u8, 0x25_u8, 0xeb_u8, 0x54_u8, 0x2a_u8, 0x59_u8, 0xfb_u8, 0xda_u8])
     def query_interface(this : IShellDispatch4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22905,7 +23114,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("866738b9-6cf2-4de8-8767-f794ebe74f4e")]
   record IShellDispatch5, lpVtbl : IShellDispatch5Vtbl* do
     GUID = LibC::GUID.new(0x866738b9_u32, 0x6cf2_u16, 0x4de8_u16, StaticArray[0x87_u8, 0x67_u8, 0xf7_u8, 0x94_u8, 0xeb_u8, 0xe7_u8, 0x4f_u8, 0x4e_u8])
     def query_interface(this : IShellDispatch5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23097,7 +23305,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("286e6f1b-7113-4355-9562-96b7e9d64c54")]
   record IShellDispatch6, lpVtbl : IShellDispatch6Vtbl* do
     GUID = LibC::GUID.new(0x286e6f1b_u32, 0x7113_u16, 0x4355_u16, StaticArray[0x95_u8, 0x62_u8, 0x96_u8, 0xb7_u8, 0xe9_u8, 0xd6_u8, 0x4c_u8, 0x54_u8])
     def query_interface(this : IShellDispatch6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23258,7 +23465,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("2d91eea1-9932-11d2-be86-00a0c9a83da1")]
   record IFileSearchBand, lpVtbl : IFileSearchBandVtbl* do
     GUID = LibC::GUID.new(0x2d91eea1_u32, 0x9932_u16, 0x11d2_u16, StaticArray[0xbe_u8, 0x86_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa8_u8, 0x3d_u8, 0xa1_u8])
     def query_interface(this : IFileSearchBand*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23321,7 +23527,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("18bcc359-4990-4bfb-b951-3c83702be5f9")]
   record IWebWizardHost, lpVtbl : IWebWizardHostVtbl* do
     GUID = LibC::GUID.new(0x18bcc359_u32, 0x4990_u16, 0x4bfb_u16, StaticArray[0xb9_u8, 0x51_u8, 0x3c_u8, 0x83_u8, 0x70_u8, 0x2b_u8, 0xe5_u8, 0xf9_u8])
     def query_interface(this : IWebWizardHost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23397,7 +23602,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("f9c013dc-3c23-4041-8e39-cfb402f7ea59")]
   record IWebWizardHost2, lpVtbl : IWebWizardHost2Vtbl* do
     GUID = LibC::GUID.new(0xf9c013dc_u32, 0x3c23_u16, 0x4041_u16, StaticArray[0x8e_u8, 0x39_u8, 0xcf_u8, 0xb4_u8, 0x2_u8, 0xf7_u8, 0xea_u8, 0x59_u8])
     def query_interface(this : IWebWizardHost2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23476,7 +23680,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("0751c551-7568-41c9-8e5b-e22e38919236")]
   record INewWDEvents, lpVtbl : INewWDEventsVtbl* do
     GUID = LibC::GUID.new(0x751c551_u32, 0x7568_u16, 0x41c9_u16, StaticArray[0x8e_u8, 0x5b_u8, 0xe2_u8, 0x2e_u8, 0x38_u8, 0x91_u8, 0x92_u8, 0x36_u8])
     def query_interface(this : INewWDEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23543,7 +23746,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("00bb2762-6a77-11d0-a535-00c04fd7d062")]
   record IAutoComplete, lpVtbl : IAutoCompleteVtbl* do
     GUID = LibC::GUID.new(0xbb2762_u32, 0x6a77_u16, 0x11d0_u16, StaticArray[0xa5_u8, 0x35_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0xd0_u8, 0x62_u8])
     def query_interface(this : IAutoComplete*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23576,7 +23778,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("eac04bc0-3791-11d2-bb95-0060977b464c")]
   record IAutoComplete2, lpVtbl : IAutoComplete2Vtbl* do
     GUID = LibC::GUID.new(0xeac04bc0_u32, 0x3791_u16, 0x11d2_u16, StaticArray[0xbb_u8, 0x95_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0x7b_u8, 0x46_u8, 0x4c_u8])
     def query_interface(this : IAutoComplete2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23618,7 +23819,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("8e74c210-cf9d-4eaf-a403-7356428f0a5a")]
   record IEnumACString, lpVtbl : IEnumACStringVtbl* do
     GUID = LibC::GUID.new(0x8e74c210_u32, 0xcf9d_u16, 0x4eaf_u16, StaticArray[0xa4_u8, 0x3_u8, 0x73_u8, 0x56_u8, 0x42_u8, 0x8f_u8, 0xa_u8, 0x5a_u8])
     def query_interface(this : IEnumACString*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23667,7 +23867,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("3d8b0590-f691-11d2-8ea9-006097df5bd4")]
   record IDataObjectAsyncCapability, lpVtbl : IDataObjectAsyncCapabilityVtbl* do
     GUID = LibC::GUID.new(0x3d8b0590_u32, 0xf691_u16, 0x11d2_u16, StaticArray[0x8e_u8, 0xa9_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xdf_u8, 0x5b_u8, 0xd4_u8])
     def query_interface(this : IDataObjectAsyncCapability*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23707,7 +23906,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("000214eb-0000-0000-c000-000000000046")]
   record IExtractIconA, lpVtbl : IExtractIconAVtbl* do
     GUID = LibC::GUID.new(0x214eb_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IExtractIconA*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23738,7 +23936,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("000214fa-0000-0000-c000-000000000046")]
   record IExtractIconW, lpVtbl : IExtractIconWVtbl* do
     GUID = LibC::GUID.new(0x214fa_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IExtractIconW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23772,7 +23969,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("f10b5e34-dd3b-42a7-aa7d-2f4ec54bb09b")]
   record IShellIconOverlayManager, lpVtbl : IShellIconOverlayManagerVtbl* do
     GUID = LibC::GUID.new(0xf10b5e34_u32, 0xdd3b_u16, 0x42a7_u16, StaticArray[0xaa_u8, 0x7d_u8, 0x2f_u8, 0x4e_u8, 0xc5_u8, 0x4b_u8, 0xb0_u8, 0x9b_u8])
     def query_interface(this : IShellIconOverlayManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23812,7 +24008,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("7d688a70-c613-11d0-999b-00c04fd655e1")]
   record IShellIconOverlay, lpVtbl : IShellIconOverlayVtbl* do
     GUID = LibC::GUID.new(0x7d688a70_u32, 0xc613_u16, 0x11d0_u16, StaticArray[0x99_u8, 0x9b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd6_u8, 0x55_u8, 0xe1_u8])
     def query_interface(this : IShellIconOverlay*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23842,7 +24037,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("ac60f6a0-0fd9-11d0-99cb-00c04fd64497")]
   record IURLSearchHook, lpVtbl : IURLSearchHookVtbl* do
     GUID = LibC::GUID.new(0xac60f6a0_u32, 0xfd9_u16, 0x11d0_u16, StaticArray[0x99_u8, 0xcb_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd6_u8, 0x44_u8, 0x97_u8])
     def query_interface(this : IURLSearchHook*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23871,7 +24065,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("09f656a2-41af-480c-88f7-16cc0d164615")]
   record ISearchContext, lpVtbl : ISearchContextVtbl* do
     GUID = LibC::GUID.new(0x9f656a2_u32, 0x41af_u16, 0x480c_u16, StaticArray[0x88_u8, 0xf7_u8, 0x16_u8, 0xcc_u8, 0xd_u8, 0x16_u8, 0x46_u8, 0x15_u8])
     def query_interface(this : ISearchContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23905,7 +24098,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("5ee44da4-6d32-46e3-86bc-07540dedd0e0")]
   record IURLSearchHook2, lpVtbl : IURLSearchHook2Vtbl* do
     GUID = LibC::GUID.new(0x5ee44da4_u32, 0x6d32_u16, 0x46e3_u16, StaticArray[0x86_u8, 0xbc_u8, 0x7_u8, 0x54_u8, 0xd_u8, 0xed_u8, 0xd0_u8, 0xe0_u8])
     def query_interface(this : IURLSearchHook2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23936,7 +24128,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("000214ec-0000-0000-c000-000000000046")]
   record IShellDetails, lpVtbl : IShellDetailsVtbl* do
     GUID = LibC::GUID.new(0x214ec_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IShellDetails*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23967,7 +24158,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("00bb2761-6a77-11d0-a535-00c04fd7d062")]
   record IObjMgr, lpVtbl : IObjMgrVtbl* do
     GUID = LibC::GUID.new(0xbb2761_u32, 0x6a77_u16, 0x11d0_u16, StaticArray[0xa5_u8, 0x35_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0xd0_u8, 0x62_u8])
     def query_interface(this : IObjMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23997,7 +24187,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("77a130b0-94fd-11d0-a544-00c04fd7d062")]
   record IACList, lpVtbl : IACListVtbl* do
     GUID = LibC::GUID.new(0x77a130b0_u32, 0x94fd_u16, 0x11d0_u16, StaticArray[0xa5_u8, 0x44_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0xd0_u8, 0x62_u8])
     def query_interface(this : IACList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24026,7 +24215,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("470141a0-5186-11d2-bbb6-0060977b464c")]
   record IACList2, lpVtbl : IACList2Vtbl* do
     GUID = LibC::GUID.new(0x470141a0_u32, 0x5186_u16, 0x11d2_u16, StaticArray[0xbb_u8, 0xb6_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0x7b_u8, 0x46_u8, 0x4c_u8])
     def query_interface(this : IACList2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24068,7 +24256,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("ebbc7c04-315e-11d2-b62f-006097df5bd4")]
   record IProgressDialog, lpVtbl : IProgressDialogVtbl* do
     GUID = LibC::GUID.new(0xebbc7c04_u32, 0x315e_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x2f_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xdf_u8, 0x5b_u8, 0xd4_u8])
     def query_interface(this : IProgressDialog*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24126,7 +24313,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("2a342fc2-7b26-11d0-8ca9-00a0c92dbfe8")]
   record IDockingWindowSite, lpVtbl : IDockingWindowSiteVtbl* do
     GUID = LibC::GUID.new(0x2a342fc2_u32, 0x7b26_u16, 0x11d0_u16, StaticArray[0x8c_u8, 0xa9_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x2d_u8, 0xbf_u8, 0xe8_u8])
     def query_interface(this : IDockingWindowSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24165,7 +24351,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("d82be2b1-5764-11d0-a96e-00c04fd705a2")]
   record IShellChangeNotify, lpVtbl : IShellChangeNotifyVtbl* do
     GUID = LibC::GUID.new(0xd82be2b1_u32, 0x5764_u16, 0x11d0_u16, StaticArray[0xa9_u8, 0x6e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0x5_u8, 0xa2_u8])
     def query_interface(this : IShellChangeNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24193,7 +24378,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("00021500-0000-0000-c000-000000000046")]
   record IQueryInfo, lpVtbl : IQueryInfoVtbl* do
     GUID = LibC::GUID.new(0x21500_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IQueryInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24223,7 +24407,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("2047e320-f2a9-11ce-ae65-08002b2e1262")]
   record IShellFolderViewCB, lpVtbl : IShellFolderViewCBVtbl* do
     GUID = LibC::GUID.new(0x2047e320_u32, 0xf2a9_u16, 0x11ce_u16, StaticArray[0xae_u8, 0x65_u8, 0x8_u8, 0x0_u8, 0x2b_u8, 0x2e_u8, 0x12_u8, 0x62_u8])
     def query_interface(this : IShellFolderViewCB*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24277,7 +24460,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("37a378c0-f82d-11ce-ae65-08002b2e1262")]
   record IShellFolderView, lpVtbl : IShellFolderViewVtbl* do
     GUID = LibC::GUID.new(0x37a378c0_u32, 0xf82d_u16, 0x11ce_u16, StaticArray[0xae_u8, 0x65_u8, 0x8_u8, 0x0_u8, 0x2b_u8, 0x2e_u8, 0x12_u8, 0x62_u8])
     def query_interface(this : IShellFolderView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24387,7 +24569,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("fb700430-952c-11d1-946f-000000000000")]
   record INamedPropertyBag, lpVtbl : INamedPropertyBagVtbl* do
     GUID = LibC::GUID.new(0xfb700430_u32, 0x952c_u16, 0x11d1_u16, StaticArray[0x94_u8, 0x6f_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : INamedPropertyBag*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24425,7 +24606,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("000214e1-0000-0000-c000-000000000046")]
   record INewShortcutHookA, lpVtbl : INewShortcutHookAVtbl* do
     GUID = LibC::GUID.new(0x214e1_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : INewShortcutHookA*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24472,7 +24652,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("000214f7-0000-0000-c000-000000000046")]
   record INewShortcutHookW, lpVtbl : INewShortcutHookWVtbl* do
     GUID = LibC::GUID.new(0x214f7_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : INewShortcutHookW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24514,7 +24693,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("000214ef-0000-0000-c000-000000000046")]
   record ICopyHookA, lpVtbl : ICopyHookAVtbl* do
     GUID = LibC::GUID.new(0x214ef_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : ICopyHookA*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24541,7 +24719,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("000214fc-0000-0000-c000-000000000046")]
   record ICopyHookW, lpVtbl : ICopyHookWVtbl* do
     GUID = LibC::GUID.new(0x214fc_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : ICopyHookW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24569,7 +24746,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("91956d21-9276-11d1-921a-006097df5bd4")]
   record ICurrentWorkingDirectory, lpVtbl : ICurrentWorkingDirectoryVtbl* do
     GUID = LibC::GUID.new(0x91956d21_u32, 0x9276_u16, 0x11d1_u16, StaticArray[0x92_u8, 0x1a_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xdf_u8, 0x5b_u8, 0xd4_u8])
     def query_interface(this : ICurrentWorkingDirectory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24603,7 +24779,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("47d2657a-7b27-11d0-8ca9-00a0c92dbfe8")]
   record IDockingWindowFrame, lpVtbl : IDockingWindowFrameVtbl* do
     GUID = LibC::GUID.new(0x47d2657a_u32, 0x7b27_u16, 0x11d0_u16, StaticArray[0x8c_u8, 0xa9_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x2d_u8, 0xbf_u8, 0xe8_u8])
     def query_interface(this : IDockingWindowFrame*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24642,7 +24817,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("4ea39266-7211-409f-b622-f63dbd16c533")]
   record IThumbnailCapture, lpVtbl : IThumbnailCaptureVtbl* do
     GUID = LibC::GUID.new(0x4ea39266_u32, 0x7211_u16, 0x409f_u16, StaticArray[0xb6_u8, 0x22_u8, 0xf6_u8, 0x3d_u8, 0xbd_u8, 0x16_u8, 0xc5_u8, 0x33_u8])
     def query_interface(this : IThumbnailCapture*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24671,7 +24845,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("7fe80cc8-c247-11d0-b93a-00a0c90312e1")]
   record IShellFolderBand, lpVtbl : IShellFolderBandVtbl* do
     GUID = LibC::GUID.new(0x7fe80cc8_u32, 0xc247_u16, 0x11d0_u16, StaticArray[0xb9_u8, 0x3a_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0x12_u8, 0xe1_u8])
     def query_interface(this : IShellFolderBand*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24709,7 +24882,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("eb0fe175-1a3a-11d0-89b3-00a0c90a90ac")]
   record IDeskBarClient, lpVtbl : IDeskBarClientVtbl* do
     GUID = LibC::GUID.new(0xeb0fe175_u32, 0x1a3a_u16, 0x11d0_u16, StaticArray[0x89_u8, 0xb3_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0x90_u8, 0xac_u8])
     def query_interface(this : IDeskBarClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24753,7 +24925,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("e8025004-1c42-11d2-be2c-00a0c9a83da1")]
   record IColumnProvider, lpVtbl : IColumnProviderVtbl* do
     GUID = LibC::GUID.new(0xe8025004_u32, 0x1c42_u16, 0x11d2_u16, StaticArray[0xbe_u8, 0x2c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa8_u8, 0x3d_u8, 0xa1_u8])
     def query_interface(this : IColumnProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24786,7 +24957,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("87d605e0-c511-11cf-89a9-00a0c9054129")]
   record IDocViewSite, lpVtbl : IDocViewSiteVtbl* do
     GUID = LibC::GUID.new(0x87d605e0_u32, 0xc511_u16, 0x11cf_u16, StaticArray[0x89_u8, 0xa9_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0x41_u8, 0x29_u8])
     def query_interface(this : IDocViewSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24813,7 +24983,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("4622ad16-ff23-11d0-8d34-00a0c90f2719")]
   record IInitializeObject, lpVtbl : IInitializeObjectVtbl* do
     GUID = LibC::GUID.new(0x4622ad16_u32, 0xff23_u16, 0x11d0_u16, StaticArray[0x8d_u8, 0x34_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xf_u8, 0x27_u8, 0x19_u8])
     def query_interface(this : IInitializeObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24843,7 +25012,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("596a9a94-013e-11d1-8d34-00a0c90f2719")]
   record IBanneredBar, lpVtbl : IBanneredBarVtbl* do
     GUID = LibC::GUID.new(0x596a9a94_u32, 0x13e_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0x34_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xf_u8, 0x27_u8, 0x19_u8])
     def query_interface(this : IBanneredBar*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24883,7 +25051,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("c46ca590-3c3f-11d2-bee6-0000f805ca57")]
   record IQueryAssociations, lpVtbl : IQueryAssociationsVtbl* do
     GUID = LibC::GUID.new(0xc46ca590_u32, 0x3c3f_u16, 0x11d2_u16, StaticArray[0xbe_u8, 0xe6_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x5_u8, 0xca_u8, 0x57_u8])
     def query_interface(this : IQueryAssociations*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24926,7 +25093,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("a3e14960-935f-11d1-b8b8-006008059382")]
   record IShellApp, lpVtbl : IShellAppVtbl* do
     GUID = LibC::GUID.new(0xa3e14960_u32, 0x935f_u16, 0x11d1_u16, StaticArray[0xb8_u8, 0xb8_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x5_u8, 0x93_u8, 0x82_u8])
     def query_interface(this : IShellApp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24972,7 +25138,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("1bc752e0-9046-11d1-b8b3-006008059382")]
   record IPublishedApp, lpVtbl : IPublishedAppVtbl* do
     GUID = LibC::GUID.new(0x1bc752e0_u32, 0x9046_u16, 0x11d1_u16, StaticArray[0xb8_u8, 0xb3_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x5_u8, 0x93_u8, 0x82_u8])
     def query_interface(this : IPublishedApp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25028,7 +25193,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("12b81347-1b3a-4a04-aa61-3f768b67fd7e")]
   record IPublishedApp2, lpVtbl : IPublishedApp2Vtbl* do
     GUID = LibC::GUID.new(0x12b81347_u32, 0x1b3a_u16, 0x4a04_u16, StaticArray[0xaa_u8, 0x61_u8, 0x3f_u8, 0x76_u8, 0x8b_u8, 0x67_u8, 0xfd_u8, 0x7e_u8])
     def query_interface(this : IPublishedApp2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25080,7 +25244,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("0b124f8c-91f0-11d1-b8b5-006008059382")]
   record IEnumPublishedApps, lpVtbl : IEnumPublishedAppsVtbl* do
     GUID = LibC::GUID.new(0xb124f8c_u32, 0x91f0_u16, 0x11d1_u16, StaticArray[0xb8_u8, 0xb5_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x5_u8, 0x93_u8, 0x82_u8])
     def query_interface(this : IEnumPublishedApps*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25113,7 +25276,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("07250a10-9cf9-11d1-9076-006008059382")]
   record IAppPublisher, lpVtbl : IAppPublisherVtbl* do
     GUID = LibC::GUID.new(0x7250a10_u32, 0x9cf9_u16, 0x11d1_u16, StaticArray[0x90_u8, 0x76_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x5_u8, 0x93_u8, 0x82_u8])
     def query_interface(this : IAppPublisher*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25165,7 +25327,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("63913a93-40c1-481a-818d-4072ff8c70cc")]
   record ICredentialProviderCredential, lpVtbl : ICredentialProviderCredentialVtbl* do
     GUID = LibC::GUID.new(0x63913a93_u32, 0x40c1_u16, 0x481a_u16, StaticArray[0x81_u8, 0x8d_u8, 0x40_u8, 0x72_u8, 0xff_u8, 0x8c_u8, 0x70_u8, 0xcc_u8])
     def query_interface(this : ICredentialProviderCredential*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25241,7 +25402,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("9090be5b-502b-41fb-bccc-0049a6c7254b")]
   record IQueryContinueWithStatus, lpVtbl : IQueryContinueWithStatusVtbl* do
     GUID = LibC::GUID.new(0x9090be5b_u32, 0x502b_u16, 0x41fb_u16, StaticArray[0xbc_u8, 0xcc_u8, 0x0_u8, 0x49_u8, 0xa6_u8, 0xc7_u8, 0x25_u8, 0x4b_u8])
     def query_interface(this : IQueryContinueWithStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25289,7 +25449,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("9387928b-ac75-4bf9-8ab2-2b93c4a55290")]
   record IConnectableCredentialProviderCredential, lpVtbl : IConnectableCredentialProviderCredentialVtbl* do
     GUID = LibC::GUID.new(0x9387928b_u32, 0xac75_u16, 0x4bf9_u16, StaticArray[0x8a_u8, 0xb2_u8, 0x2b_u8, 0x93_u8, 0xc4_u8, 0xa5_u8, 0x52_u8, 0x90_u8])
     def query_interface(this : IConnectableCredentialProviderCredential*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25379,7 +25538,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("fa6fa76b-66b7-4b11-95f1-86171118e816")]
   record ICredentialProviderCredentialEvents, lpVtbl : ICredentialProviderCredentialEventsVtbl* do
     GUID = LibC::GUID.new(0xfa6fa76b_u32, 0x66b7_u16, 0x4b11_u16, StaticArray[0x95_u8, 0xf1_u8, 0x86_u8, 0x17_u8, 0x11_u8, 0x18_u8, 0xe8_u8, 0x16_u8])
     def query_interface(this : ICredentialProviderCredentialEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25440,7 +25598,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("d27c3481-5a1c-45b2-8aaa-c20ebbe8229e")]
   record ICredentialProvider, lpVtbl : ICredentialProviderVtbl* do
     GUID = LibC::GUID.new(0xd27c3481_u32, 0x5a1c_u16, 0x45b2_u16, StaticArray[0x8a_u8, 0xaa_u8, 0xc2_u8, 0xe_u8, 0xbb_u8, 0xe8_u8, 0x22_u8, 0x9e_u8])
     def query_interface(this : ICredentialProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25488,7 +25645,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("34201e5a-a787-41a3-a5a4-bd6dcf2a854e")]
   record ICredentialProviderEvents, lpVtbl : ICredentialProviderEventsVtbl* do
     GUID = LibC::GUID.new(0x34201e5a_u32, 0xa787_u16, 0x41a3_u16, StaticArray[0xa5_u8, 0xa4_u8, 0xbd_u8, 0x6d_u8, 0xcf_u8, 0x2a_u8, 0x85_u8, 0x4e_u8])
     def query_interface(this : ICredentialProviderEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25516,7 +25672,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("a5da53f9-d475-4080-a120-910c4a739880")]
   record ICredentialProviderFilter, lpVtbl : ICredentialProviderFilterVtbl* do
     GUID = LibC::GUID.new(0xa5da53f9_u32, 0xd475_u16, 0x4080_u16, StaticArray[0xa1_u8, 0x20_u8, 0x91_u8, 0xc_u8, 0x4a_u8, 0x73_u8, 0x98_u8, 0x80_u8])
     def query_interface(this : ICredentialProviderFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25563,7 +25718,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("fd672c54-40ea-4d6e-9b49-cfb1a7507bd7")]
   record ICredentialProviderCredential2, lpVtbl : ICredentialProviderCredential2Vtbl* do
     GUID = LibC::GUID.new(0xfd672c54_u32, 0x40ea_u16, 0x4d6e_u16, StaticArray[0x9b_u8, 0x49_u8, 0xcf_u8, 0xb1_u8, 0xa7_u8, 0x50_u8, 0x7b_u8, 0xd7_u8])
     def query_interface(this : ICredentialProviderCredential2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25641,7 +25795,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("dbc6fb30-c843-49e3-a645-573e6f39446a")]
   record ICredentialProviderCredentialWithFieldOptions, lpVtbl : ICredentialProviderCredentialWithFieldOptionsVtbl* do
     GUID = LibC::GUID.new(0xdbc6fb30_u32, 0xc843_u16, 0x49e3_u16, StaticArray[0xa6_u8, 0x45_u8, 0x57_u8, 0x3e_u8, 0x6f_u8, 0x39_u8, 0x44_u8, 0x6a_u8])
     def query_interface(this : ICredentialProviderCredentialWithFieldOptions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25680,7 +25833,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("b53c00b6-9922-4b78-b1f4-ddfe774dc39b")]
   record ICredentialProviderCredentialEvents2, lpVtbl : ICredentialProviderCredentialEvents2Vtbl* do
     GUID = LibC::GUID.new(0xb53c00b6_u32, 0x9922_u16, 0x4b78_u16, StaticArray[0xb1_u8, 0xf4_u8, 0xdd_u8, 0xfe_u8, 0x77_u8, 0x4d_u8, 0xc3_u8, 0x9b_u8])
     def query_interface(this : ICredentialProviderCredentialEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25746,7 +25898,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("13793285-3ea6-40fd-b420-15f47da41fbb")]
   record ICredentialProviderUser, lpVtbl : ICredentialProviderUserVtbl* do
     GUID = LibC::GUID.new(0x13793285_u32, 0x3ea6_u16, 0x40fd_u16, StaticArray[0xb4_u8, 0x20_u8, 0x15_u8, 0xf4_u8, 0x7d_u8, 0xa4_u8, 0x1f_u8, 0xbb_u8])
     def query_interface(this : ICredentialProviderUser*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25785,7 +25936,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("90c119ae-0f18-4520-a1f1-114366a40fe8")]
   record ICredentialProviderUserArray, lpVtbl : ICredentialProviderUserArrayVtbl* do
     GUID = LibC::GUID.new(0x90c119ae_u32, 0xf18_u16, 0x4520_u16, StaticArray[0xa1_u8, 0xf1_u8, 0x11_u8, 0x43_u8, 0x66_u8, 0xa4_u8, 0xf_u8, 0xe8_u8])
     def query_interface(this : ICredentialProviderUserArray*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25821,7 +25971,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("095c1484-1c0c-4388-9c6d-500e61bf84bd")]
   record ICredentialProviderSetUserArray, lpVtbl : ICredentialProviderSetUserArrayVtbl* do
     GUID = LibC::GUID.new(0x95c1484_u32, 0x1c0c_u16, 0x4388_u16, StaticArray[0x9c_u8, 0x6d_u8, 0x50_u8, 0xe_u8, 0x61_u8, 0xbf_u8, 0x84_u8, 0xbd_u8])
     def query_interface(this : ICredentialProviderSetUserArray*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25849,7 +25998,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("a7f337a3-d20b-45cb-9ed7-87d094ca5045")]
   record ISyncMgrHandlerCollection, lpVtbl : ISyncMgrHandlerCollectionVtbl* do
     GUID = LibC::GUID.new(0xa7f337a3_u32, 0xd20b_u16, 0x45cb_u16, StaticArray[0x9e_u8, 0xd7_u8, 0x87_u8, 0xd0_u8, 0x94_u8, 0xca_u8, 0x50_u8, 0x45_u8])
     def query_interface(this : ISyncMgrHandlerCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25886,7 +26034,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("04ec2e43-ac77-49f9-9b98-0307ef7a72a2")]
   record ISyncMgrHandler, lpVtbl : ISyncMgrHandlerVtbl* do
     GUID = LibC::GUID.new(0x4ec2e43_u32, 0xac77_u16, 0x49f9_u16, StaticArray[0x9b_u8, 0x98_u8, 0x3_u8, 0x7_u8, 0xef_u8, 0x7a_u8, 0x72_u8, 0xa2_u8])
     def query_interface(this : ISyncMgrHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25940,7 +26087,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("4ff1d798-ecf7-4524-aa81-1e362a0aef3a")]
   record ISyncMgrHandlerInfo, lpVtbl : ISyncMgrHandlerInfoVtbl* do
     GUID = LibC::GUID.new(0x4ff1d798_u32, 0xecf7_u16, 0x4524_u16, StaticArray[0xaa_u8, 0x81_u8, 0x1e_u8, 0x36_u8, 0x2a_u8, 0xa_u8, 0xef_u8, 0x3a_u8])
     def query_interface(this : ISyncMgrHandlerInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25987,7 +26133,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("90701133-be32-4129-a65c-99e616cafff4")]
   record ISyncMgrSyncItemContainer, lpVtbl : ISyncMgrSyncItemContainerVtbl* do
     GUID = LibC::GUID.new(0x90701133_u32, 0xbe32_u16, 0x4129_u16, StaticArray[0xa6_u8, 0x5c_u8, 0x99_u8, 0xe6_u8, 0x16_u8, 0xca_u8, 0xff_u8, 0xf4_u8])
     def query_interface(this : ISyncMgrSyncItemContainer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26027,7 +26172,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("b20b24ce-2593-4f04-bd8b-7ad6c45051cd")]
   record ISyncMgrSyncItem, lpVtbl : ISyncMgrSyncItemVtbl* do
     GUID = LibC::GUID.new(0xb20b24ce_u32, 0x2593_u16, 0x4f04_u16, StaticArray[0xbd_u8, 0x8b_u8, 0x7a_u8, 0xd6_u8, 0xc4_u8, 0x50_u8, 0x51_u8, 0xcd_u8])
     def query_interface(this : ISyncMgrSyncItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26079,7 +26223,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("e7fd9502-be0c-4464-90a1-2b5277031232")]
   record ISyncMgrSyncItemInfo, lpVtbl : ISyncMgrSyncItemInfoVtbl* do
     GUID = LibC::GUID.new(0xe7fd9502_u32, 0xbe0c_u16, 0x4464_u16, StaticArray[0x90_u8, 0xa1_u8, 0x2b_u8, 0x52_u8, 0x77_u8, 0x3_u8, 0x12_u8, 0x32_u8])
     def query_interface(this : ISyncMgrSyncItemInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26121,7 +26264,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("54b3abf3-f085-4181-b546-e29c403c726b")]
   record IEnumSyncMgrSyncItems, lpVtbl : IEnumSyncMgrSyncItemsVtbl* do
     GUID = LibC::GUID.new(0x54b3abf3_u32, 0xf085_u16, 0x4181_u16, StaticArray[0xb5_u8, 0x46_u8, 0xe2_u8, 0x9c_u8, 0x40_u8, 0x3c_u8, 0x72_u8, 0x6b_u8])
     def query_interface(this : IEnumSyncMgrSyncItems*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26157,7 +26299,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("17f48517-f305-4321-a08d-b25a834918fd")]
   record ISyncMgrSessionCreator, lpVtbl : ISyncMgrSessionCreatorVtbl* do
     GUID = LibC::GUID.new(0x17f48517_u32, 0xf305_u16, 0x4321_u16, StaticArray[0xa0_u8, 0x8d_u8, 0xb2_u8, 0x5a_u8, 0x83_u8, 0x49_u8, 0x18_u8, 0xfd_u8])
     def query_interface(this : ISyncMgrSessionCreator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26193,7 +26334,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("884ccd87-b139-4937-a4ba-4f8e19513fbe")]
   record ISyncMgrSyncCallback, lpVtbl : ISyncMgrSyncCallbackVtbl* do
     GUID = LibC::GUID.new(0x884ccd87_u32, 0xb139_u16, 0x4937_u16, StaticArray[0xa4_u8, 0xba_u8, 0x4f_u8, 0x8e_u8, 0x19_u8, 0x51_u8, 0x3f_u8, 0xbe_u8])
     def query_interface(this : ISyncMgrSyncCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26247,7 +26387,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("fc7cfa47-dfe1-45b5-a049-8cfd82bec271")]
   record ISyncMgrUIOperation, lpVtbl : ISyncMgrUIOperationVtbl* do
     GUID = LibC::GUID.new(0xfc7cfa47_u32, 0xdfe1_u16, 0x45b5_u16, StaticArray[0xa0_u8, 0x49_u8, 0x8c_u8, 0xfd_u8, 0x82_u8, 0xbe_u8, 0xc2_u8, 0x71_u8])
     def query_interface(this : ISyncMgrUIOperation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26275,7 +26414,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("64522e52-848b-4015-89ce-5a36f00b94ff")]
   record ISyncMgrEventLinkUIOperation, lpVtbl : ISyncMgrEventLinkUIOperationVtbl* do
     GUID = LibC::GUID.new(0x64522e52_u32, 0x848b_u16, 0x4015_u16, StaticArray[0x89_u8, 0xce_u8, 0x5a_u8, 0x36_u8, 0xf0_u8, 0xb_u8, 0x94_u8, 0xff_u8])
     def query_interface(this : ISyncMgrEventLinkUIOperation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26306,7 +26444,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("459a6c84-21d2-4ddc-8a53-f023a46066f2")]
   record ISyncMgrScheduleWizardUIOperation, lpVtbl : ISyncMgrScheduleWizardUIOperationVtbl* do
     GUID = LibC::GUID.new(0x459a6c84_u32, 0x21d2_u16, 0x4ddc_u16, StaticArray[0x8a_u8, 0x53_u8, 0xf0_u8, 0x23_u8, 0xa4_u8, 0x60_u8, 0x66_u8, 0xf2_u8])
     def query_interface(this : ISyncMgrScheduleWizardUIOperation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26336,7 +26473,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("2b90f17e-5a3e-4b33-bb7f-1bc48056b94d")]
   record ISyncMgrSyncResult, lpVtbl : ISyncMgrSyncResultVtbl* do
     GUID = LibC::GUID.new(0x2b90f17e_u32, 0x5a3e_u16, 0x4b33_u16, StaticArray[0xbb_u8, 0x7f_u8, 0x1b_u8, 0xc4_u8, 0x80_u8, 0x56_u8, 0xb9_u8, 0x4d_u8])
     def query_interface(this : ISyncMgrSyncResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26377,7 +26513,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("9b63616c-36b2-46bc-959f-c1593952d19b")]
   record ISyncMgrControl, lpVtbl : ISyncMgrControlVtbl* do
     GUID = LibC::GUID.new(0x9b63616c_u32, 0x36b2_u16, 0x46bc_u16, StaticArray[0x95_u8, 0x9f_u8, 0xc1_u8, 0x59_u8, 0x39_u8, 0x52_u8, 0xd1_u8, 0x9b_u8])
     def query_interface(this : ISyncMgrControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26449,7 +26584,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("37e412f9-016e-44c2-81ff-db3add774266")]
   record ISyncMgrEventStore, lpVtbl : ISyncMgrEventStoreVtbl* do
     GUID = LibC::GUID.new(0x37e412f9_u32, 0x16e_u16, 0x44c2_u16, StaticArray[0x81_u8, 0xff_u8, 0xdb_u8, 0x3a_u8, 0xdd_u8, 0x77_u8, 0x42_u8, 0x66_u8])
     def query_interface(this : ISyncMgrEventStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26495,7 +26629,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("fee0ef8b-46bd-4db4-b7e6-ff2c687313bc")]
   record ISyncMgrEvent, lpVtbl : ISyncMgrEventVtbl* do
     GUID = LibC::GUID.new(0xfee0ef8b_u32, 0x46bd_u16, 0x4db4_u16, StaticArray[0xb7_u8, 0xe6_u8, 0xff_u8, 0x2c_u8, 0x68_u8, 0x73_u8, 0x13_u8, 0xbc_u8])
     def query_interface(this : ISyncMgrEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26555,7 +26688,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("c81a1d4e-8cf7-4683-80e0-bcae88d677b6")]
   record IEnumSyncMgrEvents, lpVtbl : IEnumSyncMgrEventsVtbl* do
     GUID = LibC::GUID.new(0xc81a1d4e_u32, 0x8cf7_u16, 0x4683_u16, StaticArray[0x80_u8, 0xe0_u8, 0xbc_u8, 0xae_u8, 0x88_u8, 0xd6_u8, 0x77_u8, 0xb6_u8])
     def query_interface(this : IEnumSyncMgrEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26594,7 +26726,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("cf8fc579-c396-4774-85f1-d908a831156e")]
   record ISyncMgrConflictStore, lpVtbl : ISyncMgrConflictStoreVtbl* do
     GUID = LibC::GUID.new(0xcf8fc579_u32, 0xc396_u16, 0x4774_u16, StaticArray[0x85_u8, 0xf1_u8, 0xd9_u8, 0x8_u8, 0xa8_u8, 0x31_u8, 0x15_u8, 0x6e_u8])
     def query_interface(this : ISyncMgrConflictStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26633,7 +26764,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("82705914-dda3-4893-ba99-49de6c8c8036")]
   record IEnumSyncMgrConflict, lpVtbl : IEnumSyncMgrConflictVtbl* do
     GUID = LibC::GUID.new(0x82705914_u32, 0xdda3_u16, 0x4893_u16, StaticArray[0xba_u8, 0x99_u8, 0x49_u8, 0xde_u8, 0x6c_u8, 0x8c_u8, 0x80_u8, 0x36_u8])
     def query_interface(this : IEnumSyncMgrConflict*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26673,7 +26803,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("9c204249-c443-4ba4-85ed-c972681db137")]
   record ISyncMgrConflict, lpVtbl : ISyncMgrConflictVtbl* do
     GUID = LibC::GUID.new(0x9c204249_u32, 0xc443_u16, 0x4ba4_u16, StaticArray[0x85_u8, 0xed_u8, 0xc9_u8, 0x72_u8, 0x68_u8, 0x1d_u8, 0xb1_u8, 0x37_u8])
     def query_interface(this : ISyncMgrConflict*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26716,7 +26845,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("40a3d052-8bff-4c4b-a338-d4a395700de9")]
   record ISyncMgrResolutionHandler, lpVtbl : ISyncMgrResolutionHandlerVtbl* do
     GUID = LibC::GUID.new(0x40a3d052_u32, 0x8bff_u16, 0x4c4b_u16, StaticArray[0xa3_u8, 0x38_u8, 0xd4_u8, 0xa3_u8, 0x95_u8, 0x70_u8, 0xd_u8, 0xe9_u8])
     def query_interface(this : ISyncMgrResolutionHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26755,7 +26883,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("0b4f5353-fd2b-42cd-8763-4779f2d508a3")]
   record ISyncMgrConflictPresenter, lpVtbl : ISyncMgrConflictPresenterVtbl* do
     GUID = LibC::GUID.new(0xb4f5353_u32, 0xfd2b_u16, 0x42cd_u16, StaticArray[0x87_u8, 0x63_u8, 0x47_u8, 0x79_u8, 0xf2_u8, 0xd5_u8, 0x8_u8, 0xa3_u8])
     def query_interface(this : ISyncMgrConflictPresenter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26789,7 +26916,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("c405a219-25a2-442e-8743-b845a2cee93f")]
   record ISyncMgrConflictResolveInfo, lpVtbl : ISyncMgrConflictResolveInfoVtbl* do
     GUID = LibC::GUID.new(0xc405a219_u32, 0x25a2_u16, 0x442e_u16, StaticArray[0x87_u8, 0x43_u8, 0xb8_u8, 0x45_u8, 0xa2_u8, 0xce_u8, 0xe9_u8, 0x3f_u8])
     def query_interface(this : ISyncMgrConflictResolveInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26837,7 +26963,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("59287f5e-bc81-4fca-a7f1-e5a8ecdb1d69")]
   record ISyncMgrConflictFolder, lpVtbl : ISyncMgrConflictFolderVtbl* do
     GUID = LibC::GUID.new(0x59287f5e_u32, 0xbc81_u16, 0x4fca_u16, StaticArray[0xa7_u8, 0xf1_u8, 0xe5_u8, 0xa8_u8, 0xec_u8, 0xdb_u8, 0x1d_u8, 0x69_u8])
     def query_interface(this : ISyncMgrConflictFolder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26865,7 +26990,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("9c7ead52-8023-4936-a4db-d2a9a99e436a")]
   record ISyncMgrConflictItems, lpVtbl : ISyncMgrConflictItemsVtbl* do
     GUID = LibC::GUID.new(0x9c7ead52_u32, 0x8023_u16, 0x4936_u16, StaticArray[0xa4_u8, 0xdb_u8, 0xd2_u8, 0xa9_u8, 0xa9_u8, 0x9e_u8, 0x43_u8, 0x6a_u8])
     def query_interface(this : ISyncMgrConflictItems*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26896,7 +27020,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("458725b9-129d-4135-a998-9ceafec27007")]
   record ISyncMgrConflictResolutionItems, lpVtbl : ISyncMgrConflictResolutionItemsVtbl* do
     GUID = LibC::GUID.new(0x458725b9_u32, 0x129d_u16, 0x4135_u16, StaticArray[0xa9_u8, 0x98_u8, 0x9c_u8, 0xea_u8, 0xfe_u8, 0xc2_u8, 0x70_u8, 0x7_u8])
     def query_interface(this : ISyncMgrConflictResolutionItems*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26926,7 +27049,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("41c81592-514c-48bd-a22e-e6af638521a6")]
   record IInputPanelConfiguration, lpVtbl : IInputPanelConfigurationVtbl* do
     GUID = LibC::GUID.new(0x41c81592_u32, 0x514c_u16, 0x48bd_u16, StaticArray[0xa2_u8, 0x2e_u8, 0xe6_u8, 0xaf_u8, 0x63_u8, 0x85_u8, 0x21_u8, 0xa6_u8])
     def query_interface(this : IInputPanelConfiguration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26953,7 +27075,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("a213f136-3b45-4362-a332-efb6547cd432")]
   record IInputPanelInvocationConfiguration, lpVtbl : IInputPanelInvocationConfigurationVtbl* do
     GUID = LibC::GUID.new(0xa213f136_u32, 0x3b45_u16, 0x4362_u16, StaticArray[0xa3_u8, 0x32_u8, 0xef_u8, 0xb6_u8, 0x54_u8, 0x7c_u8, 0xd4_u8, 0x32_u8])
     def query_interface(this : IInputPanelInvocationConfiguration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26984,7 +27105,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("091162a4-bc96-411f-aae8-c5122cd03363")]
   record ISharedBitmap, lpVtbl : ISharedBitmapVtbl* do
     GUID = LibC::GUID.new(0x91162a4_u32, 0xbc96_u16, 0x411f_u16, StaticArray[0xaa_u8, 0xe8_u8, 0xc5_u8, 0x12_u8, 0x2c_u8, 0xd0_u8, 0x33_u8, 0x63_u8])
     def query_interface(this : ISharedBitmap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27024,7 +27144,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("f676c15d-596a-4ce2-8234-33996f445db1")]
   record IThumbnailCache, lpVtbl : IThumbnailCacheVtbl* do
     GUID = LibC::GUID.new(0xf676c15d_u32, 0x596a_u16, 0x4ce2_u16, StaticArray[0x82_u8, 0x34_u8, 0x33_u8, 0x99_u8, 0x6f_u8, 0x44_u8, 0x5d_u8, 0xb1_u8])
     def query_interface(this : IThumbnailCache*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27054,7 +27173,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("e357fccd-a995-4576-b01f-234630154e96")]
   record IThumbnailProvider, lpVtbl : IThumbnailProviderVtbl* do
     GUID = LibC::GUID.new(0xe357fccd_u32, 0xa995_u16, 0x4576_u16, StaticArray[0xb0_u8, 0x1f_u8, 0x23_u8, 0x46_u8, 0x30_u8, 0x15_u8, 0x4e_u8, 0x96_u8])
     def query_interface(this : IThumbnailProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27081,7 +27199,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("f4376f00-bef5-4d45-80f3-1e023bbf1209")]
   record IThumbnailSettings, lpVtbl : IThumbnailSettingsVtbl* do
     GUID = LibC::GUID.new(0xf4376f00_u32, 0xbef5_u16, 0x4d45_u16, StaticArray[0x80_u8, 0xf3_u8, 0x1e_u8, 0x2_u8, 0x3b_u8, 0xbf_u8, 0x12_u8, 0x9_u8])
     def query_interface(this : IThumbnailSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27108,7 +27225,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("0f03f8fe-2b26-46f0-965a-212aa8d66b76")]
   record IThumbnailCachePrimer, lpVtbl : IThumbnailCachePrimerVtbl* do
     GUID = LibC::GUID.new(0xf03f8fe_u32, 0x2b26_u16, 0x46f0_u16, StaticArray[0x96_u8, 0x5a_u8, 0x21_u8, 0x2a_u8, 0xa8_u8, 0xd6_u8, 0x6b_u8, 0x76_u8])
     def query_interface(this : IThumbnailCachePrimer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27138,7 +27254,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("9be8ed5c-edab-4d75-90f3-bd5bdbb21c82")]
   record IShellImageDataFactory, lpVtbl : IShellImageDataFactoryVtbl* do
     GUID = LibC::GUID.new(0x9be8ed5c_u32, 0xedab_u16, 0x4d75_u16, StaticArray[0x90_u8, 0xf3_u8, 0xbd_u8, 0x5b_u8, 0xdb_u8, 0xb2_u8, 0x1c_u8, 0x82_u8])
     def query_interface(this : IShellImageDataFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27203,7 +27318,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("bfdeec12-8040-4403-a5ea-9e07dafcf530")]
   record IShellImageData, lpVtbl : IShellImageDataVtbl* do
     GUID = LibC::GUID.new(0xbfdeec12_u32, 0x8040_u16, 0x4403_u16, StaticArray[0xa5_u8, 0xea_u8, 0x9e_u8, 0x7_u8, 0xda_u8, 0xfc_u8, 0xf5_u8, 0x30_u8])
     def query_interface(this : IShellImageData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27317,7 +27431,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("53fb8e58-50c0-4003-b4aa-0c8df28e7f3a")]
   record IShellImageDataAbort, lpVtbl : IShellImageDataAbortVtbl* do
     GUID = LibC::GUID.new(0x53fb8e58_u32, 0x50c0_u16, 0x4003_u16, StaticArray[0xb4_u8, 0xaa_u8, 0xc_u8, 0x8d_u8, 0xf2_u8, 0x8e_u8, 0x7f_u8, 0x3a_u8])
     def query_interface(this : IShellImageDataAbort*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27345,7 +27458,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("301dfbe5-524c-4b0f-8b2d-21c40b3a2988")]
   record IStorageProviderPropertyHandler, lpVtbl : IStorageProviderPropertyHandlerVtbl* do
     GUID = LibC::GUID.new(0x301dfbe5_u32, 0x524c_u16, 0x4b0f_u16, StaticArray[0x8b_u8, 0x2d_u8, 0x21_u8, 0xc4_u8, 0xb_u8, 0x3a_u8, 0x29_u8, 0x88_u8])
     def query_interface(this : IStorageProviderPropertyHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27377,7 +27489,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("162c6fb5-44d3-435b-903d-e613fa093fb5")]
   record IStorageProviderHandler, lpVtbl : IStorageProviderHandlerVtbl* do
     GUID = LibC::GUID.new(0x162c6fb5_u32, 0x44d3_u16, 0x435b_u16, StaticArray[0x90_u8, 0x3d_u8, 0xe6_u8, 0x13_u8, 0xfa_u8, 0x9_u8, 0x3f_u8, 0xb5_u8])
     def query_interface(this : IStorageProviderHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27418,7 +27529,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("6295df41-35ee-11d1-8707-00c04fd93327")]
   record ISyncMgrSynchronizeCallback, lpVtbl : ISyncMgrSynchronizeCallbackVtbl* do
     GUID = LibC::GUID.new(0x6295df41_u32, 0x35ee_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x33_u8, 0x27_u8])
     def query_interface(this : ISyncMgrSynchronizeCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27472,7 +27582,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("6295df2a-35ee-11d1-8707-00c04fd93327")]
   record ISyncMgrEnumItems, lpVtbl : ISyncMgrEnumItemsVtbl* do
     GUID = LibC::GUID.new(0x6295df2a_u32, 0x35ee_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x33_u8, 0x27_u8])
     def query_interface(this : ISyncMgrEnumItems*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27517,7 +27626,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("6295df40-35ee-11d1-8707-00c04fd93327")]
   record ISyncMgrSynchronize, lpVtbl : ISyncMgrSynchronizeVtbl* do
     GUID = LibC::GUID.new(0x6295df40_u32, 0x35ee_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x33_u8, 0x27_u8])
     def query_interface(this : ISyncMgrSynchronize*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27572,7 +27680,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("6295df2c-35ee-11d1-8707-00c04fd93327")]
   record ISyncMgrSynchronizeInvoke, lpVtbl : ISyncMgrSynchronizeInvokeVtbl* do
     GUID = LibC::GUID.new(0x6295df2c_u32, 0x35ee_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x33_u8, 0x27_u8])
     def query_interface(this : ISyncMgrSynchronizeInvoke*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27604,7 +27711,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("6295df42-35ee-11d1-8707-00c04fd93327")]
   record ISyncMgrRegister, lpVtbl : ISyncMgrRegisterVtbl* do
     GUID = LibC::GUID.new(0x6295df42_u32, 0x35ee_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x33_u8, 0x27_u8])
     def query_interface(this : ISyncMgrRegister*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27638,7 +27744,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("90e11430-9569-41d8-ae75-6d4d2ae7cca0")]
   record IThumbnailStreamCache, lpVtbl : IThumbnailStreamCacheVtbl* do
     GUID = LibC::GUID.new(0x90e11430_u32, 0x9569_u16, 0x41d8_u16, StaticArray[0xae_u8, 0x75_u8, 0x6d_u8, 0x4d_u8, 0x2a_u8, 0xe7_u8, 0xcc_u8, 0xa0_u8])
     def query_interface(this : IThumbnailStreamCache*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27669,7 +27774,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("7ebfdd87-ad18-11d3-a4c5-00c04f72d6b8")]
   record ITravelLogEntry, lpVtbl : ITravelLogEntryVtbl* do
     GUID = LibC::GUID.new(0x7ebfdd87_u32, 0xad18_u16, 0x11d3_u16, StaticArray[0xa4_u8, 0xc5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd6_u8, 0xb8_u8])
     def query_interface(this : ITravelLogEntry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27701,7 +27805,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("241c033e-e659-43da-aa4d-4086dbc4758d")]
   record ITravelLogClient, lpVtbl : ITravelLogClientVtbl* do
     GUID = LibC::GUID.new(0x241c033e_u32, 0xe659_u16, 0x43da_u16, StaticArray[0xaa_u8, 0x4d_u8, 0x40_u8, 0x86_u8, 0xdb_u8, 0xc4_u8, 0x75_u8, 0x8d_u8])
     def query_interface(this : ITravelLogClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27737,7 +27840,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("7ebfdd85-ad18-11d3-a4c5-00c04f72d6b8")]
   record IEnumTravelLogEntry, lpVtbl : IEnumTravelLogEntryVtbl* do
     GUID = LibC::GUID.new(0x7ebfdd85_u32, 0xad18_u16, 0x11d3_u16, StaticArray[0xa4_u8, 0xc5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd6_u8, 0xb8_u8])
     def query_interface(this : IEnumTravelLogEntry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27779,7 +27881,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("7ebfdd80-ad18-11d3-a4c5-00c04f72d6b8")]
   record ITravelLogStg, lpVtbl : ITravelLogStgVtbl* do
     GUID = LibC::GUID.new(0x7ebfdd80_u32, 0xad18_u16, 0x11d3_u16, StaticArray[0xa4_u8, 0xc5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd6_u8, 0xb8_u8])
     def query_interface(this : ITravelLogStg*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27837,7 +27938,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("79eac9c3-baf9-11ce-8c82-00aa004ba90b")]
   record IHlink, lpVtbl : IHlinkVtbl* do
     GUID = LibC::GUID.new(0x79eac9c3_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : IHlink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27906,7 +28006,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("79eac9c2-baf9-11ce-8c82-00aa004ba90b")]
   record IHlinkSite, lpVtbl : IHlinkSiteVtbl* do
     GUID = LibC::GUID.new(0x79eac9c2_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : IHlinkSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27946,7 +28045,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("79eac9c4-baf9-11ce-8c82-00aa004ba90b")]
   record IHlinkTarget, lpVtbl : IHlinkTargetVtbl* do
     GUID = LibC::GUID.new(0x79eac9c4_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : IHlinkTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27989,7 +28087,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("79eac9c5-baf9-11ce-8c82-00aa004ba90b")]
   record IHlinkFrame, lpVtbl : IHlinkFrameVtbl* do
     GUID = LibC::GUID.new(0x79eac9c5_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : IHlinkFrame*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -28031,7 +28128,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("79eac9c6-baf9-11ce-8c82-00aa004ba90b")]
   record IEnumHLITEM, lpVtbl : IEnumHLITEMVtbl* do
     GUID = LibC::GUID.new(0x79eac9c6_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : IEnumHLITEM*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -28080,7 +28176,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("79eac9c7-baf9-11ce-8c82-00aa004ba90b")]
   record IHlinkBrowseContext, lpVtbl : IHlinkBrowseContextVtbl* do
     GUID = LibC::GUID.new(0x79eac9c7_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : IHlinkBrowseContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -28147,7 +28242,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("79eac9cb-baf9-11ce-8c82-00aa004ba90b")]
   record IExtensionServices, lpVtbl : IExtensionServicesVtbl* do
     GUID = LibC::GUID.new(0x79eac9cb_u32, 0xbaf9_u16, 0x11ce_u16, StaticArray[0x8c_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xa9_u8, 0xb_u8])
     def query_interface(this : IExtensionServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -28179,7 +28273,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("f46edb3b-bc2f-11d0-9412-00aa00a3ebd3")]
   record ITravelEntry, lpVtbl : ITravelEntryVtbl* do
     GUID = LibC::GUID.new(0xf46edb3b_u32, 0xbc2f_u16, 0x11d0_u16, StaticArray[0x94_u8, 0x12_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa3_u8, 0xeb_u8, 0xd3_u8])
     def query_interface(this : ITravelEntry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -28222,7 +28315,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("66a9cb08-4802-11d2-a561-00a0c92dbfe8")]
   record ITravelLog, lpVtbl : ITravelLogVtbl* do
     GUID = LibC::GUID.new(0x66a9cb08_u32, 0x4802_u16, 0x11d2_u16, StaticArray[0xa5_u8, 0x61_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x2d_u8, 0xbf_u8, 0xe8_u8])
     def query_interface(this : ITravelLog*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -28331,7 +28423,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("2f0dd58c-f789-4f14-99fb-9293b3c9c212")]
   record IExpDispSupportXP, lpVtbl : IExpDispSupportXPVtbl* do
     GUID = LibC::GUID.new(0x2f0dd58c_u32, 0xf789_u16, 0x4f14_u16, StaticArray[0x99_u8, 0xfb_u8, 0x92_u8, 0x93_u8, 0xb3_u8, 0xc9_u8, 0xc2_u8, 0x12_u8])
     def query_interface(this : IExpDispSupportXP*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -28366,7 +28457,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("0d7d1d00-6fc0-11d0-a974-00c04fd705a2")]
   record IExpDispSupport, lpVtbl : IExpDispSupportVtbl* do
     GUID = LibC::GUID.new(0xd7d1d00_u32, 0x6fc0_u16, 0x11d0_u16, StaticArray[0xa9_u8, 0x74_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0x5_u8, 0xa2_u8])
     def query_interface(this : IExpDispSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -28428,7 +28518,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("02ba3b52-0547-11d1-b833-00c04fc9b31f")]
   record IBrowserService, lpVtbl : IBrowserServiceVtbl* do
     GUID = LibC::GUID.new(0x2ba3b52_u32, 0x547_u16, 0x11d1_u16, StaticArray[0xb8_u8, 0x33_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xb3_u8, 0x1f_u8])
     def query_interface(this : IBrowserService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -28542,7 +28631,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("5836fb00-8187-11cf-a12b-00aa004ae837")]
   record IShellService, lpVtbl : IShellServiceVtbl* do
     GUID = LibC::GUID.new(0x5836fb00_u32, 0x8187_u16, 0x11cf_u16, StaticArray[0xa1_u8, 0x2b_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xe8_u8, 0x37_u8])
     def query_interface(this : IShellService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -28660,7 +28748,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("68bd21cc-438b-11d2-a560-00a0c92dbfe8")]
   record IBrowserService2, lpVtbl : IBrowserService2Vtbl* do
     GUID = LibC::GUID.new(0x68bd21cc_u32, 0x438b_u16, 0x11d2_u16, StaticArray[0xa5_u8, 0x60_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x2d_u8, 0xbf_u8, 0xe8_u8])
     def query_interface(this : IBrowserService2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -29053,7 +29140,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("27d7ce21-762d-48f3-86f3-40e2fd3749c4")]
   record IBrowserService3, lpVtbl : IBrowserService3Vtbl* do
     GUID = LibC::GUID.new(0x27d7ce21_u32, 0x762d_u16, 0x48f3_u16, StaticArray[0x86_u8, 0xf3_u8, 0x40_u8, 0xe2_u8, 0xfd_u8, 0x37_u8, 0x49_u8, 0xc4_u8])
     def query_interface(this : IBrowserService3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -29455,7 +29541,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("639f1bff-e135-4096-abd8-e0f504d649a4")]
   record IBrowserService4, lpVtbl : IBrowserService4Vtbl* do
     GUID = LibC::GUID.new(0x639f1bff_u32, 0xe135_u16, 0x4096_u16, StaticArray[0xab_u8, 0xd8_u8, 0xe0_u8, 0xf5_u8, 0x4_u8, 0xd6_u8, 0x49_u8, 0xa4_u8])
     def query_interface(this : IBrowserService4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -29780,7 +29865,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("8278f932-2a3e-11d2-838f-00c04fd918d0")]
   record ITrackShellMenu, lpVtbl : ITrackShellMenuVtbl* do
     GUID = LibC::GUID.new(0x8278f932_u32, 0x2a3e_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x8f_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0xd0_u8])
     def query_interface(this : ITrackShellMenu*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -29837,7 +29921,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("bae86ddd-dc11-421c-b7ab-cc55d1d65c44")]
   record ITranscodeImage, lpVtbl : ITranscodeImageVtbl* do
     GUID = LibC::GUID.new(0xbae86ddd_u32, 0xdc11_u16, 0x421c_u16, StaticArray[0xb7_u8, 0xab_u8, 0xcc_u8, 0x55_u8, 0xd1_u8, 0xd6_u8, 0x5c_u8, 0x44_u8])
     def query_interface(this : ITranscodeImage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -29866,7 +29949,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("fbf23b80-e3f0-101b-8488-00aa003e56f8")]
   record IUniformResourceLocatorA, lpVtbl : IUniformResourceLocatorAVtbl* do
     GUID = LibC::GUID.new(0xfbf23b80_u32, 0xe3f0_u16, 0x101b_u16, StaticArray[0x84_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3e_u8, 0x56_u8, 0xf8_u8])
     def query_interface(this : IUniformResourceLocatorA*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -29901,7 +29983,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("cabb0da0-da57-11cf-9974-0020afd79762")]
   record IUniformResourceLocatorW, lpVtbl : IUniformResourceLocatorWVtbl* do
     GUID = LibC::GUID.new(0xcabb0da0_u32, 0xda57_u16, 0x11cf_u16, StaticArray[0x99_u8, 0x74_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xd7_u8, 0x97_u8, 0x62_u8])
     def query_interface(this : IUniformResourceLocatorW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -29934,7 +30015,6 @@ module Win32cr::UI::Shell
 
 
   @[Extern]
-  #@[Com("2af16ba9-2de5-4b75-82d9-01372afbffb4")]
   record IInputPaneAnimationCoordinator, lpVtbl : IInputPaneAnimationCoordinatorVtbl* do
     GUID = LibC::GUID.new(0x2af16ba9_u32, 0x2de5_u16, 0x4b75_u16, StaticArray[0x82_u8, 0xd9_u8, 0x1_u8, 0x37_u8, 0x2a_u8, 0xfb_u8, 0xff_u8, 0xb4_u8])
     def query_interface(this : IInputPaneAnimationCoordinator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -29958,14 +30038,8 @@ module Win32cr::UI::Shell
   @[Link("shell32")]
   @[Link("ole32")]
   @[Link("shdocvw")]
-  @[Link("api-ms-win-shcore-scaling-l1-1-0")]
-  @[Link("api-ms-win-shcore-scaling-l1-1-1")]
-  @[Link("api-ms-win-shcore-scaling-l1-1-2")]
   @[Link("shlwapi")]
   @[Link("hlink")]
-  @[Link("api-ms-win-core-path-l1-1-0")]
-  @[Link("api-ms-win-core-psm-appnotify-l1-1-0")]
-  @[Link("api-ms-win-core-psm-appnotify-l1-1-1")]
   lib C
     fun LoadUserProfileA(hToken : Win32cr::Foundation::HANDLE, lpProfileInfo : Win32cr::UI::Shell::PROFILEINFOA*) : Win32cr::Foundation::BOOL
 

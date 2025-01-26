@@ -12,37 +12,37 @@ module Win32cr::Media::Multimedia
   alias HDRVR = LibC::IntPtrT
   alias HIC = LibC::IntPtrT
   alias HVIDEO = LibC::IntPtrT
-  alias YIELDPROC = Proc(UInt32, UInt32, UInt32)*
+  alias YIELDPROC = Proc(UInt32, UInt32, UInt32)
 
-  alias DRIVERPROC = Proc(LibC::UIntPtrT, Win32cr::Media::Multimedia::HDRVR, UInt32, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LRESULT)*
+  alias DRIVERPROC = Proc(LibC::UIntPtrT, Win32cr::Media::Multimedia::HDRVR, UInt32, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LRESULT)
 
-  alias DRIVERMSGPROC = Proc(UInt32, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, UInt32)*
+  alias DRIVERMSGPROC = Proc(UInt32, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, UInt32)
 
-  alias LPMMIOPROC = Proc(Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LRESULT)*
+  alias LPMMIOPROC = Proc(Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LRESULT)
 
-  alias AVISAVECALLBACK = Proc(Int32, Win32cr::Foundation::BOOL)*
+  alias AVISAVECALLBACK = Proc(Int32, Win32cr::Foundation::BOOL)
 
-  alias CAPYIELDCALLBACK = Proc(Win32cr::Foundation::HWND, Win32cr::Foundation::LRESULT)*
+  alias CAPYIELDCALLBACK = Proc(Win32cr::Foundation::HWND, Win32cr::Foundation::LRESULT)
 
-  alias CAPSTATUSCALLBACKW = Proc(Win32cr::Foundation::HWND, Int32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::LRESULT)*
+  alias CAPSTATUSCALLBACKW = Proc(Win32cr::Foundation::HWND, Int32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::LRESULT)
 
-  alias CAPERRORCALLBACKW = Proc(Win32cr::Foundation::HWND, Int32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::LRESULT)*
+  alias CAPERRORCALLBACKW = Proc(Win32cr::Foundation::HWND, Int32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::LRESULT)
 
-  alias CAPSTATUSCALLBACKA = Proc(Win32cr::Foundation::HWND, Int32, Win32cr::Foundation::PSTR, Win32cr::Foundation::LRESULT)*
+  alias CAPSTATUSCALLBACKA = Proc(Win32cr::Foundation::HWND, Int32, Win32cr::Foundation::PSTR, Win32cr::Foundation::LRESULT)
 
-  alias CAPERRORCALLBACKA = Proc(Win32cr::Foundation::HWND, Int32, Win32cr::Foundation::PSTR, Win32cr::Foundation::LRESULT)*
+  alias CAPERRORCALLBACKA = Proc(Win32cr::Foundation::HWND, Int32, Win32cr::Foundation::PSTR, Win32cr::Foundation::LRESULT)
 
-  alias CAPVIDEOCALLBACK = Proc(Win32cr::Foundation::HWND, Win32cr::Media::Multimedia::VIDEOHDR*, Win32cr::Foundation::LRESULT)*
+  alias CAPVIDEOCALLBACK = Proc(Win32cr::Foundation::HWND, Win32cr::Media::Multimedia::VIDEOHDR*, Win32cr::Foundation::LRESULT)
 
-  alias CAPWAVECALLBACK = Proc(Win32cr::Foundation::HWND, Win32cr::Media::Audio::WAVEHDR*, Win32cr::Foundation::LRESULT)*
+  alias CAPWAVECALLBACK = Proc(Win32cr::Foundation::HWND, Win32cr::Media::Audio::WAVEHDR*, Win32cr::Foundation::LRESULT)
 
-  alias CAPCONTROLCALLBACK = Proc(Win32cr::Foundation::HWND, Int32, Win32cr::Foundation::LRESULT)*
+  alias CAPCONTROLCALLBACK = Proc(Win32cr::Foundation::HWND, Int32, Win32cr::Foundation::LRESULT)
 
-  alias LPTASKCALLBACK = Proc(LibC::UIntPtrT, Void)*
+  alias LPTASKCALLBACK = Proc(LibC::UIntPtrT, Void)
 
-  alias VFWWDMExtensionProc = Proc(Void*, Win32cr::UI::Controls::LPFNSVADDPROPSHEETPAGE, Win32cr::Foundation::LPARAM, UInt32)*
+  alias VFWWDMExtensionProc = Proc(Void*, Win32cr::UI::Controls::LPFNSVADDPROPSHEETPAGE, Win32cr::Foundation::LPARAM, UInt32)
 
-  alias LPFNEXTDEVIO = Proc(Win32cr::Foundation::LPARAM, UInt32, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Win32cr::System::IO::OVERLAPPED*, Win32cr::Foundation::BOOL)*
+  alias LPFNEXTDEVIO = Proc(Win32cr::Foundation::LPARAM, UInt32, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Win32cr::System::IO::OVERLAPPED*, Win32cr::Foundation::BOOL)
 
   WM_CAP_START = 1024_u32
   MODM_USER = 16384_u32
@@ -4697,1363 +4697,1852 @@ module Win32cr::Media::Multimedia
 
 
   @[Extern]
-  record ADPCMCOEFSET,
-    iCoef1 : Int16,
-    iCoef2 : Int16
-
-  @[Extern]
-  record ADPCMWAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
-    wSamplesPerBlock : UInt16,
-    wNumCoef : UInt16,
-    aCoef : Win32cr::Media::Multimedia::ADPCMCOEFSET*
-
-  @[Extern]
-  record DRMWAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
-    wReserved : UInt16,
-    ulContentId : UInt32,
-    wfxSecure : Win32cr::Media::Audio::WAVEFORMATEX
-
-  @[Extern]
-  record DVIADPCMWAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
-    wSamplesPerBlock : UInt16
-
-  @[Extern]
-  record IMAADPCMWAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
-    wSamplesPerBlock : UInt16
-
-  @[Extern]
-  record MEDIASPACEADPCMWAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
-    wRevision : UInt16
-
-  @[Extern]
-  record SIERRAADPCMWAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
-    wRevision : UInt16
-
-  @[Extern]
-  record G723_ADPCMWAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
-    cbExtraSize : UInt16,
-    nAuxBlockSize : UInt16
-
-  @[Extern]
-  record DIGISTDWAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX
-
-  @[Extern]
-  record DIGIFIXWAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX
-
-  @[Extern]
-  record DIALOGICOKIADPCMWAVEFORMAT,
-    ewf : Win32cr::Media::Audio::WAVEFORMATEX
-
-  @[Extern]
-  record YAMAHA_ADPCMWAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX
-
-  @[Extern]
-  record SONARCWAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
-    wCompType : UInt16
-
-  @[Extern]
-  record TRUESPEECHWAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
-    wRevision : UInt16,
-    nSamplesPerBlock : UInt16,
-    abReserved : UInt8[28]
-
-  @[Extern]
-  record ECHOSC1WAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX
-
-  @[Extern]
-  record AUDIOFILE_AF36WAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX
-
-  @[Extern]
-  record APTXWAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX
-
-  @[Extern]
-  record AUDIOFILE_AF10WAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX
-
-  @[Extern]
-  record DOLBYAC2WAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
-    nAuxBitsCode : UInt16
-
-  @[Extern]
-  record GSM610WAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
-    wSamplesPerBlock : UInt16
-
-  @[Extern]
-  record ADPCMEWAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
-    wSamplesPerBlock : UInt16
-
-  @[Extern]
-  record CONTRESVQLPCWAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
-    wSamplesPerBlock : UInt16
-
-  @[Extern]
-  record DIGIREALWAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
-    wSamplesPerBlock : UInt16
-
-  @[Extern]
-  record DIGIADPCMWAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
-    wSamplesPerBlock : UInt16
-
-  @[Extern]
-  record CONTRESCR10WAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
-    wSamplesPerBlock : UInt16
-
-  @[Extern]
-  record NMS_VBXADPCMWAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
-    wSamplesPerBlock : UInt16
-
-  @[Extern]
-  record G721_ADPCMWAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
-    nAuxBlockSize : UInt16
-
-  @[Extern]
-  record MSAUDIO1WAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
-    wSamplesPerBlock : UInt16,
-    wEncodeOptions : UInt16
-
-  @[Extern]
-  record WMAUDIO2WAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
-    dwSamplesPerBlock : UInt32,
-    wEncodeOptions : UInt16,
-    dwSuperBlockAlign : UInt32
-
-  @[Extern]
-  record WMAUDIO3WAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
-    wValidBitsPerSample : UInt16,
-    dwChannelMask : UInt32,
-    dwReserved1 : UInt32,
-    dwReserved2 : UInt32,
-    wEncodeOptions : UInt16,
-    wReserved3 : UInt16
-
-  @[Extern]
-  record CREATIVEADPCMWAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
-    wRevision : UInt16
-
-  @[Extern]
-  record CREATIVEFASTSPEECH8WAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
-    wRevision : UInt16
-
-  @[Extern]
-  record CREATIVEFASTSPEECH10WAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
-    wRevision : UInt16
-
-  @[Extern]
-  record FMTOWNS_SND_WAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
-    wRevision : UInt16
-
-  @[Extern]
-  record OLIGSMWAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX
-
-  @[Extern]
-  record OLIADPCMWAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX
-
-  @[Extern]
-  record OLICELPWAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX
-
-  @[Extern]
-  record OLISBCWAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX
-
-  @[Extern]
-  record OLIOPRWAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX
-
-  @[Extern]
-  record CSIMAADPCMWAVEFORMAT,
-    wfx : Win32cr::Media::Audio::WAVEFORMATEX
-
-  @[Extern]
-  record S_riffwave_inst,
-    bUnshiftedNote : UInt8,
-    chFineTune : Win32cr::Foundation::CHAR,
-    chGain : Win32cr::Foundation::CHAR,
-    bLowNote : UInt8,
-    bHighNote : UInt8,
-    bLowVelocity : UInt8,
-    bHighVelocity : UInt8
-
-  @[Extern]
-  record EXBMINFOHEADER,
-    bmi : Win32cr::Graphics::Gdi::BITMAPINFOHEADER,
-    biExtDataOffset : UInt32
-
-  @[Extern]
-  record JPEGINFOHEADER,
-    jpeg_size : UInt32,
-    jpeg_process : UInt32,
-    jpeg_color_space_id : UInt32,
-    jpeg_bits_per_sample : UInt32,
-    jpegh_sub_sampling : UInt32,
-    jpegv_sub_sampling : UInt32
-
-  @[Extern]
-  record MCI_GENERIC_PARMS,
-    dwCallback : LibC::UIntPtrT
-
-  @[Extern]
-  record MCI_OPEN_PARMSA,
-    dwCallback : LibC::UIntPtrT,
-    wDeviceID : UInt32,
-    lpstrDeviceType : Win32cr::Foundation::PSTR,
-    lpstrElementName : Win32cr::Foundation::PSTR,
-    lpstrAlias : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record MCI_OPEN_PARMSW,
-    dwCallback : LibC::UIntPtrT,
-    wDeviceID : UInt32,
-    lpstrDeviceType : Win32cr::Foundation::PWSTR,
-    lpstrElementName : Win32cr::Foundation::PWSTR,
-    lpstrAlias : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record MCI_PLAY_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    dwFrom : UInt32,
-    dwTo : UInt32
-
-  @[Extern]
-  record MCI_SEEK_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    dwTo : UInt32
-
-  @[Extern]
-  record MCI_STATUS_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    dwReturn : LibC::UIntPtrT,
-    dwItem : UInt32,
-    dwTrack : UInt32
-
-  @[Extern]
-  record MCI_INFO_PARMSA,
-    dwCallback : LibC::UIntPtrT,
-    lpstrReturn : Win32cr::Foundation::PSTR,
-    dwRetSize : UInt32
-
-  @[Extern]
-  record MCI_INFO_PARMSW,
-    dwCallback : LibC::UIntPtrT,
-    lpstrReturn : Win32cr::Foundation::PWSTR,
-    dwRetSize : UInt32
-
-  @[Extern]
-  record MCI_GETDEVCAPS_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    dwReturn : UInt32,
-    dwItem : UInt32
-
-  @[Extern]
-  record MCI_SYSINFO_PARMSA,
-    dwCallback : LibC::UIntPtrT,
-    lpstrReturn : Win32cr::Foundation::PSTR,
-    dwRetSize : UInt32,
-    dwNumber : UInt32,
-    wDeviceType : UInt32
-
-  @[Extern]
-  record MCI_SYSINFO_PARMSW,
-    dwCallback : LibC::UIntPtrT,
-    lpstrReturn : Win32cr::Foundation::PWSTR,
-    dwRetSize : UInt32,
-    dwNumber : UInt32,
-    wDeviceType : UInt32
-
-  @[Extern]
-  record MCI_SET_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    dwTimeFormat : UInt32,
-    dwAudio : UInt32
-
-  @[Extern]
-  record MCI_BREAK_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    nVirtKey : Int32,
-    hwndBreak : Win32cr::Foundation::HWND
-
-  @[Extern]
-  record MCI_SAVE_PARMSA,
-    dwCallback : LibC::UIntPtrT,
-    lpfilename : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record MCI_SAVE_PARMSW,
-    dwCallback : LibC::UIntPtrT,
-    lpfilename : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record MCI_LOAD_PARMSA,
-    dwCallback : LibC::UIntPtrT,
-    lpfilename : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record MCI_LOAD_PARMSW,
-    dwCallback : LibC::UIntPtrT,
-    lpfilename : Win32cr::Foundation::PWSTR
-
+  struct ADPCMCOEFSET
+    property iCoef1 : Int16
+    property iCoef2 : Int16
+    def initialize(@iCoef1 : Int16, @iCoef2 : Int16)
+    end
+  end
+
+  @[Extern]
+  struct ADPCMWAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    property wSamplesPerBlock : UInt16
+    property wNumCoef : UInt16
+    property aCoef : Win32cr::Media::Multimedia::ADPCMCOEFSET*
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX, @wSamplesPerBlock : UInt16, @wNumCoef : UInt16, @aCoef : Win32cr::Media::Multimedia::ADPCMCOEFSET*)
+    end
+  end
+
+  @[Extern]
+  struct DRMWAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    property wReserved : UInt16
+    property ulContentId : UInt32
+    property wfxSecure : Win32cr::Media::Audio::WAVEFORMATEX
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX, @wReserved : UInt16, @ulContentId : UInt32, @wfxSecure : Win32cr::Media::Audio::WAVEFORMATEX)
+    end
+  end
+
+  @[Extern]
+  struct DVIADPCMWAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    property wSamplesPerBlock : UInt16
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX, @wSamplesPerBlock : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct IMAADPCMWAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    property wSamplesPerBlock : UInt16
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX, @wSamplesPerBlock : UInt16)
+    end
+  end
+
   @[Extern]
-  record MCI_RECORD_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    dwFrom : UInt32,
-    dwTo : UInt32
-
-  @[Extern]
-  record MCI_VD_PLAY_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    dwFrom : UInt32,
-    dwTo : UInt32,
-    dwSpeed : UInt32
-
-  @[Extern]
-  record MCI_VD_STEP_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    dwFrames : UInt32
-
-  @[Extern]
-  record MCI_VD_ESCAPE_PARMSA,
-    dwCallback : LibC::UIntPtrT,
-    lpstrCommand : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record MCI_VD_ESCAPE_PARMSW,
-    dwCallback : LibC::UIntPtrT,
-    lpstrCommand : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record MCI_WAVE_OPEN_PARMSA,
-    dwCallback : LibC::UIntPtrT,
-    wDeviceID : UInt32,
-    lpstrDeviceType : Win32cr::Foundation::PSTR,
-    lpstrElementName : Win32cr::Foundation::PSTR,
-    lpstrAlias : Win32cr::Foundation::PSTR,
-    dwBufferSeconds : UInt32
-
-  @[Extern]
-  record MCI_WAVE_OPEN_PARMSW,
-    dwCallback : LibC::UIntPtrT,
-    wDeviceID : UInt32,
-    lpstrDeviceType : Win32cr::Foundation::PWSTR,
-    lpstrElementName : Win32cr::Foundation::PWSTR,
-    lpstrAlias : Win32cr::Foundation::PWSTR,
-    dwBufferSeconds : UInt32
-
-  @[Extern]
-  record MCI_WAVE_DELETE_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    dwFrom : UInt32,
-    dwTo : UInt32
-
-  @[Extern]
-  record MCI_WAVE_SET_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    dwTimeFormat : UInt32,
-    dwAudio : UInt32,
-    wInput : UInt32,
-    wOutput : UInt32,
-    wFormatTag : UInt16,
-    wReserved2 : UInt16,
-    nChannels : UInt16,
-    wReserved3 : UInt16,
-    nSamplesPerSec : UInt32,
-    nAvgBytesPerSec : UInt32,
-    nBlockAlign : UInt16,
-    wReserved4 : UInt16,
-    wBitsPerSample : UInt16,
-    wReserved5 : UInt16
-
-  @[Extern]
-  record MCI_SEQ_SET_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    dwTimeFormat : UInt32,
-    dwAudio : UInt32,
-    dwTempo : UInt32,
-    dwPort : UInt32,
-    dwSlave : UInt32,
-    dwMaster : UInt32,
-    dwOffset : UInt32
-
-  @[Extern]
-  record MCI_ANIM_OPEN_PARMSA,
-    dwCallback : LibC::UIntPtrT,
-    wDeviceID : UInt32,
-    lpstrDeviceType : Win32cr::Foundation::PSTR,
-    lpstrElementName : Win32cr::Foundation::PSTR,
-    lpstrAlias : Win32cr::Foundation::PSTR,
-    dwStyle : UInt32,
-    hWndParent : Win32cr::Foundation::HWND
-
-  @[Extern]
-  record MCI_ANIM_OPEN_PARMSW,
-    dwCallback : LibC::UIntPtrT,
-    wDeviceID : UInt32,
-    lpstrDeviceType : Win32cr::Foundation::PWSTR,
-    lpstrElementName : Win32cr::Foundation::PWSTR,
-    lpstrAlias : Win32cr::Foundation::PWSTR,
-    dwStyle : UInt32,
-    hWndParent : Win32cr::Foundation::HWND
-
-  @[Extern]
-  record MCI_ANIM_PLAY_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    dwFrom : UInt32,
-    dwTo : UInt32,
-    dwSpeed : UInt32
-
-  @[Extern]
-  record MCI_ANIM_STEP_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    dwFrames : UInt32
-
-  @[Extern]
-  record MCI_ANIM_WINDOW_PARMSA,
-    dwCallback : LibC::UIntPtrT,
-    hWnd : Win32cr::Foundation::HWND,
-    nCmdShow : UInt32,
-    lpstrText : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record MCI_ANIM_WINDOW_PARMSW,
-    dwCallback : LibC::UIntPtrT,
-    hWnd : Win32cr::Foundation::HWND,
-    nCmdShow : UInt32,
-    lpstrText : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record MCI_ANIM_RECT_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    rc : Win32cr::Foundation::RECT
-
-  @[Extern]
-  record MCI_ANIM_UPDATE_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    rc : Win32cr::Foundation::RECT,
-    hDC : Win32cr::Graphics::Gdi::HDC
-
-  @[Extern]
-  record MCI_OVLY_OPEN_PARMSA,
-    dwCallback : LibC::UIntPtrT,
-    wDeviceID : UInt32,
-    lpstrDeviceType : Win32cr::Foundation::PSTR,
-    lpstrElementName : Win32cr::Foundation::PSTR,
-    lpstrAlias : Win32cr::Foundation::PSTR,
-    dwStyle : UInt32,
-    hWndParent : Win32cr::Foundation::HWND
-
-  @[Extern]
-  record MCI_OVLY_OPEN_PARMSW,
-    dwCallback : LibC::UIntPtrT,
-    wDeviceID : UInt32,
-    lpstrDeviceType : Win32cr::Foundation::PWSTR,
-    lpstrElementName : Win32cr::Foundation::PWSTR,
-    lpstrAlias : Win32cr::Foundation::PWSTR,
-    dwStyle : UInt32,
-    hWndParent : Win32cr::Foundation::HWND
-
-  @[Extern]
-  record MCI_OVLY_WINDOW_PARMSA,
-    dwCallback : LibC::UIntPtrT,
-    hWnd : Win32cr::Foundation::HWND,
-    nCmdShow : UInt32,
-    lpstrText : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record MCI_OVLY_WINDOW_PARMSW,
-    dwCallback : LibC::UIntPtrT,
-    hWnd : Win32cr::Foundation::HWND,
-    nCmdShow : UInt32,
-    lpstrText : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record MCI_OVLY_RECT_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    rc : Win32cr::Foundation::RECT
-
-  @[Extern]
-  record MCI_OVLY_SAVE_PARMSA,
-    dwCallback : LibC::UIntPtrT,
-    lpfilename : Win32cr::Foundation::PSTR,
-    rc : Win32cr::Foundation::RECT
-
-  @[Extern]
-  record MCI_OVLY_SAVE_PARMSW,
-    dwCallback : LibC::UIntPtrT,
-    lpfilename : Win32cr::Foundation::PWSTR,
-    rc : Win32cr::Foundation::RECT
-
-  @[Extern]
-  record MCI_OVLY_LOAD_PARMSA,
-    dwCallback : LibC::UIntPtrT,
-    lpfilename : Win32cr::Foundation::PSTR,
-    rc : Win32cr::Foundation::RECT
-
-  @[Extern]
-  record MCI_OVLY_LOAD_PARMSW,
-    dwCallback : LibC::UIntPtrT,
-    lpfilename : Win32cr::Foundation::PWSTR,
-    rc : Win32cr::Foundation::RECT
-
-  @[Extern]
-  record DRVCONFIGINFOEX,
-    dwDCISize : UInt32,
-    lpszDCISectionName : Win32cr::Foundation::PWSTR,
-    lpszDCIAliasName : Win32cr::Foundation::PWSTR,
-    dnDevNode : UInt32
-
-  @[Extern]
-  record DRVCONFIGINFO,
-    dwDCISize : UInt32,
-    lpszDCISectionName : Win32cr::Foundation::PWSTR,
-    lpszDCIAliasName : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record MMIOINFO,
-    dwFlags : UInt32,
-    fccIOProc : UInt32,
-    pIOProc : Win32cr::Media::Multimedia::LPMMIOPROC,
-    wErrorRet : UInt32,
-    htask : Win32cr::Media::HTASK,
-    cchBuffer : Int32,
-    pchBuffer : Int8*,
-    pchNext : Int8*,
-    pchEndRead : Int8*,
-    pchEndWrite : Int8*,
-    lBufOffset : Int32,
-    lDiskOffset : Int32,
-    adwInfo : UInt32[3],
-    dwReserved1 : UInt32,
-    dwReserved2 : UInt32,
-    hmmio : Win32cr::Media::Multimedia::HMMIO
-
+  struct MEDIASPACEADPCMWAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    property wRevision : UInt16
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX, @wRevision : UInt16)
+    end
+  end
+
   @[Extern]
-  record MMCKINFO,
-    ckid : UInt32,
-    cksize : UInt32,
-    fccType : UInt32,
-    dwDataOffset : UInt32,
-    dwFlags : UInt32
-
-  @[Extern]
-  record JOYCAPSA,
-    wMid : UInt16,
-    wPid : UInt16,
-    szPname : Win32cr::Foundation::CHAR[32],
-    wXmin : UInt32,
-    wXmax : UInt32,
-    wYmin : UInt32,
-    wYmax : UInt32,
-    wZmin : UInt32,
-    wZmax : UInt32,
-    wNumButtons : UInt32,
-    wPeriodMin : UInt32,
-    wPeriodMax : UInt32,
-    wRmin : UInt32,
-    wRmax : UInt32,
-    wUmin : UInt32,
-    wUmax : UInt32,
-    wVmin : UInt32,
-    wVmax : UInt32,
-    wCaps : UInt32,
-    wMaxAxes : UInt32,
-    wNumAxes : UInt32,
-    wMaxButtons : UInt32,
-    szRegKey : Win32cr::Foundation::CHAR[32],
-    szOEMVxD : Win32cr::Foundation::CHAR[260]
-
-  @[Extern]
-  record JOYCAPSW,
-    wMid : UInt16,
-    wPid : UInt16,
-    szPname : UInt16[32],
-    wXmin : UInt32,
-    wXmax : UInt32,
-    wYmin : UInt32,
-    wYmax : UInt32,
-    wZmin : UInt32,
-    wZmax : UInt32,
-    wNumButtons : UInt32,
-    wPeriodMin : UInt32,
-    wPeriodMax : UInt32,
-    wRmin : UInt32,
-    wRmax : UInt32,
-    wUmin : UInt32,
-    wUmax : UInt32,
-    wVmin : UInt32,
-    wVmax : UInt32,
-    wCaps : UInt32,
-    wMaxAxes : UInt32,
-    wNumAxes : UInt32,
-    wMaxButtons : UInt32,
-    szRegKey : UInt16[32],
-    szOEMVxD : UInt16[260]
-
-  @[Extern]
-  record JOYCAPS2A,
-    wMid : UInt16,
-    wPid : UInt16,
-    szPname : Win32cr::Foundation::CHAR[32],
-    wXmin : UInt32,
-    wXmax : UInt32,
-    wYmin : UInt32,
-    wYmax : UInt32,
-    wZmin : UInt32,
-    wZmax : UInt32,
-    wNumButtons : UInt32,
-    wPeriodMin : UInt32,
-    wPeriodMax : UInt32,
-    wRmin : UInt32,
-    wRmax : UInt32,
-    wUmin : UInt32,
-    wUmax : UInt32,
-    wVmin : UInt32,
-    wVmax : UInt32,
-    wCaps : UInt32,
-    wMaxAxes : UInt32,
-    wNumAxes : UInt32,
-    wMaxButtons : UInt32,
-    szRegKey : Win32cr::Foundation::CHAR[32],
-    szOEMVxD : Win32cr::Foundation::CHAR[260],
-    manufacturer_guid : LibC::GUID,
-    product_guid : LibC::GUID,
-    name_guid : LibC::GUID
-
-  @[Extern]
-  record JOYCAPS2W,
-    wMid : UInt16,
-    wPid : UInt16,
-    szPname : UInt16[32],
-    wXmin : UInt32,
-    wXmax : UInt32,
-    wYmin : UInt32,
-    wYmax : UInt32,
-    wZmin : UInt32,
-    wZmax : UInt32,
-    wNumButtons : UInt32,
-    wPeriodMin : UInt32,
-    wPeriodMax : UInt32,
-    wRmin : UInt32,
-    wRmax : UInt32,
-    wUmin : UInt32,
-    wUmax : UInt32,
-    wVmin : UInt32,
-    wVmax : UInt32,
-    wCaps : UInt32,
-    wMaxAxes : UInt32,
-    wNumAxes : UInt32,
-    wMaxButtons : UInt32,
-    szRegKey : UInt16[32],
-    szOEMVxD : UInt16[260],
-    manufacturer_guid : LibC::GUID,
-    product_guid : LibC::GUID,
-    name_guid : LibC::GUID
-
-  @[Extern]
-  record JOYINFO,
-    wXpos : UInt32,
-    wYpos : UInt32,
-    wZpos : UInt32,
-    wButtons : UInt32
-
-  @[Extern]
-  record JOYINFOEX,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwXpos : UInt32,
-    dwYpos : UInt32,
-    dwZpos : UInt32,
-    dwRpos : UInt32,
-    dwUpos : UInt32,
-    dwVpos : UInt32,
-    dwButtons : UInt32,
-    dwButtonNumber : UInt32,
-    dwPOV : UInt32,
-    dwReserved1 : UInt32,
-    dwReserved2 : UInt32
-
-  @[Extern]
-  record MCI_DGV_RECT_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    rc : Win32cr::Foundation::RECT
-
-  @[Extern]
-  record MCI_DGV_CAPTURE_PARMSA,
-    dwCallback : LibC::UIntPtrT,
-    lpstrFileName : Win32cr::Foundation::PSTR,
-    rc : Win32cr::Foundation::RECT
-
-  @[Extern]
-  record MCI_DGV_CAPTURE_PARMSW,
-    dwCallback : LibC::UIntPtrT,
-    lpstrFileName : Win32cr::Foundation::PWSTR,
-    rc : Win32cr::Foundation::RECT
-
-  @[Extern]
-  record MCI_DGV_COPY_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    dwFrom : UInt32,
-    dwTo : UInt32,
-    rc : Win32cr::Foundation::RECT,
-    dwAudioStream : UInt32,
-    dwVideoStream : UInt32
-
-  @[Extern]
-  record MCI_DGV_CUE_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    dwTo : UInt32
-
-  @[Extern]
-  record MCI_DGV_CUT_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    dwFrom : UInt32,
-    dwTo : UInt32,
-    rc : Win32cr::Foundation::RECT,
-    dwAudioStream : UInt32,
-    dwVideoStream : UInt32
-
-  @[Extern]
-  record MCI_DGV_DELETE_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    dwFrom : UInt32,
-    dwTo : UInt32,
-    rc : Win32cr::Foundation::RECT,
-    dwAudioStream : UInt32,
-    dwVideoStream : UInt32
-
-  @[Extern]
-  record MCI_DGV_INFO_PARMSA,
-    dwCallback : LibC::UIntPtrT,
-    lpstrReturn : Win32cr::Foundation::PSTR,
-    dwRetSize : UInt32,
-    dwItem : UInt32
-
-  @[Extern]
-  record MCI_DGV_INFO_PARMSW,
-    dwCallback : LibC::UIntPtrT,
-    lpstrReturn : Win32cr::Foundation::PWSTR,
-    dwRetSize : UInt32,
-    dwItem : UInt32
-
-  @[Extern]
-  record MCI_DGV_LIST_PARMSA,
-    dwCallback : LibC::UIntPtrT,
-    lpstrReturn : Win32cr::Foundation::PSTR,
-    dwLength : UInt32,
-    dwNumber : UInt32,
-    dwItem : UInt32,
-    lpstrAlgorithm : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record MCI_DGV_LIST_PARMSW,
-    dwCallback : LibC::UIntPtrT,
-    lpstrReturn : Win32cr::Foundation::PWSTR,
-    dwLength : UInt32,
-    dwNumber : UInt32,
-    dwItem : UInt32,
-    lpstrAlgorithm : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record MCI_DGV_MONITOR_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    dwSource : UInt32,
-    dwMethod : UInt32
-
-  @[Extern]
-  record MCI_DGV_OPEN_PARMSA,
-    dwCallback : LibC::UIntPtrT,
-    wDeviceID : UInt32,
-    lpstrDeviceType : Win32cr::Foundation::PSTR,
-    lpstrElementName : Win32cr::Foundation::PSTR,
-    lpstrAlias : Win32cr::Foundation::PSTR,
-    dwStyle : UInt32,
-    hWndParent : Win32cr::Foundation::HWND
-
-  @[Extern]
-  record MCI_DGV_OPEN_PARMSW,
-    dwCallback : LibC::UIntPtrT,
-    wDeviceID : UInt32,
-    lpstrDeviceType : Win32cr::Foundation::PWSTR,
-    lpstrElementName : Win32cr::Foundation::PWSTR,
-    lpstrAlias : Win32cr::Foundation::PWSTR,
-    dwStyle : UInt32,
-    hWndParent : Win32cr::Foundation::HWND
-
-  @[Extern]
-  record MCI_DGV_PASTE_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    dwTo : UInt32,
-    rc : Win32cr::Foundation::RECT,
-    dwAudioStream : UInt32,
-    dwVideoStream : UInt32
-
-  @[Extern]
-  record MCI_DGV_QUALITY_PARMSA,
-    dwCallback : LibC::UIntPtrT,
-    dwItem : UInt32,
-    lpstrName : Win32cr::Foundation::PSTR,
-    lpstrAlgorithm : UInt32,
-    dwHandle : UInt32
-
+  struct SIERRAADPCMWAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    property wRevision : UInt16
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX, @wRevision : UInt16)
+    end
+  end
+
   @[Extern]
-  record MCI_DGV_QUALITY_PARMSW,
-    dwCallback : LibC::UIntPtrT,
-    dwItem : UInt32,
-    lpstrName : Win32cr::Foundation::PWSTR,
-    lpstrAlgorithm : UInt32,
-    dwHandle : UInt32
+  struct G723_ADPCMWAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    property cbExtraSize : UInt16
+    property nAuxBlockSize : UInt16
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX, @cbExtraSize : UInt16, @nAuxBlockSize : UInt16)
+    end
+  end
 
   @[Extern]
-  record MCI_DGV_RECORD_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    dwFrom : UInt32,
-    dwTo : UInt32,
-    rc : Win32cr::Foundation::RECT,
-    dwAudioStream : UInt32,
-    dwVideoStream : UInt32
-
-  @[Extern]
-  record MCI_DGV_RESERVE_PARMSA,
-    dwCallback : LibC::UIntPtrT,
-    lpstrPath : Win32cr::Foundation::PSTR,
-    dwSize : UInt32
-
-  @[Extern]
-  record MCI_DGV_RESERVE_PARMSW,
-    dwCallback : LibC::UIntPtrT,
-    lpstrPath : Win32cr::Foundation::PWSTR,
-    dwSize : UInt32
-
-  @[Extern]
-  record MCI_DGV_RESTORE_PARMSA,
-    dwCallback : LibC::UIntPtrT,
-    lpstrFileName : Win32cr::Foundation::PSTR,
-    rc : Win32cr::Foundation::RECT
-
+  struct DIGISTDWAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX)
+    end
+  end
+
   @[Extern]
-  record MCI_DGV_RESTORE_PARMSW,
-    dwCallback : LibC::UIntPtrT,
-    lpstrFileName : Win32cr::Foundation::PWSTR,
-    rc : Win32cr::Foundation::RECT
+  struct DIGIFIXWAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX)
+    end
+  end
+
+  @[Extern]
+  struct DIALOGICOKIADPCMWAVEFORMAT
+    property ewf : Win32cr::Media::Audio::WAVEFORMATEX
+    def initialize(@ewf : Win32cr::Media::Audio::WAVEFORMATEX)
+    end
+  end
+
+  @[Extern]
+  struct YAMAHA_ADPCMWAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX)
+    end
+  end
+
+  @[Extern]
+  struct SONARCWAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    property wCompType : UInt16
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX, @wCompType : UInt16)
+    end
+  end
 
   @[Extern]
-  record MCI_DGV_SAVE_PARMSA,
-    dwCallback : LibC::UIntPtrT,
-    lpstrFileName : Win32cr::Foundation::PSTR,
-    rc : Win32cr::Foundation::RECT
-
-  @[Extern]
-  record MCI_DGV_SAVE_PARMSW,
-    dwCallback : LibC::UIntPtrT,
-    lpstrFileName : Win32cr::Foundation::PWSTR,
-    rc : Win32cr::Foundation::RECT
-
-  @[Extern]
-  record MCI_DGV_SET_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    dwTimeFormat : UInt32,
-    dwAudio : UInt32,
-    dwFileFormat : UInt32,
-    dwSpeed : UInt32
-
+  struct TRUESPEECHWAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    property wRevision : UInt16
+    property nSamplesPerBlock : UInt16
+    property abReserved : UInt8[28]
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX, @wRevision : UInt16, @nSamplesPerBlock : UInt16, @abReserved : UInt8[28])
+    end
+  end
+
   @[Extern]
-  record MCI_DGV_SETAUDIO_PARMSA,
-    dwCallback : LibC::UIntPtrT,
-    dwItem : UInt32,
-    dwValue : UInt32,
-    dwOver : UInt32,
-    lpstrAlgorithm : Win32cr::Foundation::PSTR,
-    lpstrQuality : Win32cr::Foundation::PSTR
+  struct ECHOSC1WAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX)
+    end
+  end
 
-  @[Extern]
-  record MCI_DGV_SETAUDIO_PARMSW,
-    dwCallback : LibC::UIntPtrT,
-    dwItem : UInt32,
-    dwValue : UInt32,
-    dwOver : UInt32,
-    lpstrAlgorithm : Win32cr::Foundation::PWSTR,
-    lpstrQuality : Win32cr::Foundation::PWSTR
+  @[Extern]
+  struct AUDIOFILE_AF36WAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX)
+    end
+  end
 
   @[Extern]
-  record MCI_DGV_SIGNAL_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    dwPosition : UInt32,
-    dwPeriod : UInt32,
-    dwUserParm : UInt32
+  struct APTXWAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX)
+    end
+  end
 
   @[Extern]
-  record MCI_DGV_SETVIDEO_PARMSA,
-    dwCallback : LibC::UIntPtrT,
-    dwItem : UInt32,
-    dwValue : UInt32,
-    dwOver : UInt32,
-    lpstrAlgorithm : Win32cr::Foundation::PSTR,
-    lpstrQuality : Win32cr::Foundation::PSTR,
-    dwSourceNumber : UInt32
-
+  struct AUDIOFILE_AF10WAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX)
+    end
+  end
+
+  @[Extern]
+  struct DOLBYAC2WAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    property nAuxBitsCode : UInt16
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX, @nAuxBitsCode : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct GSM610WAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    property wSamplesPerBlock : UInt16
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX, @wSamplesPerBlock : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct ADPCMEWAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    property wSamplesPerBlock : UInt16
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX, @wSamplesPerBlock : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct CONTRESVQLPCWAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    property wSamplesPerBlock : UInt16
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX, @wSamplesPerBlock : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct DIGIREALWAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    property wSamplesPerBlock : UInt16
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX, @wSamplesPerBlock : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct DIGIADPCMWAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    property wSamplesPerBlock : UInt16
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX, @wSamplesPerBlock : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct CONTRESCR10WAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    property wSamplesPerBlock : UInt16
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX, @wSamplesPerBlock : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct NMS_VBXADPCMWAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    property wSamplesPerBlock : UInt16
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX, @wSamplesPerBlock : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct G721_ADPCMWAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    property nAuxBlockSize : UInt16
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX, @nAuxBlockSize : UInt16)
+    end
+  end
+
   @[Extern]
-  record MCI_DGV_SETVIDEO_PARMSW,
-    dwCallback : LibC::UIntPtrT,
-    dwItem : UInt32,
-    dwValue : UInt32,
-    dwOver : UInt32,
-    lpstrAlgorithm : Win32cr::Foundation::PWSTR,
-    lpstrQuality : Win32cr::Foundation::PWSTR,
-    dwSourceNumber : UInt32
-
-  @[Extern]
-  record MCI_DGV_STATUS_PARMSA,
-    dwCallback : LibC::UIntPtrT,
-    dwReturn : LibC::UIntPtrT,
-    dwItem : UInt32,
-    dwTrack : UInt32,
-    lpstrDrive : Win32cr::Foundation::PSTR,
-    dwReference : UInt32
+  struct MSAUDIO1WAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    property wSamplesPerBlock : UInt16
+    property wEncodeOptions : UInt16
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX, @wSamplesPerBlock : UInt16, @wEncodeOptions : UInt16)
+    end
+  end
 
   @[Extern]
-  record MCI_DGV_STATUS_PARMSW,
-    dwCallback : LibC::UIntPtrT,
-    dwReturn : LibC::UIntPtrT,
-    dwItem : UInt32,
-    dwTrack : UInt32,
-    lpstrDrive : Win32cr::Foundation::PWSTR,
-    dwReference : UInt32
-
-  @[Extern]
-  record MCI_DGV_STEP_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    dwFrames : UInt32
-
-  @[Extern]
-  record MCI_DGV_UPDATE_PARMS,
-    dwCallback : LibC::UIntPtrT,
-    rc : Win32cr::Foundation::RECT,
-    hDC : Win32cr::Graphics::Gdi::HDC
-
-  @[Extern]
-  record MCI_DGV_WINDOW_PARMSA,
-    dwCallback : LibC::UIntPtrT,
-    hWnd : Win32cr::Foundation::HWND,
-    nCmdShow : UInt32,
-    lpstrText : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record MCI_DGV_WINDOW_PARMSW,
-    dwCallback : LibC::UIntPtrT,
-    hWnd : Win32cr::Foundation::HWND,
-    nCmdShow : UInt32,
-    lpstrText : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record ICOPEN,
-    dwSize : UInt32,
-    fccType : UInt32,
-    fccHandler : UInt32,
-    dwVersion : UInt32,
-    dwFlags : UInt32,
-    dwError : Win32cr::Foundation::LRESULT,
-    pV1Reserved : Void*,
-    pV2Reserved : Void*,
-    dnDevNode : UInt32
-
-  @[Extern]
-  record ICINFO,
-    dwSize : UInt32,
-    fccType : UInt32,
-    fccHandler : UInt32,
-    dwFlags : UInt32,
-    dwVersion : UInt32,
-    dwVersionICM : UInt32,
-    szName : UInt16[16],
-    szDescription : UInt16[128],
-    szDriver : UInt16[128]
-
-  @[Extern]
-  record ICCOMPRESS,
-    dwFlags : UInt32,
-    lpbiOutput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*,
-    lpOutput : Void*,
-    lpbiInput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*,
-    lpInput : Void*,
-    lpckid : UInt32*,
-    lpdwFlags : UInt32*,
-    lFrameNum : Int32,
-    dwFrameSize : UInt32,
-    dwQuality : UInt32,
-    lpbiPrev : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*,
-    lpPrev : Void*
-
-  @[Extern]
-  record ICCOMPRESSFRAMES,
-    dwFlags : UInt32,
-    lpbiOutput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*,
-    lOutput : Win32cr::Foundation::LPARAM,
-    lpbiInput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*,
-    lInput : Win32cr::Foundation::LPARAM,
-    lStartFrame : Int32,
-    lFrameCount : Int32,
-    lQuality : Int32,
-    lDataRate : Int32,
-    lKeyRate : Int32,
-    dwRate : UInt32,
-    dwScale : UInt32,
-    dwOverheadPerFrame : UInt32,
-    dwReserved2 : UInt32,
-    get_data : LibC::IntPtrT,
-    put_data : LibC::IntPtrT
-
-  @[Extern]
-  record ICSETSTATUSPROC,
-    dwFlags : UInt32,
-    lParam : Win32cr::Foundation::LPARAM,
-    status : LibC::IntPtrT
-
-  @[Extern]
-  record ICDECOMPRESS,
-    dwFlags : UInt32,
-    lpbiInput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*,
-    lpInput : Void*,
-    lpbiOutput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*,
-    lpOutput : Void*,
-    ckid : UInt32
-
-  @[Extern]
-  record ICDECOMPRESSEX,
-    dwFlags : UInt32,
-    lpbiSrc : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*,
-    lpSrc : Void*,
-    lpbiDst : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*,
-    lpDst : Void*,
-    xDst : Int32,
-    yDst : Int32,
-    dxDst : Int32,
-    dyDst : Int32,
-    xSrc : Int32,
-    ySrc : Int32,
-    dxSrc : Int32,
-    dySrc : Int32
-
-  @[Extern]
-  record ICDRAWBEGIN,
-    dwFlags : UInt32,
-    hpal : Win32cr::Graphics::Gdi::HPALETTE,
-    hwnd : Win32cr::Foundation::HWND,
-    hdc : Win32cr::Graphics::Gdi::HDC,
-    xDst : Int32,
-    yDst : Int32,
-    dxDst : Int32,
-    dyDst : Int32,
-    lpbi : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*,
-    xSrc : Int32,
-    ySrc : Int32,
-    dxSrc : Int32,
-    dySrc : Int32,
-    dwRate : UInt32,
-    dwScale : UInt32
-
-  @[Extern]
-  record ICDRAW,
-    dwFlags : UInt32,
-    lpFormat : Void*,
-    lpData : Void*,
-    cbData : UInt32,
-    lTime : Int32
-
-  @[Extern]
-  record ICDRAWSUGGEST,
-    lpbiIn : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*,
-    lpbiSuggest : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*,
-    dxSrc : Int32,
-    dySrc : Int32,
-    dxDst : Int32,
-    dyDst : Int32,
-    hicDecompressor : Win32cr::Media::Multimedia::HIC
-
-  @[Extern]
-  record ICPALETTE,
-    dwFlags : UInt32,
-    iStart : Int32,
-    iLen : Int32,
-    lppe : Win32cr::Graphics::Gdi::PALETTEENTRY*
-
-  @[Extern]
-  record COMPVARS,
-    cbSize : Int32,
-    dwFlags : UInt32,
-    hic : Win32cr::Media::Multimedia::HIC,
-    fccType : UInt32,
-    fccHandler : UInt32,
-    lpbiIn : Win32cr::Graphics::Gdi::BITMAPINFO*,
-    lpbiOut : Win32cr::Graphics::Gdi::BITMAPINFO*,
-    lpBitsOut : Void*,
-    lpBitsPrev : Void*,
-    lFrame : Int32,
-    lKey : Int32,
-    lDataRate : Int32,
-    lQ : Int32,
-    lKeyCount : Int32,
-    lpState : Void*,
-    cbState : Int32
-
-  @[Extern]
-  record DRAWDIBTIME,
-    timeCount : Int32,
-    timeDraw : Int32,
-    timeDecompress : Int32,
-    timeDither : Int32,
-    timeStretch : Int32,
-    timeBlt : Int32,
-    timeSetDIBits : Int32
-
-  @[Extern]
-  record AVISTREAMINFOW,
-    fccType : UInt32,
-    fccHandler : UInt32,
-    dwFlags : UInt32,
-    dwCaps : UInt32,
-    wPriority : UInt16,
-    wLanguage : UInt16,
-    dwScale : UInt32,
-    dwRate : UInt32,
-    dwStart : UInt32,
-    dwLength : UInt32,
-    dwInitialFrames : UInt32,
-    dwSuggestedBufferSize : UInt32,
-    dwQuality : UInt32,
-    dwSampleSize : UInt32,
-    rcFrame : Win32cr::Foundation::RECT,
-    dwEditCount : UInt32,
-    dwFormatChangeCount : UInt32,
-    szName : UInt16[64]
-
-  @[Extern]
-  record AVISTREAMINFOA,
-    fccType : UInt32,
-    fccHandler : UInt32,
-    dwFlags : UInt32,
-    dwCaps : UInt32,
-    wPriority : UInt16,
-    wLanguage : UInt16,
-    dwScale : UInt32,
-    dwRate : UInt32,
-    dwStart : UInt32,
-    dwLength : UInt32,
-    dwInitialFrames : UInt32,
-    dwSuggestedBufferSize : UInt32,
-    dwQuality : UInt32,
-    dwSampleSize : UInt32,
-    rcFrame : Win32cr::Foundation::RECT,
-    dwEditCount : UInt32,
-    dwFormatChangeCount : UInt32,
-    szName : Win32cr::Foundation::CHAR[64]
-
-  @[Extern]
-  record AVIFILEINFOW,
-    dwMaxBytesPerSec : UInt32,
-    dwFlags : UInt32,
-    dwCaps : UInt32,
-    dwStreams : UInt32,
-    dwSuggestedBufferSize : UInt32,
-    dwWidth : UInt32,
-    dwHeight : UInt32,
-    dwScale : UInt32,
-    dwRate : UInt32,
-    dwLength : UInt32,
-    dwEditCount : UInt32,
-    szFileType : UInt16[64]
-
-  @[Extern]
-  record AVIFILEINFOA,
-    dwMaxBytesPerSec : UInt32,
-    dwFlags : UInt32,
-    dwCaps : UInt32,
-    dwStreams : UInt32,
-    dwSuggestedBufferSize : UInt32,
-    dwWidth : UInt32,
-    dwHeight : UInt32,
-    dwScale : UInt32,
-    dwRate : UInt32,
-    dwLength : UInt32,
-    dwEditCount : UInt32,
-    szFileType : Win32cr::Foundation::CHAR[64]
-
-  @[Extern]
-  record AVICOMPRESSOPTIONS,
-    fccType : UInt32,
-    fccHandler : UInt32,
-    dwKeyFrameEvery : UInt32,
-    dwQuality : UInt32,
-    dwBytesPerSecond : UInt32,
-    dwFlags : UInt32,
-    lpFormat : Void*,
-    cbFormat : UInt32,
-    lpParms : Void*,
-    cbParms : UInt32,
-    dwInterleaveEvery : UInt32
-
-  @[Extern]
-  record VIDEOHDR,
-    lpData : UInt8*,
-    dwBufferLength : UInt32,
-    dwBytesUsed : UInt32,
-    dwTimeCaptured : UInt32,
-    dwUser : LibC::UIntPtrT,
-    dwFlags : UInt32,
-    dwReserved : LibC::UIntPtrT[4]
-
-  @[Extern]
-  record CHANNEL_CAPS,
-    dwFlags : UInt32,
-    dwSrcRectXMod : UInt32,
-    dwSrcRectYMod : UInt32,
-    dwSrcRectWidthMod : UInt32,
-    dwSrcRectHeightMod : UInt32,
-    dwDstRectXMod : UInt32,
-    dwDstRectYMod : UInt32,
-    dwDstRectWidthMod : UInt32,
-    dwDstRectHeightMod : UInt32
-
-  @[Extern]
-  record CAPDRIVERCAPS,
-    wDeviceIndex : UInt32,
-    fHasOverlay : Win32cr::Foundation::BOOL,
-    fHasDlgVideoSource : Win32cr::Foundation::BOOL,
-    fHasDlgVideoFormat : Win32cr::Foundation::BOOL,
-    fHasDlgVideoDisplay : Win32cr::Foundation::BOOL,
-    fCaptureInitialized : Win32cr::Foundation::BOOL,
-    fDriverSuppliesPalettes : Win32cr::Foundation::BOOL,
-    hVideoIn : Win32cr::Foundation::HANDLE,
-    hVideoOut : Win32cr::Foundation::HANDLE,
-    hVideoExtIn : Win32cr::Foundation::HANDLE,
-    hVideoExtOut : Win32cr::Foundation::HANDLE
-
-  @[Extern]
-  record CAPSTATUS,
-    uiImageWidth : UInt32,
-    uiImageHeight : UInt32,
-    fLiveWindow : Win32cr::Foundation::BOOL,
-    fOverlayWindow : Win32cr::Foundation::BOOL,
-    fScale : Win32cr::Foundation::BOOL,
-    ptScroll : Win32cr::Foundation::POINT,
-    fUsingDefaultPalette : Win32cr::Foundation::BOOL,
-    fAudioHardware : Win32cr::Foundation::BOOL,
-    fCapFileExists : Win32cr::Foundation::BOOL,
-    dwCurrentVideoFrame : UInt32,
-    dwCurrentVideoFramesDropped : UInt32,
-    dwCurrentWaveSamples : UInt32,
-    dwCurrentTimeElapsedMS : UInt32,
-    hPalCurrent : Win32cr::Graphics::Gdi::HPALETTE,
-    fCapturingNow : Win32cr::Foundation::BOOL,
-    dwReturn : UInt32,
-    wNumVideoAllocated : UInt32,
-    wNumAudioAllocated : UInt32
-
-  @[Extern]
-  record CAPTUREPARMS,
-    dwRequestMicroSecPerFrame : UInt32,
-    fMakeUserHitOKToCapture : Win32cr::Foundation::BOOL,
-    wPercentDropForError : UInt32,
-    fYield : Win32cr::Foundation::BOOL,
-    dwIndexSize : UInt32,
-    wChunkGranularity : UInt32,
-    fUsingDOSMemory : Win32cr::Foundation::BOOL,
-    wNumVideoRequested : UInt32,
-    fCaptureAudio : Win32cr::Foundation::BOOL,
-    wNumAudioRequested : UInt32,
-    vKeyAbort : UInt32,
-    fAbortLeftMouse : Win32cr::Foundation::BOOL,
-    fAbortRightMouse : Win32cr::Foundation::BOOL,
-    fLimitEnabled : Win32cr::Foundation::BOOL,
-    wTimeLimit : UInt32,
-    fMCIControl : Win32cr::Foundation::BOOL,
-    fStepMCIDevice : Win32cr::Foundation::BOOL,
-    dwMCIStartTime : UInt32,
-    dwMCIStopTime : UInt32,
-    fStepCaptureAt2x : Win32cr::Foundation::BOOL,
-    wStepCaptureAverageFrames : UInt32,
-    dwAudioBufferSize : UInt32,
-    fDisableWriteCache : Win32cr::Foundation::BOOL,
-    av_stream_master : UInt32
-
-  @[Extern]
-  record CAPINFOCHUNK,
-    fccInfoID : UInt32,
-    lpData : Void*,
-    cbData : Int32
-
-  @[Extern]
-  record DRVM_IOCTL_DATA,
-    dwSize : UInt32,
-    dwCmd : UInt32
-
-  @[Extern]
-  record WAVEOPENDESC,
-    hWave : Win32cr::Media::Audio::HWAVE,
-    lpFormat : Win32cr::Media::Audio::WAVEFORMAT*,
-    dwCallback : LibC::UIntPtrT,
-    dwInstance : LibC::UIntPtrT,
-    uMappedDeviceID : UInt32,
-    dnDevNode : LibC::UIntPtrT
-
-  @[Extern]
-  record MIDIOPENSTRMID,
-    dwStreamID : UInt32,
-    uDeviceID : UInt32
-
-  @[Extern]
-  record MIXEROPENDESC,
-    hmx : Win32cr::Media::Audio::HMIXER,
-    pReserved0 : Void*,
-    dwCallback : LibC::UIntPtrT,
-    dwInstance : LibC::UIntPtrT,
-    dnDevNode : LibC::UIntPtrT
-
-  @[Extern]
-  record TIMEREVENT,
-    wDelay : UInt16,
-    wResolution : UInt16,
-    lpFunction : Win32cr::Media::LPTIMECALLBACK,
-    dwUser : UInt32,
-    wFlags : UInt16,
-    wReserved1 : UInt16
-
-  @[Extern]
-  record MCI_OPEN_DRIVER_PARMS,
-    wDeviceID : UInt32,
-    lpstrParams : Win32cr::Foundation::PWSTR,
-    wCustomCommandTable : UInt32,
-    wType : UInt32
+  struct WMAUDIO2WAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    property dwSamplesPerBlock : UInt32
+    property wEncodeOptions : UInt16
+    property dwSuperBlockAlign : UInt32
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX, @dwSamplesPerBlock : UInt32, @wEncodeOptions : UInt16, @dwSuperBlockAlign : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WMAUDIO3WAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    property wValidBitsPerSample : UInt16
+    property dwChannelMask : UInt32
+    property dwReserved1 : UInt32
+    property dwReserved2 : UInt32
+    property wEncodeOptions : UInt16
+    property wReserved3 : UInt16
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX, @wValidBitsPerSample : UInt16, @dwChannelMask : UInt32, @dwReserved1 : UInt32, @dwReserved2 : UInt32, @wEncodeOptions : UInt16, @wReserved3 : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct CREATIVEADPCMWAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    property wRevision : UInt16
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX, @wRevision : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct CREATIVEFASTSPEECH8WAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    property wRevision : UInt16
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX, @wRevision : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct CREATIVEFASTSPEECH10WAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    property wRevision : UInt16
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX, @wRevision : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct FMTOWNS_SND_WAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    property wRevision : UInt16
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX, @wRevision : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct OLIGSMWAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX)
+    end
+  end
+
+  @[Extern]
+  struct OLIADPCMWAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX)
+    end
+  end
+
+  @[Extern]
+  struct OLICELPWAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX)
+    end
+  end
+
+  @[Extern]
+  struct OLISBCWAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX)
+    end
+  end
+
+  @[Extern]
+  struct OLIOPRWAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX)
+    end
+  end
+
+  @[Extern]
+  struct CSIMAADPCMWAVEFORMAT
+    property wfx : Win32cr::Media::Audio::WAVEFORMATEX
+    def initialize(@wfx : Win32cr::Media::Audio::WAVEFORMATEX)
+    end
+  end
+
+  @[Extern]
+  struct S_riffwave_inst
+    property bUnshiftedNote : UInt8
+    property chFineTune : Win32cr::Foundation::CHAR
+    property chGain : Win32cr::Foundation::CHAR
+    property bLowNote : UInt8
+    property bHighNote : UInt8
+    property bLowVelocity : UInt8
+    property bHighVelocity : UInt8
+    def initialize(@bUnshiftedNote : UInt8, @chFineTune : Win32cr::Foundation::CHAR, @chGain : Win32cr::Foundation::CHAR, @bLowNote : UInt8, @bHighNote : UInt8, @bLowVelocity : UInt8, @bHighVelocity : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct EXBMINFOHEADER
+    property bmi : Win32cr::Graphics::Gdi::BITMAPINFOHEADER
+    property biExtDataOffset : UInt32
+    def initialize(@bmi : Win32cr::Graphics::Gdi::BITMAPINFOHEADER, @biExtDataOffset : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct JPEGINFOHEADER
+    property jpeg_size : UInt32
+    property jpeg_process : UInt32
+    property jpeg_color_space_id : UInt32
+    property jpeg_bits_per_sample : UInt32
+    property jpegh_sub_sampling : UInt32
+    property jpegv_sub_sampling : UInt32
+    def initialize(@jpeg_size : UInt32, @jpeg_process : UInt32, @jpeg_color_space_id : UInt32, @jpeg_bits_per_sample : UInt32, @jpegh_sub_sampling : UInt32, @jpegv_sub_sampling : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_GENERIC_PARMS
+    property dwCallback : LibC::UIntPtrT
+    def initialize(@dwCallback : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct MCI_OPEN_PARMSA
+    property dwCallback : LibC::UIntPtrT
+    property wDeviceID : UInt32
+    property lpstrDeviceType : Win32cr::Foundation::PSTR
+    property lpstrElementName : Win32cr::Foundation::PSTR
+    property lpstrAlias : Win32cr::Foundation::PSTR
+    def initialize(@dwCallback : LibC::UIntPtrT, @wDeviceID : UInt32, @lpstrDeviceType : Win32cr::Foundation::PSTR, @lpstrElementName : Win32cr::Foundation::PSTR, @lpstrAlias : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct MCI_OPEN_PARMSW
+    property dwCallback : LibC::UIntPtrT
+    property wDeviceID : UInt32
+    property lpstrDeviceType : Win32cr::Foundation::PWSTR
+    property lpstrElementName : Win32cr::Foundation::PWSTR
+    property lpstrAlias : Win32cr::Foundation::PWSTR
+    def initialize(@dwCallback : LibC::UIntPtrT, @wDeviceID : UInt32, @lpstrDeviceType : Win32cr::Foundation::PWSTR, @lpstrElementName : Win32cr::Foundation::PWSTR, @lpstrAlias : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct MCI_PLAY_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property dwFrom : UInt32
+    property dwTo : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwFrom : UInt32, @dwTo : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_SEEK_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property dwTo : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwTo : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_STATUS_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property dwReturn : LibC::UIntPtrT
+    property dwItem : UInt32
+    property dwTrack : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwReturn : LibC::UIntPtrT, @dwItem : UInt32, @dwTrack : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_INFO_PARMSA
+    property dwCallback : LibC::UIntPtrT
+    property lpstrReturn : Win32cr::Foundation::PSTR
+    property dwRetSize : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @lpstrReturn : Win32cr::Foundation::PSTR, @dwRetSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_INFO_PARMSW
+    property dwCallback : LibC::UIntPtrT
+    property lpstrReturn : Win32cr::Foundation::PWSTR
+    property dwRetSize : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @lpstrReturn : Win32cr::Foundation::PWSTR, @dwRetSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_GETDEVCAPS_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property dwReturn : UInt32
+    property dwItem : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwReturn : UInt32, @dwItem : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_SYSINFO_PARMSA
+    property dwCallback : LibC::UIntPtrT
+    property lpstrReturn : Win32cr::Foundation::PSTR
+    property dwRetSize : UInt32
+    property dwNumber : UInt32
+    property wDeviceType : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @lpstrReturn : Win32cr::Foundation::PSTR, @dwRetSize : UInt32, @dwNumber : UInt32, @wDeviceType : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_SYSINFO_PARMSW
+    property dwCallback : LibC::UIntPtrT
+    property lpstrReturn : Win32cr::Foundation::PWSTR
+    property dwRetSize : UInt32
+    property dwNumber : UInt32
+    property wDeviceType : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @lpstrReturn : Win32cr::Foundation::PWSTR, @dwRetSize : UInt32, @dwNumber : UInt32, @wDeviceType : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_SET_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property dwTimeFormat : UInt32
+    property dwAudio : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwTimeFormat : UInt32, @dwAudio : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_BREAK_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property nVirtKey : Int32
+    property hwndBreak : Win32cr::Foundation::HWND
+    def initialize(@dwCallback : LibC::UIntPtrT, @nVirtKey : Int32, @hwndBreak : Win32cr::Foundation::HWND)
+    end
+  end
+
+  @[Extern]
+  struct MCI_SAVE_PARMSA
+    property dwCallback : LibC::UIntPtrT
+    property lpfilename : Win32cr::Foundation::PSTR
+    def initialize(@dwCallback : LibC::UIntPtrT, @lpfilename : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct MCI_SAVE_PARMSW
+    property dwCallback : LibC::UIntPtrT
+    property lpfilename : Win32cr::Foundation::PWSTR
+    def initialize(@dwCallback : LibC::UIntPtrT, @lpfilename : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct MCI_LOAD_PARMSA
+    property dwCallback : LibC::UIntPtrT
+    property lpfilename : Win32cr::Foundation::PSTR
+    def initialize(@dwCallback : LibC::UIntPtrT, @lpfilename : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct MCI_LOAD_PARMSW
+    property dwCallback : LibC::UIntPtrT
+    property lpfilename : Win32cr::Foundation::PWSTR
+    def initialize(@dwCallback : LibC::UIntPtrT, @lpfilename : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct MCI_RECORD_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property dwFrom : UInt32
+    property dwTo : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwFrom : UInt32, @dwTo : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_VD_PLAY_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property dwFrom : UInt32
+    property dwTo : UInt32
+    property dwSpeed : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwFrom : UInt32, @dwTo : UInt32, @dwSpeed : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_VD_STEP_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property dwFrames : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwFrames : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_VD_ESCAPE_PARMSA
+    property dwCallback : LibC::UIntPtrT
+    property lpstrCommand : Win32cr::Foundation::PSTR
+    def initialize(@dwCallback : LibC::UIntPtrT, @lpstrCommand : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct MCI_VD_ESCAPE_PARMSW
+    property dwCallback : LibC::UIntPtrT
+    property lpstrCommand : Win32cr::Foundation::PWSTR
+    def initialize(@dwCallback : LibC::UIntPtrT, @lpstrCommand : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct MCI_WAVE_OPEN_PARMSA
+    property dwCallback : LibC::UIntPtrT
+    property wDeviceID : UInt32
+    property lpstrDeviceType : Win32cr::Foundation::PSTR
+    property lpstrElementName : Win32cr::Foundation::PSTR
+    property lpstrAlias : Win32cr::Foundation::PSTR
+    property dwBufferSeconds : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @wDeviceID : UInt32, @lpstrDeviceType : Win32cr::Foundation::PSTR, @lpstrElementName : Win32cr::Foundation::PSTR, @lpstrAlias : Win32cr::Foundation::PSTR, @dwBufferSeconds : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_WAVE_OPEN_PARMSW
+    property dwCallback : LibC::UIntPtrT
+    property wDeviceID : UInt32
+    property lpstrDeviceType : Win32cr::Foundation::PWSTR
+    property lpstrElementName : Win32cr::Foundation::PWSTR
+    property lpstrAlias : Win32cr::Foundation::PWSTR
+    property dwBufferSeconds : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @wDeviceID : UInt32, @lpstrDeviceType : Win32cr::Foundation::PWSTR, @lpstrElementName : Win32cr::Foundation::PWSTR, @lpstrAlias : Win32cr::Foundation::PWSTR, @dwBufferSeconds : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_WAVE_DELETE_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property dwFrom : UInt32
+    property dwTo : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwFrom : UInt32, @dwTo : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_WAVE_SET_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property dwTimeFormat : UInt32
+    property dwAudio : UInt32
+    property wInput : UInt32
+    property wOutput : UInt32
+    property wFormatTag : UInt16
+    property wReserved2 : UInt16
+    property nChannels : UInt16
+    property wReserved3 : UInt16
+    property nSamplesPerSec : UInt32
+    property nAvgBytesPerSec : UInt32
+    property nBlockAlign : UInt16
+    property wReserved4 : UInt16
+    property wBitsPerSample : UInt16
+    property wReserved5 : UInt16
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwTimeFormat : UInt32, @dwAudio : UInt32, @wInput : UInt32, @wOutput : UInt32, @wFormatTag : UInt16, @wReserved2 : UInt16, @nChannels : UInt16, @wReserved3 : UInt16, @nSamplesPerSec : UInt32, @nAvgBytesPerSec : UInt32, @nBlockAlign : UInt16, @wReserved4 : UInt16, @wBitsPerSample : UInt16, @wReserved5 : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct MCI_SEQ_SET_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property dwTimeFormat : UInt32
+    property dwAudio : UInt32
+    property dwTempo : UInt32
+    property dwPort : UInt32
+    property dwSlave : UInt32
+    property dwMaster : UInt32
+    property dwOffset : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwTimeFormat : UInt32, @dwAudio : UInt32, @dwTempo : UInt32, @dwPort : UInt32, @dwSlave : UInt32, @dwMaster : UInt32, @dwOffset : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_ANIM_OPEN_PARMSA
+    property dwCallback : LibC::UIntPtrT
+    property wDeviceID : UInt32
+    property lpstrDeviceType : Win32cr::Foundation::PSTR
+    property lpstrElementName : Win32cr::Foundation::PSTR
+    property lpstrAlias : Win32cr::Foundation::PSTR
+    property dwStyle : UInt32
+    property hWndParent : Win32cr::Foundation::HWND
+    def initialize(@dwCallback : LibC::UIntPtrT, @wDeviceID : UInt32, @lpstrDeviceType : Win32cr::Foundation::PSTR, @lpstrElementName : Win32cr::Foundation::PSTR, @lpstrAlias : Win32cr::Foundation::PSTR, @dwStyle : UInt32, @hWndParent : Win32cr::Foundation::HWND)
+    end
+  end
+
+  @[Extern]
+  struct MCI_ANIM_OPEN_PARMSW
+    property dwCallback : LibC::UIntPtrT
+    property wDeviceID : UInt32
+    property lpstrDeviceType : Win32cr::Foundation::PWSTR
+    property lpstrElementName : Win32cr::Foundation::PWSTR
+    property lpstrAlias : Win32cr::Foundation::PWSTR
+    property dwStyle : UInt32
+    property hWndParent : Win32cr::Foundation::HWND
+    def initialize(@dwCallback : LibC::UIntPtrT, @wDeviceID : UInt32, @lpstrDeviceType : Win32cr::Foundation::PWSTR, @lpstrElementName : Win32cr::Foundation::PWSTR, @lpstrAlias : Win32cr::Foundation::PWSTR, @dwStyle : UInt32, @hWndParent : Win32cr::Foundation::HWND)
+    end
+  end
+
+  @[Extern]
+  struct MCI_ANIM_PLAY_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property dwFrom : UInt32
+    property dwTo : UInt32
+    property dwSpeed : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwFrom : UInt32, @dwTo : UInt32, @dwSpeed : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_ANIM_STEP_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property dwFrames : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwFrames : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_ANIM_WINDOW_PARMSA
+    property dwCallback : LibC::UIntPtrT
+    property hWnd : Win32cr::Foundation::HWND
+    property nCmdShow : UInt32
+    property lpstrText : Win32cr::Foundation::PSTR
+    def initialize(@dwCallback : LibC::UIntPtrT, @hWnd : Win32cr::Foundation::HWND, @nCmdShow : UInt32, @lpstrText : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct MCI_ANIM_WINDOW_PARMSW
+    property dwCallback : LibC::UIntPtrT
+    property hWnd : Win32cr::Foundation::HWND
+    property nCmdShow : UInt32
+    property lpstrText : Win32cr::Foundation::PWSTR
+    def initialize(@dwCallback : LibC::UIntPtrT, @hWnd : Win32cr::Foundation::HWND, @nCmdShow : UInt32, @lpstrText : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct MCI_ANIM_RECT_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property rc : Win32cr::Foundation::RECT
+    def initialize(@dwCallback : LibC::UIntPtrT, @rc : Win32cr::Foundation::RECT)
+    end
+  end
+
+  @[Extern]
+  struct MCI_ANIM_UPDATE_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property rc : Win32cr::Foundation::RECT
+    property hDC : Win32cr::Graphics::Gdi::HDC
+    def initialize(@dwCallback : LibC::UIntPtrT, @rc : Win32cr::Foundation::RECT, @hDC : Win32cr::Graphics::Gdi::HDC)
+    end
+  end
+
+  @[Extern]
+  struct MCI_OVLY_OPEN_PARMSA
+    property dwCallback : LibC::UIntPtrT
+    property wDeviceID : UInt32
+    property lpstrDeviceType : Win32cr::Foundation::PSTR
+    property lpstrElementName : Win32cr::Foundation::PSTR
+    property lpstrAlias : Win32cr::Foundation::PSTR
+    property dwStyle : UInt32
+    property hWndParent : Win32cr::Foundation::HWND
+    def initialize(@dwCallback : LibC::UIntPtrT, @wDeviceID : UInt32, @lpstrDeviceType : Win32cr::Foundation::PSTR, @lpstrElementName : Win32cr::Foundation::PSTR, @lpstrAlias : Win32cr::Foundation::PSTR, @dwStyle : UInt32, @hWndParent : Win32cr::Foundation::HWND)
+    end
+  end
+
+  @[Extern]
+  struct MCI_OVLY_OPEN_PARMSW
+    property dwCallback : LibC::UIntPtrT
+    property wDeviceID : UInt32
+    property lpstrDeviceType : Win32cr::Foundation::PWSTR
+    property lpstrElementName : Win32cr::Foundation::PWSTR
+    property lpstrAlias : Win32cr::Foundation::PWSTR
+    property dwStyle : UInt32
+    property hWndParent : Win32cr::Foundation::HWND
+    def initialize(@dwCallback : LibC::UIntPtrT, @wDeviceID : UInt32, @lpstrDeviceType : Win32cr::Foundation::PWSTR, @lpstrElementName : Win32cr::Foundation::PWSTR, @lpstrAlias : Win32cr::Foundation::PWSTR, @dwStyle : UInt32, @hWndParent : Win32cr::Foundation::HWND)
+    end
+  end
+
+  @[Extern]
+  struct MCI_OVLY_WINDOW_PARMSA
+    property dwCallback : LibC::UIntPtrT
+    property hWnd : Win32cr::Foundation::HWND
+    property nCmdShow : UInt32
+    property lpstrText : Win32cr::Foundation::PSTR
+    def initialize(@dwCallback : LibC::UIntPtrT, @hWnd : Win32cr::Foundation::HWND, @nCmdShow : UInt32, @lpstrText : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct MCI_OVLY_WINDOW_PARMSW
+    property dwCallback : LibC::UIntPtrT
+    property hWnd : Win32cr::Foundation::HWND
+    property nCmdShow : UInt32
+    property lpstrText : Win32cr::Foundation::PWSTR
+    def initialize(@dwCallback : LibC::UIntPtrT, @hWnd : Win32cr::Foundation::HWND, @nCmdShow : UInt32, @lpstrText : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct MCI_OVLY_RECT_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property rc : Win32cr::Foundation::RECT
+    def initialize(@dwCallback : LibC::UIntPtrT, @rc : Win32cr::Foundation::RECT)
+    end
+  end
+
+  @[Extern]
+  struct MCI_OVLY_SAVE_PARMSA
+    property dwCallback : LibC::UIntPtrT
+    property lpfilename : Win32cr::Foundation::PSTR
+    property rc : Win32cr::Foundation::RECT
+    def initialize(@dwCallback : LibC::UIntPtrT, @lpfilename : Win32cr::Foundation::PSTR, @rc : Win32cr::Foundation::RECT)
+    end
+  end
+
+  @[Extern]
+  struct MCI_OVLY_SAVE_PARMSW
+    property dwCallback : LibC::UIntPtrT
+    property lpfilename : Win32cr::Foundation::PWSTR
+    property rc : Win32cr::Foundation::RECT
+    def initialize(@dwCallback : LibC::UIntPtrT, @lpfilename : Win32cr::Foundation::PWSTR, @rc : Win32cr::Foundation::RECT)
+    end
+  end
+
+  @[Extern]
+  struct MCI_OVLY_LOAD_PARMSA
+    property dwCallback : LibC::UIntPtrT
+    property lpfilename : Win32cr::Foundation::PSTR
+    property rc : Win32cr::Foundation::RECT
+    def initialize(@dwCallback : LibC::UIntPtrT, @lpfilename : Win32cr::Foundation::PSTR, @rc : Win32cr::Foundation::RECT)
+    end
+  end
+
+  @[Extern]
+  struct MCI_OVLY_LOAD_PARMSW
+    property dwCallback : LibC::UIntPtrT
+    property lpfilename : Win32cr::Foundation::PWSTR
+    property rc : Win32cr::Foundation::RECT
+    def initialize(@dwCallback : LibC::UIntPtrT, @lpfilename : Win32cr::Foundation::PWSTR, @rc : Win32cr::Foundation::RECT)
+    end
+  end
+
+  @[Extern]
+  struct DRVCONFIGINFOEX
+    property dwDCISize : UInt32
+    property lpszDCISectionName : Win32cr::Foundation::PWSTR
+    property lpszDCIAliasName : Win32cr::Foundation::PWSTR
+    property dnDevNode : UInt32
+    def initialize(@dwDCISize : UInt32, @lpszDCISectionName : Win32cr::Foundation::PWSTR, @lpszDCIAliasName : Win32cr::Foundation::PWSTR, @dnDevNode : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DRVCONFIGINFO
+    property dwDCISize : UInt32
+    property lpszDCISectionName : Win32cr::Foundation::PWSTR
+    property lpszDCIAliasName : Win32cr::Foundation::PWSTR
+    def initialize(@dwDCISize : UInt32, @lpszDCISectionName : Win32cr::Foundation::PWSTR, @lpszDCIAliasName : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct MMIOINFO
+    property dwFlags : UInt32
+    property fccIOProc : UInt32
+    property pIOProc : Win32cr::Media::Multimedia::LPMMIOPROC
+    property wErrorRet : UInt32
+    property htask : Win32cr::Media::HTASK
+    property cchBuffer : Int32
+    property pchBuffer : Int8*
+    property pchNext : Int8*
+    property pchEndRead : Int8*
+    property pchEndWrite : Int8*
+    property lBufOffset : Int32
+    property lDiskOffset : Int32
+    property adwInfo : UInt32[3]
+    property dwReserved1 : UInt32
+    property dwReserved2 : UInt32
+    property hmmio : Win32cr::Media::Multimedia::HMMIO
+    def initialize(@dwFlags : UInt32, @fccIOProc : UInt32, @pIOProc : Win32cr::Media::Multimedia::LPMMIOPROC, @wErrorRet : UInt32, @htask : Win32cr::Media::HTASK, @cchBuffer : Int32, @pchBuffer : Int8*, @pchNext : Int8*, @pchEndRead : Int8*, @pchEndWrite : Int8*, @lBufOffset : Int32, @lDiskOffset : Int32, @adwInfo : UInt32[3], @dwReserved1 : UInt32, @dwReserved2 : UInt32, @hmmio : Win32cr::Media::Multimedia::HMMIO)
+    end
+  end
+
+  @[Extern]
+  struct MMCKINFO
+    property ckid : UInt32
+    property cksize : UInt32
+    property fccType : UInt32
+    property dwDataOffset : UInt32
+    property dwFlags : UInt32
+    def initialize(@ckid : UInt32, @cksize : UInt32, @fccType : UInt32, @dwDataOffset : UInt32, @dwFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct JOYCAPSA
+    property wMid : UInt16
+    property wPid : UInt16
+    property szPname : Win32cr::Foundation::CHAR[32]
+    property wXmin : UInt32
+    property wXmax : UInt32
+    property wYmin : UInt32
+    property wYmax : UInt32
+    property wZmin : UInt32
+    property wZmax : UInt32
+    property wNumButtons : UInt32
+    property wPeriodMin : UInt32
+    property wPeriodMax : UInt32
+    property wRmin : UInt32
+    property wRmax : UInt32
+    property wUmin : UInt32
+    property wUmax : UInt32
+    property wVmin : UInt32
+    property wVmax : UInt32
+    property wCaps : UInt32
+    property wMaxAxes : UInt32
+    property wNumAxes : UInt32
+    property wMaxButtons : UInt32
+    property szRegKey : Win32cr::Foundation::CHAR[32]
+    property szOEMVxD : Win32cr::Foundation::CHAR[260]
+    def initialize(@wMid : UInt16, @wPid : UInt16, @szPname : Win32cr::Foundation::CHAR[32], @wXmin : UInt32, @wXmax : UInt32, @wYmin : UInt32, @wYmax : UInt32, @wZmin : UInt32, @wZmax : UInt32, @wNumButtons : UInt32, @wPeriodMin : UInt32, @wPeriodMax : UInt32, @wRmin : UInt32, @wRmax : UInt32, @wUmin : UInt32, @wUmax : UInt32, @wVmin : UInt32, @wVmax : UInt32, @wCaps : UInt32, @wMaxAxes : UInt32, @wNumAxes : UInt32, @wMaxButtons : UInt32, @szRegKey : Win32cr::Foundation::CHAR[32], @szOEMVxD : Win32cr::Foundation::CHAR[260])
+    end
+  end
+
+  @[Extern]
+  struct JOYCAPSW
+    property wMid : UInt16
+    property wPid : UInt16
+    property szPname : UInt16[32]
+    property wXmin : UInt32
+    property wXmax : UInt32
+    property wYmin : UInt32
+    property wYmax : UInt32
+    property wZmin : UInt32
+    property wZmax : UInt32
+    property wNumButtons : UInt32
+    property wPeriodMin : UInt32
+    property wPeriodMax : UInt32
+    property wRmin : UInt32
+    property wRmax : UInt32
+    property wUmin : UInt32
+    property wUmax : UInt32
+    property wVmin : UInt32
+    property wVmax : UInt32
+    property wCaps : UInt32
+    property wMaxAxes : UInt32
+    property wNumAxes : UInt32
+    property wMaxButtons : UInt32
+    property szRegKey : UInt16[32]
+    property szOEMVxD : UInt16[260]
+    def initialize(@wMid : UInt16, @wPid : UInt16, @szPname : UInt16[32], @wXmin : UInt32, @wXmax : UInt32, @wYmin : UInt32, @wYmax : UInt32, @wZmin : UInt32, @wZmax : UInt32, @wNumButtons : UInt32, @wPeriodMin : UInt32, @wPeriodMax : UInt32, @wRmin : UInt32, @wRmax : UInt32, @wUmin : UInt32, @wUmax : UInt32, @wVmin : UInt32, @wVmax : UInt32, @wCaps : UInt32, @wMaxAxes : UInt32, @wNumAxes : UInt32, @wMaxButtons : UInt32, @szRegKey : UInt16[32], @szOEMVxD : UInt16[260])
+    end
+  end
+
+  @[Extern]
+  struct JOYCAPS2A
+    property wMid : UInt16
+    property wPid : UInt16
+    property szPname : Win32cr::Foundation::CHAR[32]
+    property wXmin : UInt32
+    property wXmax : UInt32
+    property wYmin : UInt32
+    property wYmax : UInt32
+    property wZmin : UInt32
+    property wZmax : UInt32
+    property wNumButtons : UInt32
+    property wPeriodMin : UInt32
+    property wPeriodMax : UInt32
+    property wRmin : UInt32
+    property wRmax : UInt32
+    property wUmin : UInt32
+    property wUmax : UInt32
+    property wVmin : UInt32
+    property wVmax : UInt32
+    property wCaps : UInt32
+    property wMaxAxes : UInt32
+    property wNumAxes : UInt32
+    property wMaxButtons : UInt32
+    property szRegKey : Win32cr::Foundation::CHAR[32]
+    property szOEMVxD : Win32cr::Foundation::CHAR[260]
+    property manufacturer_guid : LibC::GUID
+    property product_guid : LibC::GUID
+    property name_guid : LibC::GUID
+    def initialize(@wMid : UInt16, @wPid : UInt16, @szPname : Win32cr::Foundation::CHAR[32], @wXmin : UInt32, @wXmax : UInt32, @wYmin : UInt32, @wYmax : UInt32, @wZmin : UInt32, @wZmax : UInt32, @wNumButtons : UInt32, @wPeriodMin : UInt32, @wPeriodMax : UInt32, @wRmin : UInt32, @wRmax : UInt32, @wUmin : UInt32, @wUmax : UInt32, @wVmin : UInt32, @wVmax : UInt32, @wCaps : UInt32, @wMaxAxes : UInt32, @wNumAxes : UInt32, @wMaxButtons : UInt32, @szRegKey : Win32cr::Foundation::CHAR[32], @szOEMVxD : Win32cr::Foundation::CHAR[260], @manufacturer_guid : LibC::GUID, @product_guid : LibC::GUID, @name_guid : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct JOYCAPS2W
+    property wMid : UInt16
+    property wPid : UInt16
+    property szPname : UInt16[32]
+    property wXmin : UInt32
+    property wXmax : UInt32
+    property wYmin : UInt32
+    property wYmax : UInt32
+    property wZmin : UInt32
+    property wZmax : UInt32
+    property wNumButtons : UInt32
+    property wPeriodMin : UInt32
+    property wPeriodMax : UInt32
+    property wRmin : UInt32
+    property wRmax : UInt32
+    property wUmin : UInt32
+    property wUmax : UInt32
+    property wVmin : UInt32
+    property wVmax : UInt32
+    property wCaps : UInt32
+    property wMaxAxes : UInt32
+    property wNumAxes : UInt32
+    property wMaxButtons : UInt32
+    property szRegKey : UInt16[32]
+    property szOEMVxD : UInt16[260]
+    property manufacturer_guid : LibC::GUID
+    property product_guid : LibC::GUID
+    property name_guid : LibC::GUID
+    def initialize(@wMid : UInt16, @wPid : UInt16, @szPname : UInt16[32], @wXmin : UInt32, @wXmax : UInt32, @wYmin : UInt32, @wYmax : UInt32, @wZmin : UInt32, @wZmax : UInt32, @wNumButtons : UInt32, @wPeriodMin : UInt32, @wPeriodMax : UInt32, @wRmin : UInt32, @wRmax : UInt32, @wUmin : UInt32, @wUmax : UInt32, @wVmin : UInt32, @wVmax : UInt32, @wCaps : UInt32, @wMaxAxes : UInt32, @wNumAxes : UInt32, @wMaxButtons : UInt32, @szRegKey : UInt16[32], @szOEMVxD : UInt16[260], @manufacturer_guid : LibC::GUID, @product_guid : LibC::GUID, @name_guid : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct JOYINFO
+    property wXpos : UInt32
+    property wYpos : UInt32
+    property wZpos : UInt32
+    property wButtons : UInt32
+    def initialize(@wXpos : UInt32, @wYpos : UInt32, @wZpos : UInt32, @wButtons : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct JOYINFOEX
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwXpos : UInt32
+    property dwYpos : UInt32
+    property dwZpos : UInt32
+    property dwRpos : UInt32
+    property dwUpos : UInt32
+    property dwVpos : UInt32
+    property dwButtons : UInt32
+    property dwButtonNumber : UInt32
+    property dwPOV : UInt32
+    property dwReserved1 : UInt32
+    property dwReserved2 : UInt32
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwXpos : UInt32, @dwYpos : UInt32, @dwZpos : UInt32, @dwRpos : UInt32, @dwUpos : UInt32, @dwVpos : UInt32, @dwButtons : UInt32, @dwButtonNumber : UInt32, @dwPOV : UInt32, @dwReserved1 : UInt32, @dwReserved2 : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_RECT_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property rc : Win32cr::Foundation::RECT
+    def initialize(@dwCallback : LibC::UIntPtrT, @rc : Win32cr::Foundation::RECT)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_CAPTURE_PARMSA
+    property dwCallback : LibC::UIntPtrT
+    property lpstrFileName : Win32cr::Foundation::PSTR
+    property rc : Win32cr::Foundation::RECT
+    def initialize(@dwCallback : LibC::UIntPtrT, @lpstrFileName : Win32cr::Foundation::PSTR, @rc : Win32cr::Foundation::RECT)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_CAPTURE_PARMSW
+    property dwCallback : LibC::UIntPtrT
+    property lpstrFileName : Win32cr::Foundation::PWSTR
+    property rc : Win32cr::Foundation::RECT
+    def initialize(@dwCallback : LibC::UIntPtrT, @lpstrFileName : Win32cr::Foundation::PWSTR, @rc : Win32cr::Foundation::RECT)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_COPY_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property dwFrom : UInt32
+    property dwTo : UInt32
+    property rc : Win32cr::Foundation::RECT
+    property dwAudioStream : UInt32
+    property dwVideoStream : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwFrom : UInt32, @dwTo : UInt32, @rc : Win32cr::Foundation::RECT, @dwAudioStream : UInt32, @dwVideoStream : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_CUE_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property dwTo : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwTo : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_CUT_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property dwFrom : UInt32
+    property dwTo : UInt32
+    property rc : Win32cr::Foundation::RECT
+    property dwAudioStream : UInt32
+    property dwVideoStream : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwFrom : UInt32, @dwTo : UInt32, @rc : Win32cr::Foundation::RECT, @dwAudioStream : UInt32, @dwVideoStream : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_DELETE_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property dwFrom : UInt32
+    property dwTo : UInt32
+    property rc : Win32cr::Foundation::RECT
+    property dwAudioStream : UInt32
+    property dwVideoStream : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwFrom : UInt32, @dwTo : UInt32, @rc : Win32cr::Foundation::RECT, @dwAudioStream : UInt32, @dwVideoStream : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_INFO_PARMSA
+    property dwCallback : LibC::UIntPtrT
+    property lpstrReturn : Win32cr::Foundation::PSTR
+    property dwRetSize : UInt32
+    property dwItem : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @lpstrReturn : Win32cr::Foundation::PSTR, @dwRetSize : UInt32, @dwItem : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_INFO_PARMSW
+    property dwCallback : LibC::UIntPtrT
+    property lpstrReturn : Win32cr::Foundation::PWSTR
+    property dwRetSize : UInt32
+    property dwItem : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @lpstrReturn : Win32cr::Foundation::PWSTR, @dwRetSize : UInt32, @dwItem : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_LIST_PARMSA
+    property dwCallback : LibC::UIntPtrT
+    property lpstrReturn : Win32cr::Foundation::PSTR
+    property dwLength : UInt32
+    property dwNumber : UInt32
+    property dwItem : UInt32
+    property lpstrAlgorithm : Win32cr::Foundation::PSTR
+    def initialize(@dwCallback : LibC::UIntPtrT, @lpstrReturn : Win32cr::Foundation::PSTR, @dwLength : UInt32, @dwNumber : UInt32, @dwItem : UInt32, @lpstrAlgorithm : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_LIST_PARMSW
+    property dwCallback : LibC::UIntPtrT
+    property lpstrReturn : Win32cr::Foundation::PWSTR
+    property dwLength : UInt32
+    property dwNumber : UInt32
+    property dwItem : UInt32
+    property lpstrAlgorithm : Win32cr::Foundation::PWSTR
+    def initialize(@dwCallback : LibC::UIntPtrT, @lpstrReturn : Win32cr::Foundation::PWSTR, @dwLength : UInt32, @dwNumber : UInt32, @dwItem : UInt32, @lpstrAlgorithm : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_MONITOR_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property dwSource : UInt32
+    property dwMethod : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwSource : UInt32, @dwMethod : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_OPEN_PARMSA
+    property dwCallback : LibC::UIntPtrT
+    property wDeviceID : UInt32
+    property lpstrDeviceType : Win32cr::Foundation::PSTR
+    property lpstrElementName : Win32cr::Foundation::PSTR
+    property lpstrAlias : Win32cr::Foundation::PSTR
+    property dwStyle : UInt32
+    property hWndParent : Win32cr::Foundation::HWND
+    def initialize(@dwCallback : LibC::UIntPtrT, @wDeviceID : UInt32, @lpstrDeviceType : Win32cr::Foundation::PSTR, @lpstrElementName : Win32cr::Foundation::PSTR, @lpstrAlias : Win32cr::Foundation::PSTR, @dwStyle : UInt32, @hWndParent : Win32cr::Foundation::HWND)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_OPEN_PARMSW
+    property dwCallback : LibC::UIntPtrT
+    property wDeviceID : UInt32
+    property lpstrDeviceType : Win32cr::Foundation::PWSTR
+    property lpstrElementName : Win32cr::Foundation::PWSTR
+    property lpstrAlias : Win32cr::Foundation::PWSTR
+    property dwStyle : UInt32
+    property hWndParent : Win32cr::Foundation::HWND
+    def initialize(@dwCallback : LibC::UIntPtrT, @wDeviceID : UInt32, @lpstrDeviceType : Win32cr::Foundation::PWSTR, @lpstrElementName : Win32cr::Foundation::PWSTR, @lpstrAlias : Win32cr::Foundation::PWSTR, @dwStyle : UInt32, @hWndParent : Win32cr::Foundation::HWND)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_PASTE_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property dwTo : UInt32
+    property rc : Win32cr::Foundation::RECT
+    property dwAudioStream : UInt32
+    property dwVideoStream : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwTo : UInt32, @rc : Win32cr::Foundation::RECT, @dwAudioStream : UInt32, @dwVideoStream : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_QUALITY_PARMSA
+    property dwCallback : LibC::UIntPtrT
+    property dwItem : UInt32
+    property lpstrName : Win32cr::Foundation::PSTR
+    property lpstrAlgorithm : UInt32
+    property dwHandle : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwItem : UInt32, @lpstrName : Win32cr::Foundation::PSTR, @lpstrAlgorithm : UInt32, @dwHandle : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_QUALITY_PARMSW
+    property dwCallback : LibC::UIntPtrT
+    property dwItem : UInt32
+    property lpstrName : Win32cr::Foundation::PWSTR
+    property lpstrAlgorithm : UInt32
+    property dwHandle : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwItem : UInt32, @lpstrName : Win32cr::Foundation::PWSTR, @lpstrAlgorithm : UInt32, @dwHandle : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_RECORD_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property dwFrom : UInt32
+    property dwTo : UInt32
+    property rc : Win32cr::Foundation::RECT
+    property dwAudioStream : UInt32
+    property dwVideoStream : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwFrom : UInt32, @dwTo : UInt32, @rc : Win32cr::Foundation::RECT, @dwAudioStream : UInt32, @dwVideoStream : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_RESERVE_PARMSA
+    property dwCallback : LibC::UIntPtrT
+    property lpstrPath : Win32cr::Foundation::PSTR
+    property dwSize : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @lpstrPath : Win32cr::Foundation::PSTR, @dwSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_RESERVE_PARMSW
+    property dwCallback : LibC::UIntPtrT
+    property lpstrPath : Win32cr::Foundation::PWSTR
+    property dwSize : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @lpstrPath : Win32cr::Foundation::PWSTR, @dwSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_RESTORE_PARMSA
+    property dwCallback : LibC::UIntPtrT
+    property lpstrFileName : Win32cr::Foundation::PSTR
+    property rc : Win32cr::Foundation::RECT
+    def initialize(@dwCallback : LibC::UIntPtrT, @lpstrFileName : Win32cr::Foundation::PSTR, @rc : Win32cr::Foundation::RECT)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_RESTORE_PARMSW
+    property dwCallback : LibC::UIntPtrT
+    property lpstrFileName : Win32cr::Foundation::PWSTR
+    property rc : Win32cr::Foundation::RECT
+    def initialize(@dwCallback : LibC::UIntPtrT, @lpstrFileName : Win32cr::Foundation::PWSTR, @rc : Win32cr::Foundation::RECT)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_SAVE_PARMSA
+    property dwCallback : LibC::UIntPtrT
+    property lpstrFileName : Win32cr::Foundation::PSTR
+    property rc : Win32cr::Foundation::RECT
+    def initialize(@dwCallback : LibC::UIntPtrT, @lpstrFileName : Win32cr::Foundation::PSTR, @rc : Win32cr::Foundation::RECT)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_SAVE_PARMSW
+    property dwCallback : LibC::UIntPtrT
+    property lpstrFileName : Win32cr::Foundation::PWSTR
+    property rc : Win32cr::Foundation::RECT
+    def initialize(@dwCallback : LibC::UIntPtrT, @lpstrFileName : Win32cr::Foundation::PWSTR, @rc : Win32cr::Foundation::RECT)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_SET_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property dwTimeFormat : UInt32
+    property dwAudio : UInt32
+    property dwFileFormat : UInt32
+    property dwSpeed : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwTimeFormat : UInt32, @dwAudio : UInt32, @dwFileFormat : UInt32, @dwSpeed : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_SETAUDIO_PARMSA
+    property dwCallback : LibC::UIntPtrT
+    property dwItem : UInt32
+    property dwValue : UInt32
+    property dwOver : UInt32
+    property lpstrAlgorithm : Win32cr::Foundation::PSTR
+    property lpstrQuality : Win32cr::Foundation::PSTR
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwItem : UInt32, @dwValue : UInt32, @dwOver : UInt32, @lpstrAlgorithm : Win32cr::Foundation::PSTR, @lpstrQuality : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_SETAUDIO_PARMSW
+    property dwCallback : LibC::UIntPtrT
+    property dwItem : UInt32
+    property dwValue : UInt32
+    property dwOver : UInt32
+    property lpstrAlgorithm : Win32cr::Foundation::PWSTR
+    property lpstrQuality : Win32cr::Foundation::PWSTR
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwItem : UInt32, @dwValue : UInt32, @dwOver : UInt32, @lpstrAlgorithm : Win32cr::Foundation::PWSTR, @lpstrQuality : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_SIGNAL_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property dwPosition : UInt32
+    property dwPeriod : UInt32
+    property dwUserParm : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwPosition : UInt32, @dwPeriod : UInt32, @dwUserParm : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_SETVIDEO_PARMSA
+    property dwCallback : LibC::UIntPtrT
+    property dwItem : UInt32
+    property dwValue : UInt32
+    property dwOver : UInt32
+    property lpstrAlgorithm : Win32cr::Foundation::PSTR
+    property lpstrQuality : Win32cr::Foundation::PSTR
+    property dwSourceNumber : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwItem : UInt32, @dwValue : UInt32, @dwOver : UInt32, @lpstrAlgorithm : Win32cr::Foundation::PSTR, @lpstrQuality : Win32cr::Foundation::PSTR, @dwSourceNumber : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_SETVIDEO_PARMSW
+    property dwCallback : LibC::UIntPtrT
+    property dwItem : UInt32
+    property dwValue : UInt32
+    property dwOver : UInt32
+    property lpstrAlgorithm : Win32cr::Foundation::PWSTR
+    property lpstrQuality : Win32cr::Foundation::PWSTR
+    property dwSourceNumber : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwItem : UInt32, @dwValue : UInt32, @dwOver : UInt32, @lpstrAlgorithm : Win32cr::Foundation::PWSTR, @lpstrQuality : Win32cr::Foundation::PWSTR, @dwSourceNumber : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_STATUS_PARMSA
+    property dwCallback : LibC::UIntPtrT
+    property dwReturn : LibC::UIntPtrT
+    property dwItem : UInt32
+    property dwTrack : UInt32
+    property lpstrDrive : Win32cr::Foundation::PSTR
+    property dwReference : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwReturn : LibC::UIntPtrT, @dwItem : UInt32, @dwTrack : UInt32, @lpstrDrive : Win32cr::Foundation::PSTR, @dwReference : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_STATUS_PARMSW
+    property dwCallback : LibC::UIntPtrT
+    property dwReturn : LibC::UIntPtrT
+    property dwItem : UInt32
+    property dwTrack : UInt32
+    property lpstrDrive : Win32cr::Foundation::PWSTR
+    property dwReference : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwReturn : LibC::UIntPtrT, @dwItem : UInt32, @dwTrack : UInt32, @lpstrDrive : Win32cr::Foundation::PWSTR, @dwReference : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_STEP_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property dwFrames : UInt32
+    def initialize(@dwCallback : LibC::UIntPtrT, @dwFrames : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_UPDATE_PARMS
+    property dwCallback : LibC::UIntPtrT
+    property rc : Win32cr::Foundation::RECT
+    property hDC : Win32cr::Graphics::Gdi::HDC
+    def initialize(@dwCallback : LibC::UIntPtrT, @rc : Win32cr::Foundation::RECT, @hDC : Win32cr::Graphics::Gdi::HDC)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_WINDOW_PARMSA
+    property dwCallback : LibC::UIntPtrT
+    property hWnd : Win32cr::Foundation::HWND
+    property nCmdShow : UInt32
+    property lpstrText : Win32cr::Foundation::PSTR
+    def initialize(@dwCallback : LibC::UIntPtrT, @hWnd : Win32cr::Foundation::HWND, @nCmdShow : UInt32, @lpstrText : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct MCI_DGV_WINDOW_PARMSW
+    property dwCallback : LibC::UIntPtrT
+    property hWnd : Win32cr::Foundation::HWND
+    property nCmdShow : UInt32
+    property lpstrText : Win32cr::Foundation::PWSTR
+    def initialize(@dwCallback : LibC::UIntPtrT, @hWnd : Win32cr::Foundation::HWND, @nCmdShow : UInt32, @lpstrText : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct ICOPEN
+    property dwSize : UInt32
+    property fccType : UInt32
+    property fccHandler : UInt32
+    property dwVersion : UInt32
+    property dwFlags : UInt32
+    property dwError : Win32cr::Foundation::LRESULT
+    property pV1Reserved : Void*
+    property pV2Reserved : Void*
+    property dnDevNode : UInt32
+    def initialize(@dwSize : UInt32, @fccType : UInt32, @fccHandler : UInt32, @dwVersion : UInt32, @dwFlags : UInt32, @dwError : Win32cr::Foundation::LRESULT, @pV1Reserved : Void*, @pV2Reserved : Void*, @dnDevNode : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ICINFO
+    property dwSize : UInt32
+    property fccType : UInt32
+    property fccHandler : UInt32
+    property dwFlags : UInt32
+    property dwVersion : UInt32
+    property dwVersionICM : UInt32
+    property szName : UInt16[16]
+    property szDescription : UInt16[128]
+    property szDriver : UInt16[128]
+    def initialize(@dwSize : UInt32, @fccType : UInt32, @fccHandler : UInt32, @dwFlags : UInt32, @dwVersion : UInt32, @dwVersionICM : UInt32, @szName : UInt16[16], @szDescription : UInt16[128], @szDriver : UInt16[128])
+    end
+  end
+
+  @[Extern]
+  struct ICCOMPRESS
+    property dwFlags : UInt32
+    property lpbiOutput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*
+    property lpOutput : Void*
+    property lpbiInput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*
+    property lpInput : Void*
+    property lpckid : UInt32*
+    property lpdwFlags : UInt32*
+    property lFrameNum : Int32
+    property dwFrameSize : UInt32
+    property dwQuality : UInt32
+    property lpbiPrev : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*
+    property lpPrev : Void*
+    def initialize(@dwFlags : UInt32, @lpbiOutput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, @lpOutput : Void*, @lpbiInput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, @lpInput : Void*, @lpckid : UInt32*, @lpdwFlags : UInt32*, @lFrameNum : Int32, @dwFrameSize : UInt32, @dwQuality : UInt32, @lpbiPrev : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, @lpPrev : Void*)
+    end
+  end
+
+  @[Extern]
+  struct ICCOMPRESSFRAMES
+    property dwFlags : UInt32
+    property lpbiOutput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*
+    property lOutput : Win32cr::Foundation::LPARAM
+    property lpbiInput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*
+    property lInput : Win32cr::Foundation::LPARAM
+    property lStartFrame : Int32
+    property lFrameCount : Int32
+    property lQuality : Int32
+    property lDataRate : Int32
+    property lKeyRate : Int32
+    property dwRate : UInt32
+    property dwScale : UInt32
+    property dwOverheadPerFrame : UInt32
+    property dwReserved2 : UInt32
+    property get_data : LibC::IntPtrT
+    property put_data : LibC::IntPtrT
+    def initialize(@dwFlags : UInt32, @lpbiOutput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, @lOutput : Win32cr::Foundation::LPARAM, @lpbiInput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, @lInput : Win32cr::Foundation::LPARAM, @lStartFrame : Int32, @lFrameCount : Int32, @lQuality : Int32, @lDataRate : Int32, @lKeyRate : Int32, @dwRate : UInt32, @dwScale : UInt32, @dwOverheadPerFrame : UInt32, @dwReserved2 : UInt32, @get_data : LibC::IntPtrT, @put_data : LibC::IntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct ICSETSTATUSPROC
+    property dwFlags : UInt32
+    property lParam : Win32cr::Foundation::LPARAM
+    property status : LibC::IntPtrT
+    def initialize(@dwFlags : UInt32, @lParam : Win32cr::Foundation::LPARAM, @status : LibC::IntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct ICDECOMPRESS
+    property dwFlags : UInt32
+    property lpbiInput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*
+    property lpInput : Void*
+    property lpbiOutput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*
+    property lpOutput : Void*
+    property ckid : UInt32
+    def initialize(@dwFlags : UInt32, @lpbiInput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, @lpInput : Void*, @lpbiOutput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, @lpOutput : Void*, @ckid : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ICDECOMPRESSEX
+    property dwFlags : UInt32
+    property lpbiSrc : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*
+    property lpSrc : Void*
+    property lpbiDst : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*
+    property lpDst : Void*
+    property xDst : Int32
+    property yDst : Int32
+    property dxDst : Int32
+    property dyDst : Int32
+    property xSrc : Int32
+    property ySrc : Int32
+    property dxSrc : Int32
+    property dySrc : Int32
+    def initialize(@dwFlags : UInt32, @lpbiSrc : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, @lpSrc : Void*, @lpbiDst : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, @lpDst : Void*, @xDst : Int32, @yDst : Int32, @dxDst : Int32, @dyDst : Int32, @xSrc : Int32, @ySrc : Int32, @dxSrc : Int32, @dySrc : Int32)
+    end
+  end
+
+  @[Extern]
+  struct ICDRAWBEGIN
+    property dwFlags : UInt32
+    property hpal : Win32cr::Graphics::Gdi::HPALETTE
+    property hwnd : Win32cr::Foundation::HWND
+    property hdc : Win32cr::Graphics::Gdi::HDC
+    property xDst : Int32
+    property yDst : Int32
+    property dxDst : Int32
+    property dyDst : Int32
+    property lpbi : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*
+    property xSrc : Int32
+    property ySrc : Int32
+    property dxSrc : Int32
+    property dySrc : Int32
+    property dwRate : UInt32
+    property dwScale : UInt32
+    def initialize(@dwFlags : UInt32, @hpal : Win32cr::Graphics::Gdi::HPALETTE, @hwnd : Win32cr::Foundation::HWND, @hdc : Win32cr::Graphics::Gdi::HDC, @xDst : Int32, @yDst : Int32, @dxDst : Int32, @dyDst : Int32, @lpbi : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, @xSrc : Int32, @ySrc : Int32, @dxSrc : Int32, @dySrc : Int32, @dwRate : UInt32, @dwScale : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ICDRAW
+    property dwFlags : UInt32
+    property lpFormat : Void*
+    property lpData : Void*
+    property cbData : UInt32
+    property lTime : Int32
+    def initialize(@dwFlags : UInt32, @lpFormat : Void*, @lpData : Void*, @cbData : UInt32, @lTime : Int32)
+    end
+  end
+
+  @[Extern]
+  struct ICDRAWSUGGEST
+    property lpbiIn : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*
+    property lpbiSuggest : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*
+    property dxSrc : Int32
+    property dySrc : Int32
+    property dxDst : Int32
+    property dyDst : Int32
+    property hicDecompressor : Win32cr::Media::Multimedia::HIC
+    def initialize(@lpbiIn : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, @lpbiSuggest : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, @dxSrc : Int32, @dySrc : Int32, @dxDst : Int32, @dyDst : Int32, @hicDecompressor : Win32cr::Media::Multimedia::HIC)
+    end
+  end
+
+  @[Extern]
+  struct ICPALETTE
+    property dwFlags : UInt32
+    property iStart : Int32
+    property iLen : Int32
+    property lppe : Win32cr::Graphics::Gdi::PALETTEENTRY*
+    def initialize(@dwFlags : UInt32, @iStart : Int32, @iLen : Int32, @lppe : Win32cr::Graphics::Gdi::PALETTEENTRY*)
+    end
+  end
+
+  @[Extern]
+  struct COMPVARS
+    property cbSize : Int32
+    property dwFlags : UInt32
+    property hic : Win32cr::Media::Multimedia::HIC
+    property fccType : UInt32
+    property fccHandler : UInt32
+    property lpbiIn : Win32cr::Graphics::Gdi::BITMAPINFO*
+    property lpbiOut : Win32cr::Graphics::Gdi::BITMAPINFO*
+    property lpBitsOut : Void*
+    property lpBitsPrev : Void*
+    property lFrame : Int32
+    property lKey : Int32
+    property lDataRate : Int32
+    property lQ : Int32
+    property lKeyCount : Int32
+    property lpState : Void*
+    property cbState : Int32
+    def initialize(@cbSize : Int32, @dwFlags : UInt32, @hic : Win32cr::Media::Multimedia::HIC, @fccType : UInt32, @fccHandler : UInt32, @lpbiIn : Win32cr::Graphics::Gdi::BITMAPINFO*, @lpbiOut : Win32cr::Graphics::Gdi::BITMAPINFO*, @lpBitsOut : Void*, @lpBitsPrev : Void*, @lFrame : Int32, @lKey : Int32, @lDataRate : Int32, @lQ : Int32, @lKeyCount : Int32, @lpState : Void*, @cbState : Int32)
+    end
+  end
+
+  @[Extern]
+  struct DRAWDIBTIME
+    property timeCount : Int32
+    property timeDraw : Int32
+    property timeDecompress : Int32
+    property timeDither : Int32
+    property timeStretch : Int32
+    property timeBlt : Int32
+    property timeSetDIBits : Int32
+    def initialize(@timeCount : Int32, @timeDraw : Int32, @timeDecompress : Int32, @timeDither : Int32, @timeStretch : Int32, @timeBlt : Int32, @timeSetDIBits : Int32)
+    end
+  end
+
+  @[Extern]
+  struct AVISTREAMINFOW
+    property fccType : UInt32
+    property fccHandler : UInt32
+    property dwFlags : UInt32
+    property dwCaps : UInt32
+    property wPriority : UInt16
+    property wLanguage : UInt16
+    property dwScale : UInt32
+    property dwRate : UInt32
+    property dwStart : UInt32
+    property dwLength : UInt32
+    property dwInitialFrames : UInt32
+    property dwSuggestedBufferSize : UInt32
+    property dwQuality : UInt32
+    property dwSampleSize : UInt32
+    property rcFrame : Win32cr::Foundation::RECT
+    property dwEditCount : UInt32
+    property dwFormatChangeCount : UInt32
+    property szName : UInt16[64]
+    def initialize(@fccType : UInt32, @fccHandler : UInt32, @dwFlags : UInt32, @dwCaps : UInt32, @wPriority : UInt16, @wLanguage : UInt16, @dwScale : UInt32, @dwRate : UInt32, @dwStart : UInt32, @dwLength : UInt32, @dwInitialFrames : UInt32, @dwSuggestedBufferSize : UInt32, @dwQuality : UInt32, @dwSampleSize : UInt32, @rcFrame : Win32cr::Foundation::RECT, @dwEditCount : UInt32, @dwFormatChangeCount : UInt32, @szName : UInt16[64])
+    end
+  end
+
+  @[Extern]
+  struct AVISTREAMINFOA
+    property fccType : UInt32
+    property fccHandler : UInt32
+    property dwFlags : UInt32
+    property dwCaps : UInt32
+    property wPriority : UInt16
+    property wLanguage : UInt16
+    property dwScale : UInt32
+    property dwRate : UInt32
+    property dwStart : UInt32
+    property dwLength : UInt32
+    property dwInitialFrames : UInt32
+    property dwSuggestedBufferSize : UInt32
+    property dwQuality : UInt32
+    property dwSampleSize : UInt32
+    property rcFrame : Win32cr::Foundation::RECT
+    property dwEditCount : UInt32
+    property dwFormatChangeCount : UInt32
+    property szName : Win32cr::Foundation::CHAR[64]
+    def initialize(@fccType : UInt32, @fccHandler : UInt32, @dwFlags : UInt32, @dwCaps : UInt32, @wPriority : UInt16, @wLanguage : UInt16, @dwScale : UInt32, @dwRate : UInt32, @dwStart : UInt32, @dwLength : UInt32, @dwInitialFrames : UInt32, @dwSuggestedBufferSize : UInt32, @dwQuality : UInt32, @dwSampleSize : UInt32, @rcFrame : Win32cr::Foundation::RECT, @dwEditCount : UInt32, @dwFormatChangeCount : UInt32, @szName : Win32cr::Foundation::CHAR[64])
+    end
+  end
+
+  @[Extern]
+  struct AVIFILEINFOW
+    property dwMaxBytesPerSec : UInt32
+    property dwFlags : UInt32
+    property dwCaps : UInt32
+    property dwStreams : UInt32
+    property dwSuggestedBufferSize : UInt32
+    property dwWidth : UInt32
+    property dwHeight : UInt32
+    property dwScale : UInt32
+    property dwRate : UInt32
+    property dwLength : UInt32
+    property dwEditCount : UInt32
+    property szFileType : UInt16[64]
+    def initialize(@dwMaxBytesPerSec : UInt32, @dwFlags : UInt32, @dwCaps : UInt32, @dwStreams : UInt32, @dwSuggestedBufferSize : UInt32, @dwWidth : UInt32, @dwHeight : UInt32, @dwScale : UInt32, @dwRate : UInt32, @dwLength : UInt32, @dwEditCount : UInt32, @szFileType : UInt16[64])
+    end
+  end
+
+  @[Extern]
+  struct AVIFILEINFOA
+    property dwMaxBytesPerSec : UInt32
+    property dwFlags : UInt32
+    property dwCaps : UInt32
+    property dwStreams : UInt32
+    property dwSuggestedBufferSize : UInt32
+    property dwWidth : UInt32
+    property dwHeight : UInt32
+    property dwScale : UInt32
+    property dwRate : UInt32
+    property dwLength : UInt32
+    property dwEditCount : UInt32
+    property szFileType : Win32cr::Foundation::CHAR[64]
+    def initialize(@dwMaxBytesPerSec : UInt32, @dwFlags : UInt32, @dwCaps : UInt32, @dwStreams : UInt32, @dwSuggestedBufferSize : UInt32, @dwWidth : UInt32, @dwHeight : UInt32, @dwScale : UInt32, @dwRate : UInt32, @dwLength : UInt32, @dwEditCount : UInt32, @szFileType : Win32cr::Foundation::CHAR[64])
+    end
+  end
+
+  @[Extern]
+  struct AVICOMPRESSOPTIONS
+    property fccType : UInt32
+    property fccHandler : UInt32
+    property dwKeyFrameEvery : UInt32
+    property dwQuality : UInt32
+    property dwBytesPerSecond : UInt32
+    property dwFlags : UInt32
+    property lpFormat : Void*
+    property cbFormat : UInt32
+    property lpParms : Void*
+    property cbParms : UInt32
+    property dwInterleaveEvery : UInt32
+    def initialize(@fccType : UInt32, @fccHandler : UInt32, @dwKeyFrameEvery : UInt32, @dwQuality : UInt32, @dwBytesPerSecond : UInt32, @dwFlags : UInt32, @lpFormat : Void*, @cbFormat : UInt32, @lpParms : Void*, @cbParms : UInt32, @dwInterleaveEvery : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct VIDEOHDR
+    property lpData : UInt8*
+    property dwBufferLength : UInt32
+    property dwBytesUsed : UInt32
+    property dwTimeCaptured : UInt32
+    property dwUser : LibC::UIntPtrT
+    property dwFlags : UInt32
+    property dwReserved : LibC::UIntPtrT[4]
+    def initialize(@lpData : UInt8*, @dwBufferLength : UInt32, @dwBytesUsed : UInt32, @dwTimeCaptured : UInt32, @dwUser : LibC::UIntPtrT, @dwFlags : UInt32, @dwReserved : LibC::UIntPtrT[4])
+    end
+  end
+
+  @[Extern]
+  struct CHANNEL_CAPS
+    property dwFlags : UInt32
+    property dwSrcRectXMod : UInt32
+    property dwSrcRectYMod : UInt32
+    property dwSrcRectWidthMod : UInt32
+    property dwSrcRectHeightMod : UInt32
+    property dwDstRectXMod : UInt32
+    property dwDstRectYMod : UInt32
+    property dwDstRectWidthMod : UInt32
+    property dwDstRectHeightMod : UInt32
+    def initialize(@dwFlags : UInt32, @dwSrcRectXMod : UInt32, @dwSrcRectYMod : UInt32, @dwSrcRectWidthMod : UInt32, @dwSrcRectHeightMod : UInt32, @dwDstRectXMod : UInt32, @dwDstRectYMod : UInt32, @dwDstRectWidthMod : UInt32, @dwDstRectHeightMod : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CAPDRIVERCAPS
+    property wDeviceIndex : UInt32
+    property fHasOverlay : Win32cr::Foundation::BOOL
+    property fHasDlgVideoSource : Win32cr::Foundation::BOOL
+    property fHasDlgVideoFormat : Win32cr::Foundation::BOOL
+    property fHasDlgVideoDisplay : Win32cr::Foundation::BOOL
+    property fCaptureInitialized : Win32cr::Foundation::BOOL
+    property fDriverSuppliesPalettes : Win32cr::Foundation::BOOL
+    property hVideoIn : Win32cr::Foundation::HANDLE
+    property hVideoOut : Win32cr::Foundation::HANDLE
+    property hVideoExtIn : Win32cr::Foundation::HANDLE
+    property hVideoExtOut : Win32cr::Foundation::HANDLE
+    def initialize(@wDeviceIndex : UInt32, @fHasOverlay : Win32cr::Foundation::BOOL, @fHasDlgVideoSource : Win32cr::Foundation::BOOL, @fHasDlgVideoFormat : Win32cr::Foundation::BOOL, @fHasDlgVideoDisplay : Win32cr::Foundation::BOOL, @fCaptureInitialized : Win32cr::Foundation::BOOL, @fDriverSuppliesPalettes : Win32cr::Foundation::BOOL, @hVideoIn : Win32cr::Foundation::HANDLE, @hVideoOut : Win32cr::Foundation::HANDLE, @hVideoExtIn : Win32cr::Foundation::HANDLE, @hVideoExtOut : Win32cr::Foundation::HANDLE)
+    end
+  end
+
+  @[Extern]
+  struct CAPSTATUS
+    property uiImageWidth : UInt32
+    property uiImageHeight : UInt32
+    property fLiveWindow : Win32cr::Foundation::BOOL
+    property fOverlayWindow : Win32cr::Foundation::BOOL
+    property fScale : Win32cr::Foundation::BOOL
+    property ptScroll : Win32cr::Foundation::POINT
+    property fUsingDefaultPalette : Win32cr::Foundation::BOOL
+    property fAudioHardware : Win32cr::Foundation::BOOL
+    property fCapFileExists : Win32cr::Foundation::BOOL
+    property dwCurrentVideoFrame : UInt32
+    property dwCurrentVideoFramesDropped : UInt32
+    property dwCurrentWaveSamples : UInt32
+    property dwCurrentTimeElapsedMS : UInt32
+    property hPalCurrent : Win32cr::Graphics::Gdi::HPALETTE
+    property fCapturingNow : Win32cr::Foundation::BOOL
+    property dwReturn : UInt32
+    property wNumVideoAllocated : UInt32
+    property wNumAudioAllocated : UInt32
+    def initialize(@uiImageWidth : UInt32, @uiImageHeight : UInt32, @fLiveWindow : Win32cr::Foundation::BOOL, @fOverlayWindow : Win32cr::Foundation::BOOL, @fScale : Win32cr::Foundation::BOOL, @ptScroll : Win32cr::Foundation::POINT, @fUsingDefaultPalette : Win32cr::Foundation::BOOL, @fAudioHardware : Win32cr::Foundation::BOOL, @fCapFileExists : Win32cr::Foundation::BOOL, @dwCurrentVideoFrame : UInt32, @dwCurrentVideoFramesDropped : UInt32, @dwCurrentWaveSamples : UInt32, @dwCurrentTimeElapsedMS : UInt32, @hPalCurrent : Win32cr::Graphics::Gdi::HPALETTE, @fCapturingNow : Win32cr::Foundation::BOOL, @dwReturn : UInt32, @wNumVideoAllocated : UInt32, @wNumAudioAllocated : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CAPTUREPARMS
+    property dwRequestMicroSecPerFrame : UInt32
+    property fMakeUserHitOKToCapture : Win32cr::Foundation::BOOL
+    property wPercentDropForError : UInt32
+    property fYield : Win32cr::Foundation::BOOL
+    property dwIndexSize : UInt32
+    property wChunkGranularity : UInt32
+    property fUsingDOSMemory : Win32cr::Foundation::BOOL
+    property wNumVideoRequested : UInt32
+    property fCaptureAudio : Win32cr::Foundation::BOOL
+    property wNumAudioRequested : UInt32
+    property vKeyAbort : UInt32
+    property fAbortLeftMouse : Win32cr::Foundation::BOOL
+    property fAbortRightMouse : Win32cr::Foundation::BOOL
+    property fLimitEnabled : Win32cr::Foundation::BOOL
+    property wTimeLimit : UInt32
+    property fMCIControl : Win32cr::Foundation::BOOL
+    property fStepMCIDevice : Win32cr::Foundation::BOOL
+    property dwMCIStartTime : UInt32
+    property dwMCIStopTime : UInt32
+    property fStepCaptureAt2x : Win32cr::Foundation::BOOL
+    property wStepCaptureAverageFrames : UInt32
+    property dwAudioBufferSize : UInt32
+    property fDisableWriteCache : Win32cr::Foundation::BOOL
+    property av_stream_master : UInt32
+    def initialize(@dwRequestMicroSecPerFrame : UInt32, @fMakeUserHitOKToCapture : Win32cr::Foundation::BOOL, @wPercentDropForError : UInt32, @fYield : Win32cr::Foundation::BOOL, @dwIndexSize : UInt32, @wChunkGranularity : UInt32, @fUsingDOSMemory : Win32cr::Foundation::BOOL, @wNumVideoRequested : UInt32, @fCaptureAudio : Win32cr::Foundation::BOOL, @wNumAudioRequested : UInt32, @vKeyAbort : UInt32, @fAbortLeftMouse : Win32cr::Foundation::BOOL, @fAbortRightMouse : Win32cr::Foundation::BOOL, @fLimitEnabled : Win32cr::Foundation::BOOL, @wTimeLimit : UInt32, @fMCIControl : Win32cr::Foundation::BOOL, @fStepMCIDevice : Win32cr::Foundation::BOOL, @dwMCIStartTime : UInt32, @dwMCIStopTime : UInt32, @fStepCaptureAt2x : Win32cr::Foundation::BOOL, @wStepCaptureAverageFrames : UInt32, @dwAudioBufferSize : UInt32, @fDisableWriteCache : Win32cr::Foundation::BOOL, @av_stream_master : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CAPINFOCHUNK
+    property fccInfoID : UInt32
+    property lpData : Void*
+    property cbData : Int32
+    def initialize(@fccInfoID : UInt32, @lpData : Void*, @cbData : Int32)
+    end
+  end
+
+  @[Extern]
+  struct DRVM_IOCTL_DATA
+    property dwSize : UInt32
+    property dwCmd : UInt32
+    def initialize(@dwSize : UInt32, @dwCmd : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WAVEOPENDESC
+    property hWave : Win32cr::Media::Audio::HWAVE
+    property lpFormat : Win32cr::Media::Audio::WAVEFORMAT*
+    property dwCallback : LibC::UIntPtrT
+    property dwInstance : LibC::UIntPtrT
+    property uMappedDeviceID : UInt32
+    property dnDevNode : LibC::UIntPtrT
+    def initialize(@hWave : Win32cr::Media::Audio::HWAVE, @lpFormat : Win32cr::Media::Audio::WAVEFORMAT*, @dwCallback : LibC::UIntPtrT, @dwInstance : LibC::UIntPtrT, @uMappedDeviceID : UInt32, @dnDevNode : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct MIDIOPENSTRMID
+    property dwStreamID : UInt32
+    property uDeviceID : UInt32
+    def initialize(@dwStreamID : UInt32, @uDeviceID : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MIXEROPENDESC
+    property hmx : Win32cr::Media::Audio::HMIXER
+    property pReserved0 : Void*
+    property dwCallback : LibC::UIntPtrT
+    property dwInstance : LibC::UIntPtrT
+    property dnDevNode : LibC::UIntPtrT
+    def initialize(@hmx : Win32cr::Media::Audio::HMIXER, @pReserved0 : Void*, @dwCallback : LibC::UIntPtrT, @dwInstance : LibC::UIntPtrT, @dnDevNode : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct TIMEREVENT
+    property wDelay : UInt16
+    property wResolution : UInt16
+    property lpFunction : Win32cr::Media::LPTIMECALLBACK
+    property dwUser : UInt32
+    property wFlags : UInt16
+    property wReserved1 : UInt16
+    def initialize(@wDelay : UInt16, @wResolution : UInt16, @lpFunction : Win32cr::Media::LPTIMECALLBACK, @dwUser : UInt32, @wFlags : UInt16, @wReserved1 : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct MCI_OPEN_DRIVER_PARMS
+    property wDeviceID : UInt32
+    property lpstrParams : Win32cr::Foundation::PWSTR
+    property wCustomCommandTable : UInt32
+    property wType : UInt32
+    def initialize(@wDeviceID : UInt32, @lpstrParams : Win32cr::Foundation::PWSTR, @wCustomCommandTable : UInt32, @wType : UInt32)
+    end
+  end
 
   @[Extern]
   record IAVIStreamVtbl,
@@ -6074,7 +6563,6 @@ module Win32cr::Media::Multimedia
 
 
   @[Extern]
-  #@[Com("00020021-0000-0000-c000-000000000046")]
   record IAVIStream, lpVtbl : IAVIStreamVtbl* do
     GUID = LibC::GUID.new(0x20021_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IAVIStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6132,7 +6620,6 @@ module Win32cr::Media::Multimedia
 
 
   @[Extern]
-  #@[Com("00020022-0000-0000-c000-000000000046")]
   record IAVIStreaming, lpVtbl : IAVIStreamingVtbl* do
     GUID = LibC::GUID.new(0x20022_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IAVIStreaming*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6166,7 +6653,6 @@ module Win32cr::Media::Multimedia
 
 
   @[Extern]
-  #@[Com("00020024-0000-0000-c000-000000000046")]
   record IAVIEditStream, lpVtbl : IAVIEditStreamVtbl* do
     GUID = LibC::GUID.new(0x20024_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IAVIEditStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6211,7 +6697,6 @@ module Win32cr::Media::Multimedia
 
 
   @[Extern]
-  #@[Com("00020025-0000-0000-c000-000000000046")]
   record IAVIPersistFile, lpVtbl : IAVIPersistFileVtbl* do
     GUID = LibC::GUID.new(0x20025_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IAVIPersistFile*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6262,7 +6747,6 @@ module Win32cr::Media::Multimedia
 
 
   @[Extern]
-  #@[Com("00020020-0000-0000-c000-000000000046")]
   record IAVIFile, lpVtbl : IAVIFileVtbl* do
     GUID = LibC::GUID.new(0x20020_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IAVIFile*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6310,7 +6794,6 @@ module Win32cr::Media::Multimedia
 
 
   @[Extern]
-  #@[Com("00020023-0000-0000-c000-000000000046")]
   record IGetFrame, lpVtbl : IGetFrameVtbl* do
     GUID = LibC::GUID.new(0x20023_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IGetFrame*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6338,7 +6821,6 @@ module Win32cr::Media::Multimedia
   end
 
   @[Link("winmm")]
-  @[Link("api-ms-win-mm-misc-l1-1-1")]
   @[Link("msvfw32")]
   @[Link("avifil32")]
   @[Link("avicap32")]

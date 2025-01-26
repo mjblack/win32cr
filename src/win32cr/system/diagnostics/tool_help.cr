@@ -22,85 +22,106 @@ module Win32cr::System::Diagnostics::ToolHelp
   end
 
   @[Extern]
-  record HEAPLIST32,
-    dwSize : LibC::UIntPtrT,
-    th32ProcessID : UInt32,
-    th32HeapID : LibC::UIntPtrT,
-    dwFlags : UInt32
+  struct HEAPLIST32
+    property dwSize : LibC::UIntPtrT
+    property th32ProcessID : UInt32
+    property th32HeapID : LibC::UIntPtrT
+    property dwFlags : UInt32
+    def initialize(@dwSize : LibC::UIntPtrT, @th32ProcessID : UInt32, @th32HeapID : LibC::UIntPtrT, @dwFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record HEAPENTRY32,
-    dwSize : LibC::UIntPtrT,
-    hHandle : Win32cr::Foundation::HANDLE,
-    dwAddress : LibC::UIntPtrT,
-    dwBlockSize : LibC::UIntPtrT,
-    dwFlags : Win32cr::System::Diagnostics::ToolHelp::HEAPENTRY32_FLAGS,
-    dwLockCount : UInt32,
-    dwResvd : UInt32,
-    th32ProcessID : UInt32,
-    th32HeapID : LibC::UIntPtrT
+  struct HEAPENTRY32
+    property dwSize : LibC::UIntPtrT
+    property hHandle : Win32cr::Foundation::HANDLE
+    property dwAddress : LibC::UIntPtrT
+    property dwBlockSize : LibC::UIntPtrT
+    property dwFlags : Win32cr::System::Diagnostics::ToolHelp::HEAPENTRY32_FLAGS
+    property dwLockCount : UInt32
+    property dwResvd : UInt32
+    property th32ProcessID : UInt32
+    property th32HeapID : LibC::UIntPtrT
+    def initialize(@dwSize : LibC::UIntPtrT, @hHandle : Win32cr::Foundation::HANDLE, @dwAddress : LibC::UIntPtrT, @dwBlockSize : LibC::UIntPtrT, @dwFlags : Win32cr::System::Diagnostics::ToolHelp::HEAPENTRY32_FLAGS, @dwLockCount : UInt32, @dwResvd : UInt32, @th32ProcessID : UInt32, @th32HeapID : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record PROCESSENTRY32W,
-    dwSize : UInt32,
-    cntUsage : UInt32,
-    th32ProcessID : UInt32,
-    th32DefaultHeapID : LibC::UIntPtrT,
-    th32ModuleID : UInt32,
-    cntThreads : UInt32,
-    th32ParentProcessID : UInt32,
-    pcPriClassBase : Int32,
-    dwFlags : UInt32,
-    szExeFile : UInt16[260]
+  struct PROCESSENTRY32W
+    property dwSize : UInt32
+    property cntUsage : UInt32
+    property th32ProcessID : UInt32
+    property th32DefaultHeapID : LibC::UIntPtrT
+    property th32ModuleID : UInt32
+    property cntThreads : UInt32
+    property th32ParentProcessID : UInt32
+    property pcPriClassBase : Int32
+    property dwFlags : UInt32
+    property szExeFile : UInt16[260]
+    def initialize(@dwSize : UInt32, @cntUsage : UInt32, @th32ProcessID : UInt32, @th32DefaultHeapID : LibC::UIntPtrT, @th32ModuleID : UInt32, @cntThreads : UInt32, @th32ParentProcessID : UInt32, @pcPriClassBase : Int32, @dwFlags : UInt32, @szExeFile : UInt16[260])
+    end
+  end
 
   @[Extern]
-  record PROCESSENTRY32,
-    dwSize : UInt32,
-    cntUsage : UInt32,
-    th32ProcessID : UInt32,
-    th32DefaultHeapID : LibC::UIntPtrT,
-    th32ModuleID : UInt32,
-    cntThreads : UInt32,
-    th32ParentProcessID : UInt32,
-    pcPriClassBase : Int32,
-    dwFlags : UInt32,
-    szExeFile : Win32cr::Foundation::CHAR[260]
+  struct PROCESSENTRY32
+    property dwSize : UInt32
+    property cntUsage : UInt32
+    property th32ProcessID : UInt32
+    property th32DefaultHeapID : LibC::UIntPtrT
+    property th32ModuleID : UInt32
+    property cntThreads : UInt32
+    property th32ParentProcessID : UInt32
+    property pcPriClassBase : Int32
+    property dwFlags : UInt32
+    property szExeFile : Win32cr::Foundation::CHAR[260]
+    def initialize(@dwSize : UInt32, @cntUsage : UInt32, @th32ProcessID : UInt32, @th32DefaultHeapID : LibC::UIntPtrT, @th32ModuleID : UInt32, @cntThreads : UInt32, @th32ParentProcessID : UInt32, @pcPriClassBase : Int32, @dwFlags : UInt32, @szExeFile : Win32cr::Foundation::CHAR[260])
+    end
+  end
 
   @[Extern]
-  record THREADENTRY32,
-    dwSize : UInt32,
-    cntUsage : UInt32,
-    th32ThreadID : UInt32,
-    th32OwnerProcessID : UInt32,
-    tpBasePri : Int32,
-    tpDeltaPri : Int32,
-    dwFlags : UInt32
+  struct THREADENTRY32
+    property dwSize : UInt32
+    property cntUsage : UInt32
+    property th32ThreadID : UInt32
+    property th32OwnerProcessID : UInt32
+    property tpBasePri : Int32
+    property tpDeltaPri : Int32
+    property dwFlags : UInt32
+    def initialize(@dwSize : UInt32, @cntUsage : UInt32, @th32ThreadID : UInt32, @th32OwnerProcessID : UInt32, @tpBasePri : Int32, @tpDeltaPri : Int32, @dwFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record MODULEENTRY32W,
-    dwSize : UInt32,
-    th32ModuleID : UInt32,
-    th32ProcessID : UInt32,
-    glblcnt_usage : UInt32,
-    proccnt_usage : UInt32,
-    modBaseAddr : UInt8*,
-    modBaseSize : UInt32,
-    hModule : Win32cr::Foundation::HINSTANCE,
-    szModule : UInt16[256],
-    szExePath : UInt16[260]
+  struct MODULEENTRY32W
+    property dwSize : UInt32
+    property th32ModuleID : UInt32
+    property th32ProcessID : UInt32
+    property glblcnt_usage : UInt32
+    property proccnt_usage : UInt32
+    property modBaseAddr : UInt8*
+    property modBaseSize : UInt32
+    property hModule : Win32cr::Foundation::HINSTANCE
+    property szModule : UInt16[256]
+    property szExePath : UInt16[260]
+    def initialize(@dwSize : UInt32, @th32ModuleID : UInt32, @th32ProcessID : UInt32, @glblcnt_usage : UInt32, @proccnt_usage : UInt32, @modBaseAddr : UInt8*, @modBaseSize : UInt32, @hModule : Win32cr::Foundation::HINSTANCE, @szModule : UInt16[256], @szExePath : UInt16[260])
+    end
+  end
 
   @[Extern]
-  record MODULEENTRY32,
-    dwSize : UInt32,
-    th32ModuleID : UInt32,
-    th32ProcessID : UInt32,
-    glblcnt_usage : UInt32,
-    proccnt_usage : UInt32,
-    modBaseAddr : UInt8*,
-    modBaseSize : UInt32,
-    hModule : Win32cr::Foundation::HINSTANCE,
-    szModule : Win32cr::Foundation::CHAR[256],
-    szExePath : Win32cr::Foundation::CHAR[260]
+  struct MODULEENTRY32
+    property dwSize : UInt32
+    property th32ModuleID : UInt32
+    property th32ProcessID : UInt32
+    property glblcnt_usage : UInt32
+    property proccnt_usage : UInt32
+    property modBaseAddr : UInt8*
+    property modBaseSize : UInt32
+    property hModule : Win32cr::Foundation::HINSTANCE
+    property szModule : Win32cr::Foundation::CHAR[256]
+    property szExePath : Win32cr::Foundation::CHAR[260]
+    def initialize(@dwSize : UInt32, @th32ModuleID : UInt32, @th32ProcessID : UInt32, @glblcnt_usage : UInt32, @proccnt_usage : UInt32, @modBaseAddr : UInt8*, @modBaseSize : UInt32, @hModule : Win32cr::Foundation::HINSTANCE, @szModule : Win32cr::Foundation::CHAR[256], @szExePath : Win32cr::Foundation::CHAR[260])
+    end
+  end
 
   @[Link("kernel32")]
   lib C

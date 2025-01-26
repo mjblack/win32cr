@@ -2,33 +2,33 @@ require "./../foundation.cr"
 require "./com.cr"
 
 module Win32cr::System::DistributedTransactionCoordinator
-  alias DTC_GET_TRANSACTION_MANAGER = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, LibC::GUID*, UInt32, UInt16, Void*, Void**, Win32cr::Foundation::HRESULT)*
+  alias DTC_GET_TRANSACTION_MANAGER = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, LibC::GUID*, UInt32, UInt16, Void*, Void**, Win32cr::Foundation::HRESULT)
 
-  alias DTC_GET_TRANSACTION_MANAGER_EX_A = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, LibC::GUID*, UInt32, Void*, Void**, Win32cr::Foundation::HRESULT)*
+  alias DTC_GET_TRANSACTION_MANAGER_EX_A = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, LibC::GUID*, UInt32, Void*, Void**, Win32cr::Foundation::HRESULT)
 
-  alias DTC_GET_TRANSACTION_MANAGER_EX_W = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, LibC::GUID*, UInt32, Void*, Void**, Win32cr::Foundation::HRESULT)*
+  alias DTC_GET_TRANSACTION_MANAGER_EX_W = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, LibC::GUID*, UInt32, Void*, Void**, Win32cr::Foundation::HRESULT)
 
-  alias DTC_INSTALL_CLIENT = Proc(Int8*, UInt32, UInt32, Win32cr::Foundation::HRESULT)*
+  alias DTC_INSTALL_CLIENT = Proc(Int8*, UInt32, UInt32, Win32cr::Foundation::HRESULT)
 
-  alias XA_OPEN_EPT = Proc(Win32cr::Foundation::PSTR, Int32, Int32, Int32)*
+  alias XA_OPEN_EPT = Proc(Win32cr::Foundation::PSTR, Int32, Int32, Int32)
 
-  alias XA_CLOSE_EPT = Proc(Win32cr::Foundation::PSTR, Int32, Int32, Int32)*
+  alias XA_CLOSE_EPT = Proc(Win32cr::Foundation::PSTR, Int32, Int32, Int32)
 
-  alias XA_START_EPT = Proc(Win32cr::System::DistributedTransactionCoordinator::Xid_t*, Int32, Int32, Int32)*
+  alias XA_START_EPT = Proc(Win32cr::System::DistributedTransactionCoordinator::Xid_t*, Int32, Int32, Int32)
 
-  alias XA_END_EPT = Proc(Win32cr::System::DistributedTransactionCoordinator::Xid_t*, Int32, Int32, Int32)*
+  alias XA_END_EPT = Proc(Win32cr::System::DistributedTransactionCoordinator::Xid_t*, Int32, Int32, Int32)
 
-  alias XA_ROLLBACK_EPT = Proc(Win32cr::System::DistributedTransactionCoordinator::Xid_t*, Int32, Int32, Int32)*
+  alias XA_ROLLBACK_EPT = Proc(Win32cr::System::DistributedTransactionCoordinator::Xid_t*, Int32, Int32, Int32)
 
-  alias XA_PREPARE_EPT = Proc(Win32cr::System::DistributedTransactionCoordinator::Xid_t*, Int32, Int32, Int32)*
+  alias XA_PREPARE_EPT = Proc(Win32cr::System::DistributedTransactionCoordinator::Xid_t*, Int32, Int32, Int32)
 
-  alias XA_COMMIT_EPT = Proc(Win32cr::System::DistributedTransactionCoordinator::Xid_t*, Int32, Int32, Int32)*
+  alias XA_COMMIT_EPT = Proc(Win32cr::System::DistributedTransactionCoordinator::Xid_t*, Int32, Int32, Int32)
 
-  alias XA_RECOVER_EPT = Proc(Win32cr::System::DistributedTransactionCoordinator::Xid_t*, Int32, Int32, Int32, Int32)*
+  alias XA_RECOVER_EPT = Proc(Win32cr::System::DistributedTransactionCoordinator::Xid_t*, Int32, Int32, Int32, Int32)
 
-  alias XA_FORGET_EPT = Proc(Win32cr::System::DistributedTransactionCoordinator::Xid_t*, Int32, Int32, Int32)*
+  alias XA_FORGET_EPT = Proc(Win32cr::System::DistributedTransactionCoordinator::Xid_t*, Int32, Int32, Int32)
 
-  alias XA_COMPLETE_EPT = Proc(Int32*, Int32*, Int32, Int32, Int32)*
+  alias XA_COMPLETE_EPT = Proc(Int32*, Int32*, Int32, Int32, Int32)
 
   DTCINSTALL_E_CLIENT_ALREADY_INSTALLED = 384_i32
   DTCINSTALL_E_SERVER_ALREADY_INSTALLED = 385_i32
@@ -266,73 +266,100 @@ module Win32cr::System::DistributedTransactionCoordinator
   end
 
   @[Extern]
-  record BOID,
-    rgb : UInt8[16]
+  struct BOID
+    property rgb : UInt8[16]
+    def initialize(@rgb : UInt8[16])
+    end
+  end
 
   @[Extern]
-  record XACTTRANSINFO,
-    uow : Win32cr::System::DistributedTransactionCoordinator::BOID,
-    isoLevel : Int32,
-    isoFlags : UInt32,
-    grfTCSupported : UInt32,
-    grfRMSupported : UInt32,
-    grfTCSupportedRetaining : UInt32,
-    grfRMSupportedRetaining : UInt32
+  struct XACTTRANSINFO
+    property uow : Win32cr::System::DistributedTransactionCoordinator::BOID
+    property isoLevel : Int32
+    property isoFlags : UInt32
+    property grfTCSupported : UInt32
+    property grfRMSupported : UInt32
+    property grfTCSupportedRetaining : UInt32
+    property grfRMSupportedRetaining : UInt32
+    def initialize(@uow : Win32cr::System::DistributedTransactionCoordinator::BOID, @isoLevel : Int32, @isoFlags : UInt32, @grfTCSupported : UInt32, @grfRMSupported : UInt32, @grfTCSupportedRetaining : UInt32, @grfRMSupportedRetaining : UInt32)
+    end
+  end
 
   @[Extern]
-  record XACTSTATS,
-    cOpen : UInt32,
-    cCommitting : UInt32,
-    cCommitted : UInt32,
-    cAborting : UInt32,
-    cAborted : UInt32,
-    cInDoubt : UInt32,
-    cHeuristicDecision : UInt32,
-    timeTransactionsUp : Win32cr::Foundation::FILETIME
+  struct XACTSTATS
+    property cOpen : UInt32
+    property cCommitting : UInt32
+    property cCommitted : UInt32
+    property cAborting : UInt32
+    property cAborted : UInt32
+    property cInDoubt : UInt32
+    property cHeuristicDecision : UInt32
+    property timeTransactionsUp : Win32cr::Foundation::FILETIME
+    def initialize(@cOpen : UInt32, @cCommitting : UInt32, @cCommitted : UInt32, @cAborting : UInt32, @cAborted : UInt32, @cInDoubt : UInt32, @cHeuristicDecision : UInt32, @timeTransactionsUp : Win32cr::Foundation::FILETIME)
+    end
+  end
 
   @[Extern]
-  record XACTOPT,
-    ulTimeout : UInt32,
-    szDescription : UInt8[40]
+  struct XACTOPT
+    property ulTimeout : UInt32
+    property szDescription : UInt8[40]
+    def initialize(@ulTimeout : UInt32, @szDescription : UInt8[40])
+    end
+  end
 
   @[Extern]
-  record Xid_t,
-    formatID : Int32,
-    gtrid_length : Int32,
-    bqual_length : Int32,
-    data : Win32cr::Foundation::CHAR[128]
+  struct Xid_t
+    property formatID : Int32
+    property gtrid_length : Int32
+    property bqual_length : Int32
+    property data : Win32cr::Foundation::CHAR[128]
+    def initialize(@formatID : Int32, @gtrid_length : Int32, @bqual_length : Int32, @data : Win32cr::Foundation::CHAR[128])
+    end
+  end
 
   @[Extern]
-  record Xa_switch_t,
-    name : Win32cr::Foundation::CHAR[32],
-    flags : Int32,
-    version : Int32,
-    xa_open_entry : LibC::IntPtrT,
-    xa_close_entry : LibC::IntPtrT,
-    xa_start_entry : LibC::IntPtrT,
-    xa_end_entry : LibC::IntPtrT,
-    xa_rollback_entry : LibC::IntPtrT,
-    xa_prepare_entry : LibC::IntPtrT,
-    xa_commit_entry : LibC::IntPtrT,
-    xa_recover_entry : LibC::IntPtrT,
-    xa_forget_entry : LibC::IntPtrT,
-    xa_complete_entry : LibC::IntPtrT
+  struct Xa_switch_t
+    property name : Win32cr::Foundation::CHAR[32]
+    property flags : Int32
+    property version : Int32
+    property xa_open_entry : LibC::IntPtrT
+    property xa_close_entry : LibC::IntPtrT
+    property xa_start_entry : LibC::IntPtrT
+    property xa_end_entry : LibC::IntPtrT
+    property xa_rollback_entry : LibC::IntPtrT
+    property xa_prepare_entry : LibC::IntPtrT
+    property xa_commit_entry : LibC::IntPtrT
+    property xa_recover_entry : LibC::IntPtrT
+    property xa_forget_entry : LibC::IntPtrT
+    property xa_complete_entry : LibC::IntPtrT
+    def initialize(@name : Win32cr::Foundation::CHAR[32], @flags : Int32, @version : Int32, @xa_open_entry : LibC::IntPtrT, @xa_close_entry : LibC::IntPtrT, @xa_start_entry : LibC::IntPtrT, @xa_end_entry : LibC::IntPtrT, @xa_rollback_entry : LibC::IntPtrT, @xa_prepare_entry : LibC::IntPtrT, @xa_commit_entry : LibC::IntPtrT, @xa_recover_entry : LibC::IntPtrT, @xa_forget_entry : LibC::IntPtrT, @xa_complete_entry : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record OLE_TM_CONFIG_PARAMS_V1,
-    dwVersion : UInt32,
-    dwcConcurrencyHint : UInt32
+  struct OLE_TM_CONFIG_PARAMS_V1
+    property dwVersion : UInt32
+    property dwcConcurrencyHint : UInt32
+    def initialize(@dwVersion : UInt32, @dwcConcurrencyHint : UInt32)
+    end
+  end
 
   @[Extern]
-  record OLE_TM_CONFIG_PARAMS_V2,
-    dwVersion : UInt32,
-    dwcConcurrencyHint : UInt32,
-    applicationType : Win32cr::System::DistributedTransactionCoordinator::APPLICATIONTYPE,
-    clusterResourceId : LibC::GUID
+  struct OLE_TM_CONFIG_PARAMS_V2
+    property dwVersion : UInt32
+    property dwcConcurrencyHint : UInt32
+    property applicationType : Win32cr::System::DistributedTransactionCoordinator::APPLICATIONTYPE
+    property clusterResourceId : LibC::GUID
+    def initialize(@dwVersion : UInt32, @dwcConcurrencyHint : UInt32, @applicationType : Win32cr::System::DistributedTransactionCoordinator::APPLICATIONTYPE, @clusterResourceId : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record ProxyConfigParams_,
-    wcThreadsMax : UInt16
+  struct ProxyConfigParams_
+    property wcThreadsMax : UInt16
+    def initialize(@wcThreadsMax : UInt16)
+    end
+  end
 
   @[Extern]
   record ITransactionVtbl,
@@ -345,7 +372,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("0fb15084-af41-11ce-bd2b-204c4f4f5020")]
   record ITransaction, lpVtbl : ITransactionVtbl* do
     GUID = LibC::GUID.new(0xfb15084_u32, 0xaf41_u16, 0x11ce_u16, StaticArray[0xbd_u8, 0x2b_u8, 0x20_u8, 0x4c_u8, 0x4f_u8, 0x4f_u8, 0x50_u8, 0x20_u8])
     def query_interface(this : ITransaction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -381,7 +407,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("02656950-2152-11d0-944c-00a0c905416e")]
   record ITransactionCloner, lpVtbl : ITransactionClonerVtbl* do
     GUID = LibC::GUID.new(0x2656950_u32, 0x2152_u16, 0x11d0_u16, StaticArray[0x94_u8, 0x4c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0x41_u8, 0x6e_u8])
     def query_interface(this : ITransactionCloner*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -421,7 +446,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("34021548-0065-11d3-bac1-00c04f797be2")]
   record ITransaction2, lpVtbl : ITransaction2Vtbl* do
     GUID = LibC::GUID.new(0x34021548_u32, 0x65_u16, 0x11d3_u16, StaticArray[0xba_u8, 0xc1_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x7b_u8, 0xe2_u8])
     def query_interface(this : ITransaction2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -461,7 +485,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("3a6ad9e1-23b9-11cf-ad60-00aa00a74ccd")]
   record ITransactionDispenser, lpVtbl : ITransactionDispenserVtbl* do
     GUID = LibC::GUID.new(0x3a6ad9e1_u32, 0x23b9_u16, 0x11cf_u16, StaticArray[0xad_u8, 0x60_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa7_u8, 0x4c_u8, 0xcd_u8])
     def query_interface(this : ITransactionDispenser*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -492,7 +515,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("3a6ad9e0-23b9-11cf-ad60-00aa00a74ccd")]
   record ITransactionOptions, lpVtbl : ITransactionOptionsVtbl* do
     GUID = LibC::GUID.new(0x3a6ad9e0_u32, 0x23b9_u16, 0x11cf_u16, StaticArray[0xad_u8, 0x60_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa7_u8, 0x4c_u8, 0xcd_u8])
     def query_interface(this : ITransactionOptions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -525,7 +547,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("3a6ad9e2-23b9-11cf-ad60-00aa00a74ccd")]
   record ITransactionOutcomeEvents, lpVtbl : ITransactionOutcomeEventsVtbl* do
     GUID = LibC::GUID.new(0x3a6ad9e2_u32, 0x23b9_u16, 0x11cf_u16, StaticArray[0xad_u8, 0x60_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa7_u8, 0x4c_u8, 0xcd_u8])
     def query_interface(this : ITransactionOutcomeEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -562,7 +583,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("30274f88-6ee4-474e-9b95-7807bc9ef8cf")]
   record ITmNodeName, lpVtbl : ITmNodeNameVtbl* do
     GUID = LibC::GUID.new(0x30274f88_u32, 0x6ee4_u16, 0x474e_u16, StaticArray[0x9b_u8, 0x95_u8, 0x78_u8, 0x7_u8, 0xbc_u8, 0x9e_u8, 0xf8_u8, 0xcf_u8])
     def query_interface(this : ITmNodeName*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -592,7 +612,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("79427a2b-f895-40e0-be79-b57dc82ed231")]
   record IKernelTransaction, lpVtbl : IKernelTransactionVtbl* do
     GUID = LibC::GUID.new(0x79427a2b_u32, 0xf895_u16, 0x40e0_u16, StaticArray[0xbe_u8, 0x79_u8, 0xb5_u8, 0x7d_u8, 0xc8_u8, 0x2e_u8, 0xd2_u8, 0x31_u8])
     def query_interface(this : IKernelTransaction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -622,7 +641,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("69e971f0-23ce-11cf-ad60-00aa00a74ccd")]
   record ITransactionResourceAsync, lpVtbl : ITransactionResourceAsyncVtbl* do
     GUID = LibC::GUID.new(0x69e971f0_u32, 0x23ce_u16, 0x11cf_u16, StaticArray[0xad_u8, 0x60_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa7_u8, 0x4c_u8, 0xcd_u8])
     def query_interface(this : ITransactionResourceAsync*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -659,7 +677,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("c82bd532-5b30-11d3-8a91-00c04f79eb6d")]
   record ITransactionLastResourceAsync, lpVtbl : ITransactionLastResourceAsyncVtbl* do
     GUID = LibC::GUID.new(0xc82bd532_u32, 0x5b30_u16, 0x11d3_u16, StaticArray[0x8a_u8, 0x91_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xeb_u8, 0x6d_u8])
     def query_interface(this : ITransactionLastResourceAsync*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -692,7 +709,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("ee5ff7b3-4572-11d0-9452-00a0c905416e")]
   record ITransactionResource, lpVtbl : ITransactionResourceVtbl* do
     GUID = LibC::GUID.new(0xee5ff7b3_u32, 0x4572_u16, 0x11d0_u16, StaticArray[0x94_u8, 0x52_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0x41_u8, 0x6e_u8])
     def query_interface(this : ITransactionResource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -730,7 +746,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("0fb15081-af41-11ce-bd2b-204c4f4f5020")]
   record ITransactionEnlistmentAsync, lpVtbl : ITransactionEnlistmentAsyncVtbl* do
     GUID = LibC::GUID.new(0xfb15081_u32, 0xaf41_u16, 0x11ce_u16, StaticArray[0xbd_u8, 0x2b_u8, 0x20_u8, 0x4c_u8, 0x4f_u8, 0x4f_u8, 0x50_u8, 0x20_u8])
     def query_interface(this : ITransactionEnlistmentAsync*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -763,7 +778,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("c82bd533-5b30-11d3-8a91-00c04f79eb6d")]
   record ITransactionLastEnlistmentAsync, lpVtbl : ITransactionLastEnlistmentAsyncVtbl* do
     GUID = LibC::GUID.new(0xc82bd533_u32, 0x5b30_u16, 0x11d3_u16, StaticArray[0x8a_u8, 0x91_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xeb_u8, 0x6d_u8])
     def query_interface(this : ITransactionLastEnlistmentAsync*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -791,7 +805,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("e1cf9b53-8745-11ce-a9ba-00aa006c3706")]
   record ITransactionExportFactory, lpVtbl : ITransactionExportFactoryVtbl* do
     GUID = LibC::GUID.new(0xe1cf9b53_u32, 0x8745_u16, 0x11ce_u16, StaticArray[0xa9_u8, 0xba_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6c_u8, 0x37_u8, 0x6_u8])
     def query_interface(this : ITransactionExportFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -822,7 +835,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("0141fda4-8fc0-11ce-bd18-204c4f4f5020")]
   record ITransactionImportWhereabouts, lpVtbl : ITransactionImportWhereaboutsVtbl* do
     GUID = LibC::GUID.new(0x141fda4_u32, 0x8fc0_u16, 0x11ce_u16, StaticArray[0xbd_u8, 0x18_u8, 0x20_u8, 0x4c_u8, 0x4f_u8, 0x4f_u8, 0x50_u8, 0x20_u8])
     def query_interface(this : ITransactionImportWhereabouts*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -853,7 +865,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("0141fda5-8fc0-11ce-bd18-204c4f4f5020")]
   record ITransactionExport, lpVtbl : ITransactionExportVtbl* do
     GUID = LibC::GUID.new(0x141fda5_u32, 0x8fc0_u16, 0x11ce_u16, StaticArray[0xbd_u8, 0x18_u8, 0x20_u8, 0x4c_u8, 0x4f_u8, 0x4f_u8, 0x50_u8, 0x20_u8])
     def query_interface(this : ITransactionExport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -883,7 +894,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("e1cf9b5a-8745-11ce-a9ba-00aa006c3706")]
   record ITransactionImport, lpVtbl : ITransactionImportVtbl* do
     GUID = LibC::GUID.new(0xe1cf9b5a_u32, 0x8745_u16, 0x11ce_u16, StaticArray[0xa9_u8, 0xba_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6c_u8, 0x37_u8, 0x6_u8])
     def query_interface(this : ITransactionImport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -911,7 +921,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("17cf72d0-bac5-11d1-b1bf-00c04fc2f3ef")]
   record ITipTransaction, lpVtbl : ITipTransactionVtbl* do
     GUID = LibC::GUID.new(0x17cf72d0_u32, 0xbac5_u16, 0x11d1_u16, StaticArray[0xb1_u8, 0xbf_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xf3_u8, 0xef_u8])
     def query_interface(this : ITipTransaction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -943,7 +952,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("17cf72d1-bac5-11d1-b1bf-00c04fc2f3ef")]
   record ITipHelper, lpVtbl : ITipHelperVtbl* do
     GUID = LibC::GUID.new(0x17cf72d1_u32, 0xbac5_u16, 0x11d1_u16, StaticArray[0xb1_u8, 0xbf_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xf3_u8, 0xef_u8])
     def query_interface(this : ITipHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -976,7 +984,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("17cf72d2-bac5-11d1-b1bf-00c04fc2f3ef")]
   record ITipPullSink, lpVtbl : ITipPullSinkVtbl* do
     GUID = LibC::GUID.new(0x17cf72d2_u32, 0xbac5_u16, 0x11d1_u16, StaticArray[0xb1_u8, 0xbf_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xf3_u8, 0xef_u8])
     def query_interface(this : ITipPullSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1015,7 +1022,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("9797c15d-a428-4291-87b6-0995031a678d")]
   record IDtcNetworkAccessConfig, lpVtbl : IDtcNetworkAccessConfigVtbl* do
     GUID = LibC::GUID.new(0x9797c15d_u32, 0xa428_u16, 0x4291_u16, StaticArray[0x87_u8, 0xb6_u8, 0x9_u8, 0x95_u8, 0x3_u8, 0x1a_u8, 0x67_u8, 0x8d_u8])
     def query_interface(this : IDtcNetworkAccessConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1096,7 +1102,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("a7aa013b-eb7d-4f42-b41c-b2dec09ae034")]
   record IDtcNetworkAccessConfig2, lpVtbl : IDtcNetworkAccessConfig2Vtbl* do
     GUID = LibC::GUID.new(0xa7aa013b_u32, 0xeb7d_u16, 0x4f42_u16, StaticArray[0xb4_u8, 0x1c_u8, 0xb2_u8, 0xde_u8, 0xc0_u8, 0x9a_u8, 0xe0_u8, 0x34_u8])
     def query_interface(this : IDtcNetworkAccessConfig2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1197,7 +1202,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("76e4b4f3-2ca5-466b-89d5-fd218ee75b49")]
   record IDtcNetworkAccessConfig3, lpVtbl : IDtcNetworkAccessConfig3Vtbl* do
     GUID = LibC::GUID.new(0x76e4b4f3_u32, 0x2ca5_u16, 0x466b_u16, StaticArray[0x89_u8, 0xd5_u8, 0xfd_u8, 0x21_u8, 0x8e_u8, 0xe7_u8, 0x5b_u8, 0x49_u8])
     def query_interface(this : IDtcNetworkAccessConfig3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1287,7 +1291,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("64ffabe0-7ce9-11d0-8ce6-00c04fdc877e")]
   record IDtcToXaMapper, lpVtbl : IDtcToXaMapperVtbl* do
     GUID = LibC::GUID.new(0x64ffabe0_u32, 0x7ce9_u16, 0x11d0_u16, StaticArray[0x8c_u8, 0xe6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xdc_u8, 0x87_u8, 0x7e_u8])
     def query_interface(this : IDtcToXaMapper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1323,7 +1326,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("a9861610-304a-11d1-9813-00a0c905416e")]
   record IDtcToXaHelperFactory, lpVtbl : IDtcToXaHelperFactoryVtbl* do
     GUID = LibC::GUID.new(0xa9861610_u32, 0x304a_u16, 0x11d1_u16, StaticArray[0x98_u8, 0x13_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0x41_u8, 0x6e_u8])
     def query_interface(this : IDtcToXaHelperFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1351,7 +1353,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("a9861611-304a-11d1-9813-00a0c905416e")]
   record IDtcToXaHelper, lpVtbl : IDtcToXaHelperVtbl* do
     GUID = LibC::GUID.new(0xa9861611_u32, 0x304a_u16, 0x11d1_u16, StaticArray[0x98_u8, 0x13_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0x41_u8, 0x6e_u8])
     def query_interface(this : IDtcToXaHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1384,7 +1385,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("47ed4971-53b3-11d1-bbb9-00c04fd658f6")]
   record IDtcToXaHelperSinglePipe, lpVtbl : IDtcToXaHelperSinglePipeVtbl* do
     GUID = LibC::GUID.new(0x47ed4971_u32, 0x53b3_u16, 0x11d1_u16, StaticArray[0xbb_u8, 0xb9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd6_u8, 0x58_u8, 0xf6_u8])
     def query_interface(this : IDtcToXaHelperSinglePipe*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1420,7 +1420,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("f3b1f131-eeda-11ce-aed4-00aa0051e2c4")]
   record IXATransLookup, lpVtbl : IXATransLookupVtbl* do
     GUID = LibC::GUID.new(0xf3b1f131_u32, 0xeeda_u16, 0x11ce_u16, StaticArray[0xae_u8, 0xd4_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x51_u8, 0xe2_u8, 0xc4_u8])
     def query_interface(this : IXATransLookup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1447,7 +1446,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("bf193c85-0d1a-4290-b88f-d2cb8873d1e7")]
   record IXATransLookup2, lpVtbl : IXATransLookup2Vtbl* do
     GUID = LibC::GUID.new(0xbf193c85_u32, 0xd1a_u16, 0x4290_u16, StaticArray[0xb8_u8, 0x8f_u8, 0xd2_u8, 0xcb_u8, 0x88_u8, 0x73_u8, 0xd1_u8, 0xe7_u8])
     def query_interface(this : IXATransLookup2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1474,7 +1472,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("0d563181-defb-11ce-aed1-00aa0051e2c4")]
   record IResourceManagerSink, lpVtbl : IResourceManagerSinkVtbl* do
     GUID = LibC::GUID.new(0xd563181_u32, 0xdefb_u16, 0x11ce_u16, StaticArray[0xae_u8, 0xd1_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x51_u8, 0xe2_u8, 0xc4_u8])
     def query_interface(this : IResourceManagerSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1504,7 +1501,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("13741d21-87eb-11ce-8081-0080c758527e")]
   record IResourceManager, lpVtbl : IResourceManagerVtbl* do
     GUID = LibC::GUID.new(0x13741d21_u32, 0x87eb_u16, 0x11ce_u16, StaticArray[0x80_u8, 0x81_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0x58_u8, 0x52_u8, 0x7e_u8])
     def query_interface(this : IResourceManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1541,7 +1537,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("4d964ad4-5b33-11d3-8a91-00c04f79eb6d")]
   record ILastResourceManager, lpVtbl : ILastResourceManagerVtbl* do
     GUID = LibC::GUID.new(0x4d964ad4_u32, 0x5b33_u16, 0x11d3_u16, StaticArray[0x8a_u8, 0x91_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xeb_u8, 0x6d_u8])
     def query_interface(this : ILastResourceManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1576,7 +1571,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("d136c69a-f749-11d1-8f47-00c04f8ee57d")]
   record IResourceManager2, lpVtbl : IResourceManager2Vtbl* do
     GUID = LibC::GUID.new(0xd136c69a_u32, 0xf749_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x47_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe5_u8, 0x7d_u8])
     def query_interface(this : IResourceManager2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1624,7 +1618,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("6f6de620-b5df-4f3e-9cfa-c8aebd05172b")]
   record IResourceManagerRejoinable, lpVtbl : IResourceManagerRejoinableVtbl* do
     GUID = LibC::GUID.new(0x6f6de620_u32, 0xb5df_u16, 0x4f3e_u16, StaticArray[0x9c_u8, 0xfa_u8, 0xc8_u8, 0xae_u8, 0xbd_u8, 0x5_u8, 0x17_u8, 0x2b_u8])
     def query_interface(this : IResourceManagerRejoinable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1670,7 +1663,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("c8a6e3a1-9a8c-11cf-a308-00a0c905416e")]
   record IXAConfig, lpVtbl : IXAConfigVtbl* do
     GUID = LibC::GUID.new(0xc8a6e3a1_u32, 0x9a8c_u16, 0x11cf_u16, StaticArray[0xa3_u8, 0x8_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0x41_u8, 0x6e_u8])
     def query_interface(this : IXAConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1701,7 +1693,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("e793f6d1-f53d-11cf-a60d-00a0c905416e")]
   record IRMHelper, lpVtbl : IRMHelperVtbl* do
     GUID = LibC::GUID.new(0xe793f6d1_u32, 0xf53d_u16, 0x11cf_u16, StaticArray[0xa6_u8, 0xd_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0x41_u8, 0x6e_u8])
     def query_interface(this : IRMHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1731,7 +1722,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("e793f6d2-f53d-11cf-a60d-00a0c905416e")]
   record IXAObtainRMInfo, lpVtbl : IXAObtainRMInfoVtbl* do
     GUID = LibC::GUID.new(0xe793f6d2_u32, 0xf53d_u16, 0x11cf_u16, StaticArray[0xa6_u8, 0xd_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0x41_u8, 0x6e_u8])
     def query_interface(this : IXAObtainRMInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1758,7 +1748,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("13741d20-87eb-11ce-8081-0080c758527e")]
   record IResourceManagerFactory, lpVtbl : IResourceManagerFactoryVtbl* do
     GUID = LibC::GUID.new(0x13741d20_u32, 0x87eb_u16, 0x11ce_u16, StaticArray[0x80_u8, 0x81_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0x58_u8, 0x52_u8, 0x7e_u8])
     def query_interface(this : IResourceManagerFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1786,7 +1775,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("6b369c21-fbd2-11d1-8f47-00c04f8ee57d")]
   record IResourceManagerFactory2, lpVtbl : IResourceManagerFactory2Vtbl* do
     GUID = LibC::GUID.new(0x6b369c21_u32, 0xfbd2_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x47_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe5_u8, 0x7d_u8])
     def query_interface(this : IResourceManagerFactory2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1817,7 +1805,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("80c7bfd0-87ee-11ce-8081-0080c758527e")]
   record IPrepareInfo, lpVtbl : IPrepareInfoVtbl* do
     GUID = LibC::GUID.new(0x80c7bfd0_u32, 0x87ee_u16, 0x11ce_u16, StaticArray[0x80_u8, 0x81_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0x58_u8, 0x52_u8, 0x7e_u8])
     def query_interface(this : IPrepareInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1848,7 +1835,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("5fab2547-9779-11d1-b886-00c04fb9618a")]
   record IPrepareInfo2, lpVtbl : IPrepareInfo2Vtbl* do
     GUID = LibC::GUID.new(0x5fab2547_u32, 0x9779_u16, 0x11d1_u16, StaticArray[0xb8_u8, 0x86_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x61_u8, 0x8a_u8])
     def query_interface(this : IPrepareInfo2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1878,7 +1864,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("c23cc370-87ef-11ce-8081-0080c758527e")]
   record IGetDispenser, lpVtbl : IGetDispenserVtbl* do
     GUID = LibC::GUID.new(0xc23cc370_u32, 0x87ef_u16, 0x11ce_u16, StaticArray[0x80_u8, 0x81_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0x58_u8, 0x52_u8, 0x7e_u8])
     def query_interface(this : IGetDispenser*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1905,7 +1890,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("5433376c-414d-11d3-b206-00c04fc2f3ef")]
   record ITransactionVoterBallotAsync2, lpVtbl : ITransactionVoterBallotAsync2Vtbl* do
     GUID = LibC::GUID.new(0x5433376c_u32, 0x414d_u16, 0x11d3_u16, StaticArray[0xb2_u8, 0x6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xf3_u8, 0xef_u8])
     def query_interface(this : ITransactionVoterBallotAsync2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1936,7 +1920,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("5433376b-414d-11d3-b206-00c04fc2f3ef")]
   record ITransactionVoterNotifyAsync2, lpVtbl : ITransactionVoterNotifyAsync2Vtbl* do
     GUID = LibC::GUID.new(0x5433376b_u32, 0x414d_u16, 0x11d3_u16, StaticArray[0xb2_u8, 0x6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xf3_u8, 0xef_u8])
     def query_interface(this : ITransactionVoterNotifyAsync2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1975,7 +1958,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("5433376a-414d-11d3-b206-00c04fc2f3ef")]
   record ITransactionVoterFactory2, lpVtbl : ITransactionVoterFactory2Vtbl* do
     GUID = LibC::GUID.new(0x5433376a_u32, 0x414d_u16, 0x11d3_u16, StaticArray[0xb2_u8, 0x6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xf3_u8, 0xef_u8])
     def query_interface(this : ITransactionVoterFactory2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2006,7 +1988,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("82dc88e1-a954-11d1-8f88-00600895e7d5")]
   record ITransactionPhase0EnlistmentAsync, lpVtbl : ITransactionPhase0EnlistmentAsyncVtbl* do
     GUID = LibC::GUID.new(0x82dc88e1_u32, 0xa954_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x88_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x95_u8, 0xe7_u8, 0xd5_u8])
     def query_interface(this : ITransactionPhase0EnlistmentAsync*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2046,7 +2027,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("ef081809-0c76-11d2-87a6-00c04f990f34")]
   record ITransactionPhase0NotifyAsync, lpVtbl : ITransactionPhase0NotifyAsyncVtbl* do
     GUID = LibC::GUID.new(0xef081809_u32, 0xc76_u16, 0x11d2_u16, StaticArray[0x87_u8, 0xa6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x99_u8, 0xf_u8, 0x34_u8])
     def query_interface(this : ITransactionPhase0NotifyAsync*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2076,7 +2056,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("82dc88e0-a954-11d1-8f88-00600895e7d5")]
   record ITransactionPhase0Factory, lpVtbl : ITransactionPhase0FactoryVtbl* do
     GUID = LibC::GUID.new(0x82dc88e0_u32, 0xa954_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x88_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x95_u8, 0xe7_u8, 0xd5_u8])
     def query_interface(this : ITransactionPhase0Factory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2107,7 +2086,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("59313e01-b36c-11cf-a539-00aa006887c3")]
   record ITransactionTransmitter, lpVtbl : ITransactionTransmitterVtbl* do
     GUID = LibC::GUID.new(0x59313e01_u32, 0xb36c_u16, 0x11cf_u16, StaticArray[0xa5_u8, 0x39_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x68_u8, 0x87_u8, 0xc3_u8])
     def query_interface(this : ITransactionTransmitter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2146,7 +2124,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("59313e00-b36c-11cf-a539-00aa006887c3")]
   record ITransactionTransmitterFactory, lpVtbl : ITransactionTransmitterFactoryVtbl* do
     GUID = LibC::GUID.new(0x59313e00_u32, 0xb36c_u16, 0x11cf_u16, StaticArray[0xa5_u8, 0x39_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x68_u8, 0x87_u8, 0xc3_u8])
     def query_interface(this : ITransactionTransmitterFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2176,7 +2153,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("59313e03-b36c-11cf-a539-00aa006887c3")]
   record ITransactionReceiver, lpVtbl : ITransactionReceiverVtbl* do
     GUID = LibC::GUID.new(0x59313e03_u32, 0xb36c_u16, 0x11cf_u16, StaticArray[0xa5_u8, 0x39_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x68_u8, 0x87_u8, 0xc3_u8])
     def query_interface(this : ITransactionReceiver*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2212,7 +2188,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("59313e02-b36c-11cf-a539-00aa006887c3")]
   record ITransactionReceiverFactory, lpVtbl : ITransactionReceiverFactoryVtbl* do
     GUID = LibC::GUID.new(0x59313e02_u32, 0xb36c_u16, 0x11cf_u16, StaticArray[0xa5_u8, 0x39_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x68_u8, 0x87_u8, 0xc3_u8])
     def query_interface(this : ITransactionReceiverFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2240,7 +2215,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("4131e760-1aea-11d0-944b-00a0c905416e")]
   record IDtcLuConfigure, lpVtbl : IDtcLuConfigureVtbl* do
     GUID = LibC::GUID.new(0x4131e760_u32, 0x1aea_u16, 0x11d0_u16, StaticArray[0x94_u8, 0x4b_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0x41_u8, 0x6e_u8])
     def query_interface(this : IDtcLuConfigure*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2269,7 +2243,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("ac2b8ad2-d6f0-11d0-b386-00a0c9083365")]
   record IDtcLuRecovery, lpVtbl : IDtcLuRecoveryVtbl* do
     GUID = LibC::GUID.new(0xac2b8ad2_u32, 0xd6f0_u16, 0x11d0_u16, StaticArray[0xb3_u8, 0x86_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x8_u8, 0x33_u8, 0x65_u8])
     def query_interface(this : IDtcLuRecovery*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2293,7 +2266,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("4131e762-1aea-11d0-944b-00a0c905416e")]
   record IDtcLuRecoveryFactory, lpVtbl : IDtcLuRecoveryFactoryVtbl* do
     GUID = LibC::GUID.new(0x4131e762_u32, 0x1aea_u16, 0x11d0_u16, StaticArray[0x94_u8, 0x4b_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0x41_u8, 0x6e_u8])
     def query_interface(this : IDtcLuRecoveryFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2332,7 +2304,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("4131e765-1aea-11d0-944b-00a0c905416e")]
   record IDtcLuRecoveryInitiatedByDtcTransWork, lpVtbl : IDtcLuRecoveryInitiatedByDtcTransWorkVtbl* do
     GUID = LibC::GUID.new(0x4131e765_u32, 0x1aea_u16, 0x11d0_u16, StaticArray[0x94_u8, 0x4b_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0x41_u8, 0x6e_u8])
     def query_interface(this : IDtcLuRecoveryInitiatedByDtcTransWork*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2395,7 +2366,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("4131e766-1aea-11d0-944b-00a0c905416e")]
   record IDtcLuRecoveryInitiatedByDtcStatusWork, lpVtbl : IDtcLuRecoveryInitiatedByDtcStatusWorkVtbl* do
     GUID = LibC::GUID.new(0x4131e766_u32, 0x1aea_u16, 0x11d0_u16, StaticArray[0x94_u8, 0x4b_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0x41_u8, 0x6e_u8])
     def query_interface(this : IDtcLuRecoveryInitiatedByDtcStatusWork*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2422,7 +2392,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("4131e764-1aea-11d0-944b-00a0c905416e")]
   record IDtcLuRecoveryInitiatedByDtc, lpVtbl : IDtcLuRecoveryInitiatedByDtcVtbl* do
     GUID = LibC::GUID.new(0x4131e764_u32, 0x1aea_u16, 0x11d0_u16, StaticArray[0x94_u8, 0x4b_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0x41_u8, 0x6e_u8])
     def query_interface(this : IDtcLuRecoveryInitiatedByDtc*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2456,7 +2425,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("ac2b8ad1-d6f0-11d0-b386-00a0c9083365")]
   record IDtcLuRecoveryInitiatedByLuWork, lpVtbl : IDtcLuRecoveryInitiatedByLuWorkVtbl* do
     GUID = LibC::GUID.new(0xac2b8ad1_u32, 0xd6f0_u16, 0x11d0_u16, StaticArray[0xb3_u8, 0x86_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x8_u8, 0x33_u8, 0x65_u8])
     def query_interface(this : IDtcLuRecoveryInitiatedByLuWork*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2504,7 +2472,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("4131e768-1aea-11d0-944b-00a0c905416e")]
   record IDtcLuRecoveryInitiatedByLu, lpVtbl : IDtcLuRecoveryInitiatedByLuVtbl* do
     GUID = LibC::GUID.new(0x4131e768_u32, 0x1aea_u16, 0x11d0_u16, StaticArray[0x94_u8, 0x4b_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0x41_u8, 0x6e_u8])
     def query_interface(this : IDtcLuRecoveryInitiatedByLu*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2536,7 +2503,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("4131e769-1aea-11d0-944b-00a0c905416e")]
   record IDtcLuRmEnlistment, lpVtbl : IDtcLuRmEnlistmentVtbl* do
     GUID = LibC::GUID.new(0x4131e769_u32, 0x1aea_u16, 0x11d0_u16, StaticArray[0x94_u8, 0x4b_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0x41_u8, 0x6e_u8])
     def query_interface(this : IDtcLuRmEnlistment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2586,7 +2552,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("4131e770-1aea-11d0-944b-00a0c905416e")]
   record IDtcLuRmEnlistmentSink, lpVtbl : IDtcLuRmEnlistmentSinkVtbl* do
     GUID = LibC::GUID.new(0x4131e770_u32, 0x1aea_u16, 0x11d0_u16, StaticArray[0x94_u8, 0x4b_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0x41_u8, 0x6e_u8])
     def query_interface(this : IDtcLuRmEnlistmentSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2637,7 +2602,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("4131e771-1aea-11d0-944b-00a0c905416e")]
   record IDtcLuRmEnlistmentFactory, lpVtbl : IDtcLuRmEnlistmentFactoryVtbl* do
     GUID = LibC::GUID.new(0x4131e771_u32, 0x1aea_u16, 0x11d0_u16, StaticArray[0x94_u8, 0x4b_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0x41_u8, 0x6e_u8])
     def query_interface(this : IDtcLuRmEnlistmentFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2670,7 +2634,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("4131e773-1aea-11d0-944b-00a0c905416e")]
   record IDtcLuSubordinateDtc, lpVtbl : IDtcLuSubordinateDtcVtbl* do
     GUID = LibC::GUID.new(0x4131e773_u32, 0x1aea_u16, 0x11d0_u16, StaticArray[0x94_u8, 0x4b_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0x41_u8, 0x6e_u8])
     def query_interface(this : IDtcLuSubordinateDtc*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2722,7 +2685,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("4131e774-1aea-11d0-944b-00a0c905416e")]
   record IDtcLuSubordinateDtcSink, lpVtbl : IDtcLuSubordinateDtcSinkVtbl* do
     GUID = LibC::GUID.new(0x4131e774_u32, 0x1aea_u16, 0x11d0_u16, StaticArray[0x94_u8, 0x4b_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0x41_u8, 0x6e_u8])
     def query_interface(this : IDtcLuSubordinateDtcSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2770,7 +2732,6 @@ module Win32cr::System::DistributedTransactionCoordinator
 
 
   @[Extern]
-  #@[Com("4131e775-1aea-11d0-944b-00a0c905416e")]
   record IDtcLuSubordinateDtcFactory, lpVtbl : IDtcLuSubordinateDtcFactoryVtbl* do
     GUID = LibC::GUID.new(0x4131e775_u32, 0x1aea_u16, 0x11d0_u16, StaticArray[0x94_u8, 0x4b_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0x41_u8, 0x6e_u8])
     def query_interface(this : IDtcLuSubordinateDtcFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

@@ -2,15 +2,15 @@ require "./../foundation.cr"
 
 module Win32cr::Devices::Bluetooth
   alias HANDLE_SDP_TYPE = UInt64
-  alias PFN_DEVICE_CALLBACK = Proc(Void*, Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, Win32cr::Foundation::BOOL)*
+  alias PFN_DEVICE_CALLBACK = Proc(Void*, Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, Win32cr::Foundation::BOOL)
 
-  alias PFN_AUTHENTICATION_CALLBACK = Proc(Void*, Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, Win32cr::Foundation::BOOL)*
+  alias PFN_AUTHENTICATION_CALLBACK = Proc(Void*, Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, Win32cr::Foundation::BOOL)
 
-  alias PFN_AUTHENTICATION_CALLBACK_EX = Proc(Void*, Win32cr::Devices::Bluetooth::BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS*, Win32cr::Foundation::BOOL)*
+  alias PFN_AUTHENTICATION_CALLBACK_EX = Proc(Void*, Win32cr::Devices::Bluetooth::BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS*, Win32cr::Foundation::BOOL)
 
-  alias PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK = Proc(UInt32, UInt8*, UInt32, Void*, Win32cr::Foundation::BOOL)*
+  alias PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK = Proc(UInt32, UInt8*, UInt32, Void*, Win32cr::Foundation::BOOL)
 
-  alias PFNBLUETOOTH_GATT_EVENT_CALLBACK = Proc(Win32cr::Devices::Bluetooth::BTH_LE_GATT_EVENT_TYPE, Void*, Void*, Void)*
+  alias PFNBLUETOOTH_GATT_EVENT_CALLBACK = Proc(Win32cr::Devices::Bluetooth::BTH_LE_GATT_EVENT_TYPE, Void*, Void*, Void)
 
   BTH_MAJORVERSION = 2_u32
   BTH_MINORVERSION = 1_u32
@@ -877,446 +877,619 @@ module Win32cr::Devices::Bluetooth
   end
 
   @[Extern]
-  record SDP_LARGE_INTEGER_16,
-    low_part : UInt64,
-    high_part : Int64
+  struct SDP_LARGE_INTEGER_16
+    property low_part : UInt64
+    property high_part : Int64
+    def initialize(@low_part : UInt64, @high_part : Int64)
+    end
+  end
 
   @[Extern]
-  record SDP_ULARGE_INTEGER_16,
-    low_part : UInt64,
-    high_part : UInt64
+  struct SDP_ULARGE_INTEGER_16
+    property low_part : UInt64
+    property high_part : UInt64
+    def initialize(@low_part : UInt64, @high_part : UInt64)
+    end
+  end
 
   @[Extern]
-  record SdpAttributeRange,
-    minAttribute : UInt16,
-    maxAttribute : UInt16
+  struct SdpAttributeRange
+    property minAttribute : UInt16
+    property maxAttribute : UInt16
+    def initialize(@minAttribute : UInt16, @maxAttribute : UInt16)
+    end
+  end
 
   @[Extern(union: true)]
-  record SdpQueryUuidUnion,
-    uuid128 : LibC::GUID,
-    uuid32 : UInt32,
-    uuid16 : UInt16
-
-  @[Extern]
-  record SdpQueryUuid,
-    u : Win32cr::Devices::Bluetooth::SdpQueryUuidUnion,
-    uuidType : UInt16
-
-  @[Extern]
-  record BTH_DEVICE_INFO,
-    flags : UInt32,
-    address : UInt64,
-    classOfDevice : UInt32,
-    name : Win32cr::Foundation::CHAR[248]
-
-  @[Extern]
-  record BTH_RADIO_IN_RANGE,
-    deviceInfo : Win32cr::Devices::Bluetooth::BTH_DEVICE_INFO,
-    previousDeviceFlags : UInt32
-
-  @[Extern]
-  record BTH_L2CAP_EVENT_INFO,
-    bthAddress : UInt64,
-    psm : UInt16,
-    connected : UInt8,
-    initiated : UInt8
-
-  @[Extern]
-  record BTH_HCI_EVENT_INFO,
-    bthAddress : UInt64,
-    connectionType : UInt8,
-    connected : UInt8
-
-  @[Extern]
-  record BLUETOOTH_ADDRESS,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      ullLong : UInt64,
-      rgBytes : UInt8[6]
-
+  struct SdpQueryUuidUnion
+    property uuid128 : LibC::GUID
+    property uuid32 : UInt32
+    property uuid16 : UInt16
+    def initialize(@uuid128 : LibC::GUID, @uuid32 : UInt32, @uuid16 : UInt16)
+    end
   end
 
   @[Extern]
-  record BLUETOOTH_LOCAL_SERVICE_INFO,
-    enabled : Win32cr::Foundation::BOOL,
-    btAddr : Win32cr::Devices::Bluetooth::BLUETOOTH_ADDRESS,
-    szName : UInt16[256],
-    szDeviceString : UInt16[256]
-
-  @[Extern]
-  record BLUETOOTH_FIND_RADIO_PARAMS,
-    dwSize : UInt32
-
-  @[Extern]
-  record BLUETOOTH_RADIO_INFO,
-    dwSize : UInt32,
-    address : Win32cr::Devices::Bluetooth::BLUETOOTH_ADDRESS,
-    szName : UInt16[248],
-    ulClassofDevice : UInt32,
-    lmpSubversion : UInt16,
-    manufacturer : UInt16
-
-  @[Extern]
-  record BLUETOOTH_DEVICE_INFO,
-    dwSize : UInt32,
-    address : Win32cr::Devices::Bluetooth::BLUETOOTH_ADDRESS,
-    ulClassofDevice : UInt32,
-    fConnected : Win32cr::Foundation::BOOL,
-    fRemembered : Win32cr::Foundation::BOOL,
-    fAuthenticated : Win32cr::Foundation::BOOL,
-    stLastSeen : Win32cr::Foundation::SYSTEMTIME,
-    stLastUsed : Win32cr::Foundation::SYSTEMTIME,
-    szName : UInt16[248]
-
-  @[Extern]
-  record BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS,
-    deviceInfo : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO,
-    authenticationMethod : Win32cr::Devices::Bluetooth::BLUETOOTH_AUTHENTICATION_METHOD,
-    ioCapability : Win32cr::Devices::Bluetooth::BLUETOOTH_IO_CAPABILITY,
-    authenticationRequirements : Win32cr::Devices::Bluetooth::BLUETOOTH_AUTHENTICATION_REQUIREMENTS,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      numeric_value : UInt32,
-      passkey : UInt32
-
+  struct SdpQueryUuid
+    property u : Win32cr::Devices::Bluetooth::SdpQueryUuidUnion
+    property uuidType : UInt16
+    def initialize(@u : Win32cr::Devices::Bluetooth::SdpQueryUuidUnion, @uuidType : UInt16)
+    end
   end
 
   @[Extern]
-  record BLUETOOTH_DEVICE_SEARCH_PARAMS,
-    dwSize : UInt32,
-    fReturnAuthenticated : Win32cr::Foundation::BOOL,
-    fReturnRemembered : Win32cr::Foundation::BOOL,
-    fReturnUnknown : Win32cr::Foundation::BOOL,
-    fReturnConnected : Win32cr::Foundation::BOOL,
-    fIssueInquiry : Win32cr::Foundation::BOOL,
-    cTimeoutMultiplier : UInt8,
-    hRadio : Win32cr::Foundation::HANDLE
-
-  @[Extern]
-  record BLUETOOTH_COD_PAIRS,
-    ulCODMask : UInt32,
-    pcszDescription : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record BLUETOOTH_SELECT_DEVICE_PARAMS,
-    dwSize : UInt32,
-    cNumOfClasses : UInt32,
-    prgClassOfDevices : Win32cr::Devices::Bluetooth::BLUETOOTH_COD_PAIRS*,
-    pszInfo : Win32cr::Foundation::PWSTR,
-    hwndParent : Win32cr::Foundation::HWND,
-    fForceAuthentication : Win32cr::Foundation::BOOL,
-    fShowAuthenticated : Win32cr::Foundation::BOOL,
-    fShowRemembered : Win32cr::Foundation::BOOL,
-    fShowUnknown : Win32cr::Foundation::BOOL,
-    fAddNewDeviceWizard : Win32cr::Foundation::BOOL,
-    fSkipServicesPage : Win32cr::Foundation::BOOL,
-    pfnDeviceCallback : Win32cr::Devices::Bluetooth::PFN_DEVICE_CALLBACK,
-    pvParam : Void*,
-    cNumDevices : UInt32,
-    pDevices : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*
-
-  @[Extern]
-  record BLUETOOTH_PIN_INFO,
-    pin : UInt8[16],
-    pinLength : UInt8
-
-  @[Extern]
-  record BLUETOOTH_OOB_DATA_INFO,
-    c : UInt8[16],
-    r : UInt8[16]
-
-  @[Extern]
-  record BLUETOOTH_NUMERIC_COMPARISON_INFO,
-    numeric_value : UInt32
-
-  @[Extern]
-  record BLUETOOTH_PASSKEY_INFO,
-    passkey : UInt32
-
-  @[Extern]
-  record BLUETOOTH_AUTHENTICATE_RESPONSE,
-    bthAddressRemote : Win32cr::Devices::Bluetooth::BLUETOOTH_ADDRESS,
-    authMethod : Win32cr::Devices::Bluetooth::BLUETOOTH_AUTHENTICATION_METHOD,
-    anonymous : Anonymous_e__Union_,
-    negativeResponse : UInt8 do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      pinInfo : Win32cr::Devices::Bluetooth::BLUETOOTH_PIN_INFO,
-      oobInfo : Win32cr::Devices::Bluetooth::BLUETOOTH_OOB_DATA_INFO,
-      numericCompInfo : Win32cr::Devices::Bluetooth::BLUETOOTH_NUMERIC_COMPARISON_INFO,
-      passkeyInfo : Win32cr::Devices::Bluetooth::BLUETOOTH_PASSKEY_INFO
-
+  struct BTH_DEVICE_INFO
+    property flags : UInt32
+    property address : UInt64
+    property classOfDevice : UInt32
+    property name : Win32cr::Foundation::CHAR[248]
+    def initialize(@flags : UInt32, @address : UInt64, @classOfDevice : UInt32, @name : Win32cr::Foundation::CHAR[248])
+    end
   end
 
   @[Extern]
-  record SDP_ELEMENT_DATA,
-    type__ : Win32cr::Devices::Bluetooth::SDP_TYPE,
-    specificType : Win32cr::Devices::Bluetooth::SDP_SPECIFICTYPE,
-    data : Data_e__union_ do
+  struct BTH_RADIO_IN_RANGE
+    property deviceInfo : Win32cr::Devices::Bluetooth::BTH_DEVICE_INFO
+    property previousDeviceFlags : UInt32
+    def initialize(@deviceInfo : Win32cr::Devices::Bluetooth::BTH_DEVICE_INFO, @previousDeviceFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct BTH_L2CAP_EVENT_INFO
+    property bthAddress : UInt64
+    property psm : UInt16
+    property connected : UInt8
+    property initiated : UInt8
+    def initialize(@bthAddress : UInt64, @psm : UInt16, @connected : UInt8, @initiated : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct BTH_HCI_EVENT_INFO
+    property bthAddress : UInt64
+    property connectionType : UInt8
+    property connected : UInt8
+    def initialize(@bthAddress : UInt64, @connectionType : UInt8, @connected : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct BLUETOOTH_ADDRESS
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property ullLong : UInt64
+    property rgBytes : UInt8[6]
+    def initialize(@ullLong : UInt64, @rgBytes : UInt8[6])
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct BLUETOOTH_LOCAL_SERVICE_INFO
+    property enabled : Win32cr::Foundation::BOOL
+    property btAddr : Win32cr::Devices::Bluetooth::BLUETOOTH_ADDRESS
+    property szName : UInt16[256]
+    property szDeviceString : UInt16[256]
+    def initialize(@enabled : Win32cr::Foundation::BOOL, @btAddr : Win32cr::Devices::Bluetooth::BLUETOOTH_ADDRESS, @szName : UInt16[256], @szDeviceString : UInt16[256])
+    end
+  end
+
+  @[Extern]
+  struct BLUETOOTH_FIND_RADIO_PARAMS
+    property dwSize : UInt32
+    def initialize(@dwSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct BLUETOOTH_RADIO_INFO
+    property dwSize : UInt32
+    property address : Win32cr::Devices::Bluetooth::BLUETOOTH_ADDRESS
+    property szName : UInt16[248]
+    property ulClassofDevice : UInt32
+    property lmpSubversion : UInt16
+    property manufacturer : UInt16
+    def initialize(@dwSize : UInt32, @address : Win32cr::Devices::Bluetooth::BLUETOOTH_ADDRESS, @szName : UInt16[248], @ulClassofDevice : UInt32, @lmpSubversion : UInt16, @manufacturer : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct BLUETOOTH_DEVICE_INFO
+    property dwSize : UInt32
+    property address : Win32cr::Devices::Bluetooth::BLUETOOTH_ADDRESS
+    property ulClassofDevice : UInt32
+    property fConnected : Win32cr::Foundation::BOOL
+    property fRemembered : Win32cr::Foundation::BOOL
+    property fAuthenticated : Win32cr::Foundation::BOOL
+    property stLastSeen : Win32cr::Foundation::SYSTEMTIME
+    property stLastUsed : Win32cr::Foundation::SYSTEMTIME
+    property szName : UInt16[248]
+    def initialize(@dwSize : UInt32, @address : Win32cr::Devices::Bluetooth::BLUETOOTH_ADDRESS, @ulClassofDevice : UInt32, @fConnected : Win32cr::Foundation::BOOL, @fRemembered : Win32cr::Foundation::BOOL, @fAuthenticated : Win32cr::Foundation::BOOL, @stLastSeen : Win32cr::Foundation::SYSTEMTIME, @stLastUsed : Win32cr::Foundation::SYSTEMTIME, @szName : UInt16[248])
+    end
+  end
+
+  @[Extern]
+  struct BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS
+    property deviceInfo : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO
+    property authenticationMethod : Win32cr::Devices::Bluetooth::BLUETOOTH_AUTHENTICATION_METHOD
+    property ioCapability : Win32cr::Devices::Bluetooth::BLUETOOTH_IO_CAPABILITY
+    property authenticationRequirements : Win32cr::Devices::Bluetooth::BLUETOOTH_AUTHENTICATION_REQUIREMENTS
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property numeric_value : UInt32
+    property passkey : UInt32
+    def initialize(@numeric_value : UInt32, @passkey : UInt32)
+    end
+    end
+
+    def initialize(@deviceInfo : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO, @authenticationMethod : Win32cr::Devices::Bluetooth::BLUETOOTH_AUTHENTICATION_METHOD, @ioCapability : Win32cr::Devices::Bluetooth::BLUETOOTH_IO_CAPABILITY, @authenticationRequirements : Win32cr::Devices::Bluetooth::BLUETOOTH_AUTHENTICATION_REQUIREMENTS, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct BLUETOOTH_DEVICE_SEARCH_PARAMS
+    property dwSize : UInt32
+    property fReturnAuthenticated : Win32cr::Foundation::BOOL
+    property fReturnRemembered : Win32cr::Foundation::BOOL
+    property fReturnUnknown : Win32cr::Foundation::BOOL
+    property fReturnConnected : Win32cr::Foundation::BOOL
+    property fIssueInquiry : Win32cr::Foundation::BOOL
+    property cTimeoutMultiplier : UInt8
+    property hRadio : Win32cr::Foundation::HANDLE
+    def initialize(@dwSize : UInt32, @fReturnAuthenticated : Win32cr::Foundation::BOOL, @fReturnRemembered : Win32cr::Foundation::BOOL, @fReturnUnknown : Win32cr::Foundation::BOOL, @fReturnConnected : Win32cr::Foundation::BOOL, @fIssueInquiry : Win32cr::Foundation::BOOL, @cTimeoutMultiplier : UInt8, @hRadio : Win32cr::Foundation::HANDLE)
+    end
+  end
+
+  @[Extern]
+  struct BLUETOOTH_COD_PAIRS
+    property ulCODMask : UInt32
+    property pcszDescription : Win32cr::Foundation::PWSTR
+    def initialize(@ulCODMask : UInt32, @pcszDescription : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct BLUETOOTH_SELECT_DEVICE_PARAMS
+    property dwSize : UInt32
+    property cNumOfClasses : UInt32
+    property prgClassOfDevices : Win32cr::Devices::Bluetooth::BLUETOOTH_COD_PAIRS*
+    property pszInfo : Win32cr::Foundation::PWSTR
+    property hwndParent : Win32cr::Foundation::HWND
+    property fForceAuthentication : Win32cr::Foundation::BOOL
+    property fShowAuthenticated : Win32cr::Foundation::BOOL
+    property fShowRemembered : Win32cr::Foundation::BOOL
+    property fShowUnknown : Win32cr::Foundation::BOOL
+    property fAddNewDeviceWizard : Win32cr::Foundation::BOOL
+    property fSkipServicesPage : Win32cr::Foundation::BOOL
+    property pfnDeviceCallback : Win32cr::Devices::Bluetooth::PFN_DEVICE_CALLBACK
+    property pvParam : Void*
+    property cNumDevices : UInt32
+    property pDevices : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*
+    def initialize(@dwSize : UInt32, @cNumOfClasses : UInt32, @prgClassOfDevices : Win32cr::Devices::Bluetooth::BLUETOOTH_COD_PAIRS*, @pszInfo : Win32cr::Foundation::PWSTR, @hwndParent : Win32cr::Foundation::HWND, @fForceAuthentication : Win32cr::Foundation::BOOL, @fShowAuthenticated : Win32cr::Foundation::BOOL, @fShowRemembered : Win32cr::Foundation::BOOL, @fShowUnknown : Win32cr::Foundation::BOOL, @fAddNewDeviceWizard : Win32cr::Foundation::BOOL, @fSkipServicesPage : Win32cr::Foundation::BOOL, @pfnDeviceCallback : Win32cr::Devices::Bluetooth::PFN_DEVICE_CALLBACK, @pvParam : Void*, @cNumDevices : UInt32, @pDevices : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*)
+    end
+  end
+
+  @[Extern]
+  struct BLUETOOTH_PIN_INFO
+    property pin : UInt8[16]
+    property pinLength : UInt8
+    def initialize(@pin : UInt8[16], @pinLength : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct BLUETOOTH_OOB_DATA_INFO
+    property c : UInt8[16]
+    property r : UInt8[16]
+    def initialize(@c : UInt8[16], @r : UInt8[16])
+    end
+  end
+
+  @[Extern]
+  struct BLUETOOTH_NUMERIC_COMPARISON_INFO
+    property numeric_value : UInt32
+    def initialize(@numeric_value : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct BLUETOOTH_PASSKEY_INFO
+    property passkey : UInt32
+    def initialize(@passkey : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct BLUETOOTH_AUTHENTICATE_RESPONSE
+    property bthAddressRemote : Win32cr::Devices::Bluetooth::BLUETOOTH_ADDRESS
+    property authMethod : Win32cr::Devices::Bluetooth::BLUETOOTH_AUTHENTICATION_METHOD
+    property anonymous : Anonymous_e__Union_
+    property negativeResponse : UInt8
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property pinInfo : Win32cr::Devices::Bluetooth::BLUETOOTH_PIN_INFO
+    property oobInfo : Win32cr::Devices::Bluetooth::BLUETOOTH_OOB_DATA_INFO
+    property numericCompInfo : Win32cr::Devices::Bluetooth::BLUETOOTH_NUMERIC_COMPARISON_INFO
+    property passkeyInfo : Win32cr::Devices::Bluetooth::BLUETOOTH_PASSKEY_INFO
+    def initialize(@pinInfo : Win32cr::Devices::Bluetooth::BLUETOOTH_PIN_INFO, @oobInfo : Win32cr::Devices::Bluetooth::BLUETOOTH_OOB_DATA_INFO, @numericCompInfo : Win32cr::Devices::Bluetooth::BLUETOOTH_NUMERIC_COMPARISON_INFO, @passkeyInfo : Win32cr::Devices::Bluetooth::BLUETOOTH_PASSKEY_INFO)
+    end
+    end
+
+    def initialize(@bthAddressRemote : Win32cr::Devices::Bluetooth::BLUETOOTH_ADDRESS, @authMethod : Win32cr::Devices::Bluetooth::BLUETOOTH_AUTHENTICATION_METHOD, @anonymous : Anonymous_e__Union_, @negativeResponse : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct SDP_ELEMENT_DATA
+    property type__ : Win32cr::Devices::Bluetooth::SDP_TYPE
+    property specificType : Win32cr::Devices::Bluetooth::SDP_SPECIFICTYPE
+    property data : Data_e__union_
 
     # Nested Type Data_e__union_
     @[Extern(union: true)]
-    record Data_e__union_,
-      int128 : Win32cr::Devices::Bluetooth::SDP_LARGE_INTEGER_16,
-      int64 : Int64,
-      int32 : Int32,
-      int16 : Int16,
-      int8 : Win32cr::Foundation::CHAR,
-      uint128 : Win32cr::Devices::Bluetooth::SDP_ULARGE_INTEGER_16,
-      uint64 : UInt64,
-      uint32 : UInt32,
-      uint16 : UInt16,
-      uint8 : UInt8,
-      booleanVal : UInt8,
-      uuid128 : LibC::GUID,
-      uuid32 : UInt32,
-      uuid16 : UInt16,
-      string : String_e__struct_,
-      url : Url_e__struct_,
-      sequence : Sequence_e__struct_,
-      alternative : Alternative_e__struct_ do
+    struct Data_e__union_
+    property int128 : Win32cr::Devices::Bluetooth::SDP_LARGE_INTEGER_16
+    property int64 : Int64
+    property int32 : Int32
+    property int16 : Int16
+    property int8 : Win32cr::Foundation::CHAR
+    property uint128 : Win32cr::Devices::Bluetooth::SDP_ULARGE_INTEGER_16
+    property uint64 : UInt64
+    property uint32 : UInt32
+    property uint16 : UInt16
+    property uint8 : UInt8
+    property booleanVal : UInt8
+    property uuid128 : LibC::GUID
+    property uuid32 : UInt32
+    property uuid16 : UInt16
+    property string : String_e__struct_
+    property url : Url_e__struct_
+    property sequence : Sequence_e__struct_
+    property alternative : Alternative_e__struct_
 
       # Nested Type Alternative_e__struct_
       @[Extern]
-      record Alternative_e__struct_,
-        value : UInt8*,
-        length : UInt32
+      struct Alternative_e__struct_
+    property value : UInt8*
+    property length : UInt32
+    def initialize(@value : UInt8*, @length : UInt32)
+    end
+      end
 
 
       # Nested Type Url_e__struct_
       @[Extern]
-      record Url_e__struct_,
-        value : UInt8*,
-        length : UInt32
+      struct Url_e__struct_
+    property value : UInt8*
+    property length : UInt32
+    def initialize(@value : UInt8*, @length : UInt32)
+    end
+      end
 
 
       # Nested Type String_e__struct_
       @[Extern]
-      record String_e__struct_,
-        value : UInt8*,
-        length : UInt32
+      struct String_e__struct_
+    property value : UInt8*
+    property length : UInt32
+    def initialize(@value : UInt8*, @length : UInt32)
+    end
+      end
 
 
       # Nested Type Sequence_e__struct_
       @[Extern]
-      record Sequence_e__struct_,
-        value : UInt8*,
-        length : UInt32
+      struct Sequence_e__struct_
+    property value : UInt8*
+    property length : UInt32
+    def initialize(@value : UInt8*, @length : UInt32)
+    end
+      end
 
+    def initialize(@int128 : Win32cr::Devices::Bluetooth::SDP_LARGE_INTEGER_16, @int64 : Int64, @int32 : Int32, @int16 : Int16, @int8 : Win32cr::Foundation::CHAR, @uint128 : Win32cr::Devices::Bluetooth::SDP_ULARGE_INTEGER_16, @uint64 : UInt64, @uint32 : UInt32, @uint16 : UInt16, @uint8 : UInt8, @booleanVal : UInt8, @uuid128 : LibC::GUID, @uuid32 : UInt32, @uuid16 : UInt16, @string : String_e__struct_, @url : Url_e__struct_, @sequence : Sequence_e__struct_, @alternative : Alternative_e__struct_)
+    end
     end
 
+    def initialize(@type__ : Win32cr::Devices::Bluetooth::SDP_TYPE, @specificType : Win32cr::Devices::Bluetooth::SDP_SPECIFICTYPE, @data : Data_e__union_)
+    end
   end
 
   @[Extern]
-  record SDP_STRING_TYPE_DATA,
-    encoding : UInt16,
-    mibeNum : UInt16,
-    attributeId : UInt16
+  struct SDP_STRING_TYPE_DATA
+    property encoding : UInt16
+    property mibeNum : UInt16
+    property attributeId : UInt16
+    def initialize(@encoding : UInt16, @mibeNum : UInt16, @attributeId : UInt16)
+    end
+  end
 
   @[Extern]
-  record BTH_LE_UUID,
-    is_short_uuid : Win32cr::Foundation::BOOLEAN,
-    value : Value_e__Union_ do
+  struct BTH_LE_UUID
+    property is_short_uuid : Win32cr::Foundation::BOOLEAN
+    property value : Value_e__Union_
 
     # Nested Type Value_e__Union_
     @[Extern(union: true)]
-    record Value_e__Union_,
-      short_uuid : UInt16,
-      long_uuid : LibC::GUID
+    struct Value_e__Union_
+    property short_uuid : UInt16
+    property long_uuid : LibC::GUID
+    def initialize(@short_uuid : UInt16, @long_uuid : LibC::GUID)
+    end
+    end
 
+    def initialize(@is_short_uuid : Win32cr::Foundation::BOOLEAN, @value : Value_e__Union_)
+    end
   end
 
   @[Extern]
-  record BTH_LE_GATT_SERVICE,
-    service_uuid : Win32cr::Devices::Bluetooth::BTH_LE_UUID,
-    attribute_handle : UInt16
+  struct BTH_LE_GATT_SERVICE
+    property service_uuid : Win32cr::Devices::Bluetooth::BTH_LE_UUID
+    property attribute_handle : UInt16
+    def initialize(@service_uuid : Win32cr::Devices::Bluetooth::BTH_LE_UUID, @attribute_handle : UInt16)
+    end
+  end
 
   @[Extern]
-  record BTH_LE_GATT_CHARACTERISTIC,
-    service_handle : UInt16,
-    characteristic_uuid : Win32cr::Devices::Bluetooth::BTH_LE_UUID,
-    attribute_handle : UInt16,
-    characteristic_value_handle : UInt16,
-    is_broadcastable : Win32cr::Foundation::BOOLEAN,
-    is_readable : Win32cr::Foundation::BOOLEAN,
-    is_writable : Win32cr::Foundation::BOOLEAN,
-    is_writable_without_response : Win32cr::Foundation::BOOLEAN,
-    is_signed_writable : Win32cr::Foundation::BOOLEAN,
-    is_notifiable : Win32cr::Foundation::BOOLEAN,
-    is_indicatable : Win32cr::Foundation::BOOLEAN,
-    has_extended_properties : Win32cr::Foundation::BOOLEAN
+  struct BTH_LE_GATT_CHARACTERISTIC
+    property service_handle : UInt16
+    property characteristic_uuid : Win32cr::Devices::Bluetooth::BTH_LE_UUID
+    property attribute_handle : UInt16
+    property characteristic_value_handle : UInt16
+    property is_broadcastable : Win32cr::Foundation::BOOLEAN
+    property is_readable : Win32cr::Foundation::BOOLEAN
+    property is_writable : Win32cr::Foundation::BOOLEAN
+    property is_writable_without_response : Win32cr::Foundation::BOOLEAN
+    property is_signed_writable : Win32cr::Foundation::BOOLEAN
+    property is_notifiable : Win32cr::Foundation::BOOLEAN
+    property is_indicatable : Win32cr::Foundation::BOOLEAN
+    property has_extended_properties : Win32cr::Foundation::BOOLEAN
+    def initialize(@service_handle : UInt16, @characteristic_uuid : Win32cr::Devices::Bluetooth::BTH_LE_UUID, @attribute_handle : UInt16, @characteristic_value_handle : UInt16, @is_broadcastable : Win32cr::Foundation::BOOLEAN, @is_readable : Win32cr::Foundation::BOOLEAN, @is_writable : Win32cr::Foundation::BOOLEAN, @is_writable_without_response : Win32cr::Foundation::BOOLEAN, @is_signed_writable : Win32cr::Foundation::BOOLEAN, @is_notifiable : Win32cr::Foundation::BOOLEAN, @is_indicatable : Win32cr::Foundation::BOOLEAN, @has_extended_properties : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record BTH_LE_GATT_CHARACTERISTIC_VALUE,
-    data_size : UInt32,
-    data : UInt8*
+  struct BTH_LE_GATT_CHARACTERISTIC_VALUE
+    property data_size : UInt32
+    property data : UInt8*
+    def initialize(@data_size : UInt32, @data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record BTH_LE_GATT_DESCRIPTOR,
-    service_handle : UInt16,
-    characteristic_handle : UInt16,
-    descriptor_type : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR_TYPE,
-    descriptor_uuid : Win32cr::Devices::Bluetooth::BTH_LE_UUID,
-    attribute_handle : UInt16
+  struct BTH_LE_GATT_DESCRIPTOR
+    property service_handle : UInt16
+    property characteristic_handle : UInt16
+    property descriptor_type : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR_TYPE
+    property descriptor_uuid : Win32cr::Devices::Bluetooth::BTH_LE_UUID
+    property attribute_handle : UInt16
+    def initialize(@service_handle : UInt16, @characteristic_handle : UInt16, @descriptor_type : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR_TYPE, @descriptor_uuid : Win32cr::Devices::Bluetooth::BTH_LE_UUID, @attribute_handle : UInt16)
+    end
+  end
 
   @[Extern]
-  record BTH_LE_GATT_DESCRIPTOR_VALUE,
-    descriptor_type : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR_TYPE,
-    descriptor_uuid : Win32cr::Devices::Bluetooth::BTH_LE_UUID,
-    anonymous : Anonymous_e__Union_,
-    data_size : UInt32,
-    data : UInt8* do
+  struct BTH_LE_GATT_DESCRIPTOR_VALUE
+    property descriptor_type : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR_TYPE
+    property descriptor_uuid : Win32cr::Devices::Bluetooth::BTH_LE_UUID
+    property anonymous : Anonymous_e__Union_
+    property data_size : UInt32
+    property data : UInt8*
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      characteristic_extended_properties : CharacteristicExtendedProperties_e__Struct_,
-      client_characteristic_configuration : ClientCharacteristicConfiguration_e__Struct_,
-      server_characteristic_configuration : ServerCharacteristicConfiguration_e__Struct_,
-      characteristic_format : CharacteristicFormat_e__Struct_ do
+    struct Anonymous_e__Union_
+    property characteristic_extended_properties : CharacteristicExtendedProperties_e__Struct_
+    property client_characteristic_configuration : ClientCharacteristicConfiguration_e__Struct_
+    property server_characteristic_configuration : ServerCharacteristicConfiguration_e__Struct_
+    property characteristic_format : CharacteristicFormat_e__Struct_
 
       # Nested Type ServerCharacteristicConfiguration_e__Struct_
       @[Extern]
-      record ServerCharacteristicConfiguration_e__Struct_,
-        is_broadcast : Win32cr::Foundation::BOOLEAN
+      struct ServerCharacteristicConfiguration_e__Struct_
+    property is_broadcast : Win32cr::Foundation::BOOLEAN
+    def initialize(@is_broadcast : Win32cr::Foundation::BOOLEAN)
+    end
+      end
 
 
       # Nested Type CharacteristicExtendedProperties_e__Struct_
       @[Extern]
-      record CharacteristicExtendedProperties_e__Struct_,
-        is_reliable_write_enabled : Win32cr::Foundation::BOOLEAN,
-        is_auxiliaries_writable : Win32cr::Foundation::BOOLEAN
+      struct CharacteristicExtendedProperties_e__Struct_
+    property is_reliable_write_enabled : Win32cr::Foundation::BOOLEAN
+    property is_auxiliaries_writable : Win32cr::Foundation::BOOLEAN
+    def initialize(@is_reliable_write_enabled : Win32cr::Foundation::BOOLEAN, @is_auxiliaries_writable : Win32cr::Foundation::BOOLEAN)
+    end
+      end
 
 
       # Nested Type CharacteristicFormat_e__Struct_
       @[Extern]
-      record CharacteristicFormat_e__Struct_,
-        format : UInt8,
-        exponent : UInt8,
-        unit : Win32cr::Devices::Bluetooth::BTH_LE_UUID,
-        name_space : UInt8,
-        description : Win32cr::Devices::Bluetooth::BTH_LE_UUID
+      struct CharacteristicFormat_e__Struct_
+    property format : UInt8
+    property exponent : UInt8
+    property unit : Win32cr::Devices::Bluetooth::BTH_LE_UUID
+    property name_space : UInt8
+    property description : Win32cr::Devices::Bluetooth::BTH_LE_UUID
+    def initialize(@format : UInt8, @exponent : UInt8, @unit : Win32cr::Devices::Bluetooth::BTH_LE_UUID, @name_space : UInt8, @description : Win32cr::Devices::Bluetooth::BTH_LE_UUID)
+    end
+      end
 
 
       # Nested Type ClientCharacteristicConfiguration_e__Struct_
       @[Extern]
-      record ClientCharacteristicConfiguration_e__Struct_,
-        is_subscribe_to_notification : Win32cr::Foundation::BOOLEAN,
-        is_subscribe_to_indication : Win32cr::Foundation::BOOLEAN
+      struct ClientCharacteristicConfiguration_e__Struct_
+    property is_subscribe_to_notification : Win32cr::Foundation::BOOLEAN
+    property is_subscribe_to_indication : Win32cr::Foundation::BOOLEAN
+    def initialize(@is_subscribe_to_notification : Win32cr::Foundation::BOOLEAN, @is_subscribe_to_indication : Win32cr::Foundation::BOOLEAN)
+    end
+      end
 
+    def initialize(@characteristic_extended_properties : CharacteristicExtendedProperties_e__Struct_, @client_characteristic_configuration : ClientCharacteristicConfiguration_e__Struct_, @server_characteristic_configuration : ServerCharacteristicConfiguration_e__Struct_, @characteristic_format : CharacteristicFormat_e__Struct_)
+    end
     end
 
+    def initialize(@descriptor_type : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR_TYPE, @descriptor_uuid : Win32cr::Devices::Bluetooth::BTH_LE_UUID, @anonymous : Anonymous_e__Union_, @data_size : UInt32, @data : UInt8*)
+    end
   end
 
   @[Extern]
-  record BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION,
-    num_characteristics : UInt16,
-    characteristics : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC*
+  struct BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION
+    property num_characteristics : UInt16
+    property characteristics : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC*
+    def initialize(@num_characteristics : UInt16, @characteristics : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC*)
+    end
+  end
 
   @[Extern]
-  record BLUETOOTH_GATT_VALUE_CHANGED_EVENT,
-    changed_attribute_handle : UInt16,
-    characteristic_value_data_size : LibC::UIntPtrT,
-    characteristic_value : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC_VALUE*
+  struct BLUETOOTH_GATT_VALUE_CHANGED_EVENT
+    property changed_attribute_handle : UInt16
+    property characteristic_value_data_size : LibC::UIntPtrT
+    property characteristic_value : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC_VALUE*
+    def initialize(@changed_attribute_handle : UInt16, @characteristic_value_data_size : LibC::UIntPtrT, @characteristic_value : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC_VALUE*)
+    end
+  end
 
   @[Extern]
-  record SOCKADDR_BTH,
-    addressFamily : UInt16,
-    btAddr : UInt64,
-    serviceClassId : LibC::GUID,
-    port : UInt32
+  struct SOCKADDR_BTH
+    property addressFamily : UInt16
+    property btAddr : UInt64
+    property serviceClassId : LibC::GUID
+    property port : UInt32
+    def initialize(@addressFamily : UInt16, @btAddr : UInt64, @serviceClassId : LibC::GUID, @port : UInt32)
+    end
+  end
 
   @[Extern]
-  record BTH_SET_SERVICE,
-    pSdpVersion : UInt32*,
-    pRecordHandle : Win32cr::Foundation::HANDLE*,
-    fCodService : UInt32,
-    reserved : UInt32[5],
-    ulRecordLength : UInt32,
-    pRecord : UInt8*
+  struct BTH_SET_SERVICE
+    property pSdpVersion : UInt32*
+    property pRecordHandle : Win32cr::Foundation::HANDLE*
+    property fCodService : UInt32
+    property reserved : UInt32[5]
+    property ulRecordLength : UInt32
+    property pRecord : UInt8*
+    def initialize(@pSdpVersion : UInt32*, @pRecordHandle : Win32cr::Foundation::HANDLE*, @fCodService : UInt32, @reserved : UInt32[5], @ulRecordLength : UInt32, @pRecord : UInt8*)
+    end
+  end
 
   @[Extern]
-  record BTH_QUERY_DEVICE,
-    lap : UInt32,
-    length : UInt8
+  struct BTH_QUERY_DEVICE
+    property lap : UInt32
+    property length : UInt8
+    def initialize(@lap : UInt32, @length : UInt8)
+    end
+  end
 
   @[Extern]
-  record BTH_QUERY_SERVICE,
-    type__ : UInt32,
-    serviceHandle : UInt32,
-    uuids : Win32cr::Devices::Bluetooth::SdpQueryUuid[12],
-    numRange : UInt32,
-    pRange : Win32cr::Devices::Bluetooth::SdpAttributeRange*
+  struct BTH_QUERY_SERVICE
+    property type__ : UInt32
+    property serviceHandle : UInt32
+    property uuids : Win32cr::Devices::Bluetooth::SdpQueryUuid[12]
+    property numRange : UInt32
+    property pRange : Win32cr::Devices::Bluetooth::SdpAttributeRange*
+    def initialize(@type__ : UInt32, @serviceHandle : UInt32, @uuids : Win32cr::Devices::Bluetooth::SdpQueryUuid[12], @numRange : UInt32, @pRange : Win32cr::Devices::Bluetooth::SdpAttributeRange*)
+    end
+  end
 
   @[Extern]
-  record RFCOMM_MSC_DATA,
-    signals : UInt8,
-    break__ : UInt8
+  struct RFCOMM_MSC_DATA
+    property signals : UInt8
+    property break__ : UInt8
+    def initialize(@signals : UInt8, @break__ : UInt8)
+    end
+  end
 
   @[Extern]
-  record RFCOMM_RLS_DATA,
-    line_status : UInt8
+  struct RFCOMM_RLS_DATA
+    property line_status : UInt8
+    def initialize(@line_status : UInt8)
+    end
+  end
 
   @[Extern]
-  record RFCOMM_RPN_DATA,
-    baud : UInt8,
-    data : UInt8,
-    flow_control : UInt8,
-    xon_char : UInt8,
-    xoff_char : UInt8,
-    parameter_mask1 : UInt8,
-    parameter_mask2 : UInt8
+  struct RFCOMM_RPN_DATA
+    property baud : UInt8
+    property data : UInt8
+    property flow_control : UInt8
+    property xon_char : UInt8
+    property xoff_char : UInt8
+    property parameter_mask1 : UInt8
+    property parameter_mask2 : UInt8
+    def initialize(@baud : UInt8, @data : UInt8, @flow_control : UInt8, @xon_char : UInt8, @xoff_char : UInt8, @parameter_mask1 : UInt8, @parameter_mask2 : UInt8)
+    end
+  end
 
   @[Extern]
-  record RFCOMM_COMMAND,
-    cmd_type : UInt32,
-    data : Data_e__Union_ do
+  struct RFCOMM_COMMAND
+    property cmd_type : UInt32
+    property data : Data_e__Union_
 
     # Nested Type Data_e__Union_
     @[Extern(union: true)]
-    record Data_e__Union_,
-      msc : Win32cr::Devices::Bluetooth::RFCOMM_MSC_DATA,
-      rls : Win32cr::Devices::Bluetooth::RFCOMM_RLS_DATA,
-      rpn : Win32cr::Devices::Bluetooth::RFCOMM_RPN_DATA
+    struct Data_e__Union_
+    property msc : Win32cr::Devices::Bluetooth::RFCOMM_MSC_DATA
+    property rls : Win32cr::Devices::Bluetooth::RFCOMM_RLS_DATA
+    property rpn : Win32cr::Devices::Bluetooth::RFCOMM_RPN_DATA
+    def initialize(@msc : Win32cr::Devices::Bluetooth::RFCOMM_MSC_DATA, @rls : Win32cr::Devices::Bluetooth::RFCOMM_RLS_DATA, @rpn : Win32cr::Devices::Bluetooth::RFCOMM_RPN_DATA)
+    end
+    end
 
+    def initialize(@cmd_type : UInt32, @data : Data_e__Union_)
+    end
   end
 
   @[Extern]
-  record BTH_PING_REQ,
-    btAddr : UInt64,
-    dataLen : UInt8,
-    data : UInt8[44]
+  struct BTH_PING_REQ
+    property btAddr : UInt64
+    property dataLen : UInt8
+    property data : UInt8[44]
+    def initialize(@btAddr : UInt64, @dataLen : UInt8, @data : UInt8[44])
+    end
+  end
 
   @[Extern]
-  record BTH_PING_RSP,
-    dataLen : UInt8,
-    data : UInt8[44]
+  struct BTH_PING_RSP
+    property dataLen : UInt8
+    property data : UInt8[44]
+    def initialize(@dataLen : UInt8, @data : UInt8[44])
+    end
+  end
 
   @[Extern]
-  record BTH_INFO_REQ,
-    btAddr : UInt64,
-    infoType : UInt16
+  struct BTH_INFO_REQ
+    property btAddr : UInt64
+    property infoType : UInt16
+    def initialize(@btAddr : UInt64, @infoType : UInt16)
+    end
+  end
 
   @[Extern]
-  record BTH_INFO_RSP,
-    result : UInt16,
-    dataLen : UInt8,
-    anonymous : Anonymous_e__Union_ do
+  struct BTH_INFO_RSP
+    property result : UInt16
+    property dataLen : UInt8
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      connectionlessMTU : UInt16,
-      data : UInt8[44]
+    struct Anonymous_e__Union_
+    property connectionlessMTU : UInt16
+    property data : UInt8[44]
+    def initialize(@connectionlessMTU : UInt16, @data : UInt8[44])
+    end
+    end
 
+    def initialize(@result : UInt16, @dataLen : UInt8, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Link("bluetoothapis")]

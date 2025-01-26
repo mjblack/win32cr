@@ -3,23 +3,23 @@ require "./com.cr"
 require "./../security/cryptography.cr"
 
 module Win32cr::System::Iis
-  alias PFN_HSE_IO_COMPLETION = Proc(Win32cr::System::Iis::EXTENSION_CONTROL_BLOCK*, Void*, UInt32, UInt32, Void)*
+  alias PFN_HSE_IO_COMPLETION = Proc(Win32cr::System::Iis::EXTENSION_CONTROL_BLOCK*, Void*, UInt32, UInt32, Void)
 
-  alias PFN_HSE_CACHE_INVALIDATION_CALLBACK = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT)*
+  alias PFN_HSE_CACHE_INVALIDATION_CALLBACK = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT)
 
-  alias PFN_HSE_GET_PROTOCOL_MANAGER_CUSTOM_INTERFACE_CALLBACK = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Void**, Win32cr::Foundation::HRESULT)*
+  alias PFN_HSE_GET_PROTOCOL_MANAGER_CUSTOM_INTERFACE_CALLBACK = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Void**, Win32cr::Foundation::HRESULT)
 
-  alias PFN_GETEXTENSIONVERSION = Proc(Win32cr::System::Iis::HSE_VERSION_INFO*, Win32cr::Foundation::BOOL)*
+  alias PFN_GETEXTENSIONVERSION = Proc(Win32cr::System::Iis::HSE_VERSION_INFO*, Win32cr::Foundation::BOOL)
 
-  alias PFN_HTTPEXTENSIONPROC = Proc(Win32cr::System::Iis::EXTENSION_CONTROL_BLOCK*, UInt32)*
+  alias PFN_HTTPEXTENSIONPROC = Proc(Win32cr::System::Iis::EXTENSION_CONTROL_BLOCK*, UInt32)
 
-  alias PFN_TERMINATEEXTENSION = Proc(UInt32, Win32cr::Foundation::BOOL)*
+  alias PFN_TERMINATEEXTENSION = Proc(UInt32, Win32cr::Foundation::BOOL)
 
-  alias PFN_WEB_CORE_SET_METADATA_DLL_ENTRY = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT)*
+  alias PFN_WEB_CORE_SET_METADATA_DLL_ENTRY = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT)
 
-  alias PFN_WEB_CORE_ACTIVATE = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT)*
+  alias PFN_WEB_CORE_ACTIVATE = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT)
 
-  alias PFN_WEB_CORE_SHUTDOWN = Proc(UInt32, Win32cr::Foundation::HRESULT)*
+  alias PFN_WEB_CORE_SHUTDOWN = Proc(UInt32, Win32cr::Foundation::HRESULT)
 
   IISADMIN_EXTENSIONS_REG_KEYA = "SOFTWARE\\Microsoft\\InetStp\\Extensions"
   IISADMIN_EXTENSIONS_REG_KEYW = "SOFTWARE\\Microsoft\\InetStp\\Extensions"
@@ -1013,379 +1013,502 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record CONFIGURATION_ENTRY,
-    bstrKey : Win32cr::Foundation::BSTR,
-    bstrValue : Win32cr::Foundation::BSTR
-
-  @[Extern]
-  record LOGGING_PARAMETERS,
-    pszSessionId : Win32cr::Foundation::PWSTR,
-    pszSiteName : Win32cr::Foundation::PWSTR,
-    pszUserName : Win32cr::Foundation::PWSTR,
-    pszHostName : Win32cr::Foundation::PWSTR,
-    pszRemoteIpAddress : Win32cr::Foundation::PWSTR,
-    dwRemoteIpPort : UInt32,
-    pszLocalIpAddress : Win32cr::Foundation::PWSTR,
-    dwLocalIpPort : UInt32,
-    bytes_sent : UInt64,
-    bytes_received : UInt64,
-    pszCommand : Win32cr::Foundation::PWSTR,
-    pszCommandParameters : Win32cr::Foundation::PWSTR,
-    pszFullPath : Win32cr::Foundation::PWSTR,
-    dwElapsedMilliseconds : UInt32,
-    ftp_status : UInt32,
-    ftp_sub_status : UInt32,
-    hrStatus : Win32cr::Foundation::HRESULT,
-    pszInformation : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record PRE_PROCESS_PARAMETERS,
-    pszSessionId : Win32cr::Foundation::PWSTR,
-    pszSiteName : Win32cr::Foundation::PWSTR,
-    pszUserName : Win32cr::Foundation::PWSTR,
-    pszHostName : Win32cr::Foundation::PWSTR,
-    pszRemoteIpAddress : Win32cr::Foundation::PWSTR,
-    dwRemoteIpPort : UInt32,
-    pszLocalIpAddress : Win32cr::Foundation::PWSTR,
-    dwLocalIpPort : UInt32,
-    pszCommand : Win32cr::Foundation::PWSTR,
-    pszCommandParameters : Win32cr::Foundation::PWSTR,
-    session_start_time : Win32cr::Foundation::FILETIME,
-    bytes_sent_per_session : UInt64,
-    bytes_received_per_session : UInt64
-
-  @[Extern]
-  record POST_PROCESS_PARAMETERS,
-    pszSessionId : Win32cr::Foundation::PWSTR,
-    pszSiteName : Win32cr::Foundation::PWSTR,
-    pszUserName : Win32cr::Foundation::PWSTR,
-    pszHostName : Win32cr::Foundation::PWSTR,
-    pszRemoteIpAddress : Win32cr::Foundation::PWSTR,
-    dwRemoteIpPort : UInt32,
-    pszLocalIpAddress : Win32cr::Foundation::PWSTR,
-    dwLocalIpPort : UInt32,
-    bytes_sent : UInt64,
-    bytes_received : UInt64,
-    pszCommand : Win32cr::Foundation::PWSTR,
-    pszCommandParameters : Win32cr::Foundation::PWSTR,
-    pszFullPath : Win32cr::Foundation::PWSTR,
-    pszPhysicalPath : Win32cr::Foundation::PWSTR,
-    ftp_status : UInt32,
-    ftp_sub_status : UInt32,
-    hrStatus : Win32cr::Foundation::HRESULT,
-    session_start_time : Win32cr::Foundation::FILETIME,
-    bytes_sent_per_session : UInt64,
-    bytes_received_per_session : UInt64
-
-  @[Extern]
-  record METADATA_RECORD,
-    dwMDIdentifier : UInt32,
-    dwMDAttributes : UInt32,
-    dwMDUserType : UInt32,
-    dwMDDataType : UInt32,
-    dwMDDataLen : UInt32,
-    pbMDData : UInt8*,
-    dwMDDataTag : UInt32
-
-  @[Extern]
-  record METADATA_GETALL_RECORD,
-    dwMDIdentifier : UInt32,
-    dwMDAttributes : UInt32,
-    dwMDUserType : UInt32,
-    dwMDDataType : UInt32,
-    dwMDDataLen : UInt32,
-    dwMDDataOffset : UInt32,
-    dwMDDataTag : UInt32
-
-  @[Extern]
-  record METADATA_GETALL_INTERNAL_RECORD,
-    dwMDIdentifier : UInt32,
-    dwMDAttributes : UInt32,
-    dwMDUserType : UInt32,
-    dwMDDataType : UInt32,
-    dwMDDataLen : UInt32,
-    anonymous : Anonymous_e__Union_,
-    dwMDDataTag : UInt32 do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      dwMDDataOffset : LibC::UIntPtrT,
-      pbMDData : UInt8*
-
+  struct CONFIGURATION_ENTRY
+    property bstrKey : Win32cr::Foundation::BSTR
+    property bstrValue : Win32cr::Foundation::BSTR
+    def initialize(@bstrKey : Win32cr::Foundation::BSTR, @bstrValue : Win32cr::Foundation::BSTR)
+    end
   end
 
   @[Extern]
-  record METADATA_HANDLE_INFO,
-    dwMDPermissions : UInt32,
-    dwMDSystemChangeNumber : UInt32
+  struct LOGGING_PARAMETERS
+    property pszSessionId : Win32cr::Foundation::PWSTR
+    property pszSiteName : Win32cr::Foundation::PWSTR
+    property pszUserName : Win32cr::Foundation::PWSTR
+    property pszHostName : Win32cr::Foundation::PWSTR
+    property pszRemoteIpAddress : Win32cr::Foundation::PWSTR
+    property dwRemoteIpPort : UInt32
+    property pszLocalIpAddress : Win32cr::Foundation::PWSTR
+    property dwLocalIpPort : UInt32
+    property bytes_sent : UInt64
+    property bytes_received : UInt64
+    property pszCommand : Win32cr::Foundation::PWSTR
+    property pszCommandParameters : Win32cr::Foundation::PWSTR
+    property pszFullPath : Win32cr::Foundation::PWSTR
+    property dwElapsedMilliseconds : UInt32
+    property ftp_status : UInt32
+    property ftp_sub_status : UInt32
+    property hrStatus : Win32cr::Foundation::HRESULT
+    property pszInformation : Win32cr::Foundation::PWSTR
+    def initialize(@pszSessionId : Win32cr::Foundation::PWSTR, @pszSiteName : Win32cr::Foundation::PWSTR, @pszUserName : Win32cr::Foundation::PWSTR, @pszHostName : Win32cr::Foundation::PWSTR, @pszRemoteIpAddress : Win32cr::Foundation::PWSTR, @dwRemoteIpPort : UInt32, @pszLocalIpAddress : Win32cr::Foundation::PWSTR, @dwLocalIpPort : UInt32, @bytes_sent : UInt64, @bytes_received : UInt64, @pszCommand : Win32cr::Foundation::PWSTR, @pszCommandParameters : Win32cr::Foundation::PWSTR, @pszFullPath : Win32cr::Foundation::PWSTR, @dwElapsedMilliseconds : UInt32, @ftp_status : UInt32, @ftp_sub_status : UInt32, @hrStatus : Win32cr::Foundation::HRESULT, @pszInformation : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record MD_CHANGE_OBJECT_W,
-    pszMDPath : Win32cr::Foundation::PWSTR,
-    dwMDChangeType : UInt32,
-    dwMDNumDataIDs : UInt32,
-    pdwMDDataIDs : UInt32*
+  struct PRE_PROCESS_PARAMETERS
+    property pszSessionId : Win32cr::Foundation::PWSTR
+    property pszSiteName : Win32cr::Foundation::PWSTR
+    property pszUserName : Win32cr::Foundation::PWSTR
+    property pszHostName : Win32cr::Foundation::PWSTR
+    property pszRemoteIpAddress : Win32cr::Foundation::PWSTR
+    property dwRemoteIpPort : UInt32
+    property pszLocalIpAddress : Win32cr::Foundation::PWSTR
+    property dwLocalIpPort : UInt32
+    property pszCommand : Win32cr::Foundation::PWSTR
+    property pszCommandParameters : Win32cr::Foundation::PWSTR
+    property session_start_time : Win32cr::Foundation::FILETIME
+    property bytes_sent_per_session : UInt64
+    property bytes_received_per_session : UInt64
+    def initialize(@pszSessionId : Win32cr::Foundation::PWSTR, @pszSiteName : Win32cr::Foundation::PWSTR, @pszUserName : Win32cr::Foundation::PWSTR, @pszHostName : Win32cr::Foundation::PWSTR, @pszRemoteIpAddress : Win32cr::Foundation::PWSTR, @dwRemoteIpPort : UInt32, @pszLocalIpAddress : Win32cr::Foundation::PWSTR, @dwLocalIpPort : UInt32, @pszCommand : Win32cr::Foundation::PWSTR, @pszCommandParameters : Win32cr::Foundation::PWSTR, @session_start_time : Win32cr::Foundation::FILETIME, @bytes_sent_per_session : UInt64, @bytes_received_per_session : UInt64)
+    end
+  end
 
   @[Extern]
-  record IIS_CRYPTO_BLOB_
-  @[Extern]
-  record HSE_VERSION_INFO,
-    dwExtensionVersion : UInt32,
-    lpszExtensionDesc : Win32cr::Foundation::CHAR[256]
+  struct POST_PROCESS_PARAMETERS
+    property pszSessionId : Win32cr::Foundation::PWSTR
+    property pszSiteName : Win32cr::Foundation::PWSTR
+    property pszUserName : Win32cr::Foundation::PWSTR
+    property pszHostName : Win32cr::Foundation::PWSTR
+    property pszRemoteIpAddress : Win32cr::Foundation::PWSTR
+    property dwRemoteIpPort : UInt32
+    property pszLocalIpAddress : Win32cr::Foundation::PWSTR
+    property dwLocalIpPort : UInt32
+    property bytes_sent : UInt64
+    property bytes_received : UInt64
+    property pszCommand : Win32cr::Foundation::PWSTR
+    property pszCommandParameters : Win32cr::Foundation::PWSTR
+    property pszFullPath : Win32cr::Foundation::PWSTR
+    property pszPhysicalPath : Win32cr::Foundation::PWSTR
+    property ftp_status : UInt32
+    property ftp_sub_status : UInt32
+    property hrStatus : Win32cr::Foundation::HRESULT
+    property session_start_time : Win32cr::Foundation::FILETIME
+    property bytes_sent_per_session : UInt64
+    property bytes_received_per_session : UInt64
+    def initialize(@pszSessionId : Win32cr::Foundation::PWSTR, @pszSiteName : Win32cr::Foundation::PWSTR, @pszUserName : Win32cr::Foundation::PWSTR, @pszHostName : Win32cr::Foundation::PWSTR, @pszRemoteIpAddress : Win32cr::Foundation::PWSTR, @dwRemoteIpPort : UInt32, @pszLocalIpAddress : Win32cr::Foundation::PWSTR, @dwLocalIpPort : UInt32, @bytes_sent : UInt64, @bytes_received : UInt64, @pszCommand : Win32cr::Foundation::PWSTR, @pszCommandParameters : Win32cr::Foundation::PWSTR, @pszFullPath : Win32cr::Foundation::PWSTR, @pszPhysicalPath : Win32cr::Foundation::PWSTR, @ftp_status : UInt32, @ftp_sub_status : UInt32, @hrStatus : Win32cr::Foundation::HRESULT, @session_start_time : Win32cr::Foundation::FILETIME, @bytes_sent_per_session : UInt64, @bytes_received_per_session : UInt64)
+    end
+  end
 
   @[Extern]
-  record EXTENSION_CONTROL_BLOCK,
-    cbSize : UInt32,
-    dwVersion : UInt32,
-    conn_id : Void*,
-    dwHttpStatusCode : UInt32,
-    lpszLogData : Win32cr::Foundation::CHAR[80],
-    lpszMethod : Win32cr::Foundation::PSTR,
-    lpszQueryString : Win32cr::Foundation::PSTR,
-    lpszPathInfo : Win32cr::Foundation::PSTR,
-    lpszPathTranslated : Win32cr::Foundation::PSTR,
-    cbTotalBytes : UInt32,
-    cbAvailable : UInt32,
-    lpbData : UInt8*,
-    lpszContentType : Win32cr::Foundation::PSTR,
-    get_server_variable : LibC::IntPtrT,
-    write_client : LibC::IntPtrT,
-    read_client : LibC::IntPtrT,
-    server_support_function : LibC::IntPtrT
+  struct METADATA_RECORD
+    property dwMDIdentifier : UInt32
+    property dwMDAttributes : UInt32
+    property dwMDUserType : UInt32
+    property dwMDDataType : UInt32
+    property dwMDDataLen : UInt32
+    property pbMDData : UInt8*
+    property dwMDDataTag : UInt32
+    def initialize(@dwMDIdentifier : UInt32, @dwMDAttributes : UInt32, @dwMDUserType : UInt32, @dwMDDataType : UInt32, @dwMDDataLen : UInt32, @pbMDData : UInt8*, @dwMDDataTag : UInt32)
+    end
+  end
 
   @[Extern]
-  record HSE_URL_MAPEX_INFO,
-    lpszPath : Win32cr::Foundation::CHAR[260],
-    dwFlags : UInt32,
-    cchMatchingPath : UInt32,
-    cchMatchingURL : UInt32,
-    dwReserved1 : UInt32,
-    dwReserved2 : UInt32
+  struct METADATA_GETALL_RECORD
+    property dwMDIdentifier : UInt32
+    property dwMDAttributes : UInt32
+    property dwMDUserType : UInt32
+    property dwMDDataType : UInt32
+    property dwMDDataLen : UInt32
+    property dwMDDataOffset : UInt32
+    property dwMDDataTag : UInt32
+    def initialize(@dwMDIdentifier : UInt32, @dwMDAttributes : UInt32, @dwMDUserType : UInt32, @dwMDDataType : UInt32, @dwMDDataLen : UInt32, @dwMDDataOffset : UInt32, @dwMDDataTag : UInt32)
+    end
+  end
 
   @[Extern]
-  record HSE_UNICODE_URL_MAPEX_INFO,
-    lpszPath : UInt16[260],
-    dwFlags : UInt32,
-    cchMatchingPath : UInt32,
-    cchMatchingURL : UInt32
+  struct METADATA_GETALL_INTERNAL_RECORD
+    property dwMDIdentifier : UInt32
+    property dwMDAttributes : UInt32
+    property dwMDUserType : UInt32
+    property dwMDDataType : UInt32
+    property dwMDDataLen : UInt32
+    property anonymous : Anonymous_e__Union_
+    property dwMDDataTag : UInt32
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property dwMDDataOffset : LibC::UIntPtrT
+    property pbMDData : UInt8*
+    def initialize(@dwMDDataOffset : LibC::UIntPtrT, @pbMDData : UInt8*)
+    end
+    end
+
+    def initialize(@dwMDIdentifier : UInt32, @dwMDAttributes : UInt32, @dwMDUserType : UInt32, @dwMDDataType : UInt32, @dwMDDataLen : UInt32, @anonymous : Anonymous_e__Union_, @dwMDDataTag : UInt32)
+    end
+  end
 
   @[Extern]
-  record HSE_TF_INFO,
-    pfnHseIO : Win32cr::System::Iis::PFN_HSE_IO_COMPLETION,
-    pContext : Void*,
-    hFile : Win32cr::Foundation::HANDLE,
-    pszStatusCode : Win32cr::Foundation::PSTR,
-    bytes_to_write : UInt32,
-    offset : UInt32,
-    pHead : Void*,
-    head_length : UInt32,
-    pTail : Void*,
-    tail_length : UInt32,
-    dwFlags : UInt32
+  struct METADATA_HANDLE_INFO
+    property dwMDPermissions : UInt32
+    property dwMDSystemChangeNumber : UInt32
+    def initialize(@dwMDPermissions : UInt32, @dwMDSystemChangeNumber : UInt32)
+    end
+  end
 
   @[Extern]
-  record HSE_SEND_HEADER_EX_INFO,
-    pszStatus : Win32cr::Foundation::PSTR,
-    pszHeader : Win32cr::Foundation::PSTR,
-    cchStatus : UInt32,
-    cchHeader : UInt32,
-    fKeepConn : Win32cr::Foundation::BOOL
+  struct MD_CHANGE_OBJECT_W
+    property pszMDPath : Win32cr::Foundation::PWSTR
+    property dwMDChangeType : UInt32
+    property dwMDNumDataIDs : UInt32
+    property pdwMDDataIDs : UInt32*
+    def initialize(@pszMDPath : Win32cr::Foundation::PWSTR, @dwMDChangeType : UInt32, @dwMDNumDataIDs : UInt32, @pdwMDDataIDs : UInt32*)
+    end
+  end
 
   @[Extern]
-  record HSE_EXEC_URL_USER_INFO,
-    hImpersonationToken : Win32cr::Foundation::HANDLE,
-    pszCustomUserName : Win32cr::Foundation::PSTR,
-    pszCustomAuthType : Win32cr::Foundation::PSTR
+  struct IIS_CRYPTO_BLOB_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record HSE_EXEC_URL_ENTITY_INFO,
-    cbAvailable : UInt32,
-    lpbData : Void*
+  struct HSE_VERSION_INFO
+    property dwExtensionVersion : UInt32
+    property lpszExtensionDesc : Win32cr::Foundation::CHAR[256]
+    def initialize(@dwExtensionVersion : UInt32, @lpszExtensionDesc : Win32cr::Foundation::CHAR[256])
+    end
+  end
 
   @[Extern]
-  record HSE_EXEC_URL_STATUS,
-    uHttpStatusCode : UInt16,
-    uHttpSubStatus : UInt16,
-    dwWin32Error : UInt32
+  struct EXTENSION_CONTROL_BLOCK
+    property cbSize : UInt32
+    property dwVersion : UInt32
+    property conn_id : Void*
+    property dwHttpStatusCode : UInt32
+    property lpszLogData : Win32cr::Foundation::CHAR[80]
+    property lpszMethod : Win32cr::Foundation::PSTR
+    property lpszQueryString : Win32cr::Foundation::PSTR
+    property lpszPathInfo : Win32cr::Foundation::PSTR
+    property lpszPathTranslated : Win32cr::Foundation::PSTR
+    property cbTotalBytes : UInt32
+    property cbAvailable : UInt32
+    property lpbData : UInt8*
+    property lpszContentType : Win32cr::Foundation::PSTR
+    property get_server_variable : LibC::IntPtrT
+    property write_client : LibC::IntPtrT
+    property read_client : LibC::IntPtrT
+    property server_support_function : LibC::IntPtrT
+    def initialize(@cbSize : UInt32, @dwVersion : UInt32, @conn_id : Void*, @dwHttpStatusCode : UInt32, @lpszLogData : Win32cr::Foundation::CHAR[80], @lpszMethod : Win32cr::Foundation::PSTR, @lpszQueryString : Win32cr::Foundation::PSTR, @lpszPathInfo : Win32cr::Foundation::PSTR, @lpszPathTranslated : Win32cr::Foundation::PSTR, @cbTotalBytes : UInt32, @cbAvailable : UInt32, @lpbData : UInt8*, @lpszContentType : Win32cr::Foundation::PSTR, @get_server_variable : LibC::IntPtrT, @write_client : LibC::IntPtrT, @read_client : LibC::IntPtrT, @server_support_function : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record HSE_EXEC_URL_INFO,
-    pszUrl : Win32cr::Foundation::PSTR,
-    pszMethod : Win32cr::Foundation::PSTR,
-    pszChildHeaders : Win32cr::Foundation::PSTR,
-    pUserInfo : Win32cr::System::Iis::HSE_EXEC_URL_USER_INFO*,
-    pEntity : Win32cr::System::Iis::HSE_EXEC_URL_ENTITY_INFO*,
-    dwExecUrlFlags : UInt32
+  struct HSE_URL_MAPEX_INFO
+    property lpszPath : Win32cr::Foundation::CHAR[260]
+    property dwFlags : UInt32
+    property cchMatchingPath : UInt32
+    property cchMatchingURL : UInt32
+    property dwReserved1 : UInt32
+    property dwReserved2 : UInt32
+    def initialize(@lpszPath : Win32cr::Foundation::CHAR[260], @dwFlags : UInt32, @cchMatchingPath : UInt32, @cchMatchingURL : UInt32, @dwReserved1 : UInt32, @dwReserved2 : UInt32)
+    end
+  end
 
   @[Extern]
-  record HSE_EXEC_UNICODE_URL_USER_INFO,
-    hImpersonationToken : Win32cr::Foundation::HANDLE,
-    pszCustomUserName : Win32cr::Foundation::PWSTR,
-    pszCustomAuthType : Win32cr::Foundation::PSTR
+  struct HSE_UNICODE_URL_MAPEX_INFO
+    property lpszPath : UInt16[260]
+    property dwFlags : UInt32
+    property cchMatchingPath : UInt32
+    property cchMatchingURL : UInt32
+    def initialize(@lpszPath : UInt16[260], @dwFlags : UInt32, @cchMatchingPath : UInt32, @cchMatchingURL : UInt32)
+    end
+  end
 
   @[Extern]
-  record HSE_EXEC_UNICODE_URL_INFO,
-    pszUrl : Win32cr::Foundation::PWSTR,
-    pszMethod : Win32cr::Foundation::PSTR,
-    pszChildHeaders : Win32cr::Foundation::PSTR,
-    pUserInfo : Win32cr::System::Iis::HSE_EXEC_UNICODE_URL_USER_INFO*,
-    pEntity : Win32cr::System::Iis::HSE_EXEC_URL_ENTITY_INFO*,
-    dwExecUrlFlags : UInt32
+  struct HSE_TF_INFO
+    property pfnHseIO : Win32cr::System::Iis::PFN_HSE_IO_COMPLETION
+    property pContext : Void*
+    property hFile : Win32cr::Foundation::HANDLE
+    property pszStatusCode : Win32cr::Foundation::PSTR
+    property bytes_to_write : UInt32
+    property offset : UInt32
+    property pHead : Void*
+    property head_length : UInt32
+    property pTail : Void*
+    property tail_length : UInt32
+    property dwFlags : UInt32
+    def initialize(@pfnHseIO : Win32cr::System::Iis::PFN_HSE_IO_COMPLETION, @pContext : Void*, @hFile : Win32cr::Foundation::HANDLE, @pszStatusCode : Win32cr::Foundation::PSTR, @bytes_to_write : UInt32, @offset : UInt32, @pHead : Void*, @head_length : UInt32, @pTail : Void*, @tail_length : UInt32, @dwFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record HSE_CUSTOM_ERROR_INFO,
-    pszStatus : Win32cr::Foundation::PSTR,
-    uHttpSubError : UInt16,
-    fAsync : Win32cr::Foundation::BOOL
+  struct HSE_SEND_HEADER_EX_INFO
+    property pszStatus : Win32cr::Foundation::PSTR
+    property pszHeader : Win32cr::Foundation::PSTR
+    property cchStatus : UInt32
+    property cchHeader : UInt32
+    property fKeepConn : Win32cr::Foundation::BOOL
+    def initialize(@pszStatus : Win32cr::Foundation::PSTR, @pszHeader : Win32cr::Foundation::PSTR, @cchStatus : UInt32, @cchHeader : UInt32, @fKeepConn : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record HSE_VECTOR_ELEMENT,
-    element_type : UInt32,
-    pvContext : Void*,
-    cbOffset : UInt64,
-    cbSize : UInt64
+  struct HSE_EXEC_URL_USER_INFO
+    property hImpersonationToken : Win32cr::Foundation::HANDLE
+    property pszCustomUserName : Win32cr::Foundation::PSTR
+    property pszCustomAuthType : Win32cr::Foundation::PSTR
+    def initialize(@hImpersonationToken : Win32cr::Foundation::HANDLE, @pszCustomUserName : Win32cr::Foundation::PSTR, @pszCustomAuthType : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record HSE_RESPONSE_VECTOR,
-    dwFlags : UInt32,
-    pszStatus : Win32cr::Foundation::PSTR,
-    pszHeaders : Win32cr::Foundation::PSTR,
-    nElementCount : UInt32,
-    lpElementArray : Win32cr::System::Iis::HSE_VECTOR_ELEMENT*
+  struct HSE_EXEC_URL_ENTITY_INFO
+    property cbAvailable : UInt32
+    property lpbData : Void*
+    def initialize(@cbAvailable : UInt32, @lpbData : Void*)
+    end
+  end
 
   @[Extern]
-  record CERT_CONTEXT_EX,
-    cert_context : Win32cr::Security::Cryptography::CERT_CONTEXT,
-    cbAllocated : UInt32,
-    dwCertificateFlags : UInt32
+  struct HSE_EXEC_URL_STATUS
+    property uHttpStatusCode : UInt16
+    property uHttpSubStatus : UInt16
+    property dwWin32Error : UInt32
+    def initialize(@uHttpStatusCode : UInt16, @uHttpSubStatus : UInt16, @dwWin32Error : UInt32)
+    end
+  end
 
   @[Extern]
-  record HSE_TRACE_INFO,
-    fTraceRequest : Win32cr::Foundation::BOOL,
-    trace_context_id : UInt8[16],
-    dwReserved1 : UInt32,
-    dwReserved2 : UInt32
+  struct HSE_EXEC_URL_INFO
+    property pszUrl : Win32cr::Foundation::PSTR
+    property pszMethod : Win32cr::Foundation::PSTR
+    property pszChildHeaders : Win32cr::Foundation::PSTR
+    property pUserInfo : Win32cr::System::Iis::HSE_EXEC_URL_USER_INFO*
+    property pEntity : Win32cr::System::Iis::HSE_EXEC_URL_ENTITY_INFO*
+    property dwExecUrlFlags : UInt32
+    def initialize(@pszUrl : Win32cr::Foundation::PSTR, @pszMethod : Win32cr::Foundation::PSTR, @pszChildHeaders : Win32cr::Foundation::PSTR, @pUserInfo : Win32cr::System::Iis::HSE_EXEC_URL_USER_INFO*, @pEntity : Win32cr::System::Iis::HSE_EXEC_URL_ENTITY_INFO*, @dwExecUrlFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_FILTER_CONTEXT,
-    cbSize : UInt32,
-    revision : UInt32,
-    server_context : Void*,
-    ulReserved : UInt32,
-    fIsSecurePort : Win32cr::Foundation::BOOL,
-    pFilterContext : Void*,
-    get_server_variable : LibC::IntPtrT,
-    add_response_headers : LibC::IntPtrT,
-    write_client : LibC::IntPtrT,
-    alloc_mem : LibC::IntPtrT,
-    server_support_function : LibC::IntPtrT
+  struct HSE_EXEC_UNICODE_URL_USER_INFO
+    property hImpersonationToken : Win32cr::Foundation::HANDLE
+    property pszCustomUserName : Win32cr::Foundation::PWSTR
+    property pszCustomAuthType : Win32cr::Foundation::PSTR
+    def initialize(@hImpersonationToken : Win32cr::Foundation::HANDLE, @pszCustomUserName : Win32cr::Foundation::PWSTR, @pszCustomAuthType : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record HTTP_FILTER_RAW_DATA,
-    pvInData : Void*,
-    cbInData : UInt32,
-    cbInBuffer : UInt32,
-    dwReserved : UInt32
+  struct HSE_EXEC_UNICODE_URL_INFO
+    property pszUrl : Win32cr::Foundation::PWSTR
+    property pszMethod : Win32cr::Foundation::PSTR
+    property pszChildHeaders : Win32cr::Foundation::PSTR
+    property pUserInfo : Win32cr::System::Iis::HSE_EXEC_UNICODE_URL_USER_INFO*
+    property pEntity : Win32cr::System::Iis::HSE_EXEC_URL_ENTITY_INFO*
+    property dwExecUrlFlags : UInt32
+    def initialize(@pszUrl : Win32cr::Foundation::PWSTR, @pszMethod : Win32cr::Foundation::PSTR, @pszChildHeaders : Win32cr::Foundation::PSTR, @pUserInfo : Win32cr::System::Iis::HSE_EXEC_UNICODE_URL_USER_INFO*, @pEntity : Win32cr::System::Iis::HSE_EXEC_URL_ENTITY_INFO*, @dwExecUrlFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_FILTER_PREPROC_HEADERS,
-    get_header : LibC::IntPtrT,
-    set_header : LibC::IntPtrT,
-    add_header : LibC::IntPtrT,
-    http_status : UInt32,
-    dwReserved : UInt32
+  struct HSE_CUSTOM_ERROR_INFO
+    property pszStatus : Win32cr::Foundation::PSTR
+    property uHttpSubError : UInt16
+    property fAsync : Win32cr::Foundation::BOOL
+    def initialize(@pszStatus : Win32cr::Foundation::PSTR, @uHttpSubError : UInt16, @fAsync : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record HTTP_FILTER_AUTHENT,
-    pszUser : Win32cr::Foundation::PSTR,
-    cbUserBuff : UInt32,
-    pszPassword : Win32cr::Foundation::PSTR,
-    cbPasswordBuff : UInt32
+  struct HSE_VECTOR_ELEMENT
+    property element_type : UInt32
+    property pvContext : Void*
+    property cbOffset : UInt64
+    property cbSize : UInt64
+    def initialize(@element_type : UInt32, @pvContext : Void*, @cbOffset : UInt64, @cbSize : UInt64)
+    end
+  end
 
   @[Extern]
-  record HTTP_FILTER_URL_MAP,
-    pszURL : Win32cr::Foundation::PSTR,
-    pszPhysicalPath : Win32cr::Foundation::PSTR,
-    cbPathBuff : UInt32
+  struct HSE_RESPONSE_VECTOR
+    property dwFlags : UInt32
+    property pszStatus : Win32cr::Foundation::PSTR
+    property pszHeaders : Win32cr::Foundation::PSTR
+    property nElementCount : UInt32
+    property lpElementArray : Win32cr::System::Iis::HSE_VECTOR_ELEMENT*
+    def initialize(@dwFlags : UInt32, @pszStatus : Win32cr::Foundation::PSTR, @pszHeaders : Win32cr::Foundation::PSTR, @nElementCount : UInt32, @lpElementArray : Win32cr::System::Iis::HSE_VECTOR_ELEMENT*)
+    end
+  end
 
   @[Extern]
-  record HTTP_FILTER_URL_MAP_EX,
-    pszURL : Win32cr::Foundation::PSTR,
-    pszPhysicalPath : Win32cr::Foundation::PSTR,
-    cbPathBuff : UInt32,
-    dwFlags : UInt32,
-    cchMatchingPath : UInt32,
-    cchMatchingURL : UInt32,
-    pszScriptMapEntry : Win32cr::Foundation::PSTR
+  struct CERT_CONTEXT_EX
+    property cert_context : Win32cr::Security::Cryptography::CERT_CONTEXT
+    property cbAllocated : UInt32
+    property dwCertificateFlags : UInt32
+    def initialize(@cert_context : Win32cr::Security::Cryptography::CERT_CONTEXT, @cbAllocated : UInt32, @dwCertificateFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_FILTER_ACCESS_DENIED,
-    pszURL : Win32cr::Foundation::PSTR,
-    pszPhysicalPath : Win32cr::Foundation::PSTR,
-    dwReason : UInt32
+  struct HSE_TRACE_INFO
+    property fTraceRequest : Win32cr::Foundation::BOOL
+    property trace_context_id : UInt8[16]
+    property dwReserved1 : UInt32
+    property dwReserved2 : UInt32
+    def initialize(@fTraceRequest : Win32cr::Foundation::BOOL, @trace_context_id : UInt8[16], @dwReserved1 : UInt32, @dwReserved2 : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_FILTER_LOG,
-    pszClientHostName : Win32cr::Foundation::PSTR,
-    pszClientUserName : Win32cr::Foundation::PSTR,
-    pszServerName : Win32cr::Foundation::PSTR,
-    pszOperation : Win32cr::Foundation::PSTR,
-    pszTarget : Win32cr::Foundation::PSTR,
-    pszParameters : Win32cr::Foundation::PSTR,
-    dwHttpStatus : UInt32,
-    dwWin32Status : UInt32,
-    dwBytesSent : UInt32,
-    dwBytesRecvd : UInt32,
-    msTimeForProcessing : UInt32
+  struct HTTP_FILTER_CONTEXT
+    property cbSize : UInt32
+    property revision : UInt32
+    property server_context : Void*
+    property ulReserved : UInt32
+    property fIsSecurePort : Win32cr::Foundation::BOOL
+    property pFilterContext : Void*
+    property get_server_variable : LibC::IntPtrT
+    property add_response_headers : LibC::IntPtrT
+    property write_client : LibC::IntPtrT
+    property alloc_mem : LibC::IntPtrT
+    property server_support_function : LibC::IntPtrT
+    def initialize(@cbSize : UInt32, @revision : UInt32, @server_context : Void*, @ulReserved : UInt32, @fIsSecurePort : Win32cr::Foundation::BOOL, @pFilterContext : Void*, @get_server_variable : LibC::IntPtrT, @add_response_headers : LibC::IntPtrT, @write_client : LibC::IntPtrT, @alloc_mem : LibC::IntPtrT, @server_support_function : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record HTTP_FILTER_AUTH_COMPLETE_INFO,
-    get_header : LibC::IntPtrT,
-    set_header : LibC::IntPtrT,
-    add_header : LibC::IntPtrT,
-    get_user_token : LibC::IntPtrT,
-    http_status : UInt32,
-    fResetAuth : Win32cr::Foundation::BOOL,
-    dwReserved : UInt32
+  struct HTTP_FILTER_RAW_DATA
+    property pvInData : Void*
+    property cbInData : UInt32
+    property cbInBuffer : UInt32
+    property dwReserved : UInt32
+    def initialize(@pvInData : Void*, @cbInData : UInt32, @cbInBuffer : UInt32, @dwReserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_FILTER_VERSION,
-    dwServerFilterVersion : UInt32,
-    dwFilterVersion : UInt32,
-    lpszFilterDesc : Win32cr::Foundation::CHAR[257],
-    dwFlags : UInt32
+  struct HTTP_FILTER_PREPROC_HEADERS
+    property get_header : LibC::IntPtrT
+    property set_header : LibC::IntPtrT
+    property add_header : LibC::IntPtrT
+    property http_status : UInt32
+    property dwReserved : UInt32
+    def initialize(@get_header : LibC::IntPtrT, @set_header : LibC::IntPtrT, @add_header : LibC::IntPtrT, @http_status : UInt32, @dwReserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_TRACE_EVENT,
-    pProviderGuid : LibC::GUID*,
-    dwArea : UInt32,
-    pAreaGuid : LibC::GUID*,
-    dwEvent : UInt32,
-    pszEventName : Win32cr::Foundation::PWSTR,
-    dwEventVersion : UInt32,
-    dwVerbosity : UInt32,
-    pActivityGuid : LibC::GUID*,
-    pRelatedActivityGuid : LibC::GUID*,
-    dwTimeStamp : UInt32,
-    dwFlags : UInt32,
-    cEventItems : UInt32,
-    pEventItems : Win32cr::System::Iis::HTTP_TRACE_EVENT_ITEM*
+  struct HTTP_FILTER_AUTHENT
+    property pszUser : Win32cr::Foundation::PSTR
+    property cbUserBuff : UInt32
+    property pszPassword : Win32cr::Foundation::PSTR
+    property cbPasswordBuff : UInt32
+    def initialize(@pszUser : Win32cr::Foundation::PSTR, @cbUserBuff : UInt32, @pszPassword : Win32cr::Foundation::PSTR, @cbPasswordBuff : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_TRACE_EVENT_ITEM,
-    pszName : Win32cr::Foundation::PWSTR,
-    dwDataType : Win32cr::System::Iis::HTTP_TRACE_TYPE,
-    pbData : UInt8*,
-    cbData : UInt32,
-    pszDataDescription : Win32cr::Foundation::PWSTR
+  struct HTTP_FILTER_URL_MAP
+    property pszURL : Win32cr::Foundation::PSTR
+    property pszPhysicalPath : Win32cr::Foundation::PSTR
+    property cbPathBuff : UInt32
+    def initialize(@pszURL : Win32cr::Foundation::PSTR, @pszPhysicalPath : Win32cr::Foundation::PSTR, @cbPathBuff : UInt32)
+    end
+  end
 
   @[Extern]
-  record HTTP_TRACE_CONFIGURATION,
-    pProviderGuid : LibC::GUID*,
-    dwAreas : UInt32,
-    dwVerbosity : UInt32,
-    fProviderEnabled : Win32cr::Foundation::BOOL
+  struct HTTP_FILTER_URL_MAP_EX
+    property pszURL : Win32cr::Foundation::PSTR
+    property pszPhysicalPath : Win32cr::Foundation::PSTR
+    property cbPathBuff : UInt32
+    property dwFlags : UInt32
+    property cchMatchingPath : UInt32
+    property cchMatchingURL : UInt32
+    property pszScriptMapEntry : Win32cr::Foundation::PSTR
+    def initialize(@pszURL : Win32cr::Foundation::PSTR, @pszPhysicalPath : Win32cr::Foundation::PSTR, @cbPathBuff : UInt32, @dwFlags : UInt32, @cchMatchingPath : UInt32, @cchMatchingURL : UInt32, @pszScriptMapEntry : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct HTTP_FILTER_ACCESS_DENIED
+    property pszURL : Win32cr::Foundation::PSTR
+    property pszPhysicalPath : Win32cr::Foundation::PSTR
+    property dwReason : UInt32
+    def initialize(@pszURL : Win32cr::Foundation::PSTR, @pszPhysicalPath : Win32cr::Foundation::PSTR, @dwReason : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct HTTP_FILTER_LOG
+    property pszClientHostName : Win32cr::Foundation::PSTR
+    property pszClientUserName : Win32cr::Foundation::PSTR
+    property pszServerName : Win32cr::Foundation::PSTR
+    property pszOperation : Win32cr::Foundation::PSTR
+    property pszTarget : Win32cr::Foundation::PSTR
+    property pszParameters : Win32cr::Foundation::PSTR
+    property dwHttpStatus : UInt32
+    property dwWin32Status : UInt32
+    property dwBytesSent : UInt32
+    property dwBytesRecvd : UInt32
+    property msTimeForProcessing : UInt32
+    def initialize(@pszClientHostName : Win32cr::Foundation::PSTR, @pszClientUserName : Win32cr::Foundation::PSTR, @pszServerName : Win32cr::Foundation::PSTR, @pszOperation : Win32cr::Foundation::PSTR, @pszTarget : Win32cr::Foundation::PSTR, @pszParameters : Win32cr::Foundation::PSTR, @dwHttpStatus : UInt32, @dwWin32Status : UInt32, @dwBytesSent : UInt32, @dwBytesRecvd : UInt32, @msTimeForProcessing : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct HTTP_FILTER_AUTH_COMPLETE_INFO
+    property get_header : LibC::IntPtrT
+    property set_header : LibC::IntPtrT
+    property add_header : LibC::IntPtrT
+    property get_user_token : LibC::IntPtrT
+    property http_status : UInt32
+    property fResetAuth : Win32cr::Foundation::BOOL
+    property dwReserved : UInt32
+    def initialize(@get_header : LibC::IntPtrT, @set_header : LibC::IntPtrT, @add_header : LibC::IntPtrT, @get_user_token : LibC::IntPtrT, @http_status : UInt32, @fResetAuth : Win32cr::Foundation::BOOL, @dwReserved : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct HTTP_FILTER_VERSION
+    property dwServerFilterVersion : UInt32
+    property dwFilterVersion : UInt32
+    property lpszFilterDesc : Win32cr::Foundation::CHAR[257]
+    property dwFlags : UInt32
+    def initialize(@dwServerFilterVersion : UInt32, @dwFilterVersion : UInt32, @lpszFilterDesc : Win32cr::Foundation::CHAR[257], @dwFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct HTTP_TRACE_EVENT
+    property pProviderGuid : LibC::GUID*
+    property dwArea : UInt32
+    property pAreaGuid : LibC::GUID*
+    property dwEvent : UInt32
+    property pszEventName : Win32cr::Foundation::PWSTR
+    property dwEventVersion : UInt32
+    property dwVerbosity : UInt32
+    property pActivityGuid : LibC::GUID*
+    property pRelatedActivityGuid : LibC::GUID*
+    property dwTimeStamp : UInt32
+    property dwFlags : UInt32
+    property cEventItems : UInt32
+    property pEventItems : Win32cr::System::Iis::HTTP_TRACE_EVENT_ITEM*
+    def initialize(@pProviderGuid : LibC::GUID*, @dwArea : UInt32, @pAreaGuid : LibC::GUID*, @dwEvent : UInt32, @pszEventName : Win32cr::Foundation::PWSTR, @dwEventVersion : UInt32, @dwVerbosity : UInt32, @pActivityGuid : LibC::GUID*, @pRelatedActivityGuid : LibC::GUID*, @dwTimeStamp : UInt32, @dwFlags : UInt32, @cEventItems : UInt32, @pEventItems : Win32cr::System::Iis::HTTP_TRACE_EVENT_ITEM*)
+    end
+  end
+
+  @[Extern]
+  struct HTTP_TRACE_EVENT_ITEM
+    property pszName : Win32cr::Foundation::PWSTR
+    property dwDataType : Win32cr::System::Iis::HTTP_TRACE_TYPE
+    property pbData : UInt8*
+    property cbData : UInt32
+    property pszDataDescription : Win32cr::Foundation::PWSTR
+    def initialize(@pszName : Win32cr::Foundation::PWSTR, @dwDataType : Win32cr::System::Iis::HTTP_TRACE_TYPE, @pbData : UInt8*, @cbData : UInt32, @pszDataDescription : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct HTTP_TRACE_CONFIGURATION
+    property pProviderGuid : LibC::GUID*
+    property dwAreas : UInt32
+    property dwVerbosity : UInt32
+    property fProviderEnabled : Win32cr::Foundation::BOOL
+    def initialize(@pProviderGuid : LibC::GUID*, @dwAreas : UInt32, @dwVerbosity : UInt32, @fProviderEnabled : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
   record IFtpProviderConstructVtbl,
@@ -1396,7 +1519,6 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  #@[Com("4d1a3f7b-412d-447c-b199-64f967e9a2da")]
   record IFtpProviderConstruct, lpVtbl : IFtpProviderConstructVtbl* do
     GUID = LibC::GUID.new(0x4d1a3f7b_u32, 0x412d_u16, 0x447c_u16, StaticArray[0xb1_u8, 0x99_u8, 0x64_u8, 0xf9_u8, 0x67_u8, 0xe9_u8, 0xa2_u8, 0xda_u8])
     def query_interface(this : IFtpProviderConstruct*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1423,7 +1545,6 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  #@[Com("4659f95c-d5a8-4707-b2fc-6fd5794246cf")]
   record IFtpAuthenticationProvider, lpVtbl : IFtpAuthenticationProviderVtbl* do
     GUID = LibC::GUID.new(0x4659f95c_u32, 0xd5a8_u16, 0x4707_u16, StaticArray[0xb2_u8, 0xfc_u8, 0x6f_u8, 0xd5_u8, 0x79_u8, 0x42_u8, 0x46_u8, 0xcf_u8])
     def query_interface(this : IFtpAuthenticationProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1451,7 +1572,6 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  #@[Com("c24efb65-9f3e-4996-8fb1-ce166916bab5")]
   record AsyncIFtpAuthenticationProvider, lpVtbl : AsyncIFtpAuthenticationProviderVtbl* do
     GUID = LibC::GUID.new(0xc24efb65_u32, 0x9f3e_u16, 0x4996_u16, StaticArray[0x8f_u8, 0xb1_u8, 0xce_u8, 0x16_u8, 0x69_u8, 0x16_u8, 0xba_u8, 0xb5_u8])
     def query_interface(this : AsyncIFtpAuthenticationProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1481,7 +1601,6 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  #@[Com("909c850d-8ca0-4674-96b8-cc2941535725")]
   record IFtpRoleProvider, lpVtbl : IFtpRoleProviderVtbl* do
     GUID = LibC::GUID.new(0x909c850d_u32, 0x8ca0_u16, 0x4674_u16, StaticArray[0x96_u8, 0xb8_u8, 0xcc_u8, 0x29_u8, 0x41_u8, 0x53_u8, 0x57_u8, 0x25_u8])
     def query_interface(this : IFtpRoleProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1509,7 +1628,6 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  #@[Com("3e83bf99-70ec-41ca-84b6-aca7c7a62caf")]
   record AsyncIFtpRoleProvider, lpVtbl : AsyncIFtpRoleProviderVtbl* do
     GUID = LibC::GUID.new(0x3e83bf99_u32, 0x70ec_u16, 0x41ca_u16, StaticArray[0x84_u8, 0xb6_u8, 0xac_u8, 0xa7_u8, 0xc7_u8, 0xa6_u8, 0x2c_u8, 0xaf_u8])
     def query_interface(this : AsyncIFtpRoleProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1539,7 +1657,6 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  #@[Com("0933b392-18dd-4097-8b9c-83325c35d9a6")]
   record IFtpHomeDirectoryProvider, lpVtbl : IFtpHomeDirectoryProviderVtbl* do
     GUID = LibC::GUID.new(0x933b392_u32, 0x18dd_u16, 0x4097_u16, StaticArray[0x8b_u8, 0x9c_u8, 0x83_u8, 0x32_u8, 0x5c_u8, 0x35_u8, 0xd9_u8, 0xa6_u8])
     def query_interface(this : IFtpHomeDirectoryProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1567,7 +1684,6 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  #@[Com("73f81638-6295-42bd-a2be-4a657f7c479c")]
   record AsyncIFtpHomeDirectoryProvider, lpVtbl : AsyncIFtpHomeDirectoryProviderVtbl* do
     GUID = LibC::GUID.new(0x73f81638_u32, 0x6295_u16, 0x42bd_u16, StaticArray[0xa2_u8, 0xbe_u8, 0x4a_u8, 0x65_u8, 0x7f_u8, 0x7c_u8, 0x47_u8, 0x9c_u8])
     def query_interface(this : AsyncIFtpHomeDirectoryProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1597,7 +1713,6 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  #@[Com("a18a94cc-8299-4408-816c-7c3baca1a40e")]
   record IFtpLogProvider, lpVtbl : IFtpLogProviderVtbl* do
     GUID = LibC::GUID.new(0xa18a94cc_u32, 0x8299_u16, 0x4408_u16, StaticArray[0x81_u8, 0x6c_u8, 0x7c_u8, 0x3b_u8, 0xac_u8, 0xa1_u8, 0xa4_u8, 0xe_u8])
     def query_interface(this : IFtpLogProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1625,7 +1740,6 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  #@[Com("00a0ae46-2498-48b2-95e6-df678ed7d49f")]
   record AsyncIFtpLogProvider, lpVtbl : AsyncIFtpLogProviderVtbl* do
     GUID = LibC::GUID.new(0xa0ae46_u32, 0x2498_u16, 0x48b2_u16, StaticArray[0x95_u8, 0xe6_u8, 0xdf_u8, 0x67_u8, 0x8e_u8, 0xd7_u8, 0xd4_u8, 0x9f_u8])
     def query_interface(this : AsyncIFtpLogProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1655,7 +1769,6 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  #@[Com("a50ae7a1-a35a-42b4-a4f3-f4f7057a05d1")]
   record IFtpAuthorizationProvider, lpVtbl : IFtpAuthorizationProviderVtbl* do
     GUID = LibC::GUID.new(0xa50ae7a1_u32, 0xa35a_u16, 0x42b4_u16, StaticArray[0xa4_u8, 0xf3_u8, 0xf4_u8, 0xf7_u8, 0x5_u8, 0x7a_u8, 0x5_u8, 0xd1_u8])
     def query_interface(this : IFtpAuthorizationProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1683,7 +1796,6 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  #@[Com("860dc339-07e5-4a5c-9c61-8820cea012bc")]
   record AsyncIFtpAuthorizationProvider, lpVtbl : AsyncIFtpAuthorizationProviderVtbl* do
     GUID = LibC::GUID.new(0x860dc339_u32, 0x7e5_u16, 0x4a5c_u16, StaticArray[0x9c_u8, 0x61_u8, 0x88_u8, 0x20_u8, 0xce_u8, 0xa0_u8, 0x12_u8, 0xbc_u8])
     def query_interface(this : AsyncIFtpAuthorizationProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1713,7 +1825,6 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  #@[Com("a3c19b60-5a28-471a-8f93-ab30411cee82")]
   record IFtpPreprocessProvider, lpVtbl : IFtpPreprocessProviderVtbl* do
     GUID = LibC::GUID.new(0xa3c19b60_u32, 0x5a28_u16, 0x471a_u16, StaticArray[0x8f_u8, 0x93_u8, 0xab_u8, 0x30_u8, 0x41_u8, 0x1c_u8, 0xee_u8, 0x82_u8])
     def query_interface(this : IFtpPreprocessProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1741,7 +1852,6 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  #@[Com("6ff5fd8f-fd8e-48b1-a3e0-bf7073db4db5")]
   record AsyncIFtpPreprocessProvider, lpVtbl : AsyncIFtpPreprocessProviderVtbl* do
     GUID = LibC::GUID.new(0x6ff5fd8f_u32, 0xfd8e_u16, 0x48b1_u16, StaticArray[0xa3_u8, 0xe0_u8, 0xbf_u8, 0x70_u8, 0x73_u8, 0xdb_u8, 0x4d_u8, 0xb5_u8])
     def query_interface(this : AsyncIFtpPreprocessProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1771,7 +1881,6 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  #@[Com("4522cbc6-16cd-49ad-8653-9a2c579e4280")]
   record IFtpPostprocessProvider, lpVtbl : IFtpPostprocessProviderVtbl* do
     GUID = LibC::GUID.new(0x4522cbc6_u32, 0x16cd_u16, 0x49ad_u16, StaticArray[0x86_u8, 0x53_u8, 0x9a_u8, 0x2c_u8, 0x57_u8, 0x9e_u8, 0x42_u8, 0x80_u8])
     def query_interface(this : IFtpPostprocessProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1799,7 +1908,6 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  #@[Com("a16b2542-9694-4eb1-a564-6c2e91fdc133")]
   record AsyncIFtpPostprocessProvider, lpVtbl : AsyncIFtpPostprocessProviderVtbl* do
     GUID = LibC::GUID.new(0xa16b2542_u32, 0x9694_u16, 0x4eb1_u16, StaticArray[0xa5_u8, 0x64_u8, 0x6c_u8, 0x2e_u8, 0x91_u8, 0xfd_u8, 0xc1_u8, 0x33_u8])
     def query_interface(this : AsyncIFtpPostprocessProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1831,7 +1939,6 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  #@[Com("51dfe970-f6f2-11d0-b9bd-00a0c922e750")]
   record IADMEXT, lpVtbl : IADMEXTVtbl* do
     GUID = LibC::GUID.new(0x51dfe970_u32, 0xf6f2_u16, 0x11d0_u16, StaticArray[0xb9_u8, 0xbd_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0xe7_u8, 0x50_u8])
     def query_interface(this : IADMEXT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1894,7 +2001,6 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  #@[Com("70b51430-b6ca-11d0-b9b9-00a0c922e750")]
   record IMSAdminBaseW, lpVtbl : IMSAdminBaseWVtbl* do
     GUID = LibC::GUID.new(0x70b51430_u32, 0xb6ca_u16, 0x11d0_u16, StaticArray[0xb9_u8, 0xb9_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0xe7_u8, 0x50_u8])
     def query_interface(this : IMSAdminBaseW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2047,7 +2153,6 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  #@[Com("8298d101-f992-43b7-8eca-5052d885b995")]
   record IMSAdminBase2W, lpVtbl : IMSAdminBase2WVtbl* do
     GUID = LibC::GUID.new(0x8298d101_u32, 0xf992_u16, 0x43b7_u16, StaticArray[0x8e_u8, 0xca_u8, 0x50_u8, 0x52_u8, 0xd8_u8, 0x85_u8, 0xb9_u8, 0x95_u8])
     def query_interface(this : IMSAdminBase2W*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2219,7 +2324,6 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  #@[Com("f612954d-3b0b-4c56-9563-227b7be624b4")]
   record IMSAdminBase3W, lpVtbl : IMSAdminBase3WVtbl* do
     GUID = LibC::GUID.new(0xf612954d_u32, 0x3b0b_u16, 0x4c56_u16, StaticArray[0x95_u8, 0x63_u8, 0x22_u8, 0x7b_u8, 0x7b_u8, 0xe6_u8, 0x24_u8, 0xb4_u8])
     def query_interface(this : IMSAdminBase3W*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2357,7 +2461,6 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  #@[Com("29ff67ff-8050-480f-9f30-cc41635f2f9d")]
   record IMSImpExpHelpW, lpVtbl : IMSImpExpHelpWVtbl* do
     GUID = LibC::GUID.new(0x29ff67ff_u32, 0x8050_u16, 0x480f_u16, StaticArray[0x9f_u8, 0x30_u8, 0xcc_u8, 0x41_u8, 0x63_u8, 0x5f_u8, 0x2f_u8, 0x9d_u8])
     def query_interface(this : IMSImpExpHelpW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2385,7 +2488,6 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  #@[Com("a9e69612-b80d-11d0-b9b9-00a0c922e750")]
   record IMSAdminBaseSinkW, lpVtbl : IMSAdminBaseSinkWVtbl* do
     GUID = LibC::GUID.new(0xa9e69612_u32, 0xb80d_u16, 0x11d0_u16, StaticArray[0xb9_u8, 0xb9_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0xe7_u8, 0x50_u8])
     def query_interface(this : IMSAdminBaseSinkW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2418,7 +2520,6 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  #@[Com("a9e69613-b80d-11d0-b9b9-00a0c922e750")]
   record AsyncIMSAdminBaseSinkW, lpVtbl : AsyncIMSAdminBaseSinkWVtbl* do
     GUID = LibC::GUID.new(0xa9e69613_u32, 0xb80d_u16, 0x11d0_u16, StaticArray[0xb9_u8, 0xb9_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0xe7_u8, 0x50_u8])
     def query_interface(this : AsyncIMSAdminBaseSinkW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

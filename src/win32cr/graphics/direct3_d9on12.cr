@@ -4,20 +4,23 @@ require "./direct3_d9.cr"
 require "./direct3_d12.cr"
 
 module Win32cr::Graphics::Direct3D9on12
-  alias PFN_Direct3DCreate9On12Ex = Proc(UInt32, Win32cr::Graphics::Direct3D9on12::D3D9ON12_ARGS*, UInt32, Void**, Win32cr::Foundation::HRESULT)*
+  alias PFN_Direct3DCreate9On12Ex = Proc(UInt32, Win32cr::Graphics::Direct3D9on12::D3D9ON12_ARGS*, UInt32, Void**, Win32cr::Foundation::HRESULT)
 
-  alias PFN_Direct3DCreate9On12 = Proc(UInt32, Win32cr::Graphics::Direct3D9on12::D3D9ON12_ARGS*, UInt32, Void*)*
+  alias PFN_Direct3DCreate9On12 = Proc(UInt32, Win32cr::Graphics::Direct3D9on12::D3D9ON12_ARGS*, UInt32, Void*)
 
   MAX_D3D9ON12_QUEUES = 2_u32
 
 
   @[Extern]
-  record D3D9ON12_ARGS,
-    enable9_on12 : Win32cr::Foundation::BOOL,
-    pD3D12Device : Void*,
-    ppD3D12Queues : Void*[2],
-    num_queues : UInt32,
-    node_mask : UInt32
+  struct D3D9ON12_ARGS
+    property enable9_on12 : Win32cr::Foundation::BOOL
+    property pD3D12Device : Void*
+    property ppD3D12Queues : Void*[2]
+    property num_queues : UInt32
+    property node_mask : UInt32
+    def initialize(@enable9_on12 : Win32cr::Foundation::BOOL, @pD3D12Device : Void*, @ppD3D12Queues : Void*[2], @num_queues : UInt32, @node_mask : UInt32)
+    end
+  end
 
   @[Extern]
   record IDirect3DDevice9On12Vtbl,
@@ -30,7 +33,6 @@ module Win32cr::Graphics::Direct3D9on12
 
 
   @[Extern]
-  #@[Com("e7fda234-b589-4049-940d-8878977531c8")]
   record IDirect3DDevice9On12, lpVtbl : IDirect3DDevice9On12Vtbl* do
     GUID = LibC::GUID.new(0xe7fda234_u32, 0xb589_u16, 0x4049_u16, StaticArray[0x94_u8, 0xd_u8, 0x88_u8, 0x78_u8, 0x97_u8, 0x75_u8, 0x31_u8, 0xc8_u8])
     def query_interface(this : IDirect3DDevice9On12*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

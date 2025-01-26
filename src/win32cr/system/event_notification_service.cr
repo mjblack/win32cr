@@ -23,18 +23,24 @@ module Win32cr::System::EventNotificationService
   end
 
   @[Extern]
-  record QOCINFO,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwInSpeed : UInt32,
-    dwOutSpeed : UInt32
+  struct QOCINFO
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwInSpeed : UInt32
+    property dwOutSpeed : UInt32
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwInSpeed : UInt32, @dwOutSpeed : UInt32)
+    end
+  end
 
   @[Extern]
-  record SENS_QOCINFO,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwOutSpeed : UInt32,
-    dwInSpeed : UInt32
+  struct SENS_QOCINFO
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwOutSpeed : UInt32
+    property dwInSpeed : UInt32
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwOutSpeed : UInt32, @dwInSpeed : UInt32)
+    end
+  end
 
   @[Extern]
   record ISensNetworkVtbl,
@@ -53,7 +59,6 @@ module Win32cr::System::EventNotificationService
 
 
   @[Extern]
-  #@[Com("d597bab1-5b9f-11d1-8dd2-00aa004abd5e")]
   record ISensNetwork, lpVtbl : ISensNetworkVtbl* do
     GUID = LibC::GUID.new(0xd597bab1_u32, 0x5b9f_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xd2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xbd_u8, 0x5e_u8])
     def query_interface(this : ISensNetwork*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -110,7 +115,6 @@ module Win32cr::System::EventNotificationService
 
 
   @[Extern]
-  #@[Com("d597bab2-5b9f-11d1-8dd2-00aa004abd5e")]
   record ISensOnNow, lpVtbl : ISensOnNowVtbl* do
     GUID = LibC::GUID.new(0xd597bab2_u32, 0x5b9f_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xd2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xbd_u8, 0x5e_u8])
     def query_interface(this : ISensOnNow*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -165,7 +169,6 @@ module Win32cr::System::EventNotificationService
 
 
   @[Extern]
-  #@[Com("d597bab3-5b9f-11d1-8dd2-00aa004abd5e")]
   record ISensLogon, lpVtbl : ISensLogonVtbl* do
     GUID = LibC::GUID.new(0xd597bab3_u32, 0x5b9f_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xd2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xbd_u8, 0x5e_u8])
     def query_interface(this : ISensLogon*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -230,7 +233,6 @@ module Win32cr::System::EventNotificationService
 
 
   @[Extern]
-  #@[Com("d597bab4-5b9f-11d1-8dd2-00aa004abd5e")]
   record ISensLogon2, lpVtbl : ISensLogon2Vtbl* do
     GUID = LibC::GUID.new(0xd597bab4_u32, 0x5b9f_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xd2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xbd_u8, 0x5e_u8])
     def query_interface(this : ISensLogon2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

@@ -378,81 +378,115 @@ module Win32cr::Storage::Vss
   end
 
   @[Extern]
-  record VSS_SNAPSHOT_PROP,
-    m_SnapshotId : LibC::GUID,
-    m_SnapshotSetId : LibC::GUID,
-    m_lSnapshotsCount : Int32,
-    m_pwszSnapshotDeviceObject : UInt16*,
-    m_pwszOriginalVolumeName : UInt16*,
-    m_pwszOriginatingMachine : UInt16*,
-    m_pwszServiceMachine : UInt16*,
-    m_pwszExposedName : UInt16*,
-    m_pwszExposedPath : UInt16*,
-    m_ProviderId : LibC::GUID,
-    m_lSnapshotAttributes : Int32,
-    m_tsCreationTimestamp : Int64,
-    m_eStatus : Win32cr::Storage::Vss::VSS_SNAPSHOT_STATE
+  struct VSS_SNAPSHOT_PROP
+    property m_SnapshotId : LibC::GUID
+    property m_SnapshotSetId : LibC::GUID
+    property m_lSnapshotsCount : Int32
+    property m_pwszSnapshotDeviceObject : UInt16*
+    property m_pwszOriginalVolumeName : UInt16*
+    property m_pwszOriginatingMachine : UInt16*
+    property m_pwszServiceMachine : UInt16*
+    property m_pwszExposedName : UInt16*
+    property m_pwszExposedPath : UInt16*
+    property m_ProviderId : LibC::GUID
+    property m_lSnapshotAttributes : Int32
+    property m_tsCreationTimestamp : Int64
+    property m_eStatus : Win32cr::Storage::Vss::VSS_SNAPSHOT_STATE
+    def initialize(@m_SnapshotId : LibC::GUID, @m_SnapshotSetId : LibC::GUID, @m_lSnapshotsCount : Int32, @m_pwszSnapshotDeviceObject : UInt16*, @m_pwszOriginalVolumeName : UInt16*, @m_pwszOriginatingMachine : UInt16*, @m_pwszServiceMachine : UInt16*, @m_pwszExposedName : UInt16*, @m_pwszExposedPath : UInt16*, @m_ProviderId : LibC::GUID, @m_lSnapshotAttributes : Int32, @m_tsCreationTimestamp : Int64, @m_eStatus : Win32cr::Storage::Vss::VSS_SNAPSHOT_STATE)
+    end
+  end
 
   @[Extern]
-  record VSS_PROVIDER_PROP,
-    m_ProviderId : LibC::GUID,
-    m_pwszProviderName : UInt16*,
-    m_eProviderType : Win32cr::Storage::Vss::VSS_PROVIDER_TYPE,
-    m_pwszProviderVersion : UInt16*,
-    m_ProviderVersionId : LibC::GUID,
-    m_ClassId : LibC::GUID
+  struct VSS_PROVIDER_PROP
+    property m_ProviderId : LibC::GUID
+    property m_pwszProviderName : UInt16*
+    property m_eProviderType : Win32cr::Storage::Vss::VSS_PROVIDER_TYPE
+    property m_pwszProviderVersion : UInt16*
+    property m_ProviderVersionId : LibC::GUID
+    property m_ClassId : LibC::GUID
+    def initialize(@m_ProviderId : LibC::GUID, @m_pwszProviderName : UInt16*, @m_eProviderType : Win32cr::Storage::Vss::VSS_PROVIDER_TYPE, @m_pwszProviderVersion : UInt16*, @m_ProviderVersionId : LibC::GUID, @m_ClassId : LibC::GUID)
+    end
+  end
 
   @[Extern(union: true)]
-  record VSS_OBJECT_UNION,
-    snap : Win32cr::Storage::Vss::VSS_SNAPSHOT_PROP,
-    prov : Win32cr::Storage::Vss::VSS_PROVIDER_PROP
+  struct VSS_OBJECT_UNION
+    property snap : Win32cr::Storage::Vss::VSS_SNAPSHOT_PROP
+    property prov : Win32cr::Storage::Vss::VSS_PROVIDER_PROP
+    def initialize(@snap : Win32cr::Storage::Vss::VSS_SNAPSHOT_PROP, @prov : Win32cr::Storage::Vss::VSS_PROVIDER_PROP)
+    end
+  end
 
   @[Extern]
-  record VSS_OBJECT_PROP,
-    type__ : Win32cr::Storage::Vss::VSS_OBJECT_TYPE,
-    obj : Win32cr::Storage::Vss::VSS_OBJECT_UNION
+  struct VSS_OBJECT_PROP
+    property type__ : Win32cr::Storage::Vss::VSS_OBJECT_TYPE
+    property obj : Win32cr::Storage::Vss::VSS_OBJECT_UNION
+    def initialize(@type__ : Win32cr::Storage::Vss::VSS_OBJECT_TYPE, @obj : Win32cr::Storage::Vss::VSS_OBJECT_UNION)
+    end
+  end
 
   @[Extern]
-  record IVssExamineWriterMetadata
-  @[Extern]
-  record VSS_VOLUME_PROP,
-    m_pwszVolumeName : UInt16*,
-    m_pwszVolumeDisplayName : UInt16*
+  struct IVssExamineWriterMetadata
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record VSS_DIFF_VOLUME_PROP,
-    m_pwszVolumeName : UInt16*,
-    m_pwszVolumeDisplayName : UInt16*,
-    m_llVolumeFreeSpace : Int64,
-    m_llVolumeTotalSpace : Int64
+  struct VSS_VOLUME_PROP
+    property m_pwszVolumeName : UInt16*
+    property m_pwszVolumeDisplayName : UInt16*
+    def initialize(@m_pwszVolumeName : UInt16*, @m_pwszVolumeDisplayName : UInt16*)
+    end
+  end
 
   @[Extern]
-  record VSS_DIFF_AREA_PROP,
-    m_pwszVolumeName : UInt16*,
-    m_pwszDiffAreaVolumeName : UInt16*,
-    m_llMaximumDiffSpace : Int64,
-    m_llAllocatedDiffSpace : Int64,
-    m_llUsedDiffSpace : Int64
+  struct VSS_DIFF_VOLUME_PROP
+    property m_pwszVolumeName : UInt16*
+    property m_pwszVolumeDisplayName : UInt16*
+    property m_llVolumeFreeSpace : Int64
+    property m_llVolumeTotalSpace : Int64
+    def initialize(@m_pwszVolumeName : UInt16*, @m_pwszVolumeDisplayName : UInt16*, @m_llVolumeFreeSpace : Int64, @m_llVolumeTotalSpace : Int64)
+    end
+  end
+
+  @[Extern]
+  struct VSS_DIFF_AREA_PROP
+    property m_pwszVolumeName : UInt16*
+    property m_pwszDiffAreaVolumeName : UInt16*
+    property m_llMaximumDiffSpace : Int64
+    property m_llAllocatedDiffSpace : Int64
+    property m_llUsedDiffSpace : Int64
+    def initialize(@m_pwszVolumeName : UInt16*, @m_pwszDiffAreaVolumeName : UInt16*, @m_llMaximumDiffSpace : Int64, @m_llAllocatedDiffSpace : Int64, @m_llUsedDiffSpace : Int64)
+    end
+  end
 
   @[Extern(union: true)]
-  record VSS_MGMT_OBJECT_UNION,
-    vol : Win32cr::Storage::Vss::VSS_VOLUME_PROP,
-    diff_vol : Win32cr::Storage::Vss::VSS_DIFF_VOLUME_PROP,
-    diff_area : Win32cr::Storage::Vss::VSS_DIFF_AREA_PROP
+  struct VSS_MGMT_OBJECT_UNION
+    property vol : Win32cr::Storage::Vss::VSS_VOLUME_PROP
+    property diff_vol : Win32cr::Storage::Vss::VSS_DIFF_VOLUME_PROP
+    property diff_area : Win32cr::Storage::Vss::VSS_DIFF_AREA_PROP
+    def initialize(@vol : Win32cr::Storage::Vss::VSS_VOLUME_PROP, @diff_vol : Win32cr::Storage::Vss::VSS_DIFF_VOLUME_PROP, @diff_area : Win32cr::Storage::Vss::VSS_DIFF_AREA_PROP)
+    end
+  end
 
   @[Extern]
-  record VSS_MGMT_OBJECT_PROP,
-    type__ : Win32cr::Storage::Vss::VSS_MGMT_OBJECT_TYPE,
-    obj : Win32cr::Storage::Vss::VSS_MGMT_OBJECT_UNION
+  struct VSS_MGMT_OBJECT_PROP
+    property type__ : Win32cr::Storage::Vss::VSS_MGMT_OBJECT_TYPE
+    property obj : Win32cr::Storage::Vss::VSS_MGMT_OBJECT_UNION
+    def initialize(@type__ : Win32cr::Storage::Vss::VSS_MGMT_OBJECT_TYPE, @obj : Win32cr::Storage::Vss::VSS_MGMT_OBJECT_UNION)
+    end
+  end
 
   @[Extern]
-  record VSS_VOLUME_PROTECTION_INFO,
-    m_protectionLevel : Win32cr::Storage::Vss::VSS_PROTECTION_LEVEL,
-    m_volumeIsOfflineForProtection : Win32cr::Foundation::BOOL,
-    m_protectionFault : Win32cr::Storage::Vss::VSS_PROTECTION_FAULT,
-    m_failureStatus : Int32,
-    m_volumeHasUnusedDiffArea : Win32cr::Foundation::BOOL,
-    m_reserved : UInt32
+  struct VSS_VOLUME_PROTECTION_INFO
+    property m_protectionLevel : Win32cr::Storage::Vss::VSS_PROTECTION_LEVEL
+    property m_volumeIsOfflineForProtection : Win32cr::Foundation::BOOL
+    property m_protectionFault : Win32cr::Storage::Vss::VSS_PROTECTION_FAULT
+    property m_failureStatus : Int32
+    property m_volumeHasUnusedDiffArea : Win32cr::Foundation::BOOL
+    property m_reserved : UInt32
+    def initialize(@m_protectionLevel : Win32cr::Storage::Vss::VSS_PROTECTION_LEVEL, @m_volumeIsOfflineForProtection : Win32cr::Foundation::BOOL, @m_protectionFault : Win32cr::Storage::Vss::VSS_PROTECTION_FAULT, @m_failureStatus : Int32, @m_volumeHasUnusedDiffArea : Win32cr::Foundation::BOOL, @m_reserved : UInt32)
+    end
+  end
 
   @[Extern]
   record IVssEnumObjectVtbl,
@@ -466,7 +500,6 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  #@[Com("ae1c7110-2f60-11d3-8a39-00c04f72d8e3")]
   record IVssEnumObject, lpVtbl : IVssEnumObjectVtbl* do
     GUID = LibC::GUID.new(0xae1c7110_u32, 0x2f60_u16, 0x11d3_u16, StaticArray[0x8a_u8, 0x39_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd8_u8, 0xe3_u8])
     def query_interface(this : IVssEnumObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -504,7 +537,6 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  #@[Com("507c37b4-cf5b-4e95-b0af-14eb9767467e")]
   record IVssAsync, lpVtbl : IVssAsyncVtbl* do
     GUID = LibC::GUID.new(0x507c37b4_u32, 0xcf5b_u16, 0x4e95_u16, StaticArray[0xb0_u8, 0xaf_u8, 0x14_u8, 0xeb_u8, 0x97_u8, 0x67_u8, 0x46_u8, 0x7e_u8])
     def query_interface(this : IVssAsync*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -650,7 +682,6 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  #@[Com("d2c72c96-c121-4518-b627-e5a93d010ead")]
   record IVssComponent, lpVtbl : IVssComponentVtbl* do
     GUID = LibC::GUID.new(0xd2c72c96_u32, 0xc121_u16, 0x4518_u16, StaticArray[0xb6_u8, 0x27_u8, 0xe5_u8, 0xa9_u8, 0x3d_u8, 0x1_u8, 0xe_u8, 0xad_u8])
     def query_interface(this : IVssComponent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -854,7 +885,6 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  #@[Com("156c8b5e-f131-4bd7-9c97-d1923be7e1fa")]
   record IVssComponentEx, lpVtbl : IVssComponentExVtbl* do
     GUID = LibC::GUID.new(0x156c8b5e_u32, 0xf131_u16, 0x4bd7_u16, StaticArray[0x9c_u8, 0x97_u8, 0xd1_u8, 0x92_u8, 0x3b_u8, 0xe7_u8, 0xe1_u8, 0xfa_u8])
     def query_interface(this : IVssComponentEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1059,7 +1089,6 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  #@[Com("3b5be0f2-07a9-4e4b-bdd3-cfdc8e2c0d2d")]
   record IVssComponentEx2, lpVtbl : IVssComponentEx2Vtbl* do
     GUID = LibC::GUID.new(0x3b5be0f2_u32, 0x7a9_u16, 0x4e4b_u16, StaticArray[0xbd_u8, 0xd3_u8, 0xcf_u8, 0xdc_u8, 0x8e_u8, 0x2c_u8, 0xd_u8, 0x2d_u8])
     def query_interface(this : IVssComponentEx2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1398,7 +1427,6 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  #@[Com("9c772e77-b26e-427f-92dd-c996f41ea5e3")]
   record IVssCreateExpressWriterMetadata, lpVtbl : IVssCreateExpressWriterMetadataVtbl* do
     GUID = LibC::GUID.new(0x9c772e77_u32, 0xb26e_u16, 0x427f_u16, StaticArray[0x92_u8, 0xdd_u8, 0xc9_u8, 0x96_u8, 0xf4_u8, 0x1e_u8, 0xa5_u8, 0xe3_u8])
     def query_interface(this : IVssCreateExpressWriterMetadata*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1446,7 +1474,6 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  #@[Com("e33affdc-59c7-47b1-97d5-4266598f6235")]
   record IVssExpressWriter, lpVtbl : IVssExpressWriterVtbl* do
     GUID = LibC::GUID.new(0xe33affdc_u32, 0x59c7_u16, 0x47b1_u16, StaticArray[0x97_u8, 0xd5_u8, 0x42_u8, 0x66_u8, 0x59_u8, 0x8f_u8, 0x62_u8, 0x35_u8])
     def query_interface(this : IVssExpressWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1484,7 +1511,6 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  #@[Com("fa7df749-66e7-4986-a27f-e2f04ae53772")]
   record IVssSnapshotMgmt, lpVtbl : IVssSnapshotMgmtVtbl* do
     GUID = LibC::GUID.new(0xfa7df749_u32, 0x66e7_u16, 0x4986_u16, StaticArray[0xa2_u8, 0x7f_u8, 0xe2_u8, 0xf0_u8, 0x4a_u8, 0xe5_u8, 0x37_u8, 0x72_u8])
     def query_interface(this : IVssSnapshotMgmt*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1517,7 +1543,6 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  #@[Com("0f61ec39-fe82-45f2-a3f0-768b5d427102")]
   record IVssSnapshotMgmt2, lpVtbl : IVssSnapshotMgmt2Vtbl* do
     GUID = LibC::GUID.new(0xf61ec39_u32, 0xfe82_u16, 0x45f2_u16, StaticArray[0xa3_u8, 0xf0_u8, 0x76_u8, 0x8b_u8, 0x5d_u8, 0x42_u8, 0x71_u8, 0x2_u8])
     def query_interface(this : IVssSnapshotMgmt2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1549,7 +1574,6 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  #@[Com("214a0f28-b737-4026-b847-4f9e37d79529")]
   record IVssDifferentialSoftwareSnapshotMgmt, lpVtbl : IVssDifferentialSoftwareSnapshotMgmtVtbl* do
     GUID = LibC::GUID.new(0x214a0f28_u32, 0xb737_u16, 0x4026_u16, StaticArray[0xb8_u8, 0x47_u8, 0x4f_u8, 0x9e_u8, 0x37_u8, 0xd7_u8, 0x95_u8, 0x29_u8])
     def query_interface(this : IVssDifferentialSoftwareSnapshotMgmt*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1600,7 +1624,6 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  #@[Com("949d7353-675f-4275-8969-f044c6277815")]
   record IVssDifferentialSoftwareSnapshotMgmt2, lpVtbl : IVssDifferentialSoftwareSnapshotMgmt2Vtbl* do
     GUID = LibC::GUID.new(0x949d7353_u32, 0x675f_u16, 0x4275_u16, StaticArray[0x89_u8, 0x69_u8, 0xf0_u8, 0x44_u8, 0xc6_u8, 0x27_u8, 0x78_u8, 0x15_u8])
     def query_interface(this : IVssDifferentialSoftwareSnapshotMgmt2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1668,7 +1691,6 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  #@[Com("383f7e71-a4c5-401f-b27f-f826289f8458")]
   record IVssDifferentialSoftwareSnapshotMgmt3, lpVtbl : IVssDifferentialSoftwareSnapshotMgmt3Vtbl* do
     GUID = LibC::GUID.new(0x383f7e71_u32, 0xa4c5_u16, 0x401f_u16, StaticArray[0xb2_u8, 0x7f_u8, 0xf8_u8, 0x26_u8, 0x28_u8, 0x9f_u8, 0x84_u8, 0x58_u8])
     def query_interface(this : IVssDifferentialSoftwareSnapshotMgmt3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1740,7 +1762,6 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  #@[Com("01954e6b-9254-4e6e-808c-c9e05d007696")]
   record IVssEnumMgmtObject, lpVtbl : IVssEnumMgmtObjectVtbl* do
     GUID = LibC::GUID.new(0x1954e6b_u32, 0x9254_u16, 0x4e6e_u16, StaticArray[0x80_u8, 0x8c_u8, 0xc9_u8, 0xe0_u8, 0x5d_u8, 0x0_u8, 0x76_u8, 0x96_u8])
     def query_interface(this : IVssEnumMgmtObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1779,7 +1800,6 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  #@[Com("77ed5996-2f63-11d3-8a39-00c04f72d8e3")]
   record IVssAdmin, lpVtbl : IVssAdminVtbl* do
     GUID = LibC::GUID.new(0x77ed5996_u32, 0x2f63_u16, 0x11d3_u16, StaticArray[0x8a_u8, 0x39_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd8_u8, 0xe3_u8])
     def query_interface(this : IVssAdmin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1821,7 +1841,6 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  #@[Com("7858a9f8-b1fa-41a6-964f-b9b36b8cd8d8")]
   record IVssAdminEx, lpVtbl : IVssAdminExVtbl* do
     GUID = LibC::GUID.new(0x7858a9f8_u32, 0xb1fa_u16, 0x41a6_u16, StaticArray[0x96_u8, 0x4f_u8, 0xb9_u8, 0xb3_u8, 0x6b_u8, 0x8c_u8, 0xd8_u8, 0xd8_u8])
     def query_interface(this : IVssAdminEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1875,7 +1894,6 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  #@[Com("609e123e-2c5a-44d3-8f01-0b1d9a47d1ff")]
   record IVssSoftwareSnapshotProvider, lpVtbl : IVssSoftwareSnapshotProviderVtbl* do
     GUID = LibC::GUID.new(0x609e123e_u32, 0x2c5a_u16, 0x44d3_u16, StaticArray[0x8f_u8, 0x1_u8, 0xb_u8, 0x1d_u8, 0x9a_u8, 0x47_u8, 0xd1_u8, 0xff_u8])
     def query_interface(this : IVssSoftwareSnapshotProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1935,7 +1953,6 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  #@[Com("5f894e5b-1e39-4778-8e23-9abad9f0e08c")]
   record IVssProviderCreateSnapshotSet, lpVtbl : IVssProviderCreateSnapshotSetVtbl* do
     GUID = LibC::GUID.new(0x5f894e5b_u32, 0x1e39_u16, 0x4778_u16, StaticArray[0x8e_u8, 0x23_u8, 0x9a_u8, 0xba_u8, 0xd9_u8, 0xf0_u8, 0xe0_u8, 0x8c_u8])
     def query_interface(this : IVssProviderCreateSnapshotSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1981,7 +1998,6 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  #@[Com("e561901f-03a5-4afe-86d0-72baeece7004")]
   record IVssProviderNotifications, lpVtbl : IVssProviderNotificationsVtbl* do
     GUID = LibC::GUID.new(0xe561901f_u32, 0x3a5_u16, 0x4afe_u16, StaticArray[0x86_u8, 0xd0_u8, 0x72_u8, 0xba_u8, 0xee_u8, 0xce_u8, 0x70_u8, 0x4_u8])
     def query_interface(this : IVssProviderNotifications*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2016,7 +2032,6 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  #@[Com("9593a157-44e9-4344-bbeb-44fbf9b06b10")]
   record IVssHardwareSnapshotProvider, lpVtbl : IVssHardwareSnapshotProviderVtbl* do
     GUID = LibC::GUID.new(0x9593a157_u32, 0x44e9_u16, 0x4344_u16, StaticArray[0xbb_u8, 0xeb_u8, 0x44_u8, 0xfb_u8, 0xf9_u8, 0xb0_u8, 0x6b_u8, 0x10_u8])
     def query_interface(this : IVssHardwareSnapshotProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2067,7 +2082,6 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  #@[Com("7f5ba925-cdb1-4d11-a71f-339eb7e709fd")]
   record IVssHardwareSnapshotProviderEx, lpVtbl : IVssHardwareSnapshotProviderExVtbl* do
     GUID = LibC::GUID.new(0x7f5ba925_u32, 0xcdb1_u16, 0x4d11_u16, StaticArray[0xa7_u8, 0x1f_u8, 0x33_u8, 0x9e_u8, 0xb7_u8, 0xe7_u8, 0x9_u8, 0xfd_u8])
     def query_interface(this : IVssHardwareSnapshotProviderEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2128,7 +2142,6 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  #@[Com("c8636060-7c2e-11df-8c4a-0800200c9a66")]
   record IVssFileShareSnapshotProvider, lpVtbl : IVssFileShareSnapshotProviderVtbl* do
     GUID = LibC::GUID.new(0xc8636060_u32, 0x7c2e_u16, 0x11df_u16, StaticArray[0x8c_u8, 0x4a_u8, 0x8_u8, 0x0_u8, 0x20_u8, 0xc_u8, 0x9a_u8, 0x66_u8])
     def query_interface(this : IVssFileShareSnapshotProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

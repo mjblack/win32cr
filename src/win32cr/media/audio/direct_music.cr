@@ -7,11 +7,11 @@ require "./../../system/io.cr"
 require "./../multimedia.cr"
 
 module Win32cr::Media::Audio::DirectMusic
-  alias LPFNDIRECTSOUNDDEVICEENUMERATECALLBACK1 = Proc(Win32cr::Media::Audio::DirectMusic::DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_1_DATA*, Void*, Win32cr::Foundation::BOOL)*
+  alias LPFNDIRECTSOUNDDEVICEENUMERATECALLBACK1 = Proc(Win32cr::Media::Audio::DirectMusic::DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_1_DATA*, Void*, Win32cr::Foundation::BOOL)
 
-  alias LPFNDIRECTSOUNDDEVICEENUMERATECALLBACKA = Proc(Win32cr::Media::Audio::DirectMusic::DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_A_DATA*, Void*, Win32cr::Foundation::BOOL)*
+  alias LPFNDIRECTSOUNDDEVICEENUMERATECALLBACKA = Proc(Win32cr::Media::Audio::DirectMusic::DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_A_DATA*, Void*, Win32cr::Foundation::BOOL)
 
-  alias LPFNDIRECTSOUNDDEVICEENUMERATECALLBACKW = Proc(Win32cr::Media::Audio::DirectMusic::DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_W_DATA*, Void*, Win32cr::Foundation::BOOL)*
+  alias LPFNDIRECTSOUNDDEVICEENUMERATECALLBACKW = Proc(Win32cr::Media::Audio::DirectMusic::DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_W_DATA*, Void*, Win32cr::Foundation::BOOL)
 
   DMUS_MAX_DESCRIPTION = 128_u32
   DMUS_MAX_DRIVER = 128_u32
@@ -276,395 +276,557 @@ module Win32cr::Media::Audio::DirectMusic
   end
 
   @[Extern]
-  record DLSID,
-    ulData1 : UInt32,
-    usData2 : UInt16,
-    usData3 : UInt16,
-    abData4 : UInt8[8]
+  struct DLSID
+    property ulData1 : UInt32
+    property usData2 : UInt16
+    property usData3 : UInt16
+    property abData4 : UInt8[8]
+    def initialize(@ulData1 : UInt32, @usData2 : UInt16, @usData3 : UInt16, @abData4 : UInt8[8])
+    end
+  end
 
   @[Extern]
-  record DLSVERSION,
-    dwVersionMS : UInt32,
-    dwVersionLS : UInt32
+  struct DLSVERSION
+    property dwVersionMS : UInt32
+    property dwVersionLS : UInt32
+    def initialize(@dwVersionMS : UInt32, @dwVersionLS : UInt32)
+    end
+  end
 
   @[Extern]
-  record CONNECTION,
-    usSource : UInt16,
-    usControl : UInt16,
-    usDestination : UInt16,
-    usTransform : UInt16,
-    lScale : Int32
+  struct CONNECTION
+    property usSource : UInt16
+    property usControl : UInt16
+    property usDestination : UInt16
+    property usTransform : UInt16
+    property lScale : Int32
+    def initialize(@usSource : UInt16, @usControl : UInt16, @usDestination : UInt16, @usTransform : UInt16, @lScale : Int32)
+    end
+  end
 
   @[Extern]
-  record CONNECTIONLIST,
-    cbSize : UInt32,
-    cConnections : UInt32
+  struct CONNECTIONLIST
+    property cbSize : UInt32
+    property cConnections : UInt32
+    def initialize(@cbSize : UInt32, @cConnections : UInt32)
+    end
+  end
 
   @[Extern]
-  record RGNRANGE,
-    usLow : UInt16,
-    usHigh : UInt16
+  struct RGNRANGE
+    property usLow : UInt16
+    property usHigh : UInt16
+    def initialize(@usLow : UInt16, @usHigh : UInt16)
+    end
+  end
 
   @[Extern]
-  record MIDILOCALE,
-    ulBank : UInt32,
-    ulInstrument : UInt32
+  struct MIDILOCALE
+    property ulBank : UInt32
+    property ulInstrument : UInt32
+    def initialize(@ulBank : UInt32, @ulInstrument : UInt32)
+    end
+  end
 
   @[Extern]
-  record RGNHEADER,
-    range_key : Win32cr::Media::Audio::DirectMusic::RGNRANGE,
-    range_velocity : Win32cr::Media::Audio::DirectMusic::RGNRANGE,
-    fusOptions : UInt16,
-    usKeyGroup : UInt16
+  struct RGNHEADER
+    property range_key : Win32cr::Media::Audio::DirectMusic::RGNRANGE
+    property range_velocity : Win32cr::Media::Audio::DirectMusic::RGNRANGE
+    property fusOptions : UInt16
+    property usKeyGroup : UInt16
+    def initialize(@range_key : Win32cr::Media::Audio::DirectMusic::RGNRANGE, @range_velocity : Win32cr::Media::Audio::DirectMusic::RGNRANGE, @fusOptions : UInt16, @usKeyGroup : UInt16)
+    end
+  end
 
   @[Extern]
-  record INSTHEADER,
-    cRegions : UInt32,
-    locale : Win32cr::Media::Audio::DirectMusic::MIDILOCALE
+  struct INSTHEADER
+    property cRegions : UInt32
+    property locale : Win32cr::Media::Audio::DirectMusic::MIDILOCALE
+    def initialize(@cRegions : UInt32, @locale : Win32cr::Media::Audio::DirectMusic::MIDILOCALE)
+    end
+  end
 
   @[Extern]
-  record DLSHEADER,
-    cInstruments : UInt32
+  struct DLSHEADER
+    property cInstruments : UInt32
+    def initialize(@cInstruments : UInt32)
+    end
+  end
 
   @[Extern]
-  record WAVELINK,
-    fusOptions : UInt16,
-    usPhaseGroup : UInt16,
-    ulChannel : UInt32,
-    ulTableIndex : UInt32
+  struct WAVELINK
+    property fusOptions : UInt16
+    property usPhaseGroup : UInt16
+    property ulChannel : UInt32
+    property ulTableIndex : UInt32
+    def initialize(@fusOptions : UInt16, @usPhaseGroup : UInt16, @ulChannel : UInt32, @ulTableIndex : UInt32)
+    end
+  end
 
   @[Extern]
-  record POOLCUE,
-    ulOffset : UInt32
+  struct POOLCUE
+    property ulOffset : UInt32
+    def initialize(@ulOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record POOLTABLE,
-    cbSize : UInt32,
-    cCues : UInt32
+  struct POOLTABLE
+    property cbSize : UInt32
+    property cCues : UInt32
+    def initialize(@cbSize : UInt32, @cCues : UInt32)
+    end
+  end
 
   @[Extern]
-  record Rwsmp_,
-    cbSize : UInt32,
-    usUnityNote : UInt16,
-    sFineTune : Int16,
-    lAttenuation : Int32,
-    fulOptions : UInt32,
-    cSampleLoops : UInt32
+  struct Rwsmp_
+    property cbSize : UInt32
+    property usUnityNote : UInt16
+    property sFineTune : Int16
+    property lAttenuation : Int32
+    property fulOptions : UInt32
+    property cSampleLoops : UInt32
+    def initialize(@cbSize : UInt32, @usUnityNote : UInt16, @sFineTune : Int16, @lAttenuation : Int32, @fulOptions : UInt32, @cSampleLoops : UInt32)
+    end
+  end
 
   @[Extern]
-  record Rloop_,
-    cbSize : UInt32,
-    ulType : UInt32,
-    ulStart : UInt32,
-    ulLength : UInt32
+  struct Rloop_
+    property cbSize : UInt32
+    property ulType : UInt32
+    property ulStart : UInt32
+    property ulLength : UInt32
+    def initialize(@cbSize : UInt32, @ulType : UInt32, @ulStart : UInt32, @ulLength : UInt32)
+    end
+  end
 
   @[Extern]
-  record DMUS_DOWNLOADINFO,
-    dwDLType : UInt32,
-    dwDLId : UInt32,
-    dwNumOffsetTableEntries : UInt32,
-    cbSize : UInt32
+  struct DMUS_DOWNLOADINFO
+    property dwDLType : UInt32
+    property dwDLId : UInt32
+    property dwNumOffsetTableEntries : UInt32
+    property cbSize : UInt32
+    def initialize(@dwDLType : UInt32, @dwDLId : UInt32, @dwNumOffsetTableEntries : UInt32, @cbSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record DMUS_OFFSETTABLE,
-    ulOffsetTable : UInt32*
+  struct DMUS_OFFSETTABLE
+    property ulOffsetTable : UInt32*
+    def initialize(@ulOffsetTable : UInt32*)
+    end
+  end
 
   @[Extern]
-  record DMUS_INSTRUMENT,
-    ulPatch : UInt32,
-    ulFirstRegionIdx : UInt32,
-    ulGlobalArtIdx : UInt32,
-    ulFirstExtCkIdx : UInt32,
-    ulCopyrightIdx : UInt32,
-    ulFlags : UInt32
+  struct DMUS_INSTRUMENT
+    property ulPatch : UInt32
+    property ulFirstRegionIdx : UInt32
+    property ulGlobalArtIdx : UInt32
+    property ulFirstExtCkIdx : UInt32
+    property ulCopyrightIdx : UInt32
+    property ulFlags : UInt32
+    def initialize(@ulPatch : UInt32, @ulFirstRegionIdx : UInt32, @ulGlobalArtIdx : UInt32, @ulFirstExtCkIdx : UInt32, @ulCopyrightIdx : UInt32, @ulFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record DMUS_REGION,
-    range_key : Win32cr::Media::Audio::DirectMusic::RGNRANGE,
-    range_velocity : Win32cr::Media::Audio::DirectMusic::RGNRANGE,
-    fusOptions : UInt16,
-    usKeyGroup : UInt16,
-    ulRegionArtIdx : UInt32,
-    ulNextRegionIdx : UInt32,
-    ulFirstExtCkIdx : UInt32,
-    wave_link : Win32cr::Media::Audio::DirectMusic::WAVELINK,
-    wsmp : Win32cr::Media::Audio::DirectMusic::Rwsmp_,
-    wloop : Win32cr::Media::Audio::DirectMusic::Rloop_*
+  struct DMUS_REGION
+    property range_key : Win32cr::Media::Audio::DirectMusic::RGNRANGE
+    property range_velocity : Win32cr::Media::Audio::DirectMusic::RGNRANGE
+    property fusOptions : UInt16
+    property usKeyGroup : UInt16
+    property ulRegionArtIdx : UInt32
+    property ulNextRegionIdx : UInt32
+    property ulFirstExtCkIdx : UInt32
+    property wave_link : Win32cr::Media::Audio::DirectMusic::WAVELINK
+    property wsmp : Win32cr::Media::Audio::DirectMusic::Rwsmp_
+    property wloop : Win32cr::Media::Audio::DirectMusic::Rloop_*
+    def initialize(@range_key : Win32cr::Media::Audio::DirectMusic::RGNRANGE, @range_velocity : Win32cr::Media::Audio::DirectMusic::RGNRANGE, @fusOptions : UInt16, @usKeyGroup : UInt16, @ulRegionArtIdx : UInt32, @ulNextRegionIdx : UInt32, @ulFirstExtCkIdx : UInt32, @wave_link : Win32cr::Media::Audio::DirectMusic::WAVELINK, @wsmp : Win32cr::Media::Audio::DirectMusic::Rwsmp_, @wloop : Win32cr::Media::Audio::DirectMusic::Rloop_*)
+    end
+  end
 
   @[Extern]
-  record DMUS_LFOPARAMS,
-    pcFrequency : Int32,
-    tcDelay : Int32,
-    gcVolumeScale : Int32,
-    pcPitchScale : Int32,
-    gcMWToVolume : Int32,
-    pcMWToPitch : Int32
+  struct DMUS_LFOPARAMS
+    property pcFrequency : Int32
+    property tcDelay : Int32
+    property gcVolumeScale : Int32
+    property pcPitchScale : Int32
+    property gcMWToVolume : Int32
+    property pcMWToPitch : Int32
+    def initialize(@pcFrequency : Int32, @tcDelay : Int32, @gcVolumeScale : Int32, @pcPitchScale : Int32, @gcMWToVolume : Int32, @pcMWToPitch : Int32)
+    end
+  end
 
   @[Extern]
-  record DMUS_VEGPARAMS,
-    tcAttack : Int32,
-    tcDecay : Int32,
-    ptSustain : Int32,
-    tcRelease : Int32,
-    tcVel2Attack : Int32,
-    tcKey2Decay : Int32
+  struct DMUS_VEGPARAMS
+    property tcAttack : Int32
+    property tcDecay : Int32
+    property ptSustain : Int32
+    property tcRelease : Int32
+    property tcVel2Attack : Int32
+    property tcKey2Decay : Int32
+    def initialize(@tcAttack : Int32, @tcDecay : Int32, @ptSustain : Int32, @tcRelease : Int32, @tcVel2Attack : Int32, @tcKey2Decay : Int32)
+    end
+  end
 
   @[Extern]
-  record DMUS_PEGPARAMS,
-    tcAttack : Int32,
-    tcDecay : Int32,
-    ptSustain : Int32,
-    tcRelease : Int32,
-    tcVel2Attack : Int32,
-    tcKey2Decay : Int32,
-    pcRange : Int32
+  struct DMUS_PEGPARAMS
+    property tcAttack : Int32
+    property tcDecay : Int32
+    property ptSustain : Int32
+    property tcRelease : Int32
+    property tcVel2Attack : Int32
+    property tcKey2Decay : Int32
+    property pcRange : Int32
+    def initialize(@tcAttack : Int32, @tcDecay : Int32, @ptSustain : Int32, @tcRelease : Int32, @tcVel2Attack : Int32, @tcKey2Decay : Int32, @pcRange : Int32)
+    end
+  end
 
   @[Extern]
-  record DMUS_MSCPARAMS,
-    ptDefaultPan : Int32
+  struct DMUS_MSCPARAMS
+    property ptDefaultPan : Int32
+    def initialize(@ptDefaultPan : Int32)
+    end
+  end
 
   @[Extern]
-  record DMUS_ARTICPARAMS,
-    lfo : Win32cr::Media::Audio::DirectMusic::DMUS_LFOPARAMS,
-    vol_eg : Win32cr::Media::Audio::DirectMusic::DMUS_VEGPARAMS,
-    pitch_eg : Win32cr::Media::Audio::DirectMusic::DMUS_PEGPARAMS,
-    misc : Win32cr::Media::Audio::DirectMusic::DMUS_MSCPARAMS
+  struct DMUS_ARTICPARAMS
+    property lfo : Win32cr::Media::Audio::DirectMusic::DMUS_LFOPARAMS
+    property vol_eg : Win32cr::Media::Audio::DirectMusic::DMUS_VEGPARAMS
+    property pitch_eg : Win32cr::Media::Audio::DirectMusic::DMUS_PEGPARAMS
+    property misc : Win32cr::Media::Audio::DirectMusic::DMUS_MSCPARAMS
+    def initialize(@lfo : Win32cr::Media::Audio::DirectMusic::DMUS_LFOPARAMS, @vol_eg : Win32cr::Media::Audio::DirectMusic::DMUS_VEGPARAMS, @pitch_eg : Win32cr::Media::Audio::DirectMusic::DMUS_PEGPARAMS, @misc : Win32cr::Media::Audio::DirectMusic::DMUS_MSCPARAMS)
+    end
+  end
 
   @[Extern]
-  record DMUS_ARTICULATION,
-    ulArt1Idx : UInt32,
-    ulFirstExtCkIdx : UInt32
+  struct DMUS_ARTICULATION
+    property ulArt1Idx : UInt32
+    property ulFirstExtCkIdx : UInt32
+    def initialize(@ulArt1Idx : UInt32, @ulFirstExtCkIdx : UInt32)
+    end
+  end
 
   @[Extern]
-  record DMUS_ARTICULATION2,
-    ulArtIdx : UInt32,
-    ulFirstExtCkIdx : UInt32,
-    ulNextArtIdx : UInt32
+  struct DMUS_ARTICULATION2
+    property ulArtIdx : UInt32
+    property ulFirstExtCkIdx : UInt32
+    property ulNextArtIdx : UInt32
+    def initialize(@ulArtIdx : UInt32, @ulFirstExtCkIdx : UInt32, @ulNextArtIdx : UInt32)
+    end
+  end
 
   @[Extern]
-  record DMUS_EXTENSIONCHUNK,
-    cbSize : UInt32,
-    ulNextExtCkIdx : UInt32,
-    ext_ck_id : UInt32,
-    byExtCk : UInt8[4]
+  struct DMUS_EXTENSIONCHUNK
+    property cbSize : UInt32
+    property ulNextExtCkIdx : UInt32
+    property ext_ck_id : UInt32
+    property byExtCk : UInt8[4]
+    def initialize(@cbSize : UInt32, @ulNextExtCkIdx : UInt32, @ext_ck_id : UInt32, @byExtCk : UInt8[4])
+    end
+  end
 
   @[Extern]
-  record DMUS_COPYRIGHT,
-    cbSize : UInt32,
-    byCopyright : UInt8[4]
+  struct DMUS_COPYRIGHT
+    property cbSize : UInt32
+    property byCopyright : UInt8[4]
+    def initialize(@cbSize : UInt32, @byCopyright : UInt8[4])
+    end
+  end
 
   @[Extern]
-  record DMUS_WAVEDATA,
-    cbSize : UInt32,
-    byData : UInt8[4]
+  struct DMUS_WAVEDATA
+    property cbSize : UInt32
+    property byData : UInt8[4]
+    def initialize(@cbSize : UInt32, @byData : UInt8[4])
+    end
+  end
 
   @[Extern]
-  record DMUS_WAVE,
-    ulFirstExtCkIdx : UInt32,
-    ulCopyrightIdx : UInt32,
-    ulWaveDataIdx : UInt32,
-    waveformat_ex : Win32cr::Media::Audio::WAVEFORMATEX
+  struct DMUS_WAVE
+    property ulFirstExtCkIdx : UInt32
+    property ulCopyrightIdx : UInt32
+    property ulWaveDataIdx : UInt32
+    property waveformat_ex : Win32cr::Media::Audio::WAVEFORMATEX
+    def initialize(@ulFirstExtCkIdx : UInt32, @ulCopyrightIdx : UInt32, @ulWaveDataIdx : UInt32, @waveformat_ex : Win32cr::Media::Audio::WAVEFORMATEX)
+    end
+  end
 
   @[Extern]
-  record DMUS_NOTERANGE,
-    dwLowNote : UInt32,
-    dwHighNote : UInt32
+  struct DMUS_NOTERANGE
+    property dwLowNote : UInt32
+    property dwHighNote : UInt32
+    def initialize(@dwLowNote : UInt32, @dwHighNote : UInt32)
+    end
+  end
 
   @[Extern]
-  record DMUS_WAVEARTDL,
-    ulDownloadIdIdx : UInt32,
-    ulBus : UInt32,
-    ulBuffers : UInt32,
-    ulMasterDLId : UInt32,
-    usOptions : UInt16
+  struct DMUS_WAVEARTDL
+    property ulDownloadIdIdx : UInt32
+    property ulBus : UInt32
+    property ulBuffers : UInt32
+    property ulMasterDLId : UInt32
+    property usOptions : UInt16
+    def initialize(@ulDownloadIdIdx : UInt32, @ulBus : UInt32, @ulBuffers : UInt32, @ulMasterDLId : UInt32, @usOptions : UInt16)
+    end
+  end
 
   @[Extern]
-  record DMUS_WAVEDL,
-    cbWaveData : UInt32
+  struct DMUS_WAVEDL
+    property cbWaveData : UInt32
+    def initialize(@cbWaveData : UInt32)
+    end
+  end
 
   @[Extern]
-  record DMUS_EVENTHEADER,
-    cbEvent : UInt32,
-    dwChannelGroup : UInt32,
-    rtDelta : Int64,
-    dwFlags : UInt32
+  struct DMUS_EVENTHEADER
+    property cbEvent : UInt32
+    property dwChannelGroup : UInt32
+    property rtDelta : Int64
+    property dwFlags : UInt32
+    def initialize(@cbEvent : UInt32, @dwChannelGroup : UInt32, @rtDelta : Int64, @dwFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record DMUS_BUFFERDESC,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    guidBufferFormat : LibC::GUID,
-    cbBuffer : UInt32
+  struct DMUS_BUFFERDESC
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property guidBufferFormat : LibC::GUID
+    property cbBuffer : UInt32
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @guidBufferFormat : LibC::GUID, @cbBuffer : UInt32)
+    end
+  end
 
   @[Extern]
-  record DMUS_PORTCAPS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    guidPort : LibC::GUID,
-    dwClass : UInt32,
-    dwType : UInt32,
-    dwMemorySize : UInt32,
-    dwMaxChannelGroups : UInt32,
-    dwMaxVoices : UInt32,
-    dwMaxAudioChannels : UInt32,
-    dwEffectFlags : UInt32,
-    wszDescription : UInt16[128]
+  struct DMUS_PORTCAPS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property guidPort : LibC::GUID
+    property dwClass : UInt32
+    property dwType : UInt32
+    property dwMemorySize : UInt32
+    property dwMaxChannelGroups : UInt32
+    property dwMaxVoices : UInt32
+    property dwMaxAudioChannels : UInt32
+    property dwEffectFlags : UInt32
+    property wszDescription : UInt16[128]
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @guidPort : LibC::GUID, @dwClass : UInt32, @dwType : UInt32, @dwMemorySize : UInt32, @dwMaxChannelGroups : UInt32, @dwMaxVoices : UInt32, @dwMaxAudioChannels : UInt32, @dwEffectFlags : UInt32, @wszDescription : UInt16[128])
+    end
+  end
 
   @[Extern]
-  record DMUS_PORTPARAMS_,
-    dwSize : UInt32,
-    dwValidParams : UInt32,
-    dwVoices : UInt32,
-    dwChannelGroups : UInt32,
-    dwAudioChannels : UInt32,
-    dwSampleRate : UInt32,
-    dwEffectFlags : UInt32,
-    fShare : Win32cr::Foundation::BOOL
+  struct DMUS_PORTPARAMS_
+    property dwSize : UInt32
+    property dwValidParams : UInt32
+    property dwVoices : UInt32
+    property dwChannelGroups : UInt32
+    property dwAudioChannels : UInt32
+    property dwSampleRate : UInt32
+    property dwEffectFlags : UInt32
+    property fShare : Win32cr::Foundation::BOOL
+    def initialize(@dwSize : UInt32, @dwValidParams : UInt32, @dwVoices : UInt32, @dwChannelGroups : UInt32, @dwAudioChannels : UInt32, @dwSampleRate : UInt32, @dwEffectFlags : UInt32, @fShare : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record DMUS_PORTPARAMS8,
-    dwSize : UInt32,
-    dwValidParams : UInt32,
-    dwVoices : UInt32,
-    dwChannelGroups : UInt32,
-    dwAudioChannels : UInt32,
-    dwSampleRate : UInt32,
-    dwEffectFlags : UInt32,
-    fShare : Win32cr::Foundation::BOOL,
-    dwFeatures : UInt32
+  struct DMUS_PORTPARAMS8
+    property dwSize : UInt32
+    property dwValidParams : UInt32
+    property dwVoices : UInt32
+    property dwChannelGroups : UInt32
+    property dwAudioChannels : UInt32
+    property dwSampleRate : UInt32
+    property dwEffectFlags : UInt32
+    property fShare : Win32cr::Foundation::BOOL
+    property dwFeatures : UInt32
+    def initialize(@dwSize : UInt32, @dwValidParams : UInt32, @dwVoices : UInt32, @dwChannelGroups : UInt32, @dwAudioChannels : UInt32, @dwSampleRate : UInt32, @dwEffectFlags : UInt32, @fShare : Win32cr::Foundation::BOOL, @dwFeatures : UInt32)
+    end
+  end
 
   @[Extern]
-  record DMUS_SYNTHSTATS,
-    dwSize : UInt32,
-    dwValidStats : UInt32,
-    dwVoices : UInt32,
-    dwTotalCPU : UInt32,
-    dwCPUPerVoice : UInt32,
-    dwLostNotes : UInt32,
-    dwFreeMemory : UInt32,
-    lPeakVolume : Int32
+  struct DMUS_SYNTHSTATS
+    property dwSize : UInt32
+    property dwValidStats : UInt32
+    property dwVoices : UInt32
+    property dwTotalCPU : UInt32
+    property dwCPUPerVoice : UInt32
+    property dwLostNotes : UInt32
+    property dwFreeMemory : UInt32
+    property lPeakVolume : Int32
+    def initialize(@dwSize : UInt32, @dwValidStats : UInt32, @dwVoices : UInt32, @dwTotalCPU : UInt32, @dwCPUPerVoice : UInt32, @dwLostNotes : UInt32, @dwFreeMemory : UInt32, @lPeakVolume : Int32)
+    end
+  end
 
   @[Extern]
-  record DMUS_SYNTHSTATS8,
-    dwSize : UInt32,
-    dwValidStats : UInt32,
-    dwVoices : UInt32,
-    dwTotalCPU : UInt32,
-    dwCPUPerVoice : UInt32,
-    dwLostNotes : UInt32,
-    dwFreeMemory : UInt32,
-    lPeakVolume : Int32,
-    dwSynthMemUse : UInt32
+  struct DMUS_SYNTHSTATS8
+    property dwSize : UInt32
+    property dwValidStats : UInt32
+    property dwVoices : UInt32
+    property dwTotalCPU : UInt32
+    property dwCPUPerVoice : UInt32
+    property dwLostNotes : UInt32
+    property dwFreeMemory : UInt32
+    property lPeakVolume : Int32
+    property dwSynthMemUse : UInt32
+    def initialize(@dwSize : UInt32, @dwValidStats : UInt32, @dwVoices : UInt32, @dwTotalCPU : UInt32, @dwCPUPerVoice : UInt32, @dwLostNotes : UInt32, @dwFreeMemory : UInt32, @lPeakVolume : Int32, @dwSynthMemUse : UInt32)
+    end
+  end
 
   @[Extern]
-  record DMUS_WAVES_REVERB_PARAMS,
-    fInGain : Float32,
-    fReverbMix : Float32,
-    fReverbTime : Float32,
-    fHighFreqRTRatio : Float32
+  struct DMUS_WAVES_REVERB_PARAMS
+    property fInGain : Float32
+    property fReverbMix : Float32
+    property fReverbTime : Float32
+    property fHighFreqRTRatio : Float32
+    def initialize(@fInGain : Float32, @fReverbMix : Float32, @fReverbTime : Float32, @fHighFreqRTRatio : Float32)
+    end
+  end
 
   @[Extern]
-  record DMUS_CLOCKINFO7,
-    dwSize : UInt32,
-    ctType : Win32cr::Media::Audio::DirectMusic::DMUS_CLOCKTYPE,
-    guidClock : LibC::GUID,
-    wszDescription : UInt16[128]
+  struct DMUS_CLOCKINFO7
+    property dwSize : UInt32
+    property ctType : Win32cr::Media::Audio::DirectMusic::DMUS_CLOCKTYPE
+    property guidClock : LibC::GUID
+    property wszDescription : UInt16[128]
+    def initialize(@dwSize : UInt32, @ctType : Win32cr::Media::Audio::DirectMusic::DMUS_CLOCKTYPE, @guidClock : LibC::GUID, @wszDescription : UInt16[128])
+    end
+  end
 
   @[Extern]
-  record DMUS_CLOCKINFO8,
-    dwSize : UInt32,
-    ctType : Win32cr::Media::Audio::DirectMusic::DMUS_CLOCKTYPE,
-    guidClock : LibC::GUID,
-    wszDescription : UInt16[128],
-    dwFlags : UInt32
+  struct DMUS_CLOCKINFO8
+    property dwSize : UInt32
+    property ctType : Win32cr::Media::Audio::DirectMusic::DMUS_CLOCKTYPE
+    property guidClock : LibC::GUID
+    property wszDescription : UInt16[128]
+    property dwFlags : UInt32
+    def initialize(@dwSize : UInt32, @ctType : Win32cr::Media::Audio::DirectMusic::DMUS_CLOCKTYPE, @guidClock : LibC::GUID, @wszDescription : UInt16[128], @dwFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record DMUS_VOICE_STATE,
-    bExists : Win32cr::Foundation::BOOL,
-    spPosition : UInt64
+  struct DMUS_VOICE_STATE
+    property bExists : Win32cr::Foundation::BOOL
+    property spPosition : UInt64
+    def initialize(@bExists : Win32cr::Foundation::BOOL, @spPosition : UInt64)
+    end
+  end
 
   @[Extern]
-  record DSPROPERTY_DIRECTSOUNDDEVICE_WAVEDEVICEMAPPING_A_DATA,
-    device_name : Win32cr::Foundation::PSTR,
-    data_flow : Win32cr::Media::Audio::DirectMusic::DIRECTSOUNDDEVICE_DATAFLOW,
-    device_id : LibC::GUID
+  struct DSPROPERTY_DIRECTSOUNDDEVICE_WAVEDEVICEMAPPING_A_DATA
+    property device_name : Win32cr::Foundation::PSTR
+    property data_flow : Win32cr::Media::Audio::DirectMusic::DIRECTSOUNDDEVICE_DATAFLOW
+    property device_id : LibC::GUID
+    def initialize(@device_name : Win32cr::Foundation::PSTR, @data_flow : Win32cr::Media::Audio::DirectMusic::DIRECTSOUNDDEVICE_DATAFLOW, @device_id : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record DSPROPERTY_DIRECTSOUNDDEVICE_WAVEDEVICEMAPPING_W_DATA,
-    device_name : Win32cr::Foundation::PWSTR,
-    data_flow : Win32cr::Media::Audio::DirectMusic::DIRECTSOUNDDEVICE_DATAFLOW,
-    device_id : LibC::GUID
+  struct DSPROPERTY_DIRECTSOUNDDEVICE_WAVEDEVICEMAPPING_W_DATA
+    property device_name : Win32cr::Foundation::PWSTR
+    property data_flow : Win32cr::Media::Audio::DirectMusic::DIRECTSOUNDDEVICE_DATAFLOW
+    property device_id : LibC::GUID
+    def initialize(@device_name : Win32cr::Foundation::PWSTR, @data_flow : Win32cr::Media::Audio::DirectMusic::DIRECTSOUNDDEVICE_DATAFLOW, @device_id : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_1_DATA,
-    device_id : LibC::GUID,
-    description_a : Win32cr::Foundation::CHAR[256],
-    description_w : UInt16[256],
-    module_a : Win32cr::Foundation::CHAR[260],
-    module_w : UInt16[260],
-    type__ : Win32cr::Media::Audio::DirectMusic::DIRECTSOUNDDEVICE_TYPE,
-    data_flow : Win32cr::Media::Audio::DirectMusic::DIRECTSOUNDDEVICE_DATAFLOW,
-    wave_device_id : UInt32,
-    devnode : UInt32
+  struct DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_1_DATA
+    property device_id : LibC::GUID
+    property description_a : Win32cr::Foundation::CHAR[256]
+    property description_w : UInt16[256]
+    property module_a : Win32cr::Foundation::CHAR[260]
+    property module_w : UInt16[260]
+    property type__ : Win32cr::Media::Audio::DirectMusic::DIRECTSOUNDDEVICE_TYPE
+    property data_flow : Win32cr::Media::Audio::DirectMusic::DIRECTSOUNDDEVICE_DATAFLOW
+    property wave_device_id : UInt32
+    property devnode : UInt32
+    def initialize(@device_id : LibC::GUID, @description_a : Win32cr::Foundation::CHAR[256], @description_w : UInt16[256], @module_a : Win32cr::Foundation::CHAR[260], @module_w : UInt16[260], @type__ : Win32cr::Media::Audio::DirectMusic::DIRECTSOUNDDEVICE_TYPE, @data_flow : Win32cr::Media::Audio::DirectMusic::DIRECTSOUNDDEVICE_DATAFLOW, @wave_device_id : UInt32, @devnode : UInt32)
+    end
+  end
 
   @[Extern]
-  record DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_A_DATA,
-    type__ : Win32cr::Media::Audio::DirectMusic::DIRECTSOUNDDEVICE_TYPE,
-    data_flow : Win32cr::Media::Audio::DirectMusic::DIRECTSOUNDDEVICE_DATAFLOW,
-    device_id : LibC::GUID,
-    description : Win32cr::Foundation::PSTR,
-    module__ : Win32cr::Foundation::PSTR,
-    interface : Win32cr::Foundation::PSTR,
-    wave_device_id : UInt32
+  struct DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_A_DATA
+    property type__ : Win32cr::Media::Audio::DirectMusic::DIRECTSOUNDDEVICE_TYPE
+    property data_flow : Win32cr::Media::Audio::DirectMusic::DIRECTSOUNDDEVICE_DATAFLOW
+    property device_id : LibC::GUID
+    property description : Win32cr::Foundation::PSTR
+    property module__ : Win32cr::Foundation::PSTR
+    property interface : Win32cr::Foundation::PSTR
+    property wave_device_id : UInt32
+    def initialize(@type__ : Win32cr::Media::Audio::DirectMusic::DIRECTSOUNDDEVICE_TYPE, @data_flow : Win32cr::Media::Audio::DirectMusic::DIRECTSOUNDDEVICE_DATAFLOW, @device_id : LibC::GUID, @description : Win32cr::Foundation::PSTR, @module__ : Win32cr::Foundation::PSTR, @interface : Win32cr::Foundation::PSTR, @wave_device_id : UInt32)
+    end
+  end
 
   @[Extern]
-  record DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_W_DATA,
-    type__ : Win32cr::Media::Audio::DirectMusic::DIRECTSOUNDDEVICE_TYPE,
-    data_flow : Win32cr::Media::Audio::DirectMusic::DIRECTSOUNDDEVICE_DATAFLOW,
-    device_id : LibC::GUID,
-    description : Win32cr::Foundation::PWSTR,
-    module__ : Win32cr::Foundation::PWSTR,
-    interface : Win32cr::Foundation::PWSTR,
-    wave_device_id : UInt32
+  struct DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_W_DATA
+    property type__ : Win32cr::Media::Audio::DirectMusic::DIRECTSOUNDDEVICE_TYPE
+    property data_flow : Win32cr::Media::Audio::DirectMusic::DIRECTSOUNDDEVICE_DATAFLOW
+    property device_id : LibC::GUID
+    property description : Win32cr::Foundation::PWSTR
+    property module__ : Win32cr::Foundation::PWSTR
+    property interface : Win32cr::Foundation::PWSTR
+    property wave_device_id : UInt32
+    def initialize(@type__ : Win32cr::Media::Audio::DirectMusic::DIRECTSOUNDDEVICE_TYPE, @data_flow : Win32cr::Media::Audio::DirectMusic::DIRECTSOUNDDEVICE_DATAFLOW, @device_id : LibC::GUID, @description : Win32cr::Foundation::PWSTR, @module__ : Win32cr::Foundation::PWSTR, @interface : Win32cr::Foundation::PWSTR, @wave_device_id : UInt32)
+    end
+  end
 
   @[Extern]
-  record DSPROPERTY_DIRECTSOUNDDEVICE_ENUMERATE_1_DATA,
-    callback : Win32cr::Media::Audio::DirectMusic::LPFNDIRECTSOUNDDEVICEENUMERATECALLBACK1,
-    context : Void*
+  struct DSPROPERTY_DIRECTSOUNDDEVICE_ENUMERATE_1_DATA
+    property callback : Win32cr::Media::Audio::DirectMusic::LPFNDIRECTSOUNDDEVICEENUMERATECALLBACK1
+    property context : Void*
+    def initialize(@callback : Win32cr::Media::Audio::DirectMusic::LPFNDIRECTSOUNDDEVICEENUMERATECALLBACK1, @context : Void*)
+    end
+  end
 
   @[Extern]
-  record DSPROPERTY_DIRECTSOUNDDEVICE_ENUMERATE_A_DATA,
-    callback : Win32cr::Media::Audio::DirectMusic::LPFNDIRECTSOUNDDEVICEENUMERATECALLBACKA,
-    context : Void*
+  struct DSPROPERTY_DIRECTSOUNDDEVICE_ENUMERATE_A_DATA
+    property callback : Win32cr::Media::Audio::DirectMusic::LPFNDIRECTSOUNDDEVICEENUMERATECALLBACKA
+    property context : Void*
+    def initialize(@callback : Win32cr::Media::Audio::DirectMusic::LPFNDIRECTSOUNDDEVICEENUMERATECALLBACKA, @context : Void*)
+    end
+  end
 
   @[Extern]
-  record DSPROPERTY_DIRECTSOUNDDEVICE_ENUMERATE_W_DATA,
-    callback : Win32cr::Media::Audio::DirectMusic::LPFNDIRECTSOUNDDEVICEENUMERATECALLBACKW,
-    context : Void*
+  struct DSPROPERTY_DIRECTSOUNDDEVICE_ENUMERATE_W_DATA
+    property callback : Win32cr::Media::Audio::DirectMusic::LPFNDIRECTSOUNDDEVICEENUMERATECALLBACKW
+    property context : Void*
+    def initialize(@callback : Win32cr::Media::Audio::DirectMusic::LPFNDIRECTSOUNDDEVICEENUMERATECALLBACKW, @context : Void*)
+    end
+  end
 
   @[Extern]
-  record Tag_DVAudInfo,
-    bAudStyle : UInt8[2],
-    bAudQu : UInt8[2],
-    bNumAudPin : UInt8,
-    wAvgSamplesPerPinPerFrm : UInt16[2],
-    wBlkMode : UInt16,
-    wDIFMode : UInt16,
-    wBlkDiv : UInt16
+  struct Tag_DVAudInfo
+    property bAudStyle : UInt8[2]
+    property bAudQu : UInt8[2]
+    property bNumAudPin : UInt8
+    property wAvgSamplesPerPinPerFrm : UInt16[2]
+    property wBlkMode : UInt16
+    property wDIFMode : UInt16
+    property wBlkDiv : UInt16
+    def initialize(@bAudStyle : UInt8[2], @bAudQu : UInt8[2], @bNumAudPin : UInt8, @wAvgSamplesPerPinPerFrm : UInt16[2], @wBlkMode : UInt16, @wDIFMode : UInt16, @wBlkDiv : UInt16)
+    end
+  end
 
   @[Extern]
-  record MDEVICECAPSEX,
-    cbSize : UInt32,
-    pCaps : Void*
+  struct MDEVICECAPSEX
+    property cbSize : UInt32
+    property pCaps : Void*
+    def initialize(@cbSize : UInt32, @pCaps : Void*)
+    end
+  end
 
   @[Extern]
-  record MIDIOPENDESC,
-    hMidi : Win32cr::Media::Audio::HMIDI,
-    dwCallback : LibC::UIntPtrT,
-    dwInstance : LibC::UIntPtrT,
-    dnDevNode : LibC::UIntPtrT,
-    cIds : UInt32,
-    rgIds : Win32cr::Media::Multimedia::MIDIOPENSTRMID*
+  struct MIDIOPENDESC
+    property hMidi : Win32cr::Media::Audio::HMIDI
+    property dwCallback : LibC::UIntPtrT
+    property dwInstance : LibC::UIntPtrT
+    property dnDevNode : LibC::UIntPtrT
+    property cIds : UInt32
+    property rgIds : Win32cr::Media::Multimedia::MIDIOPENSTRMID*
+    def initialize(@hMidi : Win32cr::Media::Audio::HMIDI, @dwCallback : LibC::UIntPtrT, @dwInstance : LibC::UIntPtrT, @dnDevNode : LibC::UIntPtrT, @cIds : UInt32, @rgIds : Win32cr::Media::Multimedia::MIDIOPENSTRMID*)
+    end
+  end
 
   @[Extern]
   record IDirectMusicVtbl,
@@ -683,7 +845,6 @@ module Win32cr::Media::Audio::DirectMusic
 
 
   @[Extern]
-  #@[Com("6536115a-7b2d-11d2-ba18-0000f875ac12")]
   record IDirectMusic, lpVtbl : IDirectMusicVtbl* do
     GUID = LibC::GUID.new(0x6536115a_u32, 0x7b2d_u16, 0x11d2_u16, StaticArray[0xba_u8, 0x18_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0xac_u8, 0x12_u8])
     def query_interface(this : IDirectMusic*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -743,7 +904,6 @@ module Win32cr::Media::Audio::DirectMusic
 
 
   @[Extern]
-  #@[Com("2d3629f7-813d-4939-8508-f05c6b75fd97")]
   record IDirectMusic8, lpVtbl : IDirectMusic8Vtbl* do
     GUID = LibC::GUID.new(0x2d3629f7_u32, 0x813d_u16, 0x4939_u16, StaticArray[0x85_u8, 0x8_u8, 0xf0_u8, 0x5c_u8, 0x6b_u8, 0x75_u8, 0xfd_u8, 0x97_u8])
     def query_interface(this : IDirectMusic8*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -809,7 +969,6 @@ module Win32cr::Media::Audio::DirectMusic
 
 
   @[Extern]
-  #@[Com("d2ac2878-b39b-11d1-8704-00600893b1bd")]
   record IDirectMusicBuffer, lpVtbl : IDirectMusicBufferVtbl* do
     GUID = LibC::GUID.new(0xd2ac2878_u32, 0xb39b_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x4_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x93_u8, 0xb1_u8, 0xbd_u8])
     def query_interface(this : IDirectMusicBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -873,7 +1032,6 @@ module Win32cr::Media::Audio::DirectMusic
 
 
   @[Extern]
-  #@[Com("d2ac287d-b39b-11d1-8704-00600893b1bd")]
   record IDirectMusicInstrument, lpVtbl : IDirectMusicInstrumentVtbl* do
     GUID = LibC::GUID.new(0xd2ac287d_u32, 0xb39b_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x4_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x93_u8, 0xb1_u8, 0xbd_u8])
     def query_interface(this : IDirectMusicInstrument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -902,7 +1060,6 @@ module Win32cr::Media::Audio::DirectMusic
 
 
   @[Extern]
-  #@[Com("d2ac287e-b39b-11d1-8704-00600893b1bd")]
   record IDirectMusicDownloadedInstrument, lpVtbl : IDirectMusicDownloadedInstrumentVtbl* do
     GUID = LibC::GUID.new(0xd2ac287e_u32, 0xb39b_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x4_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x93_u8, 0xb1_u8, 0xbd_u8])
     def query_interface(this : IDirectMusicDownloadedInstrument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -927,7 +1084,6 @@ module Win32cr::Media::Audio::DirectMusic
 
 
   @[Extern]
-  #@[Com("d2ac287c-b39b-11d1-8704-00600893b1bd")]
   record IDirectMusicCollection, lpVtbl : IDirectMusicCollectionVtbl* do
     GUID = LibC::GUID.new(0xd2ac287c_u32, 0xb39b_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x4_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x93_u8, 0xb1_u8, 0xbd_u8])
     def query_interface(this : IDirectMusicCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -957,7 +1113,6 @@ module Win32cr::Media::Audio::DirectMusic
 
 
   @[Extern]
-  #@[Com("d2ac287b-b39b-11d1-8704-00600893b1bd")]
   record IDirectMusicDownload, lpVtbl : IDirectMusicDownloadVtbl* do
     GUID = LibC::GUID.new(0xd2ac287b_u32, 0xb39b_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x4_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x93_u8, 0xb1_u8, 0xbd_u8])
     def query_interface(this : IDirectMusicDownload*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -989,7 +1144,6 @@ module Win32cr::Media::Audio::DirectMusic
 
 
   @[Extern]
-  #@[Com("d2ac287a-b39b-11d1-8704-00600893b1bd")]
   record IDirectMusicPortDownload, lpVtbl : IDirectMusicPortDownloadVtbl* do
     GUID = LibC::GUID.new(0xd2ac287a_u32, 0xb39b_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x4_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x93_u8, 0xb1_u8, 0xbd_u8])
     def query_interface(this : IDirectMusicPortDownload*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1047,7 +1201,6 @@ module Win32cr::Media::Audio::DirectMusic
 
 
   @[Extern]
-  #@[Com("08f2d8c9-37c2-11d2-b9f9-0000f875ac12")]
   record IDirectMusicPort, lpVtbl : IDirectMusicPortVtbl* do
     GUID = LibC::GUID.new(0x8f2d8c9_u32, 0x37c2_u16, 0x11d2_u16, StaticArray[0xb9_u8, 0xf9_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0xac_u8, 0x12_u8])
     def query_interface(this : IDirectMusicPort*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1122,7 +1275,6 @@ module Win32cr::Media::Audio::DirectMusic
 
 
   @[Extern]
-  #@[Com("ced153e7-3606-11d2-b9f9-0000f875ac12")]
   record IDirectMusicThru, lpVtbl : IDirectMusicThruVtbl* do
     GUID = LibC::GUID.new(0xced153e7_u32, 0x3606_u16, 0x11d2_u16, StaticArray[0xb9_u8, 0xf9_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0xac_u8, 0x12_u8])
     def query_interface(this : IDirectMusicThru*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1165,7 +1317,6 @@ module Win32cr::Media::Audio::DirectMusic
 
 
   @[Extern]
-  #@[Com("09823661-5c85-11d2-afa6-00aa0024d8b6")]
   record IDirectMusicSynth, lpVtbl : IDirectMusicSynthVtbl* do
     GUID = LibC::GUID.new(0x9823661_u32, 0x5c85_u16, 0x11d2_u16, StaticArray[0xaf_u8, 0xa6_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x24_u8, 0xd8_u8, 0xb6_u8])
     def query_interface(this : IDirectMusicSynth*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1261,7 +1412,6 @@ module Win32cr::Media::Audio::DirectMusic
 
 
   @[Extern]
-  #@[Com("53cab625-2711-4c9f-9de7-1b7f925f6fc8")]
   record IDirectMusicSynth8, lpVtbl : IDirectMusicSynth8Vtbl* do
     GUID = LibC::GUID.new(0x53cab625_u32, 0x2711_u16, 0x4c9f_u16, StaticArray[0x9d_u8, 0xe7_u8, 0x1b_u8, 0x7f_u8, 0x92_u8, 0x5f_u8, 0x6f_u8, 0xc8_u8])
     def query_interface(this : IDirectMusicSynth8*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1358,7 +1508,6 @@ module Win32cr::Media::Audio::DirectMusic
 
 
   @[Extern]
-  #@[Com("09823663-5c85-11d2-afa6-00aa0024d8b6")]
   record IDirectMusicSynthSink, lpVtbl : IDirectMusicSynthSinkVtbl* do
     GUID = LibC::GUID.new(0x9823663_u32, 0x5c85_u16, 0x11d2_u16, StaticArray[0xaf_u8, 0xa6_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x24_u8, 0xd8_u8, 0xb6_u8])
     def query_interface(this : IDirectMusicSynthSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

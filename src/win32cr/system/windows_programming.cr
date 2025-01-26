@@ -9,53 +9,53 @@ module Win32cr::System::WindowsProgramming
   alias HWINWATCH = LibC::IntPtrT
   alias FEATURE_STATE_CHANGE_SUBSCRIPTION = LibC::IntPtrT
   alias FH_SERVICE_PIPE_HANDLE = LibC::IntPtrT
-  alias PFIBER_CALLOUT_ROUTINE = Proc(Void*, Void*)*
+  alias PFIBER_CALLOUT_ROUTINE = Proc(Void*, Void*)
 
-  alias PQUERYACTCTXW_FUNC = Proc(UInt32, Win32cr::Foundation::HANDLE, Void*, UInt32, Void*, LibC::UIntPtrT, LibC::UIntPtrT*, Win32cr::Foundation::BOOL)*
+  alias PQUERYACTCTXW_FUNC = Proc(UInt32, Win32cr::Foundation::HANDLE, Void*, UInt32, Void*, LibC::UIntPtrT, LibC::UIntPtrT*, Win32cr::Foundation::BOOL)
 
-  alias APPLICATION_RECOVERY_CALLBACK = Proc(Void*, UInt32)*
+  alias APPLICATION_RECOVERY_CALLBACK = Proc(Void*, UInt32)
 
-  alias PIO_APC_ROUTINE = Proc(Void*, Win32cr::System::WindowsProgramming::IO_STATUS_BLOCK*, UInt32, Void)*
+  alias PIO_APC_ROUTINE = Proc(Void*, Win32cr::System::WindowsProgramming::IO_STATUS_BLOCK*, UInt32, Void)
 
-  alias PWINSTATIONQUERYINFORMATIONW = Proc(Win32cr::Foundation::HANDLE, UInt32, Win32cr::System::WindowsProgramming::WINSTATIONINFOCLASS, Void*, UInt32, UInt32*, Win32cr::Foundation::BOOLEAN)*
+  alias PWINSTATIONQUERYINFORMATIONW = Proc(Win32cr::Foundation::HANDLE, UInt32, Win32cr::System::WindowsProgramming::WINSTATIONINFOCLASS, Void*, UInt32, UInt32*, Win32cr::Foundation::BOOLEAN)
 
-  alias PFEATURE_STATE_CHANGE_CALLBACK = Proc(Void*, Void)*
+  alias PFEATURE_STATE_CHANGE_CALLBACK = Proc(Void*, Void)
 
-  alias ENUM_CALLBACK = Proc(Win32cr::System::WindowsProgramming::DCISURFACEINFO*, Void*, Void)*
+  alias ENUM_CALLBACK = Proc(Win32cr::System::WindowsProgramming::DCISURFACEINFO*, Void*, Void)
 
-  alias WINWATCHNOTIFYPROC = Proc(Win32cr::System::WindowsProgramming::HWINWATCH, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::LPARAM, Void)*
+  alias WINWATCHNOTIFYPROC = Proc(Win32cr::System::WindowsProgramming::HWINWATCH, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::LPARAM, Void)
 
-  alias REGINSTALLA = Proc(Win32cr::Foundation::HINSTANCE, Win32cr::Foundation::PSTR, Win32cr::System::WindowsProgramming::STRTABLEA*, Win32cr::Foundation::HRESULT)*
+  alias REGINSTALLA = Proc(Win32cr::Foundation::HINSTANCE, Win32cr::Foundation::PSTR, Win32cr::System::WindowsProgramming::STRTABLEA*, Win32cr::Foundation::HRESULT)
 
-  alias PWLDP_SETDYNAMICCODETRUST_API = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HRESULT)*
+  alias PWLDP_SETDYNAMICCODETRUST_API = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HRESULT)
 
-  alias PWLDP_ISDYNAMICCODEPOLICYENABLED_API = Proc(Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT)*
+  alias PWLDP_ISDYNAMICCODEPOLICYENABLED_API = Proc(Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT)
 
-  alias PWLDP_QUERYDYNAMICODETRUST_API = Proc(Win32cr::Foundation::HANDLE, Void*, UInt32, Win32cr::Foundation::HRESULT)*
+  alias PWLDP_QUERYDYNAMICODETRUST_API = Proc(Win32cr::Foundation::HANDLE, Void*, UInt32, Win32cr::Foundation::HRESULT)
 
-  alias PWLDP_QUERYWINDOWSLOCKDOWNMODE_API = Proc(Win32cr::System::WindowsProgramming::WLDP_WINDOWS_LOCKDOWN_MODE*, Win32cr::Foundation::HRESULT)*
+  alias PWLDP_QUERYWINDOWSLOCKDOWNMODE_API = Proc(Win32cr::System::WindowsProgramming::WLDP_WINDOWS_LOCKDOWN_MODE*, Win32cr::Foundation::HRESULT)
 
-  alias PWLDP_QUERYDEVICESECURITYINFORMATION_API = Proc(Win32cr::System::WindowsProgramming::WLDP_DEVICE_SECURITY_INFORMATION*, UInt32, UInt32*, Win32cr::Foundation::HRESULT)*
+  alias PWLDP_QUERYDEVICESECURITYINFORMATION_API = Proc(Win32cr::System::WindowsProgramming::WLDP_DEVICE_SECURITY_INFORMATION*, UInt32, UInt32*, Win32cr::Foundation::HRESULT)
 
-  alias PWLDP_QUERYWINDOWSLOCKDOWNRESTRICTION_API = Proc(Win32cr::System::WindowsProgramming::WLDP_WINDOWS_LOCKDOWN_RESTRICTION*, Win32cr::Foundation::HRESULT)*
+  alias PWLDP_QUERYWINDOWSLOCKDOWNRESTRICTION_API = Proc(Win32cr::System::WindowsProgramming::WLDP_WINDOWS_LOCKDOWN_RESTRICTION*, Win32cr::Foundation::HRESULT)
 
-  alias PWLDP_SETWINDOWSLOCKDOWNRESTRICTION_API = Proc(Win32cr::System::WindowsProgramming::WLDP_WINDOWS_LOCKDOWN_RESTRICTION, Win32cr::Foundation::HRESULT)*
+  alias PWLDP_SETWINDOWSLOCKDOWNRESTRICTION_API = Proc(Win32cr::System::WindowsProgramming::WLDP_WINDOWS_LOCKDOWN_RESTRICTION, Win32cr::Foundation::HRESULT)
 
-  alias PWLDP_ISAPPAPPROVEDBYPOLICY_API = Proc(Win32cr::Foundation::PWSTR, UInt64, Win32cr::Foundation::HRESULT)*
+  alias PWLDP_ISAPPAPPROVEDBYPOLICY_API = Proc(Win32cr::Foundation::PWSTR, UInt64, Win32cr::Foundation::HRESULT)
 
-  alias PWLDP_QUERYPOLICYSETTINGENABLED_API = Proc(Win32cr::System::WindowsProgramming::WLDP_POLICY_SETTING, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT)*
+  alias PWLDP_QUERYPOLICYSETTINGENABLED_API = Proc(Win32cr::System::WindowsProgramming::WLDP_POLICY_SETTING, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT)
 
-  alias PWLDP_QUERYPOLICYSETTINGENABLED2_API = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT)*
+  alias PWLDP_QUERYPOLICYSETTINGENABLED2_API = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT)
 
-  alias PWLDP_ISWCOSPRODUCTIONCONFIGURATION_API = Proc(Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT)*
+  alias PWLDP_ISWCOSPRODUCTIONCONFIGURATION_API = Proc(Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT)
 
-  alias PWLDP_RESETWCOSPRODUCTIONCONFIGURATION_API = Proc(Win32cr::Foundation::HRESULT)*
+  alias PWLDP_RESETWCOSPRODUCTIONCONFIGURATION_API = Proc(Win32cr::Foundation::HRESULT)
 
-  alias PWLDP_ISPRODUCTIONCONFIGURATION_API = Proc(Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT)*
+  alias PWLDP_ISPRODUCTIONCONFIGURATION_API = Proc(Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT)
 
-  alias PWLDP_RESETPRODUCTIONCONFIGURATION_API = Proc(Win32cr::Foundation::HRESULT)*
+  alias PWLDP_RESETPRODUCTIONCONFIGURATION_API = Proc(Win32cr::Foundation::HRESULT)
 
-  alias PDELAYLOAD_FAILURE_DLL_CALLBACK = Proc(UInt32, Win32cr::System::WindowsProgramming::DELAYLOAD_INFO*, Void*)*
+  alias PDELAYLOAD_FAILURE_DLL_CALLBACK = Proc(UInt32, Win32cr::System::WindowsProgramming::DELAYLOAD_INFO*, Void*)
 
   WLDP_DLL = "WLDP.DLL"
   WLDP_GETLOCKDOWNPOLICY_FN = "WldpGetLockdownPolicy"
@@ -786,607 +786,832 @@ module Win32cr::System::WindowsProgramming
   end
 
   @[Extern]
-  record D3DHAL_CALLBACKS_
-  @[Extern]
-  record D3DHAL_GLOBALDRIVERDATA_
-  @[Extern]
-  record IMAGE_THUNK_DATA64,
-    u1 : U1_e__union_ do
-
-    # Nested Type U1_e__union_
-    @[Extern(union: true)]
-    record U1_e__union_,
-      forwarder_string : UInt64,
-      function : UInt64,
-      ordinal : UInt64,
-      address_of_data : UInt64
-
+  struct D3DHAL_CALLBACKS_
+    def initialize()
+    end
   end
 
   @[Extern]
-  record IMAGE_THUNK_DATA32,
-    u1 : U1_e__union_ do
-
-    # Nested Type U1_e__union_
-    @[Extern(union: true)]
-    record U1_e__union_,
-      forwarder_string : UInt32,
-      function : UInt32,
-      ordinal : UInt32,
-      address_of_data : UInt32
-
+  struct D3DHAL_GLOBALDRIVERDATA_
+    def initialize()
+    end
   end
 
   @[Extern]
-  record IMAGE_DELAYLOAD_DESCRIPTOR,
-    attributes : Attributes_e__Union_,
-    dll_name_rva : UInt32,
-    module_handle_rva : UInt32,
-    import_address_table_rva : UInt32,
-    import_name_table_rva : UInt32,
-    bound_import_address_table_rva : UInt32,
-    unload_information_table_rva : UInt32,
-    time_date_stamp : UInt32 do
+  struct IMAGE_THUNK_DATA64
+    property u1 : U1_e__union_
+
+    # Nested Type U1_e__union_
+    @[Extern(union: true)]
+    struct U1_e__union_
+    property forwarder_string : UInt64
+    property function : UInt64
+    property ordinal : UInt64
+    property address_of_data : UInt64
+    def initialize(@forwarder_string : UInt64, @function : UInt64, @ordinal : UInt64, @address_of_data : UInt64)
+    end
+    end
+
+    def initialize(@u1 : U1_e__union_)
+    end
+  end
+
+  @[Extern]
+  struct IMAGE_THUNK_DATA32
+    property u1 : U1_e__union_
+
+    # Nested Type U1_e__union_
+    @[Extern(union: true)]
+    struct U1_e__union_
+    property forwarder_string : UInt32
+    property function : UInt32
+    property ordinal : UInt32
+    property address_of_data : UInt32
+    def initialize(@forwarder_string : UInt32, @function : UInt32, @ordinal : UInt32, @address_of_data : UInt32)
+    end
+    end
+
+    def initialize(@u1 : U1_e__union_)
+    end
+  end
+
+  @[Extern]
+  struct IMAGE_DELAYLOAD_DESCRIPTOR
+    property attributes : Attributes_e__Union_
+    property dll_name_rva : UInt32
+    property module_handle_rva : UInt32
+    property import_address_table_rva : UInt32
+    property import_name_table_rva : UInt32
+    property bound_import_address_table_rva : UInt32
+    property unload_information_table_rva : UInt32
+    property time_date_stamp : UInt32
 
     # Nested Type Attributes_e__Union_
     @[Extern(union: true)]
-    record Attributes_e__Union_,
-      all_attributes : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Attributes_e__Union_
+    property all_attributes : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@all_attributes : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@attributes : Attributes_e__Union_, @dll_name_rva : UInt32, @module_handle_rva : UInt32, @import_address_table_rva : UInt32, @import_name_table_rva : UInt32, @bound_import_address_table_rva : UInt32, @unload_information_table_rva : UInt32, @time_date_stamp : UInt32)
+    end
   end
 
   @[Extern]
-  record CUSTOM_SYSTEM_EVENT_TRIGGER_CONFIG,
-    size : UInt32,
-    trigger_id : Win32cr::Foundation::PWSTR
+  struct CUSTOM_SYSTEM_EVENT_TRIGGER_CONFIG
+    property size : UInt32
+    property trigger_id : Win32cr::Foundation::PWSTR
+    def initialize(@size : UInt32, @trigger_id : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record JIT_DEBUG_INFO,
-    dwSize : UInt32,
-    dwProcessorArchitecture : UInt32,
-    dwThreadID : UInt32,
-    dwReserved0 : UInt32,
-    lpExceptionAddress : UInt64,
-    lpExceptionRecord : UInt64,
-    lpContextRecord : UInt64
+  struct JIT_DEBUG_INFO
+    property dwSize : UInt32
+    property dwProcessorArchitecture : UInt32
+    property dwThreadID : UInt32
+    property dwReserved0 : UInt32
+    property lpExceptionAddress : UInt64
+    property lpExceptionRecord : UInt64
+    property lpContextRecord : UInt64
+    def initialize(@dwSize : UInt32, @dwProcessorArchitecture : UInt32, @dwThreadID : UInt32, @dwReserved0 : UInt32, @lpExceptionAddress : UInt64, @lpExceptionRecord : UInt64, @lpContextRecord : UInt64)
+    end
+  end
 
   @[Extern]
-  record HW_PROFILE_INFOA,
-    dwDockInfo : UInt32,
-    szHwProfileGuid : Win32cr::Foundation::CHAR[39],
-    szHwProfileName : Win32cr::Foundation::CHAR[80]
+  struct HW_PROFILE_INFOA
+    property dwDockInfo : UInt32
+    property szHwProfileGuid : Win32cr::Foundation::CHAR[39]
+    property szHwProfileName : Win32cr::Foundation::CHAR[80]
+    def initialize(@dwDockInfo : UInt32, @szHwProfileGuid : Win32cr::Foundation::CHAR[39], @szHwProfileName : Win32cr::Foundation::CHAR[80])
+    end
+  end
 
   @[Extern]
-  record HW_PROFILE_INFOW,
-    dwDockInfo : UInt32,
-    szHwProfileGuid : UInt16[39],
-    szHwProfileName : UInt16[80]
+  struct HW_PROFILE_INFOW
+    property dwDockInfo : UInt32
+    property szHwProfileGuid : UInt16[39]
+    property szHwProfileName : UInt16[80]
+    def initialize(@dwDockInfo : UInt32, @szHwProfileGuid : UInt16[39], @szHwProfileName : UInt16[80])
+    end
+  end
 
   @[Extern]
-  record ACTCTX_SECTION_KEYED_DATA_2600,
-    cbSize : UInt32,
-    ulDataFormatVersion : UInt32,
-    lpData : Void*,
-    ulLength : UInt32,
-    lpSectionGlobalData : Void*,
-    ulSectionGlobalDataLength : UInt32,
-    lpSectionBase : Void*,
-    ulSectionTotalLength : UInt32,
-    hActCtx : Win32cr::Foundation::HANDLE,
-    ulAssemblyRosterIndex : UInt32
+  struct ACTCTX_SECTION_KEYED_DATA_2600
+    property cbSize : UInt32
+    property ulDataFormatVersion : UInt32
+    property lpData : Void*
+    property ulLength : UInt32
+    property lpSectionGlobalData : Void*
+    property ulSectionGlobalDataLength : UInt32
+    property lpSectionBase : Void*
+    property ulSectionTotalLength : UInt32
+    property hActCtx : Win32cr::Foundation::HANDLE
+    property ulAssemblyRosterIndex : UInt32
+    def initialize(@cbSize : UInt32, @ulDataFormatVersion : UInt32, @lpData : Void*, @ulLength : UInt32, @lpSectionGlobalData : Void*, @ulSectionGlobalDataLength : UInt32, @lpSectionBase : Void*, @ulSectionTotalLength : UInt32, @hActCtx : Win32cr::Foundation::HANDLE, @ulAssemblyRosterIndex : UInt32)
+    end
+  end
 
   @[Extern]
-  record ACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA,
-    lpInformation : Void*,
-    lpSectionBase : Void*,
-    ulSectionLength : UInt32,
-    lpSectionGlobalDataBase : Void*,
-    ulSectionGlobalDataLength : UInt32
+  struct ACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA
+    property lpInformation : Void*
+    property lpSectionBase : Void*
+    property ulSectionLength : UInt32
+    property lpSectionGlobalDataBase : Void*
+    property ulSectionGlobalDataLength : UInt32
+    def initialize(@lpInformation : Void*, @lpSectionBase : Void*, @ulSectionLength : UInt32, @lpSectionGlobalDataBase : Void*, @ulSectionGlobalDataLength : UInt32)
+    end
+  end
 
   @[Extern]
-  record ACTIVATION_CONTEXT_BASIC_INFORMATION,
-    hActCtx : Win32cr::Foundation::HANDLE,
-    dwFlags : UInt32
+  struct ACTIVATION_CONTEXT_BASIC_INFORMATION
+    property hActCtx : Win32cr::Foundation::HANDLE
+    property dwFlags : UInt32
+    def initialize(@hActCtx : Win32cr::Foundation::HANDLE, @dwFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record FILE_CASE_SENSITIVE_INFO,
-    flags : UInt32
+  struct FILE_CASE_SENSITIVE_INFO
+    property flags : UInt32
+    def initialize(@flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record FILE_DISPOSITION_INFO_EX,
-    flags : UInt32
+  struct FILE_DISPOSITION_INFO_EX
+    property flags : UInt32
+    def initialize(@flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record CLIENT_ID,
-    unique_process : Win32cr::Foundation::HANDLE,
-    unique_thread : Win32cr::Foundation::HANDLE
+  struct CLIENT_ID
+    property unique_process : Win32cr::Foundation::HANDLE
+    property unique_thread : Win32cr::Foundation::HANDLE
+    def initialize(@unique_process : Win32cr::Foundation::HANDLE, @unique_thread : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record LDR_DATA_TABLE_ENTRY,
-    reserved1 : Void*[2],
-    in_memory_order_links : Win32cr::System::Kernel::LIST_ENTRY,
-    reserved2 : Void*[2],
-    dll_base : Void*,
-    reserved3 : Void*[2],
-    full_dll_name : Win32cr::Foundation::UNICODE_STRING,
-    reserved4 : UInt8[8],
-    reserved5 : Void*[3],
-    anonymous : Anonymous_e__Union_,
-    time_date_stamp : UInt32 do
+  struct LDR_DATA_TABLE_ENTRY
+    property reserved1 : Void*[2]
+    property in_memory_order_links : Win32cr::System::Kernel::LIST_ENTRY
+    property reserved2 : Void*[2]
+    property dll_base : Void*
+    property reserved3 : Void*[2]
+    property full_dll_name : Win32cr::Foundation::UNICODE_STRING
+    property reserved4 : UInt8[8]
+    property reserved5 : Void*[3]
+    property anonymous : Anonymous_e__Union_
+    property time_date_stamp : UInt32
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      check_sum : UInt32,
-      reserved6 : Void*
+    struct Anonymous_e__Union_
+    property check_sum : UInt32
+    property reserved6 : Void*
+    def initialize(@check_sum : UInt32, @reserved6 : Void*)
+    end
+    end
 
+    def initialize(@reserved1 : Void*[2], @in_memory_order_links : Win32cr::System::Kernel::LIST_ENTRY, @reserved2 : Void*[2], @dll_base : Void*, @reserved3 : Void*[2], @full_dll_name : Win32cr::Foundation::UNICODE_STRING, @reserved4 : UInt8[8], @reserved5 : Void*[3], @anonymous : Anonymous_e__Union_, @time_date_stamp : UInt32)
+    end
   end
 
   @[Extern]
-  record OBJECT_ATTRIBUTES,
-    length : UInt32,
-    root_directory : Win32cr::Foundation::HANDLE,
-    object_name : Win32cr::Foundation::UNICODE_STRING*,
-    attributes : UInt32,
-    security_descriptor : Void*,
-    security_quality_of_service : Void*
+  struct OBJECT_ATTRIBUTES
+    property length : UInt32
+    property root_directory : Win32cr::Foundation::HANDLE
+    property object_name : Win32cr::Foundation::UNICODE_STRING*
+    property attributes : UInt32
+    property security_descriptor : Void*
+    property security_quality_of_service : Void*
+    def initialize(@length : UInt32, @root_directory : Win32cr::Foundation::HANDLE, @object_name : Win32cr::Foundation::UNICODE_STRING*, @attributes : UInt32, @security_descriptor : Void*, @security_quality_of_service : Void*)
+    end
+  end
 
   @[Extern]
-  record IO_STATUS_BLOCK,
-    anonymous : Anonymous_e__Union_,
-    information : LibC::UIntPtrT do
+  struct IO_STATUS_BLOCK
+    property anonymous : Anonymous_e__Union_
+    property information : LibC::UIntPtrT
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      status : Win32cr::Foundation::NTSTATUS,
-      pointer : Void*
+    struct Anonymous_e__Union_
+    property status : Win32cr::Foundation::NTSTATUS
+    property pointer : Void*
+    def initialize(@status : Win32cr::Foundation::NTSTATUS, @pointer : Void*)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Union_, @information : LibC::UIntPtrT)
+    end
   end
 
   @[Extern]
-  record SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION,
-    idle_time : Win32cr::Foundation::LARGE_INTEGER,
-    kernel_time : Win32cr::Foundation::LARGE_INTEGER,
-    user_time : Win32cr::Foundation::LARGE_INTEGER,
-    reserved1 : Win32cr::Foundation::LARGE_INTEGER[2],
-    reserved2 : UInt32
+  struct SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION
+    property idle_time : Win32cr::Foundation::LARGE_INTEGER
+    property kernel_time : Win32cr::Foundation::LARGE_INTEGER
+    property user_time : Win32cr::Foundation::LARGE_INTEGER
+    property reserved1 : Win32cr::Foundation::LARGE_INTEGER[2]
+    property reserved2 : UInt32
+    def initialize(@idle_time : Win32cr::Foundation::LARGE_INTEGER, @kernel_time : Win32cr::Foundation::LARGE_INTEGER, @user_time : Win32cr::Foundation::LARGE_INTEGER, @reserved1 : Win32cr::Foundation::LARGE_INTEGER[2], @reserved2 : UInt32)
+    end
+  end
 
   @[Extern]
-  record SYSTEM_PROCESS_INFORMATION,
-    next_entry_offset : UInt32,
-    number_of_threads : UInt32,
-    reserved1 : UInt8[48],
-    image_name : Win32cr::Foundation::UNICODE_STRING,
-    base_priority : Int32,
-    unique_process_id : Win32cr::Foundation::HANDLE,
-    reserved2 : Void*,
-    handle_count : UInt32,
-    session_id : UInt32,
-    reserved3 : Void*,
-    peak_virtual_size : LibC::UIntPtrT,
-    virtual_size : LibC::UIntPtrT,
-    reserved4 : UInt32,
-    peak_working_set_size : LibC::UIntPtrT,
-    working_set_size : LibC::UIntPtrT,
-    reserved5 : Void*,
-    quota_paged_pool_usage : LibC::UIntPtrT,
-    reserved6 : Void*,
-    quota_non_paged_pool_usage : LibC::UIntPtrT,
-    pagefile_usage : LibC::UIntPtrT,
-    peak_pagefile_usage : LibC::UIntPtrT,
-    private_page_count : LibC::UIntPtrT,
-    reserved7 : Win32cr::Foundation::LARGE_INTEGER[6]
+  struct SYSTEM_PROCESS_INFORMATION
+    property next_entry_offset : UInt32
+    property number_of_threads : UInt32
+    property reserved1 : UInt8[48]
+    property image_name : Win32cr::Foundation::UNICODE_STRING
+    property base_priority : Int32
+    property unique_process_id : Win32cr::Foundation::HANDLE
+    property reserved2 : Void*
+    property handle_count : UInt32
+    property session_id : UInt32
+    property reserved3 : Void*
+    property peak_virtual_size : LibC::UIntPtrT
+    property virtual_size : LibC::UIntPtrT
+    property reserved4 : UInt32
+    property peak_working_set_size : LibC::UIntPtrT
+    property working_set_size : LibC::UIntPtrT
+    property reserved5 : Void*
+    property quota_paged_pool_usage : LibC::UIntPtrT
+    property reserved6 : Void*
+    property quota_non_paged_pool_usage : LibC::UIntPtrT
+    property pagefile_usage : LibC::UIntPtrT
+    property peak_pagefile_usage : LibC::UIntPtrT
+    property private_page_count : LibC::UIntPtrT
+    property reserved7 : Win32cr::Foundation::LARGE_INTEGER[6]
+    def initialize(@next_entry_offset : UInt32, @number_of_threads : UInt32, @reserved1 : UInt8[48], @image_name : Win32cr::Foundation::UNICODE_STRING, @base_priority : Int32, @unique_process_id : Win32cr::Foundation::HANDLE, @reserved2 : Void*, @handle_count : UInt32, @session_id : UInt32, @reserved3 : Void*, @peak_virtual_size : LibC::UIntPtrT, @virtual_size : LibC::UIntPtrT, @reserved4 : UInt32, @peak_working_set_size : LibC::UIntPtrT, @working_set_size : LibC::UIntPtrT, @reserved5 : Void*, @quota_paged_pool_usage : LibC::UIntPtrT, @reserved6 : Void*, @quota_non_paged_pool_usage : LibC::UIntPtrT, @pagefile_usage : LibC::UIntPtrT, @peak_pagefile_usage : LibC::UIntPtrT, @private_page_count : LibC::UIntPtrT, @reserved7 : Win32cr::Foundation::LARGE_INTEGER[6])
+    end
+  end
 
   @[Extern]
-  record SYSTEM_THREAD_INFORMATION,
-    reserved1 : Win32cr::Foundation::LARGE_INTEGER[3],
-    reserved2 : UInt32,
-    start_address : Void*,
-    client_id : Win32cr::System::WindowsProgramming::CLIENT_ID,
-    priority : Int32,
-    base_priority : Int32,
-    reserved3 : UInt32,
-    thread_state : UInt32,
-    wait_reason : UInt32
+  struct SYSTEM_THREAD_INFORMATION
+    property reserved1 : Win32cr::Foundation::LARGE_INTEGER[3]
+    property reserved2 : UInt32
+    property start_address : Void*
+    property client_id : Win32cr::System::WindowsProgramming::CLIENT_ID
+    property priority : Int32
+    property base_priority : Int32
+    property reserved3 : UInt32
+    property thread_state : UInt32
+    property wait_reason : UInt32
+    def initialize(@reserved1 : Win32cr::Foundation::LARGE_INTEGER[3], @reserved2 : UInt32, @start_address : Void*, @client_id : Win32cr::System::WindowsProgramming::CLIENT_ID, @priority : Int32, @base_priority : Int32, @reserved3 : UInt32, @thread_state : UInt32, @wait_reason : UInt32)
+    end
+  end
 
   @[Extern]
-  record SYSTEM_REGISTRY_QUOTA_INFORMATION,
-    registry_quota_allowed : UInt32,
-    registry_quota_used : UInt32,
-    reserved1 : Void*
+  struct SYSTEM_REGISTRY_QUOTA_INFORMATION
+    property registry_quota_allowed : UInt32
+    property registry_quota_used : UInt32
+    property reserved1 : Void*
+    def initialize(@registry_quota_allowed : UInt32, @registry_quota_used : UInt32, @reserved1 : Void*)
+    end
+  end
 
   @[Extern]
-  record SYSTEM_BASIC_INFORMATION,
-    reserved1 : UInt8[24],
-    reserved2 : Void*[4],
-    number_of_processors : Int8
+  struct SYSTEM_BASIC_INFORMATION
+    property reserved1 : UInt8[24]
+    property reserved2 : Void*[4]
+    property number_of_processors : Int8
+    def initialize(@reserved1 : UInt8[24], @reserved2 : Void*[4], @number_of_processors : Int8)
+    end
+  end
 
   @[Extern]
-  record SYSTEM_TIMEOFDAY_INFORMATION,
-    reserved1 : UInt8[48]
+  struct SYSTEM_TIMEOFDAY_INFORMATION
+    property reserved1 : UInt8[48]
+    def initialize(@reserved1 : UInt8[48])
+    end
+  end
 
   @[Extern]
-  record SYSTEM_PERFORMANCE_INFORMATION,
-    reserved1 : UInt8[312]
+  struct SYSTEM_PERFORMANCE_INFORMATION
+    property reserved1 : UInt8[312]
+    def initialize(@reserved1 : UInt8[312])
+    end
+  end
 
   @[Extern]
-  record SYSTEM_EXCEPTION_INFORMATION,
-    reserved1 : UInt8[16]
+  struct SYSTEM_EXCEPTION_INFORMATION
+    property reserved1 : UInt8[16]
+    def initialize(@reserved1 : UInt8[16])
+    end
+  end
 
   @[Extern]
-  record SYSTEM_LOOKASIDE_INFORMATION,
-    reserved1 : UInt8[32]
+  struct SYSTEM_LOOKASIDE_INFORMATION
+    property reserved1 : UInt8[32]
+    def initialize(@reserved1 : UInt8[32])
+    end
+  end
 
   @[Extern]
-  record SYSTEM_INTERRUPT_INFORMATION,
-    reserved1 : UInt8[24]
+  struct SYSTEM_INTERRUPT_INFORMATION
+    property reserved1 : UInt8[24]
+    def initialize(@reserved1 : UInt8[24])
+    end
+  end
 
   @[Extern]
-  record SYSTEM_POLICY_INFORMATION,
-    reserved1 : Void*[2],
-    reserved2 : UInt32[3]
+  struct SYSTEM_POLICY_INFORMATION
+    property reserved1 : Void*[2]
+    property reserved2 : UInt32[3]
+    def initialize(@reserved1 : Void*[2], @reserved2 : UInt32[3])
+    end
+  end
 
   @[Extern]
-  record THREAD_NAME_INFORMATION,
-    thread_name : Win32cr::Foundation::UNICODE_STRING
+  struct THREAD_NAME_INFORMATION
+    property thread_name : Win32cr::Foundation::UNICODE_STRING
+    def initialize(@thread_name : Win32cr::Foundation::UNICODE_STRING)
+    end
+  end
 
   @[Extern]
-  record SYSTEM_CODEINTEGRITY_INFORMATION,
-    length : UInt32,
-    code_integrity_options : UInt32
+  struct SYSTEM_CODEINTEGRITY_INFORMATION
+    property length : UInt32
+    property code_integrity_options : UInt32
+    def initialize(@length : UInt32, @code_integrity_options : UInt32)
+    end
+  end
 
   @[Extern]
-  record PUBLIC_OBJECT_BASIC_INFORMATION,
-    attributes : UInt32,
-    granted_access : UInt32,
-    handle_count : UInt32,
-    pointer_count : UInt32,
-    reserved : UInt32[10]
+  struct PUBLIC_OBJECT_BASIC_INFORMATION
+    property attributes : UInt32
+    property granted_access : UInt32
+    property handle_count : UInt32
+    property pointer_count : UInt32
+    property reserved : UInt32[10]
+    def initialize(@attributes : UInt32, @granted_access : UInt32, @handle_count : UInt32, @pointer_count : UInt32, @reserved : UInt32[10])
+    end
+  end
 
   @[Extern]
-  record PUBLIC_OBJECT_TYPE_INFORMATION,
-    type_name : Win32cr::Foundation::UNICODE_STRING,
-    reserved : UInt32[22]
+  struct PUBLIC_OBJECT_TYPE_INFORMATION
+    property type_name : Win32cr::Foundation::UNICODE_STRING
+    property reserved : UInt32[22]
+    def initialize(@type_name : Win32cr::Foundation::UNICODE_STRING, @reserved : UInt32[22])
+    end
+  end
 
   @[Extern]
-  record KEY_VALUE_ENTRY,
-    value_name : Win32cr::Foundation::UNICODE_STRING*,
-    data_length : UInt32,
-    data_offset : UInt32,
-    type__ : UInt32
+  struct KEY_VALUE_ENTRY
+    property value_name : Win32cr::Foundation::UNICODE_STRING*
+    property data_length : UInt32
+    property data_offset : UInt32
+    property type__ : UInt32
+    def initialize(@value_name : Win32cr::Foundation::UNICODE_STRING*, @data_length : UInt32, @data_offset : UInt32, @type__ : UInt32)
+    end
+  end
 
   @[Extern]
-  record WINSTATIONINFORMATIONW,
-    reserved2 : UInt8[70],
-    logon_id : UInt32,
-    reserved3 : UInt8[1140]
+  struct WINSTATIONINFORMATIONW
+    property reserved2 : UInt8[70]
+    property logon_id : UInt32
+    property reserved3 : UInt8[1140]
+    def initialize(@reserved2 : UInt8[70], @logon_id : UInt32, @reserved3 : UInt8[1140])
+    end
+  end
 
   @[Extern]
-  record FEATURE_ERROR,
-    hr : Win32cr::Foundation::HRESULT,
-    lineNumber : UInt16,
-    file : Win32cr::Foundation::PSTR,
-    process : Win32cr::Foundation::PSTR,
-    module__ : Win32cr::Foundation::PSTR,
-    callerReturnAddressOffset : UInt32,
-    callerModule : Win32cr::Foundation::PSTR,
-    message : Win32cr::Foundation::PSTR,
-    originLineNumber : UInt16,
-    originFile : Win32cr::Foundation::PSTR,
-    originModule : Win32cr::Foundation::PSTR,
-    originCallerReturnAddressOffset : UInt32,
-    originCallerModule : Win32cr::Foundation::PSTR,
-    originName : Win32cr::Foundation::PSTR
+  struct FEATURE_ERROR
+    property hr : Win32cr::Foundation::HRESULT
+    property lineNumber : UInt16
+    property file : Win32cr::Foundation::PSTR
+    property process : Win32cr::Foundation::PSTR
+    property module__ : Win32cr::Foundation::PSTR
+    property callerReturnAddressOffset : UInt32
+    property callerModule : Win32cr::Foundation::PSTR
+    property message : Win32cr::Foundation::PSTR
+    property originLineNumber : UInt16
+    property originFile : Win32cr::Foundation::PSTR
+    property originModule : Win32cr::Foundation::PSTR
+    property originCallerReturnAddressOffset : UInt32
+    property originCallerModule : Win32cr::Foundation::PSTR
+    property originName : Win32cr::Foundation::PSTR
+    def initialize(@hr : Win32cr::Foundation::HRESULT, @lineNumber : UInt16, @file : Win32cr::Foundation::PSTR, @process : Win32cr::Foundation::PSTR, @module__ : Win32cr::Foundation::PSTR, @callerReturnAddressOffset : UInt32, @callerModule : Win32cr::Foundation::PSTR, @message : Win32cr::Foundation::PSTR, @originLineNumber : UInt16, @originFile : Win32cr::Foundation::PSTR, @originModule : Win32cr::Foundation::PSTR, @originCallerReturnAddressOffset : UInt32, @originCallerModule : Win32cr::Foundation::PSTR, @originName : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record DCICMD,
-    dwCommand : UInt32,
-    dwParam1 : UInt32,
-    dwParam2 : UInt32,
-    dwVersion : UInt32,
-    dwReserved : UInt32
+  struct DCICMD
+    property dwCommand : UInt32
+    property dwParam1 : UInt32
+    property dwParam2 : UInt32
+    property dwVersion : UInt32
+    property dwReserved : UInt32
+    def initialize(@dwCommand : UInt32, @dwParam1 : UInt32, @dwParam2 : UInt32, @dwVersion : UInt32, @dwReserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record DCICREATEINPUT,
-    cmd : Win32cr::System::WindowsProgramming::DCICMD,
-    dwCompression : UInt32,
-    dwMask : UInt32[3],
-    dwWidth : UInt32,
-    dwHeight : UInt32,
-    dwDCICaps : UInt32,
-    dwBitCount : UInt32,
-    lpSurface : Void*
+  struct DCICREATEINPUT
+    property cmd : Win32cr::System::WindowsProgramming::DCICMD
+    property dwCompression : UInt32
+    property dwMask : UInt32[3]
+    property dwWidth : UInt32
+    property dwHeight : UInt32
+    property dwDCICaps : UInt32
+    property dwBitCount : UInt32
+    property lpSurface : Void*
+    def initialize(@cmd : Win32cr::System::WindowsProgramming::DCICMD, @dwCompression : UInt32, @dwMask : UInt32[3], @dwWidth : UInt32, @dwHeight : UInt32, @dwDCICaps : UInt32, @dwBitCount : UInt32, @lpSurface : Void*)
+    end
+  end
 
   @[Extern]
-  record DCISURFACEINFO,
-    dwSize : UInt32,
-    dwDCICaps : UInt32,
-    dwCompression : UInt32,
-    dwMask : UInt32[3],
-    dwWidth : UInt32,
-    dwHeight : UInt32,
-    lStride : Int32,
-    dwBitCount : UInt32,
-    dwOffSurface : LibC::UIntPtrT,
-    wSelSurface : UInt16,
-    wReserved : UInt16,
-    dwReserved1 : UInt32,
-    dwReserved2 : UInt32,
-    dwReserved3 : UInt32,
-    begin_access : LibC::IntPtrT,
-    end_access : LibC::IntPtrT,
-    destroy_surface : LibC::IntPtrT
+  struct DCISURFACEINFO
+    property dwSize : UInt32
+    property dwDCICaps : UInt32
+    property dwCompression : UInt32
+    property dwMask : UInt32[3]
+    property dwWidth : UInt32
+    property dwHeight : UInt32
+    property lStride : Int32
+    property dwBitCount : UInt32
+    property dwOffSurface : LibC::UIntPtrT
+    property wSelSurface : UInt16
+    property wReserved : UInt16
+    property dwReserved1 : UInt32
+    property dwReserved2 : UInt32
+    property dwReserved3 : UInt32
+    property begin_access : LibC::IntPtrT
+    property end_access : LibC::IntPtrT
+    property destroy_surface : LibC::IntPtrT
+    def initialize(@dwSize : UInt32, @dwDCICaps : UInt32, @dwCompression : UInt32, @dwMask : UInt32[3], @dwWidth : UInt32, @dwHeight : UInt32, @lStride : Int32, @dwBitCount : UInt32, @dwOffSurface : LibC::UIntPtrT, @wSelSurface : UInt16, @wReserved : UInt16, @dwReserved1 : UInt32, @dwReserved2 : UInt32, @dwReserved3 : UInt32, @begin_access : LibC::IntPtrT, @end_access : LibC::IntPtrT, @destroy_surface : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record DCIENUMINPUT,
-    cmd : Win32cr::System::WindowsProgramming::DCICMD,
-    rSrc : Win32cr::Foundation::RECT,
-    rDst : Win32cr::Foundation::RECT,
-    enum_callback : LibC::IntPtrT,
-    lpContext : Void*
+  struct DCIENUMINPUT
+    property cmd : Win32cr::System::WindowsProgramming::DCICMD
+    property rSrc : Win32cr::Foundation::RECT
+    property rDst : Win32cr::Foundation::RECT
+    property enum_callback : LibC::IntPtrT
+    property lpContext : Void*
+    def initialize(@cmd : Win32cr::System::WindowsProgramming::DCICMD, @rSrc : Win32cr::Foundation::RECT, @rDst : Win32cr::Foundation::RECT, @enum_callback : LibC::IntPtrT, @lpContext : Void*)
+    end
+  end
 
   @[Extern]
-  record DCIOFFSCREEN,
-    dciInfo : Win32cr::System::WindowsProgramming::DCISURFACEINFO,
-    draw : LibC::IntPtrT,
-    set_clip_list : LibC::IntPtrT,
-    set_destination : LibC::IntPtrT
+  struct DCIOFFSCREEN
+    property dciInfo : Win32cr::System::WindowsProgramming::DCISURFACEINFO
+    property draw : LibC::IntPtrT
+    property set_clip_list : LibC::IntPtrT
+    property set_destination : LibC::IntPtrT
+    def initialize(@dciInfo : Win32cr::System::WindowsProgramming::DCISURFACEINFO, @draw : LibC::IntPtrT, @set_clip_list : LibC::IntPtrT, @set_destination : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record DCIOVERLAY,
-    dciInfo : Win32cr::System::WindowsProgramming::DCISURFACEINFO,
-    dwChromakeyValue : UInt32,
-    dwChromakeyMask : UInt32
+  struct DCIOVERLAY
+    property dciInfo : Win32cr::System::WindowsProgramming::DCISURFACEINFO
+    property dwChromakeyValue : UInt32
+    property dwChromakeyMask : UInt32
+    def initialize(@dciInfo : Win32cr::System::WindowsProgramming::DCISURFACEINFO, @dwChromakeyValue : UInt32, @dwChromakeyMask : UInt32)
+    end
+  end
 
   @[Extern]
-  record STRENTRYA,
-    pszName : Win32cr::Foundation::PSTR,
-    pszValue : Win32cr::Foundation::PSTR
+  struct STRENTRYA
+    property pszName : Win32cr::Foundation::PSTR
+    property pszValue : Win32cr::Foundation::PSTR
+    def initialize(@pszName : Win32cr::Foundation::PSTR, @pszValue : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record STRENTRYW,
-    pszName : Win32cr::Foundation::PWSTR,
-    pszValue : Win32cr::Foundation::PWSTR
+  struct STRENTRYW
+    property pszName : Win32cr::Foundation::PWSTR
+    property pszValue : Win32cr::Foundation::PWSTR
+    def initialize(@pszName : Win32cr::Foundation::PWSTR, @pszValue : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record STRTABLEA,
-    cEntries : UInt32,
-    pse : Win32cr::System::WindowsProgramming::STRENTRYA*
+  struct STRTABLEA
+    property cEntries : UInt32
+    property pse : Win32cr::System::WindowsProgramming::STRENTRYA*
+    def initialize(@cEntries : UInt32, @pse : Win32cr::System::WindowsProgramming::STRENTRYA*)
+    end
+  end
 
   @[Extern]
-  record STRTABLEW,
-    cEntries : UInt32,
-    pse : Win32cr::System::WindowsProgramming::STRENTRYW*
+  struct STRTABLEW
+    property cEntries : UInt32
+    property pse : Win32cr::System::WindowsProgramming::STRENTRYW*
+    def initialize(@cEntries : UInt32, @pse : Win32cr::System::WindowsProgramming::STRENTRYW*)
+    end
+  end
 
   @[Extern]
-  record CABINFOA,
-    pszCab : Win32cr::Foundation::PSTR,
-    pszInf : Win32cr::Foundation::PSTR,
-    pszSection : Win32cr::Foundation::PSTR,
-    szSrcPath : Win32cr::Foundation::CHAR[260],
-    dwFlags : UInt32
+  struct CABINFOA
+    property pszCab : Win32cr::Foundation::PSTR
+    property pszInf : Win32cr::Foundation::PSTR
+    property pszSection : Win32cr::Foundation::PSTR
+    property szSrcPath : Win32cr::Foundation::CHAR[260]
+    property dwFlags : UInt32
+    def initialize(@pszCab : Win32cr::Foundation::PSTR, @pszInf : Win32cr::Foundation::PSTR, @pszSection : Win32cr::Foundation::PSTR, @szSrcPath : Win32cr::Foundation::CHAR[260], @dwFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record CABINFOW,
-    pszCab : Win32cr::Foundation::PWSTR,
-    pszInf : Win32cr::Foundation::PWSTR,
-    pszSection : Win32cr::Foundation::PWSTR,
-    szSrcPath : UInt16[260],
-    dwFlags : UInt32
+  struct CABINFOW
+    property pszCab : Win32cr::Foundation::PWSTR
+    property pszInf : Win32cr::Foundation::PWSTR
+    property pszSection : Win32cr::Foundation::PWSTR
+    property szSrcPath : UInt16[260]
+    property dwFlags : UInt32
+    def initialize(@pszCab : Win32cr::Foundation::PWSTR, @pszInf : Win32cr::Foundation::PWSTR, @pszSection : Win32cr::Foundation::PWSTR, @szSrcPath : UInt16[260], @dwFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record PERUSERSECTIONA,
-    szGUID : Win32cr::Foundation::CHAR[59],
-    szDispName : Win32cr::Foundation::CHAR[128],
-    szLocale : Win32cr::Foundation::CHAR[10],
-    szStub : Win32cr::Foundation::CHAR[1040],
-    szVersion : Win32cr::Foundation::CHAR[32],
-    szCompID : Win32cr::Foundation::CHAR[128],
-    dwIsInstalled : UInt32,
-    bRollback : Win32cr::Foundation::BOOL
+  struct PERUSERSECTIONA
+    property szGUID : Win32cr::Foundation::CHAR[59]
+    property szDispName : Win32cr::Foundation::CHAR[128]
+    property szLocale : Win32cr::Foundation::CHAR[10]
+    property szStub : Win32cr::Foundation::CHAR[1040]
+    property szVersion : Win32cr::Foundation::CHAR[32]
+    property szCompID : Win32cr::Foundation::CHAR[128]
+    property dwIsInstalled : UInt32
+    property bRollback : Win32cr::Foundation::BOOL
+    def initialize(@szGUID : Win32cr::Foundation::CHAR[59], @szDispName : Win32cr::Foundation::CHAR[128], @szLocale : Win32cr::Foundation::CHAR[10], @szStub : Win32cr::Foundation::CHAR[1040], @szVersion : Win32cr::Foundation::CHAR[32], @szCompID : Win32cr::Foundation::CHAR[128], @dwIsInstalled : UInt32, @bRollback : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record PERUSERSECTIONW,
-    szGUID : UInt16[59],
-    szDispName : UInt16[128],
-    szLocale : UInt16[10],
-    szStub : UInt16[1040],
-    szVersion : UInt16[32],
-    szCompID : UInt16[128],
-    dwIsInstalled : UInt32,
-    bRollback : Win32cr::Foundation::BOOL
+  struct PERUSERSECTIONW
+    property szGUID : UInt16[59]
+    property szDispName : UInt16[128]
+    property szLocale : UInt16[10]
+    property szStub : UInt16[1040]
+    property szVersion : UInt16[32]
+    property szCompID : UInt16[128]
+    property dwIsInstalled : UInt32
+    property bRollback : Win32cr::Foundation::BOOL
+    def initialize(@szGUID : UInt16[59], @szDispName : UInt16[128], @szLocale : UInt16[10], @szStub : UInt16[1040], @szVersion : UInt16[32], @szCompID : UInt16[128], @dwIsInstalled : UInt32, @bRollback : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record IMESTRUCT,
-    fnc : UInt32,
-    wParam : Win32cr::Foundation::WPARAM,
-    wCount : UInt32,
-    dchSource : UInt32,
-    dchDest : UInt32,
-    lParam1 : Win32cr::Foundation::LPARAM,
-    lParam2 : Win32cr::Foundation::LPARAM,
-    lParam3 : Win32cr::Foundation::LPARAM
+  struct IMESTRUCT
+    property fnc : UInt32
+    property wParam : Win32cr::Foundation::WPARAM
+    property wCount : UInt32
+    property dchSource : UInt32
+    property dchDest : UInt32
+    property lParam1 : Win32cr::Foundation::LPARAM
+    property lParam2 : Win32cr::Foundation::LPARAM
+    property lParam3 : Win32cr::Foundation::LPARAM
+    def initialize(@fnc : UInt32, @wParam : Win32cr::Foundation::WPARAM, @wCount : UInt32, @dchSource : UInt32, @dchDest : UInt32, @lParam1 : Win32cr::Foundation::LPARAM, @lParam2 : Win32cr::Foundation::LPARAM, @lParam3 : Win32cr::Foundation::LPARAM)
+    end
+  end
 
   @[Extern]
-  record UNDETERMINESTRUCT,
-    dwSize : UInt32,
-    uDefIMESize : UInt32,
-    uDefIMEPos : UInt32,
-    uUndetTextLen : UInt32,
-    uUndetTextPos : UInt32,
-    uUndetAttrPos : UInt32,
-    uCursorPos : UInt32,
-    uDeltaStart : UInt32,
-    uDetermineTextLen : UInt32,
-    uDetermineTextPos : UInt32,
-    uDetermineDelimPos : UInt32,
-    uYomiTextLen : UInt32,
-    uYomiTextPos : UInt32,
-    uYomiDelimPos : UInt32
+  struct UNDETERMINESTRUCT
+    property dwSize : UInt32
+    property uDefIMESize : UInt32
+    property uDefIMEPos : UInt32
+    property uUndetTextLen : UInt32
+    property uUndetTextPos : UInt32
+    property uUndetAttrPos : UInt32
+    property uCursorPos : UInt32
+    property uDeltaStart : UInt32
+    property uDetermineTextLen : UInt32
+    property uDetermineTextPos : UInt32
+    property uDetermineDelimPos : UInt32
+    property uYomiTextLen : UInt32
+    property uYomiTextPos : UInt32
+    property uYomiDelimPos : UInt32
+    def initialize(@dwSize : UInt32, @uDefIMESize : UInt32, @uDefIMEPos : UInt32, @uUndetTextLen : UInt32, @uUndetTextPos : UInt32, @uUndetAttrPos : UInt32, @uCursorPos : UInt32, @uDeltaStart : UInt32, @uDetermineTextLen : UInt32, @uDetermineTextPos : UInt32, @uDetermineDelimPos : UInt32, @uYomiTextLen : UInt32, @uYomiTextPos : UInt32, @uYomiDelimPos : UInt32)
+    end
+  end
 
   @[Extern]
-  record STRINGEXSTRUCT,
-    dwSize : UInt32,
-    uDeterminePos : UInt32,
-    uDetermineDelimPos : UInt32,
-    uYomiPos : UInt32,
-    uYomiDelimPos : UInt32
+  struct STRINGEXSTRUCT
+    property dwSize : UInt32
+    property uDeterminePos : UInt32
+    property uDetermineDelimPos : UInt32
+    property uYomiPos : UInt32
+    property uYomiDelimPos : UInt32
+    def initialize(@dwSize : UInt32, @uDeterminePos : UInt32, @uDetermineDelimPos : UInt32, @uYomiPos : UInt32, @uYomiDelimPos : UInt32)
+    end
+  end
 
   @[Extern]
-  record DATETIME,
-    year : UInt16,
-    month : UInt16,
-    day : UInt16,
-    hour : UInt16,
-    min : UInt16,
-    sec : UInt16
+  struct DATETIME
+    property year : UInt16
+    property month : UInt16
+    property day : UInt16
+    property hour : UInt16
+    property min : UInt16
+    property sec : UInt16
+    def initialize(@year : UInt16, @month : UInt16, @day : UInt16, @hour : UInt16, @min : UInt16, @sec : UInt16)
+    end
+  end
 
   @[Extern]
-  record IMEPROA,
-    hWnd : Win32cr::Foundation::HWND,
-    inst_date : Win32cr::System::WindowsProgramming::DATETIME,
-    wVersion : UInt32,
-    szDescription : UInt8[50],
-    szName : UInt8[80],
-    szOptions : UInt8[30]
+  struct IMEPROA
+    property hWnd : Win32cr::Foundation::HWND
+    property inst_date : Win32cr::System::WindowsProgramming::DATETIME
+    property wVersion : UInt32
+    property szDescription : UInt8[50]
+    property szName : UInt8[80]
+    property szOptions : UInt8[30]
+    def initialize(@hWnd : Win32cr::Foundation::HWND, @inst_date : Win32cr::System::WindowsProgramming::DATETIME, @wVersion : UInt32, @szDescription : UInt8[50], @szName : UInt8[80], @szOptions : UInt8[30])
+    end
+  end
 
   @[Extern]
-  record IMEPROW,
-    hWnd : Win32cr::Foundation::HWND,
-    inst_date : Win32cr::System::WindowsProgramming::DATETIME,
-    wVersion : UInt32,
-    szDescription : UInt16[50],
-    szName : UInt16[80],
-    szOptions : UInt16[30]
+  struct IMEPROW
+    property hWnd : Win32cr::Foundation::HWND
+    property inst_date : Win32cr::System::WindowsProgramming::DATETIME
+    property wVersion : UInt32
+    property szDescription : UInt16[50]
+    property szName : UInt16[80]
+    property szOptions : UInt16[30]
+    def initialize(@hWnd : Win32cr::Foundation::HWND, @inst_date : Win32cr::System::WindowsProgramming::DATETIME, @wVersion : UInt32, @szDescription : UInt16[50], @szName : UInt16[80], @szOptions : UInt16[30])
+    end
+  end
 
   @[Extern]
-  record JAVA_TRUST,
-    cbSize : UInt32,
-    flag : UInt32,
-    fAllActiveXPermissions : Win32cr::Foundation::BOOL,
-    fAllPermissions : Win32cr::Foundation::BOOL,
-    dwEncodingType : UInt32,
-    pbJavaPermissions : UInt8*,
-    cbJavaPermissions : UInt32,
-    pbSigner : UInt8*,
-    cbSigner : UInt32,
-    pwszZone : Win32cr::Foundation::PWSTR,
-    guidZone : LibC::GUID,
-    hVerify : Win32cr::Foundation::HRESULT
+  struct JAVA_TRUST
+    property cbSize : UInt32
+    property flag : UInt32
+    property fAllActiveXPermissions : Win32cr::Foundation::BOOL
+    property fAllPermissions : Win32cr::Foundation::BOOL
+    property dwEncodingType : UInt32
+    property pbJavaPermissions : UInt8*
+    property cbJavaPermissions : UInt32
+    property pbSigner : UInt8*
+    property cbSigner : UInt32
+    property pwszZone : Win32cr::Foundation::PWSTR
+    property guidZone : LibC::GUID
+    property hVerify : Win32cr::Foundation::HRESULT
+    def initialize(@cbSize : UInt32, @flag : UInt32, @fAllActiveXPermissions : Win32cr::Foundation::BOOL, @fAllPermissions : Win32cr::Foundation::BOOL, @dwEncodingType : UInt32, @pbJavaPermissions : UInt8*, @cbJavaPermissions : UInt32, @pbSigner : UInt8*, @cbSigner : UInt32, @pwszZone : Win32cr::Foundation::PWSTR, @guidZone : LibC::GUID, @hVerify : Win32cr::Foundation::HRESULT)
+    end
+  end
 
   @[Extern]
-  record TDIEntityID,
-    tei_entity : Win32cr::System::WindowsProgramming::TDIENTITY_ENTITY_TYPE,
-    tei_instance : UInt32
+  struct TDIEntityID
+    property tei_entity : Win32cr::System::WindowsProgramming::TDIENTITY_ENTITY_TYPE
+    property tei_instance : UInt32
+    def initialize(@tei_entity : Win32cr::System::WindowsProgramming::TDIENTITY_ENTITY_TYPE, @tei_instance : UInt32)
+    end
+  end
 
   @[Extern]
-  record TDIObjectID,
-    toi_entity : Win32cr::System::WindowsProgramming::TDIEntityID,
-    toi_class : UInt32,
-    toi_type : UInt32,
-    toi_id : UInt32
+  struct TDIObjectID
+    property toi_entity : Win32cr::System::WindowsProgramming::TDIEntityID
+    property toi_class : UInt32
+    property toi_type : UInt32
+    property toi_id : UInt32
+    def initialize(@toi_entity : Win32cr::System::WindowsProgramming::TDIEntityID, @toi_class : UInt32, @toi_type : UInt32, @toi_id : UInt32)
+    end
+  end
 
   @[Extern]
-  record Tcp_request_query_information_ex_xp,
-    id : Win32cr::System::WindowsProgramming::TDIObjectID,
-    context : LibC::UIntPtrT[2]
+  struct Tcp_request_query_information_ex_xp
+    property id : Win32cr::System::WindowsProgramming::TDIObjectID
+    property context : LibC::UIntPtrT[2]
+    def initialize(@id : Win32cr::System::WindowsProgramming::TDIObjectID, @context : LibC::UIntPtrT[2])
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record Tcp_request_query_information_ex32_xp,
-    id : Win32cr::System::WindowsProgramming::TDIObjectID,
-    context : UInt32[4]
+  struct Tcp_request_query_information_ex32_xp
+    property id : Win32cr::System::WindowsProgramming::TDIObjectID
+    property context : UInt32[4]
+    def initialize(@id : Win32cr::System::WindowsProgramming::TDIObjectID, @context : UInt32[4])
+    end
+  end
   {% end %}
 
   @[Extern]
-  record Tcp_request_query_information_ex_w2k,
-    id : Win32cr::System::WindowsProgramming::TDIObjectID,
-    context : UInt8[16]
-
-  @[Extern]
-  record Tcp_request_set_information_ex,
-    id : Win32cr::System::WindowsProgramming::TDIObjectID,
-    buffer_size : UInt32,
-    buffer : UInt8*
-
-  @[Extern]
-  record TDI_TL_IO_CONTROL_ENDPOINT,
-    type__ : Win32cr::System::WindowsProgramming::TDI_TL_IO_CONTROL_TYPE,
-    level : UInt32,
-    anonymous : Anonymous_e__Union_,
-    input_buffer : Void*,
-    input_buffer_length : UInt32,
-    output_buffer : Void*,
-    output_buffer_length : UInt32 do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      io_control_code : UInt32,
-      option_name : UInt32
-
+  struct Tcp_request_query_information_ex_w2k
+    property id : Win32cr::System::WindowsProgramming::TDIObjectID
+    property context : UInt8[16]
+    def initialize(@id : Win32cr::System::WindowsProgramming::TDIObjectID, @context : UInt8[16])
+    end
   end
 
   @[Extern]
-  record WLDP_HOST_INFORMATION,
-    dwRevision : UInt32,
-    dwHostId : Win32cr::System::WindowsProgramming::WLDP_HOST_ID,
-    szSource : Win32cr::Foundation::PWSTR,
-    hSource : Win32cr::Foundation::HANDLE
+  struct Tcp_request_set_information_ex
+    property id : Win32cr::System::WindowsProgramming::TDIObjectID
+    property buffer_size : UInt32
+    property buffer : UInt8*
+    def initialize(@id : Win32cr::System::WindowsProgramming::TDIObjectID, @buffer_size : UInt32, @buffer : UInt8*)
+    end
+  end
 
   @[Extern]
-  record WLDP_DEVICE_SECURITY_INFORMATION,
-    unlock_id_size : UInt32,
-    unlock_id : UInt8*,
-    manufacturer_id_length : UInt32,
-    manufacturer_id : Win32cr::Foundation::PWSTR
+  struct TDI_TL_IO_CONTROL_ENDPOINT
+    property type__ : Win32cr::System::WindowsProgramming::TDI_TL_IO_CONTROL_TYPE
+    property level : UInt32
+    property anonymous : Anonymous_e__Union_
+    property input_buffer : Void*
+    property input_buffer_length : UInt32
+    property output_buffer : Void*
+    property output_buffer_length : UInt32
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property io_control_code : UInt32
+    property option_name : UInt32
+    def initialize(@io_control_code : UInt32, @option_name : UInt32)
+    end
+    end
+
+    def initialize(@type__ : Win32cr::System::WindowsProgramming::TDI_TL_IO_CONTROL_TYPE, @level : UInt32, @anonymous : Anonymous_e__Union_, @input_buffer : Void*, @input_buffer_length : UInt32, @output_buffer : Void*, @output_buffer_length : UInt32)
+    end
+  end
 
   @[Extern]
-  record DELAYLOAD_PROC_DESCRIPTOR,
-    import_described_by_name : UInt32,
-    description : Description_e__Union_ do
+  struct WLDP_HOST_INFORMATION
+    property dwRevision : UInt32
+    property dwHostId : Win32cr::System::WindowsProgramming::WLDP_HOST_ID
+    property szSource : Win32cr::Foundation::PWSTR
+    property hSource : Win32cr::Foundation::HANDLE
+    def initialize(@dwRevision : UInt32, @dwHostId : Win32cr::System::WindowsProgramming::WLDP_HOST_ID, @szSource : Win32cr::Foundation::PWSTR, @hSource : Win32cr::Foundation::HANDLE)
+    end
+  end
+
+  @[Extern]
+  struct WLDP_DEVICE_SECURITY_INFORMATION
+    property unlock_id_size : UInt32
+    property unlock_id : UInt8*
+    property manufacturer_id_length : UInt32
+    property manufacturer_id : Win32cr::Foundation::PWSTR
+    def initialize(@unlock_id_size : UInt32, @unlock_id : UInt8*, @manufacturer_id_length : UInt32, @manufacturer_id : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct DELAYLOAD_PROC_DESCRIPTOR
+    property import_described_by_name : UInt32
+    property description : Description_e__Union_
 
     # Nested Type Description_e__Union_
     @[Extern(union: true)]
-    record Description_e__Union_,
-      name : Win32cr::Foundation::PSTR,
-      ordinal : UInt32
+    struct Description_e__Union_
+    property name : Win32cr::Foundation::PSTR
+    property ordinal : UInt32
+    def initialize(@name : Win32cr::Foundation::PSTR, @ordinal : UInt32)
+    end
+    end
 
+    def initialize(@import_described_by_name : UInt32, @description : Description_e__Union_)
+    end
   end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record DELAYLOAD_INFO,
-    size : UInt32,
-    delayload_descriptor : Win32cr::System::WindowsProgramming::IMAGE_DELAYLOAD_DESCRIPTOR*,
-    thunk_address : Win32cr::System::WindowsProgramming::IMAGE_THUNK_DATA64*,
-    target_dll_name : Win32cr::Foundation::PSTR,
-    target_api_descriptor : Win32cr::System::WindowsProgramming::DELAYLOAD_PROC_DESCRIPTOR,
-    target_module_base : Void*,
-    unused : Void*,
-    last_error : UInt32
+  struct DELAYLOAD_INFO
+    property size : UInt32
+    property delayload_descriptor : Win32cr::System::WindowsProgramming::IMAGE_DELAYLOAD_DESCRIPTOR*
+    property thunk_address : Win32cr::System::WindowsProgramming::IMAGE_THUNK_DATA64*
+    property target_dll_name : Win32cr::Foundation::PSTR
+    property target_api_descriptor : Win32cr::System::WindowsProgramming::DELAYLOAD_PROC_DESCRIPTOR
+    property target_module_base : Void*
+    property unused : Void*
+    property last_error : UInt32
+    def initialize(@size : UInt32, @delayload_descriptor : Win32cr::System::WindowsProgramming::IMAGE_DELAYLOAD_DESCRIPTOR*, @thunk_address : Win32cr::System::WindowsProgramming::IMAGE_THUNK_DATA64*, @target_dll_name : Win32cr::Foundation::PSTR, @target_api_descriptor : Win32cr::System::WindowsProgramming::DELAYLOAD_PROC_DESCRIPTOR, @target_module_base : Void*, @unused : Void*, @last_error : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record DELAYLOAD_INFO,
-    size : UInt32,
-    delayload_descriptor : Win32cr::System::WindowsProgramming::IMAGE_DELAYLOAD_DESCRIPTOR*,
-    thunk_address : Win32cr::System::WindowsProgramming::IMAGE_THUNK_DATA32*,
-    target_dll_name : Win32cr::Foundation::PSTR,
-    target_api_descriptor : Win32cr::System::WindowsProgramming::DELAYLOAD_PROC_DESCRIPTOR,
-    target_module_base : Void*,
-    unused : Void*,
-    last_error : UInt32
+  struct DELAYLOAD_INFO
+    property size : UInt32
+    property delayload_descriptor : Win32cr::System::WindowsProgramming::IMAGE_DELAYLOAD_DESCRIPTOR*
+    property thunk_address : Win32cr::System::WindowsProgramming::IMAGE_THUNK_DATA32*
+    property target_dll_name : Win32cr::Foundation::PSTR
+    property target_api_descriptor : Win32cr::System::WindowsProgramming::DELAYLOAD_PROC_DESCRIPTOR
+    property target_module_base : Void*
+    property unused : Void*
+    property last_error : UInt32
+    def initialize(@size : UInt32, @delayload_descriptor : Win32cr::System::WindowsProgramming::IMAGE_DELAYLOAD_DESCRIPTOR*, @thunk_address : Win32cr::System::WindowsProgramming::IMAGE_THUNK_DATA32*, @target_dll_name : Win32cr::Foundation::PSTR, @target_api_descriptor : Win32cr::System::WindowsProgramming::DELAYLOAD_PROC_DESCRIPTOR, @target_module_base : Void*, @unused : Void*, @last_error : UInt32)
+    end
+  end
   {% end %}
 
   @[Extern]
@@ -1402,7 +1627,6 @@ module Win32cr::System::WindowsProgramming
 
 
   @[Extern]
-  #@[Com("1bfa0c2c-fbcd-4776-bda4-88bf974e74f4")]
   record ICameraUIControlEventCallback, lpVtbl : ICameraUIControlEventCallbackVtbl* do
     GUID = LibC::GUID.new(0x1bfa0c2c_u32, 0xfbcd_u16, 0x4776_u16, StaticArray[0xbd_u8, 0xa4_u8, 0x88_u8, 0xbf_u8, 0x97_u8, 0x4e_u8, 0x74_u8, 0xf4_u8])
     def query_interface(this : ICameraUIControlEventCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1448,7 +1672,6 @@ module Win32cr::System::WindowsProgramming
 
 
   @[Extern]
-  #@[Com("b8733adf-3d68-4b8f-bb08-e28a0bed0376")]
   record ICameraUIControl, lpVtbl : ICameraUIControlVtbl* do
     GUID = LibC::GUID.new(0xb8733adf_u32, 0x3d68_u16, 0x4b8f_u16, StaticArray[0xbb_u8, 0x8_u8, 0xe2_u8, 0x8a_u8, 0xb_u8, 0xed_u8, 0x3_u8, 0x76_u8])
     def query_interface(this : ICameraUIControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1500,7 +1723,6 @@ module Win32cr::System::WindowsProgramming
 
 
   @[Extern]
-  #@[Com("d3e9e342-5deb-43b6-849e-6913b85d503a")]
   record IEditionUpgradeHelper, lpVtbl : IEditionUpgradeHelperVtbl* do
     GUID = LibC::GUID.new(0xd3e9e342_u32, 0x5deb_u16, 0x43b6_u16, StaticArray[0x84_u8, 0x9e_u8, 0x69_u8, 0x13_u8, 0xb8_u8, 0x5d_u8, 0x50_u8, 0x3a_u8])
     def query_interface(this : IEditionUpgradeHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1539,7 +1761,6 @@ module Win32cr::System::WindowsProgramming
 
 
   @[Extern]
-  #@[Com("f342d19e-cc22-4648-bb5d-03ccf75b47c5")]
   record IWindowsLockModeHelper, lpVtbl : IWindowsLockModeHelperVtbl* do
     GUID = LibC::GUID.new(0xf342d19e_u32, 0xcc22_u16, 0x4648_u16, StaticArray[0xbb_u8, 0x5d_u8, 0x3_u8, 0xcc_u8, 0xf7_u8, 0x5b_u8, 0x47_u8, 0xc5_u8])
     def query_interface(this : IWindowsLockModeHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1569,7 +1790,6 @@ module Win32cr::System::WindowsProgramming
 
 
   @[Extern]
-  #@[Com("ff19cbcf-9455-4937-b872-6b7929a460af")]
   record IEditionUpgradeBroker, lpVtbl : IEditionUpgradeBrokerVtbl* do
     GUID = LibC::GUID.new(0xff19cbcf_u32, 0x9455_u16, 0x4937_u16, StaticArray[0xb8_u8, 0x72_u8, 0x6b_u8, 0x79_u8, 0x29_u8, 0xa4_u8, 0x60_u8, 0xaf_u8])
     def query_interface(this : IEditionUpgradeBroker*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1605,7 +1825,6 @@ module Win32cr::System::WindowsProgramming
 
 
   @[Extern]
-  #@[Com("b524f93f-80d5-4ec7-ae9e-d66e93ade1fa")]
   record IContainerActivationHelper, lpVtbl : IContainerActivationHelperVtbl* do
     GUID = LibC::GUID.new(0xb524f93f_u32, 0x80d5_u16, 0x4ec7_u16, StaticArray[0xae_u8, 0x9e_u8, 0xd6_u8, 0x6e_u8, 0x93_u8, 0xad_u8, 0xe1_u8, 0xfa_u8])
     def query_interface(this : IContainerActivationHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1632,7 +1851,6 @@ module Win32cr::System::WindowsProgramming
 
 
   @[Extern]
-  #@[Com("c39948f0-6142-44fd-98ca-e1681a8d68b5")]
   record IClipServiceNotificationHelper, lpVtbl : IClipServiceNotificationHelperVtbl* do
     GUID = LibC::GUID.new(0xc39948f0_u32, 0x6142_u16, 0x44fd_u16, StaticArray[0x98_u8, 0xca_u8, 0xe1_u8, 0x68_u8, 0x1a_u8, 0x8d_u8, 0x68_u8, 0xb5_u8])
     def query_interface(this : IClipServiceNotificationHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1659,7 +1877,6 @@ module Win32cr::System::WindowsProgramming
 
 
   @[Extern]
-  #@[Com("7a27faad-5ae6-4255-9030-c530936292e3")]
   record IDefaultBrowserSyncSettings, lpVtbl : IDefaultBrowserSyncSettingsVtbl* do
     GUID = LibC::GUID.new(0x7a27faad_u32, 0x5ae6_u16, 0x4255_u16, StaticArray[0x90_u8, 0x30_u8, 0xc5_u8, 0x30_u8, 0x93_u8, 0x62_u8, 0x92_u8, 0xe3_u8])
     def query_interface(this : IDefaultBrowserSyncSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1686,7 +1903,6 @@ module Win32cr::System::WindowsProgramming
 
 
   @[Extern]
-  #@[Com("cf38ed4b-2be7-4461-8b5e-9a466dc82ae3")]
   record IDeleteBrowsingHistory, lpVtbl : IDeleteBrowsingHistoryVtbl* do
     GUID = LibC::GUID.new(0xcf38ed4b_u32, 0x2be7_u16, 0x4461_u16, StaticArray[0x8b_u8, 0x5e_u8, 0x9a_u8, 0x46_u8, 0x6d_u8, 0xc8_u8, 0x2a_u8, 0xe3_u8])
     def query_interface(this : IDeleteBrowsingHistory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1705,16 +1921,9 @@ module Win32cr::System::WindowsProgramming
   end
 
   @[Link("ntdll")]
-  @[Link("api-ms-win-core-apiquery-l2-1-0")]
   @[Link("kernel32")]
-  @[Link("api-ms-win-core-realtime-l1-1-1")]
-  @[Link("api-ms-win-core-realtime-l1-1-2")]
   @[Link("advapi32")]
-  @[Link("api-ms-win-core-backgroundtask-l1-1-0")]
-  @[Link("api-ms-win-core-featurestaging-l1-1-0")]
-  @[Link("api-ms-win-core-featurestaging-l1-1-1")]
   @[Link("dciman32")]
-  @[Link("api-ms-win-dx-d3dkmt-l1-1-0")]
   @[Link("advpack")]
   @[Link("user32")]
   @[Link("apphelp")]

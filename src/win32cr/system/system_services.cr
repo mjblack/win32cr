@@ -5,33 +5,33 @@ require "./../graphics/gdi.cr"
 require "./../security.cr"
 
 module Win32cr::System::SystemServices
-  alias PUMS_SCHEDULER_ENTRY_POINT = Proc(Win32cr::System::SystemServices::RTL_UMS_SCHEDULER_REASON, LibC::UIntPtrT, Void*, Void)*
+  alias PUMS_SCHEDULER_ENTRY_POINT = Proc(Win32cr::System::SystemServices::RTL_UMS_SCHEDULER_REASON, LibC::UIntPtrT, Void*, Void)
 
   {% if flag?(:arm) %}
-  alias PTERMINATION_HANDLER = Proc(Win32cr::Foundation::BOOLEAN, UInt64, Void)*
+  alias PTERMINATION_HANDLER = Proc(Win32cr::Foundation::BOOLEAN, UInt64, Void)
   {% end %}
 
   {% if flag?(:arm) %}
-  alias POUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK = Proc(Win32cr::Foundation::HANDLE, Void*, UInt32*, Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY**, UInt32)*
+  alias POUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK = Proc(Win32cr::Foundation::HANDLE, Void*, UInt32*, Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY**, UInt32)
   {% end %}
 
   {% if flag?(:x86_64) %}
-  alias POUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK = Proc(Win32cr::Foundation::HANDLE, Void*, UInt32*, Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY**, UInt32)*
+  alias POUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK = Proc(Win32cr::Foundation::HANDLE, Void*, UInt32*, Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY**, UInt32)
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
-  alias PEXCEPTION_FILTER = Proc(Win32cr::System::Diagnostics::Debug::EXCEPTION_POINTERS*, Void*, Int32)*
+  alias PEXCEPTION_FILTER = Proc(Win32cr::System::Diagnostics::Debug::EXCEPTION_POINTERS*, Void*, Int32)
   {% end %}
 
   {% if flag?(:x86_64) %}
-  alias PTERMINATION_HANDLER = Proc(Win32cr::Foundation::BOOLEAN, Void*, Void)*
+  alias PTERMINATION_HANDLER = Proc(Win32cr::Foundation::BOOLEAN, Void*, Void)
   {% end %}
 
-  alias PIMAGE_TLS_CALLBACK = Proc(Void*, UInt32, Void*, Void)*
+  alias PIMAGE_TLS_CALLBACK = Proc(Void*, UInt32, Void*, Void)
 
-  alias WORKERCALLBACKFUNC = Proc(Void*, Void)*
+  alias WORKERCALLBACKFUNC = Proc(Void*, Void)
 
-  alias APC_CALLBACK_FUNCTION = Proc(UInt32, Void*, Void*, Void)*
+  alias APC_CALLBACK_FUNCTION = Proc(UInt32, Void*, Void*, Void)
 
   MM_HINT_T0_ = 1_u32
   MM_HINT_T1_ = 2_u32
@@ -3739,2211 +3739,3020 @@ module Win32cr::System::SystemServices
   end
 
   @[Extern]
-  record TP_POOL
-  @[Extern]
-  record TP_CLEANUP_GROUP
-  @[Extern]
-  record TEB
-  @[Extern]
-  record RemHGLOBAL,
-    fNullHGlobal : Int32,
-    cbData : UInt32,
-    data : UInt8*
-
-  @[Extern]
-  record RemHMETAFILEPICT,
-    mm : Int32,
-    xExt : Int32,
-    yExt : Int32,
-    cbData : UInt32,
-    data : UInt8*
-
-  @[Extern]
-  record RemHENHMETAFILE,
-    cbData : UInt32,
-    data : UInt8*
-
-  @[Extern]
-  record RemHBITMAP,
-    cbData : UInt32,
-    data : UInt8*
-
-  @[Extern]
-  record RemHPALETTE,
-    cbData : UInt32,
-    data : UInt8*
-
-  @[Extern]
-  record RemBRUSH,
-    cbData : UInt32,
-    data : UInt8*
-
-  @[Extern]
-  record Userclipformat,
-    fContext : Int32,
-    u : U_e__struct_ do
-
-    # Nested Type U_e__struct_
-    @[Extern(union: true)]
-    record U_e__struct_,
-      dwValue : UInt32,
-      pwszName : Win32cr::Foundation::PWSTR
-
+  struct TP_POOL
+    def initialize()
+    end
   end
 
   @[Extern]
-  record GDI_NONREMOTE,
-    fContext : Int32,
-    u : U_e__struct_ do
-
-    # Nested Type U_e__struct_
-    @[Extern(union: true)]
-    record U_e__struct_,
-      hInproc : Int32,
-      hRemote : Win32cr::System::Com::DWORD_BLOB*
-
+  struct TP_CLEANUP_GROUP
+    def initialize()
+    end
   end
 
   @[Extern]
-  record Userhglobal,
-    fContext : Int32,
-    u : U_e__struct_ do
-
-    # Nested Type U_e__struct_
-    @[Extern(union: true)]
-    record U_e__struct_,
-      hInproc : Int32,
-      hRemote : Win32cr::System::Com::FLAGGED_BYTE_BLOB*,
-      hInproc64 : Int64
-
+  struct TEB
+    def initialize()
+    end
   end
 
   @[Extern]
-  record Userhmetafile,
-    fContext : Int32,
-    u : U_e__struct_ do
-
-    # Nested Type U_e__struct_
-    @[Extern(union: true)]
-    record U_e__struct_,
-      hInproc : Int32,
-      hRemote : Win32cr::System::Com::BYTE_BLOB*,
-      hInproc64 : Int64
-
+  struct RemHGLOBAL
+    property fNullHGlobal : Int32
+    property cbData : UInt32
+    property data : UInt8*
+    def initialize(@fNullHGlobal : Int32, @cbData : UInt32, @data : UInt8*)
+    end
   end
 
   @[Extern]
-  record Remotemetafilepict,
-    mm : Int32,
-    xExt : Int32,
-    yExt : Int32,
-    hMF : Win32cr::System::SystemServices::Userhmetafile*
-
-  @[Extern]
-  record Userhmetafilepict,
-    fContext : Int32,
-    u : U_e__struct_ do
-
-    # Nested Type U_e__struct_
-    @[Extern(union: true)]
-    record U_e__struct_,
-      hInproc : Int32,
-      hRemote : Win32cr::System::SystemServices::Remotemetafilepict*,
-      hInproc64 : Int64
-
+  struct RemHMETAFILEPICT
+    property mm : Int32
+    property xExt : Int32
+    property yExt : Int32
+    property cbData : UInt32
+    property data : UInt8*
+    def initialize(@mm : Int32, @xExt : Int32, @yExt : Int32, @cbData : UInt32, @data : UInt8*)
+    end
   end
 
   @[Extern]
-  record Userhenhmetafile,
-    fContext : Int32,
-    u : U_e__struct_ do
-
-    # Nested Type U_e__struct_
-    @[Extern(union: true)]
-    record U_e__struct_,
-      hInproc : Int32,
-      hRemote : Win32cr::System::Com::BYTE_BLOB*,
-      hInproc64 : Int64
-
+  struct RemHENHMETAFILE
+    property cbData : UInt32
+    property data : UInt8*
+    def initialize(@cbData : UInt32, @data : UInt8*)
+    end
   end
 
   @[Extern]
-  record Userbitmap,
-    bmType : Int32,
-    bmWidth : Int32,
-    bmHeight : Int32,
-    bmWidthBytes : Int32,
-    bmPlanes : UInt16,
-    bmBitsPixel : UInt16,
-    cbSize : UInt32,
-    pBuffer : UInt8*
-
-  @[Extern]
-  record Userhbitmap,
-    fContext : Int32,
-    u : U_e__struct_ do
-
-    # Nested Type U_e__struct_
-    @[Extern(union: true)]
-    record U_e__struct_,
-      hInproc : Int32,
-      hRemote : Win32cr::System::SystemServices::Userbitmap*,
-      hInproc64 : Int64
-
+  struct RemHBITMAP
+    property cbData : UInt32
+    property data : UInt8*
+    def initialize(@cbData : UInt32, @data : UInt8*)
+    end
   end
 
   @[Extern]
-  record Userhpalette,
-    fContext : Int32,
-    u : U_e__struct_ do
-
-    # Nested Type U_e__struct_
-    @[Extern(union: true)]
-    record U_e__struct_,
-      hInproc : Int32,
-      hRemote : Win32cr::Graphics::Gdi::LOGPALETTE*,
-      hInproc64 : Int64
-
+  struct RemHPALETTE
+    property cbData : UInt32
+    property data : UInt8*
+    def initialize(@cbData : UInt32, @data : UInt8*)
+    end
   end
 
   @[Extern]
-  record RemotableHandle,
-    fContext : Int32,
-    u : U_e__struct_ do
-
-    # Nested Type U_e__struct_
-    @[Extern(union: true)]
-    record U_e__struct_,
-      hInproc : Int32,
-      hRemote : Int32
-
+  struct RemBRUSH
+    property cbData : UInt32
+    property data : UInt8*
+    def initialize(@cbData : UInt32, @data : UInt8*)
+    end
   end
 
   @[Extern]
-  record DEVICE_EVENT_MOUNT,
-    version : UInt32,
-    flags : UInt32,
-    file_system_name_length : UInt32,
-    file_system_name_offset : UInt32
+  struct Userclipformat
+    property fContext : Int32
+    property u : U_e__struct_
+
+    # Nested Type U_e__struct_
+    @[Extern(union: true)]
+    struct U_e__struct_
+    property dwValue : UInt32
+    property pwszName : Win32cr::Foundation::PWSTR
+    def initialize(@dwValue : UInt32, @pwszName : Win32cr::Foundation::PWSTR)
+    end
+    end
+
+    def initialize(@fContext : Int32, @u : U_e__struct_)
+    end
+  end
 
   @[Extern]
-  record DEVICE_EVENT_BECOMING_READY,
-    version : UInt32,
-    reason : UInt32,
-    estimated100ms_to_ready : UInt32
+  struct GDI_NONREMOTE
+    property fContext : Int32
+    property u : U_e__struct_
+
+    # Nested Type U_e__struct_
+    @[Extern(union: true)]
+    struct U_e__struct_
+    property hInproc : Int32
+    property hRemote : Win32cr::System::Com::DWORD_BLOB*
+    def initialize(@hInproc : Int32, @hRemote : Win32cr::System::Com::DWORD_BLOB*)
+    end
+    end
+
+    def initialize(@fContext : Int32, @u : U_e__struct_)
+    end
+  end
 
   @[Extern]
-  record DEVICE_EVENT_EXTERNAL_REQUEST,
-    version : UInt32,
-    device_class : UInt32,
-    button_status : UInt16,
-    request : UInt16,
-    system_time : Win32cr::Foundation::LARGE_INTEGER
+  struct Userhglobal
+    property fContext : Int32
+    property u : U_e__struct_
+
+    # Nested Type U_e__struct_
+    @[Extern(union: true)]
+    struct U_e__struct_
+    property hInproc : Int32
+    property hRemote : Win32cr::System::Com::FLAGGED_BYTE_BLOB*
+    property hInproc64 : Int64
+    def initialize(@hInproc : Int32, @hRemote : Win32cr::System::Com::FLAGGED_BYTE_BLOB*, @hInproc64 : Int64)
+    end
+    end
+
+    def initialize(@fContext : Int32, @u : U_e__struct_)
+    end
+  end
 
   @[Extern]
-  record DEVICE_EVENT_GENERIC_DATA,
-    event_number : UInt32
+  struct Userhmetafile
+    property fContext : Int32
+    property u : U_e__struct_
+
+    # Nested Type U_e__struct_
+    @[Extern(union: true)]
+    struct U_e__struct_
+    property hInproc : Int32
+    property hRemote : Win32cr::System::Com::BYTE_BLOB*
+    property hInproc64 : Int64
+    def initialize(@hInproc : Int32, @hRemote : Win32cr::System::Com::BYTE_BLOB*, @hInproc64 : Int64)
+    end
+    end
+
+    def initialize(@fContext : Int32, @u : U_e__struct_)
+    end
+  end
 
   @[Extern]
-  record DEVICE_EVENT_RBC_DATA,
-    event_number : UInt32,
-    sense_qualifier : UInt8,
-    sense_code : UInt8,
-    sense_key : UInt8,
-    reserved : UInt8,
-    information : UInt32
+  struct Remotemetafilepict
+    property mm : Int32
+    property xExt : Int32
+    property yExt : Int32
+    property hMF : Win32cr::System::SystemServices::Userhmetafile*
+    def initialize(@mm : Int32, @xExt : Int32, @yExt : Int32, @hMF : Win32cr::System::SystemServices::Userhmetafile*)
+    end
+  end
 
   @[Extern]
-  record GUID_IO_DISK_CLONE_ARRIVAL_INFORMATION,
-    disk_number : UInt32
+  struct Userhmetafilepict
+    property fContext : Int32
+    property u : U_e__struct_
+
+    # Nested Type U_e__struct_
+    @[Extern(union: true)]
+    struct U_e__struct_
+    property hInproc : Int32
+    property hRemote : Win32cr::System::SystemServices::Remotemetafilepict*
+    property hInproc64 : Int64
+    def initialize(@hInproc : Int32, @hRemote : Win32cr::System::SystemServices::Remotemetafilepict*, @hInproc64 : Int64)
+    end
+    end
+
+    def initialize(@fContext : Int32, @u : U_e__struct_)
+    end
+  end
 
   @[Extern]
-  record DISK_HEALTH_NOTIFICATION_DATA,
-    device_guid : LibC::GUID
+  struct Userhenhmetafile
+    property fContext : Int32
+    property u : U_e__struct_
+
+    # Nested Type U_e__struct_
+    @[Extern(union: true)]
+    struct U_e__struct_
+    property hInproc : Int32
+    property hRemote : Win32cr::System::Com::BYTE_BLOB*
+    property hInproc64 : Int64
+    def initialize(@hInproc : Int32, @hRemote : Win32cr::System::Com::BYTE_BLOB*, @hInproc64 : Int64)
+    end
+    end
+
+    def initialize(@fContext : Int32, @u : U_e__struct_)
+    end
+  end
 
   @[Extern]
-  record REDBOOK_DIGITAL_AUDIO_EXTRACTION_INFO,
-    version : UInt32,
-    accurate : UInt32,
-    supported : UInt32,
-    accurate_mask0 : UInt32
+  struct Userbitmap
+    property bmType : Int32
+    property bmWidth : Int32
+    property bmHeight : Int32
+    property bmWidthBytes : Int32
+    property bmPlanes : UInt16
+    property bmBitsPixel : UInt16
+    property cbSize : UInt32
+    property pBuffer : UInt8*
+    def initialize(@bmType : Int32, @bmWidth : Int32, @bmHeight : Int32, @bmWidthBytes : Int32, @bmPlanes : UInt16, @bmBitsPixel : UInt16, @cbSize : UInt32, @pBuffer : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DEV_BROADCAST_HDR,
-    dbch_size : UInt32,
-    dbch_devicetype : Win32cr::System::SystemServices::DEV_BROADCAST_HDR_DEVICE_TYPE,
-    dbch_reserved : UInt32
+  struct Userhbitmap
+    property fContext : Int32
+    property u : U_e__struct_
+
+    # Nested Type U_e__struct_
+    @[Extern(union: true)]
+    struct U_e__struct_
+    property hInproc : Int32
+    property hRemote : Win32cr::System::SystemServices::Userbitmap*
+    property hInproc64 : Int64
+    def initialize(@hInproc : Int32, @hRemote : Win32cr::System::SystemServices::Userbitmap*, @hInproc64 : Int64)
+    end
+    end
+
+    def initialize(@fContext : Int32, @u : U_e__struct_)
+    end
+  end
 
   @[Extern]
-  record VolLockBroadcast,
-    vlb_dbh : Win32cr::System::SystemServices::DEV_BROADCAST_HDR,
-    vlb_owner : UInt32,
-    vlb_perms : UInt8,
-    vlb_lockType : UInt8,
-    vlb_drive : UInt8,
-    vlb_flags : UInt8
+  struct Userhpalette
+    property fContext : Int32
+    property u : U_e__struct_
+
+    # Nested Type U_e__struct_
+    @[Extern(union: true)]
+    struct U_e__struct_
+    property hInproc : Int32
+    property hRemote : Win32cr::Graphics::Gdi::LOGPALETTE*
+    property hInproc64 : Int64
+    def initialize(@hInproc : Int32, @hRemote : Win32cr::Graphics::Gdi::LOGPALETTE*, @hInproc64 : Int64)
+    end
+    end
+
+    def initialize(@fContext : Int32, @u : U_e__struct_)
+    end
+  end
 
   @[Extern]
-  record DEV_BROADCAST_HEADER_,
-    dbcd_size : UInt32,
-    dbcd_devicetype : UInt32,
-    dbcd_reserved : UInt32
+  struct RemotableHandle
+    property fContext : Int32
+    property u : U_e__struct_
+
+    # Nested Type U_e__struct_
+    @[Extern(union: true)]
+    struct U_e__struct_
+    property hInproc : Int32
+    property hRemote : Int32
+    def initialize(@hInproc : Int32, @hRemote : Int32)
+    end
+    end
+
+    def initialize(@fContext : Int32, @u : U_e__struct_)
+    end
+  end
 
   @[Extern]
-  record DEV_BROADCAST_OEM,
-    dbco_size : UInt32,
-    dbco_devicetype : UInt32,
-    dbco_reserved : UInt32,
-    dbco_identifier : UInt32,
-    dbco_suppfunc : UInt32
+  struct DEVICE_EVENT_MOUNT
+    property version : UInt32
+    property flags : UInt32
+    property file_system_name_length : UInt32
+    property file_system_name_offset : UInt32
+    def initialize(@version : UInt32, @flags : UInt32, @file_system_name_length : UInt32, @file_system_name_offset : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEV_BROADCAST_DEVNODE,
-    dbcd_size : UInt32,
-    dbcd_devicetype : UInt32,
-    dbcd_reserved : UInt32,
-    dbcd_devnode : UInt32
+  struct DEVICE_EVENT_BECOMING_READY
+    property version : UInt32
+    property reason : UInt32
+    property estimated100ms_to_ready : UInt32
+    def initialize(@version : UInt32, @reason : UInt32, @estimated100ms_to_ready : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEV_BROADCAST_VOLUME,
-    dbcv_size : UInt32,
-    dbcv_devicetype : UInt32,
-    dbcv_reserved : UInt32,
-    dbcv_unitmask : UInt32,
-    dbcv_flags : Win32cr::System::SystemServices::DEV_BROADCAST_VOLUME_FLAGS
+  struct DEVICE_EVENT_EXTERNAL_REQUEST
+    property version : UInt32
+    property device_class : UInt32
+    property button_status : UInt16
+    property request : UInt16
+    property system_time : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@version : UInt32, @device_class : UInt32, @button_status : UInt16, @request : UInt16, @system_time : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
 
   @[Extern]
-  record DEV_BROADCAST_PORT_A,
-    dbcp_size : UInt32,
-    dbcp_devicetype : UInt32,
-    dbcp_reserved : UInt32,
-    dbcp_name : Win32cr::Foundation::CHAR*
+  struct DEVICE_EVENT_GENERIC_DATA
+    property event_number : UInt32
+    def initialize(@event_number : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEV_BROADCAST_PORT_W,
-    dbcp_size : UInt32,
-    dbcp_devicetype : UInt32,
-    dbcp_reserved : UInt32,
-    dbcp_name : UInt16*
+  struct DEVICE_EVENT_RBC_DATA
+    property event_number : UInt32
+    property sense_qualifier : UInt8
+    property sense_code : UInt8
+    property sense_key : UInt8
+    property reserved : UInt8
+    property information : UInt32
+    def initialize(@event_number : UInt32, @sense_qualifier : UInt8, @sense_code : UInt8, @sense_key : UInt8, @reserved : UInt8, @information : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEV_BROADCAST_NET,
-    dbcn_size : UInt32,
-    dbcn_devicetype : UInt32,
-    dbcn_reserved : UInt32,
-    dbcn_resource : UInt32,
-    dbcn_flags : UInt32
+  struct GUID_IO_DISK_CLONE_ARRIVAL_INFORMATION
+    property disk_number : UInt32
+    def initialize(@disk_number : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEV_BROADCAST_DEVICEINTERFACE_A,
-    dbcc_size : UInt32,
-    dbcc_devicetype : UInt32,
-    dbcc_reserved : UInt32,
-    dbcc_classguid : LibC::GUID,
-    dbcc_name : Win32cr::Foundation::CHAR*
+  struct DISK_HEALTH_NOTIFICATION_DATA
+    property device_guid : LibC::GUID
+    def initialize(@device_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record DEV_BROADCAST_DEVICEINTERFACE_W,
-    dbcc_size : UInt32,
-    dbcc_devicetype : UInt32,
-    dbcc_reserved : UInt32,
-    dbcc_classguid : LibC::GUID,
-    dbcc_name : UInt16*
+  struct REDBOOK_DIGITAL_AUDIO_EXTRACTION_INFO
+    property version : UInt32
+    property accurate : UInt32
+    property supported : UInt32
+    property accurate_mask0 : UInt32
+    def initialize(@version : UInt32, @accurate : UInt32, @supported : UInt32, @accurate_mask0 : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEV_BROADCAST_HANDLE,
-    dbch_size : UInt32,
-    dbch_devicetype : UInt32,
-    dbch_reserved : UInt32,
-    dbch_handle : Win32cr::Foundation::HANDLE,
-    dbch_hdevnotify : Void*,
-    dbch_eventguid : LibC::GUID,
-    dbch_nameoffset : Int32,
-    dbch_data : UInt8*
+  struct DEV_BROADCAST_HDR
+    property dbch_size : UInt32
+    property dbch_devicetype : Win32cr::System::SystemServices::DEV_BROADCAST_HDR_DEVICE_TYPE
+    property dbch_reserved : UInt32
+    def initialize(@dbch_size : UInt32, @dbch_devicetype : Win32cr::System::SystemServices::DEV_BROADCAST_HDR_DEVICE_TYPE, @dbch_reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEV_BROADCAST_HANDLE32,
-    dbch_size : UInt32,
-    dbch_devicetype : UInt32,
-    dbch_reserved : UInt32,
-    dbch_handle : UInt32,
-    dbch_hdevnotify : UInt32,
-    dbch_eventguid : LibC::GUID,
-    dbch_nameoffset : Int32,
-    dbch_data : UInt8*
+  struct VolLockBroadcast
+    property vlb_dbh : Win32cr::System::SystemServices::DEV_BROADCAST_HDR
+    property vlb_owner : UInt32
+    property vlb_perms : UInt8
+    property vlb_lockType : UInt8
+    property vlb_drive : UInt8
+    property vlb_flags : UInt8
+    def initialize(@vlb_dbh : Win32cr::System::SystemServices::DEV_BROADCAST_HDR, @vlb_owner : UInt32, @vlb_perms : UInt8, @vlb_lockType : UInt8, @vlb_drive : UInt8, @vlb_flags : UInt8)
+    end
+  end
 
   @[Extern]
-  record DEV_BROADCAST_HANDLE64,
-    dbch_size : UInt32,
-    dbch_devicetype : UInt32,
-    dbch_reserved : UInt32,
-    dbch_handle : UInt64,
-    dbch_hdevnotify : UInt64,
-    dbch_eventguid : LibC::GUID,
-    dbch_nameoffset : Int32,
-    dbch_data : UInt8*
+  struct DEV_BROADCAST_HEADER_
+    property dbcd_size : UInt32
+    property dbcd_devicetype : UInt32
+    property dbcd_reserved : UInt32
+    def initialize(@dbcd_size : UInt32, @dbcd_devicetype : UInt32, @dbcd_reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEV_BROADCAST_USERDEFINED_,
-    dbud_dbh : Win32cr::System::SystemServices::DEV_BROADCAST_HDR,
-    dbud_szName : Win32cr::Foundation::CHAR*
+  struct DEV_BROADCAST_OEM
+    property dbco_size : UInt32
+    property dbco_devicetype : UInt32
+    property dbco_reserved : UInt32
+    property dbco_identifier : UInt32
+    property dbco_suppfunc : UInt32
+    def initialize(@dbco_size : UInt32, @dbco_devicetype : UInt32, @dbco_reserved : UInt32, @dbco_identifier : UInt32, @dbco_suppfunc : UInt32)
+    end
+  end
 
   @[Extern]
-  record AtlThunkData_t
-  @[Extern]
-  record XSAVE_CET_U_FORMAT,
-    ia32_cet_u_msr : UInt64,
-    ia32_pl3_ssp_msr : UInt64
+  struct DEV_BROADCAST_DEVNODE
+    property dbcd_size : UInt32
+    property dbcd_devicetype : UInt32
+    property dbcd_reserved : UInt32
+    property dbcd_devnode : UInt32
+    def initialize(@dbcd_size : UInt32, @dbcd_devicetype : UInt32, @dbcd_reserved : UInt32, @dbcd_devnode : UInt32)
+    end
+  end
 
   @[Extern]
-  record KERNEL_CET_CONTEXT,
-    ssp : UInt64,
-    rip : UInt64,
-    seg_cs : UInt16,
-    anonymous : Anonymous_e__Union_,
-    fill : UInt16[2] do
+  struct DEV_BROADCAST_VOLUME
+    property dbcv_size : UInt32
+    property dbcv_devicetype : UInt32
+    property dbcv_reserved : UInt32
+    property dbcv_unitmask : UInt32
+    property dbcv_flags : Win32cr::System::SystemServices::DEV_BROADCAST_VOLUME_FLAGS
+    def initialize(@dbcv_size : UInt32, @dbcv_devicetype : UInt32, @dbcv_reserved : UInt32, @dbcv_unitmask : UInt32, @dbcv_flags : Win32cr::System::SystemServices::DEV_BROADCAST_VOLUME_FLAGS)
+    end
+  end
+
+  @[Extern]
+  struct DEV_BROADCAST_PORT_A
+    property dbcp_size : UInt32
+    property dbcp_devicetype : UInt32
+    property dbcp_reserved : UInt32
+    property dbcp_name : Win32cr::Foundation::CHAR*
+    def initialize(@dbcp_size : UInt32, @dbcp_devicetype : UInt32, @dbcp_reserved : UInt32, @dbcp_name : Win32cr::Foundation::CHAR*)
+    end
+  end
+
+  @[Extern]
+  struct DEV_BROADCAST_PORT_W
+    property dbcp_size : UInt32
+    property dbcp_devicetype : UInt32
+    property dbcp_reserved : UInt32
+    property dbcp_name : UInt16*
+    def initialize(@dbcp_size : UInt32, @dbcp_devicetype : UInt32, @dbcp_reserved : UInt32, @dbcp_name : UInt16*)
+    end
+  end
+
+  @[Extern]
+  struct DEV_BROADCAST_NET
+    property dbcn_size : UInt32
+    property dbcn_devicetype : UInt32
+    property dbcn_reserved : UInt32
+    property dbcn_resource : UInt32
+    property dbcn_flags : UInt32
+    def initialize(@dbcn_size : UInt32, @dbcn_devicetype : UInt32, @dbcn_reserved : UInt32, @dbcn_resource : UInt32, @dbcn_flags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DEV_BROADCAST_DEVICEINTERFACE_A
+    property dbcc_size : UInt32
+    property dbcc_devicetype : UInt32
+    property dbcc_reserved : UInt32
+    property dbcc_classguid : LibC::GUID
+    property dbcc_name : Win32cr::Foundation::CHAR*
+    def initialize(@dbcc_size : UInt32, @dbcc_devicetype : UInt32, @dbcc_reserved : UInt32, @dbcc_classguid : LibC::GUID, @dbcc_name : Win32cr::Foundation::CHAR*)
+    end
+  end
+
+  @[Extern]
+  struct DEV_BROADCAST_DEVICEINTERFACE_W
+    property dbcc_size : UInt32
+    property dbcc_devicetype : UInt32
+    property dbcc_reserved : UInt32
+    property dbcc_classguid : LibC::GUID
+    property dbcc_name : UInt16*
+    def initialize(@dbcc_size : UInt32, @dbcc_devicetype : UInt32, @dbcc_reserved : UInt32, @dbcc_classguid : LibC::GUID, @dbcc_name : UInt16*)
+    end
+  end
+
+  @[Extern]
+  struct DEV_BROADCAST_HANDLE
+    property dbch_size : UInt32
+    property dbch_devicetype : UInt32
+    property dbch_reserved : UInt32
+    property dbch_handle : Win32cr::Foundation::HANDLE
+    property dbch_hdevnotify : Void*
+    property dbch_eventguid : LibC::GUID
+    property dbch_nameoffset : Int32
+    property dbch_data : UInt8*
+    def initialize(@dbch_size : UInt32, @dbch_devicetype : UInt32, @dbch_reserved : UInt32, @dbch_handle : Win32cr::Foundation::HANDLE, @dbch_hdevnotify : Void*, @dbch_eventguid : LibC::GUID, @dbch_nameoffset : Int32, @dbch_data : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct DEV_BROADCAST_HANDLE32
+    property dbch_size : UInt32
+    property dbch_devicetype : UInt32
+    property dbch_reserved : UInt32
+    property dbch_handle : UInt32
+    property dbch_hdevnotify : UInt32
+    property dbch_eventguid : LibC::GUID
+    property dbch_nameoffset : Int32
+    property dbch_data : UInt8*
+    def initialize(@dbch_size : UInt32, @dbch_devicetype : UInt32, @dbch_reserved : UInt32, @dbch_handle : UInt32, @dbch_hdevnotify : UInt32, @dbch_eventguid : LibC::GUID, @dbch_nameoffset : Int32, @dbch_data : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct DEV_BROADCAST_HANDLE64
+    property dbch_size : UInt32
+    property dbch_devicetype : UInt32
+    property dbch_reserved : UInt32
+    property dbch_handle : UInt64
+    property dbch_hdevnotify : UInt64
+    property dbch_eventguid : LibC::GUID
+    property dbch_nameoffset : Int32
+    property dbch_data : UInt8*
+    def initialize(@dbch_size : UInt32, @dbch_devicetype : UInt32, @dbch_reserved : UInt32, @dbch_handle : UInt64, @dbch_hdevnotify : UInt64, @dbch_eventguid : LibC::GUID, @dbch_nameoffset : Int32, @dbch_data : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct DEV_BROADCAST_USERDEFINED_
+    property dbud_dbh : Win32cr::System::SystemServices::DEV_BROADCAST_HDR
+    property dbud_szName : Win32cr::Foundation::CHAR*
+    def initialize(@dbud_dbh : Win32cr::System::SystemServices::DEV_BROADCAST_HDR, @dbud_szName : Win32cr::Foundation::CHAR*)
+    end
+  end
+
+  @[Extern]
+  struct AtlThunkData_t
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct XSAVE_CET_U_FORMAT
+    property ia32_cet_u_msr : UInt64
+    property ia32_pl3_ssp_msr : UInt64
+    def initialize(@ia32_cet_u_msr : UInt64, @ia32_pl3_ssp_msr : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct KERNEL_CET_CONTEXT
+    property ssp : UInt64
+    property rip : UInt64
+    property seg_cs : UInt16
+    property anonymous : Anonymous_e__Union_
+    property fill : UInt16[2]
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      all_flags : UInt16,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property all_flags : UInt16
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt16
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+      end
 
+    def initialize(@all_flags : UInt16, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@ssp : UInt64, @rip : UInt64, @seg_cs : UInt16, @anonymous : Anonymous_e__Union_, @fill : UInt16[2])
+    end
   end
 
   @[Extern]
-  record SCOPE_TABLE_AMD64,
-    count : UInt32,
-    scope_record : Anonymous_e__Struct_* do
+  struct SCOPE_TABLE_AMD64
+    property count : UInt32
+    property scope_record : Anonymous_e__Struct_*
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      begin_address : UInt32,
-      end_address : UInt32,
-      handler_address : UInt32,
-      jump_target : UInt32
+    struct Anonymous_e__Struct_
+    property begin_address : UInt32
+    property end_address : UInt32
+    property handler_address : UInt32
+    property jump_target : UInt32
+    def initialize(@begin_address : UInt32, @end_address : UInt32, @handler_address : UInt32, @jump_target : UInt32)
+    end
+    end
 
+    def initialize(@count : UInt32, @scope_record : Anonymous_e__Struct_*)
+    end
   end
 
   @[Extern]
-  record SCOPE_TABLE_ARM,
-    count : UInt32,
-    scope_record : Anonymous_e__Struct_* do
+  struct SCOPE_TABLE_ARM
+    property count : UInt32
+    property scope_record : Anonymous_e__Struct_*
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      begin_address : UInt32,
-      end_address : UInt32,
-      handler_address : UInt32,
-      jump_target : UInt32
+    struct Anonymous_e__Struct_
+    property begin_address : UInt32
+    property end_address : UInt32
+    property handler_address : UInt32
+    property jump_target : UInt32
+    def initialize(@begin_address : UInt32, @end_address : UInt32, @handler_address : UInt32, @jump_target : UInt32)
+    end
+    end
 
+    def initialize(@count : UInt32, @scope_record : Anonymous_e__Struct_*)
+    end
   end
 
   @[Extern]
-  record SCOPE_TABLE_ARM64,
-    count : UInt32,
-    scope_record : Anonymous_e__Struct_* do
+  struct SCOPE_TABLE_ARM64
+    property count : UInt32
+    property scope_record : Anonymous_e__Struct_*
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      begin_address : UInt32,
-      end_address : UInt32,
-      handler_address : UInt32,
-      jump_target : UInt32
+    struct Anonymous_e__Struct_
+    property begin_address : UInt32
+    property end_address : UInt32
+    property handler_address : UInt32
+    property jump_target : UInt32
+    def initialize(@begin_address : UInt32, @end_address : UInt32, @handler_address : UInt32, @jump_target : UInt32)
+    end
+    end
 
+    def initialize(@count : UInt32, @scope_record : Anonymous_e__Struct_*)
+    end
   end
 
   @[Extern(union: true)]
-  record DISPATCHER_CONTEXT_NONVOLREG_ARM64,
-    buffer : UInt8[152],
-    anonymous : Anonymous_e__Struct_ do
+  struct DISPATCHER_CONTEXT_NONVOLREG_ARM64
+    property buffer : UInt8[152]
+    property anonymous : Anonymous_e__Struct_
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      gp_nv_regs : UInt64[11],
-      fp_nv_regs : Float64[8]
+    struct Anonymous_e__Struct_
+    property gp_nv_regs : UInt64[11]
+    property fp_nv_regs : Float64[8]
+    def initialize(@gp_nv_regs : UInt64[11], @fp_nv_regs : Float64[8])
+    end
+    end
 
+    def initialize(@buffer : UInt8[152], @anonymous : Anonymous_e__Struct_)
+    end
   end
 
   @[Extern]
-  record SECURITY_DESCRIPTOR_RELATIVE,
-    revision : UInt8,
-    sbz1 : UInt8,
-    control : UInt16,
-    owner : UInt32,
-    group : UInt32,
-    sacl : UInt32,
-    dacl : UInt32
+  struct SECURITY_DESCRIPTOR_RELATIVE
+    property revision : UInt8
+    property sbz1 : UInt8
+    property control : UInt16
+    property owner : UInt32
+    property group : UInt32
+    property sacl : UInt32
+    property dacl : UInt32
+    def initialize(@revision : UInt8, @sbz1 : UInt8, @control : UInt16, @owner : UInt32, @group : UInt32, @sacl : UInt32, @dacl : UInt32)
+    end
+  end
 
   @[Extern]
-  record SECURITY_OBJECT_AI_PARAMS,
-    size : UInt32,
-    constraint_mask : UInt32
+  struct SECURITY_OBJECT_AI_PARAMS
+    property size : UInt32
+    property constraint_mask : UInt32
+    def initialize(@size : UInt32, @constraint_mask : UInt32)
+    end
+  end
 
   @[Extern]
-  record SE_TOKEN_USER,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_ do
+  struct SE_TOKEN_USER
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      sid : Win32cr::Security::SID,
-      buffer : UInt8[68]
+    struct Anonymous2_e__Union_
+    property sid : Win32cr::Security::SID
+    property buffer : UInt8[68]
+    def initialize(@sid : Win32cr::Security::SID, @buffer : UInt8[68])
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      token_user : Win32cr::Security::TOKEN_USER,
-      user : Win32cr::Security::SID_AND_ATTRIBUTES
+    struct Anonymous1_e__Union_
+    property token_user : Win32cr::Security::TOKEN_USER
+    property user : Win32cr::Security::SID_AND_ATTRIBUTES
+    def initialize(@token_user : Win32cr::Security::TOKEN_USER, @user : Win32cr::Security::SID_AND_ATTRIBUTES)
+    end
+    end
 
+    def initialize(@anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_)
+    end
   end
 
   @[Extern]
-  record TOKEN_SID_INFORMATION,
-    sid : Win32cr::Foundation::PSID
+  struct TOKEN_SID_INFORMATION
+    property sid : Win32cr::Foundation::PSID
+    def initialize(@sid : Win32cr::Foundation::PSID)
+    end
+  end
 
   @[Extern]
-  record TOKEN_BNO_ISOLATION_INFORMATION,
-    isolation_prefix : Win32cr::Foundation::PWSTR,
-    isolation_enabled : Win32cr::Foundation::BOOLEAN
+  struct TOKEN_BNO_ISOLATION_INFORMATION
+    property isolation_prefix : Win32cr::Foundation::PWSTR
+    property isolation_enabled : Win32cr::Foundation::BOOLEAN
+    def initialize(@isolation_prefix : Win32cr::Foundation::PWSTR, @isolation_enabled : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record NT_TIB32,
-    exception_list : UInt32,
-    stack_base : UInt32,
-    stack_limit : UInt32,
-    sub_system_tib : UInt32,
-    anonymous : Anonymous_e__Union_,
-    arbitrary_user_pointer : UInt32,
-    self__ : UInt32 do
+  struct NT_TIB32
+    property exception_list : UInt32
+    property stack_base : UInt32
+    property stack_limit : UInt32
+    property sub_system_tib : UInt32
+    property anonymous : Anonymous_e__Union_
+    property arbitrary_user_pointer : UInt32
+    property self__ : UInt32
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      fiber_data : UInt32,
-      version : UInt32
+    struct Anonymous_e__Union_
+    property fiber_data : UInt32
+    property version : UInt32
+    def initialize(@fiber_data : UInt32, @version : UInt32)
+    end
+    end
 
+    def initialize(@exception_list : UInt32, @stack_base : UInt32, @stack_limit : UInt32, @sub_system_tib : UInt32, @anonymous : Anonymous_e__Union_, @arbitrary_user_pointer : UInt32, @self__ : UInt32)
+    end
   end
 
   @[Extern]
-  record NT_TIB64,
-    exception_list : UInt64,
-    stack_base : UInt64,
-    stack_limit : UInt64,
-    sub_system_tib : UInt64,
-    anonymous : Anonymous_e__Union_,
-    arbitrary_user_pointer : UInt64,
-    self__ : UInt64 do
+  struct NT_TIB64
+    property exception_list : UInt64
+    property stack_base : UInt64
+    property stack_limit : UInt64
+    property sub_system_tib : UInt64
+    property anonymous : Anonymous_e__Union_
+    property arbitrary_user_pointer : UInt64
+    property self__ : UInt64
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      fiber_data : UInt64,
-      version : UInt32
+    struct Anonymous_e__Union_
+    property fiber_data : UInt64
+    property version : UInt32
+    def initialize(@fiber_data : UInt64, @version : UInt32)
+    end
+    end
 
+    def initialize(@exception_list : UInt64, @stack_base : UInt64, @stack_limit : UInt64, @sub_system_tib : UInt64, @anonymous : Anonymous_e__Union_, @arbitrary_user_pointer : UInt64, @self__ : UInt64)
+    end
   end
 
   @[Extern]
-  record UMS_CREATE_THREAD_ATTRIBUTES,
-    ums_version : UInt32,
-    ums_context : Void*,
-    ums_completion_list : Void*
+  struct UMS_CREATE_THREAD_ATTRIBUTES
+    property ums_version : UInt32
+    property ums_context : Void*
+    property ums_completion_list : Void*
+    def initialize(@ums_version : UInt32, @ums_context : Void*, @ums_completion_list : Void*)
+    end
+  end
 
   @[Extern]
-  record COMPONENT_FILTER,
-    component_flags : UInt32
+  struct COMPONENT_FILTER
+    property component_flags : UInt32
+    def initialize(@component_flags : UInt32)
+    end
+  end
 
   @[Extern(union: true)]
-  record RATE_QUOTA_LIMIT,
-    rate_data : UInt32,
-    anonymous : Anonymous_e__Struct_ do
+  struct RATE_QUOTA_LIMIT
+    property rate_data : UInt32
+    property anonymous : Anonymous_e__Struct_
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt32
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
 
+    def initialize(@rate_data : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
   end
 
   @[Extern]
-  record QUOTA_LIMITS_EX,
-    paged_pool_limit : LibC::UIntPtrT,
-    non_paged_pool_limit : LibC::UIntPtrT,
-    minimum_working_set_size : LibC::UIntPtrT,
-    maximum_working_set_size : LibC::UIntPtrT,
-    pagefile_limit : LibC::UIntPtrT,
-    time_limit : Win32cr::Foundation::LARGE_INTEGER,
-    working_set_limit : LibC::UIntPtrT,
-    reserved2 : LibC::UIntPtrT,
-    reserved3 : LibC::UIntPtrT,
-    reserved4 : LibC::UIntPtrT,
-    flags : UInt32,
-    cpu_rate_limit : Win32cr::System::SystemServices::RATE_QUOTA_LIMIT
+  struct QUOTA_LIMITS_EX
+    property paged_pool_limit : LibC::UIntPtrT
+    property non_paged_pool_limit : LibC::UIntPtrT
+    property minimum_working_set_size : LibC::UIntPtrT
+    property maximum_working_set_size : LibC::UIntPtrT
+    property pagefile_limit : LibC::UIntPtrT
+    property time_limit : Win32cr::Foundation::LARGE_INTEGER
+    property working_set_limit : LibC::UIntPtrT
+    property reserved2 : LibC::UIntPtrT
+    property reserved3 : LibC::UIntPtrT
+    property reserved4 : LibC::UIntPtrT
+    property flags : UInt32
+    property cpu_rate_limit : Win32cr::System::SystemServices::RATE_QUOTA_LIMIT
+    def initialize(@paged_pool_limit : LibC::UIntPtrT, @non_paged_pool_limit : LibC::UIntPtrT, @minimum_working_set_size : LibC::UIntPtrT, @maximum_working_set_size : LibC::UIntPtrT, @pagefile_limit : LibC::UIntPtrT, @time_limit : Win32cr::Foundation::LARGE_INTEGER, @working_set_limit : LibC::UIntPtrT, @reserved2 : LibC::UIntPtrT, @reserved3 : LibC::UIntPtrT, @reserved4 : LibC::UIntPtrT, @flags : UInt32, @cpu_rate_limit : Win32cr::System::SystemServices::RATE_QUOTA_LIMIT)
+    end
+  end
 
   @[Extern]
-  record PROCESS_MITIGATION_ASLR_POLICY,
-    anonymous : Anonymous_e__Union_ do
+  struct PROCESS_MITIGATION_ASLR_POLICY
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      flags : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property flags : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@flags : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record PROCESS_MITIGATION_DEP_POLICY,
-    anonymous : Anonymous_e__Union_,
-    permanent : Win32cr::Foundation::BOOLEAN do
+  struct PROCESS_MITIGATION_DEP_POLICY
+    property anonymous : Anonymous_e__Union_
+    property permanent : Win32cr::Foundation::BOOLEAN
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      flags : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property flags : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@flags : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_, @permanent : Win32cr::Foundation::BOOLEAN)
+    end
   end
 
   @[Extern]
-  record PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY,
-    anonymous : Anonymous_e__Union_ do
+  struct PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      flags : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property flags : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@flags : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY,
-    anonymous : Anonymous_e__Union_ do
+  struct PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      flags : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property flags : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@flags : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY,
-    anonymous : Anonymous_e__Union_ do
+  struct PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      flags : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property flags : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@flags : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record PROCESS_MITIGATION_DYNAMIC_CODE_POLICY,
-    anonymous : Anonymous_e__Union_ do
+  struct PROCESS_MITIGATION_DYNAMIC_CODE_POLICY
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      flags : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property flags : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@flags : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record PROCESS_MITIGATION_CONTROL_FLOW_GUARD_POLICY,
-    anonymous : Anonymous_e__Union_ do
+  struct PROCESS_MITIGATION_CONTROL_FLOW_GUARD_POLICY
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      flags : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property flags : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@flags : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record PROCESS_MITIGATION_BINARY_SIGNATURE_POLICY,
-    anonymous : Anonymous_e__Union_ do
+  struct PROCESS_MITIGATION_BINARY_SIGNATURE_POLICY
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      flags : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property flags : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@flags : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record PROCESS_MITIGATION_FONT_DISABLE_POLICY,
-    anonymous : Anonymous_e__Union_ do
+  struct PROCESS_MITIGATION_FONT_DISABLE_POLICY
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      flags : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property flags : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@flags : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record PROCESS_MITIGATION_IMAGE_LOAD_POLICY,
-    anonymous : Anonymous_e__Union_ do
+  struct PROCESS_MITIGATION_IMAGE_LOAD_POLICY
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      flags : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property flags : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@flags : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record PROCESS_MITIGATION_SYSTEM_CALL_FILTER_POLICY,
-    anonymous : Anonymous_e__Union_ do
+  struct PROCESS_MITIGATION_SYSTEM_CALL_FILTER_POLICY
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      flags : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property flags : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@flags : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record PROCESS_MITIGATION_PAYLOAD_RESTRICTION_POLICY,
-    anonymous : Anonymous_e__Union_ do
+  struct PROCESS_MITIGATION_PAYLOAD_RESTRICTION_POLICY
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      flags : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property flags : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@flags : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record PROCESS_MITIGATION_CHILD_PROCESS_POLICY,
-    anonymous : Anonymous_e__Union_ do
+  struct PROCESS_MITIGATION_CHILD_PROCESS_POLICY
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      flags : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property flags : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@flags : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record PROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY,
-    anonymous : Anonymous_e__Union_ do
+  struct PROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      flags : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property flags : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@flags : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record PROCESS_MITIGATION_USER_SHADOW_STACK_POLICY,
-    anonymous : Anonymous_e__Union_ do
+  struct PROCESS_MITIGATION_USER_SHADOW_STACK_POLICY
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      flags : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property flags : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@flags : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record PROCESS_MITIGATION_REDIRECTION_TRUST_POLICY,
-    anonymous : Anonymous_e__Union_ do
+  struct PROCESS_MITIGATION_REDIRECTION_TRUST_POLICY
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      flags : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property flags : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@flags : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record SILOOBJECT_BASIC_INFORMATION,
-    silo_id : UInt32,
-    silo_parent_id : UInt32,
-    number_of_processes : UInt32,
-    is_in_server_silo : Win32cr::Foundation::BOOLEAN,
-    reserved : UInt8[3]
+  struct SILOOBJECT_BASIC_INFORMATION
+    property silo_id : UInt32
+    property silo_parent_id : UInt32
+    property number_of_processes : UInt32
+    property is_in_server_silo : Win32cr::Foundation::BOOLEAN
+    property reserved : UInt8[3]
+    def initialize(@silo_id : UInt32, @silo_parent_id : UInt32, @number_of_processes : UInt32, @is_in_server_silo : Win32cr::Foundation::BOOLEAN, @reserved : UInt8[3])
+    end
+  end
 
   @[Extern]
-  record SERVERSILO_BASIC_INFORMATION,
-    service_session_id : UInt32,
-    state : Win32cr::System::SystemServices::SERVERSILO_STATE,
-    exit_status : UInt32,
-    is_downlevel_container : Win32cr::Foundation::BOOLEAN,
-    api_set_schema : Void*,
-    host_api_set_schema : Void*
+  struct SERVERSILO_BASIC_INFORMATION
+    property service_session_id : UInt32
+    property state : Win32cr::System::SystemServices::SERVERSILO_STATE
+    property exit_status : UInt32
+    property is_downlevel_container : Win32cr::Foundation::BOOLEAN
+    property api_set_schema : Void*
+    property host_api_set_schema : Void*
+    def initialize(@service_session_id : UInt32, @state : Win32cr::System::SystemServices::SERVERSILO_STATE, @exit_status : UInt32, @is_downlevel_container : Win32cr::Foundation::BOOLEAN, @api_set_schema : Void*, @host_api_set_schema : Void*)
+    end
+  end
 
   @[Extern]
-  record MEMORY_PARTITION_DEDICATED_MEMORY_ATTRIBUTE,
-    type__ : Win32cr::System::SystemServices::MEM_DEDICATED_ATTRIBUTE_TYPE,
-    reserved : UInt32,
-    value : UInt64
+  struct MEMORY_PARTITION_DEDICATED_MEMORY_ATTRIBUTE
+    property type__ : Win32cr::System::SystemServices::MEM_DEDICATED_ATTRIBUTE_TYPE
+    property reserved : UInt32
+    property value : UInt64
+    def initialize(@type__ : Win32cr::System::SystemServices::MEM_DEDICATED_ATTRIBUTE_TYPE, @reserved : UInt32, @value : UInt64)
+    end
+  end
 
   @[Extern]
-  record MEMORY_PARTITION_DEDICATED_MEMORY_INFORMATION,
-    next_entry_offset : UInt32,
-    size_of_information : UInt32,
-    flags : UInt32,
-    attributes_offset : UInt32,
-    attribute_count : UInt32,
-    reserved : UInt32,
-    type_id : UInt64
+  struct MEMORY_PARTITION_DEDICATED_MEMORY_INFORMATION
+    property next_entry_offset : UInt32
+    property size_of_information : UInt32
+    property flags : UInt32
+    property attributes_offset : UInt32
+    property attribute_count : UInt32
+    property reserved : UInt32
+    property type_id : UInt64
+    def initialize(@next_entry_offset : UInt32, @size_of_information : UInt32, @flags : UInt32, @attributes_offset : UInt32, @attribute_count : UInt32, @reserved : UInt32, @type_id : UInt64)
+    end
+  end
 
   @[Extern]
-  record SCRUB_DATA_INPUT,
-    size : UInt32,
-    flags : UInt32,
-    maximum_ios : UInt32,
-    object_id : UInt32[4],
-    reserved : UInt32[41],
-    resume_context : UInt8[1040]
+  struct SCRUB_DATA_INPUT
+    property size : UInt32
+    property flags : UInt32
+    property maximum_ios : UInt32
+    property object_id : UInt32[4]
+    property reserved : UInt32[41]
+    property resume_context : UInt8[1040]
+    def initialize(@size : UInt32, @flags : UInt32, @maximum_ios : UInt32, @object_id : UInt32[4], @reserved : UInt32[41], @resume_context : UInt8[1040])
+    end
+  end
 
   @[Extern]
-  record SCRUB_PARITY_EXTENT,
-    offset : Int64,
-    length : UInt64
+  struct SCRUB_PARITY_EXTENT
+    property offset : Int64
+    property length : UInt64
+    def initialize(@offset : Int64, @length : UInt64)
+    end
+  end
 
   @[Extern]
-  record SCRUB_PARITY_EXTENT_DATA,
-    size : UInt16,
-    flags : UInt16,
-    number_of_parity_extents : UInt16,
-    maximum_number_of_parity_extents : UInt16,
-    parity_extents : Win32cr::System::SystemServices::SCRUB_PARITY_EXTENT*
+  struct SCRUB_PARITY_EXTENT_DATA
+    property size : UInt16
+    property flags : UInt16
+    property number_of_parity_extents : UInt16
+    property maximum_number_of_parity_extents : UInt16
+    property parity_extents : Win32cr::System::SystemServices::SCRUB_PARITY_EXTENT*
+    def initialize(@size : UInt16, @flags : UInt16, @number_of_parity_extents : UInt16, @maximum_number_of_parity_extents : UInt16, @parity_extents : Win32cr::System::SystemServices::SCRUB_PARITY_EXTENT*)
+    end
+  end
 
   @[Extern]
-  record SCRUB_DATA_OUTPUT,
-    size : UInt32,
-    flags : UInt32,
-    status : UInt32,
-    error_file_offset : UInt64,
-    error_length : UInt64,
-    number_of_bytes_repaired : UInt64,
-    number_of_bytes_failed : UInt64,
-    internal_file_reference : UInt64,
-    resume_context_length : UInt16,
-    parity_extent_data_offset : UInt16,
-    reserved : UInt32[9],
-    number_of_metadata_bytes_processed : UInt64,
-    number_of_data_bytes_processed : UInt64,
-    total_number_of_metadata_bytes_in_use : UInt64,
-    total_number_of_data_bytes_in_use : UInt64,
-    data_bytes_skipped_due_to_no_allocation : UInt64,
-    data_bytes_skipped_due_to_invalid_run : UInt64,
-    data_bytes_skipped_due_to_integrity_stream : UInt64,
-    data_bytes_skipped_due_to_region_being_clean : UInt64,
-    data_bytes_skipped_due_to_lock_conflict : UInt64,
-    data_bytes_skipped_due_to_no_scrub_data_flag : UInt64,
-    data_bytes_skipped_due_to_no_scrub_non_integrity_stream_flag : UInt64,
-    data_bytes_scrubbed : UInt64,
-    resume_context : UInt8[1040]
+  struct SCRUB_DATA_OUTPUT
+    property size : UInt32
+    property flags : UInt32
+    property status : UInt32
+    property error_file_offset : UInt64
+    property error_length : UInt64
+    property number_of_bytes_repaired : UInt64
+    property number_of_bytes_failed : UInt64
+    property internal_file_reference : UInt64
+    property resume_context_length : UInt16
+    property parity_extent_data_offset : UInt16
+    property reserved : UInt32[9]
+    property number_of_metadata_bytes_processed : UInt64
+    property number_of_data_bytes_processed : UInt64
+    property total_number_of_metadata_bytes_in_use : UInt64
+    property total_number_of_data_bytes_in_use : UInt64
+    property data_bytes_skipped_due_to_no_allocation : UInt64
+    property data_bytes_skipped_due_to_invalid_run : UInt64
+    property data_bytes_skipped_due_to_integrity_stream : UInt64
+    property data_bytes_skipped_due_to_region_being_clean : UInt64
+    property data_bytes_skipped_due_to_lock_conflict : UInt64
+    property data_bytes_skipped_due_to_no_scrub_data_flag : UInt64
+    property data_bytes_skipped_due_to_no_scrub_non_integrity_stream_flag : UInt64
+    property data_bytes_scrubbed : UInt64
+    property resume_context : UInt8[1040]
+    def initialize(@size : UInt32, @flags : UInt32, @status : UInt32, @error_file_offset : UInt64, @error_length : UInt64, @number_of_bytes_repaired : UInt64, @number_of_bytes_failed : UInt64, @internal_file_reference : UInt64, @resume_context_length : UInt16, @parity_extent_data_offset : UInt16, @reserved : UInt32[9], @number_of_metadata_bytes_processed : UInt64, @number_of_data_bytes_processed : UInt64, @total_number_of_metadata_bytes_in_use : UInt64, @total_number_of_data_bytes_in_use : UInt64, @data_bytes_skipped_due_to_no_allocation : UInt64, @data_bytes_skipped_due_to_invalid_run : UInt64, @data_bytes_skipped_due_to_integrity_stream : UInt64, @data_bytes_skipped_due_to_region_being_clean : UInt64, @data_bytes_skipped_due_to_lock_conflict : UInt64, @data_bytes_skipped_due_to_no_scrub_data_flag : UInt64, @data_bytes_skipped_due_to_no_scrub_non_integrity_stream_flag : UInt64, @data_bytes_scrubbed : UInt64, @resume_context : UInt8[1040])
+    end
+  end
 
   @[Extern]
-  record SHARED_VIRTUAL_DISK_SUPPORT,
-    shared_virtual_disk_support : Win32cr::System::SystemServices::SharedVirtualDiskSupportType,
-    handle_state : Win32cr::System::SystemServices::SharedVirtualDiskHandleState
+  struct SHARED_VIRTUAL_DISK_SUPPORT
+    property shared_virtual_disk_support : Win32cr::System::SystemServices::SharedVirtualDiskSupportType
+    property handle_state : Win32cr::System::SystemServices::SharedVirtualDiskHandleState
+    def initialize(@shared_virtual_disk_support : Win32cr::System::SystemServices::SharedVirtualDiskSupportType, @handle_state : Win32cr::System::SystemServices::SharedVirtualDiskHandleState)
+    end
+  end
 
   @[Extern]
-  record REARRANGE_FILE_DATA,
-    source_starting_offset : UInt64,
-    target_offset : UInt64,
-    source_file_handle : Win32cr::Foundation::HANDLE,
-    length : UInt32,
-    flags : UInt32
+  struct REARRANGE_FILE_DATA
+    property source_starting_offset : UInt64
+    property target_offset : UInt64
+    property source_file_handle : Win32cr::Foundation::HANDLE
+    property length : UInt32
+    property flags : UInt32
+    def initialize(@source_starting_offset : UInt64, @target_offset : UInt64, @source_file_handle : Win32cr::Foundation::HANDLE, @length : UInt32, @flags : UInt32)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record REARRANGE_FILE_DATA32,
-    source_starting_offset : UInt64,
-    target_offset : UInt64,
-    source_file_handle : UInt32,
-    length : UInt32,
-    flags : UInt32
+  struct REARRANGE_FILE_DATA32
+    property source_starting_offset : UInt64
+    property target_offset : UInt64
+    property source_file_handle : UInt32
+    property length : UInt32
+    property flags : UInt32
+    def initialize(@source_starting_offset : UInt64, @target_offset : UInt64, @source_file_handle : UInt32, @length : UInt32, @flags : UInt32)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record SHUFFLE_FILE_DATA,
-    starting_offset : Int64,
-    length : Int64,
-    flags : UInt32
+  struct SHUFFLE_FILE_DATA
+    property starting_offset : Int64
+    property length : Int64
+    property flags : UInt32
+    def initialize(@starting_offset : Int64, @length : Int64, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record NETWORK_APP_INSTANCE_EA,
-    app_instance_id : LibC::GUID,
-    csv_flags : UInt32
+  struct NETWORK_APP_INSTANCE_EA
+    property app_instance_id : LibC::GUID
+    property csv_flags : UInt32
+    def initialize(@app_instance_id : LibC::GUID, @csv_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record POWER_USER_PRESENCE,
-    user_presence : Win32cr::System::SystemServices::POWER_USER_PRESENCE_TYPE
+  struct POWER_USER_PRESENCE
+    property user_presence : Win32cr::System::SystemServices::POWER_USER_PRESENCE_TYPE
+    def initialize(@user_presence : Win32cr::System::SystemServices::POWER_USER_PRESENCE_TYPE)
+    end
+  end
 
   @[Extern]
-  record POWER_SESSION_CONNECT,
-    connected : Win32cr::Foundation::BOOLEAN,
-    console : Win32cr::Foundation::BOOLEAN
+  struct POWER_SESSION_CONNECT
+    property connected : Win32cr::Foundation::BOOLEAN
+    property console : Win32cr::Foundation::BOOLEAN
+    def initialize(@connected : Win32cr::Foundation::BOOLEAN, @console : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record POWER_SESSION_TIMEOUTS,
-    input_timeout : UInt32,
-    display_timeout : UInt32
+  struct POWER_SESSION_TIMEOUTS
+    property input_timeout : UInt32
+    property display_timeout : UInt32
+    def initialize(@input_timeout : UInt32, @display_timeout : UInt32)
+    end
+  end
 
   @[Extern]
-  record POWER_SESSION_RIT_STATE,
-    active : Win32cr::Foundation::BOOLEAN,
-    last_input_time : UInt64
+  struct POWER_SESSION_RIT_STATE
+    property active : Win32cr::Foundation::BOOLEAN
+    property last_input_time : UInt64
+    def initialize(@active : Win32cr::Foundation::BOOLEAN, @last_input_time : UInt64)
+    end
+  end
 
   @[Extern]
-  record POWER_SESSION_WINLOGON,
-    session_id : UInt32,
-    console : Win32cr::Foundation::BOOLEAN,
-    locked : Win32cr::Foundation::BOOLEAN
+  struct POWER_SESSION_WINLOGON
+    property session_id : UInt32
+    property console : Win32cr::Foundation::BOOLEAN
+    property locked : Win32cr::Foundation::BOOLEAN
+    def initialize(@session_id : UInt32, @console : Win32cr::Foundation::BOOLEAN, @locked : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record POWER_SESSION_ALLOW_EXTERNAL_DMA_DEVICES,
-    is_allowed : Win32cr::Foundation::BOOLEAN
+  struct POWER_SESSION_ALLOW_EXTERNAL_DMA_DEVICES
+    property is_allowed : Win32cr::Foundation::BOOLEAN
+    def initialize(@is_allowed : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record POWER_IDLE_RESILIENCY,
-    coalescing_timeout : UInt32,
-    idle_resiliency_period : UInt32
+  struct POWER_IDLE_RESILIENCY
+    property coalescing_timeout : UInt32
+    property idle_resiliency_period : UInt32
+    def initialize(@coalescing_timeout : UInt32, @idle_resiliency_period : UInt32)
+    end
+  end
 
   @[Extern]
-  record POWER_MONITOR_INVOCATION,
-    console : Win32cr::Foundation::BOOLEAN,
-    request_reason : Win32cr::System::SystemServices::POWER_MONITOR_REQUEST_REASON
+  struct POWER_MONITOR_INVOCATION
+    property console : Win32cr::Foundation::BOOLEAN
+    property request_reason : Win32cr::System::SystemServices::POWER_MONITOR_REQUEST_REASON
+    def initialize(@console : Win32cr::Foundation::BOOLEAN, @request_reason : Win32cr::System::SystemServices::POWER_MONITOR_REQUEST_REASON)
+    end
+  end
 
   @[Extern]
-  record RESUME_PERFORMANCE,
-    post_time_ms : UInt32,
-    total_resume_time_ms : UInt64,
-    resume_complete_timestamp : UInt64
+  struct RESUME_PERFORMANCE
+    property post_time_ms : UInt32
+    property total_resume_time_ms : UInt64
+    property resume_complete_timestamp : UInt64
+    def initialize(@post_time_ms : UInt32, @total_resume_time_ms : UInt64, @resume_complete_timestamp : UInt64)
+    end
+  end
 
   @[Extern]
-  record NOTIFY_USER_POWER_SETTING,
-    guid : LibC::GUID
+  struct NOTIFY_USER_POWER_SETTING
+    property guid : LibC::GUID
+    def initialize(@guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record APPLICATIONLAUNCH_SETTING_VALUE,
-    activation_time : Win32cr::Foundation::LARGE_INTEGER,
-    flags : UInt32,
-    button_instance_id : UInt32
+  struct APPLICATIONLAUNCH_SETTING_VALUE
+    property activation_time : Win32cr::Foundation::LARGE_INTEGER
+    property flags : UInt32
+    property button_instance_id : UInt32
+    def initialize(@activation_time : Win32cr::Foundation::LARGE_INTEGER, @flags : UInt32, @button_instance_id : UInt32)
+    end
+  end
 
   @[Extern]
-  record POWER_PLATFORM_INFORMATION,
-    ao_ac : Win32cr::Foundation::BOOLEAN
+  struct POWER_PLATFORM_INFORMATION
+    property ao_ac : Win32cr::Foundation::BOOLEAN
+    def initialize(@ao_ac : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record PPM_WMI_LEGACY_PERFSTATE,
-    frequency : UInt32,
-    flags : UInt32,
-    percent_frequency : UInt32
+  struct PPM_WMI_LEGACY_PERFSTATE
+    property frequency : UInt32
+    property flags : UInt32
+    property percent_frequency : UInt32
+    def initialize(@frequency : UInt32, @flags : UInt32, @percent_frequency : UInt32)
+    end
+  end
 
   @[Extern]
-  record PPM_WMI_IDLE_STATE,
-    latency : UInt32,
-    power : UInt32,
-    time_check : UInt32,
-    promote_percent : UInt8,
-    demote_percent : UInt8,
-    state_type : UInt8,
-    reserved : UInt8,
-    state_flags : UInt32,
-    context : UInt32,
-    idle_handler : UInt32,
-    reserved1 : UInt32
+  struct PPM_WMI_IDLE_STATE
+    property latency : UInt32
+    property power : UInt32
+    property time_check : UInt32
+    property promote_percent : UInt8
+    property demote_percent : UInt8
+    property state_type : UInt8
+    property reserved : UInt8
+    property state_flags : UInt32
+    property context : UInt32
+    property idle_handler : UInt32
+    property reserved1 : UInt32
+    def initialize(@latency : UInt32, @power : UInt32, @time_check : UInt32, @promote_percent : UInt8, @demote_percent : UInt8, @state_type : UInt8, @reserved : UInt8, @state_flags : UInt32, @context : UInt32, @idle_handler : UInt32, @reserved1 : UInt32)
+    end
+  end
 
   @[Extern]
-  record PPM_WMI_IDLE_STATES,
-    type__ : UInt32,
-    count : UInt32,
-    target_state : UInt32,
-    old_state : UInt32,
-    target_processors : UInt64,
-    state : Win32cr::System::SystemServices::PPM_WMI_IDLE_STATE*
+  struct PPM_WMI_IDLE_STATES
+    property type__ : UInt32
+    property count : UInt32
+    property target_state : UInt32
+    property old_state : UInt32
+    property target_processors : UInt64
+    property state : Win32cr::System::SystemServices::PPM_WMI_IDLE_STATE*
+    def initialize(@type__ : UInt32, @count : UInt32, @target_state : UInt32, @old_state : UInt32, @target_processors : UInt64, @state : Win32cr::System::SystemServices::PPM_WMI_IDLE_STATE*)
+    end
+  end
 
   @[Extern]
-  record PPM_WMI_IDLE_STATES_EX,
-    type__ : UInt32,
-    count : UInt32,
-    target_state : UInt32,
-    old_state : UInt32,
-    target_processors : Void*,
-    state : Win32cr::System::SystemServices::PPM_WMI_IDLE_STATE*
+  struct PPM_WMI_IDLE_STATES_EX
+    property type__ : UInt32
+    property count : UInt32
+    property target_state : UInt32
+    property old_state : UInt32
+    property target_processors : Void*
+    property state : Win32cr::System::SystemServices::PPM_WMI_IDLE_STATE*
+    def initialize(@type__ : UInt32, @count : UInt32, @target_state : UInt32, @old_state : UInt32, @target_processors : Void*, @state : Win32cr::System::SystemServices::PPM_WMI_IDLE_STATE*)
+    end
+  end
 
   @[Extern]
-  record PPM_WMI_PERF_STATE,
-    frequency : UInt32,
-    power : UInt32,
-    percent_frequency : UInt8,
-    increase_level : UInt8,
-    decrease_level : UInt8,
-    type__ : UInt8,
-    increase_time : UInt32,
-    decrease_time : UInt32,
-    control : UInt64,
-    status : UInt64,
-    hit_count : UInt32,
-    reserved1 : UInt32,
-    reserved2 : UInt64,
-    reserved3 : UInt64
+  struct PPM_WMI_PERF_STATE
+    property frequency : UInt32
+    property power : UInt32
+    property percent_frequency : UInt8
+    property increase_level : UInt8
+    property decrease_level : UInt8
+    property type__ : UInt8
+    property increase_time : UInt32
+    property decrease_time : UInt32
+    property control : UInt64
+    property status : UInt64
+    property hit_count : UInt32
+    property reserved1 : UInt32
+    property reserved2 : UInt64
+    property reserved3 : UInt64
+    def initialize(@frequency : UInt32, @power : UInt32, @percent_frequency : UInt8, @increase_level : UInt8, @decrease_level : UInt8, @type__ : UInt8, @increase_time : UInt32, @decrease_time : UInt32, @control : UInt64, @status : UInt64, @hit_count : UInt32, @reserved1 : UInt32, @reserved2 : UInt64, @reserved3 : UInt64)
+    end
+  end
 
   @[Extern]
-  record PPM_WMI_PERF_STATES,
-    count : UInt32,
-    max_frequency : UInt32,
-    current_state : UInt32,
-    max_perf_state : UInt32,
-    min_perf_state : UInt32,
-    lowest_perf_state : UInt32,
-    thermal_constraint : UInt32,
-    busy_adj_threshold : UInt8,
-    policy_type : UInt8,
-    type__ : UInt8,
-    reserved : UInt8,
-    timer_interval : UInt32,
-    target_processors : UInt64,
-    p_state_handler : UInt32,
-    p_state_context : UInt32,
-    t_state_handler : UInt32,
-    t_state_context : UInt32,
-    feedback_handler : UInt32,
-    reserved1 : UInt32,
-    reserved2 : UInt64,
-    state : Win32cr::System::SystemServices::PPM_WMI_PERF_STATE*
+  struct PPM_WMI_PERF_STATES
+    property count : UInt32
+    property max_frequency : UInt32
+    property current_state : UInt32
+    property max_perf_state : UInt32
+    property min_perf_state : UInt32
+    property lowest_perf_state : UInt32
+    property thermal_constraint : UInt32
+    property busy_adj_threshold : UInt8
+    property policy_type : UInt8
+    property type__ : UInt8
+    property reserved : UInt8
+    property timer_interval : UInt32
+    property target_processors : UInt64
+    property p_state_handler : UInt32
+    property p_state_context : UInt32
+    property t_state_handler : UInt32
+    property t_state_context : UInt32
+    property feedback_handler : UInt32
+    property reserved1 : UInt32
+    property reserved2 : UInt64
+    property state : Win32cr::System::SystemServices::PPM_WMI_PERF_STATE*
+    def initialize(@count : UInt32, @max_frequency : UInt32, @current_state : UInt32, @max_perf_state : UInt32, @min_perf_state : UInt32, @lowest_perf_state : UInt32, @thermal_constraint : UInt32, @busy_adj_threshold : UInt8, @policy_type : UInt8, @type__ : UInt8, @reserved : UInt8, @timer_interval : UInt32, @target_processors : UInt64, @p_state_handler : UInt32, @p_state_context : UInt32, @t_state_handler : UInt32, @t_state_context : UInt32, @feedback_handler : UInt32, @reserved1 : UInt32, @reserved2 : UInt64, @state : Win32cr::System::SystemServices::PPM_WMI_PERF_STATE*)
+    end
+  end
 
   @[Extern]
-  record PPM_WMI_PERF_STATES_EX,
-    count : UInt32,
-    max_frequency : UInt32,
-    current_state : UInt32,
-    max_perf_state : UInt32,
-    min_perf_state : UInt32,
-    lowest_perf_state : UInt32,
-    thermal_constraint : UInt32,
-    busy_adj_threshold : UInt8,
-    policy_type : UInt8,
-    type__ : UInt8,
-    reserved : UInt8,
-    timer_interval : UInt32,
-    target_processors : Void*,
-    p_state_handler : UInt32,
-    p_state_context : UInt32,
-    t_state_handler : UInt32,
-    t_state_context : UInt32,
-    feedback_handler : UInt32,
-    reserved1 : UInt32,
-    reserved2 : UInt64,
-    state : Win32cr::System::SystemServices::PPM_WMI_PERF_STATE*
+  struct PPM_WMI_PERF_STATES_EX
+    property count : UInt32
+    property max_frequency : UInt32
+    property current_state : UInt32
+    property max_perf_state : UInt32
+    property min_perf_state : UInt32
+    property lowest_perf_state : UInt32
+    property thermal_constraint : UInt32
+    property busy_adj_threshold : UInt8
+    property policy_type : UInt8
+    property type__ : UInt8
+    property reserved : UInt8
+    property timer_interval : UInt32
+    property target_processors : Void*
+    property p_state_handler : UInt32
+    property p_state_context : UInt32
+    property t_state_handler : UInt32
+    property t_state_context : UInt32
+    property feedback_handler : UInt32
+    property reserved1 : UInt32
+    property reserved2 : UInt64
+    property state : Win32cr::System::SystemServices::PPM_WMI_PERF_STATE*
+    def initialize(@count : UInt32, @max_frequency : UInt32, @current_state : UInt32, @max_perf_state : UInt32, @min_perf_state : UInt32, @lowest_perf_state : UInt32, @thermal_constraint : UInt32, @busy_adj_threshold : UInt8, @policy_type : UInt8, @type__ : UInt8, @reserved : UInt8, @timer_interval : UInt32, @target_processors : Void*, @p_state_handler : UInt32, @p_state_context : UInt32, @t_state_handler : UInt32, @t_state_context : UInt32, @feedback_handler : UInt32, @reserved1 : UInt32, @reserved2 : UInt64, @state : Win32cr::System::SystemServices::PPM_WMI_PERF_STATE*)
+    end
+  end
 
   @[Extern]
-  record PPM_IDLE_STATE_ACCOUNTING,
-    idle_transitions : UInt32,
-    failed_transitions : UInt32,
-    invalid_bucket_index : UInt32,
-    total_time : UInt64,
-    idle_time_buckets : UInt32[6]
+  struct PPM_IDLE_STATE_ACCOUNTING
+    property idle_transitions : UInt32
+    property failed_transitions : UInt32
+    property invalid_bucket_index : UInt32
+    property total_time : UInt64
+    property idle_time_buckets : UInt32[6]
+    def initialize(@idle_transitions : UInt32, @failed_transitions : UInt32, @invalid_bucket_index : UInt32, @total_time : UInt64, @idle_time_buckets : UInt32[6])
+    end
+  end
 
   @[Extern]
-  record PPM_IDLE_ACCOUNTING,
-    state_count : UInt32,
-    total_transitions : UInt32,
-    reset_count : UInt32,
-    start_time : UInt64,
-    state : Win32cr::System::SystemServices::PPM_IDLE_STATE_ACCOUNTING*
+  struct PPM_IDLE_ACCOUNTING
+    property state_count : UInt32
+    property total_transitions : UInt32
+    property reset_count : UInt32
+    property start_time : UInt64
+    property state : Win32cr::System::SystemServices::PPM_IDLE_STATE_ACCOUNTING*
+    def initialize(@state_count : UInt32, @total_transitions : UInt32, @reset_count : UInt32, @start_time : UInt64, @state : Win32cr::System::SystemServices::PPM_IDLE_STATE_ACCOUNTING*)
+    end
+  end
 
   @[Extern]
-  record PPM_IDLE_STATE_BUCKET_EX,
-    total_time_us : UInt64,
-    min_time_us : UInt32,
-    max_time_us : UInt32,
-    count : UInt32
+  struct PPM_IDLE_STATE_BUCKET_EX
+    property total_time_us : UInt64
+    property min_time_us : UInt32
+    property max_time_us : UInt32
+    property count : UInt32
+    def initialize(@total_time_us : UInt64, @min_time_us : UInt32, @max_time_us : UInt32, @count : UInt32)
+    end
+  end
 
   @[Extern]
-  record PPM_IDLE_STATE_ACCOUNTING_EX,
-    total_time : UInt64,
-    idle_transitions : UInt32,
-    failed_transitions : UInt32,
-    invalid_bucket_index : UInt32,
-    min_time_us : UInt32,
-    max_time_us : UInt32,
-    cancelled_transitions : UInt32,
-    idle_time_buckets : Win32cr::System::SystemServices::PPM_IDLE_STATE_BUCKET_EX[16]
+  struct PPM_IDLE_STATE_ACCOUNTING_EX
+    property total_time : UInt64
+    property idle_transitions : UInt32
+    property failed_transitions : UInt32
+    property invalid_bucket_index : UInt32
+    property min_time_us : UInt32
+    property max_time_us : UInt32
+    property cancelled_transitions : UInt32
+    property idle_time_buckets : Win32cr::System::SystemServices::PPM_IDLE_STATE_BUCKET_EX[16]
+    def initialize(@total_time : UInt64, @idle_transitions : UInt32, @failed_transitions : UInt32, @invalid_bucket_index : UInt32, @min_time_us : UInt32, @max_time_us : UInt32, @cancelled_transitions : UInt32, @idle_time_buckets : Win32cr::System::SystemServices::PPM_IDLE_STATE_BUCKET_EX[16])
+    end
+  end
 
   @[Extern]
-  record PPM_IDLE_ACCOUNTING_EX,
-    state_count : UInt32,
-    total_transitions : UInt32,
-    reset_count : UInt32,
-    abort_count : UInt32,
-    start_time : UInt64,
-    state : Win32cr::System::SystemServices::PPM_IDLE_STATE_ACCOUNTING_EX*
+  struct PPM_IDLE_ACCOUNTING_EX
+    property state_count : UInt32
+    property total_transitions : UInt32
+    property reset_count : UInt32
+    property abort_count : UInt32
+    property start_time : UInt64
+    property state : Win32cr::System::SystemServices::PPM_IDLE_STATE_ACCOUNTING_EX*
+    def initialize(@state_count : UInt32, @total_transitions : UInt32, @reset_count : UInt32, @abort_count : UInt32, @start_time : UInt64, @state : Win32cr::System::SystemServices::PPM_IDLE_STATE_ACCOUNTING_EX*)
+    end
+  end
 
   @[Extern]
-  record PPM_PERFSTATE_EVENT,
-    state : UInt32,
-    status : UInt32,
-    latency : UInt32,
-    speed : UInt32,
-    processor : UInt32
+  struct PPM_PERFSTATE_EVENT
+    property state : UInt32
+    property status : UInt32
+    property latency : UInt32
+    property speed : UInt32
+    property processor : UInt32
+    def initialize(@state : UInt32, @status : UInt32, @latency : UInt32, @speed : UInt32, @processor : UInt32)
+    end
+  end
 
   @[Extern]
-  record PPM_PERFSTATE_DOMAIN_EVENT,
-    state : UInt32,
-    latency : UInt32,
-    speed : UInt32,
-    processors : UInt64
+  struct PPM_PERFSTATE_DOMAIN_EVENT
+    property state : UInt32
+    property latency : UInt32
+    property speed : UInt32
+    property processors : UInt64
+    def initialize(@state : UInt32, @latency : UInt32, @speed : UInt32, @processors : UInt64)
+    end
+  end
 
   @[Extern]
-  record PPM_IDLESTATE_EVENT,
-    new_state : UInt32,
-    old_state : UInt32,
-    processors : UInt64
+  struct PPM_IDLESTATE_EVENT
+    property new_state : UInt32
+    property old_state : UInt32
+    property processors : UInt64
+    def initialize(@new_state : UInt32, @old_state : UInt32, @processors : UInt64)
+    end
+  end
 
   @[Extern]
-  record PPM_THERMALCHANGE_EVENT,
-    thermal_constraint : UInt32,
-    processors : UInt64
+  struct PPM_THERMALCHANGE_EVENT
+    property thermal_constraint : UInt32
+    property processors : UInt64
+    def initialize(@thermal_constraint : UInt32, @processors : UInt64)
+    end
+  end
 
   @[Extern]
-  record PPM_THERMAL_POLICY_EVENT,
-    mode : UInt8,
-    processors : UInt64
+  struct PPM_THERMAL_POLICY_EVENT
+    property mode : UInt8
+    property processors : UInt64
+    def initialize(@mode : UInt8, @processors : UInt64)
+    end
+  end
 
   @[Extern]
-  record PROCESSOR_IDLESTATE_INFO,
-    time_check : UInt32,
-    demote_percent : UInt8,
-    promote_percent : UInt8,
-    spare : UInt8[2]
+  struct PROCESSOR_IDLESTATE_INFO
+    property time_check : UInt32
+    property demote_percent : UInt8
+    property promote_percent : UInt8
+    property spare : UInt8[2]
+    def initialize(@time_check : UInt32, @demote_percent : UInt8, @promote_percent : UInt8, @spare : UInt8[2])
+    end
+  end
 
   @[Extern]
-  record PROCESSOR_IDLESTATE_POLICY,
-    revision : UInt16,
-    flags : Flags_e__Union_,
-    policy_count : UInt32,
-    policy : Win32cr::System::SystemServices::PROCESSOR_IDLESTATE_INFO[3] do
+  struct PROCESSOR_IDLESTATE_POLICY
+    property revision : UInt16
+    property flags : Flags_e__Union_
+    property policy_count : UInt32
+    property policy : Win32cr::System::SystemServices::PROCESSOR_IDLESTATE_INFO[3]
 
     # Nested Type Flags_e__Union_
     @[Extern(union: true)]
-    record Flags_e__Union_,
-      as_word : UInt16,
-      anonymous : Anonymous_e__Struct_ do
+    struct Flags_e__Union_
+    property as_word : UInt16
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt16
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+      end
 
+    def initialize(@as_word : UInt16, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@revision : UInt16, @flags : Flags_e__Union_, @policy_count : UInt32, @policy : Win32cr::System::SystemServices::PROCESSOR_IDLESTATE_INFO[3])
+    end
   end
 
   @[Extern]
-  record PROCESSOR_PERFSTATE_POLICY,
-    revision : UInt32,
-    max_throttle : UInt8,
-    min_throttle : UInt8,
-    busy_adj_threshold : UInt8,
-    anonymous : Anonymous_e__Union_,
-    time_check : UInt32,
-    increase_time : UInt32,
-    decrease_time : UInt32,
-    increase_percent : UInt32,
-    decrease_percent : UInt32 do
+  struct PROCESSOR_PERFSTATE_POLICY
+    property revision : UInt32
+    property max_throttle : UInt8
+    property min_throttle : UInt8
+    property busy_adj_threshold : UInt8
+    property anonymous : Anonymous_e__Union_
+    property time_check : UInt32
+    property increase_time : UInt32
+    property decrease_time : UInt32
+    property increase_percent : UInt32
+    property decrease_percent : UInt32
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      spare : UInt8,
-      flags : Flags_e__Union_ do
+    struct Anonymous_e__Union_
+    property spare : UInt8
+    property flags : Flags_e__Union_
 
       # Nested Type Flags_e__Union_
       @[Extern(union: true)]
-      record Flags_e__Union_,
-        as_byte : UInt8,
-        anonymous : Anonymous_e__Struct_ do
+      struct Flags_e__Union_
+    property as_byte : UInt8
+    property anonymous : Anonymous_e__Struct_
 
         # Nested Type Anonymous_e__Struct_
         @[Extern]
-        record Anonymous_e__Struct_,
-          _bitfield : UInt8
+        struct Anonymous_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+        end
 
+    def initialize(@as_byte : UInt8, @anonymous : Anonymous_e__Struct_)
+    end
       end
 
+    def initialize(@spare : UInt8, @flags : Flags_e__Union_)
+    end
     end
 
+    def initialize(@revision : UInt32, @max_throttle : UInt8, @min_throttle : UInt8, @busy_adj_threshold : UInt8, @anonymous : Anonymous_e__Union_, @time_check : UInt32, @increase_time : UInt32, @decrease_time : UInt32, @increase_percent : UInt32, @decrease_percent : UInt32)
+    end
   end
 
   @[Extern]
-  record HIBERFILE_BUCKET,
-    max_physical_memory : UInt64,
-    physical_memory_percent : UInt32[3]
+  struct HIBERFILE_BUCKET
+    property max_physical_memory : UInt64
+    property physical_memory_percent : UInt32[3]
+    def initialize(@max_physical_memory : UInt64, @physical_memory_percent : UInt32[3])
+    end
+  end
 
   @[Extern]
-  record IMAGE_DOS_HEADER,
-    e_magic : UInt16,
-    e_cblp : UInt16,
-    e_cp : UInt16,
-    e_crlc : UInt16,
-    e_cparhdr : UInt16,
-    e_minalloc : UInt16,
-    e_maxalloc : UInt16,
-    e_ss : UInt16,
-    e_sp : UInt16,
-    e_csum : UInt16,
-    e_ip : UInt16,
-    e_cs : UInt16,
-    e_lfarlc : UInt16,
-    e_ovno : UInt16,
-    e_res : UInt16[4],
-    e_oemid : UInt16,
-    e_oeminfo : UInt16,
-    e_res2 : UInt16[10],
-    e_lfanew : Int32
+  struct IMAGE_DOS_HEADER
+    property e_magic : UInt16
+    property e_cblp : UInt16
+    property e_cp : UInt16
+    property e_crlc : UInt16
+    property e_cparhdr : UInt16
+    property e_minalloc : UInt16
+    property e_maxalloc : UInt16
+    property e_ss : UInt16
+    property e_sp : UInt16
+    property e_csum : UInt16
+    property e_ip : UInt16
+    property e_cs : UInt16
+    property e_lfarlc : UInt16
+    property e_ovno : UInt16
+    property e_res : UInt16[4]
+    property e_oemid : UInt16
+    property e_oeminfo : UInt16
+    property e_res2 : UInt16[10]
+    property e_lfanew : Int32
+    def initialize(@e_magic : UInt16, @e_cblp : UInt16, @e_cp : UInt16, @e_crlc : UInt16, @e_cparhdr : UInt16, @e_minalloc : UInt16, @e_maxalloc : UInt16, @e_ss : UInt16, @e_sp : UInt16, @e_csum : UInt16, @e_ip : UInt16, @e_cs : UInt16, @e_lfarlc : UInt16, @e_ovno : UInt16, @e_res : UInt16[4], @e_oemid : UInt16, @e_oeminfo : UInt16, @e_res2 : UInt16[10], @e_lfanew : Int32)
+    end
+  end
 
   @[Extern]
-  record IMAGE_OS2_HEADER,
-    ne_magic : UInt16,
-    ne_ver : Win32cr::Foundation::CHAR,
-    ne_rev : Win32cr::Foundation::CHAR,
-    ne_enttab : UInt16,
-    ne_cbenttab : UInt16,
-    ne_crc : Int32,
-    ne_flags : UInt16,
-    ne_autodata : UInt16,
-    ne_heap : UInt16,
-    ne_stack : UInt16,
-    ne_csip : Int32,
-    ne_sssp : Int32,
-    ne_cseg : UInt16,
-    ne_cmod : UInt16,
-    ne_cbnrestab : UInt16,
-    ne_segtab : UInt16,
-    ne_rsrctab : UInt16,
-    ne_restab : UInt16,
-    ne_modtab : UInt16,
-    ne_imptab : UInt16,
-    ne_nrestab : Int32,
-    ne_cmovent : UInt16,
-    ne_align : UInt16,
-    ne_cres : UInt16,
-    ne_exetyp : UInt8,
-    ne_flagsothers : UInt8,
-    ne_pretthunks : UInt16,
-    ne_psegrefbytes : UInt16,
-    ne_swaparea : UInt16,
-    ne_expver : UInt16
+  struct IMAGE_OS2_HEADER
+    property ne_magic : UInt16
+    property ne_ver : Win32cr::Foundation::CHAR
+    property ne_rev : Win32cr::Foundation::CHAR
+    property ne_enttab : UInt16
+    property ne_cbenttab : UInt16
+    property ne_crc : Int32
+    property ne_flags : UInt16
+    property ne_autodata : UInt16
+    property ne_heap : UInt16
+    property ne_stack : UInt16
+    property ne_csip : Int32
+    property ne_sssp : Int32
+    property ne_cseg : UInt16
+    property ne_cmod : UInt16
+    property ne_cbnrestab : UInt16
+    property ne_segtab : UInt16
+    property ne_rsrctab : UInt16
+    property ne_restab : UInt16
+    property ne_modtab : UInt16
+    property ne_imptab : UInt16
+    property ne_nrestab : Int32
+    property ne_cmovent : UInt16
+    property ne_align : UInt16
+    property ne_cres : UInt16
+    property ne_exetyp : UInt8
+    property ne_flagsothers : UInt8
+    property ne_pretthunks : UInt16
+    property ne_psegrefbytes : UInt16
+    property ne_swaparea : UInt16
+    property ne_expver : UInt16
+    def initialize(@ne_magic : UInt16, @ne_ver : Win32cr::Foundation::CHAR, @ne_rev : Win32cr::Foundation::CHAR, @ne_enttab : UInt16, @ne_cbenttab : UInt16, @ne_crc : Int32, @ne_flags : UInt16, @ne_autodata : UInt16, @ne_heap : UInt16, @ne_stack : UInt16, @ne_csip : Int32, @ne_sssp : Int32, @ne_cseg : UInt16, @ne_cmod : UInt16, @ne_cbnrestab : UInt16, @ne_segtab : UInt16, @ne_rsrctab : UInt16, @ne_restab : UInt16, @ne_modtab : UInt16, @ne_imptab : UInt16, @ne_nrestab : Int32, @ne_cmovent : UInt16, @ne_align : UInt16, @ne_cres : UInt16, @ne_exetyp : UInt8, @ne_flagsothers : UInt8, @ne_pretthunks : UInt16, @ne_psegrefbytes : UInt16, @ne_swaparea : UInt16, @ne_expver : UInt16)
+    end
+  end
 
   @[Extern]
-  record IMAGE_VXD_HEADER,
-    e32_magic : UInt16,
-    e32_border : UInt8,
-    e32_worder : UInt8,
-    e32_level : UInt32,
-    e32_cpu : UInt16,
-    e32_os : UInt16,
-    e32_ver : UInt32,
-    e32_mflags : UInt32,
-    e32_mpages : UInt32,
-    e32_startobj : UInt32,
-    e32_eip : UInt32,
-    e32_stackobj : UInt32,
-    e32_esp : UInt32,
-    e32_pagesize : UInt32,
-    e32_lastpagesize : UInt32,
-    e32_fixupsize : UInt32,
-    e32_fixupsum : UInt32,
-    e32_ldrsize : UInt32,
-    e32_ldrsum : UInt32,
-    e32_objtab : UInt32,
-    e32_objcnt : UInt32,
-    e32_objmap : UInt32,
-    e32_itermap : UInt32,
-    e32_rsrctab : UInt32,
-    e32_rsrccnt : UInt32,
-    e32_restab : UInt32,
-    e32_enttab : UInt32,
-    e32_dirtab : UInt32,
-    e32_dircnt : UInt32,
-    e32_fpagetab : UInt32,
-    e32_frectab : UInt32,
-    e32_impmod : UInt32,
-    e32_impmodcnt : UInt32,
-    e32_impproc : UInt32,
-    e32_pagesum : UInt32,
-    e32_datapage : UInt32,
-    e32_preload : UInt32,
-    e32_nrestab : UInt32,
-    e32_cbnrestab : UInt32,
-    e32_nressum : UInt32,
-    e32_autodata : UInt32,
-    e32_debuginfo : UInt32,
-    e32_debuglen : UInt32,
-    e32_instpreload : UInt32,
-    e32_instdemand : UInt32,
-    e32_heapsize : UInt32,
-    e32_res3 : UInt8[12],
-    e32_winresoff : UInt32,
-    e32_winreslen : UInt32,
-    e32_devid : UInt16,
-    e32_ddkver : UInt16
+  struct IMAGE_VXD_HEADER
+    property e32_magic : UInt16
+    property e32_border : UInt8
+    property e32_worder : UInt8
+    property e32_level : UInt32
+    property e32_cpu : UInt16
+    property e32_os : UInt16
+    property e32_ver : UInt32
+    property e32_mflags : UInt32
+    property e32_mpages : UInt32
+    property e32_startobj : UInt32
+    property e32_eip : UInt32
+    property e32_stackobj : UInt32
+    property e32_esp : UInt32
+    property e32_pagesize : UInt32
+    property e32_lastpagesize : UInt32
+    property e32_fixupsize : UInt32
+    property e32_fixupsum : UInt32
+    property e32_ldrsize : UInt32
+    property e32_ldrsum : UInt32
+    property e32_objtab : UInt32
+    property e32_objcnt : UInt32
+    property e32_objmap : UInt32
+    property e32_itermap : UInt32
+    property e32_rsrctab : UInt32
+    property e32_rsrccnt : UInt32
+    property e32_restab : UInt32
+    property e32_enttab : UInt32
+    property e32_dirtab : UInt32
+    property e32_dircnt : UInt32
+    property e32_fpagetab : UInt32
+    property e32_frectab : UInt32
+    property e32_impmod : UInt32
+    property e32_impmodcnt : UInt32
+    property e32_impproc : UInt32
+    property e32_pagesum : UInt32
+    property e32_datapage : UInt32
+    property e32_preload : UInt32
+    property e32_nrestab : UInt32
+    property e32_cbnrestab : UInt32
+    property e32_nressum : UInt32
+    property e32_autodata : UInt32
+    property e32_debuginfo : UInt32
+    property e32_debuglen : UInt32
+    property e32_instpreload : UInt32
+    property e32_instdemand : UInt32
+    property e32_heapsize : UInt32
+    property e32_res3 : UInt8[12]
+    property e32_winresoff : UInt32
+    property e32_winreslen : UInt32
+    property e32_devid : UInt16
+    property e32_ddkver : UInt16
+    def initialize(@e32_magic : UInt16, @e32_border : UInt8, @e32_worder : UInt8, @e32_level : UInt32, @e32_cpu : UInt16, @e32_os : UInt16, @e32_ver : UInt32, @e32_mflags : UInt32, @e32_mpages : UInt32, @e32_startobj : UInt32, @e32_eip : UInt32, @e32_stackobj : UInt32, @e32_esp : UInt32, @e32_pagesize : UInt32, @e32_lastpagesize : UInt32, @e32_fixupsize : UInt32, @e32_fixupsum : UInt32, @e32_ldrsize : UInt32, @e32_ldrsum : UInt32, @e32_objtab : UInt32, @e32_objcnt : UInt32, @e32_objmap : UInt32, @e32_itermap : UInt32, @e32_rsrctab : UInt32, @e32_rsrccnt : UInt32, @e32_restab : UInt32, @e32_enttab : UInt32, @e32_dirtab : UInt32, @e32_dircnt : UInt32, @e32_fpagetab : UInt32, @e32_frectab : UInt32, @e32_impmod : UInt32, @e32_impmodcnt : UInt32, @e32_impproc : UInt32, @e32_pagesum : UInt32, @e32_datapage : UInt32, @e32_preload : UInt32, @e32_nrestab : UInt32, @e32_cbnrestab : UInt32, @e32_nressum : UInt32, @e32_autodata : UInt32, @e32_debuginfo : UInt32, @e32_debuglen : UInt32, @e32_instpreload : UInt32, @e32_instdemand : UInt32, @e32_heapsize : UInt32, @e32_res3 : UInt8[12], @e32_winresoff : UInt32, @e32_winreslen : UInt32, @e32_devid : UInt16, @e32_ddkver : UInt16)
+    end
+  end
 
   @[Extern]
-  record ANON_OBJECT_HEADER,
-    sig1 : UInt16,
-    sig2 : UInt16,
-    version : UInt16,
-    machine : UInt16,
-    time_date_stamp : UInt32,
-    class_id : LibC::GUID,
-    size_of_data : UInt32
+  struct ANON_OBJECT_HEADER
+    property sig1 : UInt16
+    property sig2 : UInt16
+    property version : UInt16
+    property machine : UInt16
+    property time_date_stamp : UInt32
+    property class_id : LibC::GUID
+    property size_of_data : UInt32
+    def initialize(@sig1 : UInt16, @sig2 : UInt16, @version : UInt16, @machine : UInt16, @time_date_stamp : UInt32, @class_id : LibC::GUID, @size_of_data : UInt32)
+    end
+  end
 
   @[Extern]
-  record ANON_OBJECT_HEADER_V2,
-    sig1 : UInt16,
-    sig2 : UInt16,
-    version : UInt16,
-    machine : UInt16,
-    time_date_stamp : UInt32,
-    class_id : LibC::GUID,
-    size_of_data : UInt32,
-    flags : UInt32,
-    meta_data_size : UInt32,
-    meta_data_offset : UInt32
+  struct ANON_OBJECT_HEADER_V2
+    property sig1 : UInt16
+    property sig2 : UInt16
+    property version : UInt16
+    property machine : UInt16
+    property time_date_stamp : UInt32
+    property class_id : LibC::GUID
+    property size_of_data : UInt32
+    property flags : UInt32
+    property meta_data_size : UInt32
+    property meta_data_offset : UInt32
+    def initialize(@sig1 : UInt16, @sig2 : UInt16, @version : UInt16, @machine : UInt16, @time_date_stamp : UInt32, @class_id : LibC::GUID, @size_of_data : UInt32, @flags : UInt32, @meta_data_size : UInt32, @meta_data_offset : UInt32)
+    end
+  end
 
   @[Extern]
-  record ANON_OBJECT_HEADER_BIGOBJ,
-    sig1 : UInt16,
-    sig2 : UInt16,
-    version : UInt16,
-    machine : UInt16,
-    time_date_stamp : UInt32,
-    class_id : LibC::GUID,
-    size_of_data : UInt32,
-    flags : UInt32,
-    meta_data_size : UInt32,
-    meta_data_offset : UInt32,
-    number_of_sections : UInt32,
-    pointer_to_symbol_table : UInt32,
-    number_of_symbols : UInt32
+  struct ANON_OBJECT_HEADER_BIGOBJ
+    property sig1 : UInt16
+    property sig2 : UInt16
+    property version : UInt16
+    property machine : UInt16
+    property time_date_stamp : UInt32
+    property class_id : LibC::GUID
+    property size_of_data : UInt32
+    property flags : UInt32
+    property meta_data_size : UInt32
+    property meta_data_offset : UInt32
+    property number_of_sections : UInt32
+    property pointer_to_symbol_table : UInt32
+    property number_of_symbols : UInt32
+    def initialize(@sig1 : UInt16, @sig2 : UInt16, @version : UInt16, @machine : UInt16, @time_date_stamp : UInt32, @class_id : LibC::GUID, @size_of_data : UInt32, @flags : UInt32, @meta_data_size : UInt32, @meta_data_offset : UInt32, @number_of_sections : UInt32, @pointer_to_symbol_table : UInt32, @number_of_symbols : UInt32)
+    end
+  end
 
   @[Extern]
-  record IMAGE_SYMBOL,
-    n : N_e__Union_,
-    value : UInt32,
-    section_number : Int16,
-    type__ : UInt16,
-    storage_class : UInt8,
-    number_of_aux_symbols : UInt8 do
+  struct IMAGE_SYMBOL
+    property n : N_e__Union_
+    property value : UInt32
+    property section_number : Int16
+    property type__ : UInt16
+    property storage_class : UInt8
+    property number_of_aux_symbols : UInt8
 
     # Nested Type N_e__Union_
     @[Extern(union: true)]
-    record N_e__Union_,
-      short_name : UInt8[8],
-      name : Name_e__Struct_,
-      long_name : UInt32[2] do
+    struct N_e__Union_
+    property short_name : UInt8[8]
+    property name : Name_e__Struct_
+    property long_name : UInt32[2]
 
       # Nested Type Name_e__Struct_
       @[Extern]
-      record Name_e__Struct_,
-        short : UInt32,
-        long : UInt32
+      struct Name_e__Struct_
+    property short : UInt32
+    property long : UInt32
+    def initialize(@short : UInt32, @long : UInt32)
+    end
+      end
 
+    def initialize(@short_name : UInt8[8], @name : Name_e__Struct_, @long_name : UInt32[2])
+    end
     end
 
+    def initialize(@n : N_e__Union_, @value : UInt32, @section_number : Int16, @type__ : UInt16, @storage_class : UInt8, @number_of_aux_symbols : UInt8)
+    end
   end
 
   @[Extern]
-  record IMAGE_SYMBOL_EX,
-    n : N_e__Union_,
-    value : UInt32,
-    section_number : Int32,
-    type__ : UInt16,
-    storage_class : UInt8,
-    number_of_aux_symbols : UInt8 do
+  struct IMAGE_SYMBOL_EX
+    property n : N_e__Union_
+    property value : UInt32
+    property section_number : Int32
+    property type__ : UInt16
+    property storage_class : UInt8
+    property number_of_aux_symbols : UInt8
 
     # Nested Type N_e__Union_
     @[Extern(union: true)]
-    record N_e__Union_,
-      short_name : UInt8[8],
-      name : Name_e__Struct_,
-      long_name : UInt32[2] do
+    struct N_e__Union_
+    property short_name : UInt8[8]
+    property name : Name_e__Struct_
+    property long_name : UInt32[2]
 
       # Nested Type Name_e__Struct_
       @[Extern]
-      record Name_e__Struct_,
-        short : UInt32,
-        long : UInt32
+      struct Name_e__Struct_
+    property short : UInt32
+    property long : UInt32
+    def initialize(@short : UInt32, @long : UInt32)
+    end
+      end
 
+    def initialize(@short_name : UInt8[8], @name : Name_e__Struct_, @long_name : UInt32[2])
+    end
     end
 
+    def initialize(@n : N_e__Union_, @value : UInt32, @section_number : Int32, @type__ : UInt16, @storage_class : UInt8, @number_of_aux_symbols : UInt8)
+    end
   end
 
   @[Extern]
-  record IMAGE_AUX_SYMBOL_TOKEN_DEF,
-    bAuxType : UInt8,
-    bReserved : UInt8,
-    symbol_table_index : UInt32,
-    rgbReserved : UInt8[12]
+  struct IMAGE_AUX_SYMBOL_TOKEN_DEF
+    property bAuxType : UInt8
+    property bReserved : UInt8
+    property symbol_table_index : UInt32
+    property rgbReserved : UInt8[12]
+    def initialize(@bAuxType : UInt8, @bReserved : UInt8, @symbol_table_index : UInt32, @rgbReserved : UInt8[12])
+    end
+  end
 
   @[Extern(union: true)]
-  record IMAGE_AUX_SYMBOL,
-    sym : Sym_e__Struct_,
-    file : File_e__Struct_,
-    section : Section_e__Struct_,
-    token_def : Win32cr::System::SystemServices::IMAGE_AUX_SYMBOL_TOKEN_DEF,
-    crc : CRC_e__Struct_ do
+  struct IMAGE_AUX_SYMBOL
+    property sym : Sym_e__Struct_
+    property file : File_e__Struct_
+    property section : Section_e__Struct_
+    property token_def : Win32cr::System::SystemServices::IMAGE_AUX_SYMBOL_TOKEN_DEF
+    property crc : CRC_e__Struct_
 
     # Nested Type CRC_e__Struct_
     @[Extern]
-    record CRC_e__Struct_,
-      crc : UInt32,
-      rgbReserved : UInt8[14]
+    struct CRC_e__Struct_
+    property crc : UInt32
+    property rgbReserved : UInt8[14]
+    def initialize(@crc : UInt32, @rgbReserved : UInt8[14])
+    end
+    end
 
 
     # Nested Type File_e__Struct_
     @[Extern]
-    record File_e__Struct_,
-      name : UInt8[18]
+    struct File_e__Struct_
+    property name : UInt8[18]
+    def initialize(@name : UInt8[18])
+    end
+    end
 
 
     # Nested Type Sym_e__Struct_
     @[Extern]
-    record Sym_e__Struct_,
-      tag_index : UInt32,
-      misc : Misc_e__Union_,
-      fcn_ary : FcnAry_e__Union_,
-      tv_index : UInt16 do
+    struct Sym_e__Struct_
+    property tag_index : UInt32
+    property misc : Misc_e__Union_
+    property fcn_ary : FcnAry_e__Union_
+    property tv_index : UInt16
 
       # Nested Type FcnAry_e__Union_
       @[Extern(union: true)]
-      record FcnAry_e__Union_,
-        function : Function_e__Struct_,
-        array : Array_e__Struct_ do
+      struct FcnAry_e__Union_
+    property function : Function_e__Struct_
+    property array : Array_e__Struct_
 
         # Nested Type Array_e__Struct_
         @[Extern]
-        record Array_e__Struct_,
-          dimension : UInt16[4]
+        struct Array_e__Struct_
+    property dimension : UInt16[4]
+    def initialize(@dimension : UInt16[4])
+    end
+        end
 
 
         # Nested Type Function_e__Struct_
         @[Extern]
-        record Function_e__Struct_,
-          pointer_to_linenumber : UInt32,
-          pointer_to_next_function : UInt32
+        struct Function_e__Struct_
+    property pointer_to_linenumber : UInt32
+    property pointer_to_next_function : UInt32
+    def initialize(@pointer_to_linenumber : UInt32, @pointer_to_next_function : UInt32)
+    end
+        end
 
+    def initialize(@function : Function_e__Struct_, @array : Array_e__Struct_)
+    end
       end
 
 
       # Nested Type Misc_e__Union_
       @[Extern(union: true)]
-      record Misc_e__Union_,
-        ln_sz : LnSz_e__Struct_,
-        total_size : UInt32 do
+      struct Misc_e__Union_
+    property ln_sz : LnSz_e__Struct_
+    property total_size : UInt32
 
         # Nested Type LnSz_e__Struct_
         @[Extern]
-        record LnSz_e__Struct_,
-          linenumber : UInt16,
-          size : UInt16
+        struct LnSz_e__Struct_
+    property linenumber : UInt16
+    property size : UInt16
+    def initialize(@linenumber : UInt16, @size : UInt16)
+    end
+        end
 
+    def initialize(@ln_sz : LnSz_e__Struct_, @total_size : UInt32)
+    end
       end
 
+    def initialize(@tag_index : UInt32, @misc : Misc_e__Union_, @fcn_ary : FcnAry_e__Union_, @tv_index : UInt16)
+    end
     end
 
 
     # Nested Type Section_e__Struct_
     @[Extern]
-    record Section_e__Struct_,
-      length : UInt32,
-      number_of_relocations : UInt16,
-      number_of_linenumbers : UInt16,
-      check_sum : UInt32,
-      number : Int16,
-      selection : UInt8,
-      bReserved : UInt8,
-      high_number : Int16
+    struct Section_e__Struct_
+    property length : UInt32
+    property number_of_relocations : UInt16
+    property number_of_linenumbers : UInt16
+    property check_sum : UInt32
+    property number : Int16
+    property selection : UInt8
+    property bReserved : UInt8
+    property high_number : Int16
+    def initialize(@length : UInt32, @number_of_relocations : UInt16, @number_of_linenumbers : UInt16, @check_sum : UInt32, @number : Int16, @selection : UInt8, @bReserved : UInt8, @high_number : Int16)
+    end
+    end
 
+    def initialize(@sym : Sym_e__Struct_, @file : File_e__Struct_, @section : Section_e__Struct_, @token_def : Win32cr::System::SystemServices::IMAGE_AUX_SYMBOL_TOKEN_DEF, @crc : CRC_e__Struct_)
+    end
   end
 
   @[Extern(union: true)]
-  record IMAGE_AUX_SYMBOL_EX,
-    sym : Sym_e__Struct_,
-    file : File_e__Struct_,
-    section : Section_e__Struct_,
-    anonymous : Anonymous_e__Struct_,
-    crc : CRC_e__Struct_ do
+  struct IMAGE_AUX_SYMBOL_EX
+    property sym : Sym_e__Struct_
+    property file : File_e__Struct_
+    property section : Section_e__Struct_
+    property anonymous : Anonymous_e__Struct_
+    property crc : CRC_e__Struct_
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      token_def : Win32cr::System::SystemServices::IMAGE_AUX_SYMBOL_TOKEN_DEF,
-      rgbReserved : UInt8[2]
+    struct Anonymous_e__Struct_
+    property token_def : Win32cr::System::SystemServices::IMAGE_AUX_SYMBOL_TOKEN_DEF
+    property rgbReserved : UInt8[2]
+    def initialize(@token_def : Win32cr::System::SystemServices::IMAGE_AUX_SYMBOL_TOKEN_DEF, @rgbReserved : UInt8[2])
+    end
+    end
 
 
     # Nested Type File_e__Struct_
     @[Extern]
-    record File_e__Struct_,
-      name : UInt8[20]
+    struct File_e__Struct_
+    property name : UInt8[20]
+    def initialize(@name : UInt8[20])
+    end
+    end
 
 
     # Nested Type CRC_e__Struct_
     @[Extern]
-    record CRC_e__Struct_,
-      crc : UInt32,
-      rgbReserved : UInt8[16]
+    struct CRC_e__Struct_
+    property crc : UInt32
+    property rgbReserved : UInt8[16]
+    def initialize(@crc : UInt32, @rgbReserved : UInt8[16])
+    end
+    end
 
 
     # Nested Type Sym_e__Struct_
     @[Extern]
-    record Sym_e__Struct_,
-      weak_default_sym_index : UInt32,
-      weak_search_type : UInt32,
-      rgbReserved : UInt8[12]
+    struct Sym_e__Struct_
+    property weak_default_sym_index : UInt32
+    property weak_search_type : UInt32
+    property rgbReserved : UInt8[12]
+    def initialize(@weak_default_sym_index : UInt32, @weak_search_type : UInt32, @rgbReserved : UInt8[12])
+    end
+    end
 
 
     # Nested Type Section_e__Struct_
     @[Extern]
-    record Section_e__Struct_,
-      length : UInt32,
-      number_of_relocations : UInt16,
-      number_of_linenumbers : UInt16,
-      check_sum : UInt32,
-      number : Int16,
-      selection : UInt8,
-      bReserved : UInt8,
-      high_number : Int16,
-      rgbReserved : UInt8[2]
+    struct Section_e__Struct_
+    property length : UInt32
+    property number_of_relocations : UInt16
+    property number_of_linenumbers : UInt16
+    property check_sum : UInt32
+    property number : Int16
+    property selection : UInt8
+    property bReserved : UInt8
+    property high_number : Int16
+    property rgbReserved : UInt8[2]
+    def initialize(@length : UInt32, @number_of_relocations : UInt16, @number_of_linenumbers : UInt16, @check_sum : UInt32, @number : Int16, @selection : UInt8, @bReserved : UInt8, @high_number : Int16, @rgbReserved : UInt8[2])
+    end
+    end
 
+    def initialize(@sym : Sym_e__Struct_, @file : File_e__Struct_, @section : Section_e__Struct_, @anonymous : Anonymous_e__Struct_, @crc : CRC_e__Struct_)
+    end
   end
 
   @[Extern]
-  record IMAGE_RELOCATION,
-    anonymous : Anonymous_e__Union_,
-    symbol_table_index : UInt32,
-    type__ : UInt16 do
+  struct IMAGE_RELOCATION
+    property anonymous : Anonymous_e__Union_
+    property symbol_table_index : UInt32
+    property type__ : UInt16
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      virtual_address : UInt32,
-      reloc_count : UInt32
+    struct Anonymous_e__Union_
+    property virtual_address : UInt32
+    property reloc_count : UInt32
+    def initialize(@virtual_address : UInt32, @reloc_count : UInt32)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Union_, @symbol_table_index : UInt32, @type__ : UInt16)
+    end
   end
 
   @[Extern]
-  record IMAGE_LINENUMBER,
-    type__ : Type_e__Union_,
-    linenumber : UInt16 do
+  struct IMAGE_LINENUMBER
+    property type__ : Type_e__Union_
+    property linenumber : UInt16
 
     # Nested Type Type_e__Union_
     @[Extern(union: true)]
-    record Type_e__Union_,
-      symbol_table_index : UInt32,
-      virtual_address : UInt32
+    struct Type_e__Union_
+    property symbol_table_index : UInt32
+    property virtual_address : UInt32
+    def initialize(@symbol_table_index : UInt32, @virtual_address : UInt32)
+    end
+    end
 
+    def initialize(@type__ : Type_e__Union_, @linenumber : UInt16)
+    end
   end
 
   @[Extern]
-  record IMAGE_BASE_RELOCATION,
-    virtual_address : UInt32,
-    size_of_block : UInt32
+  struct IMAGE_BASE_RELOCATION
+    property virtual_address : UInt32
+    property size_of_block : UInt32
+    def initialize(@virtual_address : UInt32, @size_of_block : UInt32)
+    end
+  end
 
   @[Extern]
-  record IMAGE_ARCHIVE_MEMBER_HEADER,
-    name : UInt8[16],
-    date : UInt8[12],
-    user_id : UInt8[6],
-    group_id : UInt8[6],
-    mode : UInt8[8],
-    size : UInt8[10],
-    end_header : UInt8[2]
+  struct IMAGE_ARCHIVE_MEMBER_HEADER
+    property name : UInt8[16]
+    property date : UInt8[12]
+    property user_id : UInt8[6]
+    property group_id : UInt8[6]
+    property mode : UInt8[8]
+    property size : UInt8[10]
+    property end_header : UInt8[2]
+    def initialize(@name : UInt8[16], @date : UInt8[12], @user_id : UInt8[6], @group_id : UInt8[6], @mode : UInt8[8], @size : UInt8[10], @end_header : UInt8[2])
+    end
+  end
 
   @[Extern]
-  record IMAGE_EXPORT_DIRECTORY,
-    characteristics : UInt32,
-    time_date_stamp : UInt32,
-    major_version : UInt16,
-    minor_version : UInt16,
-    name : UInt32,
-    base : UInt32,
-    number_of_functions : UInt32,
-    number_of_names : UInt32,
-    address_of_functions : UInt32,
-    address_of_names : UInt32,
-    address_of_name_ordinals : UInt32
+  struct IMAGE_EXPORT_DIRECTORY
+    property characteristics : UInt32
+    property time_date_stamp : UInt32
+    property major_version : UInt16
+    property minor_version : UInt16
+    property name : UInt32
+    property base : UInt32
+    property number_of_functions : UInt32
+    property number_of_names : UInt32
+    property address_of_functions : UInt32
+    property address_of_names : UInt32
+    property address_of_name_ordinals : UInt32
+    def initialize(@characteristics : UInt32, @time_date_stamp : UInt32, @major_version : UInt16, @minor_version : UInt16, @name : UInt32, @base : UInt32, @number_of_functions : UInt32, @number_of_names : UInt32, @address_of_functions : UInt32, @address_of_names : UInt32, @address_of_name_ordinals : UInt32)
+    end
+  end
 
   @[Extern]
-  record IMAGE_IMPORT_BY_NAME,
-    hint : UInt16,
-    name : Win32cr::Foundation::CHAR*
+  struct IMAGE_IMPORT_BY_NAME
+    property hint : UInt16
+    property name : Win32cr::Foundation::CHAR*
+    def initialize(@hint : UInt16, @name : Win32cr::Foundation::CHAR*)
+    end
+  end
 
   @[Extern]
-  record IMAGE_TLS_DIRECTORY64,
-    start_address_of_raw_data : UInt64,
-    end_address_of_raw_data : UInt64,
-    address_of_index : UInt64,
-    address_of_call_backs : UInt64,
-    size_of_zero_fill : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct IMAGE_TLS_DIRECTORY64
+    property start_address_of_raw_data : UInt64
+    property end_address_of_raw_data : UInt64
+    property address_of_index : UInt64
+    property address_of_call_backs : UInt64
+    property size_of_zero_fill : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      characteristics : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property characteristics : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@characteristics : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@start_address_of_raw_data : UInt64, @end_address_of_raw_data : UInt64, @address_of_index : UInt64, @address_of_call_backs : UInt64, @size_of_zero_fill : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record IMAGE_TLS_DIRECTORY32,
-    start_address_of_raw_data : UInt32,
-    end_address_of_raw_data : UInt32,
-    address_of_index : UInt32,
-    address_of_call_backs : UInt32,
-    size_of_zero_fill : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct IMAGE_TLS_DIRECTORY32
+    property start_address_of_raw_data : UInt32
+    property end_address_of_raw_data : UInt32
+    property address_of_index : UInt32
+    property address_of_call_backs : UInt32
+    property size_of_zero_fill : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      characteristics : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property characteristics : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@characteristics : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@start_address_of_raw_data : UInt32, @end_address_of_raw_data : UInt32, @address_of_index : UInt32, @address_of_call_backs : UInt32, @size_of_zero_fill : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record IMAGE_IMPORT_DESCRIPTOR,
-    anonymous : Anonymous_e__Union_,
-    time_date_stamp : UInt32,
-    forwarder_chain : UInt32,
-    name : UInt32,
-    first_thunk : UInt32 do
+  struct IMAGE_IMPORT_DESCRIPTOR
+    property anonymous : Anonymous_e__Union_
+    property time_date_stamp : UInt32
+    property forwarder_chain : UInt32
+    property name : UInt32
+    property first_thunk : UInt32
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      characteristics : UInt32,
-      original_first_thunk : UInt32
+    struct Anonymous_e__Union_
+    property characteristics : UInt32
+    property original_first_thunk : UInt32
+    def initialize(@characteristics : UInt32, @original_first_thunk : UInt32)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Union_, @time_date_stamp : UInt32, @forwarder_chain : UInt32, @name : UInt32, @first_thunk : UInt32)
+    end
   end
 
   @[Extern]
-  record IMAGE_BOUND_IMPORT_DESCRIPTOR,
-    time_date_stamp : UInt32,
-    offset_module_name : UInt16,
-    number_of_module_forwarder_refs : UInt16
+  struct IMAGE_BOUND_IMPORT_DESCRIPTOR
+    property time_date_stamp : UInt32
+    property offset_module_name : UInt16
+    property number_of_module_forwarder_refs : UInt16
+    def initialize(@time_date_stamp : UInt32, @offset_module_name : UInt16, @number_of_module_forwarder_refs : UInt16)
+    end
+  end
 
   @[Extern]
-  record IMAGE_BOUND_FORWARDER_REF,
-    time_date_stamp : UInt32,
-    offset_module_name : UInt16,
-    reserved : UInt16
+  struct IMAGE_BOUND_FORWARDER_REF
+    property time_date_stamp : UInt32
+    property offset_module_name : UInt16
+    property reserved : UInt16
+    def initialize(@time_date_stamp : UInt32, @offset_module_name : UInt16, @reserved : UInt16)
+    end
+  end
 
   @[Extern]
-  record IMAGE_RESOURCE_DIRECTORY,
-    characteristics : UInt32,
-    time_date_stamp : UInt32,
-    major_version : UInt16,
-    minor_version : UInt16,
-    number_of_named_entries : UInt16,
-    number_of_id_entries : UInt16
+  struct IMAGE_RESOURCE_DIRECTORY
+    property characteristics : UInt32
+    property time_date_stamp : UInt32
+    property major_version : UInt16
+    property minor_version : UInt16
+    property number_of_named_entries : UInt16
+    property number_of_id_entries : UInt16
+    def initialize(@characteristics : UInt32, @time_date_stamp : UInt32, @major_version : UInt16, @minor_version : UInt16, @number_of_named_entries : UInt16, @number_of_id_entries : UInt16)
+    end
+  end
 
   @[Extern]
-  record IMAGE_RESOURCE_DIRECTORY_ENTRY,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_ do
+  struct IMAGE_RESOURCE_DIRECTORY_ENTRY
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      offset_to_data : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous2_e__Union_
+    property offset_to_data : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@offset_to_data : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      name : UInt32,
-      id : UInt16 do
+    struct Anonymous1_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property name : UInt32
+    property id : UInt16
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @name : UInt32, @id : UInt16)
+    end
     end
 
+    def initialize(@anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_)
+    end
   end
 
   @[Extern]
-  record IMAGE_RESOURCE_DIRECTORY_STRING,
-    length : UInt16,
-    name_string : Win32cr::Foundation::CHAR*
+  struct IMAGE_RESOURCE_DIRECTORY_STRING
+    property length : UInt16
+    property name_string : Win32cr::Foundation::CHAR*
+    def initialize(@length : UInt16, @name_string : Win32cr::Foundation::CHAR*)
+    end
+  end
 
   @[Extern]
-  record IMAGE_RESOURCE_DIR_STRING_U,
-    length : UInt16,
-    name_string : UInt16*
+  struct IMAGE_RESOURCE_DIR_STRING_U
+    property length : UInt16
+    property name_string : UInt16*
+    def initialize(@length : UInt16, @name_string : UInt16*)
+    end
+  end
 
   @[Extern]
-  record IMAGE_RESOURCE_DATA_ENTRY,
-    offset_to_data : UInt32,
-    size : UInt32,
-    code_page : UInt32,
-    reserved : UInt32
+  struct IMAGE_RESOURCE_DATA_ENTRY
+    property offset_to_data : UInt32
+    property size : UInt32
+    property code_page : UInt32
+    property reserved : UInt32
+    def initialize(@offset_to_data : UInt32, @size : UInt32, @code_page : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record IMAGE_DYNAMIC_RELOCATION_TABLE,
-    version : UInt32,
-    size : UInt32
+  struct IMAGE_DYNAMIC_RELOCATION_TABLE
+    property version : UInt32
+    property size : UInt32
+    def initialize(@version : UInt32, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record IMAGE_DYNAMIC_RELOCATION32,
-    symbol : UInt32,
-    base_reloc_size : UInt32
+  struct IMAGE_DYNAMIC_RELOCATION32
+    property symbol : UInt32
+    property base_reloc_size : UInt32
+    def initialize(@symbol : UInt32, @base_reloc_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record IMAGE_DYNAMIC_RELOCATION64,
-    symbol : UInt64,
-    base_reloc_size : UInt32
+  struct IMAGE_DYNAMIC_RELOCATION64
+    property symbol : UInt64
+    property base_reloc_size : UInt32
+    def initialize(@symbol : UInt64, @base_reloc_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record IMAGE_DYNAMIC_RELOCATION32_V2,
-    header_size : UInt32,
-    fixup_info_size : UInt32,
-    symbol : UInt32,
-    symbol_group : UInt32,
-    flags : UInt32
+  struct IMAGE_DYNAMIC_RELOCATION32_V2
+    property header_size : UInt32
+    property fixup_info_size : UInt32
+    property symbol : UInt32
+    property symbol_group : UInt32
+    property flags : UInt32
+    def initialize(@header_size : UInt32, @fixup_info_size : UInt32, @symbol : UInt32, @symbol_group : UInt32, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record IMAGE_DYNAMIC_RELOCATION64_V2,
-    header_size : UInt32,
-    fixup_info_size : UInt32,
-    symbol : UInt64,
-    symbol_group : UInt32,
-    flags : UInt32
+  struct IMAGE_DYNAMIC_RELOCATION64_V2
+    property header_size : UInt32
+    property fixup_info_size : UInt32
+    property symbol : UInt64
+    property symbol_group : UInt32
+    property flags : UInt32
+    def initialize(@header_size : UInt32, @fixup_info_size : UInt32, @symbol : UInt64, @symbol_group : UInt32, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record IMAGE_PROLOGUE_DYNAMIC_RELOCATION_HEADER,
-    prologue_byte_count : UInt8
+  struct IMAGE_PROLOGUE_DYNAMIC_RELOCATION_HEADER
+    property prologue_byte_count : UInt8
+    def initialize(@prologue_byte_count : UInt8)
+    end
+  end
 
   @[Extern]
-  record IMAGE_EPILOGUE_DYNAMIC_RELOCATION_HEADER,
-    epilogue_count : UInt32,
-    epilogue_byte_count : UInt8,
-    branch_descriptor_element_size : UInt8,
-    branch_descriptor_count : UInt16
+  struct IMAGE_EPILOGUE_DYNAMIC_RELOCATION_HEADER
+    property epilogue_count : UInt32
+    property epilogue_byte_count : UInt8
+    property branch_descriptor_element_size : UInt8
+    property branch_descriptor_count : UInt16
+    def initialize(@epilogue_count : UInt32, @epilogue_byte_count : UInt8, @branch_descriptor_element_size : UInt8, @branch_descriptor_count : UInt16)
+    end
+  end
 
   @[Extern]
-  record IMAGE_IMPORT_CONTROL_TRANSFER_DYNAMIC_RELOCATION,
-    _bitfield : UInt32
+  struct IMAGE_IMPORT_CONTROL_TRANSFER_DYNAMIC_RELOCATION
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+  end
 
   @[Extern]
-  record IMAGE_INDIR_CONTROL_TRANSFER_DYNAMIC_RELOCATION,
-    _bitfield : UInt16
+  struct IMAGE_INDIR_CONTROL_TRANSFER_DYNAMIC_RELOCATION
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+  end
 
   @[Extern]
-  record IMAGE_SWITCHTABLE_BRANCH_DYNAMIC_RELOCATION,
-    _bitfield : UInt16
+  struct IMAGE_SWITCHTABLE_BRANCH_DYNAMIC_RELOCATION
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+  end
 
   @[Extern]
-  record IMAGE_HOT_PATCH_INFO,
-    version : UInt32,
-    size : UInt32,
-    sequence_number : UInt32,
-    base_image_list : UInt32,
-    base_image_count : UInt32,
-    buffer_offset : UInt32,
-    extra_patch_size : UInt32
+  struct IMAGE_HOT_PATCH_INFO
+    property version : UInt32
+    property size : UInt32
+    property sequence_number : UInt32
+    property base_image_list : UInt32
+    property base_image_count : UInt32
+    property buffer_offset : UInt32
+    property extra_patch_size : UInt32
+    def initialize(@version : UInt32, @size : UInt32, @sequence_number : UInt32, @base_image_list : UInt32, @base_image_count : UInt32, @buffer_offset : UInt32, @extra_patch_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record IMAGE_HOT_PATCH_BASE,
-    sequence_number : UInt32,
-    flags : UInt32,
-    original_time_date_stamp : UInt32,
-    original_check_sum : UInt32,
-    code_integrity_info : UInt32,
-    code_integrity_size : UInt32,
-    patch_table : UInt32,
-    buffer_offset : UInt32
+  struct IMAGE_HOT_PATCH_BASE
+    property sequence_number : UInt32
+    property flags : UInt32
+    property original_time_date_stamp : UInt32
+    property original_check_sum : UInt32
+    property code_integrity_info : UInt32
+    property code_integrity_size : UInt32
+    property patch_table : UInt32
+    property buffer_offset : UInt32
+    def initialize(@sequence_number : UInt32, @flags : UInt32, @original_time_date_stamp : UInt32, @original_check_sum : UInt32, @code_integrity_info : UInt32, @code_integrity_size : UInt32, @patch_table : UInt32, @buffer_offset : UInt32)
+    end
+  end
 
   @[Extern]
-  record IMAGE_HOT_PATCH_HASHES,
-    sha256 : UInt8[32],
-    sha1 : UInt8[20]
+  struct IMAGE_HOT_PATCH_HASHES
+    property sha256 : UInt8[32]
+    property sha1 : UInt8[20]
+    def initialize(@sha256 : UInt8[32], @sha1 : UInt8[20])
+    end
+  end
 
   @[Extern]
-  record IMAGE_CE_RUNTIME_FUNCTION_ENTRY,
-    func_start : UInt32,
-    _bitfield : UInt32
+  struct IMAGE_CE_RUNTIME_FUNCTION_ENTRY
+    property func_start : UInt32
+    property _bitfield : UInt32
+    def initialize(@func_start : UInt32, @_bitfield : UInt32)
+    end
+  end
 
   @[Extern]
-  record IMAGE_ARM_RUNTIME_FUNCTION_ENTRY,
-    begin_address : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct IMAGE_ARM_RUNTIME_FUNCTION_ENTRY
+    property begin_address : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      unwind_data : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property unwind_data : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@unwind_data : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@begin_address : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern(union: true)]
-  record IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA,
-    header_data : UInt32,
-    anonymous : Anonymous_e__Struct_ do
+  struct IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA
+    property header_data : UInt32
+    property anonymous : Anonymous_e__Struct_
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt32
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
 
+    def initialize(@header_data : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
   end
 
   @[Extern]
-  record IMAGE_ALPHA64_RUNTIME_FUNCTION_ENTRY,
-    begin_address : UInt64,
-    end_address : UInt64,
-    exception_handler : UInt64,
-    handler_data : UInt64,
-    prolog_end_address : UInt64
+  struct IMAGE_ALPHA64_RUNTIME_FUNCTION_ENTRY
+    property begin_address : UInt64
+    property end_address : UInt64
+    property exception_handler : UInt64
+    property handler_data : UInt64
+    property prolog_end_address : UInt64
+    def initialize(@begin_address : UInt64, @end_address : UInt64, @exception_handler : UInt64, @handler_data : UInt64, @prolog_end_address : UInt64)
+    end
+  end
 
   @[Extern]
-  record IMAGE_ALPHA_RUNTIME_FUNCTION_ENTRY,
-    begin_address : UInt32,
-    end_address : UInt32,
-    exception_handler : UInt32,
-    handler_data : UInt32,
-    prolog_end_address : UInt32
+  struct IMAGE_ALPHA_RUNTIME_FUNCTION_ENTRY
+    property begin_address : UInt32
+    property end_address : UInt32
+    property exception_handler : UInt32
+    property handler_data : UInt32
+    property prolog_end_address : UInt32
+    def initialize(@begin_address : UInt32, @end_address : UInt32, @exception_handler : UInt32, @handler_data : UInt32, @prolog_end_address : UInt32)
+    end
+  end
 
   @[Extern]
-  record IMAGE_DEBUG_MISC,
-    data_type : UInt32,
-    length : UInt32,
-    unicode : Win32cr::Foundation::BOOLEAN,
-    reserved : UInt8[3],
-    data : UInt8*
+  struct IMAGE_DEBUG_MISC
+    property data_type : UInt32
+    property length : UInt32
+    property unicode : Win32cr::Foundation::BOOLEAN
+    property reserved : UInt8[3]
+    property data : UInt8*
+    def initialize(@data_type : UInt32, @length : UInt32, @unicode : Win32cr::Foundation::BOOLEAN, @reserved : UInt8[3], @data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record IMAGE_SEPARATE_DEBUG_HEADER,
-    signature : UInt16,
-    flags : UInt16,
-    machine : UInt16,
-    characteristics : UInt16,
-    time_date_stamp : UInt32,
-    check_sum : UInt32,
-    image_base : UInt32,
-    size_of_image : UInt32,
-    number_of_sections : UInt32,
-    exported_names_size : UInt32,
-    debug_directory_size : UInt32,
-    section_alignment : UInt32,
-    reserved : UInt32[2]
+  struct IMAGE_SEPARATE_DEBUG_HEADER
+    property signature : UInt16
+    property flags : UInt16
+    property machine : UInt16
+    property characteristics : UInt16
+    property time_date_stamp : UInt32
+    property check_sum : UInt32
+    property image_base : UInt32
+    property size_of_image : UInt32
+    property number_of_sections : UInt32
+    property exported_names_size : UInt32
+    property debug_directory_size : UInt32
+    property section_alignment : UInt32
+    property reserved : UInt32[2]
+    def initialize(@signature : UInt16, @flags : UInt16, @machine : UInt16, @characteristics : UInt16, @time_date_stamp : UInt32, @check_sum : UInt32, @image_base : UInt32, @size_of_image : UInt32, @number_of_sections : UInt32, @exported_names_size : UInt32, @debug_directory_size : UInt32, @section_alignment : UInt32, @reserved : UInt32[2])
+    end
+  end
 
   @[Extern]
-  record NON_PAGED_DEBUG_INFO,
-    signature : UInt16,
-    flags : UInt16,
-    size : UInt32,
-    machine : UInt16,
-    characteristics : UInt16,
-    time_date_stamp : UInt32,
-    check_sum : UInt32,
-    size_of_image : UInt32,
-    image_base : UInt64
+  struct NON_PAGED_DEBUG_INFO
+    property signature : UInt16
+    property flags : UInt16
+    property size : UInt32
+    property machine : UInt16
+    property characteristics : UInt16
+    property time_date_stamp : UInt32
+    property check_sum : UInt32
+    property size_of_image : UInt32
+    property image_base : UInt64
+    def initialize(@signature : UInt16, @flags : UInt16, @size : UInt32, @machine : UInt16, @characteristics : UInt16, @time_date_stamp : UInt32, @check_sum : UInt32, @size_of_image : UInt32, @image_base : UInt64)
+    end
+  end
 
   @[Extern]
-  record IMAGE_ARCHITECTURE_HEADER,
-    _bitfield : UInt32,
-    first_entry_rva : UInt32
+  struct IMAGE_ARCHITECTURE_HEADER
+    property _bitfield : UInt32
+    property first_entry_rva : UInt32
+    def initialize(@_bitfield : UInt32, @first_entry_rva : UInt32)
+    end
+  end
 
   @[Extern]
-  record IMAGE_ARCHITECTURE_ENTRY,
-    fixup_inst_rva : UInt32,
-    new_inst : UInt32
+  struct IMAGE_ARCHITECTURE_ENTRY
+    property fixup_inst_rva : UInt32
+    property new_inst : UInt32
+    def initialize(@fixup_inst_rva : UInt32, @new_inst : UInt32)
+    end
+  end
 
   @[Extern]
-  record IMPORT_OBJECT_HEADER,
-    sig1 : UInt16,
-    sig2 : UInt16,
-    version : UInt16,
-    machine : UInt16,
-    time_date_stamp : UInt32,
-    size_of_data : UInt32,
-    anonymous : Anonymous_e__Union_,
-    _bitfield : UInt16 do
+  struct IMPORT_OBJECT_HEADER
+    property sig1 : UInt16
+    property sig2 : UInt16
+    property version : UInt16
+    property machine : UInt16
+    property time_date_stamp : UInt32
+    property size_of_data : UInt32
+    property anonymous : Anonymous_e__Union_
+    property _bitfield : UInt16
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      ordinal : UInt16,
-      hint : UInt16
+    struct Anonymous_e__Union_
+    property ordinal : UInt16
+    property hint : UInt16
+    def initialize(@ordinal : UInt16, @hint : UInt16)
+    end
+    end
 
+    def initialize(@sig1 : UInt16, @sig2 : UInt16, @version : UInt16, @machine : UInt16, @time_date_stamp : UInt32, @size_of_data : UInt32, @anonymous : Anonymous_e__Union_, @_bitfield : UInt16)
+    end
   end
 
   @[Extern]
-  record IMAGE_POLICY_ENTRY,
-    type__ : Win32cr::System::SystemServices::IMAGE_POLICY_ENTRY_TYPE,
-    policy_id : Win32cr::System::SystemServices::IMAGE_POLICY_ID,
-    u : U_e__union_ do
+  struct IMAGE_POLICY_ENTRY
+    property type__ : Win32cr::System::SystemServices::IMAGE_POLICY_ENTRY_TYPE
+    property policy_id : Win32cr::System::SystemServices::IMAGE_POLICY_ID
+    property u : U_e__union_
 
     # Nested Type U_e__union_
     @[Extern(union: true)]
-    record U_e__union_,
-      none : Void*,
-      bool_value : Win32cr::Foundation::BOOLEAN,
-      int8_value : Int8,
-      u_int8_value : UInt8,
-      int16_value : Int16,
-      u_int16_value : UInt16,
-      int32_value : Int32,
-      u_int32_value : UInt32,
-      int64_value : Int64,
-      u_int64_value : UInt64,
-      ansi_string_value : Win32cr::Foundation::PSTR,
-      unicode_string_value : Win32cr::Foundation::PWSTR
+    struct U_e__union_
+    property none : Void*
+    property bool_value : Win32cr::Foundation::BOOLEAN
+    property int8_value : Int8
+    property u_int8_value : UInt8
+    property int16_value : Int16
+    property u_int16_value : UInt16
+    property int32_value : Int32
+    property u_int32_value : UInt32
+    property int64_value : Int64
+    property u_int64_value : UInt64
+    property ansi_string_value : Win32cr::Foundation::PSTR
+    property unicode_string_value : Win32cr::Foundation::PWSTR
+    def initialize(@none : Void*, @bool_value : Win32cr::Foundation::BOOLEAN, @int8_value : Int8, @u_int8_value : UInt8, @int16_value : Int16, @u_int16_value : UInt16, @int32_value : Int32, @u_int32_value : UInt32, @int64_value : Int64, @u_int64_value : UInt64, @ansi_string_value : Win32cr::Foundation::PSTR, @unicode_string_value : Win32cr::Foundation::PWSTR)
+    end
+    end
 
+    def initialize(@type__ : Win32cr::System::SystemServices::IMAGE_POLICY_ENTRY_TYPE, @policy_id : Win32cr::System::SystemServices::IMAGE_POLICY_ID, @u : U_e__union_)
+    end
   end
 
   @[Extern]
-  record IMAGE_POLICY_METADATA,
-    version : UInt8,
-    reserved0 : UInt8[7],
-    application_id : UInt64,
-    policies : Win32cr::System::SystemServices::IMAGE_POLICY_ENTRY*
+  struct IMAGE_POLICY_METADATA
+    property version : UInt8
+    property reserved0 : UInt8[7]
+    property application_id : UInt64
+    property policies : Win32cr::System::SystemServices::IMAGE_POLICY_ENTRY*
+    def initialize(@version : UInt8, @reserved0 : UInt8[7], @application_id : UInt64, @policies : Win32cr::System::SystemServices::IMAGE_POLICY_ENTRY*)
+    end
+  end
 
   @[Extern]
-  record HEAP_OPTIMIZE_RESOURCES_INFORMATION,
-    version : UInt32,
-    flags : UInt32
+  struct HEAP_OPTIMIZE_RESOURCES_INFORMATION
+    property version : UInt32
+    property flags : UInt32
+    def initialize(@version : UInt32, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record SUPPORTED_OS_INFO,
-    major_version : UInt16,
-    minor_version : UInt16
+  struct SUPPORTED_OS_INFO
+    property major_version : UInt16
+    property minor_version : UInt16
+    def initialize(@major_version : UInt16, @minor_version : UInt16)
+    end
+  end
 
   @[Extern]
-  record MAXVERSIONTESTED_INFO,
-    max_version_tested : UInt64
+  struct MAXVERSIONTESTED_INFO
+    property max_version_tested : UInt64
+    def initialize(@max_version_tested : UInt64)
+    end
+  end
 
   @[Extern]
-  record PACKEDEVENTINFO,
-    ulSize : UInt32,
-    ulNumEventsForLogFile : UInt32,
-    ulOffsets : UInt32*
+  struct PACKEDEVENTINFO
+    property ulSize : UInt32
+    property ulNumEventsForLogFile : UInt32
+    property ulOffsets : UInt32*
+    def initialize(@ulSize : UInt32, @ulNumEventsForLogFile : UInt32, @ulOffsets : UInt32*)
+    end
+  end
 
   @[Extern]
-  record TAPE_GET_DRIVE_PARAMETERS,
-    ecc : Win32cr::Foundation::BOOLEAN,
-    compression : Win32cr::Foundation::BOOLEAN,
-    data_padding : Win32cr::Foundation::BOOLEAN,
-    report_setmarks : Win32cr::Foundation::BOOLEAN,
-    default_block_size : UInt32,
-    maximum_block_size : UInt32,
-    minimum_block_size : UInt32,
-    maximum_partition_count : UInt32,
-    features_low : UInt32,
-    features_high : Win32cr::System::SystemServices::TAPE_GET_DRIVE_PARAMETERS_FEATURES_HIGH,
-    eot_warning_zone_size : UInt32
+  struct TAPE_GET_DRIVE_PARAMETERS
+    property ecc : Win32cr::Foundation::BOOLEAN
+    property compression : Win32cr::Foundation::BOOLEAN
+    property data_padding : Win32cr::Foundation::BOOLEAN
+    property report_setmarks : Win32cr::Foundation::BOOLEAN
+    property default_block_size : UInt32
+    property maximum_block_size : UInt32
+    property minimum_block_size : UInt32
+    property maximum_partition_count : UInt32
+    property features_low : UInt32
+    property features_high : Win32cr::System::SystemServices::TAPE_GET_DRIVE_PARAMETERS_FEATURES_HIGH
+    property eot_warning_zone_size : UInt32
+    def initialize(@ecc : Win32cr::Foundation::BOOLEAN, @compression : Win32cr::Foundation::BOOLEAN, @data_padding : Win32cr::Foundation::BOOLEAN, @report_setmarks : Win32cr::Foundation::BOOLEAN, @default_block_size : UInt32, @maximum_block_size : UInt32, @minimum_block_size : UInt32, @maximum_partition_count : UInt32, @features_low : UInt32, @features_high : Win32cr::System::SystemServices::TAPE_GET_DRIVE_PARAMETERS_FEATURES_HIGH, @eot_warning_zone_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record TAPE_SET_DRIVE_PARAMETERS,
-    ecc : Win32cr::Foundation::BOOLEAN,
-    compression : Win32cr::Foundation::BOOLEAN,
-    data_padding : Win32cr::Foundation::BOOLEAN,
-    report_setmarks : Win32cr::Foundation::BOOLEAN,
-    eot_warning_zone_size : UInt32
+  struct TAPE_SET_DRIVE_PARAMETERS
+    property ecc : Win32cr::Foundation::BOOLEAN
+    property compression : Win32cr::Foundation::BOOLEAN
+    property data_padding : Win32cr::Foundation::BOOLEAN
+    property report_setmarks : Win32cr::Foundation::BOOLEAN
+    property eot_warning_zone_size : UInt32
+    def initialize(@ecc : Win32cr::Foundation::BOOLEAN, @compression : Win32cr::Foundation::BOOLEAN, @data_padding : Win32cr::Foundation::BOOLEAN, @report_setmarks : Win32cr::Foundation::BOOLEAN, @eot_warning_zone_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record TAPE_GET_MEDIA_PARAMETERS,
-    capacity : Win32cr::Foundation::LARGE_INTEGER,
-    remaining : Win32cr::Foundation::LARGE_INTEGER,
-    block_size : UInt32,
-    partition_count : UInt32,
-    write_protected : Win32cr::Foundation::BOOLEAN
+  struct TAPE_GET_MEDIA_PARAMETERS
+    property capacity : Win32cr::Foundation::LARGE_INTEGER
+    property remaining : Win32cr::Foundation::LARGE_INTEGER
+    property block_size : UInt32
+    property partition_count : UInt32
+    property write_protected : Win32cr::Foundation::BOOLEAN
+    def initialize(@capacity : Win32cr::Foundation::LARGE_INTEGER, @remaining : Win32cr::Foundation::LARGE_INTEGER, @block_size : UInt32, @partition_count : UInt32, @write_protected : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record TAPE_SET_MEDIA_PARAMETERS,
-    block_size : UInt32
+  struct TAPE_SET_MEDIA_PARAMETERS
+    property block_size : UInt32
+    def initialize(@block_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record TAPE_CREATE_PARTITION,
-    method : UInt32,
-    count : UInt32,
-    size : UInt32
+  struct TAPE_CREATE_PARTITION
+    property method : UInt32
+    property count : UInt32
+    property size : UInt32
+    def initialize(@method : UInt32, @count : UInt32, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record TAPE_WMI_OPERATIONS,
-    method : UInt32,
-    data_buffer_size : UInt32,
-    data_buffer : Void*
+  struct TAPE_WMI_OPERATIONS
+    property method : UInt32
+    property data_buffer_size : UInt32
+    property data_buffer : Void*
+    def initialize(@method : UInt32, @data_buffer_size : UInt32, @data_buffer : Void*)
+    end
+  end
 
   @[Extern]
-  record TRANSACTION_BASIC_INFORMATION,
-    transaction_id : LibC::GUID,
-    state : UInt32,
-    outcome : UInt32
+  struct TRANSACTION_BASIC_INFORMATION
+    property transaction_id : LibC::GUID
+    property state : UInt32
+    property outcome : UInt32
+    def initialize(@transaction_id : LibC::GUID, @state : UInt32, @outcome : UInt32)
+    end
+  end
 
   @[Extern]
-  record TRANSACTIONMANAGER_BASIC_INFORMATION,
-    tm_identity : LibC::GUID,
-    virtual_clock : Win32cr::Foundation::LARGE_INTEGER
+  struct TRANSACTIONMANAGER_BASIC_INFORMATION
+    property tm_identity : LibC::GUID
+    property virtual_clock : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@tm_identity : LibC::GUID, @virtual_clock : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
 
   @[Extern]
-  record TRANSACTIONMANAGER_LOG_INFORMATION,
-    log_identity : LibC::GUID
+  struct TRANSACTIONMANAGER_LOG_INFORMATION
+    property log_identity : LibC::GUID
+    def initialize(@log_identity : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record TRANSACTIONMANAGER_LOGPATH_INFORMATION,
-    log_path_length : UInt32,
-    log_path : UInt16*
+  struct TRANSACTIONMANAGER_LOGPATH_INFORMATION
+    property log_path_length : UInt32
+    property log_path : UInt16*
+    def initialize(@log_path_length : UInt32, @log_path : UInt16*)
+    end
+  end
 
   @[Extern]
-  record TRANSACTIONMANAGER_RECOVERY_INFORMATION,
-    last_recovered_lsn : UInt64
+  struct TRANSACTIONMANAGER_RECOVERY_INFORMATION
+    property last_recovered_lsn : UInt64
+    def initialize(@last_recovered_lsn : UInt64)
+    end
+  end
 
   @[Extern]
-  record TRANSACTIONMANAGER_OLDEST_INFORMATION,
-    oldest_transaction_guid : LibC::GUID
+  struct TRANSACTIONMANAGER_OLDEST_INFORMATION
+    property oldest_transaction_guid : LibC::GUID
+    def initialize(@oldest_transaction_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record TRANSACTION_PROPERTIES_INFORMATION,
-    isolation_level : UInt32,
-    isolation_flags : UInt32,
-    timeout : Win32cr::Foundation::LARGE_INTEGER,
-    outcome : UInt32,
-    description_length : UInt32,
-    description : UInt16*
+  struct TRANSACTION_PROPERTIES_INFORMATION
+    property isolation_level : UInt32
+    property isolation_flags : UInt32
+    property timeout : Win32cr::Foundation::LARGE_INTEGER
+    property outcome : UInt32
+    property description_length : UInt32
+    property description : UInt16*
+    def initialize(@isolation_level : UInt32, @isolation_flags : UInt32, @timeout : Win32cr::Foundation::LARGE_INTEGER, @outcome : UInt32, @description_length : UInt32, @description : UInt16*)
+    end
+  end
 
   @[Extern]
-  record TRANSACTION_BIND_INFORMATION,
-    tm_handle : Win32cr::Foundation::HANDLE
+  struct TRANSACTION_BIND_INFORMATION
+    property tm_handle : Win32cr::Foundation::HANDLE
+    def initialize(@tm_handle : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record TRANSACTION_ENLISTMENT_PAIR,
-    enlistment_id : LibC::GUID,
-    resource_manager_id : LibC::GUID
+  struct TRANSACTION_ENLISTMENT_PAIR
+    property enlistment_id : LibC::GUID
+    property resource_manager_id : LibC::GUID
+    def initialize(@enlistment_id : LibC::GUID, @resource_manager_id : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record TRANSACTION_ENLISTMENTS_INFORMATION,
-    number_of_enlistments : UInt32,
-    enlistment_pair : Win32cr::System::SystemServices::TRANSACTION_ENLISTMENT_PAIR*
+  struct TRANSACTION_ENLISTMENTS_INFORMATION
+    property number_of_enlistments : UInt32
+    property enlistment_pair : Win32cr::System::SystemServices::TRANSACTION_ENLISTMENT_PAIR*
+    def initialize(@number_of_enlistments : UInt32, @enlistment_pair : Win32cr::System::SystemServices::TRANSACTION_ENLISTMENT_PAIR*)
+    end
+  end
 
   @[Extern]
-  record TRANSACTION_SUPERIOR_ENLISTMENT_INFORMATION,
-    superior_enlistment_pair : Win32cr::System::SystemServices::TRANSACTION_ENLISTMENT_PAIR
+  struct TRANSACTION_SUPERIOR_ENLISTMENT_INFORMATION
+    property superior_enlistment_pair : Win32cr::System::SystemServices::TRANSACTION_ENLISTMENT_PAIR
+    def initialize(@superior_enlistment_pair : Win32cr::System::SystemServices::TRANSACTION_ENLISTMENT_PAIR)
+    end
+  end
 
   @[Extern]
-  record RESOURCEMANAGER_BASIC_INFORMATION,
-    resource_manager_id : LibC::GUID,
-    description_length : UInt32,
-    description : UInt16*
+  struct RESOURCEMANAGER_BASIC_INFORMATION
+    property resource_manager_id : LibC::GUID
+    property description_length : UInt32
+    property description : UInt16*
+    def initialize(@resource_manager_id : LibC::GUID, @description_length : UInt32, @description : UInt16*)
+    end
+  end
 
   @[Extern]
-  record RESOURCEMANAGER_COMPLETION_INFORMATION,
-    io_completion_port_handle : Win32cr::Foundation::HANDLE,
-    completion_key : LibC::UIntPtrT
+  struct RESOURCEMANAGER_COMPLETION_INFORMATION
+    property io_completion_port_handle : Win32cr::Foundation::HANDLE
+    property completion_key : LibC::UIntPtrT
+    def initialize(@io_completion_port_handle : Win32cr::Foundation::HANDLE, @completion_key : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record ENLISTMENT_BASIC_INFORMATION,
-    enlistment_id : LibC::GUID,
-    transaction_id : LibC::GUID,
-    resource_manager_id : LibC::GUID
+  struct ENLISTMENT_BASIC_INFORMATION
+    property enlistment_id : LibC::GUID
+    property transaction_id : LibC::GUID
+    property resource_manager_id : LibC::GUID
+    def initialize(@enlistment_id : LibC::GUID, @transaction_id : LibC::GUID, @resource_manager_id : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record ENLISTMENT_CRM_INFORMATION,
-    crm_transaction_manager_id : LibC::GUID,
-    crm_resource_manager_id : LibC::GUID,
-    crm_enlistment_id : LibC::GUID
+  struct ENLISTMENT_CRM_INFORMATION
+    property crm_transaction_manager_id : LibC::GUID
+    property crm_resource_manager_id : LibC::GUID
+    property crm_enlistment_id : LibC::GUID
+    def initialize(@crm_transaction_manager_id : LibC::GUID, @crm_resource_manager_id : LibC::GUID, @crm_enlistment_id : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record TRANSACTION_LIST_ENTRY,
-    uow : LibC::GUID
+  struct TRANSACTION_LIST_ENTRY
+    property uow : LibC::GUID
+    def initialize(@uow : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record TRANSACTION_LIST_INFORMATION,
-    number_of_transactions : UInt32,
-    transaction_information : Win32cr::System::SystemServices::TRANSACTION_LIST_ENTRY*
+  struct TRANSACTION_LIST_INFORMATION
+    property number_of_transactions : UInt32
+    property transaction_information : Win32cr::System::SystemServices::TRANSACTION_LIST_ENTRY*
+    def initialize(@number_of_transactions : UInt32, @transaction_information : Win32cr::System::SystemServices::TRANSACTION_LIST_ENTRY*)
+    end
+  end
 
   @[Extern]
-  record KTMOBJECT_CURSOR,
-    last_query : LibC::GUID,
-    object_id_count : UInt32,
-    object_ids : LibC::GUID*
+  struct KTMOBJECT_CURSOR
+    property last_query : LibC::GUID
+    property object_id_count : UInt32
+    property object_ids : LibC::GUID*
+    def initialize(@last_query : LibC::GUID, @object_id_count : UInt32, @object_ids : LibC::GUID*)
+    end
+  end
 
   @[Link("user32")]
   lib C

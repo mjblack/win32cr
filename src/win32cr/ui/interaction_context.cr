@@ -4,9 +4,9 @@ require "./input/pointer.cr"
 
 module Win32cr::UI::InteractionContext
   alias HINTERACTIONCONTEXT = LibC::IntPtrT
-  alias INTERACTION_CONTEXT_OUTPUT_CALLBACK = Proc(Void*, Win32cr::UI::InteractionContext::INTERACTION_CONTEXT_OUTPUT*, Void)*
+  alias INTERACTION_CONTEXT_OUTPUT_CALLBACK = Proc(Void*, Win32cr::UI::InteractionContext::INTERACTION_CONTEXT_OUTPUT*, Void)
 
-  alias INTERACTION_CONTEXT_OUTPUT_CALLBACK2 = Proc(Void*, Win32cr::UI::InteractionContext::INTERACTION_CONTEXT_OUTPUT2*, Void)*
+  alias INTERACTION_CONTEXT_OUTPUT_CALLBACK2 = Proc(Void*, Win32cr::UI::InteractionContext::INTERACTION_CONTEXT_OUTPUT2*, Void)
 
 
   enum INTERACTION_ID
@@ -130,82 +130,113 @@ module Win32cr::UI::InteractionContext
   end
 
   @[Extern]
-  record MANIPULATION_TRANSFORM,
-    translationX : Float32,
-    translationY : Float32,
-    scale : Float32,
-    expansion : Float32,
-    rotation : Float32
-
-  @[Extern]
-  record MANIPULATION_VELOCITY,
-    velocityX : Float32,
-    velocityY : Float32,
-    velocityExpansion : Float32,
-    velocityAngular : Float32
-
-  @[Extern]
-  record INTERACTION_ARGUMENTS_MANIPULATION,
-    delta : Win32cr::UI::InteractionContext::MANIPULATION_TRANSFORM,
-    cumulative : Win32cr::UI::InteractionContext::MANIPULATION_TRANSFORM,
-    velocity : Win32cr::UI::InteractionContext::MANIPULATION_VELOCITY,
-    railsState : Win32cr::UI::InteractionContext::MANIPULATION_RAILS_STATE
-
-  @[Extern]
-  record INTERACTION_ARGUMENTS_TAP,
-    count : UInt32
-
-  @[Extern]
-  record INTERACTION_ARGUMENTS_CROSS_SLIDE,
-    flags : Win32cr::UI::InteractionContext::CROSS_SLIDE_FLAGS
-
-  @[Extern]
-  record INTERACTION_CONTEXT_OUTPUT,
-    interactionId : Win32cr::UI::InteractionContext::INTERACTION_ID,
-    interactionFlags : Win32cr::UI::InteractionContext::INTERACTION_FLAGS,
-    inputType : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE,
-    x : Float32,
-    y : Float32,
-    arguments : Arguments_e__union_ do
-
-    # Nested Type Arguments_e__union_
-    @[Extern(union: true)]
-    record Arguments_e__union_,
-      manipulation : Win32cr::UI::InteractionContext::INTERACTION_ARGUMENTS_MANIPULATION,
-      tap : Win32cr::UI::InteractionContext::INTERACTION_ARGUMENTS_TAP,
-      crossSlide : Win32cr::UI::InteractionContext::INTERACTION_ARGUMENTS_CROSS_SLIDE
-
+  struct MANIPULATION_TRANSFORM
+    property translationX : Float32
+    property translationY : Float32
+    property scale : Float32
+    property expansion : Float32
+    property rotation : Float32
+    def initialize(@translationX : Float32, @translationY : Float32, @scale : Float32, @expansion : Float32, @rotation : Float32)
+    end
   end
 
   @[Extern]
-  record INTERACTION_CONTEXT_OUTPUT2,
-    interactionId : Win32cr::UI::InteractionContext::INTERACTION_ID,
-    interactionFlags : Win32cr::UI::InteractionContext::INTERACTION_FLAGS,
-    inputType : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE,
-    contactCount : UInt32,
-    currentContactCount : UInt32,
-    x : Float32,
-    y : Float32,
-    arguments : Arguments_e__union_ do
-
-    # Nested Type Arguments_e__union_
-    @[Extern(union: true)]
-    record Arguments_e__union_,
-      manipulation : Win32cr::UI::InteractionContext::INTERACTION_ARGUMENTS_MANIPULATION,
-      tap : Win32cr::UI::InteractionContext::INTERACTION_ARGUMENTS_TAP,
-      crossSlide : Win32cr::UI::InteractionContext::INTERACTION_ARGUMENTS_CROSS_SLIDE
-
+  struct MANIPULATION_VELOCITY
+    property velocityX : Float32
+    property velocityY : Float32
+    property velocityExpansion : Float32
+    property velocityAngular : Float32
+    def initialize(@velocityX : Float32, @velocityY : Float32, @velocityExpansion : Float32, @velocityAngular : Float32)
+    end
   end
 
   @[Extern]
-  record INTERACTION_CONTEXT_CONFIGURATION,
-    interactionId : Win32cr::UI::InteractionContext::INTERACTION_ID,
-    enable : Win32cr::UI::InteractionContext::INTERACTION_CONFIGURATION_FLAGS
+  struct INTERACTION_ARGUMENTS_MANIPULATION
+    property delta : Win32cr::UI::InteractionContext::MANIPULATION_TRANSFORM
+    property cumulative : Win32cr::UI::InteractionContext::MANIPULATION_TRANSFORM
+    property velocity : Win32cr::UI::InteractionContext::MANIPULATION_VELOCITY
+    property railsState : Win32cr::UI::InteractionContext::MANIPULATION_RAILS_STATE
+    def initialize(@delta : Win32cr::UI::InteractionContext::MANIPULATION_TRANSFORM, @cumulative : Win32cr::UI::InteractionContext::MANIPULATION_TRANSFORM, @velocity : Win32cr::UI::InteractionContext::MANIPULATION_VELOCITY, @railsState : Win32cr::UI::InteractionContext::MANIPULATION_RAILS_STATE)
+    end
+  end
 
   @[Extern]
-  record CROSS_SLIDE_PARAMETER,
-    threshold : Win32cr::UI::InteractionContext::CROSS_SLIDE_THRESHOLD,
-    distance : Float32
+  struct INTERACTION_ARGUMENTS_TAP
+    property count : UInt32
+    def initialize(@count : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct INTERACTION_ARGUMENTS_CROSS_SLIDE
+    property flags : Win32cr::UI::InteractionContext::CROSS_SLIDE_FLAGS
+    def initialize(@flags : Win32cr::UI::InteractionContext::CROSS_SLIDE_FLAGS)
+    end
+  end
+
+  @[Extern]
+  struct INTERACTION_CONTEXT_OUTPUT
+    property interactionId : Win32cr::UI::InteractionContext::INTERACTION_ID
+    property interactionFlags : Win32cr::UI::InteractionContext::INTERACTION_FLAGS
+    property inputType : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE
+    property x : Float32
+    property y : Float32
+    property arguments : Arguments_e__union_
+
+    # Nested Type Arguments_e__union_
+    @[Extern(union: true)]
+    struct Arguments_e__union_
+    property manipulation : Win32cr::UI::InteractionContext::INTERACTION_ARGUMENTS_MANIPULATION
+    property tap : Win32cr::UI::InteractionContext::INTERACTION_ARGUMENTS_TAP
+    property crossSlide : Win32cr::UI::InteractionContext::INTERACTION_ARGUMENTS_CROSS_SLIDE
+    def initialize(@manipulation : Win32cr::UI::InteractionContext::INTERACTION_ARGUMENTS_MANIPULATION, @tap : Win32cr::UI::InteractionContext::INTERACTION_ARGUMENTS_TAP, @crossSlide : Win32cr::UI::InteractionContext::INTERACTION_ARGUMENTS_CROSS_SLIDE)
+    end
+    end
+
+    def initialize(@interactionId : Win32cr::UI::InteractionContext::INTERACTION_ID, @interactionFlags : Win32cr::UI::InteractionContext::INTERACTION_FLAGS, @inputType : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE, @x : Float32, @y : Float32, @arguments : Arguments_e__union_)
+    end
+  end
+
+  @[Extern]
+  struct INTERACTION_CONTEXT_OUTPUT2
+    property interactionId : Win32cr::UI::InteractionContext::INTERACTION_ID
+    property interactionFlags : Win32cr::UI::InteractionContext::INTERACTION_FLAGS
+    property inputType : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE
+    property contactCount : UInt32
+    property currentContactCount : UInt32
+    property x : Float32
+    property y : Float32
+    property arguments : Arguments_e__union_
+
+    # Nested Type Arguments_e__union_
+    @[Extern(union: true)]
+    struct Arguments_e__union_
+    property manipulation : Win32cr::UI::InteractionContext::INTERACTION_ARGUMENTS_MANIPULATION
+    property tap : Win32cr::UI::InteractionContext::INTERACTION_ARGUMENTS_TAP
+    property crossSlide : Win32cr::UI::InteractionContext::INTERACTION_ARGUMENTS_CROSS_SLIDE
+    def initialize(@manipulation : Win32cr::UI::InteractionContext::INTERACTION_ARGUMENTS_MANIPULATION, @tap : Win32cr::UI::InteractionContext::INTERACTION_ARGUMENTS_TAP, @crossSlide : Win32cr::UI::InteractionContext::INTERACTION_ARGUMENTS_CROSS_SLIDE)
+    end
+    end
+
+    def initialize(@interactionId : Win32cr::UI::InteractionContext::INTERACTION_ID, @interactionFlags : Win32cr::UI::InteractionContext::INTERACTION_FLAGS, @inputType : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE, @contactCount : UInt32, @currentContactCount : UInt32, @x : Float32, @y : Float32, @arguments : Arguments_e__union_)
+    end
+  end
+
+  @[Extern]
+  struct INTERACTION_CONTEXT_CONFIGURATION
+    property interactionId : Win32cr::UI::InteractionContext::INTERACTION_ID
+    property enable : Win32cr::UI::InteractionContext::INTERACTION_CONFIGURATION_FLAGS
+    def initialize(@interactionId : Win32cr::UI::InteractionContext::INTERACTION_ID, @enable : Win32cr::UI::InteractionContext::INTERACTION_CONFIGURATION_FLAGS)
+    end
+  end
+
+  @[Extern]
+  struct CROSS_SLIDE_PARAMETER
+    property threshold : Win32cr::UI::InteractionContext::CROSS_SLIDE_THRESHOLD
+    property distance : Float32
+    def initialize(@threshold : Win32cr::UI::InteractionContext::CROSS_SLIDE_THRESHOLD, @distance : Float32)
+    end
+  end
 
   @[Link("ninput")]
   lib C

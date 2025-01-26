@@ -12,16 +12,22 @@ module Win32cr::Storage::OperationRecorder
   end
 
   @[Extern]
-  record OPERATION_START_PARAMETERS,
-    version : UInt32,
-    operation_id : UInt32,
-    flags : Win32cr::Storage::OperationRecorder::OPERATION_START_FLAGS
+  struct OPERATION_START_PARAMETERS
+    property version : UInt32
+    property operation_id : UInt32
+    property flags : Win32cr::Storage::OperationRecorder::OPERATION_START_FLAGS
+    def initialize(@version : UInt32, @operation_id : UInt32, @flags : Win32cr::Storage::OperationRecorder::OPERATION_START_FLAGS)
+    end
+  end
 
   @[Extern]
-  record OPERATION_END_PARAMETERS,
-    version : UInt32,
-    operation_id : UInt32,
-    flags : Win32cr::Storage::OperationRecorder::OPERATION_END_PARAMETERS_FLAGS
+  struct OPERATION_END_PARAMETERS
+    property version : UInt32
+    property operation_id : UInt32
+    property flags : Win32cr::Storage::OperationRecorder::OPERATION_END_PARAMETERS_FLAGS
+    def initialize(@version : UInt32, @operation_id : UInt32, @flags : Win32cr::Storage::OperationRecorder::OPERATION_END_PARAMETERS_FLAGS)
+    end
+  end
 
   @[Link("advapi32")]
   lib C

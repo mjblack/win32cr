@@ -70,63 +70,90 @@ module Win32cr::System::SideShow
   end
 
   @[Extern]
-  record SCF_EVENT_HEADER,
-    previous_page : UInt32,
-    target_page : UInt32
+  struct SCF_EVENT_HEADER
+    property previous_page : UInt32
+    property target_page : UInt32
+    def initialize(@previous_page : UInt32, @target_page : UInt32)
+    end
+  end
 
   @[Extern]
-  record SCF_NAVIGATION_EVENT,
-    previous_page : UInt32,
-    target_page : UInt32,
-    button : UInt32
+  struct SCF_NAVIGATION_EVENT
+    property previous_page : UInt32
+    property target_page : UInt32
+    property button : UInt32
+    def initialize(@previous_page : UInt32, @target_page : UInt32, @button : UInt32)
+    end
+  end
 
   @[Extern]
-  record SCF_MENUACTION_EVENT,
-    previous_page : UInt32,
-    target_page : UInt32,
-    button : UInt32,
-    item_id : UInt32
+  struct SCF_MENUACTION_EVENT
+    property previous_page : UInt32
+    property target_page : UInt32
+    property button : UInt32
+    property item_id : UInt32
+    def initialize(@previous_page : UInt32, @target_page : UInt32, @button : UInt32, @item_id : UInt32)
+    end
+  end
 
   @[Extern]
-  record SCF_CONTEXTMENU_EVENT,
-    previous_page : UInt32,
-    target_page : UInt32,
-    previous_item_id : UInt32,
-    menu_page : UInt32,
-    menu_item_id : UInt32
+  struct SCF_CONTEXTMENU_EVENT
+    property previous_page : UInt32
+    property target_page : UInt32
+    property previous_item_id : UInt32
+    property menu_page : UInt32
+    property menu_item_id : UInt32
+    def initialize(@previous_page : UInt32, @target_page : UInt32, @previous_item_id : UInt32, @menu_page : UInt32, @menu_item_id : UInt32)
+    end
+  end
 
   @[Extern]
-  record CONTENT_MISSING_EVENT_DATA,
-    cbContentMissingEventData : UInt32,
-    application_id : LibC::GUID,
-    endpoint_id : LibC::GUID,
-    content_id : UInt32
+  struct CONTENT_MISSING_EVENT_DATA
+    property cbContentMissingEventData : UInt32
+    property application_id : LibC::GUID
+    property endpoint_id : LibC::GUID
+    property content_id : UInt32
+    def initialize(@cbContentMissingEventData : UInt32, @application_id : LibC::GUID, @endpoint_id : LibC::GUID, @content_id : UInt32)
+    end
+  end
 
   @[Extern]
-  record APPLICATION_EVENT_DATA,
-    cbApplicationEventData : UInt32,
-    application_id : LibC::GUID,
-    endpoint_id : LibC::GUID,
-    dwEventId : UInt32,
-    cbEventData : UInt32,
-    bEventData : UInt8*
+  struct APPLICATION_EVENT_DATA
+    property cbApplicationEventData : UInt32
+    property application_id : LibC::GUID
+    property endpoint_id : LibC::GUID
+    property dwEventId : UInt32
+    property cbEventData : UInt32
+    property bEventData : UInt8*
+    def initialize(@cbApplicationEventData : UInt32, @application_id : LibC::GUID, @endpoint_id : LibC::GUID, @dwEventId : UInt32, @cbEventData : UInt32, @bEventData : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DEVICE_USER_CHANGE_EVENT_DATA,
-    cbDeviceUserChangeEventData : UInt32,
-    wszUser : UInt16
+  struct DEVICE_USER_CHANGE_EVENT_DATA
+    property cbDeviceUserChangeEventData : UInt32
+    property wszUser : UInt16
+    def initialize(@cbDeviceUserChangeEventData : UInt32, @wszUser : UInt16)
+    end
+  end
 
   @[Extern]
-  record NEW_EVENT_DATA_AVAILABLE,
-    cbNewEventDataAvailable : UInt32,
-    dwVersion : UInt32
+  struct NEW_EVENT_DATA_AVAILABLE
+    property cbNewEventDataAvailable : UInt32
+    property dwVersion : UInt32
+    def initialize(@cbNewEventDataAvailable : UInt32, @dwVersion : UInt32)
+    end
+  end
 
   @[Extern]
-  record EVENT_DATA_HEADER,
-    cbEventDataHeader : UInt32,
-    guidEventType : LibC::GUID,
-    dwVersion : UInt32,
-    cbEventDataSid : UInt32
+  struct EVENT_DATA_HEADER
+    property cbEventDataHeader : UInt32
+    property guidEventType : LibC::GUID
+    property dwVersion : UInt32
+    property cbEventDataSid : UInt32
+    def initialize(@cbEventDataHeader : UInt32, @guidEventType : LibC::GUID, @dwVersion : UInt32, @cbEventDataSid : UInt32)
+    end
+  end
 
   @[Extern]
   record ISideShowSessionVtbl,
@@ -138,7 +165,6 @@ module Win32cr::System::SideShow
 
 
   @[Extern]
-  #@[Com("e22331ee-9e7d-4922-9fc2-ab7aa41ce491")]
   record ISideShowSession, lpVtbl : ISideShowSessionVtbl* do
     GUID = LibC::GUID.new(0xe22331ee_u32, 0x9e7d_u16, 0x4922_u16, StaticArray[0x9f_u8, 0xc2_u8, 0xab_u8, 0x7a_u8, 0xa4_u8, 0x1c_u8, 0xe4_u8, 0x91_u8])
     def query_interface(this : ISideShowSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -170,7 +196,6 @@ module Win32cr::System::SideShow
 
 
   @[Extern]
-  #@[Com("63cea909-f2b9-4302-b5e1-c68e6d9ab833")]
   record ISideShowNotificationManager, lpVtbl : ISideShowNotificationManagerVtbl* do
     GUID = LibC::GUID.new(0x63cea909_u32, 0xf2b9_u16, 0x4302_u16, StaticArray[0xb5_u8, 0xe1_u8, 0xc6_u8, 0x8e_u8, 0x6d_u8, 0x9a_u8, 0xb8_u8, 0x33_u8])
     def query_interface(this : ISideShowNotificationManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -212,7 +237,6 @@ module Win32cr::System::SideShow
 
 
   @[Extern]
-  #@[Com("03c93300-8ab2-41c5-9b79-46127a30e148")]
   record ISideShowNotification, lpVtbl : ISideShowNotificationVtbl* do
     GUID = LibC::GUID.new(0x3c93300_u32, 0x8ab2_u16, 0x41c5_u16, StaticArray[0x9b_u8, 0x79_u8, 0x46_u8, 0x12_u8, 0x7a_u8, 0x30_u8, 0xe1_u8, 0x48_u8])
     def query_interface(this : ISideShowNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -270,7 +294,6 @@ module Win32cr::System::SideShow
 
 
   @[Extern]
-  #@[Com("a5d5b66b-eef9-41db-8d7e-e17c33ab10b0")]
   record ISideShowContentManager, lpVtbl : ISideShowContentManagerVtbl* do
     GUID = LibC::GUID.new(0xa5d5b66b_u32, 0xeef9_u16, 0x41db_u16, StaticArray[0x8d_u8, 0x7e_u8, 0xe1_u8, 0x7c_u8, 0x33_u8, 0xab_u8, 0x10_u8, 0xb0_u8])
     def query_interface(this : ISideShowContentManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -311,7 +334,6 @@ module Win32cr::System::SideShow
 
 
   @[Extern]
-  #@[Com("c18552ed-74ff-4fec-be07-4cfed29d4887")]
   record ISideShowContent, lpVtbl : ISideShowContentVtbl* do
     GUID = LibC::GUID.new(0xc18552ed_u32, 0x74ff_u16, 0x4fec_u16, StaticArray[0xbe_u8, 0x7_u8, 0x4c_u8, 0xfe_u8, 0xd2_u8, 0x9d_u8, 0x48_u8, 0x87_u8])
     def query_interface(this : ISideShowContent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -347,7 +369,6 @@ module Win32cr::System::SideShow
 
 
   @[Extern]
-  #@[Com("61feca4c-deb4-4a7e-8d75-51f1132d615b")]
   record ISideShowEvents, lpVtbl : ISideShowEventsVtbl* do
     GUID = LibC::GUID.new(0x61feca4c_u32, 0xdeb4_u16, 0x4a7e_u16, StaticArray[0x8d_u8, 0x75_u8, 0x51_u8, 0xf1_u8, 0x13_u8, 0x2d_u8, 0x61_u8, 0x5b_u8])
     def query_interface(this : ISideShowEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -383,7 +404,6 @@ module Win32cr::System::SideShow
 
 
   @[Extern]
-  #@[Com("535e1379-c09e-4a54-a511-597bab3a72b8")]
   record ISideShowCapabilities, lpVtbl : ISideShowCapabilitiesVtbl* do
     GUID = LibC::GUID.new(0x535e1379_u32, 0xc09e_u16, 0x4a54_u16, StaticArray[0xa5_u8, 0x11_u8, 0x59_u8, 0x7b_u8, 0xab_u8, 0x3a_u8, 0x72_u8, 0xb8_u8])
     def query_interface(this : ISideShowCapabilities*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -411,7 +431,6 @@ module Win32cr::System::SideShow
 
 
   @[Extern]
-  #@[Com("50305597-5e0d-4ff7-b3af-33d0d9bd52dd")]
   record ISideShowCapabilitiesCollection, lpVtbl : ISideShowCapabilitiesCollectionVtbl* do
     GUID = LibC::GUID.new(0x50305597_u32, 0x5e0d_u16, 0x4ff7_u16, StaticArray[0xb3_u8, 0xaf_u8, 0x33_u8, 0xd0_u8, 0xd9_u8, 0xbd_u8, 0x52_u8, 0xdd_u8])
     def query_interface(this : ISideShowCapabilitiesCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -442,7 +461,6 @@ module Win32cr::System::SideShow
 
 
   @[Extern]
-  #@[Com("3a2b7fbc-3ad5-48bd-bbf1-0e6cfbd10807")]
   record ISideShowBulkCapabilities, lpVtbl : ISideShowBulkCapabilitiesVtbl* do
     GUID = LibC::GUID.new(0x3a2b7fbc_u32, 0x3ad5_u16, 0x48bd_u16, StaticArray[0xbb_u8, 0xf1_u8, 0xe_u8, 0x6c_u8, 0xfb_u8, 0xd1_u8, 0x8_u8, 0x7_u8])
     def query_interface(this : ISideShowBulkCapabilities*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -476,7 +494,6 @@ module Win32cr::System::SideShow
 
 
   @[Extern]
-  #@[Com("045473bc-a37b-4957-b144-68105411ed8e")]
   record ISideShowKeyCollection, lpVtbl : ISideShowKeyCollectionVtbl* do
     GUID = LibC::GUID.new(0x45473bc_u32, 0xa37b_u16, 0x4957_u16, StaticArray[0xb1_u8, 0x44_u8, 0x68_u8, 0x10_u8, 0x54_u8, 0x11_u8, 0xed_u8, 0x8e_u8])
     def query_interface(this : ISideShowKeyCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -519,7 +536,6 @@ module Win32cr::System::SideShow
 
 
   @[Extern]
-  #@[Com("2ea7a549-7bff-4aae-bab0-22d43111de49")]
   record ISideShowPropVariantCollection, lpVtbl : ISideShowPropVariantCollectionVtbl* do
     GUID = LibC::GUID.new(0x2ea7a549_u32, 0x7bff_u16, 0x4aae_u16, StaticArray[0xba_u8, 0xb0_u8, 0x22_u8, 0xd4_u8, 0x31_u8, 0x11_u8, 0xde_u8, 0x49_u8])
     def query_interface(this : ISideShowPropVariantCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

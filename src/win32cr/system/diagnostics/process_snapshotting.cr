@@ -86,214 +86,272 @@ module Win32cr::System::Diagnostics::ProcessSnapshotting
   end
 
   @[Extern]
-  record PSS_PROCESS_INFORMATION,
-    exit_status : UInt32,
-    peb_base_address : Void*,
-    affinity_mask : LibC::UIntPtrT,
-    base_priority : Int32,
-    process_id : UInt32,
-    parent_process_id : UInt32,
-    flags : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_PROCESS_FLAGS,
-    create_time : Win32cr::Foundation::FILETIME,
-    exit_time : Win32cr::Foundation::FILETIME,
-    kernel_time : Win32cr::Foundation::FILETIME,
-    user_time : Win32cr::Foundation::FILETIME,
-    priority_class : UInt32,
-    peak_virtual_size : LibC::UIntPtrT,
-    virtual_size : LibC::UIntPtrT,
-    page_fault_count : UInt32,
-    peak_working_set_size : LibC::UIntPtrT,
-    working_set_size : LibC::UIntPtrT,
-    quota_peak_paged_pool_usage : LibC::UIntPtrT,
-    quota_paged_pool_usage : LibC::UIntPtrT,
-    quota_peak_non_paged_pool_usage : LibC::UIntPtrT,
-    quota_non_paged_pool_usage : LibC::UIntPtrT,
-    pagefile_usage : LibC::UIntPtrT,
-    peak_pagefile_usage : LibC::UIntPtrT,
-    private_usage : LibC::UIntPtrT,
-    execute_flags : UInt32,
-    image_file_name : UInt16[260]
+  struct PSS_PROCESS_INFORMATION
+    property exit_status : UInt32
+    property peb_base_address : Void*
+    property affinity_mask : LibC::UIntPtrT
+    property base_priority : Int32
+    property process_id : UInt32
+    property parent_process_id : UInt32
+    property flags : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_PROCESS_FLAGS
+    property create_time : Win32cr::Foundation::FILETIME
+    property exit_time : Win32cr::Foundation::FILETIME
+    property kernel_time : Win32cr::Foundation::FILETIME
+    property user_time : Win32cr::Foundation::FILETIME
+    property priority_class : UInt32
+    property peak_virtual_size : LibC::UIntPtrT
+    property virtual_size : LibC::UIntPtrT
+    property page_fault_count : UInt32
+    property peak_working_set_size : LibC::UIntPtrT
+    property working_set_size : LibC::UIntPtrT
+    property quota_peak_paged_pool_usage : LibC::UIntPtrT
+    property quota_paged_pool_usage : LibC::UIntPtrT
+    property quota_peak_non_paged_pool_usage : LibC::UIntPtrT
+    property quota_non_paged_pool_usage : LibC::UIntPtrT
+    property pagefile_usage : LibC::UIntPtrT
+    property peak_pagefile_usage : LibC::UIntPtrT
+    property private_usage : LibC::UIntPtrT
+    property execute_flags : UInt32
+    property image_file_name : UInt16[260]
+    def initialize(@exit_status : UInt32, @peb_base_address : Void*, @affinity_mask : LibC::UIntPtrT, @base_priority : Int32, @process_id : UInt32, @parent_process_id : UInt32, @flags : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_PROCESS_FLAGS, @create_time : Win32cr::Foundation::FILETIME, @exit_time : Win32cr::Foundation::FILETIME, @kernel_time : Win32cr::Foundation::FILETIME, @user_time : Win32cr::Foundation::FILETIME, @priority_class : UInt32, @peak_virtual_size : LibC::UIntPtrT, @virtual_size : LibC::UIntPtrT, @page_fault_count : UInt32, @peak_working_set_size : LibC::UIntPtrT, @working_set_size : LibC::UIntPtrT, @quota_peak_paged_pool_usage : LibC::UIntPtrT, @quota_paged_pool_usage : LibC::UIntPtrT, @quota_peak_non_paged_pool_usage : LibC::UIntPtrT, @quota_non_paged_pool_usage : LibC::UIntPtrT, @pagefile_usage : LibC::UIntPtrT, @peak_pagefile_usage : LibC::UIntPtrT, @private_usage : LibC::UIntPtrT, @execute_flags : UInt32, @image_file_name : UInt16[260])
+    end
+  end
 
   @[Extern]
-  record PSS_VA_CLONE_INFORMATION,
-    va_clone_handle : Win32cr::Foundation::HANDLE
+  struct PSS_VA_CLONE_INFORMATION
+    property va_clone_handle : Win32cr::Foundation::HANDLE
+    def initialize(@va_clone_handle : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record PSS_AUXILIARY_PAGES_INFORMATION,
-    aux_pages_captured : UInt32
+  struct PSS_AUXILIARY_PAGES_INFORMATION
+    property aux_pages_captured : UInt32
+    def initialize(@aux_pages_captured : UInt32)
+    end
+  end
 
   @[Extern]
-  record PSS_VA_SPACE_INFORMATION,
-    region_count : UInt32
+  struct PSS_VA_SPACE_INFORMATION
+    property region_count : UInt32
+    def initialize(@region_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record PSS_HANDLE_INFORMATION,
-    handles_captured : UInt32
+  struct PSS_HANDLE_INFORMATION
+    property handles_captured : UInt32
+    def initialize(@handles_captured : UInt32)
+    end
+  end
 
   @[Extern]
-  record PSS_THREAD_INFORMATION,
-    threads_captured : UInt32,
-    context_length : UInt32
+  struct PSS_THREAD_INFORMATION
+    property threads_captured : UInt32
+    property context_length : UInt32
+    def initialize(@threads_captured : UInt32, @context_length : UInt32)
+    end
+  end
 
   @[Extern]
-  record PSS_HANDLE_TRACE_INFORMATION,
-    section_handle : Win32cr::Foundation::HANDLE,
-    size : UInt32
+  struct PSS_HANDLE_TRACE_INFORMATION
+    property section_handle : Win32cr::Foundation::HANDLE
+    property size : UInt32
+    def initialize(@section_handle : Win32cr::Foundation::HANDLE, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record PSS_PERFORMANCE_COUNTERS,
-    total_cycle_count : UInt64,
-    total_wall_clock_period : UInt64,
-    va_clone_cycle_count : UInt64,
-    va_clone_wall_clock_period : UInt64,
-    va_space_cycle_count : UInt64,
-    va_space_wall_clock_period : UInt64,
-    aux_pages_cycle_count : UInt64,
-    aux_pages_wall_clock_period : UInt64,
-    handles_cycle_count : UInt64,
-    handles_wall_clock_period : UInt64,
-    threads_cycle_count : UInt64,
-    threads_wall_clock_period : UInt64
+  struct PSS_PERFORMANCE_COUNTERS
+    property total_cycle_count : UInt64
+    property total_wall_clock_period : UInt64
+    property va_clone_cycle_count : UInt64
+    property va_clone_wall_clock_period : UInt64
+    property va_space_cycle_count : UInt64
+    property va_space_wall_clock_period : UInt64
+    property aux_pages_cycle_count : UInt64
+    property aux_pages_wall_clock_period : UInt64
+    property handles_cycle_count : UInt64
+    property handles_wall_clock_period : UInt64
+    property threads_cycle_count : UInt64
+    property threads_wall_clock_period : UInt64
+    def initialize(@total_cycle_count : UInt64, @total_wall_clock_period : UInt64, @va_clone_cycle_count : UInt64, @va_clone_wall_clock_period : UInt64, @va_space_cycle_count : UInt64, @va_space_wall_clock_period : UInt64, @aux_pages_cycle_count : UInt64, @aux_pages_wall_clock_period : UInt64, @handles_cycle_count : UInt64, @handles_wall_clock_period : UInt64, @threads_cycle_count : UInt64, @threads_wall_clock_period : UInt64)
+    end
+  end
 
   @[Extern]
-  record PSS_AUXILIARY_PAGE_ENTRY,
-    address : Void*,
-    basic_information : Win32cr::System::Memory::MEMORY_BASIC_INFORMATION,
-    capture_time : Win32cr::Foundation::FILETIME,
-    page_contents : Void*,
-    page_size : UInt32
+  struct PSS_AUXILIARY_PAGE_ENTRY
+    property address : Void*
+    property basic_information : Win32cr::System::Memory::MEMORY_BASIC_INFORMATION
+    property capture_time : Win32cr::Foundation::FILETIME
+    property page_contents : Void*
+    property page_size : UInt32
+    def initialize(@address : Void*, @basic_information : Win32cr::System::Memory::MEMORY_BASIC_INFORMATION, @capture_time : Win32cr::Foundation::FILETIME, @page_contents : Void*, @page_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record PSS_VA_SPACE_ENTRY,
-    base_address : Void*,
-    allocation_base : Void*,
-    allocation_protect : UInt32,
-    region_size : LibC::UIntPtrT,
-    state : UInt32,
-    protect : UInt32,
-    type__ : UInt32,
-    time_date_stamp : UInt32,
-    size_of_image : UInt32,
-    image_base : Void*,
-    check_sum : UInt32,
-    mapped_file_name_length : UInt16,
-    mapped_file_name : Win32cr::Foundation::PWSTR
+  struct PSS_VA_SPACE_ENTRY
+    property base_address : Void*
+    property allocation_base : Void*
+    property allocation_protect : UInt32
+    property region_size : LibC::UIntPtrT
+    property state : UInt32
+    property protect : UInt32
+    property type__ : UInt32
+    property time_date_stamp : UInt32
+    property size_of_image : UInt32
+    property image_base : Void*
+    property check_sum : UInt32
+    property mapped_file_name_length : UInt16
+    property mapped_file_name : Win32cr::Foundation::PWSTR
+    def initialize(@base_address : Void*, @allocation_base : Void*, @allocation_protect : UInt32, @region_size : LibC::UIntPtrT, @state : UInt32, @protect : UInt32, @type__ : UInt32, @time_date_stamp : UInt32, @size_of_image : UInt32, @image_base : Void*, @check_sum : UInt32, @mapped_file_name_length : UInt16, @mapped_file_name : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record PSS_HANDLE_ENTRY,
-    handle : Win32cr::Foundation::HANDLE,
-    flags : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_HANDLE_FLAGS,
-    object_type : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_OBJECT_TYPE,
-    capture_time : Win32cr::Foundation::FILETIME,
-    attributes : UInt32,
-    granted_access : UInt32,
-    handle_count : UInt32,
-    pointer_count : UInt32,
-    paged_pool_charge : UInt32,
-    non_paged_pool_charge : UInt32,
-    creation_time : Win32cr::Foundation::FILETIME,
-    type_name_length : UInt16,
-    type_name : Win32cr::Foundation::PWSTR,
-    object_name_length : UInt16,
-    object_name : Win32cr::Foundation::PWSTR,
-    type_specific_information : TypeSpecificInformation_e__Union_ do
+  struct PSS_HANDLE_ENTRY
+    property handle : Win32cr::Foundation::HANDLE
+    property flags : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_HANDLE_FLAGS
+    property object_type : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_OBJECT_TYPE
+    property capture_time : Win32cr::Foundation::FILETIME
+    property attributes : UInt32
+    property granted_access : UInt32
+    property handle_count : UInt32
+    property pointer_count : UInt32
+    property paged_pool_charge : UInt32
+    property non_paged_pool_charge : UInt32
+    property creation_time : Win32cr::Foundation::FILETIME
+    property type_name_length : UInt16
+    property type_name : Win32cr::Foundation::PWSTR
+    property object_name_length : UInt16
+    property object_name : Win32cr::Foundation::PWSTR
+    property type_specific_information : TypeSpecificInformation_e__Union_
 
     # Nested Type TypeSpecificInformation_e__Union_
     @[Extern(union: true)]
-    record TypeSpecificInformation_e__Union_,
-      process : Process_e__Struct_,
-      thread : Thread_e__Struct_,
-      mutant : Mutant_e__Struct_,
-      event : Event_e__Struct_,
-      section : Section_e__Struct_,
-      semaphore : Semaphore_e__Struct_ do
+    struct TypeSpecificInformation_e__Union_
+    property process : Process_e__Struct_
+    property thread : Thread_e__Struct_
+    property mutant : Mutant_e__Struct_
+    property event : Event_e__Struct_
+    property section : Section_e__Struct_
+    property semaphore : Semaphore_e__Struct_
 
       # Nested Type Semaphore_e__Struct_
       @[Extern]
-      record Semaphore_e__Struct_,
-        current_count : Int32,
-        maximum_count : Int32
+      struct Semaphore_e__Struct_
+    property current_count : Int32
+    property maximum_count : Int32
+    def initialize(@current_count : Int32, @maximum_count : Int32)
+    end
+      end
 
 
       # Nested Type Event_e__Struct_
       @[Extern]
-      record Event_e__Struct_,
-        manual_reset : Win32cr::Foundation::BOOL,
-        signaled : Win32cr::Foundation::BOOL
+      struct Event_e__Struct_
+    property manual_reset : Win32cr::Foundation::BOOL
+    property signaled : Win32cr::Foundation::BOOL
+    def initialize(@manual_reset : Win32cr::Foundation::BOOL, @signaled : Win32cr::Foundation::BOOL)
+    end
+      end
 
 
       # Nested Type Thread_e__Struct_
       @[Extern]
-      record Thread_e__Struct_,
-        exit_status : UInt32,
-        teb_base_address : Void*,
-        process_id : UInt32,
-        thread_id : UInt32,
-        affinity_mask : LibC::UIntPtrT,
-        priority : Int32,
-        base_priority : Int32,
-        win32_start_address : Void*
+      struct Thread_e__Struct_
+    property exit_status : UInt32
+    property teb_base_address : Void*
+    property process_id : UInt32
+    property thread_id : UInt32
+    property affinity_mask : LibC::UIntPtrT
+    property priority : Int32
+    property base_priority : Int32
+    property win32_start_address : Void*
+    def initialize(@exit_status : UInt32, @teb_base_address : Void*, @process_id : UInt32, @thread_id : UInt32, @affinity_mask : LibC::UIntPtrT, @priority : Int32, @base_priority : Int32, @win32_start_address : Void*)
+    end
+      end
 
 
       # Nested Type Section_e__Struct_
       @[Extern]
-      record Section_e__Struct_,
-        base_address : Void*,
-        allocation_attributes : UInt32,
-        maximum_size : Win32cr::Foundation::LARGE_INTEGER
+      struct Section_e__Struct_
+    property base_address : Void*
+    property allocation_attributes : UInt32
+    property maximum_size : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@base_address : Void*, @allocation_attributes : UInt32, @maximum_size : Win32cr::Foundation::LARGE_INTEGER)
+    end
+      end
 
 
       # Nested Type Process_e__Struct_
       @[Extern]
-      record Process_e__Struct_,
-        exit_status : UInt32,
-        peb_base_address : Void*,
-        affinity_mask : LibC::UIntPtrT,
-        base_priority : Int32,
-        process_id : UInt32,
-        parent_process_id : UInt32,
-        flags : UInt32
+      struct Process_e__Struct_
+    property exit_status : UInt32
+    property peb_base_address : Void*
+    property affinity_mask : LibC::UIntPtrT
+    property base_priority : Int32
+    property process_id : UInt32
+    property parent_process_id : UInt32
+    property flags : UInt32
+    def initialize(@exit_status : UInt32, @peb_base_address : Void*, @affinity_mask : LibC::UIntPtrT, @base_priority : Int32, @process_id : UInt32, @parent_process_id : UInt32, @flags : UInt32)
+    end
+      end
 
 
       # Nested Type Mutant_e__Struct_
       @[Extern]
-      record Mutant_e__Struct_,
-        current_count : Int32,
-        abandoned : Win32cr::Foundation::BOOL,
-        owner_process_id : UInt32,
-        owner_thread_id : UInt32
+      struct Mutant_e__Struct_
+    property current_count : Int32
+    property abandoned : Win32cr::Foundation::BOOL
+    property owner_process_id : UInt32
+    property owner_thread_id : UInt32
+    def initialize(@current_count : Int32, @abandoned : Win32cr::Foundation::BOOL, @owner_process_id : UInt32, @owner_thread_id : UInt32)
+    end
+      end
 
+    def initialize(@process : Process_e__Struct_, @thread : Thread_e__Struct_, @mutant : Mutant_e__Struct_, @event : Event_e__Struct_, @section : Section_e__Struct_, @semaphore : Semaphore_e__Struct_)
+    end
     end
 
+    def initialize(@handle : Win32cr::Foundation::HANDLE, @flags : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_HANDLE_FLAGS, @object_type : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_OBJECT_TYPE, @capture_time : Win32cr::Foundation::FILETIME, @attributes : UInt32, @granted_access : UInt32, @handle_count : UInt32, @pointer_count : UInt32, @paged_pool_charge : UInt32, @non_paged_pool_charge : UInt32, @creation_time : Win32cr::Foundation::FILETIME, @type_name_length : UInt16, @type_name : Win32cr::Foundation::PWSTR, @object_name_length : UInt16, @object_name : Win32cr::Foundation::PWSTR, @type_specific_information : TypeSpecificInformation_e__Union_)
+    end
   end
 
   @[Extern]
-  record PSS_THREAD_ENTRY,
-    exit_status : UInt32,
-    teb_base_address : Void*,
-    process_id : UInt32,
-    thread_id : UInt32,
-    affinity_mask : LibC::UIntPtrT,
-    priority : Int32,
-    base_priority : Int32,
-    last_syscall_first_argument : Void*,
-    last_syscall_number : UInt16,
-    create_time : Win32cr::Foundation::FILETIME,
-    exit_time : Win32cr::Foundation::FILETIME,
-    kernel_time : Win32cr::Foundation::FILETIME,
-    user_time : Win32cr::Foundation::FILETIME,
-    win32_start_address : Void*,
-    capture_time : Win32cr::Foundation::FILETIME,
-    flags : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_THREAD_FLAGS,
-    suspend_count : UInt16,
-    size_of_context_record : UInt16,
-    context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*
+  struct PSS_THREAD_ENTRY
+    property exit_status : UInt32
+    property teb_base_address : Void*
+    property process_id : UInt32
+    property thread_id : UInt32
+    property affinity_mask : LibC::UIntPtrT
+    property priority : Int32
+    property base_priority : Int32
+    property last_syscall_first_argument : Void*
+    property last_syscall_number : UInt16
+    property create_time : Win32cr::Foundation::FILETIME
+    property exit_time : Win32cr::Foundation::FILETIME
+    property kernel_time : Win32cr::Foundation::FILETIME
+    property user_time : Win32cr::Foundation::FILETIME
+    property win32_start_address : Void*
+    property capture_time : Win32cr::Foundation::FILETIME
+    property flags : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_THREAD_FLAGS
+    property suspend_count : UInt16
+    property size_of_context_record : UInt16
+    property context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*
+    def initialize(@exit_status : UInt32, @teb_base_address : Void*, @process_id : UInt32, @thread_id : UInt32, @affinity_mask : LibC::UIntPtrT, @priority : Int32, @base_priority : Int32, @last_syscall_first_argument : Void*, @last_syscall_number : UInt16, @create_time : Win32cr::Foundation::FILETIME, @exit_time : Win32cr::Foundation::FILETIME, @kernel_time : Win32cr::Foundation::FILETIME, @user_time : Win32cr::Foundation::FILETIME, @win32_start_address : Void*, @capture_time : Win32cr::Foundation::FILETIME, @flags : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_THREAD_FLAGS, @suspend_count : UInt16, @size_of_context_record : UInt16, @context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*)
+    end
+  end
 
   @[Extern]
-  record PSS_ALLOCATOR,
-    context : Void*,
-    alloc_routine : LibC::IntPtrT,
-    free_routine : LibC::IntPtrT
+  struct PSS_ALLOCATOR
+    property context : Void*
+    property alloc_routine : LibC::IntPtrT
+    property free_routine : LibC::IntPtrT
+    def initialize(@context : Void*, @alloc_routine : LibC::IntPtrT, @free_routine : LibC::IntPtrT)
+    end
+  end
 
   @[Link("kernel32")]
   lib C

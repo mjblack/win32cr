@@ -5,11 +5,11 @@ module Win32cr::System::HostComputeSystem
   alias HCS_OPERATION = LibC::IntPtrT
   alias HCS_SYSTEM = LibC::IntPtrT
   alias HCS_PROCESS = LibC::IntPtrT
-  alias HCS_OPERATION_COMPLETION = Proc(Win32cr::System::HostComputeSystem::HCS_OPERATION, Void*, Void)*
+  alias HCS_OPERATION_COMPLETION = Proc(Win32cr::System::HostComputeSystem::HCS_OPERATION, Void*, Void)
 
-  alias HCS_EVENT_CALLBACK = Proc(Win32cr::System::HostComputeSystem::HCS_EVENT*, Void*, Void)*
+  alias HCS_EVENT_CALLBACK = Proc(Win32cr::System::HostComputeSystem::HCS_EVENT*, Void*, Void)
 
-  alias HCS_NOTIFICATION_CALLBACK = Proc(UInt32, Void*, Win32cr::Foundation::HRESULT, Win32cr::Foundation::PWSTR, Void)*
+  alias HCS_NOTIFICATION_CALLBACK = Proc(UInt32, Void*, Win32cr::Foundation::HRESULT, Win32cr::Foundation::PWSTR, Void)
 
 
   enum HCS_OPERATION_TYPE
@@ -80,27 +80,36 @@ module Win32cr::System::HostComputeSystem
   end
 
   @[Extern]
-  record HCS_EVENT,
-    type__ : Win32cr::System::HostComputeSystem::HCS_EVENT_TYPE,
-    event_data : Win32cr::Foundation::PWSTR,
-    operation : Win32cr::System::HostComputeSystem::HCS_OPERATION
+  struct HCS_EVENT
+    property type__ : Win32cr::System::HostComputeSystem::HCS_EVENT_TYPE
+    property event_data : Win32cr::Foundation::PWSTR
+    property operation : Win32cr::System::HostComputeSystem::HCS_OPERATION
+    def initialize(@type__ : Win32cr::System::HostComputeSystem::HCS_EVENT_TYPE, @event_data : Win32cr::Foundation::PWSTR, @operation : Win32cr::System::HostComputeSystem::HCS_OPERATION)
+    end
+  end
 
   @[Extern]
-  record HCS_PROCESS_INFORMATION,
-    process_id : UInt32,
-    reserved : UInt32,
-    std_input : Win32cr::Foundation::HANDLE,
-    std_output : Win32cr::Foundation::HANDLE,
-    std_error : Win32cr::Foundation::HANDLE
+  struct HCS_PROCESS_INFORMATION
+    property process_id : UInt32
+    property reserved : UInt32
+    property std_input : Win32cr::Foundation::HANDLE
+    property std_output : Win32cr::Foundation::HANDLE
+    property std_error : Win32cr::Foundation::HANDLE
+    def initialize(@process_id : UInt32, @reserved : UInt32, @std_input : Win32cr::Foundation::HANDLE, @std_output : Win32cr::Foundation::HANDLE, @std_error : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record HCS_CREATE_OPTIONS_1,
-    version : Win32cr::System::HostComputeSystem::HCS_CREATE_OPTIONS,
-    user_token : Win32cr::Foundation::HANDLE,
-    security_descriptor : Win32cr::Security::SECURITY_DESCRIPTOR*,
-    callback_options : Win32cr::System::HostComputeSystem::HCS_EVENT_OPTIONS,
-    callback_context : Void*,
-    callback : Win32cr::System::HostComputeSystem::HCS_EVENT_CALLBACK
+  struct HCS_CREATE_OPTIONS_1
+    property version : Win32cr::System::HostComputeSystem::HCS_CREATE_OPTIONS
+    property user_token : Win32cr::Foundation::HANDLE
+    property security_descriptor : Win32cr::Security::SECURITY_DESCRIPTOR*
+    property callback_options : Win32cr::System::HostComputeSystem::HCS_EVENT_OPTIONS
+    property callback_context : Void*
+    property callback : Win32cr::System::HostComputeSystem::HCS_EVENT_CALLBACK
+    def initialize(@version : Win32cr::System::HostComputeSystem::HCS_CREATE_OPTIONS, @user_token : Win32cr::Foundation::HANDLE, @security_descriptor : Win32cr::Security::SECURITY_DESCRIPTOR*, @callback_options : Win32cr::System::HostComputeSystem::HCS_EVENT_OPTIONS, @callback_context : Void*, @callback : Win32cr::System::HostComputeSystem::HCS_EVENT_CALLBACK)
+    end
+  end
 
   @[Link("computecore")]
   @[Link("computestorage")]

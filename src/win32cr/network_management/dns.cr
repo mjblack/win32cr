@@ -2,17 +2,17 @@ require "./../foundation.cr"
 
 module Win32cr::NetworkManagement::Dns
   alias DnsContextHandle = LibC::IntPtrT
-  alias DNS_PROXY_COMPLETION_ROUTINE = Proc(Void*, Int32, Void)*
+  alias DNS_PROXY_COMPLETION_ROUTINE = Proc(Void*, Int32, Void)
 
-  alias PDNS_QUERY_COMPLETION_ROUTINE = Proc(Void*, Win32cr::NetworkManagement::Dns::DNS_QUERY_RESULT*, Void)*
+  alias PDNS_QUERY_COMPLETION_ROUTINE = Proc(Void*, Win32cr::NetworkManagement::Dns::DNS_QUERY_RESULT*, Void)
 
-  alias PDNS_SERVICE_BROWSE_CALLBACK = Proc(UInt32, Void*, Win32cr::NetworkManagement::Dns::DNS_RECORDW*, Void)*
+  alias PDNS_SERVICE_BROWSE_CALLBACK = Proc(UInt32, Void*, Win32cr::NetworkManagement::Dns::DNS_RECORDW*, Void)
 
-  alias PDNS_SERVICE_RESOLVE_COMPLETE = Proc(UInt32, Void*, Win32cr::NetworkManagement::Dns::DNS_SERVICE_INSTANCE*, Void)*
+  alias PDNS_SERVICE_RESOLVE_COMPLETE = Proc(UInt32, Void*, Win32cr::NetworkManagement::Dns::DNS_SERVICE_INSTANCE*, Void)
 
-  alias PDNS_SERVICE_REGISTER_COMPLETE = Proc(UInt32, Void*, Win32cr::NetworkManagement::Dns::DNS_SERVICE_INSTANCE*, Void)*
+  alias PDNS_SERVICE_REGISTER_COMPLETE = Proc(UInt32, Void*, Win32cr::NetworkManagement::Dns::DNS_SERVICE_INSTANCE*, Void)
 
-  alias PMDNS_QUERY_CALLBACK = Proc(Void*, Win32cr::NetworkManagement::Dns::MDNS_QUERY_HANDLE*, Win32cr::NetworkManagement::Dns::DNS_QUERY_RESULT*, Void)*
+  alias PMDNS_QUERY_CALLBACK = Proc(Void*, Win32cr::NetworkManagement::Dns::MDNS_QUERY_HANDLE*, Win32cr::NetworkManagement::Dns::DNS_QUERY_RESULT*, Void)
 
   SIZEOF_IP4_ADDRESS = 4_u32
   IP4_ADDRESS_STRING_LENGTH = 16_u32
@@ -412,916 +412,1195 @@ module Win32cr::NetworkManagement::Dns
   end
 
   @[Extern]
-  record IP4_ARRAY,
-    addr_count : UInt32,
-    addr_array : UInt32*
+  struct IP4_ARRAY
+    property addr_count : UInt32
+    property addr_array : UInt32*
+    def initialize(@addr_count : UInt32, @addr_array : UInt32*)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern(union: true)]
-  record IP6_ADDRESS,
-    ip6_qword : UInt64[2],
-    ip6_dword : UInt32[4],
-    ip6_word : UInt16[8],
-    ip6_byte : UInt8[16]
+  struct IP6_ADDRESS
+    property ip6_qword : UInt64[2]
+    property ip6_dword : UInt32[4]
+    property ip6_word : UInt16[8]
+    property ip6_byte : UInt8[16]
+    def initialize(@ip6_qword : UInt64[2], @ip6_dword : UInt32[4], @ip6_word : UInt16[8], @ip6_byte : UInt8[16])
+    end
+  end
   {% end %}
 
   @[Extern]
-  record DNS_ADDR,
-    max_sa : Win32cr::Foundation::CHAR[32],
-    data : Data_e__Union_ do
+  struct DNS_ADDR
+    property max_sa : Win32cr::Foundation::CHAR[32]
+    property data : Data_e__Union_
 
     # Nested Type Data_e__Union_
     @[Extern(union: true)]
-    record Data_e__Union_,
-      dns_addr_user_dword : UInt32[8]
+    struct Data_e__Union_
+    property dns_addr_user_dword : UInt32[8]
+    def initialize(@dns_addr_user_dword : UInt32[8])
+    end
+    end
 
+    def initialize(@max_sa : Win32cr::Foundation::CHAR[32], @data : Data_e__Union_)
+    end
   end
 
   @[Extern]
-  record DNS_ADDR_ARRAY,
-    max_count : UInt32,
-    addr_count : UInt32,
-    tag : UInt32,
-    family : UInt16,
-    word_reserved : UInt16,
-    flags : UInt32,
-    match_flag : UInt32,
-    reserved1 : UInt32,
-    reserved2 : UInt32,
-    addr_array : Win32cr::NetworkManagement::Dns::DNS_ADDR*
+  struct DNS_ADDR_ARRAY
+    property max_count : UInt32
+    property addr_count : UInt32
+    property tag : UInt32
+    property family : UInt16
+    property word_reserved : UInt16
+    property flags : UInt32
+    property match_flag : UInt32
+    property reserved1 : UInt32
+    property reserved2 : UInt32
+    property addr_array : Win32cr::NetworkManagement::Dns::DNS_ADDR*
+    def initialize(@max_count : UInt32, @addr_count : UInt32, @tag : UInt32, @family : UInt16, @word_reserved : UInt16, @flags : UInt32, @match_flag : UInt32, @reserved1 : UInt32, @reserved2 : UInt32, @addr_array : Win32cr::NetworkManagement::Dns::DNS_ADDR*)
+    end
+  end
 
   @[Extern]
-  record DNS_HEADER,
-    xid : UInt16,
-    _bitfield1 : UInt8,
-    _bitfield2 : UInt8,
-    question_count : UInt16,
-    answer_count : UInt16,
-    name_server_count : UInt16,
-    additional_count : UInt16
+  struct DNS_HEADER
+    property xid : UInt16
+    property _bitfield1 : UInt8
+    property _bitfield2 : UInt8
+    property question_count : UInt16
+    property answer_count : UInt16
+    property name_server_count : UInt16
+    property additional_count : UInt16
+    def initialize(@xid : UInt16, @_bitfield1 : UInt8, @_bitfield2 : UInt8, @question_count : UInt16, @answer_count : UInt16, @name_server_count : UInt16, @additional_count : UInt16)
+    end
+  end
 
   @[Extern]
-  record DNS_HEADER_EXT,
-    _bitfield : UInt16,
-    chRcode : UInt8,
-    chVersion : UInt8
+  struct DNS_HEADER_EXT
+    property _bitfield : UInt16
+    property chRcode : UInt8
+    property chVersion : UInt8
+    def initialize(@_bitfield : UInt16, @chRcode : UInt8, @chVersion : UInt8)
+    end
+  end
 
   @[Extern]
-  record DNS_WIRE_QUESTION,
-    question_type : UInt16,
-    question_class : UInt16
+  struct DNS_WIRE_QUESTION
+    property question_type : UInt16
+    property question_class : UInt16
+    def initialize(@question_type : UInt16, @question_class : UInt16)
+    end
+  end
 
   @[Extern]
-  record DNS_WIRE_RECORD,
-    record_type : UInt16,
-    record_class : UInt16,
-    time_to_live : UInt32,
-    data_length : UInt16
+  struct DNS_WIRE_RECORD
+    property record_type : UInt16
+    property record_class : UInt16
+    property time_to_live : UInt32
+    property data_length : UInt16
+    def initialize(@record_type : UInt16, @record_class : UInt16, @time_to_live : UInt32, @data_length : UInt16)
+    end
+  end
 
   @[Extern]
-  record DNS_A_DATA,
-    ip_address : UInt32
+  struct DNS_A_DATA
+    property ip_address : UInt32
+    def initialize(@ip_address : UInt32)
+    end
+  end
 
   @[Extern]
-  record DNS_PTR_DATAW,
-    pNameHost : Win32cr::Foundation::PWSTR
+  struct DNS_PTR_DATAW
+    property pNameHost : Win32cr::Foundation::PWSTR
+    def initialize(@pNameHost : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record DNS_PTR_DATAA,
-    pNameHost : Win32cr::Foundation::PSTR
+  struct DNS_PTR_DATAA
+    property pNameHost : Win32cr::Foundation::PSTR
+    def initialize(@pNameHost : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record DNS_SOA_DATAW,
-    pNamePrimaryServer : Win32cr::Foundation::PWSTR,
-    pNameAdministrator : Win32cr::Foundation::PWSTR,
-    dwSerialNo : UInt32,
-    dwRefresh : UInt32,
-    dwRetry : UInt32,
-    dwExpire : UInt32,
-    dwDefaultTtl : UInt32
+  struct DNS_SOA_DATAW
+    property pNamePrimaryServer : Win32cr::Foundation::PWSTR
+    property pNameAdministrator : Win32cr::Foundation::PWSTR
+    property dwSerialNo : UInt32
+    property dwRefresh : UInt32
+    property dwRetry : UInt32
+    property dwExpire : UInt32
+    property dwDefaultTtl : UInt32
+    def initialize(@pNamePrimaryServer : Win32cr::Foundation::PWSTR, @pNameAdministrator : Win32cr::Foundation::PWSTR, @dwSerialNo : UInt32, @dwRefresh : UInt32, @dwRetry : UInt32, @dwExpire : UInt32, @dwDefaultTtl : UInt32)
+    end
+  end
 
   @[Extern]
-  record DNS_SOA_DATAA,
-    pNamePrimaryServer : Win32cr::Foundation::PSTR,
-    pNameAdministrator : Win32cr::Foundation::PSTR,
-    dwSerialNo : UInt32,
-    dwRefresh : UInt32,
-    dwRetry : UInt32,
-    dwExpire : UInt32,
-    dwDefaultTtl : UInt32
+  struct DNS_SOA_DATAA
+    property pNamePrimaryServer : Win32cr::Foundation::PSTR
+    property pNameAdministrator : Win32cr::Foundation::PSTR
+    property dwSerialNo : UInt32
+    property dwRefresh : UInt32
+    property dwRetry : UInt32
+    property dwExpire : UInt32
+    property dwDefaultTtl : UInt32
+    def initialize(@pNamePrimaryServer : Win32cr::Foundation::PSTR, @pNameAdministrator : Win32cr::Foundation::PSTR, @dwSerialNo : UInt32, @dwRefresh : UInt32, @dwRetry : UInt32, @dwExpire : UInt32, @dwDefaultTtl : UInt32)
+    end
+  end
 
   @[Extern]
-  record DNS_MINFO_DATAW,
-    pNameMailbox : Win32cr::Foundation::PWSTR,
-    pNameErrorsMailbox : Win32cr::Foundation::PWSTR
+  struct DNS_MINFO_DATAW
+    property pNameMailbox : Win32cr::Foundation::PWSTR
+    property pNameErrorsMailbox : Win32cr::Foundation::PWSTR
+    def initialize(@pNameMailbox : Win32cr::Foundation::PWSTR, @pNameErrorsMailbox : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record DNS_MINFO_DATAA,
-    pNameMailbox : Win32cr::Foundation::PSTR,
-    pNameErrorsMailbox : Win32cr::Foundation::PSTR
+  struct DNS_MINFO_DATAA
+    property pNameMailbox : Win32cr::Foundation::PSTR
+    property pNameErrorsMailbox : Win32cr::Foundation::PSTR
+    def initialize(@pNameMailbox : Win32cr::Foundation::PSTR, @pNameErrorsMailbox : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record DNS_MX_DATAW,
-    pNameExchange : Win32cr::Foundation::PWSTR,
-    wPreference : UInt16,
-    pad : UInt16
+  struct DNS_MX_DATAW
+    property pNameExchange : Win32cr::Foundation::PWSTR
+    property wPreference : UInt16
+    property pad : UInt16
+    def initialize(@pNameExchange : Win32cr::Foundation::PWSTR, @wPreference : UInt16, @pad : UInt16)
+    end
+  end
 
   @[Extern]
-  record DNS_MX_DATAA,
-    pNameExchange : Win32cr::Foundation::PSTR,
-    wPreference : UInt16,
-    pad : UInt16
+  struct DNS_MX_DATAA
+    property pNameExchange : Win32cr::Foundation::PSTR
+    property wPreference : UInt16
+    property pad : UInt16
+    def initialize(@pNameExchange : Win32cr::Foundation::PSTR, @wPreference : UInt16, @pad : UInt16)
+    end
+  end
 
   @[Extern]
-  record DNS_TXT_DATAW,
-    dwStringCount : UInt32,
-    pStringArray : Win32cr::Foundation::PWSTR*
+  struct DNS_TXT_DATAW
+    property dwStringCount : UInt32
+    property pStringArray : Win32cr::Foundation::PWSTR*
+    def initialize(@dwStringCount : UInt32, @pStringArray : Win32cr::Foundation::PWSTR*)
+    end
+  end
 
   @[Extern]
-  record DNS_TXT_DATAA,
-    dwStringCount : UInt32,
-    pStringArray : Win32cr::Foundation::PSTR*
+  struct DNS_TXT_DATAA
+    property dwStringCount : UInt32
+    property pStringArray : Win32cr::Foundation::PSTR*
+    def initialize(@dwStringCount : UInt32, @pStringArray : Win32cr::Foundation::PSTR*)
+    end
+  end
 
   @[Extern]
-  record DNS_NULL_DATA,
-    dwByteCount : UInt32,
-    data : UInt8*
+  struct DNS_NULL_DATA
+    property dwByteCount : UInt32
+    property data : UInt8*
+    def initialize(@dwByteCount : UInt32, @data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DNS_WKS_DATA,
-    ip_address : UInt32,
-    chProtocol : UInt8,
-    bit_mask : UInt8*
+  struct DNS_WKS_DATA
+    property ip_address : UInt32
+    property chProtocol : UInt8
+    property bit_mask : UInt8*
+    def initialize(@ip_address : UInt32, @chProtocol : UInt8, @bit_mask : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DNS_AAAA_DATA,
-    ip6_address : Win32cr::NetworkManagement::Dns::IP6_ADDRESS
+  struct DNS_AAAA_DATA
+    property ip6_address : Win32cr::NetworkManagement::Dns::IP6_ADDRESS
+    def initialize(@ip6_address : Win32cr::NetworkManagement::Dns::IP6_ADDRESS)
+    end
+  end
 
   @[Extern]
-  record DNS_SIG_DATAW,
-    wTypeCovered : UInt16,
-    chAlgorithm : UInt8,
-    chLabelCount : UInt8,
-    dwOriginalTtl : UInt32,
-    dwExpiration : UInt32,
-    dwTimeSigned : UInt32,
-    wKeyTag : UInt16,
-    wSignatureLength : UInt16,
-    pNameSigner : Win32cr::Foundation::PWSTR,
-    signature : UInt8*
+  struct DNS_SIG_DATAW
+    property wTypeCovered : UInt16
+    property chAlgorithm : UInt8
+    property chLabelCount : UInt8
+    property dwOriginalTtl : UInt32
+    property dwExpiration : UInt32
+    property dwTimeSigned : UInt32
+    property wKeyTag : UInt16
+    property wSignatureLength : UInt16
+    property pNameSigner : Win32cr::Foundation::PWSTR
+    property signature : UInt8*
+    def initialize(@wTypeCovered : UInt16, @chAlgorithm : UInt8, @chLabelCount : UInt8, @dwOriginalTtl : UInt32, @dwExpiration : UInt32, @dwTimeSigned : UInt32, @wKeyTag : UInt16, @wSignatureLength : UInt16, @pNameSigner : Win32cr::Foundation::PWSTR, @signature : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DNS_SIG_DATAA,
-    wTypeCovered : UInt16,
-    chAlgorithm : UInt8,
-    chLabelCount : UInt8,
-    dwOriginalTtl : UInt32,
-    dwExpiration : UInt32,
-    dwTimeSigned : UInt32,
-    wKeyTag : UInt16,
-    wSignatureLength : UInt16,
-    pNameSigner : Win32cr::Foundation::PSTR,
-    signature : UInt8*
+  struct DNS_SIG_DATAA
+    property wTypeCovered : UInt16
+    property chAlgorithm : UInt8
+    property chLabelCount : UInt8
+    property dwOriginalTtl : UInt32
+    property dwExpiration : UInt32
+    property dwTimeSigned : UInt32
+    property wKeyTag : UInt16
+    property wSignatureLength : UInt16
+    property pNameSigner : Win32cr::Foundation::PSTR
+    property signature : UInt8*
+    def initialize(@wTypeCovered : UInt16, @chAlgorithm : UInt8, @chLabelCount : UInt8, @dwOriginalTtl : UInt32, @dwExpiration : UInt32, @dwTimeSigned : UInt32, @wKeyTag : UInt16, @wSignatureLength : UInt16, @pNameSigner : Win32cr::Foundation::PSTR, @signature : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DNS_KEY_DATA,
-    wFlags : UInt16,
-    chProtocol : UInt8,
-    chAlgorithm : UInt8,
-    wKeyLength : UInt16,
-    wPad : UInt16,
-    key : UInt8*
+  struct DNS_KEY_DATA
+    property wFlags : UInt16
+    property chProtocol : UInt8
+    property chAlgorithm : UInt8
+    property wKeyLength : UInt16
+    property wPad : UInt16
+    property key : UInt8*
+    def initialize(@wFlags : UInt16, @chProtocol : UInt8, @chAlgorithm : UInt8, @wKeyLength : UInt16, @wPad : UInt16, @key : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DNS_DHCID_DATA,
-    dwByteCount : UInt32,
-    dhcid : UInt8*
+  struct DNS_DHCID_DATA
+    property dwByteCount : UInt32
+    property dhcid : UInt8*
+    def initialize(@dwByteCount : UInt32, @dhcid : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DNS_NSEC_DATAW,
-    pNextDomainName : Win32cr::Foundation::PWSTR,
-    wTypeBitMapsLength : UInt16,
-    wPad : UInt16,
-    type_bit_maps : UInt8*
+  struct DNS_NSEC_DATAW
+    property pNextDomainName : Win32cr::Foundation::PWSTR
+    property wTypeBitMapsLength : UInt16
+    property wPad : UInt16
+    property type_bit_maps : UInt8*
+    def initialize(@pNextDomainName : Win32cr::Foundation::PWSTR, @wTypeBitMapsLength : UInt16, @wPad : UInt16, @type_bit_maps : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DNS_NSEC_DATAA,
-    pNextDomainName : Win32cr::Foundation::PSTR,
-    wTypeBitMapsLength : UInt16,
-    wPad : UInt16,
-    type_bit_maps : UInt8*
+  struct DNS_NSEC_DATAA
+    property pNextDomainName : Win32cr::Foundation::PSTR
+    property wTypeBitMapsLength : UInt16
+    property wPad : UInt16
+    property type_bit_maps : UInt8*
+    def initialize(@pNextDomainName : Win32cr::Foundation::PSTR, @wTypeBitMapsLength : UInt16, @wPad : UInt16, @type_bit_maps : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DNS_NSEC3_DATA,
-    chAlgorithm : UInt8,
-    bFlags : UInt8,
-    wIterations : UInt16,
-    bSaltLength : UInt8,
-    bHashLength : UInt8,
-    wTypeBitMapsLength : UInt16,
-    chData : UInt8*
+  struct DNS_NSEC3_DATA
+    property chAlgorithm : UInt8
+    property bFlags : UInt8
+    property wIterations : UInt16
+    property bSaltLength : UInt8
+    property bHashLength : UInt8
+    property wTypeBitMapsLength : UInt16
+    property chData : UInt8*
+    def initialize(@chAlgorithm : UInt8, @bFlags : UInt8, @wIterations : UInt16, @bSaltLength : UInt8, @bHashLength : UInt8, @wTypeBitMapsLength : UInt16, @chData : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DNS_NSEC3PARAM_DATA,
-    chAlgorithm : UInt8,
-    bFlags : UInt8,
-    wIterations : UInt16,
-    bSaltLength : UInt8,
-    bPad : UInt8[3],
-    pbSalt : UInt8*
+  struct DNS_NSEC3PARAM_DATA
+    property chAlgorithm : UInt8
+    property bFlags : UInt8
+    property wIterations : UInt16
+    property bSaltLength : UInt8
+    property bPad : UInt8[3]
+    property pbSalt : UInt8*
+    def initialize(@chAlgorithm : UInt8, @bFlags : UInt8, @wIterations : UInt16, @bSaltLength : UInt8, @bPad : UInt8[3], @pbSalt : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DNS_TLSA_DATA,
-    bCertUsage : UInt8,
-    bSelector : UInt8,
-    bMatchingType : UInt8,
-    bCertificateAssociationDataLength : UInt16,
-    bPad : UInt8[3],
-    bCertificateAssociationData : UInt8*
+  struct DNS_TLSA_DATA
+    property bCertUsage : UInt8
+    property bSelector : UInt8
+    property bMatchingType : UInt8
+    property bCertificateAssociationDataLength : UInt16
+    property bPad : UInt8[3]
+    property bCertificateAssociationData : UInt8*
+    def initialize(@bCertUsage : UInt8, @bSelector : UInt8, @bMatchingType : UInt8, @bCertificateAssociationDataLength : UInt16, @bPad : UInt8[3], @bCertificateAssociationData : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DNS_DS_DATA,
-    wKeyTag : UInt16,
-    chAlgorithm : UInt8,
-    chDigestType : UInt8,
-    wDigestLength : UInt16,
-    wPad : UInt16,
-    digest : UInt8*
+  struct DNS_DS_DATA
+    property wKeyTag : UInt16
+    property chAlgorithm : UInt8
+    property chDigestType : UInt8
+    property wDigestLength : UInt16
+    property wPad : UInt16
+    property digest : UInt8*
+    def initialize(@wKeyTag : UInt16, @chAlgorithm : UInt8, @chDigestType : UInt8, @wDigestLength : UInt16, @wPad : UInt16, @digest : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DNS_OPT_DATA,
-    wDataLength : UInt16,
-    wPad : UInt16,
-    data : UInt8*
+  struct DNS_OPT_DATA
+    property wDataLength : UInt16
+    property wPad : UInt16
+    property data : UInt8*
+    def initialize(@wDataLength : UInt16, @wPad : UInt16, @data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DNS_LOC_DATA,
-    wVersion : UInt16,
-    wSize : UInt16,
-    wHorPrec : UInt16,
-    wVerPrec : UInt16,
-    dwLatitude : UInt32,
-    dwLongitude : UInt32,
-    dwAltitude : UInt32
+  struct DNS_LOC_DATA
+    property wVersion : UInt16
+    property wSize : UInt16
+    property wHorPrec : UInt16
+    property wVerPrec : UInt16
+    property dwLatitude : UInt32
+    property dwLongitude : UInt32
+    property dwAltitude : UInt32
+    def initialize(@wVersion : UInt16, @wSize : UInt16, @wHorPrec : UInt16, @wVerPrec : UInt16, @dwLatitude : UInt32, @dwLongitude : UInt32, @dwAltitude : UInt32)
+    end
+  end
 
   @[Extern]
-  record DNS_NXT_DATAW,
-    pNameNext : Win32cr::Foundation::PWSTR,
-    wNumTypes : UInt16,
-    wTypes : UInt16*
+  struct DNS_NXT_DATAW
+    property pNameNext : Win32cr::Foundation::PWSTR
+    property wNumTypes : UInt16
+    property wTypes : UInt16*
+    def initialize(@pNameNext : Win32cr::Foundation::PWSTR, @wNumTypes : UInt16, @wTypes : UInt16*)
+    end
+  end
 
   @[Extern]
-  record DNS_NXT_DATAA,
-    pNameNext : Win32cr::Foundation::PSTR,
-    wNumTypes : UInt16,
-    wTypes : UInt16*
+  struct DNS_NXT_DATAA
+    property pNameNext : Win32cr::Foundation::PSTR
+    property wNumTypes : UInt16
+    property wTypes : UInt16*
+    def initialize(@pNameNext : Win32cr::Foundation::PSTR, @wNumTypes : UInt16, @wTypes : UInt16*)
+    end
+  end
 
   @[Extern]
-  record DNS_SRV_DATAW,
-    pNameTarget : Win32cr::Foundation::PWSTR,
-    wPriority : UInt16,
-    wWeight : UInt16,
-    wPort : UInt16,
-    pad : UInt16
+  struct DNS_SRV_DATAW
+    property pNameTarget : Win32cr::Foundation::PWSTR
+    property wPriority : UInt16
+    property wWeight : UInt16
+    property wPort : UInt16
+    property pad : UInt16
+    def initialize(@pNameTarget : Win32cr::Foundation::PWSTR, @wPriority : UInt16, @wWeight : UInt16, @wPort : UInt16, @pad : UInt16)
+    end
+  end
 
   @[Extern]
-  record DNS_SRV_DATAA,
-    pNameTarget : Win32cr::Foundation::PSTR,
-    wPriority : UInt16,
-    wWeight : UInt16,
-    wPort : UInt16,
-    pad : UInt16
+  struct DNS_SRV_DATAA
+    property pNameTarget : Win32cr::Foundation::PSTR
+    property wPriority : UInt16
+    property wWeight : UInt16
+    property wPort : UInt16
+    property pad : UInt16
+    def initialize(@pNameTarget : Win32cr::Foundation::PSTR, @wPriority : UInt16, @wWeight : UInt16, @wPort : UInt16, @pad : UInt16)
+    end
+  end
 
   @[Extern]
-  record DNS_NAPTR_DATAW,
-    wOrder : UInt16,
-    wPreference : UInt16,
-    pFlags : Win32cr::Foundation::PWSTR,
-    pService : Win32cr::Foundation::PWSTR,
-    pRegularExpression : Win32cr::Foundation::PWSTR,
-    pReplacement : Win32cr::Foundation::PWSTR
+  struct DNS_NAPTR_DATAW
+    property wOrder : UInt16
+    property wPreference : UInt16
+    property pFlags : Win32cr::Foundation::PWSTR
+    property pService : Win32cr::Foundation::PWSTR
+    property pRegularExpression : Win32cr::Foundation::PWSTR
+    property pReplacement : Win32cr::Foundation::PWSTR
+    def initialize(@wOrder : UInt16, @wPreference : UInt16, @pFlags : Win32cr::Foundation::PWSTR, @pService : Win32cr::Foundation::PWSTR, @pRegularExpression : Win32cr::Foundation::PWSTR, @pReplacement : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record DNS_NAPTR_DATAA,
-    wOrder : UInt16,
-    wPreference : UInt16,
-    pFlags : Win32cr::Foundation::PSTR,
-    pService : Win32cr::Foundation::PSTR,
-    pRegularExpression : Win32cr::Foundation::PSTR,
-    pReplacement : Win32cr::Foundation::PSTR
+  struct DNS_NAPTR_DATAA
+    property wOrder : UInt16
+    property wPreference : UInt16
+    property pFlags : Win32cr::Foundation::PSTR
+    property pService : Win32cr::Foundation::PSTR
+    property pRegularExpression : Win32cr::Foundation::PSTR
+    property pReplacement : Win32cr::Foundation::PSTR
+    def initialize(@wOrder : UInt16, @wPreference : UInt16, @pFlags : Win32cr::Foundation::PSTR, @pService : Win32cr::Foundation::PSTR, @pRegularExpression : Win32cr::Foundation::PSTR, @pReplacement : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record DNS_ATMA_DATA,
-    address_type : UInt8,
-    address : UInt8[20]
+  struct DNS_ATMA_DATA
+    property address_type : UInt8
+    property address : UInt8[20]
+    def initialize(@address_type : UInt8, @address : UInt8[20])
+    end
+  end
 
   @[Extern]
-  record DNS_TKEY_DATAW,
-    pNameAlgorithm : Win32cr::Foundation::PWSTR,
-    pAlgorithmPacket : UInt8*,
-    pKey : UInt8*,
-    pOtherData : UInt8*,
-    dwCreateTime : UInt32,
-    dwExpireTime : UInt32,
-    wMode : UInt16,
-    wError : UInt16,
-    wKeyLength : UInt16,
-    wOtherLength : UInt16,
-    cAlgNameLength : UInt8,
-    bPacketPointers : Win32cr::Foundation::BOOL
+  struct DNS_TKEY_DATAW
+    property pNameAlgorithm : Win32cr::Foundation::PWSTR
+    property pAlgorithmPacket : UInt8*
+    property pKey : UInt8*
+    property pOtherData : UInt8*
+    property dwCreateTime : UInt32
+    property dwExpireTime : UInt32
+    property wMode : UInt16
+    property wError : UInt16
+    property wKeyLength : UInt16
+    property wOtherLength : UInt16
+    property cAlgNameLength : UInt8
+    property bPacketPointers : Win32cr::Foundation::BOOL
+    def initialize(@pNameAlgorithm : Win32cr::Foundation::PWSTR, @pAlgorithmPacket : UInt8*, @pKey : UInt8*, @pOtherData : UInt8*, @dwCreateTime : UInt32, @dwExpireTime : UInt32, @wMode : UInt16, @wError : UInt16, @wKeyLength : UInt16, @wOtherLength : UInt16, @cAlgNameLength : UInt8, @bPacketPointers : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record DNS_TKEY_DATAA,
-    pNameAlgorithm : Win32cr::Foundation::PSTR,
-    pAlgorithmPacket : UInt8*,
-    pKey : UInt8*,
-    pOtherData : UInt8*,
-    dwCreateTime : UInt32,
-    dwExpireTime : UInt32,
-    wMode : UInt16,
-    wError : UInt16,
-    wKeyLength : UInt16,
-    wOtherLength : UInt16,
-    cAlgNameLength : UInt8,
-    bPacketPointers : Win32cr::Foundation::BOOL
+  struct DNS_TKEY_DATAA
+    property pNameAlgorithm : Win32cr::Foundation::PSTR
+    property pAlgorithmPacket : UInt8*
+    property pKey : UInt8*
+    property pOtherData : UInt8*
+    property dwCreateTime : UInt32
+    property dwExpireTime : UInt32
+    property wMode : UInt16
+    property wError : UInt16
+    property wKeyLength : UInt16
+    property wOtherLength : UInt16
+    property cAlgNameLength : UInt8
+    property bPacketPointers : Win32cr::Foundation::BOOL
+    def initialize(@pNameAlgorithm : Win32cr::Foundation::PSTR, @pAlgorithmPacket : UInt8*, @pKey : UInt8*, @pOtherData : UInt8*, @dwCreateTime : UInt32, @dwExpireTime : UInt32, @wMode : UInt16, @wError : UInt16, @wKeyLength : UInt16, @wOtherLength : UInt16, @cAlgNameLength : UInt8, @bPacketPointers : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record DNS_TSIG_DATAW,
-    pNameAlgorithm : Win32cr::Foundation::PWSTR,
-    pAlgorithmPacket : UInt8*,
-    pSignature : UInt8*,
-    pOtherData : UInt8*,
-    i64CreateTime : Int64,
-    wFudgeTime : UInt16,
-    wOriginalXid : UInt16,
-    wError : UInt16,
-    wSigLength : UInt16,
-    wOtherLength : UInt16,
-    cAlgNameLength : UInt8,
-    bPacketPointers : Win32cr::Foundation::BOOL
+  struct DNS_TSIG_DATAW
+    property pNameAlgorithm : Win32cr::Foundation::PWSTR
+    property pAlgorithmPacket : UInt8*
+    property pSignature : UInt8*
+    property pOtherData : UInt8*
+    property i64CreateTime : Int64
+    property wFudgeTime : UInt16
+    property wOriginalXid : UInt16
+    property wError : UInt16
+    property wSigLength : UInt16
+    property wOtherLength : UInt16
+    property cAlgNameLength : UInt8
+    property bPacketPointers : Win32cr::Foundation::BOOL
+    def initialize(@pNameAlgorithm : Win32cr::Foundation::PWSTR, @pAlgorithmPacket : UInt8*, @pSignature : UInt8*, @pOtherData : UInt8*, @i64CreateTime : Int64, @wFudgeTime : UInt16, @wOriginalXid : UInt16, @wError : UInt16, @wSigLength : UInt16, @wOtherLength : UInt16, @cAlgNameLength : UInt8, @bPacketPointers : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record DNS_TSIG_DATAA,
-    pNameAlgorithm : Win32cr::Foundation::PSTR,
-    pAlgorithmPacket : UInt8*,
-    pSignature : UInt8*,
-    pOtherData : UInt8*,
-    i64CreateTime : Int64,
-    wFudgeTime : UInt16,
-    wOriginalXid : UInt16,
-    wError : UInt16,
-    wSigLength : UInt16,
-    wOtherLength : UInt16,
-    cAlgNameLength : UInt8,
-    bPacketPointers : Win32cr::Foundation::BOOL
+  struct DNS_TSIG_DATAA
+    property pNameAlgorithm : Win32cr::Foundation::PSTR
+    property pAlgorithmPacket : UInt8*
+    property pSignature : UInt8*
+    property pOtherData : UInt8*
+    property i64CreateTime : Int64
+    property wFudgeTime : UInt16
+    property wOriginalXid : UInt16
+    property wError : UInt16
+    property wSigLength : UInt16
+    property wOtherLength : UInt16
+    property cAlgNameLength : UInt8
+    property bPacketPointers : Win32cr::Foundation::BOOL
+    def initialize(@pNameAlgorithm : Win32cr::Foundation::PSTR, @pAlgorithmPacket : UInt8*, @pSignature : UInt8*, @pOtherData : UInt8*, @i64CreateTime : Int64, @wFudgeTime : UInt16, @wOriginalXid : UInt16, @wError : UInt16, @wSigLength : UInt16, @wOtherLength : UInt16, @cAlgNameLength : UInt8, @bPacketPointers : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record DNS_UNKNOWN_DATA,
-    dwByteCount : UInt32,
-    bData : UInt8*
+  struct DNS_UNKNOWN_DATA
+    property dwByteCount : UInt32
+    property bData : UInt8*
+    def initialize(@dwByteCount : UInt32, @bData : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DNS_WINS_DATA,
-    dwMappingFlag : UInt32,
-    dwLookupTimeout : UInt32,
-    dwCacheTimeout : UInt32,
-    cWinsServerCount : UInt32,
-    wins_servers : UInt32*
+  struct DNS_WINS_DATA
+    property dwMappingFlag : UInt32
+    property dwLookupTimeout : UInt32
+    property dwCacheTimeout : UInt32
+    property cWinsServerCount : UInt32
+    property wins_servers : UInt32*
+    def initialize(@dwMappingFlag : UInt32, @dwLookupTimeout : UInt32, @dwCacheTimeout : UInt32, @cWinsServerCount : UInt32, @wins_servers : UInt32*)
+    end
+  end
 
   @[Extern]
-  record DNS_WINSR_DATAW,
-    dwMappingFlag : UInt32,
-    dwLookupTimeout : UInt32,
-    dwCacheTimeout : UInt32,
-    pNameResultDomain : Win32cr::Foundation::PWSTR
+  struct DNS_WINSR_DATAW
+    property dwMappingFlag : UInt32
+    property dwLookupTimeout : UInt32
+    property dwCacheTimeout : UInt32
+    property pNameResultDomain : Win32cr::Foundation::PWSTR
+    def initialize(@dwMappingFlag : UInt32, @dwLookupTimeout : UInt32, @dwCacheTimeout : UInt32, @pNameResultDomain : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record DNS_WINSR_DATAA,
-    dwMappingFlag : UInt32,
-    dwLookupTimeout : UInt32,
-    dwCacheTimeout : UInt32,
-    pNameResultDomain : Win32cr::Foundation::PSTR
+  struct DNS_WINSR_DATAA
+    property dwMappingFlag : UInt32
+    property dwLookupTimeout : UInt32
+    property dwCacheTimeout : UInt32
+    property pNameResultDomain : Win32cr::Foundation::PSTR
+    def initialize(@dwMappingFlag : UInt32, @dwLookupTimeout : UInt32, @dwCacheTimeout : UInt32, @pNameResultDomain : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record DNS_RECORD_FLAGS,
-    _bitfield : UInt32
+  struct DNS_RECORD_FLAGS
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+  end
 
   @[Extern]
-  record DNS_RECORDW,
-    pNext : Win32cr::NetworkManagement::Dns::DNS_RECORDW*,
-    pName : Win32cr::Foundation::PWSTR,
-    wType : UInt16,
-    wDataLength : UInt16,
-    flags : Flags_e__Union_,
-    dwTtl : UInt32,
-    dwReserved : UInt32,
-    data : Data_e__Union_ do
+  struct DNS_RECORDW
+    property pNext : Win32cr::NetworkManagement::Dns::DNS_RECORDW*
+    property pName : Win32cr::Foundation::PWSTR
+    property wType : UInt16
+    property wDataLength : UInt16
+    property flags : Flags_e__Union_
+    property dwTtl : UInt32
+    property dwReserved : UInt32
+    property data : Data_e__Union_
 
     # Nested Type Flags_e__Union_
     @[Extern(union: true)]
-    record Flags_e__Union_,
-      dw : UInt32,
-      s : Win32cr::NetworkManagement::Dns::DNS_RECORD_FLAGS
+    struct Flags_e__Union_
+    property dw : UInt32
+    property s : Win32cr::NetworkManagement::Dns::DNS_RECORD_FLAGS
+    def initialize(@dw : UInt32, @s : Win32cr::NetworkManagement::Dns::DNS_RECORD_FLAGS)
+    end
+    end
 
 
     # Nested Type Data_e__Union_
     @[Extern(union: true)]
-    record Data_e__Union_,
-      a : Win32cr::NetworkManagement::Dns::DNS_A_DATA,
-      soa : Win32cr::NetworkManagement::Dns::DNS_SOA_DATAW,
-      soa_ : Win32cr::NetworkManagement::Dns::DNS_SOA_DATAW,
-      ptr : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW,
-      ptr_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW,
-      ns : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW,
-      ns_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW,
-      cname : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW,
-      cname_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW,
-      dname : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW,
-      dname_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW,
-      mb : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW,
-      mb_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW,
-      md : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW,
-      md_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW,
-      mf : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW,
-      mf_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW,
-      mg : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW,
-      mg_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW,
-      mr : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW,
-      mr_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW,
-      minfo : Win32cr::NetworkManagement::Dns::DNS_MINFO_DATAW,
-      minfo_ : Win32cr::NetworkManagement::Dns::DNS_MINFO_DATAW,
-      rp : Win32cr::NetworkManagement::Dns::DNS_MINFO_DATAW,
-      rp_ : Win32cr::NetworkManagement::Dns::DNS_MINFO_DATAW,
-      mx : Win32cr::NetworkManagement::Dns::DNS_MX_DATAW,
-      mx_ : Win32cr::NetworkManagement::Dns::DNS_MX_DATAW,
-      afsdb : Win32cr::NetworkManagement::Dns::DNS_MX_DATAW,
-      afsdb_ : Win32cr::NetworkManagement::Dns::DNS_MX_DATAW,
-      rt : Win32cr::NetworkManagement::Dns::DNS_MX_DATAW,
-      rt_ : Win32cr::NetworkManagement::Dns::DNS_MX_DATAW,
-      hinfo : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAW,
-      hinfo_ : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAW,
-      isdn : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAW,
-      isdn_ : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAW,
-      txt : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAW,
-      txt_ : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAW,
-      x25 : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAW,
-      null : Win32cr::NetworkManagement::Dns::DNS_NULL_DATA,
-      wks : Win32cr::NetworkManagement::Dns::DNS_WKS_DATA,
-      wks_ : Win32cr::NetworkManagement::Dns::DNS_WKS_DATA,
-      aaaa : Win32cr::NetworkManagement::Dns::DNS_AAAA_DATA,
-      key : Win32cr::NetworkManagement::Dns::DNS_KEY_DATA,
-      key_ : Win32cr::NetworkManagement::Dns::DNS_KEY_DATA,
-      sig : Win32cr::NetworkManagement::Dns::DNS_SIG_DATAW,
-      sig_ : Win32cr::NetworkManagement::Dns::DNS_SIG_DATAW,
-      atma : Win32cr::NetworkManagement::Dns::DNS_ATMA_DATA,
-      atma_ : Win32cr::NetworkManagement::Dns::DNS_ATMA_DATA,
-      nxt : Win32cr::NetworkManagement::Dns::DNS_NXT_DATAW,
-      nxt_ : Win32cr::NetworkManagement::Dns::DNS_NXT_DATAW,
-      srv : Win32cr::NetworkManagement::Dns::DNS_SRV_DATAW,
-      srv_ : Win32cr::NetworkManagement::Dns::DNS_SRV_DATAW,
-      naptr : Win32cr::NetworkManagement::Dns::DNS_NAPTR_DATAW,
-      naptr_ : Win32cr::NetworkManagement::Dns::DNS_NAPTR_DATAW,
-      opt : Win32cr::NetworkManagement::Dns::DNS_OPT_DATA,
-      opt_ : Win32cr::NetworkManagement::Dns::DNS_OPT_DATA,
-      ds : Win32cr::NetworkManagement::Dns::DNS_DS_DATA,
-      ds_ : Win32cr::NetworkManagement::Dns::DNS_DS_DATA,
-      rrsig : Win32cr::NetworkManagement::Dns::DNS_SIG_DATAW,
-      rrsig_ : Win32cr::NetworkManagement::Dns::DNS_SIG_DATAW,
-      nsec : Win32cr::NetworkManagement::Dns::DNS_NSEC_DATAW,
-      nsec_ : Win32cr::NetworkManagement::Dns::DNS_NSEC_DATAW,
-      dnskey : Win32cr::NetworkManagement::Dns::DNS_KEY_DATA,
-      dnskey_ : Win32cr::NetworkManagement::Dns::DNS_KEY_DATA,
-      tkey : Win32cr::NetworkManagement::Dns::DNS_TKEY_DATAW,
-      tkey_ : Win32cr::NetworkManagement::Dns::DNS_TKEY_DATAW,
-      tsig : Win32cr::NetworkManagement::Dns::DNS_TSIG_DATAW,
-      tsig_ : Win32cr::NetworkManagement::Dns::DNS_TSIG_DATAW,
-      wins : Win32cr::NetworkManagement::Dns::DNS_WINS_DATA,
-      wins_ : Win32cr::NetworkManagement::Dns::DNS_WINS_DATA,
-      winsr : Win32cr::NetworkManagement::Dns::DNS_WINSR_DATAW,
-      wins_r : Win32cr::NetworkManagement::Dns::DNS_WINSR_DATAW,
-      nbstat : Win32cr::NetworkManagement::Dns::DNS_WINSR_DATAW,
-      nbstat_ : Win32cr::NetworkManagement::Dns::DNS_WINSR_DATAW,
-      dhcid : Win32cr::NetworkManagement::Dns::DNS_DHCID_DATA,
-      nsec3 : Win32cr::NetworkManagement::Dns::DNS_NSEC3_DATA,
-      nsec3_ : Win32cr::NetworkManagement::Dns::DNS_NSEC3_DATA,
-      nsec3_param : Win32cr::NetworkManagement::Dns::DNS_NSEC3PARAM_DATA,
-      nsec3_param_ : Win32cr::NetworkManagement::Dns::DNS_NSEC3PARAM_DATA,
-      tlsa : Win32cr::NetworkManagement::Dns::DNS_TLSA_DATA,
-      tlsa_ : Win32cr::NetworkManagement::Dns::DNS_TLSA_DATA,
-      unknown : Win32cr::NetworkManagement::Dns::DNS_UNKNOWN_DATA,
-      unknown_ : Win32cr::NetworkManagement::Dns::DNS_UNKNOWN_DATA,
-      pDataPtr : UInt8*
+    struct Data_e__Union_
+    property a : Win32cr::NetworkManagement::Dns::DNS_A_DATA
+    property soa : Win32cr::NetworkManagement::Dns::DNS_SOA_DATAW
+    property soa_ : Win32cr::NetworkManagement::Dns::DNS_SOA_DATAW
+    property ptr : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW
+    property ptr_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW
+    property ns : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW
+    property ns_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW
+    property cname : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW
+    property cname_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW
+    property dname : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW
+    property dname_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW
+    property mb : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW
+    property mb_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW
+    property md : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW
+    property md_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW
+    property mf : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW
+    property mf_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW
+    property mg : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW
+    property mg_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW
+    property mr : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW
+    property mr_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW
+    property minfo : Win32cr::NetworkManagement::Dns::DNS_MINFO_DATAW
+    property minfo_ : Win32cr::NetworkManagement::Dns::DNS_MINFO_DATAW
+    property rp : Win32cr::NetworkManagement::Dns::DNS_MINFO_DATAW
+    property rp_ : Win32cr::NetworkManagement::Dns::DNS_MINFO_DATAW
+    property mx : Win32cr::NetworkManagement::Dns::DNS_MX_DATAW
+    property mx_ : Win32cr::NetworkManagement::Dns::DNS_MX_DATAW
+    property afsdb : Win32cr::NetworkManagement::Dns::DNS_MX_DATAW
+    property afsdb_ : Win32cr::NetworkManagement::Dns::DNS_MX_DATAW
+    property rt : Win32cr::NetworkManagement::Dns::DNS_MX_DATAW
+    property rt_ : Win32cr::NetworkManagement::Dns::DNS_MX_DATAW
+    property hinfo : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAW
+    property hinfo_ : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAW
+    property isdn : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAW
+    property isdn_ : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAW
+    property txt : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAW
+    property txt_ : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAW
+    property x25 : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAW
+    property null : Win32cr::NetworkManagement::Dns::DNS_NULL_DATA
+    property wks : Win32cr::NetworkManagement::Dns::DNS_WKS_DATA
+    property wks_ : Win32cr::NetworkManagement::Dns::DNS_WKS_DATA
+    property aaaa : Win32cr::NetworkManagement::Dns::DNS_AAAA_DATA
+    property key : Win32cr::NetworkManagement::Dns::DNS_KEY_DATA
+    property key_ : Win32cr::NetworkManagement::Dns::DNS_KEY_DATA
+    property sig : Win32cr::NetworkManagement::Dns::DNS_SIG_DATAW
+    property sig_ : Win32cr::NetworkManagement::Dns::DNS_SIG_DATAW
+    property atma : Win32cr::NetworkManagement::Dns::DNS_ATMA_DATA
+    property atma_ : Win32cr::NetworkManagement::Dns::DNS_ATMA_DATA
+    property nxt : Win32cr::NetworkManagement::Dns::DNS_NXT_DATAW
+    property nxt_ : Win32cr::NetworkManagement::Dns::DNS_NXT_DATAW
+    property srv : Win32cr::NetworkManagement::Dns::DNS_SRV_DATAW
+    property srv_ : Win32cr::NetworkManagement::Dns::DNS_SRV_DATAW
+    property naptr : Win32cr::NetworkManagement::Dns::DNS_NAPTR_DATAW
+    property naptr_ : Win32cr::NetworkManagement::Dns::DNS_NAPTR_DATAW
+    property opt : Win32cr::NetworkManagement::Dns::DNS_OPT_DATA
+    property opt_ : Win32cr::NetworkManagement::Dns::DNS_OPT_DATA
+    property ds : Win32cr::NetworkManagement::Dns::DNS_DS_DATA
+    property ds_ : Win32cr::NetworkManagement::Dns::DNS_DS_DATA
+    property rrsig : Win32cr::NetworkManagement::Dns::DNS_SIG_DATAW
+    property rrsig_ : Win32cr::NetworkManagement::Dns::DNS_SIG_DATAW
+    property nsec : Win32cr::NetworkManagement::Dns::DNS_NSEC_DATAW
+    property nsec_ : Win32cr::NetworkManagement::Dns::DNS_NSEC_DATAW
+    property dnskey : Win32cr::NetworkManagement::Dns::DNS_KEY_DATA
+    property dnskey_ : Win32cr::NetworkManagement::Dns::DNS_KEY_DATA
+    property tkey : Win32cr::NetworkManagement::Dns::DNS_TKEY_DATAW
+    property tkey_ : Win32cr::NetworkManagement::Dns::DNS_TKEY_DATAW
+    property tsig : Win32cr::NetworkManagement::Dns::DNS_TSIG_DATAW
+    property tsig_ : Win32cr::NetworkManagement::Dns::DNS_TSIG_DATAW
+    property wins : Win32cr::NetworkManagement::Dns::DNS_WINS_DATA
+    property wins_ : Win32cr::NetworkManagement::Dns::DNS_WINS_DATA
+    property winsr : Win32cr::NetworkManagement::Dns::DNS_WINSR_DATAW
+    property wins_r : Win32cr::NetworkManagement::Dns::DNS_WINSR_DATAW
+    property nbstat : Win32cr::NetworkManagement::Dns::DNS_WINSR_DATAW
+    property nbstat_ : Win32cr::NetworkManagement::Dns::DNS_WINSR_DATAW
+    property dhcid : Win32cr::NetworkManagement::Dns::DNS_DHCID_DATA
+    property nsec3 : Win32cr::NetworkManagement::Dns::DNS_NSEC3_DATA
+    property nsec3_ : Win32cr::NetworkManagement::Dns::DNS_NSEC3_DATA
+    property nsec3_param : Win32cr::NetworkManagement::Dns::DNS_NSEC3PARAM_DATA
+    property nsec3_param_ : Win32cr::NetworkManagement::Dns::DNS_NSEC3PARAM_DATA
+    property tlsa : Win32cr::NetworkManagement::Dns::DNS_TLSA_DATA
+    property tlsa_ : Win32cr::NetworkManagement::Dns::DNS_TLSA_DATA
+    property unknown : Win32cr::NetworkManagement::Dns::DNS_UNKNOWN_DATA
+    property unknown_ : Win32cr::NetworkManagement::Dns::DNS_UNKNOWN_DATA
+    property pDataPtr : UInt8*
+    def initialize(@a : Win32cr::NetworkManagement::Dns::DNS_A_DATA, @soa : Win32cr::NetworkManagement::Dns::DNS_SOA_DATAW, @soa_ : Win32cr::NetworkManagement::Dns::DNS_SOA_DATAW, @ptr : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW, @ptr_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW, @ns : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW, @ns_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW, @cname : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW, @cname_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW, @dname : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW, @dname_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW, @mb : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW, @mb_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW, @md : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW, @md_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW, @mf : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW, @mf_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW, @mg : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW, @mg_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW, @mr : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW, @mr_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAW, @minfo : Win32cr::NetworkManagement::Dns::DNS_MINFO_DATAW, @minfo_ : Win32cr::NetworkManagement::Dns::DNS_MINFO_DATAW, @rp : Win32cr::NetworkManagement::Dns::DNS_MINFO_DATAW, @rp_ : Win32cr::NetworkManagement::Dns::DNS_MINFO_DATAW, @mx : Win32cr::NetworkManagement::Dns::DNS_MX_DATAW, @mx_ : Win32cr::NetworkManagement::Dns::DNS_MX_DATAW, @afsdb : Win32cr::NetworkManagement::Dns::DNS_MX_DATAW, @afsdb_ : Win32cr::NetworkManagement::Dns::DNS_MX_DATAW, @rt : Win32cr::NetworkManagement::Dns::DNS_MX_DATAW, @rt_ : Win32cr::NetworkManagement::Dns::DNS_MX_DATAW, @hinfo : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAW, @hinfo_ : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAW, @isdn : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAW, @isdn_ : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAW, @txt : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAW, @txt_ : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAW, @x25 : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAW, @null : Win32cr::NetworkManagement::Dns::DNS_NULL_DATA, @wks : Win32cr::NetworkManagement::Dns::DNS_WKS_DATA, @wks_ : Win32cr::NetworkManagement::Dns::DNS_WKS_DATA, @aaaa : Win32cr::NetworkManagement::Dns::DNS_AAAA_DATA, @key : Win32cr::NetworkManagement::Dns::DNS_KEY_DATA, @key_ : Win32cr::NetworkManagement::Dns::DNS_KEY_DATA, @sig : Win32cr::NetworkManagement::Dns::DNS_SIG_DATAW, @sig_ : Win32cr::NetworkManagement::Dns::DNS_SIG_DATAW, @atma : Win32cr::NetworkManagement::Dns::DNS_ATMA_DATA, @atma_ : Win32cr::NetworkManagement::Dns::DNS_ATMA_DATA, @nxt : Win32cr::NetworkManagement::Dns::DNS_NXT_DATAW, @nxt_ : Win32cr::NetworkManagement::Dns::DNS_NXT_DATAW, @srv : Win32cr::NetworkManagement::Dns::DNS_SRV_DATAW, @srv_ : Win32cr::NetworkManagement::Dns::DNS_SRV_DATAW, @naptr : Win32cr::NetworkManagement::Dns::DNS_NAPTR_DATAW, @naptr_ : Win32cr::NetworkManagement::Dns::DNS_NAPTR_DATAW, @opt : Win32cr::NetworkManagement::Dns::DNS_OPT_DATA, @opt_ : Win32cr::NetworkManagement::Dns::DNS_OPT_DATA, @ds : Win32cr::NetworkManagement::Dns::DNS_DS_DATA, @ds_ : Win32cr::NetworkManagement::Dns::DNS_DS_DATA, @rrsig : Win32cr::NetworkManagement::Dns::DNS_SIG_DATAW, @rrsig_ : Win32cr::NetworkManagement::Dns::DNS_SIG_DATAW, @nsec : Win32cr::NetworkManagement::Dns::DNS_NSEC_DATAW, @nsec_ : Win32cr::NetworkManagement::Dns::DNS_NSEC_DATAW, @dnskey : Win32cr::NetworkManagement::Dns::DNS_KEY_DATA, @dnskey_ : Win32cr::NetworkManagement::Dns::DNS_KEY_DATA, @tkey : Win32cr::NetworkManagement::Dns::DNS_TKEY_DATAW, @tkey_ : Win32cr::NetworkManagement::Dns::DNS_TKEY_DATAW, @tsig : Win32cr::NetworkManagement::Dns::DNS_TSIG_DATAW, @tsig_ : Win32cr::NetworkManagement::Dns::DNS_TSIG_DATAW, @wins : Win32cr::NetworkManagement::Dns::DNS_WINS_DATA, @wins_ : Win32cr::NetworkManagement::Dns::DNS_WINS_DATA, @winsr : Win32cr::NetworkManagement::Dns::DNS_WINSR_DATAW, @wins_r : Win32cr::NetworkManagement::Dns::DNS_WINSR_DATAW, @nbstat : Win32cr::NetworkManagement::Dns::DNS_WINSR_DATAW, @nbstat_ : Win32cr::NetworkManagement::Dns::DNS_WINSR_DATAW, @dhcid : Win32cr::NetworkManagement::Dns::DNS_DHCID_DATA, @nsec3 : Win32cr::NetworkManagement::Dns::DNS_NSEC3_DATA, @nsec3_ : Win32cr::NetworkManagement::Dns::DNS_NSEC3_DATA, @nsec3_param : Win32cr::NetworkManagement::Dns::DNS_NSEC3PARAM_DATA, @nsec3_param_ : Win32cr::NetworkManagement::Dns::DNS_NSEC3PARAM_DATA, @tlsa : Win32cr::NetworkManagement::Dns::DNS_TLSA_DATA, @tlsa_ : Win32cr::NetworkManagement::Dns::DNS_TLSA_DATA, @unknown : Win32cr::NetworkManagement::Dns::DNS_UNKNOWN_DATA, @unknown_ : Win32cr::NetworkManagement::Dns::DNS_UNKNOWN_DATA, @pDataPtr : UInt8*)
+    end
+    end
 
+    def initialize(@pNext : Win32cr::NetworkManagement::Dns::DNS_RECORDW*, @pName : Win32cr::Foundation::PWSTR, @wType : UInt16, @wDataLength : UInt16, @flags : Flags_e__Union_, @dwTtl : UInt32, @dwReserved : UInt32, @data : Data_e__Union_)
+    end
   end
 
   @[Extern]
-  record DnsRecordOptW_,
-    pNext : Win32cr::NetworkManagement::Dns::DNS_RECORDW*,
-    pName : Win32cr::Foundation::PWSTR,
-    wType : UInt16,
-    wDataLength : UInt16,
-    flags : Flags_e__Union_,
-    ext_header : Win32cr::NetworkManagement::Dns::DNS_HEADER_EXT,
-    wPayloadSize : UInt16,
-    wReserved : UInt16,
-    data : Data_e__Union_ do
+  struct DnsRecordOptW_
+    property pNext : Win32cr::NetworkManagement::Dns::DNS_RECORDW*
+    property pName : Win32cr::Foundation::PWSTR
+    property wType : UInt16
+    property wDataLength : UInt16
+    property flags : Flags_e__Union_
+    property ext_header : Win32cr::NetworkManagement::Dns::DNS_HEADER_EXT
+    property wPayloadSize : UInt16
+    property wReserved : UInt16
+    property data : Data_e__Union_
 
     # Nested Type Flags_e__Union_
     @[Extern(union: true)]
-    record Flags_e__Union_,
-      dw : UInt32,
-      s : Win32cr::NetworkManagement::Dns::DNS_RECORD_FLAGS
+    struct Flags_e__Union_
+    property dw : UInt32
+    property s : Win32cr::NetworkManagement::Dns::DNS_RECORD_FLAGS
+    def initialize(@dw : UInt32, @s : Win32cr::NetworkManagement::Dns::DNS_RECORD_FLAGS)
+    end
+    end
 
 
     # Nested Type Data_e__Union_
     @[Extern(union: true)]
-    record Data_e__Union_,
-      opt : Win32cr::NetworkManagement::Dns::DNS_OPT_DATA,
-      opt_ : Win32cr::NetworkManagement::Dns::DNS_OPT_DATA
+    struct Data_e__Union_
+    property opt : Win32cr::NetworkManagement::Dns::DNS_OPT_DATA
+    property opt_ : Win32cr::NetworkManagement::Dns::DNS_OPT_DATA
+    def initialize(@opt : Win32cr::NetworkManagement::Dns::DNS_OPT_DATA, @opt_ : Win32cr::NetworkManagement::Dns::DNS_OPT_DATA)
+    end
+    end
 
+    def initialize(@pNext : Win32cr::NetworkManagement::Dns::DNS_RECORDW*, @pName : Win32cr::Foundation::PWSTR, @wType : UInt16, @wDataLength : UInt16, @flags : Flags_e__Union_, @ext_header : Win32cr::NetworkManagement::Dns::DNS_HEADER_EXT, @wPayloadSize : UInt16, @wReserved : UInt16, @data : Data_e__Union_)
+    end
   end
 
   @[Extern]
-  record DNS_RECORDA,
-    pNext : Win32cr::NetworkManagement::Dns::DNS_RECORDA*,
-    pName : Win32cr::Foundation::PSTR,
-    wType : UInt16,
-    wDataLength : UInt16,
-    flags : Flags_e__Union_,
-    dwTtl : UInt32,
-    dwReserved : UInt32,
-    data : Data_e__Union_ do
+  struct DNS_RECORDA
+    property pNext : Win32cr::NetworkManagement::Dns::DNS_RECORDA*
+    property pName : Win32cr::Foundation::PSTR
+    property wType : UInt16
+    property wDataLength : UInt16
+    property flags : Flags_e__Union_
+    property dwTtl : UInt32
+    property dwReserved : UInt32
+    property data : Data_e__Union_
 
     # Nested Type Flags_e__Union_
     @[Extern(union: true)]
-    record Flags_e__Union_,
-      dw : UInt32,
-      s : Win32cr::NetworkManagement::Dns::DNS_RECORD_FLAGS
+    struct Flags_e__Union_
+    property dw : UInt32
+    property s : Win32cr::NetworkManagement::Dns::DNS_RECORD_FLAGS
+    def initialize(@dw : UInt32, @s : Win32cr::NetworkManagement::Dns::DNS_RECORD_FLAGS)
+    end
+    end
 
 
     # Nested Type Data_e__Union_
     @[Extern(union: true)]
-    record Data_e__Union_,
-      a : Win32cr::NetworkManagement::Dns::DNS_A_DATA,
-      soa : Win32cr::NetworkManagement::Dns::DNS_SOA_DATAA,
-      soa_ : Win32cr::NetworkManagement::Dns::DNS_SOA_DATAA,
-      ptr : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA,
-      ptr_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA,
-      ns : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA,
-      ns_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA,
-      cname : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA,
-      cname_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA,
-      dname : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA,
-      dname_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA,
-      mb : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA,
-      mb_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA,
-      md : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA,
-      md_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA,
-      mf : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA,
-      mf_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA,
-      mg : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA,
-      mg_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA,
-      mr : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA,
-      mr_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA,
-      minfo : Win32cr::NetworkManagement::Dns::DNS_MINFO_DATAA,
-      minfo_ : Win32cr::NetworkManagement::Dns::DNS_MINFO_DATAA,
-      rp : Win32cr::NetworkManagement::Dns::DNS_MINFO_DATAA,
-      rp_ : Win32cr::NetworkManagement::Dns::DNS_MINFO_DATAA,
-      mx : Win32cr::NetworkManagement::Dns::DNS_MX_DATAA,
-      mx_ : Win32cr::NetworkManagement::Dns::DNS_MX_DATAA,
-      afsdb : Win32cr::NetworkManagement::Dns::DNS_MX_DATAA,
-      afsdb_ : Win32cr::NetworkManagement::Dns::DNS_MX_DATAA,
-      rt : Win32cr::NetworkManagement::Dns::DNS_MX_DATAA,
-      rt_ : Win32cr::NetworkManagement::Dns::DNS_MX_DATAA,
-      hinfo : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAA,
-      hinfo_ : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAA,
-      isdn : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAA,
-      isdn_ : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAA,
-      txt : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAA,
-      txt_ : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAA,
-      x25 : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAA,
-      null : Win32cr::NetworkManagement::Dns::DNS_NULL_DATA,
-      wks : Win32cr::NetworkManagement::Dns::DNS_WKS_DATA,
-      wks_ : Win32cr::NetworkManagement::Dns::DNS_WKS_DATA,
-      aaaa : Win32cr::NetworkManagement::Dns::DNS_AAAA_DATA,
-      key : Win32cr::NetworkManagement::Dns::DNS_KEY_DATA,
-      key_ : Win32cr::NetworkManagement::Dns::DNS_KEY_DATA,
-      sig : Win32cr::NetworkManagement::Dns::DNS_SIG_DATAA,
-      sig_ : Win32cr::NetworkManagement::Dns::DNS_SIG_DATAA,
-      atma : Win32cr::NetworkManagement::Dns::DNS_ATMA_DATA,
-      atma_ : Win32cr::NetworkManagement::Dns::DNS_ATMA_DATA,
-      nxt : Win32cr::NetworkManagement::Dns::DNS_NXT_DATAA,
-      nxt_ : Win32cr::NetworkManagement::Dns::DNS_NXT_DATAA,
-      srv : Win32cr::NetworkManagement::Dns::DNS_SRV_DATAA,
-      srv_ : Win32cr::NetworkManagement::Dns::DNS_SRV_DATAA,
-      naptr : Win32cr::NetworkManagement::Dns::DNS_NAPTR_DATAA,
-      naptr_ : Win32cr::NetworkManagement::Dns::DNS_NAPTR_DATAA,
-      opt : Win32cr::NetworkManagement::Dns::DNS_OPT_DATA,
-      opt_ : Win32cr::NetworkManagement::Dns::DNS_OPT_DATA,
-      ds : Win32cr::NetworkManagement::Dns::DNS_DS_DATA,
-      ds_ : Win32cr::NetworkManagement::Dns::DNS_DS_DATA,
-      rrsig : Win32cr::NetworkManagement::Dns::DNS_SIG_DATAA,
-      rrsig_ : Win32cr::NetworkManagement::Dns::DNS_SIG_DATAA,
-      nsec : Win32cr::NetworkManagement::Dns::DNS_NSEC_DATAA,
-      nsec_ : Win32cr::NetworkManagement::Dns::DNS_NSEC_DATAA,
-      dnskey : Win32cr::NetworkManagement::Dns::DNS_KEY_DATA,
-      dnskey_ : Win32cr::NetworkManagement::Dns::DNS_KEY_DATA,
-      tkey : Win32cr::NetworkManagement::Dns::DNS_TKEY_DATAA,
-      tkey_ : Win32cr::NetworkManagement::Dns::DNS_TKEY_DATAA,
-      tsig : Win32cr::NetworkManagement::Dns::DNS_TSIG_DATAA,
-      tsig_ : Win32cr::NetworkManagement::Dns::DNS_TSIG_DATAA,
-      wins : Win32cr::NetworkManagement::Dns::DNS_WINS_DATA,
-      wins_ : Win32cr::NetworkManagement::Dns::DNS_WINS_DATA,
-      winsr : Win32cr::NetworkManagement::Dns::DNS_WINSR_DATAA,
-      wins_r : Win32cr::NetworkManagement::Dns::DNS_WINSR_DATAA,
-      nbstat : Win32cr::NetworkManagement::Dns::DNS_WINSR_DATAA,
-      nbstat_ : Win32cr::NetworkManagement::Dns::DNS_WINSR_DATAA,
-      dhcid : Win32cr::NetworkManagement::Dns::DNS_DHCID_DATA,
-      nsec3 : Win32cr::NetworkManagement::Dns::DNS_NSEC3_DATA,
-      nsec3_ : Win32cr::NetworkManagement::Dns::DNS_NSEC3_DATA,
-      nsec3_param : Win32cr::NetworkManagement::Dns::DNS_NSEC3PARAM_DATA,
-      nsec3_param_ : Win32cr::NetworkManagement::Dns::DNS_NSEC3PARAM_DATA,
-      tlsa : Win32cr::NetworkManagement::Dns::DNS_TLSA_DATA,
-      tlsa_ : Win32cr::NetworkManagement::Dns::DNS_TLSA_DATA,
-      unknown : Win32cr::NetworkManagement::Dns::DNS_UNKNOWN_DATA,
-      unknown_ : Win32cr::NetworkManagement::Dns::DNS_UNKNOWN_DATA,
-      pDataPtr : UInt8*
+    struct Data_e__Union_
+    property a : Win32cr::NetworkManagement::Dns::DNS_A_DATA
+    property soa : Win32cr::NetworkManagement::Dns::DNS_SOA_DATAA
+    property soa_ : Win32cr::NetworkManagement::Dns::DNS_SOA_DATAA
+    property ptr : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA
+    property ptr_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA
+    property ns : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA
+    property ns_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA
+    property cname : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA
+    property cname_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA
+    property dname : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA
+    property dname_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA
+    property mb : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA
+    property mb_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA
+    property md : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA
+    property md_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA
+    property mf : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA
+    property mf_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA
+    property mg : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA
+    property mg_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA
+    property mr : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA
+    property mr_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA
+    property minfo : Win32cr::NetworkManagement::Dns::DNS_MINFO_DATAA
+    property minfo_ : Win32cr::NetworkManagement::Dns::DNS_MINFO_DATAA
+    property rp : Win32cr::NetworkManagement::Dns::DNS_MINFO_DATAA
+    property rp_ : Win32cr::NetworkManagement::Dns::DNS_MINFO_DATAA
+    property mx : Win32cr::NetworkManagement::Dns::DNS_MX_DATAA
+    property mx_ : Win32cr::NetworkManagement::Dns::DNS_MX_DATAA
+    property afsdb : Win32cr::NetworkManagement::Dns::DNS_MX_DATAA
+    property afsdb_ : Win32cr::NetworkManagement::Dns::DNS_MX_DATAA
+    property rt : Win32cr::NetworkManagement::Dns::DNS_MX_DATAA
+    property rt_ : Win32cr::NetworkManagement::Dns::DNS_MX_DATAA
+    property hinfo : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAA
+    property hinfo_ : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAA
+    property isdn : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAA
+    property isdn_ : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAA
+    property txt : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAA
+    property txt_ : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAA
+    property x25 : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAA
+    property null : Win32cr::NetworkManagement::Dns::DNS_NULL_DATA
+    property wks : Win32cr::NetworkManagement::Dns::DNS_WKS_DATA
+    property wks_ : Win32cr::NetworkManagement::Dns::DNS_WKS_DATA
+    property aaaa : Win32cr::NetworkManagement::Dns::DNS_AAAA_DATA
+    property key : Win32cr::NetworkManagement::Dns::DNS_KEY_DATA
+    property key_ : Win32cr::NetworkManagement::Dns::DNS_KEY_DATA
+    property sig : Win32cr::NetworkManagement::Dns::DNS_SIG_DATAA
+    property sig_ : Win32cr::NetworkManagement::Dns::DNS_SIG_DATAA
+    property atma : Win32cr::NetworkManagement::Dns::DNS_ATMA_DATA
+    property atma_ : Win32cr::NetworkManagement::Dns::DNS_ATMA_DATA
+    property nxt : Win32cr::NetworkManagement::Dns::DNS_NXT_DATAA
+    property nxt_ : Win32cr::NetworkManagement::Dns::DNS_NXT_DATAA
+    property srv : Win32cr::NetworkManagement::Dns::DNS_SRV_DATAA
+    property srv_ : Win32cr::NetworkManagement::Dns::DNS_SRV_DATAA
+    property naptr : Win32cr::NetworkManagement::Dns::DNS_NAPTR_DATAA
+    property naptr_ : Win32cr::NetworkManagement::Dns::DNS_NAPTR_DATAA
+    property opt : Win32cr::NetworkManagement::Dns::DNS_OPT_DATA
+    property opt_ : Win32cr::NetworkManagement::Dns::DNS_OPT_DATA
+    property ds : Win32cr::NetworkManagement::Dns::DNS_DS_DATA
+    property ds_ : Win32cr::NetworkManagement::Dns::DNS_DS_DATA
+    property rrsig : Win32cr::NetworkManagement::Dns::DNS_SIG_DATAA
+    property rrsig_ : Win32cr::NetworkManagement::Dns::DNS_SIG_DATAA
+    property nsec : Win32cr::NetworkManagement::Dns::DNS_NSEC_DATAA
+    property nsec_ : Win32cr::NetworkManagement::Dns::DNS_NSEC_DATAA
+    property dnskey : Win32cr::NetworkManagement::Dns::DNS_KEY_DATA
+    property dnskey_ : Win32cr::NetworkManagement::Dns::DNS_KEY_DATA
+    property tkey : Win32cr::NetworkManagement::Dns::DNS_TKEY_DATAA
+    property tkey_ : Win32cr::NetworkManagement::Dns::DNS_TKEY_DATAA
+    property tsig : Win32cr::NetworkManagement::Dns::DNS_TSIG_DATAA
+    property tsig_ : Win32cr::NetworkManagement::Dns::DNS_TSIG_DATAA
+    property wins : Win32cr::NetworkManagement::Dns::DNS_WINS_DATA
+    property wins_ : Win32cr::NetworkManagement::Dns::DNS_WINS_DATA
+    property winsr : Win32cr::NetworkManagement::Dns::DNS_WINSR_DATAA
+    property wins_r : Win32cr::NetworkManagement::Dns::DNS_WINSR_DATAA
+    property nbstat : Win32cr::NetworkManagement::Dns::DNS_WINSR_DATAA
+    property nbstat_ : Win32cr::NetworkManagement::Dns::DNS_WINSR_DATAA
+    property dhcid : Win32cr::NetworkManagement::Dns::DNS_DHCID_DATA
+    property nsec3 : Win32cr::NetworkManagement::Dns::DNS_NSEC3_DATA
+    property nsec3_ : Win32cr::NetworkManagement::Dns::DNS_NSEC3_DATA
+    property nsec3_param : Win32cr::NetworkManagement::Dns::DNS_NSEC3PARAM_DATA
+    property nsec3_param_ : Win32cr::NetworkManagement::Dns::DNS_NSEC3PARAM_DATA
+    property tlsa : Win32cr::NetworkManagement::Dns::DNS_TLSA_DATA
+    property tlsa_ : Win32cr::NetworkManagement::Dns::DNS_TLSA_DATA
+    property unknown : Win32cr::NetworkManagement::Dns::DNS_UNKNOWN_DATA
+    property unknown_ : Win32cr::NetworkManagement::Dns::DNS_UNKNOWN_DATA
+    property pDataPtr : UInt8*
+    def initialize(@a : Win32cr::NetworkManagement::Dns::DNS_A_DATA, @soa : Win32cr::NetworkManagement::Dns::DNS_SOA_DATAA, @soa_ : Win32cr::NetworkManagement::Dns::DNS_SOA_DATAA, @ptr : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA, @ptr_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA, @ns : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA, @ns_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA, @cname : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA, @cname_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA, @dname : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA, @dname_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA, @mb : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA, @mb_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA, @md : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA, @md_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA, @mf : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA, @mf_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA, @mg : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA, @mg_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA, @mr : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA, @mr_ : Win32cr::NetworkManagement::Dns::DNS_PTR_DATAA, @minfo : Win32cr::NetworkManagement::Dns::DNS_MINFO_DATAA, @minfo_ : Win32cr::NetworkManagement::Dns::DNS_MINFO_DATAA, @rp : Win32cr::NetworkManagement::Dns::DNS_MINFO_DATAA, @rp_ : Win32cr::NetworkManagement::Dns::DNS_MINFO_DATAA, @mx : Win32cr::NetworkManagement::Dns::DNS_MX_DATAA, @mx_ : Win32cr::NetworkManagement::Dns::DNS_MX_DATAA, @afsdb : Win32cr::NetworkManagement::Dns::DNS_MX_DATAA, @afsdb_ : Win32cr::NetworkManagement::Dns::DNS_MX_DATAA, @rt : Win32cr::NetworkManagement::Dns::DNS_MX_DATAA, @rt_ : Win32cr::NetworkManagement::Dns::DNS_MX_DATAA, @hinfo : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAA, @hinfo_ : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAA, @isdn : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAA, @isdn_ : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAA, @txt : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAA, @txt_ : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAA, @x25 : Win32cr::NetworkManagement::Dns::DNS_TXT_DATAA, @null : Win32cr::NetworkManagement::Dns::DNS_NULL_DATA, @wks : Win32cr::NetworkManagement::Dns::DNS_WKS_DATA, @wks_ : Win32cr::NetworkManagement::Dns::DNS_WKS_DATA, @aaaa : Win32cr::NetworkManagement::Dns::DNS_AAAA_DATA, @key : Win32cr::NetworkManagement::Dns::DNS_KEY_DATA, @key_ : Win32cr::NetworkManagement::Dns::DNS_KEY_DATA, @sig : Win32cr::NetworkManagement::Dns::DNS_SIG_DATAA, @sig_ : Win32cr::NetworkManagement::Dns::DNS_SIG_DATAA, @atma : Win32cr::NetworkManagement::Dns::DNS_ATMA_DATA, @atma_ : Win32cr::NetworkManagement::Dns::DNS_ATMA_DATA, @nxt : Win32cr::NetworkManagement::Dns::DNS_NXT_DATAA, @nxt_ : Win32cr::NetworkManagement::Dns::DNS_NXT_DATAA, @srv : Win32cr::NetworkManagement::Dns::DNS_SRV_DATAA, @srv_ : Win32cr::NetworkManagement::Dns::DNS_SRV_DATAA, @naptr : Win32cr::NetworkManagement::Dns::DNS_NAPTR_DATAA, @naptr_ : Win32cr::NetworkManagement::Dns::DNS_NAPTR_DATAA, @opt : Win32cr::NetworkManagement::Dns::DNS_OPT_DATA, @opt_ : Win32cr::NetworkManagement::Dns::DNS_OPT_DATA, @ds : Win32cr::NetworkManagement::Dns::DNS_DS_DATA, @ds_ : Win32cr::NetworkManagement::Dns::DNS_DS_DATA, @rrsig : Win32cr::NetworkManagement::Dns::DNS_SIG_DATAA, @rrsig_ : Win32cr::NetworkManagement::Dns::DNS_SIG_DATAA, @nsec : Win32cr::NetworkManagement::Dns::DNS_NSEC_DATAA, @nsec_ : Win32cr::NetworkManagement::Dns::DNS_NSEC_DATAA, @dnskey : Win32cr::NetworkManagement::Dns::DNS_KEY_DATA, @dnskey_ : Win32cr::NetworkManagement::Dns::DNS_KEY_DATA, @tkey : Win32cr::NetworkManagement::Dns::DNS_TKEY_DATAA, @tkey_ : Win32cr::NetworkManagement::Dns::DNS_TKEY_DATAA, @tsig : Win32cr::NetworkManagement::Dns::DNS_TSIG_DATAA, @tsig_ : Win32cr::NetworkManagement::Dns::DNS_TSIG_DATAA, @wins : Win32cr::NetworkManagement::Dns::DNS_WINS_DATA, @wins_ : Win32cr::NetworkManagement::Dns::DNS_WINS_DATA, @winsr : Win32cr::NetworkManagement::Dns::DNS_WINSR_DATAA, @wins_r : Win32cr::NetworkManagement::Dns::DNS_WINSR_DATAA, @nbstat : Win32cr::NetworkManagement::Dns::DNS_WINSR_DATAA, @nbstat_ : Win32cr::NetworkManagement::Dns::DNS_WINSR_DATAA, @dhcid : Win32cr::NetworkManagement::Dns::DNS_DHCID_DATA, @nsec3 : Win32cr::NetworkManagement::Dns::DNS_NSEC3_DATA, @nsec3_ : Win32cr::NetworkManagement::Dns::DNS_NSEC3_DATA, @nsec3_param : Win32cr::NetworkManagement::Dns::DNS_NSEC3PARAM_DATA, @nsec3_param_ : Win32cr::NetworkManagement::Dns::DNS_NSEC3PARAM_DATA, @tlsa : Win32cr::NetworkManagement::Dns::DNS_TLSA_DATA, @tlsa_ : Win32cr::NetworkManagement::Dns::DNS_TLSA_DATA, @unknown : Win32cr::NetworkManagement::Dns::DNS_UNKNOWN_DATA, @unknown_ : Win32cr::NetworkManagement::Dns::DNS_UNKNOWN_DATA, @pDataPtr : UInt8*)
+    end
+    end
 
+    def initialize(@pNext : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, @pName : Win32cr::Foundation::PSTR, @wType : UInt16, @wDataLength : UInt16, @flags : Flags_e__Union_, @dwTtl : UInt32, @dwReserved : UInt32, @data : Data_e__Union_)
+    end
   end
 
   @[Extern]
-  record DnsRecordOptA_,
-    pNext : Win32cr::NetworkManagement::Dns::DNS_RECORDA*,
-    pName : Win32cr::Foundation::PSTR,
-    wType : UInt16,
-    wDataLength : UInt16,
-    flags : Flags_e__Union_,
-    ext_header : Win32cr::NetworkManagement::Dns::DNS_HEADER_EXT,
-    wPayloadSize : UInt16,
-    wReserved : UInt16,
-    data : Data_e__Union_ do
+  struct DnsRecordOptA_
+    property pNext : Win32cr::NetworkManagement::Dns::DNS_RECORDA*
+    property pName : Win32cr::Foundation::PSTR
+    property wType : UInt16
+    property wDataLength : UInt16
+    property flags : Flags_e__Union_
+    property ext_header : Win32cr::NetworkManagement::Dns::DNS_HEADER_EXT
+    property wPayloadSize : UInt16
+    property wReserved : UInt16
+    property data : Data_e__Union_
 
     # Nested Type Flags_e__Union_
     @[Extern(union: true)]
-    record Flags_e__Union_,
-      dw : UInt32,
-      s : Win32cr::NetworkManagement::Dns::DNS_RECORD_FLAGS
+    struct Flags_e__Union_
+    property dw : UInt32
+    property s : Win32cr::NetworkManagement::Dns::DNS_RECORD_FLAGS
+    def initialize(@dw : UInt32, @s : Win32cr::NetworkManagement::Dns::DNS_RECORD_FLAGS)
+    end
+    end
 
 
     # Nested Type Data_e__Union_
     @[Extern(union: true)]
-    record Data_e__Union_,
-      opt : Win32cr::NetworkManagement::Dns::DNS_OPT_DATA,
-      opt_ : Win32cr::NetworkManagement::Dns::DNS_OPT_DATA
+    struct Data_e__Union_
+    property opt : Win32cr::NetworkManagement::Dns::DNS_OPT_DATA
+    property opt_ : Win32cr::NetworkManagement::Dns::DNS_OPT_DATA
+    def initialize(@opt : Win32cr::NetworkManagement::Dns::DNS_OPT_DATA, @opt_ : Win32cr::NetworkManagement::Dns::DNS_OPT_DATA)
+    end
+    end
 
+    def initialize(@pNext : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, @pName : Win32cr::Foundation::PSTR, @wType : UInt16, @wDataLength : UInt16, @flags : Flags_e__Union_, @ext_header : Win32cr::NetworkManagement::Dns::DNS_HEADER_EXT, @wPayloadSize : UInt16, @wReserved : UInt16, @data : Data_e__Union_)
+    end
   end
 
   @[Extern]
-  record DNS_RRSET,
-    pFirstRR : Win32cr::NetworkManagement::Dns::DNS_RECORDA*,
-    pLastRR : Win32cr::NetworkManagement::Dns::DNS_RECORDA*
+  struct DNS_RRSET
+    property pFirstRR : Win32cr::NetworkManagement::Dns::DNS_RECORDA*
+    property pLastRR : Win32cr::NetworkManagement::Dns::DNS_RECORDA*
+    def initialize(@pFirstRR : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, @pLastRR : Win32cr::NetworkManagement::Dns::DNS_RECORDA*)
+    end
+  end
 
   @[Extern]
-  record DNS_PROXY_INFORMATION,
-    version : UInt32,
-    proxyInformationType : Win32cr::NetworkManagement::Dns::DNS_PROXY_INFORMATION_TYPE,
-    proxyName : Win32cr::Foundation::PWSTR
+  struct DNS_PROXY_INFORMATION
+    property version : UInt32
+    property proxyInformationType : Win32cr::NetworkManagement::Dns::DNS_PROXY_INFORMATION_TYPE
+    property proxyName : Win32cr::Foundation::PWSTR
+    def initialize(@version : UInt32, @proxyInformationType : Win32cr::NetworkManagement::Dns::DNS_PROXY_INFORMATION_TYPE, @proxyName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record DNS_QUERY_RESULT,
-    version : UInt32,
-    query_status : Int32,
-    query_options : UInt64,
-    pQueryRecords : Win32cr::NetworkManagement::Dns::DNS_RECORDA*,
-    reserved : Void*
+  struct DNS_QUERY_RESULT
+    property version : UInt32
+    property query_status : Int32
+    property query_options : UInt64
+    property pQueryRecords : Win32cr::NetworkManagement::Dns::DNS_RECORDA*
+    property reserved : Void*
+    def initialize(@version : UInt32, @query_status : Int32, @query_options : UInt64, @pQueryRecords : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, @reserved : Void*)
+    end
+  end
 
   @[Extern]
-  record DNS_QUERY_REQUEST,
-    version : UInt32,
-    query_name : Win32cr::Foundation::PWSTR,
-    query_type : UInt16,
-    query_options : UInt64,
-    pDnsServerList : Win32cr::NetworkManagement::Dns::DNS_ADDR_ARRAY*,
-    interface_index : UInt32,
-    pQueryCompletionCallback : Win32cr::NetworkManagement::Dns::PDNS_QUERY_COMPLETION_ROUTINE,
-    pQueryContext : Void*
+  struct DNS_QUERY_REQUEST
+    property version : UInt32
+    property query_name : Win32cr::Foundation::PWSTR
+    property query_type : UInt16
+    property query_options : UInt64
+    property pDnsServerList : Win32cr::NetworkManagement::Dns::DNS_ADDR_ARRAY*
+    property interface_index : UInt32
+    property pQueryCompletionCallback : Win32cr::NetworkManagement::Dns::PDNS_QUERY_COMPLETION_ROUTINE
+    property pQueryContext : Void*
+    def initialize(@version : UInt32, @query_name : Win32cr::Foundation::PWSTR, @query_type : UInt16, @query_options : UInt64, @pDnsServerList : Win32cr::NetworkManagement::Dns::DNS_ADDR_ARRAY*, @interface_index : UInt32, @pQueryCompletionCallback : Win32cr::NetworkManagement::Dns::PDNS_QUERY_COMPLETION_ROUTINE, @pQueryContext : Void*)
+    end
+  end
 
   @[Extern]
-  record DNS_QUERY_CANCEL,
-    reserved : Win32cr::Foundation::CHAR[32]
+  struct DNS_QUERY_CANCEL
+    property reserved : Win32cr::Foundation::CHAR[32]
+    def initialize(@reserved : Win32cr::Foundation::CHAR[32])
+    end
+  end
 
   @[Extern]
-  record DNS_CUSTOM_SERVER,
-    dwServerType : UInt32,
-    ullFlags : UInt64,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_ do
+  struct DNS_CUSTOM_SERVER
+    property dwServerType : UInt32
+    property ullFlags : UInt64
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      pwszTemplate : Win32cr::Foundation::PWSTR
+    struct Anonymous1_e__Union_
+    property pwszTemplate : Win32cr::Foundation::PWSTR
+    def initialize(@pwszTemplate : Win32cr::Foundation::PWSTR)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      max_sa : Win32cr::Foundation::CHAR[32]
+    struct Anonymous2_e__Union_
+    property max_sa : Win32cr::Foundation::CHAR[32]
+    def initialize(@max_sa : Win32cr::Foundation::CHAR[32])
+    end
+    end
 
+    def initialize(@dwServerType : UInt32, @ullFlags : UInt64, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_)
+    end
   end
 
   @[Extern]
-  record DNS_QUERY_REQUEST3,
-    version : UInt32,
-    query_name : Win32cr::Foundation::PWSTR,
-    query_type : UInt16,
-    query_options : UInt64,
-    pDnsServerList : Win32cr::NetworkManagement::Dns::DNS_ADDR_ARRAY*,
-    interface_index : UInt32,
-    pQueryCompletionCallback : Win32cr::NetworkManagement::Dns::PDNS_QUERY_COMPLETION_ROUTINE,
-    pQueryContext : Void*,
-    is_network_query_required : Win32cr::Foundation::BOOL,
-    required_network_index : UInt32,
-    cCustomServers : UInt32,
-    pCustomServers : Win32cr::NetworkManagement::Dns::DNS_CUSTOM_SERVER*
+  struct DNS_QUERY_REQUEST3
+    property version : UInt32
+    property query_name : Win32cr::Foundation::PWSTR
+    property query_type : UInt16
+    property query_options : UInt64
+    property pDnsServerList : Win32cr::NetworkManagement::Dns::DNS_ADDR_ARRAY*
+    property interface_index : UInt32
+    property pQueryCompletionCallback : Win32cr::NetworkManagement::Dns::PDNS_QUERY_COMPLETION_ROUTINE
+    property pQueryContext : Void*
+    property is_network_query_required : Win32cr::Foundation::BOOL
+    property required_network_index : UInt32
+    property cCustomServers : UInt32
+    property pCustomServers : Win32cr::NetworkManagement::Dns::DNS_CUSTOM_SERVER*
+    def initialize(@version : UInt32, @query_name : Win32cr::Foundation::PWSTR, @query_type : UInt16, @query_options : UInt64, @pDnsServerList : Win32cr::NetworkManagement::Dns::DNS_ADDR_ARRAY*, @interface_index : UInt32, @pQueryCompletionCallback : Win32cr::NetworkManagement::Dns::PDNS_QUERY_COMPLETION_ROUTINE, @pQueryContext : Void*, @is_network_query_required : Win32cr::Foundation::BOOL, @required_network_index : UInt32, @cCustomServers : UInt32, @pCustomServers : Win32cr::NetworkManagement::Dns::DNS_CUSTOM_SERVER*)
+    end
+  end
 
   @[Extern]
-  record DNS_APPLICATION_SETTINGS,
-    version : UInt32,
-    flags : UInt64
+  struct DNS_APPLICATION_SETTINGS
+    property version : UInt32
+    property flags : UInt64
+    def initialize(@version : UInt32, @flags : UInt64)
+    end
+  end
 
   @[Extern]
-  record DNS_MESSAGE_BUFFER,
-    message_head : Win32cr::NetworkManagement::Dns::DNS_HEADER,
-    message_body : Win32cr::Foundation::CHAR*
+  struct DNS_MESSAGE_BUFFER
+    property message_head : Win32cr::NetworkManagement::Dns::DNS_HEADER
+    property message_body : Win32cr::Foundation::CHAR*
+    def initialize(@message_head : Win32cr::NetworkManagement::Dns::DNS_HEADER, @message_body : Win32cr::Foundation::CHAR*)
+    end
+  end
 
   @[Extern]
-  record DNS_CONNECTION_PROXY_INFO,
-    version : UInt32,
-    pwszFriendlyName : Win32cr::Foundation::PWSTR,
-    flags : UInt32,
-    switch : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_INFO_SWITCH,
-    anonymous : Anonymous_e__Union_ do
+  struct DNS_CONNECTION_PROXY_INFO
+    property version : UInt32
+    property pwszFriendlyName : Win32cr::Foundation::PWSTR
+    property flags : UInt32
+    property switch : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_INFO_SWITCH
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      config : DNS_CONNECTION_PROXY_INFO_CONFIG_,
-      script : DNS_CONNECTION_PROXY_INFO_SCRIPT_ do
+    struct Anonymous_e__Union_
+    property config : DNS_CONNECTION_PROXY_INFO_CONFIG_
+    property script : DNS_CONNECTION_PROXY_INFO_SCRIPT_
 
       # Nested Type DNS_CONNECTION_PROXY_INFO_SCRIPT_
       @[Extern]
-      record DNS_CONNECTION_PROXY_INFO_SCRIPT_,
-        pwszScript : Win32cr::Foundation::PWSTR,
-        pwszUsername : Win32cr::Foundation::PWSTR,
-        pwszPassword : Win32cr::Foundation::PWSTR
+      struct DNS_CONNECTION_PROXY_INFO_SCRIPT_
+    property pwszScript : Win32cr::Foundation::PWSTR
+    property pwszUsername : Win32cr::Foundation::PWSTR
+    property pwszPassword : Win32cr::Foundation::PWSTR
+    def initialize(@pwszScript : Win32cr::Foundation::PWSTR, @pwszUsername : Win32cr::Foundation::PWSTR, @pwszPassword : Win32cr::Foundation::PWSTR)
+    end
+      end
 
 
       # Nested Type DNS_CONNECTION_PROXY_INFO_CONFIG_
       @[Extern]
-      record DNS_CONNECTION_PROXY_INFO_CONFIG_,
-        pwszServer : Win32cr::Foundation::PWSTR,
-        pwszUsername : Win32cr::Foundation::PWSTR,
-        pwszPassword : Win32cr::Foundation::PWSTR,
-        pwszException : Win32cr::Foundation::PWSTR,
-        pwszExtraInfo : Win32cr::Foundation::PWSTR,
-        port : UInt16
+      struct DNS_CONNECTION_PROXY_INFO_CONFIG_
+    property pwszServer : Win32cr::Foundation::PWSTR
+    property pwszUsername : Win32cr::Foundation::PWSTR
+    property pwszPassword : Win32cr::Foundation::PWSTR
+    property pwszException : Win32cr::Foundation::PWSTR
+    property pwszExtraInfo : Win32cr::Foundation::PWSTR
+    property port : UInt16
+    def initialize(@pwszServer : Win32cr::Foundation::PWSTR, @pwszUsername : Win32cr::Foundation::PWSTR, @pwszPassword : Win32cr::Foundation::PWSTR, @pwszException : Win32cr::Foundation::PWSTR, @pwszExtraInfo : Win32cr::Foundation::PWSTR, @port : UInt16)
+    end
+      end
 
+    def initialize(@config : DNS_CONNECTION_PROXY_INFO_CONFIG_, @script : DNS_CONNECTION_PROXY_INFO_SCRIPT_)
+    end
     end
 
+    def initialize(@version : UInt32, @pwszFriendlyName : Win32cr::Foundation::PWSTR, @flags : UInt32, @switch : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_INFO_SWITCH, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record DNS_CONNECTION_PROXY_INFO_EX,
-    proxy_info : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_INFO,
-    dwInterfaceIndex : UInt32,
-    pwszConnectionName : Win32cr::Foundation::PWSTR,
-    fDirectConfiguration : Win32cr::Foundation::BOOL,
-    hConnection : Win32cr::Foundation::HANDLE
+  struct DNS_CONNECTION_PROXY_INFO_EX
+    property proxy_info : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_INFO
+    property dwInterfaceIndex : UInt32
+    property pwszConnectionName : Win32cr::Foundation::PWSTR
+    property fDirectConfiguration : Win32cr::Foundation::BOOL
+    property hConnection : Win32cr::Foundation::HANDLE
+    def initialize(@proxy_info : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_INFO, @dwInterfaceIndex : UInt32, @pwszConnectionName : Win32cr::Foundation::PWSTR, @fDirectConfiguration : Win32cr::Foundation::BOOL, @hConnection : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record DNS_CONNECTION_PROXY_ELEMENT,
-    type__ : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_TYPE,
-    info : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_INFO
+  struct DNS_CONNECTION_PROXY_ELEMENT
+    property type__ : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_TYPE
+    property info : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_INFO
+    def initialize(@type__ : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_TYPE, @info : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_INFO)
+    end
+  end
 
   @[Extern]
-  record DNS_CONNECTION_PROXY_LIST,
-    cProxies : UInt32,
-    pProxies : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_ELEMENT*
+  struct DNS_CONNECTION_PROXY_LIST
+    property cProxies : UInt32
+    property pProxies : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_ELEMENT*
+    def initialize(@cProxies : UInt32, @pProxies : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_ELEMENT*)
+    end
+  end
 
   @[Extern]
-  record DNS_CONNECTION_NAME,
-    wszName : UInt16[65]
+  struct DNS_CONNECTION_NAME
+    property wszName : UInt16[65]
+    def initialize(@wszName : UInt16[65])
+    end
+  end
 
   @[Extern]
-  record DNS_CONNECTION_NAME_LIST,
-    cNames : UInt32,
-    pNames : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_NAME*
+  struct DNS_CONNECTION_NAME_LIST
+    property cNames : UInt32
+    property pNames : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_NAME*
+    def initialize(@cNames : UInt32, @pNames : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_NAME*)
+    end
+  end
 
   @[Extern]
-  record DNS_CONNECTION_IFINDEX_ENTRY,
-    pwszConnectionName : Win32cr::Foundation::PWSTR,
-    dwIfIndex : UInt32
+  struct DNS_CONNECTION_IFINDEX_ENTRY
+    property pwszConnectionName : Win32cr::Foundation::PWSTR
+    property dwIfIndex : UInt32
+    def initialize(@pwszConnectionName : Win32cr::Foundation::PWSTR, @dwIfIndex : UInt32)
+    end
+  end
 
   @[Extern]
-  record DNS_CONNECTION_IFINDEX_LIST,
-    pConnectionIfIndexEntries : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_IFINDEX_ENTRY*,
-    nEntries : UInt32
+  struct DNS_CONNECTION_IFINDEX_LIST
+    property pConnectionIfIndexEntries : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_IFINDEX_ENTRY*
+    property nEntries : UInt32
+    def initialize(@pConnectionIfIndexEntries : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_IFINDEX_ENTRY*, @nEntries : UInt32)
+    end
+  end
 
   @[Extern]
-  record DNS_CONNECTION_POLICY_ENTRY,
-    pwszHost : Win32cr::Foundation::PWSTR,
-    pwszAppId : Win32cr::Foundation::PWSTR,
-    cbAppSid : UInt32,
-    pbAppSid : UInt8*,
-    nConnections : UInt32,
-    ppwszConnections : Win32cr::Foundation::PWSTR*,
-    dwPolicyEntryFlags : UInt32
+  struct DNS_CONNECTION_POLICY_ENTRY
+    property pwszHost : Win32cr::Foundation::PWSTR
+    property pwszAppId : Win32cr::Foundation::PWSTR
+    property cbAppSid : UInt32
+    property pbAppSid : UInt8*
+    property nConnections : UInt32
+    property ppwszConnections : Win32cr::Foundation::PWSTR*
+    property dwPolicyEntryFlags : UInt32
+    def initialize(@pwszHost : Win32cr::Foundation::PWSTR, @pwszAppId : Win32cr::Foundation::PWSTR, @cbAppSid : UInt32, @pbAppSid : UInt8*, @nConnections : UInt32, @ppwszConnections : Win32cr::Foundation::PWSTR*, @dwPolicyEntryFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record DNS_CONNECTION_POLICY_ENTRY_LIST,
-    pPolicyEntries : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_POLICY_ENTRY*,
-    nEntries : UInt32
+  struct DNS_CONNECTION_POLICY_ENTRY_LIST
+    property pPolicyEntries : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_POLICY_ENTRY*
+    property nEntries : UInt32
+    def initialize(@pPolicyEntries : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_POLICY_ENTRY*, @nEntries : UInt32)
+    end
+  end
 
   @[Extern]
-  record DNS_SERVICE_INSTANCE,
-    pszInstanceName : Win32cr::Foundation::PWSTR,
-    pszHostName : Win32cr::Foundation::PWSTR,
-    ip4Address : UInt32*,
-    ip6Address : Win32cr::NetworkManagement::Dns::IP6_ADDRESS*,
-    wPort : UInt16,
-    wPriority : UInt16,
-    wWeight : UInt16,
-    dwPropertyCount : UInt32,
-    keys : Win32cr::Foundation::PWSTR*,
-    values : Win32cr::Foundation::PWSTR*,
-    dwInterfaceIndex : UInt32
+  struct DNS_SERVICE_INSTANCE
+    property pszInstanceName : Win32cr::Foundation::PWSTR
+    property pszHostName : Win32cr::Foundation::PWSTR
+    property ip4Address : UInt32*
+    property ip6Address : Win32cr::NetworkManagement::Dns::IP6_ADDRESS*
+    property wPort : UInt16
+    property wPriority : UInt16
+    property wWeight : UInt16
+    property dwPropertyCount : UInt32
+    property keys : Win32cr::Foundation::PWSTR*
+    property values : Win32cr::Foundation::PWSTR*
+    property dwInterfaceIndex : UInt32
+    def initialize(@pszInstanceName : Win32cr::Foundation::PWSTR, @pszHostName : Win32cr::Foundation::PWSTR, @ip4Address : UInt32*, @ip6Address : Win32cr::NetworkManagement::Dns::IP6_ADDRESS*, @wPort : UInt16, @wPriority : UInt16, @wWeight : UInt16, @dwPropertyCount : UInt32, @keys : Win32cr::Foundation::PWSTR*, @values : Win32cr::Foundation::PWSTR*, @dwInterfaceIndex : UInt32)
+    end
+  end
 
   @[Extern]
-  record DNS_SERVICE_CANCEL,
-    reserved : Void*
+  struct DNS_SERVICE_CANCEL
+    property reserved : Void*
+    def initialize(@reserved : Void*)
+    end
+  end
 
   @[Extern]
-  record DNS_SERVICE_BROWSE_REQUEST,
-    version : UInt32,
-    interface_index : UInt32,
-    query_name : Win32cr::Foundation::PWSTR,
-    anonymous : Anonymous_e__Union_,
-    pQueryContext : Void* do
+  struct DNS_SERVICE_BROWSE_REQUEST
+    property version : UInt32
+    property interface_index : UInt32
+    property query_name : Win32cr::Foundation::PWSTR
+    property anonymous : Anonymous_e__Union_
+    property pQueryContext : Void*
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      pBrowseCallback : Win32cr::NetworkManagement::Dns::PDNS_SERVICE_BROWSE_CALLBACK,
-      pBrowseCallbackV2 : Win32cr::NetworkManagement::Dns::PDNS_QUERY_COMPLETION_ROUTINE
+    struct Anonymous_e__Union_
+    property pBrowseCallback : Win32cr::NetworkManagement::Dns::PDNS_SERVICE_BROWSE_CALLBACK
+    property pBrowseCallbackV2 : Win32cr::NetworkManagement::Dns::PDNS_QUERY_COMPLETION_ROUTINE
+    def initialize(@pBrowseCallback : Win32cr::NetworkManagement::Dns::PDNS_SERVICE_BROWSE_CALLBACK, @pBrowseCallbackV2 : Win32cr::NetworkManagement::Dns::PDNS_QUERY_COMPLETION_ROUTINE)
+    end
+    end
 
+    def initialize(@version : UInt32, @interface_index : UInt32, @query_name : Win32cr::Foundation::PWSTR, @anonymous : Anonymous_e__Union_, @pQueryContext : Void*)
+    end
   end
 
   @[Extern]
-  record DNS_SERVICE_RESOLVE_REQUEST,
-    version : UInt32,
-    interface_index : UInt32,
-    query_name : Win32cr::Foundation::PWSTR,
-    pResolveCompletionCallback : Win32cr::NetworkManagement::Dns::PDNS_SERVICE_RESOLVE_COMPLETE,
-    pQueryContext : Void*
+  struct DNS_SERVICE_RESOLVE_REQUEST
+    property version : UInt32
+    property interface_index : UInt32
+    property query_name : Win32cr::Foundation::PWSTR
+    property pResolveCompletionCallback : Win32cr::NetworkManagement::Dns::PDNS_SERVICE_RESOLVE_COMPLETE
+    property pQueryContext : Void*
+    def initialize(@version : UInt32, @interface_index : UInt32, @query_name : Win32cr::Foundation::PWSTR, @pResolveCompletionCallback : Win32cr::NetworkManagement::Dns::PDNS_SERVICE_RESOLVE_COMPLETE, @pQueryContext : Void*)
+    end
+  end
 
   @[Extern]
-  record DNS_SERVICE_REGISTER_REQUEST,
-    version : UInt32,
-    interface_index : UInt32,
-    pServiceInstance : Win32cr::NetworkManagement::Dns::DNS_SERVICE_INSTANCE*,
-    pRegisterCompletionCallback : Win32cr::NetworkManagement::Dns::PDNS_SERVICE_REGISTER_COMPLETE,
-    pQueryContext : Void*,
-    hCredentials : Win32cr::Foundation::HANDLE,
-    unicastEnabled : Win32cr::Foundation::BOOL
+  struct DNS_SERVICE_REGISTER_REQUEST
+    property version : UInt32
+    property interface_index : UInt32
+    property pServiceInstance : Win32cr::NetworkManagement::Dns::DNS_SERVICE_INSTANCE*
+    property pRegisterCompletionCallback : Win32cr::NetworkManagement::Dns::PDNS_SERVICE_REGISTER_COMPLETE
+    property pQueryContext : Void*
+    property hCredentials : Win32cr::Foundation::HANDLE
+    property unicastEnabled : Win32cr::Foundation::BOOL
+    def initialize(@version : UInt32, @interface_index : UInt32, @pServiceInstance : Win32cr::NetworkManagement::Dns::DNS_SERVICE_INSTANCE*, @pRegisterCompletionCallback : Win32cr::NetworkManagement::Dns::PDNS_SERVICE_REGISTER_COMPLETE, @pQueryContext : Void*, @hCredentials : Win32cr::Foundation::HANDLE, @unicastEnabled : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record MDNS_QUERY_HANDLE,
-    nameBuf : UInt16[256],
-    wType : UInt16,
-    pSubscription : Void*,
-    pWnfCallbackParams : Void*,
-    stateNameData : UInt32[2]
+  struct MDNS_QUERY_HANDLE
+    property nameBuf : UInt16[256]
+    property wType : UInt16
+    property pSubscription : Void*
+    property pWnfCallbackParams : Void*
+    property stateNameData : UInt32[2]
+    def initialize(@nameBuf : UInt16[256], @wType : UInt16, @pSubscription : Void*, @pWnfCallbackParams : Void*, @stateNameData : UInt32[2])
+    end
+  end
 
   @[Extern]
-  record MDNS_QUERY_REQUEST,
-    version : UInt32,
-    ulRefCount : UInt32,
-    query : Win32cr::Foundation::PWSTR,
-    query_type : UInt16,
-    query_options : UInt64,
-    interface_index : UInt32,
-    pQueryCallback : Win32cr::NetworkManagement::Dns::PMDNS_QUERY_CALLBACK,
-    pQueryContext : Void*,
-    fAnswerReceived : Win32cr::Foundation::BOOL,
-    ulResendCount : UInt32
+  struct MDNS_QUERY_REQUEST
+    property version : UInt32
+    property ulRefCount : UInt32
+    property query : Win32cr::Foundation::PWSTR
+    property query_type : UInt16
+    property query_options : UInt64
+    property interface_index : UInt32
+    property pQueryCallback : Win32cr::NetworkManagement::Dns::PMDNS_QUERY_CALLBACK
+    property pQueryContext : Void*
+    property fAnswerReceived : Win32cr::Foundation::BOOL
+    property ulResendCount : UInt32
+    def initialize(@version : UInt32, @ulRefCount : UInt32, @query : Win32cr::Foundation::PWSTR, @query_type : UInt16, @query_options : UInt64, @interface_index : UInt32, @pQueryCallback : Win32cr::NetworkManagement::Dns::PMDNS_QUERY_CALLBACK, @pQueryContext : Void*, @fAnswerReceived : Win32cr::Foundation::BOOL, @ulResendCount : UInt32)
+    end
+  end
 
   {% if flag?(:i386) %}
   @[Extern(union: true)]
-  record IP6_ADDRESS,
-    ip6_dword : UInt32[4],
-    ip6_word : UInt16[8],
-    ip6_byte : UInt8[16]
+  struct IP6_ADDRESS
+    property ip6_dword : UInt32[4]
+    property ip6_word : UInt16[8]
+    property ip6_byte : UInt8[16]
+    def initialize(@ip6_dword : UInt32[4], @ip6_word : UInt16[8], @ip6_byte : UInt8[16])
+    end
+  end
   {% end %}
 
   @[Link("dnsapi")]

@@ -739,360 +739,488 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record DWRITE_COLOR_F,
-    r : Float32,
-    g : Float32,
-    b : Float32,
-    a : Float32
+  struct DWRITE_COLOR_F
+    property r : Float32
+    property g : Float32
+    property b : Float32
+    property a : Float32
+    def initialize(@r : Float32, @g : Float32, @b : Float32, @a : Float32)
+    end
+  end
 
   @[Extern]
-  record DWRITE_FONT_METRICS,
-    designUnitsPerEm : UInt16,
-    ascent : UInt16,
-    descent : UInt16,
-    lineGap : Int16,
-    capHeight : UInt16,
-    xHeight : UInt16,
-    underlinePosition : Int16,
-    underlineThickness : UInt16,
-    strikethroughPosition : Int16,
-    strikethroughThickness : UInt16
+  struct DWRITE_FONT_METRICS
+    property designUnitsPerEm : UInt16
+    property ascent : UInt16
+    property descent : UInt16
+    property lineGap : Int16
+    property capHeight : UInt16
+    property xHeight : UInt16
+    property underlinePosition : Int16
+    property underlineThickness : UInt16
+    property strikethroughPosition : Int16
+    property strikethroughThickness : UInt16
+    def initialize(@designUnitsPerEm : UInt16, @ascent : UInt16, @descent : UInt16, @lineGap : Int16, @capHeight : UInt16, @xHeight : UInt16, @underlinePosition : Int16, @underlineThickness : UInt16, @strikethroughPosition : Int16, @strikethroughThickness : UInt16)
+    end
+  end
 
   @[Extern]
-  record DWRITE_GLYPH_METRICS,
-    leftSideBearing : Int32,
-    advanceWidth : UInt32,
-    rightSideBearing : Int32,
-    topSideBearing : Int32,
-    advanceHeight : UInt32,
-    bottomSideBearing : Int32,
-    verticalOriginY : Int32
+  struct DWRITE_GLYPH_METRICS
+    property leftSideBearing : Int32
+    property advanceWidth : UInt32
+    property rightSideBearing : Int32
+    property topSideBearing : Int32
+    property advanceHeight : UInt32
+    property bottomSideBearing : Int32
+    property verticalOriginY : Int32
+    def initialize(@leftSideBearing : Int32, @advanceWidth : UInt32, @rightSideBearing : Int32, @topSideBearing : Int32, @advanceHeight : UInt32, @bottomSideBearing : Int32, @verticalOriginY : Int32)
+    end
+  end
 
   @[Extern]
-  record DWRITE_GLYPH_OFFSET,
-    advanceOffset : Float32,
-    ascenderOffset : Float32
+  struct DWRITE_GLYPH_OFFSET
+    property advanceOffset : Float32
+    property ascenderOffset : Float32
+    def initialize(@advanceOffset : Float32, @ascenderOffset : Float32)
+    end
+  end
 
   @[Extern]
-  record DWRITE_MATRIX,
-    m11 : Float32,
-    m12 : Float32,
-    m21 : Float32,
-    m22 : Float32,
-    dx : Float32,
-    dy : Float32
+  struct DWRITE_MATRIX
+    property m11 : Float32
+    property m12 : Float32
+    property m21 : Float32
+    property m22 : Float32
+    property dx : Float32
+    property dy : Float32
+    def initialize(@m11 : Float32, @m12 : Float32, @m21 : Float32, @m22 : Float32, @dx : Float32, @dy : Float32)
+    end
+  end
 
   @[Extern]
-  record DWRITE_TEXT_RANGE,
-    startPosition : UInt32,
-    length : UInt32
+  struct DWRITE_TEXT_RANGE
+    property startPosition : UInt32
+    property length : UInt32
+    def initialize(@startPosition : UInt32, @length : UInt32)
+    end
+  end
 
   @[Extern]
-  record DWRITE_FONT_FEATURE,
-    nameTag : Win32cr::Graphics::DirectWrite::DWRITE_FONT_FEATURE_TAG,
-    parameter : UInt32
+  struct DWRITE_FONT_FEATURE
+    property nameTag : Win32cr::Graphics::DirectWrite::DWRITE_FONT_FEATURE_TAG
+    property parameter : UInt32
+    def initialize(@nameTag : Win32cr::Graphics::DirectWrite::DWRITE_FONT_FEATURE_TAG, @parameter : UInt32)
+    end
+  end
 
   @[Extern]
-  record DWRITE_TYPOGRAPHIC_FEATURES,
-    features : Win32cr::Graphics::DirectWrite::DWRITE_FONT_FEATURE*,
-    featureCount : UInt32
+  struct DWRITE_TYPOGRAPHIC_FEATURES
+    property features : Win32cr::Graphics::DirectWrite::DWRITE_FONT_FEATURE*
+    property featureCount : UInt32
+    def initialize(@features : Win32cr::Graphics::DirectWrite::DWRITE_FONT_FEATURE*, @featureCount : UInt32)
+    end
+  end
 
   @[Extern]
-  record DWRITE_TRIMMING,
-    granularity : Win32cr::Graphics::DirectWrite::DWRITE_TRIMMING_GRANULARITY,
-    delimiter : UInt32,
-    delimiterCount : UInt32
+  struct DWRITE_TRIMMING
+    property granularity : Win32cr::Graphics::DirectWrite::DWRITE_TRIMMING_GRANULARITY
+    property delimiter : UInt32
+    property delimiterCount : UInt32
+    def initialize(@granularity : Win32cr::Graphics::DirectWrite::DWRITE_TRIMMING_GRANULARITY, @delimiter : UInt32, @delimiterCount : UInt32)
+    end
+  end
 
   @[Extern]
-  record DWRITE_SCRIPT_ANALYSIS,
-    script : UInt16,
-    shapes : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_SHAPES
+  struct DWRITE_SCRIPT_ANALYSIS
+    property script : UInt16
+    property shapes : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_SHAPES
+    def initialize(@script : UInt16, @shapes : Win32cr::Graphics::DirectWrite::DWRITE_SCRIPT_SHAPES)
+    end
+  end
 
   @[Extern]
-  record DWRITE_LINE_BREAKPOINT,
-    _bitfield : UInt8
+  struct DWRITE_LINE_BREAKPOINT
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+  end
 
   @[Extern]
-  record DWRITE_SHAPING_TEXT_PROPERTIES,
-    _bitfield : UInt16
+  struct DWRITE_SHAPING_TEXT_PROPERTIES
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+  end
 
   @[Extern]
-  record DWRITE_SHAPING_GLYPH_PROPERTIES,
-    _bitfield : UInt16
+  struct DWRITE_SHAPING_GLYPH_PROPERTIES
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+  end
 
   @[Extern]
-  record DWRITE_GLYPH_RUN,
-    fontFace : Void*,
-    fontEmSize : Float32,
-    glyphCount : UInt32,
-    glyphIndices : UInt16*,
-    glyphAdvances : Float32*,
-    glyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*,
-    isSideways : Win32cr::Foundation::BOOL,
-    bidiLevel : UInt32
+  struct DWRITE_GLYPH_RUN
+    property fontFace : Void*
+    property fontEmSize : Float32
+    property glyphCount : UInt32
+    property glyphIndices : UInt16*
+    property glyphAdvances : Float32*
+    property glyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*
+    property isSideways : Win32cr::Foundation::BOOL
+    property bidiLevel : UInt32
+    def initialize(@fontFace : Void*, @fontEmSize : Float32, @glyphCount : UInt32, @glyphIndices : UInt16*, @glyphAdvances : Float32*, @glyphOffsets : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_OFFSET*, @isSideways : Win32cr::Foundation::BOOL, @bidiLevel : UInt32)
+    end
+  end
 
   @[Extern]
-  record DWRITE_GLYPH_RUN_DESCRIPTION,
-    localeName : Win32cr::Foundation::PWSTR,
-    string : Win32cr::Foundation::PWSTR,
-    stringLength : UInt32,
-    clusterMap : UInt16*,
-    textPosition : UInt32
+  struct DWRITE_GLYPH_RUN_DESCRIPTION
+    property localeName : Win32cr::Foundation::PWSTR
+    property string : Win32cr::Foundation::PWSTR
+    property stringLength : UInt32
+    property clusterMap : UInt16*
+    property textPosition : UInt32
+    def initialize(@localeName : Win32cr::Foundation::PWSTR, @string : Win32cr::Foundation::PWSTR, @stringLength : UInt32, @clusterMap : UInt16*, @textPosition : UInt32)
+    end
+  end
 
   @[Extern]
-  record DWRITE_UNDERLINE,
-    width : Float32,
-    thickness : Float32,
-    offset : Float32,
-    runHeight : Float32,
-    readingDirection : Win32cr::Graphics::DirectWrite::DWRITE_READING_DIRECTION,
-    flowDirection : Win32cr::Graphics::DirectWrite::DWRITE_FLOW_DIRECTION,
-    localeName : Win32cr::Foundation::PWSTR,
-    measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE
+  struct DWRITE_UNDERLINE
+    property width : Float32
+    property thickness : Float32
+    property offset : Float32
+    property runHeight : Float32
+    property readingDirection : Win32cr::Graphics::DirectWrite::DWRITE_READING_DIRECTION
+    property flowDirection : Win32cr::Graphics::DirectWrite::DWRITE_FLOW_DIRECTION
+    property localeName : Win32cr::Foundation::PWSTR
+    property measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE
+    def initialize(@width : Float32, @thickness : Float32, @offset : Float32, @runHeight : Float32, @readingDirection : Win32cr::Graphics::DirectWrite::DWRITE_READING_DIRECTION, @flowDirection : Win32cr::Graphics::DirectWrite::DWRITE_FLOW_DIRECTION, @localeName : Win32cr::Foundation::PWSTR, @measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE)
+    end
+  end
 
   @[Extern]
-  record DWRITE_STRIKETHROUGH,
-    width : Float32,
-    thickness : Float32,
-    offset : Float32,
-    readingDirection : Win32cr::Graphics::DirectWrite::DWRITE_READING_DIRECTION,
-    flowDirection : Win32cr::Graphics::DirectWrite::DWRITE_FLOW_DIRECTION,
-    localeName : Win32cr::Foundation::PWSTR,
-    measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE
+  struct DWRITE_STRIKETHROUGH
+    property width : Float32
+    property thickness : Float32
+    property offset : Float32
+    property readingDirection : Win32cr::Graphics::DirectWrite::DWRITE_READING_DIRECTION
+    property flowDirection : Win32cr::Graphics::DirectWrite::DWRITE_FLOW_DIRECTION
+    property localeName : Win32cr::Foundation::PWSTR
+    property measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE
+    def initialize(@width : Float32, @thickness : Float32, @offset : Float32, @readingDirection : Win32cr::Graphics::DirectWrite::DWRITE_READING_DIRECTION, @flowDirection : Win32cr::Graphics::DirectWrite::DWRITE_FLOW_DIRECTION, @localeName : Win32cr::Foundation::PWSTR, @measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE)
+    end
+  end
 
   @[Extern]
-  record DWRITE_LINE_METRICS,
-    length : UInt32,
-    trailingWhitespaceLength : UInt32,
-    newlineLength : UInt32,
-    height : Float32,
-    baseline : Float32,
-    isTrimmed : Win32cr::Foundation::BOOL
+  struct DWRITE_LINE_METRICS
+    property length : UInt32
+    property trailingWhitespaceLength : UInt32
+    property newlineLength : UInt32
+    property height : Float32
+    property baseline : Float32
+    property isTrimmed : Win32cr::Foundation::BOOL
+    def initialize(@length : UInt32, @trailingWhitespaceLength : UInt32, @newlineLength : UInt32, @height : Float32, @baseline : Float32, @isTrimmed : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record DWRITE_CLUSTER_METRICS,
-    width : Float32,
-    length : UInt16,
-    _bitfield : UInt16
+  struct DWRITE_CLUSTER_METRICS
+    property width : Float32
+    property length : UInt16
+    property _bitfield : UInt16
+    def initialize(@width : Float32, @length : UInt16, @_bitfield : UInt16)
+    end
+  end
 
   @[Extern]
-  record DWRITE_TEXT_METRICS,
-    left : Float32,
-    top : Float32,
-    width : Float32,
-    widthIncludingTrailingWhitespace : Float32,
-    height : Float32,
-    layoutWidth : Float32,
-    layoutHeight : Float32,
-    maxBidiReorderingDepth : UInt32,
-    lineCount : UInt32
+  struct DWRITE_TEXT_METRICS
+    property left : Float32
+    property top : Float32
+    property width : Float32
+    property widthIncludingTrailingWhitespace : Float32
+    property height : Float32
+    property layoutWidth : Float32
+    property layoutHeight : Float32
+    property maxBidiReorderingDepth : UInt32
+    property lineCount : UInt32
+    def initialize(@left : Float32, @top : Float32, @width : Float32, @widthIncludingTrailingWhitespace : Float32, @height : Float32, @layoutWidth : Float32, @layoutHeight : Float32, @maxBidiReorderingDepth : UInt32, @lineCount : UInt32)
+    end
+  end
 
   @[Extern]
-  record DWRITE_INLINE_OBJECT_METRICS,
-    width : Float32,
-    height : Float32,
-    baseline : Float32,
-    supportsSideways : Win32cr::Foundation::BOOL
+  struct DWRITE_INLINE_OBJECT_METRICS
+    property width : Float32
+    property height : Float32
+    property baseline : Float32
+    property supportsSideways : Win32cr::Foundation::BOOL
+    def initialize(@width : Float32, @height : Float32, @baseline : Float32, @supportsSideways : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record DWRITE_OVERHANG_METRICS,
-    left : Float32,
-    top : Float32,
-    right : Float32,
-    bottom : Float32
+  struct DWRITE_OVERHANG_METRICS
+    property left : Float32
+    property top : Float32
+    property right : Float32
+    property bottom : Float32
+    def initialize(@left : Float32, @top : Float32, @right : Float32, @bottom : Float32)
+    end
+  end
 
   @[Extern]
-  record DWRITE_HIT_TEST_METRICS,
-    textPosition : UInt32,
-    length : UInt32,
-    left : Float32,
-    top : Float32,
-    width : Float32,
-    height : Float32,
-    bidiLevel : UInt32,
-    isText : Win32cr::Foundation::BOOL,
-    isTrimmed : Win32cr::Foundation::BOOL
+  struct DWRITE_HIT_TEST_METRICS
+    property textPosition : UInt32
+    property length : UInt32
+    property left : Float32
+    property top : Float32
+    property width : Float32
+    property height : Float32
+    property bidiLevel : UInt32
+    property isText : Win32cr::Foundation::BOOL
+    property isTrimmed : Win32cr::Foundation::BOOL
+    def initialize(@textPosition : UInt32, @length : UInt32, @left : Float32, @top : Float32, @width : Float32, @height : Float32, @bidiLevel : UInt32, @isText : Win32cr::Foundation::BOOL, @isTrimmed : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record DWRITE_FONT_METRICS1,
-    __anonymous_base_d_write_1_l627_c38 : Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS,
-    glyphBoxLeft : Int16,
-    glyphBoxTop : Int16,
-    glyphBoxRight : Int16,
-    glyphBoxBottom : Int16,
-    subscriptPositionX : Int16,
-    subscriptPositionY : Int16,
-    subscriptSizeX : Int16,
-    subscriptSizeY : Int16,
-    superscriptPositionX : Int16,
-    superscriptPositionY : Int16,
-    superscriptSizeX : Int16,
-    superscriptSizeY : Int16,
-    hasTypographicMetrics : Win32cr::Foundation::BOOL
+  struct DWRITE_FONT_METRICS1
+    property __anonymous_base_d_write_1_l627_c38 : Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS
+    property glyphBoxLeft : Int16
+    property glyphBoxTop : Int16
+    property glyphBoxRight : Int16
+    property glyphBoxBottom : Int16
+    property subscriptPositionX : Int16
+    property subscriptPositionY : Int16
+    property subscriptSizeX : Int16
+    property subscriptSizeY : Int16
+    property superscriptPositionX : Int16
+    property superscriptPositionY : Int16
+    property superscriptSizeX : Int16
+    property superscriptSizeY : Int16
+    property hasTypographicMetrics : Win32cr::Foundation::BOOL
+    def initialize(@__anonymous_base_d_write_1_l627_c38 : Win32cr::Graphics::DirectWrite::DWRITE_FONT_METRICS, @glyphBoxLeft : Int16, @glyphBoxTop : Int16, @glyphBoxRight : Int16, @glyphBoxBottom : Int16, @subscriptPositionX : Int16, @subscriptPositionY : Int16, @subscriptSizeX : Int16, @subscriptSizeY : Int16, @superscriptPositionX : Int16, @superscriptPositionY : Int16, @superscriptSizeX : Int16, @superscriptSizeY : Int16, @hasTypographicMetrics : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record DWRITE_CARET_METRICS,
-    slopeRise : Int16,
-    slopeRun : Int16,
-    offset : Int16
+  struct DWRITE_CARET_METRICS
+    property slopeRise : Int16
+    property slopeRun : Int16
+    property offset : Int16
+    def initialize(@slopeRise : Int16, @slopeRun : Int16, @offset : Int16)
+    end
+  end
 
   @[Extern(union: true)]
-  record DWRITE_PANOSE,
-    values : UInt8[10],
-    familyKind : UInt8,
-    text : Text_e__struct_,
-    script : Script_e__struct_,
-    decorative : Decorative_e__struct_,
-    symbol : Symbol_e__struct_ do
+  struct DWRITE_PANOSE
+    property values : UInt8[10]
+    property familyKind : UInt8
+    property text : Text_e__struct_
+    property script : Script_e__struct_
+    property decorative : Decorative_e__struct_
+    property symbol : Symbol_e__struct_
 
     # Nested Type Decorative_e__struct_
     @[Extern]
-    record Decorative_e__struct_,
-      familyKind : UInt8,
-      decorativeClass : UInt8,
-      weight : UInt8,
-      aspect : UInt8,
-      contrast : UInt8,
-      serifVariant : UInt8,
-      fill : UInt8,
-      lining : UInt8,
-      decorativeTopology : UInt8,
-      characterRange : UInt8
+    struct Decorative_e__struct_
+    property familyKind : UInt8
+    property decorativeClass : UInt8
+    property weight : UInt8
+    property aspect : UInt8
+    property contrast : UInt8
+    property serifVariant : UInt8
+    property fill : UInt8
+    property lining : UInt8
+    property decorativeTopology : UInt8
+    property characterRange : UInt8
+    def initialize(@familyKind : UInt8, @decorativeClass : UInt8, @weight : UInt8, @aspect : UInt8, @contrast : UInt8, @serifVariant : UInt8, @fill : UInt8, @lining : UInt8, @decorativeTopology : UInt8, @characterRange : UInt8)
+    end
+    end
 
 
     # Nested Type Text_e__struct_
     @[Extern]
-    record Text_e__struct_,
-      familyKind : UInt8,
-      serifStyle : UInt8,
-      weight : UInt8,
-      proportion : UInt8,
-      contrast : UInt8,
-      strokeVariation : UInt8,
-      armStyle : UInt8,
-      letterform : UInt8,
-      midline : UInt8,
-      xHeight : UInt8
+    struct Text_e__struct_
+    property familyKind : UInt8
+    property serifStyle : UInt8
+    property weight : UInt8
+    property proportion : UInt8
+    property contrast : UInt8
+    property strokeVariation : UInt8
+    property armStyle : UInt8
+    property letterform : UInt8
+    property midline : UInt8
+    property xHeight : UInt8
+    def initialize(@familyKind : UInt8, @serifStyle : UInt8, @weight : UInt8, @proportion : UInt8, @contrast : UInt8, @strokeVariation : UInt8, @armStyle : UInt8, @letterform : UInt8, @midline : UInt8, @xHeight : UInt8)
+    end
+    end
 
 
     # Nested Type Symbol_e__struct_
     @[Extern]
-    record Symbol_e__struct_,
-      familyKind : UInt8,
-      symbolKind : UInt8,
-      weight : UInt8,
-      spacing : UInt8,
-      aspectRatioAndContrast : UInt8,
-      aspectRatio94 : UInt8,
-      aspectRatio119 : UInt8,
-      aspectRatio157 : UInt8,
-      aspectRatio163 : UInt8,
-      aspectRatio211 : UInt8
+    struct Symbol_e__struct_
+    property familyKind : UInt8
+    property symbolKind : UInt8
+    property weight : UInt8
+    property spacing : UInt8
+    property aspectRatioAndContrast : UInt8
+    property aspectRatio94 : UInt8
+    property aspectRatio119 : UInt8
+    property aspectRatio157 : UInt8
+    property aspectRatio163 : UInt8
+    property aspectRatio211 : UInt8
+    def initialize(@familyKind : UInt8, @symbolKind : UInt8, @weight : UInt8, @spacing : UInt8, @aspectRatioAndContrast : UInt8, @aspectRatio94 : UInt8, @aspectRatio119 : UInt8, @aspectRatio157 : UInt8, @aspectRatio163 : UInt8, @aspectRatio211 : UInt8)
+    end
+    end
 
 
     # Nested Type Script_e__struct_
     @[Extern]
-    record Script_e__struct_,
-      familyKind : UInt8,
-      toolKind : UInt8,
-      weight : UInt8,
-      spacing : UInt8,
-      aspectRatio : UInt8,
-      contrast : UInt8,
-      scriptTopology : UInt8,
-      scriptForm : UInt8,
-      finials : UInt8,
-      xAscent : UInt8
+    struct Script_e__struct_
+    property familyKind : UInt8
+    property toolKind : UInt8
+    property weight : UInt8
+    property spacing : UInt8
+    property aspectRatio : UInt8
+    property contrast : UInt8
+    property scriptTopology : UInt8
+    property scriptForm : UInt8
+    property finials : UInt8
+    property xAscent : UInt8
+    def initialize(@familyKind : UInt8, @toolKind : UInt8, @weight : UInt8, @spacing : UInt8, @aspectRatio : UInt8, @contrast : UInt8, @scriptTopology : UInt8, @scriptForm : UInt8, @finials : UInt8, @xAscent : UInt8)
+    end
+    end
 
+    def initialize(@values : UInt8[10], @familyKind : UInt8, @text : Text_e__struct_, @script : Script_e__struct_, @decorative : Decorative_e__struct_, @symbol : Symbol_e__struct_)
+    end
   end
 
   @[Extern]
-  record DWRITE_UNICODE_RANGE,
-    first : UInt32,
-    last : UInt32
+  struct DWRITE_UNICODE_RANGE
+    property first : UInt32
+    property last : UInt32
+    def initialize(@first : UInt32, @last : UInt32)
+    end
+  end
 
   @[Extern]
-  record DWRITE_SCRIPT_PROPERTIES,
-    isoScriptCode : UInt32,
-    isoScriptNumber : UInt32,
-    clusterLookahead : UInt32,
-    justificationCharacter : UInt32,
-    _bitfield : UInt32
+  struct DWRITE_SCRIPT_PROPERTIES
+    property isoScriptCode : UInt32
+    property isoScriptNumber : UInt32
+    property clusterLookahead : UInt32
+    property justificationCharacter : UInt32
+    property _bitfield : UInt32
+    def initialize(@isoScriptCode : UInt32, @isoScriptNumber : UInt32, @clusterLookahead : UInt32, @justificationCharacter : UInt32, @_bitfield : UInt32)
+    end
+  end
 
   @[Extern]
-  record DWRITE_JUSTIFICATION_OPPORTUNITY,
-    expansionMinimum : Float32,
-    expansionMaximum : Float32,
-    compressionMaximum : Float32,
-    _bitfield : UInt32
+  struct DWRITE_JUSTIFICATION_OPPORTUNITY
+    property expansionMinimum : Float32
+    property expansionMaximum : Float32
+    property compressionMaximum : Float32
+    property _bitfield : UInt32
+    def initialize(@expansionMinimum : Float32, @expansionMaximum : Float32, @compressionMaximum : Float32, @_bitfield : UInt32)
+    end
+  end
 
   @[Extern]
-  record DWRITE_TEXT_METRICS1,
-    base : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_METRICS,
-    heightIncludingTrailingWhitespace : Float32
+  struct DWRITE_TEXT_METRICS1
+    property base : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_METRICS
+    property heightIncludingTrailingWhitespace : Float32
+    def initialize(@base : Win32cr::Graphics::DirectWrite::DWRITE_TEXT_METRICS, @heightIncludingTrailingWhitespace : Float32)
+    end
+  end
 
   @[Extern]
-  record DWRITE_COLOR_GLYPH_RUN,
-    glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN,
-    glyphRunDescription : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*,
-    baselineOriginX : Float32,
-    baselineOriginY : Float32,
-    runColor : Win32cr::Graphics::DirectWrite::DWRITE_COLOR_F,
-    paletteIndex : UInt16
+  struct DWRITE_COLOR_GLYPH_RUN
+    property glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN
+    property glyphRunDescription : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*
+    property baselineOriginX : Float32
+    property baselineOriginY : Float32
+    property runColor : Win32cr::Graphics::DirectWrite::DWRITE_COLOR_F
+    property paletteIndex : UInt16
+    def initialize(@glyphRun : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN, @glyphRunDescription : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_RUN_DESCRIPTION*, @baselineOriginX : Float32, @baselineOriginY : Float32, @runColor : Win32cr::Graphics::DirectWrite::DWRITE_COLOR_F, @paletteIndex : UInt16)
+    end
+  end
 
   @[Extern]
-  record DWRITE_FONT_PROPERTY,
-    propertyId : Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY_ID,
-    propertyValue : Win32cr::Foundation::PWSTR,
-    localeName : Win32cr::Foundation::PWSTR
+  struct DWRITE_FONT_PROPERTY
+    property propertyId : Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY_ID
+    property propertyValue : Win32cr::Foundation::PWSTR
+    property localeName : Win32cr::Foundation::PWSTR
+    def initialize(@propertyId : Win32cr::Graphics::DirectWrite::DWRITE_FONT_PROPERTY_ID, @propertyValue : Win32cr::Foundation::PWSTR, @localeName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record DWRITE_LINE_METRICS1,
-    base : Win32cr::Graphics::DirectWrite::DWRITE_LINE_METRICS,
-    leadingBefore : Float32,
-    leadingAfter : Float32
+  struct DWRITE_LINE_METRICS1
+    property base : Win32cr::Graphics::DirectWrite::DWRITE_LINE_METRICS
+    property leadingBefore : Float32
+    property leadingAfter : Float32
+    def initialize(@base : Win32cr::Graphics::DirectWrite::DWRITE_LINE_METRICS, @leadingBefore : Float32, @leadingAfter : Float32)
+    end
+  end
 
   @[Extern]
-  record DWRITE_LINE_SPACING,
-    method : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD,
-    height : Float32,
-    baseline : Float32,
-    leadingBefore : Float32,
-    fontLineGapUsage : Win32cr::Graphics::DirectWrite::DWRITE_FONT_LINE_GAP_USAGE
+  struct DWRITE_LINE_SPACING
+    property method : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD
+    property height : Float32
+    property baseline : Float32
+    property leadingBefore : Float32
+    property fontLineGapUsage : Win32cr::Graphics::DirectWrite::DWRITE_FONT_LINE_GAP_USAGE
+    def initialize(@method : Win32cr::Graphics::DirectWrite::DWRITE_LINE_SPACING_METHOD, @height : Float32, @baseline : Float32, @leadingBefore : Float32, @fontLineGapUsage : Win32cr::Graphics::DirectWrite::DWRITE_FONT_LINE_GAP_USAGE)
+    end
+  end
 
   @[Extern]
-  record DWRITE_COLOR_GLYPH_RUN1,
-    base : Win32cr::Graphics::DirectWrite::DWRITE_COLOR_GLYPH_RUN,
-    glyphImageFormat : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS,
-    measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE
+  struct DWRITE_COLOR_GLYPH_RUN1
+    property base : Win32cr::Graphics::DirectWrite::DWRITE_COLOR_GLYPH_RUN
+    property glyphImageFormat : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS
+    property measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE
+    def initialize(@base : Win32cr::Graphics::DirectWrite::DWRITE_COLOR_GLYPH_RUN, @glyphImageFormat : Win32cr::Graphics::DirectWrite::DWRITE_GLYPH_IMAGE_FORMATS, @measuringMode : Win32cr::Graphics::DirectWrite::DWRITE_MEASURING_MODE)
+    end
+  end
 
   @[Extern]
-  record DWRITE_GLYPH_IMAGE_DATA,
-    imageData : Void*,
-    imageDataSize : UInt32,
-    uniqueDataId : UInt32,
-    pixelsPerEm : UInt32,
-    pixelSize : Win32cr::Graphics::Direct2D::Common::D2D_SIZE_U,
-    horizontalLeftOrigin : Win32cr::Foundation::POINT,
-    horizontalRightOrigin : Win32cr::Foundation::POINT,
-    verticalTopOrigin : Win32cr::Foundation::POINT,
-    verticalBottomOrigin : Win32cr::Foundation::POINT
+  struct DWRITE_GLYPH_IMAGE_DATA
+    property imageData : Void*
+    property imageDataSize : UInt32
+    property uniqueDataId : UInt32
+    property pixelsPerEm : UInt32
+    property pixelSize : Win32cr::Graphics::Direct2D::Common::D2D_SIZE_U
+    property horizontalLeftOrigin : Win32cr::Foundation::POINT
+    property horizontalRightOrigin : Win32cr::Foundation::POINT
+    property verticalTopOrigin : Win32cr::Foundation::POINT
+    property verticalBottomOrigin : Win32cr::Foundation::POINT
+    def initialize(@imageData : Void*, @imageDataSize : UInt32, @uniqueDataId : UInt32, @pixelsPerEm : UInt32, @pixelSize : Win32cr::Graphics::Direct2D::Common::D2D_SIZE_U, @horizontalLeftOrigin : Win32cr::Foundation::POINT, @horizontalRightOrigin : Win32cr::Foundation::POINT, @verticalTopOrigin : Win32cr::Foundation::POINT, @verticalBottomOrigin : Win32cr::Foundation::POINT)
+    end
+  end
 
   @[Extern]
-  record DWRITE_FILE_FRAGMENT,
-    fileOffset : UInt64,
-    fragmentSize : UInt64
+  struct DWRITE_FILE_FRAGMENT
+    property fileOffset : UInt64
+    property fragmentSize : UInt64
+    def initialize(@fileOffset : UInt64, @fragmentSize : UInt64)
+    end
+  end
 
   @[Extern]
-  record DWRITE_FONT_AXIS_VALUE,
-    axisTag : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_TAG,
-    value : Float32
+  struct DWRITE_FONT_AXIS_VALUE
+    property axisTag : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_TAG
+    property value : Float32
+    def initialize(@axisTag : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_TAG, @value : Float32)
+    end
+  end
 
   @[Extern]
-  record DWRITE_FONT_AXIS_RANGE,
-    axisTag : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_TAG,
-    minValue : Float32,
-    maxValue : Float32
+  struct DWRITE_FONT_AXIS_RANGE
+    property axisTag : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_TAG
+    property minValue : Float32
+    property maxValue : Float32
+    def initialize(@axisTag : Win32cr::Graphics::DirectWrite::DWRITE_FONT_AXIS_TAG, @minValue : Float32, @maxValue : Float32)
+    end
+  end
 
   @[Extern]
   record IDWriteFontFileLoaderVtbl,
@@ -1103,7 +1231,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("727cad4e-d6af-4c9e-8a08-d695b11caa49")]
   record IDWriteFontFileLoader, lpVtbl : IDWriteFontFileLoaderVtbl* do
     GUID = LibC::GUID.new(0x727cad4e_u32, 0xd6af_u16, 0x4c9e_u16, StaticArray[0x8a_u8, 0x8_u8, 0xd6_u8, 0x95_u8, 0xb1_u8, 0x1c_u8, 0xaa_u8, 0x49_u8])
     def query_interface(this : IDWriteFontFileLoader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1133,7 +1260,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("b2d9f3ec-c9fe-4a11-a2ec-d86208f7c0a2")]
   record IDWriteLocalFontFileLoader, lpVtbl : IDWriteLocalFontFileLoaderVtbl* do
     GUID = LibC::GUID.new(0xb2d9f3ec_u32, 0xc9fe_u16, 0x4a11_u16, StaticArray[0xa2_u8, 0xec_u8, 0xd8_u8, 0x62_u8, 0x8_u8, 0xf7_u8, 0xc0_u8, 0xa2_u8])
     def query_interface(this : IDWriteLocalFontFileLoader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1172,7 +1298,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("6d4865fe-0ab8-4d91-8f62-5dd6be34a3e0")]
   record IDWriteFontFileStream, lpVtbl : IDWriteFontFileStreamVtbl* do
     GUID = LibC::GUID.new(0x6d4865fe_u32, 0xab8_u16, 0x4d91_u16, StaticArray[0x8f_u8, 0x62_u8, 0x5d_u8, 0xd6_u8, 0xbe_u8, 0x34_u8, 0xa3_u8, 0xe0_u8])
     def query_interface(this : IDWriteFontFileStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1210,7 +1335,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("739d886a-cef5-47dc-8769-1a8b41bebbb0")]
   record IDWriteFontFile, lpVtbl : IDWriteFontFileVtbl* do
     GUID = LibC::GUID.new(0x739d886a_u32, 0xcef5_u16, 0x47dc_u16, StaticArray[0x87_u8, 0x69_u8, 0x1a_u8, 0x8b_u8, 0x41_u8, 0xbe_u8, 0xbb_u8, 0xb0_u8])
     def query_interface(this : IDWriteFontFile*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1247,7 +1371,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("2f0da53a-2add-47cd-82ee-d9ec34688e75")]
   record IDWriteRenderingParams, lpVtbl : IDWriteRenderingParamsVtbl* do
     GUID = LibC::GUID.new(0x2f0da53a_u32, 0x2add_u16, 0x47cd_u16, StaticArray[0x82_u8, 0xee_u8, 0xd9_u8, 0xec_u8, 0x34_u8, 0x68_u8, 0x8e_u8, 0x75_u8])
     def query_interface(this : IDWriteRenderingParams*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1300,7 +1423,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("5f49804d-7024-4d43-bfa9-d25984f53849")]
   record IDWriteFontFace, lpVtbl : IDWriteFontFaceVtbl* do
     GUID = LibC::GUID.new(0x5f49804d_u32, 0x7024_u16, 0x4d43_u16, StaticArray[0xbf_u8, 0xa9_u8, 0xd2_u8, 0x59_u8, 0x84_u8, 0xf5_u8, 0x38_u8, 0x49_u8])
     def query_interface(this : IDWriteFontFace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1369,7 +1491,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("cca920e4-52f0-492b-bfa8-29c72ee0a468")]
   record IDWriteFontCollectionLoader, lpVtbl : IDWriteFontCollectionLoaderVtbl* do
     GUID = LibC::GUID.new(0xcca920e4_u32, 0x52f0_u16, 0x492b_u16, StaticArray[0xbf_u8, 0xa8_u8, 0x29_u8, 0xc7_u8, 0x2e_u8, 0xe0_u8, 0xa4_u8, 0x68_u8])
     def query_interface(this : IDWriteFontCollectionLoader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1397,7 +1518,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("72755049-5ff7-435d-8348-4be97cfa6c7c")]
   record IDWriteFontFileEnumerator, lpVtbl : IDWriteFontFileEnumeratorVtbl* do
     GUID = LibC::GUID.new(0x72755049_u32, 0x5ff7_u16, 0x435d_u16, StaticArray[0x83_u8, 0x48_u8, 0x4b_u8, 0xe9_u8, 0x7c_u8, 0xfa_u8, 0x6c_u8, 0x7c_u8])
     def query_interface(this : IDWriteFontFileEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1432,7 +1552,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("08256209-099a-4b34-b86d-c22b110e7771")]
   record IDWriteLocalizedStrings, lpVtbl : IDWriteLocalizedStringsVtbl* do
     GUID = LibC::GUID.new(0x8256209_u32, 0x99a_u16, 0x4b34_u16, StaticArray[0xb8_u8, 0x6d_u8, 0xc2_u8, 0x2b_u8, 0x11_u8, 0xe_u8, 0x77_u8, 0x71_u8])
     def query_interface(this : IDWriteLocalizedStrings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1477,7 +1596,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("a84cee02-3eea-4eee-a827-87c1a02a0fcc")]
   record IDWriteFontCollection, lpVtbl : IDWriteFontCollectionVtbl* do
     GUID = LibC::GUID.new(0xa84cee02_u32, 0x3eea_u16, 0x4eee_u16, StaticArray[0xa8_u8, 0x27_u8, 0x87_u8, 0xc1_u8, 0xa0_u8, 0x2a_u8, 0xf_u8, 0xcc_u8])
     def query_interface(this : IDWriteFontCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1515,7 +1633,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("1a0d8438-1d97-4ec1-aef9-a2fb86ed6acb")]
   record IDWriteFontList, lpVtbl : IDWriteFontListVtbl* do
     GUID = LibC::GUID.new(0x1a0d8438_u32, 0x1d97_u16, 0x4ec1_u16, StaticArray[0xae_u8, 0xf9_u8, 0xa2_u8, 0xfb_u8, 0x86_u8, 0xed_u8, 0x6a_u8, 0xcb_u8])
     def query_interface(this : IDWriteFontList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1553,7 +1670,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("da20d8ef-812a-4c43-9802-62ec4abd7add")]
   record IDWriteFontFamily, lpVtbl : IDWriteFontFamilyVtbl* do
     GUID = LibC::GUID.new(0xda20d8ef_u32, 0x812a_u16, 0x4c43_u16, StaticArray[0x98_u8, 0x2_u8, 0x62_u8, 0xec_u8, 0x4a_u8, 0xbd_u8, 0x7a_u8, 0xdd_u8])
     def query_interface(this : IDWriteFontFamily*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1605,7 +1721,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("acd16696-8c14-4f5d-877e-fe3fc1d32737")]
   record IDWriteFont, lpVtbl : IDWriteFontVtbl* do
     GUID = LibC::GUID.new(0xacd16696_u32, 0x8c14_u16, 0x4f5d_u16, StaticArray[0x87_u8, 0x7e_u8, 0xfe_u8, 0x3f_u8, 0xc1_u8, 0xd3_u8, 0x27_u8, 0x37_u8])
     def query_interface(this : IDWriteFont*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1686,7 +1801,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("9c906818-31d7-4fd3-a151-7c5e225db55a")]
   record IDWriteTextFormat, lpVtbl : IDWriteTextFormatVtbl* do
     GUID = LibC::GUID.new(0x9c906818_u32, 0x31d7_u16, 0x4fd3_u16, StaticArray[0xa1_u8, 0x51_u8, 0x7c_u8, 0x5e_u8, 0x22_u8, 0x5d_u8, 0xb5_u8, 0x5a_u8])
     def query_interface(this : IDWriteTextFormat*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1787,7 +1901,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("55f1112b-1dc2-4b3c-9541-f46894ed85b6")]
   record IDWriteTypography, lpVtbl : IDWriteTypographyVtbl* do
     GUID = LibC::GUID.new(0x55f1112b_u32, 0x1dc2_u16, 0x4b3c_u16, StaticArray[0x95_u8, 0x41_u8, 0xf4_u8, 0x68_u8, 0x94_u8, 0xed_u8, 0x85_u8, 0xb6_u8])
     def query_interface(this : IDWriteTypography*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1819,7 +1932,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("14885cc9-bab0-4f90-b6ed-5c366a2cd03d")]
   record IDWriteNumberSubstitution, lpVtbl : IDWriteNumberSubstitutionVtbl* do
     GUID = LibC::GUID.new(0x14885cc9_u32, 0xbab0_u16, 0x4f90_u16, StaticArray[0xb6_u8, 0xed_u8, 0x5c_u8, 0x36_u8, 0x6a_u8, 0x2c_u8, 0xd0_u8, 0x3d_u8])
     def query_interface(this : IDWriteNumberSubstitution*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1847,7 +1959,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("688e1a58-5094-47c8-adc8-fbcea60ae92b")]
   record IDWriteTextAnalysisSource, lpVtbl : IDWriteTextAnalysisSourceVtbl* do
     GUID = LibC::GUID.new(0x688e1a58_u32, 0x5094_u16, 0x47c8_u16, StaticArray[0xad_u8, 0xc8_u8, 0xfb_u8, 0xce_u8, 0xa6_u8, 0xa_u8, 0xe9_u8, 0x2b_u8])
     def query_interface(this : IDWriteTextAnalysisSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1889,7 +2000,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("5810cd44-0ca0-4701-b3fa-bec5182ae4f6")]
   record IDWriteTextAnalysisSink, lpVtbl : IDWriteTextAnalysisSinkVtbl* do
     GUID = LibC::GUID.new(0x5810cd44_u32, 0xca0_u16, 0x4701_u16, StaticArray[0xb3_u8, 0xfa_u8, 0xbe_u8, 0xc5_u8, 0x18_u8, 0x2a_u8, 0xe4_u8, 0xf6_u8])
     def query_interface(this : IDWriteTextAnalysisSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1931,7 +2041,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("b7e6163e-7f46-43b4-84b3-e4e6249c365d")]
   record IDWriteTextAnalyzer, lpVtbl : IDWriteTextAnalyzerVtbl* do
     GUID = LibC::GUID.new(0xb7e6163e_u32, 0x7f46_u16, 0x43b4_u16, StaticArray[0x84_u8, 0xb3_u8, 0xe4_u8, 0xe6_u8, 0x24_u8, 0x9c_u8, 0x36_u8, 0x5d_u8])
     def query_interface(this : IDWriteTextAnalyzer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1979,7 +2088,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("8339fde3-106f-47ab-8373-1c6295eb10b3")]
   record IDWriteInlineObject, lpVtbl : IDWriteInlineObjectVtbl* do
     GUID = LibC::GUID.new(0x8339fde3_u32, 0x106f_u16, 0x47ab_u16, StaticArray[0x83_u8, 0x73_u8, 0x1c_u8, 0x62_u8, 0x95_u8, 0xeb_u8, 0x10_u8, 0xb3_u8])
     def query_interface(this : IDWriteInlineObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2017,7 +2125,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("eaf3a2da-ecf4-4d24-b644-b34f6842024b")]
   record IDWritePixelSnapping, lpVtbl : IDWritePixelSnappingVtbl* do
     GUID = LibC::GUID.new(0xeaf3a2da_u32, 0xecf4_u16, 0x4d24_u16, StaticArray[0xb6_u8, 0x44_u8, 0xb3_u8, 0x4f_u8, 0x68_u8, 0x42_u8, 0x2_u8, 0x4b_u8])
     def query_interface(this : IDWritePixelSnapping*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2056,7 +2163,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("ef8a8135-5cc6-45fe-8825-c5a0724eb819")]
   record IDWriteTextRenderer, lpVtbl : IDWriteTextRendererVtbl* do
     GUID = LibC::GUID.new(0xef8a8135_u32, 0x5cc6_u16, 0x45fe_u16, StaticArray[0x88_u8, 0x25_u8, 0xc5_u8, 0xa0_u8, 0x72_u8, 0x4e_u8, 0xb8_u8, 0x19_u8])
     def query_interface(this : IDWriteTextRenderer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2164,7 +2270,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("53737037-6d14-410b-9bfe-0b182bb70961")]
   record IDWriteTextLayout, lpVtbl : IDWriteTextLayoutVtbl* do
     GUID = LibC::GUID.new(0x53737037_u32, 0x6d14_u16, 0x410b_u16, StaticArray[0x9b_u8, 0xfe_u8, 0xb_u8, 0x18_u8, 0x2b_u8, 0xb7_u8, 0x9_u8, 0x61_u8])
     def query_interface(this : IDWriteTextLayout*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2387,7 +2492,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("5e5a32a3-8dff-4773-9ff6-0696eab77267")]
   record IDWriteBitmapRenderTarget, lpVtbl : IDWriteBitmapRenderTargetVtbl* do
     GUID = LibC::GUID.new(0x5e5a32a3_u32, 0x8dff_u16, 0x4773_u16, StaticArray[0x9f_u8, 0xf6_u8, 0x6_u8, 0x96_u8, 0xea_u8, 0xb7_u8, 0x72_u8, 0x67_u8])
     def query_interface(this : IDWriteBitmapRenderTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2439,7 +2543,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("1edd9491-9853-4299-898f-6432983b6f3a")]
   record IDWriteGdiInterop, lpVtbl : IDWriteGdiInteropVtbl* do
     GUID = LibC::GUID.new(0x1edd9491_u32, 0x9853_u16, 0x4299_u16, StaticArray[0x89_u8, 0x8f_u8, 0x64_u8, 0x32_u8, 0x98_u8, 0x3b_u8, 0x6f_u8, 0x3a_u8])
     def query_interface(this : IDWriteGdiInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2480,7 +2583,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("7d97dbf7-e085-42d4-81e3-6a883bded118")]
   record IDWriteGlyphRunAnalysis, lpVtbl : IDWriteGlyphRunAnalysisVtbl* do
     GUID = LibC::GUID.new(0x7d97dbf7_u32, 0xe085_u16, 0x42d4_u16, StaticArray[0x81_u8, 0xe3_u8, 0x6a_u8, 0x88_u8, 0x3b_u8, 0xde_u8, 0xd1_u8, 0x18_u8])
     def query_interface(this : IDWriteGlyphRunAnalysis*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2533,7 +2635,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("b859ee5a-d838-4b5b-a2e8-1adc7d93db48")]
   record IDWriteFactory, lpVtbl : IDWriteFactoryVtbl* do
     GUID = LibC::GUID.new(0xb859ee5a_u32, 0xd838_u16, 0x4b5b_u16, StaticArray[0xa2_u8, 0xe8_u8, 0x1a_u8, 0xdc_u8, 0x7d_u8, 0x93_u8, 0xdb_u8, 0x48_u8])
     def query_interface(this : IDWriteFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2642,7 +2743,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("30572f99-dac6-41db-a16e-0486307e606a")]
   record IDWriteFactory1, lpVtbl : IDWriteFactory1Vtbl* do
     GUID = LibC::GUID.new(0x30572f99_u32, 0xdac6_u16, 0x41db_u16, StaticArray[0xa1_u8, 0x6e_u8, 0x4_u8, 0x86_u8, 0x30_u8, 0x7e_u8, 0x60_u8, 0x6a_u8])
     def query_interface(this : IDWriteFactory1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2761,7 +2861,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("a71efdb4-9fdb-4838-ad90-cfc3be8c3daf")]
   record IDWriteFontFace1, lpVtbl : IDWriteFontFace1Vtbl* do
     GUID = LibC::GUID.new(0xa71efdb4_u32, 0x9fdb_u16, 0x4838_u16, StaticArray[0xad_u8, 0x90_u8, 0xcf_u8, 0xc3_u8, 0xbe_u8, 0x8c_u8, 0x3d_u8, 0xaf_u8])
     def query_interface(this : IDWriteFontFace1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2880,7 +2979,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("acd16696-8c14-4f5d-877e-fe3fc1d32738")]
   record IDWriteFont1, lpVtbl : IDWriteFont1Vtbl* do
     GUID = LibC::GUID.new(0xacd16696_u32, 0x8c14_u16, 0x4f5d_u16, StaticArray[0x87_u8, 0x7e_u8, 0xfe_u8, 0x3f_u8, 0xc1_u8, 0xd3_u8, 0x27_u8, 0x38_u8])
     def query_interface(this : IDWriteFont1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2954,7 +3052,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("94413cf4-a6fc-4248-8b50-6674348fcad3")]
   record IDWriteRenderingParams1, lpVtbl : IDWriteRenderingParams1Vtbl* do
     GUID = LibC::GUID.new(0x94413cf4_u32, 0xa6fc_u16, 0x4248_u16, StaticArray[0x8b_u8, 0x50_u8, 0x66_u8, 0x74_u8, 0x34_u8, 0x8f_u8, 0xca_u8, 0xd3_u8])
     def query_interface(this : IDWriteRenderingParams1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3011,7 +3108,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("80dad800-e21f-4e83-96ce-bfcce500db7c")]
   record IDWriteTextAnalyzer1, lpVtbl : IDWriteTextAnalyzer1Vtbl* do
     GUID = LibC::GUID.new(0x80dad800_u32, 0xe21f_u16, 0x4e83_u16, StaticArray[0x96_u8, 0xce_u8, 0xbf_u8, 0xcc_u8, 0xe5_u8, 0x0_u8, 0xdb_u8, 0x7c_u8])
     def query_interface(this : IDWriteTextAnalyzer1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3088,7 +3184,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("639cfad8-0fb4-4b21-a58a-067920120009")]
   record IDWriteTextAnalysisSource1, lpVtbl : IDWriteTextAnalysisSource1Vtbl* do
     GUID = LibC::GUID.new(0x639cfad8_u32, 0xfb4_u16, 0x4b21_u16, StaticArray[0xa5_u8, 0x8a_u8, 0x6_u8, 0x79_u8, 0x20_u8, 0x12_u8, 0x0_u8, 0x9_u8])
     def query_interface(this : IDWriteTextAnalysisSource1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3134,7 +3229,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("b0d941a0-85e7-4d8b-9fd3-5ced9934482a")]
   record IDWriteTextAnalysisSink1, lpVtbl : IDWriteTextAnalysisSink1Vtbl* do
     GUID = LibC::GUID.new(0xb0d941a0_u32, 0x85e7_u16, 0x4d8b_u16, StaticArray[0x9f_u8, 0xd3_u8, 0x5c_u8, 0xed_u8, 0x99_u8, 0x34_u8, 0x48_u8, 0x2a_u8])
     def query_interface(this : IDWriteTextAnalysisSink1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3240,7 +3334,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("9064d822-80a7-465c-a986-df65f78b8feb")]
   record IDWriteTextLayout1, lpVtbl : IDWriteTextLayout1Vtbl* do
     GUID = LibC::GUID.new(0x9064d822_u32, 0x80a7_u16, 0x465c_u16, StaticArray[0xa9_u8, 0x86_u8, 0xdf_u8, 0x65_u8, 0xf7_u8, 0x8b_u8, 0x8f_u8, 0xeb_u8])
     def query_interface(this : IDWriteTextLayout1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3477,7 +3570,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("791e8298-3ef3-4230-9880-c9bdecc42064")]
   record IDWriteBitmapRenderTarget1, lpVtbl : IDWriteBitmapRenderTarget1Vtbl* do
     GUID = LibC::GUID.new(0x791e8298_u32, 0x3ef3_u16, 0x4230_u16, StaticArray[0x98_u8, 0x80_u8, 0xc9_u8, 0xbd_u8, 0xec_u8, 0xc4_u8, 0x20_u8, 0x64_u8])
     def query_interface(this : IDWriteBitmapRenderTarget1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3541,7 +3633,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("d3e0e934-22a0-427e-aae4-7d9574b59db1")]
   record IDWriteTextRenderer1, lpVtbl : IDWriteTextRenderer1Vtbl* do
     GUID = LibC::GUID.new(0xd3e0e934_u32, 0x22a0_u16, 0x427e_u16, StaticArray[0xaa_u8, 0xe4_u8, 0x7d_u8, 0x95_u8, 0x74_u8, 0xb5_u8, 0x9d_u8, 0xb1_u8])
     def query_interface(this : IDWriteTextRenderer1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3630,7 +3721,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("5f174b49-0d8b-4cfb-8bca-f1cce9d06c67")]
   record IDWriteTextFormat1, lpVtbl : IDWriteTextFormat1Vtbl* do
     GUID = LibC::GUID.new(0x5f174b49_u32, 0xd8b_u16, 0x4cfb_u16, StaticArray[0x8b_u8, 0xca_u8, 0xf1_u8, 0xcc_u8, 0xe9_u8, 0xd0_u8, 0x6c_u8, 0x67_u8])
     def query_interface(this : IDWriteTextFormat1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3829,7 +3919,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("1093c18f-8d5e-43f0-b064-0917311b525e")]
   record IDWriteTextLayout2, lpVtbl : IDWriteTextLayout2Vtbl* do
     GUID = LibC::GUID.new(0x1093c18f_u32, 0x8d5e_u16, 0x43f0_u16, StaticArray[0xb0_u8, 0x64_u8, 0x9_u8, 0x17_u8, 0x31_u8, 0x1b_u8, 0x52_u8, 0x5e_u8])
     def query_interface(this : IDWriteTextLayout2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4102,7 +4191,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("553a9ff3-5693-4df7-b52b-74806f7f2eb9")]
   record IDWriteTextAnalyzer2, lpVtbl : IDWriteTextAnalyzer2Vtbl* do
     GUID = LibC::GUID.new(0x553a9ff3_u32, 0x5693_u16, 0x4df7_u16, StaticArray[0xb5_u8, 0x2b_u8, 0x74_u8, 0x80_u8, 0x6f_u8, 0x7f_u8, 0x2e_u8, 0xb9_u8])
     def query_interface(this : IDWriteTextAnalyzer2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4183,7 +4271,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("efa008f9-f7a1-48bf-b05c-f224713cc0ff")]
   record IDWriteFontFallback, lpVtbl : IDWriteFontFallbackVtbl* do
     GUID = LibC::GUID.new(0xefa008f9_u32, 0xf7a1_u16, 0x48bf_u16, StaticArray[0xb0_u8, 0x5c_u8, 0xf2_u8, 0x24_u8, 0x71_u8, 0x3c_u8, 0xc0_u8, 0xff_u8])
     def query_interface(this : IDWriteFontFallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4212,7 +4299,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("fd882d06-8aba-4fb8-b849-8be8b73e14de")]
   record IDWriteFontFallbackBuilder, lpVtbl : IDWriteFontFallbackBuilderVtbl* do
     GUID = LibC::GUID.new(0xfd882d06_u32, 0x8aba_u16, 0x4fb8_u16, StaticArray[0xb8_u8, 0x49_u8, 0x8b_u8, 0xe8_u8, 0xb7_u8, 0x3e_u8, 0x14_u8, 0xde_u8])
     def query_interface(this : IDWriteFontFallbackBuilder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4260,7 +4346,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("29748ed6-8c9c-4a6a-be0b-d912e8538944")]
   record IDWriteFont2, lpVtbl : IDWriteFont2Vtbl* do
     GUID = LibC::GUID.new(0x29748ed6_u32, 0x8c9c_u16, 0x4a6a_u16, StaticArray[0xbe_u8, 0xb_u8, 0xd9_u8, 0x12_u8, 0xe8_u8, 0x53_u8, 0x89_u8, 0x44_u8])
     def query_interface(this : IDWriteFont2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4363,7 +4448,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("d8b768ff-64bc-4e66-982b-ec8e87f693f7")]
   record IDWriteFontFace2, lpVtbl : IDWriteFontFace2Vtbl* do
     GUID = LibC::GUID.new(0xd8b768ff_u32, 0x64bc_u16, 0x4e66_u16, StaticArray[0x98_u8, 0x2b_u8, 0xec_u8, 0x8e_u8, 0x87_u8, 0xf6_u8, 0x93_u8, 0xf7_u8])
     def query_interface(this : IDWriteFontFace2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4484,7 +4568,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("d31fbe17-f157-41a2-8d24-cb779e0560e8")]
   record IDWriteColorGlyphRunEnumerator, lpVtbl : IDWriteColorGlyphRunEnumeratorVtbl* do
     GUID = LibC::GUID.new(0xd31fbe17_u32, 0xf157_u16, 0x41a2_u16, StaticArray[0x8d_u8, 0x24_u8, 0xcb_u8, 0x77_u8, 0x9e_u8, 0x5_u8, 0x60_u8, 0xe8_u8])
     def query_interface(this : IDWriteColorGlyphRunEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4520,7 +4603,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("f9d711c3-9777-40ae-87e8-3e5af9bf0948")]
   record IDWriteRenderingParams2, lpVtbl : IDWriteRenderingParams2Vtbl* do
     GUID = LibC::GUID.new(0xf9d711c3_u32, 0x9777_u16, 0x40ae_u16, StaticArray[0x87_u8, 0xe8_u8, 0x3e_u8, 0x5a_u8, 0xf9_u8, 0xbf_u8, 0x9_u8, 0x48_u8])
     def query_interface(this : IDWriteRenderingParams2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4592,7 +4674,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("0439fc60-ca44-4994-8dee-3a9af7b732ec")]
   record IDWriteFactory2, lpVtbl : IDWriteFactory2Vtbl* do
     GUID = LibC::GUID.new(0x439fc60_u32, 0xca44_u16, 0x4994_u16, StaticArray[0x8d_u8, 0xee_u8, 0x3a_u8, 0x9a_u8, 0xf7_u8, 0xb7_u8, 0x32_u8, 0xec_u8])
     def query_interface(this : IDWriteFactory2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4707,7 +4788,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("b7924baa-391b-412a-8c5c-e44cc2d867dc")]
   record IDWriteRenderingParams3, lpVtbl : IDWriteRenderingParams3Vtbl* do
     GUID = LibC::GUID.new(0xb7924baa_u32, 0x391b_u16, 0x412a_u16, StaticArray[0x8c_u8, 0x5c_u8, 0xe4_u8, 0x4c_u8, 0xc2_u8, 0xd8_u8, 0x67_u8, 0xdc_u8])
     def query_interface(this : IDWriteRenderingParams3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4791,7 +4871,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("9a1b41c3-d3bb-466a-87fc-fe67556a3b65")]
   record IDWriteFactory3, lpVtbl : IDWriteFactory3Vtbl* do
     GUID = LibC::GUID.new(0x9a1b41c3_u32, 0xd3bb_u16, 0x466a_u16, StaticArray[0x87_u8, 0xfc_u8, 0xfe_u8, 0x67_u8, 0x55_u8, 0x6a_u8, 0x3b_u8, 0x65_u8])
     def query_interface(this : IDWriteFactory3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4935,7 +5014,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("53585141-d9f8-4095-8321-d73cf6bd116b")]
   record IDWriteFontSet, lpVtbl : IDWriteFontSetVtbl* do
     GUID = LibC::GUID.new(0x53585141_u32, 0xd9f8_u16, 0x4095_u16, StaticArray[0x83_u8, 0x21_u8, 0xd7_u8, 0x3c_u8, 0xf6_u8, 0xbd_u8, 0x11_u8, 0x6b_u8])
     def query_interface(this : IDWriteFontSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4992,7 +5070,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("2f642afe-9c68-4f40-b8be-457401afcb3d")]
   record IDWriteFontSetBuilder, lpVtbl : IDWriteFontSetBuilderVtbl* do
     GUID = LibC::GUID.new(0x2f642afe_u32, 0x9c68_u16, 0x4f40_u16, StaticArray[0xb8_u8, 0xbe_u8, 0x45_u8, 0x74_u8, 0x1_u8, 0xaf_u8, 0xcb_u8, 0x3d_u8])
     def query_interface(this : IDWriteFontSetBuilder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5033,7 +5110,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("53585141-d9f8-4095-8321-d73cf6bd116c")]
   record IDWriteFontCollection1, lpVtbl : IDWriteFontCollection1Vtbl* do
     GUID = LibC::GUID.new(0x53585141_u32, 0xd9f8_u16, 0x4095_u16, StaticArray[0x83_u8, 0x21_u8, 0xd7_u8, 0x3c_u8, 0xf6_u8, 0xbd_u8, 0x11_u8, 0x6c_u8])
     def query_interface(this : IDWriteFontCollection1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5083,7 +5159,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("da20d8ef-812a-4c43-9802-62ec4abd7adf")]
   record IDWriteFontFamily1, lpVtbl : IDWriteFontFamily1Vtbl* do
     GUID = LibC::GUID.new(0xda20d8ef_u32, 0x812a_u16, 0x4c43_u16, StaticArray[0x98_u8, 0x2_u8, 0x62_u8, 0xec_u8, 0x4a_u8, 0xbd_u8, 0x7a_u8, 0xdf_u8])
     def query_interface(this : IDWriteFontFamily1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5139,7 +5214,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("da20d8ef-812a-4c43-9802-62ec4abd7ade")]
   record IDWriteFontList1, lpVtbl : IDWriteFontList1Vtbl* do
     GUID = LibC::GUID.new(0xda20d8ef_u32, 0x812a_u16, 0x4c43_u16, StaticArray[0x98_u8, 0x2_u8, 0x62_u8, 0xec_u8, 0x4a_u8, 0xbd_u8, 0x7a_u8, 0xde_u8])
     def query_interface(this : IDWriteFontList1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5194,7 +5268,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("5e7fa7ca-dde3-424c-89f0-9fcd6fed58cd")]
   record IDWriteFontFaceReference, lpVtbl : IDWriteFontFaceReferenceVtbl* do
     GUID = LibC::GUID.new(0x5e7fa7ca_u32, 0xdde3_u16, 0x424c_u16, StaticArray[0x89_u8, 0xf0_u8, 0x9f_u8, 0xcd_u8, 0x6f_u8, 0xed_u8, 0x58_u8, 0xcd_u8])
     def query_interface(this : IDWriteFontFaceReference*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5280,7 +5353,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("29748ed6-8c9c-4a6a-be0b-d912e8538944")]
   record IDWriteFont3, lpVtbl : IDWriteFont3Vtbl* do
     GUID = LibC::GUID.new(0x29748ed6_u32, 0x8c9c_u16, 0x4a6a_u16, StaticArray[0xbe_u8, 0xb_u8, 0xd9_u8, 0x12_u8, 0xe8_u8, 0x53_u8, 0x89_u8, 0x44_u8])
     def query_interface(this : IDWriteFont3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5412,7 +5484,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("d37d7598-09be-4222-a236-2081341cc1f2")]
   record IDWriteFontFace3, lpVtbl : IDWriteFontFace3Vtbl* do
     GUID = LibC::GUID.new(0xd37d7598_u32, 0x9be_u16, 0x4222_u16, StaticArray[0xa2_u8, 0x36_u8, 0x20_u8, 0x81_u8, 0x34_u8, 0x1c_u8, 0xc1_u8, 0xf2_u8])
     def query_interface(this : IDWriteFontFace3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5578,7 +5649,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("cfee3140-1157-47ca-8b85-31bfcf3f2d0e")]
   record IDWriteStringList, lpVtbl : IDWriteStringListVtbl* do
     GUID = LibC::GUID.new(0xcfee3140_u32, 0x1157_u16, 0x47ca_u16, StaticArray[0x8b_u8, 0x85_u8, 0x31_u8, 0xbf_u8, 0xcf_u8, 0x3f_u8, 0x2d_u8, 0xe_u8])
     def query_interface(this : IDWriteStringList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5617,7 +5687,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("b06fe5b9-43ec-4393-881b-dbe4dc72fda7")]
   record IDWriteFontDownloadListener, lpVtbl : IDWriteFontDownloadListenerVtbl* do
     GUID = LibC::GUID.new(0xb06fe5b9_u32, 0x43ec_u16, 0x4393_u16, StaticArray[0x88_u8, 0x1b_u8, 0xdb_u8, 0xe4_u8, 0xdc_u8, 0x72_u8, 0xfd_u8, 0xa7_u8])
     def query_interface(this : IDWriteFontDownloadListener*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5649,7 +5718,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("b71e6052-5aea-4fa3-832e-f60d431f7e91")]
   record IDWriteFontDownloadQueue, lpVtbl : IDWriteFontDownloadQueueVtbl* do
     GUID = LibC::GUID.new(0xb71e6052_u32, 0x5aea_u16, 0x4fa3_u16, StaticArray[0x83_u8, 0x2e_u8, 0xf6_u8, 0xd_u8, 0x43_u8, 0x1f_u8, 0x7e_u8, 0x91_u8])
     def query_interface(this : IDWriteFontDownloadQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5699,7 +5767,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("4556be70-3abd-4f70-90be-421780a6f515")]
   record IDWriteGdiInterop1, lpVtbl : IDWriteGdiInterop1Vtbl* do
     GUID = LibC::GUID.new(0x4556be70_u32, 0x3abd_u16, 0x4f70_u16, StaticArray[0x90_u8, 0xbe_u8, 0x42_u8, 0x17_u8, 0x80_u8, 0xa6_u8, 0xf5_u8, 0x15_u8])
     def query_interface(this : IDWriteGdiInterop1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5784,7 +5851,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("f67e0edd-9e3d-4ecc-8c32-4183253dfe70")]
   record IDWriteTextFormat2, lpVtbl : IDWriteTextFormat2Vtbl* do
     GUID = LibC::GUID.new(0xf67e0edd_u32, 0x9e3d_u16, 0x4ecc_u16, StaticArray[0x8c_u8, 0x32_u8, 0x41_u8, 0x83_u8, 0x25_u8, 0x3d_u8, 0xfe_u8, 0x70_u8])
     def query_interface(this : IDWriteTextFormat2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5993,7 +6059,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("07ddcd52-020e-4de8-ac33-6c953d83f92d")]
   record IDWriteTextLayout3, lpVtbl : IDWriteTextLayout3Vtbl* do
     GUID = LibC::GUID.new(0x7ddcd52_u32, 0x20e_u16, 0x4de8_u16, StaticArray[0xac_u8, 0x33_u8, 0x6c_u8, 0x95_u8, 0x3d_u8, 0x83_u8, 0xf9_u8, 0x2d_u8])
     def query_interface(this : IDWriteTextLayout3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6262,7 +6327,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("7c5f86da-c7a1-4f05-b8e1-55a179fe5a35")]
   record IDWriteColorGlyphRunEnumerator1, lpVtbl : IDWriteColorGlyphRunEnumerator1Vtbl* do
     GUID = LibC::GUID.new(0x7c5f86da_u32, 0xc7a1_u16, 0x4f05_u16, StaticArray[0xb8_u8, 0xe1_u8, 0x55_u8, 0xa1_u8, 0x79_u8, 0xfe_u8, 0x5a_u8, 0x35_u8])
     def query_interface(this : IDWriteColorGlyphRunEnumerator1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6344,7 +6408,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("27f2a904-4eb8-441d-9678-0563f53e3e2f")]
   record IDWriteFontFace4, lpVtbl : IDWriteFontFace4Vtbl* do
     GUID = LibC::GUID.new(0x27f2a904_u32, 0x4eb8_u16, 0x441d_u16, StaticArray[0x96_u8, 0x78_u8, 0x5_u8, 0x63_u8, 0xf5_u8, 0x3e_u8, 0x3e_u8, 0x2f_u8])
     def query_interface(this : IDWriteFontFace4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6557,7 +6620,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("4b0b5bd3-0797-4549-8ac5-fe915cc53856")]
   record IDWriteFactory4, lpVtbl : IDWriteFactory4Vtbl* do
     GUID = LibC::GUID.new(0x4b0b5bd3_u32, 0x797_u16, 0x4549_u16, StaticArray[0x8a_u8, 0xc5_u8, 0xfe_u8, 0x91_u8, 0x5c_u8, 0xc5_u8, 0x38_u8, 0x56_u8])
     def query_interface(this : IDWriteFactory4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6705,7 +6767,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("3ff7715f-3cdc-4dc6-9b72-ec5621dccafd")]
   record IDWriteFontSetBuilder1, lpVtbl : IDWriteFontSetBuilder1Vtbl* do
     GUID = LibC::GUID.new(0x3ff7715f_u32, 0x3cdc_u16, 0x4dc6_u16, StaticArray[0x9b_u8, 0x72_u8, 0xec_u8, 0x56_u8, 0x21_u8, 0xdc_u8, 0xca_u8, 0xfd_u8])
     def query_interface(this : IDWriteFontSetBuilder1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6745,7 +6806,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("ce25f8fd-863b-4d13-9651-c1f88dc73fe2")]
   record IDWriteAsyncResult, lpVtbl : IDWriteAsyncResultVtbl* do
     GUID = LibC::GUID.new(0xce25f8fd_u32, 0x863b_u16, 0x4d13_u16, StaticArray[0x96_u8, 0x51_u8, 0xc1_u8, 0xf8_u8, 0x8d_u8, 0xc7_u8, 0x3f_u8, 0xe2_u8])
     def query_interface(this : IDWriteAsyncResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6782,7 +6842,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("4db3757a-2c72-4ed9-b2b6-1ababe1aff9c")]
   record IDWriteRemoteFontFileStream, lpVtbl : IDWriteRemoteFontFileStreamVtbl* do
     GUID = LibC::GUID.new(0x4db3757a_u32, 0x2c72_u16, 0x4ed9_u16, StaticArray[0xb2_u8, 0xb6_u8, 0x1a_u8, 0xba_u8, 0xbe_u8, 0x1a_u8, 0xff_u8, 0x9c_u8])
     def query_interface(this : IDWriteRemoteFontFileStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6833,7 +6892,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("68648c83-6ede-46c0-ab46-20083a887fde")]
   record IDWriteRemoteFontFileLoader, lpVtbl : IDWriteRemoteFontFileLoaderVtbl* do
     GUID = LibC::GUID.new(0x68648c83_u32, 0x6ede_u16, 0x46c0_u16, StaticArray[0xab_u8, 0x46_u8, 0x20_u8, 0x8_u8, 0x3a_u8, 0x88_u8, 0x7f_u8, 0xde_u8])
     def query_interface(this : IDWriteRemoteFontFileLoader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6871,7 +6929,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("dc102f47-a12d-4b1c-822d-9e117e33043f")]
   record IDWriteInMemoryFontFileLoader, lpVtbl : IDWriteInMemoryFontFileLoaderVtbl* do
     GUID = LibC::GUID.new(0xdc102f47_u32, 0xa12d_u16, 0x4b1c_u16, StaticArray[0x82_u8, 0x2d_u8, 0x9e_u8, 0x11_u8, 0x7e_u8, 0x33_u8, 0x4_u8, 0x3f_u8])
     def query_interface(this : IDWriteInMemoryFontFileLoader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6948,7 +7005,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("958db99a-be2a-4f09-af7d-65189803d1d3")]
   record IDWriteFactory5, lpVtbl : IDWriteFactory5Vtbl* do
     GUID = LibC::GUID.new(0x958db99a_u32, 0xbe2a_u16, 0x4f09_u16, StaticArray[0xaf_u8, 0x7d_u8, 0x65_u8, 0x18_u8, 0x98_u8, 0x3_u8, 0xd1_u8, 0xd3_u8])
     def query_interface(this : IDWriteFactory5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7158,7 +7214,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("f3744d80-21f7-42eb-b35d-995bc72fc223")]
   record IDWriteFactory6, lpVtbl : IDWriteFactory6Vtbl* do
     GUID = LibC::GUID.new(0xf3744d80_u32, 0x21f7_u16, 0x42eb_u16, StaticArray[0xb3_u8, 0x5d_u8, 0x99_u8, 0x5b_u8, 0xc7_u8, 0x2f_u8, 0xc2_u8, 0x23_u8])
     def query_interface(this : IDWriteFactory6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7392,7 +7447,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("98eff3a5-b667-479a-b145-e2fa5b9fdc29")]
   record IDWriteFontFace5, lpVtbl : IDWriteFontFace5Vtbl* do
     GUID = LibC::GUID.new(0x98eff3a5_u32, 0xb667_u16, 0x479a_u16, StaticArray[0xb1_u8, 0x45_u8, 0xe2_u8, 0xfa_u8, 0x5b_u8, 0x9f_u8, 0xdc_u8, 0x29_u8])
     def query_interface(this : IDWriteFontFace5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7592,7 +7646,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("1f803a76-6871-48e8-987f-b975551c50f2")]
   record IDWriteFontResource, lpVtbl : IDWriteFontResourceVtbl* do
     GUID = LibC::GUID.new(0x1f803a76_u32, 0x6871_u16, 0x48e8_u16, StaticArray[0x98_u8, 0x7f_u8, 0xb9_u8, 0x75_u8, 0x55_u8, 0x1c_u8, 0x50_u8, 0xf2_u8])
     def query_interface(this : IDWriteFontResource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7668,7 +7721,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("c081fe77-2fd1-41ac-a5a3-34983c4ba61a")]
   record IDWriteFontFaceReference1, lpVtbl : IDWriteFontFaceReference1Vtbl* do
     GUID = LibC::GUID.new(0xc081fe77_u32, 0x2fd1_u16, 0x41ac_u16, StaticArray[0xa5_u8, 0xa3_u8, 0x34_u8, 0x98_u8, 0x3c_u8, 0x4b_u8, 0xa6_u8, 0x1a_u8])
     def query_interface(this : IDWriteFontFaceReference1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7749,7 +7801,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("ee5ba612-b131-463c-8f4f-3189b9401e45")]
   record IDWriteFontSetBuilder2, lpVtbl : IDWriteFontSetBuilder2Vtbl* do
     GUID = LibC::GUID.new(0xee5ba612_u32, 0xb131_u16, 0x463c_u16, StaticArray[0x8f_u8, 0x4f_u8, 0x31_u8, 0x89_u8, 0xb9_u8, 0x40_u8, 0x1e_u8, 0x45_u8])
     def query_interface(this : IDWriteFontSetBuilder2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7816,7 +7867,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("7e9fda85-6c92-4053-bc47-7ae3530db4d3")]
   record IDWriteFontSet1, lpVtbl : IDWriteFontSet1Vtbl* do
     GUID = LibC::GUID.new(0x7e9fda85_u32, 0x6c92_u16, 0x4053_u16, StaticArray[0xbc_u8, 0x47_u8, 0x7a_u8, 0xe3_u8, 0x53_u8, 0xd_u8, 0xb4_u8, 0xd3_u8])
     def query_interface(this : IDWriteFontSet1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7915,7 +7965,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("c0763a34-77af-445a-b735-08c37b0a5bf5")]
   record IDWriteFontList2, lpVtbl : IDWriteFontList2Vtbl* do
     GUID = LibC::GUID.new(0xc0763a34_u32, 0x77af_u16, 0x445a_u16, StaticArray[0xb7_u8, 0x35_u8, 0x8_u8, 0xc3_u8, 0x7b_u8, 0xa_u8, 0x5b_u8, 0xf5_u8])
     def query_interface(this : IDWriteFontList2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7970,7 +8019,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("3ed49e77-a398-4261-b9cf-c126c2131ef3")]
   record IDWriteFontFamily2, lpVtbl : IDWriteFontFamily2Vtbl* do
     GUID = LibC::GUID.new(0x3ed49e77_u32, 0xa398_u16, 0x4261_u16, StaticArray[0xb9_u8, 0xcf_u8, 0xc1_u8, 0x26_u8, 0xc2_u8, 0x13_u8, 0x1e_u8, 0xf3_u8])
     def query_interface(this : IDWriteFontFamily2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8036,7 +8084,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("514039c6-4617-4064-bf8b-92ea83e506e0")]
   record IDWriteFontCollection2, lpVtbl : IDWriteFontCollection2Vtbl* do
     GUID = LibC::GUID.new(0x514039c6_u32, 0x4617_u16, 0x4064_u16, StaticArray[0xbf_u8, 0x8b_u8, 0x92_u8, 0xea_u8, 0x83_u8, 0xe5_u8, 0x6_u8, 0xe0_u8])
     def query_interface(this : IDWriteFontCollection2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8175,7 +8222,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("05a9bf42-223f-4441-b5fb-8263685f55e9")]
   record IDWriteTextLayout4, lpVtbl : IDWriteTextLayout4Vtbl* do
     GUID = LibC::GUID.new(0x5a9bf42_u32, 0x223f_u16, 0x4441_u16, StaticArray[0xb5_u8, 0xfb_u8, 0x82_u8, 0x63_u8, 0x68_u8, 0x5f_u8, 0x55_u8, 0xe9_u8])
     def query_interface(this : IDWriteTextLayout4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8496,7 +8542,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("6d3b5641-e550-430d-a85b-b7bf48a93427")]
   record IDWriteTextFormat3, lpVtbl : IDWriteTextFormat3Vtbl* do
     GUID = LibC::GUID.new(0x6d3b5641_u32, 0xe550_u16, 0x430d_u16, StaticArray[0xa8_u8, 0x5b_u8, 0xb7_u8, 0xbf_u8, 0x48_u8, 0xa9_u8, 0x34_u8, 0x27_u8])
     def query_interface(this : IDWriteTextFormat3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8641,7 +8686,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("2397599d-dd0d-4681-bd6a-f4f31eaade77")]
   record IDWriteFontFallback1, lpVtbl : IDWriteFontFallback1Vtbl* do
     GUID = LibC::GUID.new(0x2397599d_u32, 0xdd0d_u16, 0x4681_u16, StaticArray[0xbd_u8, 0x6a_u8, 0xf4_u8, 0xf3_u8, 0x1e_u8, 0xaa_u8, 0xde_u8, 0x77_u8])
     def query_interface(this : IDWriteFontFallback1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8694,7 +8738,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("dc7ead19-e54c-43af-b2da-4e2b79ba3f7f")]
   record IDWriteFontSet2, lpVtbl : IDWriteFontSet2Vtbl* do
     GUID = LibC::GUID.new(0xdc7ead19_u32, 0xe54c_u16, 0x43af_u16, StaticArray[0xb2_u8, 0xda_u8, 0x4e_u8, 0x2b_u8, 0x79_u8, 0xba_u8, 0x3f_u8, 0x7f_u8])
     def query_interface(this : IDWriteFontSet2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8800,7 +8843,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("a4d055a6-f9e3-4e25-93b7-9e309f3af8e9")]
   record IDWriteFontCollection3, lpVtbl : IDWriteFontCollection3Vtbl* do
     GUID = LibC::GUID.new(0xa4d055a6_u32, 0xf9e3_u16, 0x4e25_u16, StaticArray[0x93_u8, 0xb7_u8, 0x9e_u8, 0x30_u8, 0x9f_u8, 0x3a_u8, 0xf8_u8, 0xe9_u8])
     def query_interface(this : IDWriteFontCollection3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8910,7 +8952,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("35d0e0b3-9076-4d2e-a016-a91b568a06b4")]
   record IDWriteFactory7, lpVtbl : IDWriteFactory7Vtbl* do
     GUID = LibC::GUID.new(0x35d0e0b3_u32, 0x9076_u16, 0x4d2e_u16, StaticArray[0xa0_u8, 0x16_u8, 0xa9_u8, 0x1b_u8, 0x56_u8, 0x8a_u8, 0x6_u8, 0xb4_u8])
     def query_interface(this : IDWriteFactory7*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9122,7 +9163,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("7c073ef2-a7f4-4045-8c32-8ab8ae640f90")]
   record IDWriteFontSet3, lpVtbl : IDWriteFontSet3Vtbl* do
     GUID = LibC::GUID.new(0x7c073ef2_u32, 0xa7f4_u16, 0x4045_u16, StaticArray[0x8c_u8, 0x32_u8, 0x8a_u8, 0xb8_u8, 0xae_u8, 0x64_u8, 0xf_u8, 0x90_u8])
     def query_interface(this : IDWriteFontSet3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9283,7 +9323,6 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  #@[Com("c4b1fe1b-6e84-47d5-b54c-a597981b06ad")]
   record IDWriteFontFace6, lpVtbl : IDWriteFontFace6Vtbl* do
     GUID = LibC::GUID.new(0xc4b1fe1b_u32, 0x6e84_u16, 0x47d5_u16, StaticArray[0xb5_u8, 0x4c_u8, 0xa5_u8, 0x97_u8, 0x98_u8, 0x1b_u8, 0x6_u8, 0xad_u8])
     def query_interface(this : IDWriteFontFace6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

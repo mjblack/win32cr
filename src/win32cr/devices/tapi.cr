@@ -5,23 +5,23 @@ require "./../media/direct_show.cr"
 require "./../system/address_book.cr"
 
 module Win32cr::Devices::Tapi
-  alias LINECALLBACK = Proc(UInt32, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)*
+  alias LINECALLBACK = Proc(UInt32, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)
 
-  alias PHONECALLBACK = Proc(UInt32, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)*
+  alias PHONECALLBACK = Proc(UInt32, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)
 
-  alias ASYNC_COMPLETION = Proc(UInt32, Int32, Void)*
+  alias ASYNC_COMPLETION = Proc(UInt32, Int32, Void)
 
-  alias LINEEVENT = Proc(Win32cr::Devices::Tapi::HTAPILINE__*, Win32cr::Devices::Tapi::HTAPICALL__*, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)*
+  alias LINEEVENT = Proc(Win32cr::Devices::Tapi::HTAPILINE__*, Win32cr::Devices::Tapi::HTAPICALL__*, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)
 
-  alias PHONEEVENT = Proc(Win32cr::Devices::Tapi::HTAPIPHONE__*, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)*
+  alias PHONEEVENT = Proc(Win32cr::Devices::Tapi::HTAPIPHONE__*, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)
 
-  alias TUISPIDLLCALLBACK = Proc(LibC::UIntPtrT, UInt32, Void*, UInt32, Int32)*
+  alias TUISPIDLLCALLBACK = Proc(LibC::UIntPtrT, UInt32, Void*, UInt32, Int32)
 
-  alias LPOPENTNEFSTREAM = Proc(Void*, Void*, Int8*, UInt32, Void*, UInt16, Void**, Win32cr::Foundation::HRESULT)*
+  alias LPOPENTNEFSTREAM = Proc(Void*, Void*, Int8*, UInt32, Void*, UInt16, Void**, Win32cr::Foundation::HRESULT)
 
-  alias LPOPENTNEFSTREAMEX = Proc(Void*, Void*, Int8*, UInt32, Void*, UInt16, Void*, Void**, Win32cr::Foundation::HRESULT)*
+  alias LPOPENTNEFSTREAMEX = Proc(Void*, Void*, Int8*, UInt32, Void*, UInt16, Void*, Void**, Win32cr::Foundation::HRESULT)
 
-  alias LPGETTNEFSTREAMCODEPAGE = Proc(Void*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT)*
+  alias LPGETTNEFSTREAMCODEPAGE = Proc(Void*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT)
 
   TAPI_CURRENT_VERSION = 131074_u32
   LINE_ADDRESSSTATE = 0_i32
@@ -1727,1286 +1727,1617 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record LINEADDRESSCAPS,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    dwLineDeviceID : UInt32,
-    dwAddressSize : UInt32,
-    dwAddressOffset : UInt32,
-    dwDevSpecificSize : UInt32,
-    dwDevSpecificOffset : UInt32,
-    dwAddressSharing : UInt32,
-    dwAddressStates : UInt32,
-    dwCallInfoStates : UInt32,
-    dwCallerIDFlags : UInt32,
-    dwCalledIDFlags : UInt32,
-    dwConnectedIDFlags : UInt32,
-    dwRedirectionIDFlags : UInt32,
-    dwRedirectingIDFlags : UInt32,
-    dwCallStates : UInt32,
-    dwDialToneModes : UInt32,
-    dwBusyModes : UInt32,
-    dwSpecialInfo : UInt32,
-    dwDisconnectModes : UInt32,
-    dwMaxNumActiveCalls : UInt32,
-    dwMaxNumOnHoldCalls : UInt32,
-    dwMaxNumOnHoldPendingCalls : UInt32,
-    dwMaxNumConference : UInt32,
-    dwMaxNumTransConf : UInt32,
-    dwAddrCapFlags : UInt32,
-    dwCallFeatures : UInt32,
-    dwRemoveFromConfCaps : UInt32,
-    dwRemoveFromConfState : UInt32,
-    dwTransferModes : UInt32,
-    dwParkModes : UInt32,
-    dwForwardModes : UInt32,
-    dwMaxForwardEntries : UInt32,
-    dwMaxSpecificEntries : UInt32,
-    dwMinFwdNumRings : UInt32,
-    dwMaxFwdNumRings : UInt32,
-    dwMaxCallCompletions : UInt32,
-    dwCallCompletionConds : UInt32,
-    dwCallCompletionModes : UInt32,
-    dwNumCompletionMessages : UInt32,
-    dwCompletionMsgTextEntrySize : UInt32,
-    dwCompletionMsgTextSize : UInt32,
-    dwCompletionMsgTextOffset : UInt32,
-    dwAddressFeatures : UInt32,
-    dwPredictiveAutoTransferStates : UInt32,
-    dwNumCallTreatments : UInt32,
-    dwCallTreatmentListSize : UInt32,
-    dwCallTreatmentListOffset : UInt32,
-    dwDeviceClassesSize : UInt32,
-    dwDeviceClassesOffset : UInt32,
-    dwMaxCallDataSize : UInt32,
-    dwCallFeatures2 : UInt32,
-    dwMaxNoAnswerTimeout : UInt32,
-    dwConnectedModes : UInt32,
-    dwOfferingModes : UInt32,
-    dwAvailableMediaModes : UInt32
+  struct LINEADDRESSCAPS
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property dwLineDeviceID : UInt32
+    property dwAddressSize : UInt32
+    property dwAddressOffset : UInt32
+    property dwDevSpecificSize : UInt32
+    property dwDevSpecificOffset : UInt32
+    property dwAddressSharing : UInt32
+    property dwAddressStates : UInt32
+    property dwCallInfoStates : UInt32
+    property dwCallerIDFlags : UInt32
+    property dwCalledIDFlags : UInt32
+    property dwConnectedIDFlags : UInt32
+    property dwRedirectionIDFlags : UInt32
+    property dwRedirectingIDFlags : UInt32
+    property dwCallStates : UInt32
+    property dwDialToneModes : UInt32
+    property dwBusyModes : UInt32
+    property dwSpecialInfo : UInt32
+    property dwDisconnectModes : UInt32
+    property dwMaxNumActiveCalls : UInt32
+    property dwMaxNumOnHoldCalls : UInt32
+    property dwMaxNumOnHoldPendingCalls : UInt32
+    property dwMaxNumConference : UInt32
+    property dwMaxNumTransConf : UInt32
+    property dwAddrCapFlags : UInt32
+    property dwCallFeatures : UInt32
+    property dwRemoveFromConfCaps : UInt32
+    property dwRemoveFromConfState : UInt32
+    property dwTransferModes : UInt32
+    property dwParkModes : UInt32
+    property dwForwardModes : UInt32
+    property dwMaxForwardEntries : UInt32
+    property dwMaxSpecificEntries : UInt32
+    property dwMinFwdNumRings : UInt32
+    property dwMaxFwdNumRings : UInt32
+    property dwMaxCallCompletions : UInt32
+    property dwCallCompletionConds : UInt32
+    property dwCallCompletionModes : UInt32
+    property dwNumCompletionMessages : UInt32
+    property dwCompletionMsgTextEntrySize : UInt32
+    property dwCompletionMsgTextSize : UInt32
+    property dwCompletionMsgTextOffset : UInt32
+    property dwAddressFeatures : UInt32
+    property dwPredictiveAutoTransferStates : UInt32
+    property dwNumCallTreatments : UInt32
+    property dwCallTreatmentListSize : UInt32
+    property dwCallTreatmentListOffset : UInt32
+    property dwDeviceClassesSize : UInt32
+    property dwDeviceClassesOffset : UInt32
+    property dwMaxCallDataSize : UInt32
+    property dwCallFeatures2 : UInt32
+    property dwMaxNoAnswerTimeout : UInt32
+    property dwConnectedModes : UInt32
+    property dwOfferingModes : UInt32
+    property dwAvailableMediaModes : UInt32
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @dwLineDeviceID : UInt32, @dwAddressSize : UInt32, @dwAddressOffset : UInt32, @dwDevSpecificSize : UInt32, @dwDevSpecificOffset : UInt32, @dwAddressSharing : UInt32, @dwAddressStates : UInt32, @dwCallInfoStates : UInt32, @dwCallerIDFlags : UInt32, @dwCalledIDFlags : UInt32, @dwConnectedIDFlags : UInt32, @dwRedirectionIDFlags : UInt32, @dwRedirectingIDFlags : UInt32, @dwCallStates : UInt32, @dwDialToneModes : UInt32, @dwBusyModes : UInt32, @dwSpecialInfo : UInt32, @dwDisconnectModes : UInt32, @dwMaxNumActiveCalls : UInt32, @dwMaxNumOnHoldCalls : UInt32, @dwMaxNumOnHoldPendingCalls : UInt32, @dwMaxNumConference : UInt32, @dwMaxNumTransConf : UInt32, @dwAddrCapFlags : UInt32, @dwCallFeatures : UInt32, @dwRemoveFromConfCaps : UInt32, @dwRemoveFromConfState : UInt32, @dwTransferModes : UInt32, @dwParkModes : UInt32, @dwForwardModes : UInt32, @dwMaxForwardEntries : UInt32, @dwMaxSpecificEntries : UInt32, @dwMinFwdNumRings : UInt32, @dwMaxFwdNumRings : UInt32, @dwMaxCallCompletions : UInt32, @dwCallCompletionConds : UInt32, @dwCallCompletionModes : UInt32, @dwNumCompletionMessages : UInt32, @dwCompletionMsgTextEntrySize : UInt32, @dwCompletionMsgTextSize : UInt32, @dwCompletionMsgTextOffset : UInt32, @dwAddressFeatures : UInt32, @dwPredictiveAutoTransferStates : UInt32, @dwNumCallTreatments : UInt32, @dwCallTreatmentListSize : UInt32, @dwCallTreatmentListOffset : UInt32, @dwDeviceClassesSize : UInt32, @dwDeviceClassesOffset : UInt32, @dwMaxCallDataSize : UInt32, @dwCallFeatures2 : UInt32, @dwMaxNoAnswerTimeout : UInt32, @dwConnectedModes : UInt32, @dwOfferingModes : UInt32, @dwAvailableMediaModes : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEADDRESSSTATUS,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    dwNumInUse : UInt32,
-    dwNumActiveCalls : UInt32,
-    dwNumOnHoldCalls : UInt32,
-    dwNumOnHoldPendCalls : UInt32,
-    dwAddressFeatures : UInt32,
-    dwNumRingsNoAnswer : UInt32,
-    dwForwardNumEntries : UInt32,
-    dwForwardSize : UInt32,
-    dwForwardOffset : UInt32,
-    dwTerminalModesSize : UInt32,
-    dwTerminalModesOffset : UInt32,
-    dwDevSpecificSize : UInt32,
-    dwDevSpecificOffset : UInt32
+  struct LINEADDRESSSTATUS
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property dwNumInUse : UInt32
+    property dwNumActiveCalls : UInt32
+    property dwNumOnHoldCalls : UInt32
+    property dwNumOnHoldPendCalls : UInt32
+    property dwAddressFeatures : UInt32
+    property dwNumRingsNoAnswer : UInt32
+    property dwForwardNumEntries : UInt32
+    property dwForwardSize : UInt32
+    property dwForwardOffset : UInt32
+    property dwTerminalModesSize : UInt32
+    property dwTerminalModesOffset : UInt32
+    property dwDevSpecificSize : UInt32
+    property dwDevSpecificOffset : UInt32
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @dwNumInUse : UInt32, @dwNumActiveCalls : UInt32, @dwNumOnHoldCalls : UInt32, @dwNumOnHoldPendCalls : UInt32, @dwAddressFeatures : UInt32, @dwNumRingsNoAnswer : UInt32, @dwForwardNumEntries : UInt32, @dwForwardSize : UInt32, @dwForwardOffset : UInt32, @dwTerminalModesSize : UInt32, @dwTerminalModesOffset : UInt32, @dwDevSpecificSize : UInt32, @dwDevSpecificOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEAGENTACTIVITYENTRY,
-    dwID : UInt32,
-    dwNameSize : UInt32,
-    dwNameOffset : UInt32
+  struct LINEAGENTACTIVITYENTRY
+    property dwID : UInt32
+    property dwNameSize : UInt32
+    property dwNameOffset : UInt32
+    def initialize(@dwID : UInt32, @dwNameSize : UInt32, @dwNameOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEAGENTACTIVITYLIST,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    dwNumEntries : UInt32,
-    dwListSize : UInt32,
-    dwListOffset : UInt32
+  struct LINEAGENTACTIVITYLIST
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property dwNumEntries : UInt32
+    property dwListSize : UInt32
+    property dwListOffset : UInt32
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @dwNumEntries : UInt32, @dwListSize : UInt32, @dwListOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEAGENTCAPS,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    dwAgentHandlerInfoSize : UInt32,
-    dwAgentHandlerInfoOffset : UInt32,
-    dwCapsVersion : UInt32,
-    dwFeatures : UInt32,
-    dwStates : UInt32,
-    dwNextStates : UInt32,
-    dwMaxNumGroupEntries : UInt32,
-    dwAgentStatusMessages : UInt32,
-    dwNumAgentExtensionIDs : UInt32,
-    dwAgentExtensionIDListSize : UInt32,
-    dwAgentExtensionIDListOffset : UInt32,
-    proxy_guid : LibC::GUID
+  struct LINEAGENTCAPS
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property dwAgentHandlerInfoSize : UInt32
+    property dwAgentHandlerInfoOffset : UInt32
+    property dwCapsVersion : UInt32
+    property dwFeatures : UInt32
+    property dwStates : UInt32
+    property dwNextStates : UInt32
+    property dwMaxNumGroupEntries : UInt32
+    property dwAgentStatusMessages : UInt32
+    property dwNumAgentExtensionIDs : UInt32
+    property dwAgentExtensionIDListSize : UInt32
+    property dwAgentExtensionIDListOffset : UInt32
+    property proxy_guid : LibC::GUID
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @dwAgentHandlerInfoSize : UInt32, @dwAgentHandlerInfoOffset : UInt32, @dwCapsVersion : UInt32, @dwFeatures : UInt32, @dwStates : UInt32, @dwNextStates : UInt32, @dwMaxNumGroupEntries : UInt32, @dwAgentStatusMessages : UInt32, @dwNumAgentExtensionIDs : UInt32, @dwAgentExtensionIDListSize : UInt32, @dwAgentExtensionIDListOffset : UInt32, @proxy_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record LINEAGENTGROUPENTRY,
-    group_id : GroupID_e__Struct_,
-    dwNameSize : UInt32,
-    dwNameOffset : UInt32 do
+  struct LINEAGENTGROUPENTRY
+    property group_id : GroupID_e__Struct_
+    property dwNameSize : UInt32
+    property dwNameOffset : UInt32
 
     # Nested Type GroupID_e__Struct_
     @[Extern]
-    record GroupID_e__Struct_,
-      dwGroupID1 : UInt32,
-      dwGroupID2 : UInt32,
-      dwGroupID3 : UInt32,
-      dwGroupID4 : UInt32
+    struct GroupID_e__Struct_
+    property dwGroupID1 : UInt32
+    property dwGroupID2 : UInt32
+    property dwGroupID3 : UInt32
+    property dwGroupID4 : UInt32
+    def initialize(@dwGroupID1 : UInt32, @dwGroupID2 : UInt32, @dwGroupID3 : UInt32, @dwGroupID4 : UInt32)
+    end
+    end
 
+    def initialize(@group_id : GroupID_e__Struct_, @dwNameSize : UInt32, @dwNameOffset : UInt32)
+    end
   end
 
   @[Extern]
-  record LINEAGENTGROUPLIST,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    dwNumEntries : UInt32,
-    dwListSize : UInt32,
-    dwListOffset : UInt32
+  struct LINEAGENTGROUPLIST
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property dwNumEntries : UInt32
+    property dwListSize : UInt32
+    property dwListOffset : UInt32
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @dwNumEntries : UInt32, @dwListSize : UInt32, @dwListOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEAGENTSTATUS,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    dwNumEntries : UInt32,
-    dwGroupListSize : UInt32,
-    dwGroupListOffset : UInt32,
-    dwState : UInt32,
-    dwNextState : UInt32,
-    dwActivityID : UInt32,
-    dwActivitySize : UInt32,
-    dwActivityOffset : UInt32,
-    dwAgentFeatures : UInt32,
-    dwValidStates : UInt32,
-    dwValidNextStates : UInt32
+  struct LINEAGENTSTATUS
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property dwNumEntries : UInt32
+    property dwGroupListSize : UInt32
+    property dwGroupListOffset : UInt32
+    property dwState : UInt32
+    property dwNextState : UInt32
+    property dwActivityID : UInt32
+    property dwActivitySize : UInt32
+    property dwActivityOffset : UInt32
+    property dwAgentFeatures : UInt32
+    property dwValidStates : UInt32
+    property dwValidNextStates : UInt32
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @dwNumEntries : UInt32, @dwGroupListSize : UInt32, @dwGroupListOffset : UInt32, @dwState : UInt32, @dwNextState : UInt32, @dwActivityID : UInt32, @dwActivitySize : UInt32, @dwActivityOffset : UInt32, @dwAgentFeatures : UInt32, @dwValidStates : UInt32, @dwValidNextStates : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEAPPINFO,
-    dwMachineNameSize : UInt32,
-    dwMachineNameOffset : UInt32,
-    dwUserNameSize : UInt32,
-    dwUserNameOffset : UInt32,
-    dwModuleFilenameSize : UInt32,
-    dwModuleFilenameOffset : UInt32,
-    dwFriendlyNameSize : UInt32,
-    dwFriendlyNameOffset : UInt32,
-    dwMediaModes : UInt32,
-    dwAddressID : UInt32
+  struct LINEAPPINFO
+    property dwMachineNameSize : UInt32
+    property dwMachineNameOffset : UInt32
+    property dwUserNameSize : UInt32
+    property dwUserNameOffset : UInt32
+    property dwModuleFilenameSize : UInt32
+    property dwModuleFilenameOffset : UInt32
+    property dwFriendlyNameSize : UInt32
+    property dwFriendlyNameOffset : UInt32
+    property dwMediaModes : UInt32
+    property dwAddressID : UInt32
+    def initialize(@dwMachineNameSize : UInt32, @dwMachineNameOffset : UInt32, @dwUserNameSize : UInt32, @dwUserNameOffset : UInt32, @dwModuleFilenameSize : UInt32, @dwModuleFilenameOffset : UInt32, @dwFriendlyNameSize : UInt32, @dwFriendlyNameOffset : UInt32, @dwMediaModes : UInt32, @dwAddressID : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEAGENTENTRY,
-    hAgent : UInt32,
-    dwNameSize : UInt32,
-    dwNameOffset : UInt32,
-    dwIDSize : UInt32,
-    dwIDOffset : UInt32,
-    dwPINSize : UInt32,
-    dwPINOffset : UInt32
+  struct LINEAGENTENTRY
+    property hAgent : UInt32
+    property dwNameSize : UInt32
+    property dwNameOffset : UInt32
+    property dwIDSize : UInt32
+    property dwIDOffset : UInt32
+    property dwPINSize : UInt32
+    property dwPINOffset : UInt32
+    def initialize(@hAgent : UInt32, @dwNameSize : UInt32, @dwNameOffset : UInt32, @dwIDSize : UInt32, @dwIDOffset : UInt32, @dwPINSize : UInt32, @dwPINOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEAGENTLIST,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    dwNumEntries : UInt32,
-    dwListSize : UInt32,
-    dwListOffset : UInt32
+  struct LINEAGENTLIST
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property dwNumEntries : UInt32
+    property dwListSize : UInt32
+    property dwListOffset : UInt32
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @dwNumEntries : UInt32, @dwListSize : UInt32, @dwListOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEAGENTINFO,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    dwAgentState : UInt32,
-    dwNextAgentState : UInt32,
-    dwMeasurementPeriod : UInt32,
-    cyOverallCallRate : Win32cr::System::Com::CY,
-    dwNumberOfACDCalls : UInt32,
-    dwNumberOfIncomingCalls : UInt32,
-    dwNumberOfOutgoingCalls : UInt32,
-    dwTotalACDTalkTime : UInt32,
-    dwTotalACDCallTime : UInt32,
-    dwTotalACDWrapUpTime : UInt32
+  struct LINEAGENTINFO
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property dwAgentState : UInt32
+    property dwNextAgentState : UInt32
+    property dwMeasurementPeriod : UInt32
+    property cyOverallCallRate : Win32cr::System::Com::CY
+    property dwNumberOfACDCalls : UInt32
+    property dwNumberOfIncomingCalls : UInt32
+    property dwNumberOfOutgoingCalls : UInt32
+    property dwTotalACDTalkTime : UInt32
+    property dwTotalACDCallTime : UInt32
+    property dwTotalACDWrapUpTime : UInt32
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @dwAgentState : UInt32, @dwNextAgentState : UInt32, @dwMeasurementPeriod : UInt32, @cyOverallCallRate : Win32cr::System::Com::CY, @dwNumberOfACDCalls : UInt32, @dwNumberOfIncomingCalls : UInt32, @dwNumberOfOutgoingCalls : UInt32, @dwTotalACDTalkTime : UInt32, @dwTotalACDCallTime : UInt32, @dwTotalACDWrapUpTime : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEAGENTSESSIONENTRY,
-    hAgentSession : UInt32,
-    hAgent : UInt32,
-    group_id : LibC::GUID,
-    dwWorkingAddressID : UInt32
+  struct LINEAGENTSESSIONENTRY
+    property hAgentSession : UInt32
+    property hAgent : UInt32
+    property group_id : LibC::GUID
+    property dwWorkingAddressID : UInt32
+    def initialize(@hAgentSession : UInt32, @hAgent : UInt32, @group_id : LibC::GUID, @dwWorkingAddressID : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEAGENTSESSIONLIST,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    dwNumEntries : UInt32,
-    dwListSize : UInt32,
-    dwListOffset : UInt32
+  struct LINEAGENTSESSIONLIST
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property dwNumEntries : UInt32
+    property dwListSize : UInt32
+    property dwListOffset : UInt32
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @dwNumEntries : UInt32, @dwListSize : UInt32, @dwListOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEAGENTSESSIONINFO,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    dwAgentSessionState : UInt32,
-    dwNextAgentSessionState : UInt32,
-    dateSessionStartTime : Float64,
-    dwSessionDuration : UInt32,
-    dwNumberOfCalls : UInt32,
-    dwTotalTalkTime : UInt32,
-    dwAverageTalkTime : UInt32,
-    dwTotalCallTime : UInt32,
-    dwAverageCallTime : UInt32,
-    dwTotalWrapUpTime : UInt32,
-    dwAverageWrapUpTime : UInt32,
-    cyACDCallRate : Win32cr::System::Com::CY,
-    dwLongestTimeToAnswer : UInt32,
-    dwAverageTimeToAnswer : UInt32
+  struct LINEAGENTSESSIONINFO
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property dwAgentSessionState : UInt32
+    property dwNextAgentSessionState : UInt32
+    property dateSessionStartTime : Float64
+    property dwSessionDuration : UInt32
+    property dwNumberOfCalls : UInt32
+    property dwTotalTalkTime : UInt32
+    property dwAverageTalkTime : UInt32
+    property dwTotalCallTime : UInt32
+    property dwAverageCallTime : UInt32
+    property dwTotalWrapUpTime : UInt32
+    property dwAverageWrapUpTime : UInt32
+    property cyACDCallRate : Win32cr::System::Com::CY
+    property dwLongestTimeToAnswer : UInt32
+    property dwAverageTimeToAnswer : UInt32
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @dwAgentSessionState : UInt32, @dwNextAgentSessionState : UInt32, @dateSessionStartTime : Float64, @dwSessionDuration : UInt32, @dwNumberOfCalls : UInt32, @dwTotalTalkTime : UInt32, @dwAverageTalkTime : UInt32, @dwTotalCallTime : UInt32, @dwAverageCallTime : UInt32, @dwTotalWrapUpTime : UInt32, @dwAverageWrapUpTime : UInt32, @cyACDCallRate : Win32cr::System::Com::CY, @dwLongestTimeToAnswer : UInt32, @dwAverageTimeToAnswer : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEQUEUEENTRY,
-    dwQueueID : UInt32,
-    dwNameSize : UInt32,
-    dwNameOffset : UInt32
+  struct LINEQUEUEENTRY
+    property dwQueueID : UInt32
+    property dwNameSize : UInt32
+    property dwNameOffset : UInt32
+    def initialize(@dwQueueID : UInt32, @dwNameSize : UInt32, @dwNameOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEQUEUELIST,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    dwNumEntries : UInt32,
-    dwListSize : UInt32,
-    dwListOffset : UInt32
+  struct LINEQUEUELIST
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property dwNumEntries : UInt32
+    property dwListSize : UInt32
+    property dwListOffset : UInt32
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @dwNumEntries : UInt32, @dwListSize : UInt32, @dwListOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEQUEUEINFO,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    dwMeasurementPeriod : UInt32,
-    dwTotalCallsQueued : UInt32,
-    dwCurrentCallsQueued : UInt32,
-    dwTotalCallsAbandoned : UInt32,
-    dwTotalCallsFlowedIn : UInt32,
-    dwTotalCallsFlowedOut : UInt32,
-    dwLongestEverWaitTime : UInt32,
-    dwCurrentLongestWaitTime : UInt32,
-    dwAverageWaitTime : UInt32,
-    dwFinalDisposition : UInt32
+  struct LINEQUEUEINFO
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property dwMeasurementPeriod : UInt32
+    property dwTotalCallsQueued : UInt32
+    property dwCurrentCallsQueued : UInt32
+    property dwTotalCallsAbandoned : UInt32
+    property dwTotalCallsFlowedIn : UInt32
+    property dwTotalCallsFlowedOut : UInt32
+    property dwLongestEverWaitTime : UInt32
+    property dwCurrentLongestWaitTime : UInt32
+    property dwAverageWaitTime : UInt32
+    property dwFinalDisposition : UInt32
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @dwMeasurementPeriod : UInt32, @dwTotalCallsQueued : UInt32, @dwCurrentCallsQueued : UInt32, @dwTotalCallsAbandoned : UInt32, @dwTotalCallsFlowedIn : UInt32, @dwTotalCallsFlowedOut : UInt32, @dwLongestEverWaitTime : UInt32, @dwCurrentLongestWaitTime : UInt32, @dwAverageWaitTime : UInt32, @dwFinalDisposition : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEPROXYREQUESTLIST,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    dwNumEntries : UInt32,
-    dwListSize : UInt32,
-    dwListOffset : UInt32
+  struct LINEPROXYREQUESTLIST
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property dwNumEntries : UInt32
+    property dwListSize : UInt32
+    property dwListOffset : UInt32
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @dwNumEntries : UInt32, @dwListSize : UInt32, @dwListOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEDIALPARAMS,
-    dwDialPause : UInt32,
-    dwDialSpeed : UInt32,
-    dwDigitDuration : UInt32,
-    dwWaitForDialtone : UInt32
+  struct LINEDIALPARAMS
+    property dwDialPause : UInt32
+    property dwDialSpeed : UInt32
+    property dwDigitDuration : UInt32
+    property dwWaitForDialtone : UInt32
+    def initialize(@dwDialPause : UInt32, @dwDialSpeed : UInt32, @dwDigitDuration : UInt32, @dwWaitForDialtone : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINECALLINFO,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    hLine : UInt32,
-    dwLineDeviceID : UInt32,
-    dwAddressID : UInt32,
-    dwBearerMode : UInt32,
-    dwRate : UInt32,
-    dwMediaMode : UInt32,
-    dwAppSpecific : UInt32,
-    dwCallID : UInt32,
-    dwRelatedCallID : UInt32,
-    dwCallParamFlags : UInt32,
-    dwCallStates : UInt32,
-    dwMonitorDigitModes : UInt32,
-    dwMonitorMediaModes : UInt32,
-    dial_params : Win32cr::Devices::Tapi::LINEDIALPARAMS,
-    dwOrigin : UInt32,
-    dwReason : UInt32,
-    dwCompletionID : UInt32,
-    dwNumOwners : UInt32,
-    dwNumMonitors : UInt32,
-    dwCountryCode : UInt32,
-    dwTrunk : UInt32,
-    dwCallerIDFlags : UInt32,
-    dwCallerIDSize : UInt32,
-    dwCallerIDOffset : UInt32,
-    dwCallerIDNameSize : UInt32,
-    dwCallerIDNameOffset : UInt32,
-    dwCalledIDFlags : UInt32,
-    dwCalledIDSize : UInt32,
-    dwCalledIDOffset : UInt32,
-    dwCalledIDNameSize : UInt32,
-    dwCalledIDNameOffset : UInt32,
-    dwConnectedIDFlags : UInt32,
-    dwConnectedIDSize : UInt32,
-    dwConnectedIDOffset : UInt32,
-    dwConnectedIDNameSize : UInt32,
-    dwConnectedIDNameOffset : UInt32,
-    dwRedirectionIDFlags : UInt32,
-    dwRedirectionIDSize : UInt32,
-    dwRedirectionIDOffset : UInt32,
-    dwRedirectionIDNameSize : UInt32,
-    dwRedirectionIDNameOffset : UInt32,
-    dwRedirectingIDFlags : UInt32,
-    dwRedirectingIDSize : UInt32,
-    dwRedirectingIDOffset : UInt32,
-    dwRedirectingIDNameSize : UInt32,
-    dwRedirectingIDNameOffset : UInt32,
-    dwAppNameSize : UInt32,
-    dwAppNameOffset : UInt32,
-    dwDisplayableAddressSize : UInt32,
-    dwDisplayableAddressOffset : UInt32,
-    dwCalledPartySize : UInt32,
-    dwCalledPartyOffset : UInt32,
-    dwCommentSize : UInt32,
-    dwCommentOffset : UInt32,
-    dwDisplaySize : UInt32,
-    dwDisplayOffset : UInt32,
-    dwUserUserInfoSize : UInt32,
-    dwUserUserInfoOffset : UInt32,
-    dwHighLevelCompSize : UInt32,
-    dwHighLevelCompOffset : UInt32,
-    dwLowLevelCompSize : UInt32,
-    dwLowLevelCompOffset : UInt32,
-    dwChargingInfoSize : UInt32,
-    dwChargingInfoOffset : UInt32,
-    dwTerminalModesSize : UInt32,
-    dwTerminalModesOffset : UInt32,
-    dwDevSpecificSize : UInt32,
-    dwDevSpecificOffset : UInt32,
-    dwCallTreatment : UInt32,
-    dwCallDataSize : UInt32,
-    dwCallDataOffset : UInt32,
-    dwSendingFlowspecSize : UInt32,
-    dwSendingFlowspecOffset : UInt32,
-    dwReceivingFlowspecSize : UInt32,
-    dwReceivingFlowspecOffset : UInt32
+  struct LINECALLINFO
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property hLine : UInt32
+    property dwLineDeviceID : UInt32
+    property dwAddressID : UInt32
+    property dwBearerMode : UInt32
+    property dwRate : UInt32
+    property dwMediaMode : UInt32
+    property dwAppSpecific : UInt32
+    property dwCallID : UInt32
+    property dwRelatedCallID : UInt32
+    property dwCallParamFlags : UInt32
+    property dwCallStates : UInt32
+    property dwMonitorDigitModes : UInt32
+    property dwMonitorMediaModes : UInt32
+    property dial_params : Win32cr::Devices::Tapi::LINEDIALPARAMS
+    property dwOrigin : UInt32
+    property dwReason : UInt32
+    property dwCompletionID : UInt32
+    property dwNumOwners : UInt32
+    property dwNumMonitors : UInt32
+    property dwCountryCode : UInt32
+    property dwTrunk : UInt32
+    property dwCallerIDFlags : UInt32
+    property dwCallerIDSize : UInt32
+    property dwCallerIDOffset : UInt32
+    property dwCallerIDNameSize : UInt32
+    property dwCallerIDNameOffset : UInt32
+    property dwCalledIDFlags : UInt32
+    property dwCalledIDSize : UInt32
+    property dwCalledIDOffset : UInt32
+    property dwCalledIDNameSize : UInt32
+    property dwCalledIDNameOffset : UInt32
+    property dwConnectedIDFlags : UInt32
+    property dwConnectedIDSize : UInt32
+    property dwConnectedIDOffset : UInt32
+    property dwConnectedIDNameSize : UInt32
+    property dwConnectedIDNameOffset : UInt32
+    property dwRedirectionIDFlags : UInt32
+    property dwRedirectionIDSize : UInt32
+    property dwRedirectionIDOffset : UInt32
+    property dwRedirectionIDNameSize : UInt32
+    property dwRedirectionIDNameOffset : UInt32
+    property dwRedirectingIDFlags : UInt32
+    property dwRedirectingIDSize : UInt32
+    property dwRedirectingIDOffset : UInt32
+    property dwRedirectingIDNameSize : UInt32
+    property dwRedirectingIDNameOffset : UInt32
+    property dwAppNameSize : UInt32
+    property dwAppNameOffset : UInt32
+    property dwDisplayableAddressSize : UInt32
+    property dwDisplayableAddressOffset : UInt32
+    property dwCalledPartySize : UInt32
+    property dwCalledPartyOffset : UInt32
+    property dwCommentSize : UInt32
+    property dwCommentOffset : UInt32
+    property dwDisplaySize : UInt32
+    property dwDisplayOffset : UInt32
+    property dwUserUserInfoSize : UInt32
+    property dwUserUserInfoOffset : UInt32
+    property dwHighLevelCompSize : UInt32
+    property dwHighLevelCompOffset : UInt32
+    property dwLowLevelCompSize : UInt32
+    property dwLowLevelCompOffset : UInt32
+    property dwChargingInfoSize : UInt32
+    property dwChargingInfoOffset : UInt32
+    property dwTerminalModesSize : UInt32
+    property dwTerminalModesOffset : UInt32
+    property dwDevSpecificSize : UInt32
+    property dwDevSpecificOffset : UInt32
+    property dwCallTreatment : UInt32
+    property dwCallDataSize : UInt32
+    property dwCallDataOffset : UInt32
+    property dwSendingFlowspecSize : UInt32
+    property dwSendingFlowspecOffset : UInt32
+    property dwReceivingFlowspecSize : UInt32
+    property dwReceivingFlowspecOffset : UInt32
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @hLine : UInt32, @dwLineDeviceID : UInt32, @dwAddressID : UInt32, @dwBearerMode : UInt32, @dwRate : UInt32, @dwMediaMode : UInt32, @dwAppSpecific : UInt32, @dwCallID : UInt32, @dwRelatedCallID : UInt32, @dwCallParamFlags : UInt32, @dwCallStates : UInt32, @dwMonitorDigitModes : UInt32, @dwMonitorMediaModes : UInt32, @dial_params : Win32cr::Devices::Tapi::LINEDIALPARAMS, @dwOrigin : UInt32, @dwReason : UInt32, @dwCompletionID : UInt32, @dwNumOwners : UInt32, @dwNumMonitors : UInt32, @dwCountryCode : UInt32, @dwTrunk : UInt32, @dwCallerIDFlags : UInt32, @dwCallerIDSize : UInt32, @dwCallerIDOffset : UInt32, @dwCallerIDNameSize : UInt32, @dwCallerIDNameOffset : UInt32, @dwCalledIDFlags : UInt32, @dwCalledIDSize : UInt32, @dwCalledIDOffset : UInt32, @dwCalledIDNameSize : UInt32, @dwCalledIDNameOffset : UInt32, @dwConnectedIDFlags : UInt32, @dwConnectedIDSize : UInt32, @dwConnectedIDOffset : UInt32, @dwConnectedIDNameSize : UInt32, @dwConnectedIDNameOffset : UInt32, @dwRedirectionIDFlags : UInt32, @dwRedirectionIDSize : UInt32, @dwRedirectionIDOffset : UInt32, @dwRedirectionIDNameSize : UInt32, @dwRedirectionIDNameOffset : UInt32, @dwRedirectingIDFlags : UInt32, @dwRedirectingIDSize : UInt32, @dwRedirectingIDOffset : UInt32, @dwRedirectingIDNameSize : UInt32, @dwRedirectingIDNameOffset : UInt32, @dwAppNameSize : UInt32, @dwAppNameOffset : UInt32, @dwDisplayableAddressSize : UInt32, @dwDisplayableAddressOffset : UInt32, @dwCalledPartySize : UInt32, @dwCalledPartyOffset : UInt32, @dwCommentSize : UInt32, @dwCommentOffset : UInt32, @dwDisplaySize : UInt32, @dwDisplayOffset : UInt32, @dwUserUserInfoSize : UInt32, @dwUserUserInfoOffset : UInt32, @dwHighLevelCompSize : UInt32, @dwHighLevelCompOffset : UInt32, @dwLowLevelCompSize : UInt32, @dwLowLevelCompOffset : UInt32, @dwChargingInfoSize : UInt32, @dwChargingInfoOffset : UInt32, @dwTerminalModesSize : UInt32, @dwTerminalModesOffset : UInt32, @dwDevSpecificSize : UInt32, @dwDevSpecificOffset : UInt32, @dwCallTreatment : UInt32, @dwCallDataSize : UInt32, @dwCallDataOffset : UInt32, @dwSendingFlowspecSize : UInt32, @dwSendingFlowspecOffset : UInt32, @dwReceivingFlowspecSize : UInt32, @dwReceivingFlowspecOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINECALLLIST,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    dwCallsNumEntries : UInt32,
-    dwCallsSize : UInt32,
-    dwCallsOffset : UInt32
+  struct LINECALLLIST
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property dwCallsNumEntries : UInt32
+    property dwCallsSize : UInt32
+    property dwCallsOffset : UInt32
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @dwCallsNumEntries : UInt32, @dwCallsSize : UInt32, @dwCallsOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINECALLPARAMS,
-    dwTotalSize : UInt32,
-    dwBearerMode : UInt32,
-    dwMinRate : UInt32,
-    dwMaxRate : UInt32,
-    dwMediaMode : UInt32,
-    dwCallParamFlags : UInt32,
-    dwAddressMode : UInt32,
-    dwAddressID : UInt32,
-    dial_params : Win32cr::Devices::Tapi::LINEDIALPARAMS,
-    dwOrigAddressSize : UInt32,
-    dwOrigAddressOffset : UInt32,
-    dwDisplayableAddressSize : UInt32,
-    dwDisplayableAddressOffset : UInt32,
-    dwCalledPartySize : UInt32,
-    dwCalledPartyOffset : UInt32,
-    dwCommentSize : UInt32,
-    dwCommentOffset : UInt32,
-    dwUserUserInfoSize : UInt32,
-    dwUserUserInfoOffset : UInt32,
-    dwHighLevelCompSize : UInt32,
-    dwHighLevelCompOffset : UInt32,
-    dwLowLevelCompSize : UInt32,
-    dwLowLevelCompOffset : UInt32,
-    dwDevSpecificSize : UInt32,
-    dwDevSpecificOffset : UInt32,
-    dwPredictiveAutoTransferStates : UInt32,
-    dwTargetAddressSize : UInt32,
-    dwTargetAddressOffset : UInt32,
-    dwSendingFlowspecSize : UInt32,
-    dwSendingFlowspecOffset : UInt32,
-    dwReceivingFlowspecSize : UInt32,
-    dwReceivingFlowspecOffset : UInt32,
-    dwDeviceClassSize : UInt32,
-    dwDeviceClassOffset : UInt32,
-    dwDeviceConfigSize : UInt32,
-    dwDeviceConfigOffset : UInt32,
-    dwCallDataSize : UInt32,
-    dwCallDataOffset : UInt32,
-    dwNoAnswerTimeout : UInt32,
-    dwCallingPartyIDSize : UInt32,
-    dwCallingPartyIDOffset : UInt32
+  struct LINECALLPARAMS
+    property dwTotalSize : UInt32
+    property dwBearerMode : UInt32
+    property dwMinRate : UInt32
+    property dwMaxRate : UInt32
+    property dwMediaMode : UInt32
+    property dwCallParamFlags : UInt32
+    property dwAddressMode : UInt32
+    property dwAddressID : UInt32
+    property dial_params : Win32cr::Devices::Tapi::LINEDIALPARAMS
+    property dwOrigAddressSize : UInt32
+    property dwOrigAddressOffset : UInt32
+    property dwDisplayableAddressSize : UInt32
+    property dwDisplayableAddressOffset : UInt32
+    property dwCalledPartySize : UInt32
+    property dwCalledPartyOffset : UInt32
+    property dwCommentSize : UInt32
+    property dwCommentOffset : UInt32
+    property dwUserUserInfoSize : UInt32
+    property dwUserUserInfoOffset : UInt32
+    property dwHighLevelCompSize : UInt32
+    property dwHighLevelCompOffset : UInt32
+    property dwLowLevelCompSize : UInt32
+    property dwLowLevelCompOffset : UInt32
+    property dwDevSpecificSize : UInt32
+    property dwDevSpecificOffset : UInt32
+    property dwPredictiveAutoTransferStates : UInt32
+    property dwTargetAddressSize : UInt32
+    property dwTargetAddressOffset : UInt32
+    property dwSendingFlowspecSize : UInt32
+    property dwSendingFlowspecOffset : UInt32
+    property dwReceivingFlowspecSize : UInt32
+    property dwReceivingFlowspecOffset : UInt32
+    property dwDeviceClassSize : UInt32
+    property dwDeviceClassOffset : UInt32
+    property dwDeviceConfigSize : UInt32
+    property dwDeviceConfigOffset : UInt32
+    property dwCallDataSize : UInt32
+    property dwCallDataOffset : UInt32
+    property dwNoAnswerTimeout : UInt32
+    property dwCallingPartyIDSize : UInt32
+    property dwCallingPartyIDOffset : UInt32
+    def initialize(@dwTotalSize : UInt32, @dwBearerMode : UInt32, @dwMinRate : UInt32, @dwMaxRate : UInt32, @dwMediaMode : UInt32, @dwCallParamFlags : UInt32, @dwAddressMode : UInt32, @dwAddressID : UInt32, @dial_params : Win32cr::Devices::Tapi::LINEDIALPARAMS, @dwOrigAddressSize : UInt32, @dwOrigAddressOffset : UInt32, @dwDisplayableAddressSize : UInt32, @dwDisplayableAddressOffset : UInt32, @dwCalledPartySize : UInt32, @dwCalledPartyOffset : UInt32, @dwCommentSize : UInt32, @dwCommentOffset : UInt32, @dwUserUserInfoSize : UInt32, @dwUserUserInfoOffset : UInt32, @dwHighLevelCompSize : UInt32, @dwHighLevelCompOffset : UInt32, @dwLowLevelCompSize : UInt32, @dwLowLevelCompOffset : UInt32, @dwDevSpecificSize : UInt32, @dwDevSpecificOffset : UInt32, @dwPredictiveAutoTransferStates : UInt32, @dwTargetAddressSize : UInt32, @dwTargetAddressOffset : UInt32, @dwSendingFlowspecSize : UInt32, @dwSendingFlowspecOffset : UInt32, @dwReceivingFlowspecSize : UInt32, @dwReceivingFlowspecOffset : UInt32, @dwDeviceClassSize : UInt32, @dwDeviceClassOffset : UInt32, @dwDeviceConfigSize : UInt32, @dwDeviceConfigOffset : UInt32, @dwCallDataSize : UInt32, @dwCallDataOffset : UInt32, @dwNoAnswerTimeout : UInt32, @dwCallingPartyIDSize : UInt32, @dwCallingPartyIDOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINECALLSTATUS,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    dwCallState : UInt32,
-    dwCallStateMode : UInt32,
-    dwCallPrivilege : UInt32,
-    dwCallFeatures : UInt32,
-    dwDevSpecificSize : UInt32,
-    dwDevSpecificOffset : UInt32,
-    dwCallFeatures2 : UInt32,
-    tStateEntryTime : Win32cr::Foundation::SYSTEMTIME
+  struct LINECALLSTATUS
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property dwCallState : UInt32
+    property dwCallStateMode : UInt32
+    property dwCallPrivilege : UInt32
+    property dwCallFeatures : UInt32
+    property dwDevSpecificSize : UInt32
+    property dwDevSpecificOffset : UInt32
+    property dwCallFeatures2 : UInt32
+    property tStateEntryTime : Win32cr::Foundation::SYSTEMTIME
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @dwCallState : UInt32, @dwCallStateMode : UInt32, @dwCallPrivilege : UInt32, @dwCallFeatures : UInt32, @dwDevSpecificSize : UInt32, @dwDevSpecificOffset : UInt32, @dwCallFeatures2 : UInt32, @tStateEntryTime : Win32cr::Foundation::SYSTEMTIME)
+    end
+  end
 
   @[Extern]
-  record LINECALLTREATMENTENTRY,
-    dwCallTreatmentID : UInt32,
-    dwCallTreatmentNameSize : UInt32,
-    dwCallTreatmentNameOffset : UInt32
+  struct LINECALLTREATMENTENTRY
+    property dwCallTreatmentID : UInt32
+    property dwCallTreatmentNameSize : UInt32
+    property dwCallTreatmentNameOffset : UInt32
+    def initialize(@dwCallTreatmentID : UInt32, @dwCallTreatmentNameSize : UInt32, @dwCallTreatmentNameOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINECARDENTRY,
-    dwPermanentCardID : UInt32,
-    dwCardNameSize : UInt32,
-    dwCardNameOffset : UInt32,
-    dwCardNumberDigits : UInt32,
-    dwSameAreaRuleSize : UInt32,
-    dwSameAreaRuleOffset : UInt32,
-    dwLongDistanceRuleSize : UInt32,
-    dwLongDistanceRuleOffset : UInt32,
-    dwInternationalRuleSize : UInt32,
-    dwInternationalRuleOffset : UInt32,
-    dwOptions : UInt32
+  struct LINECARDENTRY
+    property dwPermanentCardID : UInt32
+    property dwCardNameSize : UInt32
+    property dwCardNameOffset : UInt32
+    property dwCardNumberDigits : UInt32
+    property dwSameAreaRuleSize : UInt32
+    property dwSameAreaRuleOffset : UInt32
+    property dwLongDistanceRuleSize : UInt32
+    property dwLongDistanceRuleOffset : UInt32
+    property dwInternationalRuleSize : UInt32
+    property dwInternationalRuleOffset : UInt32
+    property dwOptions : UInt32
+    def initialize(@dwPermanentCardID : UInt32, @dwCardNameSize : UInt32, @dwCardNameOffset : UInt32, @dwCardNumberDigits : UInt32, @dwSameAreaRuleSize : UInt32, @dwSameAreaRuleOffset : UInt32, @dwLongDistanceRuleSize : UInt32, @dwLongDistanceRuleOffset : UInt32, @dwInternationalRuleSize : UInt32, @dwInternationalRuleOffset : UInt32, @dwOptions : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINECOUNTRYENTRY,
-    dwCountryID : UInt32,
-    dwCountryCode : UInt32,
-    dwNextCountryID : UInt32,
-    dwCountryNameSize : UInt32,
-    dwCountryNameOffset : UInt32,
-    dwSameAreaRuleSize : UInt32,
-    dwSameAreaRuleOffset : UInt32,
-    dwLongDistanceRuleSize : UInt32,
-    dwLongDistanceRuleOffset : UInt32,
-    dwInternationalRuleSize : UInt32,
-    dwInternationalRuleOffset : UInt32
+  struct LINECOUNTRYENTRY
+    property dwCountryID : UInt32
+    property dwCountryCode : UInt32
+    property dwNextCountryID : UInt32
+    property dwCountryNameSize : UInt32
+    property dwCountryNameOffset : UInt32
+    property dwSameAreaRuleSize : UInt32
+    property dwSameAreaRuleOffset : UInt32
+    property dwLongDistanceRuleSize : UInt32
+    property dwLongDistanceRuleOffset : UInt32
+    property dwInternationalRuleSize : UInt32
+    property dwInternationalRuleOffset : UInt32
+    def initialize(@dwCountryID : UInt32, @dwCountryCode : UInt32, @dwNextCountryID : UInt32, @dwCountryNameSize : UInt32, @dwCountryNameOffset : UInt32, @dwSameAreaRuleSize : UInt32, @dwSameAreaRuleOffset : UInt32, @dwLongDistanceRuleSize : UInt32, @dwLongDistanceRuleOffset : UInt32, @dwInternationalRuleSize : UInt32, @dwInternationalRuleOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINECOUNTRYLIST,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    dwNumCountries : UInt32,
-    dwCountryListSize : UInt32,
-    dwCountryListOffset : UInt32
+  struct LINECOUNTRYLIST
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property dwNumCountries : UInt32
+    property dwCountryListSize : UInt32
+    property dwCountryListOffset : UInt32
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @dwNumCountries : UInt32, @dwCountryListSize : UInt32, @dwCountryListOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEDEVCAPS,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    dwProviderInfoSize : UInt32,
-    dwProviderInfoOffset : UInt32,
-    dwSwitchInfoSize : UInt32,
-    dwSwitchInfoOffset : UInt32,
-    dwPermanentLineID : UInt32,
-    dwLineNameSize : UInt32,
-    dwLineNameOffset : UInt32,
-    dwStringFormat : UInt32,
-    dwAddressModes : UInt32,
-    dwNumAddresses : UInt32,
-    dwBearerModes : UInt32,
-    dwMaxRate : UInt32,
-    dwMediaModes : UInt32,
-    dwGenerateToneModes : UInt32,
-    dwGenerateToneMaxNumFreq : UInt32,
-    dwGenerateDigitModes : UInt32,
-    dwMonitorToneMaxNumFreq : UInt32,
-    dwMonitorToneMaxNumEntries : UInt32,
-    dwMonitorDigitModes : UInt32,
-    dwGatherDigitsMinTimeout : UInt32,
-    dwGatherDigitsMaxTimeout : UInt32,
-    dwMedCtlDigitMaxListSize : UInt32,
-    dwMedCtlMediaMaxListSize : UInt32,
-    dwMedCtlToneMaxListSize : UInt32,
-    dwMedCtlCallStateMaxListSize : UInt32,
-    dwDevCapFlags : UInt32,
-    dwMaxNumActiveCalls : UInt32,
-    dwAnswerMode : UInt32,
-    dwRingModes : UInt32,
-    dwLineStates : UInt32,
-    dwUUIAcceptSize : UInt32,
-    dwUUIAnswerSize : UInt32,
-    dwUUIMakeCallSize : UInt32,
-    dwUUIDropSize : UInt32,
-    dwUUISendUserUserInfoSize : UInt32,
-    dwUUICallInfoSize : UInt32,
-    min_dial_params : Win32cr::Devices::Tapi::LINEDIALPARAMS,
-    max_dial_params : Win32cr::Devices::Tapi::LINEDIALPARAMS,
-    default_dial_params : Win32cr::Devices::Tapi::LINEDIALPARAMS,
-    dwNumTerminals : UInt32,
-    dwTerminalCapsSize : UInt32,
-    dwTerminalCapsOffset : UInt32,
-    dwTerminalTextEntrySize : UInt32,
-    dwTerminalTextSize : UInt32,
-    dwTerminalTextOffset : UInt32,
-    dwDevSpecificSize : UInt32,
-    dwDevSpecificOffset : UInt32,
-    dwLineFeatures : UInt32,
-    dwSettableDevStatus : UInt32,
-    dwDeviceClassesSize : UInt32,
-    dwDeviceClassesOffset : UInt32,
-    permanent_line_guid : LibC::GUID
+  struct LINEDEVCAPS
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property dwProviderInfoSize : UInt32
+    property dwProviderInfoOffset : UInt32
+    property dwSwitchInfoSize : UInt32
+    property dwSwitchInfoOffset : UInt32
+    property dwPermanentLineID : UInt32
+    property dwLineNameSize : UInt32
+    property dwLineNameOffset : UInt32
+    property dwStringFormat : UInt32
+    property dwAddressModes : UInt32
+    property dwNumAddresses : UInt32
+    property dwBearerModes : UInt32
+    property dwMaxRate : UInt32
+    property dwMediaModes : UInt32
+    property dwGenerateToneModes : UInt32
+    property dwGenerateToneMaxNumFreq : UInt32
+    property dwGenerateDigitModes : UInt32
+    property dwMonitorToneMaxNumFreq : UInt32
+    property dwMonitorToneMaxNumEntries : UInt32
+    property dwMonitorDigitModes : UInt32
+    property dwGatherDigitsMinTimeout : UInt32
+    property dwGatherDigitsMaxTimeout : UInt32
+    property dwMedCtlDigitMaxListSize : UInt32
+    property dwMedCtlMediaMaxListSize : UInt32
+    property dwMedCtlToneMaxListSize : UInt32
+    property dwMedCtlCallStateMaxListSize : UInt32
+    property dwDevCapFlags : UInt32
+    property dwMaxNumActiveCalls : UInt32
+    property dwAnswerMode : UInt32
+    property dwRingModes : UInt32
+    property dwLineStates : UInt32
+    property dwUUIAcceptSize : UInt32
+    property dwUUIAnswerSize : UInt32
+    property dwUUIMakeCallSize : UInt32
+    property dwUUIDropSize : UInt32
+    property dwUUISendUserUserInfoSize : UInt32
+    property dwUUICallInfoSize : UInt32
+    property min_dial_params : Win32cr::Devices::Tapi::LINEDIALPARAMS
+    property max_dial_params : Win32cr::Devices::Tapi::LINEDIALPARAMS
+    property default_dial_params : Win32cr::Devices::Tapi::LINEDIALPARAMS
+    property dwNumTerminals : UInt32
+    property dwTerminalCapsSize : UInt32
+    property dwTerminalCapsOffset : UInt32
+    property dwTerminalTextEntrySize : UInt32
+    property dwTerminalTextSize : UInt32
+    property dwTerminalTextOffset : UInt32
+    property dwDevSpecificSize : UInt32
+    property dwDevSpecificOffset : UInt32
+    property dwLineFeatures : UInt32
+    property dwSettableDevStatus : UInt32
+    property dwDeviceClassesSize : UInt32
+    property dwDeviceClassesOffset : UInt32
+    property permanent_line_guid : LibC::GUID
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @dwProviderInfoSize : UInt32, @dwProviderInfoOffset : UInt32, @dwSwitchInfoSize : UInt32, @dwSwitchInfoOffset : UInt32, @dwPermanentLineID : UInt32, @dwLineNameSize : UInt32, @dwLineNameOffset : UInt32, @dwStringFormat : UInt32, @dwAddressModes : UInt32, @dwNumAddresses : UInt32, @dwBearerModes : UInt32, @dwMaxRate : UInt32, @dwMediaModes : UInt32, @dwGenerateToneModes : UInt32, @dwGenerateToneMaxNumFreq : UInt32, @dwGenerateDigitModes : UInt32, @dwMonitorToneMaxNumFreq : UInt32, @dwMonitorToneMaxNumEntries : UInt32, @dwMonitorDigitModes : UInt32, @dwGatherDigitsMinTimeout : UInt32, @dwGatherDigitsMaxTimeout : UInt32, @dwMedCtlDigitMaxListSize : UInt32, @dwMedCtlMediaMaxListSize : UInt32, @dwMedCtlToneMaxListSize : UInt32, @dwMedCtlCallStateMaxListSize : UInt32, @dwDevCapFlags : UInt32, @dwMaxNumActiveCalls : UInt32, @dwAnswerMode : UInt32, @dwRingModes : UInt32, @dwLineStates : UInt32, @dwUUIAcceptSize : UInt32, @dwUUIAnswerSize : UInt32, @dwUUIMakeCallSize : UInt32, @dwUUIDropSize : UInt32, @dwUUISendUserUserInfoSize : UInt32, @dwUUICallInfoSize : UInt32, @min_dial_params : Win32cr::Devices::Tapi::LINEDIALPARAMS, @max_dial_params : Win32cr::Devices::Tapi::LINEDIALPARAMS, @default_dial_params : Win32cr::Devices::Tapi::LINEDIALPARAMS, @dwNumTerminals : UInt32, @dwTerminalCapsSize : UInt32, @dwTerminalCapsOffset : UInt32, @dwTerminalTextEntrySize : UInt32, @dwTerminalTextSize : UInt32, @dwTerminalTextOffset : UInt32, @dwDevSpecificSize : UInt32, @dwDevSpecificOffset : UInt32, @dwLineFeatures : UInt32, @dwSettableDevStatus : UInt32, @dwDeviceClassesSize : UInt32, @dwDeviceClassesOffset : UInt32, @permanent_line_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record LINEDEVSTATUS,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    dwNumOpens : UInt32,
-    dwOpenMediaModes : UInt32,
-    dwNumActiveCalls : UInt32,
-    dwNumOnHoldCalls : UInt32,
-    dwNumOnHoldPendCalls : UInt32,
-    dwLineFeatures : UInt32,
-    dwNumCallCompletions : UInt32,
-    dwRingMode : UInt32,
-    dwSignalLevel : UInt32,
-    dwBatteryLevel : UInt32,
-    dwRoamMode : UInt32,
-    dwDevStatusFlags : UInt32,
-    dwTerminalModesSize : UInt32,
-    dwTerminalModesOffset : UInt32,
-    dwDevSpecificSize : UInt32,
-    dwDevSpecificOffset : UInt32,
-    dwAvailableMediaModes : UInt32,
-    dwAppInfoSize : UInt32,
-    dwAppInfoOffset : UInt32
+  struct LINEDEVSTATUS
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property dwNumOpens : UInt32
+    property dwOpenMediaModes : UInt32
+    property dwNumActiveCalls : UInt32
+    property dwNumOnHoldCalls : UInt32
+    property dwNumOnHoldPendCalls : UInt32
+    property dwLineFeatures : UInt32
+    property dwNumCallCompletions : UInt32
+    property dwRingMode : UInt32
+    property dwSignalLevel : UInt32
+    property dwBatteryLevel : UInt32
+    property dwRoamMode : UInt32
+    property dwDevStatusFlags : UInt32
+    property dwTerminalModesSize : UInt32
+    property dwTerminalModesOffset : UInt32
+    property dwDevSpecificSize : UInt32
+    property dwDevSpecificOffset : UInt32
+    property dwAvailableMediaModes : UInt32
+    property dwAppInfoSize : UInt32
+    property dwAppInfoOffset : UInt32
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @dwNumOpens : UInt32, @dwOpenMediaModes : UInt32, @dwNumActiveCalls : UInt32, @dwNumOnHoldCalls : UInt32, @dwNumOnHoldPendCalls : UInt32, @dwLineFeatures : UInt32, @dwNumCallCompletions : UInt32, @dwRingMode : UInt32, @dwSignalLevel : UInt32, @dwBatteryLevel : UInt32, @dwRoamMode : UInt32, @dwDevStatusFlags : UInt32, @dwTerminalModesSize : UInt32, @dwTerminalModesOffset : UInt32, @dwDevSpecificSize : UInt32, @dwDevSpecificOffset : UInt32, @dwAvailableMediaModes : UInt32, @dwAppInfoSize : UInt32, @dwAppInfoOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEEXTENSIONID,
-    dwExtensionID0 : UInt32,
-    dwExtensionID1 : UInt32,
-    dwExtensionID2 : UInt32,
-    dwExtensionID3 : UInt32
+  struct LINEEXTENSIONID
+    property dwExtensionID0 : UInt32
+    property dwExtensionID1 : UInt32
+    property dwExtensionID2 : UInt32
+    property dwExtensionID3 : UInt32
+    def initialize(@dwExtensionID0 : UInt32, @dwExtensionID1 : UInt32, @dwExtensionID2 : UInt32, @dwExtensionID3 : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEFORWARD,
-    dwForwardMode : UInt32,
-    dwCallerAddressSize : UInt32,
-    dwCallerAddressOffset : UInt32,
-    dwDestCountryCode : UInt32,
-    dwDestAddressSize : UInt32,
-    dwDestAddressOffset : UInt32
+  struct LINEFORWARD
+    property dwForwardMode : UInt32
+    property dwCallerAddressSize : UInt32
+    property dwCallerAddressOffset : UInt32
+    property dwDestCountryCode : UInt32
+    property dwDestAddressSize : UInt32
+    property dwDestAddressOffset : UInt32
+    def initialize(@dwForwardMode : UInt32, @dwCallerAddressSize : UInt32, @dwCallerAddressOffset : UInt32, @dwDestCountryCode : UInt32, @dwDestAddressSize : UInt32, @dwDestAddressOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEFORWARDLIST,
-    dwTotalSize : UInt32,
-    dwNumEntries : UInt32,
-    forward_list : Win32cr::Devices::Tapi::LINEFORWARD*
+  struct LINEFORWARDLIST
+    property dwTotalSize : UInt32
+    property dwNumEntries : UInt32
+    property forward_list : Win32cr::Devices::Tapi::LINEFORWARD*
+    def initialize(@dwTotalSize : UInt32, @dwNumEntries : UInt32, @forward_list : Win32cr::Devices::Tapi::LINEFORWARD*)
+    end
+  end
 
   @[Extern]
-  record LINEGENERATETONE,
-    dwFrequency : UInt32,
-    dwCadenceOn : UInt32,
-    dwCadenceOff : UInt32,
-    dwVolume : UInt32
+  struct LINEGENERATETONE
+    property dwFrequency : UInt32
+    property dwCadenceOn : UInt32
+    property dwCadenceOff : UInt32
+    property dwVolume : UInt32
+    def initialize(@dwFrequency : UInt32, @dwCadenceOn : UInt32, @dwCadenceOff : UInt32, @dwVolume : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEINITIALIZEEXPARAMS,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    dwOptions : UInt32,
-    handles : Handles_e__Union_,
-    dwCompletionKey : UInt32 do
+  struct LINEINITIALIZEEXPARAMS
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property dwOptions : UInt32
+    property handles : Handles_e__Union_
+    property dwCompletionKey : UInt32
 
     # Nested Type Handles_e__Union_
     @[Extern(union: true)]
-    record Handles_e__Union_,
-      hEvent : Win32cr::Foundation::HANDLE,
-      hCompletionPort : Win32cr::Foundation::HANDLE
+    struct Handles_e__Union_
+    property hEvent : Win32cr::Foundation::HANDLE
+    property hCompletionPort : Win32cr::Foundation::HANDLE
+    def initialize(@hEvent : Win32cr::Foundation::HANDLE, @hCompletionPort : Win32cr::Foundation::HANDLE)
+    end
+    end
 
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @dwOptions : UInt32, @handles : Handles_e__Union_, @dwCompletionKey : UInt32)
+    end
   end
 
   @[Extern]
-  record LINELOCATIONENTRY,
-    dwPermanentLocationID : UInt32,
-    dwLocationNameSize : UInt32,
-    dwLocationNameOffset : UInt32,
-    dwCountryCode : UInt32,
-    dwCityCodeSize : UInt32,
-    dwCityCodeOffset : UInt32,
-    dwPreferredCardID : UInt32,
-    dwLocalAccessCodeSize : UInt32,
-    dwLocalAccessCodeOffset : UInt32,
-    dwLongDistanceAccessCodeSize : UInt32,
-    dwLongDistanceAccessCodeOffset : UInt32,
-    dwTollPrefixListSize : UInt32,
-    dwTollPrefixListOffset : UInt32,
-    dwCountryID : UInt32,
-    dwOptions : UInt32,
-    dwCancelCallWaitingSize : UInt32,
-    dwCancelCallWaitingOffset : UInt32
+  struct LINELOCATIONENTRY
+    property dwPermanentLocationID : UInt32
+    property dwLocationNameSize : UInt32
+    property dwLocationNameOffset : UInt32
+    property dwCountryCode : UInt32
+    property dwCityCodeSize : UInt32
+    property dwCityCodeOffset : UInt32
+    property dwPreferredCardID : UInt32
+    property dwLocalAccessCodeSize : UInt32
+    property dwLocalAccessCodeOffset : UInt32
+    property dwLongDistanceAccessCodeSize : UInt32
+    property dwLongDistanceAccessCodeOffset : UInt32
+    property dwTollPrefixListSize : UInt32
+    property dwTollPrefixListOffset : UInt32
+    property dwCountryID : UInt32
+    property dwOptions : UInt32
+    property dwCancelCallWaitingSize : UInt32
+    property dwCancelCallWaitingOffset : UInt32
+    def initialize(@dwPermanentLocationID : UInt32, @dwLocationNameSize : UInt32, @dwLocationNameOffset : UInt32, @dwCountryCode : UInt32, @dwCityCodeSize : UInt32, @dwCityCodeOffset : UInt32, @dwPreferredCardID : UInt32, @dwLocalAccessCodeSize : UInt32, @dwLocalAccessCodeOffset : UInt32, @dwLongDistanceAccessCodeSize : UInt32, @dwLongDistanceAccessCodeOffset : UInt32, @dwTollPrefixListSize : UInt32, @dwTollPrefixListOffset : UInt32, @dwCountryID : UInt32, @dwOptions : UInt32, @dwCancelCallWaitingSize : UInt32, @dwCancelCallWaitingOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEMEDIACONTROLCALLSTATE,
-    dwCallStates : UInt32,
-    dwMediaControl : UInt32
+  struct LINEMEDIACONTROLCALLSTATE
+    property dwCallStates : UInt32
+    property dwMediaControl : UInt32
+    def initialize(@dwCallStates : UInt32, @dwMediaControl : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEMEDIACONTROLDIGIT,
-    dwDigit : UInt32,
-    dwDigitModes : UInt32,
-    dwMediaControl : UInt32
+  struct LINEMEDIACONTROLDIGIT
+    property dwDigit : UInt32
+    property dwDigitModes : UInt32
+    property dwMediaControl : UInt32
+    def initialize(@dwDigit : UInt32, @dwDigitModes : UInt32, @dwMediaControl : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEMEDIACONTROLMEDIA,
-    dwMediaModes : UInt32,
-    dwDuration : UInt32,
-    dwMediaControl : UInt32
+  struct LINEMEDIACONTROLMEDIA
+    property dwMediaModes : UInt32
+    property dwDuration : UInt32
+    property dwMediaControl : UInt32
+    def initialize(@dwMediaModes : UInt32, @dwDuration : UInt32, @dwMediaControl : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEMEDIACONTROLTONE,
-    dwAppSpecific : UInt32,
-    dwDuration : UInt32,
-    dwFrequency1 : UInt32,
-    dwFrequency2 : UInt32,
-    dwFrequency3 : UInt32,
-    dwMediaControl : UInt32
+  struct LINEMEDIACONTROLTONE
+    property dwAppSpecific : UInt32
+    property dwDuration : UInt32
+    property dwFrequency1 : UInt32
+    property dwFrequency2 : UInt32
+    property dwFrequency3 : UInt32
+    property dwMediaControl : UInt32
+    def initialize(@dwAppSpecific : UInt32, @dwDuration : UInt32, @dwFrequency1 : UInt32, @dwFrequency2 : UInt32, @dwFrequency3 : UInt32, @dwMediaControl : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEMESSAGE,
-    hDevice : UInt32,
-    dwMessageID : UInt32,
-    dwCallbackInstance : LibC::UIntPtrT,
-    dwParam1 : LibC::UIntPtrT,
-    dwParam2 : LibC::UIntPtrT,
-    dwParam3 : LibC::UIntPtrT
+  struct LINEMESSAGE
+    property hDevice : UInt32
+    property dwMessageID : UInt32
+    property dwCallbackInstance : LibC::UIntPtrT
+    property dwParam1 : LibC::UIntPtrT
+    property dwParam2 : LibC::UIntPtrT
+    property dwParam3 : LibC::UIntPtrT
+    def initialize(@hDevice : UInt32, @dwMessageID : UInt32, @dwCallbackInstance : LibC::UIntPtrT, @dwParam1 : LibC::UIntPtrT, @dwParam2 : LibC::UIntPtrT, @dwParam3 : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record LINEMONITORTONE,
-    dwAppSpecific : UInt32,
-    dwDuration : UInt32,
-    dwFrequency1 : UInt32,
-    dwFrequency2 : UInt32,
-    dwFrequency3 : UInt32
+  struct LINEMONITORTONE
+    property dwAppSpecific : UInt32
+    property dwDuration : UInt32
+    property dwFrequency1 : UInt32
+    property dwFrequency2 : UInt32
+    property dwFrequency3 : UInt32
+    def initialize(@dwAppSpecific : UInt32, @dwDuration : UInt32, @dwFrequency1 : UInt32, @dwFrequency2 : UInt32, @dwFrequency3 : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEPROVIDERENTRY,
-    dwPermanentProviderID : UInt32,
-    dwProviderFilenameSize : UInt32,
-    dwProviderFilenameOffset : UInt32
+  struct LINEPROVIDERENTRY
+    property dwPermanentProviderID : UInt32
+    property dwProviderFilenameSize : UInt32
+    property dwProviderFilenameOffset : UInt32
+    def initialize(@dwPermanentProviderID : UInt32, @dwProviderFilenameSize : UInt32, @dwProviderFilenameOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEPROVIDERLIST,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    dwNumProviders : UInt32,
-    dwProviderListSize : UInt32,
-    dwProviderListOffset : UInt32
+  struct LINEPROVIDERLIST
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property dwNumProviders : UInt32
+    property dwProviderListSize : UInt32
+    property dwProviderListOffset : UInt32
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @dwNumProviders : UInt32, @dwProviderListSize : UInt32, @dwProviderListOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINEPROXYREQUEST,
-    dwSize : UInt32,
-    dwClientMachineNameSize : UInt32,
-    dwClientMachineNameOffset : UInt32,
-    dwClientUserNameSize : UInt32,
-    dwClientUserNameOffset : UInt32,
-    dwClientAppAPIVersion : UInt32,
-    dwRequestType : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct LINEPROXYREQUEST
+    property dwSize : UInt32
+    property dwClientMachineNameSize : UInt32
+    property dwClientMachineNameOffset : UInt32
+    property dwClientUserNameSize : UInt32
+    property dwClientUserNameOffset : UInt32
+    property dwClientAppAPIVersion : UInt32
+    property dwRequestType : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      set_agent_group : SetAgentGroup_e__Struct_,
-      set_agent_state : SetAgentState_e__Struct_,
-      set_agent_activity : SetAgentActivity_e__Struct_,
-      get_agent_caps : GetAgentCaps_e__Struct_,
-      get_agent_status : GetAgentStatus_e__Struct_,
-      agent_specific : AgentSpecific_e__Struct_,
-      get_agent_activity_list : GetAgentActivityList_e__Struct_,
-      get_agent_group_list : GetAgentGroupList_e__Struct_,
-      create_agent : CreateAgent_e__Struct_,
-      set_agent_state_ex : SetAgentStateEx_e__Struct_,
-      set_agent_measurement_period : SetAgentMeasurementPeriod_e__Struct_,
-      get_agent_info : GetAgentInfo_e__Struct_,
-      create_agent_session : CreateAgentSession_e__Struct_,
-      get_agent_session_list : GetAgentSessionList_e__Struct_,
-      get_agent_session_info : GetAgentSessionInfo_e__Struct_,
-      set_agent_session_state : SetAgentSessionState_e__Struct_,
-      get_queue_list : GetQueueList_e__Struct_,
-      set_queue_measurement_period : SetQueueMeasurementPeriod_e__Struct_,
-      get_queue_info : GetQueueInfo_e__Struct_,
-      get_group_list : GetGroupList_e__Struct_ do
+    struct Anonymous_e__Union_
+    property set_agent_group : SetAgentGroup_e__Struct_
+    property set_agent_state : SetAgentState_e__Struct_
+    property set_agent_activity : SetAgentActivity_e__Struct_
+    property get_agent_caps : GetAgentCaps_e__Struct_
+    property get_agent_status : GetAgentStatus_e__Struct_
+    property agent_specific : AgentSpecific_e__Struct_
+    property get_agent_activity_list : GetAgentActivityList_e__Struct_
+    property get_agent_group_list : GetAgentGroupList_e__Struct_
+    property create_agent : CreateAgent_e__Struct_
+    property set_agent_state_ex : SetAgentStateEx_e__Struct_
+    property set_agent_measurement_period : SetAgentMeasurementPeriod_e__Struct_
+    property get_agent_info : GetAgentInfo_e__Struct_
+    property create_agent_session : CreateAgentSession_e__Struct_
+    property get_agent_session_list : GetAgentSessionList_e__Struct_
+    property get_agent_session_info : GetAgentSessionInfo_e__Struct_
+    property set_agent_session_state : SetAgentSessionState_e__Struct_
+    property get_queue_list : GetQueueList_e__Struct_
+    property set_queue_measurement_period : SetQueueMeasurementPeriod_e__Struct_
+    property get_queue_info : GetQueueInfo_e__Struct_
+    property get_group_list : GetGroupList_e__Struct_
 
       # Nested Type GetQueueInfo_e__Struct_
       @[Extern]
-      record GetQueueInfo_e__Struct_,
-        dwQueueID : UInt32,
-        queue_info : Win32cr::Devices::Tapi::LINEQUEUEINFO
+      struct GetQueueInfo_e__Struct_
+    property dwQueueID : UInt32
+    property queue_info : Win32cr::Devices::Tapi::LINEQUEUEINFO
+    def initialize(@dwQueueID : UInt32, @queue_info : Win32cr::Devices::Tapi::LINEQUEUEINFO)
+    end
+      end
 
 
       # Nested Type GetQueueList_e__Struct_
       @[Extern]
-      record GetQueueList_e__Struct_,
-        group_id : LibC::GUID,
-        queue_list : Win32cr::Devices::Tapi::LINEQUEUELIST
+      struct GetQueueList_e__Struct_
+    property group_id : LibC::GUID
+    property queue_list : Win32cr::Devices::Tapi::LINEQUEUELIST
+    def initialize(@group_id : LibC::GUID, @queue_list : Win32cr::Devices::Tapi::LINEQUEUELIST)
+    end
+      end
 
 
       # Nested Type GetAgentSessionInfo_e__Struct_
       @[Extern]
-      record GetAgentSessionInfo_e__Struct_,
-        hAgentSession : UInt32,
-        session_info : Win32cr::Devices::Tapi::LINEAGENTSESSIONINFO
+      struct GetAgentSessionInfo_e__Struct_
+    property hAgentSession : UInt32
+    property session_info : Win32cr::Devices::Tapi::LINEAGENTSESSIONINFO
+    def initialize(@hAgentSession : UInt32, @session_info : Win32cr::Devices::Tapi::LINEAGENTSESSIONINFO)
+    end
+      end
 
 
       # Nested Type CreateAgentSession_e__Struct_
       @[Extern]
-      record CreateAgentSession_e__Struct_,
-        hAgentSession : UInt32,
-        dwAgentPINSize : UInt32,
-        dwAgentPINOffset : UInt32,
-        hAgent : UInt32,
-        group_id : LibC::GUID,
-        dwWorkingAddressID : UInt32
+      struct CreateAgentSession_e__Struct_
+    property hAgentSession : UInt32
+    property dwAgentPINSize : UInt32
+    property dwAgentPINOffset : UInt32
+    property hAgent : UInt32
+    property group_id : LibC::GUID
+    property dwWorkingAddressID : UInt32
+    def initialize(@hAgentSession : UInt32, @dwAgentPINSize : UInt32, @dwAgentPINOffset : UInt32, @hAgent : UInt32, @group_id : LibC::GUID, @dwWorkingAddressID : UInt32)
+    end
+      end
 
 
       # Nested Type SetAgentMeasurementPeriod_e__Struct_
       @[Extern]
-      record SetAgentMeasurementPeriod_e__Struct_,
-        hAgent : UInt32,
-        dwMeasurementPeriod : UInt32
+      struct SetAgentMeasurementPeriod_e__Struct_
+    property hAgent : UInt32
+    property dwMeasurementPeriod : UInt32
+    def initialize(@hAgent : UInt32, @dwMeasurementPeriod : UInt32)
+    end
+      end
 
 
       # Nested Type CreateAgent_e__Struct_
       @[Extern]
-      record CreateAgent_e__Struct_,
-        hAgent : UInt32,
-        dwAgentIDSize : UInt32,
-        dwAgentIDOffset : UInt32,
-        dwAgentPINSize : UInt32,
-        dwAgentPINOffset : UInt32
+      struct CreateAgent_e__Struct_
+    property hAgent : UInt32
+    property dwAgentIDSize : UInt32
+    property dwAgentIDOffset : UInt32
+    property dwAgentPINSize : UInt32
+    property dwAgentPINOffset : UInt32
+    def initialize(@hAgent : UInt32, @dwAgentIDSize : UInt32, @dwAgentIDOffset : UInt32, @dwAgentPINSize : UInt32, @dwAgentPINOffset : UInt32)
+    end
+      end
 
 
       # Nested Type GetAgentActivityList_e__Struct_
       @[Extern]
-      record GetAgentActivityList_e__Struct_,
-        dwAddressID : UInt32,
-        activity_list : Win32cr::Devices::Tapi::LINEAGENTACTIVITYLIST
+      struct GetAgentActivityList_e__Struct_
+    property dwAddressID : UInt32
+    property activity_list : Win32cr::Devices::Tapi::LINEAGENTACTIVITYLIST
+    def initialize(@dwAddressID : UInt32, @activity_list : Win32cr::Devices::Tapi::LINEAGENTACTIVITYLIST)
+    end
+      end
 
 
       # Nested Type GetAgentStatus_e__Struct_
       @[Extern]
-      record GetAgentStatus_e__Struct_,
-        dwAddressID : UInt32,
-        agent_status : Win32cr::Devices::Tapi::LINEAGENTSTATUS
+      struct GetAgentStatus_e__Struct_
+    property dwAddressID : UInt32
+    property agent_status : Win32cr::Devices::Tapi::LINEAGENTSTATUS
+    def initialize(@dwAddressID : UInt32, @agent_status : Win32cr::Devices::Tapi::LINEAGENTSTATUS)
+    end
+      end
 
 
       # Nested Type SetAgentActivity_e__Struct_
       @[Extern]
-      record SetAgentActivity_e__Struct_,
-        dwAddressID : UInt32,
-        dwActivityID : UInt32
+      struct SetAgentActivity_e__Struct_
+    property dwAddressID : UInt32
+    property dwActivityID : UInt32
+    def initialize(@dwAddressID : UInt32, @dwActivityID : UInt32)
+    end
+      end
 
 
       # Nested Type SetAgentGroup_e__Struct_
       @[Extern]
-      record SetAgentGroup_e__Struct_,
-        dwAddressID : UInt32,
-        group_list : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST
+      struct SetAgentGroup_e__Struct_
+    property dwAddressID : UInt32
+    property group_list : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST
+    def initialize(@dwAddressID : UInt32, @group_list : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST)
+    end
+      end
 
 
       # Nested Type SetQueueMeasurementPeriod_e__Struct_
       @[Extern]
-      record SetQueueMeasurementPeriod_e__Struct_,
-        dwQueueID : UInt32,
-        dwMeasurementPeriod : UInt32
+      struct SetQueueMeasurementPeriod_e__Struct_
+    property dwQueueID : UInt32
+    property dwMeasurementPeriod : UInt32
+    def initialize(@dwQueueID : UInt32, @dwMeasurementPeriod : UInt32)
+    end
+      end
 
 
       # Nested Type GetAgentSessionList_e__Struct_
       @[Extern]
-      record GetAgentSessionList_e__Struct_,
-        hAgent : UInt32,
-        session_list : Win32cr::Devices::Tapi::LINEAGENTSESSIONLIST
+      struct GetAgentSessionList_e__Struct_
+    property hAgent : UInt32
+    property session_list : Win32cr::Devices::Tapi::LINEAGENTSESSIONLIST
+    def initialize(@hAgent : UInt32, @session_list : Win32cr::Devices::Tapi::LINEAGENTSESSIONLIST)
+    end
+      end
 
 
       # Nested Type SetAgentStateEx_e__Struct_
       @[Extern]
-      record SetAgentStateEx_e__Struct_,
-        hAgent : UInt32,
-        dwAgentState : UInt32,
-        dwNextAgentState : UInt32
+      struct SetAgentStateEx_e__Struct_
+    property hAgent : UInt32
+    property dwAgentState : UInt32
+    property dwNextAgentState : UInt32
+    def initialize(@hAgent : UInt32, @dwAgentState : UInt32, @dwNextAgentState : UInt32)
+    end
+      end
 
 
       # Nested Type AgentSpecific_e__Struct_
       @[Extern]
-      record AgentSpecific_e__Struct_,
-        dwAddressID : UInt32,
-        dwAgentExtensionIDIndex : UInt32,
-        dwSize : UInt32,
-        params : UInt8*
+      struct AgentSpecific_e__Struct_
+    property dwAddressID : UInt32
+    property dwAgentExtensionIDIndex : UInt32
+    property dwSize : UInt32
+    property params : UInt8*
+    def initialize(@dwAddressID : UInt32, @dwAgentExtensionIDIndex : UInt32, @dwSize : UInt32, @params : UInt8*)
+    end
+      end
 
 
       # Nested Type SetAgentState_e__Struct_
       @[Extern]
-      record SetAgentState_e__Struct_,
-        dwAddressID : UInt32,
-        dwAgentState : UInt32,
-        dwNextAgentState : UInt32
+      struct SetAgentState_e__Struct_
+    property dwAddressID : UInt32
+    property dwAgentState : UInt32
+    property dwNextAgentState : UInt32
+    def initialize(@dwAddressID : UInt32, @dwAgentState : UInt32, @dwNextAgentState : UInt32)
+    end
+      end
 
 
       # Nested Type SetAgentSessionState_e__Struct_
       @[Extern]
-      record SetAgentSessionState_e__Struct_,
-        hAgentSession : UInt32,
-        dwAgentSessionState : UInt32,
-        dwNextAgentSessionState : UInt32
+      struct SetAgentSessionState_e__Struct_
+    property hAgentSession : UInt32
+    property dwAgentSessionState : UInt32
+    property dwNextAgentSessionState : UInt32
+    def initialize(@hAgentSession : UInt32, @dwAgentSessionState : UInt32, @dwNextAgentSessionState : UInt32)
+    end
+      end
 
 
       # Nested Type GetAgentGroupList_e__Struct_
       @[Extern]
-      record GetAgentGroupList_e__Struct_,
-        dwAddressID : UInt32,
-        group_list : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST
+      struct GetAgentGroupList_e__Struct_
+    property dwAddressID : UInt32
+    property group_list : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST
+    def initialize(@dwAddressID : UInt32, @group_list : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST)
+    end
+      end
 
 
       # Nested Type GetGroupList_e__Struct_
       @[Extern]
-      record GetGroupList_e__Struct_,
-        group_list : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST
+      struct GetGroupList_e__Struct_
+    property group_list : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST
+    def initialize(@group_list : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST)
+    end
+      end
 
 
       # Nested Type GetAgentCaps_e__Struct_
       @[Extern]
-      record GetAgentCaps_e__Struct_,
-        dwAddressID : UInt32,
-        agent_caps : Win32cr::Devices::Tapi::LINEAGENTCAPS
+      struct GetAgentCaps_e__Struct_
+    property dwAddressID : UInt32
+    property agent_caps : Win32cr::Devices::Tapi::LINEAGENTCAPS
+    def initialize(@dwAddressID : UInt32, @agent_caps : Win32cr::Devices::Tapi::LINEAGENTCAPS)
+    end
+      end
 
 
       # Nested Type GetAgentInfo_e__Struct_
       @[Extern]
-      record GetAgentInfo_e__Struct_,
-        hAgent : UInt32,
-        agent_info : Win32cr::Devices::Tapi::LINEAGENTINFO
+      struct GetAgentInfo_e__Struct_
+    property hAgent : UInt32
+    property agent_info : Win32cr::Devices::Tapi::LINEAGENTINFO
+    def initialize(@hAgent : UInt32, @agent_info : Win32cr::Devices::Tapi::LINEAGENTINFO)
+    end
+      end
 
+    def initialize(@set_agent_group : SetAgentGroup_e__Struct_, @set_agent_state : SetAgentState_e__Struct_, @set_agent_activity : SetAgentActivity_e__Struct_, @get_agent_caps : GetAgentCaps_e__Struct_, @get_agent_status : GetAgentStatus_e__Struct_, @agent_specific : AgentSpecific_e__Struct_, @get_agent_activity_list : GetAgentActivityList_e__Struct_, @get_agent_group_list : GetAgentGroupList_e__Struct_, @create_agent : CreateAgent_e__Struct_, @set_agent_state_ex : SetAgentStateEx_e__Struct_, @set_agent_measurement_period : SetAgentMeasurementPeriod_e__Struct_, @get_agent_info : GetAgentInfo_e__Struct_, @create_agent_session : CreateAgentSession_e__Struct_, @get_agent_session_list : GetAgentSessionList_e__Struct_, @get_agent_session_info : GetAgentSessionInfo_e__Struct_, @set_agent_session_state : SetAgentSessionState_e__Struct_, @get_queue_list : GetQueueList_e__Struct_, @set_queue_measurement_period : SetQueueMeasurementPeriod_e__Struct_, @get_queue_info : GetQueueInfo_e__Struct_, @get_group_list : GetGroupList_e__Struct_)
+    end
     end
 
+    def initialize(@dwSize : UInt32, @dwClientMachineNameSize : UInt32, @dwClientMachineNameOffset : UInt32, @dwClientUserNameSize : UInt32, @dwClientUserNameOffset : UInt32, @dwClientAppAPIVersion : UInt32, @dwRequestType : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record LINEREQMAKECALL,
-    szDestAddress : Win32cr::Foundation::CHAR[80],
-    szAppName : Win32cr::Foundation::CHAR[40],
-    szCalledParty : Win32cr::Foundation::CHAR[40],
-    szComment : Win32cr::Foundation::CHAR[80]
+  struct LINEREQMAKECALL
+    property szDestAddress : Win32cr::Foundation::CHAR[80]
+    property szAppName : Win32cr::Foundation::CHAR[40]
+    property szCalledParty : Win32cr::Foundation::CHAR[40]
+    property szComment : Win32cr::Foundation::CHAR[80]
+    def initialize(@szDestAddress : Win32cr::Foundation::CHAR[80], @szAppName : Win32cr::Foundation::CHAR[40], @szCalledParty : Win32cr::Foundation::CHAR[40], @szComment : Win32cr::Foundation::CHAR[80])
+    end
+  end
 
   @[Extern]
-  record Linereqmakecallw_tag,
-    szDestAddress : UInt16[80],
-    szAppName : UInt16[40],
-    szCalledParty : UInt16[40],
-    szComment : UInt16[80]
+  struct Linereqmakecallw_tag
+    property szDestAddress : UInt16[80]
+    property szAppName : UInt16[40]
+    property szCalledParty : UInt16[40]
+    property szComment : UInt16[80]
+    def initialize(@szDestAddress : UInt16[80], @szAppName : UInt16[40], @szCalledParty : UInt16[40], @szComment : UInt16[80])
+    end
+  end
 
   @[Extern]
-  record LINEREQMEDIACALL,
-    hWnd : Win32cr::Foundation::HWND,
-    wRequestID : Win32cr::Foundation::WPARAM,
-    szDeviceClass : Win32cr::Foundation::CHAR[40],
-    ucDeviceID : UInt8[40],
-    dwSize : UInt32,
-    dwSecure : UInt32,
-    szDestAddress : Win32cr::Foundation::CHAR[80],
-    szAppName : Win32cr::Foundation::CHAR[40],
-    szCalledParty : Win32cr::Foundation::CHAR[40],
-    szComment : Win32cr::Foundation::CHAR[80]
+  struct LINEREQMEDIACALL
+    property hWnd : Win32cr::Foundation::HWND
+    property wRequestID : Win32cr::Foundation::WPARAM
+    property szDeviceClass : Win32cr::Foundation::CHAR[40]
+    property ucDeviceID : UInt8[40]
+    property dwSize : UInt32
+    property dwSecure : UInt32
+    property szDestAddress : Win32cr::Foundation::CHAR[80]
+    property szAppName : Win32cr::Foundation::CHAR[40]
+    property szCalledParty : Win32cr::Foundation::CHAR[40]
+    property szComment : Win32cr::Foundation::CHAR[80]
+    def initialize(@hWnd : Win32cr::Foundation::HWND, @wRequestID : Win32cr::Foundation::WPARAM, @szDeviceClass : Win32cr::Foundation::CHAR[40], @ucDeviceID : UInt8[40], @dwSize : UInt32, @dwSecure : UInt32, @szDestAddress : Win32cr::Foundation::CHAR[80], @szAppName : Win32cr::Foundation::CHAR[40], @szCalledParty : Win32cr::Foundation::CHAR[40], @szComment : Win32cr::Foundation::CHAR[80])
+    end
+  end
 
   @[Extern]
-  record Linereqmediacallw_tag,
-    hWnd : Win32cr::Foundation::HWND,
-    wRequestID : Win32cr::Foundation::WPARAM,
-    szDeviceClass : UInt16[40],
-    ucDeviceID : UInt8[40],
-    dwSize : UInt32,
-    dwSecure : UInt32,
-    szDestAddress : UInt16[80],
-    szAppName : UInt16[40],
-    szCalledParty : UInt16[40],
-    szComment : UInt16[80]
+  struct Linereqmediacallw_tag
+    property hWnd : Win32cr::Foundation::HWND
+    property wRequestID : Win32cr::Foundation::WPARAM
+    property szDeviceClass : UInt16[40]
+    property ucDeviceID : UInt8[40]
+    property dwSize : UInt32
+    property dwSecure : UInt32
+    property szDestAddress : UInt16[80]
+    property szAppName : UInt16[40]
+    property szCalledParty : UInt16[40]
+    property szComment : UInt16[80]
+    def initialize(@hWnd : Win32cr::Foundation::HWND, @wRequestID : Win32cr::Foundation::WPARAM, @szDeviceClass : UInt16[40], @ucDeviceID : UInt8[40], @dwSize : UInt32, @dwSecure : UInt32, @szDestAddress : UInt16[80], @szAppName : UInt16[40], @szCalledParty : UInt16[40], @szComment : UInt16[80])
+    end
+  end
 
   @[Extern]
-  record LINETERMCAPS,
-    dwTermDev : UInt32,
-    dwTermModes : UInt32,
-    dwTermSharing : UInt32
+  struct LINETERMCAPS
+    property dwTermDev : UInt32
+    property dwTermModes : UInt32
+    property dwTermSharing : UInt32
+    def initialize(@dwTermDev : UInt32, @dwTermModes : UInt32, @dwTermSharing : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINETRANSLATECAPS,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    dwNumLocations : UInt32,
-    dwLocationListSize : UInt32,
-    dwLocationListOffset : UInt32,
-    dwCurrentLocationID : UInt32,
-    dwNumCards : UInt32,
-    dwCardListSize : UInt32,
-    dwCardListOffset : UInt32,
-    dwCurrentPreferredCardID : UInt32
+  struct LINETRANSLATECAPS
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property dwNumLocations : UInt32
+    property dwLocationListSize : UInt32
+    property dwLocationListOffset : UInt32
+    property dwCurrentLocationID : UInt32
+    property dwNumCards : UInt32
+    property dwCardListSize : UInt32
+    property dwCardListOffset : UInt32
+    property dwCurrentPreferredCardID : UInt32
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @dwNumLocations : UInt32, @dwLocationListSize : UInt32, @dwLocationListOffset : UInt32, @dwCurrentLocationID : UInt32, @dwNumCards : UInt32, @dwCardListSize : UInt32, @dwCardListOffset : UInt32, @dwCurrentPreferredCardID : UInt32)
+    end
+  end
 
   @[Extern]
-  record LINETRANSLATEOUTPUT,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    dwDialableStringSize : UInt32,
-    dwDialableStringOffset : UInt32,
-    dwDisplayableStringSize : UInt32,
-    dwDisplayableStringOffset : UInt32,
-    dwCurrentCountry : UInt32,
-    dwDestCountry : UInt32,
-    dwTranslateResults : UInt32
+  struct LINETRANSLATEOUTPUT
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property dwDialableStringSize : UInt32
+    property dwDialableStringOffset : UInt32
+    property dwDisplayableStringSize : UInt32
+    property dwDisplayableStringOffset : UInt32
+    property dwCurrentCountry : UInt32
+    property dwDestCountry : UInt32
+    property dwTranslateResults : UInt32
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @dwDialableStringSize : UInt32, @dwDialableStringOffset : UInt32, @dwDisplayableStringSize : UInt32, @dwDisplayableStringOffset : UInt32, @dwCurrentCountry : UInt32, @dwDestCountry : UInt32, @dwTranslateResults : UInt32)
+    end
+  end
 
   @[Extern]
-  record PHONEBUTTONINFO,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    dwButtonMode : UInt32,
-    dwButtonFunction : UInt32,
-    dwButtonTextSize : UInt32,
-    dwButtonTextOffset : UInt32,
-    dwDevSpecificSize : UInt32,
-    dwDevSpecificOffset : UInt32,
-    dwButtonState : UInt32
+  struct PHONEBUTTONINFO
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property dwButtonMode : UInt32
+    property dwButtonFunction : UInt32
+    property dwButtonTextSize : UInt32
+    property dwButtonTextOffset : UInt32
+    property dwDevSpecificSize : UInt32
+    property dwDevSpecificOffset : UInt32
+    property dwButtonState : UInt32
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @dwButtonMode : UInt32, @dwButtonFunction : UInt32, @dwButtonTextSize : UInt32, @dwButtonTextOffset : UInt32, @dwDevSpecificSize : UInt32, @dwDevSpecificOffset : UInt32, @dwButtonState : UInt32)
+    end
+  end
 
   @[Extern]
-  record PHONECAPS,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    dwProviderInfoSize : UInt32,
-    dwProviderInfoOffset : UInt32,
-    dwPhoneInfoSize : UInt32,
-    dwPhoneInfoOffset : UInt32,
-    dwPermanentPhoneID : UInt32,
-    dwPhoneNameSize : UInt32,
-    dwPhoneNameOffset : UInt32,
-    dwStringFormat : UInt32,
-    dwPhoneStates : UInt32,
-    dwHookSwitchDevs : UInt32,
-    dwHandsetHookSwitchModes : UInt32,
-    dwSpeakerHookSwitchModes : UInt32,
-    dwHeadsetHookSwitchModes : UInt32,
-    dwVolumeFlags : UInt32,
-    dwGainFlags : UInt32,
-    dwDisplayNumRows : UInt32,
-    dwDisplayNumColumns : UInt32,
-    dwNumRingModes : UInt32,
-    dwNumButtonLamps : UInt32,
-    dwButtonModesSize : UInt32,
-    dwButtonModesOffset : UInt32,
-    dwButtonFunctionsSize : UInt32,
-    dwButtonFunctionsOffset : UInt32,
-    dwLampModesSize : UInt32,
-    dwLampModesOffset : UInt32,
-    dwNumSetData : UInt32,
-    dwSetDataSize : UInt32,
-    dwSetDataOffset : UInt32,
-    dwNumGetData : UInt32,
-    dwGetDataSize : UInt32,
-    dwGetDataOffset : UInt32,
-    dwDevSpecificSize : UInt32,
-    dwDevSpecificOffset : UInt32,
-    dwDeviceClassesSize : UInt32,
-    dwDeviceClassesOffset : UInt32,
-    dwPhoneFeatures : UInt32,
-    dwSettableHandsetHookSwitchModes : UInt32,
-    dwSettableSpeakerHookSwitchModes : UInt32,
-    dwSettableHeadsetHookSwitchModes : UInt32,
-    dwMonitoredHandsetHookSwitchModes : UInt32,
-    dwMonitoredSpeakerHookSwitchModes : UInt32,
-    dwMonitoredHeadsetHookSwitchModes : UInt32,
-    permanent_phone_guid : LibC::GUID
+  struct PHONECAPS
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property dwProviderInfoSize : UInt32
+    property dwProviderInfoOffset : UInt32
+    property dwPhoneInfoSize : UInt32
+    property dwPhoneInfoOffset : UInt32
+    property dwPermanentPhoneID : UInt32
+    property dwPhoneNameSize : UInt32
+    property dwPhoneNameOffset : UInt32
+    property dwStringFormat : UInt32
+    property dwPhoneStates : UInt32
+    property dwHookSwitchDevs : UInt32
+    property dwHandsetHookSwitchModes : UInt32
+    property dwSpeakerHookSwitchModes : UInt32
+    property dwHeadsetHookSwitchModes : UInt32
+    property dwVolumeFlags : UInt32
+    property dwGainFlags : UInt32
+    property dwDisplayNumRows : UInt32
+    property dwDisplayNumColumns : UInt32
+    property dwNumRingModes : UInt32
+    property dwNumButtonLamps : UInt32
+    property dwButtonModesSize : UInt32
+    property dwButtonModesOffset : UInt32
+    property dwButtonFunctionsSize : UInt32
+    property dwButtonFunctionsOffset : UInt32
+    property dwLampModesSize : UInt32
+    property dwLampModesOffset : UInt32
+    property dwNumSetData : UInt32
+    property dwSetDataSize : UInt32
+    property dwSetDataOffset : UInt32
+    property dwNumGetData : UInt32
+    property dwGetDataSize : UInt32
+    property dwGetDataOffset : UInt32
+    property dwDevSpecificSize : UInt32
+    property dwDevSpecificOffset : UInt32
+    property dwDeviceClassesSize : UInt32
+    property dwDeviceClassesOffset : UInt32
+    property dwPhoneFeatures : UInt32
+    property dwSettableHandsetHookSwitchModes : UInt32
+    property dwSettableSpeakerHookSwitchModes : UInt32
+    property dwSettableHeadsetHookSwitchModes : UInt32
+    property dwMonitoredHandsetHookSwitchModes : UInt32
+    property dwMonitoredSpeakerHookSwitchModes : UInt32
+    property dwMonitoredHeadsetHookSwitchModes : UInt32
+    property permanent_phone_guid : LibC::GUID
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @dwProviderInfoSize : UInt32, @dwProviderInfoOffset : UInt32, @dwPhoneInfoSize : UInt32, @dwPhoneInfoOffset : UInt32, @dwPermanentPhoneID : UInt32, @dwPhoneNameSize : UInt32, @dwPhoneNameOffset : UInt32, @dwStringFormat : UInt32, @dwPhoneStates : UInt32, @dwHookSwitchDevs : UInt32, @dwHandsetHookSwitchModes : UInt32, @dwSpeakerHookSwitchModes : UInt32, @dwHeadsetHookSwitchModes : UInt32, @dwVolumeFlags : UInt32, @dwGainFlags : UInt32, @dwDisplayNumRows : UInt32, @dwDisplayNumColumns : UInt32, @dwNumRingModes : UInt32, @dwNumButtonLamps : UInt32, @dwButtonModesSize : UInt32, @dwButtonModesOffset : UInt32, @dwButtonFunctionsSize : UInt32, @dwButtonFunctionsOffset : UInt32, @dwLampModesSize : UInt32, @dwLampModesOffset : UInt32, @dwNumSetData : UInt32, @dwSetDataSize : UInt32, @dwSetDataOffset : UInt32, @dwNumGetData : UInt32, @dwGetDataSize : UInt32, @dwGetDataOffset : UInt32, @dwDevSpecificSize : UInt32, @dwDevSpecificOffset : UInt32, @dwDeviceClassesSize : UInt32, @dwDeviceClassesOffset : UInt32, @dwPhoneFeatures : UInt32, @dwSettableHandsetHookSwitchModes : UInt32, @dwSettableSpeakerHookSwitchModes : UInt32, @dwSettableHeadsetHookSwitchModes : UInt32, @dwMonitoredHandsetHookSwitchModes : UInt32, @dwMonitoredSpeakerHookSwitchModes : UInt32, @dwMonitoredHeadsetHookSwitchModes : UInt32, @permanent_phone_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record PHONEEXTENSIONID,
-    dwExtensionID0 : UInt32,
-    dwExtensionID1 : UInt32,
-    dwExtensionID2 : UInt32,
-    dwExtensionID3 : UInt32
+  struct PHONEEXTENSIONID
+    property dwExtensionID0 : UInt32
+    property dwExtensionID1 : UInt32
+    property dwExtensionID2 : UInt32
+    property dwExtensionID3 : UInt32
+    def initialize(@dwExtensionID0 : UInt32, @dwExtensionID1 : UInt32, @dwExtensionID2 : UInt32, @dwExtensionID3 : UInt32)
+    end
+  end
 
   @[Extern]
-  record PHONEINITIALIZEEXPARAMS,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    dwOptions : UInt32,
-    handles : Handles_e__Union_,
-    dwCompletionKey : UInt32 do
+  struct PHONEINITIALIZEEXPARAMS
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property dwOptions : UInt32
+    property handles : Handles_e__Union_
+    property dwCompletionKey : UInt32
 
     # Nested Type Handles_e__Union_
     @[Extern(union: true)]
-    record Handles_e__Union_,
-      hEvent : Win32cr::Foundation::HANDLE,
-      hCompletionPort : Win32cr::Foundation::HANDLE
+    struct Handles_e__Union_
+    property hEvent : Win32cr::Foundation::HANDLE
+    property hCompletionPort : Win32cr::Foundation::HANDLE
+    def initialize(@hEvent : Win32cr::Foundation::HANDLE, @hCompletionPort : Win32cr::Foundation::HANDLE)
+    end
+    end
 
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @dwOptions : UInt32, @handles : Handles_e__Union_, @dwCompletionKey : UInt32)
+    end
   end
 
   @[Extern]
-  record PHONEMESSAGE,
-    hDevice : UInt32,
-    dwMessageID : UInt32,
-    dwCallbackInstance : LibC::UIntPtrT,
-    dwParam1 : LibC::UIntPtrT,
-    dwParam2 : LibC::UIntPtrT,
-    dwParam3 : LibC::UIntPtrT
+  struct PHONEMESSAGE
+    property hDevice : UInt32
+    property dwMessageID : UInt32
+    property dwCallbackInstance : LibC::UIntPtrT
+    property dwParam1 : LibC::UIntPtrT
+    property dwParam2 : LibC::UIntPtrT
+    property dwParam3 : LibC::UIntPtrT
+    def initialize(@hDevice : UInt32, @dwMessageID : UInt32, @dwCallbackInstance : LibC::UIntPtrT, @dwParam1 : LibC::UIntPtrT, @dwParam2 : LibC::UIntPtrT, @dwParam3 : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record PHONESTATUS,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    dwStatusFlags : UInt32,
-    dwNumOwners : UInt32,
-    dwNumMonitors : UInt32,
-    dwRingMode : UInt32,
-    dwRingVolume : UInt32,
-    dwHandsetHookSwitchMode : UInt32,
-    dwHandsetVolume : UInt32,
-    dwHandsetGain : UInt32,
-    dwSpeakerHookSwitchMode : UInt32,
-    dwSpeakerVolume : UInt32,
-    dwSpeakerGain : UInt32,
-    dwHeadsetHookSwitchMode : UInt32,
-    dwHeadsetVolume : UInt32,
-    dwHeadsetGain : UInt32,
-    dwDisplaySize : UInt32,
-    dwDisplayOffset : UInt32,
-    dwLampModesSize : UInt32,
-    dwLampModesOffset : UInt32,
-    dwOwnerNameSize : UInt32,
-    dwOwnerNameOffset : UInt32,
-    dwDevSpecificSize : UInt32,
-    dwDevSpecificOffset : UInt32,
-    dwPhoneFeatures : UInt32
+  struct PHONESTATUS
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property dwStatusFlags : UInt32
+    property dwNumOwners : UInt32
+    property dwNumMonitors : UInt32
+    property dwRingMode : UInt32
+    property dwRingVolume : UInt32
+    property dwHandsetHookSwitchMode : UInt32
+    property dwHandsetVolume : UInt32
+    property dwHandsetGain : UInt32
+    property dwSpeakerHookSwitchMode : UInt32
+    property dwSpeakerVolume : UInt32
+    property dwSpeakerGain : UInt32
+    property dwHeadsetHookSwitchMode : UInt32
+    property dwHeadsetVolume : UInt32
+    property dwHeadsetGain : UInt32
+    property dwDisplaySize : UInt32
+    property dwDisplayOffset : UInt32
+    property dwLampModesSize : UInt32
+    property dwLampModesOffset : UInt32
+    property dwOwnerNameSize : UInt32
+    property dwOwnerNameOffset : UInt32
+    property dwDevSpecificSize : UInt32
+    property dwDevSpecificOffset : UInt32
+    property dwPhoneFeatures : UInt32
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @dwStatusFlags : UInt32, @dwNumOwners : UInt32, @dwNumMonitors : UInt32, @dwRingMode : UInt32, @dwRingVolume : UInt32, @dwHandsetHookSwitchMode : UInt32, @dwHandsetVolume : UInt32, @dwHandsetGain : UInt32, @dwSpeakerHookSwitchMode : UInt32, @dwSpeakerVolume : UInt32, @dwSpeakerGain : UInt32, @dwHeadsetHookSwitchMode : UInt32, @dwHeadsetVolume : UInt32, @dwHeadsetGain : UInt32, @dwDisplaySize : UInt32, @dwDisplayOffset : UInt32, @dwLampModesSize : UInt32, @dwLampModesOffset : UInt32, @dwOwnerNameSize : UInt32, @dwOwnerNameOffset : UInt32, @dwDevSpecificSize : UInt32, @dwDevSpecificOffset : UInt32, @dwPhoneFeatures : UInt32)
+    end
+  end
 
   @[Extern]
-  record VARSTRING,
-    dwTotalSize : UInt32,
-    dwNeededSize : UInt32,
-    dwUsedSize : UInt32,
-    dwStringFormat : UInt32,
-    dwStringSize : UInt32,
-    dwStringOffset : UInt32
+  struct VARSTRING
+    property dwTotalSize : UInt32
+    property dwNeededSize : UInt32
+    property dwUsedSize : UInt32
+    property dwStringFormat : UInt32
+    property dwStringSize : UInt32
+    property dwStringOffset : UInt32
+    def initialize(@dwTotalSize : UInt32, @dwNeededSize : UInt32, @dwUsedSize : UInt32, @dwStringFormat : UInt32, @dwStringSize : UInt32, @dwStringOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record HDRVCALL__,
-    unused : Int32
+  struct HDRVCALL__
+    property unused : Int32
+    def initialize(@unused : Int32)
+    end
+  end
 
   @[Extern]
-  record HDRVLINE__,
-    unused : Int32
+  struct HDRVLINE__
+    property unused : Int32
+    def initialize(@unused : Int32)
+    end
+  end
 
   @[Extern]
-  record HDRVPHONE__,
-    unused : Int32
+  struct HDRVPHONE__
+    property unused : Int32
+    def initialize(@unused : Int32)
+    end
+  end
 
   @[Extern]
-  record HDRVMSPLINE__,
-    unused : Int32
+  struct HDRVMSPLINE__
+    property unused : Int32
+    def initialize(@unused : Int32)
+    end
+  end
 
   @[Extern]
-  record HDRVDIALOGINSTANCE__,
-    unused : Int32
+  struct HDRVDIALOGINSTANCE__
+    property unused : Int32
+    def initialize(@unused : Int32)
+    end
+  end
 
   @[Extern]
-  record HTAPICALL__,
-    unused : Int32
+  struct HTAPICALL__
+    property unused : Int32
+    def initialize(@unused : Int32)
+    end
+  end
 
   @[Extern]
-  record HTAPILINE__,
-    unused : Int32
+  struct HTAPILINE__
+    property unused : Int32
+    def initialize(@unused : Int32)
+    end
+  end
 
   @[Extern]
-  record HTAPIPHONE__,
-    unused : Int32
+  struct HTAPIPHONE__
+    property unused : Int32
+    def initialize(@unused : Int32)
+    end
+  end
 
   @[Extern]
-  record HPROVIDER__,
-    unused : Int32
+  struct HPROVIDER__
+    property unused : Int32
+    def initialize(@unused : Int32)
+    end
+  end
 
   @[Extern]
-  record TUISPICREATEDIALOGINSTANCEPARAMS,
-    dwRequestID : UInt32,
-    hdDlgInst : Win32cr::Devices::Tapi::HDRVDIALOGINSTANCE__*,
-    htDlgInst : UInt32,
-    lpszUIDLLName : Win32cr::Foundation::PWSTR,
-    lpParams : Void*,
-    dwSize : UInt32
+  struct TUISPICREATEDIALOGINSTANCEPARAMS
+    property dwRequestID : UInt32
+    property hdDlgInst : Win32cr::Devices::Tapi::HDRVDIALOGINSTANCE__*
+    property htDlgInst : UInt32
+    property lpszUIDLLName : Win32cr::Foundation::PWSTR
+    property lpParams : Void*
+    property dwSize : UInt32
+    def initialize(@dwRequestID : UInt32, @hdDlgInst : Win32cr::Devices::Tapi::HDRVDIALOGINSTANCE__*, @htDlgInst : UInt32, @lpszUIDLLName : Win32cr::Foundation::PWSTR, @lpParams : Void*, @dwSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record TAPI_CUSTOMTONE,
-    dwFrequency : UInt32,
-    dwCadenceOn : UInt32,
-    dwCadenceOff : UInt32,
-    dwVolume : UInt32
+  struct TAPI_CUSTOMTONE
+    property dwFrequency : UInt32
+    property dwCadenceOn : UInt32
+    property dwCadenceOff : UInt32
+    property dwVolume : UInt32
+    def initialize(@dwFrequency : UInt32, @dwCadenceOn : UInt32, @dwCadenceOff : UInt32, @dwVolume : UInt32)
+    end
+  end
 
   @[Extern]
-  record TAPI_DETECTTONE,
-    dwAppSpecific : UInt32,
-    dwDuration : UInt32,
-    dwFrequency1 : UInt32,
-    dwFrequency2 : UInt32,
-    dwFrequency3 : UInt32
+  struct TAPI_DETECTTONE
+    property dwAppSpecific : UInt32
+    property dwDuration : UInt32
+    property dwFrequency1 : UInt32
+    property dwFrequency2 : UInt32
+    property dwFrequency3 : UInt32
+    def initialize(@dwAppSpecific : UInt32, @dwDuration : UInt32, @dwFrequency1 : UInt32, @dwFrequency2 : UInt32, @dwFrequency3 : UInt32)
+    end
+  end
 
   @[Extern]
-  record MSP_EVENT_INFO,
-    dwSize : UInt32,
-    event : Win32cr::Devices::Tapi::MSP_EVENT,
-    hCall : Int32*,
-    anonymous : Anonymous_e__Union_ do
+  struct MSP_EVENT_INFO
+    property dwSize : UInt32
+    property event : Win32cr::Devices::Tapi::MSP_EVENT
+    property hCall : Int32*
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      msp_address_event_info : MSP_ADDRESS_EVENT_INFO_e__Struct_,
-      msp_call_event_info : MSP_CALL_EVENT_INFO_e__Struct_,
-      msp_tsp_data : MSP_TSP_DATA_e__Struct_,
-      msp_private_event_info : MSP_PRIVATE_EVENT_INFO_e__Struct_,
-      msp_file_terminal_event_info : MSP_FILE_TERMINAL_EVENT_INFO_e__Struct_,
-      msp_asr_terminal_event_info : MSP_ASR_TERMINAL_EVENT_INFO_e__Struct_,
-      msp_tts_terminal_event_info : MSP_TTS_TERMINAL_EVENT_INFO_e__Struct_,
-      msp_tone_terminal_event_info : MSP_TONE_TERMINAL_EVENT_INFO_e__Struct_ do
+    struct Anonymous_e__Union_
+    property msp_address_event_info : MSP_ADDRESS_EVENT_INFO_e__Struct_
+    property msp_call_event_info : MSP_CALL_EVENT_INFO_e__Struct_
+    property msp_tsp_data : MSP_TSP_DATA_e__Struct_
+    property msp_private_event_info : MSP_PRIVATE_EVENT_INFO_e__Struct_
+    property msp_file_terminal_event_info : MSP_FILE_TERMINAL_EVENT_INFO_e__Struct_
+    property msp_asr_terminal_event_info : MSP_ASR_TERMINAL_EVENT_INFO_e__Struct_
+    property msp_tts_terminal_event_info : MSP_TTS_TERMINAL_EVENT_INFO_e__Struct_
+    property msp_tone_terminal_event_info : MSP_TONE_TERMINAL_EVENT_INFO_e__Struct_
 
       # Nested Type MSP_TONE_TERMINAL_EVENT_INFO_e__Struct_
       @[Extern]
-      record MSP_TONE_TERMINAL_EVENT_INFO_e__Struct_,
-        pToneTerminal : Void*,
-        hrErrorCode : Win32cr::Foundation::HRESULT
+      struct MSP_TONE_TERMINAL_EVENT_INFO_e__Struct_
+    property pToneTerminal : Void*
+    property hrErrorCode : Win32cr::Foundation::HRESULT
+    def initialize(@pToneTerminal : Void*, @hrErrorCode : Win32cr::Foundation::HRESULT)
+    end
+      end
 
 
       # Nested Type MSP_ASR_TERMINAL_EVENT_INFO_e__Struct_
       @[Extern]
-      record MSP_ASR_TERMINAL_EVENT_INFO_e__Struct_,
-        pASRTerminal : Void*,
-        hrErrorCode : Win32cr::Foundation::HRESULT
+      struct MSP_ASR_TERMINAL_EVENT_INFO_e__Struct_
+    property pASRTerminal : Void*
+    property hrErrorCode : Win32cr::Foundation::HRESULT
+    def initialize(@pASRTerminal : Void*, @hrErrorCode : Win32cr::Foundation::HRESULT)
+    end
+      end
 
 
       # Nested Type MSP_PRIVATE_EVENT_INFO_e__Struct_
       @[Extern]
-      record MSP_PRIVATE_EVENT_INFO_e__Struct_,
-        pEvent : Void*,
-        lEventCode : Int32
+      struct MSP_PRIVATE_EVENT_INFO_e__Struct_
+    property pEvent : Void*
+    property lEventCode : Int32
+    def initialize(@pEvent : Void*, @lEventCode : Int32)
+    end
+      end
 
 
       # Nested Type MSP_CALL_EVENT_INFO_e__Struct_
       @[Extern]
-      record MSP_CALL_EVENT_INFO_e__Struct_,
-        type__ : Win32cr::Devices::Tapi::MSP_CALL_EVENT,
-        cause : Win32cr::Devices::Tapi::MSP_CALL_EVENT_CAUSE,
-        pStream : Void*,
-        pTerminal : Void*,
-        hrError : Win32cr::Foundation::HRESULT
+      struct MSP_CALL_EVENT_INFO_e__Struct_
+    property type__ : Win32cr::Devices::Tapi::MSP_CALL_EVENT
+    property cause : Win32cr::Devices::Tapi::MSP_CALL_EVENT_CAUSE
+    property pStream : Void*
+    property pTerminal : Void*
+    property hrError : Win32cr::Foundation::HRESULT
+    def initialize(@type__ : Win32cr::Devices::Tapi::MSP_CALL_EVENT, @cause : Win32cr::Devices::Tapi::MSP_CALL_EVENT_CAUSE, @pStream : Void*, @pTerminal : Void*, @hrError : Win32cr::Foundation::HRESULT)
+    end
+      end
 
 
       # Nested Type MSP_FILE_TERMINAL_EVENT_INFO_e__Struct_
       @[Extern]
-      record MSP_FILE_TERMINAL_EVENT_INFO_e__Struct_,
-        pParentFileTerminal : Void*,
-        pFileTrack : Void*,
-        terminal_media_state : Win32cr::Devices::Tapi::TERMINAL_MEDIA_STATE,
-        ftecEventCause : Win32cr::Devices::Tapi::FT_STATE_EVENT_CAUSE,
-        hrErrorCode : Win32cr::Foundation::HRESULT
+      struct MSP_FILE_TERMINAL_EVENT_INFO_e__Struct_
+    property pParentFileTerminal : Void*
+    property pFileTrack : Void*
+    property terminal_media_state : Win32cr::Devices::Tapi::TERMINAL_MEDIA_STATE
+    property ftecEventCause : Win32cr::Devices::Tapi::FT_STATE_EVENT_CAUSE
+    property hrErrorCode : Win32cr::Foundation::HRESULT
+    def initialize(@pParentFileTerminal : Void*, @pFileTrack : Void*, @terminal_media_state : Win32cr::Devices::Tapi::TERMINAL_MEDIA_STATE, @ftecEventCause : Win32cr::Devices::Tapi::FT_STATE_EVENT_CAUSE, @hrErrorCode : Win32cr::Foundation::HRESULT)
+    end
+      end
 
 
       # Nested Type MSP_ADDRESS_EVENT_INFO_e__Struct_
       @[Extern]
-      record MSP_ADDRESS_EVENT_INFO_e__Struct_,
-        type__ : Win32cr::Devices::Tapi::MSP_ADDRESS_EVENT,
-        pTerminal : Void*
+      struct MSP_ADDRESS_EVENT_INFO_e__Struct_
+    property type__ : Win32cr::Devices::Tapi::MSP_ADDRESS_EVENT
+    property pTerminal : Void*
+    def initialize(@type__ : Win32cr::Devices::Tapi::MSP_ADDRESS_EVENT, @pTerminal : Void*)
+    end
+      end
 
 
       # Nested Type MSP_TSP_DATA_e__Struct_
       @[Extern]
-      record MSP_TSP_DATA_e__Struct_,
-        dwBufferSize : UInt32,
-        pBuffer : UInt8*
+      struct MSP_TSP_DATA_e__Struct_
+    property dwBufferSize : UInt32
+    property pBuffer : UInt8*
+    def initialize(@dwBufferSize : UInt32, @pBuffer : UInt8*)
+    end
+      end
 
 
       # Nested Type MSP_TTS_TERMINAL_EVENT_INFO_e__Struct_
       @[Extern]
-      record MSP_TTS_TERMINAL_EVENT_INFO_e__Struct_,
-        pTTSTerminal : Void*,
-        hrErrorCode : Win32cr::Foundation::HRESULT
+      struct MSP_TTS_TERMINAL_EVENT_INFO_e__Struct_
+    property pTTSTerminal : Void*
+    property hrErrorCode : Win32cr::Foundation::HRESULT
+    def initialize(@pTTSTerminal : Void*, @hrErrorCode : Win32cr::Foundation::HRESULT)
+    end
+      end
 
+    def initialize(@msp_address_event_info : MSP_ADDRESS_EVENT_INFO_e__Struct_, @msp_call_event_info : MSP_CALL_EVENT_INFO_e__Struct_, @msp_tsp_data : MSP_TSP_DATA_e__Struct_, @msp_private_event_info : MSP_PRIVATE_EVENT_INFO_e__Struct_, @msp_file_terminal_event_info : MSP_FILE_TERMINAL_EVENT_INFO_e__Struct_, @msp_asr_terminal_event_info : MSP_ASR_TERMINAL_EVENT_INFO_e__Struct_, @msp_tts_terminal_event_info : MSP_TTS_TERMINAL_EVENT_INFO_e__Struct_, @msp_tone_terminal_event_info : MSP_TONE_TERMINAL_EVENT_INFO_e__Struct_)
+    end
     end
 
+    def initialize(@dwSize : UInt32, @event : Win32cr::Devices::Tapi::MSP_EVENT, @hCall : Int32*, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record STnefProblem,
-    ulComponent : UInt32,
-    ulAttribute : UInt32,
-    ulPropTag : UInt32,
-    scode : Int32
+  struct STnefProblem
+    property ulComponent : UInt32
+    property ulAttribute : UInt32
+    property ulPropTag : UInt32
+    property scode : Int32
+    def initialize(@ulComponent : UInt32, @ulAttribute : UInt32, @ulPropTag : UInt32, @scode : Int32)
+    end
+  end
 
   @[Extern]
-  record STnefProblemArray,
-    cProblem : UInt32,
-    aProblem : Win32cr::Devices::Tapi::STnefProblem*
+  struct STnefProblemArray
+    property cProblem : UInt32
+    property aProblem : Win32cr::Devices::Tapi::STnefProblem*
+    def initialize(@cProblem : UInt32, @aProblem : Win32cr::Devices::Tapi::STnefProblem*)
+    end
+  end
 
   @[Extern]
-  record Renddata_,
-    atyp : UInt16,
-    ulPosition : UInt32,
-    dxWidth : UInt16,
-    dyHeight : UInt16,
-    dwFlags : UInt32
+  struct Renddata_
+    property atyp : UInt16
+    property ulPosition : UInt32
+    property dxWidth : UInt16
+    property dyHeight : UInt16
+    property dwFlags : UInt32
+    def initialize(@atyp : UInt16, @ulPosition : UInt32, @dxWidth : UInt16, @dyHeight : UInt16, @dwFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record Dtr_,
-    wYear : UInt16,
-    wMonth : UInt16,
-    wDay : UInt16,
-    wHour : UInt16,
-    wMinute : UInt16,
-    wSecond : UInt16,
-    wDayOfWeek : UInt16
+  struct Dtr_
+    property wYear : UInt16
+    property wMonth : UInt16
+    property wDay : UInt16
+    property wHour : UInt16
+    property wMinute : UInt16
+    property wSecond : UInt16
+    property wDayOfWeek : UInt16
+    def initialize(@wYear : UInt16, @wMonth : UInt16, @wDay : UInt16, @wHour : UInt16, @wMinute : UInt16, @wSecond : UInt16, @wDayOfWeek : UInt16)
+    end
+  end
 
   @[Extern]
-  record Trp_,
-    trpid : UInt16,
-    cbgrtrp : UInt16,
-    cch : UInt16,
-    cbRgb : UInt16
+  struct Trp_
+    property trpid : UInt16
+    property cbgrtrp : UInt16
+    property cch : UInt16
+    property cbRgb : UInt16
+    def initialize(@trpid : UInt16, @cbgrtrp : UInt16, @cch : UInt16, @cbRgb : UInt16)
+    end
+  end
 
   @[Extern]
-  record ADDR_ALIAS_,
-    rgchName : Win32cr::Foundation::CHAR[41],
-    rgchEName : Win32cr::Foundation::CHAR[11],
-    rgchSrvr : Win32cr::Foundation::CHAR[12],
-    dibDetail : UInt32,
-    type__ : UInt16
+  struct ADDR_ALIAS_
+    property rgchName : Win32cr::Foundation::CHAR[41]
+    property rgchEName : Win32cr::Foundation::CHAR[11]
+    property rgchSrvr : Win32cr::Foundation::CHAR[12]
+    property dibDetail : UInt32
+    property type__ : UInt16
+    def initialize(@rgchName : Win32cr::Foundation::CHAR[41], @rgchEName : Win32cr::Foundation::CHAR[11], @rgchSrvr : Win32cr::Foundation::CHAR[12], @dibDetail : UInt32, @type__ : UInt16)
+    end
+  end
 
   @[Extern]
-  record NSID,
-    dwSize : UInt32,
-    uchType : UInt8[16],
-    xtype : UInt32,
-    lTime : Int32,
-    address : Address_e__union_ do
+  struct NSID
+    property dwSize : UInt32
+    property uchType : UInt8[16]
+    property xtype : UInt32
+    property lTime : Int32
+    property address : Address_e__union_
 
     # Nested Type Address_e__union_
     @[Extern(union: true)]
-    record Address_e__union_,
-      alias__ : Win32cr::Devices::Tapi::ADDR_ALIAS_,
-      rgchInterNet : Win32cr::Foundation::CHAR*
+    struct Address_e__union_
+    property alias__ : Win32cr::Devices::Tapi::ADDR_ALIAS_
+    property rgchInterNet : Win32cr::Foundation::CHAR*
+    def initialize(@alias__ : Win32cr::Devices::Tapi::ADDR_ALIAS_, @rgchInterNet : Win32cr::Foundation::CHAR*)
+    end
+    end
 
+    def initialize(@dwSize : UInt32, @uchType : UInt8[16], @xtype : UInt32, @lTime : Int32, @address : Address_e__union_)
+    end
   end
 
   @[Extern]
@@ -3037,7 +3368,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("b1efc382-9355-11d0-835c-00aa003ccabd")]
   record ITTAPI, lpVtbl : ITTAPIVtbl* do
     GUID = LibC::GUID.new(0xb1efc382_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : ITTAPI*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3143,7 +3473,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("54fbdc8c-d90f-4dad-9695-b373097f094b")]
   record ITTAPI2, lpVtbl : ITTAPI2Vtbl* do
     GUID = LibC::GUID.new(0x54fbdc8c_u32, 0xd90f_u16, 0x4dad_u16, StaticArray[0x96_u8, 0x95_u8, 0xb3_u8, 0x73_u8, 0x9_u8, 0x7f_u8, 0x9_u8, 0x4b_u8])
     def query_interface(this : ITTAPI2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3241,7 +3570,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("b1efc384-9355-11d0-835c-00aa003ccabd")]
   record ITMediaSupport, lpVtbl : ITMediaSupportVtbl* do
     GUID = LibC::GUID.new(0xb1efc384_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : ITMediaSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3293,7 +3621,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("41757f4a-cf09-4b34-bc96-0a79d2390076")]
   record ITPluggableTerminalClassInfo, lpVtbl : ITPluggableTerminalClassInfoVtbl* do
     GUID = LibC::GUID.new(0x41757f4a_u32, 0xcf09_u16, 0x4b34_u16, StaticArray[0xbc_u8, 0x96_u8, 0xa_u8, 0x79_u8, 0xd2_u8, 0x39_u8, 0x0_u8, 0x76_u8])
     def query_interface(this : ITPluggableTerminalClassInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3355,7 +3682,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("6d54e42c-4625-4359-a6f7-631999107e05")]
   record ITPluggableTerminalSuperclassInfo, lpVtbl : ITPluggableTerminalSuperclassInfoVtbl* do
     GUID = LibC::GUID.new(0x6d54e42c_u32, 0x4625_u16, 0x4359_u16, StaticArray[0xa6_u8, 0xf7_u8, 0x63_u8, 0x19_u8, 0x99_u8, 0x10_u8, 0x7e_u8, 0x5_u8])
     def query_interface(this : ITPluggableTerminalSuperclassInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3406,7 +3732,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("b1efc385-9355-11d0-835c-00aa003ccabd")]
   record ITTerminalSupport, lpVtbl : ITTerminalSupportVtbl* do
     GUID = LibC::GUID.new(0xb1efc385_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : ITTerminalSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3473,7 +3798,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("f3eb39bc-1b1f-4e99-a0c0-56305c4dd591")]
   record ITTerminalSupport2, lpVtbl : ITTerminalSupport2Vtbl* do
     GUID = LibC::GUID.new(0xf3eb39bc_u32, 0x1b1f_u16, 0x4e99_u16, StaticArray[0xa0_u8, 0xc0_u8, 0x56_u8, 0x30_u8, 0x5c_u8, 0x4d_u8, 0xd5_u8, 0x91_u8])
     def query_interface(this : ITTerminalSupport2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3557,7 +3881,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("b1efc386-9355-11d0-835c-00aa003ccabd")]
   record ITAddress, lpVtbl : ITAddressVtbl* do
     GUID = LibC::GUID.new(0xb1efc386_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : ITAddress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3666,7 +3989,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("b0ae5d9b-be51-46c9-b0f7-dfa8a22a8bc4")]
   record ITAddress2, lpVtbl : ITAddress2Vtbl* do
     GUID = LibC::GUID.new(0xb0ae5d9b_u32, 0xbe51_u16, 0x46c9_u16, StaticArray[0xb0_u8, 0xf7_u8, 0xdf_u8, 0xa8_u8, 0xa2_u8, 0x2a_u8, 0x8b_u8, 0xc4_u8])
     def query_interface(this : ITAddress2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3788,7 +4110,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("8df232f5-821b-11d1-bb5c-00c04fb6809f")]
   record ITAddressCapabilities, lpVtbl : ITAddressCapabilitiesVtbl* do
     GUID = LibC::GUID.new(0x8df232f5_u32, 0x821b_u16, 0x11d1_u16, StaticArray[0xbb_u8, 0x5c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITAddressCapabilities*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3884,7 +4205,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("09d48db4-10cc-4388-9de7-a8465618975a")]
   record ITPhone, lpVtbl : ITPhoneVtbl* do
     GUID = LibC::GUID.new(0x9d48db4_u32, 0x10cc_u16, 0x4388_u16, StaticArray[0x9d_u8, 0xe7_u8, 0xa8_u8, 0x46_u8, 0x56_u8, 0x18_u8, 0x97_u8, 0x5a_u8])
     def query_interface(this : ITPhone*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4054,7 +4374,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("1ee1af0e-6159-4a61-b79b-6a4ba3fc9dfc")]
   record ITAutomatedPhoneControl, lpVtbl : ITAutomatedPhoneControlVtbl* do
     GUID = LibC::GUID.new(0x1ee1af0e_u32, 0x6159_u16, 0x4a61_u16, StaticArray[0xb7_u8, 0x9b_u8, 0x6a_u8, 0x4b_u8, 0xa3_u8, 0xfc_u8, 0x9d_u8, 0xfc_u8])
     def query_interface(this : ITAutomatedPhoneControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4207,7 +4526,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("b1efc389-9355-11d0-835c-00aa003ccabd")]
   record ITBasicCallControl, lpVtbl : ITBasicCallControlVtbl* do
     GUID = LibC::GUID.new(0xb1efc389_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : ITBasicCallControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4313,7 +4631,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("350f85d1-1227-11d3-83d4-00c04fb6809f")]
   record ITCallInfo, lpVtbl : ITCallInfoVtbl* do
     GUID = LibC::GUID.new(0x350f85d1_u32, 0x1227_u16, 0x11d3_u16, StaticArray[0x83_u8, 0xd4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITCallInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4406,7 +4723,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("94d70ca6-7ab0-4daa-81ca-b8f8643faec1")]
   record ITCallInfo2, lpVtbl : ITCallInfo2Vtbl* do
     GUID = LibC::GUID.new(0x94d70ca6_u32, 0x7ab0_u16, 0x4daa_u16, StaticArray[0x81_u8, 0xca_u8, 0xb8_u8, 0xf8_u8, 0x64_u8, 0x3f_u8, 0xae_u8, 0xc1_u8])
     def query_interface(this : ITCallInfo2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4496,7 +4812,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("b1efc38a-9355-11d0-835c-00aa003ccabd")]
   record ITTerminal, lpVtbl : ITTerminalVtbl* do
     GUID = LibC::GUID.new(0xb1efc38a_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : ITTerminal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4559,7 +4874,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("fe040091-ade8-4072-95c9-bf7de8c54b44")]
   record ITMultiTrackTerminal, lpVtbl : ITMultiTrackTerminalVtbl* do
     GUID = LibC::GUID.new(0xfe040091_u32, 0xade8_u16, 0x4072_u16, StaticArray[0x95_u8, 0xc9_u8, 0xbf_u8, 0x7d_u8, 0xe8_u8, 0xc5_u8, 0x4b_u8, 0x44_u8])
     def query_interface(this : ITMultiTrackTerminal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4622,7 +4936,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("31ca6ea9-c08a-4bea-8811-8e9c1ba3ea3a")]
   record ITFileTrack, lpVtbl : ITFileTrackVtbl* do
     GUID = LibC::GUID.new(0x31ca6ea9_u32, 0xc08a_u16, 0x4bea_u16, StaticArray[0x88_u8, 0x11_u8, 0x8e_u8, 0x9c_u8, 0x1b_u8, 0xa3_u8, 0xea_u8, 0x3a_u8])
     def query_interface(this : ITFileTrack*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4681,7 +4994,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("627e8ae6-ae4c-4a69-bb63-2ad625404b77")]
   record ITMediaPlayback, lpVtbl : ITMediaPlaybackVtbl* do
     GUID = LibC::GUID.new(0x627e8ae6_u32, 0xae4c_u16, 0x4a69_u16, StaticArray[0xbb_u8, 0x63_u8, 0x2a_u8, 0xd6_u8, 0x25_u8, 0x40_u8, 0x4b_u8, 0x77_u8])
     def query_interface(this : ITMediaPlayback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4728,7 +5040,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("f5dd4592-5476-4cc1-9d4d-fad3eefe7db2")]
   record ITMediaRecord, lpVtbl : ITMediaRecordVtbl* do
     GUID = LibC::GUID.new(0xf5dd4592_u32, 0x5476_u16, 0x4cc1_u16, StaticArray[0x9d_u8, 0x4d_u8, 0xfa_u8, 0xd3_u8, 0xee_u8, 0xfe_u8, 0x7d_u8, 0xb2_u8])
     def query_interface(this : ITMediaRecord*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4777,7 +5088,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("c445dde8-5199-4bc7-9807-5ffb92e42e09")]
   record ITMediaControl, lpVtbl : ITMediaControlVtbl* do
     GUID = LibC::GUID.new(0xc445dde8_u32, 0x5199_u16, 0x4bc7_u16, StaticArray[0x98_u8, 0x7_u8, 0x5f_u8, 0xfb_u8, 0x92_u8, 0xe4_u8, 0x2e_u8, 0x9_u8])
     def query_interface(this : ITMediaControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4832,7 +5142,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("b1efc38d-9355-11d0-835c-00aa003ccabd")]
   record ITBasicAudioTerminal, lpVtbl : ITBasicAudioTerminalVtbl* do
     GUID = LibC::GUID.new(0xb1efc38d_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : ITBasicAudioTerminal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4884,7 +5193,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("a86b7871-d14c-48e6-922e-a8d15f984800")]
   record ITStaticAudioTerminal, lpVtbl : ITStaticAudioTerminalVtbl* do
     GUID = LibC::GUID.new(0xa86b7871_u32, 0xd14c_u16, 0x48e6_u16, StaticArray[0x92_u8, 0x2e_u8, 0xa8_u8, 0xd1_u8, 0x5f_u8, 0x98_u8, 0x48_u8, 0x0_u8])
     def query_interface(this : ITStaticAudioTerminal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4931,7 +5239,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("a3c1544e-5b92-11d1-8f4e-00c04fb6809f")]
   record ITCallHub, lpVtbl : ITCallHubVtbl* do
     GUID = LibC::GUID.new(0xa3c1544e_u32, 0x5b92_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x4e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITCallHub*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4984,7 +5291,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("ab493640-4c0b-11d2-a046-00c04fb6809f")]
   record ITLegacyAddressMediaControl, lpVtbl : ITLegacyAddressMediaControlVtbl* do
     GUID = LibC::GUID.new(0xab493640_u32, 0x4c0b_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x46_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITLegacyAddressMediaControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5025,7 +5331,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("0e269cd0-10d4-4121-9c22-9c85d625650d")]
   record ITPrivateEvent, lpVtbl : ITPrivateEventVtbl* do
     GUID = LibC::GUID.new(0xe269cd0_u32, 0x10d4_u16, 0x4121_u16, StaticArray[0x9c_u8, 0x22_u8, 0x9c_u8, 0x85_u8, 0xd6_u8, 0x25_u8, 0x65_u8, 0xd_u8])
     def query_interface(this : ITPrivateEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5080,7 +5385,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("b0ee512b-a531-409e-9dd9-4099fe86c738")]
   record ITLegacyAddressMediaControl2, lpVtbl : ITLegacyAddressMediaControl2Vtbl* do
     GUID = LibC::GUID.new(0xb0ee512b_u32, 0xa531_u16, 0x409e_u16, StaticArray[0x9d_u8, 0xd9_u8, 0x40_u8, 0x99_u8, 0xfe_u8, 0x86_u8, 0xc7_u8, 0x38_u8])
     def query_interface(this : ITLegacyAddressMediaControl2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5127,7 +5431,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("d624582f-cc23-4436-b8a5-47c625c8045d")]
   record ITLegacyCallMediaControl, lpVtbl : ITLegacyCallMediaControlVtbl* do
     GUID = LibC::GUID.new(0xd624582f_u32, 0xcc23_u16, 0x4436_u16, StaticArray[0xb8_u8, 0xa5_u8, 0x47_u8, 0xc6_u8, 0x25_u8, 0xc8_u8, 0x4_u8, 0x5d_u8])
     def query_interface(this : ITLegacyCallMediaControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5196,7 +5499,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("57ca332d-7bc2-44f1-a60c-936fe8d7ce73")]
   record ITLegacyCallMediaControl2, lpVtbl : ITLegacyCallMediaControl2Vtbl* do
     GUID = LibC::GUID.new(0x57ca332d_u32, 0x7bc2_u16, 0x44f1_u16, StaticArray[0xa6_u8, 0xc_u8, 0x93_u8, 0x6f_u8, 0xe8_u8, 0xd7_u8, 0xce_u8, 0x73_u8])
     def query_interface(this : ITLegacyCallMediaControl2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5286,7 +5588,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("961f79bd-3097-49df-a1d6-909b77e89ca0")]
   record ITDetectTone, lpVtbl : ITDetectToneVtbl* do
     GUID = LibC::GUID.new(0x961f79bd_u32, 0x3097_u16, 0x49df_u16, StaticArray[0xa1_u8, 0xd6_u8, 0x90_u8, 0x9b_u8, 0x77_u8, 0xe8_u8, 0x9c_u8, 0xa0_u8])
     def query_interface(this : ITDetectTone*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5351,7 +5652,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("357ad764-b3c6-4b2a-8fa5-0722827a9254")]
   record ITCustomTone, lpVtbl : ITCustomToneVtbl* do
     GUID = LibC::GUID.new(0x357ad764_u32, 0xb3c6_u16, 0x4b2a_u16, StaticArray[0x8f_u8, 0xa5_u8, 0x7_u8, 0x22_u8, 0x82_u8, 0x7a_u8, 0x92_u8, 0x54_u8])
     def query_interface(this : ITCustomTone*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5414,7 +5714,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("f15b7669-4780-4595-8c89-fb369c8cf7aa")]
   record IEnumPhone, lpVtbl : IEnumPhoneVtbl* do
     GUID = LibC::GUID.new(0xf15b7669_u32, 0x4780_u16, 0x4595_u16, StaticArray[0x8c_u8, 0x89_u8, 0xfb_u8, 0x36_u8, 0x9c_u8, 0x8c_u8, 0xf7_u8, 0xaa_u8])
     def query_interface(this : IEnumPhone*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5453,7 +5752,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("ae269cf4-935e-11d0-835c-00aa003ccabd")]
   record IEnumTerminal, lpVtbl : IEnumTerminalVtbl* do
     GUID = LibC::GUID.new(0xae269cf4_u32, 0x935e_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : IEnumTerminal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5492,7 +5790,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("ae269cf5-935e-11d0-835c-00aa003ccabd")]
   record IEnumTerminalClass, lpVtbl : IEnumTerminalClassVtbl* do
     GUID = LibC::GUID.new(0xae269cf5_u32, 0x935e_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : IEnumTerminalClass*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5531,7 +5828,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("ae269cf6-935e-11d0-835c-00aa003ccabd")]
   record IEnumCall, lpVtbl : IEnumCallVtbl* do
     GUID = LibC::GUID.new(0xae269cf6_u32, 0x935e_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : IEnumCall*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5570,7 +5866,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("1666fca1-9363-11d0-835c-00aa003ccabd")]
   record IEnumAddress, lpVtbl : IEnumAddressVtbl* do
     GUID = LibC::GUID.new(0x1666fca1_u32, 0x9363_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : IEnumAddress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5609,7 +5904,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("a3c15450-5b92-11d1-8f4e-00c04fb6809f")]
   record IEnumCallHub, lpVtbl : IEnumCallHubVtbl* do
     GUID = LibC::GUID.new(0xa3c15450_u32, 0x5b92_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x4e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : IEnumCallHub*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5648,7 +5942,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("35372049-0bc6-11d2-a033-00c04fb6809f")]
   record IEnumBstr, lpVtbl : IEnumBstrVtbl* do
     GUID = LibC::GUID.new(0x35372049_u32, 0xbc6_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x33_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : IEnumBstr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5687,7 +5980,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("4567450c-dbee-4e3f-aaf5-37bf9ebf5e29")]
   record IEnumPluggableTerminalClassInfo, lpVtbl : IEnumPluggableTerminalClassInfoVtbl* do
     GUID = LibC::GUID.new(0x4567450c_u32, 0xdbee_u16, 0x4e3f_u16, StaticArray[0xaa_u8, 0xf5_u8, 0x37_u8, 0xbf_u8, 0x9e_u8, 0xbf_u8, 0x5e_u8, 0x29_u8])
     def query_interface(this : IEnumPluggableTerminalClassInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5726,7 +6018,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("e9586a80-89e6-4cff-931d-478d5751f4c0")]
   record IEnumPluggableSuperclassInfo, lpVtbl : IEnumPluggableSuperclassInfoVtbl* do
     GUID = LibC::GUID.new(0xe9586a80_u32, 0x89e6_u16, 0x4cff_u16, StaticArray[0x93_u8, 0x1d_u8, 0x47_u8, 0x8d_u8, 0x57_u8, 0x51_u8, 0xf4_u8, 0xc0_u8])
     def query_interface(this : IEnumPluggableSuperclassInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5774,7 +6065,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("8f942dd8-64ed-4aaf-a77d-b23db0837ead")]
   record ITPhoneEvent, lpVtbl : ITPhoneEventVtbl* do
     GUID = LibC::GUID.new(0x8f942dd8_u32, 0x64ed_u16, 0x4aaf_u16, StaticArray[0xa7_u8, 0x7d_u8, 0xb2_u8, 0x3d_u8, 0xb0_u8, 0x83_u8, 0x7e_u8, 0xad_u8])
     def query_interface(this : ITPhoneEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5844,7 +6134,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("62f47097-95c9-11d0-835d-00aa003ccabd")]
   record ITCallStateEvent, lpVtbl : ITCallStateEventVtbl* do
     GUID = LibC::GUID.new(0x62f47097_u32, 0x95c9_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5d_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : ITCallStateEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5899,7 +6188,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("63ffb2a6-872b-4cd3-a501-326e8fb40af7")]
   record ITPhoneDeviceSpecificEvent, lpVtbl : ITPhoneDeviceSpecificEventVtbl* do
     GUID = LibC::GUID.new(0x63ffb2a6_u32, 0x872b_u16, 0x4cd3_u16, StaticArray[0xa5_u8, 0x1_u8, 0x32_u8, 0x6e_u8, 0x8f_u8, 0xb4_u8, 0xa_u8, 0xf7_u8])
     def query_interface(this : ITPhoneDeviceSpecificEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5956,7 +6244,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("ff36b87f-ec3a-11d0-8ee4-00c04fb6809f")]
   record ITCallMediaEvent, lpVtbl : ITCallMediaEventVtbl* do
     GUID = LibC::GUID.new(0xff36b87f_u32, 0xec3a_u16, 0x11d0_u16, StaticArray[0x8e_u8, 0xe4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITCallMediaEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6018,7 +6305,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("80d3bfac-57d9-11d2-a04a-00c04fb6809f")]
   record ITDigitDetectionEvent, lpVtbl : ITDigitDetectionEventVtbl* do
     GUID = LibC::GUID.new(0x80d3bfac_u32, 0x57d9_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x4a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITDigitDetectionEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6076,7 +6362,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("80d3bfad-57d9-11d2-a04a-00c04fb6809f")]
   record ITDigitGenerationEvent, lpVtbl : ITDigitGenerationEventVtbl* do
     GUID = LibC::GUID.new(0x80d3bfad_u32, 0x57d9_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x4a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITDigitGenerationEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6132,7 +6417,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("e52ec4c1-cba3-441a-9e6a-93cb909e9724")]
   record ITDigitsGatheredEvent, lpVtbl : ITDigitsGatheredEventVtbl* do
     GUID = LibC::GUID.new(0xe52ec4c1_u32, 0xcba3_u16, 0x441a_u16, StaticArray[0x9e_u8, 0x6a_u8, 0x93_u8, 0xcb_u8, 0x90_u8, 0x9e_u8, 0x97_u8, 0x24_u8])
     def query_interface(this : ITDigitsGatheredEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6190,7 +6474,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("407e0faf-d047-4753-b0c6-8e060373fecd")]
   record ITToneDetectionEvent, lpVtbl : ITToneDetectionEventVtbl* do
     GUID = LibC::GUID.new(0x407e0faf_u32, 0xd047_u16, 0x4753_u16, StaticArray[0xb0_u8, 0xc6_u8, 0x8e_u8, 0x6_u8, 0x3_u8, 0x73_u8, 0xfe_u8, 0xcd_u8])
     def query_interface(this : ITToneDetectionEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6245,7 +6528,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("f4854d48-937a-11d1-bb58-00c04fb6809f")]
   record ITTAPIObjectEvent, lpVtbl : ITTAPIObjectEventVtbl* do
     GUID = LibC::GUID.new(0xf4854d48_u32, 0x937a_u16, 0x11d1_u16, StaticArray[0xbb_u8, 0x58_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITTAPIObjectEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6301,7 +6583,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("359dda6e-68ce-4383-bf0b-169133c41b46")]
   record ITTAPIObjectEvent2, lpVtbl : ITTAPIObjectEvent2Vtbl* do
     GUID = LibC::GUID.new(0x359dda6e_u32, 0x68ce_u16, 0x4383_u16, StaticArray[0xbf_u8, 0xb_u8, 0x16_u8, 0x91_u8, 0x33_u8, 0xc4_u8, 0x1b_u8, 0x46_u8])
     def query_interface(this : ITTAPIObjectEvent2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6352,7 +6633,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("eddb9426-3b91-11d1-8f30-00c04fb6809f")]
   record ITTAPIEventNotification, lpVtbl : ITTAPIEventNotificationVtbl* do
     GUID = LibC::GUID.new(0xeddb9426_u32, 0x3b91_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x30_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITTAPIEventNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6385,7 +6665,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("a3c15451-5b92-11d1-8f4e-00c04fb6809f")]
   record ITCallHubEvent, lpVtbl : ITCallHubEventVtbl* do
     GUID = LibC::GUID.new(0xa3c15451_u32, 0x5b92_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x4e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITCallHubEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6436,7 +6715,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("831ce2d1-83b5-11d1-bb5c-00c04fb6809f")]
   record ITAddressEvent, lpVtbl : ITAddressEventVtbl* do
     GUID = LibC::GUID.new(0x831ce2d1_u32, 0x83b5_u16, 0x11d1_u16, StaticArray[0xbb_u8, 0x5c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITAddressEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6489,7 +6767,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("3acb216b-40bd-487a-8672-5ce77bd7e3a3")]
   record ITAddressDeviceSpecificEvent, lpVtbl : ITAddressDeviceSpecificEventVtbl* do
     GUID = LibC::GUID.new(0x3acb216b_u32, 0x40bd_u16, 0x487a_u16, StaticArray[0x86_u8, 0x72_u8, 0x5c_u8, 0xe7_u8, 0x7b_u8, 0xd7_u8, 0xe3_u8, 0xa3_u8])
     def query_interface(this : ITAddressDeviceSpecificEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6549,7 +6826,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("e4a7fbac-8c17-4427-9f55-9f589ac8af00")]
   record ITFileTerminalEvent, lpVtbl : ITFileTerminalEventVtbl* do
     GUID = LibC::GUID.new(0xe4a7fbac_u32, 0x8c17_u16, 0x4427_u16, StaticArray[0x9f_u8, 0x55_u8, 0x9f_u8, 0x58_u8, 0x9a_u8, 0xc8_u8, 0xaf_u8, 0x0_u8])
     def query_interface(this : ITFileTerminalEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6609,7 +6885,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("d964788f-95a5-461d-ab0c-b9900a6c2713")]
   record ITTTSTerminalEvent, lpVtbl : ITTTSTerminalEventVtbl* do
     GUID = LibC::GUID.new(0xd964788f_u32, 0x95a5_u16, 0x461d_u16, StaticArray[0xab_u8, 0xc_u8, 0xb9_u8, 0x90_u8, 0xa_u8, 0x6c_u8, 0x27_u8, 0x13_u8])
     def query_interface(this : ITTTSTerminalEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6660,7 +6935,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("ee016a02-4fa9-467c-933f-5a15b12377d7")]
   record ITASRTerminalEvent, lpVtbl : ITASRTerminalEventVtbl* do
     GUID = LibC::GUID.new(0xee016a02_u32, 0x4fa9_u16, 0x467c_u16, StaticArray[0x93_u8, 0x3f_u8, 0x5a_u8, 0x15_u8, 0xb1_u8, 0x23_u8, 0x77_u8, 0xd7_u8])
     def query_interface(this : ITASRTerminalEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6711,7 +6985,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("e6f56009-611f-4945-bbd2-2d0ce5612056")]
   record ITToneTerminalEvent, lpVtbl : ITToneTerminalEventVtbl* do
     GUID = LibC::GUID.new(0xe6f56009_u32, 0x611f_u16, 0x4945_u16, StaticArray[0xbb_u8, 0xd2_u8, 0x2d_u8, 0xc_u8, 0xe5_u8, 0x61_u8, 0x20_u8, 0x56_u8])
     def query_interface(this : ITToneTerminalEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6762,7 +7035,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("cfa3357c-ad77-11d1-bb68-00c04fb6809f")]
   record ITQOSEvent, lpVtbl : ITQOSEventVtbl* do
     GUID = LibC::GUID.new(0xcfa3357c_u32, 0xad77_u16, 0x11d1_u16, StaticArray[0xbb_u8, 0x68_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITQOSEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6813,7 +7085,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("5d4b65f9-e51c-11d1-a02f-00c04fb6809f")]
   record ITCallInfoChangeEvent, lpVtbl : ITCallInfoChangeEventVtbl* do
     GUID = LibC::GUID.new(0x5d4b65f9_u32, 0xe51c_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x2f_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITCallInfoChangeEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6862,7 +7133,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("ac48ffdf-f8c4-11d1-a030-00c04fb6809f")]
   record ITRequest, lpVtbl : ITRequestVtbl* do
     GUID = LibC::GUID.new(0xac48ffdf_u32, 0xf8c4_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x30_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6910,7 +7180,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("ac48ffde-f8c4-11d1-a030-00c04fb6809f")]
   record ITRequestEvent, lpVtbl : ITRequestEventVtbl* do
     GUID = LibC::GUID.new(0xac48ffde_u32, 0xf8c4_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x30_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITRequestEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6970,7 +7239,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("5ec5acf2-9c02-11d0-8362-00aa003ccabd")]
   record ITCollection, lpVtbl : ITCollectionVtbl* do
     GUID = LibC::GUID.new(0x5ec5acf2_u32, 0x9c02_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x62_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : ITCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7023,7 +7291,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("e6dddda5-a6d3-48ff-8737-d32fc4d95477")]
   record ITCollection2, lpVtbl : ITCollection2Vtbl* do
     GUID = LibC::GUID.new(0xe6dddda5_u32, 0xa6d3_u16, 0x48ff_u16, StaticArray[0x87_u8, 0x37_u8, 0xd3_u8, 0x2f_u8, 0xc4_u8, 0xd9_u8, 0x54_u8, 0x77_u8])
     def query_interface(this : ITCollection2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7084,7 +7351,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("449f659e-88a3-11d1-bb5d-00c04fb6809f")]
   record ITForwardInformation, lpVtbl : ITForwardInformationVtbl* do
     GUID = LibC::GUID.new(0x449f659e_u32, 0x88a3_u16, 0x11d1_u16, StaticArray[0xbb_u8, 0x5d_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITForwardInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7155,7 +7421,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("5229b4ed-b260-4382-8e1a-5df3a8a4ccc0")]
   record ITForwardInformation2, lpVtbl : ITForwardInformation2Vtbl* do
     GUID = LibC::GUID.new(0x5229b4ed_u32, 0xb260_u16, 0x4382_u16, StaticArray[0x8e_u8, 0x1a_u8, 0x5d_u8, 0xf3_u8, 0xa8_u8, 0xa4_u8, 0xcc_u8, 0xc0_u8])
     def query_interface(this : ITForwardInformation2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7233,7 +7498,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("0c4d8f03-8ddb-11d1-a09e-00805fc147d3")]
   record ITAddressTranslation, lpVtbl : ITAddressTranslationVtbl* do
     GUID = LibC::GUID.new(0xc4d8f03_u32, 0x8ddb_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x9e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITAddressTranslation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7295,7 +7559,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("afc15945-8d40-11d1-a09e-00805fc147d3")]
   record ITAddressTranslationInfo, lpVtbl : ITAddressTranslationInfoVtbl* do
     GUID = LibC::GUID.new(0xafc15945_u32, 0x8d40_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x9e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITAddressTranslationInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7360,7 +7623,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("0c4d8eff-8ddb-11d1-a09e-00805fc147d3")]
   record ITLocationInfo, lpVtbl : ITLocationInfoVtbl* do
     GUID = LibC::GUID.new(0xc4d8eff_u32, 0x8ddb_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x9e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITLocationInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7432,7 +7694,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("0c4d8f01-8ddb-11d1-a09e-00805fc147d3")]
   record IEnumLocation, lpVtbl : IEnumLocationVtbl* do
     GUID = LibC::GUID.new(0xc4d8f01_u32, 0x8ddb_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x9e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : IEnumLocation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7478,7 +7739,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("0c4d8f00-8ddb-11d1-a09e-00805fc147d3")]
   record ITCallingCard, lpVtbl : ITCallingCardVtbl* do
     GUID = LibC::GUID.new(0xc4d8f00_u32, 0x8ddb_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x9e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITCallingCard*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7538,7 +7798,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("0c4d8f02-8ddb-11d1-a09e-00805fc147d3")]
   record IEnumCallingCard, lpVtbl : IEnumCallingCardVtbl* do
     GUID = LibC::GUID.new(0xc4d8f02_u32, 0x8ddb_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x9e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : IEnumCallingCard*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7580,7 +7839,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("895801df-3dd6-11d1-8f30-00c04fb6809f")]
   record ITCallNotificationEvent, lpVtbl : ITCallNotificationEventVtbl* do
     GUID = LibC::GUID.new(0x895801df_u32, 0x3dd6_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x30_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITCallNotificationEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7629,7 +7887,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("e9225295-c759-11d1-a02b-00c04fb6809f")]
   record ITDispatchMapper, lpVtbl : ITDispatchMapperVtbl* do
     GUID = LibC::GUID.new(0xe9225295_u32, 0xc759_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x2b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITDispatchMapper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7675,7 +7932,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("ee3bd604-3868-11d2-a045-00c04fb6809f")]
   record ITStreamControl, lpVtbl : ITStreamControlVtbl* do
     GUID = LibC::GUID.new(0xee3bd604_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITStreamControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7736,7 +7992,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("ee3bd605-3868-11d2-a045-00c04fb6809f")]
   record ITStream, lpVtbl : ITStreamVtbl* do
     GUID = LibC::GUID.new(0xee3bd605_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7805,7 +8060,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("ee3bd606-3868-11d2-a045-00c04fb6809f")]
   record IEnumStream, lpVtbl : IEnumStreamVtbl* do
     GUID = LibC::GUID.new(0xee3bd606_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : IEnumStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7848,7 +8102,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("ee3bd607-3868-11d2-a045-00c04fb6809f")]
   record ITSubStreamControl, lpVtbl : ITSubStreamControlVtbl* do
     GUID = LibC::GUID.new(0xee3bd607_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITSubStreamControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7907,7 +8160,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("ee3bd608-3868-11d2-a045-00c04fb6809f")]
   record ITSubStream, lpVtbl : ITSubStreamVtbl* do
     GUID = LibC::GUID.new(0xee3bd608_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITSubStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7970,7 +8222,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("ee3bd609-3868-11d2-a045-00c04fb6809f")]
   record IEnumSubStream, lpVtbl : IEnumSubStreamVtbl* do
     GUID = LibC::GUID.new(0xee3bd609_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : IEnumSubStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8010,7 +8261,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("207823ea-e252-11d2-b77e-0080c7135381")]
   record ITLegacyWaveSupport, lpVtbl : ITLegacyWaveSupportVtbl* do
     GUID = LibC::GUID.new(0x207823ea_u32, 0xe252_u16, 0x11d2_u16, StaticArray[0xb7_u8, 0x7e_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0x13_u8, 0x53_u8, 0x81_u8])
     def query_interface(this : ITLegacyWaveSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8073,7 +8323,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("161a4a56-1e99-4b3f-a46a-168f38a5ee4c")]
   record ITBasicCallControl2, lpVtbl : ITBasicCallControl2Vtbl* do
     GUID = LibC::GUID.new(0x161a4a56_u32, 0x1e99_u16, 0x4b3f_u16, StaticArray[0xa4_u8, 0x6a_u8, 0x16_u8, 0x8f_u8, 0x38_u8, 0xa5_u8, 0xee_u8, 0x4c_u8])
     def query_interface(this : ITBasicCallControl2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8187,7 +8436,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("b87658bd-3c59-4f64-be74-aede3e86a81e")]
   record ITScriptableAudioFormat, lpVtbl : ITScriptableAudioFormatVtbl* do
     GUID = LibC::GUID.new(0xb87658bd_u32, 0x3c59_u16, 0x4f64_u16, StaticArray[0xbe_u8, 0x74_u8, 0xae_u8, 0xde_u8, 0x3e_u8, 0x86_u8, 0xa8_u8, 0x1e_u8])
     def query_interface(this : ITScriptableAudioFormat*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8279,7 +8527,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("5770ece5-4b27-11d1-bf80-00805fc147d3")]
   record ITAgent, lpVtbl : ITAgentVtbl* do
     GUID = LibC::GUID.new(0x5770ece5_u32, 0x4b27_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITAgent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8386,7 +8633,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("5afc3147-4bcc-11d1-bf80-00805fc147d3")]
   record ITAgentSession, lpVtbl : ITAgentSessionVtbl* do
     GUID = LibC::GUID.new(0x5afc3147_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITAgentSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8479,7 +8725,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("5afc3148-4bcc-11d1-bf80-00805fc147d3")]
   record ITACDGroup, lpVtbl : ITACDGroupVtbl* do
     GUID = LibC::GUID.new(0x5afc3148_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITACDGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8539,7 +8784,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("5afc3149-4bcc-11d1-bf80-00805fc147d3")]
   record ITQueue, lpVtbl : ITQueueVtbl* do
     GUID = LibC::GUID.new(0x5afc3149_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8616,7 +8860,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("5afc314a-4bcc-11d1-bf80-00805fc147d3")]
   record ITAgentEvent, lpVtbl : ITAgentEventVtbl* do
     GUID = LibC::GUID.new(0x5afc314a_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITAgentEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8663,7 +8906,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("5afc314b-4bcc-11d1-bf80-00805fc147d3")]
   record ITAgentSessionEvent, lpVtbl : ITAgentSessionEventVtbl* do
     GUID = LibC::GUID.new(0x5afc314b_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITAgentSessionEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8710,7 +8952,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("297f3032-bd11-11d1-a0a7-00805fc147d3")]
   record ITACDGroupEvent, lpVtbl : ITACDGroupEventVtbl* do
     GUID = LibC::GUID.new(0x297f3032_u32, 0xbd11_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0xa7_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITACDGroupEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8757,7 +8998,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("297f3033-bd11-11d1-a0a7-00805fc147d3")]
   record ITQueueEvent, lpVtbl : ITQueueEventVtbl* do
     GUID = LibC::GUID.new(0x297f3033_u32, 0xbd11_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0xa7_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITQueueEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8804,7 +9044,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("297f3034-bd11-11d1-a0a7-00805fc147d3")]
   record ITAgentHandlerEvent, lpVtbl : ITAgentHandlerEventVtbl* do
     GUID = LibC::GUID.new(0x297f3034_u32, 0xbd11_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0xa7_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITAgentHandlerEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8851,7 +9090,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("5afc3154-4bcc-11d1-bf80-00805fc147d3")]
   record ITTAPICallCenter, lpVtbl : ITTAPICallCenterVtbl* do
     GUID = LibC::GUID.new(0x5afc3154_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITTAPICallCenter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8903,7 +9141,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("587e8c22-9802-11d1-a0a4-00805fc147d3")]
   record ITAgentHandler, lpVtbl : ITAgentHandlerVtbl* do
     GUID = LibC::GUID.new(0x587e8c22_u32, 0x9802_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0xa4_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITAgentHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8963,7 +9200,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("5afc314d-4bcc-11d1-bf80-00805fc147d3")]
   record IEnumAgent, lpVtbl : IEnumAgentVtbl* do
     GUID = LibC::GUID.new(0x5afc314d_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : IEnumAgent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9002,7 +9238,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("5afc314e-4bcc-11d1-bf80-00805fc147d3")]
   record IEnumAgentSession, lpVtbl : IEnumAgentSessionVtbl* do
     GUID = LibC::GUID.new(0x5afc314e_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : IEnumAgentSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9041,7 +9276,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("5afc3158-4bcc-11d1-bf80-00805fc147d3")]
   record IEnumQueue, lpVtbl : IEnumQueueVtbl* do
     GUID = LibC::GUID.new(0x5afc3158_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : IEnumQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9080,7 +9314,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("5afc3157-4bcc-11d1-bf80-00805fc147d3")]
   record IEnumACDGroup, lpVtbl : IEnumACDGroupVtbl* do
     GUID = LibC::GUID.new(0x5afc3157_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : IEnumACDGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9119,7 +9352,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("587e8c28-9802-11d1-a0a4-00805fc147d3")]
   record IEnumAgentHandler, lpVtbl : IEnumAgentHandlerVtbl* do
     GUID = LibC::GUID.new(0x587e8c28_u32, 0x9802_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0xa4_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : IEnumAgentHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9156,7 +9388,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("0364eb00-4a77-11d1-a671-006097c9a2e8")]
   record ITAMMediaFormat, lpVtbl : ITAMMediaFormatVtbl* do
     GUID = LibC::GUID.new(0x364eb00_u32, 0x4a77_u16, 0x11d1_u16, StaticArray[0xa6_u8, 0x71_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xc9_u8, 0xa2_u8, 0xe8_u8])
     def query_interface(this : ITAMMediaFormat*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9191,7 +9422,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("c1bc3c90-bcfe-11d1-9745-00c04fd91ac0")]
   record ITAllocatorProperties, lpVtbl : ITAllocatorPropertiesVtbl* do
     GUID = LibC::GUID.new(0xc1bc3c90_u32, 0xbcfe_u16, 0x11d1_u16, StaticArray[0x97_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x1a_u8, 0xc0_u8])
     def query_interface(this : ITAllocatorProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9233,7 +9463,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("6e0887be-ba1a-492e-bd10-4020ec5e33e0")]
   record ITPluggableTerminalEventSink, lpVtbl : ITPluggableTerminalEventSinkVtbl* do
     GUID = LibC::GUID.new(0x6e0887be_u32, 0xba1a_u16, 0x492e_u16, StaticArray[0xbd_u8, 0x10_u8, 0x40_u8, 0x20_u8, 0xec_u8, 0x5e_u8, 0x33_u8, 0xe0_u8])
     def query_interface(this : ITPluggableTerminalEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9261,7 +9490,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("f7115709-a216-4957-a759-060ab32a90d1")]
   record ITPluggableTerminalEventSinkRegistration, lpVtbl : ITPluggableTerminalEventSinkRegistrationVtbl* do
     GUID = LibC::GUID.new(0xf7115709_u32, 0xa216_u16, 0x4957_u16, StaticArray[0xa7_u8, 0x59_u8, 0x6_u8, 0xa_u8, 0xb3_u8, 0x2a_u8, 0x90_u8, 0xd1_u8])
     def query_interface(this : ITPluggableTerminalEventSinkRegistration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9296,7 +9524,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("ee3bd600-3868-11d2-a045-00c04fb6809f")]
   record ITMSPAddress, lpVtbl : ITMSPAddressVtbl* do
     GUID = LibC::GUID.new(0xee3bd600_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITMSPAddress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9341,7 +9568,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("9f34325b-7e62-11d2-9457-00c04f8ec888")]
   record ITTAPIDispatchEventNotification, lpVtbl : ITTAPIDispatchEventNotificationVtbl* do
     GUID = LibC::GUID.new(0x9f34325b_u32, 0x7e62_u16, 0x11d2_u16, StaticArray[0x94_u8, 0x57_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xc8_u8, 0x88_u8])
     def query_interface(this : ITTAPIDispatchEventNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9395,7 +9621,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("f1029e5d-cb5b-11d0-8d59-00c04fd91ac0")]
   record ITDirectoryObjectConference, lpVtbl : ITDirectoryObjectConferenceVtbl* do
     GUID = LibC::GUID.new(0xf1029e5d_u32, 0xcb5b_u16, 0x11d0_u16, StaticArray[0x8d_u8, 0x59_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x1a_u8, 0xc0_u8])
     def query_interface(this : ITDirectoryObjectConference*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9481,7 +9706,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("34621d6f-6cff-11d1-aff7-00c04fc31fee")]
   record ITDirectoryObjectUser, lpVtbl : ITDirectoryObjectUserVtbl* do
     GUID = LibC::GUID.new(0x34621d6f_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
     def query_interface(this : ITDirectoryObjectUser*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9526,7 +9750,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("34621d70-6cff-11d1-aff7-00c04fc31fee")]
   record IEnumDialableAddrs, lpVtbl : IEnumDialableAddrsVtbl* do
     GUID = LibC::GUID.new(0x34621d70_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
     def query_interface(this : IEnumDialableAddrs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9572,7 +9795,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("34621d6e-6cff-11d1-aff7-00c04fc31fee")]
   record ITDirectoryObject, lpVtbl : ITDirectoryObjectVtbl* do
     GUID = LibC::GUID.new(0x34621d6e_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
     def query_interface(this : ITDirectoryObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9632,7 +9854,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("06c9b64a-306d-11d1-9774-00c04fd91ac0")]
   record IEnumDirectoryObject, lpVtbl : IEnumDirectoryObjectVtbl* do
     GUID = LibC::GUID.new(0x6c9b64a_u32, 0x306d_u16, 0x11d1_u16, StaticArray[0x97_u8, 0x74_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x1a_u8, 0xc0_u8])
     def query_interface(this : IEnumDirectoryObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9673,7 +9894,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("34621d72-6cff-11d1-aff7-00c04fc31fee")]
   record ITILSConfig, lpVtbl : ITILSConfigVtbl* do
     GUID = LibC::GUID.new(0x34621d72_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
     def query_interface(this : ITILSConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9732,7 +9952,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("34621d6c-6cff-11d1-aff7-00c04fc31fee")]
   record ITDirectory, lpVtbl : ITDirectoryVtbl* do
     GUID = LibC::GUID.new(0x34621d6c_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
     def query_interface(this : ITDirectory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9813,7 +10032,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("34621d6d-6cff-11d1-aff7-00c04fc31fee")]
   record IEnumDirectory, lpVtbl : IEnumDirectoryVtbl* do
     GUID = LibC::GUID.new(0x34621d6d_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
     def query_interface(this : IEnumDirectory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9856,7 +10074,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("34621d6b-6cff-11d1-aff7-00c04fc31fee")]
   record ITRendezvous, lpVtbl : ITRendezvousVtbl* do
     GUID = LibC::GUID.new(0x34621d6b_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
     def query_interface(this : ITRendezvous*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9912,7 +10129,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("df0daef4-a289-11d1-8697-006008b0e5d2")]
   record IMcastScope, lpVtbl : IMcastScopeVtbl* do
     GUID = LibC::GUID.new(0xdf0daef4_u32, 0xa289_u16, 0x11d1_u16, StaticArray[0x86_u8, 0x97_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0xb0_u8, 0xe5_u8, 0xd2_u8])
     def query_interface(this : IMcastScope*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9976,7 +10192,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("df0daefd-a289-11d1-8697-006008b0e5d2")]
   record IMcastLeaseInfo, lpVtbl : IMcastLeaseInfoVtbl* do
     GUID = LibC::GUID.new(0xdf0daefd_u32, 0xa289_u16, 0x11d1_u16, StaticArray[0x86_u8, 0x97_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0xb0_u8, 0xe5_u8, 0xd2_u8])
     def query_interface(this : IMcastLeaseInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10045,7 +10260,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("df0daf09-a289-11d1-8697-006008b0e5d2")]
   record IEnumMcastScope, lpVtbl : IEnumMcastScopeVtbl* do
     GUID = LibC::GUID.new(0xdf0daf09_u32, 0xa289_u16, 0x11d1_u16, StaticArray[0x86_u8, 0x97_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0xb0_u8, 0xe5_u8, 0xd2_u8])
     def query_interface(this : IEnumMcastScope*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10091,7 +10305,6 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  #@[Com("df0daef1-a289-11d1-8697-006008b0e5d2")]
   record IMcastAddressAllocation, lpVtbl : IMcastAddressAllocationVtbl* do
     GUID = LibC::GUID.new(0xdf0daef1_u32, 0xa289_u16, 0x11d1_u16, StaticArray[0x86_u8, 0x97_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0xb0_u8, 0xe5_u8, 0xd2_u8])
     def query_interface(this : IMcastAddressAllocation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

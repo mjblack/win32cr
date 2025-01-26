@@ -10,17 +10,17 @@ module Win32cr::Security::Authorization
   alias AUTHZ_AUDIT_EVENT_HANDLE = LibC::IntPtrT
   alias AUTHZ_AUDIT_EVENT_TYPE_HANDLE = LibC::IntPtrT
   alias AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE = LibC::IntPtrT
-  alias PFN_AUTHZ_DYNAMIC_ACCESS_CHECK = Proc(Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, Win32cr::Security::ACE_HEADER*, Void*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::BOOL)*
+  alias PFN_AUTHZ_DYNAMIC_ACCESS_CHECK = Proc(Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, Win32cr::Security::ACE_HEADER*, Void*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::BOOL)
 
-  alias PFN_AUTHZ_COMPUTE_DYNAMIC_GROUPS = Proc(Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, Void*, Win32cr::Security::SID_AND_ATTRIBUTES**, UInt32*, Win32cr::Security::SID_AND_ATTRIBUTES**, UInt32*, Win32cr::Foundation::BOOL)*
+  alias PFN_AUTHZ_COMPUTE_DYNAMIC_GROUPS = Proc(Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, Void*, Win32cr::Security::SID_AND_ATTRIBUTES**, UInt32*, Win32cr::Security::SID_AND_ATTRIBUTES**, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFN_AUTHZ_FREE_DYNAMIC_GROUPS = Proc(Win32cr::Security::SID_AND_ATTRIBUTES*, Void)*
+  alias PFN_AUTHZ_FREE_DYNAMIC_GROUPS = Proc(Win32cr::Security::SID_AND_ATTRIBUTES*, Void)
 
-  alias PFN_AUTHZ_GET_CENTRAL_ACCESS_POLICY = Proc(Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, Win32cr::Foundation::PSID, Void*, Win32cr::Foundation::BOOL*, Void**, Win32cr::Foundation::BOOL)*
+  alias PFN_AUTHZ_GET_CENTRAL_ACCESS_POLICY = Proc(Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, Win32cr::Foundation::PSID, Void*, Win32cr::Foundation::BOOL*, Void**, Win32cr::Foundation::BOOL)
 
-  alias PFN_AUTHZ_FREE_CENTRAL_ACCESS_POLICY = Proc(Void*, Void)*
+  alias PFN_AUTHZ_FREE_CENTRAL_ACCESS_POLICY = Proc(Void*, Void)
 
-  alias FN_PROGRESS = Proc(Win32cr::Foundation::PWSTR, UInt32, Win32cr::Security::Authorization::PROG_INVOKE_SETTING*, Void*, Win32cr::Foundation::BOOL, Void)*
+  alias FN_PROGRESS = Proc(Win32cr::Foundation::PWSTR, UInt32, Win32cr::Security::Authorization::PROG_INVOKE_SETTING*, Void*, Win32cr::Foundation::BOOL, Void)
 
   SDDL_REVISION_1 = 1_u32
   SDDL_REVISION = 1_u32
@@ -556,348 +556,493 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record OBJECTS_AND_SID,
-    objects_present : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS,
-    object_type_guid : LibC::GUID,
-    inherited_object_type_guid : LibC::GUID,
-    pSid : Win32cr::Security::SID*
-
-  @[Extern]
-  record OBJECTS_AND_NAME_A,
-    objects_present : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS,
-    object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE,
-    object_type_name : Win32cr::Foundation::PSTR,
-    inherited_object_type_name : Win32cr::Foundation::PSTR,
-    ptstrName : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record OBJECTS_AND_NAME_W,
-    objects_present : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS,
-    object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE,
-    object_type_name : Win32cr::Foundation::PWSTR,
-    inherited_object_type_name : Win32cr::Foundation::PWSTR,
-    ptstrName : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record TRUSTEE_A,
-    pMultipleTrustee : Win32cr::Security::Authorization::TRUSTEE_A*,
-    multiple_trustee_operation : Win32cr::Security::Authorization::MULTIPLE_TRUSTEE_OPERATION,
-    trustee_form : Win32cr::Security::Authorization::TRUSTEE_FORM,
-    trustee_type : Win32cr::Security::Authorization::TRUSTEE_TYPE,
-    ptstrName : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record TRUSTEE_W,
-    pMultipleTrustee : Win32cr::Security::Authorization::TRUSTEE_W*,
-    multiple_trustee_operation : Win32cr::Security::Authorization::MULTIPLE_TRUSTEE_OPERATION,
-    trustee_form : Win32cr::Security::Authorization::TRUSTEE_FORM,
-    trustee_type : Win32cr::Security::Authorization::TRUSTEE_TYPE,
-    ptstrName : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record EXPLICIT_ACCESS_A,
-    grfAccessPermissions : UInt32,
-    grfAccessMode : Win32cr::Security::Authorization::ACCESS_MODE,
-    grfInheritance : Win32cr::Security::ACE_FLAGS,
-    trustee : Win32cr::Security::Authorization::TRUSTEE_A
-
-  @[Extern]
-  record EXPLICIT_ACCESS_W,
-    grfAccessPermissions : UInt32,
-    grfAccessMode : Win32cr::Security::Authorization::ACCESS_MODE,
-    grfInheritance : Win32cr::Security::ACE_FLAGS,
-    trustee : Win32cr::Security::Authorization::TRUSTEE_W
-
-  @[Extern]
-  record ACTRL_ACCESS_ENTRYA,
-    trustee : Win32cr::Security::Authorization::TRUSTEE_A,
-    fAccessFlags : Win32cr::Security::Authorization::ACTRL_ACCESS_ENTRY_ACCESS_FLAGS,
-    access : UInt32,
-    prov_specific_access : UInt32,
-    inheritance : Win32cr::Security::ACE_FLAGS,
-    lpInheritProperty : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record ACTRL_ACCESS_ENTRYW,
-    trustee : Win32cr::Security::Authorization::TRUSTEE_W,
-    fAccessFlags : Win32cr::Security::Authorization::ACTRL_ACCESS_ENTRY_ACCESS_FLAGS,
-    access : UInt32,
-    prov_specific_access : UInt32,
-    inheritance : Win32cr::Security::ACE_FLAGS,
-    lpInheritProperty : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record ACTRL_ACCESS_ENTRY_LISTA,
-    cEntries : UInt32,
-    pAccessList : Win32cr::Security::Authorization::ACTRL_ACCESS_ENTRYA*
-
-  @[Extern]
-  record ACTRL_ACCESS_ENTRY_LISTW,
-    cEntries : UInt32,
-    pAccessList : Win32cr::Security::Authorization::ACTRL_ACCESS_ENTRYW*
-
-  @[Extern]
-  record ACTRL_PROPERTY_ENTRYA,
-    lpProperty : Win32cr::Foundation::PSTR,
-    pAccessEntryList : Win32cr::Security::Authorization::ACTRL_ACCESS_ENTRY_LISTA*,
-    fListFlags : UInt32
-
-  @[Extern]
-  record ACTRL_PROPERTY_ENTRYW,
-    lpProperty : Win32cr::Foundation::PWSTR,
-    pAccessEntryList : Win32cr::Security::Authorization::ACTRL_ACCESS_ENTRY_LISTW*,
-    fListFlags : UInt32
-
-  @[Extern]
-  record ACTRL_ACCESSA,
-    cEntries : UInt32,
-    pPropertyAccessList : Win32cr::Security::Authorization::ACTRL_PROPERTY_ENTRYA*
-
-  @[Extern]
-  record ACTRL_ACCESSW,
-    cEntries : UInt32,
-    pPropertyAccessList : Win32cr::Security::Authorization::ACTRL_PROPERTY_ENTRYW*
-
-  @[Extern]
-  record TRUSTEE_ACCESSA,
-    lpProperty : Win32cr::Foundation::PSTR,
-    access : UInt32,
-    fAccessFlags : UInt32,
-    fReturnedAccess : UInt32
-
-  @[Extern]
-  record TRUSTEE_ACCESSW,
-    lpProperty : Win32cr::Foundation::PWSTR,
-    access : UInt32,
-    fAccessFlags : UInt32,
-    fReturnedAccess : UInt32
-
-  @[Extern]
-  record ACTRL_OVERLAPPED,
-    anonymous : Anonymous_e__Union_,
-    reserved2 : UInt32,
-    hEvent : Win32cr::Foundation::HANDLE do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      provider : Void*,
-      reserved1 : UInt32
-
+  struct OBJECTS_AND_SID
+    property objects_present : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS
+    property object_type_guid : LibC::GUID
+    property inherited_object_type_guid : LibC::GUID
+    property pSid : Win32cr::Security::SID*
+    def initialize(@objects_present : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS, @object_type_guid : LibC::GUID, @inherited_object_type_guid : LibC::GUID, @pSid : Win32cr::Security::SID*)
+    end
   end
 
   @[Extern]
-  record ACTRL_ACCESS_INFOA,
-    fAccessPermission : UInt32,
-    lpAccessPermissionName : Win32cr::Foundation::PSTR
+  struct OBJECTS_AND_NAME_A
+    property objects_present : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS
+    property object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE
+    property object_type_name : Win32cr::Foundation::PSTR
+    property inherited_object_type_name : Win32cr::Foundation::PSTR
+    property ptstrName : Win32cr::Foundation::PSTR
+    def initialize(@objects_present : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS, @object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, @object_type_name : Win32cr::Foundation::PSTR, @inherited_object_type_name : Win32cr::Foundation::PSTR, @ptstrName : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record ACTRL_ACCESS_INFOW,
-    fAccessPermission : UInt32,
-    lpAccessPermissionName : Win32cr::Foundation::PWSTR
+  struct OBJECTS_AND_NAME_W
+    property objects_present : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS
+    property object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE
+    property object_type_name : Win32cr::Foundation::PWSTR
+    property inherited_object_type_name : Win32cr::Foundation::PWSTR
+    property ptstrName : Win32cr::Foundation::PWSTR
+    def initialize(@objects_present : Win32cr::Security::SYSTEM_AUDIT_OBJECT_ACE_FLAGS, @object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, @object_type_name : Win32cr::Foundation::PWSTR, @inherited_object_type_name : Win32cr::Foundation::PWSTR, @ptstrName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record ACTRL_CONTROL_INFOA,
-    lpControlId : Win32cr::Foundation::PSTR,
-    lpControlName : Win32cr::Foundation::PSTR
+  struct TRUSTEE_A
+    property pMultipleTrustee : Win32cr::Security::Authorization::TRUSTEE_A*
+    property multiple_trustee_operation : Win32cr::Security::Authorization::MULTIPLE_TRUSTEE_OPERATION
+    property trustee_form : Win32cr::Security::Authorization::TRUSTEE_FORM
+    property trustee_type : Win32cr::Security::Authorization::TRUSTEE_TYPE
+    property ptstrName : Win32cr::Foundation::PSTR
+    def initialize(@pMultipleTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, @multiple_trustee_operation : Win32cr::Security::Authorization::MULTIPLE_TRUSTEE_OPERATION, @trustee_form : Win32cr::Security::Authorization::TRUSTEE_FORM, @trustee_type : Win32cr::Security::Authorization::TRUSTEE_TYPE, @ptstrName : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record ACTRL_CONTROL_INFOW,
-    lpControlId : Win32cr::Foundation::PWSTR,
-    lpControlName : Win32cr::Foundation::PWSTR
+  struct TRUSTEE_W
+    property pMultipleTrustee : Win32cr::Security::Authorization::TRUSTEE_W*
+    property multiple_trustee_operation : Win32cr::Security::Authorization::MULTIPLE_TRUSTEE_OPERATION
+    property trustee_form : Win32cr::Security::Authorization::TRUSTEE_FORM
+    property trustee_type : Win32cr::Security::Authorization::TRUSTEE_TYPE
+    property ptstrName : Win32cr::Foundation::PWSTR
+    def initialize(@pMultipleTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, @multiple_trustee_operation : Win32cr::Security::Authorization::MULTIPLE_TRUSTEE_OPERATION, @trustee_form : Win32cr::Security::Authorization::TRUSTEE_FORM, @trustee_type : Win32cr::Security::Authorization::TRUSTEE_TYPE, @ptstrName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record FN_OBJECT_MGR_FUNCTIONS,
-    placeholder : UInt32
+  struct EXPLICIT_ACCESS_A
+    property grfAccessPermissions : UInt32
+    property grfAccessMode : Win32cr::Security::Authorization::ACCESS_MODE
+    property grfInheritance : Win32cr::Security::ACE_FLAGS
+    property trustee : Win32cr::Security::Authorization::TRUSTEE_A
+    def initialize(@grfAccessPermissions : UInt32, @grfAccessMode : Win32cr::Security::Authorization::ACCESS_MODE, @grfInheritance : Win32cr::Security::ACE_FLAGS, @trustee : Win32cr::Security::Authorization::TRUSTEE_A)
+    end
+  end
 
   @[Extern]
-  record INHERITED_FROMA,
-    generation_gap : Int32,
-    ancestor_name : Win32cr::Foundation::PSTR
+  struct EXPLICIT_ACCESS_W
+    property grfAccessPermissions : UInt32
+    property grfAccessMode : Win32cr::Security::Authorization::ACCESS_MODE
+    property grfInheritance : Win32cr::Security::ACE_FLAGS
+    property trustee : Win32cr::Security::Authorization::TRUSTEE_W
+    def initialize(@grfAccessPermissions : UInt32, @grfAccessMode : Win32cr::Security::Authorization::ACCESS_MODE, @grfInheritance : Win32cr::Security::ACE_FLAGS, @trustee : Win32cr::Security::Authorization::TRUSTEE_W)
+    end
+  end
 
   @[Extern]
-  record INHERITED_FROMW,
-    generation_gap : Int32,
-    ancestor_name : Win32cr::Foundation::PWSTR
+  struct ACTRL_ACCESS_ENTRYA
+    property trustee : Win32cr::Security::Authorization::TRUSTEE_A
+    property fAccessFlags : Win32cr::Security::Authorization::ACTRL_ACCESS_ENTRY_ACCESS_FLAGS
+    property access : UInt32
+    property prov_specific_access : UInt32
+    property inheritance : Win32cr::Security::ACE_FLAGS
+    property lpInheritProperty : Win32cr::Foundation::PSTR
+    def initialize(@trustee : Win32cr::Security::Authorization::TRUSTEE_A, @fAccessFlags : Win32cr::Security::Authorization::ACTRL_ACCESS_ENTRY_ACCESS_FLAGS, @access : UInt32, @prov_specific_access : UInt32, @inheritance : Win32cr::Security::ACE_FLAGS, @lpInheritProperty : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record AUDIT_OBJECT_TYPE,
-    object_type : LibC::GUID,
-    flags : UInt16,
-    level : UInt16,
-    access_mask : UInt32
+  struct ACTRL_ACCESS_ENTRYW
+    property trustee : Win32cr::Security::Authorization::TRUSTEE_W
+    property fAccessFlags : Win32cr::Security::Authorization::ACTRL_ACCESS_ENTRY_ACCESS_FLAGS
+    property access : UInt32
+    property prov_specific_access : UInt32
+    property inheritance : Win32cr::Security::ACE_FLAGS
+    property lpInheritProperty : Win32cr::Foundation::PWSTR
+    def initialize(@trustee : Win32cr::Security::Authorization::TRUSTEE_W, @fAccessFlags : Win32cr::Security::Authorization::ACTRL_ACCESS_ENTRY_ACCESS_FLAGS, @access : UInt32, @prov_specific_access : UInt32, @inheritance : Win32cr::Security::ACE_FLAGS, @lpInheritProperty : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record AUDIT_OBJECT_TYPES,
-    count : UInt16,
-    flags : UInt16,
-    pObjectTypes : Win32cr::Security::Authorization::AUDIT_OBJECT_TYPE*
+  struct ACTRL_ACCESS_ENTRY_LISTA
+    property cEntries : UInt32
+    property pAccessList : Win32cr::Security::Authorization::ACTRL_ACCESS_ENTRYA*
+    def initialize(@cEntries : UInt32, @pAccessList : Win32cr::Security::Authorization::ACTRL_ACCESS_ENTRYA*)
+    end
+  end
 
   @[Extern]
-  record AUDIT_IP_ADDRESS,
-    pIpAddress : UInt8[128]
+  struct ACTRL_ACCESS_ENTRY_LISTW
+    property cEntries : UInt32
+    property pAccessList : Win32cr::Security::Authorization::ACTRL_ACCESS_ENTRYW*
+    def initialize(@cEntries : UInt32, @pAccessList : Win32cr::Security::Authorization::ACTRL_ACCESS_ENTRYW*)
+    end
+  end
 
   @[Extern]
-  record AUDIT_PARAM,
-    type__ : Win32cr::Security::Authorization::AUDIT_PARAM_TYPE,
-    length : UInt32,
-    flags : UInt32,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_ do
+  struct ACTRL_PROPERTY_ENTRYA
+    property lpProperty : Win32cr::Foundation::PSTR
+    property pAccessEntryList : Win32cr::Security::Authorization::ACTRL_ACCESS_ENTRY_LISTA*
+    property fListFlags : UInt32
+    def initialize(@lpProperty : Win32cr::Foundation::PSTR, @pAccessEntryList : Win32cr::Security::Authorization::ACTRL_ACCESS_ENTRY_LISTA*, @fListFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ACTRL_PROPERTY_ENTRYW
+    property lpProperty : Win32cr::Foundation::PWSTR
+    property pAccessEntryList : Win32cr::Security::Authorization::ACTRL_ACCESS_ENTRY_LISTW*
+    property fListFlags : UInt32
+    def initialize(@lpProperty : Win32cr::Foundation::PWSTR, @pAccessEntryList : Win32cr::Security::Authorization::ACTRL_ACCESS_ENTRY_LISTW*, @fListFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ACTRL_ACCESSA
+    property cEntries : UInt32
+    property pPropertyAccessList : Win32cr::Security::Authorization::ACTRL_PROPERTY_ENTRYA*
+    def initialize(@cEntries : UInt32, @pPropertyAccessList : Win32cr::Security::Authorization::ACTRL_PROPERTY_ENTRYA*)
+    end
+  end
+
+  @[Extern]
+  struct ACTRL_ACCESSW
+    property cEntries : UInt32
+    property pPropertyAccessList : Win32cr::Security::Authorization::ACTRL_PROPERTY_ENTRYW*
+    def initialize(@cEntries : UInt32, @pPropertyAccessList : Win32cr::Security::Authorization::ACTRL_PROPERTY_ENTRYW*)
+    end
+  end
+
+  @[Extern]
+  struct TRUSTEE_ACCESSA
+    property lpProperty : Win32cr::Foundation::PSTR
+    property access : UInt32
+    property fAccessFlags : UInt32
+    property fReturnedAccess : UInt32
+    def initialize(@lpProperty : Win32cr::Foundation::PSTR, @access : UInt32, @fAccessFlags : UInt32, @fReturnedAccess : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct TRUSTEE_ACCESSW
+    property lpProperty : Win32cr::Foundation::PWSTR
+    property access : UInt32
+    property fAccessFlags : UInt32
+    property fReturnedAccess : UInt32
+    def initialize(@lpProperty : Win32cr::Foundation::PWSTR, @access : UInt32, @fAccessFlags : UInt32, @fReturnedAccess : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ACTRL_OVERLAPPED
+    property anonymous : Anonymous_e__Union_
+    property reserved2 : UInt32
+    property hEvent : Win32cr::Foundation::HANDLE
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property provider : Void*
+    property reserved1 : UInt32
+    def initialize(@provider : Void*, @reserved1 : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Union_, @reserved2 : UInt32, @hEvent : Win32cr::Foundation::HANDLE)
+    end
+  end
+
+  @[Extern]
+  struct ACTRL_ACCESS_INFOA
+    property fAccessPermission : UInt32
+    property lpAccessPermissionName : Win32cr::Foundation::PSTR
+    def initialize(@fAccessPermission : UInt32, @lpAccessPermissionName : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct ACTRL_ACCESS_INFOW
+    property fAccessPermission : UInt32
+    property lpAccessPermissionName : Win32cr::Foundation::PWSTR
+    def initialize(@fAccessPermission : UInt32, @lpAccessPermissionName : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct ACTRL_CONTROL_INFOA
+    property lpControlId : Win32cr::Foundation::PSTR
+    property lpControlName : Win32cr::Foundation::PSTR
+    def initialize(@lpControlId : Win32cr::Foundation::PSTR, @lpControlName : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct ACTRL_CONTROL_INFOW
+    property lpControlId : Win32cr::Foundation::PWSTR
+    property lpControlName : Win32cr::Foundation::PWSTR
+    def initialize(@lpControlId : Win32cr::Foundation::PWSTR, @lpControlName : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct FN_OBJECT_MGR_FUNCTIONS
+    property placeholder : UInt32
+    def initialize(@placeholder : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct INHERITED_FROMA
+    property generation_gap : Int32
+    property ancestor_name : Win32cr::Foundation::PSTR
+    def initialize(@generation_gap : Int32, @ancestor_name : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct INHERITED_FROMW
+    property generation_gap : Int32
+    property ancestor_name : Win32cr::Foundation::PWSTR
+    def initialize(@generation_gap : Int32, @ancestor_name : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct AUDIT_OBJECT_TYPE
+    property object_type : LibC::GUID
+    property flags : UInt16
+    property level : UInt16
+    property access_mask : UInt32
+    def initialize(@object_type : LibC::GUID, @flags : UInt16, @level : UInt16, @access_mask : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct AUDIT_OBJECT_TYPES
+    property count : UInt16
+    property flags : UInt16
+    property pObjectTypes : Win32cr::Security::Authorization::AUDIT_OBJECT_TYPE*
+    def initialize(@count : UInt16, @flags : UInt16, @pObjectTypes : Win32cr::Security::Authorization::AUDIT_OBJECT_TYPE*)
+    end
+  end
+
+  @[Extern]
+  struct AUDIT_IP_ADDRESS
+    property pIpAddress : UInt8[128]
+    def initialize(@pIpAddress : UInt8[128])
+    end
+  end
+
+  @[Extern]
+  struct AUDIT_PARAM
+    property type__ : Win32cr::Security::Authorization::AUDIT_PARAM_TYPE
+    property length : UInt32
+    property flags : UInt32
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      data0 : LibC::UIntPtrT,
-      string : Win32cr::Foundation::PWSTR,
-      u : LibC::UIntPtrT,
-      psid : Win32cr::Security::SID*,
-      pguid : LibC::GUID*,
-      logon_id_low_part : UInt32,
-      pObjectTypes : Win32cr::Security::Authorization::AUDIT_OBJECT_TYPES*,
-      pIpAddress : Win32cr::Security::Authorization::AUDIT_IP_ADDRESS*
+    struct Anonymous1_e__Union_
+    property data0 : LibC::UIntPtrT
+    property string : Win32cr::Foundation::PWSTR
+    property u : LibC::UIntPtrT
+    property psid : Win32cr::Security::SID*
+    property pguid : LibC::GUID*
+    property logon_id_low_part : UInt32
+    property pObjectTypes : Win32cr::Security::Authorization::AUDIT_OBJECT_TYPES*
+    property pIpAddress : Win32cr::Security::Authorization::AUDIT_IP_ADDRESS*
+    def initialize(@data0 : LibC::UIntPtrT, @string : Win32cr::Foundation::PWSTR, @u : LibC::UIntPtrT, @psid : Win32cr::Security::SID*, @pguid : LibC::GUID*, @logon_id_low_part : UInt32, @pObjectTypes : Win32cr::Security::Authorization::AUDIT_OBJECT_TYPES*, @pIpAddress : Win32cr::Security::Authorization::AUDIT_IP_ADDRESS*)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      data1 : LibC::UIntPtrT,
-      logon_id_high_part : Int32
+    struct Anonymous2_e__Union_
+    property data1 : LibC::UIntPtrT
+    property logon_id_high_part : Int32
+    def initialize(@data1 : LibC::UIntPtrT, @logon_id_high_part : Int32)
+    end
+    end
 
+    def initialize(@type__ : Win32cr::Security::Authorization::AUDIT_PARAM_TYPE, @length : UInt32, @flags : UInt32, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_)
+    end
   end
 
   @[Extern]
-  record AUDIT_PARAMS,
-    length : UInt32,
-    flags : UInt32,
-    count : UInt16,
-    parameters : Win32cr::Security::Authorization::AUDIT_PARAM*
+  struct AUDIT_PARAMS
+    property length : UInt32
+    property flags : UInt32
+    property count : UInt16
+    property parameters : Win32cr::Security::Authorization::AUDIT_PARAM*
+    def initialize(@length : UInt32, @flags : UInt32, @count : UInt16, @parameters : Win32cr::Security::Authorization::AUDIT_PARAM*)
+    end
+  end
 
   @[Extern]
-  record AUTHZ_AUDIT_EVENT_TYPE_LEGACY,
-    category_id : UInt16,
-    audit_id : UInt16,
-    parameter_count : UInt16
+  struct AUTHZ_AUDIT_EVENT_TYPE_LEGACY
+    property category_id : UInt16
+    property audit_id : UInt16
+    property parameter_count : UInt16
+    def initialize(@category_id : UInt16, @audit_id : UInt16, @parameter_count : UInt16)
+    end
+  end
 
   @[Extern(union: true)]
-  record AUTHZ_AUDIT_EVENT_TYPE_UNION,
-    legacy : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_TYPE_LEGACY
+  struct AUTHZ_AUDIT_EVENT_TYPE_UNION
+    property legacy : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_TYPE_LEGACY
+    def initialize(@legacy : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_TYPE_LEGACY)
+    end
+  end
 
   @[Extern]
-  record AUTHZ_AUDIT_EVENT_TYPE_OLD,
-    version : UInt32,
-    dwFlags : UInt32,
-    ref_count : Int32,
-    hAudit : LibC::UIntPtrT,
-    link_id : Win32cr::Foundation::LUID,
-    u : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_TYPE_UNION
+  struct AUTHZ_AUDIT_EVENT_TYPE_OLD
+    property version : UInt32
+    property dwFlags : UInt32
+    property ref_count : Int32
+    property hAudit : LibC::UIntPtrT
+    property link_id : Win32cr::Foundation::LUID
+    property u : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_TYPE_UNION
+    def initialize(@version : UInt32, @dwFlags : UInt32, @ref_count : Int32, @hAudit : LibC::UIntPtrT, @link_id : Win32cr::Foundation::LUID, @u : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_TYPE_UNION)
+    end
+  end
 
   @[Extern]
-  record AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE__,
-    unused : Int32
+  struct AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE__
+    property unused : Int32
+    def initialize(@unused : Int32)
+    end
+  end
 
   @[Extern]
-  record AUTHZ_ACCESS_REQUEST,
-    desired_access : UInt32,
-    principal_self_sid : Win32cr::Foundation::PSID,
-    object_type_list : Win32cr::Security::OBJECT_TYPE_LIST*,
-    object_type_list_length : UInt32,
-    optional_arguments : Void*
+  struct AUTHZ_ACCESS_REQUEST
+    property desired_access : UInt32
+    property principal_self_sid : Win32cr::Foundation::PSID
+    property object_type_list : Win32cr::Security::OBJECT_TYPE_LIST*
+    property object_type_list_length : UInt32
+    property optional_arguments : Void*
+    def initialize(@desired_access : UInt32, @principal_self_sid : Win32cr::Foundation::PSID, @object_type_list : Win32cr::Security::OBJECT_TYPE_LIST*, @object_type_list_length : UInt32, @optional_arguments : Void*)
+    end
+  end
 
   @[Extern]
-  record AUTHZ_ACCESS_REPLY,
-    result_list_length : UInt32,
-    granted_access_mask : UInt32*,
-    sacl_evaluation_results : Win32cr::Security::Authorization::AUTHZ_GENERATE_RESULTS*,
-    error : UInt32*
+  struct AUTHZ_ACCESS_REPLY
+    property result_list_length : UInt32
+    property granted_access_mask : UInt32*
+    property sacl_evaluation_results : Win32cr::Security::Authorization::AUTHZ_GENERATE_RESULTS*
+    property error : UInt32*
+    def initialize(@result_list_length : UInt32, @granted_access_mask : UInt32*, @sacl_evaluation_results : Win32cr::Security::Authorization::AUTHZ_GENERATE_RESULTS*, @error : UInt32*)
+    end
+  end
 
   @[Extern]
-  record AUTHZ_SECURITY_ATTRIBUTE_FQBN_VALUE,
-    version : UInt64,
-    pName : Win32cr::Foundation::PWSTR
+  struct AUTHZ_SECURITY_ATTRIBUTE_FQBN_VALUE
+    property version : UInt64
+    property pName : Win32cr::Foundation::PWSTR
+    def initialize(@version : UInt64, @pName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record AUTHZ_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE,
-    pValue : Void*,
-    value_length : UInt32
+  struct AUTHZ_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE
+    property pValue : Void*
+    property value_length : UInt32
+    def initialize(@pValue : Void*, @value_length : UInt32)
+    end
+  end
 
   @[Extern]
-  record AUTHZ_SECURITY_ATTRIBUTE_V1,
-    pName : Win32cr::Foundation::PWSTR,
-    value_type : UInt16,
-    reserved : UInt16,
-    flags : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_FLAGS,
-    value_count : UInt32,
-    values : Values_e__Union_ do
+  struct AUTHZ_SECURITY_ATTRIBUTE_V1
+    property pName : Win32cr::Foundation::PWSTR
+    property value_type : UInt16
+    property reserved : UInt16
+    property flags : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_FLAGS
+    property value_count : UInt32
+    property values : Values_e__Union_
 
     # Nested Type Values_e__Union_
     @[Extern(union: true)]
-    record Values_e__Union_,
-      pInt64 : Int64*,
-      pUint64 : UInt64*,
-      ppString : Win32cr::Foundation::PWSTR*,
-      pFqbn : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_FQBN_VALUE*,
-      pOctetString : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE*
+    struct Values_e__Union_
+    property pInt64 : Int64*
+    property pUint64 : UInt64*
+    property ppString : Win32cr::Foundation::PWSTR*
+    property pFqbn : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_FQBN_VALUE*
+    property pOctetString : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE*
+    def initialize(@pInt64 : Int64*, @pUint64 : UInt64*, @ppString : Win32cr::Foundation::PWSTR*, @pFqbn : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_FQBN_VALUE*, @pOctetString : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE*)
+    end
+    end
 
+    def initialize(@pName : Win32cr::Foundation::PWSTR, @value_type : UInt16, @reserved : UInt16, @flags : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_FLAGS, @value_count : UInt32, @values : Values_e__Union_)
+    end
   end
 
   @[Extern]
-  record AUTHZ_SECURITY_ATTRIBUTES_INFORMATION,
-    version : UInt16,
-    reserved : UInt16,
-    attribute_count : UInt32,
-    attribute : Attribute_e__Union_ do
+  struct AUTHZ_SECURITY_ATTRIBUTES_INFORMATION
+    property version : UInt16
+    property reserved : UInt16
+    property attribute_count : UInt32
+    property attribute : Attribute_e__Union_
 
     # Nested Type Attribute_e__Union_
     @[Extern(union: true)]
-    record Attribute_e__Union_,
-      pAttributeV1 : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_V1*
+    struct Attribute_e__Union_
+    property pAttributeV1 : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_V1*
+    def initialize(@pAttributeV1 : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_V1*)
+    end
+    end
 
+    def initialize(@version : UInt16, @reserved : UInt16, @attribute_count : UInt32, @attribute : Attribute_e__Union_)
+    end
   end
 
   @[Extern]
-  record AUTHZ_RPC_INIT_INFO_CLIENT,
-    version : UInt16,
-    object_uuid : Win32cr::Foundation::PWSTR,
-    prot_seq : Win32cr::Foundation::PWSTR,
-    network_addr : Win32cr::Foundation::PWSTR,
-    endpoint : Win32cr::Foundation::PWSTR,
-    options : Win32cr::Foundation::PWSTR,
-    server_spn : Win32cr::Foundation::PWSTR
+  struct AUTHZ_RPC_INIT_INFO_CLIENT
+    property version : UInt16
+    property object_uuid : Win32cr::Foundation::PWSTR
+    property prot_seq : Win32cr::Foundation::PWSTR
+    property network_addr : Win32cr::Foundation::PWSTR
+    property endpoint : Win32cr::Foundation::PWSTR
+    property options : Win32cr::Foundation::PWSTR
+    property server_spn : Win32cr::Foundation::PWSTR
+    def initialize(@version : UInt16, @object_uuid : Win32cr::Foundation::PWSTR, @prot_seq : Win32cr::Foundation::PWSTR, @network_addr : Win32cr::Foundation::PWSTR, @endpoint : Win32cr::Foundation::PWSTR, @options : Win32cr::Foundation::PWSTR, @server_spn : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record AUTHZ_INIT_INFO,
-    version : UInt16,
-    szResourceManagerName : Win32cr::Foundation::PWSTR,
-    pfnDynamicAccessCheck : Win32cr::Security::Authorization::PFN_AUTHZ_DYNAMIC_ACCESS_CHECK,
-    pfnComputeDynamicGroups : Win32cr::Security::Authorization::PFN_AUTHZ_COMPUTE_DYNAMIC_GROUPS,
-    pfnFreeDynamicGroups : Win32cr::Security::Authorization::PFN_AUTHZ_FREE_DYNAMIC_GROUPS,
-    pfnGetCentralAccessPolicy : Win32cr::Security::Authorization::PFN_AUTHZ_GET_CENTRAL_ACCESS_POLICY,
-    pfnFreeCentralAccessPolicy : Win32cr::Security::Authorization::PFN_AUTHZ_FREE_CENTRAL_ACCESS_POLICY
+  struct AUTHZ_INIT_INFO
+    property version : UInt16
+    property szResourceManagerName : Win32cr::Foundation::PWSTR
+    property pfnDynamicAccessCheck : Win32cr::Security::Authorization::PFN_AUTHZ_DYNAMIC_ACCESS_CHECK
+    property pfnComputeDynamicGroups : Win32cr::Security::Authorization::PFN_AUTHZ_COMPUTE_DYNAMIC_GROUPS
+    property pfnFreeDynamicGroups : Win32cr::Security::Authorization::PFN_AUTHZ_FREE_DYNAMIC_GROUPS
+    property pfnGetCentralAccessPolicy : Win32cr::Security::Authorization::PFN_AUTHZ_GET_CENTRAL_ACCESS_POLICY
+    property pfnFreeCentralAccessPolicy : Win32cr::Security::Authorization::PFN_AUTHZ_FREE_CENTRAL_ACCESS_POLICY
+    def initialize(@version : UInt16, @szResourceManagerName : Win32cr::Foundation::PWSTR, @pfnDynamicAccessCheck : Win32cr::Security::Authorization::PFN_AUTHZ_DYNAMIC_ACCESS_CHECK, @pfnComputeDynamicGroups : Win32cr::Security::Authorization::PFN_AUTHZ_COMPUTE_DYNAMIC_GROUPS, @pfnFreeDynamicGroups : Win32cr::Security::Authorization::PFN_AUTHZ_FREE_DYNAMIC_GROUPS, @pfnGetCentralAccessPolicy : Win32cr::Security::Authorization::PFN_AUTHZ_GET_CENTRAL_ACCESS_POLICY, @pfnFreeCentralAccessPolicy : Win32cr::Security::Authorization::PFN_AUTHZ_FREE_CENTRAL_ACCESS_POLICY)
+    end
+  end
 
   @[Extern]
-  record AUTHZ_REGISTRATION_OBJECT_TYPE_NAME_OFFSET,
-    szObjectTypeName : Win32cr::Foundation::PWSTR,
-    dwOffset : UInt32
+  struct AUTHZ_REGISTRATION_OBJECT_TYPE_NAME_OFFSET
+    property szObjectTypeName : Win32cr::Foundation::PWSTR
+    property dwOffset : UInt32
+    def initialize(@szObjectTypeName : Win32cr::Foundation::PWSTR, @dwOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record AUTHZ_SOURCE_SCHEMA_REGISTRATION,
-    dwFlags : UInt32,
-    szEventSourceName : Win32cr::Foundation::PWSTR,
-    szEventMessageFile : Win32cr::Foundation::PWSTR,
-    szEventSourceXmlSchemaFile : Win32cr::Foundation::PWSTR,
-    szEventAccessStringsFile : Win32cr::Foundation::PWSTR,
-    szExecutableImagePath : Win32cr::Foundation::PWSTR,
-    anonymous : Anonymous_e__Union_,
-    dwObjectTypeNameCount : UInt32,
-    object_type_names : Win32cr::Security::Authorization::AUTHZ_REGISTRATION_OBJECT_TYPE_NAME_OFFSET* do
+  struct AUTHZ_SOURCE_SCHEMA_REGISTRATION
+    property dwFlags : UInt32
+    property szEventSourceName : Win32cr::Foundation::PWSTR
+    property szEventMessageFile : Win32cr::Foundation::PWSTR
+    property szEventSourceXmlSchemaFile : Win32cr::Foundation::PWSTR
+    property szEventAccessStringsFile : Win32cr::Foundation::PWSTR
+    property szExecutableImagePath : Win32cr::Foundation::PWSTR
+    property anonymous : Anonymous_e__Union_
+    property dwObjectTypeNameCount : UInt32
+    property object_type_names : Win32cr::Security::Authorization::AUTHZ_REGISTRATION_OBJECT_TYPE_NAME_OFFSET*
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      pReserved : Void*,
-      pProviderGuid : LibC::GUID*
+    struct Anonymous_e__Union_
+    property pReserved : Void*
+    property pProviderGuid : LibC::GUID*
+    def initialize(@pReserved : Void*, @pProviderGuid : LibC::GUID*)
+    end
+    end
 
+    def initialize(@dwFlags : UInt32, @szEventSourceName : Win32cr::Foundation::PWSTR, @szEventMessageFile : Win32cr::Foundation::PWSTR, @szEventSourceXmlSchemaFile : Win32cr::Foundation::PWSTR, @szEventAccessStringsFile : Win32cr::Foundation::PWSTR, @szExecutableImagePath : Win32cr::Foundation::PWSTR, @anonymous : Anonymous_e__Union_, @dwObjectTypeNameCount : UInt32, @object_type_names : Win32cr::Security::Authorization::AUTHZ_REGISTRATION_OBJECT_TYPE_NAME_OFFSET*)
+    end
   end
 
   @[Extern]
@@ -963,7 +1108,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("edbd9ca9-9b82-4f6a-9e8b-98301e450f14")]
   record IAzAuthorizationStore, lpVtbl : IAzAuthorizationStoreVtbl* do
     GUID = LibC::GUID.new(0xedbd9ca9_u32, 0x9b82_u16, 0x4f6a_u16, StaticArray[0x9e_u8, 0x8b_u8, 0x98_u8, 0x30_u8, 0x1e_u8, 0x45_u8, 0xf_u8, 0x14_u8])
     def query_interface(this : IAzAuthorizationStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1208,7 +1352,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("b11e5584-d577-4273-b6c5-0973e0f8e80d")]
   record IAzAuthorizationStore2, lpVtbl : IAzAuthorizationStore2Vtbl* do
     GUID = LibC::GUID.new(0xb11e5584_u32, 0xd577_u16, 0x4273_u16, StaticArray[0xb6_u8, 0xc5_u8, 0x9_u8, 0x73_u8, 0xe0_u8, 0xf8_u8, 0xe8_u8, 0xd_u8])
     def query_interface(this : IAzAuthorizationStore2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1464,7 +1607,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("abc08425-0c86-4fa0-9be3-7189956c926e")]
   record IAzAuthorizationStore3, lpVtbl : IAzAuthorizationStore3Vtbl* do
     GUID = LibC::GUID.new(0xabc08425_u32, 0xc86_u16, 0x4fa0_u16, StaticArray[0x9b_u8, 0xe3_u8, 0x71_u8, 0x89_u8, 0x95_u8, 0x6c_u8, 0x92_u8, 0x6e_u8])
     def query_interface(this : IAzAuthorizationStore3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1738,7 +1880,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("987bc7c7-b813-4d27-bede-6ba5ae867e95")]
   record IAzApplication, lpVtbl : IAzApplicationVtbl* do
     GUID = LibC::GUID.new(0x987bc7c7_u32, 0xb813_u16, 0x4d27_u16, StaticArray[0xbe_u8, 0xde_u8, 0x6b_u8, 0xa5_u8, 0xae_u8, 0x86_u8, 0x7e_u8, 0x95_u8])
     def query_interface(this : IAzApplication*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2023,7 +2164,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("086a68af-a249-437c-b18d-d4d86d6a9660")]
   record IAzApplication2, lpVtbl : IAzApplication2Vtbl* do
     GUID = LibC::GUID.new(0x86a68af_u32, 0xa249_u16, 0x437c_u16, StaticArray[0xb1_u8, 0x8d_u8, 0xd4_u8, 0xd8_u8, 0x6d_u8, 0x6a_u8, 0x96_u8, 0x60_u8])
     def query_interface(this : IAzApplication2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2254,7 +2394,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("929b11a9-95c5-4a84-a29a-20ad42c2f16c")]
   record IAzApplications, lpVtbl : IAzApplicationsVtbl* do
     GUID = LibC::GUID.new(0x929b11a9_u32, 0x95c5_u16, 0x4a84_u16, StaticArray[0xa2_u8, 0x9a_u8, 0x20_u8, 0xad_u8, 0x42_u8, 0xc2_u8, 0xf1_u8, 0x6c_u8])
     def query_interface(this : IAzApplications*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2314,7 +2453,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("5e56b24f-ea01-4d61-be44-c49b5e4eaf74")]
   record IAzOperation, lpVtbl : IAzOperationVtbl* do
     GUID = LibC::GUID.new(0x5e56b24f_u32, 0xea01_u16, 0x4d61_u16, StaticArray[0xbe_u8, 0x44_u8, 0xc4_u8, 0x9b_u8, 0x5e_u8, 0x4e_u8, 0xaf_u8, 0x74_u8])
     def query_interface(this : IAzOperation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2392,7 +2530,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("90ef9c07-9706-49d9-af80-0438a5f3ec35")]
   record IAzOperations, lpVtbl : IAzOperationsVtbl* do
     GUID = LibC::GUID.new(0x90ef9c07_u32, 0x9706_u16, 0x49d9_u16, StaticArray[0xaf_u8, 0x80_u8, 0x4_u8, 0x38_u8, 0xa5_u8, 0xf3_u8, 0xec_u8, 0x35_u8])
     def query_interface(this : IAzOperations*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2466,7 +2603,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("cb94e592-2e0e-4a6c-a336-b89a6dc1e388")]
   record IAzTask, lpVtbl : IAzTaskVtbl* do
     GUID = LibC::GUID.new(0xcb94e592_u32, 0x2e0e_u16, 0x4a6c_u16, StaticArray[0xa3_u8, 0x36_u8, 0xb8_u8, 0x9a_u8, 0x6d_u8, 0xc1_u8, 0xe3_u8, 0x88_u8])
     def query_interface(this : IAzTask*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2586,7 +2722,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("b338ccab-4c85-4388-8c0a-c58592bad398")]
   record IAzTasks, lpVtbl : IAzTasksVtbl* do
     GUID = LibC::GUID.new(0xb338ccab_u32, 0x4c85_u16, 0x4388_u16, StaticArray[0x8c_u8, 0xa_u8, 0xc5_u8, 0x85_u8, 0x92_u8, 0xba_u8, 0xd3_u8, 0x98_u8])
     def query_interface(this : IAzTasks*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2672,7 +2807,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("00e52487-e08d-4514-b62e-877d5645f5ab")]
   record IAzScope, lpVtbl : IAzScopeVtbl* do
     GUID = LibC::GUID.new(0xe52487_u32, 0xe08d_u16, 0x4514_u16, StaticArray[0xb6_u8, 0x2e_u8, 0x87_u8, 0x7d_u8, 0x56_u8, 0x45_u8, 0xf5_u8, 0xab_u8])
     def query_interface(this : IAzScope*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2828,7 +2962,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("78e14853-9f5e-406d-9b91-6bdba6973510")]
   record IAzScopes, lpVtbl : IAzScopesVtbl* do
     GUID = LibC::GUID.new(0x78e14853_u32, 0x9f5e_u16, 0x406d_u16, StaticArray[0x9b_u8, 0x91_u8, 0x6b_u8, 0xdb_u8, 0xa6_u8, 0x97_u8, 0x35_u8, 0x10_u8])
     def query_interface(this : IAzScopes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2908,7 +3041,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("f1b744cd-58a6-4e06-9fbf-36f6d779e21e")]
   record IAzApplicationGroup, lpVtbl : IAzApplicationGroupVtbl* do
     GUID = LibC::GUID.new(0xf1b744cd_u32, 0x58a6_u16, 0x4e06_u16, StaticArray[0x9f_u8, 0xbf_u8, 0x36_u8, 0xf6_u8, 0xd7_u8, 0x79_u8, 0xe2_u8, 0x1e_u8])
     def query_interface(this : IAzApplicationGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3046,7 +3178,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("4ce66ad5-9f3c-469d-a911-b99887a7e685")]
   record IAzApplicationGroups, lpVtbl : IAzApplicationGroupsVtbl* do
     GUID = LibC::GUID.new(0x4ce66ad5_u32, 0x9f3c_u16, 0x469d_u16, StaticArray[0xa9_u8, 0x11_u8, 0xb9_u8, 0x98_u8, 0x87_u8, 0xa7_u8, 0xe6_u8, 0x85_u8])
     def query_interface(this : IAzApplicationGroups*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3121,7 +3252,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("859e0d8d-62d7-41d8-a034-c0cd5d43fdfa")]
   record IAzRole, lpVtbl : IAzRoleVtbl* do
     GUID = LibC::GUID.new(0x859e0d8d_u32, 0x62d7_u16, 0x41d8_u16, StaticArray[0xa0_u8, 0x34_u8, 0xc0_u8, 0xcd_u8, 0x5d_u8, 0x43_u8, 0xfd_u8, 0xfa_u8])
     def query_interface(this : IAzRole*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3244,7 +3374,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("95e0f119-13b4-4dae-b65f-2f7d60d822e4")]
   record IAzRoles, lpVtbl : IAzRolesVtbl* do
     GUID = LibC::GUID.new(0x95e0f119_u32, 0x13b4_u16, 0x4dae_u16, StaticArray[0xb6_u8, 0x5f_u8, 0x2f_u8, 0x7d_u8, 0x60_u8, 0xd8_u8, 0x22_u8, 0xe4_u8])
     def query_interface(this : IAzRoles*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3305,7 +3434,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("eff1f00b-488a-466d-afd9-a401c5f9eef5")]
   record IAzClientContext, lpVtbl : IAzClientContextVtbl* do
     GUID = LibC::GUID.new(0xeff1f00b_u32, 0x488a_u16, 0x466d_u16, StaticArray[0xaf_u8, 0xd9_u8, 0xa4_u8, 0x1_u8, 0xc5_u8, 0xf9_u8, 0xee_u8, 0xf5_u8])
     def query_interface(this : IAzClientContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3402,7 +3530,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("2b0c92b8-208a-488a-8f81-e4edb22111cd")]
   record IAzClientContext2, lpVtbl : IAzClientContext2Vtbl* do
     GUID = LibC::GUID.new(0x2b0c92b8_u32, 0x208a_u16, 0x488a_u16, StaticArray[0x8f_u8, 0x81_u8, 0xe4_u8, 0xed_u8, 0xb2_u8, 0x21_u8, 0x11_u8, 0xcd_u8])
     def query_interface(this : IAzClientContext2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3502,7 +3629,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("e192f17d-d59f-455e-a152-940316cd77b2")]
   record IAzBizRuleContext, lpVtbl : IAzBizRuleContextVtbl* do
     GUID = LibC::GUID.new(0xe192f17d_u32, 0xd59f_u16, 0x455e_u16, StaticArray[0xa1_u8, 0x52_u8, 0x94_u8, 0x3_u8, 0x16_u8, 0xcd_u8, 0x77_u8, 0xb2_u8])
     def query_interface(this : IAzBizRuleContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3559,7 +3685,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("fc17685f-e25d-4dcd-bae1-276ec9533cb5")]
   record IAzBizRuleParameters, lpVtbl : IAzBizRuleParametersVtbl* do
     GUID = LibC::GUID.new(0xfc17685f_u32, 0xe25d_u16, 0x4dcd_u16, StaticArray[0xba_u8, 0xe1_u8, 0x27_u8, 0x6e_u8, 0xc9_u8, 0x53_u8, 0x3c_u8, 0xb5_u8])
     def query_interface(this : IAzBizRuleParameters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3622,7 +3747,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("e94128c7-e9da-44cc-b0bd-53036f3aab3d")]
   record IAzBizRuleInterfaces, lpVtbl : IAzBizRuleInterfacesVtbl* do
     GUID = LibC::GUID.new(0xe94128c7_u32, 0xe9da_u16, 0x44cc_u16, StaticArray[0xb0_u8, 0xbd_u8, 0x53_u8, 0x3_u8, 0x6f_u8, 0x3a_u8, 0xab_u8, 0x3d_u8])
     def query_interface(this : IAzBizRuleInterfaces*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3706,7 +3830,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("11894fde-1deb-4b4b-8907-6d1cda1f5d4f")]
   record IAzClientContext3, lpVtbl : IAzClientContext3Vtbl* do
     GUID = LibC::GUID.new(0x11894fde_u32, 0x1deb_u16, 0x4b4b_u16, StaticArray[0x89_u8, 0x7_u8, 0x6d_u8, 0x1c_u8, 0xda_u8, 0x1f_u8, 0x5d_u8, 0x4f_u8])
     def query_interface(this : IAzClientContext3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3872,7 +3995,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("ee9fe8c9-c9f3-40e2-aa12-d1d8599727fd")]
   record IAzScope2, lpVtbl : IAzScope2Vtbl* do
     GUID = LibC::GUID.new(0xee9fe8c9_u32, 0xc9f3_u16, 0x40e2_u16, StaticArray[0xaa_u8, 0x12_u8, 0xd1_u8, 0xd8_u8, 0x59_u8, 0x97_u8, 0x27_u8, 0xfd_u8])
     def query_interface(this : IAzScope2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4126,7 +4248,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("181c845e-7196-4a7d-ac2e-020c0bb7a303")]
   record IAzApplication3, lpVtbl : IAzApplication3Vtbl* do
     GUID = LibC::GUID.new(0x181c845e_u32, 0x7196_u16, 0x4a7d_u16, StaticArray[0xac_u8, 0x2e_u8, 0x2_u8, 0xc_u8, 0xb_u8, 0xb7_u8, 0xa3_u8, 0x3_u8])
     def query_interface(this : IAzApplication3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4409,7 +4530,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("1f5ea01f-44a2-4184-9c48-a75b4dcc8ccc")]
   record IAzOperation2, lpVtbl : IAzOperation2Vtbl* do
     GUID = LibC::GUID.new(0x1f5ea01f_u32, 0x44a2_u16, 0x4184_u16, StaticArray[0x9c_u8, 0x48_u8, 0xa7_u8, 0x5b_u8, 0x4d_u8, 0xcc_u8, 0x8c_u8, 0xcc_u8])
     def query_interface(this : IAzOperation2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4490,7 +4610,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("881f25a5-d755-4550-957a-d503a3b34001")]
   record IAzRoleDefinitions, lpVtbl : IAzRoleDefinitionsVtbl* do
     GUID = LibC::GUID.new(0x881f25a5_u32, 0xd755_u16, 0x4550_u16, StaticArray[0x95_u8, 0x7a_u8, 0xd5_u8, 0x3_u8, 0xa3_u8, 0xb3_u8, 0x40_u8, 0x1_u8])
     def query_interface(this : IAzRoleDefinitions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4568,7 +4687,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("d97fcea1-2599-44f1-9fc3-58e9fbe09466")]
   record IAzRoleDefinition, lpVtbl : IAzRoleDefinitionVtbl* do
     GUID = LibC::GUID.new(0xd97fcea1_u32, 0x2599_u16, 0x44f1_u16, StaticArray[0x9f_u8, 0xc3_u8, 0x58_u8, 0xe9_u8, 0xfb_u8, 0xe0_u8, 0x94_u8, 0x66_u8])
     def query_interface(this : IAzRoleDefinition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4728,7 +4846,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("55647d31-0d5a-4fa3-b4ac-2b5f9ad5ab76")]
   record IAzRoleAssignment, lpVtbl : IAzRoleAssignmentVtbl* do
     GUID = LibC::GUID.new(0x55647d31_u32, 0xd5a_u16, 0x4fa3_u16, StaticArray[0xb4_u8, 0xac_u8, 0x2b_u8, 0x5f_u8, 0x9a_u8, 0xd5_u8, 0xab_u8, 0x76_u8])
     def query_interface(this : IAzRoleAssignment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4863,7 +4980,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("9c80b900-fceb-4d73-a0f4-c83b0bbf2481")]
   record IAzRoleAssignments, lpVtbl : IAzRoleAssignmentsVtbl* do
     GUID = LibC::GUID.new(0x9c80b900_u32, 0xfceb_u16, 0x4d73_u16, StaticArray[0xa0_u8, 0xf4_u8, 0xc8_u8, 0x3b_u8, 0xb_u8, 0xbf_u8, 0x24_u8, 0x81_u8])
     def query_interface(this : IAzRoleAssignments*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4913,7 +5029,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("e5c3507d-ad6a-4992-9c7f-74ab480b44cc")]
   record IAzPrincipalLocator, lpVtbl : IAzPrincipalLocatorVtbl* do
     GUID = LibC::GUID.new(0xe5c3507d_u32, 0xad6a_u16, 0x4992_u16, StaticArray[0x9c_u8, 0x7f_u8, 0x74_u8, 0xab_u8, 0x48_u8, 0xb_u8, 0x44_u8, 0xcc_u8])
     def query_interface(this : IAzPrincipalLocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4960,7 +5075,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("504d0f15-73e2-43df-a870-a64f40714f53")]
   record IAzNameResolver, lpVtbl : IAzNameResolverVtbl* do
     GUID = LibC::GUID.new(0x504d0f15_u32, 0x73e2_u16, 0x43df_u16, StaticArray[0xa8_u8, 0x70_u8, 0xa6_u8, 0x4f_u8, 0x40_u8, 0x71_u8, 0x4f_u8, 0x53_u8])
     def query_interface(this : IAzNameResolver*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5007,7 +5121,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("63130a48-699a-42d8-bf01-c62ac3fb79f9")]
   record IAzObjectPicker, lpVtbl : IAzObjectPickerVtbl* do
     GUID = LibC::GUID.new(0x63130a48_u32, 0x699a_u16, 0x42d8_u16, StaticArray[0xbf_u8, 0x1_u8, 0xc6_u8, 0x2a_u8, 0xc3_u8, 0xfb_u8, 0x79_u8, 0xf9_u8])
     def query_interface(this : IAzObjectPicker*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5091,7 +5204,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("3f0613fc-b71a-464e-a11d-5b881a56cefa")]
   record IAzApplicationGroup2, lpVtbl : IAzApplicationGroup2Vtbl* do
     GUID = LibC::GUID.new(0x3f0613fc_u32, 0xb71a_u16, 0x464e_u16, StaticArray[0xa1_u8, 0x1d_u8, 0x5b_u8, 0x88_u8, 0x1a_u8, 0x56_u8, 0xce_u8, 0xfa_u8])
     def query_interface(this : IAzApplicationGroup2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5274,7 +5386,6 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  #@[Com("03a9a5ee-48c8-4832-9025-aad503c46526")]
   record IAzTask2, lpVtbl : IAzTask2Vtbl* do
     GUID = LibC::GUID.new(0x3a9a5ee_u32, 0x48c8_u16, 0x4832_u16, StaticArray[0x90_u8, 0x25_u8, 0xaa_u8, 0xd5_u8, 0x3_u8, 0xc4_u8, 0x65_u8, 0x26_u8])
     def query_interface(this : IAzTask2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

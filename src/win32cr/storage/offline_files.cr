@@ -325,7 +325,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("e25585c1-0caa-4eb1-873b-1cae5b77c314")]
   record IOfflineFilesEvents, lpVtbl : IOfflineFilesEventsVtbl* do
     GUID = LibC::GUID.new(0xe25585c1_u32, 0xcaa_u16, 0x4eb1_u16, StaticArray[0x87_u8, 0x3b_u8, 0x1c_u8, 0xae_u8, 0x5b_u8, 0x77_u8, 0xc3_u8, 0x14_u8])
     def query_interface(this : IOfflineFilesEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -457,7 +456,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("1ead8f56-ff76-4faa-a795-6f6ef792498b")]
   record IOfflineFilesEvents2, lpVtbl : IOfflineFilesEvents2Vtbl* do
     GUID = LibC::GUID.new(0x1ead8f56_u32, 0xff76_u16, 0x4faa_u16, StaticArray[0xa7_u8, 0x95_u8, 0x6f_u8, 0x6e_u8, 0xf7_u8, 0x92_u8, 0x49_u8, 0x8b_u8])
     def query_interface(this : IOfflineFilesEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -619,7 +617,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("9ba04a45-ee69-42f0-9ab1-7db5c8805808")]
   record IOfflineFilesEvents3, lpVtbl : IOfflineFilesEvents3Vtbl* do
     GUID = LibC::GUID.new(0x9ba04a45_u32, 0xee69_u16, 0x42f0_u16, StaticArray[0x9a_u8, 0xb1_u8, 0x7d_u8, 0xb5_u8, 0xc8_u8, 0x80_u8, 0x58_u8, 0x8_u8])
     def query_interface(this : IOfflineFilesEvents3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -792,7 +789,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("dbd69b1e-c7d2-473e-b35f-9d8c24c0c484")]
   record IOfflineFilesEvents4, lpVtbl : IOfflineFilesEvents4Vtbl* do
     GUID = LibC::GUID.new(0xdbd69b1e_u32, 0xc7d2_u16, 0x473e_u16, StaticArray[0xb3_u8, 0x5f_u8, 0x9d_u8, 0x8c_u8, 0x24_u8, 0xc0_u8, 0xc4_u8, 0x84_u8])
     def query_interface(this : IOfflineFilesEvents4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -935,7 +931,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("33fc4e1b-0716-40fa-ba65-6e62a84a846f")]
   record IOfflineFilesEventsFilter, lpVtbl : IOfflineFilesEventsFilterVtbl* do
     GUID = LibC::GUID.new(0x33fc4e1b_u32, 0x716_u16, 0x40fa_u16, StaticArray[0xba_u8, 0x65_u8, 0x6e_u8, 0x62_u8, 0xa8_u8, 0x4a_u8, 0x84_u8, 0x6f_u8])
     def query_interface(this : IOfflineFilesEventsFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -969,7 +964,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("7112fa5f-7571-435a-8eb7-195c7c1429bc")]
   record IOfflineFilesErrorInfo, lpVtbl : IOfflineFilesErrorInfoVtbl* do
     GUID = LibC::GUID.new(0x7112fa5f_u32, 0x7571_u16, 0x435a_u16, StaticArray[0x8e_u8, 0xb7_u8, 0x19_u8, 0x5c_u8, 0x7c_u8, 0x14_u8, 0x29_u8, 0xbc_u8])
     def query_interface(this : IOfflineFilesErrorInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1001,7 +995,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("ecdbaf0d-6a18-4d55-8017-108f7660ba44")]
   record IOfflineFilesSyncErrorItemInfo, lpVtbl : IOfflineFilesSyncErrorItemInfoVtbl* do
     GUID = LibC::GUID.new(0xecdbaf0d_u32, 0x6a18_u16, 0x4d55_u16, StaticArray[0x80_u8, 0x17_u8, 0x10_u8, 0x8f_u8, 0x76_u8, 0x60_u8, 0xba_u8, 0x44_u8])
     def query_interface(this : IOfflineFilesSyncErrorItemInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1042,7 +1035,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("59f95e46-eb54-49d1-be76-de95458d01b0")]
   record IOfflineFilesSyncErrorInfo, lpVtbl : IOfflineFilesSyncErrorInfoVtbl* do
     GUID = LibC::GUID.new(0x59f95e46_u32, 0xeb54_u16, 0x49d1_u16, StaticArray[0xbe_u8, 0x76_u8, 0xde_u8, 0x95_u8, 0x45_u8, 0x8d_u8, 0x1_u8, 0xb0_u8])
     def query_interface(this : IOfflineFilesSyncErrorInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1095,7 +1087,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("fad63237-c55b-4911-9850-bcf96d4c979e")]
   record IOfflineFilesProgress, lpVtbl : IOfflineFilesProgressVtbl* do
     GUID = LibC::GUID.new(0xfad63237_u32, 0xc55b_u16, 0x4911_u16, StaticArray[0x98_u8, 0x50_u8, 0xbc_u8, 0xf9_u8, 0x6d_u8, 0x4c_u8, 0x97_u8, 0x9e_u8])
     def query_interface(this : IOfflineFilesProgress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1132,7 +1123,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("c34f7f9b-c43d-4f9d-a776-c0eb6de5d401")]
   record IOfflineFilesSimpleProgress, lpVtbl : IOfflineFilesSimpleProgressVtbl* do
     GUID = LibC::GUID.new(0xc34f7f9b_u32, 0xc43d_u16, 0x4f9d_u16, StaticArray[0xa7_u8, 0x76_u8, 0xc0_u8, 0xeb_u8, 0x6d_u8, 0xe5_u8, 0xd4_u8, 0x1_u8])
     def query_interface(this : IOfflineFilesSimpleProgress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1175,7 +1165,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("6931f49a-6fc7-4c1b-b265-56793fc451b7")]
   record IOfflineFilesSyncProgress, lpVtbl : IOfflineFilesSyncProgressVtbl* do
     GUID = LibC::GUID.new(0x6931f49a_u32, 0x6fc7_u16, 0x4c1b_u16, StaticArray[0xb2_u8, 0x65_u8, 0x56_u8, 0x79_u8, 0x3f_u8, 0xc4_u8, 0x51_u8, 0xb7_u8])
     def query_interface(this : IOfflineFilesSyncProgress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1214,7 +1203,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("b6dd5092-c65c-46b6-97b8-fadd08e7e1be")]
   record IOfflineFilesSyncConflictHandler, lpVtbl : IOfflineFilesSyncConflictHandlerVtbl* do
     GUID = LibC::GUID.new(0xb6dd5092_u32, 0xc65c_u16, 0x46b6_u16, StaticArray[0x97_u8, 0xb8_u8, 0xfa_u8, 0xdd_u8, 0x8_u8, 0xe7_u8, 0xe1_u8, 0xbe_u8])
     def query_interface(this : IOfflineFilesSyncConflictHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1243,7 +1231,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("f4b5a26c-dc05-4f20-ada4-551f1077be5c")]
   record IOfflineFilesItemFilter, lpVtbl : IOfflineFilesItemFilterVtbl* do
     GUID = LibC::GUID.new(0xf4b5a26c_u32, 0xdc05_u16, 0x4f20_u16, StaticArray[0xad_u8, 0xa4_u8, 0x55_u8, 0x1f_u8, 0x10_u8, 0x77_u8, 0xbe_u8, 0x5c_u8])
     def query_interface(this : IOfflineFilesItemFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1280,7 +1267,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("4a753da6-e044-4f12-a718-5d14d079a906")]
   record IOfflineFilesItem, lpVtbl : IOfflineFilesItemVtbl* do
     GUID = LibC::GUID.new(0x4a753da6_u32, 0xe044_u16, 0x4f12_u16, StaticArray[0xa7_u8, 0x18_u8, 0x5d_u8, 0x14_u8, 0xd0_u8, 0x79_u8, 0xa9_u8, 0x6_u8])
     def query_interface(this : IOfflineFilesItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1323,7 +1309,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("9b1c9576-a92b-4151-8e9e-7c7b3ec2e016")]
   record IOfflineFilesServerItem, lpVtbl : IOfflineFilesServerItemVtbl* do
     GUID = LibC::GUID.new(0x9b1c9576_u32, 0xa92b_u16, 0x4151_u16, StaticArray[0x8e_u8, 0x9e_u8, 0x7c_u8, 0x7b_u8, 0x3e_u8, 0xc2_u8, 0xe0_u8, 0x16_u8])
     def query_interface(this : IOfflineFilesServerItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1366,7 +1351,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("bab7e48d-4804-41b5-a44d-0f199b06b145")]
   record IOfflineFilesShareItem, lpVtbl : IOfflineFilesShareItemVtbl* do
     GUID = LibC::GUID.new(0xbab7e48d_u32, 0x4804_u16, 0x41b5_u16, StaticArray[0xa4_u8, 0x4d_u8, 0xf_u8, 0x19_u8, 0x9b_u8, 0x6_u8, 0xb1_u8, 0x45_u8])
     def query_interface(this : IOfflineFilesShareItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1409,7 +1393,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("2273597a-a08c-4a00-a37a-c1ae4e9a1cfd")]
   record IOfflineFilesDirectoryItem, lpVtbl : IOfflineFilesDirectoryItemVtbl* do
     GUID = LibC::GUID.new(0x2273597a_u32, 0xa08c_u16, 0x4a00_u16, StaticArray[0xa3_u8, 0x7a_u8, 0xc1_u8, 0xae_u8, 0x4e_u8, 0x9a_u8, 0x1c_u8, 0xfd_u8])
     def query_interface(this : IOfflineFilesDirectoryItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1454,7 +1437,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("8dfadead-26c2-4eff-8a72-6b50723d9a00")]
   record IOfflineFilesFileItem, lpVtbl : IOfflineFilesFileItemVtbl* do
     GUID = LibC::GUID.new(0x8dfadead_u32, 0x26c2_u16, 0x4eff_u16, StaticArray[0x8a_u8, 0x72_u8, 0x6b_u8, 0x50_u8, 0x72_u8, 0x3d_u8, 0x9a_u8, 0x0_u8])
     def query_interface(this : IOfflineFilesFileItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1502,7 +1484,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("da70e815-c361-4407-bc0b-0d7046e5f2cd")]
   record IEnumOfflineFilesItems, lpVtbl : IEnumOfflineFilesItemsVtbl* do
     GUID = LibC::GUID.new(0xda70e815_u32, 0xc361_u16, 0x4407_u16, StaticArray[0xbc_u8, 0xb_u8, 0xd_u8, 0x70_u8, 0x46_u8, 0xe5_u8, 0xf2_u8, 0xcd_u8])
     def query_interface(this : IEnumOfflineFilesItems*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1539,7 +1520,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("3836f049-9413-45dd-bf46-b5aaa82dc310")]
   record IOfflineFilesItemContainer, lpVtbl : IOfflineFilesItemContainerVtbl* do
     GUID = LibC::GUID.new(0x3836f049_u32, 0x9413_u16, 0x45dd_u16, StaticArray[0xbf_u8, 0x46_u8, 0xb5_u8, 0xaa_u8, 0xa8_u8, 0x2d_u8, 0xc3_u8, 0x10_u8])
     def query_interface(this : IOfflineFilesItemContainer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1574,7 +1554,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("a96e6fa4-e0d1-4c29-960b-ee508fe68c72")]
   record IOfflineFilesChangeInfo, lpVtbl : IOfflineFilesChangeInfoVtbl* do
     GUID = LibC::GUID.new(0xa96e6fa4_u32, 0xe0d1_u16, 0x4c29_u16, StaticArray[0x96_u8, 0xb_u8, 0xee_u8, 0x50_u8, 0x8f_u8, 0xe6_u8, 0x8c_u8, 0x72_u8])
     def query_interface(this : IOfflineFilesChangeInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1617,7 +1596,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("0f50ce33-bac9-4eaa-a11d-da0e527d047d")]
   record IOfflineFilesDirtyInfo, lpVtbl : IOfflineFilesDirtyInfoVtbl* do
     GUID = LibC::GUID.new(0xf50ce33_u32, 0xbac9_u16, 0x4eaa_u16, StaticArray[0xa1_u8, 0x1d_u8, 0xda_u8, 0xe_u8, 0x52_u8, 0x7d_u8, 0x4_u8, 0x7d_u8])
     def query_interface(this : IOfflineFilesDirtyInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1649,7 +1627,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("bc1a163f-7bfd-4d88-9c66-96ea9a6a3d6b")]
   record IOfflineFilesFileSysInfo, lpVtbl : IOfflineFilesFileSysInfoVtbl* do
     GUID = LibC::GUID.new(0xbc1a163f_u32, 0x7bfd_u16, 0x4d88_u16, StaticArray[0x9c_u8, 0x66_u8, 0x96_u8, 0xea_u8, 0x9a_u8, 0x6a_u8, 0x3d_u8, 0x6b_u8])
     def query_interface(this : IOfflineFilesFileSysInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1686,7 +1663,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("5b2b0655-b3fd-497d-adeb-bd156bc8355b")]
   record IOfflineFilesPinInfo, lpVtbl : IOfflineFilesPinInfoVtbl* do
     GUID = LibC::GUID.new(0x5b2b0655_u32, 0xb3fd_u16, 0x497d_u16, StaticArray[0xad_u8, 0xeb_u8, 0xbd_u8, 0x15_u8, 0x6b_u8, 0xc8_u8, 0x35_u8, 0x5b_u8])
     def query_interface(this : IOfflineFilesPinInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1730,7 +1706,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("623c58a2-42ed-4ad7-b69a-0f1b30a72d0d")]
   record IOfflineFilesPinInfo2, lpVtbl : IOfflineFilesPinInfo2Vtbl* do
     GUID = LibC::GUID.new(0x623c58a2_u32, 0x42ed_u16, 0x4ad7_u16, StaticArray[0xb6_u8, 0x9a_u8, 0xf_u8, 0x1b_u8, 0x30_u8, 0xa7_u8, 0x2d_u8, 0xd_u8])
     def query_interface(this : IOfflineFilesPinInfo2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1772,7 +1747,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("bcaf4a01-5b68-4b56-a6a1-8d2786ede8e3")]
   record IOfflineFilesTransparentCacheInfo, lpVtbl : IOfflineFilesTransparentCacheInfoVtbl* do
     GUID = LibC::GUID.new(0xbcaf4a01_u32, 0x5b68_u16, 0x4b56_u16, StaticArray[0xa6_u8, 0xa1_u8, 0x8d_u8, 0x27_u8, 0x86_u8, 0xed_u8, 0xe8_u8, 0xe3_u8])
     def query_interface(this : IOfflineFilesTransparentCacheInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1799,7 +1773,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("2b09d48c-8ab5-464f-a755-a59d92f99429")]
   record IOfflineFilesGhostInfo, lpVtbl : IOfflineFilesGhostInfoVtbl* do
     GUID = LibC::GUID.new(0x2b09d48c_u32, 0x8ab5_u16, 0x464f_u16, StaticArray[0xa7_u8, 0x55_u8, 0xa5_u8, 0x9d_u8, 0x92_u8, 0xf9_u8, 0x94_u8, 0x29_u8])
     def query_interface(this : IOfflineFilesGhostInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1829,7 +1802,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("efb23a09-a867-4be8-83a6-86969a7d0856")]
   record IOfflineFilesConnectionInfo, lpVtbl : IOfflineFilesConnectionInfoVtbl* do
     GUID = LibC::GUID.new(0xefb23a09_u32, 0xa867_u16, 0x4be8_u16, StaticArray[0x83_u8, 0xa6_u8, 0x86_u8, 0x96_u8, 0x9a_u8, 0x7d_u8, 0x8_u8, 0x56_u8])
     def query_interface(this : IOfflineFilesConnectionInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1867,7 +1839,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("7bcc43e7-31ce-4ca4-8ccd-1cff2dc494da")]
   record IOfflineFilesShareInfo, lpVtbl : IOfflineFilesShareInfoVtbl* do
     GUID = LibC::GUID.new(0x7bcc43e7_u32, 0x31ce_u16, 0x4ca4_u16, StaticArray[0x8c_u8, 0xcd_u8, 0x1c_u8, 0xff_u8, 0x2d_u8, 0xc4_u8, 0x94_u8, 0xda_u8])
     def query_interface(this : IOfflineFilesShareInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1900,7 +1871,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("62c4560f-bc0b-48ca-ad9d-34cb528d99a9")]
   record IOfflineFilesSuspend, lpVtbl : IOfflineFilesSuspendVtbl* do
     GUID = LibC::GUID.new(0x62c4560f_u32, 0xbc0b_u16, 0x48ca_u16, StaticArray[0xad_u8, 0x9d_u8, 0x34_u8, 0xcb_u8, 0x52_u8, 0x8d_u8, 0x99_u8, 0xa9_u8])
     def query_interface(this : IOfflineFilesSuspend*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1927,7 +1897,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("a457c25b-4e9c-4b04-85af-8932ccd97889")]
   record IOfflineFilesSuspendInfo, lpVtbl : IOfflineFilesSuspendInfoVtbl* do
     GUID = LibC::GUID.new(0xa457c25b_u32, 0x4e9c_u16, 0x4b04_u16, StaticArray[0x85_u8, 0xaf_u8, 0x89_u8, 0x32_u8, 0xcc_u8, 0xd9_u8, 0x78_u8, 0x89_u8])
     def query_interface(this : IOfflineFilesSuspendInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1962,7 +1931,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("d871d3f7-f613-48a1-827e-7a34e560fff6")]
   record IOfflineFilesSetting, lpVtbl : IOfflineFilesSettingVtbl* do
     GUID = LibC::GUID.new(0xd871d3f7_u32, 0xf613_u16, 0x48a1_u16, StaticArray[0x82_u8, 0x7e_u8, 0x7a_u8, 0x34_u8, 0xe5_u8, 0x60_u8, 0xff_u8, 0xf6_u8])
     def query_interface(this : IOfflineFilesSetting*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2016,7 +1984,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("729680c4-1a38-47bc-9e5c-02c51562ac30")]
   record IEnumOfflineFilesSettings, lpVtbl : IEnumOfflineFilesSettingsVtbl* do
     GUID = LibC::GUID.new(0x729680c4_u32, 0x1a38_u16, 0x47bc_u16, StaticArray[0x9e_u8, 0x5c_u8, 0x2_u8, 0xc5_u8, 0x15_u8, 0x62_u8, 0xac_u8, 0x30_u8])
     def query_interface(this : IEnumOfflineFilesSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2068,7 +2035,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("855d6203-7914-48b9-8d40-4c56f5acffc5")]
   record IOfflineFilesCache, lpVtbl : IOfflineFilesCacheVtbl* do
     GUID = LibC::GUID.new(0x855d6203_u32, 0x7914_u16, 0x48b9_u16, StaticArray[0x8d_u8, 0x40_u8, 0x4c_u8, 0x56_u8, 0xf5_u8, 0xac_u8, 0xff_u8, 0xc5_u8])
     def query_interface(this : IOfflineFilesCache*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2160,7 +2126,6 @@ module Win32cr::Storage::OfflineFiles
 
 
   @[Extern]
-  #@[Com("8c075039-1551-4ed9-8781-56705c04d3c0")]
   record IOfflineFilesCache2, lpVtbl : IOfflineFilesCache2Vtbl* do
     GUID = LibC::GUID.new(0x8c075039_u32, 0x1551_u16, 0x4ed9_u16, StaticArray[0x87_u8, 0x81_u8, 0x56_u8, 0x70_u8, 0x5c_u8, 0x4_u8, 0xd3_u8, 0xc0_u8])
     def query_interface(this : IOfflineFilesCache2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

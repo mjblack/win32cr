@@ -30,42 +30,69 @@ module Win32cr::Devices::Pwm
   end
 
   @[Extern]
-  record PWM_CONTROLLER_INFO,
-    size : LibC::UIntPtrT,
-    pin_count : UInt32,
-    minimum_period : UInt64,
-    maximum_period : UInt64
+  struct PWM_CONTROLLER_INFO
+    property size : LibC::UIntPtrT
+    property pin_count : UInt32
+    property minimum_period : UInt64
+    property maximum_period : UInt64
+    def initialize(@size : LibC::UIntPtrT, @pin_count : UInt32, @minimum_period : UInt64, @maximum_period : UInt64)
+    end
+  end
 
   @[Extern]
-  record PWM_CONTROLLER_GET_ACTUAL_PERIOD_OUTPUT,
-    actual_period : UInt64
+  struct PWM_CONTROLLER_GET_ACTUAL_PERIOD_OUTPUT
+    property actual_period : UInt64
+    def initialize(@actual_period : UInt64)
+    end
+  end
 
   @[Extern]
-  record PWM_CONTROLLER_SET_DESIRED_PERIOD_INPUT,
-    desired_period : UInt64
+  struct PWM_CONTROLLER_SET_DESIRED_PERIOD_INPUT
+    property desired_period : UInt64
+    def initialize(@desired_period : UInt64)
+    end
+  end
 
   @[Extern]
-  record PWM_CONTROLLER_SET_DESIRED_PERIOD_OUTPUT,
-    actual_period : UInt64
+  struct PWM_CONTROLLER_SET_DESIRED_PERIOD_OUTPUT
+    property actual_period : UInt64
+    def initialize(@actual_period : UInt64)
+    end
+  end
 
   @[Extern]
-  record PWM_PIN_GET_ACTIVE_DUTY_CYCLE_PERCENTAGE_OUTPUT,
-    percentage : UInt64
+  struct PWM_PIN_GET_ACTIVE_DUTY_CYCLE_PERCENTAGE_OUTPUT
+    property percentage : UInt64
+    def initialize(@percentage : UInt64)
+    end
+  end
 
   @[Extern]
-  record PWM_PIN_SET_ACTIVE_DUTY_CYCLE_PERCENTAGE_INPUT,
-    percentage : UInt64
+  struct PWM_PIN_SET_ACTIVE_DUTY_CYCLE_PERCENTAGE_INPUT
+    property percentage : UInt64
+    def initialize(@percentage : UInt64)
+    end
+  end
 
   @[Extern]
-  record PWM_PIN_GET_POLARITY_OUTPUT,
-    polarity : Win32cr::Devices::Pwm::PWM_POLARITY
+  struct PWM_PIN_GET_POLARITY_OUTPUT
+    property polarity : Win32cr::Devices::Pwm::PWM_POLARITY
+    def initialize(@polarity : Win32cr::Devices::Pwm::PWM_POLARITY)
+    end
+  end
 
   @[Extern]
-  record PWM_PIN_SET_POLARITY_INPUT,
-    polarity : Win32cr::Devices::Pwm::PWM_POLARITY
+  struct PWM_PIN_SET_POLARITY_INPUT
+    property polarity : Win32cr::Devices::Pwm::PWM_POLARITY
+    def initialize(@polarity : Win32cr::Devices::Pwm::PWM_POLARITY)
+    end
+  end
 
   @[Extern]
-  record PWM_PIN_IS_STARTED_OUTPUT,
-    is_started : Win32cr::Foundation::BOOLEAN
+  struct PWM_PIN_IS_STARTED_OUTPUT
+    property is_started : Win32cr::Foundation::BOOLEAN
+    def initialize(@is_started : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
 end

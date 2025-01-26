@@ -114,7 +114,6 @@ module Win32cr::Storage::FileHistory
 
 
   @[Extern]
-  #@[Com("d87965fd-2bad-4657-bd3b-9567eb300ced")]
   record IFhTarget, lpVtbl : IFhTargetVtbl* do
     GUID = LibC::GUID.new(0xd87965fd_u32, 0x2bad_u16, 0x4657_u16, StaticArray[0xbd_u8, 0x3b_u8, 0x95_u8, 0x67_u8, 0xeb_u8, 0x30_u8, 0xc_u8, 0xed_u8])
     def query_interface(this : IFhTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -145,7 +144,6 @@ module Win32cr::Storage::FileHistory
 
 
   @[Extern]
-  #@[Com("3197abce-532a-44c6-8615-f3666566a720")]
   record IFhScopeIterator, lpVtbl : IFhScopeIteratorVtbl* do
     GUID = LibC::GUID.new(0x3197abce_u32, 0x532a_u16, 0x44c6_u16, StaticArray[0x86_u8, 0x15_u8, 0xf3_u8, 0x66_u8, 0x65_u8, 0x66_u8, 0xa7_u8, 0x20_u8])
     def query_interface(this : IFhScopeIterator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -188,7 +186,6 @@ module Win32cr::Storage::FileHistory
 
 
   @[Extern]
-  #@[Com("6a5fea5b-bf8f-4ee5-b8c3-44d8a0d7331c")]
   record IFhConfigMgr, lpVtbl : IFhConfigMgrVtbl* do
     GUID = LibC::GUID.new(0x6a5fea5b_u32, 0xbf8f_u16, 0x4ee5_u16, StaticArray[0xb8_u8, 0xc3_u8, 0x44_u8, 0xd8_u8, 0xa0_u8, 0xd7_u8, 0x33_u8, 0x1c_u8])
     def query_interface(this : IFhConfigMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -258,7 +255,6 @@ module Win32cr::Storage::FileHistory
 
 
   @[Extern]
-  #@[Com("6544a28a-f68d-47ac-91ef-16b2b36aa3ee")]
   record IFhReassociation, lpVtbl : IFhReassociationVtbl* do
     GUID = LibC::GUID.new(0x6544a28a_u32, 0xf68d_u16, 0x47ac_u16, StaticArray[0x91_u8, 0xef_u8, 0x16_u8, 0xb2_u8, 0xb3_u8, 0x6a_u8, 0xa3_u8, 0xee_u8])
     def query_interface(this : IFhReassociation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

@@ -1,7 +1,7 @@
 require "./../foundation.cr"
 
 module Win32cr::Data::RightsManagement
-  alias DRMCALLBACK = Proc(Win32cr::Data::RightsManagement::DRM_STATUS_MSG, Win32cr::Foundation::HRESULT, Void*, Void*, Win32cr::Foundation::HRESULT)*
+  alias DRMCALLBACK = Proc(Win32cr::Data::RightsManagement::DRM_STATUS_MSG, Win32cr::Foundation::HRESULT, Void*, Void*, Win32cr::Foundation::HRESULT)
 
   DRMHANDLE_INVALID = 0_u32
   DRMENVHANDLE_INVALID = 0_u32
@@ -120,46 +120,61 @@ module Win32cr::Data::RightsManagement
   end
 
   @[Extern]
-  record DRMID,
-    uVersion : UInt32,
-    wszIDType : Win32cr::Foundation::PWSTR,
-    wszID : Win32cr::Foundation::PWSTR
+  struct DRMID
+    property uVersion : UInt32
+    property wszIDType : Win32cr::Foundation::PWSTR
+    property wszID : Win32cr::Foundation::PWSTR
+    def initialize(@uVersion : UInt32, @wszIDType : Win32cr::Foundation::PWSTR, @wszID : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record DRMBOUNDLICENSEPARAMS,
-    uVersion : UInt32,
-    hEnablingPrincipal : UInt32,
-    hSecureStore : UInt32,
-    wszRightsRequested : Win32cr::Foundation::PWSTR,
-    wszRightsGroup : Win32cr::Foundation::PWSTR,
-    idResource : Win32cr::Data::RightsManagement::DRMID,
-    cAuthenticatorCount : UInt32,
-    rghAuthenticators : UInt32*,
-    wszDefaultEnablingPrincipalCredentials : Win32cr::Foundation::PWSTR,
-    dwFlags : UInt32
+  struct DRMBOUNDLICENSEPARAMS
+    property uVersion : UInt32
+    property hEnablingPrincipal : UInt32
+    property hSecureStore : UInt32
+    property wszRightsRequested : Win32cr::Foundation::PWSTR
+    property wszRightsGroup : Win32cr::Foundation::PWSTR
+    property idResource : Win32cr::Data::RightsManagement::DRMID
+    property cAuthenticatorCount : UInt32
+    property rghAuthenticators : UInt32*
+    property wszDefaultEnablingPrincipalCredentials : Win32cr::Foundation::PWSTR
+    property dwFlags : UInt32
+    def initialize(@uVersion : UInt32, @hEnablingPrincipal : UInt32, @hSecureStore : UInt32, @wszRightsRequested : Win32cr::Foundation::PWSTR, @wszRightsGroup : Win32cr::Foundation::PWSTR, @idResource : Win32cr::Data::RightsManagement::DRMID, @cAuthenticatorCount : UInt32, @rghAuthenticators : UInt32*, @wszDefaultEnablingPrincipalCredentials : Win32cr::Foundation::PWSTR, @dwFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record DRM_LICENSE_ACQ_DATA,
-    uVersion : UInt32,
-    wszURL : Win32cr::Foundation::PWSTR,
-    wszLocalFilename : Win32cr::Foundation::PWSTR,
-    pbPostData : UInt8*,
-    dwPostDataSize : UInt32,
-    wszFriendlyName : Win32cr::Foundation::PWSTR
+  struct DRM_LICENSE_ACQ_DATA
+    property uVersion : UInt32
+    property wszURL : Win32cr::Foundation::PWSTR
+    property wszLocalFilename : Win32cr::Foundation::PWSTR
+    property pbPostData : UInt8*
+    property dwPostDataSize : UInt32
+    property wszFriendlyName : Win32cr::Foundation::PWSTR
+    def initialize(@uVersion : UInt32, @wszURL : Win32cr::Foundation::PWSTR, @wszLocalFilename : Win32cr::Foundation::PWSTR, @pbPostData : UInt8*, @dwPostDataSize : UInt32, @wszFriendlyName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record DRM_ACTSERV_INFO,
-    uVersion : UInt32,
-    wszPubKey : Win32cr::Foundation::PWSTR,
-    wszURL : Win32cr::Foundation::PWSTR
+  struct DRM_ACTSERV_INFO
+    property uVersion : UInt32
+    property wszPubKey : Win32cr::Foundation::PWSTR
+    property wszURL : Win32cr::Foundation::PWSTR
+    def initialize(@uVersion : UInt32, @wszPubKey : Win32cr::Foundation::PWSTR, @wszURL : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record DRM_CLIENT_VERSION_INFO,
-    uStructVersion : UInt32,
-    dwVersion : UInt32[4],
-    wszHierarchy : UInt16[256],
-    wszProductId : UInt16[256],
-    wszProductDescription : UInt16[256]
+  struct DRM_CLIENT_VERSION_INFO
+    property uStructVersion : UInt32
+    property dwVersion : UInt32[4]
+    property wszHierarchy : UInt16[256]
+    property wszProductId : UInt16[256]
+    property wszProductDescription : UInt16[256]
+    def initialize(@uStructVersion : UInt32, @dwVersion : UInt32[4], @wszHierarchy : UInt16[256], @wszProductId : UInt16[256], @wszProductDescription : UInt16[256])
+    end
+  end
 
   @[Link("msdrm")]
   lib C

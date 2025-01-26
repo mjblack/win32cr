@@ -4,129 +4,129 @@ require "./../security/authentication/identity.cr"
 require "./../system/win_rt.cr"
 
 module Win32cr::Networking::WindowsWebServices
-  alias WS_READ_CALLBACK = Proc(Void*, Void*, UInt32, UInt32*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_READ_CALLBACK = Proc(Void*, Void*, UInt32, UInt32*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_WRITE_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_BYTES*, UInt32, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_WRITE_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_BYTES*, UInt32, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_PUSH_BYTES_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_WRITE_CALLBACK, Void*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_PUSH_BYTES_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_WRITE_CALLBACK, Void*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_PULL_BYTES_CALLBACK = Proc(Void*, Void*, UInt32, UInt32*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_PULL_BYTES_CALLBACK = Proc(Void*, Void*, UInt32, UInt32*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_DYNAMIC_STRING_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, Win32cr::Foundation::BOOL*, UInt32*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_DYNAMIC_STRING_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, Win32cr::Foundation::BOOL*, UInt32*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_ASYNC_CALLBACK = Proc(Win32cr::Foundation::HRESULT, Win32cr::Networking::WindowsWebServices::WS_CALLBACK_MODEL, Void*, Void)*
+  alias WS_ASYNC_CALLBACK = Proc(Win32cr::Foundation::HRESULT, Win32cr::Networking::WindowsWebServices::WS_CALLBACK_MODEL, Void*, Void)
 
-  alias WS_ASYNC_FUNCTION = Proc(Win32cr::Foundation::HRESULT, Win32cr::Networking::WindowsWebServices::WS_CALLBACK_MODEL, Void*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_OPERATION*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_ASYNC_FUNCTION = Proc(Win32cr::Foundation::HRESULT, Win32cr::Networking::WindowsWebServices::WS_CALLBACK_MODEL, Void*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_OPERATION*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_CREATE_CHANNEL_CALLBACK = Proc(Win32cr::Networking::WindowsWebServices::WS_CHANNEL_TYPE, Void*, UInt32, Void**, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_CREATE_CHANNEL_CALLBACK = Proc(Win32cr::Networking::WindowsWebServices::WS_CHANNEL_TYPE, Void*, UInt32, Void**, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_FREE_CHANNEL_CALLBACK = Proc(Void*, Void)*
+  alias WS_FREE_CHANNEL_CALLBACK = Proc(Void*, Void)
 
-  alias WS_RESET_CHANNEL_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_RESET_CHANNEL_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_ABORT_CHANNEL_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_ABORT_CHANNEL_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_OPEN_CHANNEL_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_ADDRESS*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_OPEN_CHANNEL_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_ADDRESS*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_CLOSE_CHANNEL_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_CLOSE_CHANNEL_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_SET_CHANNEL_PROPERTY_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY_ID, Void*, UInt32, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_SET_CHANNEL_PROPERTY_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY_ID, Void*, UInt32, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_GET_CHANNEL_PROPERTY_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY_ID, Void*, UInt32, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_GET_CHANNEL_PROPERTY_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY_ID, Void*, UInt32, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_READ_MESSAGE_START_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_READ_MESSAGE_START_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_READ_MESSAGE_END_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_READ_MESSAGE_END_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_WRITE_MESSAGE_START_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_WRITE_MESSAGE_START_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_WRITE_MESSAGE_END_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_WRITE_MESSAGE_END_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_ABANDON_MESSAGE_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_ABANDON_MESSAGE_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_SHUTDOWN_SESSION_CHANNEL_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_SHUTDOWN_SESSION_CHANNEL_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_CREATE_ENCODER_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_WRITE_CALLBACK, Void*, Void**, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_CREATE_ENCODER_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_WRITE_CALLBACK, Void*, Void**, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_ENCODER_GET_CONTENT_TYPE_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_STRING*, Win32cr::Networking::WindowsWebServices::WS_STRING*, Win32cr::Networking::WindowsWebServices::WS_STRING*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_ENCODER_GET_CONTENT_TYPE_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_STRING*, Win32cr::Networking::WindowsWebServices::WS_STRING*, Win32cr::Networking::WindowsWebServices::WS_STRING*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_ENCODER_START_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_ENCODER_START_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_ENCODER_ENCODE_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_BYTES*, UInt32, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_ENCODER_ENCODE_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_BYTES*, UInt32, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_ENCODER_END_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_ENCODER_END_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_FREE_ENCODER_CALLBACK = Proc(Void*, Void)*
+  alias WS_FREE_ENCODER_CALLBACK = Proc(Void*, Void)
 
-  alias WS_CREATE_DECODER_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_READ_CALLBACK, Void*, Void**, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_CREATE_DECODER_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_READ_CALLBACK, Void*, Void**, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_DECODER_GET_CONTENT_TYPE_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_STRING*, Win32cr::Networking::WindowsWebServices::WS_STRING*, Win32cr::Networking::WindowsWebServices::WS_STRING*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_DECODER_GET_CONTENT_TYPE_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_STRING*, Win32cr::Networking::WindowsWebServices::WS_STRING*, Win32cr::Networking::WindowsWebServices::WS_STRING*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_DECODER_START_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_DECODER_START_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_DECODER_DECODE_CALLBACK = Proc(Void*, Void*, UInt32, UInt32*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_DECODER_DECODE_CALLBACK = Proc(Void*, Void*, UInt32, UInt32*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_DECODER_END_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_DECODER_END_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_FREE_DECODER_CALLBACK = Proc(Void*, Void)*
+  alias WS_FREE_DECODER_CALLBACK = Proc(Void*, Void)
 
-  alias WS_HTTP_REDIRECT_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_STRING*, Win32cr::Networking::WindowsWebServices::WS_STRING*, Win32cr::Foundation::HRESULT)*
+  alias WS_HTTP_REDIRECT_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_STRING*, Win32cr::Networking::WindowsWebServices::WS_STRING*, Win32cr::Foundation::HRESULT)
 
-  alias WS_CREATE_LISTENER_CALLBACK = Proc(Win32cr::Networking::WindowsWebServices::WS_CHANNEL_TYPE, Void*, UInt32, Void**, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_CREATE_LISTENER_CALLBACK = Proc(Win32cr::Networking::WindowsWebServices::WS_CHANNEL_TYPE, Void*, UInt32, Void**, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_FREE_LISTENER_CALLBACK = Proc(Void*, Void)*
+  alias WS_FREE_LISTENER_CALLBACK = Proc(Void*, Void)
 
-  alias WS_RESET_LISTENER_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_RESET_LISTENER_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_OPEN_LISTENER_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_STRING*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_OPEN_LISTENER_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_STRING*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_CLOSE_LISTENER_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_CLOSE_LISTENER_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_GET_LISTENER_PROPERTY_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_LISTENER_PROPERTY_ID, Void*, UInt32, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_GET_LISTENER_PROPERTY_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_LISTENER_PROPERTY_ID, Void*, UInt32, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_SET_LISTENER_PROPERTY_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_LISTENER_PROPERTY_ID, Void*, UInt32, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_SET_LISTENER_PROPERTY_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_LISTENER_PROPERTY_ID, Void*, UInt32, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_ACCEPT_CHANNEL_CALLBACK = Proc(Void*, Void*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_ACCEPT_CHANNEL_CALLBACK = Proc(Void*, Void*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_ABORT_LISTENER_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_ABORT_LISTENER_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_CREATE_CHANNEL_FOR_LISTENER_CALLBACK = Proc(Void*, Void*, UInt32, Void**, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_CREATE_CHANNEL_FOR_LISTENER_CALLBACK = Proc(Void*, Void*, UInt32, Void**, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_MESSAGE_DONE_CALLBACK = Proc(Void*, Void)*
+  alias WS_MESSAGE_DONE_CALLBACK = Proc(Void*, Void)
 
-  alias WS_CERTIFICATE_VALIDATION_CALLBACK = Proc(Win32cr::Security::Cryptography::CERT_CONTEXT*, Void*, Win32cr::Foundation::HRESULT)*
+  alias WS_CERTIFICATE_VALIDATION_CALLBACK = Proc(Win32cr::Security::Cryptography::CERT_CONTEXT*, Void*, Win32cr::Foundation::HRESULT)
 
-  alias WS_GET_CERT_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_ADDRESS*, Win32cr::Networking::WindowsWebServices::WS_STRING*, Win32cr::Security::Cryptography::CERT_CONTEXT**, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_GET_CERT_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_ADDRESS*, Win32cr::Networking::WindowsWebServices::WS_STRING*, Win32cr::Security::Cryptography::CERT_CONTEXT**, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_CERT_ISSUER_LIST_NOTIFICATION_CALLBACK = Proc(Void*, Win32cr::Security::Authentication::Identity::SecPkgContext_IssuerListInfoEx*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_CERT_ISSUER_LIST_NOTIFICATION_CALLBACK = Proc(Void*, Win32cr::Security::Authentication::Identity::SecPkgContext_IssuerListInfoEx*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_VALIDATE_PASSWORD_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_STRING*, Win32cr::Networking::WindowsWebServices::WS_STRING*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_VALIDATE_PASSWORD_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_STRING*, Win32cr::Networking::WindowsWebServices::WS_STRING*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_VALIDATE_SAML_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_VALIDATE_SAML_CALLBACK = Proc(Void*, Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_DURATION_COMPARISON_CALLBACK = Proc(Win32cr::Networking::WindowsWebServices::WS_DURATION*, Win32cr::Networking::WindowsWebServices::WS_DURATION*, Int32*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_DURATION_COMPARISON_CALLBACK = Proc(Win32cr::Networking::WindowsWebServices::WS_DURATION*, Win32cr::Networking::WindowsWebServices::WS_DURATION*, Int32*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_READ_TYPE_CALLBACK = Proc(Win32cr::Networking::WindowsWebServices::WS_XML_READER*, Win32cr::Networking::WindowsWebServices::WS_TYPE_MAPPING, Void*, Win32cr::Networking::WindowsWebServices::WS_HEAP*, Void*, UInt32, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_READ_TYPE_CALLBACK = Proc(Win32cr::Networking::WindowsWebServices::WS_XML_READER*, Win32cr::Networking::WindowsWebServices::WS_TYPE_MAPPING, Void*, Win32cr::Networking::WindowsWebServices::WS_HEAP*, Void*, UInt32, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_WRITE_TYPE_CALLBACK = Proc(Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, Win32cr::Networking::WindowsWebServices::WS_TYPE_MAPPING, Void*, Void*, UInt32, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_WRITE_TYPE_CALLBACK = Proc(Win32cr::Networking::WindowsWebServices::WS_XML_WRITER*, Win32cr::Networking::WindowsWebServices::WS_TYPE_MAPPING, Void*, Void*, UInt32, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_IS_DEFAULT_VALUE_CALLBACK = Proc(Void*, Void*, Void*, UInt32, Win32cr::Foundation::BOOL*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_IS_DEFAULT_VALUE_CALLBACK = Proc(Void*, Void*, Void*, UInt32, Win32cr::Foundation::BOOL*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_SERVICE_MESSAGE_RECEIVE_CALLBACK = Proc(Win32cr::Networking::WindowsWebServices::WS_OPERATION_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_SERVICE_MESSAGE_RECEIVE_CALLBACK = Proc(Win32cr::Networking::WindowsWebServices::WS_OPERATION_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_OPERATION_CANCEL_CALLBACK = Proc(Win32cr::Networking::WindowsWebServices::WS_SERVICE_CANCEL_REASON, Void*, Void)*
+  alias WS_OPERATION_CANCEL_CALLBACK = Proc(Win32cr::Networking::WindowsWebServices::WS_SERVICE_CANCEL_REASON, Void*, Void)
 
-  alias WS_OPERATION_FREE_STATE_CALLBACK = Proc(Void*, Void)*
+  alias WS_OPERATION_FREE_STATE_CALLBACK = Proc(Void*, Void)
 
-  alias WS_SERVICE_STUB_CALLBACK = Proc(Win32cr::Networking::WindowsWebServices::WS_OPERATION_CONTEXT*, Void*, Void*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_SERVICE_STUB_CALLBACK = Proc(Win32cr::Networking::WindowsWebServices::WS_OPERATION_CONTEXT*, Void*, Void*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_SERVICE_ACCEPT_CHANNEL_CALLBACK = Proc(Win32cr::Networking::WindowsWebServices::WS_OPERATION_CONTEXT*, Void**, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_SERVICE_ACCEPT_CHANNEL_CALLBACK = Proc(Win32cr::Networking::WindowsWebServices::WS_OPERATION_CONTEXT*, Void**, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_SERVICE_CLOSE_CHANNEL_CALLBACK = Proc(Win32cr::Networking::WindowsWebServices::WS_OPERATION_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Foundation::HRESULT)*
+  alias WS_SERVICE_CLOSE_CHANNEL_CALLBACK = Proc(Win32cr::Networking::WindowsWebServices::WS_OPERATION_CONTEXT*, Win32cr::Networking::WindowsWebServices::WS_ASYNC_CONTEXT*, Win32cr::Foundation::HRESULT)
 
-  alias WS_SERVICE_SECURITY_CALLBACK = Proc(Win32cr::Networking::WindowsWebServices::WS_OPERATION_CONTEXT*, Win32cr::Foundation::BOOL*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_SERVICE_SECURITY_CALLBACK = Proc(Win32cr::Networking::WindowsWebServices::WS_OPERATION_CONTEXT*, Win32cr::Foundation::BOOL*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
-  alias WS_PROXY_MESSAGE_CALLBACK = Proc(Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, Win32cr::Networking::WindowsWebServices::WS_HEAP*, Void*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)*
+  alias WS_PROXY_MESSAGE_CALLBACK = Proc(Win32cr::Networking::WindowsWebServices::WS_MESSAGE*, Win32cr::Networking::WindowsWebServices::WS_HEAP*, Void*, Win32cr::Networking::WindowsWebServices::WS_ERROR*, Win32cr::Foundation::HRESULT)
 
   WEBAUTHN_API_VERSION_1 = 1_u32
   WEBAUTHN_API_VERSION_2 = 2_u32
@@ -1293,1796 +1293,2692 @@ alias WS_SECURITY_ALGORITHM_PROPERTY_ID = LibC::Int
   end
 
   @[Extern]
-  record WS_XML_READER
-  @[Extern]
-  record WS_XML_WRITER
-  @[Extern]
-  record WS_XML_BUFFER
-  @[Extern]
-  record WS_CHANNEL
-  @[Extern]
-  record WS_OPERATION_CONTEXT
-  @[Extern]
-  record WS_ERROR
-  @[Extern]
-  record WS_HEAP
-  @[Extern]
-  record WS_LISTENER
-  @[Extern]
-  record WS_MESSAGE
-  @[Extern]
-  record WS_SECURITY_TOKEN
-  @[Extern]
-  record WS_SECURITY_CONTEXT
-  @[Extern]
-  record WS_SERVICE_HOST
-  @[Extern]
-  record WS_SERVICE_PROXY
-  @[Extern]
-  record WS_METADATA
-  @[Extern]
-  record WS_POLICY
-  @[Extern]
-  record WS_XML_DICTIONARY,
-    guid : LibC::GUID,
-    strings : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    stringCount : UInt32,
-    isConst : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record WS_XML_STRING,
-    length : UInt32,
-    bytes : UInt8*,
-    dictionary : Win32cr::Networking::WindowsWebServices::WS_XML_DICTIONARY*,
-    id : UInt32
-
-  @[Extern]
-  record WS_XML_QNAME,
-    localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING,
-    ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING
-
-  @[Extern]
-  record WS_XML_NODE_POSITION,
-    buffer : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*,
-    node : Void*
-
-  @[Extern]
-  record WS_XML_READER_PROPERTY,
-    id : Win32cr::Networking::WindowsWebServices::WS_XML_READER_PROPERTY_ID,
-    value : Void*,
-    valueSize : UInt32
-
-  @[Extern]
-  record WS_XML_CANONICALIZATION_INCLUSIVE_PREFIXES,
-    prefixCount : UInt32,
-    prefixes : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
-
-  @[Extern]
-  record WS_XML_CANONICALIZATION_PROPERTY,
-    id : Win32cr::Networking::WindowsWebServices::WS_XML_CANONICALIZATION_PROPERTY_ID,
-    value : Void*,
-    valueSize : UInt32
-
-  @[Extern]
-  record WS_XML_WRITER_PROPERTY,
-    id : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_PROPERTY_ID,
-    value : Void*,
-    valueSize : UInt32
-
-  @[Extern]
-  record WS_XML_BUFFER_PROPERTY,
-    id : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER_PROPERTY_ID,
-    value : Void*,
-    valueSize : UInt32
-
-  @[Extern]
-  record WS_XML_TEXT,
-    textType : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT_TYPE
-
-  @[Extern]
-  record WS_XML_UTF8_TEXT,
-    text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT,
-    value : Win32cr::Networking::WindowsWebServices::WS_XML_STRING
-
-  @[Extern]
-  record WS_XML_UTF16_TEXT,
-    text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT,
-    bytes : UInt8*,
-    byteCount : UInt32
-
-  @[Extern]
-  record WS_XML_BASE64_TEXT,
-    text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT,
-    bytes : UInt8*,
-    length : UInt32
-
-  @[Extern]
-  record WS_XML_BOOL_TEXT,
-    text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT,
-    value : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record WS_XML_INT32_TEXT,
-    text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT,
-    value : Int32
-
-  @[Extern]
-  record WS_XML_INT64_TEXT,
-    text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT,
-    value : Int64
-
-  @[Extern]
-  record WS_XML_UINT64_TEXT,
-    text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT,
-    value : UInt64
-
-  @[Extern]
-  record WS_XML_FLOAT_TEXT,
-    text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT,
-    value : Float32
-
-  @[Extern]
-  record WS_XML_DOUBLE_TEXT,
-    text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT,
-    value : Float64
-
-  @[Extern]
-  record WS_XML_DECIMAL_TEXT,
-    text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT,
-    value : Win32cr::Foundation::DECIMAL
-
-  @[Extern]
-  record WS_XML_GUID_TEXT,
-    text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT,
-    value : LibC::GUID
-
-  @[Extern]
-  record WS_XML_UNIQUE_ID_TEXT,
-    text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT,
-    value : LibC::GUID
-
-  @[Extern]
-  record WS_DATETIME,
-    ticks : UInt64,
-    format : Win32cr::Networking::WindowsWebServices::WS_DATETIME_FORMAT
-
-  @[Extern]
-  record WS_XML_DATETIME_TEXT,
-    text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT,
-    value : Win32cr::Networking::WindowsWebServices::WS_DATETIME
-
-  @[Extern]
-  record WS_TIMESPAN,
-    ticks : Int64
-
-  @[Extern]
-  record WS_XML_TIMESPAN_TEXT,
-    text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT,
-    value : Win32cr::Networking::WindowsWebServices::WS_TIMESPAN
-
-  @[Extern]
-  record WS_XML_QNAME_TEXT,
-    text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT,
-    prefix : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
-
-  @[Extern]
-  record WS_XML_LIST_TEXT,
-    text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT,
-    itemCount : UInt32,
-    items : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT**
-
-  @[Extern]
-  record WS_XML_NODE,
-    nodeType : Win32cr::Networking::WindowsWebServices::WS_XML_NODE_TYPE
-
-  @[Extern]
-  record WS_XML_ATTRIBUTE,
-    singleQuote : UInt8,
-    isXmlNs : UInt8,
-    prefix : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    value : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT*
-
-  @[Extern]
-  record WS_XML_ELEMENT_NODE,
-    node : Win32cr::Networking::WindowsWebServices::WS_XML_NODE,
-    prefix : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    attributeCount : UInt32,
-    attributes : Win32cr::Networking::WindowsWebServices::WS_XML_ATTRIBUTE**,
-    isEmpty : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record WS_XML_TEXT_NODE,
-    node : Win32cr::Networking::WindowsWebServices::WS_XML_NODE,
-    text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT*
-
-  @[Extern]
-  record WS_XML_COMMENT_NODE,
-    node : Win32cr::Networking::WindowsWebServices::WS_XML_NODE,
-    value : Win32cr::Networking::WindowsWebServices::WS_XML_STRING
-
-  @[Extern]
-  record WS_XML_READER_INPUT,
-    inputType : Win32cr::Networking::WindowsWebServices::WS_XML_READER_INPUT_TYPE
-
-  @[Extern]
-  record WS_XML_READER_BUFFER_INPUT,
-    input : Win32cr::Networking::WindowsWebServices::WS_XML_READER_INPUT,
-    encodedData : Void*,
-    encodedDataSize : UInt32
-
-  @[Extern]
-  record WS_XML_READER_STREAM_INPUT,
-    input : Win32cr::Networking::WindowsWebServices::WS_XML_READER_INPUT,
-    readCallback : Win32cr::Networking::WindowsWebServices::WS_READ_CALLBACK,
-    readCallbackState : Void*
-
-  @[Extern]
-  record WS_XML_READER_ENCODING,
-    encodingType : Win32cr::Networking::WindowsWebServices::WS_XML_READER_ENCODING_TYPE
-
-  @[Extern]
-  record WS_XML_READER_TEXT_ENCODING,
-    encoding : Win32cr::Networking::WindowsWebServices::WS_XML_READER_ENCODING,
-    charSet : Win32cr::Networking::WindowsWebServices::WS_CHARSET
-
-  @[Extern]
-  record WS_XML_READER_BINARY_ENCODING,
-    encoding : Win32cr::Networking::WindowsWebServices::WS_XML_READER_ENCODING,
-    staticDictionary : Win32cr::Networking::WindowsWebServices::WS_XML_DICTIONARY*,
-    dynamicDictionary : Win32cr::Networking::WindowsWebServices::WS_XML_DICTIONARY*
-
-  @[Extern]
-  record WS_STRING,
-    length : UInt32,
-    chars : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record WS_XML_READER_MTOM_ENCODING,
-    encoding : Win32cr::Networking::WindowsWebServices::WS_XML_READER_ENCODING,
-    textEncoding : Win32cr::Networking::WindowsWebServices::WS_XML_READER_ENCODING*,
-    readMimeHeader : Win32cr::Foundation::BOOL,
-    startInfo : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    boundary : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    startUri : Win32cr::Networking::WindowsWebServices::WS_STRING
-
-  @[Extern]
-  record WS_XML_READER_RAW_ENCODING,
-    encoding : Win32cr::Networking::WindowsWebServices::WS_XML_READER_ENCODING
-
-  @[Extern]
-  record WS_XML_WRITER_ENCODING,
-    encodingType : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_ENCODING_TYPE
-
-  @[Extern]
-  record WS_XML_WRITER_TEXT_ENCODING,
-    encoding : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_ENCODING,
-    charSet : Win32cr::Networking::WindowsWebServices::WS_CHARSET
-
-  @[Extern]
-  record WS_XML_WRITER_BINARY_ENCODING,
-    encoding : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_ENCODING,
-    staticDictionary : Win32cr::Networking::WindowsWebServices::WS_XML_DICTIONARY*,
-    dynamicStringCallback : Win32cr::Networking::WindowsWebServices::WS_DYNAMIC_STRING_CALLBACK,
-    dynamicStringCallbackState : Void*
-
-  @[Extern]
-  record WS_XML_WRITER_MTOM_ENCODING,
-    encoding : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_ENCODING,
-    textEncoding : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_ENCODING*,
-    writeMimeHeader : Win32cr::Foundation::BOOL,
-    boundary : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    startInfo : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    startUri : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    maxInlineByteCount : UInt32
-
-  @[Extern]
-  record WS_XML_WRITER_RAW_ENCODING,
-    encoding : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_ENCODING
-
-  @[Extern]
-  record WS_XML_WRITER_OUTPUT,
-    outputType : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_OUTPUT_TYPE
-
-  @[Extern]
-  record WS_XML_WRITER_BUFFER_OUTPUT,
-    output : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_OUTPUT
-
-  @[Extern]
-  record WS_XML_WRITER_STREAM_OUTPUT,
-    output : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_OUTPUT,
-    writeCallback : Win32cr::Networking::WindowsWebServices::WS_WRITE_CALLBACK,
-    writeCallbackState : Void*
-
-  @[Extern]
-  record WS_XML_WRITER_PROPERTIES,
-    properties : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_PROPERTY*,
-    propertyCount : UInt32
-
-  @[Extern]
-  record WS_XML_READER_PROPERTIES,
-    properties : Win32cr::Networking::WindowsWebServices::WS_XML_READER_PROPERTY*,
-    propertyCount : UInt32
-
-  @[Extern]
-  record WS_ASYNC_CONTEXT,
-    callback : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CALLBACK,
-    callbackState : Void*
-
-  @[Extern]
-  record WS_ASYNC_STATE,
-    internal0 : Void*,
-    internal1 : Void*,
-    internal2 : Void*,
-    internal3 : Void*,
-    internal4 : Void*
-
-  @[Extern]
-  record WS_ASYNC_OPERATION,
-    function : Win32cr::Networking::WindowsWebServices::WS_ASYNC_FUNCTION
-
-  @[Extern]
-  record WS_CHANNEL_PROPERTY,
-    id : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY_ID,
-    value : Void*,
-    valueSize : UInt32
-
-  @[Extern]
-  record WS_CUSTOM_HTTP_PROXY,
-    servers : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    bypass : Win32cr::Networking::WindowsWebServices::WS_STRING
-
-  @[Extern]
-  record WS_CHANNEL_PROPERTIES,
-    properties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY*,
-    propertyCount : UInt32
-
-  @[Extern]
-  record WS_CUSTOM_CHANNEL_CALLBACKS,
-    createChannelCallback : Win32cr::Networking::WindowsWebServices::WS_CREATE_CHANNEL_CALLBACK,
-    freeChannelCallback : Win32cr::Networking::WindowsWebServices::WS_FREE_CHANNEL_CALLBACK,
-    resetChannelCallback : Win32cr::Networking::WindowsWebServices::WS_RESET_CHANNEL_CALLBACK,
-    openChannelCallback : Win32cr::Networking::WindowsWebServices::WS_OPEN_CHANNEL_CALLBACK,
-    closeChannelCallback : Win32cr::Networking::WindowsWebServices::WS_CLOSE_CHANNEL_CALLBACK,
-    abortChannelCallback : Win32cr::Networking::WindowsWebServices::WS_ABORT_CHANNEL_CALLBACK,
-    getChannelPropertyCallback : Win32cr::Networking::WindowsWebServices::WS_GET_CHANNEL_PROPERTY_CALLBACK,
-    setChannelPropertyCallback : Win32cr::Networking::WindowsWebServices::WS_SET_CHANNEL_PROPERTY_CALLBACK,
-    writeMessageStartCallback : Win32cr::Networking::WindowsWebServices::WS_WRITE_MESSAGE_START_CALLBACK,
-    writeMessageEndCallback : Win32cr::Networking::WindowsWebServices::WS_WRITE_MESSAGE_END_CALLBACK,
-    readMessageStartCallback : Win32cr::Networking::WindowsWebServices::WS_READ_MESSAGE_START_CALLBACK,
-    readMessageEndCallback : Win32cr::Networking::WindowsWebServices::WS_READ_MESSAGE_END_CALLBACK,
-    abandonMessageCallback : Win32cr::Networking::WindowsWebServices::WS_ABANDON_MESSAGE_CALLBACK,
-    shutdownSessionChannelCallback : Win32cr::Networking::WindowsWebServices::WS_SHUTDOWN_SESSION_CHANNEL_CALLBACK
-
-  @[Extern]
-  record WS_HTTP_HEADER_MAPPING,
-    headerName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING,
-    headerMappingOptions : UInt32
-
-  @[Extern]
-  record WS_HTTP_MESSAGE_MAPPING,
-    requestMappingOptions : UInt32,
-    responseMappingOptions : UInt32,
-    requestHeaderMappings : Win32cr::Networking::WindowsWebServices::WS_HTTP_HEADER_MAPPING**,
-    requestHeaderMappingCount : UInt32,
-    responseHeaderMappings : Win32cr::Networking::WindowsWebServices::WS_HTTP_HEADER_MAPPING**,
-    responseHeaderMappingCount : UInt32
-
-  @[Extern]
-  record WS_ELEMENT_DESCRIPTION,
-    elementLocalName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    elementNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    type__ : Win32cr::Networking::WindowsWebServices::WS_TYPE,
-    typeDescription : Void*
-
-  @[Extern]
-  record WS_MESSAGE_DESCRIPTION,
-    action : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    bodyElementDescription : Win32cr::Networking::WindowsWebServices::WS_ELEMENT_DESCRIPTION*
-
-  @[Extern]
-  record WS_CHANNEL_ENCODER,
-    createContext : Void*,
-    createEncoderCallback : Win32cr::Networking::WindowsWebServices::WS_CREATE_ENCODER_CALLBACK,
-    encoderGetContentTypeCallback : Win32cr::Networking::WindowsWebServices::WS_ENCODER_GET_CONTENT_TYPE_CALLBACK,
-    encoderStartCallback : Win32cr::Networking::WindowsWebServices::WS_ENCODER_START_CALLBACK,
-    encoderEncodeCallback : Win32cr::Networking::WindowsWebServices::WS_ENCODER_ENCODE_CALLBACK,
-    encoderEndCallback : Win32cr::Networking::WindowsWebServices::WS_ENCODER_END_CALLBACK,
-    freeEncoderCallback : Win32cr::Networking::WindowsWebServices::WS_FREE_ENCODER_CALLBACK
-
-  @[Extern]
-  record WS_CHANNEL_DECODER,
-    createContext : Void*,
-    createDecoderCallback : Win32cr::Networking::WindowsWebServices::WS_CREATE_DECODER_CALLBACK,
-    decoderGetContentTypeCallback : Win32cr::Networking::WindowsWebServices::WS_DECODER_GET_CONTENT_TYPE_CALLBACK,
-    decoderStartCallback : Win32cr::Networking::WindowsWebServices::WS_DECODER_START_CALLBACK,
-    decoderDecodeCallback : Win32cr::Networking::WindowsWebServices::WS_DECODER_DECODE_CALLBACK,
-    decoderEndCallback : Win32cr::Networking::WindowsWebServices::WS_DECODER_END_CALLBACK,
-    freeDecoderCallback : Win32cr::Networking::WindowsWebServices::WS_FREE_DECODER_CALLBACK
-
-  @[Extern]
-  record WS_HTTP_REDIRECT_CALLBACK_CONTEXT,
-    callback : Win32cr::Networking::WindowsWebServices::WS_HTTP_REDIRECT_CALLBACK,
-    state : Void*
-
-  @[Extern]
-  record WS_ENDPOINT_IDENTITY,
-    identityType : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_IDENTITY_TYPE
-
-  @[Extern]
-  record WS_ENDPOINT_ADDRESS,
-    url : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    headers : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*,
-    extensions : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*,
-    identity : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_IDENTITY*
-
-  @[Extern]
-  record WS_DNS_ENDPOINT_IDENTITY,
-    identity : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_IDENTITY,
-    dns : Win32cr::Networking::WindowsWebServices::WS_STRING
-
-  @[Extern]
-  record WS_UPN_ENDPOINT_IDENTITY,
-    identity : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_IDENTITY,
-    upn : Win32cr::Networking::WindowsWebServices::WS_STRING
-
-  @[Extern]
-  record WS_SPN_ENDPOINT_IDENTITY,
-    identity : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_IDENTITY,
-    spn : Win32cr::Networking::WindowsWebServices::WS_STRING
-
-  @[Extern]
-  record WS_BYTES,
-    length : UInt32,
-    bytes : UInt8*
-
-  @[Extern]
-  record WS_RSA_ENDPOINT_IDENTITY,
-    identity : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_IDENTITY,
-    modulus : Win32cr::Networking::WindowsWebServices::WS_BYTES,
-    exponent : Win32cr::Networking::WindowsWebServices::WS_BYTES
-
-  @[Extern]
-  record WS_CERT_ENDPOINT_IDENTITY,
-    identity : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_IDENTITY,
-    rawCertificateData : Win32cr::Networking::WindowsWebServices::WS_BYTES
-
-  @[Extern]
-  record WS_UNKNOWN_ENDPOINT_IDENTITY,
-    identity : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_IDENTITY,
-    element : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*
-
-  @[Extern]
-  record WS_ERROR_PROPERTY,
-    id : Win32cr::Networking::WindowsWebServices::WS_ERROR_PROPERTY_ID,
-    value : Void*,
-    valueSize : UInt32
-
-  @[Extern]
-  record WS_FAULT_REASON,
-    text : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    lang : Win32cr::Networking::WindowsWebServices::WS_STRING
-
-  @[Extern]
-  record WS_FAULT_CODE,
-    value : Win32cr::Networking::WindowsWebServices::WS_XML_QNAME,
-    subCode : Win32cr::Networking::WindowsWebServices::WS_FAULT_CODE*
-
-  @[Extern]
-  record WS_FAULT,
-    code : Win32cr::Networking::WindowsWebServices::WS_FAULT_CODE*,
-    reasons : Win32cr::Networking::WindowsWebServices::WS_FAULT_REASON*,
-    reasonCount : UInt32,
-    actor : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    node : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    detail : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*
-
-  @[Extern]
-  record WS_FAULT_DETAIL_DESCRIPTION,
-    action : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    detailElementDescription : Win32cr::Networking::WindowsWebServices::WS_ELEMENT_DESCRIPTION*
-
-  @[Extern]
-  record WS_HEAP_PROPERTY,
-    id : Win32cr::Networking::WindowsWebServices::WS_HEAP_PROPERTY_ID,
-    value : Void*,
-    valueSize : UInt32
-
-  @[Extern]
-  record WS_HEAP_PROPERTIES,
-    properties : Win32cr::Networking::WindowsWebServices::WS_HEAP_PROPERTY*,
-    propertyCount : UInt32
-
-  @[Extern]
-  record WS_LISTENER_PROPERTY,
-    id : Win32cr::Networking::WindowsWebServices::WS_LISTENER_PROPERTY_ID,
-    value : Void*,
-    valueSize : UInt32
-
-  @[Extern]
-  record WS_DISALLOWED_USER_AGENT_SUBSTRINGS,
-    subStringCount : UInt32,
-    subStrings : Win32cr::Networking::WindowsWebServices::WS_STRING**
-
-  @[Extern]
-  record WS_LISTENER_PROPERTIES,
-    properties : Win32cr::Networking::WindowsWebServices::WS_LISTENER_PROPERTY*,
-    propertyCount : UInt32
-
-  @[Extern]
-  record WS_HOST_NAMES,
-    hostNames : Win32cr::Networking::WindowsWebServices::WS_STRING*,
-    hostNameCount : UInt32
-
-  @[Extern]
-  record WS_CUSTOM_LISTENER_CALLBACKS,
-    createListenerCallback : Win32cr::Networking::WindowsWebServices::WS_CREATE_LISTENER_CALLBACK,
-    freeListenerCallback : Win32cr::Networking::WindowsWebServices::WS_FREE_LISTENER_CALLBACK,
-    resetListenerCallback : Win32cr::Networking::WindowsWebServices::WS_RESET_LISTENER_CALLBACK,
-    openListenerCallback : Win32cr::Networking::WindowsWebServices::WS_OPEN_LISTENER_CALLBACK,
-    closeListenerCallback : Win32cr::Networking::WindowsWebServices::WS_CLOSE_LISTENER_CALLBACK,
-    abortListenerCallback : Win32cr::Networking::WindowsWebServices::WS_ABORT_LISTENER_CALLBACK,
-    getListenerPropertyCallback : Win32cr::Networking::WindowsWebServices::WS_GET_LISTENER_PROPERTY_CALLBACK,
-    setListenerPropertyCallback : Win32cr::Networking::WindowsWebServices::WS_SET_LISTENER_PROPERTY_CALLBACK,
-    createChannelForListenerCallback : Win32cr::Networking::WindowsWebServices::WS_CREATE_CHANNEL_FOR_LISTENER_CALLBACK,
-    acceptChannelCallback : Win32cr::Networking::WindowsWebServices::WS_ACCEPT_CHANNEL_CALLBACK
-
-  @[Extern]
-  record WS_MESSAGE_PROPERTY,
-    id : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_PROPERTY_ID,
-    value : Void*,
-    valueSize : UInt32
-
-  @[Extern]
-  record WS_MESSAGE_PROPERTIES,
-    properties : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_PROPERTY*,
-    propertyCount : UInt32
-
-  @[Extern]
-  record WS_SECURITY_ALGORITHM_PROPERTY,
-    id : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_PROPERTY_ID,
-    value : Void*,
-    valueSize : UInt32
-
-  @[Extern]
-  record WS_SECURITY_ALGORITHM_SUITE,
-    canonicalizationAlgorithm : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_ID,
-    digestAlgorithm : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_ID,
-    symmetricSignatureAlgorithm : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_ID,
-    asymmetricSignatureAlgorithm : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_ID,
-    encryptionAlgorithm : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_ID,
-    keyDerivationAlgorithm : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_ID,
-    symmetricKeyWrapAlgorithm : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_ID,
-    asymmetricKeyWrapAlgorithm : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_ID,
-    minSymmetricKeyLength : UInt32,
-    maxSymmetricKeyLength : UInt32,
-    minAsymmetricKeyLength : UInt32,
-    maxAsymmetricKeyLength : UInt32,
-    properties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_PROPERTY*,
-    propertyCount : UInt32
-
-  @[Extern]
-  record WS_SECURITY_PROPERTY,
-    id : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTY_ID,
-    value : Void*,
-    valueSize : UInt32
-
-  @[Extern]
-  record WS_SECURITY_PROPERTIES,
-    properties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTY*,
-    propertyCount : UInt32
-
-  @[Extern]
-  record WS_SECURITY_BINDING_PROPERTY,
-    id : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTY_ID,
-    value : Void*,
-    valueSize : UInt32
-
-  @[Extern]
-  record WS_SECURITY_BINDING_PROPERTIES,
-    properties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTY*,
-    propertyCount : UInt32
-
-  @[Extern]
-  record WS_SERVICE_SECURITY_IDENTITIES,
-    serviceIdentities : Win32cr::Networking::WindowsWebServices::WS_STRING*,
-    serviceIdentityCount : UInt32
-
-  @[Extern]
-  record WS_CERTIFICATE_VALIDATION_CALLBACK_CONTEXT,
-    callback : Win32cr::Networking::WindowsWebServices::WS_CERTIFICATE_VALIDATION_CALLBACK,
-    state : Void*
-
-  @[Extern]
-  record WS_CERT_CREDENTIAL,
-    credentialType : Win32cr::Networking::WindowsWebServices::WS_CERT_CREDENTIAL_TYPE
-
-  @[Extern]
-  record WS_SUBJECT_NAME_CERT_CREDENTIAL,
-    credential : Win32cr::Networking::WindowsWebServices::WS_CERT_CREDENTIAL,
-    storeLocation : UInt32,
-    storeName : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    subjectName : Win32cr::Networking::WindowsWebServices::WS_STRING
-
-  @[Extern]
-  record WS_THUMBPRINT_CERT_CREDENTIAL,
-    credential : Win32cr::Networking::WindowsWebServices::WS_CERT_CREDENTIAL,
-    storeLocation : UInt32,
-    storeName : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    thumbprint : Win32cr::Networking::WindowsWebServices::WS_STRING
-
-  @[Extern]
-  record WS_CUSTOM_CERT_CREDENTIAL,
-    credential : Win32cr::Networking::WindowsWebServices::WS_CERT_CREDENTIAL,
-    getCertCallback : Win32cr::Networking::WindowsWebServices::WS_GET_CERT_CALLBACK,
-    getCertCallbackState : Void*,
-    certIssuerListNotificationCallback : Win32cr::Networking::WindowsWebServices::WS_CERT_ISSUER_LIST_NOTIFICATION_CALLBACK,
-    certIssuerListNotificationCallbackState : Void*
-
-  @[Extern]
-  record WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL,
-    credentialType : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL_TYPE
-
-  @[Extern]
-  record WS_STRING_WINDOWS_INTEGRATED_AUTH_CREDENTIAL,
-    credential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL,
-    username : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    password : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    domain : Win32cr::Networking::WindowsWebServices::WS_STRING
-
-  @[Extern]
-  record WS_DEFAULT_WINDOWS_INTEGRATED_AUTH_CREDENTIAL,
-    credential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL
-
-  @[Extern]
-  record WS_OPAQUE_WINDOWS_INTEGRATED_AUTH_CREDENTIAL,
-    credential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL,
-    opaqueAuthIdentity : Void*
-
-  @[Extern]
-  record WS_USERNAME_CREDENTIAL,
-    credentialType : Win32cr::Networking::WindowsWebServices::WS_USERNAME_CREDENTIAL_TYPE
-
-  @[Extern]
-  record WS_STRING_USERNAME_CREDENTIAL,
-    credential : Win32cr::Networking::WindowsWebServices::WS_USERNAME_CREDENTIAL,
-    username : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    password : Win32cr::Networking::WindowsWebServices::WS_STRING
-
-  @[Extern]
-  record WS_SECURITY_KEY_HANDLE,
-    keyHandleType : Win32cr::Networking::WindowsWebServices::WS_SECURITY_KEY_HANDLE_TYPE
-
-  @[Extern]
-  record WS_RAW_SYMMETRIC_SECURITY_KEY_HANDLE,
-    keyHandle : Win32cr::Networking::WindowsWebServices::WS_SECURITY_KEY_HANDLE,
-    rawKeyBytes : Win32cr::Networking::WindowsWebServices::WS_BYTES
-
-  @[Extern]
-  record WS_NCRYPT_ASYMMETRIC_SECURITY_KEY_HANDLE,
-    keyHandle : Win32cr::Networking::WindowsWebServices::WS_SECURITY_KEY_HANDLE,
-    asymmetricKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE
-
-  @[Extern]
-  record WS_CAPI_ASYMMETRIC_SECURITY_KEY_HANDLE,
-    keyHandle : Win32cr::Networking::WindowsWebServices::WS_SECURITY_KEY_HANDLE,
-    provider : LibC::UIntPtrT,
-    keySpec : UInt32
-
-  @[Extern]
-  record WS_SECURITY_BINDING,
-    bindingType : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_TYPE,
-    properties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTY*,
-    propertyCount : UInt32
-
-  @[Extern]
-  record WS_SSL_TRANSPORT_SECURITY_BINDING,
-    binding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING,
-    localCertCredential : Win32cr::Networking::WindowsWebServices::WS_CERT_CREDENTIAL*
-
-  @[Extern]
-  record WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING,
-    binding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING,
-    clientCredential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL*
-
-  @[Extern]
-  record WS_NAMEDPIPE_SSPI_TRANSPORT_SECURITY_BINDING,
-    binding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING,
-    clientCredential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL*
-
-  @[Extern]
-  record WS_HTTP_HEADER_AUTH_SECURITY_BINDING,
-    binding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING,
-    clientCredential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL*
-
-  @[Extern]
-  record WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING,
-    binding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING,
-    bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE,
-    clientCredential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL*
-
-  @[Extern]
-  record WS_USERNAME_MESSAGE_SECURITY_BINDING,
-    binding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING,
-    bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE,
-    clientCredential : Win32cr::Networking::WindowsWebServices::WS_USERNAME_CREDENTIAL*,
-    passwordValidator : Win32cr::Networking::WindowsWebServices::WS_VALIDATE_PASSWORD_CALLBACK,
-    passwordValidatorCallbackState : Void*
-
-  @[Extern]
-  record WS_SECURITY_DESCRIPTION,
-    securityBindings : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING**,
-    securityBindingCount : UInt32,
-    properties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTY*,
-    propertyCount : UInt32
-
-  @[Extern]
-  record WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING,
-    binding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING,
-    bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE,
-    bootstrapSecurityDescription : Win32cr::Networking::WindowsWebServices::WS_SECURITY_DESCRIPTION*
-
-  @[Extern]
-  record WS_SECURITY_CONTEXT_PROPERTY,
-    id : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_PROPERTY_ID,
-    value : Void*,
-    valueSize : UInt32
-
-  @[Extern]
-  record WS_XML_SECURITY_TOKEN_PROPERTY,
-    id : Win32cr::Networking::WindowsWebServices::WS_XML_SECURITY_TOKEN_PROPERTY_ID,
-    value : Void*,
-    valueSize : UInt32
-
-  @[Extern]
-  record WS_XML_TOKEN_MESSAGE_SECURITY_BINDING,
-    binding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING,
-    bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE,
-    xmlToken : Win32cr::Networking::WindowsWebServices::WS_SECURITY_TOKEN*
-
-  @[Extern]
-  record WS_SAML_AUTHENTICATOR,
-    authenticatorType : Win32cr::Networking::WindowsWebServices::WS_SAML_AUTHENTICATOR_TYPE
-
-  @[Extern]
-  record WS_CERT_SIGNED_SAML_AUTHENTICATOR,
-    authenticator : Win32cr::Networking::WindowsWebServices::WS_SAML_AUTHENTICATOR,
-    trustedIssuerCerts : Win32cr::Security::Cryptography::CERT_CONTEXT**,
-    trustedIssuerCertCount : UInt32,
-    decryptionCert : Win32cr::Security::Cryptography::CERT_CONTEXT*,
-    samlValidator : Win32cr::Networking::WindowsWebServices::WS_VALIDATE_SAML_CALLBACK,
-    samlValidatorCallbackState : Void*
-
-  @[Extern]
-  record WS_SAML_MESSAGE_SECURITY_BINDING,
-    binding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING,
-    bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE,
-    authenticator : Win32cr::Networking::WindowsWebServices::WS_SAML_AUTHENTICATOR*
-
-  @[Extern]
-  record WS_REQUEST_SECURITY_TOKEN_PROPERTY,
-    id : Win32cr::Networking::WindowsWebServices::WS_REQUEST_SECURITY_TOKEN_PROPERTY_ID,
-    value : Void*,
-    valueSize : UInt32
-
-  @[Extern]
-  record WS_ANY_ATTRIBUTE,
-    localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING,
-    ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING,
-    value : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT*
-
-  @[Extern]
-  record WS_ANY_ATTRIBUTES,
-    attributes : Win32cr::Networking::WindowsWebServices::WS_ANY_ATTRIBUTE*,
-    attributeCount : UInt32
-
-  @[Extern]
-  record WS_BOOL_DESCRIPTION,
-    value : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record WS_GUID_DESCRIPTION,
-    value : LibC::GUID
-
-  @[Extern]
-  record WS_DATETIME_DESCRIPTION,
-    minValue : Win32cr::Networking::WindowsWebServices::WS_DATETIME,
-    maxValue : Win32cr::Networking::WindowsWebServices::WS_DATETIME
-
-  @[Extern]
-  record WS_DURATION,
-    negative : Win32cr::Foundation::BOOL,
-    years : UInt32,
-    months : UInt32,
-    days : UInt32,
-    hours : UInt32,
-    minutes : UInt32,
-    seconds : UInt32,
-    milliseconds : UInt32,
-    ticks : UInt32
-
-  @[Extern]
-  record WS_DURATION_DESCRIPTION,
-    minValue : Win32cr::Networking::WindowsWebServices::WS_DURATION,
-    maxValue : Win32cr::Networking::WindowsWebServices::WS_DURATION,
-    comparer : Win32cr::Networking::WindowsWebServices::WS_DURATION_COMPARISON_CALLBACK
-
-  @[Extern]
-  record WS_TIMESPAN_DESCRIPTION,
-    minValue : Win32cr::Networking::WindowsWebServices::WS_TIMESPAN,
-    maxValue : Win32cr::Networking::WindowsWebServices::WS_TIMESPAN
-
-  @[Extern]
-  record WS_UNIQUE_ID_DESCRIPTION,
-    minCharCount : UInt32,
-    maxCharCount : UInt32
-
-  @[Extern]
-  record WS_STRING_DESCRIPTION,
-    minCharCount : UInt32,
-    maxCharCount : UInt32
-
-  @[Extern]
-  record WS_XML_STRING_DESCRIPTION,
-    minByteCount : UInt32,
-    maxByteCount : UInt32
-
-  @[Extern]
-  record WS_XML_QNAME_DESCRIPTION,
-    minLocalNameByteCount : UInt32,
-    maxLocalNameByteCount : UInt32,
-    minNsByteCount : UInt32,
-    maxNsByteCount : UInt32
-
-  @[Extern]
-  record WS_CHAR_ARRAY_DESCRIPTION,
-    minCharCount : UInt32,
-    maxCharCount : UInt32
-
-  @[Extern]
-  record WS_BYTE_ARRAY_DESCRIPTION,
-    minByteCount : UInt32,
-    maxByteCount : UInt32
-
-  @[Extern]
-  record WS_UTF8_ARRAY_DESCRIPTION,
-    minByteCount : UInt32,
-    maxByteCount : UInt32
-
-  @[Extern]
-  record WS_WSZ_DESCRIPTION,
-    minCharCount : UInt32,
-    maxCharCount : UInt32
-
-  @[Extern]
-  record WS_INT8_DESCRIPTION,
-    minValue : Win32cr::Foundation::CHAR,
-    maxValue : Win32cr::Foundation::CHAR
-
-  @[Extern]
-  record WS_UINT8_DESCRIPTION,
-    minValue : UInt8,
-    maxValue : UInt8
-
-  @[Extern]
-  record WS_INT16_DESCRIPTION,
-    minValue : Int16,
-    maxValue : Int16
-
-  @[Extern]
-  record WS_UINT16_DESCRIPTION,
-    minValue : UInt16,
-    maxValue : UInt16
-
-  @[Extern]
-  record WS_INT32_DESCRIPTION,
-    minValue : Int32,
-    maxValue : Int32
-
-  @[Extern]
-  record WS_UINT32_DESCRIPTION,
-    minValue : UInt32,
-    maxValue : UInt32
-
-  @[Extern]
-  record WS_INT64_DESCRIPTION,
-    minValue : Int64,
-    maxValue : Int64
-
-  @[Extern]
-  record WS_UINT64_DESCRIPTION,
-    minValue : UInt64,
-    maxValue : UInt64
-
-  @[Extern]
-  record WS_FLOAT_DESCRIPTION,
-    minValue : Float32,
-    maxValue : Float32
-
-  @[Extern]
-  record WS_DOUBLE_DESCRIPTION,
-    minValue : Float64,
-    maxValue : Float64
-
-  @[Extern]
-  record WS_DECIMAL_DESCRIPTION,
-    minValue : Win32cr::Foundation::DECIMAL,
-    maxValue : Win32cr::Foundation::DECIMAL
-
-  @[Extern]
-  record WS_BYTES_DESCRIPTION,
-    minByteCount : UInt32,
-    maxByteCount : UInt32
-
-  @[Extern]
-  record WS_ENUM_VALUE,
-    value : Int32,
-    name : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
-
-  @[Extern]
-  record WS_ENUM_DESCRIPTION,
-    values : Win32cr::Networking::WindowsWebServices::WS_ENUM_VALUE*,
-    valueCount : UInt32,
-    maxByteCount : UInt32,
-    nameIndices : UInt32*
-
-  @[Extern]
-  record WS_ITEM_RANGE,
-    minItemCount : UInt32,
-    maxItemCount : UInt32
-
-  @[Extern]
-  record WS_DEFAULT_VALUE,
-    value : Void*,
-    valueSize : UInt32
-
-  @[Extern]
-  record WS_FIELD_DESCRIPTION,
-    mapping : Win32cr::Networking::WindowsWebServices::WS_FIELD_MAPPING,
-    localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    type__ : Win32cr::Networking::WindowsWebServices::WS_TYPE,
-    typeDescription : Void*,
-    offset : UInt32,
-    options : UInt32,
-    defaultValue : Win32cr::Networking::WindowsWebServices::WS_DEFAULT_VALUE*,
-    countOffset : UInt32,
-    itemLocalName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    itemNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    itemRange : Win32cr::Networking::WindowsWebServices::WS_ITEM_RANGE*
-
-  @[Extern]
-  record WS_UNION_FIELD_DESCRIPTION,
-    value : Int32,
-    field : Win32cr::Networking::WindowsWebServices::WS_FIELD_DESCRIPTION
-
-  @[Extern]
-  record WS_STRUCT_DESCRIPTION,
-    size : UInt32,
-    alignment : UInt32,
-    fields : Win32cr::Networking::WindowsWebServices::WS_FIELD_DESCRIPTION**,
-    fieldCount : UInt32,
-    typeLocalName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    typeNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    parentType : Win32cr::Networking::WindowsWebServices::WS_STRUCT_DESCRIPTION*,
-    subTypes : Win32cr::Networking::WindowsWebServices::WS_STRUCT_DESCRIPTION**,
-    subTypeCount : UInt32,
-    structOptions : UInt32
-
-  @[Extern]
-  record WS_UNION_DESCRIPTION,
-    size : UInt32,
-    alignment : UInt32,
-    fields : Win32cr::Networking::WindowsWebServices::WS_UNION_FIELD_DESCRIPTION**,
-    fieldCount : UInt32,
-    enumOffset : UInt32,
-    noneEnumValue : Int32,
-    valueIndices : UInt32*
-
-  @[Extern]
-  record WS_ENDPOINT_ADDRESS_DESCRIPTION,
-    addressingVersion : Win32cr::Networking::WindowsWebServices::WS_ADDRESSING_VERSION
-
-  @[Extern]
-  record WS_FAULT_DESCRIPTION,
-    envelopeVersion : Win32cr::Networking::WindowsWebServices::WS_ENVELOPE_VERSION
-
-  @[Extern]
-  record WS_VOID_DESCRIPTION,
-    size : UInt32
-
-  @[Extern]
-  record WS_CUSTOM_TYPE_DESCRIPTION,
-    size : UInt32,
-    alignment : UInt32,
-    readCallback : Win32cr::Networking::WindowsWebServices::WS_READ_TYPE_CALLBACK,
-    writeCallback : Win32cr::Networking::WindowsWebServices::WS_WRITE_TYPE_CALLBACK,
-    descriptionData : Void*,
-    isDefaultValueCallback : Win32cr::Networking::WindowsWebServices::WS_IS_DEFAULT_VALUE_CALLBACK
-
-  @[Extern]
-  record WS_ATTRIBUTE_DESCRIPTION,
-    attributeLocalName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    attributeNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    type__ : Win32cr::Networking::WindowsWebServices::WS_TYPE,
-    typeDescription : Void*
-
-  @[Extern]
-  record WS_PARAMETER_DESCRIPTION,
-    parameterType : Win32cr::Networking::WindowsWebServices::WS_PARAMETER_TYPE,
-    inputMessageIndex : UInt16,
-    outputMessageIndex : UInt16
-
-  @[Extern]
-  record WS_OPERATION_DESCRIPTION,
-    versionInfo : UInt32,
-    inputMessageDescription : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_DESCRIPTION*,
-    outputMessageDescription : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_DESCRIPTION*,
-    inputMessageOptions : UInt32,
-    outputMessageOptions : UInt32,
-    parameterCount : UInt16,
-    parameterDescription : Win32cr::Networking::WindowsWebServices::WS_PARAMETER_DESCRIPTION*,
-    stubCallback : Win32cr::Networking::WindowsWebServices::WS_SERVICE_STUB_CALLBACK,
-    style : Win32cr::Networking::WindowsWebServices::WS_OPERATION_STYLE
-
-  @[Extern]
-  record WS_CONTRACT_DESCRIPTION,
-    operationCount : UInt32,
-    operations : Win32cr::Networking::WindowsWebServices::WS_OPERATION_DESCRIPTION**
-
-  @[Extern]
-  record WS_SERVICE_CONTRACT,
-    contractDescription : Win32cr::Networking::WindowsWebServices::WS_CONTRACT_DESCRIPTION*,
-    defaultMessageHandlerCallback : Win32cr::Networking::WindowsWebServices::WS_SERVICE_MESSAGE_RECEIVE_CALLBACK,
-    methodTable : Void*
-
-  @[Extern]
-  record WS_SERVICE_PROPERTY,
-    id : Win32cr::Networking::WindowsWebServices::WS_SERVICE_PROPERTY_ID,
-    value : Void*,
-    valueSize : UInt32
-
-  @[Extern]
-  record WS_SERVICE_ENDPOINT_PROPERTY,
-    id : Win32cr::Networking::WindowsWebServices::WS_SERVICE_ENDPOINT_PROPERTY_ID,
-    value : Void*,
-    valueSize : UInt32
-
-  @[Extern]
-  record WS_SERVICE_PROPERTY_ACCEPT_CALLBACK,
-    callback : Win32cr::Networking::WindowsWebServices::WS_SERVICE_ACCEPT_CHANNEL_CALLBACK
-
-  @[Extern]
-  record WS_SERVICE_METADATA_DOCUMENT,
-    content : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    name : Win32cr::Networking::WindowsWebServices::WS_STRING*
-
-  @[Extern]
-  record WS_SERVICE_METADATA,
-    documentCount : UInt32,
-    documents : Win32cr::Networking::WindowsWebServices::WS_SERVICE_METADATA_DOCUMENT**,
-    serviceName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    serviceNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
-
-  @[Extern]
-  record WS_SERVICE_PROPERTY_CLOSE_CALLBACK,
-    callback : Win32cr::Networking::WindowsWebServices::WS_SERVICE_CLOSE_CHANNEL_CALLBACK
-
-  @[Extern]
-  record WS_SERVICE_ENDPOINT_METADATA,
-    portName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    bindingName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    bindingNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
-
-  @[Extern]
-  record WS_SERVICE_ENDPOINT,
-    address : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_ADDRESS,
-    channelBinding : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_BINDING,
-    channelType : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_TYPE,
-    securityDescription : Win32cr::Networking::WindowsWebServices::WS_SECURITY_DESCRIPTION*,
-    contract : Win32cr::Networking::WindowsWebServices::WS_SERVICE_CONTRACT*,
-    authorizationCallback : Win32cr::Networking::WindowsWebServices::WS_SERVICE_SECURITY_CALLBACK,
-    properties : Win32cr::Networking::WindowsWebServices::WS_SERVICE_ENDPOINT_PROPERTY*,
-    propertyCount : UInt32,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
-
-  @[Extern]
-  record WS_PROXY_PROPERTY,
-    id : Win32cr::Networking::WindowsWebServices::WS_PROXY_PROPERTY_ID,
-    value : Void*,
-    valueSize : UInt32
-
-  @[Extern]
-  record WS_PROXY_MESSAGE_CALLBACK_CONTEXT,
-    callback : Win32cr::Networking::WindowsWebServices::WS_PROXY_MESSAGE_CALLBACK,
-    state : Void*
-
-  @[Extern]
-  record WS_CALL_PROPERTY,
-    id : Win32cr::Networking::WindowsWebServices::WS_CALL_PROPERTY_ID,
-    value : Void*,
-    valueSize : UInt32
-
-  @[Extern]
-  record WS_URL,
-    scheme : Win32cr::Networking::WindowsWebServices::WS_URL_SCHEME_TYPE
-
-  @[Extern]
-  record WS_HTTP_URL,
-    url : Win32cr::Networking::WindowsWebServices::WS_URL,
-    host : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    port : UInt16,
-    portAsString : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    path : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    query : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    fragment : Win32cr::Networking::WindowsWebServices::WS_STRING
-
-  @[Extern]
-  record WS_HTTPS_URL,
-    url : Win32cr::Networking::WindowsWebServices::WS_URL,
-    host : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    port : UInt16,
-    portAsString : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    path : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    query : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    fragment : Win32cr::Networking::WindowsWebServices::WS_STRING
-
-  @[Extern]
-  record WS_NETTCP_URL,
-    url : Win32cr::Networking::WindowsWebServices::WS_URL,
-    host : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    port : UInt16,
-    portAsString : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    path : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    query : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    fragment : Win32cr::Networking::WindowsWebServices::WS_STRING
-
-  @[Extern]
-  record WS_SOAPUDP_URL,
-    url : Win32cr::Networking::WindowsWebServices::WS_URL,
-    host : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    port : UInt16,
-    portAsString : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    path : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    query : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    fragment : Win32cr::Networking::WindowsWebServices::WS_STRING
-
-  @[Extern]
-  record WS_NETPIPE_URL,
-    url : Win32cr::Networking::WindowsWebServices::WS_URL,
-    host : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    port : UInt16,
-    portAsString : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    path : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    query : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    fragment : Win32cr::Networking::WindowsWebServices::WS_STRING
-
-  @[Extern]
-  record WS_UNIQUE_ID,
-    uri : Win32cr::Networking::WindowsWebServices::WS_STRING,
-    guid : LibC::GUID
-
-  @[Extern]
-  record WS_BUFFERS,
-    bufferCount : UInt32,
-    buffers : Win32cr::Networking::WindowsWebServices::WS_BYTES*
-
-  @[Extern]
-  record WS_METADATA_ENDPOINT,
-    endpointAddress : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_ADDRESS,
-    endpointPolicy : Win32cr::Networking::WindowsWebServices::WS_POLICY*,
-    portName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    serviceName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    serviceNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    bindingName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    bindingNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    portTypeName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    portTypeNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
-
-  @[Extern]
-  record WS_METADATA_ENDPOINTS,
-    endpoints : Win32cr::Networking::WindowsWebServices::WS_METADATA_ENDPOINT*,
-    endpointCount : UInt32
-
-  @[Extern]
-  record WS_METADATA_PROPERTY,
-    id : Win32cr::Networking::WindowsWebServices::WS_METADATA_PROPERTY_ID,
-    value : Void*,
-    valueSize : UInt32
-
-  @[Extern]
-  record WS_POLICY_PROPERTY,
-    id : Win32cr::Networking::WindowsWebServices::WS_POLICY_PROPERTY_ID,
-    value : Void*,
-    valueSize : UInt32
-
-  @[Extern]
-  record WS_POLICY_PROPERTIES,
-    properties : Win32cr::Networking::WindowsWebServices::WS_POLICY_PROPERTY*,
-    propertyCount : UInt32
-
-  @[Extern]
-  record WS_SECURITY_BINDING_PROPERTY_CONSTRAINT,
-    id : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTY_ID,
-    allowedValues : Void*,
-    allowedValuesSize : UInt32,
-    out__ : Out_e__struct_ do
-
-    # Nested Type Out_e__struct_
-    @[Extern]
-    record Out_e__struct_,
-      securityBindingProperty : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTY
-
+  struct WS_XML_READER
+    def initialize()
+    end
   end
 
   @[Extern]
-  record WS_SECURITY_BINDING_CONSTRAINT,
-    type__ : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT_TYPE,
-    propertyConstraints : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTY_CONSTRAINT*,
-    propertyConstraintCount : UInt32
-
-  @[Extern]
-  record WS_SSL_TRANSPORT_SECURITY_BINDING_CONSTRAINT,
-    bindingConstraint : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT,
-    out__ : Out_e__struct_ do
-
-    # Nested Type Out_e__struct_
-    @[Extern]
-    record Out_e__struct_,
-      clientCertCredentialRequired : Win32cr::Foundation::BOOL
-
+  struct WS_XML_WRITER
+    def initialize()
+    end
   end
 
   @[Extern]
-  record WS_USERNAME_MESSAGE_SECURITY_BINDING_CONSTRAINT,
-    bindingConstraint : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT,
-    bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE
-
-  @[Extern]
-  record WS_HTTP_HEADER_AUTH_SECURITY_BINDING_CONSTRAINT,
-    bindingConstraint : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT
-
-  @[Extern]
-  record WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_CONSTRAINT,
-    bindingConstraint : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT
-
-  @[Extern]
-  record WS_CERT_MESSAGE_SECURITY_BINDING_CONSTRAINT,
-    bindingConstraint : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT,
-    bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE
-
-  @[Extern]
-  record WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_CONSTRAINT,
-    bindingConstraint : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT,
-    bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE
-
-  @[Extern]
-  record WS_REQUEST_SECURITY_TOKEN_PROPERTY_CONSTRAINT,
-    id : Win32cr::Networking::WindowsWebServices::WS_REQUEST_SECURITY_TOKEN_PROPERTY_ID,
-    allowedValues : Void*,
-    allowedValuesSize : UInt32,
-    out__ : Out_e__struct_ do
-
-    # Nested Type Out_e__struct_
-    @[Extern]
-    record Out_e__struct_,
-      requestSecurityTokenProperty : Win32cr::Networking::WindowsWebServices::WS_REQUEST_SECURITY_TOKEN_PROPERTY
-
+  struct WS_XML_BUFFER
+    def initialize()
+    end
   end
 
   @[Extern]
-  record WS_ISSUED_TOKEN_MESSAGE_SECURITY_BINDING_CONSTRAINT,
-    bindingConstraint : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT,
-    bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE,
-    claimConstraints : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    claimConstraintCount : UInt32,
-    requestSecurityTokenPropertyConstraints : Win32cr::Networking::WindowsWebServices::WS_REQUEST_SECURITY_TOKEN_PROPERTY_CONSTRAINT*,
-    requestSecurityTokenPropertyConstraintCount : UInt32,
-    out__ : Out_e__struct_ do
-
-    # Nested Type Out_e__struct_
-    @[Extern]
-    record Out_e__struct_,
-      issuerAddress : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_ADDRESS*,
-      requestSecurityTokenTemplate : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*
-
+  struct WS_CHANNEL
+    def initialize()
+    end
   end
 
   @[Extern]
-  record WS_SECURITY_PROPERTY_CONSTRAINT,
-    id : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTY_ID,
-    allowedValues : Void*,
-    allowedValuesSize : UInt32,
-    out__ : Out_e__struct_ do
-
-    # Nested Type Out_e__struct_
-    @[Extern]
-    record Out_e__struct_,
-      securityProperty : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTY
-
+  struct WS_OPERATION_CONTEXT
+    def initialize()
+    end
   end
 
   @[Extern]
-  record WS_SECURITY_CONSTRAINTS,
-    securityPropertyConstraints : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTY_CONSTRAINT*,
-    securityPropertyConstraintCount : UInt32,
-    securityBindingConstraints : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT**,
-    securityBindingConstraintCount : UInt32
-
-  @[Extern]
-  record WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING_CONSTRAINT,
-    bindingConstraint : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT,
-    bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE,
-    bootstrapSecurityConstraint : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONSTRAINTS*
-
-  @[Extern]
-  record WS_CHANNEL_PROPERTY_CONSTRAINT,
-    id : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY_ID,
-    allowedValues : Void*,
-    allowedValuesSize : UInt32,
-    out__ : Out_e__struct_ do
-
-    # Nested Type Out_e__struct_
-    @[Extern]
-    record Out_e__struct_,
-      channelProperty : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY
-
+  struct WS_ERROR
+    def initialize()
+    end
   end
 
   @[Extern]
-  record WS_POLICY_EXTENSION,
-    type__ : Win32cr::Networking::WindowsWebServices::WS_POLICY_EXTENSION_TYPE
-
-  @[Extern]
-  record WS_ENDPOINT_POLICY_EXTENSION,
-    policyExtension : Win32cr::Networking::WindowsWebServices::WS_POLICY_EXTENSION,
-    assertionName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    assertionNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*,
-    out__ : Out_e__struct_ do
-
-    # Nested Type Out_e__struct_
-    @[Extern]
-    record Out_e__struct_,
-      assertionValue : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*
-
+  struct WS_HEAP
+    def initialize()
+    end
   end
 
   @[Extern]
-  record WS_POLICY_CONSTRAINTS,
-    channelBinding : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_BINDING,
-    channelPropertyConstraints : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY_CONSTRAINT*,
-    channelPropertyConstraintCount : UInt32,
-    securityConstraints : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONSTRAINTS*,
-    policyExtensions : Win32cr::Networking::WindowsWebServices::WS_POLICY_EXTENSION**,
-    policyExtensionCount : UInt32
+  struct WS_LISTENER
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record WS_HTTP_POLICY_DESCRIPTION,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+  struct WS_MESSAGE
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION,
-    securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES
+  struct WS_SECURITY_TOKEN
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record WS_HTTP_SSL_POLICY_DESCRIPTION,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES,
-    securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES,
-    sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION
+  struct WS_SECURITY_CONTEXT
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record WS_HTTP_HEADER_AUTH_SECURITY_BINDING_POLICY_DESCRIPTION,
-    securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES
+  struct WS_SERVICE_HOST
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record WS_HTTP_HEADER_AUTH_POLICY_DESCRIPTION,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES,
-    securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES,
-    httpHeaderAuthSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_HTTP_HEADER_AUTH_SECURITY_BINDING_POLICY_DESCRIPTION
+  struct WS_SERVICE_PROXY
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record WS_HTTP_SSL_HEADER_AUTH_POLICY_DESCRIPTION,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES,
-    securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES,
-    sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION,
-    httpHeaderAuthSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_HTTP_HEADER_AUTH_SECURITY_BINDING_POLICY_DESCRIPTION
+  struct WS_METADATA
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record WS_USERNAME_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION,
-    securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES,
-    bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE
+  struct WS_POLICY
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record WS_HTTP_SSL_USERNAME_POLICY_DESCRIPTION,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES,
-    securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES,
-    sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION,
-    usernameMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_USERNAME_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION
+  struct WS_XML_DICTIONARY
+    property guid : LibC::GUID
+    property strings : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property stringCount : UInt32
+    property isConst : Win32cr::Foundation::BOOL
+    def initialize(@guid : LibC::GUID, @strings : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @stringCount : UInt32, @isConst : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION,
-    securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES,
-    bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE
+  struct WS_XML_STRING
+    property length : UInt32
+    property bytes : UInt8*
+    property dictionary : Win32cr::Networking::WindowsWebServices::WS_XML_DICTIONARY*
+    property id : UInt32
+    def initialize(@length : UInt32, @bytes : UInt8*, @dictionary : Win32cr::Networking::WindowsWebServices::WS_XML_DICTIONARY*, @id : UInt32)
+    end
+  end
 
   @[Extern]
-  record WS_HTTP_SSL_KERBEROS_APREQ_POLICY_DESCRIPTION,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES,
-    securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES,
-    sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION,
-    kerberosApreqMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION
+  struct WS_XML_QNAME
+    property localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING
+    property ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING
+    def initialize(@localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING, @ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING)
+    end
+  end
 
   @[Extern]
-  record WS_TCP_POLICY_DESCRIPTION,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+  struct WS_XML_NODE_POSITION
+    property buffer : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*
+    property node : Void*
+    def initialize(@buffer : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*, @node : Void*)
+    end
+  end
 
   @[Extern]
-  record WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION,
-    securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES
+  struct WS_XML_READER_PROPERTY
+    property id : Win32cr::Networking::WindowsWebServices::WS_XML_READER_PROPERTY_ID
+    property value : Void*
+    property valueSize : UInt32
+    def initialize(@id : Win32cr::Networking::WindowsWebServices::WS_XML_READER_PROPERTY_ID, @value : Void*, @valueSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record WS_TCP_SSPI_POLICY_DESCRIPTION,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES,
-    securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES,
-    sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION
+  struct WS_XML_CANONICALIZATION_INCLUSIVE_PREFIXES
+    property prefixCount : UInt32
+    property prefixes : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    def initialize(@prefixCount : UInt32, @prefixes : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*)
+    end
+  end
 
   @[Extern]
-  record WS_TCP_SSPI_USERNAME_POLICY_DESCRIPTION,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES,
-    securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES,
-    sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION,
-    usernameMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_USERNAME_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION
+  struct WS_XML_CANONICALIZATION_PROPERTY
+    property id : Win32cr::Networking::WindowsWebServices::WS_XML_CANONICALIZATION_PROPERTY_ID
+    property value : Void*
+    property valueSize : UInt32
+    def initialize(@id : Win32cr::Networking::WindowsWebServices::WS_XML_CANONICALIZATION_PROPERTY_ID, @value : Void*, @valueSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record WS_TCP_SSPI_KERBEROS_APREQ_POLICY_DESCRIPTION,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES,
-    securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES,
-    sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION,
-    kerberosApreqMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION
+  struct WS_XML_WRITER_PROPERTY
+    property id : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_PROPERTY_ID
+    property value : Void*
+    property valueSize : UInt32
+    def initialize(@id : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_PROPERTY_ID, @value : Void*, @valueSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION,
-    securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES,
-    bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE
+  struct WS_XML_BUFFER_PROPERTY
+    property id : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER_PROPERTY_ID
+    property value : Void*
+    property valueSize : UInt32
+    def initialize(@id : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER_PROPERTY_ID, @value : Void*, @valueSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record WS_SECURITY_CONTEXT_SECURITY_BINDING_POLICY_DESCRIPTION,
-    securityContextMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION,
-    securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+  struct WS_XML_TEXT
+    property textType : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT_TYPE
+    def initialize(@textType : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT_TYPE)
+    end
+  end
 
   @[Extern]
-  record WS_TCP_SSPI_KERBEROS_APREQ_SECURITY_CONTEXT_POLICY_DESCRIPTION,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES,
-    securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES,
-    sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION,
-    kerberosApreqMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION,
-    securityContextSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_SECURITY_BINDING_POLICY_DESCRIPTION
+  struct WS_XML_UTF8_TEXT
+    property text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT
+    property value : Win32cr::Networking::WindowsWebServices::WS_XML_STRING
+    def initialize(@text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT, @value : Win32cr::Networking::WindowsWebServices::WS_XML_STRING)
+    end
+  end
 
   @[Extern]
-  record WS_TCP_SSPI_USERNAME_SECURITY_CONTEXT_POLICY_DESCRIPTION,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES,
-    securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES,
-    sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION,
-    usernameMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_USERNAME_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION,
-    securityContextSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_SECURITY_BINDING_POLICY_DESCRIPTION
+  struct WS_XML_UTF16_TEXT
+    property text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT
+    property bytes : UInt8*
+    property byteCount : UInt32
+    def initialize(@text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT, @bytes : UInt8*, @byteCount : UInt32)
+    end
+  end
 
   @[Extern]
-  record WS_HTTP_SSL_USERNAME_SECURITY_CONTEXT_POLICY_DESCRIPTION,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES,
-    securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES,
-    sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION,
-    usernameMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_USERNAME_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION,
-    securityContextSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_SECURITY_BINDING_POLICY_DESCRIPTION
+  struct WS_XML_BASE64_TEXT
+    property text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT
+    property bytes : UInt8*
+    property length : UInt32
+    def initialize(@text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT, @bytes : UInt8*, @length : UInt32)
+    end
+  end
 
   @[Extern]
-  record WS_HTTP_SSL_KERBEROS_APREQ_SECURITY_CONTEXT_POLICY_DESCRIPTION,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES,
-    securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES,
-    sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION,
-    kerberosApreqMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION,
-    securityContextSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_SECURITY_BINDING_POLICY_DESCRIPTION
+  struct WS_XML_BOOL_TEXT
+    property text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT
+    property value : Win32cr::Foundation::BOOL
+    def initialize(@text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT, @value : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record WS_HTTP_BINDING_TEMPLATE,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+  struct WS_XML_INT32_TEXT
+    property text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT
+    property value : Int32
+    def initialize(@text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT, @value : Int32)
+    end
+  end
 
   @[Extern]
-  record WS_TCP_BINDING_TEMPLATE,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+  struct WS_XML_INT64_TEXT
+    property text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT
+    property value : Int64
+    def initialize(@text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT, @value : Int64)
+    end
+  end
 
   @[Extern]
-  record WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE,
-    securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES,
-    localCertCredential : Win32cr::Networking::WindowsWebServices::WS_CERT_CREDENTIAL*
+  struct WS_XML_UINT64_TEXT
+    property text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT
+    property value : UInt64
+    def initialize(@text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT, @value : UInt64)
+    end
+  end
 
   @[Extern]
-  record WS_HTTP_SSL_BINDING_TEMPLATE,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES,
-    securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES,
-    sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE
+  struct WS_XML_FLOAT_TEXT
+    property text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT
+    property value : Float32
+    def initialize(@text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT, @value : Float32)
+    end
+  end
 
   @[Extern]
-  record WS_HTTP_HEADER_AUTH_SECURITY_BINDING_TEMPLATE,
-    securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES,
-    clientCredential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL*
+  struct WS_XML_DOUBLE_TEXT
+    property text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT
+    property value : Float64
+    def initialize(@text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT, @value : Float64)
+    end
+  end
 
   @[Extern]
-  record WS_HTTP_HEADER_AUTH_BINDING_TEMPLATE,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES,
-    securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES,
-    httpHeaderAuthSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_HTTP_HEADER_AUTH_SECURITY_BINDING_TEMPLATE
+  struct WS_XML_DECIMAL_TEXT
+    property text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT
+    property value : Win32cr::Foundation::DECIMAL
+    def initialize(@text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT, @value : Win32cr::Foundation::DECIMAL)
+    end
+  end
 
   @[Extern]
-  record WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE,
-    securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES,
-    clientCredential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL*
+  struct WS_XML_GUID_TEXT
+    property text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT
+    property value : LibC::GUID
+    def initialize(@text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT, @value : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record WS_TCP_SSPI_BINDING_TEMPLATE,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES,
-    securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES,
-    sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE
+  struct WS_XML_UNIQUE_ID_TEXT
+    property text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT
+    property value : LibC::GUID
+    def initialize(@text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT, @value : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record WS_HTTP_SSL_HEADER_AUTH_BINDING_TEMPLATE,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES,
-    securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES,
-    sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE,
-    httpHeaderAuthSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_HTTP_HEADER_AUTH_SECURITY_BINDING_TEMPLATE
+  struct WS_DATETIME
+    property ticks : UInt64
+    property format : Win32cr::Networking::WindowsWebServices::WS_DATETIME_FORMAT
+    def initialize(@ticks : UInt64, @format : Win32cr::Networking::WindowsWebServices::WS_DATETIME_FORMAT)
+    end
+  end
 
   @[Extern]
-  record WS_USERNAME_MESSAGE_SECURITY_BINDING_TEMPLATE,
-    securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES,
-    clientCredential : Win32cr::Networking::WindowsWebServices::WS_USERNAME_CREDENTIAL*,
-    passwordValidator : Win32cr::Networking::WindowsWebServices::WS_VALIDATE_PASSWORD_CALLBACK,
-    passwordValidatorCallbackState : Void*
+  struct WS_XML_DATETIME_TEXT
+    property text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT
+    property value : Win32cr::Networking::WindowsWebServices::WS_DATETIME
+    def initialize(@text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT, @value : Win32cr::Networking::WindowsWebServices::WS_DATETIME)
+    end
+  end
 
   @[Extern]
-  record WS_HTTP_SSL_USERNAME_BINDING_TEMPLATE,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES,
-    securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES,
-    sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE,
-    usernameMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_USERNAME_MESSAGE_SECURITY_BINDING_TEMPLATE
+  struct WS_TIMESPAN
+    property ticks : Int64
+    def initialize(@ticks : Int64)
+    end
+  end
 
   @[Extern]
-  record WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_TEMPLATE,
-    securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES,
-    clientCredential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL*
+  struct WS_XML_TIMESPAN_TEXT
+    property text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT
+    property value : Win32cr::Networking::WindowsWebServices::WS_TIMESPAN
+    def initialize(@text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT, @value : Win32cr::Networking::WindowsWebServices::WS_TIMESPAN)
+    end
+  end
 
   @[Extern]
-  record WS_HTTP_SSL_KERBEROS_APREQ_BINDING_TEMPLATE,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES,
-    securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES,
-    sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE,
-    kerberosApreqMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_TEMPLATE
+  struct WS_XML_QNAME_TEXT
+    property text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT
+    property prefix : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    def initialize(@text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT, @prefix : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*)
+    end
+  end
 
   @[Extern]
-  record WS_TCP_SSPI_USERNAME_BINDING_TEMPLATE,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES,
-    securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES,
-    sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE,
-    usernameMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_USERNAME_MESSAGE_SECURITY_BINDING_TEMPLATE
+  struct WS_XML_LIST_TEXT
+    property text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT
+    property itemCount : UInt32
+    property items : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT**
+    def initialize(@text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT, @itemCount : UInt32, @items : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT**)
+    end
+  end
 
   @[Extern]
-  record WS_TCP_SSPI_KERBEROS_APREQ_BINDING_TEMPLATE,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES,
-    securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES,
-    sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE,
-    kerberosApreqMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_TEMPLATE
+  struct WS_XML_NODE
+    property nodeType : Win32cr::Networking::WindowsWebServices::WS_XML_NODE_TYPE
+    def initialize(@nodeType : Win32cr::Networking::WindowsWebServices::WS_XML_NODE_TYPE)
+    end
+  end
 
   @[Extern]
-  record WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING_TEMPLATE,
-    securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES
+  struct WS_XML_ATTRIBUTE
+    property singleQuote : UInt8
+    property isXmlNs : UInt8
+    property prefix : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property value : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT*
+    def initialize(@singleQuote : UInt8, @isXmlNs : UInt8, @prefix : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @value : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT*)
+    end
+  end
 
   @[Extern]
-  record WS_SECURITY_CONTEXT_SECURITY_BINDING_TEMPLATE,
-    securityContextMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING_TEMPLATE,
-    securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+  struct WS_XML_ELEMENT_NODE
+    property node : Win32cr::Networking::WindowsWebServices::WS_XML_NODE
+    property prefix : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property attributeCount : UInt32
+    property attributes : Win32cr::Networking::WindowsWebServices::WS_XML_ATTRIBUTE**
+    property isEmpty : Win32cr::Foundation::BOOL
+    def initialize(@node : Win32cr::Networking::WindowsWebServices::WS_XML_NODE, @prefix : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @attributeCount : UInt32, @attributes : Win32cr::Networking::WindowsWebServices::WS_XML_ATTRIBUTE**, @isEmpty : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record WS_HTTP_SSL_USERNAME_SECURITY_CONTEXT_BINDING_TEMPLATE,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES,
-    securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES,
-    sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE,
-    usernameMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_USERNAME_MESSAGE_SECURITY_BINDING_TEMPLATE,
-    securityContextSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_SECURITY_BINDING_TEMPLATE
+  struct WS_XML_TEXT_NODE
+    property node : Win32cr::Networking::WindowsWebServices::WS_XML_NODE
+    property text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT*
+    def initialize(@node : Win32cr::Networking::WindowsWebServices::WS_XML_NODE, @text : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT*)
+    end
+  end
 
   @[Extern]
-  record WS_HTTP_SSL_KERBEROS_APREQ_SECURITY_CONTEXT_BINDING_TEMPLATE,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES,
-    securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES,
-    sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE,
-    kerberosApreqMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_TEMPLATE,
-    securityContextSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_SECURITY_BINDING_TEMPLATE
+  struct WS_XML_COMMENT_NODE
+    property node : Win32cr::Networking::WindowsWebServices::WS_XML_NODE
+    property value : Win32cr::Networking::WindowsWebServices::WS_XML_STRING
+    def initialize(@node : Win32cr::Networking::WindowsWebServices::WS_XML_NODE, @value : Win32cr::Networking::WindowsWebServices::WS_XML_STRING)
+    end
+  end
 
   @[Extern]
-  record WS_TCP_SSPI_USERNAME_SECURITY_CONTEXT_BINDING_TEMPLATE,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES,
-    securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES,
-    sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE,
-    usernameMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_USERNAME_MESSAGE_SECURITY_BINDING_TEMPLATE,
-    securityContextSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_SECURITY_BINDING_TEMPLATE
+  struct WS_XML_READER_INPUT
+    property inputType : Win32cr::Networking::WindowsWebServices::WS_XML_READER_INPUT_TYPE
+    def initialize(@inputType : Win32cr::Networking::WindowsWebServices::WS_XML_READER_INPUT_TYPE)
+    end
+  end
 
   @[Extern]
-  record WS_TCP_SSPI_KERBEROS_APREQ_SECURITY_CONTEXT_BINDING_TEMPLATE,
-    channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES,
-    securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES,
-    sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE,
-    kerberosApreqMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_TEMPLATE,
-    securityContextSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_SECURITY_BINDING_TEMPLATE
+  struct WS_XML_READER_BUFFER_INPUT
+    property input : Win32cr::Networking::WindowsWebServices::WS_XML_READER_INPUT
+    property encodedData : Void*
+    property encodedDataSize : UInt32
+    def initialize(@input : Win32cr::Networking::WindowsWebServices::WS_XML_READER_INPUT, @encodedData : Void*, @encodedDataSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record WEBAUTHN_RP_ENTITY_INFORMATION,
-    dwVersion : UInt32,
-    pwszId : Win32cr::Foundation::PWSTR,
-    pwszName : Win32cr::Foundation::PWSTR,
-    pwszIcon : Win32cr::Foundation::PWSTR
+  struct WS_XML_READER_STREAM_INPUT
+    property input : Win32cr::Networking::WindowsWebServices::WS_XML_READER_INPUT
+    property readCallback : Win32cr::Networking::WindowsWebServices::WS_READ_CALLBACK
+    property readCallbackState : Void*
+    def initialize(@input : Win32cr::Networking::WindowsWebServices::WS_XML_READER_INPUT, @readCallback : Win32cr::Networking::WindowsWebServices::WS_READ_CALLBACK, @readCallbackState : Void*)
+    end
+  end
 
   @[Extern]
-  record WEBAUTHN_USER_ENTITY_INFORMATION,
-    dwVersion : UInt32,
-    cbId : UInt32,
-    pbId : UInt8*,
-    pwszName : Win32cr::Foundation::PWSTR,
-    pwszIcon : Win32cr::Foundation::PWSTR,
-    pwszDisplayName : Win32cr::Foundation::PWSTR
+  struct WS_XML_READER_ENCODING
+    property encodingType : Win32cr::Networking::WindowsWebServices::WS_XML_READER_ENCODING_TYPE
+    def initialize(@encodingType : Win32cr::Networking::WindowsWebServices::WS_XML_READER_ENCODING_TYPE)
+    end
+  end
 
   @[Extern]
-  record WEBAUTHN_CLIENT_DATA,
-    dwVersion : UInt32,
-    cbClientDataJSON : UInt32,
-    pbClientDataJSON : UInt8*,
-    pwszHashAlgId : Win32cr::Foundation::PWSTR
+  struct WS_XML_READER_TEXT_ENCODING
+    property encoding : Win32cr::Networking::WindowsWebServices::WS_XML_READER_ENCODING
+    property charSet : Win32cr::Networking::WindowsWebServices::WS_CHARSET
+    def initialize(@encoding : Win32cr::Networking::WindowsWebServices::WS_XML_READER_ENCODING, @charSet : Win32cr::Networking::WindowsWebServices::WS_CHARSET)
+    end
+  end
 
   @[Extern]
-  record WEBAUTHN_COSE_CREDENTIAL_PARAMETER,
-    dwVersion : UInt32,
-    pwszCredentialType : Win32cr::Foundation::PWSTR,
-    lAlg : Int32
+  struct WS_XML_READER_BINARY_ENCODING
+    property encoding : Win32cr::Networking::WindowsWebServices::WS_XML_READER_ENCODING
+    property staticDictionary : Win32cr::Networking::WindowsWebServices::WS_XML_DICTIONARY*
+    property dynamicDictionary : Win32cr::Networking::WindowsWebServices::WS_XML_DICTIONARY*
+    def initialize(@encoding : Win32cr::Networking::WindowsWebServices::WS_XML_READER_ENCODING, @staticDictionary : Win32cr::Networking::WindowsWebServices::WS_XML_DICTIONARY*, @dynamicDictionary : Win32cr::Networking::WindowsWebServices::WS_XML_DICTIONARY*)
+    end
+  end
 
   @[Extern]
-  record WEBAUTHN_COSE_CREDENTIAL_PARAMETERS,
-    cCredentialParameters : UInt32,
-    pCredentialParameters : Win32cr::Networking::WindowsWebServices::WEBAUTHN_COSE_CREDENTIAL_PARAMETER*
+  struct WS_STRING
+    property length : UInt32
+    property chars : Win32cr::Foundation::PWSTR
+    def initialize(@length : UInt32, @chars : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record WEBAUTHN_CREDENTIAL,
-    dwVersion : UInt32,
-    cbId : UInt32,
-    pbId : UInt8*,
-    pwszCredentialType : Win32cr::Foundation::PWSTR
+  struct WS_XML_READER_MTOM_ENCODING
+    property encoding : Win32cr::Networking::WindowsWebServices::WS_XML_READER_ENCODING
+    property textEncoding : Win32cr::Networking::WindowsWebServices::WS_XML_READER_ENCODING*
+    property readMimeHeader : Win32cr::Foundation::BOOL
+    property startInfo : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property boundary : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property startUri : Win32cr::Networking::WindowsWebServices::WS_STRING
+    def initialize(@encoding : Win32cr::Networking::WindowsWebServices::WS_XML_READER_ENCODING, @textEncoding : Win32cr::Networking::WindowsWebServices::WS_XML_READER_ENCODING*, @readMimeHeader : Win32cr::Foundation::BOOL, @startInfo : Win32cr::Networking::WindowsWebServices::WS_STRING, @boundary : Win32cr::Networking::WindowsWebServices::WS_STRING, @startUri : Win32cr::Networking::WindowsWebServices::WS_STRING)
+    end
+  end
 
   @[Extern]
-  record WEBAUTHN_CREDENTIALS,
-    cCredentials : UInt32,
-    pCredentials : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CREDENTIAL*
+  struct WS_XML_READER_RAW_ENCODING
+    property encoding : Win32cr::Networking::WindowsWebServices::WS_XML_READER_ENCODING
+    def initialize(@encoding : Win32cr::Networking::WindowsWebServices::WS_XML_READER_ENCODING)
+    end
+  end
 
   @[Extern]
-  record WEBAUTHN_CREDENTIAL_EX,
-    dwVersion : UInt32,
-    cbId : UInt32,
-    pbId : UInt8*,
-    pwszCredentialType : Win32cr::Foundation::PWSTR,
-    dwTransports : UInt32
+  struct WS_XML_WRITER_ENCODING
+    property encodingType : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_ENCODING_TYPE
+    def initialize(@encodingType : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_ENCODING_TYPE)
+    end
+  end
 
   @[Extern]
-  record WEBAUTHN_CREDENTIAL_LIST,
-    cCredentials : UInt32,
-    ppCredentials : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CREDENTIAL_EX**
+  struct WS_XML_WRITER_TEXT_ENCODING
+    property encoding : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_ENCODING
+    property charSet : Win32cr::Networking::WindowsWebServices::WS_CHARSET
+    def initialize(@encoding : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_ENCODING, @charSet : Win32cr::Networking::WindowsWebServices::WS_CHARSET)
+    end
+  end
 
   @[Extern]
-  record WEBAUTHN_CRED_PROTECT_EXTENSION_IN,
-    dwCredProtect : UInt32,
-    bRequireCredProtect : Win32cr::Foundation::BOOL
+  struct WS_XML_WRITER_BINARY_ENCODING
+    property encoding : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_ENCODING
+    property staticDictionary : Win32cr::Networking::WindowsWebServices::WS_XML_DICTIONARY*
+    property dynamicStringCallback : Win32cr::Networking::WindowsWebServices::WS_DYNAMIC_STRING_CALLBACK
+    property dynamicStringCallbackState : Void*
+    def initialize(@encoding : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_ENCODING, @staticDictionary : Win32cr::Networking::WindowsWebServices::WS_XML_DICTIONARY*, @dynamicStringCallback : Win32cr::Networking::WindowsWebServices::WS_DYNAMIC_STRING_CALLBACK, @dynamicStringCallbackState : Void*)
+    end
+  end
 
   @[Extern]
-  record WEBAUTHN_CRED_BLOB_EXTENSION,
-    cbCredBlob : UInt32,
-    pbCredBlob : UInt8*
+  struct WS_XML_WRITER_MTOM_ENCODING
+    property encoding : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_ENCODING
+    property textEncoding : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_ENCODING*
+    property writeMimeHeader : Win32cr::Foundation::BOOL
+    property boundary : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property startInfo : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property startUri : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property maxInlineByteCount : UInt32
+    def initialize(@encoding : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_ENCODING, @textEncoding : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_ENCODING*, @writeMimeHeader : Win32cr::Foundation::BOOL, @boundary : Win32cr::Networking::WindowsWebServices::WS_STRING, @startInfo : Win32cr::Networking::WindowsWebServices::WS_STRING, @startUri : Win32cr::Networking::WindowsWebServices::WS_STRING, @maxInlineByteCount : UInt32)
+    end
+  end
 
   @[Extern]
-  record WEBAUTHN_EXTENSION,
-    pwszExtensionIdentifier : Win32cr::Foundation::PWSTR,
-    cbExtension : UInt32,
-    pvExtension : Void*
+  struct WS_XML_WRITER_RAW_ENCODING
+    property encoding : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_ENCODING
+    def initialize(@encoding : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_ENCODING)
+    end
+  end
 
   @[Extern]
-  record WEBAUTHN_EXTENSIONS,
-    cExtensions : UInt32,
-    pExtensions : Win32cr::Networking::WindowsWebServices::WEBAUTHN_EXTENSION*
+  struct WS_XML_WRITER_OUTPUT
+    property outputType : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_OUTPUT_TYPE
+    def initialize(@outputType : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_OUTPUT_TYPE)
+    end
+  end
 
   @[Extern]
-  record WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS,
-    dwVersion : UInt32,
-    dwTimeoutMilliseconds : UInt32,
-    credential_list : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CREDENTIALS,
-    extensions : Win32cr::Networking::WindowsWebServices::WEBAUTHN_EXTENSIONS,
-    dwAuthenticatorAttachment : UInt32,
-    bRequireResidentKey : Win32cr::Foundation::BOOL,
-    dwUserVerificationRequirement : UInt32,
-    dwAttestationConveyancePreference : UInt32,
-    dwFlags : UInt32,
-    pCancellationId : LibC::GUID*,
-    pExcludeCredentialList : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CREDENTIAL_LIST*,
-    dwEnterpriseAttestation : UInt32,
-    dwLargeBlobSupport : UInt32,
-    bPreferResidentKey : Win32cr::Foundation::BOOL
+  struct WS_XML_WRITER_BUFFER_OUTPUT
+    property output : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_OUTPUT
+    def initialize(@output : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_OUTPUT)
+    end
+  end
 
   @[Extern]
-  record WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS,
-    dwVersion : UInt32,
-    dwTimeoutMilliseconds : UInt32,
-    credential_list : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CREDENTIALS,
-    extensions : Win32cr::Networking::WindowsWebServices::WEBAUTHN_EXTENSIONS,
-    dwAuthenticatorAttachment : UInt32,
-    dwUserVerificationRequirement : UInt32,
-    dwFlags : UInt32,
-    pwszU2fAppId : Win32cr::Foundation::PWSTR,
-    pbU2fAppId : Win32cr::Foundation::BOOL*,
-    pCancellationId : LibC::GUID*,
-    pAllowCredentialList : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CREDENTIAL_LIST*,
-    dwCredLargeBlobOperation : UInt32,
-    cbCredLargeBlob : UInt32,
-    pbCredLargeBlob : UInt8*
+  struct WS_XML_WRITER_STREAM_OUTPUT
+    property output : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_OUTPUT
+    property writeCallback : Win32cr::Networking::WindowsWebServices::WS_WRITE_CALLBACK
+    property writeCallbackState : Void*
+    def initialize(@output : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_OUTPUT, @writeCallback : Win32cr::Networking::WindowsWebServices::WS_WRITE_CALLBACK, @writeCallbackState : Void*)
+    end
+  end
 
   @[Extern]
-  record WEBAUTHN_X5C,
-    cbData : UInt32,
-    pbData : UInt8*
+  struct WS_XML_WRITER_PROPERTIES
+    property properties : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_PROPERTY*
+    property propertyCount : UInt32
+    def initialize(@properties : Win32cr::Networking::WindowsWebServices::WS_XML_WRITER_PROPERTY*, @propertyCount : UInt32)
+    end
+  end
 
   @[Extern]
-  record WEBAUTHN_COMMON_ATTESTATION,
-    dwVersion : UInt32,
-    pwszAlg : Win32cr::Foundation::PWSTR,
-    lAlg : Int32,
-    cbSignature : UInt32,
-    pbSignature : UInt8*,
-    cX5c : UInt32,
-    pX5c : Win32cr::Networking::WindowsWebServices::WEBAUTHN_X5C*,
-    pwszVer : Win32cr::Foundation::PWSTR,
-    cbCertInfo : UInt32,
-    pbCertInfo : UInt8*,
-    cbPubArea : UInt32,
-    pbPubArea : UInt8*
+  struct WS_XML_READER_PROPERTIES
+    property properties : Win32cr::Networking::WindowsWebServices::WS_XML_READER_PROPERTY*
+    property propertyCount : UInt32
+    def initialize(@properties : Win32cr::Networking::WindowsWebServices::WS_XML_READER_PROPERTY*, @propertyCount : UInt32)
+    end
+  end
 
   @[Extern]
-  record WEBAUTHN_CREDENTIAL_ATTESTATION,
-    dwVersion : UInt32,
-    pwszFormatType : Win32cr::Foundation::PWSTR,
-    cbAuthenticatorData : UInt32,
-    pbAuthenticatorData : UInt8*,
-    cbAttestation : UInt32,
-    pbAttestation : UInt8*,
-    dwAttestationDecodeType : UInt32,
-    pvAttestationDecode : Void*,
-    cbAttestationObject : UInt32,
-    pbAttestationObject : UInt8*,
-    cbCredentialId : UInt32,
-    pbCredentialId : UInt8*,
-    extensions : Win32cr::Networking::WindowsWebServices::WEBAUTHN_EXTENSIONS,
-    dwUsedTransport : UInt32,
-    bEpAtt : Win32cr::Foundation::BOOL,
-    bLargeBlobSupported : Win32cr::Foundation::BOOL,
-    bResidentKey : Win32cr::Foundation::BOOL
+  struct WS_ASYNC_CONTEXT
+    property callback : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CALLBACK
+    property callbackState : Void*
+    def initialize(@callback : Win32cr::Networking::WindowsWebServices::WS_ASYNC_CALLBACK, @callbackState : Void*)
+    end
+  end
 
   @[Extern]
-  record WEBAUTHN_ASSERTION,
-    dwVersion : UInt32,
-    cbAuthenticatorData : UInt32,
-    pbAuthenticatorData : UInt8*,
-    cbSignature : UInt32,
-    pbSignature : UInt8*,
-    credential : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CREDENTIAL,
-    cbUserId : UInt32,
-    pbUserId : UInt8*,
-    extensions : Win32cr::Networking::WindowsWebServices::WEBAUTHN_EXTENSIONS,
-    cbCredLargeBlob : UInt32,
-    pbCredLargeBlob : UInt8*,
-    dwCredLargeBlobStatus : UInt32
+  struct WS_ASYNC_STATE
+    property internal0 : Void*
+    property internal1 : Void*
+    property internal2 : Void*
+    property internal3 : Void*
+    property internal4 : Void*
+    def initialize(@internal0 : Void*, @internal1 : Void*, @internal2 : Void*, @internal3 : Void*, @internal4 : Void*)
+    end
+  end
+
+  @[Extern]
+  struct WS_ASYNC_OPERATION
+    property function : Win32cr::Networking::WindowsWebServices::WS_ASYNC_FUNCTION
+    def initialize(@function : Win32cr::Networking::WindowsWebServices::WS_ASYNC_FUNCTION)
+    end
+  end
+
+  @[Extern]
+  struct WS_CHANNEL_PROPERTY
+    property id : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY_ID
+    property value : Void*
+    property valueSize : UInt32
+    def initialize(@id : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY_ID, @value : Void*, @valueSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_CUSTOM_HTTP_PROXY
+    property servers : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property bypass : Win32cr::Networking::WindowsWebServices::WS_STRING
+    def initialize(@servers : Win32cr::Networking::WindowsWebServices::WS_STRING, @bypass : Win32cr::Networking::WindowsWebServices::WS_STRING)
+    end
+  end
+
+  @[Extern]
+  struct WS_CHANNEL_PROPERTIES
+    property properties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY*
+    property propertyCount : UInt32
+    def initialize(@properties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY*, @propertyCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_CUSTOM_CHANNEL_CALLBACKS
+    property createChannelCallback : Win32cr::Networking::WindowsWebServices::WS_CREATE_CHANNEL_CALLBACK
+    property freeChannelCallback : Win32cr::Networking::WindowsWebServices::WS_FREE_CHANNEL_CALLBACK
+    property resetChannelCallback : Win32cr::Networking::WindowsWebServices::WS_RESET_CHANNEL_CALLBACK
+    property openChannelCallback : Win32cr::Networking::WindowsWebServices::WS_OPEN_CHANNEL_CALLBACK
+    property closeChannelCallback : Win32cr::Networking::WindowsWebServices::WS_CLOSE_CHANNEL_CALLBACK
+    property abortChannelCallback : Win32cr::Networking::WindowsWebServices::WS_ABORT_CHANNEL_CALLBACK
+    property getChannelPropertyCallback : Win32cr::Networking::WindowsWebServices::WS_GET_CHANNEL_PROPERTY_CALLBACK
+    property setChannelPropertyCallback : Win32cr::Networking::WindowsWebServices::WS_SET_CHANNEL_PROPERTY_CALLBACK
+    property writeMessageStartCallback : Win32cr::Networking::WindowsWebServices::WS_WRITE_MESSAGE_START_CALLBACK
+    property writeMessageEndCallback : Win32cr::Networking::WindowsWebServices::WS_WRITE_MESSAGE_END_CALLBACK
+    property readMessageStartCallback : Win32cr::Networking::WindowsWebServices::WS_READ_MESSAGE_START_CALLBACK
+    property readMessageEndCallback : Win32cr::Networking::WindowsWebServices::WS_READ_MESSAGE_END_CALLBACK
+    property abandonMessageCallback : Win32cr::Networking::WindowsWebServices::WS_ABANDON_MESSAGE_CALLBACK
+    property shutdownSessionChannelCallback : Win32cr::Networking::WindowsWebServices::WS_SHUTDOWN_SESSION_CHANNEL_CALLBACK
+    def initialize(@createChannelCallback : Win32cr::Networking::WindowsWebServices::WS_CREATE_CHANNEL_CALLBACK, @freeChannelCallback : Win32cr::Networking::WindowsWebServices::WS_FREE_CHANNEL_CALLBACK, @resetChannelCallback : Win32cr::Networking::WindowsWebServices::WS_RESET_CHANNEL_CALLBACK, @openChannelCallback : Win32cr::Networking::WindowsWebServices::WS_OPEN_CHANNEL_CALLBACK, @closeChannelCallback : Win32cr::Networking::WindowsWebServices::WS_CLOSE_CHANNEL_CALLBACK, @abortChannelCallback : Win32cr::Networking::WindowsWebServices::WS_ABORT_CHANNEL_CALLBACK, @getChannelPropertyCallback : Win32cr::Networking::WindowsWebServices::WS_GET_CHANNEL_PROPERTY_CALLBACK, @setChannelPropertyCallback : Win32cr::Networking::WindowsWebServices::WS_SET_CHANNEL_PROPERTY_CALLBACK, @writeMessageStartCallback : Win32cr::Networking::WindowsWebServices::WS_WRITE_MESSAGE_START_CALLBACK, @writeMessageEndCallback : Win32cr::Networking::WindowsWebServices::WS_WRITE_MESSAGE_END_CALLBACK, @readMessageStartCallback : Win32cr::Networking::WindowsWebServices::WS_READ_MESSAGE_START_CALLBACK, @readMessageEndCallback : Win32cr::Networking::WindowsWebServices::WS_READ_MESSAGE_END_CALLBACK, @abandonMessageCallback : Win32cr::Networking::WindowsWebServices::WS_ABANDON_MESSAGE_CALLBACK, @shutdownSessionChannelCallback : Win32cr::Networking::WindowsWebServices::WS_SHUTDOWN_SESSION_CHANNEL_CALLBACK)
+    end
+  end
+
+  @[Extern]
+  struct WS_HTTP_HEADER_MAPPING
+    property headerName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING
+    property headerMappingOptions : UInt32
+    def initialize(@headerName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING, @headerMappingOptions : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_HTTP_MESSAGE_MAPPING
+    property requestMappingOptions : UInt32
+    property responseMappingOptions : UInt32
+    property requestHeaderMappings : Win32cr::Networking::WindowsWebServices::WS_HTTP_HEADER_MAPPING**
+    property requestHeaderMappingCount : UInt32
+    property responseHeaderMappings : Win32cr::Networking::WindowsWebServices::WS_HTTP_HEADER_MAPPING**
+    property responseHeaderMappingCount : UInt32
+    def initialize(@requestMappingOptions : UInt32, @responseMappingOptions : UInt32, @requestHeaderMappings : Win32cr::Networking::WindowsWebServices::WS_HTTP_HEADER_MAPPING**, @requestHeaderMappingCount : UInt32, @responseHeaderMappings : Win32cr::Networking::WindowsWebServices::WS_HTTP_HEADER_MAPPING**, @responseHeaderMappingCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_ELEMENT_DESCRIPTION
+    property elementLocalName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property elementNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property type__ : Win32cr::Networking::WindowsWebServices::WS_TYPE
+    property typeDescription : Void*
+    def initialize(@elementLocalName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @elementNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @type__ : Win32cr::Networking::WindowsWebServices::WS_TYPE, @typeDescription : Void*)
+    end
+  end
+
+  @[Extern]
+  struct WS_MESSAGE_DESCRIPTION
+    property action : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property bodyElementDescription : Win32cr::Networking::WindowsWebServices::WS_ELEMENT_DESCRIPTION*
+    def initialize(@action : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @bodyElementDescription : Win32cr::Networking::WindowsWebServices::WS_ELEMENT_DESCRIPTION*)
+    end
+  end
+
+  @[Extern]
+  struct WS_CHANNEL_ENCODER
+    property createContext : Void*
+    property createEncoderCallback : Win32cr::Networking::WindowsWebServices::WS_CREATE_ENCODER_CALLBACK
+    property encoderGetContentTypeCallback : Win32cr::Networking::WindowsWebServices::WS_ENCODER_GET_CONTENT_TYPE_CALLBACK
+    property encoderStartCallback : Win32cr::Networking::WindowsWebServices::WS_ENCODER_START_CALLBACK
+    property encoderEncodeCallback : Win32cr::Networking::WindowsWebServices::WS_ENCODER_ENCODE_CALLBACK
+    property encoderEndCallback : Win32cr::Networking::WindowsWebServices::WS_ENCODER_END_CALLBACK
+    property freeEncoderCallback : Win32cr::Networking::WindowsWebServices::WS_FREE_ENCODER_CALLBACK
+    def initialize(@createContext : Void*, @createEncoderCallback : Win32cr::Networking::WindowsWebServices::WS_CREATE_ENCODER_CALLBACK, @encoderGetContentTypeCallback : Win32cr::Networking::WindowsWebServices::WS_ENCODER_GET_CONTENT_TYPE_CALLBACK, @encoderStartCallback : Win32cr::Networking::WindowsWebServices::WS_ENCODER_START_CALLBACK, @encoderEncodeCallback : Win32cr::Networking::WindowsWebServices::WS_ENCODER_ENCODE_CALLBACK, @encoderEndCallback : Win32cr::Networking::WindowsWebServices::WS_ENCODER_END_CALLBACK, @freeEncoderCallback : Win32cr::Networking::WindowsWebServices::WS_FREE_ENCODER_CALLBACK)
+    end
+  end
+
+  @[Extern]
+  struct WS_CHANNEL_DECODER
+    property createContext : Void*
+    property createDecoderCallback : Win32cr::Networking::WindowsWebServices::WS_CREATE_DECODER_CALLBACK
+    property decoderGetContentTypeCallback : Win32cr::Networking::WindowsWebServices::WS_DECODER_GET_CONTENT_TYPE_CALLBACK
+    property decoderStartCallback : Win32cr::Networking::WindowsWebServices::WS_DECODER_START_CALLBACK
+    property decoderDecodeCallback : Win32cr::Networking::WindowsWebServices::WS_DECODER_DECODE_CALLBACK
+    property decoderEndCallback : Win32cr::Networking::WindowsWebServices::WS_DECODER_END_CALLBACK
+    property freeDecoderCallback : Win32cr::Networking::WindowsWebServices::WS_FREE_DECODER_CALLBACK
+    def initialize(@createContext : Void*, @createDecoderCallback : Win32cr::Networking::WindowsWebServices::WS_CREATE_DECODER_CALLBACK, @decoderGetContentTypeCallback : Win32cr::Networking::WindowsWebServices::WS_DECODER_GET_CONTENT_TYPE_CALLBACK, @decoderStartCallback : Win32cr::Networking::WindowsWebServices::WS_DECODER_START_CALLBACK, @decoderDecodeCallback : Win32cr::Networking::WindowsWebServices::WS_DECODER_DECODE_CALLBACK, @decoderEndCallback : Win32cr::Networking::WindowsWebServices::WS_DECODER_END_CALLBACK, @freeDecoderCallback : Win32cr::Networking::WindowsWebServices::WS_FREE_DECODER_CALLBACK)
+    end
+  end
+
+  @[Extern]
+  struct WS_HTTP_REDIRECT_CALLBACK_CONTEXT
+    property callback : Win32cr::Networking::WindowsWebServices::WS_HTTP_REDIRECT_CALLBACK
+    property state : Void*
+    def initialize(@callback : Win32cr::Networking::WindowsWebServices::WS_HTTP_REDIRECT_CALLBACK, @state : Void*)
+    end
+  end
+
+  @[Extern]
+  struct WS_ENDPOINT_IDENTITY
+    property identityType : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_IDENTITY_TYPE
+    def initialize(@identityType : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_IDENTITY_TYPE)
+    end
+  end
+
+  @[Extern]
+  struct WS_ENDPOINT_ADDRESS
+    property url : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property headers : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*
+    property extensions : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*
+    property identity : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_IDENTITY*
+    def initialize(@url : Win32cr::Networking::WindowsWebServices::WS_STRING, @headers : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*, @extensions : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*, @identity : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_IDENTITY*)
+    end
+  end
+
+  @[Extern]
+  struct WS_DNS_ENDPOINT_IDENTITY
+    property identity : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_IDENTITY
+    property dns : Win32cr::Networking::WindowsWebServices::WS_STRING
+    def initialize(@identity : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_IDENTITY, @dns : Win32cr::Networking::WindowsWebServices::WS_STRING)
+    end
+  end
+
+  @[Extern]
+  struct WS_UPN_ENDPOINT_IDENTITY
+    property identity : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_IDENTITY
+    property upn : Win32cr::Networking::WindowsWebServices::WS_STRING
+    def initialize(@identity : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_IDENTITY, @upn : Win32cr::Networking::WindowsWebServices::WS_STRING)
+    end
+  end
+
+  @[Extern]
+  struct WS_SPN_ENDPOINT_IDENTITY
+    property identity : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_IDENTITY
+    property spn : Win32cr::Networking::WindowsWebServices::WS_STRING
+    def initialize(@identity : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_IDENTITY, @spn : Win32cr::Networking::WindowsWebServices::WS_STRING)
+    end
+  end
+
+  @[Extern]
+  struct WS_BYTES
+    property length : UInt32
+    property bytes : UInt8*
+    def initialize(@length : UInt32, @bytes : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct WS_RSA_ENDPOINT_IDENTITY
+    property identity : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_IDENTITY
+    property modulus : Win32cr::Networking::WindowsWebServices::WS_BYTES
+    property exponent : Win32cr::Networking::WindowsWebServices::WS_BYTES
+    def initialize(@identity : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_IDENTITY, @modulus : Win32cr::Networking::WindowsWebServices::WS_BYTES, @exponent : Win32cr::Networking::WindowsWebServices::WS_BYTES)
+    end
+  end
+
+  @[Extern]
+  struct WS_CERT_ENDPOINT_IDENTITY
+    property identity : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_IDENTITY
+    property rawCertificateData : Win32cr::Networking::WindowsWebServices::WS_BYTES
+    def initialize(@identity : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_IDENTITY, @rawCertificateData : Win32cr::Networking::WindowsWebServices::WS_BYTES)
+    end
+  end
+
+  @[Extern]
+  struct WS_UNKNOWN_ENDPOINT_IDENTITY
+    property identity : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_IDENTITY
+    property element : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*
+    def initialize(@identity : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_IDENTITY, @element : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*)
+    end
+  end
+
+  @[Extern]
+  struct WS_ERROR_PROPERTY
+    property id : Win32cr::Networking::WindowsWebServices::WS_ERROR_PROPERTY_ID
+    property value : Void*
+    property valueSize : UInt32
+    def initialize(@id : Win32cr::Networking::WindowsWebServices::WS_ERROR_PROPERTY_ID, @value : Void*, @valueSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_FAULT_REASON
+    property text : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property lang : Win32cr::Networking::WindowsWebServices::WS_STRING
+    def initialize(@text : Win32cr::Networking::WindowsWebServices::WS_STRING, @lang : Win32cr::Networking::WindowsWebServices::WS_STRING)
+    end
+  end
+
+  @[Extern]
+  struct WS_FAULT_CODE
+    property value : Win32cr::Networking::WindowsWebServices::WS_XML_QNAME
+    property subCode : Win32cr::Networking::WindowsWebServices::WS_FAULT_CODE*
+    def initialize(@value : Win32cr::Networking::WindowsWebServices::WS_XML_QNAME, @subCode : Win32cr::Networking::WindowsWebServices::WS_FAULT_CODE*)
+    end
+  end
+
+  @[Extern]
+  struct WS_FAULT
+    property code : Win32cr::Networking::WindowsWebServices::WS_FAULT_CODE*
+    property reasons : Win32cr::Networking::WindowsWebServices::WS_FAULT_REASON*
+    property reasonCount : UInt32
+    property actor : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property node : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property detail : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*
+    def initialize(@code : Win32cr::Networking::WindowsWebServices::WS_FAULT_CODE*, @reasons : Win32cr::Networking::WindowsWebServices::WS_FAULT_REASON*, @reasonCount : UInt32, @actor : Win32cr::Networking::WindowsWebServices::WS_STRING, @node : Win32cr::Networking::WindowsWebServices::WS_STRING, @detail : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*)
+    end
+  end
+
+  @[Extern]
+  struct WS_FAULT_DETAIL_DESCRIPTION
+    property action : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property detailElementDescription : Win32cr::Networking::WindowsWebServices::WS_ELEMENT_DESCRIPTION*
+    def initialize(@action : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @detailElementDescription : Win32cr::Networking::WindowsWebServices::WS_ELEMENT_DESCRIPTION*)
+    end
+  end
+
+  @[Extern]
+  struct WS_HEAP_PROPERTY
+    property id : Win32cr::Networking::WindowsWebServices::WS_HEAP_PROPERTY_ID
+    property value : Void*
+    property valueSize : UInt32
+    def initialize(@id : Win32cr::Networking::WindowsWebServices::WS_HEAP_PROPERTY_ID, @value : Void*, @valueSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_HEAP_PROPERTIES
+    property properties : Win32cr::Networking::WindowsWebServices::WS_HEAP_PROPERTY*
+    property propertyCount : UInt32
+    def initialize(@properties : Win32cr::Networking::WindowsWebServices::WS_HEAP_PROPERTY*, @propertyCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_LISTENER_PROPERTY
+    property id : Win32cr::Networking::WindowsWebServices::WS_LISTENER_PROPERTY_ID
+    property value : Void*
+    property valueSize : UInt32
+    def initialize(@id : Win32cr::Networking::WindowsWebServices::WS_LISTENER_PROPERTY_ID, @value : Void*, @valueSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_DISALLOWED_USER_AGENT_SUBSTRINGS
+    property subStringCount : UInt32
+    property subStrings : Win32cr::Networking::WindowsWebServices::WS_STRING**
+    def initialize(@subStringCount : UInt32, @subStrings : Win32cr::Networking::WindowsWebServices::WS_STRING**)
+    end
+  end
+
+  @[Extern]
+  struct WS_LISTENER_PROPERTIES
+    property properties : Win32cr::Networking::WindowsWebServices::WS_LISTENER_PROPERTY*
+    property propertyCount : UInt32
+    def initialize(@properties : Win32cr::Networking::WindowsWebServices::WS_LISTENER_PROPERTY*, @propertyCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_HOST_NAMES
+    property hostNames : Win32cr::Networking::WindowsWebServices::WS_STRING*
+    property hostNameCount : UInt32
+    def initialize(@hostNames : Win32cr::Networking::WindowsWebServices::WS_STRING*, @hostNameCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_CUSTOM_LISTENER_CALLBACKS
+    property createListenerCallback : Win32cr::Networking::WindowsWebServices::WS_CREATE_LISTENER_CALLBACK
+    property freeListenerCallback : Win32cr::Networking::WindowsWebServices::WS_FREE_LISTENER_CALLBACK
+    property resetListenerCallback : Win32cr::Networking::WindowsWebServices::WS_RESET_LISTENER_CALLBACK
+    property openListenerCallback : Win32cr::Networking::WindowsWebServices::WS_OPEN_LISTENER_CALLBACK
+    property closeListenerCallback : Win32cr::Networking::WindowsWebServices::WS_CLOSE_LISTENER_CALLBACK
+    property abortListenerCallback : Win32cr::Networking::WindowsWebServices::WS_ABORT_LISTENER_CALLBACK
+    property getListenerPropertyCallback : Win32cr::Networking::WindowsWebServices::WS_GET_LISTENER_PROPERTY_CALLBACK
+    property setListenerPropertyCallback : Win32cr::Networking::WindowsWebServices::WS_SET_LISTENER_PROPERTY_CALLBACK
+    property createChannelForListenerCallback : Win32cr::Networking::WindowsWebServices::WS_CREATE_CHANNEL_FOR_LISTENER_CALLBACK
+    property acceptChannelCallback : Win32cr::Networking::WindowsWebServices::WS_ACCEPT_CHANNEL_CALLBACK
+    def initialize(@createListenerCallback : Win32cr::Networking::WindowsWebServices::WS_CREATE_LISTENER_CALLBACK, @freeListenerCallback : Win32cr::Networking::WindowsWebServices::WS_FREE_LISTENER_CALLBACK, @resetListenerCallback : Win32cr::Networking::WindowsWebServices::WS_RESET_LISTENER_CALLBACK, @openListenerCallback : Win32cr::Networking::WindowsWebServices::WS_OPEN_LISTENER_CALLBACK, @closeListenerCallback : Win32cr::Networking::WindowsWebServices::WS_CLOSE_LISTENER_CALLBACK, @abortListenerCallback : Win32cr::Networking::WindowsWebServices::WS_ABORT_LISTENER_CALLBACK, @getListenerPropertyCallback : Win32cr::Networking::WindowsWebServices::WS_GET_LISTENER_PROPERTY_CALLBACK, @setListenerPropertyCallback : Win32cr::Networking::WindowsWebServices::WS_SET_LISTENER_PROPERTY_CALLBACK, @createChannelForListenerCallback : Win32cr::Networking::WindowsWebServices::WS_CREATE_CHANNEL_FOR_LISTENER_CALLBACK, @acceptChannelCallback : Win32cr::Networking::WindowsWebServices::WS_ACCEPT_CHANNEL_CALLBACK)
+    end
+  end
+
+  @[Extern]
+  struct WS_MESSAGE_PROPERTY
+    property id : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_PROPERTY_ID
+    property value : Void*
+    property valueSize : UInt32
+    def initialize(@id : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_PROPERTY_ID, @value : Void*, @valueSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_MESSAGE_PROPERTIES
+    property properties : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_PROPERTY*
+    property propertyCount : UInt32
+    def initialize(@properties : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_PROPERTY*, @propertyCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_SECURITY_ALGORITHM_PROPERTY
+    property id : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_PROPERTY_ID
+    property value : Void*
+    property valueSize : UInt32
+    def initialize(@id : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_PROPERTY_ID, @value : Void*, @valueSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_SECURITY_ALGORITHM_SUITE
+    property canonicalizationAlgorithm : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_ID
+    property digestAlgorithm : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_ID
+    property symmetricSignatureAlgorithm : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_ID
+    property asymmetricSignatureAlgorithm : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_ID
+    property encryptionAlgorithm : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_ID
+    property keyDerivationAlgorithm : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_ID
+    property symmetricKeyWrapAlgorithm : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_ID
+    property asymmetricKeyWrapAlgorithm : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_ID
+    property minSymmetricKeyLength : UInt32
+    property maxSymmetricKeyLength : UInt32
+    property minAsymmetricKeyLength : UInt32
+    property maxAsymmetricKeyLength : UInt32
+    property properties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_PROPERTY*
+    property propertyCount : UInt32
+    def initialize(@canonicalizationAlgorithm : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_ID, @digestAlgorithm : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_ID, @symmetricSignatureAlgorithm : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_ID, @asymmetricSignatureAlgorithm : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_ID, @encryptionAlgorithm : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_ID, @keyDerivationAlgorithm : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_ID, @symmetricKeyWrapAlgorithm : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_ID, @asymmetricKeyWrapAlgorithm : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_ID, @minSymmetricKeyLength : UInt32, @maxSymmetricKeyLength : UInt32, @minAsymmetricKeyLength : UInt32, @maxAsymmetricKeyLength : UInt32, @properties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_ALGORITHM_PROPERTY*, @propertyCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_SECURITY_PROPERTY
+    property id : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTY_ID
+    property value : Void*
+    property valueSize : UInt32
+    def initialize(@id : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTY_ID, @value : Void*, @valueSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_SECURITY_PROPERTIES
+    property properties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTY*
+    property propertyCount : UInt32
+    def initialize(@properties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTY*, @propertyCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_SECURITY_BINDING_PROPERTY
+    property id : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTY_ID
+    property value : Void*
+    property valueSize : UInt32
+    def initialize(@id : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTY_ID, @value : Void*, @valueSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_SECURITY_BINDING_PROPERTIES
+    property properties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTY*
+    property propertyCount : UInt32
+    def initialize(@properties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTY*, @propertyCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_SERVICE_SECURITY_IDENTITIES
+    property serviceIdentities : Win32cr::Networking::WindowsWebServices::WS_STRING*
+    property serviceIdentityCount : UInt32
+    def initialize(@serviceIdentities : Win32cr::Networking::WindowsWebServices::WS_STRING*, @serviceIdentityCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_CERTIFICATE_VALIDATION_CALLBACK_CONTEXT
+    property callback : Win32cr::Networking::WindowsWebServices::WS_CERTIFICATE_VALIDATION_CALLBACK
+    property state : Void*
+    def initialize(@callback : Win32cr::Networking::WindowsWebServices::WS_CERTIFICATE_VALIDATION_CALLBACK, @state : Void*)
+    end
+  end
+
+  @[Extern]
+  struct WS_CERT_CREDENTIAL
+    property credentialType : Win32cr::Networking::WindowsWebServices::WS_CERT_CREDENTIAL_TYPE
+    def initialize(@credentialType : Win32cr::Networking::WindowsWebServices::WS_CERT_CREDENTIAL_TYPE)
+    end
+  end
+
+  @[Extern]
+  struct WS_SUBJECT_NAME_CERT_CREDENTIAL
+    property credential : Win32cr::Networking::WindowsWebServices::WS_CERT_CREDENTIAL
+    property storeLocation : UInt32
+    property storeName : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property subjectName : Win32cr::Networking::WindowsWebServices::WS_STRING
+    def initialize(@credential : Win32cr::Networking::WindowsWebServices::WS_CERT_CREDENTIAL, @storeLocation : UInt32, @storeName : Win32cr::Networking::WindowsWebServices::WS_STRING, @subjectName : Win32cr::Networking::WindowsWebServices::WS_STRING)
+    end
+  end
+
+  @[Extern]
+  struct WS_THUMBPRINT_CERT_CREDENTIAL
+    property credential : Win32cr::Networking::WindowsWebServices::WS_CERT_CREDENTIAL
+    property storeLocation : UInt32
+    property storeName : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property thumbprint : Win32cr::Networking::WindowsWebServices::WS_STRING
+    def initialize(@credential : Win32cr::Networking::WindowsWebServices::WS_CERT_CREDENTIAL, @storeLocation : UInt32, @storeName : Win32cr::Networking::WindowsWebServices::WS_STRING, @thumbprint : Win32cr::Networking::WindowsWebServices::WS_STRING)
+    end
+  end
+
+  @[Extern]
+  struct WS_CUSTOM_CERT_CREDENTIAL
+    property credential : Win32cr::Networking::WindowsWebServices::WS_CERT_CREDENTIAL
+    property getCertCallback : Win32cr::Networking::WindowsWebServices::WS_GET_CERT_CALLBACK
+    property getCertCallbackState : Void*
+    property certIssuerListNotificationCallback : Win32cr::Networking::WindowsWebServices::WS_CERT_ISSUER_LIST_NOTIFICATION_CALLBACK
+    property certIssuerListNotificationCallbackState : Void*
+    def initialize(@credential : Win32cr::Networking::WindowsWebServices::WS_CERT_CREDENTIAL, @getCertCallback : Win32cr::Networking::WindowsWebServices::WS_GET_CERT_CALLBACK, @getCertCallbackState : Void*, @certIssuerListNotificationCallback : Win32cr::Networking::WindowsWebServices::WS_CERT_ISSUER_LIST_NOTIFICATION_CALLBACK, @certIssuerListNotificationCallbackState : Void*)
+    end
+  end
+
+  @[Extern]
+  struct WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL
+    property credentialType : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL_TYPE
+    def initialize(@credentialType : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL_TYPE)
+    end
+  end
+
+  @[Extern]
+  struct WS_STRING_WINDOWS_INTEGRATED_AUTH_CREDENTIAL
+    property credential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL
+    property username : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property password : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property domain : Win32cr::Networking::WindowsWebServices::WS_STRING
+    def initialize(@credential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL, @username : Win32cr::Networking::WindowsWebServices::WS_STRING, @password : Win32cr::Networking::WindowsWebServices::WS_STRING, @domain : Win32cr::Networking::WindowsWebServices::WS_STRING)
+    end
+  end
+
+  @[Extern]
+  struct WS_DEFAULT_WINDOWS_INTEGRATED_AUTH_CREDENTIAL
+    property credential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL
+    def initialize(@credential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL)
+    end
+  end
+
+  @[Extern]
+  struct WS_OPAQUE_WINDOWS_INTEGRATED_AUTH_CREDENTIAL
+    property credential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL
+    property opaqueAuthIdentity : Void*
+    def initialize(@credential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL, @opaqueAuthIdentity : Void*)
+    end
+  end
+
+  @[Extern]
+  struct WS_USERNAME_CREDENTIAL
+    property credentialType : Win32cr::Networking::WindowsWebServices::WS_USERNAME_CREDENTIAL_TYPE
+    def initialize(@credentialType : Win32cr::Networking::WindowsWebServices::WS_USERNAME_CREDENTIAL_TYPE)
+    end
+  end
+
+  @[Extern]
+  struct WS_STRING_USERNAME_CREDENTIAL
+    property credential : Win32cr::Networking::WindowsWebServices::WS_USERNAME_CREDENTIAL
+    property username : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property password : Win32cr::Networking::WindowsWebServices::WS_STRING
+    def initialize(@credential : Win32cr::Networking::WindowsWebServices::WS_USERNAME_CREDENTIAL, @username : Win32cr::Networking::WindowsWebServices::WS_STRING, @password : Win32cr::Networking::WindowsWebServices::WS_STRING)
+    end
+  end
+
+  @[Extern]
+  struct WS_SECURITY_KEY_HANDLE
+    property keyHandleType : Win32cr::Networking::WindowsWebServices::WS_SECURITY_KEY_HANDLE_TYPE
+    def initialize(@keyHandleType : Win32cr::Networking::WindowsWebServices::WS_SECURITY_KEY_HANDLE_TYPE)
+    end
+  end
+
+  @[Extern]
+  struct WS_RAW_SYMMETRIC_SECURITY_KEY_HANDLE
+    property keyHandle : Win32cr::Networking::WindowsWebServices::WS_SECURITY_KEY_HANDLE
+    property rawKeyBytes : Win32cr::Networking::WindowsWebServices::WS_BYTES
+    def initialize(@keyHandle : Win32cr::Networking::WindowsWebServices::WS_SECURITY_KEY_HANDLE, @rawKeyBytes : Win32cr::Networking::WindowsWebServices::WS_BYTES)
+    end
+  end
+
+  @[Extern]
+  struct WS_NCRYPT_ASYMMETRIC_SECURITY_KEY_HANDLE
+    property keyHandle : Win32cr::Networking::WindowsWebServices::WS_SECURITY_KEY_HANDLE
+    property asymmetricKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE
+    def initialize(@keyHandle : Win32cr::Networking::WindowsWebServices::WS_SECURITY_KEY_HANDLE, @asymmetricKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE)
+    end
+  end
+
+  @[Extern]
+  struct WS_CAPI_ASYMMETRIC_SECURITY_KEY_HANDLE
+    property keyHandle : Win32cr::Networking::WindowsWebServices::WS_SECURITY_KEY_HANDLE
+    property provider : LibC::UIntPtrT
+    property keySpec : UInt32
+    def initialize(@keyHandle : Win32cr::Networking::WindowsWebServices::WS_SECURITY_KEY_HANDLE, @provider : LibC::UIntPtrT, @keySpec : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_SECURITY_BINDING
+    property bindingType : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_TYPE
+    property properties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTY*
+    property propertyCount : UInt32
+    def initialize(@bindingType : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_TYPE, @properties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTY*, @propertyCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_SSL_TRANSPORT_SECURITY_BINDING
+    property binding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING
+    property localCertCredential : Win32cr::Networking::WindowsWebServices::WS_CERT_CREDENTIAL*
+    def initialize(@binding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING, @localCertCredential : Win32cr::Networking::WindowsWebServices::WS_CERT_CREDENTIAL*)
+    end
+  end
+
+  @[Extern]
+  struct WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING
+    property binding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING
+    property clientCredential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL*
+    def initialize(@binding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING, @clientCredential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL*)
+    end
+  end
+
+  @[Extern]
+  struct WS_NAMEDPIPE_SSPI_TRANSPORT_SECURITY_BINDING
+    property binding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING
+    property clientCredential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL*
+    def initialize(@binding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING, @clientCredential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL*)
+    end
+  end
+
+  @[Extern]
+  struct WS_HTTP_HEADER_AUTH_SECURITY_BINDING
+    property binding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING
+    property clientCredential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL*
+    def initialize(@binding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING, @clientCredential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL*)
+    end
+  end
+
+  @[Extern]
+  struct WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING
+    property binding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING
+    property bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE
+    property clientCredential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL*
+    def initialize(@binding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING, @bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE, @clientCredential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL*)
+    end
+  end
+
+  @[Extern]
+  struct WS_USERNAME_MESSAGE_SECURITY_BINDING
+    property binding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING
+    property bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE
+    property clientCredential : Win32cr::Networking::WindowsWebServices::WS_USERNAME_CREDENTIAL*
+    property passwordValidator : Win32cr::Networking::WindowsWebServices::WS_VALIDATE_PASSWORD_CALLBACK
+    property passwordValidatorCallbackState : Void*
+    def initialize(@binding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING, @bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE, @clientCredential : Win32cr::Networking::WindowsWebServices::WS_USERNAME_CREDENTIAL*, @passwordValidator : Win32cr::Networking::WindowsWebServices::WS_VALIDATE_PASSWORD_CALLBACK, @passwordValidatorCallbackState : Void*)
+    end
+  end
+
+  @[Extern]
+  struct WS_SECURITY_DESCRIPTION
+    property securityBindings : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING**
+    property securityBindingCount : UInt32
+    property properties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTY*
+    property propertyCount : UInt32
+    def initialize(@securityBindings : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING**, @securityBindingCount : UInt32, @properties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTY*, @propertyCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING
+    property binding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING
+    property bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE
+    property bootstrapSecurityDescription : Win32cr::Networking::WindowsWebServices::WS_SECURITY_DESCRIPTION*
+    def initialize(@binding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING, @bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE, @bootstrapSecurityDescription : Win32cr::Networking::WindowsWebServices::WS_SECURITY_DESCRIPTION*)
+    end
+  end
+
+  @[Extern]
+  struct WS_SECURITY_CONTEXT_PROPERTY
+    property id : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_PROPERTY_ID
+    property value : Void*
+    property valueSize : UInt32
+    def initialize(@id : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_PROPERTY_ID, @value : Void*, @valueSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_XML_SECURITY_TOKEN_PROPERTY
+    property id : Win32cr::Networking::WindowsWebServices::WS_XML_SECURITY_TOKEN_PROPERTY_ID
+    property value : Void*
+    property valueSize : UInt32
+    def initialize(@id : Win32cr::Networking::WindowsWebServices::WS_XML_SECURITY_TOKEN_PROPERTY_ID, @value : Void*, @valueSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_XML_TOKEN_MESSAGE_SECURITY_BINDING
+    property binding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING
+    property bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE
+    property xmlToken : Win32cr::Networking::WindowsWebServices::WS_SECURITY_TOKEN*
+    def initialize(@binding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING, @bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE, @xmlToken : Win32cr::Networking::WindowsWebServices::WS_SECURITY_TOKEN*)
+    end
+  end
+
+  @[Extern]
+  struct WS_SAML_AUTHENTICATOR
+    property authenticatorType : Win32cr::Networking::WindowsWebServices::WS_SAML_AUTHENTICATOR_TYPE
+    def initialize(@authenticatorType : Win32cr::Networking::WindowsWebServices::WS_SAML_AUTHENTICATOR_TYPE)
+    end
+  end
+
+  @[Extern]
+  struct WS_CERT_SIGNED_SAML_AUTHENTICATOR
+    property authenticator : Win32cr::Networking::WindowsWebServices::WS_SAML_AUTHENTICATOR
+    property trustedIssuerCerts : Win32cr::Security::Cryptography::CERT_CONTEXT**
+    property trustedIssuerCertCount : UInt32
+    property decryptionCert : Win32cr::Security::Cryptography::CERT_CONTEXT*
+    property samlValidator : Win32cr::Networking::WindowsWebServices::WS_VALIDATE_SAML_CALLBACK
+    property samlValidatorCallbackState : Void*
+    def initialize(@authenticator : Win32cr::Networking::WindowsWebServices::WS_SAML_AUTHENTICATOR, @trustedIssuerCerts : Win32cr::Security::Cryptography::CERT_CONTEXT**, @trustedIssuerCertCount : UInt32, @decryptionCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, @samlValidator : Win32cr::Networking::WindowsWebServices::WS_VALIDATE_SAML_CALLBACK, @samlValidatorCallbackState : Void*)
+    end
+  end
+
+  @[Extern]
+  struct WS_SAML_MESSAGE_SECURITY_BINDING
+    property binding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING
+    property bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE
+    property authenticator : Win32cr::Networking::WindowsWebServices::WS_SAML_AUTHENTICATOR*
+    def initialize(@binding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING, @bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE, @authenticator : Win32cr::Networking::WindowsWebServices::WS_SAML_AUTHENTICATOR*)
+    end
+  end
+
+  @[Extern]
+  struct WS_REQUEST_SECURITY_TOKEN_PROPERTY
+    property id : Win32cr::Networking::WindowsWebServices::WS_REQUEST_SECURITY_TOKEN_PROPERTY_ID
+    property value : Void*
+    property valueSize : UInt32
+    def initialize(@id : Win32cr::Networking::WindowsWebServices::WS_REQUEST_SECURITY_TOKEN_PROPERTY_ID, @value : Void*, @valueSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_ANY_ATTRIBUTE
+    property localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING
+    property ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING
+    property value : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT*
+    def initialize(@localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING, @ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING, @value : Win32cr::Networking::WindowsWebServices::WS_XML_TEXT*)
+    end
+  end
+
+  @[Extern]
+  struct WS_ANY_ATTRIBUTES
+    property attributes : Win32cr::Networking::WindowsWebServices::WS_ANY_ATTRIBUTE*
+    property attributeCount : UInt32
+    def initialize(@attributes : Win32cr::Networking::WindowsWebServices::WS_ANY_ATTRIBUTE*, @attributeCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_BOOL_DESCRIPTION
+    property value : Win32cr::Foundation::BOOL
+    def initialize(@value : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct WS_GUID_DESCRIPTION
+    property value : LibC::GUID
+    def initialize(@value : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct WS_DATETIME_DESCRIPTION
+    property minValue : Win32cr::Networking::WindowsWebServices::WS_DATETIME
+    property maxValue : Win32cr::Networking::WindowsWebServices::WS_DATETIME
+    def initialize(@minValue : Win32cr::Networking::WindowsWebServices::WS_DATETIME, @maxValue : Win32cr::Networking::WindowsWebServices::WS_DATETIME)
+    end
+  end
+
+  @[Extern]
+  struct WS_DURATION
+    property negative : Win32cr::Foundation::BOOL
+    property years : UInt32
+    property months : UInt32
+    property days : UInt32
+    property hours : UInt32
+    property minutes : UInt32
+    property seconds : UInt32
+    property milliseconds : UInt32
+    property ticks : UInt32
+    def initialize(@negative : Win32cr::Foundation::BOOL, @years : UInt32, @months : UInt32, @days : UInt32, @hours : UInt32, @minutes : UInt32, @seconds : UInt32, @milliseconds : UInt32, @ticks : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_DURATION_DESCRIPTION
+    property minValue : Win32cr::Networking::WindowsWebServices::WS_DURATION
+    property maxValue : Win32cr::Networking::WindowsWebServices::WS_DURATION
+    property comparer : Win32cr::Networking::WindowsWebServices::WS_DURATION_COMPARISON_CALLBACK
+    def initialize(@minValue : Win32cr::Networking::WindowsWebServices::WS_DURATION, @maxValue : Win32cr::Networking::WindowsWebServices::WS_DURATION, @comparer : Win32cr::Networking::WindowsWebServices::WS_DURATION_COMPARISON_CALLBACK)
+    end
+  end
+
+  @[Extern]
+  struct WS_TIMESPAN_DESCRIPTION
+    property minValue : Win32cr::Networking::WindowsWebServices::WS_TIMESPAN
+    property maxValue : Win32cr::Networking::WindowsWebServices::WS_TIMESPAN
+    def initialize(@minValue : Win32cr::Networking::WindowsWebServices::WS_TIMESPAN, @maxValue : Win32cr::Networking::WindowsWebServices::WS_TIMESPAN)
+    end
+  end
+
+  @[Extern]
+  struct WS_UNIQUE_ID_DESCRIPTION
+    property minCharCount : UInt32
+    property maxCharCount : UInt32
+    def initialize(@minCharCount : UInt32, @maxCharCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_STRING_DESCRIPTION
+    property minCharCount : UInt32
+    property maxCharCount : UInt32
+    def initialize(@minCharCount : UInt32, @maxCharCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_XML_STRING_DESCRIPTION
+    property minByteCount : UInt32
+    property maxByteCount : UInt32
+    def initialize(@minByteCount : UInt32, @maxByteCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_XML_QNAME_DESCRIPTION
+    property minLocalNameByteCount : UInt32
+    property maxLocalNameByteCount : UInt32
+    property minNsByteCount : UInt32
+    property maxNsByteCount : UInt32
+    def initialize(@minLocalNameByteCount : UInt32, @maxLocalNameByteCount : UInt32, @minNsByteCount : UInt32, @maxNsByteCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_CHAR_ARRAY_DESCRIPTION
+    property minCharCount : UInt32
+    property maxCharCount : UInt32
+    def initialize(@minCharCount : UInt32, @maxCharCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_BYTE_ARRAY_DESCRIPTION
+    property minByteCount : UInt32
+    property maxByteCount : UInt32
+    def initialize(@minByteCount : UInt32, @maxByteCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_UTF8_ARRAY_DESCRIPTION
+    property minByteCount : UInt32
+    property maxByteCount : UInt32
+    def initialize(@minByteCount : UInt32, @maxByteCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_WSZ_DESCRIPTION
+    property minCharCount : UInt32
+    property maxCharCount : UInt32
+    def initialize(@minCharCount : UInt32, @maxCharCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_INT8_DESCRIPTION
+    property minValue : Win32cr::Foundation::CHAR
+    property maxValue : Win32cr::Foundation::CHAR
+    def initialize(@minValue : Win32cr::Foundation::CHAR, @maxValue : Win32cr::Foundation::CHAR)
+    end
+  end
+
+  @[Extern]
+  struct WS_UINT8_DESCRIPTION
+    property minValue : UInt8
+    property maxValue : UInt8
+    def initialize(@minValue : UInt8, @maxValue : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct WS_INT16_DESCRIPTION
+    property minValue : Int16
+    property maxValue : Int16
+    def initialize(@minValue : Int16, @maxValue : Int16)
+    end
+  end
+
+  @[Extern]
+  struct WS_UINT16_DESCRIPTION
+    property minValue : UInt16
+    property maxValue : UInt16
+    def initialize(@minValue : UInt16, @maxValue : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct WS_INT32_DESCRIPTION
+    property minValue : Int32
+    property maxValue : Int32
+    def initialize(@minValue : Int32, @maxValue : Int32)
+    end
+  end
+
+  @[Extern]
+  struct WS_UINT32_DESCRIPTION
+    property minValue : UInt32
+    property maxValue : UInt32
+    def initialize(@minValue : UInt32, @maxValue : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_INT64_DESCRIPTION
+    property minValue : Int64
+    property maxValue : Int64
+    def initialize(@minValue : Int64, @maxValue : Int64)
+    end
+  end
+
+  @[Extern]
+  struct WS_UINT64_DESCRIPTION
+    property minValue : UInt64
+    property maxValue : UInt64
+    def initialize(@minValue : UInt64, @maxValue : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct WS_FLOAT_DESCRIPTION
+    property minValue : Float32
+    property maxValue : Float32
+    def initialize(@minValue : Float32, @maxValue : Float32)
+    end
+  end
+
+  @[Extern]
+  struct WS_DOUBLE_DESCRIPTION
+    property minValue : Float64
+    property maxValue : Float64
+    def initialize(@minValue : Float64, @maxValue : Float64)
+    end
+  end
+
+  @[Extern]
+  struct WS_DECIMAL_DESCRIPTION
+    property minValue : Win32cr::Foundation::DECIMAL
+    property maxValue : Win32cr::Foundation::DECIMAL
+    def initialize(@minValue : Win32cr::Foundation::DECIMAL, @maxValue : Win32cr::Foundation::DECIMAL)
+    end
+  end
+
+  @[Extern]
+  struct WS_BYTES_DESCRIPTION
+    property minByteCount : UInt32
+    property maxByteCount : UInt32
+    def initialize(@minByteCount : UInt32, @maxByteCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_ENUM_VALUE
+    property value : Int32
+    property name : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    def initialize(@value : Int32, @name : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*)
+    end
+  end
+
+  @[Extern]
+  struct WS_ENUM_DESCRIPTION
+    property values : Win32cr::Networking::WindowsWebServices::WS_ENUM_VALUE*
+    property valueCount : UInt32
+    property maxByteCount : UInt32
+    property nameIndices : UInt32*
+    def initialize(@values : Win32cr::Networking::WindowsWebServices::WS_ENUM_VALUE*, @valueCount : UInt32, @maxByteCount : UInt32, @nameIndices : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct WS_ITEM_RANGE
+    property minItemCount : UInt32
+    property maxItemCount : UInt32
+    def initialize(@minItemCount : UInt32, @maxItemCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_DEFAULT_VALUE
+    property value : Void*
+    property valueSize : UInt32
+    def initialize(@value : Void*, @valueSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_FIELD_DESCRIPTION
+    property mapping : Win32cr::Networking::WindowsWebServices::WS_FIELD_MAPPING
+    property localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property type__ : Win32cr::Networking::WindowsWebServices::WS_TYPE
+    property typeDescription : Void*
+    property offset : UInt32
+    property options : UInt32
+    property defaultValue : Win32cr::Networking::WindowsWebServices::WS_DEFAULT_VALUE*
+    property countOffset : UInt32
+    property itemLocalName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property itemNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property itemRange : Win32cr::Networking::WindowsWebServices::WS_ITEM_RANGE*
+    def initialize(@mapping : Win32cr::Networking::WindowsWebServices::WS_FIELD_MAPPING, @localName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @ns : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @type__ : Win32cr::Networking::WindowsWebServices::WS_TYPE, @typeDescription : Void*, @offset : UInt32, @options : UInt32, @defaultValue : Win32cr::Networking::WindowsWebServices::WS_DEFAULT_VALUE*, @countOffset : UInt32, @itemLocalName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @itemNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @itemRange : Win32cr::Networking::WindowsWebServices::WS_ITEM_RANGE*)
+    end
+  end
+
+  @[Extern]
+  struct WS_UNION_FIELD_DESCRIPTION
+    property value : Int32
+    property field : Win32cr::Networking::WindowsWebServices::WS_FIELD_DESCRIPTION
+    def initialize(@value : Int32, @field : Win32cr::Networking::WindowsWebServices::WS_FIELD_DESCRIPTION)
+    end
+  end
+
+  @[Extern]
+  struct WS_STRUCT_DESCRIPTION
+    property size : UInt32
+    property alignment : UInt32
+    property fields : Win32cr::Networking::WindowsWebServices::WS_FIELD_DESCRIPTION**
+    property fieldCount : UInt32
+    property typeLocalName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property typeNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property parentType : Win32cr::Networking::WindowsWebServices::WS_STRUCT_DESCRIPTION*
+    property subTypes : Win32cr::Networking::WindowsWebServices::WS_STRUCT_DESCRIPTION**
+    property subTypeCount : UInt32
+    property structOptions : UInt32
+    def initialize(@size : UInt32, @alignment : UInt32, @fields : Win32cr::Networking::WindowsWebServices::WS_FIELD_DESCRIPTION**, @fieldCount : UInt32, @typeLocalName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @typeNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @parentType : Win32cr::Networking::WindowsWebServices::WS_STRUCT_DESCRIPTION*, @subTypes : Win32cr::Networking::WindowsWebServices::WS_STRUCT_DESCRIPTION**, @subTypeCount : UInt32, @structOptions : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_UNION_DESCRIPTION
+    property size : UInt32
+    property alignment : UInt32
+    property fields : Win32cr::Networking::WindowsWebServices::WS_UNION_FIELD_DESCRIPTION**
+    property fieldCount : UInt32
+    property enumOffset : UInt32
+    property noneEnumValue : Int32
+    property valueIndices : UInt32*
+    def initialize(@size : UInt32, @alignment : UInt32, @fields : Win32cr::Networking::WindowsWebServices::WS_UNION_FIELD_DESCRIPTION**, @fieldCount : UInt32, @enumOffset : UInt32, @noneEnumValue : Int32, @valueIndices : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct WS_ENDPOINT_ADDRESS_DESCRIPTION
+    property addressingVersion : Win32cr::Networking::WindowsWebServices::WS_ADDRESSING_VERSION
+    def initialize(@addressingVersion : Win32cr::Networking::WindowsWebServices::WS_ADDRESSING_VERSION)
+    end
+  end
+
+  @[Extern]
+  struct WS_FAULT_DESCRIPTION
+    property envelopeVersion : Win32cr::Networking::WindowsWebServices::WS_ENVELOPE_VERSION
+    def initialize(@envelopeVersion : Win32cr::Networking::WindowsWebServices::WS_ENVELOPE_VERSION)
+    end
+  end
+
+  @[Extern]
+  struct WS_VOID_DESCRIPTION
+    property size : UInt32
+    def initialize(@size : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_CUSTOM_TYPE_DESCRIPTION
+    property size : UInt32
+    property alignment : UInt32
+    property readCallback : Win32cr::Networking::WindowsWebServices::WS_READ_TYPE_CALLBACK
+    property writeCallback : Win32cr::Networking::WindowsWebServices::WS_WRITE_TYPE_CALLBACK
+    property descriptionData : Void*
+    property isDefaultValueCallback : Win32cr::Networking::WindowsWebServices::WS_IS_DEFAULT_VALUE_CALLBACK
+    def initialize(@size : UInt32, @alignment : UInt32, @readCallback : Win32cr::Networking::WindowsWebServices::WS_READ_TYPE_CALLBACK, @writeCallback : Win32cr::Networking::WindowsWebServices::WS_WRITE_TYPE_CALLBACK, @descriptionData : Void*, @isDefaultValueCallback : Win32cr::Networking::WindowsWebServices::WS_IS_DEFAULT_VALUE_CALLBACK)
+    end
+  end
+
+  @[Extern]
+  struct WS_ATTRIBUTE_DESCRIPTION
+    property attributeLocalName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property attributeNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property type__ : Win32cr::Networking::WindowsWebServices::WS_TYPE
+    property typeDescription : Void*
+    def initialize(@attributeLocalName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @attributeNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @type__ : Win32cr::Networking::WindowsWebServices::WS_TYPE, @typeDescription : Void*)
+    end
+  end
+
+  @[Extern]
+  struct WS_PARAMETER_DESCRIPTION
+    property parameterType : Win32cr::Networking::WindowsWebServices::WS_PARAMETER_TYPE
+    property inputMessageIndex : UInt16
+    property outputMessageIndex : UInt16
+    def initialize(@parameterType : Win32cr::Networking::WindowsWebServices::WS_PARAMETER_TYPE, @inputMessageIndex : UInt16, @outputMessageIndex : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct WS_OPERATION_DESCRIPTION
+    property versionInfo : UInt32
+    property inputMessageDescription : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_DESCRIPTION*
+    property outputMessageDescription : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_DESCRIPTION*
+    property inputMessageOptions : UInt32
+    property outputMessageOptions : UInt32
+    property parameterCount : UInt16
+    property parameterDescription : Win32cr::Networking::WindowsWebServices::WS_PARAMETER_DESCRIPTION*
+    property stubCallback : Win32cr::Networking::WindowsWebServices::WS_SERVICE_STUB_CALLBACK
+    property style : Win32cr::Networking::WindowsWebServices::WS_OPERATION_STYLE
+    def initialize(@versionInfo : UInt32, @inputMessageDescription : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_DESCRIPTION*, @outputMessageDescription : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_DESCRIPTION*, @inputMessageOptions : UInt32, @outputMessageOptions : UInt32, @parameterCount : UInt16, @parameterDescription : Win32cr::Networking::WindowsWebServices::WS_PARAMETER_DESCRIPTION*, @stubCallback : Win32cr::Networking::WindowsWebServices::WS_SERVICE_STUB_CALLBACK, @style : Win32cr::Networking::WindowsWebServices::WS_OPERATION_STYLE)
+    end
+  end
+
+  @[Extern]
+  struct WS_CONTRACT_DESCRIPTION
+    property operationCount : UInt32
+    property operations : Win32cr::Networking::WindowsWebServices::WS_OPERATION_DESCRIPTION**
+    def initialize(@operationCount : UInt32, @operations : Win32cr::Networking::WindowsWebServices::WS_OPERATION_DESCRIPTION**)
+    end
+  end
+
+  @[Extern]
+  struct WS_SERVICE_CONTRACT
+    property contractDescription : Win32cr::Networking::WindowsWebServices::WS_CONTRACT_DESCRIPTION*
+    property defaultMessageHandlerCallback : Win32cr::Networking::WindowsWebServices::WS_SERVICE_MESSAGE_RECEIVE_CALLBACK
+    property methodTable : Void*
+    def initialize(@contractDescription : Win32cr::Networking::WindowsWebServices::WS_CONTRACT_DESCRIPTION*, @defaultMessageHandlerCallback : Win32cr::Networking::WindowsWebServices::WS_SERVICE_MESSAGE_RECEIVE_CALLBACK, @methodTable : Void*)
+    end
+  end
+
+  @[Extern]
+  struct WS_SERVICE_PROPERTY
+    property id : Win32cr::Networking::WindowsWebServices::WS_SERVICE_PROPERTY_ID
+    property value : Void*
+    property valueSize : UInt32
+    def initialize(@id : Win32cr::Networking::WindowsWebServices::WS_SERVICE_PROPERTY_ID, @value : Void*, @valueSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_SERVICE_ENDPOINT_PROPERTY
+    property id : Win32cr::Networking::WindowsWebServices::WS_SERVICE_ENDPOINT_PROPERTY_ID
+    property value : Void*
+    property valueSize : UInt32
+    def initialize(@id : Win32cr::Networking::WindowsWebServices::WS_SERVICE_ENDPOINT_PROPERTY_ID, @value : Void*, @valueSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_SERVICE_PROPERTY_ACCEPT_CALLBACK
+    property callback : Win32cr::Networking::WindowsWebServices::WS_SERVICE_ACCEPT_CHANNEL_CALLBACK
+    def initialize(@callback : Win32cr::Networking::WindowsWebServices::WS_SERVICE_ACCEPT_CHANNEL_CALLBACK)
+    end
+  end
+
+  @[Extern]
+  struct WS_SERVICE_METADATA_DOCUMENT
+    property content : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property name : Win32cr::Networking::WindowsWebServices::WS_STRING*
+    def initialize(@content : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @name : Win32cr::Networking::WindowsWebServices::WS_STRING*)
+    end
+  end
+
+  @[Extern]
+  struct WS_SERVICE_METADATA
+    property documentCount : UInt32
+    property documents : Win32cr::Networking::WindowsWebServices::WS_SERVICE_METADATA_DOCUMENT**
+    property serviceName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property serviceNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    def initialize(@documentCount : UInt32, @documents : Win32cr::Networking::WindowsWebServices::WS_SERVICE_METADATA_DOCUMENT**, @serviceName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @serviceNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*)
+    end
+  end
+
+  @[Extern]
+  struct WS_SERVICE_PROPERTY_CLOSE_CALLBACK
+    property callback : Win32cr::Networking::WindowsWebServices::WS_SERVICE_CLOSE_CHANNEL_CALLBACK
+    def initialize(@callback : Win32cr::Networking::WindowsWebServices::WS_SERVICE_CLOSE_CHANNEL_CALLBACK)
+    end
+  end
+
+  @[Extern]
+  struct WS_SERVICE_ENDPOINT_METADATA
+    property portName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property bindingName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property bindingNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    def initialize(@portName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @bindingName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @bindingNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*)
+    end
+  end
+
+  @[Extern]
+  struct WS_SERVICE_ENDPOINT
+    property address : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_ADDRESS
+    property channelBinding : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_BINDING
+    property channelType : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_TYPE
+    property securityDescription : Win32cr::Networking::WindowsWebServices::WS_SECURITY_DESCRIPTION*
+    property contract : Win32cr::Networking::WindowsWebServices::WS_SERVICE_CONTRACT*
+    property authorizationCallback : Win32cr::Networking::WindowsWebServices::WS_SERVICE_SECURITY_CALLBACK
+    property properties : Win32cr::Networking::WindowsWebServices::WS_SERVICE_ENDPOINT_PROPERTY*
+    property propertyCount : UInt32
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    def initialize(@address : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_ADDRESS, @channelBinding : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_BINDING, @channelType : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_TYPE, @securityDescription : Win32cr::Networking::WindowsWebServices::WS_SECURITY_DESCRIPTION*, @contract : Win32cr::Networking::WindowsWebServices::WS_SERVICE_CONTRACT*, @authorizationCallback : Win32cr::Networking::WindowsWebServices::WS_SERVICE_SECURITY_CALLBACK, @properties : Win32cr::Networking::WindowsWebServices::WS_SERVICE_ENDPOINT_PROPERTY*, @propertyCount : UInt32, @channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES)
+    end
+  end
+
+  @[Extern]
+  struct WS_PROXY_PROPERTY
+    property id : Win32cr::Networking::WindowsWebServices::WS_PROXY_PROPERTY_ID
+    property value : Void*
+    property valueSize : UInt32
+    def initialize(@id : Win32cr::Networking::WindowsWebServices::WS_PROXY_PROPERTY_ID, @value : Void*, @valueSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_PROXY_MESSAGE_CALLBACK_CONTEXT
+    property callback : Win32cr::Networking::WindowsWebServices::WS_PROXY_MESSAGE_CALLBACK
+    property state : Void*
+    def initialize(@callback : Win32cr::Networking::WindowsWebServices::WS_PROXY_MESSAGE_CALLBACK, @state : Void*)
+    end
+  end
+
+  @[Extern]
+  struct WS_CALL_PROPERTY
+    property id : Win32cr::Networking::WindowsWebServices::WS_CALL_PROPERTY_ID
+    property value : Void*
+    property valueSize : UInt32
+    def initialize(@id : Win32cr::Networking::WindowsWebServices::WS_CALL_PROPERTY_ID, @value : Void*, @valueSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_URL
+    property scheme : Win32cr::Networking::WindowsWebServices::WS_URL_SCHEME_TYPE
+    def initialize(@scheme : Win32cr::Networking::WindowsWebServices::WS_URL_SCHEME_TYPE)
+    end
+  end
+
+  @[Extern]
+  struct WS_HTTP_URL
+    property url : Win32cr::Networking::WindowsWebServices::WS_URL
+    property host : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property port : UInt16
+    property portAsString : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property path : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property query : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property fragment : Win32cr::Networking::WindowsWebServices::WS_STRING
+    def initialize(@url : Win32cr::Networking::WindowsWebServices::WS_URL, @host : Win32cr::Networking::WindowsWebServices::WS_STRING, @port : UInt16, @portAsString : Win32cr::Networking::WindowsWebServices::WS_STRING, @path : Win32cr::Networking::WindowsWebServices::WS_STRING, @query : Win32cr::Networking::WindowsWebServices::WS_STRING, @fragment : Win32cr::Networking::WindowsWebServices::WS_STRING)
+    end
+  end
+
+  @[Extern]
+  struct WS_HTTPS_URL
+    property url : Win32cr::Networking::WindowsWebServices::WS_URL
+    property host : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property port : UInt16
+    property portAsString : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property path : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property query : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property fragment : Win32cr::Networking::WindowsWebServices::WS_STRING
+    def initialize(@url : Win32cr::Networking::WindowsWebServices::WS_URL, @host : Win32cr::Networking::WindowsWebServices::WS_STRING, @port : UInt16, @portAsString : Win32cr::Networking::WindowsWebServices::WS_STRING, @path : Win32cr::Networking::WindowsWebServices::WS_STRING, @query : Win32cr::Networking::WindowsWebServices::WS_STRING, @fragment : Win32cr::Networking::WindowsWebServices::WS_STRING)
+    end
+  end
+
+  @[Extern]
+  struct WS_NETTCP_URL
+    property url : Win32cr::Networking::WindowsWebServices::WS_URL
+    property host : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property port : UInt16
+    property portAsString : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property path : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property query : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property fragment : Win32cr::Networking::WindowsWebServices::WS_STRING
+    def initialize(@url : Win32cr::Networking::WindowsWebServices::WS_URL, @host : Win32cr::Networking::WindowsWebServices::WS_STRING, @port : UInt16, @portAsString : Win32cr::Networking::WindowsWebServices::WS_STRING, @path : Win32cr::Networking::WindowsWebServices::WS_STRING, @query : Win32cr::Networking::WindowsWebServices::WS_STRING, @fragment : Win32cr::Networking::WindowsWebServices::WS_STRING)
+    end
+  end
+
+  @[Extern]
+  struct WS_SOAPUDP_URL
+    property url : Win32cr::Networking::WindowsWebServices::WS_URL
+    property host : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property port : UInt16
+    property portAsString : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property path : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property query : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property fragment : Win32cr::Networking::WindowsWebServices::WS_STRING
+    def initialize(@url : Win32cr::Networking::WindowsWebServices::WS_URL, @host : Win32cr::Networking::WindowsWebServices::WS_STRING, @port : UInt16, @portAsString : Win32cr::Networking::WindowsWebServices::WS_STRING, @path : Win32cr::Networking::WindowsWebServices::WS_STRING, @query : Win32cr::Networking::WindowsWebServices::WS_STRING, @fragment : Win32cr::Networking::WindowsWebServices::WS_STRING)
+    end
+  end
+
+  @[Extern]
+  struct WS_NETPIPE_URL
+    property url : Win32cr::Networking::WindowsWebServices::WS_URL
+    property host : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property port : UInt16
+    property portAsString : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property path : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property query : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property fragment : Win32cr::Networking::WindowsWebServices::WS_STRING
+    def initialize(@url : Win32cr::Networking::WindowsWebServices::WS_URL, @host : Win32cr::Networking::WindowsWebServices::WS_STRING, @port : UInt16, @portAsString : Win32cr::Networking::WindowsWebServices::WS_STRING, @path : Win32cr::Networking::WindowsWebServices::WS_STRING, @query : Win32cr::Networking::WindowsWebServices::WS_STRING, @fragment : Win32cr::Networking::WindowsWebServices::WS_STRING)
+    end
+  end
+
+  @[Extern]
+  struct WS_UNIQUE_ID
+    property uri : Win32cr::Networking::WindowsWebServices::WS_STRING
+    property guid : LibC::GUID
+    def initialize(@uri : Win32cr::Networking::WindowsWebServices::WS_STRING, @guid : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct WS_BUFFERS
+    property bufferCount : UInt32
+    property buffers : Win32cr::Networking::WindowsWebServices::WS_BYTES*
+    def initialize(@bufferCount : UInt32, @buffers : Win32cr::Networking::WindowsWebServices::WS_BYTES*)
+    end
+  end
+
+  @[Extern]
+  struct WS_METADATA_ENDPOINT
+    property endpointAddress : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_ADDRESS
+    property endpointPolicy : Win32cr::Networking::WindowsWebServices::WS_POLICY*
+    property portName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property serviceName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property serviceNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property bindingName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property bindingNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property portTypeName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property portTypeNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    def initialize(@endpointAddress : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_ADDRESS, @endpointPolicy : Win32cr::Networking::WindowsWebServices::WS_POLICY*, @portName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @serviceName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @serviceNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @bindingName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @bindingNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @portTypeName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @portTypeNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*)
+    end
+  end
+
+  @[Extern]
+  struct WS_METADATA_ENDPOINTS
+    property endpoints : Win32cr::Networking::WindowsWebServices::WS_METADATA_ENDPOINT*
+    property endpointCount : UInt32
+    def initialize(@endpoints : Win32cr::Networking::WindowsWebServices::WS_METADATA_ENDPOINT*, @endpointCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_METADATA_PROPERTY
+    property id : Win32cr::Networking::WindowsWebServices::WS_METADATA_PROPERTY_ID
+    property value : Void*
+    property valueSize : UInt32
+    def initialize(@id : Win32cr::Networking::WindowsWebServices::WS_METADATA_PROPERTY_ID, @value : Void*, @valueSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_POLICY_PROPERTY
+    property id : Win32cr::Networking::WindowsWebServices::WS_POLICY_PROPERTY_ID
+    property value : Void*
+    property valueSize : UInt32
+    def initialize(@id : Win32cr::Networking::WindowsWebServices::WS_POLICY_PROPERTY_ID, @value : Void*, @valueSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_POLICY_PROPERTIES
+    property properties : Win32cr::Networking::WindowsWebServices::WS_POLICY_PROPERTY*
+    property propertyCount : UInt32
+    def initialize(@properties : Win32cr::Networking::WindowsWebServices::WS_POLICY_PROPERTY*, @propertyCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_SECURITY_BINDING_PROPERTY_CONSTRAINT
+    property id : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTY_ID
+    property allowedValues : Void*
+    property allowedValuesSize : UInt32
+    property out__ : Out_e__struct_
+
+    # Nested Type Out_e__struct_
+    @[Extern]
+    struct Out_e__struct_
+    property securityBindingProperty : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTY
+    def initialize(@securityBindingProperty : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTY)
+    end
+    end
+
+    def initialize(@id : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTY_ID, @allowedValues : Void*, @allowedValuesSize : UInt32, @out__ : Out_e__struct_)
+    end
+  end
+
+  @[Extern]
+  struct WS_SECURITY_BINDING_CONSTRAINT
+    property type__ : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT_TYPE
+    property propertyConstraints : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTY_CONSTRAINT*
+    property propertyConstraintCount : UInt32
+    def initialize(@type__ : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT_TYPE, @propertyConstraints : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTY_CONSTRAINT*, @propertyConstraintCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_SSL_TRANSPORT_SECURITY_BINDING_CONSTRAINT
+    property bindingConstraint : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT
+    property out__ : Out_e__struct_
+
+    # Nested Type Out_e__struct_
+    @[Extern]
+    struct Out_e__struct_
+    property clientCertCredentialRequired : Win32cr::Foundation::BOOL
+    def initialize(@clientCertCredentialRequired : Win32cr::Foundation::BOOL)
+    end
+    end
+
+    def initialize(@bindingConstraint : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT, @out__ : Out_e__struct_)
+    end
+  end
+
+  @[Extern]
+  struct WS_USERNAME_MESSAGE_SECURITY_BINDING_CONSTRAINT
+    property bindingConstraint : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT
+    property bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE
+    def initialize(@bindingConstraint : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT, @bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE)
+    end
+  end
+
+  @[Extern]
+  struct WS_HTTP_HEADER_AUTH_SECURITY_BINDING_CONSTRAINT
+    property bindingConstraint : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT
+    def initialize(@bindingConstraint : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT)
+    end
+  end
+
+  @[Extern]
+  struct WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_CONSTRAINT
+    property bindingConstraint : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT
+    def initialize(@bindingConstraint : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT)
+    end
+  end
+
+  @[Extern]
+  struct WS_CERT_MESSAGE_SECURITY_BINDING_CONSTRAINT
+    property bindingConstraint : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT
+    property bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE
+    def initialize(@bindingConstraint : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT, @bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE)
+    end
+  end
+
+  @[Extern]
+  struct WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_CONSTRAINT
+    property bindingConstraint : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT
+    property bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE
+    def initialize(@bindingConstraint : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT, @bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE)
+    end
+  end
+
+  @[Extern]
+  struct WS_REQUEST_SECURITY_TOKEN_PROPERTY_CONSTRAINT
+    property id : Win32cr::Networking::WindowsWebServices::WS_REQUEST_SECURITY_TOKEN_PROPERTY_ID
+    property allowedValues : Void*
+    property allowedValuesSize : UInt32
+    property out__ : Out_e__struct_
+
+    # Nested Type Out_e__struct_
+    @[Extern]
+    struct Out_e__struct_
+    property requestSecurityTokenProperty : Win32cr::Networking::WindowsWebServices::WS_REQUEST_SECURITY_TOKEN_PROPERTY
+    def initialize(@requestSecurityTokenProperty : Win32cr::Networking::WindowsWebServices::WS_REQUEST_SECURITY_TOKEN_PROPERTY)
+    end
+    end
+
+    def initialize(@id : Win32cr::Networking::WindowsWebServices::WS_REQUEST_SECURITY_TOKEN_PROPERTY_ID, @allowedValues : Void*, @allowedValuesSize : UInt32, @out__ : Out_e__struct_)
+    end
+  end
+
+  @[Extern]
+  struct WS_ISSUED_TOKEN_MESSAGE_SECURITY_BINDING_CONSTRAINT
+    property bindingConstraint : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT
+    property bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE
+    property claimConstraints : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property claimConstraintCount : UInt32
+    property requestSecurityTokenPropertyConstraints : Win32cr::Networking::WindowsWebServices::WS_REQUEST_SECURITY_TOKEN_PROPERTY_CONSTRAINT*
+    property requestSecurityTokenPropertyConstraintCount : UInt32
+    property out__ : Out_e__struct_
+
+    # Nested Type Out_e__struct_
+    @[Extern]
+    struct Out_e__struct_
+    property issuerAddress : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_ADDRESS*
+    property requestSecurityTokenTemplate : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*
+    def initialize(@issuerAddress : Win32cr::Networking::WindowsWebServices::WS_ENDPOINT_ADDRESS*, @requestSecurityTokenTemplate : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*)
+    end
+    end
+
+    def initialize(@bindingConstraint : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT, @bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE, @claimConstraints : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @claimConstraintCount : UInt32, @requestSecurityTokenPropertyConstraints : Win32cr::Networking::WindowsWebServices::WS_REQUEST_SECURITY_TOKEN_PROPERTY_CONSTRAINT*, @requestSecurityTokenPropertyConstraintCount : UInt32, @out__ : Out_e__struct_)
+    end
+  end
+
+  @[Extern]
+  struct WS_SECURITY_PROPERTY_CONSTRAINT
+    property id : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTY_ID
+    property allowedValues : Void*
+    property allowedValuesSize : UInt32
+    property out__ : Out_e__struct_
+
+    # Nested Type Out_e__struct_
+    @[Extern]
+    struct Out_e__struct_
+    property securityProperty : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTY
+    def initialize(@securityProperty : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTY)
+    end
+    end
+
+    def initialize(@id : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTY_ID, @allowedValues : Void*, @allowedValuesSize : UInt32, @out__ : Out_e__struct_)
+    end
+  end
+
+  @[Extern]
+  struct WS_SECURITY_CONSTRAINTS
+    property securityPropertyConstraints : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTY_CONSTRAINT*
+    property securityPropertyConstraintCount : UInt32
+    property securityBindingConstraints : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT**
+    property securityBindingConstraintCount : UInt32
+    def initialize(@securityPropertyConstraints : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTY_CONSTRAINT*, @securityPropertyConstraintCount : UInt32, @securityBindingConstraints : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT**, @securityBindingConstraintCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING_CONSTRAINT
+    property bindingConstraint : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT
+    property bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE
+    property bootstrapSecurityConstraint : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONSTRAINTS*
+    def initialize(@bindingConstraint : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_CONSTRAINT, @bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE, @bootstrapSecurityConstraint : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONSTRAINTS*)
+    end
+  end
+
+  @[Extern]
+  struct WS_CHANNEL_PROPERTY_CONSTRAINT
+    property id : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY_ID
+    property allowedValues : Void*
+    property allowedValuesSize : UInt32
+    property out__ : Out_e__struct_
+
+    # Nested Type Out_e__struct_
+    @[Extern]
+    struct Out_e__struct_
+    property channelProperty : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY
+    def initialize(@channelProperty : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY)
+    end
+    end
+
+    def initialize(@id : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY_ID, @allowedValues : Void*, @allowedValuesSize : UInt32, @out__ : Out_e__struct_)
+    end
+  end
+
+  @[Extern]
+  struct WS_POLICY_EXTENSION
+    property type__ : Win32cr::Networking::WindowsWebServices::WS_POLICY_EXTENSION_TYPE
+    def initialize(@type__ : Win32cr::Networking::WindowsWebServices::WS_POLICY_EXTENSION_TYPE)
+    end
+  end
+
+  @[Extern]
+  struct WS_ENDPOINT_POLICY_EXTENSION
+    property policyExtension : Win32cr::Networking::WindowsWebServices::WS_POLICY_EXTENSION
+    property assertionName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property assertionNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*
+    property out__ : Out_e__struct_
+
+    # Nested Type Out_e__struct_
+    @[Extern]
+    struct Out_e__struct_
+    property assertionValue : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*
+    def initialize(@assertionValue : Win32cr::Networking::WindowsWebServices::WS_XML_BUFFER*)
+    end
+    end
+
+    def initialize(@policyExtension : Win32cr::Networking::WindowsWebServices::WS_POLICY_EXTENSION, @assertionName : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @assertionNs : Win32cr::Networking::WindowsWebServices::WS_XML_STRING*, @out__ : Out_e__struct_)
+    end
+  end
+
+  @[Extern]
+  struct WS_POLICY_CONSTRAINTS
+    property channelBinding : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_BINDING
+    property channelPropertyConstraints : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY_CONSTRAINT*
+    property channelPropertyConstraintCount : UInt32
+    property securityConstraints : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONSTRAINTS*
+    property policyExtensions : Win32cr::Networking::WindowsWebServices::WS_POLICY_EXTENSION**
+    property policyExtensionCount : UInt32
+    def initialize(@channelBinding : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_BINDING, @channelPropertyConstraints : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTY_CONSTRAINT*, @channelPropertyConstraintCount : UInt32, @securityConstraints : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONSTRAINTS*, @policyExtensions : Win32cr::Networking::WindowsWebServices::WS_POLICY_EXTENSION**, @policyExtensionCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WS_HTTP_POLICY_DESCRIPTION
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES)
+    end
+  end
+
+  @[Extern]
+  struct WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION
+    property securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES
+    def initialize(@securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES)
+    end
+  end
+
+  @[Extern]
+  struct WS_HTTP_SSL_POLICY_DESCRIPTION
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    property securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+    property sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES, @securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES, @sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION)
+    end
+  end
+
+  @[Extern]
+  struct WS_HTTP_HEADER_AUTH_SECURITY_BINDING_POLICY_DESCRIPTION
+    property securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES
+    def initialize(@securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES)
+    end
+  end
+
+  @[Extern]
+  struct WS_HTTP_HEADER_AUTH_POLICY_DESCRIPTION
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    property securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+    property httpHeaderAuthSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_HTTP_HEADER_AUTH_SECURITY_BINDING_POLICY_DESCRIPTION
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES, @securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES, @httpHeaderAuthSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_HTTP_HEADER_AUTH_SECURITY_BINDING_POLICY_DESCRIPTION)
+    end
+  end
+
+  @[Extern]
+  struct WS_HTTP_SSL_HEADER_AUTH_POLICY_DESCRIPTION
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    property securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+    property sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION
+    property httpHeaderAuthSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_HTTP_HEADER_AUTH_SECURITY_BINDING_POLICY_DESCRIPTION
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES, @securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES, @sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION, @httpHeaderAuthSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_HTTP_HEADER_AUTH_SECURITY_BINDING_POLICY_DESCRIPTION)
+    end
+  end
+
+  @[Extern]
+  struct WS_USERNAME_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION
+    property securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES
+    property bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE
+    def initialize(@securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES, @bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE)
+    end
+  end
+
+  @[Extern]
+  struct WS_HTTP_SSL_USERNAME_POLICY_DESCRIPTION
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    property securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+    property sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION
+    property usernameMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_USERNAME_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES, @securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES, @sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION, @usernameMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_USERNAME_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION)
+    end
+  end
+
+  @[Extern]
+  struct WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION
+    property securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES
+    property bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE
+    def initialize(@securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES, @bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE)
+    end
+  end
+
+  @[Extern]
+  struct WS_HTTP_SSL_KERBEROS_APREQ_POLICY_DESCRIPTION
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    property securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+    property sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION
+    property kerberosApreqMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES, @securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES, @sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION, @kerberosApreqMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION)
+    end
+  end
+
+  @[Extern]
+  struct WS_TCP_POLICY_DESCRIPTION
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES)
+    end
+  end
+
+  @[Extern]
+  struct WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION
+    property securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES
+    def initialize(@securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES)
+    end
+  end
+
+  @[Extern]
+  struct WS_TCP_SSPI_POLICY_DESCRIPTION
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    property securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+    property sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES, @securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES, @sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION)
+    end
+  end
+
+  @[Extern]
+  struct WS_TCP_SSPI_USERNAME_POLICY_DESCRIPTION
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    property securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+    property sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION
+    property usernameMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_USERNAME_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES, @securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES, @sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION, @usernameMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_USERNAME_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION)
+    end
+  end
+
+  @[Extern]
+  struct WS_TCP_SSPI_KERBEROS_APREQ_POLICY_DESCRIPTION
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    property securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+    property sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION
+    property kerberosApreqMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES, @securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES, @sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION, @kerberosApreqMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION)
+    end
+  end
+
+  @[Extern]
+  struct WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION
+    property securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES
+    property bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE
+    def initialize(@securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES, @bindingUsage : Win32cr::Networking::WindowsWebServices::WS_MESSAGE_SECURITY_USAGE)
+    end
+  end
+
+  @[Extern]
+  struct WS_SECURITY_CONTEXT_SECURITY_BINDING_POLICY_DESCRIPTION
+    property securityContextMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION
+    property securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+    def initialize(@securityContextMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION, @securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES)
+    end
+  end
+
+  @[Extern]
+  struct WS_TCP_SSPI_KERBEROS_APREQ_SECURITY_CONTEXT_POLICY_DESCRIPTION
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    property securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+    property sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION
+    property kerberosApreqMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION
+    property securityContextSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_SECURITY_BINDING_POLICY_DESCRIPTION
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES, @securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES, @sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION, @kerberosApreqMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION, @securityContextSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_SECURITY_BINDING_POLICY_DESCRIPTION)
+    end
+  end
+
+  @[Extern]
+  struct WS_TCP_SSPI_USERNAME_SECURITY_CONTEXT_POLICY_DESCRIPTION
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    property securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+    property sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION
+    property usernameMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_USERNAME_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION
+    property securityContextSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_SECURITY_BINDING_POLICY_DESCRIPTION
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES, @securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES, @sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION, @usernameMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_USERNAME_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION, @securityContextSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_SECURITY_BINDING_POLICY_DESCRIPTION)
+    end
+  end
+
+  @[Extern]
+  struct WS_HTTP_SSL_USERNAME_SECURITY_CONTEXT_POLICY_DESCRIPTION
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    property securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+    property sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION
+    property usernameMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_USERNAME_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION
+    property securityContextSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_SECURITY_BINDING_POLICY_DESCRIPTION
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES, @securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES, @sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION, @usernameMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_USERNAME_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION, @securityContextSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_SECURITY_BINDING_POLICY_DESCRIPTION)
+    end
+  end
+
+  @[Extern]
+  struct WS_HTTP_SSL_KERBEROS_APREQ_SECURITY_CONTEXT_POLICY_DESCRIPTION
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    property securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+    property sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION
+    property kerberosApreqMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION
+    property securityContextSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_SECURITY_BINDING_POLICY_DESCRIPTION
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES, @securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES, @sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION, @kerberosApreqMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION, @securityContextSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_SECURITY_BINDING_POLICY_DESCRIPTION)
+    end
+  end
+
+  @[Extern]
+  struct WS_HTTP_BINDING_TEMPLATE
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES)
+    end
+  end
+
+  @[Extern]
+  struct WS_TCP_BINDING_TEMPLATE
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES)
+    end
+  end
+
+  @[Extern]
+  struct WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE
+    property securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES
+    property localCertCredential : Win32cr::Networking::WindowsWebServices::WS_CERT_CREDENTIAL*
+    def initialize(@securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES, @localCertCredential : Win32cr::Networking::WindowsWebServices::WS_CERT_CREDENTIAL*)
+    end
+  end
+
+  @[Extern]
+  struct WS_HTTP_SSL_BINDING_TEMPLATE
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    property securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+    property sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES, @securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES, @sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE)
+    end
+  end
+
+  @[Extern]
+  struct WS_HTTP_HEADER_AUTH_SECURITY_BINDING_TEMPLATE
+    property securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES
+    property clientCredential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL*
+    def initialize(@securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES, @clientCredential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL*)
+    end
+  end
+
+  @[Extern]
+  struct WS_HTTP_HEADER_AUTH_BINDING_TEMPLATE
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    property securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+    property httpHeaderAuthSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_HTTP_HEADER_AUTH_SECURITY_BINDING_TEMPLATE
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES, @securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES, @httpHeaderAuthSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_HTTP_HEADER_AUTH_SECURITY_BINDING_TEMPLATE)
+    end
+  end
+
+  @[Extern]
+  struct WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE
+    property securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES
+    property clientCredential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL*
+    def initialize(@securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES, @clientCredential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL*)
+    end
+  end
+
+  @[Extern]
+  struct WS_TCP_SSPI_BINDING_TEMPLATE
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    property securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+    property sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES, @securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES, @sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE)
+    end
+  end
+
+  @[Extern]
+  struct WS_HTTP_SSL_HEADER_AUTH_BINDING_TEMPLATE
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    property securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+    property sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE
+    property httpHeaderAuthSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_HTTP_HEADER_AUTH_SECURITY_BINDING_TEMPLATE
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES, @securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES, @sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE, @httpHeaderAuthSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_HTTP_HEADER_AUTH_SECURITY_BINDING_TEMPLATE)
+    end
+  end
+
+  @[Extern]
+  struct WS_USERNAME_MESSAGE_SECURITY_BINDING_TEMPLATE
+    property securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES
+    property clientCredential : Win32cr::Networking::WindowsWebServices::WS_USERNAME_CREDENTIAL*
+    property passwordValidator : Win32cr::Networking::WindowsWebServices::WS_VALIDATE_PASSWORD_CALLBACK
+    property passwordValidatorCallbackState : Void*
+    def initialize(@securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES, @clientCredential : Win32cr::Networking::WindowsWebServices::WS_USERNAME_CREDENTIAL*, @passwordValidator : Win32cr::Networking::WindowsWebServices::WS_VALIDATE_PASSWORD_CALLBACK, @passwordValidatorCallbackState : Void*)
+    end
+  end
+
+  @[Extern]
+  struct WS_HTTP_SSL_USERNAME_BINDING_TEMPLATE
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    property securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+    property sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE
+    property usernameMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_USERNAME_MESSAGE_SECURITY_BINDING_TEMPLATE
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES, @securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES, @sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE, @usernameMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_USERNAME_MESSAGE_SECURITY_BINDING_TEMPLATE)
+    end
+  end
+
+  @[Extern]
+  struct WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_TEMPLATE
+    property securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES
+    property clientCredential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL*
+    def initialize(@securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES, @clientCredential : Win32cr::Networking::WindowsWebServices::WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL*)
+    end
+  end
+
+  @[Extern]
+  struct WS_HTTP_SSL_KERBEROS_APREQ_BINDING_TEMPLATE
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    property securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+    property sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE
+    property kerberosApreqMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_TEMPLATE
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES, @securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES, @sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE, @kerberosApreqMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_TEMPLATE)
+    end
+  end
+
+  @[Extern]
+  struct WS_TCP_SSPI_USERNAME_BINDING_TEMPLATE
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    property securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+    property sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE
+    property usernameMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_USERNAME_MESSAGE_SECURITY_BINDING_TEMPLATE
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES, @securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES, @sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE, @usernameMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_USERNAME_MESSAGE_SECURITY_BINDING_TEMPLATE)
+    end
+  end
+
+  @[Extern]
+  struct WS_TCP_SSPI_KERBEROS_APREQ_BINDING_TEMPLATE
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    property securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+    property sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE
+    property kerberosApreqMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_TEMPLATE
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES, @securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES, @sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE, @kerberosApreqMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_TEMPLATE)
+    end
+  end
+
+  @[Extern]
+  struct WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING_TEMPLATE
+    property securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES
+    def initialize(@securityBindingProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_BINDING_PROPERTIES)
+    end
+  end
+
+  @[Extern]
+  struct WS_SECURITY_CONTEXT_SECURITY_BINDING_TEMPLATE
+    property securityContextMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING_TEMPLATE
+    property securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+    def initialize(@securityContextMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING_TEMPLATE, @securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES)
+    end
+  end
+
+  @[Extern]
+  struct WS_HTTP_SSL_USERNAME_SECURITY_CONTEXT_BINDING_TEMPLATE
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    property securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+    property sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE
+    property usernameMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_USERNAME_MESSAGE_SECURITY_BINDING_TEMPLATE
+    property securityContextSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_SECURITY_BINDING_TEMPLATE
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES, @securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES, @sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE, @usernameMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_USERNAME_MESSAGE_SECURITY_BINDING_TEMPLATE, @securityContextSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_SECURITY_BINDING_TEMPLATE)
+    end
+  end
+
+  @[Extern]
+  struct WS_HTTP_SSL_KERBEROS_APREQ_SECURITY_CONTEXT_BINDING_TEMPLATE
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    property securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+    property sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE
+    property kerberosApreqMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_TEMPLATE
+    property securityContextSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_SECURITY_BINDING_TEMPLATE
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES, @securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES, @sslTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE, @kerberosApreqMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_TEMPLATE, @securityContextSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_SECURITY_BINDING_TEMPLATE)
+    end
+  end
+
+  @[Extern]
+  struct WS_TCP_SSPI_USERNAME_SECURITY_CONTEXT_BINDING_TEMPLATE
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    property securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+    property sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE
+    property usernameMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_USERNAME_MESSAGE_SECURITY_BINDING_TEMPLATE
+    property securityContextSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_SECURITY_BINDING_TEMPLATE
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES, @securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES, @sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE, @usernameMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_USERNAME_MESSAGE_SECURITY_BINDING_TEMPLATE, @securityContextSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_SECURITY_BINDING_TEMPLATE)
+    end
+  end
+
+  @[Extern]
+  struct WS_TCP_SSPI_KERBEROS_APREQ_SECURITY_CONTEXT_BINDING_TEMPLATE
+    property channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES
+    property securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES
+    property sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE
+    property kerberosApreqMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_TEMPLATE
+    property securityContextSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_SECURITY_BINDING_TEMPLATE
+    def initialize(@channelProperties : Win32cr::Networking::WindowsWebServices::WS_CHANNEL_PROPERTIES, @securityProperties : Win32cr::Networking::WindowsWebServices::WS_SECURITY_PROPERTIES, @sspiTransportSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE, @kerberosApreqMessageSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_TEMPLATE, @securityContextSecurityBinding : Win32cr::Networking::WindowsWebServices::WS_SECURITY_CONTEXT_SECURITY_BINDING_TEMPLATE)
+    end
+  end
+
+  @[Extern]
+  struct WEBAUTHN_RP_ENTITY_INFORMATION
+    property dwVersion : UInt32
+    property pwszId : Win32cr::Foundation::PWSTR
+    property pwszName : Win32cr::Foundation::PWSTR
+    property pwszIcon : Win32cr::Foundation::PWSTR
+    def initialize(@dwVersion : UInt32, @pwszId : Win32cr::Foundation::PWSTR, @pwszName : Win32cr::Foundation::PWSTR, @pwszIcon : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct WEBAUTHN_USER_ENTITY_INFORMATION
+    property dwVersion : UInt32
+    property cbId : UInt32
+    property pbId : UInt8*
+    property pwszName : Win32cr::Foundation::PWSTR
+    property pwszIcon : Win32cr::Foundation::PWSTR
+    property pwszDisplayName : Win32cr::Foundation::PWSTR
+    def initialize(@dwVersion : UInt32, @cbId : UInt32, @pbId : UInt8*, @pwszName : Win32cr::Foundation::PWSTR, @pwszIcon : Win32cr::Foundation::PWSTR, @pwszDisplayName : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct WEBAUTHN_CLIENT_DATA
+    property dwVersion : UInt32
+    property cbClientDataJSON : UInt32
+    property pbClientDataJSON : UInt8*
+    property pwszHashAlgId : Win32cr::Foundation::PWSTR
+    def initialize(@dwVersion : UInt32, @cbClientDataJSON : UInt32, @pbClientDataJSON : UInt8*, @pwszHashAlgId : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct WEBAUTHN_COSE_CREDENTIAL_PARAMETER
+    property dwVersion : UInt32
+    property pwszCredentialType : Win32cr::Foundation::PWSTR
+    property lAlg : Int32
+    def initialize(@dwVersion : UInt32, @pwszCredentialType : Win32cr::Foundation::PWSTR, @lAlg : Int32)
+    end
+  end
+
+  @[Extern]
+  struct WEBAUTHN_COSE_CREDENTIAL_PARAMETERS
+    property cCredentialParameters : UInt32
+    property pCredentialParameters : Win32cr::Networking::WindowsWebServices::WEBAUTHN_COSE_CREDENTIAL_PARAMETER*
+    def initialize(@cCredentialParameters : UInt32, @pCredentialParameters : Win32cr::Networking::WindowsWebServices::WEBAUTHN_COSE_CREDENTIAL_PARAMETER*)
+    end
+  end
+
+  @[Extern]
+  struct WEBAUTHN_CREDENTIAL
+    property dwVersion : UInt32
+    property cbId : UInt32
+    property pbId : UInt8*
+    property pwszCredentialType : Win32cr::Foundation::PWSTR
+    def initialize(@dwVersion : UInt32, @cbId : UInt32, @pbId : UInt8*, @pwszCredentialType : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct WEBAUTHN_CREDENTIALS
+    property cCredentials : UInt32
+    property pCredentials : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CREDENTIAL*
+    def initialize(@cCredentials : UInt32, @pCredentials : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CREDENTIAL*)
+    end
+  end
+
+  @[Extern]
+  struct WEBAUTHN_CREDENTIAL_EX
+    property dwVersion : UInt32
+    property cbId : UInt32
+    property pbId : UInt8*
+    property pwszCredentialType : Win32cr::Foundation::PWSTR
+    property dwTransports : UInt32
+    def initialize(@dwVersion : UInt32, @cbId : UInt32, @pbId : UInt8*, @pwszCredentialType : Win32cr::Foundation::PWSTR, @dwTransports : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WEBAUTHN_CREDENTIAL_LIST
+    property cCredentials : UInt32
+    property ppCredentials : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CREDENTIAL_EX**
+    def initialize(@cCredentials : UInt32, @ppCredentials : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CREDENTIAL_EX**)
+    end
+  end
+
+  @[Extern]
+  struct WEBAUTHN_CRED_PROTECT_EXTENSION_IN
+    property dwCredProtect : UInt32
+    property bRequireCredProtect : Win32cr::Foundation::BOOL
+    def initialize(@dwCredProtect : UInt32, @bRequireCredProtect : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct WEBAUTHN_CRED_BLOB_EXTENSION
+    property cbCredBlob : UInt32
+    property pbCredBlob : UInt8*
+    def initialize(@cbCredBlob : UInt32, @pbCredBlob : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct WEBAUTHN_EXTENSION
+    property pwszExtensionIdentifier : Win32cr::Foundation::PWSTR
+    property cbExtension : UInt32
+    property pvExtension : Void*
+    def initialize(@pwszExtensionIdentifier : Win32cr::Foundation::PWSTR, @cbExtension : UInt32, @pvExtension : Void*)
+    end
+  end
+
+  @[Extern]
+  struct WEBAUTHN_EXTENSIONS
+    property cExtensions : UInt32
+    property pExtensions : Win32cr::Networking::WindowsWebServices::WEBAUTHN_EXTENSION*
+    def initialize(@cExtensions : UInt32, @pExtensions : Win32cr::Networking::WindowsWebServices::WEBAUTHN_EXTENSION*)
+    end
+  end
+
+  @[Extern]
+  struct WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS
+    property dwVersion : UInt32
+    property dwTimeoutMilliseconds : UInt32
+    property credential_list : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CREDENTIALS
+    property extensions : Win32cr::Networking::WindowsWebServices::WEBAUTHN_EXTENSIONS
+    property dwAuthenticatorAttachment : UInt32
+    property bRequireResidentKey : Win32cr::Foundation::BOOL
+    property dwUserVerificationRequirement : UInt32
+    property dwAttestationConveyancePreference : UInt32
+    property dwFlags : UInt32
+    property pCancellationId : LibC::GUID*
+    property pExcludeCredentialList : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CREDENTIAL_LIST*
+    property dwEnterpriseAttestation : UInt32
+    property dwLargeBlobSupport : UInt32
+    property bPreferResidentKey : Win32cr::Foundation::BOOL
+    def initialize(@dwVersion : UInt32, @dwTimeoutMilliseconds : UInt32, @credential_list : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CREDENTIALS, @extensions : Win32cr::Networking::WindowsWebServices::WEBAUTHN_EXTENSIONS, @dwAuthenticatorAttachment : UInt32, @bRequireResidentKey : Win32cr::Foundation::BOOL, @dwUserVerificationRequirement : UInt32, @dwAttestationConveyancePreference : UInt32, @dwFlags : UInt32, @pCancellationId : LibC::GUID*, @pExcludeCredentialList : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CREDENTIAL_LIST*, @dwEnterpriseAttestation : UInt32, @dwLargeBlobSupport : UInt32, @bPreferResidentKey : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS
+    property dwVersion : UInt32
+    property dwTimeoutMilliseconds : UInt32
+    property credential_list : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CREDENTIALS
+    property extensions : Win32cr::Networking::WindowsWebServices::WEBAUTHN_EXTENSIONS
+    property dwAuthenticatorAttachment : UInt32
+    property dwUserVerificationRequirement : UInt32
+    property dwFlags : UInt32
+    property pwszU2fAppId : Win32cr::Foundation::PWSTR
+    property pbU2fAppId : Win32cr::Foundation::BOOL*
+    property pCancellationId : LibC::GUID*
+    property pAllowCredentialList : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CREDENTIAL_LIST*
+    property dwCredLargeBlobOperation : UInt32
+    property cbCredLargeBlob : UInt32
+    property pbCredLargeBlob : UInt8*
+    def initialize(@dwVersion : UInt32, @dwTimeoutMilliseconds : UInt32, @credential_list : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CREDENTIALS, @extensions : Win32cr::Networking::WindowsWebServices::WEBAUTHN_EXTENSIONS, @dwAuthenticatorAttachment : UInt32, @dwUserVerificationRequirement : UInt32, @dwFlags : UInt32, @pwszU2fAppId : Win32cr::Foundation::PWSTR, @pbU2fAppId : Win32cr::Foundation::BOOL*, @pCancellationId : LibC::GUID*, @pAllowCredentialList : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CREDENTIAL_LIST*, @dwCredLargeBlobOperation : UInt32, @cbCredLargeBlob : UInt32, @pbCredLargeBlob : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct WEBAUTHN_X5C
+    property cbData : UInt32
+    property pbData : UInt8*
+    def initialize(@cbData : UInt32, @pbData : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct WEBAUTHN_COMMON_ATTESTATION
+    property dwVersion : UInt32
+    property pwszAlg : Win32cr::Foundation::PWSTR
+    property lAlg : Int32
+    property cbSignature : UInt32
+    property pbSignature : UInt8*
+    property cX5c : UInt32
+    property pX5c : Win32cr::Networking::WindowsWebServices::WEBAUTHN_X5C*
+    property pwszVer : Win32cr::Foundation::PWSTR
+    property cbCertInfo : UInt32
+    property pbCertInfo : UInt8*
+    property cbPubArea : UInt32
+    property pbPubArea : UInt8*
+    def initialize(@dwVersion : UInt32, @pwszAlg : Win32cr::Foundation::PWSTR, @lAlg : Int32, @cbSignature : UInt32, @pbSignature : UInt8*, @cX5c : UInt32, @pX5c : Win32cr::Networking::WindowsWebServices::WEBAUTHN_X5C*, @pwszVer : Win32cr::Foundation::PWSTR, @cbCertInfo : UInt32, @pbCertInfo : UInt8*, @cbPubArea : UInt32, @pbPubArea : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct WEBAUTHN_CREDENTIAL_ATTESTATION
+    property dwVersion : UInt32
+    property pwszFormatType : Win32cr::Foundation::PWSTR
+    property cbAuthenticatorData : UInt32
+    property pbAuthenticatorData : UInt8*
+    property cbAttestation : UInt32
+    property pbAttestation : UInt8*
+    property dwAttestationDecodeType : UInt32
+    property pvAttestationDecode : Void*
+    property cbAttestationObject : UInt32
+    property pbAttestationObject : UInt8*
+    property cbCredentialId : UInt32
+    property pbCredentialId : UInt8*
+    property extensions : Win32cr::Networking::WindowsWebServices::WEBAUTHN_EXTENSIONS
+    property dwUsedTransport : UInt32
+    property bEpAtt : Win32cr::Foundation::BOOL
+    property bLargeBlobSupported : Win32cr::Foundation::BOOL
+    property bResidentKey : Win32cr::Foundation::BOOL
+    def initialize(@dwVersion : UInt32, @pwszFormatType : Win32cr::Foundation::PWSTR, @cbAuthenticatorData : UInt32, @pbAuthenticatorData : UInt8*, @cbAttestation : UInt32, @pbAttestation : UInt8*, @dwAttestationDecodeType : UInt32, @pvAttestationDecode : Void*, @cbAttestationObject : UInt32, @pbAttestationObject : UInt8*, @cbCredentialId : UInt32, @pbCredentialId : UInt8*, @extensions : Win32cr::Networking::WindowsWebServices::WEBAUTHN_EXTENSIONS, @dwUsedTransport : UInt32, @bEpAtt : Win32cr::Foundation::BOOL, @bLargeBlobSupported : Win32cr::Foundation::BOOL, @bResidentKey : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct WEBAUTHN_ASSERTION
+    property dwVersion : UInt32
+    property cbAuthenticatorData : UInt32
+    property pbAuthenticatorData : UInt8*
+    property cbSignature : UInt32
+    property pbSignature : UInt8*
+    property credential : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CREDENTIAL
+    property cbUserId : UInt32
+    property pbUserId : UInt8*
+    property extensions : Win32cr::Networking::WindowsWebServices::WEBAUTHN_EXTENSIONS
+    property cbCredLargeBlob : UInt32
+    property pbCredLargeBlob : UInt8*
+    property dwCredLargeBlobStatus : UInt32
+    def initialize(@dwVersion : UInt32, @cbAuthenticatorData : UInt32, @pbAuthenticatorData : UInt8*, @cbSignature : UInt32, @pbSignature : UInt8*, @credential : Win32cr::Networking::WindowsWebServices::WEBAUTHN_CREDENTIAL, @cbUserId : UInt32, @pbUserId : UInt8*, @extensions : Win32cr::Networking::WindowsWebServices::WEBAUTHN_EXTENSIONS, @cbCredLargeBlob : UInt32, @pbCredLargeBlob : UInt8*, @dwCredLargeBlobStatus : UInt32)
+    end
+  end
 
   @[Extern]
   record IContentPrefetcherTaskTriggerVtbl,
@@ -3097,7 +3993,6 @@ alias WS_SECURITY_ALGORITHM_PROPERTY_ID = LibC::Int
 
 
   @[Extern]
-  #@[Com("1b35a14a-6094-4799-a60e-e474e15d4dc9")]
   record IContentPrefetcherTaskTrigger, lpVtbl : IContentPrefetcherTaskTriggerVtbl* do
     GUID = LibC::GUID.new(0x1b35a14a_u32, 0x6094_u16, 0x4799_u16, StaticArray[0xa6_u8, 0xe_u8, 0xe4_u8, 0x74_u8, 0xe1_u8, 0x5d_u8, 0x4d_u8, 0xc9_u8])
     def query_interface(this : IContentPrefetcherTaskTrigger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

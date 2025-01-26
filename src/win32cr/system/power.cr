@@ -4,13 +4,13 @@ require "./threading.cr"
 
 module Win32cr::System::Power
   alias HPOWERNOTIFY = LibC::IntPtrT
-  alias EFFECTIVE_POWER_MODE_CALLBACK = Proc(Win32cr::System::Power::EFFECTIVE_POWER_MODE, Void*, Void)*
+  alias EFFECTIVE_POWER_MODE_CALLBACK = Proc(Win32cr::System::Power::EFFECTIVE_POWER_MODE, Void*, Void)
 
-  alias PWRSCHEMESENUMPROC_V1 = Proc(UInt32, UInt32, Int8*, UInt32, Int8*, Win32cr::System::Power::POWER_POLICY*, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOLEAN)*
+  alias PWRSCHEMESENUMPROC_V1 = Proc(UInt32, UInt32, Int8*, UInt32, Int8*, Win32cr::System::Power::POWER_POLICY*, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOLEAN)
 
-  alias PWRSCHEMESENUMPROC = Proc(UInt32, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::System::Power::POWER_POLICY*, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOLEAN)*
+  alias PWRSCHEMESENUMPROC = Proc(UInt32, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::System::Power::POWER_POLICY*, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOLEAN)
 
-  alias PDEVICE_NOTIFY_CALLBACK_ROUTINE = Proc(Void*, UInt32, Void*, UInt32)*
+  alias PDEVICE_NOTIFY_CALLBACK_ROUTINE = Proc(Void*, UInt32, Void*, UInt32)
 
   PROCESSOR_NUMBER_PKEY = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x5724c81d_u32, 0xd5af_u16, 0x4c1f_u16, StaticArray[0xa1_u8, 0x3_u8, 0xa0_u8, 0x6e_u8, 0x28_u8, 0xf2_u8, 0x4_u8, 0xc6_u8]), 1_u32)
   GUID_DEVICE_BATTERY = "72631e54-78a4-11d0-bcf7-00aa00b7b32a"
@@ -409,450 +409,594 @@ module Win32cr::System::Power
   end
 
   @[Extern]
-  record PROCESSOR_POWER_INFORMATION,
-    number : UInt64,
-    max_mhz : UInt64,
-    current_mhz : UInt64,
-    mhz_limit : UInt64,
-    max_idle_state : UInt64,
-    current_idle_state : UInt64
+  struct PROCESSOR_POWER_INFORMATION
+    property number : UInt64
+    property max_mhz : UInt64
+    property current_mhz : UInt64
+    property mhz_limit : UInt64
+    property max_idle_state : UInt64
+    property current_idle_state : UInt64
+    def initialize(@number : UInt64, @max_mhz : UInt64, @current_mhz : UInt64, @mhz_limit : UInt64, @max_idle_state : UInt64, @current_idle_state : UInt64)
+    end
+  end
 
   @[Extern]
-  record SYSTEM_POWER_INFORMATION,
-    max_idleness_allowed : UInt64,
-    idleness : UInt64,
-    time_remaining : UInt64,
-    cooling_mode : Win32cr::System::Power::POWER_COOLING_MODE
+  struct SYSTEM_POWER_INFORMATION
+    property max_idleness_allowed : UInt64
+    property idleness : UInt64
+    property time_remaining : UInt64
+    property cooling_mode : Win32cr::System::Power::POWER_COOLING_MODE
+    def initialize(@max_idleness_allowed : UInt64, @idleness : UInt64, @time_remaining : UInt64, @cooling_mode : Win32cr::System::Power::POWER_COOLING_MODE)
+    end
+  end
 
   @[Extern]
-  record GLOBAL_MACHINE_POWER_POLICY,
-    revision : UInt32,
-    lid_open_wake_ac : Win32cr::System::Power::SYSTEM_POWER_STATE,
-    lid_open_wake_dc : Win32cr::System::Power::SYSTEM_POWER_STATE,
-    broadcast_capacity_resolution : UInt32
+  struct GLOBAL_MACHINE_POWER_POLICY
+    property revision : UInt32
+    property lid_open_wake_ac : Win32cr::System::Power::SYSTEM_POWER_STATE
+    property lid_open_wake_dc : Win32cr::System::Power::SYSTEM_POWER_STATE
+    property broadcast_capacity_resolution : UInt32
+    def initialize(@revision : UInt32, @lid_open_wake_ac : Win32cr::System::Power::SYSTEM_POWER_STATE, @lid_open_wake_dc : Win32cr::System::Power::SYSTEM_POWER_STATE, @broadcast_capacity_resolution : UInt32)
+    end
+  end
 
   @[Extern]
-  record GLOBAL_USER_POWER_POLICY,
-    revision : UInt32,
-    power_button_ac : Win32cr::System::Power::POWER_ACTION_POLICY,
-    power_button_dc : Win32cr::System::Power::POWER_ACTION_POLICY,
-    sleep_button_ac : Win32cr::System::Power::POWER_ACTION_POLICY,
-    sleep_button_dc : Win32cr::System::Power::POWER_ACTION_POLICY,
-    lid_close_ac : Win32cr::System::Power::POWER_ACTION_POLICY,
-    lid_close_dc : Win32cr::System::Power::POWER_ACTION_POLICY,
-    discharge_policy : Win32cr::System::Power::SYSTEM_POWER_LEVEL[4],
-    global_flags : UInt32
+  struct GLOBAL_USER_POWER_POLICY
+    property revision : UInt32
+    property power_button_ac : Win32cr::System::Power::POWER_ACTION_POLICY
+    property power_button_dc : Win32cr::System::Power::POWER_ACTION_POLICY
+    property sleep_button_ac : Win32cr::System::Power::POWER_ACTION_POLICY
+    property sleep_button_dc : Win32cr::System::Power::POWER_ACTION_POLICY
+    property lid_close_ac : Win32cr::System::Power::POWER_ACTION_POLICY
+    property lid_close_dc : Win32cr::System::Power::POWER_ACTION_POLICY
+    property discharge_policy : Win32cr::System::Power::SYSTEM_POWER_LEVEL[4]
+    property global_flags : UInt32
+    def initialize(@revision : UInt32, @power_button_ac : Win32cr::System::Power::POWER_ACTION_POLICY, @power_button_dc : Win32cr::System::Power::POWER_ACTION_POLICY, @sleep_button_ac : Win32cr::System::Power::POWER_ACTION_POLICY, @sleep_button_dc : Win32cr::System::Power::POWER_ACTION_POLICY, @lid_close_ac : Win32cr::System::Power::POWER_ACTION_POLICY, @lid_close_dc : Win32cr::System::Power::POWER_ACTION_POLICY, @discharge_policy : Win32cr::System::Power::SYSTEM_POWER_LEVEL[4], @global_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record GLOBAL_POWER_POLICY,
-    user : Win32cr::System::Power::GLOBAL_USER_POWER_POLICY,
-    mach : Win32cr::System::Power::GLOBAL_MACHINE_POWER_POLICY
+  struct GLOBAL_POWER_POLICY
+    property user : Win32cr::System::Power::GLOBAL_USER_POWER_POLICY
+    property mach : Win32cr::System::Power::GLOBAL_MACHINE_POWER_POLICY
+    def initialize(@user : Win32cr::System::Power::GLOBAL_USER_POWER_POLICY, @mach : Win32cr::System::Power::GLOBAL_MACHINE_POWER_POLICY)
+    end
+  end
 
   @[Extern]
-  record MACHINE_POWER_POLICY,
-    revision : UInt32,
-    min_sleep_ac : Win32cr::System::Power::SYSTEM_POWER_STATE,
-    min_sleep_dc : Win32cr::System::Power::SYSTEM_POWER_STATE,
-    reduced_latency_sleep_ac : Win32cr::System::Power::SYSTEM_POWER_STATE,
-    reduced_latency_sleep_dc : Win32cr::System::Power::SYSTEM_POWER_STATE,
-    doze_timeout_ac : UInt32,
-    doze_timeout_dc : UInt32,
-    doze_s4_timeout_ac : UInt32,
-    doze_s4_timeout_dc : UInt32,
-    min_throttle_ac : UInt8,
-    min_throttle_dc : UInt8,
-    pad1 : UInt8[2],
-    over_throttled_ac : Win32cr::System::Power::POWER_ACTION_POLICY,
-    over_throttled_dc : Win32cr::System::Power::POWER_ACTION_POLICY
+  struct MACHINE_POWER_POLICY
+    property revision : UInt32
+    property min_sleep_ac : Win32cr::System::Power::SYSTEM_POWER_STATE
+    property min_sleep_dc : Win32cr::System::Power::SYSTEM_POWER_STATE
+    property reduced_latency_sleep_ac : Win32cr::System::Power::SYSTEM_POWER_STATE
+    property reduced_latency_sleep_dc : Win32cr::System::Power::SYSTEM_POWER_STATE
+    property doze_timeout_ac : UInt32
+    property doze_timeout_dc : UInt32
+    property doze_s4_timeout_ac : UInt32
+    property doze_s4_timeout_dc : UInt32
+    property min_throttle_ac : UInt8
+    property min_throttle_dc : UInt8
+    property pad1 : UInt8[2]
+    property over_throttled_ac : Win32cr::System::Power::POWER_ACTION_POLICY
+    property over_throttled_dc : Win32cr::System::Power::POWER_ACTION_POLICY
+    def initialize(@revision : UInt32, @min_sleep_ac : Win32cr::System::Power::SYSTEM_POWER_STATE, @min_sleep_dc : Win32cr::System::Power::SYSTEM_POWER_STATE, @reduced_latency_sleep_ac : Win32cr::System::Power::SYSTEM_POWER_STATE, @reduced_latency_sleep_dc : Win32cr::System::Power::SYSTEM_POWER_STATE, @doze_timeout_ac : UInt32, @doze_timeout_dc : UInt32, @doze_s4_timeout_ac : UInt32, @doze_s4_timeout_dc : UInt32, @min_throttle_ac : UInt8, @min_throttle_dc : UInt8, @pad1 : UInt8[2], @over_throttled_ac : Win32cr::System::Power::POWER_ACTION_POLICY, @over_throttled_dc : Win32cr::System::Power::POWER_ACTION_POLICY)
+    end
+  end
 
   @[Extern]
-  record MACHINE_PROCESSOR_POWER_POLICY,
-    revision : UInt32,
-    processor_policy_ac : Win32cr::System::Power::PROCESSOR_POWER_POLICY,
-    processor_policy_dc : Win32cr::System::Power::PROCESSOR_POWER_POLICY
+  struct MACHINE_PROCESSOR_POWER_POLICY
+    property revision : UInt32
+    property processor_policy_ac : Win32cr::System::Power::PROCESSOR_POWER_POLICY
+    property processor_policy_dc : Win32cr::System::Power::PROCESSOR_POWER_POLICY
+    def initialize(@revision : UInt32, @processor_policy_ac : Win32cr::System::Power::PROCESSOR_POWER_POLICY, @processor_policy_dc : Win32cr::System::Power::PROCESSOR_POWER_POLICY)
+    end
+  end
 
   @[Extern]
-  record USER_POWER_POLICY,
-    revision : UInt32,
-    idle_ac : Win32cr::System::Power::POWER_ACTION_POLICY,
-    idle_dc : Win32cr::System::Power::POWER_ACTION_POLICY,
-    idle_timeout_ac : UInt32,
-    idle_timeout_dc : UInt32,
-    idle_sensitivity_ac : UInt8,
-    idle_sensitivity_dc : UInt8,
-    throttle_policy_ac : UInt8,
-    throttle_policy_dc : UInt8,
-    max_sleep_ac : Win32cr::System::Power::SYSTEM_POWER_STATE,
-    max_sleep_dc : Win32cr::System::Power::SYSTEM_POWER_STATE,
-    reserved : UInt32[2],
-    video_timeout_ac : UInt32,
-    video_timeout_dc : UInt32,
-    spindown_timeout_ac : UInt32,
-    spindown_timeout_dc : UInt32,
-    optimize_for_power_ac : Win32cr::Foundation::BOOLEAN,
-    optimize_for_power_dc : Win32cr::Foundation::BOOLEAN,
-    fan_throttle_tolerance_ac : UInt8,
-    fan_throttle_tolerance_dc : UInt8,
-    forced_throttle_ac : UInt8,
-    forced_throttle_dc : UInt8
+  struct USER_POWER_POLICY
+    property revision : UInt32
+    property idle_ac : Win32cr::System::Power::POWER_ACTION_POLICY
+    property idle_dc : Win32cr::System::Power::POWER_ACTION_POLICY
+    property idle_timeout_ac : UInt32
+    property idle_timeout_dc : UInt32
+    property idle_sensitivity_ac : UInt8
+    property idle_sensitivity_dc : UInt8
+    property throttle_policy_ac : UInt8
+    property throttle_policy_dc : UInt8
+    property max_sleep_ac : Win32cr::System::Power::SYSTEM_POWER_STATE
+    property max_sleep_dc : Win32cr::System::Power::SYSTEM_POWER_STATE
+    property reserved : UInt32[2]
+    property video_timeout_ac : UInt32
+    property video_timeout_dc : UInt32
+    property spindown_timeout_ac : UInt32
+    property spindown_timeout_dc : UInt32
+    property optimize_for_power_ac : Win32cr::Foundation::BOOLEAN
+    property optimize_for_power_dc : Win32cr::Foundation::BOOLEAN
+    property fan_throttle_tolerance_ac : UInt8
+    property fan_throttle_tolerance_dc : UInt8
+    property forced_throttle_ac : UInt8
+    property forced_throttle_dc : UInt8
+    def initialize(@revision : UInt32, @idle_ac : Win32cr::System::Power::POWER_ACTION_POLICY, @idle_dc : Win32cr::System::Power::POWER_ACTION_POLICY, @idle_timeout_ac : UInt32, @idle_timeout_dc : UInt32, @idle_sensitivity_ac : UInt8, @idle_sensitivity_dc : UInt8, @throttle_policy_ac : UInt8, @throttle_policy_dc : UInt8, @max_sleep_ac : Win32cr::System::Power::SYSTEM_POWER_STATE, @max_sleep_dc : Win32cr::System::Power::SYSTEM_POWER_STATE, @reserved : UInt32[2], @video_timeout_ac : UInt32, @video_timeout_dc : UInt32, @spindown_timeout_ac : UInt32, @spindown_timeout_dc : UInt32, @optimize_for_power_ac : Win32cr::Foundation::BOOLEAN, @optimize_for_power_dc : Win32cr::Foundation::BOOLEAN, @fan_throttle_tolerance_ac : UInt8, @fan_throttle_tolerance_dc : UInt8, @forced_throttle_ac : UInt8, @forced_throttle_dc : UInt8)
+    end
+  end
 
   @[Extern]
-  record POWER_POLICY,
-    user : Win32cr::System::Power::USER_POWER_POLICY,
-    mach : Win32cr::System::Power::MACHINE_POWER_POLICY
+  struct POWER_POLICY
+    property user : Win32cr::System::Power::USER_POWER_POLICY
+    property mach : Win32cr::System::Power::MACHINE_POWER_POLICY
+    def initialize(@user : Win32cr::System::Power::USER_POWER_POLICY, @mach : Win32cr::System::Power::MACHINE_POWER_POLICY)
+    end
+  end
 
   @[Extern]
-  record DEVICE_NOTIFY_SUBSCRIBE_PARAMETERS,
-    callback : Win32cr::System::Power::PDEVICE_NOTIFY_CALLBACK_ROUTINE,
-    context : Void*
+  struct DEVICE_NOTIFY_SUBSCRIBE_PARAMETERS
+    property callback : Win32cr::System::Power::PDEVICE_NOTIFY_CALLBACK_ROUTINE
+    property context : Void*
+    def initialize(@callback : Win32cr::System::Power::PDEVICE_NOTIFY_CALLBACK_ROUTINE, @context : Void*)
+    end
+  end
 
   @[Extern]
-  record THERMAL_EVENT,
-    version : UInt32,
-    size : UInt32,
-    type__ : UInt32,
-    temperature : UInt32,
-    trip_point_temperature : UInt32,
-    initiator : Win32cr::Foundation::PWSTR
+  struct THERMAL_EVENT
+    property version : UInt32
+    property size : UInt32
+    property type__ : UInt32
+    property temperature : UInt32
+    property trip_point_temperature : UInt32
+    property initiator : Win32cr::Foundation::PWSTR
+    def initialize(@version : UInt32, @size : UInt32, @type__ : UInt32, @temperature : UInt32, @trip_point_temperature : UInt32, @initiator : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record BATTERY_QUERY_INFORMATION,
-    battery_tag : UInt32,
-    information_level : Win32cr::System::Power::BATTERY_QUERY_INFORMATION_LEVEL,
-    at_rate : UInt32
+  struct BATTERY_QUERY_INFORMATION
+    property battery_tag : UInt32
+    property information_level : Win32cr::System::Power::BATTERY_QUERY_INFORMATION_LEVEL
+    property at_rate : UInt32
+    def initialize(@battery_tag : UInt32, @information_level : Win32cr::System::Power::BATTERY_QUERY_INFORMATION_LEVEL, @at_rate : UInt32)
+    end
+  end
 
   @[Extern]
-  record BATTERY_INFORMATION,
-    capabilities : UInt32,
-    technology : UInt8,
-    reserved : UInt8[3],
-    chemistry : UInt8[4],
-    designed_capacity : UInt32,
-    full_charged_capacity : UInt32,
-    default_alert1 : UInt32,
-    default_alert2 : UInt32,
-    critical_bias : UInt32,
-    cycle_count : UInt32
+  struct BATTERY_INFORMATION
+    property capabilities : UInt32
+    property technology : UInt8
+    property reserved : UInt8[3]
+    property chemistry : UInt8[4]
+    property designed_capacity : UInt32
+    property full_charged_capacity : UInt32
+    property default_alert1 : UInt32
+    property default_alert2 : UInt32
+    property critical_bias : UInt32
+    property cycle_count : UInt32
+    def initialize(@capabilities : UInt32, @technology : UInt8, @reserved : UInt8[3], @chemistry : UInt8[4], @designed_capacity : UInt32, @full_charged_capacity : UInt32, @default_alert1 : UInt32, @default_alert2 : UInt32, @critical_bias : UInt32, @cycle_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record BATTERY_CHARGING_SOURCE,
-    type__ : Win32cr::System::Power::BATTERY_CHARGING_SOURCE_TYPE,
-    max_current : UInt32
+  struct BATTERY_CHARGING_SOURCE
+    property type__ : Win32cr::System::Power::BATTERY_CHARGING_SOURCE_TYPE
+    property max_current : UInt32
+    def initialize(@type__ : Win32cr::System::Power::BATTERY_CHARGING_SOURCE_TYPE, @max_current : UInt32)
+    end
+  end
 
   @[Extern]
-  record BATTERY_CHARGING_SOURCE_INFORMATION,
-    type__ : Win32cr::System::Power::BATTERY_CHARGING_SOURCE_TYPE,
-    source_online : Win32cr::Foundation::BOOLEAN
+  struct BATTERY_CHARGING_SOURCE_INFORMATION
+    property type__ : Win32cr::System::Power::BATTERY_CHARGING_SOURCE_TYPE
+    property source_online : Win32cr::Foundation::BOOLEAN
+    def initialize(@type__ : Win32cr::System::Power::BATTERY_CHARGING_SOURCE_TYPE, @source_online : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record BATTERY_SET_INFORMATION,
-    battery_tag : UInt32,
-    information_level : Win32cr::System::Power::BATTERY_SET_INFORMATION_LEVEL,
-    buffer : UInt8*
+  struct BATTERY_SET_INFORMATION
+    property battery_tag : UInt32
+    property information_level : Win32cr::System::Power::BATTERY_SET_INFORMATION_LEVEL
+    property buffer : UInt8*
+    def initialize(@battery_tag : UInt32, @information_level : Win32cr::System::Power::BATTERY_SET_INFORMATION_LEVEL, @buffer : UInt8*)
+    end
+  end
 
   @[Extern]
-  record BATTERY_CHARGER_STATUS,
-    type__ : Win32cr::System::Power::BATTERY_CHARGING_SOURCE_TYPE,
-    va_data : UInt32*
+  struct BATTERY_CHARGER_STATUS
+    property type__ : Win32cr::System::Power::BATTERY_CHARGING_SOURCE_TYPE
+    property va_data : UInt32*
+    def initialize(@type__ : Win32cr::System::Power::BATTERY_CHARGING_SOURCE_TYPE, @va_data : UInt32*)
+    end
+  end
 
   @[Extern]
-  record BATTERY_USB_CHARGER_STATUS,
-    type__ : Win32cr::System::Power::BATTERY_CHARGING_SOURCE_TYPE,
-    reserved : UInt32,
-    flags : UInt32,
-    max_current : UInt32,
-    voltage : UInt32,
-    port_type : Win32cr::System::Power::USB_CHARGER_PORT,
-    port_id : UInt64,
-    power_source_information : Void*,
-    oem_charger : LibC::GUID
+  struct BATTERY_USB_CHARGER_STATUS
+    property type__ : Win32cr::System::Power::BATTERY_CHARGING_SOURCE_TYPE
+    property reserved : UInt32
+    property flags : UInt32
+    property max_current : UInt32
+    property voltage : UInt32
+    property port_type : Win32cr::System::Power::USB_CHARGER_PORT
+    property port_id : UInt64
+    property power_source_information : Void*
+    property oem_charger : LibC::GUID
+    def initialize(@type__ : Win32cr::System::Power::BATTERY_CHARGING_SOURCE_TYPE, @reserved : UInt32, @flags : UInt32, @max_current : UInt32, @voltage : UInt32, @port_type : Win32cr::System::Power::USB_CHARGER_PORT, @port_id : UInt64, @power_source_information : Void*, @oem_charger : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record BATTERY_WAIT_STATUS,
-    battery_tag : UInt32,
-    timeout : UInt32,
-    power_state : UInt32,
-    low_capacity : UInt32,
-    high_capacity : UInt32
+  struct BATTERY_WAIT_STATUS
+    property battery_tag : UInt32
+    property timeout : UInt32
+    property power_state : UInt32
+    property low_capacity : UInt32
+    property high_capacity : UInt32
+    def initialize(@battery_tag : UInt32, @timeout : UInt32, @power_state : UInt32, @low_capacity : UInt32, @high_capacity : UInt32)
+    end
+  end
 
   @[Extern]
-  record BATTERY_STATUS,
-    power_state : UInt32,
-    capacity : UInt32,
-    voltage : UInt32,
-    rate : Int32
+  struct BATTERY_STATUS
+    property power_state : UInt32
+    property capacity : UInt32
+    property voltage : UInt32
+    property rate : Int32
+    def initialize(@power_state : UInt32, @capacity : UInt32, @voltage : UInt32, @rate : Int32)
+    end
+  end
 
   @[Extern]
-  record BATTERY_MANUFACTURE_DATE,
-    day : UInt8,
-    month : UInt8,
-    year : UInt16
+  struct BATTERY_MANUFACTURE_DATE
+    property day : UInt8
+    property month : UInt8
+    property year : UInt16
+    def initialize(@day : UInt8, @month : UInt8, @year : UInt16)
+    end
+  end
 
   @[Extern]
-  record THERMAL_INFORMATION,
-    thermal_stamp : UInt32,
-    thermal_constant1 : UInt32,
-    thermal_constant2 : UInt32,
-    processors : LibC::UIntPtrT,
-    sampling_period : UInt32,
-    current_temperature : UInt32,
-    passive_trip_point : UInt32,
-    critical_trip_point : UInt32,
-    active_trip_point_count : UInt8,
-    active_trip_point : UInt32[10]
+  struct THERMAL_INFORMATION
+    property thermal_stamp : UInt32
+    property thermal_constant1 : UInt32
+    property thermal_constant2 : UInt32
+    property processors : LibC::UIntPtrT
+    property sampling_period : UInt32
+    property current_temperature : UInt32
+    property passive_trip_point : UInt32
+    property critical_trip_point : UInt32
+    property active_trip_point_count : UInt8
+    property active_trip_point : UInt32[10]
+    def initialize(@thermal_stamp : UInt32, @thermal_constant1 : UInt32, @thermal_constant2 : UInt32, @processors : LibC::UIntPtrT, @sampling_period : UInt32, @current_temperature : UInt32, @passive_trip_point : UInt32, @critical_trip_point : UInt32, @active_trip_point_count : UInt8, @active_trip_point : UInt32[10])
+    end
+  end
 
   @[Extern]
-  record THERMAL_WAIT_READ,
-    timeout : UInt32,
-    low_temperature : UInt32,
-    high_temperature : UInt32
+  struct THERMAL_WAIT_READ
+    property timeout : UInt32
+    property low_temperature : UInt32
+    property high_temperature : UInt32
+    def initialize(@timeout : UInt32, @low_temperature : UInt32, @high_temperature : UInt32)
+    end
+  end
 
   @[Extern]
-  record THERMAL_POLICY,
-    version : UInt32,
-    wait_for_update : Win32cr::Foundation::BOOLEAN,
-    hibernate : Win32cr::Foundation::BOOLEAN,
-    critical : Win32cr::Foundation::BOOLEAN,
-    thermal_standby : Win32cr::Foundation::BOOLEAN,
-    activation_reasons : UInt32,
-    passive_limit : UInt32,
-    active_level : UInt32,
-    over_throttled : Win32cr::Foundation::BOOLEAN
+  struct THERMAL_POLICY
+    property version : UInt32
+    property wait_for_update : Win32cr::Foundation::BOOLEAN
+    property hibernate : Win32cr::Foundation::BOOLEAN
+    property critical : Win32cr::Foundation::BOOLEAN
+    property thermal_standby : Win32cr::Foundation::BOOLEAN
+    property activation_reasons : UInt32
+    property passive_limit : UInt32
+    property active_level : UInt32
+    property over_throttled : Win32cr::Foundation::BOOLEAN
+    def initialize(@version : UInt32, @wait_for_update : Win32cr::Foundation::BOOLEAN, @hibernate : Win32cr::Foundation::BOOLEAN, @critical : Win32cr::Foundation::BOOLEAN, @thermal_standby : Win32cr::Foundation::BOOLEAN, @activation_reasons : UInt32, @passive_limit : UInt32, @active_level : UInt32, @over_throttled : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record PROCESSOR_OBJECT_INFO,
-    physical_id : UInt32,
-    p_blk_address : UInt32,
-    p_blk_length : UInt8
+  struct PROCESSOR_OBJECT_INFO
+    property physical_id : UInt32
+    property p_blk_address : UInt32
+    property p_blk_length : UInt8
+    def initialize(@physical_id : UInt32, @p_blk_address : UInt32, @p_blk_length : UInt8)
+    end
+  end
 
   @[Extern]
-  record PROCESSOR_OBJECT_INFO_EX,
-    physical_id : UInt32,
-    p_blk_address : UInt32,
-    p_blk_length : UInt8,
-    initial_apic_id : UInt32
+  struct PROCESSOR_OBJECT_INFO_EX
+    property physical_id : UInt32
+    property p_blk_address : UInt32
+    property p_blk_length : UInt8
+    property initial_apic_id : UInt32
+    def initialize(@physical_id : UInt32, @p_blk_address : UInt32, @p_blk_length : UInt8, @initial_apic_id : UInt32)
+    end
+  end
 
   @[Extern]
-  record WAKE_ALARM_INFORMATION,
-    timer_identifier : UInt32,
-    timeout : UInt32
+  struct WAKE_ALARM_INFORMATION
+    property timer_identifier : UInt32
+    property timeout : UInt32
+    def initialize(@timer_identifier : UInt32, @timeout : UInt32)
+    end
+  end
 
   @[Extern]
-  record ACPI_REAL_TIME,
-    year : UInt16,
-    month : UInt8,
-    day : UInt8,
-    hour : UInt8,
-    minute : UInt8,
-    second : UInt8,
-    valid : UInt8,
-    milliseconds : UInt16,
-    time_zone : Int16,
-    day_light : UInt8,
-    reserved1 : UInt8[3]
+  struct ACPI_REAL_TIME
+    property year : UInt16
+    property month : UInt8
+    property day : UInt8
+    property hour : UInt8
+    property minute : UInt8
+    property second : UInt8
+    property valid : UInt8
+    property milliseconds : UInt16
+    property time_zone : Int16
+    property day_light : UInt8
+    property reserved1 : UInt8[3]
+    def initialize(@year : UInt16, @month : UInt8, @day : UInt8, @hour : UInt8, @minute : UInt8, @second : UInt8, @valid : UInt8, @milliseconds : UInt16, @time_zone : Int16, @day_light : UInt8, @reserved1 : UInt8[3])
+    end
+  end
 
   @[Extern]
-  record EMI_VERSION,
-    emi_version : UInt16
+  struct EMI_VERSION
+    property emi_version : UInt16
+    def initialize(@emi_version : UInt16)
+    end
+  end
 
   @[Extern]
-  record EMI_METADATA_SIZE,
-    metadata_size : UInt32
+  struct EMI_METADATA_SIZE
+    property metadata_size : UInt32
+    def initialize(@metadata_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record EMI_CHANNEL_MEASUREMENT_DATA,
-    absolute_energy : UInt64,
-    absolute_time : UInt64
+  struct EMI_CHANNEL_MEASUREMENT_DATA
+    property absolute_energy : UInt64
+    property absolute_time : UInt64
+    def initialize(@absolute_energy : UInt64, @absolute_time : UInt64)
+    end
+  end
 
   @[Extern]
-  record EMI_METADATA_V1,
-    measurement_unit : Win32cr::System::Power::EMI_MEASUREMENT_UNIT,
-    hardware_oem : UInt16[16],
-    hardware_model : UInt16[16],
-    hardware_revision : UInt16,
-    metered_hardware_name_size : UInt16,
-    metered_hardware_name : UInt16*
+  struct EMI_METADATA_V1
+    property measurement_unit : Win32cr::System::Power::EMI_MEASUREMENT_UNIT
+    property hardware_oem : UInt16[16]
+    property hardware_model : UInt16[16]
+    property hardware_revision : UInt16
+    property metered_hardware_name_size : UInt16
+    property metered_hardware_name : UInt16*
+    def initialize(@measurement_unit : Win32cr::System::Power::EMI_MEASUREMENT_UNIT, @hardware_oem : UInt16[16], @hardware_model : UInt16[16], @hardware_revision : UInt16, @metered_hardware_name_size : UInt16, @metered_hardware_name : UInt16*)
+    end
+  end
 
   @[Extern]
-  record EMI_CHANNEL_V2,
-    measurement_unit : Win32cr::System::Power::EMI_MEASUREMENT_UNIT,
-    channel_name_size : UInt16,
-    channel_name : UInt16*
+  struct EMI_CHANNEL_V2
+    property measurement_unit : Win32cr::System::Power::EMI_MEASUREMENT_UNIT
+    property channel_name_size : UInt16
+    property channel_name : UInt16*
+    def initialize(@measurement_unit : Win32cr::System::Power::EMI_MEASUREMENT_UNIT, @channel_name_size : UInt16, @channel_name : UInt16*)
+    end
+  end
 
   @[Extern]
-  record EMI_METADATA_V2,
-    hardware_oem : UInt16[16],
-    hardware_model : UInt16[16],
-    hardware_revision : UInt16,
-    channel_count : UInt16,
-    channels : Win32cr::System::Power::EMI_CHANNEL_V2*
+  struct EMI_METADATA_V2
+    property hardware_oem : UInt16[16]
+    property hardware_model : UInt16[16]
+    property hardware_revision : UInt16
+    property channel_count : UInt16
+    property channels : Win32cr::System::Power::EMI_CHANNEL_V2*
+    def initialize(@hardware_oem : UInt16[16], @hardware_model : UInt16[16], @hardware_revision : UInt16, @channel_count : UInt16, @channels : Win32cr::System::Power::EMI_CHANNEL_V2*)
+    end
+  end
 
   @[Extern]
-  record EMI_MEASUREMENT_DATA_V2,
-    channel_data : Win32cr::System::Power::EMI_CHANNEL_MEASUREMENT_DATA*
+  struct EMI_MEASUREMENT_DATA_V2
+    property channel_data : Win32cr::System::Power::EMI_CHANNEL_MEASUREMENT_DATA*
+    def initialize(@channel_data : Win32cr::System::Power::EMI_CHANNEL_MEASUREMENT_DATA*)
+    end
+  end
 
   @[Extern]
-  record CM_POWER_DATA,
-    pd_size : UInt32,
-    pd_most_recent_power_state : Win32cr::System::Power::DEVICE_POWER_STATE,
-    pd_capabilities : UInt32,
-    pd_d1_latency : UInt32,
-    pd_d2_latency : UInt32,
-    pd_d3_latency : UInt32,
-    pd_power_state_mapping : Win32cr::System::Power::DEVICE_POWER_STATE[7],
-    pd_deepest_system_wake : Win32cr::System::Power::SYSTEM_POWER_STATE
+  struct CM_POWER_DATA
+    property pd_size : UInt32
+    property pd_most_recent_power_state : Win32cr::System::Power::DEVICE_POWER_STATE
+    property pd_capabilities : UInt32
+    property pd_d1_latency : UInt32
+    property pd_d2_latency : UInt32
+    property pd_d3_latency : UInt32
+    property pd_power_state_mapping : Win32cr::System::Power::DEVICE_POWER_STATE[7]
+    property pd_deepest_system_wake : Win32cr::System::Power::SYSTEM_POWER_STATE
+    def initialize(@pd_size : UInt32, @pd_most_recent_power_state : Win32cr::System::Power::DEVICE_POWER_STATE, @pd_capabilities : UInt32, @pd_d1_latency : UInt32, @pd_d2_latency : UInt32, @pd_d3_latency : UInt32, @pd_power_state_mapping : Win32cr::System::Power::DEVICE_POWER_STATE[7], @pd_deepest_system_wake : Win32cr::System::Power::SYSTEM_POWER_STATE)
+    end
+  end
 
   @[Extern]
-  record SET_POWER_SETTING_VALUE,
-    version : UInt32,
-    guid : LibC::GUID,
-    power_condition : Win32cr::System::Power::SYSTEM_POWER_CONDITION,
-    data_length : UInt32,
-    data : UInt8*
+  struct SET_POWER_SETTING_VALUE
+    property version : UInt32
+    property guid : LibC::GUID
+    property power_condition : Win32cr::System::Power::SYSTEM_POWER_CONDITION
+    property data_length : UInt32
+    property data : UInt8*
+    def initialize(@version : UInt32, @guid : LibC::GUID, @power_condition : Win32cr::System::Power::SYSTEM_POWER_CONDITION, @data_length : UInt32, @data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record BATTERY_REPORTING_SCALE,
-    granularity : UInt32,
-    capacity : UInt32
+  struct BATTERY_REPORTING_SCALE
+    property granularity : UInt32
+    property capacity : UInt32
+    def initialize(@granularity : UInt32, @capacity : UInt32)
+    end
+  end
 
   @[Extern]
-  record POWER_ACTION_POLICY,
-    action : Win32cr::System::Power::POWER_ACTION,
-    flags : UInt32,
-    event_code : Win32cr::System::Power::POWER_ACTION_POLICY_EVENT_CODE
+  struct POWER_ACTION_POLICY
+    property action : Win32cr::System::Power::POWER_ACTION
+    property flags : UInt32
+    property event_code : Win32cr::System::Power::POWER_ACTION_POLICY_EVENT_CODE
+    def initialize(@action : Win32cr::System::Power::POWER_ACTION, @flags : UInt32, @event_code : Win32cr::System::Power::POWER_ACTION_POLICY_EVENT_CODE)
+    end
+  end
 
   @[Extern]
-  record SYSTEM_POWER_LEVEL,
-    enable : Win32cr::Foundation::BOOLEAN,
-    spare : UInt8[3],
-    battery_level : UInt32,
-    power_policy : Win32cr::System::Power::POWER_ACTION_POLICY,
-    min_system_state : Win32cr::System::Power::SYSTEM_POWER_STATE
+  struct SYSTEM_POWER_LEVEL
+    property enable : Win32cr::Foundation::BOOLEAN
+    property spare : UInt8[3]
+    property battery_level : UInt32
+    property power_policy : Win32cr::System::Power::POWER_ACTION_POLICY
+    property min_system_state : Win32cr::System::Power::SYSTEM_POWER_STATE
+    def initialize(@enable : Win32cr::Foundation::BOOLEAN, @spare : UInt8[3], @battery_level : UInt32, @power_policy : Win32cr::System::Power::POWER_ACTION_POLICY, @min_system_state : Win32cr::System::Power::SYSTEM_POWER_STATE)
+    end
+  end
 
   @[Extern]
-  record SYSTEM_POWER_POLICY,
-    revision : UInt32,
-    power_button : Win32cr::System::Power::POWER_ACTION_POLICY,
-    sleep_button : Win32cr::System::Power::POWER_ACTION_POLICY,
-    lid_close : Win32cr::System::Power::POWER_ACTION_POLICY,
-    lid_open_wake : Win32cr::System::Power::SYSTEM_POWER_STATE,
-    reserved : UInt32,
-    idle : Win32cr::System::Power::POWER_ACTION_POLICY,
-    idle_timeout : UInt32,
-    idle_sensitivity : UInt8,
-    dynamic_throttle : UInt8,
-    spare2 : UInt8[2],
-    min_sleep : Win32cr::System::Power::SYSTEM_POWER_STATE,
-    max_sleep : Win32cr::System::Power::SYSTEM_POWER_STATE,
-    reduced_latency_sleep : Win32cr::System::Power::SYSTEM_POWER_STATE,
-    win_logon_flags : UInt32,
-    spare3 : UInt32,
-    doze_s4_timeout : UInt32,
-    broadcast_capacity_resolution : UInt32,
-    discharge_policy : Win32cr::System::Power::SYSTEM_POWER_LEVEL[4],
-    video_timeout : UInt32,
-    video_dim_display : Win32cr::Foundation::BOOLEAN,
-    video_reserved : UInt32[3],
-    spindown_timeout : UInt32,
-    optimize_for_power : Win32cr::Foundation::BOOLEAN,
-    fan_throttle_tolerance : UInt8,
-    forced_throttle : UInt8,
-    min_throttle : UInt8,
-    over_throttled : Win32cr::System::Power::POWER_ACTION_POLICY
+  struct SYSTEM_POWER_POLICY
+    property revision : UInt32
+    property power_button : Win32cr::System::Power::POWER_ACTION_POLICY
+    property sleep_button : Win32cr::System::Power::POWER_ACTION_POLICY
+    property lid_close : Win32cr::System::Power::POWER_ACTION_POLICY
+    property lid_open_wake : Win32cr::System::Power::SYSTEM_POWER_STATE
+    property reserved : UInt32
+    property idle : Win32cr::System::Power::POWER_ACTION_POLICY
+    property idle_timeout : UInt32
+    property idle_sensitivity : UInt8
+    property dynamic_throttle : UInt8
+    property spare2 : UInt8[2]
+    property min_sleep : Win32cr::System::Power::SYSTEM_POWER_STATE
+    property max_sleep : Win32cr::System::Power::SYSTEM_POWER_STATE
+    property reduced_latency_sleep : Win32cr::System::Power::SYSTEM_POWER_STATE
+    property win_logon_flags : UInt32
+    property spare3 : UInt32
+    property doze_s4_timeout : UInt32
+    property broadcast_capacity_resolution : UInt32
+    property discharge_policy : Win32cr::System::Power::SYSTEM_POWER_LEVEL[4]
+    property video_timeout : UInt32
+    property video_dim_display : Win32cr::Foundation::BOOLEAN
+    property video_reserved : UInt32[3]
+    property spindown_timeout : UInt32
+    property optimize_for_power : Win32cr::Foundation::BOOLEAN
+    property fan_throttle_tolerance : UInt8
+    property forced_throttle : UInt8
+    property min_throttle : UInt8
+    property over_throttled : Win32cr::System::Power::POWER_ACTION_POLICY
+    def initialize(@revision : UInt32, @power_button : Win32cr::System::Power::POWER_ACTION_POLICY, @sleep_button : Win32cr::System::Power::POWER_ACTION_POLICY, @lid_close : Win32cr::System::Power::POWER_ACTION_POLICY, @lid_open_wake : Win32cr::System::Power::SYSTEM_POWER_STATE, @reserved : UInt32, @idle : Win32cr::System::Power::POWER_ACTION_POLICY, @idle_timeout : UInt32, @idle_sensitivity : UInt8, @dynamic_throttle : UInt8, @spare2 : UInt8[2], @min_sleep : Win32cr::System::Power::SYSTEM_POWER_STATE, @max_sleep : Win32cr::System::Power::SYSTEM_POWER_STATE, @reduced_latency_sleep : Win32cr::System::Power::SYSTEM_POWER_STATE, @win_logon_flags : UInt32, @spare3 : UInt32, @doze_s4_timeout : UInt32, @broadcast_capacity_resolution : UInt32, @discharge_policy : Win32cr::System::Power::SYSTEM_POWER_LEVEL[4], @video_timeout : UInt32, @video_dim_display : Win32cr::Foundation::BOOLEAN, @video_reserved : UInt32[3], @spindown_timeout : UInt32, @optimize_for_power : Win32cr::Foundation::BOOLEAN, @fan_throttle_tolerance : UInt8, @forced_throttle : UInt8, @min_throttle : UInt8, @over_throttled : Win32cr::System::Power::POWER_ACTION_POLICY)
+    end
+  end
 
   @[Extern]
-  record PROCESSOR_POWER_POLICY_INFO,
-    time_check : UInt32,
-    demote_limit : UInt32,
-    promote_limit : UInt32,
-    demote_percent : UInt8,
-    promote_percent : UInt8,
-    spare : UInt8[2],
-    _bitfield : UInt32
+  struct PROCESSOR_POWER_POLICY_INFO
+    property time_check : UInt32
+    property demote_limit : UInt32
+    property promote_limit : UInt32
+    property demote_percent : UInt8
+    property promote_percent : UInt8
+    property spare : UInt8[2]
+    property _bitfield : UInt32
+    def initialize(@time_check : UInt32, @demote_limit : UInt32, @promote_limit : UInt32, @demote_percent : UInt8, @promote_percent : UInt8, @spare : UInt8[2], @_bitfield : UInt32)
+    end
+  end
 
   @[Extern]
-  record PROCESSOR_POWER_POLICY,
-    revision : UInt32,
-    dynamic_throttle : UInt8,
-    spare : UInt8[3],
-    _bitfield : UInt32,
-    policy_count : UInt32,
-    policy : Win32cr::System::Power::PROCESSOR_POWER_POLICY_INFO[3]
+  struct PROCESSOR_POWER_POLICY
+    property revision : UInt32
+    property dynamic_throttle : UInt8
+    property spare : UInt8[3]
+    property _bitfield : UInt32
+    property policy_count : UInt32
+    property policy : Win32cr::System::Power::PROCESSOR_POWER_POLICY_INFO[3]
+    def initialize(@revision : UInt32, @dynamic_throttle : UInt8, @spare : UInt8[3], @_bitfield : UInt32, @policy_count : UInt32, @policy : Win32cr::System::Power::PROCESSOR_POWER_POLICY_INFO[3])
+    end
+  end
 
   @[Extern]
-  record ADMINISTRATOR_POWER_POLICY,
-    min_sleep : Win32cr::System::Power::SYSTEM_POWER_STATE,
-    max_sleep : Win32cr::System::Power::SYSTEM_POWER_STATE,
-    min_video_timeout : UInt32,
-    max_video_timeout : UInt32,
-    min_spindown_timeout : UInt32,
-    max_spindown_timeout : UInt32
+  struct ADMINISTRATOR_POWER_POLICY
+    property min_sleep : Win32cr::System::Power::SYSTEM_POWER_STATE
+    property max_sleep : Win32cr::System::Power::SYSTEM_POWER_STATE
+    property min_video_timeout : UInt32
+    property max_video_timeout : UInt32
+    property min_spindown_timeout : UInt32
+    property max_spindown_timeout : UInt32
+    def initialize(@min_sleep : Win32cr::System::Power::SYSTEM_POWER_STATE, @max_sleep : Win32cr::System::Power::SYSTEM_POWER_STATE, @min_video_timeout : UInt32, @max_video_timeout : UInt32, @min_spindown_timeout : UInt32, @max_spindown_timeout : UInt32)
+    end
+  end
 
   @[Extern]
-  record SYSTEM_POWER_CAPABILITIES,
-    power_button_present : Win32cr::Foundation::BOOLEAN,
-    sleep_button_present : Win32cr::Foundation::BOOLEAN,
-    lid_present : Win32cr::Foundation::BOOLEAN,
-    system_s1 : Win32cr::Foundation::BOOLEAN,
-    system_s2 : Win32cr::Foundation::BOOLEAN,
-    system_s3 : Win32cr::Foundation::BOOLEAN,
-    system_s4 : Win32cr::Foundation::BOOLEAN,
-    system_s5 : Win32cr::Foundation::BOOLEAN,
-    hiber_file_present : Win32cr::Foundation::BOOLEAN,
-    full_wake : Win32cr::Foundation::BOOLEAN,
-    video_dim_present : Win32cr::Foundation::BOOLEAN,
-    apm_present : Win32cr::Foundation::BOOLEAN,
-    ups_present : Win32cr::Foundation::BOOLEAN,
-    thermal_control : Win32cr::Foundation::BOOLEAN,
-    processor_throttle : Win32cr::Foundation::BOOLEAN,
-    processor_min_throttle : UInt8,
-    processor_max_throttle : UInt8,
-    fast_system_s4 : Win32cr::Foundation::BOOLEAN,
-    hiberboot : Win32cr::Foundation::BOOLEAN,
-    wake_alarm_present : Win32cr::Foundation::BOOLEAN,
-    ao_ac : Win32cr::Foundation::BOOLEAN,
-    disk_spin_down : Win32cr::Foundation::BOOLEAN,
-    hiber_file_type : UInt8,
-    ao_ac_connectivity_supported : Win32cr::Foundation::BOOLEAN,
-    spare3 : UInt8[6],
-    system_batteries_present : Win32cr::Foundation::BOOLEAN,
-    batteries_are_short_term : Win32cr::Foundation::BOOLEAN,
-    battery_scale : Win32cr::System::Power::BATTERY_REPORTING_SCALE[3],
-    ac_on_line_wake : Win32cr::System::Power::SYSTEM_POWER_STATE,
-    soft_lid_wake : Win32cr::System::Power::SYSTEM_POWER_STATE,
-    rtc_wake : Win32cr::System::Power::SYSTEM_POWER_STATE,
-    min_device_wake_state : Win32cr::System::Power::SYSTEM_POWER_STATE,
-    default_low_latency_wake : Win32cr::System::Power::SYSTEM_POWER_STATE
+  struct SYSTEM_POWER_CAPABILITIES
+    property power_button_present : Win32cr::Foundation::BOOLEAN
+    property sleep_button_present : Win32cr::Foundation::BOOLEAN
+    property lid_present : Win32cr::Foundation::BOOLEAN
+    property system_s1 : Win32cr::Foundation::BOOLEAN
+    property system_s2 : Win32cr::Foundation::BOOLEAN
+    property system_s3 : Win32cr::Foundation::BOOLEAN
+    property system_s4 : Win32cr::Foundation::BOOLEAN
+    property system_s5 : Win32cr::Foundation::BOOLEAN
+    property hiber_file_present : Win32cr::Foundation::BOOLEAN
+    property full_wake : Win32cr::Foundation::BOOLEAN
+    property video_dim_present : Win32cr::Foundation::BOOLEAN
+    property apm_present : Win32cr::Foundation::BOOLEAN
+    property ups_present : Win32cr::Foundation::BOOLEAN
+    property thermal_control : Win32cr::Foundation::BOOLEAN
+    property processor_throttle : Win32cr::Foundation::BOOLEAN
+    property processor_min_throttle : UInt8
+    property processor_max_throttle : UInt8
+    property fast_system_s4 : Win32cr::Foundation::BOOLEAN
+    property hiberboot : Win32cr::Foundation::BOOLEAN
+    property wake_alarm_present : Win32cr::Foundation::BOOLEAN
+    property ao_ac : Win32cr::Foundation::BOOLEAN
+    property disk_spin_down : Win32cr::Foundation::BOOLEAN
+    property hiber_file_type : UInt8
+    property ao_ac_connectivity_supported : Win32cr::Foundation::BOOLEAN
+    property spare3 : UInt8[6]
+    property system_batteries_present : Win32cr::Foundation::BOOLEAN
+    property batteries_are_short_term : Win32cr::Foundation::BOOLEAN
+    property battery_scale : Win32cr::System::Power::BATTERY_REPORTING_SCALE[3]
+    property ac_on_line_wake : Win32cr::System::Power::SYSTEM_POWER_STATE
+    property soft_lid_wake : Win32cr::System::Power::SYSTEM_POWER_STATE
+    property rtc_wake : Win32cr::System::Power::SYSTEM_POWER_STATE
+    property min_device_wake_state : Win32cr::System::Power::SYSTEM_POWER_STATE
+    property default_low_latency_wake : Win32cr::System::Power::SYSTEM_POWER_STATE
+    def initialize(@power_button_present : Win32cr::Foundation::BOOLEAN, @sleep_button_present : Win32cr::Foundation::BOOLEAN, @lid_present : Win32cr::Foundation::BOOLEAN, @system_s1 : Win32cr::Foundation::BOOLEAN, @system_s2 : Win32cr::Foundation::BOOLEAN, @system_s3 : Win32cr::Foundation::BOOLEAN, @system_s4 : Win32cr::Foundation::BOOLEAN, @system_s5 : Win32cr::Foundation::BOOLEAN, @hiber_file_present : Win32cr::Foundation::BOOLEAN, @full_wake : Win32cr::Foundation::BOOLEAN, @video_dim_present : Win32cr::Foundation::BOOLEAN, @apm_present : Win32cr::Foundation::BOOLEAN, @ups_present : Win32cr::Foundation::BOOLEAN, @thermal_control : Win32cr::Foundation::BOOLEAN, @processor_throttle : Win32cr::Foundation::BOOLEAN, @processor_min_throttle : UInt8, @processor_max_throttle : UInt8, @fast_system_s4 : Win32cr::Foundation::BOOLEAN, @hiberboot : Win32cr::Foundation::BOOLEAN, @wake_alarm_present : Win32cr::Foundation::BOOLEAN, @ao_ac : Win32cr::Foundation::BOOLEAN, @disk_spin_down : Win32cr::Foundation::BOOLEAN, @hiber_file_type : UInt8, @ao_ac_connectivity_supported : Win32cr::Foundation::BOOLEAN, @spare3 : UInt8[6], @system_batteries_present : Win32cr::Foundation::BOOLEAN, @batteries_are_short_term : Win32cr::Foundation::BOOLEAN, @battery_scale : Win32cr::System::Power::BATTERY_REPORTING_SCALE[3], @ac_on_line_wake : Win32cr::System::Power::SYSTEM_POWER_STATE, @soft_lid_wake : Win32cr::System::Power::SYSTEM_POWER_STATE, @rtc_wake : Win32cr::System::Power::SYSTEM_POWER_STATE, @min_device_wake_state : Win32cr::System::Power::SYSTEM_POWER_STATE, @default_low_latency_wake : Win32cr::System::Power::SYSTEM_POWER_STATE)
+    end
+  end
 
   @[Extern]
-  record SYSTEM_BATTERY_STATE,
-    ac_on_line : Win32cr::Foundation::BOOLEAN,
-    battery_present : Win32cr::Foundation::BOOLEAN,
-    charging : Win32cr::Foundation::BOOLEAN,
-    discharging : Win32cr::Foundation::BOOLEAN,
-    spare1 : Win32cr::Foundation::BOOLEAN[3],
-    tag : UInt8,
-    max_capacity : UInt32,
-    remaining_capacity : UInt32,
-    rate : UInt32,
-    estimated_time : UInt32,
-    default_alert1 : UInt32,
-    default_alert2 : UInt32
+  struct SYSTEM_BATTERY_STATE
+    property ac_on_line : Win32cr::Foundation::BOOLEAN
+    property battery_present : Win32cr::Foundation::BOOLEAN
+    property charging : Win32cr::Foundation::BOOLEAN
+    property discharging : Win32cr::Foundation::BOOLEAN
+    property spare1 : Win32cr::Foundation::BOOLEAN[3]
+    property tag : UInt8
+    property max_capacity : UInt32
+    property remaining_capacity : UInt32
+    property rate : UInt32
+    property estimated_time : UInt32
+    property default_alert1 : UInt32
+    property default_alert2 : UInt32
+    def initialize(@ac_on_line : Win32cr::Foundation::BOOLEAN, @battery_present : Win32cr::Foundation::BOOLEAN, @charging : Win32cr::Foundation::BOOLEAN, @discharging : Win32cr::Foundation::BOOLEAN, @spare1 : Win32cr::Foundation::BOOLEAN[3], @tag : UInt8, @max_capacity : UInt32, @remaining_capacity : UInt32, @rate : UInt32, @estimated_time : UInt32, @default_alert1 : UInt32, @default_alert2 : UInt32)
+    end
+  end
 
   @[Extern]
-  record POWERBROADCAST_SETTING,
-    power_setting : LibC::GUID,
-    data_length : UInt32,
-    data : UInt8*
+  struct POWERBROADCAST_SETTING
+    property power_setting : LibC::GUID
+    property data_length : UInt32
+    property data : UInt8*
+    def initialize(@power_setting : LibC::GUID, @data_length : UInt32, @data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record SYSTEM_POWER_STATUS,
-    ac_line_status : UInt8,
-    battery_flag : UInt8,
-    battery_life_percent : UInt8,
-    system_status_flag : UInt8,
-    battery_life_time : UInt32,
-    battery_full_life_time : UInt32
+  struct SYSTEM_POWER_STATUS
+    property ac_line_status : UInt8
+    property battery_flag : UInt8
+    property battery_life_percent : UInt8
+    property system_status_flag : UInt8
+    property battery_life_time : UInt32
+    property battery_full_life_time : UInt32
+    def initialize(@ac_line_status : UInt8, @battery_flag : UInt8, @battery_life_percent : UInt8, @system_status_flag : UInt8, @battery_life_time : UInt32, @battery_full_life_time : UInt32)
+    end
+  end
 
   @[Link("powrprof")]
   @[Link("user32")]

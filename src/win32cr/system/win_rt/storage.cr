@@ -46,7 +46,6 @@ module Win32cr::System::WinRT::Storage
 
 
   @[Extern]
-  #@[Com("332e5848-2e15-458e-85c4-c911c0c3d6f4")]
   record IRandomAccessStreamFileAccessMode, lpVtbl : IRandomAccessStreamFileAccessModeVtbl* do
     GUID = LibC::GUID.new(0x332e5848_u32, 0x2e15_u16, 0x458e_u16, StaticArray[0x85_u8, 0xc4_u8, 0xc9_u8, 0x11_u8, 0xc0_u8, 0xc3_u8, 0xd6_u8, 0xf4_u8])
     def query_interface(this : IRandomAccessStreamFileAccessMode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -73,7 +72,6 @@ module Win32cr::System::WinRT::Storage
 
 
   @[Extern]
-  #@[Com("d1019a0e-6243-4329-8497-2e75894d7710")]
   record IUnbufferedFileHandleOplockCallback, lpVtbl : IUnbufferedFileHandleOplockCallbackVtbl* do
     GUID = LibC::GUID.new(0xd1019a0e_u32, 0x6243_u16, 0x4329_u16, StaticArray[0x84_u8, 0x97_u8, 0x2e_u8, 0x75_u8, 0x89_u8, 0x4d_u8, 0x77_u8, 0x10_u8])
     def query_interface(this : IUnbufferedFileHandleOplockCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -101,7 +99,6 @@ module Win32cr::System::WinRT::Storage
 
 
   @[Extern]
-  #@[Com("a65c9109-42ab-4b94-a7b1-dd2e4e68515e")]
   record IUnbufferedFileHandleProvider, lpVtbl : IUnbufferedFileHandleProviderVtbl* do
     GUID = LibC::GUID.new(0xa65c9109_u32, 0x42ab_u16, 0x4b94_u16, StaticArray[0xa7_u8, 0xb1_u8, 0xdd_u8, 0x2e_u8, 0x4e_u8, 0x68_u8, 0x51_u8, 0x5e_u8])
     def query_interface(this : IUnbufferedFileHandleProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -131,7 +128,6 @@ module Win32cr::System::WinRT::Storage
 
 
   @[Extern]
-  #@[Com("826abe3d-3acd-47d3-84f2-88aaedcf6304")]
   record IOplockBreakingHandler, lpVtbl : IOplockBreakingHandlerVtbl* do
     GUID = LibC::GUID.new(0x826abe3d_u32, 0x3acd_u16, 0x47d3_u16, StaticArray[0x84_u8, 0xf2_u8, 0x88_u8, 0xaa_u8, 0xed_u8, 0xcf_u8, 0x63_u8, 0x4_u8])
     def query_interface(this : IOplockBreakingHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -158,7 +154,6 @@ module Win32cr::System::WinRT::Storage
 
 
   @[Extern]
-  #@[Com("5ca296b2-2c25-4d22-b785-b885c8201e6a")]
   record IStorageItemHandleAccess, lpVtbl : IStorageItemHandleAccessVtbl* do
     GUID = LibC::GUID.new(0x5ca296b2_u32, 0x2c25_u16, 0x4d22_u16, StaticArray[0xb7_u8, 0x85_u8, 0xb8_u8, 0x85_u8, 0xc8_u8, 0x20_u8, 0x1e_u8, 0x6a_u8])
     def query_interface(this : IStorageItemHandleAccess*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -185,7 +180,6 @@ module Win32cr::System::WinRT::Storage
 
 
   @[Extern]
-  #@[Com("df19938f-5462-48a0-be65-d2a3271a08d6")]
   record IStorageFolderHandleAccess, lpVtbl : IStorageFolderHandleAccessVtbl* do
     GUID = LibC::GUID.new(0xdf19938f_u32, 0x5462_u16, 0x48a0_u16, StaticArray[0xbe_u8, 0x65_u8, 0xd2_u8, 0xa3_u8, 0x27_u8, 0x1a_u8, 0x8_u8, 0xd6_u8])
     def query_interface(this : IStorageFolderHandleAccess*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

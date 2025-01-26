@@ -5,107 +5,107 @@ require "./ip_helper.cr"
 
 module Win32cr::NetworkManagement::Rras
   alias HRASCONN = LibC::IntPtrT
-  alias RASDIALFUNC = Proc(UInt32, Win32cr::NetworkManagement::Rras::RASCONNSTATE, UInt32, Void)*
+  alias RASDIALFUNC = Proc(UInt32, Win32cr::NetworkManagement::Rras::RASCONNSTATE, UInt32, Void)
 
-  alias RASDIALFUNC1 = Proc(Win32cr::NetworkManagement::Rras::HRASCONN, UInt32, Win32cr::NetworkManagement::Rras::RASCONNSTATE, UInt32, UInt32, Void)*
+  alias RASDIALFUNC1 = Proc(Win32cr::NetworkManagement::Rras::HRASCONN, UInt32, Win32cr::NetworkManagement::Rras::RASCONNSTATE, UInt32, UInt32, Void)
 
-  alias RASDIALFUNC2 = Proc(LibC::UIntPtrT, UInt32, Win32cr::NetworkManagement::Rras::HRASCONN, UInt32, Win32cr::NetworkManagement::Rras::RASCONNSTATE, UInt32, UInt32, UInt32)*
+  alias RASDIALFUNC2 = Proc(LibC::UIntPtrT, UInt32, Win32cr::NetworkManagement::Rras::HRASCONN, UInt32, Win32cr::NetworkManagement::Rras::RASCONNSTATE, UInt32, UInt32, UInt32)
 
-  alias ORASADFUNC = Proc(Win32cr::Foundation::HWND, Win32cr::Foundation::PSTR, UInt32, UInt32*, Win32cr::Foundation::BOOL)*
+  alias ORASADFUNC = Proc(Win32cr::Foundation::HWND, Win32cr::Foundation::PSTR, UInt32, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias RASADFUNCA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::NetworkManagement::Rras::RASADPARAMS*, UInt32*, Win32cr::Foundation::BOOL)*
+  alias RASADFUNCA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::NetworkManagement::Rras::RASADPARAMS*, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias RASADFUNCW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::NetworkManagement::Rras::RASADPARAMS*, UInt32*, Win32cr::Foundation::BOOL)*
+  alias RASADFUNCW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::NetworkManagement::Rras::RASADPARAMS*, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFNRASGETBUFFER = Proc(UInt8**, UInt32*, UInt32)*
+  alias PFNRASGETBUFFER = Proc(UInt8**, UInt32*, UInt32)
 
-  alias PFNRASFREEBUFFER = Proc(UInt8*, UInt32)*
+  alias PFNRASFREEBUFFER = Proc(UInt8*, UInt32)
 
-  alias PFNRASSENDBUFFER = Proc(Win32cr::Foundation::HANDLE, UInt8*, UInt32, UInt32)*
+  alias PFNRASSENDBUFFER = Proc(Win32cr::Foundation::HANDLE, UInt8*, UInt32, UInt32)
 
-  alias PFNRASRECEIVEBUFFER = Proc(Win32cr::Foundation::HANDLE, UInt8*, UInt32*, UInt32, Win32cr::Foundation::HANDLE, UInt32)*
+  alias PFNRASRECEIVEBUFFER = Proc(Win32cr::Foundation::HANDLE, UInt8*, UInt32*, UInt32, Win32cr::Foundation::HANDLE, UInt32)
 
-  alias PFNRASRETRIEVEBUFFER = Proc(Win32cr::Foundation::HANDLE, UInt8*, UInt32*, UInt32)*
+  alias PFNRASRETRIEVEBUFFER = Proc(Win32cr::Foundation::HANDLE, UInt8*, UInt32*, UInt32)
 
-  alias RasCustomScriptExecuteFn = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::NetworkManagement::Rras::PFNRASGETBUFFER, Win32cr::NetworkManagement::Rras::PFNRASFREEBUFFER, Win32cr::NetworkManagement::Rras::PFNRASSENDBUFFER, Win32cr::NetworkManagement::Rras::PFNRASRECEIVEBUFFER, Win32cr::NetworkManagement::Rras::PFNRASRETRIEVEBUFFER, Win32cr::Foundation::HWND, Win32cr::NetworkManagement::Rras::RASDIALPARAMSA*, Void*, UInt32)*
+  alias RasCustomScriptExecuteFn = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::NetworkManagement::Rras::PFNRASGETBUFFER, Win32cr::NetworkManagement::Rras::PFNRASFREEBUFFER, Win32cr::NetworkManagement::Rras::PFNRASSENDBUFFER, Win32cr::NetworkManagement::Rras::PFNRASRECEIVEBUFFER, Win32cr::NetworkManagement::Rras::PFNRASRETRIEVEBUFFER, Win32cr::Foundation::HWND, Win32cr::NetworkManagement::Rras::RASDIALPARAMSA*, Void*, UInt32)
 
-  alias PFNRASSETCOMMSETTINGS = Proc(Win32cr::Foundation::HANDLE, Win32cr::NetworkManagement::Rras::RASCOMMSETTINGS*, Void*, UInt32)*
+  alias PFNRASSETCOMMSETTINGS = Proc(Win32cr::Foundation::HANDLE, Win32cr::NetworkManagement::Rras::RASCOMMSETTINGS*, Void*, UInt32)
 
-  alias RasCustomHangUpFn = Proc(Win32cr::NetworkManagement::Rras::HRASCONN, UInt32)*
+  alias RasCustomHangUpFn = Proc(Win32cr::NetworkManagement::Rras::HRASCONN, UInt32)
 
-  alias RasCustomDialFn = Proc(Win32cr::Foundation::HINSTANCE, Win32cr::NetworkManagement::Rras::RASDIALEXTENSIONS*, Win32cr::Foundation::PWSTR, Win32cr::NetworkManagement::Rras::RASDIALPARAMSA*, UInt32, Void*, Win32cr::NetworkManagement::Rras::HRASCONN*, UInt32, UInt32)*
+  alias RasCustomDialFn = Proc(Win32cr::Foundation::HINSTANCE, Win32cr::NetworkManagement::Rras::RASDIALEXTENSIONS*, Win32cr::Foundation::PWSTR, Win32cr::NetworkManagement::Rras::RASDIALPARAMSA*, UInt32, Void*, Win32cr::NetworkManagement::Rras::HRASCONN*, UInt32, UInt32)
 
-  alias RasCustomDeleteEntryNotifyFn = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, UInt32)*
+  alias RasCustomDeleteEntryNotifyFn = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, UInt32)
 
-  alias RASPBDLGFUNCW = Proc(LibC::UIntPtrT, UInt32, Win32cr::Foundation::PWSTR, Void*, Void)*
+  alias RASPBDLGFUNCW = Proc(LibC::UIntPtrT, UInt32, Win32cr::Foundation::PWSTR, Void*, Void)
 
-  alias RASPBDLGFUNCA = Proc(LibC::UIntPtrT, UInt32, Win32cr::Foundation::PSTR, Void*, Void)*
+  alias RASPBDLGFUNCA = Proc(LibC::UIntPtrT, UInt32, Win32cr::Foundation::PSTR, Void*, Void)
 
-  alias RasCustomDialDlgFn = Proc(Win32cr::Foundation::HINSTANCE, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::NetworkManagement::Rras::RASDIALDLG*, Void*, Win32cr::Foundation::BOOL)*
+  alias RasCustomDialDlgFn = Proc(Win32cr::Foundation::HINSTANCE, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::NetworkManagement::Rras::RASDIALDLG*, Void*, Win32cr::Foundation::BOOL)
 
-  alias RasCustomEntryDlgFn = Proc(Win32cr::Foundation::HINSTANCE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::NetworkManagement::Rras::RASENTRYDLGA*, UInt32, Win32cr::Foundation::BOOL)*
+  alias RasCustomEntryDlgFn = Proc(Win32cr::Foundation::HINSTANCE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::NetworkManagement::Rras::RASENTRYDLGA*, UInt32, Win32cr::Foundation::BOOL)
 
-  alias PMPRADMINGETIPADDRESSFORUSER = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::BOOL*, UInt32)*
+  alias PMPRADMINGETIPADDRESSFORUSER = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::BOOL*, UInt32)
 
-  alias PMPRADMINRELEASEIPADRESS = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32*, Void)*
+  alias PMPRADMINRELEASEIPADRESS = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32*, Void)
 
-  alias PMPRADMINGETIPV6ADDRESSFORUSER = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Networking::WinSock::IN6_ADDR*, Win32cr::Foundation::BOOL*, UInt32)*
+  alias PMPRADMINGETIPV6ADDRESSFORUSER = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Networking::WinSock::IN6_ADDR*, Win32cr::Foundation::BOOL*, UInt32)
 
-  alias PMPRADMINRELEASEIPV6ADDRESSFORUSER = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Networking::WinSock::IN6_ADDR*, Void)*
+  alias PMPRADMINRELEASEIPV6ADDRESSFORUSER = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Networking::WinSock::IN6_ADDR*, Void)
 
-  alias PMPRADMINACCEPTNEWCONNECTION = Proc(Win32cr::NetworkManagement::Rras::RAS_CONNECTION_0*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_1*, Win32cr::Foundation::BOOL)*
+  alias PMPRADMINACCEPTNEWCONNECTION = Proc(Win32cr::NetworkManagement::Rras::RAS_CONNECTION_0*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_1*, Win32cr::Foundation::BOOL)
 
-  alias PMPRADMINACCEPTNEWCONNECTION2 = Proc(Win32cr::NetworkManagement::Rras::RAS_CONNECTION_0*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_1*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_2*, Win32cr::Foundation::BOOL)*
+  alias PMPRADMINACCEPTNEWCONNECTION2 = Proc(Win32cr::NetworkManagement::Rras::RAS_CONNECTION_0*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_1*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_2*, Win32cr::Foundation::BOOL)
 
-  alias PMPRADMINACCEPTNEWCONNECTION3 = Proc(Win32cr::NetworkManagement::Rras::RAS_CONNECTION_0*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_1*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_2*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_3*, Win32cr::Foundation::BOOL)*
+  alias PMPRADMINACCEPTNEWCONNECTION3 = Proc(Win32cr::NetworkManagement::Rras::RAS_CONNECTION_0*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_1*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_2*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_3*, Win32cr::Foundation::BOOL)
 
-  alias PMPRADMINACCEPTNEWLINK = Proc(Win32cr::NetworkManagement::Rras::RAS_PORT_0*, Win32cr::NetworkManagement::Rras::RAS_PORT_1*, Win32cr::Foundation::BOOL)*
+  alias PMPRADMINACCEPTNEWLINK = Proc(Win32cr::NetworkManagement::Rras::RAS_PORT_0*, Win32cr::NetworkManagement::Rras::RAS_PORT_1*, Win32cr::Foundation::BOOL)
 
-  alias PMPRADMINCONNECTIONHANGUPNOTIFICATION = Proc(Win32cr::NetworkManagement::Rras::RAS_CONNECTION_0*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_1*, Void)*
+  alias PMPRADMINCONNECTIONHANGUPNOTIFICATION = Proc(Win32cr::NetworkManagement::Rras::RAS_CONNECTION_0*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_1*, Void)
 
-  alias PMPRADMINCONNECTIONHANGUPNOTIFICATION2 = Proc(Win32cr::NetworkManagement::Rras::RAS_CONNECTION_0*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_1*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_2*, Void)*
+  alias PMPRADMINCONNECTIONHANGUPNOTIFICATION2 = Proc(Win32cr::NetworkManagement::Rras::RAS_CONNECTION_0*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_1*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_2*, Void)
 
-  alias PMPRADMINCONNECTIONHANGUPNOTIFICATION3 = Proc(Win32cr::NetworkManagement::Rras::RAS_CONNECTION_0*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_1*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_2*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_3, Void)*
+  alias PMPRADMINCONNECTIONHANGUPNOTIFICATION3 = Proc(Win32cr::NetworkManagement::Rras::RAS_CONNECTION_0*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_1*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_2*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_3, Void)
 
-  alias PMPRADMINLINKHANGUPNOTIFICATION = Proc(Win32cr::NetworkManagement::Rras::RAS_PORT_0*, Win32cr::NetworkManagement::Rras::RAS_PORT_1*, Void)*
+  alias PMPRADMINLINKHANGUPNOTIFICATION = Proc(Win32cr::NetworkManagement::Rras::RAS_PORT_0*, Win32cr::NetworkManagement::Rras::RAS_PORT_1*, Void)
 
-  alias PMPRADMINTERMINATEDLL = Proc(UInt32)*
+  alias PMPRADMINTERMINATEDLL = Proc(UInt32)
 
-  alias PMPRADMINACCEPTREAUTHENTICATION = Proc(Win32cr::NetworkManagement::Rras::RAS_CONNECTION_0*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_1*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_2*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_3*, Win32cr::Foundation::BOOL)*
+  alias PMPRADMINACCEPTREAUTHENTICATION = Proc(Win32cr::NetworkManagement::Rras::RAS_CONNECTION_0*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_1*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_2*, Win32cr::NetworkManagement::Rras::RAS_CONNECTION_3*, Win32cr::Foundation::BOOL)
 
-  alias PMPRADMINACCEPTNEWCONNECTIONEX = Proc(Win32cr::NetworkManagement::Rras::RAS_CONNECTION_EX*, Win32cr::Foundation::BOOL)*
+  alias PMPRADMINACCEPTNEWCONNECTIONEX = Proc(Win32cr::NetworkManagement::Rras::RAS_CONNECTION_EX*, Win32cr::Foundation::BOOL)
 
-  alias PMPRADMINACCEPTREAUTHENTICATIONEX = Proc(Win32cr::NetworkManagement::Rras::RAS_CONNECTION_EX*, Win32cr::Foundation::BOOL)*
+  alias PMPRADMINACCEPTREAUTHENTICATIONEX = Proc(Win32cr::NetworkManagement::Rras::RAS_CONNECTION_EX*, Win32cr::Foundation::BOOL)
 
-  alias PMPRADMINACCEPTTUNNELENDPOINTCHANGEEX = Proc(Win32cr::NetworkManagement::Rras::RAS_CONNECTION_EX*, Win32cr::Foundation::BOOL)*
+  alias PMPRADMINACCEPTTUNNELENDPOINTCHANGEEX = Proc(Win32cr::NetworkManagement::Rras::RAS_CONNECTION_EX*, Win32cr::Foundation::BOOL)
 
-  alias PMPRADMINCONNECTIONHANGUPNOTIFICATIONEX = Proc(Win32cr::NetworkManagement::Rras::RAS_CONNECTION_EX*, Void)*
+  alias PMPRADMINCONNECTIONHANGUPNOTIFICATIONEX = Proc(Win32cr::NetworkManagement::Rras::RAS_CONNECTION_EX*, Void)
 
-  alias PMPRADMINRASVALIDATEPREAUTHENTICATEDCONNECTIONEX = Proc(Win32cr::NetworkManagement::Rras::AUTH_VALIDATION_EX*, UInt32)*
+  alias PMPRADMINRASVALIDATEPREAUTHENTICATEDCONNECTIONEX = Proc(Win32cr::NetworkManagement::Rras::AUTH_VALIDATION_EX*, UInt32)
 
-  alias RASSECURITYPROC = Proc(UInt32)*
+  alias RASSECURITYPROC = Proc(UInt32)
 
-  alias PMGM_RPF_CALLBACK = Proc(UInt32, UInt32, UInt32, UInt32, UInt32*, UInt32*, UInt32*, UInt32, UInt8*, UInt8*, UInt32)*
+  alias PMGM_RPF_CALLBACK = Proc(UInt32, UInt32, UInt32, UInt32, UInt32*, UInt32*, UInt32*, UInt32, UInt8*, UInt8*, UInt32)
 
-  alias PMGM_CREATION_ALERT_CALLBACK = Proc(UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, Win32cr::NetworkManagement::Rras::MGM_IF_ENTRY*, UInt32)*
+  alias PMGM_CREATION_ALERT_CALLBACK = Proc(UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, Win32cr::NetworkManagement::Rras::MGM_IF_ENTRY*, UInt32)
 
-  alias PMGM_PRUNE_ALERT_CALLBACK = Proc(UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, Win32cr::Foundation::BOOL, UInt32*, UInt32)*
+  alias PMGM_PRUNE_ALERT_CALLBACK = Proc(UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, Win32cr::Foundation::BOOL, UInt32*, UInt32)
 
-  alias PMGM_JOIN_ALERT_CALLBACK = Proc(UInt32, UInt32, UInt32, UInt32, Win32cr::Foundation::BOOL, UInt32)*
+  alias PMGM_JOIN_ALERT_CALLBACK = Proc(UInt32, UInt32, UInt32, UInt32, Win32cr::Foundation::BOOL, UInt32)
 
-  alias PMGM_WRONG_IF_CALLBACK = Proc(UInt32, UInt32, UInt32, UInt32, UInt32, UInt8*, UInt32)*
+  alias PMGM_WRONG_IF_CALLBACK = Proc(UInt32, UInt32, UInt32, UInt32, UInt32, UInt8*, UInt32)
 
-  alias PMGM_LOCAL_JOIN_CALLBACK = Proc(UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32)*
+  alias PMGM_LOCAL_JOIN_CALLBACK = Proc(UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32)
 
-  alias PMGM_LOCAL_LEAVE_CALLBACK = Proc(UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32)*
+  alias PMGM_LOCAL_LEAVE_CALLBACK = Proc(UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32)
 
-  alias PMGM_DISABLE_IGMP_CALLBACK = Proc(UInt32, UInt32, UInt32)*
+  alias PMGM_DISABLE_IGMP_CALLBACK = Proc(UInt32, UInt32, UInt32)
 
-  alias PMGM_ENABLE_IGMP_CALLBACK = Proc(UInt32, UInt32, UInt32)*
+  alias PMGM_ENABLE_IGMP_CALLBACK = Proc(UInt32, UInt32, UInt32)
 
-  alias RTM_EVENT_CALLBACK = Proc(LibC::IntPtrT, Win32cr::NetworkManagement::Rras::RTM_EVENT_TYPE, Void*, Void*, UInt32)*
+  alias RTM_EVENT_CALLBACK = Proc(LibC::IntPtrT, Win32cr::NetworkManagement::Rras::RTM_EVENT_TYPE, Void*, Void*, UInt32)
 
-  alias RTM_ENTITY_EXPORT_METHOD = Proc(LibC::IntPtrT, LibC::IntPtrT, Win32cr::NetworkManagement::Rras::RTM_ENTITY_METHOD_INPUT*, Win32cr::NetworkManagement::Rras::RTM_ENTITY_METHOD_OUTPUT*, Void)*
+  alias RTM_ENTITY_EXPORT_METHOD = Proc(LibC::IntPtrT, LibC::IntPtrT, Win32cr::NetworkManagement::Rras::RTM_ENTITY_METHOD_INPUT*, Win32cr::NetworkManagement::Rras::RTM_ENTITY_METHOD_OUTPUT*, Void)
 
   RASNAP_ProbationTime = 1_u32
   RASTUNNELENDPOINT_UNKNOWN = 0_u32
@@ -1025,1650 +1025,2104 @@ module Win32cr::NetworkManagement::Rras
   end
 
   @[Extern]
-  record RASIPADDR,
-    a : UInt8,
-    b : UInt8,
-    c : UInt8,
-    d : UInt8
-
-  @[Extern]
-  record RASTUNNELENDPOINT,
-    dwType : UInt32,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      ipv4 : Win32cr::Networking::WinSock::IN_ADDR,
-      ipv6 : Win32cr::Networking::WinSock::IN6_ADDR
-
+  struct RASIPADDR
+    property a : UInt8
+    property b : UInt8
+    property c : UInt8
+    property d : UInt8
+    def initialize(@a : UInt8, @b : UInt8, @c : UInt8, @d : UInt8)
+    end
   end
 
   @[Extern]
-  record RASCONNW,
-    dwSize : UInt32,
-    hrasconn : Win32cr::NetworkManagement::Rras::HRASCONN,
-    szEntryName : UInt16[257],
-    szDeviceType : UInt16[17],
-    szDeviceName : UInt16[129],
-    szPhonebook : UInt16[260],
-    dwSubEntry : UInt32,
-    guidEntry : LibC::GUID,
-    dwFlags : UInt32,
-    luid : Win32cr::Foundation::LUID,
-    guidCorrelationId : LibC::GUID
-
-  @[Extern]
-  record RASCONNA,
-    dwSize : UInt32,
-    hrasconn : Win32cr::NetworkManagement::Rras::HRASCONN,
-    szEntryName : Win32cr::Foundation::CHAR[257],
-    szDeviceType : Win32cr::Foundation::CHAR[17],
-    szDeviceName : Win32cr::Foundation::CHAR[129],
-    szPhonebook : Win32cr::Foundation::CHAR[260],
-    dwSubEntry : UInt32,
-    guidEntry : LibC::GUID,
-    dwFlags : UInt32,
-    luid : Win32cr::Foundation::LUID,
-    guidCorrelationId : LibC::GUID
-
-  @[Extern]
-  record RASCONNSTATUSW,
-    dwSize : UInt32,
-    rasconnstate : Win32cr::NetworkManagement::Rras::RASCONNSTATE,
-    dwError : UInt32,
-    szDeviceType : UInt16[17],
-    szDeviceName : UInt16[129],
-    szPhoneNumber : UInt16[129],
-    localEndPoint : Win32cr::NetworkManagement::Rras::RASTUNNELENDPOINT,
-    remoteEndPoint : Win32cr::NetworkManagement::Rras::RASTUNNELENDPOINT,
-    rasconnsubstate : Win32cr::NetworkManagement::Rras::RASCONNSUBSTATE
-
-  @[Extern]
-  record RASCONNSTATUSA,
-    dwSize : UInt32,
-    rasconnstate : Win32cr::NetworkManagement::Rras::RASCONNSTATE,
-    dwError : UInt32,
-    szDeviceType : Win32cr::Foundation::CHAR[17],
-    szDeviceName : Win32cr::Foundation::CHAR[129],
-    szPhoneNumber : Win32cr::Foundation::CHAR[129],
-    localEndPoint : Win32cr::NetworkManagement::Rras::RASTUNNELENDPOINT,
-    remoteEndPoint : Win32cr::NetworkManagement::Rras::RASTUNNELENDPOINT,
-    rasconnsubstate : Win32cr::NetworkManagement::Rras::RASCONNSUBSTATE
-
-  @[Extern]
-  record RASDIALPARAMSW,
-    dwSize : UInt32,
-    szEntryName : UInt16[257],
-    szPhoneNumber : UInt16[129],
-    szCallbackNumber : UInt16[129],
-    szUserName : UInt16[257],
-    szPassword : UInt16[257],
-    szDomain : UInt16[16],
-    dwSubEntry : UInt32,
-    dwCallbackId : LibC::UIntPtrT,
-    dwIfIndex : UInt32,
-    szEncPassword : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record RASDIALPARAMSA,
-    dwSize : UInt32,
-    szEntryName : Win32cr::Foundation::CHAR[257],
-    szPhoneNumber : Win32cr::Foundation::CHAR[129],
-    szCallbackNumber : Win32cr::Foundation::CHAR[129],
-    szUserName : Win32cr::Foundation::CHAR[257],
-    szPassword : Win32cr::Foundation::CHAR[257],
-    szDomain : Win32cr::Foundation::CHAR[16],
-    dwSubEntry : UInt32,
-    dwCallbackId : LibC::UIntPtrT,
-    dwIfIndex : UInt32,
-    szEncPassword : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record RASEAPINFO,
-    dwSizeofEapInfo : UInt32,
-    pbEapInfo : UInt8*
-
-  @[Extern]
-  record RASDEVSPECIFICINFO,
-    dwSize : UInt32,
-    pbDevSpecificInfo : UInt8*
-
-  @[Extern]
-  record RASDIALEXTENSIONS,
-    dwSize : UInt32,
-    dwfOptions : UInt32,
-    hwndParent : Win32cr::Foundation::HWND,
-    reserved : LibC::UIntPtrT,
-    reserved1 : LibC::UIntPtrT,
-    ras_eap_info : Win32cr::NetworkManagement::Rras::RASEAPINFO,
-    fSkipPppAuth : Win32cr::Foundation::BOOL,
-    ras_dev_specific_info : Win32cr::NetworkManagement::Rras::RASDEVSPECIFICINFO
-
-  @[Extern]
-  record RASENTRYNAMEW,
-    dwSize : UInt32,
-    szEntryName : UInt16[257],
-    dwFlags : UInt32,
-    szPhonebookPath : UInt16[261]
-
-  @[Extern]
-  record RASENTRYNAMEA,
-    dwSize : UInt32,
-    szEntryName : Win32cr::Foundation::CHAR[257],
-    dwFlags : UInt32,
-    szPhonebookPath : Win32cr::Foundation::CHAR[261]
-
-  @[Extern]
-  record RASAMBW,
-    dwSize : UInt32,
-    dwError : UInt32,
-    szNetBiosError : UInt16[17],
-    bLana : UInt8
-
-  @[Extern]
-  record RASAMBA,
-    dwSize : UInt32,
-    dwError : UInt32,
-    szNetBiosError : Win32cr::Foundation::CHAR[17],
-    bLana : UInt8
-
-  @[Extern]
-  record RASPPPNBFW,
-    dwSize : UInt32,
-    dwError : UInt32,
-    dwNetBiosError : UInt32,
-    szNetBiosError : UInt16[17],
-    szWorkstationName : UInt16[17],
-    bLana : UInt8
-
-  @[Extern]
-  record RASPPPNBFA,
-    dwSize : UInt32,
-    dwError : UInt32,
-    dwNetBiosError : UInt32,
-    szNetBiosError : Win32cr::Foundation::CHAR[17],
-    szWorkstationName : Win32cr::Foundation::CHAR[17],
-    bLana : UInt8
-
-  @[Extern]
-  record RASIPXW,
-    dwSize : UInt32,
-    dwError : UInt32,
-    szIpxAddress : UInt16[22]
-
-  @[Extern]
-  record RASPPPIPXA,
-    dwSize : UInt32,
-    dwError : UInt32,
-    szIpxAddress : Win32cr::Foundation::CHAR[22]
-
-  @[Extern]
-  record RASPPPIPW,
-    dwSize : UInt32,
-    dwError : UInt32,
-    szIpAddress : UInt16[16],
-    szServerIpAddress : UInt16[16],
-    dwOptions : UInt32,
-    dwServerOptions : UInt32
-
-  @[Extern]
-  record RASPPPIPA,
-    dwSize : UInt32,
-    dwError : UInt32,
-    szIpAddress : Win32cr::Foundation::CHAR[16],
-    szServerIpAddress : Win32cr::Foundation::CHAR[16],
-    dwOptions : UInt32,
-    dwServerOptions : UInt32
-
-  @[Extern]
-  record RASPPPIPV6,
-    dwSize : UInt32,
-    dwError : UInt32,
-    bLocalInterfaceIdentifier : UInt8[8],
-    bPeerInterfaceIdentifier : UInt8[8],
-    bLocalCompressionProtocol : UInt8[2],
-    bPeerCompressionProtocol : UInt8[2]
-
-  @[Extern]
-  record RASPPPLCPW,
-    dwSize : UInt32,
-    fBundled : Win32cr::Foundation::BOOL,
-    dwError : UInt32,
-    dwAuthenticationProtocol : UInt32,
-    dwAuthenticationData : UInt32,
-    dwEapTypeId : UInt32,
-    dwServerAuthenticationProtocol : UInt32,
-    dwServerAuthenticationData : UInt32,
-    dwServerEapTypeId : UInt32,
-    fMultilink : Win32cr::Foundation::BOOL,
-    dwTerminateReason : UInt32,
-    dwServerTerminateReason : UInt32,
-    szReplyMessage : UInt16[1024],
-    dwOptions : UInt32,
-    dwServerOptions : UInt32
-
-  @[Extern]
-  record RASPPPLCPA,
-    dwSize : UInt32,
-    fBundled : Win32cr::Foundation::BOOL,
-    dwError : UInt32,
-    dwAuthenticationProtocol : UInt32,
-    dwAuthenticationData : UInt32,
-    dwEapTypeId : UInt32,
-    dwServerAuthenticationProtocol : UInt32,
-    dwServerAuthenticationData : UInt32,
-    dwServerEapTypeId : UInt32,
-    fMultilink : Win32cr::Foundation::BOOL,
-    dwTerminateReason : UInt32,
-    dwServerTerminateReason : UInt32,
-    szReplyMessage : Win32cr::Foundation::CHAR[1024],
-    dwOptions : UInt32,
-    dwServerOptions : UInt32
-
-  @[Extern]
-  record RASPPPCCP,
-    dwSize : UInt32,
-    dwError : UInt32,
-    dwCompressionAlgorithm : UInt32,
-    dwOptions : UInt32,
-    dwServerCompressionAlgorithm : UInt32,
-    dwServerOptions : UInt32
-
-  @[Extern]
-  record RASPPP_PROJECTION_INFO,
-    dwIPv4NegotiationError : UInt32,
-    ipv4Address : Win32cr::Networking::WinSock::IN_ADDR,
-    ipv4ServerAddress : Win32cr::Networking::WinSock::IN_ADDR,
-    dwIPv4Options : UInt32,
-    dwIPv4ServerOptions : UInt32,
-    dwIPv6NegotiationError : UInt32,
-    bInterfaceIdentifier : UInt8[8],
-    bServerInterfaceIdentifier : UInt8[8],
-    fBundled : Win32cr::Foundation::BOOL,
-    fMultilink : Win32cr::Foundation::BOOL,
-    dwAuthenticationProtocol : Win32cr::NetworkManagement::Rras::RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL,
-    dwAuthenticationData : Win32cr::NetworkManagement::Rras::RASPPP_PROJECTION_INFO_SERVER_AUTH_DATA,
-    dwServerAuthenticationProtocol : Win32cr::NetworkManagement::Rras::RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL,
-    dwServerAuthenticationData : Win32cr::NetworkManagement::Rras::RASPPP_PROJECTION_INFO_SERVER_AUTH_DATA,
-    dwEapTypeId : UInt32,
-    dwServerEapTypeId : UInt32,
-    dwLcpOptions : UInt32,
-    dwLcpServerOptions : UInt32,
-    dwCcpError : UInt32,
-    dwCcpCompressionAlgorithm : UInt32,
-    dwCcpServerCompressionAlgorithm : UInt32,
-    dwCcpOptions : UInt32,
-    dwCcpServerOptions : UInt32
-
-  @[Extern]
-  record RASIKEV2_PROJECTION_INFO,
-    dwIPv4NegotiationError : UInt32,
-    ipv4Address : Win32cr::Networking::WinSock::IN_ADDR,
-    ipv4ServerAddress : Win32cr::Networking::WinSock::IN_ADDR,
-    dwIPv6NegotiationError : UInt32,
-    ipv6Address : Win32cr::Networking::WinSock::IN6_ADDR,
-    ipv6ServerAddress : Win32cr::Networking::WinSock::IN6_ADDR,
-    dwPrefixLength : UInt32,
-    dwAuthenticationProtocol : UInt32,
-    dwEapTypeId : UInt32,
-    dwFlags : Win32cr::NetworkManagement::Rras::RASIKEV_PROJECTION_INFO_FLAGS,
-    dwEncryptionMethod : UInt32,
-    numIPv4ServerAddresses : UInt32,
-    ipv4ServerAddresses : Win32cr::Networking::WinSock::IN_ADDR*,
-    numIPv6ServerAddresses : UInt32,
-    ipv6ServerAddresses : Win32cr::Networking::WinSock::IN6_ADDR*
-
-  @[Extern]
-  record RAS_PROJECTION_INFO,
-    version : Win32cr::NetworkManagement::Rras::RASAPIVERSION,
-    type__ : Win32cr::NetworkManagement::Rras::RASPROJECTION_INFO_TYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct RASTUNNELENDPOINT
+    property dwType : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      ppp : Win32cr::NetworkManagement::Rras::RASPPP_PROJECTION_INFO,
-      ikev2 : Win32cr::NetworkManagement::Rras::RASIKEV2_PROJECTION_INFO
+    struct Anonymous_e__Union_
+    property ipv4 : Win32cr::Networking::WinSock::IN_ADDR
+    property ipv6 : Win32cr::Networking::WinSock::IN6_ADDR
+    def initialize(@ipv4 : Win32cr::Networking::WinSock::IN_ADDR, @ipv6 : Win32cr::Networking::WinSock::IN6_ADDR)
+    end
+    end
 
+    def initialize(@dwType : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record RASDEVINFOW,
-    dwSize : UInt32,
-    szDeviceType : UInt16[17],
-    szDeviceName : UInt16[129]
-
-  @[Extern]
-  record RASDEVINFOA,
-    dwSize : UInt32,
-    szDeviceType : Win32cr::Foundation::CHAR[17],
-    szDeviceName : Win32cr::Foundation::CHAR[129]
-
-  @[Extern]
-  record RASCTRYINFO,
-    dwSize : UInt32,
-    dwCountryID : UInt32,
-    dwNextCountryID : UInt32,
-    dwCountryCode : UInt32,
-    dwCountryNameOffset : UInt32
-
-  @[Extern]
-  record RASENTRYA,
-    dwSize : UInt32,
-    dwfOptions : UInt32,
-    dwCountryID : UInt32,
-    dwCountryCode : UInt32,
-    szAreaCode : Win32cr::Foundation::CHAR[11],
-    szLocalPhoneNumber : Win32cr::Foundation::CHAR[129],
-    dwAlternateOffset : UInt32,
-    ipaddr : Win32cr::NetworkManagement::Rras::RASIPADDR,
-    ipaddrDns : Win32cr::NetworkManagement::Rras::RASIPADDR,
-    ipaddrDnsAlt : Win32cr::NetworkManagement::Rras::RASIPADDR,
-    ipaddrWins : Win32cr::NetworkManagement::Rras::RASIPADDR,
-    ipaddrWinsAlt : Win32cr::NetworkManagement::Rras::RASIPADDR,
-    dwFrameSize : UInt32,
-    dwfNetProtocols : UInt32,
-    dwFramingProtocol : UInt32,
-    szScript : Win32cr::Foundation::CHAR[260],
-    szAutodialDll : Win32cr::Foundation::CHAR[260],
-    szAutodialFunc : Win32cr::Foundation::CHAR[260],
-    szDeviceType : Win32cr::Foundation::CHAR[17],
-    szDeviceName : Win32cr::Foundation::CHAR[129],
-    szX25PadType : Win32cr::Foundation::CHAR[33],
-    szX25Address : Win32cr::Foundation::CHAR[201],
-    szX25Facilities : Win32cr::Foundation::CHAR[201],
-    szX25UserData : Win32cr::Foundation::CHAR[201],
-    dwChannels : UInt32,
-    dwReserved1 : UInt32,
-    dwReserved2 : UInt32,
-    dwSubEntries : UInt32,
-    dwDialMode : Win32cr::NetworkManagement::Rras::RASENTRY_DIAL_MODE,
-    dwDialExtraPercent : UInt32,
-    dwDialExtraSampleSeconds : UInt32,
-    dwHangUpExtraPercent : UInt32,
-    dwHangUpExtraSampleSeconds : UInt32,
-    dwIdleDisconnectSeconds : UInt32,
-    dwType : UInt32,
-    dwEncryptionType : UInt32,
-    dwCustomAuthKey : UInt32,
-    guidId : LibC::GUID,
-    szCustomDialDll : Win32cr::Foundation::CHAR[260],
-    dwVpnStrategy : UInt32,
-    dwfOptions2 : UInt32,
-    dwfOptions3 : UInt32,
-    szDnsSuffix : Win32cr::Foundation::CHAR[256],
-    dwTcpWindowSize : UInt32,
-    szPrerequisitePbk : Win32cr::Foundation::CHAR[260],
-    szPrerequisiteEntry : Win32cr::Foundation::CHAR[257],
-    dwRedialCount : UInt32,
-    dwRedialPause : UInt32,
-    ipv6addrDns : Win32cr::Networking::WinSock::IN6_ADDR,
-    ipv6addrDnsAlt : Win32cr::Networking::WinSock::IN6_ADDR,
-    dwIPv4InterfaceMetric : UInt32,
-    dwIPv6InterfaceMetric : UInt32,
-    ipv6addr : Win32cr::Networking::WinSock::IN6_ADDR,
-    dwIPv6PrefixLength : UInt32,
-    dwNetworkOutageTime : UInt32,
-    szIDi : Win32cr::Foundation::CHAR[257],
-    szIDr : Win32cr::Foundation::CHAR[257],
-    fIsImsConfig : Win32cr::Foundation::BOOL,
-    idi_type : Win32cr::NetworkManagement::Rras::IKEV2_ID_PAYLOAD_TYPE,
-    idr_type : Win32cr::NetworkManagement::Rras::IKEV2_ID_PAYLOAD_TYPE,
-    fDisableIKEv2Fragmentation : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record RASENTRYW,
-    dwSize : UInt32,
-    dwfOptions : UInt32,
-    dwCountryID : UInt32,
-    dwCountryCode : UInt32,
-    szAreaCode : UInt16[11],
-    szLocalPhoneNumber : UInt16[129],
-    dwAlternateOffset : UInt32,
-    ipaddr : Win32cr::NetworkManagement::Rras::RASIPADDR,
-    ipaddrDns : Win32cr::NetworkManagement::Rras::RASIPADDR,
-    ipaddrDnsAlt : Win32cr::NetworkManagement::Rras::RASIPADDR,
-    ipaddrWins : Win32cr::NetworkManagement::Rras::RASIPADDR,
-    ipaddrWinsAlt : Win32cr::NetworkManagement::Rras::RASIPADDR,
-    dwFrameSize : UInt32,
-    dwfNetProtocols : UInt32,
-    dwFramingProtocol : UInt32,
-    szScript : UInt16[260],
-    szAutodialDll : UInt16[260],
-    szAutodialFunc : UInt16[260],
-    szDeviceType : UInt16[17],
-    szDeviceName : UInt16[129],
-    szX25PadType : UInt16[33],
-    szX25Address : UInt16[201],
-    szX25Facilities : UInt16[201],
-    szX25UserData : UInt16[201],
-    dwChannels : UInt32,
-    dwReserved1 : UInt32,
-    dwReserved2 : UInt32,
-    dwSubEntries : UInt32,
-    dwDialMode : Win32cr::NetworkManagement::Rras::RASENTRY_DIAL_MODE,
-    dwDialExtraPercent : UInt32,
-    dwDialExtraSampleSeconds : UInt32,
-    dwHangUpExtraPercent : UInt32,
-    dwHangUpExtraSampleSeconds : UInt32,
-    dwIdleDisconnectSeconds : UInt32,
-    dwType : UInt32,
-    dwEncryptionType : UInt32,
-    dwCustomAuthKey : UInt32,
-    guidId : LibC::GUID,
-    szCustomDialDll : UInt16[260],
-    dwVpnStrategy : UInt32,
-    dwfOptions2 : UInt32,
-    dwfOptions3 : UInt32,
-    szDnsSuffix : UInt16[256],
-    dwTcpWindowSize : UInt32,
-    szPrerequisitePbk : UInt16[260],
-    szPrerequisiteEntry : UInt16[257],
-    dwRedialCount : UInt32,
-    dwRedialPause : UInt32,
-    ipv6addrDns : Win32cr::Networking::WinSock::IN6_ADDR,
-    ipv6addrDnsAlt : Win32cr::Networking::WinSock::IN6_ADDR,
-    dwIPv4InterfaceMetric : UInt32,
-    dwIPv6InterfaceMetric : UInt32,
-    ipv6addr : Win32cr::Networking::WinSock::IN6_ADDR,
-    dwIPv6PrefixLength : UInt32,
-    dwNetworkOutageTime : UInt32,
-    szIDi : UInt16[257],
-    szIDr : UInt16[257],
-    fIsImsConfig : Win32cr::Foundation::BOOL,
-    idi_type : Win32cr::NetworkManagement::Rras::IKEV2_ID_PAYLOAD_TYPE,
-    idr_type : Win32cr::NetworkManagement::Rras::IKEV2_ID_PAYLOAD_TYPE,
-    fDisableIKEv2Fragmentation : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record RASADPARAMS,
-    dwSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    dwFlags : UInt32,
-    xDlg : Int32,
-    yDlg : Int32
-
-  @[Extern]
-  record RASSUBENTRYA,
-    dwSize : UInt32,
-    dwfFlags : UInt32,
-    szDeviceType : Win32cr::Foundation::CHAR[17],
-    szDeviceName : Win32cr::Foundation::CHAR[129],
-    szLocalPhoneNumber : Win32cr::Foundation::CHAR[129],
-    dwAlternateOffset : UInt32
-
-  @[Extern]
-  record RASSUBENTRYW,
-    dwSize : UInt32,
-    dwfFlags : UInt32,
-    szDeviceType : UInt16[17],
-    szDeviceName : UInt16[129],
-    szLocalPhoneNumber : UInt16[129],
-    dwAlternateOffset : UInt32
-
-  @[Extern]
-  record RASCREDENTIALSA,
-    dwSize : UInt32,
-    dwMask : UInt32,
-    szUserName : Win32cr::Foundation::CHAR[257],
-    szPassword : Win32cr::Foundation::CHAR[257],
-    szDomain : Win32cr::Foundation::CHAR[16]
-
-  @[Extern]
-  record RASCREDENTIALSW,
-    dwSize : UInt32,
-    dwMask : UInt32,
-    szUserName : UInt16[257],
-    szPassword : UInt16[257],
-    szDomain : UInt16[16]
-
-  @[Extern]
-  record RASAUTODIALENTRYA,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwDialingLocation : UInt32,
-    szEntry : Win32cr::Foundation::CHAR[257]
-
-  @[Extern]
-  record RASAUTODIALENTRYW,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwDialingLocation : UInt32,
-    szEntry : UInt16[257]
-
-  @[Extern]
-  record RASEAPUSERIDENTITYA,
-    szUserName : Win32cr::Foundation::CHAR[257],
-    dwSizeofEapInfo : UInt32,
-    pbEapInfo : UInt8*
-
-  @[Extern]
-  record RASEAPUSERIDENTITYW,
-    szUserName : UInt16[257],
-    dwSizeofEapInfo : UInt32,
-    pbEapInfo : UInt8*
-
-  @[Extern]
-  record RASCOMMSETTINGS,
-    dwSize : UInt32,
-    bParity : UInt8,
-    bStop : UInt8,
-    bByteSize : UInt8,
-    bAlign : UInt8
-
-  @[Extern]
-  record RASCUSTOMSCRIPTEXTENSIONS,
-    dwSize : UInt32,
-    pfnRasSetCommSettings : Win32cr::NetworkManagement::Rras::PFNRASSETCOMMSETTINGS
-
-  @[Extern]
-  record RAS_STATS,
-    dwSize : UInt32,
-    dwBytesXmited : UInt32,
-    dwBytesRcved : UInt32,
-    dwFramesXmited : UInt32,
-    dwFramesRcved : UInt32,
-    dwCrcErr : UInt32,
-    dwTimeoutErr : UInt32,
-    dwAlignmentErr : UInt32,
-    dwHardwareOverrunErr : UInt32,
-    dwFramingErr : UInt32,
-    dwBufferOverrunErr : UInt32,
-    dwCompressionRatioIn : UInt32,
-    dwCompressionRatioOut : UInt32,
-    dwBps : UInt32,
-    dwConnectDuration : UInt32
-
-  @[Extern]
-  record RASUPDATECONN,
-    version : Win32cr::NetworkManagement::Rras::RASAPIVERSION,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwIfIndex : UInt32,
-    localEndPoint : Win32cr::NetworkManagement::Rras::RASTUNNELENDPOINT,
-    remoteEndPoint : Win32cr::NetworkManagement::Rras::RASTUNNELENDPOINT
-
-  @[Extern]
-  record RASNOUSERW,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwTimeoutMs : UInt32,
-    szUserName : UInt16[257],
-    szPassword : UInt16[257],
-    szDomain : UInt16[16]
-
-  @[Extern]
-  record RASNOUSERA,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwTimeoutMs : UInt32,
-    szUserName : Win32cr::Foundation::CHAR[257],
-    szPassword : Win32cr::Foundation::CHAR[257],
-    szDomain : Win32cr::Foundation::CHAR[16]
-
-  @[Extern]
-  record RASPBDLGW,
-    dwSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    dwFlags : UInt32,
-    xDlg : Int32,
-    yDlg : Int32,
-    dwCallbackId : LibC::UIntPtrT,
-    pCallback : Win32cr::NetworkManagement::Rras::RASPBDLGFUNCW,
-    dwError : UInt32,
-    reserved : LibC::UIntPtrT,
-    reserved2 : LibC::UIntPtrT
-
-  @[Extern]
-  record RASPBDLGA,
-    dwSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    dwFlags : UInt32,
-    xDlg : Int32,
-    yDlg : Int32,
-    dwCallbackId : LibC::UIntPtrT,
-    pCallback : Win32cr::NetworkManagement::Rras::RASPBDLGFUNCA,
-    dwError : UInt32,
-    reserved : LibC::UIntPtrT,
-    reserved2 : LibC::UIntPtrT
-
-  @[Extern]
-  record RASENTRYDLGW,
-    dwSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    dwFlags : UInt32,
-    xDlg : Int32,
-    yDlg : Int32,
-    szEntry : UInt16[257],
-    dwError : UInt32,
-    reserved : LibC::UIntPtrT,
-    reserved2 : LibC::UIntPtrT
-
-  @[Extern]
-  record RASENTRYDLGA,
-    dwSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    dwFlags : UInt32,
-    xDlg : Int32,
-    yDlg : Int32,
-    szEntry : Win32cr::Foundation::CHAR[257],
-    dwError : UInt32,
-    reserved : LibC::UIntPtrT,
-    reserved2 : LibC::UIntPtrT
-
-  @[Extern]
-  record RASDIALDLG,
-    dwSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    dwFlags : UInt32,
-    xDlg : Int32,
-    yDlg : Int32,
-    dwSubEntry : UInt32,
-    dwError : UInt32,
-    reserved : LibC::UIntPtrT,
-    reserved2 : LibC::UIntPtrT
-
-  @[Extern]
-  record MPR_INTERFACE_0,
-    wszInterfaceName : UInt16[257],
-    hInterface : Win32cr::Foundation::HANDLE,
-    fEnabled : Win32cr::Foundation::BOOL,
-    dwIfType : Win32cr::NetworkManagement::Rras::ROUTER_INTERFACE_TYPE,
-    dwConnectionState : Win32cr::NetworkManagement::Rras::ROUTER_CONNECTION_STATE,
-    fUnReachabilityReasons : UInt32,
-    dwLastError : UInt32
-
-  @[Extern]
-  record MPR_IPINIP_INTERFACE_0,
-    wszFriendlyName : UInt16[257],
-    guid : LibC::GUID
-
-  @[Extern]
-  record MPR_INTERFACE_1,
-    wszInterfaceName : UInt16[257],
-    hInterface : Win32cr::Foundation::HANDLE,
-    fEnabled : Win32cr::Foundation::BOOL,
-    dwIfType : Win32cr::NetworkManagement::Rras::ROUTER_INTERFACE_TYPE,
-    dwConnectionState : Win32cr::NetworkManagement::Rras::ROUTER_CONNECTION_STATE,
-    fUnReachabilityReasons : UInt32,
-    dwLastError : UInt32,
-    lpwsDialoutHoursRestriction : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record MPR_INTERFACE_2,
-    wszInterfaceName : UInt16[257],
-    hInterface : Win32cr::Foundation::HANDLE,
-    fEnabled : Win32cr::Foundation::BOOL,
-    dwIfType : Win32cr::NetworkManagement::Rras::ROUTER_INTERFACE_TYPE,
-    dwConnectionState : Win32cr::NetworkManagement::Rras::ROUTER_CONNECTION_STATE,
-    fUnReachabilityReasons : UInt32,
-    dwLastError : UInt32,
-    dwfOptions : UInt32,
-    szLocalPhoneNumber : UInt16[129],
-    szAlternates : Win32cr::Foundation::PWSTR,
-    ipaddr : UInt32,
-    ipaddrDns : UInt32,
-    ipaddrDnsAlt : UInt32,
-    ipaddrWins : UInt32,
-    ipaddrWinsAlt : UInt32,
-    dwfNetProtocols : UInt32,
-    szDeviceType : UInt16[17],
-    szDeviceName : UInt16[129],
-    szX25PadType : UInt16[33],
-    szX25Address : UInt16[201],
-    szX25Facilities : UInt16[201],
-    szX25UserData : UInt16[201],
-    dwChannels : UInt32,
-    dwSubEntries : UInt32,
-    dwDialMode : Win32cr::NetworkManagement::Rras::MPR_INTERFACE_DIAL_MODE,
-    dwDialExtraPercent : UInt32,
-    dwDialExtraSampleSeconds : UInt32,
-    dwHangUpExtraPercent : UInt32,
-    dwHangUpExtraSampleSeconds : UInt32,
-    dwIdleDisconnectSeconds : UInt32,
-    dwType : UInt32,
-    dwEncryptionType : Win32cr::NetworkManagement::Rras::MPR_ET,
-    dwCustomAuthKey : UInt32,
-    dwCustomAuthDataSize : UInt32,
-    lpbCustomAuthData : UInt8*,
-    guidId : LibC::GUID,
-    dwVpnStrategy : Win32cr::NetworkManagement::Rras::MPR_VS
-
-  @[Extern]
-  record MPR_INTERFACE_3,
-    wszInterfaceName : UInt16[257],
-    hInterface : Win32cr::Foundation::HANDLE,
-    fEnabled : Win32cr::Foundation::BOOL,
-    dwIfType : Win32cr::NetworkManagement::Rras::ROUTER_INTERFACE_TYPE,
-    dwConnectionState : Win32cr::NetworkManagement::Rras::ROUTER_CONNECTION_STATE,
-    fUnReachabilityReasons : UInt32,
-    dwLastError : UInt32,
-    dwfOptions : UInt32,
-    szLocalPhoneNumber : UInt16[129],
-    szAlternates : Win32cr::Foundation::PWSTR,
-    ipaddr : UInt32,
-    ipaddrDns : UInt32,
-    ipaddrDnsAlt : UInt32,
-    ipaddrWins : UInt32,
-    ipaddrWinsAlt : UInt32,
-    dwfNetProtocols : UInt32,
-    szDeviceType : UInt16[17],
-    szDeviceName : UInt16[129],
-    szX25PadType : UInt16[33],
-    szX25Address : UInt16[201],
-    szX25Facilities : UInt16[201],
-    szX25UserData : UInt16[201],
-    dwChannels : UInt32,
-    dwSubEntries : UInt32,
-    dwDialMode : Win32cr::NetworkManagement::Rras::MPR_INTERFACE_DIAL_MODE,
-    dwDialExtraPercent : UInt32,
-    dwDialExtraSampleSeconds : UInt32,
-    dwHangUpExtraPercent : UInt32,
-    dwHangUpExtraSampleSeconds : UInt32,
-    dwIdleDisconnectSeconds : UInt32,
-    dwType : UInt32,
-    dwEncryptionType : Win32cr::NetworkManagement::Rras::MPR_ET,
-    dwCustomAuthKey : UInt32,
-    dwCustomAuthDataSize : UInt32,
-    lpbCustomAuthData : UInt8*,
-    guidId : LibC::GUID,
-    dwVpnStrategy : Win32cr::NetworkManagement::Rras::MPR_VS,
-    address_count : UInt32,
-    ipv6addrDns : Win32cr::Networking::WinSock::IN6_ADDR,
-    ipv6addrDnsAlt : Win32cr::Networking::WinSock::IN6_ADDR,
-    ipv6addr : Win32cr::Networking::WinSock::IN6_ADDR*
-
-  @[Extern]
-  record MPR_DEVICE_0,
-    szDeviceType : UInt16[17],
-    szDeviceName : UInt16[129]
-
-  @[Extern]
-  record MPR_DEVICE_1,
-    szDeviceType : UInt16[17],
-    szDeviceName : UInt16[129],
-    szLocalPhoneNumber : UInt16[129],
-    szAlternates : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record MPR_CREDENTIALSEX_0,
-    dwSize : UInt32,
-    lpbCredentialsInfo : UInt8*
-
-  @[Extern]
-  record MPR_CREDENTIALSEX_1,
-    dwSize : UInt32,
-    lpbCredentialsInfo : UInt8*
-
-  @[Extern]
-  record MPR_TRANSPORT_0,
-    dwTransportId : UInt32,
-    hTransport : Win32cr::Foundation::HANDLE,
-    wszTransportName : UInt16[41]
-
-  @[Extern]
-  record MPR_IFTRANSPORT_0,
-    dwTransportId : UInt32,
-    hIfTransport : Win32cr::Foundation::HANDLE,
-    wszIfTransportName : UInt16[41]
-
-  @[Extern]
-  record MPR_SERVER_0,
-    fLanOnlyMode : Win32cr::Foundation::BOOL,
-    dwUpTime : UInt32,
-    dwTotalPorts : UInt32,
-    dwPortsInUse : UInt32
-
-  @[Extern]
-  record MPR_SERVER_1,
-    dwNumPptpPorts : UInt32,
-    dwPptpPortFlags : UInt32,
-    dwNumL2tpPorts : UInt32,
-    dwL2tpPortFlags : UInt32
-
-  @[Extern]
-  record MPR_SERVER_2,
-    dwNumPptpPorts : UInt32,
-    dwPptpPortFlags : UInt32,
-    dwNumL2tpPorts : UInt32,
-    dwL2tpPortFlags : UInt32,
-    dwNumSstpPorts : UInt32,
-    dwSstpPortFlags : UInt32
-
-  @[Extern]
-  record RAS_PORT_0,
-    hPort : Win32cr::Foundation::HANDLE,
-    hConnection : Win32cr::Foundation::HANDLE,
-    dwPortCondition : Win32cr::NetworkManagement::Rras::RAS_PORT_CONDITION,
-    dwTotalNumberOfCalls : UInt32,
-    dwConnectDuration : UInt32,
-    wszPortName : UInt16[17],
-    wszMediaName : UInt16[17],
-    wszDeviceName : UInt16[129],
-    wszDeviceType : UInt16[17]
-
-  @[Extern]
-  record RAS_PORT_1,
-    hPort : Win32cr::Foundation::HANDLE,
-    hConnection : Win32cr::Foundation::HANDLE,
-    dwHardwareCondition : Win32cr::NetworkManagement::Rras::RAS_HARDWARE_CONDITION,
-    dwLineSpeed : UInt32,
-    dwBytesXmited : UInt32,
-    dwBytesRcved : UInt32,
-    dwFramesXmited : UInt32,
-    dwFramesRcved : UInt32,
-    dwCrcErr : UInt32,
-    dwTimeoutErr : UInt32,
-    dwAlignmentErr : UInt32,
-    dwHardwareOverrunErr : UInt32,
-    dwFramingErr : UInt32,
-    dwBufferOverrunErr : UInt32,
-    dwCompressionRatioIn : UInt32,
-    dwCompressionRatioOut : UInt32
-
-  @[Extern]
-  record RAS_PORT_2,
-    hPort : Win32cr::Foundation::HANDLE,
-    hConnection : Win32cr::Foundation::HANDLE,
-    dwConn_State : UInt32,
-    wszPortName : UInt16[17],
-    wszMediaName : UInt16[17],
-    wszDeviceName : UInt16[129],
-    wszDeviceType : UInt16[17],
-    dwHardwareCondition : Win32cr::NetworkManagement::Rras::RAS_HARDWARE_CONDITION,
-    dwLineSpeed : UInt32,
-    dwCrcErr : UInt32,
-    dwSerialOverRunErrs : UInt32,
-    dwTimeoutErr : UInt32,
-    dwAlignmentErr : UInt32,
-    dwHardwareOverrunErr : UInt32,
-    dwFramingErr : UInt32,
-    dwBufferOverrunErr : UInt32,
-    dwCompressionRatioIn : UInt32,
-    dwCompressionRatioOut : UInt32,
-    dwTotalErrors : UInt32,
-    ullBytesXmited : UInt64,
-    ullBytesRcved : UInt64,
-    ullFramesXmited : UInt64,
-    ullFramesRcved : UInt64,
-    ullBytesTxUncompressed : UInt64,
-    ullBytesTxCompressed : UInt64,
-    ullBytesRcvUncompressed : UInt64,
-    ullBytesRcvCompressed : UInt64
-
-  @[Extern]
-  record PPP_NBFCP_INFO,
-    dwError : UInt32,
-    wszWksta : UInt16[17]
-
-  @[Extern]
-  record PPP_IPCP_INFO,
-    dwError : UInt32,
-    wszAddress : UInt16[16],
-    wszRemoteAddress : UInt16[16]
-
-  @[Extern]
-  record PPP_IPCP_INFO2,
-    dwError : UInt32,
-    wszAddress : UInt16[16],
-    wszRemoteAddress : UInt16[16],
-    dwOptions : UInt32,
-    dwRemoteOptions : UInt32
-
-  @[Extern]
-  record PPP_IPXCP_INFO,
-    dwError : UInt32,
-    wszAddress : UInt16[23]
-
-  @[Extern]
-  record PPP_ATCP_INFO,
-    dwError : UInt32,
-    wszAddress : UInt16[33]
-
-  @[Extern]
-  record PPP_IPV6_CP_INFO,
-    dwVersion : UInt32,
-    dwSize : UInt32,
-    dwError : UInt32,
-    bInterfaceIdentifier : UInt8[8],
-    bRemoteInterfaceIdentifier : UInt8[8],
-    dwOptions : UInt32,
-    dwRemoteOptions : UInt32,
-    bPrefix : UInt8[8],
-    dwPrefixLength : UInt32
-
-  @[Extern]
-  record PPP_INFO,
-    nbf : Win32cr::NetworkManagement::Rras::PPP_NBFCP_INFO,
-    ip : Win32cr::NetworkManagement::Rras::PPP_IPCP_INFO,
-    ipx : Win32cr::NetworkManagement::Rras::PPP_IPXCP_INFO,
-    at : Win32cr::NetworkManagement::Rras::PPP_ATCP_INFO
-
-  @[Extern]
-  record PPP_CCP_INFO,
-    dwError : UInt32,
-    dwCompressionAlgorithm : UInt32,
-    dwOptions : UInt32,
-    dwRemoteCompressionAlgorithm : UInt32,
-    dwRemoteOptions : UInt32
-
-  @[Extern]
-  record PPP_LCP_INFO,
-    dwError : UInt32,
-    dwAuthenticationProtocol : Win32cr::NetworkManagement::Rras::PPP_LCP,
-    dwAuthenticationData : Win32cr::NetworkManagement::Rras::PPP_LCP_INFO_AUTH_DATA,
-    dwRemoteAuthenticationProtocol : UInt32,
-    dwRemoteAuthenticationData : UInt32,
-    dwTerminateReason : UInt32,
-    dwRemoteTerminateReason : UInt32,
-    dwOptions : UInt32,
-    dwRemoteOptions : UInt32,
-    dwEapTypeId : UInt32,
-    dwRemoteEapTypeId : UInt32
-
-  @[Extern]
-  record PPP_INFO_2,
-    nbf : Win32cr::NetworkManagement::Rras::PPP_NBFCP_INFO,
-    ip : Win32cr::NetworkManagement::Rras::PPP_IPCP_INFO2,
-    ipx : Win32cr::NetworkManagement::Rras::PPP_IPXCP_INFO,
-    at : Win32cr::NetworkManagement::Rras::PPP_ATCP_INFO,
-    ccp : Win32cr::NetworkManagement::Rras::PPP_CCP_INFO,
-    lcp : Win32cr::NetworkManagement::Rras::PPP_LCP_INFO
-
-  @[Extern]
-  record PPP_INFO_3,
-    nbf : Win32cr::NetworkManagement::Rras::PPP_NBFCP_INFO,
-    ip : Win32cr::NetworkManagement::Rras::PPP_IPCP_INFO2,
-    ipv6 : Win32cr::NetworkManagement::Rras::PPP_IPV6_CP_INFO,
-    ccp : Win32cr::NetworkManagement::Rras::PPP_CCP_INFO,
-    lcp : Win32cr::NetworkManagement::Rras::PPP_LCP_INFO
-
-  @[Extern]
-  record RAS_CONNECTION_0,
-    hConnection : Win32cr::Foundation::HANDLE,
-    hInterface : Win32cr::Foundation::HANDLE,
-    dwConnectDuration : UInt32,
-    dwInterfaceType : Win32cr::NetworkManagement::Rras::ROUTER_INTERFACE_TYPE,
-    dwConnectionFlags : Win32cr::NetworkManagement::Rras::RAS_FLAGS,
-    wszInterfaceName : UInt16[257],
-    wszUserName : UInt16[257],
-    wszLogonDomain : UInt16[16],
-    wszRemoteComputer : UInt16[17]
-
-  @[Extern]
-  record RAS_CONNECTION_1,
-    hConnection : Win32cr::Foundation::HANDLE,
-    hInterface : Win32cr::Foundation::HANDLE,
-    ppp_info : Win32cr::NetworkManagement::Rras::PPP_INFO,
-    dwBytesXmited : UInt32,
-    dwBytesRcved : UInt32,
-    dwFramesXmited : UInt32,
-    dwFramesRcved : UInt32,
-    dwCrcErr : UInt32,
-    dwTimeoutErr : UInt32,
-    dwAlignmentErr : UInt32,
-    dwHardwareOverrunErr : UInt32,
-    dwFramingErr : UInt32,
-    dwBufferOverrunErr : UInt32,
-    dwCompressionRatioIn : UInt32,
-    dwCompressionRatioOut : UInt32
-
-  @[Extern]
-  record RAS_CONNECTION_2,
-    hConnection : Win32cr::Foundation::HANDLE,
-    wszUserName : UInt16[257],
-    dwInterfaceType : Win32cr::NetworkManagement::Rras::ROUTER_INTERFACE_TYPE,
-    guid : LibC::GUID,
-    ppp_info2 : Win32cr::NetworkManagement::Rras::PPP_INFO_2
-
-  @[Extern]
-  record RAS_CONNECTION_3,
-    dwVersion : UInt32,
-    dwSize : UInt32,
-    hConnection : Win32cr::Foundation::HANDLE,
-    wszUserName : UInt16[257],
-    dwInterfaceType : Win32cr::NetworkManagement::Rras::ROUTER_INTERFACE_TYPE,
-    guid : LibC::GUID,
-    ppp_info3 : Win32cr::NetworkManagement::Rras::PPP_INFO_3,
-    rasQuarState : Win32cr::NetworkManagement::Rras::RAS_QUARANTINE_STATE,
-    timer : Win32cr::Foundation::FILETIME
-
-  @[Extern]
-  record RAS_USER_0,
-    bfPrivilege : UInt8,
-    wszPhoneNumber : UInt16[129]
-
-  @[Extern]
-  record RAS_USER_1,
-    bfPrivilege : UInt8,
-    wszPhoneNumber : UInt16[129],
-    bfPrivilege2 : UInt8
-
-  @[Extern]
-  record MPR_FILTER_0,
-    fEnable : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record MPRAPI_OBJECT_HEADER,
-    revision : UInt8,
-    type__ : UInt8,
-    size : UInt16
-
-  @[Extern]
-  record PPP_PROJECTION_INFO,
-    dwIPv4NegotiationError : UInt32,
-    wszAddress : UInt16[16],
-    wszRemoteAddress : UInt16[16],
-    dwIPv4Options : UInt32,
-    dwIPv4RemoteOptions : UInt32,
-    i_pv4_sub_interface_index : UInt64,
-    dwIPv6NegotiationError : UInt32,
-    bInterfaceIdentifier : UInt8[8],
-    bRemoteInterfaceIdentifier : UInt8[8],
-    bPrefix : UInt8[8],
-    dwPrefixLength : UInt32,
-    i_pv6_sub_interface_index : UInt64,
-    dwLcpError : UInt32,
-    dwAuthenticationProtocol : Win32cr::NetworkManagement::Rras::PPP_LCP,
-    dwAuthenticationData : Win32cr::NetworkManagement::Rras::PPP_LCP_INFO_AUTH_DATA,
-    dwRemoteAuthenticationProtocol : Win32cr::NetworkManagement::Rras::PPP_LCP,
-    dwRemoteAuthenticationData : Win32cr::NetworkManagement::Rras::PPP_LCP_INFO_AUTH_DATA,
-    dwLcpTerminateReason : UInt32,
-    dwLcpRemoteTerminateReason : UInt32,
-    dwLcpOptions : UInt32,
-    dwLcpRemoteOptions : UInt32,
-    dwEapTypeId : UInt32,
-    dwRemoteEapTypeId : UInt32,
-    dwCcpError : UInt32,
-    dwCompressionAlgorithm : UInt32,
-    dwCcpOptions : UInt32,
-    dwRemoteCompressionAlgorithm : UInt32,
-    dwCcpRemoteOptions : UInt32
-
-  @[Extern]
-  record PPP_PROJECTION_INFO2,
-    dwIPv4NegotiationError : UInt32,
-    wszAddress : UInt16[16],
-    wszRemoteAddress : UInt16[16],
-    dwIPv4Options : UInt32,
-    dwIPv4RemoteOptions : UInt32,
-    i_pv4_sub_interface_index : UInt64,
-    dwIPv6NegotiationError : UInt32,
-    bInterfaceIdentifier : UInt8[8],
-    bRemoteInterfaceIdentifier : UInt8[8],
-    bPrefix : UInt8[8],
-    dwPrefixLength : UInt32,
-    i_pv6_sub_interface_index : UInt64,
-    dwLcpError : UInt32,
-    dwAuthenticationProtocol : Win32cr::NetworkManagement::Rras::PPP_LCP,
-    dwAuthenticationData : Win32cr::NetworkManagement::Rras::PPP_LCP_INFO_AUTH_DATA,
-    dwRemoteAuthenticationProtocol : Win32cr::NetworkManagement::Rras::PPP_LCP,
-    dwRemoteAuthenticationData : Win32cr::NetworkManagement::Rras::PPP_LCP_INFO_AUTH_DATA,
-    dwLcpTerminateReason : UInt32,
-    dwLcpRemoteTerminateReason : UInt32,
-    dwLcpOptions : UInt32,
-    dwLcpRemoteOptions : UInt32,
-    dwEapTypeId : UInt32,
-    dwEmbeddedEAPTypeId : UInt32,
-    dwRemoteEapTypeId : UInt32,
-    dwCcpError : UInt32,
-    dwCompressionAlgorithm : UInt32,
-    dwCcpOptions : UInt32,
-    dwRemoteCompressionAlgorithm : UInt32,
-    dwCcpRemoteOptions : UInt32
-
-  @[Extern]
-  record IKEV2_PROJECTION_INFO,
-    dwIPv4NegotiationError : UInt32,
-    wszAddress : UInt16[16],
-    wszRemoteAddress : UInt16[16],
-    i_pv4_sub_interface_index : UInt64,
-    dwIPv6NegotiationError : UInt32,
-    bInterfaceIdentifier : UInt8[8],
-    bRemoteInterfaceIdentifier : UInt8[8],
-    bPrefix : UInt8[8],
-    dwPrefixLength : UInt32,
-    i_pv6_sub_interface_index : UInt64,
-    dwOptions : UInt32,
-    dwAuthenticationProtocol : UInt32,
-    dwEapTypeId : UInt32,
-    dwCompressionAlgorithm : UInt32,
-    dwEncryptionMethod : UInt32
-
-  @[Extern]
-  record IKEV2_PROJECTION_INFO2,
-    dwIPv4NegotiationError : UInt32,
-    wszAddress : UInt16[16],
-    wszRemoteAddress : UInt16[16],
-    i_pv4_sub_interface_index : UInt64,
-    dwIPv6NegotiationError : UInt32,
-    bInterfaceIdentifier : UInt8[8],
-    bRemoteInterfaceIdentifier : UInt8[8],
-    bPrefix : UInt8[8],
-    dwPrefixLength : UInt32,
-    i_pv6_sub_interface_index : UInt64,
-    dwOptions : UInt32,
-    dwAuthenticationProtocol : UInt32,
-    dwEapTypeId : UInt32,
-    dwEmbeddedEAPTypeId : UInt32,
-    dwCompressionAlgorithm : UInt32,
-    dwEncryptionMethod : UInt32
-
-  @[Extern]
-  record PROJECTION_INFO,
-    projectionInfoType : UInt8,
-    anonymous : Anonymous_e__Union_ do
+  struct RASCONNW
+    property dwSize : UInt32
+    property hrasconn : Win32cr::NetworkManagement::Rras::HRASCONN
+    property szEntryName : UInt16[257]
+    property szDeviceType : UInt16[17]
+    property szDeviceName : UInt16[129]
+    property szPhonebook : UInt16[260]
+    property dwSubEntry : UInt32
+    property guidEntry : LibC::GUID
+    property dwFlags : UInt32
+    property luid : Win32cr::Foundation::LUID
+    property guidCorrelationId : LibC::GUID
+    def initialize(@dwSize : UInt32, @hrasconn : Win32cr::NetworkManagement::Rras::HRASCONN, @szEntryName : UInt16[257], @szDeviceType : UInt16[17], @szDeviceName : UInt16[129], @szPhonebook : UInt16[260], @dwSubEntry : UInt32, @guidEntry : LibC::GUID, @dwFlags : UInt32, @luid : Win32cr::Foundation::LUID, @guidCorrelationId : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct RASCONNA
+    property dwSize : UInt32
+    property hrasconn : Win32cr::NetworkManagement::Rras::HRASCONN
+    property szEntryName : Win32cr::Foundation::CHAR[257]
+    property szDeviceType : Win32cr::Foundation::CHAR[17]
+    property szDeviceName : Win32cr::Foundation::CHAR[129]
+    property szPhonebook : Win32cr::Foundation::CHAR[260]
+    property dwSubEntry : UInt32
+    property guidEntry : LibC::GUID
+    property dwFlags : UInt32
+    property luid : Win32cr::Foundation::LUID
+    property guidCorrelationId : LibC::GUID
+    def initialize(@dwSize : UInt32, @hrasconn : Win32cr::NetworkManagement::Rras::HRASCONN, @szEntryName : Win32cr::Foundation::CHAR[257], @szDeviceType : Win32cr::Foundation::CHAR[17], @szDeviceName : Win32cr::Foundation::CHAR[129], @szPhonebook : Win32cr::Foundation::CHAR[260], @dwSubEntry : UInt32, @guidEntry : LibC::GUID, @dwFlags : UInt32, @luid : Win32cr::Foundation::LUID, @guidCorrelationId : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct RASCONNSTATUSW
+    property dwSize : UInt32
+    property rasconnstate : Win32cr::NetworkManagement::Rras::RASCONNSTATE
+    property dwError : UInt32
+    property szDeviceType : UInt16[17]
+    property szDeviceName : UInt16[129]
+    property szPhoneNumber : UInt16[129]
+    property localEndPoint : Win32cr::NetworkManagement::Rras::RASTUNNELENDPOINT
+    property remoteEndPoint : Win32cr::NetworkManagement::Rras::RASTUNNELENDPOINT
+    property rasconnsubstate : Win32cr::NetworkManagement::Rras::RASCONNSUBSTATE
+    def initialize(@dwSize : UInt32, @rasconnstate : Win32cr::NetworkManagement::Rras::RASCONNSTATE, @dwError : UInt32, @szDeviceType : UInt16[17], @szDeviceName : UInt16[129], @szPhoneNumber : UInt16[129], @localEndPoint : Win32cr::NetworkManagement::Rras::RASTUNNELENDPOINT, @remoteEndPoint : Win32cr::NetworkManagement::Rras::RASTUNNELENDPOINT, @rasconnsubstate : Win32cr::NetworkManagement::Rras::RASCONNSUBSTATE)
+    end
+  end
+
+  @[Extern]
+  struct RASCONNSTATUSA
+    property dwSize : UInt32
+    property rasconnstate : Win32cr::NetworkManagement::Rras::RASCONNSTATE
+    property dwError : UInt32
+    property szDeviceType : Win32cr::Foundation::CHAR[17]
+    property szDeviceName : Win32cr::Foundation::CHAR[129]
+    property szPhoneNumber : Win32cr::Foundation::CHAR[129]
+    property localEndPoint : Win32cr::NetworkManagement::Rras::RASTUNNELENDPOINT
+    property remoteEndPoint : Win32cr::NetworkManagement::Rras::RASTUNNELENDPOINT
+    property rasconnsubstate : Win32cr::NetworkManagement::Rras::RASCONNSUBSTATE
+    def initialize(@dwSize : UInt32, @rasconnstate : Win32cr::NetworkManagement::Rras::RASCONNSTATE, @dwError : UInt32, @szDeviceType : Win32cr::Foundation::CHAR[17], @szDeviceName : Win32cr::Foundation::CHAR[129], @szPhoneNumber : Win32cr::Foundation::CHAR[129], @localEndPoint : Win32cr::NetworkManagement::Rras::RASTUNNELENDPOINT, @remoteEndPoint : Win32cr::NetworkManagement::Rras::RASTUNNELENDPOINT, @rasconnsubstate : Win32cr::NetworkManagement::Rras::RASCONNSUBSTATE)
+    end
+  end
+
+  @[Extern]
+  struct RASDIALPARAMSW
+    property dwSize : UInt32
+    property szEntryName : UInt16[257]
+    property szPhoneNumber : UInt16[129]
+    property szCallbackNumber : UInt16[129]
+    property szUserName : UInt16[257]
+    property szPassword : UInt16[257]
+    property szDomain : UInt16[16]
+    property dwSubEntry : UInt32
+    property dwCallbackId : LibC::UIntPtrT
+    property dwIfIndex : UInt32
+    property szEncPassword : Win32cr::Foundation::PWSTR
+    def initialize(@dwSize : UInt32, @szEntryName : UInt16[257], @szPhoneNumber : UInt16[129], @szCallbackNumber : UInt16[129], @szUserName : UInt16[257], @szPassword : UInt16[257], @szDomain : UInt16[16], @dwSubEntry : UInt32, @dwCallbackId : LibC::UIntPtrT, @dwIfIndex : UInt32, @szEncPassword : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct RASDIALPARAMSA
+    property dwSize : UInt32
+    property szEntryName : Win32cr::Foundation::CHAR[257]
+    property szPhoneNumber : Win32cr::Foundation::CHAR[129]
+    property szCallbackNumber : Win32cr::Foundation::CHAR[129]
+    property szUserName : Win32cr::Foundation::CHAR[257]
+    property szPassword : Win32cr::Foundation::CHAR[257]
+    property szDomain : Win32cr::Foundation::CHAR[16]
+    property dwSubEntry : UInt32
+    property dwCallbackId : LibC::UIntPtrT
+    property dwIfIndex : UInt32
+    property szEncPassword : Win32cr::Foundation::PSTR
+    def initialize(@dwSize : UInt32, @szEntryName : Win32cr::Foundation::CHAR[257], @szPhoneNumber : Win32cr::Foundation::CHAR[129], @szCallbackNumber : Win32cr::Foundation::CHAR[129], @szUserName : Win32cr::Foundation::CHAR[257], @szPassword : Win32cr::Foundation::CHAR[257], @szDomain : Win32cr::Foundation::CHAR[16], @dwSubEntry : UInt32, @dwCallbackId : LibC::UIntPtrT, @dwIfIndex : UInt32, @szEncPassword : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct RASEAPINFO
+    property dwSizeofEapInfo : UInt32
+    property pbEapInfo : UInt8*
+    def initialize(@dwSizeofEapInfo : UInt32, @pbEapInfo : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct RASDEVSPECIFICINFO
+    property dwSize : UInt32
+    property pbDevSpecificInfo : UInt8*
+    def initialize(@dwSize : UInt32, @pbDevSpecificInfo : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct RASDIALEXTENSIONS
+    property dwSize : UInt32
+    property dwfOptions : UInt32
+    property hwndParent : Win32cr::Foundation::HWND
+    property reserved : LibC::UIntPtrT
+    property reserved1 : LibC::UIntPtrT
+    property ras_eap_info : Win32cr::NetworkManagement::Rras::RASEAPINFO
+    property fSkipPppAuth : Win32cr::Foundation::BOOL
+    property ras_dev_specific_info : Win32cr::NetworkManagement::Rras::RASDEVSPECIFICINFO
+    def initialize(@dwSize : UInt32, @dwfOptions : UInt32, @hwndParent : Win32cr::Foundation::HWND, @reserved : LibC::UIntPtrT, @reserved1 : LibC::UIntPtrT, @ras_eap_info : Win32cr::NetworkManagement::Rras::RASEAPINFO, @fSkipPppAuth : Win32cr::Foundation::BOOL, @ras_dev_specific_info : Win32cr::NetworkManagement::Rras::RASDEVSPECIFICINFO)
+    end
+  end
+
+  @[Extern]
+  struct RASENTRYNAMEW
+    property dwSize : UInt32
+    property szEntryName : UInt16[257]
+    property dwFlags : UInt32
+    property szPhonebookPath : UInt16[261]
+    def initialize(@dwSize : UInt32, @szEntryName : UInt16[257], @dwFlags : UInt32, @szPhonebookPath : UInt16[261])
+    end
+  end
+
+  @[Extern]
+  struct RASENTRYNAMEA
+    property dwSize : UInt32
+    property szEntryName : Win32cr::Foundation::CHAR[257]
+    property dwFlags : UInt32
+    property szPhonebookPath : Win32cr::Foundation::CHAR[261]
+    def initialize(@dwSize : UInt32, @szEntryName : Win32cr::Foundation::CHAR[257], @dwFlags : UInt32, @szPhonebookPath : Win32cr::Foundation::CHAR[261])
+    end
+  end
+
+  @[Extern]
+  struct RASAMBW
+    property dwSize : UInt32
+    property dwError : UInt32
+    property szNetBiosError : UInt16[17]
+    property bLana : UInt8
+    def initialize(@dwSize : UInt32, @dwError : UInt32, @szNetBiosError : UInt16[17], @bLana : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct RASAMBA
+    property dwSize : UInt32
+    property dwError : UInt32
+    property szNetBiosError : Win32cr::Foundation::CHAR[17]
+    property bLana : UInt8
+    def initialize(@dwSize : UInt32, @dwError : UInt32, @szNetBiosError : Win32cr::Foundation::CHAR[17], @bLana : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct RASPPPNBFW
+    property dwSize : UInt32
+    property dwError : UInt32
+    property dwNetBiosError : UInt32
+    property szNetBiosError : UInt16[17]
+    property szWorkstationName : UInt16[17]
+    property bLana : UInt8
+    def initialize(@dwSize : UInt32, @dwError : UInt32, @dwNetBiosError : UInt32, @szNetBiosError : UInt16[17], @szWorkstationName : UInt16[17], @bLana : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct RASPPPNBFA
+    property dwSize : UInt32
+    property dwError : UInt32
+    property dwNetBiosError : UInt32
+    property szNetBiosError : Win32cr::Foundation::CHAR[17]
+    property szWorkstationName : Win32cr::Foundation::CHAR[17]
+    property bLana : UInt8
+    def initialize(@dwSize : UInt32, @dwError : UInt32, @dwNetBiosError : UInt32, @szNetBiosError : Win32cr::Foundation::CHAR[17], @szWorkstationName : Win32cr::Foundation::CHAR[17], @bLana : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct RASIPXW
+    property dwSize : UInt32
+    property dwError : UInt32
+    property szIpxAddress : UInt16[22]
+    def initialize(@dwSize : UInt32, @dwError : UInt32, @szIpxAddress : UInt16[22])
+    end
+  end
+
+  @[Extern]
+  struct RASPPPIPXA
+    property dwSize : UInt32
+    property dwError : UInt32
+    property szIpxAddress : Win32cr::Foundation::CHAR[22]
+    def initialize(@dwSize : UInt32, @dwError : UInt32, @szIpxAddress : Win32cr::Foundation::CHAR[22])
+    end
+  end
+
+  @[Extern]
+  struct RASPPPIPW
+    property dwSize : UInt32
+    property dwError : UInt32
+    property szIpAddress : UInt16[16]
+    property szServerIpAddress : UInt16[16]
+    property dwOptions : UInt32
+    property dwServerOptions : UInt32
+    def initialize(@dwSize : UInt32, @dwError : UInt32, @szIpAddress : UInt16[16], @szServerIpAddress : UInt16[16], @dwOptions : UInt32, @dwServerOptions : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct RASPPPIPA
+    property dwSize : UInt32
+    property dwError : UInt32
+    property szIpAddress : Win32cr::Foundation::CHAR[16]
+    property szServerIpAddress : Win32cr::Foundation::CHAR[16]
+    property dwOptions : UInt32
+    property dwServerOptions : UInt32
+    def initialize(@dwSize : UInt32, @dwError : UInt32, @szIpAddress : Win32cr::Foundation::CHAR[16], @szServerIpAddress : Win32cr::Foundation::CHAR[16], @dwOptions : UInt32, @dwServerOptions : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct RASPPPIPV6
+    property dwSize : UInt32
+    property dwError : UInt32
+    property bLocalInterfaceIdentifier : UInt8[8]
+    property bPeerInterfaceIdentifier : UInt8[8]
+    property bLocalCompressionProtocol : UInt8[2]
+    property bPeerCompressionProtocol : UInt8[2]
+    def initialize(@dwSize : UInt32, @dwError : UInt32, @bLocalInterfaceIdentifier : UInt8[8], @bPeerInterfaceIdentifier : UInt8[8], @bLocalCompressionProtocol : UInt8[2], @bPeerCompressionProtocol : UInt8[2])
+    end
+  end
+
+  @[Extern]
+  struct RASPPPLCPW
+    property dwSize : UInt32
+    property fBundled : Win32cr::Foundation::BOOL
+    property dwError : UInt32
+    property dwAuthenticationProtocol : UInt32
+    property dwAuthenticationData : UInt32
+    property dwEapTypeId : UInt32
+    property dwServerAuthenticationProtocol : UInt32
+    property dwServerAuthenticationData : UInt32
+    property dwServerEapTypeId : UInt32
+    property fMultilink : Win32cr::Foundation::BOOL
+    property dwTerminateReason : UInt32
+    property dwServerTerminateReason : UInt32
+    property szReplyMessage : UInt16[1024]
+    property dwOptions : UInt32
+    property dwServerOptions : UInt32
+    def initialize(@dwSize : UInt32, @fBundled : Win32cr::Foundation::BOOL, @dwError : UInt32, @dwAuthenticationProtocol : UInt32, @dwAuthenticationData : UInt32, @dwEapTypeId : UInt32, @dwServerAuthenticationProtocol : UInt32, @dwServerAuthenticationData : UInt32, @dwServerEapTypeId : UInt32, @fMultilink : Win32cr::Foundation::BOOL, @dwTerminateReason : UInt32, @dwServerTerminateReason : UInt32, @szReplyMessage : UInt16[1024], @dwOptions : UInt32, @dwServerOptions : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct RASPPPLCPA
+    property dwSize : UInt32
+    property fBundled : Win32cr::Foundation::BOOL
+    property dwError : UInt32
+    property dwAuthenticationProtocol : UInt32
+    property dwAuthenticationData : UInt32
+    property dwEapTypeId : UInt32
+    property dwServerAuthenticationProtocol : UInt32
+    property dwServerAuthenticationData : UInt32
+    property dwServerEapTypeId : UInt32
+    property fMultilink : Win32cr::Foundation::BOOL
+    property dwTerminateReason : UInt32
+    property dwServerTerminateReason : UInt32
+    property szReplyMessage : Win32cr::Foundation::CHAR[1024]
+    property dwOptions : UInt32
+    property dwServerOptions : UInt32
+    def initialize(@dwSize : UInt32, @fBundled : Win32cr::Foundation::BOOL, @dwError : UInt32, @dwAuthenticationProtocol : UInt32, @dwAuthenticationData : UInt32, @dwEapTypeId : UInt32, @dwServerAuthenticationProtocol : UInt32, @dwServerAuthenticationData : UInt32, @dwServerEapTypeId : UInt32, @fMultilink : Win32cr::Foundation::BOOL, @dwTerminateReason : UInt32, @dwServerTerminateReason : UInt32, @szReplyMessage : Win32cr::Foundation::CHAR[1024], @dwOptions : UInt32, @dwServerOptions : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct RASPPPCCP
+    property dwSize : UInt32
+    property dwError : UInt32
+    property dwCompressionAlgorithm : UInt32
+    property dwOptions : UInt32
+    property dwServerCompressionAlgorithm : UInt32
+    property dwServerOptions : UInt32
+    def initialize(@dwSize : UInt32, @dwError : UInt32, @dwCompressionAlgorithm : UInt32, @dwOptions : UInt32, @dwServerCompressionAlgorithm : UInt32, @dwServerOptions : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct RASPPP_PROJECTION_INFO
+    property dwIPv4NegotiationError : UInt32
+    property ipv4Address : Win32cr::Networking::WinSock::IN_ADDR
+    property ipv4ServerAddress : Win32cr::Networking::WinSock::IN_ADDR
+    property dwIPv4Options : UInt32
+    property dwIPv4ServerOptions : UInt32
+    property dwIPv6NegotiationError : UInt32
+    property bInterfaceIdentifier : UInt8[8]
+    property bServerInterfaceIdentifier : UInt8[8]
+    property fBundled : Win32cr::Foundation::BOOL
+    property fMultilink : Win32cr::Foundation::BOOL
+    property dwAuthenticationProtocol : Win32cr::NetworkManagement::Rras::RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL
+    property dwAuthenticationData : Win32cr::NetworkManagement::Rras::RASPPP_PROJECTION_INFO_SERVER_AUTH_DATA
+    property dwServerAuthenticationProtocol : Win32cr::NetworkManagement::Rras::RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL
+    property dwServerAuthenticationData : Win32cr::NetworkManagement::Rras::RASPPP_PROJECTION_INFO_SERVER_AUTH_DATA
+    property dwEapTypeId : UInt32
+    property dwServerEapTypeId : UInt32
+    property dwLcpOptions : UInt32
+    property dwLcpServerOptions : UInt32
+    property dwCcpError : UInt32
+    property dwCcpCompressionAlgorithm : UInt32
+    property dwCcpServerCompressionAlgorithm : UInt32
+    property dwCcpOptions : UInt32
+    property dwCcpServerOptions : UInt32
+    def initialize(@dwIPv4NegotiationError : UInt32, @ipv4Address : Win32cr::Networking::WinSock::IN_ADDR, @ipv4ServerAddress : Win32cr::Networking::WinSock::IN_ADDR, @dwIPv4Options : UInt32, @dwIPv4ServerOptions : UInt32, @dwIPv6NegotiationError : UInt32, @bInterfaceIdentifier : UInt8[8], @bServerInterfaceIdentifier : UInt8[8], @fBundled : Win32cr::Foundation::BOOL, @fMultilink : Win32cr::Foundation::BOOL, @dwAuthenticationProtocol : Win32cr::NetworkManagement::Rras::RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL, @dwAuthenticationData : Win32cr::NetworkManagement::Rras::RASPPP_PROJECTION_INFO_SERVER_AUTH_DATA, @dwServerAuthenticationProtocol : Win32cr::NetworkManagement::Rras::RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL, @dwServerAuthenticationData : Win32cr::NetworkManagement::Rras::RASPPP_PROJECTION_INFO_SERVER_AUTH_DATA, @dwEapTypeId : UInt32, @dwServerEapTypeId : UInt32, @dwLcpOptions : UInt32, @dwLcpServerOptions : UInt32, @dwCcpError : UInt32, @dwCcpCompressionAlgorithm : UInt32, @dwCcpServerCompressionAlgorithm : UInt32, @dwCcpOptions : UInt32, @dwCcpServerOptions : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct RASIKEV2_PROJECTION_INFO
+    property dwIPv4NegotiationError : UInt32
+    property ipv4Address : Win32cr::Networking::WinSock::IN_ADDR
+    property ipv4ServerAddress : Win32cr::Networking::WinSock::IN_ADDR
+    property dwIPv6NegotiationError : UInt32
+    property ipv6Address : Win32cr::Networking::WinSock::IN6_ADDR
+    property ipv6ServerAddress : Win32cr::Networking::WinSock::IN6_ADDR
+    property dwPrefixLength : UInt32
+    property dwAuthenticationProtocol : UInt32
+    property dwEapTypeId : UInt32
+    property dwFlags : Win32cr::NetworkManagement::Rras::RASIKEV_PROJECTION_INFO_FLAGS
+    property dwEncryptionMethod : UInt32
+    property numIPv4ServerAddresses : UInt32
+    property ipv4ServerAddresses : Win32cr::Networking::WinSock::IN_ADDR*
+    property numIPv6ServerAddresses : UInt32
+    property ipv6ServerAddresses : Win32cr::Networking::WinSock::IN6_ADDR*
+    def initialize(@dwIPv4NegotiationError : UInt32, @ipv4Address : Win32cr::Networking::WinSock::IN_ADDR, @ipv4ServerAddress : Win32cr::Networking::WinSock::IN_ADDR, @dwIPv6NegotiationError : UInt32, @ipv6Address : Win32cr::Networking::WinSock::IN6_ADDR, @ipv6ServerAddress : Win32cr::Networking::WinSock::IN6_ADDR, @dwPrefixLength : UInt32, @dwAuthenticationProtocol : UInt32, @dwEapTypeId : UInt32, @dwFlags : Win32cr::NetworkManagement::Rras::RASIKEV_PROJECTION_INFO_FLAGS, @dwEncryptionMethod : UInt32, @numIPv4ServerAddresses : UInt32, @ipv4ServerAddresses : Win32cr::Networking::WinSock::IN_ADDR*, @numIPv6ServerAddresses : UInt32, @ipv6ServerAddresses : Win32cr::Networking::WinSock::IN6_ADDR*)
+    end
+  end
+
+  @[Extern]
+  struct RAS_PROJECTION_INFO
+    property version : Win32cr::NetworkManagement::Rras::RASAPIVERSION
+    property type__ : Win32cr::NetworkManagement::Rras::RASPROJECTION_INFO_TYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      ppp_projection_info : Win32cr::NetworkManagement::Rras::PPP_PROJECTION_INFO,
-      ikev2_projection_info : Win32cr::NetworkManagement::Rras::IKEV2_PROJECTION_INFO
+    struct Anonymous_e__Union_
+    property ppp : Win32cr::NetworkManagement::Rras::RASPPP_PROJECTION_INFO
+    property ikev2 : Win32cr::NetworkManagement::Rras::RASIKEV2_PROJECTION_INFO
+    def initialize(@ppp : Win32cr::NetworkManagement::Rras::RASPPP_PROJECTION_INFO, @ikev2 : Win32cr::NetworkManagement::Rras::RASIKEV2_PROJECTION_INFO)
+    end
+    end
 
+    def initialize(@version : Win32cr::NetworkManagement::Rras::RASAPIVERSION, @type__ : Win32cr::NetworkManagement::Rras::RASPROJECTION_INFO_TYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record PROJECTION_INFO2,
-    projectionInfoType : UInt8,
-    anonymous : Anonymous_e__Union_ do
+  struct RASDEVINFOW
+    property dwSize : UInt32
+    property szDeviceType : UInt16[17]
+    property szDeviceName : UInt16[129]
+    def initialize(@dwSize : UInt32, @szDeviceType : UInt16[17], @szDeviceName : UInt16[129])
+    end
+  end
+
+  @[Extern]
+  struct RASDEVINFOA
+    property dwSize : UInt32
+    property szDeviceType : Win32cr::Foundation::CHAR[17]
+    property szDeviceName : Win32cr::Foundation::CHAR[129]
+    def initialize(@dwSize : UInt32, @szDeviceType : Win32cr::Foundation::CHAR[17], @szDeviceName : Win32cr::Foundation::CHAR[129])
+    end
+  end
+
+  @[Extern]
+  struct RASCTRYINFO
+    property dwSize : UInt32
+    property dwCountryID : UInt32
+    property dwNextCountryID : UInt32
+    property dwCountryCode : UInt32
+    property dwCountryNameOffset : UInt32
+    def initialize(@dwSize : UInt32, @dwCountryID : UInt32, @dwNextCountryID : UInt32, @dwCountryCode : UInt32, @dwCountryNameOffset : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct RASENTRYA
+    property dwSize : UInt32
+    property dwfOptions : UInt32
+    property dwCountryID : UInt32
+    property dwCountryCode : UInt32
+    property szAreaCode : Win32cr::Foundation::CHAR[11]
+    property szLocalPhoneNumber : Win32cr::Foundation::CHAR[129]
+    property dwAlternateOffset : UInt32
+    property ipaddr : Win32cr::NetworkManagement::Rras::RASIPADDR
+    property ipaddrDns : Win32cr::NetworkManagement::Rras::RASIPADDR
+    property ipaddrDnsAlt : Win32cr::NetworkManagement::Rras::RASIPADDR
+    property ipaddrWins : Win32cr::NetworkManagement::Rras::RASIPADDR
+    property ipaddrWinsAlt : Win32cr::NetworkManagement::Rras::RASIPADDR
+    property dwFrameSize : UInt32
+    property dwfNetProtocols : UInt32
+    property dwFramingProtocol : UInt32
+    property szScript : Win32cr::Foundation::CHAR[260]
+    property szAutodialDll : Win32cr::Foundation::CHAR[260]
+    property szAutodialFunc : Win32cr::Foundation::CHAR[260]
+    property szDeviceType : Win32cr::Foundation::CHAR[17]
+    property szDeviceName : Win32cr::Foundation::CHAR[129]
+    property szX25PadType : Win32cr::Foundation::CHAR[33]
+    property szX25Address : Win32cr::Foundation::CHAR[201]
+    property szX25Facilities : Win32cr::Foundation::CHAR[201]
+    property szX25UserData : Win32cr::Foundation::CHAR[201]
+    property dwChannels : UInt32
+    property dwReserved1 : UInt32
+    property dwReserved2 : UInt32
+    property dwSubEntries : UInt32
+    property dwDialMode : Win32cr::NetworkManagement::Rras::RASENTRY_DIAL_MODE
+    property dwDialExtraPercent : UInt32
+    property dwDialExtraSampleSeconds : UInt32
+    property dwHangUpExtraPercent : UInt32
+    property dwHangUpExtraSampleSeconds : UInt32
+    property dwIdleDisconnectSeconds : UInt32
+    property dwType : UInt32
+    property dwEncryptionType : UInt32
+    property dwCustomAuthKey : UInt32
+    property guidId : LibC::GUID
+    property szCustomDialDll : Win32cr::Foundation::CHAR[260]
+    property dwVpnStrategy : UInt32
+    property dwfOptions2 : UInt32
+    property dwfOptions3 : UInt32
+    property szDnsSuffix : Win32cr::Foundation::CHAR[256]
+    property dwTcpWindowSize : UInt32
+    property szPrerequisitePbk : Win32cr::Foundation::CHAR[260]
+    property szPrerequisiteEntry : Win32cr::Foundation::CHAR[257]
+    property dwRedialCount : UInt32
+    property dwRedialPause : UInt32
+    property ipv6addrDns : Win32cr::Networking::WinSock::IN6_ADDR
+    property ipv6addrDnsAlt : Win32cr::Networking::WinSock::IN6_ADDR
+    property dwIPv4InterfaceMetric : UInt32
+    property dwIPv6InterfaceMetric : UInt32
+    property ipv6addr : Win32cr::Networking::WinSock::IN6_ADDR
+    property dwIPv6PrefixLength : UInt32
+    property dwNetworkOutageTime : UInt32
+    property szIDi : Win32cr::Foundation::CHAR[257]
+    property szIDr : Win32cr::Foundation::CHAR[257]
+    property fIsImsConfig : Win32cr::Foundation::BOOL
+    property idi_type : Win32cr::NetworkManagement::Rras::IKEV2_ID_PAYLOAD_TYPE
+    property idr_type : Win32cr::NetworkManagement::Rras::IKEV2_ID_PAYLOAD_TYPE
+    property fDisableIKEv2Fragmentation : Win32cr::Foundation::BOOL
+    def initialize(@dwSize : UInt32, @dwfOptions : UInt32, @dwCountryID : UInt32, @dwCountryCode : UInt32, @szAreaCode : Win32cr::Foundation::CHAR[11], @szLocalPhoneNumber : Win32cr::Foundation::CHAR[129], @dwAlternateOffset : UInt32, @ipaddr : Win32cr::NetworkManagement::Rras::RASIPADDR, @ipaddrDns : Win32cr::NetworkManagement::Rras::RASIPADDR, @ipaddrDnsAlt : Win32cr::NetworkManagement::Rras::RASIPADDR, @ipaddrWins : Win32cr::NetworkManagement::Rras::RASIPADDR, @ipaddrWinsAlt : Win32cr::NetworkManagement::Rras::RASIPADDR, @dwFrameSize : UInt32, @dwfNetProtocols : UInt32, @dwFramingProtocol : UInt32, @szScript : Win32cr::Foundation::CHAR[260], @szAutodialDll : Win32cr::Foundation::CHAR[260], @szAutodialFunc : Win32cr::Foundation::CHAR[260], @szDeviceType : Win32cr::Foundation::CHAR[17], @szDeviceName : Win32cr::Foundation::CHAR[129], @szX25PadType : Win32cr::Foundation::CHAR[33], @szX25Address : Win32cr::Foundation::CHAR[201], @szX25Facilities : Win32cr::Foundation::CHAR[201], @szX25UserData : Win32cr::Foundation::CHAR[201], @dwChannels : UInt32, @dwReserved1 : UInt32, @dwReserved2 : UInt32, @dwSubEntries : UInt32, @dwDialMode : Win32cr::NetworkManagement::Rras::RASENTRY_DIAL_MODE, @dwDialExtraPercent : UInt32, @dwDialExtraSampleSeconds : UInt32, @dwHangUpExtraPercent : UInt32, @dwHangUpExtraSampleSeconds : UInt32, @dwIdleDisconnectSeconds : UInt32, @dwType : UInt32, @dwEncryptionType : UInt32, @dwCustomAuthKey : UInt32, @guidId : LibC::GUID, @szCustomDialDll : Win32cr::Foundation::CHAR[260], @dwVpnStrategy : UInt32, @dwfOptions2 : UInt32, @dwfOptions3 : UInt32, @szDnsSuffix : Win32cr::Foundation::CHAR[256], @dwTcpWindowSize : UInt32, @szPrerequisitePbk : Win32cr::Foundation::CHAR[260], @szPrerequisiteEntry : Win32cr::Foundation::CHAR[257], @dwRedialCount : UInt32, @dwRedialPause : UInt32, @ipv6addrDns : Win32cr::Networking::WinSock::IN6_ADDR, @ipv6addrDnsAlt : Win32cr::Networking::WinSock::IN6_ADDR, @dwIPv4InterfaceMetric : UInt32, @dwIPv6InterfaceMetric : UInt32, @ipv6addr : Win32cr::Networking::WinSock::IN6_ADDR, @dwIPv6PrefixLength : UInt32, @dwNetworkOutageTime : UInt32, @szIDi : Win32cr::Foundation::CHAR[257], @szIDr : Win32cr::Foundation::CHAR[257], @fIsImsConfig : Win32cr::Foundation::BOOL, @idi_type : Win32cr::NetworkManagement::Rras::IKEV2_ID_PAYLOAD_TYPE, @idr_type : Win32cr::NetworkManagement::Rras::IKEV2_ID_PAYLOAD_TYPE, @fDisableIKEv2Fragmentation : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct RASENTRYW
+    property dwSize : UInt32
+    property dwfOptions : UInt32
+    property dwCountryID : UInt32
+    property dwCountryCode : UInt32
+    property szAreaCode : UInt16[11]
+    property szLocalPhoneNumber : UInt16[129]
+    property dwAlternateOffset : UInt32
+    property ipaddr : Win32cr::NetworkManagement::Rras::RASIPADDR
+    property ipaddrDns : Win32cr::NetworkManagement::Rras::RASIPADDR
+    property ipaddrDnsAlt : Win32cr::NetworkManagement::Rras::RASIPADDR
+    property ipaddrWins : Win32cr::NetworkManagement::Rras::RASIPADDR
+    property ipaddrWinsAlt : Win32cr::NetworkManagement::Rras::RASIPADDR
+    property dwFrameSize : UInt32
+    property dwfNetProtocols : UInt32
+    property dwFramingProtocol : UInt32
+    property szScript : UInt16[260]
+    property szAutodialDll : UInt16[260]
+    property szAutodialFunc : UInt16[260]
+    property szDeviceType : UInt16[17]
+    property szDeviceName : UInt16[129]
+    property szX25PadType : UInt16[33]
+    property szX25Address : UInt16[201]
+    property szX25Facilities : UInt16[201]
+    property szX25UserData : UInt16[201]
+    property dwChannels : UInt32
+    property dwReserved1 : UInt32
+    property dwReserved2 : UInt32
+    property dwSubEntries : UInt32
+    property dwDialMode : Win32cr::NetworkManagement::Rras::RASENTRY_DIAL_MODE
+    property dwDialExtraPercent : UInt32
+    property dwDialExtraSampleSeconds : UInt32
+    property dwHangUpExtraPercent : UInt32
+    property dwHangUpExtraSampleSeconds : UInt32
+    property dwIdleDisconnectSeconds : UInt32
+    property dwType : UInt32
+    property dwEncryptionType : UInt32
+    property dwCustomAuthKey : UInt32
+    property guidId : LibC::GUID
+    property szCustomDialDll : UInt16[260]
+    property dwVpnStrategy : UInt32
+    property dwfOptions2 : UInt32
+    property dwfOptions3 : UInt32
+    property szDnsSuffix : UInt16[256]
+    property dwTcpWindowSize : UInt32
+    property szPrerequisitePbk : UInt16[260]
+    property szPrerequisiteEntry : UInt16[257]
+    property dwRedialCount : UInt32
+    property dwRedialPause : UInt32
+    property ipv6addrDns : Win32cr::Networking::WinSock::IN6_ADDR
+    property ipv6addrDnsAlt : Win32cr::Networking::WinSock::IN6_ADDR
+    property dwIPv4InterfaceMetric : UInt32
+    property dwIPv6InterfaceMetric : UInt32
+    property ipv6addr : Win32cr::Networking::WinSock::IN6_ADDR
+    property dwIPv6PrefixLength : UInt32
+    property dwNetworkOutageTime : UInt32
+    property szIDi : UInt16[257]
+    property szIDr : UInt16[257]
+    property fIsImsConfig : Win32cr::Foundation::BOOL
+    property idi_type : Win32cr::NetworkManagement::Rras::IKEV2_ID_PAYLOAD_TYPE
+    property idr_type : Win32cr::NetworkManagement::Rras::IKEV2_ID_PAYLOAD_TYPE
+    property fDisableIKEv2Fragmentation : Win32cr::Foundation::BOOL
+    def initialize(@dwSize : UInt32, @dwfOptions : UInt32, @dwCountryID : UInt32, @dwCountryCode : UInt32, @szAreaCode : UInt16[11], @szLocalPhoneNumber : UInt16[129], @dwAlternateOffset : UInt32, @ipaddr : Win32cr::NetworkManagement::Rras::RASIPADDR, @ipaddrDns : Win32cr::NetworkManagement::Rras::RASIPADDR, @ipaddrDnsAlt : Win32cr::NetworkManagement::Rras::RASIPADDR, @ipaddrWins : Win32cr::NetworkManagement::Rras::RASIPADDR, @ipaddrWinsAlt : Win32cr::NetworkManagement::Rras::RASIPADDR, @dwFrameSize : UInt32, @dwfNetProtocols : UInt32, @dwFramingProtocol : UInt32, @szScript : UInt16[260], @szAutodialDll : UInt16[260], @szAutodialFunc : UInt16[260], @szDeviceType : UInt16[17], @szDeviceName : UInt16[129], @szX25PadType : UInt16[33], @szX25Address : UInt16[201], @szX25Facilities : UInt16[201], @szX25UserData : UInt16[201], @dwChannels : UInt32, @dwReserved1 : UInt32, @dwReserved2 : UInt32, @dwSubEntries : UInt32, @dwDialMode : Win32cr::NetworkManagement::Rras::RASENTRY_DIAL_MODE, @dwDialExtraPercent : UInt32, @dwDialExtraSampleSeconds : UInt32, @dwHangUpExtraPercent : UInt32, @dwHangUpExtraSampleSeconds : UInt32, @dwIdleDisconnectSeconds : UInt32, @dwType : UInt32, @dwEncryptionType : UInt32, @dwCustomAuthKey : UInt32, @guidId : LibC::GUID, @szCustomDialDll : UInt16[260], @dwVpnStrategy : UInt32, @dwfOptions2 : UInt32, @dwfOptions3 : UInt32, @szDnsSuffix : UInt16[256], @dwTcpWindowSize : UInt32, @szPrerequisitePbk : UInt16[260], @szPrerequisiteEntry : UInt16[257], @dwRedialCount : UInt32, @dwRedialPause : UInt32, @ipv6addrDns : Win32cr::Networking::WinSock::IN6_ADDR, @ipv6addrDnsAlt : Win32cr::Networking::WinSock::IN6_ADDR, @dwIPv4InterfaceMetric : UInt32, @dwIPv6InterfaceMetric : UInt32, @ipv6addr : Win32cr::Networking::WinSock::IN6_ADDR, @dwIPv6PrefixLength : UInt32, @dwNetworkOutageTime : UInt32, @szIDi : UInt16[257], @szIDr : UInt16[257], @fIsImsConfig : Win32cr::Foundation::BOOL, @idi_type : Win32cr::NetworkManagement::Rras::IKEV2_ID_PAYLOAD_TYPE, @idr_type : Win32cr::NetworkManagement::Rras::IKEV2_ID_PAYLOAD_TYPE, @fDisableIKEv2Fragmentation : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct RASADPARAMS
+    property dwSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property dwFlags : UInt32
+    property xDlg : Int32
+    property yDlg : Int32
+    def initialize(@dwSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @dwFlags : UInt32, @xDlg : Int32, @yDlg : Int32)
+    end
+  end
+
+  @[Extern]
+  struct RASSUBENTRYA
+    property dwSize : UInt32
+    property dwfFlags : UInt32
+    property szDeviceType : Win32cr::Foundation::CHAR[17]
+    property szDeviceName : Win32cr::Foundation::CHAR[129]
+    property szLocalPhoneNumber : Win32cr::Foundation::CHAR[129]
+    property dwAlternateOffset : UInt32
+    def initialize(@dwSize : UInt32, @dwfFlags : UInt32, @szDeviceType : Win32cr::Foundation::CHAR[17], @szDeviceName : Win32cr::Foundation::CHAR[129], @szLocalPhoneNumber : Win32cr::Foundation::CHAR[129], @dwAlternateOffset : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct RASSUBENTRYW
+    property dwSize : UInt32
+    property dwfFlags : UInt32
+    property szDeviceType : UInt16[17]
+    property szDeviceName : UInt16[129]
+    property szLocalPhoneNumber : UInt16[129]
+    property dwAlternateOffset : UInt32
+    def initialize(@dwSize : UInt32, @dwfFlags : UInt32, @szDeviceType : UInt16[17], @szDeviceName : UInt16[129], @szLocalPhoneNumber : UInt16[129], @dwAlternateOffset : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct RASCREDENTIALSA
+    property dwSize : UInt32
+    property dwMask : UInt32
+    property szUserName : Win32cr::Foundation::CHAR[257]
+    property szPassword : Win32cr::Foundation::CHAR[257]
+    property szDomain : Win32cr::Foundation::CHAR[16]
+    def initialize(@dwSize : UInt32, @dwMask : UInt32, @szUserName : Win32cr::Foundation::CHAR[257], @szPassword : Win32cr::Foundation::CHAR[257], @szDomain : Win32cr::Foundation::CHAR[16])
+    end
+  end
+
+  @[Extern]
+  struct RASCREDENTIALSW
+    property dwSize : UInt32
+    property dwMask : UInt32
+    property szUserName : UInt16[257]
+    property szPassword : UInt16[257]
+    property szDomain : UInt16[16]
+    def initialize(@dwSize : UInt32, @dwMask : UInt32, @szUserName : UInt16[257], @szPassword : UInt16[257], @szDomain : UInt16[16])
+    end
+  end
+
+  @[Extern]
+  struct RASAUTODIALENTRYA
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwDialingLocation : UInt32
+    property szEntry : Win32cr::Foundation::CHAR[257]
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwDialingLocation : UInt32, @szEntry : Win32cr::Foundation::CHAR[257])
+    end
+  end
+
+  @[Extern]
+  struct RASAUTODIALENTRYW
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwDialingLocation : UInt32
+    property szEntry : UInt16[257]
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwDialingLocation : UInt32, @szEntry : UInt16[257])
+    end
+  end
+
+  @[Extern]
+  struct RASEAPUSERIDENTITYA
+    property szUserName : Win32cr::Foundation::CHAR[257]
+    property dwSizeofEapInfo : UInt32
+    property pbEapInfo : UInt8*
+    def initialize(@szUserName : Win32cr::Foundation::CHAR[257], @dwSizeofEapInfo : UInt32, @pbEapInfo : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct RASEAPUSERIDENTITYW
+    property szUserName : UInt16[257]
+    property dwSizeofEapInfo : UInt32
+    property pbEapInfo : UInt8*
+    def initialize(@szUserName : UInt16[257], @dwSizeofEapInfo : UInt32, @pbEapInfo : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct RASCOMMSETTINGS
+    property dwSize : UInt32
+    property bParity : UInt8
+    property bStop : UInt8
+    property bByteSize : UInt8
+    property bAlign : UInt8
+    def initialize(@dwSize : UInt32, @bParity : UInt8, @bStop : UInt8, @bByteSize : UInt8, @bAlign : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct RASCUSTOMSCRIPTEXTENSIONS
+    property dwSize : UInt32
+    property pfnRasSetCommSettings : Win32cr::NetworkManagement::Rras::PFNRASSETCOMMSETTINGS
+    def initialize(@dwSize : UInt32, @pfnRasSetCommSettings : Win32cr::NetworkManagement::Rras::PFNRASSETCOMMSETTINGS)
+    end
+  end
+
+  @[Extern]
+  struct RAS_STATS
+    property dwSize : UInt32
+    property dwBytesXmited : UInt32
+    property dwBytesRcved : UInt32
+    property dwFramesXmited : UInt32
+    property dwFramesRcved : UInt32
+    property dwCrcErr : UInt32
+    property dwTimeoutErr : UInt32
+    property dwAlignmentErr : UInt32
+    property dwHardwareOverrunErr : UInt32
+    property dwFramingErr : UInt32
+    property dwBufferOverrunErr : UInt32
+    property dwCompressionRatioIn : UInt32
+    property dwCompressionRatioOut : UInt32
+    property dwBps : UInt32
+    property dwConnectDuration : UInt32
+    def initialize(@dwSize : UInt32, @dwBytesXmited : UInt32, @dwBytesRcved : UInt32, @dwFramesXmited : UInt32, @dwFramesRcved : UInt32, @dwCrcErr : UInt32, @dwTimeoutErr : UInt32, @dwAlignmentErr : UInt32, @dwHardwareOverrunErr : UInt32, @dwFramingErr : UInt32, @dwBufferOverrunErr : UInt32, @dwCompressionRatioIn : UInt32, @dwCompressionRatioOut : UInt32, @dwBps : UInt32, @dwConnectDuration : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct RASUPDATECONN
+    property version : Win32cr::NetworkManagement::Rras::RASAPIVERSION
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwIfIndex : UInt32
+    property localEndPoint : Win32cr::NetworkManagement::Rras::RASTUNNELENDPOINT
+    property remoteEndPoint : Win32cr::NetworkManagement::Rras::RASTUNNELENDPOINT
+    def initialize(@version : Win32cr::NetworkManagement::Rras::RASAPIVERSION, @dwSize : UInt32, @dwFlags : UInt32, @dwIfIndex : UInt32, @localEndPoint : Win32cr::NetworkManagement::Rras::RASTUNNELENDPOINT, @remoteEndPoint : Win32cr::NetworkManagement::Rras::RASTUNNELENDPOINT)
+    end
+  end
+
+  @[Extern]
+  struct RASNOUSERW
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwTimeoutMs : UInt32
+    property szUserName : UInt16[257]
+    property szPassword : UInt16[257]
+    property szDomain : UInt16[16]
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwTimeoutMs : UInt32, @szUserName : UInt16[257], @szPassword : UInt16[257], @szDomain : UInt16[16])
+    end
+  end
+
+  @[Extern]
+  struct RASNOUSERA
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwTimeoutMs : UInt32
+    property szUserName : Win32cr::Foundation::CHAR[257]
+    property szPassword : Win32cr::Foundation::CHAR[257]
+    property szDomain : Win32cr::Foundation::CHAR[16]
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwTimeoutMs : UInt32, @szUserName : Win32cr::Foundation::CHAR[257], @szPassword : Win32cr::Foundation::CHAR[257], @szDomain : Win32cr::Foundation::CHAR[16])
+    end
+  end
+
+  @[Extern]
+  struct RASPBDLGW
+    property dwSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property dwFlags : UInt32
+    property xDlg : Int32
+    property yDlg : Int32
+    property dwCallbackId : LibC::UIntPtrT
+    property pCallback : Win32cr::NetworkManagement::Rras::RASPBDLGFUNCW
+    property dwError : UInt32
+    property reserved : LibC::UIntPtrT
+    property reserved2 : LibC::UIntPtrT
+    def initialize(@dwSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @dwFlags : UInt32, @xDlg : Int32, @yDlg : Int32, @dwCallbackId : LibC::UIntPtrT, @pCallback : Win32cr::NetworkManagement::Rras::RASPBDLGFUNCW, @dwError : UInt32, @reserved : LibC::UIntPtrT, @reserved2 : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct RASPBDLGA
+    property dwSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property dwFlags : UInt32
+    property xDlg : Int32
+    property yDlg : Int32
+    property dwCallbackId : LibC::UIntPtrT
+    property pCallback : Win32cr::NetworkManagement::Rras::RASPBDLGFUNCA
+    property dwError : UInt32
+    property reserved : LibC::UIntPtrT
+    property reserved2 : LibC::UIntPtrT
+    def initialize(@dwSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @dwFlags : UInt32, @xDlg : Int32, @yDlg : Int32, @dwCallbackId : LibC::UIntPtrT, @pCallback : Win32cr::NetworkManagement::Rras::RASPBDLGFUNCA, @dwError : UInt32, @reserved : LibC::UIntPtrT, @reserved2 : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct RASENTRYDLGW
+    property dwSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property dwFlags : UInt32
+    property xDlg : Int32
+    property yDlg : Int32
+    property szEntry : UInt16[257]
+    property dwError : UInt32
+    property reserved : LibC::UIntPtrT
+    property reserved2 : LibC::UIntPtrT
+    def initialize(@dwSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @dwFlags : UInt32, @xDlg : Int32, @yDlg : Int32, @szEntry : UInt16[257], @dwError : UInt32, @reserved : LibC::UIntPtrT, @reserved2 : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct RASENTRYDLGA
+    property dwSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property dwFlags : UInt32
+    property xDlg : Int32
+    property yDlg : Int32
+    property szEntry : Win32cr::Foundation::CHAR[257]
+    property dwError : UInt32
+    property reserved : LibC::UIntPtrT
+    property reserved2 : LibC::UIntPtrT
+    def initialize(@dwSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @dwFlags : UInt32, @xDlg : Int32, @yDlg : Int32, @szEntry : Win32cr::Foundation::CHAR[257], @dwError : UInt32, @reserved : LibC::UIntPtrT, @reserved2 : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct RASDIALDLG
+    property dwSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property dwFlags : UInt32
+    property xDlg : Int32
+    property yDlg : Int32
+    property dwSubEntry : UInt32
+    property dwError : UInt32
+    property reserved : LibC::UIntPtrT
+    property reserved2 : LibC::UIntPtrT
+    def initialize(@dwSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @dwFlags : UInt32, @xDlg : Int32, @yDlg : Int32, @dwSubEntry : UInt32, @dwError : UInt32, @reserved : LibC::UIntPtrT, @reserved2 : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct MPR_INTERFACE_0
+    property wszInterfaceName : UInt16[257]
+    property hInterface : Win32cr::Foundation::HANDLE
+    property fEnabled : Win32cr::Foundation::BOOL
+    property dwIfType : Win32cr::NetworkManagement::Rras::ROUTER_INTERFACE_TYPE
+    property dwConnectionState : Win32cr::NetworkManagement::Rras::ROUTER_CONNECTION_STATE
+    property fUnReachabilityReasons : UInt32
+    property dwLastError : UInt32
+    def initialize(@wszInterfaceName : UInt16[257], @hInterface : Win32cr::Foundation::HANDLE, @fEnabled : Win32cr::Foundation::BOOL, @dwIfType : Win32cr::NetworkManagement::Rras::ROUTER_INTERFACE_TYPE, @dwConnectionState : Win32cr::NetworkManagement::Rras::ROUTER_CONNECTION_STATE, @fUnReachabilityReasons : UInt32, @dwLastError : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MPR_IPINIP_INTERFACE_0
+    property wszFriendlyName : UInt16[257]
+    property guid : LibC::GUID
+    def initialize(@wszFriendlyName : UInt16[257], @guid : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct MPR_INTERFACE_1
+    property wszInterfaceName : UInt16[257]
+    property hInterface : Win32cr::Foundation::HANDLE
+    property fEnabled : Win32cr::Foundation::BOOL
+    property dwIfType : Win32cr::NetworkManagement::Rras::ROUTER_INTERFACE_TYPE
+    property dwConnectionState : Win32cr::NetworkManagement::Rras::ROUTER_CONNECTION_STATE
+    property fUnReachabilityReasons : UInt32
+    property dwLastError : UInt32
+    property lpwsDialoutHoursRestriction : Win32cr::Foundation::PWSTR
+    def initialize(@wszInterfaceName : UInt16[257], @hInterface : Win32cr::Foundation::HANDLE, @fEnabled : Win32cr::Foundation::BOOL, @dwIfType : Win32cr::NetworkManagement::Rras::ROUTER_INTERFACE_TYPE, @dwConnectionState : Win32cr::NetworkManagement::Rras::ROUTER_CONNECTION_STATE, @fUnReachabilityReasons : UInt32, @dwLastError : UInt32, @lpwsDialoutHoursRestriction : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct MPR_INTERFACE_2
+    property wszInterfaceName : UInt16[257]
+    property hInterface : Win32cr::Foundation::HANDLE
+    property fEnabled : Win32cr::Foundation::BOOL
+    property dwIfType : Win32cr::NetworkManagement::Rras::ROUTER_INTERFACE_TYPE
+    property dwConnectionState : Win32cr::NetworkManagement::Rras::ROUTER_CONNECTION_STATE
+    property fUnReachabilityReasons : UInt32
+    property dwLastError : UInt32
+    property dwfOptions : UInt32
+    property szLocalPhoneNumber : UInt16[129]
+    property szAlternates : Win32cr::Foundation::PWSTR
+    property ipaddr : UInt32
+    property ipaddrDns : UInt32
+    property ipaddrDnsAlt : UInt32
+    property ipaddrWins : UInt32
+    property ipaddrWinsAlt : UInt32
+    property dwfNetProtocols : UInt32
+    property szDeviceType : UInt16[17]
+    property szDeviceName : UInt16[129]
+    property szX25PadType : UInt16[33]
+    property szX25Address : UInt16[201]
+    property szX25Facilities : UInt16[201]
+    property szX25UserData : UInt16[201]
+    property dwChannels : UInt32
+    property dwSubEntries : UInt32
+    property dwDialMode : Win32cr::NetworkManagement::Rras::MPR_INTERFACE_DIAL_MODE
+    property dwDialExtraPercent : UInt32
+    property dwDialExtraSampleSeconds : UInt32
+    property dwHangUpExtraPercent : UInt32
+    property dwHangUpExtraSampleSeconds : UInt32
+    property dwIdleDisconnectSeconds : UInt32
+    property dwType : UInt32
+    property dwEncryptionType : Win32cr::NetworkManagement::Rras::MPR_ET
+    property dwCustomAuthKey : UInt32
+    property dwCustomAuthDataSize : UInt32
+    property lpbCustomAuthData : UInt8*
+    property guidId : LibC::GUID
+    property dwVpnStrategy : Win32cr::NetworkManagement::Rras::MPR_VS
+    def initialize(@wszInterfaceName : UInt16[257], @hInterface : Win32cr::Foundation::HANDLE, @fEnabled : Win32cr::Foundation::BOOL, @dwIfType : Win32cr::NetworkManagement::Rras::ROUTER_INTERFACE_TYPE, @dwConnectionState : Win32cr::NetworkManagement::Rras::ROUTER_CONNECTION_STATE, @fUnReachabilityReasons : UInt32, @dwLastError : UInt32, @dwfOptions : UInt32, @szLocalPhoneNumber : UInt16[129], @szAlternates : Win32cr::Foundation::PWSTR, @ipaddr : UInt32, @ipaddrDns : UInt32, @ipaddrDnsAlt : UInt32, @ipaddrWins : UInt32, @ipaddrWinsAlt : UInt32, @dwfNetProtocols : UInt32, @szDeviceType : UInt16[17], @szDeviceName : UInt16[129], @szX25PadType : UInt16[33], @szX25Address : UInt16[201], @szX25Facilities : UInt16[201], @szX25UserData : UInt16[201], @dwChannels : UInt32, @dwSubEntries : UInt32, @dwDialMode : Win32cr::NetworkManagement::Rras::MPR_INTERFACE_DIAL_MODE, @dwDialExtraPercent : UInt32, @dwDialExtraSampleSeconds : UInt32, @dwHangUpExtraPercent : UInt32, @dwHangUpExtraSampleSeconds : UInt32, @dwIdleDisconnectSeconds : UInt32, @dwType : UInt32, @dwEncryptionType : Win32cr::NetworkManagement::Rras::MPR_ET, @dwCustomAuthKey : UInt32, @dwCustomAuthDataSize : UInt32, @lpbCustomAuthData : UInt8*, @guidId : LibC::GUID, @dwVpnStrategy : Win32cr::NetworkManagement::Rras::MPR_VS)
+    end
+  end
+
+  @[Extern]
+  struct MPR_INTERFACE_3
+    property wszInterfaceName : UInt16[257]
+    property hInterface : Win32cr::Foundation::HANDLE
+    property fEnabled : Win32cr::Foundation::BOOL
+    property dwIfType : Win32cr::NetworkManagement::Rras::ROUTER_INTERFACE_TYPE
+    property dwConnectionState : Win32cr::NetworkManagement::Rras::ROUTER_CONNECTION_STATE
+    property fUnReachabilityReasons : UInt32
+    property dwLastError : UInt32
+    property dwfOptions : UInt32
+    property szLocalPhoneNumber : UInt16[129]
+    property szAlternates : Win32cr::Foundation::PWSTR
+    property ipaddr : UInt32
+    property ipaddrDns : UInt32
+    property ipaddrDnsAlt : UInt32
+    property ipaddrWins : UInt32
+    property ipaddrWinsAlt : UInt32
+    property dwfNetProtocols : UInt32
+    property szDeviceType : UInt16[17]
+    property szDeviceName : UInt16[129]
+    property szX25PadType : UInt16[33]
+    property szX25Address : UInt16[201]
+    property szX25Facilities : UInt16[201]
+    property szX25UserData : UInt16[201]
+    property dwChannels : UInt32
+    property dwSubEntries : UInt32
+    property dwDialMode : Win32cr::NetworkManagement::Rras::MPR_INTERFACE_DIAL_MODE
+    property dwDialExtraPercent : UInt32
+    property dwDialExtraSampleSeconds : UInt32
+    property dwHangUpExtraPercent : UInt32
+    property dwHangUpExtraSampleSeconds : UInt32
+    property dwIdleDisconnectSeconds : UInt32
+    property dwType : UInt32
+    property dwEncryptionType : Win32cr::NetworkManagement::Rras::MPR_ET
+    property dwCustomAuthKey : UInt32
+    property dwCustomAuthDataSize : UInt32
+    property lpbCustomAuthData : UInt8*
+    property guidId : LibC::GUID
+    property dwVpnStrategy : Win32cr::NetworkManagement::Rras::MPR_VS
+    property address_count : UInt32
+    property ipv6addrDns : Win32cr::Networking::WinSock::IN6_ADDR
+    property ipv6addrDnsAlt : Win32cr::Networking::WinSock::IN6_ADDR
+    property ipv6addr : Win32cr::Networking::WinSock::IN6_ADDR*
+    def initialize(@wszInterfaceName : UInt16[257], @hInterface : Win32cr::Foundation::HANDLE, @fEnabled : Win32cr::Foundation::BOOL, @dwIfType : Win32cr::NetworkManagement::Rras::ROUTER_INTERFACE_TYPE, @dwConnectionState : Win32cr::NetworkManagement::Rras::ROUTER_CONNECTION_STATE, @fUnReachabilityReasons : UInt32, @dwLastError : UInt32, @dwfOptions : UInt32, @szLocalPhoneNumber : UInt16[129], @szAlternates : Win32cr::Foundation::PWSTR, @ipaddr : UInt32, @ipaddrDns : UInt32, @ipaddrDnsAlt : UInt32, @ipaddrWins : UInt32, @ipaddrWinsAlt : UInt32, @dwfNetProtocols : UInt32, @szDeviceType : UInt16[17], @szDeviceName : UInt16[129], @szX25PadType : UInt16[33], @szX25Address : UInt16[201], @szX25Facilities : UInt16[201], @szX25UserData : UInt16[201], @dwChannels : UInt32, @dwSubEntries : UInt32, @dwDialMode : Win32cr::NetworkManagement::Rras::MPR_INTERFACE_DIAL_MODE, @dwDialExtraPercent : UInt32, @dwDialExtraSampleSeconds : UInt32, @dwHangUpExtraPercent : UInt32, @dwHangUpExtraSampleSeconds : UInt32, @dwIdleDisconnectSeconds : UInt32, @dwType : UInt32, @dwEncryptionType : Win32cr::NetworkManagement::Rras::MPR_ET, @dwCustomAuthKey : UInt32, @dwCustomAuthDataSize : UInt32, @lpbCustomAuthData : UInt8*, @guidId : LibC::GUID, @dwVpnStrategy : Win32cr::NetworkManagement::Rras::MPR_VS, @address_count : UInt32, @ipv6addrDns : Win32cr::Networking::WinSock::IN6_ADDR, @ipv6addrDnsAlt : Win32cr::Networking::WinSock::IN6_ADDR, @ipv6addr : Win32cr::Networking::WinSock::IN6_ADDR*)
+    end
+  end
+
+  @[Extern]
+  struct MPR_DEVICE_0
+    property szDeviceType : UInt16[17]
+    property szDeviceName : UInt16[129]
+    def initialize(@szDeviceType : UInt16[17], @szDeviceName : UInt16[129])
+    end
+  end
+
+  @[Extern]
+  struct MPR_DEVICE_1
+    property szDeviceType : UInt16[17]
+    property szDeviceName : UInt16[129]
+    property szLocalPhoneNumber : UInt16[129]
+    property szAlternates : Win32cr::Foundation::PWSTR
+    def initialize(@szDeviceType : UInt16[17], @szDeviceName : UInt16[129], @szLocalPhoneNumber : UInt16[129], @szAlternates : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct MPR_CREDENTIALSEX_0
+    property dwSize : UInt32
+    property lpbCredentialsInfo : UInt8*
+    def initialize(@dwSize : UInt32, @lpbCredentialsInfo : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct MPR_CREDENTIALSEX_1
+    property dwSize : UInt32
+    property lpbCredentialsInfo : UInt8*
+    def initialize(@dwSize : UInt32, @lpbCredentialsInfo : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct MPR_TRANSPORT_0
+    property dwTransportId : UInt32
+    property hTransport : Win32cr::Foundation::HANDLE
+    property wszTransportName : UInt16[41]
+    def initialize(@dwTransportId : UInt32, @hTransport : Win32cr::Foundation::HANDLE, @wszTransportName : UInt16[41])
+    end
+  end
+
+  @[Extern]
+  struct MPR_IFTRANSPORT_0
+    property dwTransportId : UInt32
+    property hIfTransport : Win32cr::Foundation::HANDLE
+    property wszIfTransportName : UInt16[41]
+    def initialize(@dwTransportId : UInt32, @hIfTransport : Win32cr::Foundation::HANDLE, @wszIfTransportName : UInt16[41])
+    end
+  end
+
+  @[Extern]
+  struct MPR_SERVER_0
+    property fLanOnlyMode : Win32cr::Foundation::BOOL
+    property dwUpTime : UInt32
+    property dwTotalPorts : UInt32
+    property dwPortsInUse : UInt32
+    def initialize(@fLanOnlyMode : Win32cr::Foundation::BOOL, @dwUpTime : UInt32, @dwTotalPorts : UInt32, @dwPortsInUse : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MPR_SERVER_1
+    property dwNumPptpPorts : UInt32
+    property dwPptpPortFlags : UInt32
+    property dwNumL2tpPorts : UInt32
+    property dwL2tpPortFlags : UInt32
+    def initialize(@dwNumPptpPorts : UInt32, @dwPptpPortFlags : UInt32, @dwNumL2tpPorts : UInt32, @dwL2tpPortFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MPR_SERVER_2
+    property dwNumPptpPorts : UInt32
+    property dwPptpPortFlags : UInt32
+    property dwNumL2tpPorts : UInt32
+    property dwL2tpPortFlags : UInt32
+    property dwNumSstpPorts : UInt32
+    property dwSstpPortFlags : UInt32
+    def initialize(@dwNumPptpPorts : UInt32, @dwPptpPortFlags : UInt32, @dwNumL2tpPorts : UInt32, @dwL2tpPortFlags : UInt32, @dwNumSstpPorts : UInt32, @dwSstpPortFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct RAS_PORT_0
+    property hPort : Win32cr::Foundation::HANDLE
+    property hConnection : Win32cr::Foundation::HANDLE
+    property dwPortCondition : Win32cr::NetworkManagement::Rras::RAS_PORT_CONDITION
+    property dwTotalNumberOfCalls : UInt32
+    property dwConnectDuration : UInt32
+    property wszPortName : UInt16[17]
+    property wszMediaName : UInt16[17]
+    property wszDeviceName : UInt16[129]
+    property wszDeviceType : UInt16[17]
+    def initialize(@hPort : Win32cr::Foundation::HANDLE, @hConnection : Win32cr::Foundation::HANDLE, @dwPortCondition : Win32cr::NetworkManagement::Rras::RAS_PORT_CONDITION, @dwTotalNumberOfCalls : UInt32, @dwConnectDuration : UInt32, @wszPortName : UInt16[17], @wszMediaName : UInt16[17], @wszDeviceName : UInt16[129], @wszDeviceType : UInt16[17])
+    end
+  end
+
+  @[Extern]
+  struct RAS_PORT_1
+    property hPort : Win32cr::Foundation::HANDLE
+    property hConnection : Win32cr::Foundation::HANDLE
+    property dwHardwareCondition : Win32cr::NetworkManagement::Rras::RAS_HARDWARE_CONDITION
+    property dwLineSpeed : UInt32
+    property dwBytesXmited : UInt32
+    property dwBytesRcved : UInt32
+    property dwFramesXmited : UInt32
+    property dwFramesRcved : UInt32
+    property dwCrcErr : UInt32
+    property dwTimeoutErr : UInt32
+    property dwAlignmentErr : UInt32
+    property dwHardwareOverrunErr : UInt32
+    property dwFramingErr : UInt32
+    property dwBufferOverrunErr : UInt32
+    property dwCompressionRatioIn : UInt32
+    property dwCompressionRatioOut : UInt32
+    def initialize(@hPort : Win32cr::Foundation::HANDLE, @hConnection : Win32cr::Foundation::HANDLE, @dwHardwareCondition : Win32cr::NetworkManagement::Rras::RAS_HARDWARE_CONDITION, @dwLineSpeed : UInt32, @dwBytesXmited : UInt32, @dwBytesRcved : UInt32, @dwFramesXmited : UInt32, @dwFramesRcved : UInt32, @dwCrcErr : UInt32, @dwTimeoutErr : UInt32, @dwAlignmentErr : UInt32, @dwHardwareOverrunErr : UInt32, @dwFramingErr : UInt32, @dwBufferOverrunErr : UInt32, @dwCompressionRatioIn : UInt32, @dwCompressionRatioOut : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct RAS_PORT_2
+    property hPort : Win32cr::Foundation::HANDLE
+    property hConnection : Win32cr::Foundation::HANDLE
+    property dwConn_State : UInt32
+    property wszPortName : UInt16[17]
+    property wszMediaName : UInt16[17]
+    property wszDeviceName : UInt16[129]
+    property wszDeviceType : UInt16[17]
+    property dwHardwareCondition : Win32cr::NetworkManagement::Rras::RAS_HARDWARE_CONDITION
+    property dwLineSpeed : UInt32
+    property dwCrcErr : UInt32
+    property dwSerialOverRunErrs : UInt32
+    property dwTimeoutErr : UInt32
+    property dwAlignmentErr : UInt32
+    property dwHardwareOverrunErr : UInt32
+    property dwFramingErr : UInt32
+    property dwBufferOverrunErr : UInt32
+    property dwCompressionRatioIn : UInt32
+    property dwCompressionRatioOut : UInt32
+    property dwTotalErrors : UInt32
+    property ullBytesXmited : UInt64
+    property ullBytesRcved : UInt64
+    property ullFramesXmited : UInt64
+    property ullFramesRcved : UInt64
+    property ullBytesTxUncompressed : UInt64
+    property ullBytesTxCompressed : UInt64
+    property ullBytesRcvUncompressed : UInt64
+    property ullBytesRcvCompressed : UInt64
+    def initialize(@hPort : Win32cr::Foundation::HANDLE, @hConnection : Win32cr::Foundation::HANDLE, @dwConn_State : UInt32, @wszPortName : UInt16[17], @wszMediaName : UInt16[17], @wszDeviceName : UInt16[129], @wszDeviceType : UInt16[17], @dwHardwareCondition : Win32cr::NetworkManagement::Rras::RAS_HARDWARE_CONDITION, @dwLineSpeed : UInt32, @dwCrcErr : UInt32, @dwSerialOverRunErrs : UInt32, @dwTimeoutErr : UInt32, @dwAlignmentErr : UInt32, @dwHardwareOverrunErr : UInt32, @dwFramingErr : UInt32, @dwBufferOverrunErr : UInt32, @dwCompressionRatioIn : UInt32, @dwCompressionRatioOut : UInt32, @dwTotalErrors : UInt32, @ullBytesXmited : UInt64, @ullBytesRcved : UInt64, @ullFramesXmited : UInt64, @ullFramesRcved : UInt64, @ullBytesTxUncompressed : UInt64, @ullBytesTxCompressed : UInt64, @ullBytesRcvUncompressed : UInt64, @ullBytesRcvCompressed : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct PPP_NBFCP_INFO
+    property dwError : UInt32
+    property wszWksta : UInt16[17]
+    def initialize(@dwError : UInt32, @wszWksta : UInt16[17])
+    end
+  end
+
+  @[Extern]
+  struct PPP_IPCP_INFO
+    property dwError : UInt32
+    property wszAddress : UInt16[16]
+    property wszRemoteAddress : UInt16[16]
+    def initialize(@dwError : UInt32, @wszAddress : UInt16[16], @wszRemoteAddress : UInt16[16])
+    end
+  end
+
+  @[Extern]
+  struct PPP_IPCP_INFO2
+    property dwError : UInt32
+    property wszAddress : UInt16[16]
+    property wszRemoteAddress : UInt16[16]
+    property dwOptions : UInt32
+    property dwRemoteOptions : UInt32
+    def initialize(@dwError : UInt32, @wszAddress : UInt16[16], @wszRemoteAddress : UInt16[16], @dwOptions : UInt32, @dwRemoteOptions : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PPP_IPXCP_INFO
+    property dwError : UInt32
+    property wszAddress : UInt16[23]
+    def initialize(@dwError : UInt32, @wszAddress : UInt16[23])
+    end
+  end
+
+  @[Extern]
+  struct PPP_ATCP_INFO
+    property dwError : UInt32
+    property wszAddress : UInt16[33]
+    def initialize(@dwError : UInt32, @wszAddress : UInt16[33])
+    end
+  end
+
+  @[Extern]
+  struct PPP_IPV6_CP_INFO
+    property dwVersion : UInt32
+    property dwSize : UInt32
+    property dwError : UInt32
+    property bInterfaceIdentifier : UInt8[8]
+    property bRemoteInterfaceIdentifier : UInt8[8]
+    property dwOptions : UInt32
+    property dwRemoteOptions : UInt32
+    property bPrefix : UInt8[8]
+    property dwPrefixLength : UInt32
+    def initialize(@dwVersion : UInt32, @dwSize : UInt32, @dwError : UInt32, @bInterfaceIdentifier : UInt8[8], @bRemoteInterfaceIdentifier : UInt8[8], @dwOptions : UInt32, @dwRemoteOptions : UInt32, @bPrefix : UInt8[8], @dwPrefixLength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PPP_INFO
+    property nbf : Win32cr::NetworkManagement::Rras::PPP_NBFCP_INFO
+    property ip : Win32cr::NetworkManagement::Rras::PPP_IPCP_INFO
+    property ipx : Win32cr::NetworkManagement::Rras::PPP_IPXCP_INFO
+    property at : Win32cr::NetworkManagement::Rras::PPP_ATCP_INFO
+    def initialize(@nbf : Win32cr::NetworkManagement::Rras::PPP_NBFCP_INFO, @ip : Win32cr::NetworkManagement::Rras::PPP_IPCP_INFO, @ipx : Win32cr::NetworkManagement::Rras::PPP_IPXCP_INFO, @at : Win32cr::NetworkManagement::Rras::PPP_ATCP_INFO)
+    end
+  end
+
+  @[Extern]
+  struct PPP_CCP_INFO
+    property dwError : UInt32
+    property dwCompressionAlgorithm : UInt32
+    property dwOptions : UInt32
+    property dwRemoteCompressionAlgorithm : UInt32
+    property dwRemoteOptions : UInt32
+    def initialize(@dwError : UInt32, @dwCompressionAlgorithm : UInt32, @dwOptions : UInt32, @dwRemoteCompressionAlgorithm : UInt32, @dwRemoteOptions : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PPP_LCP_INFO
+    property dwError : UInt32
+    property dwAuthenticationProtocol : Win32cr::NetworkManagement::Rras::PPP_LCP
+    property dwAuthenticationData : Win32cr::NetworkManagement::Rras::PPP_LCP_INFO_AUTH_DATA
+    property dwRemoteAuthenticationProtocol : UInt32
+    property dwRemoteAuthenticationData : UInt32
+    property dwTerminateReason : UInt32
+    property dwRemoteTerminateReason : UInt32
+    property dwOptions : UInt32
+    property dwRemoteOptions : UInt32
+    property dwEapTypeId : UInt32
+    property dwRemoteEapTypeId : UInt32
+    def initialize(@dwError : UInt32, @dwAuthenticationProtocol : Win32cr::NetworkManagement::Rras::PPP_LCP, @dwAuthenticationData : Win32cr::NetworkManagement::Rras::PPP_LCP_INFO_AUTH_DATA, @dwRemoteAuthenticationProtocol : UInt32, @dwRemoteAuthenticationData : UInt32, @dwTerminateReason : UInt32, @dwRemoteTerminateReason : UInt32, @dwOptions : UInt32, @dwRemoteOptions : UInt32, @dwEapTypeId : UInt32, @dwRemoteEapTypeId : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PPP_INFO_2
+    property nbf : Win32cr::NetworkManagement::Rras::PPP_NBFCP_INFO
+    property ip : Win32cr::NetworkManagement::Rras::PPP_IPCP_INFO2
+    property ipx : Win32cr::NetworkManagement::Rras::PPP_IPXCP_INFO
+    property at : Win32cr::NetworkManagement::Rras::PPP_ATCP_INFO
+    property ccp : Win32cr::NetworkManagement::Rras::PPP_CCP_INFO
+    property lcp : Win32cr::NetworkManagement::Rras::PPP_LCP_INFO
+    def initialize(@nbf : Win32cr::NetworkManagement::Rras::PPP_NBFCP_INFO, @ip : Win32cr::NetworkManagement::Rras::PPP_IPCP_INFO2, @ipx : Win32cr::NetworkManagement::Rras::PPP_IPXCP_INFO, @at : Win32cr::NetworkManagement::Rras::PPP_ATCP_INFO, @ccp : Win32cr::NetworkManagement::Rras::PPP_CCP_INFO, @lcp : Win32cr::NetworkManagement::Rras::PPP_LCP_INFO)
+    end
+  end
+
+  @[Extern]
+  struct PPP_INFO_3
+    property nbf : Win32cr::NetworkManagement::Rras::PPP_NBFCP_INFO
+    property ip : Win32cr::NetworkManagement::Rras::PPP_IPCP_INFO2
+    property ipv6 : Win32cr::NetworkManagement::Rras::PPP_IPV6_CP_INFO
+    property ccp : Win32cr::NetworkManagement::Rras::PPP_CCP_INFO
+    property lcp : Win32cr::NetworkManagement::Rras::PPP_LCP_INFO
+    def initialize(@nbf : Win32cr::NetworkManagement::Rras::PPP_NBFCP_INFO, @ip : Win32cr::NetworkManagement::Rras::PPP_IPCP_INFO2, @ipv6 : Win32cr::NetworkManagement::Rras::PPP_IPV6_CP_INFO, @ccp : Win32cr::NetworkManagement::Rras::PPP_CCP_INFO, @lcp : Win32cr::NetworkManagement::Rras::PPP_LCP_INFO)
+    end
+  end
+
+  @[Extern]
+  struct RAS_CONNECTION_0
+    property hConnection : Win32cr::Foundation::HANDLE
+    property hInterface : Win32cr::Foundation::HANDLE
+    property dwConnectDuration : UInt32
+    property dwInterfaceType : Win32cr::NetworkManagement::Rras::ROUTER_INTERFACE_TYPE
+    property dwConnectionFlags : Win32cr::NetworkManagement::Rras::RAS_FLAGS
+    property wszInterfaceName : UInt16[257]
+    property wszUserName : UInt16[257]
+    property wszLogonDomain : UInt16[16]
+    property wszRemoteComputer : UInt16[17]
+    def initialize(@hConnection : Win32cr::Foundation::HANDLE, @hInterface : Win32cr::Foundation::HANDLE, @dwConnectDuration : UInt32, @dwInterfaceType : Win32cr::NetworkManagement::Rras::ROUTER_INTERFACE_TYPE, @dwConnectionFlags : Win32cr::NetworkManagement::Rras::RAS_FLAGS, @wszInterfaceName : UInt16[257], @wszUserName : UInt16[257], @wszLogonDomain : UInt16[16], @wszRemoteComputer : UInt16[17])
+    end
+  end
+
+  @[Extern]
+  struct RAS_CONNECTION_1
+    property hConnection : Win32cr::Foundation::HANDLE
+    property hInterface : Win32cr::Foundation::HANDLE
+    property ppp_info : Win32cr::NetworkManagement::Rras::PPP_INFO
+    property dwBytesXmited : UInt32
+    property dwBytesRcved : UInt32
+    property dwFramesXmited : UInt32
+    property dwFramesRcved : UInt32
+    property dwCrcErr : UInt32
+    property dwTimeoutErr : UInt32
+    property dwAlignmentErr : UInt32
+    property dwHardwareOverrunErr : UInt32
+    property dwFramingErr : UInt32
+    property dwBufferOverrunErr : UInt32
+    property dwCompressionRatioIn : UInt32
+    property dwCompressionRatioOut : UInt32
+    def initialize(@hConnection : Win32cr::Foundation::HANDLE, @hInterface : Win32cr::Foundation::HANDLE, @ppp_info : Win32cr::NetworkManagement::Rras::PPP_INFO, @dwBytesXmited : UInt32, @dwBytesRcved : UInt32, @dwFramesXmited : UInt32, @dwFramesRcved : UInt32, @dwCrcErr : UInt32, @dwTimeoutErr : UInt32, @dwAlignmentErr : UInt32, @dwHardwareOverrunErr : UInt32, @dwFramingErr : UInt32, @dwBufferOverrunErr : UInt32, @dwCompressionRatioIn : UInt32, @dwCompressionRatioOut : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct RAS_CONNECTION_2
+    property hConnection : Win32cr::Foundation::HANDLE
+    property wszUserName : UInt16[257]
+    property dwInterfaceType : Win32cr::NetworkManagement::Rras::ROUTER_INTERFACE_TYPE
+    property guid : LibC::GUID
+    property ppp_info2 : Win32cr::NetworkManagement::Rras::PPP_INFO_2
+    def initialize(@hConnection : Win32cr::Foundation::HANDLE, @wszUserName : UInt16[257], @dwInterfaceType : Win32cr::NetworkManagement::Rras::ROUTER_INTERFACE_TYPE, @guid : LibC::GUID, @ppp_info2 : Win32cr::NetworkManagement::Rras::PPP_INFO_2)
+    end
+  end
+
+  @[Extern]
+  struct RAS_CONNECTION_3
+    property dwVersion : UInt32
+    property dwSize : UInt32
+    property hConnection : Win32cr::Foundation::HANDLE
+    property wszUserName : UInt16[257]
+    property dwInterfaceType : Win32cr::NetworkManagement::Rras::ROUTER_INTERFACE_TYPE
+    property guid : LibC::GUID
+    property ppp_info3 : Win32cr::NetworkManagement::Rras::PPP_INFO_3
+    property rasQuarState : Win32cr::NetworkManagement::Rras::RAS_QUARANTINE_STATE
+    property timer : Win32cr::Foundation::FILETIME
+    def initialize(@dwVersion : UInt32, @dwSize : UInt32, @hConnection : Win32cr::Foundation::HANDLE, @wszUserName : UInt16[257], @dwInterfaceType : Win32cr::NetworkManagement::Rras::ROUTER_INTERFACE_TYPE, @guid : LibC::GUID, @ppp_info3 : Win32cr::NetworkManagement::Rras::PPP_INFO_3, @rasQuarState : Win32cr::NetworkManagement::Rras::RAS_QUARANTINE_STATE, @timer : Win32cr::Foundation::FILETIME)
+    end
+  end
+
+  @[Extern]
+  struct RAS_USER_0
+    property bfPrivilege : UInt8
+    property wszPhoneNumber : UInt16[129]
+    def initialize(@bfPrivilege : UInt8, @wszPhoneNumber : UInt16[129])
+    end
+  end
+
+  @[Extern]
+  struct RAS_USER_1
+    property bfPrivilege : UInt8
+    property wszPhoneNumber : UInt16[129]
+    property bfPrivilege2 : UInt8
+    def initialize(@bfPrivilege : UInt8, @wszPhoneNumber : UInt16[129], @bfPrivilege2 : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MPR_FILTER_0
+    property fEnable : Win32cr::Foundation::BOOL
+    def initialize(@fEnable : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct MPRAPI_OBJECT_HEADER
+    property revision : UInt8
+    property type__ : UInt8
+    property size : UInt16
+    def initialize(@revision : UInt8, @type__ : UInt8, @size : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct PPP_PROJECTION_INFO
+    property dwIPv4NegotiationError : UInt32
+    property wszAddress : UInt16[16]
+    property wszRemoteAddress : UInt16[16]
+    property dwIPv4Options : UInt32
+    property dwIPv4RemoteOptions : UInt32
+    property i_pv4_sub_interface_index : UInt64
+    property dwIPv6NegotiationError : UInt32
+    property bInterfaceIdentifier : UInt8[8]
+    property bRemoteInterfaceIdentifier : UInt8[8]
+    property bPrefix : UInt8[8]
+    property dwPrefixLength : UInt32
+    property i_pv6_sub_interface_index : UInt64
+    property dwLcpError : UInt32
+    property dwAuthenticationProtocol : Win32cr::NetworkManagement::Rras::PPP_LCP
+    property dwAuthenticationData : Win32cr::NetworkManagement::Rras::PPP_LCP_INFO_AUTH_DATA
+    property dwRemoteAuthenticationProtocol : Win32cr::NetworkManagement::Rras::PPP_LCP
+    property dwRemoteAuthenticationData : Win32cr::NetworkManagement::Rras::PPP_LCP_INFO_AUTH_DATA
+    property dwLcpTerminateReason : UInt32
+    property dwLcpRemoteTerminateReason : UInt32
+    property dwLcpOptions : UInt32
+    property dwLcpRemoteOptions : UInt32
+    property dwEapTypeId : UInt32
+    property dwRemoteEapTypeId : UInt32
+    property dwCcpError : UInt32
+    property dwCompressionAlgorithm : UInt32
+    property dwCcpOptions : UInt32
+    property dwRemoteCompressionAlgorithm : UInt32
+    property dwCcpRemoteOptions : UInt32
+    def initialize(@dwIPv4NegotiationError : UInt32, @wszAddress : UInt16[16], @wszRemoteAddress : UInt16[16], @dwIPv4Options : UInt32, @dwIPv4RemoteOptions : UInt32, @i_pv4_sub_interface_index : UInt64, @dwIPv6NegotiationError : UInt32, @bInterfaceIdentifier : UInt8[8], @bRemoteInterfaceIdentifier : UInt8[8], @bPrefix : UInt8[8], @dwPrefixLength : UInt32, @i_pv6_sub_interface_index : UInt64, @dwLcpError : UInt32, @dwAuthenticationProtocol : Win32cr::NetworkManagement::Rras::PPP_LCP, @dwAuthenticationData : Win32cr::NetworkManagement::Rras::PPP_LCP_INFO_AUTH_DATA, @dwRemoteAuthenticationProtocol : Win32cr::NetworkManagement::Rras::PPP_LCP, @dwRemoteAuthenticationData : Win32cr::NetworkManagement::Rras::PPP_LCP_INFO_AUTH_DATA, @dwLcpTerminateReason : UInt32, @dwLcpRemoteTerminateReason : UInt32, @dwLcpOptions : UInt32, @dwLcpRemoteOptions : UInt32, @dwEapTypeId : UInt32, @dwRemoteEapTypeId : UInt32, @dwCcpError : UInt32, @dwCompressionAlgorithm : UInt32, @dwCcpOptions : UInt32, @dwRemoteCompressionAlgorithm : UInt32, @dwCcpRemoteOptions : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PPP_PROJECTION_INFO2
+    property dwIPv4NegotiationError : UInt32
+    property wszAddress : UInt16[16]
+    property wszRemoteAddress : UInt16[16]
+    property dwIPv4Options : UInt32
+    property dwIPv4RemoteOptions : UInt32
+    property i_pv4_sub_interface_index : UInt64
+    property dwIPv6NegotiationError : UInt32
+    property bInterfaceIdentifier : UInt8[8]
+    property bRemoteInterfaceIdentifier : UInt8[8]
+    property bPrefix : UInt8[8]
+    property dwPrefixLength : UInt32
+    property i_pv6_sub_interface_index : UInt64
+    property dwLcpError : UInt32
+    property dwAuthenticationProtocol : Win32cr::NetworkManagement::Rras::PPP_LCP
+    property dwAuthenticationData : Win32cr::NetworkManagement::Rras::PPP_LCP_INFO_AUTH_DATA
+    property dwRemoteAuthenticationProtocol : Win32cr::NetworkManagement::Rras::PPP_LCP
+    property dwRemoteAuthenticationData : Win32cr::NetworkManagement::Rras::PPP_LCP_INFO_AUTH_DATA
+    property dwLcpTerminateReason : UInt32
+    property dwLcpRemoteTerminateReason : UInt32
+    property dwLcpOptions : UInt32
+    property dwLcpRemoteOptions : UInt32
+    property dwEapTypeId : UInt32
+    property dwEmbeddedEAPTypeId : UInt32
+    property dwRemoteEapTypeId : UInt32
+    property dwCcpError : UInt32
+    property dwCompressionAlgorithm : UInt32
+    property dwCcpOptions : UInt32
+    property dwRemoteCompressionAlgorithm : UInt32
+    property dwCcpRemoteOptions : UInt32
+    def initialize(@dwIPv4NegotiationError : UInt32, @wszAddress : UInt16[16], @wszRemoteAddress : UInt16[16], @dwIPv4Options : UInt32, @dwIPv4RemoteOptions : UInt32, @i_pv4_sub_interface_index : UInt64, @dwIPv6NegotiationError : UInt32, @bInterfaceIdentifier : UInt8[8], @bRemoteInterfaceIdentifier : UInt8[8], @bPrefix : UInt8[8], @dwPrefixLength : UInt32, @i_pv6_sub_interface_index : UInt64, @dwLcpError : UInt32, @dwAuthenticationProtocol : Win32cr::NetworkManagement::Rras::PPP_LCP, @dwAuthenticationData : Win32cr::NetworkManagement::Rras::PPP_LCP_INFO_AUTH_DATA, @dwRemoteAuthenticationProtocol : Win32cr::NetworkManagement::Rras::PPP_LCP, @dwRemoteAuthenticationData : Win32cr::NetworkManagement::Rras::PPP_LCP_INFO_AUTH_DATA, @dwLcpTerminateReason : UInt32, @dwLcpRemoteTerminateReason : UInt32, @dwLcpOptions : UInt32, @dwLcpRemoteOptions : UInt32, @dwEapTypeId : UInt32, @dwEmbeddedEAPTypeId : UInt32, @dwRemoteEapTypeId : UInt32, @dwCcpError : UInt32, @dwCompressionAlgorithm : UInt32, @dwCcpOptions : UInt32, @dwRemoteCompressionAlgorithm : UInt32, @dwCcpRemoteOptions : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct IKEV2_PROJECTION_INFO
+    property dwIPv4NegotiationError : UInt32
+    property wszAddress : UInt16[16]
+    property wszRemoteAddress : UInt16[16]
+    property i_pv4_sub_interface_index : UInt64
+    property dwIPv6NegotiationError : UInt32
+    property bInterfaceIdentifier : UInt8[8]
+    property bRemoteInterfaceIdentifier : UInt8[8]
+    property bPrefix : UInt8[8]
+    property dwPrefixLength : UInt32
+    property i_pv6_sub_interface_index : UInt64
+    property dwOptions : UInt32
+    property dwAuthenticationProtocol : UInt32
+    property dwEapTypeId : UInt32
+    property dwCompressionAlgorithm : UInt32
+    property dwEncryptionMethod : UInt32
+    def initialize(@dwIPv4NegotiationError : UInt32, @wszAddress : UInt16[16], @wszRemoteAddress : UInt16[16], @i_pv4_sub_interface_index : UInt64, @dwIPv6NegotiationError : UInt32, @bInterfaceIdentifier : UInt8[8], @bRemoteInterfaceIdentifier : UInt8[8], @bPrefix : UInt8[8], @dwPrefixLength : UInt32, @i_pv6_sub_interface_index : UInt64, @dwOptions : UInt32, @dwAuthenticationProtocol : UInt32, @dwEapTypeId : UInt32, @dwCompressionAlgorithm : UInt32, @dwEncryptionMethod : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct IKEV2_PROJECTION_INFO2
+    property dwIPv4NegotiationError : UInt32
+    property wszAddress : UInt16[16]
+    property wszRemoteAddress : UInt16[16]
+    property i_pv4_sub_interface_index : UInt64
+    property dwIPv6NegotiationError : UInt32
+    property bInterfaceIdentifier : UInt8[8]
+    property bRemoteInterfaceIdentifier : UInt8[8]
+    property bPrefix : UInt8[8]
+    property dwPrefixLength : UInt32
+    property i_pv6_sub_interface_index : UInt64
+    property dwOptions : UInt32
+    property dwAuthenticationProtocol : UInt32
+    property dwEapTypeId : UInt32
+    property dwEmbeddedEAPTypeId : UInt32
+    property dwCompressionAlgorithm : UInt32
+    property dwEncryptionMethod : UInt32
+    def initialize(@dwIPv4NegotiationError : UInt32, @wszAddress : UInt16[16], @wszRemoteAddress : UInt16[16], @i_pv4_sub_interface_index : UInt64, @dwIPv6NegotiationError : UInt32, @bInterfaceIdentifier : UInt8[8], @bRemoteInterfaceIdentifier : UInt8[8], @bPrefix : UInt8[8], @dwPrefixLength : UInt32, @i_pv6_sub_interface_index : UInt64, @dwOptions : UInt32, @dwAuthenticationProtocol : UInt32, @dwEapTypeId : UInt32, @dwEmbeddedEAPTypeId : UInt32, @dwCompressionAlgorithm : UInt32, @dwEncryptionMethod : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PROJECTION_INFO
+    property projectionInfoType : UInt8
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      ppp_projection_info : Win32cr::NetworkManagement::Rras::PPP_PROJECTION_INFO2,
-      ikev2_projection_info : Win32cr::NetworkManagement::Rras::IKEV2_PROJECTION_INFO2
+    struct Anonymous_e__Union_
+    property ppp_projection_info : Win32cr::NetworkManagement::Rras::PPP_PROJECTION_INFO
+    property ikev2_projection_info : Win32cr::NetworkManagement::Rras::IKEV2_PROJECTION_INFO
+    def initialize(@ppp_projection_info : Win32cr::NetworkManagement::Rras::PPP_PROJECTION_INFO, @ikev2_projection_info : Win32cr::NetworkManagement::Rras::IKEV2_PROJECTION_INFO)
+    end
+    end
 
+    def initialize(@projectionInfoType : UInt8, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record RAS_CONNECTION_EX,
-    header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER,
-    dwConnectDuration : UInt32,
-    dwInterfaceType : Win32cr::NetworkManagement::Rras::ROUTER_INTERFACE_TYPE,
-    dwConnectionFlags : Win32cr::NetworkManagement::Rras::RAS_FLAGS,
-    wszInterfaceName : UInt16[257],
-    wszUserName : UInt16[257],
-    wszLogonDomain : UInt16[16],
-    wszRemoteComputer : UInt16[17],
-    guid : LibC::GUID,
-    rasQuarState : Win32cr::NetworkManagement::Rras::RAS_QUARANTINE_STATE,
-    probationTime : Win32cr::Foundation::FILETIME,
-    dwBytesXmited : UInt32,
-    dwBytesRcved : UInt32,
-    dwFramesXmited : UInt32,
-    dwFramesRcved : UInt32,
-    dwCrcErr : UInt32,
-    dwTimeoutErr : UInt32,
-    dwAlignmentErr : UInt32,
-    dwHardwareOverrunErr : UInt32,
-    dwFramingErr : UInt32,
-    dwBufferOverrunErr : UInt32,
-    dwCompressionRatioIn : UInt32,
-    dwCompressionRatioOut : UInt32,
-    dwNumSwitchOvers : UInt32,
-    wszRemoteEndpointAddress : UInt16[65],
-    wszLocalEndpointAddress : UInt16[65],
-    projection_info : Win32cr::NetworkManagement::Rras::PROJECTION_INFO,
-    hConnection : Win32cr::Foundation::HANDLE,
-    hInterface : Win32cr::Foundation::HANDLE
-
-  @[Extern]
-  record RAS_CONNECTION_4,
-    dwConnectDuration : UInt32,
-    dwInterfaceType : Win32cr::NetworkManagement::Rras::ROUTER_INTERFACE_TYPE,
-    dwConnectionFlags : Win32cr::NetworkManagement::Rras::RAS_FLAGS,
-    wszInterfaceName : UInt16[257],
-    wszUserName : UInt16[257],
-    wszLogonDomain : UInt16[16],
-    wszRemoteComputer : UInt16[17],
-    guid : LibC::GUID,
-    rasQuarState : Win32cr::NetworkManagement::Rras::RAS_QUARANTINE_STATE,
-    probationTime : Win32cr::Foundation::FILETIME,
-    connectionStartTime : Win32cr::Foundation::FILETIME,
-    ullBytesXmited : UInt64,
-    ullBytesRcved : UInt64,
-    dwFramesXmited : UInt32,
-    dwFramesRcved : UInt32,
-    dwCrcErr : UInt32,
-    dwTimeoutErr : UInt32,
-    dwAlignmentErr : UInt32,
-    dwHardwareOverrunErr : UInt32,
-    dwFramingErr : UInt32,
-    dwBufferOverrunErr : UInt32,
-    dwCompressionRatioIn : UInt32,
-    dwCompressionRatioOut : UInt32,
-    dwNumSwitchOvers : UInt32,
-    wszRemoteEndpointAddress : UInt16[65],
-    wszLocalEndpointAddress : UInt16[65],
-    projection_info : Win32cr::NetworkManagement::Rras::PROJECTION_INFO2,
-    hConnection : Win32cr::Foundation::HANDLE,
-    hInterface : Win32cr::Foundation::HANDLE,
-    dwDeviceType : UInt32
-
-  @[Extern]
-  record ROUTER_CUSTOM_IKEv2_POLICY0,
-    dwIntegrityMethod : UInt32,
-    dwEncryptionMethod : UInt32,
-    dwCipherTransformConstant : UInt32,
-    dwAuthTransformConstant : UInt32,
-    dwPfsGroup : UInt32,
-    dwDhGroup : UInt32
-
-  @[Extern]
-  record ROUTER_IKEv2_IF_CUSTOM_CONFIG0,
-    dwSaLifeTime : UInt32,
-    dwSaDataSize : UInt32,
-    certificateName : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
-    customPolicy : Win32cr::NetworkManagement::Rras::ROUTER_CUSTOM_IKEv2_POLICY0*
-
-  @[Extern]
-  record MPR_IF_CUSTOMINFOEX0,
-    header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER,
-    dwFlags : UInt32,
-    customIkev2Config : Win32cr::NetworkManagement::Rras::ROUTER_IKEv2_IF_CUSTOM_CONFIG0
-
-  @[Extern]
-  record MPR_CERT_EKU,
-    dwSize : UInt32,
-    is_ekuoid : Win32cr::Foundation::BOOL,
-    pwszEKU : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record VPN_TS_IP_ADDRESS,
-    type__ : UInt16,
-    anonymous : Anonymous_e__Union_ do
+  struct PROJECTION_INFO2
+    property projectionInfoType : UInt8
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      v4 : Win32cr::Networking::WinSock::IN_ADDR,
-      v6 : Win32cr::Networking::WinSock::IN6_ADDR
+    struct Anonymous_e__Union_
+    property ppp_projection_info : Win32cr::NetworkManagement::Rras::PPP_PROJECTION_INFO2
+    property ikev2_projection_info : Win32cr::NetworkManagement::Rras::IKEV2_PROJECTION_INFO2
+    def initialize(@ppp_projection_info : Win32cr::NetworkManagement::Rras::PPP_PROJECTION_INFO2, @ikev2_projection_info : Win32cr::NetworkManagement::Rras::IKEV2_PROJECTION_INFO2)
+    end
+    end
 
+    def initialize(@projectionInfoType : UInt8, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record MPR_VPN_SELECTOR_,
-    type__ : Win32cr::NetworkManagement::Rras::MPR_VPN_TS_TYPE,
-    protocolId : UInt8,
-    portStart : UInt16,
-    portEnd : UInt16,
-    tsPayloadId : UInt16,
-    addrStart : Win32cr::NetworkManagement::Rras::VPN_TS_IP_ADDRESS,
-    addrEnd : Win32cr::NetworkManagement::Rras::VPN_TS_IP_ADDRESS
+  struct RAS_CONNECTION_EX
+    property header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER
+    property dwConnectDuration : UInt32
+    property dwInterfaceType : Win32cr::NetworkManagement::Rras::ROUTER_INTERFACE_TYPE
+    property dwConnectionFlags : Win32cr::NetworkManagement::Rras::RAS_FLAGS
+    property wszInterfaceName : UInt16[257]
+    property wszUserName : UInt16[257]
+    property wszLogonDomain : UInt16[16]
+    property wszRemoteComputer : UInt16[17]
+    property guid : LibC::GUID
+    property rasQuarState : Win32cr::NetworkManagement::Rras::RAS_QUARANTINE_STATE
+    property probationTime : Win32cr::Foundation::FILETIME
+    property dwBytesXmited : UInt32
+    property dwBytesRcved : UInt32
+    property dwFramesXmited : UInt32
+    property dwFramesRcved : UInt32
+    property dwCrcErr : UInt32
+    property dwTimeoutErr : UInt32
+    property dwAlignmentErr : UInt32
+    property dwHardwareOverrunErr : UInt32
+    property dwFramingErr : UInt32
+    property dwBufferOverrunErr : UInt32
+    property dwCompressionRatioIn : UInt32
+    property dwCompressionRatioOut : UInt32
+    property dwNumSwitchOvers : UInt32
+    property wszRemoteEndpointAddress : UInt16[65]
+    property wszLocalEndpointAddress : UInt16[65]
+    property projection_info : Win32cr::NetworkManagement::Rras::PROJECTION_INFO
+    property hConnection : Win32cr::Foundation::HANDLE
+    property hInterface : Win32cr::Foundation::HANDLE
+    def initialize(@header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER, @dwConnectDuration : UInt32, @dwInterfaceType : Win32cr::NetworkManagement::Rras::ROUTER_INTERFACE_TYPE, @dwConnectionFlags : Win32cr::NetworkManagement::Rras::RAS_FLAGS, @wszInterfaceName : UInt16[257], @wszUserName : UInt16[257], @wszLogonDomain : UInt16[16], @wszRemoteComputer : UInt16[17], @guid : LibC::GUID, @rasQuarState : Win32cr::NetworkManagement::Rras::RAS_QUARANTINE_STATE, @probationTime : Win32cr::Foundation::FILETIME, @dwBytesXmited : UInt32, @dwBytesRcved : UInt32, @dwFramesXmited : UInt32, @dwFramesRcved : UInt32, @dwCrcErr : UInt32, @dwTimeoutErr : UInt32, @dwAlignmentErr : UInt32, @dwHardwareOverrunErr : UInt32, @dwFramingErr : UInt32, @dwBufferOverrunErr : UInt32, @dwCompressionRatioIn : UInt32, @dwCompressionRatioOut : UInt32, @dwNumSwitchOvers : UInt32, @wszRemoteEndpointAddress : UInt16[65], @wszLocalEndpointAddress : UInt16[65], @projection_info : Win32cr::NetworkManagement::Rras::PROJECTION_INFO, @hConnection : Win32cr::Foundation::HANDLE, @hInterface : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record MPR_VPN_TRAFFIC_SELECTORS,
-    numTsi : UInt32,
-    numTsr : UInt32,
-    tsI : Win32cr::NetworkManagement::Rras::MPR_VPN_SELECTOR_*,
-    tsR : Win32cr::NetworkManagement::Rras::MPR_VPN_SELECTOR_*
+  struct RAS_CONNECTION_4
+    property dwConnectDuration : UInt32
+    property dwInterfaceType : Win32cr::NetworkManagement::Rras::ROUTER_INTERFACE_TYPE
+    property dwConnectionFlags : Win32cr::NetworkManagement::Rras::RAS_FLAGS
+    property wszInterfaceName : UInt16[257]
+    property wszUserName : UInt16[257]
+    property wszLogonDomain : UInt16[16]
+    property wszRemoteComputer : UInt16[17]
+    property guid : LibC::GUID
+    property rasQuarState : Win32cr::NetworkManagement::Rras::RAS_QUARANTINE_STATE
+    property probationTime : Win32cr::Foundation::FILETIME
+    property connectionStartTime : Win32cr::Foundation::FILETIME
+    property ullBytesXmited : UInt64
+    property ullBytesRcved : UInt64
+    property dwFramesXmited : UInt32
+    property dwFramesRcved : UInt32
+    property dwCrcErr : UInt32
+    property dwTimeoutErr : UInt32
+    property dwAlignmentErr : UInt32
+    property dwHardwareOverrunErr : UInt32
+    property dwFramingErr : UInt32
+    property dwBufferOverrunErr : UInt32
+    property dwCompressionRatioIn : UInt32
+    property dwCompressionRatioOut : UInt32
+    property dwNumSwitchOvers : UInt32
+    property wszRemoteEndpointAddress : UInt16[65]
+    property wszLocalEndpointAddress : UInt16[65]
+    property projection_info : Win32cr::NetworkManagement::Rras::PROJECTION_INFO2
+    property hConnection : Win32cr::Foundation::HANDLE
+    property hInterface : Win32cr::Foundation::HANDLE
+    property dwDeviceType : UInt32
+    def initialize(@dwConnectDuration : UInt32, @dwInterfaceType : Win32cr::NetworkManagement::Rras::ROUTER_INTERFACE_TYPE, @dwConnectionFlags : Win32cr::NetworkManagement::Rras::RAS_FLAGS, @wszInterfaceName : UInt16[257], @wszUserName : UInt16[257], @wszLogonDomain : UInt16[16], @wszRemoteComputer : UInt16[17], @guid : LibC::GUID, @rasQuarState : Win32cr::NetworkManagement::Rras::RAS_QUARANTINE_STATE, @probationTime : Win32cr::Foundation::FILETIME, @connectionStartTime : Win32cr::Foundation::FILETIME, @ullBytesXmited : UInt64, @ullBytesRcved : UInt64, @dwFramesXmited : UInt32, @dwFramesRcved : UInt32, @dwCrcErr : UInt32, @dwTimeoutErr : UInt32, @dwAlignmentErr : UInt32, @dwHardwareOverrunErr : UInt32, @dwFramingErr : UInt32, @dwBufferOverrunErr : UInt32, @dwCompressionRatioIn : UInt32, @dwCompressionRatioOut : UInt32, @dwNumSwitchOvers : UInt32, @wszRemoteEndpointAddress : UInt16[65], @wszLocalEndpointAddress : UInt16[65], @projection_info : Win32cr::NetworkManagement::Rras::PROJECTION_INFO2, @hConnection : Win32cr::Foundation::HANDLE, @hInterface : Win32cr::Foundation::HANDLE, @dwDeviceType : UInt32)
+    end
+  end
 
   @[Extern]
-  record ROUTER_IKEv2_IF_CUSTOM_CONFIG2,
-    dwSaLifeTime : UInt32,
-    dwSaDataSize : UInt32,
-    certificateName : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
-    customPolicy : Win32cr::NetworkManagement::Rras::ROUTER_CUSTOM_IKEv2_POLICY0*,
-    certificateHash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
-    dwMmSaLifeTime : UInt32,
-    vpnTrafficSelectors : Win32cr::NetworkManagement::Rras::MPR_VPN_TRAFFIC_SELECTORS
+  struct ROUTER_CUSTOM_IKEv2_POLICY0
+    property dwIntegrityMethod : UInt32
+    property dwEncryptionMethod : UInt32
+    property dwCipherTransformConstant : UInt32
+    property dwAuthTransformConstant : UInt32
+    property dwPfsGroup : UInt32
+    property dwDhGroup : UInt32
+    def initialize(@dwIntegrityMethod : UInt32, @dwEncryptionMethod : UInt32, @dwCipherTransformConstant : UInt32, @dwAuthTransformConstant : UInt32, @dwPfsGroup : UInt32, @dwDhGroup : UInt32)
+    end
+  end
 
   @[Extern]
-  record MPR_IF_CUSTOMINFOEX2,
-    header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER,
-    dwFlags : UInt32,
-    customIkev2Config : Win32cr::NetworkManagement::Rras::ROUTER_IKEv2_IF_CUSTOM_CONFIG2
+  struct ROUTER_IKEv2_IF_CUSTOM_CONFIG0
+    property dwSaLifeTime : UInt32
+    property dwSaDataSize : UInt32
+    property certificateName : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property customPolicy : Win32cr::NetworkManagement::Rras::ROUTER_CUSTOM_IKEv2_POLICY0*
+    def initialize(@dwSaLifeTime : UInt32, @dwSaDataSize : UInt32, @certificateName : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @customPolicy : Win32cr::NetworkManagement::Rras::ROUTER_CUSTOM_IKEv2_POLICY0*)
+    end
+  end
 
   @[Extern]
-  record IKEV2_TUNNEL_CONFIG_PARAMS4,
-    dwIdleTimeout : UInt32,
-    dwNetworkBlackoutTime : UInt32,
-    dwSaLifeTime : UInt32,
-    dwSaDataSizeForRenegotiation : UInt32,
-    dwConfigOptions : UInt32,
-    dwTotalCertificates : UInt32,
-    certificateNames : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*,
-    machineCertificateName : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
-    dwEncryptionType : UInt32,
-    customPolicy : Win32cr::NetworkManagement::Rras::ROUTER_CUSTOM_IKEv2_POLICY0*,
-    dwTotalEkus : UInt32,
-    certificateEKUs : Win32cr::NetworkManagement::Rras::MPR_CERT_EKU*,
-    machineCertificateHash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
-    dwMmSaLifeTime : UInt32
+  struct MPR_IF_CUSTOMINFOEX0
+    property header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER
+    property dwFlags : UInt32
+    property customIkev2Config : Win32cr::NetworkManagement::Rras::ROUTER_IKEv2_IF_CUSTOM_CONFIG0
+    def initialize(@header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER, @dwFlags : UInt32, @customIkev2Config : Win32cr::NetworkManagement::Rras::ROUTER_IKEv2_IF_CUSTOM_CONFIG0)
+    end
+  end
 
   @[Extern]
-  record ROUTER_IKEv2_IF_CUSTOM_CONFIG1,
-    dwSaLifeTime : UInt32,
-    dwSaDataSize : UInt32,
-    certificateName : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
-    customPolicy : Win32cr::NetworkManagement::Rras::ROUTER_CUSTOM_IKEv2_POLICY0*,
-    certificateHash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+  struct MPR_CERT_EKU
+    property dwSize : UInt32
+    property is_ekuoid : Win32cr::Foundation::BOOL
+    property pwszEKU : Win32cr::Foundation::PWSTR
+    def initialize(@dwSize : UInt32, @is_ekuoid : Win32cr::Foundation::BOOL, @pwszEKU : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record MPR_IF_CUSTOMINFOEX1,
-    header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER,
-    dwFlags : UInt32,
-    customIkev2Config : Win32cr::NetworkManagement::Rras::ROUTER_IKEv2_IF_CUSTOM_CONFIG1
+  struct VPN_TS_IP_ADDRESS
+    property type__ : UInt16
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property v4 : Win32cr::Networking::WinSock::IN_ADDR
+    property v6 : Win32cr::Networking::WinSock::IN6_ADDR
+    def initialize(@v4 : Win32cr::Networking::WinSock::IN_ADDR, @v6 : Win32cr::Networking::WinSock::IN6_ADDR)
+    end
+    end
+
+    def initialize(@type__ : UInt16, @anonymous : Anonymous_e__Union_)
+    end
+  end
 
   @[Extern]
-  record IKEV2_TUNNEL_CONFIG_PARAMS3,
-    dwIdleTimeout : UInt32,
-    dwNetworkBlackoutTime : UInt32,
-    dwSaLifeTime : UInt32,
-    dwSaDataSizeForRenegotiation : UInt32,
-    dwConfigOptions : UInt32,
-    dwTotalCertificates : UInt32,
-    certificateNames : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*,
-    machineCertificateName : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
-    dwEncryptionType : UInt32,
-    customPolicy : Win32cr::NetworkManagement::Rras::ROUTER_CUSTOM_IKEv2_POLICY0*,
-    dwTotalEkus : UInt32,
-    certificateEKUs : Win32cr::NetworkManagement::Rras::MPR_CERT_EKU*,
-    machineCertificateHash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+  struct MPR_VPN_SELECTOR_
+    property type__ : Win32cr::NetworkManagement::Rras::MPR_VPN_TS_TYPE
+    property protocolId : UInt8
+    property portStart : UInt16
+    property portEnd : UInt16
+    property tsPayloadId : UInt16
+    property addrStart : Win32cr::NetworkManagement::Rras::VPN_TS_IP_ADDRESS
+    property addrEnd : Win32cr::NetworkManagement::Rras::VPN_TS_IP_ADDRESS
+    def initialize(@type__ : Win32cr::NetworkManagement::Rras::MPR_VPN_TS_TYPE, @protocolId : UInt8, @portStart : UInt16, @portEnd : UInt16, @tsPayloadId : UInt16, @addrStart : Win32cr::NetworkManagement::Rras::VPN_TS_IP_ADDRESS, @addrEnd : Win32cr::NetworkManagement::Rras::VPN_TS_IP_ADDRESS)
+    end
+  end
 
   @[Extern]
-  record IKEV2_TUNNEL_CONFIG_PARAMS2,
-    dwIdleTimeout : UInt32,
-    dwNetworkBlackoutTime : UInt32,
-    dwSaLifeTime : UInt32,
-    dwSaDataSizeForRenegotiation : UInt32,
-    dwConfigOptions : UInt32,
-    dwTotalCertificates : UInt32,
-    certificateNames : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*,
-    machineCertificateName : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
-    dwEncryptionType : UInt32,
-    customPolicy : Win32cr::NetworkManagement::Rras::ROUTER_CUSTOM_IKEv2_POLICY0*
+  struct MPR_VPN_TRAFFIC_SELECTORS
+    property numTsi : UInt32
+    property numTsr : UInt32
+    property tsI : Win32cr::NetworkManagement::Rras::MPR_VPN_SELECTOR_*
+    property tsR : Win32cr::NetworkManagement::Rras::MPR_VPN_SELECTOR_*
+    def initialize(@numTsi : UInt32, @numTsr : UInt32, @tsI : Win32cr::NetworkManagement::Rras::MPR_VPN_SELECTOR_*, @tsR : Win32cr::NetworkManagement::Rras::MPR_VPN_SELECTOR_*)
+    end
+  end
 
   @[Extern]
-  record L2TP_TUNNEL_CONFIG_PARAMS2,
-    dwIdleTimeout : UInt32,
-    dwEncryptionType : UInt32,
-    dwSaLifeTime : UInt32,
-    dwSaDataSizeForRenegotiation : UInt32,
-    customPolicy : Win32cr::NetworkManagement::Rras::ROUTER_CUSTOM_IKEv2_POLICY0*,
-    dwMmSaLifeTime : UInt32
+  struct ROUTER_IKEv2_IF_CUSTOM_CONFIG2
+    property dwSaLifeTime : UInt32
+    property dwSaDataSize : UInt32
+    property certificateName : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property customPolicy : Win32cr::NetworkManagement::Rras::ROUTER_CUSTOM_IKEv2_POLICY0*
+    property certificateHash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property dwMmSaLifeTime : UInt32
+    property vpnTrafficSelectors : Win32cr::NetworkManagement::Rras::MPR_VPN_TRAFFIC_SELECTORS
+    def initialize(@dwSaLifeTime : UInt32, @dwSaDataSize : UInt32, @certificateName : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @customPolicy : Win32cr::NetworkManagement::Rras::ROUTER_CUSTOM_IKEv2_POLICY0*, @certificateHash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @dwMmSaLifeTime : UInt32, @vpnTrafficSelectors : Win32cr::NetworkManagement::Rras::MPR_VPN_TRAFFIC_SELECTORS)
+    end
+  end
 
   @[Extern]
-  record L2TP_TUNNEL_CONFIG_PARAMS1,
-    dwIdleTimeout : UInt32,
-    dwEncryptionType : UInt32,
-    dwSaLifeTime : UInt32,
-    dwSaDataSizeForRenegotiation : UInt32,
-    customPolicy : Win32cr::NetworkManagement::Rras::ROUTER_CUSTOM_IKEv2_POLICY0*
+  struct MPR_IF_CUSTOMINFOEX2
+    property header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER
+    property dwFlags : UInt32
+    property customIkev2Config : Win32cr::NetworkManagement::Rras::ROUTER_IKEv2_IF_CUSTOM_CONFIG2
+    def initialize(@header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER, @dwFlags : UInt32, @customIkev2Config : Win32cr::NetworkManagement::Rras::ROUTER_IKEv2_IF_CUSTOM_CONFIG2)
+    end
+  end
 
   @[Extern]
-  record IKEV2_CONFIG_PARAMS,
-    dwNumPorts : UInt32,
-    dwPortFlags : UInt32,
-    dwTunnelConfigParamFlags : UInt32,
-    tunnel_config_params : Win32cr::NetworkManagement::Rras::IKEV2_TUNNEL_CONFIG_PARAMS4
+  struct IKEV2_TUNNEL_CONFIG_PARAMS4
+    property dwIdleTimeout : UInt32
+    property dwNetworkBlackoutTime : UInt32
+    property dwSaLifeTime : UInt32
+    property dwSaDataSizeForRenegotiation : UInt32
+    property dwConfigOptions : UInt32
+    property dwTotalCertificates : UInt32
+    property certificateNames : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
+    property machineCertificateName : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property dwEncryptionType : UInt32
+    property customPolicy : Win32cr::NetworkManagement::Rras::ROUTER_CUSTOM_IKEv2_POLICY0*
+    property dwTotalEkus : UInt32
+    property certificateEKUs : Win32cr::NetworkManagement::Rras::MPR_CERT_EKU*
+    property machineCertificateHash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property dwMmSaLifeTime : UInt32
+    def initialize(@dwIdleTimeout : UInt32, @dwNetworkBlackoutTime : UInt32, @dwSaLifeTime : UInt32, @dwSaDataSizeForRenegotiation : UInt32, @dwConfigOptions : UInt32, @dwTotalCertificates : UInt32, @certificateNames : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, @machineCertificateName : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @dwEncryptionType : UInt32, @customPolicy : Win32cr::NetworkManagement::Rras::ROUTER_CUSTOM_IKEv2_POLICY0*, @dwTotalEkus : UInt32, @certificateEKUs : Win32cr::NetworkManagement::Rras::MPR_CERT_EKU*, @machineCertificateHash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @dwMmSaLifeTime : UInt32)
+    end
+  end
 
   @[Extern]
-  record PPTP_CONFIG_PARAMS,
-    dwNumPorts : UInt32,
-    dwPortFlags : UInt32
+  struct ROUTER_IKEv2_IF_CUSTOM_CONFIG1
+    property dwSaLifeTime : UInt32
+    property dwSaDataSize : UInt32
+    property certificateName : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property customPolicy : Win32cr::NetworkManagement::Rras::ROUTER_CUSTOM_IKEv2_POLICY0*
+    property certificateHash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    def initialize(@dwSaLifeTime : UInt32, @dwSaDataSize : UInt32, @certificateName : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @customPolicy : Win32cr::NetworkManagement::Rras::ROUTER_CUSTOM_IKEv2_POLICY0*, @certificateHash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    end
+  end
 
   @[Extern]
-  record L2TP_CONFIG_PARAMS1,
-    dwNumPorts : UInt32,
-    dwPortFlags : UInt32,
-    dwTunnelConfigParamFlags : UInt32,
-    tunnel_config_params : Win32cr::NetworkManagement::Rras::L2TP_TUNNEL_CONFIG_PARAMS2
+  struct MPR_IF_CUSTOMINFOEX1
+    property header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER
+    property dwFlags : UInt32
+    property customIkev2Config : Win32cr::NetworkManagement::Rras::ROUTER_IKEv2_IF_CUSTOM_CONFIG1
+    def initialize(@header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER, @dwFlags : UInt32, @customIkev2Config : Win32cr::NetworkManagement::Rras::ROUTER_IKEv2_IF_CUSTOM_CONFIG1)
+    end
+  end
 
   @[Extern]
-  record GRE_CONFIG_PARAMS0,
-    dwNumPorts : UInt32,
-    dwPortFlags : UInt32
+  struct IKEV2_TUNNEL_CONFIG_PARAMS3
+    property dwIdleTimeout : UInt32
+    property dwNetworkBlackoutTime : UInt32
+    property dwSaLifeTime : UInt32
+    property dwSaDataSizeForRenegotiation : UInt32
+    property dwConfigOptions : UInt32
+    property dwTotalCertificates : UInt32
+    property certificateNames : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
+    property machineCertificateName : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property dwEncryptionType : UInt32
+    property customPolicy : Win32cr::NetworkManagement::Rras::ROUTER_CUSTOM_IKEv2_POLICY0*
+    property dwTotalEkus : UInt32
+    property certificateEKUs : Win32cr::NetworkManagement::Rras::MPR_CERT_EKU*
+    property machineCertificateHash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    def initialize(@dwIdleTimeout : UInt32, @dwNetworkBlackoutTime : UInt32, @dwSaLifeTime : UInt32, @dwSaDataSizeForRenegotiation : UInt32, @dwConfigOptions : UInt32, @dwTotalCertificates : UInt32, @certificateNames : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, @machineCertificateName : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @dwEncryptionType : UInt32, @customPolicy : Win32cr::NetworkManagement::Rras::ROUTER_CUSTOM_IKEv2_POLICY0*, @dwTotalEkus : UInt32, @certificateEKUs : Win32cr::NetworkManagement::Rras::MPR_CERT_EKU*, @machineCertificateHash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    end
+  end
 
   @[Extern]
-  record L2TP_CONFIG_PARAMS0,
-    dwNumPorts : UInt32,
-    dwPortFlags : UInt32
+  struct IKEV2_TUNNEL_CONFIG_PARAMS2
+    property dwIdleTimeout : UInt32
+    property dwNetworkBlackoutTime : UInt32
+    property dwSaLifeTime : UInt32
+    property dwSaDataSizeForRenegotiation : UInt32
+    property dwConfigOptions : UInt32
+    property dwTotalCertificates : UInt32
+    property certificateNames : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
+    property machineCertificateName : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property dwEncryptionType : UInt32
+    property customPolicy : Win32cr::NetworkManagement::Rras::ROUTER_CUSTOM_IKEv2_POLICY0*
+    def initialize(@dwIdleTimeout : UInt32, @dwNetworkBlackoutTime : UInt32, @dwSaLifeTime : UInt32, @dwSaDataSizeForRenegotiation : UInt32, @dwConfigOptions : UInt32, @dwTotalCertificates : UInt32, @certificateNames : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, @machineCertificateName : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @dwEncryptionType : UInt32, @customPolicy : Win32cr::NetworkManagement::Rras::ROUTER_CUSTOM_IKEv2_POLICY0*)
+    end
+  end
 
   @[Extern]
-  record SSTP_CERT_INFO,
-    isDefault : Win32cr::Foundation::BOOL,
-    certBlob : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+  struct L2TP_TUNNEL_CONFIG_PARAMS2
+    property dwIdleTimeout : UInt32
+    property dwEncryptionType : UInt32
+    property dwSaLifeTime : UInt32
+    property dwSaDataSizeForRenegotiation : UInt32
+    property customPolicy : Win32cr::NetworkManagement::Rras::ROUTER_CUSTOM_IKEv2_POLICY0*
+    property dwMmSaLifeTime : UInt32
+    def initialize(@dwIdleTimeout : UInt32, @dwEncryptionType : UInt32, @dwSaLifeTime : UInt32, @dwSaDataSizeForRenegotiation : UInt32, @customPolicy : Win32cr::NetworkManagement::Rras::ROUTER_CUSTOM_IKEv2_POLICY0*, @dwMmSaLifeTime : UInt32)
+    end
+  end
 
   @[Extern]
-  record SSTP_CONFIG_PARAMS,
-    dwNumPorts : UInt32,
-    dwPortFlags : UInt32,
-    isUseHttps : Win32cr::Foundation::BOOL,
-    certAlgorithm : UInt32,
-    sstpCertDetails : Win32cr::NetworkManagement::Rras::SSTP_CERT_INFO
+  struct L2TP_TUNNEL_CONFIG_PARAMS1
+    property dwIdleTimeout : UInt32
+    property dwEncryptionType : UInt32
+    property dwSaLifeTime : UInt32
+    property dwSaDataSizeForRenegotiation : UInt32
+    property customPolicy : Win32cr::NetworkManagement::Rras::ROUTER_CUSTOM_IKEv2_POLICY0*
+    def initialize(@dwIdleTimeout : UInt32, @dwEncryptionType : UInt32, @dwSaLifeTime : UInt32, @dwSaDataSizeForRenegotiation : UInt32, @customPolicy : Win32cr::NetworkManagement::Rras::ROUTER_CUSTOM_IKEv2_POLICY0*)
+    end
+  end
 
   @[Extern]
-  record MPRAPI_TUNNEL_CONFIG_PARAMS0,
-    ike_config_params : Win32cr::NetworkManagement::Rras::IKEV2_CONFIG_PARAMS,
-    pptp_config_params : Win32cr::NetworkManagement::Rras::PPTP_CONFIG_PARAMS,
-    l2tp_config_params : Win32cr::NetworkManagement::Rras::L2TP_CONFIG_PARAMS1,
-    sstp_config_params : Win32cr::NetworkManagement::Rras::SSTP_CONFIG_PARAMS
+  struct IKEV2_CONFIG_PARAMS
+    property dwNumPorts : UInt32
+    property dwPortFlags : UInt32
+    property dwTunnelConfigParamFlags : UInt32
+    property tunnel_config_params : Win32cr::NetworkManagement::Rras::IKEV2_TUNNEL_CONFIG_PARAMS4
+    def initialize(@dwNumPorts : UInt32, @dwPortFlags : UInt32, @dwTunnelConfigParamFlags : UInt32, @tunnel_config_params : Win32cr::NetworkManagement::Rras::IKEV2_TUNNEL_CONFIG_PARAMS4)
+    end
+  end
 
   @[Extern]
-  record MPRAPI_TUNNEL_CONFIG_PARAMS1,
-    ike_config_params : Win32cr::NetworkManagement::Rras::IKEV2_CONFIG_PARAMS,
-    pptp_config_params : Win32cr::NetworkManagement::Rras::PPTP_CONFIG_PARAMS,
-    l2tp_config_params : Win32cr::NetworkManagement::Rras::L2TP_CONFIG_PARAMS1,
-    sstp_config_params : Win32cr::NetworkManagement::Rras::SSTP_CONFIG_PARAMS,
-    gre_config_params : Win32cr::NetworkManagement::Rras::GRE_CONFIG_PARAMS0
+  struct PPTP_CONFIG_PARAMS
+    property dwNumPorts : UInt32
+    property dwPortFlags : UInt32
+    def initialize(@dwNumPorts : UInt32, @dwPortFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record MPR_SERVER_EX0,
-    header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER,
-    fLanOnlyMode : UInt32,
-    dwUpTime : UInt32,
-    dwTotalPorts : UInt32,
-    dwPortsInUse : UInt32,
-    reserved : UInt32,
-    config_params : Win32cr::NetworkManagement::Rras::MPRAPI_TUNNEL_CONFIG_PARAMS0
+  struct L2TP_CONFIG_PARAMS1
+    property dwNumPorts : UInt32
+    property dwPortFlags : UInt32
+    property dwTunnelConfigParamFlags : UInt32
+    property tunnel_config_params : Win32cr::NetworkManagement::Rras::L2TP_TUNNEL_CONFIG_PARAMS2
+    def initialize(@dwNumPorts : UInt32, @dwPortFlags : UInt32, @dwTunnelConfigParamFlags : UInt32, @tunnel_config_params : Win32cr::NetworkManagement::Rras::L2TP_TUNNEL_CONFIG_PARAMS2)
+    end
+  end
 
   @[Extern]
-  record MPR_SERVER_EX1,
-    header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER,
-    fLanOnlyMode : UInt32,
-    dwUpTime : UInt32,
-    dwTotalPorts : UInt32,
-    dwPortsInUse : UInt32,
-    reserved : UInt32,
-    config_params : Win32cr::NetworkManagement::Rras::MPRAPI_TUNNEL_CONFIG_PARAMS1
+  struct GRE_CONFIG_PARAMS0
+    property dwNumPorts : UInt32
+    property dwPortFlags : UInt32
+    def initialize(@dwNumPorts : UInt32, @dwPortFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record MPR_SERVER_SET_CONFIG_EX0,
-    header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER,
-    setConfigForProtocols : UInt32,
-    config_params : Win32cr::NetworkManagement::Rras::MPRAPI_TUNNEL_CONFIG_PARAMS0
+  struct L2TP_CONFIG_PARAMS0
+    property dwNumPorts : UInt32
+    property dwPortFlags : UInt32
+    def initialize(@dwNumPorts : UInt32, @dwPortFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record MPR_SERVER_SET_CONFIG_EX1,
-    header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER,
-    setConfigForProtocols : UInt32,
-    config_params : Win32cr::NetworkManagement::Rras::MPRAPI_TUNNEL_CONFIG_PARAMS1
+  struct SSTP_CERT_INFO
+    property isDefault : Win32cr::Foundation::BOOL
+    property certBlob : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    def initialize(@isDefault : Win32cr::Foundation::BOOL, @certBlob : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    end
+  end
 
   @[Extern]
-  record AUTH_VALIDATION_EX,
-    header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER,
-    hRasConnection : Win32cr::Foundation::HANDLE,
-    wszUserName : UInt16[257],
-    wszLogonDomain : UInt16[16],
-    auth_info_size : UInt32,
-    auth_info : UInt8*
+  struct SSTP_CONFIG_PARAMS
+    property dwNumPorts : UInt32
+    property dwPortFlags : UInt32
+    property isUseHttps : Win32cr::Foundation::BOOL
+    property certAlgorithm : UInt32
+    property sstpCertDetails : Win32cr::NetworkManagement::Rras::SSTP_CERT_INFO
+    def initialize(@dwNumPorts : UInt32, @dwPortFlags : UInt32, @isUseHttps : Win32cr::Foundation::BOOL, @certAlgorithm : UInt32, @sstpCertDetails : Win32cr::NetworkManagement::Rras::SSTP_CERT_INFO)
+    end
+  end
 
   @[Extern]
-  record RAS_UPDATE_CONNECTION,
-    header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER,
-    dwIfIndex : UInt32,
-    wszLocalEndpointAddress : UInt16[65],
-    wszRemoteEndpointAddress : UInt16[65]
+  struct MPRAPI_TUNNEL_CONFIG_PARAMS0
+    property ike_config_params : Win32cr::NetworkManagement::Rras::IKEV2_CONFIG_PARAMS
+    property pptp_config_params : Win32cr::NetworkManagement::Rras::PPTP_CONFIG_PARAMS
+    property l2tp_config_params : Win32cr::NetworkManagement::Rras::L2TP_CONFIG_PARAMS1
+    property sstp_config_params : Win32cr::NetworkManagement::Rras::SSTP_CONFIG_PARAMS
+    def initialize(@ike_config_params : Win32cr::NetworkManagement::Rras::IKEV2_CONFIG_PARAMS, @pptp_config_params : Win32cr::NetworkManagement::Rras::PPTP_CONFIG_PARAMS, @l2tp_config_params : Win32cr::NetworkManagement::Rras::L2TP_CONFIG_PARAMS1, @sstp_config_params : Win32cr::NetworkManagement::Rras::SSTP_CONFIG_PARAMS)
+    end
+  end
 
   @[Extern]
-  record MPRAPI_ADMIN_DLL_CALLBACKS,
-    revision : UInt8,
-    lpfnMprAdminGetIpAddressForUser : Win32cr::NetworkManagement::Rras::PMPRADMINGETIPADDRESSFORUSER,
-    lpfnMprAdminReleaseIpAddress : Win32cr::NetworkManagement::Rras::PMPRADMINRELEASEIPADRESS,
-    lpfnMprAdminGetIpv6AddressForUser : Win32cr::NetworkManagement::Rras::PMPRADMINGETIPV6ADDRESSFORUSER,
-    lpfnMprAdminReleaseIpV6AddressForUser : Win32cr::NetworkManagement::Rras::PMPRADMINRELEASEIPV6ADDRESSFORUSER,
-    lpfnRasAdminAcceptNewLink : Win32cr::NetworkManagement::Rras::PMPRADMINACCEPTNEWLINK,
-    lpfnRasAdminLinkHangupNotification : Win32cr::NetworkManagement::Rras::PMPRADMINLINKHANGUPNOTIFICATION,
-    lpfnRasAdminTerminateDll : Win32cr::NetworkManagement::Rras::PMPRADMINTERMINATEDLL,
-    lpfnRasAdminAcceptNewConnectionEx : Win32cr::NetworkManagement::Rras::PMPRADMINACCEPTNEWCONNECTIONEX,
-    lpfnRasAdminAcceptEndpointChangeEx : Win32cr::NetworkManagement::Rras::PMPRADMINACCEPTTUNNELENDPOINTCHANGEEX,
-    lpfnRasAdminAcceptReauthenticationEx : Win32cr::NetworkManagement::Rras::PMPRADMINACCEPTREAUTHENTICATIONEX,
-    lpfnRasAdminConnectionHangupNotificationEx : Win32cr::NetworkManagement::Rras::PMPRADMINCONNECTIONHANGUPNOTIFICATIONEX,
-    lpfnRASValidatePreAuthenticatedConnectionEx : Win32cr::NetworkManagement::Rras::PMPRADMINRASVALIDATEPREAUTHENTICATEDCONNECTIONEX
+  struct MPRAPI_TUNNEL_CONFIG_PARAMS1
+    property ike_config_params : Win32cr::NetworkManagement::Rras::IKEV2_CONFIG_PARAMS
+    property pptp_config_params : Win32cr::NetworkManagement::Rras::PPTP_CONFIG_PARAMS
+    property l2tp_config_params : Win32cr::NetworkManagement::Rras::L2TP_CONFIG_PARAMS1
+    property sstp_config_params : Win32cr::NetworkManagement::Rras::SSTP_CONFIG_PARAMS
+    property gre_config_params : Win32cr::NetworkManagement::Rras::GRE_CONFIG_PARAMS0
+    def initialize(@ike_config_params : Win32cr::NetworkManagement::Rras::IKEV2_CONFIG_PARAMS, @pptp_config_params : Win32cr::NetworkManagement::Rras::PPTP_CONFIG_PARAMS, @l2tp_config_params : Win32cr::NetworkManagement::Rras::L2TP_CONFIG_PARAMS1, @sstp_config_params : Win32cr::NetworkManagement::Rras::SSTP_CONFIG_PARAMS, @gre_config_params : Win32cr::NetworkManagement::Rras::GRE_CONFIG_PARAMS0)
+    end
+  end
 
   @[Extern]
-  record SECURITY_MESSAGE,
-    dwMsgId : Win32cr::NetworkManagement::Rras::SECURITY_MESSAGE_MSG_ID,
-    hPort : LibC::IntPtrT,
-    dwError : UInt32,
-    user_name : Win32cr::Foundation::CHAR[257],
-    domain : Win32cr::Foundation::CHAR[16]
+  struct MPR_SERVER_EX0
+    property header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER
+    property fLanOnlyMode : UInt32
+    property dwUpTime : UInt32
+    property dwTotalPorts : UInt32
+    property dwPortsInUse : UInt32
+    property reserved : UInt32
+    property config_params : Win32cr::NetworkManagement::Rras::MPRAPI_TUNNEL_CONFIG_PARAMS0
+    def initialize(@header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER, @fLanOnlyMode : UInt32, @dwUpTime : UInt32, @dwTotalPorts : UInt32, @dwPortsInUse : UInt32, @reserved : UInt32, @config_params : Win32cr::NetworkManagement::Rras::MPRAPI_TUNNEL_CONFIG_PARAMS0)
+    end
+  end
 
   @[Extern]
-  record RAS_SECURITY_INFO,
-    last_error : UInt32,
-    bytes_received : UInt32,
-    device_name : Win32cr::Foundation::CHAR[129]
+  struct MPR_SERVER_EX1
+    property header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER
+    property fLanOnlyMode : UInt32
+    property dwUpTime : UInt32
+    property dwTotalPorts : UInt32
+    property dwPortsInUse : UInt32
+    property reserved : UInt32
+    property config_params : Win32cr::NetworkManagement::Rras::MPRAPI_TUNNEL_CONFIG_PARAMS1
+    def initialize(@header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER, @fLanOnlyMode : UInt32, @dwUpTime : UInt32, @dwTotalPorts : UInt32, @dwPortsInUse : UInt32, @reserved : UInt32, @config_params : Win32cr::NetworkManagement::Rras::MPRAPI_TUNNEL_CONFIG_PARAMS1)
+    end
+  end
 
   @[Extern]
-  record MGM_IF_ENTRY,
-    dwIfIndex : UInt32,
-    dwIfNextHopAddr : UInt32,
-    bIGMP : Win32cr::Foundation::BOOL,
-    bIsEnabled : Win32cr::Foundation::BOOL
+  struct MPR_SERVER_SET_CONFIG_EX0
+    property header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER
+    property setConfigForProtocols : UInt32
+    property config_params : Win32cr::NetworkManagement::Rras::MPRAPI_TUNNEL_CONFIG_PARAMS0
+    def initialize(@header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER, @setConfigForProtocols : UInt32, @config_params : Win32cr::NetworkManagement::Rras::MPRAPI_TUNNEL_CONFIG_PARAMS0)
+    end
+  end
 
   @[Extern]
-  record ROUTING_PROTOCOL_CONFIG,
-    dwCallbackFlags : UInt32,
-    pfnRpfCallback : Win32cr::NetworkManagement::Rras::PMGM_RPF_CALLBACK,
-    pfnCreationAlertCallback : Win32cr::NetworkManagement::Rras::PMGM_CREATION_ALERT_CALLBACK,
-    pfnPruneAlertCallback : Win32cr::NetworkManagement::Rras::PMGM_PRUNE_ALERT_CALLBACK,
-    pfnJoinAlertCallback : Win32cr::NetworkManagement::Rras::PMGM_JOIN_ALERT_CALLBACK,
-    pfnWrongIfCallback : Win32cr::NetworkManagement::Rras::PMGM_WRONG_IF_CALLBACK,
-    pfnLocalJoinCallback : Win32cr::NetworkManagement::Rras::PMGM_LOCAL_JOIN_CALLBACK,
-    pfnLocalLeaveCallback : Win32cr::NetworkManagement::Rras::PMGM_LOCAL_LEAVE_CALLBACK,
-    pfnDisableIgmpCallback : Win32cr::NetworkManagement::Rras::PMGM_DISABLE_IGMP_CALLBACK,
-    pfnEnableIgmpCallback : Win32cr::NetworkManagement::Rras::PMGM_ENABLE_IGMP_CALLBACK
+  struct MPR_SERVER_SET_CONFIG_EX1
+    property header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER
+    property setConfigForProtocols : UInt32
+    property config_params : Win32cr::NetworkManagement::Rras::MPRAPI_TUNNEL_CONFIG_PARAMS1
+    def initialize(@header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER, @setConfigForProtocols : UInt32, @config_params : Win32cr::NetworkManagement::Rras::MPRAPI_TUNNEL_CONFIG_PARAMS1)
+    end
+  end
 
   @[Extern]
-  record SOURCE_GROUP_ENTRY,
-    dwSourceAddr : UInt32,
-    dwSourceMask : UInt32,
-    dwGroupAddr : UInt32,
-    dwGroupMask : UInt32
+  struct AUTH_VALIDATION_EX
+    property header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER
+    property hRasConnection : Win32cr::Foundation::HANDLE
+    property wszUserName : UInt16[257]
+    property wszLogonDomain : UInt16[16]
+    property auth_info_size : UInt32
+    property auth_info : UInt8*
+    def initialize(@header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER, @hRasConnection : Win32cr::Foundation::HANDLE, @wszUserName : UInt16[257], @wszLogonDomain : UInt16[16], @auth_info_size : UInt32, @auth_info : UInt8*)
+    end
+  end
 
   @[Extern]
-  record RTM_REGN_PROFILE,
-    max_next_hops_in_route : UInt32,
-    max_handles_in_enum : UInt32,
-    views_supported : UInt32,
-    number_of_views : UInt32
+  struct RAS_UPDATE_CONNECTION
+    property header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER
+    property dwIfIndex : UInt32
+    property wszLocalEndpointAddress : UInt16[65]
+    property wszRemoteEndpointAddress : UInt16[65]
+    def initialize(@header : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER, @dwIfIndex : UInt32, @wszLocalEndpointAddress : UInt16[65], @wszRemoteEndpointAddress : UInt16[65])
+    end
+  end
 
   @[Extern]
-  record RTM_NET_ADDRESS,
-    address_family : UInt16,
-    num_bits : UInt16,
-    addr_bits : UInt8[16]
+  struct MPRAPI_ADMIN_DLL_CALLBACKS
+    property revision : UInt8
+    property lpfnMprAdminGetIpAddressForUser : Win32cr::NetworkManagement::Rras::PMPRADMINGETIPADDRESSFORUSER
+    property lpfnMprAdminReleaseIpAddress : Win32cr::NetworkManagement::Rras::PMPRADMINRELEASEIPADRESS
+    property lpfnMprAdminGetIpv6AddressForUser : Win32cr::NetworkManagement::Rras::PMPRADMINGETIPV6ADDRESSFORUSER
+    property lpfnMprAdminReleaseIpV6AddressForUser : Win32cr::NetworkManagement::Rras::PMPRADMINRELEASEIPV6ADDRESSFORUSER
+    property lpfnRasAdminAcceptNewLink : Win32cr::NetworkManagement::Rras::PMPRADMINACCEPTNEWLINK
+    property lpfnRasAdminLinkHangupNotification : Win32cr::NetworkManagement::Rras::PMPRADMINLINKHANGUPNOTIFICATION
+    property lpfnRasAdminTerminateDll : Win32cr::NetworkManagement::Rras::PMPRADMINTERMINATEDLL
+    property lpfnRasAdminAcceptNewConnectionEx : Win32cr::NetworkManagement::Rras::PMPRADMINACCEPTNEWCONNECTIONEX
+    property lpfnRasAdminAcceptEndpointChangeEx : Win32cr::NetworkManagement::Rras::PMPRADMINACCEPTTUNNELENDPOINTCHANGEEX
+    property lpfnRasAdminAcceptReauthenticationEx : Win32cr::NetworkManagement::Rras::PMPRADMINACCEPTREAUTHENTICATIONEX
+    property lpfnRasAdminConnectionHangupNotificationEx : Win32cr::NetworkManagement::Rras::PMPRADMINCONNECTIONHANGUPNOTIFICATIONEX
+    property lpfnRASValidatePreAuthenticatedConnectionEx : Win32cr::NetworkManagement::Rras::PMPRADMINRASVALIDATEPREAUTHENTICATEDCONNECTIONEX
+    def initialize(@revision : UInt8, @lpfnMprAdminGetIpAddressForUser : Win32cr::NetworkManagement::Rras::PMPRADMINGETIPADDRESSFORUSER, @lpfnMprAdminReleaseIpAddress : Win32cr::NetworkManagement::Rras::PMPRADMINRELEASEIPADRESS, @lpfnMprAdminGetIpv6AddressForUser : Win32cr::NetworkManagement::Rras::PMPRADMINGETIPV6ADDRESSFORUSER, @lpfnMprAdminReleaseIpV6AddressForUser : Win32cr::NetworkManagement::Rras::PMPRADMINRELEASEIPV6ADDRESSFORUSER, @lpfnRasAdminAcceptNewLink : Win32cr::NetworkManagement::Rras::PMPRADMINACCEPTNEWLINK, @lpfnRasAdminLinkHangupNotification : Win32cr::NetworkManagement::Rras::PMPRADMINLINKHANGUPNOTIFICATION, @lpfnRasAdminTerminateDll : Win32cr::NetworkManagement::Rras::PMPRADMINTERMINATEDLL, @lpfnRasAdminAcceptNewConnectionEx : Win32cr::NetworkManagement::Rras::PMPRADMINACCEPTNEWCONNECTIONEX, @lpfnRasAdminAcceptEndpointChangeEx : Win32cr::NetworkManagement::Rras::PMPRADMINACCEPTTUNNELENDPOINTCHANGEEX, @lpfnRasAdminAcceptReauthenticationEx : Win32cr::NetworkManagement::Rras::PMPRADMINACCEPTREAUTHENTICATIONEX, @lpfnRasAdminConnectionHangupNotificationEx : Win32cr::NetworkManagement::Rras::PMPRADMINCONNECTIONHANGUPNOTIFICATIONEX, @lpfnRASValidatePreAuthenticatedConnectionEx : Win32cr::NetworkManagement::Rras::PMPRADMINRASVALIDATEPREAUTHENTICATEDCONNECTIONEX)
+    end
+  end
 
   @[Extern]
-  record RTM_PREF_INFO,
-    metric : UInt32,
-    preference : UInt32
+  struct SECURITY_MESSAGE
+    property dwMsgId : Win32cr::NetworkManagement::Rras::SECURITY_MESSAGE_MSG_ID
+    property hPort : LibC::IntPtrT
+    property dwError : UInt32
+    property user_name : Win32cr::Foundation::CHAR[257]
+    property domain : Win32cr::Foundation::CHAR[16]
+    def initialize(@dwMsgId : Win32cr::NetworkManagement::Rras::SECURITY_MESSAGE_MSG_ID, @hPort : LibC::IntPtrT, @dwError : UInt32, @user_name : Win32cr::Foundation::CHAR[257], @domain : Win32cr::Foundation::CHAR[16])
+    end
+  end
 
   @[Extern]
-  record RTM_NEXTHOP_LIST,
-    num_next_hops : UInt16,
-    next_hops : LibC::IntPtrT*
+  struct RAS_SECURITY_INFO
+    property last_error : UInt32
+    property bytes_received : UInt32
+    property device_name : Win32cr::Foundation::CHAR[129]
+    def initialize(@last_error : UInt32, @bytes_received : UInt32, @device_name : Win32cr::Foundation::CHAR[129])
+    end
+  end
 
   @[Extern]
-  record RTM_DEST_INFO,
-    dest_handle : LibC::IntPtrT,
-    dest_address : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS,
-    last_changed : Win32cr::Foundation::FILETIME,
-    belongs_to_views : UInt32,
-    number_of_views : UInt32,
-    view_info : Anonymous_e__Struct_* do
+  struct MGM_IF_ENTRY
+    property dwIfIndex : UInt32
+    property dwIfNextHopAddr : UInt32
+    property bIGMP : Win32cr::Foundation::BOOL
+    property bIsEnabled : Win32cr::Foundation::BOOL
+    def initialize(@dwIfIndex : UInt32, @dwIfNextHopAddr : UInt32, @bIGMP : Win32cr::Foundation::BOOL, @bIsEnabled : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct ROUTING_PROTOCOL_CONFIG
+    property dwCallbackFlags : UInt32
+    property pfnRpfCallback : Win32cr::NetworkManagement::Rras::PMGM_RPF_CALLBACK
+    property pfnCreationAlertCallback : Win32cr::NetworkManagement::Rras::PMGM_CREATION_ALERT_CALLBACK
+    property pfnPruneAlertCallback : Win32cr::NetworkManagement::Rras::PMGM_PRUNE_ALERT_CALLBACK
+    property pfnJoinAlertCallback : Win32cr::NetworkManagement::Rras::PMGM_JOIN_ALERT_CALLBACK
+    property pfnWrongIfCallback : Win32cr::NetworkManagement::Rras::PMGM_WRONG_IF_CALLBACK
+    property pfnLocalJoinCallback : Win32cr::NetworkManagement::Rras::PMGM_LOCAL_JOIN_CALLBACK
+    property pfnLocalLeaveCallback : Win32cr::NetworkManagement::Rras::PMGM_LOCAL_LEAVE_CALLBACK
+    property pfnDisableIgmpCallback : Win32cr::NetworkManagement::Rras::PMGM_DISABLE_IGMP_CALLBACK
+    property pfnEnableIgmpCallback : Win32cr::NetworkManagement::Rras::PMGM_ENABLE_IGMP_CALLBACK
+    def initialize(@dwCallbackFlags : UInt32, @pfnRpfCallback : Win32cr::NetworkManagement::Rras::PMGM_RPF_CALLBACK, @pfnCreationAlertCallback : Win32cr::NetworkManagement::Rras::PMGM_CREATION_ALERT_CALLBACK, @pfnPruneAlertCallback : Win32cr::NetworkManagement::Rras::PMGM_PRUNE_ALERT_CALLBACK, @pfnJoinAlertCallback : Win32cr::NetworkManagement::Rras::PMGM_JOIN_ALERT_CALLBACK, @pfnWrongIfCallback : Win32cr::NetworkManagement::Rras::PMGM_WRONG_IF_CALLBACK, @pfnLocalJoinCallback : Win32cr::NetworkManagement::Rras::PMGM_LOCAL_JOIN_CALLBACK, @pfnLocalLeaveCallback : Win32cr::NetworkManagement::Rras::PMGM_LOCAL_LEAVE_CALLBACK, @pfnDisableIgmpCallback : Win32cr::NetworkManagement::Rras::PMGM_DISABLE_IGMP_CALLBACK, @pfnEnableIgmpCallback : Win32cr::NetworkManagement::Rras::PMGM_ENABLE_IGMP_CALLBACK)
+    end
+  end
+
+  @[Extern]
+  struct SOURCE_GROUP_ENTRY
+    property dwSourceAddr : UInt32
+    property dwSourceMask : UInt32
+    property dwGroupAddr : UInt32
+    property dwGroupMask : UInt32
+    def initialize(@dwSourceAddr : UInt32, @dwSourceMask : UInt32, @dwGroupAddr : UInt32, @dwGroupMask : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct RTM_REGN_PROFILE
+    property max_next_hops_in_route : UInt32
+    property max_handles_in_enum : UInt32
+    property views_supported : UInt32
+    property number_of_views : UInt32
+    def initialize(@max_next_hops_in_route : UInt32, @max_handles_in_enum : UInt32, @views_supported : UInt32, @number_of_views : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct RTM_NET_ADDRESS
+    property address_family : UInt16
+    property num_bits : UInt16
+    property addr_bits : UInt8[16]
+    def initialize(@address_family : UInt16, @num_bits : UInt16, @addr_bits : UInt8[16])
+    end
+  end
+
+  @[Extern]
+  struct RTM_PREF_INFO
+    property metric : UInt32
+    property preference : UInt32
+    def initialize(@metric : UInt32, @preference : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct RTM_NEXTHOP_LIST
+    property num_next_hops : UInt16
+    property next_hops : LibC::IntPtrT*
+    def initialize(@num_next_hops : UInt16, @next_hops : LibC::IntPtrT*)
+    end
+  end
+
+  @[Extern]
+  struct RTM_DEST_INFO
+    property dest_handle : LibC::IntPtrT
+    property dest_address : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS
+    property last_changed : Win32cr::Foundation::FILETIME
+    property belongs_to_views : UInt32
+    property number_of_views : UInt32
+    property view_info : Anonymous_e__Struct_*
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      view_id : Int32,
-      num_routes : UInt32,
-      route : LibC::IntPtrT,
-      owner : LibC::IntPtrT,
-      dest_flags : UInt32,
-      hold_route : LibC::IntPtrT
+    struct Anonymous_e__Struct_
+    property view_id : Int32
+    property num_routes : UInt32
+    property route : LibC::IntPtrT
+    property owner : LibC::IntPtrT
+    property dest_flags : UInt32
+    property hold_route : LibC::IntPtrT
+    def initialize(@view_id : Int32, @num_routes : UInt32, @route : LibC::IntPtrT, @owner : LibC::IntPtrT, @dest_flags : UInt32, @hold_route : LibC::IntPtrT)
+    end
+    end
 
+    def initialize(@dest_handle : LibC::IntPtrT, @dest_address : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS, @last_changed : Win32cr::Foundation::FILETIME, @belongs_to_views : UInt32, @number_of_views : UInt32, @view_info : Anonymous_e__Struct_*)
+    end
   end
 
   @[Extern]
-  record RTM_ROUTE_INFO,
-    dest_handle : LibC::IntPtrT,
-    route_owner : LibC::IntPtrT,
-    neighbour : LibC::IntPtrT,
-    state : UInt8,
-    flags1 : UInt8,
-    flags : UInt16,
-    pref_info : Win32cr::NetworkManagement::Rras::RTM_PREF_INFO,
-    belongs_to_views : UInt32,
-    entity_specific_info : Void*,
-    next_hops_list : Win32cr::NetworkManagement::Rras::RTM_NEXTHOP_LIST
+  struct RTM_ROUTE_INFO
+    property dest_handle : LibC::IntPtrT
+    property route_owner : LibC::IntPtrT
+    property neighbour : LibC::IntPtrT
+    property state : UInt8
+    property flags1 : UInt8
+    property flags : UInt16
+    property pref_info : Win32cr::NetworkManagement::Rras::RTM_PREF_INFO
+    property belongs_to_views : UInt32
+    property entity_specific_info : Void*
+    property next_hops_list : Win32cr::NetworkManagement::Rras::RTM_NEXTHOP_LIST
+    def initialize(@dest_handle : LibC::IntPtrT, @route_owner : LibC::IntPtrT, @neighbour : LibC::IntPtrT, @state : UInt8, @flags1 : UInt8, @flags : UInt16, @pref_info : Win32cr::NetworkManagement::Rras::RTM_PREF_INFO, @belongs_to_views : UInt32, @entity_specific_info : Void*, @next_hops_list : Win32cr::NetworkManagement::Rras::RTM_NEXTHOP_LIST)
+    end
+  end
 
   @[Extern]
-  record RTM_NEXTHOP_INFO,
-    next_hop_address : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS,
-    next_hop_owner : LibC::IntPtrT,
-    interface_index : UInt32,
-    state : UInt16,
-    flags : UInt16,
-    entity_specific_info : Void*,
-    remote_next_hop : LibC::IntPtrT
+  struct RTM_NEXTHOP_INFO
+    property next_hop_address : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS
+    property next_hop_owner : LibC::IntPtrT
+    property interface_index : UInt32
+    property state : UInt16
+    property flags : UInt16
+    property entity_specific_info : Void*
+    property remote_next_hop : LibC::IntPtrT
+    def initialize(@next_hop_address : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS, @next_hop_owner : LibC::IntPtrT, @interface_index : UInt32, @state : UInt16, @flags : UInt16, @entity_specific_info : Void*, @remote_next_hop : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record RTM_ENTITY_ID,
-    anonymous : Anonymous_e__Union_ do
+  struct RTM_ENTITY_ID
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      entity_id : UInt64 do
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property entity_id : UInt64
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        entity_protocol_id : UInt32,
-        entity_instance_id : UInt32
+      struct Anonymous_e__Struct_
+    property entity_protocol_id : UInt32
+    property entity_instance_id : UInt32
+    def initialize(@entity_protocol_id : UInt32, @entity_instance_id : UInt32)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @entity_id : UInt64)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record RTM_ENTITY_INFO,
-    rtm_instance_id : UInt16,
-    address_family : UInt16,
-    entity_id : Win32cr::NetworkManagement::Rras::RTM_ENTITY_ID
+  struct RTM_ENTITY_INFO
+    property rtm_instance_id : UInt16
+    property address_family : UInt16
+    property entity_id : Win32cr::NetworkManagement::Rras::RTM_ENTITY_ID
+    def initialize(@rtm_instance_id : UInt16, @address_family : UInt16, @entity_id : Win32cr::NetworkManagement::Rras::RTM_ENTITY_ID)
+    end
+  end
 
   @[Extern]
-  record RTM_ENTITY_METHOD_INPUT,
-    method_type : UInt32,
-    input_size : UInt32,
-    input_data : UInt8*
+  struct RTM_ENTITY_METHOD_INPUT
+    property method_type : UInt32
+    property input_size : UInt32
+    property input_data : UInt8*
+    def initialize(@method_type : UInt32, @input_size : UInt32, @input_data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record RTM_ENTITY_METHOD_OUTPUT,
-    method_type : UInt32,
-    method_status : UInt32,
-    output_size : UInt32,
-    output_data : UInt8*
+  struct RTM_ENTITY_METHOD_OUTPUT
+    property method_type : UInt32
+    property method_status : UInt32
+    property output_size : UInt32
+    property output_data : UInt8*
+    def initialize(@method_type : UInt32, @method_status : UInt32, @output_size : UInt32, @output_data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record RTM_ENTITY_EXPORT_METHODS,
-    num_methods : UInt32,
-    methods : Win32cr::NetworkManagement::Rras::RTM_ENTITY_EXPORT_METHOD*
+  struct RTM_ENTITY_EXPORT_METHODS
+    property num_methods : UInt32
+    property methods : Win32cr::NetworkManagement::Rras::RTM_ENTITY_EXPORT_METHOD*
+    def initialize(@num_methods : UInt32, @methods : Win32cr::NetworkManagement::Rras::RTM_ENTITY_EXPORT_METHOD*)
+    end
+  end
 
   @[Link("rasapi32")]
   @[Link("rasdlg")]

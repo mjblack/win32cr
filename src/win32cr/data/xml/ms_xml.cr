@@ -809,54 +809,66 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record XML_ERROR,
-    _n_line : UInt32,
-    _pch_buf : Win32cr::Foundation::BSTR,
-    _cch_buf : UInt32,
-    _ich : UInt32,
-    _psz_found : Win32cr::Foundation::BSTR,
-    _psz_expected : Win32cr::Foundation::BSTR,
-    _reserved1 : UInt32,
-    _reserved2 : UInt32
+  struct XML_ERROR
+    property _n_line : UInt32
+    property _pch_buf : Win32cr::Foundation::BSTR
+    property _cch_buf : UInt32
+    property _ich : UInt32
+    property _psz_found : Win32cr::Foundation::BSTR
+    property _psz_expected : Win32cr::Foundation::BSTR
+    property _reserved1 : UInt32
+    property _reserved2 : UInt32
+    def initialize(@_n_line : UInt32, @_pch_buf : Win32cr::Foundation::BSTR, @_cch_buf : UInt32, @_ich : UInt32, @_psz_found : Win32cr::Foundation::BSTR, @_psz_expected : Win32cr::Foundation::BSTR, @_reserved1 : UInt32, @_reserved2 : UInt32)
+    end
+  end
 
   @[Extern]
-  record Msxml6_referenceremainingtypes____,
-    __tag_dom_node_type__ : Win32cr::Data::Xml::MsXml::DOMNodeType,
-    __dom_node_type__ : Win32cr::Data::Xml::MsXml::DOMNodeType,
-    __server_xml_http_option_enum__ : Win32cr::Data::Xml::MsXml::SERVERXMLHTTP_OPTION,
-    __server_xml_http_option__ : Win32cr::Data::Xml::MsXml::SERVERXMLHTTP_OPTION,
-    __server_cert_option_enum__ : Win32cr::Data::Xml::MsXml::SXH_SERVER_CERT_OPTION,
-    __server_cert_option__ : Win32cr::Data::Xml::MsXml::SXH_SERVER_CERT_OPTION,
-    __proxy_setting_enum__ : Win32cr::Data::Xml::MsXml::SXH_PROXY_SETTING,
-    __proxy_setting__ : Win32cr::Data::Xml::MsXml::SXH_PROXY_SETTING,
-    __som_item_type_enum__ : Win32cr::Data::Xml::MsXml::SOMITEMTYPE,
-    __som_item_type__ : Win32cr::Data::Xml::MsXml::SOMITEMTYPE,
-    __schema_use_enum__ : Win32cr::Data::Xml::MsXml::SCHEMAUSE,
-    __schema_use__ : Win32cr::Data::Xml::MsXml::SCHEMAUSE,
-    __schema_derivation_method_enum__ : Win32cr::Data::Xml::MsXml::SCHEMADERIVATIONMETHOD,
-    __schema_derivation_method__ : Win32cr::Data::Xml::MsXml::SCHEMADERIVATIONMETHOD,
-    __schema_content_type_enum__ : Win32cr::Data::Xml::MsXml::SCHEMACONTENTTYPE,
-    __schema_content_type__ : Win32cr::Data::Xml::MsXml::SCHEMACONTENTTYPE,
-    __schema_process_contents_enum__ : Win32cr::Data::Xml::MsXml::SCHEMAPROCESSCONTENTS,
-    __schema_process_contents__ : Win32cr::Data::Xml::MsXml::SCHEMAPROCESSCONTENTS,
-    __schema_whitespace_enum__ : Win32cr::Data::Xml::MsXml::SCHEMAWHITESPACE,
-    __schema_whitespace__ : Win32cr::Data::Xml::MsXml::SCHEMAWHITESPACE,
-    __schema_type_variety_enum__ : Win32cr::Data::Xml::MsXml::SCHEMATYPEVARIETY,
-    __schema_type_variety__ : Win32cr::Data::Xml::MsXml::SCHEMATYPEVARIETY
+  struct Msxml6_referenceremainingtypes____
+    property __tag_dom_node_type__ : Win32cr::Data::Xml::MsXml::DOMNodeType
+    property __dom_node_type__ : Win32cr::Data::Xml::MsXml::DOMNodeType
+    property __server_xml_http_option_enum__ : Win32cr::Data::Xml::MsXml::SERVERXMLHTTP_OPTION
+    property __server_xml_http_option__ : Win32cr::Data::Xml::MsXml::SERVERXMLHTTP_OPTION
+    property __server_cert_option_enum__ : Win32cr::Data::Xml::MsXml::SXH_SERVER_CERT_OPTION
+    property __server_cert_option__ : Win32cr::Data::Xml::MsXml::SXH_SERVER_CERT_OPTION
+    property __proxy_setting_enum__ : Win32cr::Data::Xml::MsXml::SXH_PROXY_SETTING
+    property __proxy_setting__ : Win32cr::Data::Xml::MsXml::SXH_PROXY_SETTING
+    property __som_item_type_enum__ : Win32cr::Data::Xml::MsXml::SOMITEMTYPE
+    property __som_item_type__ : Win32cr::Data::Xml::MsXml::SOMITEMTYPE
+    property __schema_use_enum__ : Win32cr::Data::Xml::MsXml::SCHEMAUSE
+    property __schema_use__ : Win32cr::Data::Xml::MsXml::SCHEMAUSE
+    property __schema_derivation_method_enum__ : Win32cr::Data::Xml::MsXml::SCHEMADERIVATIONMETHOD
+    property __schema_derivation_method__ : Win32cr::Data::Xml::MsXml::SCHEMADERIVATIONMETHOD
+    property __schema_content_type_enum__ : Win32cr::Data::Xml::MsXml::SCHEMACONTENTTYPE
+    property __schema_content_type__ : Win32cr::Data::Xml::MsXml::SCHEMACONTENTTYPE
+    property __schema_process_contents_enum__ : Win32cr::Data::Xml::MsXml::SCHEMAPROCESSCONTENTS
+    property __schema_process_contents__ : Win32cr::Data::Xml::MsXml::SCHEMAPROCESSCONTENTS
+    property __schema_whitespace_enum__ : Win32cr::Data::Xml::MsXml::SCHEMAWHITESPACE
+    property __schema_whitespace__ : Win32cr::Data::Xml::MsXml::SCHEMAWHITESPACE
+    property __schema_type_variety_enum__ : Win32cr::Data::Xml::MsXml::SCHEMATYPEVARIETY
+    property __schema_type_variety__ : Win32cr::Data::Xml::MsXml::SCHEMATYPEVARIETY
+    def initialize(@__tag_dom_node_type__ : Win32cr::Data::Xml::MsXml::DOMNodeType, @__dom_node_type__ : Win32cr::Data::Xml::MsXml::DOMNodeType, @__server_xml_http_option_enum__ : Win32cr::Data::Xml::MsXml::SERVERXMLHTTP_OPTION, @__server_xml_http_option__ : Win32cr::Data::Xml::MsXml::SERVERXMLHTTP_OPTION, @__server_cert_option_enum__ : Win32cr::Data::Xml::MsXml::SXH_SERVER_CERT_OPTION, @__server_cert_option__ : Win32cr::Data::Xml::MsXml::SXH_SERVER_CERT_OPTION, @__proxy_setting_enum__ : Win32cr::Data::Xml::MsXml::SXH_PROXY_SETTING, @__proxy_setting__ : Win32cr::Data::Xml::MsXml::SXH_PROXY_SETTING, @__som_item_type_enum__ : Win32cr::Data::Xml::MsXml::SOMITEMTYPE, @__som_item_type__ : Win32cr::Data::Xml::MsXml::SOMITEMTYPE, @__schema_use_enum__ : Win32cr::Data::Xml::MsXml::SCHEMAUSE, @__schema_use__ : Win32cr::Data::Xml::MsXml::SCHEMAUSE, @__schema_derivation_method_enum__ : Win32cr::Data::Xml::MsXml::SCHEMADERIVATIONMETHOD, @__schema_derivation_method__ : Win32cr::Data::Xml::MsXml::SCHEMADERIVATIONMETHOD, @__schema_content_type_enum__ : Win32cr::Data::Xml::MsXml::SCHEMACONTENTTYPE, @__schema_content_type__ : Win32cr::Data::Xml::MsXml::SCHEMACONTENTTYPE, @__schema_process_contents_enum__ : Win32cr::Data::Xml::MsXml::SCHEMAPROCESSCONTENTS, @__schema_process_contents__ : Win32cr::Data::Xml::MsXml::SCHEMAPROCESSCONTENTS, @__schema_whitespace_enum__ : Win32cr::Data::Xml::MsXml::SCHEMAWHITESPACE, @__schema_whitespace__ : Win32cr::Data::Xml::MsXml::SCHEMAWHITESPACE, @__schema_type_variety_enum__ : Win32cr::Data::Xml::MsXml::SCHEMATYPEVARIETY, @__schema_type_variety__ : Win32cr::Data::Xml::MsXml::SCHEMATYPEVARIETY)
+    end
+  end
 
   @[Extern]
-  record XHR_COOKIE,
-    pwszUrl : Win32cr::Foundation::PWSTR,
-    pwszName : Win32cr::Foundation::PWSTR,
-    pwszValue : Win32cr::Foundation::PWSTR,
-    pwszP3PPolicy : Win32cr::Foundation::PWSTR,
-    ftExpires : Win32cr::Foundation::FILETIME,
-    dwFlags : UInt32
+  struct XHR_COOKIE
+    property pwszUrl : Win32cr::Foundation::PWSTR
+    property pwszName : Win32cr::Foundation::PWSTR
+    property pwszValue : Win32cr::Foundation::PWSTR
+    property pwszP3PPolicy : Win32cr::Foundation::PWSTR
+    property ftExpires : Win32cr::Foundation::FILETIME
+    property dwFlags : UInt32
+    def initialize(@pwszUrl : Win32cr::Foundation::PWSTR, @pwszName : Win32cr::Foundation::PWSTR, @pwszValue : Win32cr::Foundation::PWSTR, @pwszP3PPolicy : Win32cr::Foundation::PWSTR, @ftExpires : Win32cr::Foundation::FILETIME, @dwFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record XHR_CERT,
-    cbCert : UInt32,
-    pbCert : UInt8*
+  struct XHR_CERT
+    property cbCert : UInt32
+    property pbCert : UInt8*
+    def initialize(@cbCert : UInt32, @pbCert : UInt8*)
+    end
+  end
 
   @[Extern]
   record IXMLDOMImplementationVtbl,
@@ -871,7 +883,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("2933bf8f-7b36-11d2-b20e-00c04f983e60")]
   record IXMLDOMImplementation, lpVtbl : IXMLDOMImplementationVtbl* do
     GUID = LibC::GUID.new(0x2933bf8f_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMImplementation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -949,7 +960,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("2933bf80-7b36-11d2-b20e-00c04f983e60")]
   record IXMLDOMNode, lpVtbl : IXMLDOMNodeVtbl* do
     GUID = LibC::GUID.new(0x2933bf80_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMNode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1132,7 +1142,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("3efaa413-272f-11d2-836f-0000f87a7782")]
   record IXMLDOMDocumentFragment, lpVtbl : IXMLDOMDocumentFragmentVtbl* do
     GUID = LibC::GUID.new(0x3efaa413_u32, 0x272f_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x6f_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x77_u8, 0x82_u8])
     def query_interface(this : IXMLDOMDocumentFragment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1348,7 +1357,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("2933bf81-7b36-11d2-b20e-00c04f983e60")]
   record IXMLDOMDocument, lpVtbl : IXMLDOMDocumentVtbl* do
     GUID = LibC::GUID.new(0x2933bf81_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMDocument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1599,7 +1607,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("2933bf82-7b36-11d2-b20e-00c04f983e60")]
   record IXMLDOMNodeList, lpVtbl : IXMLDOMNodeListVtbl* do
     GUID = LibC::GUID.new(0x2933bf82_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMNodeList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1663,7 +1670,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("2933bf83-7b36-11d2-b20e-00c04f983e60")]
   record IXMLDOMNamedNodeMap, lpVtbl : IXMLDOMNamedNodeMapVtbl* do
     GUID = LibC::GUID.new(0x2933bf83_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMNamedNodeMap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1776,7 +1782,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("2933bf84-7b36-11d2-b20e-00c04f983e60")]
   record IXMLDOMCharacterData, lpVtbl : IXMLDOMCharacterDataVtbl* do
     GUID = LibC::GUID.new(0x2933bf84_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMCharacterData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1986,7 +1991,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("2933bf85-7b36-11d2-b20e-00c04f983e60")]
   record IXMLDOMAttribute, lpVtbl : IXMLDOMAttributeVtbl* do
     GUID = LibC::GUID.new(0x2933bf85_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMAttribute*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2187,7 +2191,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("2933bf86-7b36-11d2-b20e-00c04f983e60")]
   record IXMLDOMElement, lpVtbl : IXMLDOMElementVtbl* do
     GUID = LibC::GUID.new(0x2933bf86_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2406,7 +2409,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("2933bf87-7b36-11d2-b20e-00c04f983e60")]
   record IXMLDOMText, lpVtbl : IXMLDOMTextVtbl* do
     GUID = LibC::GUID.new(0x2933bf87_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMText*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2624,7 +2626,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("2933bf88-7b36-11d2-b20e-00c04f983e60")]
   record IXMLDOMComment, lpVtbl : IXMLDOMCommentVtbl* do
     GUID = LibC::GUID.new(0x2933bf88_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMComment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2834,7 +2835,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("2933bf89-7b36-11d2-b20e-00c04f983e60")]
   record IXMLDOMProcessingInstruction, lpVtbl : IXMLDOMProcessingInstructionVtbl* do
     GUID = LibC::GUID.new(0x2933bf89_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMProcessingInstruction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3035,7 +3035,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("2933bf8a-7b36-11d2-b20e-00c04f983e60")]
   record IXMLDOMCDATASection, lpVtbl : IXMLDOMCDATASectionVtbl* do
     GUID = LibC::GUID.new(0x2933bf8a_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMCDATASection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3248,7 +3247,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("2933bf8b-7b36-11d2-b20e-00c04f983e60")]
   record IXMLDOMDocumentType, lpVtbl : IXMLDOMDocumentTypeVtbl* do
     GUID = LibC::GUID.new(0x2933bf8b_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMDocumentType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3442,7 +3440,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("2933bf8c-7b36-11d2-b20e-00c04f983e60")]
   record IXMLDOMNotation, lpVtbl : IXMLDOMNotationVtbl* do
     GUID = LibC::GUID.new(0x2933bf8c_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMNotation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3634,7 +3631,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("2933bf8d-7b36-11d2-b20e-00c04f983e60")]
   record IXMLDOMEntity, lpVtbl : IXMLDOMEntityVtbl* do
     GUID = LibC::GUID.new(0x2933bf8d_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMEntity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3826,7 +3822,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("2933bf8e-7b36-11d2-b20e-00c04f983e60")]
   record IXMLDOMEntityReference, lpVtbl : IXMLDOMEntityReferenceVtbl* do
     GUID = LibC::GUID.new(0x2933bf8e_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMEntityReference*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3980,7 +3975,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("3efaa426-272f-11d2-836f-0000f87a7782")]
   record IXMLDOMParseError, lpVtbl : IXMLDOMParseErrorVtbl* do
     GUID = LibC::GUID.new(0x3efaa426_u32, 0x272f_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x6f_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x77_u8, 0x82_u8])
     def query_interface(this : IXMLDOMParseError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4085,7 +4079,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("3efaa425-272f-11d2-836f-0000f87a7782")]
   record IXTLRuntime, lpVtbl : IXTLRuntimeVtbl* do
     GUID = LibC::GUID.new(0x3efaa425_u32, 0x272f_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x6f_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x77_u8, 0x82_u8])
     def query_interface(this : IXTLRuntime*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4259,7 +4252,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("3efaa427-272f-11d2-836f-0000f87a7782")]
   record XMLDOMDocumentEvents, lpVtbl : XMLDOMDocumentEventsVtbl* do
     GUID = LibC::GUID.new(0x3efaa427_u32, 0x272f_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x6f_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x77_u8, 0x82_u8])
     def query_interface(this : XMLDOMDocumentEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4312,7 +4304,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("ed8c108d-4349-11d2-91a4-00c04f7969e8")]
   record IXMLHttpRequest, lpVtbl : IXMLHttpRequestVtbl* do
     GUID = LibC::GUID.new(0xed8c108d_u32, 0x4349_u16, 0x11d2_u16, StaticArray[0x91_u8, 0xa4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x69_u8, 0xe8_u8])
     def query_interface(this : IXMLHttpRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4398,7 +4389,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("310afa62-0575-11d2-9ca9-0060b0ec3d39")]
   record IXMLDSOControl, lpVtbl : IXMLDSOControlVtbl* do
     GUID = LibC::GUID.new(0x310afa62_u32, 0x575_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0xa9_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0xec_u8, 0x3d_u8, 0x39_u8])
     def query_interface(this : IXMLDSOControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4456,7 +4446,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("65725580-9b5d-11d0-9bfe-00c04fc99c8e")]
   record IXMLElementCollection, lpVtbl : IXMLElementCollectionVtbl* do
     GUID = LibC::GUID.new(0x65725580_u32, 0x9b5d_u16, 0x11d0_u16, StaticArray[0x9b_u8, 0xfe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9c_u8, 0x8e_u8])
     def query_interface(this : IXMLElementCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4521,7 +4510,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("f52e2b61-18a1-11d1-b105-00805f49916b")]
   record IXMLDocument, lpVtbl : IXMLDocumentVtbl* do
     GUID = LibC::GUID.new(0xf52e2b61_u32, 0x18a1_u16, 0x11d1_u16, StaticArray[0xb1_u8, 0x5_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x49_u8, 0x91_u8, 0x6b_u8])
     def query_interface(this : IXMLDocument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4618,7 +4606,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("2b8de2fe-8d2d-11d1-b2fc-00c04fd915a9")]
   record IXMLDocument2, lpVtbl : IXMLDocument2Vtbl* do
     GUID = LibC::GUID.new(0x2b8de2fe_u32, 0x8d2d_u16, 0x11d1_u16, StaticArray[0xb2_u8, 0xfc_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x15_u8, 0xa9_u8])
     def query_interface(this : IXMLDocument2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4717,7 +4704,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("3f7f31ac-e15f-11d0-9c25-00c04fc99c8e")]
   record IXMLElement, lpVtbl : IXMLElementVtbl* do
     GUID = LibC::GUID.new(0x3f7f31ac_u32, 0xe15f_u16, 0x11d0_u16, StaticArray[0x9c_u8, 0x25_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9c_u8, 0x8e_u8])
     def query_interface(this : IXMLElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4805,7 +4791,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("2b8de2ff-8d2d-11d1-b2fc-00c04fd915a9")]
   record IXMLElement2, lpVtbl : IXMLElement2Vtbl* do
     GUID = LibC::GUID.new(0x2b8de2ff_u32, 0x8d2d_u16, 0x11d1_u16, StaticArray[0xb2_u8, 0xfc_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x15_u8, 0xa9_u8])
     def query_interface(this : IXMLElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4885,7 +4870,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("d4d4a0fc-3b73-11d1-b2b4-00c04fb92596")]
   record IXMLAttribute, lpVtbl : IXMLAttributeVtbl* do
     GUID = LibC::GUID.new(0xd4d4a0fc_u32, 0x3b73_u16, 0x11d1_u16, StaticArray[0xb2_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x25_u8, 0x96_u8])
     def query_interface(this : IXMLAttribute*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4927,7 +4911,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("948c5ad3-c58d-11d0-9c0b-00c04fc99c8e")]
   record IXMLError, lpVtbl : IXMLErrorVtbl* do
     GUID = LibC::GUID.new(0x948c5ad3_u32, 0xc58d_u16, 0x11d0_u16, StaticArray[0x9c_u8, 0xb_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9c_u8, 0x8e_u8])
     def query_interface(this : IXMLError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5032,7 +5015,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("2933bf95-7b36-11d2-b20e-00c04f983e60")]
   record IXMLDOMDocument2, lpVtbl : IXMLDOMDocument2Vtbl* do
     GUID = LibC::GUID.new(0x2933bf95_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMDocument2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5373,7 +5355,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("2933bf96-7b36-11d2-b20e-00c04f983e60")]
   record IXMLDOMDocument3, lpVtbl : IXMLDOMDocument3Vtbl* do
     GUID = LibC::GUID.new(0x2933bf96_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMDocument3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5650,7 +5631,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("373984c8-b845-449b-91e7-45ac83036ade")]
   record IXMLDOMSchemaCollection, lpVtbl : IXMLDOMSchemaCollectionVtbl* do
     GUID = LibC::GUID.new(0x373984c8_u32, 0xb845_u16, 0x449b_u16, StaticArray[0x91_u8, 0xe7_u8, 0x45_u8, 0xac_u8, 0x83_u8, 0x3_u8, 0x6a_u8, 0xde_u8])
     def query_interface(this : IXMLDOMSchemaCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5726,7 +5706,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("aa634fc7-5888-44a7-a257-3a47150d3a0e")]
   record IXMLDOMSelection, lpVtbl : IXMLDOMSelectionVtbl* do
     GUID = LibC::GUID.new(0xaa634fc7_u32, 0x5888_u16, 0x44a7_u16, StaticArray[0xa2_u8, 0x57_u8, 0x3a_u8, 0x47_u8, 0x15_u8, 0xd_u8, 0x3a_u8, 0xe_u8])
     def query_interface(this : IXMLDOMSelection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5824,7 +5803,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("3efaa428-272f-11d2-836f-0000f87a7782")]
   record IXMLDOMParseError2, lpVtbl : IXMLDOMParseError2Vtbl* do
     GUID = LibC::GUID.new(0x3efaa428_u32, 0x272f_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x6f_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x77_u8, 0x82_u8])
     def query_interface(this : IXMLDOMParseError2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5901,7 +5879,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("3efaa429-272f-11d2-836f-0000f87a7782")]
   record IXMLDOMParseErrorCollection, lpVtbl : IXMLDOMParseErrorCollectionVtbl* do
     GUID = LibC::GUID.new(0x3efaa429_u32, 0x272f_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x6f_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x77_u8, 0x82_u8])
     def query_interface(this : IXMLDOMParseErrorCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5969,7 +5946,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("2933bf92-7b36-11d2-b20e-00c04f983e60")]
   record IXSLProcessor, lpVtbl : IXSLProcessorVtbl* do
     GUID = LibC::GUID.new(0x2933bf92_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXSLProcessor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6053,7 +6029,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("2933bf93-7b36-11d2-b20e-00c04f983e60")]
   record IXSLTemplate, lpVtbl : IXSLTemplateVtbl* do
     GUID = LibC::GUID.new(0x2933bf93_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXSLTemplate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6115,7 +6090,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("ed8c108d-4349-11d2-91a4-00c04f7969e8")]
   record IXMLHTTPRequest, lpVtbl : IXMLHTTPRequestVtbl* do
     GUID = LibC::GUID.new(0xed8c108d_u32, 0x4349_u16, 0x11d2_u16, StaticArray[0x91_u8, 0xa4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x69_u8, 0xe8_u8])
     def query_interface(this : IXMLHTTPRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6214,7 +6188,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("2e9196bf-13ba-4dd4-91ca-6c571f281495")]
   record IServerXMLHTTPRequest, lpVtbl : IServerXMLHTTPRequestVtbl* do
     GUID = LibC::GUID.new(0x2e9196bf_u32, 0x13ba_u16, 0x4dd4_u16, StaticArray[0x91_u8, 0xca_u8, 0x6c_u8, 0x57_u8, 0x1f_u8, 0x28_u8, 0x14_u8, 0x95_u8])
     def query_interface(this : IServerXMLHTTPRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6327,7 +6300,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("2e01311b-c322-4b0a-bd77-b90cfdc8dce7")]
   record IServerXMLHTTPRequest2, lpVtbl : IServerXMLHTTPRequest2Vtbl* do
     GUID = LibC::GUID.new(0x2e01311b_u32, 0xc322_u16, 0x4b0a_u16, StaticArray[0xbd_u8, 0x77_u8, 0xb9_u8, 0xc_u8, 0xfd_u8, 0xc8_u8, 0xdc_u8, 0xe7_u8])
     def query_interface(this : IServerXMLHTTPRequest2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6440,7 +6412,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("a4f96ed0-f829-476e-81c0-cdc7bd2a0802")]
   record ISAXXMLReader, lpVtbl : ISAXXMLReaderVtbl* do
     GUID = LibC::GUID.new(0xa4f96ed0_u32, 0xf829_u16, 0x476e_u16, StaticArray[0x81_u8, 0xc0_u8, 0xcd_u8, 0xc7_u8, 0xbd_u8, 0x2a_u8, 0x8_u8, 0x2_u8])
     def query_interface(this : ISAXXMLReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6537,7 +6508,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("70409222-ca09-4475-acb8-40312fe8d145")]
   record ISAXXMLFilter, lpVtbl : ISAXXMLFilterVtbl* do
     GUID = LibC::GUID.new(0x70409222_u32, 0xca09_u16, 0x4475_u16, StaticArray[0xac_u8, 0xb8_u8, 0x40_u8, 0x31_u8, 0x2f_u8, 0xe8_u8, 0xd1_u8, 0x45_u8])
     def query_interface(this : ISAXXMLFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6624,7 +6594,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("9b7e472a-0de4-4640-bff3-84d38a051c31")]
   record ISAXLocator, lpVtbl : ISAXLocatorVtbl* do
     GUID = LibC::GUID.new(0x9b7e472a_u32, 0xde4_u16, 0x4640_u16, StaticArray[0xbf_u8, 0xf3_u8, 0x84_u8, 0xd3_u8, 0x8a_u8, 0x5_u8, 0x1c_u8, 0x31_u8])
     def query_interface(this : ISAXLocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6660,7 +6629,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("99bca7bd-e8c4-4d5f-a0cf-6d907901ff07")]
   record ISAXEntityResolver, lpVtbl : ISAXEntityResolverVtbl* do
     GUID = LibC::GUID.new(0x99bca7bd_u32, 0xe8c4_u16, 0x4d5f_u16, StaticArray[0xa0_u8, 0xcf_u8, 0x6d_u8, 0x90_u8, 0x79_u8, 0x1_u8, 0xff_u8, 0x7_u8])
     def query_interface(this : ISAXEntityResolver*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6697,7 +6665,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("1545cdfa-9e4e-4497-a8a4-2bf7d0112c44")]
   record ISAXContentHandler, lpVtbl : ISAXContentHandlerVtbl* do
     GUID = LibC::GUID.new(0x1545cdfa_u32, 0x9e4e_u16, 0x4497_u16, StaticArray[0xa8_u8, 0xa4_u8, 0x2b_u8, 0xf7_u8, 0xd0_u8, 0x11_u8, 0x2c_u8, 0x44_u8])
     def query_interface(this : ISAXContentHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6755,7 +6722,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("e15c1baf-afb3-4d60-8c36-19a8c45defed")]
   record ISAXDTDHandler, lpVtbl : ISAXDTDHandlerVtbl* do
     GUID = LibC::GUID.new(0xe15c1baf_u32, 0xafb3_u16, 0x4d60_u16, StaticArray[0x8c_u8, 0x36_u8, 0x19_u8, 0xa8_u8, 0xc4_u8, 0x5d_u8, 0xef_u8, 0xed_u8])
     def query_interface(this : ISAXDTDHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6787,7 +6753,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("a60511c4-ccf5-479e-98a3-dc8dc545b7d0")]
   record ISAXErrorHandler, lpVtbl : ISAXErrorHandlerVtbl* do
     GUID = LibC::GUID.new(0xa60511c4_u32, 0xccf5_u16, 0x479e_u16, StaticArray[0x98_u8, 0xa3_u8, 0xdc_u8, 0x8d_u8, 0xc5_u8, 0x45_u8, 0xb7_u8, 0xd0_u8])
     def query_interface(this : ISAXErrorHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6826,7 +6791,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("7f85d5f5-47a8-4497-bda5-84ba04819ea6")]
   record ISAXLexicalHandler, lpVtbl : ISAXLexicalHandlerVtbl* do
     GUID = LibC::GUID.new(0x7f85d5f5_u32, 0x47a8_u16, 0x4497_u16, StaticArray[0xbd_u8, 0xa5_u8, 0x84_u8, 0xba_u8, 0x4_u8, 0x81_u8, 0x9e_u8, 0xa6_u8])
     def query_interface(this : ISAXLexicalHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6874,7 +6838,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("862629ac-771a-47b2-8337-4e6843c1be90")]
   record ISAXDeclHandler, lpVtbl : ISAXDeclHandlerVtbl* do
     GUID = LibC::GUID.new(0x862629ac_u32, 0x771a_u16, 0x47b2_u16, StaticArray[0x83_u8, 0x37_u8, 0x4e_u8, 0x68_u8, 0x43_u8, 0xc1_u8, 0xbe_u8, 0x90_u8])
     def query_interface(this : ISAXDeclHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6922,7 +6885,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("f078abe1-45d2-4832-91ea-4466ce2f25c9")]
   record ISAXAttributes, lpVtbl : ISAXAttributesVtbl* do
     GUID = LibC::GUID.new(0xf078abe1_u32, 0x45d2_u16, 0x4832_u16, StaticArray[0x91_u8, 0xea_u8, 0x44_u8, 0x66_u8, 0xce_u8, 0x2f_u8, 0x25_u8, 0xc9_u8])
     def query_interface(this : ISAXAttributes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7006,7 +6968,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("8c033caa-6cd6-4f73-b728-4531af74945f")]
   record IVBSAXXMLReader, lpVtbl : IVBSAXXMLReaderVtbl* do
     GUID = LibC::GUID.new(0x8c033caa_u32, 0x6cd6_u16, 0x4f73_u16, StaticArray[0xb7_u8, 0x28_u8, 0x45_u8, 0x31_u8, 0xaf_u8, 0x74_u8, 0x94_u8, 0x5f_u8])
     def query_interface(this : IVBSAXXMLReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7101,7 +7062,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("1299eb1b-5b88-433e-82de-82ca75ad4e04")]
   record IVBSAXXMLFilter, lpVtbl : IVBSAXXMLFilterVtbl* do
     GUID = LibC::GUID.new(0x1299eb1b_u32, 0x5b88_u16, 0x433e_u16, StaticArray[0x82_u8, 0xde_u8, 0x82_u8, 0xca_u8, 0x75_u8, 0xad_u8, 0x4e_u8, 0x4_u8])
     def query_interface(this : IVBSAXXMLFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7150,7 +7110,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("796e7ac5-5aa2-4eff-acad-3faaf01a3288")]
   record IVBSAXLocator, lpVtbl : IVBSAXLocatorVtbl* do
     GUID = LibC::GUID.new(0x796e7ac5_u32, 0x5aa2_u16, 0x4eff_u16, StaticArray[0xac_u8, 0xad_u8, 0x3f_u8, 0xaa_u8, 0xf0_u8, 0x1a_u8, 0x32_u8, 0x88_u8])
     def query_interface(this : IVBSAXLocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7202,7 +7161,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("0c05d096-f45b-4aca-ad1a-aa0bc25518dc")]
   record IVBSAXEntityResolver, lpVtbl : IVBSAXEntityResolverVtbl* do
     GUID = LibC::GUID.new(0xc05d096_u32, 0xf45b_u16, 0x4aca_u16, StaticArray[0xad_u8, 0x1a_u8, 0xaa_u8, 0xb_u8, 0xc2_u8, 0x55_u8, 0x18_u8, 0xdc_u8])
     def query_interface(this : IVBSAXEntityResolver*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7255,7 +7213,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("2ed7290a-4dd5-4b46-bb26-4e4155e77faa")]
   record IVBSAXContentHandler, lpVtbl : IVBSAXContentHandlerVtbl* do
     GUID = LibC::GUID.new(0x2ed7290a_u32, 0x4dd5_u16, 0x4b46_u16, StaticArray[0xbb_u8, 0x26_u8, 0x4e_u8, 0x41_u8, 0x55_u8, 0xe7_u8, 0x7f_u8, 0xaa_u8])
     def query_interface(this : IVBSAXContentHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7329,7 +7286,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("24fb3297-302d-4620-ba39-3a732d850558")]
   record IVBSAXDTDHandler, lpVtbl : IVBSAXDTDHandlerVtbl* do
     GUID = LibC::GUID.new(0x24fb3297_u32, 0x302d_u16, 0x4620_u16, StaticArray[0xba_u8, 0x39_u8, 0x3a_u8, 0x73_u8, 0x2d_u8, 0x85_u8, 0x5_u8, 0x58_u8])
     def query_interface(this : IVBSAXDTDHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7377,7 +7333,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("d963d3fe-173c-4862-9095-b92f66995f52")]
   record IVBSAXErrorHandler, lpVtbl : IVBSAXErrorHandlerVtbl* do
     GUID = LibC::GUID.new(0xd963d3fe_u32, 0x173c_u16, 0x4862_u16, StaticArray[0x90_u8, 0x95_u8, 0xb9_u8, 0x2f_u8, 0x66_u8, 0x99_u8, 0x5f_u8, 0x52_u8])
     def query_interface(this : IVBSAXErrorHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7432,7 +7387,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("032aac35-8c0e-4d9d-979f-e3b702935576")]
   record IVBSAXLexicalHandler, lpVtbl : IVBSAXLexicalHandlerVtbl* do
     GUID = LibC::GUID.new(0x32aac35_u32, 0x8c0e_u16, 0x4d9d_u16, StaticArray[0x97_u8, 0x9f_u8, 0xe3_u8, 0xb7_u8, 0x2_u8, 0x93_u8, 0x55_u8, 0x76_u8])
     def query_interface(this : IVBSAXLexicalHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7496,7 +7450,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("e8917260-7579-4be1-b5dd-7afbfa6f077b")]
   record IVBSAXDeclHandler, lpVtbl : IVBSAXDeclHandlerVtbl* do
     GUID = LibC::GUID.new(0xe8917260_u32, 0x7579_u16, 0x4be1_u16, StaticArray[0xb5_u8, 0xdd_u8, 0x7a_u8, 0xfb_u8, 0xfa_u8, 0x6f_u8, 0x7_u8, 0x7b_u8])
     def query_interface(this : IVBSAXDeclHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7559,7 +7512,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("10dc0586-132b-4cac-8bb3-db00ac8b7ee0")]
   record IVBSAXAttributes, lpVtbl : IVBSAXAttributesVtbl* do
     GUID = LibC::GUID.new(0x10dc0586_u32, 0x132b_u16, 0x4cac_u16, StaticArray[0x8b_u8, 0xb3_u8, 0xdb_u8, 0x0_u8, 0xac_u8, 0x8b_u8, 0x7e_u8, 0xe0_u8])
     def query_interface(this : IVBSAXAttributes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7651,7 +7603,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("4d7ff4ba-1565-4ea8-94e1-6e724a46f98d")]
   record IMXWriter, lpVtbl : IMXWriterVtbl* do
     GUID = LibC::GUID.new(0x4d7ff4ba_u32, 0x1565_u16, 0x4ea8_u16, StaticArray[0x94_u8, 0xe1_u8, 0x6e_u8, 0x72_u8, 0x4a_u8, 0x46_u8, 0xf9_u8, 0x8d_u8])
     def query_interface(this : IMXWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7752,7 +7703,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("f10d27cc-3ec0-415c-8ed8-77ab1c5e7262")]
   record IMXAttributes, lpVtbl : IMXAttributesVtbl* do
     GUID = LibC::GUID.new(0xf10d27cc_u32, 0x3ec0_u16, 0x415c_u16, StaticArray[0x8e_u8, 0xd8_u8, 0x77_u8, 0xab_u8, 0x1c_u8, 0x5e_u8, 0x72_u8, 0x62_u8])
     def query_interface(this : IMXAttributes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7827,7 +7777,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("808f4e35-8d5a-4fbe-8466-33a41279ed30")]
   record IMXReaderControl, lpVtbl : IMXReaderControlVtbl* do
     GUID = LibC::GUID.new(0x808f4e35_u32, 0x8d5a_u16, 0x4fbe_u16, StaticArray[0x84_u8, 0x66_u8, 0x33_u8, 0xa4_u8, 0x12_u8, 0x79_u8, 0xed_u8, 0x30_u8])
     def query_interface(this : IMXReaderControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7876,7 +7825,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("fa4bb38c-faf9-4cca-9302-d1dd0fe520db")]
   record IMXSchemaDeclHandler, lpVtbl : IMXSchemaDeclHandlerVtbl* do
     GUID = LibC::GUID.new(0xfa4bb38c_u32, 0xfaf9_u16, 0x4cca_u16, StaticArray[0x93_u8, 0x2_u8, 0xd1_u8, 0xdd_u8, 0xf_u8, 0xe5_u8, 0x20_u8, 0xdb_u8])
     def query_interface(this : IMXSchemaDeclHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7921,7 +7869,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("c90352f4-643c-4fbc-bb23-e996eb2d51fd")]
   record IMXNamespacePrefixes, lpVtbl : IMXNamespacePrefixesVtbl* do
     GUID = LibC::GUID.new(0xc90352f4_u32, 0x643c_u16, 0x4fbc_u16, StaticArray[0xbb_u8, 0x23_u8, 0xe9_u8, 0x96_u8, 0xeb_u8, 0x2d_u8, 0x51_u8, 0xfd_u8])
     def query_interface(this : IMXNamespacePrefixes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7980,7 +7927,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("c90352f5-643c-4fbc-bb23-e996eb2d51fd")]
   record IVBMXNamespaceManager, lpVtbl : IVBMXNamespaceManagerVtbl* do
     GUID = LibC::GUID.new(0xc90352f5_u32, 0x643c_u16, 0x4fbc_u16, StaticArray[0xbb_u8, 0x23_u8, 0xe9_u8, 0x96_u8, 0xeb_u8, 0x2d_u8, 0x51_u8, 0xfd_u8])
     def query_interface(this : IVBMXNamespaceManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8058,7 +8004,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("c90352f6-643c-4fbc-bb23-e996eb2d51fd")]
   record IMXNamespaceManager, lpVtbl : IMXNamespaceManagerVtbl* do
     GUID = LibC::GUID.new(0xc90352f6_u32, 0x643c_u16, 0x4fbc_u16, StaticArray[0xbb_u8, 0x23_u8, 0xe9_u8, 0x96_u8, 0xeb_u8, 0x2d_u8, 0x51_u8, 0xfd_u8])
     def query_interface(this : IMXNamespaceManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8127,7 +8072,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("c90352f7-643c-4fbc-bb23-e996eb2d51fd")]
   record IMXXMLFilter, lpVtbl : IMXXMLFilterVtbl* do
     GUID = LibC::GUID.new(0xc90352f7_u32, 0x643c_u16, 0x4fbc_u16, StaticArray[0xbb_u8, 0x23_u8, 0xe9_u8, 0x96_u8, 0xeb_u8, 0x2d_u8, 0x51_u8, 0xfd_u8])
     def query_interface(this : IMXXMLFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8214,7 +8158,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("50ea08b0-dd1b-4664-9a50-c2f40f4bd79a")]
   record IXMLDOMSchemaCollection2, lpVtbl : IXMLDOMSchemaCollection2Vtbl* do
     GUID = LibC::GUID.new(0x50ea08b0_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : IXMLDOMSchemaCollection2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8292,7 +8235,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("50ea08b1-dd1b-4664-9a50-c2f40f4bd79a")]
   record ISchemaStringCollection, lpVtbl : ISchemaStringCollectionVtbl* do
     GUID = LibC::GUID.new(0x50ea08b1_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaStringCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8345,7 +8287,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("50ea08b2-dd1b-4664-9a50-c2f40f4bd79a")]
   record ISchemaItemCollection, lpVtbl : ISchemaItemCollectionVtbl* do
     GUID = LibC::GUID.new(0x50ea08b2_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaItemCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8406,7 +8347,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("50ea08b3-dd1b-4664-9a50-c2f40f4bd79a")]
   record ISchemaItem, lpVtbl : ISchemaItemVtbl* do
     GUID = LibC::GUID.new(0x50ea08b3_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8482,7 +8422,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("50ea08b4-dd1b-4664-9a50-c2f40f4bd79a")]
   record ISchema, lpVtbl : ISchemaVtbl* do
     GUID = LibC::GUID.new(0x50ea08b4_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchema*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8578,7 +8517,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("50ea08b5-dd1b-4664-9a50-c2f40f4bd79a")]
   record ISchemaParticle, lpVtbl : ISchemaParticleVtbl* do
     GUID = LibC::GUID.new(0x50ea08b5_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaParticle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8657,7 +8595,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("50ea08b6-dd1b-4664-9a50-c2f40f4bd79a")]
   record ISchemaAttribute, lpVtbl : ISchemaAttributeVtbl* do
     GUID = LibC::GUID.new(0x50ea08b6_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaAttribute*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8755,7 +8692,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("50ea08b7-dd1b-4664-9a50-c2f40f4bd79a")]
   record ISchemaElement, lpVtbl : ISchemaElementVtbl* do
     GUID = LibC::GUID.new(0x50ea08b7_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8878,7 +8814,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("50ea08b8-dd1b-4664-9a50-c2f40f4bd79a")]
   record ISchemaType, lpVtbl : ISchemaTypeVtbl* do
     GUID = LibC::GUID.new(0x50ea08b8_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9019,7 +8954,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("50ea08b9-dd1b-4664-9a50-c2f40f4bd79a")]
   record ISchemaComplexType, lpVtbl : ISchemaComplexTypeVtbl* do
     GUID = LibC::GUID.new(0x50ea08b9_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaComplexType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9157,7 +9091,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("50ea08ba-dd1b-4664-9a50-c2f40f4bd79a")]
   record ISchemaAttributeGroup, lpVtbl : ISchemaAttributeGroupVtbl* do
     GUID = LibC::GUID.new(0x50ea08ba_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaAttributeGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9233,7 +9166,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("50ea08bb-dd1b-4664-9a50-c2f40f4bd79a")]
   record ISchemaModelGroup, lpVtbl : ISchemaModelGroupVtbl* do
     GUID = LibC::GUID.new(0x50ea08bb_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaModelGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9313,7 +9245,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("50ea08bc-dd1b-4664-9a50-c2f40f4bd79a")]
   record ISchemaAny, lpVtbl : ISchemaAnyVtbl* do
     GUID = LibC::GUID.new(0x50ea08bc_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaAny*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9395,7 +9326,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("50ea08bd-dd1b-4664-9a50-c2f40f4bd79a")]
   record ISchemaIdentityConstraint, lpVtbl : ISchemaIdentityConstraintVtbl* do
     GUID = LibC::GUID.new(0x50ea08bd_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaIdentityConstraint*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9473,7 +9403,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("50ea08be-dd1b-4664-9a50-c2f40f4bd79a")]
   record ISchemaNotation, lpVtbl : ISchemaNotationVtbl* do
     GUID = LibC::GUID.new(0x50ea08be_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaNotation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9540,7 +9469,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("a44a9299-e321-40de-8866-341b41669162")]
   record IXMLHTTPRequest2Callback, lpVtbl : IXMLHTTPRequest2CallbackVtbl* do
     GUID = LibC::GUID.new(0xa44a9299_u32, 0xe321_u16, 0x40de_u16, StaticArray[0x88_u8, 0x66_u8, 0x34_u8, 0x1b_u8, 0x41_u8, 0x66_u8, 0x91_u8, 0x62_u8])
     def query_interface(this : IXMLHTTPRequest2Callback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9588,7 +9516,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("e5d37dc0-552a-4d52-9cc0-a14d546fbd04")]
   record IXMLHTTPRequest2, lpVtbl : IXMLHTTPRequest2Vtbl* do
     GUID = LibC::GUID.new(0xe5d37dc0_u32, 0x552a_u16, 0x4d52_u16, StaticArray[0x9c_u8, 0xc0_u8, 0xa1_u8, 0x4d_u8, 0x54_u8, 0x6f_u8, 0xbd_u8, 0x4_u8])
     def query_interface(this : IXMLHTTPRequest2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9648,7 +9575,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("b9e57830-8c6c-4a6f-9c13-47772bb047bb")]
   record IXMLHTTPRequest3Callback, lpVtbl : IXMLHTTPRequest3CallbackVtbl* do
     GUID = LibC::GUID.new(0xb9e57830_u32, 0x8c6c_u16, 0x4a6f_u16, StaticArray[0x9c_u8, 0x13_u8, 0x47_u8, 0x77_u8, 0x2b_u8, 0xb0_u8, 0x47_u8, 0xbb_u8])
     def query_interface(this : IXMLHTTPRequest3Callback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9703,7 +9629,6 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  #@[Com("a1c9feee-0617-4f23-9d58-8961ea43567c")]
   record IXMLHTTPRequest3, lpVtbl : IXMLHTTPRequest3Vtbl* do
     GUID = LibC::GUID.new(0xa1c9feee_u32, 0x617_u16, 0x4f23_u16, StaticArray[0x9d_u8, 0x58_u8, 0x89_u8, 0x61_u8, 0xea_u8, 0x43_u8, 0x56_u8, 0x7c_u8])
     def query_interface(this : IXMLHTTPRequest3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

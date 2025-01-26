@@ -4,13 +4,13 @@ require "./../foundation.cr"
 module Win32cr::Storage::Jet
   alias JET_OSSNAPID = LibC::UIntPtrT
   alias JET_LS = LibC::UIntPtrT
-  alias JET_PFNSTATUS = Proc(Win32cr::Storage::StructuredStorage::JET_SESID, UInt32, UInt32, Void*, Int32)*
+  alias JET_PFNSTATUS = Proc(Win32cr::Storage::StructuredStorage::JET_SESID, UInt32, UInt32, Void*, Int32)
 
-  alias JET_CALLBACK = Proc(Win32cr::Storage::StructuredStorage::JET_SESID, UInt32, Win32cr::Storage::StructuredStorage::JET_TABLEID, UInt32, Void*, Void*, Void*, Win32cr::Storage::StructuredStorage::JET_API_PTR, Int32)*
+  alias JET_CALLBACK = Proc(Win32cr::Storage::StructuredStorage::JET_SESID, UInt32, Win32cr::Storage::StructuredStorage::JET_TABLEID, UInt32, Void*, Void*, Void*, Win32cr::Storage::StructuredStorage::JET_API_PTR, Int32)
 
-  alias JET_PFNDURABLECOMMITCALLBACK = Proc(Win32cr::Storage::StructuredStorage::JET_INSTANCE, Win32cr::Storage::Jet::JET_COMMIT_ID*, UInt32, Int32)*
+  alias JET_PFNDURABLECOMMITCALLBACK = Proc(Win32cr::Storage::StructuredStorage::JET_INSTANCE, Win32cr::Storage::Jet::JET_COMMIT_ID*, UInt32, Int32)
 
-  alias JET_PFNREALLOC = Proc(Void*, Void*, UInt32, Void*)*
+  alias JET_PFNREALLOC = Proc(Void*, Void*, UInt32, Void*)
 
   JET_VERSION = 1280_u32
   JET_wszConfigStoreReadControl = "CsReadControl"
@@ -1002,1245 +1002,1566 @@ module Win32cr::Storage::Jet
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record JET_INDEXID,
-    cbStruct : UInt32,
-    rgbIndexId : UInt8[16]
+  struct JET_INDEXID
+    property cbStruct : UInt32
+    property rgbIndexId : UInt8[16]
+    def initialize(@cbStruct : UInt32, @rgbIndexId : UInt8[16])
+    end
+  end
   {% end %}
 
   @[Extern]
-  record JET_RSTMAP_A,
-    szDatabaseName : Win32cr::Foundation::PSTR,
-    szNewDatabaseName : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record JET_RSTMAP_W,
-    szDatabaseName : Win32cr::Foundation::PWSTR,
-    szNewDatabaseName : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record CONVERT_A,
-    szOldDll : Win32cr::Foundation::PSTR,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      fFlags : UInt32,
-      anonymous : Anonymous_e__Struct_ do
-
-      # Nested Type Anonymous_e__Struct_
-      @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
-
+  struct JET_RSTMAP_A
+    property szDatabaseName : Win32cr::Foundation::PSTR
+    property szNewDatabaseName : Win32cr::Foundation::PSTR
+    def initialize(@szDatabaseName : Win32cr::Foundation::PSTR, @szNewDatabaseName : Win32cr::Foundation::PSTR)
     end
-
   end
 
   @[Extern]
-  record CONVERT_W,
-    szOldDll : Win32cr::Foundation::PWSTR,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      fFlags : UInt32,
-      anonymous : Anonymous_e__Struct_ do
-
-      # Nested Type Anonymous_e__Struct_
-      @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
-
+  struct JET_RSTMAP_W
+    property szDatabaseName : Win32cr::Foundation::PWSTR
+    property szNewDatabaseName : Win32cr::Foundation::PWSTR
+    def initialize(@szDatabaseName : Win32cr::Foundation::PWSTR, @szNewDatabaseName : Win32cr::Foundation::PWSTR)
     end
-
   end
 
   @[Extern]
-  record JET_SNPROG,
-    cbStruct : UInt32,
-    cunitDone : UInt32,
-    cunitTotal : UInt32
-
-  @[Extern]
-  record JET_DBINFOUPGRADE,
-    cbStruct : UInt32,
-    cbFilesizeLow : UInt32,
-    cbFilesizeHigh : UInt32,
-    cbFreeSpaceRequiredLow : UInt32,
-    cbFreeSpaceRequiredHigh : UInt32,
-    csecToUpgrade : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct CONVERT_A
+    property szOldDll : Win32cr::Foundation::PSTR
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      ulFlags : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property fFlags : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@fFlags : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@szOldDll : Win32cr::Foundation::PSTR, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct CONVERT_W
+    property szOldDll : Win32cr::Foundation::PWSTR
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property fFlags : UInt32
+    property anonymous : Anonymous_e__Struct_
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
+
+    def initialize(@fFlags : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
+    end
+
+    def initialize(@szOldDll : Win32cr::Foundation::PWSTR, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct JET_SNPROG
+    property cbStruct : UInt32
+    property cunitDone : UInt32
+    property cunitTotal : UInt32
+    def initialize(@cbStruct : UInt32, @cunitDone : UInt32, @cunitTotal : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct JET_DBINFOUPGRADE
+    property cbStruct : UInt32
+    property cbFilesizeLow : UInt32
+    property cbFilesizeHigh : UInt32
+    property cbFreeSpaceRequiredLow : UInt32
+    property cbFreeSpaceRequiredHigh : UInt32
+    property csecToUpgrade : UInt32
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property ulFlags : UInt32
+    property anonymous : Anonymous_e__Struct_
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
+
+    def initialize(@ulFlags : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
+    end
+
+    def initialize(@cbStruct : UInt32, @cbFilesizeLow : UInt32, @cbFilesizeHigh : UInt32, @cbFreeSpaceRequiredLow : UInt32, @cbFreeSpaceRequiredHigh : UInt32, @csecToUpgrade : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record JET_OBJECTINFO,
-    cbStruct : UInt32,
-    objtyp : UInt32,
-    dtCreate : Float64,
-    dtUpdate : Float64,
-    grbit : UInt32,
-    flags : UInt32,
-    cRecord : UInt32,
-    cPage : UInt32
+  struct JET_OBJECTINFO
+    property cbStruct : UInt32
+    property objtyp : UInt32
+    property dtCreate : Float64
+    property dtUpdate : Float64
+    property grbit : UInt32
+    property flags : UInt32
+    property cRecord : UInt32
+    property cPage : UInt32
+    def initialize(@cbStruct : UInt32, @objtyp : UInt32, @dtCreate : Float64, @dtUpdate : Float64, @grbit : UInt32, @flags : UInt32, @cRecord : UInt32, @cPage : UInt32)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record JET_OBJECTLIST,
-    cbStruct : UInt32,
-    tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID,
-    cRecord : UInt32,
-    columnidcontainername : UInt32,
-    columnidobjectname : UInt32,
-    columnidobjtyp : UInt32,
-    columniddtCreate : UInt32,
-    columniddtUpdate : UInt32,
-    columnidgrbit : UInt32,
-    columnidflags : UInt32,
-    columnidcRecord : UInt32,
-    columnidcPage : UInt32
+  struct JET_OBJECTLIST
+    property cbStruct : UInt32
+    property tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID
+    property cRecord : UInt32
+    property columnidcontainername : UInt32
+    property columnidobjectname : UInt32
+    property columnidobjtyp : UInt32
+    property columniddtCreate : UInt32
+    property columniddtUpdate : UInt32
+    property columnidgrbit : UInt32
+    property columnidflags : UInt32
+    property columnidcRecord : UInt32
+    property columnidcPage : UInt32
+    def initialize(@cbStruct : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cRecord : UInt32, @columnidcontainername : UInt32, @columnidobjectname : UInt32, @columnidobjtyp : UInt32, @columniddtCreate : UInt32, @columniddtUpdate : UInt32, @columnidgrbit : UInt32, @columnidflags : UInt32, @columnidcRecord : UInt32, @columnidcPage : UInt32)
+    end
+  end
 
   @[Extern]
-  record JET_COLUMNLIST,
-    cbStruct : UInt32,
-    tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID,
-    cRecord : UInt32,
-    columnidPresentationOrder : UInt32,
-    columnidcolumnname : UInt32,
-    columnidcolumnid : UInt32,
-    columnidcoltyp : UInt32,
-    columnidCountry : UInt32,
-    columnidLangid : UInt32,
-    columnidCp : UInt32,
-    columnidCollate : UInt32,
-    columnidcbMax : UInt32,
-    columnidgrbit : UInt32,
-    columnidDefault : UInt32,
-    columnidBaseTableName : UInt32,
-    columnidBaseColumnName : UInt32,
-    columnidDefinitionName : UInt32
+  struct JET_COLUMNLIST
+    property cbStruct : UInt32
+    property tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID
+    property cRecord : UInt32
+    property columnidPresentationOrder : UInt32
+    property columnidcolumnname : UInt32
+    property columnidcolumnid : UInt32
+    property columnidcoltyp : UInt32
+    property columnidCountry : UInt32
+    property columnidLangid : UInt32
+    property columnidCp : UInt32
+    property columnidCollate : UInt32
+    property columnidcbMax : UInt32
+    property columnidgrbit : UInt32
+    property columnidDefault : UInt32
+    property columnidBaseTableName : UInt32
+    property columnidBaseColumnName : UInt32
+    property columnidDefinitionName : UInt32
+    def initialize(@cbStruct : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cRecord : UInt32, @columnidPresentationOrder : UInt32, @columnidcolumnname : UInt32, @columnidcolumnid : UInt32, @columnidcoltyp : UInt32, @columnidCountry : UInt32, @columnidLangid : UInt32, @columnidCp : UInt32, @columnidCollate : UInt32, @columnidcbMax : UInt32, @columnidgrbit : UInt32, @columnidDefault : UInt32, @columnidBaseTableName : UInt32, @columnidBaseColumnName : UInt32, @columnidDefinitionName : UInt32)
+    end
+  end
 
   @[Extern]
-  record JET_COLUMNDEF,
-    cbStruct : UInt32,
-    columnid : UInt32,
-    coltyp : UInt32,
-    wCountry : UInt16,
-    langid : UInt16,
-    cp : UInt16,
-    wCollate : UInt16,
-    cbMax : UInt32,
-    grbit : UInt32
+  struct JET_COLUMNDEF
+    property cbStruct : UInt32
+    property columnid : UInt32
+    property coltyp : UInt32
+    property wCountry : UInt16
+    property langid : UInt16
+    property cp : UInt16
+    property wCollate : UInt16
+    property cbMax : UInt32
+    property grbit : UInt32
+    def initialize(@cbStruct : UInt32, @columnid : UInt32, @coltyp : UInt32, @wCountry : UInt16, @langid : UInt16, @cp : UInt16, @wCollate : UInt16, @cbMax : UInt32, @grbit : UInt32)
+    end
+  end
 
   @[Extern]
-  record JET_COLUMNBASE_A,
-    cbStruct : UInt32,
-    columnid : UInt32,
-    coltyp : UInt32,
-    wCountry : UInt16,
-    langid : UInt16,
-    cp : UInt16,
-    wFiller : UInt16,
-    cbMax : UInt32,
-    grbit : UInt32,
-    szBaseTableName : Win32cr::Foundation::CHAR[256],
-    szBaseColumnName : Win32cr::Foundation::CHAR[256]
+  struct JET_COLUMNBASE_A
+    property cbStruct : UInt32
+    property columnid : UInt32
+    property coltyp : UInt32
+    property wCountry : UInt16
+    property langid : UInt16
+    property cp : UInt16
+    property wFiller : UInt16
+    property cbMax : UInt32
+    property grbit : UInt32
+    property szBaseTableName : Win32cr::Foundation::CHAR[256]
+    property szBaseColumnName : Win32cr::Foundation::CHAR[256]
+    def initialize(@cbStruct : UInt32, @columnid : UInt32, @coltyp : UInt32, @wCountry : UInt16, @langid : UInt16, @cp : UInt16, @wFiller : UInt16, @cbMax : UInt32, @grbit : UInt32, @szBaseTableName : Win32cr::Foundation::CHAR[256], @szBaseColumnName : Win32cr::Foundation::CHAR[256])
+    end
+  end
 
   @[Extern]
-  record JET_COLUMNBASE_W,
-    cbStruct : UInt32,
-    columnid : UInt32,
-    coltyp : UInt32,
-    wCountry : UInt16,
-    langid : UInt16,
-    cp : UInt16,
-    wFiller : UInt16,
-    cbMax : UInt32,
-    grbit : UInt32,
-    szBaseTableName : UInt16[256],
-    szBaseColumnName : UInt16[256]
+  struct JET_COLUMNBASE_W
+    property cbStruct : UInt32
+    property columnid : UInt32
+    property coltyp : UInt32
+    property wCountry : UInt16
+    property langid : UInt16
+    property cp : UInt16
+    property wFiller : UInt16
+    property cbMax : UInt32
+    property grbit : UInt32
+    property szBaseTableName : UInt16[256]
+    property szBaseColumnName : UInt16[256]
+    def initialize(@cbStruct : UInt32, @columnid : UInt32, @coltyp : UInt32, @wCountry : UInt16, @langid : UInt16, @cp : UInt16, @wFiller : UInt16, @cbMax : UInt32, @grbit : UInt32, @szBaseTableName : UInt16[256], @szBaseColumnName : UInt16[256])
+    end
+  end
 
   @[Extern]
-  record JET_INDEXLIST,
-    cbStruct : UInt32,
-    tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID,
-    cRecord : UInt32,
-    columnidindexname : UInt32,
-    columnidgrbitIndex : UInt32,
-    columnidcKey : UInt32,
-    columnidcEntry : UInt32,
-    columnidcPage : UInt32,
-    columnidcColumn : UInt32,
-    columnidiColumn : UInt32,
-    columnidcolumnid : UInt32,
-    columnidcoltyp : UInt32,
-    columnidCountry : UInt32,
-    columnidLangid : UInt32,
-    columnidCp : UInt32,
-    columnidCollate : UInt32,
-    columnidgrbitColumn : UInt32,
-    columnidcolumnname : UInt32,
-    columnidLCMapFlags : UInt32
+  struct JET_INDEXLIST
+    property cbStruct : UInt32
+    property tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID
+    property cRecord : UInt32
+    property columnidindexname : UInt32
+    property columnidgrbitIndex : UInt32
+    property columnidcKey : UInt32
+    property columnidcEntry : UInt32
+    property columnidcPage : UInt32
+    property columnidcColumn : UInt32
+    property columnidiColumn : UInt32
+    property columnidcolumnid : UInt32
+    property columnidcoltyp : UInt32
+    property columnidCountry : UInt32
+    property columnidLangid : UInt32
+    property columnidCp : UInt32
+    property columnidCollate : UInt32
+    property columnidgrbitColumn : UInt32
+    property columnidcolumnname : UInt32
+    property columnidLCMapFlags : UInt32
+    def initialize(@cbStruct : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cRecord : UInt32, @columnidindexname : UInt32, @columnidgrbitIndex : UInt32, @columnidcKey : UInt32, @columnidcEntry : UInt32, @columnidcPage : UInt32, @columnidcColumn : UInt32, @columnidiColumn : UInt32, @columnidcolumnid : UInt32, @columnidcoltyp : UInt32, @columnidCountry : UInt32, @columnidLangid : UInt32, @columnidCp : UInt32, @columnidCollate : UInt32, @columnidgrbitColumn : UInt32, @columnidcolumnname : UInt32, @columnidLCMapFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record JET_COLUMNCREATE_A,
-    cbStruct : UInt32,
-    szColumnName : Win32cr::Foundation::PSTR,
-    coltyp : UInt32,
-    cbMax : UInt32,
-    grbit : UInt32,
-    pvDefault : Void*,
-    cbDefault : UInt32,
-    cp : UInt32,
-    columnid : UInt32,
-    err : Int32
+  struct JET_COLUMNCREATE_A
+    property cbStruct : UInt32
+    property szColumnName : Win32cr::Foundation::PSTR
+    property coltyp : UInt32
+    property cbMax : UInt32
+    property grbit : UInt32
+    property pvDefault : Void*
+    property cbDefault : UInt32
+    property cp : UInt32
+    property columnid : UInt32
+    property err : Int32
+    def initialize(@cbStruct : UInt32, @szColumnName : Win32cr::Foundation::PSTR, @coltyp : UInt32, @cbMax : UInt32, @grbit : UInt32, @pvDefault : Void*, @cbDefault : UInt32, @cp : UInt32, @columnid : UInt32, @err : Int32)
+    end
+  end
 
   @[Extern]
-  record JET_COLUMNCREATE_W,
-    cbStruct : UInt32,
-    szColumnName : Win32cr::Foundation::PWSTR,
-    coltyp : UInt32,
-    cbMax : UInt32,
-    grbit : UInt32,
-    pvDefault : Void*,
-    cbDefault : UInt32,
-    cp : UInt32,
-    columnid : UInt32,
-    err : Int32
+  struct JET_COLUMNCREATE_W
+    property cbStruct : UInt32
+    property szColumnName : Win32cr::Foundation::PWSTR
+    property coltyp : UInt32
+    property cbMax : UInt32
+    property grbit : UInt32
+    property pvDefault : Void*
+    property cbDefault : UInt32
+    property cp : UInt32
+    property columnid : UInt32
+    property err : Int32
+    def initialize(@cbStruct : UInt32, @szColumnName : Win32cr::Foundation::PWSTR, @coltyp : UInt32, @cbMax : UInt32, @grbit : UInt32, @pvDefault : Void*, @cbDefault : UInt32, @cp : UInt32, @columnid : UInt32, @err : Int32)
+    end
+  end
 
   @[Extern]
-  record JET_USERDEFINEDDEFAULT_A,
-    szCallback : Win32cr::Foundation::PSTR,
-    pbUserData : UInt8*,
-    cbUserData : UInt32,
-    szDependantColumns : Win32cr::Foundation::PSTR
+  struct JET_USERDEFINEDDEFAULT_A
+    property szCallback : Win32cr::Foundation::PSTR
+    property pbUserData : UInt8*
+    property cbUserData : UInt32
+    property szDependantColumns : Win32cr::Foundation::PSTR
+    def initialize(@szCallback : Win32cr::Foundation::PSTR, @pbUserData : UInt8*, @cbUserData : UInt32, @szDependantColumns : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record JET_USERDEFINEDDEFAULT_W,
-    szCallback : Win32cr::Foundation::PWSTR,
-    pbUserData : UInt8*,
-    cbUserData : UInt32,
-    szDependantColumns : Win32cr::Foundation::PWSTR
+  struct JET_USERDEFINEDDEFAULT_W
+    property szCallback : Win32cr::Foundation::PWSTR
+    property pbUserData : UInt8*
+    property cbUserData : UInt32
+    property szDependantColumns : Win32cr::Foundation::PWSTR
+    def initialize(@szCallback : Win32cr::Foundation::PWSTR, @pbUserData : UInt8*, @cbUserData : UInt32, @szDependantColumns : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record JET_CONDITIONALCOLUMN_A,
-    cbStruct : UInt32,
-    szColumnName : Win32cr::Foundation::PSTR,
-    grbit : UInt32
+  struct JET_CONDITIONALCOLUMN_A
+    property cbStruct : UInt32
+    property szColumnName : Win32cr::Foundation::PSTR
+    property grbit : UInt32
+    def initialize(@cbStruct : UInt32, @szColumnName : Win32cr::Foundation::PSTR, @grbit : UInt32)
+    end
+  end
 
   @[Extern]
-  record JET_CONDITIONALCOLUMN_W,
-    cbStruct : UInt32,
-    szColumnName : Win32cr::Foundation::PWSTR,
-    grbit : UInt32
+  struct JET_CONDITIONALCOLUMN_W
+    property cbStruct : UInt32
+    property szColumnName : Win32cr::Foundation::PWSTR
+    property grbit : UInt32
+    def initialize(@cbStruct : UInt32, @szColumnName : Win32cr::Foundation::PWSTR, @grbit : UInt32)
+    end
+  end
 
   @[Extern]
-  record JET_UNICODEINDEX,
-    lcid : UInt32,
-    dwMapFlags : UInt32
+  struct JET_UNICODEINDEX
+    property lcid : UInt32
+    property dwMapFlags : UInt32
+    def initialize(@lcid : UInt32, @dwMapFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record JET_UNICODEINDEX2,
-    szLocaleName : Win32cr::Foundation::PWSTR,
-    dwMapFlags : UInt32
+  struct JET_UNICODEINDEX2
+    property szLocaleName : Win32cr::Foundation::PWSTR
+    property dwMapFlags : UInt32
+    def initialize(@szLocaleName : Win32cr::Foundation::PWSTR, @dwMapFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record JET_TUPLELIMITS,
-    chLengthMin : UInt32,
-    chLengthMax : UInt32,
-    chToIndexMax : UInt32,
-    cchIncrement : UInt32,
-    ichStart : UInt32
+  struct JET_TUPLELIMITS
+    property chLengthMin : UInt32
+    property chLengthMax : UInt32
+    property chToIndexMax : UInt32
+    property cchIncrement : UInt32
+    property ichStart : UInt32
+    def initialize(@chLengthMin : UInt32, @chLengthMax : UInt32, @chToIndexMax : UInt32, @cchIncrement : UInt32, @ichStart : UInt32)
+    end
+  end
 
   @[Extern]
-  record JET_SPACEHINTS,
-    cbStruct : UInt32,
-    ulInitialDensity : UInt32,
-    cbInitial : UInt32,
-    grbit : UInt32,
-    ulMaintDensity : UInt32,
-    ulGrowth : UInt32,
-    cbMinExtent : UInt32,
-    cbMaxExtent : UInt32
+  struct JET_SPACEHINTS
+    property cbStruct : UInt32
+    property ulInitialDensity : UInt32
+    property cbInitial : UInt32
+    property grbit : UInt32
+    property ulMaintDensity : UInt32
+    property ulGrowth : UInt32
+    property cbMinExtent : UInt32
+    property cbMaxExtent : UInt32
+    def initialize(@cbStruct : UInt32, @ulInitialDensity : UInt32, @cbInitial : UInt32, @grbit : UInt32, @ulMaintDensity : UInt32, @ulGrowth : UInt32, @cbMinExtent : UInt32, @cbMaxExtent : UInt32)
+    end
+  end
 
   @[Extern]
-  record JET_INDEXCREATE_A,
-    cbStruct : UInt32,
-    szIndexName : Win32cr::Foundation::PSTR,
-    szKey : Win32cr::Foundation::PSTR,
-    cbKey : UInt32,
-    grbit : UInt32,
-    ulDensity : UInt32,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_A*,
-    cConditionalColumn : UInt32,
-    err : Int32,
-    cbKeyMost : UInt32 do
+  struct JET_INDEXCREATE_A
+    property cbStruct : UInt32
+    property szIndexName : Win32cr::Foundation::PSTR
+    property szKey : Win32cr::Foundation::PSTR
+    property cbKey : UInt32
+    property grbit : UInt32
+    property ulDensity : UInt32
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_A*
+    property cConditionalColumn : UInt32
+    property err : Int32
+    property cbKeyMost : UInt32
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      lcid : UInt32,
-      pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX*
+    struct Anonymous1_e__Union_
+    property lcid : UInt32
+    property pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX*
+    def initialize(@lcid : UInt32, @pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX*)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      cbVarSegMac : UInt32,
-      ptuplelimits : Win32cr::Storage::Jet::JET_TUPLELIMITS*
+    struct Anonymous2_e__Union_
+    property cbVarSegMac : UInt32
+    property ptuplelimits : Win32cr::Storage::Jet::JET_TUPLELIMITS*
+    def initialize(@cbVarSegMac : UInt32, @ptuplelimits : Win32cr::Storage::Jet::JET_TUPLELIMITS*)
+    end
+    end
 
+    def initialize(@cbStruct : UInt32, @szIndexName : Win32cr::Foundation::PSTR, @szKey : Win32cr::Foundation::PSTR, @cbKey : UInt32, @grbit : UInt32, @ulDensity : UInt32, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_A*, @cConditionalColumn : UInt32, @err : Int32, @cbKeyMost : UInt32)
+    end
   end
 
   @[Extern]
-  record JET_INDEXCREATE_W,
-    cbStruct : UInt32,
-    szIndexName : Win32cr::Foundation::PWSTR,
-    szKey : Win32cr::Foundation::PWSTR,
-    cbKey : UInt32,
-    grbit : UInt32,
-    ulDensity : UInt32,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_W*,
-    cConditionalColumn : UInt32,
-    err : Int32,
-    cbKeyMost : UInt32 do
+  struct JET_INDEXCREATE_W
+    property cbStruct : UInt32
+    property szIndexName : Win32cr::Foundation::PWSTR
+    property szKey : Win32cr::Foundation::PWSTR
+    property cbKey : UInt32
+    property grbit : UInt32
+    property ulDensity : UInt32
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_W*
+    property cConditionalColumn : UInt32
+    property err : Int32
+    property cbKeyMost : UInt32
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      lcid : UInt32,
-      pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX*
+    struct Anonymous1_e__Union_
+    property lcid : UInt32
+    property pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX*
+    def initialize(@lcid : UInt32, @pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX*)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      cbVarSegMac : UInt32,
-      ptuplelimits : Win32cr::Storage::Jet::JET_TUPLELIMITS*
+    struct Anonymous2_e__Union_
+    property cbVarSegMac : UInt32
+    property ptuplelimits : Win32cr::Storage::Jet::JET_TUPLELIMITS*
+    def initialize(@cbVarSegMac : UInt32, @ptuplelimits : Win32cr::Storage::Jet::JET_TUPLELIMITS*)
+    end
+    end
 
+    def initialize(@cbStruct : UInt32, @szIndexName : Win32cr::Foundation::PWSTR, @szKey : Win32cr::Foundation::PWSTR, @cbKey : UInt32, @grbit : UInt32, @ulDensity : UInt32, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_W*, @cConditionalColumn : UInt32, @err : Int32, @cbKeyMost : UInt32)
+    end
   end
 
   @[Extern]
-  record JET_INDEXCREATE2_A,
-    cbStruct : UInt32,
-    szIndexName : Win32cr::Foundation::PSTR,
-    szKey : Win32cr::Foundation::PSTR,
-    cbKey : UInt32,
-    grbit : UInt32,
-    ulDensity : UInt32,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_A*,
-    cConditionalColumn : UInt32,
-    err : Int32,
-    cbKeyMost : UInt32,
-    pSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS* do
+  struct JET_INDEXCREATE2_A
+    property cbStruct : UInt32
+    property szIndexName : Win32cr::Foundation::PSTR
+    property szKey : Win32cr::Foundation::PSTR
+    property cbKey : UInt32
+    property grbit : UInt32
+    property ulDensity : UInt32
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_A*
+    property cConditionalColumn : UInt32
+    property err : Int32
+    property cbKeyMost : UInt32
+    property pSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      lcid : UInt32,
-      pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX*
+    struct Anonymous1_e__Union_
+    property lcid : UInt32
+    property pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX*
+    def initialize(@lcid : UInt32, @pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX*)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      cbVarSegMac : UInt32,
-      ptuplelimits : Win32cr::Storage::Jet::JET_TUPLELIMITS*
+    struct Anonymous2_e__Union_
+    property cbVarSegMac : UInt32
+    property ptuplelimits : Win32cr::Storage::Jet::JET_TUPLELIMITS*
+    def initialize(@cbVarSegMac : UInt32, @ptuplelimits : Win32cr::Storage::Jet::JET_TUPLELIMITS*)
+    end
+    end
 
+    def initialize(@cbStruct : UInt32, @szIndexName : Win32cr::Foundation::PSTR, @szKey : Win32cr::Foundation::PSTR, @cbKey : UInt32, @grbit : UInt32, @ulDensity : UInt32, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_A*, @cConditionalColumn : UInt32, @err : Int32, @cbKeyMost : UInt32, @pSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*)
+    end
   end
 
   @[Extern]
-  record JET_INDEXCREATE2_W,
-    cbStruct : UInt32,
-    szIndexName : Win32cr::Foundation::PWSTR,
-    szKey : Win32cr::Foundation::PWSTR,
-    cbKey : UInt32,
-    grbit : UInt32,
-    ulDensity : UInt32,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_W*,
-    cConditionalColumn : UInt32,
-    err : Int32,
-    cbKeyMost : UInt32,
-    pSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS* do
+  struct JET_INDEXCREATE2_W
+    property cbStruct : UInt32
+    property szIndexName : Win32cr::Foundation::PWSTR
+    property szKey : Win32cr::Foundation::PWSTR
+    property cbKey : UInt32
+    property grbit : UInt32
+    property ulDensity : UInt32
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_W*
+    property cConditionalColumn : UInt32
+    property err : Int32
+    property cbKeyMost : UInt32
+    property pSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      lcid : UInt32,
-      pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX*
+    struct Anonymous1_e__Union_
+    property lcid : UInt32
+    property pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX*
+    def initialize(@lcid : UInt32, @pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX*)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      cbVarSegMac : UInt32,
-      ptuplelimits : Win32cr::Storage::Jet::JET_TUPLELIMITS*
+    struct Anonymous2_e__Union_
+    property cbVarSegMac : UInt32
+    property ptuplelimits : Win32cr::Storage::Jet::JET_TUPLELIMITS*
+    def initialize(@cbVarSegMac : UInt32, @ptuplelimits : Win32cr::Storage::Jet::JET_TUPLELIMITS*)
+    end
+    end
 
+    def initialize(@cbStruct : UInt32, @szIndexName : Win32cr::Foundation::PWSTR, @szKey : Win32cr::Foundation::PWSTR, @cbKey : UInt32, @grbit : UInt32, @ulDensity : UInt32, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_W*, @cConditionalColumn : UInt32, @err : Int32, @cbKeyMost : UInt32, @pSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*)
+    end
   end
 
   @[Extern]
-  record JET_INDEXCREATE3_A,
-    cbStruct : UInt32,
-    szIndexName : Win32cr::Foundation::PSTR,
-    szKey : Win32cr::Foundation::PSTR,
-    cbKey : UInt32,
-    grbit : UInt32,
-    ulDensity : UInt32,
-    pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX2*,
-    anonymous : Anonymous_e__Union_,
-    rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_A*,
-    cConditionalColumn : UInt32,
-    err : Int32,
-    cbKeyMost : UInt32,
-    pSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS* do
+  struct JET_INDEXCREATE3_A
+    property cbStruct : UInt32
+    property szIndexName : Win32cr::Foundation::PSTR
+    property szKey : Win32cr::Foundation::PSTR
+    property cbKey : UInt32
+    property grbit : UInt32
+    property ulDensity : UInt32
+    property pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX2*
+    property anonymous : Anonymous_e__Union_
+    property rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_A*
+    property cConditionalColumn : UInt32
+    property err : Int32
+    property cbKeyMost : UInt32
+    property pSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      cbVarSegMac : UInt32,
-      ptuplelimits : Win32cr::Storage::Jet::JET_TUPLELIMITS*
+    struct Anonymous_e__Union_
+    property cbVarSegMac : UInt32
+    property ptuplelimits : Win32cr::Storage::Jet::JET_TUPLELIMITS*
+    def initialize(@cbVarSegMac : UInt32, @ptuplelimits : Win32cr::Storage::Jet::JET_TUPLELIMITS*)
+    end
+    end
 
+    def initialize(@cbStruct : UInt32, @szIndexName : Win32cr::Foundation::PSTR, @szKey : Win32cr::Foundation::PSTR, @cbKey : UInt32, @grbit : UInt32, @ulDensity : UInt32, @pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX2*, @anonymous : Anonymous_e__Union_, @rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_A*, @cConditionalColumn : UInt32, @err : Int32, @cbKeyMost : UInt32, @pSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*)
+    end
   end
 
   @[Extern]
-  record JET_INDEXCREATE3_W,
-    cbStruct : UInt32,
-    szIndexName : Win32cr::Foundation::PWSTR,
-    szKey : Win32cr::Foundation::PWSTR,
-    cbKey : UInt32,
-    grbit : UInt32,
-    ulDensity : UInt32,
-    pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX2*,
-    anonymous : Anonymous_e__Union_,
-    rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_W*,
-    cConditionalColumn : UInt32,
-    err : Int32,
-    cbKeyMost : UInt32,
-    pSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS* do
+  struct JET_INDEXCREATE3_W
+    property cbStruct : UInt32
+    property szIndexName : Win32cr::Foundation::PWSTR
+    property szKey : Win32cr::Foundation::PWSTR
+    property cbKey : UInt32
+    property grbit : UInt32
+    property ulDensity : UInt32
+    property pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX2*
+    property anonymous : Anonymous_e__Union_
+    property rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_W*
+    property cConditionalColumn : UInt32
+    property err : Int32
+    property cbKeyMost : UInt32
+    property pSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      cbVarSegMac : UInt32,
-      ptuplelimits : Win32cr::Storage::Jet::JET_TUPLELIMITS*
+    struct Anonymous_e__Union_
+    property cbVarSegMac : UInt32
+    property ptuplelimits : Win32cr::Storage::Jet::JET_TUPLELIMITS*
+    def initialize(@cbVarSegMac : UInt32, @ptuplelimits : Win32cr::Storage::Jet::JET_TUPLELIMITS*)
+    end
+    end
 
+    def initialize(@cbStruct : UInt32, @szIndexName : Win32cr::Foundation::PWSTR, @szKey : Win32cr::Foundation::PWSTR, @cbKey : UInt32, @grbit : UInt32, @ulDensity : UInt32, @pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX2*, @anonymous : Anonymous_e__Union_, @rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_W*, @cConditionalColumn : UInt32, @err : Int32, @cbKeyMost : UInt32, @pSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*)
+    end
   end
 
   @[Extern]
-  record JET_TABLECREATE_A,
-    cbStruct : UInt32,
-    szTableName : Win32cr::Foundation::PSTR,
-    szTemplateTableName : Win32cr::Foundation::PSTR,
-    ulPages : UInt32,
-    ulDensity : UInt32,
-    rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_A*,
-    cColumns : UInt32,
-    rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_A*,
-    cIndexes : UInt32,
-    grbit : UInt32,
-    tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID,
-    cCreated : UInt32
+  struct JET_TABLECREATE_A
+    property cbStruct : UInt32
+    property szTableName : Win32cr::Foundation::PSTR
+    property szTemplateTableName : Win32cr::Foundation::PSTR
+    property ulPages : UInt32
+    property ulDensity : UInt32
+    property rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_A*
+    property cColumns : UInt32
+    property rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_A*
+    property cIndexes : UInt32
+    property grbit : UInt32
+    property tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID
+    property cCreated : UInt32
+    def initialize(@cbStruct : UInt32, @szTableName : Win32cr::Foundation::PSTR, @szTemplateTableName : Win32cr::Foundation::PSTR, @ulPages : UInt32, @ulDensity : UInt32, @rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_A*, @cColumns : UInt32, @rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_A*, @cIndexes : UInt32, @grbit : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cCreated : UInt32)
+    end
+  end
 
   @[Extern]
-  record JET_TABLECREATE_W,
-    cbStruct : UInt32,
-    szTableName : Win32cr::Foundation::PWSTR,
-    szTemplateTableName : Win32cr::Foundation::PWSTR,
-    ulPages : UInt32,
-    ulDensity : UInt32,
-    rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_W*,
-    cColumns : UInt32,
-    rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_W*,
-    cIndexes : UInt32,
-    grbit : UInt32,
-    tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID,
-    cCreated : UInt32
+  struct JET_TABLECREATE_W
+    property cbStruct : UInt32
+    property szTableName : Win32cr::Foundation::PWSTR
+    property szTemplateTableName : Win32cr::Foundation::PWSTR
+    property ulPages : UInt32
+    property ulDensity : UInt32
+    property rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_W*
+    property cColumns : UInt32
+    property rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_W*
+    property cIndexes : UInt32
+    property grbit : UInt32
+    property tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID
+    property cCreated : UInt32
+    def initialize(@cbStruct : UInt32, @szTableName : Win32cr::Foundation::PWSTR, @szTemplateTableName : Win32cr::Foundation::PWSTR, @ulPages : UInt32, @ulDensity : UInt32, @rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_W*, @cColumns : UInt32, @rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_W*, @cIndexes : UInt32, @grbit : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cCreated : UInt32)
+    end
+  end
 
   @[Extern]
-  record JET_TABLECREATE2_A,
-    cbStruct : UInt32,
-    szTableName : Win32cr::Foundation::PSTR,
-    szTemplateTableName : Win32cr::Foundation::PSTR,
-    ulPages : UInt32,
-    ulDensity : UInt32,
-    rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_A*,
-    cColumns : UInt32,
-    rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_A*,
-    cIndexes : UInt32,
-    szCallback : Win32cr::Foundation::PSTR,
-    cbtyp : UInt32,
-    grbit : UInt32,
-    tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID,
-    cCreated : UInt32
+  struct JET_TABLECREATE2_A
+    property cbStruct : UInt32
+    property szTableName : Win32cr::Foundation::PSTR
+    property szTemplateTableName : Win32cr::Foundation::PSTR
+    property ulPages : UInt32
+    property ulDensity : UInt32
+    property rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_A*
+    property cColumns : UInt32
+    property rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_A*
+    property cIndexes : UInt32
+    property szCallback : Win32cr::Foundation::PSTR
+    property cbtyp : UInt32
+    property grbit : UInt32
+    property tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID
+    property cCreated : UInt32
+    def initialize(@cbStruct : UInt32, @szTableName : Win32cr::Foundation::PSTR, @szTemplateTableName : Win32cr::Foundation::PSTR, @ulPages : UInt32, @ulDensity : UInt32, @rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_A*, @cColumns : UInt32, @rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_A*, @cIndexes : UInt32, @szCallback : Win32cr::Foundation::PSTR, @cbtyp : UInt32, @grbit : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cCreated : UInt32)
+    end
+  end
 
   @[Extern]
-  record JET_TABLECREATE2_W,
-    cbStruct : UInt32,
-    szTableName : Win32cr::Foundation::PWSTR,
-    szTemplateTableName : Win32cr::Foundation::PWSTR,
-    ulPages : UInt32,
-    ulDensity : UInt32,
-    rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_W*,
-    cColumns : UInt32,
-    rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_W*,
-    cIndexes : UInt32,
-    szCallback : Win32cr::Foundation::PWSTR,
-    cbtyp : UInt32,
-    grbit : UInt32,
-    tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID,
-    cCreated : UInt32
+  struct JET_TABLECREATE2_W
+    property cbStruct : UInt32
+    property szTableName : Win32cr::Foundation::PWSTR
+    property szTemplateTableName : Win32cr::Foundation::PWSTR
+    property ulPages : UInt32
+    property ulDensity : UInt32
+    property rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_W*
+    property cColumns : UInt32
+    property rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_W*
+    property cIndexes : UInt32
+    property szCallback : Win32cr::Foundation::PWSTR
+    property cbtyp : UInt32
+    property grbit : UInt32
+    property tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID
+    property cCreated : UInt32
+    def initialize(@cbStruct : UInt32, @szTableName : Win32cr::Foundation::PWSTR, @szTemplateTableName : Win32cr::Foundation::PWSTR, @ulPages : UInt32, @ulDensity : UInt32, @rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_W*, @cColumns : UInt32, @rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_W*, @cIndexes : UInt32, @szCallback : Win32cr::Foundation::PWSTR, @cbtyp : UInt32, @grbit : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cCreated : UInt32)
+    end
+  end
 
   @[Extern]
-  record JET_TABLECREATE3_A,
-    cbStruct : UInt32,
-    szTableName : Win32cr::Foundation::PSTR,
-    szTemplateTableName : Win32cr::Foundation::PSTR,
-    ulPages : UInt32,
-    ulDensity : UInt32,
-    rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_A*,
-    cColumns : UInt32,
-    rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE2_A*,
-    cIndexes : UInt32,
-    szCallback : Win32cr::Foundation::PSTR,
-    cbtyp : UInt32,
-    grbit : UInt32,
-    pSeqSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*,
-    pLVSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*,
-    cbSeparateLV : UInt32,
-    tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID,
-    cCreated : UInt32
+  struct JET_TABLECREATE3_A
+    property cbStruct : UInt32
+    property szTableName : Win32cr::Foundation::PSTR
+    property szTemplateTableName : Win32cr::Foundation::PSTR
+    property ulPages : UInt32
+    property ulDensity : UInt32
+    property rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_A*
+    property cColumns : UInt32
+    property rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE2_A*
+    property cIndexes : UInt32
+    property szCallback : Win32cr::Foundation::PSTR
+    property cbtyp : UInt32
+    property grbit : UInt32
+    property pSeqSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*
+    property pLVSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*
+    property cbSeparateLV : UInt32
+    property tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID
+    property cCreated : UInt32
+    def initialize(@cbStruct : UInt32, @szTableName : Win32cr::Foundation::PSTR, @szTemplateTableName : Win32cr::Foundation::PSTR, @ulPages : UInt32, @ulDensity : UInt32, @rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_A*, @cColumns : UInt32, @rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE2_A*, @cIndexes : UInt32, @szCallback : Win32cr::Foundation::PSTR, @cbtyp : UInt32, @grbit : UInt32, @pSeqSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*, @pLVSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*, @cbSeparateLV : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cCreated : UInt32)
+    end
+  end
 
   @[Extern]
-  record JET_TABLECREATE3_W,
-    cbStruct : UInt32,
-    szTableName : Win32cr::Foundation::PWSTR,
-    szTemplateTableName : Win32cr::Foundation::PWSTR,
-    ulPages : UInt32,
-    ulDensity : UInt32,
-    rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_W*,
-    cColumns : UInt32,
-    rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE2_W*,
-    cIndexes : UInt32,
-    szCallback : Win32cr::Foundation::PWSTR,
-    cbtyp : UInt32,
-    grbit : UInt32,
-    pSeqSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*,
-    pLVSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*,
-    cbSeparateLV : UInt32,
-    tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID,
-    cCreated : UInt32
+  struct JET_TABLECREATE3_W
+    property cbStruct : UInt32
+    property szTableName : Win32cr::Foundation::PWSTR
+    property szTemplateTableName : Win32cr::Foundation::PWSTR
+    property ulPages : UInt32
+    property ulDensity : UInt32
+    property rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_W*
+    property cColumns : UInt32
+    property rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE2_W*
+    property cIndexes : UInt32
+    property szCallback : Win32cr::Foundation::PWSTR
+    property cbtyp : UInt32
+    property grbit : UInt32
+    property pSeqSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*
+    property pLVSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*
+    property cbSeparateLV : UInt32
+    property tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID
+    property cCreated : UInt32
+    def initialize(@cbStruct : UInt32, @szTableName : Win32cr::Foundation::PWSTR, @szTemplateTableName : Win32cr::Foundation::PWSTR, @ulPages : UInt32, @ulDensity : UInt32, @rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_W*, @cColumns : UInt32, @rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE2_W*, @cIndexes : UInt32, @szCallback : Win32cr::Foundation::PWSTR, @cbtyp : UInt32, @grbit : UInt32, @pSeqSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*, @pLVSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*, @cbSeparateLV : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cCreated : UInt32)
+    end
+  end
 
   @[Extern]
-  record JET_TABLECREATE4_A,
-    cbStruct : UInt32,
-    szTableName : Win32cr::Foundation::PSTR,
-    szTemplateTableName : Win32cr::Foundation::PSTR,
-    ulPages : UInt32,
-    ulDensity : UInt32,
-    rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_A*,
-    cColumns : UInt32,
-    rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE3_A*,
-    cIndexes : UInt32,
-    szCallback : Win32cr::Foundation::PSTR,
-    cbtyp : UInt32,
-    grbit : UInt32,
-    pSeqSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*,
-    pLVSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*,
-    cbSeparateLV : UInt32,
-    tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID,
-    cCreated : UInt32
+  struct JET_TABLECREATE4_A
+    property cbStruct : UInt32
+    property szTableName : Win32cr::Foundation::PSTR
+    property szTemplateTableName : Win32cr::Foundation::PSTR
+    property ulPages : UInt32
+    property ulDensity : UInt32
+    property rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_A*
+    property cColumns : UInt32
+    property rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE3_A*
+    property cIndexes : UInt32
+    property szCallback : Win32cr::Foundation::PSTR
+    property cbtyp : UInt32
+    property grbit : UInt32
+    property pSeqSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*
+    property pLVSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*
+    property cbSeparateLV : UInt32
+    property tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID
+    property cCreated : UInt32
+    def initialize(@cbStruct : UInt32, @szTableName : Win32cr::Foundation::PSTR, @szTemplateTableName : Win32cr::Foundation::PSTR, @ulPages : UInt32, @ulDensity : UInt32, @rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_A*, @cColumns : UInt32, @rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE3_A*, @cIndexes : UInt32, @szCallback : Win32cr::Foundation::PSTR, @cbtyp : UInt32, @grbit : UInt32, @pSeqSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*, @pLVSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*, @cbSeparateLV : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cCreated : UInt32)
+    end
+  end
 
   @[Extern]
-  record JET_TABLECREATE4_W,
-    cbStruct : UInt32,
-    szTableName : Win32cr::Foundation::PWSTR,
-    szTemplateTableName : Win32cr::Foundation::PWSTR,
-    ulPages : UInt32,
-    ulDensity : UInt32,
-    rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_W*,
-    cColumns : UInt32,
-    rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE3_W*,
-    cIndexes : UInt32,
-    szCallback : Win32cr::Foundation::PWSTR,
-    cbtyp : UInt32,
-    grbit : UInt32,
-    pSeqSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*,
-    pLVSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*,
-    cbSeparateLV : UInt32,
-    tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID,
-    cCreated : UInt32
+  struct JET_TABLECREATE4_W
+    property cbStruct : UInt32
+    property szTableName : Win32cr::Foundation::PWSTR
+    property szTemplateTableName : Win32cr::Foundation::PWSTR
+    property ulPages : UInt32
+    property ulDensity : UInt32
+    property rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_W*
+    property cColumns : UInt32
+    property rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE3_W*
+    property cIndexes : UInt32
+    property szCallback : Win32cr::Foundation::PWSTR
+    property cbtyp : UInt32
+    property grbit : UInt32
+    property pSeqSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*
+    property pLVSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*
+    property cbSeparateLV : UInt32
+    property tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID
+    property cCreated : UInt32
+    def initialize(@cbStruct : UInt32, @szTableName : Win32cr::Foundation::PWSTR, @szTemplateTableName : Win32cr::Foundation::PWSTR, @ulPages : UInt32, @ulDensity : UInt32, @rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_W*, @cColumns : UInt32, @rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE3_W*, @cIndexes : UInt32, @szCallback : Win32cr::Foundation::PWSTR, @cbtyp : UInt32, @grbit : UInt32, @pSeqSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*, @pLVSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*, @cbSeparateLV : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cCreated : UInt32)
+    end
+  end
 
   @[Extern]
-  record JET_OPENTEMPORARYTABLE,
-    cbStruct : UInt32,
-    prgcolumndef : Win32cr::Storage::Jet::JET_COLUMNDEF*,
-    ccolumn : UInt32,
-    pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX*,
-    grbit : UInt32,
-    prgcolumnid : UInt32*,
-    cbKeyMost : UInt32,
-    cbVarSegMac : UInt32,
-    tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID
+  struct JET_OPENTEMPORARYTABLE
+    property cbStruct : UInt32
+    property prgcolumndef : Win32cr::Storage::Jet::JET_COLUMNDEF*
+    property ccolumn : UInt32
+    property pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX*
+    property grbit : UInt32
+    property prgcolumnid : UInt32*
+    property cbKeyMost : UInt32
+    property cbVarSegMac : UInt32
+    property tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID
+    def initialize(@cbStruct : UInt32, @prgcolumndef : Win32cr::Storage::Jet::JET_COLUMNDEF*, @ccolumn : UInt32, @pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX*, @grbit : UInt32, @prgcolumnid : UInt32*, @cbKeyMost : UInt32, @cbVarSegMac : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID)
+    end
+  end
 
   @[Extern]
-  record JET_OPENTEMPORARYTABLE2,
-    cbStruct : UInt32,
-    prgcolumndef : Win32cr::Storage::Jet::JET_COLUMNDEF*,
-    ccolumn : UInt32,
-    pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX2*,
-    grbit : UInt32,
-    prgcolumnid : UInt32*,
-    cbKeyMost : UInt32,
-    cbVarSegMac : UInt32,
-    tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID
+  struct JET_OPENTEMPORARYTABLE2
+    property cbStruct : UInt32
+    property prgcolumndef : Win32cr::Storage::Jet::JET_COLUMNDEF*
+    property ccolumn : UInt32
+    property pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX2*
+    property grbit : UInt32
+    property prgcolumnid : UInt32*
+    property cbKeyMost : UInt32
+    property cbVarSegMac : UInt32
+    property tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID
+    def initialize(@cbStruct : UInt32, @prgcolumndef : Win32cr::Storage::Jet::JET_COLUMNDEF*, @ccolumn : UInt32, @pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX2*, @grbit : UInt32, @prgcolumnid : UInt32*, @cbKeyMost : UInt32, @cbVarSegMac : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID)
+    end
+  end
 
   @[Extern]
-  record JET_RETINFO,
-    cbStruct : UInt32,
-    ibLongValue : UInt32,
-    itagSequence : UInt32,
-    columnidNextTagged : UInt32
+  struct JET_RETINFO
+    property cbStruct : UInt32
+    property ibLongValue : UInt32
+    property itagSequence : UInt32
+    property columnidNextTagged : UInt32
+    def initialize(@cbStruct : UInt32, @ibLongValue : UInt32, @itagSequence : UInt32, @columnidNextTagged : UInt32)
+    end
+  end
 
   @[Extern]
-  record JET_SETINFO,
-    cbStruct : UInt32,
-    ibLongValue : UInt32,
-    itagSequence : UInt32
+  struct JET_SETINFO
+    property cbStruct : UInt32
+    property ibLongValue : UInt32
+    property itagSequence : UInt32
+    def initialize(@cbStruct : UInt32, @ibLongValue : UInt32, @itagSequence : UInt32)
+    end
+  end
 
   @[Extern]
-  record JET_RECPOS,
-    cbStruct : UInt32,
-    centriesLT : UInt32,
-    centriesInRange : UInt32,
-    centriesTotal : UInt32
+  struct JET_RECPOS
+    property cbStruct : UInt32
+    property centriesLT : UInt32
+    property centriesInRange : UInt32
+    property centriesTotal : UInt32
+    def initialize(@cbStruct : UInt32, @centriesLT : UInt32, @centriesInRange : UInt32, @centriesTotal : UInt32)
+    end
+  end
 
   @[Extern]
-  record JET_RECORDLIST,
-    cbStruct : UInt32,
-    tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID,
-    cRecord : UInt32,
-    columnidBookmark : UInt32
+  struct JET_RECORDLIST
+    property cbStruct : UInt32
+    property tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID
+    property cRecord : UInt32
+    property columnidBookmark : UInt32
+    def initialize(@cbStruct : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cRecord : UInt32, @columnidBookmark : UInt32)
+    end
+  end
 
   @[Extern]
-  record JET_INDEXRANGE,
-    cbStruct : UInt32,
-    tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID,
-    grbit : UInt32
+  struct JET_INDEXRANGE
+    property cbStruct : UInt32
+    property tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID
+    property grbit : UInt32
+    def initialize(@cbStruct : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @grbit : UInt32)
+    end
+  end
 
   @[Extern]
-  record JET_INDEX_COLUMN,
-    columnid : UInt32,
-    relop : Win32cr::Storage::Jet::JET_RELOP,
-    pv : Void*,
-    cb : UInt32,
-    grbit : UInt32
+  struct JET_INDEX_COLUMN
+    property columnid : UInt32
+    property relop : Win32cr::Storage::Jet::JET_RELOP
+    property pv : Void*
+    property cb : UInt32
+    property grbit : UInt32
+    def initialize(@columnid : UInt32, @relop : Win32cr::Storage::Jet::JET_RELOP, @pv : Void*, @cb : UInt32, @grbit : UInt32)
+    end
+  end
 
   @[Extern]
-  record JET_INDEX_RANGE,
-    rgStartColumns : Win32cr::Storage::Jet::JET_INDEX_COLUMN*,
-    cStartColumns : UInt32,
-    rgEndColumns : Win32cr::Storage::Jet::JET_INDEX_COLUMN*,
-    cEndColumns : UInt32
+  struct JET_INDEX_RANGE
+    property rgStartColumns : Win32cr::Storage::Jet::JET_INDEX_COLUMN*
+    property cStartColumns : UInt32
+    property rgEndColumns : Win32cr::Storage::Jet::JET_INDEX_COLUMN*
+    property cEndColumns : UInt32
+    def initialize(@rgStartColumns : Win32cr::Storage::Jet::JET_INDEX_COLUMN*, @cStartColumns : UInt32, @rgEndColumns : Win32cr::Storage::Jet::JET_INDEX_COLUMN*, @cEndColumns : UInt32)
+    end
+  end
 
   @[Extern]
-  record JET_LOGTIME,
-    bSeconds : Win32cr::Foundation::CHAR,
-    bMinutes : Win32cr::Foundation::CHAR,
-    bHours : Win32cr::Foundation::CHAR,
-    bDay : Win32cr::Foundation::CHAR,
-    bMonth : Win32cr::Foundation::CHAR,
-    bYear : Win32cr::Foundation::CHAR,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_ do
+  struct JET_LOGTIME
+    property bSeconds : Win32cr::Foundation::CHAR
+    property bMinutes : Win32cr::Foundation::CHAR
+    property bHours : Win32cr::Foundation::CHAR
+    property bDay : Win32cr::Foundation::CHAR
+    property bMonth : Win32cr::Foundation::CHAR
+    property bYear : Win32cr::Foundation::CHAR
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      bFiller2 : Win32cr::Foundation::CHAR,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous2_e__Union_
+    property bFiller2 : Win32cr::Foundation::CHAR
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt8
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+      end
 
+    def initialize(@bFiller2 : Win32cr::Foundation::CHAR, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      bFiller1 : Win32cr::Foundation::CHAR,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous1_e__Union_
+    property bFiller1 : Win32cr::Foundation::CHAR
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt8
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+      end
 
+    def initialize(@bFiller1 : Win32cr::Foundation::CHAR, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@bSeconds : Win32cr::Foundation::CHAR, @bMinutes : Win32cr::Foundation::CHAR, @bHours : Win32cr::Foundation::CHAR, @bDay : Win32cr::Foundation::CHAR, @bMonth : Win32cr::Foundation::CHAR, @bYear : Win32cr::Foundation::CHAR, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_)
+    end
   end
 
   @[Extern]
-  record JET_BKLOGTIME,
-    bSeconds : Win32cr::Foundation::CHAR,
-    bMinutes : Win32cr::Foundation::CHAR,
-    bHours : Win32cr::Foundation::CHAR,
-    bDay : Win32cr::Foundation::CHAR,
-    bMonth : Win32cr::Foundation::CHAR,
-    bYear : Win32cr::Foundation::CHAR,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_ do
+  struct JET_BKLOGTIME
+    property bSeconds : Win32cr::Foundation::CHAR
+    property bMinutes : Win32cr::Foundation::CHAR
+    property bHours : Win32cr::Foundation::CHAR
+    property bDay : Win32cr::Foundation::CHAR
+    property bMonth : Win32cr::Foundation::CHAR
+    property bYear : Win32cr::Foundation::CHAR
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      bFiller2 : Win32cr::Foundation::CHAR,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous2_e__Union_
+    property bFiller2 : Win32cr::Foundation::CHAR
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt8
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+      end
 
+    def initialize(@bFiller2 : Win32cr::Foundation::CHAR, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      bFiller1 : Win32cr::Foundation::CHAR,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous1_e__Union_
+    property bFiller1 : Win32cr::Foundation::CHAR
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt8
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+      end
 
+    def initialize(@bFiller1 : Win32cr::Foundation::CHAR, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@bSeconds : Win32cr::Foundation::CHAR, @bMinutes : Win32cr::Foundation::CHAR, @bHours : Win32cr::Foundation::CHAR, @bDay : Win32cr::Foundation::CHAR, @bMonth : Win32cr::Foundation::CHAR, @bYear : Win32cr::Foundation::CHAR, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_)
+    end
   end
 
   @[Extern]
-  record JET_LGPOS,
-    ib : UInt16,
-    isec : UInt16,
-    lGeneration : Int32
-
-  @[Extern]
-  record JET_SIGNATURE,
-    ulRandom : UInt32,
-    logtimeCreate : Win32cr::Storage::Jet::JET_LOGTIME,
-    szComputerName : Win32cr::Foundation::CHAR[16]
-
-  @[Extern]
-  record JET_BKINFO,
-    lgposMark : Win32cr::Storage::Jet::JET_LGPOS,
-    anonymous : Anonymous_e__Union_,
-    genLow : UInt32,
-    genHigh : UInt32 do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      logtimeMark : Win32cr::Storage::Jet::JET_LOGTIME,
-      bklogtimeMark : Win32cr::Storage::Jet::JET_BKLOGTIME
-
+  struct JET_LGPOS
+    property ib : UInt16
+    property isec : UInt16
+    property lGeneration : Int32
+    def initialize(@ib : UInt16, @isec : UInt16, @lGeneration : Int32)
+    end
   end
 
   @[Extern]
-  record JET_DBINFOMISC,
-    ulVersion : UInt32,
-    ulUpdate : UInt32,
-    signDb : Win32cr::Storage::Jet::JET_SIGNATURE,
-    dbstate : UInt32,
-    lgposConsistent : Win32cr::Storage::Jet::JET_LGPOS,
-    logtimeConsistent : Win32cr::Storage::Jet::JET_LOGTIME,
-    logtimeAttach : Win32cr::Storage::Jet::JET_LOGTIME,
-    lgposAttach : Win32cr::Storage::Jet::JET_LGPOS,
-    logtimeDetach : Win32cr::Storage::Jet::JET_LOGTIME,
-    lgposDetach : Win32cr::Storage::Jet::JET_LGPOS,
-    signLog : Win32cr::Storage::Jet::JET_SIGNATURE,
-    bkinfoFullPrev : Win32cr::Storage::Jet::JET_BKINFO,
-    bkinfoIncPrev : Win32cr::Storage::Jet::JET_BKINFO,
-    bkinfoFullCur : Win32cr::Storage::Jet::JET_BKINFO,
-    fShadowingDisabled : UInt32,
-    fUpgradeDb : UInt32,
-    dwMajorVersion : UInt32,
-    dwMinorVersion : UInt32,
-    dwBuildNumber : UInt32,
-    lSPNumber : Int32,
-    cbPageSize : UInt32
+  struct JET_SIGNATURE
+    property ulRandom : UInt32
+    property logtimeCreate : Win32cr::Storage::Jet::JET_LOGTIME
+    property szComputerName : Win32cr::Foundation::CHAR[16]
+    def initialize(@ulRandom : UInt32, @logtimeCreate : Win32cr::Storage::Jet::JET_LOGTIME, @szComputerName : Win32cr::Foundation::CHAR[16])
+    end
+  end
 
   @[Extern]
-  record JET_DBINFOMISC2,
-    ulVersion : UInt32,
-    ulUpdate : UInt32,
-    signDb : Win32cr::Storage::Jet::JET_SIGNATURE,
-    dbstate : UInt32,
-    lgposConsistent : Win32cr::Storage::Jet::JET_LGPOS,
-    logtimeConsistent : Win32cr::Storage::Jet::JET_LOGTIME,
-    logtimeAttach : Win32cr::Storage::Jet::JET_LOGTIME,
-    lgposAttach : Win32cr::Storage::Jet::JET_LGPOS,
-    logtimeDetach : Win32cr::Storage::Jet::JET_LOGTIME,
-    lgposDetach : Win32cr::Storage::Jet::JET_LGPOS,
-    signLog : Win32cr::Storage::Jet::JET_SIGNATURE,
-    bkinfoFullPrev : Win32cr::Storage::Jet::JET_BKINFO,
-    bkinfoIncPrev : Win32cr::Storage::Jet::JET_BKINFO,
-    bkinfoFullCur : Win32cr::Storage::Jet::JET_BKINFO,
-    fShadowingDisabled : UInt32,
-    fUpgradeDb : UInt32,
-    dwMajorVersion : UInt32,
-    dwMinorVersion : UInt32,
-    dwBuildNumber : UInt32,
-    lSPNumber : Int32,
-    cbPageSize : UInt32,
-    genMinRequired : UInt32,
-    genMaxRequired : UInt32,
-    logtimeGenMaxCreate : Win32cr::Storage::Jet::JET_LOGTIME,
-    ulRepairCount : UInt32,
-    logtimeRepair : Win32cr::Storage::Jet::JET_LOGTIME,
-    ulRepairCountOld : UInt32,
-    ulECCFixSuccess : UInt32,
-    logtimeECCFixSuccess : Win32cr::Storage::Jet::JET_LOGTIME,
-    ulECCFixSuccessOld : UInt32,
-    ulECCFixFail : UInt32,
-    logtimeECCFixFail : Win32cr::Storage::Jet::JET_LOGTIME,
-    ulECCFixFailOld : UInt32,
-    ulBadChecksum : UInt32,
-    logtimeBadChecksum : Win32cr::Storage::Jet::JET_LOGTIME,
-    ulBadChecksumOld : UInt32
-
-  @[Extern]
-  record JET_DBINFOMISC3,
-    ulVersion : UInt32,
-    ulUpdate : UInt32,
-    signDb : Win32cr::Storage::Jet::JET_SIGNATURE,
-    dbstate : UInt32,
-    lgposConsistent : Win32cr::Storage::Jet::JET_LGPOS,
-    logtimeConsistent : Win32cr::Storage::Jet::JET_LOGTIME,
-    logtimeAttach : Win32cr::Storage::Jet::JET_LOGTIME,
-    lgposAttach : Win32cr::Storage::Jet::JET_LGPOS,
-    logtimeDetach : Win32cr::Storage::Jet::JET_LOGTIME,
-    lgposDetach : Win32cr::Storage::Jet::JET_LGPOS,
-    signLog : Win32cr::Storage::Jet::JET_SIGNATURE,
-    bkinfoFullPrev : Win32cr::Storage::Jet::JET_BKINFO,
-    bkinfoIncPrev : Win32cr::Storage::Jet::JET_BKINFO,
-    bkinfoFullCur : Win32cr::Storage::Jet::JET_BKINFO,
-    fShadowingDisabled : UInt32,
-    fUpgradeDb : UInt32,
-    dwMajorVersion : UInt32,
-    dwMinorVersion : UInt32,
-    dwBuildNumber : UInt32,
-    lSPNumber : Int32,
-    cbPageSize : UInt32,
-    genMinRequired : UInt32,
-    genMaxRequired : UInt32,
-    logtimeGenMaxCreate : Win32cr::Storage::Jet::JET_LOGTIME,
-    ulRepairCount : UInt32,
-    logtimeRepair : Win32cr::Storage::Jet::JET_LOGTIME,
-    ulRepairCountOld : UInt32,
-    ulECCFixSuccess : UInt32,
-    logtimeECCFixSuccess : Win32cr::Storage::Jet::JET_LOGTIME,
-    ulECCFixSuccessOld : UInt32,
-    ulECCFixFail : UInt32,
-    logtimeECCFixFail : Win32cr::Storage::Jet::JET_LOGTIME,
-    ulECCFixFailOld : UInt32,
-    ulBadChecksum : UInt32,
-    logtimeBadChecksum : Win32cr::Storage::Jet::JET_LOGTIME,
-    ulBadChecksumOld : UInt32,
-    genCommitted : UInt32
-
-  @[Extern]
-  record JET_DBINFOMISC4,
-    ulVersion : UInt32,
-    ulUpdate : UInt32,
-    signDb : Win32cr::Storage::Jet::JET_SIGNATURE,
-    dbstate : UInt32,
-    lgposConsistent : Win32cr::Storage::Jet::JET_LGPOS,
-    logtimeConsistent : Win32cr::Storage::Jet::JET_LOGTIME,
-    logtimeAttach : Win32cr::Storage::Jet::JET_LOGTIME,
-    lgposAttach : Win32cr::Storage::Jet::JET_LGPOS,
-    logtimeDetach : Win32cr::Storage::Jet::JET_LOGTIME,
-    lgposDetach : Win32cr::Storage::Jet::JET_LGPOS,
-    signLog : Win32cr::Storage::Jet::JET_SIGNATURE,
-    bkinfoFullPrev : Win32cr::Storage::Jet::JET_BKINFO,
-    bkinfoIncPrev : Win32cr::Storage::Jet::JET_BKINFO,
-    bkinfoFullCur : Win32cr::Storage::Jet::JET_BKINFO,
-    fShadowingDisabled : UInt32,
-    fUpgradeDb : UInt32,
-    dwMajorVersion : UInt32,
-    dwMinorVersion : UInt32,
-    dwBuildNumber : UInt32,
-    lSPNumber : Int32,
-    cbPageSize : UInt32,
-    genMinRequired : UInt32,
-    genMaxRequired : UInt32,
-    logtimeGenMaxCreate : Win32cr::Storage::Jet::JET_LOGTIME,
-    ulRepairCount : UInt32,
-    logtimeRepair : Win32cr::Storage::Jet::JET_LOGTIME,
-    ulRepairCountOld : UInt32,
-    ulECCFixSuccess : UInt32,
-    logtimeECCFixSuccess : Win32cr::Storage::Jet::JET_LOGTIME,
-    ulECCFixSuccessOld : UInt32,
-    ulECCFixFail : UInt32,
-    logtimeECCFixFail : Win32cr::Storage::Jet::JET_LOGTIME,
-    ulECCFixFailOld : UInt32,
-    ulBadChecksum : UInt32,
-    logtimeBadChecksum : Win32cr::Storage::Jet::JET_LOGTIME,
-    ulBadChecksumOld : UInt32,
-    genCommitted : UInt32,
-    bkinfoCopyPrev : Win32cr::Storage::Jet::JET_BKINFO,
-    bkinfoDiffPrev : Win32cr::Storage::Jet::JET_BKINFO
-
-  @[Extern]
-  record JET_THREADSTATS,
-    cbStruct : UInt32,
-    cPageReferenced : UInt32,
-    cPageRead : UInt32,
-    cPagePreread : UInt32,
-    cPageDirtied : UInt32,
-    cPageRedirtied : UInt32,
-    cLogRecord : UInt32,
-    cbLogRecord : UInt32
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record JET_THREADSTATS2,
-    cbStruct : UInt32,
-    cPageReferenced : UInt32,
-    cPageRead : UInt32,
-    cPagePreread : UInt32,
-    cPageDirtied : UInt32,
-    cPageRedirtied : UInt32,
-    cLogRecord : UInt32,
-    cbLogRecord : UInt32,
-    cusecPageCacheMiss : UInt64,
-    cPageCacheMiss : UInt32
-  {% end %}
-
-  @[Extern]
-  record JET_RSTINFO_A,
-    cbStruct : UInt32,
-    rgrstmap : Win32cr::Storage::Jet::JET_RSTMAP_A*,
-    crstmap : Int32,
-    lgposStop : Win32cr::Storage::Jet::JET_LGPOS,
-    logtimeStop : Win32cr::Storage::Jet::JET_LOGTIME,
-    pfnStatus : Win32cr::Storage::Jet::JET_PFNSTATUS
-
-  @[Extern]
-  record JET_RSTINFO_W,
-    cbStruct : UInt32,
-    rgrstmap : Win32cr::Storage::Jet::JET_RSTMAP_W*,
-    crstmap : Int32,
-    lgposStop : Win32cr::Storage::Jet::JET_LGPOS,
-    logtimeStop : Win32cr::Storage::Jet::JET_LOGTIME,
-    pfnStatus : Win32cr::Storage::Jet::JET_PFNSTATUS
-
-  @[Extern]
-  record JET_ERRINFOBASIC_W,
-    cbStruct : UInt32,
-    errValue : Int32,
-    errcatMostSpecific : Win32cr::Storage::Jet::JET_ERRCAT,
-    rgCategoricalHierarchy : UInt8[8],
-    lSourceLine : UInt32,
-    rgszSourceFile : UInt16[64]
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record JET_COMMIT_ID,
-    signLog : Win32cr::Storage::Jet::JET_SIGNATURE,
-    reserved : Int32,
-    commitId : Int64
-  {% end %}
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record JET_RBSINFOMISC,
-    lRBSGeneration : Int32,
-    logtimeCreate : Win32cr::Storage::Jet::JET_LOGTIME,
-    logtimeCreatePrevRBS : Win32cr::Storage::Jet::JET_LOGTIME,
-    ulMajor : UInt32,
-    ulMinor : UInt32,
-    cbLogicalFileSize : UInt64
-  {% end %}
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record JET_RBSREVERTINFOMISC,
-    lGenMinRevertStart : Int32,
-    lGenMaxRevertStart : Int32,
-    lGenMinRevertEnd : Int32,
-    lGenMaxRevertEnd : Int32,
-    logtimeRevertFrom : Win32cr::Storage::Jet::JET_LOGTIME,
-    cSecRevert : UInt64,
-    cPagesReverted : UInt64
-  {% end %}
-
-  @[Extern]
-  record JET_OPERATIONCONTEXT,
-    ulUserID : UInt32,
-    nOperationID : UInt8,
-    nOperationType : UInt8,
-    nClientType : UInt8,
-    fFlags : UInt8
-
-  @[Extern]
-  record JET_SETCOLUMN,
-    columnid : UInt32,
-    pvData : Void*,
-    cbData : UInt32,
-    grbit : UInt32,
-    ibLongValue : UInt32,
-    itagSequence : UInt32,
-    err : Int32
-
-  @[Extern]
-  record JET_SETSYSPARAM_A,
-    paramid : UInt32,
-    lParam : Win32cr::Storage::StructuredStorage::JET_API_PTR,
-    sz : Win32cr::Foundation::PSTR,
-    err : Int32
-
-  @[Extern]
-  record JET_SETSYSPARAM_W,
-    paramid : UInt32,
-    lParam : Win32cr::Storage::StructuredStorage::JET_API_PTR,
-    sz : Win32cr::Foundation::PWSTR,
-    err : Int32
-
-  @[Extern]
-  record JET_RETRIEVECOLUMN,
-    columnid : UInt32,
-    pvData : Void*,
-    cbData : UInt32,
-    cbActual : UInt32,
-    grbit : UInt32,
-    ibLongValue : UInt32,
-    itagSequence : UInt32,
-    columnidNextTagged : UInt32,
-    err : Int32
-
-  @[Extern]
-  record JET_ENUMCOLUMNID,
-    columnid : UInt32,
-    ctagSequence : UInt32,
-    rgtagSequence : UInt32*
-
-  @[Extern]
-  record JET_ENUMCOLUMNVALUE,
-    itagSequence : UInt32,
-    err : Int32,
-    cbData : UInt32,
-    pvData : Void*
-
-  @[Extern]
-  record JET_ENUMCOLUMN,
-    columnid : UInt32,
-    err : Int32,
-    anonymous : Anonymous_e__Union_ do
+  struct JET_BKINFO
+    property lgposMark : Win32cr::Storage::Jet::JET_LGPOS
+    property anonymous : Anonymous_e__Union_
+    property genLow : UInt32
+    property genHigh : UInt32
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous1 : Anonymous1_e__Struct_,
-      anonymous2 : Anonymous2_e__Struct_ do
+    struct Anonymous_e__Union_
+    property logtimeMark : Win32cr::Storage::Jet::JET_LOGTIME
+    property bklogtimeMark : Win32cr::Storage::Jet::JET_BKLOGTIME
+    def initialize(@logtimeMark : Win32cr::Storage::Jet::JET_LOGTIME, @bklogtimeMark : Win32cr::Storage::Jet::JET_BKLOGTIME)
+    end
+    end
+
+    def initialize(@lgposMark : Win32cr::Storage::Jet::JET_LGPOS, @anonymous : Anonymous_e__Union_, @genLow : UInt32, @genHigh : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct JET_DBINFOMISC
+    property ulVersion : UInt32
+    property ulUpdate : UInt32
+    property signDb : Win32cr::Storage::Jet::JET_SIGNATURE
+    property dbstate : UInt32
+    property lgposConsistent : Win32cr::Storage::Jet::JET_LGPOS
+    property logtimeConsistent : Win32cr::Storage::Jet::JET_LOGTIME
+    property logtimeAttach : Win32cr::Storage::Jet::JET_LOGTIME
+    property lgposAttach : Win32cr::Storage::Jet::JET_LGPOS
+    property logtimeDetach : Win32cr::Storage::Jet::JET_LOGTIME
+    property lgposDetach : Win32cr::Storage::Jet::JET_LGPOS
+    property signLog : Win32cr::Storage::Jet::JET_SIGNATURE
+    property bkinfoFullPrev : Win32cr::Storage::Jet::JET_BKINFO
+    property bkinfoIncPrev : Win32cr::Storage::Jet::JET_BKINFO
+    property bkinfoFullCur : Win32cr::Storage::Jet::JET_BKINFO
+    property fShadowingDisabled : UInt32
+    property fUpgradeDb : UInt32
+    property dwMajorVersion : UInt32
+    property dwMinorVersion : UInt32
+    property dwBuildNumber : UInt32
+    property lSPNumber : Int32
+    property cbPageSize : UInt32
+    def initialize(@ulVersion : UInt32, @ulUpdate : UInt32, @signDb : Win32cr::Storage::Jet::JET_SIGNATURE, @dbstate : UInt32, @lgposConsistent : Win32cr::Storage::Jet::JET_LGPOS, @logtimeConsistent : Win32cr::Storage::Jet::JET_LOGTIME, @logtimeAttach : Win32cr::Storage::Jet::JET_LOGTIME, @lgposAttach : Win32cr::Storage::Jet::JET_LGPOS, @logtimeDetach : Win32cr::Storage::Jet::JET_LOGTIME, @lgposDetach : Win32cr::Storage::Jet::JET_LGPOS, @signLog : Win32cr::Storage::Jet::JET_SIGNATURE, @bkinfoFullPrev : Win32cr::Storage::Jet::JET_BKINFO, @bkinfoIncPrev : Win32cr::Storage::Jet::JET_BKINFO, @bkinfoFullCur : Win32cr::Storage::Jet::JET_BKINFO, @fShadowingDisabled : UInt32, @fUpgradeDb : UInt32, @dwMajorVersion : UInt32, @dwMinorVersion : UInt32, @dwBuildNumber : UInt32, @lSPNumber : Int32, @cbPageSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct JET_DBINFOMISC2
+    property ulVersion : UInt32
+    property ulUpdate : UInt32
+    property signDb : Win32cr::Storage::Jet::JET_SIGNATURE
+    property dbstate : UInt32
+    property lgposConsistent : Win32cr::Storage::Jet::JET_LGPOS
+    property logtimeConsistent : Win32cr::Storage::Jet::JET_LOGTIME
+    property logtimeAttach : Win32cr::Storage::Jet::JET_LOGTIME
+    property lgposAttach : Win32cr::Storage::Jet::JET_LGPOS
+    property logtimeDetach : Win32cr::Storage::Jet::JET_LOGTIME
+    property lgposDetach : Win32cr::Storage::Jet::JET_LGPOS
+    property signLog : Win32cr::Storage::Jet::JET_SIGNATURE
+    property bkinfoFullPrev : Win32cr::Storage::Jet::JET_BKINFO
+    property bkinfoIncPrev : Win32cr::Storage::Jet::JET_BKINFO
+    property bkinfoFullCur : Win32cr::Storage::Jet::JET_BKINFO
+    property fShadowingDisabled : UInt32
+    property fUpgradeDb : UInt32
+    property dwMajorVersion : UInt32
+    property dwMinorVersion : UInt32
+    property dwBuildNumber : UInt32
+    property lSPNumber : Int32
+    property cbPageSize : UInt32
+    property genMinRequired : UInt32
+    property genMaxRequired : UInt32
+    property logtimeGenMaxCreate : Win32cr::Storage::Jet::JET_LOGTIME
+    property ulRepairCount : UInt32
+    property logtimeRepair : Win32cr::Storage::Jet::JET_LOGTIME
+    property ulRepairCountOld : UInt32
+    property ulECCFixSuccess : UInt32
+    property logtimeECCFixSuccess : Win32cr::Storage::Jet::JET_LOGTIME
+    property ulECCFixSuccessOld : UInt32
+    property ulECCFixFail : UInt32
+    property logtimeECCFixFail : Win32cr::Storage::Jet::JET_LOGTIME
+    property ulECCFixFailOld : UInt32
+    property ulBadChecksum : UInt32
+    property logtimeBadChecksum : Win32cr::Storage::Jet::JET_LOGTIME
+    property ulBadChecksumOld : UInt32
+    def initialize(@ulVersion : UInt32, @ulUpdate : UInt32, @signDb : Win32cr::Storage::Jet::JET_SIGNATURE, @dbstate : UInt32, @lgposConsistent : Win32cr::Storage::Jet::JET_LGPOS, @logtimeConsistent : Win32cr::Storage::Jet::JET_LOGTIME, @logtimeAttach : Win32cr::Storage::Jet::JET_LOGTIME, @lgposAttach : Win32cr::Storage::Jet::JET_LGPOS, @logtimeDetach : Win32cr::Storage::Jet::JET_LOGTIME, @lgposDetach : Win32cr::Storage::Jet::JET_LGPOS, @signLog : Win32cr::Storage::Jet::JET_SIGNATURE, @bkinfoFullPrev : Win32cr::Storage::Jet::JET_BKINFO, @bkinfoIncPrev : Win32cr::Storage::Jet::JET_BKINFO, @bkinfoFullCur : Win32cr::Storage::Jet::JET_BKINFO, @fShadowingDisabled : UInt32, @fUpgradeDb : UInt32, @dwMajorVersion : UInt32, @dwMinorVersion : UInt32, @dwBuildNumber : UInt32, @lSPNumber : Int32, @cbPageSize : UInt32, @genMinRequired : UInt32, @genMaxRequired : UInt32, @logtimeGenMaxCreate : Win32cr::Storage::Jet::JET_LOGTIME, @ulRepairCount : UInt32, @logtimeRepair : Win32cr::Storage::Jet::JET_LOGTIME, @ulRepairCountOld : UInt32, @ulECCFixSuccess : UInt32, @logtimeECCFixSuccess : Win32cr::Storage::Jet::JET_LOGTIME, @ulECCFixSuccessOld : UInt32, @ulECCFixFail : UInt32, @logtimeECCFixFail : Win32cr::Storage::Jet::JET_LOGTIME, @ulECCFixFailOld : UInt32, @ulBadChecksum : UInt32, @logtimeBadChecksum : Win32cr::Storage::Jet::JET_LOGTIME, @ulBadChecksumOld : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct JET_DBINFOMISC3
+    property ulVersion : UInt32
+    property ulUpdate : UInt32
+    property signDb : Win32cr::Storage::Jet::JET_SIGNATURE
+    property dbstate : UInt32
+    property lgposConsistent : Win32cr::Storage::Jet::JET_LGPOS
+    property logtimeConsistent : Win32cr::Storage::Jet::JET_LOGTIME
+    property logtimeAttach : Win32cr::Storage::Jet::JET_LOGTIME
+    property lgposAttach : Win32cr::Storage::Jet::JET_LGPOS
+    property logtimeDetach : Win32cr::Storage::Jet::JET_LOGTIME
+    property lgposDetach : Win32cr::Storage::Jet::JET_LGPOS
+    property signLog : Win32cr::Storage::Jet::JET_SIGNATURE
+    property bkinfoFullPrev : Win32cr::Storage::Jet::JET_BKINFO
+    property bkinfoIncPrev : Win32cr::Storage::Jet::JET_BKINFO
+    property bkinfoFullCur : Win32cr::Storage::Jet::JET_BKINFO
+    property fShadowingDisabled : UInt32
+    property fUpgradeDb : UInt32
+    property dwMajorVersion : UInt32
+    property dwMinorVersion : UInt32
+    property dwBuildNumber : UInt32
+    property lSPNumber : Int32
+    property cbPageSize : UInt32
+    property genMinRequired : UInt32
+    property genMaxRequired : UInt32
+    property logtimeGenMaxCreate : Win32cr::Storage::Jet::JET_LOGTIME
+    property ulRepairCount : UInt32
+    property logtimeRepair : Win32cr::Storage::Jet::JET_LOGTIME
+    property ulRepairCountOld : UInt32
+    property ulECCFixSuccess : UInt32
+    property logtimeECCFixSuccess : Win32cr::Storage::Jet::JET_LOGTIME
+    property ulECCFixSuccessOld : UInt32
+    property ulECCFixFail : UInt32
+    property logtimeECCFixFail : Win32cr::Storage::Jet::JET_LOGTIME
+    property ulECCFixFailOld : UInt32
+    property ulBadChecksum : UInt32
+    property logtimeBadChecksum : Win32cr::Storage::Jet::JET_LOGTIME
+    property ulBadChecksumOld : UInt32
+    property genCommitted : UInt32
+    def initialize(@ulVersion : UInt32, @ulUpdate : UInt32, @signDb : Win32cr::Storage::Jet::JET_SIGNATURE, @dbstate : UInt32, @lgposConsistent : Win32cr::Storage::Jet::JET_LGPOS, @logtimeConsistent : Win32cr::Storage::Jet::JET_LOGTIME, @logtimeAttach : Win32cr::Storage::Jet::JET_LOGTIME, @lgposAttach : Win32cr::Storage::Jet::JET_LGPOS, @logtimeDetach : Win32cr::Storage::Jet::JET_LOGTIME, @lgposDetach : Win32cr::Storage::Jet::JET_LGPOS, @signLog : Win32cr::Storage::Jet::JET_SIGNATURE, @bkinfoFullPrev : Win32cr::Storage::Jet::JET_BKINFO, @bkinfoIncPrev : Win32cr::Storage::Jet::JET_BKINFO, @bkinfoFullCur : Win32cr::Storage::Jet::JET_BKINFO, @fShadowingDisabled : UInt32, @fUpgradeDb : UInt32, @dwMajorVersion : UInt32, @dwMinorVersion : UInt32, @dwBuildNumber : UInt32, @lSPNumber : Int32, @cbPageSize : UInt32, @genMinRequired : UInt32, @genMaxRequired : UInt32, @logtimeGenMaxCreate : Win32cr::Storage::Jet::JET_LOGTIME, @ulRepairCount : UInt32, @logtimeRepair : Win32cr::Storage::Jet::JET_LOGTIME, @ulRepairCountOld : UInt32, @ulECCFixSuccess : UInt32, @logtimeECCFixSuccess : Win32cr::Storage::Jet::JET_LOGTIME, @ulECCFixSuccessOld : UInt32, @ulECCFixFail : UInt32, @logtimeECCFixFail : Win32cr::Storage::Jet::JET_LOGTIME, @ulECCFixFailOld : UInt32, @ulBadChecksum : UInt32, @logtimeBadChecksum : Win32cr::Storage::Jet::JET_LOGTIME, @ulBadChecksumOld : UInt32, @genCommitted : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct JET_DBINFOMISC4
+    property ulVersion : UInt32
+    property ulUpdate : UInt32
+    property signDb : Win32cr::Storage::Jet::JET_SIGNATURE
+    property dbstate : UInt32
+    property lgposConsistent : Win32cr::Storage::Jet::JET_LGPOS
+    property logtimeConsistent : Win32cr::Storage::Jet::JET_LOGTIME
+    property logtimeAttach : Win32cr::Storage::Jet::JET_LOGTIME
+    property lgposAttach : Win32cr::Storage::Jet::JET_LGPOS
+    property logtimeDetach : Win32cr::Storage::Jet::JET_LOGTIME
+    property lgposDetach : Win32cr::Storage::Jet::JET_LGPOS
+    property signLog : Win32cr::Storage::Jet::JET_SIGNATURE
+    property bkinfoFullPrev : Win32cr::Storage::Jet::JET_BKINFO
+    property bkinfoIncPrev : Win32cr::Storage::Jet::JET_BKINFO
+    property bkinfoFullCur : Win32cr::Storage::Jet::JET_BKINFO
+    property fShadowingDisabled : UInt32
+    property fUpgradeDb : UInt32
+    property dwMajorVersion : UInt32
+    property dwMinorVersion : UInt32
+    property dwBuildNumber : UInt32
+    property lSPNumber : Int32
+    property cbPageSize : UInt32
+    property genMinRequired : UInt32
+    property genMaxRequired : UInt32
+    property logtimeGenMaxCreate : Win32cr::Storage::Jet::JET_LOGTIME
+    property ulRepairCount : UInt32
+    property logtimeRepair : Win32cr::Storage::Jet::JET_LOGTIME
+    property ulRepairCountOld : UInt32
+    property ulECCFixSuccess : UInt32
+    property logtimeECCFixSuccess : Win32cr::Storage::Jet::JET_LOGTIME
+    property ulECCFixSuccessOld : UInt32
+    property ulECCFixFail : UInt32
+    property logtimeECCFixFail : Win32cr::Storage::Jet::JET_LOGTIME
+    property ulECCFixFailOld : UInt32
+    property ulBadChecksum : UInt32
+    property logtimeBadChecksum : Win32cr::Storage::Jet::JET_LOGTIME
+    property ulBadChecksumOld : UInt32
+    property genCommitted : UInt32
+    property bkinfoCopyPrev : Win32cr::Storage::Jet::JET_BKINFO
+    property bkinfoDiffPrev : Win32cr::Storage::Jet::JET_BKINFO
+    def initialize(@ulVersion : UInt32, @ulUpdate : UInt32, @signDb : Win32cr::Storage::Jet::JET_SIGNATURE, @dbstate : UInt32, @lgposConsistent : Win32cr::Storage::Jet::JET_LGPOS, @logtimeConsistent : Win32cr::Storage::Jet::JET_LOGTIME, @logtimeAttach : Win32cr::Storage::Jet::JET_LOGTIME, @lgposAttach : Win32cr::Storage::Jet::JET_LGPOS, @logtimeDetach : Win32cr::Storage::Jet::JET_LOGTIME, @lgposDetach : Win32cr::Storage::Jet::JET_LGPOS, @signLog : Win32cr::Storage::Jet::JET_SIGNATURE, @bkinfoFullPrev : Win32cr::Storage::Jet::JET_BKINFO, @bkinfoIncPrev : Win32cr::Storage::Jet::JET_BKINFO, @bkinfoFullCur : Win32cr::Storage::Jet::JET_BKINFO, @fShadowingDisabled : UInt32, @fUpgradeDb : UInt32, @dwMajorVersion : UInt32, @dwMinorVersion : UInt32, @dwBuildNumber : UInt32, @lSPNumber : Int32, @cbPageSize : UInt32, @genMinRequired : UInt32, @genMaxRequired : UInt32, @logtimeGenMaxCreate : Win32cr::Storage::Jet::JET_LOGTIME, @ulRepairCount : UInt32, @logtimeRepair : Win32cr::Storage::Jet::JET_LOGTIME, @ulRepairCountOld : UInt32, @ulECCFixSuccess : UInt32, @logtimeECCFixSuccess : Win32cr::Storage::Jet::JET_LOGTIME, @ulECCFixSuccessOld : UInt32, @ulECCFixFail : UInt32, @logtimeECCFixFail : Win32cr::Storage::Jet::JET_LOGTIME, @ulECCFixFailOld : UInt32, @ulBadChecksum : UInt32, @logtimeBadChecksum : Win32cr::Storage::Jet::JET_LOGTIME, @ulBadChecksumOld : UInt32, @genCommitted : UInt32, @bkinfoCopyPrev : Win32cr::Storage::Jet::JET_BKINFO, @bkinfoDiffPrev : Win32cr::Storage::Jet::JET_BKINFO)
+    end
+  end
+
+  @[Extern]
+  struct JET_THREADSTATS
+    property cbStruct : UInt32
+    property cPageReferenced : UInt32
+    property cPageRead : UInt32
+    property cPagePreread : UInt32
+    property cPageDirtied : UInt32
+    property cPageRedirtied : UInt32
+    property cLogRecord : UInt32
+    property cbLogRecord : UInt32
+    def initialize(@cbStruct : UInt32, @cPageReferenced : UInt32, @cPageRead : UInt32, @cPagePreread : UInt32, @cPageDirtied : UInt32, @cPageRedirtied : UInt32, @cLogRecord : UInt32, @cbLogRecord : UInt32)
+    end
+  end
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct JET_THREADSTATS2
+    property cbStruct : UInt32
+    property cPageReferenced : UInt32
+    property cPageRead : UInt32
+    property cPagePreread : UInt32
+    property cPageDirtied : UInt32
+    property cPageRedirtied : UInt32
+    property cLogRecord : UInt32
+    property cbLogRecord : UInt32
+    property cusecPageCacheMiss : UInt64
+    property cPageCacheMiss : UInt32
+    def initialize(@cbStruct : UInt32, @cPageReferenced : UInt32, @cPageRead : UInt32, @cPagePreread : UInt32, @cPageDirtied : UInt32, @cPageRedirtied : UInt32, @cLogRecord : UInt32, @cbLogRecord : UInt32, @cusecPageCacheMiss : UInt64, @cPageCacheMiss : UInt32)
+    end
+  end
+  {% end %}
+
+  @[Extern]
+  struct JET_RSTINFO_A
+    property cbStruct : UInt32
+    property rgrstmap : Win32cr::Storage::Jet::JET_RSTMAP_A*
+    property crstmap : Int32
+    property lgposStop : Win32cr::Storage::Jet::JET_LGPOS
+    property logtimeStop : Win32cr::Storage::Jet::JET_LOGTIME
+    property pfnStatus : Win32cr::Storage::Jet::JET_PFNSTATUS
+    def initialize(@cbStruct : UInt32, @rgrstmap : Win32cr::Storage::Jet::JET_RSTMAP_A*, @crstmap : Int32, @lgposStop : Win32cr::Storage::Jet::JET_LGPOS, @logtimeStop : Win32cr::Storage::Jet::JET_LOGTIME, @pfnStatus : Win32cr::Storage::Jet::JET_PFNSTATUS)
+    end
+  end
+
+  @[Extern]
+  struct JET_RSTINFO_W
+    property cbStruct : UInt32
+    property rgrstmap : Win32cr::Storage::Jet::JET_RSTMAP_W*
+    property crstmap : Int32
+    property lgposStop : Win32cr::Storage::Jet::JET_LGPOS
+    property logtimeStop : Win32cr::Storage::Jet::JET_LOGTIME
+    property pfnStatus : Win32cr::Storage::Jet::JET_PFNSTATUS
+    def initialize(@cbStruct : UInt32, @rgrstmap : Win32cr::Storage::Jet::JET_RSTMAP_W*, @crstmap : Int32, @lgposStop : Win32cr::Storage::Jet::JET_LGPOS, @logtimeStop : Win32cr::Storage::Jet::JET_LOGTIME, @pfnStatus : Win32cr::Storage::Jet::JET_PFNSTATUS)
+    end
+  end
+
+  @[Extern]
+  struct JET_ERRINFOBASIC_W
+    property cbStruct : UInt32
+    property errValue : Int32
+    property errcatMostSpecific : Win32cr::Storage::Jet::JET_ERRCAT
+    property rgCategoricalHierarchy : UInt8[8]
+    property lSourceLine : UInt32
+    property rgszSourceFile : UInt16[64]
+    def initialize(@cbStruct : UInt32, @errValue : Int32, @errcatMostSpecific : Win32cr::Storage::Jet::JET_ERRCAT, @rgCategoricalHierarchy : UInt8[8], @lSourceLine : UInt32, @rgszSourceFile : UInt16[64])
+    end
+  end
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct JET_COMMIT_ID
+    property signLog : Win32cr::Storage::Jet::JET_SIGNATURE
+    property reserved : Int32
+    property commitId : Int64
+    def initialize(@signLog : Win32cr::Storage::Jet::JET_SIGNATURE, @reserved : Int32, @commitId : Int64)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct JET_RBSINFOMISC
+    property lRBSGeneration : Int32
+    property logtimeCreate : Win32cr::Storage::Jet::JET_LOGTIME
+    property logtimeCreatePrevRBS : Win32cr::Storage::Jet::JET_LOGTIME
+    property ulMajor : UInt32
+    property ulMinor : UInt32
+    property cbLogicalFileSize : UInt64
+    def initialize(@lRBSGeneration : Int32, @logtimeCreate : Win32cr::Storage::Jet::JET_LOGTIME, @logtimeCreatePrevRBS : Win32cr::Storage::Jet::JET_LOGTIME, @ulMajor : UInt32, @ulMinor : UInt32, @cbLogicalFileSize : UInt64)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct JET_RBSREVERTINFOMISC
+    property lGenMinRevertStart : Int32
+    property lGenMaxRevertStart : Int32
+    property lGenMinRevertEnd : Int32
+    property lGenMaxRevertEnd : Int32
+    property logtimeRevertFrom : Win32cr::Storage::Jet::JET_LOGTIME
+    property cSecRevert : UInt64
+    property cPagesReverted : UInt64
+    def initialize(@lGenMinRevertStart : Int32, @lGenMaxRevertStart : Int32, @lGenMinRevertEnd : Int32, @lGenMaxRevertEnd : Int32, @logtimeRevertFrom : Win32cr::Storage::Jet::JET_LOGTIME, @cSecRevert : UInt64, @cPagesReverted : UInt64)
+    end
+  end
+  {% end %}
+
+  @[Extern]
+  struct JET_OPERATIONCONTEXT
+    property ulUserID : UInt32
+    property nOperationID : UInt8
+    property nOperationType : UInt8
+    property nClientType : UInt8
+    property fFlags : UInt8
+    def initialize(@ulUserID : UInt32, @nOperationID : UInt8, @nOperationType : UInt8, @nClientType : UInt8, @fFlags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct JET_SETCOLUMN
+    property columnid : UInt32
+    property pvData : Void*
+    property cbData : UInt32
+    property grbit : UInt32
+    property ibLongValue : UInt32
+    property itagSequence : UInt32
+    property err : Int32
+    def initialize(@columnid : UInt32, @pvData : Void*, @cbData : UInt32, @grbit : UInt32, @ibLongValue : UInt32, @itagSequence : UInt32, @err : Int32)
+    end
+  end
+
+  @[Extern]
+  struct JET_SETSYSPARAM_A
+    property paramid : UInt32
+    property lParam : Win32cr::Storage::StructuredStorage::JET_API_PTR
+    property sz : Win32cr::Foundation::PSTR
+    property err : Int32
+    def initialize(@paramid : UInt32, @lParam : Win32cr::Storage::StructuredStorage::JET_API_PTR, @sz : Win32cr::Foundation::PSTR, @err : Int32)
+    end
+  end
+
+  @[Extern]
+  struct JET_SETSYSPARAM_W
+    property paramid : UInt32
+    property lParam : Win32cr::Storage::StructuredStorage::JET_API_PTR
+    property sz : Win32cr::Foundation::PWSTR
+    property err : Int32
+    def initialize(@paramid : UInt32, @lParam : Win32cr::Storage::StructuredStorage::JET_API_PTR, @sz : Win32cr::Foundation::PWSTR, @err : Int32)
+    end
+  end
+
+  @[Extern]
+  struct JET_RETRIEVECOLUMN
+    property columnid : UInt32
+    property pvData : Void*
+    property cbData : UInt32
+    property cbActual : UInt32
+    property grbit : UInt32
+    property ibLongValue : UInt32
+    property itagSequence : UInt32
+    property columnidNextTagged : UInt32
+    property err : Int32
+    def initialize(@columnid : UInt32, @pvData : Void*, @cbData : UInt32, @cbActual : UInt32, @grbit : UInt32, @ibLongValue : UInt32, @itagSequence : UInt32, @columnidNextTagged : UInt32, @err : Int32)
+    end
+  end
+
+  @[Extern]
+  struct JET_ENUMCOLUMNID
+    property columnid : UInt32
+    property ctagSequence : UInt32
+    property rgtagSequence : UInt32*
+    def initialize(@columnid : UInt32, @ctagSequence : UInt32, @rgtagSequence : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct JET_ENUMCOLUMNVALUE
+    property itagSequence : UInt32
+    property err : Int32
+    property cbData : UInt32
+    property pvData : Void*
+    def initialize(@itagSequence : UInt32, @err : Int32, @cbData : UInt32, @pvData : Void*)
+    end
+  end
+
+  @[Extern]
+  struct JET_ENUMCOLUMN
+    property columnid : UInt32
+    property err : Int32
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property anonymous1 : Anonymous1_e__Struct_
+    property anonymous2 : Anonymous2_e__Struct_
 
       # Nested Type Anonymous2_e__Struct_
       @[Extern]
-      record Anonymous2_e__Struct_,
-        cbData : UInt32,
-        pvData : Void*
+      struct Anonymous2_e__Struct_
+    property cbData : UInt32
+    property pvData : Void*
+    def initialize(@cbData : UInt32, @pvData : Void*)
+    end
+      end
 
 
       # Nested Type Anonymous1_e__Struct_
       @[Extern]
-      record Anonymous1_e__Struct_,
-        cEnumColumnValue : UInt32,
-        rgEnumColumnValue : Win32cr::Storage::Jet::JET_ENUMCOLUMNVALUE*
+      struct Anonymous1_e__Struct_
+    property cEnumColumnValue : UInt32
+    property rgEnumColumnValue : Win32cr::Storage::Jet::JET_ENUMCOLUMNVALUE*
+    def initialize(@cEnumColumnValue : UInt32, @rgEnumColumnValue : Win32cr::Storage::Jet::JET_ENUMCOLUMNVALUE*)
+    end
+      end
 
+    def initialize(@anonymous1 : Anonymous1_e__Struct_, @anonymous2 : Anonymous2_e__Struct_)
+    end
     end
 
+    def initialize(@columnid : UInt32, @err : Int32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record JET_RECSIZE,
-    cbData : UInt64,
-    cbLongValueData : UInt64,
-    cbOverhead : UInt64,
-    cbLongValueOverhead : UInt64,
-    cNonTaggedColumns : UInt64,
-    cTaggedColumns : UInt64,
-    cLongValues : UInt64,
-    cMultiValues : UInt64
+  struct JET_RECSIZE
+    property cbData : UInt64
+    property cbLongValueData : UInt64
+    property cbOverhead : UInt64
+    property cbLongValueOverhead : UInt64
+    property cNonTaggedColumns : UInt64
+    property cTaggedColumns : UInt64
+    property cLongValues : UInt64
+    property cMultiValues : UInt64
+    def initialize(@cbData : UInt64, @cbLongValueData : UInt64, @cbOverhead : UInt64, @cbLongValueOverhead : UInt64, @cNonTaggedColumns : UInt64, @cTaggedColumns : UInt64, @cLongValues : UInt64, @cMultiValues : UInt64)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record JET_RECSIZE2,
-    cbData : UInt64,
-    cbLongValueData : UInt64,
-    cbOverhead : UInt64,
-    cbLongValueOverhead : UInt64,
-    cNonTaggedColumns : UInt64,
-    cTaggedColumns : UInt64,
-    cLongValues : UInt64,
-    cMultiValues : UInt64,
-    cCompressedColumns : UInt64,
-    cbDataCompressed : UInt64,
-    cbLongValueDataCompressed : UInt64
+  struct JET_RECSIZE2
+    property cbData : UInt64
+    property cbLongValueData : UInt64
+    property cbOverhead : UInt64
+    property cbLongValueOverhead : UInt64
+    property cNonTaggedColumns : UInt64
+    property cTaggedColumns : UInt64
+    property cLongValues : UInt64
+    property cMultiValues : UInt64
+    property cCompressedColumns : UInt64
+    property cbDataCompressed : UInt64
+    property cbLongValueDataCompressed : UInt64
+    def initialize(@cbData : UInt64, @cbLongValueData : UInt64, @cbOverhead : UInt64, @cbLongValueOverhead : UInt64, @cNonTaggedColumns : UInt64, @cTaggedColumns : UInt64, @cLongValues : UInt64, @cMultiValues : UInt64, @cCompressedColumns : UInt64, @cbDataCompressed : UInt64, @cbLongValueDataCompressed : UInt64)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record JET_LOGINFO_A,
-    cbSize : UInt32,
-    ulGenLow : UInt32,
-    ulGenHigh : UInt32,
-    szBaseName : Win32cr::Foundation::CHAR[4]
+  struct JET_LOGINFO_A
+    property cbSize : UInt32
+    property ulGenLow : UInt32
+    property ulGenHigh : UInt32
+    property szBaseName : Win32cr::Foundation::CHAR[4]
+    def initialize(@cbSize : UInt32, @ulGenLow : UInt32, @ulGenHigh : UInt32, @szBaseName : Win32cr::Foundation::CHAR[4])
+    end
+  end
 
   @[Extern]
-  record JET_LOGINFO_W,
-    cbSize : UInt32,
-    ulGenLow : UInt32,
-    ulGenHigh : UInt32,
-    szBaseName : UInt16[4]
+  struct JET_LOGINFO_W
+    property cbSize : UInt32
+    property ulGenLow : UInt32
+    property ulGenHigh : UInt32
+    property szBaseName : UInt16[4]
+    def initialize(@cbSize : UInt32, @ulGenLow : UInt32, @ulGenHigh : UInt32, @szBaseName : UInt16[4])
+    end
+  end
 
   @[Extern]
-  record JET_INSTANCE_INFO_A,
-    hInstanceId : Win32cr::Storage::StructuredStorage::JET_INSTANCE,
-    szInstanceName : Win32cr::Foundation::PSTR,
-    cDatabases : Win32cr::Storage::StructuredStorage::JET_API_PTR,
-    szDatabaseFileName : Int8**,
-    szDatabaseDisplayName : Int8**,
-    szDatabaseSLVFileName_Obsolete : Int8**
+  struct JET_INSTANCE_INFO_A
+    property hInstanceId : Win32cr::Storage::StructuredStorage::JET_INSTANCE
+    property szInstanceName : Win32cr::Foundation::PSTR
+    property cDatabases : Win32cr::Storage::StructuredStorage::JET_API_PTR
+    property szDatabaseFileName : Int8**
+    property szDatabaseDisplayName : Int8**
+    property szDatabaseSLVFileName_Obsolete : Int8**
+    def initialize(@hInstanceId : Win32cr::Storage::StructuredStorage::JET_INSTANCE, @szInstanceName : Win32cr::Foundation::PSTR, @cDatabases : Win32cr::Storage::StructuredStorage::JET_API_PTR, @szDatabaseFileName : Int8**, @szDatabaseDisplayName : Int8**, @szDatabaseSLVFileName_Obsolete : Int8**)
+    end
+  end
 
   @[Extern]
-  record JET_INSTANCE_INFO_W,
-    hInstanceId : Win32cr::Storage::StructuredStorage::JET_INSTANCE,
-    szInstanceName : Win32cr::Foundation::PWSTR,
-    cDatabases : Win32cr::Storage::StructuredStorage::JET_API_PTR,
-    szDatabaseFileName : UInt16**,
-    szDatabaseDisplayName : UInt16**,
-    szDatabaseSLVFileName_Obsolete : UInt16**
-
-  {% if flag?(:i386) %}
-  @[Extern]
-  record JET_INDEXID,
-    cbStruct : UInt32,
-    rgbIndexId : UInt8[12]
-  {% end %}
-
-  {% if flag?(:i386) %}
-  @[Extern]
-  record JET_OBJECTINFO,
-    cbStruct : UInt32,
-    objtyp : UInt32,
-    dtCreate : Float64,
-    dtUpdate : Float64,
-    grbit : UInt32,
-    flags : UInt32,
-    cRecord : UInt32,
-    cPage : UInt32
-  {% end %}
+  struct JET_INSTANCE_INFO_W
+    property hInstanceId : Win32cr::Storage::StructuredStorage::JET_INSTANCE
+    property szInstanceName : Win32cr::Foundation::PWSTR
+    property cDatabases : Win32cr::Storage::StructuredStorage::JET_API_PTR
+    property szDatabaseFileName : UInt16**
+    property szDatabaseDisplayName : UInt16**
+    property szDatabaseSLVFileName_Obsolete : UInt16**
+    def initialize(@hInstanceId : Win32cr::Storage::StructuredStorage::JET_INSTANCE, @szInstanceName : Win32cr::Foundation::PWSTR, @cDatabases : Win32cr::Storage::StructuredStorage::JET_API_PTR, @szDatabaseFileName : UInt16**, @szDatabaseDisplayName : UInt16**, @szDatabaseSLVFileName_Obsolete : UInt16**)
+    end
+  end
 
   {% if flag?(:i386) %}
   @[Extern]
-  record JET_THREADSTATS2,
-    cbStruct : UInt32,
-    cPageReferenced : UInt32,
-    cPageRead : UInt32,
-    cPagePreread : UInt32,
-    cPageDirtied : UInt32,
-    cPageRedirtied : UInt32,
-    cLogRecord : UInt32,
-    cbLogRecord : UInt32,
-    cusecPageCacheMiss : UInt64,
-    cPageCacheMiss : UInt32
+  struct JET_INDEXID
+    property cbStruct : UInt32
+    property rgbIndexId : UInt8[12]
+    def initialize(@cbStruct : UInt32, @rgbIndexId : UInt8[12])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record JET_COMMIT_ID,
-    signLog : Win32cr::Storage::Jet::JET_SIGNATURE,
-    reserved : Int32,
-    commitId : Int64
+  struct JET_OBJECTINFO
+    property cbStruct : UInt32
+    property objtyp : UInt32
+    property dtCreate : Float64
+    property dtUpdate : Float64
+    property grbit : UInt32
+    property flags : UInt32
+    property cRecord : UInt32
+    property cPage : UInt32
+    def initialize(@cbStruct : UInt32, @objtyp : UInt32, @dtCreate : Float64, @dtUpdate : Float64, @grbit : UInt32, @flags : UInt32, @cRecord : UInt32, @cPage : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record JET_RBSINFOMISC,
-    lRBSGeneration : Int32,
-    logtimeCreate : Win32cr::Storage::Jet::JET_LOGTIME,
-    logtimeCreatePrevRBS : Win32cr::Storage::Jet::JET_LOGTIME,
-    ulMajor : UInt32,
-    ulMinor : UInt32,
-    cbLogicalFileSize : UInt64
+  struct JET_THREADSTATS2
+    property cbStruct : UInt32
+    property cPageReferenced : UInt32
+    property cPageRead : UInt32
+    property cPagePreread : UInt32
+    property cPageDirtied : UInt32
+    property cPageRedirtied : UInt32
+    property cLogRecord : UInt32
+    property cbLogRecord : UInt32
+    property cusecPageCacheMiss : UInt64
+    property cPageCacheMiss : UInt32
+    def initialize(@cbStruct : UInt32, @cPageReferenced : UInt32, @cPageRead : UInt32, @cPagePreread : UInt32, @cPageDirtied : UInt32, @cPageRedirtied : UInt32, @cLogRecord : UInt32, @cbLogRecord : UInt32, @cusecPageCacheMiss : UInt64, @cPageCacheMiss : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record JET_RBSREVERTINFOMISC,
-    lGenMinRevertStart : Int32,
-    lGenMaxRevertStart : Int32,
-    lGenMinRevertEnd : Int32,
-    lGenMaxRevertEnd : Int32,
-    logtimeRevertFrom : Win32cr::Storage::Jet::JET_LOGTIME,
-    cSecRevert : UInt64,
-    cPagesReverted : UInt64
+  struct JET_COMMIT_ID
+    property signLog : Win32cr::Storage::Jet::JET_SIGNATURE
+    property reserved : Int32
+    property commitId : Int64
+    def initialize(@signLog : Win32cr::Storage::Jet::JET_SIGNATURE, @reserved : Int32, @commitId : Int64)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record JET_RECSIZE,
-    cbData : UInt64,
-    cbLongValueData : UInt64,
-    cbOverhead : UInt64,
-    cbLongValueOverhead : UInt64,
-    cNonTaggedColumns : UInt64,
-    cTaggedColumns : UInt64,
-    cLongValues : UInt64,
-    cMultiValues : UInt64
+  struct JET_RBSINFOMISC
+    property lRBSGeneration : Int32
+    property logtimeCreate : Win32cr::Storage::Jet::JET_LOGTIME
+    property logtimeCreatePrevRBS : Win32cr::Storage::Jet::JET_LOGTIME
+    property ulMajor : UInt32
+    property ulMinor : UInt32
+    property cbLogicalFileSize : UInt64
+    def initialize(@lRBSGeneration : Int32, @logtimeCreate : Win32cr::Storage::Jet::JET_LOGTIME, @logtimeCreatePrevRBS : Win32cr::Storage::Jet::JET_LOGTIME, @ulMajor : UInt32, @ulMinor : UInt32, @cbLogicalFileSize : UInt64)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record JET_RECSIZE2,
-    cbData : UInt64,
-    cbLongValueData : UInt64,
-    cbOverhead : UInt64,
-    cbLongValueOverhead : UInt64,
-    cNonTaggedColumns : UInt64,
-    cTaggedColumns : UInt64,
-    cLongValues : UInt64,
-    cMultiValues : UInt64,
-    cCompressedColumns : UInt64,
-    cbDataCompressed : UInt64,
-    cbLongValueDataCompressed : UInt64
+  struct JET_RBSREVERTINFOMISC
+    property lGenMinRevertStart : Int32
+    property lGenMaxRevertStart : Int32
+    property lGenMinRevertEnd : Int32
+    property lGenMaxRevertEnd : Int32
+    property logtimeRevertFrom : Win32cr::Storage::Jet::JET_LOGTIME
+    property cSecRevert : UInt64
+    property cPagesReverted : UInt64
+    def initialize(@lGenMinRevertStart : Int32, @lGenMaxRevertStart : Int32, @lGenMinRevertEnd : Int32, @lGenMaxRevertEnd : Int32, @logtimeRevertFrom : Win32cr::Storage::Jet::JET_LOGTIME, @cSecRevert : UInt64, @cPagesReverted : UInt64)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:i386) %}
+  @[Extern]
+  struct JET_RECSIZE
+    property cbData : UInt64
+    property cbLongValueData : UInt64
+    property cbOverhead : UInt64
+    property cbLongValueOverhead : UInt64
+    property cNonTaggedColumns : UInt64
+    property cTaggedColumns : UInt64
+    property cLongValues : UInt64
+    property cMultiValues : UInt64
+    def initialize(@cbData : UInt64, @cbLongValueData : UInt64, @cbOverhead : UInt64, @cbLongValueOverhead : UInt64, @cNonTaggedColumns : UInt64, @cTaggedColumns : UInt64, @cLongValues : UInt64, @cMultiValues : UInt64)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:i386) %}
+  @[Extern]
+  struct JET_RECSIZE2
+    property cbData : UInt64
+    property cbLongValueData : UInt64
+    property cbOverhead : UInt64
+    property cbLongValueOverhead : UInt64
+    property cNonTaggedColumns : UInt64
+    property cTaggedColumns : UInt64
+    property cLongValues : UInt64
+    property cMultiValues : UInt64
+    property cCompressedColumns : UInt64
+    property cbDataCompressed : UInt64
+    property cbLongValueDataCompressed : UInt64
+    def initialize(@cbData : UInt64, @cbLongValueData : UInt64, @cbOverhead : UInt64, @cbLongValueOverhead : UInt64, @cNonTaggedColumns : UInt64, @cTaggedColumns : UInt64, @cLongValues : UInt64, @cMultiValues : UInt64, @cCompressedColumns : UInt64, @cbDataCompressed : UInt64, @cbLongValueDataCompressed : UInt64)
+    end
+  end
   {% end %}
 
   @[Link("esent")]

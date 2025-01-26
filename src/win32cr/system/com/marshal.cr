@@ -24,7 +24,6 @@ module Win32cr::System::Com::Marshal
 
 
   @[Extern]
-  #@[Com("00000003-0000-0000-c000-000000000046")]
   record IMarshal, lpVtbl : IMarshalVtbl* do
     GUID = LibC::GUID.new(0x3_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IMarshal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -71,7 +70,6 @@ module Win32cr::System::Com::Marshal
 
 
   @[Extern]
-  #@[Com("000001cf-0000-0000-c000-000000000046")]
   record IMarshal2, lpVtbl : IMarshal2Vtbl* do
     GUID = LibC::GUID.new(0x1cf_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IMarshal2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -124,7 +122,6 @@ module Win32cr::System::Com::Marshal
 
 
   @[Extern]
-  #@[Com("d8f2f5e6-6102-4863-9f26-389a4676efde")]
   record IMarshalingStream, lpVtbl : IMarshalingStreamVtbl* do
     GUID = LibC::GUID.new(0xd8f2f5e6_u32, 0x6102_u16, 0x4863_u16, StaticArray[0x9f_u8, 0x26_u8, 0x38_u8, 0x9a_u8, 0x46_u8, 0x76_u8, 0xef_u8, 0xde_u8])
     def query_interface(this : IMarshalingStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

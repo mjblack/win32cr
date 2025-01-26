@@ -3,71 +3,71 @@ require "./com.cr"
 require "./com/structured_storage.cr"
 
 module Win32cr::System::AddressBook
-  alias LPALLOCATEBUFFER = Proc(UInt32, Void**, Int32)*
+  alias LPALLOCATEBUFFER = Proc(UInt32, Void**, Int32)
 
-  alias LPALLOCATEMORE = Proc(UInt32, Void*, Void**, Int32)*
+  alias LPALLOCATEMORE = Proc(UInt32, Void*, Void**, Int32)
 
-  alias LPFREEBUFFER = Proc(Void*, UInt32)*
+  alias LPFREEBUFFER = Proc(Void*, UInt32)
 
-  alias LPNOTIFCALLBACK = Proc(Void*, UInt32, Win32cr::System::AddressBook::NOTIFICATION*, Int32)*
+  alias LPNOTIFCALLBACK = Proc(Void*, UInt32, Win32cr::System::AddressBook::NOTIFICATION*, Int32)
 
-  alias LPFNABSDI = Proc(LibC::UIntPtrT, Void*, Win32cr::Foundation::BOOL)*
+  alias LPFNABSDI = Proc(LibC::UIntPtrT, Void*, Win32cr::Foundation::BOOL)
 
-  alias LPFNDISMISS = Proc(LibC::UIntPtrT, Void*, Void)*
+  alias LPFNDISMISS = Proc(LibC::UIntPtrT, Void*, Void)
 
-  alias LPFNBUTTON = Proc(LibC::UIntPtrT, Void*, UInt32, Win32cr::System::AddressBook::ENTRYID*, UInt32, Int32)*
+  alias LPFNBUTTON = Proc(LibC::UIntPtrT, Void*, UInt32, Win32cr::System::AddressBook::ENTRYID*, UInt32, Int32)
 
-  alias CALLERRELEASE = Proc(UInt32, Void*, Void*, Void)*
+  alias CALLERRELEASE = Proc(UInt32, Void*, Void*, Void)
 
-  alias PFNIDLE = Proc(Void*, Win32cr::Foundation::BOOL)*
+  alias PFNIDLE = Proc(Void*, Win32cr::Foundation::BOOL)
 
-  alias LPOPENSTREAMONFILE = Proc(Win32cr::System::AddressBook::LPALLOCATEBUFFER, Win32cr::System::AddressBook::LPFREEBUFFER, UInt32, Int8*, Int8*, Void**, Win32cr::Foundation::HRESULT)*
+  alias LPOPENSTREAMONFILE = Proc(Win32cr::System::AddressBook::LPALLOCATEBUFFER, Win32cr::System::AddressBook::LPFREEBUFFER, UInt32, Int8*, Int8*, Void**, Win32cr::Foundation::HRESULT)
 
-  alias LPDISPATCHNOTIFICATIONS = Proc(UInt32, Win32cr::Foundation::HRESULT)*
+  alias LPDISPATCHNOTIFICATIONS = Proc(UInt32, Win32cr::Foundation::HRESULT)
 
-  alias LPCREATECONVERSATIONINDEX = Proc(UInt32, UInt8*, UInt32*, UInt8**, Int32)*
+  alias LPCREATECONVERSATIONINDEX = Proc(UInt32, UInt8*, UInt32*, UInt8**, Int32)
 
-  alias IWABOBJECT_QueryInterface_METHOD = Proc(LibC::GUID*, Void**, Win32cr::Foundation::HRESULT)*
+  alias IWABOBJECT_QueryInterface_METHOD = Proc(LibC::GUID*, Void**, Win32cr::Foundation::HRESULT)
 
-  alias IWABOBJECT_AddRef_METHOD = Proc(UInt32)*
+  alias IWABOBJECT_AddRef_METHOD = Proc(UInt32)
 
-  alias IWABOBJECT_Release_METHOD = Proc(UInt32)*
+  alias IWABOBJECT_Release_METHOD = Proc(UInt32)
 
-  alias IWABOBJECT_GetLastError_METHOD = Proc(Win32cr::Foundation::HRESULT, UInt32, Win32cr::System::AddressBook::MAPIERROR**, Win32cr::Foundation::HRESULT)*
+  alias IWABOBJECT_GetLastError_METHOD = Proc(Win32cr::Foundation::HRESULT, UInt32, Win32cr::System::AddressBook::MAPIERROR**, Win32cr::Foundation::HRESULT)
 
-  alias IWABOBJECT_AllocateBuffer_METHOD = Proc(UInt32, Void**, Win32cr::Foundation::HRESULT)*
+  alias IWABOBJECT_AllocateBuffer_METHOD = Proc(UInt32, Void**, Win32cr::Foundation::HRESULT)
 
-  alias IWABOBJECT_AllocateMore_METHOD = Proc(UInt32, Void*, Void**, Win32cr::Foundation::HRESULT)*
+  alias IWABOBJECT_AllocateMore_METHOD = Proc(UInt32, Void*, Void**, Win32cr::Foundation::HRESULT)
 
-  alias IWABOBJECT_FreeBuffer_METHOD = Proc(Void*, Win32cr::Foundation::HRESULT)*
+  alias IWABOBJECT_FreeBuffer_METHOD = Proc(Void*, Win32cr::Foundation::HRESULT)
 
-  alias IWABOBJECT_Backup_METHOD = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::HRESULT)*
+  alias IWABOBJECT_Backup_METHOD = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::HRESULT)
 
-  alias IWABOBJECT_Import_METHOD = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::HRESULT)*
+  alias IWABOBJECT_Import_METHOD = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::HRESULT)
 
-  alias IWABOBJECT_Find_METHOD = Proc(Void*, Win32cr::Foundation::HWND, Win32cr::Foundation::HRESULT)*
+  alias IWABOBJECT_Find_METHOD = Proc(Void*, Win32cr::Foundation::HWND, Win32cr::Foundation::HRESULT)
 
-  alias IWABOBJECT_VCardDisplay_METHOD = Proc(Void*, Win32cr::Foundation::HWND, Win32cr::Foundation::PSTR, Win32cr::Foundation::HRESULT)*
+  alias IWABOBJECT_VCardDisplay_METHOD = Proc(Void*, Win32cr::Foundation::HWND, Win32cr::Foundation::PSTR, Win32cr::Foundation::HRESULT)
 
-  alias IWABOBJECT_LDAPUrl_METHOD = Proc(Void*, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::PSTR, Void**, Win32cr::Foundation::HRESULT)*
+  alias IWABOBJECT_LDAPUrl_METHOD = Proc(Void*, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::PSTR, Void**, Win32cr::Foundation::HRESULT)
 
-  alias IWABOBJECT_VCardCreate_METHOD = Proc(Void*, UInt32, Win32cr::Foundation::PSTR, Void*, Win32cr::Foundation::HRESULT)*
+  alias IWABOBJECT_VCardCreate_METHOD = Proc(Void*, UInt32, Win32cr::Foundation::PSTR, Void*, Win32cr::Foundation::HRESULT)
 
-  alias IWABOBJECT_VCardRetrieve_METHOD = Proc(Void*, UInt32, Win32cr::Foundation::PSTR, Void**, Win32cr::Foundation::HRESULT)*
+  alias IWABOBJECT_VCardRetrieve_METHOD = Proc(Void*, UInt32, Win32cr::Foundation::PSTR, Void**, Win32cr::Foundation::HRESULT)
 
-  alias IWABOBJECT_GetMe_METHOD = Proc(Void*, UInt32, UInt32*, Win32cr::System::AddressBook::SBinary*, Win32cr::Foundation::HWND, Win32cr::Foundation::HRESULT)*
+  alias IWABOBJECT_GetMe_METHOD = Proc(Void*, UInt32, UInt32*, Win32cr::System::AddressBook::SBinary*, Win32cr::Foundation::HWND, Win32cr::Foundation::HRESULT)
 
-  alias IWABOBJECT_SetMe_METHOD = Proc(Void*, UInt32, Win32cr::System::AddressBook::SBinary, Win32cr::Foundation::HWND, Win32cr::Foundation::HRESULT)*
+  alias IWABOBJECT_SetMe_METHOD = Proc(Void*, UInt32, Win32cr::System::AddressBook::SBinary, Win32cr::Foundation::HWND, Win32cr::Foundation::HRESULT)
 
-  alias LPWABOPEN = Proc(Void**, Void**, Win32cr::System::AddressBook::WAB_PARAM*, UInt32, Win32cr::Foundation::HRESULT)*
+  alias LPWABOPEN = Proc(Void**, Void**, Win32cr::System::AddressBook::WAB_PARAM*, UInt32, Win32cr::Foundation::HRESULT)
 
-  alias LPWABOPENEX = Proc(Void**, Void**, Win32cr::System::AddressBook::WAB_PARAM*, UInt32, Win32cr::System::AddressBook::LPALLOCATEBUFFER, Win32cr::System::AddressBook::LPALLOCATEMORE, Win32cr::System::AddressBook::LPFREEBUFFER, Win32cr::Foundation::HRESULT)*
+  alias LPWABOPENEX = Proc(Void**, Void**, Win32cr::System::AddressBook::WAB_PARAM*, UInt32, Win32cr::System::AddressBook::LPALLOCATEBUFFER, Win32cr::System::AddressBook::LPALLOCATEMORE, Win32cr::System::AddressBook::LPFREEBUFFER, Win32cr::Foundation::HRESULT)
 
-  alias LPWABALLOCATEBUFFER = Proc(Void*, UInt32, Void**, Int32)*
+  alias LPWABALLOCATEBUFFER = Proc(Void*, UInt32, Void**, Int32)
 
-  alias LPWABALLOCATEMORE = Proc(Void*, UInt32, Void*, Void**, Int32)*
+  alias LPWABALLOCATEMORE = Proc(Void*, UInt32, Void*, Void**, Int32)
 
-  alias LPWABFREEBUFFER = Proc(Void*, Void*, UInt32)*
+  alias LPWABFREEBUFFER = Proc(Void*, Void*, UInt32)
 
   PROP_ID_SECURE_MIN = 26608_u32
   PROP_ID_SECURE_MAX = 26623_u32
@@ -295,544 +295,771 @@ module Win32cr::System::AddressBook
   end
 
   @[Extern]
-  record ENTRYID,
-    abFlags : UInt8[4],
-    ab : UInt8*
+  struct ENTRYID
+    property abFlags : UInt8[4]
+    property ab : UInt8*
+    def initialize(@abFlags : UInt8[4], @ab : UInt8*)
+    end
+  end
 
   @[Extern]
-  record MAPIUID,
-    ab : UInt8[16]
+  struct MAPIUID
+    property ab : UInt8[16]
+    def initialize(@ab : UInt8[16])
+    end
+  end
 
   @[Extern]
-  record SPropTagArray,
-    cValues : UInt32,
-    aulPropTag : UInt32*
+  struct SPropTagArray
+    property cValues : UInt32
+    property aulPropTag : UInt32*
+    def initialize(@cValues : UInt32, @aulPropTag : UInt32*)
+    end
+  end
 
   @[Extern]
-  record SBinary,
-    cb : UInt32,
-    lpb : UInt8*
+  struct SBinary
+    property cb : UInt32
+    property lpb : UInt8*
+    def initialize(@cb : UInt32, @lpb : UInt8*)
+    end
+  end
 
   @[Extern]
-  record SShortArray,
-    cValues : UInt32,
-    lpi : Int16*
+  struct SShortArray
+    property cValues : UInt32
+    property lpi : Int16*
+    def initialize(@cValues : UInt32, @lpi : Int16*)
+    end
+  end
 
   @[Extern]
-  record SGuidArray,
-    cValues : UInt32,
-    lpguid : LibC::GUID*
+  struct SGuidArray
+    property cValues : UInt32
+    property lpguid : LibC::GUID*
+    def initialize(@cValues : UInt32, @lpguid : LibC::GUID*)
+    end
+  end
 
   @[Extern]
-  record SRealArray,
-    cValues : UInt32,
-    lpflt : Float32*
+  struct SRealArray
+    property cValues : UInt32
+    property lpflt : Float32*
+    def initialize(@cValues : UInt32, @lpflt : Float32*)
+    end
+  end
 
   @[Extern]
-  record SLongArray,
-    cValues : UInt32,
-    lpl : Int32*
+  struct SLongArray
+    property cValues : UInt32
+    property lpl : Int32*
+    def initialize(@cValues : UInt32, @lpl : Int32*)
+    end
+  end
 
   @[Extern]
-  record SLargeIntegerArray,
-    cValues : UInt32,
-    lpli : Win32cr::Foundation::LARGE_INTEGER*
+  struct SLargeIntegerArray
+    property cValues : UInt32
+    property lpli : Win32cr::Foundation::LARGE_INTEGER*
+    def initialize(@cValues : UInt32, @lpli : Win32cr::Foundation::LARGE_INTEGER*)
+    end
+  end
 
   @[Extern]
-  record SDateTimeArray,
-    cValues : UInt32,
-    lpft : Win32cr::Foundation::FILETIME*
+  struct SDateTimeArray
+    property cValues : UInt32
+    property lpft : Win32cr::Foundation::FILETIME*
+    def initialize(@cValues : UInt32, @lpft : Win32cr::Foundation::FILETIME*)
+    end
+  end
 
   @[Extern]
-  record SAppTimeArray,
-    cValues : UInt32,
-    lpat : Float64*
+  struct SAppTimeArray
+    property cValues : UInt32
+    property lpat : Float64*
+    def initialize(@cValues : UInt32, @lpat : Float64*)
+    end
+  end
 
   @[Extern]
-  record SCurrencyArray,
-    cValues : UInt32,
-    lpcur : Win32cr::System::Com::CY*
+  struct SCurrencyArray
+    property cValues : UInt32
+    property lpcur : Win32cr::System::Com::CY*
+    def initialize(@cValues : UInt32, @lpcur : Win32cr::System::Com::CY*)
+    end
+  end
 
   @[Extern]
-  record SBinaryArray,
-    cValues : UInt32,
-    lpbin : Win32cr::System::AddressBook::SBinary*
+  struct SBinaryArray
+    property cValues : UInt32
+    property lpbin : Win32cr::System::AddressBook::SBinary*
+    def initialize(@cValues : UInt32, @lpbin : Win32cr::System::AddressBook::SBinary*)
+    end
+  end
 
   @[Extern]
-  record SDoubleArray,
-    cValues : UInt32,
-    lpdbl : Float64*
+  struct SDoubleArray
+    property cValues : UInt32
+    property lpdbl : Float64*
+    def initialize(@cValues : UInt32, @lpdbl : Float64*)
+    end
+  end
 
   @[Extern]
-  record SWStringArray,
-    cValues : UInt32,
-    lppszW : Win32cr::Foundation::PWSTR*
+  struct SWStringArray
+    property cValues : UInt32
+    property lppszW : Win32cr::Foundation::PWSTR*
+    def initialize(@cValues : UInt32, @lppszW : Win32cr::Foundation::PWSTR*)
+    end
+  end
 
   @[Extern]
-  record SLPSTRArray,
-    cValues : UInt32,
-    lppszA : Win32cr::Foundation::PSTR*
+  struct SLPSTRArray
+    property cValues : UInt32
+    property lppszA : Win32cr::Foundation::PSTR*
+    def initialize(@cValues : UInt32, @lppszA : Win32cr::Foundation::PSTR*)
+    end
+  end
 
   @[Extern(union: true)]
-  record PV_,
-    i : Int16,
-    l : Int32,
-    ul : UInt32,
-    flt : Float32,
-    dbl : Float64,
-    b : UInt16,
-    cur : Win32cr::System::Com::CY,
-    at : Float64,
-    ft : Win32cr::Foundation::FILETIME,
-    lpszA : Win32cr::Foundation::PSTR,
-    bin : Win32cr::System::AddressBook::SBinary,
-    lpszW : Win32cr::Foundation::PWSTR,
-    lpguid : LibC::GUID*,
-    li : Win32cr::Foundation::LARGE_INTEGER,
-    m_vi : Win32cr::System::AddressBook::SShortArray,
-    m_vl : Win32cr::System::AddressBook::SLongArray,
-    m_vflt : Win32cr::System::AddressBook::SRealArray,
-    m_vdbl : Win32cr::System::AddressBook::SDoubleArray,
-    m_vcur : Win32cr::System::AddressBook::SCurrencyArray,
-    m_vat : Win32cr::System::AddressBook::SAppTimeArray,
-    m_vft : Win32cr::System::AddressBook::SDateTimeArray,
-    m_vbin : Win32cr::System::AddressBook::SBinaryArray,
-    m_vsz_a : Win32cr::System::AddressBook::SLPSTRArray,
-    m_vsz_w : Win32cr::System::AddressBook::SWStringArray,
-    m_vguid : Win32cr::System::AddressBook::SGuidArray,
-    m_vli : Win32cr::System::AddressBook::SLargeIntegerArray,
-    err : Int32,
-    x : Int32
+  struct PV_
+    property i : Int16
+    property l : Int32
+    property ul : UInt32
+    property flt : Float32
+    property dbl : Float64
+    property b : UInt16
+    property cur : Win32cr::System::Com::CY
+    property at : Float64
+    property ft : Win32cr::Foundation::FILETIME
+    property lpszA : Win32cr::Foundation::PSTR
+    property bin : Win32cr::System::AddressBook::SBinary
+    property lpszW : Win32cr::Foundation::PWSTR
+    property lpguid : LibC::GUID*
+    property li : Win32cr::Foundation::LARGE_INTEGER
+    property m_vi : Win32cr::System::AddressBook::SShortArray
+    property m_vl : Win32cr::System::AddressBook::SLongArray
+    property m_vflt : Win32cr::System::AddressBook::SRealArray
+    property m_vdbl : Win32cr::System::AddressBook::SDoubleArray
+    property m_vcur : Win32cr::System::AddressBook::SCurrencyArray
+    property m_vat : Win32cr::System::AddressBook::SAppTimeArray
+    property m_vft : Win32cr::System::AddressBook::SDateTimeArray
+    property m_vbin : Win32cr::System::AddressBook::SBinaryArray
+    property m_vsz_a : Win32cr::System::AddressBook::SLPSTRArray
+    property m_vsz_w : Win32cr::System::AddressBook::SWStringArray
+    property m_vguid : Win32cr::System::AddressBook::SGuidArray
+    property m_vli : Win32cr::System::AddressBook::SLargeIntegerArray
+    property err : Int32
+    property x : Int32
+    def initialize(@i : Int16, @l : Int32, @ul : UInt32, @flt : Float32, @dbl : Float64, @b : UInt16, @cur : Win32cr::System::Com::CY, @at : Float64, @ft : Win32cr::Foundation::FILETIME, @lpszA : Win32cr::Foundation::PSTR, @bin : Win32cr::System::AddressBook::SBinary, @lpszW : Win32cr::Foundation::PWSTR, @lpguid : LibC::GUID*, @li : Win32cr::Foundation::LARGE_INTEGER, @m_vi : Win32cr::System::AddressBook::SShortArray, @m_vl : Win32cr::System::AddressBook::SLongArray, @m_vflt : Win32cr::System::AddressBook::SRealArray, @m_vdbl : Win32cr::System::AddressBook::SDoubleArray, @m_vcur : Win32cr::System::AddressBook::SCurrencyArray, @m_vat : Win32cr::System::AddressBook::SAppTimeArray, @m_vft : Win32cr::System::AddressBook::SDateTimeArray, @m_vbin : Win32cr::System::AddressBook::SBinaryArray, @m_vsz_a : Win32cr::System::AddressBook::SLPSTRArray, @m_vsz_w : Win32cr::System::AddressBook::SWStringArray, @m_vguid : Win32cr::System::AddressBook::SGuidArray, @m_vli : Win32cr::System::AddressBook::SLargeIntegerArray, @err : Int32, @x : Int32)
+    end
+  end
 
   @[Extern]
-  record SPropValue,
-    ulPropTag : UInt32,
-    dwAlignPad : UInt32,
-    value : Win32cr::System::AddressBook::PV_
+  struct SPropValue
+    property ulPropTag : UInt32
+    property dwAlignPad : UInt32
+    property value : Win32cr::System::AddressBook::PV_
+    def initialize(@ulPropTag : UInt32, @dwAlignPad : UInt32, @value : Win32cr::System::AddressBook::PV_)
+    end
+  end
 
   @[Extern]
-  record SPropProblem,
-    ulIndex : UInt32,
-    ulPropTag : UInt32,
-    scode : Int32
+  struct SPropProblem
+    property ulIndex : UInt32
+    property ulPropTag : UInt32
+    property scode : Int32
+    def initialize(@ulIndex : UInt32, @ulPropTag : UInt32, @scode : Int32)
+    end
+  end
 
   @[Extern]
-  record SPropProblemArray,
-    cProblem : UInt32,
-    aProblem : Win32cr::System::AddressBook::SPropProblem*
+  struct SPropProblemArray
+    property cProblem : UInt32
+    property aProblem : Win32cr::System::AddressBook::SPropProblem*
+    def initialize(@cProblem : UInt32, @aProblem : Win32cr::System::AddressBook::SPropProblem*)
+    end
+  end
 
   @[Extern]
-  record FLATENTRY,
-    cb : UInt32,
-    abEntry : UInt8*
+  struct FLATENTRY
+    property cb : UInt32
+    property abEntry : UInt8*
+    def initialize(@cb : UInt32, @abEntry : UInt8*)
+    end
+  end
 
   @[Extern]
-  record FLATENTRYLIST,
-    cEntries : UInt32,
-    cbEntries : UInt32,
-    abEntries : UInt8*
+  struct FLATENTRYLIST
+    property cEntries : UInt32
+    property cbEntries : UInt32
+    property abEntries : UInt8*
+    def initialize(@cEntries : UInt32, @cbEntries : UInt32, @abEntries : UInt8*)
+    end
+  end
 
   @[Extern]
-  record MTSID,
-    cb : UInt32,
-    ab : UInt8*
+  struct MTSID
+    property cb : UInt32
+    property ab : UInt8*
+    def initialize(@cb : UInt32, @ab : UInt8*)
+    end
+  end
 
   @[Extern]
-  record FLATMTSIDLIST,
-    cMTSIDs : UInt32,
-    cbMTSIDs : UInt32,
-    abMTSIDs : UInt8*
+  struct FLATMTSIDLIST
+    property cMTSIDs : UInt32
+    property cbMTSIDs : UInt32
+    property abMTSIDs : UInt8*
+    def initialize(@cMTSIDs : UInt32, @cbMTSIDs : UInt32, @abMTSIDs : UInt8*)
+    end
+  end
 
   @[Extern]
-  record ADRENTRY,
-    ulReserved1 : UInt32,
-    cValues : UInt32,
-    rgPropVals : Win32cr::System::AddressBook::SPropValue*
+  struct ADRENTRY
+    property ulReserved1 : UInt32
+    property cValues : UInt32
+    property rgPropVals : Win32cr::System::AddressBook::SPropValue*
+    def initialize(@ulReserved1 : UInt32, @cValues : UInt32, @rgPropVals : Win32cr::System::AddressBook::SPropValue*)
+    end
+  end
 
   @[Extern]
-  record ADRLIST,
-    cEntries : UInt32,
-    aEntries : Win32cr::System::AddressBook::ADRENTRY*
+  struct ADRLIST
+    property cEntries : UInt32
+    property aEntries : Win32cr::System::AddressBook::ADRENTRY*
+    def initialize(@cEntries : UInt32, @aEntries : Win32cr::System::AddressBook::ADRENTRY*)
+    end
+  end
 
   @[Extern]
-  record SRow,
-    ulAdrEntryPad : UInt32,
-    cValues : UInt32,
-    lpProps : Win32cr::System::AddressBook::SPropValue*
+  struct SRow
+    property ulAdrEntryPad : UInt32
+    property cValues : UInt32
+    property lpProps : Win32cr::System::AddressBook::SPropValue*
+    def initialize(@ulAdrEntryPad : UInt32, @cValues : UInt32, @lpProps : Win32cr::System::AddressBook::SPropValue*)
+    end
+  end
 
   @[Extern]
-  record SRowSet,
-    cRows : UInt32,
-    aRow : Win32cr::System::AddressBook::SRow*
+  struct SRowSet
+    property cRows : UInt32
+    property aRow : Win32cr::System::AddressBook::SRow*
+    def initialize(@cRows : UInt32, @aRow : Win32cr::System::AddressBook::SRow*)
+    end
+  end
 
   @[Extern]
-  record MAPIERROR,
-    ulVersion : UInt32,
-    lpszError : Int8*,
-    lpszComponent : Int8*,
-    ulLowLevelError : UInt32,
-    ulContext : UInt32
+  struct MAPIERROR
+    property ulVersion : UInt32
+    property lpszError : Int8*
+    property lpszComponent : Int8*
+    property ulLowLevelError : UInt32
+    property ulContext : UInt32
+    def initialize(@ulVersion : UInt32, @lpszError : Int8*, @lpszComponent : Int8*, @ulLowLevelError : UInt32, @ulContext : UInt32)
+    end
+  end
 
   @[Extern]
-  record ERROR_NOTIFICATION,
-    cbEntryID : UInt32,
-    lpEntryID : Win32cr::System::AddressBook::ENTRYID*,
-    scode : Int32,
-    ulFlags : UInt32,
-    lpMAPIError : Win32cr::System::AddressBook::MAPIERROR*
+  struct ERROR_NOTIFICATION
+    property cbEntryID : UInt32
+    property lpEntryID : Win32cr::System::AddressBook::ENTRYID*
+    property scode : Int32
+    property ulFlags : UInt32
+    property lpMAPIError : Win32cr::System::AddressBook::MAPIERROR*
+    def initialize(@cbEntryID : UInt32, @lpEntryID : Win32cr::System::AddressBook::ENTRYID*, @scode : Int32, @ulFlags : UInt32, @lpMAPIError : Win32cr::System::AddressBook::MAPIERROR*)
+    end
+  end
 
   @[Extern]
-  record NEWMAIL_NOTIFICATION,
-    cbEntryID : UInt32,
-    lpEntryID : Win32cr::System::AddressBook::ENTRYID*,
-    cbParentID : UInt32,
-    lpParentID : Win32cr::System::AddressBook::ENTRYID*,
-    ulFlags : UInt32,
-    lpszMessageClass : Int8*,
-    ulMessageFlags : UInt32
+  struct NEWMAIL_NOTIFICATION
+    property cbEntryID : UInt32
+    property lpEntryID : Win32cr::System::AddressBook::ENTRYID*
+    property cbParentID : UInt32
+    property lpParentID : Win32cr::System::AddressBook::ENTRYID*
+    property ulFlags : UInt32
+    property lpszMessageClass : Int8*
+    property ulMessageFlags : UInt32
+    def initialize(@cbEntryID : UInt32, @lpEntryID : Win32cr::System::AddressBook::ENTRYID*, @cbParentID : UInt32, @lpParentID : Win32cr::System::AddressBook::ENTRYID*, @ulFlags : UInt32, @lpszMessageClass : Int8*, @ulMessageFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record OBJECT_NOTIFICATION,
-    cbEntryID : UInt32,
-    lpEntryID : Win32cr::System::AddressBook::ENTRYID*,
-    ulObjType : UInt32,
-    cbParentID : UInt32,
-    lpParentID : Win32cr::System::AddressBook::ENTRYID*,
-    cbOldID : UInt32,
-    lpOldID : Win32cr::System::AddressBook::ENTRYID*,
-    cbOldParentID : UInt32,
-    lpOldParentID : Win32cr::System::AddressBook::ENTRYID*,
-    lpPropTagArray : Win32cr::System::AddressBook::SPropTagArray*
+  struct OBJECT_NOTIFICATION
+    property cbEntryID : UInt32
+    property lpEntryID : Win32cr::System::AddressBook::ENTRYID*
+    property ulObjType : UInt32
+    property cbParentID : UInt32
+    property lpParentID : Win32cr::System::AddressBook::ENTRYID*
+    property cbOldID : UInt32
+    property lpOldID : Win32cr::System::AddressBook::ENTRYID*
+    property cbOldParentID : UInt32
+    property lpOldParentID : Win32cr::System::AddressBook::ENTRYID*
+    property lpPropTagArray : Win32cr::System::AddressBook::SPropTagArray*
+    def initialize(@cbEntryID : UInt32, @lpEntryID : Win32cr::System::AddressBook::ENTRYID*, @ulObjType : UInt32, @cbParentID : UInt32, @lpParentID : Win32cr::System::AddressBook::ENTRYID*, @cbOldID : UInt32, @lpOldID : Win32cr::System::AddressBook::ENTRYID*, @cbOldParentID : UInt32, @lpOldParentID : Win32cr::System::AddressBook::ENTRYID*, @lpPropTagArray : Win32cr::System::AddressBook::SPropTagArray*)
+    end
+  end
 
   @[Extern]
-  record TABLE_NOTIFICATION,
-    ulTableEvent : UInt32,
-    hResult : Win32cr::Foundation::HRESULT,
-    propIndex : Win32cr::System::AddressBook::SPropValue,
-    propPrior : Win32cr::System::AddressBook::SPropValue,
-    row : Win32cr::System::AddressBook::SRow,
-    ulPad : UInt32
+  struct TABLE_NOTIFICATION
+    property ulTableEvent : UInt32
+    property hResult : Win32cr::Foundation::HRESULT
+    property propIndex : Win32cr::System::AddressBook::SPropValue
+    property propPrior : Win32cr::System::AddressBook::SPropValue
+    property row : Win32cr::System::AddressBook::SRow
+    property ulPad : UInt32
+    def initialize(@ulTableEvent : UInt32, @hResult : Win32cr::Foundation::HRESULT, @propIndex : Win32cr::System::AddressBook::SPropValue, @propPrior : Win32cr::System::AddressBook::SPropValue, @row : Win32cr::System::AddressBook::SRow, @ulPad : UInt32)
+    end
+  end
 
   @[Extern]
-  record EXTENDED_NOTIFICATION,
-    ulEvent : UInt32,
-    cb : UInt32,
-    pbEventParameters : UInt8*
+  struct EXTENDED_NOTIFICATION
+    property ulEvent : UInt32
+    property cb : UInt32
+    property pbEventParameters : UInt8*
+    def initialize(@ulEvent : UInt32, @cb : UInt32, @pbEventParameters : UInt8*)
+    end
+  end
 
   @[Extern]
-  record STATUS_OBJECT_NOTIFICATION,
-    cbEntryID : UInt32,
-    lpEntryID : Win32cr::System::AddressBook::ENTRYID*,
-    cValues : UInt32,
-    lpPropVals : Win32cr::System::AddressBook::SPropValue*
+  struct STATUS_OBJECT_NOTIFICATION
+    property cbEntryID : UInt32
+    property lpEntryID : Win32cr::System::AddressBook::ENTRYID*
+    property cValues : UInt32
+    property lpPropVals : Win32cr::System::AddressBook::SPropValue*
+    def initialize(@cbEntryID : UInt32, @lpEntryID : Win32cr::System::AddressBook::ENTRYID*, @cValues : UInt32, @lpPropVals : Win32cr::System::AddressBook::SPropValue*)
+    end
+  end
 
   @[Extern]
-  record NOTIFICATION,
-    ulEventType : UInt32,
-    ulAlignPad : UInt32,
-    info : Info_e__union_ do
+  struct NOTIFICATION
+    property ulEventType : UInt32
+    property ulAlignPad : UInt32
+    property info : Info_e__union_
 
     # Nested Type Info_e__union_
     @[Extern(union: true)]
-    record Info_e__union_,
-      err : Win32cr::System::AddressBook::ERROR_NOTIFICATION,
-      newmail : Win32cr::System::AddressBook::NEWMAIL_NOTIFICATION,
-      obj : Win32cr::System::AddressBook::OBJECT_NOTIFICATION,
-      tab : Win32cr::System::AddressBook::TABLE_NOTIFICATION,
-      ext : Win32cr::System::AddressBook::EXTENDED_NOTIFICATION,
-      statobj : Win32cr::System::AddressBook::STATUS_OBJECT_NOTIFICATION
+    struct Info_e__union_
+    property err : Win32cr::System::AddressBook::ERROR_NOTIFICATION
+    property newmail : Win32cr::System::AddressBook::NEWMAIL_NOTIFICATION
+    property obj : Win32cr::System::AddressBook::OBJECT_NOTIFICATION
+    property tab : Win32cr::System::AddressBook::TABLE_NOTIFICATION
+    property ext : Win32cr::System::AddressBook::EXTENDED_NOTIFICATION
+    property statobj : Win32cr::System::AddressBook::STATUS_OBJECT_NOTIFICATION
+    def initialize(@err : Win32cr::System::AddressBook::ERROR_NOTIFICATION, @newmail : Win32cr::System::AddressBook::NEWMAIL_NOTIFICATION, @obj : Win32cr::System::AddressBook::OBJECT_NOTIFICATION, @tab : Win32cr::System::AddressBook::TABLE_NOTIFICATION, @ext : Win32cr::System::AddressBook::EXTENDED_NOTIFICATION, @statobj : Win32cr::System::AddressBook::STATUS_OBJECT_NOTIFICATION)
+    end
+    end
 
+    def initialize(@ulEventType : UInt32, @ulAlignPad : UInt32, @info : Info_e__union_)
+    end
   end
 
   @[Extern]
-  record MAPINAMEID,
-    lpguid : LibC::GUID*,
-    ulKind : UInt32,
-    kind : Kind_e__Union_ do
+  struct MAPINAMEID
+    property lpguid : LibC::GUID*
+    property ulKind : UInt32
+    property kind : Kind_e__Union_
 
     # Nested Type Kind_e__Union_
     @[Extern(union: true)]
-    record Kind_e__Union_,
-      lID : Int32,
-      lpwstrName : Win32cr::Foundation::PWSTR
+    struct Kind_e__Union_
+    property lID : Int32
+    property lpwstrName : Win32cr::Foundation::PWSTR
+    def initialize(@lID : Int32, @lpwstrName : Win32cr::Foundation::PWSTR)
+    end
+    end
 
+    def initialize(@lpguid : LibC::GUID*, @ulKind : UInt32, @kind : Kind_e__Union_)
+    end
   end
 
   @[Extern]
-  record SSortOrder,
-    ulPropTag : UInt32,
-    ulOrder : UInt32
+  struct SSortOrder
+    property ulPropTag : UInt32
+    property ulOrder : UInt32
+    def initialize(@ulPropTag : UInt32, @ulOrder : UInt32)
+    end
+  end
 
   @[Extern]
-  record SSortOrderSet,
-    cSorts : UInt32,
-    cCategories : UInt32,
-    cExpanded : UInt32,
-    aSort : Win32cr::System::AddressBook::SSortOrder*
+  struct SSortOrderSet
+    property cSorts : UInt32
+    property cCategories : UInt32
+    property cExpanded : UInt32
+    property aSort : Win32cr::System::AddressBook::SSortOrder*
+    def initialize(@cSorts : UInt32, @cCategories : UInt32, @cExpanded : UInt32, @aSort : Win32cr::System::AddressBook::SSortOrder*)
+    end
+  end
 
   @[Extern]
-  record SAndRestriction,
-    cRes : UInt32,
-    lpRes : Win32cr::System::AddressBook::SRestriction*
+  struct SAndRestriction
+    property cRes : UInt32
+    property lpRes : Win32cr::System::AddressBook::SRestriction*
+    def initialize(@cRes : UInt32, @lpRes : Win32cr::System::AddressBook::SRestriction*)
+    end
+  end
 
   @[Extern]
-  record SOrRestriction,
-    cRes : UInt32,
-    lpRes : Win32cr::System::AddressBook::SRestriction*
+  struct SOrRestriction
+    property cRes : UInt32
+    property lpRes : Win32cr::System::AddressBook::SRestriction*
+    def initialize(@cRes : UInt32, @lpRes : Win32cr::System::AddressBook::SRestriction*)
+    end
+  end
 
   @[Extern]
-  record SNotRestriction,
-    ulReserved : UInt32,
-    lpRes : Win32cr::System::AddressBook::SRestriction*
+  struct SNotRestriction
+    property ulReserved : UInt32
+    property lpRes : Win32cr::System::AddressBook::SRestriction*
+    def initialize(@ulReserved : UInt32, @lpRes : Win32cr::System::AddressBook::SRestriction*)
+    end
+  end
 
   @[Extern]
-  record SContentRestriction,
-    ulFuzzyLevel : UInt32,
-    ulPropTag : UInt32,
-    lpProp : Win32cr::System::AddressBook::SPropValue*
+  struct SContentRestriction
+    property ulFuzzyLevel : UInt32
+    property ulPropTag : UInt32
+    property lpProp : Win32cr::System::AddressBook::SPropValue*
+    def initialize(@ulFuzzyLevel : UInt32, @ulPropTag : UInt32, @lpProp : Win32cr::System::AddressBook::SPropValue*)
+    end
+  end
 
   @[Extern]
-  record SBitMaskRestriction,
-    relBMR : UInt32,
-    ulPropTag : UInt32,
-    ulMask : UInt32
+  struct SBitMaskRestriction
+    property relBMR : UInt32
+    property ulPropTag : UInt32
+    property ulMask : UInt32
+    def initialize(@relBMR : UInt32, @ulPropTag : UInt32, @ulMask : UInt32)
+    end
+  end
 
   @[Extern]
-  record SPropertyRestriction,
-    relop : UInt32,
-    ulPropTag : UInt32,
-    lpProp : Win32cr::System::AddressBook::SPropValue*
+  struct SPropertyRestriction
+    property relop : UInt32
+    property ulPropTag : UInt32
+    property lpProp : Win32cr::System::AddressBook::SPropValue*
+    def initialize(@relop : UInt32, @ulPropTag : UInt32, @lpProp : Win32cr::System::AddressBook::SPropValue*)
+    end
+  end
 
   @[Extern]
-  record SComparePropsRestriction,
-    relop : UInt32,
-    ulPropTag1 : UInt32,
-    ulPropTag2 : UInt32
+  struct SComparePropsRestriction
+    property relop : UInt32
+    property ulPropTag1 : UInt32
+    property ulPropTag2 : UInt32
+    def initialize(@relop : UInt32, @ulPropTag1 : UInt32, @ulPropTag2 : UInt32)
+    end
+  end
 
   @[Extern]
-  record SSizeRestriction,
-    relop : UInt32,
-    ulPropTag : UInt32,
-    cb : UInt32
+  struct SSizeRestriction
+    property relop : UInt32
+    property ulPropTag : UInt32
+    property cb : UInt32
+    def initialize(@relop : UInt32, @ulPropTag : UInt32, @cb : UInt32)
+    end
+  end
 
   @[Extern]
-  record SExistRestriction,
-    ulReserved1 : UInt32,
-    ulPropTag : UInt32,
-    ulReserved2 : UInt32
+  struct SExistRestriction
+    property ulReserved1 : UInt32
+    property ulPropTag : UInt32
+    property ulReserved2 : UInt32
+    def initialize(@ulReserved1 : UInt32, @ulPropTag : UInt32, @ulReserved2 : UInt32)
+    end
+  end
 
   @[Extern]
-  record SSubRestriction,
-    ulSubObject : UInt32,
-    lpRes : Win32cr::System::AddressBook::SRestriction*
+  struct SSubRestriction
+    property ulSubObject : UInt32
+    property lpRes : Win32cr::System::AddressBook::SRestriction*
+    def initialize(@ulSubObject : UInt32, @lpRes : Win32cr::System::AddressBook::SRestriction*)
+    end
+  end
 
   @[Extern]
-  record SCommentRestriction,
-    cValues : UInt32,
-    lpRes : Win32cr::System::AddressBook::SRestriction*,
-    lpProp : Win32cr::System::AddressBook::SPropValue*
+  struct SCommentRestriction
+    property cValues : UInt32
+    property lpRes : Win32cr::System::AddressBook::SRestriction*
+    property lpProp : Win32cr::System::AddressBook::SPropValue*
+    def initialize(@cValues : UInt32, @lpRes : Win32cr::System::AddressBook::SRestriction*, @lpProp : Win32cr::System::AddressBook::SPropValue*)
+    end
+  end
 
   @[Extern]
-  record SRestriction,
-    rt : UInt32,
-    res : Res_e__union_ do
+  struct SRestriction
+    property rt : UInt32
+    property res : Res_e__union_
 
     # Nested Type Res_e__union_
     @[Extern(union: true)]
-    record Res_e__union_,
-      resCompareProps : Win32cr::System::AddressBook::SComparePropsRestriction,
-      resAnd : Win32cr::System::AddressBook::SAndRestriction,
-      resOr : Win32cr::System::AddressBook::SOrRestriction,
-      resNot : Win32cr::System::AddressBook::SNotRestriction,
-      resContent : Win32cr::System::AddressBook::SContentRestriction,
-      resProperty : Win32cr::System::AddressBook::SPropertyRestriction,
-      resBitMask : Win32cr::System::AddressBook::SBitMaskRestriction,
-      resSize : Win32cr::System::AddressBook::SSizeRestriction,
-      resExist : Win32cr::System::AddressBook::SExistRestriction,
-      resSub : Win32cr::System::AddressBook::SSubRestriction,
-      resComment : Win32cr::System::AddressBook::SCommentRestriction
+    struct Res_e__union_
+    property resCompareProps : Win32cr::System::AddressBook::SComparePropsRestriction
+    property resAnd : Win32cr::System::AddressBook::SAndRestriction
+    property resOr : Win32cr::System::AddressBook::SOrRestriction
+    property resNot : Win32cr::System::AddressBook::SNotRestriction
+    property resContent : Win32cr::System::AddressBook::SContentRestriction
+    property resProperty : Win32cr::System::AddressBook::SPropertyRestriction
+    property resBitMask : Win32cr::System::AddressBook::SBitMaskRestriction
+    property resSize : Win32cr::System::AddressBook::SSizeRestriction
+    property resExist : Win32cr::System::AddressBook::SExistRestriction
+    property resSub : Win32cr::System::AddressBook::SSubRestriction
+    property resComment : Win32cr::System::AddressBook::SCommentRestriction
+    def initialize(@resCompareProps : Win32cr::System::AddressBook::SComparePropsRestriction, @resAnd : Win32cr::System::AddressBook::SAndRestriction, @resOr : Win32cr::System::AddressBook::SOrRestriction, @resNot : Win32cr::System::AddressBook::SNotRestriction, @resContent : Win32cr::System::AddressBook::SContentRestriction, @resProperty : Win32cr::System::AddressBook::SPropertyRestriction, @resBitMask : Win32cr::System::AddressBook::SBitMaskRestriction, @resSize : Win32cr::System::AddressBook::SSizeRestriction, @resExist : Win32cr::System::AddressBook::SExistRestriction, @resSub : Win32cr::System::AddressBook::SSubRestriction, @resComment : Win32cr::System::AddressBook::SCommentRestriction)
+    end
+    end
 
+    def initialize(@rt : UInt32, @res : Res_e__union_)
+    end
   end
 
   @[Extern]
-  record Flaglist_,
-    cFlags : UInt32,
-    ulFlag : UInt32*
+  struct Flaglist_
+    property cFlags : UInt32
+    property ulFlag : UInt32*
+    def initialize(@cFlags : UInt32, @ulFlag : UInt32*)
+    end
+  end
 
   @[Extern]
-  record ADRPARM,
-    cbABContEntryID : UInt32,
-    lpABContEntryID : Win32cr::System::AddressBook::ENTRYID*,
-    ulFlags : UInt32,
-    lpReserved : Void*,
-    ulHelpContext : UInt32,
-    lpszHelpFileName : Int8*,
-    lpfnABSDI : Win32cr::System::AddressBook::LPFNABSDI,
-    lpfnDismiss : Win32cr::System::AddressBook::LPFNDISMISS,
-    lpvDismissContext : Void*,
-    lpszCaption : Int8*,
-    lpszNewEntryTitle : Int8*,
-    lpszDestWellsTitle : Int8*,
-    cDestFields : UInt32,
-    nDestFieldFocus : UInt32,
-    lppszDestTitles : Int8**,
-    lpulDestComps : UInt32*,
-    lpContRestriction : Win32cr::System::AddressBook::SRestriction*,
-    lpHierRestriction : Win32cr::System::AddressBook::SRestriction*
+  struct ADRPARM
+    property cbABContEntryID : UInt32
+    property lpABContEntryID : Win32cr::System::AddressBook::ENTRYID*
+    property ulFlags : UInt32
+    property lpReserved : Void*
+    property ulHelpContext : UInt32
+    property lpszHelpFileName : Int8*
+    property lpfnABSDI : Win32cr::System::AddressBook::LPFNABSDI
+    property lpfnDismiss : Win32cr::System::AddressBook::LPFNDISMISS
+    property lpvDismissContext : Void*
+    property lpszCaption : Int8*
+    property lpszNewEntryTitle : Int8*
+    property lpszDestWellsTitle : Int8*
+    property cDestFields : UInt32
+    property nDestFieldFocus : UInt32
+    property lppszDestTitles : Int8**
+    property lpulDestComps : UInt32*
+    property lpContRestriction : Win32cr::System::AddressBook::SRestriction*
+    property lpHierRestriction : Win32cr::System::AddressBook::SRestriction*
+    def initialize(@cbABContEntryID : UInt32, @lpABContEntryID : Win32cr::System::AddressBook::ENTRYID*, @ulFlags : UInt32, @lpReserved : Void*, @ulHelpContext : UInt32, @lpszHelpFileName : Int8*, @lpfnABSDI : Win32cr::System::AddressBook::LPFNABSDI, @lpfnDismiss : Win32cr::System::AddressBook::LPFNDISMISS, @lpvDismissContext : Void*, @lpszCaption : Int8*, @lpszNewEntryTitle : Int8*, @lpszDestWellsTitle : Int8*, @cDestFields : UInt32, @nDestFieldFocus : UInt32, @lppszDestTitles : Int8**, @lpulDestComps : UInt32*, @lpContRestriction : Win32cr::System::AddressBook::SRestriction*, @lpHierRestriction : Win32cr::System::AddressBook::SRestriction*)
+    end
+  end
 
   @[Extern]
-  record DTBLLABEL,
-    ulbLpszLabelName : UInt32,
-    ulFlags : UInt32
+  struct DTBLLABEL
+    property ulbLpszLabelName : UInt32
+    property ulFlags : UInt32
+    def initialize(@ulbLpszLabelName : UInt32, @ulFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record DTBLEDIT,
-    ulbLpszCharsAllowed : UInt32,
-    ulFlags : UInt32,
-    ulNumCharsAllowed : UInt32,
-    ulPropTag : UInt32
+  struct DTBLEDIT
+    property ulbLpszCharsAllowed : UInt32
+    property ulFlags : UInt32
+    property ulNumCharsAllowed : UInt32
+    property ulPropTag : UInt32
+    def initialize(@ulbLpszCharsAllowed : UInt32, @ulFlags : UInt32, @ulNumCharsAllowed : UInt32, @ulPropTag : UInt32)
+    end
+  end
 
   @[Extern]
-  record DTBLLBX,
-    ulFlags : UInt32,
-    ulPRSetProperty : UInt32,
-    ulPRTableName : UInt32
+  struct DTBLLBX
+    property ulFlags : UInt32
+    property ulPRSetProperty : UInt32
+    property ulPRTableName : UInt32
+    def initialize(@ulFlags : UInt32, @ulPRSetProperty : UInt32, @ulPRTableName : UInt32)
+    end
+  end
 
   @[Extern]
-  record DTBLCOMBOBOX,
-    ulbLpszCharsAllowed : UInt32,
-    ulFlags : UInt32,
-    ulNumCharsAllowed : UInt32,
-    ulPRPropertyName : UInt32,
-    ulPRTableName : UInt32
+  struct DTBLCOMBOBOX
+    property ulbLpszCharsAllowed : UInt32
+    property ulFlags : UInt32
+    property ulNumCharsAllowed : UInt32
+    property ulPRPropertyName : UInt32
+    property ulPRTableName : UInt32
+    def initialize(@ulbLpszCharsAllowed : UInt32, @ulFlags : UInt32, @ulNumCharsAllowed : UInt32, @ulPRPropertyName : UInt32, @ulPRTableName : UInt32)
+    end
+  end
 
   @[Extern]
-  record DTBLDDLBX,
-    ulFlags : UInt32,
-    ulPRDisplayProperty : UInt32,
-    ulPRSetProperty : UInt32,
-    ulPRTableName : UInt32
+  struct DTBLDDLBX
+    property ulFlags : UInt32
+    property ulPRDisplayProperty : UInt32
+    property ulPRSetProperty : UInt32
+    property ulPRTableName : UInt32
+    def initialize(@ulFlags : UInt32, @ulPRDisplayProperty : UInt32, @ulPRSetProperty : UInt32, @ulPRTableName : UInt32)
+    end
+  end
 
   @[Extern]
-  record DTBLCHECKBOX,
-    ulbLpszLabel : UInt32,
-    ulFlags : UInt32,
-    ulPRPropertyName : UInt32
+  struct DTBLCHECKBOX
+    property ulbLpszLabel : UInt32
+    property ulFlags : UInt32
+    property ulPRPropertyName : UInt32
+    def initialize(@ulbLpszLabel : UInt32, @ulFlags : UInt32, @ulPRPropertyName : UInt32)
+    end
+  end
 
   @[Extern]
-  record DTBLGROUPBOX,
-    ulbLpszLabel : UInt32,
-    ulFlags : UInt32
+  struct DTBLGROUPBOX
+    property ulbLpszLabel : UInt32
+    property ulFlags : UInt32
+    def initialize(@ulbLpszLabel : UInt32, @ulFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record DTBLBUTTON,
-    ulbLpszLabel : UInt32,
-    ulFlags : UInt32,
-    ulPRControl : UInt32
+  struct DTBLBUTTON
+    property ulbLpszLabel : UInt32
+    property ulFlags : UInt32
+    property ulPRControl : UInt32
+    def initialize(@ulbLpszLabel : UInt32, @ulFlags : UInt32, @ulPRControl : UInt32)
+    end
+  end
 
   @[Extern]
-  record DTBLPAGE,
-    ulbLpszLabel : UInt32,
-    ulFlags : UInt32,
-    ulbLpszComponent : UInt32,
-    ulContext : UInt32
+  struct DTBLPAGE
+    property ulbLpszLabel : UInt32
+    property ulFlags : UInt32
+    property ulbLpszComponent : UInt32
+    property ulContext : UInt32
+    def initialize(@ulbLpszLabel : UInt32, @ulFlags : UInt32, @ulbLpszComponent : UInt32, @ulContext : UInt32)
+    end
+  end
 
   @[Extern]
-  record DTBLRADIOBUTTON,
-    ulbLpszLabel : UInt32,
-    ulFlags : UInt32,
-    ulcButtons : UInt32,
-    ulPropTag : UInt32,
-    lReturnValue : Int32
+  struct DTBLRADIOBUTTON
+    property ulbLpszLabel : UInt32
+    property ulFlags : UInt32
+    property ulcButtons : UInt32
+    property ulPropTag : UInt32
+    property lReturnValue : Int32
+    def initialize(@ulbLpszLabel : UInt32, @ulFlags : UInt32, @ulcButtons : UInt32, @ulPropTag : UInt32, @lReturnValue : Int32)
+    end
+  end
 
   @[Extern]
-  record DTBLMVLISTBOX,
-    ulFlags : UInt32,
-    ulMVPropTag : UInt32
+  struct DTBLMVLISTBOX
+    property ulFlags : UInt32
+    property ulMVPropTag : UInt32
+    def initialize(@ulFlags : UInt32, @ulMVPropTag : UInt32)
+    end
+  end
 
   @[Extern]
-  record DTBLMVDDLBX,
-    ulFlags : UInt32,
-    ulMVPropTag : UInt32
+  struct DTBLMVDDLBX
+    property ulFlags : UInt32
+    property ulMVPropTag : UInt32
+    def initialize(@ulFlags : UInt32, @ulMVPropTag : UInt32)
+    end
+  end
 
   @[Extern]
-  record DTCTL,
-    ulCtlType : UInt32,
-    ulCtlFlags : UInt32,
-    lpbNotif : UInt8*,
-    cbNotif : UInt32,
-    lpszFilter : Int8*,
-    ulItemID : UInt32,
-    ctl : Ctl_e__union_ do
+  struct DTCTL
+    property ulCtlType : UInt32
+    property ulCtlFlags : UInt32
+    property lpbNotif : UInt8*
+    property cbNotif : UInt32
+    property lpszFilter : Int8*
+    property ulItemID : UInt32
+    property ctl : Ctl_e__union_
 
     # Nested Type Ctl_e__union_
     @[Extern(union: true)]
-    record Ctl_e__union_,
-      lpv : Void*,
-      lplabel : Win32cr::System::AddressBook::DTBLLABEL*,
-      lpedit : Win32cr::System::AddressBook::DTBLEDIT*,
-      lplbx : Win32cr::System::AddressBook::DTBLLBX*,
-      lpcombobox : Win32cr::System::AddressBook::DTBLCOMBOBOX*,
-      lpddlbx : Win32cr::System::AddressBook::DTBLDDLBX*,
-      lpcheckbox : Win32cr::System::AddressBook::DTBLCHECKBOX*,
-      lpgroupbox : Win32cr::System::AddressBook::DTBLGROUPBOX*,
-      lpbutton : Win32cr::System::AddressBook::DTBLBUTTON*,
-      lpradiobutton : Win32cr::System::AddressBook::DTBLRADIOBUTTON*,
-      lpmvlbx : Win32cr::System::AddressBook::DTBLMVLISTBOX*,
-      lpmvddlbx : Win32cr::System::AddressBook::DTBLMVDDLBX*,
-      lppage : Win32cr::System::AddressBook::DTBLPAGE*
+    struct Ctl_e__union_
+    property lpv : Void*
+    property lplabel : Win32cr::System::AddressBook::DTBLLABEL*
+    property lpedit : Win32cr::System::AddressBook::DTBLEDIT*
+    property lplbx : Win32cr::System::AddressBook::DTBLLBX*
+    property lpcombobox : Win32cr::System::AddressBook::DTBLCOMBOBOX*
+    property lpddlbx : Win32cr::System::AddressBook::DTBLDDLBX*
+    property lpcheckbox : Win32cr::System::AddressBook::DTBLCHECKBOX*
+    property lpgroupbox : Win32cr::System::AddressBook::DTBLGROUPBOX*
+    property lpbutton : Win32cr::System::AddressBook::DTBLBUTTON*
+    property lpradiobutton : Win32cr::System::AddressBook::DTBLRADIOBUTTON*
+    property lpmvlbx : Win32cr::System::AddressBook::DTBLMVLISTBOX*
+    property lpmvddlbx : Win32cr::System::AddressBook::DTBLMVDDLBX*
+    property lppage : Win32cr::System::AddressBook::DTBLPAGE*
+    def initialize(@lpv : Void*, @lplabel : Win32cr::System::AddressBook::DTBLLABEL*, @lpedit : Win32cr::System::AddressBook::DTBLEDIT*, @lplbx : Win32cr::System::AddressBook::DTBLLBX*, @lpcombobox : Win32cr::System::AddressBook::DTBLCOMBOBOX*, @lpddlbx : Win32cr::System::AddressBook::DTBLDDLBX*, @lpcheckbox : Win32cr::System::AddressBook::DTBLCHECKBOX*, @lpgroupbox : Win32cr::System::AddressBook::DTBLGROUPBOX*, @lpbutton : Win32cr::System::AddressBook::DTBLBUTTON*, @lpradiobutton : Win32cr::System::AddressBook::DTBLRADIOBUTTON*, @lpmvlbx : Win32cr::System::AddressBook::DTBLMVLISTBOX*, @lpmvddlbx : Win32cr::System::AddressBook::DTBLMVDDLBX*, @lppage : Win32cr::System::AddressBook::DTBLPAGE*)
+    end
+    end
 
+    def initialize(@ulCtlType : UInt32, @ulCtlFlags : UInt32, @lpbNotif : UInt8*, @cbNotif : UInt32, @lpszFilter : Int8*, @ulItemID : UInt32, @ctl : Ctl_e__union_)
+    end
   end
 
   @[Extern]
-  record DTPAGE,
-    cctl : UInt32,
-    lpszResourceName : Int8*,
-    anonymous : Anonymous_e__Union_,
-    lpctl : Win32cr::System::AddressBook::DTCTL* do
+  struct DTPAGE
+    property cctl : UInt32
+    property lpszResourceName : Int8*
+    property anonymous : Anonymous_e__Union_
+    property lpctl : Win32cr::System::AddressBook::DTCTL*
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      lpszComponent : Int8*,
-      ulItemID : UInt32
+    struct Anonymous_e__Union_
+    property lpszComponent : Int8*
+    property ulItemID : UInt32
+    def initialize(@lpszComponent : Int8*, @ulItemID : UInt32)
+    end
+    end
 
+    def initialize(@cctl : UInt32, @lpszResourceName : Int8*, @anonymous : Anonymous_e__Union_, @lpctl : Win32cr::System::AddressBook::DTCTL*)
+    end
   end
 
   @[Extern]
-  record WABACTIONITEM_
-  @[Extern]
-  record WAB_PARAM,
-    cbSize : UInt32,
-    hwnd : Win32cr::Foundation::HWND,
-    szFileName : Win32cr::Foundation::PSTR,
-    ulFlags : UInt32,
-    guidPSExt : LibC::GUID
+  struct WABACTIONITEM_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record WABIMPORTPARAM,
-    cbSize : UInt32,
-    lpAdrBook : Void*,
-    hWnd : Win32cr::Foundation::HWND,
-    ulFlags : UInt32,
-    lpszFileName : Win32cr::Foundation::PSTR
+  struct WAB_PARAM
+    property cbSize : UInt32
+    property hwnd : Win32cr::Foundation::HWND
+    property szFileName : Win32cr::Foundation::PSTR
+    property ulFlags : UInt32
+    property guidPSExt : LibC::GUID
+    def initialize(@cbSize : UInt32, @hwnd : Win32cr::Foundation::HWND, @szFileName : Win32cr::Foundation::PSTR, @ulFlags : UInt32, @guidPSExt : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record WABEXTDISPLAY,
-    cbSize : UInt32,
-    lpWABObject : Void*,
-    lpAdrBook : Void*,
-    lpPropObj : Void*,
-    fReadOnly : Win32cr::Foundation::BOOL,
-    fDataChanged : Win32cr::Foundation::BOOL,
-    ulFlags : UInt32,
-    lpv : Void*,
-    lpsz : Int8*
+  struct WABIMPORTPARAM
+    property cbSize : UInt32
+    property lpAdrBook : Void*
+    property hWnd : Win32cr::Foundation::HWND
+    property ulFlags : UInt32
+    property lpszFileName : Win32cr::Foundation::PSTR
+    def initialize(@cbSize : UInt32, @lpAdrBook : Void*, @hWnd : Win32cr::Foundation::HWND, @ulFlags : UInt32, @lpszFileName : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record NOTIFKEY,
-    cb : UInt32,
-    ab : UInt8*
+  struct WABEXTDISPLAY
+    property cbSize : UInt32
+    property lpWABObject : Void*
+    property lpAdrBook : Void*
+    property lpPropObj : Void*
+    property fReadOnly : Win32cr::Foundation::BOOL
+    property fDataChanged : Win32cr::Foundation::BOOL
+    property ulFlags : UInt32
+    property lpv : Void*
+    property lpsz : Int8*
+    def initialize(@cbSize : UInt32, @lpWABObject : Void*, @lpAdrBook : Void*, @lpPropObj : Void*, @fReadOnly : Win32cr::Foundation::BOOL, @fDataChanged : Win32cr::Foundation::BOOL, @ulFlags : UInt32, @lpv : Void*, @lpsz : Int8*)
+    end
+  end
+
+  @[Extern]
+  struct NOTIFKEY
+    property cb : UInt32
+    property ab : UInt8*
+    def initialize(@cb : UInt32, @ab : UInt8*)
+    end
+  end
 
   @[Extern]
   record IMAPIAdviseSinkVtbl,
@@ -2509,7 +2736,6 @@ module Win32cr::System::AddressBook
 
 
   @[Extern]
-  #@[Com("ea22ebf0-87a4-11d1-9acf-00a0c91f9c8b")]
   record IWABExtInit, lpVtbl : IWABExtInitVtbl* do
     GUID = LibC::GUID.new(0xea22ebf0_u32, 0x87a4_u16, 0x11d1_u16, StaticArray[0x9a_u8, 0xcf_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x1f_u8, 0x9c_u8, 0x8b_u8])
     def query_interface(this : IWABExtInit*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

@@ -6,211 +6,211 @@ require "./../system/com.cr"
 module Win32cr::Networking::WinSock
   alias HWSAEVENT = LibC::IntPtrT
   alias SOCKET = LibC::UIntPtrT
-  alias LPCONDITIONPROC = Proc(Win32cr::Networking::WinSock::WSABUF*, Win32cr::Networking::WinSock::WSABUF*, Win32cr::Networking::WinSock::QOS*, Win32cr::Networking::WinSock::QOS*, Win32cr::Networking::WinSock::WSABUF*, Win32cr::Networking::WinSock::WSABUF*, UInt32*, LibC::UIntPtrT, Int32)*
+  alias LPCONDITIONPROC = Proc(Win32cr::Networking::WinSock::WSABUF*, Win32cr::Networking::WinSock::WSABUF*, Win32cr::Networking::WinSock::QOS*, Win32cr::Networking::WinSock::QOS*, Win32cr::Networking::WinSock::WSABUF*, Win32cr::Networking::WinSock::WSABUF*, UInt32*, LibC::UIntPtrT, Int32)
 
-  alias LPWSAOVERLAPPED_COMPLETION_ROUTINE = Proc(UInt32, UInt32, Win32cr::System::IO::OVERLAPPED*, UInt32, Void)*
+  alias LPWSAOVERLAPPED_COMPLETION_ROUTINE = Proc(UInt32, UInt32, Win32cr::System::IO::OVERLAPPED*, UInt32, Void)
 
-  alias LPFN_TRANSMITFILE = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Foundation::HANDLE, UInt32, UInt32, Win32cr::System::IO::OVERLAPPED*, Win32cr::Networking::WinSock::TRANSMIT_FILE_BUFFERS*, UInt32, Win32cr::Foundation::BOOL)*
+  alias LPFN_TRANSMITFILE = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Foundation::HANDLE, UInt32, UInt32, Win32cr::System::IO::OVERLAPPED*, Win32cr::Networking::WinSock::TRANSMIT_FILE_BUFFERS*, UInt32, Win32cr::Foundation::BOOL)
 
-  alias LPFN_ACCEPTEX = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::SOCKET, Void*, UInt32, UInt32, UInt32, UInt32*, Win32cr::System::IO::OVERLAPPED*, Win32cr::Foundation::BOOL)*
+  alias LPFN_ACCEPTEX = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::SOCKET, Void*, UInt32, UInt32, UInt32, UInt32*, Win32cr::System::IO::OVERLAPPED*, Win32cr::Foundation::BOOL)
 
-  alias LPFN_GETACCEPTEXSOCKADDRS = Proc(Void*, UInt32, UInt32, UInt32, Win32cr::Networking::WinSock::SOCKADDR**, Int32*, Win32cr::Networking::WinSock::SOCKADDR**, Int32*, Void)*
+  alias LPFN_GETACCEPTEXSOCKADDRS = Proc(Void*, UInt32, UInt32, UInt32, Win32cr::Networking::WinSock::SOCKADDR**, Int32*, Win32cr::Networking::WinSock::SOCKADDR**, Int32*, Void)
 
-  alias LPFN_TRANSMITPACKETS = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::TRANSMIT_PACKETS_ELEMENT*, UInt32, UInt32, Win32cr::System::IO::OVERLAPPED*, UInt32, Win32cr::Foundation::BOOL)*
+  alias LPFN_TRANSMITPACKETS = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::TRANSMIT_PACKETS_ELEMENT*, UInt32, UInt32, Win32cr::System::IO::OVERLAPPED*, UInt32, Win32cr::Foundation::BOOL)
 
-  alias LPFN_CONNECTEX = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::SOCKADDR*, Int32, Void*, UInt32, UInt32*, Win32cr::System::IO::OVERLAPPED*, Win32cr::Foundation::BOOL)*
+  alias LPFN_CONNECTEX = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::SOCKADDR*, Int32, Void*, UInt32, UInt32*, Win32cr::System::IO::OVERLAPPED*, Win32cr::Foundation::BOOL)
 
-  alias LPFN_DISCONNECTEX = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::System::IO::OVERLAPPED*, UInt32, UInt32, Win32cr::Foundation::BOOL)*
+  alias LPFN_DISCONNECTEX = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::System::IO::OVERLAPPED*, UInt32, UInt32, Win32cr::Foundation::BOOL)
 
-  alias LPFN_WSARECVMSG = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::WSAMSG*, UInt32*, Win32cr::System::IO::OVERLAPPED*, Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE, Int32)*
+  alias LPFN_WSARECVMSG = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::WSAMSG*, UInt32*, Win32cr::System::IO::OVERLAPPED*, Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE, Int32)
 
-  alias LPFN_WSASENDMSG = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::WSAMSG*, UInt32, UInt32*, Win32cr::System::IO::OVERLAPPED*, Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE, Int32)*
+  alias LPFN_WSASENDMSG = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::WSAMSG*, UInt32, UInt32*, Win32cr::System::IO::OVERLAPPED*, Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE, Int32)
 
-  alias LPFN_WSAPOLL = Proc(Win32cr::Networking::WinSock::WSAPOLLFD*, UInt32, Int32, Int32)*
+  alias LPFN_WSAPOLL = Proc(Win32cr::Networking::WinSock::WSAPOLLFD*, UInt32, Int32, Int32)
 
-  alias LPFN_RIORECEIVE = Proc(Win32cr::Networking::WinSock::RIO_RQ_t*, Win32cr::Networking::WinSock::RIO_BUF*, UInt32, UInt32, Void*, Win32cr::Foundation::BOOL)*
+  alias LPFN_RIORECEIVE = Proc(Win32cr::Networking::WinSock::RIO_RQ_t*, Win32cr::Networking::WinSock::RIO_BUF*, UInt32, UInt32, Void*, Win32cr::Foundation::BOOL)
 
-  alias LPFN_RIORECEIVEEX = Proc(Win32cr::Networking::WinSock::RIO_RQ_t*, Win32cr::Networking::WinSock::RIO_BUF*, UInt32, Win32cr::Networking::WinSock::RIO_BUF*, Win32cr::Networking::WinSock::RIO_BUF*, Win32cr::Networking::WinSock::RIO_BUF*, Win32cr::Networking::WinSock::RIO_BUF*, UInt32, Void*, Int32)*
+  alias LPFN_RIORECEIVEEX = Proc(Win32cr::Networking::WinSock::RIO_RQ_t*, Win32cr::Networking::WinSock::RIO_BUF*, UInt32, Win32cr::Networking::WinSock::RIO_BUF*, Win32cr::Networking::WinSock::RIO_BUF*, Win32cr::Networking::WinSock::RIO_BUF*, Win32cr::Networking::WinSock::RIO_BUF*, UInt32, Void*, Int32)
 
-  alias LPFN_RIOSEND = Proc(Win32cr::Networking::WinSock::RIO_RQ_t*, Win32cr::Networking::WinSock::RIO_BUF*, UInt32, UInt32, Void*, Win32cr::Foundation::BOOL)*
+  alias LPFN_RIOSEND = Proc(Win32cr::Networking::WinSock::RIO_RQ_t*, Win32cr::Networking::WinSock::RIO_BUF*, UInt32, UInt32, Void*, Win32cr::Foundation::BOOL)
 
-  alias LPFN_RIOSENDEX = Proc(Win32cr::Networking::WinSock::RIO_RQ_t*, Win32cr::Networking::WinSock::RIO_BUF*, UInt32, Win32cr::Networking::WinSock::RIO_BUF*, Win32cr::Networking::WinSock::RIO_BUF*, Win32cr::Networking::WinSock::RIO_BUF*, Win32cr::Networking::WinSock::RIO_BUF*, UInt32, Void*, Win32cr::Foundation::BOOL)*
+  alias LPFN_RIOSENDEX = Proc(Win32cr::Networking::WinSock::RIO_RQ_t*, Win32cr::Networking::WinSock::RIO_BUF*, UInt32, Win32cr::Networking::WinSock::RIO_BUF*, Win32cr::Networking::WinSock::RIO_BUF*, Win32cr::Networking::WinSock::RIO_BUF*, Win32cr::Networking::WinSock::RIO_BUF*, UInt32, Void*, Win32cr::Foundation::BOOL)
 
-  alias LPFN_RIOCLOSECOMPLETIONQUEUE = Proc(Win32cr::Networking::WinSock::RIO_CQ_t*, Void)*
+  alias LPFN_RIOCLOSECOMPLETIONQUEUE = Proc(Win32cr::Networking::WinSock::RIO_CQ_t*, Void)
 
-  alias LPFN_RIOCREATECOMPLETIONQUEUE = Proc(UInt32, Win32cr::Networking::WinSock::RIO_NOTIFICATION_COMPLETION*, Win32cr::Networking::WinSock::RIO_CQ_t*)*
+  alias LPFN_RIOCREATECOMPLETIONQUEUE = Proc(UInt32, Win32cr::Networking::WinSock::RIO_NOTIFICATION_COMPLETION*, Win32cr::Networking::WinSock::RIO_CQ_t*)
 
-  alias LPFN_RIOCREATEREQUESTQUEUE = Proc(Win32cr::Networking::WinSock::SOCKET, UInt32, UInt32, UInt32, UInt32, Win32cr::Networking::WinSock::RIO_CQ_t*, Win32cr::Networking::WinSock::RIO_CQ_t*, Void*, Win32cr::Networking::WinSock::RIO_RQ_t*)*
+  alias LPFN_RIOCREATEREQUESTQUEUE = Proc(Win32cr::Networking::WinSock::SOCKET, UInt32, UInt32, UInt32, UInt32, Win32cr::Networking::WinSock::RIO_CQ_t*, Win32cr::Networking::WinSock::RIO_CQ_t*, Void*, Win32cr::Networking::WinSock::RIO_RQ_t*)
 
-  alias LPFN_RIODEQUEUECOMPLETION = Proc(Win32cr::Networking::WinSock::RIO_CQ_t*, Win32cr::Networking::WinSock::RIORESULT*, UInt32, UInt32)*
+  alias LPFN_RIODEQUEUECOMPLETION = Proc(Win32cr::Networking::WinSock::RIO_CQ_t*, Win32cr::Networking::WinSock::RIORESULT*, UInt32, UInt32)
 
-  alias LPFN_RIODEREGISTERBUFFER = Proc(Win32cr::Networking::WinSock::RIO_BUFFERID_t*, Void)*
+  alias LPFN_RIODEREGISTERBUFFER = Proc(Win32cr::Networking::WinSock::RIO_BUFFERID_t*, Void)
 
-  alias LPFN_RIONOTIFY = Proc(Win32cr::Networking::WinSock::RIO_CQ_t*, Int32)*
+  alias LPFN_RIONOTIFY = Proc(Win32cr::Networking::WinSock::RIO_CQ_t*, Int32)
 
-  alias LPFN_RIOREGISTERBUFFER = Proc(Win32cr::Foundation::PSTR, UInt32, Win32cr::Networking::WinSock::RIO_BUFFERID_t*)*
+  alias LPFN_RIOREGISTERBUFFER = Proc(Win32cr::Foundation::PSTR, UInt32, Win32cr::Networking::WinSock::RIO_BUFFERID_t*)
 
-  alias LPFN_RIORESIZECOMPLETIONQUEUE = Proc(Win32cr::Networking::WinSock::RIO_CQ_t*, UInt32, Win32cr::Foundation::BOOL)*
+  alias LPFN_RIORESIZECOMPLETIONQUEUE = Proc(Win32cr::Networking::WinSock::RIO_CQ_t*, UInt32, Win32cr::Foundation::BOOL)
 
-  alias LPFN_RIORESIZEREQUESTQUEUE = Proc(Win32cr::Networking::WinSock::RIO_RQ_t*, UInt32, UInt32, Win32cr::Foundation::BOOL)*
+  alias LPFN_RIORESIZEREQUESTQUEUE = Proc(Win32cr::Networking::WinSock::RIO_RQ_t*, UInt32, UInt32, Win32cr::Foundation::BOOL)
 
-  alias LPBLOCKINGCALLBACK = Proc(LibC::UIntPtrT, Win32cr::Foundation::BOOL)*
+  alias LPBLOCKINGCALLBACK = Proc(LibC::UIntPtrT, Win32cr::Foundation::BOOL)
 
-  alias LPWSAUSERAPC = Proc(LibC::UIntPtrT, Void)*
+  alias LPWSAUSERAPC = Proc(LibC::UIntPtrT, Void)
 
-  alias LPWSPACCEPT = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::SOCKADDR*, Int32*, Win32cr::Networking::WinSock::LPCONDITIONPROC, LibC::UIntPtrT, Int32*, Win32cr::Networking::WinSock::SOCKET)*
+  alias LPWSPACCEPT = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::SOCKADDR*, Int32*, Win32cr::Networking::WinSock::LPCONDITIONPROC, LibC::UIntPtrT, Int32*, Win32cr::Networking::WinSock::SOCKET)
 
-  alias LPWSPADDRESSTOSTRING = Proc(Win32cr::Networking::WinSock::SOCKADDR*, UInt32, Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, UInt16*, UInt32*, Int32*, Int32)*
+  alias LPWSPADDRESSTOSTRING = Proc(Win32cr::Networking::WinSock::SOCKADDR*, UInt32, Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, UInt16*, UInt32*, Int32*, Int32)
 
-  alias LPWSPASYNCSELECT = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Foundation::HWND, UInt32, Int32, Int32*, Int32)*
+  alias LPWSPASYNCSELECT = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Foundation::HWND, UInt32, Int32, Int32*, Int32)
 
-  alias LPWSPBIND = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::SOCKADDR*, Int32, Int32*, Int32)*
+  alias LPWSPBIND = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::SOCKADDR*, Int32, Int32*, Int32)
 
-  alias LPWSPCANCELBLOCKINGCALL = Proc(Int32*, Int32)*
+  alias LPWSPCANCELBLOCKINGCALL = Proc(Int32*, Int32)
 
-  alias LPWSPCLEANUP = Proc(Int32*, Int32)*
+  alias LPWSPCLEANUP = Proc(Int32*, Int32)
 
-  alias LPWSPCLOSESOCKET = Proc(Win32cr::Networking::WinSock::SOCKET, Int32*, Int32)*
+  alias LPWSPCLOSESOCKET = Proc(Win32cr::Networking::WinSock::SOCKET, Int32*, Int32)
 
-  alias LPWSPCONNECT = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::SOCKADDR*, Int32, Win32cr::Networking::WinSock::WSABUF*, Win32cr::Networking::WinSock::WSABUF*, Win32cr::Networking::WinSock::QOS*, Win32cr::Networking::WinSock::QOS*, Int32*, Int32)*
+  alias LPWSPCONNECT = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::SOCKADDR*, Int32, Win32cr::Networking::WinSock::WSABUF*, Win32cr::Networking::WinSock::WSABUF*, Win32cr::Networking::WinSock::QOS*, Win32cr::Networking::WinSock::QOS*, Int32*, Int32)
 
-  alias LPWSPDUPLICATESOCKET = Proc(Win32cr::Networking::WinSock::SOCKET, UInt32, Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, Int32*, Int32)*
+  alias LPWSPDUPLICATESOCKET = Proc(Win32cr::Networking::WinSock::SOCKET, UInt32, Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, Int32*, Int32)
 
-  alias LPWSPENUMNETWORKEVENTS = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Foundation::HANDLE, Win32cr::Networking::WinSock::WSANETWORKEVENTS*, Int32*, Int32)*
+  alias LPWSPENUMNETWORKEVENTS = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Foundation::HANDLE, Win32cr::Networking::WinSock::WSANETWORKEVENTS*, Int32*, Int32)
 
-  alias LPWSPEVENTSELECT = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Foundation::HANDLE, Int32, Int32*, Int32)*
+  alias LPWSPEVENTSELECT = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Foundation::HANDLE, Int32, Int32*, Int32)
 
-  alias LPWSPGETOVERLAPPEDRESULT = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::System::IO::OVERLAPPED*, UInt32*, Win32cr::Foundation::BOOL, UInt32*, Int32*, Win32cr::Foundation::BOOL)*
+  alias LPWSPGETOVERLAPPEDRESULT = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::System::IO::OVERLAPPED*, UInt32*, Win32cr::Foundation::BOOL, UInt32*, Int32*, Win32cr::Foundation::BOOL)
 
-  alias LPWSPGETPEERNAME = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::SOCKADDR*, Int32*, Int32*, Int32)*
+  alias LPWSPGETPEERNAME = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::SOCKADDR*, Int32*, Int32*, Int32)
 
-  alias LPWSPGETSOCKNAME = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::SOCKADDR*, Int32*, Int32*, Int32)*
+  alias LPWSPGETSOCKNAME = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::SOCKADDR*, Int32*, Int32*, Int32)
 
-  alias LPWSPGETSOCKOPT = Proc(Win32cr::Networking::WinSock::SOCKET, Int32, Int32, Win32cr::Foundation::PSTR, Int32*, Int32*, Int32)*
+  alias LPWSPGETSOCKOPT = Proc(Win32cr::Networking::WinSock::SOCKET, Int32, Int32, Win32cr::Foundation::PSTR, Int32*, Int32*, Int32)
 
-  alias LPWSPGETQOSBYNAME = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::WSABUF*, Win32cr::Networking::WinSock::QOS*, Int32*, Win32cr::Foundation::BOOL)*
+  alias LPWSPGETQOSBYNAME = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::WSABUF*, Win32cr::Networking::WinSock::QOS*, Int32*, Win32cr::Foundation::BOOL)
 
-  alias LPWSPIOCTL = Proc(Win32cr::Networking::WinSock::SOCKET, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Win32cr::System::IO::OVERLAPPED*, Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE, Win32cr::Networking::WinSock::WSATHREADID*, Int32*, Int32)*
+  alias LPWSPIOCTL = Proc(Win32cr::Networking::WinSock::SOCKET, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Win32cr::System::IO::OVERLAPPED*, Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE, Win32cr::Networking::WinSock::WSATHREADID*, Int32*, Int32)
 
-  alias LPWSPJOINLEAF = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::SOCKADDR*, Int32, Win32cr::Networking::WinSock::WSABUF*, Win32cr::Networking::WinSock::WSABUF*, Win32cr::Networking::WinSock::QOS*, Win32cr::Networking::WinSock::QOS*, UInt32, Int32*, Win32cr::Networking::WinSock::SOCKET)*
+  alias LPWSPJOINLEAF = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::SOCKADDR*, Int32, Win32cr::Networking::WinSock::WSABUF*, Win32cr::Networking::WinSock::WSABUF*, Win32cr::Networking::WinSock::QOS*, Win32cr::Networking::WinSock::QOS*, UInt32, Int32*, Win32cr::Networking::WinSock::SOCKET)
 
-  alias LPWSPLISTEN = Proc(Win32cr::Networking::WinSock::SOCKET, Int32, Int32*, Int32)*
+  alias LPWSPLISTEN = Proc(Win32cr::Networking::WinSock::SOCKET, Int32, Int32*, Int32)
 
-  alias LPWSPRECV = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::WSABUF*, UInt32, UInt32*, UInt32*, Win32cr::System::IO::OVERLAPPED*, Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE, Win32cr::Networking::WinSock::WSATHREADID*, Int32*, Int32)*
+  alias LPWSPRECV = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::WSABUF*, UInt32, UInt32*, UInt32*, Win32cr::System::IO::OVERLAPPED*, Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE, Win32cr::Networking::WinSock::WSATHREADID*, Int32*, Int32)
 
-  alias LPWSPRECVDISCONNECT = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::WSABUF*, Int32*, Int32)*
+  alias LPWSPRECVDISCONNECT = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::WSABUF*, Int32*, Int32)
 
-  alias LPWSPRECVFROM = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::WSABUF*, UInt32, UInt32*, UInt32*, Win32cr::Networking::WinSock::SOCKADDR*, Int32*, Win32cr::System::IO::OVERLAPPED*, Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE, Win32cr::Networking::WinSock::WSATHREADID*, Int32*, Int32)*
+  alias LPWSPRECVFROM = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::WSABUF*, UInt32, UInt32*, UInt32*, Win32cr::Networking::WinSock::SOCKADDR*, Int32*, Win32cr::System::IO::OVERLAPPED*, Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE, Win32cr::Networking::WinSock::WSATHREADID*, Int32*, Int32)
 
-  alias LPWSPSELECT = Proc(Int32, Win32cr::Networking::WinSock::Fd_set*, Win32cr::Networking::WinSock::Fd_set*, Win32cr::Networking::WinSock::Fd_set*, Win32cr::Networking::WinSock::Timeval*, Int32*, Int32)*
+  alias LPWSPSELECT = Proc(Int32, Win32cr::Networking::WinSock::Fd_set*, Win32cr::Networking::WinSock::Fd_set*, Win32cr::Networking::WinSock::Fd_set*, Win32cr::Networking::WinSock::Timeval*, Int32*, Int32)
 
-  alias LPWSPSEND = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::WSABUF*, UInt32, UInt32*, UInt32, Win32cr::System::IO::OVERLAPPED*, Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE, Win32cr::Networking::WinSock::WSATHREADID*, Int32*, Int32)*
+  alias LPWSPSEND = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::WSABUF*, UInt32, UInt32*, UInt32, Win32cr::System::IO::OVERLAPPED*, Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE, Win32cr::Networking::WinSock::WSATHREADID*, Int32*, Int32)
 
-  alias LPWSPSENDDISCONNECT = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::WSABUF*, Int32*, Int32)*
+  alias LPWSPSENDDISCONNECT = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::WSABUF*, Int32*, Int32)
 
-  alias LPWSPSENDTO = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::WSABUF*, UInt32, UInt32*, UInt32, Win32cr::Networking::WinSock::SOCKADDR*, Int32, Win32cr::System::IO::OVERLAPPED*, Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE, Win32cr::Networking::WinSock::WSATHREADID*, Int32*, Int32)*
+  alias LPWSPSENDTO = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::WSABUF*, UInt32, UInt32*, UInt32, Win32cr::Networking::WinSock::SOCKADDR*, Int32, Win32cr::System::IO::OVERLAPPED*, Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE, Win32cr::Networking::WinSock::WSATHREADID*, Int32*, Int32)
 
-  alias LPWSPSETSOCKOPT = Proc(Win32cr::Networking::WinSock::SOCKET, Int32, Int32, Win32cr::Foundation::PSTR, Int32, Int32*, Int32)*
+  alias LPWSPSETSOCKOPT = Proc(Win32cr::Networking::WinSock::SOCKET, Int32, Int32, Win32cr::Foundation::PSTR, Int32, Int32*, Int32)
 
-  alias LPWSPSHUTDOWN = Proc(Win32cr::Networking::WinSock::SOCKET, Int32, Int32*, Int32)*
+  alias LPWSPSHUTDOWN = Proc(Win32cr::Networking::WinSock::SOCKET, Int32, Int32*, Int32)
 
-  alias LPWSPSOCKET = Proc(Int32, Int32, Int32, Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, UInt32, UInt32, Int32*, Win32cr::Networking::WinSock::SOCKET)*
+  alias LPWSPSOCKET = Proc(Int32, Int32, Int32, Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, UInt32, UInt32, Int32*, Win32cr::Networking::WinSock::SOCKET)
 
-  alias LPWSPSTRINGTOADDRESS = Proc(Win32cr::Foundation::PWSTR, Int32, Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, Win32cr::Networking::WinSock::SOCKADDR*, Int32*, Int32*, Int32)*
+  alias LPWSPSTRINGTOADDRESS = Proc(Win32cr::Foundation::PWSTR, Int32, Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, Win32cr::Networking::WinSock::SOCKADDR*, Int32*, Int32*, Int32)
 
-  alias LPWPUCLOSEEVENT = Proc(Win32cr::Foundation::HANDLE, Int32*, Win32cr::Foundation::BOOL)*
+  alias LPWPUCLOSEEVENT = Proc(Win32cr::Foundation::HANDLE, Int32*, Win32cr::Foundation::BOOL)
 
-  alias LPWPUCLOSESOCKETHANDLE = Proc(Win32cr::Networking::WinSock::SOCKET, Int32*, Int32)*
+  alias LPWPUCLOSESOCKETHANDLE = Proc(Win32cr::Networking::WinSock::SOCKET, Int32*, Int32)
 
-  alias LPWPUCREATEEVENT = Proc(Int32*, Win32cr::Foundation::HANDLE)*
+  alias LPWPUCREATEEVENT = Proc(Int32*, Win32cr::Foundation::HANDLE)
 
-  alias LPWPUCREATESOCKETHANDLE = Proc(UInt32, LibC::UIntPtrT, Int32*, Win32cr::Networking::WinSock::SOCKET)*
+  alias LPWPUCREATESOCKETHANDLE = Proc(UInt32, LibC::UIntPtrT, Int32*, Win32cr::Networking::WinSock::SOCKET)
 
-  alias LPWPUFDISSET = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::Fd_set*, Int32)*
+  alias LPWPUFDISSET = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::Networking::WinSock::Fd_set*, Int32)
 
-  alias LPWPUGETPROVIDERPATH = Proc(LibC::GUID*, UInt16*, Int32*, Int32*, Int32)*
+  alias LPWPUGETPROVIDERPATH = Proc(LibC::GUID*, UInt16*, Int32*, Int32*, Int32)
 
-  alias LPWPUMODIFYIFSHANDLE = Proc(UInt32, Win32cr::Networking::WinSock::SOCKET, Int32*, Win32cr::Networking::WinSock::SOCKET)*
+  alias LPWPUMODIFYIFSHANDLE = Proc(UInt32, Win32cr::Networking::WinSock::SOCKET, Int32*, Win32cr::Networking::WinSock::SOCKET)
 
-  alias LPWPUPOSTMESSAGE = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)*
+  alias LPWPUPOSTMESSAGE = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)
 
-  alias LPWPUQUERYBLOCKINGCALLBACK = Proc(UInt32, Win32cr::Networking::WinSock::LPBLOCKINGCALLBACK*, LibC::UIntPtrT*, Int32*, Int32)*
+  alias LPWPUQUERYBLOCKINGCALLBACK = Proc(UInt32, Win32cr::Networking::WinSock::LPBLOCKINGCALLBACK*, LibC::UIntPtrT*, Int32*, Int32)
 
-  alias LPWPUQUERYSOCKETHANDLECONTEXT = Proc(Win32cr::Networking::WinSock::SOCKET, LibC::UIntPtrT*, Int32*, Int32)*
+  alias LPWPUQUERYSOCKETHANDLECONTEXT = Proc(Win32cr::Networking::WinSock::SOCKET, LibC::UIntPtrT*, Int32*, Int32)
 
-  alias LPWPUQUEUEAPC = Proc(Win32cr::Networking::WinSock::WSATHREADID*, Win32cr::Networking::WinSock::LPWSAUSERAPC, LibC::UIntPtrT, Int32*, Int32)*
+  alias LPWPUQUEUEAPC = Proc(Win32cr::Networking::WinSock::WSATHREADID*, Win32cr::Networking::WinSock::LPWSAUSERAPC, LibC::UIntPtrT, Int32*, Int32)
 
-  alias LPWPURESETEVENT = Proc(Win32cr::Foundation::HANDLE, Int32*, Win32cr::Foundation::BOOL)*
+  alias LPWPURESETEVENT = Proc(Win32cr::Foundation::HANDLE, Int32*, Win32cr::Foundation::BOOL)
 
-  alias LPWPUSETEVENT = Proc(Win32cr::Foundation::HANDLE, Int32*, Win32cr::Foundation::BOOL)*
+  alias LPWPUSETEVENT = Proc(Win32cr::Foundation::HANDLE, Int32*, Win32cr::Foundation::BOOL)
 
-  alias LPWPUOPENCURRENTTHREAD = Proc(Win32cr::Networking::WinSock::WSATHREADID*, Int32*, Int32)*
+  alias LPWPUOPENCURRENTTHREAD = Proc(Win32cr::Networking::WinSock::WSATHREADID*, Int32*, Int32)
 
-  alias LPWPUCLOSETHREAD = Proc(Win32cr::Networking::WinSock::WSATHREADID*, Int32*, Int32)*
+  alias LPWPUCLOSETHREAD = Proc(Win32cr::Networking::WinSock::WSATHREADID*, Int32*, Int32)
 
-  alias LPWPUCOMPLETEOVERLAPPEDREQUEST = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::System::IO::OVERLAPPED*, UInt32, UInt32, Int32*, Int32)*
+  alias LPWPUCOMPLETEOVERLAPPEDREQUEST = Proc(Win32cr::Networking::WinSock::SOCKET, Win32cr::System::IO::OVERLAPPED*, UInt32, UInt32, Int32*, Int32)
 
-  alias LPWSPSTARTUP = Proc(UInt16, Win32cr::Networking::WinSock::WSPData*, Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, Win32cr::Networking::WinSock::WSPUPCALLTABLE, Win32cr::Networking::WinSock::WSPPROC_TABLE*, Int32)*
+  alias LPWSPSTARTUP = Proc(UInt16, Win32cr::Networking::WinSock::WSPData*, Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, Win32cr::Networking::WinSock::WSPUPCALLTABLE, Win32cr::Networking::WinSock::WSPPROC_TABLE*, Int32)
 
-  alias LPWSCENUMPROTOCOLS = Proc(Int32*, Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, UInt32*, Int32*, Int32)*
+  alias LPWSCENUMPROTOCOLS = Proc(Int32*, Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, UInt32*, Int32*, Int32)
 
-  alias LPWSCDEINSTALLPROVIDER = Proc(LibC::GUID*, Int32*, Int32)*
+  alias LPWSCDEINSTALLPROVIDER = Proc(LibC::GUID*, Int32*, Int32)
 
-  alias LPWSCINSTALLPROVIDER = Proc(LibC::GUID*, Win32cr::Foundation::PWSTR, Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, UInt32, Int32*, Int32)*
+  alias LPWSCINSTALLPROVIDER = Proc(LibC::GUID*, Win32cr::Foundation::PWSTR, Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, UInt32, Int32*, Int32)
 
-  alias LPWSCGETPROVIDERPATH = Proc(LibC::GUID*, UInt16*, Int32*, Int32*, Int32)*
+  alias LPWSCGETPROVIDERPATH = Proc(LibC::GUID*, UInt16*, Int32*, Int32*, Int32)
 
-  alias LPWSCUPDATEPROVIDER = Proc(LibC::GUID*, Win32cr::Foundation::PWSTR, Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, UInt32, Int32*, Int32)*
+  alias LPWSCUPDATEPROVIDER = Proc(LibC::GUID*, Win32cr::Foundation::PWSTR, Win32cr::Networking::WinSock::WSAPROTOCOL_INFOW*, UInt32, Int32*, Int32)
 
-  alias LPWSCINSTALLNAMESPACE = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, UInt32, LibC::GUID*, Int32)*
+  alias LPWSCINSTALLNAMESPACE = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, UInt32, LibC::GUID*, Int32)
 
-  alias LPWSCUNINSTALLNAMESPACE = Proc(LibC::GUID*, Int32)*
+  alias LPWSCUNINSTALLNAMESPACE = Proc(LibC::GUID*, Int32)
 
-  alias LPWSCENABLENSPROVIDER = Proc(LibC::GUID*, Win32cr::Foundation::BOOL, Int32)*
+  alias LPWSCENABLENSPROVIDER = Proc(LibC::GUID*, Win32cr::Foundation::BOOL, Int32)
 
-  alias LPNSPCLEANUP = Proc(LibC::GUID*, Int32)*
+  alias LPNSPCLEANUP = Proc(LibC::GUID*, Int32)
 
-  alias LPNSPLOOKUPSERVICEBEGIN = Proc(LibC::GUID*, Win32cr::Networking::WinSock::WSAQUERYSETW*, Win32cr::Networking::WinSock::WSASERVICECLASSINFOW*, UInt32, Win32cr::Foundation::HANDLE*, Int32)*
+  alias LPNSPLOOKUPSERVICEBEGIN = Proc(LibC::GUID*, Win32cr::Networking::WinSock::WSAQUERYSETW*, Win32cr::Networking::WinSock::WSASERVICECLASSINFOW*, UInt32, Win32cr::Foundation::HANDLE*, Int32)
 
-  alias LPNSPLOOKUPSERVICENEXT = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt32*, Win32cr::Networking::WinSock::WSAQUERYSETW*, Int32)*
+  alias LPNSPLOOKUPSERVICENEXT = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt32*, Win32cr::Networking::WinSock::WSAQUERYSETW*, Int32)
 
-  alias LPNSPIOCTL = Proc(Win32cr::Foundation::HANDLE, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Win32cr::Networking::WinSock::WSACOMPLETION*, Win32cr::Networking::WinSock::WSATHREADID*, Int32)*
+  alias LPNSPIOCTL = Proc(Win32cr::Foundation::HANDLE, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Win32cr::Networking::WinSock::WSACOMPLETION*, Win32cr::Networking::WinSock::WSATHREADID*, Int32)
 
-  alias LPNSPLOOKUPSERVICEEND = Proc(Win32cr::Foundation::HANDLE, Int32)*
+  alias LPNSPLOOKUPSERVICEEND = Proc(Win32cr::Foundation::HANDLE, Int32)
 
-  alias LPNSPSETSERVICE = Proc(LibC::GUID*, Win32cr::Networking::WinSock::WSASERVICECLASSINFOW*, Win32cr::Networking::WinSock::WSAQUERYSETW*, Win32cr::Networking::WinSock::WSAESETSERVICEOP, UInt32, Int32)*
+  alias LPNSPSETSERVICE = Proc(LibC::GUID*, Win32cr::Networking::WinSock::WSASERVICECLASSINFOW*, Win32cr::Networking::WinSock::WSAQUERYSETW*, Win32cr::Networking::WinSock::WSAESETSERVICEOP, UInt32, Int32)
 
-  alias LPNSPINSTALLSERVICECLASS = Proc(LibC::GUID*, Win32cr::Networking::WinSock::WSASERVICECLASSINFOW*, Int32)*
+  alias LPNSPINSTALLSERVICECLASS = Proc(LibC::GUID*, Win32cr::Networking::WinSock::WSASERVICECLASSINFOW*, Int32)
 
-  alias LPNSPREMOVESERVICECLASS = Proc(LibC::GUID*, LibC::GUID*, Int32)*
+  alias LPNSPREMOVESERVICECLASS = Proc(LibC::GUID*, LibC::GUID*, Int32)
 
-  alias LPNSPGETSERVICECLASSINFO = Proc(LibC::GUID*, UInt32*, Win32cr::Networking::WinSock::WSASERVICECLASSINFOW*, Int32)*
+  alias LPNSPGETSERVICECLASSINFO = Proc(LibC::GUID*, UInt32*, Win32cr::Networking::WinSock::WSASERVICECLASSINFOW*, Int32)
 
-  alias LPNSPSTARTUP = Proc(LibC::GUID*, Win32cr::Networking::WinSock::NSP_ROUTINE*, Int32)*
+  alias LPNSPSTARTUP = Proc(LibC::GUID*, Win32cr::Networking::WinSock::NSP_ROUTINE*, Int32)
 
-  alias LPNSPV2STARTUP = Proc(LibC::GUID*, Void**, Int32)*
+  alias LPNSPV2STARTUP = Proc(LibC::GUID*, Void**, Int32)
 
-  alias LPNSPV2CLEANUP = Proc(LibC::GUID*, Void*, Int32)*
+  alias LPNSPV2CLEANUP = Proc(LibC::GUID*, Void*, Int32)
 
-  alias LPNSPV2LOOKUPSERVICEBEGIN = Proc(LibC::GUID*, Win32cr::Networking::WinSock::WSAQUERYSET2W*, UInt32, Void*, Win32cr::Foundation::HANDLE*, Int32)*
+  alias LPNSPV2LOOKUPSERVICEBEGIN = Proc(LibC::GUID*, Win32cr::Networking::WinSock::WSAQUERYSET2W*, UInt32, Void*, Win32cr::Foundation::HANDLE*, Int32)
 
-  alias LPNSPV2LOOKUPSERVICENEXTEX = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt32, UInt32*, Win32cr::Networking::WinSock::WSAQUERYSET2W*, Void)*
+  alias LPNSPV2LOOKUPSERVICENEXTEX = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt32, UInt32*, Win32cr::Networking::WinSock::WSAQUERYSET2W*, Void)
 
-  alias LPNSPV2LOOKUPSERVICEEND = Proc(Win32cr::Foundation::HANDLE, Int32)*
+  alias LPNSPV2LOOKUPSERVICEEND = Proc(Win32cr::Foundation::HANDLE, Int32)
 
-  alias LPNSPV2SETSERVICEEX = Proc(Win32cr::Foundation::HANDLE, LibC::GUID*, Win32cr::Networking::WinSock::WSAQUERYSET2W*, Win32cr::Networking::WinSock::WSAESETSERVICEOP, UInt32, Void*, Void)*
+  alias LPNSPV2SETSERVICEEX = Proc(Win32cr::Foundation::HANDLE, LibC::GUID*, Win32cr::Networking::WinSock::WSAQUERYSET2W*, Win32cr::Networking::WinSock::WSAESETSERVICEOP, UInt32, Void*, Void)
 
-  alias LPNSPV2CLIENTSESSIONRUNDOWN = Proc(LibC::GUID*, Void*, Void)*
+  alias LPNSPV2CLIENTSESSIONRUNDOWN = Proc(LibC::GUID*, Void*, Void)
 
-  alias LPFN_NSPAPI = Proc(UInt32)*
+  alias LPFN_NSPAPI = Proc(UInt32)
 
-  alias LPSERVICE_CALLBACK_PROC = Proc(Win32cr::Foundation::LPARAM, Win32cr::Foundation::HANDLE, Void)*
+  alias LPSERVICE_CALLBACK_PROC = Proc(Win32cr::Foundation::LPARAM, Win32cr::Foundation::HANDLE, Void)
 
-  alias LPLOOKUPSERVICE_COMPLETION_ROUTINE = Proc(UInt32, UInt32, Win32cr::System::IO::OVERLAPPED*, Void)*
+  alias LPLOOKUPSERVICE_COMPLETION_ROUTINE = Proc(UInt32, UInt32, Win32cr::System::IO::OVERLAPPED*, Void)
 
-  alias LPWSCWRITEPROVIDERORDER = Proc(UInt32*, UInt32, Int32)*
+  alias LPWSCWRITEPROVIDERORDER = Proc(UInt32*, UInt32, Int32)
 
-  alias LPWSCWRITENAMESPACEORDER = Proc(LibC::GUID*, UInt32, Int32)*
+  alias LPWSCWRITENAMESPACEORDER = Proc(LibC::GUID*, UInt32, Int32)
 
   SOCKET_DEFAULT2_QM_POLICY = "aec2ef9c-3a4d-4d3e-8842-239942e39a47"
   REAL_TIME_NOTIFICATION_CAPABILITY = "6b59819a-5cae-492d-a901-2a3c2c50164f"
@@ -1922,2600 +1922,3539 @@ module Win32cr::Networking::WinSock
   end
 
   @[Extern]
-  record RIO_BUFFERID_t
-  @[Extern]
-  record RIO_CQ_t
-  @[Extern]
-  record RIO_RQ_t
-  @[Extern]
-  record FLOWSPEC,
-    token_rate : UInt32,
-    token_bucket_size : UInt32,
-    peak_bandwidth : UInt32,
-    latency : UInt32,
-    delay_variation : UInt32,
-    service_type : UInt32,
-    max_sdu_size : UInt32,
-    minimum_policed_size : UInt32
+  struct RIO_BUFFERID_t
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record IN_ADDR,
-    s_un : S_un_e__Union_ do
+  struct RIO_CQ_t
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct RIO_RQ_t
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct FLOWSPEC
+    property token_rate : UInt32
+    property token_bucket_size : UInt32
+    property peak_bandwidth : UInt32
+    property latency : UInt32
+    property delay_variation : UInt32
+    property service_type : UInt32
+    property max_sdu_size : UInt32
+    property minimum_policed_size : UInt32
+    def initialize(@token_rate : UInt32, @token_bucket_size : UInt32, @peak_bandwidth : UInt32, @latency : UInt32, @delay_variation : UInt32, @service_type : UInt32, @max_sdu_size : UInt32, @minimum_policed_size : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct IN_ADDR
+    property s_un : S_un_e__Union_
 
     # Nested Type S_un_e__Union_
     @[Extern(union: true)]
-    record S_un_e__Union_,
-      s_un_b : S_un_b_e__Struct_,
-      s_un_w : S_un_w_e__Struct_,
-      s_addr : UInt32 do
+    struct S_un_e__Union_
+    property s_un_b : S_un_b_e__Struct_
+    property s_un_w : S_un_w_e__Struct_
+    property s_addr : UInt32
 
       # Nested Type S_un_w_e__Struct_
       @[Extern]
-      record S_un_w_e__Struct_,
-        s_w1 : UInt16,
-        s_w2 : UInt16
+      struct S_un_w_e__Struct_
+    property s_w1 : UInt16
+    property s_w2 : UInt16
+    def initialize(@s_w1 : UInt16, @s_w2 : UInt16)
+    end
+      end
 
 
       # Nested Type S_un_b_e__Struct_
       @[Extern]
-      record S_un_b_e__Struct_,
-        s_b1 : UInt8,
-        s_b2 : UInt8,
-        s_b3 : UInt8,
-        s_b4 : UInt8
+      struct S_un_b_e__Struct_
+    property s_b1 : UInt8
+    property s_b2 : UInt8
+    property s_b3 : UInt8
+    property s_b4 : UInt8
+    def initialize(@s_b1 : UInt8, @s_b2 : UInt8, @s_b3 : UInt8, @s_b4 : UInt8)
+    end
+      end
 
+    def initialize(@s_un_b : S_un_b_e__Struct_, @s_un_w : S_un_w_e__Struct_, @s_addr : UInt32)
+    end
     end
 
+    def initialize(@s_un : S_un_e__Union_)
+    end
   end
 
   @[Extern]
-  record SOCKADDR,
-    sa_family : UInt16,
-    sa_data : Win32cr::Foundation::CHAR[14]
+  struct SOCKADDR
+    property sa_family : UInt16
+    property sa_data : Win32cr::Foundation::CHAR[14]
+    def initialize(@sa_family : UInt16, @sa_data : Win32cr::Foundation::CHAR[14])
+    end
+  end
 
   @[Extern]
-  record SOCKET_ADDRESS,
-    lpSockaddr : Win32cr::Networking::WinSock::SOCKADDR*,
-    iSockaddrLength : Int32
+  struct SOCKET_ADDRESS
+    property lpSockaddr : Win32cr::Networking::WinSock::SOCKADDR*
+    property iSockaddrLength : Int32
+    def initialize(@lpSockaddr : Win32cr::Networking::WinSock::SOCKADDR*, @iSockaddrLength : Int32)
+    end
+  end
 
   @[Extern]
-  record SOCKET_ADDRESS_LIST,
-    iAddressCount : Int32,
-    address : Win32cr::Networking::WinSock::SOCKET_ADDRESS*
+  struct SOCKET_ADDRESS_LIST
+    property iAddressCount : Int32
+    property address : Win32cr::Networking::WinSock::SOCKET_ADDRESS*
+    def initialize(@iAddressCount : Int32, @address : Win32cr::Networking::WinSock::SOCKET_ADDRESS*)
+    end
+  end
 
   @[Extern]
-  record CSADDR_INFO,
-    local_addr : Win32cr::Networking::WinSock::SOCKET_ADDRESS,
-    remote_addr : Win32cr::Networking::WinSock::SOCKET_ADDRESS,
-    iSocketType : Int32,
-    iProtocol : Int32
+  struct CSADDR_INFO
+    property local_addr : Win32cr::Networking::WinSock::SOCKET_ADDRESS
+    property remote_addr : Win32cr::Networking::WinSock::SOCKET_ADDRESS
+    property iSocketType : Int32
+    property iProtocol : Int32
+    def initialize(@local_addr : Win32cr::Networking::WinSock::SOCKET_ADDRESS, @remote_addr : Win32cr::Networking::WinSock::SOCKET_ADDRESS, @iSocketType : Int32, @iProtocol : Int32)
+    end
+  end
 
   @[Extern]
-  record SOCKADDR_STORAGE,
-    ss_family : UInt16,
-    __ss_pad1 : Win32cr::Foundation::CHAR[6],
-    __ss_align : Int64,
-    __ss_pad2 : Win32cr::Foundation::CHAR[112]
+  struct SOCKADDR_STORAGE
+    property ss_family : UInt16
+    property __ss_pad1 : Win32cr::Foundation::CHAR[6]
+    property __ss_align : Int64
+    property __ss_pad2 : Win32cr::Foundation::CHAR[112]
+    def initialize(@ss_family : UInt16, @__ss_pad1 : Win32cr::Foundation::CHAR[6], @__ss_align : Int64, @__ss_pad2 : Win32cr::Foundation::CHAR[112])
+    end
+  end
 
   @[Extern]
-  record SOCKADDR_STORAGE_XP,
-    ss_family : Int16,
-    __ss_pad1 : Win32cr::Foundation::CHAR[6],
-    __ss_align : Int64,
-    __ss_pad2 : Win32cr::Foundation::CHAR[112]
+  struct SOCKADDR_STORAGE_XP
+    property ss_family : Int16
+    property __ss_pad1 : Win32cr::Foundation::CHAR[6]
+    property __ss_align : Int64
+    property __ss_pad2 : Win32cr::Foundation::CHAR[112]
+    def initialize(@ss_family : Int16, @__ss_pad1 : Win32cr::Foundation::CHAR[6], @__ss_align : Int64, @__ss_pad2 : Win32cr::Foundation::CHAR[112])
+    end
+  end
 
   @[Extern]
-  record SOCKET_PROCESSOR_AFFINITY,
-    processor : Win32cr::System::Kernel::PROCESSOR_NUMBER,
-    numa_node_id : UInt16,
-    reserved : UInt16
+  struct SOCKET_PROCESSOR_AFFINITY
+    property processor : Win32cr::System::Kernel::PROCESSOR_NUMBER
+    property numa_node_id : UInt16
+    property reserved : UInt16
+    def initialize(@processor : Win32cr::System::Kernel::PROCESSOR_NUMBER, @numa_node_id : UInt16, @reserved : UInt16)
+    end
+  end
 
   @[Extern]
-  record SCOPE_ID,
-    anonymous : Anonymous_e__Union_ do
+  struct SCOPE_ID
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      value : UInt32 do
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property value : UInt32
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @value : UInt32)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record SOCKADDR_IN,
-    sin_family : UInt16,
-    sin_port : UInt16,
-    sin_addr : Win32cr::Networking::WinSock::IN_ADDR,
-    sin_zero : Win32cr::Foundation::CHAR[8]
+  struct SOCKADDR_IN
+    property sin_family : UInt16
+    property sin_port : UInt16
+    property sin_addr : Win32cr::Networking::WinSock::IN_ADDR
+    property sin_zero : Win32cr::Foundation::CHAR[8]
+    def initialize(@sin_family : UInt16, @sin_port : UInt16, @sin_addr : Win32cr::Networking::WinSock::IN_ADDR, @sin_zero : Win32cr::Foundation::CHAR[8])
+    end
+  end
 
   @[Extern]
-  record SOCKADDR_DL,
-    sdl_family : UInt16,
-    sdl_data : UInt8[8],
-    sdl_zero : UInt8[4]
+  struct SOCKADDR_DL
+    property sdl_family : UInt16
+    property sdl_data : UInt8[8]
+    property sdl_zero : UInt8[4]
+    def initialize(@sdl_family : UInt16, @sdl_data : UInt8[8], @sdl_zero : UInt8[4])
+    end
+  end
 
   @[Extern]
-  record WSABUF,
-    len : UInt32,
-    buf : Win32cr::Foundation::PSTR
+  struct WSABUF
+    property len : UInt32
+    property buf : Win32cr::Foundation::PSTR
+    def initialize(@len : UInt32, @buf : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record WSAMSG,
-    name : Win32cr::Networking::WinSock::SOCKADDR*,
-    namelen : Int32,
-    lpBuffers : Win32cr::Networking::WinSock::WSABUF*,
-    dwBufferCount : UInt32,
-    control : Win32cr::Networking::WinSock::WSABUF,
-    dwFlags : UInt32
+  struct WSAMSG
+    property name : Win32cr::Networking::WinSock::SOCKADDR*
+    property namelen : Int32
+    property lpBuffers : Win32cr::Networking::WinSock::WSABUF*
+    property dwBufferCount : UInt32
+    property control : Win32cr::Networking::WinSock::WSABUF
+    property dwFlags : UInt32
+    def initialize(@name : Win32cr::Networking::WinSock::SOCKADDR*, @namelen : Int32, @lpBuffers : Win32cr::Networking::WinSock::WSABUF*, @dwBufferCount : UInt32, @control : Win32cr::Networking::WinSock::WSABUF, @dwFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record Cmsghdr,
-    cmsg_len : LibC::UIntPtrT,
-    cmsg_level : Int32,
-    cmsg_type : Int32
+  struct Cmsghdr
+    property cmsg_len : LibC::UIntPtrT
+    property cmsg_level : Int32
+    property cmsg_type : Int32
+    def initialize(@cmsg_len : LibC::UIntPtrT, @cmsg_level : Int32, @cmsg_type : Int32)
+    end
+  end
 
   @[Extern]
-  record ADDRINFOA,
-    ai_flags : Int32,
-    ai_family : Int32,
-    ai_socktype : Int32,
-    ai_protocol : Int32,
-    ai_addrlen : LibC::UIntPtrT,
-    ai_canonname : Win32cr::Foundation::PSTR,
-    ai_addr : Win32cr::Networking::WinSock::SOCKADDR*,
-    ai_next : Win32cr::Networking::WinSock::ADDRINFOA*
+  struct ADDRINFOA
+    property ai_flags : Int32
+    property ai_family : Int32
+    property ai_socktype : Int32
+    property ai_protocol : Int32
+    property ai_addrlen : LibC::UIntPtrT
+    property ai_canonname : Win32cr::Foundation::PSTR
+    property ai_addr : Win32cr::Networking::WinSock::SOCKADDR*
+    property ai_next : Win32cr::Networking::WinSock::ADDRINFOA*
+    def initialize(@ai_flags : Int32, @ai_family : Int32, @ai_socktype : Int32, @ai_protocol : Int32, @ai_addrlen : LibC::UIntPtrT, @ai_canonname : Win32cr::Foundation::PSTR, @ai_addr : Win32cr::Networking::WinSock::SOCKADDR*, @ai_next : Win32cr::Networking::WinSock::ADDRINFOA*)
+    end
+  end
 
   @[Extern]
-  record Addrinfow,
-    ai_flags : Int32,
-    ai_family : Int32,
-    ai_socktype : Int32,
-    ai_protocol : Int32,
-    ai_addrlen : LibC::UIntPtrT,
-    ai_canonname : Win32cr::Foundation::PWSTR,
-    ai_addr : Win32cr::Networking::WinSock::SOCKADDR*,
-    ai_next : Win32cr::Networking::WinSock::Addrinfow*
+  struct Addrinfow
+    property ai_flags : Int32
+    property ai_family : Int32
+    property ai_socktype : Int32
+    property ai_protocol : Int32
+    property ai_addrlen : LibC::UIntPtrT
+    property ai_canonname : Win32cr::Foundation::PWSTR
+    property ai_addr : Win32cr::Networking::WinSock::SOCKADDR*
+    property ai_next : Win32cr::Networking::WinSock::Addrinfow*
+    def initialize(@ai_flags : Int32, @ai_family : Int32, @ai_socktype : Int32, @ai_protocol : Int32, @ai_addrlen : LibC::UIntPtrT, @ai_canonname : Win32cr::Foundation::PWSTR, @ai_addr : Win32cr::Networking::WinSock::SOCKADDR*, @ai_next : Win32cr::Networking::WinSock::Addrinfow*)
+    end
+  end
 
   @[Extern]
-  record Addrinfoexa,
-    ai_flags : Int32,
-    ai_family : Int32,
-    ai_socktype : Int32,
-    ai_protocol : Int32,
-    ai_addrlen : LibC::UIntPtrT,
-    ai_canonname : Win32cr::Foundation::PSTR,
-    ai_addr : Win32cr::Networking::WinSock::SOCKADDR*,
-    ai_blob : Void*,
-    ai_bloblen : LibC::UIntPtrT,
-    ai_provider : LibC::GUID*,
-    ai_next : Win32cr::Networking::WinSock::Addrinfoexa*
+  struct Addrinfoexa
+    property ai_flags : Int32
+    property ai_family : Int32
+    property ai_socktype : Int32
+    property ai_protocol : Int32
+    property ai_addrlen : LibC::UIntPtrT
+    property ai_canonname : Win32cr::Foundation::PSTR
+    property ai_addr : Win32cr::Networking::WinSock::SOCKADDR*
+    property ai_blob : Void*
+    property ai_bloblen : LibC::UIntPtrT
+    property ai_provider : LibC::GUID*
+    property ai_next : Win32cr::Networking::WinSock::Addrinfoexa*
+    def initialize(@ai_flags : Int32, @ai_family : Int32, @ai_socktype : Int32, @ai_protocol : Int32, @ai_addrlen : LibC::UIntPtrT, @ai_canonname : Win32cr::Foundation::PSTR, @ai_addr : Win32cr::Networking::WinSock::SOCKADDR*, @ai_blob : Void*, @ai_bloblen : LibC::UIntPtrT, @ai_provider : LibC::GUID*, @ai_next : Win32cr::Networking::WinSock::Addrinfoexa*)
+    end
+  end
 
   @[Extern]
-  record Addrinfoexw,
-    ai_flags : Int32,
-    ai_family : Int32,
-    ai_socktype : Int32,
-    ai_protocol : Int32,
-    ai_addrlen : LibC::UIntPtrT,
-    ai_canonname : Win32cr::Foundation::PWSTR,
-    ai_addr : Win32cr::Networking::WinSock::SOCKADDR*,
-    ai_blob : Void*,
-    ai_bloblen : LibC::UIntPtrT,
-    ai_provider : LibC::GUID*,
-    ai_next : Win32cr::Networking::WinSock::Addrinfoexw*
+  struct Addrinfoexw
+    property ai_flags : Int32
+    property ai_family : Int32
+    property ai_socktype : Int32
+    property ai_protocol : Int32
+    property ai_addrlen : LibC::UIntPtrT
+    property ai_canonname : Win32cr::Foundation::PWSTR
+    property ai_addr : Win32cr::Networking::WinSock::SOCKADDR*
+    property ai_blob : Void*
+    property ai_bloblen : LibC::UIntPtrT
+    property ai_provider : LibC::GUID*
+    property ai_next : Win32cr::Networking::WinSock::Addrinfoexw*
+    def initialize(@ai_flags : Int32, @ai_family : Int32, @ai_socktype : Int32, @ai_protocol : Int32, @ai_addrlen : LibC::UIntPtrT, @ai_canonname : Win32cr::Foundation::PWSTR, @ai_addr : Win32cr::Networking::WinSock::SOCKADDR*, @ai_blob : Void*, @ai_bloblen : LibC::UIntPtrT, @ai_provider : LibC::GUID*, @ai_next : Win32cr::Networking::WinSock::Addrinfoexw*)
+    end
+  end
 
   @[Extern]
-  record Addrinfoex2a,
-    ai_flags : Int32,
-    ai_family : Int32,
-    ai_socktype : Int32,
-    ai_protocol : Int32,
-    ai_addrlen : LibC::UIntPtrT,
-    ai_canonname : Win32cr::Foundation::PSTR,
-    ai_addr : Win32cr::Networking::WinSock::SOCKADDR*,
-    ai_blob : Void*,
-    ai_bloblen : LibC::UIntPtrT,
-    ai_provider : LibC::GUID*,
-    ai_next : Win32cr::Networking::WinSock::Addrinfoex2a*,
-    ai_version : Int32,
-    ai_fqdn : Win32cr::Foundation::PSTR
+  struct Addrinfoex2a
+    property ai_flags : Int32
+    property ai_family : Int32
+    property ai_socktype : Int32
+    property ai_protocol : Int32
+    property ai_addrlen : LibC::UIntPtrT
+    property ai_canonname : Win32cr::Foundation::PSTR
+    property ai_addr : Win32cr::Networking::WinSock::SOCKADDR*
+    property ai_blob : Void*
+    property ai_bloblen : LibC::UIntPtrT
+    property ai_provider : LibC::GUID*
+    property ai_next : Win32cr::Networking::WinSock::Addrinfoex2a*
+    property ai_version : Int32
+    property ai_fqdn : Win32cr::Foundation::PSTR
+    def initialize(@ai_flags : Int32, @ai_family : Int32, @ai_socktype : Int32, @ai_protocol : Int32, @ai_addrlen : LibC::UIntPtrT, @ai_canonname : Win32cr::Foundation::PSTR, @ai_addr : Win32cr::Networking::WinSock::SOCKADDR*, @ai_blob : Void*, @ai_bloblen : LibC::UIntPtrT, @ai_provider : LibC::GUID*, @ai_next : Win32cr::Networking::WinSock::Addrinfoex2a*, @ai_version : Int32, @ai_fqdn : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record Addrinfoex2w,
-    ai_flags : Int32,
-    ai_family : Int32,
-    ai_socktype : Int32,
-    ai_protocol : Int32,
-    ai_addrlen : LibC::UIntPtrT,
-    ai_canonname : Win32cr::Foundation::PWSTR,
-    ai_addr : Win32cr::Networking::WinSock::SOCKADDR*,
-    ai_blob : Void*,
-    ai_bloblen : LibC::UIntPtrT,
-    ai_provider : LibC::GUID*,
-    ai_next : Win32cr::Networking::WinSock::Addrinfoex2w*,
-    ai_version : Int32,
-    ai_fqdn : Win32cr::Foundation::PWSTR
+  struct Addrinfoex2w
+    property ai_flags : Int32
+    property ai_family : Int32
+    property ai_socktype : Int32
+    property ai_protocol : Int32
+    property ai_addrlen : LibC::UIntPtrT
+    property ai_canonname : Win32cr::Foundation::PWSTR
+    property ai_addr : Win32cr::Networking::WinSock::SOCKADDR*
+    property ai_blob : Void*
+    property ai_bloblen : LibC::UIntPtrT
+    property ai_provider : LibC::GUID*
+    property ai_next : Win32cr::Networking::WinSock::Addrinfoex2w*
+    property ai_version : Int32
+    property ai_fqdn : Win32cr::Foundation::PWSTR
+    def initialize(@ai_flags : Int32, @ai_family : Int32, @ai_socktype : Int32, @ai_protocol : Int32, @ai_addrlen : LibC::UIntPtrT, @ai_canonname : Win32cr::Foundation::PWSTR, @ai_addr : Win32cr::Networking::WinSock::SOCKADDR*, @ai_blob : Void*, @ai_bloblen : LibC::UIntPtrT, @ai_provider : LibC::GUID*, @ai_next : Win32cr::Networking::WinSock::Addrinfoex2w*, @ai_version : Int32, @ai_fqdn : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record Addrinfoex3,
-    ai_flags : Int32,
-    ai_family : Int32,
-    ai_socktype : Int32,
-    ai_protocol : Int32,
-    ai_addrlen : LibC::UIntPtrT,
-    ai_canonname : Win32cr::Foundation::PWSTR,
-    ai_addr : Win32cr::Networking::WinSock::SOCKADDR*,
-    ai_blob : Void*,
-    ai_bloblen : LibC::UIntPtrT,
-    ai_provider : LibC::GUID*,
-    ai_next : Win32cr::Networking::WinSock::Addrinfoex3*,
-    ai_version : Int32,
-    ai_fqdn : Win32cr::Foundation::PWSTR,
-    ai_interfaceindex : Int32
+  struct Addrinfoex3
+    property ai_flags : Int32
+    property ai_family : Int32
+    property ai_socktype : Int32
+    property ai_protocol : Int32
+    property ai_addrlen : LibC::UIntPtrT
+    property ai_canonname : Win32cr::Foundation::PWSTR
+    property ai_addr : Win32cr::Networking::WinSock::SOCKADDR*
+    property ai_blob : Void*
+    property ai_bloblen : LibC::UIntPtrT
+    property ai_provider : LibC::GUID*
+    property ai_next : Win32cr::Networking::WinSock::Addrinfoex3*
+    property ai_version : Int32
+    property ai_fqdn : Win32cr::Foundation::PWSTR
+    property ai_interfaceindex : Int32
+    def initialize(@ai_flags : Int32, @ai_family : Int32, @ai_socktype : Int32, @ai_protocol : Int32, @ai_addrlen : LibC::UIntPtrT, @ai_canonname : Win32cr::Foundation::PWSTR, @ai_addr : Win32cr::Networking::WinSock::SOCKADDR*, @ai_blob : Void*, @ai_bloblen : LibC::UIntPtrT, @ai_provider : LibC::GUID*, @ai_next : Win32cr::Networking::WinSock::Addrinfoex3*, @ai_version : Int32, @ai_fqdn : Win32cr::Foundation::PWSTR, @ai_interfaceindex : Int32)
+    end
+  end
 
   @[Extern]
-  record Addrinfoex4,
-    ai_flags : Int32,
-    ai_family : Int32,
-    ai_socktype : Int32,
-    ai_protocol : Int32,
-    ai_addrlen : LibC::UIntPtrT,
-    ai_canonname : Win32cr::Foundation::PWSTR,
-    ai_addr : Win32cr::Networking::WinSock::SOCKADDR*,
-    ai_blob : Void*,
-    ai_bloblen : LibC::UIntPtrT,
-    ai_provider : LibC::GUID*,
-    ai_next : Win32cr::Networking::WinSock::Addrinfoex4*,
-    ai_version : Int32,
-    ai_fqdn : Win32cr::Foundation::PWSTR,
-    ai_interfaceindex : Int32,
-    ai_resolutionhandle : Win32cr::Foundation::HANDLE
+  struct Addrinfoex4
+    property ai_flags : Int32
+    property ai_family : Int32
+    property ai_socktype : Int32
+    property ai_protocol : Int32
+    property ai_addrlen : LibC::UIntPtrT
+    property ai_canonname : Win32cr::Foundation::PWSTR
+    property ai_addr : Win32cr::Networking::WinSock::SOCKADDR*
+    property ai_blob : Void*
+    property ai_bloblen : LibC::UIntPtrT
+    property ai_provider : LibC::GUID*
+    property ai_next : Win32cr::Networking::WinSock::Addrinfoex4*
+    property ai_version : Int32
+    property ai_fqdn : Win32cr::Foundation::PWSTR
+    property ai_interfaceindex : Int32
+    property ai_resolutionhandle : Win32cr::Foundation::HANDLE
+    def initialize(@ai_flags : Int32, @ai_family : Int32, @ai_socktype : Int32, @ai_protocol : Int32, @ai_addrlen : LibC::UIntPtrT, @ai_canonname : Win32cr::Foundation::PWSTR, @ai_addr : Win32cr::Networking::WinSock::SOCKADDR*, @ai_blob : Void*, @ai_bloblen : LibC::UIntPtrT, @ai_provider : LibC::GUID*, @ai_next : Win32cr::Networking::WinSock::Addrinfoex4*, @ai_version : Int32, @ai_fqdn : Win32cr::Foundation::PWSTR, @ai_interfaceindex : Int32, @ai_resolutionhandle : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record Addrinfoex5,
-    ai_flags : Int32,
-    ai_family : Int32,
-    ai_socktype : Int32,
-    ai_protocol : Int32,
-    ai_addrlen : LibC::UIntPtrT,
-    ai_canonname : Win32cr::Foundation::PWSTR,
-    ai_addr : Win32cr::Networking::WinSock::SOCKADDR*,
-    ai_blob : Void*,
-    ai_bloblen : LibC::UIntPtrT,
-    ai_provider : LibC::GUID*,
-    ai_next : Win32cr::Networking::WinSock::Addrinfoex5*,
-    ai_version : Int32,
-    ai_fqdn : Win32cr::Foundation::PWSTR,
-    ai_interfaceindex : Int32,
-    ai_resolutionhandle : Win32cr::Foundation::HANDLE,
-    ai_ttl : UInt32
+  struct Addrinfoex5
+    property ai_flags : Int32
+    property ai_family : Int32
+    property ai_socktype : Int32
+    property ai_protocol : Int32
+    property ai_addrlen : LibC::UIntPtrT
+    property ai_canonname : Win32cr::Foundation::PWSTR
+    property ai_addr : Win32cr::Networking::WinSock::SOCKADDR*
+    property ai_blob : Void*
+    property ai_bloblen : LibC::UIntPtrT
+    property ai_provider : LibC::GUID*
+    property ai_next : Win32cr::Networking::WinSock::Addrinfoex5*
+    property ai_version : Int32
+    property ai_fqdn : Win32cr::Foundation::PWSTR
+    property ai_interfaceindex : Int32
+    property ai_resolutionhandle : Win32cr::Foundation::HANDLE
+    property ai_ttl : UInt32
+    def initialize(@ai_flags : Int32, @ai_family : Int32, @ai_socktype : Int32, @ai_protocol : Int32, @ai_addrlen : LibC::UIntPtrT, @ai_canonname : Win32cr::Foundation::PWSTR, @ai_addr : Win32cr::Networking::WinSock::SOCKADDR*, @ai_blob : Void*, @ai_bloblen : LibC::UIntPtrT, @ai_provider : LibC::GUID*, @ai_next : Win32cr::Networking::WinSock::Addrinfoex5*, @ai_version : Int32, @ai_fqdn : Win32cr::Foundation::PWSTR, @ai_interfaceindex : Int32, @ai_resolutionhandle : Win32cr::Foundation::HANDLE, @ai_ttl : UInt32)
+    end
+  end
 
   @[Extern]
-  record Addrinfo_dns_server,
-    ai_servertype : UInt32,
-    ai_flags : UInt64,
-    ai_addrlen : UInt32,
-    ai_addr : Win32cr::Networking::WinSock::SOCKADDR*,
-    anonymous : Anonymous_e__Union_ do
+  struct Addrinfo_dns_server
+    property ai_servertype : UInt32
+    property ai_flags : UInt64
+    property ai_addrlen : UInt32
+    property ai_addr : Win32cr::Networking::WinSock::SOCKADDR*
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      ai_template : Win32cr::Foundation::PWSTR
+    struct Anonymous_e__Union_
+    property ai_template : Win32cr::Foundation::PWSTR
+    def initialize(@ai_template : Win32cr::Foundation::PWSTR)
+    end
+    end
 
+    def initialize(@ai_servertype : UInt32, @ai_flags : UInt64, @ai_addrlen : UInt32, @ai_addr : Win32cr::Networking::WinSock::SOCKADDR*, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record Addrinfoex6,
-    ai_flags : Int32,
-    ai_family : Int32,
-    ai_socktype : Int32,
-    ai_protocol : Int32,
-    ai_addrlen : LibC::UIntPtrT,
-    ai_canonname : Win32cr::Foundation::PWSTR,
-    ai_addr : Win32cr::Networking::WinSock::SOCKADDR*,
-    ai_blob : Void*,
-    ai_bloblen : LibC::UIntPtrT,
-    ai_provider : LibC::GUID*,
-    ai_next : Win32cr::Networking::WinSock::Addrinfoex5*,
-    ai_version : Int32,
-    ai_fqdn : Win32cr::Foundation::PWSTR,
-    ai_interfaceindex : Int32,
-    ai_resolutionhandle : Win32cr::Foundation::HANDLE,
-    ai_ttl : UInt32,
-    ai_numservers : UInt32,
-    ai_servers : Win32cr::Networking::WinSock::Addrinfo_dns_server*,
-    ai_responseflags : UInt64
+  struct Addrinfoex6
+    property ai_flags : Int32
+    property ai_family : Int32
+    property ai_socktype : Int32
+    property ai_protocol : Int32
+    property ai_addrlen : LibC::UIntPtrT
+    property ai_canonname : Win32cr::Foundation::PWSTR
+    property ai_addr : Win32cr::Networking::WinSock::SOCKADDR*
+    property ai_blob : Void*
+    property ai_bloblen : LibC::UIntPtrT
+    property ai_provider : LibC::GUID*
+    property ai_next : Win32cr::Networking::WinSock::Addrinfoex5*
+    property ai_version : Int32
+    property ai_fqdn : Win32cr::Foundation::PWSTR
+    property ai_interfaceindex : Int32
+    property ai_resolutionhandle : Win32cr::Foundation::HANDLE
+    property ai_ttl : UInt32
+    property ai_numservers : UInt32
+    property ai_servers : Win32cr::Networking::WinSock::Addrinfo_dns_server*
+    property ai_responseflags : UInt64
+    def initialize(@ai_flags : Int32, @ai_family : Int32, @ai_socktype : Int32, @ai_protocol : Int32, @ai_addrlen : LibC::UIntPtrT, @ai_canonname : Win32cr::Foundation::PWSTR, @ai_addr : Win32cr::Networking::WinSock::SOCKADDR*, @ai_blob : Void*, @ai_bloblen : LibC::UIntPtrT, @ai_provider : LibC::GUID*, @ai_next : Win32cr::Networking::WinSock::Addrinfoex5*, @ai_version : Int32, @ai_fqdn : Win32cr::Foundation::PWSTR, @ai_interfaceindex : Int32, @ai_resolutionhandle : Win32cr::Foundation::HANDLE, @ai_ttl : UInt32, @ai_numservers : UInt32, @ai_servers : Win32cr::Networking::WinSock::Addrinfo_dns_server*, @ai_responseflags : UInt64)
+    end
+  end
 
   @[Extern]
-  record Fd_set,
-    fd_count : UInt32,
-    fd_array : Win32cr::Networking::WinSock::SOCKET[64]
+  struct Fd_set
+    property fd_count : UInt32
+    property fd_array : Win32cr::Networking::WinSock::SOCKET[64]
+    def initialize(@fd_count : UInt32, @fd_array : Win32cr::Networking::WinSock::SOCKET[64])
+    end
+  end
 
   @[Extern]
-  record Timeval,
-    tv_sec : Int32,
-    tv_usec : Int32
+  struct Timeval
+    property tv_sec : Int32
+    property tv_usec : Int32
+    def initialize(@tv_sec : Int32, @tv_usec : Int32)
+    end
+  end
 
   @[Extern]
-  record Hostent,
-    h_name : Win32cr::Foundation::PSTR,
-    h_aliases : Int8**,
-    h_addrtype : Int16,
-    h_length : Int16,
-    h_addr_list : Int8**
+  struct Hostent
+    property h_name : Win32cr::Foundation::PSTR
+    property h_aliases : Int8**
+    property h_addrtype : Int16
+    property h_length : Int16
+    property h_addr_list : Int8**
+    def initialize(@h_name : Win32cr::Foundation::PSTR, @h_aliases : Int8**, @h_addrtype : Int16, @h_length : Int16, @h_addr_list : Int8**)
+    end
+  end
 
   @[Extern]
-  record Netent,
-    n_name : Win32cr::Foundation::PSTR,
-    n_aliases : Int8**,
-    n_addrtype : Int16,
-    n_net : UInt32
+  struct Netent
+    property n_name : Win32cr::Foundation::PSTR
+    property n_aliases : Int8**
+    property n_addrtype : Int16
+    property n_net : UInt32
+    def initialize(@n_name : Win32cr::Foundation::PSTR, @n_aliases : Int8**, @n_addrtype : Int16, @n_net : UInt32)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record Servent,
-    s_name : Win32cr::Foundation::PSTR,
-    s_aliases : Int8**,
-    s_proto : Win32cr::Foundation::PSTR,
-    s_port : Int16
+  struct Servent
+    property s_name : Win32cr::Foundation::PSTR
+    property s_aliases : Int8**
+    property s_proto : Win32cr::Foundation::PSTR
+    property s_port : Int16
+    def initialize(@s_name : Win32cr::Foundation::PSTR, @s_aliases : Int8**, @s_proto : Win32cr::Foundation::PSTR, @s_port : Int16)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record Protoent,
-    p_name : Win32cr::Foundation::PSTR,
-    p_aliases : Int8**,
-    p_proto : Int16
+  struct Protoent
+    property p_name : Win32cr::Foundation::PSTR
+    property p_aliases : Int8**
+    property p_proto : Int16
+    def initialize(@p_name : Win32cr::Foundation::PSTR, @p_aliases : Int8**, @p_proto : Int16)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record WSAData,
-    wVersion : UInt16,
-    wHighVersion : UInt16,
-    iMaxSockets : UInt16,
-    iMaxUdpDg : UInt16,
-    lpVendorInfo : Win32cr::Foundation::PSTR,
-    szDescription : Win32cr::Foundation::CHAR[257],
-    szSystemStatus : Win32cr::Foundation::CHAR[129]
+  struct WSAData
+    property wVersion : UInt16
+    property wHighVersion : UInt16
+    property iMaxSockets : UInt16
+    property iMaxUdpDg : UInt16
+    property lpVendorInfo : Win32cr::Foundation::PSTR
+    property szDescription : Win32cr::Foundation::CHAR[257]
+    property szSystemStatus : Win32cr::Foundation::CHAR[129]
+    def initialize(@wVersion : UInt16, @wHighVersion : UInt16, @iMaxSockets : UInt16, @iMaxUdpDg : UInt16, @lpVendorInfo : Win32cr::Foundation::PSTR, @szDescription : Win32cr::Foundation::CHAR[257], @szSystemStatus : Win32cr::Foundation::CHAR[129])
+    end
+  end
   {% end %}
 
   @[Extern]
-  record Sockproto,
-    sp_family : UInt16,
-    sp_protocol : UInt16
+  struct Sockproto
+    property sp_family : UInt16
+    property sp_protocol : UInt16
+    def initialize(@sp_family : UInt16, @sp_protocol : UInt16)
+    end
+  end
 
   @[Extern]
-  record Linger,
-    l_onoff : UInt16,
-    l_linger : UInt16
+  struct Linger
+    property l_onoff : UInt16
+    property l_linger : UInt16
+    def initialize(@l_onoff : UInt16, @l_linger : UInt16)
+    end
+  end
 
   @[Extern]
-  record QOS,
-    sending_flowspec : Win32cr::Networking::WinSock::FLOWSPEC,
-    receiving_flowspec : Win32cr::Networking::WinSock::FLOWSPEC,
-    provider_specific : Win32cr::Networking::WinSock::WSABUF
+  struct QOS
+    property sending_flowspec : Win32cr::Networking::WinSock::FLOWSPEC
+    property receiving_flowspec : Win32cr::Networking::WinSock::FLOWSPEC
+    property provider_specific : Win32cr::Networking::WinSock::WSABUF
+    def initialize(@sending_flowspec : Win32cr::Networking::WinSock::FLOWSPEC, @receiving_flowspec : Win32cr::Networking::WinSock::FLOWSPEC, @provider_specific : Win32cr::Networking::WinSock::WSABUF)
+    end
+  end
 
   @[Extern]
-  record WSANETWORKEVENTS,
-    lNetworkEvents : Int32,
-    iErrorCode : Int32[10]
+  struct WSANETWORKEVENTS
+    property lNetworkEvents : Int32
+    property iErrorCode : Int32[10]
+    def initialize(@lNetworkEvents : Int32, @iErrorCode : Int32[10])
+    end
+  end
 
   @[Extern]
-  record WSAPROTOCOLCHAIN,
-    chain_len : Int32,
-    chain_entries : UInt32[7]
+  struct WSAPROTOCOLCHAIN
+    property chain_len : Int32
+    property chain_entries : UInt32[7]
+    def initialize(@chain_len : Int32, @chain_entries : UInt32[7])
+    end
+  end
 
   @[Extern]
-  record WSAPROTOCOL_INFOA,
-    dwServiceFlags1 : UInt32,
-    dwServiceFlags2 : UInt32,
-    dwServiceFlags3 : UInt32,
-    dwServiceFlags4 : UInt32,
-    dwProviderFlags : UInt32,
-    provider_id : LibC::GUID,
-    dwCatalogEntryId : UInt32,
-    protocol_chain : Win32cr::Networking::WinSock::WSAPROTOCOLCHAIN,
-    iVersion : Int32,
-    iAddressFamily : Int32,
-    iMaxSockAddr : Int32,
-    iMinSockAddr : Int32,
-    iSocketType : Int32,
-    iProtocol : Int32,
-    iProtocolMaxOffset : Int32,
-    iNetworkByteOrder : Int32,
-    iSecurityScheme : Int32,
-    dwMessageSize : UInt32,
-    dwProviderReserved : UInt32,
-    szProtocol : Win32cr::Foundation::CHAR[256]
+  struct WSAPROTOCOL_INFOA
+    property dwServiceFlags1 : UInt32
+    property dwServiceFlags2 : UInt32
+    property dwServiceFlags3 : UInt32
+    property dwServiceFlags4 : UInt32
+    property dwProviderFlags : UInt32
+    property provider_id : LibC::GUID
+    property dwCatalogEntryId : UInt32
+    property protocol_chain : Win32cr::Networking::WinSock::WSAPROTOCOLCHAIN
+    property iVersion : Int32
+    property iAddressFamily : Int32
+    property iMaxSockAddr : Int32
+    property iMinSockAddr : Int32
+    property iSocketType : Int32
+    property iProtocol : Int32
+    property iProtocolMaxOffset : Int32
+    property iNetworkByteOrder : Int32
+    property iSecurityScheme : Int32
+    property dwMessageSize : UInt32
+    property dwProviderReserved : UInt32
+    property szProtocol : Win32cr::Foundation::CHAR[256]
+    def initialize(@dwServiceFlags1 : UInt32, @dwServiceFlags2 : UInt32, @dwServiceFlags3 : UInt32, @dwServiceFlags4 : UInt32, @dwProviderFlags : UInt32, @provider_id : LibC::GUID, @dwCatalogEntryId : UInt32, @protocol_chain : Win32cr::Networking::WinSock::WSAPROTOCOLCHAIN, @iVersion : Int32, @iAddressFamily : Int32, @iMaxSockAddr : Int32, @iMinSockAddr : Int32, @iSocketType : Int32, @iProtocol : Int32, @iProtocolMaxOffset : Int32, @iNetworkByteOrder : Int32, @iSecurityScheme : Int32, @dwMessageSize : UInt32, @dwProviderReserved : UInt32, @szProtocol : Win32cr::Foundation::CHAR[256])
+    end
+  end
 
   @[Extern]
-  record WSAPROTOCOL_INFOW,
-    dwServiceFlags1 : UInt32,
-    dwServiceFlags2 : UInt32,
-    dwServiceFlags3 : UInt32,
-    dwServiceFlags4 : UInt32,
-    dwProviderFlags : UInt32,
-    provider_id : LibC::GUID,
-    dwCatalogEntryId : UInt32,
-    protocol_chain : Win32cr::Networking::WinSock::WSAPROTOCOLCHAIN,
-    iVersion : Int32,
-    iAddressFamily : Int32,
-    iMaxSockAddr : Int32,
-    iMinSockAddr : Int32,
-    iSocketType : Int32,
-    iProtocol : Int32,
-    iProtocolMaxOffset : Int32,
-    iNetworkByteOrder : Int32,
-    iSecurityScheme : Int32,
-    dwMessageSize : UInt32,
-    dwProviderReserved : UInt32,
-    szProtocol : UInt16[256]
+  struct WSAPROTOCOL_INFOW
+    property dwServiceFlags1 : UInt32
+    property dwServiceFlags2 : UInt32
+    property dwServiceFlags3 : UInt32
+    property dwServiceFlags4 : UInt32
+    property dwProviderFlags : UInt32
+    property provider_id : LibC::GUID
+    property dwCatalogEntryId : UInt32
+    property protocol_chain : Win32cr::Networking::WinSock::WSAPROTOCOLCHAIN
+    property iVersion : Int32
+    property iAddressFamily : Int32
+    property iMaxSockAddr : Int32
+    property iMinSockAddr : Int32
+    property iSocketType : Int32
+    property iProtocol : Int32
+    property iProtocolMaxOffset : Int32
+    property iNetworkByteOrder : Int32
+    property iSecurityScheme : Int32
+    property dwMessageSize : UInt32
+    property dwProviderReserved : UInt32
+    property szProtocol : UInt16[256]
+    def initialize(@dwServiceFlags1 : UInt32, @dwServiceFlags2 : UInt32, @dwServiceFlags3 : UInt32, @dwServiceFlags4 : UInt32, @dwProviderFlags : UInt32, @provider_id : LibC::GUID, @dwCatalogEntryId : UInt32, @protocol_chain : Win32cr::Networking::WinSock::WSAPROTOCOLCHAIN, @iVersion : Int32, @iAddressFamily : Int32, @iMaxSockAddr : Int32, @iMinSockAddr : Int32, @iSocketType : Int32, @iProtocol : Int32, @iProtocolMaxOffset : Int32, @iNetworkByteOrder : Int32, @iSecurityScheme : Int32, @dwMessageSize : UInt32, @dwProviderReserved : UInt32, @szProtocol : UInt16[256])
+    end
+  end
 
   @[Extern]
-  record WSACOMPLETION,
-    type__ : Win32cr::Networking::WinSock::WSACOMPLETIONTYPE,
-    parameters : Parameters_e__Union_ do
+  struct WSACOMPLETION
+    property type__ : Win32cr::Networking::WinSock::WSACOMPLETIONTYPE
+    property parameters : Parameters_e__Union_
 
     # Nested Type Parameters_e__Union_
     @[Extern(union: true)]
-    record Parameters_e__Union_,
-      window_message : WindowMessage_e__Struct_,
-      event : Event_e__Struct_,
-      apc : Apc_e__Struct_,
-      port : Port_e__Struct_ do
+    struct Parameters_e__Union_
+    property window_message : WindowMessage_e__Struct_
+    property event : Event_e__Struct_
+    property apc : Apc_e__Struct_
+    property port : Port_e__Struct_
 
       # Nested Type Port_e__Struct_
       @[Extern]
-      record Port_e__Struct_,
-        lpOverlapped : Win32cr::System::IO::OVERLAPPED*,
-        hPort : Win32cr::Foundation::HANDLE,
-        key : LibC::UIntPtrT
+      struct Port_e__Struct_
+    property lpOverlapped : Win32cr::System::IO::OVERLAPPED*
+    property hPort : Win32cr::Foundation::HANDLE
+    property key : LibC::UIntPtrT
+    def initialize(@lpOverlapped : Win32cr::System::IO::OVERLAPPED*, @hPort : Win32cr::Foundation::HANDLE, @key : LibC::UIntPtrT)
+    end
+      end
 
 
       # Nested Type Event_e__Struct_
       @[Extern]
-      record Event_e__Struct_,
-        lpOverlapped : Win32cr::System::IO::OVERLAPPED*
+      struct Event_e__Struct_
+    property lpOverlapped : Win32cr::System::IO::OVERLAPPED*
+    def initialize(@lpOverlapped : Win32cr::System::IO::OVERLAPPED*)
+    end
+      end
 
 
       # Nested Type Apc_e__Struct_
       @[Extern]
-      record Apc_e__Struct_,
-        lpOverlapped : Win32cr::System::IO::OVERLAPPED*,
-        lpfnCompletionProc : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE
+      struct Apc_e__Struct_
+    property lpOverlapped : Win32cr::System::IO::OVERLAPPED*
+    property lpfnCompletionProc : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE
+    def initialize(@lpOverlapped : Win32cr::System::IO::OVERLAPPED*, @lpfnCompletionProc : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE)
+    end
+      end
 
 
       # Nested Type WindowMessage_e__Struct_
       @[Extern]
-      record WindowMessage_e__Struct_,
-        hWnd : Win32cr::Foundation::HWND,
-        uMsg : UInt32,
-        context : Win32cr::Foundation::WPARAM
+      struct WindowMessage_e__Struct_
+    property hWnd : Win32cr::Foundation::HWND
+    property uMsg : UInt32
+    property context : Win32cr::Foundation::WPARAM
+    def initialize(@hWnd : Win32cr::Foundation::HWND, @uMsg : UInt32, @context : Win32cr::Foundation::WPARAM)
+    end
+      end
 
+    def initialize(@window_message : WindowMessage_e__Struct_, @event : Event_e__Struct_, @apc : Apc_e__Struct_, @port : Port_e__Struct_)
+    end
     end
 
+    def initialize(@type__ : Win32cr::Networking::WinSock::WSACOMPLETIONTYPE, @parameters : Parameters_e__Union_)
+    end
   end
 
   @[Extern]
-  record AFPROTOCOLS,
-    iAddressFamily : Int32,
-    iProtocol : Int32
+  struct AFPROTOCOLS
+    property iAddressFamily : Int32
+    property iProtocol : Int32
+    def initialize(@iAddressFamily : Int32, @iProtocol : Int32)
+    end
+  end
 
   @[Extern]
-  record WSAVERSION,
-    dwVersion : UInt32,
-    ecHow : Win32cr::Networking::WinSock::WSAECOMPARATOR
+  struct WSAVERSION
+    property dwVersion : UInt32
+    property ecHow : Win32cr::Networking::WinSock::WSAECOMPARATOR
+    def initialize(@dwVersion : UInt32, @ecHow : Win32cr::Networking::WinSock::WSAECOMPARATOR)
+    end
+  end
 
   @[Extern]
-  record WSAQUERYSETA,
-    dwSize : UInt32,
-    lpszServiceInstanceName : Win32cr::Foundation::PSTR,
-    lpServiceClassId : LibC::GUID*,
-    lpVersion : Win32cr::Networking::WinSock::WSAVERSION*,
-    lpszComment : Win32cr::Foundation::PSTR,
-    dwNameSpace : UInt32,
-    lpNSProviderId : LibC::GUID*,
-    lpszContext : Win32cr::Foundation::PSTR,
-    dwNumberOfProtocols : UInt32,
-    lpafpProtocols : Win32cr::Networking::WinSock::AFPROTOCOLS*,
-    lpszQueryString : Win32cr::Foundation::PSTR,
-    dwNumberOfCsAddrs : UInt32,
-    lpcsaBuffer : Win32cr::Networking::WinSock::CSADDR_INFO*,
-    dwOutputFlags : UInt32,
-    lpBlob : Win32cr::System::Com::BLOB*
+  struct WSAQUERYSETA
+    property dwSize : UInt32
+    property lpszServiceInstanceName : Win32cr::Foundation::PSTR
+    property lpServiceClassId : LibC::GUID*
+    property lpVersion : Win32cr::Networking::WinSock::WSAVERSION*
+    property lpszComment : Win32cr::Foundation::PSTR
+    property dwNameSpace : UInt32
+    property lpNSProviderId : LibC::GUID*
+    property lpszContext : Win32cr::Foundation::PSTR
+    property dwNumberOfProtocols : UInt32
+    property lpafpProtocols : Win32cr::Networking::WinSock::AFPROTOCOLS*
+    property lpszQueryString : Win32cr::Foundation::PSTR
+    property dwNumberOfCsAddrs : UInt32
+    property lpcsaBuffer : Win32cr::Networking::WinSock::CSADDR_INFO*
+    property dwOutputFlags : UInt32
+    property lpBlob : Win32cr::System::Com::BLOB*
+    def initialize(@dwSize : UInt32, @lpszServiceInstanceName : Win32cr::Foundation::PSTR, @lpServiceClassId : LibC::GUID*, @lpVersion : Win32cr::Networking::WinSock::WSAVERSION*, @lpszComment : Win32cr::Foundation::PSTR, @dwNameSpace : UInt32, @lpNSProviderId : LibC::GUID*, @lpszContext : Win32cr::Foundation::PSTR, @dwNumberOfProtocols : UInt32, @lpafpProtocols : Win32cr::Networking::WinSock::AFPROTOCOLS*, @lpszQueryString : Win32cr::Foundation::PSTR, @dwNumberOfCsAddrs : UInt32, @lpcsaBuffer : Win32cr::Networking::WinSock::CSADDR_INFO*, @dwOutputFlags : UInt32, @lpBlob : Win32cr::System::Com::BLOB*)
+    end
+  end
 
   @[Extern]
-  record WSAQUERYSETW,
-    dwSize : UInt32,
-    lpszServiceInstanceName : Win32cr::Foundation::PWSTR,
-    lpServiceClassId : LibC::GUID*,
-    lpVersion : Win32cr::Networking::WinSock::WSAVERSION*,
-    lpszComment : Win32cr::Foundation::PWSTR,
-    dwNameSpace : UInt32,
-    lpNSProviderId : LibC::GUID*,
-    lpszContext : Win32cr::Foundation::PWSTR,
-    dwNumberOfProtocols : UInt32,
-    lpafpProtocols : Win32cr::Networking::WinSock::AFPROTOCOLS*,
-    lpszQueryString : Win32cr::Foundation::PWSTR,
-    dwNumberOfCsAddrs : UInt32,
-    lpcsaBuffer : Win32cr::Networking::WinSock::CSADDR_INFO*,
-    dwOutputFlags : UInt32,
-    lpBlob : Win32cr::System::Com::BLOB*
+  struct WSAQUERYSETW
+    property dwSize : UInt32
+    property lpszServiceInstanceName : Win32cr::Foundation::PWSTR
+    property lpServiceClassId : LibC::GUID*
+    property lpVersion : Win32cr::Networking::WinSock::WSAVERSION*
+    property lpszComment : Win32cr::Foundation::PWSTR
+    property dwNameSpace : UInt32
+    property lpNSProviderId : LibC::GUID*
+    property lpszContext : Win32cr::Foundation::PWSTR
+    property dwNumberOfProtocols : UInt32
+    property lpafpProtocols : Win32cr::Networking::WinSock::AFPROTOCOLS*
+    property lpszQueryString : Win32cr::Foundation::PWSTR
+    property dwNumberOfCsAddrs : UInt32
+    property lpcsaBuffer : Win32cr::Networking::WinSock::CSADDR_INFO*
+    property dwOutputFlags : UInt32
+    property lpBlob : Win32cr::System::Com::BLOB*
+    def initialize(@dwSize : UInt32, @lpszServiceInstanceName : Win32cr::Foundation::PWSTR, @lpServiceClassId : LibC::GUID*, @lpVersion : Win32cr::Networking::WinSock::WSAVERSION*, @lpszComment : Win32cr::Foundation::PWSTR, @dwNameSpace : UInt32, @lpNSProviderId : LibC::GUID*, @lpszContext : Win32cr::Foundation::PWSTR, @dwNumberOfProtocols : UInt32, @lpafpProtocols : Win32cr::Networking::WinSock::AFPROTOCOLS*, @lpszQueryString : Win32cr::Foundation::PWSTR, @dwNumberOfCsAddrs : UInt32, @lpcsaBuffer : Win32cr::Networking::WinSock::CSADDR_INFO*, @dwOutputFlags : UInt32, @lpBlob : Win32cr::System::Com::BLOB*)
+    end
+  end
 
   @[Extern]
-  record WSAQUERYSET2A,
-    dwSize : UInt32,
-    lpszServiceInstanceName : Win32cr::Foundation::PSTR,
-    lpVersion : Win32cr::Networking::WinSock::WSAVERSION*,
-    lpszComment : Win32cr::Foundation::PSTR,
-    dwNameSpace : UInt32,
-    lpNSProviderId : LibC::GUID*,
-    lpszContext : Win32cr::Foundation::PSTR,
-    dwNumberOfProtocols : UInt32,
-    lpafpProtocols : Win32cr::Networking::WinSock::AFPROTOCOLS*,
-    lpszQueryString : Win32cr::Foundation::PSTR,
-    dwNumberOfCsAddrs : UInt32,
-    lpcsaBuffer : Win32cr::Networking::WinSock::CSADDR_INFO*,
-    dwOutputFlags : UInt32,
-    lpBlob : Win32cr::System::Com::BLOB*
+  struct WSAQUERYSET2A
+    property dwSize : UInt32
+    property lpszServiceInstanceName : Win32cr::Foundation::PSTR
+    property lpVersion : Win32cr::Networking::WinSock::WSAVERSION*
+    property lpszComment : Win32cr::Foundation::PSTR
+    property dwNameSpace : UInt32
+    property lpNSProviderId : LibC::GUID*
+    property lpszContext : Win32cr::Foundation::PSTR
+    property dwNumberOfProtocols : UInt32
+    property lpafpProtocols : Win32cr::Networking::WinSock::AFPROTOCOLS*
+    property lpszQueryString : Win32cr::Foundation::PSTR
+    property dwNumberOfCsAddrs : UInt32
+    property lpcsaBuffer : Win32cr::Networking::WinSock::CSADDR_INFO*
+    property dwOutputFlags : UInt32
+    property lpBlob : Win32cr::System::Com::BLOB*
+    def initialize(@dwSize : UInt32, @lpszServiceInstanceName : Win32cr::Foundation::PSTR, @lpVersion : Win32cr::Networking::WinSock::WSAVERSION*, @lpszComment : Win32cr::Foundation::PSTR, @dwNameSpace : UInt32, @lpNSProviderId : LibC::GUID*, @lpszContext : Win32cr::Foundation::PSTR, @dwNumberOfProtocols : UInt32, @lpafpProtocols : Win32cr::Networking::WinSock::AFPROTOCOLS*, @lpszQueryString : Win32cr::Foundation::PSTR, @dwNumberOfCsAddrs : UInt32, @lpcsaBuffer : Win32cr::Networking::WinSock::CSADDR_INFO*, @dwOutputFlags : UInt32, @lpBlob : Win32cr::System::Com::BLOB*)
+    end
+  end
 
   @[Extern]
-  record WSAQUERYSET2W,
-    dwSize : UInt32,
-    lpszServiceInstanceName : Win32cr::Foundation::PWSTR,
-    lpVersion : Win32cr::Networking::WinSock::WSAVERSION*,
-    lpszComment : Win32cr::Foundation::PWSTR,
-    dwNameSpace : UInt32,
-    lpNSProviderId : LibC::GUID*,
-    lpszContext : Win32cr::Foundation::PWSTR,
-    dwNumberOfProtocols : UInt32,
-    lpafpProtocols : Win32cr::Networking::WinSock::AFPROTOCOLS*,
-    lpszQueryString : Win32cr::Foundation::PWSTR,
-    dwNumberOfCsAddrs : UInt32,
-    lpcsaBuffer : Win32cr::Networking::WinSock::CSADDR_INFO*,
-    dwOutputFlags : UInt32,
-    lpBlob : Win32cr::System::Com::BLOB*
+  struct WSAQUERYSET2W
+    property dwSize : UInt32
+    property lpszServiceInstanceName : Win32cr::Foundation::PWSTR
+    property lpVersion : Win32cr::Networking::WinSock::WSAVERSION*
+    property lpszComment : Win32cr::Foundation::PWSTR
+    property dwNameSpace : UInt32
+    property lpNSProviderId : LibC::GUID*
+    property lpszContext : Win32cr::Foundation::PWSTR
+    property dwNumberOfProtocols : UInt32
+    property lpafpProtocols : Win32cr::Networking::WinSock::AFPROTOCOLS*
+    property lpszQueryString : Win32cr::Foundation::PWSTR
+    property dwNumberOfCsAddrs : UInt32
+    property lpcsaBuffer : Win32cr::Networking::WinSock::CSADDR_INFO*
+    property dwOutputFlags : UInt32
+    property lpBlob : Win32cr::System::Com::BLOB*
+    def initialize(@dwSize : UInt32, @lpszServiceInstanceName : Win32cr::Foundation::PWSTR, @lpVersion : Win32cr::Networking::WinSock::WSAVERSION*, @lpszComment : Win32cr::Foundation::PWSTR, @dwNameSpace : UInt32, @lpNSProviderId : LibC::GUID*, @lpszContext : Win32cr::Foundation::PWSTR, @dwNumberOfProtocols : UInt32, @lpafpProtocols : Win32cr::Networking::WinSock::AFPROTOCOLS*, @lpszQueryString : Win32cr::Foundation::PWSTR, @dwNumberOfCsAddrs : UInt32, @lpcsaBuffer : Win32cr::Networking::WinSock::CSADDR_INFO*, @dwOutputFlags : UInt32, @lpBlob : Win32cr::System::Com::BLOB*)
+    end
+  end
 
   @[Extern]
-  record WSANSCLASSINFOA,
-    lpszName : Win32cr::Foundation::PSTR,
-    dwNameSpace : UInt32,
-    dwValueType : UInt32,
-    dwValueSize : UInt32,
-    lpValue : Void*
+  struct WSANSCLASSINFOA
+    property lpszName : Win32cr::Foundation::PSTR
+    property dwNameSpace : UInt32
+    property dwValueType : UInt32
+    property dwValueSize : UInt32
+    property lpValue : Void*
+    def initialize(@lpszName : Win32cr::Foundation::PSTR, @dwNameSpace : UInt32, @dwValueType : UInt32, @dwValueSize : UInt32, @lpValue : Void*)
+    end
+  end
 
   @[Extern]
-  record WSANSCLASSINFOW,
-    lpszName : Win32cr::Foundation::PWSTR,
-    dwNameSpace : UInt32,
-    dwValueType : UInt32,
-    dwValueSize : UInt32,
-    lpValue : Void*
+  struct WSANSCLASSINFOW
+    property lpszName : Win32cr::Foundation::PWSTR
+    property dwNameSpace : UInt32
+    property dwValueType : UInt32
+    property dwValueSize : UInt32
+    property lpValue : Void*
+    def initialize(@lpszName : Win32cr::Foundation::PWSTR, @dwNameSpace : UInt32, @dwValueType : UInt32, @dwValueSize : UInt32, @lpValue : Void*)
+    end
+  end
 
   @[Extern]
-  record WSASERVICECLASSINFOA,
-    lpServiceClassId : LibC::GUID*,
-    lpszServiceClassName : Win32cr::Foundation::PSTR,
-    dwCount : UInt32,
-    lpClassInfos : Win32cr::Networking::WinSock::WSANSCLASSINFOA*
+  struct WSASERVICECLASSINFOA
+    property lpServiceClassId : LibC::GUID*
+    property lpszServiceClassName : Win32cr::Foundation::PSTR
+    property dwCount : UInt32
+    property lpClassInfos : Win32cr::Networking::WinSock::WSANSCLASSINFOA*
+    def initialize(@lpServiceClassId : LibC::GUID*, @lpszServiceClassName : Win32cr::Foundation::PSTR, @dwCount : UInt32, @lpClassInfos : Win32cr::Networking::WinSock::WSANSCLASSINFOA*)
+    end
+  end
 
   @[Extern]
-  record WSASERVICECLASSINFOW,
-    lpServiceClassId : LibC::GUID*,
-    lpszServiceClassName : Win32cr::Foundation::PWSTR,
-    dwCount : UInt32,
-    lpClassInfos : Win32cr::Networking::WinSock::WSANSCLASSINFOW*
+  struct WSASERVICECLASSINFOW
+    property lpServiceClassId : LibC::GUID*
+    property lpszServiceClassName : Win32cr::Foundation::PWSTR
+    property dwCount : UInt32
+    property lpClassInfos : Win32cr::Networking::WinSock::WSANSCLASSINFOW*
+    def initialize(@lpServiceClassId : LibC::GUID*, @lpszServiceClassName : Win32cr::Foundation::PWSTR, @dwCount : UInt32, @lpClassInfos : Win32cr::Networking::WinSock::WSANSCLASSINFOW*)
+    end
+  end
 
   @[Extern]
-  record WSANAMESPACE_INFOA,
-    ns_provider_id : LibC::GUID,
-    dwNameSpace : UInt32,
-    fActive : Win32cr::Foundation::BOOL,
-    dwVersion : UInt32,
-    lpszIdentifier : Win32cr::Foundation::PSTR
+  struct WSANAMESPACE_INFOA
+    property ns_provider_id : LibC::GUID
+    property dwNameSpace : UInt32
+    property fActive : Win32cr::Foundation::BOOL
+    property dwVersion : UInt32
+    property lpszIdentifier : Win32cr::Foundation::PSTR
+    def initialize(@ns_provider_id : LibC::GUID, @dwNameSpace : UInt32, @fActive : Win32cr::Foundation::BOOL, @dwVersion : UInt32, @lpszIdentifier : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record WSANAMESPACE_INFOW,
-    ns_provider_id : LibC::GUID,
-    dwNameSpace : UInt32,
-    fActive : Win32cr::Foundation::BOOL,
-    dwVersion : UInt32,
-    lpszIdentifier : Win32cr::Foundation::PWSTR
+  struct WSANAMESPACE_INFOW
+    property ns_provider_id : LibC::GUID
+    property dwNameSpace : UInt32
+    property fActive : Win32cr::Foundation::BOOL
+    property dwVersion : UInt32
+    property lpszIdentifier : Win32cr::Foundation::PWSTR
+    def initialize(@ns_provider_id : LibC::GUID, @dwNameSpace : UInt32, @fActive : Win32cr::Foundation::BOOL, @dwVersion : UInt32, @lpszIdentifier : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record WSANAMESPACE_INFOEXA,
-    ns_provider_id : LibC::GUID,
-    dwNameSpace : UInt32,
-    fActive : Win32cr::Foundation::BOOL,
-    dwVersion : UInt32,
-    lpszIdentifier : Win32cr::Foundation::PSTR,
-    provider_specific : Win32cr::System::Com::BLOB
+  struct WSANAMESPACE_INFOEXA
+    property ns_provider_id : LibC::GUID
+    property dwNameSpace : UInt32
+    property fActive : Win32cr::Foundation::BOOL
+    property dwVersion : UInt32
+    property lpszIdentifier : Win32cr::Foundation::PSTR
+    property provider_specific : Win32cr::System::Com::BLOB
+    def initialize(@ns_provider_id : LibC::GUID, @dwNameSpace : UInt32, @fActive : Win32cr::Foundation::BOOL, @dwVersion : UInt32, @lpszIdentifier : Win32cr::Foundation::PSTR, @provider_specific : Win32cr::System::Com::BLOB)
+    end
+  end
 
   @[Extern]
-  record WSANAMESPACE_INFOEXW,
-    ns_provider_id : LibC::GUID,
-    dwNameSpace : UInt32,
-    fActive : Win32cr::Foundation::BOOL,
-    dwVersion : UInt32,
-    lpszIdentifier : Win32cr::Foundation::PWSTR,
-    provider_specific : Win32cr::System::Com::BLOB
+  struct WSANAMESPACE_INFOEXW
+    property ns_provider_id : LibC::GUID
+    property dwNameSpace : UInt32
+    property fActive : Win32cr::Foundation::BOOL
+    property dwVersion : UInt32
+    property lpszIdentifier : Win32cr::Foundation::PWSTR
+    property provider_specific : Win32cr::System::Com::BLOB
+    def initialize(@ns_provider_id : LibC::GUID, @dwNameSpace : UInt32, @fActive : Win32cr::Foundation::BOOL, @dwVersion : UInt32, @lpszIdentifier : Win32cr::Foundation::PWSTR, @provider_specific : Win32cr::System::Com::BLOB)
+    end
+  end
 
   @[Extern]
-  record WSAPOLLFD,
-    fd : Win32cr::Networking::WinSock::SOCKET,
-    events : Int16,
-    revents : Int16
+  struct WSAPOLLFD
+    property fd : Win32cr::Networking::WinSock::SOCKET
+    property events : Int16
+    property revents : Int16
+    def initialize(@fd : Win32cr::Networking::WinSock::SOCKET, @events : Int16, @revents : Int16)
+    end
+  end
 
   @[Extern]
-  record SOCK_NOTIFY_REGISTRATION,
-    socket : Win32cr::Networking::WinSock::SOCKET,
-    completionKey : Void*,
-    eventFilter : UInt16,
-    operation : UInt8,
-    triggerFlags : UInt8,
-    registrationResult : UInt32
+  struct SOCK_NOTIFY_REGISTRATION
+    property socket : Win32cr::Networking::WinSock::SOCKET
+    property completionKey : Void*
+    property eventFilter : UInt16
+    property operation : UInt8
+    property triggerFlags : UInt8
+    property registrationResult : UInt32
+    def initialize(@socket : Win32cr::Networking::WinSock::SOCKET, @completionKey : Void*, @eventFilter : UInt16, @operation : UInt8, @triggerFlags : UInt8, @registrationResult : UInt32)
+    end
+  end
 
   @[Extern]
-  record IN6_ADDR,
-    u : U_e__union_ do
+  struct IN6_ADDR
+    property u : U_e__union_
 
     # Nested Type U_e__union_
     @[Extern(union: true)]
-    record U_e__union_,
-      byte : UInt8[16],
-      word : UInt16[8]
+    struct U_e__union_
+    property byte : UInt8[16]
+    property word : UInt16[8]
+    def initialize(@byte : UInt8[16], @word : UInt16[8])
+    end
+    end
 
+    def initialize(@u : U_e__union_)
+    end
   end
 
   @[Extern]
-  record Sockaddr_in6_old,
-    sin6_family : Int16,
-    sin6_port : UInt16,
-    sin6_flowinfo : UInt32,
-    sin6_addr : Win32cr::Networking::WinSock::IN6_ADDR
+  struct Sockaddr_in6_old
+    property sin6_family : Int16
+    property sin6_port : UInt16
+    property sin6_flowinfo : UInt32
+    property sin6_addr : Win32cr::Networking::WinSock::IN6_ADDR
+    def initialize(@sin6_family : Int16, @sin6_port : UInt16, @sin6_flowinfo : UInt32, @sin6_addr : Win32cr::Networking::WinSock::IN6_ADDR)
+    end
+  end
 
   @[Extern(union: true)]
-  record Sockaddr_gen,
-    address : Win32cr::Networking::WinSock::SOCKADDR,
-    address_in : Win32cr::Networking::WinSock::SOCKADDR_IN,
-    address_in6 : Win32cr::Networking::WinSock::Sockaddr_in6_old
+  struct Sockaddr_gen
+    property address : Win32cr::Networking::WinSock::SOCKADDR
+    property address_in : Win32cr::Networking::WinSock::SOCKADDR_IN
+    property address_in6 : Win32cr::Networking::WinSock::Sockaddr_in6_old
+    def initialize(@address : Win32cr::Networking::WinSock::SOCKADDR, @address_in : Win32cr::Networking::WinSock::SOCKADDR_IN, @address_in6 : Win32cr::Networking::WinSock::Sockaddr_in6_old)
+    end
+  end
 
   @[Extern]
-  record INTERFACE_INFO,
-    iiFlags : UInt32,
-    iiAddress : Win32cr::Networking::WinSock::Sockaddr_gen,
-    iiBroadcastAddress : Win32cr::Networking::WinSock::Sockaddr_gen,
-    iiNetmask : Win32cr::Networking::WinSock::Sockaddr_gen
+  struct INTERFACE_INFO
+    property iiFlags : UInt32
+    property iiAddress : Win32cr::Networking::WinSock::Sockaddr_gen
+    property iiBroadcastAddress : Win32cr::Networking::WinSock::Sockaddr_gen
+    property iiNetmask : Win32cr::Networking::WinSock::Sockaddr_gen
+    def initialize(@iiFlags : UInt32, @iiAddress : Win32cr::Networking::WinSock::Sockaddr_gen, @iiBroadcastAddress : Win32cr::Networking::WinSock::Sockaddr_gen, @iiNetmask : Win32cr::Networking::WinSock::Sockaddr_gen)
+    end
+  end
 
   @[Extern]
-  record INTERFACE_INFO_EX,
-    iiFlags : UInt32,
-    iiAddress : Win32cr::Networking::WinSock::SOCKET_ADDRESS,
-    iiBroadcastAddress : Win32cr::Networking::WinSock::SOCKET_ADDRESS,
-    iiNetmask : Win32cr::Networking::WinSock::SOCKET_ADDRESS
+  struct INTERFACE_INFO_EX
+    property iiFlags : UInt32
+    property iiAddress : Win32cr::Networking::WinSock::SOCKET_ADDRESS
+    property iiBroadcastAddress : Win32cr::Networking::WinSock::SOCKET_ADDRESS
+    property iiNetmask : Win32cr::Networking::WinSock::SOCKET_ADDRESS
+    def initialize(@iiFlags : UInt32, @iiAddress : Win32cr::Networking::WinSock::SOCKET_ADDRESS, @iiBroadcastAddress : Win32cr::Networking::WinSock::SOCKET_ADDRESS, @iiNetmask : Win32cr::Networking::WinSock::SOCKET_ADDRESS)
+    end
+  end
 
   @[Extern]
-  record SOCKADDR_IN6,
-    sin6_family : UInt16,
-    sin6_port : UInt16,
-    sin6_flowinfo : UInt32,
-    sin6_addr : Win32cr::Networking::WinSock::IN6_ADDR,
-    anonymous : Anonymous_e__Union_ do
+  struct SOCKADDR_IN6
+    property sin6_family : UInt16
+    property sin6_port : UInt16
+    property sin6_flowinfo : UInt32
+    property sin6_addr : Win32cr::Networking::WinSock::IN6_ADDR
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      sin6_scope_id : UInt32,
-      sin6_scope_struct : Win32cr::Networking::WinSock::SCOPE_ID
+    struct Anonymous_e__Union_
+    property sin6_scope_id : UInt32
+    property sin6_scope_struct : Win32cr::Networking::WinSock::SCOPE_ID
+    def initialize(@sin6_scope_id : UInt32, @sin6_scope_struct : Win32cr::Networking::WinSock::SCOPE_ID)
+    end
+    end
 
+    def initialize(@sin6_family : UInt16, @sin6_port : UInt16, @sin6_flowinfo : UInt32, @sin6_addr : Win32cr::Networking::WinSock::IN6_ADDR, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record SOCKADDR_IN6_W2KSP1,
-    sin6_family : Int16,
-    sin6_port : UInt16,
-    sin6_flowinfo : UInt32,
-    sin6_addr : Win32cr::Networking::WinSock::IN6_ADDR,
-    sin6_scope_id : UInt32
+  struct SOCKADDR_IN6_W2KSP1
+    property sin6_family : Int16
+    property sin6_port : UInt16
+    property sin6_flowinfo : UInt32
+    property sin6_addr : Win32cr::Networking::WinSock::IN6_ADDR
+    property sin6_scope_id : UInt32
+    def initialize(@sin6_family : Int16, @sin6_port : UInt16, @sin6_flowinfo : UInt32, @sin6_addr : Win32cr::Networking::WinSock::IN6_ADDR, @sin6_scope_id : UInt32)
+    end
+  end
 
   @[Extern(union: true)]
-  record SOCKADDR_INET,
-    ipv4 : Win32cr::Networking::WinSock::SOCKADDR_IN,
-    ipv6 : Win32cr::Networking::WinSock::SOCKADDR_IN6,
-    si_family : UInt16
+  struct SOCKADDR_INET
+    property ipv4 : Win32cr::Networking::WinSock::SOCKADDR_IN
+    property ipv6 : Win32cr::Networking::WinSock::SOCKADDR_IN6
+    property si_family : UInt16
+    def initialize(@ipv4 : Win32cr::Networking::WinSock::SOCKADDR_IN, @ipv6 : Win32cr::Networking::WinSock::SOCKADDR_IN6, @si_family : UInt16)
+    end
+  end
 
   @[Extern]
-  record SOCKADDR_IN6_PAIR,
-    source_address : Win32cr::Networking::WinSock::SOCKADDR_IN6*,
-    destination_address : Win32cr::Networking::WinSock::SOCKADDR_IN6*
+  struct SOCKADDR_IN6_PAIR
+    property source_address : Win32cr::Networking::WinSock::SOCKADDR_IN6*
+    property destination_address : Win32cr::Networking::WinSock::SOCKADDR_IN6*
+    def initialize(@source_address : Win32cr::Networking::WinSock::SOCKADDR_IN6*, @destination_address : Win32cr::Networking::WinSock::SOCKADDR_IN6*)
+    end
+  end
 
   @[Extern]
-  record IP_MREQ,
-    imr_multiaddr : Win32cr::Networking::WinSock::IN_ADDR,
-    imr_interface : Win32cr::Networking::WinSock::IN_ADDR
+  struct IP_MREQ
+    property imr_multiaddr : Win32cr::Networking::WinSock::IN_ADDR
+    property imr_interface : Win32cr::Networking::WinSock::IN_ADDR
+    def initialize(@imr_multiaddr : Win32cr::Networking::WinSock::IN_ADDR, @imr_interface : Win32cr::Networking::WinSock::IN_ADDR)
+    end
+  end
 
   @[Extern]
-  record IP_MREQ_SOURCE,
-    imr_multiaddr : Win32cr::Networking::WinSock::IN_ADDR,
-    imr_sourceaddr : Win32cr::Networking::WinSock::IN_ADDR,
-    imr_interface : Win32cr::Networking::WinSock::IN_ADDR
+  struct IP_MREQ_SOURCE
+    property imr_multiaddr : Win32cr::Networking::WinSock::IN_ADDR
+    property imr_sourceaddr : Win32cr::Networking::WinSock::IN_ADDR
+    property imr_interface : Win32cr::Networking::WinSock::IN_ADDR
+    def initialize(@imr_multiaddr : Win32cr::Networking::WinSock::IN_ADDR, @imr_sourceaddr : Win32cr::Networking::WinSock::IN_ADDR, @imr_interface : Win32cr::Networking::WinSock::IN_ADDR)
+    end
+  end
 
   @[Extern]
-  record IP_MSFILTER,
-    imsf_multiaddr : Win32cr::Networking::WinSock::IN_ADDR,
-    imsf_interface : Win32cr::Networking::WinSock::IN_ADDR,
-    imsf_fmode : Win32cr::Networking::WinSock::MULTICAST_MODE_TYPE,
-    imsf_numsrc : UInt32,
-    imsf_slist : Win32cr::Networking::WinSock::IN_ADDR*
+  struct IP_MSFILTER
+    property imsf_multiaddr : Win32cr::Networking::WinSock::IN_ADDR
+    property imsf_interface : Win32cr::Networking::WinSock::IN_ADDR
+    property imsf_fmode : Win32cr::Networking::WinSock::MULTICAST_MODE_TYPE
+    property imsf_numsrc : UInt32
+    property imsf_slist : Win32cr::Networking::WinSock::IN_ADDR*
+    def initialize(@imsf_multiaddr : Win32cr::Networking::WinSock::IN_ADDR, @imsf_interface : Win32cr::Networking::WinSock::IN_ADDR, @imsf_fmode : Win32cr::Networking::WinSock::MULTICAST_MODE_TYPE, @imsf_numsrc : UInt32, @imsf_slist : Win32cr::Networking::WinSock::IN_ADDR*)
+    end
+  end
 
   @[Extern]
-  record IPV6_MREQ,
-    ipv6mr_multiaddr : Win32cr::Networking::WinSock::IN6_ADDR,
-    ipv6mr_interface : UInt32
+  struct IPV6_MREQ
+    property ipv6mr_multiaddr : Win32cr::Networking::WinSock::IN6_ADDR
+    property ipv6mr_interface : UInt32
+    def initialize(@ipv6mr_multiaddr : Win32cr::Networking::WinSock::IN6_ADDR, @ipv6mr_interface : UInt32)
+    end
+  end
 
   @[Extern]
-  record GROUP_REQ,
-    gr_interface : UInt32,
-    gr_group : Win32cr::Networking::WinSock::SOCKADDR_STORAGE
+  struct GROUP_REQ
+    property gr_interface : UInt32
+    property gr_group : Win32cr::Networking::WinSock::SOCKADDR_STORAGE
+    def initialize(@gr_interface : UInt32, @gr_group : Win32cr::Networking::WinSock::SOCKADDR_STORAGE)
+    end
+  end
 
   @[Extern]
-  record GROUP_SOURCE_REQ,
-    gsr_interface : UInt32,
-    gsr_group : Win32cr::Networking::WinSock::SOCKADDR_STORAGE,
-    gsr_source : Win32cr::Networking::WinSock::SOCKADDR_STORAGE
+  struct GROUP_SOURCE_REQ
+    property gsr_interface : UInt32
+    property gsr_group : Win32cr::Networking::WinSock::SOCKADDR_STORAGE
+    property gsr_source : Win32cr::Networking::WinSock::SOCKADDR_STORAGE
+    def initialize(@gsr_interface : UInt32, @gsr_group : Win32cr::Networking::WinSock::SOCKADDR_STORAGE, @gsr_source : Win32cr::Networking::WinSock::SOCKADDR_STORAGE)
+    end
+  end
 
   @[Extern]
-  record GROUP_FILTER,
-    gf_interface : UInt32,
-    gf_group : Win32cr::Networking::WinSock::SOCKADDR_STORAGE,
-    gf_fmode : Win32cr::Networking::WinSock::MULTICAST_MODE_TYPE,
-    gf_numsrc : UInt32,
-    gf_slist : Win32cr::Networking::WinSock::SOCKADDR_STORAGE*
+  struct GROUP_FILTER
+    property gf_interface : UInt32
+    property gf_group : Win32cr::Networking::WinSock::SOCKADDR_STORAGE
+    property gf_fmode : Win32cr::Networking::WinSock::MULTICAST_MODE_TYPE
+    property gf_numsrc : UInt32
+    property gf_slist : Win32cr::Networking::WinSock::SOCKADDR_STORAGE*
+    def initialize(@gf_interface : UInt32, @gf_group : Win32cr::Networking::WinSock::SOCKADDR_STORAGE, @gf_fmode : Win32cr::Networking::WinSock::MULTICAST_MODE_TYPE, @gf_numsrc : UInt32, @gf_slist : Win32cr::Networking::WinSock::SOCKADDR_STORAGE*)
+    end
+  end
 
   @[Extern]
-  record IN_PKTINFO,
-    ipi_addr : Win32cr::Networking::WinSock::IN_ADDR,
-    ipi_ifindex : UInt32
+  struct IN_PKTINFO
+    property ipi_addr : Win32cr::Networking::WinSock::IN_ADDR
+    property ipi_ifindex : UInt32
+    def initialize(@ipi_addr : Win32cr::Networking::WinSock::IN_ADDR, @ipi_ifindex : UInt32)
+    end
+  end
 
   @[Extern]
-  record IN6_PKTINFO,
-    ipi6_addr : Win32cr::Networking::WinSock::IN6_ADDR,
-    ipi6_ifindex : UInt32
+  struct IN6_PKTINFO
+    property ipi6_addr : Win32cr::Networking::WinSock::IN6_ADDR
+    property ipi6_ifindex : UInt32
+    def initialize(@ipi6_addr : Win32cr::Networking::WinSock::IN6_ADDR, @ipi6_ifindex : UInt32)
+    end
+  end
 
   @[Extern]
-  record IN_PKTINFO_EX,
-    pkt_info : Win32cr::Networking::WinSock::IN_PKTINFO,
-    scope_id : Win32cr::Networking::WinSock::SCOPE_ID
+  struct IN_PKTINFO_EX
+    property pkt_info : Win32cr::Networking::WinSock::IN_PKTINFO
+    property scope_id : Win32cr::Networking::WinSock::SCOPE_ID
+    def initialize(@pkt_info : Win32cr::Networking::WinSock::IN_PKTINFO, @scope_id : Win32cr::Networking::WinSock::SCOPE_ID)
+    end
+  end
 
   @[Extern]
-  record In6_pktinfo_ex,
-    pkt_info : Win32cr::Networking::WinSock::IN6_PKTINFO,
-    scope_id : Win32cr::Networking::WinSock::SCOPE_ID
+  struct In6_pktinfo_ex
+    property pkt_info : Win32cr::Networking::WinSock::IN6_PKTINFO
+    property scope_id : Win32cr::Networking::WinSock::SCOPE_ID
+    def initialize(@pkt_info : Win32cr::Networking::WinSock::IN6_PKTINFO, @scope_id : Win32cr::Networking::WinSock::SCOPE_ID)
+    end
+  end
 
   @[Extern]
-  record IN_RECVERR,
-    protocol : Win32cr::Networking::WinSock::IPPROTO,
-    info : UInt32,
-    type__ : UInt8,
-    code : UInt8
+  struct IN_RECVERR
+    property protocol : Win32cr::Networking::WinSock::IPPROTO
+    property info : UInt32
+    property type__ : UInt8
+    property code : UInt8
+    def initialize(@protocol : Win32cr::Networking::WinSock::IPPROTO, @info : UInt32, @type__ : UInt8, @code : UInt8)
+    end
+  end
 
   @[Extern]
-  record ICMP_ERROR_INFO,
-    srcaddress : Win32cr::Networking::WinSock::SOCKADDR_INET,
-    protocol : Win32cr::Networking::WinSock::IPPROTO,
-    type__ : UInt8,
-    code : UInt8
+  struct ICMP_ERROR_INFO
+    property srcaddress : Win32cr::Networking::WinSock::SOCKADDR_INET
+    property protocol : Win32cr::Networking::WinSock::IPPROTO
+    property type__ : UInt8
+    property code : UInt8
+    def initialize(@srcaddress : Win32cr::Networking::WinSock::SOCKADDR_INET, @protocol : Win32cr::Networking::WinSock::IPPROTO, @type__ : UInt8, @code : UInt8)
+    end
+  end
 
   @[Extern]
-  record RM_SEND_WINDOW,
-    rate_kbits_per_sec : UInt32,
-    window_size_in_m_secs : UInt32,
-    window_size_in_bytes : UInt32
+  struct RM_SEND_WINDOW
+    property rate_kbits_per_sec : UInt32
+    property window_size_in_m_secs : UInt32
+    property window_size_in_bytes : UInt32
+    def initialize(@rate_kbits_per_sec : UInt32, @window_size_in_m_secs : UInt32, @window_size_in_bytes : UInt32)
+    end
+  end
 
   @[Extern]
-  record RM_SENDER_STATS,
-    data_bytes_sent : UInt64,
-    total_bytes_sent : UInt64,
-    naks_received : UInt64,
-    naks_received_too_late : UInt64,
-    num_outstanding_naks : UInt64,
-    num_naks_after_r_data : UInt64,
-    repair_packets_sent : UInt64,
-    buffer_space_available : UInt64,
-    trailing_edge_seq_id : UInt64,
-    leading_edge_seq_id : UInt64,
-    rate_k_bits_per_sec_overall : UInt64,
-    rate_k_bits_per_sec_last : UInt64,
-    total_o_data_packets_sent : UInt64
+  struct RM_SENDER_STATS
+    property data_bytes_sent : UInt64
+    property total_bytes_sent : UInt64
+    property naks_received : UInt64
+    property naks_received_too_late : UInt64
+    property num_outstanding_naks : UInt64
+    property num_naks_after_r_data : UInt64
+    property repair_packets_sent : UInt64
+    property buffer_space_available : UInt64
+    property trailing_edge_seq_id : UInt64
+    property leading_edge_seq_id : UInt64
+    property rate_k_bits_per_sec_overall : UInt64
+    property rate_k_bits_per_sec_last : UInt64
+    property total_o_data_packets_sent : UInt64
+    def initialize(@data_bytes_sent : UInt64, @total_bytes_sent : UInt64, @naks_received : UInt64, @naks_received_too_late : UInt64, @num_outstanding_naks : UInt64, @num_naks_after_r_data : UInt64, @repair_packets_sent : UInt64, @buffer_space_available : UInt64, @trailing_edge_seq_id : UInt64, @leading_edge_seq_id : UInt64, @rate_k_bits_per_sec_overall : UInt64, @rate_k_bits_per_sec_last : UInt64, @total_o_data_packets_sent : UInt64)
+    end
+  end
 
   @[Extern]
-  record RM_RECEIVER_STATS,
-    num_o_data_packets_received : UInt64,
-    num_r_data_packets_received : UInt64,
-    num_duplicate_data_packets : UInt64,
-    data_bytes_received : UInt64,
-    total_bytes_received : UInt64,
-    rate_k_bits_per_sec_overall : UInt64,
-    rate_k_bits_per_sec_last : UInt64,
-    trailing_edge_seq_id : UInt64,
-    leading_edge_seq_id : UInt64,
-    average_sequences_in_window : UInt64,
-    min_sequences_in_window : UInt64,
-    max_sequences_in_window : UInt64,
-    first_nak_sequence_number : UInt64,
-    num_pending_naks : UInt64,
-    num_outstanding_naks : UInt64,
-    num_data_packets_buffered : UInt64,
-    total_selective_naks_sent : UInt64,
-    total_parity_naks_sent : UInt64
+  struct RM_RECEIVER_STATS
+    property num_o_data_packets_received : UInt64
+    property num_r_data_packets_received : UInt64
+    property num_duplicate_data_packets : UInt64
+    property data_bytes_received : UInt64
+    property total_bytes_received : UInt64
+    property rate_k_bits_per_sec_overall : UInt64
+    property rate_k_bits_per_sec_last : UInt64
+    property trailing_edge_seq_id : UInt64
+    property leading_edge_seq_id : UInt64
+    property average_sequences_in_window : UInt64
+    property min_sequences_in_window : UInt64
+    property max_sequences_in_window : UInt64
+    property first_nak_sequence_number : UInt64
+    property num_pending_naks : UInt64
+    property num_outstanding_naks : UInt64
+    property num_data_packets_buffered : UInt64
+    property total_selective_naks_sent : UInt64
+    property total_parity_naks_sent : UInt64
+    def initialize(@num_o_data_packets_received : UInt64, @num_r_data_packets_received : UInt64, @num_duplicate_data_packets : UInt64, @data_bytes_received : UInt64, @total_bytes_received : UInt64, @rate_k_bits_per_sec_overall : UInt64, @rate_k_bits_per_sec_last : UInt64, @trailing_edge_seq_id : UInt64, @leading_edge_seq_id : UInt64, @average_sequences_in_window : UInt64, @min_sequences_in_window : UInt64, @max_sequences_in_window : UInt64, @first_nak_sequence_number : UInt64, @num_pending_naks : UInt64, @num_outstanding_naks : UInt64, @num_data_packets_buffered : UInt64, @total_selective_naks_sent : UInt64, @total_parity_naks_sent : UInt64)
+    end
+  end
 
   @[Extern]
-  record RM_FEC_INFO,
-    fec_block_size : UInt16,
-    fec_pro_active_packets : UInt16,
-    fec_group_size : UInt8,
-    fFECOnDemandParityEnabled : Win32cr::Foundation::BOOLEAN
+  struct RM_FEC_INFO
+    property fec_block_size : UInt16
+    property fec_pro_active_packets : UInt16
+    property fec_group_size : UInt8
+    property fFECOnDemandParityEnabled : Win32cr::Foundation::BOOLEAN
+    def initialize(@fec_block_size : UInt16, @fec_pro_active_packets : UInt16, @fec_group_size : UInt8, @fFECOnDemandParityEnabled : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record IPX_ADDRESS_DATA,
-    adapternum : Int32,
-    netnum : UInt8[4],
-    nodenum : UInt8[6],
-    wan : Win32cr::Foundation::BOOLEAN,
-    status : Win32cr::Foundation::BOOLEAN,
-    maxpkt : Int32,
-    linkspeed : UInt32
+  struct IPX_ADDRESS_DATA
+    property adapternum : Int32
+    property netnum : UInt8[4]
+    property nodenum : UInt8[6]
+    property wan : Win32cr::Foundation::BOOLEAN
+    property status : Win32cr::Foundation::BOOLEAN
+    property maxpkt : Int32
+    property linkspeed : UInt32
+    def initialize(@adapternum : Int32, @netnum : UInt8[4], @nodenum : UInt8[6], @wan : Win32cr::Foundation::BOOLEAN, @status : Win32cr::Foundation::BOOLEAN, @maxpkt : Int32, @linkspeed : UInt32)
+    end
+  end
 
   @[Extern]
-  record IPX_NETNUM_DATA,
-    netnum : UInt8[4],
-    hopcount : UInt16,
-    netdelay : UInt16,
-    cardnum : Int32,
-    router : UInt8[6]
+  struct IPX_NETNUM_DATA
+    property netnum : UInt8[4]
+    property hopcount : UInt16
+    property netdelay : UInt16
+    property cardnum : Int32
+    property router : UInt8[6]
+    def initialize(@netnum : UInt8[4], @hopcount : UInt16, @netdelay : UInt16, @cardnum : Int32, @router : UInt8[6])
+    end
+  end
 
   @[Extern]
-  record IPX_SPXCONNSTATUS_DATA,
-    connection_state : UInt8,
-    watch_dog_active : UInt8,
-    local_connection_id : UInt16,
-    remote_connection_id : UInt16,
-    local_sequence_number : UInt16,
-    local_ack_number : UInt16,
-    local_alloc_number : UInt16,
-    remote_ack_number : UInt16,
-    remote_alloc_number : UInt16,
-    local_socket : UInt16,
-    immediate_address : UInt8[6],
-    remote_network : UInt8[4],
-    remote_node : UInt8[6],
-    remote_socket : UInt16,
-    retransmission_count : UInt16,
-    estimated_round_trip_delay : UInt16,
-    retransmitted_packets : UInt16,
-    suppressed_packet : UInt16
+  struct IPX_SPXCONNSTATUS_DATA
+    property connection_state : UInt8
+    property watch_dog_active : UInt8
+    property local_connection_id : UInt16
+    property remote_connection_id : UInt16
+    property local_sequence_number : UInt16
+    property local_ack_number : UInt16
+    property local_alloc_number : UInt16
+    property remote_ack_number : UInt16
+    property remote_alloc_number : UInt16
+    property local_socket : UInt16
+    property immediate_address : UInt8[6]
+    property remote_network : UInt8[4]
+    property remote_node : UInt8[6]
+    property remote_socket : UInt16
+    property retransmission_count : UInt16
+    property estimated_round_trip_delay : UInt16
+    property retransmitted_packets : UInt16
+    property suppressed_packet : UInt16
+    def initialize(@connection_state : UInt8, @watch_dog_active : UInt8, @local_connection_id : UInt16, @remote_connection_id : UInt16, @local_sequence_number : UInt16, @local_ack_number : UInt16, @local_alloc_number : UInt16, @remote_ack_number : UInt16, @remote_alloc_number : UInt16, @local_socket : UInt16, @immediate_address : UInt8[6], @remote_network : UInt8[4], @remote_node : UInt8[6], @remote_socket : UInt16, @retransmission_count : UInt16, @estimated_round_trip_delay : UInt16, @retransmitted_packets : UInt16, @suppressed_packet : UInt16)
+    end
+  end
 
   @[Extern]
-  record LM_IRPARMS,
-    nTXDataBytes : UInt32,
-    nRXDataBytes : UInt32,
-    nBaudRate : UInt32,
-    thresholdTime : UInt32,
-    discTime : UInt32,
-    nMSLinkTurn : UInt16,
-    nTXPackets : UInt8,
-    nRXPackets : UInt8
+  struct LM_IRPARMS
+    property nTXDataBytes : UInt32
+    property nRXDataBytes : UInt32
+    property nBaudRate : UInt32
+    property thresholdTime : UInt32
+    property discTime : UInt32
+    property nMSLinkTurn : UInt16
+    property nTXPackets : UInt8
+    property nRXPackets : UInt8
+    def initialize(@nTXDataBytes : UInt32, @nRXDataBytes : UInt32, @nBaudRate : UInt32, @thresholdTime : UInt32, @discTime : UInt32, @nMSLinkTurn : UInt16, @nTXPackets : UInt8, @nRXPackets : UInt8)
+    end
+  end
 
   @[Extern]
-  record SOCKADDR_IRDA,
-    irdaAddressFamily : UInt16,
-    irdaDeviceID : UInt8[4],
-    irdaServiceName : Win32cr::Foundation::CHAR[25]
+  struct SOCKADDR_IRDA
+    property irdaAddressFamily : UInt16
+    property irdaDeviceID : UInt8[4]
+    property irdaServiceName : Win32cr::Foundation::CHAR[25]
+    def initialize(@irdaAddressFamily : UInt16, @irdaDeviceID : UInt8[4], @irdaServiceName : Win32cr::Foundation::CHAR[25])
+    end
+  end
 
   @[Extern]
-  record WINDOWS_IRDA_DEVICE_INFO,
-    irdaDeviceID : UInt8[4],
-    irdaDeviceName : Win32cr::Foundation::CHAR[22],
-    irdaDeviceHints1 : UInt8,
-    irdaDeviceHints2 : UInt8,
-    irdaCharSet : UInt8
+  struct WINDOWS_IRDA_DEVICE_INFO
+    property irdaDeviceID : UInt8[4]
+    property irdaDeviceName : Win32cr::Foundation::CHAR[22]
+    property irdaDeviceHints1 : UInt8
+    property irdaDeviceHints2 : UInt8
+    property irdaCharSet : UInt8
+    def initialize(@irdaDeviceID : UInt8[4], @irdaDeviceName : Win32cr::Foundation::CHAR[22], @irdaDeviceHints1 : UInt8, @irdaDeviceHints2 : UInt8, @irdaCharSet : UInt8)
+    end
+  end
 
   @[Extern]
-  record WCE_IRDA_DEVICE_INFO,
-    irdaDeviceID : UInt8[4],
-    irdaDeviceName : Win32cr::Foundation::CHAR[22],
-    reserved : UInt8[2]
+  struct WCE_IRDA_DEVICE_INFO
+    property irdaDeviceID : UInt8[4]
+    property irdaDeviceName : Win32cr::Foundation::CHAR[22]
+    property reserved : UInt8[2]
+    def initialize(@irdaDeviceID : UInt8[4], @irdaDeviceName : Win32cr::Foundation::CHAR[22], @reserved : UInt8[2])
+    end
+  end
 
   @[Extern]
-  record WINDOWS_DEVICELIST,
-    numDevice : UInt32,
-    device : Win32cr::Networking::WinSock::WINDOWS_IRDA_DEVICE_INFO*
+  struct WINDOWS_DEVICELIST
+    property numDevice : UInt32
+    property device : Win32cr::Networking::WinSock::WINDOWS_IRDA_DEVICE_INFO*
+    def initialize(@numDevice : UInt32, @device : Win32cr::Networking::WinSock::WINDOWS_IRDA_DEVICE_INFO*)
+    end
+  end
 
   @[Extern]
-  record WCE_DEVICELIST,
-    numDevice : UInt32,
-    device : Win32cr::Networking::WinSock::WCE_IRDA_DEVICE_INFO*
+  struct WCE_DEVICELIST
+    property numDevice : UInt32
+    property device : Win32cr::Networking::WinSock::WCE_IRDA_DEVICE_INFO*
+    def initialize(@numDevice : UInt32, @device : Win32cr::Networking::WinSock::WCE_IRDA_DEVICE_INFO*)
+    end
+  end
 
   @[Extern]
-  record WINDOWS_IAS_SET,
-    irdaClassName : Win32cr::Foundation::CHAR[64],
-    irdaAttribName : Win32cr::Foundation::CHAR[256],
-    irdaAttribType : UInt32,
-    irdaAttribute : Irdaattribute_e__union_ do
+  struct WINDOWS_IAS_SET
+    property irdaClassName : Win32cr::Foundation::CHAR[64]
+    property irdaAttribName : Win32cr::Foundation::CHAR[256]
+    property irdaAttribType : UInt32
+    property irdaAttribute : Irdaattribute_e__union_
 
     # Nested Type Irdaattribute_e__union_
     @[Extern(union: true)]
-    record Irdaattribute_e__union_,
-      irdaAttribInt : Int32,
-      irdaAttribOctetSeq : Irdaattriboctetseq_e__struct_,
-      irdaAttribUsrStr : Irdaattribusrstr_e__struct_ do
+    struct Irdaattribute_e__union_
+    property irdaAttribInt : Int32
+    property irdaAttribOctetSeq : Irdaattriboctetseq_e__struct_
+    property irdaAttribUsrStr : Irdaattribusrstr_e__struct_
 
       # Nested Type Irdaattriboctetseq_e__struct_
       @[Extern]
-      record Irdaattriboctetseq_e__struct_,
-        len : UInt16,
-        octet_seq : UInt8[1024]
+      struct Irdaattriboctetseq_e__struct_
+    property len : UInt16
+    property octet_seq : UInt8[1024]
+    def initialize(@len : UInt16, @octet_seq : UInt8[1024])
+    end
+      end
 
 
       # Nested Type Irdaattribusrstr_e__struct_
       @[Extern]
-      record Irdaattribusrstr_e__struct_,
-        len : UInt8,
-        char_set : UInt8,
-        usr_str : UInt8[256]
+      struct Irdaattribusrstr_e__struct_
+    property len : UInt8
+    property char_set : UInt8
+    property usr_str : UInt8[256]
+    def initialize(@len : UInt8, @char_set : UInt8, @usr_str : UInt8[256])
+    end
+      end
 
+    def initialize(@irdaAttribInt : Int32, @irdaAttribOctetSeq : Irdaattriboctetseq_e__struct_, @irdaAttribUsrStr : Irdaattribusrstr_e__struct_)
+    end
     end
 
+    def initialize(@irdaClassName : Win32cr::Foundation::CHAR[64], @irdaAttribName : Win32cr::Foundation::CHAR[256], @irdaAttribType : UInt32, @irdaAttribute : Irdaattribute_e__union_)
+    end
   end
 
   @[Extern]
-  record WINDOWS_IAS_QUERY,
-    irdaDeviceID : UInt8[4],
-    irdaClassName : Win32cr::Foundation::CHAR[64],
-    irdaAttribName : Win32cr::Foundation::CHAR[256],
-    irdaAttribType : UInt32,
-    irdaAttribute : Irdaattribute_e__union_ do
+  struct WINDOWS_IAS_QUERY
+    property irdaDeviceID : UInt8[4]
+    property irdaClassName : Win32cr::Foundation::CHAR[64]
+    property irdaAttribName : Win32cr::Foundation::CHAR[256]
+    property irdaAttribType : UInt32
+    property irdaAttribute : Irdaattribute_e__union_
 
     # Nested Type Irdaattribute_e__union_
     @[Extern(union: true)]
-    record Irdaattribute_e__union_,
-      irdaAttribInt : Int32,
-      irdaAttribOctetSeq : Irdaattriboctetseq_e__struct_,
-      irdaAttribUsrStr : Irdaattribusrstr_e__struct_ do
+    struct Irdaattribute_e__union_
+    property irdaAttribInt : Int32
+    property irdaAttribOctetSeq : Irdaattriboctetseq_e__struct_
+    property irdaAttribUsrStr : Irdaattribusrstr_e__struct_
 
       # Nested Type Irdaattriboctetseq_e__struct_
       @[Extern]
-      record Irdaattriboctetseq_e__struct_,
-        len : UInt32,
-        octet_seq : UInt8[1024]
+      struct Irdaattriboctetseq_e__struct_
+    property len : UInt32
+    property octet_seq : UInt8[1024]
+    def initialize(@len : UInt32, @octet_seq : UInt8[1024])
+    end
+      end
 
 
       # Nested Type Irdaattribusrstr_e__struct_
       @[Extern]
-      record Irdaattribusrstr_e__struct_,
-        len : UInt32,
-        char_set : UInt32,
-        usr_str : UInt8[256]
+      struct Irdaattribusrstr_e__struct_
+    property len : UInt32
+    property char_set : UInt32
+    property usr_str : UInt8[256]
+    def initialize(@len : UInt32, @char_set : UInt32, @usr_str : UInt8[256])
+    end
+      end
 
+    def initialize(@irdaAttribInt : Int32, @irdaAttribOctetSeq : Irdaattriboctetseq_e__struct_, @irdaAttribUsrStr : Irdaattribusrstr_e__struct_)
+    end
     end
 
+    def initialize(@irdaDeviceID : UInt8[4], @irdaClassName : Win32cr::Foundation::CHAR[64], @irdaAttribName : Win32cr::Foundation::CHAR[256], @irdaAttribType : UInt32, @irdaAttribute : Irdaattribute_e__union_)
+    end
   end
 
   @[Extern]
-  record NL_INTERFACE_OFFLOAD_ROD,
-    _bitfield : UInt8
+  struct NL_INTERFACE_OFFLOAD_ROD
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+  end
 
   @[Extern]
-  record NL_PATH_BANDWIDTH_ROD,
-    bandwidth : UInt64,
-    instability : UInt64,
-    bandwidth_peaked : Win32cr::Foundation::BOOLEAN
+  struct NL_PATH_BANDWIDTH_ROD
+    property bandwidth : UInt64
+    property instability : UInt64
+    property bandwidth_peaked : Win32cr::Foundation::BOOLEAN
+    def initialize(@bandwidth : UInt64, @instability : UInt64, @bandwidth_peaked : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record NL_NETWORK_CONNECTIVITY_HINT,
-    connectivity_level : Win32cr::Networking::WinSock::NL_NETWORK_CONNECTIVITY_LEVEL_HINT,
-    connectivity_cost : Win32cr::Networking::WinSock::NL_NETWORK_CONNECTIVITY_COST_HINT,
-    approaching_data_limit : Win32cr::Foundation::BOOLEAN,
-    over_data_limit : Win32cr::Foundation::BOOLEAN,
-    roaming : Win32cr::Foundation::BOOLEAN
+  struct NL_NETWORK_CONNECTIVITY_HINT
+    property connectivity_level : Win32cr::Networking::WinSock::NL_NETWORK_CONNECTIVITY_LEVEL_HINT
+    property connectivity_cost : Win32cr::Networking::WinSock::NL_NETWORK_CONNECTIVITY_COST_HINT
+    property approaching_data_limit : Win32cr::Foundation::BOOLEAN
+    property over_data_limit : Win32cr::Foundation::BOOLEAN
+    property roaming : Win32cr::Foundation::BOOLEAN
+    def initialize(@connectivity_level : Win32cr::Networking::WinSock::NL_NETWORK_CONNECTIVITY_LEVEL_HINT, @connectivity_cost : Win32cr::Networking::WinSock::NL_NETWORK_CONNECTIVITY_COST_HINT, @approaching_data_limit : Win32cr::Foundation::BOOLEAN, @over_data_limit : Win32cr::Foundation::BOOLEAN, @roaming : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record NL_BANDWIDTH_INFORMATION,
-    bandwidth : UInt64,
-    instability : UInt64,
-    bandwidth_peaked : Win32cr::Foundation::BOOLEAN
+  struct NL_BANDWIDTH_INFORMATION
+    property bandwidth : UInt64
+    property instability : UInt64
+    property bandwidth_peaked : Win32cr::Foundation::BOOLEAN
+    def initialize(@bandwidth : UInt64, @instability : UInt64, @bandwidth_peaked : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record TRANSPORT_SETTING_ID,
-    guid : LibC::GUID
+  struct TRANSPORT_SETTING_ID
+    property guid : LibC::GUID
+    def initialize(@guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record Tcp_keepalive,
-    onoff : UInt32,
-    keepalivetime : UInt32,
-    keepaliveinterval : UInt32
+  struct Tcp_keepalive
+    property onoff : UInt32
+    property keepalivetime : UInt32
+    property keepaliveinterval : UInt32
+    def initialize(@onoff : UInt32, @keepalivetime : UInt32, @keepaliveinterval : UInt32)
+    end
+  end
 
   @[Extern]
-  record REAL_TIME_NOTIFICATION_SETTING_INPUT,
-    transport_setting_id : Win32cr::Networking::WinSock::TRANSPORT_SETTING_ID,
-    broker_event_guid : LibC::GUID
+  struct REAL_TIME_NOTIFICATION_SETTING_INPUT
+    property transport_setting_id : Win32cr::Networking::WinSock::TRANSPORT_SETTING_ID
+    property broker_event_guid : LibC::GUID
+    def initialize(@transport_setting_id : Win32cr::Networking::WinSock::TRANSPORT_SETTING_ID, @broker_event_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record REAL_TIME_NOTIFICATION_SETTING_INPUT_EX,
-    transport_setting_id : Win32cr::Networking::WinSock::TRANSPORT_SETTING_ID,
-    broker_event_guid : LibC::GUID,
-    unmark : Win32cr::Foundation::BOOLEAN
+  struct REAL_TIME_NOTIFICATION_SETTING_INPUT_EX
+    property transport_setting_id : Win32cr::Networking::WinSock::TRANSPORT_SETTING_ID
+    property broker_event_guid : LibC::GUID
+    property unmark : Win32cr::Foundation::BOOLEAN
+    def initialize(@transport_setting_id : Win32cr::Networking::WinSock::TRANSPORT_SETTING_ID, @broker_event_guid : LibC::GUID, @unmark : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record REAL_TIME_NOTIFICATION_SETTING_OUTPUT,
-    channel_status : Win32cr::Networking::WinSock::CONTROL_CHANNEL_TRIGGER_STATUS
+  struct REAL_TIME_NOTIFICATION_SETTING_OUTPUT
+    property channel_status : Win32cr::Networking::WinSock::CONTROL_CHANNEL_TRIGGER_STATUS
+    def initialize(@channel_status : Win32cr::Networking::WinSock::CONTROL_CHANNEL_TRIGGER_STATUS)
+    end
+  end
 
   @[Extern]
-  record ASSOCIATE_NAMERES_CONTEXT_INPUT,
-    transport_setting_id : Win32cr::Networking::WinSock::TRANSPORT_SETTING_ID,
-    handle : UInt64
+  struct ASSOCIATE_NAMERES_CONTEXT_INPUT
+    property transport_setting_id : Win32cr::Networking::WinSock::TRANSPORT_SETTING_ID
+    property handle : UInt64
+    def initialize(@transport_setting_id : Win32cr::Networking::WinSock::TRANSPORT_SETTING_ID, @handle : UInt64)
+    end
+  end
 
   @[Extern]
-  record TIMESTAMPING_CONFIG,
-    flags : UInt32,
-    tx_timestamps_buffered : UInt16
+  struct TIMESTAMPING_CONFIG
+    property flags : UInt32
+    property tx_timestamps_buffered : UInt16
+    def initialize(@flags : UInt32, @tx_timestamps_buffered : UInt16)
+    end
+  end
 
   @[Extern]
-  record PRIORITY_STATUS,
-    sender : Win32cr::Networking::WinSock::SOCKET_PRIORITY_HINT,
-    receiver : Win32cr::Networking::WinSock::SOCKET_PRIORITY_HINT
+  struct PRIORITY_STATUS
+    property sender : Win32cr::Networking::WinSock::SOCKET_PRIORITY_HINT
+    property receiver : Win32cr::Networking::WinSock::SOCKET_PRIORITY_HINT
+    def initialize(@sender : Win32cr::Networking::WinSock::SOCKET_PRIORITY_HINT, @receiver : Win32cr::Networking::WinSock::SOCKET_PRIORITY_HINT)
+    end
+  end
 
   @[Extern]
-  record RCVALL_IF,
-    mode : Win32cr::Networking::WinSock::RCVALL_VALUE,
-    interface : UInt32
+  struct RCVALL_IF
+    property mode : Win32cr::Networking::WinSock::RCVALL_VALUE
+    property interface : UInt32
+    def initialize(@mode : Win32cr::Networking::WinSock::RCVALL_VALUE, @interface : UInt32)
+    end
+  end
 
   @[Extern]
-  record TCP_INITIAL_RTO_PARAMETERS,
-    rtt : UInt16,
-    max_syn_retransmissions : UInt8
+  struct TCP_INITIAL_RTO_PARAMETERS
+    property rtt : UInt16
+    property max_syn_retransmissions : UInt8
+    def initialize(@rtt : UInt16, @max_syn_retransmissions : UInt8)
+    end
+  end
 
   @[Extern]
-  record TCP_ICW_PARAMETERS,
-    level : Win32cr::Networking::WinSock::TCP_ICW_LEVEL
+  struct TCP_ICW_PARAMETERS
+    property level : Win32cr::Networking::WinSock::TCP_ICW_LEVEL
+    def initialize(@level : Win32cr::Networking::WinSock::TCP_ICW_LEVEL)
+    end
+  end
 
   @[Extern]
-  record TCP_ACK_FREQUENCY_PARAMETERS,
-    tcp_delayed_ack_frequency : UInt8
+  struct TCP_ACK_FREQUENCY_PARAMETERS
+    property tcp_delayed_ack_frequency : UInt8
+    def initialize(@tcp_delayed_ack_frequency : UInt8)
+    end
+  end
 
   @[Extern]
-  record TCP_INFO_v0,
-    state : Win32cr::Networking::WinSock::TCPSTATE,
-    mss : UInt32,
-    connection_time_ms : UInt64,
-    timestamps_enabled : Win32cr::Foundation::BOOLEAN,
-    rtt_us : UInt32,
-    min_rtt_us : UInt32,
-    bytes_in_flight : UInt32,
-    cwnd : UInt32,
-    snd_wnd : UInt32,
-    rcv_wnd : UInt32,
-    rcv_buf : UInt32,
-    bytes_out : UInt64,
-    bytes_in : UInt64,
-    bytes_reordered : UInt32,
-    bytes_retrans : UInt32,
-    fast_retrans : UInt32,
-    dup_acks_in : UInt32,
-    timeout_episodes : UInt32,
-    syn_retrans : UInt8
+  struct TCP_INFO_v0
+    property state : Win32cr::Networking::WinSock::TCPSTATE
+    property mss : UInt32
+    property connection_time_ms : UInt64
+    property timestamps_enabled : Win32cr::Foundation::BOOLEAN
+    property rtt_us : UInt32
+    property min_rtt_us : UInt32
+    property bytes_in_flight : UInt32
+    property cwnd : UInt32
+    property snd_wnd : UInt32
+    property rcv_wnd : UInt32
+    property rcv_buf : UInt32
+    property bytes_out : UInt64
+    property bytes_in : UInt64
+    property bytes_reordered : UInt32
+    property bytes_retrans : UInt32
+    property fast_retrans : UInt32
+    property dup_acks_in : UInt32
+    property timeout_episodes : UInt32
+    property syn_retrans : UInt8
+    def initialize(@state : Win32cr::Networking::WinSock::TCPSTATE, @mss : UInt32, @connection_time_ms : UInt64, @timestamps_enabled : Win32cr::Foundation::BOOLEAN, @rtt_us : UInt32, @min_rtt_us : UInt32, @bytes_in_flight : UInt32, @cwnd : UInt32, @snd_wnd : UInt32, @rcv_wnd : UInt32, @rcv_buf : UInt32, @bytes_out : UInt64, @bytes_in : UInt64, @bytes_reordered : UInt32, @bytes_retrans : UInt32, @fast_retrans : UInt32, @dup_acks_in : UInt32, @timeout_episodes : UInt32, @syn_retrans : UInt8)
+    end
+  end
 
   @[Extern]
-  record TCP_INFO_v1,
-    state : Win32cr::Networking::WinSock::TCPSTATE,
-    mss : UInt32,
-    connection_time_ms : UInt64,
-    timestamps_enabled : Win32cr::Foundation::BOOLEAN,
-    rtt_us : UInt32,
-    min_rtt_us : UInt32,
-    bytes_in_flight : UInt32,
-    cwnd : UInt32,
-    snd_wnd : UInt32,
-    rcv_wnd : UInt32,
-    rcv_buf : UInt32,
-    bytes_out : UInt64,
-    bytes_in : UInt64,
-    bytes_reordered : UInt32,
-    bytes_retrans : UInt32,
-    fast_retrans : UInt32,
-    dup_acks_in : UInt32,
-    timeout_episodes : UInt32,
-    syn_retrans : UInt8,
-    snd_lim_trans_rwin : UInt32,
-    snd_lim_time_rwin : UInt32,
-    snd_lim_bytes_rwin : UInt64,
-    snd_lim_trans_cwnd : UInt32,
-    snd_lim_time_cwnd : UInt32,
-    snd_lim_bytes_cwnd : UInt64,
-    snd_lim_trans_snd : UInt32,
-    snd_lim_time_snd : UInt32,
-    snd_lim_bytes_snd : UInt64
+  struct TCP_INFO_v1
+    property state : Win32cr::Networking::WinSock::TCPSTATE
+    property mss : UInt32
+    property connection_time_ms : UInt64
+    property timestamps_enabled : Win32cr::Foundation::BOOLEAN
+    property rtt_us : UInt32
+    property min_rtt_us : UInt32
+    property bytes_in_flight : UInt32
+    property cwnd : UInt32
+    property snd_wnd : UInt32
+    property rcv_wnd : UInt32
+    property rcv_buf : UInt32
+    property bytes_out : UInt64
+    property bytes_in : UInt64
+    property bytes_reordered : UInt32
+    property bytes_retrans : UInt32
+    property fast_retrans : UInt32
+    property dup_acks_in : UInt32
+    property timeout_episodes : UInt32
+    property syn_retrans : UInt8
+    property snd_lim_trans_rwin : UInt32
+    property snd_lim_time_rwin : UInt32
+    property snd_lim_bytes_rwin : UInt64
+    property snd_lim_trans_cwnd : UInt32
+    property snd_lim_time_cwnd : UInt32
+    property snd_lim_bytes_cwnd : UInt64
+    property snd_lim_trans_snd : UInt32
+    property snd_lim_time_snd : UInt32
+    property snd_lim_bytes_snd : UInt64
+    def initialize(@state : Win32cr::Networking::WinSock::TCPSTATE, @mss : UInt32, @connection_time_ms : UInt64, @timestamps_enabled : Win32cr::Foundation::BOOLEAN, @rtt_us : UInt32, @min_rtt_us : UInt32, @bytes_in_flight : UInt32, @cwnd : UInt32, @snd_wnd : UInt32, @rcv_wnd : UInt32, @rcv_buf : UInt32, @bytes_out : UInt64, @bytes_in : UInt64, @bytes_reordered : UInt32, @bytes_retrans : UInt32, @fast_retrans : UInt32, @dup_acks_in : UInt32, @timeout_episodes : UInt32, @syn_retrans : UInt8, @snd_lim_trans_rwin : UInt32, @snd_lim_time_rwin : UInt32, @snd_lim_bytes_rwin : UInt64, @snd_lim_trans_cwnd : UInt32, @snd_lim_time_cwnd : UInt32, @snd_lim_bytes_cwnd : UInt64, @snd_lim_trans_snd : UInt32, @snd_lim_time_snd : UInt32, @snd_lim_bytes_snd : UInt64)
+    end
+  end
 
   @[Extern]
-  record INET_PORT_RANGE,
-    start_port : UInt16,
-    number_of_ports : UInt16
+  struct INET_PORT_RANGE
+    property start_port : UInt16
+    property number_of_ports : UInt16
+    def initialize(@start_port : UInt16, @number_of_ports : UInt16)
+    end
+  end
 
   @[Extern]
-  record INET_PORT_RESERVATION_TOKEN,
-    token : UInt64
+  struct INET_PORT_RESERVATION_TOKEN
+    property token : UInt64
+    def initialize(@token : UInt64)
+    end
+  end
 
   @[Extern]
-  record INET_PORT_RESERVATION_INSTANCE,
-    reservation : Win32cr::Networking::WinSock::INET_PORT_RANGE,
-    token : Win32cr::Networking::WinSock::INET_PORT_RESERVATION_TOKEN
+  struct INET_PORT_RESERVATION_INSTANCE
+    property reservation : Win32cr::Networking::WinSock::INET_PORT_RANGE
+    property token : Win32cr::Networking::WinSock::INET_PORT_RESERVATION_TOKEN
+    def initialize(@reservation : Win32cr::Networking::WinSock::INET_PORT_RANGE, @token : Win32cr::Networking::WinSock::INET_PORT_RESERVATION_TOKEN)
+    end
+  end
 
   @[Extern]
-  record INET_PORT_RESERVATION_INFORMATION,
-    owning_pid : UInt32
+  struct INET_PORT_RESERVATION_INFORMATION
+    property owning_pid : UInt32
+    def initialize(@owning_pid : UInt32)
+    end
+  end
 
   @[Extern]
-  record SOCKET_SECURITY_SETTINGS,
-    security_protocol : Win32cr::Networking::WinSock::SOCKET_SECURITY_PROTOCOL,
-    security_flags : UInt32
+  struct SOCKET_SECURITY_SETTINGS
+    property security_protocol : Win32cr::Networking::WinSock::SOCKET_SECURITY_PROTOCOL
+    property security_flags : UInt32
+    def initialize(@security_protocol : Win32cr::Networking::WinSock::SOCKET_SECURITY_PROTOCOL, @security_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record SOCKET_SECURITY_SETTINGS_IPSEC,
-    security_protocol : Win32cr::Networking::WinSock::SOCKET_SECURITY_PROTOCOL,
-    security_flags : UInt32,
-    ipsec_flags : UInt32,
-    authip_mm_policy_key : LibC::GUID,
-    authip_qm_policy_key : LibC::GUID,
-    reserved : LibC::GUID,
-    reserved2 : UInt64,
-    user_name_string_len : UInt32,
-    domain_name_string_len : UInt32,
-    password_string_len : UInt32,
-    all_strings : UInt16*
+  struct SOCKET_SECURITY_SETTINGS_IPSEC
+    property security_protocol : Win32cr::Networking::WinSock::SOCKET_SECURITY_PROTOCOL
+    property security_flags : UInt32
+    property ipsec_flags : UInt32
+    property authip_mm_policy_key : LibC::GUID
+    property authip_qm_policy_key : LibC::GUID
+    property reserved : LibC::GUID
+    property reserved2 : UInt64
+    property user_name_string_len : UInt32
+    property domain_name_string_len : UInt32
+    property password_string_len : UInt32
+    property all_strings : UInt16*
+    def initialize(@security_protocol : Win32cr::Networking::WinSock::SOCKET_SECURITY_PROTOCOL, @security_flags : UInt32, @ipsec_flags : UInt32, @authip_mm_policy_key : LibC::GUID, @authip_qm_policy_key : LibC::GUID, @reserved : LibC::GUID, @reserved2 : UInt64, @user_name_string_len : UInt32, @domain_name_string_len : UInt32, @password_string_len : UInt32, @all_strings : UInt16*)
+    end
+  end
 
   @[Extern]
-  record SOCKET_PEER_TARGET_NAME,
-    security_protocol : Win32cr::Networking::WinSock::SOCKET_SECURITY_PROTOCOL,
-    peer_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE,
-    peer_target_name_string_len : UInt32,
-    all_strings : UInt16*
+  struct SOCKET_PEER_TARGET_NAME
+    property security_protocol : Win32cr::Networking::WinSock::SOCKET_SECURITY_PROTOCOL
+    property peer_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE
+    property peer_target_name_string_len : UInt32
+    property all_strings : UInt16*
+    def initialize(@security_protocol : Win32cr::Networking::WinSock::SOCKET_SECURITY_PROTOCOL, @peer_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE, @peer_target_name_string_len : UInt32, @all_strings : UInt16*)
+    end
+  end
 
   @[Extern]
-  record SOCKET_SECURITY_QUERY_TEMPLATE,
-    security_protocol : Win32cr::Networking::WinSock::SOCKET_SECURITY_PROTOCOL,
-    peer_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE,
-    peer_token_access_mask : UInt32
+  struct SOCKET_SECURITY_QUERY_TEMPLATE
+    property security_protocol : Win32cr::Networking::WinSock::SOCKET_SECURITY_PROTOCOL
+    property peer_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE
+    property peer_token_access_mask : UInt32
+    def initialize(@security_protocol : Win32cr::Networking::WinSock::SOCKET_SECURITY_PROTOCOL, @peer_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE, @peer_token_access_mask : UInt32)
+    end
+  end
 
   @[Extern]
-  record SOCKET_SECURITY_QUERY_TEMPLATE_IPSEC2,
-    security_protocol : Win32cr::Networking::WinSock::SOCKET_SECURITY_PROTOCOL,
-    peer_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE,
-    peer_token_access_mask : UInt32,
-    flags : UInt32,
-    field_mask : UInt32
+  struct SOCKET_SECURITY_QUERY_TEMPLATE_IPSEC2
+    property security_protocol : Win32cr::Networking::WinSock::SOCKET_SECURITY_PROTOCOL
+    property peer_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE
+    property peer_token_access_mask : UInt32
+    property flags : UInt32
+    property field_mask : UInt32
+    def initialize(@security_protocol : Win32cr::Networking::WinSock::SOCKET_SECURITY_PROTOCOL, @peer_address : Win32cr::Networking::WinSock::SOCKADDR_STORAGE, @peer_token_access_mask : UInt32, @flags : UInt32, @field_mask : UInt32)
+    end
+  end
 
   @[Extern]
-  record SOCKET_SECURITY_QUERY_INFO,
-    security_protocol : Win32cr::Networking::WinSock::SOCKET_SECURITY_PROTOCOL,
-    flags : UInt32,
-    peer_application_access_token_handle : UInt64,
-    peer_machine_access_token_handle : UInt64
+  struct SOCKET_SECURITY_QUERY_INFO
+    property security_protocol : Win32cr::Networking::WinSock::SOCKET_SECURITY_PROTOCOL
+    property flags : UInt32
+    property peer_application_access_token_handle : UInt64
+    property peer_machine_access_token_handle : UInt64
+    def initialize(@security_protocol : Win32cr::Networking::WinSock::SOCKET_SECURITY_PROTOCOL, @flags : UInt32, @peer_application_access_token_handle : UInt64, @peer_machine_access_token_handle : UInt64)
+    end
+  end
 
   @[Extern]
-  record SOCKET_SECURITY_QUERY_INFO_IPSEC2,
-    security_protocol : Win32cr::Networking::WinSock::SOCKET_SECURITY_PROTOCOL,
-    flags : UInt32,
-    peer_application_access_token_handle : UInt64,
-    peer_machine_access_token_handle : UInt64,
-    mm_sa_id : UInt64,
-    qm_sa_id : UInt64,
-    negotiation_winerr : UInt32,
-    sa_lookup_context : LibC::GUID
+  struct SOCKET_SECURITY_QUERY_INFO_IPSEC2
+    property security_protocol : Win32cr::Networking::WinSock::SOCKET_SECURITY_PROTOCOL
+    property flags : UInt32
+    property peer_application_access_token_handle : UInt64
+    property peer_machine_access_token_handle : UInt64
+    property mm_sa_id : UInt64
+    property qm_sa_id : UInt64
+    property negotiation_winerr : UInt32
+    property sa_lookup_context : LibC::GUID
+    def initialize(@security_protocol : Win32cr::Networking::WinSock::SOCKET_SECURITY_PROTOCOL, @flags : UInt32, @peer_application_access_token_handle : UInt64, @peer_machine_access_token_handle : UInt64, @mm_sa_id : UInt64, @qm_sa_id : UInt64, @negotiation_winerr : UInt32, @sa_lookup_context : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record RSS_SCALABILITY_INFO,
-    rss_enabled : Win32cr::Foundation::BOOLEAN
+  struct RSS_SCALABILITY_INFO
+    property rss_enabled : Win32cr::Foundation::BOOLEAN
+    def initialize(@rss_enabled : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record WSA_COMPATIBILITY_MODE,
-    behavior_id : Win32cr::Networking::WinSock::WSA_COMPATIBILITY_BEHAVIOR_ID,
-    target_os_version : UInt32
+  struct WSA_COMPATIBILITY_MODE
+    property behavior_id : Win32cr::Networking::WinSock::WSA_COMPATIBILITY_BEHAVIOR_ID
+    property target_os_version : UInt32
+    def initialize(@behavior_id : Win32cr::Networking::WinSock::WSA_COMPATIBILITY_BEHAVIOR_ID, @target_os_version : UInt32)
+    end
+  end
 
   @[Extern]
-  record RIORESULT,
-    status : Int32,
-    bytes_transferred : UInt32,
-    socket_context : UInt64,
-    request_context : UInt64
+  struct RIORESULT
+    property status : Int32
+    property bytes_transferred : UInt32
+    property socket_context : UInt64
+    property request_context : UInt64
+    def initialize(@status : Int32, @bytes_transferred : UInt32, @socket_context : UInt64, @request_context : UInt64)
+    end
+  end
 
   @[Extern]
-  record RIO_BUF,
-    buffer_id : Win32cr::Networking::WinSock::RIO_BUFFERID_t*,
-    offset : UInt32,
-    length : UInt32
+  struct RIO_BUF
+    property buffer_id : Win32cr::Networking::WinSock::RIO_BUFFERID_t*
+    property offset : UInt32
+    property length : UInt32
+    def initialize(@buffer_id : Win32cr::Networking::WinSock::RIO_BUFFERID_t*, @offset : UInt32, @length : UInt32)
+    end
+  end
 
   @[Extern]
-  record RIO_CMSG_BUFFER,
-    total_length : UInt32
+  struct RIO_CMSG_BUFFER
+    property total_length : UInt32
+    def initialize(@total_length : UInt32)
+    end
+  end
 
   @[Extern]
-  record ATM_ADDRESS,
-    address_type : UInt32,
-    numof_digits : UInt32,
-    addr : UInt8[20]
+  struct ATM_ADDRESS
+    property address_type : UInt32
+    property numof_digits : UInt32
+    property addr : UInt8[20]
+    def initialize(@address_type : UInt32, @numof_digits : UInt32, @addr : UInt8[20])
+    end
+  end
 
   @[Extern]
-  record ATM_BLLI,
-    layer2_protocol : UInt32,
-    layer2_user_specified_protocol : UInt32,
-    layer3_protocol : UInt32,
-    layer3_user_specified_protocol : UInt32,
-    layer3_ipi : UInt32,
-    snap_id : UInt8[5]
+  struct ATM_BLLI
+    property layer2_protocol : UInt32
+    property layer2_user_specified_protocol : UInt32
+    property layer3_protocol : UInt32
+    property layer3_user_specified_protocol : UInt32
+    property layer3_ipi : UInt32
+    property snap_id : UInt8[5]
+    def initialize(@layer2_protocol : UInt32, @layer2_user_specified_protocol : UInt32, @layer3_protocol : UInt32, @layer3_user_specified_protocol : UInt32, @layer3_ipi : UInt32, @snap_id : UInt8[5])
+    end
+  end
 
   @[Extern]
-  record ATM_BHLI,
-    high_layer_info_type : UInt32,
-    high_layer_info_length : UInt32,
-    high_layer_info : UInt8[8]
+  struct ATM_BHLI
+    property high_layer_info_type : UInt32
+    property high_layer_info_length : UInt32
+    property high_layer_info : UInt8[8]
+    def initialize(@high_layer_info_type : UInt32, @high_layer_info_length : UInt32, @high_layer_info : UInt8[8])
+    end
+  end
 
   @[Extern]
-  record Sockaddr_atm,
-    satm_family : UInt16,
-    satm_number : Win32cr::Networking::WinSock::ATM_ADDRESS,
-    satm_blli : Win32cr::Networking::WinSock::ATM_BLLI,
-    satm_bhli : Win32cr::Networking::WinSock::ATM_BHLI
+  struct Sockaddr_atm
+    property satm_family : UInt16
+    property satm_number : Win32cr::Networking::WinSock::ATM_ADDRESS
+    property satm_blli : Win32cr::Networking::WinSock::ATM_BLLI
+    property satm_bhli : Win32cr::Networking::WinSock::ATM_BHLI
+    def initialize(@satm_family : UInt16, @satm_number : Win32cr::Networking::WinSock::ATM_ADDRESS, @satm_blli : Win32cr::Networking::WinSock::ATM_BLLI, @satm_bhli : Win32cr::Networking::WinSock::ATM_BHLI)
+    end
+  end
 
   @[Extern]
-  record Q2931_IE,
-    ie_type : Win32cr::Networking::WinSock::Q2931_IE_TYPE,
-    ie_length : UInt32,
-    ie : UInt8*
+  struct Q2931_IE
+    property ie_type : Win32cr::Networking::WinSock::Q2931_IE_TYPE
+    property ie_length : UInt32
+    property ie : UInt8*
+    def initialize(@ie_type : Win32cr::Networking::WinSock::Q2931_IE_TYPE, @ie_length : UInt32, @ie : UInt8*)
+    end
+  end
 
   @[Extern]
-  record AAL5_PARAMETERS,
-    forward_max_cpcssdu_size : UInt32,
-    backward_max_cpcssdu_size : UInt32,
-    mode : UInt8,
-    sscs_type : UInt8
+  struct AAL5_PARAMETERS
+    property forward_max_cpcssdu_size : UInt32
+    property backward_max_cpcssdu_size : UInt32
+    property mode : UInt8
+    property sscs_type : UInt8
+    def initialize(@forward_max_cpcssdu_size : UInt32, @backward_max_cpcssdu_size : UInt32, @mode : UInt8, @sscs_type : UInt8)
+    end
+  end
 
   @[Extern]
-  record AALUSER_PARAMETERS,
-    user_defined : UInt32
+  struct AALUSER_PARAMETERS
+    property user_defined : UInt32
+    def initialize(@user_defined : UInt32)
+    end
+  end
 
   @[Extern]
-  record AAL_PARAMETERS_IE,
-    aal_type : Win32cr::Networking::WinSock::AAL_TYPE,
-    aal_specific_parameters : AALSpecificParameters_e__Union_ do
+  struct AAL_PARAMETERS_IE
+    property aal_type : Win32cr::Networking::WinSock::AAL_TYPE
+    property aal_specific_parameters : AALSpecificParameters_e__Union_
 
     # Nested Type AALSpecificParameters_e__Union_
     @[Extern(union: true)]
-    record AALSpecificParameters_e__Union_,
-      aal5_parameters : Win32cr::Networking::WinSock::AAL5_PARAMETERS,
-      aal_user_parameters : Win32cr::Networking::WinSock::AALUSER_PARAMETERS
+    struct AALSpecificParameters_e__Union_
+    property aal5_parameters : Win32cr::Networking::WinSock::AAL5_PARAMETERS
+    property aal_user_parameters : Win32cr::Networking::WinSock::AALUSER_PARAMETERS
+    def initialize(@aal5_parameters : Win32cr::Networking::WinSock::AAL5_PARAMETERS, @aal_user_parameters : Win32cr::Networking::WinSock::AALUSER_PARAMETERS)
+    end
+    end
 
+    def initialize(@aal_type : Win32cr::Networking::WinSock::AAL_TYPE, @aal_specific_parameters : AALSpecificParameters_e__Union_)
+    end
   end
 
   @[Extern]
-  record ATM_TD,
-    peak_cell_rate_clp0 : UInt32,
-    peak_cell_rate_clp01 : UInt32,
-    sustainable_cell_rate_clp0 : UInt32,
-    sustainable_cell_rate_clp01 : UInt32,
-    max_burst_size_clp0 : UInt32,
-    max_burst_size_clp01 : UInt32,
-    tagging : Win32cr::Foundation::BOOL
+  struct ATM_TD
+    property peak_cell_rate_clp0 : UInt32
+    property peak_cell_rate_clp01 : UInt32
+    property sustainable_cell_rate_clp0 : UInt32
+    property sustainable_cell_rate_clp01 : UInt32
+    property max_burst_size_clp0 : UInt32
+    property max_burst_size_clp01 : UInt32
+    property tagging : Win32cr::Foundation::BOOL
+    def initialize(@peak_cell_rate_clp0 : UInt32, @peak_cell_rate_clp01 : UInt32, @sustainable_cell_rate_clp0 : UInt32, @sustainable_cell_rate_clp01 : UInt32, @max_burst_size_clp0 : UInt32, @max_burst_size_clp01 : UInt32, @tagging : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record ATM_TRAFFIC_DESCRIPTOR_IE,
-    forward : Win32cr::Networking::WinSock::ATM_TD,
-    backward : Win32cr::Networking::WinSock::ATM_TD,
-    best_effort : Win32cr::Foundation::BOOL
+  struct ATM_TRAFFIC_DESCRIPTOR_IE
+    property forward : Win32cr::Networking::WinSock::ATM_TD
+    property backward : Win32cr::Networking::WinSock::ATM_TD
+    property best_effort : Win32cr::Foundation::BOOL
+    def initialize(@forward : Win32cr::Networking::WinSock::ATM_TD, @backward : Win32cr::Networking::WinSock::ATM_TD, @best_effort : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record ATM_BROADBAND_BEARER_CAPABILITY_IE,
-    bearer_class : UInt8,
-    traffic_type : UInt8,
-    timing_requirements : UInt8,
-    clipping_susceptability : UInt8,
-    user_plane_connection_config : UInt8
+  struct ATM_BROADBAND_BEARER_CAPABILITY_IE
+    property bearer_class : UInt8
+    property traffic_type : UInt8
+    property timing_requirements : UInt8
+    property clipping_susceptability : UInt8
+    property user_plane_connection_config : UInt8
+    def initialize(@bearer_class : UInt8, @traffic_type : UInt8, @timing_requirements : UInt8, @clipping_susceptability : UInt8, @user_plane_connection_config : UInt8)
+    end
+  end
 
   @[Extern]
-  record ATM_BLLI_IE,
-    layer2_protocol : UInt32,
-    layer2_mode : UInt8,
-    layer2_window_size : UInt8,
-    layer2_user_specified_protocol : UInt32,
-    layer3_protocol : UInt32,
-    layer3_mode : UInt8,
-    layer3_default_packet_size : UInt8,
-    layer3_packet_window_size : UInt8,
-    layer3_user_specified_protocol : UInt32,
-    layer3_ipi : UInt32,
-    snap_id : UInt8[5]
+  struct ATM_BLLI_IE
+    property layer2_protocol : UInt32
+    property layer2_mode : UInt8
+    property layer2_window_size : UInt8
+    property layer2_user_specified_protocol : UInt32
+    property layer3_protocol : UInt32
+    property layer3_mode : UInt8
+    property layer3_default_packet_size : UInt8
+    property layer3_packet_window_size : UInt8
+    property layer3_user_specified_protocol : UInt32
+    property layer3_ipi : UInt32
+    property snap_id : UInt8[5]
+    def initialize(@layer2_protocol : UInt32, @layer2_mode : UInt8, @layer2_window_size : UInt8, @layer2_user_specified_protocol : UInt32, @layer3_protocol : UInt32, @layer3_mode : UInt8, @layer3_default_packet_size : UInt8, @layer3_packet_window_size : UInt8, @layer3_user_specified_protocol : UInt32, @layer3_ipi : UInt32, @snap_id : UInt8[5])
+    end
+  end
 
   @[Extern]
-  record ATM_CALLING_PARTY_NUMBER_IE,
-    atm_number : Win32cr::Networking::WinSock::ATM_ADDRESS,
-    presentation_indication : UInt8,
-    screening_indicator : UInt8
+  struct ATM_CALLING_PARTY_NUMBER_IE
+    property atm_number : Win32cr::Networking::WinSock::ATM_ADDRESS
+    property presentation_indication : UInt8
+    property screening_indicator : UInt8
+    def initialize(@atm_number : Win32cr::Networking::WinSock::ATM_ADDRESS, @presentation_indication : UInt8, @screening_indicator : UInt8)
+    end
+  end
 
   @[Extern]
-  record ATM_CAUSE_IE,
-    location : UInt8,
-    cause : UInt8,
-    diagnostics_length : UInt8,
-    diagnostics : UInt8[4]
+  struct ATM_CAUSE_IE
+    property location : UInt8
+    property cause : UInt8
+    property diagnostics_length : UInt8
+    property diagnostics : UInt8[4]
+    def initialize(@location : UInt8, @cause : UInt8, @diagnostics_length : UInt8, @diagnostics : UInt8[4])
+    end
+  end
 
   @[Extern]
-  record ATM_QOS_CLASS_IE,
-    qos_class_forward : UInt8,
-    qos_class_backward : UInt8
+  struct ATM_QOS_CLASS_IE
+    property qos_class_forward : UInt8
+    property qos_class_backward : UInt8
+    def initialize(@qos_class_forward : UInt8, @qos_class_backward : UInt8)
+    end
+  end
 
   @[Extern]
-  record ATM_TRANSIT_NETWORK_SELECTION_IE,
-    type_of_network_id : UInt8,
-    network_id_plan : UInt8,
-    network_id_length : UInt8,
-    network_id : UInt8*
+  struct ATM_TRANSIT_NETWORK_SELECTION_IE
+    property type_of_network_id : UInt8
+    property network_id_plan : UInt8
+    property network_id_length : UInt8
+    property network_id : UInt8*
+    def initialize(@type_of_network_id : UInt8, @network_id_plan : UInt8, @network_id_length : UInt8, @network_id : UInt8*)
+    end
+  end
 
   @[Extern]
-  record ATM_CONNECTION_ID,
-    device_number : UInt32,
-    vpi : UInt32,
-    vci : UInt32
+  struct ATM_CONNECTION_ID
+    property device_number : UInt32
+    property vpi : UInt32
+    property vci : UInt32
+    def initialize(@device_number : UInt32, @vpi : UInt32, @vci : UInt32)
+    end
+  end
 
   @[Extern]
-  record ATM_PVC_PARAMS,
-    pvc_connection_id : Win32cr::Networking::WinSock::ATM_CONNECTION_ID,
-    pvc_qos : Win32cr::Networking::WinSock::QOS
+  struct ATM_PVC_PARAMS
+    property pvc_connection_id : Win32cr::Networking::WinSock::ATM_CONNECTION_ID
+    property pvc_qos : Win32cr::Networking::WinSock::QOS
+    def initialize(@pvc_connection_id : Win32cr::Networking::WinSock::ATM_CONNECTION_ID, @pvc_qos : Win32cr::Networking::WinSock::QOS)
+    end
+  end
 
   @[Extern]
-  record NAPI_DOMAIN_DESCRIPTION_BLOB,
-    auth_level : UInt32,
-    cchDomainName : UInt32,
-    offset_next_domain_description : UInt32,
-    offset_this_domain_name : UInt32
+  struct NAPI_DOMAIN_DESCRIPTION_BLOB
+    property auth_level : UInt32
+    property cchDomainName : UInt32
+    property offset_next_domain_description : UInt32
+    property offset_this_domain_name : UInt32
+    def initialize(@auth_level : UInt32, @cchDomainName : UInt32, @offset_next_domain_description : UInt32, @offset_this_domain_name : UInt32)
+    end
+  end
 
   @[Extern]
-  record NAPI_PROVIDER_INSTALLATION_BLOB,
-    dwVersion : UInt32,
-    dwProviderType : UInt32,
-    fSupportsWildCard : UInt32,
-    cDomains : UInt32,
-    offset_first_domain : UInt32
+  struct NAPI_PROVIDER_INSTALLATION_BLOB
+    property dwVersion : UInt32
+    property dwProviderType : UInt32
+    property fSupportsWildCard : UInt32
+    property cDomains : UInt32
+    property offset_first_domain : UInt32
+    def initialize(@dwVersion : UInt32, @dwProviderType : UInt32, @fSupportsWildCard : UInt32, @cDomains : UInt32, @offset_first_domain : UInt32)
+    end
+  end
 
   @[Extern]
-  record TRANSMIT_FILE_BUFFERS,
-    head : Void*,
-    head_length : UInt32,
-    tail : Void*,
-    tail_length : UInt32
+  struct TRANSMIT_FILE_BUFFERS
+    property head : Void*
+    property head_length : UInt32
+    property tail : Void*
+    property tail_length : UInt32
+    def initialize(@head : Void*, @head_length : UInt32, @tail : Void*, @tail_length : UInt32)
+    end
+  end
 
   @[Extern]
-  record TRANSMIT_PACKETS_ELEMENT,
-    dwElFlags : UInt32,
-    cLength : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct TRANSMIT_PACKETS_ELEMENT
+    property dwElFlags : UInt32
+    property cLength : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      pBuffer : Void* do
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property pBuffer : Void*
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        nFileOffset : Win32cr::Foundation::LARGE_INTEGER,
-        hFile : Win32cr::Foundation::HANDLE
+      struct Anonymous_e__Struct_
+    property nFileOffset : Win32cr::Foundation::LARGE_INTEGER
+    property hFile : Win32cr::Foundation::HANDLE
+    def initialize(@nFileOffset : Win32cr::Foundation::LARGE_INTEGER, @hFile : Win32cr::Foundation::HANDLE)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @pBuffer : Void*)
+    end
     end
 
+    def initialize(@dwElFlags : UInt32, @cLength : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record NLA_BLOB,
-    header : Header_e__struct_,
-    data : Data_e__union_ do
+  struct NLA_BLOB
+    property header : Header_e__struct_
+    property data : Data_e__union_
 
     # Nested Type Data_e__union_
     @[Extern(union: true)]
-    record Data_e__union_,
-      rawData : Win32cr::Foundation::CHAR*,
-      interfaceData : Interfacedata_e__struct_,
-      locationData : Locationdata_e__struct_,
-      connectivity : Connectivity_e__struct_,
-      ics : ICS_e__Struct_ do
+    struct Data_e__union_
+    property rawData : Win32cr::Foundation::CHAR*
+    property interfaceData : Interfacedata_e__struct_
+    property locationData : Locationdata_e__struct_
+    property connectivity : Connectivity_e__struct_
+    property ics : ICS_e__Struct_
 
       # Nested Type ICS_e__Struct_
       @[Extern]
-      record ICS_e__Struct_,
-        remote : Remote_e__struct_ do
+      struct ICS_e__Struct_
+    property remote : Remote_e__struct_
 
         # Nested Type Remote_e__struct_
         @[Extern]
-        record Remote_e__struct_,
-          speed : UInt32,
-          type__ : UInt32,
-          state : UInt32,
-          machineName : UInt16[256],
-          sharedAdapterName : UInt16[256]
+        struct Remote_e__struct_
+    property speed : UInt32
+    property type__ : UInt32
+    property state : UInt32
+    property machineName : UInt16[256]
+    property sharedAdapterName : UInt16[256]
+    def initialize(@speed : UInt32, @type__ : UInt32, @state : UInt32, @machineName : UInt16[256], @sharedAdapterName : UInt16[256])
+    end
+        end
 
+    def initialize(@remote : Remote_e__struct_)
+    end
       end
 
 
       # Nested Type Locationdata_e__struct_
       @[Extern]
-      record Locationdata_e__struct_,
-        information : Win32cr::Foundation::CHAR*
+      struct Locationdata_e__struct_
+    property information : Win32cr::Foundation::CHAR*
+    def initialize(@information : Win32cr::Foundation::CHAR*)
+    end
+      end
 
 
       # Nested Type Connectivity_e__struct_
       @[Extern]
-      record Connectivity_e__struct_,
-        type__ : Win32cr::Networking::WinSock::NLA_CONNECTIVITY_TYPE,
-        internet : Win32cr::Networking::WinSock::NLA_INTERNET
+      struct Connectivity_e__struct_
+    property type__ : Win32cr::Networking::WinSock::NLA_CONNECTIVITY_TYPE
+    property internet : Win32cr::Networking::WinSock::NLA_INTERNET
+    def initialize(@type__ : Win32cr::Networking::WinSock::NLA_CONNECTIVITY_TYPE, @internet : Win32cr::Networking::WinSock::NLA_INTERNET)
+    end
+      end
 
 
       # Nested Type Interfacedata_e__struct_
       @[Extern]
-      record Interfacedata_e__struct_,
-        dwType : UInt32,
-        dwSpeed : UInt32,
-        adapterName : Win32cr::Foundation::CHAR*
+      struct Interfacedata_e__struct_
+    property dwType : UInt32
+    property dwSpeed : UInt32
+    property adapterName : Win32cr::Foundation::CHAR*
+    def initialize(@dwType : UInt32, @dwSpeed : UInt32, @adapterName : Win32cr::Foundation::CHAR*)
+    end
+      end
 
+    def initialize(@rawData : Win32cr::Foundation::CHAR*, @interfaceData : Interfacedata_e__struct_, @locationData : Locationdata_e__struct_, @connectivity : Connectivity_e__struct_, @ics : ICS_e__Struct_)
+    end
     end
 
 
     # Nested Type Header_e__struct_
     @[Extern]
-    record Header_e__struct_,
-      type__ : Win32cr::Networking::WinSock::NLA_BLOB_DATA_TYPE,
-      dwSize : UInt32,
-      nextOffset : UInt32
+    struct Header_e__struct_
+    property type__ : Win32cr::Networking::WinSock::NLA_BLOB_DATA_TYPE
+    property dwSize : UInt32
+    property nextOffset : UInt32
+    def initialize(@type__ : Win32cr::Networking::WinSock::NLA_BLOB_DATA_TYPE, @dwSize : UInt32, @nextOffset : UInt32)
+    end
+    end
 
+    def initialize(@header : Header_e__struct_, @data : Data_e__union_)
+    end
   end
 
   @[Extern]
-  record WSAPOLLDATA,
-    result : Int32,
-    fds : UInt32,
-    timeout : Int32,
-    fdArray : Win32cr::Networking::WinSock::WSAPOLLFD*
+  struct WSAPOLLDATA
+    property result : Int32
+    property fds : UInt32
+    property timeout : Int32
+    property fdArray : Win32cr::Networking::WinSock::WSAPOLLFD*
+    def initialize(@result : Int32, @fds : UInt32, @timeout : Int32, @fdArray : Win32cr::Networking::WinSock::WSAPOLLFD*)
+    end
+  end
 
   @[Extern]
-  record WSASENDMSG,
-    lpMsg : Win32cr::Networking::WinSock::WSAMSG*,
-    dwFlags : UInt32,
-    lpNumberOfBytesSent : UInt32*,
-    lpOverlapped : Win32cr::System::IO::OVERLAPPED*,
-    lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE
+  struct WSASENDMSG
+    property lpMsg : Win32cr::Networking::WinSock::WSAMSG*
+    property dwFlags : UInt32
+    property lpNumberOfBytesSent : UInt32*
+    property lpOverlapped : Win32cr::System::IO::OVERLAPPED*
+    property lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE
+    def initialize(@lpMsg : Win32cr::Networking::WinSock::WSAMSG*, @dwFlags : UInt32, @lpNumberOfBytesSent : UInt32*, @lpOverlapped : Win32cr::System::IO::OVERLAPPED*, @lpCompletionRoutine : Win32cr::Networking::WinSock::LPWSAOVERLAPPED_COMPLETION_ROUTINE)
+    end
+  end
 
   @[Extern]
-  record RIO_NOTIFICATION_COMPLETION,
-    type__ : Win32cr::Networking::WinSock::RIO_NOTIFICATION_COMPLETION_TYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct RIO_NOTIFICATION_COMPLETION
+    property type__ : Win32cr::Networking::WinSock::RIO_NOTIFICATION_COMPLETION_TYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      event : Event_e__Struct_,
-      iocp : Iocp_e__Struct_ do
+    struct Anonymous_e__Union_
+    property event : Event_e__Struct_
+    property iocp : Iocp_e__Struct_
 
       # Nested Type Iocp_e__Struct_
       @[Extern]
-      record Iocp_e__Struct_,
-        iocp_handle : Win32cr::Foundation::HANDLE,
-        completion_key : Void*,
-        overlapped : Void*
+      struct Iocp_e__Struct_
+    property iocp_handle : Win32cr::Foundation::HANDLE
+    property completion_key : Void*
+    property overlapped : Void*
+    def initialize(@iocp_handle : Win32cr::Foundation::HANDLE, @completion_key : Void*, @overlapped : Void*)
+    end
+      end
 
 
       # Nested Type Event_e__Struct_
       @[Extern]
-      record Event_e__Struct_,
-        event_handle : Win32cr::Foundation::HANDLE,
-        notify_reset : Win32cr::Foundation::BOOL
+      struct Event_e__Struct_
+    property event_handle : Win32cr::Foundation::HANDLE
+    property notify_reset : Win32cr::Foundation::BOOL
+    def initialize(@event_handle : Win32cr::Foundation::HANDLE, @notify_reset : Win32cr::Foundation::BOOL)
+    end
+      end
 
+    def initialize(@event : Event_e__Struct_, @iocp : Iocp_e__Struct_)
+    end
     end
 
+    def initialize(@type__ : Win32cr::Networking::WinSock::RIO_NOTIFICATION_COMPLETION_TYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record RIO_EXTENSION_FUNCTION_TABLE,
-    cbSize : UInt32,
-    rio_receive : Win32cr::Networking::WinSock::LPFN_RIORECEIVE,
-    rio_receive_ex : Win32cr::Networking::WinSock::LPFN_RIORECEIVEEX,
-    rio_send : Win32cr::Networking::WinSock::LPFN_RIOSEND,
-    rio_send_ex : Win32cr::Networking::WinSock::LPFN_RIOSENDEX,
-    rio_close_completion_queue : Win32cr::Networking::WinSock::LPFN_RIOCLOSECOMPLETIONQUEUE,
-    rio_create_completion_queue : Win32cr::Networking::WinSock::LPFN_RIOCREATECOMPLETIONQUEUE,
-    rio_create_request_queue : Win32cr::Networking::WinSock::LPFN_RIOCREATEREQUESTQUEUE,
-    rio_dequeue_completion : Win32cr::Networking::WinSock::LPFN_RIODEQUEUECOMPLETION,
-    rio_deregister_buffer : Win32cr::Networking::WinSock::LPFN_RIODEREGISTERBUFFER,
-    rio_notify : Win32cr::Networking::WinSock::LPFN_RIONOTIFY,
-    rio_register_buffer : Win32cr::Networking::WinSock::LPFN_RIOREGISTERBUFFER,
-    rio_resize_completion_queue : Win32cr::Networking::WinSock::LPFN_RIORESIZECOMPLETIONQUEUE,
-    rio_resize_request_queue : Win32cr::Networking::WinSock::LPFN_RIORESIZEREQUESTQUEUE
+  struct RIO_EXTENSION_FUNCTION_TABLE
+    property cbSize : UInt32
+    property rio_receive : Win32cr::Networking::WinSock::LPFN_RIORECEIVE
+    property rio_receive_ex : Win32cr::Networking::WinSock::LPFN_RIORECEIVEEX
+    property rio_send : Win32cr::Networking::WinSock::LPFN_RIOSEND
+    property rio_send_ex : Win32cr::Networking::WinSock::LPFN_RIOSENDEX
+    property rio_close_completion_queue : Win32cr::Networking::WinSock::LPFN_RIOCLOSECOMPLETIONQUEUE
+    property rio_create_completion_queue : Win32cr::Networking::WinSock::LPFN_RIOCREATECOMPLETIONQUEUE
+    property rio_create_request_queue : Win32cr::Networking::WinSock::LPFN_RIOCREATEREQUESTQUEUE
+    property rio_dequeue_completion : Win32cr::Networking::WinSock::LPFN_RIODEQUEUECOMPLETION
+    property rio_deregister_buffer : Win32cr::Networking::WinSock::LPFN_RIODEREGISTERBUFFER
+    property rio_notify : Win32cr::Networking::WinSock::LPFN_RIONOTIFY
+    property rio_register_buffer : Win32cr::Networking::WinSock::LPFN_RIOREGISTERBUFFER
+    property rio_resize_completion_queue : Win32cr::Networking::WinSock::LPFN_RIORESIZECOMPLETIONQUEUE
+    property rio_resize_request_queue : Win32cr::Networking::WinSock::LPFN_RIORESIZEREQUESTQUEUE
+    def initialize(@cbSize : UInt32, @rio_receive : Win32cr::Networking::WinSock::LPFN_RIORECEIVE, @rio_receive_ex : Win32cr::Networking::WinSock::LPFN_RIORECEIVEEX, @rio_send : Win32cr::Networking::WinSock::LPFN_RIOSEND, @rio_send_ex : Win32cr::Networking::WinSock::LPFN_RIOSENDEX, @rio_close_completion_queue : Win32cr::Networking::WinSock::LPFN_RIOCLOSECOMPLETIONQUEUE, @rio_create_completion_queue : Win32cr::Networking::WinSock::LPFN_RIOCREATECOMPLETIONQUEUE, @rio_create_request_queue : Win32cr::Networking::WinSock::LPFN_RIOCREATEREQUESTQUEUE, @rio_dequeue_completion : Win32cr::Networking::WinSock::LPFN_RIODEQUEUECOMPLETION, @rio_deregister_buffer : Win32cr::Networking::WinSock::LPFN_RIODEREGISTERBUFFER, @rio_notify : Win32cr::Networking::WinSock::LPFN_RIONOTIFY, @rio_register_buffer : Win32cr::Networking::WinSock::LPFN_RIOREGISTERBUFFER, @rio_resize_completion_queue : Win32cr::Networking::WinSock::LPFN_RIORESIZECOMPLETIONQUEUE, @rio_resize_request_queue : Win32cr::Networking::WinSock::LPFN_RIORESIZEREQUESTQUEUE)
+    end
+  end
 
   @[Extern]
-  record WSPData,
-    wVersion : UInt16,
-    wHighVersion : UInt16,
-    szDescription : UInt16[256]
+  struct WSPData
+    property wVersion : UInt16
+    property wHighVersion : UInt16
+    property szDescription : UInt16[256]
+    def initialize(@wVersion : UInt16, @wHighVersion : UInt16, @szDescription : UInt16[256])
+    end
+  end
 
   @[Extern]
-  record WSATHREADID,
-    thread_handle : Win32cr::Foundation::HANDLE,
-    reserved : LibC::UIntPtrT
+  struct WSATHREADID
+    property thread_handle : Win32cr::Foundation::HANDLE
+    property reserved : LibC::UIntPtrT
+    def initialize(@thread_handle : Win32cr::Foundation::HANDLE, @reserved : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record WSPPROC_TABLE,
-    lpWSPAccept : Win32cr::Networking::WinSock::LPWSPACCEPT,
-    lpWSPAddressToString : Win32cr::Networking::WinSock::LPWSPADDRESSTOSTRING,
-    lpWSPAsyncSelect : Win32cr::Networking::WinSock::LPWSPASYNCSELECT,
-    lpWSPBind : Win32cr::Networking::WinSock::LPWSPBIND,
-    lpWSPCancelBlockingCall : Win32cr::Networking::WinSock::LPWSPCANCELBLOCKINGCALL,
-    lpWSPCleanup : Win32cr::Networking::WinSock::LPWSPCLEANUP,
-    lpWSPCloseSocket : Win32cr::Networking::WinSock::LPWSPCLOSESOCKET,
-    lpWSPConnect : Win32cr::Networking::WinSock::LPWSPCONNECT,
-    lpWSPDuplicateSocket : Win32cr::Networking::WinSock::LPWSPDUPLICATESOCKET,
-    lpWSPEnumNetworkEvents : Win32cr::Networking::WinSock::LPWSPENUMNETWORKEVENTS,
-    lpWSPEventSelect : Win32cr::Networking::WinSock::LPWSPEVENTSELECT,
-    lpWSPGetOverlappedResult : Win32cr::Networking::WinSock::LPWSPGETOVERLAPPEDRESULT,
-    lpWSPGetPeerName : Win32cr::Networking::WinSock::LPWSPGETPEERNAME,
-    lpWSPGetSockName : Win32cr::Networking::WinSock::LPWSPGETSOCKNAME,
-    lpWSPGetSockOpt : Win32cr::Networking::WinSock::LPWSPGETSOCKOPT,
-    lpWSPGetQOSByName : Win32cr::Networking::WinSock::LPWSPGETQOSBYNAME,
-    lpWSPIoctl : Win32cr::Networking::WinSock::LPWSPIOCTL,
-    lpWSPJoinLeaf : Win32cr::Networking::WinSock::LPWSPJOINLEAF,
-    lpWSPListen : Win32cr::Networking::WinSock::LPWSPLISTEN,
-    lpWSPRecv : Win32cr::Networking::WinSock::LPWSPRECV,
-    lpWSPRecvDisconnect : Win32cr::Networking::WinSock::LPWSPRECVDISCONNECT,
-    lpWSPRecvFrom : Win32cr::Networking::WinSock::LPWSPRECVFROM,
-    lpWSPSelect : Win32cr::Networking::WinSock::LPWSPSELECT,
-    lpWSPSend : Win32cr::Networking::WinSock::LPWSPSEND,
-    lpWSPSendDisconnect : Win32cr::Networking::WinSock::LPWSPSENDDISCONNECT,
-    lpWSPSendTo : Win32cr::Networking::WinSock::LPWSPSENDTO,
-    lpWSPSetSockOpt : Win32cr::Networking::WinSock::LPWSPSETSOCKOPT,
-    lpWSPShutdown : Win32cr::Networking::WinSock::LPWSPSHUTDOWN,
-    lpWSPSocket : Win32cr::Networking::WinSock::LPWSPSOCKET,
-    lpWSPStringToAddress : Win32cr::Networking::WinSock::LPWSPSTRINGTOADDRESS
+  struct WSPPROC_TABLE
+    property lpWSPAccept : Win32cr::Networking::WinSock::LPWSPACCEPT
+    property lpWSPAddressToString : Win32cr::Networking::WinSock::LPWSPADDRESSTOSTRING
+    property lpWSPAsyncSelect : Win32cr::Networking::WinSock::LPWSPASYNCSELECT
+    property lpWSPBind : Win32cr::Networking::WinSock::LPWSPBIND
+    property lpWSPCancelBlockingCall : Win32cr::Networking::WinSock::LPWSPCANCELBLOCKINGCALL
+    property lpWSPCleanup : Win32cr::Networking::WinSock::LPWSPCLEANUP
+    property lpWSPCloseSocket : Win32cr::Networking::WinSock::LPWSPCLOSESOCKET
+    property lpWSPConnect : Win32cr::Networking::WinSock::LPWSPCONNECT
+    property lpWSPDuplicateSocket : Win32cr::Networking::WinSock::LPWSPDUPLICATESOCKET
+    property lpWSPEnumNetworkEvents : Win32cr::Networking::WinSock::LPWSPENUMNETWORKEVENTS
+    property lpWSPEventSelect : Win32cr::Networking::WinSock::LPWSPEVENTSELECT
+    property lpWSPGetOverlappedResult : Win32cr::Networking::WinSock::LPWSPGETOVERLAPPEDRESULT
+    property lpWSPGetPeerName : Win32cr::Networking::WinSock::LPWSPGETPEERNAME
+    property lpWSPGetSockName : Win32cr::Networking::WinSock::LPWSPGETSOCKNAME
+    property lpWSPGetSockOpt : Win32cr::Networking::WinSock::LPWSPGETSOCKOPT
+    property lpWSPGetQOSByName : Win32cr::Networking::WinSock::LPWSPGETQOSBYNAME
+    property lpWSPIoctl : Win32cr::Networking::WinSock::LPWSPIOCTL
+    property lpWSPJoinLeaf : Win32cr::Networking::WinSock::LPWSPJOINLEAF
+    property lpWSPListen : Win32cr::Networking::WinSock::LPWSPLISTEN
+    property lpWSPRecv : Win32cr::Networking::WinSock::LPWSPRECV
+    property lpWSPRecvDisconnect : Win32cr::Networking::WinSock::LPWSPRECVDISCONNECT
+    property lpWSPRecvFrom : Win32cr::Networking::WinSock::LPWSPRECVFROM
+    property lpWSPSelect : Win32cr::Networking::WinSock::LPWSPSELECT
+    property lpWSPSend : Win32cr::Networking::WinSock::LPWSPSEND
+    property lpWSPSendDisconnect : Win32cr::Networking::WinSock::LPWSPSENDDISCONNECT
+    property lpWSPSendTo : Win32cr::Networking::WinSock::LPWSPSENDTO
+    property lpWSPSetSockOpt : Win32cr::Networking::WinSock::LPWSPSETSOCKOPT
+    property lpWSPShutdown : Win32cr::Networking::WinSock::LPWSPSHUTDOWN
+    property lpWSPSocket : Win32cr::Networking::WinSock::LPWSPSOCKET
+    property lpWSPStringToAddress : Win32cr::Networking::WinSock::LPWSPSTRINGTOADDRESS
+    def initialize(@lpWSPAccept : Win32cr::Networking::WinSock::LPWSPACCEPT, @lpWSPAddressToString : Win32cr::Networking::WinSock::LPWSPADDRESSTOSTRING, @lpWSPAsyncSelect : Win32cr::Networking::WinSock::LPWSPASYNCSELECT, @lpWSPBind : Win32cr::Networking::WinSock::LPWSPBIND, @lpWSPCancelBlockingCall : Win32cr::Networking::WinSock::LPWSPCANCELBLOCKINGCALL, @lpWSPCleanup : Win32cr::Networking::WinSock::LPWSPCLEANUP, @lpWSPCloseSocket : Win32cr::Networking::WinSock::LPWSPCLOSESOCKET, @lpWSPConnect : Win32cr::Networking::WinSock::LPWSPCONNECT, @lpWSPDuplicateSocket : Win32cr::Networking::WinSock::LPWSPDUPLICATESOCKET, @lpWSPEnumNetworkEvents : Win32cr::Networking::WinSock::LPWSPENUMNETWORKEVENTS, @lpWSPEventSelect : Win32cr::Networking::WinSock::LPWSPEVENTSELECT, @lpWSPGetOverlappedResult : Win32cr::Networking::WinSock::LPWSPGETOVERLAPPEDRESULT, @lpWSPGetPeerName : Win32cr::Networking::WinSock::LPWSPGETPEERNAME, @lpWSPGetSockName : Win32cr::Networking::WinSock::LPWSPGETSOCKNAME, @lpWSPGetSockOpt : Win32cr::Networking::WinSock::LPWSPGETSOCKOPT, @lpWSPGetQOSByName : Win32cr::Networking::WinSock::LPWSPGETQOSBYNAME, @lpWSPIoctl : Win32cr::Networking::WinSock::LPWSPIOCTL, @lpWSPJoinLeaf : Win32cr::Networking::WinSock::LPWSPJOINLEAF, @lpWSPListen : Win32cr::Networking::WinSock::LPWSPLISTEN, @lpWSPRecv : Win32cr::Networking::WinSock::LPWSPRECV, @lpWSPRecvDisconnect : Win32cr::Networking::WinSock::LPWSPRECVDISCONNECT, @lpWSPRecvFrom : Win32cr::Networking::WinSock::LPWSPRECVFROM, @lpWSPSelect : Win32cr::Networking::WinSock::LPWSPSELECT, @lpWSPSend : Win32cr::Networking::WinSock::LPWSPSEND, @lpWSPSendDisconnect : Win32cr::Networking::WinSock::LPWSPSENDDISCONNECT, @lpWSPSendTo : Win32cr::Networking::WinSock::LPWSPSENDTO, @lpWSPSetSockOpt : Win32cr::Networking::WinSock::LPWSPSETSOCKOPT, @lpWSPShutdown : Win32cr::Networking::WinSock::LPWSPSHUTDOWN, @lpWSPSocket : Win32cr::Networking::WinSock::LPWSPSOCKET, @lpWSPStringToAddress : Win32cr::Networking::WinSock::LPWSPSTRINGTOADDRESS)
+    end
+  end
 
   @[Extern]
-  record WSPUPCALLTABLE,
-    lpWPUCloseEvent : Win32cr::Networking::WinSock::LPWPUCLOSEEVENT,
-    lpWPUCloseSocketHandle : Win32cr::Networking::WinSock::LPWPUCLOSESOCKETHANDLE,
-    lpWPUCreateEvent : Win32cr::Networking::WinSock::LPWPUCREATEEVENT,
-    lpWPUCreateSocketHandle : Win32cr::Networking::WinSock::LPWPUCREATESOCKETHANDLE,
-    lpWPUFDIsSet : Win32cr::Networking::WinSock::LPWPUFDISSET,
-    lpWPUGetProviderPath : Win32cr::Networking::WinSock::LPWPUGETPROVIDERPATH,
-    lpWPUModifyIFSHandle : Win32cr::Networking::WinSock::LPWPUMODIFYIFSHANDLE,
-    lpWPUPostMessage : Win32cr::Networking::WinSock::LPWPUPOSTMESSAGE,
-    lpWPUQueryBlockingCallback : Win32cr::Networking::WinSock::LPWPUQUERYBLOCKINGCALLBACK,
-    lpWPUQuerySocketHandleContext : Win32cr::Networking::WinSock::LPWPUQUERYSOCKETHANDLECONTEXT,
-    lpWPUQueueApc : Win32cr::Networking::WinSock::LPWPUQUEUEAPC,
-    lpWPUResetEvent : Win32cr::Networking::WinSock::LPWPURESETEVENT,
-    lpWPUSetEvent : Win32cr::Networking::WinSock::LPWPUSETEVENT,
-    lpWPUOpenCurrentThread : Win32cr::Networking::WinSock::LPWPUOPENCURRENTTHREAD,
-    lpWPUCloseThread : Win32cr::Networking::WinSock::LPWPUCLOSETHREAD
+  struct WSPUPCALLTABLE
+    property lpWPUCloseEvent : Win32cr::Networking::WinSock::LPWPUCLOSEEVENT
+    property lpWPUCloseSocketHandle : Win32cr::Networking::WinSock::LPWPUCLOSESOCKETHANDLE
+    property lpWPUCreateEvent : Win32cr::Networking::WinSock::LPWPUCREATEEVENT
+    property lpWPUCreateSocketHandle : Win32cr::Networking::WinSock::LPWPUCREATESOCKETHANDLE
+    property lpWPUFDIsSet : Win32cr::Networking::WinSock::LPWPUFDISSET
+    property lpWPUGetProviderPath : Win32cr::Networking::WinSock::LPWPUGETPROVIDERPATH
+    property lpWPUModifyIFSHandle : Win32cr::Networking::WinSock::LPWPUMODIFYIFSHANDLE
+    property lpWPUPostMessage : Win32cr::Networking::WinSock::LPWPUPOSTMESSAGE
+    property lpWPUQueryBlockingCallback : Win32cr::Networking::WinSock::LPWPUQUERYBLOCKINGCALLBACK
+    property lpWPUQuerySocketHandleContext : Win32cr::Networking::WinSock::LPWPUQUERYSOCKETHANDLECONTEXT
+    property lpWPUQueueApc : Win32cr::Networking::WinSock::LPWPUQUEUEAPC
+    property lpWPUResetEvent : Win32cr::Networking::WinSock::LPWPURESETEVENT
+    property lpWPUSetEvent : Win32cr::Networking::WinSock::LPWPUSETEVENT
+    property lpWPUOpenCurrentThread : Win32cr::Networking::WinSock::LPWPUOPENCURRENTTHREAD
+    property lpWPUCloseThread : Win32cr::Networking::WinSock::LPWPUCLOSETHREAD
+    def initialize(@lpWPUCloseEvent : Win32cr::Networking::WinSock::LPWPUCLOSEEVENT, @lpWPUCloseSocketHandle : Win32cr::Networking::WinSock::LPWPUCLOSESOCKETHANDLE, @lpWPUCreateEvent : Win32cr::Networking::WinSock::LPWPUCREATEEVENT, @lpWPUCreateSocketHandle : Win32cr::Networking::WinSock::LPWPUCREATESOCKETHANDLE, @lpWPUFDIsSet : Win32cr::Networking::WinSock::LPWPUFDISSET, @lpWPUGetProviderPath : Win32cr::Networking::WinSock::LPWPUGETPROVIDERPATH, @lpWPUModifyIFSHandle : Win32cr::Networking::WinSock::LPWPUMODIFYIFSHANDLE, @lpWPUPostMessage : Win32cr::Networking::WinSock::LPWPUPOSTMESSAGE, @lpWPUQueryBlockingCallback : Win32cr::Networking::WinSock::LPWPUQUERYBLOCKINGCALLBACK, @lpWPUQuerySocketHandleContext : Win32cr::Networking::WinSock::LPWPUQUERYSOCKETHANDLECONTEXT, @lpWPUQueueApc : Win32cr::Networking::WinSock::LPWPUQUEUEAPC, @lpWPUResetEvent : Win32cr::Networking::WinSock::LPWPURESETEVENT, @lpWPUSetEvent : Win32cr::Networking::WinSock::LPWPUSETEVENT, @lpWPUOpenCurrentThread : Win32cr::Networking::WinSock::LPWPUOPENCURRENTTHREAD, @lpWPUCloseThread : Win32cr::Networking::WinSock::LPWPUCLOSETHREAD)
+    end
+  end
 
   @[Extern]
-  record WSC_PROVIDER_AUDIT_INFO,
-    record_size : UInt32,
-    reserved : Void*
+  struct WSC_PROVIDER_AUDIT_INFO
+    property record_size : UInt32
+    property reserved : Void*
+    def initialize(@record_size : UInt32, @reserved : Void*)
+    end
+  end
 
   @[Extern]
-  record NSP_ROUTINE,
-    cbSize : UInt32,
-    dwMajorVersion : UInt32,
-    dwMinorVersion : UInt32,
-    nsp_cleanup : Win32cr::Networking::WinSock::LPNSPCLEANUP,
-    nsp_lookup_service_begin : Win32cr::Networking::WinSock::LPNSPLOOKUPSERVICEBEGIN,
-    nsp_lookup_service_next : Win32cr::Networking::WinSock::LPNSPLOOKUPSERVICENEXT,
-    nsp_lookup_service_end : Win32cr::Networking::WinSock::LPNSPLOOKUPSERVICEEND,
-    nsp_set_service : Win32cr::Networking::WinSock::LPNSPSETSERVICE,
-    nsp_install_service_class : Win32cr::Networking::WinSock::LPNSPINSTALLSERVICECLASS,
-    nsp_remove_service_class : Win32cr::Networking::WinSock::LPNSPREMOVESERVICECLASS,
-    nsp_get_service_class_info : Win32cr::Networking::WinSock::LPNSPGETSERVICECLASSINFO,
-    nsp_ioctl : Win32cr::Networking::WinSock::LPNSPIOCTL
+  struct NSP_ROUTINE
+    property cbSize : UInt32
+    property dwMajorVersion : UInt32
+    property dwMinorVersion : UInt32
+    property nsp_cleanup : Win32cr::Networking::WinSock::LPNSPCLEANUP
+    property nsp_lookup_service_begin : Win32cr::Networking::WinSock::LPNSPLOOKUPSERVICEBEGIN
+    property nsp_lookup_service_next : Win32cr::Networking::WinSock::LPNSPLOOKUPSERVICENEXT
+    property nsp_lookup_service_end : Win32cr::Networking::WinSock::LPNSPLOOKUPSERVICEEND
+    property nsp_set_service : Win32cr::Networking::WinSock::LPNSPSETSERVICE
+    property nsp_install_service_class : Win32cr::Networking::WinSock::LPNSPINSTALLSERVICECLASS
+    property nsp_remove_service_class : Win32cr::Networking::WinSock::LPNSPREMOVESERVICECLASS
+    property nsp_get_service_class_info : Win32cr::Networking::WinSock::LPNSPGETSERVICECLASSINFO
+    property nsp_ioctl : Win32cr::Networking::WinSock::LPNSPIOCTL
+    def initialize(@cbSize : UInt32, @dwMajorVersion : UInt32, @dwMinorVersion : UInt32, @nsp_cleanup : Win32cr::Networking::WinSock::LPNSPCLEANUP, @nsp_lookup_service_begin : Win32cr::Networking::WinSock::LPNSPLOOKUPSERVICEBEGIN, @nsp_lookup_service_next : Win32cr::Networking::WinSock::LPNSPLOOKUPSERVICENEXT, @nsp_lookup_service_end : Win32cr::Networking::WinSock::LPNSPLOOKUPSERVICEEND, @nsp_set_service : Win32cr::Networking::WinSock::LPNSPSETSERVICE, @nsp_install_service_class : Win32cr::Networking::WinSock::LPNSPINSTALLSERVICECLASS, @nsp_remove_service_class : Win32cr::Networking::WinSock::LPNSPREMOVESERVICECLASS, @nsp_get_service_class_info : Win32cr::Networking::WinSock::LPNSPGETSERVICECLASSINFO, @nsp_ioctl : Win32cr::Networking::WinSock::LPNSPIOCTL)
+    end
+  end
 
   @[Extern]
-  record NSPV2_ROUTINE,
-    cbSize : UInt32,
-    dwMajorVersion : UInt32,
-    dwMinorVersion : UInt32,
-    ns_pv2_startup : Win32cr::Networking::WinSock::LPNSPV2STARTUP,
-    ns_pv2_cleanup : Win32cr::Networking::WinSock::LPNSPV2CLEANUP,
-    ns_pv2_lookup_service_begin : Win32cr::Networking::WinSock::LPNSPV2LOOKUPSERVICEBEGIN,
-    ns_pv2_lookup_service_next_ex : Win32cr::Networking::WinSock::LPNSPV2LOOKUPSERVICENEXTEX,
-    ns_pv2_lookup_service_end : Win32cr::Networking::WinSock::LPNSPV2LOOKUPSERVICEEND,
-    ns_pv2_set_service_ex : Win32cr::Networking::WinSock::LPNSPV2SETSERVICEEX,
-    ns_pv2_client_session_rundown : Win32cr::Networking::WinSock::LPNSPV2CLIENTSESSIONRUNDOWN
+  struct NSPV2_ROUTINE
+    property cbSize : UInt32
+    property dwMajorVersion : UInt32
+    property dwMinorVersion : UInt32
+    property ns_pv2_startup : Win32cr::Networking::WinSock::LPNSPV2STARTUP
+    property ns_pv2_cleanup : Win32cr::Networking::WinSock::LPNSPV2CLEANUP
+    property ns_pv2_lookup_service_begin : Win32cr::Networking::WinSock::LPNSPV2LOOKUPSERVICEBEGIN
+    property ns_pv2_lookup_service_next_ex : Win32cr::Networking::WinSock::LPNSPV2LOOKUPSERVICENEXTEX
+    property ns_pv2_lookup_service_end : Win32cr::Networking::WinSock::LPNSPV2LOOKUPSERVICEEND
+    property ns_pv2_set_service_ex : Win32cr::Networking::WinSock::LPNSPV2SETSERVICEEX
+    property ns_pv2_client_session_rundown : Win32cr::Networking::WinSock::LPNSPV2CLIENTSESSIONRUNDOWN
+    def initialize(@cbSize : UInt32, @dwMajorVersion : UInt32, @dwMinorVersion : UInt32, @ns_pv2_startup : Win32cr::Networking::WinSock::LPNSPV2STARTUP, @ns_pv2_cleanup : Win32cr::Networking::WinSock::LPNSPV2CLEANUP, @ns_pv2_lookup_service_begin : Win32cr::Networking::WinSock::LPNSPV2LOOKUPSERVICEBEGIN, @ns_pv2_lookup_service_next_ex : Win32cr::Networking::WinSock::LPNSPV2LOOKUPSERVICENEXTEX, @ns_pv2_lookup_service_end : Win32cr::Networking::WinSock::LPNSPV2LOOKUPSERVICEEND, @ns_pv2_set_service_ex : Win32cr::Networking::WinSock::LPNSPV2SETSERVICEEX, @ns_pv2_client_session_rundown : Win32cr::Networking::WinSock::LPNSPV2CLIENTSESSIONRUNDOWN)
+    end
+  end
 
   @[Extern]
-  record NS_INFOA,
-    dwNameSpace : UInt32,
-    dwNameSpaceFlags : UInt32,
-    lpNameSpace : Win32cr::Foundation::PSTR
+  struct NS_INFOA
+    property dwNameSpace : UInt32
+    property dwNameSpaceFlags : UInt32
+    property lpNameSpace : Win32cr::Foundation::PSTR
+    def initialize(@dwNameSpace : UInt32, @dwNameSpaceFlags : UInt32, @lpNameSpace : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record NS_INFOW,
-    dwNameSpace : UInt32,
-    dwNameSpaceFlags : UInt32,
-    lpNameSpace : Win32cr::Foundation::PWSTR
+  struct NS_INFOW
+    property dwNameSpace : UInt32
+    property dwNameSpaceFlags : UInt32
+    property lpNameSpace : Win32cr::Foundation::PWSTR
+    def initialize(@dwNameSpace : UInt32, @dwNameSpaceFlags : UInt32, @lpNameSpace : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record SERVICE_TYPE_VALUE,
-    dwNameSpace : UInt32,
-    dwValueType : UInt32,
-    dwValueSize : UInt32,
-    dwValueNameOffset : UInt32,
-    dwValueOffset : UInt32
+  struct SERVICE_TYPE_VALUE
+    property dwNameSpace : UInt32
+    property dwValueType : UInt32
+    property dwValueSize : UInt32
+    property dwValueNameOffset : UInt32
+    property dwValueOffset : UInt32
+    def initialize(@dwNameSpace : UInt32, @dwValueType : UInt32, @dwValueSize : UInt32, @dwValueNameOffset : UInt32, @dwValueOffset : UInt32)
+    end
+  end
 
   @[Extern]
-  record SERVICE_TYPE_VALUE_ABSA,
-    dwNameSpace : UInt32,
-    dwValueType : UInt32,
-    dwValueSize : UInt32,
-    lpValueName : Win32cr::Foundation::PSTR,
-    lpValue : Void*
+  struct SERVICE_TYPE_VALUE_ABSA
+    property dwNameSpace : UInt32
+    property dwValueType : UInt32
+    property dwValueSize : UInt32
+    property lpValueName : Win32cr::Foundation::PSTR
+    property lpValue : Void*
+    def initialize(@dwNameSpace : UInt32, @dwValueType : UInt32, @dwValueSize : UInt32, @lpValueName : Win32cr::Foundation::PSTR, @lpValue : Void*)
+    end
+  end
 
   @[Extern]
-  record SERVICE_TYPE_VALUE_ABSW,
-    dwNameSpace : UInt32,
-    dwValueType : UInt32,
-    dwValueSize : UInt32,
-    lpValueName : Win32cr::Foundation::PWSTR,
-    lpValue : Void*
+  struct SERVICE_TYPE_VALUE_ABSW
+    property dwNameSpace : UInt32
+    property dwValueType : UInt32
+    property dwValueSize : UInt32
+    property lpValueName : Win32cr::Foundation::PWSTR
+    property lpValue : Void*
+    def initialize(@dwNameSpace : UInt32, @dwValueType : UInt32, @dwValueSize : UInt32, @lpValueName : Win32cr::Foundation::PWSTR, @lpValue : Void*)
+    end
+  end
 
   @[Extern]
-  record SERVICE_TYPE_INFO,
-    dwTypeNameOffset : UInt32,
-    dwValueCount : UInt32,
-    values : Win32cr::Networking::WinSock::SERVICE_TYPE_VALUE*
+  struct SERVICE_TYPE_INFO
+    property dwTypeNameOffset : UInt32
+    property dwValueCount : UInt32
+    property values : Win32cr::Networking::WinSock::SERVICE_TYPE_VALUE*
+    def initialize(@dwTypeNameOffset : UInt32, @dwValueCount : UInt32, @values : Win32cr::Networking::WinSock::SERVICE_TYPE_VALUE*)
+    end
+  end
 
   @[Extern]
-  record SERVICE_TYPE_INFO_ABSA,
-    lpTypeName : Win32cr::Foundation::PSTR,
-    dwValueCount : UInt32,
-    values : Win32cr::Networking::WinSock::SERVICE_TYPE_VALUE_ABSA*
+  struct SERVICE_TYPE_INFO_ABSA
+    property lpTypeName : Win32cr::Foundation::PSTR
+    property dwValueCount : UInt32
+    property values : Win32cr::Networking::WinSock::SERVICE_TYPE_VALUE_ABSA*
+    def initialize(@lpTypeName : Win32cr::Foundation::PSTR, @dwValueCount : UInt32, @values : Win32cr::Networking::WinSock::SERVICE_TYPE_VALUE_ABSA*)
+    end
+  end
 
   @[Extern]
-  record SERVICE_TYPE_INFO_ABSW,
-    lpTypeName : Win32cr::Foundation::PWSTR,
-    dwValueCount : UInt32,
-    values : Win32cr::Networking::WinSock::SERVICE_TYPE_VALUE_ABSW*
+  struct SERVICE_TYPE_INFO_ABSW
+    property lpTypeName : Win32cr::Foundation::PWSTR
+    property dwValueCount : UInt32
+    property values : Win32cr::Networking::WinSock::SERVICE_TYPE_VALUE_ABSW*
+    def initialize(@lpTypeName : Win32cr::Foundation::PWSTR, @dwValueCount : UInt32, @values : Win32cr::Networking::WinSock::SERVICE_TYPE_VALUE_ABSW*)
+    end
+  end
 
   @[Extern]
-  record SERVICE_ADDRESS,
-    dwAddressType : UInt32,
-    dwAddressFlags : UInt32,
-    dwAddressLength : UInt32,
-    dwPrincipalLength : UInt32,
-    lpAddress : UInt8*,
-    lpPrincipal : UInt8*
+  struct SERVICE_ADDRESS
+    property dwAddressType : UInt32
+    property dwAddressFlags : UInt32
+    property dwAddressLength : UInt32
+    property dwPrincipalLength : UInt32
+    property lpAddress : UInt8*
+    property lpPrincipal : UInt8*
+    def initialize(@dwAddressType : UInt32, @dwAddressFlags : UInt32, @dwAddressLength : UInt32, @dwPrincipalLength : UInt32, @lpAddress : UInt8*, @lpPrincipal : UInt8*)
+    end
+  end
 
   @[Extern]
-  record SERVICE_ADDRESSES,
-    dwAddressCount : UInt32,
-    addresses : Win32cr::Networking::WinSock::SERVICE_ADDRESS*
+  struct SERVICE_ADDRESSES
+    property dwAddressCount : UInt32
+    property addresses : Win32cr::Networking::WinSock::SERVICE_ADDRESS*
+    def initialize(@dwAddressCount : UInt32, @addresses : Win32cr::Networking::WinSock::SERVICE_ADDRESS*)
+    end
+  end
 
   @[Extern]
-  record SERVICE_INFOA,
-    lpServiceType : LibC::GUID*,
-    lpServiceName : Win32cr::Foundation::PSTR,
-    lpComment : Win32cr::Foundation::PSTR,
-    lpLocale : Win32cr::Foundation::PSTR,
-    dwDisplayHint : Win32cr::Networking::WinSock::RESOURCE_DISPLAY_TYPE,
-    dwVersion : UInt32,
-    dwTime : UInt32,
-    lpMachineName : Win32cr::Foundation::PSTR,
-    lpServiceAddress : Win32cr::Networking::WinSock::SERVICE_ADDRESSES*,
-    service_specific_info : Win32cr::System::Com::BLOB
+  struct SERVICE_INFOA
+    property lpServiceType : LibC::GUID*
+    property lpServiceName : Win32cr::Foundation::PSTR
+    property lpComment : Win32cr::Foundation::PSTR
+    property lpLocale : Win32cr::Foundation::PSTR
+    property dwDisplayHint : Win32cr::Networking::WinSock::RESOURCE_DISPLAY_TYPE
+    property dwVersion : UInt32
+    property dwTime : UInt32
+    property lpMachineName : Win32cr::Foundation::PSTR
+    property lpServiceAddress : Win32cr::Networking::WinSock::SERVICE_ADDRESSES*
+    property service_specific_info : Win32cr::System::Com::BLOB
+    def initialize(@lpServiceType : LibC::GUID*, @lpServiceName : Win32cr::Foundation::PSTR, @lpComment : Win32cr::Foundation::PSTR, @lpLocale : Win32cr::Foundation::PSTR, @dwDisplayHint : Win32cr::Networking::WinSock::RESOURCE_DISPLAY_TYPE, @dwVersion : UInt32, @dwTime : UInt32, @lpMachineName : Win32cr::Foundation::PSTR, @lpServiceAddress : Win32cr::Networking::WinSock::SERVICE_ADDRESSES*, @service_specific_info : Win32cr::System::Com::BLOB)
+    end
+  end
 
   @[Extern]
-  record SERVICE_INFOW,
-    lpServiceType : LibC::GUID*,
-    lpServiceName : Win32cr::Foundation::PWSTR,
-    lpComment : Win32cr::Foundation::PWSTR,
-    lpLocale : Win32cr::Foundation::PWSTR,
-    dwDisplayHint : Win32cr::Networking::WinSock::RESOURCE_DISPLAY_TYPE,
-    dwVersion : UInt32,
-    dwTime : UInt32,
-    lpMachineName : Win32cr::Foundation::PWSTR,
-    lpServiceAddress : Win32cr::Networking::WinSock::SERVICE_ADDRESSES*,
-    service_specific_info : Win32cr::System::Com::BLOB
+  struct SERVICE_INFOW
+    property lpServiceType : LibC::GUID*
+    property lpServiceName : Win32cr::Foundation::PWSTR
+    property lpComment : Win32cr::Foundation::PWSTR
+    property lpLocale : Win32cr::Foundation::PWSTR
+    property dwDisplayHint : Win32cr::Networking::WinSock::RESOURCE_DISPLAY_TYPE
+    property dwVersion : UInt32
+    property dwTime : UInt32
+    property lpMachineName : Win32cr::Foundation::PWSTR
+    property lpServiceAddress : Win32cr::Networking::WinSock::SERVICE_ADDRESSES*
+    property service_specific_info : Win32cr::System::Com::BLOB
+    def initialize(@lpServiceType : LibC::GUID*, @lpServiceName : Win32cr::Foundation::PWSTR, @lpComment : Win32cr::Foundation::PWSTR, @lpLocale : Win32cr::Foundation::PWSTR, @dwDisplayHint : Win32cr::Networking::WinSock::RESOURCE_DISPLAY_TYPE, @dwVersion : UInt32, @dwTime : UInt32, @lpMachineName : Win32cr::Foundation::PWSTR, @lpServiceAddress : Win32cr::Networking::WinSock::SERVICE_ADDRESSES*, @service_specific_info : Win32cr::System::Com::BLOB)
+    end
+  end
 
   @[Extern]
-  record NS_SERVICE_INFOA,
-    dwNameSpace : UInt32,
-    service_info : Win32cr::Networking::WinSock::SERVICE_INFOA
+  struct NS_SERVICE_INFOA
+    property dwNameSpace : UInt32
+    property service_info : Win32cr::Networking::WinSock::SERVICE_INFOA
+    def initialize(@dwNameSpace : UInt32, @service_info : Win32cr::Networking::WinSock::SERVICE_INFOA)
+    end
+  end
 
   @[Extern]
-  record NS_SERVICE_INFOW,
-    dwNameSpace : UInt32,
-    service_info : Win32cr::Networking::WinSock::SERVICE_INFOW
+  struct NS_SERVICE_INFOW
+    property dwNameSpace : UInt32
+    property service_info : Win32cr::Networking::WinSock::SERVICE_INFOW
+    def initialize(@dwNameSpace : UInt32, @service_info : Win32cr::Networking::WinSock::SERVICE_INFOW)
+    end
+  end
 
   @[Extern]
-  record PROTOCOL_INFOA,
-    dwServiceFlags : UInt32,
-    iAddressFamily : Int32,
-    iMaxSockAddr : Int32,
-    iMinSockAddr : Int32,
-    iSocketType : Int32,
-    iProtocol : Int32,
-    dwMessageSize : UInt32,
-    lpProtocol : Win32cr::Foundation::PSTR
+  struct PROTOCOL_INFOA
+    property dwServiceFlags : UInt32
+    property iAddressFamily : Int32
+    property iMaxSockAddr : Int32
+    property iMinSockAddr : Int32
+    property iSocketType : Int32
+    property iProtocol : Int32
+    property dwMessageSize : UInt32
+    property lpProtocol : Win32cr::Foundation::PSTR
+    def initialize(@dwServiceFlags : UInt32, @iAddressFamily : Int32, @iMaxSockAddr : Int32, @iMinSockAddr : Int32, @iSocketType : Int32, @iProtocol : Int32, @dwMessageSize : UInt32, @lpProtocol : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record PROTOCOL_INFOW,
-    dwServiceFlags : UInt32,
-    iAddressFamily : Int32,
-    iMaxSockAddr : Int32,
-    iMinSockAddr : Int32,
-    iSocketType : Int32,
-    iProtocol : Int32,
-    dwMessageSize : UInt32,
-    lpProtocol : Win32cr::Foundation::PWSTR
+  struct PROTOCOL_INFOW
+    property dwServiceFlags : UInt32
+    property iAddressFamily : Int32
+    property iMaxSockAddr : Int32
+    property iMinSockAddr : Int32
+    property iSocketType : Int32
+    property iProtocol : Int32
+    property dwMessageSize : UInt32
+    property lpProtocol : Win32cr::Foundation::PWSTR
+    def initialize(@dwServiceFlags : UInt32, @iAddressFamily : Int32, @iMaxSockAddr : Int32, @iMinSockAddr : Int32, @iSocketType : Int32, @iProtocol : Int32, @dwMessageSize : UInt32, @lpProtocol : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record NETRESOURCE2A,
-    dwScope : UInt32,
-    dwType : UInt32,
-    dwUsage : UInt32,
-    dwDisplayType : UInt32,
-    lpLocalName : Win32cr::Foundation::PSTR,
-    lpRemoteName : Win32cr::Foundation::PSTR,
-    lpComment : Win32cr::Foundation::PSTR,
-    ns_info : Win32cr::Networking::WinSock::NS_INFOA,
-    service_type : LibC::GUID,
-    dwProtocols : UInt32,
-    lpiProtocols : Int32*
+  struct NETRESOURCE2A
+    property dwScope : UInt32
+    property dwType : UInt32
+    property dwUsage : UInt32
+    property dwDisplayType : UInt32
+    property lpLocalName : Win32cr::Foundation::PSTR
+    property lpRemoteName : Win32cr::Foundation::PSTR
+    property lpComment : Win32cr::Foundation::PSTR
+    property ns_info : Win32cr::Networking::WinSock::NS_INFOA
+    property service_type : LibC::GUID
+    property dwProtocols : UInt32
+    property lpiProtocols : Int32*
+    def initialize(@dwScope : UInt32, @dwType : UInt32, @dwUsage : UInt32, @dwDisplayType : UInt32, @lpLocalName : Win32cr::Foundation::PSTR, @lpRemoteName : Win32cr::Foundation::PSTR, @lpComment : Win32cr::Foundation::PSTR, @ns_info : Win32cr::Networking::WinSock::NS_INFOA, @service_type : LibC::GUID, @dwProtocols : UInt32, @lpiProtocols : Int32*)
+    end
+  end
 
   @[Extern]
-  record NETRESOURCE2W,
-    dwScope : UInt32,
-    dwType : UInt32,
-    dwUsage : UInt32,
-    dwDisplayType : UInt32,
-    lpLocalName : Win32cr::Foundation::PWSTR,
-    lpRemoteName : Win32cr::Foundation::PWSTR,
-    lpComment : Win32cr::Foundation::PWSTR,
-    ns_info : Win32cr::Networking::WinSock::NS_INFOA,
-    service_type : LibC::GUID,
-    dwProtocols : UInt32,
-    lpiProtocols : Int32*
+  struct NETRESOURCE2W
+    property dwScope : UInt32
+    property dwType : UInt32
+    property dwUsage : UInt32
+    property dwDisplayType : UInt32
+    property lpLocalName : Win32cr::Foundation::PWSTR
+    property lpRemoteName : Win32cr::Foundation::PWSTR
+    property lpComment : Win32cr::Foundation::PWSTR
+    property ns_info : Win32cr::Networking::WinSock::NS_INFOA
+    property service_type : LibC::GUID
+    property dwProtocols : UInt32
+    property lpiProtocols : Int32*
+    def initialize(@dwScope : UInt32, @dwType : UInt32, @dwUsage : UInt32, @dwDisplayType : UInt32, @lpLocalName : Win32cr::Foundation::PWSTR, @lpRemoteName : Win32cr::Foundation::PWSTR, @lpComment : Win32cr::Foundation::PWSTR, @ns_info : Win32cr::Networking::WinSock::NS_INFOA, @service_type : LibC::GUID, @dwProtocols : UInt32, @lpiProtocols : Int32*)
+    end
+  end
 
   @[Extern]
-  record SERVICE_ASYNC_INFO,
-    lpServiceCallbackProc : Win32cr::Networking::WinSock::LPSERVICE_CALLBACK_PROC,
-    lParam : Win32cr::Foundation::LPARAM,
-    hAsyncTaskHandle : Win32cr::Foundation::HANDLE
+  struct SERVICE_ASYNC_INFO
+    property lpServiceCallbackProc : Win32cr::Networking::WinSock::LPSERVICE_CALLBACK_PROC
+    property lParam : Win32cr::Foundation::LPARAM
+    property hAsyncTaskHandle : Win32cr::Foundation::HANDLE
+    def initialize(@lpServiceCallbackProc : Win32cr::Networking::WinSock::LPSERVICE_CALLBACK_PROC, @lParam : Win32cr::Foundation::LPARAM, @hAsyncTaskHandle : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record Sockaddr_un,
-    sun_family : UInt16,
-    sun_path : Win32cr::Foundation::CHAR[108]
+  struct Sockaddr_un
+    property sun_family : UInt16
+    property sun_path : Win32cr::Foundation::CHAR[108]
+    def initialize(@sun_family : UInt16, @sun_path : Win32cr::Foundation::CHAR[108])
+    end
+  end
 
   @[Extern]
-  record Sockaddr_ipx,
-    sa_family : Int16,
-    sa_netnum : Win32cr::Foundation::CHAR[4],
-    sa_nodenum : Win32cr::Foundation::CHAR[6],
-    sa_socket : UInt16
+  struct Sockaddr_ipx
+    property sa_family : Int16
+    property sa_netnum : Win32cr::Foundation::CHAR[4]
+    property sa_nodenum : Win32cr::Foundation::CHAR[6]
+    property sa_socket : UInt16
+    def initialize(@sa_family : Int16, @sa_netnum : Win32cr::Foundation::CHAR[4], @sa_nodenum : Win32cr::Foundation::CHAR[6], @sa_socket : UInt16)
+    end
+  end
 
   @[Extern]
-  record Sockaddr_tp,
-    tp_family : UInt16,
-    tp_addr_type : UInt16,
-    tp_taddr_len : UInt16,
-    tp_tsel_len : UInt16,
-    tp_addr : UInt8[64]
+  struct Sockaddr_tp
+    property tp_family : UInt16
+    property tp_addr_type : UInt16
+    property tp_taddr_len : UInt16
+    property tp_tsel_len : UInt16
+    property tp_addr : UInt8[64]
+    def initialize(@tp_family : UInt16, @tp_addr_type : UInt16, @tp_taddr_len : UInt16, @tp_tsel_len : UInt16, @tp_addr : UInt8[64])
+    end
+  end
 
   @[Extern]
-  record Sockaddr_nb,
-    snb_family : Int16,
-    snb_type : UInt16,
-    snb_name : Win32cr::Foundation::CHAR[16]
+  struct Sockaddr_nb
+    property snb_family : Int16
+    property snb_type : UInt16
+    property snb_name : Win32cr::Foundation::CHAR[16]
+    def initialize(@snb_family : Int16, @snb_type : UInt16, @snb_name : Win32cr::Foundation::CHAR[16])
+    end
+  end
 
   @[Extern]
-  record Sockaddr_vns,
-    sin_family : UInt16,
-    net_address : UInt8[4],
-    subnet_addr : UInt8[2],
-    port : UInt8[2],
-    hops : UInt8,
-    filler : UInt8[5]
-
-  @[Extern(union: true)]
-  record DL_OUI,
-    byte : UInt8[3],
-    anonymous : Anonymous_e__Struct_ do
-
-    # Nested Type Anonymous_e__Struct_
-    @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt8
-
+  struct Sockaddr_vns
+    property sin_family : UInt16
+    property net_address : UInt8[4]
+    property subnet_addr : UInt8[2]
+    property port : UInt8[2]
+    property hops : UInt8
+    property filler : UInt8[5]
+    def initialize(@sin_family : UInt16, @net_address : UInt8[4], @subnet_addr : UInt8[2], @port : UInt8[2], @hops : UInt8, @filler : UInt8[5])
+    end
   end
 
   @[Extern(union: true)]
-  record DL_EI48,
-    byte : UInt8[3]
-
-  @[Extern(union: true)]
-  record DL_EUI48,
-    byte : UInt8[6],
-    anonymous : Anonymous_e__Struct_ do
+  struct DL_OUI
+    property byte : UInt8[3]
+    property anonymous : Anonymous_e__Struct_
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      oui : Win32cr::Networking::WinSock::DL_OUI,
-      ei48 : Win32cr::Networking::WinSock::DL_EI48
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+    end
 
+    def initialize(@byte : UInt8[3], @anonymous : Anonymous_e__Struct_)
+    end
   end
 
   @[Extern(union: true)]
-  record DL_EI64,
-    byte : UInt8[5]
+  struct DL_EI48
+    property byte : UInt8[3]
+    def initialize(@byte : UInt8[3])
+    end
+  end
 
   @[Extern(union: true)]
-  record DL_EUI64,
-    byte : UInt8[8],
-    value : UInt64,
-    anonymous : Anonymous_e__Struct_ do
+  struct DL_EUI48
+    property byte : UInt8[6]
+    property anonymous : Anonymous_e__Struct_
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      oui : Win32cr::Networking::WinSock::DL_OUI,
-      anonymous : Anonymous_e__Union_ do
+    struct Anonymous_e__Struct_
+    property oui : Win32cr::Networking::WinSock::DL_OUI
+    property ei48 : Win32cr::Networking::WinSock::DL_EI48
+    def initialize(@oui : Win32cr::Networking::WinSock::DL_OUI, @ei48 : Win32cr::Networking::WinSock::DL_EI48)
+    end
+    end
+
+    def initialize(@byte : UInt8[6], @anonymous : Anonymous_e__Struct_)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct DL_EI64
+    property byte : UInt8[5]
+    def initialize(@byte : UInt8[5])
+    end
+  end
+
+  @[Extern(union: true)]
+  struct DL_EUI64
+    property byte : UInt8[8]
+    property value : UInt64
+    property anonymous : Anonymous_e__Struct_
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property oui : Win32cr::Networking::WinSock::DL_OUI
+    property anonymous : Anonymous_e__Union_
 
       # Nested Type Anonymous_e__Union_
       @[Extern(union: true)]
-      record Anonymous_e__Union_,
-        ei64 : Win32cr::Networking::WinSock::DL_EI64,
-        anonymous : Anonymous_e__Struct_ do
+      struct Anonymous_e__Union_
+    property ei64 : Win32cr::Networking::WinSock::DL_EI64
+    property anonymous : Anonymous_e__Struct_
 
         # Nested Type Anonymous_e__Struct_
         @[Extern]
-        record Anonymous_e__Struct_,
-          type__ : UInt8,
-          tse : UInt8,
-          ei48 : Win32cr::Networking::WinSock::DL_EI48
+        struct Anonymous_e__Struct_
+    property type__ : UInt8
+    property tse : UInt8
+    property ei48 : Win32cr::Networking::WinSock::DL_EI48
+    def initialize(@type__ : UInt8, @tse : UInt8, @ei48 : Win32cr::Networking::WinSock::DL_EI48)
+    end
+        end
 
+    def initialize(@ei64 : Win32cr::Networking::WinSock::DL_EI64, @anonymous : Anonymous_e__Struct_)
+    end
       end
 
+    def initialize(@oui : Win32cr::Networking::WinSock::DL_OUI, @anonymous : Anonymous_e__Union_)
+    end
     end
 
+    def initialize(@byte : UInt8[8], @value : UInt64, @anonymous : Anonymous_e__Struct_)
+    end
   end
 
   @[Extern]
-  record SNAP_HEADER,
-    dsap : UInt8,
-    ssap : UInt8,
-    control : UInt8,
-    oui : UInt8[3],
-    type__ : UInt16
-
-  @[Extern]
-  record ETHERNET_HEADER,
-    destination : Win32cr::Networking::WinSock::DL_EUI48,
-    source : Win32cr::Networking::WinSock::DL_EUI48,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      type__ : UInt16,
-      length : UInt16
-
+  struct SNAP_HEADER
+    property dsap : UInt8
+    property ssap : UInt8
+    property control : UInt8
+    property oui : UInt8[3]
+    property type__ : UInt16
+    def initialize(@dsap : UInt8, @ssap : UInt8, @control : UInt8, @oui : UInt8[3], @type__ : UInt16)
+    end
   end
 
   @[Extern]
-  record VLAN_TAG,
-    anonymous : Anonymous_e__Union_,
-    type__ : UInt16 do
+  struct ETHERNET_HEADER
+    property destination : Win32cr::Networking::WinSock::DL_EUI48
+    property source : Win32cr::Networking::WinSock::DL_EUI48
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      tag : UInt16,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property type__ : UInt16
+    property length : UInt16
+    def initialize(@type__ : UInt16, @length : UInt16)
+    end
+    end
+
+    def initialize(@destination : Win32cr::Networking::WinSock::DL_EUI48, @source : Win32cr::Networking::WinSock::DL_EUI48, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct VLAN_TAG
+    property anonymous : Anonymous_e__Union_
+    property type__ : UInt16
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property tag : UInt16
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt16
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+      end
 
+    def initialize(@tag : UInt16, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_, @type__ : UInt16)
+    end
   end
 
   @[Extern]
-  record ICMP_HEADER,
-    type__ : UInt8,
-    code : UInt8,
-    checksum : UInt16
+  struct ICMP_HEADER
+    property type__ : UInt8
+    property code : UInt8
+    property checksum : UInt16
+    def initialize(@type__ : UInt8, @code : UInt8, @checksum : UInt16)
+    end
+  end
 
   @[Extern]
-  record ICMP_MESSAGE,
-    header : Win32cr::Networking::WinSock::ICMP_HEADER,
-    data : Data_e__Union_ do
+  struct ICMP_MESSAGE
+    property header : Win32cr::Networking::WinSock::ICMP_HEADER
+    property data : Data_e__Union_
 
     # Nested Type Data_e__Union_
     @[Extern(union: true)]
-    record Data_e__Union_,
-      data32 : UInt32*,
-      data16 : UInt16[2],
-      data8 : UInt8[4]
+    struct Data_e__Union_
+    property data32 : UInt32*
+    property data16 : UInt16[2]
+    property data8 : UInt8[4]
+    def initialize(@data32 : UInt32*, @data16 : UInt16[2], @data8 : UInt8[4])
+    end
+    end
 
+    def initialize(@header : Win32cr::Networking::WinSock::ICMP_HEADER, @data : Data_e__Union_)
+    end
   end
 
   @[Extern]
-  record IPV4_HEADER,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    total_length : UInt16,
-    identification : UInt16,
-    anonymous3 : Anonymous3_e__Union_,
-    time_to_live : UInt8,
-    protocol : UInt8,
-    header_checksum : UInt16,
-    source_address : Win32cr::Networking::WinSock::IN_ADDR,
-    destination_address : Win32cr::Networking::WinSock::IN_ADDR do
+  struct IPV4_HEADER
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property total_length : UInt16
+    property identification : UInt16
+    property anonymous3 : Anonymous3_e__Union_
+    property time_to_live : UInt8
+    property protocol : UInt8
+    property header_checksum : UInt16
+    property source_address : Win32cr::Networking::WinSock::IN_ADDR
+    property destination_address : Win32cr::Networking::WinSock::IN_ADDR
 
     # Nested Type Anonymous3_e__Union_
     @[Extern(union: true)]
-    record Anonymous3_e__Union_,
-      flags_and_offset : UInt16,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous3_e__Union_
+    property flags_and_offset : UInt16
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt16
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+      end
 
+    def initialize(@flags_and_offset : UInt16, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      type_of_service_and_ecn_field : UInt8,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous2_e__Union_
+    property type_of_service_and_ecn_field : UInt8
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt8
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+      end
 
+    def initialize(@type_of_service_and_ecn_field : UInt8, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      version_and_header_length : UInt8,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous1_e__Union_
+    property version_and_header_length : UInt8
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt8
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+      end
 
+    def initialize(@version_and_header_length : UInt8, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @total_length : UInt16, @identification : UInt16, @anonymous3 : Anonymous3_e__Union_, @time_to_live : UInt8, @protocol : UInt8, @header_checksum : UInt16, @source_address : Win32cr::Networking::WinSock::IN_ADDR, @destination_address : Win32cr::Networking::WinSock::IN_ADDR)
+    end
   end
 
   @[Extern]
-  record IPV4_OPTION_HEADER,
-    anonymous : Anonymous_e__Union_,
-    option_length : UInt8 do
+  struct IPV4_OPTION_HEADER
+    property anonymous : Anonymous_e__Union_
+    property option_length : UInt8
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      option_type : UInt8,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property option_type : UInt8
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt8
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+      end
 
+    def initialize(@option_type : UInt8, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_, @option_length : UInt8)
+    end
   end
 
   @[Extern]
-  record IPV4_TIMESTAMP_OPTION,
-    option_header : Win32cr::Networking::WinSock::IPV4_OPTION_HEADER,
-    pointer : UInt8,
-    anonymous : Anonymous_e__Union_ do
+  struct IPV4_TIMESTAMP_OPTION
+    property option_header : Win32cr::Networking::WinSock::IPV4_OPTION_HEADER
+    property pointer : UInt8
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      flags_overflow : UInt8,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property flags_overflow : UInt8
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt8
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+      end
 
+    def initialize(@flags_overflow : UInt8, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@option_header : Win32cr::Networking::WinSock::IPV4_OPTION_HEADER, @pointer : UInt8, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record IPV4_ROUTING_HEADER,
-    option_header : Win32cr::Networking::WinSock::IPV4_OPTION_HEADER,
-    pointer : UInt8
+  struct IPV4_ROUTING_HEADER
+    property option_header : Win32cr::Networking::WinSock::IPV4_OPTION_HEADER
+    property pointer : UInt8
+    def initialize(@option_header : Win32cr::Networking::WinSock::IPV4_OPTION_HEADER, @pointer : UInt8)
+    end
+  end
 
   @[Extern]
-  record ICMPV4_ROUTER_SOLICIT,
-    rs_header : Win32cr::Networking::WinSock::ICMP_MESSAGE
+  struct ICMPV4_ROUTER_SOLICIT
+    property rs_header : Win32cr::Networking::WinSock::ICMP_MESSAGE
+    def initialize(@rs_header : Win32cr::Networking::WinSock::ICMP_MESSAGE)
+    end
+  end
 
   @[Extern]
-  record ICMPV4_ROUTER_ADVERT_HEADER,
-    ra_header : Win32cr::Networking::WinSock::ICMP_MESSAGE
+  struct ICMPV4_ROUTER_ADVERT_HEADER
+    property ra_header : Win32cr::Networking::WinSock::ICMP_MESSAGE
+    def initialize(@ra_header : Win32cr::Networking::WinSock::ICMP_MESSAGE)
+    end
+  end
 
   @[Extern]
-  record ICMPV4_ROUTER_ADVERT_ENTRY,
-    router_advert_addr : Win32cr::Networking::WinSock::IN_ADDR,
-    preference_level : Int32
+  struct ICMPV4_ROUTER_ADVERT_ENTRY
+    property router_advert_addr : Win32cr::Networking::WinSock::IN_ADDR
+    property preference_level : Int32
+    def initialize(@router_advert_addr : Win32cr::Networking::WinSock::IN_ADDR, @preference_level : Int32)
+    end
+  end
 
   @[Extern]
-  record ICMPV4_TIMESTAMP_MESSAGE,
-    header : Win32cr::Networking::WinSock::ICMP_MESSAGE,
-    originate_timestamp : UInt32,
-    receive_timestamp : UInt32,
-    transmit_timestamp : UInt32
+  struct ICMPV4_TIMESTAMP_MESSAGE
+    property header : Win32cr::Networking::WinSock::ICMP_MESSAGE
+    property originate_timestamp : UInt32
+    property receive_timestamp : UInt32
+    property transmit_timestamp : UInt32
+    def initialize(@header : Win32cr::Networking::WinSock::ICMP_MESSAGE, @originate_timestamp : UInt32, @receive_timestamp : UInt32, @transmit_timestamp : UInt32)
+    end
+  end
 
   @[Extern]
-  record ICMPV4_ADDRESS_MASK_MESSAGE,
-    header : Win32cr::Networking::WinSock::ICMP_MESSAGE,
-    address_mask : UInt32
+  struct ICMPV4_ADDRESS_MASK_MESSAGE
+    property header : Win32cr::Networking::WinSock::ICMP_MESSAGE
+    property address_mask : UInt32
+    def initialize(@header : Win32cr::Networking::WinSock::ICMP_MESSAGE, @address_mask : UInt32)
+    end
+  end
 
   @[Extern]
-  record ARP_HEADER,
-    hardware_address_space : UInt16,
-    protocol_address_space : UInt16,
-    hardware_address_length : UInt8,
-    protocol_address_length : UInt8,
-    opcode : UInt16,
-    sender_hardware_address : UInt8*
+  struct ARP_HEADER
+    property hardware_address_space : UInt16
+    property protocol_address_space : UInt16
+    property hardware_address_length : UInt8
+    property protocol_address_length : UInt8
+    property opcode : UInt16
+    property sender_hardware_address : UInt8*
+    def initialize(@hardware_address_space : UInt16, @protocol_address_space : UInt16, @hardware_address_length : UInt8, @protocol_address_length : UInt8, @opcode : UInt16, @sender_hardware_address : UInt8*)
+    end
+  end
 
   @[Extern]
-  record IGMP_HEADER,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    checksum : UInt16,
-    multicast_address : Win32cr::Networking::WinSock::IN_ADDR do
+  struct IGMP_HEADER
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property checksum : UInt16
+    property multicast_address : Win32cr::Networking::WinSock::IN_ADDR
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      version_type : UInt8 do
+    struct Anonymous1_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property version_type : UInt8
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt8
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @version_type : UInt8)
+    end
     end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      reserved : UInt8,
-      max_resp_time : UInt8,
-      code : UInt8
+    struct Anonymous2_e__Union_
+    property reserved : UInt8
+    property max_resp_time : UInt8
+    property code : UInt8
+    def initialize(@reserved : UInt8, @max_resp_time : UInt8, @code : UInt8)
+    end
+    end
 
+    def initialize(@anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @checksum : UInt16, @multicast_address : Win32cr::Networking::WinSock::IN_ADDR)
+    end
   end
 
   @[Extern]
-  record IGMPV3_QUERY_HEADER,
-    type__ : UInt8,
-    anonymous1 : Anonymous1_e__Union_,
-    checksum : UInt16,
-    multicast_address : Win32cr::Networking::WinSock::IN_ADDR,
-    _bitfield : UInt8,
-    anonymous2 : Anonymous2_e__Union_,
-    source_count : UInt16 do
+  struct IGMPV3_QUERY_HEADER
+    property type__ : UInt8
+    property anonymous1 : Anonymous1_e__Union_
+    property checksum : UInt16
+    property multicast_address : Win32cr::Networking::WinSock::IN_ADDR
+    property _bitfield : UInt8
+    property anonymous2 : Anonymous2_e__Union_
+    property source_count : UInt16
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      queriers_query_interface_code : UInt8,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous2_e__Union_
+    property queriers_query_interface_code : UInt8
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt8
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+      end
 
+    def initialize(@queriers_query_interface_code : UInt8, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      max_resp_code : UInt8,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous1_e__Union_
+    property max_resp_code : UInt8
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt8
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+      end
 
+    def initialize(@max_resp_code : UInt8, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@type__ : UInt8, @anonymous1 : Anonymous1_e__Union_, @checksum : UInt16, @multicast_address : Win32cr::Networking::WinSock::IN_ADDR, @_bitfield : UInt8, @anonymous2 : Anonymous2_e__Union_, @source_count : UInt16)
+    end
   end
 
   @[Extern]
-  record IGMPV3_REPORT_RECORD_HEADER,
-    type__ : UInt8,
-    auxillary_data_length : UInt8,
-    source_count : UInt16,
-    multicast_address : Win32cr::Networking::WinSock::IN_ADDR
+  struct IGMPV3_REPORT_RECORD_HEADER
+    property type__ : UInt8
+    property auxillary_data_length : UInt8
+    property source_count : UInt16
+    property multicast_address : Win32cr::Networking::WinSock::IN_ADDR
+    def initialize(@type__ : UInt8, @auxillary_data_length : UInt8, @source_count : UInt16, @multicast_address : Win32cr::Networking::WinSock::IN_ADDR)
+    end
+  end
 
   @[Extern]
-  record IGMPV3_REPORT_HEADER,
-    type__ : UInt8,
-    reserved : UInt8,
-    checksum : UInt16,
-    reserved2 : UInt16,
-    record_count : UInt16
+  struct IGMPV3_REPORT_HEADER
+    property type__ : UInt8
+    property reserved : UInt8
+    property checksum : UInt16
+    property reserved2 : UInt16
+    property record_count : UInt16
+    def initialize(@type__ : UInt8, @reserved : UInt8, @checksum : UInt16, @reserved2 : UInt16, @record_count : UInt16)
+    end
+  end
 
   @[Extern]
-  record IPV6_HEADER,
-    anonymous : Anonymous_e__Union_,
-    payload_length : UInt16,
-    next_header : UInt8,
-    hop_limit : UInt8,
-    source_address : Win32cr::Networking::WinSock::IN6_ADDR,
-    destination_address : Win32cr::Networking::WinSock::IN6_ADDR do
+  struct IPV6_HEADER
+    property anonymous : Anonymous_e__Union_
+    property payload_length : UInt16
+    property next_header : UInt8
+    property hop_limit : UInt8
+    property source_address : Win32cr::Networking::WinSock::IN6_ADDR
+    property destination_address : Win32cr::Networking::WinSock::IN6_ADDR
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      version_class_flow : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property version_class_flow : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@version_class_flow : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_, @payload_length : UInt16, @next_header : UInt8, @hop_limit : UInt8, @source_address : Win32cr::Networking::WinSock::IN6_ADDR, @destination_address : Win32cr::Networking::WinSock::IN6_ADDR)
+    end
   end
 
   @[Extern]
-  record IPV6_FRAGMENT_HEADER,
-    next_header : UInt8,
-    reserved : UInt8,
-    anonymous : Anonymous_e__Union_,
-    id : UInt32 do
+  struct IPV6_FRAGMENT_HEADER
+    property next_header : UInt8
+    property reserved : UInt8
+    property anonymous : Anonymous_e__Union_
+    property id : UInt32
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      offset_and_flags : UInt16 do
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property offset_and_flags : UInt16
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt16
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @offset_and_flags : UInt16)
+    end
     end
 
+    def initialize(@next_header : UInt8, @reserved : UInt8, @anonymous : Anonymous_e__Union_, @id : UInt32)
+    end
   end
 
   @[Extern]
-  record IPV6_EXTENSION_HEADER,
-    next_header : UInt8,
-    length : UInt8
+  struct IPV6_EXTENSION_HEADER
+    property next_header : UInt8
+    property length : UInt8
+    def initialize(@next_header : UInt8, @length : UInt8)
+    end
+  end
 
   @[Extern]
-  record IPV6_OPTION_HEADER,
-    type__ : UInt8,
-    data_length : UInt8
+  struct IPV6_OPTION_HEADER
+    property type__ : UInt8
+    property data_length : UInt8
+    def initialize(@type__ : UInt8, @data_length : UInt8)
+    end
+  end
 
   @[Extern]
-  record IPV6_OPTION_JUMBOGRAM,
-    header : Win32cr::Networking::WinSock::IPV6_OPTION_HEADER,
-    jumbogram_length : UInt8[4]
+  struct IPV6_OPTION_JUMBOGRAM
+    property header : Win32cr::Networking::WinSock::IPV6_OPTION_HEADER
+    property jumbogram_length : UInt8[4]
+    def initialize(@header : Win32cr::Networking::WinSock::IPV6_OPTION_HEADER, @jumbogram_length : UInt8[4])
+    end
+  end
 
   @[Extern]
-  record IPV6_OPTION_ROUTER_ALERT,
-    header : Win32cr::Networking::WinSock::IPV6_OPTION_HEADER,
-    value : UInt8[2]
+  struct IPV6_OPTION_ROUTER_ALERT
+    property header : Win32cr::Networking::WinSock::IPV6_OPTION_HEADER
+    property value : UInt8[2]
+    def initialize(@header : Win32cr::Networking::WinSock::IPV6_OPTION_HEADER, @value : UInt8[2])
+    end
+  end
 
   @[Extern]
-  record IPV6_ROUTING_HEADER,
-    next_header : UInt8,
-    length : UInt8,
-    routing_type : UInt8,
-    segments_left : UInt8,
-    reserved : UInt8[4]
+  struct IPV6_ROUTING_HEADER
+    property next_header : UInt8
+    property length : UInt8
+    property routing_type : UInt8
+    property segments_left : UInt8
+    property reserved : UInt8[4]
+    def initialize(@next_header : UInt8, @length : UInt8, @routing_type : UInt8, @segments_left : UInt8, @reserved : UInt8[4])
+    end
+  end
 
   @[Extern]
-  record Nd_router_solicit,
-    nd_rs_hdr : Win32cr::Networking::WinSock::ICMP_MESSAGE
+  struct Nd_router_solicit
+    property nd_rs_hdr : Win32cr::Networking::WinSock::ICMP_MESSAGE
+    def initialize(@nd_rs_hdr : Win32cr::Networking::WinSock::ICMP_MESSAGE)
+    end
+  end
 
   @[Extern]
-  record Nd_router_advert,
-    nd_ra_hdr : Win32cr::Networking::WinSock::ICMP_MESSAGE,
-    nd_ra_reachable : UInt32,
-    nd_ra_retransmit : UInt32
+  struct Nd_router_advert
+    property nd_ra_hdr : Win32cr::Networking::WinSock::ICMP_MESSAGE
+    property nd_ra_reachable : UInt32
+    property nd_ra_retransmit : UInt32
+    def initialize(@nd_ra_hdr : Win32cr::Networking::WinSock::ICMP_MESSAGE, @nd_ra_reachable : UInt32, @nd_ra_retransmit : UInt32)
+    end
+  end
 
   @[Extern(union: true)]
-  record IPV6_ROUTER_ADVERTISEMENT_FLAGS,
-    anonymous : Anonymous_e__Struct_,
-    value : UInt8 do
+  struct IPV6_ROUTER_ADVERTISEMENT_FLAGS
+    property anonymous : Anonymous_e__Struct_
+    property value : UInt8
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt8
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @value : UInt8)
+    end
   end
 
   @[Extern]
-  record Nd_neighbor_solicit,
-    nd_ns_hdr : Win32cr::Networking::WinSock::ICMP_MESSAGE,
-    nd_ns_target : Win32cr::Networking::WinSock::IN6_ADDR
+  struct Nd_neighbor_solicit
+    property nd_ns_hdr : Win32cr::Networking::WinSock::ICMP_MESSAGE
+    property nd_ns_target : Win32cr::Networking::WinSock::IN6_ADDR
+    def initialize(@nd_ns_hdr : Win32cr::Networking::WinSock::ICMP_MESSAGE, @nd_ns_target : Win32cr::Networking::WinSock::IN6_ADDR)
+    end
+  end
 
   @[Extern]
-  record Nd_neighbor_advert,
-    nd_na_hdr : Win32cr::Networking::WinSock::ICMP_MESSAGE,
-    nd_na_target : Win32cr::Networking::WinSock::IN6_ADDR
+  struct Nd_neighbor_advert
+    property nd_na_hdr : Win32cr::Networking::WinSock::ICMP_MESSAGE
+    property nd_na_target : Win32cr::Networking::WinSock::IN6_ADDR
+    def initialize(@nd_na_hdr : Win32cr::Networking::WinSock::ICMP_MESSAGE, @nd_na_target : Win32cr::Networking::WinSock::IN6_ADDR)
+    end
+  end
 
   @[Extern(union: true)]
-  record IPV6_NEIGHBOR_ADVERTISEMENT_FLAGS,
-    anonymous : Anonymous_e__Struct_,
-    value : UInt32 do
+  struct IPV6_NEIGHBOR_ADVERTISEMENT_FLAGS
+    property anonymous : Anonymous_e__Struct_
+    property value : UInt32
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt8,
-      reserved2 : UInt8[3]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt8
+    property reserved2 : UInt8[3]
+    def initialize(@_bitfield : UInt8, @reserved2 : UInt8[3])
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @value : UInt32)
+    end
   end
 
   @[Extern]
-  record Nd_redirect,
-    nd_rd_hdr : Win32cr::Networking::WinSock::ICMP_MESSAGE,
-    nd_rd_target : Win32cr::Networking::WinSock::IN6_ADDR,
-    nd_rd_dst : Win32cr::Networking::WinSock::IN6_ADDR
+  struct Nd_redirect
+    property nd_rd_hdr : Win32cr::Networking::WinSock::ICMP_MESSAGE
+    property nd_rd_target : Win32cr::Networking::WinSock::IN6_ADDR
+    property nd_rd_dst : Win32cr::Networking::WinSock::IN6_ADDR
+    def initialize(@nd_rd_hdr : Win32cr::Networking::WinSock::ICMP_MESSAGE, @nd_rd_target : Win32cr::Networking::WinSock::IN6_ADDR, @nd_rd_dst : Win32cr::Networking::WinSock::IN6_ADDR)
+    end
+  end
 
   @[Extern]
-  record Nd_opt_hdr,
-    nd_opt_type : UInt8,
-    nd_opt_len : UInt8
+  struct Nd_opt_hdr
+    property nd_opt_type : UInt8
+    property nd_opt_len : UInt8
+    def initialize(@nd_opt_type : UInt8, @nd_opt_len : UInt8)
+    end
+  end
 
   @[Extern]
-  record Nd_opt_prefix_info,
-    nd_opt_pi_type : UInt8,
-    nd_opt_pi_len : UInt8,
-    nd_opt_pi_prefix_len : UInt8,
-    anonymous1 : Anonymous1_e__Union_,
-    nd_opt_pi_valid_time : UInt32,
-    nd_opt_pi_preferred_time : UInt32,
-    anonymous2 : Anonymous2_e__Union_,
-    nd_opt_pi_prefix : Win32cr::Networking::WinSock::IN6_ADDR do
+  struct Nd_opt_prefix_info
+    property nd_opt_pi_type : UInt8
+    property nd_opt_pi_len : UInt8
+    property nd_opt_pi_prefix_len : UInt8
+    property anonymous1 : Anonymous1_e__Union_
+    property nd_opt_pi_valid_time : UInt32
+    property nd_opt_pi_preferred_time : UInt32
+    property anonymous2 : Anonymous2_e__Union_
+    property nd_opt_pi_prefix : Win32cr::Networking::WinSock::IN6_ADDR
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      nd_opt_pi_reserved2 : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous2_e__Union_
+    property nd_opt_pi_reserved2 : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        nd_opt_pi_reserved3 : UInt8[3],
-        nd_opt_pi_site_prefix_len : UInt8
+      struct Anonymous_e__Struct_
+    property nd_opt_pi_reserved3 : UInt8[3]
+    property nd_opt_pi_site_prefix_len : UInt8
+    def initialize(@nd_opt_pi_reserved3 : UInt8[3], @nd_opt_pi_site_prefix_len : UInt8)
+    end
+      end
 
+    def initialize(@nd_opt_pi_reserved2 : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      nd_opt_pi_flags_reserved : UInt8,
-      flags : Flags_e__Struct_ do
+    struct Anonymous1_e__Union_
+    property nd_opt_pi_flags_reserved : UInt8
+    property flags : Flags_e__Struct_
 
       # Nested Type Flags_e__Struct_
       @[Extern]
-      record Flags_e__Struct_,
-        _bitfield : UInt8
+      struct Flags_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+      end
 
+    def initialize(@nd_opt_pi_flags_reserved : UInt8, @flags : Flags_e__Struct_)
+    end
     end
 
+    def initialize(@nd_opt_pi_type : UInt8, @nd_opt_pi_len : UInt8, @nd_opt_pi_prefix_len : UInt8, @anonymous1 : Anonymous1_e__Union_, @nd_opt_pi_valid_time : UInt32, @nd_opt_pi_preferred_time : UInt32, @anonymous2 : Anonymous2_e__Union_, @nd_opt_pi_prefix : Win32cr::Networking::WinSock::IN6_ADDR)
+    end
   end
 
   @[Extern]
-  record Nd_opt_rd_hdr,
-    nd_opt_rh_type : UInt8,
-    nd_opt_rh_len : UInt8,
-    nd_opt_rh_reserved1 : UInt16,
-    nd_opt_rh_reserved2 : UInt32
+  struct Nd_opt_rd_hdr
+    property nd_opt_rh_type : UInt8
+    property nd_opt_rh_len : UInt8
+    property nd_opt_rh_reserved1 : UInt16
+    property nd_opt_rh_reserved2 : UInt32
+    def initialize(@nd_opt_rh_type : UInt8, @nd_opt_rh_len : UInt8, @nd_opt_rh_reserved1 : UInt16, @nd_opt_rh_reserved2 : UInt32)
+    end
+  end
 
   @[Extern]
-  record Nd_opt_mtu,
-    nd_opt_mtu_type : UInt8,
-    nd_opt_mtu_len : UInt8,
-    nd_opt_mtu_reserved : UInt16,
-    nd_opt_mtu_mtu : UInt32
+  struct Nd_opt_mtu
+    property nd_opt_mtu_type : UInt8
+    property nd_opt_mtu_len : UInt8
+    property nd_opt_mtu_reserved : UInt16
+    property nd_opt_mtu_mtu : UInt32
+    def initialize(@nd_opt_mtu_type : UInt8, @nd_opt_mtu_len : UInt8, @nd_opt_mtu_reserved : UInt16, @nd_opt_mtu_mtu : UInt32)
+    end
+  end
 
   @[Extern]
-  record Nd_opt_route_info,
-    nd_opt_ri_type : UInt8,
-    nd_opt_ri_len : UInt8,
-    nd_opt_ri_prefix_len : UInt8,
-    anonymous : Anonymous_e__Union_,
-    nd_opt_ri_route_lifetime : UInt32,
-    nd_opt_ri_prefix : Win32cr::Networking::WinSock::IN6_ADDR do
+  struct Nd_opt_route_info
+    property nd_opt_ri_type : UInt8
+    property nd_opt_ri_len : UInt8
+    property nd_opt_ri_prefix_len : UInt8
+    property anonymous : Anonymous_e__Union_
+    property nd_opt_ri_route_lifetime : UInt32
+    property nd_opt_ri_prefix : Win32cr::Networking::WinSock::IN6_ADDR
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      nd_opt_ri_flags_reserved : UInt8,
-      flags : Flags_e__Struct_ do
+    struct Anonymous_e__Union_
+    property nd_opt_ri_flags_reserved : UInt8
+    property flags : Flags_e__Struct_
 
       # Nested Type Flags_e__Struct_
       @[Extern]
-      record Flags_e__Struct_,
-        _bitfield : UInt8
+      struct Flags_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+      end
 
+    def initialize(@nd_opt_ri_flags_reserved : UInt8, @flags : Flags_e__Struct_)
+    end
     end
 
+    def initialize(@nd_opt_ri_type : UInt8, @nd_opt_ri_len : UInt8, @nd_opt_ri_prefix_len : UInt8, @anonymous : Anonymous_e__Union_, @nd_opt_ri_route_lifetime : UInt32, @nd_opt_ri_prefix : Win32cr::Networking::WinSock::IN6_ADDR)
+    end
   end
 
   @[Extern]
-  record Nd_opt_rdnss,
-    nd_opt_rdnss_type : UInt8,
-    nd_opt_rdnss_len : UInt8,
-    nd_opt_rdnss_reserved : UInt16,
-    nd_opt_rdnss_lifetime : UInt32
+  struct Nd_opt_rdnss
+    property nd_opt_rdnss_type : UInt8
+    property nd_opt_rdnss_len : UInt8
+    property nd_opt_rdnss_reserved : UInt16
+    property nd_opt_rdnss_lifetime : UInt32
+    def initialize(@nd_opt_rdnss_type : UInt8, @nd_opt_rdnss_len : UInt8, @nd_opt_rdnss_reserved : UInt16, @nd_opt_rdnss_lifetime : UInt32)
+    end
+  end
 
   @[Extern]
-  record Nd_opt_dnssl,
-    nd_opt_dnssl_type : UInt8,
-    nd_opt_dnssl_len : UInt8,
-    nd_opt_dnssl_reserved : UInt16,
-    nd_opt_dnssl_lifetime : UInt32
+  struct Nd_opt_dnssl
+    property nd_opt_dnssl_type : UInt8
+    property nd_opt_dnssl_len : UInt8
+    property nd_opt_dnssl_reserved : UInt16
+    property nd_opt_dnssl_lifetime : UInt32
+    def initialize(@nd_opt_dnssl_type : UInt8, @nd_opt_dnssl_len : UInt8, @nd_opt_dnssl_reserved : UInt16, @nd_opt_dnssl_lifetime : UInt32)
+    end
+  end
 
   @[Extern]
-  record MLD_HEADER,
-    icmp_header : Win32cr::Networking::WinSock::ICMP_HEADER,
-    max_resp_time : UInt16,
-    reserved : UInt16,
-    multicast_address : Win32cr::Networking::WinSock::IN6_ADDR
+  struct MLD_HEADER
+    property icmp_header : Win32cr::Networking::WinSock::ICMP_HEADER
+    property max_resp_time : UInt16
+    property reserved : UInt16
+    property multicast_address : Win32cr::Networking::WinSock::IN6_ADDR
+    def initialize(@icmp_header : Win32cr::Networking::WinSock::ICMP_HEADER, @max_resp_time : UInt16, @reserved : UInt16, @multicast_address : Win32cr::Networking::WinSock::IN6_ADDR)
+    end
+  end
 
   @[Extern]
-  record MLDV2_QUERY_HEADER,
-    icmp_header : Win32cr::Networking::WinSock::ICMP_HEADER,
-    anonymous1 : Anonymous1_e__Union_,
-    reserved : UInt16,
-    multicast_address : Win32cr::Networking::WinSock::IN6_ADDR,
-    _bitfield : UInt8,
-    anonymous2 : Anonymous2_e__Union_,
-    source_count : UInt16 do
+  struct MLDV2_QUERY_HEADER
+    property icmp_header : Win32cr::Networking::WinSock::ICMP_HEADER
+    property anonymous1 : Anonymous1_e__Union_
+    property reserved : UInt16
+    property multicast_address : Win32cr::Networking::WinSock::IN6_ADDR
+    property _bitfield : UInt8
+    property anonymous2 : Anonymous2_e__Union_
+    property source_count : UInt16
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      queriers_query_interface_code : UInt8,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous2_e__Union_
+    property queriers_query_interface_code : UInt8
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt8
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+      end
 
+    def initialize(@queriers_query_interface_code : UInt8, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      max_resp_code : UInt16,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous1_e__Union_
+    property max_resp_code : UInt16
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt16
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+      end
 
+    def initialize(@max_resp_code : UInt16, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@icmp_header : Win32cr::Networking::WinSock::ICMP_HEADER, @anonymous1 : Anonymous1_e__Union_, @reserved : UInt16, @multicast_address : Win32cr::Networking::WinSock::IN6_ADDR, @_bitfield : UInt8, @anonymous2 : Anonymous2_e__Union_, @source_count : UInt16)
+    end
   end
 
   @[Extern]
-  record MLDV2_REPORT_RECORD_HEADER,
-    type__ : UInt8,
-    auxillary_data_length : UInt8,
-    source_count : UInt16,
-    multicast_address : Win32cr::Networking::WinSock::IN6_ADDR
+  struct MLDV2_REPORT_RECORD_HEADER
+    property type__ : UInt8
+    property auxillary_data_length : UInt8
+    property source_count : UInt16
+    property multicast_address : Win32cr::Networking::WinSock::IN6_ADDR
+    def initialize(@type__ : UInt8, @auxillary_data_length : UInt8, @source_count : UInt16, @multicast_address : Win32cr::Networking::WinSock::IN6_ADDR)
+    end
+  end
 
   @[Extern]
-  record MLDV2_REPORT_HEADER,
-    icmp_header : Win32cr::Networking::WinSock::ICMP_HEADER,
-    reserved : UInt16,
-    record_count : UInt16
+  struct MLDV2_REPORT_HEADER
+    property icmp_header : Win32cr::Networking::WinSock::ICMP_HEADER
+    property reserved : UInt16
+    property record_count : UInt16
+    def initialize(@icmp_header : Win32cr::Networking::WinSock::ICMP_HEADER, @reserved : UInt16, @record_count : UInt16)
+    end
+  end
 
   @[Extern]
-  record Tcp_hdr,
-    th_sport : UInt16,
-    th_dport : UInt16,
-    th_seq : UInt32,
-    th_ack : UInt32,
-    _bitfield : UInt8,
-    th_flags : UInt8,
-    th_win : UInt16,
-    th_sum : UInt16,
-    th_urp : UInt16
+  struct Tcp_hdr
+    property th_sport : UInt16
+    property th_dport : UInt16
+    property th_seq : UInt32
+    property th_ack : UInt32
+    property _bitfield : UInt8
+    property th_flags : UInt8
+    property th_win : UInt16
+    property th_sum : UInt16
+    property th_urp : UInt16
+    def initialize(@th_sport : UInt16, @th_dport : UInt16, @th_seq : UInt32, @th_ack : UInt32, @_bitfield : UInt8, @th_flags : UInt8, @th_win : UInt16, @th_sum : UInt16, @th_urp : UInt16)
+    end
+  end
 
   @[Extern]
-  record Tcp_opt_mss,
-    kind : UInt8,
-    length : UInt8,
-    mss : UInt16
+  struct Tcp_opt_mss
+    property kind : UInt8
+    property length : UInt8
+    property mss : UInt16
+    def initialize(@kind : UInt8, @length : UInt8, @mss : UInt16)
+    end
+  end
 
   @[Extern]
-  record Tcp_opt_ws,
-    kind : UInt8,
-    length : UInt8,
-    shift_cnt : UInt8
+  struct Tcp_opt_ws
+    property kind : UInt8
+    property length : UInt8
+    property shift_cnt : UInt8
+    def initialize(@kind : UInt8, @length : UInt8, @shift_cnt : UInt8)
+    end
+  end
 
   @[Extern]
-  record Tcp_opt_sack_permitted,
-    kind : UInt8,
-    length : UInt8
+  struct Tcp_opt_sack_permitted
+    property kind : UInt8
+    property length : UInt8
+    def initialize(@kind : UInt8, @length : UInt8)
+    end
+  end
 
   @[Extern]
-  record Tcp_opt_sack,
-    kind : UInt8,
-    length : UInt8,
-    block : Tcp_opt_sack_block* do
+  struct Tcp_opt_sack
+    property kind : UInt8
+    property length : UInt8
+    property block : Tcp_opt_sack_block*
 
     # Nested Type Tcp_opt_sack_block
     @[Extern]
-    record Tcp_opt_sack_block,
-      left : UInt32,
-      right : UInt32
+    struct Tcp_opt_sack_block
+    property left : UInt32
+    property right : UInt32
+    def initialize(@left : UInt32, @right : UInt32)
+    end
+    end
 
+    def initialize(@kind : UInt8, @length : UInt8, @block : Tcp_opt_sack_block*)
+    end
   end
 
   @[Extern]
-  record Tcp_opt_ts,
-    kind : UInt8,
-    length : UInt8,
-    val : UInt32,
-    ec_r : UInt32
+  struct Tcp_opt_ts
+    property kind : UInt8
+    property length : UInt8
+    property val : UInt32
+    property ec_r : UInt32
+    def initialize(@kind : UInt8, @length : UInt8, @val : UInt32, @ec_r : UInt32)
+    end
+  end
 
   @[Extern]
-  record Tcp_opt_unknown,
-    kind : UInt8,
-    length : UInt8
+  struct Tcp_opt_unknown
+    property kind : UInt8
+    property length : UInt8
+    def initialize(@kind : UInt8, @length : UInt8)
+    end
+  end
 
   @[Extern]
-  record Tcp_opt_fastopen,
-    kind : UInt8,
-    length : UInt8,
-    cookie : UInt8*
+  struct Tcp_opt_fastopen
+    property kind : UInt8
+    property length : UInt8
+    property cookie : UInt8*
+    def initialize(@kind : UInt8, @length : UInt8, @cookie : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DL_TUNNEL_ADDRESS,
-    compartment_id : Win32cr::System::Kernel::COMPARTMENT_ID,
-    scope_id : Win32cr::Networking::WinSock::SCOPE_ID,
-    ip_address : UInt8*
+  struct DL_TUNNEL_ADDRESS
+    property compartment_id : Win32cr::System::Kernel::COMPARTMENT_ID
+    property scope_id : Win32cr::Networking::WinSock::SCOPE_ID
+    property ip_address : UInt8*
+    def initialize(@compartment_id : Win32cr::System::Kernel::COMPARTMENT_ID, @scope_id : Win32cr::Networking::WinSock::SCOPE_ID, @ip_address : UInt8*)
+    end
+  end
 
   @[Extern]
-  record DL_TEREDO_ADDRESS,
-    reserved : UInt8[6],
-    anonymous : Anonymous_e__Union_ do
+  struct DL_TEREDO_ADDRESS
+    property reserved : UInt8[6]
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      eui64 : Win32cr::Networking::WinSock::DL_EUI64,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property eui64 : Win32cr::Networking::WinSock::DL_EUI64
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        flags : UInt16,
-        mapped_port : UInt16,
-        mapped_address : Win32cr::Networking::WinSock::IN_ADDR
+      struct Anonymous_e__Struct_
+    property flags : UInt16
+    property mapped_port : UInt16
+    property mapped_address : Win32cr::Networking::WinSock::IN_ADDR
+    def initialize(@flags : UInt16, @mapped_port : UInt16, @mapped_address : Win32cr::Networking::WinSock::IN_ADDR)
+    end
+      end
 
+    def initialize(@eui64 : Win32cr::Networking::WinSock::DL_EUI64, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@reserved : UInt8[6], @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record DL_TEREDO_ADDRESS_PRV,
-    reserved : UInt8[6],
-    anonymous : Anonymous_e__Union_ do
+  struct DL_TEREDO_ADDRESS_PRV
+    property reserved : UInt8[6]
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      eui64 : Win32cr::Networking::WinSock::DL_EUI64,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property eui64 : Win32cr::Networking::WinSock::DL_EUI64
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        flags : UInt16,
-        mapped_port : UInt16,
-        mapped_address : Win32cr::Networking::WinSock::IN_ADDR,
-        local_address : Win32cr::Networking::WinSock::IN_ADDR,
-        interface_index : UInt32,
-        local_port : UInt16,
-        dl_destination : Win32cr::Networking::WinSock::DL_EUI48
+      struct Anonymous_e__Struct_
+    property flags : UInt16
+    property mapped_port : UInt16
+    property mapped_address : Win32cr::Networking::WinSock::IN_ADDR
+    property local_address : Win32cr::Networking::WinSock::IN_ADDR
+    property interface_index : UInt32
+    property local_port : UInt16
+    property dl_destination : Win32cr::Networking::WinSock::DL_EUI48
+    def initialize(@flags : UInt16, @mapped_port : UInt16, @mapped_address : Win32cr::Networking::WinSock::IN_ADDR, @local_address : Win32cr::Networking::WinSock::IN_ADDR, @interface_index : UInt32, @local_port : UInt16, @dl_destination : Win32cr::Networking::WinSock::DL_EUI48)
+    end
+      end
 
+    def initialize(@eui64 : Win32cr::Networking::WinSock::DL_EUI64, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@reserved : UInt8[6], @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record IPTLS_METADATA,
-    sequence_number : UInt64
+  struct IPTLS_METADATA
+    property sequence_number : UInt64
+    def initialize(@sequence_number : UInt64)
+    end
+  end
 
   @[Extern]
-  record NPI_MODULEID,
-    length : UInt16,
-    type__ : Win32cr::Networking::WinSock::NPI_MODULEID_TYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct NPI_MODULEID
+    property length : UInt16
+    property type__ : Win32cr::Networking::WinSock::NPI_MODULEID_TYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      guid : LibC::GUID,
-      if_luid : Win32cr::Foundation::LUID
+    struct Anonymous_e__Union_
+    property guid : LibC::GUID
+    property if_luid : Win32cr::Foundation::LUID
+    def initialize(@guid : LibC::GUID, @if_luid : Win32cr::Foundation::LUID)
+    end
+    end
 
+    def initialize(@length : UInt16, @type__ : Win32cr::Networking::WinSock::NPI_MODULEID_TYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   {% if flag?(:i386) %}
   @[Extern]
-  record Servent,
-    s_name : Win32cr::Foundation::PSTR,
-    s_aliases : Int8**,
-    s_port : Int16,
-    s_proto : Win32cr::Foundation::PSTR
+  struct Servent
+    property s_name : Win32cr::Foundation::PSTR
+    property s_aliases : Int8**
+    property s_port : Int16
+    property s_proto : Win32cr::Foundation::PSTR
+    def initialize(@s_name : Win32cr::Foundation::PSTR, @s_aliases : Int8**, @s_port : Int16, @s_proto : Win32cr::Foundation::PSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record WSAData,
-    wVersion : UInt16,
-    wHighVersion : UInt16,
-    szDescription : Win32cr::Foundation::CHAR[257],
-    szSystemStatus : Win32cr::Foundation::CHAR[129],
-    iMaxSockets : UInt16,
-    iMaxUdpDg : UInt16,
-    lpVendorInfo : Win32cr::Foundation::PSTR
+  struct WSAData
+    property wVersion : UInt16
+    property wHighVersion : UInt16
+    property szDescription : Win32cr::Foundation::CHAR[257]
+    property szSystemStatus : Win32cr::Foundation::CHAR[129]
+    property iMaxSockets : UInt16
+    property iMaxUdpDg : UInt16
+    property lpVendorInfo : Win32cr::Foundation::PSTR
+    def initialize(@wVersion : UInt16, @wHighVersion : UInt16, @szDescription : Win32cr::Foundation::CHAR[257], @szSystemStatus : Win32cr::Foundation::CHAR[129], @iMaxSockets : UInt16, @iMaxUdpDg : UInt16, @lpVendorInfo : Win32cr::Foundation::PSTR)
+    end
+  end
   {% end %}
 
   @[Link("ws2_32")]

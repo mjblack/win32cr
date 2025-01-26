@@ -6,7 +6,7 @@ require "./../system/registry.cr"
 require "./../data/xml/ms_xml.cr"
 
 module Win32cr::NetworkManagement::NetManagement
-  alias WORKERFUNCTION = Proc(Void*, Void)*
+  alias WORKERFUNCTION = Proc(Void*, Void)
 
   NERR_BASE = 2100_u32
   NERR_PasswordExpired = 2242_u32
@@ -2349,2017 +2349,2914 @@ module Win32cr::NetworkManagement::NetManagement
   end
 
   @[Extern]
-  record USER_INFO_0,
-    usri0_name : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record USER_INFO_1,
-    usri1_name : Win32cr::Foundation::PWSTR,
-    usri1_password : Win32cr::Foundation::PWSTR,
-    usri1_password_age : UInt32,
-    usri1_priv : Win32cr::NetworkManagement::NetManagement::USER_PRIV,
-    usri1_home_dir : Win32cr::Foundation::PWSTR,
-    usri1_comment : Win32cr::Foundation::PWSTR,
-    usri1_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS,
-    usri1_script_path : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record USER_INFO_2,
-    usri2_name : Win32cr::Foundation::PWSTR,
-    usri2_password : Win32cr::Foundation::PWSTR,
-    usri2_password_age : UInt32,
-    usri2_priv : Win32cr::NetworkManagement::NetManagement::USER_PRIV,
-    usri2_home_dir : Win32cr::Foundation::PWSTR,
-    usri2_comment : Win32cr::Foundation::PWSTR,
-    usri2_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS,
-    usri2_script_path : Win32cr::Foundation::PWSTR,
-    usri2_auth_flags : Win32cr::NetworkManagement::NetManagement::AF_OP,
-    usri2_full_name : Win32cr::Foundation::PWSTR,
-    usri2_usr_comment : Win32cr::Foundation::PWSTR,
-    usri2_parms : Win32cr::Foundation::PWSTR,
-    usri2_workstations : Win32cr::Foundation::PWSTR,
-    usri2_last_logon : UInt32,
-    usri2_last_logoff : UInt32,
-    usri2_acct_expires : UInt32,
-    usri2_max_storage : UInt32,
-    usri2_units_per_week : UInt32,
-    usri2_logon_hours : UInt8*,
-    usri2_bad_pw_count : UInt32,
-    usri2_num_logons : UInt32,
-    usri2_logon_server : Win32cr::Foundation::PWSTR,
-    usri2_country_code : UInt32,
-    usri2_code_page : UInt32
-
-  @[Extern]
-  record USER_INFO_3,
-    usri3_name : Win32cr::Foundation::PWSTR,
-    usri3_password : Win32cr::Foundation::PWSTR,
-    usri3_password_age : UInt32,
-    usri3_priv : Win32cr::NetworkManagement::NetManagement::USER_PRIV,
-    usri3_home_dir : Win32cr::Foundation::PWSTR,
-    usri3_comment : Win32cr::Foundation::PWSTR,
-    usri3_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS,
-    usri3_script_path : Win32cr::Foundation::PWSTR,
-    usri3_auth_flags : Win32cr::NetworkManagement::NetManagement::AF_OP,
-    usri3_full_name : Win32cr::Foundation::PWSTR,
-    usri3_usr_comment : Win32cr::Foundation::PWSTR,
-    usri3_parms : Win32cr::Foundation::PWSTR,
-    usri3_workstations : Win32cr::Foundation::PWSTR,
-    usri3_last_logon : UInt32,
-    usri3_last_logoff : UInt32,
-    usri3_acct_expires : UInt32,
-    usri3_max_storage : UInt32,
-    usri3_units_per_week : UInt32,
-    usri3_logon_hours : UInt8*,
-    usri3_bad_pw_count : UInt32,
-    usri3_num_logons : UInt32,
-    usri3_logon_server : Win32cr::Foundation::PWSTR,
-    usri3_country_code : UInt32,
-    usri3_code_page : UInt32,
-    usri3_user_id : UInt32,
-    usri3_primary_group_id : UInt32,
-    usri3_profile : Win32cr::Foundation::PWSTR,
-    usri3_home_dir_drive : Win32cr::Foundation::PWSTR,
-    usri3_password_expired : UInt32
-
-  @[Extern]
-  record USER_INFO_4,
-    usri4_name : Win32cr::Foundation::PWSTR,
-    usri4_password : Win32cr::Foundation::PWSTR,
-    usri4_password_age : UInt32,
-    usri4_priv : Win32cr::NetworkManagement::NetManagement::USER_PRIV,
-    usri4_home_dir : Win32cr::Foundation::PWSTR,
-    usri4_comment : Win32cr::Foundation::PWSTR,
-    usri4_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS,
-    usri4_script_path : Win32cr::Foundation::PWSTR,
-    usri4_auth_flags : Win32cr::NetworkManagement::NetManagement::AF_OP,
-    usri4_full_name : Win32cr::Foundation::PWSTR,
-    usri4_usr_comment : Win32cr::Foundation::PWSTR,
-    usri4_parms : Win32cr::Foundation::PWSTR,
-    usri4_workstations : Win32cr::Foundation::PWSTR,
-    usri4_last_logon : UInt32,
-    usri4_last_logoff : UInt32,
-    usri4_acct_expires : UInt32,
-    usri4_max_storage : UInt32,
-    usri4_units_per_week : UInt32,
-    usri4_logon_hours : UInt8*,
-    usri4_bad_pw_count : UInt32,
-    usri4_num_logons : UInt32,
-    usri4_logon_server : Win32cr::Foundation::PWSTR,
-    usri4_country_code : UInt32,
-    usri4_code_page : UInt32,
-    usri4_user_sid : Win32cr::Foundation::PSID,
-    usri4_primary_group_id : UInt32,
-    usri4_profile : Win32cr::Foundation::PWSTR,
-    usri4_home_dir_drive : Win32cr::Foundation::PWSTR,
-    usri4_password_expired : UInt32
-
-  @[Extern]
-  record USER_INFO_10,
-    usri10_name : Win32cr::Foundation::PWSTR,
-    usri10_comment : Win32cr::Foundation::PWSTR,
-    usri10_usr_comment : Win32cr::Foundation::PWSTR,
-    usri10_full_name : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record USER_INFO_11,
-    usri11_name : Win32cr::Foundation::PWSTR,
-    usri11_comment : Win32cr::Foundation::PWSTR,
-    usri11_usr_comment : Win32cr::Foundation::PWSTR,
-    usri11_full_name : Win32cr::Foundation::PWSTR,
-    usri11_priv : Win32cr::NetworkManagement::NetManagement::USER_PRIV,
-    usri11_auth_flags : Win32cr::NetworkManagement::NetManagement::AF_OP,
-    usri11_password_age : UInt32,
-    usri11_home_dir : Win32cr::Foundation::PWSTR,
-    usri11_parms : Win32cr::Foundation::PWSTR,
-    usri11_last_logon : UInt32,
-    usri11_last_logoff : UInt32,
-    usri11_bad_pw_count : UInt32,
-    usri11_num_logons : UInt32,
-    usri11_logon_server : Win32cr::Foundation::PWSTR,
-    usri11_country_code : UInt32,
-    usri11_workstations : Win32cr::Foundation::PWSTR,
-    usri11_max_storage : UInt32,
-    usri11_units_per_week : UInt32,
-    usri11_logon_hours : UInt8*,
-    usri11_code_page : UInt32
-
-  @[Extern]
-  record USER_INFO_20,
-    usri20_name : Win32cr::Foundation::PWSTR,
-    usri20_full_name : Win32cr::Foundation::PWSTR,
-    usri20_comment : Win32cr::Foundation::PWSTR,
-    usri20_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS,
-    usri20_user_id : UInt32
-
-  @[Extern]
-  record USER_INFO_21,
-    usri21_password : UInt8[16]
-
-  @[Extern]
-  record USER_INFO_22,
-    usri22_name : Win32cr::Foundation::PWSTR,
-    usri22_password : UInt8[16],
-    usri22_password_age : UInt32,
-    usri22_priv : Win32cr::NetworkManagement::NetManagement::USER_PRIV,
-    usri22_home_dir : Win32cr::Foundation::PWSTR,
-    usri22_comment : Win32cr::Foundation::PWSTR,
-    usri22_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS,
-    usri22_script_path : Win32cr::Foundation::PWSTR,
-    usri22_auth_flags : Win32cr::NetworkManagement::NetManagement::AF_OP,
-    usri22_full_name : Win32cr::Foundation::PWSTR,
-    usri22_usr_comment : Win32cr::Foundation::PWSTR,
-    usri22_parms : Win32cr::Foundation::PWSTR,
-    usri22_workstations : Win32cr::Foundation::PWSTR,
-    usri22_last_logon : UInt32,
-    usri22_last_logoff : UInt32,
-    usri22_acct_expires : UInt32,
-    usri22_max_storage : UInt32,
-    usri22_units_per_week : UInt32,
-    usri22_logon_hours : UInt8*,
-    usri22_bad_pw_count : UInt32,
-    usri22_num_logons : UInt32,
-    usri22_logon_server : Win32cr::Foundation::PWSTR,
-    usri22_country_code : UInt32,
-    usri22_code_page : UInt32
-
-  @[Extern]
-  record USER_INFO_23,
-    usri23_name : Win32cr::Foundation::PWSTR,
-    usri23_full_name : Win32cr::Foundation::PWSTR,
-    usri23_comment : Win32cr::Foundation::PWSTR,
-    usri23_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS,
-    usri23_user_sid : Win32cr::Foundation::PSID
-
-  @[Extern]
-  record USER_INFO_24,
-    usri24_internet_identity : Win32cr::Foundation::BOOL,
-    usri24_flags : UInt32,
-    usri24_internet_provider_name : Win32cr::Foundation::PWSTR,
-    usri24_internet_principal_name : Win32cr::Foundation::PWSTR,
-    usri24_user_sid : Win32cr::Foundation::PSID
-
-  @[Extern]
-  record USER_INFO_1003,
-    usri1003_password : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record USER_INFO_1005,
-    usri1005_priv : Win32cr::NetworkManagement::NetManagement::USER_PRIV
-
-  @[Extern]
-  record USER_INFO_1006,
-    usri1006_home_dir : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record USER_INFO_1007,
-    usri1007_comment : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record USER_INFO_1008,
-    usri1008_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS
-
-  @[Extern]
-  record USER_INFO_1009,
-    usri1009_script_path : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record USER_INFO_1010,
-    usri1010_auth_flags : Win32cr::NetworkManagement::NetManagement::AF_OP
-
-  @[Extern]
-  record USER_INFO_1011,
-    usri1011_full_name : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record USER_INFO_1012,
-    usri1012_usr_comment : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record USER_INFO_1013,
-    usri1013_parms : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record USER_INFO_1014,
-    usri1014_workstations : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record USER_INFO_1017,
-    usri1017_acct_expires : UInt32
-
-  @[Extern]
-  record USER_INFO_1018,
-    usri1018_max_storage : UInt32
-
-  @[Extern]
-  record USER_INFO_1020,
-    usri1020_units_per_week : UInt32,
-    usri1020_logon_hours : UInt8*
-
-  @[Extern]
-  record USER_INFO_1023,
-    usri1023_logon_server : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record USER_INFO_1024,
-    usri1024_country_code : UInt32
-
-  @[Extern]
-  record USER_INFO_1025,
-    usri1025_code_page : UInt32
-
-  @[Extern]
-  record USER_INFO_1051,
-    usri1051_primary_group_id : UInt32
-
-  @[Extern]
-  record USER_INFO_1052,
-    usri1052_profile : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record USER_INFO_1053,
-    usri1053_home_dir_drive : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record USER_MODALS_INFO_0,
-    usrmod0_min_passwd_len : UInt32,
-    usrmod0_max_passwd_age : UInt32,
-    usrmod0_min_passwd_age : UInt32,
-    usrmod0_force_logoff : UInt32,
-    usrmod0_password_hist_len : UInt32
-
-  @[Extern]
-  record USER_MODALS_INFO_1,
-    usrmod1_role : UInt32,
-    usrmod1_primary : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record USER_MODALS_INFO_2,
-    usrmod2_domain_name : Win32cr::Foundation::PWSTR,
-    usrmod2_domain_id : Win32cr::Foundation::PSID
-
-  @[Extern]
-  record USER_MODALS_INFO_3,
-    usrmod3_lockout_duration : UInt32,
-    usrmod3_lockout_observation_window : UInt32,
-    usrmod3_lockout_threshold : UInt32
-
-  @[Extern]
-  record USER_MODALS_INFO_1001,
-    usrmod1001_min_passwd_len : UInt32
-
-  @[Extern]
-  record USER_MODALS_INFO_1002,
-    usrmod1002_max_passwd_age : UInt32
-
-  @[Extern]
-  record USER_MODALS_INFO_1003,
-    usrmod1003_min_passwd_age : UInt32
-
-  @[Extern]
-  record USER_MODALS_INFO_1004,
-    usrmod1004_force_logoff : UInt32
-
-  @[Extern]
-  record USER_MODALS_INFO_1005,
-    usrmod1005_password_hist_len : UInt32
-
-  @[Extern]
-  record USER_MODALS_INFO_1006,
-    usrmod1006_role : Win32cr::NetworkManagement::NetManagement::USER_MODALS_ROLES
-
-  @[Extern]
-  record USER_MODALS_INFO_1007,
-    usrmod1007_primary : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record GROUP_INFO_0,
-    grpi0_name : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record GROUP_INFO_1,
-    grpi1_name : Win32cr::Foundation::PWSTR,
-    grpi1_comment : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record GROUP_INFO_2,
-    grpi2_name : Win32cr::Foundation::PWSTR,
-    grpi2_comment : Win32cr::Foundation::PWSTR,
-    grpi2_group_id : UInt32,
-    grpi2_attributes : UInt32
-
-  @[Extern]
-  record GROUP_INFO_3,
-    grpi3_name : Win32cr::Foundation::PWSTR,
-    grpi3_comment : Win32cr::Foundation::PWSTR,
-    grpi3_group_sid : Win32cr::Foundation::PSID,
-    grpi3_attributes : UInt32
-
-  @[Extern]
-  record GROUP_INFO_1002,
-    grpi1002_comment : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record GROUP_INFO_1005,
-    grpi1005_attributes : UInt32
-
-  @[Extern]
-  record GROUP_USERS_INFO_0,
-    grui0_name : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record GROUP_USERS_INFO_1,
-    grui1_name : Win32cr::Foundation::PWSTR,
-    grui1_attributes : UInt32
-
-  @[Extern]
-  record LOCALGROUP_INFO_0,
-    lgrpi0_name : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record LOCALGROUP_INFO_1,
-    lgrpi1_name : Win32cr::Foundation::PWSTR,
-    lgrpi1_comment : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record LOCALGROUP_INFO_1002,
-    lgrpi1002_comment : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record LOCALGROUP_MEMBERS_INFO_0,
-    lgrmi0_sid : Win32cr::Foundation::PSID
-
-  @[Extern]
-  record LOCALGROUP_MEMBERS_INFO_1,
-    lgrmi1_sid : Win32cr::Foundation::PSID,
-    lgrmi1_sidusage : Win32cr::Security::SID_NAME_USE,
-    lgrmi1_name : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record LOCALGROUP_MEMBERS_INFO_2,
-    lgrmi2_sid : Win32cr::Foundation::PSID,
-    lgrmi2_sidusage : Win32cr::Security::SID_NAME_USE,
-    lgrmi2_domainandname : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record LOCALGROUP_MEMBERS_INFO_3,
-    lgrmi3_domainandname : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record LOCALGROUP_USERS_INFO_0,
-    lgrui0_name : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record NET_DISPLAY_USER,
-    usri1_name : Win32cr::Foundation::PWSTR,
-    usri1_comment : Win32cr::Foundation::PWSTR,
-    usri1_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS,
-    usri1_full_name : Win32cr::Foundation::PWSTR,
-    usri1_user_id : UInt32,
-    usri1_next_index : UInt32
-
-  @[Extern]
-  record NET_DISPLAY_MACHINE,
-    usri2_name : Win32cr::Foundation::PWSTR,
-    usri2_comment : Win32cr::Foundation::PWSTR,
-    usri2_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS,
-    usri2_user_id : UInt32,
-    usri2_next_index : UInt32
-
-  @[Extern]
-  record NET_DISPLAY_GROUP,
-    grpi3_name : Win32cr::Foundation::PWSTR,
-    grpi3_comment : Win32cr::Foundation::PWSTR,
-    grpi3_group_id : UInt32,
-    grpi3_attributes : UInt32,
-    grpi3_next_index : UInt32
-
-  @[Extern]
-  record ACCESS_INFO_0,
-    acc0_resource_name : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record ACCESS_INFO_1,
-    acc1_resource_name : Win32cr::Foundation::PWSTR,
-    acc1_attr : UInt32,
-    acc1_count : UInt32
-
-  @[Extern]
-  record ACCESS_INFO_1002,
-    acc1002_attr : UInt32
-
-  @[Extern]
-  record ACCESS_LIST,
-    acl_ugname : Win32cr::Foundation::PWSTR,
-    acl_access : UInt32
-
-  @[Extern]
-  record NET_VALIDATE_PASSWORD_HASH,
-    length : UInt32,
-    hash : UInt8*
-
-  @[Extern]
-  record NET_VALIDATE_PERSISTED_FIELDS,
-    present_fields : UInt32,
-    password_last_set : Win32cr::Foundation::FILETIME,
-    bad_password_time : Win32cr::Foundation::FILETIME,
-    lockout_time : Win32cr::Foundation::FILETIME,
-    bad_password_count : UInt32,
-    password_history_length : UInt32,
-    password_history : Win32cr::NetworkManagement::NetManagement::NET_VALIDATE_PASSWORD_HASH*
-
-  @[Extern]
-  record NET_VALIDATE_OUTPUT_ARG,
-    changed_persisted_fields : Win32cr::NetworkManagement::NetManagement::NET_VALIDATE_PERSISTED_FIELDS,
-    validation_status : UInt32
-
-  @[Extern]
-  record NET_VALIDATE_AUTHENTICATION_INPUT_ARG,
-    input_persisted_fields : Win32cr::NetworkManagement::NetManagement::NET_VALIDATE_PERSISTED_FIELDS,
-    password_matched : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record NET_VALIDATE_PASSWORD_CHANGE_INPUT_ARG,
-    input_persisted_fields : Win32cr::NetworkManagement::NetManagement::NET_VALIDATE_PERSISTED_FIELDS,
-    clear_password : Win32cr::Foundation::PWSTR,
-    user_account_name : Win32cr::Foundation::PWSTR,
-    hashed_password : Win32cr::NetworkManagement::NetManagement::NET_VALIDATE_PASSWORD_HASH,
-    password_match : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record NET_VALIDATE_PASSWORD_RESET_INPUT_ARG,
-    input_persisted_fields : Win32cr::NetworkManagement::NetManagement::NET_VALIDATE_PERSISTED_FIELDS,
-    clear_password : Win32cr::Foundation::PWSTR,
-    user_account_name : Win32cr::Foundation::PWSTR,
-    hashed_password : Win32cr::NetworkManagement::NetManagement::NET_VALIDATE_PASSWORD_HASH,
-    password_must_change_at_next_logon : Win32cr::Foundation::BOOLEAN,
-    clear_lockout : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record NETLOGON_INFO_1,
-    netlog1_flags : UInt32,
-    netlog1_pdc_connection_status : UInt32
-
-  @[Extern]
-  record NETLOGON_INFO_2,
-    netlog2_flags : UInt32,
-    netlog2_pdc_connection_status : UInt32,
-    netlog2_trusted_dc_name : Win32cr::Foundation::PWSTR,
-    netlog2_tc_connection_status : UInt32
-
-  @[Extern]
-  record NETLOGON_INFO_3,
-    netlog3_flags : UInt32,
-    netlog3_logon_attempts : UInt32,
-    netlog3_reserved1 : UInt32,
-    netlog3_reserved2 : UInt32,
-    netlog3_reserved3 : UInt32,
-    netlog3_reserved4 : UInt32,
-    netlog3_reserved5 : UInt32
-
-  @[Extern]
-  record NETLOGON_INFO_4,
-    netlog4_trusted_dc_name : Win32cr::Foundation::PWSTR,
-    netlog4_trusted_domain_name : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record MSA_INFO_0,
-    state : Win32cr::NetworkManagement::NetManagement::MSA_INFO_STATE
-
-  @[Extern]
-  record STD_ALERT,
-    alrt_timestamp : UInt32,
-    alrt_eventname : UInt16[17],
-    alrt_servicename : UInt16[81]
-
-  @[Extern]
-  record ADMIN_OTHER_INFO,
-    alrtad_errcode : UInt32,
-    alrtad_numstrings : UInt32
-
-  @[Extern]
-  record ERRLOG_OTHER_INFO,
-    alrter_errcode : UInt32,
-    alrter_offset : UInt32
-
-  @[Extern]
-  record PRINT_OTHER_INFO,
-    alrtpr_jobid : UInt32,
-    alrtpr_status : UInt32,
-    alrtpr_submitted : UInt32,
-    alrtpr_size : UInt32
-
-  @[Extern]
-  record USER_OTHER_INFO,
-    alrtus_errcode : UInt32,
-    alrtus_numstrings : UInt32
-
-  @[Extern]
-  record MSG_INFO_0,
-    msgi0_name : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record MSG_INFO_1,
-    msgi1_name : Win32cr::Foundation::PWSTR,
-    msgi1_forward_flag : UInt32,
-    msgi1_forward : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record TIME_OF_DAY_INFO,
-    tod_elapsedt : UInt32,
-    tod_msecs : UInt32,
-    tod_hours : UInt32,
-    tod_mins : UInt32,
-    tod_secs : UInt32,
-    tod_hunds : UInt32,
-    tod_timezone : Int32,
-    tod_tinterval : UInt32,
-    tod_day : UInt32,
-    tod_month : UInt32,
-    tod_year : UInt32,
-    tod_weekday : UInt32
-
-  @[Extern]
-  record REPL_INFO_0,
-    rp0_role : UInt32,
-    rp0_exportpath : Win32cr::Foundation::PWSTR,
-    rp0_exportlist : Win32cr::Foundation::PWSTR,
-    rp0_importpath : Win32cr::Foundation::PWSTR,
-    rp0_importlist : Win32cr::Foundation::PWSTR,
-    rp0_logonusername : Win32cr::Foundation::PWSTR,
-    rp0_interval : UInt32,
-    rp0_pulse : UInt32,
-    rp0_guardtime : UInt32,
-    rp0_random : UInt32
-
-  @[Extern]
-  record REPL_INFO_1000,
-    rp1000_interval : UInt32
-
-  @[Extern]
-  record REPL_INFO_1001,
-    rp1001_pulse : UInt32
-
-  @[Extern]
-  record REPL_INFO_1002,
-    rp1002_guardtime : UInt32
-
-  @[Extern]
-  record REPL_INFO_1003,
-    rp1003_random : UInt32
-
-  @[Extern]
-  record REPL_EDIR_INFO_0,
-    rped0_dirname : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record REPL_EDIR_INFO_1,
-    rped1_dirname : Win32cr::Foundation::PWSTR,
-    rped1_integrity : UInt32,
-    rped1_extent : UInt32
-
-  @[Extern]
-  record REPL_EDIR_INFO_2,
-    rped2_dirname : Win32cr::Foundation::PWSTR,
-    rped2_integrity : UInt32,
-    rped2_extent : UInt32,
-    rped2_lockcount : UInt32,
-    rped2_locktime : UInt32
-
-  @[Extern]
-  record REPL_EDIR_INFO_1000,
-    rped1000_integrity : UInt32
-
-  @[Extern]
-  record REPL_EDIR_INFO_1001,
-    rped1001_extent : UInt32
-
-  @[Extern]
-  record REPL_IDIR_INFO_0,
-    rpid0_dirname : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record REPL_IDIR_INFO_1,
-    rpid1_dirname : Win32cr::Foundation::PWSTR,
-    rpid1_state : UInt32,
-    rpid1_mastername : Win32cr::Foundation::PWSTR,
-    rpid1_last_update_time : UInt32,
-    rpid1_lockcount : UInt32,
-    rpid1_locktime : UInt32
-
-  @[Extern]
-  record SERVER_INFO_100,
-    sv100_platform_id : UInt32,
-    sv100_name : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record SERVER_INFO_101,
-    sv101_platform_id : UInt32,
-    sv101_name : Win32cr::Foundation::PWSTR,
-    sv101_version_major : UInt32,
-    sv101_version_minor : UInt32,
-    sv101_type : Win32cr::NetworkManagement::NetManagement::NET_SERVER_TYPE,
-    sv101_comment : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record SERVER_INFO_102,
-    sv102_platform_id : UInt32,
-    sv102_name : Win32cr::Foundation::PWSTR,
-    sv102_version_major : UInt32,
-    sv102_version_minor : UInt32,
-    sv102_type : Win32cr::NetworkManagement::NetManagement::NET_SERVER_TYPE,
-    sv102_comment : Win32cr::Foundation::PWSTR,
-    sv102_users : UInt32,
-    sv102_disc : Int32,
-    sv102_hidden : Win32cr::NetworkManagement::NetManagement::SERVER_INFO_HIDDEN,
-    sv102_announce : UInt32,
-    sv102_anndelta : UInt32,
-    sv102_licenses : UInt32,
-    sv102_userpath : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record SERVER_INFO_103,
-    sv103_platform_id : UInt32,
-    sv103_name : Win32cr::Foundation::PWSTR,
-    sv103_version_major : UInt32,
-    sv103_version_minor : UInt32,
-    sv103_type : UInt32,
-    sv103_comment : Win32cr::Foundation::PWSTR,
-    sv103_users : UInt32,
-    sv103_disc : Int32,
-    sv103_hidden : Win32cr::Foundation::BOOL,
-    sv103_announce : UInt32,
-    sv103_anndelta : UInt32,
-    sv103_licenses : UInt32,
-    sv103_userpath : Win32cr::Foundation::PWSTR,
-    sv103_capabilities : UInt32
-
-  @[Extern]
-  record SERVER_INFO_402,
-    sv402_ulist_mtime : UInt32,
-    sv402_glist_mtime : UInt32,
-    sv402_alist_mtime : UInt32,
-    sv402_alerts : Win32cr::Foundation::PWSTR,
-    sv402_security : Win32cr::NetworkManagement::NetManagement::SERVER_INFO_SECURITY,
-    sv402_numadmin : UInt32,
-    sv402_lanmask : UInt32,
-    sv402_guestacct : Win32cr::Foundation::PWSTR,
-    sv402_chdevs : UInt32,
-    sv402_chdevq : UInt32,
-    sv402_chdevjobs : UInt32,
-    sv402_connections : UInt32,
-    sv402_shares : UInt32,
-    sv402_openfiles : UInt32,
-    sv402_sessopens : UInt32,
-    sv402_sessvcs : UInt32,
-    sv402_sessreqs : UInt32,
-    sv402_opensearch : UInt32,
-    sv402_activelocks : UInt32,
-    sv402_numreqbuf : UInt32,
-    sv402_sizreqbuf : UInt32,
-    sv402_numbigbuf : UInt32,
-    sv402_numfiletasks : UInt32,
-    sv402_alertsched : UInt32,
-    sv402_erroralert : UInt32,
-    sv402_logonalert : UInt32,
-    sv402_accessalert : UInt32,
-    sv402_diskalert : UInt32,
-    sv402_netioalert : UInt32,
-    sv402_maxauditsz : UInt32,
-    sv402_srvheuristics : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record SERVER_INFO_403,
-    sv403_ulist_mtime : UInt32,
-    sv403_glist_mtime : UInt32,
-    sv403_alist_mtime : UInt32,
-    sv403_alerts : Win32cr::Foundation::PWSTR,
-    sv403_security : Win32cr::NetworkManagement::NetManagement::SERVER_INFO_SECURITY,
-    sv403_numadmin : UInt32,
-    sv403_lanmask : UInt32,
-    sv403_guestacct : Win32cr::Foundation::PWSTR,
-    sv403_chdevs : UInt32,
-    sv403_chdevq : UInt32,
-    sv403_chdevjobs : UInt32,
-    sv403_connections : UInt32,
-    sv403_shares : UInt32,
-    sv403_openfiles : UInt32,
-    sv403_sessopens : UInt32,
-    sv403_sessvcs : UInt32,
-    sv403_sessreqs : UInt32,
-    sv403_opensearch : UInt32,
-    sv403_activelocks : UInt32,
-    sv403_numreqbuf : UInt32,
-    sv403_sizreqbuf : UInt32,
-    sv403_numbigbuf : UInt32,
-    sv403_numfiletasks : UInt32,
-    sv403_alertsched : UInt32,
-    sv403_erroralert : UInt32,
-    sv403_logonalert : UInt32,
-    sv403_accessalert : UInt32,
-    sv403_diskalert : UInt32,
-    sv403_netioalert : UInt32,
-    sv403_maxauditsz : UInt32,
-    sv403_srvheuristics : Win32cr::Foundation::PWSTR,
-    sv403_auditedevents : UInt32,
-    sv403_autoprofile : UInt32,
-    sv403_autopath : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record SERVER_INFO_502,
-    sv502_sessopens : UInt32,
-    sv502_sessvcs : UInt32,
-    sv502_opensearch : UInt32,
-    sv502_sizreqbuf : UInt32,
-    sv502_initworkitems : UInt32,
-    sv502_maxworkitems : UInt32,
-    sv502_rawworkitems : UInt32,
-    sv502_irpstacksize : UInt32,
-    sv502_maxrawbuflen : UInt32,
-    sv502_sessusers : UInt32,
-    sv502_sessconns : UInt32,
-    sv502_maxpagedmemoryusage : UInt32,
-    sv502_maxnonpagedmemoryusage : UInt32,
-    sv502_enablesoftcompat : Win32cr::Foundation::BOOL,
-    sv502_enableforcedlogoff : Win32cr::Foundation::BOOL,
-    sv502_timesource : Win32cr::Foundation::BOOL,
-    sv502_acceptdownlevelapis : Win32cr::Foundation::BOOL,
-    sv502_lmannounce : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record SERVER_INFO_503,
-    sv503_sessopens : UInt32,
-    sv503_sessvcs : UInt32,
-    sv503_opensearch : UInt32,
-    sv503_sizreqbuf : UInt32,
-    sv503_initworkitems : UInt32,
-    sv503_maxworkitems : UInt32,
-    sv503_rawworkitems : UInt32,
-    sv503_irpstacksize : UInt32,
-    sv503_maxrawbuflen : UInt32,
-    sv503_sessusers : UInt32,
-    sv503_sessconns : UInt32,
-    sv503_maxpagedmemoryusage : UInt32,
-    sv503_maxnonpagedmemoryusage : UInt32,
-    sv503_enablesoftcompat : Win32cr::Foundation::BOOL,
-    sv503_enableforcedlogoff : Win32cr::Foundation::BOOL,
-    sv503_timesource : Win32cr::Foundation::BOOL,
-    sv503_acceptdownlevelapis : Win32cr::Foundation::BOOL,
-    sv503_lmannounce : Win32cr::Foundation::BOOL,
-    sv503_domain : Win32cr::Foundation::PWSTR,
-    sv503_maxcopyreadlen : UInt32,
-    sv503_maxcopywritelen : UInt32,
-    sv503_minkeepsearch : UInt32,
-    sv503_maxkeepsearch : UInt32,
-    sv503_minkeepcomplsearch : UInt32,
-    sv503_maxkeepcomplsearch : UInt32,
-    sv503_threadcountadd : UInt32,
-    sv503_numblockthreads : UInt32,
-    sv503_scavtimeout : UInt32,
-    sv503_minrcvqueue : UInt32,
-    sv503_minfreeworkitems : UInt32,
-    sv503_xactmemsize : UInt32,
-    sv503_threadpriority : UInt32,
-    sv503_maxmpxct : UInt32,
-    sv503_oplockbreakwait : UInt32,
-    sv503_oplockbreakresponsewait : UInt32,
-    sv503_enableoplocks : Win32cr::Foundation::BOOL,
-    sv503_enableoplockforceclose : Win32cr::Foundation::BOOL,
-    sv503_enablefcbopens : Win32cr::Foundation::BOOL,
-    sv503_enableraw : Win32cr::Foundation::BOOL,
-    sv503_enablesharednetdrives : Win32cr::Foundation::BOOL,
-    sv503_minfreeconnections : UInt32,
-    sv503_maxfreeconnections : UInt32
-
-  @[Extern]
-  record SERVER_INFO_599,
-    sv599_sessopens : UInt32,
-    sv599_sessvcs : UInt32,
-    sv599_opensearch : UInt32,
-    sv599_sizreqbuf : UInt32,
-    sv599_initworkitems : UInt32,
-    sv599_maxworkitems : UInt32,
-    sv599_rawworkitems : UInt32,
-    sv599_irpstacksize : UInt32,
-    sv599_maxrawbuflen : UInt32,
-    sv599_sessusers : UInt32,
-    sv599_sessconns : UInt32,
-    sv599_maxpagedmemoryusage : UInt32,
-    sv599_maxnonpagedmemoryusage : UInt32,
-    sv599_enablesoftcompat : Win32cr::Foundation::BOOL,
-    sv599_enableforcedlogoff : Win32cr::Foundation::BOOL,
-    sv599_timesource : Win32cr::Foundation::BOOL,
-    sv599_acceptdownlevelapis : Win32cr::Foundation::BOOL,
-    sv599_lmannounce : Win32cr::Foundation::BOOL,
-    sv599_domain : Win32cr::Foundation::PWSTR,
-    sv599_maxcopyreadlen : UInt32,
-    sv599_maxcopywritelen : UInt32,
-    sv599_minkeepsearch : UInt32,
-    sv599_maxkeepsearch : UInt32,
-    sv599_minkeepcomplsearch : UInt32,
-    sv599_maxkeepcomplsearch : UInt32,
-    sv599_threadcountadd : UInt32,
-    sv599_numblockthreads : UInt32,
-    sv599_scavtimeout : UInt32,
-    sv599_minrcvqueue : UInt32,
-    sv599_minfreeworkitems : UInt32,
-    sv599_xactmemsize : UInt32,
-    sv599_threadpriority : UInt32,
-    sv599_maxmpxct : UInt32,
-    sv599_oplockbreakwait : UInt32,
-    sv599_oplockbreakresponsewait : UInt32,
-    sv599_enableoplocks : Win32cr::Foundation::BOOL,
-    sv599_enableoplockforceclose : Win32cr::Foundation::BOOL,
-    sv599_enablefcbopens : Win32cr::Foundation::BOOL,
-    sv599_enableraw : Win32cr::Foundation::BOOL,
-    sv599_enablesharednetdrives : Win32cr::Foundation::BOOL,
-    sv599_minfreeconnections : UInt32,
-    sv599_maxfreeconnections : UInt32,
-    sv599_initsesstable : UInt32,
-    sv599_initconntable : UInt32,
-    sv599_initfiletable : UInt32,
-    sv599_initsearchtable : UInt32,
-    sv599_alertschedule : UInt32,
-    sv599_errorthreshold : UInt32,
-    sv599_networkerrorthreshold : UInt32,
-    sv599_diskspacethreshold : UInt32,
-    sv599_reserved : UInt32,
-    sv599_maxlinkdelay : UInt32,
-    sv599_minlinkthroughput : UInt32,
-    sv599_linkinfovalidtime : UInt32,
-    sv599_scavqosinfoupdatetime : UInt32,
-    sv599_maxworkitemidletime : UInt32
-
-  @[Extern]
-  record SERVER_INFO_598,
-    sv598_maxrawworkitems : UInt32,
-    sv598_maxthreadsperqueue : UInt32,
-    sv598_producttype : UInt32,
-    sv598_serversize : UInt32,
-    sv598_connectionlessautodisc : UInt32,
-    sv598_sharingviolationretries : UInt32,
-    sv598_sharingviolationdelay : UInt32,
-    sv598_maxglobalopensearch : UInt32,
-    sv598_removeduplicatesearches : UInt32,
-    sv598_lockviolationoffset : UInt32,
-    sv598_lockviolationdelay : UInt32,
-    sv598_mdlreadswitchover : UInt32,
-    sv598_cachedopenlimit : UInt32,
-    sv598_otherqueueaffinity : UInt32,
-    sv598_restrictnullsessaccess : Win32cr::Foundation::BOOL,
-    sv598_enablewfw311directipx : Win32cr::Foundation::BOOL,
-    sv598_queuesamplesecs : UInt32,
-    sv598_balancecount : UInt32,
-    sv598_preferredaffinity : UInt32,
-    sv598_maxfreerfcbs : UInt32,
-    sv598_maxfreemfcbs : UInt32,
-    sv598_maxfreelfcbs : UInt32,
-    sv598_maxfreepagedpoolchunks : UInt32,
-    sv598_minpagedpoolchunksize : UInt32,
-    sv598_maxpagedpoolchunksize : UInt32,
-    sv598_sendsfrompreferredprocessor : Win32cr::Foundation::BOOL,
-    sv598_cacheddirectorylimit : UInt32,
-    sv598_maxcopylength : UInt32,
-    sv598_enablecompression : Win32cr::Foundation::BOOL,
-    sv598_autosharewks : Win32cr::Foundation::BOOL,
-    sv598_autoshareserver : Win32cr::Foundation::BOOL,
-    sv598_enablesecuritysignature : Win32cr::Foundation::BOOL,
-    sv598_requiresecuritysignature : Win32cr::Foundation::BOOL,
-    sv598_minclientbuffersize : UInt32,
-    sv598_serverguid : LibC::GUID,
-    sv598_ConnectionNoSessionsTimeout : UInt32,
-    sv598_IdleThreadTimeOut : UInt32,
-    sv598_enableW9xsecuritysignature : Win32cr::Foundation::BOOL,
-    sv598_enforcekerberosreauthentication : Win32cr::Foundation::BOOL,
-    sv598_disabledos : Win32cr::Foundation::BOOL,
-    sv598_lowdiskspaceminimum : UInt32,
-    sv598_disablestrictnamechecking : Win32cr::Foundation::BOOL,
-    sv598_enableauthenticateusersharing : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record SERVER_INFO_1005,
-    sv1005_comment : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record SERVER_INFO_1107,
-    sv1107_users : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1010,
-    sv1010_disc : Int32
-
-  @[Extern]
-  record SERVER_INFO_1016,
-    sv1016_hidden : Win32cr::NetworkManagement::NetManagement::SERVER_INFO_HIDDEN
-
-  @[Extern]
-  record SERVER_INFO_1017,
-    sv1017_announce : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1018,
-    sv1018_anndelta : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1501,
-    sv1501_sessopens : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1502,
-    sv1502_sessvcs : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1503,
-    sv1503_opensearch : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1506,
-    sv1506_maxworkitems : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1509,
-    sv1509_maxrawbuflen : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1510,
-    sv1510_sessusers : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1511,
-    sv1511_sessconns : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1512,
-    sv1512_maxnonpagedmemoryusage : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1513,
-    sv1513_maxpagedmemoryusage : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1514,
-    sv1514_enablesoftcompat : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record SERVER_INFO_1515,
-    sv1515_enableforcedlogoff : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record SERVER_INFO_1516,
-    sv1516_timesource : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record SERVER_INFO_1518,
-    sv1518_lmannounce : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record SERVER_INFO_1520,
-    sv1520_maxcopyreadlen : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1521,
-    sv1521_maxcopywritelen : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1522,
-    sv1522_minkeepsearch : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1523,
-    sv1523_maxkeepsearch : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1524,
-    sv1524_minkeepcomplsearch : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1525,
-    sv1525_maxkeepcomplsearch : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1528,
-    sv1528_scavtimeout : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1529,
-    sv1529_minrcvqueue : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1530,
-    sv1530_minfreeworkitems : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1533,
-    sv1533_maxmpxct : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1534,
-    sv1534_oplockbreakwait : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1535,
-    sv1535_oplockbreakresponsewait : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1536,
-    sv1536_enableoplocks : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record SERVER_INFO_1537,
-    sv1537_enableoplockforceclose : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record SERVER_INFO_1538,
-    sv1538_enablefcbopens : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record SERVER_INFO_1539,
-    sv1539_enableraw : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record SERVER_INFO_1540,
-    sv1540_enablesharednetdrives : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record SERVER_INFO_1541,
-    sv1541_minfreeconnections : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record SERVER_INFO_1542,
-    sv1542_maxfreeconnections : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record SERVER_INFO_1543,
-    sv1543_initsesstable : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1544,
-    sv1544_initconntable : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1545,
-    sv1545_initfiletable : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1546,
-    sv1546_initsearchtable : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1547,
-    sv1547_alertschedule : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1548,
-    sv1548_errorthreshold : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1549,
-    sv1549_networkerrorthreshold : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1550,
-    sv1550_diskspacethreshold : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1552,
-    sv1552_maxlinkdelay : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1553,
-    sv1553_minlinkthroughput : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1554,
-    sv1554_linkinfovalidtime : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1555,
-    sv1555_scavqosinfoupdatetime : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1556,
-    sv1556_maxworkitemidletime : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1557,
-    sv1557_maxrawworkitems : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1560,
-    sv1560_producttype : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1561,
-    sv1561_serversize : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1562,
-    sv1562_connectionlessautodisc : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1563,
-    sv1563_sharingviolationretries : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1564,
-    sv1564_sharingviolationdelay : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1565,
-    sv1565_maxglobalopensearch : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1566,
-    sv1566_removeduplicatesearches : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record SERVER_INFO_1567,
-    sv1567_lockviolationretries : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1568,
-    sv1568_lockviolationoffset : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1569,
-    sv1569_lockviolationdelay : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1570,
-    sv1570_mdlreadswitchover : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1571,
-    sv1571_cachedopenlimit : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1572,
-    sv1572_criticalthreads : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1573,
-    sv1573_restrictnullsessaccess : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1574,
-    sv1574_enablewfw311directipx : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1575,
-    sv1575_otherqueueaffinity : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1576,
-    sv1576_queuesamplesecs : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1577,
-    sv1577_balancecount : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1578,
-    sv1578_preferredaffinity : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1579,
-    sv1579_maxfreerfcbs : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1580,
-    sv1580_maxfreemfcbs : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1581,
-    sv1581_maxfreemlcbs : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1582,
-    sv1582_maxfreepagedpoolchunks : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1583,
-    sv1583_minpagedpoolchunksize : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1584,
-    sv1584_maxpagedpoolchunksize : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1585,
-    sv1585_sendsfrompreferredprocessor : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record SERVER_INFO_1586,
-    sv1586_maxthreadsperqueue : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1587,
-    sv1587_cacheddirectorylimit : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1588,
-    sv1588_maxcopylength : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1590,
-    sv1590_enablecompression : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1591,
-    sv1591_autosharewks : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1592,
-    sv1592_autosharewks : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1593,
-    sv1593_enablesecuritysignature : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1594,
-    sv1594_requiresecuritysignature : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1595,
-    sv1595_minclientbuffersize : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1596,
-    sv1596_ConnectionNoSessionsTimeout : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1597,
-    sv1597_IdleThreadTimeOut : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1598,
-    sv1598_enableW9xsecuritysignature : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1599,
-    sv1598_enforcekerberosreauthentication : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record SERVER_INFO_1600,
-    sv1598_disabledos : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record SERVER_INFO_1601,
-    sv1598_lowdiskspaceminimum : UInt32
-
-  @[Extern]
-  record SERVER_INFO_1602,
-    sv_1598_disablestrictnamechecking : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record SERVER_TRANSPORT_INFO_0,
-    svti0_numberofvcs : UInt32,
-    svti0_transportname : Win32cr::Foundation::PWSTR,
-    svti0_transportaddress : UInt8*,
-    svti0_transportaddresslength : UInt32,
-    svti0_networkaddress : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record SERVER_TRANSPORT_INFO_1,
-    svti1_numberofvcs : UInt32,
-    svti1_transportname : Win32cr::Foundation::PWSTR,
-    svti1_transportaddress : UInt8*,
-    svti1_transportaddresslength : UInt32,
-    svti1_networkaddress : Win32cr::Foundation::PWSTR,
-    svti1_domain : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record SERVER_TRANSPORT_INFO_2,
-    svti2_numberofvcs : UInt32,
-    svti2_transportname : Win32cr::Foundation::PWSTR,
-    svti2_transportaddress : UInt8*,
-    svti2_transportaddresslength : UInt32,
-    svti2_networkaddress : Win32cr::Foundation::PWSTR,
-    svti2_domain : Win32cr::Foundation::PWSTR,
-    svti2_flags : UInt32
-
-  @[Extern]
-  record SERVER_TRANSPORT_INFO_3,
-    svti3_numberofvcs : UInt32,
-    svti3_transportname : Win32cr::Foundation::PWSTR,
-    svti3_transportaddress : UInt8*,
-    svti3_transportaddresslength : UInt32,
-    svti3_networkaddress : Win32cr::Foundation::PWSTR,
-    svti3_domain : Win32cr::Foundation::PWSTR,
-    svti3_flags : UInt32,
-    svti3_passwordlength : UInt32,
-    svti3_password : UInt8[256]
-
-  @[Extern]
-  record SERVICE_INFO_0,
-    svci0_name : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record SERVICE_INFO_1,
-    svci1_name : Win32cr::Foundation::PWSTR,
-    svci1_status : UInt32,
-    svci1_code : UInt32,
-    svci1_pid : UInt32
-
-  @[Extern]
-  record SERVICE_INFO_2,
-    svci2_name : Win32cr::Foundation::PWSTR,
-    svci2_status : UInt32,
-    svci2_code : UInt32,
-    svci2_pid : UInt32,
-    svci2_text : Win32cr::Foundation::PWSTR,
-    svci2_specific_error : UInt32,
-    svci2_display_name : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record USE_INFO_0,
-    ui0_local : Win32cr::Foundation::PWSTR,
-    ui0_remote : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record USE_INFO_1,
-    ui1_local : Win32cr::Foundation::PWSTR,
-    ui1_remote : Win32cr::Foundation::PWSTR,
-    ui1_password : Win32cr::Foundation::PWSTR,
-    ui1_status : UInt32,
-    ui1_asg_type : Win32cr::NetworkManagement::NetManagement::USE_INFO_ASG_TYPE,
-    ui1_refcount : UInt32,
-    ui1_usecount : UInt32
-
-  @[Extern]
-  record USE_INFO_2,
-    ui2_local : Win32cr::Foundation::PWSTR,
-    ui2_remote : Win32cr::Foundation::PWSTR,
-    ui2_password : Win32cr::Foundation::PWSTR,
-    ui2_status : UInt32,
-    ui2_asg_type : Win32cr::NetworkManagement::NetManagement::USE_INFO_ASG_TYPE,
-    ui2_refcount : UInt32,
-    ui2_usecount : UInt32,
-    ui2_username : Win32cr::Foundation::PWSTR,
-    ui2_domainname : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record USE_INFO_3,
-    ui3_ui2 : Win32cr::NetworkManagement::NetManagement::USE_INFO_2,
-    ui3_flags : UInt32
-
-  @[Extern]
-  record USE_INFO_4,
-    ui4_ui3 : Win32cr::NetworkManagement::NetManagement::USE_INFO_3,
-    ui4_auth_identity_length : UInt32,
-    ui4_auth_identity : UInt8*
-
-  @[Extern]
-  record USE_INFO_5,
-    ui4_ui3 : Win32cr::NetworkManagement::NetManagement::USE_INFO_3,
-    ui4_auth_identity_length : UInt32,
-    ui4_auth_identity : UInt8*,
-    ui5_security_descriptor_length : UInt32,
-    ui5_security_descriptor : UInt8*,
-    ui5_use_options_length : UInt32,
-    ui5_use_options : UInt8*
-
-  @[Extern]
-  record USE_OPTION_GENERIC,
-    tag : UInt32,
-    length : UInt16,
-    reserved : UInt16
-
-  @[Extern]
-  record USE_OPTION_DEFERRED_CONNECTION_PARAMETERS,
-    tag : UInt32,
-    length : UInt16,
-    reserved : UInt16
-
-  @[Extern]
-  record TRANSPORT_INFO,
-    type__ : Win32cr::NetworkManagement::NetManagement::TRANSPORT_TYPE,
-    skip_certificate_check : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record USE_OPTION_TRANSPORT_PARAMETERS,
-    tag : UInt32,
-    length : UInt16,
-    reserved : UInt16
-
-  @[Extern]
-  record SMB_COMPRESSION_INFO,
-    switch : Win32cr::Foundation::BOOLEAN,
-    reserved1 : UInt8,
-    reserved2 : UInt16,
-    reserved3 : UInt32
-
-  @[Extern]
-  record SMB_USE_OPTION_COMPRESSION_PARAMETERS,
-    tag : UInt32,
-    length : UInt16,
-    reserved : UInt16
-
-  @[Extern]
-  record SMB_TREE_CONNECT_PARAMETERS,
-    ea_buffer_offset : UInt32,
-    ea_buffer_len : UInt32,
-    create_options : UInt32,
-    tree_connect_attributes : UInt32
-
-  @[Extern]
-  record USE_OPTION_PROPERTIES,
-    tag : UInt32,
-    pInfo : Void*,
-    length : LibC::UIntPtrT
-
-  @[Extern]
-  record WKSTA_INFO_100,
-    wki100_platform_id : UInt32,
-    wki100_computername : Win32cr::Foundation::PWSTR,
-    wki100_langroup : Win32cr::Foundation::PWSTR,
-    wki100_ver_major : UInt32,
-    wki100_ver_minor : UInt32
-
-  @[Extern]
-  record WKSTA_INFO_101,
-    wki101_platform_id : UInt32,
-    wki101_computername : Win32cr::Foundation::PWSTR,
-    wki101_langroup : Win32cr::Foundation::PWSTR,
-    wki101_ver_major : UInt32,
-    wki101_ver_minor : UInt32,
-    wki101_lanroot : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record WKSTA_INFO_102,
-    wki102_platform_id : UInt32,
-    wki102_computername : Win32cr::Foundation::PWSTR,
-    wki102_langroup : Win32cr::Foundation::PWSTR,
-    wki102_ver_major : UInt32,
-    wki102_ver_minor : UInt32,
-    wki102_lanroot : Win32cr::Foundation::PWSTR,
-    wki102_logged_on_users : UInt32
-
-  @[Extern]
-  record WKSTA_INFO_302,
-    wki302_char_wait : UInt32,
-    wki302_collection_time : UInt32,
-    wki302_maximum_collection_count : UInt32,
-    wki302_keep_conn : UInt32,
-    wki302_keep_search : UInt32,
-    wki302_max_cmds : UInt32,
-    wki302_num_work_buf : UInt32,
-    wki302_siz_work_buf : UInt32,
-    wki302_max_wrk_cache : UInt32,
-    wki302_sess_timeout : UInt32,
-    wki302_siz_error : UInt32,
-    wki302_num_alerts : UInt32,
-    wki302_num_services : UInt32,
-    wki302_errlog_sz : UInt32,
-    wki302_print_buf_time : UInt32,
-    wki302_num_char_buf : UInt32,
-    wki302_siz_char_buf : UInt32,
-    wki302_wrk_heuristics : Win32cr::Foundation::PWSTR,
-    wki302_mailslots : UInt32,
-    wki302_num_dgram_buf : UInt32
-
-  @[Extern]
-  record WKSTA_INFO_402,
-    wki402_char_wait : UInt32,
-    wki402_collection_time : UInt32,
-    wki402_maximum_collection_count : UInt32,
-    wki402_keep_conn : UInt32,
-    wki402_keep_search : UInt32,
-    wki402_max_cmds : UInt32,
-    wki402_num_work_buf : UInt32,
-    wki402_siz_work_buf : UInt32,
-    wki402_max_wrk_cache : UInt32,
-    wki402_sess_timeout : UInt32,
-    wki402_siz_error : UInt32,
-    wki402_num_alerts : UInt32,
-    wki402_num_services : UInt32,
-    wki402_errlog_sz : UInt32,
-    wki402_print_buf_time : UInt32,
-    wki402_num_char_buf : UInt32,
-    wki402_siz_char_buf : UInt32,
-    wki402_wrk_heuristics : Win32cr::Foundation::PWSTR,
-    wki402_mailslots : UInt32,
-    wki402_num_dgram_buf : UInt32,
-    wki402_max_threads : UInt32
-
-  @[Extern]
-  record WKSTA_INFO_502,
-    wki502_char_wait : UInt32,
-    wki502_collection_time : UInt32,
-    wki502_maximum_collection_count : UInt32,
-    wki502_keep_conn : UInt32,
-    wki502_max_cmds : UInt32,
-    wki502_sess_timeout : UInt32,
-    wki502_siz_char_buf : UInt32,
-    wki502_max_threads : UInt32,
-    wki502_lock_quota : UInt32,
-    wki502_lock_increment : UInt32,
-    wki502_lock_maximum : UInt32,
-    wki502_pipe_increment : UInt32,
-    wki502_pipe_maximum : UInt32,
-    wki502_cache_file_timeout : UInt32,
-    wki502_dormant_file_limit : UInt32,
-    wki502_read_ahead_throughput : UInt32,
-    wki502_num_mailslot_buffers : UInt32,
-    wki502_num_srv_announce_buffers : UInt32,
-    wki502_max_illegal_datagram_events : UInt32,
-    wki502_illegal_datagram_event_reset_frequency : UInt32,
-    wki502_log_election_packets : Win32cr::Foundation::BOOL,
-    wki502_use_opportunistic_locking : Win32cr::Foundation::BOOL,
-    wki502_use_unlock_behind : Win32cr::Foundation::BOOL,
-    wki502_use_close_behind : Win32cr::Foundation::BOOL,
-    wki502_buf_named_pipes : Win32cr::Foundation::BOOL,
-    wki502_use_lock_read_unlock : Win32cr::Foundation::BOOL,
-    wki502_utilize_nt_caching : Win32cr::Foundation::BOOL,
-    wki502_use_raw_read : Win32cr::Foundation::BOOL,
-    wki502_use_raw_write : Win32cr::Foundation::BOOL,
-    wki502_use_write_raw_data : Win32cr::Foundation::BOOL,
-    wki502_use_encryption : Win32cr::Foundation::BOOL,
-    wki502_buf_files_deny_write : Win32cr::Foundation::BOOL,
-    wki502_buf_read_only_files : Win32cr::Foundation::BOOL,
-    wki502_force_core_create_mode : Win32cr::Foundation::BOOL,
-    wki502_use_512_byte_max_transfer : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record WKSTA_INFO_1010,
-    wki1010_char_wait : UInt32
-
-  @[Extern]
-  record WKSTA_INFO_1011,
-    wki1011_collection_time : UInt32
-
-  @[Extern]
-  record WKSTA_INFO_1012,
-    wki1012_maximum_collection_count : UInt32
-
-  @[Extern]
-  record WKSTA_INFO_1027,
-    wki1027_errlog_sz : UInt32
-
-  @[Extern]
-  record WKSTA_INFO_1028,
-    wki1028_print_buf_time : UInt32
-
-  @[Extern]
-  record WKSTA_INFO_1032,
-    wki1032_wrk_heuristics : UInt32
-
-  @[Extern]
-  record WKSTA_INFO_1013,
-    wki1013_keep_conn : UInt32
-
-  @[Extern]
-  record WKSTA_INFO_1018,
-    wki1018_sess_timeout : UInt32
-
-  @[Extern]
-  record WKSTA_INFO_1023,
-    wki1023_siz_char_buf : UInt32
-
-  @[Extern]
-  record WKSTA_INFO_1033,
-    wki1033_max_threads : UInt32
-
-  @[Extern]
-  record WKSTA_INFO_1041,
-    wki1041_lock_quota : UInt32
-
-  @[Extern]
-  record WKSTA_INFO_1042,
-    wki1042_lock_increment : UInt32
-
-  @[Extern]
-  record WKSTA_INFO_1043,
-    wki1043_lock_maximum : UInt32
-
-  @[Extern]
-  record WKSTA_INFO_1044,
-    wki1044_pipe_increment : UInt32
-
-  @[Extern]
-  record WKSTA_INFO_1045,
-    wki1045_pipe_maximum : UInt32
-
-  @[Extern]
-  record WKSTA_INFO_1046,
-    wki1046_dormant_file_limit : UInt32
-
-  @[Extern]
-  record WKSTA_INFO_1047,
-    wki1047_cache_file_timeout : UInt32
-
-  @[Extern]
-  record WKSTA_INFO_1048,
-    wki1048_use_opportunistic_locking : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record WKSTA_INFO_1049,
-    wki1049_use_unlock_behind : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record WKSTA_INFO_1050,
-    wki1050_use_close_behind : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record WKSTA_INFO_1051,
-    wki1051_buf_named_pipes : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record WKSTA_INFO_1052,
-    wki1052_use_lock_read_unlock : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record WKSTA_INFO_1053,
-    wki1053_utilize_nt_caching : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record WKSTA_INFO_1054,
-    wki1054_use_raw_read : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record WKSTA_INFO_1055,
-    wki1055_use_raw_write : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record WKSTA_INFO_1056,
-    wki1056_use_write_raw_data : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record WKSTA_INFO_1057,
-    wki1057_use_encryption : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record WKSTA_INFO_1058,
-    wki1058_buf_files_deny_write : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record WKSTA_INFO_1059,
-    wki1059_buf_read_only_files : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record WKSTA_INFO_1060,
-    wki1060_force_core_create_mode : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record WKSTA_INFO_1061,
-    wki1061_use_512_byte_max_transfer : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record WKSTA_INFO_1062,
-    wki1062_read_ahead_throughput : UInt32
-
-  @[Extern]
-  record WKSTA_USER_INFO_0,
-    wkui0_username : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record WKSTA_USER_INFO_1,
-    wkui1_username : Win32cr::Foundation::PWSTR,
-    wkui1_logon_domain : Win32cr::Foundation::PWSTR,
-    wkui1_oth_domains : Win32cr::Foundation::PWSTR,
-    wkui1_logon_server : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record WKSTA_USER_INFO_1101,
-    wkui1101_oth_domains : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record WKSTA_TRANSPORT_INFO_0,
-    wkti0_quality_of_service : UInt32,
-    wkti0_number_of_vcs : UInt32,
-    wkti0_transport_name : Win32cr::Foundation::PWSTR,
-    wkti0_transport_address : Win32cr::Foundation::PWSTR,
-    wkti0_wan_ish : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record ERROR_LOG,
-    el_len : UInt32,
-    el_reserved : UInt32,
-    el_time : UInt32,
-    el_error : UInt32,
-    el_name : Win32cr::Foundation::PWSTR,
-    el_text : Win32cr::Foundation::PWSTR,
-    el_data : UInt8*,
-    el_data_size : UInt32,
-    el_nstrings : UInt32
-
-  @[Extern]
-  record HLOG,
-    time : UInt32,
-    last_flags : UInt32,
-    offset : UInt32,
-    rec_offset : UInt32
-
-  @[Extern]
-  record CONFIG_INFO_0,
-    cfgi0_key : Win32cr::Foundation::PWSTR,
-    cfgi0_data : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record AUDIT_ENTRY,
-    ae_len : UInt32,
-    ae_reserved : UInt32,
-    ae_time : UInt32,
-    ae_type : UInt32,
-    ae_data_offset : UInt32,
-    ae_data_size : UInt32
-
-  @[Extern]
-  record AE_SRVSTATUS,
-    ae_sv_status : UInt32
-
-  @[Extern]
-  record AE_SESSLOGON,
-    ae_so_compname : UInt32,
-    ae_so_username : UInt32,
-    ae_so_privilege : UInt32
-
-  @[Extern]
-  record AE_SESSLOGOFF,
-    ae_sf_compname : UInt32,
-    ae_sf_username : UInt32,
-    ae_sf_reason : UInt32
-
-  @[Extern]
-  record AE_SESSPWERR,
-    ae_sp_compname : UInt32,
-    ae_sp_username : UInt32
-
-  @[Extern]
-  record AE_CONNSTART,
-    ae_ct_compname : UInt32,
-    ae_ct_username : UInt32,
-    ae_ct_netname : UInt32,
-    ae_ct_connid : UInt32
-
-  @[Extern]
-  record AE_CONNSTOP,
-    ae_cp_compname : UInt32,
-    ae_cp_username : UInt32,
-    ae_cp_netname : UInt32,
-    ae_cp_connid : UInt32,
-    ae_cp_reason : UInt32
-
-  @[Extern]
-  record AE_CONNREJ,
-    ae_cr_compname : UInt32,
-    ae_cr_username : UInt32,
-    ae_cr_netname : UInt32,
-    ae_cr_reason : UInt32
-
-  @[Extern]
-  record AE_RESACCESS,
-    ae_ra_compname : UInt32,
-    ae_ra_username : UInt32,
-    ae_ra_resname : UInt32,
-    ae_ra_operation : UInt32,
-    ae_ra_returncode : UInt32,
-    ae_ra_restype : UInt32,
-    ae_ra_fileid : UInt32
-
-  @[Extern]
-  record AE_RESACCESSREJ,
-    ae_rr_compname : UInt32,
-    ae_rr_username : UInt32,
-    ae_rr_resname : UInt32,
-    ae_rr_operation : UInt32
-
-  @[Extern]
-  record AE_CLOSEFILE,
-    ae_cf_compname : UInt32,
-    ae_cf_username : UInt32,
-    ae_cf_resname : UInt32,
-    ae_cf_fileid : UInt32,
-    ae_cf_duration : UInt32,
-    ae_cf_reason : UInt32
-
-  @[Extern]
-  record AE_SERVICESTAT,
-    ae_ss_compname : UInt32,
-    ae_ss_username : UInt32,
-    ae_ss_svcname : UInt32,
-    ae_ss_status : UInt32,
-    ae_ss_code : UInt32,
-    ae_ss_text : UInt32,
-    ae_ss_returnval : UInt32
-
-  @[Extern]
-  record AE_ACLMOD,
-    ae_am_compname : UInt32,
-    ae_am_username : UInt32,
-    ae_am_resname : UInt32,
-    ae_am_action : UInt32,
-    ae_am_datalen : UInt32
-
-  @[Extern]
-  record AE_UASMOD,
-    ae_um_compname : UInt32,
-    ae_um_username : UInt32,
-    ae_um_resname : UInt32,
-    ae_um_rectype : UInt32,
-    ae_um_action : UInt32,
-    ae_um_datalen : UInt32
-
-  @[Extern]
-  record AE_NETLOGON,
-    ae_no_compname : UInt32,
-    ae_no_username : UInt32,
-    ae_no_privilege : UInt32,
-    ae_no_authflags : UInt32
-
-  @[Extern]
-  record AE_NETLOGOFF,
-    ae_nf_compname : UInt32,
-    ae_nf_username : UInt32,
-    ae_nf_reserved1 : UInt32,
-    ae_nf_reserved2 : UInt32
-
-  @[Extern]
-  record AE_ACCLIM,
-    ae_al_compname : UInt32,
-    ae_al_username : UInt32,
-    ae_al_resname : UInt32,
-    ae_al_limit : UInt32
-
-  @[Extern]
-  record AE_LOCKOUT,
-    ae_lk_compname : UInt32,
-    ae_lk_username : UInt32,
-    ae_lk_action : UInt32,
-    ae_lk_bad_pw_count : UInt32
-
-  @[Extern]
-  record AE_GENERIC,
-    ae_ge_msgfile : UInt32,
-    ae_ge_msgnum : UInt32,
-    ae_ge_params : UInt32,
-    ae_ge_param1 : UInt32,
-    ae_ge_param2 : UInt32,
-    ae_ge_param3 : UInt32,
-    ae_ge_param4 : UInt32,
-    ae_ge_param5 : UInt32,
-    ae_ge_param6 : UInt32,
-    ae_ge_param7 : UInt32,
-    ae_ge_param8 : UInt32,
-    ae_ge_param9 : UInt32
-
-  @[Extern]
-  record DSREG_USER_INFO,
-    pszUserEmail : Win32cr::Foundation::PWSTR,
-    pszUserKeyId : Win32cr::Foundation::PWSTR,
-    pszUserKeyName : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record DSREG_JOIN_INFO,
-    joinType : Win32cr::NetworkManagement::NetManagement::DSREG_JOIN_TYPE,
-    pJoinCertificate : Win32cr::Security::Cryptography::CERT_CONTEXT*,
-    pszDeviceId : Win32cr::Foundation::PWSTR,
-    pszIdpDomain : Win32cr::Foundation::PWSTR,
-    pszTenantId : Win32cr::Foundation::PWSTR,
-    pszJoinUserEmail : Win32cr::Foundation::PWSTR,
-    pszTenantDisplayName : Win32cr::Foundation::PWSTR,
-    pszMdmEnrollmentUrl : Win32cr::Foundation::PWSTR,
-    pszMdmTermsOfUseUrl : Win32cr::Foundation::PWSTR,
-    pszMdmComplianceUrl : Win32cr::Foundation::PWSTR,
-    pszUserSettingSyncUrl : Win32cr::Foundation::PWSTR,
-    pUserInfo : Win32cr::NetworkManagement::NetManagement::DSREG_USER_INFO*
-
-  @[Extern]
-  record NETSETUP_PROVISIONING_PARAMS,
-    dwVersion : UInt32,
-    lpDomain : Win32cr::Foundation::PWSTR,
-    lpHostName : Win32cr::Foundation::PWSTR,
-    lpMachineAccountOU : Win32cr::Foundation::PWSTR,
-    lpDcName : Win32cr::Foundation::PWSTR,
-    dwProvisionOptions : Win32cr::NetworkManagement::NetManagement::NETSETUP_PROVISION,
-    aCertTemplateNames : Win32cr::Foundation::PWSTR*,
-    cCertTemplateNames : UInt32,
-    aMachinePolicyNames : Win32cr::Foundation::PWSTR*,
-    cMachinePolicyNames : UInt32,
-    aMachinePolicyPaths : Win32cr::Foundation::PWSTR*,
-    cMachinePolicyPaths : UInt32,
-    lpNetbiosName : Win32cr::Foundation::PWSTR,
-    lpSiteName : Win32cr::Foundation::PWSTR,
-    lpPrimaryDNSDomain : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record AT_INFO,
-    job_time : LibC::UIntPtrT,
-    days_of_month : UInt32,
-    days_of_week : UInt8,
-    flags : UInt8,
-    command : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record AT_ENUM,
-    job_id : UInt32,
-    job_time : LibC::UIntPtrT,
-    days_of_month : UInt32,
-    days_of_week : UInt8,
-    flags : UInt8,
-    command : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record FLAT_STRING,
-    maximum_length : Int16,
-    length : Int16,
-    buffer : Win32cr::Foundation::CHAR*
-
-  @[Extern]
-  record NETWORK_NAME,
-    name : Win32cr::NetworkManagement::NetManagement::FLAT_STRING
-
-  @[Extern]
-  record HARDWARE_ADDRESS,
-    address : UInt8[6]
-
-  @[Extern]
-  record OBO_TOKEN,
-    type__ : Win32cr::NetworkManagement::NetManagement::OBO_TOKEN_TYPE,
-    pncc : Void*,
-    pszwManufacturer : Win32cr::Foundation::PWSTR,
-    pszwProduct : Win32cr::Foundation::PWSTR,
-    pszwDisplayName : Win32cr::Foundation::PWSTR,
-    fRegistered : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record RASCON_IPUI,
-    guidConnection : LibC::GUID,
-    fIPv6Cfg : Win32cr::Foundation::BOOL,
-    dwFlags : UInt32,
-    pszwIpAddr : UInt16[16],
-    pszwDnsAddr : UInt16[16],
-    pszwDns2Addr : UInt16[16],
-    pszwWinsAddr : UInt16[16],
-    pszwWins2Addr : UInt16[16],
-    pszwDnsSuffix : UInt16[256],
-    pszwIpv6Addr : UInt16[65],
-    dwIpv6PrefixLength : UInt32,
-    pszwIpv6DnsAddr : UInt16[65],
-    pszwIpv6Dns2Addr : UInt16[65],
-    dwIPv4InfMetric : UInt32,
-    dwIPv6InfMetric : UInt32
-
-  @[Extern]
-  record RTR_TOC_ENTRY,
-    info_type : UInt32,
-    info_size : UInt32,
-    count : UInt32,
-    offset : UInt32
-
-  @[Extern]
-  record RTR_INFO_BLOCK_HEADER,
-    version : UInt32,
-    size : UInt32,
-    toc_entries_count : UInt32,
-    toc_entry : Win32cr::NetworkManagement::NetManagement::RTR_TOC_ENTRY*
-
-  @[Extern]
-  record MPR_PROTOCOL_0,
-    dwProtocolId : UInt32,
-    wszProtocol : UInt16[41],
-    wszDLLName : UInt16[49]
+  struct USER_INFO_0
+    property usri0_name : Win32cr::Foundation::PWSTR
+    def initialize(@usri0_name : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_1
+    property usri1_name : Win32cr::Foundation::PWSTR
+    property usri1_password : Win32cr::Foundation::PWSTR
+    property usri1_password_age : UInt32
+    property usri1_priv : Win32cr::NetworkManagement::NetManagement::USER_PRIV
+    property usri1_home_dir : Win32cr::Foundation::PWSTR
+    property usri1_comment : Win32cr::Foundation::PWSTR
+    property usri1_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS
+    property usri1_script_path : Win32cr::Foundation::PWSTR
+    def initialize(@usri1_name : Win32cr::Foundation::PWSTR, @usri1_password : Win32cr::Foundation::PWSTR, @usri1_password_age : UInt32, @usri1_priv : Win32cr::NetworkManagement::NetManagement::USER_PRIV, @usri1_home_dir : Win32cr::Foundation::PWSTR, @usri1_comment : Win32cr::Foundation::PWSTR, @usri1_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS, @usri1_script_path : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_2
+    property usri2_name : Win32cr::Foundation::PWSTR
+    property usri2_password : Win32cr::Foundation::PWSTR
+    property usri2_password_age : UInt32
+    property usri2_priv : Win32cr::NetworkManagement::NetManagement::USER_PRIV
+    property usri2_home_dir : Win32cr::Foundation::PWSTR
+    property usri2_comment : Win32cr::Foundation::PWSTR
+    property usri2_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS
+    property usri2_script_path : Win32cr::Foundation::PWSTR
+    property usri2_auth_flags : Win32cr::NetworkManagement::NetManagement::AF_OP
+    property usri2_full_name : Win32cr::Foundation::PWSTR
+    property usri2_usr_comment : Win32cr::Foundation::PWSTR
+    property usri2_parms : Win32cr::Foundation::PWSTR
+    property usri2_workstations : Win32cr::Foundation::PWSTR
+    property usri2_last_logon : UInt32
+    property usri2_last_logoff : UInt32
+    property usri2_acct_expires : UInt32
+    property usri2_max_storage : UInt32
+    property usri2_units_per_week : UInt32
+    property usri2_logon_hours : UInt8*
+    property usri2_bad_pw_count : UInt32
+    property usri2_num_logons : UInt32
+    property usri2_logon_server : Win32cr::Foundation::PWSTR
+    property usri2_country_code : UInt32
+    property usri2_code_page : UInt32
+    def initialize(@usri2_name : Win32cr::Foundation::PWSTR, @usri2_password : Win32cr::Foundation::PWSTR, @usri2_password_age : UInt32, @usri2_priv : Win32cr::NetworkManagement::NetManagement::USER_PRIV, @usri2_home_dir : Win32cr::Foundation::PWSTR, @usri2_comment : Win32cr::Foundation::PWSTR, @usri2_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS, @usri2_script_path : Win32cr::Foundation::PWSTR, @usri2_auth_flags : Win32cr::NetworkManagement::NetManagement::AF_OP, @usri2_full_name : Win32cr::Foundation::PWSTR, @usri2_usr_comment : Win32cr::Foundation::PWSTR, @usri2_parms : Win32cr::Foundation::PWSTR, @usri2_workstations : Win32cr::Foundation::PWSTR, @usri2_last_logon : UInt32, @usri2_last_logoff : UInt32, @usri2_acct_expires : UInt32, @usri2_max_storage : UInt32, @usri2_units_per_week : UInt32, @usri2_logon_hours : UInt8*, @usri2_bad_pw_count : UInt32, @usri2_num_logons : UInt32, @usri2_logon_server : Win32cr::Foundation::PWSTR, @usri2_country_code : UInt32, @usri2_code_page : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_3
+    property usri3_name : Win32cr::Foundation::PWSTR
+    property usri3_password : Win32cr::Foundation::PWSTR
+    property usri3_password_age : UInt32
+    property usri3_priv : Win32cr::NetworkManagement::NetManagement::USER_PRIV
+    property usri3_home_dir : Win32cr::Foundation::PWSTR
+    property usri3_comment : Win32cr::Foundation::PWSTR
+    property usri3_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS
+    property usri3_script_path : Win32cr::Foundation::PWSTR
+    property usri3_auth_flags : Win32cr::NetworkManagement::NetManagement::AF_OP
+    property usri3_full_name : Win32cr::Foundation::PWSTR
+    property usri3_usr_comment : Win32cr::Foundation::PWSTR
+    property usri3_parms : Win32cr::Foundation::PWSTR
+    property usri3_workstations : Win32cr::Foundation::PWSTR
+    property usri3_last_logon : UInt32
+    property usri3_last_logoff : UInt32
+    property usri3_acct_expires : UInt32
+    property usri3_max_storage : UInt32
+    property usri3_units_per_week : UInt32
+    property usri3_logon_hours : UInt8*
+    property usri3_bad_pw_count : UInt32
+    property usri3_num_logons : UInt32
+    property usri3_logon_server : Win32cr::Foundation::PWSTR
+    property usri3_country_code : UInt32
+    property usri3_code_page : UInt32
+    property usri3_user_id : UInt32
+    property usri3_primary_group_id : UInt32
+    property usri3_profile : Win32cr::Foundation::PWSTR
+    property usri3_home_dir_drive : Win32cr::Foundation::PWSTR
+    property usri3_password_expired : UInt32
+    def initialize(@usri3_name : Win32cr::Foundation::PWSTR, @usri3_password : Win32cr::Foundation::PWSTR, @usri3_password_age : UInt32, @usri3_priv : Win32cr::NetworkManagement::NetManagement::USER_PRIV, @usri3_home_dir : Win32cr::Foundation::PWSTR, @usri3_comment : Win32cr::Foundation::PWSTR, @usri3_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS, @usri3_script_path : Win32cr::Foundation::PWSTR, @usri3_auth_flags : Win32cr::NetworkManagement::NetManagement::AF_OP, @usri3_full_name : Win32cr::Foundation::PWSTR, @usri3_usr_comment : Win32cr::Foundation::PWSTR, @usri3_parms : Win32cr::Foundation::PWSTR, @usri3_workstations : Win32cr::Foundation::PWSTR, @usri3_last_logon : UInt32, @usri3_last_logoff : UInt32, @usri3_acct_expires : UInt32, @usri3_max_storage : UInt32, @usri3_units_per_week : UInt32, @usri3_logon_hours : UInt8*, @usri3_bad_pw_count : UInt32, @usri3_num_logons : UInt32, @usri3_logon_server : Win32cr::Foundation::PWSTR, @usri3_country_code : UInt32, @usri3_code_page : UInt32, @usri3_user_id : UInt32, @usri3_primary_group_id : UInt32, @usri3_profile : Win32cr::Foundation::PWSTR, @usri3_home_dir_drive : Win32cr::Foundation::PWSTR, @usri3_password_expired : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_4
+    property usri4_name : Win32cr::Foundation::PWSTR
+    property usri4_password : Win32cr::Foundation::PWSTR
+    property usri4_password_age : UInt32
+    property usri4_priv : Win32cr::NetworkManagement::NetManagement::USER_PRIV
+    property usri4_home_dir : Win32cr::Foundation::PWSTR
+    property usri4_comment : Win32cr::Foundation::PWSTR
+    property usri4_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS
+    property usri4_script_path : Win32cr::Foundation::PWSTR
+    property usri4_auth_flags : Win32cr::NetworkManagement::NetManagement::AF_OP
+    property usri4_full_name : Win32cr::Foundation::PWSTR
+    property usri4_usr_comment : Win32cr::Foundation::PWSTR
+    property usri4_parms : Win32cr::Foundation::PWSTR
+    property usri4_workstations : Win32cr::Foundation::PWSTR
+    property usri4_last_logon : UInt32
+    property usri4_last_logoff : UInt32
+    property usri4_acct_expires : UInt32
+    property usri4_max_storage : UInt32
+    property usri4_units_per_week : UInt32
+    property usri4_logon_hours : UInt8*
+    property usri4_bad_pw_count : UInt32
+    property usri4_num_logons : UInt32
+    property usri4_logon_server : Win32cr::Foundation::PWSTR
+    property usri4_country_code : UInt32
+    property usri4_code_page : UInt32
+    property usri4_user_sid : Win32cr::Foundation::PSID
+    property usri4_primary_group_id : UInt32
+    property usri4_profile : Win32cr::Foundation::PWSTR
+    property usri4_home_dir_drive : Win32cr::Foundation::PWSTR
+    property usri4_password_expired : UInt32
+    def initialize(@usri4_name : Win32cr::Foundation::PWSTR, @usri4_password : Win32cr::Foundation::PWSTR, @usri4_password_age : UInt32, @usri4_priv : Win32cr::NetworkManagement::NetManagement::USER_PRIV, @usri4_home_dir : Win32cr::Foundation::PWSTR, @usri4_comment : Win32cr::Foundation::PWSTR, @usri4_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS, @usri4_script_path : Win32cr::Foundation::PWSTR, @usri4_auth_flags : Win32cr::NetworkManagement::NetManagement::AF_OP, @usri4_full_name : Win32cr::Foundation::PWSTR, @usri4_usr_comment : Win32cr::Foundation::PWSTR, @usri4_parms : Win32cr::Foundation::PWSTR, @usri4_workstations : Win32cr::Foundation::PWSTR, @usri4_last_logon : UInt32, @usri4_last_logoff : UInt32, @usri4_acct_expires : UInt32, @usri4_max_storage : UInt32, @usri4_units_per_week : UInt32, @usri4_logon_hours : UInt8*, @usri4_bad_pw_count : UInt32, @usri4_num_logons : UInt32, @usri4_logon_server : Win32cr::Foundation::PWSTR, @usri4_country_code : UInt32, @usri4_code_page : UInt32, @usri4_user_sid : Win32cr::Foundation::PSID, @usri4_primary_group_id : UInt32, @usri4_profile : Win32cr::Foundation::PWSTR, @usri4_home_dir_drive : Win32cr::Foundation::PWSTR, @usri4_password_expired : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_10
+    property usri10_name : Win32cr::Foundation::PWSTR
+    property usri10_comment : Win32cr::Foundation::PWSTR
+    property usri10_usr_comment : Win32cr::Foundation::PWSTR
+    property usri10_full_name : Win32cr::Foundation::PWSTR
+    def initialize(@usri10_name : Win32cr::Foundation::PWSTR, @usri10_comment : Win32cr::Foundation::PWSTR, @usri10_usr_comment : Win32cr::Foundation::PWSTR, @usri10_full_name : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_11
+    property usri11_name : Win32cr::Foundation::PWSTR
+    property usri11_comment : Win32cr::Foundation::PWSTR
+    property usri11_usr_comment : Win32cr::Foundation::PWSTR
+    property usri11_full_name : Win32cr::Foundation::PWSTR
+    property usri11_priv : Win32cr::NetworkManagement::NetManagement::USER_PRIV
+    property usri11_auth_flags : Win32cr::NetworkManagement::NetManagement::AF_OP
+    property usri11_password_age : UInt32
+    property usri11_home_dir : Win32cr::Foundation::PWSTR
+    property usri11_parms : Win32cr::Foundation::PWSTR
+    property usri11_last_logon : UInt32
+    property usri11_last_logoff : UInt32
+    property usri11_bad_pw_count : UInt32
+    property usri11_num_logons : UInt32
+    property usri11_logon_server : Win32cr::Foundation::PWSTR
+    property usri11_country_code : UInt32
+    property usri11_workstations : Win32cr::Foundation::PWSTR
+    property usri11_max_storage : UInt32
+    property usri11_units_per_week : UInt32
+    property usri11_logon_hours : UInt8*
+    property usri11_code_page : UInt32
+    def initialize(@usri11_name : Win32cr::Foundation::PWSTR, @usri11_comment : Win32cr::Foundation::PWSTR, @usri11_usr_comment : Win32cr::Foundation::PWSTR, @usri11_full_name : Win32cr::Foundation::PWSTR, @usri11_priv : Win32cr::NetworkManagement::NetManagement::USER_PRIV, @usri11_auth_flags : Win32cr::NetworkManagement::NetManagement::AF_OP, @usri11_password_age : UInt32, @usri11_home_dir : Win32cr::Foundation::PWSTR, @usri11_parms : Win32cr::Foundation::PWSTR, @usri11_last_logon : UInt32, @usri11_last_logoff : UInt32, @usri11_bad_pw_count : UInt32, @usri11_num_logons : UInt32, @usri11_logon_server : Win32cr::Foundation::PWSTR, @usri11_country_code : UInt32, @usri11_workstations : Win32cr::Foundation::PWSTR, @usri11_max_storage : UInt32, @usri11_units_per_week : UInt32, @usri11_logon_hours : UInt8*, @usri11_code_page : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_20
+    property usri20_name : Win32cr::Foundation::PWSTR
+    property usri20_full_name : Win32cr::Foundation::PWSTR
+    property usri20_comment : Win32cr::Foundation::PWSTR
+    property usri20_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS
+    property usri20_user_id : UInt32
+    def initialize(@usri20_name : Win32cr::Foundation::PWSTR, @usri20_full_name : Win32cr::Foundation::PWSTR, @usri20_comment : Win32cr::Foundation::PWSTR, @usri20_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS, @usri20_user_id : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_21
+    property usri21_password : UInt8[16]
+    def initialize(@usri21_password : UInt8[16])
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_22
+    property usri22_name : Win32cr::Foundation::PWSTR
+    property usri22_password : UInt8[16]
+    property usri22_password_age : UInt32
+    property usri22_priv : Win32cr::NetworkManagement::NetManagement::USER_PRIV
+    property usri22_home_dir : Win32cr::Foundation::PWSTR
+    property usri22_comment : Win32cr::Foundation::PWSTR
+    property usri22_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS
+    property usri22_script_path : Win32cr::Foundation::PWSTR
+    property usri22_auth_flags : Win32cr::NetworkManagement::NetManagement::AF_OP
+    property usri22_full_name : Win32cr::Foundation::PWSTR
+    property usri22_usr_comment : Win32cr::Foundation::PWSTR
+    property usri22_parms : Win32cr::Foundation::PWSTR
+    property usri22_workstations : Win32cr::Foundation::PWSTR
+    property usri22_last_logon : UInt32
+    property usri22_last_logoff : UInt32
+    property usri22_acct_expires : UInt32
+    property usri22_max_storage : UInt32
+    property usri22_units_per_week : UInt32
+    property usri22_logon_hours : UInt8*
+    property usri22_bad_pw_count : UInt32
+    property usri22_num_logons : UInt32
+    property usri22_logon_server : Win32cr::Foundation::PWSTR
+    property usri22_country_code : UInt32
+    property usri22_code_page : UInt32
+    def initialize(@usri22_name : Win32cr::Foundation::PWSTR, @usri22_password : UInt8[16], @usri22_password_age : UInt32, @usri22_priv : Win32cr::NetworkManagement::NetManagement::USER_PRIV, @usri22_home_dir : Win32cr::Foundation::PWSTR, @usri22_comment : Win32cr::Foundation::PWSTR, @usri22_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS, @usri22_script_path : Win32cr::Foundation::PWSTR, @usri22_auth_flags : Win32cr::NetworkManagement::NetManagement::AF_OP, @usri22_full_name : Win32cr::Foundation::PWSTR, @usri22_usr_comment : Win32cr::Foundation::PWSTR, @usri22_parms : Win32cr::Foundation::PWSTR, @usri22_workstations : Win32cr::Foundation::PWSTR, @usri22_last_logon : UInt32, @usri22_last_logoff : UInt32, @usri22_acct_expires : UInt32, @usri22_max_storage : UInt32, @usri22_units_per_week : UInt32, @usri22_logon_hours : UInt8*, @usri22_bad_pw_count : UInt32, @usri22_num_logons : UInt32, @usri22_logon_server : Win32cr::Foundation::PWSTR, @usri22_country_code : UInt32, @usri22_code_page : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_23
+    property usri23_name : Win32cr::Foundation::PWSTR
+    property usri23_full_name : Win32cr::Foundation::PWSTR
+    property usri23_comment : Win32cr::Foundation::PWSTR
+    property usri23_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS
+    property usri23_user_sid : Win32cr::Foundation::PSID
+    def initialize(@usri23_name : Win32cr::Foundation::PWSTR, @usri23_full_name : Win32cr::Foundation::PWSTR, @usri23_comment : Win32cr::Foundation::PWSTR, @usri23_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS, @usri23_user_sid : Win32cr::Foundation::PSID)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_24
+    property usri24_internet_identity : Win32cr::Foundation::BOOL
+    property usri24_flags : UInt32
+    property usri24_internet_provider_name : Win32cr::Foundation::PWSTR
+    property usri24_internet_principal_name : Win32cr::Foundation::PWSTR
+    property usri24_user_sid : Win32cr::Foundation::PSID
+    def initialize(@usri24_internet_identity : Win32cr::Foundation::BOOL, @usri24_flags : UInt32, @usri24_internet_provider_name : Win32cr::Foundation::PWSTR, @usri24_internet_principal_name : Win32cr::Foundation::PWSTR, @usri24_user_sid : Win32cr::Foundation::PSID)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_1003
+    property usri1003_password : Win32cr::Foundation::PWSTR
+    def initialize(@usri1003_password : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_1005
+    property usri1005_priv : Win32cr::NetworkManagement::NetManagement::USER_PRIV
+    def initialize(@usri1005_priv : Win32cr::NetworkManagement::NetManagement::USER_PRIV)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_1006
+    property usri1006_home_dir : Win32cr::Foundation::PWSTR
+    def initialize(@usri1006_home_dir : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_1007
+    property usri1007_comment : Win32cr::Foundation::PWSTR
+    def initialize(@usri1007_comment : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_1008
+    property usri1008_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS
+    def initialize(@usri1008_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_1009
+    property usri1009_script_path : Win32cr::Foundation::PWSTR
+    def initialize(@usri1009_script_path : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_1010
+    property usri1010_auth_flags : Win32cr::NetworkManagement::NetManagement::AF_OP
+    def initialize(@usri1010_auth_flags : Win32cr::NetworkManagement::NetManagement::AF_OP)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_1011
+    property usri1011_full_name : Win32cr::Foundation::PWSTR
+    def initialize(@usri1011_full_name : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_1012
+    property usri1012_usr_comment : Win32cr::Foundation::PWSTR
+    def initialize(@usri1012_usr_comment : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_1013
+    property usri1013_parms : Win32cr::Foundation::PWSTR
+    def initialize(@usri1013_parms : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_1014
+    property usri1014_workstations : Win32cr::Foundation::PWSTR
+    def initialize(@usri1014_workstations : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_1017
+    property usri1017_acct_expires : UInt32
+    def initialize(@usri1017_acct_expires : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_1018
+    property usri1018_max_storage : UInt32
+    def initialize(@usri1018_max_storage : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_1020
+    property usri1020_units_per_week : UInt32
+    property usri1020_logon_hours : UInt8*
+    def initialize(@usri1020_units_per_week : UInt32, @usri1020_logon_hours : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_1023
+    property usri1023_logon_server : Win32cr::Foundation::PWSTR
+    def initialize(@usri1023_logon_server : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_1024
+    property usri1024_country_code : UInt32
+    def initialize(@usri1024_country_code : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_1025
+    property usri1025_code_page : UInt32
+    def initialize(@usri1025_code_page : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_1051
+    property usri1051_primary_group_id : UInt32
+    def initialize(@usri1051_primary_group_id : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_1052
+    property usri1052_profile : Win32cr::Foundation::PWSTR
+    def initialize(@usri1052_profile : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct USER_INFO_1053
+    property usri1053_home_dir_drive : Win32cr::Foundation::PWSTR
+    def initialize(@usri1053_home_dir_drive : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct USER_MODALS_INFO_0
+    property usrmod0_min_passwd_len : UInt32
+    property usrmod0_max_passwd_age : UInt32
+    property usrmod0_min_passwd_age : UInt32
+    property usrmod0_force_logoff : UInt32
+    property usrmod0_password_hist_len : UInt32
+    def initialize(@usrmod0_min_passwd_len : UInt32, @usrmod0_max_passwd_age : UInt32, @usrmod0_min_passwd_age : UInt32, @usrmod0_force_logoff : UInt32, @usrmod0_password_hist_len : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USER_MODALS_INFO_1
+    property usrmod1_role : UInt32
+    property usrmod1_primary : Win32cr::Foundation::PWSTR
+    def initialize(@usrmod1_role : UInt32, @usrmod1_primary : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct USER_MODALS_INFO_2
+    property usrmod2_domain_name : Win32cr::Foundation::PWSTR
+    property usrmod2_domain_id : Win32cr::Foundation::PSID
+    def initialize(@usrmod2_domain_name : Win32cr::Foundation::PWSTR, @usrmod2_domain_id : Win32cr::Foundation::PSID)
+    end
+  end
+
+  @[Extern]
+  struct USER_MODALS_INFO_3
+    property usrmod3_lockout_duration : UInt32
+    property usrmod3_lockout_observation_window : UInt32
+    property usrmod3_lockout_threshold : UInt32
+    def initialize(@usrmod3_lockout_duration : UInt32, @usrmod3_lockout_observation_window : UInt32, @usrmod3_lockout_threshold : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USER_MODALS_INFO_1001
+    property usrmod1001_min_passwd_len : UInt32
+    def initialize(@usrmod1001_min_passwd_len : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USER_MODALS_INFO_1002
+    property usrmod1002_max_passwd_age : UInt32
+    def initialize(@usrmod1002_max_passwd_age : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USER_MODALS_INFO_1003
+    property usrmod1003_min_passwd_age : UInt32
+    def initialize(@usrmod1003_min_passwd_age : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USER_MODALS_INFO_1004
+    property usrmod1004_force_logoff : UInt32
+    def initialize(@usrmod1004_force_logoff : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USER_MODALS_INFO_1005
+    property usrmod1005_password_hist_len : UInt32
+    def initialize(@usrmod1005_password_hist_len : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USER_MODALS_INFO_1006
+    property usrmod1006_role : Win32cr::NetworkManagement::NetManagement::USER_MODALS_ROLES
+    def initialize(@usrmod1006_role : Win32cr::NetworkManagement::NetManagement::USER_MODALS_ROLES)
+    end
+  end
+
+  @[Extern]
+  struct USER_MODALS_INFO_1007
+    property usrmod1007_primary : Win32cr::Foundation::PWSTR
+    def initialize(@usrmod1007_primary : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct GROUP_INFO_0
+    property grpi0_name : Win32cr::Foundation::PWSTR
+    def initialize(@grpi0_name : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct GROUP_INFO_1
+    property grpi1_name : Win32cr::Foundation::PWSTR
+    property grpi1_comment : Win32cr::Foundation::PWSTR
+    def initialize(@grpi1_name : Win32cr::Foundation::PWSTR, @grpi1_comment : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct GROUP_INFO_2
+    property grpi2_name : Win32cr::Foundation::PWSTR
+    property grpi2_comment : Win32cr::Foundation::PWSTR
+    property grpi2_group_id : UInt32
+    property grpi2_attributes : UInt32
+    def initialize(@grpi2_name : Win32cr::Foundation::PWSTR, @grpi2_comment : Win32cr::Foundation::PWSTR, @grpi2_group_id : UInt32, @grpi2_attributes : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct GROUP_INFO_3
+    property grpi3_name : Win32cr::Foundation::PWSTR
+    property grpi3_comment : Win32cr::Foundation::PWSTR
+    property grpi3_group_sid : Win32cr::Foundation::PSID
+    property grpi3_attributes : UInt32
+    def initialize(@grpi3_name : Win32cr::Foundation::PWSTR, @grpi3_comment : Win32cr::Foundation::PWSTR, @grpi3_group_sid : Win32cr::Foundation::PSID, @grpi3_attributes : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct GROUP_INFO_1002
+    property grpi1002_comment : Win32cr::Foundation::PWSTR
+    def initialize(@grpi1002_comment : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct GROUP_INFO_1005
+    property grpi1005_attributes : UInt32
+    def initialize(@grpi1005_attributes : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct GROUP_USERS_INFO_0
+    property grui0_name : Win32cr::Foundation::PWSTR
+    def initialize(@grui0_name : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct GROUP_USERS_INFO_1
+    property grui1_name : Win32cr::Foundation::PWSTR
+    property grui1_attributes : UInt32
+    def initialize(@grui1_name : Win32cr::Foundation::PWSTR, @grui1_attributes : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct LOCALGROUP_INFO_0
+    property lgrpi0_name : Win32cr::Foundation::PWSTR
+    def initialize(@lgrpi0_name : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct LOCALGROUP_INFO_1
+    property lgrpi1_name : Win32cr::Foundation::PWSTR
+    property lgrpi1_comment : Win32cr::Foundation::PWSTR
+    def initialize(@lgrpi1_name : Win32cr::Foundation::PWSTR, @lgrpi1_comment : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct LOCALGROUP_INFO_1002
+    property lgrpi1002_comment : Win32cr::Foundation::PWSTR
+    def initialize(@lgrpi1002_comment : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct LOCALGROUP_MEMBERS_INFO_0
+    property lgrmi0_sid : Win32cr::Foundation::PSID
+    def initialize(@lgrmi0_sid : Win32cr::Foundation::PSID)
+    end
+  end
+
+  @[Extern]
+  struct LOCALGROUP_MEMBERS_INFO_1
+    property lgrmi1_sid : Win32cr::Foundation::PSID
+    property lgrmi1_sidusage : Win32cr::Security::SID_NAME_USE
+    property lgrmi1_name : Win32cr::Foundation::PWSTR
+    def initialize(@lgrmi1_sid : Win32cr::Foundation::PSID, @lgrmi1_sidusage : Win32cr::Security::SID_NAME_USE, @lgrmi1_name : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct LOCALGROUP_MEMBERS_INFO_2
+    property lgrmi2_sid : Win32cr::Foundation::PSID
+    property lgrmi2_sidusage : Win32cr::Security::SID_NAME_USE
+    property lgrmi2_domainandname : Win32cr::Foundation::PWSTR
+    def initialize(@lgrmi2_sid : Win32cr::Foundation::PSID, @lgrmi2_sidusage : Win32cr::Security::SID_NAME_USE, @lgrmi2_domainandname : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct LOCALGROUP_MEMBERS_INFO_3
+    property lgrmi3_domainandname : Win32cr::Foundation::PWSTR
+    def initialize(@lgrmi3_domainandname : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct LOCALGROUP_USERS_INFO_0
+    property lgrui0_name : Win32cr::Foundation::PWSTR
+    def initialize(@lgrui0_name : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct NET_DISPLAY_USER
+    property usri1_name : Win32cr::Foundation::PWSTR
+    property usri1_comment : Win32cr::Foundation::PWSTR
+    property usri1_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS
+    property usri1_full_name : Win32cr::Foundation::PWSTR
+    property usri1_user_id : UInt32
+    property usri1_next_index : UInt32
+    def initialize(@usri1_name : Win32cr::Foundation::PWSTR, @usri1_comment : Win32cr::Foundation::PWSTR, @usri1_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS, @usri1_full_name : Win32cr::Foundation::PWSTR, @usri1_user_id : UInt32, @usri1_next_index : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NET_DISPLAY_MACHINE
+    property usri2_name : Win32cr::Foundation::PWSTR
+    property usri2_comment : Win32cr::Foundation::PWSTR
+    property usri2_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS
+    property usri2_user_id : UInt32
+    property usri2_next_index : UInt32
+    def initialize(@usri2_name : Win32cr::Foundation::PWSTR, @usri2_comment : Win32cr::Foundation::PWSTR, @usri2_flags : Win32cr::NetworkManagement::NetManagement::USER_ACCOUNT_FLAGS, @usri2_user_id : UInt32, @usri2_next_index : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NET_DISPLAY_GROUP
+    property grpi3_name : Win32cr::Foundation::PWSTR
+    property grpi3_comment : Win32cr::Foundation::PWSTR
+    property grpi3_group_id : UInt32
+    property grpi3_attributes : UInt32
+    property grpi3_next_index : UInt32
+    def initialize(@grpi3_name : Win32cr::Foundation::PWSTR, @grpi3_comment : Win32cr::Foundation::PWSTR, @grpi3_group_id : UInt32, @grpi3_attributes : UInt32, @grpi3_next_index : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ACCESS_INFO_0
+    property acc0_resource_name : Win32cr::Foundation::PWSTR
+    def initialize(@acc0_resource_name : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct ACCESS_INFO_1
+    property acc1_resource_name : Win32cr::Foundation::PWSTR
+    property acc1_attr : UInt32
+    property acc1_count : UInt32
+    def initialize(@acc1_resource_name : Win32cr::Foundation::PWSTR, @acc1_attr : UInt32, @acc1_count : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ACCESS_INFO_1002
+    property acc1002_attr : UInt32
+    def initialize(@acc1002_attr : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ACCESS_LIST
+    property acl_ugname : Win32cr::Foundation::PWSTR
+    property acl_access : UInt32
+    def initialize(@acl_ugname : Win32cr::Foundation::PWSTR, @acl_access : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NET_VALIDATE_PASSWORD_HASH
+    property length : UInt32
+    property hash : UInt8*
+    def initialize(@length : UInt32, @hash : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct NET_VALIDATE_PERSISTED_FIELDS
+    property present_fields : UInt32
+    property password_last_set : Win32cr::Foundation::FILETIME
+    property bad_password_time : Win32cr::Foundation::FILETIME
+    property lockout_time : Win32cr::Foundation::FILETIME
+    property bad_password_count : UInt32
+    property password_history_length : UInt32
+    property password_history : Win32cr::NetworkManagement::NetManagement::NET_VALIDATE_PASSWORD_HASH*
+    def initialize(@present_fields : UInt32, @password_last_set : Win32cr::Foundation::FILETIME, @bad_password_time : Win32cr::Foundation::FILETIME, @lockout_time : Win32cr::Foundation::FILETIME, @bad_password_count : UInt32, @password_history_length : UInt32, @password_history : Win32cr::NetworkManagement::NetManagement::NET_VALIDATE_PASSWORD_HASH*)
+    end
+  end
+
+  @[Extern]
+  struct NET_VALIDATE_OUTPUT_ARG
+    property changed_persisted_fields : Win32cr::NetworkManagement::NetManagement::NET_VALIDATE_PERSISTED_FIELDS
+    property validation_status : UInt32
+    def initialize(@changed_persisted_fields : Win32cr::NetworkManagement::NetManagement::NET_VALIDATE_PERSISTED_FIELDS, @validation_status : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NET_VALIDATE_AUTHENTICATION_INPUT_ARG
+    property input_persisted_fields : Win32cr::NetworkManagement::NetManagement::NET_VALIDATE_PERSISTED_FIELDS
+    property password_matched : Win32cr::Foundation::BOOLEAN
+    def initialize(@input_persisted_fields : Win32cr::NetworkManagement::NetManagement::NET_VALIDATE_PERSISTED_FIELDS, @password_matched : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct NET_VALIDATE_PASSWORD_CHANGE_INPUT_ARG
+    property input_persisted_fields : Win32cr::NetworkManagement::NetManagement::NET_VALIDATE_PERSISTED_FIELDS
+    property clear_password : Win32cr::Foundation::PWSTR
+    property user_account_name : Win32cr::Foundation::PWSTR
+    property hashed_password : Win32cr::NetworkManagement::NetManagement::NET_VALIDATE_PASSWORD_HASH
+    property password_match : Win32cr::Foundation::BOOLEAN
+    def initialize(@input_persisted_fields : Win32cr::NetworkManagement::NetManagement::NET_VALIDATE_PERSISTED_FIELDS, @clear_password : Win32cr::Foundation::PWSTR, @user_account_name : Win32cr::Foundation::PWSTR, @hashed_password : Win32cr::NetworkManagement::NetManagement::NET_VALIDATE_PASSWORD_HASH, @password_match : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct NET_VALIDATE_PASSWORD_RESET_INPUT_ARG
+    property input_persisted_fields : Win32cr::NetworkManagement::NetManagement::NET_VALIDATE_PERSISTED_FIELDS
+    property clear_password : Win32cr::Foundation::PWSTR
+    property user_account_name : Win32cr::Foundation::PWSTR
+    property hashed_password : Win32cr::NetworkManagement::NetManagement::NET_VALIDATE_PASSWORD_HASH
+    property password_must_change_at_next_logon : Win32cr::Foundation::BOOLEAN
+    property clear_lockout : Win32cr::Foundation::BOOLEAN
+    def initialize(@input_persisted_fields : Win32cr::NetworkManagement::NetManagement::NET_VALIDATE_PERSISTED_FIELDS, @clear_password : Win32cr::Foundation::PWSTR, @user_account_name : Win32cr::Foundation::PWSTR, @hashed_password : Win32cr::NetworkManagement::NetManagement::NET_VALIDATE_PASSWORD_HASH, @password_must_change_at_next_logon : Win32cr::Foundation::BOOLEAN, @clear_lockout : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct NETLOGON_INFO_1
+    property netlog1_flags : UInt32
+    property netlog1_pdc_connection_status : UInt32
+    def initialize(@netlog1_flags : UInt32, @netlog1_pdc_connection_status : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NETLOGON_INFO_2
+    property netlog2_flags : UInt32
+    property netlog2_pdc_connection_status : UInt32
+    property netlog2_trusted_dc_name : Win32cr::Foundation::PWSTR
+    property netlog2_tc_connection_status : UInt32
+    def initialize(@netlog2_flags : UInt32, @netlog2_pdc_connection_status : UInt32, @netlog2_trusted_dc_name : Win32cr::Foundation::PWSTR, @netlog2_tc_connection_status : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NETLOGON_INFO_3
+    property netlog3_flags : UInt32
+    property netlog3_logon_attempts : UInt32
+    property netlog3_reserved1 : UInt32
+    property netlog3_reserved2 : UInt32
+    property netlog3_reserved3 : UInt32
+    property netlog3_reserved4 : UInt32
+    property netlog3_reserved5 : UInt32
+    def initialize(@netlog3_flags : UInt32, @netlog3_logon_attempts : UInt32, @netlog3_reserved1 : UInt32, @netlog3_reserved2 : UInt32, @netlog3_reserved3 : UInt32, @netlog3_reserved4 : UInt32, @netlog3_reserved5 : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NETLOGON_INFO_4
+    property netlog4_trusted_dc_name : Win32cr::Foundation::PWSTR
+    property netlog4_trusted_domain_name : Win32cr::Foundation::PWSTR
+    def initialize(@netlog4_trusted_dc_name : Win32cr::Foundation::PWSTR, @netlog4_trusted_domain_name : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct MSA_INFO_0
+    property state : Win32cr::NetworkManagement::NetManagement::MSA_INFO_STATE
+    def initialize(@state : Win32cr::NetworkManagement::NetManagement::MSA_INFO_STATE)
+    end
+  end
+
+  @[Extern]
+  struct STD_ALERT
+    property alrt_timestamp : UInt32
+    property alrt_eventname : UInt16[17]
+    property alrt_servicename : UInt16[81]
+    def initialize(@alrt_timestamp : UInt32, @alrt_eventname : UInt16[17], @alrt_servicename : UInt16[81])
+    end
+  end
+
+  @[Extern]
+  struct ADMIN_OTHER_INFO
+    property alrtad_errcode : UInt32
+    property alrtad_numstrings : UInt32
+    def initialize(@alrtad_errcode : UInt32, @alrtad_numstrings : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ERRLOG_OTHER_INFO
+    property alrter_errcode : UInt32
+    property alrter_offset : UInt32
+    def initialize(@alrter_errcode : UInt32, @alrter_offset : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PRINT_OTHER_INFO
+    property alrtpr_jobid : UInt32
+    property alrtpr_status : UInt32
+    property alrtpr_submitted : UInt32
+    property alrtpr_size : UInt32
+    def initialize(@alrtpr_jobid : UInt32, @alrtpr_status : UInt32, @alrtpr_submitted : UInt32, @alrtpr_size : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USER_OTHER_INFO
+    property alrtus_errcode : UInt32
+    property alrtus_numstrings : UInt32
+    def initialize(@alrtus_errcode : UInt32, @alrtus_numstrings : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MSG_INFO_0
+    property msgi0_name : Win32cr::Foundation::PWSTR
+    def initialize(@msgi0_name : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct MSG_INFO_1
+    property msgi1_name : Win32cr::Foundation::PWSTR
+    property msgi1_forward_flag : UInt32
+    property msgi1_forward : Win32cr::Foundation::PWSTR
+    def initialize(@msgi1_name : Win32cr::Foundation::PWSTR, @msgi1_forward_flag : UInt32, @msgi1_forward : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct TIME_OF_DAY_INFO
+    property tod_elapsedt : UInt32
+    property tod_msecs : UInt32
+    property tod_hours : UInt32
+    property tod_mins : UInt32
+    property tod_secs : UInt32
+    property tod_hunds : UInt32
+    property tod_timezone : Int32
+    property tod_tinterval : UInt32
+    property tod_day : UInt32
+    property tod_month : UInt32
+    property tod_year : UInt32
+    property tod_weekday : UInt32
+    def initialize(@tod_elapsedt : UInt32, @tod_msecs : UInt32, @tod_hours : UInt32, @tod_mins : UInt32, @tod_secs : UInt32, @tod_hunds : UInt32, @tod_timezone : Int32, @tod_tinterval : UInt32, @tod_day : UInt32, @tod_month : UInt32, @tod_year : UInt32, @tod_weekday : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct REPL_INFO_0
+    property rp0_role : UInt32
+    property rp0_exportpath : Win32cr::Foundation::PWSTR
+    property rp0_exportlist : Win32cr::Foundation::PWSTR
+    property rp0_importpath : Win32cr::Foundation::PWSTR
+    property rp0_importlist : Win32cr::Foundation::PWSTR
+    property rp0_logonusername : Win32cr::Foundation::PWSTR
+    property rp0_interval : UInt32
+    property rp0_pulse : UInt32
+    property rp0_guardtime : UInt32
+    property rp0_random : UInt32
+    def initialize(@rp0_role : UInt32, @rp0_exportpath : Win32cr::Foundation::PWSTR, @rp0_exportlist : Win32cr::Foundation::PWSTR, @rp0_importpath : Win32cr::Foundation::PWSTR, @rp0_importlist : Win32cr::Foundation::PWSTR, @rp0_logonusername : Win32cr::Foundation::PWSTR, @rp0_interval : UInt32, @rp0_pulse : UInt32, @rp0_guardtime : UInt32, @rp0_random : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct REPL_INFO_1000
+    property rp1000_interval : UInt32
+    def initialize(@rp1000_interval : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct REPL_INFO_1001
+    property rp1001_pulse : UInt32
+    def initialize(@rp1001_pulse : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct REPL_INFO_1002
+    property rp1002_guardtime : UInt32
+    def initialize(@rp1002_guardtime : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct REPL_INFO_1003
+    property rp1003_random : UInt32
+    def initialize(@rp1003_random : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct REPL_EDIR_INFO_0
+    property rped0_dirname : Win32cr::Foundation::PWSTR
+    def initialize(@rped0_dirname : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct REPL_EDIR_INFO_1
+    property rped1_dirname : Win32cr::Foundation::PWSTR
+    property rped1_integrity : UInt32
+    property rped1_extent : UInt32
+    def initialize(@rped1_dirname : Win32cr::Foundation::PWSTR, @rped1_integrity : UInt32, @rped1_extent : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct REPL_EDIR_INFO_2
+    property rped2_dirname : Win32cr::Foundation::PWSTR
+    property rped2_integrity : UInt32
+    property rped2_extent : UInt32
+    property rped2_lockcount : UInt32
+    property rped2_locktime : UInt32
+    def initialize(@rped2_dirname : Win32cr::Foundation::PWSTR, @rped2_integrity : UInt32, @rped2_extent : UInt32, @rped2_lockcount : UInt32, @rped2_locktime : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct REPL_EDIR_INFO_1000
+    property rped1000_integrity : UInt32
+    def initialize(@rped1000_integrity : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct REPL_EDIR_INFO_1001
+    property rped1001_extent : UInt32
+    def initialize(@rped1001_extent : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct REPL_IDIR_INFO_0
+    property rpid0_dirname : Win32cr::Foundation::PWSTR
+    def initialize(@rpid0_dirname : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct REPL_IDIR_INFO_1
+    property rpid1_dirname : Win32cr::Foundation::PWSTR
+    property rpid1_state : UInt32
+    property rpid1_mastername : Win32cr::Foundation::PWSTR
+    property rpid1_last_update_time : UInt32
+    property rpid1_lockcount : UInt32
+    property rpid1_locktime : UInt32
+    def initialize(@rpid1_dirname : Win32cr::Foundation::PWSTR, @rpid1_state : UInt32, @rpid1_mastername : Win32cr::Foundation::PWSTR, @rpid1_last_update_time : UInt32, @rpid1_lockcount : UInt32, @rpid1_locktime : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_100
+    property sv100_platform_id : UInt32
+    property sv100_name : Win32cr::Foundation::PWSTR
+    def initialize(@sv100_platform_id : UInt32, @sv100_name : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_101
+    property sv101_platform_id : UInt32
+    property sv101_name : Win32cr::Foundation::PWSTR
+    property sv101_version_major : UInt32
+    property sv101_version_minor : UInt32
+    property sv101_type : Win32cr::NetworkManagement::NetManagement::NET_SERVER_TYPE
+    property sv101_comment : Win32cr::Foundation::PWSTR
+    def initialize(@sv101_platform_id : UInt32, @sv101_name : Win32cr::Foundation::PWSTR, @sv101_version_major : UInt32, @sv101_version_minor : UInt32, @sv101_type : Win32cr::NetworkManagement::NetManagement::NET_SERVER_TYPE, @sv101_comment : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_102
+    property sv102_platform_id : UInt32
+    property sv102_name : Win32cr::Foundation::PWSTR
+    property sv102_version_major : UInt32
+    property sv102_version_minor : UInt32
+    property sv102_type : Win32cr::NetworkManagement::NetManagement::NET_SERVER_TYPE
+    property sv102_comment : Win32cr::Foundation::PWSTR
+    property sv102_users : UInt32
+    property sv102_disc : Int32
+    property sv102_hidden : Win32cr::NetworkManagement::NetManagement::SERVER_INFO_HIDDEN
+    property sv102_announce : UInt32
+    property sv102_anndelta : UInt32
+    property sv102_licenses : UInt32
+    property sv102_userpath : Win32cr::Foundation::PWSTR
+    def initialize(@sv102_platform_id : UInt32, @sv102_name : Win32cr::Foundation::PWSTR, @sv102_version_major : UInt32, @sv102_version_minor : UInt32, @sv102_type : Win32cr::NetworkManagement::NetManagement::NET_SERVER_TYPE, @sv102_comment : Win32cr::Foundation::PWSTR, @sv102_users : UInt32, @sv102_disc : Int32, @sv102_hidden : Win32cr::NetworkManagement::NetManagement::SERVER_INFO_HIDDEN, @sv102_announce : UInt32, @sv102_anndelta : UInt32, @sv102_licenses : UInt32, @sv102_userpath : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_103
+    property sv103_platform_id : UInt32
+    property sv103_name : Win32cr::Foundation::PWSTR
+    property sv103_version_major : UInt32
+    property sv103_version_minor : UInt32
+    property sv103_type : UInt32
+    property sv103_comment : Win32cr::Foundation::PWSTR
+    property sv103_users : UInt32
+    property sv103_disc : Int32
+    property sv103_hidden : Win32cr::Foundation::BOOL
+    property sv103_announce : UInt32
+    property sv103_anndelta : UInt32
+    property sv103_licenses : UInt32
+    property sv103_userpath : Win32cr::Foundation::PWSTR
+    property sv103_capabilities : UInt32
+    def initialize(@sv103_platform_id : UInt32, @sv103_name : Win32cr::Foundation::PWSTR, @sv103_version_major : UInt32, @sv103_version_minor : UInt32, @sv103_type : UInt32, @sv103_comment : Win32cr::Foundation::PWSTR, @sv103_users : UInt32, @sv103_disc : Int32, @sv103_hidden : Win32cr::Foundation::BOOL, @sv103_announce : UInt32, @sv103_anndelta : UInt32, @sv103_licenses : UInt32, @sv103_userpath : Win32cr::Foundation::PWSTR, @sv103_capabilities : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_402
+    property sv402_ulist_mtime : UInt32
+    property sv402_glist_mtime : UInt32
+    property sv402_alist_mtime : UInt32
+    property sv402_alerts : Win32cr::Foundation::PWSTR
+    property sv402_security : Win32cr::NetworkManagement::NetManagement::SERVER_INFO_SECURITY
+    property sv402_numadmin : UInt32
+    property sv402_lanmask : UInt32
+    property sv402_guestacct : Win32cr::Foundation::PWSTR
+    property sv402_chdevs : UInt32
+    property sv402_chdevq : UInt32
+    property sv402_chdevjobs : UInt32
+    property sv402_connections : UInt32
+    property sv402_shares : UInt32
+    property sv402_openfiles : UInt32
+    property sv402_sessopens : UInt32
+    property sv402_sessvcs : UInt32
+    property sv402_sessreqs : UInt32
+    property sv402_opensearch : UInt32
+    property sv402_activelocks : UInt32
+    property sv402_numreqbuf : UInt32
+    property sv402_sizreqbuf : UInt32
+    property sv402_numbigbuf : UInt32
+    property sv402_numfiletasks : UInt32
+    property sv402_alertsched : UInt32
+    property sv402_erroralert : UInt32
+    property sv402_logonalert : UInt32
+    property sv402_accessalert : UInt32
+    property sv402_diskalert : UInt32
+    property sv402_netioalert : UInt32
+    property sv402_maxauditsz : UInt32
+    property sv402_srvheuristics : Win32cr::Foundation::PWSTR
+    def initialize(@sv402_ulist_mtime : UInt32, @sv402_glist_mtime : UInt32, @sv402_alist_mtime : UInt32, @sv402_alerts : Win32cr::Foundation::PWSTR, @sv402_security : Win32cr::NetworkManagement::NetManagement::SERVER_INFO_SECURITY, @sv402_numadmin : UInt32, @sv402_lanmask : UInt32, @sv402_guestacct : Win32cr::Foundation::PWSTR, @sv402_chdevs : UInt32, @sv402_chdevq : UInt32, @sv402_chdevjobs : UInt32, @sv402_connections : UInt32, @sv402_shares : UInt32, @sv402_openfiles : UInt32, @sv402_sessopens : UInt32, @sv402_sessvcs : UInt32, @sv402_sessreqs : UInt32, @sv402_opensearch : UInt32, @sv402_activelocks : UInt32, @sv402_numreqbuf : UInt32, @sv402_sizreqbuf : UInt32, @sv402_numbigbuf : UInt32, @sv402_numfiletasks : UInt32, @sv402_alertsched : UInt32, @sv402_erroralert : UInt32, @sv402_logonalert : UInt32, @sv402_accessalert : UInt32, @sv402_diskalert : UInt32, @sv402_netioalert : UInt32, @sv402_maxauditsz : UInt32, @sv402_srvheuristics : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_403
+    property sv403_ulist_mtime : UInt32
+    property sv403_glist_mtime : UInt32
+    property sv403_alist_mtime : UInt32
+    property sv403_alerts : Win32cr::Foundation::PWSTR
+    property sv403_security : Win32cr::NetworkManagement::NetManagement::SERVER_INFO_SECURITY
+    property sv403_numadmin : UInt32
+    property sv403_lanmask : UInt32
+    property sv403_guestacct : Win32cr::Foundation::PWSTR
+    property sv403_chdevs : UInt32
+    property sv403_chdevq : UInt32
+    property sv403_chdevjobs : UInt32
+    property sv403_connections : UInt32
+    property sv403_shares : UInt32
+    property sv403_openfiles : UInt32
+    property sv403_sessopens : UInt32
+    property sv403_sessvcs : UInt32
+    property sv403_sessreqs : UInt32
+    property sv403_opensearch : UInt32
+    property sv403_activelocks : UInt32
+    property sv403_numreqbuf : UInt32
+    property sv403_sizreqbuf : UInt32
+    property sv403_numbigbuf : UInt32
+    property sv403_numfiletasks : UInt32
+    property sv403_alertsched : UInt32
+    property sv403_erroralert : UInt32
+    property sv403_logonalert : UInt32
+    property sv403_accessalert : UInt32
+    property sv403_diskalert : UInt32
+    property sv403_netioalert : UInt32
+    property sv403_maxauditsz : UInt32
+    property sv403_srvheuristics : Win32cr::Foundation::PWSTR
+    property sv403_auditedevents : UInt32
+    property sv403_autoprofile : UInt32
+    property sv403_autopath : Win32cr::Foundation::PWSTR
+    def initialize(@sv403_ulist_mtime : UInt32, @sv403_glist_mtime : UInt32, @sv403_alist_mtime : UInt32, @sv403_alerts : Win32cr::Foundation::PWSTR, @sv403_security : Win32cr::NetworkManagement::NetManagement::SERVER_INFO_SECURITY, @sv403_numadmin : UInt32, @sv403_lanmask : UInt32, @sv403_guestacct : Win32cr::Foundation::PWSTR, @sv403_chdevs : UInt32, @sv403_chdevq : UInt32, @sv403_chdevjobs : UInt32, @sv403_connections : UInt32, @sv403_shares : UInt32, @sv403_openfiles : UInt32, @sv403_sessopens : UInt32, @sv403_sessvcs : UInt32, @sv403_sessreqs : UInt32, @sv403_opensearch : UInt32, @sv403_activelocks : UInt32, @sv403_numreqbuf : UInt32, @sv403_sizreqbuf : UInt32, @sv403_numbigbuf : UInt32, @sv403_numfiletasks : UInt32, @sv403_alertsched : UInt32, @sv403_erroralert : UInt32, @sv403_logonalert : UInt32, @sv403_accessalert : UInt32, @sv403_diskalert : UInt32, @sv403_netioalert : UInt32, @sv403_maxauditsz : UInt32, @sv403_srvheuristics : Win32cr::Foundation::PWSTR, @sv403_auditedevents : UInt32, @sv403_autoprofile : UInt32, @sv403_autopath : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_502
+    property sv502_sessopens : UInt32
+    property sv502_sessvcs : UInt32
+    property sv502_opensearch : UInt32
+    property sv502_sizreqbuf : UInt32
+    property sv502_initworkitems : UInt32
+    property sv502_maxworkitems : UInt32
+    property sv502_rawworkitems : UInt32
+    property sv502_irpstacksize : UInt32
+    property sv502_maxrawbuflen : UInt32
+    property sv502_sessusers : UInt32
+    property sv502_sessconns : UInt32
+    property sv502_maxpagedmemoryusage : UInt32
+    property sv502_maxnonpagedmemoryusage : UInt32
+    property sv502_enablesoftcompat : Win32cr::Foundation::BOOL
+    property sv502_enableforcedlogoff : Win32cr::Foundation::BOOL
+    property sv502_timesource : Win32cr::Foundation::BOOL
+    property sv502_acceptdownlevelapis : Win32cr::Foundation::BOOL
+    property sv502_lmannounce : Win32cr::Foundation::BOOL
+    def initialize(@sv502_sessopens : UInt32, @sv502_sessvcs : UInt32, @sv502_opensearch : UInt32, @sv502_sizreqbuf : UInt32, @sv502_initworkitems : UInt32, @sv502_maxworkitems : UInt32, @sv502_rawworkitems : UInt32, @sv502_irpstacksize : UInt32, @sv502_maxrawbuflen : UInt32, @sv502_sessusers : UInt32, @sv502_sessconns : UInt32, @sv502_maxpagedmemoryusage : UInt32, @sv502_maxnonpagedmemoryusage : UInt32, @sv502_enablesoftcompat : Win32cr::Foundation::BOOL, @sv502_enableforcedlogoff : Win32cr::Foundation::BOOL, @sv502_timesource : Win32cr::Foundation::BOOL, @sv502_acceptdownlevelapis : Win32cr::Foundation::BOOL, @sv502_lmannounce : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_503
+    property sv503_sessopens : UInt32
+    property sv503_sessvcs : UInt32
+    property sv503_opensearch : UInt32
+    property sv503_sizreqbuf : UInt32
+    property sv503_initworkitems : UInt32
+    property sv503_maxworkitems : UInt32
+    property sv503_rawworkitems : UInt32
+    property sv503_irpstacksize : UInt32
+    property sv503_maxrawbuflen : UInt32
+    property sv503_sessusers : UInt32
+    property sv503_sessconns : UInt32
+    property sv503_maxpagedmemoryusage : UInt32
+    property sv503_maxnonpagedmemoryusage : UInt32
+    property sv503_enablesoftcompat : Win32cr::Foundation::BOOL
+    property sv503_enableforcedlogoff : Win32cr::Foundation::BOOL
+    property sv503_timesource : Win32cr::Foundation::BOOL
+    property sv503_acceptdownlevelapis : Win32cr::Foundation::BOOL
+    property sv503_lmannounce : Win32cr::Foundation::BOOL
+    property sv503_domain : Win32cr::Foundation::PWSTR
+    property sv503_maxcopyreadlen : UInt32
+    property sv503_maxcopywritelen : UInt32
+    property sv503_minkeepsearch : UInt32
+    property sv503_maxkeepsearch : UInt32
+    property sv503_minkeepcomplsearch : UInt32
+    property sv503_maxkeepcomplsearch : UInt32
+    property sv503_threadcountadd : UInt32
+    property sv503_numblockthreads : UInt32
+    property sv503_scavtimeout : UInt32
+    property sv503_minrcvqueue : UInt32
+    property sv503_minfreeworkitems : UInt32
+    property sv503_xactmemsize : UInt32
+    property sv503_threadpriority : UInt32
+    property sv503_maxmpxct : UInt32
+    property sv503_oplockbreakwait : UInt32
+    property sv503_oplockbreakresponsewait : UInt32
+    property sv503_enableoplocks : Win32cr::Foundation::BOOL
+    property sv503_enableoplockforceclose : Win32cr::Foundation::BOOL
+    property sv503_enablefcbopens : Win32cr::Foundation::BOOL
+    property sv503_enableraw : Win32cr::Foundation::BOOL
+    property sv503_enablesharednetdrives : Win32cr::Foundation::BOOL
+    property sv503_minfreeconnections : UInt32
+    property sv503_maxfreeconnections : UInt32
+    def initialize(@sv503_sessopens : UInt32, @sv503_sessvcs : UInt32, @sv503_opensearch : UInt32, @sv503_sizreqbuf : UInt32, @sv503_initworkitems : UInt32, @sv503_maxworkitems : UInt32, @sv503_rawworkitems : UInt32, @sv503_irpstacksize : UInt32, @sv503_maxrawbuflen : UInt32, @sv503_sessusers : UInt32, @sv503_sessconns : UInt32, @sv503_maxpagedmemoryusage : UInt32, @sv503_maxnonpagedmemoryusage : UInt32, @sv503_enablesoftcompat : Win32cr::Foundation::BOOL, @sv503_enableforcedlogoff : Win32cr::Foundation::BOOL, @sv503_timesource : Win32cr::Foundation::BOOL, @sv503_acceptdownlevelapis : Win32cr::Foundation::BOOL, @sv503_lmannounce : Win32cr::Foundation::BOOL, @sv503_domain : Win32cr::Foundation::PWSTR, @sv503_maxcopyreadlen : UInt32, @sv503_maxcopywritelen : UInt32, @sv503_minkeepsearch : UInt32, @sv503_maxkeepsearch : UInt32, @sv503_minkeepcomplsearch : UInt32, @sv503_maxkeepcomplsearch : UInt32, @sv503_threadcountadd : UInt32, @sv503_numblockthreads : UInt32, @sv503_scavtimeout : UInt32, @sv503_minrcvqueue : UInt32, @sv503_minfreeworkitems : UInt32, @sv503_xactmemsize : UInt32, @sv503_threadpriority : UInt32, @sv503_maxmpxct : UInt32, @sv503_oplockbreakwait : UInt32, @sv503_oplockbreakresponsewait : UInt32, @sv503_enableoplocks : Win32cr::Foundation::BOOL, @sv503_enableoplockforceclose : Win32cr::Foundation::BOOL, @sv503_enablefcbopens : Win32cr::Foundation::BOOL, @sv503_enableraw : Win32cr::Foundation::BOOL, @sv503_enablesharednetdrives : Win32cr::Foundation::BOOL, @sv503_minfreeconnections : UInt32, @sv503_maxfreeconnections : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_599
+    property sv599_sessopens : UInt32
+    property sv599_sessvcs : UInt32
+    property sv599_opensearch : UInt32
+    property sv599_sizreqbuf : UInt32
+    property sv599_initworkitems : UInt32
+    property sv599_maxworkitems : UInt32
+    property sv599_rawworkitems : UInt32
+    property sv599_irpstacksize : UInt32
+    property sv599_maxrawbuflen : UInt32
+    property sv599_sessusers : UInt32
+    property sv599_sessconns : UInt32
+    property sv599_maxpagedmemoryusage : UInt32
+    property sv599_maxnonpagedmemoryusage : UInt32
+    property sv599_enablesoftcompat : Win32cr::Foundation::BOOL
+    property sv599_enableforcedlogoff : Win32cr::Foundation::BOOL
+    property sv599_timesource : Win32cr::Foundation::BOOL
+    property sv599_acceptdownlevelapis : Win32cr::Foundation::BOOL
+    property sv599_lmannounce : Win32cr::Foundation::BOOL
+    property sv599_domain : Win32cr::Foundation::PWSTR
+    property sv599_maxcopyreadlen : UInt32
+    property sv599_maxcopywritelen : UInt32
+    property sv599_minkeepsearch : UInt32
+    property sv599_maxkeepsearch : UInt32
+    property sv599_minkeepcomplsearch : UInt32
+    property sv599_maxkeepcomplsearch : UInt32
+    property sv599_threadcountadd : UInt32
+    property sv599_numblockthreads : UInt32
+    property sv599_scavtimeout : UInt32
+    property sv599_minrcvqueue : UInt32
+    property sv599_minfreeworkitems : UInt32
+    property sv599_xactmemsize : UInt32
+    property sv599_threadpriority : UInt32
+    property sv599_maxmpxct : UInt32
+    property sv599_oplockbreakwait : UInt32
+    property sv599_oplockbreakresponsewait : UInt32
+    property sv599_enableoplocks : Win32cr::Foundation::BOOL
+    property sv599_enableoplockforceclose : Win32cr::Foundation::BOOL
+    property sv599_enablefcbopens : Win32cr::Foundation::BOOL
+    property sv599_enableraw : Win32cr::Foundation::BOOL
+    property sv599_enablesharednetdrives : Win32cr::Foundation::BOOL
+    property sv599_minfreeconnections : UInt32
+    property sv599_maxfreeconnections : UInt32
+    property sv599_initsesstable : UInt32
+    property sv599_initconntable : UInt32
+    property sv599_initfiletable : UInt32
+    property sv599_initsearchtable : UInt32
+    property sv599_alertschedule : UInt32
+    property sv599_errorthreshold : UInt32
+    property sv599_networkerrorthreshold : UInt32
+    property sv599_diskspacethreshold : UInt32
+    property sv599_reserved : UInt32
+    property sv599_maxlinkdelay : UInt32
+    property sv599_minlinkthroughput : UInt32
+    property sv599_linkinfovalidtime : UInt32
+    property sv599_scavqosinfoupdatetime : UInt32
+    property sv599_maxworkitemidletime : UInt32
+    def initialize(@sv599_sessopens : UInt32, @sv599_sessvcs : UInt32, @sv599_opensearch : UInt32, @sv599_sizreqbuf : UInt32, @sv599_initworkitems : UInt32, @sv599_maxworkitems : UInt32, @sv599_rawworkitems : UInt32, @sv599_irpstacksize : UInt32, @sv599_maxrawbuflen : UInt32, @sv599_sessusers : UInt32, @sv599_sessconns : UInt32, @sv599_maxpagedmemoryusage : UInt32, @sv599_maxnonpagedmemoryusage : UInt32, @sv599_enablesoftcompat : Win32cr::Foundation::BOOL, @sv599_enableforcedlogoff : Win32cr::Foundation::BOOL, @sv599_timesource : Win32cr::Foundation::BOOL, @sv599_acceptdownlevelapis : Win32cr::Foundation::BOOL, @sv599_lmannounce : Win32cr::Foundation::BOOL, @sv599_domain : Win32cr::Foundation::PWSTR, @sv599_maxcopyreadlen : UInt32, @sv599_maxcopywritelen : UInt32, @sv599_minkeepsearch : UInt32, @sv599_maxkeepsearch : UInt32, @sv599_minkeepcomplsearch : UInt32, @sv599_maxkeepcomplsearch : UInt32, @sv599_threadcountadd : UInt32, @sv599_numblockthreads : UInt32, @sv599_scavtimeout : UInt32, @sv599_minrcvqueue : UInt32, @sv599_minfreeworkitems : UInt32, @sv599_xactmemsize : UInt32, @sv599_threadpriority : UInt32, @sv599_maxmpxct : UInt32, @sv599_oplockbreakwait : UInt32, @sv599_oplockbreakresponsewait : UInt32, @sv599_enableoplocks : Win32cr::Foundation::BOOL, @sv599_enableoplockforceclose : Win32cr::Foundation::BOOL, @sv599_enablefcbopens : Win32cr::Foundation::BOOL, @sv599_enableraw : Win32cr::Foundation::BOOL, @sv599_enablesharednetdrives : Win32cr::Foundation::BOOL, @sv599_minfreeconnections : UInt32, @sv599_maxfreeconnections : UInt32, @sv599_initsesstable : UInt32, @sv599_initconntable : UInt32, @sv599_initfiletable : UInt32, @sv599_initsearchtable : UInt32, @sv599_alertschedule : UInt32, @sv599_errorthreshold : UInt32, @sv599_networkerrorthreshold : UInt32, @sv599_diskspacethreshold : UInt32, @sv599_reserved : UInt32, @sv599_maxlinkdelay : UInt32, @sv599_minlinkthroughput : UInt32, @sv599_linkinfovalidtime : UInt32, @sv599_scavqosinfoupdatetime : UInt32, @sv599_maxworkitemidletime : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_598
+    property sv598_maxrawworkitems : UInt32
+    property sv598_maxthreadsperqueue : UInt32
+    property sv598_producttype : UInt32
+    property sv598_serversize : UInt32
+    property sv598_connectionlessautodisc : UInt32
+    property sv598_sharingviolationretries : UInt32
+    property sv598_sharingviolationdelay : UInt32
+    property sv598_maxglobalopensearch : UInt32
+    property sv598_removeduplicatesearches : UInt32
+    property sv598_lockviolationoffset : UInt32
+    property sv598_lockviolationdelay : UInt32
+    property sv598_mdlreadswitchover : UInt32
+    property sv598_cachedopenlimit : UInt32
+    property sv598_otherqueueaffinity : UInt32
+    property sv598_restrictnullsessaccess : Win32cr::Foundation::BOOL
+    property sv598_enablewfw311directipx : Win32cr::Foundation::BOOL
+    property sv598_queuesamplesecs : UInt32
+    property sv598_balancecount : UInt32
+    property sv598_preferredaffinity : UInt32
+    property sv598_maxfreerfcbs : UInt32
+    property sv598_maxfreemfcbs : UInt32
+    property sv598_maxfreelfcbs : UInt32
+    property sv598_maxfreepagedpoolchunks : UInt32
+    property sv598_minpagedpoolchunksize : UInt32
+    property sv598_maxpagedpoolchunksize : UInt32
+    property sv598_sendsfrompreferredprocessor : Win32cr::Foundation::BOOL
+    property sv598_cacheddirectorylimit : UInt32
+    property sv598_maxcopylength : UInt32
+    property sv598_enablecompression : Win32cr::Foundation::BOOL
+    property sv598_autosharewks : Win32cr::Foundation::BOOL
+    property sv598_autoshareserver : Win32cr::Foundation::BOOL
+    property sv598_enablesecuritysignature : Win32cr::Foundation::BOOL
+    property sv598_requiresecuritysignature : Win32cr::Foundation::BOOL
+    property sv598_minclientbuffersize : UInt32
+    property sv598_serverguid : LibC::GUID
+    property sv598_ConnectionNoSessionsTimeout : UInt32
+    property sv598_IdleThreadTimeOut : UInt32
+    property sv598_enableW9xsecuritysignature : Win32cr::Foundation::BOOL
+    property sv598_enforcekerberosreauthentication : Win32cr::Foundation::BOOL
+    property sv598_disabledos : Win32cr::Foundation::BOOL
+    property sv598_lowdiskspaceminimum : UInt32
+    property sv598_disablestrictnamechecking : Win32cr::Foundation::BOOL
+    property sv598_enableauthenticateusersharing : Win32cr::Foundation::BOOL
+    def initialize(@sv598_maxrawworkitems : UInt32, @sv598_maxthreadsperqueue : UInt32, @sv598_producttype : UInt32, @sv598_serversize : UInt32, @sv598_connectionlessautodisc : UInt32, @sv598_sharingviolationretries : UInt32, @sv598_sharingviolationdelay : UInt32, @sv598_maxglobalopensearch : UInt32, @sv598_removeduplicatesearches : UInt32, @sv598_lockviolationoffset : UInt32, @sv598_lockviolationdelay : UInt32, @sv598_mdlreadswitchover : UInt32, @sv598_cachedopenlimit : UInt32, @sv598_otherqueueaffinity : UInt32, @sv598_restrictnullsessaccess : Win32cr::Foundation::BOOL, @sv598_enablewfw311directipx : Win32cr::Foundation::BOOL, @sv598_queuesamplesecs : UInt32, @sv598_balancecount : UInt32, @sv598_preferredaffinity : UInt32, @sv598_maxfreerfcbs : UInt32, @sv598_maxfreemfcbs : UInt32, @sv598_maxfreelfcbs : UInt32, @sv598_maxfreepagedpoolchunks : UInt32, @sv598_minpagedpoolchunksize : UInt32, @sv598_maxpagedpoolchunksize : UInt32, @sv598_sendsfrompreferredprocessor : Win32cr::Foundation::BOOL, @sv598_cacheddirectorylimit : UInt32, @sv598_maxcopylength : UInt32, @sv598_enablecompression : Win32cr::Foundation::BOOL, @sv598_autosharewks : Win32cr::Foundation::BOOL, @sv598_autoshareserver : Win32cr::Foundation::BOOL, @sv598_enablesecuritysignature : Win32cr::Foundation::BOOL, @sv598_requiresecuritysignature : Win32cr::Foundation::BOOL, @sv598_minclientbuffersize : UInt32, @sv598_serverguid : LibC::GUID, @sv598_ConnectionNoSessionsTimeout : UInt32, @sv598_IdleThreadTimeOut : UInt32, @sv598_enableW9xsecuritysignature : Win32cr::Foundation::BOOL, @sv598_enforcekerberosreauthentication : Win32cr::Foundation::BOOL, @sv598_disabledos : Win32cr::Foundation::BOOL, @sv598_lowdiskspaceminimum : UInt32, @sv598_disablestrictnamechecking : Win32cr::Foundation::BOOL, @sv598_enableauthenticateusersharing : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1005
+    property sv1005_comment : Win32cr::Foundation::PWSTR
+    def initialize(@sv1005_comment : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1107
+    property sv1107_users : UInt32
+    def initialize(@sv1107_users : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1010
+    property sv1010_disc : Int32
+    def initialize(@sv1010_disc : Int32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1016
+    property sv1016_hidden : Win32cr::NetworkManagement::NetManagement::SERVER_INFO_HIDDEN
+    def initialize(@sv1016_hidden : Win32cr::NetworkManagement::NetManagement::SERVER_INFO_HIDDEN)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1017
+    property sv1017_announce : UInt32
+    def initialize(@sv1017_announce : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1018
+    property sv1018_anndelta : UInt32
+    def initialize(@sv1018_anndelta : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1501
+    property sv1501_sessopens : UInt32
+    def initialize(@sv1501_sessopens : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1502
+    property sv1502_sessvcs : UInt32
+    def initialize(@sv1502_sessvcs : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1503
+    property sv1503_opensearch : UInt32
+    def initialize(@sv1503_opensearch : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1506
+    property sv1506_maxworkitems : UInt32
+    def initialize(@sv1506_maxworkitems : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1509
+    property sv1509_maxrawbuflen : UInt32
+    def initialize(@sv1509_maxrawbuflen : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1510
+    property sv1510_sessusers : UInt32
+    def initialize(@sv1510_sessusers : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1511
+    property sv1511_sessconns : UInt32
+    def initialize(@sv1511_sessconns : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1512
+    property sv1512_maxnonpagedmemoryusage : UInt32
+    def initialize(@sv1512_maxnonpagedmemoryusage : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1513
+    property sv1513_maxpagedmemoryusage : UInt32
+    def initialize(@sv1513_maxpagedmemoryusage : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1514
+    property sv1514_enablesoftcompat : Win32cr::Foundation::BOOL
+    def initialize(@sv1514_enablesoftcompat : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1515
+    property sv1515_enableforcedlogoff : Win32cr::Foundation::BOOL
+    def initialize(@sv1515_enableforcedlogoff : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1516
+    property sv1516_timesource : Win32cr::Foundation::BOOL
+    def initialize(@sv1516_timesource : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1518
+    property sv1518_lmannounce : Win32cr::Foundation::BOOL
+    def initialize(@sv1518_lmannounce : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1520
+    property sv1520_maxcopyreadlen : UInt32
+    def initialize(@sv1520_maxcopyreadlen : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1521
+    property sv1521_maxcopywritelen : UInt32
+    def initialize(@sv1521_maxcopywritelen : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1522
+    property sv1522_minkeepsearch : UInt32
+    def initialize(@sv1522_minkeepsearch : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1523
+    property sv1523_maxkeepsearch : UInt32
+    def initialize(@sv1523_maxkeepsearch : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1524
+    property sv1524_minkeepcomplsearch : UInt32
+    def initialize(@sv1524_minkeepcomplsearch : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1525
+    property sv1525_maxkeepcomplsearch : UInt32
+    def initialize(@sv1525_maxkeepcomplsearch : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1528
+    property sv1528_scavtimeout : UInt32
+    def initialize(@sv1528_scavtimeout : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1529
+    property sv1529_minrcvqueue : UInt32
+    def initialize(@sv1529_minrcvqueue : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1530
+    property sv1530_minfreeworkitems : UInt32
+    def initialize(@sv1530_minfreeworkitems : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1533
+    property sv1533_maxmpxct : UInt32
+    def initialize(@sv1533_maxmpxct : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1534
+    property sv1534_oplockbreakwait : UInt32
+    def initialize(@sv1534_oplockbreakwait : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1535
+    property sv1535_oplockbreakresponsewait : UInt32
+    def initialize(@sv1535_oplockbreakresponsewait : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1536
+    property sv1536_enableoplocks : Win32cr::Foundation::BOOL
+    def initialize(@sv1536_enableoplocks : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1537
+    property sv1537_enableoplockforceclose : Win32cr::Foundation::BOOL
+    def initialize(@sv1537_enableoplockforceclose : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1538
+    property sv1538_enablefcbopens : Win32cr::Foundation::BOOL
+    def initialize(@sv1538_enablefcbopens : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1539
+    property sv1539_enableraw : Win32cr::Foundation::BOOL
+    def initialize(@sv1539_enableraw : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1540
+    property sv1540_enablesharednetdrives : Win32cr::Foundation::BOOL
+    def initialize(@sv1540_enablesharednetdrives : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1541
+    property sv1541_minfreeconnections : Win32cr::Foundation::BOOL
+    def initialize(@sv1541_minfreeconnections : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1542
+    property sv1542_maxfreeconnections : Win32cr::Foundation::BOOL
+    def initialize(@sv1542_maxfreeconnections : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1543
+    property sv1543_initsesstable : UInt32
+    def initialize(@sv1543_initsesstable : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1544
+    property sv1544_initconntable : UInt32
+    def initialize(@sv1544_initconntable : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1545
+    property sv1545_initfiletable : UInt32
+    def initialize(@sv1545_initfiletable : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1546
+    property sv1546_initsearchtable : UInt32
+    def initialize(@sv1546_initsearchtable : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1547
+    property sv1547_alertschedule : UInt32
+    def initialize(@sv1547_alertschedule : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1548
+    property sv1548_errorthreshold : UInt32
+    def initialize(@sv1548_errorthreshold : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1549
+    property sv1549_networkerrorthreshold : UInt32
+    def initialize(@sv1549_networkerrorthreshold : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1550
+    property sv1550_diskspacethreshold : UInt32
+    def initialize(@sv1550_diskspacethreshold : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1552
+    property sv1552_maxlinkdelay : UInt32
+    def initialize(@sv1552_maxlinkdelay : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1553
+    property sv1553_minlinkthroughput : UInt32
+    def initialize(@sv1553_minlinkthroughput : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1554
+    property sv1554_linkinfovalidtime : UInt32
+    def initialize(@sv1554_linkinfovalidtime : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1555
+    property sv1555_scavqosinfoupdatetime : UInt32
+    def initialize(@sv1555_scavqosinfoupdatetime : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1556
+    property sv1556_maxworkitemidletime : UInt32
+    def initialize(@sv1556_maxworkitemidletime : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1557
+    property sv1557_maxrawworkitems : UInt32
+    def initialize(@sv1557_maxrawworkitems : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1560
+    property sv1560_producttype : UInt32
+    def initialize(@sv1560_producttype : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1561
+    property sv1561_serversize : UInt32
+    def initialize(@sv1561_serversize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1562
+    property sv1562_connectionlessautodisc : UInt32
+    def initialize(@sv1562_connectionlessautodisc : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1563
+    property sv1563_sharingviolationretries : UInt32
+    def initialize(@sv1563_sharingviolationretries : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1564
+    property sv1564_sharingviolationdelay : UInt32
+    def initialize(@sv1564_sharingviolationdelay : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1565
+    property sv1565_maxglobalopensearch : UInt32
+    def initialize(@sv1565_maxglobalopensearch : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1566
+    property sv1566_removeduplicatesearches : Win32cr::Foundation::BOOL
+    def initialize(@sv1566_removeduplicatesearches : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1567
+    property sv1567_lockviolationretries : UInt32
+    def initialize(@sv1567_lockviolationretries : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1568
+    property sv1568_lockviolationoffset : UInt32
+    def initialize(@sv1568_lockviolationoffset : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1569
+    property sv1569_lockviolationdelay : UInt32
+    def initialize(@sv1569_lockviolationdelay : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1570
+    property sv1570_mdlreadswitchover : UInt32
+    def initialize(@sv1570_mdlreadswitchover : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1571
+    property sv1571_cachedopenlimit : UInt32
+    def initialize(@sv1571_cachedopenlimit : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1572
+    property sv1572_criticalthreads : UInt32
+    def initialize(@sv1572_criticalthreads : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1573
+    property sv1573_restrictnullsessaccess : UInt32
+    def initialize(@sv1573_restrictnullsessaccess : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1574
+    property sv1574_enablewfw311directipx : UInt32
+    def initialize(@sv1574_enablewfw311directipx : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1575
+    property sv1575_otherqueueaffinity : UInt32
+    def initialize(@sv1575_otherqueueaffinity : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1576
+    property sv1576_queuesamplesecs : UInt32
+    def initialize(@sv1576_queuesamplesecs : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1577
+    property sv1577_balancecount : UInt32
+    def initialize(@sv1577_balancecount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1578
+    property sv1578_preferredaffinity : UInt32
+    def initialize(@sv1578_preferredaffinity : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1579
+    property sv1579_maxfreerfcbs : UInt32
+    def initialize(@sv1579_maxfreerfcbs : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1580
+    property sv1580_maxfreemfcbs : UInt32
+    def initialize(@sv1580_maxfreemfcbs : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1581
+    property sv1581_maxfreemlcbs : UInt32
+    def initialize(@sv1581_maxfreemlcbs : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1582
+    property sv1582_maxfreepagedpoolchunks : UInt32
+    def initialize(@sv1582_maxfreepagedpoolchunks : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1583
+    property sv1583_minpagedpoolchunksize : UInt32
+    def initialize(@sv1583_minpagedpoolchunksize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1584
+    property sv1584_maxpagedpoolchunksize : UInt32
+    def initialize(@sv1584_maxpagedpoolchunksize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1585
+    property sv1585_sendsfrompreferredprocessor : Win32cr::Foundation::BOOL
+    def initialize(@sv1585_sendsfrompreferredprocessor : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1586
+    property sv1586_maxthreadsperqueue : UInt32
+    def initialize(@sv1586_maxthreadsperqueue : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1587
+    property sv1587_cacheddirectorylimit : UInt32
+    def initialize(@sv1587_cacheddirectorylimit : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1588
+    property sv1588_maxcopylength : UInt32
+    def initialize(@sv1588_maxcopylength : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1590
+    property sv1590_enablecompression : UInt32
+    def initialize(@sv1590_enablecompression : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1591
+    property sv1591_autosharewks : UInt32
+    def initialize(@sv1591_autosharewks : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1592
+    property sv1592_autosharewks : UInt32
+    def initialize(@sv1592_autosharewks : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1593
+    property sv1593_enablesecuritysignature : UInt32
+    def initialize(@sv1593_enablesecuritysignature : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1594
+    property sv1594_requiresecuritysignature : UInt32
+    def initialize(@sv1594_requiresecuritysignature : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1595
+    property sv1595_minclientbuffersize : UInt32
+    def initialize(@sv1595_minclientbuffersize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1596
+    property sv1596_ConnectionNoSessionsTimeout : UInt32
+    def initialize(@sv1596_ConnectionNoSessionsTimeout : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1597
+    property sv1597_IdleThreadTimeOut : UInt32
+    def initialize(@sv1597_IdleThreadTimeOut : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1598
+    property sv1598_enableW9xsecuritysignature : UInt32
+    def initialize(@sv1598_enableW9xsecuritysignature : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1599
+    property sv1598_enforcekerberosreauthentication : Win32cr::Foundation::BOOLEAN
+    def initialize(@sv1598_enforcekerberosreauthentication : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1600
+    property sv1598_disabledos : Win32cr::Foundation::BOOLEAN
+    def initialize(@sv1598_disabledos : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1601
+    property sv1598_lowdiskspaceminimum : UInt32
+    def initialize(@sv1598_lowdiskspaceminimum : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_INFO_1602
+    property sv_1598_disablestrictnamechecking : Win32cr::Foundation::BOOL
+    def initialize(@sv_1598_disablestrictnamechecking : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_TRANSPORT_INFO_0
+    property svti0_numberofvcs : UInt32
+    property svti0_transportname : Win32cr::Foundation::PWSTR
+    property svti0_transportaddress : UInt8*
+    property svti0_transportaddresslength : UInt32
+    property svti0_networkaddress : Win32cr::Foundation::PWSTR
+    def initialize(@svti0_numberofvcs : UInt32, @svti0_transportname : Win32cr::Foundation::PWSTR, @svti0_transportaddress : UInt8*, @svti0_transportaddresslength : UInt32, @svti0_networkaddress : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_TRANSPORT_INFO_1
+    property svti1_numberofvcs : UInt32
+    property svti1_transportname : Win32cr::Foundation::PWSTR
+    property svti1_transportaddress : UInt8*
+    property svti1_transportaddresslength : UInt32
+    property svti1_networkaddress : Win32cr::Foundation::PWSTR
+    property svti1_domain : Win32cr::Foundation::PWSTR
+    def initialize(@svti1_numberofvcs : UInt32, @svti1_transportname : Win32cr::Foundation::PWSTR, @svti1_transportaddress : UInt8*, @svti1_transportaddresslength : UInt32, @svti1_networkaddress : Win32cr::Foundation::PWSTR, @svti1_domain : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_TRANSPORT_INFO_2
+    property svti2_numberofvcs : UInt32
+    property svti2_transportname : Win32cr::Foundation::PWSTR
+    property svti2_transportaddress : UInt8*
+    property svti2_transportaddresslength : UInt32
+    property svti2_networkaddress : Win32cr::Foundation::PWSTR
+    property svti2_domain : Win32cr::Foundation::PWSTR
+    property svti2_flags : UInt32
+    def initialize(@svti2_numberofvcs : UInt32, @svti2_transportname : Win32cr::Foundation::PWSTR, @svti2_transportaddress : UInt8*, @svti2_transportaddresslength : UInt32, @svti2_networkaddress : Win32cr::Foundation::PWSTR, @svti2_domain : Win32cr::Foundation::PWSTR, @svti2_flags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVER_TRANSPORT_INFO_3
+    property svti3_numberofvcs : UInt32
+    property svti3_transportname : Win32cr::Foundation::PWSTR
+    property svti3_transportaddress : UInt8*
+    property svti3_transportaddresslength : UInt32
+    property svti3_networkaddress : Win32cr::Foundation::PWSTR
+    property svti3_domain : Win32cr::Foundation::PWSTR
+    property svti3_flags : UInt32
+    property svti3_passwordlength : UInt32
+    property svti3_password : UInt8[256]
+    def initialize(@svti3_numberofvcs : UInt32, @svti3_transportname : Win32cr::Foundation::PWSTR, @svti3_transportaddress : UInt8*, @svti3_transportaddresslength : UInt32, @svti3_networkaddress : Win32cr::Foundation::PWSTR, @svti3_domain : Win32cr::Foundation::PWSTR, @svti3_flags : UInt32, @svti3_passwordlength : UInt32, @svti3_password : UInt8[256])
+    end
+  end
+
+  @[Extern]
+  struct SERVICE_INFO_0
+    property svci0_name : Win32cr::Foundation::PWSTR
+    def initialize(@svci0_name : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct SERVICE_INFO_1
+    property svci1_name : Win32cr::Foundation::PWSTR
+    property svci1_status : UInt32
+    property svci1_code : UInt32
+    property svci1_pid : UInt32
+    def initialize(@svci1_name : Win32cr::Foundation::PWSTR, @svci1_status : UInt32, @svci1_code : UInt32, @svci1_pid : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SERVICE_INFO_2
+    property svci2_name : Win32cr::Foundation::PWSTR
+    property svci2_status : UInt32
+    property svci2_code : UInt32
+    property svci2_pid : UInt32
+    property svci2_text : Win32cr::Foundation::PWSTR
+    property svci2_specific_error : UInt32
+    property svci2_display_name : Win32cr::Foundation::PWSTR
+    def initialize(@svci2_name : Win32cr::Foundation::PWSTR, @svci2_status : UInt32, @svci2_code : UInt32, @svci2_pid : UInt32, @svci2_text : Win32cr::Foundation::PWSTR, @svci2_specific_error : UInt32, @svci2_display_name : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct USE_INFO_0
+    property ui0_local : Win32cr::Foundation::PWSTR
+    property ui0_remote : Win32cr::Foundation::PWSTR
+    def initialize(@ui0_local : Win32cr::Foundation::PWSTR, @ui0_remote : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct USE_INFO_1
+    property ui1_local : Win32cr::Foundation::PWSTR
+    property ui1_remote : Win32cr::Foundation::PWSTR
+    property ui1_password : Win32cr::Foundation::PWSTR
+    property ui1_status : UInt32
+    property ui1_asg_type : Win32cr::NetworkManagement::NetManagement::USE_INFO_ASG_TYPE
+    property ui1_refcount : UInt32
+    property ui1_usecount : UInt32
+    def initialize(@ui1_local : Win32cr::Foundation::PWSTR, @ui1_remote : Win32cr::Foundation::PWSTR, @ui1_password : Win32cr::Foundation::PWSTR, @ui1_status : UInt32, @ui1_asg_type : Win32cr::NetworkManagement::NetManagement::USE_INFO_ASG_TYPE, @ui1_refcount : UInt32, @ui1_usecount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USE_INFO_2
+    property ui2_local : Win32cr::Foundation::PWSTR
+    property ui2_remote : Win32cr::Foundation::PWSTR
+    property ui2_password : Win32cr::Foundation::PWSTR
+    property ui2_status : UInt32
+    property ui2_asg_type : Win32cr::NetworkManagement::NetManagement::USE_INFO_ASG_TYPE
+    property ui2_refcount : UInt32
+    property ui2_usecount : UInt32
+    property ui2_username : Win32cr::Foundation::PWSTR
+    property ui2_domainname : Win32cr::Foundation::PWSTR
+    def initialize(@ui2_local : Win32cr::Foundation::PWSTR, @ui2_remote : Win32cr::Foundation::PWSTR, @ui2_password : Win32cr::Foundation::PWSTR, @ui2_status : UInt32, @ui2_asg_type : Win32cr::NetworkManagement::NetManagement::USE_INFO_ASG_TYPE, @ui2_refcount : UInt32, @ui2_usecount : UInt32, @ui2_username : Win32cr::Foundation::PWSTR, @ui2_domainname : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct USE_INFO_3
+    property ui3_ui2 : Win32cr::NetworkManagement::NetManagement::USE_INFO_2
+    property ui3_flags : UInt32
+    def initialize(@ui3_ui2 : Win32cr::NetworkManagement::NetManagement::USE_INFO_2, @ui3_flags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USE_INFO_4
+    property ui4_ui3 : Win32cr::NetworkManagement::NetManagement::USE_INFO_3
+    property ui4_auth_identity_length : UInt32
+    property ui4_auth_identity : UInt8*
+    def initialize(@ui4_ui3 : Win32cr::NetworkManagement::NetManagement::USE_INFO_3, @ui4_auth_identity_length : UInt32, @ui4_auth_identity : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct USE_INFO_5
+    property ui4_ui3 : Win32cr::NetworkManagement::NetManagement::USE_INFO_3
+    property ui4_auth_identity_length : UInt32
+    property ui4_auth_identity : UInt8*
+    property ui5_security_descriptor_length : UInt32
+    property ui5_security_descriptor : UInt8*
+    property ui5_use_options_length : UInt32
+    property ui5_use_options : UInt8*
+    def initialize(@ui4_ui3 : Win32cr::NetworkManagement::NetManagement::USE_INFO_3, @ui4_auth_identity_length : UInt32, @ui4_auth_identity : UInt8*, @ui5_security_descriptor_length : UInt32, @ui5_security_descriptor : UInt8*, @ui5_use_options_length : UInt32, @ui5_use_options : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct USE_OPTION_GENERIC
+    property tag : UInt32
+    property length : UInt16
+    property reserved : UInt16
+    def initialize(@tag : UInt32, @length : UInt16, @reserved : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct USE_OPTION_DEFERRED_CONNECTION_PARAMETERS
+    property tag : UInt32
+    property length : UInt16
+    property reserved : UInt16
+    def initialize(@tag : UInt32, @length : UInt16, @reserved : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct TRANSPORT_INFO
+    property type__ : Win32cr::NetworkManagement::NetManagement::TRANSPORT_TYPE
+    property skip_certificate_check : Win32cr::Foundation::BOOLEAN
+    def initialize(@type__ : Win32cr::NetworkManagement::NetManagement::TRANSPORT_TYPE, @skip_certificate_check : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct USE_OPTION_TRANSPORT_PARAMETERS
+    property tag : UInt32
+    property length : UInt16
+    property reserved : UInt16
+    def initialize(@tag : UInt32, @length : UInt16, @reserved : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct SMB_COMPRESSION_INFO
+    property switch : Win32cr::Foundation::BOOLEAN
+    property reserved1 : UInt8
+    property reserved2 : UInt16
+    property reserved3 : UInt32
+    def initialize(@switch : Win32cr::Foundation::BOOLEAN, @reserved1 : UInt8, @reserved2 : UInt16, @reserved3 : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SMB_USE_OPTION_COMPRESSION_PARAMETERS
+    property tag : UInt32
+    property length : UInt16
+    property reserved : UInt16
+    def initialize(@tag : UInt32, @length : UInt16, @reserved : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct SMB_TREE_CONNECT_PARAMETERS
+    property ea_buffer_offset : UInt32
+    property ea_buffer_len : UInt32
+    property create_options : UInt32
+    property tree_connect_attributes : UInt32
+    def initialize(@ea_buffer_offset : UInt32, @ea_buffer_len : UInt32, @create_options : UInt32, @tree_connect_attributes : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USE_OPTION_PROPERTIES
+    property tag : UInt32
+    property pInfo : Void*
+    property length : LibC::UIntPtrT
+    def initialize(@tag : UInt32, @pInfo : Void*, @length : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_100
+    property wki100_platform_id : UInt32
+    property wki100_computername : Win32cr::Foundation::PWSTR
+    property wki100_langroup : Win32cr::Foundation::PWSTR
+    property wki100_ver_major : UInt32
+    property wki100_ver_minor : UInt32
+    def initialize(@wki100_platform_id : UInt32, @wki100_computername : Win32cr::Foundation::PWSTR, @wki100_langroup : Win32cr::Foundation::PWSTR, @wki100_ver_major : UInt32, @wki100_ver_minor : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_101
+    property wki101_platform_id : UInt32
+    property wki101_computername : Win32cr::Foundation::PWSTR
+    property wki101_langroup : Win32cr::Foundation::PWSTR
+    property wki101_ver_major : UInt32
+    property wki101_ver_minor : UInt32
+    property wki101_lanroot : Win32cr::Foundation::PWSTR
+    def initialize(@wki101_platform_id : UInt32, @wki101_computername : Win32cr::Foundation::PWSTR, @wki101_langroup : Win32cr::Foundation::PWSTR, @wki101_ver_major : UInt32, @wki101_ver_minor : UInt32, @wki101_lanroot : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_102
+    property wki102_platform_id : UInt32
+    property wki102_computername : Win32cr::Foundation::PWSTR
+    property wki102_langroup : Win32cr::Foundation::PWSTR
+    property wki102_ver_major : UInt32
+    property wki102_ver_minor : UInt32
+    property wki102_lanroot : Win32cr::Foundation::PWSTR
+    property wki102_logged_on_users : UInt32
+    def initialize(@wki102_platform_id : UInt32, @wki102_computername : Win32cr::Foundation::PWSTR, @wki102_langroup : Win32cr::Foundation::PWSTR, @wki102_ver_major : UInt32, @wki102_ver_minor : UInt32, @wki102_lanroot : Win32cr::Foundation::PWSTR, @wki102_logged_on_users : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_302
+    property wki302_char_wait : UInt32
+    property wki302_collection_time : UInt32
+    property wki302_maximum_collection_count : UInt32
+    property wki302_keep_conn : UInt32
+    property wki302_keep_search : UInt32
+    property wki302_max_cmds : UInt32
+    property wki302_num_work_buf : UInt32
+    property wki302_siz_work_buf : UInt32
+    property wki302_max_wrk_cache : UInt32
+    property wki302_sess_timeout : UInt32
+    property wki302_siz_error : UInt32
+    property wki302_num_alerts : UInt32
+    property wki302_num_services : UInt32
+    property wki302_errlog_sz : UInt32
+    property wki302_print_buf_time : UInt32
+    property wki302_num_char_buf : UInt32
+    property wki302_siz_char_buf : UInt32
+    property wki302_wrk_heuristics : Win32cr::Foundation::PWSTR
+    property wki302_mailslots : UInt32
+    property wki302_num_dgram_buf : UInt32
+    def initialize(@wki302_char_wait : UInt32, @wki302_collection_time : UInt32, @wki302_maximum_collection_count : UInt32, @wki302_keep_conn : UInt32, @wki302_keep_search : UInt32, @wki302_max_cmds : UInt32, @wki302_num_work_buf : UInt32, @wki302_siz_work_buf : UInt32, @wki302_max_wrk_cache : UInt32, @wki302_sess_timeout : UInt32, @wki302_siz_error : UInt32, @wki302_num_alerts : UInt32, @wki302_num_services : UInt32, @wki302_errlog_sz : UInt32, @wki302_print_buf_time : UInt32, @wki302_num_char_buf : UInt32, @wki302_siz_char_buf : UInt32, @wki302_wrk_heuristics : Win32cr::Foundation::PWSTR, @wki302_mailslots : UInt32, @wki302_num_dgram_buf : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_402
+    property wki402_char_wait : UInt32
+    property wki402_collection_time : UInt32
+    property wki402_maximum_collection_count : UInt32
+    property wki402_keep_conn : UInt32
+    property wki402_keep_search : UInt32
+    property wki402_max_cmds : UInt32
+    property wki402_num_work_buf : UInt32
+    property wki402_siz_work_buf : UInt32
+    property wki402_max_wrk_cache : UInt32
+    property wki402_sess_timeout : UInt32
+    property wki402_siz_error : UInt32
+    property wki402_num_alerts : UInt32
+    property wki402_num_services : UInt32
+    property wki402_errlog_sz : UInt32
+    property wki402_print_buf_time : UInt32
+    property wki402_num_char_buf : UInt32
+    property wki402_siz_char_buf : UInt32
+    property wki402_wrk_heuristics : Win32cr::Foundation::PWSTR
+    property wki402_mailslots : UInt32
+    property wki402_num_dgram_buf : UInt32
+    property wki402_max_threads : UInt32
+    def initialize(@wki402_char_wait : UInt32, @wki402_collection_time : UInt32, @wki402_maximum_collection_count : UInt32, @wki402_keep_conn : UInt32, @wki402_keep_search : UInt32, @wki402_max_cmds : UInt32, @wki402_num_work_buf : UInt32, @wki402_siz_work_buf : UInt32, @wki402_max_wrk_cache : UInt32, @wki402_sess_timeout : UInt32, @wki402_siz_error : UInt32, @wki402_num_alerts : UInt32, @wki402_num_services : UInt32, @wki402_errlog_sz : UInt32, @wki402_print_buf_time : UInt32, @wki402_num_char_buf : UInt32, @wki402_siz_char_buf : UInt32, @wki402_wrk_heuristics : Win32cr::Foundation::PWSTR, @wki402_mailslots : UInt32, @wki402_num_dgram_buf : UInt32, @wki402_max_threads : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_502
+    property wki502_char_wait : UInt32
+    property wki502_collection_time : UInt32
+    property wki502_maximum_collection_count : UInt32
+    property wki502_keep_conn : UInt32
+    property wki502_max_cmds : UInt32
+    property wki502_sess_timeout : UInt32
+    property wki502_siz_char_buf : UInt32
+    property wki502_max_threads : UInt32
+    property wki502_lock_quota : UInt32
+    property wki502_lock_increment : UInt32
+    property wki502_lock_maximum : UInt32
+    property wki502_pipe_increment : UInt32
+    property wki502_pipe_maximum : UInt32
+    property wki502_cache_file_timeout : UInt32
+    property wki502_dormant_file_limit : UInt32
+    property wki502_read_ahead_throughput : UInt32
+    property wki502_num_mailslot_buffers : UInt32
+    property wki502_num_srv_announce_buffers : UInt32
+    property wki502_max_illegal_datagram_events : UInt32
+    property wki502_illegal_datagram_event_reset_frequency : UInt32
+    property wki502_log_election_packets : Win32cr::Foundation::BOOL
+    property wki502_use_opportunistic_locking : Win32cr::Foundation::BOOL
+    property wki502_use_unlock_behind : Win32cr::Foundation::BOOL
+    property wki502_use_close_behind : Win32cr::Foundation::BOOL
+    property wki502_buf_named_pipes : Win32cr::Foundation::BOOL
+    property wki502_use_lock_read_unlock : Win32cr::Foundation::BOOL
+    property wki502_utilize_nt_caching : Win32cr::Foundation::BOOL
+    property wki502_use_raw_read : Win32cr::Foundation::BOOL
+    property wki502_use_raw_write : Win32cr::Foundation::BOOL
+    property wki502_use_write_raw_data : Win32cr::Foundation::BOOL
+    property wki502_use_encryption : Win32cr::Foundation::BOOL
+    property wki502_buf_files_deny_write : Win32cr::Foundation::BOOL
+    property wki502_buf_read_only_files : Win32cr::Foundation::BOOL
+    property wki502_force_core_create_mode : Win32cr::Foundation::BOOL
+    property wki502_use_512_byte_max_transfer : Win32cr::Foundation::BOOL
+    def initialize(@wki502_char_wait : UInt32, @wki502_collection_time : UInt32, @wki502_maximum_collection_count : UInt32, @wki502_keep_conn : UInt32, @wki502_max_cmds : UInt32, @wki502_sess_timeout : UInt32, @wki502_siz_char_buf : UInt32, @wki502_max_threads : UInt32, @wki502_lock_quota : UInt32, @wki502_lock_increment : UInt32, @wki502_lock_maximum : UInt32, @wki502_pipe_increment : UInt32, @wki502_pipe_maximum : UInt32, @wki502_cache_file_timeout : UInt32, @wki502_dormant_file_limit : UInt32, @wki502_read_ahead_throughput : UInt32, @wki502_num_mailslot_buffers : UInt32, @wki502_num_srv_announce_buffers : UInt32, @wki502_max_illegal_datagram_events : UInt32, @wki502_illegal_datagram_event_reset_frequency : UInt32, @wki502_log_election_packets : Win32cr::Foundation::BOOL, @wki502_use_opportunistic_locking : Win32cr::Foundation::BOOL, @wki502_use_unlock_behind : Win32cr::Foundation::BOOL, @wki502_use_close_behind : Win32cr::Foundation::BOOL, @wki502_buf_named_pipes : Win32cr::Foundation::BOOL, @wki502_use_lock_read_unlock : Win32cr::Foundation::BOOL, @wki502_utilize_nt_caching : Win32cr::Foundation::BOOL, @wki502_use_raw_read : Win32cr::Foundation::BOOL, @wki502_use_raw_write : Win32cr::Foundation::BOOL, @wki502_use_write_raw_data : Win32cr::Foundation::BOOL, @wki502_use_encryption : Win32cr::Foundation::BOOL, @wki502_buf_files_deny_write : Win32cr::Foundation::BOOL, @wki502_buf_read_only_files : Win32cr::Foundation::BOOL, @wki502_force_core_create_mode : Win32cr::Foundation::BOOL, @wki502_use_512_byte_max_transfer : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1010
+    property wki1010_char_wait : UInt32
+    def initialize(@wki1010_char_wait : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1011
+    property wki1011_collection_time : UInt32
+    def initialize(@wki1011_collection_time : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1012
+    property wki1012_maximum_collection_count : UInt32
+    def initialize(@wki1012_maximum_collection_count : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1027
+    property wki1027_errlog_sz : UInt32
+    def initialize(@wki1027_errlog_sz : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1028
+    property wki1028_print_buf_time : UInt32
+    def initialize(@wki1028_print_buf_time : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1032
+    property wki1032_wrk_heuristics : UInt32
+    def initialize(@wki1032_wrk_heuristics : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1013
+    property wki1013_keep_conn : UInt32
+    def initialize(@wki1013_keep_conn : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1018
+    property wki1018_sess_timeout : UInt32
+    def initialize(@wki1018_sess_timeout : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1023
+    property wki1023_siz_char_buf : UInt32
+    def initialize(@wki1023_siz_char_buf : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1033
+    property wki1033_max_threads : UInt32
+    def initialize(@wki1033_max_threads : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1041
+    property wki1041_lock_quota : UInt32
+    def initialize(@wki1041_lock_quota : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1042
+    property wki1042_lock_increment : UInt32
+    def initialize(@wki1042_lock_increment : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1043
+    property wki1043_lock_maximum : UInt32
+    def initialize(@wki1043_lock_maximum : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1044
+    property wki1044_pipe_increment : UInt32
+    def initialize(@wki1044_pipe_increment : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1045
+    property wki1045_pipe_maximum : UInt32
+    def initialize(@wki1045_pipe_maximum : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1046
+    property wki1046_dormant_file_limit : UInt32
+    def initialize(@wki1046_dormant_file_limit : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1047
+    property wki1047_cache_file_timeout : UInt32
+    def initialize(@wki1047_cache_file_timeout : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1048
+    property wki1048_use_opportunistic_locking : Win32cr::Foundation::BOOL
+    def initialize(@wki1048_use_opportunistic_locking : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1049
+    property wki1049_use_unlock_behind : Win32cr::Foundation::BOOL
+    def initialize(@wki1049_use_unlock_behind : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1050
+    property wki1050_use_close_behind : Win32cr::Foundation::BOOL
+    def initialize(@wki1050_use_close_behind : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1051
+    property wki1051_buf_named_pipes : Win32cr::Foundation::BOOL
+    def initialize(@wki1051_buf_named_pipes : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1052
+    property wki1052_use_lock_read_unlock : Win32cr::Foundation::BOOL
+    def initialize(@wki1052_use_lock_read_unlock : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1053
+    property wki1053_utilize_nt_caching : Win32cr::Foundation::BOOL
+    def initialize(@wki1053_utilize_nt_caching : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1054
+    property wki1054_use_raw_read : Win32cr::Foundation::BOOL
+    def initialize(@wki1054_use_raw_read : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1055
+    property wki1055_use_raw_write : Win32cr::Foundation::BOOL
+    def initialize(@wki1055_use_raw_write : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1056
+    property wki1056_use_write_raw_data : Win32cr::Foundation::BOOL
+    def initialize(@wki1056_use_write_raw_data : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1057
+    property wki1057_use_encryption : Win32cr::Foundation::BOOL
+    def initialize(@wki1057_use_encryption : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1058
+    property wki1058_buf_files_deny_write : Win32cr::Foundation::BOOL
+    def initialize(@wki1058_buf_files_deny_write : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1059
+    property wki1059_buf_read_only_files : Win32cr::Foundation::BOOL
+    def initialize(@wki1059_buf_read_only_files : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1060
+    property wki1060_force_core_create_mode : Win32cr::Foundation::BOOL
+    def initialize(@wki1060_force_core_create_mode : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1061
+    property wki1061_use_512_byte_max_transfer : Win32cr::Foundation::BOOL
+    def initialize(@wki1061_use_512_byte_max_transfer : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_INFO_1062
+    property wki1062_read_ahead_throughput : UInt32
+    def initialize(@wki1062_read_ahead_throughput : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_USER_INFO_0
+    property wkui0_username : Win32cr::Foundation::PWSTR
+    def initialize(@wkui0_username : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_USER_INFO_1
+    property wkui1_username : Win32cr::Foundation::PWSTR
+    property wkui1_logon_domain : Win32cr::Foundation::PWSTR
+    property wkui1_oth_domains : Win32cr::Foundation::PWSTR
+    property wkui1_logon_server : Win32cr::Foundation::PWSTR
+    def initialize(@wkui1_username : Win32cr::Foundation::PWSTR, @wkui1_logon_domain : Win32cr::Foundation::PWSTR, @wkui1_oth_domains : Win32cr::Foundation::PWSTR, @wkui1_logon_server : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_USER_INFO_1101
+    property wkui1101_oth_domains : Win32cr::Foundation::PWSTR
+    def initialize(@wkui1101_oth_domains : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct WKSTA_TRANSPORT_INFO_0
+    property wkti0_quality_of_service : UInt32
+    property wkti0_number_of_vcs : UInt32
+    property wkti0_transport_name : Win32cr::Foundation::PWSTR
+    property wkti0_transport_address : Win32cr::Foundation::PWSTR
+    property wkti0_wan_ish : Win32cr::Foundation::BOOL
+    def initialize(@wkti0_quality_of_service : UInt32, @wkti0_number_of_vcs : UInt32, @wkti0_transport_name : Win32cr::Foundation::PWSTR, @wkti0_transport_address : Win32cr::Foundation::PWSTR, @wkti0_wan_ish : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct ERROR_LOG
+    property el_len : UInt32
+    property el_reserved : UInt32
+    property el_time : UInt32
+    property el_error : UInt32
+    property el_name : Win32cr::Foundation::PWSTR
+    property el_text : Win32cr::Foundation::PWSTR
+    property el_data : UInt8*
+    property el_data_size : UInt32
+    property el_nstrings : UInt32
+    def initialize(@el_len : UInt32, @el_reserved : UInt32, @el_time : UInt32, @el_error : UInt32, @el_name : Win32cr::Foundation::PWSTR, @el_text : Win32cr::Foundation::PWSTR, @el_data : UInt8*, @el_data_size : UInt32, @el_nstrings : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct HLOG
+    property time : UInt32
+    property last_flags : UInt32
+    property offset : UInt32
+    property rec_offset : UInt32
+    def initialize(@time : UInt32, @last_flags : UInt32, @offset : UInt32, @rec_offset : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CONFIG_INFO_0
+    property cfgi0_key : Win32cr::Foundation::PWSTR
+    property cfgi0_data : Win32cr::Foundation::PWSTR
+    def initialize(@cfgi0_key : Win32cr::Foundation::PWSTR, @cfgi0_data : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct AUDIT_ENTRY
+    property ae_len : UInt32
+    property ae_reserved : UInt32
+    property ae_time : UInt32
+    property ae_type : UInt32
+    property ae_data_offset : UInt32
+    property ae_data_size : UInt32
+    def initialize(@ae_len : UInt32, @ae_reserved : UInt32, @ae_time : UInt32, @ae_type : UInt32, @ae_data_offset : UInt32, @ae_data_size : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct AE_SRVSTATUS
+    property ae_sv_status : UInt32
+    def initialize(@ae_sv_status : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct AE_SESSLOGON
+    property ae_so_compname : UInt32
+    property ae_so_username : UInt32
+    property ae_so_privilege : UInt32
+    def initialize(@ae_so_compname : UInt32, @ae_so_username : UInt32, @ae_so_privilege : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct AE_SESSLOGOFF
+    property ae_sf_compname : UInt32
+    property ae_sf_username : UInt32
+    property ae_sf_reason : UInt32
+    def initialize(@ae_sf_compname : UInt32, @ae_sf_username : UInt32, @ae_sf_reason : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct AE_SESSPWERR
+    property ae_sp_compname : UInt32
+    property ae_sp_username : UInt32
+    def initialize(@ae_sp_compname : UInt32, @ae_sp_username : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct AE_CONNSTART
+    property ae_ct_compname : UInt32
+    property ae_ct_username : UInt32
+    property ae_ct_netname : UInt32
+    property ae_ct_connid : UInt32
+    def initialize(@ae_ct_compname : UInt32, @ae_ct_username : UInt32, @ae_ct_netname : UInt32, @ae_ct_connid : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct AE_CONNSTOP
+    property ae_cp_compname : UInt32
+    property ae_cp_username : UInt32
+    property ae_cp_netname : UInt32
+    property ae_cp_connid : UInt32
+    property ae_cp_reason : UInt32
+    def initialize(@ae_cp_compname : UInt32, @ae_cp_username : UInt32, @ae_cp_netname : UInt32, @ae_cp_connid : UInt32, @ae_cp_reason : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct AE_CONNREJ
+    property ae_cr_compname : UInt32
+    property ae_cr_username : UInt32
+    property ae_cr_netname : UInt32
+    property ae_cr_reason : UInt32
+    def initialize(@ae_cr_compname : UInt32, @ae_cr_username : UInt32, @ae_cr_netname : UInt32, @ae_cr_reason : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct AE_RESACCESS
+    property ae_ra_compname : UInt32
+    property ae_ra_username : UInt32
+    property ae_ra_resname : UInt32
+    property ae_ra_operation : UInt32
+    property ae_ra_returncode : UInt32
+    property ae_ra_restype : UInt32
+    property ae_ra_fileid : UInt32
+    def initialize(@ae_ra_compname : UInt32, @ae_ra_username : UInt32, @ae_ra_resname : UInt32, @ae_ra_operation : UInt32, @ae_ra_returncode : UInt32, @ae_ra_restype : UInt32, @ae_ra_fileid : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct AE_RESACCESSREJ
+    property ae_rr_compname : UInt32
+    property ae_rr_username : UInt32
+    property ae_rr_resname : UInt32
+    property ae_rr_operation : UInt32
+    def initialize(@ae_rr_compname : UInt32, @ae_rr_username : UInt32, @ae_rr_resname : UInt32, @ae_rr_operation : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct AE_CLOSEFILE
+    property ae_cf_compname : UInt32
+    property ae_cf_username : UInt32
+    property ae_cf_resname : UInt32
+    property ae_cf_fileid : UInt32
+    property ae_cf_duration : UInt32
+    property ae_cf_reason : UInt32
+    def initialize(@ae_cf_compname : UInt32, @ae_cf_username : UInt32, @ae_cf_resname : UInt32, @ae_cf_fileid : UInt32, @ae_cf_duration : UInt32, @ae_cf_reason : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct AE_SERVICESTAT
+    property ae_ss_compname : UInt32
+    property ae_ss_username : UInt32
+    property ae_ss_svcname : UInt32
+    property ae_ss_status : UInt32
+    property ae_ss_code : UInt32
+    property ae_ss_text : UInt32
+    property ae_ss_returnval : UInt32
+    def initialize(@ae_ss_compname : UInt32, @ae_ss_username : UInt32, @ae_ss_svcname : UInt32, @ae_ss_status : UInt32, @ae_ss_code : UInt32, @ae_ss_text : UInt32, @ae_ss_returnval : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct AE_ACLMOD
+    property ae_am_compname : UInt32
+    property ae_am_username : UInt32
+    property ae_am_resname : UInt32
+    property ae_am_action : UInt32
+    property ae_am_datalen : UInt32
+    def initialize(@ae_am_compname : UInt32, @ae_am_username : UInt32, @ae_am_resname : UInt32, @ae_am_action : UInt32, @ae_am_datalen : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct AE_UASMOD
+    property ae_um_compname : UInt32
+    property ae_um_username : UInt32
+    property ae_um_resname : UInt32
+    property ae_um_rectype : UInt32
+    property ae_um_action : UInt32
+    property ae_um_datalen : UInt32
+    def initialize(@ae_um_compname : UInt32, @ae_um_username : UInt32, @ae_um_resname : UInt32, @ae_um_rectype : UInt32, @ae_um_action : UInt32, @ae_um_datalen : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct AE_NETLOGON
+    property ae_no_compname : UInt32
+    property ae_no_username : UInt32
+    property ae_no_privilege : UInt32
+    property ae_no_authflags : UInt32
+    def initialize(@ae_no_compname : UInt32, @ae_no_username : UInt32, @ae_no_privilege : UInt32, @ae_no_authflags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct AE_NETLOGOFF
+    property ae_nf_compname : UInt32
+    property ae_nf_username : UInt32
+    property ae_nf_reserved1 : UInt32
+    property ae_nf_reserved2 : UInt32
+    def initialize(@ae_nf_compname : UInt32, @ae_nf_username : UInt32, @ae_nf_reserved1 : UInt32, @ae_nf_reserved2 : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct AE_ACCLIM
+    property ae_al_compname : UInt32
+    property ae_al_username : UInt32
+    property ae_al_resname : UInt32
+    property ae_al_limit : UInt32
+    def initialize(@ae_al_compname : UInt32, @ae_al_username : UInt32, @ae_al_resname : UInt32, @ae_al_limit : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct AE_LOCKOUT
+    property ae_lk_compname : UInt32
+    property ae_lk_username : UInt32
+    property ae_lk_action : UInt32
+    property ae_lk_bad_pw_count : UInt32
+    def initialize(@ae_lk_compname : UInt32, @ae_lk_username : UInt32, @ae_lk_action : UInt32, @ae_lk_bad_pw_count : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct AE_GENERIC
+    property ae_ge_msgfile : UInt32
+    property ae_ge_msgnum : UInt32
+    property ae_ge_params : UInt32
+    property ae_ge_param1 : UInt32
+    property ae_ge_param2 : UInt32
+    property ae_ge_param3 : UInt32
+    property ae_ge_param4 : UInt32
+    property ae_ge_param5 : UInt32
+    property ae_ge_param6 : UInt32
+    property ae_ge_param7 : UInt32
+    property ae_ge_param8 : UInt32
+    property ae_ge_param9 : UInt32
+    def initialize(@ae_ge_msgfile : UInt32, @ae_ge_msgnum : UInt32, @ae_ge_params : UInt32, @ae_ge_param1 : UInt32, @ae_ge_param2 : UInt32, @ae_ge_param3 : UInt32, @ae_ge_param4 : UInt32, @ae_ge_param5 : UInt32, @ae_ge_param6 : UInt32, @ae_ge_param7 : UInt32, @ae_ge_param8 : UInt32, @ae_ge_param9 : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DSREG_USER_INFO
+    property pszUserEmail : Win32cr::Foundation::PWSTR
+    property pszUserKeyId : Win32cr::Foundation::PWSTR
+    property pszUserKeyName : Win32cr::Foundation::PWSTR
+    def initialize(@pszUserEmail : Win32cr::Foundation::PWSTR, @pszUserKeyId : Win32cr::Foundation::PWSTR, @pszUserKeyName : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct DSREG_JOIN_INFO
+    property joinType : Win32cr::NetworkManagement::NetManagement::DSREG_JOIN_TYPE
+    property pJoinCertificate : Win32cr::Security::Cryptography::CERT_CONTEXT*
+    property pszDeviceId : Win32cr::Foundation::PWSTR
+    property pszIdpDomain : Win32cr::Foundation::PWSTR
+    property pszTenantId : Win32cr::Foundation::PWSTR
+    property pszJoinUserEmail : Win32cr::Foundation::PWSTR
+    property pszTenantDisplayName : Win32cr::Foundation::PWSTR
+    property pszMdmEnrollmentUrl : Win32cr::Foundation::PWSTR
+    property pszMdmTermsOfUseUrl : Win32cr::Foundation::PWSTR
+    property pszMdmComplianceUrl : Win32cr::Foundation::PWSTR
+    property pszUserSettingSyncUrl : Win32cr::Foundation::PWSTR
+    property pUserInfo : Win32cr::NetworkManagement::NetManagement::DSREG_USER_INFO*
+    def initialize(@joinType : Win32cr::NetworkManagement::NetManagement::DSREG_JOIN_TYPE, @pJoinCertificate : Win32cr::Security::Cryptography::CERT_CONTEXT*, @pszDeviceId : Win32cr::Foundation::PWSTR, @pszIdpDomain : Win32cr::Foundation::PWSTR, @pszTenantId : Win32cr::Foundation::PWSTR, @pszJoinUserEmail : Win32cr::Foundation::PWSTR, @pszTenantDisplayName : Win32cr::Foundation::PWSTR, @pszMdmEnrollmentUrl : Win32cr::Foundation::PWSTR, @pszMdmTermsOfUseUrl : Win32cr::Foundation::PWSTR, @pszMdmComplianceUrl : Win32cr::Foundation::PWSTR, @pszUserSettingSyncUrl : Win32cr::Foundation::PWSTR, @pUserInfo : Win32cr::NetworkManagement::NetManagement::DSREG_USER_INFO*)
+    end
+  end
+
+  @[Extern]
+  struct NETSETUP_PROVISIONING_PARAMS
+    property dwVersion : UInt32
+    property lpDomain : Win32cr::Foundation::PWSTR
+    property lpHostName : Win32cr::Foundation::PWSTR
+    property lpMachineAccountOU : Win32cr::Foundation::PWSTR
+    property lpDcName : Win32cr::Foundation::PWSTR
+    property dwProvisionOptions : Win32cr::NetworkManagement::NetManagement::NETSETUP_PROVISION
+    property aCertTemplateNames : Win32cr::Foundation::PWSTR*
+    property cCertTemplateNames : UInt32
+    property aMachinePolicyNames : Win32cr::Foundation::PWSTR*
+    property cMachinePolicyNames : UInt32
+    property aMachinePolicyPaths : Win32cr::Foundation::PWSTR*
+    property cMachinePolicyPaths : UInt32
+    property lpNetbiosName : Win32cr::Foundation::PWSTR
+    property lpSiteName : Win32cr::Foundation::PWSTR
+    property lpPrimaryDNSDomain : Win32cr::Foundation::PWSTR
+    def initialize(@dwVersion : UInt32, @lpDomain : Win32cr::Foundation::PWSTR, @lpHostName : Win32cr::Foundation::PWSTR, @lpMachineAccountOU : Win32cr::Foundation::PWSTR, @lpDcName : Win32cr::Foundation::PWSTR, @dwProvisionOptions : Win32cr::NetworkManagement::NetManagement::NETSETUP_PROVISION, @aCertTemplateNames : Win32cr::Foundation::PWSTR*, @cCertTemplateNames : UInt32, @aMachinePolicyNames : Win32cr::Foundation::PWSTR*, @cMachinePolicyNames : UInt32, @aMachinePolicyPaths : Win32cr::Foundation::PWSTR*, @cMachinePolicyPaths : UInt32, @lpNetbiosName : Win32cr::Foundation::PWSTR, @lpSiteName : Win32cr::Foundation::PWSTR, @lpPrimaryDNSDomain : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct AT_INFO
+    property job_time : LibC::UIntPtrT
+    property days_of_month : UInt32
+    property days_of_week : UInt8
+    property flags : UInt8
+    property command : Win32cr::Foundation::PWSTR
+    def initialize(@job_time : LibC::UIntPtrT, @days_of_month : UInt32, @days_of_week : UInt8, @flags : UInt8, @command : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct AT_ENUM
+    property job_id : UInt32
+    property job_time : LibC::UIntPtrT
+    property days_of_month : UInt32
+    property days_of_week : UInt8
+    property flags : UInt8
+    property command : Win32cr::Foundation::PWSTR
+    def initialize(@job_id : UInt32, @job_time : LibC::UIntPtrT, @days_of_month : UInt32, @days_of_week : UInt8, @flags : UInt8, @command : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct FLAT_STRING
+    property maximum_length : Int16
+    property length : Int16
+    property buffer : Win32cr::Foundation::CHAR*
+    def initialize(@maximum_length : Int16, @length : Int16, @buffer : Win32cr::Foundation::CHAR*)
+    end
+  end
+
+  @[Extern]
+  struct NETWORK_NAME
+    property name : Win32cr::NetworkManagement::NetManagement::FLAT_STRING
+    def initialize(@name : Win32cr::NetworkManagement::NetManagement::FLAT_STRING)
+    end
+  end
+
+  @[Extern]
+  struct HARDWARE_ADDRESS
+    property address : UInt8[6]
+    def initialize(@address : UInt8[6])
+    end
+  end
+
+  @[Extern]
+  struct OBO_TOKEN
+    property type__ : Win32cr::NetworkManagement::NetManagement::OBO_TOKEN_TYPE
+    property pncc : Void*
+    property pszwManufacturer : Win32cr::Foundation::PWSTR
+    property pszwProduct : Win32cr::Foundation::PWSTR
+    property pszwDisplayName : Win32cr::Foundation::PWSTR
+    property fRegistered : Win32cr::Foundation::BOOL
+    def initialize(@type__ : Win32cr::NetworkManagement::NetManagement::OBO_TOKEN_TYPE, @pncc : Void*, @pszwManufacturer : Win32cr::Foundation::PWSTR, @pszwProduct : Win32cr::Foundation::PWSTR, @pszwDisplayName : Win32cr::Foundation::PWSTR, @fRegistered : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct RASCON_IPUI
+    property guidConnection : LibC::GUID
+    property fIPv6Cfg : Win32cr::Foundation::BOOL
+    property dwFlags : UInt32
+    property pszwIpAddr : UInt16[16]
+    property pszwDnsAddr : UInt16[16]
+    property pszwDns2Addr : UInt16[16]
+    property pszwWinsAddr : UInt16[16]
+    property pszwWins2Addr : UInt16[16]
+    property pszwDnsSuffix : UInt16[256]
+    property pszwIpv6Addr : UInt16[65]
+    property dwIpv6PrefixLength : UInt32
+    property pszwIpv6DnsAddr : UInt16[65]
+    property pszwIpv6Dns2Addr : UInt16[65]
+    property dwIPv4InfMetric : UInt32
+    property dwIPv6InfMetric : UInt32
+    def initialize(@guidConnection : LibC::GUID, @fIPv6Cfg : Win32cr::Foundation::BOOL, @dwFlags : UInt32, @pszwIpAddr : UInt16[16], @pszwDnsAddr : UInt16[16], @pszwDns2Addr : UInt16[16], @pszwWinsAddr : UInt16[16], @pszwWins2Addr : UInt16[16], @pszwDnsSuffix : UInt16[256], @pszwIpv6Addr : UInt16[65], @dwIpv6PrefixLength : UInt32, @pszwIpv6DnsAddr : UInt16[65], @pszwIpv6Dns2Addr : UInt16[65], @dwIPv4InfMetric : UInt32, @dwIPv6InfMetric : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct RTR_TOC_ENTRY
+    property info_type : UInt32
+    property info_size : UInt32
+    property count : UInt32
+    property offset : UInt32
+    def initialize(@info_type : UInt32, @info_size : UInt32, @count : UInt32, @offset : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct RTR_INFO_BLOCK_HEADER
+    property version : UInt32
+    property size : UInt32
+    property toc_entries_count : UInt32
+    property toc_entry : Win32cr::NetworkManagement::NetManagement::RTR_TOC_ENTRY*
+    def initialize(@version : UInt32, @size : UInt32, @toc_entries_count : UInt32, @toc_entry : Win32cr::NetworkManagement::NetManagement::RTR_TOC_ENTRY*)
+    end
+  end
+
+  @[Extern]
+  struct MPR_PROTOCOL_0
+    property dwProtocolId : UInt32
+    property wszProtocol : UInt16[41]
+    property wszDLLName : UInt16[49]
+    def initialize(@dwProtocolId : UInt32, @wszProtocol : UInt16[41], @wszDLLName : UInt16[49])
+    end
+  end
 
   @[Extern]
   record IEnumNetCfgBindingInterfaceVtbl,
@@ -4373,7 +5270,6 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  #@[Com("c0e8ae90-306e-11d1-aacf-00805fc1270e")]
   record IEnumNetCfgBindingInterface, lpVtbl : IEnumNetCfgBindingInterfaceVtbl* do
     GUID = LibC::GUID.new(0xc0e8ae90_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : IEnumNetCfgBindingInterface*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4412,7 +5308,6 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  #@[Com("c0e8ae91-306e-11d1-aacf-00805fc1270e")]
   record IEnumNetCfgBindingPath, lpVtbl : IEnumNetCfgBindingPathVtbl* do
     GUID = LibC::GUID.new(0xc0e8ae91_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : IEnumNetCfgBindingPath*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4451,7 +5346,6 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  #@[Com("c0e8ae92-306e-11d1-aacf-00805fc1270e")]
   record IEnumNetCfgComponent, lpVtbl : IEnumNetCfgComponentVtbl* do
     GUID = LibC::GUID.new(0xc0e8ae92_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : IEnumNetCfgComponent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4493,7 +5387,6 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  #@[Com("c0e8ae93-306e-11d1-aacf-00805fc1270e")]
   record INetCfg, lpVtbl : INetCfgVtbl* do
     GUID = LibC::GUID.new(0xc0e8ae93_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetCfg*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4540,7 +5433,6 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  #@[Com("c0e8ae9f-306e-11d1-aacf-00805fc1270e")]
   record INetCfgLock, lpVtbl : INetCfgLockVtbl* do
     GUID = LibC::GUID.new(0xc0e8ae9f_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetCfgLock*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4575,7 +5467,6 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  #@[Com("c0e8ae94-306e-11d1-aacf-00805fc1270e")]
   record INetCfgBindingInterface, lpVtbl : INetCfgBindingInterfaceVtbl* do
     GUID = LibC::GUID.new(0xc0e8ae94_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetCfgBindingInterface*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4615,7 +5506,6 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  #@[Com("c0e8ae96-306e-11d1-aacf-00805fc1270e")]
   record INetCfgBindingPath, lpVtbl : INetCfgBindingPathVtbl* do
     GUID = LibC::GUID.new(0xc0e8ae96_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetCfgBindingPath*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4664,7 +5554,6 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  #@[Com("c0e8ae97-306e-11d1-aacf-00805fc1270e")]
   record INetCfgClass, lpVtbl : INetCfgClassVtbl* do
     GUID = LibC::GUID.new(0xc0e8ae97_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetCfgClass*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4696,7 +5585,6 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  #@[Com("c0e8ae9d-306e-11d1-aacf-00805fc1270e")]
   record INetCfgClassSetup, lpVtbl : INetCfgClassSetupVtbl* do
     GUID = LibC::GUID.new(0xc0e8ae9d_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetCfgClassSetup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4732,7 +5620,6 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  #@[Com("c0e8aea0-306e-11d1-aacf-00805fc1270e")]
   record INetCfgClassSetup2, lpVtbl : INetCfgClassSetup2Vtbl* do
     GUID = LibC::GUID.new(0xc0e8aea0_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetCfgClassSetup2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4779,7 +5666,6 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  #@[Com("c0e8ae99-306e-11d1-aacf-00805fc1270e")]
   record INetCfgComponent, lpVtbl : INetCfgComponentVtbl* do
     GUID = LibC::GUID.new(0xc0e8ae99_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetCfgComponent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4846,7 +5732,6 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  #@[Com("c0e8ae9e-306e-11d1-aacf-00805fc1270e")]
   record INetCfgComponentBindings, lpVtbl : INetCfgComponentBindingsVtbl* do
     GUID = LibC::GUID.new(0xc0e8ae9e_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetCfgComponentBindings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4897,7 +5782,6 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  #@[Com("c0e8ae98-306e-11d1-aacf-00805fc1270e")]
   record INetCfgSysPrep, lpVtbl : INetCfgSysPrepVtbl* do
     GUID = LibC::GUID.new(0xc0e8ae98_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetCfgSysPrep*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4933,7 +5817,6 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  #@[Com("8d84bd35-e227-11d2-b700-00a0c98a6a85")]
   record INetCfgPnpReconfigCallback, lpVtbl : INetCfgPnpReconfigCallbackVtbl* do
     GUID = LibC::GUID.new(0x8d84bd35_u32, 0xe227_u16, 0x11d2_u16, StaticArray[0xb7_u8, 0x0_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x8a_u8, 0x6a_u8, 0x85_u8])
     def query_interface(this : INetCfgPnpReconfigCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4963,7 +5846,6 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  #@[Com("932238df-bea1-11d0-9298-00c04fc99dcf")]
   record INetCfgComponentControl, lpVtbl : INetCfgComponentControlVtbl* do
     GUID = LibC::GUID.new(0x932238df_u32, 0xbea1_u16, 0x11d0_u16, StaticArray[0x92_u8, 0x98_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9d_u8, 0xcf_u8])
     def query_interface(this : INetCfgComponentControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5002,7 +5884,6 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  #@[Com("932238e3-bea1-11d0-9298-00c04fc99dcf")]
   record INetCfgComponentSetup, lpVtbl : INetCfgComponentSetupVtbl* do
     GUID = LibC::GUID.new(0x932238e3_u32, 0xbea1_u16, 0x11d0_u16, StaticArray[0x92_u8, 0x98_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9d_u8, 0xcf_u8])
     def query_interface(this : INetCfgComponentSetup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5043,7 +5924,6 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  #@[Com("932238e0-bea1-11d0-9298-00c04fc99dcf")]
   record INetCfgComponentPropertyUi, lpVtbl : INetCfgComponentPropertyUiVtbl* do
     GUID = LibC::GUID.new(0x932238e0_u32, 0xbea1_u16, 0x11d0_u16, StaticArray[0x92_u8, 0x98_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9d_u8, 0xcf_u8])
     def query_interface(this : INetCfgComponentPropertyUi*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5086,7 +5966,6 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  #@[Com("932238e1-bea1-11d0-9298-00c04fc99dcf")]
   record INetCfgComponentNotifyBinding, lpVtbl : INetCfgComponentNotifyBindingVtbl* do
     GUID = LibC::GUID.new(0x932238e1_u32, 0xbea1_u16, 0x11d0_u16, StaticArray[0x92_u8, 0x98_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9d_u8, 0xcf_u8])
     def query_interface(this : INetCfgComponentNotifyBinding*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5119,7 +5998,6 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  #@[Com("932238e2-bea1-11d0-9298-00c04fc99dcf")]
   record INetCfgComponentNotifyGlobal, lpVtbl : INetCfgComponentNotifyGlobalVtbl* do
     GUID = LibC::GUID.new(0x932238e2_u32, 0xbea1_u16, 0x11d0_u16, StaticArray[0x92_u8, 0x98_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9d_u8, 0xcf_u8])
     def query_interface(this : INetCfgComponentNotifyGlobal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5157,7 +6035,6 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  #@[Com("932238e4-bea1-11d0-9298-00c04fc99dcf")]
   record INetCfgComponentUpperEdge, lpVtbl : INetCfgComponentUpperEdgeVtbl* do
     GUID = LibC::GUID.new(0x932238e4_u32, 0xbea1_u16, 0x11d0_u16, StaticArray[0x92_u8, 0x98_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9d_u8, 0xcf_u8])
     def query_interface(this : INetCfgComponentUpperEdge*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5190,7 +6067,6 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  #@[Com("c08956a6-1cd3-11d1-b1c5-00805fc1270e")]
   record INetLanConnectionUiInfo, lpVtbl : INetLanConnectionUiInfoVtbl* do
     GUID = LibC::GUID.new(0xc08956a6_u32, 0x1cd3_u16, 0x11d1_u16, StaticArray[0xb1_u8, 0xc5_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetLanConnectionUiInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5217,7 +6093,6 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  #@[Com("faedcf58-31fe-11d1-aad2-00805fc1270e")]
   record INetRasConnectionIpUiInfo, lpVtbl : INetRasConnectionIpUiInfoVtbl* do
     GUID = LibC::GUID.new(0xfaedcf58_u32, 0x31fe_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xd2_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetRasConnectionIpUiInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5245,7 +6120,6 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  #@[Com("c0e8ae9a-306e-11d1-aacf-00805fc1270e")]
   record INetCfgComponentSysPrep, lpVtbl : INetCfgComponentSysPrepVtbl* do
     GUID = LibC::GUID.new(0xc0e8ae9a_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetCfgComponentSysPrep*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5276,7 +6150,6 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  #@[Com("c96fbd50-24dd-11d8-89fb-00904b2ea9c6")]
   record IProvisioningDomain, lpVtbl : IProvisioningDomainVtbl* do
     GUID = LibC::GUID.new(0xc96fbd50_u32, 0x24dd_u16, 0x11d8_u16, StaticArray[0x89_u8, 0xfb_u8, 0x0_u8, 0x90_u8, 0x4b_u8, 0x2e_u8, 0xa9_u8, 0xc6_u8])
     def query_interface(this : IProvisioningDomain*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5306,7 +6179,6 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  #@[Com("c96fbd51-24dd-11d8-89fb-00904b2ea9c6")]
   record IProvisioningProfileWireless, lpVtbl : IProvisioningProfileWirelessVtbl* do
     GUID = LibC::GUID.new(0xc96fbd51_u32, 0x24dd_u16, 0x11d8_u16, StaticArray[0x89_u8, 0xfb_u8, 0x0_u8, 0x90_u8, 0x4b_u8, 0x2e_u8, 0xa9_u8, 0xc6_u8])
     def query_interface(this : IProvisioningProfileWireless*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

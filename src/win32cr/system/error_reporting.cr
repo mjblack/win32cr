@@ -4,17 +4,17 @@ require "./diagnostics/debug.cr"
 module Win32cr::System::ErrorReporting
   alias HREPORT = LibC::IntPtrT
   alias HREPORTSTORE = LibC::IntPtrT
-  alias PFN_WER_RUNTIME_EXCEPTION_EVENT = Proc(Void*, Win32cr::System::ErrorReporting::WER_RUNTIME_EXCEPTION_INFORMATION*, Win32cr::Foundation::BOOL*, UInt16*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT)*
+  alias PFN_WER_RUNTIME_EXCEPTION_EVENT = Proc(Void*, Win32cr::System::ErrorReporting::WER_RUNTIME_EXCEPTION_INFORMATION*, Win32cr::Foundation::BOOL*, UInt16*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT)
 
-  alias PFN_WER_RUNTIME_EXCEPTION_EVENT_SIGNATURE = Proc(Void*, Win32cr::System::ErrorReporting::WER_RUNTIME_EXCEPTION_INFORMATION*, UInt32, UInt16*, UInt32*, UInt16*, UInt32*, Win32cr::Foundation::HRESULT)*
+  alias PFN_WER_RUNTIME_EXCEPTION_EVENT_SIGNATURE = Proc(Void*, Win32cr::System::ErrorReporting::WER_RUNTIME_EXCEPTION_INFORMATION*, UInt32, UInt16*, UInt32*, UInt16*, UInt32*, Win32cr::Foundation::HRESULT)
 
-  alias PFN_WER_RUNTIME_EXCEPTION_DEBUGGER_LAUNCH = Proc(Void*, Win32cr::System::ErrorReporting::WER_RUNTIME_EXCEPTION_INFORMATION*, Win32cr::Foundation::BOOL*, UInt16*, UInt32*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT)*
+  alias PFN_WER_RUNTIME_EXCEPTION_DEBUGGER_LAUNCH = Proc(Void*, Win32cr::System::ErrorReporting::WER_RUNTIME_EXCEPTION_INFORMATION*, Win32cr::Foundation::BOOL*, UInt16*, UInt32*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT)
 
-  alias Pfn_reportfault = Proc(Win32cr::System::Diagnostics::Debug::EXCEPTION_POINTERS*, UInt32, Win32cr::System::ErrorReporting::EFaultRepRetVal)*
+  alias Pfn_reportfault = Proc(Win32cr::System::Diagnostics::Debug::EXCEPTION_POINTERS*, UInt32, Win32cr::System::ErrorReporting::EFaultRepRetVal)
 
-  alias Pfn_adderexcludedapplicationa = Proc(Win32cr::Foundation::PSTR, Win32cr::System::ErrorReporting::EFaultRepRetVal)*
+  alias Pfn_adderexcludedapplicationa = Proc(Win32cr::Foundation::PSTR, Win32cr::System::ErrorReporting::EFaultRepRetVal)
 
-  alias Pfn_adderexcludedapplicationw = Proc(Win32cr::Foundation::PWSTR, Win32cr::System::ErrorReporting::EFaultRepRetVal)*
+  alias Pfn_adderexcludedapplicationw = Proc(Win32cr::Foundation::PWSTR, Win32cr::System::ErrorReporting::EFaultRepRetVal)
 
   WER_FAULT_REPORTING_NO_UI = 32_u32
   WER_FAULT_REPORTING_FLAG_NO_HEAP_ON_QUEUE = 64_u32
@@ -182,178 +182,220 @@ module Win32cr::System::ErrorReporting
   end
 
   @[Extern]
-  record WER_REPORT_INFORMATION,
-    dwSize : UInt32,
-    hProcess : Win32cr::Foundation::HANDLE,
-    wzConsentKey : UInt16[64],
-    wzFriendlyEventName : UInt16[128],
-    wzApplicationName : UInt16[128],
-    wzApplicationPath : UInt16[260],
-    wzDescription : UInt16[512],
-    hwndParent : Win32cr::Foundation::HWND
+  struct WER_REPORT_INFORMATION
+    property dwSize : UInt32
+    property hProcess : Win32cr::Foundation::HANDLE
+    property wzConsentKey : UInt16[64]
+    property wzFriendlyEventName : UInt16[128]
+    property wzApplicationName : UInt16[128]
+    property wzApplicationPath : UInt16[260]
+    property wzDescription : UInt16[512]
+    property hwndParent : Win32cr::Foundation::HWND
+    def initialize(@dwSize : UInt32, @hProcess : Win32cr::Foundation::HANDLE, @wzConsentKey : UInt16[64], @wzFriendlyEventName : UInt16[128], @wzApplicationName : UInt16[128], @wzApplicationPath : UInt16[260], @wzDescription : UInt16[512], @hwndParent : Win32cr::Foundation::HWND)
+    end
+  end
 
   @[Extern]
-  record WER_REPORT_INFORMATION_V3,
-    dwSize : UInt32,
-    hProcess : Win32cr::Foundation::HANDLE,
-    wzConsentKey : UInt16[64],
-    wzFriendlyEventName : UInt16[128],
-    wzApplicationName : UInt16[128],
-    wzApplicationPath : UInt16[260],
-    wzDescription : UInt16[512],
-    hwndParent : Win32cr::Foundation::HWND,
-    wzNamespacePartner : UInt16[64],
-    wzNamespaceGroup : UInt16[64]
+  struct WER_REPORT_INFORMATION_V3
+    property dwSize : UInt32
+    property hProcess : Win32cr::Foundation::HANDLE
+    property wzConsentKey : UInt16[64]
+    property wzFriendlyEventName : UInt16[128]
+    property wzApplicationName : UInt16[128]
+    property wzApplicationPath : UInt16[260]
+    property wzDescription : UInt16[512]
+    property hwndParent : Win32cr::Foundation::HWND
+    property wzNamespacePartner : UInt16[64]
+    property wzNamespaceGroup : UInt16[64]
+    def initialize(@dwSize : UInt32, @hProcess : Win32cr::Foundation::HANDLE, @wzConsentKey : UInt16[64], @wzFriendlyEventName : UInt16[128], @wzApplicationName : UInt16[128], @wzApplicationPath : UInt16[260], @wzDescription : UInt16[512], @hwndParent : Win32cr::Foundation::HWND, @wzNamespacePartner : UInt16[64], @wzNamespaceGroup : UInt16[64])
+    end
+  end
 
   @[Extern]
-  record WER_DUMP_CUSTOM_OPTIONS,
-    dwSize : UInt32,
-    dwMask : UInt32,
-    dwDumpFlags : UInt32,
-    bOnlyThisThread : Win32cr::Foundation::BOOL,
-    dwExceptionThreadFlags : UInt32,
-    dwOtherThreadFlags : UInt32,
-    dwExceptionThreadExFlags : UInt32,
-    dwOtherThreadExFlags : UInt32,
-    dwPreferredModuleFlags : UInt32,
-    dwOtherModuleFlags : UInt32,
-    wzPreferredModuleList : UInt16[256]
+  struct WER_DUMP_CUSTOM_OPTIONS
+    property dwSize : UInt32
+    property dwMask : UInt32
+    property dwDumpFlags : UInt32
+    property bOnlyThisThread : Win32cr::Foundation::BOOL
+    property dwExceptionThreadFlags : UInt32
+    property dwOtherThreadFlags : UInt32
+    property dwExceptionThreadExFlags : UInt32
+    property dwOtherThreadExFlags : UInt32
+    property dwPreferredModuleFlags : UInt32
+    property dwOtherModuleFlags : UInt32
+    property wzPreferredModuleList : UInt16[256]
+    def initialize(@dwSize : UInt32, @dwMask : UInt32, @dwDumpFlags : UInt32, @bOnlyThisThread : Win32cr::Foundation::BOOL, @dwExceptionThreadFlags : UInt32, @dwOtherThreadFlags : UInt32, @dwExceptionThreadExFlags : UInt32, @dwOtherThreadExFlags : UInt32, @dwPreferredModuleFlags : UInt32, @dwOtherModuleFlags : UInt32, @wzPreferredModuleList : UInt16[256])
+    end
+  end
 
   @[Extern]
-  record WER_DUMP_CUSTOM_OPTIONS_V2,
-    dwSize : UInt32,
-    dwMask : UInt32,
-    dwDumpFlags : UInt32,
-    bOnlyThisThread : Win32cr::Foundation::BOOL,
-    dwExceptionThreadFlags : UInt32,
-    dwOtherThreadFlags : UInt32,
-    dwExceptionThreadExFlags : UInt32,
-    dwOtherThreadExFlags : UInt32,
-    dwPreferredModuleFlags : UInt32,
-    dwOtherModuleFlags : UInt32,
-    wzPreferredModuleList : UInt16[256],
-    dwPreferredModuleResetFlags : UInt32,
-    dwOtherModuleResetFlags : UInt32
+  struct WER_DUMP_CUSTOM_OPTIONS_V2
+    property dwSize : UInt32
+    property dwMask : UInt32
+    property dwDumpFlags : UInt32
+    property bOnlyThisThread : Win32cr::Foundation::BOOL
+    property dwExceptionThreadFlags : UInt32
+    property dwOtherThreadFlags : UInt32
+    property dwExceptionThreadExFlags : UInt32
+    property dwOtherThreadExFlags : UInt32
+    property dwPreferredModuleFlags : UInt32
+    property dwOtherModuleFlags : UInt32
+    property wzPreferredModuleList : UInt16[256]
+    property dwPreferredModuleResetFlags : UInt32
+    property dwOtherModuleResetFlags : UInt32
+    def initialize(@dwSize : UInt32, @dwMask : UInt32, @dwDumpFlags : UInt32, @bOnlyThisThread : Win32cr::Foundation::BOOL, @dwExceptionThreadFlags : UInt32, @dwOtherThreadFlags : UInt32, @dwExceptionThreadExFlags : UInt32, @dwOtherThreadExFlags : UInt32, @dwPreferredModuleFlags : UInt32, @dwOtherModuleFlags : UInt32, @wzPreferredModuleList : UInt16[256], @dwPreferredModuleResetFlags : UInt32, @dwOtherModuleResetFlags : UInt32)
+    end
+  end
 
   @[Extern]
-  record WER_REPORT_INFORMATION_V4,
-    dwSize : UInt32,
-    hProcess : Win32cr::Foundation::HANDLE,
-    wzConsentKey : UInt16[64],
-    wzFriendlyEventName : UInt16[128],
-    wzApplicationName : UInt16[128],
-    wzApplicationPath : UInt16[260],
-    wzDescription : UInt16[512],
-    hwndParent : Win32cr::Foundation::HWND,
-    wzNamespacePartner : UInt16[64],
-    wzNamespaceGroup : UInt16[64],
-    rgbApplicationIdentity : UInt8[16],
-    hSnapshot : Win32cr::Foundation::HANDLE,
-    hDeleteFilesImpersonationToken : Win32cr::Foundation::HANDLE
+  struct WER_REPORT_INFORMATION_V4
+    property dwSize : UInt32
+    property hProcess : Win32cr::Foundation::HANDLE
+    property wzConsentKey : UInt16[64]
+    property wzFriendlyEventName : UInt16[128]
+    property wzApplicationName : UInt16[128]
+    property wzApplicationPath : UInt16[260]
+    property wzDescription : UInt16[512]
+    property hwndParent : Win32cr::Foundation::HWND
+    property wzNamespacePartner : UInt16[64]
+    property wzNamespaceGroup : UInt16[64]
+    property rgbApplicationIdentity : UInt8[16]
+    property hSnapshot : Win32cr::Foundation::HANDLE
+    property hDeleteFilesImpersonationToken : Win32cr::Foundation::HANDLE
+    def initialize(@dwSize : UInt32, @hProcess : Win32cr::Foundation::HANDLE, @wzConsentKey : UInt16[64], @wzFriendlyEventName : UInt16[128], @wzApplicationName : UInt16[128], @wzApplicationPath : UInt16[260], @wzDescription : UInt16[512], @hwndParent : Win32cr::Foundation::HWND, @wzNamespacePartner : UInt16[64], @wzNamespaceGroup : UInt16[64], @rgbApplicationIdentity : UInt8[16], @hSnapshot : Win32cr::Foundation::HANDLE, @hDeleteFilesImpersonationToken : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record WER_REPORT_INFORMATION_V5,
-    dwSize : UInt32,
-    hProcess : Win32cr::Foundation::HANDLE,
-    wzConsentKey : UInt16[64],
-    wzFriendlyEventName : UInt16[128],
-    wzApplicationName : UInt16[128],
-    wzApplicationPath : UInt16[260],
-    wzDescription : UInt16[512],
-    hwndParent : Win32cr::Foundation::HWND,
-    wzNamespacePartner : UInt16[64],
-    wzNamespaceGroup : UInt16[64],
-    rgbApplicationIdentity : UInt8[16],
-    hSnapshot : Win32cr::Foundation::HANDLE,
-    hDeleteFilesImpersonationToken : Win32cr::Foundation::HANDLE,
-    submitResultMax : Win32cr::System::ErrorReporting::WER_SUBMIT_RESULT
+  struct WER_REPORT_INFORMATION_V5
+    property dwSize : UInt32
+    property hProcess : Win32cr::Foundation::HANDLE
+    property wzConsentKey : UInt16[64]
+    property wzFriendlyEventName : UInt16[128]
+    property wzApplicationName : UInt16[128]
+    property wzApplicationPath : UInt16[260]
+    property wzDescription : UInt16[512]
+    property hwndParent : Win32cr::Foundation::HWND
+    property wzNamespacePartner : UInt16[64]
+    property wzNamespaceGroup : UInt16[64]
+    property rgbApplicationIdentity : UInt8[16]
+    property hSnapshot : Win32cr::Foundation::HANDLE
+    property hDeleteFilesImpersonationToken : Win32cr::Foundation::HANDLE
+    property submitResultMax : Win32cr::System::ErrorReporting::WER_SUBMIT_RESULT
+    def initialize(@dwSize : UInt32, @hProcess : Win32cr::Foundation::HANDLE, @wzConsentKey : UInt16[64], @wzFriendlyEventName : UInt16[128], @wzApplicationName : UInt16[128], @wzApplicationPath : UInt16[260], @wzDescription : UInt16[512], @hwndParent : Win32cr::Foundation::HWND, @wzNamespacePartner : UInt16[64], @wzNamespaceGroup : UInt16[64], @rgbApplicationIdentity : UInt8[16], @hSnapshot : Win32cr::Foundation::HANDLE, @hDeleteFilesImpersonationToken : Win32cr::Foundation::HANDLE, @submitResultMax : Win32cr::System::ErrorReporting::WER_SUBMIT_RESULT)
+    end
+  end
 
   @[Extern]
-  record WER_DUMP_CUSTOM_OPTIONS_V3,
-    dwSize : UInt32,
-    dwMask : UInt32,
-    dwDumpFlags : UInt32,
-    bOnlyThisThread : Win32cr::Foundation::BOOL,
-    dwExceptionThreadFlags : UInt32,
-    dwOtherThreadFlags : UInt32,
-    dwExceptionThreadExFlags : UInt32,
-    dwOtherThreadExFlags : UInt32,
-    dwPreferredModuleFlags : UInt32,
-    dwOtherModuleFlags : UInt32,
-    wzPreferredModuleList : UInt16[256],
-    dwPreferredModuleResetFlags : UInt32,
-    dwOtherModuleResetFlags : UInt32,
-    pvDumpKey : Void*,
-    hSnapshot : Win32cr::Foundation::HANDLE,
-    dwThreadID : UInt32
+  struct WER_DUMP_CUSTOM_OPTIONS_V3
+    property dwSize : UInt32
+    property dwMask : UInt32
+    property dwDumpFlags : UInt32
+    property bOnlyThisThread : Win32cr::Foundation::BOOL
+    property dwExceptionThreadFlags : UInt32
+    property dwOtherThreadFlags : UInt32
+    property dwExceptionThreadExFlags : UInt32
+    property dwOtherThreadExFlags : UInt32
+    property dwPreferredModuleFlags : UInt32
+    property dwOtherModuleFlags : UInt32
+    property wzPreferredModuleList : UInt16[256]
+    property dwPreferredModuleResetFlags : UInt32
+    property dwOtherModuleResetFlags : UInt32
+    property pvDumpKey : Void*
+    property hSnapshot : Win32cr::Foundation::HANDLE
+    property dwThreadID : UInt32
+    def initialize(@dwSize : UInt32, @dwMask : UInt32, @dwDumpFlags : UInt32, @bOnlyThisThread : Win32cr::Foundation::BOOL, @dwExceptionThreadFlags : UInt32, @dwOtherThreadFlags : UInt32, @dwExceptionThreadExFlags : UInt32, @dwOtherThreadExFlags : UInt32, @dwPreferredModuleFlags : UInt32, @dwOtherModuleFlags : UInt32, @wzPreferredModuleList : UInt16[256], @dwPreferredModuleResetFlags : UInt32, @dwOtherModuleResetFlags : UInt32, @pvDumpKey : Void*, @hSnapshot : Win32cr::Foundation::HANDLE, @dwThreadID : UInt32)
+    end
+  end
 
   @[Extern]
-  record WER_EXCEPTION_INFORMATION,
-    pExceptionPointers : Win32cr::System::Diagnostics::Debug::EXCEPTION_POINTERS*,
-    bClientPointers : Win32cr::Foundation::BOOL
+  struct WER_EXCEPTION_INFORMATION
+    property pExceptionPointers : Win32cr::System::Diagnostics::Debug::EXCEPTION_POINTERS*
+    property bClientPointers : Win32cr::Foundation::BOOL
+    def initialize(@pExceptionPointers : Win32cr::System::Diagnostics::Debug::EXCEPTION_POINTERS*, @bClientPointers : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record WER_RUNTIME_EXCEPTION_INFORMATION,
-    dwSize : UInt32,
-    hProcess : Win32cr::Foundation::HANDLE,
-    hThread : Win32cr::Foundation::HANDLE,
-    exceptionRecord : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD,
-    context : Win32cr::System::Diagnostics::Debug::CONTEXT,
-    pwszReportId : Win32cr::Foundation::PWSTR,
-    bIsFatal : Win32cr::Foundation::BOOL,
-    dwReserved : UInt32
+  struct WER_RUNTIME_EXCEPTION_INFORMATION
+    property dwSize : UInt32
+    property hProcess : Win32cr::Foundation::HANDLE
+    property hThread : Win32cr::Foundation::HANDLE
+    property exceptionRecord : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD
+    property context : Win32cr::System::Diagnostics::Debug::CONTEXT
+    property pwszReportId : Win32cr::Foundation::PWSTR
+    property bIsFatal : Win32cr::Foundation::BOOL
+    property dwReserved : UInt32
+    def initialize(@dwSize : UInt32, @hProcess : Win32cr::Foundation::HANDLE, @hThread : Win32cr::Foundation::HANDLE, @exceptionRecord : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD, @context : Win32cr::System::Diagnostics::Debug::CONTEXT, @pwszReportId : Win32cr::Foundation::PWSTR, @bIsFatal : Win32cr::Foundation::BOOL, @dwReserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record WER_REPORT_PARAMETER,
-    name : UInt16[129],
-    value : UInt16[260]
+  struct WER_REPORT_PARAMETER
+    property name : UInt16[129]
+    property value : UInt16[260]
+    def initialize(@name : UInt16[129], @value : UInt16[260])
+    end
+  end
 
   @[Extern]
-  record WER_REPORT_SIGNATURE,
-    event_name : UInt16[65],
-    parameters : Win32cr::System::ErrorReporting::WER_REPORT_PARAMETER[10]
+  struct WER_REPORT_SIGNATURE
+    property event_name : UInt16[65]
+    property parameters : Win32cr::System::ErrorReporting::WER_REPORT_PARAMETER[10]
+    def initialize(@event_name : UInt16[65], @parameters : Win32cr::System::ErrorReporting::WER_REPORT_PARAMETER[10])
+    end
+  end
 
   @[Extern]
-  record WER_REPORT_METADATA_V2,
-    signature : Win32cr::System::ErrorReporting::WER_REPORT_SIGNATURE,
-    bucket_id : LibC::GUID,
-    report_id : LibC::GUID,
-    creation_time : Win32cr::Foundation::FILETIME,
-    size_in_bytes : UInt64,
-    cab_id : UInt16[260],
-    report_status : UInt32,
-    report_integrator_id : LibC::GUID,
-    number_of_files : UInt32,
-    size_of_file_names : UInt32,
-    file_names : Win32cr::Foundation::PWSTR
+  struct WER_REPORT_METADATA_V2
+    property signature : Win32cr::System::ErrorReporting::WER_REPORT_SIGNATURE
+    property bucket_id : LibC::GUID
+    property report_id : LibC::GUID
+    property creation_time : Win32cr::Foundation::FILETIME
+    property size_in_bytes : UInt64
+    property cab_id : UInt16[260]
+    property report_status : UInt32
+    property report_integrator_id : LibC::GUID
+    property number_of_files : UInt32
+    property size_of_file_names : UInt32
+    property file_names : Win32cr::Foundation::PWSTR
+    def initialize(@signature : Win32cr::System::ErrorReporting::WER_REPORT_SIGNATURE, @bucket_id : LibC::GUID, @report_id : LibC::GUID, @creation_time : Win32cr::Foundation::FILETIME, @size_in_bytes : UInt64, @cab_id : UInt16[260], @report_status : UInt32, @report_integrator_id : LibC::GUID, @number_of_files : UInt32, @size_of_file_names : UInt32, @file_names : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record WER_REPORT_METADATA_V3,
-    signature : Win32cr::System::ErrorReporting::WER_REPORT_SIGNATURE,
-    bucket_id : LibC::GUID,
-    report_id : LibC::GUID,
-    creation_time : Win32cr::Foundation::FILETIME,
-    size_in_bytes : UInt64,
-    cab_id : UInt16[260],
-    report_status : UInt32,
-    report_integrator_id : LibC::GUID,
-    number_of_files : UInt32,
-    size_of_file_names : UInt32,
-    file_names : Win32cr::Foundation::PWSTR,
-    friendly_event_name : UInt16[128],
-    application_name : UInt16[128],
-    application_path : UInt16[260],
-    description : UInt16[512],
-    bucket_id_string : UInt16[260],
-    legacy_bucket_id : UInt64
+  struct WER_REPORT_METADATA_V3
+    property signature : Win32cr::System::ErrorReporting::WER_REPORT_SIGNATURE
+    property bucket_id : LibC::GUID
+    property report_id : LibC::GUID
+    property creation_time : Win32cr::Foundation::FILETIME
+    property size_in_bytes : UInt64
+    property cab_id : UInt16[260]
+    property report_status : UInt32
+    property report_integrator_id : LibC::GUID
+    property number_of_files : UInt32
+    property size_of_file_names : UInt32
+    property file_names : Win32cr::Foundation::PWSTR
+    property friendly_event_name : UInt16[128]
+    property application_name : UInt16[128]
+    property application_path : UInt16[260]
+    property description : UInt16[512]
+    property bucket_id_string : UInt16[260]
+    property legacy_bucket_id : UInt64
+    def initialize(@signature : Win32cr::System::ErrorReporting::WER_REPORT_SIGNATURE, @bucket_id : LibC::GUID, @report_id : LibC::GUID, @creation_time : Win32cr::Foundation::FILETIME, @size_in_bytes : UInt64, @cab_id : UInt16[260], @report_status : UInt32, @report_integrator_id : LibC::GUID, @number_of_files : UInt32, @size_of_file_names : UInt32, @file_names : Win32cr::Foundation::PWSTR, @friendly_event_name : UInt16[128], @application_name : UInt16[128], @application_path : UInt16[260], @description : UInt16[512], @bucket_id_string : UInt16[260], @legacy_bucket_id : UInt64)
+    end
+  end
 
   @[Extern]
-  record WER_REPORT_METADATA_V1,
-    signature : Win32cr::System::ErrorReporting::WER_REPORT_SIGNATURE,
-    bucket_id : LibC::GUID,
-    report_id : LibC::GUID,
-    creation_time : Win32cr::Foundation::FILETIME,
-    size_in_bytes : UInt64
+  struct WER_REPORT_METADATA_V1
+    property signature : Win32cr::System::ErrorReporting::WER_REPORT_SIGNATURE
+    property bucket_id : LibC::GUID
+    property report_id : LibC::GUID
+    property creation_time : Win32cr::Foundation::FILETIME
+    property size_in_bytes : UInt64
+    def initialize(@signature : Win32cr::System::ErrorReporting::WER_REPORT_SIGNATURE, @bucket_id : LibC::GUID, @report_id : LibC::GUID, @creation_time : Win32cr::Foundation::FILETIME, @size_in_bytes : UInt64)
+    end
+  end
 
   @[Link("wer")]
   @[Link("kernel32")]

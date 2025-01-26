@@ -113,61 +113,88 @@ module Win32cr::System::WindowsSync
   end
 
   @[Extern]
-  record ID_PARAMETER_PAIR,
-    fIsVariable : Win32cr::Foundation::BOOL,
-    cbIdSize : UInt16
+  struct ID_PARAMETER_PAIR
+    property fIsVariable : Win32cr::Foundation::BOOL
+    property cbIdSize : UInt16
+    def initialize(@fIsVariable : Win32cr::Foundation::BOOL, @cbIdSize : UInt16)
+    end
+  end
 
   @[Extern]
-  record ID_PARAMETERS,
-    dwSize : UInt32,
-    replicaId : Win32cr::System::WindowsSync::ID_PARAMETER_PAIR,
-    itemId : Win32cr::System::WindowsSync::ID_PARAMETER_PAIR,
-    changeUnitId : Win32cr::System::WindowsSync::ID_PARAMETER_PAIR
+  struct ID_PARAMETERS
+    property dwSize : UInt32
+    property replicaId : Win32cr::System::WindowsSync::ID_PARAMETER_PAIR
+    property itemId : Win32cr::System::WindowsSync::ID_PARAMETER_PAIR
+    property changeUnitId : Win32cr::System::WindowsSync::ID_PARAMETER_PAIR
+    def initialize(@dwSize : UInt32, @replicaId : Win32cr::System::WindowsSync::ID_PARAMETER_PAIR, @itemId : Win32cr::System::WindowsSync::ID_PARAMETER_PAIR, @changeUnitId : Win32cr::System::WindowsSync::ID_PARAMETER_PAIR)
+    end
+  end
 
   @[Extern]
-  record SYNC_SESSION_STATISTICS,
-    dwChangesApplied : UInt32,
-    dwChangesFailed : UInt32
+  struct SYNC_SESSION_STATISTICS
+    property dwChangesApplied : UInt32
+    property dwChangesFailed : UInt32
+    def initialize(@dwChangesApplied : UInt32, @dwChangesFailed : UInt32)
+    end
+  end
 
   @[Extern]
-  record SYNC_VERSION,
-    dwLastUpdatingReplicaKey : UInt32,
-    ullTickCount : UInt64
+  struct SYNC_VERSION
+    property dwLastUpdatingReplicaKey : UInt32
+    property ullTickCount : UInt64
+    def initialize(@dwLastUpdatingReplicaKey : UInt32, @ullTickCount : UInt64)
+    end
+  end
 
   @[Extern]
-  record SYNC_RANGE,
-    pbClosedLowerBound : UInt8*,
-    pbClosedUpperBound : UInt8*
+  struct SYNC_RANGE
+    property pbClosedLowerBound : UInt8*
+    property pbClosedUpperBound : UInt8*
+    def initialize(@pbClosedLowerBound : UInt8*, @pbClosedUpperBound : UInt8*)
+    end
+  end
 
   @[Extern]
-  record SYNC_TIME,
-    dwDate : UInt32,
-    dwTime : UInt32
+  struct SYNC_TIME
+    property dwDate : UInt32
+    property dwTime : UInt32
+    def initialize(@dwDate : UInt32, @dwTime : UInt32)
+    end
+  end
 
   @[Extern]
-  record SYNC_FILTER_CHANGE,
-    fMoveIn : Win32cr::Foundation::BOOL,
-    moveVersion : Win32cr::System::WindowsSync::SYNC_VERSION
+  struct SYNC_FILTER_CHANGE
+    property fMoveIn : Win32cr::Foundation::BOOL
+    property moveVersion : Win32cr::System::WindowsSync::SYNC_VERSION
+    def initialize(@fMoveIn : Win32cr::Foundation::BOOL, @moveVersion : Win32cr::System::WindowsSync::SYNC_VERSION)
+    end
+  end
 
   @[Extern]
-  record SyncProviderConfiguration,
-    dwVersion : UInt32,
-    guidInstanceId : LibC::GUID,
-    clsidProvider : LibC::GUID,
-    guidConfigUIInstanceId : LibC::GUID,
-    guidContentType : LibC::GUID,
-    dwCapabilities : UInt32,
-    dwSupportedArchitecture : UInt32
+  struct SyncProviderConfiguration
+    property dwVersion : UInt32
+    property guidInstanceId : LibC::GUID
+    property clsidProvider : LibC::GUID
+    property guidConfigUIInstanceId : LibC::GUID
+    property guidContentType : LibC::GUID
+    property dwCapabilities : UInt32
+    property dwSupportedArchitecture : UInt32
+    def initialize(@dwVersion : UInt32, @guidInstanceId : LibC::GUID, @clsidProvider : LibC::GUID, @guidConfigUIInstanceId : LibC::GUID, @guidContentType : LibC::GUID, @dwCapabilities : UInt32, @dwSupportedArchitecture : UInt32)
+    end
+  end
 
   @[Extern]
-  record SyncProviderConfigUIConfiguration,
-    dwVersion : UInt32,
-    guidInstanceId : LibC::GUID,
-    clsidConfigUI : LibC::GUID,
-    guidContentType : LibC::GUID,
-    dwCapabilities : UInt32,
-    dwSupportedArchitecture : UInt32,
-    fIsGlobal : Win32cr::Foundation::BOOL
+  struct SyncProviderConfigUIConfiguration
+    property dwVersion : UInt32
+    property guidInstanceId : LibC::GUID
+    property clsidConfigUI : LibC::GUID
+    property guidContentType : LibC::GUID
+    property dwCapabilities : UInt32
+    property dwSupportedArchitecture : UInt32
+    property fIsGlobal : Win32cr::Foundation::BOOL
+    def initialize(@dwVersion : UInt32, @guidInstanceId : LibC::GUID, @clsidConfigUI : LibC::GUID, @guidContentType : LibC::GUID, @dwCapabilities : UInt32, @dwSupportedArchitecture : UInt32, @fIsGlobal : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
   record IClockVectorElementVtbl,
@@ -179,7 +206,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("e71c4250-adf8-4a07-8fae-5669596909c1")]
   record IClockVectorElement, lpVtbl : IClockVectorElementVtbl* do
     GUID = LibC::GUID.new(0xe71c4250_u32, 0xadf8_u16, 0x4a07_u16, StaticArray[0x8f_u8, 0xae_u8, 0x56_u8, 0x69_u8, 0x59_u8, 0x69_u8, 0x9_u8, 0xc1_u8])
     def query_interface(this : IClockVectorElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -212,7 +238,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("a40b46d2-e97b-4156-b6da-991f501b0f05")]
   record IFeedClockVectorElement, lpVtbl : IFeedClockVectorElementVtbl* do
     GUID = LibC::GUID.new(0xa40b46d2_u32, 0xe97b_u16, 0x4156_u16, StaticArray[0xb6_u8, 0xda_u8, 0x99_u8, 0x1f_u8, 0x50_u8, 0x1b_u8, 0xf_u8, 0x5_u8])
     def query_interface(this : IFeedClockVectorElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -249,7 +274,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("14b2274a-8698-4cc6-9333-f89bd1d47bc4")]
   record IClockVector, lpVtbl : IClockVectorVtbl* do
     GUID = LibC::GUID.new(0x14b2274a_u32, 0x8698_u16, 0x4cc6_u16, StaticArray[0x93_u8, 0x33_u8, 0xf8_u8, 0x9b_u8, 0xd1_u8, 0xd4_u8, 0x7b_u8, 0xc4_u8])
     def query_interface(this : IClockVector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -282,7 +306,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("8d1d98d1-9fb8-4ec9-a553-54dd924e0f67")]
   record IFeedClockVector, lpVtbl : IFeedClockVectorVtbl* do
     GUID = LibC::GUID.new(0x8d1d98d1_u32, 0x9fb8_u16, 0x4ec9_u16, StaticArray[0xa5_u8, 0x53_u8, 0x54_u8, 0xdd_u8, 0x92_u8, 0x4e_u8, 0xf_u8, 0x67_u8])
     def query_interface(this : IFeedClockVector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -321,7 +344,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("525844db-2837-4799-9e80-81a66e02220c")]
   record IEnumClockVector, lpVtbl : IEnumClockVectorVtbl* do
     GUID = LibC::GUID.new(0x525844db_u32, 0x2837_u16, 0x4799_u16, StaticArray[0x9e_u8, 0x80_u8, 0x81_u8, 0xa6_u8, 0x6e_u8, 0x2_u8, 0x22_u8, 0xc_u8])
     def query_interface(this : IEnumClockVector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -360,7 +382,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("550f763d-146a-48f6-abeb-6c88c7f70514")]
   record IEnumFeedClockVector, lpVtbl : IEnumFeedClockVectorVtbl* do
     GUID = LibC::GUID.new(0x550f763d_u32, 0x146a_u16, 0x48f6_u16, StaticArray[0xab_u8, 0xeb_u8, 0x6c_u8, 0x88_u8, 0xc7_u8, 0xf7_u8, 0x5_u8, 0x14_u8])
     def query_interface(this : IEnumFeedClockVector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -400,7 +421,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("613b2ab5-b304-47d9-9c31-ce6c54401a15")]
   record ICoreFragment, lpVtbl : ICoreFragmentVtbl* do
     GUID = LibC::GUID.new(0x613b2ab5_u32, 0xb304_u16, 0x47d9_u16, StaticArray[0x9c_u8, 0x31_u8, 0xce_u8, 0x6c_u8, 0x54_u8, 0x40_u8, 0x1a_u8, 0x15_u8])
     def query_interface(this : ICoreFragment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -440,7 +460,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("f7fcc5fd-ae26-4679-ba16-96aac583c134")]
   record ICoreFragmentInspector, lpVtbl : ICoreFragmentInspectorVtbl* do
     GUID = LibC::GUID.new(0xf7fcc5fd_u32, 0xae26_u16, 0x4679_u16, StaticArray[0xba_u8, 0x16_u8, 0x96_u8, 0xaa_u8, 0xc5_u8, 0x83_u8, 0xc1_u8, 0x34_u8])
     def query_interface(this : ICoreFragmentInspector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -472,7 +491,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("75ae8777-6848-49f7-956c-a3a92f5096e8")]
   record IRangeException, lpVtbl : IRangeExceptionVtbl* do
     GUID = LibC::GUID.new(0x75ae8777_u32, 0x6848_u16, 0x49f7_u16, StaticArray[0x95_u8, 0x6c_u8, 0xa3_u8, 0xa9_u8, 0x2f_u8, 0x50_u8, 0x96_u8, 0xe8_u8])
     def query_interface(this : IRangeException*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -508,7 +526,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("0944439f-ddb1-4176-b703-046ff22a2386")]
   record IEnumRangeExceptions, lpVtbl : IEnumRangeExceptionsVtbl* do
     GUID = LibC::GUID.new(0x944439f_u32, 0xddb1_u16, 0x4176_u16, StaticArray[0xb7_u8, 0x3_u8, 0x4_u8, 0x6f_u8, 0xf2_u8, 0x2a_u8, 0x23_u8, 0x86_u8])
     def query_interface(this : IEnumRangeExceptions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -545,7 +562,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("892fb9b0-7c55-4a18-9316-fdf449569b64")]
   record ISingleItemException, lpVtbl : ISingleItemExceptionVtbl* do
     GUID = LibC::GUID.new(0x892fb9b0_u32, 0x7c55_u16, 0x4a18_u16, StaticArray[0x93_u8, 0x16_u8, 0xfd_u8, 0xf4_u8, 0x49_u8, 0x56_u8, 0x9b_u8, 0x64_u8])
     def query_interface(this : ISingleItemException*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -578,7 +594,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("e563381c-1b4d-4c66-9796-c86faccdcd40")]
   record IEnumSingleItemExceptions, lpVtbl : IEnumSingleItemExceptionsVtbl* do
     GUID = LibC::GUID.new(0xe563381c_u32, 0x1b4d_u16, 0x4c66_u16, StaticArray[0x97_u8, 0x96_u8, 0xc8_u8, 0x6f_u8, 0xac_u8, 0xcd_u8, 0xcd_u8, 0x40_u8])
     def query_interface(this : IEnumSingleItemExceptions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -616,7 +631,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("0cd7ee7c-fec0-4021-99ee-f0e5348f2a5f")]
   record IChangeUnitException, lpVtbl : IChangeUnitExceptionVtbl* do
     GUID = LibC::GUID.new(0xcd7ee7c_u32, 0xfec0_u16, 0x4021_u16, StaticArray[0x99_u8, 0xee_u8, 0xf0_u8, 0xe5_u8, 0x34_u8, 0x8f_u8, 0x2a_u8, 0x5f_u8])
     def query_interface(this : IChangeUnitException*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -652,7 +666,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("3074e802-9319-4420-be21-1022e2e21da8")]
   record IEnumChangeUnitExceptions, lpVtbl : IEnumChangeUnitExceptionsVtbl* do
     GUID = LibC::GUID.new(0x3074e802_u32, 0x9319_u16, 0x4420_u16, StaticArray[0xbe_u8, 0x21_u8, 0x10_u8, 0x22_u8, 0xe2_u8, 0xe2_u8, 0x1d_u8, 0xa8_u8])
     def query_interface(this : IEnumChangeUnitExceptions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -690,7 +703,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("2209f4fc-fd10-4ff0-84a8-f0a1982e440e")]
   record IReplicaKeyMap, lpVtbl : IReplicaKeyMapVtbl* do
     GUID = LibC::GUID.new(0x2209f4fc_u32, 0xfd10_u16, 0x4ff0_u16, StaticArray[0x84_u8, 0xa8_u8, 0xf0_u8, 0xa1_u8, 0x98_u8, 0x2e_u8, 0x44_u8, 0xe_u8])
     def query_interface(this : IReplicaKeyMap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -723,7 +735,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("ded10970-ec85-4115-b52c-4405845642a5")]
   record IConstructReplicaKeyMap, lpVtbl : IConstructReplicaKeyMapVtbl* do
     GUID = LibC::GUID.new(0xded10970_u32, 0xec85_u16, 0x4115_u16, StaticArray[0xb5_u8, 0x2c_u8, 0x44_u8, 0x5_u8, 0x84_u8, 0x56_u8, 0x42_u8, 0xa5_u8])
     def query_interface(this : IConstructReplicaKeyMap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -773,7 +784,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("615bbb53-c945-4203-bf4b-2cb65919a0aa")]
   record ISyncKnowledge, lpVtbl : ISyncKnowledgeVtbl* do
     GUID = LibC::GUID.new(0x615bbb53_u32, 0xc945_u16, 0x4203_u16, StaticArray[0xbf_u8, 0x4b_u8, 0x2c_u8, 0xb6_u8, 0x59_u8, 0x19_u8, 0xa0_u8, 0xaa_u8])
     def query_interface(this : ISyncKnowledge*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -893,7 +903,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("456e0f96-6036-452b-9f9d-bcc4b4a85db2")]
   record IForgottenKnowledge, lpVtbl : IForgottenKnowledgeVtbl* do
     GUID = LibC::GUID.new(0x456e0f96_u32, 0x6036_u16, 0x452b_u16, StaticArray[0x9f_u8, 0x9d_u8, 0xbc_u8, 0xc4_u8, 0xb4_u8, 0xa8_u8, 0x5d_u8, 0xb2_u8])
     def query_interface(this : IForgottenKnowledge*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1029,7 +1038,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("ed0addc0-3b4b-46a1-9a45-45661d2114c8")]
   record ISyncKnowledge2, lpVtbl : ISyncKnowledge2Vtbl* do
     GUID = LibC::GUID.new(0xed0addc0_u32, 0x3b4b_u16, 0x46a1_u16, StaticArray[0x9a_u8, 0x45_u8, 0x45_u8, 0x66_u8, 0x1d_u8, 0x21_u8, 0x14_u8, 0xc8_u8])
     def query_interface(this : ISyncKnowledge2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1169,7 +1177,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("b37c4a0a-4b7d-4c2d-9711-3b00d119b1c8")]
   record IRecoverableErrorData, lpVtbl : IRecoverableErrorDataVtbl* do
     GUID = LibC::GUID.new(0xb37c4a0a_u32, 0x4b7d_u16, 0x4c2d_u16, StaticArray[0x97_u8, 0x11_u8, 0x3b_u8, 0x0_u8, 0xd1_u8, 0x19_u8, 0xb1_u8, 0xc8_u8])
     def query_interface(this : IRecoverableErrorData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1206,7 +1213,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("0f5625e8-0a7b-45ee-9637-1ce13645909e")]
   record IRecoverableError, lpVtbl : IRecoverableErrorVtbl* do
     GUID = LibC::GUID.new(0xf5625e8_u32, 0xa7b_u16, 0x45ee_u16, StaticArray[0x96_u8, 0x37_u8, 0x1c_u8, 0xe1_u8, 0x36_u8, 0x45_u8, 0x90_u8, 0x9e_u8])
     def query_interface(this : IRecoverableError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1252,7 +1258,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("014ebf97-9f20-4f7a-bdd4-25979c77c002")]
   record IChangeConflict, lpVtbl : IChangeConflictVtbl* do
     GUID = LibC::GUID.new(0x14ebf97_u32, 0x9f20_u16, 0x4f7a_u16, StaticArray[0xbd_u8, 0xd4_u8, 0x25_u8, 0x97_u8, 0x9c_u8, 0x77_u8, 0xc0_u8, 0x2_u8])
     def query_interface(this : IChangeConflict*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1311,7 +1316,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("00d2302e-1cf8-4835-b85f-b7ca4f799e0a")]
   record IConstraintConflict, lpVtbl : IConstraintConflictVtbl* do
     GUID = LibC::GUID.new(0xd2302e_u32, 0x1cf8_u16, 0x4835_u16, StaticArray[0xb8_u8, 0x5f_u8, 0xb7_u8, 0xca_u8, 0x4f_u8, 0x79_u8, 0x9e_u8, 0xa_u8])
     def query_interface(this : IConstraintConflict*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1375,7 +1379,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("0599797f-5ed9-485c-ae36-0c5d1bf2e7a5")]
   record ISyncCallback, lpVtbl : ISyncCallbackVtbl* do
     GUID = LibC::GUID.new(0x599797f_u32, 0x5ed9_u16, 0x485c_u16, StaticArray[0xae_u8, 0x36_u8, 0xc_u8, 0x5d_u8, 0x1b_u8, 0xf2_u8, 0xe7_u8, 0xa5_u8])
     def query_interface(this : ISyncCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1420,7 +1423,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("47ce84af-7442-4ead-8630-12015e030ad7")]
   record ISyncCallback2, lpVtbl : ISyncCallback2Vtbl* do
     GUID = LibC::GUID.new(0x47ce84af_u32, 0x7442_u16, 0x4ead_u16, StaticArray[0x86_u8, 0x30_u8, 0x12_u8, 0x1_u8, 0x5e_u8, 0x3_u8, 0xa_u8, 0xd7_u8])
     def query_interface(this : ISyncCallback2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1465,7 +1467,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("8af3843e-75b3-438c-bb51-6f020d70d3cb")]
   record ISyncConstraintCallback, lpVtbl : ISyncConstraintCallbackVtbl* do
     GUID = LibC::GUID.new(0x8af3843e_u32, 0x75b3_u16, 0x438c_u16, StaticArray[0xbb_u8, 0x51_u8, 0x6f_u8, 0x2_u8, 0xd_u8, 0x70_u8, 0xd3_u8, 0xcb_u8])
     def query_interface(this : ISyncConstraintCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1492,7 +1493,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("8f657056-2bce-4a17-8c68-c7bb7898b56f")]
   record ISyncProvider, lpVtbl : ISyncProviderVtbl* do
     GUID = LibC::GUID.new(0x8f657056_u32, 0x2bce_u16, 0x4a17_u16, StaticArray[0x8c_u8, 0x68_u8, 0xc7_u8, 0xbb_u8, 0x78_u8, 0x98_u8, 0xb5_u8, 0x6f_u8])
     def query_interface(this : ISyncProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1525,7 +1525,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("b8a940fe-9f01-483b-9434-c37d361225d9")]
   record ISyncSessionState, lpVtbl : ISyncSessionStateVtbl* do
     GUID = LibC::GUID.new(0xb8a940fe_u32, 0x9f01_u16, 0x483b_u16, StaticArray[0x94_u8, 0x34_u8, 0xc3_u8, 0x7d_u8, 0x36_u8, 0x12_u8, 0x25_u8, 0xd9_u8])
     def query_interface(this : ISyncSessionState*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1570,7 +1569,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("326c6810-790a-409b-b741-6999388761eb")]
   record ISyncSessionExtendedErrorInfo, lpVtbl : ISyncSessionExtendedErrorInfoVtbl* do
     GUID = LibC::GUID.new(0x326c6810_u32, 0x790a_u16, 0x409b_u16, StaticArray[0xb7_u8, 0x41_u8, 0x69_u8, 0x99_u8, 0x38_u8, 0x87_u8, 0x61_u8, 0xeb_u8])
     def query_interface(this : ISyncSessionExtendedErrorInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1605,7 +1603,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("9e37cfa3-9e38-4c61-9ca3-ffe810b45ca2")]
   record ISyncSessionState2, lpVtbl : ISyncSessionState2Vtbl* do
     GUID = LibC::GUID.new(0x9e37cfa3_u32, 0x9e38_u16, 0x4c61_u16, StaticArray[0x9c_u8, 0xa3_u8, 0xff_u8, 0xe8_u8, 0x10_u8, 0xb4_u8, 0x5c_u8, 0xa2_u8])
     def query_interface(this : ISyncSessionState2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1656,7 +1653,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("794eaaf8-3f2e-47e6-9728-17e6fcf94cb7")]
   record ISyncFilterInfo, lpVtbl : ISyncFilterInfoVtbl* do
     GUID = LibC::GUID.new(0x794eaaf8_u32, 0x3f2e_u16, 0x47e6_u16, StaticArray[0x97_u8, 0x28_u8, 0x17_u8, 0xe6_u8, 0xfc_u8, 0xf9_u8, 0x4c_u8, 0xb7_u8])
     def query_interface(this : ISyncFilterInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1684,7 +1680,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("19b394ba-e3d0-468c-934d-321968b2ab34")]
   record ISyncFilterInfo2, lpVtbl : ISyncFilterInfo2Vtbl* do
     GUID = LibC::GUID.new(0x19b394ba_u32, 0xe3d0_u16, 0x468c_u16, StaticArray[0x93_u8, 0x4d_u8, 0x32_u8, 0x19_u8, 0x68_u8, 0xb2_u8, 0xab_u8, 0x34_u8])
     def query_interface(this : ISyncFilterInfo2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1717,7 +1712,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("f2837671-0bdf-43fa-b502-232375fb50c2")]
   record IChangeUnitListFilterInfo, lpVtbl : IChangeUnitListFilterInfoVtbl* do
     GUID = LibC::GUID.new(0xf2837671_u32, 0xbdf_u16, 0x43fa_u16, StaticArray[0xb5_u8, 0x2_u8, 0x23_u8, 0x23_u8, 0x75_u8, 0xfb_u8, 0x50_u8, 0xc2_u8])
     def query_interface(this : IChangeUnitListFilterInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1754,7 +1748,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("087a3f15-0fcb-44c1-9639-53c14e2b5506")]
   record ISyncFilter, lpVtbl : ISyncFilterVtbl* do
     GUID = LibC::GUID.new(0x87a3f15_u32, 0xfcb_u16, 0x44c1_u16, StaticArray[0x96_u8, 0x39_u8, 0x53_u8, 0xc1_u8, 0x4e_u8, 0x2b_u8, 0x55_u8, 0x6_u8])
     def query_interface(this : ISyncFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1784,7 +1777,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("b45b7a72-e5c7-46be-9c82-77b8b15dab8a")]
   record ISyncFilterDeserializer, lpVtbl : ISyncFilterDeserializerVtbl* do
     GUID = LibC::GUID.new(0xb45b7a72_u32, 0xe5c7_u16, 0x46be_u16, StaticArray[0x9c_u8, 0x82_u8, 0x77_u8, 0xb8_u8, 0xb1_u8, 0x5d_u8, 0xab_u8, 0x8a_u8])
     def query_interface(this : ISyncFilterDeserializer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1812,7 +1804,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("1d335dff-6f88-4e4d-91a8-a3f351cfd473")]
   record ICustomFilterInfo, lpVtbl : ICustomFilterInfoVtbl* do
     GUID = LibC::GUID.new(0x1d335dff_u32, 0x6f88_u16, 0x4e4d_u16, StaticArray[0x91_u8, 0xa8_u8, 0xa3_u8, 0xf3_u8, 0x51_u8, 0xcf_u8, 0xd4_u8, 0x73_u8])
     def query_interface(this : ICustomFilterInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1845,7 +1836,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("11f9de71-2818-4779-b2ac-42d450565f45")]
   record ICombinedFilterInfo, lpVtbl : ICombinedFilterInfoVtbl* do
     GUID = LibC::GUID.new(0x11f9de71_u32, 0x2818_u16, 0x4779_u16, StaticArray[0xb2_u8, 0xac_u8, 0x42_u8, 0xd4_u8, 0x50_u8, 0x56_u8, 0x5f_u8, 0x45_u8])
     def query_interface(this : ICombinedFilterInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1884,7 +1874,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("5f86be4a-5e78-4e32-ac1c-c24fd223ef85")]
   record IEnumSyncChanges, lpVtbl : IEnumSyncChangesVtbl* do
     GUID = LibC::GUID.new(0x5f86be4a_u32, 0x5e78_u16, 0x4e32_u16, StaticArray[0xac_u8, 0x1c_u8, 0xc2_u8, 0x4f_u8, 0xd2_u8, 0x23_u8, 0xef_u8, 0x85_u8])
     def query_interface(this : IEnumSyncChanges*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1920,7 +1909,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("56f14771-8677-484f-a170-e386e418a676")]
   record ISyncChangeBuilder, lpVtbl : ISyncChangeBuilderVtbl* do
     GUID = LibC::GUID.new(0x56f14771_u32, 0x8677_u16, 0x484f_u16, StaticArray[0xa1_u8, 0x70_u8, 0xe3_u8, 0x86_u8, 0xe4_u8, 0x18_u8, 0xa6_u8, 0x76_u8])
     def query_interface(this : ISyncChangeBuilder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1948,7 +1936,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("295024a0-70da-4c58-883c-ce2afb308d0b")]
   record IFilterTrackingSyncChangeBuilder, lpVtbl : IFilterTrackingSyncChangeBuilderVtbl* do
     GUID = LibC::GUID.new(0x295024a0_u32, 0x70da_u16, 0x4c58_u16, StaticArray[0x88_u8, 0x3c_u8, 0xce_u8, 0x2a_u8, 0xfb_u8, 0x30_u8, 0x8d_u8, 0xb_u8])
     def query_interface(this : IFilterTrackingSyncChangeBuilder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1991,7 +1978,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("52f6e694-6a71-4494-a184-a8311bf5d227")]
   record ISyncChangeBatchBase, lpVtbl : ISyncChangeBatchBaseVtbl* do
     GUID = LibC::GUID.new(0x52f6e694_u32, 0x6a71_u16, 0x4494_u16, StaticArray[0xa1_u8, 0x84_u8, 0xa8_u8, 0x31_u8, 0x1b_u8, 0xf5_u8, 0xd2_u8, 0x27_u8])
     def query_interface(this : ISyncChangeBatchBase*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2073,7 +2059,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("70c64dee-380f-4c2e-8f70-31c55bd5f9b3")]
   record ISyncChangeBatch, lpVtbl : ISyncChangeBatchVtbl* do
     GUID = LibC::GUID.new(0x70c64dee_u32, 0x380f_u16, 0x4c2e_u16, StaticArray[0x8f_u8, 0x70_u8, 0x31_u8, 0xc5_u8, 0x5b_u8, 0xd5_u8, 0xf9_u8, 0xb3_u8])
     def query_interface(this : ISyncChangeBatch*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2164,7 +2149,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("ef64197d-4f44-4ea2-b355-4524713e3bed")]
   record ISyncFullEnumerationChangeBatch, lpVtbl : ISyncFullEnumerationChangeBatchVtbl* do
     GUID = LibC::GUID.new(0xef64197d_u32, 0x4f44_u16, 0x4ea2_u16, StaticArray[0xb3_u8, 0x55_u8, 0x45_u8, 0x24_u8, 0x71_u8, 0x3e_u8, 0x3b_u8, 0xed_u8])
     def query_interface(this : ISyncFullEnumerationChangeBatch*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2255,7 +2239,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("097f13be-5b92-4048-b3f2-7b42a2515e07")]
   record ISyncChangeBatchWithPrerequisite, lpVtbl : ISyncChangeBatchWithPrerequisiteVtbl* do
     GUID = LibC::GUID.new(0x97f13be_u32, 0x5b92_u16, 0x4048_u16, StaticArray[0xb3_u8, 0xf2_u8, 0x7b_u8, 0x42_u8, 0xa2_u8, 0x51_u8, 0x5e_u8, 0x7_u8])
     def query_interface(this : ISyncChangeBatchWithPrerequisite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2344,7 +2327,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("6fdb596a-d755-4584-bd0c-c0c23a548fbf")]
   record ISyncChangeBatchBase2, lpVtbl : ISyncChangeBatchBase2Vtbl* do
     GUID = LibC::GUID.new(0x6fdb596a_u32, 0xd755_u16, 0x4584_u16, StaticArray[0xbd_u8, 0xc_u8, 0xc0_u8, 0xc2_u8, 0x3a_u8, 0x54_u8, 0x8f_u8, 0xbf_u8])
     def query_interface(this : ISyncChangeBatchBase2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2416,7 +2398,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("0f1a4995-cbc8-421d-b550-5d0bebf3e9a5")]
   record ISyncChangeBatchAdvanced, lpVtbl : ISyncChangeBatchAdvancedVtbl* do
     GUID = LibC::GUID.new(0xf1a4995_u32, 0xcbc8_u16, 0x421d_u16, StaticArray[0xb5_u8, 0x50_u8, 0x5d_u8, 0xb_u8, 0xeb_u8, 0xf3_u8, 0xe9_u8, 0xa5_u8])
     def query_interface(this : ISyncChangeBatchAdvanced*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2470,7 +2451,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("225f4a33-f5ee-4cc7-b039-67a262b4b2ac")]
   record ISyncChangeBatch2, lpVtbl : ISyncChangeBatch2Vtbl* do
     GUID = LibC::GUID.new(0x225f4a33_u32, 0xf5ee_u16, 0x4cc7_u16, StaticArray[0xb0_u8, 0x39_u8, 0x67_u8, 0xa2_u8, 0x62_u8, 0xb4_u8, 0xb2_u8, 0xac_u8])
     def query_interface(this : ISyncChangeBatch2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2568,7 +2548,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("e06449f4-a205-4b65-9724-01b22101eec1")]
   record ISyncFullEnumerationChangeBatch2, lpVtbl : ISyncFullEnumerationChangeBatch2Vtbl* do
     GUID = LibC::GUID.new(0xe06449f4_u32, 0xa205_u16, 0x4b65_u16, StaticArray[0x97_u8, 0x24_u8, 0x1_u8, 0xb2_u8, 0x21_u8, 0x1_u8, 0xee_u8, 0xc1_u8])
     def query_interface(this : ISyncFullEnumerationChangeBatch2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2653,7 +2632,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("43434a49-8da4-47f2-8172-ad7b8b024978")]
   record IKnowledgeSyncProvider, lpVtbl : IKnowledgeSyncProviderVtbl* do
     GUID = LibC::GUID.new(0x43434a49_u32, 0x8da4_u16, 0x47f2_u16, StaticArray[0x81_u8, 0x72_u8, 0xad_u8, 0x7b_u8, 0x8b_u8, 0x2_u8, 0x49_u8, 0x78_u8])
     def query_interface(this : IKnowledgeSyncProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2703,7 +2681,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("60edd8ca-7341-4bb7-95ce-fab6394b51cb")]
   record ISyncChangeUnit, lpVtbl : ISyncChangeUnitVtbl* do
     GUID = LibC::GUID.new(0x60edd8ca_u32, 0x7341_u16, 0x4bb7_u16, StaticArray[0x95_u8, 0xce_u8, 0xfa_u8, 0xb6_u8, 0x39_u8, 0x4b_u8, 0x51_u8, 0xcb_u8])
     def query_interface(this : ISyncChangeUnit*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2739,7 +2716,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("346b35f1-8703-4c6d-ab1a-4dbca2cff97f")]
   record IEnumSyncChangeUnits, lpVtbl : IEnumSyncChangeUnitsVtbl* do
     GUID = LibC::GUID.new(0x346b35f1_u32, 0x8703_u16, 0x4c6d_u16, StaticArray[0xab_u8, 0x1a_u8, 0x4d_u8, 0xbc_u8, 0xa2_u8, 0xcf_u8, 0xf9_u8, 0x7f_u8])
     def query_interface(this : IEnumSyncChangeUnits*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2784,7 +2760,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("a1952beb-0f6b-4711-b136-01da85b968a6")]
   record ISyncChange, lpVtbl : ISyncChangeVtbl* do
     GUID = LibC::GUID.new(0xa1952beb_u32, 0xf6b_u16, 0x4711_u16, StaticArray[0xb1_u8, 0x36_u8, 0x1_u8, 0xda_u8, 0x85_u8, 0xb9_u8, 0x68_u8, 0xa6_u8])
     def query_interface(this : ISyncChange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2839,7 +2814,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("9e38382f-1589-48c3-92e4-05ecdcb4f3f7")]
   record ISyncChangeWithPrerequisite, lpVtbl : ISyncChangeWithPrerequisiteVtbl* do
     GUID = LibC::GUID.new(0x9e38382f_u32, 0x1589_u16, 0x48c3_u16, StaticArray[0x92_u8, 0xe4_u8, 0x5_u8, 0xec_u8, 0xdc_u8, 0xb4_u8, 0xf3_u8, 0xf7_u8])
     def query_interface(this : ISyncChangeWithPrerequisite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2870,7 +2844,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("9785e0bd-bdff-40c4-98c5-b34b2f1991b3")]
   record ISyncFullEnumerationChange, lpVtbl : ISyncFullEnumerationChangeVtbl* do
     GUID = LibC::GUID.new(0x9785e0bd_u32, 0xbdff_u16, 0x40c4_u16, StaticArray[0x98_u8, 0xc5_u8, 0xb3_u8, 0x4b_u8, 0x2f_u8, 0x19_u8, 0x91_u8, 0xb3_u8])
     def query_interface(this : ISyncFullEnumerationChange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2900,7 +2873,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("6ec62597-0903-484c-ad61-36d6e938f47b")]
   record ISyncMergeTombstoneChange, lpVtbl : ISyncMergeTombstoneChangeVtbl* do
     GUID = LibC::GUID.new(0x6ec62597_u32, 0x903_u16, 0x484c_u16, StaticArray[0xad_u8, 0x61_u8, 0x36_u8, 0xd6_u8, 0xe9_u8, 0x38_u8, 0xf4_u8, 0x7b_u8])
     def query_interface(this : ISyncMergeTombstoneChange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2927,7 +2899,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("43aa3f61-4b2e-4b60-83df-b110d3e148f1")]
   record IEnumItemIds, lpVtbl : IEnumItemIdsVtbl* do
     GUID = LibC::GUID.new(0x43aa3f61_u32, 0x4b2e_u16, 0x4b60_u16, StaticArray[0x83_u8, 0xdf_u8, 0xb1_u8, 0x10_u8, 0xd3_u8, 0xe1_u8, 0x48_u8, 0xf1_u8])
     def query_interface(this : IEnumItemIds*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2957,7 +2928,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("ca169652-07c6-4708-a3da-6e4eba8d2297")]
   record IFilterKeyMap, lpVtbl : IFilterKeyMapVtbl* do
     GUID = LibC::GUID.new(0xca169652_u32, 0x7c6_u16, 0x4708_u16, StaticArray[0xa3_u8, 0xda_u8, 0x6e_u8, 0x4e_u8, 0xba_u8, 0x8d_u8, 0x22_u8, 0x97_u8])
     def query_interface(this : IFilterKeyMap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3001,7 +2971,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("bfe1ef00-e87d-42fd-a4e9-242d70414aef")]
   record ISyncChangeWithFilterKeyMap, lpVtbl : ISyncChangeWithFilterKeyMapVtbl* do
     GUID = LibC::GUID.new(0xbfe1ef00_u32, 0xe87d_u16, 0x42fd_u16, StaticArray[0xa4_u8, 0xe9_u8, 0x24_u8, 0x2d_u8, 0x70_u8, 0x41_u8, 0x4a_u8, 0xef_u8])
     def query_interface(this : ISyncChangeWithFilterKeyMap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3059,7 +3028,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("de247002-566d-459a-a6ed-a5aab3459fb7")]
   record ISyncChangeBatchWithFilterKeyMap, lpVtbl : ISyncChangeBatchWithFilterKeyMapVtbl* do
     GUID = LibC::GUID.new(0xde247002_u32, 0x566d_u16, 0x459a_u16, StaticArray[0xa6_u8, 0xed_u8, 0xa5_u8, 0xaa_u8, 0xb3_u8, 0x45_u8, 0x9f_u8, 0xb7_u8])
     def query_interface(this : ISyncChangeBatchWithFilterKeyMap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3108,7 +3076,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("71b4863b-f969-4676-bbc3-3d9fdc3fb2c7")]
   record IDataRetrieverCallback, lpVtbl : IDataRetrieverCallbackVtbl* do
     GUID = LibC::GUID.new(0x71b4863b_u32, 0xf969_u16, 0x4676_u16, StaticArray[0xbb_u8, 0xc3_u8, 0x3d_u8, 0x9f_u8, 0xdc_u8, 0x3f_u8, 0xb2_u8, 0xc7_u8])
     def query_interface(this : IDataRetrieverCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3140,7 +3107,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("44a4aaca-ec39-46d5-b5c9-d633c0ee67e2")]
   record ILoadChangeContext, lpVtbl : ILoadChangeContextVtbl* do
     GUID = LibC::GUID.new(0x44a4aaca_u32, 0xec39_u16, 0x46d5_u16, StaticArray[0xb5_u8, 0xc9_u8, 0xd6_u8, 0x33_u8, 0xc0_u8, 0xee_u8, 0x67_u8, 0xe2_u8])
     def query_interface(this : ILoadChangeContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3174,7 +3140,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("9b22f2a9-a4cd-4648-9d8e-3a510d4da04b")]
   record ISynchronousDataRetriever, lpVtbl : ISynchronousDataRetrieverVtbl* do
     GUID = LibC::GUID.new(0x9b22f2a9_u32, 0xa4cd_u16, 0x4648_u16, StaticArray[0x9d_u8, 0x8e_u8, 0x3a_u8, 0x51_u8, 0xd_u8, 0x4d_u8, 0xa0_u8, 0x4b_u8])
     def query_interface(this : ISynchronousDataRetriever*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3207,7 +3172,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("9fc7e470-61ea-4a88-9be4-df56a27cfef2")]
   record IAsynchronousDataRetriever, lpVtbl : IAsynchronousDataRetrieverVtbl* do
     GUID = LibC::GUID.new(0x9fc7e470_u32, 0x61ea_u16, 0x4a88_u16, StaticArray[0x9b_u8, 0xe4_u8, 0xdf_u8, 0x56_u8, 0xa2_u8, 0x7c_u8, 0xfe_u8, 0xf2_u8])
     def query_interface(this : IAsynchronousDataRetriever*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3243,7 +3207,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("82df8873-6360-463a-a8a1-ede5e1a1594d")]
   record IFilterRequestCallback, lpVtbl : IFilterRequestCallbackVtbl* do
     GUID = LibC::GUID.new(0x82df8873_u32, 0x6360_u16, 0x463a_u16, StaticArray[0xa8_u8, 0xa1_u8, 0xed_u8, 0xe5_u8, 0xe1_u8, 0xa1_u8, 0x59_u8, 0x4d_u8])
     def query_interface(this : IFilterRequestCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3270,7 +3233,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("2e020184-6d18-46a7-a32a-da4aeb06696c")]
   record IRequestFilteredSync, lpVtbl : IRequestFilteredSyncVtbl* do
     GUID = LibC::GUID.new(0x2e020184_u32, 0x6d18_u16, 0x46a7_u16, StaticArray[0xa3_u8, 0x2a_u8, 0xda_u8, 0x4a_u8, 0xeb_u8, 0x6_u8, 0x69_u8, 0x6c_u8])
     def query_interface(this : IRequestFilteredSync*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3297,7 +3259,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("3d128ded-d555-4e0d-bf4b-fb213a8a9302")]
   record ISupportFilteredSync, lpVtbl : ISupportFilteredSyncVtbl* do
     GUID = LibC::GUID.new(0x3d128ded_u32, 0xd555_u16, 0x4e0d_u16, StaticArray[0xbf_u8, 0x4b_u8, 0xfb_u8, 0x21_u8, 0x3a_u8, 0x8a_u8, 0x93_u8, 0x2_u8])
     def query_interface(this : ISupportFilteredSync*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3324,7 +3285,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("713ca7bb-c858-4674-b4b6-1122436587a9")]
   record IFilterTrackingRequestCallback, lpVtbl : IFilterTrackingRequestCallbackVtbl* do
     GUID = LibC::GUID.new(0x713ca7bb_u32, 0xc858_u16, 0x4674_u16, StaticArray[0xb4_u8, 0xb6_u8, 0x11_u8, 0x22_u8, 0x43_u8, 0x65_u8, 0x87_u8, 0xa9_u8])
     def query_interface(this : IFilterTrackingRequestCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3352,7 +3312,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("743383c0-fc4e-45ba-ad81-d9d84c7a24f8")]
   record IFilterTrackingProvider, lpVtbl : IFilterTrackingProviderVtbl* do
     GUID = LibC::GUID.new(0x743383c0_u32, 0xfc4e_u16, 0x45ba_u16, StaticArray[0xad_u8, 0x81_u8, 0xd9_u8, 0xd8_u8, 0x4c_u8, 0x7a_u8, 0x24_u8, 0xf8_u8])
     def query_interface(this : IFilterTrackingProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3383,7 +3342,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("eadf816f-d0bd-43ca-8f40-5acdc6c06f7a")]
   record ISupportLastWriteTime, lpVtbl : ISupportLastWriteTimeVtbl* do
     GUID = LibC::GUID.new(0xeadf816f_u32, 0xd0bd_u16, 0x43ca_u16, StaticArray[0x8f_u8, 0x40_u8, 0x5a_u8, 0xcd_u8, 0xc6_u8, 0xc0_u8, 0x6f_u8, 0x7a_u8])
     def query_interface(this : ISupportLastWriteTime*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3413,7 +3371,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("809b7276-98cf-4957-93a5-0ebdd3dddffd")]
   record IProviderConverter, lpVtbl : IProviderConverterVtbl* do
     GUID = LibC::GUID.new(0x809b7276_u32, 0x98cf_u16, 0x4957_u16, StaticArray[0x93_u8, 0xa5_u8, 0xe_u8, 0xbd_u8, 0xd3_u8, 0xdd_u8, 0xdf_u8, 0xfd_u8])
     def query_interface(this : IProviderConverter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3443,7 +3400,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("435d4861-68d5-44aa-a0f9-72a0b00ef9cf")]
   record ISyncDataConverter, lpVtbl : ISyncDataConverterVtbl* do
     GUID = LibC::GUID.new(0x435d4861_u32, 0x68d5_u16, 0x44aa_u16, StaticArray[0xa0_u8, 0xf9_u8, 0x72_u8, 0xa0_u8, 0xb0_u8, 0xe_u8, 0xf9_u8, 0xcf_u8])
     def query_interface(this : ISyncDataConverter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3494,7 +3450,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("cb45953b-7624-47bc-a472-eb8cac6b222e")]
   record ISyncProviderRegistration, lpVtbl : ISyncProviderRegistrationVtbl* do
     GUID = LibC::GUID.new(0xcb45953b_u32, 0x7624_u16, 0x47bc_u16, StaticArray[0xa4_u8, 0x72_u8, 0xeb_u8, 0x8c_u8, 0xac_u8, 0x6b_u8, 0x22_u8, 0x2e_u8])
     def query_interface(this : ISyncProviderRegistration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3569,7 +3524,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("f6be2602-17c6-4658-a2d7-68ed3330f641")]
   record IEnumSyncProviderConfigUIInfos, lpVtbl : IEnumSyncProviderConfigUIInfosVtbl* do
     GUID = LibC::GUID.new(0xf6be2602_u32, 0x17c6_u16, 0x4658_u16, StaticArray[0xa2_u8, 0xd7_u8, 0x68_u8, 0xed_u8, 0x33_u8, 0x30_u8, 0xf6_u8, 0x41_u8])
     def query_interface(this : IEnumSyncProviderConfigUIInfos*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3608,7 +3562,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("a04ba850-5eb1-460d-a973-393fcb608a11")]
   record IEnumSyncProviderInfos, lpVtbl : IEnumSyncProviderInfosVtbl* do
     GUID = LibC::GUID.new(0xa04ba850_u32, 0x5eb1_u16, 0x460d_u16, StaticArray[0xa9_u8, 0x73_u8, 0x39_u8, 0x3f_u8, 0xcb_u8, 0x60_u8, 0x8a_u8, 0x11_u8])
     def query_interface(this : IEnumSyncProviderInfos*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3649,7 +3602,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("1ee135de-88a4-4504-b0d0-f7920d7e5ba6")]
   record ISyncProviderInfo, lpVtbl : ISyncProviderInfoVtbl* do
     GUID = LibC::GUID.new(0x1ee135de_u32, 0x88a4_u16, 0x4504_u16, StaticArray[0xb0_u8, 0xd0_u8, 0xf7_u8, 0x92_u8, 0xd_u8, 0x7e_u8, 0x5b_u8, 0xa6_u8])
     def query_interface(this : ISyncProviderInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3696,7 +3648,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("214141ae-33d7-4d8d-8e37-f227e880ce50")]
   record ISyncProviderConfigUIInfo, lpVtbl : ISyncProviderConfigUIInfoVtbl* do
     GUID = LibC::GUID.new(0x214141ae_u32, 0x33d7_u16, 0x4d8d_u16, StaticArray[0x8e_u8, 0x37_u8, 0xf2_u8, 0x27_u8, 0xe8_u8, 0x80_u8, 0xce_u8, 0x50_u8])
     def query_interface(this : ISyncProviderConfigUIInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3741,7 +3692,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("7b0705f6-cbcd-4071-ab05-3bdc364d4a0c")]
   record ISyncProviderConfigUI, lpVtbl : ISyncProviderConfigUIVtbl* do
     GUID = LibC::GUID.new(0x7b0705f6_u32, 0xcbcd_u16, 0x4071_u16, StaticArray[0xab_u8, 0x5_u8, 0x3b_u8, 0xdc_u8, 0x36_u8, 0x4d_u8, 0x4a_u8, 0xc_u8])
     def query_interface(this : ISyncProviderConfigUI*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3779,7 +3729,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("913bcf76-47c1-40b5-a896-5e8a9c414c14")]
   record IRegisteredSyncProvider, lpVtbl : IRegisteredSyncProviderVtbl* do
     GUID = LibC::GUID.new(0x913bcf76_u32, 0x47c1_u16, 0x40b5_u16, StaticArray[0xa8_u8, 0x96_u8, 0x5e_u8, 0x8a_u8, 0x9c_u8, 0x41_u8, 0x4c_u8, 0x14_u8])
     def query_interface(this : IRegisteredSyncProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3813,7 +3762,6 @@ module Win32cr::System::WindowsSync
 
 
   @[Extern]
-  #@[Com("eea0d9ae-6b29-43b4-9e70-e3ae33bb2c3b")]
   record ISyncRegistrationChange, lpVtbl : ISyncRegistrationChangeVtbl* do
     GUID = LibC::GUID.new(0xeea0d9ae_u32, 0x6b29_u16, 0x43b4_u16, StaticArray[0x9e_u8, 0x70_u8, 0xe3_u8, 0xae_u8, 0x33_u8, 0xbb_u8, 0x2c_u8, 0x3b_u8])
     def query_interface(this : ISyncRegistrationChange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

@@ -4,9 +4,9 @@ require "./../system/com.cr"
 require "./../networking/win_sock.cr"
 
 module Win32cr::Devices::WebServicesOnDevices
-  alias WSD_STUB_FUNCTION = Proc(Void*, Void*, Win32cr::Devices::WebServicesOnDevices::WSD_EVENT*, Win32cr::Foundation::HRESULT)*
+  alias WSD_STUB_FUNCTION = Proc(Void*, Void*, Win32cr::Devices::WebServicesOnDevices::WSD_EVENT*, Win32cr::Foundation::HRESULT)
 
-  alias PWSD_SOAP_MESSAGE_HANDLER = Proc(Void*, Win32cr::Devices::WebServicesOnDevices::WSD_EVENT*, Win32cr::Foundation::HRESULT)*
+  alias PWSD_SOAP_MESSAGE_HANDLER = Proc(Void*, Win32cr::Devices::WebServicesOnDevices::WSD_EVENT*, Win32cr::Foundation::HRESULT)
 
   WSD_DEFAULT_HOSTING_ADDRESS = "http://*:5357/"
   WSD_DEFAULT_SECURE_HOSTING_ADDRESS = "https://*:5358/"
@@ -115,454 +115,667 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record WSD_CONFIG_PARAM,
-    configParamType : Win32cr::Devices::WebServicesOnDevices::WSD_CONFIG_PARAM_TYPE,
-    pConfigData : Void*,
-    dwConfigDataSize : UInt32
-
-  @[Extern]
-  record WSD_SECURITY_CERT_VALIDATION_V1,
-    certMatchArray : Win32cr::Security::Cryptography::CERT_CONTEXT**,
-    dwCertMatchArrayCount : UInt32,
-    hCertMatchStore : Win32cr::Security::Cryptography::HCERTSTORE,
-    hCertIssuerStore : Win32cr::Security::Cryptography::HCERTSTORE,
-    dwCertCheckOptions : UInt32
-
-  @[Extern]
-  record WSD_SECURITY_CERT_VALIDATION,
-    certMatchArray : Win32cr::Security::Cryptography::CERT_CONTEXT**,
-    dwCertMatchArrayCount : UInt32,
-    hCertMatchStore : Win32cr::Security::Cryptography::HCERTSTORE,
-    hCertIssuerStore : Win32cr::Security::Cryptography::HCERTSTORE,
-    dwCertCheckOptions : UInt32,
-    pszCNGHashAlgId : Win32cr::Foundation::PWSTR,
-    pbCertHash : UInt8*,
-    dwCertHashSize : UInt32
-
-  @[Extern]
-  record WSD_SECURITY_SIGNATURE_VALIDATION,
-    signingCertArray : Win32cr::Security::Cryptography::CERT_CONTEXT**,
-    dwSigningCertArrayCount : UInt32,
-    hSigningCertStore : Win32cr::Security::Cryptography::HCERTSTORE,
-    dwFlags : UInt32
-
-  @[Extern]
-  record WSD_CONFIG_ADDRESSES,
-    addresses : Void**,
-    dwAddressCount : UInt32
-
-  @[Extern]
-  record WSDUdpRetransmitParams,
-    ulSendDelay : UInt32,
-    ulRepeat : UInt32,
-    ulRepeatMinDelay : UInt32,
-    ulRepeatMaxDelay : UInt32,
-    ulRepeatUpperDelay : UInt32
-
-  @[Extern]
-  record WSD_DATETIME,
-    isPositive : Win32cr::Foundation::BOOL,
-    year : UInt32,
-    month : UInt8,
-    day : UInt8,
-    hour : UInt8,
-    minute : UInt8,
-    second : UInt8,
-    millisecond : UInt32,
-    tz_is_local : Win32cr::Foundation::BOOL,
-    tz_is_positive : Win32cr::Foundation::BOOL,
-    tz_hour : UInt8,
-    tz_minute : UInt8
-
-  @[Extern]
-  record WSD_DURATION,
-    isPositive : Win32cr::Foundation::BOOL,
-    year : UInt32,
-    month : UInt32,
-    day : UInt32,
-    hour : UInt32,
-    minute : UInt32,
-    second : UInt32,
-    millisecond : UInt32
-
-  @[Extern]
-  record WSDXML_NAMESPACE,
-    uri : Win32cr::Foundation::PWSTR,
-    preferred_prefix : Win32cr::Foundation::PWSTR,
-    names : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*,
-    names_count : UInt16,
-    encoding : UInt16
-
-  @[Extern]
-  record WSDXML_NAME,
-    space : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAMESPACE*,
-    local_name : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record WSDXML_TYPE,
-    uri : Win32cr::Foundation::PWSTR,
-    table : UInt8*
-
-  @[Extern]
-  record WSDXML_PREFIX_MAPPING,
-    refs : UInt32,
-    next__ : Win32cr::Devices::WebServicesOnDevices::WSDXML_PREFIX_MAPPING*,
-    space : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAMESPACE*,
-    prefix : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record WSDXML_ATTRIBUTE,
-    element : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*,
-    next__ : Win32cr::Devices::WebServicesOnDevices::WSDXML_ATTRIBUTE*,
-    name : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*,
-    value : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record WSDXML_NODE,
-    type__ : Int32,
-    parent : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*,
-    next__ : Win32cr::Devices::WebServicesOnDevices::WSDXML_NODE*
-
-  @[Extern]
-  record WSDXML_ELEMENT,
-    node : Win32cr::Devices::WebServicesOnDevices::WSDXML_NODE,
-    name : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*,
-    first_attribute : Win32cr::Devices::WebServicesOnDevices::WSDXML_ATTRIBUTE*,
-    first_child : Win32cr::Devices::WebServicesOnDevices::WSDXML_NODE*,
-    prefix_mappings : Win32cr::Devices::WebServicesOnDevices::WSDXML_PREFIX_MAPPING*
-
-  @[Extern]
-  record WSDXML_TEXT,
-    node : Win32cr::Devices::WebServicesOnDevices::WSDXML_NODE,
-    text : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record WSDXML_ELEMENT_LIST,
-    next__ : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT_LIST*,
-    element : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record WSD_OPERATION,
-    request_type : Win32cr::Devices::WebServicesOnDevices::WSDXML_TYPE*,
-    response_type : Win32cr::Devices::WebServicesOnDevices::WSDXML_TYPE*,
-    request_stub_function : Win32cr::Devices::WebServicesOnDevices::WSD_STUB_FUNCTION
-
-  @[Extern]
-  record WSD_HANDLER_CONTEXT,
-    handler : Win32cr::Devices::WebServicesOnDevices::PWSD_SOAP_MESSAGE_HANDLER,
-    p_void : Void*,
-    unknown : Void*
-
-  @[Extern]
-  record WSD_SYNCHRONOUS_RESPONSE_CONTEXT,
-    hr : Win32cr::Foundation::HRESULT,
-    eventHandle : Win32cr::Foundation::HANDLE,
-    messageParameters : Void*,
-    results : Void*
-
-  @[Extern]
-  record WSD_PORT_TYPE,
-    encoded_name : UInt32,
-    operation_count : UInt32,
-    operations : Win32cr::Devices::WebServicesOnDevices::WSD_OPERATION*,
-    protocol_type : Win32cr::Devices::WebServicesOnDevices::WSD_PROTOCOL_TYPE
-
-  @[Extern]
-  record WSD_RELATIONSHIP_METADATA,
-    type__ : Win32cr::Foundation::PWSTR,
-    data : Win32cr::Devices::WebServicesOnDevices::WSD_HOST_METADATA*,
-    any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record WSD_SERVICE_METADATA_LIST,
-    next__ : Win32cr::Devices::WebServicesOnDevices::WSD_SERVICE_METADATA_LIST*,
-    element : Win32cr::Devices::WebServicesOnDevices::WSD_SERVICE_METADATA*
-
-  @[Extern]
-  record WSD_HOST_METADATA,
-    host : Win32cr::Devices::WebServicesOnDevices::WSD_SERVICE_METADATA*,
-    hosted : Win32cr::Devices::WebServicesOnDevices::WSD_SERVICE_METADATA_LIST*
-
-  @[Extern]
-  record WSD_ENDPOINT_REFERENCE_LIST,
-    next__ : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE_LIST*,
-    element : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*
-
-  @[Extern]
-  record WSD_SERVICE_METADATA,
-    endpoint_reference : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE_LIST*,
-    types : Win32cr::Devices::WebServicesOnDevices::WSD_NAME_LIST*,
-    service_id : Win32cr::Foundation::PWSTR,
-    any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record WSD_THIS_DEVICE_METADATA,
-    friendly_name : Win32cr::Devices::WebServicesOnDevices::WSD_LOCALIZED_STRING_LIST*,
-    firmware_version : Win32cr::Foundation::PWSTR,
-    serial_number : Win32cr::Foundation::PWSTR,
-    any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record WSD_THIS_MODEL_METADATA,
-    manufacturer : Win32cr::Devices::WebServicesOnDevices::WSD_LOCALIZED_STRING_LIST*,
-    manufacturer_url : Win32cr::Foundation::PWSTR,
-    model_name : Win32cr::Devices::WebServicesOnDevices::WSD_LOCALIZED_STRING_LIST*,
-    model_number : Win32cr::Foundation::PWSTR,
-    model_url : Win32cr::Foundation::PWSTR,
-    presentation_url : Win32cr::Foundation::PWSTR,
-    any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record WSD_LOCALIZED_STRING_LIST,
-    next__ : Win32cr::Devices::WebServicesOnDevices::WSD_LOCALIZED_STRING_LIST*,
-    element : Win32cr::Devices::WebServicesOnDevices::WSD_LOCALIZED_STRING*
-
-  @[Extern]
-  record WSD_SOAP_FAULT_REASON,
-    text : Win32cr::Devices::WebServicesOnDevices::WSD_LOCALIZED_STRING_LIST*
-
-  @[Extern]
-  record WSD_SOAP_FAULT_SUBCODE,
-    value : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*,
-    subcode : Win32cr::Devices::WebServicesOnDevices::WSD_SOAP_FAULT_SUBCODE*
-
-  @[Extern]
-  record WSD_SOAP_FAULT_CODE,
-    value : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*,
-    subcode : Win32cr::Devices::WebServicesOnDevices::WSD_SOAP_FAULT_SUBCODE*
-
-  @[Extern]
-  record WSD_SOAP_FAULT,
-    code : Win32cr::Devices::WebServicesOnDevices::WSD_SOAP_FAULT_CODE*,
-    reason : Win32cr::Devices::WebServicesOnDevices::WSD_SOAP_FAULT_REASON*,
-    node : Win32cr::Foundation::PWSTR,
-    role : Win32cr::Foundation::PWSTR,
-    detail : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record WSD_APP_SEQUENCE,
-    instance_id : UInt64,
-    sequence_id : Win32cr::Foundation::PWSTR,
-    message_number : UInt64
-
-  @[Extern]
-  record WSD_HEADER_RELATESTO,
-    relationship_type : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*,
-    message_id : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record WSD_SOAP_HEADER,
-    to : Win32cr::Foundation::PWSTR,
-    action : Win32cr::Foundation::PWSTR,
-    message_id : Win32cr::Foundation::PWSTR,
-    relates_to : Win32cr::Devices::WebServicesOnDevices::WSD_HEADER_RELATESTO,
-    reply_to : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*,
-    from : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*,
-    fault_to : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*,
-    app_sequence : Win32cr::Devices::WebServicesOnDevices::WSD_APP_SEQUENCE*,
-    any_headers : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record WSD_SOAP_MESSAGE,
-    header : Win32cr::Devices::WebServicesOnDevices::WSD_SOAP_HEADER,
-    body : Void*,
-    body_type : Win32cr::Devices::WebServicesOnDevices::WSDXML_TYPE*
-
-  @[Extern]
-  record WSD_RESOLVE_MATCHES,
-    resolve_match : Win32cr::Devices::WebServicesOnDevices::WSD_RESOLVE_MATCH*,
-    any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record WSD_RESOLVE_MATCH,
-    endpoint_reference : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*,
-    types : Win32cr::Devices::WebServicesOnDevices::WSD_NAME_LIST*,
-    scopes : Win32cr::Devices::WebServicesOnDevices::WSD_SCOPES*,
-    x_addrs : Win32cr::Devices::WebServicesOnDevices::WSD_URI_LIST*,
-    metadata_version : UInt64,
-    any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record WSD_RESOLVE,
-    endpoint_reference : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*,
-    any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record WSD_PROBE_MATCH,
-    endpoint_reference : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*,
-    types : Win32cr::Devices::WebServicesOnDevices::WSD_NAME_LIST*,
-    scopes : Win32cr::Devices::WebServicesOnDevices::WSD_SCOPES*,
-    x_addrs : Win32cr::Devices::WebServicesOnDevices::WSD_URI_LIST*,
-    metadata_version : UInt64,
-    any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record WSD_PROBE_MATCH_LIST,
-    next__ : Win32cr::Devices::WebServicesOnDevices::WSD_PROBE_MATCH_LIST*,
-    element : Win32cr::Devices::WebServicesOnDevices::WSD_PROBE_MATCH*
-
-  @[Extern]
-  record WSD_PROBE_MATCHES,
-    probe_match : Win32cr::Devices::WebServicesOnDevices::WSD_PROBE_MATCH_LIST*,
-    any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record WSD_PROBE,
-    types : Win32cr::Devices::WebServicesOnDevices::WSD_NAME_LIST*,
-    scopes : Win32cr::Devices::WebServicesOnDevices::WSD_SCOPES*,
-    any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record WSD_BYE,
-    endpoint_reference : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*,
-    any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record WSD_SCOPES,
-    match_by : Win32cr::Foundation::PWSTR,
-    scopes : Win32cr::Devices::WebServicesOnDevices::WSD_URI_LIST*
-
-  @[Extern]
-  record WSD_NAME_LIST,
-    next__ : Win32cr::Devices::WebServicesOnDevices::WSD_NAME_LIST*,
-    element : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*
-
-  @[Extern]
-  record WSD_HELLO,
-    endpoint_reference : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*,
-    types : Win32cr::Devices::WebServicesOnDevices::WSD_NAME_LIST*,
-    scopes : Win32cr::Devices::WebServicesOnDevices::WSD_SCOPES*,
-    x_addrs : Win32cr::Devices::WebServicesOnDevices::WSD_URI_LIST*,
-    metadata_version : UInt64,
-    any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record WSD_REFERENCE_PARAMETERS,
-    any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record WSD_REFERENCE_PROPERTIES,
-    any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record WSD_ENDPOINT_REFERENCE,
-    address : Win32cr::Foundation::PWSTR,
-    reference_properties : Win32cr::Devices::WebServicesOnDevices::WSD_REFERENCE_PROPERTIES,
-    reference_parameters : Win32cr::Devices::WebServicesOnDevices::WSD_REFERENCE_PARAMETERS,
-    port_type : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*,
-    service_name : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*,
-    any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record WSD_METADATA_SECTION,
-    dialect : Win32cr::Foundation::PWSTR,
-    identifier : Win32cr::Foundation::PWSTR,
-    data : Void*,
-    metadata_reference : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*,
-    location : Win32cr::Foundation::PWSTR,
-    any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record WSD_METADATA_SECTION_LIST,
-    next__ : Win32cr::Devices::WebServicesOnDevices::WSD_METADATA_SECTION_LIST*,
-    element : Win32cr::Devices::WebServicesOnDevices::WSD_METADATA_SECTION*
-
-  @[Extern]
-  record WSD_URI_LIST,
-    next__ : Win32cr::Devices::WebServicesOnDevices::WSD_URI_LIST*,
-    element : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record WSD_EVENTING_FILTER_ACTION,
-    actions : Win32cr::Devices::WebServicesOnDevices::WSD_URI_LIST*
-
-  @[Extern]
-  record WSD_EVENTING_FILTER,
-    dialect : Win32cr::Foundation::PWSTR,
-    filter_action : Win32cr::Devices::WebServicesOnDevices::WSD_EVENTING_FILTER_ACTION*,
-    data : Void*
-
-  @[Extern]
-  record WSD_EVENTING_EXPIRES,
-    duration : Win32cr::Devices::WebServicesOnDevices::WSD_DURATION*,
-    date_time : Win32cr::Devices::WebServicesOnDevices::WSD_DATETIME*
-
-  @[Extern]
-  record WSD_EVENTING_DELIVERY_MODE_PUSH,
-    notify_to : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*
-
-  @[Extern]
-  record WSD_EVENTING_DELIVERY_MODE,
-    mode : Win32cr::Foundation::PWSTR,
-    push : Win32cr::Devices::WebServicesOnDevices::WSD_EVENTING_DELIVERY_MODE_PUSH*,
-    data : Void*
-
-  @[Extern]
-  record WSD_LOCALIZED_STRING,
-    lang : Win32cr::Foundation::PWSTR,
-    string : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record RESPONSEBODY_GetMetadata,
-    metadata : Win32cr::Devices::WebServicesOnDevices::WSD_METADATA_SECTION_LIST*
-
-  @[Extern]
-  record REQUESTBODY_Subscribe,
-    end_to : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*,
-    delivery : Win32cr::Devices::WebServicesOnDevices::WSD_EVENTING_DELIVERY_MODE*,
-    expires : Win32cr::Devices::WebServicesOnDevices::WSD_EVENTING_EXPIRES*,
-    filter : Win32cr::Devices::WebServicesOnDevices::WSD_EVENTING_FILTER*,
-    any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record RESPONSEBODY_Subscribe,
-    subscription_manager : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*,
-    expires : Win32cr::Devices::WebServicesOnDevices::WSD_EVENTING_EXPIRES*,
-    any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record REQUESTBODY_Renew,
-    expires : Win32cr::Devices::WebServicesOnDevices::WSD_EVENTING_EXPIRES*,
-    any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record RESPONSEBODY_Renew,
-    expires : Win32cr::Devices::WebServicesOnDevices::WSD_EVENTING_EXPIRES*,
-    any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record REQUESTBODY_GetStatus,
-    any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record RESPONSEBODY_GetStatus,
-    expires : Win32cr::Devices::WebServicesOnDevices::WSD_EVENTING_EXPIRES*,
-    any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record REQUESTBODY_Unsubscribe,
-    any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record RESPONSEBODY_SubscriptionEnd,
-    subscription_manager : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*,
-    status : Win32cr::Foundation::PWSTR,
-    reason : Win32cr::Devices::WebServicesOnDevices::WSD_LOCALIZED_STRING*,
-    any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record WSD_UNKNOWN_LOOKUP,
-    any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
-
-  @[Extern]
-  record WSD_EVENT,
-    hr : Win32cr::Foundation::HRESULT,
-    event_type : UInt32,
-    dispatch_tag : Win32cr::Foundation::PWSTR,
-    handler_context : Win32cr::Devices::WebServicesOnDevices::WSD_HANDLER_CONTEXT,
-    soap : Win32cr::Devices::WebServicesOnDevices::WSD_SOAP_MESSAGE*,
-    operation : Win32cr::Devices::WebServicesOnDevices::WSD_OPERATION*,
-    message_parameters : Void*
+  struct WSD_CONFIG_PARAM
+    property configParamType : Win32cr::Devices::WebServicesOnDevices::WSD_CONFIG_PARAM_TYPE
+    property pConfigData : Void*
+    property dwConfigDataSize : UInt32
+    def initialize(@configParamType : Win32cr::Devices::WebServicesOnDevices::WSD_CONFIG_PARAM_TYPE, @pConfigData : Void*, @dwConfigDataSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WSD_SECURITY_CERT_VALIDATION_V1
+    property certMatchArray : Win32cr::Security::Cryptography::CERT_CONTEXT**
+    property dwCertMatchArrayCount : UInt32
+    property hCertMatchStore : Win32cr::Security::Cryptography::HCERTSTORE
+    property hCertIssuerStore : Win32cr::Security::Cryptography::HCERTSTORE
+    property dwCertCheckOptions : UInt32
+    def initialize(@certMatchArray : Win32cr::Security::Cryptography::CERT_CONTEXT**, @dwCertMatchArrayCount : UInt32, @hCertMatchStore : Win32cr::Security::Cryptography::HCERTSTORE, @hCertIssuerStore : Win32cr::Security::Cryptography::HCERTSTORE, @dwCertCheckOptions : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WSD_SECURITY_CERT_VALIDATION
+    property certMatchArray : Win32cr::Security::Cryptography::CERT_CONTEXT**
+    property dwCertMatchArrayCount : UInt32
+    property hCertMatchStore : Win32cr::Security::Cryptography::HCERTSTORE
+    property hCertIssuerStore : Win32cr::Security::Cryptography::HCERTSTORE
+    property dwCertCheckOptions : UInt32
+    property pszCNGHashAlgId : Win32cr::Foundation::PWSTR
+    property pbCertHash : UInt8*
+    property dwCertHashSize : UInt32
+    def initialize(@certMatchArray : Win32cr::Security::Cryptography::CERT_CONTEXT**, @dwCertMatchArrayCount : UInt32, @hCertMatchStore : Win32cr::Security::Cryptography::HCERTSTORE, @hCertIssuerStore : Win32cr::Security::Cryptography::HCERTSTORE, @dwCertCheckOptions : UInt32, @pszCNGHashAlgId : Win32cr::Foundation::PWSTR, @pbCertHash : UInt8*, @dwCertHashSize : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WSD_SECURITY_SIGNATURE_VALIDATION
+    property signingCertArray : Win32cr::Security::Cryptography::CERT_CONTEXT**
+    property dwSigningCertArrayCount : UInt32
+    property hSigningCertStore : Win32cr::Security::Cryptography::HCERTSTORE
+    property dwFlags : UInt32
+    def initialize(@signingCertArray : Win32cr::Security::Cryptography::CERT_CONTEXT**, @dwSigningCertArrayCount : UInt32, @hSigningCertStore : Win32cr::Security::Cryptography::HCERTSTORE, @dwFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WSD_CONFIG_ADDRESSES
+    property addresses : Void**
+    property dwAddressCount : UInt32
+    def initialize(@addresses : Void**, @dwAddressCount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WSDUdpRetransmitParams
+    property ulSendDelay : UInt32
+    property ulRepeat : UInt32
+    property ulRepeatMinDelay : UInt32
+    property ulRepeatMaxDelay : UInt32
+    property ulRepeatUpperDelay : UInt32
+    def initialize(@ulSendDelay : UInt32, @ulRepeat : UInt32, @ulRepeatMinDelay : UInt32, @ulRepeatMaxDelay : UInt32, @ulRepeatUpperDelay : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WSD_DATETIME
+    property isPositive : Win32cr::Foundation::BOOL
+    property year : UInt32
+    property month : UInt8
+    property day : UInt8
+    property hour : UInt8
+    property minute : UInt8
+    property second : UInt8
+    property millisecond : UInt32
+    property tz_is_local : Win32cr::Foundation::BOOL
+    property tz_is_positive : Win32cr::Foundation::BOOL
+    property tz_hour : UInt8
+    property tz_minute : UInt8
+    def initialize(@isPositive : Win32cr::Foundation::BOOL, @year : UInt32, @month : UInt8, @day : UInt8, @hour : UInt8, @minute : UInt8, @second : UInt8, @millisecond : UInt32, @tz_is_local : Win32cr::Foundation::BOOL, @tz_is_positive : Win32cr::Foundation::BOOL, @tz_hour : UInt8, @tz_minute : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct WSD_DURATION
+    property isPositive : Win32cr::Foundation::BOOL
+    property year : UInt32
+    property month : UInt32
+    property day : UInt32
+    property hour : UInt32
+    property minute : UInt32
+    property second : UInt32
+    property millisecond : UInt32
+    def initialize(@isPositive : Win32cr::Foundation::BOOL, @year : UInt32, @month : UInt32, @day : UInt32, @hour : UInt32, @minute : UInt32, @second : UInt32, @millisecond : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WSDXML_NAMESPACE
+    property uri : Win32cr::Foundation::PWSTR
+    property preferred_prefix : Win32cr::Foundation::PWSTR
+    property names : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*
+    property names_count : UInt16
+    property encoding : UInt16
+    def initialize(@uri : Win32cr::Foundation::PWSTR, @preferred_prefix : Win32cr::Foundation::PWSTR, @names : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*, @names_count : UInt16, @encoding : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct WSDXML_NAME
+    property space : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAMESPACE*
+    property local_name : Win32cr::Foundation::PWSTR
+    def initialize(@space : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAMESPACE*, @local_name : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct WSDXML_TYPE
+    property uri : Win32cr::Foundation::PWSTR
+    property table : UInt8*
+    def initialize(@uri : Win32cr::Foundation::PWSTR, @table : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct WSDXML_PREFIX_MAPPING
+    property refs : UInt32
+    property next__ : Win32cr::Devices::WebServicesOnDevices::WSDXML_PREFIX_MAPPING*
+    property space : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAMESPACE*
+    property prefix : Win32cr::Foundation::PWSTR
+    def initialize(@refs : UInt32, @next__ : Win32cr::Devices::WebServicesOnDevices::WSDXML_PREFIX_MAPPING*, @space : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAMESPACE*, @prefix : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct WSDXML_ATTRIBUTE
+    property element : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    property next__ : Win32cr::Devices::WebServicesOnDevices::WSDXML_ATTRIBUTE*
+    property name : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*
+    property value : Win32cr::Foundation::PWSTR
+    def initialize(@element : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*, @next__ : Win32cr::Devices::WebServicesOnDevices::WSDXML_ATTRIBUTE*, @name : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*, @value : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct WSDXML_NODE
+    property type__ : Int32
+    property parent : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    property next__ : Win32cr::Devices::WebServicesOnDevices::WSDXML_NODE*
+    def initialize(@type__ : Int32, @parent : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*, @next__ : Win32cr::Devices::WebServicesOnDevices::WSDXML_NODE*)
+    end
+  end
+
+  @[Extern]
+  struct WSDXML_ELEMENT
+    property node : Win32cr::Devices::WebServicesOnDevices::WSDXML_NODE
+    property name : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*
+    property first_attribute : Win32cr::Devices::WebServicesOnDevices::WSDXML_ATTRIBUTE*
+    property first_child : Win32cr::Devices::WebServicesOnDevices::WSDXML_NODE*
+    property prefix_mappings : Win32cr::Devices::WebServicesOnDevices::WSDXML_PREFIX_MAPPING*
+    def initialize(@node : Win32cr::Devices::WebServicesOnDevices::WSDXML_NODE, @name : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*, @first_attribute : Win32cr::Devices::WebServicesOnDevices::WSDXML_ATTRIBUTE*, @first_child : Win32cr::Devices::WebServicesOnDevices::WSDXML_NODE*, @prefix_mappings : Win32cr::Devices::WebServicesOnDevices::WSDXML_PREFIX_MAPPING*)
+    end
+  end
+
+  @[Extern]
+  struct WSDXML_TEXT
+    property node : Win32cr::Devices::WebServicesOnDevices::WSDXML_NODE
+    property text : Win32cr::Foundation::PWSTR
+    def initialize(@node : Win32cr::Devices::WebServicesOnDevices::WSDXML_NODE, @text : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct WSDXML_ELEMENT_LIST
+    property next__ : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT_LIST*
+    property element : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@next__ : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT_LIST*, @element : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_OPERATION
+    property request_type : Win32cr::Devices::WebServicesOnDevices::WSDXML_TYPE*
+    property response_type : Win32cr::Devices::WebServicesOnDevices::WSDXML_TYPE*
+    property request_stub_function : Win32cr::Devices::WebServicesOnDevices::WSD_STUB_FUNCTION
+    def initialize(@request_type : Win32cr::Devices::WebServicesOnDevices::WSDXML_TYPE*, @response_type : Win32cr::Devices::WebServicesOnDevices::WSDXML_TYPE*, @request_stub_function : Win32cr::Devices::WebServicesOnDevices::WSD_STUB_FUNCTION)
+    end
+  end
+
+  @[Extern]
+  struct WSD_HANDLER_CONTEXT
+    property handler : Win32cr::Devices::WebServicesOnDevices::PWSD_SOAP_MESSAGE_HANDLER
+    property p_void : Void*
+    property unknown : Void*
+    def initialize(@handler : Win32cr::Devices::WebServicesOnDevices::PWSD_SOAP_MESSAGE_HANDLER, @p_void : Void*, @unknown : Void*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_SYNCHRONOUS_RESPONSE_CONTEXT
+    property hr : Win32cr::Foundation::HRESULT
+    property eventHandle : Win32cr::Foundation::HANDLE
+    property messageParameters : Void*
+    property results : Void*
+    def initialize(@hr : Win32cr::Foundation::HRESULT, @eventHandle : Win32cr::Foundation::HANDLE, @messageParameters : Void*, @results : Void*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_PORT_TYPE
+    property encoded_name : UInt32
+    property operation_count : UInt32
+    property operations : Win32cr::Devices::WebServicesOnDevices::WSD_OPERATION*
+    property protocol_type : Win32cr::Devices::WebServicesOnDevices::WSD_PROTOCOL_TYPE
+    def initialize(@encoded_name : UInt32, @operation_count : UInt32, @operations : Win32cr::Devices::WebServicesOnDevices::WSD_OPERATION*, @protocol_type : Win32cr::Devices::WebServicesOnDevices::WSD_PROTOCOL_TYPE)
+    end
+  end
+
+  @[Extern]
+  struct WSD_RELATIONSHIP_METADATA
+    property type__ : Win32cr::Foundation::PWSTR
+    property data : Win32cr::Devices::WebServicesOnDevices::WSD_HOST_METADATA*
+    property any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@type__ : Win32cr::Foundation::PWSTR, @data : Win32cr::Devices::WebServicesOnDevices::WSD_HOST_METADATA*, @any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_SERVICE_METADATA_LIST
+    property next__ : Win32cr::Devices::WebServicesOnDevices::WSD_SERVICE_METADATA_LIST*
+    property element : Win32cr::Devices::WebServicesOnDevices::WSD_SERVICE_METADATA*
+    def initialize(@next__ : Win32cr::Devices::WebServicesOnDevices::WSD_SERVICE_METADATA_LIST*, @element : Win32cr::Devices::WebServicesOnDevices::WSD_SERVICE_METADATA*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_HOST_METADATA
+    property host : Win32cr::Devices::WebServicesOnDevices::WSD_SERVICE_METADATA*
+    property hosted : Win32cr::Devices::WebServicesOnDevices::WSD_SERVICE_METADATA_LIST*
+    def initialize(@host : Win32cr::Devices::WebServicesOnDevices::WSD_SERVICE_METADATA*, @hosted : Win32cr::Devices::WebServicesOnDevices::WSD_SERVICE_METADATA_LIST*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_ENDPOINT_REFERENCE_LIST
+    property next__ : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE_LIST*
+    property element : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*
+    def initialize(@next__ : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE_LIST*, @element : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_SERVICE_METADATA
+    property endpoint_reference : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE_LIST*
+    property types : Win32cr::Devices::WebServicesOnDevices::WSD_NAME_LIST*
+    property service_id : Win32cr::Foundation::PWSTR
+    property any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@endpoint_reference : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE_LIST*, @types : Win32cr::Devices::WebServicesOnDevices::WSD_NAME_LIST*, @service_id : Win32cr::Foundation::PWSTR, @any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_THIS_DEVICE_METADATA
+    property friendly_name : Win32cr::Devices::WebServicesOnDevices::WSD_LOCALIZED_STRING_LIST*
+    property firmware_version : Win32cr::Foundation::PWSTR
+    property serial_number : Win32cr::Foundation::PWSTR
+    property any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@friendly_name : Win32cr::Devices::WebServicesOnDevices::WSD_LOCALIZED_STRING_LIST*, @firmware_version : Win32cr::Foundation::PWSTR, @serial_number : Win32cr::Foundation::PWSTR, @any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_THIS_MODEL_METADATA
+    property manufacturer : Win32cr::Devices::WebServicesOnDevices::WSD_LOCALIZED_STRING_LIST*
+    property manufacturer_url : Win32cr::Foundation::PWSTR
+    property model_name : Win32cr::Devices::WebServicesOnDevices::WSD_LOCALIZED_STRING_LIST*
+    property model_number : Win32cr::Foundation::PWSTR
+    property model_url : Win32cr::Foundation::PWSTR
+    property presentation_url : Win32cr::Foundation::PWSTR
+    property any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@manufacturer : Win32cr::Devices::WebServicesOnDevices::WSD_LOCALIZED_STRING_LIST*, @manufacturer_url : Win32cr::Foundation::PWSTR, @model_name : Win32cr::Devices::WebServicesOnDevices::WSD_LOCALIZED_STRING_LIST*, @model_number : Win32cr::Foundation::PWSTR, @model_url : Win32cr::Foundation::PWSTR, @presentation_url : Win32cr::Foundation::PWSTR, @any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_LOCALIZED_STRING_LIST
+    property next__ : Win32cr::Devices::WebServicesOnDevices::WSD_LOCALIZED_STRING_LIST*
+    property element : Win32cr::Devices::WebServicesOnDevices::WSD_LOCALIZED_STRING*
+    def initialize(@next__ : Win32cr::Devices::WebServicesOnDevices::WSD_LOCALIZED_STRING_LIST*, @element : Win32cr::Devices::WebServicesOnDevices::WSD_LOCALIZED_STRING*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_SOAP_FAULT_REASON
+    property text : Win32cr::Devices::WebServicesOnDevices::WSD_LOCALIZED_STRING_LIST*
+    def initialize(@text : Win32cr::Devices::WebServicesOnDevices::WSD_LOCALIZED_STRING_LIST*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_SOAP_FAULT_SUBCODE
+    property value : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*
+    property subcode : Win32cr::Devices::WebServicesOnDevices::WSD_SOAP_FAULT_SUBCODE*
+    def initialize(@value : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*, @subcode : Win32cr::Devices::WebServicesOnDevices::WSD_SOAP_FAULT_SUBCODE*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_SOAP_FAULT_CODE
+    property value : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*
+    property subcode : Win32cr::Devices::WebServicesOnDevices::WSD_SOAP_FAULT_SUBCODE*
+    def initialize(@value : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*, @subcode : Win32cr::Devices::WebServicesOnDevices::WSD_SOAP_FAULT_SUBCODE*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_SOAP_FAULT
+    property code : Win32cr::Devices::WebServicesOnDevices::WSD_SOAP_FAULT_CODE*
+    property reason : Win32cr::Devices::WebServicesOnDevices::WSD_SOAP_FAULT_REASON*
+    property node : Win32cr::Foundation::PWSTR
+    property role : Win32cr::Foundation::PWSTR
+    property detail : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@code : Win32cr::Devices::WebServicesOnDevices::WSD_SOAP_FAULT_CODE*, @reason : Win32cr::Devices::WebServicesOnDevices::WSD_SOAP_FAULT_REASON*, @node : Win32cr::Foundation::PWSTR, @role : Win32cr::Foundation::PWSTR, @detail : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_APP_SEQUENCE
+    property instance_id : UInt64
+    property sequence_id : Win32cr::Foundation::PWSTR
+    property message_number : UInt64
+    def initialize(@instance_id : UInt64, @sequence_id : Win32cr::Foundation::PWSTR, @message_number : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct WSD_HEADER_RELATESTO
+    property relationship_type : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*
+    property message_id : Win32cr::Foundation::PWSTR
+    def initialize(@relationship_type : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*, @message_id : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct WSD_SOAP_HEADER
+    property to : Win32cr::Foundation::PWSTR
+    property action : Win32cr::Foundation::PWSTR
+    property message_id : Win32cr::Foundation::PWSTR
+    property relates_to : Win32cr::Devices::WebServicesOnDevices::WSD_HEADER_RELATESTO
+    property reply_to : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*
+    property from : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*
+    property fault_to : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*
+    property app_sequence : Win32cr::Devices::WebServicesOnDevices::WSD_APP_SEQUENCE*
+    property any_headers : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@to : Win32cr::Foundation::PWSTR, @action : Win32cr::Foundation::PWSTR, @message_id : Win32cr::Foundation::PWSTR, @relates_to : Win32cr::Devices::WebServicesOnDevices::WSD_HEADER_RELATESTO, @reply_to : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*, @from : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*, @fault_to : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*, @app_sequence : Win32cr::Devices::WebServicesOnDevices::WSD_APP_SEQUENCE*, @any_headers : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_SOAP_MESSAGE
+    property header : Win32cr::Devices::WebServicesOnDevices::WSD_SOAP_HEADER
+    property body : Void*
+    property body_type : Win32cr::Devices::WebServicesOnDevices::WSDXML_TYPE*
+    def initialize(@header : Win32cr::Devices::WebServicesOnDevices::WSD_SOAP_HEADER, @body : Void*, @body_type : Win32cr::Devices::WebServicesOnDevices::WSDXML_TYPE*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_RESOLVE_MATCHES
+    property resolve_match : Win32cr::Devices::WebServicesOnDevices::WSD_RESOLVE_MATCH*
+    property any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@resolve_match : Win32cr::Devices::WebServicesOnDevices::WSD_RESOLVE_MATCH*, @any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_RESOLVE_MATCH
+    property endpoint_reference : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*
+    property types : Win32cr::Devices::WebServicesOnDevices::WSD_NAME_LIST*
+    property scopes : Win32cr::Devices::WebServicesOnDevices::WSD_SCOPES*
+    property x_addrs : Win32cr::Devices::WebServicesOnDevices::WSD_URI_LIST*
+    property metadata_version : UInt64
+    property any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@endpoint_reference : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*, @types : Win32cr::Devices::WebServicesOnDevices::WSD_NAME_LIST*, @scopes : Win32cr::Devices::WebServicesOnDevices::WSD_SCOPES*, @x_addrs : Win32cr::Devices::WebServicesOnDevices::WSD_URI_LIST*, @metadata_version : UInt64, @any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_RESOLVE
+    property endpoint_reference : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*
+    property any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@endpoint_reference : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*, @any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_PROBE_MATCH
+    property endpoint_reference : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*
+    property types : Win32cr::Devices::WebServicesOnDevices::WSD_NAME_LIST*
+    property scopes : Win32cr::Devices::WebServicesOnDevices::WSD_SCOPES*
+    property x_addrs : Win32cr::Devices::WebServicesOnDevices::WSD_URI_LIST*
+    property metadata_version : UInt64
+    property any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@endpoint_reference : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*, @types : Win32cr::Devices::WebServicesOnDevices::WSD_NAME_LIST*, @scopes : Win32cr::Devices::WebServicesOnDevices::WSD_SCOPES*, @x_addrs : Win32cr::Devices::WebServicesOnDevices::WSD_URI_LIST*, @metadata_version : UInt64, @any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_PROBE_MATCH_LIST
+    property next__ : Win32cr::Devices::WebServicesOnDevices::WSD_PROBE_MATCH_LIST*
+    property element : Win32cr::Devices::WebServicesOnDevices::WSD_PROBE_MATCH*
+    def initialize(@next__ : Win32cr::Devices::WebServicesOnDevices::WSD_PROBE_MATCH_LIST*, @element : Win32cr::Devices::WebServicesOnDevices::WSD_PROBE_MATCH*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_PROBE_MATCHES
+    property probe_match : Win32cr::Devices::WebServicesOnDevices::WSD_PROBE_MATCH_LIST*
+    property any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@probe_match : Win32cr::Devices::WebServicesOnDevices::WSD_PROBE_MATCH_LIST*, @any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_PROBE
+    property types : Win32cr::Devices::WebServicesOnDevices::WSD_NAME_LIST*
+    property scopes : Win32cr::Devices::WebServicesOnDevices::WSD_SCOPES*
+    property any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@types : Win32cr::Devices::WebServicesOnDevices::WSD_NAME_LIST*, @scopes : Win32cr::Devices::WebServicesOnDevices::WSD_SCOPES*, @any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_BYE
+    property endpoint_reference : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*
+    property any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@endpoint_reference : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*, @any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_SCOPES
+    property match_by : Win32cr::Foundation::PWSTR
+    property scopes : Win32cr::Devices::WebServicesOnDevices::WSD_URI_LIST*
+    def initialize(@match_by : Win32cr::Foundation::PWSTR, @scopes : Win32cr::Devices::WebServicesOnDevices::WSD_URI_LIST*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_NAME_LIST
+    property next__ : Win32cr::Devices::WebServicesOnDevices::WSD_NAME_LIST*
+    property element : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*
+    def initialize(@next__ : Win32cr::Devices::WebServicesOnDevices::WSD_NAME_LIST*, @element : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_HELLO
+    property endpoint_reference : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*
+    property types : Win32cr::Devices::WebServicesOnDevices::WSD_NAME_LIST*
+    property scopes : Win32cr::Devices::WebServicesOnDevices::WSD_SCOPES*
+    property x_addrs : Win32cr::Devices::WebServicesOnDevices::WSD_URI_LIST*
+    property metadata_version : UInt64
+    property any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@endpoint_reference : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*, @types : Win32cr::Devices::WebServicesOnDevices::WSD_NAME_LIST*, @scopes : Win32cr::Devices::WebServicesOnDevices::WSD_SCOPES*, @x_addrs : Win32cr::Devices::WebServicesOnDevices::WSD_URI_LIST*, @metadata_version : UInt64, @any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_REFERENCE_PARAMETERS
+    property any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_REFERENCE_PROPERTIES
+    property any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_ENDPOINT_REFERENCE
+    property address : Win32cr::Foundation::PWSTR
+    property reference_properties : Win32cr::Devices::WebServicesOnDevices::WSD_REFERENCE_PROPERTIES
+    property reference_parameters : Win32cr::Devices::WebServicesOnDevices::WSD_REFERENCE_PARAMETERS
+    property port_type : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*
+    property service_name : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*
+    property any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@address : Win32cr::Foundation::PWSTR, @reference_properties : Win32cr::Devices::WebServicesOnDevices::WSD_REFERENCE_PROPERTIES, @reference_parameters : Win32cr::Devices::WebServicesOnDevices::WSD_REFERENCE_PARAMETERS, @port_type : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*, @service_name : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*, @any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_METADATA_SECTION
+    property dialect : Win32cr::Foundation::PWSTR
+    property identifier : Win32cr::Foundation::PWSTR
+    property data : Void*
+    property metadata_reference : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*
+    property location : Win32cr::Foundation::PWSTR
+    property any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@dialect : Win32cr::Foundation::PWSTR, @identifier : Win32cr::Foundation::PWSTR, @data : Void*, @metadata_reference : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*, @location : Win32cr::Foundation::PWSTR, @any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_METADATA_SECTION_LIST
+    property next__ : Win32cr::Devices::WebServicesOnDevices::WSD_METADATA_SECTION_LIST*
+    property element : Win32cr::Devices::WebServicesOnDevices::WSD_METADATA_SECTION*
+    def initialize(@next__ : Win32cr::Devices::WebServicesOnDevices::WSD_METADATA_SECTION_LIST*, @element : Win32cr::Devices::WebServicesOnDevices::WSD_METADATA_SECTION*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_URI_LIST
+    property next__ : Win32cr::Devices::WebServicesOnDevices::WSD_URI_LIST*
+    property element : Win32cr::Foundation::PWSTR
+    def initialize(@next__ : Win32cr::Devices::WebServicesOnDevices::WSD_URI_LIST*, @element : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct WSD_EVENTING_FILTER_ACTION
+    property actions : Win32cr::Devices::WebServicesOnDevices::WSD_URI_LIST*
+    def initialize(@actions : Win32cr::Devices::WebServicesOnDevices::WSD_URI_LIST*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_EVENTING_FILTER
+    property dialect : Win32cr::Foundation::PWSTR
+    property filter_action : Win32cr::Devices::WebServicesOnDevices::WSD_EVENTING_FILTER_ACTION*
+    property data : Void*
+    def initialize(@dialect : Win32cr::Foundation::PWSTR, @filter_action : Win32cr::Devices::WebServicesOnDevices::WSD_EVENTING_FILTER_ACTION*, @data : Void*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_EVENTING_EXPIRES
+    property duration : Win32cr::Devices::WebServicesOnDevices::WSD_DURATION*
+    property date_time : Win32cr::Devices::WebServicesOnDevices::WSD_DATETIME*
+    def initialize(@duration : Win32cr::Devices::WebServicesOnDevices::WSD_DURATION*, @date_time : Win32cr::Devices::WebServicesOnDevices::WSD_DATETIME*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_EVENTING_DELIVERY_MODE_PUSH
+    property notify_to : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*
+    def initialize(@notify_to : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_EVENTING_DELIVERY_MODE
+    property mode : Win32cr::Foundation::PWSTR
+    property push : Win32cr::Devices::WebServicesOnDevices::WSD_EVENTING_DELIVERY_MODE_PUSH*
+    property data : Void*
+    def initialize(@mode : Win32cr::Foundation::PWSTR, @push : Win32cr::Devices::WebServicesOnDevices::WSD_EVENTING_DELIVERY_MODE_PUSH*, @data : Void*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_LOCALIZED_STRING
+    property lang : Win32cr::Foundation::PWSTR
+    property string : Win32cr::Foundation::PWSTR
+    def initialize(@lang : Win32cr::Foundation::PWSTR, @string : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct RESPONSEBODY_GetMetadata
+    property metadata : Win32cr::Devices::WebServicesOnDevices::WSD_METADATA_SECTION_LIST*
+    def initialize(@metadata : Win32cr::Devices::WebServicesOnDevices::WSD_METADATA_SECTION_LIST*)
+    end
+  end
+
+  @[Extern]
+  struct REQUESTBODY_Subscribe
+    property end_to : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*
+    property delivery : Win32cr::Devices::WebServicesOnDevices::WSD_EVENTING_DELIVERY_MODE*
+    property expires : Win32cr::Devices::WebServicesOnDevices::WSD_EVENTING_EXPIRES*
+    property filter : Win32cr::Devices::WebServicesOnDevices::WSD_EVENTING_FILTER*
+    property any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@end_to : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*, @delivery : Win32cr::Devices::WebServicesOnDevices::WSD_EVENTING_DELIVERY_MODE*, @expires : Win32cr::Devices::WebServicesOnDevices::WSD_EVENTING_EXPIRES*, @filter : Win32cr::Devices::WebServicesOnDevices::WSD_EVENTING_FILTER*, @any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct RESPONSEBODY_Subscribe
+    property subscription_manager : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*
+    property expires : Win32cr::Devices::WebServicesOnDevices::WSD_EVENTING_EXPIRES*
+    property any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@subscription_manager : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*, @expires : Win32cr::Devices::WebServicesOnDevices::WSD_EVENTING_EXPIRES*, @any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct REQUESTBODY_Renew
+    property expires : Win32cr::Devices::WebServicesOnDevices::WSD_EVENTING_EXPIRES*
+    property any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@expires : Win32cr::Devices::WebServicesOnDevices::WSD_EVENTING_EXPIRES*, @any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct RESPONSEBODY_Renew
+    property expires : Win32cr::Devices::WebServicesOnDevices::WSD_EVENTING_EXPIRES*
+    property any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@expires : Win32cr::Devices::WebServicesOnDevices::WSD_EVENTING_EXPIRES*, @any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct REQUESTBODY_GetStatus
+    property any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct RESPONSEBODY_GetStatus
+    property expires : Win32cr::Devices::WebServicesOnDevices::WSD_EVENTING_EXPIRES*
+    property any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@expires : Win32cr::Devices::WebServicesOnDevices::WSD_EVENTING_EXPIRES*, @any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct REQUESTBODY_Unsubscribe
+    property any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct RESPONSEBODY_SubscriptionEnd
+    property subscription_manager : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*
+    property status : Win32cr::Foundation::PWSTR
+    property reason : Win32cr::Devices::WebServicesOnDevices::WSD_LOCALIZED_STRING*
+    property any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@subscription_manager : Win32cr::Devices::WebServicesOnDevices::WSD_ENDPOINT_REFERENCE*, @status : Win32cr::Foundation::PWSTR, @reason : Win32cr::Devices::WebServicesOnDevices::WSD_LOCALIZED_STRING*, @any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_UNKNOWN_LOOKUP
+    property any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*
+    def initialize(@any : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*)
+    end
+  end
+
+  @[Extern]
+  struct WSD_EVENT
+    property hr : Win32cr::Foundation::HRESULT
+    property event_type : UInt32
+    property dispatch_tag : Win32cr::Foundation::PWSTR
+    property handler_context : Win32cr::Devices::WebServicesOnDevices::WSD_HANDLER_CONTEXT
+    property soap : Win32cr::Devices::WebServicesOnDevices::WSD_SOAP_MESSAGE*
+    property operation : Win32cr::Devices::WebServicesOnDevices::WSD_OPERATION*
+    property message_parameters : Void*
+    def initialize(@hr : Win32cr::Foundation::HRESULT, @event_type : UInt32, @dispatch_tag : Win32cr::Foundation::PWSTR, @handler_context : Win32cr::Devices::WebServicesOnDevices::WSD_HANDLER_CONTEXT, @soap : Win32cr::Devices::WebServicesOnDevices::WSD_SOAP_MESSAGE*, @operation : Win32cr::Devices::WebServicesOnDevices::WSD_OPERATION*, @message_parameters : Void*)
+    end
+  end
 
   @[Extern]
   record IWSDAddressVtbl,
@@ -574,7 +787,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("b9574c6c-12a6-4f74-93a1-3318ff605759")]
   record IWSDAddress, lpVtbl : IWSDAddressVtbl* do
     GUID = LibC::GUID.new(0xb9574c6c_u32, 0x12a6_u16, 0x4f74_u16, StaticArray[0x93_u8, 0xa1_u8, 0x33_u8, 0x18_u8, 0xff_u8, 0x60_u8, 0x57_u8, 0x59_u8])
     def query_interface(this : IWSDAddress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -610,7 +822,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("70d23498-4ee6-4340-a3df-d845d2235467")]
   record IWSDTransportAddress, lpVtbl : IWSDTransportAddressVtbl* do
     GUID = LibC::GUID.new(0x70d23498_u32, 0x4ee6_u16, 0x4340_u16, StaticArray[0xa3_u8, 0xdf_u8, 0xd8_u8, 0x45_u8, 0xd2_u8, 0x23_u8, 0x54_u8, 0x67_u8])
     def query_interface(this : IWSDTransportAddress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -659,7 +870,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("1fafe8a2-e6fc-4b80-b6cf-b7d45c416d7c")]
   record IWSDMessageParameters, lpVtbl : IWSDMessageParametersVtbl* do
     GUID = LibC::GUID.new(0x1fafe8a2_u32, 0xe6fc_u16, 0x4b80_u16, StaticArray[0xb6_u8, 0xcf_u8, 0xb7_u8, 0xd4_u8, 0x5c_u8, 0x41_u8, 0x6d_u8, 0x7c_u8])
     def query_interface(this : IWSDMessageParameters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -704,7 +914,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("9934149f-8f0c-447b-aa0b-73124b0ca7f0")]
   record IWSDUdpMessageParameters, lpVtbl : IWSDUdpMessageParametersVtbl* do
     GUID = LibC::GUID.new(0x9934149f_u32, 0x8f0c_u16, 0x447b_u16, StaticArray[0xaa_u8, 0xb_u8, 0x73_u8, 0x12_u8, 0x4b_u8, 0xc_u8, 0xa7_u8, 0xf0_u8])
     def query_interface(this : IWSDUdpMessageParameters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -765,7 +974,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("74d6124a-a441-4f78-a1eb-97a8d1996893")]
   record IWSDUdpAddress, lpVtbl : IWSDUdpAddressVtbl* do
     GUID = LibC::GUID.new(0x74d6124a_u32, 0xa441_u16, 0x4f78_u16, StaticArray[0xa1_u8, 0xeb_u8, 0x97_u8, 0xa8_u8, 0xd1_u8, 0x99_u8, 0x68_u8, 0x93_u8])
     def query_interface(this : IWSDUdpAddress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -853,7 +1061,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("540bd122-5c83-4dec-b396-ea62a2697fdf")]
   record IWSDHttpMessageParameters, lpVtbl : IWSDHttpMessageParametersVtbl* do
     GUID = LibC::GUID.new(0x540bd122_u32, 0x5c83_u16, 0x4dec_u16, StaticArray[0xb3_u8, 0x96_u8, 0xea_u8, 0x62_u8, 0xa2_u8, 0x69_u8, 0x7f_u8, 0xdf_u8])
     def query_interface(this : IWSDHttpMessageParameters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -929,7 +1136,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("d09ac7bd-2a3e-4b85-8605-2737ff3e4ea0")]
   record IWSDHttpAddress, lpVtbl : IWSDHttpAddressVtbl* do
     GUID = LibC::GUID.new(0xd09ac7bd_u32, 0x2a3e_u16, 0x4b85_u16, StaticArray[0x86_u8, 0x5_u8, 0x27_u8, 0x37_u8, 0xff_u8, 0x3e_u8, 0x4e_u8, 0xa0_u8])
     def query_interface(this : IWSDHttpAddress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -987,7 +1193,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("de105e87-a0da-418e-98ad-27b9eed87bdc")]
   record IWSDSSLClientCertificate, lpVtbl : IWSDSSLClientCertificateVtbl* do
     GUID = LibC::GUID.new(0xde105e87_u32, 0xa0da_u16, 0x418e_u16, StaticArray[0x98_u8, 0xad_u8, 0x27_u8, 0xb9_u8, 0xee_u8, 0xd8_u8, 0x7b_u8, 0xdc_u8])
     def query_interface(this : IWSDSSLClientCertificate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1018,7 +1223,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("0b476df0-8dac-480d-b05c-99781a5884aa")]
   record IWSDHttpAuthParameters, lpVtbl : IWSDHttpAuthParametersVtbl* do
     GUID = LibC::GUID.new(0xb476df0_u32, 0x8dac_u16, 0x480d_u16, StaticArray[0xb0_u8, 0x5c_u8, 0x99_u8, 0x78_u8, 0x1a_u8, 0x58_u8, 0x84_u8, 0xaa_u8])
     def query_interface(this : IWSDHttpAuthParameters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1052,7 +1256,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("03ce20aa-71c4-45e2-b32e-3766c61c790f")]
   record IWSDSignatureProperty, lpVtbl : IWSDSignaturePropertyVtbl* do
     GUID = LibC::GUID.new(0x3ce20aa_u32, 0x71c4_u16, 0x45e2_u16, StaticArray[0xb3_u8, 0x2e_u8, 0x37_u8, 0x66_u8, 0xc6_u8, 0x1c_u8, 0x79_u8, 0xf_u8])
     def query_interface(this : IWSDSignatureProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1090,7 +1293,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("5d55a616-9df8-4b09-b156-9ba351a48b76")]
   record IWSDAttachment, lpVtbl : IWSDAttachmentVtbl* do
     GUID = LibC::GUID.new(0x5d55a616_u32, 0x9df8_u16, 0x4b09_u16, StaticArray[0xb1_u8, 0x56_u8, 0x9b_u8, 0xa3_u8, 0x51_u8, 0xa4_u8, 0x8b_u8, 0x76_u8])
     def query_interface(this : IWSDAttachment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1116,7 +1318,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("aa302f8d-5a22-4ba5-b392-aa8486f4c15d")]
   record IWSDOutboundAttachment, lpVtbl : IWSDOutboundAttachmentVtbl* do
     GUID = LibC::GUID.new(0xaa302f8d_u32, 0x5a22_u16, 0x4ba5_u16, StaticArray[0xb3_u8, 0x92_u8, 0xaa_u8, 0x84_u8, 0x86_u8, 0xf4_u8, 0xc1_u8, 0x5d_u8])
     def query_interface(this : IWSDOutboundAttachment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1150,7 +1351,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("5bd6ca65-233c-4fb8-9f7a-2641619655c9")]
   record IWSDInboundAttachment, lpVtbl : IWSDInboundAttachmentVtbl* do
     GUID = LibC::GUID.new(0x5bd6ca65_u32, 0x233c_u16, 0x4fb8_u16, StaticArray[0x9f_u8, 0x7a_u8, 0x26_u8, 0x41_u8, 0x61_u8, 0x96_u8, 0x55_u8, 0xc9_u8])
     def query_interface(this : IWSDInboundAttachment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1183,7 +1383,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("75d8f3ee-3e5a-43b4-a15a-bcf6887460c0")]
   record IWSDXMLContext, lpVtbl : IWSDXMLContextVtbl* do
     GUID = LibC::GUID.new(0x75d8f3ee_u32, 0x3e5a_u16, 0x43b4_u16, StaticArray[0xa1_u8, 0x5a_u8, 0xbc_u8, 0xf6_u8, 0x88_u8, 0x74_u8, 0x60_u8, 0xc0_u8])
     def query_interface(this : IWSDXMLContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1225,7 +1424,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("8ffc8e55-f0eb-480f-88b7-b435dd281d45")]
   record IWSDiscoveryProvider, lpVtbl : IWSDiscoveryProviderVtbl* do
     GUID = LibC::GUID.new(0x8ffc8e55_u32, 0xf0eb_u16, 0x480f_u16, StaticArray[0x88_u8, 0xb7_u8, 0xb4_u8, 0x35_u8, 0xdd_u8, 0x28_u8, 0x1d_u8, 0x45_u8])
     def query_interface(this : IWSDiscoveryProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1273,7 +1471,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("73ee3ced-b6e6-4329-a546-3e8ad46563d2")]
   record IWSDiscoveryProviderNotify, lpVtbl : IWSDiscoveryProviderNotifyVtbl* do
     GUID = LibC::GUID.new(0x73ee3ced_u32, 0xb6e6_u16, 0x4329_u16, StaticArray[0xa5_u8, 0x46_u8, 0x3e_u8, 0x8a_u8, 0xd4_u8, 0x65_u8, 0x63_u8, 0xd2_u8])
     def query_interface(this : IWSDiscoveryProviderNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1319,7 +1516,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("4bad8a3b-b374-4420-9632-aac945b374aa")]
   record IWSDiscoveredService, lpVtbl : IWSDiscoveredServiceVtbl* do
     GUID = LibC::GUID.new(0x4bad8a3b_u32, 0xb374_u16, 0x4420_u16, StaticArray[0x96_u8, 0x32_u8, 0xaa_u8, 0xc9_u8, 0x45_u8, 0xb3_u8, 0x74_u8, 0xaa_u8])
     def query_interface(this : IWSDiscoveredService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1388,7 +1584,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("ae01e1a8-3ff9-4148-8116-057cc616fe13")]
   record IWSDiscoveryPublisher, lpVtbl : IWSDiscoveryPublisherVtbl* do
     GUID = LibC::GUID.new(0xae01e1a8_u32, 0x3ff9_u16, 0x4148_u16, StaticArray[0x81_u8, 0x16_u8, 0x5_u8, 0x7c_u8, 0xc6_u8, 0x16_u8, 0xfe_u8, 0x13_u8])
     def query_interface(this : IWSDiscoveryPublisher*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1452,7 +1647,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("e67651b0-337a-4b3c-9758-733388568251")]
   record IWSDiscoveryPublisherNotify, lpVtbl : IWSDiscoveryPublisherNotifyVtbl* do
     GUID = LibC::GUID.new(0xe67651b0_u32, 0x337a_u16, 0x4b3c_u16, StaticArray[0x97_u8, 0x58_u8, 0x73_u8, 0x33_u8, 0x88_u8, 0x56_u8, 0x82_u8, 0x51_u8])
     def query_interface(this : IWSDiscoveryPublisherNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1483,7 +1677,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("fcafe424-fef5-481a-bd9f-33ce0574256f")]
   record IWSDScopeMatchingRule, lpVtbl : IWSDScopeMatchingRuleVtbl* do
     GUID = LibC::GUID.new(0xfcafe424_u32, 0xfef5_u16, 0x481a_u16, StaticArray[0xbd_u8, 0x9f_u8, 0x33_u8, 0xce_u8, 0x5_u8, 0x74_u8, 0x25_u8, 0x6f_u8])
     def query_interface(this : IWSDScopeMatchingRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1519,7 +1712,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("1860d430-b24c-4975-9f90-dbb39baa24ec")]
   record IWSDEndpointProxy, lpVtbl : IWSDEndpointProxyVtbl* do
     GUID = LibC::GUID.new(0x1860d430_u32, 0xb24c_u16, 0x4975_u16, StaticArray[0x9f_u8, 0x90_u8, 0xdb_u8, 0xb3_u8, 0x9b_u8, 0xaa_u8, 0x24_u8, 0xec_u8])
     def query_interface(this : IWSDEndpointProxy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1564,7 +1756,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("06996d57-1d67-4928-9307-3d7833fdb846")]
   record IWSDMetadataExchange, lpVtbl : IWSDMetadataExchangeVtbl* do
     GUID = LibC::GUID.new(0x6996d57_u32, 0x1d67_u16, 0x4928_u16, StaticArray[0x93_u8, 0x7_u8, 0x3d_u8, 0x78_u8, 0x33_u8, 0xfd_u8, 0xb8_u8, 0x46_u8])
     def query_interface(this : IWSDMetadataExchange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1598,7 +1789,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("d4c7fb9c-03ab-4175-9d67-094fafebf487")]
   record IWSDServiceProxy, lpVtbl : IWSDServiceProxyVtbl* do
     GUID = LibC::GUID.new(0xd4c7fb9c_u32, 0x3ab_u16, 0x4175_u16, StaticArray[0x9d_u8, 0x67_u8, 0x9_u8, 0x4f_u8, 0xaf_u8, 0xeb_u8, 0xf4_u8, 0x87_u8])
     def query_interface(this : IWSDServiceProxy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1665,7 +1855,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("f9279d6d-1012-4a94-b8cc-fd35d2202bfe")]
   record IWSDServiceProxyEventing, lpVtbl : IWSDServiceProxyEventingVtbl* do
     GUID = LibC::GUID.new(0xf9279d6d_u32, 0x1012_u16, 0x4a94_u16, StaticArray[0xb8_u8, 0xcc_u8, 0xfd_u8, 0x35_u8, 0xd2_u8, 0x20_u8, 0x2b_u8, 0xfe_u8])
     def query_interface(this : IWSDServiceProxyEventing*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1758,7 +1947,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("eee0c031-c578-4c0e-9a3b-973c35f409db")]
   record IWSDDeviceProxy, lpVtbl : IWSDDeviceProxyVtbl* do
     GUID = LibC::GUID.new(0xeee0c031_u32, 0xc578_u16, 0x4c0e_u16, StaticArray[0x9a_u8, 0x3b_u8, 0x97_u8, 0x3c_u8, 0x35_u8, 0xf4_u8, 0x9_u8, 0xdb_u8])
     def query_interface(this : IWSDDeviceProxy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1818,7 +2006,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("11a9852a-8dd8-423e-b537-9356db4fbfb8")]
   record IWSDAsyncResult, lpVtbl : IWSDAsyncResultVtbl* do
     GUID = LibC::GUID.new(0x11a9852a_u32, 0x8dd8_u16, 0x423e_u16, StaticArray[0xb5_u8, 0x37_u8, 0x93_u8, 0x56_u8, 0xdb_u8, 0x4f_u8, 0xbf_u8, 0xb8_u8])
     def query_interface(this : IWSDAsyncResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1863,7 +2050,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("a63e109d-ce72-49e2-ba98-e845f5ee1666")]
   record IWSDAsyncCallback, lpVtbl : IWSDAsyncCallbackVtbl* do
     GUID = LibC::GUID.new(0xa63e109d_u32, 0xce72_u16, 0x49e2_u16, StaticArray[0xba_u8, 0x98_u8, 0xe8_u8, 0x45_u8, 0xf5_u8, 0xee_u8, 0x16_u8, 0x66_u8])
     def query_interface(this : IWSDAsyncCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1892,7 +2078,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("49b17f52-637a-407a-ae99-fbe82a4d38c0")]
   record IWSDEventingStatus, lpVtbl : IWSDEventingStatusVtbl* do
     GUID = LibC::GUID.new(0x49b17f52_u32, 0x637a_u16, 0x407a_u16, StaticArray[0xae_u8, 0x99_u8, 0xfb_u8, 0xe8_u8, 0x2a_u8, 0x4d_u8, 0x38_u8, 0xc0_u8])
     def query_interface(this : IWSDEventingStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1936,7 +2121,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("917fe891-3d13-4138-9809-934c8abeb12c")]
   record IWSDDeviceHost, lpVtbl : IWSDDeviceHostVtbl* do
     GUID = LibC::GUID.new(0x917fe891_u32, 0x3d13_u16, 0x4138_u16, StaticArray[0x98_u8, 0x9_u8, 0x93_u8, 0x4c_u8, 0x8a_u8, 0xbe_u8, 0xb1_u8, 0x2c_u8])
     def query_interface(this : IWSDDeviceHost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1996,7 +2180,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("b5bee9f9-eeda-41fe-96f7-f45e14990fb0")]
   record IWSDDeviceHostNotify, lpVtbl : IWSDDeviceHostNotifyVtbl* do
     GUID = LibC::GUID.new(0xb5bee9f9_u32, 0xeeda_u16, 0x41fe_u16, StaticArray[0x96_u8, 0xf7_u8, 0xf4_u8, 0x5e_u8, 0x14_u8, 0x99_u8, 0xf_u8, 0xb0_u8])
     def query_interface(this : IWSDDeviceHostNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2024,7 +2207,6 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  #@[Com("94974cf4-0cab-460d-a3f6-7a0ad623c0e6")]
   record IWSDServiceMessaging, lpVtbl : IWSDServiceMessagingVtbl* do
     GUID = LibC::GUID.new(0x94974cf4_u32, 0xcab_u16, 0x460d_u16, StaticArray[0xa3_u8, 0xf6_u8, 0x7a_u8, 0xa_u8, 0xd6_u8, 0x23_u8, 0xc0_u8, 0xe6_u8])
     def query_interface(this : IWSDServiceMessaging*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

@@ -3,41 +3,41 @@ require "./cryptography.cr"
 require "./cryptography/sip.cr"
 
 module Win32cr::Security::WinTrust
-  alias PFN_CPD_MEM_ALLOC = Proc(UInt32, Void*)*
+  alias PFN_CPD_MEM_ALLOC = Proc(UInt32, Void*)
 
-  alias PFN_CPD_MEM_FREE = Proc(Void*, Void)*
+  alias PFN_CPD_MEM_FREE = Proc(Void*, Void)
 
-  alias PFN_CPD_ADD_STORE = Proc(Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, Win32cr::Security::Cryptography::HCERTSTORE, Win32cr::Foundation::BOOL)*
+  alias PFN_CPD_ADD_STORE = Proc(Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, Win32cr::Security::Cryptography::HCERTSTORE, Win32cr::Foundation::BOOL)
 
-  alias PFN_CPD_ADD_SGNR = Proc(Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, Win32cr::Foundation::BOOL, UInt32, Win32cr::Security::WinTrust::CRYPT_PROVIDER_SGNR*, Win32cr::Foundation::BOOL)*
+  alias PFN_CPD_ADD_SGNR = Proc(Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, Win32cr::Foundation::BOOL, UInt32, Win32cr::Security::WinTrust::CRYPT_PROVIDER_SGNR*, Win32cr::Foundation::BOOL)
 
-  alias PFN_CPD_ADD_CERT = Proc(Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, UInt32, Win32cr::Foundation::BOOL, UInt32, Win32cr::Security::Cryptography::CERT_CONTEXT*, Win32cr::Foundation::BOOL)*
+  alias PFN_CPD_ADD_CERT = Proc(Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, UInt32, Win32cr::Foundation::BOOL, UInt32, Win32cr::Security::Cryptography::CERT_CONTEXT*, Win32cr::Foundation::BOOL)
 
-  alias PFN_CPD_ADD_PRIVDATA = Proc(Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, Win32cr::Security::WinTrust::CRYPT_PROVIDER_PRIVDATA*, Win32cr::Foundation::BOOL)*
+  alias PFN_CPD_ADD_PRIVDATA = Proc(Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, Win32cr::Security::WinTrust::CRYPT_PROVIDER_PRIVDATA*, Win32cr::Foundation::BOOL)
 
-  alias PFN_PROVIDER_INIT_CALL = Proc(Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, Win32cr::Foundation::HRESULT)*
+  alias PFN_PROVIDER_INIT_CALL = Proc(Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, Win32cr::Foundation::HRESULT)
 
-  alias PFN_PROVIDER_OBJTRUST_CALL = Proc(Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, Win32cr::Foundation::HRESULT)*
+  alias PFN_PROVIDER_OBJTRUST_CALL = Proc(Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, Win32cr::Foundation::HRESULT)
 
-  alias PFN_PROVIDER_SIGTRUST_CALL = Proc(Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, Win32cr::Foundation::HRESULT)*
+  alias PFN_PROVIDER_SIGTRUST_CALL = Proc(Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, Win32cr::Foundation::HRESULT)
 
-  alias PFN_PROVIDER_CERTTRUST_CALL = Proc(Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, Win32cr::Foundation::HRESULT)*
+  alias PFN_PROVIDER_CERTTRUST_CALL = Proc(Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, Win32cr::Foundation::HRESULT)
 
-  alias PFN_PROVIDER_FINALPOLICY_CALL = Proc(Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, Win32cr::Foundation::HRESULT)*
+  alias PFN_PROVIDER_FINALPOLICY_CALL = Proc(Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, Win32cr::Foundation::HRESULT)
 
-  alias PFN_PROVIDER_TESTFINALPOLICY_CALL = Proc(Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, Win32cr::Foundation::HRESULT)*
+  alias PFN_PROVIDER_TESTFINALPOLICY_CALL = Proc(Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, Win32cr::Foundation::HRESULT)
 
-  alias PFN_PROVIDER_CLEANUP_CALL = Proc(Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, Win32cr::Foundation::HRESULT)*
+  alias PFN_PROVIDER_CLEANUP_CALL = Proc(Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, Win32cr::Foundation::HRESULT)
 
-  alias PFN_PROVIDER_CERTCHKPOLICY_CALL = Proc(Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, UInt32, Win32cr::Foundation::BOOL, UInt32, Win32cr::Foundation::BOOL)*
+  alias PFN_PROVIDER_CERTCHKPOLICY_CALL = Proc(Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, UInt32, Win32cr::Foundation::BOOL, UInt32, Win32cr::Foundation::BOOL)
 
-  alias PFN_PROVUI_CALL = Proc(Win32cr::Foundation::HWND, Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, Win32cr::Foundation::BOOL)*
+  alias PFN_PROVUI_CALL = Proc(Win32cr::Foundation::HWND, Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, Win32cr::Foundation::BOOL)
 
-  alias PFN_ALLOCANDFILLDEFUSAGE = Proc(Win32cr::Foundation::PSTR, Win32cr::Security::WinTrust::CRYPT_PROVIDER_DEFUSAGE*, Win32cr::Foundation::BOOL)*
+  alias PFN_ALLOCANDFILLDEFUSAGE = Proc(Win32cr::Foundation::PSTR, Win32cr::Security::WinTrust::CRYPT_PROVIDER_DEFUSAGE*, Win32cr::Foundation::BOOL)
 
-  alias PFN_FREEDEFUSAGE = Proc(Win32cr::Foundation::PSTR, Win32cr::Security::WinTrust::CRYPT_PROVIDER_DEFUSAGE*, Win32cr::Foundation::BOOL)*
+  alias PFN_FREEDEFUSAGE = Proc(Win32cr::Foundation::PSTR, Win32cr::Security::WinTrust::CRYPT_PROVIDER_DEFUSAGE*, Win32cr::Foundation::BOOL)
 
-  alias PFN_WTD_GENERIC_CHAIN_POLICY_CALLBACK = Proc(Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, UInt32, UInt32, UInt32, Win32cr::Security::WinTrust::WTD_GENERIC_CHAIN_POLICY_SIGNER_INFO**, Void*, Win32cr::Foundation::HRESULT)*
+  alias PFN_WTD_GENERIC_CHAIN_POLICY_CALLBACK = Proc(Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, UInt32, UInt32, UInt32, Win32cr::Security::WinTrust::WTD_GENERIC_CHAIN_POLICY_SIGNER_INFO**, Void*, Win32cr::Foundation::HRESULT)
 
   WINTRUST_CONFIG_REGPATH = "Software\\Microsoft\\Cryptography\\Wintrust\\Config"
   WINTRUST_MAX_HEADER_BYTES_TO_MAP_VALUE_NAME = "MaxHeaderBytesToMap"
@@ -268,491 +268,650 @@ module Win32cr::Security::WinTrust
   end
 
   @[Extern]
-  record WINTRUST_DATA,
-    cbStruct : UInt32,
-    pPolicyCallbackData : Void*,
-    pSIPClientData : Void*,
-    dwUIChoice : Win32cr::Security::WinTrust::WINTRUST_DATA_UICHOICE,
-    fdwRevocationChecks : Win32cr::Security::WinTrust::WINTRUST_DATA_REVOCATION_CHECKS,
-    dwUnionChoice : Win32cr::Security::WinTrust::WINTRUST_DATA_UNION_CHOICE,
-    anonymous : Anonymous_e__Union_,
-    dwStateAction : Win32cr::Security::WinTrust::WINTRUST_DATA_STATE_ACTION,
-    hWVTStateData : Win32cr::Foundation::HANDLE,
-    pwszURLReference : Win32cr::Foundation::PWSTR,
-    dwProvFlags : Win32cr::Security::WinTrust::WINTRUST_DATA_PROVIDER_FLAGS,
-    dwUIContext : Win32cr::Security::WinTrust::WINTRUST_DATA_UICONTEXT,
-    pSignatureSettings : Win32cr::Security::WinTrust::WINTRUST_SIGNATURE_SETTINGS* do
+  struct WINTRUST_DATA
+    property cbStruct : UInt32
+    property pPolicyCallbackData : Void*
+    property pSIPClientData : Void*
+    property dwUIChoice : Win32cr::Security::WinTrust::WINTRUST_DATA_UICHOICE
+    property fdwRevocationChecks : Win32cr::Security::WinTrust::WINTRUST_DATA_REVOCATION_CHECKS
+    property dwUnionChoice : Win32cr::Security::WinTrust::WINTRUST_DATA_UNION_CHOICE
+    property anonymous : Anonymous_e__Union_
+    property dwStateAction : Win32cr::Security::WinTrust::WINTRUST_DATA_STATE_ACTION
+    property hWVTStateData : Win32cr::Foundation::HANDLE
+    property pwszURLReference : Win32cr::Foundation::PWSTR
+    property dwProvFlags : Win32cr::Security::WinTrust::WINTRUST_DATA_PROVIDER_FLAGS
+    property dwUIContext : Win32cr::Security::WinTrust::WINTRUST_DATA_UICONTEXT
+    property pSignatureSettings : Win32cr::Security::WinTrust::WINTRUST_SIGNATURE_SETTINGS*
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      pFile : Win32cr::Security::WinTrust::WINTRUST_FILE_INFO*,
-      pCatalog : Win32cr::Security::WinTrust::WINTRUST_CATALOG_INFO*,
-      pBlob : Win32cr::Security::WinTrust::WINTRUST_BLOB_INFO*,
-      pSgnr : Win32cr::Security::WinTrust::WINTRUST_SGNR_INFO*,
-      pCert : Win32cr::Security::WinTrust::WINTRUST_CERT_INFO*
+    struct Anonymous_e__Union_
+    property pFile : Win32cr::Security::WinTrust::WINTRUST_FILE_INFO*
+    property pCatalog : Win32cr::Security::WinTrust::WINTRUST_CATALOG_INFO*
+    property pBlob : Win32cr::Security::WinTrust::WINTRUST_BLOB_INFO*
+    property pSgnr : Win32cr::Security::WinTrust::WINTRUST_SGNR_INFO*
+    property pCert : Win32cr::Security::WinTrust::WINTRUST_CERT_INFO*
+    def initialize(@pFile : Win32cr::Security::WinTrust::WINTRUST_FILE_INFO*, @pCatalog : Win32cr::Security::WinTrust::WINTRUST_CATALOG_INFO*, @pBlob : Win32cr::Security::WinTrust::WINTRUST_BLOB_INFO*, @pSgnr : Win32cr::Security::WinTrust::WINTRUST_SGNR_INFO*, @pCert : Win32cr::Security::WinTrust::WINTRUST_CERT_INFO*)
+    end
+    end
 
+    def initialize(@cbStruct : UInt32, @pPolicyCallbackData : Void*, @pSIPClientData : Void*, @dwUIChoice : Win32cr::Security::WinTrust::WINTRUST_DATA_UICHOICE, @fdwRevocationChecks : Win32cr::Security::WinTrust::WINTRUST_DATA_REVOCATION_CHECKS, @dwUnionChoice : Win32cr::Security::WinTrust::WINTRUST_DATA_UNION_CHOICE, @anonymous : Anonymous_e__Union_, @dwStateAction : Win32cr::Security::WinTrust::WINTRUST_DATA_STATE_ACTION, @hWVTStateData : Win32cr::Foundation::HANDLE, @pwszURLReference : Win32cr::Foundation::PWSTR, @dwProvFlags : Win32cr::Security::WinTrust::WINTRUST_DATA_PROVIDER_FLAGS, @dwUIContext : Win32cr::Security::WinTrust::WINTRUST_DATA_UICONTEXT, @pSignatureSettings : Win32cr::Security::WinTrust::WINTRUST_SIGNATURE_SETTINGS*)
+    end
   end
 
   @[Extern]
-  record WINTRUST_SIGNATURE_SETTINGS,
-    cbStruct : UInt32,
-    dwIndex : UInt32,
-    dwFlags : Win32cr::Security::WinTrust::WINTRUST_SIGNATURE_SETTINGS_FLAGS,
-    cSecondarySigs : UInt32,
-    dwVerifiedSigIndex : UInt32,
-    pCryptoPolicy : Win32cr::Security::Cryptography::CERT_STRONG_SIGN_PARA*
+  struct WINTRUST_SIGNATURE_SETTINGS
+    property cbStruct : UInt32
+    property dwIndex : UInt32
+    property dwFlags : Win32cr::Security::WinTrust::WINTRUST_SIGNATURE_SETTINGS_FLAGS
+    property cSecondarySigs : UInt32
+    property dwVerifiedSigIndex : UInt32
+    property pCryptoPolicy : Win32cr::Security::Cryptography::CERT_STRONG_SIGN_PARA*
+    def initialize(@cbStruct : UInt32, @dwIndex : UInt32, @dwFlags : Win32cr::Security::WinTrust::WINTRUST_SIGNATURE_SETTINGS_FLAGS, @cSecondarySigs : UInt32, @dwVerifiedSigIndex : UInt32, @pCryptoPolicy : Win32cr::Security::Cryptography::CERT_STRONG_SIGN_PARA*)
+    end
+  end
 
   @[Extern]
-  record WINTRUST_FILE_INFO,
-    cbStruct : UInt32,
-    pcwszFilePath : Win32cr::Foundation::PWSTR,
-    hFile : Win32cr::Foundation::HANDLE,
-    pgKnownSubject : LibC::GUID*
+  struct WINTRUST_FILE_INFO
+    property cbStruct : UInt32
+    property pcwszFilePath : Win32cr::Foundation::PWSTR
+    property hFile : Win32cr::Foundation::HANDLE
+    property pgKnownSubject : LibC::GUID*
+    def initialize(@cbStruct : UInt32, @pcwszFilePath : Win32cr::Foundation::PWSTR, @hFile : Win32cr::Foundation::HANDLE, @pgKnownSubject : LibC::GUID*)
+    end
+  end
 
   @[Extern]
-  record WINTRUST_CATALOG_INFO,
-    cbStruct : UInt32,
-    dwCatalogVersion : UInt32,
-    pcwszCatalogFilePath : Win32cr::Foundation::PWSTR,
-    pcwszMemberTag : Win32cr::Foundation::PWSTR,
-    pcwszMemberFilePath : Win32cr::Foundation::PWSTR,
-    hMemberFile : Win32cr::Foundation::HANDLE,
-    pbCalculatedFileHash : UInt8*,
-    cbCalculatedFileHash : UInt32,
-    pcCatalogContext : Win32cr::Security::Cryptography::CTL_CONTEXT*,
-    hCatAdmin : LibC::IntPtrT
+  struct WINTRUST_CATALOG_INFO
+    property cbStruct : UInt32
+    property dwCatalogVersion : UInt32
+    property pcwszCatalogFilePath : Win32cr::Foundation::PWSTR
+    property pcwszMemberTag : Win32cr::Foundation::PWSTR
+    property pcwszMemberFilePath : Win32cr::Foundation::PWSTR
+    property hMemberFile : Win32cr::Foundation::HANDLE
+    property pbCalculatedFileHash : UInt8*
+    property cbCalculatedFileHash : UInt32
+    property pcCatalogContext : Win32cr::Security::Cryptography::CTL_CONTEXT*
+    property hCatAdmin : LibC::IntPtrT
+    def initialize(@cbStruct : UInt32, @dwCatalogVersion : UInt32, @pcwszCatalogFilePath : Win32cr::Foundation::PWSTR, @pcwszMemberTag : Win32cr::Foundation::PWSTR, @pcwszMemberFilePath : Win32cr::Foundation::PWSTR, @hMemberFile : Win32cr::Foundation::HANDLE, @pbCalculatedFileHash : UInt8*, @cbCalculatedFileHash : UInt32, @pcCatalogContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, @hCatAdmin : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record WINTRUST_BLOB_INFO,
-    cbStruct : UInt32,
-    gSubject : LibC::GUID,
-    pcwszDisplayName : Win32cr::Foundation::PWSTR,
-    cbMemObject : UInt32,
-    pbMemObject : UInt8*,
-    cbMemSignedMsg : UInt32,
-    pbMemSignedMsg : UInt8*
+  struct WINTRUST_BLOB_INFO
+    property cbStruct : UInt32
+    property gSubject : LibC::GUID
+    property pcwszDisplayName : Win32cr::Foundation::PWSTR
+    property cbMemObject : UInt32
+    property pbMemObject : UInt8*
+    property cbMemSignedMsg : UInt32
+    property pbMemSignedMsg : UInt8*
+    def initialize(@cbStruct : UInt32, @gSubject : LibC::GUID, @pcwszDisplayName : Win32cr::Foundation::PWSTR, @cbMemObject : UInt32, @pbMemObject : UInt8*, @cbMemSignedMsg : UInt32, @pbMemSignedMsg : UInt8*)
+    end
+  end
 
   @[Extern]
-  record WINTRUST_SGNR_INFO,
-    cbStruct : UInt32,
-    pcwszDisplayName : Win32cr::Foundation::PWSTR,
-    psSignerInfo : Win32cr::Security::Cryptography::CMSG_SIGNER_INFO*,
-    chStores : UInt32,
-    pahStores : Win32cr::Security::Cryptography::HCERTSTORE*
+  struct WINTRUST_SGNR_INFO
+    property cbStruct : UInt32
+    property pcwszDisplayName : Win32cr::Foundation::PWSTR
+    property psSignerInfo : Win32cr::Security::Cryptography::CMSG_SIGNER_INFO*
+    property chStores : UInt32
+    property pahStores : Win32cr::Security::Cryptography::HCERTSTORE*
+    def initialize(@cbStruct : UInt32, @pcwszDisplayName : Win32cr::Foundation::PWSTR, @psSignerInfo : Win32cr::Security::Cryptography::CMSG_SIGNER_INFO*, @chStores : UInt32, @pahStores : Win32cr::Security::Cryptography::HCERTSTORE*)
+    end
+  end
 
   @[Extern]
-  record WINTRUST_CERT_INFO,
-    cbStruct : UInt32,
-    pcwszDisplayName : Win32cr::Foundation::PWSTR,
-    psCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*,
-    chStores : UInt32,
-    pahStores : Win32cr::Security::Cryptography::HCERTSTORE*,
-    dwFlags : UInt32,
-    psftVerifyAsOf : Win32cr::Foundation::FILETIME*
+  struct WINTRUST_CERT_INFO
+    property cbStruct : UInt32
+    property pcwszDisplayName : Win32cr::Foundation::PWSTR
+    property psCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*
+    property chStores : UInt32
+    property pahStores : Win32cr::Security::Cryptography::HCERTSTORE*
+    property dwFlags : UInt32
+    property psftVerifyAsOf : Win32cr::Foundation::FILETIME*
+    def initialize(@cbStruct : UInt32, @pcwszDisplayName : Win32cr::Foundation::PWSTR, @psCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, @chStores : UInt32, @pahStores : Win32cr::Security::Cryptography::HCERTSTORE*, @dwFlags : UInt32, @psftVerifyAsOf : Win32cr::Foundation::FILETIME*)
+    end
+  end
 
   @[Extern]
-  record CRYPT_PROVIDER_DATA,
-    cbStruct : UInt32,
-    pWintrustData : Win32cr::Security::WinTrust::WINTRUST_DATA*,
-    fOpenedFile : Win32cr::Foundation::BOOL,
-    hWndParent : Win32cr::Foundation::HWND,
-    pgActionID : LibC::GUID*,
-    hProv : LibC::UIntPtrT,
-    dwError : UInt32,
-    dwRegSecuritySettings : UInt32,
-    dwRegPolicySettings : UInt32,
-    psPfns : Win32cr::Security::WinTrust::CRYPT_PROVIDER_FUNCTIONS*,
-    cdwTrustStepErrors : UInt32,
-    padwTrustStepErrors : UInt32*,
-    chStores : UInt32,
-    pahStores : Win32cr::Security::Cryptography::HCERTSTORE*,
-    dwEncoding : UInt32,
-    hMsg : Void*,
-    csSigners : UInt32,
-    pasSigners : Win32cr::Security::WinTrust::CRYPT_PROVIDER_SGNR*,
-    csProvPrivData : UInt32,
-    pasProvPrivData : Win32cr::Security::WinTrust::CRYPT_PROVIDER_PRIVDATA*,
-    dwSubjectChoice : UInt32,
-    anonymous : Anonymous_e__Union_,
-    pszUsageOID : Win32cr::Foundation::PSTR,
-    fRecallWithState : Win32cr::Foundation::BOOL,
-    sftSystemTime : Win32cr::Foundation::FILETIME,
-    pszCTLSignerUsageOID : Win32cr::Foundation::PSTR,
-    dwProvFlags : UInt32,
-    dwFinalError : UInt32,
-    pRequestUsage : Win32cr::Security::Cryptography::CERT_USAGE_MATCH*,
-    dwTrustPubSettings : UInt32,
-    dwUIStateFlags : UInt32,
-    pSigState : Win32cr::Security::WinTrust::CRYPT_PROVIDER_SIGSTATE*,
-    pSigSettings : Win32cr::Security::WinTrust::WINTRUST_SIGNATURE_SETTINGS* do
+  struct CRYPT_PROVIDER_DATA
+    property cbStruct : UInt32
+    property pWintrustData : Win32cr::Security::WinTrust::WINTRUST_DATA*
+    property fOpenedFile : Win32cr::Foundation::BOOL
+    property hWndParent : Win32cr::Foundation::HWND
+    property pgActionID : LibC::GUID*
+    property hProv : LibC::UIntPtrT
+    property dwError : UInt32
+    property dwRegSecuritySettings : UInt32
+    property dwRegPolicySettings : UInt32
+    property psPfns : Win32cr::Security::WinTrust::CRYPT_PROVIDER_FUNCTIONS*
+    property cdwTrustStepErrors : UInt32
+    property padwTrustStepErrors : UInt32*
+    property chStores : UInt32
+    property pahStores : Win32cr::Security::Cryptography::HCERTSTORE*
+    property dwEncoding : UInt32
+    property hMsg : Void*
+    property csSigners : UInt32
+    property pasSigners : Win32cr::Security::WinTrust::CRYPT_PROVIDER_SGNR*
+    property csProvPrivData : UInt32
+    property pasProvPrivData : Win32cr::Security::WinTrust::CRYPT_PROVIDER_PRIVDATA*
+    property dwSubjectChoice : UInt32
+    property anonymous : Anonymous_e__Union_
+    property pszUsageOID : Win32cr::Foundation::PSTR
+    property fRecallWithState : Win32cr::Foundation::BOOL
+    property sftSystemTime : Win32cr::Foundation::FILETIME
+    property pszCTLSignerUsageOID : Win32cr::Foundation::PSTR
+    property dwProvFlags : UInt32
+    property dwFinalError : UInt32
+    property pRequestUsage : Win32cr::Security::Cryptography::CERT_USAGE_MATCH*
+    property dwTrustPubSettings : UInt32
+    property dwUIStateFlags : UInt32
+    property pSigState : Win32cr::Security::WinTrust::CRYPT_PROVIDER_SIGSTATE*
+    property pSigSettings : Win32cr::Security::WinTrust::WINTRUST_SIGNATURE_SETTINGS*
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      pPDSip : Win32cr::Security::WinTrust::PROVDATA_SIP*
+    struct Anonymous_e__Union_
+    property pPDSip : Win32cr::Security::WinTrust::PROVDATA_SIP*
+    def initialize(@pPDSip : Win32cr::Security::WinTrust::PROVDATA_SIP*)
+    end
+    end
 
+    def initialize(@cbStruct : UInt32, @pWintrustData : Win32cr::Security::WinTrust::WINTRUST_DATA*, @fOpenedFile : Win32cr::Foundation::BOOL, @hWndParent : Win32cr::Foundation::HWND, @pgActionID : LibC::GUID*, @hProv : LibC::UIntPtrT, @dwError : UInt32, @dwRegSecuritySettings : UInt32, @dwRegPolicySettings : UInt32, @psPfns : Win32cr::Security::WinTrust::CRYPT_PROVIDER_FUNCTIONS*, @cdwTrustStepErrors : UInt32, @padwTrustStepErrors : UInt32*, @chStores : UInt32, @pahStores : Win32cr::Security::Cryptography::HCERTSTORE*, @dwEncoding : UInt32, @hMsg : Void*, @csSigners : UInt32, @pasSigners : Win32cr::Security::WinTrust::CRYPT_PROVIDER_SGNR*, @csProvPrivData : UInt32, @pasProvPrivData : Win32cr::Security::WinTrust::CRYPT_PROVIDER_PRIVDATA*, @dwSubjectChoice : UInt32, @anonymous : Anonymous_e__Union_, @pszUsageOID : Win32cr::Foundation::PSTR, @fRecallWithState : Win32cr::Foundation::BOOL, @sftSystemTime : Win32cr::Foundation::FILETIME, @pszCTLSignerUsageOID : Win32cr::Foundation::PSTR, @dwProvFlags : UInt32, @dwFinalError : UInt32, @pRequestUsage : Win32cr::Security::Cryptography::CERT_USAGE_MATCH*, @dwTrustPubSettings : UInt32, @dwUIStateFlags : UInt32, @pSigState : Win32cr::Security::WinTrust::CRYPT_PROVIDER_SIGSTATE*, @pSigSettings : Win32cr::Security::WinTrust::WINTRUST_SIGNATURE_SETTINGS*)
+    end
   end
 
   @[Extern]
-  record CRYPT_PROVIDER_SIGSTATE,
-    cbStruct : UInt32,
-    rhSecondarySigs : Void**,
-    hPrimarySig : Void*,
-    fFirstAttemptMade : Win32cr::Foundation::BOOL,
-    fNoMoreSigs : Win32cr::Foundation::BOOL,
-    cSecondarySigs : UInt32,
-    dwCurrentIndex : UInt32,
-    fSupportMultiSig : Win32cr::Foundation::BOOL,
-    dwCryptoPolicySupport : UInt32,
-    iAttemptCount : UInt32,
-    fCheckedSealing : Win32cr::Foundation::BOOL,
-    pSealingSignature : Win32cr::Security::WinTrust::SEALING_SIGNATURE_ATTRIBUTE*
+  struct CRYPT_PROVIDER_SIGSTATE
+    property cbStruct : UInt32
+    property rhSecondarySigs : Void**
+    property hPrimarySig : Void*
+    property fFirstAttemptMade : Win32cr::Foundation::BOOL
+    property fNoMoreSigs : Win32cr::Foundation::BOOL
+    property cSecondarySigs : UInt32
+    property dwCurrentIndex : UInt32
+    property fSupportMultiSig : Win32cr::Foundation::BOOL
+    property dwCryptoPolicySupport : UInt32
+    property iAttemptCount : UInt32
+    property fCheckedSealing : Win32cr::Foundation::BOOL
+    property pSealingSignature : Win32cr::Security::WinTrust::SEALING_SIGNATURE_ATTRIBUTE*
+    def initialize(@cbStruct : UInt32, @rhSecondarySigs : Void**, @hPrimarySig : Void*, @fFirstAttemptMade : Win32cr::Foundation::BOOL, @fNoMoreSigs : Win32cr::Foundation::BOOL, @cSecondarySigs : UInt32, @dwCurrentIndex : UInt32, @fSupportMultiSig : Win32cr::Foundation::BOOL, @dwCryptoPolicySupport : UInt32, @iAttemptCount : UInt32, @fCheckedSealing : Win32cr::Foundation::BOOL, @pSealingSignature : Win32cr::Security::WinTrust::SEALING_SIGNATURE_ATTRIBUTE*)
+    end
+  end
 
   @[Extern]
-  record CRYPT_PROVIDER_FUNCTIONS,
-    cbStruct : UInt32,
-    pfnAlloc : Win32cr::Security::WinTrust::PFN_CPD_MEM_ALLOC,
-    pfnFree : Win32cr::Security::WinTrust::PFN_CPD_MEM_FREE,
-    pfnAddStore2Chain : Win32cr::Security::WinTrust::PFN_CPD_ADD_STORE,
-    pfnAddSgnr2Chain : Win32cr::Security::WinTrust::PFN_CPD_ADD_SGNR,
-    pfnAddCert2Chain : Win32cr::Security::WinTrust::PFN_CPD_ADD_CERT,
-    pfnAddPrivData2Chain : Win32cr::Security::WinTrust::PFN_CPD_ADD_PRIVDATA,
-    pfnInitialize : Win32cr::Security::WinTrust::PFN_PROVIDER_INIT_CALL,
-    pfnObjectTrust : Win32cr::Security::WinTrust::PFN_PROVIDER_OBJTRUST_CALL,
-    pfnSignatureTrust : Win32cr::Security::WinTrust::PFN_PROVIDER_SIGTRUST_CALL,
-    pfnCertificateTrust : Win32cr::Security::WinTrust::PFN_PROVIDER_CERTTRUST_CALL,
-    pfnFinalPolicy : Win32cr::Security::WinTrust::PFN_PROVIDER_FINALPOLICY_CALL,
-    pfnCertCheckPolicy : Win32cr::Security::WinTrust::PFN_PROVIDER_CERTCHKPOLICY_CALL,
-    pfnTestFinalPolicy : Win32cr::Security::WinTrust::PFN_PROVIDER_TESTFINALPOLICY_CALL,
-    psUIpfns : Win32cr::Security::WinTrust::CRYPT_PROVUI_FUNCS*,
-    pfnCleanupPolicy : Win32cr::Security::WinTrust::PFN_PROVIDER_CLEANUP_CALL
+  struct CRYPT_PROVIDER_FUNCTIONS
+    property cbStruct : UInt32
+    property pfnAlloc : Win32cr::Security::WinTrust::PFN_CPD_MEM_ALLOC
+    property pfnFree : Win32cr::Security::WinTrust::PFN_CPD_MEM_FREE
+    property pfnAddStore2Chain : Win32cr::Security::WinTrust::PFN_CPD_ADD_STORE
+    property pfnAddSgnr2Chain : Win32cr::Security::WinTrust::PFN_CPD_ADD_SGNR
+    property pfnAddCert2Chain : Win32cr::Security::WinTrust::PFN_CPD_ADD_CERT
+    property pfnAddPrivData2Chain : Win32cr::Security::WinTrust::PFN_CPD_ADD_PRIVDATA
+    property pfnInitialize : Win32cr::Security::WinTrust::PFN_PROVIDER_INIT_CALL
+    property pfnObjectTrust : Win32cr::Security::WinTrust::PFN_PROVIDER_OBJTRUST_CALL
+    property pfnSignatureTrust : Win32cr::Security::WinTrust::PFN_PROVIDER_SIGTRUST_CALL
+    property pfnCertificateTrust : Win32cr::Security::WinTrust::PFN_PROVIDER_CERTTRUST_CALL
+    property pfnFinalPolicy : Win32cr::Security::WinTrust::PFN_PROVIDER_FINALPOLICY_CALL
+    property pfnCertCheckPolicy : Win32cr::Security::WinTrust::PFN_PROVIDER_CERTCHKPOLICY_CALL
+    property pfnTestFinalPolicy : Win32cr::Security::WinTrust::PFN_PROVIDER_TESTFINALPOLICY_CALL
+    property psUIpfns : Win32cr::Security::WinTrust::CRYPT_PROVUI_FUNCS*
+    property pfnCleanupPolicy : Win32cr::Security::WinTrust::PFN_PROVIDER_CLEANUP_CALL
+    def initialize(@cbStruct : UInt32, @pfnAlloc : Win32cr::Security::WinTrust::PFN_CPD_MEM_ALLOC, @pfnFree : Win32cr::Security::WinTrust::PFN_CPD_MEM_FREE, @pfnAddStore2Chain : Win32cr::Security::WinTrust::PFN_CPD_ADD_STORE, @pfnAddSgnr2Chain : Win32cr::Security::WinTrust::PFN_CPD_ADD_SGNR, @pfnAddCert2Chain : Win32cr::Security::WinTrust::PFN_CPD_ADD_CERT, @pfnAddPrivData2Chain : Win32cr::Security::WinTrust::PFN_CPD_ADD_PRIVDATA, @pfnInitialize : Win32cr::Security::WinTrust::PFN_PROVIDER_INIT_CALL, @pfnObjectTrust : Win32cr::Security::WinTrust::PFN_PROVIDER_OBJTRUST_CALL, @pfnSignatureTrust : Win32cr::Security::WinTrust::PFN_PROVIDER_SIGTRUST_CALL, @pfnCertificateTrust : Win32cr::Security::WinTrust::PFN_PROVIDER_CERTTRUST_CALL, @pfnFinalPolicy : Win32cr::Security::WinTrust::PFN_PROVIDER_FINALPOLICY_CALL, @pfnCertCheckPolicy : Win32cr::Security::WinTrust::PFN_PROVIDER_CERTCHKPOLICY_CALL, @pfnTestFinalPolicy : Win32cr::Security::WinTrust::PFN_PROVIDER_TESTFINALPOLICY_CALL, @psUIpfns : Win32cr::Security::WinTrust::CRYPT_PROVUI_FUNCS*, @pfnCleanupPolicy : Win32cr::Security::WinTrust::PFN_PROVIDER_CLEANUP_CALL)
+    end
+  end
 
   @[Extern]
-  record CRYPT_PROVUI_FUNCS,
-    cbStruct : UInt32,
-    psUIData : Win32cr::Security::WinTrust::CRYPT_PROVUI_DATA*,
-    pfnOnMoreInfoClick : Win32cr::Security::WinTrust::PFN_PROVUI_CALL,
-    pfnOnMoreInfoClickDefault : Win32cr::Security::WinTrust::PFN_PROVUI_CALL,
-    pfnOnAdvancedClick : Win32cr::Security::WinTrust::PFN_PROVUI_CALL,
-    pfnOnAdvancedClickDefault : Win32cr::Security::WinTrust::PFN_PROVUI_CALL
+  struct CRYPT_PROVUI_FUNCS
+    property cbStruct : UInt32
+    property psUIData : Win32cr::Security::WinTrust::CRYPT_PROVUI_DATA*
+    property pfnOnMoreInfoClick : Win32cr::Security::WinTrust::PFN_PROVUI_CALL
+    property pfnOnMoreInfoClickDefault : Win32cr::Security::WinTrust::PFN_PROVUI_CALL
+    property pfnOnAdvancedClick : Win32cr::Security::WinTrust::PFN_PROVUI_CALL
+    property pfnOnAdvancedClickDefault : Win32cr::Security::WinTrust::PFN_PROVUI_CALL
+    def initialize(@cbStruct : UInt32, @psUIData : Win32cr::Security::WinTrust::CRYPT_PROVUI_DATA*, @pfnOnMoreInfoClick : Win32cr::Security::WinTrust::PFN_PROVUI_CALL, @pfnOnMoreInfoClickDefault : Win32cr::Security::WinTrust::PFN_PROVUI_CALL, @pfnOnAdvancedClick : Win32cr::Security::WinTrust::PFN_PROVUI_CALL, @pfnOnAdvancedClickDefault : Win32cr::Security::WinTrust::PFN_PROVUI_CALL)
+    end
+  end
 
   @[Extern]
-  record CRYPT_PROVUI_DATA,
-    cbStruct : UInt32,
-    dwFinalError : UInt32,
-    pYesButtonText : Win32cr::Foundation::PWSTR,
-    pNoButtonText : Win32cr::Foundation::PWSTR,
-    pMoreInfoButtonText : Win32cr::Foundation::PWSTR,
-    pAdvancedLinkText : Win32cr::Foundation::PWSTR,
-    pCopyActionText : Win32cr::Foundation::PWSTR,
-    pCopyActionTextNoTS : Win32cr::Foundation::PWSTR,
-    pCopyActionTextNotSigned : Win32cr::Foundation::PWSTR
+  struct CRYPT_PROVUI_DATA
+    property cbStruct : UInt32
+    property dwFinalError : UInt32
+    property pYesButtonText : Win32cr::Foundation::PWSTR
+    property pNoButtonText : Win32cr::Foundation::PWSTR
+    property pMoreInfoButtonText : Win32cr::Foundation::PWSTR
+    property pAdvancedLinkText : Win32cr::Foundation::PWSTR
+    property pCopyActionText : Win32cr::Foundation::PWSTR
+    property pCopyActionTextNoTS : Win32cr::Foundation::PWSTR
+    property pCopyActionTextNotSigned : Win32cr::Foundation::PWSTR
+    def initialize(@cbStruct : UInt32, @dwFinalError : UInt32, @pYesButtonText : Win32cr::Foundation::PWSTR, @pNoButtonText : Win32cr::Foundation::PWSTR, @pMoreInfoButtonText : Win32cr::Foundation::PWSTR, @pAdvancedLinkText : Win32cr::Foundation::PWSTR, @pCopyActionText : Win32cr::Foundation::PWSTR, @pCopyActionTextNoTS : Win32cr::Foundation::PWSTR, @pCopyActionTextNotSigned : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record CRYPT_PROVIDER_SGNR,
-    cbStruct : UInt32,
-    sftVerifyAsOf : Win32cr::Foundation::FILETIME,
-    csCertChain : UInt32,
-    pasCertChain : Win32cr::Security::WinTrust::CRYPT_PROVIDER_CERT*,
-    dwSignerType : UInt32,
-    psSigner : Win32cr::Security::Cryptography::CMSG_SIGNER_INFO*,
-    dwError : UInt32,
-    csCounterSigners : UInt32,
-    pasCounterSigners : Win32cr::Security::WinTrust::CRYPT_PROVIDER_SGNR*,
-    pChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*
+  struct CRYPT_PROVIDER_SGNR
+    property cbStruct : UInt32
+    property sftVerifyAsOf : Win32cr::Foundation::FILETIME
+    property csCertChain : UInt32
+    property pasCertChain : Win32cr::Security::WinTrust::CRYPT_PROVIDER_CERT*
+    property dwSignerType : UInt32
+    property psSigner : Win32cr::Security::Cryptography::CMSG_SIGNER_INFO*
+    property dwError : UInt32
+    property csCounterSigners : UInt32
+    property pasCounterSigners : Win32cr::Security::WinTrust::CRYPT_PROVIDER_SGNR*
+    property pChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*
+    def initialize(@cbStruct : UInt32, @sftVerifyAsOf : Win32cr::Foundation::FILETIME, @csCertChain : UInt32, @pasCertChain : Win32cr::Security::WinTrust::CRYPT_PROVIDER_CERT*, @dwSignerType : UInt32, @psSigner : Win32cr::Security::Cryptography::CMSG_SIGNER_INFO*, @dwError : UInt32, @csCounterSigners : UInt32, @pasCounterSigners : Win32cr::Security::WinTrust::CRYPT_PROVIDER_SGNR*, @pChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*)
+    end
+  end
 
   @[Extern]
-  record CRYPT_PROVIDER_CERT,
-    cbStruct : UInt32,
-    pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*,
-    fCommercial : Win32cr::Foundation::BOOL,
-    fTrustedRoot : Win32cr::Foundation::BOOL,
-    fSelfSigned : Win32cr::Foundation::BOOL,
-    fTestCert : Win32cr::Foundation::BOOL,
-    dwRevokedReason : UInt32,
-    dwConfidence : UInt32,
-    dwError : UInt32,
-    pTrustListContext : Win32cr::Security::Cryptography::CTL_CONTEXT*,
-    fTrustListSignerCert : Win32cr::Foundation::BOOL,
-    pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*,
-    dwCtlError : UInt32,
-    fIsCyclic : Win32cr::Foundation::BOOL,
-    pChainElement : Win32cr::Security::Cryptography::CERT_CHAIN_ELEMENT*
+  struct CRYPT_PROVIDER_CERT
+    property cbStruct : UInt32
+    property pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*
+    property fCommercial : Win32cr::Foundation::BOOL
+    property fTrustedRoot : Win32cr::Foundation::BOOL
+    property fSelfSigned : Win32cr::Foundation::BOOL
+    property fTestCert : Win32cr::Foundation::BOOL
+    property dwRevokedReason : UInt32
+    property dwConfidence : UInt32
+    property dwError : UInt32
+    property pTrustListContext : Win32cr::Security::Cryptography::CTL_CONTEXT*
+    property fTrustListSignerCert : Win32cr::Foundation::BOOL
+    property pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*
+    property dwCtlError : UInt32
+    property fIsCyclic : Win32cr::Foundation::BOOL
+    property pChainElement : Win32cr::Security::Cryptography::CERT_CHAIN_ELEMENT*
+    def initialize(@cbStruct : UInt32, @pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, @fCommercial : Win32cr::Foundation::BOOL, @fTrustedRoot : Win32cr::Foundation::BOOL, @fSelfSigned : Win32cr::Foundation::BOOL, @fTestCert : Win32cr::Foundation::BOOL, @dwRevokedReason : UInt32, @dwConfidence : UInt32, @dwError : UInt32, @pTrustListContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, @fTrustListSignerCert : Win32cr::Foundation::BOOL, @pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, @dwCtlError : UInt32, @fIsCyclic : Win32cr::Foundation::BOOL, @pChainElement : Win32cr::Security::Cryptography::CERT_CHAIN_ELEMENT*)
+    end
+  end
 
   @[Extern]
-  record CRYPT_PROVIDER_PRIVDATA,
-    cbStruct : UInt32,
-    gProviderID : LibC::GUID,
-    cbProvData : UInt32,
-    pvProvData : Void*
+  struct CRYPT_PROVIDER_PRIVDATA
+    property cbStruct : UInt32
+    property gProviderID : LibC::GUID
+    property cbProvData : UInt32
+    property pvProvData : Void*
+    def initialize(@cbStruct : UInt32, @gProviderID : LibC::GUID, @cbProvData : UInt32, @pvProvData : Void*)
+    end
+  end
 
   @[Extern]
-  record PROVDATA_SIP,
-    cbStruct : UInt32,
-    gSubject : LibC::GUID,
-    pSip : Win32cr::Security::Cryptography::Sip::SIP_DISPATCH_INFO*,
-    pCATSip : Win32cr::Security::Cryptography::Sip::SIP_DISPATCH_INFO*,
-    psSipSubjectInfo : Win32cr::Security::Cryptography::Sip::SIP_SUBJECTINFO*,
-    psSipCATSubjectInfo : Win32cr::Security::Cryptography::Sip::SIP_SUBJECTINFO*,
-    psIndirectData : Win32cr::Security::Cryptography::Sip::SIP_INDIRECT_DATA*
+  struct PROVDATA_SIP
+    property cbStruct : UInt32
+    property gSubject : LibC::GUID
+    property pSip : Win32cr::Security::Cryptography::Sip::SIP_DISPATCH_INFO*
+    property pCATSip : Win32cr::Security::Cryptography::Sip::SIP_DISPATCH_INFO*
+    property psSipSubjectInfo : Win32cr::Security::Cryptography::Sip::SIP_SUBJECTINFO*
+    property psSipCATSubjectInfo : Win32cr::Security::Cryptography::Sip::SIP_SUBJECTINFO*
+    property psIndirectData : Win32cr::Security::Cryptography::Sip::SIP_INDIRECT_DATA*
+    def initialize(@cbStruct : UInt32, @gSubject : LibC::GUID, @pSip : Win32cr::Security::Cryptography::Sip::SIP_DISPATCH_INFO*, @pCATSip : Win32cr::Security::Cryptography::Sip::SIP_DISPATCH_INFO*, @psSipSubjectInfo : Win32cr::Security::Cryptography::Sip::SIP_SUBJECTINFO*, @psSipCATSubjectInfo : Win32cr::Security::Cryptography::Sip::SIP_SUBJECTINFO*, @psIndirectData : Win32cr::Security::Cryptography::Sip::SIP_INDIRECT_DATA*)
+    end
+  end
 
   @[Extern]
-  record CRYPT_TRUST_REG_ENTRY,
-    cbStruct : UInt32,
-    pwszDLLName : Win32cr::Foundation::PWSTR,
-    pwszFunctionName : Win32cr::Foundation::PWSTR
+  struct CRYPT_TRUST_REG_ENTRY
+    property cbStruct : UInt32
+    property pwszDLLName : Win32cr::Foundation::PWSTR
+    property pwszFunctionName : Win32cr::Foundation::PWSTR
+    def initialize(@cbStruct : UInt32, @pwszDLLName : Win32cr::Foundation::PWSTR, @pwszFunctionName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record CRYPT_REGISTER_ACTIONID,
-    cbStruct : UInt32,
-    sInitProvider : Win32cr::Security::WinTrust::CRYPT_TRUST_REG_ENTRY,
-    sObjectProvider : Win32cr::Security::WinTrust::CRYPT_TRUST_REG_ENTRY,
-    sSignatureProvider : Win32cr::Security::WinTrust::CRYPT_TRUST_REG_ENTRY,
-    sCertificateProvider : Win32cr::Security::WinTrust::CRYPT_TRUST_REG_ENTRY,
-    sCertificatePolicyProvider : Win32cr::Security::WinTrust::CRYPT_TRUST_REG_ENTRY,
-    sFinalPolicyProvider : Win32cr::Security::WinTrust::CRYPT_TRUST_REG_ENTRY,
-    sTestPolicyProvider : Win32cr::Security::WinTrust::CRYPT_TRUST_REG_ENTRY,
-    sCleanupProvider : Win32cr::Security::WinTrust::CRYPT_TRUST_REG_ENTRY
+  struct CRYPT_REGISTER_ACTIONID
+    property cbStruct : UInt32
+    property sInitProvider : Win32cr::Security::WinTrust::CRYPT_TRUST_REG_ENTRY
+    property sObjectProvider : Win32cr::Security::WinTrust::CRYPT_TRUST_REG_ENTRY
+    property sSignatureProvider : Win32cr::Security::WinTrust::CRYPT_TRUST_REG_ENTRY
+    property sCertificateProvider : Win32cr::Security::WinTrust::CRYPT_TRUST_REG_ENTRY
+    property sCertificatePolicyProvider : Win32cr::Security::WinTrust::CRYPT_TRUST_REG_ENTRY
+    property sFinalPolicyProvider : Win32cr::Security::WinTrust::CRYPT_TRUST_REG_ENTRY
+    property sTestPolicyProvider : Win32cr::Security::WinTrust::CRYPT_TRUST_REG_ENTRY
+    property sCleanupProvider : Win32cr::Security::WinTrust::CRYPT_TRUST_REG_ENTRY
+    def initialize(@cbStruct : UInt32, @sInitProvider : Win32cr::Security::WinTrust::CRYPT_TRUST_REG_ENTRY, @sObjectProvider : Win32cr::Security::WinTrust::CRYPT_TRUST_REG_ENTRY, @sSignatureProvider : Win32cr::Security::WinTrust::CRYPT_TRUST_REG_ENTRY, @sCertificateProvider : Win32cr::Security::WinTrust::CRYPT_TRUST_REG_ENTRY, @sCertificatePolicyProvider : Win32cr::Security::WinTrust::CRYPT_TRUST_REG_ENTRY, @sFinalPolicyProvider : Win32cr::Security::WinTrust::CRYPT_TRUST_REG_ENTRY, @sTestPolicyProvider : Win32cr::Security::WinTrust::CRYPT_TRUST_REG_ENTRY, @sCleanupProvider : Win32cr::Security::WinTrust::CRYPT_TRUST_REG_ENTRY)
+    end
+  end
 
   @[Extern]
-  record CRYPT_PROVIDER_REGDEFUSAGE,
-    cbStruct : UInt32,
-    pgActionID : LibC::GUID*,
-    pwszDllName : Win32cr::Foundation::PWSTR,
-    pwszLoadCallbackDataFunctionName : Win32cr::Foundation::PSTR,
-    pwszFreeCallbackDataFunctionName : Win32cr::Foundation::PSTR
+  struct CRYPT_PROVIDER_REGDEFUSAGE
+    property cbStruct : UInt32
+    property pgActionID : LibC::GUID*
+    property pwszDllName : Win32cr::Foundation::PWSTR
+    property pwszLoadCallbackDataFunctionName : Win32cr::Foundation::PSTR
+    property pwszFreeCallbackDataFunctionName : Win32cr::Foundation::PSTR
+    def initialize(@cbStruct : UInt32, @pgActionID : LibC::GUID*, @pwszDllName : Win32cr::Foundation::PWSTR, @pwszLoadCallbackDataFunctionName : Win32cr::Foundation::PSTR, @pwszFreeCallbackDataFunctionName : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record CRYPT_PROVIDER_DEFUSAGE,
-    cbStruct : UInt32,
-    gActionID : LibC::GUID,
-    pDefPolicyCallbackData : Void*,
-    pDefSIPClientData : Void*
+  struct CRYPT_PROVIDER_DEFUSAGE
+    property cbStruct : UInt32
+    property gActionID : LibC::GUID
+    property pDefPolicyCallbackData : Void*
+    property pDefSIPClientData : Void*
+    def initialize(@cbStruct : UInt32, @gActionID : LibC::GUID, @pDefPolicyCallbackData : Void*, @pDefSIPClientData : Void*)
+    end
+  end
 
   @[Extern]
-  record SPC_SERIALIZED_OBJECT,
-    class_id : UInt8[16],
-    serialized_data : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+  struct SPC_SERIALIZED_OBJECT
+    property class_id : UInt8[16]
+    property serialized_data : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    def initialize(@class_id : UInt8[16], @serialized_data : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    end
+  end
 
   @[Extern]
-  record SPC_SIGINFO,
-    dwSipVersion : UInt32,
-    gSIPGuid : LibC::GUID,
-    dwReserved1 : UInt32,
-    dwReserved2 : UInt32,
-    dwReserved3 : UInt32,
-    dwReserved4 : UInt32,
-    dwReserved5 : UInt32
+  struct SPC_SIGINFO
+    property dwSipVersion : UInt32
+    property gSIPGuid : LibC::GUID
+    property dwReserved1 : UInt32
+    property dwReserved2 : UInt32
+    property dwReserved3 : UInt32
+    property dwReserved4 : UInt32
+    property dwReserved5 : UInt32
+    def initialize(@dwSipVersion : UInt32, @gSIPGuid : LibC::GUID, @dwReserved1 : UInt32, @dwReserved2 : UInt32, @dwReserved3 : UInt32, @dwReserved4 : UInt32, @dwReserved5 : UInt32)
+    end
+  end
 
   @[Extern]
-  record SPC_LINK,
-    dwLinkChoice : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct SPC_LINK
+    property dwLinkChoice : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      pwszUrl : Win32cr::Foundation::PWSTR,
-      moniker : Win32cr::Security::WinTrust::SPC_SERIALIZED_OBJECT,
-      pwszFile : Win32cr::Foundation::PWSTR
+    struct Anonymous_e__Union_
+    property pwszUrl : Win32cr::Foundation::PWSTR
+    property moniker : Win32cr::Security::WinTrust::SPC_SERIALIZED_OBJECT
+    property pwszFile : Win32cr::Foundation::PWSTR
+    def initialize(@pwszUrl : Win32cr::Foundation::PWSTR, @moniker : Win32cr::Security::WinTrust::SPC_SERIALIZED_OBJECT, @pwszFile : Win32cr::Foundation::PWSTR)
+    end
+    end
 
+    def initialize(@dwLinkChoice : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record SPC_PE_IMAGE_DATA,
-    flags : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB,
-    pFile : Win32cr::Security::WinTrust::SPC_LINK*
+  struct SPC_PE_IMAGE_DATA
+    property flags : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB
+    property pFile : Win32cr::Security::WinTrust::SPC_LINK*
+    def initialize(@flags : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB, @pFile : Win32cr::Security::WinTrust::SPC_LINK*)
+    end
+  end
 
   @[Extern]
-  record SPC_INDIRECT_DATA_CONTENT,
-    data : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE_TYPE_VALUE,
-    digest_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
-    digest : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+  struct SPC_INDIRECT_DATA_CONTENT
+    property data : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE_TYPE_VALUE
+    property digest_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
+    property digest : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    def initialize(@data : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE_TYPE_VALUE, @digest_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @digest : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    end
+  end
 
   @[Extern]
-  record SPC_FINANCIAL_CRITERIA,
-    fFinancialInfoAvailable : Win32cr::Foundation::BOOL,
-    fMeetsCriteria : Win32cr::Foundation::BOOL
+  struct SPC_FINANCIAL_CRITERIA
+    property fFinancialInfoAvailable : Win32cr::Foundation::BOOL
+    property fMeetsCriteria : Win32cr::Foundation::BOOL
+    def initialize(@fFinancialInfoAvailable : Win32cr::Foundation::BOOL, @fMeetsCriteria : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record SPC_IMAGE,
-    pImageLink : Win32cr::Security::WinTrust::SPC_LINK*,
-    bitmap : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
-    metafile : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
-    enhanced_metafile : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
-    gif_file : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+  struct SPC_IMAGE
+    property pImageLink : Win32cr::Security::WinTrust::SPC_LINK*
+    property bitmap : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property metafile : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property enhanced_metafile : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property gif_file : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    def initialize(@pImageLink : Win32cr::Security::WinTrust::SPC_LINK*, @bitmap : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @metafile : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @enhanced_metafile : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @gif_file : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    end
+  end
 
   @[Extern]
-  record SPC_SP_AGENCY_INFO,
-    pPolicyInformation : Win32cr::Security::WinTrust::SPC_LINK*,
-    pwszPolicyDisplayText : Win32cr::Foundation::PWSTR,
-    pLogoImage : Win32cr::Security::WinTrust::SPC_IMAGE*,
-    pLogoLink : Win32cr::Security::WinTrust::SPC_LINK*
+  struct SPC_SP_AGENCY_INFO
+    property pPolicyInformation : Win32cr::Security::WinTrust::SPC_LINK*
+    property pwszPolicyDisplayText : Win32cr::Foundation::PWSTR
+    property pLogoImage : Win32cr::Security::WinTrust::SPC_IMAGE*
+    property pLogoLink : Win32cr::Security::WinTrust::SPC_LINK*
+    def initialize(@pPolicyInformation : Win32cr::Security::WinTrust::SPC_LINK*, @pwszPolicyDisplayText : Win32cr::Foundation::PWSTR, @pLogoImage : Win32cr::Security::WinTrust::SPC_IMAGE*, @pLogoLink : Win32cr::Security::WinTrust::SPC_LINK*)
+    end
+  end
 
   @[Extern]
-  record SPC_STATEMENT_TYPE,
-    cKeyPurposeId : UInt32,
-    rgpszKeyPurposeId : Win32cr::Foundation::PSTR*
+  struct SPC_STATEMENT_TYPE
+    property cKeyPurposeId : UInt32
+    property rgpszKeyPurposeId : Win32cr::Foundation::PSTR*
+    def initialize(@cKeyPurposeId : UInt32, @rgpszKeyPurposeId : Win32cr::Foundation::PSTR*)
+    end
+  end
 
   @[Extern]
-  record SPC_SP_OPUS_INFO,
-    pwszProgramName : Win32cr::Foundation::PWSTR,
-    pMoreInfo : Win32cr::Security::WinTrust::SPC_LINK*,
-    pPublisherInfo : Win32cr::Security::WinTrust::SPC_LINK*
+  struct SPC_SP_OPUS_INFO
+    property pwszProgramName : Win32cr::Foundation::PWSTR
+    property pMoreInfo : Win32cr::Security::WinTrust::SPC_LINK*
+    property pPublisherInfo : Win32cr::Security::WinTrust::SPC_LINK*
+    def initialize(@pwszProgramName : Win32cr::Foundation::PWSTR, @pMoreInfo : Win32cr::Security::WinTrust::SPC_LINK*, @pPublisherInfo : Win32cr::Security::WinTrust::SPC_LINK*)
+    end
+  end
 
   @[Extern]
-  record CAT_NAMEVALUE,
-    pwszTag : Win32cr::Foundation::PWSTR,
-    fdwFlags : UInt32,
-    value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+  struct CAT_NAMEVALUE
+    property pwszTag : Win32cr::Foundation::PWSTR
+    property fdwFlags : UInt32
+    property value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    def initialize(@pwszTag : Win32cr::Foundation::PWSTR, @fdwFlags : UInt32, @value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    end
+  end
 
   @[Extern]
-  record CAT_MEMBERINFO,
-    pwszSubjGuid : Win32cr::Foundation::PWSTR,
-    dwCertVersion : UInt32
+  struct CAT_MEMBERINFO
+    property pwszSubjGuid : Win32cr::Foundation::PWSTR
+    property dwCertVersion : UInt32
+    def initialize(@pwszSubjGuid : Win32cr::Foundation::PWSTR, @dwCertVersion : UInt32)
+    end
+  end
 
   @[Extern]
-  record CAT_MEMBERINFO2,
-    subject_guid : LibC::GUID,
-    dwCertVersion : UInt32
+  struct CAT_MEMBERINFO2
+    property subject_guid : LibC::GUID
+    property dwCertVersion : UInt32
+    def initialize(@subject_guid : LibC::GUID, @dwCertVersion : UInt32)
+    end
+  end
 
   @[Extern]
-  record INTENT_TO_SEAL_ATTRIBUTE,
-    version : UInt32,
-    seal : Win32cr::Foundation::BOOLEAN
+  struct INTENT_TO_SEAL_ATTRIBUTE
+    property version : UInt32
+    property seal : Win32cr::Foundation::BOOLEAN
+    def initialize(@version : UInt32, @seal : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record SEALING_SIGNATURE_ATTRIBUTE,
-    version : UInt32,
-    signerIndex : UInt32,
-    signatureAlgorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
-    encryptedDigest : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+  struct SEALING_SIGNATURE_ATTRIBUTE
+    property version : UInt32
+    property signerIndex : UInt32
+    property signatureAlgorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
+    property encryptedDigest : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    def initialize(@version : UInt32, @signerIndex : UInt32, @signatureAlgorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @encryptedDigest : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    end
+  end
 
   @[Extern]
-  record SEALING_TIMESTAMP_ATTRIBUTE,
-    version : UInt32,
-    signerIndex : UInt32,
-    sealTimeStampToken : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+  struct SEALING_TIMESTAMP_ATTRIBUTE
+    property version : UInt32
+    property signerIndex : UInt32
+    property sealTimeStampToken : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    def initialize(@version : UInt32, @signerIndex : UInt32, @sealTimeStampToken : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    end
+  end
 
   @[Extern]
-  record WIN_CERTIFICATE,
-    dwLength : UInt32,
-    wRevision : UInt16,
-    wCertificateType : UInt16,
-    bCertificate : UInt8*
+  struct WIN_CERTIFICATE
+    property dwLength : UInt32
+    property wRevision : UInt16
+    property wCertificateType : UInt16
+    property bCertificate : UInt8*
+    def initialize(@dwLength : UInt32, @wRevision : UInt16, @wCertificateType : UInt16, @bCertificate : UInt8*)
+    end
+  end
 
   @[Extern]
-  record WIN_TRUST_ACTDATA_CONTEXT_WITH_SUBJECT,
-    hClientToken : Win32cr::Foundation::HANDLE,
-    subject_type : LibC::GUID*,
-    subject : Void*
+  struct WIN_TRUST_ACTDATA_CONTEXT_WITH_SUBJECT
+    property hClientToken : Win32cr::Foundation::HANDLE
+    property subject_type : LibC::GUID*
+    property subject : Void*
+    def initialize(@hClientToken : Win32cr::Foundation::HANDLE, @subject_type : LibC::GUID*, @subject : Void*)
+    end
+  end
 
   @[Extern]
-  record WIN_TRUST_ACTDATA_SUBJECT_ONLY,
-    subject_type : LibC::GUID*,
-    subject : Void*
+  struct WIN_TRUST_ACTDATA_SUBJECT_ONLY
+    property subject_type : LibC::GUID*
+    property subject : Void*
+    def initialize(@subject_type : LibC::GUID*, @subject : Void*)
+    end
+  end
 
   @[Extern]
-  record WIN_TRUST_SUBJECT_FILE,
-    hFile : Win32cr::Foundation::HANDLE,
-    lpPath : Win32cr::Foundation::PWSTR
+  struct WIN_TRUST_SUBJECT_FILE
+    property hFile : Win32cr::Foundation::HANDLE
+    property lpPath : Win32cr::Foundation::PWSTR
+    def initialize(@hFile : Win32cr::Foundation::HANDLE, @lpPath : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record WIN_TRUST_SUBJECT_FILE_AND_DISPLAY,
-    hFile : Win32cr::Foundation::HANDLE,
-    lpPath : Win32cr::Foundation::PWSTR,
-    lpDisplayName : Win32cr::Foundation::PWSTR
+  struct WIN_TRUST_SUBJECT_FILE_AND_DISPLAY
+    property hFile : Win32cr::Foundation::HANDLE
+    property lpPath : Win32cr::Foundation::PWSTR
+    property lpDisplayName : Win32cr::Foundation::PWSTR
+    def initialize(@hFile : Win32cr::Foundation::HANDLE, @lpPath : Win32cr::Foundation::PWSTR, @lpDisplayName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record WIN_SPUB_TRUSTED_PUBLISHER_DATA,
-    hClientToken : Win32cr::Foundation::HANDLE,
-    lpCertificate : Win32cr::Security::WinTrust::WIN_CERTIFICATE*
+  struct WIN_SPUB_TRUSTED_PUBLISHER_DATA
+    property hClientToken : Win32cr::Foundation::HANDLE
+    property lpCertificate : Win32cr::Security::WinTrust::WIN_CERTIFICATE*
+    def initialize(@hClientToken : Win32cr::Foundation::HANDLE, @lpCertificate : Win32cr::Security::WinTrust::WIN_CERTIFICATE*)
+    end
+  end
 
   @[Extern]
-  record WTD_GENERIC_CHAIN_POLICY_SIGNER_INFO,
-    anonymous : Anonymous_e__Union_,
-    pChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*,
-    dwSignerType : UInt32,
-    pMsgSignerInfo : Win32cr::Security::Cryptography::CMSG_SIGNER_INFO*,
-    dwError : UInt32,
-    cCounterSigner : UInt32,
-    rgpCounterSigner : Win32cr::Security::WinTrust::WTD_GENERIC_CHAIN_POLICY_SIGNER_INFO** do
+  struct WTD_GENERIC_CHAIN_POLICY_SIGNER_INFO
+    property anonymous : Anonymous_e__Union_
+    property pChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*
+    property dwSignerType : UInt32
+    property pMsgSignerInfo : Win32cr::Security::Cryptography::CMSG_SIGNER_INFO*
+    property dwError : UInt32
+    property cCounterSigner : UInt32
+    property rgpCounterSigner : Win32cr::Security::WinTrust::WTD_GENERIC_CHAIN_POLICY_SIGNER_INFO**
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      cbStruct : UInt32,
-      cbSize : UInt32
+    struct Anonymous_e__Union_
+    property cbStruct : UInt32
+    property cbSize : UInt32
+    def initialize(@cbStruct : UInt32, @cbSize : UInt32)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Union_, @pChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*, @dwSignerType : UInt32, @pMsgSignerInfo : Win32cr::Security::Cryptography::CMSG_SIGNER_INFO*, @dwError : UInt32, @cCounterSigner : UInt32, @rgpCounterSigner : Win32cr::Security::WinTrust::WTD_GENERIC_CHAIN_POLICY_SIGNER_INFO**)
+    end
   end
 
   @[Extern]
-  record WTD_GENERIC_CHAIN_POLICY_CREATE_INFO,
-    anonymous : Anonymous_e__Union_,
-    hChainEngine : Win32cr::Security::Cryptography::HCERTCHAINENGINE,
-    pChainPara : Win32cr::Security::Cryptography::CERT_CHAIN_PARA*,
-    dwFlags : UInt32,
-    pvReserved : Void* do
+  struct WTD_GENERIC_CHAIN_POLICY_CREATE_INFO
+    property anonymous : Anonymous_e__Union_
+    property hChainEngine : Win32cr::Security::Cryptography::HCERTCHAINENGINE
+    property pChainPara : Win32cr::Security::Cryptography::CERT_CHAIN_PARA*
+    property dwFlags : UInt32
+    property pvReserved : Void*
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      cbStruct : UInt32,
-      cbSize : UInt32
+    struct Anonymous_e__Union_
+    property cbStruct : UInt32
+    property cbSize : UInt32
+    def initialize(@cbStruct : UInt32, @cbSize : UInt32)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Union_, @hChainEngine : Win32cr::Security::Cryptography::HCERTCHAINENGINE, @pChainPara : Win32cr::Security::Cryptography::CERT_CHAIN_PARA*, @dwFlags : UInt32, @pvReserved : Void*)
+    end
   end
 
   @[Extern]
-  record WTD_GENERIC_CHAIN_POLICY_DATA,
-    anonymous : Anonymous_e__Union_,
-    pSignerChainInfo : Win32cr::Security::WinTrust::WTD_GENERIC_CHAIN_POLICY_CREATE_INFO*,
-    pCounterSignerChainInfo : Win32cr::Security::WinTrust::WTD_GENERIC_CHAIN_POLICY_CREATE_INFO*,
-    pfnPolicyCallback : Win32cr::Security::WinTrust::PFN_WTD_GENERIC_CHAIN_POLICY_CALLBACK,
-    pvPolicyArg : Void* do
+  struct WTD_GENERIC_CHAIN_POLICY_DATA
+    property anonymous : Anonymous_e__Union_
+    property pSignerChainInfo : Win32cr::Security::WinTrust::WTD_GENERIC_CHAIN_POLICY_CREATE_INFO*
+    property pCounterSignerChainInfo : Win32cr::Security::WinTrust::WTD_GENERIC_CHAIN_POLICY_CREATE_INFO*
+    property pfnPolicyCallback : Win32cr::Security::WinTrust::PFN_WTD_GENERIC_CHAIN_POLICY_CALLBACK
+    property pvPolicyArg : Void*
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      cbStruct : UInt32,
-      cbSize : UInt32
+    struct Anonymous_e__Union_
+    property cbStruct : UInt32
+    property cbSize : UInt32
+    def initialize(@cbStruct : UInt32, @cbSize : UInt32)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Union_, @pSignerChainInfo : Win32cr::Security::WinTrust::WTD_GENERIC_CHAIN_POLICY_CREATE_INFO*, @pCounterSignerChainInfo : Win32cr::Security::WinTrust::WTD_GENERIC_CHAIN_POLICY_CREATE_INFO*, @pfnPolicyCallback : Win32cr::Security::WinTrust::PFN_WTD_GENERIC_CHAIN_POLICY_CALLBACK, @pvPolicyArg : Void*)
+    end
   end
 
   @[Extern]
-  record DRIVER_VER_MAJORMINOR,
-    dwMajor : UInt32,
-    dwMinor : UInt32
+  struct DRIVER_VER_MAJORMINOR
+    property dwMajor : UInt32
+    property dwMinor : UInt32
+    def initialize(@dwMajor : UInt32, @dwMinor : UInt32)
+    end
+  end
 
   @[Extern]
-  record DRIVER_VER_INFO,
-    cbStruct : UInt32,
-    dwReserved1 : LibC::UIntPtrT,
-    dwReserved2 : LibC::UIntPtrT,
-    dwPlatform : UInt32,
-    dwVersion : UInt32,
-    wszVersion : UInt16[260],
-    wszSignedBy : UInt16[260],
-    pcSignerCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*,
-    sOSVersionLow : Win32cr::Security::WinTrust::DRIVER_VER_MAJORMINOR,
-    sOSVersionHigh : Win32cr::Security::WinTrust::DRIVER_VER_MAJORMINOR,
-    dwBuildNumberLow : UInt32,
-    dwBuildNumberHigh : UInt32
+  struct DRIVER_VER_INFO
+    property cbStruct : UInt32
+    property dwReserved1 : LibC::UIntPtrT
+    property dwReserved2 : LibC::UIntPtrT
+    property dwPlatform : UInt32
+    property dwVersion : UInt32
+    property wszVersion : UInt16[260]
+    property wszSignedBy : UInt16[260]
+    property pcSignerCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*
+    property sOSVersionLow : Win32cr::Security::WinTrust::DRIVER_VER_MAJORMINOR
+    property sOSVersionHigh : Win32cr::Security::WinTrust::DRIVER_VER_MAJORMINOR
+    property dwBuildNumberLow : UInt32
+    property dwBuildNumberHigh : UInt32
+    def initialize(@cbStruct : UInt32, @dwReserved1 : LibC::UIntPtrT, @dwReserved2 : LibC::UIntPtrT, @dwPlatform : UInt32, @dwVersion : UInt32, @wszVersion : UInt16[260], @wszSignedBy : UInt16[260], @pcSignerCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, @sOSVersionLow : Win32cr::Security::WinTrust::DRIVER_VER_MAJORMINOR, @sOSVersionHigh : Win32cr::Security::WinTrust::DRIVER_VER_MAJORMINOR, @dwBuildNumberLow : UInt32, @dwBuildNumberHigh : UInt32)
+    end
+  end
 
   @[Extern]
-  record CONFIG_CI_PROV_INFO_RESULT,
-    hr : Win32cr::Foundation::HRESULT,
-    dwResult : UInt32,
-    dwPolicyIndex : UInt32,
-    fIsExplicitDeny : Win32cr::Foundation::BOOLEAN
+  struct CONFIG_CI_PROV_INFO_RESULT
+    property hr : Win32cr::Foundation::HRESULT
+    property dwResult : UInt32
+    property dwPolicyIndex : UInt32
+    property fIsExplicitDeny : Win32cr::Foundation::BOOLEAN
+    def initialize(@hr : Win32cr::Foundation::HRESULT, @dwResult : UInt32, @dwPolicyIndex : UInt32, @fIsExplicitDeny : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record CONFIG_CI_PROV_INFO,
-    cbSize : UInt32,
-    dwPolicies : UInt32,
-    pPolicies : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*,
-    result : Win32cr::Security::WinTrust::CONFIG_CI_PROV_INFO_RESULT,
-    dwScenario : UInt32
+  struct CONFIG_CI_PROV_INFO
+    property cbSize : UInt32
+    property dwPolicies : UInt32
+    property pPolicies : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
+    property result : Win32cr::Security::WinTrust::CONFIG_CI_PROV_INFO_RESULT
+    property dwScenario : UInt32
+    def initialize(@cbSize : UInt32, @dwPolicies : UInt32, @pPolicies : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, @result : Win32cr::Security::WinTrust::CONFIG_CI_PROV_INFO_RESULT, @dwScenario : UInt32)
+    end
+  end
 
   @[Link("wintrust")]
   lib C

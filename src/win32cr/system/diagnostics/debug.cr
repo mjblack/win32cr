@@ -12,307 +12,307 @@ require "./../../security/win_trust.cr"
 
 module Win32cr::System::Diagnostics::Debug
   {% if flag?(:arm) %}
-  alias PGET_RUNTIME_FUNCTION_CALLBACK = Proc(UInt64, Void*, Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY*)*
+  alias PGET_RUNTIME_FUNCTION_CALLBACK = Proc(UInt64, Void*, Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY*)
   {% end %}
 
-  alias PDEBUG_EXTENSION_INITIALIZE = Proc(UInt32*, UInt32*, Win32cr::Foundation::HRESULT)*
+  alias PDEBUG_EXTENSION_INITIALIZE = Proc(UInt32*, UInt32*, Win32cr::Foundation::HRESULT)
 
-  alias PDEBUG_EXTENSION_UNINITIALIZE = Proc(Void)*
+  alias PDEBUG_EXTENSION_UNINITIALIZE = Proc(Void)
 
-  alias PDEBUG_EXTENSION_CANUNLOAD = Proc(Win32cr::Foundation::HRESULT)*
+  alias PDEBUG_EXTENSION_CANUNLOAD = Proc(Win32cr::Foundation::HRESULT)
 
-  alias PDEBUG_EXTENSION_UNLOAD = Proc(Void)*
+  alias PDEBUG_EXTENSION_UNLOAD = Proc(Void)
 
-  alias PDEBUG_EXTENSION_NOTIFY = Proc(UInt32, UInt64, Void)*
+  alias PDEBUG_EXTENSION_NOTIFY = Proc(UInt32, UInt64, Void)
 
-  alias PDEBUG_EXTENSION_CALL = Proc(Void*, Win32cr::Foundation::PSTR, Win32cr::Foundation::HRESULT)*
+  alias PDEBUG_EXTENSION_CALL = Proc(Void*, Win32cr::Foundation::PSTR, Win32cr::Foundation::HRESULT)
 
-  alias PDEBUG_EXTENSION_KNOWN_STRUCT = Proc(UInt32, UInt64, Win32cr::Foundation::PSTR, UInt8*, UInt32*, Win32cr::Foundation::HRESULT)*
+  alias PDEBUG_EXTENSION_KNOWN_STRUCT = Proc(UInt32, UInt64, Win32cr::Foundation::PSTR, UInt8*, UInt32*, Win32cr::Foundation::HRESULT)
 
-  alias PDEBUG_EXTENSION_KNOWN_STRUCT_EX = Proc(Void*, UInt32, UInt64, Win32cr::Foundation::PSTR, UInt8*, UInt32*, Win32cr::Foundation::HRESULT)*
+  alias PDEBUG_EXTENSION_KNOWN_STRUCT_EX = Proc(Void*, UInt32, UInt64, Win32cr::Foundation::PSTR, UInt8*, UInt32*, Win32cr::Foundation::HRESULT)
 
-  alias PDEBUG_EXTENSION_QUERY_VALUE_NAMES = Proc(Void*, UInt32, UInt16*, UInt32, UInt32*, Win32cr::Foundation::HRESULT)*
+  alias PDEBUG_EXTENSION_QUERY_VALUE_NAMES = Proc(Void*, UInt32, UInt16*, UInt32, UInt32*, Win32cr::Foundation::HRESULT)
 
-  alias PDEBUG_EXTENSION_PROVIDE_VALUE = Proc(Void*, UInt32, Win32cr::Foundation::PWSTR, UInt64*, UInt64*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT)*
+  alias PDEBUG_EXTENSION_PROVIDE_VALUE = Proc(Void*, UInt32, Win32cr::Foundation::PWSTR, UInt64*, UInt64*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT)
 
-  alias PDEBUG_STACK_PROVIDER_BEGINTHREADSTACKRECONSTRUCTION = Proc(UInt32, Void*, UInt32, Win32cr::Foundation::HRESULT)*
+  alias PDEBUG_STACK_PROVIDER_BEGINTHREADSTACKRECONSTRUCTION = Proc(UInt32, Void*, UInt32, Win32cr::Foundation::HRESULT)
 
-  alias PDEBUG_STACK_PROVIDER_RECONSTRUCTSTACK = Proc(UInt32, Win32cr::System::Diagnostics::Debug::DEBUG_STACK_FRAME_EX*, UInt32, Win32cr::System::Diagnostics::Debug::STACK_SYM_FRAME_INFO**, UInt32*, Win32cr::Foundation::HRESULT)*
+  alias PDEBUG_STACK_PROVIDER_RECONSTRUCTSTACK = Proc(UInt32, Win32cr::System::Diagnostics::Debug::DEBUG_STACK_FRAME_EX*, UInt32, Win32cr::System::Diagnostics::Debug::STACK_SYM_FRAME_INFO**, UInt32*, Win32cr::Foundation::HRESULT)
 
-  alias PDEBUG_STACK_PROVIDER_FREESTACKSYMFRAMES = Proc(Win32cr::System::Diagnostics::Debug::STACK_SYM_FRAME_INFO*, Win32cr::Foundation::HRESULT)*
+  alias PDEBUG_STACK_PROVIDER_FREESTACKSYMFRAMES = Proc(Win32cr::System::Diagnostics::Debug::STACK_SYM_FRAME_INFO*, Win32cr::Foundation::HRESULT)
 
-  alias PDEBUG_STACK_PROVIDER_ENDTHREADSTACKRECONSTRUCTION = Proc(Win32cr::Foundation::HRESULT)*
+  alias PDEBUG_STACK_PROVIDER_ENDTHREADSTACKRECONSTRUCTION = Proc(Win32cr::Foundation::HRESULT)
 
-  alias PWINDBG_OUTPUT_ROUTINE = Proc(Win32cr::Foundation::PSTR, Void)*
+  alias PWINDBG_OUTPUT_ROUTINE = Proc(Win32cr::Foundation::PSTR, Void)
 
-  alias PWINDBG_GET_EXPRESSION = Proc(Win32cr::Foundation::PSTR, LibC::UIntPtrT)*
+  alias PWINDBG_GET_EXPRESSION = Proc(Win32cr::Foundation::PSTR, LibC::UIntPtrT)
 
-  alias PWINDBG_GET_EXPRESSION32 = Proc(Win32cr::Foundation::PSTR, UInt32)*
+  alias PWINDBG_GET_EXPRESSION32 = Proc(Win32cr::Foundation::PSTR, UInt32)
 
-  alias PWINDBG_GET_EXPRESSION64 = Proc(Win32cr::Foundation::PSTR, UInt64)*
+  alias PWINDBG_GET_EXPRESSION64 = Proc(Win32cr::Foundation::PSTR, UInt64)
 
-  alias PWINDBG_GET_SYMBOL = Proc(Void*, Win32cr::Foundation::PSTR, LibC::UIntPtrT*, Void)*
+  alias PWINDBG_GET_SYMBOL = Proc(Void*, Win32cr::Foundation::PSTR, LibC::UIntPtrT*, Void)
 
-  alias PWINDBG_GET_SYMBOL32 = Proc(UInt32, Win32cr::Foundation::PSTR, UInt32*, Void)*
+  alias PWINDBG_GET_SYMBOL32 = Proc(UInt32, Win32cr::Foundation::PSTR, UInt32*, Void)
 
-  alias PWINDBG_GET_SYMBOL64 = Proc(UInt64, Win32cr::Foundation::PSTR, UInt64*, Void)*
+  alias PWINDBG_GET_SYMBOL64 = Proc(UInt64, Win32cr::Foundation::PSTR, UInt64*, Void)
 
-  alias PWINDBG_DISASM = Proc(LibC::UIntPtrT*, Win32cr::Foundation::PSTR, UInt32, UInt32)*
+  alias PWINDBG_DISASM = Proc(LibC::UIntPtrT*, Win32cr::Foundation::PSTR, UInt32, UInt32)
 
-  alias PWINDBG_DISASM32 = Proc(UInt32*, Win32cr::Foundation::PSTR, UInt32, UInt32)*
+  alias PWINDBG_DISASM32 = Proc(UInt32*, Win32cr::Foundation::PSTR, UInt32, UInt32)
 
-  alias PWINDBG_DISASM64 = Proc(UInt64*, Win32cr::Foundation::PSTR, UInt32, UInt32)*
+  alias PWINDBG_DISASM64 = Proc(UInt64*, Win32cr::Foundation::PSTR, UInt32, UInt32)
 
-  alias PWINDBG_CHECK_CONTROL_C = Proc(UInt32)*
+  alias PWINDBG_CHECK_CONTROL_C = Proc(UInt32)
 
-  alias PWINDBG_READ_PROCESS_MEMORY_ROUTINE = Proc(LibC::UIntPtrT, Void*, UInt32, UInt32*, UInt32)*
+  alias PWINDBG_READ_PROCESS_MEMORY_ROUTINE = Proc(LibC::UIntPtrT, Void*, UInt32, UInt32*, UInt32)
 
-  alias PWINDBG_READ_PROCESS_MEMORY_ROUTINE32 = Proc(UInt32, Void*, UInt32, UInt32*, UInt32)*
+  alias PWINDBG_READ_PROCESS_MEMORY_ROUTINE32 = Proc(UInt32, Void*, UInt32, UInt32*, UInt32)
 
-  alias PWINDBG_READ_PROCESS_MEMORY_ROUTINE64 = Proc(UInt64, Void*, UInt32, UInt32*, UInt32)*
+  alias PWINDBG_READ_PROCESS_MEMORY_ROUTINE64 = Proc(UInt64, Void*, UInt32, UInt32*, UInt32)
 
-  alias PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE = Proc(LibC::UIntPtrT, Void*, UInt32, UInt32*, UInt32)*
+  alias PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE = Proc(LibC::UIntPtrT, Void*, UInt32, UInt32*, UInt32)
 
-  alias PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE32 = Proc(UInt32, Void*, UInt32, UInt32*, UInt32)*
+  alias PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE32 = Proc(UInt32, Void*, UInt32, UInt32*, UInt32)
 
-  alias PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE64 = Proc(UInt64, Void*, UInt32, UInt32*, UInt32)*
+  alias PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE64 = Proc(UInt64, Void*, UInt32, UInt32*, UInt32)
 
-  alias PWINDBG_GET_THREAD_CONTEXT_ROUTINE = Proc(UInt32, Win32cr::System::Diagnostics::Debug::CONTEXT*, UInt32, UInt32)*
+  alias PWINDBG_GET_THREAD_CONTEXT_ROUTINE = Proc(UInt32, Win32cr::System::Diagnostics::Debug::CONTEXT*, UInt32, UInt32)
 
-  alias PWINDBG_SET_THREAD_CONTEXT_ROUTINE = Proc(UInt32, Win32cr::System::Diagnostics::Debug::CONTEXT*, UInt32, UInt32)*
+  alias PWINDBG_SET_THREAD_CONTEXT_ROUTINE = Proc(UInt32, Win32cr::System::Diagnostics::Debug::CONTEXT*, UInt32, UInt32)
 
-  alias PWINDBG_IOCTL_ROUTINE = Proc(UInt16, Void*, UInt32, UInt32)*
+  alias PWINDBG_IOCTL_ROUTINE = Proc(UInt16, Void*, UInt32, UInt32)
 
-  alias PWINDBG_OLDKD_READ_PHYSICAL_MEMORY = Proc(UInt64, Void*, UInt32, UInt32*, UInt32)*
+  alias PWINDBG_OLDKD_READ_PHYSICAL_MEMORY = Proc(UInt64, Void*, UInt32, UInt32*, UInt32)
 
-  alias PWINDBG_OLDKD_WRITE_PHYSICAL_MEMORY = Proc(UInt64, Void*, UInt32, UInt32*, UInt32)*
+  alias PWINDBG_OLDKD_WRITE_PHYSICAL_MEMORY = Proc(UInt64, Void*, UInt32, UInt32*, UInt32)
 
-  alias PWINDBG_STACKTRACE_ROUTINE = Proc(UInt32, UInt32, UInt32, Win32cr::System::Diagnostics::Debug::EXTSTACKTRACE*, UInt32, UInt32)*
+  alias PWINDBG_STACKTRACE_ROUTINE = Proc(UInt32, UInt32, UInt32, Win32cr::System::Diagnostics::Debug::EXTSTACKTRACE*, UInt32, UInt32)
 
-  alias PWINDBG_STACKTRACE_ROUTINE32 = Proc(UInt32, UInt32, UInt32, Win32cr::System::Diagnostics::Debug::EXTSTACKTRACE32*, UInt32, UInt32)*
+  alias PWINDBG_STACKTRACE_ROUTINE32 = Proc(UInt32, UInt32, UInt32, Win32cr::System::Diagnostics::Debug::EXTSTACKTRACE32*, UInt32, UInt32)
 
-  alias PWINDBG_STACKTRACE_ROUTINE64 = Proc(UInt64, UInt64, UInt64, Win32cr::System::Diagnostics::Debug::EXTSTACKTRACE64*, UInt32, UInt32)*
+  alias PWINDBG_STACKTRACE_ROUTINE64 = Proc(UInt64, UInt64, UInt64, Win32cr::System::Diagnostics::Debug::EXTSTACKTRACE64*, UInt32, UInt32)
 
-  alias PWINDBG_OLD_EXTENSION_ROUTINE = Proc(UInt32, Win32cr::System::Diagnostics::Debug::WINDBG_EXTENSION_APIS*, Win32cr::Foundation::PSTR, Void)*
+  alias PWINDBG_OLD_EXTENSION_ROUTINE = Proc(UInt32, Win32cr::System::Diagnostics::Debug::WINDBG_EXTENSION_APIS*, Win32cr::Foundation::PSTR, Void)
 
-  alias PWINDBG_EXTENSION_ROUTINE = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt32, UInt32, Win32cr::Foundation::PSTR, Void)*
+  alias PWINDBG_EXTENSION_ROUTINE = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt32, UInt32, Win32cr::Foundation::PSTR, Void)
 
-  alias PWINDBG_EXTENSION_ROUTINE32 = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt32, UInt32, Win32cr::Foundation::PSTR, Void)*
+  alias PWINDBG_EXTENSION_ROUTINE32 = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt32, UInt32, Win32cr::Foundation::PSTR, Void)
 
-  alias PWINDBG_EXTENSION_ROUTINE64 = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt64, UInt32, Win32cr::Foundation::PSTR, Void)*
+  alias PWINDBG_EXTENSION_ROUTINE64 = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt64, UInt32, Win32cr::Foundation::PSTR, Void)
 
-  alias PWINDBG_OLDKD_EXTENSION_ROUTINE = Proc(UInt32, Win32cr::System::Diagnostics::Debug::WINDBG_OLDKD_EXTENSION_APIS*, Win32cr::Foundation::PSTR, Void)*
+  alias PWINDBG_OLDKD_EXTENSION_ROUTINE = Proc(UInt32, Win32cr::System::Diagnostics::Debug::WINDBG_OLDKD_EXTENSION_APIS*, Win32cr::Foundation::PSTR, Void)
 
-  alias PWINDBG_EXTENSION_DLL_INIT = Proc(Win32cr::System::Diagnostics::Debug::WINDBG_EXTENSION_APIS*, UInt16, UInt16, Void)*
+  alias PWINDBG_EXTENSION_DLL_INIT = Proc(Win32cr::System::Diagnostics::Debug::WINDBG_EXTENSION_APIS*, UInt16, UInt16, Void)
 
-  alias PWINDBG_EXTENSION_DLL_INIT32 = Proc(Win32cr::System::Diagnostics::Debug::WINDBG_EXTENSION_APIS32*, UInt16, UInt16, Void)*
+  alias PWINDBG_EXTENSION_DLL_INIT32 = Proc(Win32cr::System::Diagnostics::Debug::WINDBG_EXTENSION_APIS32*, UInt16, UInt16, Void)
 
-  alias PWINDBG_EXTENSION_DLL_INIT64 = Proc(Win32cr::System::Diagnostics::Debug::WINDBG_EXTENSION_APIS64*, UInt16, UInt16, Void)*
+  alias PWINDBG_EXTENSION_DLL_INIT64 = Proc(Win32cr::System::Diagnostics::Debug::WINDBG_EXTENSION_APIS64*, UInt16, UInt16, Void)
 
-  alias PWINDBG_CHECK_VERSION = Proc(UInt32)*
+  alias PWINDBG_CHECK_VERSION = Proc(UInt32)
 
-  alias PWINDBG_EXTENSION_API_VERSION = Proc(Win32cr::System::Diagnostics::Debug::EXT_API_VERSION*)*
+  alias PWINDBG_EXTENSION_API_VERSION = Proc(Win32cr::System::Diagnostics::Debug::EXT_API_VERSION*)
 
-  alias PSYM_DUMP_FIELD_CALLBACK = Proc(Win32cr::System::Diagnostics::Debug::FIELD_INFO*, Void*, UInt32)*
+  alias PSYM_DUMP_FIELD_CALLBACK = Proc(Win32cr::System::Diagnostics::Debug::FIELD_INFO*, Void*, UInt32)
 
   {% if flag?(:x86_64) %}
-  alias PGET_RUNTIME_FUNCTION_CALLBACK = Proc(UInt64, Void*, Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY*)*
+  alias PGET_RUNTIME_FUNCTION_CALLBACK = Proc(UInt64, Void*, Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY*)
   {% end %}
 
-  alias PVECTORED_EXCEPTION_HANDLER = Proc(Win32cr::System::Diagnostics::Debug::EXCEPTION_POINTERS*, Int32)*
+  alias PVECTORED_EXCEPTION_HANDLER = Proc(Win32cr::System::Diagnostics::Debug::EXCEPTION_POINTERS*, Int32)
 
-  alias LPTOP_LEVEL_EXCEPTION_FILTER = Proc(Win32cr::System::Diagnostics::Debug::EXCEPTION_POINTERS*, Int32)*
+  alias LPTOP_LEVEL_EXCEPTION_FILTER = Proc(Win32cr::System::Diagnostics::Debug::EXCEPTION_POINTERS*, Int32)
 
-  alias PWAITCHAINCALLBACK = Proc(Void*, LibC::UIntPtrT, UInt32, UInt32*, Win32cr::System::Diagnostics::Debug::WAITCHAIN_NODE_INFO*, Int32*, Void)*
+  alias PWAITCHAINCALLBACK = Proc(Void*, LibC::UIntPtrT, UInt32, UInt32*, Win32cr::System::Diagnostics::Debug::WAITCHAIN_NODE_INFO*, Int32*, Void)
 
-  alias PCOGETCALLSTATE = Proc(Int32, UInt32*, Win32cr::Foundation::HRESULT)*
+  alias PCOGETCALLSTATE = Proc(Int32, UInt32*, Win32cr::Foundation::HRESULT)
 
-  alias PCOGETACTIVATIONSTATE = Proc(LibC::GUID, UInt32, UInt32*, Win32cr::Foundation::HRESULT)*
+  alias PCOGETACTIVATIONSTATE = Proc(LibC::GUID, UInt32, UInt32*, Win32cr::Foundation::HRESULT)
 
-  alias MINIDUMP_CALLBACK_ROUTINE = Proc(Void*, Win32cr::System::Diagnostics::Debug::MINIDUMP_CALLBACK_INPUT*, Win32cr::System::Diagnostics::Debug::MINIDUMP_CALLBACK_OUTPUT*, Win32cr::Foundation::BOOL)*
+  alias MINIDUMP_CALLBACK_ROUTINE = Proc(Void*, Win32cr::System::Diagnostics::Debug::MINIDUMP_CALLBACK_INPUT*, Win32cr::System::Diagnostics::Debug::MINIDUMP_CALLBACK_OUTPUT*, Win32cr::Foundation::BOOL)
 
-  alias PIMAGEHLP_STATUS_ROUTINE = Proc(Win32cr::System::Diagnostics::Debug::IMAGEHLP_STATUS_REASON, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, LibC::UIntPtrT, LibC::UIntPtrT, Win32cr::Foundation::BOOL)*
+  alias PIMAGEHLP_STATUS_ROUTINE = Proc(Win32cr::System::Diagnostics::Debug::IMAGEHLP_STATUS_REASON, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, LibC::UIntPtrT, LibC::UIntPtrT, Win32cr::Foundation::BOOL)
 
-  alias PIMAGEHLP_STATUS_ROUTINE32 = Proc(Win32cr::System::Diagnostics::Debug::IMAGEHLP_STATUS_REASON, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt32, LibC::UIntPtrT, Win32cr::Foundation::BOOL)*
+  alias PIMAGEHLP_STATUS_ROUTINE32 = Proc(Win32cr::System::Diagnostics::Debug::IMAGEHLP_STATUS_REASON, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt32, LibC::UIntPtrT, Win32cr::Foundation::BOOL)
 
-  alias PIMAGEHLP_STATUS_ROUTINE64 = Proc(Win32cr::System::Diagnostics::Debug::IMAGEHLP_STATUS_REASON, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt64, LibC::UIntPtrT, Win32cr::Foundation::BOOL)*
+  alias PIMAGEHLP_STATUS_ROUTINE64 = Proc(Win32cr::System::Diagnostics::Debug::IMAGEHLP_STATUS_REASON, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt64, LibC::UIntPtrT, Win32cr::Foundation::BOOL)
 
-  alias DIGEST_FUNCTION = Proc(Void*, UInt8*, UInt32, Win32cr::Foundation::BOOL)*
+  alias DIGEST_FUNCTION = Proc(Void*, UInt8*, UInt32, Win32cr::Foundation::BOOL)
 
-  alias PFIND_DEBUG_FILE_CALLBACK = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PSTR, Void*, Win32cr::Foundation::BOOL)*
+  alias PFIND_DEBUG_FILE_CALLBACK = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PSTR, Void*, Win32cr::Foundation::BOOL)
 
-  alias PFIND_DEBUG_FILE_CALLBACKW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::BOOL)*
+  alias PFIND_DEBUG_FILE_CALLBACKW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::BOOL)
 
-  alias PFINDFILEINPATHCALLBACK = Proc(Win32cr::Foundation::PSTR, Void*, Win32cr::Foundation::BOOL)*
+  alias PFINDFILEINPATHCALLBACK = Proc(Win32cr::Foundation::PSTR, Void*, Win32cr::Foundation::BOOL)
 
-  alias PFINDFILEINPATHCALLBACKW = Proc(Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::BOOL)*
+  alias PFINDFILEINPATHCALLBACKW = Proc(Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::BOOL)
 
-  alias PFIND_EXE_FILE_CALLBACK = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PSTR, Void*, Win32cr::Foundation::BOOL)*
+  alias PFIND_EXE_FILE_CALLBACK = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PSTR, Void*, Win32cr::Foundation::BOOL)
 
-  alias PFIND_EXE_FILE_CALLBACKW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::BOOL)*
+  alias PFIND_EXE_FILE_CALLBACKW = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::BOOL)
 
-  alias PENUMDIRTREE_CALLBACK = Proc(Win32cr::Foundation::PSTR, Void*, Win32cr::Foundation::BOOL)*
+  alias PENUMDIRTREE_CALLBACK = Proc(Win32cr::Foundation::PSTR, Void*, Win32cr::Foundation::BOOL)
 
-  alias PENUMDIRTREE_CALLBACKW = Proc(Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::BOOL)*
+  alias PENUMDIRTREE_CALLBACKW = Proc(Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::BOOL)
 
-  alias PREAD_PROCESS_MEMORY_ROUTINE64 = Proc(Win32cr::Foundation::HANDLE, UInt64, Void*, UInt32, UInt32*, Win32cr::Foundation::BOOL)*
+  alias PREAD_PROCESS_MEMORY_ROUTINE64 = Proc(Win32cr::Foundation::HANDLE, UInt64, Void*, UInt32, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFUNCTION_TABLE_ACCESS_ROUTINE64 = Proc(Win32cr::Foundation::HANDLE, UInt64, Void*)*
+  alias PFUNCTION_TABLE_ACCESS_ROUTINE64 = Proc(Win32cr::Foundation::HANDLE, UInt64, Void*)
 
-  alias PGET_MODULE_BASE_ROUTINE64 = Proc(Win32cr::Foundation::HANDLE, UInt64, UInt64)*
+  alias PGET_MODULE_BASE_ROUTINE64 = Proc(Win32cr::Foundation::HANDLE, UInt64, UInt64)
 
-  alias PTRANSLATE_ADDRESS_ROUTINE64 = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::Diagnostics::Debug::ADDRESS64*, UInt64)*
+  alias PTRANSLATE_ADDRESS_ROUTINE64 = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::Diagnostics::Debug::ADDRESS64*, UInt64)
 
-  alias PSYM_ENUMMODULES_CALLBACK64 = Proc(Win32cr::Foundation::PSTR, UInt64, Void*, Win32cr::Foundation::BOOL)*
+  alias PSYM_ENUMMODULES_CALLBACK64 = Proc(Win32cr::Foundation::PSTR, UInt64, Void*, Win32cr::Foundation::BOOL)
 
-  alias PSYM_ENUMMODULES_CALLBACKW64 = Proc(Win32cr::Foundation::PWSTR, UInt64, Void*, Win32cr::Foundation::BOOL)*
+  alias PSYM_ENUMMODULES_CALLBACKW64 = Proc(Win32cr::Foundation::PWSTR, UInt64, Void*, Win32cr::Foundation::BOOL)
 
-  alias PENUMLOADED_MODULES_CALLBACK64 = Proc(Win32cr::Foundation::PSTR, UInt64, UInt32, Void*, Win32cr::Foundation::BOOL)*
+  alias PENUMLOADED_MODULES_CALLBACK64 = Proc(Win32cr::Foundation::PSTR, UInt64, UInt32, Void*, Win32cr::Foundation::BOOL)
 
-  alias PENUMLOADED_MODULES_CALLBACKW64 = Proc(Win32cr::Foundation::PWSTR, UInt64, UInt32, Void*, Win32cr::Foundation::BOOL)*
+  alias PENUMLOADED_MODULES_CALLBACKW64 = Proc(Win32cr::Foundation::PWSTR, UInt64, UInt32, Void*, Win32cr::Foundation::BOOL)
 
-  alias PSYM_ENUMSYMBOLS_CALLBACK64 = Proc(Win32cr::Foundation::PSTR, UInt64, UInt32, Void*, Win32cr::Foundation::BOOL)*
+  alias PSYM_ENUMSYMBOLS_CALLBACK64 = Proc(Win32cr::Foundation::PSTR, UInt64, UInt32, Void*, Win32cr::Foundation::BOOL)
 
-  alias PSYM_ENUMSYMBOLS_CALLBACK64W = Proc(Win32cr::Foundation::PWSTR, UInt64, UInt32, Void*, Win32cr::Foundation::BOOL)*
+  alias PSYM_ENUMSYMBOLS_CALLBACK64W = Proc(Win32cr::Foundation::PWSTR, UInt64, UInt32, Void*, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOL_REGISTERED_CALLBACK64 = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt64, UInt64, Win32cr::Foundation::BOOL)*
+  alias PSYMBOL_REGISTERED_CALLBACK64 = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt64, UInt64, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOL_FUNCENTRY_CALLBACK = Proc(Win32cr::Foundation::HANDLE, UInt32, Void*, Void*)*
+  alias PSYMBOL_FUNCENTRY_CALLBACK = Proc(Win32cr::Foundation::HANDLE, UInt32, Void*, Void*)
 
-  alias PSYMBOL_FUNCENTRY_CALLBACK64 = Proc(Win32cr::Foundation::HANDLE, UInt64, UInt64, Void*)*
+  alias PSYMBOL_FUNCENTRY_CALLBACK64 = Proc(Win32cr::Foundation::HANDLE, UInt64, UInt64, Void*)
 
-  alias PSYM_ENUMSOURCEFILES_CALLBACK = Proc(Win32cr::System::Diagnostics::Debug::SOURCEFILE*, Void*, Win32cr::Foundation::BOOL)*
+  alias PSYM_ENUMSOURCEFILES_CALLBACK = Proc(Win32cr::System::Diagnostics::Debug::SOURCEFILE*, Void*, Win32cr::Foundation::BOOL)
 
-  alias PSYM_ENUMSOURCEFILES_CALLBACKW = Proc(Win32cr::System::Diagnostics::Debug::SOURCEFILEW*, Void*, Win32cr::Foundation::BOOL)*
+  alias PSYM_ENUMSOURCEFILES_CALLBACKW = Proc(Win32cr::System::Diagnostics::Debug::SOURCEFILEW*, Void*, Win32cr::Foundation::BOOL)
 
-  alias PSYM_ENUMLINES_CALLBACK = Proc(Win32cr::System::Diagnostics::Debug::SRCCODEINFO*, Void*, Win32cr::Foundation::BOOL)*
+  alias PSYM_ENUMLINES_CALLBACK = Proc(Win32cr::System::Diagnostics::Debug::SRCCODEINFO*, Void*, Win32cr::Foundation::BOOL)
 
-  alias PSYM_ENUMLINES_CALLBACKW = Proc(Win32cr::System::Diagnostics::Debug::SRCCODEINFOW*, Void*, Win32cr::Foundation::BOOL)*
+  alias PSYM_ENUMLINES_CALLBACKW = Proc(Win32cr::System::Diagnostics::Debug::SRCCODEINFOW*, Void*, Win32cr::Foundation::BOOL)
 
-  alias PENUMSOURCEFILETOKENSCALLBACK = Proc(Void*, LibC::UIntPtrT, Win32cr::Foundation::BOOL)*
+  alias PENUMSOURCEFILETOKENSCALLBACK = Proc(Void*, LibC::UIntPtrT, Win32cr::Foundation::BOOL)
 
-  alias PSYM_ENUMPROCESSES_CALLBACK = Proc(Win32cr::Foundation::HANDLE, Void*, Win32cr::Foundation::BOOL)*
+  alias PSYM_ENUMPROCESSES_CALLBACK = Proc(Win32cr::Foundation::HANDLE, Void*, Win32cr::Foundation::BOOL)
 
-  alias PSYM_ENUMERATESYMBOLS_CALLBACK = Proc(Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*, UInt32, Void*, Win32cr::Foundation::BOOL)*
+  alias PSYM_ENUMERATESYMBOLS_CALLBACK = Proc(Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*, UInt32, Void*, Win32cr::Foundation::BOOL)
 
-  alias PSYM_ENUMERATESYMBOLS_CALLBACKW = Proc(Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*, UInt32, Void*, Win32cr::Foundation::BOOL)*
+  alias PSYM_ENUMERATESYMBOLS_CALLBACKW = Proc(Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*, UInt32, Void*, Win32cr::Foundation::BOOL)
 
-  alias SYMADDSOURCESTREAM = Proc(Win32cr::Foundation::HANDLE, UInt64, Win32cr::Foundation::PSTR, UInt8*, LibC::UIntPtrT, Win32cr::Foundation::BOOL)*
+  alias SYMADDSOURCESTREAM = Proc(Win32cr::Foundation::HANDLE, UInt64, Win32cr::Foundation::PSTR, UInt8*, LibC::UIntPtrT, Win32cr::Foundation::BOOL)
 
-  alias SYMADDSOURCESTREAMA = Proc(Win32cr::Foundation::HANDLE, UInt64, Win32cr::Foundation::PSTR, UInt8*, LibC::UIntPtrT, Win32cr::Foundation::BOOL)*
+  alias SYMADDSOURCESTREAMA = Proc(Win32cr::Foundation::HANDLE, UInt64, Win32cr::Foundation::PSTR, UInt8*, LibC::UIntPtrT, Win32cr::Foundation::BOOL)
 
-  alias PDBGHELP_CREATE_USER_DUMP_CALLBACK = Proc(UInt32, Void**, UInt32*, Void*, Win32cr::Foundation::BOOL)*
+  alias PDBGHELP_CREATE_USER_DUMP_CALLBACK = Proc(UInt32, Void**, UInt32*, Void*, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERPROC = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Void*, UInt32, UInt32, Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERPROC = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Void*, UInt32, UInt32, Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERPROCA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Void*, UInt32, UInt32, Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERPROCA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Void*, UInt32, UInt32, Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERPROCW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void*, UInt32, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERPROCW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void*, UInt32, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERBYINDEXPROC = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERBYINDEXPROC = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERBYINDEXPROCA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERBYINDEXPROCA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERBYINDEXPROCW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERBYINDEXPROCW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVEROPENPROC = Proc(Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVEROPENPROC = Proc(Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERCLOSEPROC = Proc(Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERCLOSEPROC = Proc(Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERSETOPTIONSPROC = Proc(LibC::UIntPtrT, UInt64, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERSETOPTIONSPROC = Proc(LibC::UIntPtrT, UInt64, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERSETOPTIONSWPROC = Proc(LibC::UIntPtrT, UInt64, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERSETOPTIONSWPROC = Proc(LibC::UIntPtrT, UInt64, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERCALLBACKPROC = Proc(LibC::UIntPtrT, UInt64, UInt64, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERCALLBACKPROC = Proc(LibC::UIntPtrT, UInt64, UInt64, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERGETOPTIONSPROC = Proc(LibC::UIntPtrT)*
+  alias PSYMBOLSERVERGETOPTIONSPROC = Proc(LibC::UIntPtrT)
 
-  alias PSYMBOLSERVERPINGPROC = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERPINGPROC = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERPINGPROCA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERPINGPROCA = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERPINGPROCW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERPINGPROCW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERGETVERSION = Proc(Win32cr::System::Diagnostics::Debug::API_VERSION*, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERGETVERSION = Proc(Win32cr::System::Diagnostics::Debug::API_VERSION*, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERDELTANAME = Proc(Win32cr::Foundation::PSTR, Void*, UInt32, UInt32, Void*, UInt32, UInt32, Win32cr::Foundation::PSTR, LibC::UIntPtrT, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERDELTANAME = Proc(Win32cr::Foundation::PSTR, Void*, UInt32, UInt32, Void*, UInt32, UInt32, Win32cr::Foundation::PSTR, LibC::UIntPtrT, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERDELTANAMEW = Proc(Win32cr::Foundation::PWSTR, Void*, UInt32, UInt32, Void*, UInt32, UInt32, Win32cr::Foundation::PWSTR, LibC::UIntPtrT, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERDELTANAMEW = Proc(Win32cr::Foundation::PWSTR, Void*, UInt32, UInt32, Void*, UInt32, UInt32, Win32cr::Foundation::PWSTR, LibC::UIntPtrT, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERGETSUPPLEMENT = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, LibC::UIntPtrT, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERGETSUPPLEMENT = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, LibC::UIntPtrT, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERGETSUPPLEMENTW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, LibC::UIntPtrT, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERGETSUPPLEMENTW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, LibC::UIntPtrT, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERSTORESUPPLEMENT = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERSTORESUPPLEMENT = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERSTORESUPPLEMENTW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERSTORESUPPLEMENTW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERGETINDEXSTRING = Proc(Void*, UInt32, UInt32, Win32cr::Foundation::PSTR, LibC::UIntPtrT, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERGETINDEXSTRING = Proc(Void*, UInt32, UInt32, Win32cr::Foundation::PSTR, LibC::UIntPtrT, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERGETINDEXSTRINGW = Proc(Void*, UInt32, UInt32, Win32cr::Foundation::PWSTR, LibC::UIntPtrT, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERGETINDEXSTRINGW = Proc(Void*, UInt32, UInt32, Win32cr::Foundation::PWSTR, LibC::UIntPtrT, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERSTOREFILE = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Void*, UInt32, UInt32, Win32cr::Foundation::PSTR, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERSTOREFILE = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Void*, UInt32, UInt32, Win32cr::Foundation::PSTR, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERSTOREFILEW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void*, UInt32, UInt32, Win32cr::Foundation::PWSTR, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERSTOREFILEW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void*, UInt32, UInt32, Win32cr::Foundation::PWSTR, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERISSTORE = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERISSTORE = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERISSTOREW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERISSTOREW = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERVERSION = Proc(UInt32)*
+  alias PSYMBOLSERVERVERSION = Proc(UInt32)
 
-  alias PSYMBOLSERVERMESSAGEPROC = Proc(LibC::UIntPtrT, UInt64, UInt64, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERMESSAGEPROC = Proc(LibC::UIntPtrT, UInt64, UInt64, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERWEXPROC = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void*, UInt32, UInt32, Win32cr::Foundation::PWSTR, Win32cr::System::Diagnostics::Debug::SYMSRV_EXTENDED_OUTPUT_DATA*, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERWEXPROC = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void*, UInt32, UInt32, Win32cr::Foundation::PWSTR, Win32cr::System::Diagnostics::Debug::SYMSRV_EXTENDED_OUTPUT_DATA*, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERPINGPROCWEX = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERPINGPROCWEX = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERGETOPTIONDATAPROC = Proc(LibC::UIntPtrT, UInt64*, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERGETOPTIONDATAPROC = Proc(LibC::UIntPtrT, UInt64*, Win32cr::Foundation::BOOL)
 
-  alias PSYMBOLSERVERSETHTTPAUTHHEADER = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)*
+  alias PSYMBOLSERVERSETHTTPAUTHHEADER = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)
 
-  alias LPCALL_BACK_USER_INTERRUPT_ROUTINE = Proc(UInt32)*
+  alias LPCALL_BACK_USER_INTERRUPT_ROUTINE = Proc(UInt32)
 
-  alias WHEA_ERROR_SOURCE_INITIALIZE_DEVICE_DRIVER = Proc(Void*, UInt32, Win32cr::Foundation::NTSTATUS)*
+  alias WHEA_ERROR_SOURCE_INITIALIZE_DEVICE_DRIVER = Proc(Void*, UInt32, Win32cr::Foundation::NTSTATUS)
 
-  alias WHEA_ERROR_SOURCE_UNINITIALIZE_DEVICE_DRIVER = Proc(Void*, Void)*
+  alias WHEA_ERROR_SOURCE_UNINITIALIZE_DEVICE_DRIVER = Proc(Void*, Void)
 
-  alias WHEA_ERROR_SOURCE_CORRECT_DEVICE_DRIVER = Proc(Void*, UInt32*, Win32cr::Foundation::NTSTATUS)*
+  alias WHEA_ERROR_SOURCE_CORRECT_DEVICE_DRIVER = Proc(Void*, UInt32*, Win32cr::Foundation::NTSTATUS)
 
   {% if flag?(:i386) %}
-  alias PREAD_PROCESS_MEMORY_ROUTINE = Proc(Win32cr::Foundation::HANDLE, UInt32, Void*, UInt32, UInt32*, Win32cr::Foundation::BOOL)*
-  {% end %}
-
-  {% if flag?(:i386) %}
-  alias PFUNCTION_TABLE_ACCESS_ROUTINE = Proc(Win32cr::Foundation::HANDLE, UInt32, Void*)*
+  alias PREAD_PROCESS_MEMORY_ROUTINE = Proc(Win32cr::Foundation::HANDLE, UInt32, Void*, UInt32, UInt32*, Win32cr::Foundation::BOOL)
   {% end %}
 
   {% if flag?(:i386) %}
-  alias PGET_MODULE_BASE_ROUTINE = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt32)*
+  alias PFUNCTION_TABLE_ACCESS_ROUTINE = Proc(Win32cr::Foundation::HANDLE, UInt32, Void*)
   {% end %}
 
   {% if flag?(:i386) %}
-  alias PTRANSLATE_ADDRESS_ROUTINE = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::Diagnostics::Debug::ADDRESS*, UInt32)*
+  alias PGET_MODULE_BASE_ROUTINE = Proc(Win32cr::Foundation::HANDLE, UInt32, UInt32)
   {% end %}
 
   {% if flag?(:i386) %}
-  alias PSYM_ENUMMODULES_CALLBACK = Proc(Win32cr::Foundation::PSTR, UInt32, Void*, Win32cr::Foundation::BOOL)*
+  alias PTRANSLATE_ADDRESS_ROUTINE = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::System::Diagnostics::Debug::ADDRESS*, UInt32)
   {% end %}
 
   {% if flag?(:i386) %}
-  alias PSYM_ENUMSYMBOLS_CALLBACK = Proc(Win32cr::Foundation::PSTR, UInt32, UInt32, Void*, Win32cr::Foundation::BOOL)*
+  alias PSYM_ENUMMODULES_CALLBACK = Proc(Win32cr::Foundation::PSTR, UInt32, Void*, Win32cr::Foundation::BOOL)
   {% end %}
 
   {% if flag?(:i386) %}
-  alias PSYM_ENUMSYMBOLS_CALLBACKW = Proc(Win32cr::Foundation::PWSTR, UInt32, UInt32, Void*, Win32cr::Foundation::BOOL)*
+  alias PSYM_ENUMSYMBOLS_CALLBACK = Proc(Win32cr::Foundation::PSTR, UInt32, UInt32, Void*, Win32cr::Foundation::BOOL)
   {% end %}
 
   {% if flag?(:i386) %}
-  alias PENUMLOADED_MODULES_CALLBACK = Proc(Win32cr::Foundation::PSTR, UInt32, UInt32, Void*, Win32cr::Foundation::BOOL)*
+  alias PSYM_ENUMSYMBOLS_CALLBACKW = Proc(Win32cr::Foundation::PWSTR, UInt32, UInt32, Void*, Win32cr::Foundation::BOOL)
   {% end %}
 
   {% if flag?(:i386) %}
-  alias PSYMBOL_REGISTERED_CALLBACK = Proc(Win32cr::Foundation::HANDLE, UInt32, Void*, Void*, Win32cr::Foundation::BOOL)*
+  alias PENUMLOADED_MODULES_CALLBACK = Proc(Win32cr::Foundation::PSTR, UInt32, UInt32, Void*, Win32cr::Foundation::BOOL)
+  {% end %}
+
+  {% if flag?(:i386) %}
+  alias PSYMBOL_REGISTERED_CALLBACK = Proc(Win32cr::Foundation::HANDLE, UInt32, Void*, Void*, Win32cr::Foundation::BOOL)
   {% end %}
 
   WOW64_CONTEXT_i386 = 65536_u32
@@ -3382,4418 +3382,5612 @@ module Win32cr::System::Diagnostics::Debug
 
   {% if flag?(:arm) %}
   @[Extern]
-  record CONTEXT,
-    context_flags : UInt32,
-    cpsr : UInt32,
-    anonymous : Anonymous_e__Union_,
-    sp : UInt64,
-    pc : UInt64,
-    v : Win32cr::System::Diagnostics::Debug::ARM64_NT_NEON128[32],
-    fpcr : UInt32,
-    fpsr : UInt32,
-    bcr : UInt32[8],
-    bvr : UInt64[8],
-    wcr : UInt32[2],
-    wvr : UInt64[2] do
+  struct CONTEXT
+    property context_flags : UInt32
+    property cpsr : UInt32
+    property anonymous : Anonymous_e__Union_
+    property sp : UInt64
+    property pc : UInt64
+    property v : Win32cr::System::Diagnostics::Debug::ARM64_NT_NEON128[32]
+    property fpcr : UInt32
+    property fpsr : UInt32
+    property bcr : UInt32[8]
+    property bvr : UInt64[8]
+    property wcr : UInt32[2]
+    property wvr : UInt64[2]
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      x : UInt64[31] do
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property x : UInt64[31]
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        x0 : UInt64,
-        x1 : UInt64,
-        x2 : UInt64,
-        x3 : UInt64,
-        x4 : UInt64,
-        x5 : UInt64,
-        x6 : UInt64,
-        x7 : UInt64,
-        x8 : UInt64,
-        x9 : UInt64,
-        x10 : UInt64,
-        x11 : UInt64,
-        x12 : UInt64,
-        x13 : UInt64,
-        x14 : UInt64,
-        x15 : UInt64,
-        x16 : UInt64,
-        x17 : UInt64,
-        x18 : UInt64,
-        x19 : UInt64,
-        x20 : UInt64,
-        x21 : UInt64,
-        x22 : UInt64,
-        x23 : UInt64,
-        x24 : UInt64,
-        x25 : UInt64,
-        x26 : UInt64,
-        x27 : UInt64,
-        x28 : UInt64,
-        fp : UInt64,
-        lr : UInt64
+      struct Anonymous_e__Struct_
+    property x0 : UInt64
+    property x1 : UInt64
+    property x2 : UInt64
+    property x3 : UInt64
+    property x4 : UInt64
+    property x5 : UInt64
+    property x6 : UInt64
+    property x7 : UInt64
+    property x8 : UInt64
+    property x9 : UInt64
+    property x10 : UInt64
+    property x11 : UInt64
+    property x12 : UInt64
+    property x13 : UInt64
+    property x14 : UInt64
+    property x15 : UInt64
+    property x16 : UInt64
+    property x17 : UInt64
+    property x18 : UInt64
+    property x19 : UInt64
+    property x20 : UInt64
+    property x21 : UInt64
+    property x22 : UInt64
+    property x23 : UInt64
+    property x24 : UInt64
+    property x25 : UInt64
+    property x26 : UInt64
+    property x27 : UInt64
+    property x28 : UInt64
+    property fp : UInt64
+    property lr : UInt64
+    def initialize(@x0 : UInt64, @x1 : UInt64, @x2 : UInt64, @x3 : UInt64, @x4 : UInt64, @x5 : UInt64, @x6 : UInt64, @x7 : UInt64, @x8 : UInt64, @x9 : UInt64, @x10 : UInt64, @x11 : UInt64, @x12 : UInt64, @x13 : UInt64, @x14 : UInt64, @x15 : UInt64, @x16 : UInt64, @x17 : UInt64, @x18 : UInt64, @x19 : UInt64, @x20 : UInt64, @x21 : UInt64, @x22 : UInt64, @x23 : UInt64, @x24 : UInt64, @x25 : UInt64, @x26 : UInt64, @x27 : UInt64, @x28 : UInt64, @fp : UInt64, @lr : UInt64)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @x : UInt64[31])
+    end
     end
 
+    def initialize(@context_flags : UInt32, @cpsr : UInt32, @anonymous : Anonymous_e__Union_, @sp : UInt64, @pc : UInt64, @v : Win32cr::System::Diagnostics::Debug::ARM64_NT_NEON128[32], @fpcr : UInt32, @fpsr : UInt32, @bcr : UInt32[8], @bvr : UInt64[8], @wcr : UInt32[2], @wvr : UInt64[2])
+    end
   end
   {% end %}
 
   {% if flag?(:arm) %}
   @[Extern]
-  record DISPATCHER_CONTEXT,
-    control_pc : LibC::UIntPtrT,
-    image_base : LibC::UIntPtrT,
-    function_entry : Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY*,
-    establisher_frame : LibC::UIntPtrT,
-    target_pc : LibC::UIntPtrT,
-    context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*,
-    language_handler : Win32cr::System::Kernel::EXCEPTION_ROUTINE,
-    handler_data : Void*,
-    history_table : Win32cr::System::Diagnostics::Debug::UNWIND_HISTORY_TABLE*,
-    scope_index : UInt32,
-    control_pc_is_unwound : Win32cr::Foundation::BOOLEAN,
-    non_volatile_registers : UInt8*
+  struct DISPATCHER_CONTEXT
+    property control_pc : LibC::UIntPtrT
+    property image_base : LibC::UIntPtrT
+    property function_entry : Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY*
+    property establisher_frame : LibC::UIntPtrT
+    property target_pc : LibC::UIntPtrT
+    property context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*
+    property language_handler : Win32cr::System::Kernel::EXCEPTION_ROUTINE
+    property handler_data : Void*
+    property history_table : Win32cr::System::Diagnostics::Debug::UNWIND_HISTORY_TABLE*
+    property scope_index : UInt32
+    property control_pc_is_unwound : Win32cr::Foundation::BOOLEAN
+    property non_volatile_registers : UInt8*
+    def initialize(@control_pc : LibC::UIntPtrT, @image_base : LibC::UIntPtrT, @function_entry : Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY*, @establisher_frame : LibC::UIntPtrT, @target_pc : LibC::UIntPtrT, @context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*, @language_handler : Win32cr::System::Kernel::EXCEPTION_ROUTINE, @handler_data : Void*, @history_table : Win32cr::System::Diagnostics::Debug::UNWIND_HISTORY_TABLE*, @scope_index : UInt32, @control_pc_is_unwound : Win32cr::Foundation::BOOLEAN, @non_volatile_registers : UInt8*)
+    end
+  end
   {% end %}
 
   {% if flag?(:arm) %}
   @[Extern]
-  record KNONVOLATILE_CONTEXT_POINTERS_ARM64,
-    x19 : UInt64*,
-    x20 : UInt64*,
-    x21 : UInt64*,
-    x22 : UInt64*,
-    x23 : UInt64*,
-    x24 : UInt64*,
-    x25 : UInt64*,
-    x26 : UInt64*,
-    x27 : UInt64*,
-    x28 : UInt64*,
-    fp : UInt64*,
-    lr : UInt64*,
-    d8 : UInt64*,
-    d9 : UInt64*,
-    d10 : UInt64*,
-    d11 : UInt64*,
-    d12 : UInt64*,
-    d13 : UInt64*,
-    d14 : UInt64*,
-    d15 : UInt64*
+  struct KNONVOLATILE_CONTEXT_POINTERS_ARM64
+    property x19 : UInt64*
+    property x20 : UInt64*
+    property x21 : UInt64*
+    property x22 : UInt64*
+    property x23 : UInt64*
+    property x24 : UInt64*
+    property x25 : UInt64*
+    property x26 : UInt64*
+    property x27 : UInt64*
+    property x28 : UInt64*
+    property fp : UInt64*
+    property lr : UInt64*
+    property d8 : UInt64*
+    property d9 : UInt64*
+    property d10 : UInt64*
+    property d11 : UInt64*
+    property d12 : UInt64*
+    property d13 : UInt64*
+    property d14 : UInt64*
+    property d15 : UInt64*
+    def initialize(@x19 : UInt64*, @x20 : UInt64*, @x21 : UInt64*, @x22 : UInt64*, @x23 : UInt64*, @x24 : UInt64*, @x25 : UInt64*, @x26 : UInt64*, @x27 : UInt64*, @x28 : UInt64*, @fp : UInt64*, @lr : UInt64*, @d8 : UInt64*, @d9 : UInt64*, @d10 : UInt64*, @d11 : UInt64*, @d12 : UInt64*, @d13 : UInt64*, @d14 : UInt64*, @d15 : UInt64*)
+    end
+  end
   {% end %}
 
   {% if flag?(:arm) %}
   @[Extern]
-  record UNWIND_HISTORY_TABLE_ENTRY,
-    image_base : LibC::UIntPtrT,
-    function_entry : Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY*
+  struct UNWIND_HISTORY_TABLE_ENTRY
+    property image_base : LibC::UIntPtrT
+    property function_entry : Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY*
+    def initialize(@image_base : LibC::UIntPtrT, @function_entry : Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY*)
+    end
+  end
   {% end %}
 
   {% if flag?(:arm) %}
   @[Extern]
-  record MINIDUMP_THREAD_CALLBACK,
-    thread_id : UInt32,
-    thread_handle : Win32cr::Foundation::HANDLE,
-    pad : UInt32,
-    context : Win32cr::System::Diagnostics::Debug::CONTEXT,
-    size_of_context : UInt32,
-    stack_base : UInt64,
-    stack_end : UInt64
+  struct MINIDUMP_THREAD_CALLBACK
+    property thread_id : UInt32
+    property thread_handle : Win32cr::Foundation::HANDLE
+    property pad : UInt32
+    property context : Win32cr::System::Diagnostics::Debug::CONTEXT
+    property size_of_context : UInt32
+    property stack_base : UInt64
+    property stack_end : UInt64
+    def initialize(@thread_id : UInt32, @thread_handle : Win32cr::Foundation::HANDLE, @pad : UInt32, @context : Win32cr::System::Diagnostics::Debug::CONTEXT, @size_of_context : UInt32, @stack_base : UInt64, @stack_end : UInt64)
+    end
+  end
   {% end %}
 
   {% if flag?(:arm) %}
   @[Extern]
-  record MINIDUMP_THREAD_EX_CALLBACK,
-    thread_id : UInt32,
-    thread_handle : Win32cr::Foundation::HANDLE,
-    pad : UInt32,
-    context : Win32cr::System::Diagnostics::Debug::CONTEXT,
-    size_of_context : UInt32,
-    stack_base : UInt64,
-    stack_end : UInt64,
-    backing_store_base : UInt64,
-    backing_store_end : UInt64
+  struct MINIDUMP_THREAD_EX_CALLBACK
+    property thread_id : UInt32
+    property thread_handle : Win32cr::Foundation::HANDLE
+    property pad : UInt32
+    property context : Win32cr::System::Diagnostics::Debug::CONTEXT
+    property size_of_context : UInt32
+    property stack_base : UInt64
+    property stack_end : UInt64
+    property backing_store_base : UInt64
+    property backing_store_end : UInt64
+    def initialize(@thread_id : UInt32, @thread_handle : Win32cr::Foundation::HANDLE, @pad : UInt32, @context : Win32cr::System::Diagnostics::Debug::CONTEXT, @size_of_context : UInt32, @stack_base : UInt64, @stack_end : UInt64, @backing_store_base : UInt64, @backing_store_end : UInt64)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record EXCEPTION_DEBUG_INFO,
-    exception_record : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD,
-    dwFirstChance : UInt32
+  struct EXCEPTION_DEBUG_INFO
+    property exception_record : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD
+    property dwFirstChance : UInt32
+    def initialize(@exception_record : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD, @dwFirstChance : UInt32)
+    end
+  end
 
   @[Extern]
-  record CREATE_THREAD_DEBUG_INFO,
-    hThread : Win32cr::Foundation::HANDLE,
-    lpThreadLocalBase : Void*,
-    lpStartAddress : Win32cr::System::Threading::LPTHREAD_START_ROUTINE
+  struct CREATE_THREAD_DEBUG_INFO
+    property hThread : Win32cr::Foundation::HANDLE
+    property lpThreadLocalBase : Void*
+    property lpStartAddress : Win32cr::System::Threading::LPTHREAD_START_ROUTINE
+    def initialize(@hThread : Win32cr::Foundation::HANDLE, @lpThreadLocalBase : Void*, @lpStartAddress : Win32cr::System::Threading::LPTHREAD_START_ROUTINE)
+    end
+  end
 
   @[Extern]
-  record CREATE_PROCESS_DEBUG_INFO,
-    hFile : Win32cr::Foundation::HANDLE,
-    hProcess : Win32cr::Foundation::HANDLE,
-    hThread : Win32cr::Foundation::HANDLE,
-    lpBaseOfImage : Void*,
-    dwDebugInfoFileOffset : UInt32,
-    nDebugInfoSize : UInt32,
-    lpThreadLocalBase : Void*,
-    lpStartAddress : Win32cr::System::Threading::LPTHREAD_START_ROUTINE,
-    lpImageName : Void*,
-    fUnicode : UInt16
+  struct CREATE_PROCESS_DEBUG_INFO
+    property hFile : Win32cr::Foundation::HANDLE
+    property hProcess : Win32cr::Foundation::HANDLE
+    property hThread : Win32cr::Foundation::HANDLE
+    property lpBaseOfImage : Void*
+    property dwDebugInfoFileOffset : UInt32
+    property nDebugInfoSize : UInt32
+    property lpThreadLocalBase : Void*
+    property lpStartAddress : Win32cr::System::Threading::LPTHREAD_START_ROUTINE
+    property lpImageName : Void*
+    property fUnicode : UInt16
+    def initialize(@hFile : Win32cr::Foundation::HANDLE, @hProcess : Win32cr::Foundation::HANDLE, @hThread : Win32cr::Foundation::HANDLE, @lpBaseOfImage : Void*, @dwDebugInfoFileOffset : UInt32, @nDebugInfoSize : UInt32, @lpThreadLocalBase : Void*, @lpStartAddress : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, @lpImageName : Void*, @fUnicode : UInt16)
+    end
+  end
 
   @[Extern]
-  record EXIT_THREAD_DEBUG_INFO,
-    dwExitCode : UInt32
+  struct EXIT_THREAD_DEBUG_INFO
+    property dwExitCode : UInt32
+    def initialize(@dwExitCode : UInt32)
+    end
+  end
 
   @[Extern]
-  record EXIT_PROCESS_DEBUG_INFO,
-    dwExitCode : UInt32
+  struct EXIT_PROCESS_DEBUG_INFO
+    property dwExitCode : UInt32
+    def initialize(@dwExitCode : UInt32)
+    end
+  end
 
   @[Extern]
-  record LOAD_DLL_DEBUG_INFO,
-    hFile : Win32cr::Foundation::HANDLE,
-    lpBaseOfDll : Void*,
-    dwDebugInfoFileOffset : UInt32,
-    nDebugInfoSize : UInt32,
-    lpImageName : Void*,
-    fUnicode : UInt16
+  struct LOAD_DLL_DEBUG_INFO
+    property hFile : Win32cr::Foundation::HANDLE
+    property lpBaseOfDll : Void*
+    property dwDebugInfoFileOffset : UInt32
+    property nDebugInfoSize : UInt32
+    property lpImageName : Void*
+    property fUnicode : UInt16
+    def initialize(@hFile : Win32cr::Foundation::HANDLE, @lpBaseOfDll : Void*, @dwDebugInfoFileOffset : UInt32, @nDebugInfoSize : UInt32, @lpImageName : Void*, @fUnicode : UInt16)
+    end
+  end
 
   @[Extern]
-  record UNLOAD_DLL_DEBUG_INFO,
-    lpBaseOfDll : Void*
+  struct UNLOAD_DLL_DEBUG_INFO
+    property lpBaseOfDll : Void*
+    def initialize(@lpBaseOfDll : Void*)
+    end
+  end
 
   @[Extern]
-  record OUTPUT_DEBUG_STRING_INFO,
-    lpDebugStringData : Win32cr::Foundation::PSTR,
-    fUnicode : UInt16,
-    nDebugStringLength : UInt16
+  struct OUTPUT_DEBUG_STRING_INFO
+    property lpDebugStringData : Win32cr::Foundation::PSTR
+    property fUnicode : UInt16
+    property nDebugStringLength : UInt16
+    def initialize(@lpDebugStringData : Win32cr::Foundation::PSTR, @fUnicode : UInt16, @nDebugStringLength : UInt16)
+    end
+  end
 
   @[Extern]
-  record RIP_INFO,
-    dwError : UInt32,
-    dwType : Win32cr::System::Diagnostics::Debug::RIP_INFO_TYPE
+  struct RIP_INFO
+    property dwError : UInt32
+    property dwType : Win32cr::System::Diagnostics::Debug::RIP_INFO_TYPE
+    def initialize(@dwError : UInt32, @dwType : Win32cr::System::Diagnostics::Debug::RIP_INFO_TYPE)
+    end
+  end
 
   @[Extern]
-  record DEBUG_EVENT,
-    dwDebugEventCode : Win32cr::System::Diagnostics::Debug::DEBUG_EVENT_CODE,
-    dwProcessId : UInt32,
-    dwThreadId : UInt32,
-    u : U_e__union_ do
+  struct DEBUG_EVENT
+    property dwDebugEventCode : Win32cr::System::Diagnostics::Debug::DEBUG_EVENT_CODE
+    property dwProcessId : UInt32
+    property dwThreadId : UInt32
+    property u : U_e__union_
 
     # Nested Type U_e__union_
     @[Extern(union: true)]
-    record U_e__union_,
-      exception : Win32cr::System::Diagnostics::Debug::EXCEPTION_DEBUG_INFO,
-      create_thread : Win32cr::System::Diagnostics::Debug::CREATE_THREAD_DEBUG_INFO,
-      create_process_info : Win32cr::System::Diagnostics::Debug::CREATE_PROCESS_DEBUG_INFO,
-      exit_thread : Win32cr::System::Diagnostics::Debug::EXIT_THREAD_DEBUG_INFO,
-      exit_process : Win32cr::System::Diagnostics::Debug::EXIT_PROCESS_DEBUG_INFO,
-      load_dll : Win32cr::System::Diagnostics::Debug::LOAD_DLL_DEBUG_INFO,
-      unload_dll : Win32cr::System::Diagnostics::Debug::UNLOAD_DLL_DEBUG_INFO,
-      debug_string : Win32cr::System::Diagnostics::Debug::OUTPUT_DEBUG_STRING_INFO,
-      rip_info : Win32cr::System::Diagnostics::Debug::RIP_INFO
+    struct U_e__union_
+    property exception : Win32cr::System::Diagnostics::Debug::EXCEPTION_DEBUG_INFO
+    property create_thread : Win32cr::System::Diagnostics::Debug::CREATE_THREAD_DEBUG_INFO
+    property create_process_info : Win32cr::System::Diagnostics::Debug::CREATE_PROCESS_DEBUG_INFO
+    property exit_thread : Win32cr::System::Diagnostics::Debug::EXIT_THREAD_DEBUG_INFO
+    property exit_process : Win32cr::System::Diagnostics::Debug::EXIT_PROCESS_DEBUG_INFO
+    property load_dll : Win32cr::System::Diagnostics::Debug::LOAD_DLL_DEBUG_INFO
+    property unload_dll : Win32cr::System::Diagnostics::Debug::UNLOAD_DLL_DEBUG_INFO
+    property debug_string : Win32cr::System::Diagnostics::Debug::OUTPUT_DEBUG_STRING_INFO
+    property rip_info : Win32cr::System::Diagnostics::Debug::RIP_INFO
+    def initialize(@exception : Win32cr::System::Diagnostics::Debug::EXCEPTION_DEBUG_INFO, @create_thread : Win32cr::System::Diagnostics::Debug::CREATE_THREAD_DEBUG_INFO, @create_process_info : Win32cr::System::Diagnostics::Debug::CREATE_PROCESS_DEBUG_INFO, @exit_thread : Win32cr::System::Diagnostics::Debug::EXIT_THREAD_DEBUG_INFO, @exit_process : Win32cr::System::Diagnostics::Debug::EXIT_PROCESS_DEBUG_INFO, @load_dll : Win32cr::System::Diagnostics::Debug::LOAD_DLL_DEBUG_INFO, @unload_dll : Win32cr::System::Diagnostics::Debug::UNLOAD_DLL_DEBUG_INFO, @debug_string : Win32cr::System::Diagnostics::Debug::OUTPUT_DEBUG_STRING_INFO, @rip_info : Win32cr::System::Diagnostics::Debug::RIP_INFO)
+    end
+    end
 
+    def initialize(@dwDebugEventCode : Win32cr::System::Diagnostics::Debug::DEBUG_EVENT_CODE, @dwProcessId : UInt32, @dwThreadId : UInt32, @u : U_e__union_)
+    end
   end
 
   @[Extern]
-  record DEBUG_OFFSET_REGION,
-    base : UInt64,
-    size : UInt64
+  struct DEBUG_OFFSET_REGION
+    property base : UInt64
+    property size : UInt64
+    def initialize(@base : UInt64, @size : UInt64)
+    end
+  end
 
   @[Extern]
-  record DEBUG_READ_USER_MINIDUMP_STREAM,
-    stream_type : UInt32,
-    flags : UInt32,
-    offset : UInt64,
-    buffer : Void*,
-    buffer_size : UInt32,
-    buffer_used : UInt32
+  struct DEBUG_READ_USER_MINIDUMP_STREAM
+    property stream_type : UInt32
+    property flags : UInt32
+    property offset : UInt64
+    property buffer : Void*
+    property buffer_size : UInt32
+    property buffer_used : UInt32
+    def initialize(@stream_type : UInt32, @flags : UInt32, @offset : UInt64, @buffer : Void*, @buffer_size : UInt32, @buffer_used : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEBUG_GET_TEXT_COMPLETIONS_IN,
-    flags : UInt32,
-    match_count_limit : UInt32,
-    reserved : UInt64[3]
+  struct DEBUG_GET_TEXT_COMPLETIONS_IN
+    property flags : UInt32
+    property match_count_limit : UInt32
+    property reserved : UInt64[3]
+    def initialize(@flags : UInt32, @match_count_limit : UInt32, @reserved : UInt64[3])
+    end
+  end
 
   @[Extern]
-  record DEBUG_GET_TEXT_COMPLETIONS_OUT,
-    flags : UInt32,
-    replace_index : UInt32,
-    match_count : UInt32,
-    reserved1 : UInt32,
-    reserved2 : UInt64[2]
+  struct DEBUG_GET_TEXT_COMPLETIONS_OUT
+    property flags : UInt32
+    property replace_index : UInt32
+    property match_count : UInt32
+    property reserved1 : UInt32
+    property reserved2 : UInt64[2]
+    def initialize(@flags : UInt32, @replace_index : UInt32, @match_count : UInt32, @reserved1 : UInt32, @reserved2 : UInt64[2])
+    end
+  end
 
   @[Extern]
-  record DEBUG_CACHED_SYMBOL_INFO,
-    mod_base : UInt64,
-    arg1 : UInt64,
-    arg2 : UInt64,
-    id : UInt32,
-    arg3 : UInt32
+  struct DEBUG_CACHED_SYMBOL_INFO
+    property mod_base : UInt64
+    property arg1 : UInt64
+    property arg2 : UInt64
+    property id : UInt32
+    property arg3 : UInt32
+    def initialize(@mod_base : UInt64, @arg1 : UInt64, @arg2 : UInt64, @id : UInt32, @arg3 : UInt32)
+    end
+  end
 
   @[Extern]
-  record PROCESS_NAME_ENTRY,
-    process_id : UInt32,
-    name_offset : UInt32,
-    name_size : UInt32,
-    next_entry : UInt32
+  struct PROCESS_NAME_ENTRY
+    property process_id : UInt32
+    property name_offset : UInt32
+    property name_size : UInt32
+    property next_entry : UInt32
+    def initialize(@process_id : UInt32, @name_offset : UInt32, @name_size : UInt32, @next_entry : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEBUG_THREAD_BASIC_INFORMATION,
-    valid : UInt32,
-    exit_status : UInt32,
-    priority_class : UInt32,
-    priority : UInt32,
-    create_time : UInt64,
-    exit_time : UInt64,
-    kernel_time : UInt64,
-    user_time : UInt64,
-    start_offset : UInt64,
-    affinity : UInt64
+  struct DEBUG_THREAD_BASIC_INFORMATION
+    property valid : UInt32
+    property exit_status : UInt32
+    property priority_class : UInt32
+    property priority : UInt32
+    property create_time : UInt64
+    property exit_time : UInt64
+    property kernel_time : UInt64
+    property user_time : UInt64
+    property start_offset : UInt64
+    property affinity : UInt64
+    def initialize(@valid : UInt32, @exit_status : UInt32, @priority_class : UInt32, @priority : UInt32, @create_time : UInt64, @exit_time : UInt64, @kernel_time : UInt64, @user_time : UInt64, @start_offset : UInt64, @affinity : UInt64)
+    end
+  end
 
   @[Extern]
-  record SYMBOL_INFO_EX,
-    size_of_struct : UInt32,
-    type_of_info : UInt32,
-    offset : UInt64,
-    line : UInt32,
-    displacement : UInt32,
-    reserved : UInt32[4]
+  struct SYMBOL_INFO_EX
+    property size_of_struct : UInt32
+    property type_of_info : UInt32
+    property offset : UInt64
+    property line : UInt32
+    property displacement : UInt32
+    property reserved : UInt32[4]
+    def initialize(@size_of_struct : UInt32, @type_of_info : UInt32, @offset : UInt64, @line : UInt32, @displacement : UInt32, @reserved : UInt32[4])
+    end
+  end
 
   @[Extern]
-  record DEBUG_BREAKPOINT_PARAMETERS,
-    offset : UInt64,
-    id : UInt32,
-    break_type : UInt32,
-    proc_type : UInt32,
-    flags : UInt32,
-    data_size : UInt32,
-    data_access_type : UInt32,
-    pass_count : UInt32,
-    current_pass_count : UInt32,
-    match_thread : UInt32,
-    command_size : UInt32,
-    offset_expression_size : UInt32
+  struct DEBUG_BREAKPOINT_PARAMETERS
+    property offset : UInt64
+    property id : UInt32
+    property break_type : UInt32
+    property proc_type : UInt32
+    property flags : UInt32
+    property data_size : UInt32
+    property data_access_type : UInt32
+    property pass_count : UInt32
+    property current_pass_count : UInt32
+    property match_thread : UInt32
+    property command_size : UInt32
+    property offset_expression_size : UInt32
+    def initialize(@offset : UInt64, @id : UInt32, @break_type : UInt32, @proc_type : UInt32, @flags : UInt32, @data_size : UInt32, @data_access_type : UInt32, @pass_count : UInt32, @current_pass_count : UInt32, @match_thread : UInt32, @command_size : UInt32, @offset_expression_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEBUG_CREATE_PROCESS_OPTIONS,
-    create_flags : UInt32,
-    eng_create_flags : UInt32,
-    verifier_flags : UInt32,
-    reserved : UInt32
+  struct DEBUG_CREATE_PROCESS_OPTIONS
+    property create_flags : UInt32
+    property eng_create_flags : UInt32
+    property verifier_flags : UInt32
+    property reserved : UInt32
+    def initialize(@create_flags : UInt32, @eng_create_flags : UInt32, @verifier_flags : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEBUG_CLIENT_CONTEXT,
-    cbSize : UInt32,
-    eClient : UInt32
+  struct DEBUG_CLIENT_CONTEXT
+    property cbSize : UInt32
+    property eClient : UInt32
+    def initialize(@cbSize : UInt32, @eClient : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEBUG_STACK_FRAME,
-    instruction_offset : UInt64,
-    return_offset : UInt64,
-    frame_offset : UInt64,
-    stack_offset : UInt64,
-    func_table_entry : UInt64,
-    params : UInt64[4],
-    reserved : UInt64[6],
-    virtual : Win32cr::Foundation::BOOL,
-    frame_number : UInt32
+  struct DEBUG_STACK_FRAME
+    property instruction_offset : UInt64
+    property return_offset : UInt64
+    property frame_offset : UInt64
+    property stack_offset : UInt64
+    property func_table_entry : UInt64
+    property params : UInt64[4]
+    property reserved : UInt64[6]
+    property virtual : Win32cr::Foundation::BOOL
+    property frame_number : UInt32
+    def initialize(@instruction_offset : UInt64, @return_offset : UInt64, @frame_offset : UInt64, @stack_offset : UInt64, @func_table_entry : UInt64, @params : UInt64[4], @reserved : UInt64[6], @virtual : Win32cr::Foundation::BOOL, @frame_number : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEBUG_STACK_FRAME_EX,
-    instruction_offset : UInt64,
-    return_offset : UInt64,
-    frame_offset : UInt64,
-    stack_offset : UInt64,
-    func_table_entry : UInt64,
-    params : UInt64[4],
-    reserved : UInt64[6],
-    virtual : Win32cr::Foundation::BOOL,
-    frame_number : UInt32,
-    inline_frame_context : UInt32,
-    reserved1 : UInt32
+  struct DEBUG_STACK_FRAME_EX
+    property instruction_offset : UInt64
+    property return_offset : UInt64
+    property frame_offset : UInt64
+    property stack_offset : UInt64
+    property func_table_entry : UInt64
+    property params : UInt64[4]
+    property reserved : UInt64[6]
+    property virtual : Win32cr::Foundation::BOOL
+    property frame_number : UInt32
+    property inline_frame_context : UInt32
+    property reserved1 : UInt32
+    def initialize(@instruction_offset : UInt64, @return_offset : UInt64, @frame_offset : UInt64, @stack_offset : UInt64, @func_table_entry : UInt64, @params : UInt64[4], @reserved : UInt64[6], @virtual : Win32cr::Foundation::BOOL, @frame_number : UInt32, @inline_frame_context : UInt32, @reserved1 : UInt32)
+    end
+  end
 
   @[Extern(union: true)]
-  record INLINE_FRAME_CONTEXT,
-    context_value : UInt32,
-    anonymous : Anonymous_e__Struct_ do
+  struct INLINE_FRAME_CONTEXT
+    property context_value : UInt32
+    property anonymous : Anonymous_e__Struct_
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      frame_id : UInt8,
-      frame_type : UInt8,
-      frame_signature : UInt16
+    struct Anonymous_e__Struct_
+    property frame_id : UInt8
+    property frame_type : UInt8
+    property frame_signature : UInt16
+    def initialize(@frame_id : UInt8, @frame_type : UInt8, @frame_signature : UInt16)
+    end
+    end
 
+    def initialize(@context_value : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
   end
 
   @[Extern]
-  record STACK_SRC_INFO,
-    image_path : Win32cr::Foundation::PWSTR,
-    module_name : Win32cr::Foundation::PWSTR,
-    function : Win32cr::Foundation::PWSTR,
-    displacement : UInt32,
-    row : UInt32,
-    column : UInt32
+  struct STACK_SRC_INFO
+    property image_path : Win32cr::Foundation::PWSTR
+    property module_name : Win32cr::Foundation::PWSTR
+    property function : Win32cr::Foundation::PWSTR
+    property displacement : UInt32
+    property row : UInt32
+    property column : UInt32
+    def initialize(@image_path : Win32cr::Foundation::PWSTR, @module_name : Win32cr::Foundation::PWSTR, @function : Win32cr::Foundation::PWSTR, @displacement : UInt32, @row : UInt32, @column : UInt32)
+    end
+  end
 
   @[Extern]
-  record STACK_SYM_FRAME_INFO,
-    stack_frame_ex : Win32cr::System::Diagnostics::Debug::DEBUG_STACK_FRAME_EX,
-    src_info : Win32cr::System::Diagnostics::Debug::STACK_SRC_INFO
+  struct STACK_SYM_FRAME_INFO
+    property stack_frame_ex : Win32cr::System::Diagnostics::Debug::DEBUG_STACK_FRAME_EX
+    property src_info : Win32cr::System::Diagnostics::Debug::STACK_SRC_INFO
+    def initialize(@stack_frame_ex : Win32cr::System::Diagnostics::Debug::DEBUG_STACK_FRAME_EX, @src_info : Win32cr::System::Diagnostics::Debug::STACK_SRC_INFO)
+    end
+  end
 
   @[Extern]
-  record DEBUG_SPECIFIC_FILTER_PARAMETERS,
-    execution_option : UInt32,
-    continue_option : UInt32,
-    text_size : UInt32,
-    command_size : UInt32,
-    argument_size : UInt32
+  struct DEBUG_SPECIFIC_FILTER_PARAMETERS
+    property execution_option : UInt32
+    property continue_option : UInt32
+    property text_size : UInt32
+    property command_size : UInt32
+    property argument_size : UInt32
+    def initialize(@execution_option : UInt32, @continue_option : UInt32, @text_size : UInt32, @command_size : UInt32, @argument_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEBUG_EXCEPTION_FILTER_PARAMETERS,
-    execution_option : UInt32,
-    continue_option : UInt32,
-    text_size : UInt32,
-    command_size : UInt32,
-    second_command_size : UInt32,
-    exception_code : UInt32
+  struct DEBUG_EXCEPTION_FILTER_PARAMETERS
+    property execution_option : UInt32
+    property continue_option : UInt32
+    property text_size : UInt32
+    property command_size : UInt32
+    property second_command_size : UInt32
+    property exception_code : UInt32
+    def initialize(@execution_option : UInt32, @continue_option : UInt32, @text_size : UInt32, @command_size : UInt32, @second_command_size : UInt32, @exception_code : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEBUG_LAST_EVENT_INFO_BREAKPOINT,
-    id : UInt32
+  struct DEBUG_LAST_EVENT_INFO_BREAKPOINT
+    property id : UInt32
+    def initialize(@id : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEBUG_LAST_EVENT_INFO_EXCEPTION,
-    exception_record : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD64,
-    first_chance : UInt32
+  struct DEBUG_LAST_EVENT_INFO_EXCEPTION
+    property exception_record : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD64
+    property first_chance : UInt32
+    def initialize(@exception_record : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD64, @first_chance : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEBUG_LAST_EVENT_INFO_EXIT_THREAD,
-    exit_code : UInt32
+  struct DEBUG_LAST_EVENT_INFO_EXIT_THREAD
+    property exit_code : UInt32
+    def initialize(@exit_code : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEBUG_LAST_EVENT_INFO_EXIT_PROCESS,
-    exit_code : UInt32
+  struct DEBUG_LAST_EVENT_INFO_EXIT_PROCESS
+    property exit_code : UInt32
+    def initialize(@exit_code : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEBUG_LAST_EVENT_INFO_LOAD_MODULE,
-    base : UInt64
+  struct DEBUG_LAST_EVENT_INFO_LOAD_MODULE
+    property base : UInt64
+    def initialize(@base : UInt64)
+    end
+  end
 
   @[Extern]
-  record DEBUG_LAST_EVENT_INFO_UNLOAD_MODULE,
-    base : UInt64
+  struct DEBUG_LAST_EVENT_INFO_UNLOAD_MODULE
+    property base : UInt64
+    def initialize(@base : UInt64)
+    end
+  end
 
   @[Extern]
-  record DEBUG_LAST_EVENT_INFO_SYSTEM_ERROR,
-    error : UInt32,
-    level : UInt32
+  struct DEBUG_LAST_EVENT_INFO_SYSTEM_ERROR
+    property error : UInt32
+    property level : UInt32
+    def initialize(@error : UInt32, @level : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEBUG_LAST_EVENT_INFO_SERVICE_EXCEPTION,
-    kind : UInt32,
-    data_size : UInt32,
-    address : UInt64
+  struct DEBUG_LAST_EVENT_INFO_SERVICE_EXCEPTION
+    property kind : UInt32
+    property data_size : UInt32
+    property address : UInt64
+    def initialize(@kind : UInt32, @data_size : UInt32, @address : UInt64)
+    end
+  end
 
   @[Extern]
-  record DEBUG_VALUE,
-    anonymous : Anonymous_e__Union_,
-    tail_of_raw_bytes : UInt32,
-    type__ : UInt32 do
+  struct DEBUG_VALUE
+    property anonymous : Anonymous_e__Union_
+    property tail_of_raw_bytes : UInt32
+    property type__ : UInt32
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      i8 : UInt8,
-      i16 : UInt16,
-      i32 : UInt32,
-      anonymous : Anonymous_e__Struct_,
-      f32 : Float32,
-      f64 : Float64,
-      f80_bytes : UInt8[10],
-      f82_bytes : UInt8[11],
-      f128_bytes : UInt8[16],
-      vi8 : UInt8[16],
-      vi16 : UInt16[8],
-      vi32 : UInt32[4],
-      vi64 : UInt64[2],
-      vf32 : Float32[4],
-      vf64 : Float64[2],
-      i64_parts32 : I64Parts32_e__Struct_,
-      f128_parts64 : F128Parts64_e__Struct_,
-      raw_bytes : UInt8[24] do
+    struct Anonymous_e__Union_
+    property i8 : UInt8
+    property i16 : UInt16
+    property i32 : UInt32
+    property anonymous : Anonymous_e__Struct_
+    property f32 : Float32
+    property f64 : Float64
+    property f80_bytes : UInt8[10]
+    property f82_bytes : UInt8[11]
+    property f128_bytes : UInt8[16]
+    property vi8 : UInt8[16]
+    property vi16 : UInt16[8]
+    property vi32 : UInt32[4]
+    property vi64 : UInt64[2]
+    property vf32 : Float32[4]
+    property vf64 : Float64[2]
+    property i64_parts32 : I64Parts32_e__Struct_
+    property f128_parts64 : F128Parts64_e__Struct_
+    property raw_bytes : UInt8[24]
 
       # Nested Type I64Parts32_e__Struct_
       @[Extern]
-      record I64Parts32_e__Struct_,
-        low_part : UInt32,
-        high_part : UInt32
+      struct I64Parts32_e__Struct_
+    property low_part : UInt32
+    property high_part : UInt32
+    def initialize(@low_part : UInt32, @high_part : UInt32)
+    end
+      end
 
 
       # Nested Type F128Parts64_e__Struct_
       @[Extern]
-      record F128Parts64_e__Struct_,
-        low_part : UInt64,
-        high_part : Int64
+      struct F128Parts64_e__Struct_
+    property low_part : UInt64
+    property high_part : Int64
+    def initialize(@low_part : UInt64, @high_part : Int64)
+    end
+      end
 
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        i64 : UInt64,
-        nat : Win32cr::Foundation::BOOL
+      struct Anonymous_e__Struct_
+    property i64 : UInt64
+    property nat : Win32cr::Foundation::BOOL
+    def initialize(@i64 : UInt64, @nat : Win32cr::Foundation::BOOL)
+    end
+      end
 
+    def initialize(@i8 : UInt8, @i16 : UInt16, @i32 : UInt32, @anonymous : Anonymous_e__Struct_, @f32 : Float32, @f64 : Float64, @f80_bytes : UInt8[10], @f82_bytes : UInt8[11], @f128_bytes : UInt8[16], @vi8 : UInt8[16], @vi16 : UInt16[8], @vi32 : UInt32[4], @vi64 : UInt64[2], @vf32 : Float32[4], @vf64 : Float64[2], @i64_parts32 : I64Parts32_e__Struct_, @f128_parts64 : F128Parts64_e__Struct_, @raw_bytes : UInt8[24])
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_, @tail_of_raw_bytes : UInt32, @type__ : UInt32)
+    end
   end
 
   @[Extern]
-  record DEBUG_PROCESSOR_IDENTIFICATION_ALPHA,
-    type__ : UInt32,
-    revision : UInt32
+  struct DEBUG_PROCESSOR_IDENTIFICATION_ALPHA
+    property type__ : UInt32
+    property revision : UInt32
+    def initialize(@type__ : UInt32, @revision : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEBUG_PROCESSOR_IDENTIFICATION_AMD64,
-    family : UInt32,
-    model : UInt32,
-    stepping : UInt32,
-    vendor_string : Win32cr::Foundation::CHAR[16]
+  struct DEBUG_PROCESSOR_IDENTIFICATION_AMD64
+    property family : UInt32
+    property model : UInt32
+    property stepping : UInt32
+    property vendor_string : Win32cr::Foundation::CHAR[16]
+    def initialize(@family : UInt32, @model : UInt32, @stepping : UInt32, @vendor_string : Win32cr::Foundation::CHAR[16])
+    end
+  end
 
   @[Extern]
-  record DEBUG_PROCESSOR_IDENTIFICATION_IA64,
-    model : UInt32,
-    revision : UInt32,
-    family : UInt32,
-    arch_rev : UInt32,
-    vendor_string : Win32cr::Foundation::CHAR[16]
+  struct DEBUG_PROCESSOR_IDENTIFICATION_IA64
+    property model : UInt32
+    property revision : UInt32
+    property family : UInt32
+    property arch_rev : UInt32
+    property vendor_string : Win32cr::Foundation::CHAR[16]
+    def initialize(@model : UInt32, @revision : UInt32, @family : UInt32, @arch_rev : UInt32, @vendor_string : Win32cr::Foundation::CHAR[16])
+    end
+  end
 
   @[Extern]
-  record DEBUG_PROCESSOR_IDENTIFICATION_X86,
-    family : UInt32,
-    model : UInt32,
-    stepping : UInt32,
-    vendor_string : Win32cr::Foundation::CHAR[16]
+  struct DEBUG_PROCESSOR_IDENTIFICATION_X86
+    property family : UInt32
+    property model : UInt32
+    property stepping : UInt32
+    property vendor_string : Win32cr::Foundation::CHAR[16]
+    def initialize(@family : UInt32, @model : UInt32, @stepping : UInt32, @vendor_string : Win32cr::Foundation::CHAR[16])
+    end
+  end
 
   @[Extern]
-  record DEBUG_PROCESSOR_IDENTIFICATION_ARM,
-    model : UInt32,
-    revision : UInt32,
-    vendor_string : Win32cr::Foundation::CHAR[16]
+  struct DEBUG_PROCESSOR_IDENTIFICATION_ARM
+    property model : UInt32
+    property revision : UInt32
+    property vendor_string : Win32cr::Foundation::CHAR[16]
+    def initialize(@model : UInt32, @revision : UInt32, @vendor_string : Win32cr::Foundation::CHAR[16])
+    end
+  end
 
   @[Extern]
-  record DEBUG_PROCESSOR_IDENTIFICATION_ARM64,
-    model : UInt32,
-    revision : UInt32,
-    vendor_string : Win32cr::Foundation::CHAR[16]
+  struct DEBUG_PROCESSOR_IDENTIFICATION_ARM64
+    property model : UInt32
+    property revision : UInt32
+    property vendor_string : Win32cr::Foundation::CHAR[16]
+    def initialize(@model : UInt32, @revision : UInt32, @vendor_string : Win32cr::Foundation::CHAR[16])
+    end
+  end
 
   @[Extern(union: true)]
-  record DEBUG_PROCESSOR_IDENTIFICATION_ALL,
-    alpha : Win32cr::System::Diagnostics::Debug::DEBUG_PROCESSOR_IDENTIFICATION_ALPHA,
-    amd64 : Win32cr::System::Diagnostics::Debug::DEBUG_PROCESSOR_IDENTIFICATION_AMD64,
-    ia64 : Win32cr::System::Diagnostics::Debug::DEBUG_PROCESSOR_IDENTIFICATION_IA64,
-    x86 : Win32cr::System::Diagnostics::Debug::DEBUG_PROCESSOR_IDENTIFICATION_X86,
-    arm : Win32cr::System::Diagnostics::Debug::DEBUG_PROCESSOR_IDENTIFICATION_ARM,
-    arm64 : Win32cr::System::Diagnostics::Debug::DEBUG_PROCESSOR_IDENTIFICATION_ARM64
+  struct DEBUG_PROCESSOR_IDENTIFICATION_ALL
+    property alpha : Win32cr::System::Diagnostics::Debug::DEBUG_PROCESSOR_IDENTIFICATION_ALPHA
+    property amd64 : Win32cr::System::Diagnostics::Debug::DEBUG_PROCESSOR_IDENTIFICATION_AMD64
+    property ia64 : Win32cr::System::Diagnostics::Debug::DEBUG_PROCESSOR_IDENTIFICATION_IA64
+    property x86 : Win32cr::System::Diagnostics::Debug::DEBUG_PROCESSOR_IDENTIFICATION_X86
+    property arm : Win32cr::System::Diagnostics::Debug::DEBUG_PROCESSOR_IDENTIFICATION_ARM
+    property arm64 : Win32cr::System::Diagnostics::Debug::DEBUG_PROCESSOR_IDENTIFICATION_ARM64
+    def initialize(@alpha : Win32cr::System::Diagnostics::Debug::DEBUG_PROCESSOR_IDENTIFICATION_ALPHA, @amd64 : Win32cr::System::Diagnostics::Debug::DEBUG_PROCESSOR_IDENTIFICATION_AMD64, @ia64 : Win32cr::System::Diagnostics::Debug::DEBUG_PROCESSOR_IDENTIFICATION_IA64, @x86 : Win32cr::System::Diagnostics::Debug::DEBUG_PROCESSOR_IDENTIFICATION_X86, @arm : Win32cr::System::Diagnostics::Debug::DEBUG_PROCESSOR_IDENTIFICATION_ARM, @arm64 : Win32cr::System::Diagnostics::Debug::DEBUG_PROCESSOR_IDENTIFICATION_ARM64)
+    end
+  end
 
   @[Extern]
-  record DEBUG_HANDLE_DATA_BASIC,
-    type_name_size : UInt32,
-    object_name_size : UInt32,
-    attributes : UInt32,
-    granted_access : UInt32,
-    handle_count : UInt32,
-    pointer_count : UInt32
+  struct DEBUG_HANDLE_DATA_BASIC
+    property type_name_size : UInt32
+    property object_name_size : UInt32
+    property attributes : UInt32
+    property granted_access : UInt32
+    property handle_count : UInt32
+    property pointer_count : UInt32
+    def initialize(@type_name_size : UInt32, @object_name_size : UInt32, @attributes : UInt32, @granted_access : UInt32, @handle_count : UInt32, @pointer_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEBUG_EVENT_CONTEXT,
-    size : UInt32,
-    process_engine_id : UInt32,
-    thread_engine_id : UInt32,
-    frame_engine_id : UInt32
+  struct DEBUG_EVENT_CONTEXT
+    property size : UInt32
+    property process_engine_id : UInt32
+    property thread_engine_id : UInt32
+    property frame_engine_id : UInt32
+    def initialize(@size : UInt32, @process_engine_id : UInt32, @thread_engine_id : UInt32, @frame_engine_id : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEBUG_REGISTER_DESCRIPTION,
-    type__ : UInt32,
-    flags : UInt32,
-    subreg_master : UInt32,
-    subreg_length : UInt32,
-    subreg_mask : UInt64,
-    subreg_shift : UInt32,
-    reserved0 : UInt32
+  struct DEBUG_REGISTER_DESCRIPTION
+    property type__ : UInt32
+    property flags : UInt32
+    property subreg_master : UInt32
+    property subreg_length : UInt32
+    property subreg_mask : UInt64
+    property subreg_shift : UInt32
+    property reserved0 : UInt32
+    def initialize(@type__ : UInt32, @flags : UInt32, @subreg_master : UInt32, @subreg_length : UInt32, @subreg_mask : UInt64, @subreg_shift : UInt32, @reserved0 : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEBUG_SYMBOL_PARAMETERS,
-    module__ : UInt64,
-    type_id : UInt32,
-    parent_symbol : UInt32,
-    sub_elements : UInt32,
-    flags : UInt32,
-    reserved : UInt64
+  struct DEBUG_SYMBOL_PARAMETERS
+    property module__ : UInt64
+    property type_id : UInt32
+    property parent_symbol : UInt32
+    property sub_elements : UInt32
+    property flags : UInt32
+    property reserved : UInt64
+    def initialize(@module__ : UInt64, @type_id : UInt32, @parent_symbol : UInt32, @sub_elements : UInt32, @flags : UInt32, @reserved : UInt64)
+    end
+  end
 
   @[Extern]
-  record DEBUG_SYMBOL_ENTRY,
-    module_base : UInt64,
-    offset : UInt64,
-    id : UInt64,
-    arg64 : UInt64,
-    size : UInt32,
-    flags : UInt32,
-    type_id : UInt32,
-    name_size : UInt32,
-    token : UInt32,
-    tag : UInt32,
-    arg32 : UInt32,
-    reserved : UInt32
+  struct DEBUG_SYMBOL_ENTRY
+    property module_base : UInt64
+    property offset : UInt64
+    property id : UInt64
+    property arg64 : UInt64
+    property size : UInt32
+    property flags : UInt32
+    property type_id : UInt32
+    property name_size : UInt32
+    property token : UInt32
+    property tag : UInt32
+    property arg32 : UInt32
+    property reserved : UInt32
+    def initialize(@module_base : UInt64, @offset : UInt64, @id : UInt64, @arg64 : UInt64, @size : UInt32, @flags : UInt32, @type_id : UInt32, @name_size : UInt32, @token : UInt32, @tag : UInt32, @arg32 : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEBUG_MODULE_PARAMETERS,
-    base : UInt64,
-    size : UInt32,
-    time_date_stamp : UInt32,
-    checksum : UInt32,
-    flags : UInt32,
-    symbol_type : UInt32,
-    image_name_size : UInt32,
-    module_name_size : UInt32,
-    loaded_image_name_size : UInt32,
-    symbol_file_name_size : UInt32,
-    mapped_image_name_size : UInt32,
-    reserved : UInt64[2]
+  struct DEBUG_MODULE_PARAMETERS
+    property base : UInt64
+    property size : UInt32
+    property time_date_stamp : UInt32
+    property checksum : UInt32
+    property flags : UInt32
+    property symbol_type : UInt32
+    property image_name_size : UInt32
+    property module_name_size : UInt32
+    property loaded_image_name_size : UInt32
+    property symbol_file_name_size : UInt32
+    property mapped_image_name_size : UInt32
+    property reserved : UInt64[2]
+    def initialize(@base : UInt64, @size : UInt32, @time_date_stamp : UInt32, @checksum : UInt32, @flags : UInt32, @symbol_type : UInt32, @image_name_size : UInt32, @module_name_size : UInt32, @loaded_image_name_size : UInt32, @symbol_file_name_size : UInt32, @mapped_image_name_size : UInt32, @reserved : UInt64[2])
+    end
+  end
 
   @[Extern]
-  record DEBUG_MODULE_AND_ID,
-    module_base : UInt64,
-    id : UInt64
+  struct DEBUG_MODULE_AND_ID
+    property module_base : UInt64
+    property id : UInt64
+    def initialize(@module_base : UInt64, @id : UInt64)
+    end
+  end
 
   @[Extern]
-  record DEBUG_SYMBOL_SOURCE_ENTRY,
-    module_base : UInt64,
-    offset : UInt64,
-    file_name_id : UInt64,
-    engine_internal : UInt64,
-    size : UInt32,
-    flags : UInt32,
-    file_name_size : UInt32,
-    start_line : UInt32,
-    end_line : UInt32,
-    start_column : UInt32,
-    end_column : UInt32,
-    reserved : UInt32
+  struct DEBUG_SYMBOL_SOURCE_ENTRY
+    property module_base : UInt64
+    property offset : UInt64
+    property file_name_id : UInt64
+    property engine_internal : UInt64
+    property size : UInt32
+    property flags : UInt32
+    property file_name_size : UInt32
+    property start_line : UInt32
+    property end_line : UInt32
+    property start_column : UInt32
+    property end_column : UInt32
+    property reserved : UInt32
+    def initialize(@module_base : UInt64, @offset : UInt64, @file_name_id : UInt64, @engine_internal : UInt64, @size : UInt32, @flags : UInt32, @file_name_size : UInt32, @start_line : UInt32, @end_line : UInt32, @start_column : UInt32, @end_column : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record Location,
-    host_defined : UInt64,
-    offset : UInt64
+  struct Location
+    property host_defined : UInt64
+    property offset : UInt64
+    def initialize(@host_defined : UInt64, @offset : UInt64)
+    end
+  end
 
   @[Extern]
-  record ArrayDimension,
-    lower_bound : Int64,
-    length : UInt64,
-    stride : UInt64
+  struct ArrayDimension
+    property lower_bound : Int64
+    property length : UInt64
+    property stride : UInt64
+    def initialize(@lower_bound : Int64, @length : UInt64, @stride : UInt64)
+    end
+  end
 
   @[Extern]
-  record ScriptDebugPosition,
-    line : UInt32,
-    column : UInt32
+  struct ScriptDebugPosition
+    property line : UInt32
+    property column : UInt32
+    def initialize(@line : UInt32, @column : UInt32)
+    end
+  end
 
   @[Extern]
-  record ScriptDebugEventInformation,
-    debug_event : Win32cr::System::Diagnostics::Debug::ScriptDebugEvent,
-    event_position : Win32cr::System::Diagnostics::Debug::ScriptDebugPosition,
-    event_span_end : Win32cr::System::Diagnostics::Debug::ScriptDebugPosition,
-    u : U_e__union_ do
+  struct ScriptDebugEventInformation
+    property debug_event : Win32cr::System::Diagnostics::Debug::ScriptDebugEvent
+    property event_position : Win32cr::System::Diagnostics::Debug::ScriptDebugPosition
+    property event_span_end : Win32cr::System::Diagnostics::Debug::ScriptDebugPosition
+    property u : U_e__union_
 
     # Nested Type U_e__union_
     @[Extern(union: true)]
-    record U_e__union_,
-      exception_information : ExceptionInformation_e__Struct_,
-      breakpoint_information : BreakpointInformation_e__Struct_ do
+    struct U_e__union_
+    property exception_information : ExceptionInformation_e__Struct_
+    property breakpoint_information : BreakpointInformation_e__Struct_
 
       # Nested Type ExceptionInformation_e__Struct_
       @[Extern]
-      record ExceptionInformation_e__Struct_,
-        is_uncaught : Bool
+      struct ExceptionInformation_e__Struct_
+    property is_uncaught : Bool
+    def initialize(@is_uncaught : Bool)
+    end
+      end
 
 
       # Nested Type BreakpointInformation_e__Struct_
       @[Extern]
-      record BreakpointInformation_e__Struct_,
-        breakpoint_id : UInt64
+      struct BreakpointInformation_e__Struct_
+    property breakpoint_id : UInt64
+    def initialize(@breakpoint_id : UInt64)
+    end
+      end
 
+    def initialize(@exception_information : ExceptionInformation_e__Struct_, @breakpoint_information : BreakpointInformation_e__Struct_)
+    end
     end
 
+    def initialize(@debug_event : Win32cr::System::Diagnostics::Debug::ScriptDebugEvent, @event_position : Win32cr::System::Diagnostics::Debug::ScriptDebugPosition, @event_span_end : Win32cr::System::Diagnostics::Debug::ScriptDebugPosition, @u : U_e__union_)
+    end
   end
 
   @[Extern]
-  record EXTSTACKTRACE,
-    frame_pointer : UInt32,
-    program_counter : UInt32,
-    return_address : UInt32,
-    args : UInt32[4]
+  struct EXTSTACKTRACE
+    property frame_pointer : UInt32
+    property program_counter : UInt32
+    property return_address : UInt32
+    property args : UInt32[4]
+    def initialize(@frame_pointer : UInt32, @program_counter : UInt32, @return_address : UInt32, @args : UInt32[4])
+    end
+  end
 
   @[Extern]
-  record EXTSTACKTRACE32,
-    frame_pointer : UInt32,
-    program_counter : UInt32,
-    return_address : UInt32,
-    args : UInt32[4]
+  struct EXTSTACKTRACE32
+    property frame_pointer : UInt32
+    property program_counter : UInt32
+    property return_address : UInt32
+    property args : UInt32[4]
+    def initialize(@frame_pointer : UInt32, @program_counter : UInt32, @return_address : UInt32, @args : UInt32[4])
+    end
+  end
 
   @[Extern]
-  record EXTSTACKTRACE64,
-    frame_pointer : UInt64,
-    program_counter : UInt64,
-    return_address : UInt64,
-    args : UInt64[4]
+  struct EXTSTACKTRACE64
+    property frame_pointer : UInt64
+    property program_counter : UInt64
+    property return_address : UInt64
+    property args : UInt64[4]
+    def initialize(@frame_pointer : UInt64, @program_counter : UInt64, @return_address : UInt64, @args : UInt64[4])
+    end
+  end
 
   @[Extern]
-  record WINDBG_EXTENSION_APIS,
-    nSize : UInt32,
-    lpOutputRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_OUTPUT_ROUTINE,
-    lpGetExpressionRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_EXPRESSION,
-    lpGetSymbolRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_SYMBOL,
-    lpDisasmRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_DISASM,
-    lpCheckControlCRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_CHECK_CONTROL_C,
-    lpReadProcessMemoryRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_READ_PROCESS_MEMORY_ROUTINE,
-    lpWriteProcessMemoryRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE,
-    lpGetThreadContextRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_THREAD_CONTEXT_ROUTINE,
-    lpSetThreadContextRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_SET_THREAD_CONTEXT_ROUTINE,
-    lpIoctlRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_IOCTL_ROUTINE,
-    lpStackTraceRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_STACKTRACE_ROUTINE
+  struct WINDBG_EXTENSION_APIS
+    property nSize : UInt32
+    property lpOutputRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_OUTPUT_ROUTINE
+    property lpGetExpressionRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_EXPRESSION
+    property lpGetSymbolRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_SYMBOL
+    property lpDisasmRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_DISASM
+    property lpCheckControlCRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_CHECK_CONTROL_C
+    property lpReadProcessMemoryRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_READ_PROCESS_MEMORY_ROUTINE
+    property lpWriteProcessMemoryRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE
+    property lpGetThreadContextRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_THREAD_CONTEXT_ROUTINE
+    property lpSetThreadContextRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_SET_THREAD_CONTEXT_ROUTINE
+    property lpIoctlRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_IOCTL_ROUTINE
+    property lpStackTraceRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_STACKTRACE_ROUTINE
+    def initialize(@nSize : UInt32, @lpOutputRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_OUTPUT_ROUTINE, @lpGetExpressionRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_EXPRESSION, @lpGetSymbolRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_SYMBOL, @lpDisasmRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_DISASM, @lpCheckControlCRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_CHECK_CONTROL_C, @lpReadProcessMemoryRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_READ_PROCESS_MEMORY_ROUTINE, @lpWriteProcessMemoryRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE, @lpGetThreadContextRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_THREAD_CONTEXT_ROUTINE, @lpSetThreadContextRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_SET_THREAD_CONTEXT_ROUTINE, @lpIoctlRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_IOCTL_ROUTINE, @lpStackTraceRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_STACKTRACE_ROUTINE)
+    end
+  end
 
   @[Extern]
-  record WINDBG_EXTENSION_APIS32,
-    nSize : UInt32,
-    lpOutputRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_OUTPUT_ROUTINE,
-    lpGetExpressionRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_EXPRESSION32,
-    lpGetSymbolRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_SYMBOL32,
-    lpDisasmRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_DISASM32,
-    lpCheckControlCRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_CHECK_CONTROL_C,
-    lpReadProcessMemoryRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_READ_PROCESS_MEMORY_ROUTINE32,
-    lpWriteProcessMemoryRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE32,
-    lpGetThreadContextRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_THREAD_CONTEXT_ROUTINE,
-    lpSetThreadContextRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_SET_THREAD_CONTEXT_ROUTINE,
-    lpIoctlRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_IOCTL_ROUTINE,
-    lpStackTraceRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_STACKTRACE_ROUTINE32
+  struct WINDBG_EXTENSION_APIS32
+    property nSize : UInt32
+    property lpOutputRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_OUTPUT_ROUTINE
+    property lpGetExpressionRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_EXPRESSION32
+    property lpGetSymbolRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_SYMBOL32
+    property lpDisasmRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_DISASM32
+    property lpCheckControlCRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_CHECK_CONTROL_C
+    property lpReadProcessMemoryRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_READ_PROCESS_MEMORY_ROUTINE32
+    property lpWriteProcessMemoryRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE32
+    property lpGetThreadContextRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_THREAD_CONTEXT_ROUTINE
+    property lpSetThreadContextRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_SET_THREAD_CONTEXT_ROUTINE
+    property lpIoctlRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_IOCTL_ROUTINE
+    property lpStackTraceRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_STACKTRACE_ROUTINE32
+    def initialize(@nSize : UInt32, @lpOutputRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_OUTPUT_ROUTINE, @lpGetExpressionRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_EXPRESSION32, @lpGetSymbolRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_SYMBOL32, @lpDisasmRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_DISASM32, @lpCheckControlCRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_CHECK_CONTROL_C, @lpReadProcessMemoryRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_READ_PROCESS_MEMORY_ROUTINE32, @lpWriteProcessMemoryRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE32, @lpGetThreadContextRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_THREAD_CONTEXT_ROUTINE, @lpSetThreadContextRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_SET_THREAD_CONTEXT_ROUTINE, @lpIoctlRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_IOCTL_ROUTINE, @lpStackTraceRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_STACKTRACE_ROUTINE32)
+    end
+  end
 
   @[Extern]
-  record WINDBG_EXTENSION_APIS64,
-    nSize : UInt32,
-    lpOutputRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_OUTPUT_ROUTINE,
-    lpGetExpressionRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_EXPRESSION64,
-    lpGetSymbolRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_SYMBOL64,
-    lpDisasmRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_DISASM64,
-    lpCheckControlCRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_CHECK_CONTROL_C,
-    lpReadProcessMemoryRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_READ_PROCESS_MEMORY_ROUTINE64,
-    lpWriteProcessMemoryRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE64,
-    lpGetThreadContextRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_THREAD_CONTEXT_ROUTINE,
-    lpSetThreadContextRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_SET_THREAD_CONTEXT_ROUTINE,
-    lpIoctlRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_IOCTL_ROUTINE,
-    lpStackTraceRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_STACKTRACE_ROUTINE64
+  struct WINDBG_EXTENSION_APIS64
+    property nSize : UInt32
+    property lpOutputRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_OUTPUT_ROUTINE
+    property lpGetExpressionRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_EXPRESSION64
+    property lpGetSymbolRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_SYMBOL64
+    property lpDisasmRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_DISASM64
+    property lpCheckControlCRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_CHECK_CONTROL_C
+    property lpReadProcessMemoryRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_READ_PROCESS_MEMORY_ROUTINE64
+    property lpWriteProcessMemoryRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE64
+    property lpGetThreadContextRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_THREAD_CONTEXT_ROUTINE
+    property lpSetThreadContextRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_SET_THREAD_CONTEXT_ROUTINE
+    property lpIoctlRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_IOCTL_ROUTINE
+    property lpStackTraceRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_STACKTRACE_ROUTINE64
+    def initialize(@nSize : UInt32, @lpOutputRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_OUTPUT_ROUTINE, @lpGetExpressionRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_EXPRESSION64, @lpGetSymbolRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_SYMBOL64, @lpDisasmRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_DISASM64, @lpCheckControlCRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_CHECK_CONTROL_C, @lpReadProcessMemoryRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_READ_PROCESS_MEMORY_ROUTINE64, @lpWriteProcessMemoryRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE64, @lpGetThreadContextRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_THREAD_CONTEXT_ROUTINE, @lpSetThreadContextRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_SET_THREAD_CONTEXT_ROUTINE, @lpIoctlRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_IOCTL_ROUTINE, @lpStackTraceRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_STACKTRACE_ROUTINE64)
+    end
+  end
 
   @[Extern]
-  record WINDBG_OLD_EXTENSION_APIS,
-    nSize : UInt32,
-    lpOutputRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_OUTPUT_ROUTINE,
-    lpGetExpressionRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_EXPRESSION,
-    lpGetSymbolRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_SYMBOL,
-    lpDisasmRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_DISASM,
-    lpCheckControlCRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_CHECK_CONTROL_C
+  struct WINDBG_OLD_EXTENSION_APIS
+    property nSize : UInt32
+    property lpOutputRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_OUTPUT_ROUTINE
+    property lpGetExpressionRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_EXPRESSION
+    property lpGetSymbolRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_SYMBOL
+    property lpDisasmRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_DISASM
+    property lpCheckControlCRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_CHECK_CONTROL_C
+    def initialize(@nSize : UInt32, @lpOutputRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_OUTPUT_ROUTINE, @lpGetExpressionRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_EXPRESSION, @lpGetSymbolRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_SYMBOL, @lpDisasmRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_DISASM, @lpCheckControlCRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_CHECK_CONTROL_C)
+    end
+  end
 
   @[Extern]
-  record WINDBG_OLDKD_EXTENSION_APIS,
-    nSize : UInt32,
-    lpOutputRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_OUTPUT_ROUTINE,
-    lpGetExpressionRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_EXPRESSION32,
-    lpGetSymbolRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_SYMBOL32,
-    lpDisasmRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_DISASM32,
-    lpCheckControlCRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_CHECK_CONTROL_C,
-    lpReadVirtualMemRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_READ_PROCESS_MEMORY_ROUTINE32,
-    lpWriteVirtualMemRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE32,
-    lpReadPhysicalMemRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_OLDKD_READ_PHYSICAL_MEMORY,
-    lpWritePhysicalMemRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_OLDKD_WRITE_PHYSICAL_MEMORY
+  struct WINDBG_OLDKD_EXTENSION_APIS
+    property nSize : UInt32
+    property lpOutputRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_OUTPUT_ROUTINE
+    property lpGetExpressionRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_EXPRESSION32
+    property lpGetSymbolRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_SYMBOL32
+    property lpDisasmRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_DISASM32
+    property lpCheckControlCRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_CHECK_CONTROL_C
+    property lpReadVirtualMemRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_READ_PROCESS_MEMORY_ROUTINE32
+    property lpWriteVirtualMemRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE32
+    property lpReadPhysicalMemRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_OLDKD_READ_PHYSICAL_MEMORY
+    property lpWritePhysicalMemRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_OLDKD_WRITE_PHYSICAL_MEMORY
+    def initialize(@nSize : UInt32, @lpOutputRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_OUTPUT_ROUTINE, @lpGetExpressionRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_EXPRESSION32, @lpGetSymbolRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_GET_SYMBOL32, @lpDisasmRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_DISASM32, @lpCheckControlCRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_CHECK_CONTROL_C, @lpReadVirtualMemRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_READ_PROCESS_MEMORY_ROUTINE32, @lpWriteVirtualMemRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE32, @lpReadPhysicalMemRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_OLDKD_READ_PHYSICAL_MEMORY, @lpWritePhysicalMemRoutine : Win32cr::System::Diagnostics::Debug::PWINDBG_OLDKD_WRITE_PHYSICAL_MEMORY)
+    end
+  end
 
   @[Extern]
-  record EXT_API_VERSION,
-    major_version : UInt16,
-    minor_version : UInt16,
-    revision : UInt16,
-    reserved : UInt16
+  struct EXT_API_VERSION
+    property major_version : UInt16
+    property minor_version : UInt16
+    property revision : UInt16
+    property reserved : UInt16
+    def initialize(@major_version : UInt16, @minor_version : UInt16, @revision : UInt16, @reserved : UInt16)
+    end
+  end
 
   @[Extern]
-  record PROCESSORINFO,
-    processor : UInt16,
-    number_processors : UInt16
+  struct PROCESSORINFO
+    property processor : UInt16
+    property number_processors : UInt16
+    def initialize(@processor : UInt16, @number_processors : UInt16)
+    end
+  end
 
   @[Extern]
-  record READCONTROLSPACE,
-    processor : UInt16,
-    address : UInt32,
-    buf_len : UInt32,
-    buf : UInt8*
+  struct READCONTROLSPACE
+    property processor : UInt16
+    property address : UInt32
+    property buf_len : UInt32
+    property buf : UInt8*
+    def initialize(@processor : UInt16, @address : UInt32, @buf_len : UInt32, @buf : UInt8*)
+    end
+  end
 
   @[Extern]
-  record READCONTROLSPACE32,
-    processor : UInt16,
-    address : UInt32,
-    buf_len : UInt32,
-    buf : UInt8*
+  struct READCONTROLSPACE32
+    property processor : UInt16
+    property address : UInt32
+    property buf_len : UInt32
+    property buf : UInt8*
+    def initialize(@processor : UInt16, @address : UInt32, @buf_len : UInt32, @buf : UInt8*)
+    end
+  end
 
   @[Extern]
-  record READCONTROLSPACE64,
-    processor : UInt16,
-    address : UInt64,
-    buf_len : UInt32,
-    buf : UInt8*
+  struct READCONTROLSPACE64
+    property processor : UInt16
+    property address : UInt64
+    property buf_len : UInt32
+    property buf : UInt8*
+    def initialize(@processor : UInt16, @address : UInt64, @buf_len : UInt32, @buf : UInt8*)
+    end
+  end
 
   @[Extern]
-  record IOSPACE,
-    address : UInt32,
-    length : UInt32,
-    data : UInt32
+  struct IOSPACE
+    property address : UInt32
+    property length : UInt32
+    property data : UInt32
+    def initialize(@address : UInt32, @length : UInt32, @data : UInt32)
+    end
+  end
 
   @[Extern]
-  record IOSPACE32,
-    address : UInt32,
-    length : UInt32,
-    data : UInt32
+  struct IOSPACE32
+    property address : UInt32
+    property length : UInt32
+    property data : UInt32
+    def initialize(@address : UInt32, @length : UInt32, @data : UInt32)
+    end
+  end
 
   @[Extern]
-  record IOSPACE64,
-    address : UInt64,
-    length : UInt32,
-    data : UInt32
+  struct IOSPACE64
+    property address : UInt64
+    property length : UInt32
+    property data : UInt32
+    def initialize(@address : UInt64, @length : UInt32, @data : UInt32)
+    end
+  end
 
   @[Extern]
-  record IOSPACE_EX,
-    address : UInt32,
-    length : UInt32,
-    data : UInt32,
-    interface_type : UInt32,
-    bus_number : UInt32,
-    address_space : UInt32
+  struct IOSPACE_EX
+    property address : UInt32
+    property length : UInt32
+    property data : UInt32
+    property interface_type : UInt32
+    property bus_number : UInt32
+    property address_space : UInt32
+    def initialize(@address : UInt32, @length : UInt32, @data : UInt32, @interface_type : UInt32, @bus_number : UInt32, @address_space : UInt32)
+    end
+  end
 
   @[Extern]
-  record IOSPACE_EX32,
-    address : UInt32,
-    length : UInt32,
-    data : UInt32,
-    interface_type : UInt32,
-    bus_number : UInt32,
-    address_space : UInt32
+  struct IOSPACE_EX32
+    property address : UInt32
+    property length : UInt32
+    property data : UInt32
+    property interface_type : UInt32
+    property bus_number : UInt32
+    property address_space : UInt32
+    def initialize(@address : UInt32, @length : UInt32, @data : UInt32, @interface_type : UInt32, @bus_number : UInt32, @address_space : UInt32)
+    end
+  end
 
   @[Extern]
-  record IOSPACE_EX64,
-    address : UInt64,
-    length : UInt32,
-    data : UInt32,
-    interface_type : UInt32,
-    bus_number : UInt32,
-    address_space : UInt32
+  struct IOSPACE_EX64
+    property address : UInt64
+    property length : UInt32
+    property data : UInt32
+    property interface_type : UInt32
+    property bus_number : UInt32
+    property address_space : UInt32
+    def initialize(@address : UInt64, @length : UInt32, @data : UInt32, @interface_type : UInt32, @bus_number : UInt32, @address_space : UInt32)
+    end
+  end
 
   @[Extern]
-  record GETSETBUSDATA_,
-    bus_data_type : UInt32,
-    bus_number : UInt32,
-    slot_number : UInt32,
-    buffer : Void*,
-    offset : UInt32,
-    length : UInt32
+  struct GETSETBUSDATA_
+    property bus_data_type : UInt32
+    property bus_number : UInt32
+    property slot_number : UInt32
+    property buffer : Void*
+    property offset : UInt32
+    property length : UInt32
+    def initialize(@bus_data_type : UInt32, @bus_number : UInt32, @slot_number : UInt32, @buffer : Void*, @offset : UInt32, @length : UInt32)
+    end
+  end
 
   @[Extern]
-  record SEARCHMEMORY,
-    search_address : UInt64,
-    search_length : UInt64,
-    found_address : UInt64,
-    pattern_length : UInt32,
-    pattern : Void*
+  struct SEARCHMEMORY
+    property search_address : UInt64
+    property search_length : UInt64
+    property found_address : UInt64
+    property pattern_length : UInt32
+    property pattern : Void*
+    def initialize(@search_address : UInt64, @search_length : UInt64, @found_address : UInt64, @pattern_length : UInt32, @pattern : Void*)
+    end
+  end
 
   @[Extern]
-  record PHYSICAL,
-    address : UInt64,
-    buf_len : UInt32,
-    buf : UInt8*
+  struct PHYSICAL
+    property address : UInt64
+    property buf_len : UInt32
+    property buf : UInt8*
+    def initialize(@address : UInt64, @buf_len : UInt32, @buf : UInt8*)
+    end
+  end
 
   @[Extern]
-  record PHYSICAL_WITH_FLAGS,
-    address : UInt64,
-    buf_len : UInt32,
-    flags : UInt32,
-    buf : UInt8*
+  struct PHYSICAL_WITH_FLAGS
+    property address : UInt64
+    property buf_len : UInt32
+    property flags : UInt32
+    property buf : UInt8*
+    def initialize(@address : UInt64, @buf_len : UInt32, @flags : UInt32, @buf : UInt8*)
+    end
+  end
 
   @[Extern]
-  record READ_WRITE_MSR,
-    msr : UInt32,
-    value : Int64
+  struct READ_WRITE_MSR
+    property msr : UInt32
+    property value : Int64
+    def initialize(@msr : UInt32, @value : Int64)
+    end
+  end
 
   @[Extern]
-  record GET_SET_SYMPATH,
-    args : Win32cr::Foundation::PSTR,
-    result : Win32cr::Foundation::PSTR,
-    length : Int32
+  struct GET_SET_SYMPATH
+    property args : Win32cr::Foundation::PSTR
+    property result : Win32cr::Foundation::PSTR
+    property length : Int32
+    def initialize(@args : Win32cr::Foundation::PSTR, @result : Win32cr::Foundation::PSTR, @length : Int32)
+    end
+  end
 
   @[Extern]
-  record GET_TEB_ADDRESS,
-    address : UInt64
+  struct GET_TEB_ADDRESS
+    property address : UInt64
+    def initialize(@address : UInt64)
+    end
+  end
 
   @[Extern]
-  record GET_PEB_ADDRESS,
-    current_thread : UInt64,
-    address : UInt64
+  struct GET_PEB_ADDRESS
+    property current_thread : UInt64
+    property address : UInt64
+    def initialize(@current_thread : UInt64, @address : UInt64)
+    end
+  end
 
   @[Extern]
-  record GET_CURRENT_THREAD_ADDRESS,
-    processor : UInt32,
-    address : UInt64
+  struct GET_CURRENT_THREAD_ADDRESS
+    property processor : UInt32
+    property address : UInt64
+    def initialize(@processor : UInt32, @address : UInt64)
+    end
+  end
 
   @[Extern]
-  record GET_CURRENT_PROCESS_ADDRESS,
-    processor : UInt32,
-    current_thread : UInt64,
-    address : UInt64
+  struct GET_CURRENT_PROCESS_ADDRESS
+    property processor : UInt32
+    property current_thread : UInt64
+    property address : UInt64
+    def initialize(@processor : UInt32, @current_thread : UInt64, @address : UInt64)
+    end
+  end
 
   @[Extern]
-  record GET_INPUT_LINE,
-    prompt : Win32cr::Foundation::PSTR,
-    buffer : Win32cr::Foundation::PSTR,
-    buffer_size : UInt32,
-    input_size : UInt32
+  struct GET_INPUT_LINE
+    property prompt : Win32cr::Foundation::PSTR
+    property buffer : Win32cr::Foundation::PSTR
+    property buffer_size : UInt32
+    property input_size : UInt32
+    def initialize(@prompt : Win32cr::Foundation::PSTR, @buffer : Win32cr::Foundation::PSTR, @buffer_size : UInt32, @input_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record GET_EXPRESSION_EX,
-    expression : Win32cr::Foundation::PSTR,
-    remainder : Win32cr::Foundation::PSTR,
-    value : UInt64
+  struct GET_EXPRESSION_EX
+    property expression : Win32cr::Foundation::PSTR
+    property remainder : Win32cr::Foundation::PSTR
+    property value : UInt64
+    def initialize(@expression : Win32cr::Foundation::PSTR, @remainder : Win32cr::Foundation::PSTR, @value : UInt64)
+    end
+  end
 
   @[Extern]
-  record TRANSLATE_VIRTUAL_TO_PHYSICAL,
-    virtual : UInt64,
-    physical : UInt64
+  struct TRANSLATE_VIRTUAL_TO_PHYSICAL
+    property virtual : UInt64
+    property physical : UInt64
+    def initialize(@virtual : UInt64, @physical : UInt64)
+    end
+  end
 
   @[Extern]
-  record VIRTUAL_TO_PHYSICAL,
-    status : UInt32,
-    size : UInt32,
-    pde_address : UInt64,
-    virtual : UInt64,
-    physical : UInt64
+  struct VIRTUAL_TO_PHYSICAL
+    property status : UInt32
+    property size : UInt32
+    property pde_address : UInt64
+    property virtual : UInt64
+    property physical : UInt64
+    def initialize(@status : UInt32, @size : UInt32, @pde_address : UInt64, @virtual : UInt64, @physical : UInt64)
+    end
+  end
 
   @[Extern]
-  record PHYSICAL_TO_VIRTUAL,
-    status : UInt32,
-    size : UInt32,
-    pde_address : UInt64
+  struct PHYSICAL_TO_VIRTUAL
+    property status : UInt32
+    property size : UInt32
+    property pde_address : UInt64
+    def initialize(@status : UInt32, @size : UInt32, @pde_address : UInt64)
+    end
+  end
 
   @[Extern]
-  record GET_CONTEXT_EX,
-    status : UInt32,
-    context_size : UInt32,
-    pContext : Void*
+  struct GET_CONTEXT_EX
+    property status : UInt32
+    property context_size : UInt32
+    property pContext : Void*
+    def initialize(@status : UInt32, @context_size : UInt32, @pContext : Void*)
+    end
+  end
 
   @[Extern]
-  record POINTER_SEARCH_PHYSICAL,
-    offset : UInt64,
-    length : UInt64,
-    pointer_min : UInt64,
-    pointer_max : UInt64,
-    flags : UInt32,
-    match_offsets : UInt64*,
-    match_offsets_size : UInt32,
-    match_offsets_count : UInt32
+  struct POINTER_SEARCH_PHYSICAL
+    property offset : UInt64
+    property length : UInt64
+    property pointer_min : UInt64
+    property pointer_max : UInt64
+    property flags : UInt32
+    property match_offsets : UInt64*
+    property match_offsets_size : UInt32
+    property match_offsets_count : UInt32
+    def initialize(@offset : UInt64, @length : UInt64, @pointer_min : UInt64, @pointer_max : UInt64, @flags : UInt32, @match_offsets : UInt64*, @match_offsets_size : UInt32, @match_offsets_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record WDBGEXTS_THREAD_OS_INFO,
-    thread_id : UInt32,
-    exit_status : UInt32,
-    priority_class : UInt32,
-    priority : UInt32,
-    create_time : UInt64,
-    exit_time : UInt64,
-    kernel_time : UInt64,
-    user_time : UInt64,
-    start_offset : UInt64,
-    affinity : UInt64
+  struct WDBGEXTS_THREAD_OS_INFO
+    property thread_id : UInt32
+    property exit_status : UInt32
+    property priority_class : UInt32
+    property priority : UInt32
+    property create_time : UInt64
+    property exit_time : UInt64
+    property kernel_time : UInt64
+    property user_time : UInt64
+    property start_offset : UInt64
+    property affinity : UInt64
+    def initialize(@thread_id : UInt32, @exit_status : UInt32, @priority_class : UInt32, @priority : UInt32, @create_time : UInt64, @exit_time : UInt64, @kernel_time : UInt64, @user_time : UInt64, @start_offset : UInt64, @affinity : UInt64)
+    end
+  end
 
   @[Extern]
-  record WDBGEXTS_CLR_DATA_INTERFACE,
-    iid : LibC::GUID*,
-    iface : Void*
+  struct WDBGEXTS_CLR_DATA_INTERFACE
+    property iid : LibC::GUID*
+    property iface : Void*
+    def initialize(@iid : LibC::GUID*, @iface : Void*)
+    end
+  end
 
   @[Extern]
-  record EXT_MATCH_PATTERN_A,
-    str : Win32cr::Foundation::PSTR,
-    pattern : Win32cr::Foundation::PSTR,
-    case_sensitive : UInt32
+  struct EXT_MATCH_PATTERN_A
+    property str : Win32cr::Foundation::PSTR
+    property pattern : Win32cr::Foundation::PSTR
+    property case_sensitive : UInt32
+    def initialize(@str : Win32cr::Foundation::PSTR, @pattern : Win32cr::Foundation::PSTR, @case_sensitive : UInt32)
+    end
+  end
 
   @[Extern]
-  record EXT_FIND_FILE,
-    file_name : Win32cr::Foundation::PWSTR,
-    indexed_size : UInt64,
-    image_time_date_stamp : UInt32,
-    image_check_sum : UInt32,
-    extra_info : Void*,
-    extra_info_size : UInt32,
-    flags : UInt32,
-    file_mapping : Void*,
-    file_mapping_size : UInt64,
-    file_handle : Win32cr::Foundation::HANDLE,
-    found_file_name : Win32cr::Foundation::PWSTR,
-    found_file_name_chars : UInt32
+  struct EXT_FIND_FILE
+    property file_name : Win32cr::Foundation::PWSTR
+    property indexed_size : UInt64
+    property image_time_date_stamp : UInt32
+    property image_check_sum : UInt32
+    property extra_info : Void*
+    property extra_info_size : UInt32
+    property flags : UInt32
+    property file_mapping : Void*
+    property file_mapping_size : UInt64
+    property file_handle : Win32cr::Foundation::HANDLE
+    property found_file_name : Win32cr::Foundation::PWSTR
+    property found_file_name_chars : UInt32
+    def initialize(@file_name : Win32cr::Foundation::PWSTR, @indexed_size : UInt64, @image_time_date_stamp : UInt32, @image_check_sum : UInt32, @extra_info : Void*, @extra_info_size : UInt32, @flags : UInt32, @file_mapping : Void*, @file_mapping_size : UInt64, @file_handle : Win32cr::Foundation::HANDLE, @found_file_name : Win32cr::Foundation::PWSTR, @found_file_name_chars : UInt32)
+    end
+  end
 
   @[Extern]
-  record DEBUG_TYPED_DATA,
-    mod_base : UInt64,
-    offset : UInt64,
-    engine_handle : UInt64,
-    data : UInt64,
-    size : UInt32,
-    flags : UInt32,
-    type_id : UInt32,
-    base_type_id : UInt32,
-    tag : UInt32,
-    register : UInt32,
-    internal : UInt64[9]
+  struct DEBUG_TYPED_DATA
+    property mod_base : UInt64
+    property offset : UInt64
+    property engine_handle : UInt64
+    property data : UInt64
+    property size : UInt32
+    property flags : UInt32
+    property type_id : UInt32
+    property base_type_id : UInt32
+    property tag : UInt32
+    property register : UInt32
+    property internal : UInt64[9]
+    def initialize(@mod_base : UInt64, @offset : UInt64, @engine_handle : UInt64, @data : UInt64, @size : UInt32, @flags : UInt32, @type_id : UInt32, @base_type_id : UInt32, @tag : UInt32, @register : UInt32, @internal : UInt64[9])
+    end
+  end
 
   @[Extern]
-  record EXT_TYPED_DATA,
-    operation : Win32cr::System::Diagnostics::Debug::EXT_TDOP,
-    flags : UInt32,
-    in_data : Win32cr::System::Diagnostics::Debug::DEBUG_TYPED_DATA,
-    out_data : Win32cr::System::Diagnostics::Debug::DEBUG_TYPED_DATA,
-    in_str_index : UInt32,
-    in32 : UInt32,
-    out32 : UInt32,
-    in64 : UInt64,
-    out64 : UInt64,
-    str_buffer_index : UInt32,
-    str_buffer_chars : UInt32,
-    str_chars_needed : UInt32,
-    data_buffer_index : UInt32,
-    data_buffer_bytes : UInt32,
-    data_bytes_needed : UInt32,
-    status : Win32cr::Foundation::HRESULT,
-    reserved : UInt64[8]
+  struct EXT_TYPED_DATA
+    property operation : Win32cr::System::Diagnostics::Debug::EXT_TDOP
+    property flags : UInt32
+    property in_data : Win32cr::System::Diagnostics::Debug::DEBUG_TYPED_DATA
+    property out_data : Win32cr::System::Diagnostics::Debug::DEBUG_TYPED_DATA
+    property in_str_index : UInt32
+    property in32 : UInt32
+    property out32 : UInt32
+    property in64 : UInt64
+    property out64 : UInt64
+    property str_buffer_index : UInt32
+    property str_buffer_chars : UInt32
+    property str_chars_needed : UInt32
+    property data_buffer_index : UInt32
+    property data_buffer_bytes : UInt32
+    property data_bytes_needed : UInt32
+    property status : Win32cr::Foundation::HRESULT
+    property reserved : UInt64[8]
+    def initialize(@operation : Win32cr::System::Diagnostics::Debug::EXT_TDOP, @flags : UInt32, @in_data : Win32cr::System::Diagnostics::Debug::DEBUG_TYPED_DATA, @out_data : Win32cr::System::Diagnostics::Debug::DEBUG_TYPED_DATA, @in_str_index : UInt32, @in32 : UInt32, @out32 : UInt32, @in64 : UInt64, @out64 : UInt64, @str_buffer_index : UInt32, @str_buffer_chars : UInt32, @str_chars_needed : UInt32, @data_buffer_index : UInt32, @data_buffer_bytes : UInt32, @data_bytes_needed : UInt32, @status : Win32cr::Foundation::HRESULT, @reserved : UInt64[8])
+    end
+  end
 
   @[Extern]
-  record WDBGEXTS_QUERY_INTERFACE,
-    iid : LibC::GUID*,
-    iface : Void*
+  struct WDBGEXTS_QUERY_INTERFACE
+    property iid : LibC::GUID*
+    property iface : Void*
+    def initialize(@iid : LibC::GUID*, @iface : Void*)
+    end
+  end
 
   @[Extern]
-  record WDBGEXTS_DISASSEMBLE_BUFFER,
-    in_offset : UInt64,
-    out_offset : UInt64,
-    addr_flags : UInt32,
-    format_flags : UInt32,
-    data_buffer_bytes : UInt32,
-    disasm_buffer_chars : UInt32,
-    data_buffer : Void*,
-    disasm_buffer : Win32cr::Foundation::PWSTR,
-    reserved0 : UInt64[3]
+  struct WDBGEXTS_DISASSEMBLE_BUFFER
+    property in_offset : UInt64
+    property out_offset : UInt64
+    property addr_flags : UInt32
+    property format_flags : UInt32
+    property data_buffer_bytes : UInt32
+    property disasm_buffer_chars : UInt32
+    property data_buffer : Void*
+    property disasm_buffer : Win32cr::Foundation::PWSTR
+    property reserved0 : UInt64[3]
+    def initialize(@in_offset : UInt64, @out_offset : UInt64, @addr_flags : UInt32, @format_flags : UInt32, @data_buffer_bytes : UInt32, @disasm_buffer_chars : UInt32, @data_buffer : Void*, @disasm_buffer : Win32cr::Foundation::PWSTR, @reserved0 : UInt64[3])
+    end
+  end
 
   @[Extern]
-  record WDBGEXTS_MODULE_IN_RANGE,
-    start : UInt64,
-    end__ : UInt64,
-    found_mod_base : UInt64,
-    found_mod_size : UInt32
+  struct WDBGEXTS_MODULE_IN_RANGE
+    property start : UInt64
+    property end__ : UInt64
+    property found_mod_base : UInt64
+    property found_mod_size : UInt32
+    def initialize(@start : UInt64, @end__ : UInt64, @found_mod_base : UInt64, @found_mod_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record DBGKD_GET_VERSION32,
-    major_version : UInt16,
-    minor_version : UInt16,
-    protocol_version : UInt16,
-    flags : UInt16,
-    kern_base : UInt32,
-    ps_loaded_module_list : UInt32,
-    machine_type : UInt16,
-    th_callback_stack : UInt16,
-    next_callback : UInt16,
-    frame_pointer : UInt16,
-    ki_call_user_mode : UInt32,
-    ke_user_callback_dispatcher : UInt32,
-    breakpoint_with_status : UInt32,
-    debugger_data_list : UInt32
+  struct DBGKD_GET_VERSION32
+    property major_version : UInt16
+    property minor_version : UInt16
+    property protocol_version : UInt16
+    property flags : UInt16
+    property kern_base : UInt32
+    property ps_loaded_module_list : UInt32
+    property machine_type : UInt16
+    property th_callback_stack : UInt16
+    property next_callback : UInt16
+    property frame_pointer : UInt16
+    property ki_call_user_mode : UInt32
+    property ke_user_callback_dispatcher : UInt32
+    property breakpoint_with_status : UInt32
+    property debugger_data_list : UInt32
+    def initialize(@major_version : UInt16, @minor_version : UInt16, @protocol_version : UInt16, @flags : UInt16, @kern_base : UInt32, @ps_loaded_module_list : UInt32, @machine_type : UInt16, @th_callback_stack : UInt16, @next_callback : UInt16, @frame_pointer : UInt16, @ki_call_user_mode : UInt32, @ke_user_callback_dispatcher : UInt32, @breakpoint_with_status : UInt32, @debugger_data_list : UInt32)
+    end
+  end
 
   @[Extern]
-  record DBGKD_DEBUG_DATA_HEADER32,
-    list : Win32cr::System::Kernel::LIST_ENTRY32,
-    owner_tag : UInt32,
-    size : UInt32
+  struct DBGKD_DEBUG_DATA_HEADER32
+    property list : Win32cr::System::Kernel::LIST_ENTRY32
+    property owner_tag : UInt32
+    property size : UInt32
+    def initialize(@list : Win32cr::System::Kernel::LIST_ENTRY32, @owner_tag : UInt32, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record KDDEBUGGER_DATA32,
-    header : Win32cr::System::Diagnostics::Debug::DBGKD_DEBUG_DATA_HEADER32,
-    kern_base : UInt32,
-    breakpoint_with_status : UInt32,
-    saved_context : UInt32,
-    th_callback_stack : UInt16,
-    next_callback : UInt16,
-    frame_pointer : UInt16,
-    _bitfield : UInt16,
-    ki_call_user_mode : UInt32,
-    ke_user_callback_dispatcher : UInt32,
-    ps_loaded_module_list : UInt32,
-    ps_active_process_head : UInt32,
-    psp_cid_table : UInt32,
-    exp_system_resources_list : UInt32,
-    exp_paged_pool_descriptor : UInt32,
-    exp_number_of_paged_pools : UInt32,
-    ke_time_increment : UInt32,
-    ke_bug_check_callback_list_head : UInt32,
-    ki_bugcheck_data : UInt32,
-    iop_error_log_list_head : UInt32,
-    obp_root_directory_object : UInt32,
-    obp_type_object_type : UInt32,
-    mm_system_cache_start : UInt32,
-    mm_system_cache_end : UInt32,
-    mm_system_cache_ws : UInt32,
-    mm_pfn_database : UInt32,
-    mm_system_ptes_start : UInt32,
-    mm_system_ptes_end : UInt32,
-    mm_subsection_base : UInt32,
-    mm_number_of_paging_files : UInt32,
-    mm_lowest_physical_page : UInt32,
-    mm_highest_physical_page : UInt32,
-    mm_number_of_physical_pages : UInt32,
-    mm_maximum_non_paged_pool_in_bytes : UInt32,
-    mm_non_paged_system_start : UInt32,
-    mm_non_paged_pool_start : UInt32,
-    mm_non_paged_pool_end : UInt32,
-    mm_paged_pool_start : UInt32,
-    mm_paged_pool_end : UInt32,
-    mm_paged_pool_information : UInt32,
-    mm_page_size : UInt32,
-    mm_size_of_paged_pool_in_bytes : UInt32,
-    mm_total_commit_limit : UInt32,
-    mm_total_committed_pages : UInt32,
-    mm_shared_commit : UInt32,
-    mm_driver_commit : UInt32,
-    mm_process_commit : UInt32,
-    mm_paged_pool_commit : UInt32,
-    mm_extended_commit : UInt32,
-    mm_zeroed_page_list_head : UInt32,
-    mm_free_page_list_head : UInt32,
-    mm_standby_page_list_head : UInt32,
-    mm_modified_page_list_head : UInt32,
-    mm_modified_no_write_page_list_head : UInt32,
-    mm_available_pages : UInt32,
-    mm_resident_available_pages : UInt32,
-    pool_track_table : UInt32,
-    non_paged_pool_descriptor : UInt32,
-    mm_highest_user_address : UInt32,
-    mm_system_range_start : UInt32,
-    mm_user_probe_address : UInt32,
-    kd_print_circular_buffer : UInt32,
-    kd_print_circular_buffer_end : UInt32,
-    kd_print_write_pointer : UInt32,
-    kd_print_rollover_count : UInt32,
-    mm_loaded_user_image_list : UInt32
+  struct KDDEBUGGER_DATA32
+    property header : Win32cr::System::Diagnostics::Debug::DBGKD_DEBUG_DATA_HEADER32
+    property kern_base : UInt32
+    property breakpoint_with_status : UInt32
+    property saved_context : UInt32
+    property th_callback_stack : UInt16
+    property next_callback : UInt16
+    property frame_pointer : UInt16
+    property _bitfield : UInt16
+    property ki_call_user_mode : UInt32
+    property ke_user_callback_dispatcher : UInt32
+    property ps_loaded_module_list : UInt32
+    property ps_active_process_head : UInt32
+    property psp_cid_table : UInt32
+    property exp_system_resources_list : UInt32
+    property exp_paged_pool_descriptor : UInt32
+    property exp_number_of_paged_pools : UInt32
+    property ke_time_increment : UInt32
+    property ke_bug_check_callback_list_head : UInt32
+    property ki_bugcheck_data : UInt32
+    property iop_error_log_list_head : UInt32
+    property obp_root_directory_object : UInt32
+    property obp_type_object_type : UInt32
+    property mm_system_cache_start : UInt32
+    property mm_system_cache_end : UInt32
+    property mm_system_cache_ws : UInt32
+    property mm_pfn_database : UInt32
+    property mm_system_ptes_start : UInt32
+    property mm_system_ptes_end : UInt32
+    property mm_subsection_base : UInt32
+    property mm_number_of_paging_files : UInt32
+    property mm_lowest_physical_page : UInt32
+    property mm_highest_physical_page : UInt32
+    property mm_number_of_physical_pages : UInt32
+    property mm_maximum_non_paged_pool_in_bytes : UInt32
+    property mm_non_paged_system_start : UInt32
+    property mm_non_paged_pool_start : UInt32
+    property mm_non_paged_pool_end : UInt32
+    property mm_paged_pool_start : UInt32
+    property mm_paged_pool_end : UInt32
+    property mm_paged_pool_information : UInt32
+    property mm_page_size : UInt32
+    property mm_size_of_paged_pool_in_bytes : UInt32
+    property mm_total_commit_limit : UInt32
+    property mm_total_committed_pages : UInt32
+    property mm_shared_commit : UInt32
+    property mm_driver_commit : UInt32
+    property mm_process_commit : UInt32
+    property mm_paged_pool_commit : UInt32
+    property mm_extended_commit : UInt32
+    property mm_zeroed_page_list_head : UInt32
+    property mm_free_page_list_head : UInt32
+    property mm_standby_page_list_head : UInt32
+    property mm_modified_page_list_head : UInt32
+    property mm_modified_no_write_page_list_head : UInt32
+    property mm_available_pages : UInt32
+    property mm_resident_available_pages : UInt32
+    property pool_track_table : UInt32
+    property non_paged_pool_descriptor : UInt32
+    property mm_highest_user_address : UInt32
+    property mm_system_range_start : UInt32
+    property mm_user_probe_address : UInt32
+    property kd_print_circular_buffer : UInt32
+    property kd_print_circular_buffer_end : UInt32
+    property kd_print_write_pointer : UInt32
+    property kd_print_rollover_count : UInt32
+    property mm_loaded_user_image_list : UInt32
+    def initialize(@header : Win32cr::System::Diagnostics::Debug::DBGKD_DEBUG_DATA_HEADER32, @kern_base : UInt32, @breakpoint_with_status : UInt32, @saved_context : UInt32, @th_callback_stack : UInt16, @next_callback : UInt16, @frame_pointer : UInt16, @_bitfield : UInt16, @ki_call_user_mode : UInt32, @ke_user_callback_dispatcher : UInt32, @ps_loaded_module_list : UInt32, @ps_active_process_head : UInt32, @psp_cid_table : UInt32, @exp_system_resources_list : UInt32, @exp_paged_pool_descriptor : UInt32, @exp_number_of_paged_pools : UInt32, @ke_time_increment : UInt32, @ke_bug_check_callback_list_head : UInt32, @ki_bugcheck_data : UInt32, @iop_error_log_list_head : UInt32, @obp_root_directory_object : UInt32, @obp_type_object_type : UInt32, @mm_system_cache_start : UInt32, @mm_system_cache_end : UInt32, @mm_system_cache_ws : UInt32, @mm_pfn_database : UInt32, @mm_system_ptes_start : UInt32, @mm_system_ptes_end : UInt32, @mm_subsection_base : UInt32, @mm_number_of_paging_files : UInt32, @mm_lowest_physical_page : UInt32, @mm_highest_physical_page : UInt32, @mm_number_of_physical_pages : UInt32, @mm_maximum_non_paged_pool_in_bytes : UInt32, @mm_non_paged_system_start : UInt32, @mm_non_paged_pool_start : UInt32, @mm_non_paged_pool_end : UInt32, @mm_paged_pool_start : UInt32, @mm_paged_pool_end : UInt32, @mm_paged_pool_information : UInt32, @mm_page_size : UInt32, @mm_size_of_paged_pool_in_bytes : UInt32, @mm_total_commit_limit : UInt32, @mm_total_committed_pages : UInt32, @mm_shared_commit : UInt32, @mm_driver_commit : UInt32, @mm_process_commit : UInt32, @mm_paged_pool_commit : UInt32, @mm_extended_commit : UInt32, @mm_zeroed_page_list_head : UInt32, @mm_free_page_list_head : UInt32, @mm_standby_page_list_head : UInt32, @mm_modified_page_list_head : UInt32, @mm_modified_no_write_page_list_head : UInt32, @mm_available_pages : UInt32, @mm_resident_available_pages : UInt32, @pool_track_table : UInt32, @non_paged_pool_descriptor : UInt32, @mm_highest_user_address : UInt32, @mm_system_range_start : UInt32, @mm_user_probe_address : UInt32, @kd_print_circular_buffer : UInt32, @kd_print_circular_buffer_end : UInt32, @kd_print_write_pointer : UInt32, @kd_print_rollover_count : UInt32, @mm_loaded_user_image_list : UInt32)
+    end
+  end
 
   @[Extern]
-  record DBGKD_GET_VERSION64,
-    major_version : UInt16,
-    minor_version : UInt16,
-    protocol_version : UInt8,
-    kd_secondary_version : UInt8,
-    flags : UInt16,
-    machine_type : UInt16,
-    max_packet_type : UInt8,
-    max_state_change : UInt8,
-    max_manipulate : UInt8,
-    simulation : UInt8,
-    unused : UInt16*,
-    kern_base : UInt64,
-    ps_loaded_module_list : UInt64,
-    debugger_data_list : UInt64
+  struct DBGKD_GET_VERSION64
+    property major_version : UInt16
+    property minor_version : UInt16
+    property protocol_version : UInt8
+    property kd_secondary_version : UInt8
+    property flags : UInt16
+    property machine_type : UInt16
+    property max_packet_type : UInt8
+    property max_state_change : UInt8
+    property max_manipulate : UInt8
+    property simulation : UInt8
+    property unused : UInt16*
+    property kern_base : UInt64
+    property ps_loaded_module_list : UInt64
+    property debugger_data_list : UInt64
+    def initialize(@major_version : UInt16, @minor_version : UInt16, @protocol_version : UInt8, @kd_secondary_version : UInt8, @flags : UInt16, @machine_type : UInt16, @max_packet_type : UInt8, @max_state_change : UInt8, @max_manipulate : UInt8, @simulation : UInt8, @unused : UInt16*, @kern_base : UInt64, @ps_loaded_module_list : UInt64, @debugger_data_list : UInt64)
+    end
+  end
 
   @[Extern]
-  record DBGKD_DEBUG_DATA_HEADER64,
-    list : Win32cr::System::Kernel::LIST_ENTRY64,
-    owner_tag : UInt32,
-    size : UInt32
+  struct DBGKD_DEBUG_DATA_HEADER64
+    property list : Win32cr::System::Kernel::LIST_ENTRY64
+    property owner_tag : UInt32
+    property size : UInt32
+    def initialize(@list : Win32cr::System::Kernel::LIST_ENTRY64, @owner_tag : UInt32, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record KDDEBUGGER_DATA64,
-    header : Win32cr::System::Diagnostics::Debug::DBGKD_DEBUG_DATA_HEADER64,
-    kern_base : UInt64,
-    breakpoint_with_status : UInt64,
-    saved_context : UInt64,
-    th_callback_stack : UInt16,
-    next_callback : UInt16,
-    frame_pointer : UInt16,
-    _bitfield : UInt16,
-    ki_call_user_mode : UInt64,
-    ke_user_callback_dispatcher : UInt64,
-    ps_loaded_module_list : UInt64,
-    ps_active_process_head : UInt64,
-    psp_cid_table : UInt64,
-    exp_system_resources_list : UInt64,
-    exp_paged_pool_descriptor : UInt64,
-    exp_number_of_paged_pools : UInt64,
-    ke_time_increment : UInt64,
-    ke_bug_check_callback_list_head : UInt64,
-    ki_bugcheck_data : UInt64,
-    iop_error_log_list_head : UInt64,
-    obp_root_directory_object : UInt64,
-    obp_type_object_type : UInt64,
-    mm_system_cache_start : UInt64,
-    mm_system_cache_end : UInt64,
-    mm_system_cache_ws : UInt64,
-    mm_pfn_database : UInt64,
-    mm_system_ptes_start : UInt64,
-    mm_system_ptes_end : UInt64,
-    mm_subsection_base : UInt64,
-    mm_number_of_paging_files : UInt64,
-    mm_lowest_physical_page : UInt64,
-    mm_highest_physical_page : UInt64,
-    mm_number_of_physical_pages : UInt64,
-    mm_maximum_non_paged_pool_in_bytes : UInt64,
-    mm_non_paged_system_start : UInt64,
-    mm_non_paged_pool_start : UInt64,
-    mm_non_paged_pool_end : UInt64,
-    mm_paged_pool_start : UInt64,
-    mm_paged_pool_end : UInt64,
-    mm_paged_pool_information : UInt64,
-    mm_page_size : UInt64,
-    mm_size_of_paged_pool_in_bytes : UInt64,
-    mm_total_commit_limit : UInt64,
-    mm_total_committed_pages : UInt64,
-    mm_shared_commit : UInt64,
-    mm_driver_commit : UInt64,
-    mm_process_commit : UInt64,
-    mm_paged_pool_commit : UInt64,
-    mm_extended_commit : UInt64,
-    mm_zeroed_page_list_head : UInt64,
-    mm_free_page_list_head : UInt64,
-    mm_standby_page_list_head : UInt64,
-    mm_modified_page_list_head : UInt64,
-    mm_modified_no_write_page_list_head : UInt64,
-    mm_available_pages : UInt64,
-    mm_resident_available_pages : UInt64,
-    pool_track_table : UInt64,
-    non_paged_pool_descriptor : UInt64,
-    mm_highest_user_address : UInt64,
-    mm_system_range_start : UInt64,
-    mm_user_probe_address : UInt64,
-    kd_print_circular_buffer : UInt64,
-    kd_print_circular_buffer_end : UInt64,
-    kd_print_write_pointer : UInt64,
-    kd_print_rollover_count : UInt64,
-    mm_loaded_user_image_list : UInt64,
-    nt_build_lab : UInt64,
-    ki_normal_system_call : UInt64,
-    ki_processor_block : UInt64,
-    mm_unloaded_drivers : UInt64,
-    mm_last_unloaded_driver : UInt64,
-    mm_triage_action_taken : UInt64,
-    mm_special_pool_tag : UInt64,
-    kernel_verifier : UInt64,
-    mm_verifier_data : UInt64,
-    mm_allocated_non_paged_pool : UInt64,
-    mm_peak_commitment : UInt64,
-    mm_total_commit_limit_maximum : UInt64,
-    cm_nt_csd_version : UInt64,
-    mm_physical_memory_block : UInt64,
-    mm_session_base : UInt64,
-    mm_session_size : UInt64,
-    mm_system_parent_table_page : UInt64,
-    mm_virtual_translation_base : UInt64,
-    offset_k_thread_next_processor : UInt16,
-    offset_k_thread_teb : UInt16,
-    offset_k_thread_kernel_stack : UInt16,
-    offset_k_thread_initial_stack : UInt16,
-    offset_k_thread_apc_process : UInt16,
-    offset_k_thread_state : UInt16,
-    offset_k_thread_b_store : UInt16,
-    offset_k_thread_b_store_limit : UInt16,
-    size_e_process : UInt16,
-    offset_eprocess_peb : UInt16,
-    offset_eprocess_parent_cid : UInt16,
-    offset_eprocess_directory_table_base : UInt16,
-    size_prcb : UInt16,
-    offset_prcb_dpc_routine : UInt16,
-    offset_prcb_current_thread : UInt16,
-    offset_prcb_mhz : UInt16,
-    offset_prcb_cpu_type : UInt16,
-    offset_prcb_vendor_string : UInt16,
-    offset_prcb_proc_state_context : UInt16,
-    offset_prcb_number : UInt16,
-    size_e_thread : UInt16,
-    l1tf_high_physical_bit_index : UInt8,
-    l1tf_swizzle_bit_index : UInt8,
-    padding0 : UInt32,
-    kd_print_circular_buffer_ptr : UInt64,
-    kd_print_buffer_size : UInt64,
-    ke_loader_block : UInt64,
-    size_pcr : UInt16,
-    offset_pcr_self_pcr : UInt16,
-    offset_pcr_current_prcb : UInt16,
-    offset_pcr_contained_prcb : UInt16,
-    offset_pcr_initial_b_store : UInt16,
-    offset_pcr_b_store_limit : UInt16,
-    offset_pcr_initial_stack : UInt16,
-    offset_pcr_stack_limit : UInt16,
-    offset_prcb_pcr_page : UInt16,
-    offset_prcb_proc_state_special_reg : UInt16,
-    gdt_r0_code : UInt16,
-    gdt_r0_data : UInt16,
-    gdt_r0_pcr : UInt16,
-    gdt_r3_code : UInt16,
-    gdt_r3_data : UInt16,
-    gdt_r3_teb : UInt16,
-    gdt_ldt : UInt16,
-    gdt_tss : UInt16,
-    gdt64_r3_cm_code : UInt16,
-    gdt64_r3_cm_teb : UInt16,
-    iop_num_triage_dump_data_blocks : UInt64,
-    iop_triage_dump_data_blocks : UInt64,
-    vf_crash_data_block : UInt64,
-    mm_bad_pages_detected : UInt64,
-    mm_zeroed_page_single_bit_errors_detected : UInt64,
-    etwp_debugger_data : UInt64,
-    offset_prcb_context : UInt16,
-    offset_prcb_max_breakpoints : UInt16,
-    offset_prcb_max_watchpoints : UInt16,
-    offset_k_thread_stack_limit : UInt32,
-    offset_k_thread_stack_base : UInt32,
-    offset_k_thread_queue_list_entry : UInt32,
-    offset_e_thread_irp_list : UInt32,
-    offset_prcb_idle_thread : UInt16,
-    offset_prcb_normal_dpc_state : UInt16,
-    offset_prcb_dpc_stack : UInt16,
-    offset_prcb_isr_stack : UInt16,
-    size_kdpc_stack_frame : UInt16,
-    offset_k_pri_queue_thread_list_head : UInt16,
-    offset_k_thread_wait_reason : UInt16,
-    padding1 : UInt16,
-    pte_base : UInt64,
-    retpoline_stub_function_table : UInt64,
-    retpoline_stub_function_table_size : UInt32,
-    retpoline_stub_offset : UInt32,
-    retpoline_stub_size : UInt32,
-    offset_e_process_mm_hot_patch_context : UInt16
+  struct KDDEBUGGER_DATA64
+    property header : Win32cr::System::Diagnostics::Debug::DBGKD_DEBUG_DATA_HEADER64
+    property kern_base : UInt64
+    property breakpoint_with_status : UInt64
+    property saved_context : UInt64
+    property th_callback_stack : UInt16
+    property next_callback : UInt16
+    property frame_pointer : UInt16
+    property _bitfield : UInt16
+    property ki_call_user_mode : UInt64
+    property ke_user_callback_dispatcher : UInt64
+    property ps_loaded_module_list : UInt64
+    property ps_active_process_head : UInt64
+    property psp_cid_table : UInt64
+    property exp_system_resources_list : UInt64
+    property exp_paged_pool_descriptor : UInt64
+    property exp_number_of_paged_pools : UInt64
+    property ke_time_increment : UInt64
+    property ke_bug_check_callback_list_head : UInt64
+    property ki_bugcheck_data : UInt64
+    property iop_error_log_list_head : UInt64
+    property obp_root_directory_object : UInt64
+    property obp_type_object_type : UInt64
+    property mm_system_cache_start : UInt64
+    property mm_system_cache_end : UInt64
+    property mm_system_cache_ws : UInt64
+    property mm_pfn_database : UInt64
+    property mm_system_ptes_start : UInt64
+    property mm_system_ptes_end : UInt64
+    property mm_subsection_base : UInt64
+    property mm_number_of_paging_files : UInt64
+    property mm_lowest_physical_page : UInt64
+    property mm_highest_physical_page : UInt64
+    property mm_number_of_physical_pages : UInt64
+    property mm_maximum_non_paged_pool_in_bytes : UInt64
+    property mm_non_paged_system_start : UInt64
+    property mm_non_paged_pool_start : UInt64
+    property mm_non_paged_pool_end : UInt64
+    property mm_paged_pool_start : UInt64
+    property mm_paged_pool_end : UInt64
+    property mm_paged_pool_information : UInt64
+    property mm_page_size : UInt64
+    property mm_size_of_paged_pool_in_bytes : UInt64
+    property mm_total_commit_limit : UInt64
+    property mm_total_committed_pages : UInt64
+    property mm_shared_commit : UInt64
+    property mm_driver_commit : UInt64
+    property mm_process_commit : UInt64
+    property mm_paged_pool_commit : UInt64
+    property mm_extended_commit : UInt64
+    property mm_zeroed_page_list_head : UInt64
+    property mm_free_page_list_head : UInt64
+    property mm_standby_page_list_head : UInt64
+    property mm_modified_page_list_head : UInt64
+    property mm_modified_no_write_page_list_head : UInt64
+    property mm_available_pages : UInt64
+    property mm_resident_available_pages : UInt64
+    property pool_track_table : UInt64
+    property non_paged_pool_descriptor : UInt64
+    property mm_highest_user_address : UInt64
+    property mm_system_range_start : UInt64
+    property mm_user_probe_address : UInt64
+    property kd_print_circular_buffer : UInt64
+    property kd_print_circular_buffer_end : UInt64
+    property kd_print_write_pointer : UInt64
+    property kd_print_rollover_count : UInt64
+    property mm_loaded_user_image_list : UInt64
+    property nt_build_lab : UInt64
+    property ki_normal_system_call : UInt64
+    property ki_processor_block : UInt64
+    property mm_unloaded_drivers : UInt64
+    property mm_last_unloaded_driver : UInt64
+    property mm_triage_action_taken : UInt64
+    property mm_special_pool_tag : UInt64
+    property kernel_verifier : UInt64
+    property mm_verifier_data : UInt64
+    property mm_allocated_non_paged_pool : UInt64
+    property mm_peak_commitment : UInt64
+    property mm_total_commit_limit_maximum : UInt64
+    property cm_nt_csd_version : UInt64
+    property mm_physical_memory_block : UInt64
+    property mm_session_base : UInt64
+    property mm_session_size : UInt64
+    property mm_system_parent_table_page : UInt64
+    property mm_virtual_translation_base : UInt64
+    property offset_k_thread_next_processor : UInt16
+    property offset_k_thread_teb : UInt16
+    property offset_k_thread_kernel_stack : UInt16
+    property offset_k_thread_initial_stack : UInt16
+    property offset_k_thread_apc_process : UInt16
+    property offset_k_thread_state : UInt16
+    property offset_k_thread_b_store : UInt16
+    property offset_k_thread_b_store_limit : UInt16
+    property size_e_process : UInt16
+    property offset_eprocess_peb : UInt16
+    property offset_eprocess_parent_cid : UInt16
+    property offset_eprocess_directory_table_base : UInt16
+    property size_prcb : UInt16
+    property offset_prcb_dpc_routine : UInt16
+    property offset_prcb_current_thread : UInt16
+    property offset_prcb_mhz : UInt16
+    property offset_prcb_cpu_type : UInt16
+    property offset_prcb_vendor_string : UInt16
+    property offset_prcb_proc_state_context : UInt16
+    property offset_prcb_number : UInt16
+    property size_e_thread : UInt16
+    property l1tf_high_physical_bit_index : UInt8
+    property l1tf_swizzle_bit_index : UInt8
+    property padding0 : UInt32
+    property kd_print_circular_buffer_ptr : UInt64
+    property kd_print_buffer_size : UInt64
+    property ke_loader_block : UInt64
+    property size_pcr : UInt16
+    property offset_pcr_self_pcr : UInt16
+    property offset_pcr_current_prcb : UInt16
+    property offset_pcr_contained_prcb : UInt16
+    property offset_pcr_initial_b_store : UInt16
+    property offset_pcr_b_store_limit : UInt16
+    property offset_pcr_initial_stack : UInt16
+    property offset_pcr_stack_limit : UInt16
+    property offset_prcb_pcr_page : UInt16
+    property offset_prcb_proc_state_special_reg : UInt16
+    property gdt_r0_code : UInt16
+    property gdt_r0_data : UInt16
+    property gdt_r0_pcr : UInt16
+    property gdt_r3_code : UInt16
+    property gdt_r3_data : UInt16
+    property gdt_r3_teb : UInt16
+    property gdt_ldt : UInt16
+    property gdt_tss : UInt16
+    property gdt64_r3_cm_code : UInt16
+    property gdt64_r3_cm_teb : UInt16
+    property iop_num_triage_dump_data_blocks : UInt64
+    property iop_triage_dump_data_blocks : UInt64
+    property vf_crash_data_block : UInt64
+    property mm_bad_pages_detected : UInt64
+    property mm_zeroed_page_single_bit_errors_detected : UInt64
+    property etwp_debugger_data : UInt64
+    property offset_prcb_context : UInt16
+    property offset_prcb_max_breakpoints : UInt16
+    property offset_prcb_max_watchpoints : UInt16
+    property offset_k_thread_stack_limit : UInt32
+    property offset_k_thread_stack_base : UInt32
+    property offset_k_thread_queue_list_entry : UInt32
+    property offset_e_thread_irp_list : UInt32
+    property offset_prcb_idle_thread : UInt16
+    property offset_prcb_normal_dpc_state : UInt16
+    property offset_prcb_dpc_stack : UInt16
+    property offset_prcb_isr_stack : UInt16
+    property size_kdpc_stack_frame : UInt16
+    property offset_k_pri_queue_thread_list_head : UInt16
+    property offset_k_thread_wait_reason : UInt16
+    property padding1 : UInt16
+    property pte_base : UInt64
+    property retpoline_stub_function_table : UInt64
+    property retpoline_stub_function_table_size : UInt32
+    property retpoline_stub_offset : UInt32
+    property retpoline_stub_size : UInt32
+    property offset_e_process_mm_hot_patch_context : UInt16
+    def initialize(@header : Win32cr::System::Diagnostics::Debug::DBGKD_DEBUG_DATA_HEADER64, @kern_base : UInt64, @breakpoint_with_status : UInt64, @saved_context : UInt64, @th_callback_stack : UInt16, @next_callback : UInt16, @frame_pointer : UInt16, @_bitfield : UInt16, @ki_call_user_mode : UInt64, @ke_user_callback_dispatcher : UInt64, @ps_loaded_module_list : UInt64, @ps_active_process_head : UInt64, @psp_cid_table : UInt64, @exp_system_resources_list : UInt64, @exp_paged_pool_descriptor : UInt64, @exp_number_of_paged_pools : UInt64, @ke_time_increment : UInt64, @ke_bug_check_callback_list_head : UInt64, @ki_bugcheck_data : UInt64, @iop_error_log_list_head : UInt64, @obp_root_directory_object : UInt64, @obp_type_object_type : UInt64, @mm_system_cache_start : UInt64, @mm_system_cache_end : UInt64, @mm_system_cache_ws : UInt64, @mm_pfn_database : UInt64, @mm_system_ptes_start : UInt64, @mm_system_ptes_end : UInt64, @mm_subsection_base : UInt64, @mm_number_of_paging_files : UInt64, @mm_lowest_physical_page : UInt64, @mm_highest_physical_page : UInt64, @mm_number_of_physical_pages : UInt64, @mm_maximum_non_paged_pool_in_bytes : UInt64, @mm_non_paged_system_start : UInt64, @mm_non_paged_pool_start : UInt64, @mm_non_paged_pool_end : UInt64, @mm_paged_pool_start : UInt64, @mm_paged_pool_end : UInt64, @mm_paged_pool_information : UInt64, @mm_page_size : UInt64, @mm_size_of_paged_pool_in_bytes : UInt64, @mm_total_commit_limit : UInt64, @mm_total_committed_pages : UInt64, @mm_shared_commit : UInt64, @mm_driver_commit : UInt64, @mm_process_commit : UInt64, @mm_paged_pool_commit : UInt64, @mm_extended_commit : UInt64, @mm_zeroed_page_list_head : UInt64, @mm_free_page_list_head : UInt64, @mm_standby_page_list_head : UInt64, @mm_modified_page_list_head : UInt64, @mm_modified_no_write_page_list_head : UInt64, @mm_available_pages : UInt64, @mm_resident_available_pages : UInt64, @pool_track_table : UInt64, @non_paged_pool_descriptor : UInt64, @mm_highest_user_address : UInt64, @mm_system_range_start : UInt64, @mm_user_probe_address : UInt64, @kd_print_circular_buffer : UInt64, @kd_print_circular_buffer_end : UInt64, @kd_print_write_pointer : UInt64, @kd_print_rollover_count : UInt64, @mm_loaded_user_image_list : UInt64, @nt_build_lab : UInt64, @ki_normal_system_call : UInt64, @ki_processor_block : UInt64, @mm_unloaded_drivers : UInt64, @mm_last_unloaded_driver : UInt64, @mm_triage_action_taken : UInt64, @mm_special_pool_tag : UInt64, @kernel_verifier : UInt64, @mm_verifier_data : UInt64, @mm_allocated_non_paged_pool : UInt64, @mm_peak_commitment : UInt64, @mm_total_commit_limit_maximum : UInt64, @cm_nt_csd_version : UInt64, @mm_physical_memory_block : UInt64, @mm_session_base : UInt64, @mm_session_size : UInt64, @mm_system_parent_table_page : UInt64, @mm_virtual_translation_base : UInt64, @offset_k_thread_next_processor : UInt16, @offset_k_thread_teb : UInt16, @offset_k_thread_kernel_stack : UInt16, @offset_k_thread_initial_stack : UInt16, @offset_k_thread_apc_process : UInt16, @offset_k_thread_state : UInt16, @offset_k_thread_b_store : UInt16, @offset_k_thread_b_store_limit : UInt16, @size_e_process : UInt16, @offset_eprocess_peb : UInt16, @offset_eprocess_parent_cid : UInt16, @offset_eprocess_directory_table_base : UInt16, @size_prcb : UInt16, @offset_prcb_dpc_routine : UInt16, @offset_prcb_current_thread : UInt16, @offset_prcb_mhz : UInt16, @offset_prcb_cpu_type : UInt16, @offset_prcb_vendor_string : UInt16, @offset_prcb_proc_state_context : UInt16, @offset_prcb_number : UInt16, @size_e_thread : UInt16, @l1tf_high_physical_bit_index : UInt8, @l1tf_swizzle_bit_index : UInt8, @padding0 : UInt32, @kd_print_circular_buffer_ptr : UInt64, @kd_print_buffer_size : UInt64, @ke_loader_block : UInt64, @size_pcr : UInt16, @offset_pcr_self_pcr : UInt16, @offset_pcr_current_prcb : UInt16, @offset_pcr_contained_prcb : UInt16, @offset_pcr_initial_b_store : UInt16, @offset_pcr_b_store_limit : UInt16, @offset_pcr_initial_stack : UInt16, @offset_pcr_stack_limit : UInt16, @offset_prcb_pcr_page : UInt16, @offset_prcb_proc_state_special_reg : UInt16, @gdt_r0_code : UInt16, @gdt_r0_data : UInt16, @gdt_r0_pcr : UInt16, @gdt_r3_code : UInt16, @gdt_r3_data : UInt16, @gdt_r3_teb : UInt16, @gdt_ldt : UInt16, @gdt_tss : UInt16, @gdt64_r3_cm_code : UInt16, @gdt64_r3_cm_teb : UInt16, @iop_num_triage_dump_data_blocks : UInt64, @iop_triage_dump_data_blocks : UInt64, @vf_crash_data_block : UInt64, @mm_bad_pages_detected : UInt64, @mm_zeroed_page_single_bit_errors_detected : UInt64, @etwp_debugger_data : UInt64, @offset_prcb_context : UInt16, @offset_prcb_max_breakpoints : UInt16, @offset_prcb_max_watchpoints : UInt16, @offset_k_thread_stack_limit : UInt32, @offset_k_thread_stack_base : UInt32, @offset_k_thread_queue_list_entry : UInt32, @offset_e_thread_irp_list : UInt32, @offset_prcb_idle_thread : UInt16, @offset_prcb_normal_dpc_state : UInt16, @offset_prcb_dpc_stack : UInt16, @offset_prcb_isr_stack : UInt16, @size_kdpc_stack_frame : UInt16, @offset_k_pri_queue_thread_list_head : UInt16, @offset_k_thread_wait_reason : UInt16, @padding1 : UInt16, @pte_base : UInt64, @retpoline_stub_function_table : UInt64, @retpoline_stub_function_table_size : UInt32, @retpoline_stub_offset : UInt32, @retpoline_stub_size : UInt32, @offset_e_process_mm_hot_patch_context : UInt16)
+    end
+  end
 
   @[Extern]
-  record FIELD_INFO,
-    fName : UInt8*,
-    printName : UInt8*,
-    size : UInt32,
-    fOptions : UInt32,
-    address : UInt64,
-    anonymous : Anonymous_e__Union_,
-    type_id : UInt32,
-    field_offset : UInt32,
-    buffer_size : UInt32,
-    bit_field : BitField_,
-    _bitfield : UInt32 do
+  struct FIELD_INFO
+    property fName : UInt8*
+    property printName : UInt8*
+    property size : UInt32
+    property fOptions : UInt32
+    property address : UInt64
+    property anonymous : Anonymous_e__Union_
+    property type_id : UInt32
+    property field_offset : UInt32
+    property buffer_size : UInt32
+    property bit_field : BitField_
+    property _bitfield : UInt32
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      fieldCallBack : Void*,
-      pBuffer : Void*
+    struct Anonymous_e__Union_
+    property fieldCallBack : Void*
+    property pBuffer : Void*
+    def initialize(@fieldCallBack : Void*, @pBuffer : Void*)
+    end
+    end
 
 
     # Nested Type BitField_
     @[Extern]
-    record BitField_,
-      position : UInt16,
-      size : UInt16
+    struct BitField_
+    property position : UInt16
+    property size : UInt16
+    def initialize(@position : UInt16, @size : UInt16)
+    end
+    end
 
+    def initialize(@fName : UInt8*, @printName : UInt8*, @size : UInt32, @fOptions : UInt32, @address : UInt64, @anonymous : Anonymous_e__Union_, @type_id : UInt32, @field_offset : UInt32, @buffer_size : UInt32, @bit_field : BitField_, @_bitfield : UInt32)
+    end
   end
 
   @[Extern]
-  record SYM_DUMP_PARAM,
-    size : UInt32,
-    sName : UInt8*,
-    options : UInt32,
-    addr : UInt64,
-    listLink : Win32cr::System::Diagnostics::Debug::FIELD_INFO*,
-    anonymous : Anonymous_e__Union_,
-    callback_routine : Win32cr::System::Diagnostics::Debug::PSYM_DUMP_FIELD_CALLBACK,
-    nFields : UInt32,
-    fields : Win32cr::System::Diagnostics::Debug::FIELD_INFO*,
-    mod_base : UInt64,
-    type_id : UInt32,
-    type_size : UInt32,
-    buffer_size : UInt32,
-    _bitfield : UInt32 do
+  struct SYM_DUMP_PARAM
+    property size : UInt32
+    property sName : UInt8*
+    property options : UInt32
+    property addr : UInt64
+    property listLink : Win32cr::System::Diagnostics::Debug::FIELD_INFO*
+    property anonymous : Anonymous_e__Union_
+    property callback_routine : Win32cr::System::Diagnostics::Debug::PSYM_DUMP_FIELD_CALLBACK
+    property nFields : UInt32
+    property fields : Win32cr::System::Diagnostics::Debug::FIELD_INFO*
+    property mod_base : UInt64
+    property type_id : UInt32
+    property type_size : UInt32
+    property buffer_size : UInt32
+    property _bitfield : UInt32
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      context : Void*,
-      pBuffer : Void*
+    struct Anonymous_e__Union_
+    property context : Void*
+    property pBuffer : Void*
+    def initialize(@context : Void*, @pBuffer : Void*)
+    end
+    end
 
+    def initialize(@size : UInt32, @sName : UInt8*, @options : UInt32, @addr : UInt64, @listLink : Win32cr::System::Diagnostics::Debug::FIELD_INFO*, @anonymous : Anonymous_e__Union_, @callback_routine : Win32cr::System::Diagnostics::Debug::PSYM_DUMP_FIELD_CALLBACK, @nFields : UInt32, @fields : Win32cr::System::Diagnostics::Debug::FIELD_INFO*, @mod_base : UInt64, @type_id : UInt32, @type_size : UInt32, @buffer_size : UInt32, @_bitfield : UInt32)
+    end
   end
 
   @[Extern]
-  record M128A,
-    low : UInt64,
-    high : Int64
+  struct M128A
+    property low : UInt64
+    property high : Int64
+    def initialize(@low : UInt64, @high : Int64)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record XSAVE_FORMAT,
-    control_word : UInt16,
-    status_word : UInt16,
-    tag_word : UInt8,
-    reserved1 : UInt8,
-    error_opcode : UInt16,
-    error_offset : UInt32,
-    error_selector : UInt16,
-    reserved2 : UInt16,
-    data_offset : UInt32,
-    data_selector : UInt16,
-    reserved3 : UInt16,
-    mx_csr : UInt32,
-    mx_csr_mask : UInt32,
-    float_registers : Win32cr::System::Diagnostics::Debug::M128A[8],
-    xmm_registers : Win32cr::System::Diagnostics::Debug::M128A[16],
-    reserved4 : UInt8[96]
+  struct XSAVE_FORMAT
+    property control_word : UInt16
+    property status_word : UInt16
+    property tag_word : UInt8
+    property reserved1 : UInt8
+    property error_opcode : UInt16
+    property error_offset : UInt32
+    property error_selector : UInt16
+    property reserved2 : UInt16
+    property data_offset : UInt32
+    property data_selector : UInt16
+    property reserved3 : UInt16
+    property mx_csr : UInt32
+    property mx_csr_mask : UInt32
+    property float_registers : Win32cr::System::Diagnostics::Debug::M128A[8]
+    property xmm_registers : Win32cr::System::Diagnostics::Debug::M128A[16]
+    property reserved4 : UInt8[96]
+    def initialize(@control_word : UInt16, @status_word : UInt16, @tag_word : UInt8, @reserved1 : UInt8, @error_opcode : UInt16, @error_offset : UInt32, @error_selector : UInt16, @reserved2 : UInt16, @data_offset : UInt32, @data_selector : UInt16, @reserved3 : UInt16, @mx_csr : UInt32, @mx_csr_mask : UInt32, @float_registers : Win32cr::System::Diagnostics::Debug::M128A[8], @xmm_registers : Win32cr::System::Diagnostics::Debug::M128A[16], @reserved4 : UInt8[96])
+    end
+  end
   {% end %}
 
   @[Extern]
-  record XSAVE_AREA_HEADER,
-    mask : UInt64,
-    compaction_mask : UInt64,
-    reserved2 : UInt64[6]
+  struct XSAVE_AREA_HEADER
+    property mask : UInt64
+    property compaction_mask : UInt64
+    property reserved2 : UInt64[6]
+    def initialize(@mask : UInt64, @compaction_mask : UInt64, @reserved2 : UInt64[6])
+    end
+  end
 
   @[Extern]
-  record XSAVE_AREA,
-    legacy_state : Win32cr::System::Diagnostics::Debug::XSAVE_FORMAT,
-    header : Win32cr::System::Diagnostics::Debug::XSAVE_AREA_HEADER
+  struct XSAVE_AREA
+    property legacy_state : Win32cr::System::Diagnostics::Debug::XSAVE_FORMAT
+    property header : Win32cr::System::Diagnostics::Debug::XSAVE_AREA_HEADER
+    def initialize(@legacy_state : Win32cr::System::Diagnostics::Debug::XSAVE_FORMAT, @header : Win32cr::System::Diagnostics::Debug::XSAVE_AREA_HEADER)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record XSTATE_CONTEXT,
-    mask : UInt64,
-    length : UInt32,
-    reserved1 : UInt32,
-    area : Win32cr::System::Diagnostics::Debug::XSAVE_AREA*,
-    buffer : Void*
+  struct XSTATE_CONTEXT
+    property mask : UInt64
+    property length : UInt32
+    property reserved1 : UInt32
+    property area : Win32cr::System::Diagnostics::Debug::XSAVE_AREA*
+    property buffer : Void*
+    def initialize(@mask : UInt64, @length : UInt32, @reserved1 : UInt32, @area : Win32cr::System::Diagnostics::Debug::XSAVE_AREA*, @buffer : Void*)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) %}
   @[Extern]
-  record CONTEXT,
-    p1_home : UInt64,
-    p2_home : UInt64,
-    p3_home : UInt64,
-    p4_home : UInt64,
-    p5_home : UInt64,
-    p6_home : UInt64,
-    context_flags : UInt32,
-    mx_csr : UInt32,
-    seg_cs : UInt16,
-    seg_ds : UInt16,
-    seg_es : UInt16,
-    seg_fs : UInt16,
-    seg_gs : UInt16,
-    seg_ss : UInt16,
-    e_flags : UInt32,
-    dr0 : UInt64,
-    dr1 : UInt64,
-    dr2 : UInt64,
-    dr3 : UInt64,
-    dr6 : UInt64,
-    dr7 : UInt64,
-    rax : UInt64,
-    rcx : UInt64,
-    rdx : UInt64,
-    rbx : UInt64,
-    rsp : UInt64,
-    rbp : UInt64,
-    rsi : UInt64,
-    rdi : UInt64,
-    r8 : UInt64,
-    r9 : UInt64,
-    r10 : UInt64,
-    r11 : UInt64,
-    r12 : UInt64,
-    r13 : UInt64,
-    r14 : UInt64,
-    r15 : UInt64,
-    rip : UInt64,
-    anonymous : Anonymous_e__Union_,
-    vector_register : Win32cr::System::Diagnostics::Debug::M128A[26],
-    vector_control : UInt64,
-    debug_control : UInt64,
-    last_branch_to_rip : UInt64,
-    last_branch_from_rip : UInt64,
-    last_exception_to_rip : UInt64,
-    last_exception_from_rip : UInt64 do
+  struct CONTEXT
+    property p1_home : UInt64
+    property p2_home : UInt64
+    property p3_home : UInt64
+    property p4_home : UInt64
+    property p5_home : UInt64
+    property p6_home : UInt64
+    property context_flags : UInt32
+    property mx_csr : UInt32
+    property seg_cs : UInt16
+    property seg_ds : UInt16
+    property seg_es : UInt16
+    property seg_fs : UInt16
+    property seg_gs : UInt16
+    property seg_ss : UInt16
+    property e_flags : UInt32
+    property dr0 : UInt64
+    property dr1 : UInt64
+    property dr2 : UInt64
+    property dr3 : UInt64
+    property dr6 : UInt64
+    property dr7 : UInt64
+    property rax : UInt64
+    property rcx : UInt64
+    property rdx : UInt64
+    property rbx : UInt64
+    property rsp : UInt64
+    property rbp : UInt64
+    property rsi : UInt64
+    property rdi : UInt64
+    property r8 : UInt64
+    property r9 : UInt64
+    property r10 : UInt64
+    property r11 : UInt64
+    property r12 : UInt64
+    property r13 : UInt64
+    property r14 : UInt64
+    property r15 : UInt64
+    property rip : UInt64
+    property anonymous : Anonymous_e__Union_
+    property vector_register : Win32cr::System::Diagnostics::Debug::M128A[26]
+    property vector_control : UInt64
+    property debug_control : UInt64
+    property last_branch_to_rip : UInt64
+    property last_branch_from_rip : UInt64
+    property last_exception_to_rip : UInt64
+    property last_exception_from_rip : UInt64
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      flt_save : Win32cr::System::Diagnostics::Debug::XSAVE_FORMAT,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property flt_save : Win32cr::System::Diagnostics::Debug::XSAVE_FORMAT
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        header : Win32cr::System::Diagnostics::Debug::M128A[2],
-        legacy : Win32cr::System::Diagnostics::Debug::M128A[8],
-        xmm0 : Win32cr::System::Diagnostics::Debug::M128A,
-        xmm1 : Win32cr::System::Diagnostics::Debug::M128A,
-        xmm2 : Win32cr::System::Diagnostics::Debug::M128A,
-        xmm3 : Win32cr::System::Diagnostics::Debug::M128A,
-        xmm4 : Win32cr::System::Diagnostics::Debug::M128A,
-        xmm5 : Win32cr::System::Diagnostics::Debug::M128A,
-        xmm6 : Win32cr::System::Diagnostics::Debug::M128A,
-        xmm7 : Win32cr::System::Diagnostics::Debug::M128A,
-        xmm8 : Win32cr::System::Diagnostics::Debug::M128A,
-        xmm9 : Win32cr::System::Diagnostics::Debug::M128A,
-        xmm10 : Win32cr::System::Diagnostics::Debug::M128A,
-        xmm11 : Win32cr::System::Diagnostics::Debug::M128A,
-        xmm12 : Win32cr::System::Diagnostics::Debug::M128A,
-        xmm13 : Win32cr::System::Diagnostics::Debug::M128A,
-        xmm14 : Win32cr::System::Diagnostics::Debug::M128A,
-        xmm15 : Win32cr::System::Diagnostics::Debug::M128A
+      struct Anonymous_e__Struct_
+    property header : Win32cr::System::Diagnostics::Debug::M128A[2]
+    property legacy : Win32cr::System::Diagnostics::Debug::M128A[8]
+    property xmm0 : Win32cr::System::Diagnostics::Debug::M128A
+    property xmm1 : Win32cr::System::Diagnostics::Debug::M128A
+    property xmm2 : Win32cr::System::Diagnostics::Debug::M128A
+    property xmm3 : Win32cr::System::Diagnostics::Debug::M128A
+    property xmm4 : Win32cr::System::Diagnostics::Debug::M128A
+    property xmm5 : Win32cr::System::Diagnostics::Debug::M128A
+    property xmm6 : Win32cr::System::Diagnostics::Debug::M128A
+    property xmm7 : Win32cr::System::Diagnostics::Debug::M128A
+    property xmm8 : Win32cr::System::Diagnostics::Debug::M128A
+    property xmm9 : Win32cr::System::Diagnostics::Debug::M128A
+    property xmm10 : Win32cr::System::Diagnostics::Debug::M128A
+    property xmm11 : Win32cr::System::Diagnostics::Debug::M128A
+    property xmm12 : Win32cr::System::Diagnostics::Debug::M128A
+    property xmm13 : Win32cr::System::Diagnostics::Debug::M128A
+    property xmm14 : Win32cr::System::Diagnostics::Debug::M128A
+    property xmm15 : Win32cr::System::Diagnostics::Debug::M128A
+    def initialize(@header : Win32cr::System::Diagnostics::Debug::M128A[2], @legacy : Win32cr::System::Diagnostics::Debug::M128A[8], @xmm0 : Win32cr::System::Diagnostics::Debug::M128A, @xmm1 : Win32cr::System::Diagnostics::Debug::M128A, @xmm2 : Win32cr::System::Diagnostics::Debug::M128A, @xmm3 : Win32cr::System::Diagnostics::Debug::M128A, @xmm4 : Win32cr::System::Diagnostics::Debug::M128A, @xmm5 : Win32cr::System::Diagnostics::Debug::M128A, @xmm6 : Win32cr::System::Diagnostics::Debug::M128A, @xmm7 : Win32cr::System::Diagnostics::Debug::M128A, @xmm8 : Win32cr::System::Diagnostics::Debug::M128A, @xmm9 : Win32cr::System::Diagnostics::Debug::M128A, @xmm10 : Win32cr::System::Diagnostics::Debug::M128A, @xmm11 : Win32cr::System::Diagnostics::Debug::M128A, @xmm12 : Win32cr::System::Diagnostics::Debug::M128A, @xmm13 : Win32cr::System::Diagnostics::Debug::M128A, @xmm14 : Win32cr::System::Diagnostics::Debug::M128A, @xmm15 : Win32cr::System::Diagnostics::Debug::M128A)
+    end
+      end
 
+    def initialize(@flt_save : Win32cr::System::Diagnostics::Debug::XSAVE_FORMAT, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@p1_home : UInt64, @p2_home : UInt64, @p3_home : UInt64, @p4_home : UInt64, @p5_home : UInt64, @p6_home : UInt64, @context_flags : UInt32, @mx_csr : UInt32, @seg_cs : UInt16, @seg_ds : UInt16, @seg_es : UInt16, @seg_fs : UInt16, @seg_gs : UInt16, @seg_ss : UInt16, @e_flags : UInt32, @dr0 : UInt64, @dr1 : UInt64, @dr2 : UInt64, @dr3 : UInt64, @dr6 : UInt64, @dr7 : UInt64, @rax : UInt64, @rcx : UInt64, @rdx : UInt64, @rbx : UInt64, @rsp : UInt64, @rbp : UInt64, @rsi : UInt64, @rdi : UInt64, @r8 : UInt64, @r9 : UInt64, @r10 : UInt64, @r11 : UInt64, @r12 : UInt64, @r13 : UInt64, @r14 : UInt64, @r15 : UInt64, @rip : UInt64, @anonymous : Anonymous_e__Union_, @vector_register : Win32cr::System::Diagnostics::Debug::M128A[26], @vector_control : UInt64, @debug_control : UInt64, @last_branch_to_rip : UInt64, @last_branch_from_rip : UInt64, @last_exception_to_rip : UInt64, @last_exception_from_rip : UInt64)
+    end
   end
   {% end %}
 
   {% if flag?(:x86_64) %}
   @[Extern]
-  record DISPATCHER_CONTEXT,
-    control_pc : UInt64,
-    image_base : UInt64,
-    function_entry : Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY*,
-    establisher_frame : UInt64,
-    target_ip : UInt64,
-    context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*,
-    language_handler : Win32cr::System::Kernel::EXCEPTION_ROUTINE,
-    handler_data : Void*,
-    history_table : Win32cr::System::Diagnostics::Debug::UNWIND_HISTORY_TABLE*,
-    scope_index : UInt32,
-    fill0 : UInt32
+  struct DISPATCHER_CONTEXT
+    property control_pc : UInt64
+    property image_base : UInt64
+    property function_entry : Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY*
+    property establisher_frame : UInt64
+    property target_ip : UInt64
+    property context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*
+    property language_handler : Win32cr::System::Kernel::EXCEPTION_ROUTINE
+    property handler_data : Void*
+    property history_table : Win32cr::System::Diagnostics::Debug::UNWIND_HISTORY_TABLE*
+    property scope_index : UInt32
+    property fill0 : UInt32
+    def initialize(@control_pc : UInt64, @image_base : UInt64, @function_entry : Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY*, @establisher_frame : UInt64, @target_ip : UInt64, @context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*, @language_handler : Win32cr::System::Kernel::EXCEPTION_ROUTINE, @handler_data : Void*, @history_table : Win32cr::System::Diagnostics::Debug::UNWIND_HISTORY_TABLE*, @scope_index : UInt32, @fill0 : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) %}
   @[Extern]
-  record KNONVOLATILE_CONTEXT_POINTERS,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_ do
+  struct KNONVOLATILE_CONTEXT_POINTERS
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      integer_context : UInt64*[16],
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous2_e__Union_
+    property integer_context : UInt64*[16]
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        rax : UInt64*,
-        rcx : UInt64*,
-        rdx : UInt64*,
-        rbx : UInt64*,
-        rsp : UInt64*,
-        rbp : UInt64*,
-        rsi : UInt64*,
-        rdi : UInt64*,
-        r8 : UInt64*,
-        r9 : UInt64*,
-        r10 : UInt64*,
-        r11 : UInt64*,
-        r12 : UInt64*,
-        r13 : UInt64*,
-        r14 : UInt64*,
-        r15 : UInt64*
+      struct Anonymous_e__Struct_
+    property rax : UInt64*
+    property rcx : UInt64*
+    property rdx : UInt64*
+    property rbx : UInt64*
+    property rsp : UInt64*
+    property rbp : UInt64*
+    property rsi : UInt64*
+    property rdi : UInt64*
+    property r8 : UInt64*
+    property r9 : UInt64*
+    property r10 : UInt64*
+    property r11 : UInt64*
+    property r12 : UInt64*
+    property r13 : UInt64*
+    property r14 : UInt64*
+    property r15 : UInt64*
+    def initialize(@rax : UInt64*, @rcx : UInt64*, @rdx : UInt64*, @rbx : UInt64*, @rsp : UInt64*, @rbp : UInt64*, @rsi : UInt64*, @rdi : UInt64*, @r8 : UInt64*, @r9 : UInt64*, @r10 : UInt64*, @r11 : UInt64*, @r12 : UInt64*, @r13 : UInt64*, @r14 : UInt64*, @r15 : UInt64*)
+    end
+      end
 
+    def initialize(@integer_context : UInt64*[16], @anonymous : Anonymous_e__Struct_)
+    end
     end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      floating_context : Win32cr::System::Diagnostics::Debug::M128A*[16],
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous1_e__Union_
+    property floating_context : Win32cr::System::Diagnostics::Debug::M128A*[16]
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        xmm0 : Win32cr::System::Diagnostics::Debug::M128A*,
-        xmm1 : Win32cr::System::Diagnostics::Debug::M128A*,
-        xmm2 : Win32cr::System::Diagnostics::Debug::M128A*,
-        xmm3 : Win32cr::System::Diagnostics::Debug::M128A*,
-        xmm4 : Win32cr::System::Diagnostics::Debug::M128A*,
-        xmm5 : Win32cr::System::Diagnostics::Debug::M128A*,
-        xmm6 : Win32cr::System::Diagnostics::Debug::M128A*,
-        xmm7 : Win32cr::System::Diagnostics::Debug::M128A*,
-        xmm8 : Win32cr::System::Diagnostics::Debug::M128A*,
-        xmm9 : Win32cr::System::Diagnostics::Debug::M128A*,
-        xmm10 : Win32cr::System::Diagnostics::Debug::M128A*,
-        xmm11 : Win32cr::System::Diagnostics::Debug::M128A*,
-        xmm12 : Win32cr::System::Diagnostics::Debug::M128A*,
-        xmm13 : Win32cr::System::Diagnostics::Debug::M128A*,
-        xmm14 : Win32cr::System::Diagnostics::Debug::M128A*,
-        xmm15 : Win32cr::System::Diagnostics::Debug::M128A*
+      struct Anonymous_e__Struct_
+    property xmm0 : Win32cr::System::Diagnostics::Debug::M128A*
+    property xmm1 : Win32cr::System::Diagnostics::Debug::M128A*
+    property xmm2 : Win32cr::System::Diagnostics::Debug::M128A*
+    property xmm3 : Win32cr::System::Diagnostics::Debug::M128A*
+    property xmm4 : Win32cr::System::Diagnostics::Debug::M128A*
+    property xmm5 : Win32cr::System::Diagnostics::Debug::M128A*
+    property xmm6 : Win32cr::System::Diagnostics::Debug::M128A*
+    property xmm7 : Win32cr::System::Diagnostics::Debug::M128A*
+    property xmm8 : Win32cr::System::Diagnostics::Debug::M128A*
+    property xmm9 : Win32cr::System::Diagnostics::Debug::M128A*
+    property xmm10 : Win32cr::System::Diagnostics::Debug::M128A*
+    property xmm11 : Win32cr::System::Diagnostics::Debug::M128A*
+    property xmm12 : Win32cr::System::Diagnostics::Debug::M128A*
+    property xmm13 : Win32cr::System::Diagnostics::Debug::M128A*
+    property xmm14 : Win32cr::System::Diagnostics::Debug::M128A*
+    property xmm15 : Win32cr::System::Diagnostics::Debug::M128A*
+    def initialize(@xmm0 : Win32cr::System::Diagnostics::Debug::M128A*, @xmm1 : Win32cr::System::Diagnostics::Debug::M128A*, @xmm2 : Win32cr::System::Diagnostics::Debug::M128A*, @xmm3 : Win32cr::System::Diagnostics::Debug::M128A*, @xmm4 : Win32cr::System::Diagnostics::Debug::M128A*, @xmm5 : Win32cr::System::Diagnostics::Debug::M128A*, @xmm6 : Win32cr::System::Diagnostics::Debug::M128A*, @xmm7 : Win32cr::System::Diagnostics::Debug::M128A*, @xmm8 : Win32cr::System::Diagnostics::Debug::M128A*, @xmm9 : Win32cr::System::Diagnostics::Debug::M128A*, @xmm10 : Win32cr::System::Diagnostics::Debug::M128A*, @xmm11 : Win32cr::System::Diagnostics::Debug::M128A*, @xmm12 : Win32cr::System::Diagnostics::Debug::M128A*, @xmm13 : Win32cr::System::Diagnostics::Debug::M128A*, @xmm14 : Win32cr::System::Diagnostics::Debug::M128A*, @xmm15 : Win32cr::System::Diagnostics::Debug::M128A*)
+    end
+      end
 
+    def initialize(@floating_context : Win32cr::System::Diagnostics::Debug::M128A*[16], @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_)
+    end
   end
   {% end %}
 
   @[Extern(union: true)]
-  record ARM64_NT_NEON128,
-    anonymous : Anonymous_e__Struct_,
-    d : Float64[2],
-    s : Float32[4],
-    h : UInt16[8],
-    b : UInt8[16] do
+  struct ARM64_NT_NEON128
+    property anonymous : Anonymous_e__Struct_
+    property d : Float64[2]
+    property s : Float32[4]
+    property h : UInt16[8]
+    property b : UInt8[16]
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      low : UInt64,
-      high : Int64
+    struct Anonymous_e__Struct_
+    property low : UInt64
+    property high : Int64
+    def initialize(@low : UInt64, @high : Int64)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @d : Float64[2], @s : Float32[4], @h : UInt16[8], @b : UInt8[16])
+    end
   end
 
   {% if flag?(:i386) || flag?(:x86_64) %}
   @[Extern]
-  record ARM64_NT_CONTEXT,
-    context_flags : UInt32,
-    cpsr : UInt32,
-    anonymous : Anonymous_e__Union_,
-    sp : UInt64,
-    pc : UInt64,
-    v : Win32cr::System::Diagnostics::Debug::ARM64_NT_NEON128[32],
-    fpcr : UInt32,
-    fpsr : UInt32,
-    bcr : UInt32[8],
-    bvr : UInt64[8],
-    wcr : UInt32[2],
-    wvr : UInt64[2] do
+  struct ARM64_NT_CONTEXT
+    property context_flags : UInt32
+    property cpsr : UInt32
+    property anonymous : Anonymous_e__Union_
+    property sp : UInt64
+    property pc : UInt64
+    property v : Win32cr::System::Diagnostics::Debug::ARM64_NT_NEON128[32]
+    property fpcr : UInt32
+    property fpsr : UInt32
+    property bcr : UInt32[8]
+    property bvr : UInt64[8]
+    property wcr : UInt32[2]
+    property wvr : UInt64[2]
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      x : UInt64[31] do
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property x : UInt64[31]
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        x0 : UInt64,
-        x1 : UInt64,
-        x2 : UInt64,
-        x3 : UInt64,
-        x4 : UInt64,
-        x5 : UInt64,
-        x6 : UInt64,
-        x7 : UInt64,
-        x8 : UInt64,
-        x9 : UInt64,
-        x10 : UInt64,
-        x11 : UInt64,
-        x12 : UInt64,
-        x13 : UInt64,
-        x14 : UInt64,
-        x15 : UInt64,
-        x16 : UInt64,
-        x17 : UInt64,
-        x18 : UInt64,
-        x19 : UInt64,
-        x20 : UInt64,
-        x21 : UInt64,
-        x22 : UInt64,
-        x23 : UInt64,
-        x24 : UInt64,
-        x25 : UInt64,
-        x26 : UInt64,
-        x27 : UInt64,
-        x28 : UInt64,
-        fp : UInt64,
-        lr : UInt64
+      struct Anonymous_e__Struct_
+    property x0 : UInt64
+    property x1 : UInt64
+    property x2 : UInt64
+    property x3 : UInt64
+    property x4 : UInt64
+    property x5 : UInt64
+    property x6 : UInt64
+    property x7 : UInt64
+    property x8 : UInt64
+    property x9 : UInt64
+    property x10 : UInt64
+    property x11 : UInt64
+    property x12 : UInt64
+    property x13 : UInt64
+    property x14 : UInt64
+    property x15 : UInt64
+    property x16 : UInt64
+    property x17 : UInt64
+    property x18 : UInt64
+    property x19 : UInt64
+    property x20 : UInt64
+    property x21 : UInt64
+    property x22 : UInt64
+    property x23 : UInt64
+    property x24 : UInt64
+    property x25 : UInt64
+    property x26 : UInt64
+    property x27 : UInt64
+    property x28 : UInt64
+    property fp : UInt64
+    property lr : UInt64
+    def initialize(@x0 : UInt64, @x1 : UInt64, @x2 : UInt64, @x3 : UInt64, @x4 : UInt64, @x5 : UInt64, @x6 : UInt64, @x7 : UInt64, @x8 : UInt64, @x9 : UInt64, @x10 : UInt64, @x11 : UInt64, @x12 : UInt64, @x13 : UInt64, @x14 : UInt64, @x15 : UInt64, @x16 : UInt64, @x17 : UInt64, @x18 : UInt64, @x19 : UInt64, @x20 : UInt64, @x21 : UInt64, @x22 : UInt64, @x23 : UInt64, @x24 : UInt64, @x25 : UInt64, @x26 : UInt64, @x27 : UInt64, @x28 : UInt64, @fp : UInt64, @lr : UInt64)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @x : UInt64[31])
+    end
     end
 
+    def initialize(@context_flags : UInt32, @cpsr : UInt32, @anonymous : Anonymous_e__Union_, @sp : UInt64, @pc : UInt64, @v : Win32cr::System::Diagnostics::Debug::ARM64_NT_NEON128[32], @fpcr : UInt32, @fpsr : UInt32, @bcr : UInt32[8], @bvr : UInt64[8], @wcr : UInt32[2], @wvr : UInt64[2])
+    end
   end
   {% end %}
 
   @[Extern]
-  record LDT_ENTRY,
-    limit_low : UInt16,
-    base_low : UInt16,
-    high_word : HighWord_e__Union_ do
+  struct LDT_ENTRY
+    property limit_low : UInt16
+    property base_low : UInt16
+    property high_word : HighWord_e__Union_
 
     # Nested Type HighWord_e__Union_
     @[Extern(union: true)]
-    record HighWord_e__Union_,
-      bytes : Bytes_e__Struct_,
-      bits : Bits_e__Struct_ do
+    struct HighWord_e__Union_
+    property bytes : Bytes_e__Struct_
+    property bits : Bits_e__Struct_
 
       # Nested Type Bytes_e__Struct_
       @[Extern]
-      record Bytes_e__Struct_,
-        base_mid : UInt8,
-        flags1 : UInt8,
-        flags2 : UInt8,
-        base_hi : UInt8
+      struct Bytes_e__Struct_
+    property base_mid : UInt8
+    property flags1 : UInt8
+    property flags2 : UInt8
+    property base_hi : UInt8
+    def initialize(@base_mid : UInt8, @flags1 : UInt8, @flags2 : UInt8, @base_hi : UInt8)
+    end
+      end
 
 
       # Nested Type Bits_e__Struct_
       @[Extern]
-      record Bits_e__Struct_,
-        _bitfield : UInt32
+      struct Bits_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@bytes : Bytes_e__Struct_, @bits : Bits_e__Struct_)
+    end
     end
 
+    def initialize(@limit_low : UInt16, @base_low : UInt16, @high_word : HighWord_e__Union_)
+    end
   end
 
   @[Extern]
-  record WOW64_FLOATING_SAVE_AREA,
-    control_word : UInt32,
-    status_word : UInt32,
-    tag_word : UInt32,
-    error_offset : UInt32,
-    error_selector : UInt32,
-    data_offset : UInt32,
-    data_selector : UInt32,
-    register_area : UInt8[80],
-    cr0_npx_state : UInt32
+  struct WOW64_FLOATING_SAVE_AREA
+    property control_word : UInt32
+    property status_word : UInt32
+    property tag_word : UInt32
+    property error_offset : UInt32
+    property error_selector : UInt32
+    property data_offset : UInt32
+    property data_selector : UInt32
+    property register_area : UInt8[80]
+    property cr0_npx_state : UInt32
+    def initialize(@control_word : UInt32, @status_word : UInt32, @tag_word : UInt32, @error_offset : UInt32, @error_selector : UInt32, @data_offset : UInt32, @data_selector : UInt32, @register_area : UInt8[80], @cr0_npx_state : UInt32)
+    end
+  end
 
   @[Extern]
-  record WOW64_CONTEXT,
-    context_flags : UInt32,
-    dr0 : UInt32,
-    dr1 : UInt32,
-    dr2 : UInt32,
-    dr3 : UInt32,
-    dr6 : UInt32,
-    dr7 : UInt32,
-    float_save : Win32cr::System::Diagnostics::Debug::WOW64_FLOATING_SAVE_AREA,
-    seg_gs : UInt32,
-    seg_fs : UInt32,
-    seg_es : UInt32,
-    seg_ds : UInt32,
-    edi : UInt32,
-    esi : UInt32,
-    ebx : UInt32,
-    edx : UInt32,
-    ecx : UInt32,
-    eax : UInt32,
-    ebp : UInt32,
-    eip : UInt32,
-    seg_cs : UInt32,
-    e_flags : UInt32,
-    esp : UInt32,
-    seg_ss : UInt32,
-    extended_registers : UInt8[512]
+  struct WOW64_CONTEXT
+    property context_flags : UInt32
+    property dr0 : UInt32
+    property dr1 : UInt32
+    property dr2 : UInt32
+    property dr3 : UInt32
+    property dr6 : UInt32
+    property dr7 : UInt32
+    property float_save : Win32cr::System::Diagnostics::Debug::WOW64_FLOATING_SAVE_AREA
+    property seg_gs : UInt32
+    property seg_fs : UInt32
+    property seg_es : UInt32
+    property seg_ds : UInt32
+    property edi : UInt32
+    property esi : UInt32
+    property ebx : UInt32
+    property edx : UInt32
+    property ecx : UInt32
+    property eax : UInt32
+    property ebp : UInt32
+    property eip : UInt32
+    property seg_cs : UInt32
+    property e_flags : UInt32
+    property esp : UInt32
+    property seg_ss : UInt32
+    property extended_registers : UInt8[512]
+    def initialize(@context_flags : UInt32, @dr0 : UInt32, @dr1 : UInt32, @dr2 : UInt32, @dr3 : UInt32, @dr6 : UInt32, @dr7 : UInt32, @float_save : Win32cr::System::Diagnostics::Debug::WOW64_FLOATING_SAVE_AREA, @seg_gs : UInt32, @seg_fs : UInt32, @seg_es : UInt32, @seg_ds : UInt32, @edi : UInt32, @esi : UInt32, @ebx : UInt32, @edx : UInt32, @ecx : UInt32, @eax : UInt32, @ebp : UInt32, @eip : UInt32, @seg_cs : UInt32, @e_flags : UInt32, @esp : UInt32, @seg_ss : UInt32, @extended_registers : UInt8[512])
+    end
+  end
 
   @[Extern]
-  record WOW64_LDT_ENTRY,
-    limit_low : UInt16,
-    base_low : UInt16,
-    high_word : HighWord_e__Union_ do
+  struct WOW64_LDT_ENTRY
+    property limit_low : UInt16
+    property base_low : UInt16
+    property high_word : HighWord_e__Union_
 
     # Nested Type HighWord_e__Union_
     @[Extern(union: true)]
-    record HighWord_e__Union_,
-      bytes : Bytes_e__Struct_,
-      bits : Bits_e__Struct_ do
+    struct HighWord_e__Union_
+    property bytes : Bytes_e__Struct_
+    property bits : Bits_e__Struct_
 
       # Nested Type Bytes_e__Struct_
       @[Extern]
-      record Bytes_e__Struct_,
-        base_mid : UInt8,
-        flags1 : UInt8,
-        flags2 : UInt8,
-        base_hi : UInt8
+      struct Bytes_e__Struct_
+    property base_mid : UInt8
+    property flags1 : UInt8
+    property flags2 : UInt8
+    property base_hi : UInt8
+    def initialize(@base_mid : UInt8, @flags1 : UInt8, @flags2 : UInt8, @base_hi : UInt8)
+    end
+      end
 
 
       # Nested Type Bits_e__Struct_
       @[Extern]
-      record Bits_e__Struct_,
-        _bitfield : UInt32
+      struct Bits_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@bytes : Bytes_e__Struct_, @bits : Bits_e__Struct_)
+    end
     end
 
+    def initialize(@limit_low : UInt16, @base_low : UInt16, @high_word : HighWord_e__Union_)
+    end
   end
 
   @[Extern]
-  record WOW64_DESCRIPTOR_TABLE_ENTRY,
-    selector : UInt32,
-    descriptor : Win32cr::System::Diagnostics::Debug::WOW64_LDT_ENTRY
+  struct WOW64_DESCRIPTOR_TABLE_ENTRY
+    property selector : UInt32
+    property descriptor : Win32cr::System::Diagnostics::Debug::WOW64_LDT_ENTRY
+    def initialize(@selector : UInt32, @descriptor : Win32cr::System::Diagnostics::Debug::WOW64_LDT_ENTRY)
+    end
+  end
 
   @[Extern]
-  record EXCEPTION_RECORD,
-    exception_code : Win32cr::Foundation::NTSTATUS,
-    exception_flags : UInt32,
-    exception_record : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD*,
-    exception_address : Void*,
-    number_parameters : UInt32,
-    exception_information : LibC::UIntPtrT[15]
+  struct EXCEPTION_RECORD
+    property exception_code : Win32cr::Foundation::NTSTATUS
+    property exception_flags : UInt32
+    property exception_record : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD*
+    property exception_address : Void*
+    property number_parameters : UInt32
+    property exception_information : LibC::UIntPtrT[15]
+    def initialize(@exception_code : Win32cr::Foundation::NTSTATUS, @exception_flags : UInt32, @exception_record : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD*, @exception_address : Void*, @number_parameters : UInt32, @exception_information : LibC::UIntPtrT[15])
+    end
+  end
 
   @[Extern]
-  record EXCEPTION_RECORD32,
-    exception_code : Win32cr::Foundation::NTSTATUS,
-    exception_flags : UInt32,
-    exception_record : UInt32,
-    exception_address : UInt32,
-    number_parameters : UInt32,
-    exception_information : UInt32[15]
+  struct EXCEPTION_RECORD32
+    property exception_code : Win32cr::Foundation::NTSTATUS
+    property exception_flags : UInt32
+    property exception_record : UInt32
+    property exception_address : UInt32
+    property number_parameters : UInt32
+    property exception_information : UInt32[15]
+    def initialize(@exception_code : Win32cr::Foundation::NTSTATUS, @exception_flags : UInt32, @exception_record : UInt32, @exception_address : UInt32, @number_parameters : UInt32, @exception_information : UInt32[15])
+    end
+  end
 
   @[Extern]
-  record EXCEPTION_RECORD64,
-    exception_code : Win32cr::Foundation::NTSTATUS,
-    exception_flags : UInt32,
-    exception_record : UInt64,
-    exception_address : UInt64,
-    number_parameters : UInt32,
-    __unused_alignment : UInt32,
-    exception_information : UInt64[15]
+  struct EXCEPTION_RECORD64
+    property exception_code : Win32cr::Foundation::NTSTATUS
+    property exception_flags : UInt32
+    property exception_record : UInt64
+    property exception_address : UInt64
+    property number_parameters : UInt32
+    property __unused_alignment : UInt32
+    property exception_information : UInt64[15]
+    def initialize(@exception_code : Win32cr::Foundation::NTSTATUS, @exception_flags : UInt32, @exception_record : UInt64, @exception_address : UInt64, @number_parameters : UInt32, @__unused_alignment : UInt32, @exception_information : UInt64[15])
+    end
+  end
 
   @[Extern]
-  record EXCEPTION_POINTERS,
-    exception_record : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD*,
-    context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*
+  struct EXCEPTION_POINTERS
+    property exception_record : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD*
+    property context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*
+    def initialize(@exception_record : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD*, @context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*)
+    end
+  end
 
   @[Extern]
-  record XSTATE_FEATURE,
-    offset : UInt32,
-    size : UInt32
+  struct XSTATE_FEATURE
+    property offset : UInt32
+    property size : UInt32
+    def initialize(@offset : UInt32, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record XSTATE_CONFIGURATION,
-    enabled_features : UInt64,
-    enabled_volatile_features : UInt64,
-    size : UInt32,
-    anonymous : Anonymous_e__Union_,
-    features : Win32cr::System::Diagnostics::Debug::XSTATE_FEATURE[64],
-    enabled_supervisor_features : UInt64,
-    aligned_features : UInt64,
-    all_feature_size : UInt32,
-    all_features : UInt32[64],
-    enabled_user_visible_supervisor_features : UInt64,
-    extended_feature_disable_features : UInt64,
-    all_non_large_feature_size : UInt32,
-    spare : UInt32 do
+  struct XSTATE_CONFIGURATION
+    property enabled_features : UInt64
+    property enabled_volatile_features : UInt64
+    property size : UInt32
+    property anonymous : Anonymous_e__Union_
+    property features : Win32cr::System::Diagnostics::Debug::XSTATE_FEATURE[64]
+    property enabled_supervisor_features : UInt64
+    property aligned_features : UInt64
+    property all_feature_size : UInt32
+    property all_features : UInt32[64]
+    property enabled_user_visible_supervisor_features : UInt64
+    property extended_feature_disable_features : UInt64
+    property all_non_large_feature_size : UInt32
+    property spare : UInt32
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      control_flags : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property control_flags : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@control_flags : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@enabled_features : UInt64, @enabled_volatile_features : UInt64, @size : UInt32, @anonymous : Anonymous_e__Union_, @features : Win32cr::System::Diagnostics::Debug::XSTATE_FEATURE[64], @enabled_supervisor_features : UInt64, @aligned_features : UInt64, @all_feature_size : UInt32, @all_features : UInt32[64], @enabled_user_visible_supervisor_features : UInt64, @extended_feature_disable_features : UInt64, @all_non_large_feature_size : UInt32, @spare : UInt32)
+    end
   end
 
   @[Extern]
-  record IMAGE_FILE_HEADER,
-    machine : Win32cr::System::SystemInformation::IMAGE_FILE_MACHINE,
-    number_of_sections : UInt16,
-    time_date_stamp : UInt32,
-    pointer_to_symbol_table : UInt32,
-    number_of_symbols : UInt32,
-    size_of_optional_header : UInt16,
-    characteristics : Win32cr::System::Diagnostics::Debug::IMAGE_FILE_CHARACTERISTICS
+  struct IMAGE_FILE_HEADER
+    property machine : Win32cr::System::SystemInformation::IMAGE_FILE_MACHINE
+    property number_of_sections : UInt16
+    property time_date_stamp : UInt32
+    property pointer_to_symbol_table : UInt32
+    property number_of_symbols : UInt32
+    property size_of_optional_header : UInt16
+    property characteristics : Win32cr::System::Diagnostics::Debug::IMAGE_FILE_CHARACTERISTICS
+    def initialize(@machine : Win32cr::System::SystemInformation::IMAGE_FILE_MACHINE, @number_of_sections : UInt16, @time_date_stamp : UInt32, @pointer_to_symbol_table : UInt32, @number_of_symbols : UInt32, @size_of_optional_header : UInt16, @characteristics : Win32cr::System::Diagnostics::Debug::IMAGE_FILE_CHARACTERISTICS)
+    end
+  end
 
   @[Extern]
-  record IMAGE_DATA_DIRECTORY,
-    virtual_address : UInt32,
-    size : UInt32
+  struct IMAGE_DATA_DIRECTORY
+    property virtual_address : UInt32
+    property size : UInt32
+    def initialize(@virtual_address : UInt32, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record IMAGE_OPTIONAL_HEADER32,
-    magic : Win32cr::System::Diagnostics::Debug::IMAGE_OPTIONAL_HEADER_MAGIC,
-    major_linker_version : UInt8,
-    minor_linker_version : UInt8,
-    size_of_code : UInt32,
-    size_of_initialized_data : UInt32,
-    size_of_uninitialized_data : UInt32,
-    address_of_entry_point : UInt32,
-    base_of_code : UInt32,
-    base_of_data : UInt32,
-    image_base : UInt32,
-    section_alignment : UInt32,
-    file_alignment : UInt32,
-    major_operating_system_version : UInt16,
-    minor_operating_system_version : UInt16,
-    major_image_version : UInt16,
-    minor_image_version : UInt16,
-    major_subsystem_version : UInt16,
-    minor_subsystem_version : UInt16,
-    win32_version_value : UInt32,
-    size_of_image : UInt32,
-    size_of_headers : UInt32,
-    check_sum : UInt32,
-    subsystem : Win32cr::System::Diagnostics::Debug::IMAGE_SUBSYSTEM,
-    dll_characteristics : Win32cr::System::Diagnostics::Debug::IMAGE_DLL_CHARACTERISTICS,
-    size_of_stack_reserve : UInt32,
-    size_of_stack_commit : UInt32,
-    size_of_heap_reserve : UInt32,
-    size_of_heap_commit : UInt32,
-    loader_flags : UInt32,
-    number_of_rva_and_sizes : UInt32,
-    data_directory : Win32cr::System::Diagnostics::Debug::IMAGE_DATA_DIRECTORY[16]
+  struct IMAGE_OPTIONAL_HEADER32
+    property magic : Win32cr::System::Diagnostics::Debug::IMAGE_OPTIONAL_HEADER_MAGIC
+    property major_linker_version : UInt8
+    property minor_linker_version : UInt8
+    property size_of_code : UInt32
+    property size_of_initialized_data : UInt32
+    property size_of_uninitialized_data : UInt32
+    property address_of_entry_point : UInt32
+    property base_of_code : UInt32
+    property base_of_data : UInt32
+    property image_base : UInt32
+    property section_alignment : UInt32
+    property file_alignment : UInt32
+    property major_operating_system_version : UInt16
+    property minor_operating_system_version : UInt16
+    property major_image_version : UInt16
+    property minor_image_version : UInt16
+    property major_subsystem_version : UInt16
+    property minor_subsystem_version : UInt16
+    property win32_version_value : UInt32
+    property size_of_image : UInt32
+    property size_of_headers : UInt32
+    property check_sum : UInt32
+    property subsystem : Win32cr::System::Diagnostics::Debug::IMAGE_SUBSYSTEM
+    property dll_characteristics : Win32cr::System::Diagnostics::Debug::IMAGE_DLL_CHARACTERISTICS
+    property size_of_stack_reserve : UInt32
+    property size_of_stack_commit : UInt32
+    property size_of_heap_reserve : UInt32
+    property size_of_heap_commit : UInt32
+    property loader_flags : UInt32
+    property number_of_rva_and_sizes : UInt32
+    property data_directory : Win32cr::System::Diagnostics::Debug::IMAGE_DATA_DIRECTORY[16]
+    def initialize(@magic : Win32cr::System::Diagnostics::Debug::IMAGE_OPTIONAL_HEADER_MAGIC, @major_linker_version : UInt8, @minor_linker_version : UInt8, @size_of_code : UInt32, @size_of_initialized_data : UInt32, @size_of_uninitialized_data : UInt32, @address_of_entry_point : UInt32, @base_of_code : UInt32, @base_of_data : UInt32, @image_base : UInt32, @section_alignment : UInt32, @file_alignment : UInt32, @major_operating_system_version : UInt16, @minor_operating_system_version : UInt16, @major_image_version : UInt16, @minor_image_version : UInt16, @major_subsystem_version : UInt16, @minor_subsystem_version : UInt16, @win32_version_value : UInt32, @size_of_image : UInt32, @size_of_headers : UInt32, @check_sum : UInt32, @subsystem : Win32cr::System::Diagnostics::Debug::IMAGE_SUBSYSTEM, @dll_characteristics : Win32cr::System::Diagnostics::Debug::IMAGE_DLL_CHARACTERISTICS, @size_of_stack_reserve : UInt32, @size_of_stack_commit : UInt32, @size_of_heap_reserve : UInt32, @size_of_heap_commit : UInt32, @loader_flags : UInt32, @number_of_rva_and_sizes : UInt32, @data_directory : Win32cr::System::Diagnostics::Debug::IMAGE_DATA_DIRECTORY[16])
+    end
+  end
 
   @[Extern]
-  record IMAGE_ROM_OPTIONAL_HEADER,
-    magic : UInt16,
-    major_linker_version : UInt8,
-    minor_linker_version : UInt8,
-    size_of_code : UInt32,
-    size_of_initialized_data : UInt32,
-    size_of_uninitialized_data : UInt32,
-    address_of_entry_point : UInt32,
-    base_of_code : UInt32,
-    base_of_data : UInt32,
-    base_of_bss : UInt32,
-    gpr_mask : UInt32,
-    cpr_mask : UInt32[4],
-    gp_value : UInt32
+  struct IMAGE_ROM_OPTIONAL_HEADER
+    property magic : UInt16
+    property major_linker_version : UInt8
+    property minor_linker_version : UInt8
+    property size_of_code : UInt32
+    property size_of_initialized_data : UInt32
+    property size_of_uninitialized_data : UInt32
+    property address_of_entry_point : UInt32
+    property base_of_code : UInt32
+    property base_of_data : UInt32
+    property base_of_bss : UInt32
+    property gpr_mask : UInt32
+    property cpr_mask : UInt32[4]
+    property gp_value : UInt32
+    def initialize(@magic : UInt16, @major_linker_version : UInt8, @minor_linker_version : UInt8, @size_of_code : UInt32, @size_of_initialized_data : UInt32, @size_of_uninitialized_data : UInt32, @address_of_entry_point : UInt32, @base_of_code : UInt32, @base_of_data : UInt32, @base_of_bss : UInt32, @gpr_mask : UInt32, @cpr_mask : UInt32[4], @gp_value : UInt32)
+    end
+  end
 
   @[Extern]
-  record IMAGE_OPTIONAL_HEADER64,
-    magic : Win32cr::System::Diagnostics::Debug::IMAGE_OPTIONAL_HEADER_MAGIC,
-    major_linker_version : UInt8,
-    minor_linker_version : UInt8,
-    size_of_code : UInt32,
-    size_of_initialized_data : UInt32,
-    size_of_uninitialized_data : UInt32,
-    address_of_entry_point : UInt32,
-    base_of_code : UInt32,
-    image_base : UInt64,
-    section_alignment : UInt32,
-    file_alignment : UInt32,
-    major_operating_system_version : UInt16,
-    minor_operating_system_version : UInt16,
-    major_image_version : UInt16,
-    minor_image_version : UInt16,
-    major_subsystem_version : UInt16,
-    minor_subsystem_version : UInt16,
-    win32_version_value : UInt32,
-    size_of_image : UInt32,
-    size_of_headers : UInt32,
-    check_sum : UInt32,
-    subsystem : Win32cr::System::Diagnostics::Debug::IMAGE_SUBSYSTEM,
-    dll_characteristics : Win32cr::System::Diagnostics::Debug::IMAGE_DLL_CHARACTERISTICS,
-    size_of_stack_reserve : UInt64,
-    size_of_stack_commit : UInt64,
-    size_of_heap_reserve : UInt64,
-    size_of_heap_commit : UInt64,
-    loader_flags : UInt32,
-    number_of_rva_and_sizes : UInt32,
-    data_directory : Win32cr::System::Diagnostics::Debug::IMAGE_DATA_DIRECTORY[16]
+  struct IMAGE_OPTIONAL_HEADER64
+    property magic : Win32cr::System::Diagnostics::Debug::IMAGE_OPTIONAL_HEADER_MAGIC
+    property major_linker_version : UInt8
+    property minor_linker_version : UInt8
+    property size_of_code : UInt32
+    property size_of_initialized_data : UInt32
+    property size_of_uninitialized_data : UInt32
+    property address_of_entry_point : UInt32
+    property base_of_code : UInt32
+    property image_base : UInt64
+    property section_alignment : UInt32
+    property file_alignment : UInt32
+    property major_operating_system_version : UInt16
+    property minor_operating_system_version : UInt16
+    property major_image_version : UInt16
+    property minor_image_version : UInt16
+    property major_subsystem_version : UInt16
+    property minor_subsystem_version : UInt16
+    property win32_version_value : UInt32
+    property size_of_image : UInt32
+    property size_of_headers : UInt32
+    property check_sum : UInt32
+    property subsystem : Win32cr::System::Diagnostics::Debug::IMAGE_SUBSYSTEM
+    property dll_characteristics : Win32cr::System::Diagnostics::Debug::IMAGE_DLL_CHARACTERISTICS
+    property size_of_stack_reserve : UInt64
+    property size_of_stack_commit : UInt64
+    property size_of_heap_reserve : UInt64
+    property size_of_heap_commit : UInt64
+    property loader_flags : UInt32
+    property number_of_rva_and_sizes : UInt32
+    property data_directory : Win32cr::System::Diagnostics::Debug::IMAGE_DATA_DIRECTORY[16]
+    def initialize(@magic : Win32cr::System::Diagnostics::Debug::IMAGE_OPTIONAL_HEADER_MAGIC, @major_linker_version : UInt8, @minor_linker_version : UInt8, @size_of_code : UInt32, @size_of_initialized_data : UInt32, @size_of_uninitialized_data : UInt32, @address_of_entry_point : UInt32, @base_of_code : UInt32, @image_base : UInt64, @section_alignment : UInt32, @file_alignment : UInt32, @major_operating_system_version : UInt16, @minor_operating_system_version : UInt16, @major_image_version : UInt16, @minor_image_version : UInt16, @major_subsystem_version : UInt16, @minor_subsystem_version : UInt16, @win32_version_value : UInt32, @size_of_image : UInt32, @size_of_headers : UInt32, @check_sum : UInt32, @subsystem : Win32cr::System::Diagnostics::Debug::IMAGE_SUBSYSTEM, @dll_characteristics : Win32cr::System::Diagnostics::Debug::IMAGE_DLL_CHARACTERISTICS, @size_of_stack_reserve : UInt64, @size_of_stack_commit : UInt64, @size_of_heap_reserve : UInt64, @size_of_heap_commit : UInt64, @loader_flags : UInt32, @number_of_rva_and_sizes : UInt32, @data_directory : Win32cr::System::Diagnostics::Debug::IMAGE_DATA_DIRECTORY[16])
+    end
+  end
 
   @[Extern]
-  record IMAGE_NT_HEADERS64,
-    signature : UInt32,
-    file_header : Win32cr::System::Diagnostics::Debug::IMAGE_FILE_HEADER,
-    optional_header : Win32cr::System::Diagnostics::Debug::IMAGE_OPTIONAL_HEADER64
+  struct IMAGE_NT_HEADERS64
+    property signature : UInt32
+    property file_header : Win32cr::System::Diagnostics::Debug::IMAGE_FILE_HEADER
+    property optional_header : Win32cr::System::Diagnostics::Debug::IMAGE_OPTIONAL_HEADER64
+    def initialize(@signature : UInt32, @file_header : Win32cr::System::Diagnostics::Debug::IMAGE_FILE_HEADER, @optional_header : Win32cr::System::Diagnostics::Debug::IMAGE_OPTIONAL_HEADER64)
+    end
+  end
 
   @[Extern]
-  record IMAGE_NT_HEADERS32,
-    signature : UInt32,
-    file_header : Win32cr::System::Diagnostics::Debug::IMAGE_FILE_HEADER,
-    optional_header : Win32cr::System::Diagnostics::Debug::IMAGE_OPTIONAL_HEADER32
+  struct IMAGE_NT_HEADERS32
+    property signature : UInt32
+    property file_header : Win32cr::System::Diagnostics::Debug::IMAGE_FILE_HEADER
+    property optional_header : Win32cr::System::Diagnostics::Debug::IMAGE_OPTIONAL_HEADER32
+    def initialize(@signature : UInt32, @file_header : Win32cr::System::Diagnostics::Debug::IMAGE_FILE_HEADER, @optional_header : Win32cr::System::Diagnostics::Debug::IMAGE_OPTIONAL_HEADER32)
+    end
+  end
 
   @[Extern]
-  record IMAGE_ROM_HEADERS,
-    file_header : Win32cr::System::Diagnostics::Debug::IMAGE_FILE_HEADER,
-    optional_header : Win32cr::System::Diagnostics::Debug::IMAGE_ROM_OPTIONAL_HEADER
+  struct IMAGE_ROM_HEADERS
+    property file_header : Win32cr::System::Diagnostics::Debug::IMAGE_FILE_HEADER
+    property optional_header : Win32cr::System::Diagnostics::Debug::IMAGE_ROM_OPTIONAL_HEADER
+    def initialize(@file_header : Win32cr::System::Diagnostics::Debug::IMAGE_FILE_HEADER, @optional_header : Win32cr::System::Diagnostics::Debug::IMAGE_ROM_OPTIONAL_HEADER)
+    end
+  end
 
   @[Extern]
-  record IMAGE_SECTION_HEADER,
-    name : UInt8[8],
-    misc : Misc_e__Union_,
-    virtual_address : UInt32,
-    size_of_raw_data : UInt32,
-    pointer_to_raw_data : UInt32,
-    pointer_to_relocations : UInt32,
-    pointer_to_linenumbers : UInt32,
-    number_of_relocations : UInt16,
-    number_of_linenumbers : UInt16,
-    characteristics : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_CHARACTERISTICS do
+  struct IMAGE_SECTION_HEADER
+    property name : UInt8[8]
+    property misc : Misc_e__Union_
+    property virtual_address : UInt32
+    property size_of_raw_data : UInt32
+    property pointer_to_raw_data : UInt32
+    property pointer_to_relocations : UInt32
+    property pointer_to_linenumbers : UInt32
+    property number_of_relocations : UInt16
+    property number_of_linenumbers : UInt16
+    property characteristics : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_CHARACTERISTICS
 
     # Nested Type Misc_e__Union_
     @[Extern(union: true)]
-    record Misc_e__Union_,
-      physical_address : UInt32,
-      virtual_size : UInt32
+    struct Misc_e__Union_
+    property physical_address : UInt32
+    property virtual_size : UInt32
+    def initialize(@physical_address : UInt32, @virtual_size : UInt32)
+    end
+    end
 
+    def initialize(@name : UInt8[8], @misc : Misc_e__Union_, @virtual_address : UInt32, @size_of_raw_data : UInt32, @pointer_to_raw_data : UInt32, @pointer_to_relocations : UInt32, @pointer_to_linenumbers : UInt32, @number_of_relocations : UInt16, @number_of_linenumbers : UInt16, @characteristics : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_CHARACTERISTICS)
+    end
   end
 
   @[Extern]
-  record IMAGE_LOAD_CONFIG_CODE_INTEGRITY,
-    flags : UInt16,
-    catalog : UInt16,
-    catalog_offset : UInt32,
-    reserved : UInt32
+  struct IMAGE_LOAD_CONFIG_CODE_INTEGRITY
+    property flags : UInt16
+    property catalog : UInt16
+    property catalog_offset : UInt32
+    property reserved : UInt32
+    def initialize(@flags : UInt16, @catalog : UInt16, @catalog_offset : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record IMAGE_LOAD_CONFIG_DIRECTORY32,
-    size : UInt32,
-    time_date_stamp : UInt32,
-    major_version : UInt16,
-    minor_version : UInt16,
-    global_flags_clear : UInt32,
-    global_flags_set : UInt32,
-    critical_section_default_timeout : UInt32,
-    de_commit_free_block_threshold : UInt32,
-    de_commit_total_free_threshold : UInt32,
-    lock_prefix_table : UInt32,
-    maximum_allocation_size : UInt32,
-    virtual_memory_threshold : UInt32,
-    process_heap_flags : UInt32,
-    process_affinity_mask : UInt32,
-    csd_version : UInt16,
-    dependent_load_flags : UInt16,
-    edit_list : UInt32,
-    security_cookie : UInt32,
-    se_handler_table : UInt32,
-    se_handler_count : UInt32,
-    guard_cf_check_function_pointer : UInt32,
-    guard_cf_dispatch_function_pointer : UInt32,
-    guard_cf_function_table : UInt32,
-    guard_cf_function_count : UInt32,
-    guard_flags : UInt32,
-    code_integrity : Win32cr::System::Diagnostics::Debug::IMAGE_LOAD_CONFIG_CODE_INTEGRITY,
-    guard_address_taken_iat_entry_table : UInt32,
-    guard_address_taken_iat_entry_count : UInt32,
-    guard_long_jump_target_table : UInt32,
-    guard_long_jump_target_count : UInt32,
-    dynamic_value_reloc_table : UInt32,
-    chpe_metadata_pointer : UInt32,
-    guard_rf_failure_routine : UInt32,
-    guard_rf_failure_routine_function_pointer : UInt32,
-    dynamic_value_reloc_table_offset : UInt32,
-    dynamic_value_reloc_table_section : UInt16,
-    reserved2 : UInt16,
-    guard_rf_verify_stack_pointer_function_pointer : UInt32,
-    hot_patch_table_offset : UInt32,
-    reserved3 : UInt32,
-    enclave_configuration_pointer : UInt32,
-    volatile_metadata_pointer : UInt32,
-    guard_eh_continuation_table : UInt32,
-    guard_eh_continuation_count : UInt32,
-    guard_xfg_check_function_pointer : UInt32,
-    guard_xfg_dispatch_function_pointer : UInt32,
-    guard_xfg_table_dispatch_function_pointer : UInt32,
-    cast_guard_os_determined_failure_mode : UInt32
+  struct IMAGE_LOAD_CONFIG_DIRECTORY32
+    property size : UInt32
+    property time_date_stamp : UInt32
+    property major_version : UInt16
+    property minor_version : UInt16
+    property global_flags_clear : UInt32
+    property global_flags_set : UInt32
+    property critical_section_default_timeout : UInt32
+    property de_commit_free_block_threshold : UInt32
+    property de_commit_total_free_threshold : UInt32
+    property lock_prefix_table : UInt32
+    property maximum_allocation_size : UInt32
+    property virtual_memory_threshold : UInt32
+    property process_heap_flags : UInt32
+    property process_affinity_mask : UInt32
+    property csd_version : UInt16
+    property dependent_load_flags : UInt16
+    property edit_list : UInt32
+    property security_cookie : UInt32
+    property se_handler_table : UInt32
+    property se_handler_count : UInt32
+    property guard_cf_check_function_pointer : UInt32
+    property guard_cf_dispatch_function_pointer : UInt32
+    property guard_cf_function_table : UInt32
+    property guard_cf_function_count : UInt32
+    property guard_flags : UInt32
+    property code_integrity : Win32cr::System::Diagnostics::Debug::IMAGE_LOAD_CONFIG_CODE_INTEGRITY
+    property guard_address_taken_iat_entry_table : UInt32
+    property guard_address_taken_iat_entry_count : UInt32
+    property guard_long_jump_target_table : UInt32
+    property guard_long_jump_target_count : UInt32
+    property dynamic_value_reloc_table : UInt32
+    property chpe_metadata_pointer : UInt32
+    property guard_rf_failure_routine : UInt32
+    property guard_rf_failure_routine_function_pointer : UInt32
+    property dynamic_value_reloc_table_offset : UInt32
+    property dynamic_value_reloc_table_section : UInt16
+    property reserved2 : UInt16
+    property guard_rf_verify_stack_pointer_function_pointer : UInt32
+    property hot_patch_table_offset : UInt32
+    property reserved3 : UInt32
+    property enclave_configuration_pointer : UInt32
+    property volatile_metadata_pointer : UInt32
+    property guard_eh_continuation_table : UInt32
+    property guard_eh_continuation_count : UInt32
+    property guard_xfg_check_function_pointer : UInt32
+    property guard_xfg_dispatch_function_pointer : UInt32
+    property guard_xfg_table_dispatch_function_pointer : UInt32
+    property cast_guard_os_determined_failure_mode : UInt32
+    def initialize(@size : UInt32, @time_date_stamp : UInt32, @major_version : UInt16, @minor_version : UInt16, @global_flags_clear : UInt32, @global_flags_set : UInt32, @critical_section_default_timeout : UInt32, @de_commit_free_block_threshold : UInt32, @de_commit_total_free_threshold : UInt32, @lock_prefix_table : UInt32, @maximum_allocation_size : UInt32, @virtual_memory_threshold : UInt32, @process_heap_flags : UInt32, @process_affinity_mask : UInt32, @csd_version : UInt16, @dependent_load_flags : UInt16, @edit_list : UInt32, @security_cookie : UInt32, @se_handler_table : UInt32, @se_handler_count : UInt32, @guard_cf_check_function_pointer : UInt32, @guard_cf_dispatch_function_pointer : UInt32, @guard_cf_function_table : UInt32, @guard_cf_function_count : UInt32, @guard_flags : UInt32, @code_integrity : Win32cr::System::Diagnostics::Debug::IMAGE_LOAD_CONFIG_CODE_INTEGRITY, @guard_address_taken_iat_entry_table : UInt32, @guard_address_taken_iat_entry_count : UInt32, @guard_long_jump_target_table : UInt32, @guard_long_jump_target_count : UInt32, @dynamic_value_reloc_table : UInt32, @chpe_metadata_pointer : UInt32, @guard_rf_failure_routine : UInt32, @guard_rf_failure_routine_function_pointer : UInt32, @dynamic_value_reloc_table_offset : UInt32, @dynamic_value_reloc_table_section : UInt16, @reserved2 : UInt16, @guard_rf_verify_stack_pointer_function_pointer : UInt32, @hot_patch_table_offset : UInt32, @reserved3 : UInt32, @enclave_configuration_pointer : UInt32, @volatile_metadata_pointer : UInt32, @guard_eh_continuation_table : UInt32, @guard_eh_continuation_count : UInt32, @guard_xfg_check_function_pointer : UInt32, @guard_xfg_dispatch_function_pointer : UInt32, @guard_xfg_table_dispatch_function_pointer : UInt32, @cast_guard_os_determined_failure_mode : UInt32)
+    end
+  end
 
   @[Extern]
-  record IMAGE_LOAD_CONFIG_DIRECTORY64,
-    size : UInt32,
-    time_date_stamp : UInt32,
-    major_version : UInt16,
-    minor_version : UInt16,
-    global_flags_clear : UInt32,
-    global_flags_set : UInt32,
-    critical_section_default_timeout : UInt32,
-    de_commit_free_block_threshold : UInt64,
-    de_commit_total_free_threshold : UInt64,
-    lock_prefix_table : UInt64,
-    maximum_allocation_size : UInt64,
-    virtual_memory_threshold : UInt64,
-    process_affinity_mask : UInt64,
-    process_heap_flags : UInt32,
-    csd_version : UInt16,
-    dependent_load_flags : UInt16,
-    edit_list : UInt64,
-    security_cookie : UInt64,
-    se_handler_table : UInt64,
-    se_handler_count : UInt64,
-    guard_cf_check_function_pointer : UInt64,
-    guard_cf_dispatch_function_pointer : UInt64,
-    guard_cf_function_table : UInt64,
-    guard_cf_function_count : UInt64,
-    guard_flags : UInt32,
-    code_integrity : Win32cr::System::Diagnostics::Debug::IMAGE_LOAD_CONFIG_CODE_INTEGRITY,
-    guard_address_taken_iat_entry_table : UInt64,
-    guard_address_taken_iat_entry_count : UInt64,
-    guard_long_jump_target_table : UInt64,
-    guard_long_jump_target_count : UInt64,
-    dynamic_value_reloc_table : UInt64,
-    chpe_metadata_pointer : UInt64,
-    guard_rf_failure_routine : UInt64,
-    guard_rf_failure_routine_function_pointer : UInt64,
-    dynamic_value_reloc_table_offset : UInt32,
-    dynamic_value_reloc_table_section : UInt16,
-    reserved2 : UInt16,
-    guard_rf_verify_stack_pointer_function_pointer : UInt64,
-    hot_patch_table_offset : UInt32,
-    reserved3 : UInt32,
-    enclave_configuration_pointer : UInt64,
-    volatile_metadata_pointer : UInt64,
-    guard_eh_continuation_table : UInt64,
-    guard_eh_continuation_count : UInt64,
-    guard_xfg_check_function_pointer : UInt64,
-    guard_xfg_dispatch_function_pointer : UInt64,
-    guard_xfg_table_dispatch_function_pointer : UInt64,
-    cast_guard_os_determined_failure_mode : UInt64
+  struct IMAGE_LOAD_CONFIG_DIRECTORY64
+    property size : UInt32
+    property time_date_stamp : UInt32
+    property major_version : UInt16
+    property minor_version : UInt16
+    property global_flags_clear : UInt32
+    property global_flags_set : UInt32
+    property critical_section_default_timeout : UInt32
+    property de_commit_free_block_threshold : UInt64
+    property de_commit_total_free_threshold : UInt64
+    property lock_prefix_table : UInt64
+    property maximum_allocation_size : UInt64
+    property virtual_memory_threshold : UInt64
+    property process_affinity_mask : UInt64
+    property process_heap_flags : UInt32
+    property csd_version : UInt16
+    property dependent_load_flags : UInt16
+    property edit_list : UInt64
+    property security_cookie : UInt64
+    property se_handler_table : UInt64
+    property se_handler_count : UInt64
+    property guard_cf_check_function_pointer : UInt64
+    property guard_cf_dispatch_function_pointer : UInt64
+    property guard_cf_function_table : UInt64
+    property guard_cf_function_count : UInt64
+    property guard_flags : UInt32
+    property code_integrity : Win32cr::System::Diagnostics::Debug::IMAGE_LOAD_CONFIG_CODE_INTEGRITY
+    property guard_address_taken_iat_entry_table : UInt64
+    property guard_address_taken_iat_entry_count : UInt64
+    property guard_long_jump_target_table : UInt64
+    property guard_long_jump_target_count : UInt64
+    property dynamic_value_reloc_table : UInt64
+    property chpe_metadata_pointer : UInt64
+    property guard_rf_failure_routine : UInt64
+    property guard_rf_failure_routine_function_pointer : UInt64
+    property dynamic_value_reloc_table_offset : UInt32
+    property dynamic_value_reloc_table_section : UInt16
+    property reserved2 : UInt16
+    property guard_rf_verify_stack_pointer_function_pointer : UInt64
+    property hot_patch_table_offset : UInt32
+    property reserved3 : UInt32
+    property enclave_configuration_pointer : UInt64
+    property volatile_metadata_pointer : UInt64
+    property guard_eh_continuation_table : UInt64
+    property guard_eh_continuation_count : UInt64
+    property guard_xfg_check_function_pointer : UInt64
+    property guard_xfg_dispatch_function_pointer : UInt64
+    property guard_xfg_table_dispatch_function_pointer : UInt64
+    property cast_guard_os_determined_failure_mode : UInt64
+    def initialize(@size : UInt32, @time_date_stamp : UInt32, @major_version : UInt16, @minor_version : UInt16, @global_flags_clear : UInt32, @global_flags_set : UInt32, @critical_section_default_timeout : UInt32, @de_commit_free_block_threshold : UInt64, @de_commit_total_free_threshold : UInt64, @lock_prefix_table : UInt64, @maximum_allocation_size : UInt64, @virtual_memory_threshold : UInt64, @process_affinity_mask : UInt64, @process_heap_flags : UInt32, @csd_version : UInt16, @dependent_load_flags : UInt16, @edit_list : UInt64, @security_cookie : UInt64, @se_handler_table : UInt64, @se_handler_count : UInt64, @guard_cf_check_function_pointer : UInt64, @guard_cf_dispatch_function_pointer : UInt64, @guard_cf_function_table : UInt64, @guard_cf_function_count : UInt64, @guard_flags : UInt32, @code_integrity : Win32cr::System::Diagnostics::Debug::IMAGE_LOAD_CONFIG_CODE_INTEGRITY, @guard_address_taken_iat_entry_table : UInt64, @guard_address_taken_iat_entry_count : UInt64, @guard_long_jump_target_table : UInt64, @guard_long_jump_target_count : UInt64, @dynamic_value_reloc_table : UInt64, @chpe_metadata_pointer : UInt64, @guard_rf_failure_routine : UInt64, @guard_rf_failure_routine_function_pointer : UInt64, @dynamic_value_reloc_table_offset : UInt32, @dynamic_value_reloc_table_section : UInt16, @reserved2 : UInt16, @guard_rf_verify_stack_pointer_function_pointer : UInt64, @hot_patch_table_offset : UInt32, @reserved3 : UInt32, @enclave_configuration_pointer : UInt64, @volatile_metadata_pointer : UInt64, @guard_eh_continuation_table : UInt64, @guard_eh_continuation_count : UInt64, @guard_xfg_check_function_pointer : UInt64, @guard_xfg_dispatch_function_pointer : UInt64, @guard_xfg_table_dispatch_function_pointer : UInt64, @cast_guard_os_determined_failure_mode : UInt64)
+    end
+  end
 
   @[Extern]
-  record IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY,
-    begin_address : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY
+    property begin_address : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      unwind_data : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property unwind_data : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@unwind_data : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@begin_address : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record IMAGE_RUNTIME_FUNCTION_ENTRY,
-    begin_address : UInt32,
-    end_address : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct IMAGE_RUNTIME_FUNCTION_ENTRY
+    property begin_address : UInt32
+    property end_address : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      unwind_info_address : UInt32,
-      unwind_data : UInt32
+    struct Anonymous_e__Union_
+    property unwind_info_address : UInt32
+    property unwind_data : UInt32
+    def initialize(@unwind_info_address : UInt32, @unwind_data : UInt32)
+    end
+    end
 
+    def initialize(@begin_address : UInt32, @end_address : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record IMAGE_DEBUG_DIRECTORY,
-    characteristics : UInt32,
-    time_date_stamp : UInt32,
-    major_version : UInt16,
-    minor_version : UInt16,
-    type__ : Win32cr::System::Diagnostics::Debug::IMAGE_DEBUG_TYPE,
-    size_of_data : UInt32,
-    address_of_raw_data : UInt32,
-    pointer_to_raw_data : UInt32
-
-  @[Extern]
-  record IMAGE_COFF_SYMBOLS_HEADER,
-    number_of_symbols : UInt32,
-    lva_to_first_symbol : UInt32,
-    number_of_linenumbers : UInt32,
-    lva_to_first_linenumber : UInt32,
-    rva_to_first_byte_of_code : UInt32,
-    rva_to_last_byte_of_code : UInt32,
-    rva_to_first_byte_of_data : UInt32,
-    rva_to_last_byte_of_data : UInt32
-
-  @[Extern]
-  record FPO_DATA,
-    ulOffStart : UInt32,
-    cbProcSize : UInt32,
-    cdwLocals : UInt32,
-    cdwParams : UInt16,
-    _bitfield : UInt16
-
-  @[Extern]
-  record IMAGE_FUNCTION_ENTRY,
-    starting_address : UInt32,
-    ending_address : UInt32,
-    end_of_prologue : UInt32
-
-  @[Extern]
-  record IMAGE_FUNCTION_ENTRY64,
-    starting_address : UInt64,
-    ending_address : UInt64,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      end_of_prologue : UInt64,
-      unwind_info_address : UInt64
-
+  struct IMAGE_DEBUG_DIRECTORY
+    property characteristics : UInt32
+    property time_date_stamp : UInt32
+    property major_version : UInt16
+    property minor_version : UInt16
+    property type__ : Win32cr::System::Diagnostics::Debug::IMAGE_DEBUG_TYPE
+    property size_of_data : UInt32
+    property address_of_raw_data : UInt32
+    property pointer_to_raw_data : UInt32
+    def initialize(@characteristics : UInt32, @time_date_stamp : UInt32, @major_version : UInt16, @minor_version : UInt16, @type__ : Win32cr::System::Diagnostics::Debug::IMAGE_DEBUG_TYPE, @size_of_data : UInt32, @address_of_raw_data : UInt32, @pointer_to_raw_data : UInt32)
+    end
   end
 
   @[Extern]
-  record IMAGE_COR20_HEADER,
-    cb : UInt32,
-    major_runtime_version : UInt16,
-    minor_runtime_version : UInt16,
-    meta_data : Win32cr::System::Diagnostics::Debug::IMAGE_DATA_DIRECTORY,
-    flags : UInt32,
-    anonymous : Anonymous_e__Union_,
-    resources : Win32cr::System::Diagnostics::Debug::IMAGE_DATA_DIRECTORY,
-    strong_name_signature : Win32cr::System::Diagnostics::Debug::IMAGE_DATA_DIRECTORY,
-    code_manager_table : Win32cr::System::Diagnostics::Debug::IMAGE_DATA_DIRECTORY,
-    v_table_fixups : Win32cr::System::Diagnostics::Debug::IMAGE_DATA_DIRECTORY,
-    export_address_table_jumps : Win32cr::System::Diagnostics::Debug::IMAGE_DATA_DIRECTORY,
-    managed_native_header : Win32cr::System::Diagnostics::Debug::IMAGE_DATA_DIRECTORY do
+  struct IMAGE_COFF_SYMBOLS_HEADER
+    property number_of_symbols : UInt32
+    property lva_to_first_symbol : UInt32
+    property number_of_linenumbers : UInt32
+    property lva_to_first_linenumber : UInt32
+    property rva_to_first_byte_of_code : UInt32
+    property rva_to_last_byte_of_code : UInt32
+    property rva_to_first_byte_of_data : UInt32
+    property rva_to_last_byte_of_data : UInt32
+    def initialize(@number_of_symbols : UInt32, @lva_to_first_symbol : UInt32, @number_of_linenumbers : UInt32, @lva_to_first_linenumber : UInt32, @rva_to_first_byte_of_code : UInt32, @rva_to_last_byte_of_code : UInt32, @rva_to_first_byte_of_data : UInt32, @rva_to_last_byte_of_data : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct FPO_DATA
+    property ulOffStart : UInt32
+    property cbProcSize : UInt32
+    property cdwLocals : UInt32
+    property cdwParams : UInt16
+    property _bitfield : UInt16
+    def initialize(@ulOffStart : UInt32, @cbProcSize : UInt32, @cdwLocals : UInt32, @cdwParams : UInt16, @_bitfield : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct IMAGE_FUNCTION_ENTRY
+    property starting_address : UInt32
+    property ending_address : UInt32
+    property end_of_prologue : UInt32
+    def initialize(@starting_address : UInt32, @ending_address : UInt32, @end_of_prologue : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct IMAGE_FUNCTION_ENTRY64
+    property starting_address : UInt64
+    property ending_address : UInt64
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      entry_point_token : UInt32,
-      entry_point_rva : UInt32
+    struct Anonymous_e__Union_
+    property end_of_prologue : UInt64
+    property unwind_info_address : UInt64
+    def initialize(@end_of_prologue : UInt64, @unwind_info_address : UInt64)
+    end
+    end
 
+    def initialize(@starting_address : UInt64, @ending_address : UInt64, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct IMAGE_COR20_HEADER
+    property cb : UInt32
+    property major_runtime_version : UInt16
+    property minor_runtime_version : UInt16
+    property meta_data : Win32cr::System::Diagnostics::Debug::IMAGE_DATA_DIRECTORY
+    property flags : UInt32
+    property anonymous : Anonymous_e__Union_
+    property resources : Win32cr::System::Diagnostics::Debug::IMAGE_DATA_DIRECTORY
+    property strong_name_signature : Win32cr::System::Diagnostics::Debug::IMAGE_DATA_DIRECTORY
+    property code_manager_table : Win32cr::System::Diagnostics::Debug::IMAGE_DATA_DIRECTORY
+    property v_table_fixups : Win32cr::System::Diagnostics::Debug::IMAGE_DATA_DIRECTORY
+    property export_address_table_jumps : Win32cr::System::Diagnostics::Debug::IMAGE_DATA_DIRECTORY
+    property managed_native_header : Win32cr::System::Diagnostics::Debug::IMAGE_DATA_DIRECTORY
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property entry_point_token : UInt32
+    property entry_point_rva : UInt32
+    def initialize(@entry_point_token : UInt32, @entry_point_rva : UInt32)
+    end
+    end
+
+    def initialize(@cb : UInt32, @major_runtime_version : UInt16, @minor_runtime_version : UInt16, @meta_data : Win32cr::System::Diagnostics::Debug::IMAGE_DATA_DIRECTORY, @flags : UInt32, @anonymous : Anonymous_e__Union_, @resources : Win32cr::System::Diagnostics::Debug::IMAGE_DATA_DIRECTORY, @strong_name_signature : Win32cr::System::Diagnostics::Debug::IMAGE_DATA_DIRECTORY, @code_manager_table : Win32cr::System::Diagnostics::Debug::IMAGE_DATA_DIRECTORY, @v_table_fixups : Win32cr::System::Diagnostics::Debug::IMAGE_DATA_DIRECTORY, @export_address_table_jumps : Win32cr::System::Diagnostics::Debug::IMAGE_DATA_DIRECTORY, @managed_native_header : Win32cr::System::Diagnostics::Debug::IMAGE_DATA_DIRECTORY)
+    end
   end
 
   {% if flag?(:x86_64) %}
   @[Extern]
-  record UNWIND_HISTORY_TABLE_ENTRY,
-    image_base : LibC::UIntPtrT,
-    function_entry : Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY*
+  struct UNWIND_HISTORY_TABLE_ENTRY
+    property image_base : LibC::UIntPtrT
+    property function_entry : Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY*
+    def initialize(@image_base : LibC::UIntPtrT, @function_entry : Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY*)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record UNWIND_HISTORY_TABLE,
-    count : UInt32,
-    local_hint : UInt8,
-    global_hint : UInt8,
-    search : UInt8,
-    once : UInt8,
-    low_address : LibC::UIntPtrT,
-    high_address : LibC::UIntPtrT,
-    entry : Win32cr::System::Diagnostics::Debug::UNWIND_HISTORY_TABLE_ENTRY[12]
+  struct UNWIND_HISTORY_TABLE
+    property count : UInt32
+    property local_hint : UInt8
+    property global_hint : UInt8
+    property search : UInt8
+    property once : UInt8
+    property low_address : LibC::UIntPtrT
+    property high_address : LibC::UIntPtrT
+    property entry : Win32cr::System::Diagnostics::Debug::UNWIND_HISTORY_TABLE_ENTRY[12]
+    def initialize(@count : UInt32, @local_hint : UInt8, @global_hint : UInt8, @search : UInt8, @once : UInt8, @low_address : LibC::UIntPtrT, @high_address : LibC::UIntPtrT, @entry : Win32cr::System::Diagnostics::Debug::UNWIND_HISTORY_TABLE_ENTRY[12])
+    end
+  end
   {% end %}
 
   @[Extern]
-  record WAITCHAIN_NODE_INFO,
-    object_type : Win32cr::System::Diagnostics::Debug::WCT_OBJECT_TYPE,
-    object_status : Win32cr::System::Diagnostics::Debug::WCT_OBJECT_STATUS,
-    anonymous : Anonymous_e__Union_ do
+  struct WAITCHAIN_NODE_INFO
+    property object_type : Win32cr::System::Diagnostics::Debug::WCT_OBJECT_TYPE
+    property object_status : Win32cr::System::Diagnostics::Debug::WCT_OBJECT_STATUS
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      lock_object : LockObject_e__Struct_,
-      thread_object : ThreadObject_e__Struct_ do
+    struct Anonymous_e__Union_
+    property lock_object : LockObject_e__Struct_
+    property thread_object : ThreadObject_e__Struct_
 
       # Nested Type LockObject_e__Struct_
       @[Extern]
-      record LockObject_e__Struct_,
-        object_name : UInt16[128],
-        timeout : Win32cr::Foundation::LARGE_INTEGER,
-        alertable : Win32cr::Foundation::BOOL
+      struct LockObject_e__Struct_
+    property object_name : UInt16[128]
+    property timeout : Win32cr::Foundation::LARGE_INTEGER
+    property alertable : Win32cr::Foundation::BOOL
+    def initialize(@object_name : UInt16[128], @timeout : Win32cr::Foundation::LARGE_INTEGER, @alertable : Win32cr::Foundation::BOOL)
+    end
+      end
 
 
       # Nested Type ThreadObject_e__Struct_
       @[Extern]
-      record ThreadObject_e__Struct_,
-        process_id : UInt32,
-        thread_id : UInt32,
-        wait_time : UInt32,
-        context_switches : UInt32
+      struct ThreadObject_e__Struct_
+    property process_id : UInt32
+    property thread_id : UInt32
+    property wait_time : UInt32
+    property context_switches : UInt32
+    def initialize(@process_id : UInt32, @thread_id : UInt32, @wait_time : UInt32, @context_switches : UInt32)
+    end
+      end
 
+    def initialize(@lock_object : LockObject_e__Struct_, @thread_object : ThreadObject_e__Struct_)
+    end
     end
 
+    def initialize(@object_type : Win32cr::System::Diagnostics::Debug::WCT_OBJECT_TYPE, @object_status : Win32cr::System::Diagnostics::Debug::WCT_OBJECT_STATUS, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record MINIDUMP_LOCATION_DESCRIPTOR,
-    data_size : UInt32,
-    rva : UInt32
+  struct MINIDUMP_LOCATION_DESCRIPTOR
+    property data_size : UInt32
+    property rva : UInt32
+    def initialize(@data_size : UInt32, @rva : UInt32)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_LOCATION_DESCRIPTOR64,
-    data_size : UInt64,
-    rva : UInt64
+  struct MINIDUMP_LOCATION_DESCRIPTOR64
+    property data_size : UInt64
+    property rva : UInt64
+    def initialize(@data_size : UInt64, @rva : UInt64)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_MEMORY_DESCRIPTOR,
-    start_of_memory_range : UInt64,
-    memory : Win32cr::System::Diagnostics::Debug::MINIDUMP_LOCATION_DESCRIPTOR
+  struct MINIDUMP_MEMORY_DESCRIPTOR
+    property start_of_memory_range : UInt64
+    property memory : Win32cr::System::Diagnostics::Debug::MINIDUMP_LOCATION_DESCRIPTOR
+    def initialize(@start_of_memory_range : UInt64, @memory : Win32cr::System::Diagnostics::Debug::MINIDUMP_LOCATION_DESCRIPTOR)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_MEMORY_DESCRIPTOR64,
-    start_of_memory_range : UInt64,
-    data_size : UInt64
+  struct MINIDUMP_MEMORY_DESCRIPTOR64
+    property start_of_memory_range : UInt64
+    property data_size : UInt64
+    def initialize(@start_of_memory_range : UInt64, @data_size : UInt64)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_HEADER,
-    signature : UInt32,
-    version : UInt32,
-    number_of_streams : UInt32,
-    stream_directory_rva : UInt32,
-    check_sum : UInt32,
-    anonymous : Anonymous_e__Union_,
-    flags : UInt64 do
+  struct MINIDUMP_HEADER
+    property signature : UInt32
+    property version : UInt32
+    property number_of_streams : UInt32
+    property stream_directory_rva : UInt32
+    property check_sum : UInt32
+    property anonymous : Anonymous_e__Union_
+    property flags : UInt64
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      reserved : UInt32,
-      time_date_stamp : UInt32
+    struct Anonymous_e__Union_
+    property reserved : UInt32
+    property time_date_stamp : UInt32
+    def initialize(@reserved : UInt32, @time_date_stamp : UInt32)
+    end
+    end
 
+    def initialize(@signature : UInt32, @version : UInt32, @number_of_streams : UInt32, @stream_directory_rva : UInt32, @check_sum : UInt32, @anonymous : Anonymous_e__Union_, @flags : UInt64)
+    end
   end
 
   @[Extern]
-  record MINIDUMP_DIRECTORY,
-    stream_type : UInt32,
-    location : Win32cr::System::Diagnostics::Debug::MINIDUMP_LOCATION_DESCRIPTOR
+  struct MINIDUMP_DIRECTORY
+    property stream_type : UInt32
+    property location : Win32cr::System::Diagnostics::Debug::MINIDUMP_LOCATION_DESCRIPTOR
+    def initialize(@stream_type : UInt32, @location : Win32cr::System::Diagnostics::Debug::MINIDUMP_LOCATION_DESCRIPTOR)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_STRING,
-    length : UInt32,
-    buffer : UInt16*
+  struct MINIDUMP_STRING
+    property length : UInt32
+    property buffer : UInt16*
+    def initialize(@length : UInt32, @buffer : UInt16*)
+    end
+  end
 
   @[Extern(union: true)]
-  record CPU_INFORMATION,
-    x86_cpu_info : X86CpuInfo_e__Struct_,
-    other_cpu_info : OtherCpuInfo_e__Struct_ do
+  struct CPU_INFORMATION
+    property x86_cpu_info : X86CpuInfo_e__Struct_
+    property other_cpu_info : OtherCpuInfo_e__Struct_
 
     # Nested Type X86CpuInfo_e__Struct_
     @[Extern]
-    record X86CpuInfo_e__Struct_,
-      vendor_id : UInt32[3],
-      version_information : UInt32,
-      feature_information : UInt32,
-      amd_extended_cpu_features : UInt32
+    struct X86CpuInfo_e__Struct_
+    property vendor_id : UInt32[3]
+    property version_information : UInt32
+    property feature_information : UInt32
+    property amd_extended_cpu_features : UInt32
+    def initialize(@vendor_id : UInt32[3], @version_information : UInt32, @feature_information : UInt32, @amd_extended_cpu_features : UInt32)
+    end
+    end
 
 
     # Nested Type OtherCpuInfo_e__Struct_
     @[Extern]
-    record OtherCpuInfo_e__Struct_,
-      processor_features : UInt64[2]
+    struct OtherCpuInfo_e__Struct_
+    property processor_features : UInt64[2]
+    def initialize(@processor_features : UInt64[2])
+    end
+    end
 
+    def initialize(@x86_cpu_info : X86CpuInfo_e__Struct_, @other_cpu_info : OtherCpuInfo_e__Struct_)
+    end
   end
 
   @[Extern]
-  record MINIDUMP_SYSTEM_INFO,
-    processor_architecture : Win32cr::System::Diagnostics::Debug::PROCESSOR_ARCHITECTURE,
-    processor_level : UInt16,
-    processor_revision : UInt16,
-    anonymous1 : Anonymous1_e__Union_,
-    major_version : UInt32,
-    minor_version : UInt32,
-    build_number : UInt32,
-    platform_id : Win32cr::System::Diagnostics::Debug::VER_PLATFORM,
-    csd_version_rva : UInt32,
-    anonymous2 : Anonymous2_e__Union_,
-    cpu : Win32cr::System::Diagnostics::Debug::CPU_INFORMATION do
+  struct MINIDUMP_SYSTEM_INFO
+    property processor_architecture : Win32cr::System::Diagnostics::Debug::PROCESSOR_ARCHITECTURE
+    property processor_level : UInt16
+    property processor_revision : UInt16
+    property anonymous1 : Anonymous1_e__Union_
+    property major_version : UInt32
+    property minor_version : UInt32
+    property build_number : UInt32
+    property platform_id : Win32cr::System::Diagnostics::Debug::VER_PLATFORM
+    property csd_version_rva : UInt32
+    property anonymous2 : Anonymous2_e__Union_
+    property cpu : Win32cr::System::Diagnostics::Debug::CPU_INFORMATION
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      reserved1 : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous2_e__Union_
+    property reserved1 : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        suite_mask : UInt16,
-        reserved2 : UInt16
+      struct Anonymous_e__Struct_
+    property suite_mask : UInt16
+    property reserved2 : UInt16
+    def initialize(@suite_mask : UInt16, @reserved2 : UInt16)
+    end
+      end
 
+    def initialize(@reserved1 : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      reserved0 : UInt16,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous1_e__Union_
+    property reserved0 : UInt16
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        number_of_processors : UInt8,
-        product_type : UInt8
+      struct Anonymous_e__Struct_
+    property number_of_processors : UInt8
+    property product_type : UInt8
+    def initialize(@number_of_processors : UInt8, @product_type : UInt8)
+    end
+      end
 
+    def initialize(@reserved0 : UInt16, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@processor_architecture : Win32cr::System::Diagnostics::Debug::PROCESSOR_ARCHITECTURE, @processor_level : UInt16, @processor_revision : UInt16, @anonymous1 : Anonymous1_e__Union_, @major_version : UInt32, @minor_version : UInt32, @build_number : UInt32, @platform_id : Win32cr::System::Diagnostics::Debug::VER_PLATFORM, @csd_version_rva : UInt32, @anonymous2 : Anonymous2_e__Union_, @cpu : Win32cr::System::Diagnostics::Debug::CPU_INFORMATION)
+    end
   end
 
   @[Extern]
-  record MINIDUMP_THREAD,
-    thread_id : UInt32,
-    suspend_count : UInt32,
-    priority_class : UInt32,
-    priority : UInt32,
-    teb : UInt64,
-    stack : Win32cr::System::Diagnostics::Debug::MINIDUMP_MEMORY_DESCRIPTOR,
-    thread_context : Win32cr::System::Diagnostics::Debug::MINIDUMP_LOCATION_DESCRIPTOR
+  struct MINIDUMP_THREAD
+    property thread_id : UInt32
+    property suspend_count : UInt32
+    property priority_class : UInt32
+    property priority : UInt32
+    property teb : UInt64
+    property stack : Win32cr::System::Diagnostics::Debug::MINIDUMP_MEMORY_DESCRIPTOR
+    property thread_context : Win32cr::System::Diagnostics::Debug::MINIDUMP_LOCATION_DESCRIPTOR
+    def initialize(@thread_id : UInt32, @suspend_count : UInt32, @priority_class : UInt32, @priority : UInt32, @teb : UInt64, @stack : Win32cr::System::Diagnostics::Debug::MINIDUMP_MEMORY_DESCRIPTOR, @thread_context : Win32cr::System::Diagnostics::Debug::MINIDUMP_LOCATION_DESCRIPTOR)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_THREAD_LIST,
-    number_of_threads : UInt32,
-    threads : Win32cr::System::Diagnostics::Debug::MINIDUMP_THREAD*
+  struct MINIDUMP_THREAD_LIST
+    property number_of_threads : UInt32
+    property threads : Win32cr::System::Diagnostics::Debug::MINIDUMP_THREAD*
+    def initialize(@number_of_threads : UInt32, @threads : Win32cr::System::Diagnostics::Debug::MINIDUMP_THREAD*)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_THREAD_EX,
-    thread_id : UInt32,
-    suspend_count : UInt32,
-    priority_class : UInt32,
-    priority : UInt32,
-    teb : UInt64,
-    stack : Win32cr::System::Diagnostics::Debug::MINIDUMP_MEMORY_DESCRIPTOR,
-    thread_context : Win32cr::System::Diagnostics::Debug::MINIDUMP_LOCATION_DESCRIPTOR,
-    backing_store : Win32cr::System::Diagnostics::Debug::MINIDUMP_MEMORY_DESCRIPTOR
+  struct MINIDUMP_THREAD_EX
+    property thread_id : UInt32
+    property suspend_count : UInt32
+    property priority_class : UInt32
+    property priority : UInt32
+    property teb : UInt64
+    property stack : Win32cr::System::Diagnostics::Debug::MINIDUMP_MEMORY_DESCRIPTOR
+    property thread_context : Win32cr::System::Diagnostics::Debug::MINIDUMP_LOCATION_DESCRIPTOR
+    property backing_store : Win32cr::System::Diagnostics::Debug::MINIDUMP_MEMORY_DESCRIPTOR
+    def initialize(@thread_id : UInt32, @suspend_count : UInt32, @priority_class : UInt32, @priority : UInt32, @teb : UInt64, @stack : Win32cr::System::Diagnostics::Debug::MINIDUMP_MEMORY_DESCRIPTOR, @thread_context : Win32cr::System::Diagnostics::Debug::MINIDUMP_LOCATION_DESCRIPTOR, @backing_store : Win32cr::System::Diagnostics::Debug::MINIDUMP_MEMORY_DESCRIPTOR)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_THREAD_EX_LIST,
-    number_of_threads : UInt32,
-    threads : Win32cr::System::Diagnostics::Debug::MINIDUMP_THREAD_EX*
+  struct MINIDUMP_THREAD_EX_LIST
+    property number_of_threads : UInt32
+    property threads : Win32cr::System::Diagnostics::Debug::MINIDUMP_THREAD_EX*
+    def initialize(@number_of_threads : UInt32, @threads : Win32cr::System::Diagnostics::Debug::MINIDUMP_THREAD_EX*)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_EXCEPTION,
-    exception_code : UInt32,
-    exception_flags : UInt32,
-    exception_record : UInt64,
-    exception_address : UInt64,
-    number_parameters : UInt32,
-    __unused_alignment : UInt32,
-    exception_information : UInt64[15]
+  struct MINIDUMP_EXCEPTION
+    property exception_code : UInt32
+    property exception_flags : UInt32
+    property exception_record : UInt64
+    property exception_address : UInt64
+    property number_parameters : UInt32
+    property __unused_alignment : UInt32
+    property exception_information : UInt64[15]
+    def initialize(@exception_code : UInt32, @exception_flags : UInt32, @exception_record : UInt64, @exception_address : UInt64, @number_parameters : UInt32, @__unused_alignment : UInt32, @exception_information : UInt64[15])
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_EXCEPTION_STREAM,
-    thread_id : UInt32,
-    __alignment : UInt32,
-    exception_record : Win32cr::System::Diagnostics::Debug::MINIDUMP_EXCEPTION,
-    thread_context : Win32cr::System::Diagnostics::Debug::MINIDUMP_LOCATION_DESCRIPTOR
+  struct MINIDUMP_EXCEPTION_STREAM
+    property thread_id : UInt32
+    property __alignment : UInt32
+    property exception_record : Win32cr::System::Diagnostics::Debug::MINIDUMP_EXCEPTION
+    property thread_context : Win32cr::System::Diagnostics::Debug::MINIDUMP_LOCATION_DESCRIPTOR
+    def initialize(@thread_id : UInt32, @__alignment : UInt32, @exception_record : Win32cr::System::Diagnostics::Debug::MINIDUMP_EXCEPTION, @thread_context : Win32cr::System::Diagnostics::Debug::MINIDUMP_LOCATION_DESCRIPTOR)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_MODULE,
-    base_of_image : UInt64,
-    size_of_image : UInt32,
-    check_sum : UInt32,
-    time_date_stamp : UInt32,
-    module_name_rva : UInt32,
-    version_info : Win32cr::Storage::FileSystem::VS_FIXEDFILEINFO,
-    cv_record : Win32cr::System::Diagnostics::Debug::MINIDUMP_LOCATION_DESCRIPTOR,
-    misc_record : Win32cr::System::Diagnostics::Debug::MINIDUMP_LOCATION_DESCRIPTOR,
-    reserved0 : UInt64,
-    reserved1 : UInt64
+  struct MINIDUMP_MODULE
+    property base_of_image : UInt64
+    property size_of_image : UInt32
+    property check_sum : UInt32
+    property time_date_stamp : UInt32
+    property module_name_rva : UInt32
+    property version_info : Win32cr::Storage::FileSystem::VS_FIXEDFILEINFO
+    property cv_record : Win32cr::System::Diagnostics::Debug::MINIDUMP_LOCATION_DESCRIPTOR
+    property misc_record : Win32cr::System::Diagnostics::Debug::MINIDUMP_LOCATION_DESCRIPTOR
+    property reserved0 : UInt64
+    property reserved1 : UInt64
+    def initialize(@base_of_image : UInt64, @size_of_image : UInt32, @check_sum : UInt32, @time_date_stamp : UInt32, @module_name_rva : UInt32, @version_info : Win32cr::Storage::FileSystem::VS_FIXEDFILEINFO, @cv_record : Win32cr::System::Diagnostics::Debug::MINIDUMP_LOCATION_DESCRIPTOR, @misc_record : Win32cr::System::Diagnostics::Debug::MINIDUMP_LOCATION_DESCRIPTOR, @reserved0 : UInt64, @reserved1 : UInt64)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_MODULE_LIST,
-    number_of_modules : UInt32,
-    modules : Win32cr::System::Diagnostics::Debug::MINIDUMP_MODULE*
+  struct MINIDUMP_MODULE_LIST
+    property number_of_modules : UInt32
+    property modules : Win32cr::System::Diagnostics::Debug::MINIDUMP_MODULE*
+    def initialize(@number_of_modules : UInt32, @modules : Win32cr::System::Diagnostics::Debug::MINIDUMP_MODULE*)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_MEMORY_LIST,
-    number_of_memory_ranges : UInt32,
-    memory_ranges : Win32cr::System::Diagnostics::Debug::MINIDUMP_MEMORY_DESCRIPTOR*
+  struct MINIDUMP_MEMORY_LIST
+    property number_of_memory_ranges : UInt32
+    property memory_ranges : Win32cr::System::Diagnostics::Debug::MINIDUMP_MEMORY_DESCRIPTOR*
+    def initialize(@number_of_memory_ranges : UInt32, @memory_ranges : Win32cr::System::Diagnostics::Debug::MINIDUMP_MEMORY_DESCRIPTOR*)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_MEMORY64_LIST,
-    number_of_memory_ranges : UInt64,
-    base_rva : UInt64,
-    memory_ranges : Win32cr::System::Diagnostics::Debug::MINIDUMP_MEMORY_DESCRIPTOR64*
+  struct MINIDUMP_MEMORY64_LIST
+    property number_of_memory_ranges : UInt64
+    property base_rva : UInt64
+    property memory_ranges : Win32cr::System::Diagnostics::Debug::MINIDUMP_MEMORY_DESCRIPTOR64*
+    def initialize(@number_of_memory_ranges : UInt64, @base_rva : UInt64, @memory_ranges : Win32cr::System::Diagnostics::Debug::MINIDUMP_MEMORY_DESCRIPTOR64*)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_EXCEPTION_INFORMATION,
-    thread_id : UInt32,
-    exception_pointers : Win32cr::System::Diagnostics::Debug::EXCEPTION_POINTERS*,
-    client_pointers : Win32cr::Foundation::BOOL
+  struct MINIDUMP_EXCEPTION_INFORMATION
+    property thread_id : UInt32
+    property exception_pointers : Win32cr::System::Diagnostics::Debug::EXCEPTION_POINTERS*
+    property client_pointers : Win32cr::Foundation::BOOL
+    def initialize(@thread_id : UInt32, @exception_pointers : Win32cr::System::Diagnostics::Debug::EXCEPTION_POINTERS*, @client_pointers : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_EXCEPTION_INFORMATION64,
-    thread_id : UInt32,
-    exception_record : UInt64,
-    context_record : UInt64,
-    client_pointers : Win32cr::Foundation::BOOL
+  struct MINIDUMP_EXCEPTION_INFORMATION64
+    property thread_id : UInt32
+    property exception_record : UInt64
+    property context_record : UInt64
+    property client_pointers : Win32cr::Foundation::BOOL
+    def initialize(@thread_id : UInt32, @exception_record : UInt64, @context_record : UInt64, @client_pointers : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_HANDLE_OBJECT_INFORMATION,
-    next_info_rva : UInt32,
-    info_type : UInt32,
-    size_of_info : UInt32
+  struct MINIDUMP_HANDLE_OBJECT_INFORMATION
+    property next_info_rva : UInt32
+    property info_type : UInt32
+    property size_of_info : UInt32
+    def initialize(@next_info_rva : UInt32, @info_type : UInt32, @size_of_info : UInt32)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_HANDLE_DESCRIPTOR,
-    handle : UInt64,
-    type_name_rva : UInt32,
-    object_name_rva : UInt32,
-    attributes : UInt32,
-    granted_access : UInt32,
-    handle_count : UInt32,
-    pointer_count : UInt32
+  struct MINIDUMP_HANDLE_DESCRIPTOR
+    property handle : UInt64
+    property type_name_rva : UInt32
+    property object_name_rva : UInt32
+    property attributes : UInt32
+    property granted_access : UInt32
+    property handle_count : UInt32
+    property pointer_count : UInt32
+    def initialize(@handle : UInt64, @type_name_rva : UInt32, @object_name_rva : UInt32, @attributes : UInt32, @granted_access : UInt32, @handle_count : UInt32, @pointer_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_HANDLE_DESCRIPTOR_2,
-    handle : UInt64,
-    type_name_rva : UInt32,
-    object_name_rva : UInt32,
-    attributes : UInt32,
-    granted_access : UInt32,
-    handle_count : UInt32,
-    pointer_count : UInt32,
-    object_info_rva : UInt32,
-    reserved0 : UInt32
+  struct MINIDUMP_HANDLE_DESCRIPTOR_2
+    property handle : UInt64
+    property type_name_rva : UInt32
+    property object_name_rva : UInt32
+    property attributes : UInt32
+    property granted_access : UInt32
+    property handle_count : UInt32
+    property pointer_count : UInt32
+    property object_info_rva : UInt32
+    property reserved0 : UInt32
+    def initialize(@handle : UInt64, @type_name_rva : UInt32, @object_name_rva : UInt32, @attributes : UInt32, @granted_access : UInt32, @handle_count : UInt32, @pointer_count : UInt32, @object_info_rva : UInt32, @reserved0 : UInt32)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_HANDLE_DATA_STREAM,
-    size_of_header : UInt32,
-    size_of_descriptor : UInt32,
-    number_of_descriptors : UInt32,
-    reserved : UInt32
+  struct MINIDUMP_HANDLE_DATA_STREAM
+    property size_of_header : UInt32
+    property size_of_descriptor : UInt32
+    property number_of_descriptors : UInt32
+    property reserved : UInt32
+    def initialize(@size_of_header : UInt32, @size_of_descriptor : UInt32, @number_of_descriptors : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_HANDLE_OPERATION_LIST,
-    size_of_header : UInt32,
-    size_of_entry : UInt32,
-    number_of_entries : UInt32,
-    reserved : UInt32
+  struct MINIDUMP_HANDLE_OPERATION_LIST
+    property size_of_header : UInt32
+    property size_of_entry : UInt32
+    property number_of_entries : UInt32
+    property reserved : UInt32
+    def initialize(@size_of_header : UInt32, @size_of_entry : UInt32, @number_of_entries : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_FUNCTION_TABLE_DESCRIPTOR,
-    minimum_address : UInt64,
-    maximum_address : UInt64,
-    base_address : UInt64,
-    entry_count : UInt32,
-    size_of_align_pad : UInt32
+  struct MINIDUMP_FUNCTION_TABLE_DESCRIPTOR
+    property minimum_address : UInt64
+    property maximum_address : UInt64
+    property base_address : UInt64
+    property entry_count : UInt32
+    property size_of_align_pad : UInt32
+    def initialize(@minimum_address : UInt64, @maximum_address : UInt64, @base_address : UInt64, @entry_count : UInt32, @size_of_align_pad : UInt32)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_FUNCTION_TABLE_STREAM,
-    size_of_header : UInt32,
-    size_of_descriptor : UInt32,
-    size_of_native_descriptor : UInt32,
-    size_of_function_entry : UInt32,
-    number_of_descriptors : UInt32,
-    size_of_align_pad : UInt32
+  struct MINIDUMP_FUNCTION_TABLE_STREAM
+    property size_of_header : UInt32
+    property size_of_descriptor : UInt32
+    property size_of_native_descriptor : UInt32
+    property size_of_function_entry : UInt32
+    property number_of_descriptors : UInt32
+    property size_of_align_pad : UInt32
+    def initialize(@size_of_header : UInt32, @size_of_descriptor : UInt32, @size_of_native_descriptor : UInt32, @size_of_function_entry : UInt32, @number_of_descriptors : UInt32, @size_of_align_pad : UInt32)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_UNLOADED_MODULE,
-    base_of_image : UInt64,
-    size_of_image : UInt32,
-    check_sum : UInt32,
-    time_date_stamp : UInt32,
-    module_name_rva : UInt32
+  struct MINIDUMP_UNLOADED_MODULE
+    property base_of_image : UInt64
+    property size_of_image : UInt32
+    property check_sum : UInt32
+    property time_date_stamp : UInt32
+    property module_name_rva : UInt32
+    def initialize(@base_of_image : UInt64, @size_of_image : UInt32, @check_sum : UInt32, @time_date_stamp : UInt32, @module_name_rva : UInt32)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_UNLOADED_MODULE_LIST,
-    size_of_header : UInt32,
-    size_of_entry : UInt32,
-    number_of_entries : UInt32
+  struct MINIDUMP_UNLOADED_MODULE_LIST
+    property size_of_header : UInt32
+    property size_of_entry : UInt32
+    property number_of_entries : UInt32
+    def initialize(@size_of_header : UInt32, @size_of_entry : UInt32, @number_of_entries : UInt32)
+    end
+  end
 
   @[Extern]
-  record XSTATE_CONFIG_FEATURE_MSC_INFO,
-    size_of_info : UInt32,
-    context_size : UInt32,
-    enabled_features : UInt64,
-    features : Win32cr::System::Diagnostics::Debug::XSTATE_FEATURE[64]
+  struct XSTATE_CONFIG_FEATURE_MSC_INFO
+    property size_of_info : UInt32
+    property context_size : UInt32
+    property enabled_features : UInt64
+    property features : Win32cr::System::Diagnostics::Debug::XSTATE_FEATURE[64]
+    def initialize(@size_of_info : UInt32, @context_size : UInt32, @enabled_features : UInt64, @features : Win32cr::System::Diagnostics::Debug::XSTATE_FEATURE[64])
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_MISC_INFO,
-    size_of_info : UInt32,
-    flags1 : Win32cr::System::Diagnostics::Debug::MINIDUMP_MISC_INFO_FLAGS,
-    process_id : UInt32,
-    process_create_time : UInt32,
-    process_user_time : UInt32,
-    process_kernel_time : UInt32
+  struct MINIDUMP_MISC_INFO
+    property size_of_info : UInt32
+    property flags1 : Win32cr::System::Diagnostics::Debug::MINIDUMP_MISC_INFO_FLAGS
+    property process_id : UInt32
+    property process_create_time : UInt32
+    property process_user_time : UInt32
+    property process_kernel_time : UInt32
+    def initialize(@size_of_info : UInt32, @flags1 : Win32cr::System::Diagnostics::Debug::MINIDUMP_MISC_INFO_FLAGS, @process_id : UInt32, @process_create_time : UInt32, @process_user_time : UInt32, @process_kernel_time : UInt32)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_MISC_INFO_2,
-    size_of_info : UInt32,
-    flags1 : UInt32,
-    process_id : UInt32,
-    process_create_time : UInt32,
-    process_user_time : UInt32,
-    process_kernel_time : UInt32,
-    processor_max_mhz : UInt32,
-    processor_current_mhz : UInt32,
-    processor_mhz_limit : UInt32,
-    processor_max_idle_state : UInt32,
-    processor_current_idle_state : UInt32
+  struct MINIDUMP_MISC_INFO_2
+    property size_of_info : UInt32
+    property flags1 : UInt32
+    property process_id : UInt32
+    property process_create_time : UInt32
+    property process_user_time : UInt32
+    property process_kernel_time : UInt32
+    property processor_max_mhz : UInt32
+    property processor_current_mhz : UInt32
+    property processor_mhz_limit : UInt32
+    property processor_max_idle_state : UInt32
+    property processor_current_idle_state : UInt32
+    def initialize(@size_of_info : UInt32, @flags1 : UInt32, @process_id : UInt32, @process_create_time : UInt32, @process_user_time : UInt32, @process_kernel_time : UInt32, @processor_max_mhz : UInt32, @processor_current_mhz : UInt32, @processor_mhz_limit : UInt32, @processor_max_idle_state : UInt32, @processor_current_idle_state : UInt32)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_MISC_INFO_3,
-    size_of_info : UInt32,
-    flags1 : UInt32,
-    process_id : UInt32,
-    process_create_time : UInt32,
-    process_user_time : UInt32,
-    process_kernel_time : UInt32,
-    processor_max_mhz : UInt32,
-    processor_current_mhz : UInt32,
-    processor_mhz_limit : UInt32,
-    processor_max_idle_state : UInt32,
-    processor_current_idle_state : UInt32,
-    process_integrity_level : UInt32,
-    process_execute_flags : UInt32,
-    protected_process : UInt32,
-    time_zone_id : UInt32,
-    time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION
+  struct MINIDUMP_MISC_INFO_3
+    property size_of_info : UInt32
+    property flags1 : UInt32
+    property process_id : UInt32
+    property process_create_time : UInt32
+    property process_user_time : UInt32
+    property process_kernel_time : UInt32
+    property processor_max_mhz : UInt32
+    property processor_current_mhz : UInt32
+    property processor_mhz_limit : UInt32
+    property processor_max_idle_state : UInt32
+    property processor_current_idle_state : UInt32
+    property process_integrity_level : UInt32
+    property process_execute_flags : UInt32
+    property protected_process : UInt32
+    property time_zone_id : UInt32
+    property time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION
+    def initialize(@size_of_info : UInt32, @flags1 : UInt32, @process_id : UInt32, @process_create_time : UInt32, @process_user_time : UInt32, @process_kernel_time : UInt32, @processor_max_mhz : UInt32, @processor_current_mhz : UInt32, @processor_mhz_limit : UInt32, @processor_max_idle_state : UInt32, @processor_current_idle_state : UInt32, @process_integrity_level : UInt32, @process_execute_flags : UInt32, @protected_process : UInt32, @time_zone_id : UInt32, @time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_MISC_INFO_4,
-    size_of_info : UInt32,
-    flags1 : UInt32,
-    process_id : UInt32,
-    process_create_time : UInt32,
-    process_user_time : UInt32,
-    process_kernel_time : UInt32,
-    processor_max_mhz : UInt32,
-    processor_current_mhz : UInt32,
-    processor_mhz_limit : UInt32,
-    processor_max_idle_state : UInt32,
-    processor_current_idle_state : UInt32,
-    process_integrity_level : UInt32,
-    process_execute_flags : UInt32,
-    protected_process : UInt32,
-    time_zone_id : UInt32,
-    time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION,
-    build_string : UInt16[260],
-    dbg_bld_str : UInt16[40]
+  struct MINIDUMP_MISC_INFO_4
+    property size_of_info : UInt32
+    property flags1 : UInt32
+    property process_id : UInt32
+    property process_create_time : UInt32
+    property process_user_time : UInt32
+    property process_kernel_time : UInt32
+    property processor_max_mhz : UInt32
+    property processor_current_mhz : UInt32
+    property processor_mhz_limit : UInt32
+    property processor_max_idle_state : UInt32
+    property processor_current_idle_state : UInt32
+    property process_integrity_level : UInt32
+    property process_execute_flags : UInt32
+    property protected_process : UInt32
+    property time_zone_id : UInt32
+    property time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION
+    property build_string : UInt16[260]
+    property dbg_bld_str : UInt16[40]
+    def initialize(@size_of_info : UInt32, @flags1 : UInt32, @process_id : UInt32, @process_create_time : UInt32, @process_user_time : UInt32, @process_kernel_time : UInt32, @processor_max_mhz : UInt32, @processor_current_mhz : UInt32, @processor_mhz_limit : UInt32, @processor_max_idle_state : UInt32, @processor_current_idle_state : UInt32, @process_integrity_level : UInt32, @process_execute_flags : UInt32, @protected_process : UInt32, @time_zone_id : UInt32, @time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION, @build_string : UInt16[260], @dbg_bld_str : UInt16[40])
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_MISC_INFO_5,
-    size_of_info : UInt32,
-    flags1 : UInt32,
-    process_id : UInt32,
-    process_create_time : UInt32,
-    process_user_time : UInt32,
-    process_kernel_time : UInt32,
-    processor_max_mhz : UInt32,
-    processor_current_mhz : UInt32,
-    processor_mhz_limit : UInt32,
-    processor_max_idle_state : UInt32,
-    processor_current_idle_state : UInt32,
-    process_integrity_level : UInt32,
-    process_execute_flags : UInt32,
-    protected_process : UInt32,
-    time_zone_id : UInt32,
-    time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION,
-    build_string : UInt16[260],
-    dbg_bld_str : UInt16[40],
-    x_state_data : Win32cr::System::Diagnostics::Debug::XSTATE_CONFIG_FEATURE_MSC_INFO,
-    process_cookie : UInt32
+  struct MINIDUMP_MISC_INFO_5
+    property size_of_info : UInt32
+    property flags1 : UInt32
+    property process_id : UInt32
+    property process_create_time : UInt32
+    property process_user_time : UInt32
+    property process_kernel_time : UInt32
+    property processor_max_mhz : UInt32
+    property processor_current_mhz : UInt32
+    property processor_mhz_limit : UInt32
+    property processor_max_idle_state : UInt32
+    property processor_current_idle_state : UInt32
+    property process_integrity_level : UInt32
+    property process_execute_flags : UInt32
+    property protected_process : UInt32
+    property time_zone_id : UInt32
+    property time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION
+    property build_string : UInt16[260]
+    property dbg_bld_str : UInt16[40]
+    property x_state_data : Win32cr::System::Diagnostics::Debug::XSTATE_CONFIG_FEATURE_MSC_INFO
+    property process_cookie : UInt32
+    def initialize(@size_of_info : UInt32, @flags1 : UInt32, @process_id : UInt32, @process_create_time : UInt32, @process_user_time : UInt32, @process_kernel_time : UInt32, @processor_max_mhz : UInt32, @processor_current_mhz : UInt32, @processor_mhz_limit : UInt32, @processor_max_idle_state : UInt32, @processor_current_idle_state : UInt32, @process_integrity_level : UInt32, @process_execute_flags : UInt32, @protected_process : UInt32, @time_zone_id : UInt32, @time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION, @build_string : UInt16[260], @dbg_bld_str : UInt16[40], @x_state_data : Win32cr::System::Diagnostics::Debug::XSTATE_CONFIG_FEATURE_MSC_INFO, @process_cookie : UInt32)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_MEMORY_INFO,
-    base_address : UInt64,
-    allocation_base : UInt64,
-    allocation_protect : UInt32,
-    __alignment1 : UInt32,
-    region_size : UInt64,
-    state : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE,
-    protect : UInt32,
-    type__ : UInt32,
-    __alignment2 : UInt32
+  struct MINIDUMP_MEMORY_INFO
+    property base_address : UInt64
+    property allocation_base : UInt64
+    property allocation_protect : UInt32
+    property __alignment1 : UInt32
+    property region_size : UInt64
+    property state : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE
+    property protect : UInt32
+    property type__ : UInt32
+    property __alignment2 : UInt32
+    def initialize(@base_address : UInt64, @allocation_base : UInt64, @allocation_protect : UInt32, @__alignment1 : UInt32, @region_size : UInt64, @state : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, @protect : UInt32, @type__ : UInt32, @__alignment2 : UInt32)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_MEMORY_INFO_LIST,
-    size_of_header : UInt32,
-    size_of_entry : UInt32,
-    number_of_entries : UInt64
+  struct MINIDUMP_MEMORY_INFO_LIST
+    property size_of_header : UInt32
+    property size_of_entry : UInt32
+    property number_of_entries : UInt64
+    def initialize(@size_of_header : UInt32, @size_of_entry : UInt32, @number_of_entries : UInt64)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_THREAD_NAME,
-    thread_id : UInt32,
-    rva_of_thread_name : UInt64
+  struct MINIDUMP_THREAD_NAME
+    property thread_id : UInt32
+    property rva_of_thread_name : UInt64
+    def initialize(@thread_id : UInt32, @rva_of_thread_name : UInt64)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_THREAD_NAME_LIST,
-    number_of_thread_names : UInt32,
-    thread_names : Win32cr::System::Diagnostics::Debug::MINIDUMP_THREAD_NAME*
+  struct MINIDUMP_THREAD_NAME_LIST
+    property number_of_thread_names : UInt32
+    property thread_names : Win32cr::System::Diagnostics::Debug::MINIDUMP_THREAD_NAME*
+    def initialize(@number_of_thread_names : UInt32, @thread_names : Win32cr::System::Diagnostics::Debug::MINIDUMP_THREAD_NAME*)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_THREAD_INFO,
-    thread_id : UInt32,
-    dump_flags : Win32cr::System::Diagnostics::Debug::MINIDUMP_THREAD_INFO_DUMP_FLAGS,
-    dump_error : UInt32,
-    exit_status : UInt32,
-    create_time : UInt64,
-    exit_time : UInt64,
-    kernel_time : UInt64,
-    user_time : UInt64,
-    start_address : UInt64,
-    affinity : UInt64
+  struct MINIDUMP_THREAD_INFO
+    property thread_id : UInt32
+    property dump_flags : Win32cr::System::Diagnostics::Debug::MINIDUMP_THREAD_INFO_DUMP_FLAGS
+    property dump_error : UInt32
+    property exit_status : UInt32
+    property create_time : UInt64
+    property exit_time : UInt64
+    property kernel_time : UInt64
+    property user_time : UInt64
+    property start_address : UInt64
+    property affinity : UInt64
+    def initialize(@thread_id : UInt32, @dump_flags : Win32cr::System::Diagnostics::Debug::MINIDUMP_THREAD_INFO_DUMP_FLAGS, @dump_error : UInt32, @exit_status : UInt32, @create_time : UInt64, @exit_time : UInt64, @kernel_time : UInt64, @user_time : UInt64, @start_address : UInt64, @affinity : UInt64)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_THREAD_INFO_LIST,
-    size_of_header : UInt32,
-    size_of_entry : UInt32,
-    number_of_entries : UInt32
+  struct MINIDUMP_THREAD_INFO_LIST
+    property size_of_header : UInt32
+    property size_of_entry : UInt32
+    property number_of_entries : UInt32
+    def initialize(@size_of_header : UInt32, @size_of_entry : UInt32, @number_of_entries : UInt32)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_TOKEN_INFO_HEADER,
-    token_size : UInt32,
-    token_id : UInt32,
-    token_handle : UInt64
+  struct MINIDUMP_TOKEN_INFO_HEADER
+    property token_size : UInt32
+    property token_id : UInt32
+    property token_handle : UInt64
+    def initialize(@token_size : UInt32, @token_id : UInt32, @token_handle : UInt64)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_TOKEN_INFO_LIST,
-    token_list_size : UInt32,
-    token_list_entries : UInt32,
-    list_header_size : UInt32,
-    element_header_size : UInt32
+  struct MINIDUMP_TOKEN_INFO_LIST
+    property token_list_size : UInt32
+    property token_list_entries : UInt32
+    property list_header_size : UInt32
+    property element_header_size : UInt32
+    def initialize(@token_list_size : UInt32, @token_list_entries : UInt32, @list_header_size : UInt32, @element_header_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_SYSTEM_BASIC_INFORMATION,
-    timer_resolution : UInt32,
-    page_size : UInt32,
-    number_of_physical_pages : UInt32,
-    lowest_physical_page_number : UInt32,
-    highest_physical_page_number : UInt32,
-    allocation_granularity : UInt32,
-    minimum_user_mode_address : UInt64,
-    maximum_user_mode_address : UInt64,
-    active_processors_affinity_mask : UInt64,
-    number_of_processors : UInt32
+  struct MINIDUMP_SYSTEM_BASIC_INFORMATION
+    property timer_resolution : UInt32
+    property page_size : UInt32
+    property number_of_physical_pages : UInt32
+    property lowest_physical_page_number : UInt32
+    property highest_physical_page_number : UInt32
+    property allocation_granularity : UInt32
+    property minimum_user_mode_address : UInt64
+    property maximum_user_mode_address : UInt64
+    property active_processors_affinity_mask : UInt64
+    property number_of_processors : UInt32
+    def initialize(@timer_resolution : UInt32, @page_size : UInt32, @number_of_physical_pages : UInt32, @lowest_physical_page_number : UInt32, @highest_physical_page_number : UInt32, @allocation_granularity : UInt32, @minimum_user_mode_address : UInt64, @maximum_user_mode_address : UInt64, @active_processors_affinity_mask : UInt64, @number_of_processors : UInt32)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_SYSTEM_FILECACHE_INFORMATION,
-    current_size : UInt64,
-    peak_size : UInt64,
-    page_fault_count : UInt32,
-    minimum_working_set : UInt64,
-    maximum_working_set : UInt64,
-    current_size_including_transition_in_pages : UInt64,
-    peak_size_including_transition_in_pages : UInt64,
-    transition_re_purpose_count : UInt32,
-    flags : UInt32
+  struct MINIDUMP_SYSTEM_FILECACHE_INFORMATION
+    property current_size : UInt64
+    property peak_size : UInt64
+    property page_fault_count : UInt32
+    property minimum_working_set : UInt64
+    property maximum_working_set : UInt64
+    property current_size_including_transition_in_pages : UInt64
+    property peak_size_including_transition_in_pages : UInt64
+    property transition_re_purpose_count : UInt32
+    property flags : UInt32
+    def initialize(@current_size : UInt64, @peak_size : UInt64, @page_fault_count : UInt32, @minimum_working_set : UInt64, @maximum_working_set : UInt64, @current_size_including_transition_in_pages : UInt64, @peak_size_including_transition_in_pages : UInt64, @transition_re_purpose_count : UInt32, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_SYSTEM_BASIC_PERFORMANCE_INFORMATION,
-    available_pages : UInt64,
-    committed_pages : UInt64,
-    commit_limit : UInt64,
-    peak_commitment : UInt64
+  struct MINIDUMP_SYSTEM_BASIC_PERFORMANCE_INFORMATION
+    property available_pages : UInt64
+    property committed_pages : UInt64
+    property commit_limit : UInt64
+    property peak_commitment : UInt64
+    def initialize(@available_pages : UInt64, @committed_pages : UInt64, @commit_limit : UInt64, @peak_commitment : UInt64)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_SYSTEM_PERFORMANCE_INFORMATION,
-    idle_process_time : UInt64,
-    io_read_transfer_count : UInt64,
-    io_write_transfer_count : UInt64,
-    io_other_transfer_count : UInt64,
-    io_read_operation_count : UInt32,
-    io_write_operation_count : UInt32,
-    io_other_operation_count : UInt32,
-    available_pages : UInt32,
-    committed_pages : UInt32,
-    commit_limit : UInt32,
-    peak_commitment : UInt32,
-    page_fault_count : UInt32,
-    copy_on_write_count : UInt32,
-    transition_count : UInt32,
-    cache_transition_count : UInt32,
-    demand_zero_count : UInt32,
-    page_read_count : UInt32,
-    page_read_io_count : UInt32,
-    cache_read_count : UInt32,
-    cache_io_count : UInt32,
-    dirty_pages_write_count : UInt32,
-    dirty_write_io_count : UInt32,
-    mapped_pages_write_count : UInt32,
-    mapped_write_io_count : UInt32,
-    paged_pool_pages : UInt32,
-    non_paged_pool_pages : UInt32,
-    paged_pool_allocs : UInt32,
-    paged_pool_frees : UInt32,
-    non_paged_pool_allocs : UInt32,
-    non_paged_pool_frees : UInt32,
-    free_system_ptes : UInt32,
-    resident_system_code_page : UInt32,
-    total_system_driver_pages : UInt32,
-    total_system_code_pages : UInt32,
-    non_paged_pool_lookaside_hits : UInt32,
-    paged_pool_lookaside_hits : UInt32,
-    available_paged_pool_pages : UInt32,
-    resident_system_cache_page : UInt32,
-    resident_paged_pool_page : UInt32,
-    resident_system_driver_page : UInt32,
-    cc_fast_read_no_wait : UInt32,
-    cc_fast_read_wait : UInt32,
-    cc_fast_read_resource_miss : UInt32,
-    cc_fast_read_not_possible : UInt32,
-    cc_fast_mdl_read_no_wait : UInt32,
-    cc_fast_mdl_read_wait : UInt32,
-    cc_fast_mdl_read_resource_miss : UInt32,
-    cc_fast_mdl_read_not_possible : UInt32,
-    cc_map_data_no_wait : UInt32,
-    cc_map_data_wait : UInt32,
-    cc_map_data_no_wait_miss : UInt32,
-    cc_map_data_wait_miss : UInt32,
-    cc_pin_mapped_data_count : UInt32,
-    cc_pin_read_no_wait : UInt32,
-    cc_pin_read_wait : UInt32,
-    cc_pin_read_no_wait_miss : UInt32,
-    cc_pin_read_wait_miss : UInt32,
-    cc_copy_read_no_wait : UInt32,
-    cc_copy_read_wait : UInt32,
-    cc_copy_read_no_wait_miss : UInt32,
-    cc_copy_read_wait_miss : UInt32,
-    cc_mdl_read_no_wait : UInt32,
-    cc_mdl_read_wait : UInt32,
-    cc_mdl_read_no_wait_miss : UInt32,
-    cc_mdl_read_wait_miss : UInt32,
-    cc_read_ahead_ios : UInt32,
-    cc_lazy_write_ios : UInt32,
-    cc_lazy_write_pages : UInt32,
-    cc_data_flushes : UInt32,
-    cc_data_pages : UInt32,
-    context_switches : UInt32,
-    first_level_tb_fills : UInt32,
-    second_level_tb_fills : UInt32,
-    system_calls : UInt32,
-    cc_total_dirty_pages : UInt64,
-    cc_dirty_page_threshold : UInt64,
-    resident_available_pages : Int64,
-    shared_committed_pages : UInt64
+  struct MINIDUMP_SYSTEM_PERFORMANCE_INFORMATION
+    property idle_process_time : UInt64
+    property io_read_transfer_count : UInt64
+    property io_write_transfer_count : UInt64
+    property io_other_transfer_count : UInt64
+    property io_read_operation_count : UInt32
+    property io_write_operation_count : UInt32
+    property io_other_operation_count : UInt32
+    property available_pages : UInt32
+    property committed_pages : UInt32
+    property commit_limit : UInt32
+    property peak_commitment : UInt32
+    property page_fault_count : UInt32
+    property copy_on_write_count : UInt32
+    property transition_count : UInt32
+    property cache_transition_count : UInt32
+    property demand_zero_count : UInt32
+    property page_read_count : UInt32
+    property page_read_io_count : UInt32
+    property cache_read_count : UInt32
+    property cache_io_count : UInt32
+    property dirty_pages_write_count : UInt32
+    property dirty_write_io_count : UInt32
+    property mapped_pages_write_count : UInt32
+    property mapped_write_io_count : UInt32
+    property paged_pool_pages : UInt32
+    property non_paged_pool_pages : UInt32
+    property paged_pool_allocs : UInt32
+    property paged_pool_frees : UInt32
+    property non_paged_pool_allocs : UInt32
+    property non_paged_pool_frees : UInt32
+    property free_system_ptes : UInt32
+    property resident_system_code_page : UInt32
+    property total_system_driver_pages : UInt32
+    property total_system_code_pages : UInt32
+    property non_paged_pool_lookaside_hits : UInt32
+    property paged_pool_lookaside_hits : UInt32
+    property available_paged_pool_pages : UInt32
+    property resident_system_cache_page : UInt32
+    property resident_paged_pool_page : UInt32
+    property resident_system_driver_page : UInt32
+    property cc_fast_read_no_wait : UInt32
+    property cc_fast_read_wait : UInt32
+    property cc_fast_read_resource_miss : UInt32
+    property cc_fast_read_not_possible : UInt32
+    property cc_fast_mdl_read_no_wait : UInt32
+    property cc_fast_mdl_read_wait : UInt32
+    property cc_fast_mdl_read_resource_miss : UInt32
+    property cc_fast_mdl_read_not_possible : UInt32
+    property cc_map_data_no_wait : UInt32
+    property cc_map_data_wait : UInt32
+    property cc_map_data_no_wait_miss : UInt32
+    property cc_map_data_wait_miss : UInt32
+    property cc_pin_mapped_data_count : UInt32
+    property cc_pin_read_no_wait : UInt32
+    property cc_pin_read_wait : UInt32
+    property cc_pin_read_no_wait_miss : UInt32
+    property cc_pin_read_wait_miss : UInt32
+    property cc_copy_read_no_wait : UInt32
+    property cc_copy_read_wait : UInt32
+    property cc_copy_read_no_wait_miss : UInt32
+    property cc_copy_read_wait_miss : UInt32
+    property cc_mdl_read_no_wait : UInt32
+    property cc_mdl_read_wait : UInt32
+    property cc_mdl_read_no_wait_miss : UInt32
+    property cc_mdl_read_wait_miss : UInt32
+    property cc_read_ahead_ios : UInt32
+    property cc_lazy_write_ios : UInt32
+    property cc_lazy_write_pages : UInt32
+    property cc_data_flushes : UInt32
+    property cc_data_pages : UInt32
+    property context_switches : UInt32
+    property first_level_tb_fills : UInt32
+    property second_level_tb_fills : UInt32
+    property system_calls : UInt32
+    property cc_total_dirty_pages : UInt64
+    property cc_dirty_page_threshold : UInt64
+    property resident_available_pages : Int64
+    property shared_committed_pages : UInt64
+    def initialize(@idle_process_time : UInt64, @io_read_transfer_count : UInt64, @io_write_transfer_count : UInt64, @io_other_transfer_count : UInt64, @io_read_operation_count : UInt32, @io_write_operation_count : UInt32, @io_other_operation_count : UInt32, @available_pages : UInt32, @committed_pages : UInt32, @commit_limit : UInt32, @peak_commitment : UInt32, @page_fault_count : UInt32, @copy_on_write_count : UInt32, @transition_count : UInt32, @cache_transition_count : UInt32, @demand_zero_count : UInt32, @page_read_count : UInt32, @page_read_io_count : UInt32, @cache_read_count : UInt32, @cache_io_count : UInt32, @dirty_pages_write_count : UInt32, @dirty_write_io_count : UInt32, @mapped_pages_write_count : UInt32, @mapped_write_io_count : UInt32, @paged_pool_pages : UInt32, @non_paged_pool_pages : UInt32, @paged_pool_allocs : UInt32, @paged_pool_frees : UInt32, @non_paged_pool_allocs : UInt32, @non_paged_pool_frees : UInt32, @free_system_ptes : UInt32, @resident_system_code_page : UInt32, @total_system_driver_pages : UInt32, @total_system_code_pages : UInt32, @non_paged_pool_lookaside_hits : UInt32, @paged_pool_lookaside_hits : UInt32, @available_paged_pool_pages : UInt32, @resident_system_cache_page : UInt32, @resident_paged_pool_page : UInt32, @resident_system_driver_page : UInt32, @cc_fast_read_no_wait : UInt32, @cc_fast_read_wait : UInt32, @cc_fast_read_resource_miss : UInt32, @cc_fast_read_not_possible : UInt32, @cc_fast_mdl_read_no_wait : UInt32, @cc_fast_mdl_read_wait : UInt32, @cc_fast_mdl_read_resource_miss : UInt32, @cc_fast_mdl_read_not_possible : UInt32, @cc_map_data_no_wait : UInt32, @cc_map_data_wait : UInt32, @cc_map_data_no_wait_miss : UInt32, @cc_map_data_wait_miss : UInt32, @cc_pin_mapped_data_count : UInt32, @cc_pin_read_no_wait : UInt32, @cc_pin_read_wait : UInt32, @cc_pin_read_no_wait_miss : UInt32, @cc_pin_read_wait_miss : UInt32, @cc_copy_read_no_wait : UInt32, @cc_copy_read_wait : UInt32, @cc_copy_read_no_wait_miss : UInt32, @cc_copy_read_wait_miss : UInt32, @cc_mdl_read_no_wait : UInt32, @cc_mdl_read_wait : UInt32, @cc_mdl_read_no_wait_miss : UInt32, @cc_mdl_read_wait_miss : UInt32, @cc_read_ahead_ios : UInt32, @cc_lazy_write_ios : UInt32, @cc_lazy_write_pages : UInt32, @cc_data_flushes : UInt32, @cc_data_pages : UInt32, @context_switches : UInt32, @first_level_tb_fills : UInt32, @second_level_tb_fills : UInt32, @system_calls : UInt32, @cc_total_dirty_pages : UInt64, @cc_dirty_page_threshold : UInt64, @resident_available_pages : Int64, @shared_committed_pages : UInt64)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_SYSTEM_MEMORY_INFO_1,
-    revision : UInt16,
-    flags : UInt16,
-    basic_info : Win32cr::System::Diagnostics::Debug::MINIDUMP_SYSTEM_BASIC_INFORMATION,
-    file_cache_info : Win32cr::System::Diagnostics::Debug::MINIDUMP_SYSTEM_FILECACHE_INFORMATION,
-    basic_perf_info : Win32cr::System::Diagnostics::Debug::MINIDUMP_SYSTEM_BASIC_PERFORMANCE_INFORMATION,
-    perf_info : Win32cr::System::Diagnostics::Debug::MINIDUMP_SYSTEM_PERFORMANCE_INFORMATION
+  struct MINIDUMP_SYSTEM_MEMORY_INFO_1
+    property revision : UInt16
+    property flags : UInt16
+    property basic_info : Win32cr::System::Diagnostics::Debug::MINIDUMP_SYSTEM_BASIC_INFORMATION
+    property file_cache_info : Win32cr::System::Diagnostics::Debug::MINIDUMP_SYSTEM_FILECACHE_INFORMATION
+    property basic_perf_info : Win32cr::System::Diagnostics::Debug::MINIDUMP_SYSTEM_BASIC_PERFORMANCE_INFORMATION
+    property perf_info : Win32cr::System::Diagnostics::Debug::MINIDUMP_SYSTEM_PERFORMANCE_INFORMATION
+    def initialize(@revision : UInt16, @flags : UInt16, @basic_info : Win32cr::System::Diagnostics::Debug::MINIDUMP_SYSTEM_BASIC_INFORMATION, @file_cache_info : Win32cr::System::Diagnostics::Debug::MINIDUMP_SYSTEM_FILECACHE_INFORMATION, @basic_perf_info : Win32cr::System::Diagnostics::Debug::MINIDUMP_SYSTEM_BASIC_PERFORMANCE_INFORMATION, @perf_info : Win32cr::System::Diagnostics::Debug::MINIDUMP_SYSTEM_PERFORMANCE_INFORMATION)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_PROCESS_VM_COUNTERS_1,
-    revision : UInt16,
-    page_fault_count : UInt32,
-    peak_working_set_size : UInt64,
-    working_set_size : UInt64,
-    quota_peak_paged_pool_usage : UInt64,
-    quota_paged_pool_usage : UInt64,
-    quota_peak_non_paged_pool_usage : UInt64,
-    quota_non_paged_pool_usage : UInt64,
-    pagefile_usage : UInt64,
-    peak_pagefile_usage : UInt64,
-    private_usage : UInt64
+  struct MINIDUMP_PROCESS_VM_COUNTERS_1
+    property revision : UInt16
+    property page_fault_count : UInt32
+    property peak_working_set_size : UInt64
+    property working_set_size : UInt64
+    property quota_peak_paged_pool_usage : UInt64
+    property quota_paged_pool_usage : UInt64
+    property quota_peak_non_paged_pool_usage : UInt64
+    property quota_non_paged_pool_usage : UInt64
+    property pagefile_usage : UInt64
+    property peak_pagefile_usage : UInt64
+    property private_usage : UInt64
+    def initialize(@revision : UInt16, @page_fault_count : UInt32, @peak_working_set_size : UInt64, @working_set_size : UInt64, @quota_peak_paged_pool_usage : UInt64, @quota_paged_pool_usage : UInt64, @quota_peak_non_paged_pool_usage : UInt64, @quota_non_paged_pool_usage : UInt64, @pagefile_usage : UInt64, @peak_pagefile_usage : UInt64, @private_usage : UInt64)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_PROCESS_VM_COUNTERS_2,
-    revision : UInt16,
-    flags : UInt16,
-    page_fault_count : UInt32,
-    peak_working_set_size : UInt64,
-    working_set_size : UInt64,
-    quota_peak_paged_pool_usage : UInt64,
-    quota_paged_pool_usage : UInt64,
-    quota_peak_non_paged_pool_usage : UInt64,
-    quota_non_paged_pool_usage : UInt64,
-    pagefile_usage : UInt64,
-    peak_pagefile_usage : UInt64,
-    peak_virtual_size : UInt64,
-    virtual_size : UInt64,
-    private_usage : UInt64,
-    private_working_set_size : UInt64,
-    shared_commit_usage : UInt64,
-    job_shared_commit_usage : UInt64,
-    job_private_commit_usage : UInt64,
-    job_peak_private_commit_usage : UInt64,
-    job_private_commit_limit : UInt64,
-    job_total_commit_limit : UInt64
+  struct MINIDUMP_PROCESS_VM_COUNTERS_2
+    property revision : UInt16
+    property flags : UInt16
+    property page_fault_count : UInt32
+    property peak_working_set_size : UInt64
+    property working_set_size : UInt64
+    property quota_peak_paged_pool_usage : UInt64
+    property quota_paged_pool_usage : UInt64
+    property quota_peak_non_paged_pool_usage : UInt64
+    property quota_non_paged_pool_usage : UInt64
+    property pagefile_usage : UInt64
+    property peak_pagefile_usage : UInt64
+    property peak_virtual_size : UInt64
+    property virtual_size : UInt64
+    property private_usage : UInt64
+    property private_working_set_size : UInt64
+    property shared_commit_usage : UInt64
+    property job_shared_commit_usage : UInt64
+    property job_private_commit_usage : UInt64
+    property job_peak_private_commit_usage : UInt64
+    property job_private_commit_limit : UInt64
+    property job_total_commit_limit : UInt64
+    def initialize(@revision : UInt16, @flags : UInt16, @page_fault_count : UInt32, @peak_working_set_size : UInt64, @working_set_size : UInt64, @quota_peak_paged_pool_usage : UInt64, @quota_paged_pool_usage : UInt64, @quota_peak_non_paged_pool_usage : UInt64, @quota_non_paged_pool_usage : UInt64, @pagefile_usage : UInt64, @peak_pagefile_usage : UInt64, @peak_virtual_size : UInt64, @virtual_size : UInt64, @private_usage : UInt64, @private_working_set_size : UInt64, @shared_commit_usage : UInt64, @job_shared_commit_usage : UInt64, @job_private_commit_usage : UInt64, @job_peak_private_commit_usage : UInt64, @job_private_commit_limit : UInt64, @job_total_commit_limit : UInt64)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_USER_RECORD,
-    type__ : UInt32,
-    memory : Win32cr::System::Diagnostics::Debug::MINIDUMP_LOCATION_DESCRIPTOR
+  struct MINIDUMP_USER_RECORD
+    property type__ : UInt32
+    property memory : Win32cr::System::Diagnostics::Debug::MINIDUMP_LOCATION_DESCRIPTOR
+    def initialize(@type__ : UInt32, @memory : Win32cr::System::Diagnostics::Debug::MINIDUMP_LOCATION_DESCRIPTOR)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_USER_STREAM,
-    type__ : UInt32,
-    buffer_size : UInt32,
-    buffer : Void*
+  struct MINIDUMP_USER_STREAM
+    property type__ : UInt32
+    property buffer_size : UInt32
+    property buffer : Void*
+    def initialize(@type__ : UInt32, @buffer_size : UInt32, @buffer : Void*)
+    end
+  end
 
   @[Extern]
-  record MINIDUMP_USER_STREAM_INFORMATION,
-    user_stream_count : UInt32,
-    user_stream_array : Win32cr::System::Diagnostics::Debug::MINIDUMP_USER_STREAM*
+  struct MINIDUMP_USER_STREAM_INFORMATION
+    property user_stream_count : UInt32
+    property user_stream_array : Win32cr::System::Diagnostics::Debug::MINIDUMP_USER_STREAM*
+    def initialize(@user_stream_count : UInt32, @user_stream_array : Win32cr::System::Diagnostics::Debug::MINIDUMP_USER_STREAM*)
+    end
+  end
 
   {% if flag?(:x86_64) %}
   @[Extern]
-  record MINIDUMP_THREAD_CALLBACK,
-    thread_id : UInt32,
-    thread_handle : Win32cr::Foundation::HANDLE,
-    context : Win32cr::System::Diagnostics::Debug::CONTEXT,
-    size_of_context : UInt32,
-    stack_base : UInt64,
-    stack_end : UInt64
+  struct MINIDUMP_THREAD_CALLBACK
+    property thread_id : UInt32
+    property thread_handle : Win32cr::Foundation::HANDLE
+    property context : Win32cr::System::Diagnostics::Debug::CONTEXT
+    property size_of_context : UInt32
+    property stack_base : UInt64
+    property stack_end : UInt64
+    def initialize(@thread_id : UInt32, @thread_handle : Win32cr::Foundation::HANDLE, @context : Win32cr::System::Diagnostics::Debug::CONTEXT, @size_of_context : UInt32, @stack_base : UInt64, @stack_end : UInt64)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) %}
   @[Extern]
-  record MINIDUMP_THREAD_EX_CALLBACK,
-    thread_id : UInt32,
-    thread_handle : Win32cr::Foundation::HANDLE,
-    context : Win32cr::System::Diagnostics::Debug::CONTEXT,
-    size_of_context : UInt32,
-    stack_base : UInt64,
-    stack_end : UInt64,
-    backing_store_base : UInt64,
-    backing_store_end : UInt64
+  struct MINIDUMP_THREAD_EX_CALLBACK
+    property thread_id : UInt32
+    property thread_handle : Win32cr::Foundation::HANDLE
+    property context : Win32cr::System::Diagnostics::Debug::CONTEXT
+    property size_of_context : UInt32
+    property stack_base : UInt64
+    property stack_end : UInt64
+    property backing_store_base : UInt64
+    property backing_store_end : UInt64
+    def initialize(@thread_id : UInt32, @thread_handle : Win32cr::Foundation::HANDLE, @context : Win32cr::System::Diagnostics::Debug::CONTEXT, @size_of_context : UInt32, @stack_base : UInt64, @stack_end : UInt64, @backing_store_base : UInt64, @backing_store_end : UInt64)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record MINIDUMP_INCLUDE_THREAD_CALLBACK,
-    thread_id : UInt32
-
-  @[Extern]
-  record MINIDUMP_MODULE_CALLBACK,
-    full_path : Win32cr::Foundation::PWSTR,
-    base_of_image : UInt64,
-    size_of_image : UInt32,
-    check_sum : UInt32,
-    time_date_stamp : UInt32,
-    version_info : Win32cr::Storage::FileSystem::VS_FIXEDFILEINFO,
-    cv_record : Void*,
-    size_of_cv_record : UInt32,
-    misc_record : Void*,
-    size_of_misc_record : UInt32
-
-  @[Extern]
-  record MINIDUMP_INCLUDE_MODULE_CALLBACK,
-    base_of_image : UInt64
-
-  @[Extern]
-  record MINIDUMP_IO_CALLBACK,
-    handle : Win32cr::Foundation::HANDLE,
-    offset : UInt64,
-    buffer : Void*,
-    buffer_bytes : UInt32
-
-  @[Extern]
-  record MINIDUMP_READ_MEMORY_FAILURE_CALLBACK,
-    offset : UInt64,
-    bytes : UInt32,
-    failure_status : Win32cr::Foundation::HRESULT
-
-  @[Extern]
-  record MINIDUMP_VM_QUERY_CALLBACK,
-    offset : UInt64
-
-  @[Extern]
-  record MINIDUMP_VM_PRE_READ_CALLBACK,
-    offset : UInt64,
-    buffer : Void*,
-    size : UInt32
-
-  @[Extern]
-  record MINIDUMP_VM_POST_READ_CALLBACK,
-    offset : UInt64,
-    buffer : Void*,
-    size : UInt32,
-    completed : UInt32,
-    status : Win32cr::Foundation::HRESULT
-
-  @[Extern]
-  record MINIDUMP_CALLBACK_INPUT,
-    process_id : UInt32,
-    process_handle : Win32cr::Foundation::HANDLE,
-    callback_type : UInt32,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      status : Win32cr::Foundation::HRESULT,
-      thread : Win32cr::System::Diagnostics::Debug::MINIDUMP_THREAD_CALLBACK,
-      thread_ex : Win32cr::System::Diagnostics::Debug::MINIDUMP_THREAD_EX_CALLBACK,
-      module__ : Win32cr::System::Diagnostics::Debug::MINIDUMP_MODULE_CALLBACK,
-      include_thread : Win32cr::System::Diagnostics::Debug::MINIDUMP_INCLUDE_THREAD_CALLBACK,
-      include_module : Win32cr::System::Diagnostics::Debug::MINIDUMP_INCLUDE_MODULE_CALLBACK,
-      io : Win32cr::System::Diagnostics::Debug::MINIDUMP_IO_CALLBACK,
-      read_memory_failure : Win32cr::System::Diagnostics::Debug::MINIDUMP_READ_MEMORY_FAILURE_CALLBACK,
-      secondary_flags : UInt32,
-      vm_query : Win32cr::System::Diagnostics::Debug::MINIDUMP_VM_QUERY_CALLBACK,
-      vm_pre_read : Win32cr::System::Diagnostics::Debug::MINIDUMP_VM_PRE_READ_CALLBACK,
-      vm_post_read : Win32cr::System::Diagnostics::Debug::MINIDUMP_VM_POST_READ_CALLBACK
-
+  struct MINIDUMP_INCLUDE_THREAD_CALLBACK
+    property thread_id : UInt32
+    def initialize(@thread_id : UInt32)
+    end
   end
 
   @[Extern]
-  record MINIDUMP_CALLBACK_OUTPUT,
-    anonymous : Anonymous_e__Union_ do
+  struct MINIDUMP_MODULE_CALLBACK
+    property full_path : Win32cr::Foundation::PWSTR
+    property base_of_image : UInt64
+    property size_of_image : UInt32
+    property check_sum : UInt32
+    property time_date_stamp : UInt32
+    property version_info : Win32cr::Storage::FileSystem::VS_FIXEDFILEINFO
+    property cv_record : Void*
+    property size_of_cv_record : UInt32
+    property misc_record : Void*
+    property size_of_misc_record : UInt32
+    def initialize(@full_path : Win32cr::Foundation::PWSTR, @base_of_image : UInt64, @size_of_image : UInt32, @check_sum : UInt32, @time_date_stamp : UInt32, @version_info : Win32cr::Storage::FileSystem::VS_FIXEDFILEINFO, @cv_record : Void*, @size_of_cv_record : UInt32, @misc_record : Void*, @size_of_misc_record : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MINIDUMP_INCLUDE_MODULE_CALLBACK
+    property base_of_image : UInt64
+    def initialize(@base_of_image : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct MINIDUMP_IO_CALLBACK
+    property handle : Win32cr::Foundation::HANDLE
+    property offset : UInt64
+    property buffer : Void*
+    property buffer_bytes : UInt32
+    def initialize(@handle : Win32cr::Foundation::HANDLE, @offset : UInt64, @buffer : Void*, @buffer_bytes : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MINIDUMP_READ_MEMORY_FAILURE_CALLBACK
+    property offset : UInt64
+    property bytes : UInt32
+    property failure_status : Win32cr::Foundation::HRESULT
+    def initialize(@offset : UInt64, @bytes : UInt32, @failure_status : Win32cr::Foundation::HRESULT)
+    end
+  end
+
+  @[Extern]
+  struct MINIDUMP_VM_QUERY_CALLBACK
+    property offset : UInt64
+    def initialize(@offset : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct MINIDUMP_VM_PRE_READ_CALLBACK
+    property offset : UInt64
+    property buffer : Void*
+    property size : UInt32
+    def initialize(@offset : UInt64, @buffer : Void*, @size : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MINIDUMP_VM_POST_READ_CALLBACK
+    property offset : UInt64
+    property buffer : Void*
+    property size : UInt32
+    property completed : UInt32
+    property status : Win32cr::Foundation::HRESULT
+    def initialize(@offset : UInt64, @buffer : Void*, @size : UInt32, @completed : UInt32, @status : Win32cr::Foundation::HRESULT)
+    end
+  end
+
+  @[Extern]
+  struct MINIDUMP_CALLBACK_INPUT
+    property process_id : UInt32
+    property process_handle : Win32cr::Foundation::HANDLE
+    property callback_type : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      module_write_flags : UInt32,
-      thread_write_flags : UInt32,
-      secondary_flags : UInt32,
-      anonymous1 : Anonymous1_e__Struct_,
-      anonymous2 : Anonymous2_e__Struct_,
-      handle : Win32cr::Foundation::HANDLE,
-      anonymous3 : Anonymous3_e__Struct_,
-      anonymous4 : Anonymous4_e__Struct_,
-      anonymous5 : Anonymous5_e__Struct_,
-      status : Win32cr::Foundation::HRESULT do
+    struct Anonymous_e__Union_
+    property status : Win32cr::Foundation::HRESULT
+    property thread : Win32cr::System::Diagnostics::Debug::MINIDUMP_THREAD_CALLBACK
+    property thread_ex : Win32cr::System::Diagnostics::Debug::MINIDUMP_THREAD_EX_CALLBACK
+    property module__ : Win32cr::System::Diagnostics::Debug::MINIDUMP_MODULE_CALLBACK
+    property include_thread : Win32cr::System::Diagnostics::Debug::MINIDUMP_INCLUDE_THREAD_CALLBACK
+    property include_module : Win32cr::System::Diagnostics::Debug::MINIDUMP_INCLUDE_MODULE_CALLBACK
+    property io : Win32cr::System::Diagnostics::Debug::MINIDUMP_IO_CALLBACK
+    property read_memory_failure : Win32cr::System::Diagnostics::Debug::MINIDUMP_READ_MEMORY_FAILURE_CALLBACK
+    property secondary_flags : UInt32
+    property vm_query : Win32cr::System::Diagnostics::Debug::MINIDUMP_VM_QUERY_CALLBACK
+    property vm_pre_read : Win32cr::System::Diagnostics::Debug::MINIDUMP_VM_PRE_READ_CALLBACK
+    property vm_post_read : Win32cr::System::Diagnostics::Debug::MINIDUMP_VM_POST_READ_CALLBACK
+    def initialize(@status : Win32cr::Foundation::HRESULT, @thread : Win32cr::System::Diagnostics::Debug::MINIDUMP_THREAD_CALLBACK, @thread_ex : Win32cr::System::Diagnostics::Debug::MINIDUMP_THREAD_EX_CALLBACK, @module__ : Win32cr::System::Diagnostics::Debug::MINIDUMP_MODULE_CALLBACK, @include_thread : Win32cr::System::Diagnostics::Debug::MINIDUMP_INCLUDE_THREAD_CALLBACK, @include_module : Win32cr::System::Diagnostics::Debug::MINIDUMP_INCLUDE_MODULE_CALLBACK, @io : Win32cr::System::Diagnostics::Debug::MINIDUMP_IO_CALLBACK, @read_memory_failure : Win32cr::System::Diagnostics::Debug::MINIDUMP_READ_MEMORY_FAILURE_CALLBACK, @secondary_flags : UInt32, @vm_query : Win32cr::System::Diagnostics::Debug::MINIDUMP_VM_QUERY_CALLBACK, @vm_pre_read : Win32cr::System::Diagnostics::Debug::MINIDUMP_VM_PRE_READ_CALLBACK, @vm_post_read : Win32cr::System::Diagnostics::Debug::MINIDUMP_VM_POST_READ_CALLBACK)
+    end
+    end
+
+    def initialize(@process_id : UInt32, @process_handle : Win32cr::Foundation::HANDLE, @callback_type : UInt32, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct MINIDUMP_CALLBACK_OUTPUT
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property module_write_flags : UInt32
+    property thread_write_flags : UInt32
+    property secondary_flags : UInt32
+    property anonymous1 : Anonymous1_e__Struct_
+    property anonymous2 : Anonymous2_e__Struct_
+    property handle : Win32cr::Foundation::HANDLE
+    property anonymous3 : Anonymous3_e__Struct_
+    property anonymous4 : Anonymous4_e__Struct_
+    property anonymous5 : Anonymous5_e__Struct_
+    property status : Win32cr::Foundation::HRESULT
 
       # Nested Type Anonymous4_e__Struct_
       @[Extern]
-      record Anonymous4_e__Struct_,
-        vm_query_status : Win32cr::Foundation::HRESULT,
-        vm_query_result : Win32cr::System::Diagnostics::Debug::MINIDUMP_MEMORY_INFO
+      struct Anonymous4_e__Struct_
+    property vm_query_status : Win32cr::Foundation::HRESULT
+    property vm_query_result : Win32cr::System::Diagnostics::Debug::MINIDUMP_MEMORY_INFO
+    def initialize(@vm_query_status : Win32cr::Foundation::HRESULT, @vm_query_result : Win32cr::System::Diagnostics::Debug::MINIDUMP_MEMORY_INFO)
+    end
+      end
 
 
       # Nested Type Anonymous2_e__Struct_
       @[Extern]
-      record Anonymous2_e__Struct_,
-        check_cancel : Win32cr::Foundation::BOOL,
-        cancel : Win32cr::Foundation::BOOL
+      struct Anonymous2_e__Struct_
+    property check_cancel : Win32cr::Foundation::BOOL
+    property cancel : Win32cr::Foundation::BOOL
+    def initialize(@check_cancel : Win32cr::Foundation::BOOL, @cancel : Win32cr::Foundation::BOOL)
+    end
+      end
 
 
       # Nested Type Anonymous5_e__Struct_
       @[Extern]
-      record Anonymous5_e__Struct_,
-        vm_read_status : Win32cr::Foundation::HRESULT,
-        vm_read_bytes_completed : UInt32
+      struct Anonymous5_e__Struct_
+    property vm_read_status : Win32cr::Foundation::HRESULT
+    property vm_read_bytes_completed : UInt32
+    def initialize(@vm_read_status : Win32cr::Foundation::HRESULT, @vm_read_bytes_completed : UInt32)
+    end
+      end
 
 
       # Nested Type Anonymous1_e__Struct_
       @[Extern]
-      record Anonymous1_e__Struct_,
-        memory_base : UInt64,
-        memory_size : UInt32
+      struct Anonymous1_e__Struct_
+    property memory_base : UInt64
+    property memory_size : UInt32
+    def initialize(@memory_base : UInt64, @memory_size : UInt32)
+    end
+      end
 
 
       # Nested Type Anonymous3_e__Struct_
       @[Extern]
-      record Anonymous3_e__Struct_,
-        vm_region : Win32cr::System::Diagnostics::Debug::MINIDUMP_MEMORY_INFO,
-        continue : Win32cr::Foundation::BOOL
+      struct Anonymous3_e__Struct_
+    property vm_region : Win32cr::System::Diagnostics::Debug::MINIDUMP_MEMORY_INFO
+    property continue : Win32cr::Foundation::BOOL
+    def initialize(@vm_region : Win32cr::System::Diagnostics::Debug::MINIDUMP_MEMORY_INFO, @continue : Win32cr::Foundation::BOOL)
+    end
+      end
 
+    def initialize(@module_write_flags : UInt32, @thread_write_flags : UInt32, @secondary_flags : UInt32, @anonymous1 : Anonymous1_e__Struct_, @anonymous2 : Anonymous2_e__Struct_, @handle : Win32cr::Foundation::HANDLE, @anonymous3 : Anonymous3_e__Struct_, @anonymous4 : Anonymous4_e__Struct_, @anonymous5 : Anonymous5_e__Struct_, @status : Win32cr::Foundation::HRESULT)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record MINIDUMP_CALLBACK_INFORMATION,
-    callback_routine : Win32cr::System::Diagnostics::Debug::MINIDUMP_CALLBACK_ROUTINE,
-    callback_param : Void*
+  struct MINIDUMP_CALLBACK_INFORMATION
+    property callback_routine : Win32cr::System::Diagnostics::Debug::MINIDUMP_CALLBACK_ROUTINE
+    property callback_param : Void*
+    def initialize(@callback_routine : Win32cr::System::Diagnostics::Debug::MINIDUMP_CALLBACK_ROUTINE, @callback_param : Void*)
+    end
+  end
 
   @[Extern]
-  record DebugPropertyInfo,
-    m_dwValidFields : UInt32,
-    m_bstrName : Win32cr::Foundation::BSTR,
-    m_bstrType : Win32cr::Foundation::BSTR,
-    m_bstrValue : Win32cr::Foundation::BSTR,
-    m_bstrFullName : Win32cr::Foundation::BSTR,
-    m_dwAttrib : UInt32,
-    m_pDebugProp : Void*
+  struct DebugPropertyInfo
+    property m_dwValidFields : UInt32
+    property m_bstrName : Win32cr::Foundation::BSTR
+    property m_bstrType : Win32cr::Foundation::BSTR
+    property m_bstrValue : Win32cr::Foundation::BSTR
+    property m_bstrFullName : Win32cr::Foundation::BSTR
+    property m_dwAttrib : UInt32
+    property m_pDebugProp : Void*
+    def initialize(@m_dwValidFields : UInt32, @m_bstrName : Win32cr::Foundation::BSTR, @m_bstrType : Win32cr::Foundation::BSTR, @m_bstrValue : Win32cr::Foundation::BSTR, @m_bstrFullName : Win32cr::Foundation::BSTR, @m_dwAttrib : UInt32, @m_pDebugProp : Void*)
+    end
+  end
 
   @[Extern]
-  record ExtendedDebugPropertyInfo,
-    dwValidFields : UInt32,
-    pszName : Win32cr::Foundation::PWSTR,
-    pszType : Win32cr::Foundation::PWSTR,
-    pszValue : Win32cr::Foundation::PWSTR,
-    pszFullName : Win32cr::Foundation::PWSTR,
-    dwAttrib : UInt32,
-    pDebugProp : Void*,
-    nDISPID : UInt32,
-    nType : UInt32,
-    varValue : Win32cr::System::Com::VARIANT,
-    plbValue : Void*,
-    pDebugExtProp : Void*
+  struct ExtendedDebugPropertyInfo
+    property dwValidFields : UInt32
+    property pszName : Win32cr::Foundation::PWSTR
+    property pszType : Win32cr::Foundation::PWSTR
+    property pszValue : Win32cr::Foundation::PWSTR
+    property pszFullName : Win32cr::Foundation::PWSTR
+    property dwAttrib : UInt32
+    property pDebugProp : Void*
+    property nDISPID : UInt32
+    property nType : UInt32
+    property varValue : Win32cr::System::Com::VARIANT
+    property plbValue : Void*
+    property pDebugExtProp : Void*
+    def initialize(@dwValidFields : UInt32, @pszName : Win32cr::Foundation::PWSTR, @pszType : Win32cr::Foundation::PWSTR, @pszValue : Win32cr::Foundation::PWSTR, @pszFullName : Win32cr::Foundation::PWSTR, @dwAttrib : UInt32, @pDebugProp : Void*, @nDISPID : UInt32, @nType : UInt32, @varValue : Win32cr::System::Com::VARIANT, @plbValue : Void*, @pDebugExtProp : Void*)
+    end
+  end
 
   @[Extern]
-  record DebugStackFrameDescriptor,
-    pdsf : Void*,
-    dwMin : UInt32,
-    dwLim : UInt32,
-    fFinal : Win32cr::Foundation::BOOL,
-    punkFinal : Void*
+  struct DebugStackFrameDescriptor
+    property pdsf : Void*
+    property dwMin : UInt32
+    property dwLim : UInt32
+    property fFinal : Win32cr::Foundation::BOOL
+    property punkFinal : Void*
+    def initialize(@pdsf : Void*, @dwMin : UInt32, @dwLim : UInt32, @fFinal : Win32cr::Foundation::BOOL, @punkFinal : Void*)
+    end
+  end
 
   @[Extern]
-  record DebugStackFrameDescriptor64,
-    pdsf : Void*,
-    dwMin : UInt64,
-    dwLim : UInt64,
-    fFinal : Win32cr::Foundation::BOOL,
-    punkFinal : Void*
+  struct DebugStackFrameDescriptor64
+    property pdsf : Void*
+    property dwMin : UInt64
+    property dwLim : UInt64
+    property fFinal : Win32cr::Foundation::BOOL
+    property punkFinal : Void*
+    def initialize(@pdsf : Void*, @dwMin : UInt64, @dwLim : UInt64, @fFinal : Win32cr::Foundation::BOOL, @punkFinal : Void*)
+    end
+  end
 
   @[Extern]
-  record PROFILER_HEAP_OBJECT_SCOPE_LIST,
-    count : UInt32,
-    scopes : LibC::UIntPtrT*
+  struct PROFILER_HEAP_OBJECT_SCOPE_LIST
+    property count : UInt32
+    property scopes : LibC::UIntPtrT*
+    def initialize(@count : UInt32, @scopes : LibC::UIntPtrT*)
+    end
+  end
 
   @[Extern]
-  record PROFILER_PROPERTY_TYPE_SUBSTRING_INFO,
-    length : UInt32,
-    value : Win32cr::Foundation::PWSTR
+  struct PROFILER_PROPERTY_TYPE_SUBSTRING_INFO
+    property length : UInt32
+    property value : Win32cr::Foundation::PWSTR
+    def initialize(@length : UInt32, @value : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record PROFILER_HEAP_OBJECT_RELATIONSHIP,
-    relationshipId : UInt32,
-    relationshipInfo : Win32cr::System::Diagnostics::Debug::PROFILER_RELATIONSHIP_INFO,
-    anonymous : Anonymous_e__Union_ do
+  struct PROFILER_HEAP_OBJECT_RELATIONSHIP
+    property relationshipId : UInt32
+    property relationshipInfo : Win32cr::System::Diagnostics::Debug::PROFILER_RELATIONSHIP_INFO
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      numberValue : Float64,
-      stringValue : Win32cr::Foundation::PWSTR,
-      bstrValue : Win32cr::Foundation::BSTR,
-      objectId : LibC::UIntPtrT,
-      externalObjectAddress : Void*,
-      subString : Win32cr::System::Diagnostics::Debug::PROFILER_PROPERTY_TYPE_SUBSTRING_INFO*
+    struct Anonymous_e__Union_
+    property numberValue : Float64
+    property stringValue : Win32cr::Foundation::PWSTR
+    property bstrValue : Win32cr::Foundation::BSTR
+    property objectId : LibC::UIntPtrT
+    property externalObjectAddress : Void*
+    property subString : Win32cr::System::Diagnostics::Debug::PROFILER_PROPERTY_TYPE_SUBSTRING_INFO*
+    def initialize(@numberValue : Float64, @stringValue : Win32cr::Foundation::PWSTR, @bstrValue : Win32cr::Foundation::BSTR, @objectId : LibC::UIntPtrT, @externalObjectAddress : Void*, @subString : Win32cr::System::Diagnostics::Debug::PROFILER_PROPERTY_TYPE_SUBSTRING_INFO*)
+    end
+    end
 
+    def initialize(@relationshipId : UInt32, @relationshipInfo : Win32cr::System::Diagnostics::Debug::PROFILER_RELATIONSHIP_INFO, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST,
-    count : UInt32,
-    elements : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_RELATIONSHIP*
+  struct PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST
+    property count : UInt32
+    property elements : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_RELATIONSHIP*
+    def initialize(@count : UInt32, @elements : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_RELATIONSHIP*)
+    end
+  end
 
   @[Extern]
-  record PROFILER_HEAP_OBJECT_OPTIONAL_INFO,
-    infoType : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_OPTIONAL_INFO_TYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct PROFILER_HEAP_OBJECT_OPTIONAL_INFO
+    property infoType : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_OPTIONAL_INFO_TYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      prototype : LibC::UIntPtrT,
-      functionName : Win32cr::Foundation::PWSTR,
-      elementAttributesSize : UInt32,
-      elementTextChildrenSize : UInt32,
-      scopeList : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_SCOPE_LIST*,
-      internalProperty : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_RELATIONSHIP*,
-      namePropertyList : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*,
-      indexPropertyList : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*,
-      relationshipList : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*,
-      eventList : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*,
-      weakMapCollectionList : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*,
-      mapCollectionList : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*,
-      setCollectionList : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*
+    struct Anonymous_e__Union_
+    property prototype : LibC::UIntPtrT
+    property functionName : Win32cr::Foundation::PWSTR
+    property elementAttributesSize : UInt32
+    property elementTextChildrenSize : UInt32
+    property scopeList : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_SCOPE_LIST*
+    property internalProperty : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_RELATIONSHIP*
+    property namePropertyList : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*
+    property indexPropertyList : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*
+    property relationshipList : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*
+    property eventList : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*
+    property weakMapCollectionList : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*
+    property mapCollectionList : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*
+    property setCollectionList : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*
+    def initialize(@prototype : LibC::UIntPtrT, @functionName : Win32cr::Foundation::PWSTR, @elementAttributesSize : UInt32, @elementTextChildrenSize : UInt32, @scopeList : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_SCOPE_LIST*, @internalProperty : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_RELATIONSHIP*, @namePropertyList : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*, @indexPropertyList : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*, @relationshipList : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*, @eventList : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*, @weakMapCollectionList : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*, @mapCollectionList : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*, @setCollectionList : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST*)
+    end
+    end
 
+    def initialize(@infoType : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_OBJECT_OPTIONAL_INFO_TYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record PROFILER_HEAP_OBJECT,
-    size : UInt32,
-    anonymous : Anonymous_e__Union_,
-    typeNameId : UInt32,
-    flags : UInt32,
-    unused : UInt16,
-    optionalInfoCount : UInt16 do
+  struct PROFILER_HEAP_OBJECT
+    property size : UInt32
+    property anonymous : Anonymous_e__Union_
+    property typeNameId : UInt32
+    property flags : UInt32
+    property unused : UInt16
+    property optionalInfoCount : UInt16
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      objectId : LibC::UIntPtrT,
-      externalObjectAddress : Void*
+    struct Anonymous_e__Union_
+    property objectId : LibC::UIntPtrT
+    property externalObjectAddress : Void*
+    def initialize(@objectId : LibC::UIntPtrT, @externalObjectAddress : Void*)
+    end
+    end
 
+    def initialize(@size : UInt32, @anonymous : Anonymous_e__Union_, @typeNameId : UInt32, @flags : UInt32, @unused : UInt16, @optionalInfoCount : UInt16)
+    end
   end
 
   @[Extern]
-  record PROFILER_HEAP_SUMMARY,
-    version : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_SUMMARY_VERSION,
-    totalHeapSize : UInt32
+  struct PROFILER_HEAP_SUMMARY
+    property version : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_SUMMARY_VERSION
+    property totalHeapSize : UInt32
+    def initialize(@version : Win32cr::System::Diagnostics::Debug::PROFILER_HEAP_SUMMARY_VERSION, @totalHeapSize : UInt32)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record LOADED_IMAGE,
-    module_name : Win32cr::Foundation::PSTR,
-    hFile : Win32cr::Foundation::HANDLE,
-    mapped_address : UInt8*,
-    file_header : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS64*,
-    last_rva_section : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER*,
-    number_of_sections : UInt32,
-    sections : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER*,
-    characteristics : Win32cr::System::Diagnostics::Debug::IMAGE_FILE_CHARACTERISTICS2,
-    fSystemImage : Win32cr::Foundation::BOOLEAN,
-    fDOSImage : Win32cr::Foundation::BOOLEAN,
-    fReadOnly : Win32cr::Foundation::BOOLEAN,
-    version : UInt8,
-    links : Win32cr::System::Kernel::LIST_ENTRY,
-    size_of_image : UInt32
+  struct LOADED_IMAGE
+    property module_name : Win32cr::Foundation::PSTR
+    property hFile : Win32cr::Foundation::HANDLE
+    property mapped_address : UInt8*
+    property file_header : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS64*
+    property last_rva_section : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER*
+    property number_of_sections : UInt32
+    property sections : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER*
+    property characteristics : Win32cr::System::Diagnostics::Debug::IMAGE_FILE_CHARACTERISTICS2
+    property fSystemImage : Win32cr::Foundation::BOOLEAN
+    property fDOSImage : Win32cr::Foundation::BOOLEAN
+    property fReadOnly : Win32cr::Foundation::BOOLEAN
+    property version : UInt8
+    property links : Win32cr::System::Kernel::LIST_ENTRY
+    property size_of_image : UInt32
+    def initialize(@module_name : Win32cr::Foundation::PSTR, @hFile : Win32cr::Foundation::HANDLE, @mapped_address : UInt8*, @file_header : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS64*, @last_rva_section : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER*, @number_of_sections : UInt32, @sections : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER*, @characteristics : Win32cr::System::Diagnostics::Debug::IMAGE_FILE_CHARACTERISTICS2, @fSystemImage : Win32cr::Foundation::BOOLEAN, @fDOSImage : Win32cr::Foundation::BOOLEAN, @fReadOnly : Win32cr::Foundation::BOOLEAN, @version : UInt8, @links : Win32cr::System::Kernel::LIST_ENTRY, @size_of_image : UInt32)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record MODLOAD_DATA,
-    ssize : UInt32,
-    ssig : Win32cr::System::Diagnostics::Debug::MODLOAD_DATA_TYPE,
-    data : Void*,
-    size : UInt32,
-    flags : UInt32
-
-  @[Extern]
-  record MODLOAD_CVMISC,
-    oCV : UInt32,
-    cCV : LibC::UIntPtrT,
-    oMisc : UInt32,
-    cMisc : LibC::UIntPtrT,
-    dtImage : UInt32,
-    cImage : UInt32
-
-  @[Extern]
-  record MODLOAD_PDBGUID_PDBAGE,
-    pdb_guid : LibC::GUID,
-    pdb_age : UInt32
-
-  @[Extern]
-  record ADDRESS64,
-    offset : UInt64,
-    segment : UInt16,
-    mode : Win32cr::System::Diagnostics::Debug::ADDRESS_MODE
-
-  @[Extern]
-  record KDHELP64,
-    thread : UInt64,
-    th_callback_stack : UInt32,
-    th_callback_b_store : UInt32,
-    next_callback : UInt32,
-    frame_pointer : UInt32,
-    ki_call_user_mode : UInt64,
-    ke_user_callback_dispatcher : UInt64,
-    system_range_start : UInt64,
-    ki_user_exception_dispatcher : UInt64,
-    stack_base : UInt64,
-    stack_limit : UInt64,
-    build_version : UInt32,
-    retpoline_stub_function_table_size : UInt32,
-    retpoline_stub_function_table : UInt64,
-    retpoline_stub_offset : UInt32,
-    retpoline_stub_size : UInt32,
-    reserved0 : UInt64[2]
-
-  @[Extern]
-  record STACKFRAME64,
-    addr_pc : Win32cr::System::Diagnostics::Debug::ADDRESS64,
-    addr_return : Win32cr::System::Diagnostics::Debug::ADDRESS64,
-    addr_frame : Win32cr::System::Diagnostics::Debug::ADDRESS64,
-    addr_stack : Win32cr::System::Diagnostics::Debug::ADDRESS64,
-    addr_b_store : Win32cr::System::Diagnostics::Debug::ADDRESS64,
-    func_table_entry : Void*,
-    params : UInt64[4],
-    far : Win32cr::Foundation::BOOL,
-    virtual : Win32cr::Foundation::BOOL,
-    reserved : UInt64[3],
-    kd_help : Win32cr::System::Diagnostics::Debug::KDHELP64
-
-  @[Extern]
-  record STACKFRAME_EX,
-    addr_pc : Win32cr::System::Diagnostics::Debug::ADDRESS64,
-    addr_return : Win32cr::System::Diagnostics::Debug::ADDRESS64,
-    addr_frame : Win32cr::System::Diagnostics::Debug::ADDRESS64,
-    addr_stack : Win32cr::System::Diagnostics::Debug::ADDRESS64,
-    addr_b_store : Win32cr::System::Diagnostics::Debug::ADDRESS64,
-    func_table_entry : Void*,
-    params : UInt64[4],
-    far : Win32cr::Foundation::BOOL,
-    virtual : Win32cr::Foundation::BOOL,
-    reserved : UInt64[3],
-    kd_help : Win32cr::System::Diagnostics::Debug::KDHELP64,
-    stack_frame_size : UInt32,
-    inline_frame_context : UInt32
-
-  @[Extern]
-  record API_VERSION,
-    major_version : UInt16,
-    minor_version : UInt16,
-    revision : UInt16,
-    reserved : UInt16
-
-  @[Extern]
-  record IMAGEHLP_SYMBOL64,
-    size_of_struct : UInt32,
-    address : UInt64,
-    size : UInt32,
-    flags : UInt32,
-    max_name_length : UInt32,
-    name : Win32cr::Foundation::CHAR*
-
-  @[Extern]
-  record IMAGEHLP_SYMBOL64_PACKAGE,
-    sym : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL64,
-    name : Win32cr::Foundation::CHAR[2001]
-
-  @[Extern]
-  record IMAGEHLP_SYMBOLW64,
-    size_of_struct : UInt32,
-    address : UInt64,
-    size : UInt32,
-    flags : UInt32,
-    max_name_length : UInt32,
-    name : UInt16*
-
-  @[Extern]
-  record IMAGEHLP_SYMBOLW64_PACKAGE,
-    sym : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOLW64,
-    name : UInt16[2001]
-
-  @[Extern]
-  record IMAGEHLP_MODULE64,
-    size_of_struct : UInt32,
-    base_of_image : UInt64,
-    image_size : UInt32,
-    time_date_stamp : UInt32,
-    check_sum : UInt32,
-    num_syms : UInt32,
-    sym_type : Win32cr::System::Diagnostics::Debug::SYM_TYPE,
-    module_name : Win32cr::Foundation::CHAR[32],
-    image_name : Win32cr::Foundation::CHAR[256],
-    loaded_image_name : Win32cr::Foundation::CHAR[256],
-    loaded_pdb_name : Win32cr::Foundation::CHAR[256],
-    cv_sig : UInt32,
-    cv_data : Win32cr::Foundation::CHAR[780],
-    pdb_sig : UInt32,
-    pdb_sig70 : LibC::GUID,
-    pdb_age : UInt32,
-    pdb_unmatched : Win32cr::Foundation::BOOL,
-    dbg_unmatched : Win32cr::Foundation::BOOL,
-    line_numbers : Win32cr::Foundation::BOOL,
-    global_symbols : Win32cr::Foundation::BOOL,
-    type_info : Win32cr::Foundation::BOOL,
-    source_indexed : Win32cr::Foundation::BOOL,
-    publics : Win32cr::Foundation::BOOL,
-    machine_type : UInt32,
-    reserved : UInt32
-
-  @[Extern]
-  record IMAGEHLP_MODULE64_EX,
-    module__ : Win32cr::System::Diagnostics::Debug::IMAGEHLP_MODULE64,
-    region_flags : UInt32
-
-  @[Extern]
-  record IMAGEHLP_MODULEW64,
-    size_of_struct : UInt32,
-    base_of_image : UInt64,
-    image_size : UInt32,
-    time_date_stamp : UInt32,
-    check_sum : UInt32,
-    num_syms : UInt32,
-    sym_type : Win32cr::System::Diagnostics::Debug::SYM_TYPE,
-    module_name : UInt16[32],
-    image_name : UInt16[256],
-    loaded_image_name : UInt16[256],
-    loaded_pdb_name : UInt16[256],
-    cv_sig : UInt32,
-    cv_data : UInt16[780],
-    pdb_sig : UInt32,
-    pdb_sig70 : LibC::GUID,
-    pdb_age : UInt32,
-    pdb_unmatched : Win32cr::Foundation::BOOL,
-    dbg_unmatched : Win32cr::Foundation::BOOL,
-    line_numbers : Win32cr::Foundation::BOOL,
-    global_symbols : Win32cr::Foundation::BOOL,
-    type_info : Win32cr::Foundation::BOOL,
-    source_indexed : Win32cr::Foundation::BOOL,
-    publics : Win32cr::Foundation::BOOL,
-    machine_type : UInt32,
-    reserved : UInt32
-
-  @[Extern]
-  record IMAGEHLP_MODULEW64_EX,
-    module__ : Win32cr::System::Diagnostics::Debug::IMAGEHLP_MODULEW64,
-    region_flags : UInt32
-
-  @[Extern]
-  record IMAGEHLP_LINE64,
-    size_of_struct : UInt32,
-    key : Void*,
-    line_number : UInt32,
-    file_name : Win32cr::Foundation::PSTR,
-    address : UInt64
-
-  @[Extern]
-  record IMAGEHLP_LINEW64,
-    size_of_struct : UInt32,
-    key : Void*,
-    line_number : UInt32,
-    file_name : Win32cr::Foundation::PWSTR,
-    address : UInt64
-
-  @[Extern]
-  record SOURCEFILE,
-    mod_base : UInt64,
-    file_name : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record SOURCEFILEW,
-    mod_base : UInt64,
-    file_name : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record IMAGEHLP_CBA_READ_MEMORY,
-    addr : UInt64,
-    buf : Void*,
-    bytes : UInt32,
-    bytesread : UInt32*
-
-  @[Extern]
-  record IMAGEHLP_CBA_EVENT,
-    severity : Win32cr::System::Diagnostics::Debug::IMAGEHLP_CBA_EVENT_SEVERITY,
-    code : UInt32,
-    desc : Win32cr::Foundation::PSTR,
-    object : Void*
-
-  @[Extern]
-  record IMAGEHLP_CBA_EVENTW,
-    severity : Win32cr::System::Diagnostics::Debug::IMAGEHLP_CBA_EVENT_SEVERITY,
-    code : UInt32,
-    desc : Win32cr::Foundation::PWSTR,
-    object : Void*
-
-  @[Extern]
-  record IMAGEHLP_DEFERRED_SYMBOL_LOAD64,
-    size_of_struct : UInt32,
-    base_of_image : UInt64,
-    check_sum : UInt32,
-    time_date_stamp : UInt32,
-    file_name : Win32cr::Foundation::CHAR[260],
-    reparse : Win32cr::Foundation::BOOLEAN,
-    hFile : Win32cr::Foundation::HANDLE,
-    flags : UInt32
-
-  @[Extern]
-  record IMAGEHLP_DEFERRED_SYMBOL_LOADW64,
-    size_of_struct : UInt32,
-    base_of_image : UInt64,
-    check_sum : UInt32,
-    time_date_stamp : UInt32,
-    file_name : UInt16[261],
-    reparse : Win32cr::Foundation::BOOLEAN,
-    hFile : Win32cr::Foundation::HANDLE,
-    flags : UInt32
-
-  @[Extern]
-  record IMAGEHLP_DUPLICATE_SYMBOL64,
-    size_of_struct : UInt32,
-    number_of_dups : UInt32,
-    symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL64*,
-    selected_symbol : UInt32
-
-  @[Extern]
-  record IMAGEHLP_JIT_SYMBOL_MAP_,
-    size_of_struct : UInt32,
-    address : UInt64,
-    base_of_image : UInt64
-
-  @[Extern]
-  record OMAP,
-    rva : UInt32,
-    rvaTo : UInt32
-
-  @[Extern]
-  record SRCCODEINFO,
-    size_of_struct : UInt32,
-    key : Void*,
-    mod_base : UInt64,
-    obj : Win32cr::Foundation::CHAR[261],
-    file_name : Win32cr::Foundation::CHAR[261],
-    line_number : UInt32,
-    address : UInt64
-
-  @[Extern]
-  record SRCCODEINFOW,
-    size_of_struct : UInt32,
-    key : Void*,
-    mod_base : UInt64,
-    obj : UInt16[261],
-    file_name : UInt16[261],
-    line_number : UInt32,
-    address : UInt64
-
-  @[Extern]
-  record IMAGEHLP_SYMBOL_SRC,
-    sizeofstruct : UInt32,
-    type__ : UInt32,
-    file : Win32cr::Foundation::CHAR[260]
-
-  @[Extern]
-  record MODULE_TYPE_INFO,
-    dataLength : UInt16,
-    leaf : UInt16,
-    data : UInt8*
-
-  @[Extern]
-  record SYMBOL_INFO,
-    size_of_struct : UInt32,
-    type_index : UInt32,
-    reserved : UInt64[2],
-    index : UInt32,
-    size : UInt32,
-    mod_base : UInt64,
-    flags : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO_FLAGS,
-    value : UInt64,
-    address : UInt64,
-    register : UInt32,
-    scope : UInt32,
-    tag : UInt32,
-    name_len : UInt32,
-    max_name_len : UInt32,
-    name : Win32cr::Foundation::CHAR*
-
-  @[Extern]
-  record SYMBOL_INFO_PACKAGE,
-    si : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO,
-    name : Win32cr::Foundation::CHAR[2001]
-
-  @[Extern]
-  record SYMBOL_INFOW,
-    size_of_struct : UInt32,
-    type_index : UInt32,
-    reserved : UInt64[2],
-    index : UInt32,
-    size : UInt32,
-    mod_base : UInt64,
-    flags : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO_FLAGS,
-    value : UInt64,
-    address : UInt64,
-    register : UInt32,
-    scope : UInt32,
-    tag : UInt32,
-    name_len : UInt32,
-    max_name_len : UInt32,
-    name : UInt16*
-
-  @[Extern]
-  record SYMBOL_INFO_PACKAGEW,
-    si : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW,
-    name : UInt16[2001]
-
-  @[Extern]
-  record IMAGEHLP_STACK_FRAME,
-    instruction_offset : UInt64,
-    return_offset : UInt64,
-    frame_offset : UInt64,
-    stack_offset : UInt64,
-    backing_store_offset : UInt64,
-    func_table_entry : UInt64,
-    params : UInt64[4],
-    reserved : UInt64[5],
-    virtual : Win32cr::Foundation::BOOL,
-    reserved2 : UInt32
-
-  @[Extern]
-  record TI_FINDCHILDREN_PARAMS,
-    count : UInt32,
-    start : UInt32,
-    child_id : UInt32*
-
-  @[Extern]
-  record IMAGEHLP_GET_TYPE_INFO_PARAMS,
-    size_of_struct : UInt32,
-    flags : Win32cr::System::Diagnostics::Debug::IMAGEHLP_GET_TYPE_INFO_FLAGS,
-    num_ids : UInt32,
-    type_ids : UInt32*,
-    tag_filter : UInt64,
-    num_reqs : UInt32,
-    req_kinds : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL_TYPE_INFO*,
-    req_offsets : LibC::UIntPtrT*,
-    req_sizes : UInt32*,
-    req_stride : LibC::UIntPtrT,
-    buffer_size : LibC::UIntPtrT,
-    buffer : Void*,
-    entries_matched : UInt32,
-    entries_filled : UInt32,
-    tags_found : UInt64,
-    all_reqs_valid : UInt64,
-    num_reqs_valid : UInt32,
-    reqs_valid : UInt64*
-
-  @[Extern]
-  record SYMSRV_INDEX_INFO,
-    sizeofstruct : UInt32,
-    file : Win32cr::Foundation::CHAR[261],
-    stripped : Win32cr::Foundation::BOOL,
-    timestamp : UInt32,
-    size : UInt32,
-    dbgfile : Win32cr::Foundation::CHAR[261],
-    pdbfile : Win32cr::Foundation::CHAR[261],
-    guid : LibC::GUID,
-    sig : UInt32,
-    age : UInt32
-
-  @[Extern]
-  record SYMSRV_INDEX_INFOW,
-    sizeofstruct : UInt32,
-    file : UInt16[261],
-    stripped : Win32cr::Foundation::BOOL,
-    timestamp : UInt32,
-    size : UInt32,
-    dbgfile : UInt16[261],
-    pdbfile : UInt16[261],
-    guid : LibC::GUID,
-    sig : UInt32,
-    age : UInt32
-
-  @[Extern]
-  record SYMSRV_EXTENDED_OUTPUT_DATA,
-    sizeOfStruct : UInt32,
-    version : UInt32,
-    filePtrMsg : UInt16[261]
-
-  @[Extern]
-  record DBGHELP_DATA_REPORT_STRUCT,
-    pBinPathNonExist : Win32cr::Foundation::PWSTR,
-    pSymbolPathNonExist : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record TEXT_DOCUMENT_ARRAY,
-    dwCount : UInt32,
-    members : Void**
-
-  @[Extern]
-  record JsDebugPropertyInfo,
-    name : Win32cr::Foundation::BSTR,
-    type__ : Win32cr::Foundation::BSTR,
-    value : Win32cr::Foundation::BSTR,
-    fullName : Win32cr::Foundation::BSTR,
-    attr : Win32cr::System::Diagnostics::Debug::JS_PROPERTY_ATTRIBUTES
-
-  @[Extern]
-  record JS_NATIVE_FRAME,
-    instruction_offset : UInt64,
-    return_offset : UInt64,
-    frame_offset : UInt64,
-    stack_offset : UInt64
-
-  @[Extern]
-  record PHYSICAL_MEMORY_RUN32,
-    base_page : UInt32,
-    page_count : UInt32
-
-  @[Extern]
-  record PHYSICAL_MEMORY_DESCRIPTOR32,
-    number_of_runs : UInt32,
-    number_of_pages : UInt32,
-    run : Win32cr::System::Diagnostics::Debug::PHYSICAL_MEMORY_RUN32*
-
-  @[Extern]
-  record PHYSICAL_MEMORY_RUN64,
-    base_page : UInt64,
-    page_count : UInt64
-
-  @[Extern]
-  record PHYSICAL_MEMORY_DESCRIPTOR64,
-    number_of_runs : UInt32,
-    number_of_pages : UInt64,
-    run : Win32cr::System::Diagnostics::Debug::PHYSICAL_MEMORY_RUN64*
-
-  @[Extern(union: true)]
-  record DUMP_FILE_ATTRIBUTES,
-    anonymous : Anonymous_e__Struct_,
-    attributes : UInt32 do
-
-    # Nested Type Anonymous_e__Struct_
-    @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt32
-
+  struct MODLOAD_DATA
+    property ssize : UInt32
+    property ssig : Win32cr::System::Diagnostics::Debug::MODLOAD_DATA_TYPE
+    property data : Void*
+    property size : UInt32
+    property flags : UInt32
+    def initialize(@ssize : UInt32, @ssig : Win32cr::System::Diagnostics::Debug::MODLOAD_DATA_TYPE, @data : Void*, @size : UInt32, @flags : UInt32)
+    end
   end
 
   @[Extern]
-  record DUMP_HEADER32,
-    signature : UInt32,
-    valid_dump : UInt32,
-    major_version : UInt32,
-    minor_version : UInt32,
-    directory_table_base : UInt32,
-    pfn_data_base : UInt32,
-    ps_loaded_module_list : UInt32,
-    ps_active_process_head : UInt32,
-    machine_image_type : UInt32,
-    number_processors : UInt32,
-    bug_check_code : UInt32,
-    bug_check_parameter1 : UInt32,
-    bug_check_parameter2 : UInt32,
-    bug_check_parameter3 : UInt32,
-    bug_check_parameter4 : UInt32,
-    version_user : Win32cr::Foundation::CHAR[32],
-    pae_enabled : UInt8,
-    kd_secondary_version : UInt8,
-    spare3 : UInt8[2],
-    kd_debugger_data_block : UInt32,
-    anonymous : Anonymous_e__Union_,
-    context_record : UInt8[1200],
-    exception : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD32,
-    comment : Win32cr::Foundation::CHAR[128],
-    attributes : Win32cr::System::Diagnostics::Debug::DUMP_FILE_ATTRIBUTES,
-    boot_id : UInt32,
-    _reserved0 : UInt8[1760],
-    dump_type : UInt32,
-    mini_dump_fields : UInt32,
-    secondary_data_state : UInt32,
-    product_type : UInt32,
-    suite_mask : UInt32,
-    writer_status : UInt32,
-    required_dump_space : Win32cr::Foundation::LARGE_INTEGER,
-    _reserved2 : UInt8[16],
-    system_up_time : Win32cr::Foundation::LARGE_INTEGER,
-    system_time : Win32cr::Foundation::LARGE_INTEGER,
-    _reserved3 : UInt8[56] do
+  struct MODLOAD_CVMISC
+    property oCV : UInt32
+    property cCV : LibC::UIntPtrT
+    property oMisc : UInt32
+    property cMisc : LibC::UIntPtrT
+    property dtImage : UInt32
+    property cImage : UInt32
+    def initialize(@oCV : UInt32, @cCV : LibC::UIntPtrT, @oMisc : UInt32, @cMisc : LibC::UIntPtrT, @dtImage : UInt32, @cImage : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MODLOAD_PDBGUID_PDBAGE
+    property pdb_guid : LibC::GUID
+    property pdb_age : UInt32
+    def initialize(@pdb_guid : LibC::GUID, @pdb_age : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ADDRESS64
+    property offset : UInt64
+    property segment : UInt16
+    property mode : Win32cr::System::Diagnostics::Debug::ADDRESS_MODE
+    def initialize(@offset : UInt64, @segment : UInt16, @mode : Win32cr::System::Diagnostics::Debug::ADDRESS_MODE)
+    end
+  end
+
+  @[Extern]
+  struct KDHELP64
+    property thread : UInt64
+    property th_callback_stack : UInt32
+    property th_callback_b_store : UInt32
+    property next_callback : UInt32
+    property frame_pointer : UInt32
+    property ki_call_user_mode : UInt64
+    property ke_user_callback_dispatcher : UInt64
+    property system_range_start : UInt64
+    property ki_user_exception_dispatcher : UInt64
+    property stack_base : UInt64
+    property stack_limit : UInt64
+    property build_version : UInt32
+    property retpoline_stub_function_table_size : UInt32
+    property retpoline_stub_function_table : UInt64
+    property retpoline_stub_offset : UInt32
+    property retpoline_stub_size : UInt32
+    property reserved0 : UInt64[2]
+    def initialize(@thread : UInt64, @th_callback_stack : UInt32, @th_callback_b_store : UInt32, @next_callback : UInt32, @frame_pointer : UInt32, @ki_call_user_mode : UInt64, @ke_user_callback_dispatcher : UInt64, @system_range_start : UInt64, @ki_user_exception_dispatcher : UInt64, @stack_base : UInt64, @stack_limit : UInt64, @build_version : UInt32, @retpoline_stub_function_table_size : UInt32, @retpoline_stub_function_table : UInt64, @retpoline_stub_offset : UInt32, @retpoline_stub_size : UInt32, @reserved0 : UInt64[2])
+    end
+  end
+
+  @[Extern]
+  struct STACKFRAME64
+    property addr_pc : Win32cr::System::Diagnostics::Debug::ADDRESS64
+    property addr_return : Win32cr::System::Diagnostics::Debug::ADDRESS64
+    property addr_frame : Win32cr::System::Diagnostics::Debug::ADDRESS64
+    property addr_stack : Win32cr::System::Diagnostics::Debug::ADDRESS64
+    property addr_b_store : Win32cr::System::Diagnostics::Debug::ADDRESS64
+    property func_table_entry : Void*
+    property params : UInt64[4]
+    property far : Win32cr::Foundation::BOOL
+    property virtual : Win32cr::Foundation::BOOL
+    property reserved : UInt64[3]
+    property kd_help : Win32cr::System::Diagnostics::Debug::KDHELP64
+    def initialize(@addr_pc : Win32cr::System::Diagnostics::Debug::ADDRESS64, @addr_return : Win32cr::System::Diagnostics::Debug::ADDRESS64, @addr_frame : Win32cr::System::Diagnostics::Debug::ADDRESS64, @addr_stack : Win32cr::System::Diagnostics::Debug::ADDRESS64, @addr_b_store : Win32cr::System::Diagnostics::Debug::ADDRESS64, @func_table_entry : Void*, @params : UInt64[4], @far : Win32cr::Foundation::BOOL, @virtual : Win32cr::Foundation::BOOL, @reserved : UInt64[3], @kd_help : Win32cr::System::Diagnostics::Debug::KDHELP64)
+    end
+  end
+
+  @[Extern]
+  struct STACKFRAME_EX
+    property addr_pc : Win32cr::System::Diagnostics::Debug::ADDRESS64
+    property addr_return : Win32cr::System::Diagnostics::Debug::ADDRESS64
+    property addr_frame : Win32cr::System::Diagnostics::Debug::ADDRESS64
+    property addr_stack : Win32cr::System::Diagnostics::Debug::ADDRESS64
+    property addr_b_store : Win32cr::System::Diagnostics::Debug::ADDRESS64
+    property func_table_entry : Void*
+    property params : UInt64[4]
+    property far : Win32cr::Foundation::BOOL
+    property virtual : Win32cr::Foundation::BOOL
+    property reserved : UInt64[3]
+    property kd_help : Win32cr::System::Diagnostics::Debug::KDHELP64
+    property stack_frame_size : UInt32
+    property inline_frame_context : UInt32
+    def initialize(@addr_pc : Win32cr::System::Diagnostics::Debug::ADDRESS64, @addr_return : Win32cr::System::Diagnostics::Debug::ADDRESS64, @addr_frame : Win32cr::System::Diagnostics::Debug::ADDRESS64, @addr_stack : Win32cr::System::Diagnostics::Debug::ADDRESS64, @addr_b_store : Win32cr::System::Diagnostics::Debug::ADDRESS64, @func_table_entry : Void*, @params : UInt64[4], @far : Win32cr::Foundation::BOOL, @virtual : Win32cr::Foundation::BOOL, @reserved : UInt64[3], @kd_help : Win32cr::System::Diagnostics::Debug::KDHELP64, @stack_frame_size : UInt32, @inline_frame_context : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct API_VERSION
+    property major_version : UInt16
+    property minor_version : UInt16
+    property revision : UInt16
+    property reserved : UInt16
+    def initialize(@major_version : UInt16, @minor_version : UInt16, @revision : UInt16, @reserved : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct IMAGEHLP_SYMBOL64
+    property size_of_struct : UInt32
+    property address : UInt64
+    property size : UInt32
+    property flags : UInt32
+    property max_name_length : UInt32
+    property name : Win32cr::Foundation::CHAR*
+    def initialize(@size_of_struct : UInt32, @address : UInt64, @size : UInt32, @flags : UInt32, @max_name_length : UInt32, @name : Win32cr::Foundation::CHAR*)
+    end
+  end
+
+  @[Extern]
+  struct IMAGEHLP_SYMBOL64_PACKAGE
+    property sym : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL64
+    property name : Win32cr::Foundation::CHAR[2001]
+    def initialize(@sym : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL64, @name : Win32cr::Foundation::CHAR[2001])
+    end
+  end
+
+  @[Extern]
+  struct IMAGEHLP_SYMBOLW64
+    property size_of_struct : UInt32
+    property address : UInt64
+    property size : UInt32
+    property flags : UInt32
+    property max_name_length : UInt32
+    property name : UInt16*
+    def initialize(@size_of_struct : UInt32, @address : UInt64, @size : UInt32, @flags : UInt32, @max_name_length : UInt32, @name : UInt16*)
+    end
+  end
+
+  @[Extern]
+  struct IMAGEHLP_SYMBOLW64_PACKAGE
+    property sym : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOLW64
+    property name : UInt16[2001]
+    def initialize(@sym : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOLW64, @name : UInt16[2001])
+    end
+  end
+
+  @[Extern]
+  struct IMAGEHLP_MODULE64
+    property size_of_struct : UInt32
+    property base_of_image : UInt64
+    property image_size : UInt32
+    property time_date_stamp : UInt32
+    property check_sum : UInt32
+    property num_syms : UInt32
+    property sym_type : Win32cr::System::Diagnostics::Debug::SYM_TYPE
+    property module_name : Win32cr::Foundation::CHAR[32]
+    property image_name : Win32cr::Foundation::CHAR[256]
+    property loaded_image_name : Win32cr::Foundation::CHAR[256]
+    property loaded_pdb_name : Win32cr::Foundation::CHAR[256]
+    property cv_sig : UInt32
+    property cv_data : Win32cr::Foundation::CHAR[780]
+    property pdb_sig : UInt32
+    property pdb_sig70 : LibC::GUID
+    property pdb_age : UInt32
+    property pdb_unmatched : Win32cr::Foundation::BOOL
+    property dbg_unmatched : Win32cr::Foundation::BOOL
+    property line_numbers : Win32cr::Foundation::BOOL
+    property global_symbols : Win32cr::Foundation::BOOL
+    property type_info : Win32cr::Foundation::BOOL
+    property source_indexed : Win32cr::Foundation::BOOL
+    property publics : Win32cr::Foundation::BOOL
+    property machine_type : UInt32
+    property reserved : UInt32
+    def initialize(@size_of_struct : UInt32, @base_of_image : UInt64, @image_size : UInt32, @time_date_stamp : UInt32, @check_sum : UInt32, @num_syms : UInt32, @sym_type : Win32cr::System::Diagnostics::Debug::SYM_TYPE, @module_name : Win32cr::Foundation::CHAR[32], @image_name : Win32cr::Foundation::CHAR[256], @loaded_image_name : Win32cr::Foundation::CHAR[256], @loaded_pdb_name : Win32cr::Foundation::CHAR[256], @cv_sig : UInt32, @cv_data : Win32cr::Foundation::CHAR[780], @pdb_sig : UInt32, @pdb_sig70 : LibC::GUID, @pdb_age : UInt32, @pdb_unmatched : Win32cr::Foundation::BOOL, @dbg_unmatched : Win32cr::Foundation::BOOL, @line_numbers : Win32cr::Foundation::BOOL, @global_symbols : Win32cr::Foundation::BOOL, @type_info : Win32cr::Foundation::BOOL, @source_indexed : Win32cr::Foundation::BOOL, @publics : Win32cr::Foundation::BOOL, @machine_type : UInt32, @reserved : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct IMAGEHLP_MODULE64_EX
+    property module__ : Win32cr::System::Diagnostics::Debug::IMAGEHLP_MODULE64
+    property region_flags : UInt32
+    def initialize(@module__ : Win32cr::System::Diagnostics::Debug::IMAGEHLP_MODULE64, @region_flags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct IMAGEHLP_MODULEW64
+    property size_of_struct : UInt32
+    property base_of_image : UInt64
+    property image_size : UInt32
+    property time_date_stamp : UInt32
+    property check_sum : UInt32
+    property num_syms : UInt32
+    property sym_type : Win32cr::System::Diagnostics::Debug::SYM_TYPE
+    property module_name : UInt16[32]
+    property image_name : UInt16[256]
+    property loaded_image_name : UInt16[256]
+    property loaded_pdb_name : UInt16[256]
+    property cv_sig : UInt32
+    property cv_data : UInt16[780]
+    property pdb_sig : UInt32
+    property pdb_sig70 : LibC::GUID
+    property pdb_age : UInt32
+    property pdb_unmatched : Win32cr::Foundation::BOOL
+    property dbg_unmatched : Win32cr::Foundation::BOOL
+    property line_numbers : Win32cr::Foundation::BOOL
+    property global_symbols : Win32cr::Foundation::BOOL
+    property type_info : Win32cr::Foundation::BOOL
+    property source_indexed : Win32cr::Foundation::BOOL
+    property publics : Win32cr::Foundation::BOOL
+    property machine_type : UInt32
+    property reserved : UInt32
+    def initialize(@size_of_struct : UInt32, @base_of_image : UInt64, @image_size : UInt32, @time_date_stamp : UInt32, @check_sum : UInt32, @num_syms : UInt32, @sym_type : Win32cr::System::Diagnostics::Debug::SYM_TYPE, @module_name : UInt16[32], @image_name : UInt16[256], @loaded_image_name : UInt16[256], @loaded_pdb_name : UInt16[256], @cv_sig : UInt32, @cv_data : UInt16[780], @pdb_sig : UInt32, @pdb_sig70 : LibC::GUID, @pdb_age : UInt32, @pdb_unmatched : Win32cr::Foundation::BOOL, @dbg_unmatched : Win32cr::Foundation::BOOL, @line_numbers : Win32cr::Foundation::BOOL, @global_symbols : Win32cr::Foundation::BOOL, @type_info : Win32cr::Foundation::BOOL, @source_indexed : Win32cr::Foundation::BOOL, @publics : Win32cr::Foundation::BOOL, @machine_type : UInt32, @reserved : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct IMAGEHLP_MODULEW64_EX
+    property module__ : Win32cr::System::Diagnostics::Debug::IMAGEHLP_MODULEW64
+    property region_flags : UInt32
+    def initialize(@module__ : Win32cr::System::Diagnostics::Debug::IMAGEHLP_MODULEW64, @region_flags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct IMAGEHLP_LINE64
+    property size_of_struct : UInt32
+    property key : Void*
+    property line_number : UInt32
+    property file_name : Win32cr::Foundation::PSTR
+    property address : UInt64
+    def initialize(@size_of_struct : UInt32, @key : Void*, @line_number : UInt32, @file_name : Win32cr::Foundation::PSTR, @address : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct IMAGEHLP_LINEW64
+    property size_of_struct : UInt32
+    property key : Void*
+    property line_number : UInt32
+    property file_name : Win32cr::Foundation::PWSTR
+    property address : UInt64
+    def initialize(@size_of_struct : UInt32, @key : Void*, @line_number : UInt32, @file_name : Win32cr::Foundation::PWSTR, @address : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct SOURCEFILE
+    property mod_base : UInt64
+    property file_name : Win32cr::Foundation::PSTR
+    def initialize(@mod_base : UInt64, @file_name : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct SOURCEFILEW
+    property mod_base : UInt64
+    property file_name : Win32cr::Foundation::PWSTR
+    def initialize(@mod_base : UInt64, @file_name : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct IMAGEHLP_CBA_READ_MEMORY
+    property addr : UInt64
+    property buf : Void*
+    property bytes : UInt32
+    property bytesread : UInt32*
+    def initialize(@addr : UInt64, @buf : Void*, @bytes : UInt32, @bytesread : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct IMAGEHLP_CBA_EVENT
+    property severity : Win32cr::System::Diagnostics::Debug::IMAGEHLP_CBA_EVENT_SEVERITY
+    property code : UInt32
+    property desc : Win32cr::Foundation::PSTR
+    property object : Void*
+    def initialize(@severity : Win32cr::System::Diagnostics::Debug::IMAGEHLP_CBA_EVENT_SEVERITY, @code : UInt32, @desc : Win32cr::Foundation::PSTR, @object : Void*)
+    end
+  end
+
+  @[Extern]
+  struct IMAGEHLP_CBA_EVENTW
+    property severity : Win32cr::System::Diagnostics::Debug::IMAGEHLP_CBA_EVENT_SEVERITY
+    property code : UInt32
+    property desc : Win32cr::Foundation::PWSTR
+    property object : Void*
+    def initialize(@severity : Win32cr::System::Diagnostics::Debug::IMAGEHLP_CBA_EVENT_SEVERITY, @code : UInt32, @desc : Win32cr::Foundation::PWSTR, @object : Void*)
+    end
+  end
+
+  @[Extern]
+  struct IMAGEHLP_DEFERRED_SYMBOL_LOAD64
+    property size_of_struct : UInt32
+    property base_of_image : UInt64
+    property check_sum : UInt32
+    property time_date_stamp : UInt32
+    property file_name : Win32cr::Foundation::CHAR[260]
+    property reparse : Win32cr::Foundation::BOOLEAN
+    property hFile : Win32cr::Foundation::HANDLE
+    property flags : UInt32
+    def initialize(@size_of_struct : UInt32, @base_of_image : UInt64, @check_sum : UInt32, @time_date_stamp : UInt32, @file_name : Win32cr::Foundation::CHAR[260], @reparse : Win32cr::Foundation::BOOLEAN, @hFile : Win32cr::Foundation::HANDLE, @flags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct IMAGEHLP_DEFERRED_SYMBOL_LOADW64
+    property size_of_struct : UInt32
+    property base_of_image : UInt64
+    property check_sum : UInt32
+    property time_date_stamp : UInt32
+    property file_name : UInt16[261]
+    property reparse : Win32cr::Foundation::BOOLEAN
+    property hFile : Win32cr::Foundation::HANDLE
+    property flags : UInt32
+    def initialize(@size_of_struct : UInt32, @base_of_image : UInt64, @check_sum : UInt32, @time_date_stamp : UInt32, @file_name : UInt16[261], @reparse : Win32cr::Foundation::BOOLEAN, @hFile : Win32cr::Foundation::HANDLE, @flags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct IMAGEHLP_DUPLICATE_SYMBOL64
+    property size_of_struct : UInt32
+    property number_of_dups : UInt32
+    property symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL64*
+    property selected_symbol : UInt32
+    def initialize(@size_of_struct : UInt32, @number_of_dups : UInt32, @symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL64*, @selected_symbol : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct IMAGEHLP_JIT_SYMBOL_MAP_
+    property size_of_struct : UInt32
+    property address : UInt64
+    property base_of_image : UInt64
+    def initialize(@size_of_struct : UInt32, @address : UInt64, @base_of_image : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct OMAP
+    property rva : UInt32
+    property rvaTo : UInt32
+    def initialize(@rva : UInt32, @rvaTo : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SRCCODEINFO
+    property size_of_struct : UInt32
+    property key : Void*
+    property mod_base : UInt64
+    property obj : Win32cr::Foundation::CHAR[261]
+    property file_name : Win32cr::Foundation::CHAR[261]
+    property line_number : UInt32
+    property address : UInt64
+    def initialize(@size_of_struct : UInt32, @key : Void*, @mod_base : UInt64, @obj : Win32cr::Foundation::CHAR[261], @file_name : Win32cr::Foundation::CHAR[261], @line_number : UInt32, @address : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct SRCCODEINFOW
+    property size_of_struct : UInt32
+    property key : Void*
+    property mod_base : UInt64
+    property obj : UInt16[261]
+    property file_name : UInt16[261]
+    property line_number : UInt32
+    property address : UInt64
+    def initialize(@size_of_struct : UInt32, @key : Void*, @mod_base : UInt64, @obj : UInt16[261], @file_name : UInt16[261], @line_number : UInt32, @address : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct IMAGEHLP_SYMBOL_SRC
+    property sizeofstruct : UInt32
+    property type__ : UInt32
+    property file : Win32cr::Foundation::CHAR[260]
+    def initialize(@sizeofstruct : UInt32, @type__ : UInt32, @file : Win32cr::Foundation::CHAR[260])
+    end
+  end
+
+  @[Extern]
+  struct MODULE_TYPE_INFO
+    property dataLength : UInt16
+    property leaf : UInt16
+    property data : UInt8*
+    def initialize(@dataLength : UInt16, @leaf : UInt16, @data : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct SYMBOL_INFO
+    property size_of_struct : UInt32
+    property type_index : UInt32
+    property reserved : UInt64[2]
+    property index : UInt32
+    property size : UInt32
+    property mod_base : UInt64
+    property flags : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO_FLAGS
+    property value : UInt64
+    property address : UInt64
+    property register : UInt32
+    property scope : UInt32
+    property tag : UInt32
+    property name_len : UInt32
+    property max_name_len : UInt32
+    property name : Win32cr::Foundation::CHAR*
+    def initialize(@size_of_struct : UInt32, @type_index : UInt32, @reserved : UInt64[2], @index : UInt32, @size : UInt32, @mod_base : UInt64, @flags : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO_FLAGS, @value : UInt64, @address : UInt64, @register : UInt32, @scope : UInt32, @tag : UInt32, @name_len : UInt32, @max_name_len : UInt32, @name : Win32cr::Foundation::CHAR*)
+    end
+  end
+
+  @[Extern]
+  struct SYMBOL_INFO_PACKAGE
+    property si : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO
+    property name : Win32cr::Foundation::CHAR[2001]
+    def initialize(@si : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO, @name : Win32cr::Foundation::CHAR[2001])
+    end
+  end
+
+  @[Extern]
+  struct SYMBOL_INFOW
+    property size_of_struct : UInt32
+    property type_index : UInt32
+    property reserved : UInt64[2]
+    property index : UInt32
+    property size : UInt32
+    property mod_base : UInt64
+    property flags : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO_FLAGS
+    property value : UInt64
+    property address : UInt64
+    property register : UInt32
+    property scope : UInt32
+    property tag : UInt32
+    property name_len : UInt32
+    property max_name_len : UInt32
+    property name : UInt16*
+    def initialize(@size_of_struct : UInt32, @type_index : UInt32, @reserved : UInt64[2], @index : UInt32, @size : UInt32, @mod_base : UInt64, @flags : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO_FLAGS, @value : UInt64, @address : UInt64, @register : UInt32, @scope : UInt32, @tag : UInt32, @name_len : UInt32, @max_name_len : UInt32, @name : UInt16*)
+    end
+  end
+
+  @[Extern]
+  struct SYMBOL_INFO_PACKAGEW
+    property si : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW
+    property name : UInt16[2001]
+    def initialize(@si : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW, @name : UInt16[2001])
+    end
+  end
+
+  @[Extern]
+  struct IMAGEHLP_STACK_FRAME
+    property instruction_offset : UInt64
+    property return_offset : UInt64
+    property frame_offset : UInt64
+    property stack_offset : UInt64
+    property backing_store_offset : UInt64
+    property func_table_entry : UInt64
+    property params : UInt64[4]
+    property reserved : UInt64[5]
+    property virtual : Win32cr::Foundation::BOOL
+    property reserved2 : UInt32
+    def initialize(@instruction_offset : UInt64, @return_offset : UInt64, @frame_offset : UInt64, @stack_offset : UInt64, @backing_store_offset : UInt64, @func_table_entry : UInt64, @params : UInt64[4], @reserved : UInt64[5], @virtual : Win32cr::Foundation::BOOL, @reserved2 : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct TI_FINDCHILDREN_PARAMS
+    property count : UInt32
+    property start : UInt32
+    property child_id : UInt32*
+    def initialize(@count : UInt32, @start : UInt32, @child_id : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct IMAGEHLP_GET_TYPE_INFO_PARAMS
+    property size_of_struct : UInt32
+    property flags : Win32cr::System::Diagnostics::Debug::IMAGEHLP_GET_TYPE_INFO_FLAGS
+    property num_ids : UInt32
+    property type_ids : UInt32*
+    property tag_filter : UInt64
+    property num_reqs : UInt32
+    property req_kinds : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL_TYPE_INFO*
+    property req_offsets : LibC::UIntPtrT*
+    property req_sizes : UInt32*
+    property req_stride : LibC::UIntPtrT
+    property buffer_size : LibC::UIntPtrT
+    property buffer : Void*
+    property entries_matched : UInt32
+    property entries_filled : UInt32
+    property tags_found : UInt64
+    property all_reqs_valid : UInt64
+    property num_reqs_valid : UInt32
+    property reqs_valid : UInt64*
+    def initialize(@size_of_struct : UInt32, @flags : Win32cr::System::Diagnostics::Debug::IMAGEHLP_GET_TYPE_INFO_FLAGS, @num_ids : UInt32, @type_ids : UInt32*, @tag_filter : UInt64, @num_reqs : UInt32, @req_kinds : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL_TYPE_INFO*, @req_offsets : LibC::UIntPtrT*, @req_sizes : UInt32*, @req_stride : LibC::UIntPtrT, @buffer_size : LibC::UIntPtrT, @buffer : Void*, @entries_matched : UInt32, @entries_filled : UInt32, @tags_found : UInt64, @all_reqs_valid : UInt64, @num_reqs_valid : UInt32, @reqs_valid : UInt64*)
+    end
+  end
+
+  @[Extern]
+  struct SYMSRV_INDEX_INFO
+    property sizeofstruct : UInt32
+    property file : Win32cr::Foundation::CHAR[261]
+    property stripped : Win32cr::Foundation::BOOL
+    property timestamp : UInt32
+    property size : UInt32
+    property dbgfile : Win32cr::Foundation::CHAR[261]
+    property pdbfile : Win32cr::Foundation::CHAR[261]
+    property guid : LibC::GUID
+    property sig : UInt32
+    property age : UInt32
+    def initialize(@sizeofstruct : UInt32, @file : Win32cr::Foundation::CHAR[261], @stripped : Win32cr::Foundation::BOOL, @timestamp : UInt32, @size : UInt32, @dbgfile : Win32cr::Foundation::CHAR[261], @pdbfile : Win32cr::Foundation::CHAR[261], @guid : LibC::GUID, @sig : UInt32, @age : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SYMSRV_INDEX_INFOW
+    property sizeofstruct : UInt32
+    property file : UInt16[261]
+    property stripped : Win32cr::Foundation::BOOL
+    property timestamp : UInt32
+    property size : UInt32
+    property dbgfile : UInt16[261]
+    property pdbfile : UInt16[261]
+    property guid : LibC::GUID
+    property sig : UInt32
+    property age : UInt32
+    def initialize(@sizeofstruct : UInt32, @file : UInt16[261], @stripped : Win32cr::Foundation::BOOL, @timestamp : UInt32, @size : UInt32, @dbgfile : UInt16[261], @pdbfile : UInt16[261], @guid : LibC::GUID, @sig : UInt32, @age : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SYMSRV_EXTENDED_OUTPUT_DATA
+    property sizeOfStruct : UInt32
+    property version : UInt32
+    property filePtrMsg : UInt16[261]
+    def initialize(@sizeOfStruct : UInt32, @version : UInt32, @filePtrMsg : UInt16[261])
+    end
+  end
+
+  @[Extern]
+  struct DBGHELP_DATA_REPORT_STRUCT
+    property pBinPathNonExist : Win32cr::Foundation::PWSTR
+    property pSymbolPathNonExist : Win32cr::Foundation::PWSTR
+    def initialize(@pBinPathNonExist : Win32cr::Foundation::PWSTR, @pSymbolPathNonExist : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct TEXT_DOCUMENT_ARRAY
+    property dwCount : UInt32
+    property members : Void**
+    def initialize(@dwCount : UInt32, @members : Void**)
+    end
+  end
+
+  @[Extern]
+  struct JsDebugPropertyInfo
+    property name : Win32cr::Foundation::BSTR
+    property type__ : Win32cr::Foundation::BSTR
+    property value : Win32cr::Foundation::BSTR
+    property fullName : Win32cr::Foundation::BSTR
+    property attr : Win32cr::System::Diagnostics::Debug::JS_PROPERTY_ATTRIBUTES
+    def initialize(@name : Win32cr::Foundation::BSTR, @type__ : Win32cr::Foundation::BSTR, @value : Win32cr::Foundation::BSTR, @fullName : Win32cr::Foundation::BSTR, @attr : Win32cr::System::Diagnostics::Debug::JS_PROPERTY_ATTRIBUTES)
+    end
+  end
+
+  @[Extern]
+  struct JS_NATIVE_FRAME
+    property instruction_offset : UInt64
+    property return_offset : UInt64
+    property frame_offset : UInt64
+    property stack_offset : UInt64
+    def initialize(@instruction_offset : UInt64, @return_offset : UInt64, @frame_offset : UInt64, @stack_offset : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct PHYSICAL_MEMORY_RUN32
+    property base_page : UInt32
+    property page_count : UInt32
+    def initialize(@base_page : UInt32, @page_count : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PHYSICAL_MEMORY_DESCRIPTOR32
+    property number_of_runs : UInt32
+    property number_of_pages : UInt32
+    property run : Win32cr::System::Diagnostics::Debug::PHYSICAL_MEMORY_RUN32*
+    def initialize(@number_of_runs : UInt32, @number_of_pages : UInt32, @run : Win32cr::System::Diagnostics::Debug::PHYSICAL_MEMORY_RUN32*)
+    end
+  end
+
+  @[Extern]
+  struct PHYSICAL_MEMORY_RUN64
+    property base_page : UInt64
+    property page_count : UInt64
+    def initialize(@base_page : UInt64, @page_count : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct PHYSICAL_MEMORY_DESCRIPTOR64
+    property number_of_runs : UInt32
+    property number_of_pages : UInt64
+    property run : Win32cr::System::Diagnostics::Debug::PHYSICAL_MEMORY_RUN64*
+    def initialize(@number_of_runs : UInt32, @number_of_pages : UInt64, @run : Win32cr::System::Diagnostics::Debug::PHYSICAL_MEMORY_RUN64*)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct DUMP_FILE_ATTRIBUTES
+    property anonymous : Anonymous_e__Struct_
+    property attributes : UInt32
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @attributes : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DUMP_HEADER32
+    property signature : UInt32
+    property valid_dump : UInt32
+    property major_version : UInt32
+    property minor_version : UInt32
+    property directory_table_base : UInt32
+    property pfn_data_base : UInt32
+    property ps_loaded_module_list : UInt32
+    property ps_active_process_head : UInt32
+    property machine_image_type : UInt32
+    property number_processors : UInt32
+    property bug_check_code : UInt32
+    property bug_check_parameter1 : UInt32
+    property bug_check_parameter2 : UInt32
+    property bug_check_parameter3 : UInt32
+    property bug_check_parameter4 : UInt32
+    property version_user : Win32cr::Foundation::CHAR[32]
+    property pae_enabled : UInt8
+    property kd_secondary_version : UInt8
+    property spare3 : UInt8[2]
+    property kd_debugger_data_block : UInt32
+    property anonymous : Anonymous_e__Union_
+    property context_record : UInt8[1200]
+    property exception : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD32
+    property comment : Win32cr::Foundation::CHAR[128]
+    property attributes : Win32cr::System::Diagnostics::Debug::DUMP_FILE_ATTRIBUTES
+    property boot_id : UInt32
+    property _reserved0 : UInt8[1760]
+    property dump_type : UInt32
+    property mini_dump_fields : UInt32
+    property secondary_data_state : UInt32
+    property product_type : UInt32
+    property suite_mask : UInt32
+    property writer_status : UInt32
+    property required_dump_space : Win32cr::Foundation::LARGE_INTEGER
+    property _reserved2 : UInt8[16]
+    property system_up_time : Win32cr::Foundation::LARGE_INTEGER
+    property system_time : Win32cr::Foundation::LARGE_INTEGER
+    property _reserved3 : UInt8[56]
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      physical_memory_block : Win32cr::System::Diagnostics::Debug::PHYSICAL_MEMORY_DESCRIPTOR32,
-      physical_memory_block_buffer : UInt8[700]
+    struct Anonymous_e__Union_
+    property physical_memory_block : Win32cr::System::Diagnostics::Debug::PHYSICAL_MEMORY_DESCRIPTOR32
+    property physical_memory_block_buffer : UInt8[700]
+    def initialize(@physical_memory_block : Win32cr::System::Diagnostics::Debug::PHYSICAL_MEMORY_DESCRIPTOR32, @physical_memory_block_buffer : UInt8[700])
+    end
+    end
 
+    def initialize(@signature : UInt32, @valid_dump : UInt32, @major_version : UInt32, @minor_version : UInt32, @directory_table_base : UInt32, @pfn_data_base : UInt32, @ps_loaded_module_list : UInt32, @ps_active_process_head : UInt32, @machine_image_type : UInt32, @number_processors : UInt32, @bug_check_code : UInt32, @bug_check_parameter1 : UInt32, @bug_check_parameter2 : UInt32, @bug_check_parameter3 : UInt32, @bug_check_parameter4 : UInt32, @version_user : Win32cr::Foundation::CHAR[32], @pae_enabled : UInt8, @kd_secondary_version : UInt8, @spare3 : UInt8[2], @kd_debugger_data_block : UInt32, @anonymous : Anonymous_e__Union_, @context_record : UInt8[1200], @exception : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD32, @comment : Win32cr::Foundation::CHAR[128], @attributes : Win32cr::System::Diagnostics::Debug::DUMP_FILE_ATTRIBUTES, @boot_id : UInt32, @_reserved0 : UInt8[1760], @dump_type : UInt32, @mini_dump_fields : UInt32, @secondary_data_state : UInt32, @product_type : UInt32, @suite_mask : UInt32, @writer_status : UInt32, @required_dump_space : Win32cr::Foundation::LARGE_INTEGER, @_reserved2 : UInt8[16], @system_up_time : Win32cr::Foundation::LARGE_INTEGER, @system_time : Win32cr::Foundation::LARGE_INTEGER, @_reserved3 : UInt8[56])
+    end
   end
 
   @[Extern]
-  record DUMP_HEADER64,
-    signature : UInt32,
-    valid_dump : UInt32,
-    major_version : UInt32,
-    minor_version : UInt32,
-    directory_table_base : UInt64,
-    pfn_data_base : UInt64,
-    ps_loaded_module_list : UInt64,
-    ps_active_process_head : UInt64,
-    machine_image_type : UInt32,
-    number_processors : UInt32,
-    bug_check_code : UInt32,
-    bug_check_parameter1 : UInt64,
-    bug_check_parameter2 : UInt64,
-    bug_check_parameter3 : UInt64,
-    bug_check_parameter4 : UInt64,
-    version_user : Win32cr::Foundation::CHAR[32],
-    kd_debugger_data_block : UInt64,
-    anonymous : Anonymous_e__Union_,
-    context_record : UInt8[3000],
-    exception : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD64,
-    dump_type : UInt32,
-    required_dump_space : Win32cr::Foundation::LARGE_INTEGER,
-    system_time : Win32cr::Foundation::LARGE_INTEGER,
-    comment : Win32cr::Foundation::CHAR[128],
-    system_up_time : Win32cr::Foundation::LARGE_INTEGER,
-    mini_dump_fields : UInt32,
-    secondary_data_state : UInt32,
-    product_type : UInt32,
-    suite_mask : UInt32,
-    writer_status : UInt32,
-    unused1 : UInt8,
-    kd_secondary_version : UInt8,
-    unused : UInt8[2],
-    attributes : Win32cr::System::Diagnostics::Debug::DUMP_FILE_ATTRIBUTES,
-    boot_id : UInt32,
-    _reserved0 : UInt8[4008] do
+  struct DUMP_HEADER64
+    property signature : UInt32
+    property valid_dump : UInt32
+    property major_version : UInt32
+    property minor_version : UInt32
+    property directory_table_base : UInt64
+    property pfn_data_base : UInt64
+    property ps_loaded_module_list : UInt64
+    property ps_active_process_head : UInt64
+    property machine_image_type : UInt32
+    property number_processors : UInt32
+    property bug_check_code : UInt32
+    property bug_check_parameter1 : UInt64
+    property bug_check_parameter2 : UInt64
+    property bug_check_parameter3 : UInt64
+    property bug_check_parameter4 : UInt64
+    property version_user : Win32cr::Foundation::CHAR[32]
+    property kd_debugger_data_block : UInt64
+    property anonymous : Anonymous_e__Union_
+    property context_record : UInt8[3000]
+    property exception : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD64
+    property dump_type : UInt32
+    property required_dump_space : Win32cr::Foundation::LARGE_INTEGER
+    property system_time : Win32cr::Foundation::LARGE_INTEGER
+    property comment : Win32cr::Foundation::CHAR[128]
+    property system_up_time : Win32cr::Foundation::LARGE_INTEGER
+    property mini_dump_fields : UInt32
+    property secondary_data_state : UInt32
+    property product_type : UInt32
+    property suite_mask : UInt32
+    property writer_status : UInt32
+    property unused1 : UInt8
+    property kd_secondary_version : UInt8
+    property unused : UInt8[2]
+    property attributes : Win32cr::System::Diagnostics::Debug::DUMP_FILE_ATTRIBUTES
+    property boot_id : UInt32
+    property _reserved0 : UInt8[4008]
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      physical_memory_block : Win32cr::System::Diagnostics::Debug::PHYSICAL_MEMORY_DESCRIPTOR64,
-      physical_memory_block_buffer : UInt8[700]
+    struct Anonymous_e__Union_
+    property physical_memory_block : Win32cr::System::Diagnostics::Debug::PHYSICAL_MEMORY_DESCRIPTOR64
+    property physical_memory_block_buffer : UInt8[700]
+    def initialize(@physical_memory_block : Win32cr::System::Diagnostics::Debug::PHYSICAL_MEMORY_DESCRIPTOR64, @physical_memory_block_buffer : UInt8[700])
+    end
+    end
 
+    def initialize(@signature : UInt32, @valid_dump : UInt32, @major_version : UInt32, @minor_version : UInt32, @directory_table_base : UInt64, @pfn_data_base : UInt64, @ps_loaded_module_list : UInt64, @ps_active_process_head : UInt64, @machine_image_type : UInt32, @number_processors : UInt32, @bug_check_code : UInt32, @bug_check_parameter1 : UInt64, @bug_check_parameter2 : UInt64, @bug_check_parameter3 : UInt64, @bug_check_parameter4 : UInt64, @version_user : Win32cr::Foundation::CHAR[32], @kd_debugger_data_block : UInt64, @anonymous : Anonymous_e__Union_, @context_record : UInt8[3000], @exception : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD64, @dump_type : UInt32, @required_dump_space : Win32cr::Foundation::LARGE_INTEGER, @system_time : Win32cr::Foundation::LARGE_INTEGER, @comment : Win32cr::Foundation::CHAR[128], @system_up_time : Win32cr::Foundation::LARGE_INTEGER, @mini_dump_fields : UInt32, @secondary_data_state : UInt32, @product_type : UInt32, @suite_mask : UInt32, @writer_status : UInt32, @unused1 : UInt8, @kd_secondary_version : UInt8, @unused : UInt8[2], @attributes : Win32cr::System::Diagnostics::Debug::DUMP_FILE_ATTRIBUTES, @boot_id : UInt32, @_reserved0 : UInt8[4008])
+    end
   end
 
   @[Extern]
-  record WHEA_ERROR_SOURCE_CONFIGURATION_DD,
-    initialize__ : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_INITIALIZE_DEVICE_DRIVER,
-    uninitialize : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_UNINITIALIZE_DEVICE_DRIVER,
-    correct : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_CORRECT_DEVICE_DRIVER
-
-  @[Extern]
-  record WHEA_ERROR_SOURCE_CONFIGURATION_DEVICE_DRIVER_V1,
-    version : UInt32,
-    source_guid : LibC::GUID,
-    log_tag : UInt16,
-    reserved : UInt8[6],
-    initialize__ : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_INITIALIZE_DEVICE_DRIVER,
-    uninitialize : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_UNINITIALIZE_DEVICE_DRIVER
-
-  @[Extern]
-  record WHEA_ERROR_SOURCE_CONFIGURATION_DEVICE_DRIVER,
-    version : UInt32,
-    source_guid : LibC::GUID,
-    log_tag : UInt16,
-    reserved : UInt8[6],
-    initialize__ : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_INITIALIZE_DEVICE_DRIVER,
-    uninitialize : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_UNINITIALIZE_DEVICE_DRIVER,
-    max_section_data_length : UInt32,
-    max_sections_per_report : UInt32,
-    creator_id : LibC::GUID,
-    partition_id : LibC::GUID
-
-  @[Extern]
-  record WHEA_DRIVER_BUFFER_SET,
-    version : UInt32,
-    data : UInt8*,
-    data_size : UInt32,
-    section_type_guid : LibC::GUID*,
-    section_friendly_name : UInt8*,
-    flags : UInt8*
-
-  @[Extern(union: true)]
-  record WHEA_NOTIFICATION_FLAGS,
-    anonymous : Anonymous_e__Struct_,
-    as_ushort : UInt16 do
-
-    # Nested Type Anonymous_e__Struct_
-    @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt16
-
-  end
-
-  @[Extern(union: true)]
-  record XPF_MC_BANK_FLAGS,
-    anonymous : Anonymous_e__Struct_,
-    as_uchar : UInt8 do
-
-    # Nested Type Anonymous_e__Struct_
-    @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt8
-
-  end
-
-  @[Extern(union: true)]
-  record XPF_MCE_FLAGS,
-    anonymous : Anonymous_e__Struct_,
-    as_ulong : UInt32 do
-
-    # Nested Type Anonymous_e__Struct_
-    @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt32
-
-  end
-
-  @[Extern(union: true)]
-  record AER_ROOTPORT_DESCRIPTOR_FLAGS,
-    anonymous : Anonymous_e__Struct_,
-    as_ushort : UInt16 do
-
-    # Nested Type Anonymous_e__Struct_
-    @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt16
-
-  end
-
-  @[Extern(union: true)]
-  record AER_ENDPOINT_DESCRIPTOR_FLAGS,
-    anonymous : Anonymous_e__Struct_,
-    as_ushort : UInt16 do
-
-    # Nested Type Anonymous_e__Struct_
-    @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt16
-
-  end
-
-  @[Extern(union: true)]
-  record AER_BRIDGE_DESCRIPTOR_FLAGS,
-    anonymous : Anonymous_e__Struct_,
-    as_ushort : UInt16 do
-
-    # Nested Type Anonymous_e__Struct_
-    @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt16
-
+  struct WHEA_ERROR_SOURCE_CONFIGURATION_DD
+    property initialize__ : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_INITIALIZE_DEVICE_DRIVER
+    property uninitialize : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_UNINITIALIZE_DEVICE_DRIVER
+    property correct : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_CORRECT_DEVICE_DRIVER
+    def initialize(@initialize__ : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_INITIALIZE_DEVICE_DRIVER, @uninitialize : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_UNINITIALIZE_DEVICE_DRIVER, @correct : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_CORRECT_DEVICE_DRIVER)
+    end
   end
 
   @[Extern]
-  record WHEA_NOTIFICATION_DESCRIPTOR,
-    type__ : UInt8,
-    length : UInt8,
-    flags : Win32cr::System::Diagnostics::Debug::WHEA_NOTIFICATION_FLAGS,
-    u : U_e__union_ do
+  struct WHEA_ERROR_SOURCE_CONFIGURATION_DEVICE_DRIVER_V1
+    property version : UInt32
+    property source_guid : LibC::GUID
+    property log_tag : UInt16
+    property reserved : UInt8[6]
+    property initialize__ : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_INITIALIZE_DEVICE_DRIVER
+    property uninitialize : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_UNINITIALIZE_DEVICE_DRIVER
+    def initialize(@version : UInt32, @source_guid : LibC::GUID, @log_tag : UInt16, @reserved : UInt8[6], @initialize__ : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_INITIALIZE_DEVICE_DRIVER, @uninitialize : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_UNINITIALIZE_DEVICE_DRIVER)
+    end
+  end
+
+  @[Extern]
+  struct WHEA_ERROR_SOURCE_CONFIGURATION_DEVICE_DRIVER
+    property version : UInt32
+    property source_guid : LibC::GUID
+    property log_tag : UInt16
+    property reserved : UInt8[6]
+    property initialize__ : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_INITIALIZE_DEVICE_DRIVER
+    property uninitialize : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_UNINITIALIZE_DEVICE_DRIVER
+    property max_section_data_length : UInt32
+    property max_sections_per_report : UInt32
+    property creator_id : LibC::GUID
+    property partition_id : LibC::GUID
+    def initialize(@version : UInt32, @source_guid : LibC::GUID, @log_tag : UInt16, @reserved : UInt8[6], @initialize__ : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_INITIALIZE_DEVICE_DRIVER, @uninitialize : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_UNINITIALIZE_DEVICE_DRIVER, @max_section_data_length : UInt32, @max_sections_per_report : UInt32, @creator_id : LibC::GUID, @partition_id : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct WHEA_DRIVER_BUFFER_SET
+    property version : UInt32
+    property data : UInt8*
+    property data_size : UInt32
+    property section_type_guid : LibC::GUID*
+    property section_friendly_name : UInt8*
+    property flags : UInt8*
+    def initialize(@version : UInt32, @data : UInt8*, @data_size : UInt32, @section_type_guid : LibC::GUID*, @section_friendly_name : UInt8*, @flags : UInt8*)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct WHEA_NOTIFICATION_FLAGS
+    property anonymous : Anonymous_e__Struct_
+    property as_ushort : UInt16
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ushort : UInt16)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct XPF_MC_BANK_FLAGS
+    property anonymous : Anonymous_e__Struct_
+    property as_uchar : UInt8
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_uchar : UInt8)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct XPF_MCE_FLAGS
+    property anonymous : Anonymous_e__Struct_
+    property as_ulong : UInt32
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ulong : UInt32)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct AER_ROOTPORT_DESCRIPTOR_FLAGS
+    property anonymous : Anonymous_e__Struct_
+    property as_ushort : UInt16
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ushort : UInt16)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct AER_ENDPOINT_DESCRIPTOR_FLAGS
+    property anonymous : Anonymous_e__Struct_
+    property as_ushort : UInt16
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ushort : UInt16)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct AER_BRIDGE_DESCRIPTOR_FLAGS
+    property anonymous : Anonymous_e__Struct_
+    property as_ushort : UInt16
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @as_ushort : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct WHEA_NOTIFICATION_DESCRIPTOR
+    property type__ : UInt8
+    property length : UInt8
+    property flags : Win32cr::System::Diagnostics::Debug::WHEA_NOTIFICATION_FLAGS
+    property u : U_e__union_
 
     # Nested Type U_e__union_
     @[Extern(union: true)]
-    record U_e__union_,
-      polled : Polled_e__Struct_,
-      interrupt : Interrupt_e__Struct_,
-      local_interrupt : LocalInterrupt_e__Struct_,
-      sci : Sci_e__Struct_,
-      nmi : Nmi_e__Struct_,
-      sea : Sea_e__Struct_,
-      sei : Sei_e__Struct_,
-      gsiv : Gsiv_e__Struct_ do
+    struct U_e__union_
+    property polled : Polled_e__Struct_
+    property interrupt : Interrupt_e__Struct_
+    property local_interrupt : LocalInterrupt_e__Struct_
+    property sci : Sci_e__Struct_
+    property nmi : Nmi_e__Struct_
+    property sea : Sea_e__Struct_
+    property sei : Sei_e__Struct_
+    property gsiv : Gsiv_e__Struct_
 
       # Nested Type Sei_e__Struct_
       @[Extern]
-      record Sei_e__Struct_,
-        poll_interval : UInt32,
-        vector : UInt32,
-        switch_to_polling_threshold : UInt32,
-        switch_to_polling_window : UInt32,
-        error_threshold : UInt32,
-        error_threshold_window : UInt32
+      struct Sei_e__Struct_
+    property poll_interval : UInt32
+    property vector : UInt32
+    property switch_to_polling_threshold : UInt32
+    property switch_to_polling_window : UInt32
+    property error_threshold : UInt32
+    property error_threshold_window : UInt32
+    def initialize(@poll_interval : UInt32, @vector : UInt32, @switch_to_polling_threshold : UInt32, @switch_to_polling_window : UInt32, @error_threshold : UInt32, @error_threshold_window : UInt32)
+    end
+      end
 
 
       # Nested Type Nmi_e__Struct_
       @[Extern]
-      record Nmi_e__Struct_,
-        poll_interval : UInt32,
-        vector : UInt32,
-        switch_to_polling_threshold : UInt32,
-        switch_to_polling_window : UInt32,
-        error_threshold : UInt32,
-        error_threshold_window : UInt32
+      struct Nmi_e__Struct_
+    property poll_interval : UInt32
+    property vector : UInt32
+    property switch_to_polling_threshold : UInt32
+    property switch_to_polling_window : UInt32
+    property error_threshold : UInt32
+    property error_threshold_window : UInt32
+    def initialize(@poll_interval : UInt32, @vector : UInt32, @switch_to_polling_threshold : UInt32, @switch_to_polling_window : UInt32, @error_threshold : UInt32, @error_threshold_window : UInt32)
+    end
+      end
 
 
       # Nested Type LocalInterrupt_e__Struct_
       @[Extern]
-      record LocalInterrupt_e__Struct_,
-        poll_interval : UInt32,
-        vector : UInt32,
-        switch_to_polling_threshold : UInt32,
-        switch_to_polling_window : UInt32,
-        error_threshold : UInt32,
-        error_threshold_window : UInt32
+      struct LocalInterrupt_e__Struct_
+    property poll_interval : UInt32
+    property vector : UInt32
+    property switch_to_polling_threshold : UInt32
+    property switch_to_polling_window : UInt32
+    property error_threshold : UInt32
+    property error_threshold_window : UInt32
+    def initialize(@poll_interval : UInt32, @vector : UInt32, @switch_to_polling_threshold : UInt32, @switch_to_polling_window : UInt32, @error_threshold : UInt32, @error_threshold_window : UInt32)
+    end
+      end
 
 
       # Nested Type Polled_e__Struct_
       @[Extern]
-      record Polled_e__Struct_,
-        poll_interval : UInt32
+      struct Polled_e__Struct_
+    property poll_interval : UInt32
+    def initialize(@poll_interval : UInt32)
+    end
+      end
 
 
       # Nested Type Sea_e__Struct_
       @[Extern]
-      record Sea_e__Struct_,
-        poll_interval : UInt32,
-        vector : UInt32,
-        switch_to_polling_threshold : UInt32,
-        switch_to_polling_window : UInt32,
-        error_threshold : UInt32,
-        error_threshold_window : UInt32
+      struct Sea_e__Struct_
+    property poll_interval : UInt32
+    property vector : UInt32
+    property switch_to_polling_threshold : UInt32
+    property switch_to_polling_window : UInt32
+    property error_threshold : UInt32
+    property error_threshold_window : UInt32
+    def initialize(@poll_interval : UInt32, @vector : UInt32, @switch_to_polling_threshold : UInt32, @switch_to_polling_window : UInt32, @error_threshold : UInt32, @error_threshold_window : UInt32)
+    end
+      end
 
 
       # Nested Type Interrupt_e__Struct_
       @[Extern]
-      record Interrupt_e__Struct_,
-        poll_interval : UInt32,
-        vector : UInt32,
-        switch_to_polling_threshold : UInt32,
-        switch_to_polling_window : UInt32,
-        error_threshold : UInt32,
-        error_threshold_window : UInt32
+      struct Interrupt_e__Struct_
+    property poll_interval : UInt32
+    property vector : UInt32
+    property switch_to_polling_threshold : UInt32
+    property switch_to_polling_window : UInt32
+    property error_threshold : UInt32
+    property error_threshold_window : UInt32
+    def initialize(@poll_interval : UInt32, @vector : UInt32, @switch_to_polling_threshold : UInt32, @switch_to_polling_window : UInt32, @error_threshold : UInt32, @error_threshold_window : UInt32)
+    end
+      end
 
 
       # Nested Type Sci_e__Struct_
       @[Extern]
-      record Sci_e__Struct_,
-        poll_interval : UInt32,
-        vector : UInt32,
-        switch_to_polling_threshold : UInt32,
-        switch_to_polling_window : UInt32,
-        error_threshold : UInt32,
-        error_threshold_window : UInt32
+      struct Sci_e__Struct_
+    property poll_interval : UInt32
+    property vector : UInt32
+    property switch_to_polling_threshold : UInt32
+    property switch_to_polling_window : UInt32
+    property error_threshold : UInt32
+    property error_threshold_window : UInt32
+    def initialize(@poll_interval : UInt32, @vector : UInt32, @switch_to_polling_threshold : UInt32, @switch_to_polling_window : UInt32, @error_threshold : UInt32, @error_threshold_window : UInt32)
+    end
+      end
 
 
       # Nested Type Gsiv_e__Struct_
       @[Extern]
-      record Gsiv_e__Struct_,
-        poll_interval : UInt32,
-        vector : UInt32,
-        switch_to_polling_threshold : UInt32,
-        switch_to_polling_window : UInt32,
-        error_threshold : UInt32,
-        error_threshold_window : UInt32
+      struct Gsiv_e__Struct_
+    property poll_interval : UInt32
+    property vector : UInt32
+    property switch_to_polling_threshold : UInt32
+    property switch_to_polling_window : UInt32
+    property error_threshold : UInt32
+    property error_threshold_window : UInt32
+    def initialize(@poll_interval : UInt32, @vector : UInt32, @switch_to_polling_threshold : UInt32, @switch_to_polling_window : UInt32, @error_threshold : UInt32, @error_threshold_window : UInt32)
+    end
+      end
 
+    def initialize(@polled : Polled_e__Struct_, @interrupt : Interrupt_e__Struct_, @local_interrupt : LocalInterrupt_e__Struct_, @sci : Sci_e__Struct_, @nmi : Nmi_e__Struct_, @sea : Sea_e__Struct_, @sei : Sei_e__Struct_, @gsiv : Gsiv_e__Struct_)
+    end
     end
 
+    def initialize(@type__ : UInt8, @length : UInt8, @flags : Win32cr::System::Diagnostics::Debug::WHEA_NOTIFICATION_FLAGS, @u : U_e__union_)
+    end
   end
 
   @[Extern]
-  record WHEA_XPF_MC_BANK_DESCRIPTOR,
-    bank_number : UInt8,
-    clear_on_initialization : Win32cr::Foundation::BOOLEAN,
-    status_data_format : UInt8,
-    flags : Win32cr::System::Diagnostics::Debug::XPF_MC_BANK_FLAGS,
-    control_msr : UInt32,
-    status_msr : UInt32,
-    address_msr : UInt32,
-    misc_msr : UInt32,
-    control_data : UInt64
+  struct WHEA_XPF_MC_BANK_DESCRIPTOR
+    property bank_number : UInt8
+    property clear_on_initialization : Win32cr::Foundation::BOOLEAN
+    property status_data_format : UInt8
+    property flags : Win32cr::System::Diagnostics::Debug::XPF_MC_BANK_FLAGS
+    property control_msr : UInt32
+    property status_msr : UInt32
+    property address_msr : UInt32
+    property misc_msr : UInt32
+    property control_data : UInt64
+    def initialize(@bank_number : UInt8, @clear_on_initialization : Win32cr::Foundation::BOOLEAN, @status_data_format : UInt8, @flags : Win32cr::System::Diagnostics::Debug::XPF_MC_BANK_FLAGS, @control_msr : UInt32, @status_msr : UInt32, @address_msr : UInt32, @misc_msr : UInt32, @control_data : UInt64)
+    end
+  end
 
   @[Extern]
-  record WHEA_XPF_MCE_DESCRIPTOR,
-    type__ : UInt16,
-    enabled : UInt8,
-    number_of_banks : UInt8,
-    flags : Win32cr::System::Diagnostics::Debug::XPF_MCE_FLAGS,
-    mcg_capability : UInt64,
-    mcg_global_control : UInt64,
-    banks : Win32cr::System::Diagnostics::Debug::WHEA_XPF_MC_BANK_DESCRIPTOR[32]
+  struct WHEA_XPF_MCE_DESCRIPTOR
+    property type__ : UInt16
+    property enabled : UInt8
+    property number_of_banks : UInt8
+    property flags : Win32cr::System::Diagnostics::Debug::XPF_MCE_FLAGS
+    property mcg_capability : UInt64
+    property mcg_global_control : UInt64
+    property banks : Win32cr::System::Diagnostics::Debug::WHEA_XPF_MC_BANK_DESCRIPTOR[32]
+    def initialize(@type__ : UInt16, @enabled : UInt8, @number_of_banks : UInt8, @flags : Win32cr::System::Diagnostics::Debug::XPF_MCE_FLAGS, @mcg_capability : UInt64, @mcg_global_control : UInt64, @banks : Win32cr::System::Diagnostics::Debug::WHEA_XPF_MC_BANK_DESCRIPTOR[32])
+    end
+  end
 
   @[Extern]
-  record WHEA_XPF_CMC_DESCRIPTOR,
-    type__ : UInt16,
-    enabled : Win32cr::Foundation::BOOLEAN,
-    number_of_banks : UInt8,
-    reserved : UInt32,
-    notify : Win32cr::System::Diagnostics::Debug::WHEA_NOTIFICATION_DESCRIPTOR,
-    banks : Win32cr::System::Diagnostics::Debug::WHEA_XPF_MC_BANK_DESCRIPTOR[32]
+  struct WHEA_XPF_CMC_DESCRIPTOR
+    property type__ : UInt16
+    property enabled : Win32cr::Foundation::BOOLEAN
+    property number_of_banks : UInt8
+    property reserved : UInt32
+    property notify : Win32cr::System::Diagnostics::Debug::WHEA_NOTIFICATION_DESCRIPTOR
+    property banks : Win32cr::System::Diagnostics::Debug::WHEA_XPF_MC_BANK_DESCRIPTOR[32]
+    def initialize(@type__ : UInt16, @enabled : Win32cr::Foundation::BOOLEAN, @number_of_banks : UInt8, @reserved : UInt32, @notify : Win32cr::System::Diagnostics::Debug::WHEA_NOTIFICATION_DESCRIPTOR, @banks : Win32cr::System::Diagnostics::Debug::WHEA_XPF_MC_BANK_DESCRIPTOR[32])
+    end
+  end
 
   @[Extern]
-  record WHEA_PCI_SLOT_NUMBER,
-    u : U_e__union_ do
+  struct WHEA_PCI_SLOT_NUMBER
+    property u : U_e__union_
 
     # Nested Type U_e__union_
     @[Extern(union: true)]
-    record U_e__union_,
-      bits : Bits_e__struct_,
-      as_ulong : UInt32 do
+    struct U_e__union_
+    property bits : Bits_e__struct_
+    property as_ulong : UInt32
 
       # Nested Type Bits_e__struct_
       @[Extern]
-      record Bits_e__struct_,
-        _bitfield : UInt32
+      struct Bits_e__struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@bits : Bits_e__struct_, @as_ulong : UInt32)
+    end
     end
 
+    def initialize(@u : U_e__union_)
+    end
   end
 
   @[Extern]
-  record WHEA_XPF_NMI_DESCRIPTOR,
-    type__ : UInt16,
-    enabled : Win32cr::Foundation::BOOLEAN
+  struct WHEA_XPF_NMI_DESCRIPTOR
+    property type__ : UInt16
+    property enabled : Win32cr::Foundation::BOOLEAN
+    def initialize(@type__ : UInt16, @enabled : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record WHEA_AER_ROOTPORT_DESCRIPTOR,
-    type__ : UInt16,
-    enabled : Win32cr::Foundation::BOOLEAN,
-    reserved : UInt8,
-    bus_number : UInt32,
-    slot : Win32cr::System::Diagnostics::Debug::WHEA_PCI_SLOT_NUMBER,
-    device_control : UInt16,
-    flags : Win32cr::System::Diagnostics::Debug::AER_ROOTPORT_DESCRIPTOR_FLAGS,
-    uncorrectable_error_mask : UInt32,
-    uncorrectable_error_severity : UInt32,
-    correctable_error_mask : UInt32,
-    advanced_caps_and_control : UInt32,
-    root_error_command : UInt32
+  struct WHEA_AER_ROOTPORT_DESCRIPTOR
+    property type__ : UInt16
+    property enabled : Win32cr::Foundation::BOOLEAN
+    property reserved : UInt8
+    property bus_number : UInt32
+    property slot : Win32cr::System::Diagnostics::Debug::WHEA_PCI_SLOT_NUMBER
+    property device_control : UInt16
+    property flags : Win32cr::System::Diagnostics::Debug::AER_ROOTPORT_DESCRIPTOR_FLAGS
+    property uncorrectable_error_mask : UInt32
+    property uncorrectable_error_severity : UInt32
+    property correctable_error_mask : UInt32
+    property advanced_caps_and_control : UInt32
+    property root_error_command : UInt32
+    def initialize(@type__ : UInt16, @enabled : Win32cr::Foundation::BOOLEAN, @reserved : UInt8, @bus_number : UInt32, @slot : Win32cr::System::Diagnostics::Debug::WHEA_PCI_SLOT_NUMBER, @device_control : UInt16, @flags : Win32cr::System::Diagnostics::Debug::AER_ROOTPORT_DESCRIPTOR_FLAGS, @uncorrectable_error_mask : UInt32, @uncorrectable_error_severity : UInt32, @correctable_error_mask : UInt32, @advanced_caps_and_control : UInt32, @root_error_command : UInt32)
+    end
+  end
 
   @[Extern]
-  record WHEA_AER_ENDPOINT_DESCRIPTOR,
-    type__ : UInt16,
-    enabled : Win32cr::Foundation::BOOLEAN,
-    reserved : UInt8,
-    bus_number : UInt32,
-    slot : Win32cr::System::Diagnostics::Debug::WHEA_PCI_SLOT_NUMBER,
-    device_control : UInt16,
-    flags : Win32cr::System::Diagnostics::Debug::AER_ENDPOINT_DESCRIPTOR_FLAGS,
-    uncorrectable_error_mask : UInt32,
-    uncorrectable_error_severity : UInt32,
-    correctable_error_mask : UInt32,
-    advanced_caps_and_control : UInt32
+  struct WHEA_AER_ENDPOINT_DESCRIPTOR
+    property type__ : UInt16
+    property enabled : Win32cr::Foundation::BOOLEAN
+    property reserved : UInt8
+    property bus_number : UInt32
+    property slot : Win32cr::System::Diagnostics::Debug::WHEA_PCI_SLOT_NUMBER
+    property device_control : UInt16
+    property flags : Win32cr::System::Diagnostics::Debug::AER_ENDPOINT_DESCRIPTOR_FLAGS
+    property uncorrectable_error_mask : UInt32
+    property uncorrectable_error_severity : UInt32
+    property correctable_error_mask : UInt32
+    property advanced_caps_and_control : UInt32
+    def initialize(@type__ : UInt16, @enabled : Win32cr::Foundation::BOOLEAN, @reserved : UInt8, @bus_number : UInt32, @slot : Win32cr::System::Diagnostics::Debug::WHEA_PCI_SLOT_NUMBER, @device_control : UInt16, @flags : Win32cr::System::Diagnostics::Debug::AER_ENDPOINT_DESCRIPTOR_FLAGS, @uncorrectable_error_mask : UInt32, @uncorrectable_error_severity : UInt32, @correctable_error_mask : UInt32, @advanced_caps_and_control : UInt32)
+    end
+  end
 
   @[Extern]
-  record WHEA_AER_BRIDGE_DESCRIPTOR,
-    type__ : UInt16,
-    enabled : Win32cr::Foundation::BOOLEAN,
-    reserved : UInt8,
-    bus_number : UInt32,
-    slot : Win32cr::System::Diagnostics::Debug::WHEA_PCI_SLOT_NUMBER,
-    device_control : UInt16,
-    flags : Win32cr::System::Diagnostics::Debug::AER_BRIDGE_DESCRIPTOR_FLAGS,
-    uncorrectable_error_mask : UInt32,
-    uncorrectable_error_severity : UInt32,
-    correctable_error_mask : UInt32,
-    advanced_caps_and_control : UInt32,
-    secondary_uncorrectable_error_mask : UInt32,
-    secondary_uncorrectable_error_sev : UInt32,
-    secondary_caps_and_control : UInt32
+  struct WHEA_AER_BRIDGE_DESCRIPTOR
+    property type__ : UInt16
+    property enabled : Win32cr::Foundation::BOOLEAN
+    property reserved : UInt8
+    property bus_number : UInt32
+    property slot : Win32cr::System::Diagnostics::Debug::WHEA_PCI_SLOT_NUMBER
+    property device_control : UInt16
+    property flags : Win32cr::System::Diagnostics::Debug::AER_BRIDGE_DESCRIPTOR_FLAGS
+    property uncorrectable_error_mask : UInt32
+    property uncorrectable_error_severity : UInt32
+    property correctable_error_mask : UInt32
+    property advanced_caps_and_control : UInt32
+    property secondary_uncorrectable_error_mask : UInt32
+    property secondary_uncorrectable_error_sev : UInt32
+    property secondary_caps_and_control : UInt32
+    def initialize(@type__ : UInt16, @enabled : Win32cr::Foundation::BOOLEAN, @reserved : UInt8, @bus_number : UInt32, @slot : Win32cr::System::Diagnostics::Debug::WHEA_PCI_SLOT_NUMBER, @device_control : UInt16, @flags : Win32cr::System::Diagnostics::Debug::AER_BRIDGE_DESCRIPTOR_FLAGS, @uncorrectable_error_mask : UInt32, @uncorrectable_error_severity : UInt32, @correctable_error_mask : UInt32, @advanced_caps_and_control : UInt32, @secondary_uncorrectable_error_mask : UInt32, @secondary_uncorrectable_error_sev : UInt32, @secondary_caps_and_control : UInt32)
+    end
+  end
 
   @[Extern]
-  record WHEA_GENERIC_ERROR_DESCRIPTOR,
-    type__ : UInt16,
-    reserved : UInt8,
-    enabled : UInt8,
-    err_status_block_length : UInt32,
-    related_error_source_id : UInt32,
-    err_status_address_space_id : UInt8,
-    err_status_address_bit_width : UInt8,
-    err_status_address_bit_offset : UInt8,
-    err_status_address_access_size : UInt8,
-    err_status_address : Win32cr::Foundation::LARGE_INTEGER,
-    notify : Win32cr::System::Diagnostics::Debug::WHEA_NOTIFICATION_DESCRIPTOR
+  struct WHEA_GENERIC_ERROR_DESCRIPTOR
+    property type__ : UInt16
+    property reserved : UInt8
+    property enabled : UInt8
+    property err_status_block_length : UInt32
+    property related_error_source_id : UInt32
+    property err_status_address_space_id : UInt8
+    property err_status_address_bit_width : UInt8
+    property err_status_address_bit_offset : UInt8
+    property err_status_address_access_size : UInt8
+    property err_status_address : Win32cr::Foundation::LARGE_INTEGER
+    property notify : Win32cr::System::Diagnostics::Debug::WHEA_NOTIFICATION_DESCRIPTOR
+    def initialize(@type__ : UInt16, @reserved : UInt8, @enabled : UInt8, @err_status_block_length : UInt32, @related_error_source_id : UInt32, @err_status_address_space_id : UInt8, @err_status_address_bit_width : UInt8, @err_status_address_bit_offset : UInt8, @err_status_address_access_size : UInt8, @err_status_address : Win32cr::Foundation::LARGE_INTEGER, @notify : Win32cr::System::Diagnostics::Debug::WHEA_NOTIFICATION_DESCRIPTOR)
+    end
+  end
 
   @[Extern]
-  record WHEA_GENERIC_ERROR_DESCRIPTOR_V2,
-    type__ : UInt16,
-    reserved : UInt8,
-    enabled : UInt8,
-    err_status_block_length : UInt32,
-    related_error_source_id : UInt32,
-    err_status_address_space_id : UInt8,
-    err_status_address_bit_width : UInt8,
-    err_status_address_bit_offset : UInt8,
-    err_status_address_access_size : UInt8,
-    err_status_address : Win32cr::Foundation::LARGE_INTEGER,
-    notify : Win32cr::System::Diagnostics::Debug::WHEA_NOTIFICATION_DESCRIPTOR,
-    read_ack_address_space_id : UInt8,
-    read_ack_address_bit_width : UInt8,
-    read_ack_address_bit_offset : UInt8,
-    read_ack_address_access_size : UInt8,
-    read_ack_address : Win32cr::Foundation::LARGE_INTEGER,
-    read_ack_preserve_mask : UInt64,
-    read_ack_write_mask : UInt64
+  struct WHEA_GENERIC_ERROR_DESCRIPTOR_V2
+    property type__ : UInt16
+    property reserved : UInt8
+    property enabled : UInt8
+    property err_status_block_length : UInt32
+    property related_error_source_id : UInt32
+    property err_status_address_space_id : UInt8
+    property err_status_address_bit_width : UInt8
+    property err_status_address_bit_offset : UInt8
+    property err_status_address_access_size : UInt8
+    property err_status_address : Win32cr::Foundation::LARGE_INTEGER
+    property notify : Win32cr::System::Diagnostics::Debug::WHEA_NOTIFICATION_DESCRIPTOR
+    property read_ack_address_space_id : UInt8
+    property read_ack_address_bit_width : UInt8
+    property read_ack_address_bit_offset : UInt8
+    property read_ack_address_access_size : UInt8
+    property read_ack_address : Win32cr::Foundation::LARGE_INTEGER
+    property read_ack_preserve_mask : UInt64
+    property read_ack_write_mask : UInt64
+    def initialize(@type__ : UInt16, @reserved : UInt8, @enabled : UInt8, @err_status_block_length : UInt32, @related_error_source_id : UInt32, @err_status_address_space_id : UInt8, @err_status_address_bit_width : UInt8, @err_status_address_bit_offset : UInt8, @err_status_address_access_size : UInt8, @err_status_address : Win32cr::Foundation::LARGE_INTEGER, @notify : Win32cr::System::Diagnostics::Debug::WHEA_NOTIFICATION_DESCRIPTOR, @read_ack_address_space_id : UInt8, @read_ack_address_bit_width : UInt8, @read_ack_address_bit_offset : UInt8, @read_ack_address_access_size : UInt8, @read_ack_address : Win32cr::Foundation::LARGE_INTEGER, @read_ack_preserve_mask : UInt64, @read_ack_write_mask : UInt64)
+    end
+  end
 
   @[Extern]
-  record WHEA_DEVICE_DRIVER_DESCRIPTOR,
-    type__ : UInt16,
-    enabled : Win32cr::Foundation::BOOLEAN,
-    reserved : UInt8,
-    source_guid : LibC::GUID,
-    log_tag : UInt16,
-    reserved2 : UInt16,
-    packet_length : UInt32,
-    packet_count : UInt32,
-    packet_buffer : UInt8*,
-    config : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_CONFIGURATION_DD,
-    creator_id : LibC::GUID,
-    partition_id : LibC::GUID,
-    max_section_data_length : UInt32,
-    max_sections_per_record : UInt32,
-    packet_state_buffer : UInt8*,
-    open_handles : Int32
+  struct WHEA_DEVICE_DRIVER_DESCRIPTOR
+    property type__ : UInt16
+    property enabled : Win32cr::Foundation::BOOLEAN
+    property reserved : UInt8
+    property source_guid : LibC::GUID
+    property log_tag : UInt16
+    property reserved2 : UInt16
+    property packet_length : UInt32
+    property packet_count : UInt32
+    property packet_buffer : UInt8*
+    property config : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_CONFIGURATION_DD
+    property creator_id : LibC::GUID
+    property partition_id : LibC::GUID
+    property max_section_data_length : UInt32
+    property max_sections_per_record : UInt32
+    property packet_state_buffer : UInt8*
+    property open_handles : Int32
+    def initialize(@type__ : UInt16, @enabled : Win32cr::Foundation::BOOLEAN, @reserved : UInt8, @source_guid : LibC::GUID, @log_tag : UInt16, @reserved2 : UInt16, @packet_length : UInt32, @packet_count : UInt32, @packet_buffer : UInt8*, @config : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_CONFIGURATION_DD, @creator_id : LibC::GUID, @partition_id : LibC::GUID, @max_section_data_length : UInt32, @max_sections_per_record : UInt32, @packet_state_buffer : UInt8*, @open_handles : Int32)
+    end
+  end
 
   @[Extern]
-  record WHEA_IPF_MCA_DESCRIPTOR,
-    type__ : UInt16,
-    enabled : UInt8,
-    reserved : UInt8
+  struct WHEA_IPF_MCA_DESCRIPTOR
+    property type__ : UInt16
+    property enabled : UInt8
+    property reserved : UInt8
+    def initialize(@type__ : UInt16, @enabled : UInt8, @reserved : UInt8)
+    end
+  end
 
   @[Extern]
-  record WHEA_IPF_CMC_DESCRIPTOR,
-    type__ : UInt16,
-    enabled : UInt8,
-    reserved : UInt8
+  struct WHEA_IPF_CMC_DESCRIPTOR
+    property type__ : UInt16
+    property enabled : UInt8
+    property reserved : UInt8
+    def initialize(@type__ : UInt16, @enabled : UInt8, @reserved : UInt8)
+    end
+  end
 
   @[Extern]
-  record WHEA_IPF_CPE_DESCRIPTOR,
-    type__ : UInt16,
-    enabled : UInt8,
-    reserved : UInt8
+  struct WHEA_IPF_CPE_DESCRIPTOR
+    property type__ : UInt16
+    property enabled : UInt8
+    property reserved : UInt8
+    def initialize(@type__ : UInt16, @enabled : UInt8, @reserved : UInt8)
+    end
+  end
 
   @[Extern]
-  record WHEA_ERROR_SOURCE_DESCRIPTOR,
-    length : UInt32,
-    version : UInt32,
-    type__ : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_TYPE,
-    state : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_STATE,
-    max_raw_data_length : UInt32,
-    num_records_to_preallocate : UInt32,
-    max_sections_per_record : UInt32,
-    error_source_id : UInt32,
-    platform_error_source_id : UInt32,
-    flags : UInt32,
-    info : Info_e__Union_ do
+  struct WHEA_ERROR_SOURCE_DESCRIPTOR
+    property length : UInt32
+    property version : UInt32
+    property type__ : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_TYPE
+    property state : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_STATE
+    property max_raw_data_length : UInt32
+    property num_records_to_preallocate : UInt32
+    property max_sections_per_record : UInt32
+    property error_source_id : UInt32
+    property platform_error_source_id : UInt32
+    property flags : UInt32
+    property info : Info_e__Union_
 
     # Nested Type Info_e__Union_
     @[Extern(union: true)]
-    record Info_e__Union_,
-      xpf_mce_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_XPF_MCE_DESCRIPTOR,
-      xpf_cmc_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_XPF_CMC_DESCRIPTOR,
-      xpf_nmi_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_XPF_NMI_DESCRIPTOR,
-      ipf_mca_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_IPF_MCA_DESCRIPTOR,
-      ipf_cmc_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_IPF_CMC_DESCRIPTOR,
-      ipf_cpe_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_IPF_CPE_DESCRIPTOR,
-      aer_rootport_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_AER_ROOTPORT_DESCRIPTOR,
-      aer_endpoint_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_AER_ENDPOINT_DESCRIPTOR,
-      aer_bridge_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_AER_BRIDGE_DESCRIPTOR,
-      gen_err_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_GENERIC_ERROR_DESCRIPTOR,
-      gen_err_descriptor_v2 : Win32cr::System::Diagnostics::Debug::WHEA_GENERIC_ERROR_DESCRIPTOR_V2,
-      device_driver_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_DEVICE_DRIVER_DESCRIPTOR
+    struct Info_e__Union_
+    property xpf_mce_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_XPF_MCE_DESCRIPTOR
+    property xpf_cmc_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_XPF_CMC_DESCRIPTOR
+    property xpf_nmi_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_XPF_NMI_DESCRIPTOR
+    property ipf_mca_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_IPF_MCA_DESCRIPTOR
+    property ipf_cmc_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_IPF_CMC_DESCRIPTOR
+    property ipf_cpe_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_IPF_CPE_DESCRIPTOR
+    property aer_rootport_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_AER_ROOTPORT_DESCRIPTOR
+    property aer_endpoint_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_AER_ENDPOINT_DESCRIPTOR
+    property aer_bridge_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_AER_BRIDGE_DESCRIPTOR
+    property gen_err_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_GENERIC_ERROR_DESCRIPTOR
+    property gen_err_descriptor_v2 : Win32cr::System::Diagnostics::Debug::WHEA_GENERIC_ERROR_DESCRIPTOR_V2
+    property device_driver_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_DEVICE_DRIVER_DESCRIPTOR
+    def initialize(@xpf_mce_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_XPF_MCE_DESCRIPTOR, @xpf_cmc_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_XPF_CMC_DESCRIPTOR, @xpf_nmi_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_XPF_NMI_DESCRIPTOR, @ipf_mca_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_IPF_MCA_DESCRIPTOR, @ipf_cmc_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_IPF_CMC_DESCRIPTOR, @ipf_cpe_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_IPF_CPE_DESCRIPTOR, @aer_rootport_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_AER_ROOTPORT_DESCRIPTOR, @aer_endpoint_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_AER_ENDPOINT_DESCRIPTOR, @aer_bridge_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_AER_BRIDGE_DESCRIPTOR, @gen_err_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_GENERIC_ERROR_DESCRIPTOR, @gen_err_descriptor_v2 : Win32cr::System::Diagnostics::Debug::WHEA_GENERIC_ERROR_DESCRIPTOR_V2, @device_driver_descriptor : Win32cr::System::Diagnostics::Debug::WHEA_DEVICE_DRIVER_DESCRIPTOR)
+    end
+    end
 
+    def initialize(@length : UInt32, @version : UInt32, @type__ : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_TYPE, @state : Win32cr::System::Diagnostics::Debug::WHEA_ERROR_SOURCE_STATE, @max_raw_data_length : UInt32, @num_records_to_preallocate : UInt32, @max_sections_per_record : UInt32, @error_source_id : UInt32, @platform_error_source_id : UInt32, @flags : UInt32, @info : Info_e__Union_)
+    end
   end
 
   @[Extern]
-  record IPMI_OS_SEL_RECORD,
-    signature : UInt32,
-    version : UInt32,
-    length : UInt32,
-    record_type : Win32cr::System::Diagnostics::Debug::IPMI_OS_SEL_RECORD_TYPE,
-    data_length : UInt32,
-    data : UInt8*
+  struct IPMI_OS_SEL_RECORD
+    property signature : UInt32
+    property version : UInt32
+    property length : UInt32
+    property record_type : Win32cr::System::Diagnostics::Debug::IPMI_OS_SEL_RECORD_TYPE
+    property data_length : UInt32
+    property data : UInt8*
+    def initialize(@signature : UInt32, @version : UInt32, @length : UInt32, @record_type : Win32cr::System::Diagnostics::Debug::IPMI_OS_SEL_RECORD_TYPE, @data_length : UInt32, @data : UInt8*)
+    end
+  end
 
   {% if flag?(:i386) %}
   @[Extern]
-  record XSAVE_FORMAT,
-    control_word : UInt16,
-    status_word : UInt16,
-    tag_word : UInt8,
-    reserved1 : UInt8,
-    error_opcode : UInt16,
-    error_offset : UInt32,
-    error_selector : UInt16,
-    reserved2 : UInt16,
-    data_offset : UInt32,
-    data_selector : UInt16,
-    reserved3 : UInt16,
-    mx_csr : UInt32,
-    mx_csr_mask : UInt32,
-    float_registers : Win32cr::System::Diagnostics::Debug::M128A[8],
-    xmm_registers : Win32cr::System::Diagnostics::Debug::M128A[8],
-    reserved4 : UInt8[224]
+  struct XSAVE_FORMAT
+    property control_word : UInt16
+    property status_word : UInt16
+    property tag_word : UInt8
+    property reserved1 : UInt8
+    property error_opcode : UInt16
+    property error_offset : UInt32
+    property error_selector : UInt16
+    property reserved2 : UInt16
+    property data_offset : UInt32
+    property data_selector : UInt16
+    property reserved3 : UInt16
+    property mx_csr : UInt32
+    property mx_csr_mask : UInt32
+    property float_registers : Win32cr::System::Diagnostics::Debug::M128A[8]
+    property xmm_registers : Win32cr::System::Diagnostics::Debug::M128A[8]
+    property reserved4 : UInt8[224]
+    def initialize(@control_word : UInt16, @status_word : UInt16, @tag_word : UInt8, @reserved1 : UInt8, @error_opcode : UInt16, @error_offset : UInt32, @error_selector : UInt16, @reserved2 : UInt16, @data_offset : UInt32, @data_selector : UInt16, @reserved3 : UInt16, @mx_csr : UInt32, @mx_csr_mask : UInt32, @float_registers : Win32cr::System::Diagnostics::Debug::M128A[8], @xmm_registers : Win32cr::System::Diagnostics::Debug::M128A[8], @reserved4 : UInt8[224])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record XSTATE_CONTEXT,
-    mask : UInt64,
-    length : UInt32,
-    reserved1 : UInt32,
-    area : Win32cr::System::Diagnostics::Debug::XSAVE_AREA*,
-    reserved2 : UInt32,
-    buffer : Void*,
-    reserved3 : UInt32
+  struct XSTATE_CONTEXT
+    property mask : UInt64
+    property length : UInt32
+    property reserved1 : UInt32
+    property area : Win32cr::System::Diagnostics::Debug::XSAVE_AREA*
+    property reserved2 : UInt32
+    property buffer : Void*
+    property reserved3 : UInt32
+    def initialize(@mask : UInt64, @length : UInt32, @reserved1 : UInt32, @area : Win32cr::System::Diagnostics::Debug::XSAVE_AREA*, @reserved2 : UInt32, @buffer : Void*, @reserved3 : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record CONTEXT,
-    context_flags : UInt32,
-    dr0 : UInt32,
-    dr1 : UInt32,
-    dr2 : UInt32,
-    dr3 : UInt32,
-    dr6 : UInt32,
-    dr7 : UInt32,
-    float_save : Win32cr::System::Kernel::FLOATING_SAVE_AREA,
-    seg_gs : UInt32,
-    seg_fs : UInt32,
-    seg_es : UInt32,
-    seg_ds : UInt32,
-    edi : UInt32,
-    esi : UInt32,
-    ebx : UInt32,
-    edx : UInt32,
-    ecx : UInt32,
-    eax : UInt32,
-    ebp : UInt32,
-    eip : UInt32,
-    seg_cs : UInt32,
-    e_flags : UInt32,
-    esp : UInt32,
-    seg_ss : UInt32,
-    extended_registers : UInt8[512]
+  struct CONTEXT
+    property context_flags : UInt32
+    property dr0 : UInt32
+    property dr1 : UInt32
+    property dr2 : UInt32
+    property dr3 : UInt32
+    property dr6 : UInt32
+    property dr7 : UInt32
+    property float_save : Win32cr::System::Kernel::FLOATING_SAVE_AREA
+    property seg_gs : UInt32
+    property seg_fs : UInt32
+    property seg_es : UInt32
+    property seg_ds : UInt32
+    property edi : UInt32
+    property esi : UInt32
+    property ebx : UInt32
+    property edx : UInt32
+    property ecx : UInt32
+    property eax : UInt32
+    property ebp : UInt32
+    property eip : UInt32
+    property seg_cs : UInt32
+    property e_flags : UInt32
+    property esp : UInt32
+    property seg_ss : UInt32
+    property extended_registers : UInt8[512]
+    def initialize(@context_flags : UInt32, @dr0 : UInt32, @dr1 : UInt32, @dr2 : UInt32, @dr3 : UInt32, @dr6 : UInt32, @dr7 : UInt32, @float_save : Win32cr::System::Kernel::FLOATING_SAVE_AREA, @seg_gs : UInt32, @seg_fs : UInt32, @seg_es : UInt32, @seg_ds : UInt32, @edi : UInt32, @esi : UInt32, @ebx : UInt32, @edx : UInt32, @ecx : UInt32, @eax : UInt32, @ebp : UInt32, @eip : UInt32, @seg_cs : UInt32, @e_flags : UInt32, @esp : UInt32, @seg_ss : UInt32, @extended_registers : UInt8[512])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record KNONVOLATILE_CONTEXT_POINTERS,
-    dummy : UInt32
+  struct KNONVOLATILE_CONTEXT_POINTERS
+    property dummy : UInt32
+    def initialize(@dummy : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record MINIDUMP_THREAD_CALLBACK,
-    thread_id : UInt32,
-    thread_handle : Win32cr::Foundation::HANDLE,
-    context : Win32cr::System::Diagnostics::Debug::CONTEXT,
-    size_of_context : UInt32,
-    stack_base : UInt64,
-    stack_end : UInt64
+  struct MINIDUMP_THREAD_CALLBACK
+    property thread_id : UInt32
+    property thread_handle : Win32cr::Foundation::HANDLE
+    property context : Win32cr::System::Diagnostics::Debug::CONTEXT
+    property size_of_context : UInt32
+    property stack_base : UInt64
+    property stack_end : UInt64
+    def initialize(@thread_id : UInt32, @thread_handle : Win32cr::Foundation::HANDLE, @context : Win32cr::System::Diagnostics::Debug::CONTEXT, @size_of_context : UInt32, @stack_base : UInt64, @stack_end : UInt64)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record MINIDUMP_THREAD_EX_CALLBACK,
-    thread_id : UInt32,
-    thread_handle : Win32cr::Foundation::HANDLE,
-    context : Win32cr::System::Diagnostics::Debug::CONTEXT,
-    size_of_context : UInt32,
-    stack_base : UInt64,
-    stack_end : UInt64,
-    backing_store_base : UInt64,
-    backing_store_end : UInt64
+  struct MINIDUMP_THREAD_EX_CALLBACK
+    property thread_id : UInt32
+    property thread_handle : Win32cr::Foundation::HANDLE
+    property context : Win32cr::System::Diagnostics::Debug::CONTEXT
+    property size_of_context : UInt32
+    property stack_base : UInt64
+    property stack_end : UInt64
+    property backing_store_base : UInt64
+    property backing_store_end : UInt64
+    def initialize(@thread_id : UInt32, @thread_handle : Win32cr::Foundation::HANDLE, @context : Win32cr::System::Diagnostics::Debug::CONTEXT, @size_of_context : UInt32, @stack_base : UInt64, @stack_end : UInt64, @backing_store_base : UInt64, @backing_store_end : UInt64)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record LOADED_IMAGE,
-    module_name : Win32cr::Foundation::PSTR,
-    hFile : Win32cr::Foundation::HANDLE,
-    mapped_address : UInt8*,
-    file_header : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS32*,
-    last_rva_section : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER*,
-    number_of_sections : UInt32,
-    sections : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER*,
-    characteristics : Win32cr::System::Diagnostics::Debug::IMAGE_FILE_CHARACTERISTICS2,
-    fSystemImage : Win32cr::Foundation::BOOLEAN,
-    fDOSImage : Win32cr::Foundation::BOOLEAN,
-    fReadOnly : Win32cr::Foundation::BOOLEAN,
-    version : UInt8,
-    links : Win32cr::System::Kernel::LIST_ENTRY,
-    size_of_image : UInt32
+  struct LOADED_IMAGE
+    property module_name : Win32cr::Foundation::PSTR
+    property hFile : Win32cr::Foundation::HANDLE
+    property mapped_address : UInt8*
+    property file_header : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS32*
+    property last_rva_section : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER*
+    property number_of_sections : UInt32
+    property sections : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER*
+    property characteristics : Win32cr::System::Diagnostics::Debug::IMAGE_FILE_CHARACTERISTICS2
+    property fSystemImage : Win32cr::Foundation::BOOLEAN
+    property fDOSImage : Win32cr::Foundation::BOOLEAN
+    property fReadOnly : Win32cr::Foundation::BOOLEAN
+    property version : UInt8
+    property links : Win32cr::System::Kernel::LIST_ENTRY
+    property size_of_image : UInt32
+    def initialize(@module_name : Win32cr::Foundation::PSTR, @hFile : Win32cr::Foundation::HANDLE, @mapped_address : UInt8*, @file_header : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS32*, @last_rva_section : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER*, @number_of_sections : UInt32, @sections : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER*, @characteristics : Win32cr::System::Diagnostics::Debug::IMAGE_FILE_CHARACTERISTICS2, @fSystemImage : Win32cr::Foundation::BOOLEAN, @fDOSImage : Win32cr::Foundation::BOOLEAN, @fReadOnly : Win32cr::Foundation::BOOLEAN, @version : UInt8, @links : Win32cr::System::Kernel::LIST_ENTRY, @size_of_image : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record IMAGE_DEBUG_INFORMATION,
-    list : Win32cr::System::Kernel::LIST_ENTRY,
-    reserved_size : UInt32,
-    reserved_mapped_base : Void*,
-    reserved_machine : UInt16,
-    reserved_characteristics : UInt16,
-    reserved_check_sum : UInt32,
-    image_base : UInt32,
-    size_of_image : UInt32,
-    reserved_number_of_sections : UInt32,
-    reserved_sections : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER*,
-    reserved_exported_names_size : UInt32,
-    reserved_exported_names : Win32cr::Foundation::PSTR,
-    reserved_number_of_function_table_entries : UInt32,
-    reserved_function_table_entries : Win32cr::System::Diagnostics::Debug::IMAGE_FUNCTION_ENTRY*,
-    reserved_lowest_function_starting_address : UInt32,
-    reserved_highest_function_ending_address : UInt32,
-    reserved_number_of_fpo_table_entries : UInt32,
-    reserved_fpo_table_entries : Win32cr::System::Diagnostics::Debug::FPO_DATA*,
-    size_of_coff_symbols : UInt32,
-    coff_symbols : Win32cr::System::Diagnostics::Debug::IMAGE_COFF_SYMBOLS_HEADER*,
-    reserved_size_of_code_view_symbols : UInt32,
-    reserved_code_view_symbols : Void*,
-    image_file_path : Win32cr::Foundation::PSTR,
-    image_file_name : Win32cr::Foundation::PSTR,
-    reserved_debug_file_path : Win32cr::Foundation::PSTR,
-    reserved_time_date_stamp : UInt32,
-    reserved_rom_image : Win32cr::Foundation::BOOL,
-    reserved_debug_directory : Win32cr::System::Diagnostics::Debug::IMAGE_DEBUG_DIRECTORY*,
-    reserved_number_of_debug_directories : UInt32,
-    reserved_original_function_table_base_address : UInt32,
-    reserved : UInt32[2]
+  struct IMAGE_DEBUG_INFORMATION
+    property list : Win32cr::System::Kernel::LIST_ENTRY
+    property reserved_size : UInt32
+    property reserved_mapped_base : Void*
+    property reserved_machine : UInt16
+    property reserved_characteristics : UInt16
+    property reserved_check_sum : UInt32
+    property image_base : UInt32
+    property size_of_image : UInt32
+    property reserved_number_of_sections : UInt32
+    property reserved_sections : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER*
+    property reserved_exported_names_size : UInt32
+    property reserved_exported_names : Win32cr::Foundation::PSTR
+    property reserved_number_of_function_table_entries : UInt32
+    property reserved_function_table_entries : Win32cr::System::Diagnostics::Debug::IMAGE_FUNCTION_ENTRY*
+    property reserved_lowest_function_starting_address : UInt32
+    property reserved_highest_function_ending_address : UInt32
+    property reserved_number_of_fpo_table_entries : UInt32
+    property reserved_fpo_table_entries : Win32cr::System::Diagnostics::Debug::FPO_DATA*
+    property size_of_coff_symbols : UInt32
+    property coff_symbols : Win32cr::System::Diagnostics::Debug::IMAGE_COFF_SYMBOLS_HEADER*
+    property reserved_size_of_code_view_symbols : UInt32
+    property reserved_code_view_symbols : Void*
+    property image_file_path : Win32cr::Foundation::PSTR
+    property image_file_name : Win32cr::Foundation::PSTR
+    property reserved_debug_file_path : Win32cr::Foundation::PSTR
+    property reserved_time_date_stamp : UInt32
+    property reserved_rom_image : Win32cr::Foundation::BOOL
+    property reserved_debug_directory : Win32cr::System::Diagnostics::Debug::IMAGE_DEBUG_DIRECTORY*
+    property reserved_number_of_debug_directories : UInt32
+    property reserved_original_function_table_base_address : UInt32
+    property reserved : UInt32[2]
+    def initialize(@list : Win32cr::System::Kernel::LIST_ENTRY, @reserved_size : UInt32, @reserved_mapped_base : Void*, @reserved_machine : UInt16, @reserved_characteristics : UInt16, @reserved_check_sum : UInt32, @image_base : UInt32, @size_of_image : UInt32, @reserved_number_of_sections : UInt32, @reserved_sections : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER*, @reserved_exported_names_size : UInt32, @reserved_exported_names : Win32cr::Foundation::PSTR, @reserved_number_of_function_table_entries : UInt32, @reserved_function_table_entries : Win32cr::System::Diagnostics::Debug::IMAGE_FUNCTION_ENTRY*, @reserved_lowest_function_starting_address : UInt32, @reserved_highest_function_ending_address : UInt32, @reserved_number_of_fpo_table_entries : UInt32, @reserved_fpo_table_entries : Win32cr::System::Diagnostics::Debug::FPO_DATA*, @size_of_coff_symbols : UInt32, @coff_symbols : Win32cr::System::Diagnostics::Debug::IMAGE_COFF_SYMBOLS_HEADER*, @reserved_size_of_code_view_symbols : UInt32, @reserved_code_view_symbols : Void*, @image_file_path : Win32cr::Foundation::PSTR, @image_file_name : Win32cr::Foundation::PSTR, @reserved_debug_file_path : Win32cr::Foundation::PSTR, @reserved_time_date_stamp : UInt32, @reserved_rom_image : Win32cr::Foundation::BOOL, @reserved_debug_directory : Win32cr::System::Diagnostics::Debug::IMAGE_DEBUG_DIRECTORY*, @reserved_number_of_debug_directories : UInt32, @reserved_original_function_table_base_address : UInt32, @reserved : UInt32[2])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record ADDRESS,
-    offset : UInt32,
-    segment : UInt16,
-    mode : Win32cr::System::Diagnostics::Debug::ADDRESS_MODE
+  struct ADDRESS
+    property offset : UInt32
+    property segment : UInt16
+    property mode : Win32cr::System::Diagnostics::Debug::ADDRESS_MODE
+    def initialize(@offset : UInt32, @segment : UInt16, @mode : Win32cr::System::Diagnostics::Debug::ADDRESS_MODE)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record KDHELP,
-    thread : UInt32,
-    th_callback_stack : UInt32,
-    next_callback : UInt32,
-    frame_pointer : UInt32,
-    ki_call_user_mode : UInt32,
-    ke_user_callback_dispatcher : UInt32,
-    system_range_start : UInt32,
-    th_callback_b_store : UInt32,
-    ki_user_exception_dispatcher : UInt32,
-    stack_base : UInt32,
-    stack_limit : UInt32,
-    reserved : UInt32[5]
+  struct KDHELP
+    property thread : UInt32
+    property th_callback_stack : UInt32
+    property next_callback : UInt32
+    property frame_pointer : UInt32
+    property ki_call_user_mode : UInt32
+    property ke_user_callback_dispatcher : UInt32
+    property system_range_start : UInt32
+    property th_callback_b_store : UInt32
+    property ki_user_exception_dispatcher : UInt32
+    property stack_base : UInt32
+    property stack_limit : UInt32
+    property reserved : UInt32[5]
+    def initialize(@thread : UInt32, @th_callback_stack : UInt32, @next_callback : UInt32, @frame_pointer : UInt32, @ki_call_user_mode : UInt32, @ke_user_callback_dispatcher : UInt32, @system_range_start : UInt32, @th_callback_b_store : UInt32, @ki_user_exception_dispatcher : UInt32, @stack_base : UInt32, @stack_limit : UInt32, @reserved : UInt32[5])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record STACKFRAME,
-    addr_pc : Win32cr::System::Diagnostics::Debug::ADDRESS,
-    addr_return : Win32cr::System::Diagnostics::Debug::ADDRESS,
-    addr_frame : Win32cr::System::Diagnostics::Debug::ADDRESS,
-    addr_stack : Win32cr::System::Diagnostics::Debug::ADDRESS,
-    func_table_entry : Void*,
-    params : UInt32[4],
-    far : Win32cr::Foundation::BOOL,
-    virtual : Win32cr::Foundation::BOOL,
-    reserved : UInt32[3],
-    kd_help : Win32cr::System::Diagnostics::Debug::KDHELP,
-    addr_b_store : Win32cr::System::Diagnostics::Debug::ADDRESS
+  struct STACKFRAME
+    property addr_pc : Win32cr::System::Diagnostics::Debug::ADDRESS
+    property addr_return : Win32cr::System::Diagnostics::Debug::ADDRESS
+    property addr_frame : Win32cr::System::Diagnostics::Debug::ADDRESS
+    property addr_stack : Win32cr::System::Diagnostics::Debug::ADDRESS
+    property func_table_entry : Void*
+    property params : UInt32[4]
+    property far : Win32cr::Foundation::BOOL
+    property virtual : Win32cr::Foundation::BOOL
+    property reserved : UInt32[3]
+    property kd_help : Win32cr::System::Diagnostics::Debug::KDHELP
+    property addr_b_store : Win32cr::System::Diagnostics::Debug::ADDRESS
+    def initialize(@addr_pc : Win32cr::System::Diagnostics::Debug::ADDRESS, @addr_return : Win32cr::System::Diagnostics::Debug::ADDRESS, @addr_frame : Win32cr::System::Diagnostics::Debug::ADDRESS, @addr_stack : Win32cr::System::Diagnostics::Debug::ADDRESS, @func_table_entry : Void*, @params : UInt32[4], @far : Win32cr::Foundation::BOOL, @virtual : Win32cr::Foundation::BOOL, @reserved : UInt32[3], @kd_help : Win32cr::System::Diagnostics::Debug::KDHELP, @addr_b_store : Win32cr::System::Diagnostics::Debug::ADDRESS)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record IMAGEHLP_SYMBOL,
-    size_of_struct : UInt32,
-    address : UInt32,
-    size : UInt32,
-    flags : UInt32,
-    max_name_length : UInt32,
-    name : Win32cr::Foundation::CHAR*
+  struct IMAGEHLP_SYMBOL
+    property size_of_struct : UInt32
+    property address : UInt32
+    property size : UInt32
+    property flags : UInt32
+    property max_name_length : UInt32
+    property name : Win32cr::Foundation::CHAR*
+    def initialize(@size_of_struct : UInt32, @address : UInt32, @size : UInt32, @flags : UInt32, @max_name_length : UInt32, @name : Win32cr::Foundation::CHAR*)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record IMAGEHLP_SYMBOL_PACKAGE,
-    sym : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL,
-    name : Win32cr::Foundation::CHAR[2001]
+  struct IMAGEHLP_SYMBOL_PACKAGE
+    property sym : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL
+    property name : Win32cr::Foundation::CHAR[2001]
+    def initialize(@sym : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL, @name : Win32cr::Foundation::CHAR[2001])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record IMAGEHLP_SYMBOLW,
-    size_of_struct : UInt32,
-    address : UInt32,
-    size : UInt32,
-    flags : UInt32,
-    max_name_length : UInt32,
-    name : UInt16*
+  struct IMAGEHLP_SYMBOLW
+    property size_of_struct : UInt32
+    property address : UInt32
+    property size : UInt32
+    property flags : UInt32
+    property max_name_length : UInt32
+    property name : UInt16*
+    def initialize(@size_of_struct : UInt32, @address : UInt32, @size : UInt32, @flags : UInt32, @max_name_length : UInt32, @name : UInt16*)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record IMAGEHLP_SYMBOLW_PACKAGE,
-    sym : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOLW,
-    name : UInt16[2001]
+  struct IMAGEHLP_SYMBOLW_PACKAGE
+    property sym : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOLW
+    property name : UInt16[2001]
+    def initialize(@sym : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOLW, @name : UInt16[2001])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record IMAGEHLP_MODULE,
-    size_of_struct : UInt32,
-    base_of_image : UInt32,
-    image_size : UInt32,
-    time_date_stamp : UInt32,
-    check_sum : UInt32,
-    num_syms : UInt32,
-    sym_type : Win32cr::System::Diagnostics::Debug::SYM_TYPE,
-    module_name : Win32cr::Foundation::CHAR[32],
-    image_name : Win32cr::Foundation::CHAR[256],
-    loaded_image_name : Win32cr::Foundation::CHAR[256]
+  struct IMAGEHLP_MODULE
+    property size_of_struct : UInt32
+    property base_of_image : UInt32
+    property image_size : UInt32
+    property time_date_stamp : UInt32
+    property check_sum : UInt32
+    property num_syms : UInt32
+    property sym_type : Win32cr::System::Diagnostics::Debug::SYM_TYPE
+    property module_name : Win32cr::Foundation::CHAR[32]
+    property image_name : Win32cr::Foundation::CHAR[256]
+    property loaded_image_name : Win32cr::Foundation::CHAR[256]
+    def initialize(@size_of_struct : UInt32, @base_of_image : UInt32, @image_size : UInt32, @time_date_stamp : UInt32, @check_sum : UInt32, @num_syms : UInt32, @sym_type : Win32cr::System::Diagnostics::Debug::SYM_TYPE, @module_name : Win32cr::Foundation::CHAR[32], @image_name : Win32cr::Foundation::CHAR[256], @loaded_image_name : Win32cr::Foundation::CHAR[256])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record IMAGEHLP_MODULEW,
-    size_of_struct : UInt32,
-    base_of_image : UInt32,
-    image_size : UInt32,
-    time_date_stamp : UInt32,
-    check_sum : UInt32,
-    num_syms : UInt32,
-    sym_type : Win32cr::System::Diagnostics::Debug::SYM_TYPE,
-    module_name : UInt16[32],
-    image_name : UInt16[256],
-    loaded_image_name : UInt16[256]
+  struct IMAGEHLP_MODULEW
+    property size_of_struct : UInt32
+    property base_of_image : UInt32
+    property image_size : UInt32
+    property time_date_stamp : UInt32
+    property check_sum : UInt32
+    property num_syms : UInt32
+    property sym_type : Win32cr::System::Diagnostics::Debug::SYM_TYPE
+    property module_name : UInt16[32]
+    property image_name : UInt16[256]
+    property loaded_image_name : UInt16[256]
+    def initialize(@size_of_struct : UInt32, @base_of_image : UInt32, @image_size : UInt32, @time_date_stamp : UInt32, @check_sum : UInt32, @num_syms : UInt32, @sym_type : Win32cr::System::Diagnostics::Debug::SYM_TYPE, @module_name : UInt16[32], @image_name : UInt16[256], @loaded_image_name : UInt16[256])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record IMAGEHLP_LINE,
-    size_of_struct : UInt32,
-    key : Void*,
-    line_number : UInt32,
-    file_name : Win32cr::Foundation::PSTR,
-    address : UInt32
+  struct IMAGEHLP_LINE
+    property size_of_struct : UInt32
+    property key : Void*
+    property line_number : UInt32
+    property file_name : Win32cr::Foundation::PSTR
+    property address : UInt32
+    def initialize(@size_of_struct : UInt32, @key : Void*, @line_number : UInt32, @file_name : Win32cr::Foundation::PSTR, @address : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record IMAGEHLP_LINEW,
-    size_of_struct : UInt32,
-    key : Void*,
-    line_number : UInt32,
-    file_name : Win32cr::Foundation::PSTR,
-    address : UInt64
+  struct IMAGEHLP_LINEW
+    property size_of_struct : UInt32
+    property key : Void*
+    property line_number : UInt32
+    property file_name : Win32cr::Foundation::PSTR
+    property address : UInt64
+    def initialize(@size_of_struct : UInt32, @key : Void*, @line_number : UInt32, @file_name : Win32cr::Foundation::PSTR, @address : UInt64)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record IMAGEHLP_DEFERRED_SYMBOL_LOAD,
-    size_of_struct : UInt32,
-    base_of_image : UInt32,
-    check_sum : UInt32,
-    time_date_stamp : UInt32,
-    file_name : Win32cr::Foundation::CHAR[260],
-    reparse : Win32cr::Foundation::BOOLEAN,
-    hFile : Win32cr::Foundation::HANDLE
+  struct IMAGEHLP_DEFERRED_SYMBOL_LOAD
+    property size_of_struct : UInt32
+    property base_of_image : UInt32
+    property check_sum : UInt32
+    property time_date_stamp : UInt32
+    property file_name : Win32cr::Foundation::CHAR[260]
+    property reparse : Win32cr::Foundation::BOOLEAN
+    property hFile : Win32cr::Foundation::HANDLE
+    def initialize(@size_of_struct : UInt32, @base_of_image : UInt32, @check_sum : UInt32, @time_date_stamp : UInt32, @file_name : Win32cr::Foundation::CHAR[260], @reparse : Win32cr::Foundation::BOOLEAN, @hFile : Win32cr::Foundation::HANDLE)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record IMAGEHLP_DUPLICATE_SYMBOL,
-    size_of_struct : UInt32,
-    number_of_dups : UInt32,
-    symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL*,
-    selected_symbol : UInt32
+  struct IMAGEHLP_DUPLICATE_SYMBOL
+    property size_of_struct : UInt32
+    property number_of_dups : UInt32
+    property symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL*
+    property selected_symbol : UInt32
+    def initialize(@size_of_struct : UInt32, @number_of_dups : UInt32, @symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL*, @selected_symbol : UInt32)
+    end
+  end
   {% end %}
 
   @[Extern]
@@ -7806,7 +9000,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("f2df5f53-071f-47bd-9de6-5734c3fed689")]
   record IDebugAdvanced, lpVtbl : IDebugAdvancedVtbl* do
     GUID = LibC::GUID.new(0xf2df5f53_u32, 0x71f_u16, 0x47bd_u16, StaticArray[0x9d_u8, 0xe6_u8, 0x57_u8, 0x34_u8, 0xc3_u8, 0xfe_u8, 0xd6_u8, 0x89_u8])
     def query_interface(this : IDebugAdvanced*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7842,7 +9035,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("716d14c9-119b-4ba5-af1f-0890e672416a")]
   record IDebugAdvanced2, lpVtbl : IDebugAdvanced2Vtbl* do
     GUID = LibC::GUID.new(0x716d14c9_u32, 0x119b_u16, 0x4ba5_u16, StaticArray[0xaf_u8, 0x1f_u8, 0x8_u8, 0x90_u8, 0xe6_u8, 0x72_u8, 0x41_u8, 0x6a_u8])
     def query_interface(this : IDebugAdvanced2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7896,7 +9088,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("cba4abb4-84c4-444d-87ca-a04e13286739")]
   record IDebugAdvanced3, lpVtbl : IDebugAdvanced3Vtbl* do
     GUID = LibC::GUID.new(0xcba4abb4_u32, 0x84c4_u16, 0x444d_u16, StaticArray[0x87_u8, 0xca_u8, 0xa0_u8, 0x4e_u8, 0x13_u8, 0x28_u8, 0x67_u8, 0x39_u8])
     def query_interface(this : IDebugAdvanced3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7960,7 +9151,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("d1069067-2a65-4bf0-ae97-76184b67856b")]
   record IDebugAdvanced4, lpVtbl : IDebugAdvanced4Vtbl* do
     GUID = LibC::GUID.new(0xd1069067_u32, 0x2a65_u16, 0x4bf0_u16, StaticArray[0xae_u8, 0x97_u8, 0x76_u8, 0x18_u8, 0x4b_u8, 0x67_u8, 0x85_u8, 0x6b_u8])
     def query_interface(this : IDebugAdvanced4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8037,7 +9227,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("5bd9d474-5975-423a-b88b-65a8e7110e65")]
   record IDebugBreakpoint, lpVtbl : IDebugBreakpointVtbl* do
     GUID = LibC::GUID.new(0x5bd9d474_u32, 0x5975_u16, 0x423a_u16, StaticArray[0xb8_u8, 0x8b_u8, 0x65_u8, 0xa8_u8, 0xe7_u8, 0x11_u8, 0xe_u8, 0x65_u8])
     def query_interface(this : IDebugBreakpoint*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8148,7 +9337,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("1b278d20-79f2-426e-a3f9-c1ddf375d48e")]
   record IDebugBreakpoint2, lpVtbl : IDebugBreakpoint2Vtbl* do
     GUID = LibC::GUID.new(0x1b278d20_u32, 0x79f2_u16, 0x426e_u16, StaticArray[0xa3_u8, 0xf9_u8, 0xc1_u8, 0xdd_u8, 0xf3_u8, 0x75_u8, 0xd4_u8, 0x8e_u8])
     def query_interface(this : IDebugBreakpoint2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8272,7 +9460,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("38f5c249-b448-43bb-9835-579d4ec02249")]
   record IDebugBreakpoint3, lpVtbl : IDebugBreakpoint3Vtbl* do
     GUID = LibC::GUID.new(0x38f5c249_u32, 0xb448_u16, 0x43bb_u16, StaticArray[0x98_u8, 0x35_u8, 0x57_u8, 0x9d_u8, 0x4e_u8, 0xc0_u8, 0x22_u8, 0x49_u8])
     def query_interface(this : IDebugBreakpoint3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8418,7 +9605,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("27fe5639-8407-4f47-8364-ee118fb08ac8")]
   record IDebugClient, lpVtbl : IDebugClientVtbl* do
     GUID = LibC::GUID.new(0x27fe5639_u32, 0x8407_u16, 0x4f47_u16, StaticArray[0x83_u8, 0x64_u8, 0xee_u8, 0x11_u8, 0x8f_u8, 0xb0_u8, 0x8a_u8, 0xc8_u8])
     def query_interface(this : IDebugClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8629,7 +9815,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("edbed635-372e-4dab-bbfe-ed0d2f63be81")]
   record IDebugClient2, lpVtbl : IDebugClient2Vtbl* do
     GUID = LibC::GUID.new(0xedbed635_u32, 0x372e_u16, 0x4dab_u16, StaticArray[0xbb_u8, 0xfe_u8, 0xed_u8, 0xd_u8, 0x2f_u8, 0x63_u8, 0xbe_u8, 0x81_u8])
     def query_interface(this : IDebugClient2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8868,7 +10053,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("dd492d7f-71b8-4ad6-a8dc-1c887479ff91")]
   record IDebugClient3, lpVtbl : IDebugClient3Vtbl* do
     GUID = LibC::GUID.new(0xdd492d7f_u32, 0x71b8_u16, 0x4ad6_u16, StaticArray[0xa8_u8, 0xdc_u8, 0x1c_u8, 0x88_u8, 0x74_u8, 0x79_u8, 0xff_u8, 0x91_u8])
     def query_interface(this : IDebugClient3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9125,7 +10309,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("ca83c3de-5089-4cf8-93c8-d892387f2a5e")]
   record IDebugClient4, lpVtbl : IDebugClient4Vtbl* do
     GUID = LibC::GUID.new(0xca83c3de_u32, 0x5089_u16, 0x4cf8_u16, StaticArray[0x93_u8, 0xc8_u8, 0xd8_u8, 0x92_u8, 0x38_u8, 0x7f_u8, 0x2a_u8, 0x5e_u8])
     def query_interface(this : IDebugClient4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9429,7 +10612,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("e3acb9d7-7ec2-4f0c-a0da-e81e0cbbe628")]
   record IDebugClient5, lpVtbl : IDebugClient5Vtbl* do
     GUID = LibC::GUID.new(0xe3acb9d7_u32, 0x7ec2_u16, 0x4f0c_u16, StaticArray[0xa0_u8, 0xda_u8, 0xe8_u8, 0x1e_u8, 0xc_u8, 0xbb_u8, 0xe6_u8, 0x28_u8])
     def query_interface(this : IDebugClient5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -9821,7 +11003,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("fd28b4c5-c498-4686-a28e-62cad2154eb3")]
   record IDebugClient6, lpVtbl : IDebugClient6Vtbl* do
     GUID = LibC::GUID.new(0xfd28b4c5_u32, 0xc498_u16, 0x4686_u16, StaticArray[0xa2_u8, 0x8e_u8, 0x62_u8, 0xca_u8, 0xd2_u8, 0x15_u8, 0x4e_u8, 0xb3_u8])
     def query_interface(this : IDebugClient6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10217,7 +11398,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("13586be3-542e-481e-b1f2-8497ba74f9a9")]
   record IDebugClient7, lpVtbl : IDebugClient7Vtbl* do
     GUID = LibC::GUID.new(0x13586be3_u32, 0x542e_u16, 0x481e_u16, StaticArray[0xb1_u8, 0xf2_u8, 0x84_u8, 0x97_u8, 0xba_u8, 0x74_u8, 0xf9_u8, 0xa9_u8])
     def query_interface(this : IDebugClient7*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10617,7 +11797,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("cec43add-6375-469e-83d5-414e4033c19a")]
   record IDebugClient8, lpVtbl : IDebugClient8Vtbl* do
     GUID = LibC::GUID.new(0xcec43add_u32, 0x6375_u16, 0x469e_u16, StaticArray[0x83_u8, 0xd5_u8, 0x41_u8, 0x4e_u8, 0x40_u8, 0x33_u8, 0xc1_u8, 0x9a_u8])
     def query_interface(this : IDebugClient8*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10926,7 +12105,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("a02b66c4-aea3-4234-a9f7-fe4c383d4e29")]
   record IDebugPlmClient, lpVtbl : IDebugPlmClientVtbl* do
     GUID = LibC::GUID.new(0xa02b66c4_u32, 0xaea3_u16, 0x4234_u16, StaticArray[0xa9_u8, 0xf7_u8, 0xfe_u8, 0x4c_u8, 0x38_u8, 0x3d_u8, 0x4e_u8, 0x29_u8])
     def query_interface(this : IDebugPlmClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10954,7 +12132,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("597c980d-e7bd-4309-962c-9d9b69a7372c")]
   record IDebugPlmClient2, lpVtbl : IDebugPlmClient2Vtbl* do
     GUID = LibC::GUID.new(0x597c980d_u32, 0xe7bd_u16, 0x4309_u16, StaticArray[0x96_u8, 0x2c_u8, 0x9d_u8, 0x9b_u8, 0x69_u8, 0xa7_u8, 0x37_u8, 0x2c_u8])
     def query_interface(this : IDebugPlmClient2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10994,7 +12171,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("d4a5dbd1-ca02-4d90-856a-2a92bfd0f20f")]
   record IDebugPlmClient3, lpVtbl : IDebugPlmClient3Vtbl* do
     GUID = LibC::GUID.new(0xd4a5dbd1_u32, 0xca02_u16, 0x4d90_u16, StaticArray[0x85_u8, 0x6a_u8, 0x2a_u8, 0x92_u8, 0xbf_u8, 0xd0_u8, 0xf2_u8, 0xf_u8])
     def query_interface(this : IDebugPlmClient3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11051,7 +12227,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("7782d8f2-2b85-4059-ab88-28ceddca1c80")]
   record IDebugOutputStream, lpVtbl : IDebugOutputStreamVtbl* do
     GUID = LibC::GUID.new(0x7782d8f2_u32, 0x2b85_u16, 0x4059_u16, StaticArray[0xab_u8, 0x88_u8, 0x28_u8, 0xce_u8, 0xdd_u8, 0xca_u8, 0x1c_u8, 0x80_u8])
     def query_interface(this : IDebugOutputStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11169,7 +12344,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("5182e668-105e-416e-ad92-24ef800424ba")]
   record IDebugControl, lpVtbl : IDebugControlVtbl* do
     GUID = LibC::GUID.new(0x5182e668_u32, 0x105e_u16, 0x416e_u16, StaticArray[0xad_u8, 0x92_u8, 0x24_u8, 0xef_u8, 0x80_u8, 0x4_u8, 0x24_u8, 0xba_u8])
     def query_interface(this : IDebugControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -11568,7 +12742,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("d4366723-44df-4bed-8c7e-4c05424f4588")]
   record IDebugControl2, lpVtbl : IDebugControl2Vtbl* do
     GUID = LibC::GUID.new(0xd4366723_u32, 0x44df_u16, 0x4bed_u16, StaticArray[0x8c_u8, 0x7e_u8, 0x4c_u8, 0x5_u8, 0x42_u8, 0x4f_u8, 0x45_u8, 0x88_u8])
     def query_interface(this : IDebugControl2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12004,7 +13177,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("7df74a86-b03f-407f-90ab-a20dadcead08")]
   record IDebugControl3, lpVtbl : IDebugControl3Vtbl* do
     GUID = LibC::GUID.new(0x7df74a86_u32, 0xb03f_u16, 0x407f_u16, StaticArray[0x90_u8, 0xab_u8, 0xa2_u8, 0xd_u8, 0xad_u8, 0xce_u8, 0xad_u8, 0x8_u8])
     def query_interface(this : IDebugControl3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -12532,7 +13704,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("94e60ce9-9b41-4b19-9fc0-6d9eb35272b3")]
   record IDebugControl4, lpVtbl : IDebugControl4Vtbl* do
     GUID = LibC::GUID.new(0x94e60ce9_u32, 0x9b41_u16, 0x4b19_u16, StaticArray[0x9f_u8, 0xc0_u8, 0x6d_u8, 0x9e_u8, 0xb3_u8, 0x52_u8, 0x72_u8, 0xb3_u8])
     def query_interface(this : IDebugControl4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13224,7 +14395,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("b2ffe162-2412-429f-8d1d-5bf6dd824696")]
   record IDebugControl5, lpVtbl : IDebugControl5Vtbl* do
     GUID = LibC::GUID.new(0xb2ffe162_u32, 0x2412_u16, 0x429f_u16, StaticArray[0x8d_u8, 0x1d_u8, 0x5b_u8, 0xf6_u8, 0xdd_u8, 0x82_u8, 0x46_u8, 0x96_u8])
     def query_interface(this : IDebugControl5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -13933,7 +15103,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("bc0d583f-126d-43a1-9cc4-a860ab1d537b")]
   record IDebugControl6, lpVtbl : IDebugControl6Vtbl* do
     GUID = LibC::GUID.new(0xbc0d583f_u32, 0x126d_u16, 0x43a1_u16, StaticArray[0x9c_u8, 0xc4_u8, 0xa8_u8, 0x60_u8, 0xab_u8, 0x1d_u8, 0x53_u8, 0x7b_u8])
     def query_interface(this : IDebugControl6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -14649,7 +15818,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("b86fb3b1-80d4-475b-aea3-cf06539cf63a")]
   record IDebugControl7, lpVtbl : IDebugControl7Vtbl* do
     GUID = LibC::GUID.new(0xb86fb3b1_u32, 0x80d4_u16, 0x475b_u16, StaticArray[0xae_u8, 0xa3_u8, 0xcf_u8, 0x6_u8, 0x53_u8, 0x9c_u8, 0xf6_u8, 0x3a_u8])
     def query_interface(this : IDebugControl7*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15214,7 +16382,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("88f7dfab-3ea7-4c3a-aefb-c4e8106173aa")]
   record IDebugDataSpaces, lpVtbl : IDebugDataSpacesVtbl* do
     GUID = LibC::GUID.new(0x88f7dfab_u32, 0x3ea7_u16, 0x4c3a_u16, StaticArray[0xae_u8, 0xfb_u8, 0xc4_u8, 0xe8_u8, 0x10_u8, 0x61_u8, 0x73_u8, 0xaa_u8])
     def query_interface(this : IDebugDataSpaces*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15323,7 +16490,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("7a5e852f-96e9-468f-ac1b-0b3addc4a049")]
   record IDebugDataSpaces2, lpVtbl : IDebugDataSpaces2Vtbl* do
     GUID = LibC::GUID.new(0x7a5e852f_u32, 0x96e9_u16, 0x468f_u16, StaticArray[0xac_u8, 0x1b_u8, 0xb_u8, 0x3a_u8, 0xdd_u8, 0xc4_u8, 0xa0_u8, 0x49_u8])
     def query_interface(this : IDebugDataSpaces2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15455,7 +16621,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("23f79d6c-8aaf-4f7c-a607-9995f5407e63")]
   record IDebugDataSpaces3, lpVtbl : IDebugDataSpaces3Vtbl* do
     GUID = LibC::GUID.new(0x23f79d6c_u32, 0x8aaf_u16, 0x4f7c_u16, StaticArray[0xa6_u8, 0x7_u8, 0x99_u8, 0x95_u8, 0xf5_u8, 0x40_u8, 0x7e_u8, 0x63_u8])
     def query_interface(this : IDebugDataSpaces3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15612,7 +16777,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("d98ada1f-29e9-4ef5-a6c0-e53349883212")]
   record IDebugDataSpaces4, lpVtbl : IDebugDataSpaces4Vtbl* do
     GUID = LibC::GUID.new(0xd98ada1f_u32, 0x29e9_u16, 0x4ef5_u16, StaticArray[0xa6_u8, 0xc0_u8, 0xe5_u8, 0x33_u8, 0x49_u8, 0x88_u8, 0x32_u8, 0x12_u8])
     def query_interface(this : IDebugDataSpaces4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15772,7 +16936,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("337be28b-5036-4d72-b6bf-c45fbb9f2eaa")]
   record IDebugEventCallbacks, lpVtbl : IDebugEventCallbacksVtbl* do
     GUID = LibC::GUID.new(0x337be28b_u32, 0x5036_u16, 0x4d72_u16, StaticArray[0xb6_u8, 0xbf_u8, 0xc4_u8, 0x5f_u8, 0xbb_u8, 0x9f_u8, 0x2e_u8, 0xaa_u8])
     def query_interface(this : IDebugEventCallbacks*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15851,7 +17014,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("0690e046-9c23-45ac-a04f-987ac29ad0d3")]
   record IDebugEventCallbacksWide, lpVtbl : IDebugEventCallbacksWideVtbl* do
     GUID = LibC::GUID.new(0x690e046_u32, 0x9c23_u16, 0x45ac_u16, StaticArray[0xa0_u8, 0x4f_u8, 0x98_u8, 0x7a_u8, 0xc2_u8, 0x9a_u8, 0xd0_u8, 0xd3_u8])
     def query_interface(this : IDebugEventCallbacksWide*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15930,7 +17092,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("61a4905b-23f9-4247-b3c5-53d087529ab7")]
   record IDebugEventContextCallbacks, lpVtbl : IDebugEventContextCallbacksVtbl* do
     GUID = LibC::GUID.new(0x61a4905b_u32, 0x23f9_u16, 0x4247_u16, StaticArray[0xb3_u8, 0xc5_u8, 0x53_u8, 0xd0_u8, 0x87_u8, 0x52_u8, 0x9a_u8, 0xb7_u8])
     def query_interface(this : IDebugEventContextCallbacks*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -15997,7 +17158,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("9f50e42c-f136-499e-9a97-73036c94ed2d")]
   record IDebugInputCallbacks, lpVtbl : IDebugInputCallbacksVtbl* do
     GUID = LibC::GUID.new(0x9f50e42c_u32, 0xf136_u16, 0x499e_u16, StaticArray[0x9a_u8, 0x97_u8, 0x73_u8, 0x3_u8, 0x6c_u8, 0x94_u8, 0xed_u8, 0x2d_u8])
     def query_interface(this : IDebugInputCallbacks*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16027,7 +17187,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("4bf58045-d654-4c40-b0af-683090f356dc")]
   record IDebugOutputCallbacks, lpVtbl : IDebugOutputCallbacksVtbl* do
     GUID = LibC::GUID.new(0x4bf58045_u32, 0xd654_u16, 0x4c40_u16, StaticArray[0xb0_u8, 0xaf_u8, 0x68_u8, 0x30_u8, 0x90_u8, 0xf3_u8, 0x56_u8, 0xdc_u8])
     def query_interface(this : IDebugOutputCallbacks*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16054,7 +17213,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("4c7fd663-c394-4e26-8ef1-34ad5ed3764c")]
   record IDebugOutputCallbacksWide, lpVtbl : IDebugOutputCallbacksWideVtbl* do
     GUID = LibC::GUID.new(0x4c7fd663_u32, 0xc394_u16, 0x4e26_u16, StaticArray[0x8e_u8, 0xf1_u8, 0x34_u8, 0xad_u8, 0x5e_u8, 0xd3_u8, 0x76_u8, 0x4c_u8])
     def query_interface(this : IDebugOutputCallbacksWide*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16083,7 +17241,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("67721fe9-56d2-4a44-a325-2b65513ce6eb")]
   record IDebugOutputCallbacks2, lpVtbl : IDebugOutputCallbacks2Vtbl* do
     GUID = LibC::GUID.new(0x67721fe9_u32, 0x56d2_u16, 0x4a44_u16, StaticArray[0xa3_u8, 0x25_u8, 0x2b_u8, 0x65_u8, 0x51_u8, 0x3c_u8, 0xe6_u8, 0xeb_u8])
     def query_interface(this : IDebugOutputCallbacks2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16126,7 +17283,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("ce289126-9e84-45a7-937e-67bb18691493")]
   record IDebugRegisters, lpVtbl : IDebugRegistersVtbl* do
     GUID = LibC::GUID.new(0xce289126_u32, 0x9e84_u16, 0x45a7_u16, StaticArray[0x93_u8, 0x7e_u8, 0x67_u8, 0xbb_u8, 0x18_u8, 0x69_u8, 0x14_u8, 0x93_u8])
     def query_interface(this : IDebugRegisters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16208,7 +17364,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("1656afa9-19c6-4e3a-97e7-5dc9160cf9c4")]
   record IDebugRegisters2, lpVtbl : IDebugRegisters2Vtbl* do
     GUID = LibC::GUID.new(0x1656afa9_u32, 0x19c6_u16, 0x4e3a_u16, StaticArray[0x97_u8, 0xe7_u8, 0x5d_u8, 0xc9_u8, 0x16_u8, 0xc_u8, 0xf9_u8, 0xc4_u8])
     def query_interface(this : IDebugRegisters2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16319,7 +17474,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("f2528316-0f1a-4431-aeed-11d096e1e2ab")]
   record IDebugSymbolGroup, lpVtbl : IDebugSymbolGroupVtbl* do
     GUID = LibC::GUID.new(0xf2528316_u32, 0xf1a_u16, 0x4431_u16, StaticArray[0xae_u8, 0xed_u8, 0x11_u8, 0xd0_u8, 0x96_u8, 0xe1_u8, 0xe2_u8, 0xab_u8])
     def query_interface(this : IDebugSymbolGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16395,7 +17549,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("6a7ccc5f-fb5e-4dcc-b41c-6c20307bccc7")]
   record IDebugSymbolGroup2, lpVtbl : IDebugSymbolGroup2Vtbl* do
     GUID = LibC::GUID.new(0x6a7ccc5f_u32, 0xfb5e_u16, 0x4dcc_u16, StaticArray[0xb4_u8, 0x1c_u8, 0x6c_u8, 0x20_u8, 0x30_u8, 0x7b_u8, 0xcc_u8, 0xc7_u8])
     def query_interface(this : IDebugSymbolGroup2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16536,7 +17689,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("8c31e98c-983a-48a5-9016-6fe5d667a950")]
   record IDebugSymbols, lpVtbl : IDebugSymbolsVtbl* do
     GUID = LibC::GUID.new(0x8c31e98c_u32, 0x983a_u16, 0x48a5_u16, StaticArray[0x90_u8, 0x16_u8, 0x6f_u8, 0xe5_u8, 0xd6_u8, 0x67_u8, 0xa9_u8, 0x50_u8])
     def query_interface(this : IDebugSymbols*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -16763,7 +17915,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("3a707211-afdd-4495-ad4f-56fecdf8163f")]
   record IDebugSymbols2, lpVtbl : IDebugSymbols2Vtbl* do
     GUID = LibC::GUID.new(0x3a707211_u32, 0xafdd_u16, 0x4495_u16, StaticArray[0xad_u8, 0x4f_u8, 0x56_u8, 0xfe_u8, 0xcd_u8, 0xf8_u8, 0x16_u8, 0x3f_u8])
     def query_interface(this : IDebugSymbols2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17080,7 +18231,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("f02fbecc-50ac-4f36-9ad9-c975e8f32ff8")]
   record IDebugSymbols3, lpVtbl : IDebugSymbols3Vtbl* do
     GUID = LibC::GUID.new(0xf02fbecc_u32, 0x50ac_u16, 0x4f36_u16, StaticArray[0x9a_u8, 0xd9_u8, 0xc9_u8, 0x75_u8, 0xe8_u8, 0xf3_u8, 0x2f_u8, 0xf8_u8])
     def query_interface(this : IDebugSymbols3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -17602,7 +18752,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("e391bbd8-9d8c-4418-840b-c006592a1752")]
   record IDebugSymbols4, lpVtbl : IDebugSymbols4Vtbl* do
     GUID = LibC::GUID.new(0xe391bbd8_u32, 0x9d8c_u16, 0x4418_u16, StaticArray[0x84_u8, 0xb_u8, 0xc0_u8, 0x6_u8, 0x59_u8, 0x2a_u8, 0x17_u8, 0x52_u8])
     def query_interface(this : IDebugSymbols4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18147,7 +19296,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("c65fa83e-1e69-475e-8e0e-b5d79e9cc17e")]
   record IDebugSymbols5, lpVtbl : IDebugSymbols5Vtbl* do
     GUID = LibC::GUID.new(0xc65fa83e_u32, 0x1e69_u16, 0x475e_u16, StaticArray[0x8e_u8, 0xe_u8, 0xb5_u8, 0xd7_u8, 0x9e_u8, 0x9c_u8, 0xc1_u8, 0x7e_u8])
     def query_interface(this : IDebugSymbols5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18595,7 +19743,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("6b86fe2c-2c4f-4f0c-9da2-174311acc327")]
   record IDebugSystemObjects, lpVtbl : IDebugSystemObjectsVtbl* do
     GUID = LibC::GUID.new(0x6b86fe2c_u32, 0x2c4f_u16, 0x4f0c_u16, StaticArray[0x9d_u8, 0xa2_u8, 0x17_u8, 0x43_u8, 0x11_u8, 0xac_u8, 0xc3_u8, 0x27_u8])
     def query_interface(this : IDebugSystemObjects*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18739,7 +19886,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("0ae9f5ff-1852-4679-b055-494bee6407ee")]
   record IDebugSystemObjects2, lpVtbl : IDebugSystemObjects2Vtbl* do
     GUID = LibC::GUID.new(0xae9f5ff_u32, 0x1852_u16, 0x4679_u16, StaticArray[0xb0_u8, 0x55_u8, 0x49_u8, 0x4b_u8, 0xee_u8, 0x64_u8, 0x7_u8, 0xee_u8])
     def query_interface(this : IDebugSystemObjects2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -18907,7 +20053,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("e9676e2f-e286-4ea3-b0f9-dfe5d9fc330e")]
   record IDebugSystemObjects3, lpVtbl : IDebugSystemObjects3Vtbl* do
     GUID = LibC::GUID.new(0xe9676e2f_u32, 0xe286_u16, 0x4ea3_u16, StaticArray[0xb0_u8, 0xf9_u8, 0xdf_u8, 0xe5_u8, 0xd9_u8, 0xfc_u8, 0x33_u8, 0xe_u8])
     def query_interface(this : IDebugSystemObjects3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19104,7 +20249,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("489468e6-7d0f-4af5-87ab-25207454d553")]
   record IDebugSystemObjects4, lpVtbl : IDebugSystemObjects4Vtbl* do
     GUID = LibC::GUID.new(0x489468e6_u32, 0x7d0f_u16, 0x4af5_u16, StaticArray[0x87_u8, 0xab_u8, 0x25_u8, 0x20_u8, 0x74_u8, 0x54_u8, 0xd5_u8, 0x53_u8])
     def query_interface(this : IDebugSystemObjects4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19419,7 +20563,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("f2bce54e-4835-4f8a-836e-7981e29904d1")]
   record IHostDataModelAccess, lpVtbl : IHostDataModelAccessVtbl* do
     GUID = LibC::GUID.new(0xf2bce54e_u32, 0x4835_u16, 0x4f8a_u16, StaticArray[0x83_u8, 0x6e_u8, 0x79_u8, 0x81_u8, 0xe2_u8, 0x99_u8, 0x4_u8, 0xd1_u8])
     def query_interface(this : IHostDataModelAccess*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19450,7 +20593,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("0fc7557d-401d-4fca-9365-da1e9850697c")]
   record IKeyStore, lpVtbl : IKeyStoreVtbl* do
     GUID = LibC::GUID.new(0xfc7557d_u32, 0x401d_u16, 0x4fca_u16, StaticArray[0x93_u8, 0x65_u8, 0xda_u8, 0x1e_u8, 0x98_u8, 0x50_u8, 0x69_u8, 0x7c_u8])
     def query_interface(this : IKeyStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19521,7 +20663,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("e28c7893-3f4b-4b96-baca-293cdc55f45d")]
   record IModelObject, lpVtbl : IModelObjectVtbl* do
     GUID = LibC::GUID.new(0xe28c7893_u32, 0x3f4b_u16, 0x4b96_u16, StaticArray[0xba_u8, 0xca_u8, 0x29_u8, 0x3c_u8, 0xdc_u8, 0x55_u8, 0xf4_u8, 0x5d_u8])
     def query_interface(this : IModelObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19663,7 +20804,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("73fe19f4-a110-4500-8ed9-3c28896f508c")]
   record IDataModelManager, lpVtbl : IDataModelManagerVtbl* do
     GUID = LibC::GUID.new(0x73fe19f4_u32, 0xa110_u16, 0x4500_u16, StaticArray[0x8e_u8, 0xd9_u8, 0x3c_u8, 0x28_u8, 0x89_u8, 0x6f_u8, 0x50_u8, 0x8c_u8])
     def query_interface(this : IDataModelManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19753,7 +20893,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("5253dcf8-5aff-4c62-b302-56a289e00998")]
   record IModelKeyReference, lpVtbl : IModelKeyReferenceVtbl* do
     GUID = LibC::GUID.new(0x5253dcf8_u32, 0x5aff_u16, 0x4c62_u16, StaticArray[0xb3_u8, 0x2_u8, 0x56_u8, 0xa2_u8, 0x89_u8, 0xe0_u8, 0x9_u8, 0x98_u8])
     def query_interface(this : IModelKeyReference*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19799,7 +20938,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("5a0c63d9-0526-42b8-960c-9516a3254c85")]
   record IModelPropertyAccessor, lpVtbl : IModelPropertyAccessorVtbl* do
     GUID = LibC::GUID.new(0x5a0c63d9_u32, 0x526_u16, 0x42b8_u16, StaticArray[0x96_u8, 0xc_u8, 0x95_u8, 0x16_u8, 0xa3_u8, 0x25_u8, 0x4c_u8, 0x85_u8])
     def query_interface(this : IModelPropertyAccessor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19829,7 +20967,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("80600c1f-b90b-4896-82ad-1c00207909e8")]
   record IModelMethod, lpVtbl : IModelMethodVtbl* do
     GUID = LibC::GUID.new(0x80600c1f_u32, 0xb90b_u16, 0x4896_u16, StaticArray[0x82_u8, 0xad_u8, 0x1c_u8, 0x0_u8, 0x20_u8, 0x79_u8, 0x9_u8, 0xe8_u8])
     def query_interface(this : IModelMethod*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19857,7 +20994,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("345fa92e-5e00-4319-9cae-971f7601cdcf")]
   record IKeyEnumerator, lpVtbl : IKeyEnumeratorVtbl* do
     GUID = LibC::GUID.new(0x345fa92e_u32, 0x5e00_u16, 0x4319_u16, StaticArray[0x9c_u8, 0xae_u8, 0x97_u8, 0x1f_u8, 0x76_u8, 0x1_u8, 0xcd_u8, 0xcf_u8])
     def query_interface(this : IKeyEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19888,7 +21024,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("e13613f9-3a3c-40b5-8f48-1e5ebfb9b21b")]
   record IRawEnumerator, lpVtbl : IRawEnumeratorVtbl* do
     GUID = LibC::GUID.new(0xe13613f9_u32, 0x3a3c_u16, 0x40b5_u16, StaticArray[0x8f_u8, 0x48_u8, 0x1e_u8, 0x5e_u8, 0xbf_u8, 0xb9_u8, 0xb2_u8, 0x1b_u8])
     def query_interface(this : IRawEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19919,7 +21054,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("fcb98d1d-1114-4fbf-b24c-effcb5def0d3")]
   record IDataModelConcept, lpVtbl : IDataModelConceptVtbl* do
     GUID = LibC::GUID.new(0xfcb98d1d_u32, 0x1114_u16, 0x4fbf_u16, StaticArray[0xb2_u8, 0x4c_u8, 0xef_u8, 0xfc_u8, 0xb5_u8, 0xde_u8, 0xf0_u8, 0xd3_u8])
     def query_interface(this : IDataModelConcept*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19949,7 +21083,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("d28e8d70-6c00-4205-940d-501016601ea3")]
   record IStringDisplayableConcept, lpVtbl : IStringDisplayableConceptVtbl* do
     GUID = LibC::GUID.new(0xd28e8d70_u32, 0x6c00_u16, 0x4205_u16, StaticArray[0x94_u8, 0xd_u8, 0x50_u8, 0x10_u8, 0x16_u8, 0x60_u8, 0x1e_u8, 0xa3_u8])
     def query_interface(this : IStringDisplayableConcept*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -19976,7 +21109,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("c7371568-5c78-4a00-a4ab-6ef8823184cb")]
   record ICodeAddressConcept, lpVtbl : ICodeAddressConceptVtbl* do
     GUID = LibC::GUID.new(0xc7371568_u32, 0x5c78_u16, 0x4a00_u16, StaticArray[0xa4_u8, 0xab_u8, 0x6e_u8, 0xf8_u8, 0x82_u8, 0x31_u8, 0x84_u8, 0xcb_u8])
     def query_interface(this : ICodeAddressConcept*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20004,7 +21136,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("e4622136-927d-4490-874f-581f3e4e3688")]
   record IModelIterator, lpVtbl : IModelIteratorVtbl* do
     GUID = LibC::GUID.new(0xe4622136_u32, 0x927d_u16, 0x4490_u16, StaticArray[0x87_u8, 0x4f_u8, 0x58_u8, 0x1f_u8, 0x3e_u8, 0x4e_u8, 0x36_u8, 0x88_u8])
     def query_interface(this : IModelIterator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20035,7 +21166,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("f5d49d0c-0b02-4301-9c9b-b3a6037628f3")]
   record IIterableConcept, lpVtbl : IIterableConceptVtbl* do
     GUID = LibC::GUID.new(0xf5d49d0c_u32, 0xb02_u16, 0x4301_u16, StaticArray[0x9c_u8, 0x9b_u8, 0xb3_u8, 0xa6_u8, 0x3_u8, 0x76_u8, 0x28_u8, 0xf3_u8])
     def query_interface(this : IIterableConcept*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20067,7 +21197,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("d1fad99f-3f53-4457-850c-8051df2d3fb5")]
   record IIndexableConcept, lpVtbl : IIndexableConceptVtbl* do
     GUID = LibC::GUID.new(0xd1fad99f_u32, 0x3f53_u16, 0x4457_u16, StaticArray[0x85_u8, 0xc_u8, 0x80_u8, 0x51_u8, 0xdf_u8, 0x2d_u8, 0x3f_u8, 0xb5_u8])
     def query_interface(this : IIndexableConcept*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20100,7 +21229,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("9d6c1d7b-a76f-4618-8068-5f76bd9a4e8a")]
   record IPreferredRuntimeTypeConcept, lpVtbl : IPreferredRuntimeTypeConceptVtbl* do
     GUID = LibC::GUID.new(0x9d6c1d7b_u32, 0xa76f_u16, 0x4618_u16, StaticArray[0x80_u8, 0x68_u8, 0x5f_u8, 0x76_u8, 0xbd_u8, 0x9a_u8, 0x4e_u8, 0x8a_u8])
     def query_interface(this : IPreferredRuntimeTypeConcept*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20129,7 +21257,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("b8c74943-6b2c-4eeb-b5c5-35d378a6d99d")]
   record IDebugHost, lpVtbl : IDebugHostVtbl* do
     GUID = LibC::GUID.new(0xb8c74943_u32, 0x6b2c_u16, 0x4eeb_u16, StaticArray[0xb5_u8, 0xc5_u8, 0x35_u8, 0xd3_u8, 0x78_u8, 0xa6_u8, 0xd9_u8, 0x9d_u8])
     def query_interface(this : IDebugHost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20162,7 +21289,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("a68c70d8-5ec0-46e5-b775-3134a48ea2e3")]
   record IDebugHostContext, lpVtbl : IDebugHostContextVtbl* do
     GUID = LibC::GUID.new(0xa68c70d8_u32, 0x5ec0_u16, 0x46e5_u16, StaticArray[0xb7_u8, 0x75_u8, 0x31_u8, 0x34_u8, 0xa4_u8, 0x8e_u8, 0xa2_u8, 0xe3_u8])
     def query_interface(this : IDebugHostContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20189,7 +21315,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("c8ff0f0b-fce9-467e-8bb3-5d69ef109c00")]
   record IDebugHostErrorSink, lpVtbl : IDebugHostErrorSinkVtbl* do
     GUID = LibC::GUID.new(0xc8ff0f0b_u32, 0xfce9_u16, 0x467e_u16, StaticArray[0x8b_u8, 0xb3_u8, 0x5d_u8, 0x69_u8, 0xef_u8, 0x10_u8, 0x9c_u8, 0x0_u8])
     def query_interface(this : IDebugHostErrorSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20222,7 +21347,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("0f819103-87de-4e96-8277-e05cd441fb22")]
   record IDebugHostSymbol, lpVtbl : IDebugHostSymbolVtbl* do
     GUID = LibC::GUID.new(0xf819103_u32, 0x87de_u16, 0x4e96_u16, StaticArray[0x82_u8, 0x77_u8, 0xe0_u8, 0x5c_u8, 0xd4_u8, 0x41_u8, 0xfb_u8, 0x22_u8])
     def query_interface(this : IDebugHostSymbol*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20268,7 +21392,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("28d96c86-10a3-4976-b14e-eaef4790aa1f")]
   record IDebugHostSymbolEnumerator, lpVtbl : IDebugHostSymbolEnumeratorVtbl* do
     GUID = LibC::GUID.new(0x28d96c86_u32, 0x10a3_u16, 0x4976_u16, StaticArray[0xb1_u8, 0x4e_u8, 0xea_u8, 0xef_u8, 0x47_u8, 0x90_u8, 0xaa_u8, 0x1f_u8])
     def query_interface(this : IDebugHostSymbolEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20310,7 +21433,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("c9ba3e18-d070-4378-bbd0-34613b346e1e")]
   record IDebugHostModule, lpVtbl : IDebugHostModuleVtbl* do
     GUID = LibC::GUID.new(0xc9ba3e18_u32, 0xd070_u16, 0x4378_u16, StaticArray[0xbb_u8, 0xd0_u8, 0x34_u8, 0x61_u8, 0x3b_u8, 0x34_u8, 0x6e_u8, 0x1e_u8])
     def query_interface(this : IDebugHostModule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20398,7 +21520,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("3aadc353-2b14-4abb-9893-5e03458e07ee")]
   record IDebugHostType, lpVtbl : IDebugHostTypeVtbl* do
     GUID = LibC::GUID.new(0x3aadc353_u32, 0x2b14_u16, 0x4abb_u16, StaticArray[0x98_u8, 0x93_u8, 0x5e_u8, 0x3_u8, 0x45_u8, 0x8e_u8, 0x7_u8, 0xee_u8])
     def query_interface(this : IDebugHostType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20507,7 +21628,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("62787edc-fa76-4690-bd71-5e8c3e2937ec")]
   record IDebugHostConstant, lpVtbl : IDebugHostConstantVtbl* do
     GUID = LibC::GUID.new(0x62787edc_u32, 0xfa76_u16, 0x4690_u16, StaticArray[0xbd_u8, 0x71_u8, 0x5e_u8, 0x8c_u8, 0x3e_u8, 0x29_u8, 0x37_u8, 0xec_u8])
     def query_interface(this : IDebugHostConstant*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20565,7 +21685,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("e06f6495-16bc-4cc9-b11d-2a6b23fa72f3")]
   record IDebugHostField, lpVtbl : IDebugHostFieldVtbl* do
     GUID = LibC::GUID.new(0xe06f6495_u32, 0x16bc_u16, 0x4cc9_u16, StaticArray[0xb1_u8, 0x1d_u8, 0x2a_u8, 0x6b_u8, 0x23_u8, 0xfa_u8, 0x72_u8, 0xf3_u8])
     def query_interface(this : IDebugHostField*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20631,7 +21750,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("a3d64993-826c-44fa-897d-926f2fe7ad0b")]
   record IDebugHostData, lpVtbl : IDebugHostDataVtbl* do
     GUID = LibC::GUID.new(0xa3d64993_u32, 0x826c_u16, 0x44fa_u16, StaticArray[0x89_u8, 0x7d_u8, 0x92_u8, 0x6f_u8, 0x2f_u8, 0xe7_u8, 0xad_u8, 0xb_u8])
     def query_interface(this : IDebugHostData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20693,7 +21811,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("6c597ac9-fb4d-4f6d-9f39-22488539f8f4")]
   record IDebugHostPublic, lpVtbl : IDebugHostPublicVtbl* do
     GUID = LibC::GUID.new(0x6c597ac9_u32, 0xfb4d_u16, 0x4f6d_u16, StaticArray[0x9f_u8, 0x39_u8, 0x22_u8, 0x48_u8, 0x85_u8, 0x39_u8, 0xf8_u8, 0xf4_u8])
     def query_interface(this : IDebugHostPublic*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20751,7 +21868,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("b94d57d2-390b-40f7-b5b4-b6db897d974b")]
   record IDebugHostBaseClass, lpVtbl : IDebugHostBaseClassVtbl* do
     GUID = LibC::GUID.new(0xb94d57d2_u32, 0x390b_u16, 0x40f7_u16, StaticArray[0xb5_u8, 0xb4_u8, 0xb6_u8, 0xdb_u8, 0x89_u8, 0x7d_u8, 0x97_u8, 0x4b_u8])
     def query_interface(this : IDebugHostBaseClass*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20805,7 +21921,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("854fd751-c2e1-4eb2-b525-6619cb97a588")]
   record IDebugHostSymbols, lpVtbl : IDebugHostSymbolsVtbl* do
     GUID = LibC::GUID.new(0x854fd751_u32, 0xc2e1_u16, 0x4eb2_u16, StaticArray[0xb5_u8, 0x25_u8, 0x66_u8, 0x19_u8, 0xcb_u8, 0x97_u8, 0xa5_u8, 0x88_u8])
     def query_interface(this : IDebugHostSymbols*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20854,7 +21969,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("212149c9-9183-4a3e-b00e-4fd1dc95339b")]
   record IDebugHostMemory, lpVtbl : IDebugHostMemoryVtbl* do
     GUID = LibC::GUID.new(0x212149c9_u32, 0x9183_u16, 0x4a3e_u16, StaticArray[0xb0_u8, 0xe_u8, 0x4f_u8, 0xd1_u8, 0xdc_u8, 0x95_u8, 0x33_u8, 0x9b_u8])
     def query_interface(this : IDebugHostMemory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20894,7 +22008,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("0fef9a21-577e-4997-ac7b-1c4883241d99")]
   record IDebugHostEvaluator, lpVtbl : IDebugHostEvaluatorVtbl* do
     GUID = LibC::GUID.new(0xfef9a21_u32, 0x577e_u16, 0x4997_u16, StaticArray[0xac_u8, 0x7b_u8, 0x1c_u8, 0x48_u8, 0x83_u8, 0x24_u8, 0x1d_u8, 0x99_u8])
     def query_interface(this : IDebugHostEvaluator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20924,7 +22037,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("31e53a5a-01ee-4bbb-b899-4b46ae7d595c")]
   record IDebugHostModuleSignature, lpVtbl : IDebugHostModuleSignatureVtbl* do
     GUID = LibC::GUID.new(0x31e53a5a_u32, 0x1ee_u16, 0x4bbb_u16, StaticArray[0xb8_u8, 0x99_u8, 0x4b_u8, 0x46_u8, 0xae_u8, 0x7d_u8, 0x59_u8, 0x5c_u8])
     def query_interface(this : IDebugHostModuleSignature*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20953,7 +22065,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("3aadc353-2b14-4abb-9893-5e03458e07ee")]
   record IDebugHostTypeSignature, lpVtbl : IDebugHostTypeSignatureVtbl* do
     GUID = LibC::GUID.new(0x3aadc353_u32, 0x2b14_u16, 0x4abb_u16, StaticArray[0x98_u8, 0x93_u8, 0x5e_u8, 0x3_u8, 0x45_u8, 0x8e_u8, 0x7_u8, 0xee_u8])
     def query_interface(this : IDebugHostTypeSignature*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -20993,7 +22104,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("21515b67-6720-4257-8a68-077dc944471c")]
   record IDebugHostSymbol2, lpVtbl : IDebugHostSymbol2Vtbl* do
     GUID = LibC::GUID.new(0x21515b67_u32, 0x6720_u16, 0x4257_u16, StaticArray[0x8a_u8, 0x68_u8, 0x7_u8, 0x7d_u8, 0xc9_u8, 0x44_u8, 0x47_u8, 0x1c_u8])
     def query_interface(this : IDebugHostSymbol2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21071,7 +22181,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("b28632b9-8506-4676-87ce-8f7e05e59876")]
   record IDebugHostType2, lpVtbl : IDebugHostType2Vtbl* do
     GUID = LibC::GUID.new(0xb28632b9_u32, 0x8506_u16, 0x4676_u16, StaticArray[0x87_u8, 0xce_u8, 0x8f_u8, 0x7e_u8, 0x5_u8, 0xe5_u8, 0x98_u8, 0x76_u8])
     def query_interface(this : IDebugHostType2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21188,7 +22297,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("4f3e1ce2-86b2-4c7a-9c65-d0a9d0eecf44")]
   record IDebugHostStatus, lpVtbl : IDebugHostStatusVtbl* do
     GUID = LibC::GUID.new(0x4f3e1ce2_u32, 0x86b2_u16, 0x4c7a_u16, StaticArray[0x9c_u8, 0x65_u8, 0xd0_u8, 0xa9_u8, 0xd0_u8, 0xee_u8, 0xcf_u8, 0x44_u8])
     def query_interface(this : IDebugHostStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21215,7 +22323,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("3b362b0e-89f0-46c6-a663-dfdc95194aef")]
   record IDataModelScriptClient, lpVtbl : IDataModelScriptClientVtbl* do
     GUID = LibC::GUID.new(0x3b362b0e_u32, 0x89f0_u16, 0x46c6_u16, StaticArray[0xa6_u8, 0x63_u8, 0xdf_u8, 0xdc_u8, 0x95_u8, 0x19_u8, 0x4a_u8, 0xef_u8])
     def query_interface(this : IDataModelScriptClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21244,7 +22351,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("1303dec4-fa3b-4f1b-9224-b953d16babb5")]
   record IDataModelScriptTemplate, lpVtbl : IDataModelScriptTemplateVtbl* do
     GUID = LibC::GUID.new(0x1303dec4_u32, 0xfa3b_u16, 0x4f1b_u16, StaticArray[0x92_u8, 0x24_u8, 0xb9_u8, 0x53_u8, 0xd1_u8, 0x6b_u8, 0xab_u8, 0xb5_u8])
     def query_interface(this : IDataModelScriptTemplate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21283,7 +22389,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("7b4d30fc-b14a-49f8-8d87-d9a1480c97f7")]
   record IDataModelScript, lpVtbl : IDataModelScriptVtbl* do
     GUID = LibC::GUID.new(0x7b4d30fc_u32, 0xb14a_u16, 0x49f8_u16, StaticArray[0x8d_u8, 0x87_u8, 0xd9_u8, 0xa1_u8, 0x48_u8, 0xc_u8, 0x97_u8, 0xf7_u8])
     def query_interface(this : IDataModelScript*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21329,7 +22434,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("69ce6ae2-2268-4e6f-b062-20ce62bfe677")]
   record IDataModelScriptTemplateEnumerator, lpVtbl : IDataModelScriptTemplateEnumeratorVtbl* do
     GUID = LibC::GUID.new(0x69ce6ae2_u32, 0x2268_u16, 0x4e6f_u16, StaticArray[0xb0_u8, 0x62_u8, 0x20_u8, 0xce_u8, 0x62_u8, 0xbf_u8, 0xe6_u8, 0x77_u8])
     def query_interface(this : IDataModelScriptTemplateEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21363,7 +22467,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("513461e0-4fca-48ce-8658-32f3e2056f3b")]
   record IDataModelScriptProvider, lpVtbl : IDataModelScriptProviderVtbl* do
     GUID = LibC::GUID.new(0x513461e0_u32, 0x4fca_u16, 0x48ce_u16, StaticArray[0x86_u8, 0x58_u8, 0x32_u8, 0xf3_u8, 0xe2_u8, 0x5_u8, 0x6f_u8, 0x3b_u8])
     def query_interface(this : IDataModelScriptProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21403,7 +22506,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("95ba00e2-704a-4fe2-a8f1-a7e7d8fb0941")]
   record IDataModelScriptProviderEnumerator, lpVtbl : IDataModelScriptProviderEnumeratorVtbl* do
     GUID = LibC::GUID.new(0x95ba00e2_u32, 0x704a_u16, 0x4fe2_u16, StaticArray[0xa8_u8, 0xf1_u8, 0xa7_u8, 0xe7_u8, 0xd8_u8, 0xfb_u8, 0x9_u8, 0x41_u8])
     def query_interface(this : IDataModelScriptProviderEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21438,7 +22540,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("6fd11e33-e5ad-410b-8011-68c6bc4bf80d")]
   record IDataModelScriptManager, lpVtbl : IDataModelScriptManagerVtbl* do
     GUID = LibC::GUID.new(0x6fd11e33_u32, 0xe5ad_u16, 0x410b_u16, StaticArray[0x80_u8, 0x11_u8, 0x68_u8, 0xc6_u8, 0xbc_u8, 0x4b_u8, 0xf8_u8, 0xd_u8])
     def query_interface(this : IDataModelScriptManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21482,7 +22583,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("e7983fa1-80a7-498c-988f-518ddc5d4025")]
   record IDynamicKeyProviderConcept, lpVtbl : IDynamicKeyProviderConceptVtbl* do
     GUID = LibC::GUID.new(0xe7983fa1_u32, 0x80a7_u16, 0x498c_u16, StaticArray[0x98_u8, 0x8f_u8, 0x51_u8, 0x8d_u8, 0xdc_u8, 0x5d_u8, 0x40_u8, 0x25_u8])
     def query_interface(this : IDynamicKeyProviderConcept*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21519,7 +22619,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("95a7f7dd-602e-483f-9d06-a15c0ee13174")]
   record IDynamicConceptProviderConcept, lpVtbl : IDynamicConceptProviderConceptVtbl* do
     GUID = LibC::GUID.new(0x95a7f7dd_u32, 0x602e_u16, 0x483f_u16, StaticArray[0x9d_u8, 0x6_u8, 0xa1_u8, 0x5c_u8, 0xe_u8, 0xe1_u8, 0x31_u8, 0x74_u8])
     def query_interface(this : IDynamicConceptProviderConcept*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21559,7 +22658,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("014d366a-1f23-4981-9219-b2db8b402054")]
   record IDataModelScriptHostContext, lpVtbl : IDataModelScriptHostContextVtbl* do
     GUID = LibC::GUID.new(0x14d366a_u32, 0x1f23_u16, 0x4981_u16, StaticArray[0x92_u8, 0x19_u8, 0xb2_u8, 0xdb_u8, 0x8b_u8, 0x40_u8, 0x20_u8, 0x54_u8])
     def query_interface(this : IDataModelScriptHostContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21589,7 +22687,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("b70334a4-b92c-4570-93a1-d3eb686649a0")]
   record IDebugHostScriptHost, lpVtbl : IDebugHostScriptHostVtbl* do
     GUID = LibC::GUID.new(0xb70334a4_u32, 0xb92c_u16, 0x4570_u16, StaticArray[0x93_u8, 0xa1_u8, 0xd3_u8, 0xeb_u8, 0x68_u8, 0x66_u8, 0x49_u8, 0xa0_u8])
     def query_interface(this : IDebugHostScriptHost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21619,7 +22716,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("af352b7b-8292-4c01-b360-2dc3696c65e7")]
   record IDataModelNameBinder, lpVtbl : IDataModelNameBinderVtbl* do
     GUID = LibC::GUID.new(0xaf352b7b_u32, 0x8292_u16, 0x4c01_u16, StaticArray[0xb3_u8, 0x60_u8, 0x2d_u8, 0xc3_u8, 0x69_u8, 0x6c_u8, 0x65_u8, 0xe7_u8])
     def query_interface(this : IDataModelNameBinder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21662,7 +22758,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("80e2f7c5-7159-4e92-887e-7e0347e88406")]
   record IModelKeyReference2, lpVtbl : IModelKeyReference2Vtbl* do
     GUID = LibC::GUID.new(0x80e2f7c5_u32, 0x7159_u16, 0x4e92_u16, StaticArray[0x88_u8, 0x7e_u8, 0x7e_u8, 0x3_u8, 0x47_u8, 0xe8_u8, 0x84_u8, 0x6_u8])
     def query_interface(this : IModelKeyReference2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21712,7 +22807,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("a117a435-1fb4-4092-a2ab-a929576c1e87")]
   record IDebugHostEvaluator2, lpVtbl : IDebugHostEvaluator2Vtbl* do
     GUID = LibC::GUID.new(0xa117a435_u32, 0x1fb4_u16, 0x4092_u16, StaticArray[0xa2_u8, 0xab_u8, 0xa9_u8, 0x29_u8, 0x57_u8, 0x6c_u8, 0x1e_u8, 0x87_u8])
     def query_interface(this : IDebugHostEvaluator2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21766,7 +22860,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("f412c5ea-2284-4622-a660-a697160d3312")]
   record IDataModelManager2, lpVtbl : IDataModelManager2Vtbl* do
     GUID = LibC::GUID.new(0xf412c5ea_u32, 0x2284_u16, 0x4622_u16, StaticArray[0xa6_u8, 0x60_u8, 0xa6_u8, 0x97_u8, 0x16_u8, 0xd_u8, 0x33_u8, 0x12_u8])
     def query_interface(this : IDataModelManager2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21861,7 +22954,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("eea033de-38f6-416b-a251-1d3771001270")]
   record IDebugHostMemory2, lpVtbl : IDebugHostMemory2Vtbl* do
     GUID = LibC::GUID.new(0xeea033de_u32, 0x38f6_u16, 0x416b_u16, StaticArray[0xa2_u8, 0x51_u8, 0x1d_u8, 0x37_u8, 0x71_u8, 0x0_u8, 0x12_u8, 0x70_u8])
     def query_interface(this : IDebugHostMemory2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21904,7 +22996,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("3c2b24e1-11d0-4f86-8ae5-4df166f73253")]
   record IDebugHostExtensibility, lpVtbl : IDebugHostExtensibilityVtbl* do
     GUID = LibC::GUID.new(0x3c2b24e1_u32, 0x11d0_u16, 0x4f86_u16, StaticArray[0x8a_u8, 0xe5_u8, 0x4d_u8, 0xf1_u8, 0x66_u8, 0xf7_u8, 0x32_u8, 0x53_u8])
     def query_interface(this : IDebugHostExtensibility*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21934,7 +23025,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("53159b6d-d4c4-471b-a863-5b110ca800ca")]
   record IDataModelScriptDebugClient, lpVtbl : IDataModelScriptDebugClientVtbl* do
     GUID = LibC::GUID.new(0x53159b6d_u32, 0xd4c4_u16, 0x471b_u16, StaticArray[0xa8_u8, 0x63_u8, 0x5b_u8, 0x11_u8, 0xc_u8, 0xa8_u8, 0x0_u8, 0xca_u8])
     def query_interface(this : IDataModelScriptDebugClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21962,7 +23052,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("0f9feed7-d045-4ac3-98a8-a98942cf6a35")]
   record IDataModelScriptDebugVariableSetEnumerator, lpVtbl : IDataModelScriptDebugVariableSetEnumeratorVtbl* do
     GUID = LibC::GUID.new(0xf9feed7_u32, 0xd045_u16, 0x4ac3_u16, StaticArray[0x98_u8, 0xa8_u8, 0xa9_u8, 0x89_u8, 0x42_u8, 0xcf_u8, 0x6a_u8, 0x35_u8])
     def query_interface(this : IDataModelScriptDebugVariableSetEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -21998,7 +23087,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("dec6ed5e-6360-4941-ab4c-a26409de4f82")]
   record IDataModelScriptDebugStackFrame, lpVtbl : IDataModelScriptDebugStackFrameVtbl* do
     GUID = LibC::GUID.new(0xdec6ed5e_u32, 0x6360_u16, 0x4941_u16, StaticArray[0xab_u8, 0x4c_u8, 0xa2_u8, 0x64_u8, 0x9_u8, 0xde_u8, 0x4f_u8, 0x82_u8])
     def query_interface(this : IDataModelScriptDebugStackFrame*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22044,7 +23132,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("051364dd-e449-443e-9762-fe578f4a5473")]
   record IDataModelScriptDebugStack, lpVtbl : IDataModelScriptDebugStackVtbl* do
     GUID = LibC::GUID.new(0x51364dd_u32, 0xe449_u16, 0x443e_u16, StaticArray[0x97_u8, 0x62_u8, 0xfe_u8, 0x57_u8, 0x8f_u8, 0x4a_u8, 0x54_u8, 0x73_u8])
     def query_interface(this : IDataModelScriptDebugStack*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22079,7 +23166,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("6bb27b35-02e6-47cb-90a0-5371244032de")]
   record IDataModelScriptDebugBreakpoint, lpVtbl : IDataModelScriptDebugBreakpointVtbl* do
     GUID = LibC::GUID.new(0x6bb27b35_u32, 0x2e6_u16, 0x47cb_u16, StaticArray[0x90_u8, 0xa0_u8, 0x53_u8, 0x71_u8, 0x24_u8, 0x40_u8, 0x32_u8, 0xde_u8])
     def query_interface(this : IDataModelScriptDebugBreakpoint*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22122,7 +23208,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("39484a75-b4f3-4799-86da-691afa57b299")]
   record IDataModelScriptDebugBreakpointEnumerator, lpVtbl : IDataModelScriptDebugBreakpointEnumeratorVtbl* do
     GUID = LibC::GUID.new(0x39484a75_u32, 0xb4f3_u16, 0x4799_u16, StaticArray[0x86_u8, 0xda_u8, 0x69_u8, 0x1a_u8, 0xfa_u8, 0x57_u8, 0xb2_u8, 0x99_u8])
     def query_interface(this : IDataModelScriptDebugBreakpointEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22161,7 +23246,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("de8e0945-9750-4471-ab76-a8f79d6ec350")]
   record IDataModelScriptDebug, lpVtbl : IDataModelScriptDebugVtbl* do
     GUID = LibC::GUID.new(0xde8e0945_u32, 0x9750_u16, 0x4471_u16, StaticArray[0xab_u8, 0x76_u8, 0xa8_u8, 0xf7_u8, 0x9d_u8, 0x6e_u8, 0xc3_u8, 0x50_u8])
     def query_interface(this : IDataModelScriptDebug*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22225,7 +23309,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("cbb10ed3-839e-426c-9243-e23535c1ae1a")]
   record IDataModelScriptDebug2, lpVtbl : IDataModelScriptDebug2Vtbl* do
     GUID = LibC::GUID.new(0xcbb10ed3_u32, 0x839e_u16, 0x426c_u16, StaticArray[0x92_u8, 0x43_u8, 0xe2_u8, 0x35_u8, 0x35_u8, 0xc1_u8, 0xae_u8, 0x1a_u8])
     def query_interface(this : IDataModelScriptDebug2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22295,7 +23378,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("b51887e8-bcd0-4e8f-a8c7-434398b78c37")]
   record IDebugHostModule2, lpVtbl : IDebugHostModule2Vtbl* do
     GUID = LibC::GUID.new(0xb51887e8_u32, 0xbcd0_u16, 0x4e8f_u16, StaticArray[0xa8_u8, 0xc7_u8, 0x43_u8, 0x43_u8, 0x98_u8, 0xb7_u8, 0x8c_u8, 0x37_u8])
     def query_interface(this : IDebugHostModule2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22361,7 +23443,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("a7830646-9f0c-4a31-ba19-503f33e6c8a3")]
   record IComparableConcept, lpVtbl : IComparableConceptVtbl* do
     GUID = LibC::GUID.new(0xa7830646_u32, 0x9f0c_u16, 0x4a31_u16, StaticArray[0xba_u8, 0x19_u8, 0x50_u8, 0x3f_u8, 0x33_u8, 0xe6_u8, 0xc8_u8, 0xa3_u8])
     def query_interface(this : IComparableConcept*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22388,7 +23469,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("c52d5d3d-609d-4d5d-8a82-46b0acdec4f4")]
   record IEquatableConcept, lpVtbl : IEquatableConceptVtbl* do
     GUID = LibC::GUID.new(0xc52d5d3d_u32, 0x609d_u16, 0x4d5d_u16, StaticArray[0x8a_u8, 0x82_u8, 0x46_u8, 0xb0_u8, 0xac_u8, 0xde_u8, 0xc4_u8, 0xf4_u8])
     def query_interface(this : IEquatableConcept*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22422,7 +23502,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("db01a1e3-a42b-11cf-8f20-00805f2cd064")]
   record IActiveScriptSite, lpVtbl : IActiveScriptSiteVtbl* do
     GUID = LibC::GUID.new(0xdb01a1e3_u32, 0xa42b_u16, 0x11cf_u16, StaticArray[0x8f_u8, 0x20_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x2c_u8, 0xd0_u8, 0x64_u8])
     def query_interface(this : IActiveScriptSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22472,7 +23551,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("eae1ba61-a4ed-11cf-8f20-00805f2cd064")]
   record IActiveScriptError, lpVtbl : IActiveScriptErrorVtbl* do
     GUID = LibC::GUID.new(0xeae1ba61_u32, 0xa4ed_u16, 0x11cf_u16, StaticArray[0x8f_u8, 0x20_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x2c_u8, 0xd0_u8, 0x64_u8])
     def query_interface(this : IActiveScriptError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22508,7 +23586,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("b21fb2a1-5b8f-4963-8c21-21450f84ed7f")]
   record IActiveScriptError64, lpVtbl : IActiveScriptError64Vtbl* do
     GUID = LibC::GUID.new(0xb21fb2a1_u32, 0x5b8f_u16, 0x4963_u16, StaticArray[0x8c_u8, 0x21_u8, 0x21_u8, 0x45_u8, 0xf_u8, 0x84_u8, 0xed_u8, 0x7f_u8])
     def query_interface(this : IActiveScriptError64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22545,7 +23622,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("d10f6761-83e9-11cf-8f20-00805f2cd064")]
   record IActiveScriptSiteWindow, lpVtbl : IActiveScriptSiteWindowVtbl* do
     GUID = LibC::GUID.new(0xd10f6761_u32, 0x83e9_u16, 0x11cf_u16, StaticArray[0x8f_u8, 0x20_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x2c_u8, 0xd0_u8, 0x64_u8])
     def query_interface(this : IActiveScriptSiteWindow*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22575,7 +23651,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("aedae97e-d7ee-4796-b960-7f092ae844ab")]
   record IActiveScriptSiteUIControl, lpVtbl : IActiveScriptSiteUIControlVtbl* do
     GUID = LibC::GUID.new(0xaedae97e_u32, 0xd7ee_u16, 0x4796_u16, StaticArray[0xb9_u8, 0x60_u8, 0x7f_u8, 0x9_u8, 0x2a_u8, 0xe8_u8, 0x44_u8, 0xab_u8])
     def query_interface(this : IActiveScriptSiteUIControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22602,7 +23677,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("539698a0-cdca-11cf-a5eb-00aa0047a063")]
   record IActiveScriptSiteInterruptPoll, lpVtbl : IActiveScriptSiteInterruptPollVtbl* do
     GUID = LibC::GUID.new(0x539698a0_u32, 0xcdca_u16, 0x11cf_u16, StaticArray[0xa5_u8, 0xeb_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x47_u8, 0xa0_u8, 0x63_u8])
     def query_interface(this : IActiveScriptSiteInterruptPoll*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22641,7 +23715,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("bb1a2ae1-a4f9-11cf-8f20-00805f2cd064")]
   record IActiveScript, lpVtbl : IActiveScriptVtbl* do
     GUID = LibC::GUID.new(0xbb1a2ae1_u32, 0xa4f9_u16, 0x11cf_u16, StaticArray[0x8f_u8, 0x20_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x2c_u8, 0xd0_u8, 0x64_u8])
     def query_interface(this : IActiveScript*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22706,7 +23779,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("bb1a2ae2-a4f9-11cf-8f20-00805f2cd064")]
   record IActiveScriptParse32, lpVtbl : IActiveScriptParse32Vtbl* do
     GUID = LibC::GUID.new(0xbb1a2ae2_u32, 0xa4f9_u16, 0x11cf_u16, StaticArray[0x8f_u8, 0x20_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x2c_u8, 0xd0_u8, 0x64_u8])
     def query_interface(this : IActiveScriptParse32*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22741,7 +23813,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("c7ef7658-e1ee-480e-97ea-d52cb4d76d17")]
   record IActiveScriptParse64, lpVtbl : IActiveScriptParse64Vtbl* do
     GUID = LibC::GUID.new(0xc7ef7658_u32, 0xe1ee_u16, 0x480e_u16, StaticArray[0x97_u8, 0xea_u8, 0xd5_u8, 0x2c_u8, 0xb4_u8, 0xd7_u8, 0x6d_u8, 0x17_u8])
     def query_interface(this : IActiveScriptParse64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22774,7 +23845,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("1cff0050-6fdd-11d0-9328-00a0c90dcaa9")]
   record IActiveScriptParseProcedureOld32, lpVtbl : IActiveScriptParseProcedureOld32Vtbl* do
     GUID = LibC::GUID.new(0x1cff0050_u32, 0x6fdd_u16, 0x11d0_u16, StaticArray[0x93_u8, 0x28_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0xca_u8, 0xa9_u8])
     def query_interface(this : IActiveScriptParseProcedureOld32*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22801,7 +23871,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("21f57128-08c9-4638-ba12-22d15d88dc5c")]
   record IActiveScriptParseProcedureOld64, lpVtbl : IActiveScriptParseProcedureOld64Vtbl* do
     GUID = LibC::GUID.new(0x21f57128_u32, 0x8c9_u16, 0x4638_u16, StaticArray[0xba_u8, 0x12_u8, 0x22_u8, 0xd1_u8, 0x5d_u8, 0x88_u8, 0xdc_u8, 0x5c_u8])
     def query_interface(this : IActiveScriptParseProcedureOld64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22828,7 +23897,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("aa5b6a80-b834-11d0-932f-00a0c90dcaa9")]
   record IActiveScriptParseProcedure32, lpVtbl : IActiveScriptParseProcedure32Vtbl* do
     GUID = LibC::GUID.new(0xaa5b6a80_u32, 0xb834_u16, 0x11d0_u16, StaticArray[0x93_u8, 0x2f_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0xca_u8, 0xa9_u8])
     def query_interface(this : IActiveScriptParseProcedure32*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22855,7 +23923,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("c64713b6-e029-4cc5-9200-438b72890b6a")]
   record IActiveScriptParseProcedure64, lpVtbl : IActiveScriptParseProcedure64Vtbl* do
     GUID = LibC::GUID.new(0xc64713b6_u32, 0xe029_u16, 0x4cc5_u16, StaticArray[0x92_u8, 0x0_u8, 0x43_u8, 0x8b_u8, 0x72_u8, 0x89_u8, 0xb_u8, 0x6a_u8])
     def query_interface(this : IActiveScriptParseProcedure64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22882,7 +23949,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("71ee5b20-fb04-11d1-b3a8-00a0c911e8b2")]
   record IActiveScriptParseProcedure2_32, lpVtbl : IActiveScriptParseProcedure2_32Vtbl* do
     GUID = LibC::GUID.new(0x71ee5b20_u32, 0xfb04_u16, 0x11d1_u16, StaticArray[0xb3_u8, 0xa8_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0xe8_u8, 0xb2_u8])
     def query_interface(this : IActiveScriptParseProcedure2_32*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22909,7 +23975,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("fe7c4271-210c-448d-9f54-76dab7047b28")]
   record IActiveScriptParseProcedure2_64, lpVtbl : IActiveScriptParseProcedure2_64Vtbl* do
     GUID = LibC::GUID.new(0xfe7c4271_u32, 0x210c_u16, 0x448d_u16, StaticArray[0x9f_u8, 0x54_u8, 0x76_u8, 0xda_u8, 0xb7_u8, 0x4_u8, 0x7b_u8, 0x28_u8])
     def query_interface(this : IActiveScriptParseProcedure2_64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22938,7 +24003,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("bb1a2ae3-a4f9-11cf-8f20-00805f2cd064")]
   record IActiveScriptEncode, lpVtbl : IActiveScriptEncodeVtbl* do
     GUID = LibC::GUID.new(0xbb1a2ae3_u32, 0xa4f9_u16, 0x11cf_u16, StaticArray[0x8f_u8, 0x20_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x2c_u8, 0xd0_u8, 0x64_u8])
     def query_interface(this : IActiveScriptEncode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22971,7 +24035,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("bee9b76e-cfe3-11d1-b747-00c04fc2b085")]
   record IActiveScriptHostEncode, lpVtbl : IActiveScriptHostEncodeVtbl* do
     GUID = LibC::GUID.new(0xbee9b76e_u32, 0xcfe3_u16, 0x11d1_u16, StaticArray[0xb7_u8, 0x47_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xb0_u8, 0x85_u8])
     def query_interface(this : IActiveScriptHostEncode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -22998,7 +24061,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("63cdbcb0-c1b1-11d0-9336-00a0c90dcaa9")]
   record IBindEventHandler, lpVtbl : IBindEventHandlerVtbl* do
     GUID = LibC::GUID.new(0x63cdbcb0_u32, 0xc1b1_u16, 0x11d0_u16, StaticArray[0x93_u8, 0x36_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0xca_u8, 0xa9_u8])
     def query_interface(this : IBindEventHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23027,7 +24089,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("b8da6310-e19b-11d0-933c-00a0c90dcaa9")]
   record IActiveScriptStats, lpVtbl : IActiveScriptStatsVtbl* do
     GUID = LibC::GUID.new(0xb8da6310_u32, 0xe19b_u16, 0x11d0_u16, StaticArray[0x93_u8, 0x3c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0xca_u8, 0xa9_u8])
     def query_interface(this : IActiveScriptStats*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23061,7 +24122,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("4954e0d0-fbc7-11d1-8410-006008c3fbfc")]
   record IActiveScriptProperty, lpVtbl : IActiveScriptPropertyVtbl* do
     GUID = LibC::GUID.new(0x4954e0d0_u32, 0xfbc7_u16, 0x11d1_u16, StaticArray[0x84_u8, 0x10_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0xc3_u8, 0xfb_u8, 0xfc_u8])
     def query_interface(this : IActiveScriptProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23091,7 +24151,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("1dc9ca50-06ef-11d2-8415-006008c3fbfc")]
   record ITridentEventSink, lpVtbl : ITridentEventSinkVtbl* do
     GUID = LibC::GUID.new(0x1dc9ca50_u32, 0x6ef_u16, 0x11d2_u16, StaticArray[0x84_u8, 0x15_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0xc3_u8, 0xfb_u8, 0xfc_u8])
     def query_interface(this : ITridentEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23118,7 +24177,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("6aa2c4a0-2b53-11d4-a2a0-00104bd35090")]
   record IActiveScriptGarbageCollector, lpVtbl : IActiveScriptGarbageCollectorVtbl* do
     GUID = LibC::GUID.new(0x6aa2c4a0_u32, 0x2b53_u16, 0x11d4_u16, StaticArray[0xa2_u8, 0xa0_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xd3_u8, 0x50_u8, 0x90_u8])
     def query_interface(this : IActiveScriptGarbageCollector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23145,7 +24203,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("764651d0-38de-11d4-a2a3-00104bd35090")]
   record IActiveScriptSIPInfo, lpVtbl : IActiveScriptSIPInfoVtbl* do
     GUID = LibC::GUID.new(0x764651d0_u32, 0x38de_u16, 0x11d4_u16, StaticArray[0xa2_u8, 0xa3_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xd3_u8, 0x50_u8, 0x90_u8])
     def query_interface(this : IActiveScriptSIPInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23172,7 +24229,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("4b7272ae-1955-4bfe-98b0-780621888569")]
   record IActiveScriptSiteTraceInfo, lpVtbl : IActiveScriptSiteTraceInfoVtbl* do
     GUID = LibC::GUID.new(0x4b7272ae_u32, 0x1955_u16, 0x4bfe_u16, StaticArray[0x98_u8, 0xb0_u8, 0x78_u8, 0x6_u8, 0x21_u8, 0x88_u8, 0x85_u8, 0x69_u8])
     def query_interface(this : IActiveScriptSiteTraceInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23200,7 +24256,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("c35456e7-bebf-4a1b-86a9-24d56be8b369")]
   record IActiveScriptTraceInfo, lpVtbl : IActiveScriptTraceInfoVtbl* do
     GUID = LibC::GUID.new(0xc35456e7_u32, 0xbebf_u16, 0x4a1b_u16, StaticArray[0x86_u8, 0xa9_u8, 0x24_u8, 0xd5_u8, 0x6b_u8, 0xe8_u8, 0xb3_u8, 0x69_u8])
     def query_interface(this : IActiveScriptTraceInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23230,7 +24285,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("58562769-ed52-42f7-8403-4963514e1f11")]
   record IActiveScriptStringCompare, lpVtbl : IActiveScriptStringCompareVtbl* do
     GUID = LibC::GUID.new(0x58562769_u32, 0xed52_u16, 0x42f7_u16, StaticArray[0x84_u8, 0x3_u8, 0x49_u8, 0x63_u8, 0x51_u8, 0x4e_u8, 0x1f_u8, 0x11_u8])
     def query_interface(this : IActiveScriptStringCompare*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23261,7 +24315,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c50-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugProperty, lpVtbl : IDebugPropertyVtbl* do
     GUID = LibC::GUID.new(0x51973c50_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23304,7 +24357,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c51-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IEnumDebugPropertyInfo, lpVtbl : IEnumDebugPropertyInfoVtbl* do
     GUID = LibC::GUID.new(0x51973c51_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IEnumDebugPropertyInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23349,7 +24401,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c52-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugExtendedProperty, lpVtbl : IDebugExtendedPropertyVtbl* do
     GUID = LibC::GUID.new(0x51973c52_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugExtendedProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23398,7 +24449,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c53-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IEnumDebugExtendedPropertyInfo, lpVtbl : IEnumDebugExtendedPropertyInfoVtbl* do
     GUID = LibC::GUID.new(0x51973c53_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IEnumDebugExtendedPropertyInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23440,7 +24490,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c54-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IPerPropertyBrowsing2, lpVtbl : IPerPropertyBrowsing2Vtbl* do
     GUID = LibC::GUID.new(0x51973c54_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IPerPropertyBrowsing2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23476,7 +24525,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c55-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugPropertyEnumType_All, lpVtbl : IDebugPropertyEnumType_AllVtbl* do
     GUID = LibC::GUID.new(0x51973c55_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugPropertyEnumType_All*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23503,7 +24551,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c56-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugPropertyEnumType_Locals, lpVtbl : IDebugPropertyEnumType_LocalsVtbl* do
     GUID = LibC::GUID.new(0x51973c56_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugPropertyEnumType_Locals*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23530,7 +24577,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c57-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugPropertyEnumType_Arguments, lpVtbl : IDebugPropertyEnumType_ArgumentsVtbl* do
     GUID = LibC::GUID.new(0x51973c57_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugPropertyEnumType_Arguments*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23557,7 +24603,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c58-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugPropertyEnumType_LocalsPlusArgs, lpVtbl : IDebugPropertyEnumType_LocalsPlusArgsVtbl* do
     GUID = LibC::GUID.new(0x51973c58_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugPropertyEnumType_LocalsPlusArgs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23584,7 +24629,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c59-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugPropertyEnumType_Registers, lpVtbl : IDebugPropertyEnumType_RegistersVtbl* do
     GUID = LibC::GUID.new(0x51973c59_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugPropertyEnumType_Registers*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23613,7 +24657,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c10-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IActiveScriptDebug32, lpVtbl : IActiveScriptDebug32Vtbl* do
     GUID = LibC::GUID.new(0x51973c10_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IActiveScriptDebug32*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23648,7 +24691,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("bc437e23-f5b8-47f4-bb79-7d1ce5483b86")]
   record IActiveScriptDebug64, lpVtbl : IActiveScriptDebug64Vtbl* do
     GUID = LibC::GUID.new(0xbc437e23_u32, 0xf5b8_u16, 0x47f4_u16, StaticArray[0xbb_u8, 0x79_u8, 0x7d_u8, 0x1c_u8, 0xe5_u8, 0x48_u8, 0x3b_u8, 0x86_u8])
     def query_interface(this : IActiveScriptDebug64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23684,7 +24726,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c11-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IActiveScriptSiteDebug32, lpVtbl : IActiveScriptSiteDebug32Vtbl* do
     GUID = LibC::GUID.new(0x51973c11_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IActiveScriptSiteDebug32*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23723,7 +24764,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("d6b96b0a-7463-402c-92ac-89984226942f")]
   record IActiveScriptSiteDebug64, lpVtbl : IActiveScriptSiteDebug64Vtbl* do
     GUID = LibC::GUID.new(0xd6b96b0a_u32, 0x7463_u16, 0x402c_u16, StaticArray[0x92_u8, 0xac_u8, 0x89_u8, 0x98_u8, 0x42_u8, 0x26_u8, 0x94_u8, 0x2f_u8])
     def query_interface(this : IActiveScriptSiteDebug64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23759,7 +24799,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("bb722ccb-6ad2-41c6-b780-af9c03ee69f5")]
   record IActiveScriptSiteDebugEx, lpVtbl : IActiveScriptSiteDebugExVtbl* do
     GUID = LibC::GUID.new(0xbb722ccb_u32, 0x6ad2_u16, 0x41c6_u16, StaticArray[0xb7_u8, 0x80_u8, 0xaf_u8, 0x9c_u8, 0x3_u8, 0xee_u8, 0x69_u8, 0xf5_u8])
     def query_interface(this : IActiveScriptSiteDebugEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23790,7 +24829,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c12-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IActiveScriptErrorDebug, lpVtbl : IActiveScriptErrorDebugVtbl* do
     GUID = LibC::GUID.new(0x51973c12_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IActiveScriptErrorDebug*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23830,7 +24868,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c13-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugCodeContext, lpVtbl : IDebugCodeContextVtbl* do
     GUID = LibC::GUID.new(0x51973c13_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugCodeContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23864,7 +24901,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c14-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugExpression, lpVtbl : IDebugExpressionVtbl* do
     GUID = LibC::GUID.new(0x51973c14_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugExpression*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23904,7 +24940,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c15-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugExpressionContext, lpVtbl : IDebugExpressionContextVtbl* do
     GUID = LibC::GUID.new(0x51973c15_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugExpressionContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23934,7 +24969,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c16-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugExpressionCallBack, lpVtbl : IDebugExpressionCallBackVtbl* do
     GUID = LibC::GUID.new(0x51973c16_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugExpressionCallBack*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -23965,7 +24999,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c17-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugStackFrame, lpVtbl : IDebugStackFrameVtbl* do
     GUID = LibC::GUID.new(0x51973c17_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugStackFrame*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24004,7 +25037,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c18-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugStackFrameSniffer, lpVtbl : IDebugStackFrameSnifferVtbl* do
     GUID = LibC::GUID.new(0x51973c18_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugStackFrameSniffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24032,7 +25064,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c19-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugStackFrameSnifferEx32, lpVtbl : IDebugStackFrameSnifferEx32Vtbl* do
     GUID = LibC::GUID.new(0x51973c19_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugStackFrameSnifferEx32*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24063,7 +25094,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("8cd12af4-49c1-4d52-8d8a-c146f47581aa")]
   record IDebugStackFrameSnifferEx64, lpVtbl : IDebugStackFrameSnifferEx64Vtbl* do
     GUID = LibC::GUID.new(0x8cd12af4_u32, 0x49c1_u16, 0x4d52_u16, StaticArray[0x8d_u8, 0x8a_u8, 0xc1_u8, 0x46_u8, 0xf4_u8, 0x75_u8, 0x81_u8, 0xaa_u8])
     def query_interface(this : IDebugStackFrameSnifferEx64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24095,7 +25125,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c1a-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugSyncOperation, lpVtbl : IDebugSyncOperationVtbl* do
     GUID = LibC::GUID.new(0x51973c1a_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugSyncOperation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24132,7 +25161,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c1b-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugAsyncOperation, lpVtbl : IDebugAsyncOperationVtbl* do
     GUID = LibC::GUID.new(0x51973c1b_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugAsyncOperation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24171,7 +25199,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c1c-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugAsyncOperationCallBack, lpVtbl : IDebugAsyncOperationCallBackVtbl* do
     GUID = LibC::GUID.new(0x51973c1c_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugAsyncOperationCallBack*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24201,7 +25228,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c1d-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IEnumDebugCodeContexts, lpVtbl : IEnumDebugCodeContextsVtbl* do
     GUID = LibC::GUID.new(0x51973c1d_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IEnumDebugCodeContexts*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24240,7 +25266,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c1e-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IEnumDebugStackFrames, lpVtbl : IEnumDebugStackFramesVtbl* do
     GUID = LibC::GUID.new(0x51973c1e_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IEnumDebugStackFrames*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24280,7 +25305,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("0dc38853-c1b0-4176-a984-b298361027af")]
   record IEnumDebugStackFrames64, lpVtbl : IEnumDebugStackFrames64Vtbl* do
     GUID = LibC::GUID.new(0xdc38853_u32, 0xc1b0_u16, 0x4176_u16, StaticArray[0xa9_u8, 0x84_u8, 0xb2_u8, 0x98_u8, 0x36_u8, 0x10_u8, 0x27_u8, 0xaf_u8])
     def query_interface(this : IEnumDebugStackFrames64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24320,7 +25344,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c1f-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugDocumentInfo, lpVtbl : IDebugDocumentInfoVtbl* do
     GUID = LibC::GUID.new(0x51973c1f_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugDocumentInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24352,7 +25375,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c20-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugDocumentProvider, lpVtbl : IDebugDocumentProviderVtbl* do
     GUID = LibC::GUID.new(0x51973c20_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugDocumentProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24386,7 +25408,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c21-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugDocument, lpVtbl : IDebugDocumentVtbl* do
     GUID = LibC::GUID.new(0x51973c21_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugDocument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24424,7 +25445,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c22-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugDocumentText, lpVtbl : IDebugDocumentTextVtbl* do
     GUID = LibC::GUID.new(0x51973c22_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugDocumentText*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24480,7 +25500,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c23-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugDocumentTextEvents, lpVtbl : IDebugDocumentTextEventsVtbl* do
     GUID = LibC::GUID.new(0x51973c23_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugDocumentTextEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24533,7 +25552,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c24-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugDocumentTextAuthor, lpVtbl : IDebugDocumentTextAuthorVtbl* do
     GUID = LibC::GUID.new(0x51973c24_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugDocumentTextAuthor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24595,7 +25613,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c25-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugDocumentTextExternalAuthor, lpVtbl : IDebugDocumentTextExternalAuthorVtbl* do
     GUID = LibC::GUID.new(0x51973c25_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugDocumentTextExternalAuthor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24645,7 +25662,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c26-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugDocumentHelper32, lpVtbl : IDebugDocumentHelper32Vtbl* do
     GUID = LibC::GUID.new(0x51973c26_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugDocumentHelper32*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24740,7 +25756,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("c4c7363c-20fd-47f9-bd82-4855e0150871")]
   record IDebugDocumentHelper64, lpVtbl : IDebugDocumentHelper64Vtbl* do
     GUID = LibC::GUID.new(0xc4c7363c_u32, 0x20fd_u16, 0x47f9_u16, StaticArray[0xbd_u8, 0x82_u8, 0x48_u8, 0x55_u8, 0xe0_u8, 0x15_u8, 0x8_u8, 0x71_u8])
     def query_interface(this : IDebugDocumentHelper64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24823,7 +25838,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c27-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugDocumentHost, lpVtbl : IDebugDocumentHostVtbl* do
     GUID = LibC::GUID.new(0x51973c27_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugDocumentHost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24866,7 +25880,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c28-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugDocumentContext, lpVtbl : IDebugDocumentContextVtbl* do
     GUID = LibC::GUID.new(0x51973c28_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugDocumentContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24896,7 +25909,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c29-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugSessionProvider, lpVtbl : IDebugSessionProviderVtbl* do
     GUID = LibC::GUID.new(0x51973c29_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugSessionProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24928,7 +25940,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c2a-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IApplicationDebugger, lpVtbl : IApplicationDebuggerVtbl* do
     GUID = LibC::GUID.new(0x51973c2a_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IApplicationDebugger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -24971,7 +25982,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c2b-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IApplicationDebuggerUI, lpVtbl : IApplicationDebuggerUIVtbl* do
     GUID = LibC::GUID.new(0x51973c2b_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IApplicationDebuggerUI*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25003,7 +26013,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c2c-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IMachineDebugManager, lpVtbl : IMachineDebugManagerVtbl* do
     GUID = LibC::GUID.new(0x51973c2c_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IMachineDebugManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25038,7 +26047,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c2d-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IMachineDebugManagerCookie, lpVtbl : IMachineDebugManagerCookieVtbl* do
     GUID = LibC::GUID.new(0x51973c2d_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IMachineDebugManagerCookie*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25072,7 +26080,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c2e-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IMachineDebugManagerEvents, lpVtbl : IMachineDebugManagerEventsVtbl* do
     GUID = LibC::GUID.new(0x51973c2e_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IMachineDebugManagerEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25106,7 +26113,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c2f-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IProcessDebugManager32, lpVtbl : IProcessDebugManager32Vtbl* do
     GUID = LibC::GUID.new(0x51973c2f_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IProcessDebugManager32*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25149,7 +26155,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("56b9fc1c-63a9-4cc1-ac21-087d69a17fab")]
   record IProcessDebugManager64, lpVtbl : IProcessDebugManager64Vtbl* do
     GUID = LibC::GUID.new(0x56b9fc1c_u32, 0x63a9_u16, 0x4cc1_u16, StaticArray[0xac_u8, 0x21_u8, 0x8_u8, 0x7d_u8, 0x69_u8, 0xa1_u8, 0x7f_u8, 0xab_u8])
     def query_interface(this : IProcessDebugManager64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25198,7 +26203,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c30-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IRemoteDebugApplication, lpVtbl : IRemoteDebugApplicationVtbl* do
     GUID = LibC::GUID.new(0x51973c30_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IRemoteDebugApplication*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25285,7 +26289,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c32-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugApplication32, lpVtbl : IDebugApplication32Vtbl* do
     GUID = LibC::GUID.new(0x51973c32_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugApplication32*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25432,7 +26435,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("4dedc754-04c7-4f10-9e60-16a390fe6e62")]
   record IDebugApplication64, lpVtbl : IDebugApplication64Vtbl* do
     GUID = LibC::GUID.new(0x4dedc754_u32, 0x4c7_u16, 0x4f10_u16, StaticArray[0x9e_u8, 0x60_u8, 0x16_u8, 0xa3_u8, 0x90_u8, 0xfe_u8, 0x6e_u8, 0x62_u8])
     def query_interface(this : IDebugApplication64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25558,7 +26560,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c33-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IRemoteDebugApplicationEvents, lpVtbl : IRemoteDebugApplicationEventsVtbl* do
     GUID = LibC::GUID.new(0x51973c33_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IRemoteDebugApplicationEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25620,7 +26621,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c34-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugApplicationNode, lpVtbl : IDebugApplicationNodeVtbl* do
     GUID = LibC::GUID.new(0x51973c34_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugApplicationNode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25674,7 +26674,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c35-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugApplicationNodeEvents, lpVtbl : IDebugApplicationNodeEventsVtbl* do
     GUID = LibC::GUID.new(0x51973c35_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugApplicationNodeEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25717,7 +26716,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("a2e3aa3b-aa8d-4ebf-84cd-648b737b8c13")]
   record AsyncIDebugApplicationNodeEvents, lpVtbl : AsyncIDebugApplicationNodeEventsVtbl* do
     GUID = LibC::GUID.new(0xa2e3aa3b_u32, 0xaa8d_u16, 0x4ebf_u16, StaticArray[0x84_u8, 0xcd_u8, 0x64_u8, 0x8b_u8, 0x73_u8, 0x7b_u8, 0x8c_u8, 0x13_u8])
     def query_interface(this : AsyncIDebugApplicationNodeEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25765,7 +26763,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c36-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugThreadCall32, lpVtbl : IDebugThreadCall32Vtbl* do
     GUID = LibC::GUID.new(0x51973c36_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugThreadCall32*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25792,7 +26789,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("cb3fa335-e979-42fd-9fcf-a7546a0f3905")]
   record IDebugThreadCall64, lpVtbl : IDebugThreadCall64Vtbl* do
     GUID = LibC::GUID.new(0xcb3fa335_u32, 0xe979_u16, 0x42fd_u16, StaticArray[0x9f_u8, 0xcf_u8, 0xa7_u8, 0x54_u8, 0x6a_u8, 0xf_u8, 0x39_u8, 0x5_u8])
     def query_interface(this : IDebugThreadCall64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25827,7 +26823,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c37-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IRemoteDebugApplicationThread, lpVtbl : IRemoteDebugApplicationThreadVtbl* do
     GUID = LibC::GUID.new(0x51973c37_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IRemoteDebugApplicationThread*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25891,7 +26886,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c38-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugApplicationThread, lpVtbl : IDebugApplicationThreadVtbl* do
     GUID = LibC::GUID.new(0x51973c38_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugApplicationThread*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -25971,7 +26965,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("9dac5886-dbad-456d-9dee-5dec39ab3dda")]
   record IDebugApplicationThread64, lpVtbl : IDebugApplicationThread64Vtbl* do
     GUID = LibC::GUID.new(0x9dac5886_u32, 0xdbad_u16, 0x456d_u16, StaticArray[0x9d_u8, 0xee_u8, 0x5d_u8, 0xec_u8, 0x39_u8, 0xab_u8, 0x3d_u8, 0xda_u8])
     def query_interface(this : IDebugApplicationThread64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26040,7 +27033,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c39-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugCookie, lpVtbl : IDebugCookieVtbl* do
     GUID = LibC::GUID.new(0x51973c39_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugCookie*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26070,7 +27062,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c3a-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IEnumDebugApplicationNodes, lpVtbl : IEnumDebugApplicationNodesVtbl* do
     GUID = LibC::GUID.new(0x51973c3a_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IEnumDebugApplicationNodes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26109,7 +27100,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c3b-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IEnumRemoteDebugApplications, lpVtbl : IEnumRemoteDebugApplicationsVtbl* do
     GUID = LibC::GUID.new(0x51973c3b_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IEnumRemoteDebugApplications*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26148,7 +27138,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c3c-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IEnumRemoteDebugApplicationThreads, lpVtbl : IEnumRemoteDebugApplicationThreadsVtbl* do
     GUID = LibC::GUID.new(0x51973c3c_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IEnumRemoteDebugApplicationThreads*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26186,7 +27175,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c05-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugFormatter, lpVtbl : IDebugFormatterVtbl* do
     GUID = LibC::GUID.new(0x51973c05_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugFormatter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26222,7 +27210,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c3e-cb0c-11d0-b5c9-00a0244a0e7a")]
   record ISimpleConnectionPoint, lpVtbl : ISimpleConnectionPointVtbl* do
     GUID = LibC::GUID.new(0x51973c3e_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : ISimpleConnectionPoint*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26260,7 +27247,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c3f-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IDebugHelper, lpVtbl : IDebugHelperVtbl* do
     GUID = LibC::GUID.new(0x51973c3f_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26296,7 +27282,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c40-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IEnumDebugExpressionContexts, lpVtbl : IEnumDebugExpressionContextsVtbl* do
     GUID = LibC::GUID.new(0x51973c40_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IEnumDebugExpressionContexts*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26332,7 +27317,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("51973c41-cb0c-11d0-b5c9-00a0244a0e7a")]
   record IProvideExpressionContexts, lpVtbl : IProvideExpressionContextsVtbl* do
     GUID = LibC::GUID.new(0x51973c41_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IProvideExpressionContexts*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26361,7 +27345,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("784b5ff0-69b0-47d1-a7dc-2518f4230e90")]
   record IActiveScriptProfilerControl, lpVtbl : IActiveScriptProfilerControlVtbl* do
     GUID = LibC::GUID.new(0x784b5ff0_u32, 0x69b0_u16, 0x47d1_u16, StaticArray[0xa7_u8, 0xdc_u8, 0x25_u8, 0x18_u8, 0xf4_u8, 0x23_u8, 0xe_u8, 0x90_u8])
     def query_interface(this : IActiveScriptProfilerControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26398,7 +27381,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("47810165-498f-40be-94f1-653557e9e7da")]
   record IActiveScriptProfilerControl2, lpVtbl : IActiveScriptProfilerControl2Vtbl* do
     GUID = LibC::GUID.new(0x47810165_u32, 0x498f_u16, 0x40be_u16, StaticArray[0x94_u8, 0xf1_u8, 0x65_u8, 0x35_u8, 0x57_u8, 0xe9_u8, 0xe7_u8, 0xda_u8])
     def query_interface(this : IActiveScriptProfilerControl2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26440,7 +27422,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("32e4694e-0d37-419b-b93d-fa20ded6e8ea")]
   record IActiveScriptProfilerHeapEnum, lpVtbl : IActiveScriptProfilerHeapEnumVtbl* do
     GUID = LibC::GUID.new(0x32e4694e_u32, 0xd37_u16, 0x419b_u16, StaticArray[0xb9_u8, 0x3d_u8, 0xfa_u8, 0x20_u8, 0xde_u8, 0xd6_u8, 0xe8_u8, 0xea_u8])
     def query_interface(this : IActiveScriptProfilerHeapEnum*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26481,7 +27462,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("0b403015-f381-4023-a5d0-6fed076de716")]
   record IActiveScriptProfilerControl3, lpVtbl : IActiveScriptProfilerControl3Vtbl* do
     GUID = LibC::GUID.new(0xb403015_u32, 0xf381_u16, 0x4023_u16, StaticArray[0xa5_u8, 0xd0_u8, 0x6f_u8, 0xed_u8, 0x7_u8, 0x6d_u8, 0xe7_u8, 0x16_u8])
     def query_interface(this : IActiveScriptProfilerControl3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26529,7 +27509,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("160f94fd-9dbc-40d4-9eac-2b71db3132f4")]
   record IActiveScriptProfilerControl4, lpVtbl : IActiveScriptProfilerControl4Vtbl* do
     GUID = LibC::GUID.new(0x160f94fd_u32, 0x9dbc_u16, 0x40d4_u16, StaticArray[0x9e_u8, 0xac_u8, 0x2b_u8, 0x71_u8, 0xdb_u8, 0x31_u8, 0x32_u8, 0xf4_u8])
     def query_interface(this : IActiveScriptProfilerControl4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26581,7 +27560,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("1c01a2d1-8f0f-46a5-9720-0d7ed2c62f0a")]
   record IActiveScriptProfilerControl5, lpVtbl : IActiveScriptProfilerControl5Vtbl* do
     GUID = LibC::GUID.new(0x1c01a2d1_u32, 0x8f0f_u16, 0x46a5_u16, StaticArray[0x97_u8, 0x20_u8, 0xd_u8, 0x7e_u8, 0xd2_u8, 0xc6_u8, 0x2f_u8, 0xa_u8])
     def query_interface(this : IActiveScriptProfilerControl5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26634,7 +27612,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("740eca23-7d9d-42e5-ba9d-f8b24b1c7a9b")]
   record IActiveScriptProfilerCallback, lpVtbl : IActiveScriptProfilerCallbackVtbl* do
     GUID = LibC::GUID.new(0x740eca23_u32, 0x7d9d_u16, 0x42e5_u16, StaticArray[0xba_u8, 0x9d_u8, 0xf8_u8, 0xb2_u8, 0x4b_u8, 0x1c_u8, 0x7a_u8, 0x9b_u8])
     def query_interface(this : IActiveScriptProfilerCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26683,7 +27660,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("31b7f8ad-a637-409c-b22f-040995b6103d")]
   record IActiveScriptProfilerCallback2, lpVtbl : IActiveScriptProfilerCallback2Vtbl* do
     GUID = LibC::GUID.new(0x31b7f8ad_u32, 0xa637_u16, 0x409c_u16, StaticArray[0xb2_u8, 0x2f_u8, 0x4_u8, 0x9_u8, 0x95_u8, 0xb6_u8, 0x10_u8, 0x3d_u8])
     def query_interface(this : IActiveScriptProfilerCallback2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26739,7 +27715,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("6ac5ad25-2037-4687-91df-b59979d93d73")]
   record IActiveScriptProfilerCallback3, lpVtbl : IActiveScriptProfilerCallback3Vtbl* do
     GUID = LibC::GUID.new(0x6ac5ad25_u32, 0x2037_u16, 0x4687_u16, StaticArray[0x91_u8, 0xdf_u8, 0xb5_u8, 0x99_u8, 0x79_u8, 0xd9_u8, 0x3d_u8, 0x73_u8])
     def query_interface(this : IActiveScriptProfilerCallback3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26799,7 +27774,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("0aee2a94-bcbb-11d0-8c72-00c04fc2b085")]
   record IScriptNode, lpVtbl : IScriptNodeVtbl* do
     GUID = LibC::GUID.new(0xaee2a94_u32, 0xbcbb_u16, 0x11d0_u16, StaticArray[0x8c_u8, 0x72_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xb0_u8, 0x85_u8])
     def query_interface(this : IScriptNode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26873,7 +27847,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("0aee2a95-bcbb-11d0-8c72-00c04fc2b085")]
   record IScriptEntry, lpVtbl : IScriptEntryVtbl* do
     GUID = LibC::GUID.new(0xaee2a95_u32, 0xbcbb_u16, 0x11d0_u16, StaticArray[0x8c_u8, 0x72_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xb0_u8, 0x85_u8])
     def query_interface(this : IScriptEntry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -26986,7 +27959,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("0aee2a96-bcbb-11d0-8c72-00c04fc2b085")]
   record IScriptScriptlet, lpVtbl : IScriptScriptletVtbl* do
     GUID = LibC::GUID.new(0xaee2a96_u32, 0xbcbb_u16, 0x11d0_u16, StaticArray[0x8c_u8, 0x72_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xb0_u8, 0x85_u8])
     def query_interface(this : IScriptScriptlet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27104,7 +28076,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("9c109da0-7006-11d1-b36c-00a0c911e8b2")]
   record IActiveScriptAuthor, lpVtbl : IActiveScriptAuthorVtbl* do
     GUID = LibC::GUID.new(0x9c109da0_u32, 0x7006_u16, 0x11d1_u16, StaticArray[0xb3_u8, 0x6c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0xe8_u8, 0xb2_u8])
     def query_interface(this : IActiveScriptAuthor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27170,7 +28141,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("7e2d4b70-bd9a-11d0-9336-00a0c90dcaa9")]
   record IActiveScriptAuthorProcedure, lpVtbl : IActiveScriptAuthorProcedureVtbl* do
     GUID = LibC::GUID.new(0x7e2d4b70_u32, 0xbd9a_u16, 0x11d0_u16, StaticArray[0x93_u8, 0x36_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0xca_u8, 0xa9_u8])
     def query_interface(this : IActiveScriptAuthorProcedure*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27199,7 +28169,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("90a7734e-841b-4f77-9384-a2891e76e7e2")]
   record IDebugApplicationNode100, lpVtbl : IDebugApplicationNode100Vtbl* do
     GUID = LibC::GUID.new(0x90a7734e_u32, 0x841b_u16, 0x4f77_u16, StaticArray[0x93_u8, 0x84_u8, 0xa2_u8, 0x89_u8, 0x1e_u8, 0x76_u8, 0xe7_u8, 0xe2_u8])
     def query_interface(this : IDebugApplicationNode100*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27233,7 +28202,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("379bfbe1-c6c9-432a-93e1-6d17656c538c")]
   record IWebAppDiagnosticsSetup, lpVtbl : IWebAppDiagnosticsSetupVtbl* do
     GUID = LibC::GUID.new(0x379bfbe1_u32, 0xc6c9_u16, 0x432a_u16, StaticArray[0x93_u8, 0xe1_u8, 0x6d_u8, 0x17_u8, 0x65_u8, 0x6c_u8, 0x53_u8, 0x8c_u8])
     def query_interface(this : IWebAppDiagnosticsSetup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27265,7 +28233,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("d5fe005b-2836-485e-b1f9-89d91aa24fd4")]
   record IRemoteDebugApplication110, lpVtbl : IRemoteDebugApplication110Vtbl* do
     GUID = LibC::GUID.new(0xd5fe005b_u32, 0x2836_u16, 0x485e_u16, StaticArray[0xb1_u8, 0xf9_u8, 0x89_u8, 0xd9_u8, 0x1a_u8, 0xa2_u8, 0x4f_u8, 0xd4_u8])
     def query_interface(this : IRemoteDebugApplication110*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27303,7 +28270,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("bdb3b5de-89f2-4e11-84a5-97445f941c7d")]
   record IDebugApplication11032, lpVtbl : IDebugApplication11032Vtbl* do
     GUID = LibC::GUID.new(0xbdb3b5de_u32, 0x89f2_u16, 0x4e11_u16, StaticArray[0x84_u8, 0xa5_u8, 0x97_u8, 0x44_u8, 0x5f_u8, 0x94_u8, 0x1c_u8, 0x7d_u8])
     def query_interface(this : IDebugApplication11032*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27350,7 +28316,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("2039d958-4eeb-496a-87bb-2e5201eadeef")]
   record IDebugApplication11064, lpVtbl : IDebugApplication11064Vtbl* do
     GUID = LibC::GUID.new(0x2039d958_u32, 0x4eeb_u16, 0x496a_u16, StaticArray[0x87_u8, 0xbb_u8, 0x2e_u8, 0x52_u8, 0x1_u8, 0xea_u8, 0xde_u8, 0xef_u8])
     def query_interface(this : IDebugApplication11064*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27392,7 +28357,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("16ff3a42-a5f5-432b-b625-8e8e16f57e15")]
   record IWebAppDiagnosticsObjectInitialization, lpVtbl : IWebAppDiagnosticsObjectInitializationVtbl* do
     GUID = LibC::GUID.new(0x16ff3a42_u32, 0xa5f5_u16, 0x432b_u16, StaticArray[0xb6_u8, 0x25_u8, 0x8e_u8, 0x8e_u8, 0x16_u8, 0xf5_u8, 0x7e_u8, 0x15_u8])
     def query_interface(this : IWebAppDiagnosticsObjectInitialization*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27424,7 +28388,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("73a3f82a-0fe9-4b33-ba3b-fe095f697e0a")]
   record IActiveScriptWinRTErrorDebug, lpVtbl : IActiveScriptWinRTErrorDebugVtbl* do
     GUID = LibC::GUID.new(0x73a3f82a_u32, 0xfe9_u16, 0x4b33_u16, StaticArray[0xba_u8, 0x3b_u8, 0xfe_u8, 0x9_u8, 0x5f_u8, 0x69_u8, 0x7e_u8, 0xa_u8])
     def query_interface(this : IActiveScriptWinRTErrorDebug*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27466,7 +28429,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("516e42b6-89a8-4530-937b-5f0708431442")]
   record IActiveScriptErrorDebug110, lpVtbl : IActiveScriptErrorDebug110Vtbl* do
     GUID = LibC::GUID.new(0x516e42b6_u32, 0x89a8_u16, 0x4530_u16, StaticArray[0x93_u8, 0x7b_u8, 0x5f_u8, 0x7_u8, 0x8_u8, 0x43_u8, 0x14_u8, 0x42_u8])
     def query_interface(this : IActiveScriptErrorDebug110*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27496,7 +28458,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("84e5e468-d5da-48a8-83f4-40366429007b")]
   record IDebugApplicationThreadEvents110, lpVtbl : IDebugApplicationThreadEvents110Vtbl* do
     GUID = LibC::GUID.new(0x84e5e468_u32, 0xd5da_u16, 0x48a8_u16, StaticArray[0x83_u8, 0xf4_u8, 0x40_u8, 0x36_u8, 0x64_u8, 0x29_u8, 0x0_u8, 0x7b_u8])
     def query_interface(this : IDebugApplicationThreadEvents110*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27535,7 +28496,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("2194ac5c-6561-404a-a2e9-f57d72de3702")]
   record IDebugApplicationThread11032, lpVtbl : IDebugApplicationThread11032Vtbl* do
     GUID = LibC::GUID.new(0x2194ac5c_u32, 0x6561_u16, 0x404a_u16, StaticArray[0xa2_u8, 0xe9_u8, 0xf5_u8, 0x7d_u8, 0x72_u8, 0xde_u8, 0x37_u8, 0x2_u8])
     def query_interface(this : IDebugApplicationThread11032*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27574,7 +28534,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("420aa4cc-efd8-4dac-983b-47127826917d")]
   record IDebugApplicationThread11064, lpVtbl : IDebugApplicationThread11064Vtbl* do
     GUID = LibC::GUID.new(0x420aa4cc_u32, 0xefd8_u16, 0x4dac_u16, StaticArray[0x98_u8, 0x3b_u8, 0x47_u8, 0x12_u8, 0x78_u8, 0x26_u8, 0x91_u8, 0x7d_u8])
     def query_interface(this : IDebugApplicationThread11064*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27610,7 +28569,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("2f69c611-6b14-47e8-9260-4bb7c52f504b")]
   record IRemoteDebugCriticalErrorEvent110, lpVtbl : IRemoteDebugCriticalErrorEvent110Vtbl* do
     GUID = LibC::GUID.new(0x2f69c611_u32, 0x6b14_u16, 0x47e8_u16, StaticArray[0x92_u8, 0x60_u8, 0x4b_u8, 0xb7_u8, 0xc5_u8, 0x2f_u8, 0x50_u8, 0x4b_u8])
     def query_interface(this : IRemoteDebugCriticalErrorEvent110*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27639,7 +28597,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("5d7741b7-af7e-4a2a-85e5-c77f4d0659fb")]
   record IScriptInvocationContext, lpVtbl : IScriptInvocationContextVtbl* do
     GUID = LibC::GUID.new(0x5d7741b7_u32, 0xaf7e_u16, 0x4a2a_u16, StaticArray[0x85_u8, 0xe5_u8, 0xc7_u8, 0x7f_u8, 0x4d_u8, 0x6_u8, 0x59_u8, 0xfb_u8])
     def query_interface(this : IScriptInvocationContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27678,7 +28635,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("4b509611-b6ea-4b24-adcb-d0ccfd1a7e33")]
   record IDebugStackFrame110, lpVtbl : IDebugStackFrame110Vtbl* do
     GUID = LibC::GUID.new(0x4b509611_u32, 0xb6ea_u16, 0x4b24_u16, StaticArray[0xad_u8, 0xcb_u8, 0xd0_u8, 0xcc_u8, 0xfd_u8, 0x1a_u8, 0x7e_u8, 0x33_u8])
     def query_interface(this : IDebugStackFrame110*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27723,7 +28679,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("9ff56bb6-eb89-4c0f-8823-cc2a4c0b7f26")]
   record IRemoteDebugInfoEvent110, lpVtbl : IRemoteDebugInfoEvent110Vtbl* do
     GUID = LibC::GUID.new(0x9ff56bb6_u32, 0xeb89_u16, 0x4c0f_u16, StaticArray[0x88_u8, 0x23_u8, 0xcc_u8, 0x2a_u8, 0x4c_u8, 0xb_u8, 0x7f_u8, 0x26_u8])
     def query_interface(this : IRemoteDebugInfoEvent110*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27750,7 +28705,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("be0e89da-2ac5-4c04-ac5e-59956aae3613")]
   record IJsDebug, lpVtbl : IJsDebugVtbl* do
     GUID = LibC::GUID.new(0xbe0e89da_u32, 0x2ac5_u16, 0x4c04_u16, StaticArray[0xac_u8, 0x5e_u8, 0x59_u8, 0x95_u8, 0x6a_u8, 0xae_u8, 0x36_u8, 0x13_u8])
     def query_interface(this : IJsDebug*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27780,7 +28734,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("3d587168-6a2d-4041-bd3b-0de674502862")]
   record IJsDebugProcess, lpVtbl : IJsDebugProcessVtbl* do
     GUID = LibC::GUID.new(0x3d587168_u32, 0x6a2d_u16, 0x4041_u16, StaticArray[0xbd_u8, 0x3b_u8, 0xd_u8, 0xe6_u8, 0x74_u8, 0x50_u8, 0x28_u8, 0x62_u8])
     def query_interface(this : IJsDebugProcess*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27816,7 +28769,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("db24b094-73c4-456c-a4ec-e90ea00bdfe3")]
   record IJsDebugStackWalker, lpVtbl : IJsDebugStackWalkerVtbl* do
     GUID = LibC::GUID.new(0xdb24b094_u32, 0x73c4_u16, 0x456c_u16, StaticArray[0xa4_u8, 0xec_u8, 0xe9_u8, 0xe_u8, 0xa0_u8, 0xb_u8, 0xdf_u8, 0xe3_u8])
     def query_interface(this : IJsDebugStackWalker*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27849,7 +28801,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("c9196637-ab9d-44b2-bad2-13b95b3f390e")]
   record IJsDebugFrame, lpVtbl : IJsDebugFrameVtbl* do
     GUID = LibC::GUID.new(0xc9196637_u32, 0xab9d_u16, 0x44b2_u16, StaticArray[0xba_u8, 0xd2_u8, 0x13_u8, 0xb9_u8, 0x5b_u8, 0x3f_u8, 0x39_u8, 0xe_u8])
     def query_interface(this : IJsDebugFrame*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27895,7 +28846,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("f8ffcf2b-3aa4-4320-85c3-52a312ba9633")]
   record IJsDebugProperty, lpVtbl : IJsDebugPropertyVtbl* do
     GUID = LibC::GUID.new(0xf8ffcf2b_u32, 0x3aa4_u16, 0x4320_u16, StaticArray[0x85_u8, 0xc3_u8, 0x52_u8, 0xa3_u8, 0x12_u8, 0xba_u8, 0x96_u8, 0x33_u8])
     def query_interface(this : IJsDebugProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27926,7 +28876,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("4092432f-2f0f-4fe1-b638-5b74a52cdcbe")]
   record IJsEnumDebugProperty, lpVtbl : IJsEnumDebugPropertyVtbl* do
     GUID = LibC::GUID.new(0x4092432f_u32, 0x2f0f_u16, 0x4fe1_u16, StaticArray[0xb6_u8, 0x38_u8, 0x5b_u8, 0x74_u8, 0xa5_u8, 0x2c_u8, 0xdc_u8, 0xbe_u8])
     def query_interface(this : IJsEnumDebugProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -27960,7 +28909,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("df6773e3-ed8d-488b-8a3e-5812577d1542")]
   record IJsDebugBreakPoint, lpVtbl : IJsDebugBreakPointVtbl* do
     GUID = LibC::GUID.new(0xdf6773e3_u32, 0xed8d_u16, 0x488b_u16, StaticArray[0x8a_u8, 0x3e_u8, 0x58_u8, 0x12_u8, 0x57_u8, 0x7d_u8, 0x15_u8, 0x42_u8])
     def query_interface(this : IJsDebugBreakPoint*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -28000,7 +28948,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("5e7da34b-fb51-4791-abe7-cb5bdf419755")]
   record IEnumJsStackFrames, lpVtbl : IEnumJsStackFramesVtbl* do
     GUID = LibC::GUID.new(0x5e7da34b_u32, 0xfb51_u16, 0x4791_u16, StaticArray[0xab_u8, 0xe7_u8, 0xcb_u8, 0x5b_u8, 0xdf_u8, 0x41_u8, 0x97_u8, 0x55_u8])
     def query_interface(this : IEnumJsStackFrames*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -28038,7 +28985,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("53b28977-53a1-48e5-9000-5d0dfa893931")]
   record IJsDebugDataTarget, lpVtbl : IJsDebugDataTargetVtbl* do
     GUID = LibC::GUID.new(0x53b28977_u32, 0x53a1_u16, 0x48e5_u16, StaticArray[0x90_u8, 0x0_u8, 0x5d_u8, 0xd_u8, 0xfa_u8, 0x89_u8, 0x39_u8, 0x31_u8])
     def query_interface(this : IJsDebugDataTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -28090,7 +29036,6 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  #@[Com("cb5bdc81-93c1-11cf-8f20-00805f2cd064")]
   record IObjectSafety, lpVtbl : IObjectSafetyVtbl* do
     GUID = LibC::GUID.new(0xcb5bdc81_u32, 0x93c1_u16, 0x11cf_u16, StaticArray[0x8f_u8, 0x20_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x2c_u8, 0xd0_u8, 0x64_u8])
     def query_interface(this : IObjectSafety*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -28115,8 +29060,6 @@ module Win32cr::System::Diagnostics::Debug
   @[Link("ntdll")]
   @[Link("dbgeng")]
   @[Link("dbgmodel")]
-  @[Link("api-ms-win-core-util-l1-1-1")]
-  @[Link("api-ms-win-core-errorhandling-l1-1-3")]
   @[Link("advapi32")]
   @[Link("dbghelp")]
   @[Link("imagehlp")]

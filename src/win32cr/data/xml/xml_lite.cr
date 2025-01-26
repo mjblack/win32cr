@@ -183,7 +183,6 @@ module Win32cr::Data::Xml::XmlLite
 
 
   @[Extern]
-  #@[Com("7279fc81-709d-4095-b63d-69fe4b0d9030")]
   record IXmlReader, lpVtbl : IXmlReaderVtbl* do
     GUID = LibC::GUID.new(0x7279fc81_u32, 0x709d_u16, 0x4095_u16, StaticArray[0xb6_u8, 0x3d_u8, 0x69_u8, 0xfe_u8, 0x4b_u8, 0xd_u8, 0x90_u8, 0x30_u8])
     def query_interface(this : IXmlReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -276,7 +275,6 @@ module Win32cr::Data::Xml::XmlLite
 
 
   @[Extern]
-  #@[Com("7279fc82-709d-4095-b63d-69fe4b0d9030")]
   record IXmlResolver, lpVtbl : IXmlResolverVtbl* do
     GUID = LibC::GUID.new(0x7279fc82_u32, 0x709d_u16, 0x4095_u16, StaticArray[0xb6_u8, 0x3d_u8, 0x69_u8, 0xfe_u8, 0x4b_u8, 0xd_u8, 0x90_u8, 0x30_u8])
     def query_interface(this : IXmlResolver*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -331,7 +329,6 @@ module Win32cr::Data::Xml::XmlLite
 
 
   @[Extern]
-  #@[Com("7279fc88-709d-4095-b63d-69fe4b0d9030")]
   record IXmlWriter, lpVtbl : IXmlWriterVtbl* do
     GUID = LibC::GUID.new(0x7279fc88_u32, 0x709d_u16, 0x4095_u16, StaticArray[0xb6_u8, 0x3d_u8, 0x69_u8, 0xfe_u8, 0x4b_u8, 0xd_u8, 0x90_u8, 0x30_u8])
     def query_interface(this : IXmlWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -469,7 +466,6 @@ module Win32cr::Data::Xml::XmlLite
 
 
   @[Extern]
-  #@[Com("862494c6-1310-4aad-b3cd-2dbeebf670d3")]
   record IXmlWriterLite, lpVtbl : IXmlWriterLiteVtbl* do
     GUID = LibC::GUID.new(0x862494c6_u32, 0x1310_u16, 0x4aad_u16, StaticArray[0xb3_u8, 0xcd_u8, 0x2d_u8, 0xbe_u8, 0xeb_u8, 0xf6_u8, 0x70_u8, 0xd3_u8])
     def query_interface(this : IXmlWriterLite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

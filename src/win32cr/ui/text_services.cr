@@ -673,147 +673,211 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record TS_STATUS,
-    dwDynamicFlags : UInt32,
-    dwStaticFlags : UInt32
-
-  @[Extern]
-  record TS_TEXTCHANGE,
-    acpStart : Int32,
-    acpOldEnd : Int32,
-    acpNewEnd : Int32
-
-  @[Extern]
-  record TS_SELECTIONSTYLE,
-    ase : Win32cr::UI::TextServices::TsActiveSelEnd,
-    fInterimChar : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record TS_SELECTION_ACP,
-    acpStart : Int32,
-    acpEnd : Int32,
-    style : Win32cr::UI::TextServices::TS_SELECTIONSTYLE
-
-  @[Extern]
-  record TS_SELECTION_ANCHOR,
-    paStart : Void*,
-    paEnd : Void*,
-    style : Win32cr::UI::TextServices::TS_SELECTIONSTYLE
-
-  @[Extern]
-  record TS_ATTRVAL,
-    idAttr : LibC::GUID,
-    dwOverlapId : UInt32,
-    varValue : Win32cr::System::Com::VARIANT
-
-  @[Extern]
-  record TS_RUNINFO,
-    uCount : UInt32,
-    type__ : Win32cr::UI::TextServices::TsRunType
-
-  @[Extern]
-  record TF_LANGBARITEMINFO,
-    clsidService : LibC::GUID,
-    guidItem : LibC::GUID,
-    dwStyle : UInt32,
-    ulSort : UInt32,
-    szDescription : UInt16[32]
-
-  @[Extern]
-  record TF_LBBALLOONINFO,
-    style : Win32cr::UI::TextServices::TfLBBalloonStyle,
-    bstrText : Win32cr::Foundation::BSTR
-
-  @[Extern]
-  record TF_PERSISTENT_PROPERTY_HEADER_ACP,
-    guidType : LibC::GUID,
-    ichStart : Int32,
-    cch : Int32,
-    cb : UInt32,
-    dwPrivate : UInt32,
-    clsidTIP : LibC::GUID
-
-  @[Extern]
-  record TF_LANGUAGEPROFILE,
-    clsid : LibC::GUID,
-    langid : UInt16,
-    catid : LibC::GUID,
-    fActive : Win32cr::Foundation::BOOL,
-    guidProfile : LibC::GUID
-
-  @[Extern]
-  record TF_SELECTIONSTYLE,
-    ase : Win32cr::UI::TextServices::TfActiveSelEnd,
-    fInterimChar : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record TF_SELECTION,
-    range : Void*,
-    style : Win32cr::UI::TextServices::TF_SELECTIONSTYLE
-
-  @[Extern]
-  record TF_PROPERTYVAL,
-    guidId : LibC::GUID,
-    varValue : Win32cr::System::Com::VARIANT
-
-  @[Extern]
-  record TF_HALTCOND,
-    pHaltRange : Void*,
-    aHaltPos : Win32cr::UI::TextServices::TfAnchor,
-    dwFlags : UInt32
-
-  @[Extern]
-  record TF_INPUTPROCESSORPROFILE,
-    dwProfileType : UInt32,
-    langid : UInt16,
-    clsid : LibC::GUID,
-    guidProfile : LibC::GUID,
-    catid : LibC::GUID,
-    hklSubstitute : Win32cr::UI::TextServices::HKL,
-    dwCaps : UInt32,
-    hkl : Win32cr::UI::TextServices::HKL,
-    dwFlags : UInt32
-
-  @[Extern]
-  record TF_PRESERVEDKEY,
-    uVKey : UInt32,
-    uModifiers : UInt32
-
-  @[Extern]
-  record TF_DA_COLOR,
-    type__ : Win32cr::UI::TextServices::TF_DA_COLORTYPE,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      nIndex : Int32,
-      cr : UInt32
-
+  struct TS_STATUS
+    property dwDynamicFlags : UInt32
+    property dwStaticFlags : UInt32
+    def initialize(@dwDynamicFlags : UInt32, @dwStaticFlags : UInt32)
+    end
   end
 
   @[Extern]
-  record TF_DISPLAYATTRIBUTE,
-    crText : Win32cr::UI::TextServices::TF_DA_COLOR,
-    crBk : Win32cr::UI::TextServices::TF_DA_COLOR,
-    lsStyle : Win32cr::UI::TextServices::TF_DA_LINESTYLE,
-    fBoldLine : Win32cr::Foundation::BOOL,
-    crLine : Win32cr::UI::TextServices::TF_DA_COLOR,
-    bAttr : Win32cr::UI::TextServices::TF_DA_ATTR_INFO
+  struct TS_TEXTCHANGE
+    property acpStart : Int32
+    property acpOldEnd : Int32
+    property acpNewEnd : Int32
+    def initialize(@acpStart : Int32, @acpOldEnd : Int32, @acpNewEnd : Int32)
+    end
+  end
 
   @[Extern]
-  record TF_LMLATTELEMENT,
-    dwFrameStart : UInt32,
-    dwFrameLen : UInt32,
-    dwFlags : UInt32,
-    anonymous : Anonymous_e__Union_,
-    bstrText : Win32cr::Foundation::BSTR do
+  struct TS_SELECTIONSTYLE
+    property ase : Win32cr::UI::TextServices::TsActiveSelEnd
+    property fInterimChar : Win32cr::Foundation::BOOL
+    def initialize(@ase : Win32cr::UI::TextServices::TsActiveSelEnd, @fInterimChar : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct TS_SELECTION_ACP
+    property acpStart : Int32
+    property acpEnd : Int32
+    property style : Win32cr::UI::TextServices::TS_SELECTIONSTYLE
+    def initialize(@acpStart : Int32, @acpEnd : Int32, @style : Win32cr::UI::TextServices::TS_SELECTIONSTYLE)
+    end
+  end
+
+  @[Extern]
+  struct TS_SELECTION_ANCHOR
+    property paStart : Void*
+    property paEnd : Void*
+    property style : Win32cr::UI::TextServices::TS_SELECTIONSTYLE
+    def initialize(@paStart : Void*, @paEnd : Void*, @style : Win32cr::UI::TextServices::TS_SELECTIONSTYLE)
+    end
+  end
+
+  @[Extern]
+  struct TS_ATTRVAL
+    property idAttr : LibC::GUID
+    property dwOverlapId : UInt32
+    property varValue : Win32cr::System::Com::VARIANT
+    def initialize(@idAttr : LibC::GUID, @dwOverlapId : UInt32, @varValue : Win32cr::System::Com::VARIANT)
+    end
+  end
+
+  @[Extern]
+  struct TS_RUNINFO
+    property uCount : UInt32
+    property type__ : Win32cr::UI::TextServices::TsRunType
+    def initialize(@uCount : UInt32, @type__ : Win32cr::UI::TextServices::TsRunType)
+    end
+  end
+
+  @[Extern]
+  struct TF_LANGBARITEMINFO
+    property clsidService : LibC::GUID
+    property guidItem : LibC::GUID
+    property dwStyle : UInt32
+    property ulSort : UInt32
+    property szDescription : UInt16[32]
+    def initialize(@clsidService : LibC::GUID, @guidItem : LibC::GUID, @dwStyle : UInt32, @ulSort : UInt32, @szDescription : UInt16[32])
+    end
+  end
+
+  @[Extern]
+  struct TF_LBBALLOONINFO
+    property style : Win32cr::UI::TextServices::TfLBBalloonStyle
+    property bstrText : Win32cr::Foundation::BSTR
+    def initialize(@style : Win32cr::UI::TextServices::TfLBBalloonStyle, @bstrText : Win32cr::Foundation::BSTR)
+    end
+  end
+
+  @[Extern]
+  struct TF_PERSISTENT_PROPERTY_HEADER_ACP
+    property guidType : LibC::GUID
+    property ichStart : Int32
+    property cch : Int32
+    property cb : UInt32
+    property dwPrivate : UInt32
+    property clsidTIP : LibC::GUID
+    def initialize(@guidType : LibC::GUID, @ichStart : Int32, @cch : Int32, @cb : UInt32, @dwPrivate : UInt32, @clsidTIP : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct TF_LANGUAGEPROFILE
+    property clsid : LibC::GUID
+    property langid : UInt16
+    property catid : LibC::GUID
+    property fActive : Win32cr::Foundation::BOOL
+    property guidProfile : LibC::GUID
+    def initialize(@clsid : LibC::GUID, @langid : UInt16, @catid : LibC::GUID, @fActive : Win32cr::Foundation::BOOL, @guidProfile : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct TF_SELECTIONSTYLE
+    property ase : Win32cr::UI::TextServices::TfActiveSelEnd
+    property fInterimChar : Win32cr::Foundation::BOOL
+    def initialize(@ase : Win32cr::UI::TextServices::TfActiveSelEnd, @fInterimChar : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct TF_SELECTION
+    property range : Void*
+    property style : Win32cr::UI::TextServices::TF_SELECTIONSTYLE
+    def initialize(@range : Void*, @style : Win32cr::UI::TextServices::TF_SELECTIONSTYLE)
+    end
+  end
+
+  @[Extern]
+  struct TF_PROPERTYVAL
+    property guidId : LibC::GUID
+    property varValue : Win32cr::System::Com::VARIANT
+    def initialize(@guidId : LibC::GUID, @varValue : Win32cr::System::Com::VARIANT)
+    end
+  end
+
+  @[Extern]
+  struct TF_HALTCOND
+    property pHaltRange : Void*
+    property aHaltPos : Win32cr::UI::TextServices::TfAnchor
+    property dwFlags : UInt32
+    def initialize(@pHaltRange : Void*, @aHaltPos : Win32cr::UI::TextServices::TfAnchor, @dwFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct TF_INPUTPROCESSORPROFILE
+    property dwProfileType : UInt32
+    property langid : UInt16
+    property clsid : LibC::GUID
+    property guidProfile : LibC::GUID
+    property catid : LibC::GUID
+    property hklSubstitute : Win32cr::UI::TextServices::HKL
+    property dwCaps : UInt32
+    property hkl : Win32cr::UI::TextServices::HKL
+    property dwFlags : UInt32
+    def initialize(@dwProfileType : UInt32, @langid : UInt16, @clsid : LibC::GUID, @guidProfile : LibC::GUID, @catid : LibC::GUID, @hklSubstitute : Win32cr::UI::TextServices::HKL, @dwCaps : UInt32, @hkl : Win32cr::UI::TextServices::HKL, @dwFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct TF_PRESERVEDKEY
+    property uVKey : UInt32
+    property uModifiers : UInt32
+    def initialize(@uVKey : UInt32, @uModifiers : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct TF_DA_COLOR
+    property type__ : Win32cr::UI::TextServices::TF_DA_COLORTYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      iCost : Int32
+    struct Anonymous_e__Union_
+    property nIndex : Int32
+    property cr : UInt32
+    def initialize(@nIndex : Int32, @cr : UInt32)
+    end
+    end
 
+    def initialize(@type__ : Win32cr::UI::TextServices::TF_DA_COLORTYPE, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct TF_DISPLAYATTRIBUTE
+    property crText : Win32cr::UI::TextServices::TF_DA_COLOR
+    property crBk : Win32cr::UI::TextServices::TF_DA_COLOR
+    property lsStyle : Win32cr::UI::TextServices::TF_DA_LINESTYLE
+    property fBoldLine : Win32cr::Foundation::BOOL
+    property crLine : Win32cr::UI::TextServices::TF_DA_COLOR
+    property bAttr : Win32cr::UI::TextServices::TF_DA_ATTR_INFO
+    def initialize(@crText : Win32cr::UI::TextServices::TF_DA_COLOR, @crBk : Win32cr::UI::TextServices::TF_DA_COLOR, @lsStyle : Win32cr::UI::TextServices::TF_DA_LINESTYLE, @fBoldLine : Win32cr::Foundation::BOOL, @crLine : Win32cr::UI::TextServices::TF_DA_COLOR, @bAttr : Win32cr::UI::TextServices::TF_DA_ATTR_INFO)
+    end
+  end
+
+  @[Extern]
+  struct TF_LMLATTELEMENT
+    property dwFrameStart : UInt32
+    property dwFrameLen : UInt32
+    property dwFlags : UInt32
+    property anonymous : Anonymous_e__Union_
+    property bstrText : Win32cr::Foundation::BSTR
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property iCost : Int32
+    def initialize(@iCost : Int32)
+    end
+    end
+
+    def initialize(@dwFrameStart : UInt32, @dwFrameLen : UInt32, @dwFlags : UInt32, @anonymous : Anonymous_e__Union_, @bstrText : Win32cr::Foundation::BSTR)
+    end
   end
 
   @[Extern]
@@ -850,7 +914,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("28888fe3-c2a0-483a-a3ea-8cb1ce51ff3d")]
   record ITextStoreACP, lpVtbl : ITextStoreACPVtbl* do
     GUID = LibC::GUID.new(0x28888fe3_u32, 0xc2a0_u16, 0x483a_u16, StaticArray[0xa3_u8, 0xea_u8, 0x8c_u8, 0xb1_u8, 0xce_u8, 0x51_u8, 0xff_u8, 0x3d_u8])
     def query_interface(this : ITextStoreACP*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -976,7 +1039,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("f86ad89f-5fe4-4b8d-bb9f-ef3797a84f1f")]
   record ITextStoreACP2, lpVtbl : ITextStoreACP2Vtbl* do
     GUID = LibC::GUID.new(0xf86ad89f_u32, 0x5fe4_u16, 0x4b8d_u16, StaticArray[0xbb_u8, 0x9f_u8, 0xef_u8, 0x37_u8, 0x97_u8, 0xa8_u8, 0x4f_u8, 0x1f_u8])
     def query_interface(this : ITextStoreACP2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1082,7 +1144,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("22d44c94-a419-4542-a272-ae26093ececf")]
   record ITextStoreACPSink, lpVtbl : ITextStoreACPSinkVtbl* do
     GUID = LibC::GUID.new(0x22d44c94_u32, 0xa419_u16, 0x4542_u16, StaticArray[0xa2_u8, 0x72_u8, 0xae_u8, 0x26_u8, 0x9_u8, 0x3e_u8, 0xce_u8, 0xcf_u8])
     def query_interface(this : ITextStoreACPSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1140,7 +1201,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("0feb7e34-5a60-4356-8ef7-abdec2ff7cf8")]
   record IAnchor, lpVtbl : IAnchorVtbl* do
     GUID = LibC::GUID.new(0xfeb7e34_u32, 0x5a60_u16, 0x4356_u16, StaticArray[0x8e_u8, 0xf7_u8, 0xab_u8, 0xde_u8, 0xc2_u8, 0xff_u8, 0x7c_u8, 0xf8_u8])
     def query_interface(this : IAnchor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1223,7 +1283,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("9b2077b0-5f18-4dec-bee9-3cc722f5dfe0")]
   record ITextStoreAnchor, lpVtbl : ITextStoreAnchorVtbl* do
     GUID = LibC::GUID.new(0x9b2077b0_u32, 0x5f18_u16, 0x4dec_u16, StaticArray[0xbe_u8, 0xe9_u8, 0x3c_u8, 0xc7_u8, 0x22_u8, 0xf5_u8, 0xdf_u8, 0xe0_u8])
     def query_interface(this : ITextStoreAnchor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1335,7 +1394,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("aa80e905-2021-11d2-93e0-0060b067b86e")]
   record ITextStoreAnchorSink, lpVtbl : ITextStoreAnchorSinkVtbl* do
     GUID = LibC::GUID.new(0xaa80e905_u32, 0x2021_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe0_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : ITextStoreAnchorSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1391,7 +1449,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("87955690-e627-11d2-8ddb-00105a2799b5")]
   record ITfLangBarMgr, lpVtbl : ITfLangBarMgrVtbl* do
     GUID = LibC::GUID.new(0x87955690_u32, 0xe627_u16, 0x11d2_u16, StaticArray[0x8d_u8, 0xdb_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : ITfLangBarMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1447,7 +1504,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("18a4e900-e0ae-11d2-afdd-00105a2799b5")]
   record ITfLangBarEventSink, lpVtbl : ITfLangBarEventSinkVtbl* do
     GUID = LibC::GUID.new(0x18a4e900_u32, 0xe0ae_u16, 0x11d2_u16, StaticArray[0xaf_u8, 0xdd_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : ITfLangBarEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1489,7 +1545,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("57dbe1a0-de25-11d2-afdd-00105a2799b5")]
   record ITfLangBarItemSink, lpVtbl : ITfLangBarItemSinkVtbl* do
     GUID = LibC::GUID.new(0x57dbe1a0_u32, 0xde25_u16, 0x11d2_u16, StaticArray[0xaf_u8, 0xdd_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : ITfLangBarItemSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1519,7 +1574,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("583f34d0-de25-11d2-afdd-00105a2799b5")]
   record IEnumTfLangBarItems, lpVtbl : IEnumTfLangBarItemsVtbl* do
     GUID = LibC::GUID.new(0x583f34d0_u32, 0xde25_u16, 0x11d2_u16, StaticArray[0xaf_u8, 0xdd_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : IEnumTfLangBarItems*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1566,7 +1620,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("ba468c55-9956-4fb1-a59d-52a7dd7cc6aa")]
   record ITfLangBarItemMgr, lpVtbl : ITfLangBarItemMgrVtbl* do
     GUID = LibC::GUID.new(0xba468c55_u32, 0x9956_u16, 0x4fb1_u16, StaticArray[0xa5_u8, 0x9d_u8, 0x52_u8, 0xa7_u8, 0xdd_u8, 0x7c_u8, 0xc6_u8, 0xaa_u8])
     def query_interface(this : ITfLangBarItemMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1629,7 +1682,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("73540d69-edeb-4ee9-96c9-23aa30b25916")]
   record ITfLangBarItem, lpVtbl : ITfLangBarItemVtbl* do
     GUID = LibC::GUID.new(0x73540d69_u32, 0xedeb_u16, 0x4ee9_u16, StaticArray[0x96_u8, 0xc9_u8, 0x23_u8, 0xaa_u8, 0x30_u8, 0xb2_u8, 0x59_u8, 0x16_u8])
     def query_interface(this : ITfLangBarItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1666,7 +1718,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("1449d9ab-13cf-4687-aa3e-8d8b18574396")]
   record ITfSystemLangBarItemSink, lpVtbl : ITfSystemLangBarItemSinkVtbl* do
     GUID = LibC::GUID.new(0x1449d9ab_u32, 0x13cf_u16, 0x4687_u16, StaticArray[0xaa_u8, 0x3e_u8, 0x8d_u8, 0x8b_u8, 0x18_u8, 0x57_u8, 0x43_u8, 0x96_u8])
     def query_interface(this : ITfSystemLangBarItemSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1697,7 +1748,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("1e13e9ec-6b33-4d4a-b5eb-8a92f029f356")]
   record ITfSystemLangBarItem, lpVtbl : ITfSystemLangBarItemVtbl* do
     GUID = LibC::GUID.new(0x1e13e9ec_u32, 0x6b33_u16, 0x4d4a_u16, StaticArray[0xb5_u8, 0xeb_u8, 0x8a_u8, 0x92_u8, 0xf0_u8, 0x29_u8, 0xf3_u8, 0x56_u8])
     def query_interface(this : ITfSystemLangBarItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1728,7 +1778,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("5c4ce0e5-ba49-4b52-ac6b-3b397b4f701f")]
   record ITfSystemLangBarItemText, lpVtbl : ITfSystemLangBarItemTextVtbl* do
     GUID = LibC::GUID.new(0x5c4ce0e5_u32, 0xba49_u16, 0x4b52_u16, StaticArray[0xac_u8, 0x6b_u8, 0x3b_u8, 0x39_u8, 0x7b_u8, 0x4f_u8, 0x70_u8, 0x1f_u8])
     def query_interface(this : ITfSystemLangBarItemText*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1759,7 +1808,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("45672eb9-9059-46a2-838d-4530355f6a77")]
   record ITfSystemDeviceTypeLangBarItem, lpVtbl : ITfSystemDeviceTypeLangBarItemVtbl* do
     GUID = LibC::GUID.new(0x45672eb9_u32, 0x9059_u16, 0x46a2_u16, StaticArray[0x83_u8, 0x8d_u8, 0x45_u8, 0x30_u8, 0x35_u8, 0x5f_u8, 0x6a_u8, 0x77_u8])
     def query_interface(this : ITfSystemDeviceTypeLangBarItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1797,7 +1845,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("28c7f1d0-de25-11d2-afdd-00105a2799b5")]
   record ITfLangBarItemButton, lpVtbl : ITfLangBarItemButtonVtbl* do
     GUID = LibC::GUID.new(0x28c7f1d0_u32, 0xde25_u16, 0x11d2_u16, StaticArray[0xaf_u8, 0xdd_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : ITfLangBarItemButton*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1857,7 +1904,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("a26a0525-3fae-4fa0-89ee-88a964f9f1b5")]
   record ITfLangBarItemBitmapButton, lpVtbl : ITfLangBarItemBitmapButtonVtbl* do
     GUID = LibC::GUID.new(0xa26a0525_u32, 0x3fae_u16, 0x4fa0_u16, StaticArray[0x89_u8, 0xee_u8, 0x88_u8, 0xa9_u8, 0x64_u8, 0xf9_u8, 0xf1_u8, 0xb5_u8])
     def query_interface(this : ITfLangBarItemBitmapButton*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1917,7 +1963,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("73830352-d722-4179-ada5-f045c98df355")]
   record ITfLangBarItemBitmap, lpVtbl : ITfLangBarItemBitmapVtbl* do
     GUID = LibC::GUID.new(0x73830352_u32, 0xd722_u16, 0x4179_u16, StaticArray[0xad_u8, 0xa5_u8, 0xf0_u8, 0x45_u8, 0xc9_u8, 0x8d_u8, 0xf3_u8, 0x55_u8])
     def query_interface(this : ITfLangBarItemBitmap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1968,7 +2013,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("01c2d285-d3c7-4b7b-b5b5-d97411d0c283")]
   record ITfLangBarItemBalloon, lpVtbl : ITfLangBarItemBalloonVtbl* do
     GUID = LibC::GUID.new(0x1c2d285_u32, 0xd3c7_u16, 0x4b7b_u16, StaticArray[0xb5_u8, 0xb5_u8, 0xd9_u8, 0x74_u8, 0x11_u8, 0xd0_u8, 0xc2_u8, 0x83_u8])
     def query_interface(this : ITfLangBarItemBalloon*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2013,7 +2057,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("6f8a98e4-aaa0-4f15-8c5b-07e0df0a3dd8")]
   record ITfMenu, lpVtbl : ITfMenuVtbl* do
     GUID = LibC::GUID.new(0x6f8a98e4_u32, 0xaaa0_u16, 0x4f15_u16, StaticArray[0x8c_u8, 0x5b_u8, 0x7_u8, 0xe0_u8, 0xdf_u8, 0xa_u8, 0x3d_u8, 0xd8_u8])
     def query_interface(this : ITfMenu*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2050,7 +2093,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("aa80e801-2021-11d2-93e0-0060b067b86e")]
   record ITfThreadMgr, lpVtbl : ITfThreadMgrVtbl* do
     GUID = LibC::GUID.new(0xaa80e801_u32, 0x2021_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe0_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : ITfThreadMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2119,7 +2161,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("3e90ade3-7594-4cb0-bb58-69628f5f458c")]
   record ITfThreadMgrEx, lpVtbl : ITfThreadMgrExVtbl* do
     GUID = LibC::GUID.new(0x3e90ade3_u32, 0x7594_u16, 0x4cb0_u16, StaticArray[0xbb_u8, 0x58_u8, 0x69_u8, 0x62_u8, 0x8f_u8, 0x5f_u8, 0x45_u8, 0x8c_u8])
     def query_interface(this : ITfThreadMgrEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2195,7 +2236,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("0ab198ef-6477-4ee8-8812-6780edb82d5e")]
   record ITfThreadMgr2, lpVtbl : ITfThreadMgr2Vtbl* do
     GUID = LibC::GUID.new(0xab198ef_u32, 0x6477_u16, 0x4ee8_u16, StaticArray[0x88_u8, 0x12_u8, 0x67_u8, 0x80_u8, 0xed_u8, 0xb8_u8, 0x2d_u8, 0x5e_u8])
     def query_interface(this : ITfThreadMgr2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2265,7 +2305,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("aa80e80e-2021-11d2-93e0-0060b067b86e")]
   record ITfThreadMgrEventSink, lpVtbl : ITfThreadMgrEventSinkVtbl* do
     GUID = LibC::GUID.new(0xaa80e80e_u32, 0x2021_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe0_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : ITfThreadMgrEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2305,7 +2344,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("0d2c969a-bc9c-437c-84ee-951c49b1a764")]
   record ITfConfigureSystemKeystrokeFeed, lpVtbl : ITfConfigureSystemKeystrokeFeedVtbl* do
     GUID = LibC::GUID.new(0xd2c969a_u32, 0xbc9c_u16, 0x437c_u16, StaticArray[0x84_u8, 0xee_u8, 0x95_u8, 0x1c_u8, 0x49_u8, 0xb1_u8, 0xa7_u8, 0x64_u8])
     def query_interface(this : ITfConfigureSystemKeystrokeFeed*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2338,7 +2376,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("aa80e808-2021-11d2-93e0-0060b067b86e")]
   record IEnumTfDocumentMgrs, lpVtbl : IEnumTfDocumentMgrsVtbl* do
     GUID = LibC::GUID.new(0xaa80e808_u32, 0x2021_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe0_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : IEnumTfDocumentMgrs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2379,7 +2416,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("aa80e7f4-2021-11d2-93e0-0060b067b86e")]
   record ITfDocumentMgr, lpVtbl : ITfDocumentMgrVtbl* do
     GUID = LibC::GUID.new(0xaa80e7f4_u32, 0x2021_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe0_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : ITfDocumentMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2424,7 +2460,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("8f1a7ea6-1654-4502-a86e-b2902344d507")]
   record IEnumTfContexts, lpVtbl : IEnumTfContextsVtbl* do
     GUID = LibC::GUID.new(0x8f1a7ea6_u32, 0x1654_u16, 0x4502_u16, StaticArray[0xa8_u8, 0x6e_u8, 0xb2_u8, 0x90_u8, 0x23_u8, 0x44_u8, 0xd5_u8, 0x7_u8])
     def query_interface(this : IEnumTfContexts*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2461,7 +2496,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("d7540241-f9a1-4364-befc-dbcd2c4395b7")]
   record ITfCompositionView, lpVtbl : ITfCompositionViewVtbl* do
     GUID = LibC::GUID.new(0xd7540241_u32, 0xf9a1_u16, 0x4364_u16, StaticArray[0xbe_u8, 0xfc_u8, 0xdb_u8, 0xcd_u8, 0x2c_u8, 0x43_u8, 0x95_u8, 0xb7_u8])
     def query_interface(this : ITfCompositionView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2494,7 +2528,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("5efd22ba-7838-46cb-88e2-cadb14124f8f")]
   record IEnumITfCompositionView, lpVtbl : IEnumITfCompositionViewVtbl* do
     GUID = LibC::GUID.new(0x5efd22ba_u32, 0x7838_u16, 0x46cb_u16, StaticArray[0x88_u8, 0xe2_u8, 0xca_u8, 0xdb_u8, 0x14_u8, 0x12_u8, 0x4f_u8, 0x8f_u8])
     def query_interface(this : IEnumITfCompositionView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2533,7 +2566,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("20168d64-5a8f-4a5a-b7bd-cfa29f4d0fd9")]
   record ITfComposition, lpVtbl : ITfCompositionVtbl* do
     GUID = LibC::GUID.new(0x20168d64_u32, 0x5a8f_u16, 0x4a5a_u16, StaticArray[0xb7_u8, 0xbd_u8, 0xcf_u8, 0xa2_u8, 0x9f_u8, 0x4d_u8, 0xf_u8, 0xd9_u8])
     def query_interface(this : ITfComposition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2569,7 +2601,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("a781718c-579a-4b15-a280-32b8577acc5e")]
   record ITfCompositionSink, lpVtbl : ITfCompositionSinkVtbl* do
     GUID = LibC::GUID.new(0xa781718c_u32, 0x579a_u16, 0x4b15_u16, StaticArray[0xa2_u8, 0x80_u8, 0x32_u8, 0xb8_u8, 0x57_u8, 0x7a_u8, 0xcc_u8, 0x5e_u8])
     def query_interface(this : ITfCompositionSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2599,7 +2630,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("d40c8aae-ac92-4fc7-9a11-0ee0e23aa39b")]
   record ITfContextComposition, lpVtbl : ITfContextCompositionVtbl* do
     GUID = LibC::GUID.new(0xd40c8aae_u32, 0xac92_u16, 0x4fc7_u16, StaticArray[0x9a_u8, 0x11_u8, 0xe_u8, 0xe0_u8, 0xe2_u8, 0x3a_u8, 0xa3_u8, 0x9b_u8])
     def query_interface(this : ITfContextComposition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2639,7 +2669,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("86462810-593b-4916-9764-19c08e9ce110")]
   record ITfContextOwnerCompositionServices, lpVtbl : ITfContextOwnerCompositionServicesVtbl* do
     GUID = LibC::GUID.new(0x86462810_u32, 0x593b_u16, 0x4916_u16, StaticArray[0x97_u8, 0x64_u8, 0x19_u8, 0xc0_u8, 0x8e_u8, 0x9c_u8, 0xe1_u8, 0x10_u8])
     def query_interface(this : ITfContextOwnerCompositionServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2680,7 +2709,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("5f20aa40-b57a-4f34-96ab-3576f377cc79")]
   record ITfContextOwnerCompositionSink, lpVtbl : ITfContextOwnerCompositionSinkVtbl* do
     GUID = LibC::GUID.new(0x5f20aa40_u32, 0xb57a_u16, 0x4f34_u16, StaticArray[0x96_u8, 0xab_u8, 0x35_u8, 0x76_u8, 0xf3_u8, 0x77_u8, 0xcc_u8, 0x79_u8])
     def query_interface(this : ITfContextOwnerCompositionSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2716,7 +2744,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("2433bf8e-0f9b-435c-ba2c-180611978c30")]
   record ITfContextView, lpVtbl : ITfContextViewVtbl* do
     GUID = LibC::GUID.new(0x2433bf8e_u32, 0xf9b_u16, 0x435c_u16, StaticArray[0xba_u8, 0x2c_u8, 0x18_u8, 0x6_u8, 0x11_u8, 0x97_u8, 0x8c_u8, 0x30_u8])
     def query_interface(this : ITfContextView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2755,7 +2782,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("f0c0f8dd-cf38-44e1-bb0f-68cf0d551c78")]
   record IEnumTfContextViews, lpVtbl : IEnumTfContextViewsVtbl* do
     GUID = LibC::GUID.new(0xf0c0f8dd_u32, 0xcf38_u16, 0x44e1_u16, StaticArray[0xbb_u8, 0xf_u8, 0x68_u8, 0xcf_u8, 0xd_u8, 0x55_u8, 0x1c_u8, 0x78_u8])
     def query_interface(this : IEnumTfContextViews*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2805,7 +2831,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("aa80e7fd-2021-11d2-93e0-0060b067b86e")]
   record ITfContext, lpVtbl : ITfContextVtbl* do
     GUID = LibC::GUID.new(0xaa80e7fd_u32, 0x2021_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe0_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : ITfContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2874,7 +2899,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("0fab9bdb-d250-4169-84e5-6be118fdd7a8")]
   record ITfQueryEmbedded, lpVtbl : ITfQueryEmbeddedVtbl* do
     GUID = LibC::GUID.new(0xfab9bdb_u32, 0xd250_u16, 0x4169_u16, StaticArray[0x84_u8, 0xe5_u8, 0x6b_u8, 0xe1_u8, 0x18_u8, 0xfd_u8, 0xd7_u8, 0xa8_u8])
     def query_interface(this : ITfQueryEmbedded*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2902,7 +2926,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("55ce16ba-3014-41c1-9ceb-fade1446ac6c")]
   record ITfInsertAtSelection, lpVtbl : ITfInsertAtSelectionVtbl* do
     GUID = LibC::GUID.new(0x55ce16ba_u32, 0x3014_u16, 0x41c1_u16, StaticArray[0x9c_u8, 0xeb_u8, 0xfa_u8, 0xde_u8, 0x14_u8, 0x46_u8, 0xac_u8, 0x6c_u8])
     def query_interface(this : ITfInsertAtSelection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2932,7 +2955,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("01689689-7acb-4e9b-ab7c-7ea46b12b522")]
   record ITfCleanupContextSink, lpVtbl : ITfCleanupContextSinkVtbl* do
     GUID = LibC::GUID.new(0x1689689_u32, 0x7acb_u16, 0x4e9b_u16, StaticArray[0xab_u8, 0x7c_u8, 0x7e_u8, 0xa4_u8, 0x6b_u8, 0x12_u8, 0xb5_u8, 0x22_u8])
     def query_interface(this : ITfCleanupContextSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2960,7 +2982,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("45c35144-154e-4797-bed8-d33ae7bf8794")]
   record ITfCleanupContextDurationSink, lpVtbl : ITfCleanupContextDurationSinkVtbl* do
     GUID = LibC::GUID.new(0x45c35144_u32, 0x154e_u16, 0x4797_u16, StaticArray[0xbe_u8, 0xd8_u8, 0xd3_u8, 0x3a_u8, 0xe7_u8, 0xbf_u8, 0x87_u8, 0x94_u8])
     def query_interface(this : ITfCleanupContextDurationSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2993,7 +3014,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("17d49a3d-f8b8-4b2f-b254-52319dd64c53")]
   record ITfReadOnlyProperty, lpVtbl : ITfReadOnlyPropertyVtbl* do
     GUID = LibC::GUID.new(0x17d49a3d_u32, 0xf8b8_u16, 0x4b2f_u16, StaticArray[0xb2_u8, 0x54_u8, 0x52_u8, 0x31_u8, 0x9d_u8, 0xd6_u8, 0x4c_u8, 0x53_u8])
     def query_interface(this : ITfReadOnlyProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3032,7 +3052,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("8ed8981b-7c10-4d7d-9fb3-ab72e9c75f72")]
   record IEnumTfPropertyValue, lpVtbl : IEnumTfPropertyValueVtbl* do
     GUID = LibC::GUID.new(0x8ed8981b_u32, 0x7c10_u16, 0x4d7d_u16, StaticArray[0x9f_u8, 0xb3_u8, 0xab_u8, 0x72_u8, 0xe9_u8, 0xc7_u8, 0x5f_u8, 0x72_u8])
     def query_interface(this : IEnumTfPropertyValue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3069,7 +3088,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("09d146cd-a544-4132-925b-7afa8ef322d0")]
   record ITfMouseTracker, lpVtbl : ITfMouseTrackerVtbl* do
     GUID = LibC::GUID.new(0x9d146cd_u32, 0xa544_u16, 0x4132_u16, StaticArray[0x92_u8, 0x5b_u8, 0x7a_u8, 0xfa_u8, 0x8e_u8, 0xf3_u8, 0x22_u8, 0xd0_u8])
     def query_interface(this : ITfMouseTracker*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3100,7 +3118,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("3bdd78e2-c16e-47fd-b883-ce6facc1a208")]
   record ITfMouseTrackerACP, lpVtbl : ITfMouseTrackerACPVtbl* do
     GUID = LibC::GUID.new(0x3bdd78e2_u32, 0xc16e_u16, 0x47fd_u16, StaticArray[0xb8_u8, 0x83_u8, 0xce_u8, 0x6f_u8, 0xac_u8, 0xc1_u8, 0xa2_u8, 0x8_u8])
     def query_interface(this : ITfMouseTrackerACP*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3130,7 +3147,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("a1adaaa2-3a24-449d-ac96-5183e7f5c217")]
   record ITfMouseSink, lpVtbl : ITfMouseSinkVtbl* do
     GUID = LibC::GUID.new(0xa1adaaa2_u32, 0x3a24_u16, 0x449d_u16, StaticArray[0xac_u8, 0x96_u8, 0x51_u8, 0x83_u8, 0xe7_u8, 0xf5_u8, 0xc2_u8, 0x17_u8])
     def query_interface(this : ITfMouseSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3158,7 +3174,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("42d4d099-7c1a-4a89-b836-6c6f22160df0")]
   record ITfEditRecord, lpVtbl : ITfEditRecordVtbl* do
     GUID = LibC::GUID.new(0x42d4d099_u32, 0x7c1a_u16, 0x4a89_u16, StaticArray[0xb8_u8, 0x36_u8, 0x6c_u8, 0x6f_u8, 0x22_u8, 0x16_u8, 0xd_u8, 0xf0_u8])
     def query_interface(this : ITfEditRecord*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3188,7 +3203,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("8127d409-ccd3-4683-967a-b43d5b482bf7")]
   record ITfTextEditSink, lpVtbl : ITfTextEditSinkVtbl* do
     GUID = LibC::GUID.new(0x8127d409_u32, 0xccd3_u16, 0x4683_u16, StaticArray[0x96_u8, 0x7a_u8, 0xb4_u8, 0x3d_u8, 0x5b_u8, 0x48_u8, 0x2b_u8, 0xf7_u8])
     def query_interface(this : ITfTextEditSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3215,7 +3229,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("2af2d06a-dd5b-4927-a0b4-54f19c91fade")]
   record ITfTextLayoutSink, lpVtbl : ITfTextLayoutSinkVtbl* do
     GUID = LibC::GUID.new(0x2af2d06a_u32, 0xdd5b_u16, 0x4927_u16, StaticArray[0xa0_u8, 0xb4_u8, 0x54_u8, 0xf1_u8, 0x9c_u8, 0x91_u8, 0xfa_u8, 0xde_u8])
     def query_interface(this : ITfTextLayoutSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3242,7 +3255,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("6b7d8d73-b267-4f69-b32e-1ca321ce4f45")]
   record ITfStatusSink, lpVtbl : ITfStatusSinkVtbl* do
     GUID = LibC::GUID.new(0x6b7d8d73_u32, 0xb267_u16, 0x4f69_u16, StaticArray[0xb3_u8, 0x2e_u8, 0x1c_u8, 0xa3_u8, 0x21_u8, 0xce_u8, 0x4f_u8, 0x45_u8])
     def query_interface(this : ITfStatusSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3270,7 +3282,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("708fbf70-b520-416b-b06c-2c41ab44f8ba")]
   record ITfEditTransactionSink, lpVtbl : ITfEditTransactionSinkVtbl* do
     GUID = LibC::GUID.new(0x708fbf70_u32, 0xb520_u16, 0x416b_u16, StaticArray[0xb0_u8, 0x6c_u8, 0x2c_u8, 0x41_u8, 0xab_u8, 0x44_u8, 0xf8_u8, 0xba_u8])
     def query_interface(this : ITfEditTransactionSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3305,7 +3316,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("aa80e80c-2021-11d2-93e0-0060b067b86e")]
   record ITfContextOwner, lpVtbl : ITfContextOwnerVtbl* do
     GUID = LibC::GUID.new(0xaa80e80c_u32, 0x2021_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe0_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : ITfContextOwner*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3353,7 +3363,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("b23eb630-3e1c-11d3-a745-0050040ab407")]
   record ITfContextOwnerServices, lpVtbl : ITfContextOwnerServicesVtbl* do
     GUID = LibC::GUID.new(0xb23eb630_u32, 0x3e1c_u16, 0x11d3_u16, StaticArray[0xa7_u8, 0x45_u8, 0x0_u8, 0x50_u8, 0x4_u8, 0xa_u8, 0xb4_u8, 0x7_u8])
     def query_interface(this : ITfContextOwnerServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3401,7 +3410,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("0552ba5d-c835-4934-bf50-846aaa67432f")]
   record ITfContextKeyEventSink, lpVtbl : ITfContextKeyEventSinkVtbl* do
     GUID = LibC::GUID.new(0x552ba5d_u32, 0xc835_u16, 0x4934_u16, StaticArray[0xbf_u8, 0x50_u8, 0x84_u8, 0x6a_u8, 0xaa_u8, 0x67_u8, 0x43_u8, 0x2f_u8])
     def query_interface(this : ITfContextKeyEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3437,7 +3445,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("aa80e803-2021-11d2-93e0-0060b067b86e")]
   record ITfEditSession, lpVtbl : ITfEditSessionVtbl* do
     GUID = LibC::GUID.new(0xaa80e803_u32, 0x2021_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe0_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : ITfEditSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3485,7 +3492,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("aa80e7ff-2021-11d2-93e0-0060b067b86e")]
   record ITfRange, lpVtbl : ITfRangeVtbl* do
     GUID = LibC::GUID.new(0xaa80e7ff_u32, 0x2021_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe0_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : ITfRange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3598,7 +3604,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("057a6296-029b-4154-b79a-0d461d4ea94c")]
   record ITfRangeACP, lpVtbl : ITfRangeACPVtbl* do
     GUID = LibC::GUID.new(0x57a6296_u32, 0x29b_u16, 0x4154_u16, StaticArray[0xb7_u8, 0x9a_u8, 0xd_u8, 0x46_u8, 0x1d_u8, 0x4e_u8, 0xa9_u8, 0x4c_u8])
     def query_interface(this : ITfRangeACP*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3697,7 +3702,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("aa80e901-2021-11d2-93e0-0060b067b86e")]
   record ITextStoreACPServices, lpVtbl : ITextStoreACPServicesVtbl* do
     GUID = LibC::GUID.new(0xaa80e901_u32, 0x2021_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe0_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : ITextStoreACPServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3733,7 +3737,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("463a506d-6992-49d2-9b88-93d55e70bb16")]
   record ITfRangeBackup, lpVtbl : ITfRangeBackupVtbl* do
     GUID = LibC::GUID.new(0x463a506d_u32, 0x6992_u16, 0x49d2_u16, StaticArray[0x9b_u8, 0x88_u8, 0x93_u8, 0xd5_u8, 0x5e_u8, 0x70_u8, 0xbb_u8, 0x16_u8])
     def query_interface(this : ITfRangeBackup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3768,7 +3771,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("6834b120-88cb-11d2-bf45-00105a2799b5")]
   record ITfPropertyStore, lpVtbl : ITfPropertyStoreVtbl* do
     GUID = LibC::GUID.new(0x6834b120_u32, 0x88cb_u16, 0x11d2_u16, StaticArray[0xbf_u8, 0x45_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : ITfPropertyStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3822,7 +3824,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("f99d3f40-8e32-11d2-bf46-00105a2799b5")]
   record IEnumTfRanges, lpVtbl : IEnumTfRangesVtbl* do
     GUID = LibC::GUID.new(0xf99d3f40_u32, 0x8e32_u16, 0x11d2_u16, StaticArray[0xbf_u8, 0x46_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : IEnumTfRanges*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3859,7 +3860,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("2463fbf0-b0af-11d2-afc5-00105a2799b5")]
   record ITfCreatePropertyStore, lpVtbl : ITfCreatePropertyStoreVtbl* do
     GUID = LibC::GUID.new(0x2463fbf0_u32, 0xb0af_u16, 0x11d2_u16, StaticArray[0xaf_u8, 0xc5_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : ITfCreatePropertyStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3889,7 +3889,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("4ef89150-0807-11d3-8df0-00105a2799b5")]
   record ITfPersistentPropertyLoaderACP, lpVtbl : ITfPersistentPropertyLoaderACPVtbl* do
     GUID = LibC::GUID.new(0x4ef89150_u32, 0x807_u16, 0x11d3_u16, StaticArray[0x8d_u8, 0xf0_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : ITfPersistentPropertyLoaderACP*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3923,7 +3922,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("e2449660-9542-11d2-bf46-00105a2799b5")]
   record ITfProperty, lpVtbl : ITfPropertyVtbl* do
     GUID = LibC::GUID.new(0xe2449660_u32, 0x9542_u16, 0x11d2_u16, StaticArray[0xbf_u8, 0x46_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : ITfProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3974,7 +3972,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("19188cb0-aca9-11d2-afc5-00105a2799b5")]
   record IEnumTfProperties, lpVtbl : IEnumTfPropertiesVtbl* do
     GUID = LibC::GUID.new(0x19188cb0_u32, 0xaca9_u16, 0x11d2_u16, StaticArray[0xaf_u8, 0xc5_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : IEnumTfProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4011,7 +4008,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("bb08f7a9-607a-4384-8623-056892b64371")]
   record ITfCompartment, lpVtbl : ITfCompartmentVtbl* do
     GUID = LibC::GUID.new(0xbb08f7a9_u32, 0x607a_u16, 0x4384_u16, StaticArray[0x86_u8, 0x23_u8, 0x5_u8, 0x68_u8, 0x92_u8, 0xb6_u8, 0x43_u8, 0x71_u8])
     def query_interface(this : ITfCompartment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4041,7 +4037,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("743abd5f-f26d-48df-8cc5-238492419b64")]
   record ITfCompartmentEventSink, lpVtbl : ITfCompartmentEventSinkVtbl* do
     GUID = LibC::GUID.new(0x743abd5f_u32, 0xf26d_u16, 0x48df_u16, StaticArray[0x8c_u8, 0xc5_u8, 0x23_u8, 0x84_u8, 0x92_u8, 0x41_u8, 0x9b_u8, 0x64_u8])
     def query_interface(this : ITfCompartmentEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4070,7 +4065,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("7dcf57ac-18ad-438b-824d-979bffb74b7c")]
   record ITfCompartmentMgr, lpVtbl : ITfCompartmentMgrVtbl* do
     GUID = LibC::GUID.new(0x7dcf57ac_u32, 0x18ad_u16, 0x438b_u16, StaticArray[0x82_u8, 0x4d_u8, 0x97_u8, 0x9b_u8, 0xff_u8, 0xb7_u8, 0x4b_u8, 0x7c_u8])
     def query_interface(this : ITfCompartmentMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4103,7 +4097,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("db593490-098f-11d3-8df0-00105a2799b5")]
   record ITfFunction, lpVtbl : ITfFunctionVtbl* do
     GUID = LibC::GUID.new(0xdb593490_u32, 0x98f_u16, 0x11d3_u16, StaticArray[0x8d_u8, 0xf0_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : ITfFunction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4132,7 +4125,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("101d6610-0990-11d3-8df0-00105a2799b5")]
   record ITfFunctionProvider, lpVtbl : ITfFunctionProviderVtbl* do
     GUID = LibC::GUID.new(0x101d6610_u32, 0x990_u16, 0x11d3_u16, StaticArray[0x8d_u8, 0xf0_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : ITfFunctionProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4168,7 +4160,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("e4b24db0-0990-11d3-8df0-00105a2799b5")]
   record IEnumTfFunctionProviders, lpVtbl : IEnumTfFunctionProvidersVtbl* do
     GUID = LibC::GUID.new(0xe4b24db0_u32, 0x990_u16, 0x11d3_u16, StaticArray[0x8d_u8, 0xf0_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : IEnumTfFunctionProviders*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4221,7 +4212,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("1f02b6c5-7842-4ee6-8a0b-9a24183a95ca")]
   record ITfInputProcessorProfiles, lpVtbl : ITfInputProcessorProfilesVtbl* do
     GUID = LibC::GUID.new(0x1f02b6c5_u32, 0x7842_u16, 0x4ee6_u16, StaticArray[0x8a_u8, 0xb_u8, 0x9a_u8, 0x24_u8, 0x18_u8, 0x3a_u8, 0x95_u8, 0xca_u8])
     def query_interface(this : ITfInputProcessorProfiles*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4317,7 +4307,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("892f230f-fe00-4a41-a98e-fcd6de0d35ef")]
   record ITfInputProcessorProfilesEx, lpVtbl : ITfInputProcessorProfilesExVtbl* do
     GUID = LibC::GUID.new(0x892f230f_u32, 0xfe00_u16, 0x4a41_u16, StaticArray[0xa9_u8, 0x8e_u8, 0xfc_u8, 0xd6_u8, 0xde_u8, 0xd_u8, 0x35_u8, 0xef_u8])
     def query_interface(this : ITfInputProcessorProfilesEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4398,7 +4387,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("4fd67194-1002-4513-bff2-c0ddf6258552")]
   record ITfInputProcessorProfileSubstituteLayout, lpVtbl : ITfInputProcessorProfileSubstituteLayoutVtbl* do
     GUID = LibC::GUID.new(0x4fd67194_u32, 0x1002_u16, 0x4513_u16, StaticArray[0xbf_u8, 0xf2_u8, 0xc0_u8, 0xdd_u8, 0xf6_u8, 0x25_u8, 0x85_u8, 0x52_u8])
     def query_interface(this : ITfInputProcessorProfileSubstituteLayout*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4425,7 +4413,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("b246cb75-a93e-4652-bf8c-b3fe0cfd7e57")]
   record ITfActiveLanguageProfileNotifySink, lpVtbl : ITfActiveLanguageProfileNotifySinkVtbl* do
     GUID = LibC::GUID.new(0xb246cb75_u32, 0xa93e_u16, 0x4652_u16, StaticArray[0xbf_u8, 0x8c_u8, 0xb3_u8, 0xfe_u8, 0xc_u8, 0xfd_u8, 0x7e_u8, 0x57_u8])
     def query_interface(this : ITfActiveLanguageProfileNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4455,7 +4442,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("3d61bf11-ac5f-42c8-a4cb-931bcc28c744")]
   record IEnumTfLanguageProfiles, lpVtbl : IEnumTfLanguageProfilesVtbl* do
     GUID = LibC::GUID.new(0x3d61bf11_u32, 0xac5f_u16, 0x42c8_u16, StaticArray[0xa4_u8, 0xcb_u8, 0x93_u8, 0x1b_u8, 0xcc_u8, 0x28_u8, 0xc7_u8, 0x44_u8])
     def query_interface(this : IEnumTfLanguageProfiles*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4492,7 +4478,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("43c9fe15-f494-4c17-9de2-b8a4ac350aa8")]
   record ITfLanguageProfileNotifySink, lpVtbl : ITfLanguageProfileNotifySinkVtbl* do
     GUID = LibC::GUID.new(0x43c9fe15_u32, 0xf494_u16, 0x4c17_u16, StaticArray[0x9d_u8, 0xe2_u8, 0xb8_u8, 0xa4_u8, 0xac_u8, 0x35_u8, 0xa_u8, 0xa8_u8])
     def query_interface(this : ITfLanguageProfileNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4529,7 +4514,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("71c6e74c-0f28-11d8-a82a-00065b84435c")]
   record ITfInputProcessorProfileMgr, lpVtbl : ITfInputProcessorProfileMgrVtbl* do
     GUID = LibC::GUID.new(0x71c6e74c_u32, 0xf28_u16, 0x11d8_u16, StaticArray[0xa8_u8, 0x2a_u8, 0x0_u8, 0x6_u8, 0x5b_u8, 0x84_u8, 0x43_u8, 0x5c_u8])
     def query_interface(this : ITfInputProcessorProfileMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4580,7 +4564,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("71c6e74d-0f28-11d8-a82a-00065b84435c")]
   record IEnumTfInputProcessorProfiles, lpVtbl : IEnumTfInputProcessorProfilesVtbl* do
     GUID = LibC::GUID.new(0x71c6e74d_u32, 0xf28_u16, 0x11d8_u16, StaticArray[0xa8_u8, 0x2a_u8, 0x0_u8, 0x6_u8, 0x5b_u8, 0x84_u8, 0x43_u8, 0x5c_u8])
     def query_interface(this : IEnumTfInputProcessorProfiles*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4616,7 +4599,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("71c6e74e-0f28-11d8-a82a-00065b84435c")]
   record ITfInputProcessorProfileActivationSink, lpVtbl : ITfInputProcessorProfileActivationSinkVtbl* do
     GUID = LibC::GUID.new(0x71c6e74e_u32, 0xf28_u16, 0x11d8_u16, StaticArray[0xa8_u8, 0x2a_u8, 0x0_u8, 0x6_u8, 0x5b_u8, 0x84_u8, 0x43_u8, 0x5c_u8])
     def query_interface(this : ITfInputProcessorProfileActivationSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4656,7 +4638,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("aa80e7f0-2021-11d2-93e0-0060b067b86e")]
   record ITfKeystrokeMgr, lpVtbl : ITfKeystrokeMgrVtbl* do
     GUID = LibC::GUID.new(0xaa80e7f0_u32, 0x2021_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe0_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : ITfKeystrokeMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4727,7 +4708,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("aa80e7f5-2021-11d2-93e0-0060b067b86e")]
   record ITfKeyEventSink, lpVtbl : ITfKeyEventSinkVtbl* do
     GUID = LibC::GUID.new(0xaa80e7f5_u32, 0x2021_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe0_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : ITfKeyEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4770,7 +4750,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("1cd4c13b-1c36-4191-a70a-7f3e611f367d")]
   record ITfKeyTraceEventSink, lpVtbl : ITfKeyTraceEventSinkVtbl* do
     GUID = LibC::GUID.new(0x1cd4c13b_u32, 0x1c36_u16, 0x4191_u16, StaticArray[0xa7_u8, 0xa_u8, 0x7f_u8, 0x3e_u8, 0x61_u8, 0x1f_u8, 0x36_u8, 0x7d_u8])
     def query_interface(this : ITfKeyTraceEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4800,7 +4779,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("6f77c993-d2b1-446e-853e-5912efc8a286")]
   record ITfPreservedKeyNotifySink, lpVtbl : ITfPreservedKeyNotifySinkVtbl* do
     GUID = LibC::GUID.new(0x6f77c993_u32, 0xd2b1_u16, 0x446e_u16, StaticArray[0x85_u8, 0x3e_u8, 0x59_u8, 0x12_u8, 0xef_u8, 0xc8_u8, 0xa2_u8, 0x86_u8])
     def query_interface(this : ITfPreservedKeyNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4830,7 +4808,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("8f1b8ad8-0b6b-4874-90c5-bd76011e8f7c")]
   record ITfMessagePump, lpVtbl : ITfMessagePumpVtbl* do
     GUID = LibC::GUID.new(0x8f1b8ad8_u32, 0xb6b_u16, 0x4874_u16, StaticArray[0x90_u8, 0xc5_u8, 0xbd_u8, 0x76_u8, 0x1_u8, 0x1e_u8, 0x8f_u8, 0x7c_u8])
     def query_interface(this : ITfMessagePump*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4867,7 +4844,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("c0f1db0c-3a20-405c-a303-96b6010a885f")]
   record ITfThreadFocusSink, lpVtbl : ITfThreadFocusSinkVtbl* do
     GUID = LibC::GUID.new(0xc0f1db0c_u32, 0x3a20_u16, 0x405c_u16, StaticArray[0xa3_u8, 0x3_u8, 0x96_u8, 0xb6_u8, 0x1_u8, 0xa_u8, 0x88_u8, 0x5f_u8])
     def query_interface(this : ITfThreadFocusSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4898,7 +4874,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("aa80e7f7-2021-11d2-93e0-0060b067b86e")]
   record ITfTextInputProcessor, lpVtbl : ITfTextInputProcessorVtbl* do
     GUID = LibC::GUID.new(0xaa80e7f7_u32, 0x2021_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe0_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : ITfTextInputProcessor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4930,7 +4905,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("6e4e2102-f9cd-433d-b496-303ce03a6507")]
   record ITfTextInputProcessorEx, lpVtbl : ITfTextInputProcessorExVtbl* do
     GUID = LibC::GUID.new(0x6e4e2102_u32, 0xf9cd_u16, 0x433d_u16, StaticArray[0xb4_u8, 0x96_u8, 0x30_u8, 0x3c_u8, 0xe0_u8, 0x3a_u8, 0x65_u8, 0x7_u8])
     def query_interface(this : ITfTextInputProcessorEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4963,7 +4937,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("d60a7b49-1b9f-4be2-b702-47e9dc05dec3")]
   record ITfClientId, lpVtbl : ITfClientIdVtbl* do
     GUID = LibC::GUID.new(0xd60a7b49_u32, 0x1b9f_u16, 0x4be2_u16, StaticArray[0xb7_u8, 0x2_u8, 0x47_u8, 0xe9_u8, 0xdc_u8, 0x5_u8, 0xde_u8, 0xc3_u8])
     def query_interface(this : ITfClientId*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4994,7 +4967,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("70528852-2f26-4aea-8c96-215150578932")]
   record ITfDisplayAttributeInfo, lpVtbl : ITfDisplayAttributeInfoVtbl* do
     GUID = LibC::GUID.new(0x70528852_u32, 0x2f26_u16, 0x4aea_u16, StaticArray[0x8c_u8, 0x96_u8, 0x21_u8, 0x51_u8, 0x50_u8, 0x57_u8, 0x89_u8, 0x32_u8])
     def query_interface(this : ITfDisplayAttributeInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5036,7 +5008,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("7cef04d7-cb75-4e80-a7ab-5f5bc7d332de")]
   record IEnumTfDisplayAttributeInfo, lpVtbl : IEnumTfDisplayAttributeInfoVtbl* do
     GUID = LibC::GUID.new(0x7cef04d7_u32, 0xcb75_u16, 0x4e80_u16, StaticArray[0xa7_u8, 0xab_u8, 0x5f_u8, 0x5b_u8, 0xc7_u8, 0xd3_u8, 0x32_u8, 0xde_u8])
     def query_interface(this : IEnumTfDisplayAttributeInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5073,7 +5044,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("fee47777-163c-4769-996a-6e9c50ad8f54")]
   record ITfDisplayAttributeProvider, lpVtbl : ITfDisplayAttributeProviderVtbl* do
     GUID = LibC::GUID.new(0xfee47777_u32, 0x163c_u16, 0x4769_u16, StaticArray[0x99_u8, 0x6a_u8, 0x6e_u8, 0x9c_u8, 0x50_u8, 0xad_u8, 0x8f_u8, 0x54_u8])
     def query_interface(this : ITfDisplayAttributeProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5105,7 +5075,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("8ded7393-5db1-475c-9e71-a39111b0ff67")]
   record ITfDisplayAttributeMgr, lpVtbl : ITfDisplayAttributeMgrVtbl* do
     GUID = LibC::GUID.new(0x8ded7393_u32, 0x5db1_u16, 0x475c_u16, StaticArray[0x9e_u8, 0x71_u8, 0xa3_u8, 0x91_u8, 0x11_u8, 0xb0_u8, 0xff_u8, 0x67_u8])
     def query_interface(this : ITfDisplayAttributeMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5138,7 +5107,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("ad56f402-e162-4f25-908f-7d577cf9bda9")]
   record ITfDisplayAttributeNotifySink, lpVtbl : ITfDisplayAttributeNotifySinkVtbl* do
     GUID = LibC::GUID.new(0xad56f402_u32, 0xe162_u16, 0x4f25_u16, StaticArray[0x90_u8, 0x8f_u8, 0x7d_u8, 0x57_u8, 0x7c_u8, 0xf9_u8, 0xbd_u8, 0xa9_u8])
     def query_interface(this : ITfDisplayAttributeNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5178,7 +5146,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("c3acefb5-f69d-4905-938f-fcadcf4be830")]
   record ITfCategoryMgr, lpVtbl : ITfCategoryMgrVtbl* do
     GUID = LibC::GUID.new(0xc3acefb5_u32, 0xf69d_u16, 0x4905_u16, StaticArray[0x93_u8, 0x8f_u8, 0xfc_u8, 0xad_u8, 0xcf_u8, 0x4b_u8, 0xe8_u8, 0x30_u8])
     def query_interface(this : ITfCategoryMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5245,7 +5212,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("4ea48a35-60ae-446f-8fd6-e6a8d82459f7")]
   record ITfSource, lpVtbl : ITfSourceVtbl* do
     GUID = LibC::GUID.new(0x4ea48a35_u32, 0x60ae_u16, 0x446f_u16, StaticArray[0x8f_u8, 0xd6_u8, 0xe6_u8, 0xa8_u8, 0xd8_u8, 0x24_u8, 0x59_u8, 0xf7_u8])
     def query_interface(this : ITfSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5276,7 +5242,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("73131f9c-56a9-49dd-b0ee-d046633f7528")]
   record ITfSourceSingle, lpVtbl : ITfSourceSingleVtbl* do
     GUID = LibC::GUID.new(0x73131f9c_u32, 0x56a9_u16, 0x49dd_u16, StaticArray[0xb0_u8, 0xee_u8, 0xd0_u8, 0x46_u8, 0x63_u8, 0x3f_u8, 0x75_u8, 0x28_u8])
     def query_interface(this : ITfSourceSingle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5310,7 +5275,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("ea1ea135-19df-11d7-a6d2-00065b84435c")]
   record ITfUIElementMgr, lpVtbl : ITfUIElementMgrVtbl* do
     GUID = LibC::GUID.new(0xea1ea135_u32, 0x19df_u16, 0x11d7_u16, StaticArray[0xa6_u8, 0xd2_u8, 0x0_u8, 0x6_u8, 0x5b_u8, 0x84_u8, 0x43_u8, 0x5c_u8])
     def query_interface(this : ITfUIElementMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5352,7 +5316,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("887aa91e-acba-4931-84da-3c5208cf543f")]
   record IEnumTfUIElements, lpVtbl : IEnumTfUIElementsVtbl* do
     GUID = LibC::GUID.new(0x887aa91e_u32, 0xacba_u16, 0x4931_u16, StaticArray[0x84_u8, 0xda_u8, 0x3c_u8, 0x52_u8, 0x8_u8, 0xcf_u8, 0x54_u8, 0x3f_u8])
     def query_interface(this : IEnumTfUIElements*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5390,7 +5353,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("ea1ea136-19df-11d7-a6d2-00065b84435c")]
   record ITfUIElementSink, lpVtbl : ITfUIElementSinkVtbl* do
     GUID = LibC::GUID.new(0xea1ea136_u32, 0x19df_u16, 0x11d7_u16, StaticArray[0xa6_u8, 0xd2_u8, 0x0_u8, 0x6_u8, 0x5b_u8, 0x84_u8, 0x43_u8, 0x5c_u8])
     def query_interface(this : ITfUIElementSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5426,7 +5388,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("ea1ea137-19df-11d7-a6d2-00065b84435c")]
   record ITfUIElement, lpVtbl : ITfUIElementVtbl* do
     GUID = LibC::GUID.new(0xea1ea137_u32, 0x19df_u16, 0x11d7_u16, StaticArray[0xa6_u8, 0xd2_u8, 0x0_u8, 0x6_u8, 0x5b_u8, 0x84_u8, 0x43_u8, 0x5c_u8])
     def query_interface(this : ITfUIElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5473,7 +5434,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("ea1ea138-19df-11d7-a6d2-00065b84435c")]
   record ITfCandidateListUIElement, lpVtbl : ITfCandidateListUIElementVtbl* do
     GUID = LibC::GUID.new(0xea1ea138_u32, 0x19df_u16, 0x11d7_u16, StaticArray[0xa6_u8, 0xd2_u8, 0x0_u8, 0x6_u8, 0x5b_u8, 0x84_u8, 0x43_u8, 0x5c_u8])
     def query_interface(this : ITfCandidateListUIElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5547,7 +5507,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("85fad185-58ce-497a-9460-355366b64b9a")]
   record ITfCandidateListUIElementBehavior, lpVtbl : ITfCandidateListUIElementBehaviorVtbl* do
     GUID = LibC::GUID.new(0x85fad185_u32, 0x58ce_u16, 0x497a_u16, StaticArray[0x94_u8, 0x60_u8, 0x35_u8, 0x53_u8, 0x66_u8, 0xb6_u8, 0x4b_u8, 0x9a_u8])
     def query_interface(this : ITfCandidateListUIElementBehavior*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5625,7 +5584,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("ea1ea139-19df-11d7-a6d2-00065b84435c")]
   record ITfReadingInformationUIElement, lpVtbl : ITfReadingInformationUIElementVtbl* do
     GUID = LibC::GUID.new(0xea1ea139_u32, 0x19df_u16, 0x11d7_u16, StaticArray[0xa6_u8, 0xd2_u8, 0x0_u8, 0x6_u8, 0x5b_u8, 0x84_u8, 0x43_u8, 0x5c_u8])
     def query_interface(this : ITfReadingInformationUIElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5683,7 +5641,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("858f956a-972f-42a2-a2f2-0321e1abe209")]
   record ITfTransitoryExtensionUIElement, lpVtbl : ITfTransitoryExtensionUIElementVtbl* do
     GUID = LibC::GUID.new(0x858f956a_u32, 0x972f_u16, 0x42a2_u16, StaticArray[0xa2_u8, 0xf2_u8, 0x3_u8, 0x21_u8, 0xe1_u8, 0xab_u8, 0xe2_u8, 0x9_u8])
     def query_interface(this : ITfTransitoryExtensionUIElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5722,7 +5679,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("a615096f-1c57-4813-8a15-55ee6e5a839c")]
   record ITfTransitoryExtensionSink, lpVtbl : ITfTransitoryExtensionSinkVtbl* do
     GUID = LibC::GUID.new(0xa615096f_u32, 0x1c57_u16, 0x4813_u16, StaticArray[0x8a_u8, 0x15_u8, 0x55_u8, 0xee_u8, 0x6e_u8, 0x5a_u8, 0x83_u8, 0x9c_u8])
     def query_interface(this : ITfTransitoryExtensionSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5753,7 +5709,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("52b18b5c-555d-46b2-b00a-fa680144fbdb")]
   record ITfToolTipUIElement, lpVtbl : ITfToolTipUIElementVtbl* do
     GUID = LibC::GUID.new(0x52b18b5c_u32, 0x555d_u16, 0x46b2_u16, StaticArray[0xb0_u8, 0xa_u8, 0xfa_u8, 0x68_u8, 0x1_u8, 0x44_u8, 0xfb_u8, 0xdb_u8])
     def query_interface(this : ITfToolTipUIElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5793,7 +5748,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("151d69f0-86f4-4674-b721-56911e797f47")]
   record ITfReverseConversionList, lpVtbl : ITfReverseConversionListVtbl* do
     GUID = LibC::GUID.new(0x151d69f0_u32, 0x86f4_u16, 0x4674_u16, StaticArray[0xb7_u8, 0x21_u8, 0x56_u8, 0x91_u8, 0x1e_u8, 0x79_u8, 0x7f_u8, 0x47_u8])
     def query_interface(this : ITfReverseConversionList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5823,7 +5777,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("a415e162-157d-417d-8a8c-0ab26c7d2781")]
   record ITfReverseConversion, lpVtbl : ITfReverseConversionVtbl* do
     GUID = LibC::GUID.new(0xa415e162_u32, 0x157d_u16, 0x417d_u16, StaticArray[0x8a_u8, 0x8c_u8, 0xa_u8, 0xb2_u8, 0x6c_u8, 0x7d_u8, 0x27_u8, 0x81_u8])
     def query_interface(this : ITfReverseConversion*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5850,7 +5803,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("b643c236-c493-41b6-abb3-692412775cc4")]
   record ITfReverseConversionMgr, lpVtbl : ITfReverseConversionMgrVtbl* do
     GUID = LibC::GUID.new(0xb643c236_u32, 0xc493_u16, 0x41b6_u16, StaticArray[0xab_u8, 0xb3_u8, 0x69_u8, 0x24_u8, 0x12_u8, 0x77_u8, 0x5c_u8, 0xc4_u8])
     def query_interface(this : ITfReverseConversionMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5878,7 +5830,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("581f317e-fd9d-443f-b972-ed00467c5d40")]
   record ITfCandidateString, lpVtbl : ITfCandidateStringVtbl* do
     GUID = LibC::GUID.new(0x581f317e_u32, 0xfd9d_u16, 0x443f_u16, StaticArray[0xb9_u8, 0x72_u8, 0xed_u8, 0x0_u8, 0x46_u8, 0x7c_u8, 0x5d_u8, 0x40_u8])
     def query_interface(this : ITfCandidateString*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5911,7 +5862,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("defb1926-6c80-4ce8-87d4-d6b72b812bde")]
   record IEnumTfCandidates, lpVtbl : IEnumTfCandidatesVtbl* do
     GUID = LibC::GUID.new(0xdefb1926_u32, 0x6c80_u16, 0x4ce8_u16, StaticArray[0x87_u8, 0xd4_u8, 0xd6_u8, 0xb7_u8, 0x2b_u8, 0x81_u8, 0x2b_u8, 0xde_u8])
     def query_interface(this : IEnumTfCandidates*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5950,7 +5900,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("a3ad50fb-9bdb-49e3-a843-6c76520fbf5d")]
   record ITfCandidateList, lpVtbl : ITfCandidateListVtbl* do
     GUID = LibC::GUID.new(0xa3ad50fb_u32, 0x9bdb_u16, 0x49e3_u16, StaticArray[0xa8_u8, 0x43_u8, 0x6c_u8, 0x76_u8, 0x52_u8, 0xf_u8, 0xbf_u8, 0x5d_u8])
     def query_interface(this : ITfCandidateList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5989,7 +5938,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("4cea93c0-0a58-11d3-8df0-00105a2799b5")]
   record ITfFnReconversion, lpVtbl : ITfFnReconversionVtbl* do
     GUID = LibC::GUID.new(0x4cea93c0_u32, 0xa58_u16, 0x11d3_u16, StaticArray[0x8d_u8, 0xf0_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : ITfFnReconversion*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6027,7 +5975,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("a3a416a4-0f64-11d3-b5b7-00c04fc324a1")]
   record ITfFnPlayBack, lpVtbl : ITfFnPlayBackVtbl* do
     GUID = LibC::GUID.new(0xa3a416a4_u32, 0xf64_u16, 0x11d3_u16, StaticArray[0xb5_u8, 0xb7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x24_u8, 0xa1_u8])
     def query_interface(this : ITfFnPlayBack*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6062,7 +6009,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("a87a8574-a6c1-4e15-99f0-3d3965f548eb")]
   record ITfFnLangProfileUtil, lpVtbl : ITfFnLangProfileUtilVtbl* do
     GUID = LibC::GUID.new(0xa87a8574_u32, 0xa6c1_u16, 0x4e15_u16, StaticArray[0x99_u8, 0xf0_u8, 0x3d_u8, 0x39_u8, 0x65_u8, 0xf5_u8, 0x48_u8, 0xeb_u8])
     def query_interface(this : ITfFnLangProfileUtil*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6096,7 +6042,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("88f567c6-1757-49f8-a1b2-89234c1eeff9")]
   record ITfFnConfigure, lpVtbl : ITfFnConfigureVtbl* do
     GUID = LibC::GUID.new(0x88f567c6_u32, 0x1757_u16, 0x49f8_u16, StaticArray[0xa1_u8, 0xb2_u8, 0x89_u8, 0x23_u8, 0x4c_u8, 0x1e_u8, 0xef_u8, 0xf9_u8])
     def query_interface(this : ITfFnConfigure*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6127,7 +6072,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("bb95808a-6d8f-4bca-8400-5390b586aedf")]
   record ITfFnConfigureRegisterWord, lpVtbl : ITfFnConfigureRegisterWordVtbl* do
     GUID = LibC::GUID.new(0xbb95808a_u32, 0x6d8f_u16, 0x4bca_u16, StaticArray[0x84_u8, 0x0_u8, 0x53_u8, 0x90_u8, 0xb5_u8, 0x86_u8, 0xae_u8, 0xdf_u8])
     def query_interface(this : ITfFnConfigureRegisterWord*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6158,7 +6102,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("b5e26ff5-d7ad-4304-913f-21a2ed95a1b0")]
   record ITfFnConfigureRegisterEudc, lpVtbl : ITfFnConfigureRegisterEudcVtbl* do
     GUID = LibC::GUID.new(0xb5e26ff5_u32, 0xd7ad_u16, 0x4304_u16, StaticArray[0x91_u8, 0x3f_u8, 0x21_u8, 0xa2_u8, 0xed_u8, 0x95_u8, 0xa1_u8, 0xb0_u8])
     def query_interface(this : ITfFnConfigureRegisterEudc*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6189,7 +6132,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("5ab1d30c-094d-4c29-8ea5-0bf59be87bf3")]
   record ITfFnShowHelp, lpVtbl : ITfFnShowHelpVtbl* do
     GUID = LibC::GUID.new(0x5ab1d30c_u32, 0x94d_u16, 0x4c29_u16, StaticArray[0x8e_u8, 0xa5_u8, 0xb_u8, 0xf5_u8, 0x9b_u8, 0xe8_u8, 0x7b_u8, 0xf3_u8])
     def query_interface(this : ITfFnShowHelp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6219,7 +6161,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("3bab89e4-5fbe-45f4-a5bc-dca36ad225a8")]
   record ITfFnBalloon, lpVtbl : ITfFnBalloonVtbl* do
     GUID = LibC::GUID.new(0x3bab89e4_u32, 0x5fbe_u16, 0x45f4_u16, StaticArray[0xa5_u8, 0xbc_u8, 0xdc_u8, 0xa3_u8, 0x6a_u8, 0xd2_u8, 0x25_u8, 0xa8_u8])
     def query_interface(this : ITfFnBalloon*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6247,7 +6188,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("5c0ab7ea-167d-4f59-bfb5-4693755e90ca")]
   record ITfFnGetSAPIObject, lpVtbl : ITfFnGetSAPIObjectVtbl* do
     GUID = LibC::GUID.new(0x5c0ab7ea_u32, 0x167d_u16, 0x4f59_u16, StaticArray[0xbf_u8, 0xb5_u8, 0x46_u8, 0x93_u8, 0x75_u8, 0x5e_u8, 0x90_u8, 0xca_u8])
     def query_interface(this : ITfFnGetSAPIObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6279,7 +6219,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("2338ac6e-2b9d-44c0-a75e-ee64f256b3bd")]
   record ITfFnPropertyUIStatus, lpVtbl : ITfFnPropertyUIStatusVtbl* do
     GUID = LibC::GUID.new(0x2338ac6e_u32, 0x2b9d_u16, 0x44c0_u16, StaticArray[0xa7_u8, 0x5e_u8, 0xee_u8, 0x64_u8, 0xf2_u8, 0x56_u8, 0xb3_u8, 0xbd_u8])
     def query_interface(this : ITfFnPropertyUIStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6315,7 +6254,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("8c5dac4f-083c-4b85-a4c9-71746048adca")]
   record IEnumSpeechCommands, lpVtbl : IEnumSpeechCommandsVtbl* do
     GUID = LibC::GUID.new(0x8c5dac4f_u32, 0x83c_u16, 0x4b85_u16, StaticArray[0xa4_u8, 0xc9_u8, 0x71_u8, 0x74_u8, 0x60_u8, 0x48_u8, 0xad_u8, 0xca_u8])
     def query_interface(this : IEnumSpeechCommands*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6352,7 +6290,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("38e09d4c-586d-435a-b592-c8a86691dec6")]
   record ISpeechCommandProvider, lpVtbl : ISpeechCommandProviderVtbl* do
     GUID = LibC::GUID.new(0x38e09d4c_u32, 0x586d_u16, 0x435a_u16, StaticArray[0xb5_u8, 0x92_u8, 0xc8_u8, 0xa8_u8, 0x66_u8, 0x91_u8, 0xde_u8, 0xc6_u8])
     def query_interface(this : ISpeechCommandProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6383,7 +6320,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("fca6c349-a12f-43a3-8dd6-5a5a4282577b")]
   record ITfFnCustomSpeechCommand, lpVtbl : ITfFnCustomSpeechCommandVtbl* do
     GUID = LibC::GUID.new(0xfca6c349_u32, 0xa12f_u16, 0x43a3_u16, StaticArray[0x8d_u8, 0xd6_u8, 0x5a_u8, 0x5a_u8, 0x42_u8, 0x82_u8, 0x57_u8, 0x7b_u8])
     def query_interface(this : ITfFnCustomSpeechCommand*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6420,7 +6356,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("7afbf8e7-ac4b-4082-b058-890899d3a010")]
   record ITfFnLMProcessor, lpVtbl : ITfFnLMProcessorVtbl* do
     GUID = LibC::GUID.new(0x7afbf8e7_u32, 0xac4b_u16, 0x4082_u16, StaticArray[0xb0_u8, 0x58_u8, 0x89_u8, 0x8_u8, 0x99_u8, 0xd3_u8, 0xa0_u8, 0x10_u8])
     def query_interface(this : ITfFnLMProcessor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6476,7 +6411,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("04b825b1-ac9a-4f7b-b5ad-c7168f1ee445")]
   record ITfFnLMInternal, lpVtbl : ITfFnLMInternalVtbl* do
     GUID = LibC::GUID.new(0x4b825b1_u32, 0xac9a_u16, 0x4f7b_u16, StaticArray[0xb5_u8, 0xad_u8, 0xc7_u8, 0x16_u8, 0x8f_u8, 0x1e_u8, 0xe4_u8, 0x45_u8])
     def query_interface(this : ITfFnLMInternal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6530,7 +6464,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("56988052-47da-4a05-911a-e3d941f17145")]
   record IEnumTfLatticeElements, lpVtbl : IEnumTfLatticeElementsVtbl* do
     GUID = LibC::GUID.new(0x56988052_u32, 0x47da_u16, 0x4a05_u16, StaticArray[0x91_u8, 0x1a_u8, 0xe3_u8, 0xd9_u8, 0x41_u8, 0xf1_u8, 0x71_u8, 0x45_u8])
     def query_interface(this : IEnumTfLatticeElements*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6567,7 +6500,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("d4236675-a5bf-4570-9d42-5d6d7b02d59b")]
   record ITfLMLattice, lpVtbl : ITfLMLatticeVtbl* do
     GUID = LibC::GUID.new(0xd4236675_u32, 0xa5bf_u16, 0x4570_u16, StaticArray[0x9d_u8, 0x42_u8, 0x5d_u8, 0x6d_u8, 0x7b_u8, 0x2_u8, 0xd5_u8, 0x9b_u8])
     def query_interface(this : ITfLMLattice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6599,7 +6531,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("3527268b-7d53-4dd9-92b7-7296ae461249")]
   record ITfFnAdviseText, lpVtbl : ITfFnAdviseTextVtbl* do
     GUID = LibC::GUID.new(0x3527268b_u32, 0x7d53_u16, 0x4dd9_u16, StaticArray[0x92_u8, 0xb7_u8, 0x72_u8, 0x96_u8, 0xae_u8, 0x46_u8, 0x12_u8, 0x49_u8])
     def query_interface(this : ITfFnAdviseText*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6634,7 +6565,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("87a2ad8f-f27b-4920-8501-67602280175d")]
   record ITfFnSearchCandidateProvider, lpVtbl : ITfFnSearchCandidateProviderVtbl* do
     GUID = LibC::GUID.new(0x87a2ad8f_u32, 0xf27b_u16, 0x4920_u16, StaticArray[0x85_u8, 0x1_u8, 0x67_u8, 0x60_u8, 0x22_u8, 0x80_u8, 0x17_u8, 0x5d_u8])
     def query_interface(this : ITfFnSearchCandidateProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6671,7 +6601,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("c7a6f54f-b180-416f-b2bf-7bf2e4683d7b")]
   record ITfIntegratableCandidateListUIElement, lpVtbl : ITfIntegratableCandidateListUIElementVtbl* do
     GUID = LibC::GUID.new(0xc7a6f54f_u32, 0xb180_u16, 0x416f_u16, StaticArray[0xb2_u8, 0xbf_u8, 0x7b_u8, 0xf2_u8, 0xe4_u8, 0x68_u8, 0x3d_u8, 0x7b_u8])
     def query_interface(this : ITfIntegratableCandidateListUIElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6711,7 +6640,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("5f309a41-590a-4acc-a97f-d8efff13fdfc")]
   record ITfFnGetPreferredTouchKeyboardLayout, lpVtbl : ITfFnGetPreferredTouchKeyboardLayoutVtbl* do
     GUID = LibC::GUID.new(0x5f309a41_u32, 0x590a_u16, 0x4acc_u16, StaticArray[0xa9_u8, 0x7f_u8, 0xd8_u8, 0xef_u8, 0xff_u8, 0x13_u8, 0xfd_u8, 0xfc_u8])
     def query_interface(this : ITfFnGetPreferredTouchKeyboardLayout*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6742,7 +6670,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("ea163ce2-7a65-4506-82a3-c528215da64e")]
   record ITfFnGetLinguisticAlternates, lpVtbl : ITfFnGetLinguisticAlternatesVtbl* do
     GUID = LibC::GUID.new(0xea163ce2_u32, 0x7a65_u16, 0x4506_u16, StaticArray[0x82_u8, 0xa3_u8, 0xc5_u8, 0x28_u8, 0x21_u8, 0x5d_u8, 0xa6_u8, 0x4e_u8])
     def query_interface(this : ITfFnGetLinguisticAlternates*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6777,7 +6704,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("cd91d690-a7e8-4265-9b38-8bb3bbaba7de")]
   record IUIManagerEventSink, lpVtbl : IUIManagerEventSinkVtbl* do
     GUID = LibC::GUID.new(0xcd91d690_u32, 0xa7e8_u16, 0x4265_u16, StaticArray[0x9b_u8, 0x38_u8, 0x8b_u8, 0xb3_u8, 0xbb_u8, 0xab_u8, 0xa7_u8, 0xde_u8])
     def query_interface(this : IUIManagerEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6823,7 +6749,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("fde1eaee-6924-4cdf-91e7-da38cff5559d")]
   record ITfInputScope, lpVtbl : ITfInputScopeVtbl* do
     GUID = LibC::GUID.new(0xfde1eaee_u32, 0x6924_u16, 0x4cdf_u16, StaticArray[0x91_u8, 0xe7_u8, 0xda_u8, 0x38_u8, 0xcf_u8, 0xf5_u8, 0x55_u8, 0x9d_u8])
     def query_interface(this : ITfInputScope*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6867,7 +6792,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("5731eaa0-6bc2-4681-a532-92fbb74d7c41")]
   record ITfInputScope2, lpVtbl : ITfInputScope2Vtbl* do
     GUID = LibC::GUID.new(0x5731eaa0_u32, 0x6bc2_u16, 0x4681_u16, StaticArray[0xa5_u8, 0x32_u8, 0x92_u8, 0xfb_u8, 0xb7_u8, 0x4d_u8, 0x7c_u8, 0x41_u8])
     def query_interface(this : ITfInputScope2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6910,7 +6834,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("b5f8fb3b-393f-4f7c-84cb-504924c2705a")]
   record ITfMSAAControl, lpVtbl : ITfMSAAControlVtbl* do
     GUID = LibC::GUID.new(0xb5f8fb3b_u32, 0x393f_u16, 0x4f7c_u16, StaticArray[0x84_u8, 0xcb_u8, 0x50_u8, 0x49_u8, 0x24_u8, 0xc2_u8, 0x70_u8, 0x5a_u8])
     def query_interface(this : ITfMSAAControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6940,7 +6863,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("e1aa6466-9db4-40ba-be03-77c38e8e60b2")]
   record IInternalDocWrap, lpVtbl : IInternalDocWrapVtbl* do
     GUID = LibC::GUID.new(0xe1aa6466_u32, 0x9db4_u16, 0x40ba_u16, StaticArray[0xbe_u8, 0x3_u8, 0x77_u8, 0xc3_u8, 0x8e_u8, 0x8e_u8, 0x60_u8, 0xb2_u8])
     def query_interface(this : IInternalDocWrap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6967,7 +6889,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("a2de3bc2-3d8e-11d3-81a9-f753fbe61a00")]
   record ITextStoreACPEx, lpVtbl : ITextStoreACPExVtbl* do
     GUID = LibC::GUID.new(0xa2de3bc2_u32, 0x3d8e_u16, 0x11d3_u16, StaticArray[0x81_u8, 0xa9_u8, 0xf7_u8, 0x53_u8, 0xfb_u8, 0xe6_u8, 0x1a_u8, 0x0_u8])
     def query_interface(this : ITextStoreACPEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6994,7 +6915,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("a2de3bc1-3d8e-11d3-81a9-f753fbe61a00")]
   record ITextStoreAnchorEx, lpVtbl : ITextStoreAnchorExVtbl* do
     GUID = LibC::GUID.new(0xa2de3bc1_u32, 0x3d8e_u16, 0x11d3_u16, StaticArray[0x81_u8, 0xa9_u8, 0xf7_u8, 0x53_u8, 0xfb_u8, 0xe6_u8, 0x1a_u8, 0x0_u8])
     def query_interface(this : ITextStoreAnchorEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7029,7 +6949,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("2bdf9464-41e2-43e3-950c-a6865ba25cd4")]
   record ITextStoreACPSinkEx, lpVtbl : ITextStoreACPSinkExVtbl* do
     GUID = LibC::GUID.new(0x2bdf9464_u32, 0x41e2_u16, 0x43e3_u16, StaticArray[0x95_u8, 0xc_u8, 0xa6_u8, 0x86_u8, 0x5b_u8, 0xa2_u8, 0x5c_u8, 0xd4_u8])
     def query_interface(this : ITextStoreACPSinkEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7088,7 +7007,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("25642426-028d-4474-977b-111bb114fe3e")]
   record ITextStoreSinkAnchorEx, lpVtbl : ITextStoreSinkAnchorExVtbl* do
     GUID = LibC::GUID.new(0x25642426_u32, 0x28d_u16, 0x4474_u16, StaticArray[0x97_u8, 0x7b_u8, 0x11_u8, 0x1b_u8, 0xb1_u8, 0x14_u8, 0xfe_u8, 0x3e_u8])
     def query_interface(this : ITextStoreSinkAnchorEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7143,7 +7061,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("1dc4cb5f-d737-474d-ade9-5ccfc9bc1cc9")]
   record IAccDictionary, lpVtbl : IAccDictionaryVtbl* do
     GUID = LibC::GUID.new(0x1dc4cb5f_u32, 0xd737_u16, 0x474d_u16, StaticArray[0xad_u8, 0xe9_u8, 0x5c_u8, 0xcf_u8, 0xc9_u8, 0xbc_u8, 0x1c_u8, 0xc9_u8])
     def query_interface(this : IAccDictionary*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7186,7 +7103,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("401518ec-db00-4611-9b29-2a0e4b9afa85")]
   record IVersionInfo, lpVtbl : IVersionInfoVtbl* do
     GUID = LibC::GUID.new(0x401518ec_u32, 0xdb00_u16, 0x4611_u16, StaticArray[0x9b_u8, 0x29_u8, 0x2a_u8, 0xe_u8, 0x4b_u8, 0x9a_u8, 0xfa_u8, 0x85_u8])
     def query_interface(this : IVersionInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7225,7 +7141,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("03de00aa-f272-41e3-99cb-03c5e8114ea0")]
   record ICoCreateLocally, lpVtbl : ICoCreateLocallyVtbl* do
     GUID = LibC::GUID.new(0x3de00aa_u32, 0xf272_u16, 0x41e3_u16, StaticArray[0x99_u8, 0xcb_u8, 0x3_u8, 0xc5_u8, 0xe8_u8, 0x11_u8, 0x4e_u8, 0xa0_u8])
     def query_interface(this : ICoCreateLocally*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7252,7 +7167,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("0a53eb6c-1908-4742-8cff-2cee2e93f94c")]
   record ICoCreatedLocally, lpVtbl : ICoCreatedLocallyVtbl* do
     GUID = LibC::GUID.new(0xa53eb6c_u32, 0x1908_u16, 0x4742_u16, StaticArray[0x8c_u8, 0xff_u8, 0x2c_u8, 0xee_u8, 0x2e_u8, 0x93_u8, 0xf9_u8, 0x4c_u8])
     def query_interface(this : ICoCreatedLocally*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7285,7 +7199,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("e2cd4a63-2b72-4d48-b739-95e4765195ba")]
   record IAccStore, lpVtbl : IAccStoreVtbl* do
     GUID = LibC::GUID.new(0xe2cd4a63_u32, 0x2b72_u16, 0x4d48_u16, StaticArray[0xb7_u8, 0x39_u8, 0x95_u8, 0xe4_u8, 0x76_u8, 0x51_u8, 0x95_u8, 0xba_u8])
     def query_interface(this : IAccStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7332,7 +7245,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("ad7c73cf-6dd5-4855-abc2-b04bad5b9153")]
   record IAccServerDocMgr, lpVtbl : IAccServerDocMgrVtbl* do
     GUID = LibC::GUID.new(0xad7c73cf_u32, 0x6dd5_u16, 0x4855_u16, StaticArray[0xab_u8, 0xc2_u8, 0xb0_u8, 0x4b_u8, 0xad_u8, 0x5b_u8, 0x91_u8, 0x53_u8])
     def query_interface(this : IAccServerDocMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7368,7 +7280,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("4c896039-7b6d-49e6-a8c1-45116a98292b")]
   record IAccClientDocMgr, lpVtbl : IAccClientDocMgrVtbl* do
     GUID = LibC::GUID.new(0x4c896039_u32, 0x7b6d_u16, 0x49e6_u16, StaticArray[0xa8_u8, 0xc1_u8, 0x45_u8, 0x11_u8, 0x6a_u8, 0x98_u8, 0x29_u8, 0x2b_u8])
     def query_interface(this : IAccClientDocMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7405,7 +7316,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("dcd285fe-0be0-43bd-99c9-aaaec513c555")]
   record IDocWrap, lpVtbl : IDocWrapVtbl* do
     GUID = LibC::GUID.new(0xdcd285fe_u32, 0xbe0_u16, 0x43bd_u16, StaticArray[0x99_u8, 0xc9_u8, 0xaa_u8, 0xae_u8, 0xc5_u8, 0x13_u8, 0xc5_u8, 0x55_u8])
     def query_interface(this : IDocWrap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7435,7 +7345,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("b33e75ff-e84c-4dca-a25c-33b8dc003374")]
   record IClonableWrapper, lpVtbl : IClonableWrapperVtbl* do
     GUID = LibC::GUID.new(0xb33e75ff_u32, 0xe84c_u16, 0x4dca_u16, StaticArray[0xa2_u8, 0x5c_u8, 0x33_u8, 0xb8_u8, 0xdc_u8, 0x0_u8, 0x33_u8, 0x74_u8])
     def query_interface(this : IClonableWrapper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7464,7 +7373,6 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  #@[Com("90e9a944-9244-489f-a78f-de67afc013a7")]
   record ITfSpeechUIServer, lpVtbl : ITfSpeechUIServerVtbl* do
     GUID = LibC::GUID.new(0x90e9a944_u32, 0x9244_u16, 0x489f_u16, StaticArray[0xa7_u8, 0x8f_u8, 0xde_u8, 0x67_u8, 0xaf_u8, 0xc0_u8, 0x13_u8, 0xa7_u8])
     def query_interface(this : ITfSpeechUIServer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

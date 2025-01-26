@@ -13,13 +13,13 @@ require "./../security/authentication/identity.cr"
 module Win32cr::Networking::ActiveDirectory
   alias GetDcContextHandle = LibC::IntPtrT
   alias ADS_SEARCH_HANDLE = LibC::IntPtrT
-  alias LPCQADDFORMSPROC = Proc(Win32cr::Foundation::LPARAM, Win32cr::Networking::ActiveDirectory::CQFORM*, Win32cr::Foundation::HRESULT)*
+  alias LPCQADDFORMSPROC = Proc(Win32cr::Foundation::LPARAM, Win32cr::Networking::ActiveDirectory::CQFORM*, Win32cr::Foundation::HRESULT)
 
-  alias LPCQADDPAGESPROC = Proc(Win32cr::Foundation::LPARAM, LibC::GUID*, Win32cr::Networking::ActiveDirectory::CQPAGE*, Win32cr::Foundation::HRESULT)*
+  alias LPCQADDPAGESPROC = Proc(Win32cr::Foundation::LPARAM, LibC::GUID*, Win32cr::Networking::ActiveDirectory::CQPAGE*, Win32cr::Foundation::HRESULT)
 
-  alias LPCQPAGEPROC = Proc(Win32cr::Networking::ActiveDirectory::CQPAGE*, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT)*
+  alias LPCQPAGEPROC = Proc(Win32cr::Networking::ActiveDirectory::CQPAGE*, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT)
 
-  alias LPDSENUMATTRIBUTES = Proc(Win32cr::Foundation::LPARAM, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT)*
+  alias LPDSENUMATTRIBUTES = Proc(Win32cr::Foundation::LPARAM, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT)
 
   WM_ADSPROP_NOTIFY_PAGEINIT = 2125_u32
   WM_ADSPROP_NOTIFY_PAGEHWND = 2126_u32
@@ -1188,995 +1188,1332 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record CQFORM,
-    cbStruct : UInt32,
-    dwFlags : UInt32,
-    clsid : LibC::GUID,
-    hIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-    pszTitle : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record CQPAGE,
-    cbStruct : UInt32,
-    dwFlags : UInt32,
-    pPageProc : Win32cr::Networking::ActiveDirectory::LPCQPAGEPROC,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    idPageName : Int32,
-    idPageTemplate : Int32,
-    pDlgProc : Win32cr::UI::WindowsAndMessaging::DLGPROC,
-    lParam : Win32cr::Foundation::LPARAM
-
-  @[Extern]
-  record OPENQUERYWINDOW,
-    cbStruct : UInt32,
-    dwFlags : UInt32,
-    clsidHandler : LibC::GUID,
-    pHandlerParameters : Void*,
-    clsidDefaultForm : LibC::GUID,
-    pPersistQuery : Void*,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      pFormParameters : Void*,
-      ppbFormParameters : Void*
-
+  struct CQFORM
+    property cbStruct : UInt32
+    property dwFlags : UInt32
+    property clsid : LibC::GUID
+    property hIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property pszTitle : Win32cr::Foundation::PWSTR
+    def initialize(@cbStruct : UInt32, @dwFlags : UInt32, @clsid : LibC::GUID, @hIcon : Win32cr::UI::WindowsAndMessaging::HICON, @pszTitle : Win32cr::Foundation::PWSTR)
+    end
   end
 
   @[Extern]
-  record ADS_OCTET_STRING,
-    dwLength : UInt32,
-    lpValue : UInt8*
-
-  @[Extern]
-  record ADS_NT_SECURITY_DESCRIPTOR,
-    dwLength : UInt32,
-    lpValue : UInt8*
-
-  @[Extern]
-  record ADS_PROV_SPECIFIC,
-    dwLength : UInt32,
-    lpValue : UInt8*
-
-  @[Extern]
-  record ADS_CASEIGNORE_LIST,
-    next__ : Win32cr::Networking::ActiveDirectory::ADS_CASEIGNORE_LIST*,
-    string : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record ADS_OCTET_LIST,
-    next__ : Win32cr::Networking::ActiveDirectory::ADS_OCTET_LIST*,
-    length : UInt32,
-    data : UInt8*
-
-  @[Extern]
-  record ADS_PATH,
-    type__ : UInt32,
-    volume_name : Win32cr::Foundation::PWSTR,
-    path : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record ADS_POSTALADDRESS,
-    postal_address : Win32cr::Foundation::PWSTR[6]
-
-  @[Extern]
-  record ADS_TIMESTAMP,
-    whole_seconds : UInt32,
-    event_id : UInt32
-
-  @[Extern]
-  record ADS_BACKLINK,
-    remote_id : UInt32,
-    object_name : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record ADS_TYPEDNAME,
-    object_name : Win32cr::Foundation::PWSTR,
-    level : UInt32,
-    interval : UInt32
-
-  @[Extern]
-  record ADS_HOLD,
-    object_name : Win32cr::Foundation::PWSTR,
-    amount : UInt32
-
-  @[Extern]
-  record ADS_NETADDRESS,
-    address_type : UInt32,
-    address_length : UInt32,
-    address : UInt8*
-
-  @[Extern]
-  record ADS_REPLICAPOINTER,
-    server_name : Win32cr::Foundation::PWSTR,
-    replica_type : UInt32,
-    replica_number : UInt32,
-    count : UInt32,
-    replica_address_hints : Win32cr::Networking::ActiveDirectory::ADS_NETADDRESS*
-
-  @[Extern]
-  record ADS_FAXNUMBER,
-    telephone_number : Win32cr::Foundation::PWSTR,
-    number_of_bits : UInt32,
-    parameters : UInt8*
-
-  @[Extern]
-  record ADS_EMAIL,
-    address : Win32cr::Foundation::PWSTR,
-    type__ : UInt32
-
-  @[Extern]
-  record ADS_DN_WITH_BINARY,
-    dwLength : UInt32,
-    lpBinaryValue : UInt8*,
-    pszDNString : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record ADS_DN_WITH_STRING,
-    pszStringValue : Win32cr::Foundation::PWSTR,
-    pszDNString : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record ADSVALUE,
-    dwType : Win32cr::Networking::ActiveDirectory::ADSTYPEENUM,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      dn_string : UInt16*,
-      case_exact_string : UInt16*,
-      case_ignore_string : UInt16*,
-      printable_string : UInt16*,
-      numeric_string : UInt16*,
-      boolean : UInt32,
-      integer : UInt32,
-      octet_string : Win32cr::Networking::ActiveDirectory::ADS_OCTET_STRING,
-      utc_time : Win32cr::Foundation::SYSTEMTIME,
-      large_integer : Win32cr::Foundation::LARGE_INTEGER,
-      class_name : UInt16*,
-      provider_specific : Win32cr::Networking::ActiveDirectory::ADS_PROV_SPECIFIC,
-      pCaseIgnoreList : Win32cr::Networking::ActiveDirectory::ADS_CASEIGNORE_LIST*,
-      pOctetList : Win32cr::Networking::ActiveDirectory::ADS_OCTET_LIST*,
-      pPath : Win32cr::Networking::ActiveDirectory::ADS_PATH*,
-      pPostalAddress : Win32cr::Networking::ActiveDirectory::ADS_POSTALADDRESS*,
-      timestamp : Win32cr::Networking::ActiveDirectory::ADS_TIMESTAMP,
-      back_link : Win32cr::Networking::ActiveDirectory::ADS_BACKLINK,
-      pTypedName : Win32cr::Networking::ActiveDirectory::ADS_TYPEDNAME*,
-      hold : Win32cr::Networking::ActiveDirectory::ADS_HOLD,
-      pNetAddress : Win32cr::Networking::ActiveDirectory::ADS_NETADDRESS*,
-      pReplicaPointer : Win32cr::Networking::ActiveDirectory::ADS_REPLICAPOINTER*,
-      pFaxNumber : Win32cr::Networking::ActiveDirectory::ADS_FAXNUMBER*,
-      email : Win32cr::Networking::ActiveDirectory::ADS_EMAIL,
-      security_descriptor : Win32cr::Networking::ActiveDirectory::ADS_NT_SECURITY_DESCRIPTOR,
-      pDNWithBinary : Win32cr::Networking::ActiveDirectory::ADS_DN_WITH_BINARY*,
-      pDNWithString : Win32cr::Networking::ActiveDirectory::ADS_DN_WITH_STRING*
-
+  struct CQPAGE
+    property cbStruct : UInt32
+    property dwFlags : UInt32
+    property pPageProc : Win32cr::Networking::ActiveDirectory::LPCQPAGEPROC
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property idPageName : Int32
+    property idPageTemplate : Int32
+    property pDlgProc : Win32cr::UI::WindowsAndMessaging::DLGPROC
+    property lParam : Win32cr::Foundation::LPARAM
+    def initialize(@cbStruct : UInt32, @dwFlags : UInt32, @pPageProc : Win32cr::Networking::ActiveDirectory::LPCQPAGEPROC, @hInstance : Win32cr::Foundation::HINSTANCE, @idPageName : Int32, @idPageTemplate : Int32, @pDlgProc : Win32cr::UI::WindowsAndMessaging::DLGPROC, @lParam : Win32cr::Foundation::LPARAM)
+    end
   end
 
   @[Extern]
-  record ADS_ATTR_INFO,
-    pszAttrName : Win32cr::Foundation::PWSTR,
-    dwControlCode : UInt32,
-    dwADsType : Win32cr::Networking::ActiveDirectory::ADSTYPEENUM,
-    pADsValues : Win32cr::Networking::ActiveDirectory::ADSVALUE*,
-    dwNumValues : UInt32
-
-  @[Extern]
-  record ADS_OBJECT_INFO,
-    pszRDN : Win32cr::Foundation::PWSTR,
-    pszObjectDN : Win32cr::Foundation::PWSTR,
-    pszParentDN : Win32cr::Foundation::PWSTR,
-    pszSchemaDN : Win32cr::Foundation::PWSTR,
-    pszClassName : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record Ads_searchpref_info,
-    dwSearchPref : Win32cr::Networking::ActiveDirectory::ADS_SEARCHPREF_ENUM,
-    vValue : Win32cr::Networking::ActiveDirectory::ADSVALUE,
-    dwStatus : Win32cr::Networking::ActiveDirectory::ADS_STATUSENUM
-
-  @[Extern]
-  record Ads_search_column,
-    pszAttrName : Win32cr::Foundation::PWSTR,
-    dwADsType : Win32cr::Networking::ActiveDirectory::ADSTYPEENUM,
-    pADsValues : Win32cr::Networking::ActiveDirectory::ADSVALUE*,
-    dwNumValues : UInt32,
-    hReserved : Win32cr::Foundation::HANDLE
-
-  @[Extern]
-  record ADS_ATTR_DEF,
-    pszAttrName : Win32cr::Foundation::PWSTR,
-    dwADsType : Win32cr::Networking::ActiveDirectory::ADSTYPEENUM,
-    dwMinRange : UInt32,
-    dwMaxRange : UInt32,
-    fMultiValued : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record ADS_CLASS_DEF,
-    pszClassName : Win32cr::Foundation::PWSTR,
-    dwMandatoryAttrs : UInt32,
-    ppszMandatoryAttrs : Win32cr::Foundation::PWSTR*,
-    optionalAttrs : UInt32,
-    ppszOptionalAttrs : Win32cr::Foundation::PWSTR**,
-    dwNamingAttrs : UInt32,
-    ppszNamingAttrs : Win32cr::Foundation::PWSTR**,
-    dwSuperClasses : UInt32,
-    ppszSuperClasses : Win32cr::Foundation::PWSTR**,
-    fIsContainer : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record ADS_SORTKEY,
-    pszAttrType : Win32cr::Foundation::PWSTR,
-    pszReserved : Win32cr::Foundation::PWSTR,
-    fReverseorder : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record ADS_VLV,
-    dwBeforeCount : UInt32,
-    dwAfterCount : UInt32,
-    dwOffset : UInt32,
-    dwContentCount : UInt32,
-    pszTarget : Win32cr::Foundation::PWSTR,
-    dwContextIDLength : UInt32,
-    lpContextID : UInt8*
-
-  @[Extern]
-  record DSOBJECT,
-    dwFlags : UInt32,
-    dwProviderFlags : UInt32,
-    offsetName : UInt32,
-    offsetClass : UInt32
-
-  @[Extern]
-  record DSOBJECTNAMES,
-    clsidNamespace : LibC::GUID,
-    cItems : UInt32,
-    aObjects : Win32cr::Networking::ActiveDirectory::DSOBJECT*
-
-  @[Extern]
-  record DSDISPLAYSPECOPTIONS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    offsetAttribPrefix : UInt32,
-    offsetUserName : UInt32,
-    offsetPassword : UInt32,
-    offsetServer : UInt32,
-    offsetServerConfigPath : UInt32
-
-  @[Extern]
-  record DSPROPERTYPAGEINFO,
-    offsetString : UInt32
-
-  @[Extern]
-  record DOMAINDESC,
-    pszName : Win32cr::Foundation::PWSTR,
-    pszPath : Win32cr::Foundation::PWSTR,
-    pszNCName : Win32cr::Foundation::PWSTR,
-    pszTrustParent : Win32cr::Foundation::PWSTR,
-    pszObjectClass : Win32cr::Foundation::PWSTR,
-    ulFlags : UInt32,
-    fDownLevel : Win32cr::Foundation::BOOL,
-    pdChildList : Win32cr::Networking::ActiveDirectory::DOMAINDESC*,
-    pdNextSibling : Win32cr::Networking::ActiveDirectory::DOMAINDESC*
-
-  @[Extern]
-  record DOMAIN_TREE,
-    dsSize : UInt32,
-    dwCount : UInt32,
-    aDomains : Win32cr::Networking::ActiveDirectory::DOMAINDESC*
-
-  @[Extern]
-  record DSCLASSCREATIONINFO,
-    dwFlags : UInt32,
-    clsidWizardDialog : LibC::GUID,
-    clsidWizardPrimaryPage : LibC::GUID,
-    cWizardExtensions : UInt32,
-    aWizardExtensions : LibC::GUID*
-
-  @[Extern]
-  record DSBROWSEINFOW,
-    cbStruct : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    pszCaption : Win32cr::Foundation::PWSTR,
-    pszTitle : Win32cr::Foundation::PWSTR,
-    pszRoot : Win32cr::Foundation::PWSTR,
-    pszPath : Win32cr::Foundation::PWSTR,
-    cchPath : UInt32,
-    dwFlags : UInt32,
-    pfnCallback : Win32cr::UI::Shell::BFFCALLBACK,
-    lParam : Win32cr::Foundation::LPARAM,
-    dwReturnFormat : UInt32,
-    pUserName : Win32cr::Foundation::PWSTR,
-    pPassword : Win32cr::Foundation::PWSTR,
-    pszObjectClass : Win32cr::Foundation::PWSTR,
-    cchObjectClass : UInt32
-
-  @[Extern]
-  record DSBROWSEINFOA,
-    cbStruct : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    pszCaption : Win32cr::Foundation::PSTR,
-    pszTitle : Win32cr::Foundation::PSTR,
-    pszRoot : Win32cr::Foundation::PWSTR,
-    pszPath : Win32cr::Foundation::PWSTR,
-    cchPath : UInt32,
-    dwFlags : UInt32,
-    pfnCallback : Win32cr::UI::Shell::BFFCALLBACK,
-    lParam : Win32cr::Foundation::LPARAM,
-    dwReturnFormat : UInt32,
-    pUserName : Win32cr::Foundation::PWSTR,
-    pPassword : Win32cr::Foundation::PWSTR,
-    pszObjectClass : Win32cr::Foundation::PWSTR,
-    cchObjectClass : UInt32
-
-  @[Extern]
-  record DSBITEMW,
-    cbStruct : UInt32,
-    pszADsPath : Win32cr::Foundation::PWSTR,
-    pszClass : Win32cr::Foundation::PWSTR,
-    dwMask : UInt32,
-    dwState : UInt32,
-    dwStateMask : UInt32,
-    szDisplayName : UInt16[64],
-    szIconLocation : UInt16[260],
-    iIconResID : Int32
-
-  @[Extern]
-  record DSBITEMA,
-    cbStruct : UInt32,
-    pszADsPath : Win32cr::Foundation::PWSTR,
-    pszClass : Win32cr::Foundation::PWSTR,
-    dwMask : UInt32,
-    dwState : UInt32,
-    dwStateMask : UInt32,
-    szDisplayName : Win32cr::Foundation::CHAR[64],
-    szIconLocation : Win32cr::Foundation::CHAR[260],
-    iIconResID : Int32
-
-  @[Extern]
-  record DSOP_UPLEVEL_FILTER_FLAGS,
-    flBothModes : UInt32,
-    flMixedModeOnly : UInt32,
-    flNativeModeOnly : UInt32
-
-  @[Extern]
-  record DSOP_FILTER_FLAGS,
-    uplevel : Win32cr::Networking::ActiveDirectory::DSOP_UPLEVEL_FILTER_FLAGS,
-    flDownlevel : UInt32
-
-  @[Extern]
-  record DSOP_SCOPE_INIT_INFO,
-    cbSize : UInt32,
-    flType : UInt32,
-    flScope : UInt32,
-    filter_flags : Win32cr::Networking::ActiveDirectory::DSOP_FILTER_FLAGS,
-    pwzDcName : Win32cr::Foundation::PWSTR,
-    pwzADsPath : Win32cr::Foundation::PWSTR,
-    hr : Win32cr::Foundation::HRESULT
-
-  @[Extern]
-  record DSOP_INIT_INFO,
-    cbSize : UInt32,
-    pwzTargetComputer : Win32cr::Foundation::PWSTR,
-    cDsScopeInfos : UInt32,
-    aDsScopeInfos : Win32cr::Networking::ActiveDirectory::DSOP_SCOPE_INIT_INFO*,
-    flOptions : UInt32,
-    cAttributesToFetch : UInt32,
-    apwzAttributeNames : Win32cr::Foundation::PWSTR*
-
-  @[Extern]
-  record DS_SELECTION,
-    pwzName : Win32cr::Foundation::PWSTR,
-    pwzADsPath : Win32cr::Foundation::PWSTR,
-    pwzClass : Win32cr::Foundation::PWSTR,
-    pwzUPN : Win32cr::Foundation::PWSTR,
-    pvarFetchedAttributes : Win32cr::System::Com::VARIANT*,
-    flScopeType : UInt32
-
-  @[Extern]
-  record DS_SELECTION_LIST,
-    cItems : UInt32,
-    cFetchedAttributes : UInt32,
-    aDsSelection : Win32cr::Networking::ActiveDirectory::DS_SELECTION*
-
-  @[Extern]
-  record DSQUERYINITPARAMS,
-    cbStruct : UInt32,
-    dwFlags : UInt32,
-    pDefaultScope : Win32cr::Foundation::PWSTR,
-    pDefaultSaveLocation : Win32cr::Foundation::PWSTR,
-    pUserName : Win32cr::Foundation::PWSTR,
-    pPassword : Win32cr::Foundation::PWSTR,
-    pServer : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record DSCOLUMN,
-    dwFlags : UInt32,
-    fmt : Int32,
-    cx : Int32,
-    idsName : Int32,
-    offsetProperty : Int32,
-    dwReserved : UInt32
-
-  @[Extern]
-  record DSQUERYPARAMS,
-    cbStruct : UInt32,
-    dwFlags : UInt32,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    offsetQuery : Int32,
-    iColumns : Int32,
-    dwReserved : UInt32,
-    aColumns : Win32cr::Networking::ActiveDirectory::DSCOLUMN*
-
-  @[Extern]
-  record DSQUERYCLASSLIST,
-    cbStruct : UInt32,
-    cClasses : Int32,
-    offsetClass : UInt32*
-
-  @[Extern]
-  record DSA_NEWOBJ_DISPINFO,
-    dwSize : UInt32,
-    hObjClassIcon : Win32cr::UI::WindowsAndMessaging::HICON,
-    lpszWizTitle : Win32cr::Foundation::PWSTR,
-    lpszContDisplayName : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record ADSPROPINITPARAMS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    hr : Win32cr::Foundation::HRESULT,
-    pDsObj : Void*,
-    pwzCN : Win32cr::Foundation::PWSTR,
-    pWritableAttrs : Win32cr::Networking::ActiveDirectory::ADS_ATTR_INFO*
-
-  @[Extern]
-  record ADSPROPERROR,
-    hwndPage : Win32cr::Foundation::HWND,
-    pszPageTitle : Win32cr::Foundation::PWSTR,
-    pszObjPath : Win32cr::Foundation::PWSTR,
-    pszObjClass : Win32cr::Foundation::PWSTR,
-    hr : Win32cr::Foundation::HRESULT,
-    pszError : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record SCHEDULE_HEADER,
-    type__ : UInt32,
-    offset : UInt32
-
-  @[Extern]
-  record SCHEDULE,
-    size : UInt32,
-    bandwidth : UInt32,
-    number_of_schedules : UInt32,
-    schedules : Win32cr::Networking::ActiveDirectory::SCHEDULE_HEADER*
-
-  @[Extern]
-  record DS_NAME_RESULT_ITEMA,
-    status : UInt32,
-    pDomain : Win32cr::Foundation::PSTR,
-    pName : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record DS_NAME_RESULTA,
-    cItems : UInt32,
-    rItems : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULT_ITEMA*
-
-  @[Extern]
-  record DS_NAME_RESULT_ITEMW,
-    status : UInt32,
-    pDomain : Win32cr::Foundation::PWSTR,
-    pName : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record DS_NAME_RESULTW,
-    cItems : UInt32,
-    rItems : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULT_ITEMW*
-
-  @[Extern]
-  record DS_REPSYNCALL_SYNCA,
-    pszSrcId : Win32cr::Foundation::PSTR,
-    pszDstId : Win32cr::Foundation::PSTR,
-    pszNC : Win32cr::Foundation::PSTR,
-    pguidSrc : LibC::GUID*,
-    pguidDst : LibC::GUID*
-
-  @[Extern]
-  record DS_REPSYNCALL_SYNCW,
-    pszSrcId : Win32cr::Foundation::PWSTR,
-    pszDstId : Win32cr::Foundation::PWSTR,
-    pszNC : Win32cr::Foundation::PWSTR,
-    pguidSrc : LibC::GUID*,
-    pguidDst : LibC::GUID*
-
-  @[Extern]
-  record DS_REPSYNCALL_ERRINFOA,
-    pszSvrId : Win32cr::Foundation::PSTR,
-    error : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_ERROR,
-    dwWin32Err : UInt32,
-    pszSrcId : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record DS_REPSYNCALL_ERRINFOW,
-    pszSvrId : Win32cr::Foundation::PWSTR,
-    error : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_ERROR,
-    dwWin32Err : UInt32,
-    pszSrcId : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record DS_REPSYNCALL_UPDATEA,
-    event : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_EVENT,
-    pErrInfo : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_ERRINFOA*,
-    pSync : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_SYNCA*
-
-  @[Extern]
-  record DS_REPSYNCALL_UPDATEW,
-    event : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_EVENT,
-    pErrInfo : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_ERRINFOW*,
-    pSync : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_SYNCW*
-
-  @[Extern]
-  record DS_SITE_COST_INFO,
-    errorCode : UInt32,
-    cost : UInt32
-
-  @[Extern]
-  record DS_SCHEMA_GUID_MAPA,
-    guid : LibC::GUID,
-    guidType : UInt32,
-    pName : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record DS_SCHEMA_GUID_MAPW,
-    guid : LibC::GUID,
-    guidType : UInt32,
-    pName : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record DS_DOMAIN_CONTROLLER_INFO_1A,
-    netbios_name : Win32cr::Foundation::PSTR,
-    dns_host_name : Win32cr::Foundation::PSTR,
-    site_name : Win32cr::Foundation::PSTR,
-    computer_object_name : Win32cr::Foundation::PSTR,
-    server_object_name : Win32cr::Foundation::PSTR,
-    fIsPdc : Win32cr::Foundation::BOOL,
-    fDsEnabled : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record DS_DOMAIN_CONTROLLER_INFO_1W,
-    netbios_name : Win32cr::Foundation::PWSTR,
-    dns_host_name : Win32cr::Foundation::PWSTR,
-    site_name : Win32cr::Foundation::PWSTR,
-    computer_object_name : Win32cr::Foundation::PWSTR,
-    server_object_name : Win32cr::Foundation::PWSTR,
-    fIsPdc : Win32cr::Foundation::BOOL,
-    fDsEnabled : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record DS_DOMAIN_CONTROLLER_INFO_2A,
-    netbios_name : Win32cr::Foundation::PSTR,
-    dns_host_name : Win32cr::Foundation::PSTR,
-    site_name : Win32cr::Foundation::PSTR,
-    site_object_name : Win32cr::Foundation::PSTR,
-    computer_object_name : Win32cr::Foundation::PSTR,
-    server_object_name : Win32cr::Foundation::PSTR,
-    ntds_dsa_object_name : Win32cr::Foundation::PSTR,
-    fIsPdc : Win32cr::Foundation::BOOL,
-    fDsEnabled : Win32cr::Foundation::BOOL,
-    fIsGc : Win32cr::Foundation::BOOL,
-    site_object_guid : LibC::GUID,
-    computer_object_guid : LibC::GUID,
-    server_object_guid : LibC::GUID,
-    ntds_dsa_object_guid : LibC::GUID
-
-  @[Extern]
-  record DS_DOMAIN_CONTROLLER_INFO_2W,
-    netbios_name : Win32cr::Foundation::PWSTR,
-    dns_host_name : Win32cr::Foundation::PWSTR,
-    site_name : Win32cr::Foundation::PWSTR,
-    site_object_name : Win32cr::Foundation::PWSTR,
-    computer_object_name : Win32cr::Foundation::PWSTR,
-    server_object_name : Win32cr::Foundation::PWSTR,
-    ntds_dsa_object_name : Win32cr::Foundation::PWSTR,
-    fIsPdc : Win32cr::Foundation::BOOL,
-    fDsEnabled : Win32cr::Foundation::BOOL,
-    fIsGc : Win32cr::Foundation::BOOL,
-    site_object_guid : LibC::GUID,
-    computer_object_guid : LibC::GUID,
-    server_object_guid : LibC::GUID,
-    ntds_dsa_object_guid : LibC::GUID
-
-  @[Extern]
-  record DS_DOMAIN_CONTROLLER_INFO_3A,
-    netbios_name : Win32cr::Foundation::PSTR,
-    dns_host_name : Win32cr::Foundation::PSTR,
-    site_name : Win32cr::Foundation::PSTR,
-    site_object_name : Win32cr::Foundation::PSTR,
-    computer_object_name : Win32cr::Foundation::PSTR,
-    server_object_name : Win32cr::Foundation::PSTR,
-    ntds_dsa_object_name : Win32cr::Foundation::PSTR,
-    fIsPdc : Win32cr::Foundation::BOOL,
-    fDsEnabled : Win32cr::Foundation::BOOL,
-    fIsGc : Win32cr::Foundation::BOOL,
-    fIsRodc : Win32cr::Foundation::BOOL,
-    site_object_guid : LibC::GUID,
-    computer_object_guid : LibC::GUID,
-    server_object_guid : LibC::GUID,
-    ntds_dsa_object_guid : LibC::GUID
-
-  @[Extern]
-  record DS_DOMAIN_CONTROLLER_INFO_3W,
-    netbios_name : Win32cr::Foundation::PWSTR,
-    dns_host_name : Win32cr::Foundation::PWSTR,
-    site_name : Win32cr::Foundation::PWSTR,
-    site_object_name : Win32cr::Foundation::PWSTR,
-    computer_object_name : Win32cr::Foundation::PWSTR,
-    server_object_name : Win32cr::Foundation::PWSTR,
-    ntds_dsa_object_name : Win32cr::Foundation::PWSTR,
-    fIsPdc : Win32cr::Foundation::BOOL,
-    fDsEnabled : Win32cr::Foundation::BOOL,
-    fIsGc : Win32cr::Foundation::BOOL,
-    fIsRodc : Win32cr::Foundation::BOOL,
-    site_object_guid : LibC::GUID,
-    computer_object_guid : LibC::GUID,
-    server_object_guid : LibC::GUID,
-    ntds_dsa_object_guid : LibC::GUID
-
-  @[Extern]
-  record DS_REPL_NEIGHBORW,
-    pszNamingContext : Win32cr::Foundation::PWSTR,
-    pszSourceDsaDN : Win32cr::Foundation::PWSTR,
-    pszSourceDsaAddress : Win32cr::Foundation::PWSTR,
-    pszAsyncIntersiteTransportDN : Win32cr::Foundation::PWSTR,
-    dwReplicaFlags : UInt32,
-    dwReserved : UInt32,
-    uuidNamingContextObjGuid : LibC::GUID,
-    uuidSourceDsaObjGuid : LibC::GUID,
-    uuidSourceDsaInvocationID : LibC::GUID,
-    uuidAsyncIntersiteTransportObjGuid : LibC::GUID,
-    usnLastObjChangeSynced : Int64,
-    usnAttributeFilter : Int64,
-    ftimeLastSyncSuccess : Win32cr::Foundation::FILETIME,
-    ftimeLastSyncAttempt : Win32cr::Foundation::FILETIME,
-    dwLastSyncResult : UInt32,
-    cNumConsecutiveSyncFailures : UInt32
-
-  @[Extern]
-  record DS_REPL_NEIGHBORW_BLOB,
-    oszNamingContext : UInt32,
-    oszSourceDsaDN : UInt32,
-    oszSourceDsaAddress : UInt32,
-    oszAsyncIntersiteTransportDN : UInt32,
-    dwReplicaFlags : UInt32,
-    dwReserved : UInt32,
-    uuidNamingContextObjGuid : LibC::GUID,
-    uuidSourceDsaObjGuid : LibC::GUID,
-    uuidSourceDsaInvocationID : LibC::GUID,
-    uuidAsyncIntersiteTransportObjGuid : LibC::GUID,
-    usnLastObjChangeSynced : Int64,
-    usnAttributeFilter : Int64,
-    ftimeLastSyncSuccess : Win32cr::Foundation::FILETIME,
-    ftimeLastSyncAttempt : Win32cr::Foundation::FILETIME,
-    dwLastSyncResult : UInt32,
-    cNumConsecutiveSyncFailures : UInt32
-
-  @[Extern]
-  record DS_REPL_NEIGHBORSW,
-    cNumNeighbors : UInt32,
-    dwReserved : UInt32,
-    rgNeighbor : Win32cr::Networking::ActiveDirectory::DS_REPL_NEIGHBORW*
-
-  @[Extern]
-  record DS_REPL_CURSOR,
-    uuidSourceDsaInvocationID : LibC::GUID,
-    usnAttributeFilter : Int64
-
-  @[Extern]
-  record DS_REPL_CURSOR_2,
-    uuidSourceDsaInvocationID : LibC::GUID,
-    usnAttributeFilter : Int64,
-    ftimeLastSyncSuccess : Win32cr::Foundation::FILETIME
-
-  @[Extern]
-  record DS_REPL_CURSOR_3W,
-    uuidSourceDsaInvocationID : LibC::GUID,
-    usnAttributeFilter : Int64,
-    ftimeLastSyncSuccess : Win32cr::Foundation::FILETIME,
-    pszSourceDsaDN : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record DS_REPL_CURSOR_BLOB,
-    uuidSourceDsaInvocationID : LibC::GUID,
-    usnAttributeFilter : Int64,
-    ftimeLastSyncSuccess : Win32cr::Foundation::FILETIME,
-    oszSourceDsaDN : UInt32
-
-  @[Extern]
-  record DS_REPL_CURSORS,
-    cNumCursors : UInt32,
-    dwReserved : UInt32,
-    rgCursor : Win32cr::Networking::ActiveDirectory::DS_REPL_CURSOR*
-
-  @[Extern]
-  record DS_REPL_CURSORS_2,
-    cNumCursors : UInt32,
-    dwEnumerationContext : UInt32,
-    rgCursor : Win32cr::Networking::ActiveDirectory::DS_REPL_CURSOR_2*
-
-  @[Extern]
-  record DS_REPL_CURSORS_3W,
-    cNumCursors : UInt32,
-    dwEnumerationContext : UInt32,
-    rgCursor : Win32cr::Networking::ActiveDirectory::DS_REPL_CURSOR_3W*
-
-  @[Extern]
-  record DS_REPL_ATTR_META_DATA,
-    pszAttributeName : Win32cr::Foundation::PWSTR,
-    dwVersion : UInt32,
-    ftimeLastOriginatingChange : Win32cr::Foundation::FILETIME,
-    uuidLastOriginatingDsaInvocationID : LibC::GUID,
-    usnOriginatingChange : Int64,
-    usnLocalChange : Int64
-
-  @[Extern]
-  record DS_REPL_ATTR_META_DATA_2,
-    pszAttributeName : Win32cr::Foundation::PWSTR,
-    dwVersion : UInt32,
-    ftimeLastOriginatingChange : Win32cr::Foundation::FILETIME,
-    uuidLastOriginatingDsaInvocationID : LibC::GUID,
-    usnOriginatingChange : Int64,
-    usnLocalChange : Int64,
-    pszLastOriginatingDsaDN : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record DS_REPL_ATTR_META_DATA_BLOB,
-    oszAttributeName : UInt32,
-    dwVersion : UInt32,
-    ftimeLastOriginatingChange : Win32cr::Foundation::FILETIME,
-    uuidLastOriginatingDsaInvocationID : LibC::GUID,
-    usnOriginatingChange : Int64,
-    usnLocalChange : Int64,
-    oszLastOriginatingDsaDN : UInt32
-
-  @[Extern]
-  record DS_REPL_OBJ_META_DATA,
-    cNumEntries : UInt32,
-    dwReserved : UInt32,
-    rgMetaData : Win32cr::Networking::ActiveDirectory::DS_REPL_ATTR_META_DATA*
-
-  @[Extern]
-  record DS_REPL_OBJ_META_DATA_2,
-    cNumEntries : UInt32,
-    dwReserved : UInt32,
-    rgMetaData : Win32cr::Networking::ActiveDirectory::DS_REPL_ATTR_META_DATA_2*
-
-  @[Extern]
-  record DS_REPL_KCC_DSA_FAILUREW,
-    pszDsaDN : Win32cr::Foundation::PWSTR,
-    uuidDsaObjGuid : LibC::GUID,
-    ftimeFirstFailure : Win32cr::Foundation::FILETIME,
-    cNumFailures : UInt32,
-    dwLastResult : UInt32
-
-  @[Extern]
-  record DS_REPL_KCC_DSA_FAILUREW_BLOB,
-    oszDsaDN : UInt32,
-    uuidDsaObjGuid : LibC::GUID,
-    ftimeFirstFailure : Win32cr::Foundation::FILETIME,
-    cNumFailures : UInt32,
-    dwLastResult : UInt32
-
-  @[Extern]
-  record DS_REPL_KCC_DSA_FAILURESW,
-    cNumEntries : UInt32,
-    dwReserved : UInt32,
-    rgDsaFailure : Win32cr::Networking::ActiveDirectory::DS_REPL_KCC_DSA_FAILUREW*
-
-  @[Extern]
-  record DS_REPL_OPW,
-    ftimeEnqueued : Win32cr::Foundation::FILETIME,
-    ulSerialNumber : UInt32,
-    ulPriority : UInt32,
-    op_type : Win32cr::Networking::ActiveDirectory::DS_REPL_OP_TYPE,
-    ulOptions : UInt32,
-    pszNamingContext : Win32cr::Foundation::PWSTR,
-    pszDsaDN : Win32cr::Foundation::PWSTR,
-    pszDsaAddress : Win32cr::Foundation::PWSTR,
-    uuidNamingContextObjGuid : LibC::GUID,
-    uuidDsaObjGuid : LibC::GUID
-
-  @[Extern]
-  record DS_REPL_OPW_BLOB,
-    ftimeEnqueued : Win32cr::Foundation::FILETIME,
-    ulSerialNumber : UInt32,
-    ulPriority : UInt32,
-    op_type : Win32cr::Networking::ActiveDirectory::DS_REPL_OP_TYPE,
-    ulOptions : UInt32,
-    oszNamingContext : UInt32,
-    oszDsaDN : UInt32,
-    oszDsaAddress : UInt32,
-    uuidNamingContextObjGuid : LibC::GUID,
-    uuidDsaObjGuid : LibC::GUID
-
-  @[Extern]
-  record DS_REPL_PENDING_OPSW,
-    ftimeCurrentOpStarted : Win32cr::Foundation::FILETIME,
-    cNumPendingOps : UInt32,
-    rgPendingOp : Win32cr::Networking::ActiveDirectory::DS_REPL_OPW*
-
-  @[Extern]
-  record DS_REPL_VALUE_META_DATA,
-    pszAttributeName : Win32cr::Foundation::PWSTR,
-    pszObjectDn : Win32cr::Foundation::PWSTR,
-    cbData : UInt32,
-    pbData : UInt8*,
-    ftimeDeleted : Win32cr::Foundation::FILETIME,
-    ftimeCreated : Win32cr::Foundation::FILETIME,
-    dwVersion : UInt32,
-    ftimeLastOriginatingChange : Win32cr::Foundation::FILETIME,
-    uuidLastOriginatingDsaInvocationID : LibC::GUID,
-    usnOriginatingChange : Int64,
-    usnLocalChange : Int64
-
-  @[Extern]
-  record DS_REPL_VALUE_META_DATA_2,
-    pszAttributeName : Win32cr::Foundation::PWSTR,
-    pszObjectDn : Win32cr::Foundation::PWSTR,
-    cbData : UInt32,
-    pbData : UInt8*,
-    ftimeDeleted : Win32cr::Foundation::FILETIME,
-    ftimeCreated : Win32cr::Foundation::FILETIME,
-    dwVersion : UInt32,
-    ftimeLastOriginatingChange : Win32cr::Foundation::FILETIME,
-    uuidLastOriginatingDsaInvocationID : LibC::GUID,
-    usnOriginatingChange : Int64,
-    usnLocalChange : Int64,
-    pszLastOriginatingDsaDN : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record DS_REPL_VALUE_META_DATA_EXT,
-    pszAttributeName : Win32cr::Foundation::PWSTR,
-    pszObjectDn : Win32cr::Foundation::PWSTR,
-    cbData : UInt32,
-    pbData : UInt8*,
-    ftimeDeleted : Win32cr::Foundation::FILETIME,
-    ftimeCreated : Win32cr::Foundation::FILETIME,
-    dwVersion : UInt32,
-    ftimeLastOriginatingChange : Win32cr::Foundation::FILETIME,
-    uuidLastOriginatingDsaInvocationID : LibC::GUID,
-    usnOriginatingChange : Int64,
-    usnLocalChange : Int64,
-    pszLastOriginatingDsaDN : Win32cr::Foundation::PWSTR,
-    dwUserIdentifier : UInt32,
-    dwPriorLinkState : UInt32,
-    dwCurrentLinkState : UInt32
-
-  @[Extern]
-  record DS_REPL_VALUE_META_DATA_BLOB,
-    oszAttributeName : UInt32,
-    oszObjectDn : UInt32,
-    cbData : UInt32,
-    obData : UInt32,
-    ftimeDeleted : Win32cr::Foundation::FILETIME,
-    ftimeCreated : Win32cr::Foundation::FILETIME,
-    dwVersion : UInt32,
-    ftimeLastOriginatingChange : Win32cr::Foundation::FILETIME,
-    uuidLastOriginatingDsaInvocationID : LibC::GUID,
-    usnOriginatingChange : Int64,
-    usnLocalChange : Int64,
-    oszLastOriginatingDsaDN : UInt32
-
-  @[Extern]
-  record DS_REPL_VALUE_META_DATA_BLOB_EXT,
-    oszAttributeName : UInt32,
-    oszObjectDn : UInt32,
-    cbData : UInt32,
-    obData : UInt32,
-    ftimeDeleted : Win32cr::Foundation::FILETIME,
-    ftimeCreated : Win32cr::Foundation::FILETIME,
-    dwVersion : UInt32,
-    ftimeLastOriginatingChange : Win32cr::Foundation::FILETIME,
-    uuidLastOriginatingDsaInvocationID : LibC::GUID,
-    usnOriginatingChange : Int64,
-    usnLocalChange : Int64,
-    oszLastOriginatingDsaDN : UInt32,
-    dwUserIdentifier : UInt32,
-    dwPriorLinkState : UInt32,
-    dwCurrentLinkState : UInt32
-
-  @[Extern]
-  record DS_REPL_ATTR_VALUE_META_DATA,
-    cNumEntries : UInt32,
-    dwEnumerationContext : UInt32,
-    rgMetaData : Win32cr::Networking::ActiveDirectory::DS_REPL_VALUE_META_DATA*
-
-  @[Extern]
-  record DS_REPL_ATTR_VALUE_META_DATA_2,
-    cNumEntries : UInt32,
-    dwEnumerationContext : UInt32,
-    rgMetaData : Win32cr::Networking::ActiveDirectory::DS_REPL_VALUE_META_DATA_2*
-
-  @[Extern]
-  record DS_REPL_ATTR_VALUE_META_DATA_EXT,
-    cNumEntries : UInt32,
-    dwEnumerationContext : UInt32,
-    rgMetaData : Win32cr::Networking::ActiveDirectory::DS_REPL_VALUE_META_DATA_EXT*
-
-  @[Extern]
-  record DS_REPL_QUEUE_STATISTICSW,
-    ftimeCurrentOpStarted : Win32cr::Foundation::FILETIME,
-    cNumPendingOps : UInt32,
-    ftimeOldestSync : Win32cr::Foundation::FILETIME,
-    ftimeOldestAdd : Win32cr::Foundation::FILETIME,
-    ftimeOldestMod : Win32cr::Foundation::FILETIME,
-    ftimeOldestDel : Win32cr::Foundation::FILETIME,
-    ftimeOldestUpdRefs : Win32cr::Foundation::FILETIME
-
-  @[Extern]
-  record DSROLE_PRIMARY_DOMAIN_INFO_BASIC,
-    machine_role : Win32cr::Networking::ActiveDirectory::DSROLE_MACHINE_ROLE,
-    flags : UInt32,
-    domain_name_flat : Win32cr::Foundation::PWSTR,
-    domain_name_dns : Win32cr::Foundation::PWSTR,
-    domain_forest_name : Win32cr::Foundation::PWSTR,
-    domain_guid : LibC::GUID
-
-  @[Extern]
-  record DSROLE_UPGRADE_STATUS_INFO,
-    operation_state : UInt32,
-    previous_server_state : Win32cr::Networking::ActiveDirectory::DSROLE_SERVER_STATE
-
-  @[Extern]
-  record DSROLE_OPERATION_STATE_INFO,
-    operation_state : Win32cr::Networking::ActiveDirectory::DSROLE_OPERATION_STATE
-
-  @[Extern]
-  record DOMAIN_CONTROLLER_INFOA,
-    domain_controller_name : Win32cr::Foundation::PSTR,
-    domain_controller_address : Win32cr::Foundation::PSTR,
-    domain_controller_address_type : UInt32,
-    domain_guid : LibC::GUID,
-    domain_name : Win32cr::Foundation::PSTR,
-    dns_forest_name : Win32cr::Foundation::PSTR,
-    flags : UInt32,
-    dc_site_name : Win32cr::Foundation::PSTR,
-    client_site_name : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record DOMAIN_CONTROLLER_INFOW,
-    domain_controller_name : Win32cr::Foundation::PWSTR,
-    domain_controller_address : Win32cr::Foundation::PWSTR,
-    domain_controller_address_type : UInt32,
-    domain_guid : LibC::GUID,
-    domain_name : Win32cr::Foundation::PWSTR,
-    dns_forest_name : Win32cr::Foundation::PWSTR,
-    flags : UInt32,
-    dc_site_name : Win32cr::Foundation::PWSTR,
-    client_site_name : Win32cr::Foundation::PWSTR
-
-  @[Extern]
-  record DS_DOMAIN_TRUSTSW,
-    netbios_domain_name : Win32cr::Foundation::PWSTR,
-    dns_domain_name : Win32cr::Foundation::PWSTR,
-    flags : UInt32,
-    parent_index : UInt32,
-    trust_type : UInt32,
-    trust_attributes : UInt32,
-    domain_sid : Win32cr::Foundation::PSID,
-    domain_guid : LibC::GUID
-
-  @[Extern]
-  record DS_DOMAIN_TRUSTSA,
-    netbios_domain_name : Win32cr::Foundation::PSTR,
-    dns_domain_name : Win32cr::Foundation::PSTR,
-    flags : UInt32,
-    parent_index : UInt32,
-    trust_type : UInt32,
-    trust_attributes : UInt32,
-    domain_sid : Win32cr::Foundation::PSID,
-    domain_guid : LibC::GUID
+  struct OPENQUERYWINDOW
+    property cbStruct : UInt32
+    property dwFlags : UInt32
+    property clsidHandler : LibC::GUID
+    property pHandlerParameters : Void*
+    property clsidDefaultForm : LibC::GUID
+    property pPersistQuery : Void*
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property pFormParameters : Void*
+    property ppbFormParameters : Void*
+    def initialize(@pFormParameters : Void*, @ppbFormParameters : Void*)
+    end
+    end
+
+    def initialize(@cbStruct : UInt32, @dwFlags : UInt32, @clsidHandler : LibC::GUID, @pHandlerParameters : Void*, @clsidDefaultForm : LibC::GUID, @pPersistQuery : Void*, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct ADS_OCTET_STRING
+    property dwLength : UInt32
+    property lpValue : UInt8*
+    def initialize(@dwLength : UInt32, @lpValue : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct ADS_NT_SECURITY_DESCRIPTOR
+    property dwLength : UInt32
+    property lpValue : UInt8*
+    def initialize(@dwLength : UInt32, @lpValue : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct ADS_PROV_SPECIFIC
+    property dwLength : UInt32
+    property lpValue : UInt8*
+    def initialize(@dwLength : UInt32, @lpValue : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct ADS_CASEIGNORE_LIST
+    property next__ : Win32cr::Networking::ActiveDirectory::ADS_CASEIGNORE_LIST*
+    property string : Win32cr::Foundation::PWSTR
+    def initialize(@next__ : Win32cr::Networking::ActiveDirectory::ADS_CASEIGNORE_LIST*, @string : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct ADS_OCTET_LIST
+    property next__ : Win32cr::Networking::ActiveDirectory::ADS_OCTET_LIST*
+    property length : UInt32
+    property data : UInt8*
+    def initialize(@next__ : Win32cr::Networking::ActiveDirectory::ADS_OCTET_LIST*, @length : UInt32, @data : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct ADS_PATH
+    property type__ : UInt32
+    property volume_name : Win32cr::Foundation::PWSTR
+    property path : Win32cr::Foundation::PWSTR
+    def initialize(@type__ : UInt32, @volume_name : Win32cr::Foundation::PWSTR, @path : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct ADS_POSTALADDRESS
+    property postal_address : Win32cr::Foundation::PWSTR[6]
+    def initialize(@postal_address : Win32cr::Foundation::PWSTR[6])
+    end
+  end
+
+  @[Extern]
+  struct ADS_TIMESTAMP
+    property whole_seconds : UInt32
+    property event_id : UInt32
+    def initialize(@whole_seconds : UInt32, @event_id : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ADS_BACKLINK
+    property remote_id : UInt32
+    property object_name : Win32cr::Foundation::PWSTR
+    def initialize(@remote_id : UInt32, @object_name : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct ADS_TYPEDNAME
+    property object_name : Win32cr::Foundation::PWSTR
+    property level : UInt32
+    property interval : UInt32
+    def initialize(@object_name : Win32cr::Foundation::PWSTR, @level : UInt32, @interval : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ADS_HOLD
+    property object_name : Win32cr::Foundation::PWSTR
+    property amount : UInt32
+    def initialize(@object_name : Win32cr::Foundation::PWSTR, @amount : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ADS_NETADDRESS
+    property address_type : UInt32
+    property address_length : UInt32
+    property address : UInt8*
+    def initialize(@address_type : UInt32, @address_length : UInt32, @address : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct ADS_REPLICAPOINTER
+    property server_name : Win32cr::Foundation::PWSTR
+    property replica_type : UInt32
+    property replica_number : UInt32
+    property count : UInt32
+    property replica_address_hints : Win32cr::Networking::ActiveDirectory::ADS_NETADDRESS*
+    def initialize(@server_name : Win32cr::Foundation::PWSTR, @replica_type : UInt32, @replica_number : UInt32, @count : UInt32, @replica_address_hints : Win32cr::Networking::ActiveDirectory::ADS_NETADDRESS*)
+    end
+  end
+
+  @[Extern]
+  struct ADS_FAXNUMBER
+    property telephone_number : Win32cr::Foundation::PWSTR
+    property number_of_bits : UInt32
+    property parameters : UInt8*
+    def initialize(@telephone_number : Win32cr::Foundation::PWSTR, @number_of_bits : UInt32, @parameters : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct ADS_EMAIL
+    property address : Win32cr::Foundation::PWSTR
+    property type__ : UInt32
+    def initialize(@address : Win32cr::Foundation::PWSTR, @type__ : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ADS_DN_WITH_BINARY
+    property dwLength : UInt32
+    property lpBinaryValue : UInt8*
+    property pszDNString : Win32cr::Foundation::PWSTR
+    def initialize(@dwLength : UInt32, @lpBinaryValue : UInt8*, @pszDNString : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct ADS_DN_WITH_STRING
+    property pszStringValue : Win32cr::Foundation::PWSTR
+    property pszDNString : Win32cr::Foundation::PWSTR
+    def initialize(@pszStringValue : Win32cr::Foundation::PWSTR, @pszDNString : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct ADSVALUE
+    property dwType : Win32cr::Networking::ActiveDirectory::ADSTYPEENUM
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property dn_string : UInt16*
+    property case_exact_string : UInt16*
+    property case_ignore_string : UInt16*
+    property printable_string : UInt16*
+    property numeric_string : UInt16*
+    property boolean : UInt32
+    property integer : UInt32
+    property octet_string : Win32cr::Networking::ActiveDirectory::ADS_OCTET_STRING
+    property utc_time : Win32cr::Foundation::SYSTEMTIME
+    property large_integer : Win32cr::Foundation::LARGE_INTEGER
+    property class_name : UInt16*
+    property provider_specific : Win32cr::Networking::ActiveDirectory::ADS_PROV_SPECIFIC
+    property pCaseIgnoreList : Win32cr::Networking::ActiveDirectory::ADS_CASEIGNORE_LIST*
+    property pOctetList : Win32cr::Networking::ActiveDirectory::ADS_OCTET_LIST*
+    property pPath : Win32cr::Networking::ActiveDirectory::ADS_PATH*
+    property pPostalAddress : Win32cr::Networking::ActiveDirectory::ADS_POSTALADDRESS*
+    property timestamp : Win32cr::Networking::ActiveDirectory::ADS_TIMESTAMP
+    property back_link : Win32cr::Networking::ActiveDirectory::ADS_BACKLINK
+    property pTypedName : Win32cr::Networking::ActiveDirectory::ADS_TYPEDNAME*
+    property hold : Win32cr::Networking::ActiveDirectory::ADS_HOLD
+    property pNetAddress : Win32cr::Networking::ActiveDirectory::ADS_NETADDRESS*
+    property pReplicaPointer : Win32cr::Networking::ActiveDirectory::ADS_REPLICAPOINTER*
+    property pFaxNumber : Win32cr::Networking::ActiveDirectory::ADS_FAXNUMBER*
+    property email : Win32cr::Networking::ActiveDirectory::ADS_EMAIL
+    property security_descriptor : Win32cr::Networking::ActiveDirectory::ADS_NT_SECURITY_DESCRIPTOR
+    property pDNWithBinary : Win32cr::Networking::ActiveDirectory::ADS_DN_WITH_BINARY*
+    property pDNWithString : Win32cr::Networking::ActiveDirectory::ADS_DN_WITH_STRING*
+    def initialize(@dn_string : UInt16*, @case_exact_string : UInt16*, @case_ignore_string : UInt16*, @printable_string : UInt16*, @numeric_string : UInt16*, @boolean : UInt32, @integer : UInt32, @octet_string : Win32cr::Networking::ActiveDirectory::ADS_OCTET_STRING, @utc_time : Win32cr::Foundation::SYSTEMTIME, @large_integer : Win32cr::Foundation::LARGE_INTEGER, @class_name : UInt16*, @provider_specific : Win32cr::Networking::ActiveDirectory::ADS_PROV_SPECIFIC, @pCaseIgnoreList : Win32cr::Networking::ActiveDirectory::ADS_CASEIGNORE_LIST*, @pOctetList : Win32cr::Networking::ActiveDirectory::ADS_OCTET_LIST*, @pPath : Win32cr::Networking::ActiveDirectory::ADS_PATH*, @pPostalAddress : Win32cr::Networking::ActiveDirectory::ADS_POSTALADDRESS*, @timestamp : Win32cr::Networking::ActiveDirectory::ADS_TIMESTAMP, @back_link : Win32cr::Networking::ActiveDirectory::ADS_BACKLINK, @pTypedName : Win32cr::Networking::ActiveDirectory::ADS_TYPEDNAME*, @hold : Win32cr::Networking::ActiveDirectory::ADS_HOLD, @pNetAddress : Win32cr::Networking::ActiveDirectory::ADS_NETADDRESS*, @pReplicaPointer : Win32cr::Networking::ActiveDirectory::ADS_REPLICAPOINTER*, @pFaxNumber : Win32cr::Networking::ActiveDirectory::ADS_FAXNUMBER*, @email : Win32cr::Networking::ActiveDirectory::ADS_EMAIL, @security_descriptor : Win32cr::Networking::ActiveDirectory::ADS_NT_SECURITY_DESCRIPTOR, @pDNWithBinary : Win32cr::Networking::ActiveDirectory::ADS_DN_WITH_BINARY*, @pDNWithString : Win32cr::Networking::ActiveDirectory::ADS_DN_WITH_STRING*)
+    end
+    end
+
+    def initialize(@dwType : Win32cr::Networking::ActiveDirectory::ADSTYPEENUM, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct ADS_ATTR_INFO
+    property pszAttrName : Win32cr::Foundation::PWSTR
+    property dwControlCode : UInt32
+    property dwADsType : Win32cr::Networking::ActiveDirectory::ADSTYPEENUM
+    property pADsValues : Win32cr::Networking::ActiveDirectory::ADSVALUE*
+    property dwNumValues : UInt32
+    def initialize(@pszAttrName : Win32cr::Foundation::PWSTR, @dwControlCode : UInt32, @dwADsType : Win32cr::Networking::ActiveDirectory::ADSTYPEENUM, @pADsValues : Win32cr::Networking::ActiveDirectory::ADSVALUE*, @dwNumValues : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ADS_OBJECT_INFO
+    property pszRDN : Win32cr::Foundation::PWSTR
+    property pszObjectDN : Win32cr::Foundation::PWSTR
+    property pszParentDN : Win32cr::Foundation::PWSTR
+    property pszSchemaDN : Win32cr::Foundation::PWSTR
+    property pszClassName : Win32cr::Foundation::PWSTR
+    def initialize(@pszRDN : Win32cr::Foundation::PWSTR, @pszObjectDN : Win32cr::Foundation::PWSTR, @pszParentDN : Win32cr::Foundation::PWSTR, @pszSchemaDN : Win32cr::Foundation::PWSTR, @pszClassName : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct Ads_searchpref_info
+    property dwSearchPref : Win32cr::Networking::ActiveDirectory::ADS_SEARCHPREF_ENUM
+    property vValue : Win32cr::Networking::ActiveDirectory::ADSVALUE
+    property dwStatus : Win32cr::Networking::ActiveDirectory::ADS_STATUSENUM
+    def initialize(@dwSearchPref : Win32cr::Networking::ActiveDirectory::ADS_SEARCHPREF_ENUM, @vValue : Win32cr::Networking::ActiveDirectory::ADSVALUE, @dwStatus : Win32cr::Networking::ActiveDirectory::ADS_STATUSENUM)
+    end
+  end
+
+  @[Extern]
+  struct Ads_search_column
+    property pszAttrName : Win32cr::Foundation::PWSTR
+    property dwADsType : Win32cr::Networking::ActiveDirectory::ADSTYPEENUM
+    property pADsValues : Win32cr::Networking::ActiveDirectory::ADSVALUE*
+    property dwNumValues : UInt32
+    property hReserved : Win32cr::Foundation::HANDLE
+    def initialize(@pszAttrName : Win32cr::Foundation::PWSTR, @dwADsType : Win32cr::Networking::ActiveDirectory::ADSTYPEENUM, @pADsValues : Win32cr::Networking::ActiveDirectory::ADSVALUE*, @dwNumValues : UInt32, @hReserved : Win32cr::Foundation::HANDLE)
+    end
+  end
+
+  @[Extern]
+  struct ADS_ATTR_DEF
+    property pszAttrName : Win32cr::Foundation::PWSTR
+    property dwADsType : Win32cr::Networking::ActiveDirectory::ADSTYPEENUM
+    property dwMinRange : UInt32
+    property dwMaxRange : UInt32
+    property fMultiValued : Win32cr::Foundation::BOOL
+    def initialize(@pszAttrName : Win32cr::Foundation::PWSTR, @dwADsType : Win32cr::Networking::ActiveDirectory::ADSTYPEENUM, @dwMinRange : UInt32, @dwMaxRange : UInt32, @fMultiValued : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct ADS_CLASS_DEF
+    property pszClassName : Win32cr::Foundation::PWSTR
+    property dwMandatoryAttrs : UInt32
+    property ppszMandatoryAttrs : Win32cr::Foundation::PWSTR*
+    property optionalAttrs : UInt32
+    property ppszOptionalAttrs : Win32cr::Foundation::PWSTR**
+    property dwNamingAttrs : UInt32
+    property ppszNamingAttrs : Win32cr::Foundation::PWSTR**
+    property dwSuperClasses : UInt32
+    property ppszSuperClasses : Win32cr::Foundation::PWSTR**
+    property fIsContainer : Win32cr::Foundation::BOOL
+    def initialize(@pszClassName : Win32cr::Foundation::PWSTR, @dwMandatoryAttrs : UInt32, @ppszMandatoryAttrs : Win32cr::Foundation::PWSTR*, @optionalAttrs : UInt32, @ppszOptionalAttrs : Win32cr::Foundation::PWSTR**, @dwNamingAttrs : UInt32, @ppszNamingAttrs : Win32cr::Foundation::PWSTR**, @dwSuperClasses : UInt32, @ppszSuperClasses : Win32cr::Foundation::PWSTR**, @fIsContainer : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct ADS_SORTKEY
+    property pszAttrType : Win32cr::Foundation::PWSTR
+    property pszReserved : Win32cr::Foundation::PWSTR
+    property fReverseorder : Win32cr::Foundation::BOOLEAN
+    def initialize(@pszAttrType : Win32cr::Foundation::PWSTR, @pszReserved : Win32cr::Foundation::PWSTR, @fReverseorder : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct ADS_VLV
+    property dwBeforeCount : UInt32
+    property dwAfterCount : UInt32
+    property dwOffset : UInt32
+    property dwContentCount : UInt32
+    property pszTarget : Win32cr::Foundation::PWSTR
+    property dwContextIDLength : UInt32
+    property lpContextID : UInt8*
+    def initialize(@dwBeforeCount : UInt32, @dwAfterCount : UInt32, @dwOffset : UInt32, @dwContentCount : UInt32, @pszTarget : Win32cr::Foundation::PWSTR, @dwContextIDLength : UInt32, @lpContextID : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct DSOBJECT
+    property dwFlags : UInt32
+    property dwProviderFlags : UInt32
+    property offsetName : UInt32
+    property offsetClass : UInt32
+    def initialize(@dwFlags : UInt32, @dwProviderFlags : UInt32, @offsetName : UInt32, @offsetClass : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DSOBJECTNAMES
+    property clsidNamespace : LibC::GUID
+    property cItems : UInt32
+    property aObjects : Win32cr::Networking::ActiveDirectory::DSOBJECT*
+    def initialize(@clsidNamespace : LibC::GUID, @cItems : UInt32, @aObjects : Win32cr::Networking::ActiveDirectory::DSOBJECT*)
+    end
+  end
+
+  @[Extern]
+  struct DSDISPLAYSPECOPTIONS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property offsetAttribPrefix : UInt32
+    property offsetUserName : UInt32
+    property offsetPassword : UInt32
+    property offsetServer : UInt32
+    property offsetServerConfigPath : UInt32
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @offsetAttribPrefix : UInt32, @offsetUserName : UInt32, @offsetPassword : UInt32, @offsetServer : UInt32, @offsetServerConfigPath : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DSPROPERTYPAGEINFO
+    property offsetString : UInt32
+    def initialize(@offsetString : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DOMAINDESC
+    property pszName : Win32cr::Foundation::PWSTR
+    property pszPath : Win32cr::Foundation::PWSTR
+    property pszNCName : Win32cr::Foundation::PWSTR
+    property pszTrustParent : Win32cr::Foundation::PWSTR
+    property pszObjectClass : Win32cr::Foundation::PWSTR
+    property ulFlags : UInt32
+    property fDownLevel : Win32cr::Foundation::BOOL
+    property pdChildList : Win32cr::Networking::ActiveDirectory::DOMAINDESC*
+    property pdNextSibling : Win32cr::Networking::ActiveDirectory::DOMAINDESC*
+    def initialize(@pszName : Win32cr::Foundation::PWSTR, @pszPath : Win32cr::Foundation::PWSTR, @pszNCName : Win32cr::Foundation::PWSTR, @pszTrustParent : Win32cr::Foundation::PWSTR, @pszObjectClass : Win32cr::Foundation::PWSTR, @ulFlags : UInt32, @fDownLevel : Win32cr::Foundation::BOOL, @pdChildList : Win32cr::Networking::ActiveDirectory::DOMAINDESC*, @pdNextSibling : Win32cr::Networking::ActiveDirectory::DOMAINDESC*)
+    end
+  end
+
+  @[Extern]
+  struct DOMAIN_TREE
+    property dsSize : UInt32
+    property dwCount : UInt32
+    property aDomains : Win32cr::Networking::ActiveDirectory::DOMAINDESC*
+    def initialize(@dsSize : UInt32, @dwCount : UInt32, @aDomains : Win32cr::Networking::ActiveDirectory::DOMAINDESC*)
+    end
+  end
+
+  @[Extern]
+  struct DSCLASSCREATIONINFO
+    property dwFlags : UInt32
+    property clsidWizardDialog : LibC::GUID
+    property clsidWizardPrimaryPage : LibC::GUID
+    property cWizardExtensions : UInt32
+    property aWizardExtensions : LibC::GUID*
+    def initialize(@dwFlags : UInt32, @clsidWizardDialog : LibC::GUID, @clsidWizardPrimaryPage : LibC::GUID, @cWizardExtensions : UInt32, @aWizardExtensions : LibC::GUID*)
+    end
+  end
+
+  @[Extern]
+  struct DSBROWSEINFOW
+    property cbStruct : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property pszCaption : Win32cr::Foundation::PWSTR
+    property pszTitle : Win32cr::Foundation::PWSTR
+    property pszRoot : Win32cr::Foundation::PWSTR
+    property pszPath : Win32cr::Foundation::PWSTR
+    property cchPath : UInt32
+    property dwFlags : UInt32
+    property pfnCallback : Win32cr::UI::Shell::BFFCALLBACK
+    property lParam : Win32cr::Foundation::LPARAM
+    property dwReturnFormat : UInt32
+    property pUserName : Win32cr::Foundation::PWSTR
+    property pPassword : Win32cr::Foundation::PWSTR
+    property pszObjectClass : Win32cr::Foundation::PWSTR
+    property cchObjectClass : UInt32
+    def initialize(@cbStruct : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @pszCaption : Win32cr::Foundation::PWSTR, @pszTitle : Win32cr::Foundation::PWSTR, @pszRoot : Win32cr::Foundation::PWSTR, @pszPath : Win32cr::Foundation::PWSTR, @cchPath : UInt32, @dwFlags : UInt32, @pfnCallback : Win32cr::UI::Shell::BFFCALLBACK, @lParam : Win32cr::Foundation::LPARAM, @dwReturnFormat : UInt32, @pUserName : Win32cr::Foundation::PWSTR, @pPassword : Win32cr::Foundation::PWSTR, @pszObjectClass : Win32cr::Foundation::PWSTR, @cchObjectClass : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DSBROWSEINFOA
+    property cbStruct : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property pszCaption : Win32cr::Foundation::PSTR
+    property pszTitle : Win32cr::Foundation::PSTR
+    property pszRoot : Win32cr::Foundation::PWSTR
+    property pszPath : Win32cr::Foundation::PWSTR
+    property cchPath : UInt32
+    property dwFlags : UInt32
+    property pfnCallback : Win32cr::UI::Shell::BFFCALLBACK
+    property lParam : Win32cr::Foundation::LPARAM
+    property dwReturnFormat : UInt32
+    property pUserName : Win32cr::Foundation::PWSTR
+    property pPassword : Win32cr::Foundation::PWSTR
+    property pszObjectClass : Win32cr::Foundation::PWSTR
+    property cchObjectClass : UInt32
+    def initialize(@cbStruct : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @pszCaption : Win32cr::Foundation::PSTR, @pszTitle : Win32cr::Foundation::PSTR, @pszRoot : Win32cr::Foundation::PWSTR, @pszPath : Win32cr::Foundation::PWSTR, @cchPath : UInt32, @dwFlags : UInt32, @pfnCallback : Win32cr::UI::Shell::BFFCALLBACK, @lParam : Win32cr::Foundation::LPARAM, @dwReturnFormat : UInt32, @pUserName : Win32cr::Foundation::PWSTR, @pPassword : Win32cr::Foundation::PWSTR, @pszObjectClass : Win32cr::Foundation::PWSTR, @cchObjectClass : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DSBITEMW
+    property cbStruct : UInt32
+    property pszADsPath : Win32cr::Foundation::PWSTR
+    property pszClass : Win32cr::Foundation::PWSTR
+    property dwMask : UInt32
+    property dwState : UInt32
+    property dwStateMask : UInt32
+    property szDisplayName : UInt16[64]
+    property szIconLocation : UInt16[260]
+    property iIconResID : Int32
+    def initialize(@cbStruct : UInt32, @pszADsPath : Win32cr::Foundation::PWSTR, @pszClass : Win32cr::Foundation::PWSTR, @dwMask : UInt32, @dwState : UInt32, @dwStateMask : UInt32, @szDisplayName : UInt16[64], @szIconLocation : UInt16[260], @iIconResID : Int32)
+    end
+  end
+
+  @[Extern]
+  struct DSBITEMA
+    property cbStruct : UInt32
+    property pszADsPath : Win32cr::Foundation::PWSTR
+    property pszClass : Win32cr::Foundation::PWSTR
+    property dwMask : UInt32
+    property dwState : UInt32
+    property dwStateMask : UInt32
+    property szDisplayName : Win32cr::Foundation::CHAR[64]
+    property szIconLocation : Win32cr::Foundation::CHAR[260]
+    property iIconResID : Int32
+    def initialize(@cbStruct : UInt32, @pszADsPath : Win32cr::Foundation::PWSTR, @pszClass : Win32cr::Foundation::PWSTR, @dwMask : UInt32, @dwState : UInt32, @dwStateMask : UInt32, @szDisplayName : Win32cr::Foundation::CHAR[64], @szIconLocation : Win32cr::Foundation::CHAR[260], @iIconResID : Int32)
+    end
+  end
+
+  @[Extern]
+  struct DSOP_UPLEVEL_FILTER_FLAGS
+    property flBothModes : UInt32
+    property flMixedModeOnly : UInt32
+    property flNativeModeOnly : UInt32
+    def initialize(@flBothModes : UInt32, @flMixedModeOnly : UInt32, @flNativeModeOnly : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DSOP_FILTER_FLAGS
+    property uplevel : Win32cr::Networking::ActiveDirectory::DSOP_UPLEVEL_FILTER_FLAGS
+    property flDownlevel : UInt32
+    def initialize(@uplevel : Win32cr::Networking::ActiveDirectory::DSOP_UPLEVEL_FILTER_FLAGS, @flDownlevel : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DSOP_SCOPE_INIT_INFO
+    property cbSize : UInt32
+    property flType : UInt32
+    property flScope : UInt32
+    property filter_flags : Win32cr::Networking::ActiveDirectory::DSOP_FILTER_FLAGS
+    property pwzDcName : Win32cr::Foundation::PWSTR
+    property pwzADsPath : Win32cr::Foundation::PWSTR
+    property hr : Win32cr::Foundation::HRESULT
+    def initialize(@cbSize : UInt32, @flType : UInt32, @flScope : UInt32, @filter_flags : Win32cr::Networking::ActiveDirectory::DSOP_FILTER_FLAGS, @pwzDcName : Win32cr::Foundation::PWSTR, @pwzADsPath : Win32cr::Foundation::PWSTR, @hr : Win32cr::Foundation::HRESULT)
+    end
+  end
+
+  @[Extern]
+  struct DSOP_INIT_INFO
+    property cbSize : UInt32
+    property pwzTargetComputer : Win32cr::Foundation::PWSTR
+    property cDsScopeInfos : UInt32
+    property aDsScopeInfos : Win32cr::Networking::ActiveDirectory::DSOP_SCOPE_INIT_INFO*
+    property flOptions : UInt32
+    property cAttributesToFetch : UInt32
+    property apwzAttributeNames : Win32cr::Foundation::PWSTR*
+    def initialize(@cbSize : UInt32, @pwzTargetComputer : Win32cr::Foundation::PWSTR, @cDsScopeInfos : UInt32, @aDsScopeInfos : Win32cr::Networking::ActiveDirectory::DSOP_SCOPE_INIT_INFO*, @flOptions : UInt32, @cAttributesToFetch : UInt32, @apwzAttributeNames : Win32cr::Foundation::PWSTR*)
+    end
+  end
+
+  @[Extern]
+  struct DS_SELECTION
+    property pwzName : Win32cr::Foundation::PWSTR
+    property pwzADsPath : Win32cr::Foundation::PWSTR
+    property pwzClass : Win32cr::Foundation::PWSTR
+    property pwzUPN : Win32cr::Foundation::PWSTR
+    property pvarFetchedAttributes : Win32cr::System::Com::VARIANT*
+    property flScopeType : UInt32
+    def initialize(@pwzName : Win32cr::Foundation::PWSTR, @pwzADsPath : Win32cr::Foundation::PWSTR, @pwzClass : Win32cr::Foundation::PWSTR, @pwzUPN : Win32cr::Foundation::PWSTR, @pvarFetchedAttributes : Win32cr::System::Com::VARIANT*, @flScopeType : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DS_SELECTION_LIST
+    property cItems : UInt32
+    property cFetchedAttributes : UInt32
+    property aDsSelection : Win32cr::Networking::ActiveDirectory::DS_SELECTION*
+    def initialize(@cItems : UInt32, @cFetchedAttributes : UInt32, @aDsSelection : Win32cr::Networking::ActiveDirectory::DS_SELECTION*)
+    end
+  end
+
+  @[Extern]
+  struct DSQUERYINITPARAMS
+    property cbStruct : UInt32
+    property dwFlags : UInt32
+    property pDefaultScope : Win32cr::Foundation::PWSTR
+    property pDefaultSaveLocation : Win32cr::Foundation::PWSTR
+    property pUserName : Win32cr::Foundation::PWSTR
+    property pPassword : Win32cr::Foundation::PWSTR
+    property pServer : Win32cr::Foundation::PWSTR
+    def initialize(@cbStruct : UInt32, @dwFlags : UInt32, @pDefaultScope : Win32cr::Foundation::PWSTR, @pDefaultSaveLocation : Win32cr::Foundation::PWSTR, @pUserName : Win32cr::Foundation::PWSTR, @pPassword : Win32cr::Foundation::PWSTR, @pServer : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct DSCOLUMN
+    property dwFlags : UInt32
+    property fmt : Int32
+    property cx : Int32
+    property idsName : Int32
+    property offsetProperty : Int32
+    property dwReserved : UInt32
+    def initialize(@dwFlags : UInt32, @fmt : Int32, @cx : Int32, @idsName : Int32, @offsetProperty : Int32, @dwReserved : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DSQUERYPARAMS
+    property cbStruct : UInt32
+    property dwFlags : UInt32
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property offsetQuery : Int32
+    property iColumns : Int32
+    property dwReserved : UInt32
+    property aColumns : Win32cr::Networking::ActiveDirectory::DSCOLUMN*
+    def initialize(@cbStruct : UInt32, @dwFlags : UInt32, @hInstance : Win32cr::Foundation::HINSTANCE, @offsetQuery : Int32, @iColumns : Int32, @dwReserved : UInt32, @aColumns : Win32cr::Networking::ActiveDirectory::DSCOLUMN*)
+    end
+  end
+
+  @[Extern]
+  struct DSQUERYCLASSLIST
+    property cbStruct : UInt32
+    property cClasses : Int32
+    property offsetClass : UInt32*
+    def initialize(@cbStruct : UInt32, @cClasses : Int32, @offsetClass : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct DSA_NEWOBJ_DISPINFO
+    property dwSize : UInt32
+    property hObjClassIcon : Win32cr::UI::WindowsAndMessaging::HICON
+    property lpszWizTitle : Win32cr::Foundation::PWSTR
+    property lpszContDisplayName : Win32cr::Foundation::PWSTR
+    def initialize(@dwSize : UInt32, @hObjClassIcon : Win32cr::UI::WindowsAndMessaging::HICON, @lpszWizTitle : Win32cr::Foundation::PWSTR, @lpszContDisplayName : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct ADSPROPINITPARAMS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property hr : Win32cr::Foundation::HRESULT
+    property pDsObj : Void*
+    property pwzCN : Win32cr::Foundation::PWSTR
+    property pWritableAttrs : Win32cr::Networking::ActiveDirectory::ADS_ATTR_INFO*
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @hr : Win32cr::Foundation::HRESULT, @pDsObj : Void*, @pwzCN : Win32cr::Foundation::PWSTR, @pWritableAttrs : Win32cr::Networking::ActiveDirectory::ADS_ATTR_INFO*)
+    end
+  end
+
+  @[Extern]
+  struct ADSPROPERROR
+    property hwndPage : Win32cr::Foundation::HWND
+    property pszPageTitle : Win32cr::Foundation::PWSTR
+    property pszObjPath : Win32cr::Foundation::PWSTR
+    property pszObjClass : Win32cr::Foundation::PWSTR
+    property hr : Win32cr::Foundation::HRESULT
+    property pszError : Win32cr::Foundation::PWSTR
+    def initialize(@hwndPage : Win32cr::Foundation::HWND, @pszPageTitle : Win32cr::Foundation::PWSTR, @pszObjPath : Win32cr::Foundation::PWSTR, @pszObjClass : Win32cr::Foundation::PWSTR, @hr : Win32cr::Foundation::HRESULT, @pszError : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct SCHEDULE_HEADER
+    property type__ : UInt32
+    property offset : UInt32
+    def initialize(@type__ : UInt32, @offset : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SCHEDULE
+    property size : UInt32
+    property bandwidth : UInt32
+    property number_of_schedules : UInt32
+    property schedules : Win32cr::Networking::ActiveDirectory::SCHEDULE_HEADER*
+    def initialize(@size : UInt32, @bandwidth : UInt32, @number_of_schedules : UInt32, @schedules : Win32cr::Networking::ActiveDirectory::SCHEDULE_HEADER*)
+    end
+  end
+
+  @[Extern]
+  struct DS_NAME_RESULT_ITEMA
+    property status : UInt32
+    property pDomain : Win32cr::Foundation::PSTR
+    property pName : Win32cr::Foundation::PSTR
+    def initialize(@status : UInt32, @pDomain : Win32cr::Foundation::PSTR, @pName : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct DS_NAME_RESULTA
+    property cItems : UInt32
+    property rItems : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULT_ITEMA*
+    def initialize(@cItems : UInt32, @rItems : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULT_ITEMA*)
+    end
+  end
+
+  @[Extern]
+  struct DS_NAME_RESULT_ITEMW
+    property status : UInt32
+    property pDomain : Win32cr::Foundation::PWSTR
+    property pName : Win32cr::Foundation::PWSTR
+    def initialize(@status : UInt32, @pDomain : Win32cr::Foundation::PWSTR, @pName : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct DS_NAME_RESULTW
+    property cItems : UInt32
+    property rItems : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULT_ITEMW*
+    def initialize(@cItems : UInt32, @rItems : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULT_ITEMW*)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPSYNCALL_SYNCA
+    property pszSrcId : Win32cr::Foundation::PSTR
+    property pszDstId : Win32cr::Foundation::PSTR
+    property pszNC : Win32cr::Foundation::PSTR
+    property pguidSrc : LibC::GUID*
+    property pguidDst : LibC::GUID*
+    def initialize(@pszSrcId : Win32cr::Foundation::PSTR, @pszDstId : Win32cr::Foundation::PSTR, @pszNC : Win32cr::Foundation::PSTR, @pguidSrc : LibC::GUID*, @pguidDst : LibC::GUID*)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPSYNCALL_SYNCW
+    property pszSrcId : Win32cr::Foundation::PWSTR
+    property pszDstId : Win32cr::Foundation::PWSTR
+    property pszNC : Win32cr::Foundation::PWSTR
+    property pguidSrc : LibC::GUID*
+    property pguidDst : LibC::GUID*
+    def initialize(@pszSrcId : Win32cr::Foundation::PWSTR, @pszDstId : Win32cr::Foundation::PWSTR, @pszNC : Win32cr::Foundation::PWSTR, @pguidSrc : LibC::GUID*, @pguidDst : LibC::GUID*)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPSYNCALL_ERRINFOA
+    property pszSvrId : Win32cr::Foundation::PSTR
+    property error : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_ERROR
+    property dwWin32Err : UInt32
+    property pszSrcId : Win32cr::Foundation::PSTR
+    def initialize(@pszSvrId : Win32cr::Foundation::PSTR, @error : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_ERROR, @dwWin32Err : UInt32, @pszSrcId : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPSYNCALL_ERRINFOW
+    property pszSvrId : Win32cr::Foundation::PWSTR
+    property error : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_ERROR
+    property dwWin32Err : UInt32
+    property pszSrcId : Win32cr::Foundation::PWSTR
+    def initialize(@pszSvrId : Win32cr::Foundation::PWSTR, @error : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_ERROR, @dwWin32Err : UInt32, @pszSrcId : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPSYNCALL_UPDATEA
+    property event : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_EVENT
+    property pErrInfo : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_ERRINFOA*
+    property pSync : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_SYNCA*
+    def initialize(@event : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_EVENT, @pErrInfo : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_ERRINFOA*, @pSync : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_SYNCA*)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPSYNCALL_UPDATEW
+    property event : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_EVENT
+    property pErrInfo : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_ERRINFOW*
+    property pSync : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_SYNCW*
+    def initialize(@event : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_EVENT, @pErrInfo : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_ERRINFOW*, @pSync : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_SYNCW*)
+    end
+  end
+
+  @[Extern]
+  struct DS_SITE_COST_INFO
+    property errorCode : UInt32
+    property cost : UInt32
+    def initialize(@errorCode : UInt32, @cost : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DS_SCHEMA_GUID_MAPA
+    property guid : LibC::GUID
+    property guidType : UInt32
+    property pName : Win32cr::Foundation::PSTR
+    def initialize(@guid : LibC::GUID, @guidType : UInt32, @pName : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct DS_SCHEMA_GUID_MAPW
+    property guid : LibC::GUID
+    property guidType : UInt32
+    property pName : Win32cr::Foundation::PWSTR
+    def initialize(@guid : LibC::GUID, @guidType : UInt32, @pName : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct DS_DOMAIN_CONTROLLER_INFO_1A
+    property netbios_name : Win32cr::Foundation::PSTR
+    property dns_host_name : Win32cr::Foundation::PSTR
+    property site_name : Win32cr::Foundation::PSTR
+    property computer_object_name : Win32cr::Foundation::PSTR
+    property server_object_name : Win32cr::Foundation::PSTR
+    property fIsPdc : Win32cr::Foundation::BOOL
+    property fDsEnabled : Win32cr::Foundation::BOOL
+    def initialize(@netbios_name : Win32cr::Foundation::PSTR, @dns_host_name : Win32cr::Foundation::PSTR, @site_name : Win32cr::Foundation::PSTR, @computer_object_name : Win32cr::Foundation::PSTR, @server_object_name : Win32cr::Foundation::PSTR, @fIsPdc : Win32cr::Foundation::BOOL, @fDsEnabled : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct DS_DOMAIN_CONTROLLER_INFO_1W
+    property netbios_name : Win32cr::Foundation::PWSTR
+    property dns_host_name : Win32cr::Foundation::PWSTR
+    property site_name : Win32cr::Foundation::PWSTR
+    property computer_object_name : Win32cr::Foundation::PWSTR
+    property server_object_name : Win32cr::Foundation::PWSTR
+    property fIsPdc : Win32cr::Foundation::BOOL
+    property fDsEnabled : Win32cr::Foundation::BOOL
+    def initialize(@netbios_name : Win32cr::Foundation::PWSTR, @dns_host_name : Win32cr::Foundation::PWSTR, @site_name : Win32cr::Foundation::PWSTR, @computer_object_name : Win32cr::Foundation::PWSTR, @server_object_name : Win32cr::Foundation::PWSTR, @fIsPdc : Win32cr::Foundation::BOOL, @fDsEnabled : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct DS_DOMAIN_CONTROLLER_INFO_2A
+    property netbios_name : Win32cr::Foundation::PSTR
+    property dns_host_name : Win32cr::Foundation::PSTR
+    property site_name : Win32cr::Foundation::PSTR
+    property site_object_name : Win32cr::Foundation::PSTR
+    property computer_object_name : Win32cr::Foundation::PSTR
+    property server_object_name : Win32cr::Foundation::PSTR
+    property ntds_dsa_object_name : Win32cr::Foundation::PSTR
+    property fIsPdc : Win32cr::Foundation::BOOL
+    property fDsEnabled : Win32cr::Foundation::BOOL
+    property fIsGc : Win32cr::Foundation::BOOL
+    property site_object_guid : LibC::GUID
+    property computer_object_guid : LibC::GUID
+    property server_object_guid : LibC::GUID
+    property ntds_dsa_object_guid : LibC::GUID
+    def initialize(@netbios_name : Win32cr::Foundation::PSTR, @dns_host_name : Win32cr::Foundation::PSTR, @site_name : Win32cr::Foundation::PSTR, @site_object_name : Win32cr::Foundation::PSTR, @computer_object_name : Win32cr::Foundation::PSTR, @server_object_name : Win32cr::Foundation::PSTR, @ntds_dsa_object_name : Win32cr::Foundation::PSTR, @fIsPdc : Win32cr::Foundation::BOOL, @fDsEnabled : Win32cr::Foundation::BOOL, @fIsGc : Win32cr::Foundation::BOOL, @site_object_guid : LibC::GUID, @computer_object_guid : LibC::GUID, @server_object_guid : LibC::GUID, @ntds_dsa_object_guid : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct DS_DOMAIN_CONTROLLER_INFO_2W
+    property netbios_name : Win32cr::Foundation::PWSTR
+    property dns_host_name : Win32cr::Foundation::PWSTR
+    property site_name : Win32cr::Foundation::PWSTR
+    property site_object_name : Win32cr::Foundation::PWSTR
+    property computer_object_name : Win32cr::Foundation::PWSTR
+    property server_object_name : Win32cr::Foundation::PWSTR
+    property ntds_dsa_object_name : Win32cr::Foundation::PWSTR
+    property fIsPdc : Win32cr::Foundation::BOOL
+    property fDsEnabled : Win32cr::Foundation::BOOL
+    property fIsGc : Win32cr::Foundation::BOOL
+    property site_object_guid : LibC::GUID
+    property computer_object_guid : LibC::GUID
+    property server_object_guid : LibC::GUID
+    property ntds_dsa_object_guid : LibC::GUID
+    def initialize(@netbios_name : Win32cr::Foundation::PWSTR, @dns_host_name : Win32cr::Foundation::PWSTR, @site_name : Win32cr::Foundation::PWSTR, @site_object_name : Win32cr::Foundation::PWSTR, @computer_object_name : Win32cr::Foundation::PWSTR, @server_object_name : Win32cr::Foundation::PWSTR, @ntds_dsa_object_name : Win32cr::Foundation::PWSTR, @fIsPdc : Win32cr::Foundation::BOOL, @fDsEnabled : Win32cr::Foundation::BOOL, @fIsGc : Win32cr::Foundation::BOOL, @site_object_guid : LibC::GUID, @computer_object_guid : LibC::GUID, @server_object_guid : LibC::GUID, @ntds_dsa_object_guid : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct DS_DOMAIN_CONTROLLER_INFO_3A
+    property netbios_name : Win32cr::Foundation::PSTR
+    property dns_host_name : Win32cr::Foundation::PSTR
+    property site_name : Win32cr::Foundation::PSTR
+    property site_object_name : Win32cr::Foundation::PSTR
+    property computer_object_name : Win32cr::Foundation::PSTR
+    property server_object_name : Win32cr::Foundation::PSTR
+    property ntds_dsa_object_name : Win32cr::Foundation::PSTR
+    property fIsPdc : Win32cr::Foundation::BOOL
+    property fDsEnabled : Win32cr::Foundation::BOOL
+    property fIsGc : Win32cr::Foundation::BOOL
+    property fIsRodc : Win32cr::Foundation::BOOL
+    property site_object_guid : LibC::GUID
+    property computer_object_guid : LibC::GUID
+    property server_object_guid : LibC::GUID
+    property ntds_dsa_object_guid : LibC::GUID
+    def initialize(@netbios_name : Win32cr::Foundation::PSTR, @dns_host_name : Win32cr::Foundation::PSTR, @site_name : Win32cr::Foundation::PSTR, @site_object_name : Win32cr::Foundation::PSTR, @computer_object_name : Win32cr::Foundation::PSTR, @server_object_name : Win32cr::Foundation::PSTR, @ntds_dsa_object_name : Win32cr::Foundation::PSTR, @fIsPdc : Win32cr::Foundation::BOOL, @fDsEnabled : Win32cr::Foundation::BOOL, @fIsGc : Win32cr::Foundation::BOOL, @fIsRodc : Win32cr::Foundation::BOOL, @site_object_guid : LibC::GUID, @computer_object_guid : LibC::GUID, @server_object_guid : LibC::GUID, @ntds_dsa_object_guid : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct DS_DOMAIN_CONTROLLER_INFO_3W
+    property netbios_name : Win32cr::Foundation::PWSTR
+    property dns_host_name : Win32cr::Foundation::PWSTR
+    property site_name : Win32cr::Foundation::PWSTR
+    property site_object_name : Win32cr::Foundation::PWSTR
+    property computer_object_name : Win32cr::Foundation::PWSTR
+    property server_object_name : Win32cr::Foundation::PWSTR
+    property ntds_dsa_object_name : Win32cr::Foundation::PWSTR
+    property fIsPdc : Win32cr::Foundation::BOOL
+    property fDsEnabled : Win32cr::Foundation::BOOL
+    property fIsGc : Win32cr::Foundation::BOOL
+    property fIsRodc : Win32cr::Foundation::BOOL
+    property site_object_guid : LibC::GUID
+    property computer_object_guid : LibC::GUID
+    property server_object_guid : LibC::GUID
+    property ntds_dsa_object_guid : LibC::GUID
+    def initialize(@netbios_name : Win32cr::Foundation::PWSTR, @dns_host_name : Win32cr::Foundation::PWSTR, @site_name : Win32cr::Foundation::PWSTR, @site_object_name : Win32cr::Foundation::PWSTR, @computer_object_name : Win32cr::Foundation::PWSTR, @server_object_name : Win32cr::Foundation::PWSTR, @ntds_dsa_object_name : Win32cr::Foundation::PWSTR, @fIsPdc : Win32cr::Foundation::BOOL, @fDsEnabled : Win32cr::Foundation::BOOL, @fIsGc : Win32cr::Foundation::BOOL, @fIsRodc : Win32cr::Foundation::BOOL, @site_object_guid : LibC::GUID, @computer_object_guid : LibC::GUID, @server_object_guid : LibC::GUID, @ntds_dsa_object_guid : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_NEIGHBORW
+    property pszNamingContext : Win32cr::Foundation::PWSTR
+    property pszSourceDsaDN : Win32cr::Foundation::PWSTR
+    property pszSourceDsaAddress : Win32cr::Foundation::PWSTR
+    property pszAsyncIntersiteTransportDN : Win32cr::Foundation::PWSTR
+    property dwReplicaFlags : UInt32
+    property dwReserved : UInt32
+    property uuidNamingContextObjGuid : LibC::GUID
+    property uuidSourceDsaObjGuid : LibC::GUID
+    property uuidSourceDsaInvocationID : LibC::GUID
+    property uuidAsyncIntersiteTransportObjGuid : LibC::GUID
+    property usnLastObjChangeSynced : Int64
+    property usnAttributeFilter : Int64
+    property ftimeLastSyncSuccess : Win32cr::Foundation::FILETIME
+    property ftimeLastSyncAttempt : Win32cr::Foundation::FILETIME
+    property dwLastSyncResult : UInt32
+    property cNumConsecutiveSyncFailures : UInt32
+    def initialize(@pszNamingContext : Win32cr::Foundation::PWSTR, @pszSourceDsaDN : Win32cr::Foundation::PWSTR, @pszSourceDsaAddress : Win32cr::Foundation::PWSTR, @pszAsyncIntersiteTransportDN : Win32cr::Foundation::PWSTR, @dwReplicaFlags : UInt32, @dwReserved : UInt32, @uuidNamingContextObjGuid : LibC::GUID, @uuidSourceDsaObjGuid : LibC::GUID, @uuidSourceDsaInvocationID : LibC::GUID, @uuidAsyncIntersiteTransportObjGuid : LibC::GUID, @usnLastObjChangeSynced : Int64, @usnAttributeFilter : Int64, @ftimeLastSyncSuccess : Win32cr::Foundation::FILETIME, @ftimeLastSyncAttempt : Win32cr::Foundation::FILETIME, @dwLastSyncResult : UInt32, @cNumConsecutiveSyncFailures : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_NEIGHBORW_BLOB
+    property oszNamingContext : UInt32
+    property oszSourceDsaDN : UInt32
+    property oszSourceDsaAddress : UInt32
+    property oszAsyncIntersiteTransportDN : UInt32
+    property dwReplicaFlags : UInt32
+    property dwReserved : UInt32
+    property uuidNamingContextObjGuid : LibC::GUID
+    property uuidSourceDsaObjGuid : LibC::GUID
+    property uuidSourceDsaInvocationID : LibC::GUID
+    property uuidAsyncIntersiteTransportObjGuid : LibC::GUID
+    property usnLastObjChangeSynced : Int64
+    property usnAttributeFilter : Int64
+    property ftimeLastSyncSuccess : Win32cr::Foundation::FILETIME
+    property ftimeLastSyncAttempt : Win32cr::Foundation::FILETIME
+    property dwLastSyncResult : UInt32
+    property cNumConsecutiveSyncFailures : UInt32
+    def initialize(@oszNamingContext : UInt32, @oszSourceDsaDN : UInt32, @oszSourceDsaAddress : UInt32, @oszAsyncIntersiteTransportDN : UInt32, @dwReplicaFlags : UInt32, @dwReserved : UInt32, @uuidNamingContextObjGuid : LibC::GUID, @uuidSourceDsaObjGuid : LibC::GUID, @uuidSourceDsaInvocationID : LibC::GUID, @uuidAsyncIntersiteTransportObjGuid : LibC::GUID, @usnLastObjChangeSynced : Int64, @usnAttributeFilter : Int64, @ftimeLastSyncSuccess : Win32cr::Foundation::FILETIME, @ftimeLastSyncAttempt : Win32cr::Foundation::FILETIME, @dwLastSyncResult : UInt32, @cNumConsecutiveSyncFailures : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_NEIGHBORSW
+    property cNumNeighbors : UInt32
+    property dwReserved : UInt32
+    property rgNeighbor : Win32cr::Networking::ActiveDirectory::DS_REPL_NEIGHBORW*
+    def initialize(@cNumNeighbors : UInt32, @dwReserved : UInt32, @rgNeighbor : Win32cr::Networking::ActiveDirectory::DS_REPL_NEIGHBORW*)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_CURSOR
+    property uuidSourceDsaInvocationID : LibC::GUID
+    property usnAttributeFilter : Int64
+    def initialize(@uuidSourceDsaInvocationID : LibC::GUID, @usnAttributeFilter : Int64)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_CURSOR_2
+    property uuidSourceDsaInvocationID : LibC::GUID
+    property usnAttributeFilter : Int64
+    property ftimeLastSyncSuccess : Win32cr::Foundation::FILETIME
+    def initialize(@uuidSourceDsaInvocationID : LibC::GUID, @usnAttributeFilter : Int64, @ftimeLastSyncSuccess : Win32cr::Foundation::FILETIME)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_CURSOR_3W
+    property uuidSourceDsaInvocationID : LibC::GUID
+    property usnAttributeFilter : Int64
+    property ftimeLastSyncSuccess : Win32cr::Foundation::FILETIME
+    property pszSourceDsaDN : Win32cr::Foundation::PWSTR
+    def initialize(@uuidSourceDsaInvocationID : LibC::GUID, @usnAttributeFilter : Int64, @ftimeLastSyncSuccess : Win32cr::Foundation::FILETIME, @pszSourceDsaDN : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_CURSOR_BLOB
+    property uuidSourceDsaInvocationID : LibC::GUID
+    property usnAttributeFilter : Int64
+    property ftimeLastSyncSuccess : Win32cr::Foundation::FILETIME
+    property oszSourceDsaDN : UInt32
+    def initialize(@uuidSourceDsaInvocationID : LibC::GUID, @usnAttributeFilter : Int64, @ftimeLastSyncSuccess : Win32cr::Foundation::FILETIME, @oszSourceDsaDN : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_CURSORS
+    property cNumCursors : UInt32
+    property dwReserved : UInt32
+    property rgCursor : Win32cr::Networking::ActiveDirectory::DS_REPL_CURSOR*
+    def initialize(@cNumCursors : UInt32, @dwReserved : UInt32, @rgCursor : Win32cr::Networking::ActiveDirectory::DS_REPL_CURSOR*)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_CURSORS_2
+    property cNumCursors : UInt32
+    property dwEnumerationContext : UInt32
+    property rgCursor : Win32cr::Networking::ActiveDirectory::DS_REPL_CURSOR_2*
+    def initialize(@cNumCursors : UInt32, @dwEnumerationContext : UInt32, @rgCursor : Win32cr::Networking::ActiveDirectory::DS_REPL_CURSOR_2*)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_CURSORS_3W
+    property cNumCursors : UInt32
+    property dwEnumerationContext : UInt32
+    property rgCursor : Win32cr::Networking::ActiveDirectory::DS_REPL_CURSOR_3W*
+    def initialize(@cNumCursors : UInt32, @dwEnumerationContext : UInt32, @rgCursor : Win32cr::Networking::ActiveDirectory::DS_REPL_CURSOR_3W*)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_ATTR_META_DATA
+    property pszAttributeName : Win32cr::Foundation::PWSTR
+    property dwVersion : UInt32
+    property ftimeLastOriginatingChange : Win32cr::Foundation::FILETIME
+    property uuidLastOriginatingDsaInvocationID : LibC::GUID
+    property usnOriginatingChange : Int64
+    property usnLocalChange : Int64
+    def initialize(@pszAttributeName : Win32cr::Foundation::PWSTR, @dwVersion : UInt32, @ftimeLastOriginatingChange : Win32cr::Foundation::FILETIME, @uuidLastOriginatingDsaInvocationID : LibC::GUID, @usnOriginatingChange : Int64, @usnLocalChange : Int64)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_ATTR_META_DATA_2
+    property pszAttributeName : Win32cr::Foundation::PWSTR
+    property dwVersion : UInt32
+    property ftimeLastOriginatingChange : Win32cr::Foundation::FILETIME
+    property uuidLastOriginatingDsaInvocationID : LibC::GUID
+    property usnOriginatingChange : Int64
+    property usnLocalChange : Int64
+    property pszLastOriginatingDsaDN : Win32cr::Foundation::PWSTR
+    def initialize(@pszAttributeName : Win32cr::Foundation::PWSTR, @dwVersion : UInt32, @ftimeLastOriginatingChange : Win32cr::Foundation::FILETIME, @uuidLastOriginatingDsaInvocationID : LibC::GUID, @usnOriginatingChange : Int64, @usnLocalChange : Int64, @pszLastOriginatingDsaDN : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_ATTR_META_DATA_BLOB
+    property oszAttributeName : UInt32
+    property dwVersion : UInt32
+    property ftimeLastOriginatingChange : Win32cr::Foundation::FILETIME
+    property uuidLastOriginatingDsaInvocationID : LibC::GUID
+    property usnOriginatingChange : Int64
+    property usnLocalChange : Int64
+    property oszLastOriginatingDsaDN : UInt32
+    def initialize(@oszAttributeName : UInt32, @dwVersion : UInt32, @ftimeLastOriginatingChange : Win32cr::Foundation::FILETIME, @uuidLastOriginatingDsaInvocationID : LibC::GUID, @usnOriginatingChange : Int64, @usnLocalChange : Int64, @oszLastOriginatingDsaDN : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_OBJ_META_DATA
+    property cNumEntries : UInt32
+    property dwReserved : UInt32
+    property rgMetaData : Win32cr::Networking::ActiveDirectory::DS_REPL_ATTR_META_DATA*
+    def initialize(@cNumEntries : UInt32, @dwReserved : UInt32, @rgMetaData : Win32cr::Networking::ActiveDirectory::DS_REPL_ATTR_META_DATA*)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_OBJ_META_DATA_2
+    property cNumEntries : UInt32
+    property dwReserved : UInt32
+    property rgMetaData : Win32cr::Networking::ActiveDirectory::DS_REPL_ATTR_META_DATA_2*
+    def initialize(@cNumEntries : UInt32, @dwReserved : UInt32, @rgMetaData : Win32cr::Networking::ActiveDirectory::DS_REPL_ATTR_META_DATA_2*)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_KCC_DSA_FAILUREW
+    property pszDsaDN : Win32cr::Foundation::PWSTR
+    property uuidDsaObjGuid : LibC::GUID
+    property ftimeFirstFailure : Win32cr::Foundation::FILETIME
+    property cNumFailures : UInt32
+    property dwLastResult : UInt32
+    def initialize(@pszDsaDN : Win32cr::Foundation::PWSTR, @uuidDsaObjGuid : LibC::GUID, @ftimeFirstFailure : Win32cr::Foundation::FILETIME, @cNumFailures : UInt32, @dwLastResult : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_KCC_DSA_FAILUREW_BLOB
+    property oszDsaDN : UInt32
+    property uuidDsaObjGuid : LibC::GUID
+    property ftimeFirstFailure : Win32cr::Foundation::FILETIME
+    property cNumFailures : UInt32
+    property dwLastResult : UInt32
+    def initialize(@oszDsaDN : UInt32, @uuidDsaObjGuid : LibC::GUID, @ftimeFirstFailure : Win32cr::Foundation::FILETIME, @cNumFailures : UInt32, @dwLastResult : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_KCC_DSA_FAILURESW
+    property cNumEntries : UInt32
+    property dwReserved : UInt32
+    property rgDsaFailure : Win32cr::Networking::ActiveDirectory::DS_REPL_KCC_DSA_FAILUREW*
+    def initialize(@cNumEntries : UInt32, @dwReserved : UInt32, @rgDsaFailure : Win32cr::Networking::ActiveDirectory::DS_REPL_KCC_DSA_FAILUREW*)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_OPW
+    property ftimeEnqueued : Win32cr::Foundation::FILETIME
+    property ulSerialNumber : UInt32
+    property ulPriority : UInt32
+    property op_type : Win32cr::Networking::ActiveDirectory::DS_REPL_OP_TYPE
+    property ulOptions : UInt32
+    property pszNamingContext : Win32cr::Foundation::PWSTR
+    property pszDsaDN : Win32cr::Foundation::PWSTR
+    property pszDsaAddress : Win32cr::Foundation::PWSTR
+    property uuidNamingContextObjGuid : LibC::GUID
+    property uuidDsaObjGuid : LibC::GUID
+    def initialize(@ftimeEnqueued : Win32cr::Foundation::FILETIME, @ulSerialNumber : UInt32, @ulPriority : UInt32, @op_type : Win32cr::Networking::ActiveDirectory::DS_REPL_OP_TYPE, @ulOptions : UInt32, @pszNamingContext : Win32cr::Foundation::PWSTR, @pszDsaDN : Win32cr::Foundation::PWSTR, @pszDsaAddress : Win32cr::Foundation::PWSTR, @uuidNamingContextObjGuid : LibC::GUID, @uuidDsaObjGuid : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_OPW_BLOB
+    property ftimeEnqueued : Win32cr::Foundation::FILETIME
+    property ulSerialNumber : UInt32
+    property ulPriority : UInt32
+    property op_type : Win32cr::Networking::ActiveDirectory::DS_REPL_OP_TYPE
+    property ulOptions : UInt32
+    property oszNamingContext : UInt32
+    property oszDsaDN : UInt32
+    property oszDsaAddress : UInt32
+    property uuidNamingContextObjGuid : LibC::GUID
+    property uuidDsaObjGuid : LibC::GUID
+    def initialize(@ftimeEnqueued : Win32cr::Foundation::FILETIME, @ulSerialNumber : UInt32, @ulPriority : UInt32, @op_type : Win32cr::Networking::ActiveDirectory::DS_REPL_OP_TYPE, @ulOptions : UInt32, @oszNamingContext : UInt32, @oszDsaDN : UInt32, @oszDsaAddress : UInt32, @uuidNamingContextObjGuid : LibC::GUID, @uuidDsaObjGuid : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_PENDING_OPSW
+    property ftimeCurrentOpStarted : Win32cr::Foundation::FILETIME
+    property cNumPendingOps : UInt32
+    property rgPendingOp : Win32cr::Networking::ActiveDirectory::DS_REPL_OPW*
+    def initialize(@ftimeCurrentOpStarted : Win32cr::Foundation::FILETIME, @cNumPendingOps : UInt32, @rgPendingOp : Win32cr::Networking::ActiveDirectory::DS_REPL_OPW*)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_VALUE_META_DATA
+    property pszAttributeName : Win32cr::Foundation::PWSTR
+    property pszObjectDn : Win32cr::Foundation::PWSTR
+    property cbData : UInt32
+    property pbData : UInt8*
+    property ftimeDeleted : Win32cr::Foundation::FILETIME
+    property ftimeCreated : Win32cr::Foundation::FILETIME
+    property dwVersion : UInt32
+    property ftimeLastOriginatingChange : Win32cr::Foundation::FILETIME
+    property uuidLastOriginatingDsaInvocationID : LibC::GUID
+    property usnOriginatingChange : Int64
+    property usnLocalChange : Int64
+    def initialize(@pszAttributeName : Win32cr::Foundation::PWSTR, @pszObjectDn : Win32cr::Foundation::PWSTR, @cbData : UInt32, @pbData : UInt8*, @ftimeDeleted : Win32cr::Foundation::FILETIME, @ftimeCreated : Win32cr::Foundation::FILETIME, @dwVersion : UInt32, @ftimeLastOriginatingChange : Win32cr::Foundation::FILETIME, @uuidLastOriginatingDsaInvocationID : LibC::GUID, @usnOriginatingChange : Int64, @usnLocalChange : Int64)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_VALUE_META_DATA_2
+    property pszAttributeName : Win32cr::Foundation::PWSTR
+    property pszObjectDn : Win32cr::Foundation::PWSTR
+    property cbData : UInt32
+    property pbData : UInt8*
+    property ftimeDeleted : Win32cr::Foundation::FILETIME
+    property ftimeCreated : Win32cr::Foundation::FILETIME
+    property dwVersion : UInt32
+    property ftimeLastOriginatingChange : Win32cr::Foundation::FILETIME
+    property uuidLastOriginatingDsaInvocationID : LibC::GUID
+    property usnOriginatingChange : Int64
+    property usnLocalChange : Int64
+    property pszLastOriginatingDsaDN : Win32cr::Foundation::PWSTR
+    def initialize(@pszAttributeName : Win32cr::Foundation::PWSTR, @pszObjectDn : Win32cr::Foundation::PWSTR, @cbData : UInt32, @pbData : UInt8*, @ftimeDeleted : Win32cr::Foundation::FILETIME, @ftimeCreated : Win32cr::Foundation::FILETIME, @dwVersion : UInt32, @ftimeLastOriginatingChange : Win32cr::Foundation::FILETIME, @uuidLastOriginatingDsaInvocationID : LibC::GUID, @usnOriginatingChange : Int64, @usnLocalChange : Int64, @pszLastOriginatingDsaDN : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_VALUE_META_DATA_EXT
+    property pszAttributeName : Win32cr::Foundation::PWSTR
+    property pszObjectDn : Win32cr::Foundation::PWSTR
+    property cbData : UInt32
+    property pbData : UInt8*
+    property ftimeDeleted : Win32cr::Foundation::FILETIME
+    property ftimeCreated : Win32cr::Foundation::FILETIME
+    property dwVersion : UInt32
+    property ftimeLastOriginatingChange : Win32cr::Foundation::FILETIME
+    property uuidLastOriginatingDsaInvocationID : LibC::GUID
+    property usnOriginatingChange : Int64
+    property usnLocalChange : Int64
+    property pszLastOriginatingDsaDN : Win32cr::Foundation::PWSTR
+    property dwUserIdentifier : UInt32
+    property dwPriorLinkState : UInt32
+    property dwCurrentLinkState : UInt32
+    def initialize(@pszAttributeName : Win32cr::Foundation::PWSTR, @pszObjectDn : Win32cr::Foundation::PWSTR, @cbData : UInt32, @pbData : UInt8*, @ftimeDeleted : Win32cr::Foundation::FILETIME, @ftimeCreated : Win32cr::Foundation::FILETIME, @dwVersion : UInt32, @ftimeLastOriginatingChange : Win32cr::Foundation::FILETIME, @uuidLastOriginatingDsaInvocationID : LibC::GUID, @usnOriginatingChange : Int64, @usnLocalChange : Int64, @pszLastOriginatingDsaDN : Win32cr::Foundation::PWSTR, @dwUserIdentifier : UInt32, @dwPriorLinkState : UInt32, @dwCurrentLinkState : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_VALUE_META_DATA_BLOB
+    property oszAttributeName : UInt32
+    property oszObjectDn : UInt32
+    property cbData : UInt32
+    property obData : UInt32
+    property ftimeDeleted : Win32cr::Foundation::FILETIME
+    property ftimeCreated : Win32cr::Foundation::FILETIME
+    property dwVersion : UInt32
+    property ftimeLastOriginatingChange : Win32cr::Foundation::FILETIME
+    property uuidLastOriginatingDsaInvocationID : LibC::GUID
+    property usnOriginatingChange : Int64
+    property usnLocalChange : Int64
+    property oszLastOriginatingDsaDN : UInt32
+    def initialize(@oszAttributeName : UInt32, @oszObjectDn : UInt32, @cbData : UInt32, @obData : UInt32, @ftimeDeleted : Win32cr::Foundation::FILETIME, @ftimeCreated : Win32cr::Foundation::FILETIME, @dwVersion : UInt32, @ftimeLastOriginatingChange : Win32cr::Foundation::FILETIME, @uuidLastOriginatingDsaInvocationID : LibC::GUID, @usnOriginatingChange : Int64, @usnLocalChange : Int64, @oszLastOriginatingDsaDN : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_VALUE_META_DATA_BLOB_EXT
+    property oszAttributeName : UInt32
+    property oszObjectDn : UInt32
+    property cbData : UInt32
+    property obData : UInt32
+    property ftimeDeleted : Win32cr::Foundation::FILETIME
+    property ftimeCreated : Win32cr::Foundation::FILETIME
+    property dwVersion : UInt32
+    property ftimeLastOriginatingChange : Win32cr::Foundation::FILETIME
+    property uuidLastOriginatingDsaInvocationID : LibC::GUID
+    property usnOriginatingChange : Int64
+    property usnLocalChange : Int64
+    property oszLastOriginatingDsaDN : UInt32
+    property dwUserIdentifier : UInt32
+    property dwPriorLinkState : UInt32
+    property dwCurrentLinkState : UInt32
+    def initialize(@oszAttributeName : UInt32, @oszObjectDn : UInt32, @cbData : UInt32, @obData : UInt32, @ftimeDeleted : Win32cr::Foundation::FILETIME, @ftimeCreated : Win32cr::Foundation::FILETIME, @dwVersion : UInt32, @ftimeLastOriginatingChange : Win32cr::Foundation::FILETIME, @uuidLastOriginatingDsaInvocationID : LibC::GUID, @usnOriginatingChange : Int64, @usnLocalChange : Int64, @oszLastOriginatingDsaDN : UInt32, @dwUserIdentifier : UInt32, @dwPriorLinkState : UInt32, @dwCurrentLinkState : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_ATTR_VALUE_META_DATA
+    property cNumEntries : UInt32
+    property dwEnumerationContext : UInt32
+    property rgMetaData : Win32cr::Networking::ActiveDirectory::DS_REPL_VALUE_META_DATA*
+    def initialize(@cNumEntries : UInt32, @dwEnumerationContext : UInt32, @rgMetaData : Win32cr::Networking::ActiveDirectory::DS_REPL_VALUE_META_DATA*)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_ATTR_VALUE_META_DATA_2
+    property cNumEntries : UInt32
+    property dwEnumerationContext : UInt32
+    property rgMetaData : Win32cr::Networking::ActiveDirectory::DS_REPL_VALUE_META_DATA_2*
+    def initialize(@cNumEntries : UInt32, @dwEnumerationContext : UInt32, @rgMetaData : Win32cr::Networking::ActiveDirectory::DS_REPL_VALUE_META_DATA_2*)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_ATTR_VALUE_META_DATA_EXT
+    property cNumEntries : UInt32
+    property dwEnumerationContext : UInt32
+    property rgMetaData : Win32cr::Networking::ActiveDirectory::DS_REPL_VALUE_META_DATA_EXT*
+    def initialize(@cNumEntries : UInt32, @dwEnumerationContext : UInt32, @rgMetaData : Win32cr::Networking::ActiveDirectory::DS_REPL_VALUE_META_DATA_EXT*)
+    end
+  end
+
+  @[Extern]
+  struct DS_REPL_QUEUE_STATISTICSW
+    property ftimeCurrentOpStarted : Win32cr::Foundation::FILETIME
+    property cNumPendingOps : UInt32
+    property ftimeOldestSync : Win32cr::Foundation::FILETIME
+    property ftimeOldestAdd : Win32cr::Foundation::FILETIME
+    property ftimeOldestMod : Win32cr::Foundation::FILETIME
+    property ftimeOldestDel : Win32cr::Foundation::FILETIME
+    property ftimeOldestUpdRefs : Win32cr::Foundation::FILETIME
+    def initialize(@ftimeCurrentOpStarted : Win32cr::Foundation::FILETIME, @cNumPendingOps : UInt32, @ftimeOldestSync : Win32cr::Foundation::FILETIME, @ftimeOldestAdd : Win32cr::Foundation::FILETIME, @ftimeOldestMod : Win32cr::Foundation::FILETIME, @ftimeOldestDel : Win32cr::Foundation::FILETIME, @ftimeOldestUpdRefs : Win32cr::Foundation::FILETIME)
+    end
+  end
+
+  @[Extern]
+  struct DSROLE_PRIMARY_DOMAIN_INFO_BASIC
+    property machine_role : Win32cr::Networking::ActiveDirectory::DSROLE_MACHINE_ROLE
+    property flags : UInt32
+    property domain_name_flat : Win32cr::Foundation::PWSTR
+    property domain_name_dns : Win32cr::Foundation::PWSTR
+    property domain_forest_name : Win32cr::Foundation::PWSTR
+    property domain_guid : LibC::GUID
+    def initialize(@machine_role : Win32cr::Networking::ActiveDirectory::DSROLE_MACHINE_ROLE, @flags : UInt32, @domain_name_flat : Win32cr::Foundation::PWSTR, @domain_name_dns : Win32cr::Foundation::PWSTR, @domain_forest_name : Win32cr::Foundation::PWSTR, @domain_guid : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct DSROLE_UPGRADE_STATUS_INFO
+    property operation_state : UInt32
+    property previous_server_state : Win32cr::Networking::ActiveDirectory::DSROLE_SERVER_STATE
+    def initialize(@operation_state : UInt32, @previous_server_state : Win32cr::Networking::ActiveDirectory::DSROLE_SERVER_STATE)
+    end
+  end
+
+  @[Extern]
+  struct DSROLE_OPERATION_STATE_INFO
+    property operation_state : Win32cr::Networking::ActiveDirectory::DSROLE_OPERATION_STATE
+    def initialize(@operation_state : Win32cr::Networking::ActiveDirectory::DSROLE_OPERATION_STATE)
+    end
+  end
+
+  @[Extern]
+  struct DOMAIN_CONTROLLER_INFOA
+    property domain_controller_name : Win32cr::Foundation::PSTR
+    property domain_controller_address : Win32cr::Foundation::PSTR
+    property domain_controller_address_type : UInt32
+    property domain_guid : LibC::GUID
+    property domain_name : Win32cr::Foundation::PSTR
+    property dns_forest_name : Win32cr::Foundation::PSTR
+    property flags : UInt32
+    property dc_site_name : Win32cr::Foundation::PSTR
+    property client_site_name : Win32cr::Foundation::PSTR
+    def initialize(@domain_controller_name : Win32cr::Foundation::PSTR, @domain_controller_address : Win32cr::Foundation::PSTR, @domain_controller_address_type : UInt32, @domain_guid : LibC::GUID, @domain_name : Win32cr::Foundation::PSTR, @dns_forest_name : Win32cr::Foundation::PSTR, @flags : UInt32, @dc_site_name : Win32cr::Foundation::PSTR, @client_site_name : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct DOMAIN_CONTROLLER_INFOW
+    property domain_controller_name : Win32cr::Foundation::PWSTR
+    property domain_controller_address : Win32cr::Foundation::PWSTR
+    property domain_controller_address_type : UInt32
+    property domain_guid : LibC::GUID
+    property domain_name : Win32cr::Foundation::PWSTR
+    property dns_forest_name : Win32cr::Foundation::PWSTR
+    property flags : UInt32
+    property dc_site_name : Win32cr::Foundation::PWSTR
+    property client_site_name : Win32cr::Foundation::PWSTR
+    def initialize(@domain_controller_name : Win32cr::Foundation::PWSTR, @domain_controller_address : Win32cr::Foundation::PWSTR, @domain_controller_address_type : UInt32, @domain_guid : LibC::GUID, @domain_name : Win32cr::Foundation::PWSTR, @dns_forest_name : Win32cr::Foundation::PWSTR, @flags : UInt32, @dc_site_name : Win32cr::Foundation::PWSTR, @client_site_name : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct DS_DOMAIN_TRUSTSW
+    property netbios_domain_name : Win32cr::Foundation::PWSTR
+    property dns_domain_name : Win32cr::Foundation::PWSTR
+    property flags : UInt32
+    property parent_index : UInt32
+    property trust_type : UInt32
+    property trust_attributes : UInt32
+    property domain_sid : Win32cr::Foundation::PSID
+    property domain_guid : LibC::GUID
+    def initialize(@netbios_domain_name : Win32cr::Foundation::PWSTR, @dns_domain_name : Win32cr::Foundation::PWSTR, @flags : UInt32, @parent_index : UInt32, @trust_type : UInt32, @trust_attributes : UInt32, @domain_sid : Win32cr::Foundation::PSID, @domain_guid : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct DS_DOMAIN_TRUSTSA
+    property netbios_domain_name : Win32cr::Foundation::PSTR
+    property dns_domain_name : Win32cr::Foundation::PSTR
+    property flags : UInt32
+    property parent_index : UInt32
+    property trust_type : UInt32
+    property trust_attributes : UInt32
+    property domain_sid : Win32cr::Foundation::PSID
+    property domain_guid : LibC::GUID
+    def initialize(@netbios_domain_name : Win32cr::Foundation::PSTR, @dns_domain_name : Win32cr::Foundation::PSTR, @flags : UInt32, @parent_index : UInt32, @trust_type : UInt32, @trust_attributes : UInt32, @domain_sid : Win32cr::Foundation::PSID, @domain_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
   record IQueryFormVtbl,
@@ -2189,7 +2526,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("8cfcee30-39bd-11d0-b8d1-00a024ab2dbb")]
   record IQueryForm, lpVtbl : IQueryFormVtbl* do
     GUID = LibC::GUID.new(0x8cfcee30_u32, 0x39bd_u16, 0x11d0_u16, StaticArray[0xb8_u8, 0xd1_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0xab_u8, 0x2d_u8, 0xbb_u8])
     def query_interface(this : IQueryForm*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2229,7 +2565,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("1a3114b8-a62e-11d0-a6c5-00a0c906af45")]
   record IPersistQuery, lpVtbl : IPersistQueryVtbl* do
     GUID = LibC::GUID.new(0x1a3114b8_u32, 0xa62e_u16, 0x11d0_u16, StaticArray[0xa6_u8, 0xc5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x6_u8, 0xaf_u8, 0x45_u8])
     def query_interface(this : IPersistQuery*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2277,7 +2612,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("ab50dec0-6f1d-11d0-a1c4-00aa00c16e65")]
   record ICommonQuery, lpVtbl : ICommonQueryVtbl* do
     GUID = LibC::GUID.new(0xab50dec0_u32, 0x6f1d_u16, 0x11d0_u16, StaticArray[0xa1_u8, 0xc4_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xc1_u8, 0x6e_u8, 0x65_u8])
     def query_interface(this : ICommonQuery*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2320,7 +2654,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("fd8256d0-fd15-11ce-abc4-02608c9e7553")]
   record IADs, lpVtbl : IADsVtbl* do
     GUID = LibC::GUID.new(0xfd8256d0_u32, 0xfd15_u16, 0x11ce_u16, StaticArray[0xab_u8, 0xc4_u8, 0x2_u8, 0x60_u8, 0x8c_u8, 0x9e_u8, 0x75_u8, 0x53_u8])
     def query_interface(this : IADs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2409,7 +2742,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("001677d0-fd16-11ce-abc4-02608c9e7553")]
   record IADsContainer, lpVtbl : IADsContainerVtbl* do
     GUID = LibC::GUID.new(0x1677d0_u32, 0xfd16_u16, 0x11ce_u16, StaticArray[0xab_u8, 0xc4_u8, 0x2_u8, 0x60_u8, 0x8c_u8, 0x9e_u8, 0x75_u8, 0x53_u8])
     def query_interface(this : IADsContainer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2485,7 +2817,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("72b945e0-253b-11cf-a988-00aa006bc149")]
   record IADsCollection, lpVtbl : IADsCollectionVtbl* do
     GUID = LibC::GUID.new(0x72b945e0_u32, 0x253b_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
     def query_interface(this : IADsCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2540,7 +2871,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("451a0030-72ec-11cf-b03b-00aa006e0975")]
   record IADsMembers, lpVtbl : IADsMembersVtbl* do
     GUID = LibC::GUID.new(0x451a0030_u32, 0x72ec_u16, 0x11cf_u16, StaticArray[0xb0_u8, 0x3b_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6e_u8, 0x9_u8, 0x75_u8])
     def query_interface(this : IADsMembers*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2600,7 +2930,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("c6f602b6-8f69-11d0-8528-00c04fd8d503")]
   record IADsPropertyList, lpVtbl : IADsPropertyListVtbl* do
     GUID = LibC::GUID.new(0xc6f602b6_u32, 0x8f69_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x28_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsPropertyList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2675,7 +3004,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("05792c8e-941f-11d0-8529-00c04fd8d503")]
   record IADsPropertyEntry, lpVtbl : IADsPropertyEntryVtbl* do
     GUID = LibC::GUID.new(0x5792c8e_u32, 0x941f_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x29_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsPropertyEntry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2766,7 +3094,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("79fa9ad0-a97c-11d0-8534-00c04fd8d503")]
   record IADsPropertyValue, lpVtbl : IADsPropertyValueVtbl* do
     GUID = LibC::GUID.new(0x79fa9ad0_u32, 0xa97c_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsPropertyValue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2882,7 +3209,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("306e831c-5bc7-11d1-a3b8-00c04fb950dc")]
   record IADsPropertyValue2, lpVtbl : IADsPropertyValue2Vtbl* do
     GUID = LibC::GUID.new(0x306e831c_u32, 0x5bc7_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsPropertyValue2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2928,7 +3254,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("86ab4bbe-65f6-11d1-8c13-00c04fd8d503")]
   record IPrivateDispatch, lpVtbl : IPrivateDispatchVtbl* do
     GUID = LibC::GUID.new(0x86ab4bbe_u32, 0x65f6_u16, 0x11d1_u16, StaticArray[0x8c_u8, 0x13_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IPrivateDispatch*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2968,7 +3293,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("89126bab-6ead-11d1-8c18-00c04fd8d503")]
   record IPrivateUnknown, lpVtbl : IPrivateUnknownVtbl* do
     GUID = LibC::GUID.new(0x89126bab_u32, 0x6ead_u16, 0x11d1_u16, StaticArray[0x8c_u8, 0x18_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IPrivateUnknown*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3000,7 +3324,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("3d35553c-d2b0-11d1-b17b-0000f87593a0")]
   record IADsExtension, lpVtbl : IADsExtensionVtbl* do
     GUID = LibC::GUID.new(0x3d35553c_u32, 0xd2b0_u16, 0x11d1_u16, StaticArray[0xb1_u8, 0x7b_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0x93_u8, 0xa0_u8])
     def query_interface(this : IADsExtension*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3037,7 +3360,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("b2bd0902-8878-11d1-8c21-00c04fd8d503")]
   record IADsDeleteOps, lpVtbl : IADsDeleteOpsVtbl* do
     GUID = LibC::GUID.new(0xb2bd0902_u32, 0x8878_u16, 0x11d1_u16, StaticArray[0x8c_u8, 0x21_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsDeleteOps*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3094,7 +3416,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("28b96ba0-b330-11cf-a9ad-00aa006bc149")]
   record IADsNamespaces, lpVtbl : IADsNamespacesVtbl* do
     GUID = LibC::GUID.new(0x28b96ba0_u32, 0xb330_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0xad_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
     def query_interface(this : IADsNamespaces*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3221,7 +3542,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("c8f93dd0-4ae0-11cf-9e73-00aa004a5691")]
   record IADsClass, lpVtbl : IADsClassVtbl* do
     GUID = LibC::GUID.new(0xc8f93dd0_u32, 0x4ae0_u16, 0x11cf_u16, StaticArray[0x9e_u8, 0x73_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0x56_u8, 0x91_u8])
     def query_interface(this : IADsClass*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3413,7 +3733,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("c8f93dd3-4ae0-11cf-9e73-00aa004a5691")]
   record IADsProperty, lpVtbl : IADsPropertyVtbl* do
     GUID = LibC::GUID.new(0xc8f93dd3_u32, 0x4ae0_u16, 0x11cf_u16, StaticArray[0x9e_u8, 0x73_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0x56_u8, 0x91_u8])
     def query_interface(this : IADsProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3539,7 +3858,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("c8f93dd2-4ae0-11cf-9e73-00aa004a5691")]
   record IADsSyntax, lpVtbl : IADsSyntaxVtbl* do
     GUID = LibC::GUID.new(0xc8f93dd2_u32, 0x4ae0_u16, 0x11cf_u16, StaticArray[0x9e_u8, 0x73_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0x56_u8, 0x91_u8])
     def query_interface(this : IADsSyntax*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3644,7 +3962,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("a05e03a2-effe-11cf-8abc-00c04fd8d503")]
   record IADsLocality, lpVtbl : IADsLocalityVtbl* do
     GUID = LibC::GUID.new(0xa05e03a2_u32, 0xeffe_u16, 0x11cf_u16, StaticArray[0x8a_u8, 0xbc_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsLocality*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3771,7 +4088,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("a1cd2dc6-effe-11cf-8abc-00c04fd8d503")]
   record IADsO, lpVtbl : IADsOVtbl* do
     GUID = LibC::GUID.new(0xa1cd2dc6_u32, 0xeffe_u16, 0x11cf_u16, StaticArray[0x8a_u8, 0xbc_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsO*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3912,7 +4228,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("a2f733b8-effe-11cf-8abc-00c04fd8d503")]
   record IADsOU, lpVtbl : IADsOUVtbl* do
     GUID = LibC::GUID.new(0xa2f733b8_u32, 0xeffe_u16, 0x11cf_u16, StaticArray[0x8a_u8, 0xbc_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsOU*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4062,7 +4377,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("00e4c220-fd16-11ce-abc4-02608c9e7553")]
   record IADsDomain, lpVtbl : IADsDomainVtbl* do
     GUID = LibC::GUID.new(0xe4c220_u32, 0xfd16_u16, 0x11ce_u16, StaticArray[0xab_u8, 0xc4_u8, 0x2_u8, 0x60_u8, 0x8c_u8, 0x9e_u8, 0x75_u8, 0x53_u8])
     def query_interface(this : IADsDomain*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4236,7 +4550,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("efe3cc70-1d9f-11cf-b1f3-02608c9e7553")]
   record IADsComputer, lpVtbl : IADsComputerVtbl* do
     GUID = LibC::GUID.new(0xefe3cc70_u32, 0x1d9f_u16, 0x11cf_u16, StaticArray[0xb1_u8, 0xf3_u8, 0x2_u8, 0x60_u8, 0x8c_u8, 0x9e_u8, 0x75_u8, 0x53_u8])
     def query_interface(this : IADsComputer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4425,7 +4738,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("ef497680-1d9f-11cf-b1f3-02608c9e7553")]
   record IADsComputerOperations, lpVtbl : IADsComputerOperationsVtbl* do
     GUID = LibC::GUID.new(0xef497680_u32, 0x1d9f_u16, 0x11cf_u16, StaticArray[0xb1_u8, 0xf3_u8, 0x2_u8, 0x60_u8, 0x8c_u8, 0x9e_u8, 0x75_u8, 0x53_u8])
     def query_interface(this : IADsComputerOperations*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4528,7 +4840,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("27636b00-410f-11cf-b1ff-02608c9e7553")]
   record IADsGroup, lpVtbl : IADsGroupVtbl* do
     GUID = LibC::GUID.new(0x27636b00_u32, 0x410f_u16, 0x11cf_u16, StaticArray[0xb1_u8, 0xff_u8, 0x2_u8, 0x60_u8, 0x8c_u8, 0x9e_u8, 0x75_u8, 0x53_u8])
     def query_interface(this : IADsGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4728,7 +5039,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("3e37e320-17e2-11cf-abc4-02608c9e7553")]
   record IADsUser, lpVtbl : IADsUserVtbl* do
     GUID = LibC::GUID.new(0x3e37e320_u32, 0x17e2_u16, 0x11cf_u16, StaticArray[0xab_u8, 0xc4_u8, 0x2_u8, 0x60_u8, 0x8c_u8, 0x9e_u8, 0x75_u8, 0x53_u8])
     def query_interface(this : IADsUser*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5118,7 +5428,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("b15160d0-1226-11cf-a985-00aa006bc149")]
   record IADsPrintQueue, lpVtbl : IADsPrintQueueVtbl* do
     GUID = LibC::GUID.new(0xb15160d0_u32, 0x1226_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x85_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
     def query_interface(this : IADsPrintQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5292,7 +5601,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("124be5c0-156e-11cf-a986-00aa006bc149")]
   record IADsPrintQueueOperations, lpVtbl : IADsPrintQueueOperationsVtbl* do
     GUID = LibC::GUID.new(0x124be5c0_u32, 0x156e_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x86_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
     def query_interface(this : IADsPrintQueueOperations*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5416,7 +5724,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("32fb6780-1ed0-11cf-a988-00aa006bc149")]
   record IADsPrintJob, lpVtbl : IADsPrintJobVtbl* do
     GUID = LibC::GUID.new(0x32fb6780_u32, 0x1ed0_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
     def query_interface(this : IADsPrintJob*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5568,7 +5875,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("9a52db30-1ecf-11cf-a988-00aa006bc149")]
   record IADsPrintJobOperations, lpVtbl : IADsPrintJobOperationsVtbl* do
     GUID = LibC::GUID.new(0x9a52db30_u32, 0x1ecf_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
     def query_interface(this : IADsPrintJobOperations*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5704,7 +6010,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("68af66e0-31ca-11cf-a98a-00aa006bc149")]
   record IADsService, lpVtbl : IADsServiceVtbl* do
     GUID = LibC::GUID.new(0x68af66e0_u32, 0x31ca_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x8a_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
     def query_interface(this : IADsService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5873,7 +6178,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("5d7b33f0-31ca-11cf-a98a-00aa006bc149")]
   record IADsServiceOperations, lpVtbl : IADsServiceOperationsVtbl* do
     GUID = LibC::GUID.new(0x5d7b33f0_u32, 0x31ca_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x8a_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
     def query_interface(this : IADsServiceOperations*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6010,7 +6314,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("a89d1900-31ca-11cf-a98a-00aa006bc149")]
   record IADsFileService, lpVtbl : IADsFileServiceVtbl* do
     GUID = LibC::GUID.new(0xa89d1900_u32, 0x31ca_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x8a_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
     def query_interface(this : IADsFileService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6193,7 +6496,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("a02ded10-31ca-11cf-a98a-00aa006bc149")]
   record IADsFileServiceOperations, lpVtbl : IADsFileServiceOperationsVtbl* do
     GUID = LibC::GUID.new(0xa02ded10_u32, 0x31ca_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x8a_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
     def query_interface(this : IADsFileServiceOperations*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6317,7 +6619,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("eb6dcaf0-4b83-11cf-a995-00aa006bc149")]
   record IADsFileShare, lpVtbl : IADsFileShareVtbl* do
     GUID = LibC::GUID.new(0xeb6dcaf0_u32, 0x4b83_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x95_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
     def query_interface(this : IADsFileShare*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6441,7 +6742,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("398b7da0-4aab-11cf-ae2c-00aa006ebfb9")]
   record IADsSession, lpVtbl : IADsSessionVtbl* do
     GUID = LibC::GUID.new(0x398b7da0_u32, 0x4aab_u16, 0x11cf_u16, StaticArray[0xae_u8, 0x2c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6e_u8, 0xbf_u8, 0xb9_u8])
     def query_interface(this : IADsSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6554,7 +6854,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("34a05b20-4aab-11cf-ae2c-00aa006ebfb9")]
   record IADsResource, lpVtbl : IADsResourceVtbl* do
     GUID = LibC::GUID.new(0x34a05b20_u32, 0x4aab_u16, 0x11cf_u16, StaticArray[0xae_u8, 0x2c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6e_u8, 0xbf_u8, 0xb9_u8])
     def query_interface(this : IADsResource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6645,7 +6944,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("ddf2891e-0f9c-11d0-8ad4-00c04fd8d503")]
   record IADsOpenDSObject, lpVtbl : IADsOpenDSObjectVtbl* do
     GUID = LibC::GUID.new(0xddf2891e_u32, 0xf9c_u16, 0x11d0_u16, StaticArray[0x8a_u8, 0xd4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsOpenDSObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6688,7 +6986,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("e798de2c-22e4-11d0-84fe-00c04fd8d503")]
   record IDirectoryObject, lpVtbl : IDirectoryObjectVtbl* do
     GUID = LibC::GUID.new(0xe798de2c_u32, 0x22e4_u16, 0x11d0_u16, StaticArray[0x84_u8, 0xfe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IDirectoryObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6736,7 +7033,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("109ba8ec-92f0-11d0-a790-00c04fd8d5a8")]
   record IDirectorySearch, lpVtbl : IDirectorySearchVtbl* do
     GUID = LibC::GUID.new(0x109ba8ec_u32, 0x92f0_u16, 0x11d0_u16, StaticArray[0xa7_u8, 0x90_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0xa8_u8])
     def query_interface(this : IDirectorySearch*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6797,7 +7093,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("75db3b9c-a4d8-11d0-a79c-00c04fd8d5a8")]
   record IDirectorySchemaMgmt, lpVtbl : IDirectorySchemaMgmtVtbl* do
     GUID = LibC::GUID.new(0x75db3b9c_u32, 0xa4d8_u16, 0x11d0_u16, StaticArray[0xa7_u8, 0x9c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0xa8_u8])
     def query_interface(this : IDirectorySchemaMgmt*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6848,7 +7143,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("1346ce8c-9039-11d0-8528-00c04fd8d503")]
   record IADsAggregatee, lpVtbl : IADsAggregateeVtbl* do
     GUID = LibC::GUID.new(0x1346ce8c_u32, 0x9039_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x28_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsAggregatee*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6885,7 +7179,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("52db5fb0-941f-11d0-8529-00c04fd8d503")]
   record IADsAggregator, lpVtbl : IADsAggregatorVtbl* do
     GUID = LibC::GUID.new(0x52db5fb0_u32, 0x941f_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x29_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsAggregator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6932,7 +7225,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("b4f3a14c-9bdd-11d0-852c-00c04fd8d503")]
   record IADsAccessControlEntry, lpVtbl : IADsAccessControlEntryVtbl* do
     GUID = LibC::GUID.new(0xb4f3a14c_u32, 0x9bdd_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x2c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsAccessControlEntry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7021,7 +7313,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("b7ee91cc-9bdd-11d0-852c-00c04fd8d503")]
   record IADsAccessControlList, lpVtbl : IADsAccessControlListVtbl* do
     GUID = LibC::GUID.new(0xb7ee91cc_u32, 0x9bdd_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x2c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsAccessControlList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7105,7 +7396,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("b8c787ca-9bdd-11d0-852c-00c04fd8d503")]
   record IADsSecurityDescriptor, lpVtbl : IADsSecurityDescriptorVtbl* do
     GUID = LibC::GUID.new(0xb8c787ca_u32, 0x9bdd_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x2c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsSecurityDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7211,7 +7501,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("9068270b-0939-11d1-8be1-00c04fd8d503")]
   record IADsLargeInteger, lpVtbl : IADsLargeIntegerVtbl* do
     GUID = LibC::GUID.new(0x9068270b_u32, 0x939_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0xe1_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsLargeInteger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7269,7 +7558,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("b1b272a3-3625-11d1-a3a4-00c04fb950dc")]
   record IADsNameTranslate, lpVtbl : IADsNameTranslateVtbl* do
     GUID = LibC::GUID.new(0xb1b272a3_u32, 0x3625_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xa4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsNameTranslate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7331,7 +7619,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("7b66b533-4680-11d1-a3b4-00c04fb950dc")]
   record IADsCaseIgnoreList, lpVtbl : IADsCaseIgnoreListVtbl* do
     GUID = LibC::GUID.new(0x7b66b533_u32, 0x4680_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsCaseIgnoreList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7380,7 +7667,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("a910dea9-4680-11d1-a3b4-00c04fb950dc")]
   record IADsFaxNumber, lpVtbl : IADsFaxNumberVtbl* do
     GUID = LibC::GUID.new(0xa910dea9_u32, 0x4680_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsFaxNumber*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7435,7 +7721,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("b21a50a9-4080-11d1-a3ac-00c04fb950dc")]
   record IADsNetAddress, lpVtbl : IADsNetAddressVtbl* do
     GUID = LibC::GUID.new(0xb21a50a9_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsNetAddress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7488,7 +7773,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("7b28b80f-4680-11d1-a3b4-00c04fb950dc")]
   record IADsOctetList, lpVtbl : IADsOctetListVtbl* do
     GUID = LibC::GUID.new(0x7b28b80f_u32, 0x4680_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsOctetList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7537,7 +7821,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("97af011a-478e-11d1-a3b4-00c04fb950dc")]
   record IADsEmail, lpVtbl : IADsEmailVtbl* do
     GUID = LibC::GUID.new(0x97af011a_u32, 0x478e_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsEmail*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7594,7 +7877,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("b287fcd5-4080-11d1-a3ac-00c04fb950dc")]
   record IADsPath, lpVtbl : IADsPathVtbl* do
     GUID = LibC::GUID.new(0xb287fcd5_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsPath*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7661,7 +7943,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("f60fb803-4080-11d1-a3ac-00c04fb950dc")]
   record IADsReplicaPointer, lpVtbl : IADsReplicaPointerVtbl* do
     GUID = LibC::GUID.new(0xf60fb803_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsReplicaPointer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7737,7 +8018,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("8452d3ab-0869-11d1-a377-00c04fb950dc")]
   record IADsAcl, lpVtbl : IADsAclVtbl* do
     GUID = LibC::GUID.new(0x8452d3ab_u32, 0x869_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0x77_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsAcl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7801,7 +8081,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("b2f5a901-4080-11d1-a3ac-00c04fb950dc")]
   record IADsTimestamp, lpVtbl : IADsTimestampVtbl* do
     GUID = LibC::GUID.new(0xb2f5a901_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsTimestamp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7854,7 +8133,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("7adecf29-4680-11d1-a3b4-00c04fb950dc")]
   record IADsPostalAddress, lpVtbl : IADsPostalAddressVtbl* do
     GUID = LibC::GUID.new(0x7adecf29_u32, 0x4680_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsPostalAddress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7903,7 +8181,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("fd1302bd-4080-11d1-a3ac-00c04fb950dc")]
   record IADsBackLink, lpVtbl : IADsBackLinkVtbl* do
     GUID = LibC::GUID.new(0xfd1302bd_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsBackLink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -7960,7 +8237,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("b371a349-4080-11d1-a3ac-00c04fb950dc")]
   record IADsTypedName, lpVtbl : IADsTypedNameVtbl* do
     GUID = LibC::GUID.new(0xb371a349_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsTypedName*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8021,7 +8297,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("b3eb3b37-4080-11d1-a3ac-00c04fb950dc")]
   record IADsHold, lpVtbl : IADsHoldVtbl* do
     GUID = LibC::GUID.new(0xb3eb3b37_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsHold*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8074,7 +8349,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("46f14fda-232b-11d1-a808-00c04fd8d5a8")]
   record IADsObjectOptions, lpVtbl : IADsObjectOptionsVtbl* do
     GUID = LibC::GUID.new(0x46f14fda_u32, 0x232b_u16, 0x11d1_u16, StaticArray[0xa8_u8, 0x8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0xa8_u8])
     def query_interface(this : IADsObjectOptions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8130,7 +8404,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("d592aed4-f420-11d0-a36e-00c04fb950dc")]
   record IADsPathname, lpVtbl : IADsPathnameVtbl* do
     GUID = LibC::GUID.new(0xd592aed4_u32, 0xf420_u16, 0x11d0_u16, StaticArray[0xa3_u8, 0x6e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsPathname*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8215,7 +8488,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("5bb11929-afd1-11d2-9cb9-0000f87a369e")]
   record IADsADSystemInfo, lpVtbl : IADsADSystemInfoVtbl* do
     GUID = LibC::GUID.new(0x5bb11929_u32, 0xafd1_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0xb9_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x36_u8, 0x9e_u8])
     def query_interface(this : IADsADSystemInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8297,7 +8569,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("6c6d65dc-afd1-11d2-9cb9-0000f87a369e")]
   record IADsWinNTSystemInfo, lpVtbl : IADsWinNTSystemInfoVtbl* do
     GUID = LibC::GUID.new(0x6c6d65dc_u32, 0xafd1_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0xb9_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x36_u8, 0x9e_u8])
     def query_interface(this : IADsWinNTSystemInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8352,7 +8623,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("7e99c0a2-f935-11d2-ba96-00c04fb6d0d1")]
   record IADsDNWithBinary, lpVtbl : IADsDNWithBinaryVtbl* do
     GUID = LibC::GUID.new(0x7e99c0a2_u32, 0xf935_u16, 0x11d2_u16, StaticArray[0xba_u8, 0x96_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xd0_u8, 0xd1_u8])
     def query_interface(this : IADsDNWithBinary*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8407,7 +8677,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("370df02e-f934-11d2-ba96-00c04fb6d0d1")]
   record IADsDNWithString, lpVtbl : IADsDNWithStringVtbl* do
     GUID = LibC::GUID.new(0x370df02e_u32, 0xf934_u16, 0x11d2_u16, StaticArray[0xba_u8, 0x96_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xd0_u8, 0xd1_u8])
     def query_interface(this : IADsDNWithString*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8463,7 +8732,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("a63251b2-5f21-474b-ab52-4a8efad10895")]
   record IADsSecurityUtility, lpVtbl : IADsSecurityUtilityVtbl* do
     GUID = LibC::GUID.new(0xa63251b2_u32, 0x5f21_u16, 0x474b_u16, StaticArray[0xab_u8, 0x52_u8, 0x4a_u8, 0x8e_u8, 0xfa_u8, 0xd1_u8, 0x8_u8, 0x95_u8])
     def query_interface(this : IADsSecurityUtility*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8518,7 +8786,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("7cabcf1e-78f5-11d2-960c-00c04fa31a86")]
   record IDsBrowseDomainTree, lpVtbl : IDsBrowseDomainTreeVtbl* do
     GUID = LibC::GUID.new(0x7cabcf1e_u32, 0x78f5_u16, 0x11d2_u16, StaticArray[0x96_u8, 0xc_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x1a_u8, 0x86_u8])
     def query_interface(this : IDsBrowseDomainTree*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8567,7 +8834,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("1ab4a8c0-6a0b-11d2-ad49-00c04fa31a86")]
   record IDsDisplaySpecifier, lpVtbl : IDsDisplaySpecifierVtbl* do
     GUID = LibC::GUID.new(0x1ab4a8c0_u32, 0x6a0b_u16, 0x11d2_u16, StaticArray[0xad_u8, 0x49_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x1a_u8, 0x86_u8])
     def query_interface(this : IDsDisplaySpecifier*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8625,7 +8891,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("0c87e64e-3b7a-11d2-b9e0-00c04fd8dbf7")]
   record IDsObjectPicker, lpVtbl : IDsObjectPickerVtbl* do
     GUID = LibC::GUID.new(0xc87e64e_u32, 0x3b7a_u16, 0x11d2_u16, StaticArray[0xb9_u8, 0xe0_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xdb_u8, 0xf7_u8])
     def query_interface(this : IDsObjectPicker*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8657,7 +8922,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("e2d3ec9b-d041-445a-8f16-4748de8fb1cf")]
   record IDsObjectPickerCredentials, lpVtbl : IDsObjectPickerCredentialsVtbl* do
     GUID = LibC::GUID.new(0xe2d3ec9b_u32, 0xd041_u16, 0x445a_u16, StaticArray[0x8f_u8, 0x16_u8, 0x47_u8, 0x48_u8, 0xde_u8, 0x8f_u8, 0xb1_u8, 0xcf_u8])
     def query_interface(this : IDsObjectPickerCredentials*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8691,7 +8955,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("53554a38-f902-11d2-82b9-00c04f68928b")]
   record IDsAdminCreateObj, lpVtbl : IDsAdminCreateObjVtbl* do
     GUID = LibC::GUID.new(0x53554a38_u32, 0xf902_u16, 0x11d2_u16, StaticArray[0x82_u8, 0xb9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x68_u8, 0x92_u8, 0x8b_u8])
     def query_interface(this : IDsAdminCreateObj*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8722,7 +8985,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("f2573587-e6fc-11d2-82af-00c04f68928b")]
   record IDsAdminNewObj, lpVtbl : IDsAdminNewObjVtbl* do
     GUID = LibC::GUID.new(0xf2573587_u32, 0xe6fc_u16, 0x11d2_u16, StaticArray[0x82_u8, 0xaf_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x68_u8, 0x92_u8, 0x8b_u8])
     def query_interface(this : IDsAdminNewObj*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8753,7 +9015,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("be2b487e-f904-11d2-82b9-00c04f68928b")]
   record IDsAdminNewObjPrimarySite, lpVtbl : IDsAdminNewObjPrimarySiteVtbl* do
     GUID = LibC::GUID.new(0xbe2b487e_u32, 0xf904_u16, 0x11d2_u16, StaticArray[0x82_u8, 0xb9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x68_u8, 0x92_u8, 0x8b_u8])
     def query_interface(this : IDsAdminNewObjPrimarySite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8788,7 +9049,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("6088eae2-e7bf-11d2-82af-00c04f68928b")]
   record IDsAdminNewObjExt, lpVtbl : IDsAdminNewObjExtVtbl* do
     GUID = LibC::GUID.new(0x6088eae2_u32, 0xe7bf_u16, 0x11d2_u16, StaticArray[0x82_u8, 0xaf_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x68_u8, 0x92_u8, 0x8b_u8])
     def query_interface(this : IDsAdminNewObjExt*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -8833,7 +9093,6 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  #@[Com("e4a2b8b3-5a18-11d2-97c1-00a0c9a06d2d")]
   record IDsAdminNotifyHandler, lpVtbl : IDsAdminNotifyHandlerVtbl* do
     GUID = LibC::GUID.new(0xe4a2b8b3_u32, 0x5a18_u16, 0x11d2_u16, StaticArray[0x97_u8, 0xc1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa0_u8, 0x6d_u8, 0x2d_u8])
     def query_interface(this : IDsAdminNotifyHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

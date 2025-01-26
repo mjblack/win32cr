@@ -2,61 +2,61 @@ require "./com.cr"
 require "./../foundation.cr"
 
 module Win32cr::System::Wmi
-  alias MI_MethodDecl_Invoke = Proc(Void*, Win32cr::System::Wmi::MI_Context*, UInt16*, UInt16*, UInt16*, Win32cr::System::Wmi::MI_Instance*, Win32cr::System::Wmi::MI_Instance*, Void)*
+  alias MI_MethodDecl_Invoke = Proc(Void*, Win32cr::System::Wmi::MI_Context*, UInt16*, UInt16*, UInt16*, Win32cr::System::Wmi::MI_Instance*, Win32cr::System::Wmi::MI_Instance*, Void)
 
-  alias MI_ProviderFT_Load = Proc(Void**, Win32cr::System::Wmi::MI_Module_Self*, Win32cr::System::Wmi::MI_Context*, Void)*
+  alias MI_ProviderFT_Load = Proc(Void**, Win32cr::System::Wmi::MI_Module_Self*, Win32cr::System::Wmi::MI_Context*, Void)
 
-  alias MI_ProviderFT_Unload = Proc(Void*, Win32cr::System::Wmi::MI_Context*, Void)*
+  alias MI_ProviderFT_Unload = Proc(Void*, Win32cr::System::Wmi::MI_Context*, Void)
 
-  alias MI_ProviderFT_GetInstance = Proc(Void*, Win32cr::System::Wmi::MI_Context*, UInt16*, UInt16*, Win32cr::System::Wmi::MI_Instance*, Win32cr::System::Wmi::MI_PropertySet*, Void)*
+  alias MI_ProviderFT_GetInstance = Proc(Void*, Win32cr::System::Wmi::MI_Context*, UInt16*, UInt16*, Win32cr::System::Wmi::MI_Instance*, Win32cr::System::Wmi::MI_PropertySet*, Void)
 
-  alias MI_ProviderFT_EnumerateInstances = Proc(Void*, Win32cr::System::Wmi::MI_Context*, UInt16*, UInt16*, Win32cr::System::Wmi::MI_PropertySet*, UInt8, Win32cr::System::Wmi::MI_Filter*, Void)*
+  alias MI_ProviderFT_EnumerateInstances = Proc(Void*, Win32cr::System::Wmi::MI_Context*, UInt16*, UInt16*, Win32cr::System::Wmi::MI_PropertySet*, UInt8, Win32cr::System::Wmi::MI_Filter*, Void)
 
-  alias MI_ProviderFT_CreateInstance = Proc(Void*, Win32cr::System::Wmi::MI_Context*, UInt16*, UInt16*, Win32cr::System::Wmi::MI_Instance*, Void)*
+  alias MI_ProviderFT_CreateInstance = Proc(Void*, Win32cr::System::Wmi::MI_Context*, UInt16*, UInt16*, Win32cr::System::Wmi::MI_Instance*, Void)
 
-  alias MI_ProviderFT_ModifyInstance = Proc(Void*, Win32cr::System::Wmi::MI_Context*, UInt16*, UInt16*, Win32cr::System::Wmi::MI_Instance*, Win32cr::System::Wmi::MI_PropertySet*, Void)*
+  alias MI_ProviderFT_ModifyInstance = Proc(Void*, Win32cr::System::Wmi::MI_Context*, UInt16*, UInt16*, Win32cr::System::Wmi::MI_Instance*, Win32cr::System::Wmi::MI_PropertySet*, Void)
 
-  alias MI_ProviderFT_DeleteInstance = Proc(Void*, Win32cr::System::Wmi::MI_Context*, UInt16*, UInt16*, Win32cr::System::Wmi::MI_Instance*, Void)*
+  alias MI_ProviderFT_DeleteInstance = Proc(Void*, Win32cr::System::Wmi::MI_Context*, UInt16*, UInt16*, Win32cr::System::Wmi::MI_Instance*, Void)
 
-  alias MI_ProviderFT_AssociatorInstances = Proc(Void*, Win32cr::System::Wmi::MI_Context*, UInt16*, UInt16*, Win32cr::System::Wmi::MI_Instance*, UInt16*, UInt16*, UInt16*, Win32cr::System::Wmi::MI_PropertySet*, UInt8, Win32cr::System::Wmi::MI_Filter*, Void)*
+  alias MI_ProviderFT_AssociatorInstances = Proc(Void*, Win32cr::System::Wmi::MI_Context*, UInt16*, UInt16*, Win32cr::System::Wmi::MI_Instance*, UInt16*, UInt16*, UInt16*, Win32cr::System::Wmi::MI_PropertySet*, UInt8, Win32cr::System::Wmi::MI_Filter*, Void)
 
-  alias MI_ProviderFT_ReferenceInstances = Proc(Void*, Win32cr::System::Wmi::MI_Context*, UInt16*, UInt16*, Win32cr::System::Wmi::MI_Instance*, UInt16*, Win32cr::System::Wmi::MI_PropertySet*, UInt8, Win32cr::System::Wmi::MI_Filter*, Void)*
+  alias MI_ProviderFT_ReferenceInstances = Proc(Void*, Win32cr::System::Wmi::MI_Context*, UInt16*, UInt16*, Win32cr::System::Wmi::MI_Instance*, UInt16*, Win32cr::System::Wmi::MI_PropertySet*, UInt8, Win32cr::System::Wmi::MI_Filter*, Void)
 
-  alias MI_ProviderFT_EnableIndications = Proc(Void*, Win32cr::System::Wmi::MI_Context*, UInt16*, UInt16*, Void)*
+  alias MI_ProviderFT_EnableIndications = Proc(Void*, Win32cr::System::Wmi::MI_Context*, UInt16*, UInt16*, Void)
 
-  alias MI_ProviderFT_DisableIndications = Proc(Void*, Win32cr::System::Wmi::MI_Context*, UInt16*, UInt16*, Void)*
+  alias MI_ProviderFT_DisableIndications = Proc(Void*, Win32cr::System::Wmi::MI_Context*, UInt16*, UInt16*, Void)
 
-  alias MI_ProviderFT_Subscribe = Proc(Void*, Win32cr::System::Wmi::MI_Context*, UInt16*, UInt16*, Win32cr::System::Wmi::MI_Filter*, UInt16*, UInt64, Void**, Void)*
+  alias MI_ProviderFT_Subscribe = Proc(Void*, Win32cr::System::Wmi::MI_Context*, UInt16*, UInt16*, Win32cr::System::Wmi::MI_Filter*, UInt16*, UInt64, Void**, Void)
 
-  alias MI_ProviderFT_Unsubscribe = Proc(Void*, Win32cr::System::Wmi::MI_Context*, UInt16*, UInt16*, UInt64, Void*, Void)*
+  alias MI_ProviderFT_Unsubscribe = Proc(Void*, Win32cr::System::Wmi::MI_Context*, UInt16*, UInt16*, UInt64, Void*, Void)
 
-  alias MI_ProviderFT_Invoke = Proc(Void*, Win32cr::System::Wmi::MI_Context*, UInt16*, UInt16*, UInt16*, Win32cr::System::Wmi::MI_Instance*, Win32cr::System::Wmi::MI_Instance*, Void)*
+  alias MI_ProviderFT_Invoke = Proc(Void*, Win32cr::System::Wmi::MI_Context*, UInt16*, UInt16*, UInt16*, Win32cr::System::Wmi::MI_Instance*, Win32cr::System::Wmi::MI_Instance*, Void)
 
-  alias MI_Module_Load = Proc(Win32cr::System::Wmi::MI_Module_Self**, Win32cr::System::Wmi::MI_Context*, Void)*
+  alias MI_Module_Load = Proc(Win32cr::System::Wmi::MI_Module_Self**, Win32cr::System::Wmi::MI_Context*, Void)
 
-  alias MI_Module_Unload = Proc(Win32cr::System::Wmi::MI_Module_Self*, Win32cr::System::Wmi::MI_Context*, Void)*
+  alias MI_Module_Unload = Proc(Win32cr::System::Wmi::MI_Module_Self*, Win32cr::System::Wmi::MI_Context*, Void)
 
-  alias MI_CancelCallback = Proc(Win32cr::System::Wmi::MI_CancellationReason, Void*, Void)*
+  alias MI_CancelCallback = Proc(Win32cr::System::Wmi::MI_CancellationReason, Void*, Void)
 
-  alias MI_MainFunction = Proc(Win32cr::System::Wmi::MI_Server*, Win32cr::System::Wmi::MI_Module*)*
+  alias MI_MainFunction = Proc(Win32cr::System::Wmi::MI_Server*, Win32cr::System::Wmi::MI_Module*)
 
-  alias MI_OperationCallback_PromptUser = Proc(Win32cr::System::Wmi::MI_Operation*, Void*, UInt16*, Win32cr::System::Wmi::MI_PromptType, LibC::IntPtrT, Void)*
+  alias MI_OperationCallback_PromptUser = Proc(Win32cr::System::Wmi::MI_Operation*, Void*, UInt16*, Win32cr::System::Wmi::MI_PromptType, LibC::IntPtrT, Void)
 
-  alias MI_OperationCallback_WriteError = Proc(Win32cr::System::Wmi::MI_Operation*, Void*, Win32cr::System::Wmi::MI_Instance*, LibC::IntPtrT, Void)*
+  alias MI_OperationCallback_WriteError = Proc(Win32cr::System::Wmi::MI_Operation*, Void*, Win32cr::System::Wmi::MI_Instance*, LibC::IntPtrT, Void)
 
-  alias MI_OperationCallback_WriteMessage = Proc(Win32cr::System::Wmi::MI_Operation*, Void*, UInt32, UInt16*, Void)*
+  alias MI_OperationCallback_WriteMessage = Proc(Win32cr::System::Wmi::MI_Operation*, Void*, UInt32, UInt16*, Void)
 
-  alias MI_OperationCallback_WriteProgress = Proc(Win32cr::System::Wmi::MI_Operation*, Void*, UInt16*, UInt16*, UInt16*, UInt32, UInt32, Void)*
+  alias MI_OperationCallback_WriteProgress = Proc(Win32cr::System::Wmi::MI_Operation*, Void*, UInt16*, UInt16*, UInt16*, UInt32, UInt32, Void)
 
-  alias MI_OperationCallback_Instance = Proc(Win32cr::System::Wmi::MI_Operation*, Void*, Win32cr::System::Wmi::MI_Instance*, UInt8, Win32cr::System::Wmi::MI_Result, UInt16*, Win32cr::System::Wmi::MI_Instance*, LibC::IntPtrT, Void)*
+  alias MI_OperationCallback_Instance = Proc(Win32cr::System::Wmi::MI_Operation*, Void*, Win32cr::System::Wmi::MI_Instance*, UInt8, Win32cr::System::Wmi::MI_Result, UInt16*, Win32cr::System::Wmi::MI_Instance*, LibC::IntPtrT, Void)
 
-  alias MI_OperationCallback_StreamedParameter = Proc(Win32cr::System::Wmi::MI_Operation*, Void*, UInt16*, Win32cr::System::Wmi::MI_Type, Win32cr::System::Wmi::MI_Value*, LibC::IntPtrT, Void)*
+  alias MI_OperationCallback_StreamedParameter = Proc(Win32cr::System::Wmi::MI_Operation*, Void*, UInt16*, Win32cr::System::Wmi::MI_Type, Win32cr::System::Wmi::MI_Value*, LibC::IntPtrT, Void)
 
-  alias MI_OperationCallback_Indication = Proc(Win32cr::System::Wmi::MI_Operation*, Void*, Win32cr::System::Wmi::MI_Instance*, UInt16*, UInt16*, UInt8, Win32cr::System::Wmi::MI_Result, UInt16*, Win32cr::System::Wmi::MI_Instance*, LibC::IntPtrT, Void)*
+  alias MI_OperationCallback_Indication = Proc(Win32cr::System::Wmi::MI_Operation*, Void*, Win32cr::System::Wmi::MI_Instance*, UInt16*, UInt16*, UInt8, Win32cr::System::Wmi::MI_Result, UInt16*, Win32cr::System::Wmi::MI_Instance*, LibC::IntPtrT, Void)
 
-  alias MI_OperationCallback_Class = Proc(Win32cr::System::Wmi::MI_Operation*, Void*, Win32cr::System::Wmi::MI_Class*, UInt8, Win32cr::System::Wmi::MI_Result, UInt16*, Win32cr::System::Wmi::MI_Instance*, LibC::IntPtrT, Void)*
+  alias MI_OperationCallback_Class = Proc(Win32cr::System::Wmi::MI_Operation*, Void*, Win32cr::System::Wmi::MI_Class*, UInt8, Win32cr::System::Wmi::MI_Result, UInt16*, Win32cr::System::Wmi::MI_Instance*, LibC::IntPtrT, Void)
 
-  alias MI_Deserializer_ClassObjectNeeded = Proc(Void*, UInt16*, UInt16*, UInt16*, Win32cr::System::Wmi::MI_Class**, Win32cr::System::Wmi::MI_Result)*
+  alias MI_Deserializer_ClassObjectNeeded = Proc(Void*, UInt16*, UInt16*, UInt16*, Win32cr::System::Wmi::MI_Class**, Win32cr::System::Wmi::MI_Result)
 
   MI_FLAG_ANY = 127_u32
   MI_FLAG_VERSION = 469762048_u32
@@ -1173,1249 +1173,1746 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record MI_Timestamp,
-    year : UInt32,
-    month : UInt32,
-    day : UInt32,
-    hour : UInt32,
-    minute : UInt32,
-    second : UInt32,
-    microseconds : UInt32,
-    utc : Int32
+  struct MI_Timestamp
+    property year : UInt32
+    property month : UInt32
+    property day : UInt32
+    property hour : UInt32
+    property minute : UInt32
+    property second : UInt32
+    property microseconds : UInt32
+    property utc : Int32
+    def initialize(@year : UInt32, @month : UInt32, @day : UInt32, @hour : UInt32, @minute : UInt32, @second : UInt32, @microseconds : UInt32, @utc : Int32)
+    end
+  end
 
   @[Extern]
-  record MI_Interval,
-    days : UInt32,
-    hours : UInt32,
-    minutes : UInt32,
-    seconds : UInt32,
-    microseconds : UInt32,
-    __padding1 : UInt32,
-    __padding2 : UInt32,
-    __padding3 : UInt32
+  struct MI_Interval
+    property days : UInt32
+    property hours : UInt32
+    property minutes : UInt32
+    property seconds : UInt32
+    property microseconds : UInt32
+    property __padding1 : UInt32
+    property __padding2 : UInt32
+    property __padding3 : UInt32
+    def initialize(@days : UInt32, @hours : UInt32, @minutes : UInt32, @seconds : UInt32, @microseconds : UInt32, @__padding1 : UInt32, @__padding2 : UInt32, @__padding3 : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_Datetime,
-    isTimestamp : UInt32,
-    u : U_e__union_ do
+  struct MI_Datetime
+    property isTimestamp : UInt32
+    property u : U_e__union_
 
     # Nested Type U_e__union_
     @[Extern(union: true)]
-    record U_e__union_,
-      timestamp : Win32cr::System::Wmi::MI_Timestamp,
-      interval : Win32cr::System::Wmi::MI_Interval
+    struct U_e__union_
+    property timestamp : Win32cr::System::Wmi::MI_Timestamp
+    property interval : Win32cr::System::Wmi::MI_Interval
+    def initialize(@timestamp : Win32cr::System::Wmi::MI_Timestamp, @interval : Win32cr::System::Wmi::MI_Interval)
+    end
+    end
 
+    def initialize(@isTimestamp : UInt32, @u : U_e__union_)
+    end
   end
 
   @[Extern]
-  record MI_BooleanA,
-    data : UInt8*,
-    size : UInt32
+  struct MI_BooleanA
+    property data : UInt8*
+    property size : UInt32
+    def initialize(@data : UInt8*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_Uint8A,
-    data : UInt8*,
-    size : UInt32
+  struct MI_Uint8A
+    property data : UInt8*
+    property size : UInt32
+    def initialize(@data : UInt8*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_Sint8A,
-    data : Int8*,
-    size : UInt32
+  struct MI_Sint8A
+    property data : Int8*
+    property size : UInt32
+    def initialize(@data : Int8*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_Uint16A,
-    data : UInt16*,
-    size : UInt32
+  struct MI_Uint16A
+    property data : UInt16*
+    property size : UInt32
+    def initialize(@data : UInt16*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_Sint16A,
-    data : Int16*,
-    size : UInt32
+  struct MI_Sint16A
+    property data : Int16*
+    property size : UInt32
+    def initialize(@data : Int16*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_Uint32A,
-    data : UInt32*,
-    size : UInt32
+  struct MI_Uint32A
+    property data : UInt32*
+    property size : UInt32
+    def initialize(@data : UInt32*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_Sint32A,
-    data : Int32*,
-    size : UInt32
+  struct MI_Sint32A
+    property data : Int32*
+    property size : UInt32
+    def initialize(@data : Int32*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_Uint64A,
-    data : UInt64*,
-    size : UInt32
+  struct MI_Uint64A
+    property data : UInt64*
+    property size : UInt32
+    def initialize(@data : UInt64*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_Sint64A,
-    data : Int64*,
-    size : UInt32
+  struct MI_Sint64A
+    property data : Int64*
+    property size : UInt32
+    def initialize(@data : Int64*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_Real32A,
-    data : Float32*,
-    size : UInt32
+  struct MI_Real32A
+    property data : Float32*
+    property size : UInt32
+    def initialize(@data : Float32*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_Real64A,
-    data : Float64*,
-    size : UInt32
+  struct MI_Real64A
+    property data : Float64*
+    property size : UInt32
+    def initialize(@data : Float64*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_Char16A,
-    data : UInt16*,
-    size : UInt32
+  struct MI_Char16A
+    property data : UInt16*
+    property size : UInt32
+    def initialize(@data : UInt16*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_DatetimeA,
-    data : Win32cr::System::Wmi::MI_Datetime*,
-    size : UInt32
+  struct MI_DatetimeA
+    property data : Win32cr::System::Wmi::MI_Datetime*
+    property size : UInt32
+    def initialize(@data : Win32cr::System::Wmi::MI_Datetime*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_StringA,
-    data : UInt16**,
-    size : UInt32
+  struct MI_StringA
+    property data : UInt16**
+    property size : UInt32
+    def initialize(@data : UInt16**, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_ReferenceA,
-    data : Win32cr::System::Wmi::MI_Instance**,
-    size : UInt32
+  struct MI_ReferenceA
+    property data : Win32cr::System::Wmi::MI_Instance**
+    property size : UInt32
+    def initialize(@data : Win32cr::System::Wmi::MI_Instance**, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_InstanceA,
-    data : Win32cr::System::Wmi::MI_Instance**,
-    size : UInt32
+  struct MI_InstanceA
+    property data : Win32cr::System::Wmi::MI_Instance**
+    property size : UInt32
+    def initialize(@data : Win32cr::System::Wmi::MI_Instance**, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_Array,
-    data : Void*,
-    size : UInt32
+  struct MI_Array
+    property data : Void*
+    property size : UInt32
+    def initialize(@data : Void*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_ConstBooleanA,
-    data : UInt8*,
-    size : UInt32
+  struct MI_ConstBooleanA
+    property data : UInt8*
+    property size : UInt32
+    def initialize(@data : UInt8*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_ConstUint8A,
-    data : UInt8*,
-    size : UInt32
+  struct MI_ConstUint8A
+    property data : UInt8*
+    property size : UInt32
+    def initialize(@data : UInt8*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_ConstSint8A,
-    data : Int8*,
-    size : UInt32
+  struct MI_ConstSint8A
+    property data : Int8*
+    property size : UInt32
+    def initialize(@data : Int8*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_ConstUint16A,
-    data : UInt16*,
-    size : UInt32
+  struct MI_ConstUint16A
+    property data : UInt16*
+    property size : UInt32
+    def initialize(@data : UInt16*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_ConstSint16A,
-    data : Int16*,
-    size : UInt32
+  struct MI_ConstSint16A
+    property data : Int16*
+    property size : UInt32
+    def initialize(@data : Int16*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_ConstUint32A,
-    data : UInt32*,
-    size : UInt32
+  struct MI_ConstUint32A
+    property data : UInt32*
+    property size : UInt32
+    def initialize(@data : UInt32*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_ConstSint32A,
-    data : Int32*,
-    size : UInt32
+  struct MI_ConstSint32A
+    property data : Int32*
+    property size : UInt32
+    def initialize(@data : Int32*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_ConstUint64A,
-    data : UInt64*,
-    size : UInt32
+  struct MI_ConstUint64A
+    property data : UInt64*
+    property size : UInt32
+    def initialize(@data : UInt64*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_ConstSint64A,
-    data : Int64*,
-    size : UInt32
+  struct MI_ConstSint64A
+    property data : Int64*
+    property size : UInt32
+    def initialize(@data : Int64*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_ConstReal32A,
-    data : Float32*,
-    size : UInt32
+  struct MI_ConstReal32A
+    property data : Float32*
+    property size : UInt32
+    def initialize(@data : Float32*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_ConstReal64A,
-    data : Float64*,
-    size : UInt32
+  struct MI_ConstReal64A
+    property data : Float64*
+    property size : UInt32
+    def initialize(@data : Float64*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_ConstChar16A,
-    data : UInt16*,
-    size : UInt32
+  struct MI_ConstChar16A
+    property data : UInt16*
+    property size : UInt32
+    def initialize(@data : UInt16*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_ConstDatetimeA,
-    data : Win32cr::System::Wmi::MI_Datetime*,
-    size : UInt32
+  struct MI_ConstDatetimeA
+    property data : Win32cr::System::Wmi::MI_Datetime*
+    property size : UInt32
+    def initialize(@data : Win32cr::System::Wmi::MI_Datetime*, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_ConstStringA,
-    data : UInt16**,
-    size : UInt32
+  struct MI_ConstStringA
+    property data : UInt16**
+    property size : UInt32
+    def initialize(@data : UInt16**, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_ConstReferenceA,
-    data : Win32cr::System::Wmi::MI_Instance**,
-    size : UInt32
+  struct MI_ConstReferenceA
+    property data : Win32cr::System::Wmi::MI_Instance**
+    property size : UInt32
+    def initialize(@data : Win32cr::System::Wmi::MI_Instance**, @size : UInt32)
+    end
+  end
 
   @[Extern]
-  record MI_ConstInstanceA,
-    data : Win32cr::System::Wmi::MI_Instance**,
-    size : UInt32
+  struct MI_ConstInstanceA
+    property data : Win32cr::System::Wmi::MI_Instance**
+    property size : UInt32
+    def initialize(@data : Win32cr::System::Wmi::MI_Instance**, @size : UInt32)
+    end
+  end
 
   @[Extern(union: true)]
-  record MI_Value,
-    boolean : UInt8,
-    uint8 : UInt8,
-    sint8 : Int8,
-    uint16 : UInt16,
-    sint16 : Int16,
-    uint32 : UInt32,
-    sint32 : Int32,
-    uint64 : UInt64,
-    sint64 : Int64,
-    real32 : Float32,
-    real64 : Float64,
-    char16 : UInt16,
-    datetime : Win32cr::System::Wmi::MI_Datetime,
-    string : UInt16*,
-    instance : Win32cr::System::Wmi::MI_Instance*,
-    reference : Win32cr::System::Wmi::MI_Instance*,
-    booleana : Win32cr::System::Wmi::MI_BooleanA,
-    uint8a : Win32cr::System::Wmi::MI_Uint8A,
-    sint8a : Win32cr::System::Wmi::MI_Sint8A,
-    uint16a : Win32cr::System::Wmi::MI_Uint16A,
-    sint16a : Win32cr::System::Wmi::MI_Sint16A,
-    uint32a : Win32cr::System::Wmi::MI_Uint32A,
-    sint32a : Win32cr::System::Wmi::MI_Sint32A,
-    uint64a : Win32cr::System::Wmi::MI_Uint64A,
-    sint64a : Win32cr::System::Wmi::MI_Sint64A,
-    real32a : Win32cr::System::Wmi::MI_Real32A,
-    real64a : Win32cr::System::Wmi::MI_Real64A,
-    char16a : Win32cr::System::Wmi::MI_Char16A,
-    datetimea : Win32cr::System::Wmi::MI_DatetimeA,
-    stringa : Win32cr::System::Wmi::MI_StringA,
-    referencea : Win32cr::System::Wmi::MI_ReferenceA,
-    instancea : Win32cr::System::Wmi::MI_InstanceA,
-    array : Win32cr::System::Wmi::MI_Array
-
-  @[Extern]
-  record MI_BooleanField,
-    value : UInt8,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_Sint8Field,
-    value : Int8,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_Uint8Field,
-    value : UInt8,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_Sint16Field,
-    value : Int16,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_Uint16Field,
-    value : UInt16,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_Sint32Field,
-    value : Int32,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_Uint32Field,
-    value : UInt32,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_Sint64Field,
-    value : Int64,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_Uint64Field,
-    value : UInt64,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_Real32Field,
-    value : Float32,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_Real64Field,
-    value : Float64,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_Char16Field,
-    value : UInt16,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_DatetimeField,
-    value : Win32cr::System::Wmi::MI_Datetime,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_StringField,
-    value : UInt16*,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ReferenceField,
-    value : Win32cr::System::Wmi::MI_Instance*,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_InstanceField,
-    value : Win32cr::System::Wmi::MI_Instance*,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_BooleanAField,
-    value : Win32cr::System::Wmi::MI_BooleanA,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_Uint8AField,
-    value : Win32cr::System::Wmi::MI_Uint8A,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_Sint8AField,
-    value : Win32cr::System::Wmi::MI_Sint8A,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_Uint16AField,
-    value : Win32cr::System::Wmi::MI_Uint16A,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_Sint16AField,
-    value : Win32cr::System::Wmi::MI_Sint16A,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_Uint32AField,
-    value : Win32cr::System::Wmi::MI_Uint32A,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_Sint32AField,
-    value : Win32cr::System::Wmi::MI_Sint32A,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_Uint64AField,
-    value : Win32cr::System::Wmi::MI_Uint64A,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_Sint64AField,
-    value : Win32cr::System::Wmi::MI_Sint64A,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_Real32AField,
-    value : Win32cr::System::Wmi::MI_Real32A,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_Real64AField,
-    value : Win32cr::System::Wmi::MI_Real64A,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_Char16AField,
-    value : Win32cr::System::Wmi::MI_Char16A,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_DatetimeAField,
-    value : Win32cr::System::Wmi::MI_DatetimeA,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_StringAField,
-    value : Win32cr::System::Wmi::MI_StringA,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ReferenceAField,
-    value : Win32cr::System::Wmi::MI_ReferenceA,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_InstanceAField,
-    value : Win32cr::System::Wmi::MI_InstanceA,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ArrayField,
-    value : Win32cr::System::Wmi::MI_Array,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstBooleanField,
-    value : UInt8,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstSint8Field,
-    value : Int8,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstUint8Field,
-    value : UInt8,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstSint16Field,
-    value : Int16,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstUint16Field,
-    value : UInt16,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstSint32Field,
-    value : Int32,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstUint32Field,
-    value : UInt32,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstSint64Field,
-    value : Int64,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstUint64Field,
-    value : UInt64,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstReal32Field,
-    value : Float32,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstReal64Field,
-    value : Float64,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstChar16Field,
-    value : UInt16,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstDatetimeField,
-    value : Win32cr::System::Wmi::MI_Datetime,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstStringField,
-    value : UInt16*,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstReferenceField,
-    value : Win32cr::System::Wmi::MI_Instance*,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstInstanceField,
-    value : Win32cr::System::Wmi::MI_Instance*,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstBooleanAField,
-    value : Win32cr::System::Wmi::MI_ConstBooleanA,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstUint8AField,
-    value : Win32cr::System::Wmi::MI_ConstUint8A,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstSint8AField,
-    value : Win32cr::System::Wmi::MI_ConstSint8A,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstUint16AField,
-    value : Win32cr::System::Wmi::MI_ConstUint16A,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstSint16AField,
-    value : Win32cr::System::Wmi::MI_ConstSint16A,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstUint32AField,
-    value : Win32cr::System::Wmi::MI_ConstUint32A,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstSint32AField,
-    value : Win32cr::System::Wmi::MI_ConstSint32A,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstUint64AField,
-    value : Win32cr::System::Wmi::MI_ConstUint64A,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstSint64AField,
-    value : Win32cr::System::Wmi::MI_ConstSint64A,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstReal32AField,
-    value : Win32cr::System::Wmi::MI_ConstReal32A,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstReal64AField,
-    value : Win32cr::System::Wmi::MI_ConstReal64A,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstChar16AField,
-    value : Win32cr::System::Wmi::MI_ConstChar16A,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstDatetimeAField,
-    value : Win32cr::System::Wmi::MI_ConstDatetimeA,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstStringAField,
-    value : Win32cr::System::Wmi::MI_ConstStringA,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstReferenceAField,
-    value : Win32cr::System::Wmi::MI_ConstReferenceA,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ConstInstanceAField,
-    value : Win32cr::System::Wmi::MI_ConstInstanceA,
-    exists : UInt8,
-    flags : UInt8
-
-  @[Extern]
-  record MI_ServerFT,
-    get_version : LibC::IntPtrT,
-    get_system_name : LibC::IntPtrT
-
-  @[Extern]
-  record MI_Server,
-    serverFT : Win32cr::System::Wmi::MI_ServerFT*,
-    contextFT : Win32cr::System::Wmi::MI_ContextFT*,
-    instanceFT : Win32cr::System::Wmi::MI_InstanceFT*,
-    propertySetFT : Win32cr::System::Wmi::MI_PropertySetFT*,
-    filterFT : Win32cr::System::Wmi::MI_FilterFT*
-
-  @[Extern]
-  record MI_FilterFT,
-    evaluate : LibC::IntPtrT,
-    get_expression : LibC::IntPtrT
-
-  @[Extern]
-  record MI_Filter,
-    ft : Win32cr::System::Wmi::MI_FilterFT*,
-    reserved : LibC::IntPtrT[3]
-
-  @[Extern]
-  record MI_PropertySetFT,
-    get_element_count : LibC::IntPtrT,
-    contains_element : LibC::IntPtrT,
-    add_element : LibC::IntPtrT,
-    get_element_at : LibC::IntPtrT,
-    clear : LibC::IntPtrT,
-    destruct : LibC::IntPtrT,
-    delete : LibC::IntPtrT,
-    clone : LibC::IntPtrT
-
-  @[Extern]
-  record MI_PropertySet,
-    ft : Win32cr::System::Wmi::MI_PropertySetFT*,
-    reserved : LibC::IntPtrT[3]
-
-  @[Extern]
-  record MI_ObjectDecl,
-    flags : UInt32,
-    code : UInt32,
-    name : UInt16*,
-    qualifiers : Win32cr::System::Wmi::MI_Qualifier**,
-    numQualifiers : UInt32,
-    properties : Win32cr::System::Wmi::MI_PropertyDecl**,
-    numProperties : UInt32,
-    size : UInt32
-
-  @[Extern]
-  record MI_ClassDecl,
-    flags : UInt32,
-    code : UInt32,
-    name : UInt16*,
-    qualifiers : Win32cr::System::Wmi::MI_Qualifier**,
-    numQualifiers : UInt32,
-    properties : Win32cr::System::Wmi::MI_PropertyDecl**,
-    numProperties : UInt32,
-    size : UInt32,
-    superClass : UInt16*,
-    superClassDecl : Win32cr::System::Wmi::MI_ClassDecl*,
-    methods : Win32cr::System::Wmi::MI_MethodDecl**,
-    numMethods : UInt32,
-    schema : Win32cr::System::Wmi::MI_SchemaDecl*,
-    providerFT : Win32cr::System::Wmi::MI_ProviderFT*,
-    owningClass : Win32cr::System::Wmi::MI_Class*
-
-  @[Extern]
-  record MI_FeatureDecl,
-    flags : UInt32,
-    code : UInt32,
-    name : UInt16*,
-    qualifiers : Win32cr::System::Wmi::MI_Qualifier**,
-    numQualifiers : UInt32
-
-  @[Extern]
-  record MI_ParameterDecl,
-    flags : UInt32,
-    code : UInt32,
-    name : UInt16*,
-    qualifiers : Win32cr::System::Wmi::MI_Qualifier**,
-    numQualifiers : UInt32,
-    type__ : UInt32,
-    className : UInt16*,
-    subscript : UInt32,
-    offset : UInt32
-
-  @[Extern]
-  record MI_PropertyDecl,
-    flags : UInt32,
-    code : UInt32,
-    name : UInt16*,
-    qualifiers : Win32cr::System::Wmi::MI_Qualifier**,
-    numQualifiers : UInt32,
-    type__ : UInt32,
-    className : UInt16*,
-    subscript : UInt32,
-    offset : UInt32,
-    origin : UInt16*,
-    propagator : UInt16*,
-    value : Void*
-
-  @[Extern]
-  record MI_MethodDecl,
-    flags : UInt32,
-    code : UInt32,
-    name : UInt16*,
-    qualifiers : Win32cr::System::Wmi::MI_Qualifier**,
-    numQualifiers : UInt32,
-    parameters : Win32cr::System::Wmi::MI_ParameterDecl**,
-    numParameters : UInt32,
-    size : UInt32,
-    returnType : UInt32,
-    origin : UInt16*,
-    propagator : UInt16*,
-    schema : Win32cr::System::Wmi::MI_SchemaDecl*,
-    function : Win32cr::System::Wmi::MI_MethodDecl_Invoke
-
-  @[Extern]
-  record MI_QualifierDecl,
-    name : UInt16*,
-    type__ : UInt32,
-    scope : UInt32,
-    flavor : UInt32,
-    subscript : UInt32,
-    value : Void*
-
-  @[Extern]
-  record MI_Qualifier,
-    name : UInt16*,
-    type__ : UInt32,
-    flavor : UInt32,
-    value : Void*
-
-  @[Extern]
-  record MI_SchemaDecl,
-    qualifierDecls : Win32cr::System::Wmi::MI_QualifierDecl**,
-    numQualifierDecls : UInt32,
-    classDecls : Win32cr::System::Wmi::MI_ClassDecl**,
-    numClassDecls : UInt32
-
-  @[Extern]
-  record MI_Module_Self
-  @[Extern]
-  record MI_ProviderFT,
-    load : Win32cr::System::Wmi::MI_ProviderFT_Load,
-    unload : Win32cr::System::Wmi::MI_ProviderFT_Unload,
-    get_instance : Win32cr::System::Wmi::MI_ProviderFT_GetInstance,
-    enumerate_instances : Win32cr::System::Wmi::MI_ProviderFT_EnumerateInstances,
-    create_instance : Win32cr::System::Wmi::MI_ProviderFT_CreateInstance,
-    modify_instance : Win32cr::System::Wmi::MI_ProviderFT_ModifyInstance,
-    delete_instance : Win32cr::System::Wmi::MI_ProviderFT_DeleteInstance,
-    associator_instances : Win32cr::System::Wmi::MI_ProviderFT_AssociatorInstances,
-    reference_instances : Win32cr::System::Wmi::MI_ProviderFT_ReferenceInstances,
-    enable_indications : Win32cr::System::Wmi::MI_ProviderFT_EnableIndications,
-    disable_indications : Win32cr::System::Wmi::MI_ProviderFT_DisableIndications,
-    subscribe : Win32cr::System::Wmi::MI_ProviderFT_Subscribe,
-    unsubscribe : Win32cr::System::Wmi::MI_ProviderFT_Unsubscribe,
-    invoke : Win32cr::System::Wmi::MI_ProviderFT_Invoke
-
-  @[Extern]
-  record MI_Module,
-    version : UInt32,
-    generatorVersion : UInt32,
-    flags : UInt32,
-    charSize : UInt32,
-    schemaDecl : Win32cr::System::Wmi::MI_SchemaDecl*,
-    load : Win32cr::System::Wmi::MI_Module_Load,
-    unload : Win32cr::System::Wmi::MI_Module_Unload,
-    dynamicProviderFT : Win32cr::System::Wmi::MI_ProviderFT*
-
-  @[Extern]
-  record MI_InstanceFT,
-    clone : LibC::IntPtrT,
-    destruct : LibC::IntPtrT,
-    delete : LibC::IntPtrT,
-    is_a : LibC::IntPtrT,
-    get_class_name_a : LibC::IntPtrT,
-    set_name_space : LibC::IntPtrT,
-    get_name_space : LibC::IntPtrT,
-    get_element_count : LibC::IntPtrT,
-    add_element : LibC::IntPtrT,
-    set_element : LibC::IntPtrT,
-    set_element_at : LibC::IntPtrT,
-    get_element : LibC::IntPtrT,
-    get_element_at : LibC::IntPtrT,
-    clear_element : LibC::IntPtrT,
-    clear_element_at : LibC::IntPtrT,
-    get_server_name : LibC::IntPtrT,
-    set_server_name : LibC::IntPtrT,
-    get_class : LibC::IntPtrT
-
-  @[Extern]
-  record MI_InstanceExFT,
-    parent : Win32cr::System::Wmi::MI_InstanceFT,
-    normalize : LibC::IntPtrT
-
-  @[Extern]
-  record MI_Instance,
-    ft : Win32cr::System::Wmi::MI_InstanceFT*,
-    classDecl : Win32cr::System::Wmi::MI_ClassDecl*,
-    serverName : UInt16*,
-    nameSpace : UInt16*,
-    reserved : LibC::IntPtrT[4]
-
-  @[Extern]
-  record MI_ContextFT,
-    post_result : LibC::IntPtrT,
-    post_instance : LibC::IntPtrT,
-    post_indication : LibC::IntPtrT,
-    construct_instance : LibC::IntPtrT,
-    construct_parameters : LibC::IntPtrT,
-    new_instance : LibC::IntPtrT,
-    new_dynamic_instance : LibC::IntPtrT,
-    new_parameters : LibC::IntPtrT,
-    canceled : LibC::IntPtrT,
-    get_locale : LibC::IntPtrT,
-    register_cancel : LibC::IntPtrT,
-    request_unload : LibC::IntPtrT,
-    refuse_unload : LibC::IntPtrT,
-    get_local_session : LibC::IntPtrT,
-    set_string_option : LibC::IntPtrT,
-    get_string_option : LibC::IntPtrT,
-    get_number_option : LibC::IntPtrT,
-    get_custom_option : LibC::IntPtrT,
-    get_custom_option_count : LibC::IntPtrT,
-    get_custom_option_at : LibC::IntPtrT,
-    write_message : LibC::IntPtrT,
-    write_progress : LibC::IntPtrT,
-    write_stream_parameter : LibC::IntPtrT,
-    write_cim_error : LibC::IntPtrT,
-    prompt_user : LibC::IntPtrT,
-    should_process : LibC::IntPtrT,
-    should_continue : LibC::IntPtrT,
-    post_error : LibC::IntPtrT,
-    post_cim_error : LibC::IntPtrT,
-    write_error : LibC::IntPtrT
-
-  @[Extern]
-  record MI_Context,
-    ft : Win32cr::System::Wmi::MI_ContextFT*,
-    reserved : LibC::IntPtrT[3]
-
-  @[Extern]
-  record MI_QualifierSetFT,
-    get_qualifier_count : LibC::IntPtrT,
-    get_qualifier_at : LibC::IntPtrT,
-    get_qualifier : LibC::IntPtrT
-
-  @[Extern]
-  record MI_QualifierSet,
-    reserved1 : UInt64,
-    reserved2 : LibC::IntPtrT,
-    ft : Win32cr::System::Wmi::MI_QualifierSetFT*
-
-  @[Extern]
-  record MI_ParameterSetFT,
-    get_method_return_type : LibC::IntPtrT,
-    get_parameter_count : LibC::IntPtrT,
-    get_parameter_at : LibC::IntPtrT,
-    get_parameter : LibC::IntPtrT
-
-  @[Extern]
-  record MI_ParameterSet,
-    reserved1 : UInt64,
-    reserved2 : LibC::IntPtrT,
-    ft : Win32cr::System::Wmi::MI_ParameterSetFT*
-
-  @[Extern]
-  record MI_ClassFT,
-    get_class_name_a : LibC::IntPtrT,
-    get_name_space : LibC::IntPtrT,
-    get_server_name : LibC::IntPtrT,
-    get_element_count : LibC::IntPtrT,
-    get_element : LibC::IntPtrT,
-    get_element_at : LibC::IntPtrT,
-    get_class_qualifier_set : LibC::IntPtrT,
-    get_method_count : LibC::IntPtrT,
-    get_method_at : LibC::IntPtrT,
-    get_method : LibC::IntPtrT,
-    get_parent_class_name : LibC::IntPtrT,
-    get_parent_class : LibC::IntPtrT,
-    delete : LibC::IntPtrT,
-    clone : LibC::IntPtrT
-
-  @[Extern]
-  record MI_Class,
-    ft : Win32cr::System::Wmi::MI_ClassFT*,
-    classDecl : Win32cr::System::Wmi::MI_ClassDecl*,
-    namespaceName : UInt16*,
-    serverName : UInt16*,
-    reserved : LibC::IntPtrT[4]
-
-  @[Extern]
-  record MI_OperationCallbacks,
-    callbackContext : Void*,
-    promptUser : Win32cr::System::Wmi::MI_OperationCallback_PromptUser,
-    writeError : Win32cr::System::Wmi::MI_OperationCallback_WriteError,
-    writeMessage : Win32cr::System::Wmi::MI_OperationCallback_WriteMessage,
-    writeProgress : Win32cr::System::Wmi::MI_OperationCallback_WriteProgress,
-    instanceResult : Win32cr::System::Wmi::MI_OperationCallback_Instance,
-    indicationResult : Win32cr::System::Wmi::MI_OperationCallback_Indication,
-    classResult : Win32cr::System::Wmi::MI_OperationCallback_Class,
-    streamedParameterResult : Win32cr::System::Wmi::MI_OperationCallback_StreamedParameter
-
-  @[Extern]
-  record MI_SessionCallbacks,
-    callbackContext : Void*,
-    writeMessage : LibC::IntPtrT,
-    writeError : LibC::IntPtrT
-
-  @[Extern]
-  record MI_UsernamePasswordCreds,
-    domain : UInt16*,
-    username : UInt16*,
-    password : UInt16*
-
+  struct MI_Value
+    property boolean : UInt8
+    property uint8 : UInt8
+    property sint8 : Int8
+    property uint16 : UInt16
+    property sint16 : Int16
+    property uint32 : UInt32
+    property sint32 : Int32
+    property uint64 : UInt64
+    property sint64 : Int64
+    property real32 : Float32
+    property real64 : Float64
+    property char16 : UInt16
+    property datetime : Win32cr::System::Wmi::MI_Datetime
+    property string : UInt16*
+    property instance : Win32cr::System::Wmi::MI_Instance*
+    property reference : Win32cr::System::Wmi::MI_Instance*
+    property booleana : Win32cr::System::Wmi::MI_BooleanA
+    property uint8a : Win32cr::System::Wmi::MI_Uint8A
+    property sint8a : Win32cr::System::Wmi::MI_Sint8A
+    property uint16a : Win32cr::System::Wmi::MI_Uint16A
+    property sint16a : Win32cr::System::Wmi::MI_Sint16A
+    property uint32a : Win32cr::System::Wmi::MI_Uint32A
+    property sint32a : Win32cr::System::Wmi::MI_Sint32A
+    property uint64a : Win32cr::System::Wmi::MI_Uint64A
+    property sint64a : Win32cr::System::Wmi::MI_Sint64A
+    property real32a : Win32cr::System::Wmi::MI_Real32A
+    property real64a : Win32cr::System::Wmi::MI_Real64A
+    property char16a : Win32cr::System::Wmi::MI_Char16A
+    property datetimea : Win32cr::System::Wmi::MI_DatetimeA
+    property stringa : Win32cr::System::Wmi::MI_StringA
+    property referencea : Win32cr::System::Wmi::MI_ReferenceA
+    property instancea : Win32cr::System::Wmi::MI_InstanceA
+    property array : Win32cr::System::Wmi::MI_Array
+    def initialize(@boolean : UInt8, @uint8 : UInt8, @sint8 : Int8, @uint16 : UInt16, @sint16 : Int16, @uint32 : UInt32, @sint32 : Int32, @uint64 : UInt64, @sint64 : Int64, @real32 : Float32, @real64 : Float64, @char16 : UInt16, @datetime : Win32cr::System::Wmi::MI_Datetime, @string : UInt16*, @instance : Win32cr::System::Wmi::MI_Instance*, @reference : Win32cr::System::Wmi::MI_Instance*, @booleana : Win32cr::System::Wmi::MI_BooleanA, @uint8a : Win32cr::System::Wmi::MI_Uint8A, @sint8a : Win32cr::System::Wmi::MI_Sint8A, @uint16a : Win32cr::System::Wmi::MI_Uint16A, @sint16a : Win32cr::System::Wmi::MI_Sint16A, @uint32a : Win32cr::System::Wmi::MI_Uint32A, @sint32a : Win32cr::System::Wmi::MI_Sint32A, @uint64a : Win32cr::System::Wmi::MI_Uint64A, @sint64a : Win32cr::System::Wmi::MI_Sint64A, @real32a : Win32cr::System::Wmi::MI_Real32A, @real64a : Win32cr::System::Wmi::MI_Real64A, @char16a : Win32cr::System::Wmi::MI_Char16A, @datetimea : Win32cr::System::Wmi::MI_DatetimeA, @stringa : Win32cr::System::Wmi::MI_StringA, @referencea : Win32cr::System::Wmi::MI_ReferenceA, @instancea : Win32cr::System::Wmi::MI_InstanceA, @array : Win32cr::System::Wmi::MI_Array)
+    end
+  end
+
+  @[Extern]
+  struct MI_BooleanField
+    property value : UInt8
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : UInt8, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_Sint8Field
+    property value : Int8
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Int8, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_Uint8Field
+    property value : UInt8
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : UInt8, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_Sint16Field
+    property value : Int16
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Int16, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_Uint16Field
+    property value : UInt16
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : UInt16, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_Sint32Field
+    property value : Int32
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Int32, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_Uint32Field
+    property value : UInt32
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : UInt32, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
   @[Extern]
-  record MI_UserCredentials,
-    authenticationType : UInt16*,
-    credentials : Credentials_e__union_ do
+  struct MI_Sint64Field
+    property value : Int64
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Int64, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_Uint64Field
+    property value : UInt64
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : UInt64, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_Real32Field
+    property value : Float32
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Float32, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_Real64Field
+    property value : Float64
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Float64, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_Char16Field
+    property value : UInt16
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : UInt16, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_DatetimeField
+    property value : Win32cr::System::Wmi::MI_Datetime
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_Datetime, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_StringField
+    property value : UInt16*
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : UInt16*, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ReferenceField
+    property value : Win32cr::System::Wmi::MI_Instance*
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_Instance*, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_InstanceField
+    property value : Win32cr::System::Wmi::MI_Instance*
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_Instance*, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_BooleanAField
+    property value : Win32cr::System::Wmi::MI_BooleanA
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_BooleanA, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_Uint8AField
+    property value : Win32cr::System::Wmi::MI_Uint8A
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_Uint8A, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_Sint8AField
+    property value : Win32cr::System::Wmi::MI_Sint8A
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_Sint8A, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_Uint16AField
+    property value : Win32cr::System::Wmi::MI_Uint16A
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_Uint16A, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_Sint16AField
+    property value : Win32cr::System::Wmi::MI_Sint16A
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_Sint16A, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_Uint32AField
+    property value : Win32cr::System::Wmi::MI_Uint32A
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_Uint32A, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_Sint32AField
+    property value : Win32cr::System::Wmi::MI_Sint32A
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_Sint32A, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_Uint64AField
+    property value : Win32cr::System::Wmi::MI_Uint64A
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_Uint64A, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_Sint64AField
+    property value : Win32cr::System::Wmi::MI_Sint64A
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_Sint64A, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_Real32AField
+    property value : Win32cr::System::Wmi::MI_Real32A
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_Real32A, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_Real64AField
+    property value : Win32cr::System::Wmi::MI_Real64A
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_Real64A, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_Char16AField
+    property value : Win32cr::System::Wmi::MI_Char16A
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_Char16A, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_DatetimeAField
+    property value : Win32cr::System::Wmi::MI_DatetimeA
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_DatetimeA, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_StringAField
+    property value : Win32cr::System::Wmi::MI_StringA
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_StringA, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ReferenceAField
+    property value : Win32cr::System::Wmi::MI_ReferenceA
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_ReferenceA, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_InstanceAField
+    property value : Win32cr::System::Wmi::MI_InstanceA
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_InstanceA, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ArrayField
+    property value : Win32cr::System::Wmi::MI_Array
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_Array, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstBooleanField
+    property value : UInt8
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : UInt8, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstSint8Field
+    property value : Int8
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Int8, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstUint8Field
+    property value : UInt8
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : UInt8, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstSint16Field
+    property value : Int16
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Int16, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstUint16Field
+    property value : UInt16
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : UInt16, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstSint32Field
+    property value : Int32
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Int32, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstUint32Field
+    property value : UInt32
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : UInt32, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstSint64Field
+    property value : Int64
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Int64, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstUint64Field
+    property value : UInt64
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : UInt64, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstReal32Field
+    property value : Float32
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Float32, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstReal64Field
+    property value : Float64
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Float64, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstChar16Field
+    property value : UInt16
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : UInt16, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstDatetimeField
+    property value : Win32cr::System::Wmi::MI_Datetime
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_Datetime, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstStringField
+    property value : UInt16*
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : UInt16*, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstReferenceField
+    property value : Win32cr::System::Wmi::MI_Instance*
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_Instance*, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstInstanceField
+    property value : Win32cr::System::Wmi::MI_Instance*
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_Instance*, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstBooleanAField
+    property value : Win32cr::System::Wmi::MI_ConstBooleanA
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_ConstBooleanA, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstUint8AField
+    property value : Win32cr::System::Wmi::MI_ConstUint8A
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_ConstUint8A, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstSint8AField
+    property value : Win32cr::System::Wmi::MI_ConstSint8A
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_ConstSint8A, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstUint16AField
+    property value : Win32cr::System::Wmi::MI_ConstUint16A
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_ConstUint16A, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstSint16AField
+    property value : Win32cr::System::Wmi::MI_ConstSint16A
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_ConstSint16A, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstUint32AField
+    property value : Win32cr::System::Wmi::MI_ConstUint32A
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_ConstUint32A, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstSint32AField
+    property value : Win32cr::System::Wmi::MI_ConstSint32A
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_ConstSint32A, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstUint64AField
+    property value : Win32cr::System::Wmi::MI_ConstUint64A
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_ConstUint64A, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstSint64AField
+    property value : Win32cr::System::Wmi::MI_ConstSint64A
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_ConstSint64A, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstReal32AField
+    property value : Win32cr::System::Wmi::MI_ConstReal32A
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_ConstReal32A, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstReal64AField
+    property value : Win32cr::System::Wmi::MI_ConstReal64A
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_ConstReal64A, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstChar16AField
+    property value : Win32cr::System::Wmi::MI_ConstChar16A
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_ConstChar16A, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstDatetimeAField
+    property value : Win32cr::System::Wmi::MI_ConstDatetimeA
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_ConstDatetimeA, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstStringAField
+    property value : Win32cr::System::Wmi::MI_ConstStringA
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_ConstStringA, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstReferenceAField
+    property value : Win32cr::System::Wmi::MI_ConstReferenceA
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_ConstReferenceA, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ConstInstanceAField
+    property value : Win32cr::System::Wmi::MI_ConstInstanceA
+    property exists : UInt8
+    property flags : UInt8
+    def initialize(@value : Win32cr::System::Wmi::MI_ConstInstanceA, @exists : UInt8, @flags : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct MI_ServerFT
+    property get_version : LibC::IntPtrT
+    property get_system_name : LibC::IntPtrT
+    def initialize(@get_version : LibC::IntPtrT, @get_system_name : LibC::IntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct MI_Server
+    property serverFT : Win32cr::System::Wmi::MI_ServerFT*
+    property contextFT : Win32cr::System::Wmi::MI_ContextFT*
+    property instanceFT : Win32cr::System::Wmi::MI_InstanceFT*
+    property propertySetFT : Win32cr::System::Wmi::MI_PropertySetFT*
+    property filterFT : Win32cr::System::Wmi::MI_FilterFT*
+    def initialize(@serverFT : Win32cr::System::Wmi::MI_ServerFT*, @contextFT : Win32cr::System::Wmi::MI_ContextFT*, @instanceFT : Win32cr::System::Wmi::MI_InstanceFT*, @propertySetFT : Win32cr::System::Wmi::MI_PropertySetFT*, @filterFT : Win32cr::System::Wmi::MI_FilterFT*)
+    end
+  end
+
+  @[Extern]
+  struct MI_FilterFT
+    property evaluate : LibC::IntPtrT
+    property get_expression : LibC::IntPtrT
+    def initialize(@evaluate : LibC::IntPtrT, @get_expression : LibC::IntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct MI_Filter
+    property ft : Win32cr::System::Wmi::MI_FilterFT*
+    property reserved : LibC::IntPtrT[3]
+    def initialize(@ft : Win32cr::System::Wmi::MI_FilterFT*, @reserved : LibC::IntPtrT[3])
+    end
+  end
+
+  @[Extern]
+  struct MI_PropertySetFT
+    property get_element_count : LibC::IntPtrT
+    property contains_element : LibC::IntPtrT
+    property add_element : LibC::IntPtrT
+    property get_element_at : LibC::IntPtrT
+    property clear : LibC::IntPtrT
+    property destruct : LibC::IntPtrT
+    property delete : LibC::IntPtrT
+    property clone : LibC::IntPtrT
+    def initialize(@get_element_count : LibC::IntPtrT, @contains_element : LibC::IntPtrT, @add_element : LibC::IntPtrT, @get_element_at : LibC::IntPtrT, @clear : LibC::IntPtrT, @destruct : LibC::IntPtrT, @delete : LibC::IntPtrT, @clone : LibC::IntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct MI_PropertySet
+    property ft : Win32cr::System::Wmi::MI_PropertySetFT*
+    property reserved : LibC::IntPtrT[3]
+    def initialize(@ft : Win32cr::System::Wmi::MI_PropertySetFT*, @reserved : LibC::IntPtrT[3])
+    end
+  end
+
+  @[Extern]
+  struct MI_ObjectDecl
+    property flags : UInt32
+    property code : UInt32
+    property name : UInt16*
+    property qualifiers : Win32cr::System::Wmi::MI_Qualifier**
+    property numQualifiers : UInt32
+    property properties : Win32cr::System::Wmi::MI_PropertyDecl**
+    property numProperties : UInt32
+    property size : UInt32
+    def initialize(@flags : UInt32, @code : UInt32, @name : UInt16*, @qualifiers : Win32cr::System::Wmi::MI_Qualifier**, @numQualifiers : UInt32, @properties : Win32cr::System::Wmi::MI_PropertyDecl**, @numProperties : UInt32, @size : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MI_ClassDecl
+    property flags : UInt32
+    property code : UInt32
+    property name : UInt16*
+    property qualifiers : Win32cr::System::Wmi::MI_Qualifier**
+    property numQualifiers : UInt32
+    property properties : Win32cr::System::Wmi::MI_PropertyDecl**
+    property numProperties : UInt32
+    property size : UInt32
+    property superClass : UInt16*
+    property superClassDecl : Win32cr::System::Wmi::MI_ClassDecl*
+    property methods : Win32cr::System::Wmi::MI_MethodDecl**
+    property numMethods : UInt32
+    property schema : Win32cr::System::Wmi::MI_SchemaDecl*
+    property providerFT : Win32cr::System::Wmi::MI_ProviderFT*
+    property owningClass : Win32cr::System::Wmi::MI_Class*
+    def initialize(@flags : UInt32, @code : UInt32, @name : UInt16*, @qualifiers : Win32cr::System::Wmi::MI_Qualifier**, @numQualifiers : UInt32, @properties : Win32cr::System::Wmi::MI_PropertyDecl**, @numProperties : UInt32, @size : UInt32, @superClass : UInt16*, @superClassDecl : Win32cr::System::Wmi::MI_ClassDecl*, @methods : Win32cr::System::Wmi::MI_MethodDecl**, @numMethods : UInt32, @schema : Win32cr::System::Wmi::MI_SchemaDecl*, @providerFT : Win32cr::System::Wmi::MI_ProviderFT*, @owningClass : Win32cr::System::Wmi::MI_Class*)
+    end
+  end
+
+  @[Extern]
+  struct MI_FeatureDecl
+    property flags : UInt32
+    property code : UInt32
+    property name : UInt16*
+    property qualifiers : Win32cr::System::Wmi::MI_Qualifier**
+    property numQualifiers : UInt32
+    def initialize(@flags : UInt32, @code : UInt32, @name : UInt16*, @qualifiers : Win32cr::System::Wmi::MI_Qualifier**, @numQualifiers : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MI_ParameterDecl
+    property flags : UInt32
+    property code : UInt32
+    property name : UInt16*
+    property qualifiers : Win32cr::System::Wmi::MI_Qualifier**
+    property numQualifiers : UInt32
+    property type__ : UInt32
+    property className : UInt16*
+    property subscript : UInt32
+    property offset : UInt32
+    def initialize(@flags : UInt32, @code : UInt32, @name : UInt16*, @qualifiers : Win32cr::System::Wmi::MI_Qualifier**, @numQualifiers : UInt32, @type__ : UInt32, @className : UInt16*, @subscript : UInt32, @offset : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MI_PropertyDecl
+    property flags : UInt32
+    property code : UInt32
+    property name : UInt16*
+    property qualifiers : Win32cr::System::Wmi::MI_Qualifier**
+    property numQualifiers : UInt32
+    property type__ : UInt32
+    property className : UInt16*
+    property subscript : UInt32
+    property offset : UInt32
+    property origin : UInt16*
+    property propagator : UInt16*
+    property value : Void*
+    def initialize(@flags : UInt32, @code : UInt32, @name : UInt16*, @qualifiers : Win32cr::System::Wmi::MI_Qualifier**, @numQualifiers : UInt32, @type__ : UInt32, @className : UInt16*, @subscript : UInt32, @offset : UInt32, @origin : UInt16*, @propagator : UInt16*, @value : Void*)
+    end
+  end
+
+  @[Extern]
+  struct MI_MethodDecl
+    property flags : UInt32
+    property code : UInt32
+    property name : UInt16*
+    property qualifiers : Win32cr::System::Wmi::MI_Qualifier**
+    property numQualifiers : UInt32
+    property parameters : Win32cr::System::Wmi::MI_ParameterDecl**
+    property numParameters : UInt32
+    property size : UInt32
+    property returnType : UInt32
+    property origin : UInt16*
+    property propagator : UInt16*
+    property schema : Win32cr::System::Wmi::MI_SchemaDecl*
+    property function : Win32cr::System::Wmi::MI_MethodDecl_Invoke
+    def initialize(@flags : UInt32, @code : UInt32, @name : UInt16*, @qualifiers : Win32cr::System::Wmi::MI_Qualifier**, @numQualifiers : UInt32, @parameters : Win32cr::System::Wmi::MI_ParameterDecl**, @numParameters : UInt32, @size : UInt32, @returnType : UInt32, @origin : UInt16*, @propagator : UInt16*, @schema : Win32cr::System::Wmi::MI_SchemaDecl*, @function : Win32cr::System::Wmi::MI_MethodDecl_Invoke)
+    end
+  end
+
+  @[Extern]
+  struct MI_QualifierDecl
+    property name : UInt16*
+    property type__ : UInt32
+    property scope : UInt32
+    property flavor : UInt32
+    property subscript : UInt32
+    property value : Void*
+    def initialize(@name : UInt16*, @type__ : UInt32, @scope : UInt32, @flavor : UInt32, @subscript : UInt32, @value : Void*)
+    end
+  end
+
+  @[Extern]
+  struct MI_Qualifier
+    property name : UInt16*
+    property type__ : UInt32
+    property flavor : UInt32
+    property value : Void*
+    def initialize(@name : UInt16*, @type__ : UInt32, @flavor : UInt32, @value : Void*)
+    end
+  end
+
+  @[Extern]
+  struct MI_SchemaDecl
+    property qualifierDecls : Win32cr::System::Wmi::MI_QualifierDecl**
+    property numQualifierDecls : UInt32
+    property classDecls : Win32cr::System::Wmi::MI_ClassDecl**
+    property numClassDecls : UInt32
+    def initialize(@qualifierDecls : Win32cr::System::Wmi::MI_QualifierDecl**, @numQualifierDecls : UInt32, @classDecls : Win32cr::System::Wmi::MI_ClassDecl**, @numClassDecls : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MI_Module_Self
+    def initialize()
+    end
+  end
+
+  @[Extern]
+  struct MI_ProviderFT
+    property load : Win32cr::System::Wmi::MI_ProviderFT_Load
+    property unload : Win32cr::System::Wmi::MI_ProviderFT_Unload
+    property get_instance : Win32cr::System::Wmi::MI_ProviderFT_GetInstance
+    property enumerate_instances : Win32cr::System::Wmi::MI_ProviderFT_EnumerateInstances
+    property create_instance : Win32cr::System::Wmi::MI_ProviderFT_CreateInstance
+    property modify_instance : Win32cr::System::Wmi::MI_ProviderFT_ModifyInstance
+    property delete_instance : Win32cr::System::Wmi::MI_ProviderFT_DeleteInstance
+    property associator_instances : Win32cr::System::Wmi::MI_ProviderFT_AssociatorInstances
+    property reference_instances : Win32cr::System::Wmi::MI_ProviderFT_ReferenceInstances
+    property enable_indications : Win32cr::System::Wmi::MI_ProviderFT_EnableIndications
+    property disable_indications : Win32cr::System::Wmi::MI_ProviderFT_DisableIndications
+    property subscribe : Win32cr::System::Wmi::MI_ProviderFT_Subscribe
+    property unsubscribe : Win32cr::System::Wmi::MI_ProviderFT_Unsubscribe
+    property invoke : Win32cr::System::Wmi::MI_ProviderFT_Invoke
+    def initialize(@load : Win32cr::System::Wmi::MI_ProviderFT_Load, @unload : Win32cr::System::Wmi::MI_ProviderFT_Unload, @get_instance : Win32cr::System::Wmi::MI_ProviderFT_GetInstance, @enumerate_instances : Win32cr::System::Wmi::MI_ProviderFT_EnumerateInstances, @create_instance : Win32cr::System::Wmi::MI_ProviderFT_CreateInstance, @modify_instance : Win32cr::System::Wmi::MI_ProviderFT_ModifyInstance, @delete_instance : Win32cr::System::Wmi::MI_ProviderFT_DeleteInstance, @associator_instances : Win32cr::System::Wmi::MI_ProviderFT_AssociatorInstances, @reference_instances : Win32cr::System::Wmi::MI_ProviderFT_ReferenceInstances, @enable_indications : Win32cr::System::Wmi::MI_ProviderFT_EnableIndications, @disable_indications : Win32cr::System::Wmi::MI_ProviderFT_DisableIndications, @subscribe : Win32cr::System::Wmi::MI_ProviderFT_Subscribe, @unsubscribe : Win32cr::System::Wmi::MI_ProviderFT_Unsubscribe, @invoke : Win32cr::System::Wmi::MI_ProviderFT_Invoke)
+    end
+  end
+
+  @[Extern]
+  struct MI_Module
+    property version : UInt32
+    property generatorVersion : UInt32
+    property flags : UInt32
+    property charSize : UInt32
+    property schemaDecl : Win32cr::System::Wmi::MI_SchemaDecl*
+    property load : Win32cr::System::Wmi::MI_Module_Load
+    property unload : Win32cr::System::Wmi::MI_Module_Unload
+    property dynamicProviderFT : Win32cr::System::Wmi::MI_ProviderFT*
+    def initialize(@version : UInt32, @generatorVersion : UInt32, @flags : UInt32, @charSize : UInt32, @schemaDecl : Win32cr::System::Wmi::MI_SchemaDecl*, @load : Win32cr::System::Wmi::MI_Module_Load, @unload : Win32cr::System::Wmi::MI_Module_Unload, @dynamicProviderFT : Win32cr::System::Wmi::MI_ProviderFT*)
+    end
+  end
+
+  @[Extern]
+  struct MI_InstanceFT
+    property clone : LibC::IntPtrT
+    property destruct : LibC::IntPtrT
+    property delete : LibC::IntPtrT
+    property is_a : LibC::IntPtrT
+    property get_class_name_a : LibC::IntPtrT
+    property set_name_space : LibC::IntPtrT
+    property get_name_space : LibC::IntPtrT
+    property get_element_count : LibC::IntPtrT
+    property add_element : LibC::IntPtrT
+    property set_element : LibC::IntPtrT
+    property set_element_at : LibC::IntPtrT
+    property get_element : LibC::IntPtrT
+    property get_element_at : LibC::IntPtrT
+    property clear_element : LibC::IntPtrT
+    property clear_element_at : LibC::IntPtrT
+    property get_server_name : LibC::IntPtrT
+    property set_server_name : LibC::IntPtrT
+    property get_class : LibC::IntPtrT
+    def initialize(@clone : LibC::IntPtrT, @destruct : LibC::IntPtrT, @delete : LibC::IntPtrT, @is_a : LibC::IntPtrT, @get_class_name_a : LibC::IntPtrT, @set_name_space : LibC::IntPtrT, @get_name_space : LibC::IntPtrT, @get_element_count : LibC::IntPtrT, @add_element : LibC::IntPtrT, @set_element : LibC::IntPtrT, @set_element_at : LibC::IntPtrT, @get_element : LibC::IntPtrT, @get_element_at : LibC::IntPtrT, @clear_element : LibC::IntPtrT, @clear_element_at : LibC::IntPtrT, @get_server_name : LibC::IntPtrT, @set_server_name : LibC::IntPtrT, @get_class : LibC::IntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct MI_InstanceExFT
+    property parent : Win32cr::System::Wmi::MI_InstanceFT
+    property normalize : LibC::IntPtrT
+    def initialize(@parent : Win32cr::System::Wmi::MI_InstanceFT, @normalize : LibC::IntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct MI_Instance
+    property ft : Win32cr::System::Wmi::MI_InstanceFT*
+    property classDecl : Win32cr::System::Wmi::MI_ClassDecl*
+    property serverName : UInt16*
+    property nameSpace : UInt16*
+    property reserved : LibC::IntPtrT[4]
+    def initialize(@ft : Win32cr::System::Wmi::MI_InstanceFT*, @classDecl : Win32cr::System::Wmi::MI_ClassDecl*, @serverName : UInt16*, @nameSpace : UInt16*, @reserved : LibC::IntPtrT[4])
+    end
+  end
+
+  @[Extern]
+  struct MI_ContextFT
+    property post_result : LibC::IntPtrT
+    property post_instance : LibC::IntPtrT
+    property post_indication : LibC::IntPtrT
+    property construct_instance : LibC::IntPtrT
+    property construct_parameters : LibC::IntPtrT
+    property new_instance : LibC::IntPtrT
+    property new_dynamic_instance : LibC::IntPtrT
+    property new_parameters : LibC::IntPtrT
+    property canceled : LibC::IntPtrT
+    property get_locale : LibC::IntPtrT
+    property register_cancel : LibC::IntPtrT
+    property request_unload : LibC::IntPtrT
+    property refuse_unload : LibC::IntPtrT
+    property get_local_session : LibC::IntPtrT
+    property set_string_option : LibC::IntPtrT
+    property get_string_option : LibC::IntPtrT
+    property get_number_option : LibC::IntPtrT
+    property get_custom_option : LibC::IntPtrT
+    property get_custom_option_count : LibC::IntPtrT
+    property get_custom_option_at : LibC::IntPtrT
+    property write_message : LibC::IntPtrT
+    property write_progress : LibC::IntPtrT
+    property write_stream_parameter : LibC::IntPtrT
+    property write_cim_error : LibC::IntPtrT
+    property prompt_user : LibC::IntPtrT
+    property should_process : LibC::IntPtrT
+    property should_continue : LibC::IntPtrT
+    property post_error : LibC::IntPtrT
+    property post_cim_error : LibC::IntPtrT
+    property write_error : LibC::IntPtrT
+    def initialize(@post_result : LibC::IntPtrT, @post_instance : LibC::IntPtrT, @post_indication : LibC::IntPtrT, @construct_instance : LibC::IntPtrT, @construct_parameters : LibC::IntPtrT, @new_instance : LibC::IntPtrT, @new_dynamic_instance : LibC::IntPtrT, @new_parameters : LibC::IntPtrT, @canceled : LibC::IntPtrT, @get_locale : LibC::IntPtrT, @register_cancel : LibC::IntPtrT, @request_unload : LibC::IntPtrT, @refuse_unload : LibC::IntPtrT, @get_local_session : LibC::IntPtrT, @set_string_option : LibC::IntPtrT, @get_string_option : LibC::IntPtrT, @get_number_option : LibC::IntPtrT, @get_custom_option : LibC::IntPtrT, @get_custom_option_count : LibC::IntPtrT, @get_custom_option_at : LibC::IntPtrT, @write_message : LibC::IntPtrT, @write_progress : LibC::IntPtrT, @write_stream_parameter : LibC::IntPtrT, @write_cim_error : LibC::IntPtrT, @prompt_user : LibC::IntPtrT, @should_process : LibC::IntPtrT, @should_continue : LibC::IntPtrT, @post_error : LibC::IntPtrT, @post_cim_error : LibC::IntPtrT, @write_error : LibC::IntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct MI_Context
+    property ft : Win32cr::System::Wmi::MI_ContextFT*
+    property reserved : LibC::IntPtrT[3]
+    def initialize(@ft : Win32cr::System::Wmi::MI_ContextFT*, @reserved : LibC::IntPtrT[3])
+    end
+  end
+
+  @[Extern]
+  struct MI_QualifierSetFT
+    property get_qualifier_count : LibC::IntPtrT
+    property get_qualifier_at : LibC::IntPtrT
+    property get_qualifier : LibC::IntPtrT
+    def initialize(@get_qualifier_count : LibC::IntPtrT, @get_qualifier_at : LibC::IntPtrT, @get_qualifier : LibC::IntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct MI_QualifierSet
+    property reserved1 : UInt64
+    property reserved2 : LibC::IntPtrT
+    property ft : Win32cr::System::Wmi::MI_QualifierSetFT*
+    def initialize(@reserved1 : UInt64, @reserved2 : LibC::IntPtrT, @ft : Win32cr::System::Wmi::MI_QualifierSetFT*)
+    end
+  end
+
+  @[Extern]
+  struct MI_ParameterSetFT
+    property get_method_return_type : LibC::IntPtrT
+    property get_parameter_count : LibC::IntPtrT
+    property get_parameter_at : LibC::IntPtrT
+    property get_parameter : LibC::IntPtrT
+    def initialize(@get_method_return_type : LibC::IntPtrT, @get_parameter_count : LibC::IntPtrT, @get_parameter_at : LibC::IntPtrT, @get_parameter : LibC::IntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct MI_ParameterSet
+    property reserved1 : UInt64
+    property reserved2 : LibC::IntPtrT
+    property ft : Win32cr::System::Wmi::MI_ParameterSetFT*
+    def initialize(@reserved1 : UInt64, @reserved2 : LibC::IntPtrT, @ft : Win32cr::System::Wmi::MI_ParameterSetFT*)
+    end
+  end
+
+  @[Extern]
+  struct MI_ClassFT
+    property get_class_name_a : LibC::IntPtrT
+    property get_name_space : LibC::IntPtrT
+    property get_server_name : LibC::IntPtrT
+    property get_element_count : LibC::IntPtrT
+    property get_element : LibC::IntPtrT
+    property get_element_at : LibC::IntPtrT
+    property get_class_qualifier_set : LibC::IntPtrT
+    property get_method_count : LibC::IntPtrT
+    property get_method_at : LibC::IntPtrT
+    property get_method : LibC::IntPtrT
+    property get_parent_class_name : LibC::IntPtrT
+    property get_parent_class : LibC::IntPtrT
+    property delete : LibC::IntPtrT
+    property clone : LibC::IntPtrT
+    def initialize(@get_class_name_a : LibC::IntPtrT, @get_name_space : LibC::IntPtrT, @get_server_name : LibC::IntPtrT, @get_element_count : LibC::IntPtrT, @get_element : LibC::IntPtrT, @get_element_at : LibC::IntPtrT, @get_class_qualifier_set : LibC::IntPtrT, @get_method_count : LibC::IntPtrT, @get_method_at : LibC::IntPtrT, @get_method : LibC::IntPtrT, @get_parent_class_name : LibC::IntPtrT, @get_parent_class : LibC::IntPtrT, @delete : LibC::IntPtrT, @clone : LibC::IntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct MI_Class
+    property ft : Win32cr::System::Wmi::MI_ClassFT*
+    property classDecl : Win32cr::System::Wmi::MI_ClassDecl*
+    property namespaceName : UInt16*
+    property serverName : UInt16*
+    property reserved : LibC::IntPtrT[4]
+    def initialize(@ft : Win32cr::System::Wmi::MI_ClassFT*, @classDecl : Win32cr::System::Wmi::MI_ClassDecl*, @namespaceName : UInt16*, @serverName : UInt16*, @reserved : LibC::IntPtrT[4])
+    end
+  end
+
+  @[Extern]
+  struct MI_OperationCallbacks
+    property callbackContext : Void*
+    property promptUser : Win32cr::System::Wmi::MI_OperationCallback_PromptUser
+    property writeError : Win32cr::System::Wmi::MI_OperationCallback_WriteError
+    property writeMessage : Win32cr::System::Wmi::MI_OperationCallback_WriteMessage
+    property writeProgress : Win32cr::System::Wmi::MI_OperationCallback_WriteProgress
+    property instanceResult : Win32cr::System::Wmi::MI_OperationCallback_Instance
+    property indicationResult : Win32cr::System::Wmi::MI_OperationCallback_Indication
+    property classResult : Win32cr::System::Wmi::MI_OperationCallback_Class
+    property streamedParameterResult : Win32cr::System::Wmi::MI_OperationCallback_StreamedParameter
+    def initialize(@callbackContext : Void*, @promptUser : Win32cr::System::Wmi::MI_OperationCallback_PromptUser, @writeError : Win32cr::System::Wmi::MI_OperationCallback_WriteError, @writeMessage : Win32cr::System::Wmi::MI_OperationCallback_WriteMessage, @writeProgress : Win32cr::System::Wmi::MI_OperationCallback_WriteProgress, @instanceResult : Win32cr::System::Wmi::MI_OperationCallback_Instance, @indicationResult : Win32cr::System::Wmi::MI_OperationCallback_Indication, @classResult : Win32cr::System::Wmi::MI_OperationCallback_Class, @streamedParameterResult : Win32cr::System::Wmi::MI_OperationCallback_StreamedParameter)
+    end
+  end
+
+  @[Extern]
+  struct MI_SessionCallbacks
+    property callbackContext : Void*
+    property writeMessage : LibC::IntPtrT
+    property writeError : LibC::IntPtrT
+    def initialize(@callbackContext : Void*, @writeMessage : LibC::IntPtrT, @writeError : LibC::IntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct MI_UsernamePasswordCreds
+    property domain : UInt16*
+    property username : UInt16*
+    property password : UInt16*
+    def initialize(@domain : UInt16*, @username : UInt16*, @password : UInt16*)
+    end
+  end
+
+  @[Extern]
+  struct MI_UserCredentials
+    property authenticationType : UInt16*
+    property credentials : Credentials_e__union_
 
     # Nested Type Credentials_e__union_
     @[Extern(union: true)]
-    record Credentials_e__union_,
-      usernamePassword : Win32cr::System::Wmi::MI_UsernamePasswordCreds,
-      certificateThumbprint : UInt16*
+    struct Credentials_e__union_
+    property usernamePassword : Win32cr::System::Wmi::MI_UsernamePasswordCreds
+    property certificateThumbprint : UInt16*
+    def initialize(@usernamePassword : Win32cr::System::Wmi::MI_UsernamePasswordCreds, @certificateThumbprint : UInt16*)
+    end
+    end
 
+    def initialize(@authenticationType : UInt16*, @credentials : Credentials_e__union_)
+    end
   end
 
   @[Extern]
-  record MI_SubscriptionDeliveryOptionsFT,
-    set_string : LibC::IntPtrT,
-    set_number : LibC::IntPtrT,
-    set_date_time : LibC::IntPtrT,
-    set_interval : LibC::IntPtrT,
-    add_credentials : LibC::IntPtrT,
-    delete : LibC::IntPtrT,
-    get_string : LibC::IntPtrT,
-    get_number : LibC::IntPtrT,
-    get_date_time : LibC::IntPtrT,
-    get_interval : LibC::IntPtrT,
-    get_option_count : LibC::IntPtrT,
-    get_option_at : LibC::IntPtrT,
-    get_option : LibC::IntPtrT,
-    get_credentials_count : LibC::IntPtrT,
-    get_credentials_at : LibC::IntPtrT,
-    get_credentials_password_at : LibC::IntPtrT,
-    clone : LibC::IntPtrT
+  struct MI_SubscriptionDeliveryOptionsFT
+    property set_string : LibC::IntPtrT
+    property set_number : LibC::IntPtrT
+    property set_date_time : LibC::IntPtrT
+    property set_interval : LibC::IntPtrT
+    property add_credentials : LibC::IntPtrT
+    property delete : LibC::IntPtrT
+    property get_string : LibC::IntPtrT
+    property get_number : LibC::IntPtrT
+    property get_date_time : LibC::IntPtrT
+    property get_interval : LibC::IntPtrT
+    property get_option_count : LibC::IntPtrT
+    property get_option_at : LibC::IntPtrT
+    property get_option : LibC::IntPtrT
+    property get_credentials_count : LibC::IntPtrT
+    property get_credentials_at : LibC::IntPtrT
+    property get_credentials_password_at : LibC::IntPtrT
+    property clone : LibC::IntPtrT
+    def initialize(@set_string : LibC::IntPtrT, @set_number : LibC::IntPtrT, @set_date_time : LibC::IntPtrT, @set_interval : LibC::IntPtrT, @add_credentials : LibC::IntPtrT, @delete : LibC::IntPtrT, @get_string : LibC::IntPtrT, @get_number : LibC::IntPtrT, @get_date_time : LibC::IntPtrT, @get_interval : LibC::IntPtrT, @get_option_count : LibC::IntPtrT, @get_option_at : LibC::IntPtrT, @get_option : LibC::IntPtrT, @get_credentials_count : LibC::IntPtrT, @get_credentials_at : LibC::IntPtrT, @get_credentials_password_at : LibC::IntPtrT, @clone : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record MI_SubscriptionDeliveryOptions,
-    reserved1 : UInt64,
-    reserved2 : LibC::IntPtrT,
-    ft : Win32cr::System::Wmi::MI_SubscriptionDeliveryOptionsFT*
+  struct MI_SubscriptionDeliveryOptions
+    property reserved1 : UInt64
+    property reserved2 : LibC::IntPtrT
+    property ft : Win32cr::System::Wmi::MI_SubscriptionDeliveryOptionsFT*
+    def initialize(@reserved1 : UInt64, @reserved2 : LibC::IntPtrT, @ft : Win32cr::System::Wmi::MI_SubscriptionDeliveryOptionsFT*)
+    end
+  end
 
   @[Extern]
-  record MI_Serializer,
-    reserved1 : UInt64,
-    reserved2 : LibC::IntPtrT
+  struct MI_Serializer
+    property reserved1 : UInt64
+    property reserved2 : LibC::IntPtrT
+    def initialize(@reserved1 : UInt64, @reserved2 : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record MI_Deserializer,
-    reserved1 : UInt64,
-    reserved2 : LibC::IntPtrT
+  struct MI_Deserializer
+    property reserved1 : UInt64
+    property reserved2 : LibC::IntPtrT
+    def initialize(@reserved1 : UInt64, @reserved2 : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record MI_SerializerFT,
-    close : LibC::IntPtrT,
-    serialize_class : LibC::IntPtrT,
-    serialize_instance : LibC::IntPtrT
+  struct MI_SerializerFT
+    property close : LibC::IntPtrT
+    property serialize_class : LibC::IntPtrT
+    property serialize_instance : LibC::IntPtrT
+    def initialize(@close : LibC::IntPtrT, @serialize_class : LibC::IntPtrT, @serialize_instance : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record MI_DeserializerFT,
-    close : LibC::IntPtrT,
-    deserialize_class : LibC::IntPtrT,
-    class_get_class_name : LibC::IntPtrT,
-    class_get_parent_class_name : LibC::IntPtrT,
-    deserialize_instance : LibC::IntPtrT,
-    instance_get_class_name : LibC::IntPtrT
+  struct MI_DeserializerFT
+    property close : LibC::IntPtrT
+    property deserialize_class : LibC::IntPtrT
+    property class_get_class_name : LibC::IntPtrT
+    property class_get_parent_class_name : LibC::IntPtrT
+    property deserialize_instance : LibC::IntPtrT
+    property instance_get_class_name : LibC::IntPtrT
+    def initialize(@close : LibC::IntPtrT, @deserialize_class : LibC::IntPtrT, @class_get_class_name : LibC::IntPtrT, @class_get_parent_class_name : LibC::IntPtrT, @deserialize_instance : LibC::IntPtrT, @instance_get_class_name : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record MI_ApplicationFT,
-    close : LibC::IntPtrT,
-    new_session : LibC::IntPtrT,
-    new_hosted_provider : LibC::IntPtrT,
-    new_instance : LibC::IntPtrT,
-    new_destination_options : LibC::IntPtrT,
-    new_operation_options : LibC::IntPtrT,
-    new_subscription_delivery_options : LibC::IntPtrT,
-    new_serializer : LibC::IntPtrT,
-    new_deserializer : LibC::IntPtrT,
-    new_instance_from_class : LibC::IntPtrT,
-    new_class : LibC::IntPtrT
+  struct MI_ApplicationFT
+    property close : LibC::IntPtrT
+    property new_session : LibC::IntPtrT
+    property new_hosted_provider : LibC::IntPtrT
+    property new_instance : LibC::IntPtrT
+    property new_destination_options : LibC::IntPtrT
+    property new_operation_options : LibC::IntPtrT
+    property new_subscription_delivery_options : LibC::IntPtrT
+    property new_serializer : LibC::IntPtrT
+    property new_deserializer : LibC::IntPtrT
+    property new_instance_from_class : LibC::IntPtrT
+    property new_class : LibC::IntPtrT
+    def initialize(@close : LibC::IntPtrT, @new_session : LibC::IntPtrT, @new_hosted_provider : LibC::IntPtrT, @new_instance : LibC::IntPtrT, @new_destination_options : LibC::IntPtrT, @new_operation_options : LibC::IntPtrT, @new_subscription_delivery_options : LibC::IntPtrT, @new_serializer : LibC::IntPtrT, @new_deserializer : LibC::IntPtrT, @new_instance_from_class : LibC::IntPtrT, @new_class : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record MI_HostedProviderFT,
-    close : LibC::IntPtrT,
-    get_application : LibC::IntPtrT
+  struct MI_HostedProviderFT
+    property close : LibC::IntPtrT
+    property get_application : LibC::IntPtrT
+    def initialize(@close : LibC::IntPtrT, @get_application : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record MI_SessionFT,
-    close : LibC::IntPtrT,
-    get_application : LibC::IntPtrT,
-    get_instance : LibC::IntPtrT,
-    modify_instance : LibC::IntPtrT,
-    create_instance : LibC::IntPtrT,
-    delete_instance : LibC::IntPtrT,
-    invoke : LibC::IntPtrT,
-    enumerate_instances : LibC::IntPtrT,
-    query_instances : LibC::IntPtrT,
-    associator_instances : LibC::IntPtrT,
-    reference_instances : LibC::IntPtrT,
-    subscribe : LibC::IntPtrT,
-    get_class : LibC::IntPtrT,
-    enumerate_classes : LibC::IntPtrT,
-    test_connection : LibC::IntPtrT
+  struct MI_SessionFT
+    property close : LibC::IntPtrT
+    property get_application : LibC::IntPtrT
+    property get_instance : LibC::IntPtrT
+    property modify_instance : LibC::IntPtrT
+    property create_instance : LibC::IntPtrT
+    property delete_instance : LibC::IntPtrT
+    property invoke : LibC::IntPtrT
+    property enumerate_instances : LibC::IntPtrT
+    property query_instances : LibC::IntPtrT
+    property associator_instances : LibC::IntPtrT
+    property reference_instances : LibC::IntPtrT
+    property subscribe : LibC::IntPtrT
+    property get_class : LibC::IntPtrT
+    property enumerate_classes : LibC::IntPtrT
+    property test_connection : LibC::IntPtrT
+    def initialize(@close : LibC::IntPtrT, @get_application : LibC::IntPtrT, @get_instance : LibC::IntPtrT, @modify_instance : LibC::IntPtrT, @create_instance : LibC::IntPtrT, @delete_instance : LibC::IntPtrT, @invoke : LibC::IntPtrT, @enumerate_instances : LibC::IntPtrT, @query_instances : LibC::IntPtrT, @associator_instances : LibC::IntPtrT, @reference_instances : LibC::IntPtrT, @subscribe : LibC::IntPtrT, @get_class : LibC::IntPtrT, @enumerate_classes : LibC::IntPtrT, @test_connection : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record MI_OperationFT,
-    close : LibC::IntPtrT,
-    cancel : LibC::IntPtrT,
-    get_session : LibC::IntPtrT,
-    get_instance : LibC::IntPtrT,
-    get_indication : LibC::IntPtrT,
-    get_class : LibC::IntPtrT
+  struct MI_OperationFT
+    property close : LibC::IntPtrT
+    property cancel : LibC::IntPtrT
+    property get_session : LibC::IntPtrT
+    property get_instance : LibC::IntPtrT
+    property get_indication : LibC::IntPtrT
+    property get_class : LibC::IntPtrT
+    def initialize(@close : LibC::IntPtrT, @cancel : LibC::IntPtrT, @get_session : LibC::IntPtrT, @get_instance : LibC::IntPtrT, @get_indication : LibC::IntPtrT, @get_class : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record MI_DestinationOptionsFT,
-    delete : LibC::IntPtrT,
-    set_string : LibC::IntPtrT,
-    set_number : LibC::IntPtrT,
-    add_credentials : LibC::IntPtrT,
-    get_string : LibC::IntPtrT,
-    get_number : LibC::IntPtrT,
-    get_option_count : LibC::IntPtrT,
-    get_option_at : LibC::IntPtrT,
-    get_option : LibC::IntPtrT,
-    get_credentials_count : LibC::IntPtrT,
-    get_credentials_at : LibC::IntPtrT,
-    get_credentials_password_at : LibC::IntPtrT,
-    clone : LibC::IntPtrT,
-    set_interval : LibC::IntPtrT,
-    get_interval : LibC::IntPtrT
+  struct MI_DestinationOptionsFT
+    property delete : LibC::IntPtrT
+    property set_string : LibC::IntPtrT
+    property set_number : LibC::IntPtrT
+    property add_credentials : LibC::IntPtrT
+    property get_string : LibC::IntPtrT
+    property get_number : LibC::IntPtrT
+    property get_option_count : LibC::IntPtrT
+    property get_option_at : LibC::IntPtrT
+    property get_option : LibC::IntPtrT
+    property get_credentials_count : LibC::IntPtrT
+    property get_credentials_at : LibC::IntPtrT
+    property get_credentials_password_at : LibC::IntPtrT
+    property clone : LibC::IntPtrT
+    property set_interval : LibC::IntPtrT
+    property get_interval : LibC::IntPtrT
+    def initialize(@delete : LibC::IntPtrT, @set_string : LibC::IntPtrT, @set_number : LibC::IntPtrT, @add_credentials : LibC::IntPtrT, @get_string : LibC::IntPtrT, @get_number : LibC::IntPtrT, @get_option_count : LibC::IntPtrT, @get_option_at : LibC::IntPtrT, @get_option : LibC::IntPtrT, @get_credentials_count : LibC::IntPtrT, @get_credentials_at : LibC::IntPtrT, @get_credentials_password_at : LibC::IntPtrT, @clone : LibC::IntPtrT, @set_interval : LibC::IntPtrT, @get_interval : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record MI_OperationOptionsFT,
-    delete : LibC::IntPtrT,
-    set_string : LibC::IntPtrT,
-    set_number : LibC::IntPtrT,
-    set_custom_option : LibC::IntPtrT,
-    get_string : LibC::IntPtrT,
-    get_number : LibC::IntPtrT,
-    get_option_count : LibC::IntPtrT,
-    get_option_at : LibC::IntPtrT,
-    get_option : LibC::IntPtrT,
-    get_enabled_channels : LibC::IntPtrT,
-    clone : LibC::IntPtrT,
-    set_interval : LibC::IntPtrT,
-    get_interval : LibC::IntPtrT
+  struct MI_OperationOptionsFT
+    property delete : LibC::IntPtrT
+    property set_string : LibC::IntPtrT
+    property set_number : LibC::IntPtrT
+    property set_custom_option : LibC::IntPtrT
+    property get_string : LibC::IntPtrT
+    property get_number : LibC::IntPtrT
+    property get_option_count : LibC::IntPtrT
+    property get_option_at : LibC::IntPtrT
+    property get_option : LibC::IntPtrT
+    property get_enabled_channels : LibC::IntPtrT
+    property clone : LibC::IntPtrT
+    property set_interval : LibC::IntPtrT
+    property get_interval : LibC::IntPtrT
+    def initialize(@delete : LibC::IntPtrT, @set_string : LibC::IntPtrT, @set_number : LibC::IntPtrT, @set_custom_option : LibC::IntPtrT, @get_string : LibC::IntPtrT, @get_number : LibC::IntPtrT, @get_option_count : LibC::IntPtrT, @get_option_at : LibC::IntPtrT, @get_option : LibC::IntPtrT, @get_enabled_channels : LibC::IntPtrT, @clone : LibC::IntPtrT, @set_interval : LibC::IntPtrT, @get_interval : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record MI_Application,
-    reserved1 : UInt64,
-    reserved2 : LibC::IntPtrT,
-    ft : Win32cr::System::Wmi::MI_ApplicationFT*
+  struct MI_Application
+    property reserved1 : UInt64
+    property reserved2 : LibC::IntPtrT
+    property ft : Win32cr::System::Wmi::MI_ApplicationFT*
+    def initialize(@reserved1 : UInt64, @reserved2 : LibC::IntPtrT, @ft : Win32cr::System::Wmi::MI_ApplicationFT*)
+    end
+  end
 
   @[Extern]
-  record MI_Session,
-    reserved1 : UInt64,
-    reserved2 : LibC::IntPtrT,
-    ft : Win32cr::System::Wmi::MI_SessionFT*
+  struct MI_Session
+    property reserved1 : UInt64
+    property reserved2 : LibC::IntPtrT
+    property ft : Win32cr::System::Wmi::MI_SessionFT*
+    def initialize(@reserved1 : UInt64, @reserved2 : LibC::IntPtrT, @ft : Win32cr::System::Wmi::MI_SessionFT*)
+    end
+  end
 
   @[Extern]
-  record MI_Operation,
-    reserved1 : UInt64,
-    reserved2 : LibC::IntPtrT,
-    ft : Win32cr::System::Wmi::MI_OperationFT*
+  struct MI_Operation
+    property reserved1 : UInt64
+    property reserved2 : LibC::IntPtrT
+    property ft : Win32cr::System::Wmi::MI_OperationFT*
+    def initialize(@reserved1 : UInt64, @reserved2 : LibC::IntPtrT, @ft : Win32cr::System::Wmi::MI_OperationFT*)
+    end
+  end
 
   @[Extern]
-  record MI_HostedProvider,
-    reserved1 : UInt64,
-    reserved2 : LibC::IntPtrT,
-    ft : Win32cr::System::Wmi::MI_HostedProviderFT*
+  struct MI_HostedProvider
+    property reserved1 : UInt64
+    property reserved2 : LibC::IntPtrT
+    property ft : Win32cr::System::Wmi::MI_HostedProviderFT*
+    def initialize(@reserved1 : UInt64, @reserved2 : LibC::IntPtrT, @ft : Win32cr::System::Wmi::MI_HostedProviderFT*)
+    end
+  end
 
   @[Extern]
-  record MI_DestinationOptions,
-    reserved1 : UInt64,
-    reserved2 : LibC::IntPtrT,
-    ft : Win32cr::System::Wmi::MI_DestinationOptionsFT*
+  struct MI_DestinationOptions
+    property reserved1 : UInt64
+    property reserved2 : LibC::IntPtrT
+    property ft : Win32cr::System::Wmi::MI_DestinationOptionsFT*
+    def initialize(@reserved1 : UInt64, @reserved2 : LibC::IntPtrT, @ft : Win32cr::System::Wmi::MI_DestinationOptionsFT*)
+    end
+  end
 
   @[Extern]
-  record MI_OperationOptions,
-    reserved1 : UInt64,
-    reserved2 : LibC::IntPtrT,
-    ft : Win32cr::System::Wmi::MI_OperationOptionsFT*
+  struct MI_OperationOptions
+    property reserved1 : UInt64
+    property reserved2 : LibC::IntPtrT
+    property ft : Win32cr::System::Wmi::MI_OperationOptionsFT*
+    def initialize(@reserved1 : UInt64, @reserved2 : LibC::IntPtrT, @ft : Win32cr::System::Wmi::MI_OperationOptionsFT*)
+    end
+  end
 
   @[Extern]
-  record MI_UtilitiesFT,
-    map_error_to_mi_error_category : LibC::IntPtrT,
-    cim_error_from_error_code : LibC::IntPtrT
+  struct MI_UtilitiesFT
+    property map_error_to_mi_error_category : LibC::IntPtrT
+    property cim_error_from_error_code : LibC::IntPtrT
+    def initialize(@map_error_to_mi_error_category : LibC::IntPtrT, @cim_error_from_error_code : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record MI_ClientFT_V1,
-    applicationFT : Win32cr::System::Wmi::MI_ApplicationFT*,
-    sessionFT : Win32cr::System::Wmi::MI_SessionFT*,
-    operationFT : Win32cr::System::Wmi::MI_OperationFT*,
-    hostedProviderFT : Win32cr::System::Wmi::MI_HostedProviderFT*,
-    serializerFT : Win32cr::System::Wmi::MI_SerializerFT*,
-    deserializerFT : Win32cr::System::Wmi::MI_DeserializerFT*,
-    subscribeDeliveryOptionsFT : Win32cr::System::Wmi::MI_SubscriptionDeliveryOptionsFT*,
-    destinationOptionsFT : Win32cr::System::Wmi::MI_DestinationOptionsFT*,
-    operationOptionsFT : Win32cr::System::Wmi::MI_OperationOptionsFT*,
-    utilitiesFT : Win32cr::System::Wmi::MI_UtilitiesFT*
+  struct MI_ClientFT_V1
+    property applicationFT : Win32cr::System::Wmi::MI_ApplicationFT*
+    property sessionFT : Win32cr::System::Wmi::MI_SessionFT*
+    property operationFT : Win32cr::System::Wmi::MI_OperationFT*
+    property hostedProviderFT : Win32cr::System::Wmi::MI_HostedProviderFT*
+    property serializerFT : Win32cr::System::Wmi::MI_SerializerFT*
+    property deserializerFT : Win32cr::System::Wmi::MI_DeserializerFT*
+    property subscribeDeliveryOptionsFT : Win32cr::System::Wmi::MI_SubscriptionDeliveryOptionsFT*
+    property destinationOptionsFT : Win32cr::System::Wmi::MI_DestinationOptionsFT*
+    property operationOptionsFT : Win32cr::System::Wmi::MI_OperationOptionsFT*
+    property utilitiesFT : Win32cr::System::Wmi::MI_UtilitiesFT*
+    def initialize(@applicationFT : Win32cr::System::Wmi::MI_ApplicationFT*, @sessionFT : Win32cr::System::Wmi::MI_SessionFT*, @operationFT : Win32cr::System::Wmi::MI_OperationFT*, @hostedProviderFT : Win32cr::System::Wmi::MI_HostedProviderFT*, @serializerFT : Win32cr::System::Wmi::MI_SerializerFT*, @deserializerFT : Win32cr::System::Wmi::MI_DeserializerFT*, @subscribeDeliveryOptionsFT : Win32cr::System::Wmi::MI_SubscriptionDeliveryOptionsFT*, @destinationOptionsFT : Win32cr::System::Wmi::MI_DestinationOptionsFT*, @operationOptionsFT : Win32cr::System::Wmi::MI_OperationOptionsFT*, @utilitiesFT : Win32cr::System::Wmi::MI_UtilitiesFT*)
+    end
+  end
 
   @[Extern]
-  record SWbemQueryQualifiedName,
-    m_uVersion : UInt32,
-    m_uTokenType : UInt32,
-    m_uNameListSize : UInt32,
-    m_ppszNameList : Win32cr::Foundation::PWSTR*,
-    m_bArraysUsed : Win32cr::Foundation::BOOL,
-    m_pbArrayElUsed : Win32cr::Foundation::BOOL*,
-    m_puArrayIndex : UInt32*
+  struct SWbemQueryQualifiedName
+    property m_uVersion : UInt32
+    property m_uTokenType : UInt32
+    property m_uNameListSize : UInt32
+    property m_ppszNameList : Win32cr::Foundation::PWSTR*
+    property m_bArraysUsed : Win32cr::Foundation::BOOL
+    property m_pbArrayElUsed : Win32cr::Foundation::BOOL*
+    property m_puArrayIndex : UInt32*
+    def initialize(@m_uVersion : UInt32, @m_uTokenType : UInt32, @m_uNameListSize : UInt32, @m_ppszNameList : Win32cr::Foundation::PWSTR*, @m_bArraysUsed : Win32cr::Foundation::BOOL, @m_pbArrayElUsed : Win32cr::Foundation::BOOL*, @m_puArrayIndex : UInt32*)
+    end
+  end
 
   @[Extern(union: true)]
-  record SWbemRpnConst,
-    m_pszStrVal : Win32cr::Foundation::PWSTR,
-    m_bBoolVal : Win32cr::Foundation::BOOL,
-    m_lLongVal : Int32,
-    m_uLongVal : UInt32,
-    m_dblVal : Float64,
-    m_lVal64 : Int64,
-    m_uVal64 : Int64
+  struct SWbemRpnConst
+    property m_pszStrVal : Win32cr::Foundation::PWSTR
+    property m_bBoolVal : Win32cr::Foundation::BOOL
+    property m_lLongVal : Int32
+    property m_uLongVal : UInt32
+    property m_dblVal : Float64
+    property m_lVal64 : Int64
+    property m_uVal64 : Int64
+    def initialize(@m_pszStrVal : Win32cr::Foundation::PWSTR, @m_bBoolVal : Win32cr::Foundation::BOOL, @m_lLongVal : Int32, @m_uLongVal : UInt32, @m_dblVal : Float64, @m_lVal64 : Int64, @m_uVal64 : Int64)
+    end
+  end
 
   @[Extern]
-  record SWbemRpnQueryToken,
-    m_uVersion : UInt32,
-    m_uTokenType : UInt32,
-    m_uSubexpressionShape : UInt32,
-    m_uOperator : UInt32,
-    m_pRightIdent : Win32cr::System::Wmi::SWbemQueryQualifiedName*,
-    m_pLeftIdent : Win32cr::System::Wmi::SWbemQueryQualifiedName*,
-    m_uConstApparentType : UInt32,
-    m_Const : Win32cr::System::Wmi::SWbemRpnConst,
-    m_uConst2ApparentType : UInt32,
-    m_Const2 : Win32cr::System::Wmi::SWbemRpnConst,
-    m_pszRightFunc : Win32cr::Foundation::PWSTR,
-    m_pszLeftFunc : Win32cr::Foundation::PWSTR
+  struct SWbemRpnQueryToken
+    property m_uVersion : UInt32
+    property m_uTokenType : UInt32
+    property m_uSubexpressionShape : UInt32
+    property m_uOperator : UInt32
+    property m_pRightIdent : Win32cr::System::Wmi::SWbemQueryQualifiedName*
+    property m_pLeftIdent : Win32cr::System::Wmi::SWbemQueryQualifiedName*
+    property m_uConstApparentType : UInt32
+    property m_Const : Win32cr::System::Wmi::SWbemRpnConst
+    property m_uConst2ApparentType : UInt32
+    property m_Const2 : Win32cr::System::Wmi::SWbemRpnConst
+    property m_pszRightFunc : Win32cr::Foundation::PWSTR
+    property m_pszLeftFunc : Win32cr::Foundation::PWSTR
+    def initialize(@m_uVersion : UInt32, @m_uTokenType : UInt32, @m_uSubexpressionShape : UInt32, @m_uOperator : UInt32, @m_pRightIdent : Win32cr::System::Wmi::SWbemQueryQualifiedName*, @m_pLeftIdent : Win32cr::System::Wmi::SWbemQueryQualifiedName*, @m_uConstApparentType : UInt32, @m_Const : Win32cr::System::Wmi::SWbemRpnConst, @m_uConst2ApparentType : UInt32, @m_Const2 : Win32cr::System::Wmi::SWbemRpnConst, @m_pszRightFunc : Win32cr::Foundation::PWSTR, @m_pszLeftFunc : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record SWbemRpnTokenList,
-    m_uVersion : UInt32,
-    m_uTokenType : UInt32,
-    m_uNumTokens : UInt32
+  struct SWbemRpnTokenList
+    property m_uVersion : UInt32
+    property m_uTokenType : UInt32
+    property m_uNumTokens : UInt32
+    def initialize(@m_uVersion : UInt32, @m_uTokenType : UInt32, @m_uNumTokens : UInt32)
+    end
+  end
 
   @[Extern]
-  record SWbemRpnEncodedQuery,
-    m_uVersion : UInt32,
-    m_uTokenType : UInt32,
-    m_uParsedFeatureMask : UInt64,
-    m_uDetectedArraySize : UInt32,
-    m_puDetectedFeatures : UInt32*,
-    m_uSelectListSize : UInt32,
-    m_ppSelectList : Win32cr::System::Wmi::SWbemQueryQualifiedName**,
-    m_uFromTargetType : UInt32,
-    m_pszOptionalFromPath : Win32cr::Foundation::PWSTR,
-    m_uFromListSize : UInt32,
-    m_ppszFromList : Win32cr::Foundation::PWSTR*,
-    m_uWhereClauseSize : UInt32,
-    m_ppRpnWhereClause : Win32cr::System::Wmi::SWbemRpnQueryToken**,
-    m_dblWithinPolling : Float64,
-    m_dblWithinWindow : Float64,
-    m_uOrderByListSize : UInt32,
-    m_ppszOrderByList : Win32cr::Foundation::PWSTR*,
-    m_uOrderDirectionEl : UInt32*
+  struct SWbemRpnEncodedQuery
+    property m_uVersion : UInt32
+    property m_uTokenType : UInt32
+    property m_uParsedFeatureMask : UInt64
+    property m_uDetectedArraySize : UInt32
+    property m_puDetectedFeatures : UInt32*
+    property m_uSelectListSize : UInt32
+    property m_ppSelectList : Win32cr::System::Wmi::SWbemQueryQualifiedName**
+    property m_uFromTargetType : UInt32
+    property m_pszOptionalFromPath : Win32cr::Foundation::PWSTR
+    property m_uFromListSize : UInt32
+    property m_ppszFromList : Win32cr::Foundation::PWSTR*
+    property m_uWhereClauseSize : UInt32
+    property m_ppRpnWhereClause : Win32cr::System::Wmi::SWbemRpnQueryToken**
+    property m_dblWithinPolling : Float64
+    property m_dblWithinWindow : Float64
+    property m_uOrderByListSize : UInt32
+    property m_ppszOrderByList : Win32cr::Foundation::PWSTR*
+    property m_uOrderDirectionEl : UInt32*
+    def initialize(@m_uVersion : UInt32, @m_uTokenType : UInt32, @m_uParsedFeatureMask : UInt64, @m_uDetectedArraySize : UInt32, @m_puDetectedFeatures : UInt32*, @m_uSelectListSize : UInt32, @m_ppSelectList : Win32cr::System::Wmi::SWbemQueryQualifiedName**, @m_uFromTargetType : UInt32, @m_pszOptionalFromPath : Win32cr::Foundation::PWSTR, @m_uFromListSize : UInt32, @m_ppszFromList : Win32cr::Foundation::PWSTR*, @m_uWhereClauseSize : UInt32, @m_ppRpnWhereClause : Win32cr::System::Wmi::SWbemRpnQueryToken**, @m_dblWithinPolling : Float64, @m_dblWithinWindow : Float64, @m_uOrderByListSize : UInt32, @m_ppszOrderByList : Win32cr::Foundation::PWSTR*, @m_uOrderDirectionEl : UInt32*)
+    end
+  end
 
   @[Extern]
-  record SWbemAnalysisMatrix,
-    m_uVersion : UInt32,
-    m_uMatrixType : UInt32,
-    m_pszProperty : Win32cr::Foundation::PWSTR,
-    m_uPropertyType : UInt32,
-    m_uEntries : UInt32,
-    m_pValues : Void**,
-    m_pbTruthTable : Win32cr::Foundation::BOOL*
+  struct SWbemAnalysisMatrix
+    property m_uVersion : UInt32
+    property m_uMatrixType : UInt32
+    property m_pszProperty : Win32cr::Foundation::PWSTR
+    property m_uPropertyType : UInt32
+    property m_uEntries : UInt32
+    property m_pValues : Void**
+    property m_pbTruthTable : Win32cr::Foundation::BOOL*
+    def initialize(@m_uVersion : UInt32, @m_uMatrixType : UInt32, @m_pszProperty : Win32cr::Foundation::PWSTR, @m_uPropertyType : UInt32, @m_uEntries : UInt32, @m_pValues : Void**, @m_pbTruthTable : Win32cr::Foundation::BOOL*)
+    end
+  end
 
   @[Extern]
-  record SWbemAnalysisMatrixList,
-    m_uVersion : UInt32,
-    m_uMatrixType : UInt32,
-    m_uNumMatrices : UInt32,
-    m_pMatrices : Win32cr::System::Wmi::SWbemAnalysisMatrix*
+  struct SWbemAnalysisMatrixList
+    property m_uVersion : UInt32
+    property m_uMatrixType : UInt32
+    property m_uNumMatrices : UInt32
+    property m_pMatrices : Win32cr::System::Wmi::SWbemAnalysisMatrix*
+    def initialize(@m_uVersion : UInt32, @m_uMatrixType : UInt32, @m_uNumMatrices : UInt32, @m_pMatrices : Win32cr::System::Wmi::SWbemAnalysisMatrix*)
+    end
+  end
 
   @[Extern]
-  record SWbemAssocQueryInf,
-    m_uVersion : UInt32,
-    m_uAnalysisType : UInt32,
-    m_uFeatureMask : UInt32,
-    m_pPath : Void*,
-    m_pszPath : Win32cr::Foundation::PWSTR,
-    m_pszQueryText : Win32cr::Foundation::PWSTR,
-    m_pszResultClass : Win32cr::Foundation::PWSTR,
-    m_pszAssocClass : Win32cr::Foundation::PWSTR,
-    m_pszRole : Win32cr::Foundation::PWSTR,
-    m_pszResultRole : Win32cr::Foundation::PWSTR,
-    m_pszRequiredQualifier : Win32cr::Foundation::PWSTR,
-    m_pszRequiredAssocQualifier : Win32cr::Foundation::PWSTR
+  struct SWbemAssocQueryInf
+    property m_uVersion : UInt32
+    property m_uAnalysisType : UInt32
+    property m_uFeatureMask : UInt32
+    property m_pPath : Void*
+    property m_pszPath : Win32cr::Foundation::PWSTR
+    property m_pszQueryText : Win32cr::Foundation::PWSTR
+    property m_pszResultClass : Win32cr::Foundation::PWSTR
+    property m_pszAssocClass : Win32cr::Foundation::PWSTR
+    property m_pszRole : Win32cr::Foundation::PWSTR
+    property m_pszResultRole : Win32cr::Foundation::PWSTR
+    property m_pszRequiredQualifier : Win32cr::Foundation::PWSTR
+    property m_pszRequiredAssocQualifier : Win32cr::Foundation::PWSTR
+    def initialize(@m_uVersion : UInt32, @m_uAnalysisType : UInt32, @m_uFeatureMask : UInt32, @m_pPath : Void*, @m_pszPath : Win32cr::Foundation::PWSTR, @m_pszQueryText : Win32cr::Foundation::PWSTR, @m_pszResultClass : Win32cr::Foundation::PWSTR, @m_pszAssocClass : Win32cr::Foundation::PWSTR, @m_pszRole : Win32cr::Foundation::PWSTR, @m_pszResultRole : Win32cr::Foundation::PWSTR, @m_pszRequiredQualifier : Win32cr::Foundation::PWSTR, @m_pszRequiredAssocQualifier : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record WBEM_COMPILE_STATUS_INFO,
-    lPhaseError : Int32,
-    hRes : Win32cr::Foundation::HRESULT,
-    object_num : Int32,
-    first_line : Int32,
-    last_line : Int32,
-    dwOutFlags : UInt32
+  struct WBEM_COMPILE_STATUS_INFO
+    property lPhaseError : Int32
+    property hRes : Win32cr::Foundation::HRESULT
+    property object_num : Int32
+    property first_line : Int32
+    property last_line : Int32
+    property dwOutFlags : UInt32
+    def initialize(@lPhaseError : Int32, @hRes : Win32cr::Foundation::HRESULT, @object_num : Int32, @first_line : Int32, @last_line : Int32, @dwOutFlags : UInt32)
+    end
+  end
 
   @[Extern]
   record IWbemPathKeyListVtbl,
@@ -2435,7 +2932,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("9ae62877-7544-4bb0-aa26-a13824659ed6")]
   record IWbemPathKeyList, lpVtbl : IWbemPathKeyListVtbl* do
     GUID = LibC::GUID.new(0x9ae62877_u32, 0x7544_u16, 0x4bb0_u16, StaticArray[0xaa_u8, 0x26_u8, 0xa1_u8, 0x38_u8, 0x24_u8, 0x65_u8, 0x9e_u8, 0xd6_u8])
     def query_interface(this : IWbemPathKeyList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2514,7 +3010,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("3bc15af2-736c-477e-9e51-238af8667dcc")]
   record IWbemPath, lpVtbl : IWbemPathVtbl* do
     GUID = LibC::GUID.new(0x3bc15af2_u32, 0x736c_u16, 0x477e_u16, StaticArray[0x9e_u8, 0x51_u8, 0x23_u8, 0x8a_u8, 0xf8_u8, 0x66_u8, 0x7d_u8, 0xcc_u8])
     def query_interface(this : IWbemPath*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2622,7 +3117,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("81166f58-dd98-11d3-a120-00105a1f515a")]
   record IWbemQuery, lpVtbl : IWbemQueryVtbl* do
     GUID = LibC::GUID.new(0x81166f58_u32, 0xdd98_u16, 0x11d3_u16, StaticArray[0xa1_u8, 0x20_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x51_u8, 0x5a_u8])
     def query_interface(this : IWbemQuery*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2690,7 +3184,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("dc12a681-737f-11cf-884d-00aa004b2e24")]
   record IWbemClassObject, lpVtbl : IWbemClassObjectVtbl* do
     GUID = LibC::GUID.new(0xdc12a681_u32, 0x737f_u16, 0x11cf_u16, StaticArray[0x88_u8, 0x4d_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0x2e_u8, 0x24_u8])
     def query_interface(this : IWbemClassObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2819,7 +3312,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("49353c9a-516b-11d1-aea6-00c04fb68820")]
   record IWbemObjectAccess, lpVtbl : IWbemObjectAccessVtbl* do
     GUID = LibC::GUID.new(0x49353c9a_u32, 0x516b_u16, 0x11d1_u16, StaticArray[0xae_u8, 0xa6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
     def query_interface(this : IWbemObjectAccess*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2951,7 +3443,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("dc12a680-737f-11cf-884d-00aa004b2e24")]
   record IWbemQualifierSet, lpVtbl : IWbemQualifierSetVtbl* do
     GUID = LibC::GUID.new(0xdc12a680_u32, 0x737f_u16, 0x11cf_u16, StaticArray[0x88_u8, 0x4d_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0x2e_u8, 0x24_u8])
     def query_interface(this : IWbemQualifierSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3018,7 +3509,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("9556dc99-828c-11cf-a37e-00aa003240c7")]
   record IWbemServices, lpVtbl : IWbemServicesVtbl* do
     GUID = LibC::GUID.new(0x9556dc99_u32, 0x828c_u16, 0x11cf_u16, StaticArray[0xa3_u8, 0x7e_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x32_u8, 0x40_u8, 0xc7_u8])
     def query_interface(this : IWbemServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3111,7 +3601,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("dc12a687-737f-11cf-884d-00aa004b2e24")]
   record IWbemLocator, lpVtbl : IWbemLocatorVtbl* do
     GUID = LibC::GUID.new(0xdc12a687_u32, 0x737f_u16, 0x11cf_u16, StaticArray[0x88_u8, 0x4d_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0x2e_u8, 0x24_u8])
     def query_interface(this : IWbemLocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3139,7 +3628,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("7c857801-7381-11cf-884d-00aa004b2e24")]
   record IWbemObjectSink, lpVtbl : IWbemObjectSinkVtbl* do
     GUID = LibC::GUID.new(0x7c857801_u32, 0x7381_u16, 0x11cf_u16, StaticArray[0x88_u8, 0x4d_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0x2e_u8, 0x24_u8])
     def query_interface(this : IWbemObjectSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3173,7 +3661,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("027947e1-d731-11ce-a357-000000000001")]
   record IEnumWbemClassObject, lpVtbl : IEnumWbemClassObjectVtbl* do
     GUID = LibC::GUID.new(0x27947e1_u32, 0xd731_u16, 0x11ce_u16, StaticArray[0xa3_u8, 0x57_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x1_u8])
     def query_interface(this : IEnumWbemClassObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3215,7 +3702,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("44aca675-e8fc-11d0-a07c-00c04fb68820")]
   record IWbemCallResult, lpVtbl : IWbemCallResultVtbl* do
     GUID = LibC::GUID.new(0x44aca675_u32, 0xe8fc_u16, 0x11d0_u16, StaticArray[0xa0_u8, 0x7c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
     def query_interface(this : IWbemCallResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3259,7 +3745,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("44aca674-e8fc-11d0-a07c-00c04fb68820")]
   record IWbemContext, lpVtbl : IWbemContextVtbl* do
     GUID = LibC::GUID.new(0x44aca674_u32, 0xe8fc_u16, 0x11d0_u16, StaticArray[0xa0_u8, 0x7c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
     def query_interface(this : IWbemContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3310,7 +3795,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("1cfaba8c-1523-11d1-ad79-00c04fd8fdff")]
   record IUnsecuredApartment, lpVtbl : IUnsecuredApartmentVtbl* do
     GUID = LibC::GUID.new(0x1cfaba8c_u32, 0x1523_u16, 0x11d1_u16, StaticArray[0xad_u8, 0x79_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
     def query_interface(this : IUnsecuredApartment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3338,7 +3822,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("31739d04-3471-4cf4-9a7c-57a44ae71956")]
   record IWbemUnsecuredApartment, lpVtbl : IWbemUnsecuredApartmentVtbl* do
     GUID = LibC::GUID.new(0x31739d04_u32, 0x3471_u16, 0x4cf4_u16, StaticArray[0x9a_u8, 0x7c_u8, 0x57_u8, 0xa4_u8, 0x4a_u8, 0xe7_u8, 0x19_u8, 0x56_u8])
     def query_interface(this : IWbemUnsecuredApartment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3369,7 +3852,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("eb87e1bc-3233-11d2-aec9-00c04fb68820")]
   record IWbemStatusCodeText, lpVtbl : IWbemStatusCodeTextVtbl* do
     GUID = LibC::GUID.new(0xeb87e1bc_u32, 0x3233_u16, 0x11d2_u16, StaticArray[0xae_u8, 0xc9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
     def query_interface(this : IWbemStatusCodeText*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3400,7 +3882,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("c49e32c7-bc8b-11d2-85d4-00105a1f8304")]
   record IWbemBackupRestore, lpVtbl : IWbemBackupRestoreVtbl* do
     GUID = LibC::GUID.new(0xc49e32c7_u32, 0xbc8b_u16, 0x11d2_u16, StaticArray[0x85_u8, 0xd4_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x83_u8, 0x4_u8])
     def query_interface(this : IWbemBackupRestore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3433,7 +3914,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("a359dec5-e813-4834-8a2a-ba7f1d777d76")]
   record IWbemBackupRestoreEx, lpVtbl : IWbemBackupRestoreExVtbl* do
     GUID = LibC::GUID.new(0xa359dec5_u32, 0xe813_u16, 0x4834_u16, StaticArray[0x8a_u8, 0x2a_u8, 0xba_u8, 0x7f_u8, 0x1d_u8, 0x77_u8, 0x7d_u8, 0x76_u8])
     def query_interface(this : IWbemBackupRestoreEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3469,7 +3949,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("49353c99-516b-11d1-aea6-00c04fb68820")]
   record IWbemRefresher, lpVtbl : IWbemRefresherVtbl* do
     GUID = LibC::GUID.new(0x49353c99_u32, 0x516b_u16, 0x11d1_u16, StaticArray[0xae_u8, 0xa6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
     def query_interface(this : IWbemRefresher*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3499,7 +3978,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("2705c288-79ae-11d2-b348-00105a1f8177")]
   record IWbemHiPerfEnum, lpVtbl : IWbemHiPerfEnumVtbl* do
     GUID = LibC::GUID.new(0x2705c288_u32, 0x79ae_u16, 0x11d2_u16, StaticArray[0xb3_u8, 0x48_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x81_u8, 0x77_u8])
     def query_interface(this : IWbemHiPerfEnum*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3539,7 +4017,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("49353c92-516b-11d1-aea6-00c04fb68820")]
   record IWbemConfigureRefresher, lpVtbl : IWbemConfigureRefresherVtbl* do
     GUID = LibC::GUID.new(0x49353c92_u32, 0x516b_u16, 0x11d1_u16, StaticArray[0xae_u8, 0xa6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
     def query_interface(this : IWbemConfigureRefresher*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3584,7 +4061,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("e7d35cfa-348b-485e-b524-252725d697ca")]
   record IWbemObjectSinkEx, lpVtbl : IWbemObjectSinkExVtbl* do
     GUID = LibC::GUID.new(0xe7d35cfa_u32, 0x348b_u16, 0x485e_u16, StaticArray[0xb5_u8, 0x24_u8, 0x25_u8, 0x27_u8, 0x25_u8, 0xd6_u8, 0x97_u8, 0xca_u8])
     def query_interface(this : IWbemObjectSinkEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3629,7 +4105,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("b7b31df9-d515-11d3-a11c-00105a1f515a")]
   record IWbemShutdown, lpVtbl : IWbemShutdownVtbl* do
     GUID = LibC::GUID.new(0xb7b31df9_u32, 0xd515_u16, 0x11d3_u16, StaticArray[0xa1_u8, 0x1c_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x51_u8, 0x5a_u8])
     def query_interface(this : IWbemShutdown*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3657,7 +4132,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("bfbf883a-cad7-11d3-a11b-00105a1f515a")]
   record IWbemObjectTextSrc, lpVtbl : IWbemObjectTextSrcVtbl* do
     GUID = LibC::GUID.new(0xbfbf883a_u32, 0xcad7_u16, 0x11d3_u16, StaticArray[0xa1_u8, 0x1b_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x51_u8, 0x5a_u8])
     def query_interface(this : IWbemObjectTextSrc*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3689,7 +4163,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("6daf974e-2e37-11d2-aec9-00c04fb68820")]
   record IMofCompiler, lpVtbl : IMofCompilerVtbl* do
     GUID = LibC::GUID.new(0x6daf974e_u32, 0x2e37_u16, 0x11d2_u16, StaticArray[0xae_u8, 0xc9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
     def query_interface(this : IMofCompiler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3723,7 +4196,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("ce61e841-65bc-11d0-b6bd-00aa003240c7")]
   record IWbemPropertyProvider, lpVtbl : IWbemPropertyProviderVtbl* do
     GUID = LibC::GUID.new(0xce61e841_u32, 0x65bc_u16, 0x11d0_u16, StaticArray[0xb6_u8, 0xbd_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x32_u8, 0x40_u8, 0xc7_u8])
     def query_interface(this : IWbemPropertyProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3753,7 +4225,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("e246107b-b06e-11d0-ad61-00c04fd8fdff")]
   record IWbemUnboundObjectSink, lpVtbl : IWbemUnboundObjectSinkVtbl* do
     GUID = LibC::GUID.new(0xe246107b_u32, 0xb06e_u16, 0x11d0_u16, StaticArray[0xad_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
     def query_interface(this : IWbemUnboundObjectSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3780,7 +4251,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("e245105b-b06e-11d0-ad61-00c04fd8fdff")]
   record IWbemEventProvider, lpVtbl : IWbemEventProviderVtbl* do
     GUID = LibC::GUID.new(0xe245105b_u32, 0xb06e_u16, 0x11d0_u16, StaticArray[0xad_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
     def query_interface(this : IWbemEventProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3808,7 +4278,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("580acaf8-fa1c-11d0-ad72-00c04fd8fdff")]
   record IWbemEventProviderQuerySink, lpVtbl : IWbemEventProviderQuerySinkVtbl* do
     GUID = LibC::GUID.new(0x580acaf8_u32, 0xfa1c_u16, 0x11d0_u16, StaticArray[0xad_u8, 0x72_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
     def query_interface(this : IWbemEventProviderQuerySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3838,7 +4307,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("631f7d96-d993-11d2-b339-00105a1f4aaf")]
   record IWbemEventProviderSecurity, lpVtbl : IWbemEventProviderSecurityVtbl* do
     GUID = LibC::GUID.new(0x631f7d96_u32, 0xd993_u16, 0x11d2_u16, StaticArray[0xb3_u8, 0x39_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x4a_u8, 0xaf_u8])
     def query_interface(this : IWbemEventProviderSecurity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3865,7 +4333,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("e246107a-b06e-11d0-ad61-00c04fd8fdff")]
   record IWbemEventConsumerProvider, lpVtbl : IWbemEventConsumerProviderVtbl* do
     GUID = LibC::GUID.new(0xe246107a_u32, 0xb06e_u16, 0x11d0_u16, StaticArray[0xad_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
     def query_interface(this : IWbemEventConsumerProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3892,7 +4359,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("1be41571-91dd-11d1-aeb2-00c04fb68820")]
   record IWbemProviderInitSink, lpVtbl : IWbemProviderInitSinkVtbl* do
     GUID = LibC::GUID.new(0x1be41571_u32, 0x91dd_u16, 0x11d1_u16, StaticArray[0xae_u8, 0xb2_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
     def query_interface(this : IWbemProviderInitSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3919,7 +4385,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("1be41572-91dd-11d1-aeb2-00c04fb68820")]
   record IWbemProviderInit, lpVtbl : IWbemProviderInitVtbl* do
     GUID = LibC::GUID.new(0x1be41572_u32, 0x91dd_u16, 0x11d1_u16, StaticArray[0xae_u8, 0xb2_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
     def query_interface(this : IWbemProviderInit*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3951,7 +4416,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("49353c93-516b-11d1-aea6-00c04fb68820")]
   record IWbemHiPerfProvider, lpVtbl : IWbemHiPerfProviderVtbl* do
     GUID = LibC::GUID.new(0x49353c93_u32, 0x516b_u16, 0x11d1_u16, StaticArray[0xae_u8, 0xa6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
     def query_interface(this : IWbemHiPerfProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3994,7 +4458,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("1005cbcf-e64f-4646-bcd3-3a089d8a84b4")]
   record IWbemDecoupledRegistrar, lpVtbl : IWbemDecoupledRegistrarVtbl* do
     GUID = LibC::GUID.new(0x1005cbcf_u32, 0xe64f_u16, 0x4646_u16, StaticArray[0xbc_u8, 0xd3_u8, 0x3a_u8, 0x8_u8, 0x9d_u8, 0x8a_u8, 0x84_u8, 0xb4_u8])
     def query_interface(this : IWbemDecoupledRegistrar*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4024,7 +4487,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("631f7d97-d993-11d2-b339-00105a1f4aaf")]
   record IWbemProviderIdentity, lpVtbl : IWbemProviderIdentityVtbl* do
     GUID = LibC::GUID.new(0x631f7d97_u32, 0xd993_u16, 0x11d2_u16, StaticArray[0xb3_u8, 0x39_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x4a_u8, 0xaf_u8])
     def query_interface(this : IWbemProviderIdentity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4054,7 +4516,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("86336d20-ca11-4786-9ef1-bc8a946b42fc")]
   record IWbemDecoupledBasicEventProvider, lpVtbl : IWbemDecoupledBasicEventProviderVtbl* do
     GUID = LibC::GUID.new(0x86336d20_u32, 0xca11_u16, 0x4786_u16, StaticArray[0x9e_u8, 0xf1_u8, 0xbc_u8, 0x8a_u8, 0x94_u8, 0x6b_u8, 0x42_u8, 0xfc_u8])
     def query_interface(this : IWbemDecoupledBasicEventProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4095,7 +4556,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("3ae0080a-7e3a-4366-bf89-0feedc931659")]
   record IWbemEventSink, lpVtbl : IWbemEventSinkVtbl* do
     GUID = LibC::GUID.new(0x3ae0080a_u32, 0x7e3a_u16, 0x4366_u16, StaticArray[0xbf_u8, 0x89_u8, 0xf_u8, 0xee_u8, 0xdc_u8, 0x93_u8, 0x16_u8, 0x59_u8])
     def query_interface(this : IWbemEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4159,7 +4619,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("76a6415c-cb41-11d1-8b02-00600806d9b6")]
   record ISWbemServices, lpVtbl : ISWbemServicesVtbl* do
     GUID = LibC::GUID.new(0x76a6415c_u32, 0xcb41_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x2_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4257,7 +4716,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("76a6415b-cb41-11d1-8b02-00600806d9b6")]
   record ISWbemLocator, lpVtbl : ISWbemLocatorVtbl* do
     GUID = LibC::GUID.new(0x76a6415b_u32, 0xcb41_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x2_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemLocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4327,7 +4785,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("76a6415a-cb41-11d1-8b02-00600806d9b6")]
   record ISWbemObject, lpVtbl : ISWbemObjectVtbl* do
     GUID = LibC::GUID.new(0x76a6415a_u32, 0xcb41_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x2_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4446,7 +4903,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("76a6415f-cb41-11d1-8b02-00600806d9b6")]
   record ISWbemObjectSet, lpVtbl : ISWbemObjectSetVtbl* do
     GUID = LibC::GUID.new(0x76a6415f_u32, 0xcb41_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x2_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemObjectSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4503,7 +4959,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("76a64164-cb41-11d1-8b02-00600806d9b6")]
   record ISWbemNamedValue, lpVtbl : ISWbemNamedValueVtbl* do
     GUID = LibC::GUID.new(0x76a64164_u32, 0xcb41_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x2_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemNamedValue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4558,7 +5013,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("cf2376ea-ce8c-11d1-8b05-00600806d9b6")]
   record ISWbemNamedValueSet, lpVtbl : ISWbemNamedValueSetVtbl* do
     GUID = LibC::GUID.new(0xcf2376ea_u32, 0xce8c_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x5_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemNamedValueSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4629,7 +5083,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("79b05932-d3b7-11d1-8b06-00600806d9b6")]
   record ISWbemQualifier, lpVtbl : ISWbemQualifierVtbl* do
     GUID = LibC::GUID.new(0x79b05932_u32, 0xd3b7_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x6_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemQualifier*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4706,7 +5159,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("9b16ed16-d3df-11d1-8b08-00600806d9b6")]
   record ISWbemQualifierSet, lpVtbl : ISWbemQualifierSetVtbl* do
     GUID = LibC::GUID.new(0x9b16ed16_u32, 0xd3df_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x8_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemQualifierSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4768,7 +5220,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("1a388f98-d4ba-11d1-8b09-00600806d9b6")]
   record ISWbemProperty, lpVtbl : ISWbemPropertyVtbl* do
     GUID = LibC::GUID.new(0x1a388f98_u32, 0xd4ba_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x9_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4836,7 +5287,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("dea0a7b2-d4ba-11d1-8b09-00600806d9b6")]
   record ISWbemPropertySet, lpVtbl : ISWbemPropertySetVtbl* do
     GUID = LibC::GUID.new(0xdea0a7b2_u32, 0xd4ba_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x9_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemPropertySet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4895,7 +5345,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("422e8e90-d955-11d1-8b09-00600806d9b6")]
   record ISWbemMethod, lpVtbl : ISWbemMethodVtbl* do
     GUID = LibC::GUID.new(0x422e8e90_u32, 0xd955_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x9_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemMethod*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4952,7 +5401,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("c93ba292-d955-11d1-8b09-00600806d9b6")]
   record ISWbemMethodSet, lpVtbl : ISWbemMethodSetVtbl* do
     GUID = LibC::GUID.new(0xc93ba292_u32, 0xd955_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x9_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemMethodSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5002,7 +5450,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("27d54d92-0ebe-11d2-8b22-00600806d9b6")]
   record ISWbemEventSource, lpVtbl : ISWbemEventSourceVtbl* do
     GUID = LibC::GUID.new(0x27d54d92_u32, 0xebe_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x22_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemEventSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5070,7 +5517,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("5791bc27-ce9c-11d1-97bf-0000f81e849c")]
   record ISWbemObjectPath, lpVtbl : ISWbemObjectPathVtbl* do
     GUID = LibC::GUID.new(0x5791bc27_u32, 0xce9c_u16, 0x11d1_u16, StaticArray[0x97_u8, 0xbf_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x1e_u8, 0x84_u8, 0x9c_u8])
     def query_interface(this : ISWbemObjectPath*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5203,7 +5649,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("d962db84-d4bb-11d1-8b09-00600806d9b6")]
   record ISWbemLastError, lpVtbl : ISWbemLastErrorVtbl* do
     GUID = LibC::GUID.new(0xd962db84_u32, 0xd4bb_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x9_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemLastError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5317,7 +5762,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("75718ca0-f029-11d1-a1ac-00c04fb6c223")]
   record ISWbemSinkEvents, lpVtbl : ISWbemSinkEventsVtbl* do
     GUID = LibC::GUID.new(0x75718ca0_u32, 0xf029_u16, 0x11d1_u16, StaticArray[0xa1_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xc2_u8, 0x23_u8])
     def query_interface(this : ISWbemSinkEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5357,7 +5801,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("75718c9f-f029-11d1-a1ac-00c04fb6c223")]
   record ISWbemSink, lpVtbl : ISWbemSinkVtbl* do
     GUID = LibC::GUID.new(0x75718c9f_u32, 0xf029_u16, 0x11d1_u16, StaticArray[0xa1_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xc2_u8, 0x23_u8])
     def query_interface(this : ISWbemSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5404,7 +5847,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("b54d66e6-2287-11d2-8b33-00600806d9b6")]
   record ISWbemSecurity, lpVtbl : ISWbemSecurityVtbl* do
     GUID = LibC::GUID.new(0xb54d66e6_u32, 0x2287_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x33_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemSecurity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5463,7 +5905,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("26ee67bd-5804-11d2-8b4a-00600806d9b6")]
   record ISWbemPrivilege, lpVtbl : ISWbemPrivilegeVtbl* do
     GUID = LibC::GUID.new(0x26ee67bd_u32, 0x5804_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x4a_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemPrivilege*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5524,7 +5965,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("26ee67bf-5804-11d2-8b4a-00600806d9b6")]
   record ISWbemPrivilegeSet, lpVtbl : ISWbemPrivilegeSetVtbl* do
     GUID = LibC::GUID.new(0x26ee67bf_u32, 0x5804_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x4a_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemPrivilegeSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5605,7 +6045,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("d2f68443-85dc-427e-91d8-366554cc754c")]
   record ISWbemServicesEx, lpVtbl : ISWbemServicesExVtbl* do
     GUID = LibC::GUID.new(0xd2f68443_u32, 0x85dc_u16, 0x427e_u16, StaticArray[0x91_u8, 0xd8_u8, 0x36_u8, 0x65_u8, 0x54_u8, 0xcc_u8, 0x75_u8, 0x4c_u8])
     def query_interface(this : ISWbemServicesEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5736,7 +6175,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("269ad56a-8a67-4129-bc8c-0506dcfe9880")]
   record ISWbemObjectEx, lpVtbl : ISWbemObjectExVtbl* do
     GUID = LibC::GUID.new(0x269ad56a_u32, 0x8a67_u16, 0x4129_u16, StaticArray[0xbc_u8, 0x8c_u8, 0x5_u8, 0x6_u8, 0xdc_u8, 0xfe_u8, 0x98_u8, 0x80_u8])
     def query_interface(this : ISWbemObjectEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5902,7 +6340,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("5e97458a-cf77-11d3-b38f-00105a1f473a")]
   record ISWbemDateTime, lpVtbl : ISWbemDateTimeVtbl* do
     GUID = LibC::GUID.new(0x5e97458a_u32, 0xcf77_u16, 0x11d3_u16, StaticArray[0xb3_u8, 0x8f_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x47_u8, 0x3a_u8])
     def query_interface(this : ISWbemDateTime*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6071,7 +6508,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("14d8250e-d9c2-11d3-b38f-00105a1f473a")]
   record ISWbemRefresher, lpVtbl : ISWbemRefresherVtbl* do
     GUID = LibC::GUID.new(0x14d8250e_u32, 0xd9c2_u16, 0x11d3_u16, StaticArray[0xb3_u8, 0x8f_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x47_u8, 0x3a_u8])
     def query_interface(this : ISWbemRefresher*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6146,7 +6582,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("5ad4bf92-daab-11d3-b38f-00105a1f473a")]
   record ISWbemRefreshableItem, lpVtbl : ISWbemRefreshableItemVtbl* do
     GUID = LibC::GUID.new(0x5ad4bf92_u32, 0xdaab_u16, 0x11d3_u16, StaticArray[0xb3_u8, 0x8f_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x47_u8, 0x3a_u8])
     def query_interface(this : ISWbemRefreshableItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6206,7 +6641,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("adc1f06e-5c7e-11d2-8b74-00104b2afb41")]
   record IWMIExtension, lpVtbl : IWMIExtensionVtbl* do
     GUID = LibC::GUID.new(0xadc1f06e_u32, 0x5c7e_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x74_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0x2a_u8, 0xfb_u8, 0x41_u8])
     def query_interface(this : IWMIExtension*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6251,7 +6685,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("553fe584-2156-11d0-b6ae-00aa003240c7")]
   record IWbemTransport, lpVtbl : IWbemTransportVtbl* do
     GUID = LibC::GUID.new(0x553fe584_u32, 0x2156_u16, 0x11d0_u16, StaticArray[0xb6_u8, 0xae_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x32_u8, 0x40_u8, 0xc7_u8])
     def query_interface(this : IWbemTransport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6281,7 +6714,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("f309ad18-d86a-11d0-a075-00c04fb68820")]
   record IWbemLevel1Login, lpVtbl : IWbemLevel1LoginVtbl* do
     GUID = LibC::GUID.new(0xf309ad18_u32, 0xd86a_u16, 0x11d0_u16, StaticArray[0xa0_u8, 0x75_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
     def query_interface(this : IWbemLevel1Login*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6317,7 +6749,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("d8ec9cb1-b135-4f10-8b1b-c7188bb0d186")]
   record IWbemConnectorLogin, lpVtbl : IWbemConnectorLoginVtbl* do
     GUID = LibC::GUID.new(0xd8ec9cb1_u32, 0xb135_u16, 0x4f10_u16, StaticArray[0x8b_u8, 0x1b_u8, 0xc7_u8, 0x18_u8, 0x8b_u8, 0xb0_u8, 0xd1_u8, 0x86_u8])
     def query_interface(this : IWbemConnectorLogin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6344,7 +6775,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("f7ce2e12-8c90-11d1-9e7b-00c04fc324a8")]
   record IWbemAddressResolution, lpVtbl : IWbemAddressResolutionVtbl* do
     GUID = LibC::GUID.new(0xf7ce2e12_u32, 0x8c90_u16, 0x11d1_u16, StaticArray[0x9e_u8, 0x7b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x24_u8, 0xa8_u8])
     def query_interface(this : IWbemAddressResolution*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6371,7 +6801,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("f7ce2e11-8c90-11d1-9e7b-00c04fc324a8")]
   record IWbemClientTransport, lpVtbl : IWbemClientTransportVtbl* do
     GUID = LibC::GUID.new(0xf7ce2e11_u32, 0x8c90_u16, 0x11d1_u16, StaticArray[0x9e_u8, 0x7b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x24_u8, 0xa8_u8])
     def query_interface(this : IWbemClientTransport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6400,7 +6829,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("a889c72a-fcc1-4a9e-af61-ed071333fb5b")]
   record IWbemClientConnectionTransport, lpVtbl : IWbemClientConnectionTransportVtbl* do
     GUID = LibC::GUID.new(0xa889c72a_u32, 0xfcc1_u16, 0x4a9e_u16, StaticArray[0xaf_u8, 0x61_u8, 0xed_u8, 0x7_u8, 0x13_u8, 0x33_u8, 0xfb_u8, 0x5b_u8])
     def query_interface(this : IWbemClientConnectionTransport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -6436,7 +6864,6 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  #@[Com("9ef76194-70d5-11d1-ad90-00c04fd8fdff")]
   record IWbemConstructClassObject, lpVtbl : IWbemConstructClassObjectVtbl* do
     GUID = LibC::GUID.new(0x9ef76194_u32, 0x70d5_u16, 0x11d1_u16, StaticArray[0xad_u8, 0x90_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
     def query_interface(this : IWbemConstructClassObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

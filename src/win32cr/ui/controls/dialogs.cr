@@ -4,21 +4,21 @@ require "./../../graphics/gdi.cr"
 require "./../../system/com.cr"
 
 module Win32cr::UI::Controls::Dialogs
-  alias LPOFNHOOKPROC = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, LibC::UIntPtrT)*
+  alias LPOFNHOOKPROC = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, LibC::UIntPtrT)
 
-  alias LPCCHOOKPROC = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, LibC::UIntPtrT)*
+  alias LPCCHOOKPROC = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, LibC::UIntPtrT)
 
-  alias LPFRHOOKPROC = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, LibC::UIntPtrT)*
+  alias LPFRHOOKPROC = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, LibC::UIntPtrT)
 
-  alias LPCFHOOKPROC = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, LibC::UIntPtrT)*
+  alias LPCFHOOKPROC = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, LibC::UIntPtrT)
 
-  alias LPPRINTHOOKPROC = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, LibC::UIntPtrT)*
+  alias LPPRINTHOOKPROC = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, LibC::UIntPtrT)
 
-  alias LPSETUPHOOKPROC = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, LibC::UIntPtrT)*
+  alias LPSETUPHOOKPROC = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, LibC::UIntPtrT)
 
-  alias LPPAGEPAINTHOOK = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, LibC::UIntPtrT)*
+  alias LPPAGEPAINTHOOK = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, LibC::UIntPtrT)
 
-  alias LPPAGESETUPHOOK = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, LibC::UIntPtrT)*
+  alias LPPAGESETUPHOOK = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, LibC::UIntPtrT)
 
   OFN_SHAREFALLTHROUGH = 2_u32
   OFN_SHARENOWARN = 1_u32
@@ -307,794 +307,926 @@ module Win32cr::UI::Controls::Dialogs
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record OPENFILENAME_NT4A,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpstrFilter : Win32cr::Foundation::PSTR,
-    lpstrCustomFilter : Win32cr::Foundation::PSTR,
-    nMaxCustFilter : UInt32,
-    nFilterIndex : UInt32,
-    lpstrFile : Win32cr::Foundation::PSTR,
-    nMaxFile : UInt32,
-    lpstrFileTitle : Win32cr::Foundation::PSTR,
-    nMaxFileTitle : UInt32,
-    lpstrInitialDir : Win32cr::Foundation::PSTR,
-    lpstrTitle : Win32cr::Foundation::PSTR,
-    flags : UInt32,
-    nFileOffset : UInt16,
-    nFileExtension : UInt16,
-    lpstrDefExt : Win32cr::Foundation::PSTR,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnHook : Win32cr::UI::Controls::Dialogs::LPOFNHOOKPROC,
-    lpTemplateName : Win32cr::Foundation::PSTR
+  struct OPENFILENAME_NT4A
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpstrFilter : Win32cr::Foundation::PSTR
+    property lpstrCustomFilter : Win32cr::Foundation::PSTR
+    property nMaxCustFilter : UInt32
+    property nFilterIndex : UInt32
+    property lpstrFile : Win32cr::Foundation::PSTR
+    property nMaxFile : UInt32
+    property lpstrFileTitle : Win32cr::Foundation::PSTR
+    property nMaxFileTitle : UInt32
+    property lpstrInitialDir : Win32cr::Foundation::PSTR
+    property lpstrTitle : Win32cr::Foundation::PSTR
+    property flags : UInt32
+    property nFileOffset : UInt16
+    property nFileExtension : UInt16
+    property lpstrDefExt : Win32cr::Foundation::PSTR
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnHook : Win32cr::UI::Controls::Dialogs::LPOFNHOOKPROC
+    property lpTemplateName : Win32cr::Foundation::PSTR
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hInstance : Win32cr::Foundation::HINSTANCE, @lpstrFilter : Win32cr::Foundation::PSTR, @lpstrCustomFilter : Win32cr::Foundation::PSTR, @nMaxCustFilter : UInt32, @nFilterIndex : UInt32, @lpstrFile : Win32cr::Foundation::PSTR, @nMaxFile : UInt32, @lpstrFileTitle : Win32cr::Foundation::PSTR, @nMaxFileTitle : UInt32, @lpstrInitialDir : Win32cr::Foundation::PSTR, @lpstrTitle : Win32cr::Foundation::PSTR, @flags : UInt32, @nFileOffset : UInt16, @nFileExtension : UInt16, @lpstrDefExt : Win32cr::Foundation::PSTR, @lCustData : Win32cr::Foundation::LPARAM, @lpfnHook : Win32cr::UI::Controls::Dialogs::LPOFNHOOKPROC, @lpTemplateName : Win32cr::Foundation::PSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record OPENFILENAME_NT4W,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpstrFilter : Win32cr::Foundation::PWSTR,
-    lpstrCustomFilter : Win32cr::Foundation::PWSTR,
-    nMaxCustFilter : UInt32,
-    nFilterIndex : UInt32,
-    lpstrFile : Win32cr::Foundation::PWSTR,
-    nMaxFile : UInt32,
-    lpstrFileTitle : Win32cr::Foundation::PWSTR,
-    nMaxFileTitle : UInt32,
-    lpstrInitialDir : Win32cr::Foundation::PWSTR,
-    lpstrTitle : Win32cr::Foundation::PWSTR,
-    flags : UInt32,
-    nFileOffset : UInt16,
-    nFileExtension : UInt16,
-    lpstrDefExt : Win32cr::Foundation::PWSTR,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnHook : Win32cr::UI::Controls::Dialogs::LPOFNHOOKPROC,
-    lpTemplateName : Win32cr::Foundation::PWSTR
+  struct OPENFILENAME_NT4W
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpstrFilter : Win32cr::Foundation::PWSTR
+    property lpstrCustomFilter : Win32cr::Foundation::PWSTR
+    property nMaxCustFilter : UInt32
+    property nFilterIndex : UInt32
+    property lpstrFile : Win32cr::Foundation::PWSTR
+    property nMaxFile : UInt32
+    property lpstrFileTitle : Win32cr::Foundation::PWSTR
+    property nMaxFileTitle : UInt32
+    property lpstrInitialDir : Win32cr::Foundation::PWSTR
+    property lpstrTitle : Win32cr::Foundation::PWSTR
+    property flags : UInt32
+    property nFileOffset : UInt16
+    property nFileExtension : UInt16
+    property lpstrDefExt : Win32cr::Foundation::PWSTR
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnHook : Win32cr::UI::Controls::Dialogs::LPOFNHOOKPROC
+    property lpTemplateName : Win32cr::Foundation::PWSTR
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hInstance : Win32cr::Foundation::HINSTANCE, @lpstrFilter : Win32cr::Foundation::PWSTR, @lpstrCustomFilter : Win32cr::Foundation::PWSTR, @nMaxCustFilter : UInt32, @nFilterIndex : UInt32, @lpstrFile : Win32cr::Foundation::PWSTR, @nMaxFile : UInt32, @lpstrFileTitle : Win32cr::Foundation::PWSTR, @nMaxFileTitle : UInt32, @lpstrInitialDir : Win32cr::Foundation::PWSTR, @lpstrTitle : Win32cr::Foundation::PWSTR, @flags : UInt32, @nFileOffset : UInt16, @nFileExtension : UInt16, @lpstrDefExt : Win32cr::Foundation::PWSTR, @lCustData : Win32cr::Foundation::LPARAM, @lpfnHook : Win32cr::UI::Controls::Dialogs::LPOFNHOOKPROC, @lpTemplateName : Win32cr::Foundation::PWSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record OPENFILENAMEA,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpstrFilter : Win32cr::Foundation::PSTR,
-    lpstrCustomFilter : Win32cr::Foundation::PSTR,
-    nMaxCustFilter : UInt32,
-    nFilterIndex : UInt32,
-    lpstrFile : Win32cr::Foundation::PSTR,
-    nMaxFile : UInt32,
-    lpstrFileTitle : Win32cr::Foundation::PSTR,
-    nMaxFileTitle : UInt32,
-    lpstrInitialDir : Win32cr::Foundation::PSTR,
-    lpstrTitle : Win32cr::Foundation::PSTR,
-    flags : Win32cr::UI::Controls::Dialogs::OPEN_FILENAME_FLAGS,
-    nFileOffset : UInt16,
-    nFileExtension : UInt16,
-    lpstrDefExt : Win32cr::Foundation::PSTR,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnHook : Win32cr::UI::Controls::Dialogs::LPOFNHOOKPROC,
-    lpTemplateName : Win32cr::Foundation::PSTR,
-    pvReserved : Void*,
-    dwReserved : UInt32,
-    flags_ex : Win32cr::UI::Controls::Dialogs::OPEN_FILENAME_FLAGS_EX
+  struct OPENFILENAMEA
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpstrFilter : Win32cr::Foundation::PSTR
+    property lpstrCustomFilter : Win32cr::Foundation::PSTR
+    property nMaxCustFilter : UInt32
+    property nFilterIndex : UInt32
+    property lpstrFile : Win32cr::Foundation::PSTR
+    property nMaxFile : UInt32
+    property lpstrFileTitle : Win32cr::Foundation::PSTR
+    property nMaxFileTitle : UInt32
+    property lpstrInitialDir : Win32cr::Foundation::PSTR
+    property lpstrTitle : Win32cr::Foundation::PSTR
+    property flags : Win32cr::UI::Controls::Dialogs::OPEN_FILENAME_FLAGS
+    property nFileOffset : UInt16
+    property nFileExtension : UInt16
+    property lpstrDefExt : Win32cr::Foundation::PSTR
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnHook : Win32cr::UI::Controls::Dialogs::LPOFNHOOKPROC
+    property lpTemplateName : Win32cr::Foundation::PSTR
+    property pvReserved : Void*
+    property dwReserved : UInt32
+    property flags_ex : Win32cr::UI::Controls::Dialogs::OPEN_FILENAME_FLAGS_EX
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hInstance : Win32cr::Foundation::HINSTANCE, @lpstrFilter : Win32cr::Foundation::PSTR, @lpstrCustomFilter : Win32cr::Foundation::PSTR, @nMaxCustFilter : UInt32, @nFilterIndex : UInt32, @lpstrFile : Win32cr::Foundation::PSTR, @nMaxFile : UInt32, @lpstrFileTitle : Win32cr::Foundation::PSTR, @nMaxFileTitle : UInt32, @lpstrInitialDir : Win32cr::Foundation::PSTR, @lpstrTitle : Win32cr::Foundation::PSTR, @flags : Win32cr::UI::Controls::Dialogs::OPEN_FILENAME_FLAGS, @nFileOffset : UInt16, @nFileExtension : UInt16, @lpstrDefExt : Win32cr::Foundation::PSTR, @lCustData : Win32cr::Foundation::LPARAM, @lpfnHook : Win32cr::UI::Controls::Dialogs::LPOFNHOOKPROC, @lpTemplateName : Win32cr::Foundation::PSTR, @pvReserved : Void*, @dwReserved : UInt32, @flags_ex : Win32cr::UI::Controls::Dialogs::OPEN_FILENAME_FLAGS_EX)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record OPENFILENAMEW,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpstrFilter : Win32cr::Foundation::PWSTR,
-    lpstrCustomFilter : Win32cr::Foundation::PWSTR,
-    nMaxCustFilter : UInt32,
-    nFilterIndex : UInt32,
-    lpstrFile : Win32cr::Foundation::PWSTR,
-    nMaxFile : UInt32,
-    lpstrFileTitle : Win32cr::Foundation::PWSTR,
-    nMaxFileTitle : UInt32,
-    lpstrInitialDir : Win32cr::Foundation::PWSTR,
-    lpstrTitle : Win32cr::Foundation::PWSTR,
-    flags : Win32cr::UI::Controls::Dialogs::OPEN_FILENAME_FLAGS,
-    nFileOffset : UInt16,
-    nFileExtension : UInt16,
-    lpstrDefExt : Win32cr::Foundation::PWSTR,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnHook : Win32cr::UI::Controls::Dialogs::LPOFNHOOKPROC,
-    lpTemplateName : Win32cr::Foundation::PWSTR,
-    pvReserved : Void*,
-    dwReserved : UInt32,
-    flags_ex : Win32cr::UI::Controls::Dialogs::OPEN_FILENAME_FLAGS_EX
+  struct OPENFILENAMEW
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpstrFilter : Win32cr::Foundation::PWSTR
+    property lpstrCustomFilter : Win32cr::Foundation::PWSTR
+    property nMaxCustFilter : UInt32
+    property nFilterIndex : UInt32
+    property lpstrFile : Win32cr::Foundation::PWSTR
+    property nMaxFile : UInt32
+    property lpstrFileTitle : Win32cr::Foundation::PWSTR
+    property nMaxFileTitle : UInt32
+    property lpstrInitialDir : Win32cr::Foundation::PWSTR
+    property lpstrTitle : Win32cr::Foundation::PWSTR
+    property flags : Win32cr::UI::Controls::Dialogs::OPEN_FILENAME_FLAGS
+    property nFileOffset : UInt16
+    property nFileExtension : UInt16
+    property lpstrDefExt : Win32cr::Foundation::PWSTR
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnHook : Win32cr::UI::Controls::Dialogs::LPOFNHOOKPROC
+    property lpTemplateName : Win32cr::Foundation::PWSTR
+    property pvReserved : Void*
+    property dwReserved : UInt32
+    property flags_ex : Win32cr::UI::Controls::Dialogs::OPEN_FILENAME_FLAGS_EX
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hInstance : Win32cr::Foundation::HINSTANCE, @lpstrFilter : Win32cr::Foundation::PWSTR, @lpstrCustomFilter : Win32cr::Foundation::PWSTR, @nMaxCustFilter : UInt32, @nFilterIndex : UInt32, @lpstrFile : Win32cr::Foundation::PWSTR, @nMaxFile : UInt32, @lpstrFileTitle : Win32cr::Foundation::PWSTR, @nMaxFileTitle : UInt32, @lpstrInitialDir : Win32cr::Foundation::PWSTR, @lpstrTitle : Win32cr::Foundation::PWSTR, @flags : Win32cr::UI::Controls::Dialogs::OPEN_FILENAME_FLAGS, @nFileOffset : UInt16, @nFileExtension : UInt16, @lpstrDefExt : Win32cr::Foundation::PWSTR, @lCustData : Win32cr::Foundation::LPARAM, @lpfnHook : Win32cr::UI::Controls::Dialogs::LPOFNHOOKPROC, @lpTemplateName : Win32cr::Foundation::PWSTR, @pvReserved : Void*, @dwReserved : UInt32, @flags_ex : Win32cr::UI::Controls::Dialogs::OPEN_FILENAME_FLAGS_EX)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record OFNOTIFYA,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEA*,
-    pszFile : Win32cr::Foundation::PSTR
+  struct OFNOTIFYA
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEA*
+    property pszFile : Win32cr::Foundation::PSTR
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEA*, @pszFile : Win32cr::Foundation::PSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record OFNOTIFYW,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEW*,
-    pszFile : Win32cr::Foundation::PWSTR
+  struct OFNOTIFYW
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEW*
+    property pszFile : Win32cr::Foundation::PWSTR
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEW*, @pszFile : Win32cr::Foundation::PWSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record OFNOTIFYEXA,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEA*,
-    psf : Void*,
-    pidl : Void*
+  struct OFNOTIFYEXA
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEA*
+    property psf : Void*
+    property pidl : Void*
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEA*, @psf : Void*, @pidl : Void*)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record OFNOTIFYEXW,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEW*,
-    psf : Void*,
-    pidl : Void*
+  struct OFNOTIFYEXW
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEW*
+    property psf : Void*
+    property pidl : Void*
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEW*, @psf : Void*, @pidl : Void*)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record CHOOSECOLORA,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hInstance : Win32cr::Foundation::HWND,
-    rgbResult : UInt32,
-    lpCustColors : UInt32*,
-    flags : UInt32,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnHook : Win32cr::UI::Controls::Dialogs::LPCCHOOKPROC,
-    lpTemplateName : Win32cr::Foundation::PSTR
+  struct CHOOSECOLORA
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hInstance : Win32cr::Foundation::HWND
+    property rgbResult : UInt32
+    property lpCustColors : UInt32*
+    property flags : UInt32
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnHook : Win32cr::UI::Controls::Dialogs::LPCCHOOKPROC
+    property lpTemplateName : Win32cr::Foundation::PSTR
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hInstance : Win32cr::Foundation::HWND, @rgbResult : UInt32, @lpCustColors : UInt32*, @flags : UInt32, @lCustData : Win32cr::Foundation::LPARAM, @lpfnHook : Win32cr::UI::Controls::Dialogs::LPCCHOOKPROC, @lpTemplateName : Win32cr::Foundation::PSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record CHOOSECOLORW,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hInstance : Win32cr::Foundation::HWND,
-    rgbResult : UInt32,
-    lpCustColors : UInt32*,
-    flags : UInt32,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnHook : Win32cr::UI::Controls::Dialogs::LPCCHOOKPROC,
-    lpTemplateName : Win32cr::Foundation::PWSTR
+  struct CHOOSECOLORW
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hInstance : Win32cr::Foundation::HWND
+    property rgbResult : UInt32
+    property lpCustColors : UInt32*
+    property flags : UInt32
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnHook : Win32cr::UI::Controls::Dialogs::LPCCHOOKPROC
+    property lpTemplateName : Win32cr::Foundation::PWSTR
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hInstance : Win32cr::Foundation::HWND, @rgbResult : UInt32, @lpCustColors : UInt32*, @flags : UInt32, @lCustData : Win32cr::Foundation::LPARAM, @lpfnHook : Win32cr::UI::Controls::Dialogs::LPCCHOOKPROC, @lpTemplateName : Win32cr::Foundation::PWSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record FINDREPLACEA,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    flags : Win32cr::UI::Controls::Dialogs::FINDREPLACE_FLAGS,
-    lpstrFindWhat : Win32cr::Foundation::PSTR,
-    lpstrReplaceWith : Win32cr::Foundation::PSTR,
-    wFindWhatLen : UInt16,
-    wReplaceWithLen : UInt16,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnHook : Win32cr::UI::Controls::Dialogs::LPFRHOOKPROC,
-    lpTemplateName : Win32cr::Foundation::PSTR
+  struct FINDREPLACEA
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property flags : Win32cr::UI::Controls::Dialogs::FINDREPLACE_FLAGS
+    property lpstrFindWhat : Win32cr::Foundation::PSTR
+    property lpstrReplaceWith : Win32cr::Foundation::PSTR
+    property wFindWhatLen : UInt16
+    property wReplaceWithLen : UInt16
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnHook : Win32cr::UI::Controls::Dialogs::LPFRHOOKPROC
+    property lpTemplateName : Win32cr::Foundation::PSTR
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hInstance : Win32cr::Foundation::HINSTANCE, @flags : Win32cr::UI::Controls::Dialogs::FINDREPLACE_FLAGS, @lpstrFindWhat : Win32cr::Foundation::PSTR, @lpstrReplaceWith : Win32cr::Foundation::PSTR, @wFindWhatLen : UInt16, @wReplaceWithLen : UInt16, @lCustData : Win32cr::Foundation::LPARAM, @lpfnHook : Win32cr::UI::Controls::Dialogs::LPFRHOOKPROC, @lpTemplateName : Win32cr::Foundation::PSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record FINDREPLACEW,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    flags : Win32cr::UI::Controls::Dialogs::FINDREPLACE_FLAGS,
-    lpstrFindWhat : Win32cr::Foundation::PWSTR,
-    lpstrReplaceWith : Win32cr::Foundation::PWSTR,
-    wFindWhatLen : UInt16,
-    wReplaceWithLen : UInt16,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnHook : Win32cr::UI::Controls::Dialogs::LPFRHOOKPROC,
-    lpTemplateName : Win32cr::Foundation::PWSTR
+  struct FINDREPLACEW
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property flags : Win32cr::UI::Controls::Dialogs::FINDREPLACE_FLAGS
+    property lpstrFindWhat : Win32cr::Foundation::PWSTR
+    property lpstrReplaceWith : Win32cr::Foundation::PWSTR
+    property wFindWhatLen : UInt16
+    property wReplaceWithLen : UInt16
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnHook : Win32cr::UI::Controls::Dialogs::LPFRHOOKPROC
+    property lpTemplateName : Win32cr::Foundation::PWSTR
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hInstance : Win32cr::Foundation::HINSTANCE, @flags : Win32cr::UI::Controls::Dialogs::FINDREPLACE_FLAGS, @lpstrFindWhat : Win32cr::Foundation::PWSTR, @lpstrReplaceWith : Win32cr::Foundation::PWSTR, @wFindWhatLen : UInt16, @wReplaceWithLen : UInt16, @lCustData : Win32cr::Foundation::LPARAM, @lpfnHook : Win32cr::UI::Controls::Dialogs::LPFRHOOKPROC, @lpTemplateName : Win32cr::Foundation::PWSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record CHOOSEFONTA,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hDC : Win32cr::Graphics::Gdi::HDC,
-    lpLogFont : Win32cr::Graphics::Gdi::LOGFONTA*,
-    iPointSize : Int32,
-    flags : Win32cr::UI::Controls::Dialogs::CHOOSEFONT_FLAGS,
-    rgbColors : UInt32,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnHook : Win32cr::UI::Controls::Dialogs::LPCFHOOKPROC,
-    lpTemplateName : Win32cr::Foundation::PSTR,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpszStyle : Win32cr::Foundation::PSTR,
-    nFontType : Win32cr::UI::Controls::Dialogs::CHOOSEFONT_FONT_TYPE,
-    ___missing_alignment__ : UInt16,
-    nSizeMin : Int32,
-    nSizeMax : Int32
+  struct CHOOSEFONTA
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hDC : Win32cr::Graphics::Gdi::HDC
+    property lpLogFont : Win32cr::Graphics::Gdi::LOGFONTA*
+    property iPointSize : Int32
+    property flags : Win32cr::UI::Controls::Dialogs::CHOOSEFONT_FLAGS
+    property rgbColors : UInt32
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnHook : Win32cr::UI::Controls::Dialogs::LPCFHOOKPROC
+    property lpTemplateName : Win32cr::Foundation::PSTR
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpszStyle : Win32cr::Foundation::PSTR
+    property nFontType : Win32cr::UI::Controls::Dialogs::CHOOSEFONT_FONT_TYPE
+    property ___missing_alignment__ : UInt16
+    property nSizeMin : Int32
+    property nSizeMax : Int32
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hDC : Win32cr::Graphics::Gdi::HDC, @lpLogFont : Win32cr::Graphics::Gdi::LOGFONTA*, @iPointSize : Int32, @flags : Win32cr::UI::Controls::Dialogs::CHOOSEFONT_FLAGS, @rgbColors : UInt32, @lCustData : Win32cr::Foundation::LPARAM, @lpfnHook : Win32cr::UI::Controls::Dialogs::LPCFHOOKPROC, @lpTemplateName : Win32cr::Foundation::PSTR, @hInstance : Win32cr::Foundation::HINSTANCE, @lpszStyle : Win32cr::Foundation::PSTR, @nFontType : Win32cr::UI::Controls::Dialogs::CHOOSEFONT_FONT_TYPE, @___missing_alignment__ : UInt16, @nSizeMin : Int32, @nSizeMax : Int32)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record CHOOSEFONTW,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hDC : Win32cr::Graphics::Gdi::HDC,
-    lpLogFont : Win32cr::Graphics::Gdi::LOGFONTW*,
-    iPointSize : Int32,
-    flags : Win32cr::UI::Controls::Dialogs::CHOOSEFONT_FLAGS,
-    rgbColors : UInt32,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnHook : Win32cr::UI::Controls::Dialogs::LPCFHOOKPROC,
-    lpTemplateName : Win32cr::Foundation::PWSTR,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpszStyle : Win32cr::Foundation::PWSTR,
-    nFontType : Win32cr::UI::Controls::Dialogs::CHOOSEFONT_FONT_TYPE,
-    ___missing_alignment__ : UInt16,
-    nSizeMin : Int32,
-    nSizeMax : Int32
+  struct CHOOSEFONTW
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hDC : Win32cr::Graphics::Gdi::HDC
+    property lpLogFont : Win32cr::Graphics::Gdi::LOGFONTW*
+    property iPointSize : Int32
+    property flags : Win32cr::UI::Controls::Dialogs::CHOOSEFONT_FLAGS
+    property rgbColors : UInt32
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnHook : Win32cr::UI::Controls::Dialogs::LPCFHOOKPROC
+    property lpTemplateName : Win32cr::Foundation::PWSTR
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpszStyle : Win32cr::Foundation::PWSTR
+    property nFontType : Win32cr::UI::Controls::Dialogs::CHOOSEFONT_FONT_TYPE
+    property ___missing_alignment__ : UInt16
+    property nSizeMin : Int32
+    property nSizeMax : Int32
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hDC : Win32cr::Graphics::Gdi::HDC, @lpLogFont : Win32cr::Graphics::Gdi::LOGFONTW*, @iPointSize : Int32, @flags : Win32cr::UI::Controls::Dialogs::CHOOSEFONT_FLAGS, @rgbColors : UInt32, @lCustData : Win32cr::Foundation::LPARAM, @lpfnHook : Win32cr::UI::Controls::Dialogs::LPCFHOOKPROC, @lpTemplateName : Win32cr::Foundation::PWSTR, @hInstance : Win32cr::Foundation::HINSTANCE, @lpszStyle : Win32cr::Foundation::PWSTR, @nFontType : Win32cr::UI::Controls::Dialogs::CHOOSEFONT_FONT_TYPE, @___missing_alignment__ : UInt16, @nSizeMin : Int32, @nSizeMax : Int32)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record PRINTDLGA,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hDevMode : LibC::IntPtrT,
-    hDevNames : LibC::IntPtrT,
-    hDC : Win32cr::Graphics::Gdi::HDC,
-    flags : Win32cr::UI::Controls::Dialogs::PRINTDLGEX_FLAGS,
-    nFromPage : UInt16,
-    nToPage : UInt16,
-    nMinPage : UInt16,
-    nMaxPage : UInt16,
-    nCopies : UInt16,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnPrintHook : Win32cr::UI::Controls::Dialogs::LPPRINTHOOKPROC,
-    lpfnSetupHook : Win32cr::UI::Controls::Dialogs::LPSETUPHOOKPROC,
-    lpPrintTemplateName : Win32cr::Foundation::PSTR,
-    lpSetupTemplateName : Win32cr::Foundation::PSTR,
-    hPrintTemplate : LibC::IntPtrT,
-    hSetupTemplate : LibC::IntPtrT
+  struct PRINTDLGA
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hDevMode : LibC::IntPtrT
+    property hDevNames : LibC::IntPtrT
+    property hDC : Win32cr::Graphics::Gdi::HDC
+    property flags : Win32cr::UI::Controls::Dialogs::PRINTDLGEX_FLAGS
+    property nFromPage : UInt16
+    property nToPage : UInt16
+    property nMinPage : UInt16
+    property nMaxPage : UInt16
+    property nCopies : UInt16
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnPrintHook : Win32cr::UI::Controls::Dialogs::LPPRINTHOOKPROC
+    property lpfnSetupHook : Win32cr::UI::Controls::Dialogs::LPSETUPHOOKPROC
+    property lpPrintTemplateName : Win32cr::Foundation::PSTR
+    property lpSetupTemplateName : Win32cr::Foundation::PSTR
+    property hPrintTemplate : LibC::IntPtrT
+    property hSetupTemplate : LibC::IntPtrT
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hDevMode : LibC::IntPtrT, @hDevNames : LibC::IntPtrT, @hDC : Win32cr::Graphics::Gdi::HDC, @flags : Win32cr::UI::Controls::Dialogs::PRINTDLGEX_FLAGS, @nFromPage : UInt16, @nToPage : UInt16, @nMinPage : UInt16, @nMaxPage : UInt16, @nCopies : UInt16, @hInstance : Win32cr::Foundation::HINSTANCE, @lCustData : Win32cr::Foundation::LPARAM, @lpfnPrintHook : Win32cr::UI::Controls::Dialogs::LPPRINTHOOKPROC, @lpfnSetupHook : Win32cr::UI::Controls::Dialogs::LPSETUPHOOKPROC, @lpPrintTemplateName : Win32cr::Foundation::PSTR, @lpSetupTemplateName : Win32cr::Foundation::PSTR, @hPrintTemplate : LibC::IntPtrT, @hSetupTemplate : LibC::IntPtrT)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record PRINTDLGW,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hDevMode : LibC::IntPtrT,
-    hDevNames : LibC::IntPtrT,
-    hDC : Win32cr::Graphics::Gdi::HDC,
-    flags : Win32cr::UI::Controls::Dialogs::PRINTDLGEX_FLAGS,
-    nFromPage : UInt16,
-    nToPage : UInt16,
-    nMinPage : UInt16,
-    nMaxPage : UInt16,
-    nCopies : UInt16,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnPrintHook : Win32cr::UI::Controls::Dialogs::LPPRINTHOOKPROC,
-    lpfnSetupHook : Win32cr::UI::Controls::Dialogs::LPSETUPHOOKPROC,
-    lpPrintTemplateName : Win32cr::Foundation::PWSTR,
-    lpSetupTemplateName : Win32cr::Foundation::PWSTR,
-    hPrintTemplate : LibC::IntPtrT,
-    hSetupTemplate : LibC::IntPtrT
+  struct PRINTDLGW
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hDevMode : LibC::IntPtrT
+    property hDevNames : LibC::IntPtrT
+    property hDC : Win32cr::Graphics::Gdi::HDC
+    property flags : Win32cr::UI::Controls::Dialogs::PRINTDLGEX_FLAGS
+    property nFromPage : UInt16
+    property nToPage : UInt16
+    property nMinPage : UInt16
+    property nMaxPage : UInt16
+    property nCopies : UInt16
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnPrintHook : Win32cr::UI::Controls::Dialogs::LPPRINTHOOKPROC
+    property lpfnSetupHook : Win32cr::UI::Controls::Dialogs::LPSETUPHOOKPROC
+    property lpPrintTemplateName : Win32cr::Foundation::PWSTR
+    property lpSetupTemplateName : Win32cr::Foundation::PWSTR
+    property hPrintTemplate : LibC::IntPtrT
+    property hSetupTemplate : LibC::IntPtrT
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hDevMode : LibC::IntPtrT, @hDevNames : LibC::IntPtrT, @hDC : Win32cr::Graphics::Gdi::HDC, @flags : Win32cr::UI::Controls::Dialogs::PRINTDLGEX_FLAGS, @nFromPage : UInt16, @nToPage : UInt16, @nMinPage : UInt16, @nMaxPage : UInt16, @nCopies : UInt16, @hInstance : Win32cr::Foundation::HINSTANCE, @lCustData : Win32cr::Foundation::LPARAM, @lpfnPrintHook : Win32cr::UI::Controls::Dialogs::LPPRINTHOOKPROC, @lpfnSetupHook : Win32cr::UI::Controls::Dialogs::LPSETUPHOOKPROC, @lpPrintTemplateName : Win32cr::Foundation::PWSTR, @lpSetupTemplateName : Win32cr::Foundation::PWSTR, @hPrintTemplate : LibC::IntPtrT, @hSetupTemplate : LibC::IntPtrT)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record PRINTPAGERANGE,
-    nFromPage : UInt32,
-    nToPage : UInt32
+  struct PRINTPAGERANGE
+    property nFromPage : UInt32
+    property nToPage : UInt32
+    def initialize(@nFromPage : UInt32, @nToPage : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record PRINTDLGEXA,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hDevMode : LibC::IntPtrT,
-    hDevNames : LibC::IntPtrT,
-    hDC : Win32cr::Graphics::Gdi::HDC,
-    flags : Win32cr::UI::Controls::Dialogs::PRINTDLGEX_FLAGS,
-    flags2 : UInt32,
-    exclusion_flags : UInt32,
-    nPageRanges : UInt32,
-    nMaxPageRanges : UInt32,
-    lpPageRanges : Win32cr::UI::Controls::Dialogs::PRINTPAGERANGE*,
-    nMinPage : UInt32,
-    nMaxPage : UInt32,
-    nCopies : UInt32,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpPrintTemplateName : Win32cr::Foundation::PSTR,
-    lpCallback : Void*,
-    nPropertyPages : UInt32,
-    lphPropertyPages : Win32cr::UI::Controls::HPROPSHEETPAGE*,
-    nStartPage : UInt32,
-    dwResultAction : UInt32
+  struct PRINTDLGEXA
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hDevMode : LibC::IntPtrT
+    property hDevNames : LibC::IntPtrT
+    property hDC : Win32cr::Graphics::Gdi::HDC
+    property flags : Win32cr::UI::Controls::Dialogs::PRINTDLGEX_FLAGS
+    property flags2 : UInt32
+    property exclusion_flags : UInt32
+    property nPageRanges : UInt32
+    property nMaxPageRanges : UInt32
+    property lpPageRanges : Win32cr::UI::Controls::Dialogs::PRINTPAGERANGE*
+    property nMinPage : UInt32
+    property nMaxPage : UInt32
+    property nCopies : UInt32
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpPrintTemplateName : Win32cr::Foundation::PSTR
+    property lpCallback : Void*
+    property nPropertyPages : UInt32
+    property lphPropertyPages : Win32cr::UI::Controls::HPROPSHEETPAGE*
+    property nStartPage : UInt32
+    property dwResultAction : UInt32
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hDevMode : LibC::IntPtrT, @hDevNames : LibC::IntPtrT, @hDC : Win32cr::Graphics::Gdi::HDC, @flags : Win32cr::UI::Controls::Dialogs::PRINTDLGEX_FLAGS, @flags2 : UInt32, @exclusion_flags : UInt32, @nPageRanges : UInt32, @nMaxPageRanges : UInt32, @lpPageRanges : Win32cr::UI::Controls::Dialogs::PRINTPAGERANGE*, @nMinPage : UInt32, @nMaxPage : UInt32, @nCopies : UInt32, @hInstance : Win32cr::Foundation::HINSTANCE, @lpPrintTemplateName : Win32cr::Foundation::PSTR, @lpCallback : Void*, @nPropertyPages : UInt32, @lphPropertyPages : Win32cr::UI::Controls::HPROPSHEETPAGE*, @nStartPage : UInt32, @dwResultAction : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record PRINTDLGEXW,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hDevMode : LibC::IntPtrT,
-    hDevNames : LibC::IntPtrT,
-    hDC : Win32cr::Graphics::Gdi::HDC,
-    flags : Win32cr::UI::Controls::Dialogs::PRINTDLGEX_FLAGS,
-    flags2 : UInt32,
-    exclusion_flags : UInt32,
-    nPageRanges : UInt32,
-    nMaxPageRanges : UInt32,
-    lpPageRanges : Win32cr::UI::Controls::Dialogs::PRINTPAGERANGE*,
-    nMinPage : UInt32,
-    nMaxPage : UInt32,
-    nCopies : UInt32,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpPrintTemplateName : Win32cr::Foundation::PWSTR,
-    lpCallback : Void*,
-    nPropertyPages : UInt32,
-    lphPropertyPages : Win32cr::UI::Controls::HPROPSHEETPAGE*,
-    nStartPage : UInt32,
-    dwResultAction : UInt32
+  struct PRINTDLGEXW
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hDevMode : LibC::IntPtrT
+    property hDevNames : LibC::IntPtrT
+    property hDC : Win32cr::Graphics::Gdi::HDC
+    property flags : Win32cr::UI::Controls::Dialogs::PRINTDLGEX_FLAGS
+    property flags2 : UInt32
+    property exclusion_flags : UInt32
+    property nPageRanges : UInt32
+    property nMaxPageRanges : UInt32
+    property lpPageRanges : Win32cr::UI::Controls::Dialogs::PRINTPAGERANGE*
+    property nMinPage : UInt32
+    property nMaxPage : UInt32
+    property nCopies : UInt32
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpPrintTemplateName : Win32cr::Foundation::PWSTR
+    property lpCallback : Void*
+    property nPropertyPages : UInt32
+    property lphPropertyPages : Win32cr::UI::Controls::HPROPSHEETPAGE*
+    property nStartPage : UInt32
+    property dwResultAction : UInt32
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hDevMode : LibC::IntPtrT, @hDevNames : LibC::IntPtrT, @hDC : Win32cr::Graphics::Gdi::HDC, @flags : Win32cr::UI::Controls::Dialogs::PRINTDLGEX_FLAGS, @flags2 : UInt32, @exclusion_flags : UInt32, @nPageRanges : UInt32, @nMaxPageRanges : UInt32, @lpPageRanges : Win32cr::UI::Controls::Dialogs::PRINTPAGERANGE*, @nMinPage : UInt32, @nMaxPage : UInt32, @nCopies : UInt32, @hInstance : Win32cr::Foundation::HINSTANCE, @lpPrintTemplateName : Win32cr::Foundation::PWSTR, @lpCallback : Void*, @nPropertyPages : UInt32, @lphPropertyPages : Win32cr::UI::Controls::HPROPSHEETPAGE*, @nStartPage : UInt32, @dwResultAction : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record DEVNAMES,
-    wDriverOffset : UInt16,
-    wDeviceOffset : UInt16,
-    wOutputOffset : UInt16,
-    wDefault : UInt16
+  struct DEVNAMES
+    property wDriverOffset : UInt16
+    property wDeviceOffset : UInt16
+    property wOutputOffset : UInt16
+    property wDefault : UInt16
+    def initialize(@wDriverOffset : UInt16, @wDeviceOffset : UInt16, @wOutputOffset : UInt16, @wDefault : UInt16)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record PAGESETUPDLGA,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hDevMode : LibC::IntPtrT,
-    hDevNames : LibC::IntPtrT,
-    flags : Win32cr::UI::Controls::Dialogs::PAGESETUPDLG_FLAGS,
-    ptPaperSize : Win32cr::Foundation::POINT,
-    rtMinMargin : Win32cr::Foundation::RECT,
-    rtMargin : Win32cr::Foundation::RECT,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnPageSetupHook : Win32cr::UI::Controls::Dialogs::LPPAGESETUPHOOK,
-    lpfnPagePaintHook : Win32cr::UI::Controls::Dialogs::LPPAGEPAINTHOOK,
-    lpPageSetupTemplateName : Win32cr::Foundation::PSTR,
-    hPageSetupTemplate : LibC::IntPtrT
+  struct PAGESETUPDLGA
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hDevMode : LibC::IntPtrT
+    property hDevNames : LibC::IntPtrT
+    property flags : Win32cr::UI::Controls::Dialogs::PAGESETUPDLG_FLAGS
+    property ptPaperSize : Win32cr::Foundation::POINT
+    property rtMinMargin : Win32cr::Foundation::RECT
+    property rtMargin : Win32cr::Foundation::RECT
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnPageSetupHook : Win32cr::UI::Controls::Dialogs::LPPAGESETUPHOOK
+    property lpfnPagePaintHook : Win32cr::UI::Controls::Dialogs::LPPAGEPAINTHOOK
+    property lpPageSetupTemplateName : Win32cr::Foundation::PSTR
+    property hPageSetupTemplate : LibC::IntPtrT
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hDevMode : LibC::IntPtrT, @hDevNames : LibC::IntPtrT, @flags : Win32cr::UI::Controls::Dialogs::PAGESETUPDLG_FLAGS, @ptPaperSize : Win32cr::Foundation::POINT, @rtMinMargin : Win32cr::Foundation::RECT, @rtMargin : Win32cr::Foundation::RECT, @hInstance : Win32cr::Foundation::HINSTANCE, @lCustData : Win32cr::Foundation::LPARAM, @lpfnPageSetupHook : Win32cr::UI::Controls::Dialogs::LPPAGESETUPHOOK, @lpfnPagePaintHook : Win32cr::UI::Controls::Dialogs::LPPAGEPAINTHOOK, @lpPageSetupTemplateName : Win32cr::Foundation::PSTR, @hPageSetupTemplate : LibC::IntPtrT)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record PAGESETUPDLGW,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hDevMode : LibC::IntPtrT,
-    hDevNames : LibC::IntPtrT,
-    flags : Win32cr::UI::Controls::Dialogs::PAGESETUPDLG_FLAGS,
-    ptPaperSize : Win32cr::Foundation::POINT,
-    rtMinMargin : Win32cr::Foundation::RECT,
-    rtMargin : Win32cr::Foundation::RECT,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnPageSetupHook : Win32cr::UI::Controls::Dialogs::LPPAGESETUPHOOK,
-    lpfnPagePaintHook : Win32cr::UI::Controls::Dialogs::LPPAGEPAINTHOOK,
-    lpPageSetupTemplateName : Win32cr::Foundation::PWSTR,
-    hPageSetupTemplate : LibC::IntPtrT
+  struct PAGESETUPDLGW
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hDevMode : LibC::IntPtrT
+    property hDevNames : LibC::IntPtrT
+    property flags : Win32cr::UI::Controls::Dialogs::PAGESETUPDLG_FLAGS
+    property ptPaperSize : Win32cr::Foundation::POINT
+    property rtMinMargin : Win32cr::Foundation::RECT
+    property rtMargin : Win32cr::Foundation::RECT
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnPageSetupHook : Win32cr::UI::Controls::Dialogs::LPPAGESETUPHOOK
+    property lpfnPagePaintHook : Win32cr::UI::Controls::Dialogs::LPPAGEPAINTHOOK
+    property lpPageSetupTemplateName : Win32cr::Foundation::PWSTR
+    property hPageSetupTemplate : LibC::IntPtrT
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hDevMode : LibC::IntPtrT, @hDevNames : LibC::IntPtrT, @flags : Win32cr::UI::Controls::Dialogs::PAGESETUPDLG_FLAGS, @ptPaperSize : Win32cr::Foundation::POINT, @rtMinMargin : Win32cr::Foundation::RECT, @rtMargin : Win32cr::Foundation::RECT, @hInstance : Win32cr::Foundation::HINSTANCE, @lCustData : Win32cr::Foundation::LPARAM, @lpfnPageSetupHook : Win32cr::UI::Controls::Dialogs::LPPAGESETUPHOOK, @lpfnPagePaintHook : Win32cr::UI::Controls::Dialogs::LPPAGEPAINTHOOK, @lpPageSetupTemplateName : Win32cr::Foundation::PWSTR, @hPageSetupTemplate : LibC::IntPtrT)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record OPENFILENAME_NT4A,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpstrFilter : Win32cr::Foundation::PSTR,
-    lpstrCustomFilter : Win32cr::Foundation::PSTR,
-    nMaxCustFilter : UInt32,
-    nFilterIndex : UInt32,
-    lpstrFile : Win32cr::Foundation::PSTR,
-    nMaxFile : UInt32,
-    lpstrFileTitle : Win32cr::Foundation::PSTR,
-    nMaxFileTitle : UInt32,
-    lpstrInitialDir : Win32cr::Foundation::PSTR,
-    lpstrTitle : Win32cr::Foundation::PSTR,
-    flags : UInt32,
-    nFileOffset : UInt16,
-    nFileExtension : UInt16,
-    lpstrDefExt : Win32cr::Foundation::PSTR,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnHook : Win32cr::UI::Controls::Dialogs::LPOFNHOOKPROC,
-    lpTemplateName : Win32cr::Foundation::PSTR
+  struct OPENFILENAME_NT4A
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpstrFilter : Win32cr::Foundation::PSTR
+    property lpstrCustomFilter : Win32cr::Foundation::PSTR
+    property nMaxCustFilter : UInt32
+    property nFilterIndex : UInt32
+    property lpstrFile : Win32cr::Foundation::PSTR
+    property nMaxFile : UInt32
+    property lpstrFileTitle : Win32cr::Foundation::PSTR
+    property nMaxFileTitle : UInt32
+    property lpstrInitialDir : Win32cr::Foundation::PSTR
+    property lpstrTitle : Win32cr::Foundation::PSTR
+    property flags : UInt32
+    property nFileOffset : UInt16
+    property nFileExtension : UInt16
+    property lpstrDefExt : Win32cr::Foundation::PSTR
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnHook : Win32cr::UI::Controls::Dialogs::LPOFNHOOKPROC
+    property lpTemplateName : Win32cr::Foundation::PSTR
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hInstance : Win32cr::Foundation::HINSTANCE, @lpstrFilter : Win32cr::Foundation::PSTR, @lpstrCustomFilter : Win32cr::Foundation::PSTR, @nMaxCustFilter : UInt32, @nFilterIndex : UInt32, @lpstrFile : Win32cr::Foundation::PSTR, @nMaxFile : UInt32, @lpstrFileTitle : Win32cr::Foundation::PSTR, @nMaxFileTitle : UInt32, @lpstrInitialDir : Win32cr::Foundation::PSTR, @lpstrTitle : Win32cr::Foundation::PSTR, @flags : UInt32, @nFileOffset : UInt16, @nFileExtension : UInt16, @lpstrDefExt : Win32cr::Foundation::PSTR, @lCustData : Win32cr::Foundation::LPARAM, @lpfnHook : Win32cr::UI::Controls::Dialogs::LPOFNHOOKPROC, @lpTemplateName : Win32cr::Foundation::PSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record OPENFILENAME_NT4W,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpstrFilter : Win32cr::Foundation::PWSTR,
-    lpstrCustomFilter : Win32cr::Foundation::PWSTR,
-    nMaxCustFilter : UInt32,
-    nFilterIndex : UInt32,
-    lpstrFile : Win32cr::Foundation::PWSTR,
-    nMaxFile : UInt32,
-    lpstrFileTitle : Win32cr::Foundation::PWSTR,
-    nMaxFileTitle : UInt32,
-    lpstrInitialDir : Win32cr::Foundation::PWSTR,
-    lpstrTitle : Win32cr::Foundation::PWSTR,
-    flags : UInt32,
-    nFileOffset : UInt16,
-    nFileExtension : UInt16,
-    lpstrDefExt : Win32cr::Foundation::PWSTR,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnHook : Win32cr::UI::Controls::Dialogs::LPOFNHOOKPROC,
-    lpTemplateName : Win32cr::Foundation::PWSTR
+  struct OPENFILENAME_NT4W
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpstrFilter : Win32cr::Foundation::PWSTR
+    property lpstrCustomFilter : Win32cr::Foundation::PWSTR
+    property nMaxCustFilter : UInt32
+    property nFilterIndex : UInt32
+    property lpstrFile : Win32cr::Foundation::PWSTR
+    property nMaxFile : UInt32
+    property lpstrFileTitle : Win32cr::Foundation::PWSTR
+    property nMaxFileTitle : UInt32
+    property lpstrInitialDir : Win32cr::Foundation::PWSTR
+    property lpstrTitle : Win32cr::Foundation::PWSTR
+    property flags : UInt32
+    property nFileOffset : UInt16
+    property nFileExtension : UInt16
+    property lpstrDefExt : Win32cr::Foundation::PWSTR
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnHook : Win32cr::UI::Controls::Dialogs::LPOFNHOOKPROC
+    property lpTemplateName : Win32cr::Foundation::PWSTR
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hInstance : Win32cr::Foundation::HINSTANCE, @lpstrFilter : Win32cr::Foundation::PWSTR, @lpstrCustomFilter : Win32cr::Foundation::PWSTR, @nMaxCustFilter : UInt32, @nFilterIndex : UInt32, @lpstrFile : Win32cr::Foundation::PWSTR, @nMaxFile : UInt32, @lpstrFileTitle : Win32cr::Foundation::PWSTR, @nMaxFileTitle : UInt32, @lpstrInitialDir : Win32cr::Foundation::PWSTR, @lpstrTitle : Win32cr::Foundation::PWSTR, @flags : UInt32, @nFileOffset : UInt16, @nFileExtension : UInt16, @lpstrDefExt : Win32cr::Foundation::PWSTR, @lCustData : Win32cr::Foundation::LPARAM, @lpfnHook : Win32cr::UI::Controls::Dialogs::LPOFNHOOKPROC, @lpTemplateName : Win32cr::Foundation::PWSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record OPENFILENAMEA,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpstrFilter : Win32cr::Foundation::PSTR,
-    lpstrCustomFilter : Win32cr::Foundation::PSTR,
-    nMaxCustFilter : UInt32,
-    nFilterIndex : UInt32,
-    lpstrFile : Win32cr::Foundation::PSTR,
-    nMaxFile : UInt32,
-    lpstrFileTitle : Win32cr::Foundation::PSTR,
-    nMaxFileTitle : UInt32,
-    lpstrInitialDir : Win32cr::Foundation::PSTR,
-    lpstrTitle : Win32cr::Foundation::PSTR,
-    flags : Win32cr::UI::Controls::Dialogs::OPEN_FILENAME_FLAGS,
-    nFileOffset : UInt16,
-    nFileExtension : UInt16,
-    lpstrDefExt : Win32cr::Foundation::PSTR,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnHook : Win32cr::UI::Controls::Dialogs::LPOFNHOOKPROC,
-    lpTemplateName : Win32cr::Foundation::PSTR,
-    pvReserved : Void*,
-    dwReserved : UInt32,
-    flags_ex : Win32cr::UI::Controls::Dialogs::OPEN_FILENAME_FLAGS_EX
+  struct OPENFILENAMEA
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpstrFilter : Win32cr::Foundation::PSTR
+    property lpstrCustomFilter : Win32cr::Foundation::PSTR
+    property nMaxCustFilter : UInt32
+    property nFilterIndex : UInt32
+    property lpstrFile : Win32cr::Foundation::PSTR
+    property nMaxFile : UInt32
+    property lpstrFileTitle : Win32cr::Foundation::PSTR
+    property nMaxFileTitle : UInt32
+    property lpstrInitialDir : Win32cr::Foundation::PSTR
+    property lpstrTitle : Win32cr::Foundation::PSTR
+    property flags : Win32cr::UI::Controls::Dialogs::OPEN_FILENAME_FLAGS
+    property nFileOffset : UInt16
+    property nFileExtension : UInt16
+    property lpstrDefExt : Win32cr::Foundation::PSTR
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnHook : Win32cr::UI::Controls::Dialogs::LPOFNHOOKPROC
+    property lpTemplateName : Win32cr::Foundation::PSTR
+    property pvReserved : Void*
+    property dwReserved : UInt32
+    property flags_ex : Win32cr::UI::Controls::Dialogs::OPEN_FILENAME_FLAGS_EX
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hInstance : Win32cr::Foundation::HINSTANCE, @lpstrFilter : Win32cr::Foundation::PSTR, @lpstrCustomFilter : Win32cr::Foundation::PSTR, @nMaxCustFilter : UInt32, @nFilterIndex : UInt32, @lpstrFile : Win32cr::Foundation::PSTR, @nMaxFile : UInt32, @lpstrFileTitle : Win32cr::Foundation::PSTR, @nMaxFileTitle : UInt32, @lpstrInitialDir : Win32cr::Foundation::PSTR, @lpstrTitle : Win32cr::Foundation::PSTR, @flags : Win32cr::UI::Controls::Dialogs::OPEN_FILENAME_FLAGS, @nFileOffset : UInt16, @nFileExtension : UInt16, @lpstrDefExt : Win32cr::Foundation::PSTR, @lCustData : Win32cr::Foundation::LPARAM, @lpfnHook : Win32cr::UI::Controls::Dialogs::LPOFNHOOKPROC, @lpTemplateName : Win32cr::Foundation::PSTR, @pvReserved : Void*, @dwReserved : UInt32, @flags_ex : Win32cr::UI::Controls::Dialogs::OPEN_FILENAME_FLAGS_EX)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record OPENFILENAMEW,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpstrFilter : Win32cr::Foundation::PWSTR,
-    lpstrCustomFilter : Win32cr::Foundation::PWSTR,
-    nMaxCustFilter : UInt32,
-    nFilterIndex : UInt32,
-    lpstrFile : Win32cr::Foundation::PWSTR,
-    nMaxFile : UInt32,
-    lpstrFileTitle : Win32cr::Foundation::PWSTR,
-    nMaxFileTitle : UInt32,
-    lpstrInitialDir : Win32cr::Foundation::PWSTR,
-    lpstrTitle : Win32cr::Foundation::PWSTR,
-    flags : Win32cr::UI::Controls::Dialogs::OPEN_FILENAME_FLAGS,
-    nFileOffset : UInt16,
-    nFileExtension : UInt16,
-    lpstrDefExt : Win32cr::Foundation::PWSTR,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnHook : Win32cr::UI::Controls::Dialogs::LPOFNHOOKPROC,
-    lpTemplateName : Win32cr::Foundation::PWSTR,
-    pvReserved : Void*,
-    dwReserved : UInt32,
-    flags_ex : Win32cr::UI::Controls::Dialogs::OPEN_FILENAME_FLAGS_EX
+  struct OPENFILENAMEW
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpstrFilter : Win32cr::Foundation::PWSTR
+    property lpstrCustomFilter : Win32cr::Foundation::PWSTR
+    property nMaxCustFilter : UInt32
+    property nFilterIndex : UInt32
+    property lpstrFile : Win32cr::Foundation::PWSTR
+    property nMaxFile : UInt32
+    property lpstrFileTitle : Win32cr::Foundation::PWSTR
+    property nMaxFileTitle : UInt32
+    property lpstrInitialDir : Win32cr::Foundation::PWSTR
+    property lpstrTitle : Win32cr::Foundation::PWSTR
+    property flags : Win32cr::UI::Controls::Dialogs::OPEN_FILENAME_FLAGS
+    property nFileOffset : UInt16
+    property nFileExtension : UInt16
+    property lpstrDefExt : Win32cr::Foundation::PWSTR
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnHook : Win32cr::UI::Controls::Dialogs::LPOFNHOOKPROC
+    property lpTemplateName : Win32cr::Foundation::PWSTR
+    property pvReserved : Void*
+    property dwReserved : UInt32
+    property flags_ex : Win32cr::UI::Controls::Dialogs::OPEN_FILENAME_FLAGS_EX
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hInstance : Win32cr::Foundation::HINSTANCE, @lpstrFilter : Win32cr::Foundation::PWSTR, @lpstrCustomFilter : Win32cr::Foundation::PWSTR, @nMaxCustFilter : UInt32, @nFilterIndex : UInt32, @lpstrFile : Win32cr::Foundation::PWSTR, @nMaxFile : UInt32, @lpstrFileTitle : Win32cr::Foundation::PWSTR, @nMaxFileTitle : UInt32, @lpstrInitialDir : Win32cr::Foundation::PWSTR, @lpstrTitle : Win32cr::Foundation::PWSTR, @flags : Win32cr::UI::Controls::Dialogs::OPEN_FILENAME_FLAGS, @nFileOffset : UInt16, @nFileExtension : UInt16, @lpstrDefExt : Win32cr::Foundation::PWSTR, @lCustData : Win32cr::Foundation::LPARAM, @lpfnHook : Win32cr::UI::Controls::Dialogs::LPOFNHOOKPROC, @lpTemplateName : Win32cr::Foundation::PWSTR, @pvReserved : Void*, @dwReserved : UInt32, @flags_ex : Win32cr::UI::Controls::Dialogs::OPEN_FILENAME_FLAGS_EX)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record OFNOTIFYA,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEA*,
-    pszFile : Win32cr::Foundation::PSTR
+  struct OFNOTIFYA
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEA*
+    property pszFile : Win32cr::Foundation::PSTR
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEA*, @pszFile : Win32cr::Foundation::PSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record OFNOTIFYW,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEW*,
-    pszFile : Win32cr::Foundation::PWSTR
+  struct OFNOTIFYW
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEW*
+    property pszFile : Win32cr::Foundation::PWSTR
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEW*, @pszFile : Win32cr::Foundation::PWSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record OFNOTIFYEXA,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEA*,
-    psf : Void*,
-    pidl : Void*
+  struct OFNOTIFYEXA
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEA*
+    property psf : Void*
+    property pidl : Void*
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEA*, @psf : Void*, @pidl : Void*)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record OFNOTIFYEXW,
-    hdr : Win32cr::UI::Controls::NMHDR,
-    lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEW*,
-    psf : Void*,
-    pidl : Void*
+  struct OFNOTIFYEXW
+    property hdr : Win32cr::UI::Controls::NMHDR
+    property lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEW*
+    property psf : Void*
+    property pidl : Void*
+    def initialize(@hdr : Win32cr::UI::Controls::NMHDR, @lpOFN : Win32cr::UI::Controls::Dialogs::OPENFILENAMEW*, @psf : Void*, @pidl : Void*)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record CHOOSECOLORA,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hInstance : Win32cr::Foundation::HWND,
-    rgbResult : UInt32,
-    lpCustColors : UInt32*,
-    flags : UInt32,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnHook : Win32cr::UI::Controls::Dialogs::LPCCHOOKPROC,
-    lpTemplateName : Win32cr::Foundation::PSTR
+  struct CHOOSECOLORA
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hInstance : Win32cr::Foundation::HWND
+    property rgbResult : UInt32
+    property lpCustColors : UInt32*
+    property flags : UInt32
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnHook : Win32cr::UI::Controls::Dialogs::LPCCHOOKPROC
+    property lpTemplateName : Win32cr::Foundation::PSTR
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hInstance : Win32cr::Foundation::HWND, @rgbResult : UInt32, @lpCustColors : UInt32*, @flags : UInt32, @lCustData : Win32cr::Foundation::LPARAM, @lpfnHook : Win32cr::UI::Controls::Dialogs::LPCCHOOKPROC, @lpTemplateName : Win32cr::Foundation::PSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record CHOOSECOLORW,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hInstance : Win32cr::Foundation::HWND,
-    rgbResult : UInt32,
-    lpCustColors : UInt32*,
-    flags : UInt32,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnHook : Win32cr::UI::Controls::Dialogs::LPCCHOOKPROC,
-    lpTemplateName : Win32cr::Foundation::PWSTR
+  struct CHOOSECOLORW
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hInstance : Win32cr::Foundation::HWND
+    property rgbResult : UInt32
+    property lpCustColors : UInt32*
+    property flags : UInt32
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnHook : Win32cr::UI::Controls::Dialogs::LPCCHOOKPROC
+    property lpTemplateName : Win32cr::Foundation::PWSTR
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hInstance : Win32cr::Foundation::HWND, @rgbResult : UInt32, @lpCustColors : UInt32*, @flags : UInt32, @lCustData : Win32cr::Foundation::LPARAM, @lpfnHook : Win32cr::UI::Controls::Dialogs::LPCCHOOKPROC, @lpTemplateName : Win32cr::Foundation::PWSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record FINDREPLACEA,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    flags : Win32cr::UI::Controls::Dialogs::FINDREPLACE_FLAGS,
-    lpstrFindWhat : Win32cr::Foundation::PSTR,
-    lpstrReplaceWith : Win32cr::Foundation::PSTR,
-    wFindWhatLen : UInt16,
-    wReplaceWithLen : UInt16,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnHook : Win32cr::UI::Controls::Dialogs::LPFRHOOKPROC,
-    lpTemplateName : Win32cr::Foundation::PSTR
+  struct FINDREPLACEA
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property flags : Win32cr::UI::Controls::Dialogs::FINDREPLACE_FLAGS
+    property lpstrFindWhat : Win32cr::Foundation::PSTR
+    property lpstrReplaceWith : Win32cr::Foundation::PSTR
+    property wFindWhatLen : UInt16
+    property wReplaceWithLen : UInt16
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnHook : Win32cr::UI::Controls::Dialogs::LPFRHOOKPROC
+    property lpTemplateName : Win32cr::Foundation::PSTR
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hInstance : Win32cr::Foundation::HINSTANCE, @flags : Win32cr::UI::Controls::Dialogs::FINDREPLACE_FLAGS, @lpstrFindWhat : Win32cr::Foundation::PSTR, @lpstrReplaceWith : Win32cr::Foundation::PSTR, @wFindWhatLen : UInt16, @wReplaceWithLen : UInt16, @lCustData : Win32cr::Foundation::LPARAM, @lpfnHook : Win32cr::UI::Controls::Dialogs::LPFRHOOKPROC, @lpTemplateName : Win32cr::Foundation::PSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record FINDREPLACEW,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    flags : Win32cr::UI::Controls::Dialogs::FINDREPLACE_FLAGS,
-    lpstrFindWhat : Win32cr::Foundation::PWSTR,
-    lpstrReplaceWith : Win32cr::Foundation::PWSTR,
-    wFindWhatLen : UInt16,
-    wReplaceWithLen : UInt16,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnHook : Win32cr::UI::Controls::Dialogs::LPFRHOOKPROC,
-    lpTemplateName : Win32cr::Foundation::PWSTR
+  struct FINDREPLACEW
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property flags : Win32cr::UI::Controls::Dialogs::FINDREPLACE_FLAGS
+    property lpstrFindWhat : Win32cr::Foundation::PWSTR
+    property lpstrReplaceWith : Win32cr::Foundation::PWSTR
+    property wFindWhatLen : UInt16
+    property wReplaceWithLen : UInt16
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnHook : Win32cr::UI::Controls::Dialogs::LPFRHOOKPROC
+    property lpTemplateName : Win32cr::Foundation::PWSTR
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hInstance : Win32cr::Foundation::HINSTANCE, @flags : Win32cr::UI::Controls::Dialogs::FINDREPLACE_FLAGS, @lpstrFindWhat : Win32cr::Foundation::PWSTR, @lpstrReplaceWith : Win32cr::Foundation::PWSTR, @wFindWhatLen : UInt16, @wReplaceWithLen : UInt16, @lCustData : Win32cr::Foundation::LPARAM, @lpfnHook : Win32cr::UI::Controls::Dialogs::LPFRHOOKPROC, @lpTemplateName : Win32cr::Foundation::PWSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record CHOOSEFONTA,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hDC : Win32cr::Graphics::Gdi::HDC,
-    lpLogFont : Win32cr::Graphics::Gdi::LOGFONTA*,
-    iPointSize : Int32,
-    flags : Win32cr::UI::Controls::Dialogs::CHOOSEFONT_FLAGS,
-    rgbColors : UInt32,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnHook : Win32cr::UI::Controls::Dialogs::LPCFHOOKPROC,
-    lpTemplateName : Win32cr::Foundation::PSTR,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpszStyle : Win32cr::Foundation::PSTR,
-    nFontType : Win32cr::UI::Controls::Dialogs::CHOOSEFONT_FONT_TYPE,
-    ___missing_alignment__ : UInt16,
-    nSizeMin : Int32,
-    nSizeMax : Int32
+  struct CHOOSEFONTA
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hDC : Win32cr::Graphics::Gdi::HDC
+    property lpLogFont : Win32cr::Graphics::Gdi::LOGFONTA*
+    property iPointSize : Int32
+    property flags : Win32cr::UI::Controls::Dialogs::CHOOSEFONT_FLAGS
+    property rgbColors : UInt32
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnHook : Win32cr::UI::Controls::Dialogs::LPCFHOOKPROC
+    property lpTemplateName : Win32cr::Foundation::PSTR
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpszStyle : Win32cr::Foundation::PSTR
+    property nFontType : Win32cr::UI::Controls::Dialogs::CHOOSEFONT_FONT_TYPE
+    property ___missing_alignment__ : UInt16
+    property nSizeMin : Int32
+    property nSizeMax : Int32
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hDC : Win32cr::Graphics::Gdi::HDC, @lpLogFont : Win32cr::Graphics::Gdi::LOGFONTA*, @iPointSize : Int32, @flags : Win32cr::UI::Controls::Dialogs::CHOOSEFONT_FLAGS, @rgbColors : UInt32, @lCustData : Win32cr::Foundation::LPARAM, @lpfnHook : Win32cr::UI::Controls::Dialogs::LPCFHOOKPROC, @lpTemplateName : Win32cr::Foundation::PSTR, @hInstance : Win32cr::Foundation::HINSTANCE, @lpszStyle : Win32cr::Foundation::PSTR, @nFontType : Win32cr::UI::Controls::Dialogs::CHOOSEFONT_FONT_TYPE, @___missing_alignment__ : UInt16, @nSizeMin : Int32, @nSizeMax : Int32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record CHOOSEFONTW,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hDC : Win32cr::Graphics::Gdi::HDC,
-    lpLogFont : Win32cr::Graphics::Gdi::LOGFONTW*,
-    iPointSize : Int32,
-    flags : Win32cr::UI::Controls::Dialogs::CHOOSEFONT_FLAGS,
-    rgbColors : UInt32,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnHook : Win32cr::UI::Controls::Dialogs::LPCFHOOKPROC,
-    lpTemplateName : Win32cr::Foundation::PWSTR,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpszStyle : Win32cr::Foundation::PWSTR,
-    nFontType : Win32cr::UI::Controls::Dialogs::CHOOSEFONT_FONT_TYPE,
-    ___missing_alignment__ : UInt16,
-    nSizeMin : Int32,
-    nSizeMax : Int32
+  struct CHOOSEFONTW
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hDC : Win32cr::Graphics::Gdi::HDC
+    property lpLogFont : Win32cr::Graphics::Gdi::LOGFONTW*
+    property iPointSize : Int32
+    property flags : Win32cr::UI::Controls::Dialogs::CHOOSEFONT_FLAGS
+    property rgbColors : UInt32
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnHook : Win32cr::UI::Controls::Dialogs::LPCFHOOKPROC
+    property lpTemplateName : Win32cr::Foundation::PWSTR
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpszStyle : Win32cr::Foundation::PWSTR
+    property nFontType : Win32cr::UI::Controls::Dialogs::CHOOSEFONT_FONT_TYPE
+    property ___missing_alignment__ : UInt16
+    property nSizeMin : Int32
+    property nSizeMax : Int32
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hDC : Win32cr::Graphics::Gdi::HDC, @lpLogFont : Win32cr::Graphics::Gdi::LOGFONTW*, @iPointSize : Int32, @flags : Win32cr::UI::Controls::Dialogs::CHOOSEFONT_FLAGS, @rgbColors : UInt32, @lCustData : Win32cr::Foundation::LPARAM, @lpfnHook : Win32cr::UI::Controls::Dialogs::LPCFHOOKPROC, @lpTemplateName : Win32cr::Foundation::PWSTR, @hInstance : Win32cr::Foundation::HINSTANCE, @lpszStyle : Win32cr::Foundation::PWSTR, @nFontType : Win32cr::UI::Controls::Dialogs::CHOOSEFONT_FONT_TYPE, @___missing_alignment__ : UInt16, @nSizeMin : Int32, @nSizeMax : Int32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record PRINTDLGA,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hDevMode : LibC::IntPtrT,
-    hDevNames : LibC::IntPtrT,
-    hDC : Win32cr::Graphics::Gdi::HDC,
-    flags : Win32cr::UI::Controls::Dialogs::PRINTDLGEX_FLAGS,
-    nFromPage : UInt16,
-    nToPage : UInt16,
-    nMinPage : UInt16,
-    nMaxPage : UInt16,
-    nCopies : UInt16,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnPrintHook : Win32cr::UI::Controls::Dialogs::LPPRINTHOOKPROC,
-    lpfnSetupHook : Win32cr::UI::Controls::Dialogs::LPSETUPHOOKPROC,
-    lpPrintTemplateName : Win32cr::Foundation::PSTR,
-    lpSetupTemplateName : Win32cr::Foundation::PSTR,
-    hPrintTemplate : LibC::IntPtrT,
-    hSetupTemplate : LibC::IntPtrT
+  struct PRINTDLGA
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hDevMode : LibC::IntPtrT
+    property hDevNames : LibC::IntPtrT
+    property hDC : Win32cr::Graphics::Gdi::HDC
+    property flags : Win32cr::UI::Controls::Dialogs::PRINTDLGEX_FLAGS
+    property nFromPage : UInt16
+    property nToPage : UInt16
+    property nMinPage : UInt16
+    property nMaxPage : UInt16
+    property nCopies : UInt16
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnPrintHook : Win32cr::UI::Controls::Dialogs::LPPRINTHOOKPROC
+    property lpfnSetupHook : Win32cr::UI::Controls::Dialogs::LPSETUPHOOKPROC
+    property lpPrintTemplateName : Win32cr::Foundation::PSTR
+    property lpSetupTemplateName : Win32cr::Foundation::PSTR
+    property hPrintTemplate : LibC::IntPtrT
+    property hSetupTemplate : LibC::IntPtrT
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hDevMode : LibC::IntPtrT, @hDevNames : LibC::IntPtrT, @hDC : Win32cr::Graphics::Gdi::HDC, @flags : Win32cr::UI::Controls::Dialogs::PRINTDLGEX_FLAGS, @nFromPage : UInt16, @nToPage : UInt16, @nMinPage : UInt16, @nMaxPage : UInt16, @nCopies : UInt16, @hInstance : Win32cr::Foundation::HINSTANCE, @lCustData : Win32cr::Foundation::LPARAM, @lpfnPrintHook : Win32cr::UI::Controls::Dialogs::LPPRINTHOOKPROC, @lpfnSetupHook : Win32cr::UI::Controls::Dialogs::LPSETUPHOOKPROC, @lpPrintTemplateName : Win32cr::Foundation::PSTR, @lpSetupTemplateName : Win32cr::Foundation::PSTR, @hPrintTemplate : LibC::IntPtrT, @hSetupTemplate : LibC::IntPtrT)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record PRINTDLGW,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hDevMode : LibC::IntPtrT,
-    hDevNames : LibC::IntPtrT,
-    hDC : Win32cr::Graphics::Gdi::HDC,
-    flags : Win32cr::UI::Controls::Dialogs::PRINTDLGEX_FLAGS,
-    nFromPage : UInt16,
-    nToPage : UInt16,
-    nMinPage : UInt16,
-    nMaxPage : UInt16,
-    nCopies : UInt16,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnPrintHook : Win32cr::UI::Controls::Dialogs::LPPRINTHOOKPROC,
-    lpfnSetupHook : Win32cr::UI::Controls::Dialogs::LPSETUPHOOKPROC,
-    lpPrintTemplateName : Win32cr::Foundation::PWSTR,
-    lpSetupTemplateName : Win32cr::Foundation::PWSTR,
-    hPrintTemplate : LibC::IntPtrT,
-    hSetupTemplate : LibC::IntPtrT
+  struct PRINTDLGW
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hDevMode : LibC::IntPtrT
+    property hDevNames : LibC::IntPtrT
+    property hDC : Win32cr::Graphics::Gdi::HDC
+    property flags : Win32cr::UI::Controls::Dialogs::PRINTDLGEX_FLAGS
+    property nFromPage : UInt16
+    property nToPage : UInt16
+    property nMinPage : UInt16
+    property nMaxPage : UInt16
+    property nCopies : UInt16
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnPrintHook : Win32cr::UI::Controls::Dialogs::LPPRINTHOOKPROC
+    property lpfnSetupHook : Win32cr::UI::Controls::Dialogs::LPSETUPHOOKPROC
+    property lpPrintTemplateName : Win32cr::Foundation::PWSTR
+    property lpSetupTemplateName : Win32cr::Foundation::PWSTR
+    property hPrintTemplate : LibC::IntPtrT
+    property hSetupTemplate : LibC::IntPtrT
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hDevMode : LibC::IntPtrT, @hDevNames : LibC::IntPtrT, @hDC : Win32cr::Graphics::Gdi::HDC, @flags : Win32cr::UI::Controls::Dialogs::PRINTDLGEX_FLAGS, @nFromPage : UInt16, @nToPage : UInt16, @nMinPage : UInt16, @nMaxPage : UInt16, @nCopies : UInt16, @hInstance : Win32cr::Foundation::HINSTANCE, @lCustData : Win32cr::Foundation::LPARAM, @lpfnPrintHook : Win32cr::UI::Controls::Dialogs::LPPRINTHOOKPROC, @lpfnSetupHook : Win32cr::UI::Controls::Dialogs::LPSETUPHOOKPROC, @lpPrintTemplateName : Win32cr::Foundation::PWSTR, @lpSetupTemplateName : Win32cr::Foundation::PWSTR, @hPrintTemplate : LibC::IntPtrT, @hSetupTemplate : LibC::IntPtrT)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record PRINTPAGERANGE,
-    nFromPage : UInt32,
-    nToPage : UInt32
+  struct PRINTPAGERANGE
+    property nFromPage : UInt32
+    property nToPage : UInt32
+    def initialize(@nFromPage : UInt32, @nToPage : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record PRINTDLGEXA,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hDevMode : LibC::IntPtrT,
-    hDevNames : LibC::IntPtrT,
-    hDC : Win32cr::Graphics::Gdi::HDC,
-    flags : Win32cr::UI::Controls::Dialogs::PRINTDLGEX_FLAGS,
-    flags2 : UInt32,
-    exclusion_flags : UInt32,
-    nPageRanges : UInt32,
-    nMaxPageRanges : UInt32,
-    lpPageRanges : Win32cr::UI::Controls::Dialogs::PRINTPAGERANGE*,
-    nMinPage : UInt32,
-    nMaxPage : UInt32,
-    nCopies : UInt32,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpPrintTemplateName : Win32cr::Foundation::PSTR,
-    lpCallback : Void*,
-    nPropertyPages : UInt32,
-    lphPropertyPages : Win32cr::UI::Controls::HPROPSHEETPAGE*,
-    nStartPage : UInt32,
-    dwResultAction : UInt32
+  struct PRINTDLGEXA
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hDevMode : LibC::IntPtrT
+    property hDevNames : LibC::IntPtrT
+    property hDC : Win32cr::Graphics::Gdi::HDC
+    property flags : Win32cr::UI::Controls::Dialogs::PRINTDLGEX_FLAGS
+    property flags2 : UInt32
+    property exclusion_flags : UInt32
+    property nPageRanges : UInt32
+    property nMaxPageRanges : UInt32
+    property lpPageRanges : Win32cr::UI::Controls::Dialogs::PRINTPAGERANGE*
+    property nMinPage : UInt32
+    property nMaxPage : UInt32
+    property nCopies : UInt32
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpPrintTemplateName : Win32cr::Foundation::PSTR
+    property lpCallback : Void*
+    property nPropertyPages : UInt32
+    property lphPropertyPages : Win32cr::UI::Controls::HPROPSHEETPAGE*
+    property nStartPage : UInt32
+    property dwResultAction : UInt32
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hDevMode : LibC::IntPtrT, @hDevNames : LibC::IntPtrT, @hDC : Win32cr::Graphics::Gdi::HDC, @flags : Win32cr::UI::Controls::Dialogs::PRINTDLGEX_FLAGS, @flags2 : UInt32, @exclusion_flags : UInt32, @nPageRanges : UInt32, @nMaxPageRanges : UInt32, @lpPageRanges : Win32cr::UI::Controls::Dialogs::PRINTPAGERANGE*, @nMinPage : UInt32, @nMaxPage : UInt32, @nCopies : UInt32, @hInstance : Win32cr::Foundation::HINSTANCE, @lpPrintTemplateName : Win32cr::Foundation::PSTR, @lpCallback : Void*, @nPropertyPages : UInt32, @lphPropertyPages : Win32cr::UI::Controls::HPROPSHEETPAGE*, @nStartPage : UInt32, @dwResultAction : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record PRINTDLGEXW,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hDevMode : LibC::IntPtrT,
-    hDevNames : LibC::IntPtrT,
-    hDC : Win32cr::Graphics::Gdi::HDC,
-    flags : Win32cr::UI::Controls::Dialogs::PRINTDLGEX_FLAGS,
-    flags2 : UInt32,
-    exclusion_flags : UInt32,
-    nPageRanges : UInt32,
-    nMaxPageRanges : UInt32,
-    lpPageRanges : Win32cr::UI::Controls::Dialogs::PRINTPAGERANGE*,
-    nMinPage : UInt32,
-    nMaxPage : UInt32,
-    nCopies : UInt32,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lpPrintTemplateName : Win32cr::Foundation::PWSTR,
-    lpCallback : Void*,
-    nPropertyPages : UInt32,
-    lphPropertyPages : Win32cr::UI::Controls::HPROPSHEETPAGE*,
-    nStartPage : UInt32,
-    dwResultAction : UInt32
+  struct PRINTDLGEXW
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hDevMode : LibC::IntPtrT
+    property hDevNames : LibC::IntPtrT
+    property hDC : Win32cr::Graphics::Gdi::HDC
+    property flags : Win32cr::UI::Controls::Dialogs::PRINTDLGEX_FLAGS
+    property flags2 : UInt32
+    property exclusion_flags : UInt32
+    property nPageRanges : UInt32
+    property nMaxPageRanges : UInt32
+    property lpPageRanges : Win32cr::UI::Controls::Dialogs::PRINTPAGERANGE*
+    property nMinPage : UInt32
+    property nMaxPage : UInt32
+    property nCopies : UInt32
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lpPrintTemplateName : Win32cr::Foundation::PWSTR
+    property lpCallback : Void*
+    property nPropertyPages : UInt32
+    property lphPropertyPages : Win32cr::UI::Controls::HPROPSHEETPAGE*
+    property nStartPage : UInt32
+    property dwResultAction : UInt32
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hDevMode : LibC::IntPtrT, @hDevNames : LibC::IntPtrT, @hDC : Win32cr::Graphics::Gdi::HDC, @flags : Win32cr::UI::Controls::Dialogs::PRINTDLGEX_FLAGS, @flags2 : UInt32, @exclusion_flags : UInt32, @nPageRanges : UInt32, @nMaxPageRanges : UInt32, @lpPageRanges : Win32cr::UI::Controls::Dialogs::PRINTPAGERANGE*, @nMinPage : UInt32, @nMaxPage : UInt32, @nCopies : UInt32, @hInstance : Win32cr::Foundation::HINSTANCE, @lpPrintTemplateName : Win32cr::Foundation::PWSTR, @lpCallback : Void*, @nPropertyPages : UInt32, @lphPropertyPages : Win32cr::UI::Controls::HPROPSHEETPAGE*, @nStartPage : UInt32, @dwResultAction : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record DEVNAMES,
-    wDriverOffset : UInt16,
-    wDeviceOffset : UInt16,
-    wOutputOffset : UInt16,
-    wDefault : UInt16
+  struct DEVNAMES
+    property wDriverOffset : UInt16
+    property wDeviceOffset : UInt16
+    property wOutputOffset : UInt16
+    property wDefault : UInt16
+    def initialize(@wDriverOffset : UInt16, @wDeviceOffset : UInt16, @wOutputOffset : UInt16, @wDefault : UInt16)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record PAGESETUPDLGA,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hDevMode : LibC::IntPtrT,
-    hDevNames : LibC::IntPtrT,
-    flags : Win32cr::UI::Controls::Dialogs::PAGESETUPDLG_FLAGS,
-    ptPaperSize : Win32cr::Foundation::POINT,
-    rtMinMargin : Win32cr::Foundation::RECT,
-    rtMargin : Win32cr::Foundation::RECT,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnPageSetupHook : Win32cr::UI::Controls::Dialogs::LPPAGESETUPHOOK,
-    lpfnPagePaintHook : Win32cr::UI::Controls::Dialogs::LPPAGEPAINTHOOK,
-    lpPageSetupTemplateName : Win32cr::Foundation::PSTR,
-    hPageSetupTemplate : LibC::IntPtrT
+  struct PAGESETUPDLGA
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hDevMode : LibC::IntPtrT
+    property hDevNames : LibC::IntPtrT
+    property flags : Win32cr::UI::Controls::Dialogs::PAGESETUPDLG_FLAGS
+    property ptPaperSize : Win32cr::Foundation::POINT
+    property rtMinMargin : Win32cr::Foundation::RECT
+    property rtMargin : Win32cr::Foundation::RECT
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnPageSetupHook : Win32cr::UI::Controls::Dialogs::LPPAGESETUPHOOK
+    property lpfnPagePaintHook : Win32cr::UI::Controls::Dialogs::LPPAGEPAINTHOOK
+    property lpPageSetupTemplateName : Win32cr::Foundation::PSTR
+    property hPageSetupTemplate : LibC::IntPtrT
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hDevMode : LibC::IntPtrT, @hDevNames : LibC::IntPtrT, @flags : Win32cr::UI::Controls::Dialogs::PAGESETUPDLG_FLAGS, @ptPaperSize : Win32cr::Foundation::POINT, @rtMinMargin : Win32cr::Foundation::RECT, @rtMargin : Win32cr::Foundation::RECT, @hInstance : Win32cr::Foundation::HINSTANCE, @lCustData : Win32cr::Foundation::LPARAM, @lpfnPageSetupHook : Win32cr::UI::Controls::Dialogs::LPPAGESETUPHOOK, @lpfnPagePaintHook : Win32cr::UI::Controls::Dialogs::LPPAGEPAINTHOOK, @lpPageSetupTemplateName : Win32cr::Foundation::PSTR, @hPageSetupTemplate : LibC::IntPtrT)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record PAGESETUPDLGW,
-    lStructSize : UInt32,
-    hwndOwner : Win32cr::Foundation::HWND,
-    hDevMode : LibC::IntPtrT,
-    hDevNames : LibC::IntPtrT,
-    flags : Win32cr::UI::Controls::Dialogs::PAGESETUPDLG_FLAGS,
-    ptPaperSize : Win32cr::Foundation::POINT,
-    rtMinMargin : Win32cr::Foundation::RECT,
-    rtMargin : Win32cr::Foundation::RECT,
-    hInstance : Win32cr::Foundation::HINSTANCE,
-    lCustData : Win32cr::Foundation::LPARAM,
-    lpfnPageSetupHook : Win32cr::UI::Controls::Dialogs::LPPAGESETUPHOOK,
-    lpfnPagePaintHook : Win32cr::UI::Controls::Dialogs::LPPAGEPAINTHOOK,
-    lpPageSetupTemplateName : Win32cr::Foundation::PWSTR,
-    hPageSetupTemplate : LibC::IntPtrT
+  struct PAGESETUPDLGW
+    property lStructSize : UInt32
+    property hwndOwner : Win32cr::Foundation::HWND
+    property hDevMode : LibC::IntPtrT
+    property hDevNames : LibC::IntPtrT
+    property flags : Win32cr::UI::Controls::Dialogs::PAGESETUPDLG_FLAGS
+    property ptPaperSize : Win32cr::Foundation::POINT
+    property rtMinMargin : Win32cr::Foundation::RECT
+    property rtMargin : Win32cr::Foundation::RECT
+    property hInstance : Win32cr::Foundation::HINSTANCE
+    property lCustData : Win32cr::Foundation::LPARAM
+    property lpfnPageSetupHook : Win32cr::UI::Controls::Dialogs::LPPAGESETUPHOOK
+    property lpfnPagePaintHook : Win32cr::UI::Controls::Dialogs::LPPAGEPAINTHOOK
+    property lpPageSetupTemplateName : Win32cr::Foundation::PWSTR
+    property hPageSetupTemplate : LibC::IntPtrT
+    def initialize(@lStructSize : UInt32, @hwndOwner : Win32cr::Foundation::HWND, @hDevMode : LibC::IntPtrT, @hDevNames : LibC::IntPtrT, @flags : Win32cr::UI::Controls::Dialogs::PAGESETUPDLG_FLAGS, @ptPaperSize : Win32cr::Foundation::POINT, @rtMinMargin : Win32cr::Foundation::RECT, @rtMargin : Win32cr::Foundation::RECT, @hInstance : Win32cr::Foundation::HINSTANCE, @lCustData : Win32cr::Foundation::LPARAM, @lpfnPageSetupHook : Win32cr::UI::Controls::Dialogs::LPPAGESETUPHOOK, @lpfnPagePaintHook : Win32cr::UI::Controls::Dialogs::LPPAGEPAINTHOOK, @lpPageSetupTemplateName : Win32cr::Foundation::PWSTR, @hPageSetupTemplate : LibC::IntPtrT)
+    end
+  end
   {% end %}
 
   @[Extern]
@@ -1108,7 +1240,6 @@ module Win32cr::UI::Controls::Dialogs
 
 
   @[Extern]
-  #@[Com("5852a2c3-6530-11d1-b6a3-0000f8757bf9")]
   record IPrintDialogCallback, lpVtbl : IPrintDialogCallbackVtbl* do
     GUID = LibC::GUID.new(0x5852a2c3_u32, 0x6530_u16, 0x11d1_u16, StaticArray[0xb6_u8, 0xa3_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0x7b_u8, 0xf9_u8])
     def query_interface(this : IPrintDialogCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1143,7 +1274,6 @@ module Win32cr::UI::Controls::Dialogs
 
 
   @[Extern]
-  #@[Com("509aaeda-5639-11d1-b6a1-0000f8757bf9")]
   record IPrintDialogServices, lpVtbl : IPrintDialogServicesVtbl* do
     GUID = LibC::GUID.new(0x509aaeda_u32, 0x5639_u16, 0x11d1_u16, StaticArray[0xb6_u8, 0xa1_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0x7b_u8, 0xf9_u8])
     def query_interface(this : IPrintDialogServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

@@ -46,121 +46,165 @@ module Win32cr::UI::Input
   end
 
   @[Extern]
-  record RAWINPUTHEADER,
-    dwType : UInt32,
-    dwSize : UInt32,
-    hDevice : Win32cr::Foundation::HANDLE,
-    wParam : Win32cr::Foundation::WPARAM
+  struct RAWINPUTHEADER
+    property dwType : UInt32
+    property dwSize : UInt32
+    property hDevice : Win32cr::Foundation::HANDLE
+    property wParam : Win32cr::Foundation::WPARAM
+    def initialize(@dwType : UInt32, @dwSize : UInt32, @hDevice : Win32cr::Foundation::HANDLE, @wParam : Win32cr::Foundation::WPARAM)
+    end
+  end
 
   @[Extern]
-  record RAWMOUSE,
-    usFlags : UInt16,
-    anonymous : Anonymous_e__Union_,
-    ulRawButtons : UInt32,
-    lLastX : Int32,
-    lLastY : Int32,
-    ulExtraInformation : UInt32 do
+  struct RAWMOUSE
+    property usFlags : UInt16
+    property anonymous : Anonymous_e__Union_
+    property ulRawButtons : UInt32
+    property lLastX : Int32
+    property lLastY : Int32
+    property ulExtraInformation : UInt32
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      ulButtons : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property ulButtons : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        usButtonFlags : UInt16,
-        usButtonData : UInt16
+      struct Anonymous_e__Struct_
+    property usButtonFlags : UInt16
+    property usButtonData : UInt16
+    def initialize(@usButtonFlags : UInt16, @usButtonData : UInt16)
+    end
+      end
 
+    def initialize(@ulButtons : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@usFlags : UInt16, @anonymous : Anonymous_e__Union_, @ulRawButtons : UInt32, @lLastX : Int32, @lLastY : Int32, @ulExtraInformation : UInt32)
+    end
   end
 
   @[Extern]
-  record RAWKEYBOARD,
-    make_code : UInt16,
-    flags : UInt16,
-    reserved : UInt16,
-    v_key : UInt16,
-    message : UInt32,
-    extra_information : UInt32
+  struct RAWKEYBOARD
+    property make_code : UInt16
+    property flags : UInt16
+    property reserved : UInt16
+    property v_key : UInt16
+    property message : UInt32
+    property extra_information : UInt32
+    def initialize(@make_code : UInt16, @flags : UInt16, @reserved : UInt16, @v_key : UInt16, @message : UInt32, @extra_information : UInt32)
+    end
+  end
 
   @[Extern]
-  record RAWHID,
-    dwSizeHid : UInt32,
-    dwCount : UInt32,
-    bRawData : UInt8*
+  struct RAWHID
+    property dwSizeHid : UInt32
+    property dwCount : UInt32
+    property bRawData : UInt8*
+    def initialize(@dwSizeHid : UInt32, @dwCount : UInt32, @bRawData : UInt8*)
+    end
+  end
 
   @[Extern]
-  record RAWINPUT,
-    header : Win32cr::UI::Input::RAWINPUTHEADER,
-    data : Data_e__union_ do
+  struct RAWINPUT
+    property header : Win32cr::UI::Input::RAWINPUTHEADER
+    property data : Data_e__union_
 
     # Nested Type Data_e__union_
     @[Extern(union: true)]
-    record Data_e__union_,
-      mouse : Win32cr::UI::Input::RAWMOUSE,
-      keyboard : Win32cr::UI::Input::RAWKEYBOARD,
-      hid : Win32cr::UI::Input::RAWHID
+    struct Data_e__union_
+    property mouse : Win32cr::UI::Input::RAWMOUSE
+    property keyboard : Win32cr::UI::Input::RAWKEYBOARD
+    property hid : Win32cr::UI::Input::RAWHID
+    def initialize(@mouse : Win32cr::UI::Input::RAWMOUSE, @keyboard : Win32cr::UI::Input::RAWKEYBOARD, @hid : Win32cr::UI::Input::RAWHID)
+    end
+    end
 
+    def initialize(@header : Win32cr::UI::Input::RAWINPUTHEADER, @data : Data_e__union_)
+    end
   end
 
   @[Extern]
-  record RID_DEVICE_INFO_MOUSE,
-    dwId : UInt32,
-    dwNumberOfButtons : UInt32,
-    dwSampleRate : UInt32,
-    fHasHorizontalWheel : Win32cr::Foundation::BOOL
+  struct RID_DEVICE_INFO_MOUSE
+    property dwId : UInt32
+    property dwNumberOfButtons : UInt32
+    property dwSampleRate : UInt32
+    property fHasHorizontalWheel : Win32cr::Foundation::BOOL
+    def initialize(@dwId : UInt32, @dwNumberOfButtons : UInt32, @dwSampleRate : UInt32, @fHasHorizontalWheel : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record RID_DEVICE_INFO_KEYBOARD,
-    dwType : UInt32,
-    dwSubType : UInt32,
-    dwKeyboardMode : UInt32,
-    dwNumberOfFunctionKeys : UInt32,
-    dwNumberOfIndicators : UInt32,
-    dwNumberOfKeysTotal : UInt32
+  struct RID_DEVICE_INFO_KEYBOARD
+    property dwType : UInt32
+    property dwSubType : UInt32
+    property dwKeyboardMode : UInt32
+    property dwNumberOfFunctionKeys : UInt32
+    property dwNumberOfIndicators : UInt32
+    property dwNumberOfKeysTotal : UInt32
+    def initialize(@dwType : UInt32, @dwSubType : UInt32, @dwKeyboardMode : UInt32, @dwNumberOfFunctionKeys : UInt32, @dwNumberOfIndicators : UInt32, @dwNumberOfKeysTotal : UInt32)
+    end
+  end
 
   @[Extern]
-  record RID_DEVICE_INFO_HID,
-    dwVendorId : UInt32,
-    dwProductId : UInt32,
-    dwVersionNumber : UInt32,
-    usUsagePage : UInt16,
-    usUsage : UInt16
+  struct RID_DEVICE_INFO_HID
+    property dwVendorId : UInt32
+    property dwProductId : UInt32
+    property dwVersionNumber : UInt32
+    property usUsagePage : UInt16
+    property usUsage : UInt16
+    def initialize(@dwVendorId : UInt32, @dwProductId : UInt32, @dwVersionNumber : UInt32, @usUsagePage : UInt16, @usUsage : UInt16)
+    end
+  end
 
   @[Extern]
-  record RID_DEVICE_INFO,
-    cbSize : UInt32,
-    dwType : Win32cr::UI::Input::RID_DEVICE_INFO_TYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct RID_DEVICE_INFO
+    property cbSize : UInt32
+    property dwType : Win32cr::UI::Input::RID_DEVICE_INFO_TYPE
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      mouse : Win32cr::UI::Input::RID_DEVICE_INFO_MOUSE,
-      keyboard : Win32cr::UI::Input::RID_DEVICE_INFO_KEYBOARD,
-      hid : Win32cr::UI::Input::RID_DEVICE_INFO_HID
+    struct Anonymous_e__Union_
+    property mouse : Win32cr::UI::Input::RID_DEVICE_INFO_MOUSE
+    property keyboard : Win32cr::UI::Input::RID_DEVICE_INFO_KEYBOARD
+    property hid : Win32cr::UI::Input::RID_DEVICE_INFO_HID
+    def initialize(@mouse : Win32cr::UI::Input::RID_DEVICE_INFO_MOUSE, @keyboard : Win32cr::UI::Input::RID_DEVICE_INFO_KEYBOARD, @hid : Win32cr::UI::Input::RID_DEVICE_INFO_HID)
+    end
+    end
 
+    def initialize(@cbSize : UInt32, @dwType : Win32cr::UI::Input::RID_DEVICE_INFO_TYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record RAWINPUTDEVICE,
-    usUsagePage : UInt16,
-    usUsage : UInt16,
-    dwFlags : Win32cr::UI::Input::RAWINPUTDEVICE_FLAGS,
-    hwndTarget : Win32cr::Foundation::HWND
+  struct RAWINPUTDEVICE
+    property usUsagePage : UInt16
+    property usUsage : UInt16
+    property dwFlags : Win32cr::UI::Input::RAWINPUTDEVICE_FLAGS
+    property hwndTarget : Win32cr::Foundation::HWND
+    def initialize(@usUsagePage : UInt16, @usUsage : UInt16, @dwFlags : Win32cr::UI::Input::RAWINPUTDEVICE_FLAGS, @hwndTarget : Win32cr::Foundation::HWND)
+    end
+  end
 
   @[Extern]
-  record RAWINPUTDEVICELIST,
-    hDevice : Win32cr::Foundation::HANDLE,
-    dwType : Win32cr::UI::Input::RID_DEVICE_INFO_TYPE
+  struct RAWINPUTDEVICELIST
+    property hDevice : Win32cr::Foundation::HANDLE
+    property dwType : Win32cr::UI::Input::RID_DEVICE_INFO_TYPE
+    def initialize(@hDevice : Win32cr::Foundation::HANDLE, @dwType : Win32cr::UI::Input::RID_DEVICE_INFO_TYPE)
+    end
+  end
 
   @[Extern]
-  record INPUT_MESSAGE_SOURCE,
-    deviceType : Win32cr::UI::Input::INPUT_MESSAGE_DEVICE_TYPE,
-    originId : Win32cr::UI::Input::INPUT_MESSAGE_ORIGIN_ID
+  struct INPUT_MESSAGE_SOURCE
+    property deviceType : Win32cr::UI::Input::INPUT_MESSAGE_DEVICE_TYPE
+    property originId : Win32cr::UI::Input::INPUT_MESSAGE_ORIGIN_ID
+    def initialize(@deviceType : Win32cr::UI::Input::INPUT_MESSAGE_DEVICE_TYPE, @originId : Win32cr::UI::Input::INPUT_MESSAGE_ORIGIN_ID)
+    end
+  end
 
   @[Link("user32")]
   lib C

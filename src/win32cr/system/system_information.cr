@@ -3,9 +3,9 @@ require "./../foundation.cr"
 
 module Win32cr::System::SystemInformation
   alias FIRMWARE_TABLE_ID = UInt32
-  alias PGET_SYSTEM_WOW64_DIRECTORY_A = Proc(UInt8*, UInt32, UInt32)*
+  alias PGET_SYSTEM_WOW64_DIRECTORY_A = Proc(UInt8*, UInt32, UInt32)
 
-  alias PGET_SYSTEM_WOW64_DIRECTORY_W = Proc(UInt16*, UInt32, UInt32)*
+  alias PGET_SYSTEM_WOW64_DIRECTORY_W = Proc(UInt16*, UInt32, UInt32)
 
   NTDDI_WIN2K = 83886080_u32
   NTDDI_WINXP = 83951616_u32
@@ -411,286 +411,370 @@ module Win32cr::System::SystemInformation
   end
 
   @[Extern]
-  record GROUP_AFFINITY,
-    mask : LibC::UIntPtrT,
-    group : UInt16,
-    reserved : UInt16[3]
-
-  @[Extern]
-  record SYSTEM_INFO,
-    anonymous : Anonymous_e__Union_,
-    dwPageSize : UInt32,
-    lpMinimumApplicationAddress : Void*,
-    lpMaximumApplicationAddress : Void*,
-    dwActiveProcessorMask : LibC::UIntPtrT,
-    dwNumberOfProcessors : UInt32,
-    dwProcessorType : UInt32,
-    dwAllocationGranularity : UInt32,
-    wProcessorLevel : UInt16,
-    wProcessorRevision : UInt16 do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      dwOemId : UInt32,
-      anonymous : Anonymous_e__Struct_ do
-
-      # Nested Type Anonymous_e__Struct_
-      @[Extern]
-      record Anonymous_e__Struct_,
-        wProcessorArchitecture : Win32cr::System::Diagnostics::Debug::PROCESSOR_ARCHITECTURE,
-        wReserved : UInt16
-
+  struct GROUP_AFFINITY
+    property mask : LibC::UIntPtrT
+    property group : UInt16
+    property reserved : UInt16[3]
+    def initialize(@mask : LibC::UIntPtrT, @group : UInt16, @reserved : UInt16[3])
     end
-
   end
 
   @[Extern]
-  record MEMORYSTATUSEX,
-    dwLength : UInt32,
-    dwMemoryLoad : UInt32,
-    ullTotalPhys : UInt64,
-    ullAvailPhys : UInt64,
-    ullTotalPageFile : UInt64,
-    ullAvailPageFile : UInt64,
-    ullTotalVirtual : UInt64,
-    ullAvailVirtual : UInt64,
-    ullAvailExtendedVirtual : UInt64
-
-  @[Extern]
-  record CACHE_DESCRIPTOR,
-    level : UInt8,
-    associativity : UInt8,
-    line_size : UInt16,
-    size : UInt32,
-    type__ : Win32cr::System::SystemInformation::PROCESSOR_CACHE_TYPE
-
-  @[Extern]
-  record SYSTEM_LOGICAL_PROCESSOR_INFORMATION,
-    processor_mask : LibC::UIntPtrT,
-    relationship : Win32cr::System::SystemInformation::LOGICAL_PROCESSOR_RELATIONSHIP,
-    anonymous : Anonymous_e__Union_ do
+  struct SYSTEM_INFO
+    property anonymous : Anonymous_e__Union_
+    property dwPageSize : UInt32
+    property lpMinimumApplicationAddress : Void*
+    property lpMaximumApplicationAddress : Void*
+    property dwActiveProcessorMask : LibC::UIntPtrT
+    property dwNumberOfProcessors : UInt32
+    property dwProcessorType : UInt32
+    property dwAllocationGranularity : UInt32
+    property wProcessorLevel : UInt16
+    property wProcessorRevision : UInt16
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      processor_core : ProcessorCore_e__Struct_,
-      numa_node : NumaNode_e__Struct_,
-      cache : Win32cr::System::SystemInformation::CACHE_DESCRIPTOR,
-      reserved : UInt64[2] do
+    struct Anonymous_e__Union_
+    property dwOemId : UInt32
+    property anonymous : Anonymous_e__Struct_
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property wProcessorArchitecture : Win32cr::System::Diagnostics::Debug::PROCESSOR_ARCHITECTURE
+    property wReserved : UInt16
+    def initialize(@wProcessorArchitecture : Win32cr::System::Diagnostics::Debug::PROCESSOR_ARCHITECTURE, @wReserved : UInt16)
+    end
+      end
+
+    def initialize(@dwOemId : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Union_, @dwPageSize : UInt32, @lpMinimumApplicationAddress : Void*, @lpMaximumApplicationAddress : Void*, @dwActiveProcessorMask : LibC::UIntPtrT, @dwNumberOfProcessors : UInt32, @dwProcessorType : UInt32, @dwAllocationGranularity : UInt32, @wProcessorLevel : UInt16, @wProcessorRevision : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct MEMORYSTATUSEX
+    property dwLength : UInt32
+    property dwMemoryLoad : UInt32
+    property ullTotalPhys : UInt64
+    property ullAvailPhys : UInt64
+    property ullTotalPageFile : UInt64
+    property ullAvailPageFile : UInt64
+    property ullTotalVirtual : UInt64
+    property ullAvailVirtual : UInt64
+    property ullAvailExtendedVirtual : UInt64
+    def initialize(@dwLength : UInt32, @dwMemoryLoad : UInt32, @ullTotalPhys : UInt64, @ullAvailPhys : UInt64, @ullTotalPageFile : UInt64, @ullAvailPageFile : UInt64, @ullTotalVirtual : UInt64, @ullAvailVirtual : UInt64, @ullAvailExtendedVirtual : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct CACHE_DESCRIPTOR
+    property level : UInt8
+    property associativity : UInt8
+    property line_size : UInt16
+    property size : UInt32
+    property type__ : Win32cr::System::SystemInformation::PROCESSOR_CACHE_TYPE
+    def initialize(@level : UInt8, @associativity : UInt8, @line_size : UInt16, @size : UInt32, @type__ : Win32cr::System::SystemInformation::PROCESSOR_CACHE_TYPE)
+    end
+  end
+
+  @[Extern]
+  struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION
+    property processor_mask : LibC::UIntPtrT
+    property relationship : Win32cr::System::SystemInformation::LOGICAL_PROCESSOR_RELATIONSHIP
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property processor_core : ProcessorCore_e__Struct_
+    property numa_node : NumaNode_e__Struct_
+    property cache : Win32cr::System::SystemInformation::CACHE_DESCRIPTOR
+    property reserved : UInt64[2]
 
       # Nested Type ProcessorCore_e__Struct_
       @[Extern]
-      record ProcessorCore_e__Struct_,
-        flags : UInt8
+      struct ProcessorCore_e__Struct_
+    property flags : UInt8
+    def initialize(@flags : UInt8)
+    end
+      end
 
 
       # Nested Type NumaNode_e__Struct_
       @[Extern]
-      record NumaNode_e__Struct_,
-        node_number : UInt32
+      struct NumaNode_e__Struct_
+    property node_number : UInt32
+    def initialize(@node_number : UInt32)
+    end
+      end
 
+    def initialize(@processor_core : ProcessorCore_e__Struct_, @numa_node : NumaNode_e__Struct_, @cache : Win32cr::System::SystemInformation::CACHE_DESCRIPTOR, @reserved : UInt64[2])
+    end
     end
 
+    def initialize(@processor_mask : LibC::UIntPtrT, @relationship : Win32cr::System::SystemInformation::LOGICAL_PROCESSOR_RELATIONSHIP, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record PROCESSOR_RELATIONSHIP,
-    flags : UInt8,
-    efficiency_class : UInt8,
-    reserved : UInt8[20],
-    group_count : UInt16,
-    group_mask : Win32cr::System::SystemInformation::GROUP_AFFINITY*
-
-  @[Extern]
-  record NUMA_NODE_RELATIONSHIP,
-    node_number : UInt32,
-    reserved : UInt8[18],
-    group_count : UInt16,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      group_mask : Win32cr::System::SystemInformation::GROUP_AFFINITY,
-      group_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY*
-
+  struct PROCESSOR_RELATIONSHIP
+    property flags : UInt8
+    property efficiency_class : UInt8
+    property reserved : UInt8[20]
+    property group_count : UInt16
+    property group_mask : Win32cr::System::SystemInformation::GROUP_AFFINITY*
+    def initialize(@flags : UInt8, @efficiency_class : UInt8, @reserved : UInt8[20], @group_count : UInt16, @group_mask : Win32cr::System::SystemInformation::GROUP_AFFINITY*)
+    end
   end
 
   @[Extern]
-  record CACHE_RELATIONSHIP,
-    level : UInt8,
-    associativity : UInt8,
-    line_size : UInt16,
-    cache_size : UInt32,
-    type__ : Win32cr::System::SystemInformation::PROCESSOR_CACHE_TYPE,
-    reserved : UInt8[18],
-    group_count : UInt16,
-    anonymous : Anonymous_e__Union_ do
+  struct NUMA_NODE_RELATIONSHIP
+    property node_number : UInt32
+    property reserved : UInt8[18]
+    property group_count : UInt16
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      group_mask : Win32cr::System::SystemInformation::GROUP_AFFINITY,
-      group_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY*
+    struct Anonymous_e__Union_
+    property group_mask : Win32cr::System::SystemInformation::GROUP_AFFINITY
+    property group_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY*
+    def initialize(@group_mask : Win32cr::System::SystemInformation::GROUP_AFFINITY, @group_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY*)
+    end
+    end
 
+    def initialize(@node_number : UInt32, @reserved : UInt8[18], @group_count : UInt16, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record PROCESSOR_GROUP_INFO,
-    maximum_processor_count : UInt8,
-    active_processor_count : UInt8,
-    reserved : UInt8[38],
-    active_processor_mask : LibC::UIntPtrT
-
-  @[Extern]
-  record GROUP_RELATIONSHIP,
-    maximum_group_count : UInt16,
-    active_group_count : UInt16,
-    reserved : UInt8[20],
-    group_info : Win32cr::System::SystemInformation::PROCESSOR_GROUP_INFO*
-
-  @[Extern]
-  record SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX,
-    relationship : Win32cr::System::SystemInformation::LOGICAL_PROCESSOR_RELATIONSHIP,
-    size : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct CACHE_RELATIONSHIP
+    property level : UInt8
+    property associativity : UInt8
+    property line_size : UInt16
+    property cache_size : UInt32
+    property type__ : Win32cr::System::SystemInformation::PROCESSOR_CACHE_TYPE
+    property reserved : UInt8[18]
+    property group_count : UInt16
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      processor : Win32cr::System::SystemInformation::PROCESSOR_RELATIONSHIP,
-      numa_node : Win32cr::System::SystemInformation::NUMA_NODE_RELATIONSHIP,
-      cache : Win32cr::System::SystemInformation::CACHE_RELATIONSHIP,
-      group : Win32cr::System::SystemInformation::GROUP_RELATIONSHIP
+    struct Anonymous_e__Union_
+    property group_mask : Win32cr::System::SystemInformation::GROUP_AFFINITY
+    property group_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY*
+    def initialize(@group_mask : Win32cr::System::SystemInformation::GROUP_AFFINITY, @group_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY*)
+    end
+    end
 
+    def initialize(@level : UInt8, @associativity : UInt8, @line_size : UInt16, @cache_size : UInt32, @type__ : Win32cr::System::SystemInformation::PROCESSOR_CACHE_TYPE, @reserved : UInt8[18], @group_count : UInt16, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record SYSTEM_CPU_SET_INFORMATION,
-    size : UInt32,
-    type__ : Win32cr::System::SystemInformation::CPU_SET_INFORMATION_TYPE,
-    anonymous : Anonymous_e__Union_ do
+  struct PROCESSOR_GROUP_INFO
+    property maximum_processor_count : UInt8
+    property active_processor_count : UInt8
+    property reserved : UInt8[38]
+    property active_processor_mask : LibC::UIntPtrT
+    def initialize(@maximum_processor_count : UInt8, @active_processor_count : UInt8, @reserved : UInt8[38], @active_processor_mask : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct GROUP_RELATIONSHIP
+    property maximum_group_count : UInt16
+    property active_group_count : UInt16
+    property reserved : UInt8[20]
+    property group_info : Win32cr::System::SystemInformation::PROCESSOR_GROUP_INFO*
+    def initialize(@maximum_group_count : UInt16, @active_group_count : UInt16, @reserved : UInt8[20], @group_info : Win32cr::System::SystemInformation::PROCESSOR_GROUP_INFO*)
+    end
+  end
+
+  @[Extern]
+  struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX
+    property relationship : Win32cr::System::SystemInformation::LOGICAL_PROCESSOR_RELATIONSHIP
+    property size : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      cpu_set : CpuSet_e__Struct_ do
+    struct Anonymous_e__Union_
+    property processor : Win32cr::System::SystemInformation::PROCESSOR_RELATIONSHIP
+    property numa_node : Win32cr::System::SystemInformation::NUMA_NODE_RELATIONSHIP
+    property cache : Win32cr::System::SystemInformation::CACHE_RELATIONSHIP
+    property group : Win32cr::System::SystemInformation::GROUP_RELATIONSHIP
+    def initialize(@processor : Win32cr::System::SystemInformation::PROCESSOR_RELATIONSHIP, @numa_node : Win32cr::System::SystemInformation::NUMA_NODE_RELATIONSHIP, @cache : Win32cr::System::SystemInformation::CACHE_RELATIONSHIP, @group : Win32cr::System::SystemInformation::GROUP_RELATIONSHIP)
+    end
+    end
+
+    def initialize(@relationship : Win32cr::System::SystemInformation::LOGICAL_PROCESSOR_RELATIONSHIP, @size : UInt32, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct SYSTEM_CPU_SET_INFORMATION
+    property size : UInt32
+    property type__ : Win32cr::System::SystemInformation::CPU_SET_INFORMATION_TYPE
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property cpu_set : CpuSet_e__Struct_
 
       # Nested Type CpuSet_e__Struct_
       @[Extern]
-      record CpuSet_e__Struct_,
-        id : UInt32,
-        group : UInt16,
-        logical_processor_index : UInt8,
-        core_index : UInt8,
-        last_level_cache_index : UInt8,
-        numa_node_index : UInt8,
-        efficiency_class : UInt8,
-        anonymous1 : Anonymous1_e__Union_,
-        anonymous2 : Anonymous2_e__Union_,
-        allocation_tag : UInt64 do
+      struct CpuSet_e__Struct_
+    property id : UInt32
+    property group : UInt16
+    property logical_processor_index : UInt8
+    property core_index : UInt8
+    property last_level_cache_index : UInt8
+    property numa_node_index : UInt8
+    property efficiency_class : UInt8
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property allocation_tag : UInt64
 
         # Nested Type Anonymous1_e__Union_
         @[Extern(union: true)]
-        record Anonymous1_e__Union_,
-          all_flags : UInt8,
-          anonymous : Anonymous_e__Struct_ do
+        struct Anonymous1_e__Union_
+    property all_flags : UInt8
+    property anonymous : Anonymous_e__Struct_
 
           # Nested Type Anonymous_e__Struct_
           @[Extern]
-          record Anonymous_e__Struct_,
-            _bitfield : UInt8
+          struct Anonymous_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+          end
 
+    def initialize(@all_flags : UInt8, @anonymous : Anonymous_e__Struct_)
+    end
         end
 
 
         # Nested Type Anonymous2_e__Union_
         @[Extern(union: true)]
-        record Anonymous2_e__Union_,
-          reserved : UInt32,
-          scheduling_class : UInt8
+        struct Anonymous2_e__Union_
+    property reserved : UInt32
+    property scheduling_class : UInt8
+    def initialize(@reserved : UInt32, @scheduling_class : UInt8)
+    end
+        end
 
+    def initialize(@id : UInt32, @group : UInt16, @logical_processor_index : UInt8, @core_index : UInt8, @last_level_cache_index : UInt8, @numa_node_index : UInt8, @efficiency_class : UInt8, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @allocation_tag : UInt64)
+    end
       end
 
+    def initialize(@cpu_set : CpuSet_e__Struct_)
+    end
     end
 
+    def initialize(@size : UInt32, @type__ : Win32cr::System::SystemInformation::CPU_SET_INFORMATION_TYPE, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record SYSTEM_POOL_ZEROING_INFORMATION,
-    pool_zeroing_support_present : Win32cr::Foundation::BOOLEAN
+  struct SYSTEM_POOL_ZEROING_INFORMATION
+    property pool_zeroing_support_present : Win32cr::Foundation::BOOLEAN
+    def initialize(@pool_zeroing_support_present : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION,
-    cycle_time : UInt64
+  struct SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION
+    property cycle_time : UInt64
+    def initialize(@cycle_time : UInt64)
+    end
+  end
 
   @[Extern]
-  record SYSTEM_SUPPORTED_PROCESSOR_ARCHITECTURES_INFORMATION,
-    _bitfield : UInt32
+  struct SYSTEM_SUPPORTED_PROCESSOR_ARCHITECTURES_INFORMATION
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+  end
 
   @[Extern]
-  record OSVERSIONINFOA,
-    dwOSVersionInfoSize : UInt32,
-    dwMajorVersion : UInt32,
-    dwMinorVersion : UInt32,
-    dwBuildNumber : UInt32,
-    dwPlatformId : UInt32,
-    szCSDVersion : Win32cr::Foundation::CHAR[128]
+  struct OSVERSIONINFOA
+    property dwOSVersionInfoSize : UInt32
+    property dwMajorVersion : UInt32
+    property dwMinorVersion : UInt32
+    property dwBuildNumber : UInt32
+    property dwPlatformId : UInt32
+    property szCSDVersion : Win32cr::Foundation::CHAR[128]
+    def initialize(@dwOSVersionInfoSize : UInt32, @dwMajorVersion : UInt32, @dwMinorVersion : UInt32, @dwBuildNumber : UInt32, @dwPlatformId : UInt32, @szCSDVersion : Win32cr::Foundation::CHAR[128])
+    end
+  end
 
   @[Extern]
-  record OSVERSIONINFOW,
-    dwOSVersionInfoSize : UInt32,
-    dwMajorVersion : UInt32,
-    dwMinorVersion : UInt32,
-    dwBuildNumber : UInt32,
-    dwPlatformId : UInt32,
-    szCSDVersion : UInt16[128]
+  struct OSVERSIONINFOW
+    property dwOSVersionInfoSize : UInt32
+    property dwMajorVersion : UInt32
+    property dwMinorVersion : UInt32
+    property dwBuildNumber : UInt32
+    property dwPlatformId : UInt32
+    property szCSDVersion : UInt16[128]
+    def initialize(@dwOSVersionInfoSize : UInt32, @dwMajorVersion : UInt32, @dwMinorVersion : UInt32, @dwBuildNumber : UInt32, @dwPlatformId : UInt32, @szCSDVersion : UInt16[128])
+    end
+  end
 
   @[Extern]
-  record OSVERSIONINFOEXA,
-    dwOSVersionInfoSize : UInt32,
-    dwMajorVersion : UInt32,
-    dwMinorVersion : UInt32,
-    dwBuildNumber : UInt32,
-    dwPlatformId : UInt32,
-    szCSDVersion : Win32cr::Foundation::CHAR[128],
-    wServicePackMajor : UInt16,
-    wServicePackMinor : UInt16,
-    wSuiteMask : UInt16,
-    wProductType : UInt8,
-    wReserved : UInt8
+  struct OSVERSIONINFOEXA
+    property dwOSVersionInfoSize : UInt32
+    property dwMajorVersion : UInt32
+    property dwMinorVersion : UInt32
+    property dwBuildNumber : UInt32
+    property dwPlatformId : UInt32
+    property szCSDVersion : Win32cr::Foundation::CHAR[128]
+    property wServicePackMajor : UInt16
+    property wServicePackMinor : UInt16
+    property wSuiteMask : UInt16
+    property wProductType : UInt8
+    property wReserved : UInt8
+    def initialize(@dwOSVersionInfoSize : UInt32, @dwMajorVersion : UInt32, @dwMinorVersion : UInt32, @dwBuildNumber : UInt32, @dwPlatformId : UInt32, @szCSDVersion : Win32cr::Foundation::CHAR[128], @wServicePackMajor : UInt16, @wServicePackMinor : UInt16, @wSuiteMask : UInt16, @wProductType : UInt8, @wReserved : UInt8)
+    end
+  end
 
   @[Extern]
-  record OSVERSIONINFOEXW,
-    dwOSVersionInfoSize : UInt32,
-    dwMajorVersion : UInt32,
-    dwMinorVersion : UInt32,
-    dwBuildNumber : UInt32,
-    dwPlatformId : UInt32,
-    szCSDVersion : UInt16[128],
-    wServicePackMajor : UInt16,
-    wServicePackMinor : UInt16,
-    wSuiteMask : UInt16,
-    wProductType : UInt8,
-    wReserved : UInt8
+  struct OSVERSIONINFOEXW
+    property dwOSVersionInfoSize : UInt32
+    property dwMajorVersion : UInt32
+    property dwMinorVersion : UInt32
+    property dwBuildNumber : UInt32
+    property dwPlatformId : UInt32
+    property szCSDVersion : UInt16[128]
+    property wServicePackMajor : UInt16
+    property wServicePackMinor : UInt16
+    property wSuiteMask : UInt16
+    property wProductType : UInt8
+    property wReserved : UInt8
+    def initialize(@dwOSVersionInfoSize : UInt32, @dwMajorVersion : UInt32, @dwMinorVersion : UInt32, @dwBuildNumber : UInt32, @dwPlatformId : UInt32, @szCSDVersion : UInt16[128], @wServicePackMajor : UInt16, @wServicePackMinor : UInt16, @wSuiteMask : UInt16, @wProductType : UInt8, @wReserved : UInt8)
+    end
+  end
 
   @[Extern]
-  record MEMORYSTATUS,
-    dwLength : UInt32,
-    dwMemoryLoad : UInt32,
-    dwTotalPhys : LibC::UIntPtrT,
-    dwAvailPhys : LibC::UIntPtrT,
-    dwTotalPageFile : LibC::UIntPtrT,
-    dwAvailPageFile : LibC::UIntPtrT,
-    dwTotalVirtual : LibC::UIntPtrT,
-    dwAvailVirtual : LibC::UIntPtrT
+  struct MEMORYSTATUS
+    property dwLength : UInt32
+    property dwMemoryLoad : UInt32
+    property dwTotalPhys : LibC::UIntPtrT
+    property dwAvailPhys : LibC::UIntPtrT
+    property dwTotalPageFile : LibC::UIntPtrT
+    property dwAvailPageFile : LibC::UIntPtrT
+    property dwTotalVirtual : LibC::UIntPtrT
+    property dwAvailVirtual : LibC::UIntPtrT
+    def initialize(@dwLength : UInt32, @dwMemoryLoad : UInt32, @dwTotalPhys : LibC::UIntPtrT, @dwAvailPhys : LibC::UIntPtrT, @dwTotalPageFile : LibC::UIntPtrT, @dwAvailPageFile : LibC::UIntPtrT, @dwTotalVirtual : LibC::UIntPtrT, @dwAvailVirtual : LibC::UIntPtrT)
+    end
+  end
 
   @[Link("kernel32")]
-  @[Link("api-ms-win-core-sysinfo-l1-2-4")]
-  @[Link("api-ms-win-core-sysinfo-l1-2-0")]
-  @[Link("api-ms-win-core-sysinfo-l1-2-3")]
-  @[Link("api-ms-win-core-wow64-l1-1-1")]
   @[Link("ntdll")]
   @[Link("ntdllk")]
   lib C

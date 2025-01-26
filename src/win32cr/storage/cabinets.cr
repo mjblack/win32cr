@@ -1,49 +1,49 @@
 require "./../foundation.cr"
 
 module Win32cr::Storage::Cabinets
-  alias PFNFCIALLOC = Proc(UInt32, Void*)*
+  alias PFNFCIALLOC = Proc(UInt32, Void*)
 
-  alias PFNFCIFREE = Proc(Void*, Void)*
+  alias PFNFCIFREE = Proc(Void*, Void)
 
-  alias PFNFCIOPEN = Proc(Win32cr::Foundation::PSTR, Int32, Int32, Int32*, Void*, LibC::IntPtrT)*
+  alias PFNFCIOPEN = Proc(Win32cr::Foundation::PSTR, Int32, Int32, Int32*, Void*, LibC::IntPtrT)
 
-  alias PFNFCIREAD = Proc(LibC::IntPtrT, Void*, UInt32, Int32*, Void*, UInt32)*
+  alias PFNFCIREAD = Proc(LibC::IntPtrT, Void*, UInt32, Int32*, Void*, UInt32)
 
-  alias PFNFCIWRITE = Proc(LibC::IntPtrT, Void*, UInt32, Int32*, Void*, UInt32)*
+  alias PFNFCIWRITE = Proc(LibC::IntPtrT, Void*, UInt32, Int32*, Void*, UInt32)
 
-  alias PFNFCICLOSE = Proc(LibC::IntPtrT, Int32*, Void*, Int32)*
+  alias PFNFCICLOSE = Proc(LibC::IntPtrT, Int32*, Void*, Int32)
 
-  alias PFNFCISEEK = Proc(LibC::IntPtrT, Int32, Int32, Int32*, Void*, Int32)*
+  alias PFNFCISEEK = Proc(LibC::IntPtrT, Int32, Int32, Int32*, Void*, Int32)
 
-  alias PFNFCIDELETE = Proc(Win32cr::Foundation::PSTR, Int32*, Void*, Int32)*
+  alias PFNFCIDELETE = Proc(Win32cr::Foundation::PSTR, Int32*, Void*, Int32)
 
-  alias PFNFCIGETNEXTCABINET = Proc(Win32cr::Storage::Cabinets::CCAB*, UInt32, Void*, Win32cr::Foundation::BOOL)*
+  alias PFNFCIGETNEXTCABINET = Proc(Win32cr::Storage::Cabinets::CCAB*, UInt32, Void*, Win32cr::Foundation::BOOL)
 
-  alias PFNFCIFILEPLACED = Proc(Win32cr::Storage::Cabinets::CCAB*, Win32cr::Foundation::PSTR, Int32, Win32cr::Foundation::BOOL, Void*, Int32)*
+  alias PFNFCIFILEPLACED = Proc(Win32cr::Storage::Cabinets::CCAB*, Win32cr::Foundation::PSTR, Int32, Win32cr::Foundation::BOOL, Void*, Int32)
 
-  alias PFNFCIGETOPENINFO = Proc(Win32cr::Foundation::PSTR, UInt16*, UInt16*, UInt16*, Int32*, Void*, LibC::IntPtrT)*
+  alias PFNFCIGETOPENINFO = Proc(Win32cr::Foundation::PSTR, UInt16*, UInt16*, UInt16*, Int32*, Void*, LibC::IntPtrT)
 
-  alias PFNFCISTATUS = Proc(UInt32, UInt32, UInt32, Void*, Int32)*
+  alias PFNFCISTATUS = Proc(UInt32, UInt32, UInt32, Void*, Int32)
 
-  alias PFNFCIGETTEMPFILE = Proc(Win32cr::Foundation::PSTR, Int32, Void*, Win32cr::Foundation::BOOL)*
+  alias PFNFCIGETTEMPFILE = Proc(Win32cr::Foundation::PSTR, Int32, Void*, Win32cr::Foundation::BOOL)
 
-  alias PFNALLOC = Proc(UInt32, Void*)*
+  alias PFNALLOC = Proc(UInt32, Void*)
 
-  alias PFNFREE = Proc(Void*, Void)*
+  alias PFNFREE = Proc(Void*, Void)
 
-  alias PFNOPEN = Proc(Win32cr::Foundation::PSTR, Int32, Int32, LibC::IntPtrT)*
+  alias PFNOPEN = Proc(Win32cr::Foundation::PSTR, Int32, Int32, LibC::IntPtrT)
 
-  alias PFNREAD = Proc(LibC::IntPtrT, Void*, UInt32, UInt32)*
+  alias PFNREAD = Proc(LibC::IntPtrT, Void*, UInt32, UInt32)
 
-  alias PFNWRITE = Proc(LibC::IntPtrT, Void*, UInt32, UInt32)*
+  alias PFNWRITE = Proc(LibC::IntPtrT, Void*, UInt32, UInt32)
 
-  alias PFNCLOSE = Proc(LibC::IntPtrT, Int32)*
+  alias PFNCLOSE = Proc(LibC::IntPtrT, Int32)
 
-  alias PFNSEEK = Proc(LibC::IntPtrT, Int32, Int32, Int32)*
+  alias PFNSEEK = Proc(LibC::IntPtrT, Int32, Int32, Int32)
 
-  alias PFNFDIDECRYPT = Proc(Win32cr::Storage::Cabinets::FDIDECRYPT*, Int32)*
+  alias PFNFDIDECRYPT = Proc(Win32cr::Storage::Cabinets::FDIDECRYPT*, Int32)
 
-  alias PFNFDINOTIFY = Proc(Win32cr::Storage::Cabinets::FDINOTIFICATIONTYPE, Win32cr::Storage::Cabinets::FDINOTIFICATION*, LibC::IntPtrT)*
+  alias PFNFDINOTIFY = Proc(Win32cr::Storage::Cabinets::FDINOTIFICATIONTYPE, Win32cr::Storage::Cabinets::FDINOTIFICATION*, LibC::IntPtrT)
 
   INCLUDED_FCI = 1_u32
   A_NAME_IS_UTF_ = 128_u32
@@ -125,109 +125,140 @@ module Win32cr::Storage::Cabinets
   end
 
   @[Extern]
-  record ERF,
-    erfOper : Int32,
-    erfType : Int32,
-    fError : Win32cr::Foundation::BOOL
+  struct ERF
+    property erfOper : Int32
+    property erfType : Int32
+    property fError : Win32cr::Foundation::BOOL
+    def initialize(@erfOper : Int32, @erfType : Int32, @fError : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record CCAB,
-    cb : UInt32,
-    cbFolderThresh : UInt32,
-    cbReserveCFHeader : UInt32,
-    cbReserveCFFolder : UInt32,
-    cbReserveCFData : UInt32,
-    iCab : Int32,
-    iDisk : Int32,
-    fFailOnIncompressible : Int32,
-    setID : UInt16,
-    szDisk : Win32cr::Foundation::CHAR[256],
-    szCab : Win32cr::Foundation::CHAR[256],
-    szCabPath : Win32cr::Foundation::CHAR[256]
+  struct CCAB
+    property cb : UInt32
+    property cbFolderThresh : UInt32
+    property cbReserveCFHeader : UInt32
+    property cbReserveCFFolder : UInt32
+    property cbReserveCFData : UInt32
+    property iCab : Int32
+    property iDisk : Int32
+    property fFailOnIncompressible : Int32
+    property setID : UInt16
+    property szDisk : Win32cr::Foundation::CHAR[256]
+    property szCab : Win32cr::Foundation::CHAR[256]
+    property szCabPath : Win32cr::Foundation::CHAR[256]
+    def initialize(@cb : UInt32, @cbFolderThresh : UInt32, @cbReserveCFHeader : UInt32, @cbReserveCFFolder : UInt32, @cbReserveCFData : UInt32, @iCab : Int32, @iDisk : Int32, @fFailOnIncompressible : Int32, @setID : UInt16, @szDisk : Win32cr::Foundation::CHAR[256], @szCab : Win32cr::Foundation::CHAR[256], @szCabPath : Win32cr::Foundation::CHAR[256])
+    end
+  end
 
   @[Extern]
-  record FDICABINETINFO,
-    cbCabinet : Int32,
-    cFolders : UInt16,
-    cFiles : UInt16,
-    setID : UInt16,
-    iCabinet : UInt16,
-    fReserve : Win32cr::Foundation::BOOL,
-    hasprev : Win32cr::Foundation::BOOL,
-    hasnext : Win32cr::Foundation::BOOL
+  struct FDICABINETINFO
+    property cbCabinet : Int32
+    property cFolders : UInt16
+    property cFiles : UInt16
+    property setID : UInt16
+    property iCabinet : UInt16
+    property fReserve : Win32cr::Foundation::BOOL
+    property hasprev : Win32cr::Foundation::BOOL
+    property hasnext : Win32cr::Foundation::BOOL
+    def initialize(@cbCabinet : Int32, @cFolders : UInt16, @cFiles : UInt16, @setID : UInt16, @iCabinet : UInt16, @fReserve : Win32cr::Foundation::BOOL, @hasprev : Win32cr::Foundation::BOOL, @hasnext : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record FDIDECRYPT,
-    fdidt : Win32cr::Storage::Cabinets::FDIDECRYPTTYPE,
-    pvUser : Void*,
-    anonymous : Anonymous_e__Union_ do
+  struct FDIDECRYPT
+    property fdidt : Win32cr::Storage::Cabinets::FDIDECRYPTTYPE
+    property pvUser : Void*
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      cabinet : Cabinet_e__struct_,
-      folder : Folder_e__struct_,
-      decrypt : Decrypt_e__struct_ do
+    struct Anonymous_e__Union_
+    property cabinet : Cabinet_e__struct_
+    property folder : Folder_e__struct_
+    property decrypt : Decrypt_e__struct_
 
       # Nested Type Decrypt_e__struct_
       @[Extern]
-      record Decrypt_e__struct_,
-        pDataReserve : Void*,
-        cbDataReserve : UInt16,
-        pbData : Void*,
-        cbData : UInt16,
-        fSplit : Win32cr::Foundation::BOOL,
-        cbPartial : UInt16
+      struct Decrypt_e__struct_
+    property pDataReserve : Void*
+    property cbDataReserve : UInt16
+    property pbData : Void*
+    property cbData : UInt16
+    property fSplit : Win32cr::Foundation::BOOL
+    property cbPartial : UInt16
+    def initialize(@pDataReserve : Void*, @cbDataReserve : UInt16, @pbData : Void*, @cbData : UInt16, @fSplit : Win32cr::Foundation::BOOL, @cbPartial : UInt16)
+    end
+      end
 
 
       # Nested Type Cabinet_e__struct_
       @[Extern]
-      record Cabinet_e__struct_,
-        pHeaderReserve : Void*,
-        cbHeaderReserve : UInt16,
-        setID : UInt16,
-        iCabinet : Int32
+      struct Cabinet_e__struct_
+    property pHeaderReserve : Void*
+    property cbHeaderReserve : UInt16
+    property setID : UInt16
+    property iCabinet : Int32
+    def initialize(@pHeaderReserve : Void*, @cbHeaderReserve : UInt16, @setID : UInt16, @iCabinet : Int32)
+    end
+      end
 
 
       # Nested Type Folder_e__struct_
       @[Extern]
-      record Folder_e__struct_,
-        pFolderReserve : Void*,
-        cbFolderReserve : UInt16,
-        iFolder : UInt16
+      struct Folder_e__struct_
+    property pFolderReserve : Void*
+    property cbFolderReserve : UInt16
+    property iFolder : UInt16
+    def initialize(@pFolderReserve : Void*, @cbFolderReserve : UInt16, @iFolder : UInt16)
+    end
+      end
 
+    def initialize(@cabinet : Cabinet_e__struct_, @folder : Folder_e__struct_, @decrypt : Decrypt_e__struct_)
+    end
     end
 
+    def initialize(@fdidt : Win32cr::Storage::Cabinets::FDIDECRYPTTYPE, @pvUser : Void*, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record FDINOTIFICATION,
-    cb : Int32,
-    psz1 : Win32cr::Foundation::PSTR,
-    psz2 : Win32cr::Foundation::PSTR,
-    psz3 : Win32cr::Foundation::PSTR,
-    pv : Void*,
-    hf : LibC::IntPtrT,
-    date : UInt16,
-    time : UInt16,
-    attribs : UInt16,
-    setID : UInt16,
-    iCabinet : UInt16,
-    iFolder : UInt16,
-    fdie : Win32cr::Storage::Cabinets::FDIERROR
+  struct FDINOTIFICATION
+    property cb : Int32
+    property psz1 : Win32cr::Foundation::PSTR
+    property psz2 : Win32cr::Foundation::PSTR
+    property psz3 : Win32cr::Foundation::PSTR
+    property pv : Void*
+    property hf : LibC::IntPtrT
+    property date : UInt16
+    property time : UInt16
+    property attribs : UInt16
+    property setID : UInt16
+    property iCabinet : UInt16
+    property iFolder : UInt16
+    property fdie : Win32cr::Storage::Cabinets::FDIERROR
+    def initialize(@cb : Int32, @psz1 : Win32cr::Foundation::PSTR, @psz2 : Win32cr::Foundation::PSTR, @psz3 : Win32cr::Foundation::PSTR, @pv : Void*, @hf : LibC::IntPtrT, @date : UInt16, @time : UInt16, @attribs : UInt16, @setID : UInt16, @iCabinet : UInt16, @iFolder : UInt16, @fdie : Win32cr::Storage::Cabinets::FDIERROR)
+    end
+  end
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record FDISPILLFILE,
-    ach : Win32cr::Foundation::CHAR[2],
-    cbFile : Int32
+  struct FDISPILLFILE
+    property ach : Win32cr::Foundation::CHAR[2]
+    property cbFile : Int32
+    def initialize(@ach : Win32cr::Foundation::CHAR[2], @cbFile : Int32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record FDISPILLFILE,
-    ach : Win32cr::Foundation::CHAR[2],
-    cbFile : Int32
+  struct FDISPILLFILE
+    property ach : Win32cr::Foundation::CHAR[2]
+    property cbFile : Int32
+    def initialize(@ach : Win32cr::Foundation::CHAR[2], @cbFile : Int32)
+    end
+  end
   {% end %}
 
   @[Link("cabinet")]

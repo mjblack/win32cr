@@ -79,31 +79,43 @@ module Win32cr::Networking::NetworkListManager
   end
 
   @[Extern]
-  record NLM_USAGE_DATA,
-    usage_in_megabytes : UInt32,
-    last_sync_time : Win32cr::Foundation::FILETIME
+  struct NLM_USAGE_DATA
+    property usage_in_megabytes : UInt32
+    property last_sync_time : Win32cr::Foundation::FILETIME
+    def initialize(@usage_in_megabytes : UInt32, @last_sync_time : Win32cr::Foundation::FILETIME)
+    end
+  end
 
   @[Extern]
-  record NLM_DATAPLAN_STATUS,
-    interface_guid : LibC::GUID,
-    usage_data : Win32cr::Networking::NetworkListManager::NLM_USAGE_DATA,
-    data_limit_in_megabytes : UInt32,
-    inbound_bandwidth_in_kbps : UInt32,
-    outbound_bandwidth_in_kbps : UInt32,
-    next_billing_cycle : Win32cr::Foundation::FILETIME,
-    max_transfer_size_in_megabytes : UInt32,
-    reserved : UInt32
+  struct NLM_DATAPLAN_STATUS
+    property interface_guid : LibC::GUID
+    property usage_data : Win32cr::Networking::NetworkListManager::NLM_USAGE_DATA
+    property data_limit_in_megabytes : UInt32
+    property inbound_bandwidth_in_kbps : UInt32
+    property outbound_bandwidth_in_kbps : UInt32
+    property next_billing_cycle : Win32cr::Foundation::FILETIME
+    property max_transfer_size_in_megabytes : UInt32
+    property reserved : UInt32
+    def initialize(@interface_guid : LibC::GUID, @usage_data : Win32cr::Networking::NetworkListManager::NLM_USAGE_DATA, @data_limit_in_megabytes : UInt32, @inbound_bandwidth_in_kbps : UInt32, @outbound_bandwidth_in_kbps : UInt32, @next_billing_cycle : Win32cr::Foundation::FILETIME, @max_transfer_size_in_megabytes : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record NLM_SOCKADDR,
-    data : UInt8[128]
+  struct NLM_SOCKADDR
+    property data : UInt8[128]
+    def initialize(@data : UInt8[128])
+    end
+  end
 
   @[Extern]
-  record NLM_SIMULATED_PROFILE_INFO,
-    profile_name : UInt16[256],
-    cost : Win32cr::Networking::NetworkListManager::NLM_CONNECTION_COST,
-    usage_in_megabytes : UInt32,
-    data_limit_in_megabytes : UInt32
+  struct NLM_SIMULATED_PROFILE_INFO
+    property profile_name : UInt16[256]
+    property cost : Win32cr::Networking::NetworkListManager::NLM_CONNECTION_COST
+    property usage_in_megabytes : UInt32
+    property data_limit_in_megabytes : UInt32
+    def initialize(@profile_name : UInt16[256], @cost : Win32cr::Networking::NetworkListManager::NLM_CONNECTION_COST, @usage_in_megabytes : UInt32, @data_limit_in_megabytes : UInt32)
+    end
+  end
 
   @[Extern]
   record INetworkListManagerVtbl,
@@ -126,7 +138,6 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  #@[Com("dcb00000-570f-4a9b-8d69-199fdba5723b")]
   record INetworkListManager, lpVtbl : INetworkListManagerVtbl* do
     GUID = LibC::GUID.new(0xdcb00000_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetworkListManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -189,7 +200,6 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  #@[Com("dcb00001-570f-4a9b-8d69-199fdba5723b")]
   record INetworkListManagerEvents, lpVtbl : INetworkListManagerEventsVtbl* do
     GUID = LibC::GUID.new(0xdcb00001_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetworkListManagerEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -232,7 +242,6 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  #@[Com("dcb00002-570f-4a9b-8d69-199fdba5723b")]
   record INetwork, lpVtbl : INetworkVtbl* do
     GUID = LibC::GUID.new(0xdcb00002_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetwork*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -315,7 +324,6 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  #@[Com("dcb00003-570f-4a9b-8d69-199fdba5723b")]
   record IEnumNetworks, lpVtbl : IEnumNetworksVtbl* do
     GUID = LibC::GUID.new(0xdcb00003_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : IEnumNetworks*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -369,7 +377,6 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  #@[Com("dcb00004-570f-4a9b-8d69-199fdba5723b")]
   record INetworkEvents, lpVtbl : INetworkEventsVtbl* do
     GUID = LibC::GUID.new(0xdcb00004_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetworkEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -415,7 +422,6 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  #@[Com("dcb00005-570f-4a9b-8d69-199fdba5723b")]
   record INetworkConnection, lpVtbl : INetworkConnectionVtbl* do
     GUID = LibC::GUID.new(0xdcb00005_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetworkConnection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -480,7 +486,6 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  #@[Com("dcb00006-570f-4a9b-8d69-199fdba5723b")]
   record IEnumNetworkConnections, lpVtbl : IEnumNetworkConnectionsVtbl* do
     GUID = LibC::GUID.new(0xdcb00006_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : IEnumNetworkConnections*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -532,7 +537,6 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  #@[Com("dcb00007-570f-4a9b-8d69-199fdba5723b")]
   record INetworkConnectionEvents, lpVtbl : INetworkConnectionEventsVtbl* do
     GUID = LibC::GUID.new(0xdcb00007_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetworkConnectionEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -564,7 +568,6 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  #@[Com("dcb00008-570f-4a9b-8d69-199fdba5723b")]
   record INetworkCostManager, lpVtbl : INetworkCostManagerVtbl* do
     GUID = LibC::GUID.new(0xdcb00008_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetworkCostManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -598,7 +601,6 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  #@[Com("dcb00009-570f-4a9b-8d69-199fdba5723b")]
   record INetworkCostManagerEvents, lpVtbl : INetworkCostManagerEventsVtbl* do
     GUID = LibC::GUID.new(0xdcb00009_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetworkCostManagerEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -629,7 +631,6 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  #@[Com("dcb0000a-570f-4a9b-8d69-199fdba5723b")]
   record INetworkConnectionCost, lpVtbl : INetworkConnectionCostVtbl* do
     GUID = LibC::GUID.new(0xdcb0000a_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetworkConnectionCost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -660,7 +661,6 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  #@[Com("dcb0000b-570f-4a9b-8d69-199fdba5723b")]
   record INetworkConnectionCostEvents, lpVtbl : INetworkConnectionCostEventsVtbl* do
     GUID = LibC::GUID.new(0xdcb0000b_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetworkConnectionCostEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

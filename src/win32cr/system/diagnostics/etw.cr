@@ -8,17 +8,17 @@ module Win32cr::System::Diagnostics::Etw
   alias PROCESSTRACE_HANDLE = UInt64
   alias CONTROLTRACE_HANDLE = UInt64
   alias RELOGSTREAM_HANDLE = UInt64
-  alias PEVENT_TRACE_BUFFER_CALLBACKW = Proc(Win32cr::System::Diagnostics::Etw::EVENT_TRACE_LOGFILEW*, UInt32)*
+  alias PEVENT_TRACE_BUFFER_CALLBACKW = Proc(Win32cr::System::Diagnostics::Etw::EVENT_TRACE_LOGFILEW*, UInt32)
 
-  alias PEVENT_TRACE_BUFFER_CALLBACKA = Proc(Win32cr::System::Diagnostics::Etw::EVENT_TRACE_LOGFILEA*, UInt32)*
+  alias PEVENT_TRACE_BUFFER_CALLBACKA = Proc(Win32cr::System::Diagnostics::Etw::EVENT_TRACE_LOGFILEA*, UInt32)
 
-  alias PEVENT_CALLBACK = Proc(Win32cr::System::Diagnostics::Etw::EVENT_TRACE*, Void)*
+  alias PEVENT_CALLBACK = Proc(Win32cr::System::Diagnostics::Etw::EVENT_TRACE*, Void)
 
-  alias PEVENT_RECORD_CALLBACK = Proc(Win32cr::System::Diagnostics::Etw::EVENT_RECORD*, Void)*
+  alias PEVENT_RECORD_CALLBACK = Proc(Win32cr::System::Diagnostics::Etw::EVENT_RECORD*, Void)
 
-  alias WMIDPREQUEST = Proc(Win32cr::System::Diagnostics::Etw::WMIDPREQUESTCODE, Void*, UInt32*, Void*, UInt32)*
+  alias WMIDPREQUEST = Proc(Win32cr::System::Diagnostics::Etw::WMIDPREQUESTCODE, Void*, UInt32*, Void*, UInt32)
 
-  alias PENABLECALLBACK = Proc(LibC::GUID*, Win32cr::System::Diagnostics::Etw::ENABLECALLBACK_ENABLED_STATE, UInt8, UInt64, UInt64, Win32cr::System::Diagnostics::Etw::EVENT_FILTER_DESCRIPTOR*, Void*, Void)*
+  alias PENABLECALLBACK = Proc(LibC::GUID*, Win32cr::System::Diagnostics::Etw::ENABLECALLBACK_ENABLED_STATE, UInt8, UInt64, UInt64, Win32cr::System::Diagnostics::Etw::EVENT_FILTER_DESCRIPTOR*, Void*, Void)
 
   ALPCGuid = "45d8cccd-539f-4b72-a8b7-5c683142609a"
   DiskIoGuid = "3d6fa8d4-fe05-11d0-9dda-00c04fd7ba7c"
@@ -784,1155 +784,1532 @@ module Win32cr::System::Diagnostics::Etw
   end
 
   @[Extern]
-  record WNODE_HEADER,
-    buffer_size : UInt32,
-    provider_id : UInt32,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    guid : LibC::GUID,
-    client_context : UInt32,
-    flags : UInt32 do
+  struct WNODE_HEADER
+    property buffer_size : UInt32
+    property provider_id : UInt32
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property guid : LibC::GUID
+    property client_context : UInt32
+    property flags : UInt32
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      count_lost : UInt32,
-      kernel_handle : Win32cr::Foundation::HANDLE,
-      time_stamp : Win32cr::Foundation::LARGE_INTEGER
+    struct Anonymous2_e__Union_
+    property count_lost : UInt32
+    property kernel_handle : Win32cr::Foundation::HANDLE
+    property time_stamp : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@count_lost : UInt32, @kernel_handle : Win32cr::Foundation::HANDLE, @time_stamp : Win32cr::Foundation::LARGE_INTEGER)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      historical_context : UInt64,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous1_e__Union_
+    property historical_context : UInt64
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        version : UInt32,
-        linkage : UInt32
+      struct Anonymous_e__Struct_
+    property version : UInt32
+    property linkage : UInt32
+    def initialize(@version : UInt32, @linkage : UInt32)
+    end
+      end
 
+    def initialize(@historical_context : UInt64, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@buffer_size : UInt32, @provider_id : UInt32, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @guid : LibC::GUID, @client_context : UInt32, @flags : UInt32)
+    end
   end
 
   @[Extern]
-  record OFFSETINSTANCEDATAANDLENGTH,
-    offset_instance_data : UInt32,
-    length_instance_data : UInt32
+  struct OFFSETINSTANCEDATAANDLENGTH
+    property offset_instance_data : UInt32
+    property length_instance_data : UInt32
+    def initialize(@offset_instance_data : UInt32, @length_instance_data : UInt32)
+    end
+  end
 
   @[Extern]
-  record WNODE_ALL_DATA,
-    wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER,
-    data_block_offset : UInt32,
-    instance_count : UInt32,
-    offset_instance_name_offsets : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct WNODE_ALL_DATA
+    property wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER
+    property data_block_offset : UInt32
+    property instance_count : UInt32
+    property offset_instance_name_offsets : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      fixed_instance_size : UInt32,
-      offset_instance_data_and_length : Win32cr::System::Diagnostics::Etw::OFFSETINSTANCEDATAANDLENGTH*
+    struct Anonymous_e__Union_
+    property fixed_instance_size : UInt32
+    property offset_instance_data_and_length : Win32cr::System::Diagnostics::Etw::OFFSETINSTANCEDATAANDLENGTH*
+    def initialize(@fixed_instance_size : UInt32, @offset_instance_data_and_length : Win32cr::System::Diagnostics::Etw::OFFSETINSTANCEDATAANDLENGTH*)
+    end
+    end
 
+    def initialize(@wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER, @data_block_offset : UInt32, @instance_count : UInt32, @offset_instance_name_offsets : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record WNODE_SINGLE_INSTANCE,
-    wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER,
-    offset_instance_name : UInt32,
-    instance_index : UInt32,
-    data_block_offset : UInt32,
-    size_data_block : UInt32,
-    variable_data : UInt8*
+  struct WNODE_SINGLE_INSTANCE
+    property wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER
+    property offset_instance_name : UInt32
+    property instance_index : UInt32
+    property data_block_offset : UInt32
+    property size_data_block : UInt32
+    property variable_data : UInt8*
+    def initialize(@wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER, @offset_instance_name : UInt32, @instance_index : UInt32, @data_block_offset : UInt32, @size_data_block : UInt32, @variable_data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record WNODE_SINGLE_ITEM,
-    wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER,
-    offset_instance_name : UInt32,
-    instance_index : UInt32,
-    item_id : UInt32,
-    data_block_offset : UInt32,
-    size_data_item : UInt32,
-    variable_data : UInt8*
+  struct WNODE_SINGLE_ITEM
+    property wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER
+    property offset_instance_name : UInt32
+    property instance_index : UInt32
+    property item_id : UInt32
+    property data_block_offset : UInt32
+    property size_data_item : UInt32
+    property variable_data : UInt8*
+    def initialize(@wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER, @offset_instance_name : UInt32, @instance_index : UInt32, @item_id : UInt32, @data_block_offset : UInt32, @size_data_item : UInt32, @variable_data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record WNODE_METHOD_ITEM,
-    wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER,
-    offset_instance_name : UInt32,
-    instance_index : UInt32,
-    method_id : UInt32,
-    data_block_offset : UInt32,
-    size_data_block : UInt32,
-    variable_data : UInt8*
+  struct WNODE_METHOD_ITEM
+    property wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER
+    property offset_instance_name : UInt32
+    property instance_index : UInt32
+    property method_id : UInt32
+    property data_block_offset : UInt32
+    property size_data_block : UInt32
+    property variable_data : UInt8*
+    def initialize(@wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER, @offset_instance_name : UInt32, @instance_index : UInt32, @method_id : UInt32, @data_block_offset : UInt32, @size_data_block : UInt32, @variable_data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record WNODE_EVENT_ITEM,
-    wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER
+  struct WNODE_EVENT_ITEM
+    property wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER
+    def initialize(@wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER)
+    end
+  end
 
   @[Extern]
-  record WNODE_EVENT_REFERENCE,
-    wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER,
-    target_guid : LibC::GUID,
-    target_data_block_size : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct WNODE_EVENT_REFERENCE
+    property wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER
+    property target_guid : LibC::GUID
+    property target_data_block_size : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      target_instance_index : UInt32,
-      target_instance_name : UInt16*
+    struct Anonymous_e__Union_
+    property target_instance_index : UInt32
+    property target_instance_name : UInt16*
+    def initialize(@target_instance_index : UInt32, @target_instance_name : UInt16*)
+    end
+    end
 
+    def initialize(@wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER, @target_guid : LibC::GUID, @target_data_block_size : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record WNODE_TOO_SMALL,
-    wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER,
-    size_needed : UInt32
+  struct WNODE_TOO_SMALL
+    property wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER
+    property size_needed : UInt32
+    def initialize(@wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER, @size_needed : UInt32)
+    end
+  end
 
   @[Extern]
-  record WMIREGGUIDW,
-    guid : LibC::GUID,
-    flags : UInt32,
-    instance_count : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct WMIREGGUIDW
+    property guid : LibC::GUID
+    property flags : UInt32
+    property instance_count : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      instance_name_list : UInt32,
-      base_name_offset : UInt32,
-      pdo : LibC::UIntPtrT,
-      instance_info : LibC::UIntPtrT
+    struct Anonymous_e__Union_
+    property instance_name_list : UInt32
+    property base_name_offset : UInt32
+    property pdo : LibC::UIntPtrT
+    property instance_info : LibC::UIntPtrT
+    def initialize(@instance_name_list : UInt32, @base_name_offset : UInt32, @pdo : LibC::UIntPtrT, @instance_info : LibC::UIntPtrT)
+    end
+    end
 
+    def initialize(@guid : LibC::GUID, @flags : UInt32, @instance_count : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record WMIREGINFOW,
-    buffer_size : UInt32,
-    next_wmi_reg_info : UInt32,
-    registry_path : UInt32,
-    mof_resource_name : UInt32,
-    guid_count : UInt32,
-    wmi_reg_guid : Win32cr::System::Diagnostics::Etw::WMIREGGUIDW*
+  struct WMIREGINFOW
+    property buffer_size : UInt32
+    property next_wmi_reg_info : UInt32
+    property registry_path : UInt32
+    property mof_resource_name : UInt32
+    property guid_count : UInt32
+    property wmi_reg_guid : Win32cr::System::Diagnostics::Etw::WMIREGGUIDW*
+    def initialize(@buffer_size : UInt32, @next_wmi_reg_info : UInt32, @registry_path : UInt32, @mof_resource_name : UInt32, @guid_count : UInt32, @wmi_reg_guid : Win32cr::System::Diagnostics::Etw::WMIREGGUIDW*)
+    end
+  end
 
   @[Extern]
-  record EVENT_TRACE_HEADER,
-    size : UInt16,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    thread_id : UInt32,
-    process_id : UInt32,
-    time_stamp : Win32cr::Foundation::LARGE_INTEGER,
-    anonymous3 : Anonymous3_e__Union_,
-    anonymous4 : Anonymous4_e__Union_ do
+  struct EVENT_TRACE_HEADER
+    property size : UInt16
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property thread_id : UInt32
+    property process_id : UInt32
+    property time_stamp : Win32cr::Foundation::LARGE_INTEGER
+    property anonymous3 : Anonymous3_e__Union_
+    property anonymous4 : Anonymous4_e__Union_
 
     # Nested Type Anonymous4_e__Union_
     @[Extern(union: true)]
-    record Anonymous4_e__Union_,
-      anonymous1 : Anonymous1_e__Struct_,
-      processor_time : UInt64,
-      anonymous2 : Anonymous2_e__Struct_ do
+    struct Anonymous4_e__Union_
+    property anonymous1 : Anonymous1_e__Struct_
+    property processor_time : UInt64
+    property anonymous2 : Anonymous2_e__Struct_
 
       # Nested Type Anonymous2_e__Struct_
       @[Extern]
-      record Anonymous2_e__Struct_,
-        client_context : UInt32,
-        flags : UInt32
+      struct Anonymous2_e__Struct_
+    property client_context : UInt32
+    property flags : UInt32
+    def initialize(@client_context : UInt32, @flags : UInt32)
+    end
+      end
 
 
       # Nested Type Anonymous1_e__Struct_
       @[Extern]
-      record Anonymous1_e__Struct_,
-        kernel_time : UInt32,
-        user_time : UInt32
+      struct Anonymous1_e__Struct_
+    property kernel_time : UInt32
+    property user_time : UInt32
+    def initialize(@kernel_time : UInt32, @user_time : UInt32)
+    end
+      end
 
+    def initialize(@anonymous1 : Anonymous1_e__Struct_, @processor_time : UInt64, @anonymous2 : Anonymous2_e__Struct_)
+    end
     end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      version : UInt32,
-      class__ : Class_e__Struct_ do
+    struct Anonymous2_e__Union_
+    property version : UInt32
+    property class__ : Class_e__Struct_
 
       # Nested Type Class_e__Struct_
       @[Extern]
-      record Class_e__Struct_,
-        type__ : UInt8,
-        level : UInt8,
-        version : UInt16
+      struct Class_e__Struct_
+    property type__ : UInt8
+    property level : UInt8
+    property version : UInt16
+    def initialize(@type__ : UInt8, @level : UInt8, @version : UInt16)
+    end
+      end
 
+    def initialize(@version : UInt32, @class__ : Class_e__Struct_)
+    end
     end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      field_type_flags : UInt16,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous1_e__Union_
+    property field_type_flags : UInt16
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        header_type : UInt8,
-        marker_flags : UInt8
+      struct Anonymous_e__Struct_
+    property header_type : UInt8
+    property marker_flags : UInt8
+    def initialize(@header_type : UInt8, @marker_flags : UInt8)
+    end
+      end
 
+    def initialize(@field_type_flags : UInt16, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
 
     # Nested Type Anonymous3_e__Union_
     @[Extern(union: true)]
-    record Anonymous3_e__Union_,
-      guid : LibC::GUID,
-      guid_ptr : UInt64
+    struct Anonymous3_e__Union_
+    property guid : LibC::GUID
+    property guid_ptr : UInt64
+    def initialize(@guid : LibC::GUID, @guid_ptr : UInt64)
+    end
+    end
 
+    def initialize(@size : UInt16, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @thread_id : UInt32, @process_id : UInt32, @time_stamp : Win32cr::Foundation::LARGE_INTEGER, @anonymous3 : Anonymous3_e__Union_, @anonymous4 : Anonymous4_e__Union_)
+    end
   end
 
   @[Extern]
-  record EVENT_INSTANCE_HEADER,
-    size : UInt16,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    thread_id : UInt32,
-    process_id : UInt32,
-    time_stamp : Win32cr::Foundation::LARGE_INTEGER,
-    reg_handle : UInt64,
-    instance_id : UInt32,
-    parent_instance_id : UInt32,
-    anonymous3 : Anonymous3_e__Union_,
-    parent_reg_handle : UInt64 do
+  struct EVENT_INSTANCE_HEADER
+    property size : UInt16
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property thread_id : UInt32
+    property process_id : UInt32
+    property time_stamp : Win32cr::Foundation::LARGE_INTEGER
+    property reg_handle : UInt64
+    property instance_id : UInt32
+    property parent_instance_id : UInt32
+    property anonymous3 : Anonymous3_e__Union_
+    property parent_reg_handle : UInt64
 
     # Nested Type Anonymous3_e__Union_
     @[Extern(union: true)]
-    record Anonymous3_e__Union_,
-      anonymous1 : Anonymous1_e__Struct_,
-      processor_time : UInt64,
-      anonymous2 : Anonymous2_e__Struct_ do
+    struct Anonymous3_e__Union_
+    property anonymous1 : Anonymous1_e__Struct_
+    property processor_time : UInt64
+    property anonymous2 : Anonymous2_e__Struct_
 
       # Nested Type Anonymous2_e__Struct_
       @[Extern]
-      record Anonymous2_e__Struct_,
-        event_id : UInt32,
-        flags : UInt32
+      struct Anonymous2_e__Struct_
+    property event_id : UInt32
+    property flags : UInt32
+    def initialize(@event_id : UInt32, @flags : UInt32)
+    end
+      end
 
 
       # Nested Type Anonymous1_e__Struct_
       @[Extern]
-      record Anonymous1_e__Struct_,
-        kernel_time : UInt32,
-        user_time : UInt32
+      struct Anonymous1_e__Struct_
+    property kernel_time : UInt32
+    property user_time : UInt32
+    def initialize(@kernel_time : UInt32, @user_time : UInt32)
+    end
+      end
 
+    def initialize(@anonymous1 : Anonymous1_e__Struct_, @processor_time : UInt64, @anonymous2 : Anonymous2_e__Struct_)
+    end
     end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      version : UInt32,
-      class__ : Class_e__Struct_ do
+    struct Anonymous2_e__Union_
+    property version : UInt32
+    property class__ : Class_e__Struct_
 
       # Nested Type Class_e__Struct_
       @[Extern]
-      record Class_e__Struct_,
-        type__ : UInt8,
-        level : UInt8,
-        version : UInt16
+      struct Class_e__Struct_
+    property type__ : UInt8
+    property level : UInt8
+    property version : UInt16
+    def initialize(@type__ : UInt8, @level : UInt8, @version : UInt16)
+    end
+      end
 
+    def initialize(@version : UInt32, @class__ : Class_e__Struct_)
+    end
     end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      field_type_flags : UInt16,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous1_e__Union_
+    property field_type_flags : UInt16
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        header_type : UInt8,
-        marker_flags : UInt8
+      struct Anonymous_e__Struct_
+    property header_type : UInt8
+    property marker_flags : UInt8
+    def initialize(@header_type : UInt8, @marker_flags : UInt8)
+    end
+      end
 
+    def initialize(@field_type_flags : UInt16, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@size : UInt16, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @thread_id : UInt32, @process_id : UInt32, @time_stamp : Win32cr::Foundation::LARGE_INTEGER, @reg_handle : UInt64, @instance_id : UInt32, @parent_instance_id : UInt32, @anonymous3 : Anonymous3_e__Union_, @parent_reg_handle : UInt64)
+    end
   end
 
   @[Extern]
-  record MOF_FIELD,
-    data_ptr : UInt64,
-    length : UInt32,
-    data_type : UInt32
+  struct MOF_FIELD
+    property data_ptr : UInt64
+    property length : UInt32
+    property data_type : UInt32
+    def initialize(@data_ptr : UInt64, @length : UInt32, @data_type : UInt32)
+    end
+  end
 
   @[Extern]
-  record TRACE_LOGFILE_HEADER,
-    buffer_size : UInt32,
-    anonymous1 : Anonymous1_e__Union_,
-    provider_version : UInt32,
-    number_of_processors : UInt32,
-    end_time : Win32cr::Foundation::LARGE_INTEGER,
-    timer_resolution : UInt32,
-    maximum_file_size : UInt32,
-    log_file_mode : UInt32,
-    buffers_written : UInt32,
-    anonymous2 : Anonymous2_e__Union_,
-    logger_name : Win32cr::Foundation::PWSTR,
-    log_file_name : Win32cr::Foundation::PWSTR,
-    time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION,
-    boot_time : Win32cr::Foundation::LARGE_INTEGER,
-    perf_freq : Win32cr::Foundation::LARGE_INTEGER,
-    start_time : Win32cr::Foundation::LARGE_INTEGER,
-    reserved_flags : UInt32,
-    buffers_lost : UInt32 do
+  struct TRACE_LOGFILE_HEADER
+    property buffer_size : UInt32
+    property anonymous1 : Anonymous1_e__Union_
+    property provider_version : UInt32
+    property number_of_processors : UInt32
+    property end_time : Win32cr::Foundation::LARGE_INTEGER
+    property timer_resolution : UInt32
+    property maximum_file_size : UInt32
+    property log_file_mode : UInt32
+    property buffers_written : UInt32
+    property anonymous2 : Anonymous2_e__Union_
+    property logger_name : Win32cr::Foundation::PWSTR
+    property log_file_name : Win32cr::Foundation::PWSTR
+    property time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION
+    property boot_time : Win32cr::Foundation::LARGE_INTEGER
+    property perf_freq : Win32cr::Foundation::LARGE_INTEGER
+    property start_time : Win32cr::Foundation::LARGE_INTEGER
+    property reserved_flags : UInt32
+    property buffers_lost : UInt32
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      log_instance_guid : LibC::GUID,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous2_e__Union_
+    property log_instance_guid : LibC::GUID
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        start_buffers : UInt32,
-        pointer_size : UInt32,
-        events_lost : UInt32,
-        cpu_speed_in_m_hz : UInt32
+      struct Anonymous_e__Struct_
+    property start_buffers : UInt32
+    property pointer_size : UInt32
+    property events_lost : UInt32
+    property cpu_speed_in_m_hz : UInt32
+    def initialize(@start_buffers : UInt32, @pointer_size : UInt32, @events_lost : UInt32, @cpu_speed_in_m_hz : UInt32)
+    end
+      end
 
+    def initialize(@log_instance_guid : LibC::GUID, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      version : UInt32,
-      version_detail : VersionDetail_e__Struct_ do
+    struct Anonymous1_e__Union_
+    property version : UInt32
+    property version_detail : VersionDetail_e__Struct_
 
       # Nested Type VersionDetail_e__Struct_
       @[Extern]
-      record VersionDetail_e__Struct_,
-        major_version : UInt8,
-        minor_version : UInt8,
-        sub_version : UInt8,
-        sub_minor_version : UInt8
+      struct VersionDetail_e__Struct_
+    property major_version : UInt8
+    property minor_version : UInt8
+    property sub_version : UInt8
+    property sub_minor_version : UInt8
+    def initialize(@major_version : UInt8, @minor_version : UInt8, @sub_version : UInt8, @sub_minor_version : UInt8)
+    end
+      end
 
+    def initialize(@version : UInt32, @version_detail : VersionDetail_e__Struct_)
+    end
     end
 
+    def initialize(@buffer_size : UInt32, @anonymous1 : Anonymous1_e__Union_, @provider_version : UInt32, @number_of_processors : UInt32, @end_time : Win32cr::Foundation::LARGE_INTEGER, @timer_resolution : UInt32, @maximum_file_size : UInt32, @log_file_mode : UInt32, @buffers_written : UInt32, @anonymous2 : Anonymous2_e__Union_, @logger_name : Win32cr::Foundation::PWSTR, @log_file_name : Win32cr::Foundation::PWSTR, @time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION, @boot_time : Win32cr::Foundation::LARGE_INTEGER, @perf_freq : Win32cr::Foundation::LARGE_INTEGER, @start_time : Win32cr::Foundation::LARGE_INTEGER, @reserved_flags : UInt32, @buffers_lost : UInt32)
+    end
   end
 
   @[Extern]
-  record TRACE_LOGFILE_HEADER32,
-    buffer_size : UInt32,
-    anonymous1 : Anonymous1_e__Union_,
-    provider_version : UInt32,
-    number_of_processors : UInt32,
-    end_time : Win32cr::Foundation::LARGE_INTEGER,
-    timer_resolution : UInt32,
-    maximum_file_size : UInt32,
-    log_file_mode : UInt32,
-    buffers_written : UInt32,
-    anonymous2 : Anonymous2_e__Union_,
-    logger_name : UInt32,
-    log_file_name : UInt32,
-    time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION,
-    boot_time : Win32cr::Foundation::LARGE_INTEGER,
-    perf_freq : Win32cr::Foundation::LARGE_INTEGER,
-    start_time : Win32cr::Foundation::LARGE_INTEGER,
-    reserved_flags : UInt32,
-    buffers_lost : UInt32 do
+  struct TRACE_LOGFILE_HEADER32
+    property buffer_size : UInt32
+    property anonymous1 : Anonymous1_e__Union_
+    property provider_version : UInt32
+    property number_of_processors : UInt32
+    property end_time : Win32cr::Foundation::LARGE_INTEGER
+    property timer_resolution : UInt32
+    property maximum_file_size : UInt32
+    property log_file_mode : UInt32
+    property buffers_written : UInt32
+    property anonymous2 : Anonymous2_e__Union_
+    property logger_name : UInt32
+    property log_file_name : UInt32
+    property time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION
+    property boot_time : Win32cr::Foundation::LARGE_INTEGER
+    property perf_freq : Win32cr::Foundation::LARGE_INTEGER
+    property start_time : Win32cr::Foundation::LARGE_INTEGER
+    property reserved_flags : UInt32
+    property buffers_lost : UInt32
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      log_instance_guid : LibC::GUID,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous2_e__Union_
+    property log_instance_guid : LibC::GUID
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        start_buffers : UInt32,
-        pointer_size : UInt32,
-        events_lost : UInt32,
-        cpu_speed_in_m_hz : UInt32
+      struct Anonymous_e__Struct_
+    property start_buffers : UInt32
+    property pointer_size : UInt32
+    property events_lost : UInt32
+    property cpu_speed_in_m_hz : UInt32
+    def initialize(@start_buffers : UInt32, @pointer_size : UInt32, @events_lost : UInt32, @cpu_speed_in_m_hz : UInt32)
+    end
+      end
 
+    def initialize(@log_instance_guid : LibC::GUID, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      version : UInt32,
-      version_detail : VersionDetail_e__Struct_ do
+    struct Anonymous1_e__Union_
+    property version : UInt32
+    property version_detail : VersionDetail_e__Struct_
 
       # Nested Type VersionDetail_e__Struct_
       @[Extern]
-      record VersionDetail_e__Struct_,
-        major_version : UInt8,
-        minor_version : UInt8,
-        sub_version : UInt8,
-        sub_minor_version : UInt8
+      struct VersionDetail_e__Struct_
+    property major_version : UInt8
+    property minor_version : UInt8
+    property sub_version : UInt8
+    property sub_minor_version : UInt8
+    def initialize(@major_version : UInt8, @minor_version : UInt8, @sub_version : UInt8, @sub_minor_version : UInt8)
+    end
+      end
 
+    def initialize(@version : UInt32, @version_detail : VersionDetail_e__Struct_)
+    end
     end
 
+    def initialize(@buffer_size : UInt32, @anonymous1 : Anonymous1_e__Union_, @provider_version : UInt32, @number_of_processors : UInt32, @end_time : Win32cr::Foundation::LARGE_INTEGER, @timer_resolution : UInt32, @maximum_file_size : UInt32, @log_file_mode : UInt32, @buffers_written : UInt32, @anonymous2 : Anonymous2_e__Union_, @logger_name : UInt32, @log_file_name : UInt32, @time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION, @boot_time : Win32cr::Foundation::LARGE_INTEGER, @perf_freq : Win32cr::Foundation::LARGE_INTEGER, @start_time : Win32cr::Foundation::LARGE_INTEGER, @reserved_flags : UInt32, @buffers_lost : UInt32)
+    end
   end
 
   @[Extern]
-  record TRACE_LOGFILE_HEADER64,
-    buffer_size : UInt32,
-    anonymous1 : Anonymous1_e__Union_,
-    provider_version : UInt32,
-    number_of_processors : UInt32,
-    end_time : Win32cr::Foundation::LARGE_INTEGER,
-    timer_resolution : UInt32,
-    maximum_file_size : UInt32,
-    log_file_mode : UInt32,
-    buffers_written : UInt32,
-    anonymous2 : Anonymous2_e__Union_,
-    logger_name : UInt64,
-    log_file_name : UInt64,
-    time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION,
-    boot_time : Win32cr::Foundation::LARGE_INTEGER,
-    perf_freq : Win32cr::Foundation::LARGE_INTEGER,
-    start_time : Win32cr::Foundation::LARGE_INTEGER,
-    reserved_flags : UInt32,
-    buffers_lost : UInt32 do
+  struct TRACE_LOGFILE_HEADER64
+    property buffer_size : UInt32
+    property anonymous1 : Anonymous1_e__Union_
+    property provider_version : UInt32
+    property number_of_processors : UInt32
+    property end_time : Win32cr::Foundation::LARGE_INTEGER
+    property timer_resolution : UInt32
+    property maximum_file_size : UInt32
+    property log_file_mode : UInt32
+    property buffers_written : UInt32
+    property anonymous2 : Anonymous2_e__Union_
+    property logger_name : UInt64
+    property log_file_name : UInt64
+    property time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION
+    property boot_time : Win32cr::Foundation::LARGE_INTEGER
+    property perf_freq : Win32cr::Foundation::LARGE_INTEGER
+    property start_time : Win32cr::Foundation::LARGE_INTEGER
+    property reserved_flags : UInt32
+    property buffers_lost : UInt32
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      log_instance_guid : LibC::GUID,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous2_e__Union_
+    property log_instance_guid : LibC::GUID
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        start_buffers : UInt32,
-        pointer_size : UInt32,
-        events_lost : UInt32,
-        cpu_speed_in_m_hz : UInt32
+      struct Anonymous_e__Struct_
+    property start_buffers : UInt32
+    property pointer_size : UInt32
+    property events_lost : UInt32
+    property cpu_speed_in_m_hz : UInt32
+    def initialize(@start_buffers : UInt32, @pointer_size : UInt32, @events_lost : UInt32, @cpu_speed_in_m_hz : UInt32)
+    end
+      end
 
+    def initialize(@log_instance_guid : LibC::GUID, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      version : UInt32,
-      version_detail : VersionDetail_e__Struct_ do
+    struct Anonymous1_e__Union_
+    property version : UInt32
+    property version_detail : VersionDetail_e__Struct_
 
       # Nested Type VersionDetail_e__Struct_
       @[Extern]
-      record VersionDetail_e__Struct_,
-        major_version : UInt8,
-        minor_version : UInt8,
-        sub_version : UInt8,
-        sub_minor_version : UInt8
+      struct VersionDetail_e__Struct_
+    property major_version : UInt8
+    property minor_version : UInt8
+    property sub_version : UInt8
+    property sub_minor_version : UInt8
+    def initialize(@major_version : UInt8, @minor_version : UInt8, @sub_version : UInt8, @sub_minor_version : UInt8)
+    end
+      end
 
+    def initialize(@version : UInt32, @version_detail : VersionDetail_e__Struct_)
+    end
     end
 
+    def initialize(@buffer_size : UInt32, @anonymous1 : Anonymous1_e__Union_, @provider_version : UInt32, @number_of_processors : UInt32, @end_time : Win32cr::Foundation::LARGE_INTEGER, @timer_resolution : UInt32, @maximum_file_size : UInt32, @log_file_mode : UInt32, @buffers_written : UInt32, @anonymous2 : Anonymous2_e__Union_, @logger_name : UInt64, @log_file_name : UInt64, @time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION, @boot_time : Win32cr::Foundation::LARGE_INTEGER, @perf_freq : Win32cr::Foundation::LARGE_INTEGER, @start_time : Win32cr::Foundation::LARGE_INTEGER, @reserved_flags : UInt32, @buffers_lost : UInt32)
+    end
   end
 
   @[Extern]
-  record EVENT_INSTANCE_INFO,
-    reg_handle : Win32cr::Foundation::HANDLE,
-    instance_id : UInt32
+  struct EVENT_INSTANCE_INFO
+    property reg_handle : Win32cr::Foundation::HANDLE
+    property instance_id : UInt32
+    def initialize(@reg_handle : Win32cr::Foundation::HANDLE, @instance_id : UInt32)
+    end
+  end
 
   @[Extern]
-  record EVENT_TRACE_PROPERTIES,
-    wnode : Win32cr::System::Diagnostics::Etw::WNODE_HEADER,
-    buffer_size : UInt32,
-    minimum_buffers : UInt32,
-    maximum_buffers : UInt32,
-    maximum_file_size : UInt32,
-    log_file_mode : UInt32,
-    flush_timer : UInt32,
-    enable_flags : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_FLAG,
-    anonymous : Anonymous_e__Union_,
-    number_of_buffers : UInt32,
-    free_buffers : UInt32,
-    events_lost : UInt32,
-    buffers_written : UInt32,
-    log_buffers_lost : UInt32,
-    real_time_buffers_lost : UInt32,
-    logger_thread_id : Win32cr::Foundation::HANDLE,
-    log_file_name_offset : UInt32,
-    logger_name_offset : UInt32 do
+  struct EVENT_TRACE_PROPERTIES
+    property wnode : Win32cr::System::Diagnostics::Etw::WNODE_HEADER
+    property buffer_size : UInt32
+    property minimum_buffers : UInt32
+    property maximum_buffers : UInt32
+    property maximum_file_size : UInt32
+    property log_file_mode : UInt32
+    property flush_timer : UInt32
+    property enable_flags : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_FLAG
+    property anonymous : Anonymous_e__Union_
+    property number_of_buffers : UInt32
+    property free_buffers : UInt32
+    property events_lost : UInt32
+    property buffers_written : UInt32
+    property log_buffers_lost : UInt32
+    property real_time_buffers_lost : UInt32
+    property logger_thread_id : Win32cr::Foundation::HANDLE
+    property log_file_name_offset : UInt32
+    property logger_name_offset : UInt32
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      age_limit : Int32,
-      flush_threshold : Int32
+    struct Anonymous_e__Union_
+    property age_limit : Int32
+    property flush_threshold : Int32
+    def initialize(@age_limit : Int32, @flush_threshold : Int32)
+    end
+    end
 
+    def initialize(@wnode : Win32cr::System::Diagnostics::Etw::WNODE_HEADER, @buffer_size : UInt32, @minimum_buffers : UInt32, @maximum_buffers : UInt32, @maximum_file_size : UInt32, @log_file_mode : UInt32, @flush_timer : UInt32, @enable_flags : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_FLAG, @anonymous : Anonymous_e__Union_, @number_of_buffers : UInt32, @free_buffers : UInt32, @events_lost : UInt32, @buffers_written : UInt32, @log_buffers_lost : UInt32, @real_time_buffers_lost : UInt32, @logger_thread_id : Win32cr::Foundation::HANDLE, @log_file_name_offset : UInt32, @logger_name_offset : UInt32)
+    end
   end
 
   @[Extern]
-  record EVENT_TRACE_PROPERTIES_V2,
-    wnode : Win32cr::System::Diagnostics::Etw::WNODE_HEADER,
-    buffer_size : UInt32,
-    minimum_buffers : UInt32,
-    maximum_buffers : UInt32,
-    maximum_file_size : UInt32,
-    log_file_mode : UInt32,
-    flush_timer : UInt32,
-    enable_flags : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_FLAG,
-    anonymous1 : Anonymous1_e__Union_,
-    number_of_buffers : UInt32,
-    free_buffers : UInt32,
-    events_lost : UInt32,
-    buffers_written : UInt32,
-    log_buffers_lost : UInt32,
-    real_time_buffers_lost : UInt32,
-    logger_thread_id : Win32cr::Foundation::HANDLE,
-    log_file_name_offset : UInt32,
-    logger_name_offset : UInt32,
-    anonymous2 : Anonymous2_e__Union_,
-    filter_desc_count : UInt32,
-    filter_desc : Win32cr::System::Diagnostics::Etw::EVENT_FILTER_DESCRIPTOR*,
-    anonymous3 : Anonymous3_e__Union_ do
+  struct EVENT_TRACE_PROPERTIES_V2
+    property wnode : Win32cr::System::Diagnostics::Etw::WNODE_HEADER
+    property buffer_size : UInt32
+    property minimum_buffers : UInt32
+    property maximum_buffers : UInt32
+    property maximum_file_size : UInt32
+    property log_file_mode : UInt32
+    property flush_timer : UInt32
+    property enable_flags : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_FLAG
+    property anonymous1 : Anonymous1_e__Union_
+    property number_of_buffers : UInt32
+    property free_buffers : UInt32
+    property events_lost : UInt32
+    property buffers_written : UInt32
+    property log_buffers_lost : UInt32
+    property real_time_buffers_lost : UInt32
+    property logger_thread_id : Win32cr::Foundation::HANDLE
+    property log_file_name_offset : UInt32
+    property logger_name_offset : UInt32
+    property anonymous2 : Anonymous2_e__Union_
+    property filter_desc_count : UInt32
+    property filter_desc : Win32cr::System::Diagnostics::Etw::EVENT_FILTER_DESCRIPTOR*
+    property anonymous3 : Anonymous3_e__Union_
 
     # Nested Type Anonymous3_e__Union_
     @[Extern(union: true)]
-    record Anonymous3_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      v2_options : UInt64 do
+    struct Anonymous3_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property v2_options : UInt64
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @v2_options : UInt64)
+    end
     end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      v2_control : UInt32 do
+    struct Anonymous2_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property v2_control : UInt32
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @v2_control : UInt32)
+    end
     end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      age_limit : Int32,
-      flush_threshold : Int32
+    struct Anonymous1_e__Union_
+    property age_limit : Int32
+    property flush_threshold : Int32
+    def initialize(@age_limit : Int32, @flush_threshold : Int32)
+    end
+    end
 
+    def initialize(@wnode : Win32cr::System::Diagnostics::Etw::WNODE_HEADER, @buffer_size : UInt32, @minimum_buffers : UInt32, @maximum_buffers : UInt32, @maximum_file_size : UInt32, @log_file_mode : UInt32, @flush_timer : UInt32, @enable_flags : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_FLAG, @anonymous1 : Anonymous1_e__Union_, @number_of_buffers : UInt32, @free_buffers : UInt32, @events_lost : UInt32, @buffers_written : UInt32, @log_buffers_lost : UInt32, @real_time_buffers_lost : UInt32, @logger_thread_id : Win32cr::Foundation::HANDLE, @log_file_name_offset : UInt32, @logger_name_offset : UInt32, @anonymous2 : Anonymous2_e__Union_, @filter_desc_count : UInt32, @filter_desc : Win32cr::System::Diagnostics::Etw::EVENT_FILTER_DESCRIPTOR*, @anonymous3 : Anonymous3_e__Union_)
+    end
   end
 
   @[Extern]
-  record TRACE_GUID_REGISTRATION,
-    guid : LibC::GUID*,
-    reg_handle : Win32cr::Foundation::HANDLE
+  struct TRACE_GUID_REGISTRATION
+    property guid : LibC::GUID*
+    property reg_handle : Win32cr::Foundation::HANDLE
+    def initialize(@guid : LibC::GUID*, @reg_handle : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record TRACE_GUID_PROPERTIES,
-    guid : LibC::GUID,
-    guid_type : UInt32,
-    logger_id : UInt32,
-    enable_level : UInt32,
-    enable_flags : UInt32,
-    is_enable : Win32cr::Foundation::BOOLEAN
+  struct TRACE_GUID_PROPERTIES
+    property guid : LibC::GUID
+    property guid_type : UInt32
+    property logger_id : UInt32
+    property enable_level : UInt32
+    property enable_flags : UInt32
+    property is_enable : Win32cr::Foundation::BOOLEAN
+    def initialize(@guid : LibC::GUID, @guid_type : UInt32, @logger_id : UInt32, @enable_level : UInt32, @enable_flags : UInt32, @is_enable : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record ETW_BUFFER_CONTEXT,
-    anonymous : Anonymous_e__Union_,
-    logger_id : UInt16 do
+  struct ETW_BUFFER_CONTEXT
+    property anonymous : Anonymous_e__Union_
+    property logger_id : UInt16
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      processor_index : UInt16 do
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property processor_index : UInt16
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        processor_number : UInt8,
-        alignment : UInt8
+      struct Anonymous_e__Struct_
+    property processor_number : UInt8
+    property alignment : UInt8
+    def initialize(@processor_number : UInt8, @alignment : UInt8)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @processor_index : UInt16)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_, @logger_id : UInt16)
+    end
   end
 
   @[Extern]
-  record TRACE_ENABLE_INFO,
-    is_enabled : UInt32,
-    level : UInt8,
-    reserved1 : UInt8,
-    logger_id : UInt16,
-    enable_property : UInt32,
-    reserved2 : UInt32,
-    match_any_keyword : UInt64,
-    match_all_keyword : UInt64
+  struct TRACE_ENABLE_INFO
+    property is_enabled : UInt32
+    property level : UInt8
+    property reserved1 : UInt8
+    property logger_id : UInt16
+    property enable_property : UInt32
+    property reserved2 : UInt32
+    property match_any_keyword : UInt64
+    property match_all_keyword : UInt64
+    def initialize(@is_enabled : UInt32, @level : UInt8, @reserved1 : UInt8, @logger_id : UInt16, @enable_property : UInt32, @reserved2 : UInt32, @match_any_keyword : UInt64, @match_all_keyword : UInt64)
+    end
+  end
 
   @[Extern]
-  record TRACE_PROVIDER_INSTANCE_INFO,
-    next_offset : UInt32,
-    enable_count : UInt32,
-    pid : UInt32,
-    flags : UInt32
+  struct TRACE_PROVIDER_INSTANCE_INFO
+    property next_offset : UInt32
+    property enable_count : UInt32
+    property pid : UInt32
+    property flags : UInt32
+    def initialize(@next_offset : UInt32, @enable_count : UInt32, @pid : UInt32, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record TRACE_GUID_INFO,
-    instance_count : UInt32,
-    reserved : UInt32
+  struct TRACE_GUID_INFO
+    property instance_count : UInt32
+    property reserved : UInt32
+    def initialize(@instance_count : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record PROFILE_SOURCE_INFO,
-    next_entry_offset : UInt32,
-    source : UInt32,
-    min_interval : UInt32,
-    max_interval : UInt32,
-    reserved : UInt64,
-    description : UInt16*
+  struct PROFILE_SOURCE_INFO
+    property next_entry_offset : UInt32
+    property source : UInt32
+    property min_interval : UInt32
+    property max_interval : UInt32
+    property reserved : UInt64
+    property description : UInt16*
+    def initialize(@next_entry_offset : UInt32, @source : UInt32, @min_interval : UInt32, @max_interval : UInt32, @reserved : UInt64, @description : UInt16*)
+    end
+  end
 
   @[Extern]
-  record ETW_PMC_COUNTER_OWNER,
-    owner_type : Win32cr::System::Diagnostics::Etw::ETW_PMC_COUNTER_OWNER_TYPE,
-    profile_source : UInt32,
-    owner_tag : UInt32
+  struct ETW_PMC_COUNTER_OWNER
+    property owner_type : Win32cr::System::Diagnostics::Etw::ETW_PMC_COUNTER_OWNER_TYPE
+    property profile_source : UInt32
+    property owner_tag : UInt32
+    def initialize(@owner_type : Win32cr::System::Diagnostics::Etw::ETW_PMC_COUNTER_OWNER_TYPE, @profile_source : UInt32, @owner_tag : UInt32)
+    end
+  end
 
   @[Extern]
-  record ETW_PMC_COUNTER_OWNERSHIP_STATUS,
-    processor_number : UInt32,
-    number_of_counters : UInt32,
-    counter_owners : Win32cr::System::Diagnostics::Etw::ETW_PMC_COUNTER_OWNER*
+  struct ETW_PMC_COUNTER_OWNERSHIP_STATUS
+    property processor_number : UInt32
+    property number_of_counters : UInt32
+    property counter_owners : Win32cr::System::Diagnostics::Etw::ETW_PMC_COUNTER_OWNER*
+    def initialize(@processor_number : UInt32, @number_of_counters : UInt32, @counter_owners : Win32cr::System::Diagnostics::Etw::ETW_PMC_COUNTER_OWNER*)
+    end
+  end
 
   @[Extern]
-  record EVENT_TRACE,
-    header : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_HEADER,
-    instance_id : UInt32,
-    parent_instance_id : UInt32,
-    parent_guid : LibC::GUID,
-    mof_data : Void*,
-    mof_length : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct EVENT_TRACE
+    property header : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_HEADER
+    property instance_id : UInt32
+    property parent_instance_id : UInt32
+    property parent_guid : LibC::GUID
+    property mof_data : Void*
+    property mof_length : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      client_context : UInt32,
-      buffer_context : Win32cr::System::Diagnostics::Etw::ETW_BUFFER_CONTEXT
+    struct Anonymous_e__Union_
+    property client_context : UInt32
+    property buffer_context : Win32cr::System::Diagnostics::Etw::ETW_BUFFER_CONTEXT
+    def initialize(@client_context : UInt32, @buffer_context : Win32cr::System::Diagnostics::Etw::ETW_BUFFER_CONTEXT)
+    end
+    end
 
+    def initialize(@header : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_HEADER, @instance_id : UInt32, @parent_instance_id : UInt32, @parent_guid : LibC::GUID, @mof_data : Void*, @mof_length : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record EVENT_TRACE_LOGFILEW,
-    log_file_name : Win32cr::Foundation::PWSTR,
-    logger_name : Win32cr::Foundation::PWSTR,
-    current_time : Int64,
-    buffers_read : UInt32,
-    anonymous1 : Anonymous1_e__Union_,
-    current_event : Win32cr::System::Diagnostics::Etw::EVENT_TRACE,
-    logfile_header : Win32cr::System::Diagnostics::Etw::TRACE_LOGFILE_HEADER,
-    buffer_callback : Win32cr::System::Diagnostics::Etw::PEVENT_TRACE_BUFFER_CALLBACKW,
-    buffer_size : UInt32,
-    filled : UInt32,
-    events_lost : UInt32,
-    anonymous2 : Anonymous2_e__Union_,
-    is_kernel_trace : UInt32,
-    context : Void* do
+  struct EVENT_TRACE_LOGFILEW
+    property log_file_name : Win32cr::Foundation::PWSTR
+    property logger_name : Win32cr::Foundation::PWSTR
+    property current_time : Int64
+    property buffers_read : UInt32
+    property anonymous1 : Anonymous1_e__Union_
+    property current_event : Win32cr::System::Diagnostics::Etw::EVENT_TRACE
+    property logfile_header : Win32cr::System::Diagnostics::Etw::TRACE_LOGFILE_HEADER
+    property buffer_callback : Win32cr::System::Diagnostics::Etw::PEVENT_TRACE_BUFFER_CALLBACKW
+    property buffer_size : UInt32
+    property filled : UInt32
+    property events_lost : UInt32
+    property anonymous2 : Anonymous2_e__Union_
+    property is_kernel_trace : UInt32
+    property context : Void*
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      log_file_mode : UInt32,
-      process_trace_mode : UInt32
+    struct Anonymous1_e__Union_
+    property log_file_mode : UInt32
+    property process_trace_mode : UInt32
+    def initialize(@log_file_mode : UInt32, @process_trace_mode : UInt32)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      event_callback : Win32cr::System::Diagnostics::Etw::PEVENT_CALLBACK,
-      event_record_callback : Win32cr::System::Diagnostics::Etw::PEVENT_RECORD_CALLBACK
+    struct Anonymous2_e__Union_
+    property event_callback : Win32cr::System::Diagnostics::Etw::PEVENT_CALLBACK
+    property event_record_callback : Win32cr::System::Diagnostics::Etw::PEVENT_RECORD_CALLBACK
+    def initialize(@event_callback : Win32cr::System::Diagnostics::Etw::PEVENT_CALLBACK, @event_record_callback : Win32cr::System::Diagnostics::Etw::PEVENT_RECORD_CALLBACK)
+    end
+    end
 
+    def initialize(@log_file_name : Win32cr::Foundation::PWSTR, @logger_name : Win32cr::Foundation::PWSTR, @current_time : Int64, @buffers_read : UInt32, @anonymous1 : Anonymous1_e__Union_, @current_event : Win32cr::System::Diagnostics::Etw::EVENT_TRACE, @logfile_header : Win32cr::System::Diagnostics::Etw::TRACE_LOGFILE_HEADER, @buffer_callback : Win32cr::System::Diagnostics::Etw::PEVENT_TRACE_BUFFER_CALLBACKW, @buffer_size : UInt32, @filled : UInt32, @events_lost : UInt32, @anonymous2 : Anonymous2_e__Union_, @is_kernel_trace : UInt32, @context : Void*)
+    end
   end
 
   @[Extern]
-  record EVENT_TRACE_LOGFILEA,
-    log_file_name : Win32cr::Foundation::PSTR,
-    logger_name : Win32cr::Foundation::PSTR,
-    current_time : Int64,
-    buffers_read : UInt32,
-    anonymous1 : Anonymous1_e__Union_,
-    current_event : Win32cr::System::Diagnostics::Etw::EVENT_TRACE,
-    logfile_header : Win32cr::System::Diagnostics::Etw::TRACE_LOGFILE_HEADER,
-    buffer_callback : Win32cr::System::Diagnostics::Etw::PEVENT_TRACE_BUFFER_CALLBACKA,
-    buffer_size : UInt32,
-    filled : UInt32,
-    events_lost : UInt32,
-    anonymous2 : Anonymous2_e__Union_,
-    is_kernel_trace : UInt32,
-    context : Void* do
+  struct EVENT_TRACE_LOGFILEA
+    property log_file_name : Win32cr::Foundation::PSTR
+    property logger_name : Win32cr::Foundation::PSTR
+    property current_time : Int64
+    property buffers_read : UInt32
+    property anonymous1 : Anonymous1_e__Union_
+    property current_event : Win32cr::System::Diagnostics::Etw::EVENT_TRACE
+    property logfile_header : Win32cr::System::Diagnostics::Etw::TRACE_LOGFILE_HEADER
+    property buffer_callback : Win32cr::System::Diagnostics::Etw::PEVENT_TRACE_BUFFER_CALLBACKA
+    property buffer_size : UInt32
+    property filled : UInt32
+    property events_lost : UInt32
+    property anonymous2 : Anonymous2_e__Union_
+    property is_kernel_trace : UInt32
+    property context : Void*
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      log_file_mode : UInt32,
-      process_trace_mode : UInt32
+    struct Anonymous1_e__Union_
+    property log_file_mode : UInt32
+    property process_trace_mode : UInt32
+    def initialize(@log_file_mode : UInt32, @process_trace_mode : UInt32)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      event_callback : Win32cr::System::Diagnostics::Etw::PEVENT_CALLBACK,
-      event_record_callback : Win32cr::System::Diagnostics::Etw::PEVENT_RECORD_CALLBACK
+    struct Anonymous2_e__Union_
+    property event_callback : Win32cr::System::Diagnostics::Etw::PEVENT_CALLBACK
+    property event_record_callback : Win32cr::System::Diagnostics::Etw::PEVENT_RECORD_CALLBACK
+    def initialize(@event_callback : Win32cr::System::Diagnostics::Etw::PEVENT_CALLBACK, @event_record_callback : Win32cr::System::Diagnostics::Etw::PEVENT_RECORD_CALLBACK)
+    end
+    end
 
+    def initialize(@log_file_name : Win32cr::Foundation::PSTR, @logger_name : Win32cr::Foundation::PSTR, @current_time : Int64, @buffers_read : UInt32, @anonymous1 : Anonymous1_e__Union_, @current_event : Win32cr::System::Diagnostics::Etw::EVENT_TRACE, @logfile_header : Win32cr::System::Diagnostics::Etw::TRACE_LOGFILE_HEADER, @buffer_callback : Win32cr::System::Diagnostics::Etw::PEVENT_TRACE_BUFFER_CALLBACKA, @buffer_size : UInt32, @filled : UInt32, @events_lost : UInt32, @anonymous2 : Anonymous2_e__Union_, @is_kernel_trace : UInt32, @context : Void*)
+    end
   end
 
   @[Extern]
-  record ENABLE_TRACE_PARAMETERS_V1,
-    version : UInt32,
-    enable_property : UInt32,
-    control_flags : UInt32,
-    source_id : LibC::GUID,
-    enable_filter_desc : Win32cr::System::Diagnostics::Etw::EVENT_FILTER_DESCRIPTOR*
+  struct ENABLE_TRACE_PARAMETERS_V1
+    property version : UInt32
+    property enable_property : UInt32
+    property control_flags : UInt32
+    property source_id : LibC::GUID
+    property enable_filter_desc : Win32cr::System::Diagnostics::Etw::EVENT_FILTER_DESCRIPTOR*
+    def initialize(@version : UInt32, @enable_property : UInt32, @control_flags : UInt32, @source_id : LibC::GUID, @enable_filter_desc : Win32cr::System::Diagnostics::Etw::EVENT_FILTER_DESCRIPTOR*)
+    end
+  end
 
   @[Extern]
-  record ENABLE_TRACE_PARAMETERS,
-    version : UInt32,
-    enable_property : UInt32,
-    control_flags : UInt32,
-    source_id : LibC::GUID,
-    enable_filter_desc : Win32cr::System::Diagnostics::Etw::EVENT_FILTER_DESCRIPTOR*,
-    filter_desc_count : UInt32
+  struct ENABLE_TRACE_PARAMETERS
+    property version : UInt32
+    property enable_property : UInt32
+    property control_flags : UInt32
+    property source_id : LibC::GUID
+    property enable_filter_desc : Win32cr::System::Diagnostics::Etw::EVENT_FILTER_DESCRIPTOR*
+    property filter_desc_count : UInt32
+    def initialize(@version : UInt32, @enable_property : UInt32, @control_flags : UInt32, @source_id : LibC::GUID, @enable_filter_desc : Win32cr::System::Diagnostics::Etw::EVENT_FILTER_DESCRIPTOR*, @filter_desc_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record CLASSIC_EVENT_ID,
-    event_guid : LibC::GUID,
-    type__ : UInt8,
-    reserved : UInt8[7]
+  struct CLASSIC_EVENT_ID
+    property event_guid : LibC::GUID
+    property type__ : UInt8
+    property reserved : UInt8[7]
+    def initialize(@event_guid : LibC::GUID, @type__ : UInt8, @reserved : UInt8[7])
+    end
+  end
 
   @[Extern]
-  record TRACE_STACK_CACHING_INFO,
-    enabled : Win32cr::Foundation::BOOLEAN,
-    cache_size : UInt32,
-    bucket_count : UInt32
+  struct TRACE_STACK_CACHING_INFO
+    property enabled : Win32cr::Foundation::BOOLEAN
+    property cache_size : UInt32
+    property bucket_count : UInt32
+    def initialize(@enabled : Win32cr::Foundation::BOOLEAN, @cache_size : UInt32, @bucket_count : UInt32)
+    end
+  end
 
   @[Extern]
-  record TRACE_PROFILE_INTERVAL,
-    source : UInt32,
-    interval : UInt32
+  struct TRACE_PROFILE_INTERVAL
+    property source : UInt32
+    property interval : UInt32
+    def initialize(@source : UInt32, @interval : UInt32)
+    end
+  end
 
   @[Extern]
-  record TRACE_VERSION_INFO,
-    etw_trace_processing_version : UInt32,
-    reserved : UInt32
+  struct TRACE_VERSION_INFO
+    property etw_trace_processing_version : UInt32
+    property reserved : UInt32
+    def initialize(@etw_trace_processing_version : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record TRACE_PERIODIC_CAPTURE_STATE_INFO,
-    capture_state_frequency_in_seconds : UInt32,
-    provider_count : UInt16,
-    reserved : UInt16
+  struct TRACE_PERIODIC_CAPTURE_STATE_INFO
+    property capture_state_frequency_in_seconds : UInt32
+    property provider_count : UInt16
+    property reserved : UInt16
+    def initialize(@capture_state_frequency_in_seconds : UInt32, @provider_count : UInt16, @reserved : UInt16)
+    end
+  end
 
   @[Extern]
-  record ETW_TRACE_PARTITION_INFORMATION,
-    partition_id : LibC::GUID,
-    parent_id : LibC::GUID,
-    qpc_offset_from_root : Int64,
-    partition_type : UInt32
+  struct ETW_TRACE_PARTITION_INFORMATION
+    property partition_id : LibC::GUID
+    property parent_id : LibC::GUID
+    property qpc_offset_from_root : Int64
+    property partition_type : UInt32
+    def initialize(@partition_id : LibC::GUID, @parent_id : LibC::GUID, @qpc_offset_from_root : Int64, @partition_type : UInt32)
+    end
+  end
 
   @[Extern]
-  record ETW_TRACE_PARTITION_INFORMATION_V2,
-    qpc_offset_from_root : Int64,
-    partition_type : UInt32,
-    partition_id : Win32cr::Foundation::PWSTR,
-    parent_id : Win32cr::Foundation::PWSTR
+  struct ETW_TRACE_PARTITION_INFORMATION_V2
+    property qpc_offset_from_root : Int64
+    property partition_type : UInt32
+    property partition_id : Win32cr::Foundation::PWSTR
+    property parent_id : Win32cr::Foundation::PWSTR
+    def initialize(@qpc_offset_from_root : Int64, @partition_type : UInt32, @partition_id : Win32cr::Foundation::PWSTR, @parent_id : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record EVENT_DATA_DESCRIPTOR,
-    ptr : UInt64,
-    size : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct EVENT_DATA_DESCRIPTOR
+    property ptr : UInt64
+    property size : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      reserved : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property reserved : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        type__ : UInt8,
-        reserved1 : UInt8,
-        reserved2 : UInt16
+      struct Anonymous_e__Struct_
+    property type__ : UInt8
+    property reserved1 : UInt8
+    property reserved2 : UInt16
+    def initialize(@type__ : UInt8, @reserved1 : UInt8, @reserved2 : UInt16)
+    end
+      end
 
+    def initialize(@reserved : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@ptr : UInt64, @size : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record EVENT_DESCRIPTOR,
-    id : UInt16,
-    version : UInt8,
-    channel : UInt8,
-    level : UInt8,
-    opcode : UInt8,
-    task : UInt16,
-    keyword : UInt64
+  struct EVENT_DESCRIPTOR
+    property id : UInt16
+    property version : UInt8
+    property channel : UInt8
+    property level : UInt8
+    property opcode : UInt8
+    property task : UInt16
+    property keyword : UInt64
+    def initialize(@id : UInt16, @version : UInt8, @channel : UInt8, @level : UInt8, @opcode : UInt8, @task : UInt16, @keyword : UInt64)
+    end
+  end
 
   @[Extern]
-  record EVENT_FILTER_DESCRIPTOR,
-    ptr : UInt64,
-    size : UInt32,
-    type__ : UInt32
+  struct EVENT_FILTER_DESCRIPTOR
+    property ptr : UInt64
+    property size : UInt32
+    property type__ : UInt32
+    def initialize(@ptr : UInt64, @size : UInt32, @type__ : UInt32)
+    end
+  end
 
   @[Extern]
-  record EVENT_FILTER_HEADER,
-    id : UInt16,
-    version : UInt8,
-    reserved : UInt8[5],
-    instance_id : UInt64,
-    size : UInt32,
-    next_offset : UInt32
+  struct EVENT_FILTER_HEADER
+    property id : UInt16
+    property version : UInt8
+    property reserved : UInt8[5]
+    property instance_id : UInt64
+    property size : UInt32
+    property next_offset : UInt32
+    def initialize(@id : UInt16, @version : UInt8, @reserved : UInt8[5], @instance_id : UInt64, @size : UInt32, @next_offset : UInt32)
+    end
+  end
 
   @[Extern]
-  record EVENT_FILTER_EVENT_ID,
-    filter_in : Win32cr::Foundation::BOOLEAN,
-    reserved : UInt8,
-    count : UInt16,
-    events : UInt16*
+  struct EVENT_FILTER_EVENT_ID
+    property filter_in : Win32cr::Foundation::BOOLEAN
+    property reserved : UInt8
+    property count : UInt16
+    property events : UInt16*
+    def initialize(@filter_in : Win32cr::Foundation::BOOLEAN, @reserved : UInt8, @count : UInt16, @events : UInt16*)
+    end
+  end
 
   @[Extern]
-  record EVENT_FILTER_EVENT_NAME,
-    match_any_keyword : UInt64,
-    match_all_keyword : UInt64,
-    level : UInt8,
-    filter_in : Win32cr::Foundation::BOOLEAN,
-    name_count : UInt16,
-    names : UInt8*
+  struct EVENT_FILTER_EVENT_NAME
+    property match_any_keyword : UInt64
+    property match_all_keyword : UInt64
+    property level : UInt8
+    property filter_in : Win32cr::Foundation::BOOLEAN
+    property name_count : UInt16
+    property names : UInt8*
+    def initialize(@match_any_keyword : UInt64, @match_all_keyword : UInt64, @level : UInt8, @filter_in : Win32cr::Foundation::BOOLEAN, @name_count : UInt16, @names : UInt8*)
+    end
+  end
 
   @[Extern]
-  record EVENT_FILTER_LEVEL_KW,
-    match_any_keyword : UInt64,
-    match_all_keyword : UInt64,
-    level : UInt8,
-    filter_in : Win32cr::Foundation::BOOLEAN
+  struct EVENT_FILTER_LEVEL_KW
+    property match_any_keyword : UInt64
+    property match_all_keyword : UInt64
+    property level : UInt8
+    property filter_in : Win32cr::Foundation::BOOLEAN
+    def initialize(@match_any_keyword : UInt64, @match_all_keyword : UInt64, @level : UInt8, @filter_in : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record EVENT_HEADER_EXTENDED_DATA_ITEM,
-    reserved1 : UInt16,
-    ext_type : UInt16,
-    anonymous : Anonymous_e__Struct_,
-    data_size : UInt16,
-    data_ptr : UInt64 do
+  struct EVENT_HEADER_EXTENDED_DATA_ITEM
+    property reserved1 : UInt16
+    property ext_type : UInt16
+    property anonymous : Anonymous_e__Struct_
+    property data_size : UInt16
+    property data_ptr : UInt64
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      _bitfield : UInt16
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+    end
 
+    def initialize(@reserved1 : UInt16, @ext_type : UInt16, @anonymous : Anonymous_e__Struct_, @data_size : UInt16, @data_ptr : UInt64)
+    end
   end
 
   @[Extern]
-  record EVENT_EXTENDED_ITEM_INSTANCE,
-    instance_id : UInt32,
-    parent_instance_id : UInt32,
-    parent_guid : LibC::GUID
+  struct EVENT_EXTENDED_ITEM_INSTANCE
+    property instance_id : UInt32
+    property parent_instance_id : UInt32
+    property parent_guid : LibC::GUID
+    def initialize(@instance_id : UInt32, @parent_instance_id : UInt32, @parent_guid : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record EVENT_EXTENDED_ITEM_RELATED_ACTIVITYID,
-    related_activity_id : LibC::GUID
+  struct EVENT_EXTENDED_ITEM_RELATED_ACTIVITYID
+    property related_activity_id : LibC::GUID
+    def initialize(@related_activity_id : LibC::GUID)
+    end
+  end
 
   @[Extern]
-  record EVENT_EXTENDED_ITEM_TS_ID,
-    session_id : UInt32
+  struct EVENT_EXTENDED_ITEM_TS_ID
+    property session_id : UInt32
+    def initialize(@session_id : UInt32)
+    end
+  end
 
   @[Extern]
-  record EVENT_EXTENDED_ITEM_STACK_TRACE32,
-    match_id : UInt64,
-    address : UInt32*
+  struct EVENT_EXTENDED_ITEM_STACK_TRACE32
+    property match_id : UInt64
+    property address : UInt32*
+    def initialize(@match_id : UInt64, @address : UInt32*)
+    end
+  end
 
   @[Extern]
-  record EVENT_EXTENDED_ITEM_STACK_TRACE64,
-    match_id : UInt64,
-    address : UInt64*
+  struct EVENT_EXTENDED_ITEM_STACK_TRACE64
+    property match_id : UInt64
+    property address : UInt64*
+    def initialize(@match_id : UInt64, @address : UInt64*)
+    end
+  end
 
   @[Extern]
-  record EVENT_EXTENDED_ITEM_STACK_KEY32,
-    match_id : UInt64,
-    stack_key : UInt32,
-    padding : UInt32
+  struct EVENT_EXTENDED_ITEM_STACK_KEY32
+    property match_id : UInt64
+    property stack_key : UInt32
+    property padding : UInt32
+    def initialize(@match_id : UInt64, @stack_key : UInt32, @padding : UInt32)
+    end
+  end
 
   @[Extern]
-  record EVENT_EXTENDED_ITEM_STACK_KEY64,
-    match_id : UInt64,
-    stack_key : UInt64
+  struct EVENT_EXTENDED_ITEM_STACK_KEY64
+    property match_id : UInt64
+    property stack_key : UInt64
+    def initialize(@match_id : UInt64, @stack_key : UInt64)
+    end
+  end
 
   @[Extern]
-  record EVENT_EXTENDED_ITEM_PEBS_INDEX,
-    pebs_index : UInt64
+  struct EVENT_EXTENDED_ITEM_PEBS_INDEX
+    property pebs_index : UInt64
+    def initialize(@pebs_index : UInt64)
+    end
+  end
 
   @[Extern]
-  record EVENT_EXTENDED_ITEM_PMC_COUNTERS,
-    counter : UInt64*
+  struct EVENT_EXTENDED_ITEM_PMC_COUNTERS
+    property counter : UInt64*
+    def initialize(@counter : UInt64*)
+    end
+  end
 
   @[Extern]
-  record EVENT_EXTENDED_ITEM_PROCESS_START_KEY,
-    process_start_key : UInt64
+  struct EVENT_EXTENDED_ITEM_PROCESS_START_KEY
+    property process_start_key : UInt64
+    def initialize(@process_start_key : UInt64)
+    end
+  end
 
   @[Extern]
-  record EVENT_EXTENDED_ITEM_EVENT_KEY,
-    key : UInt64
+  struct EVENT_EXTENDED_ITEM_EVENT_KEY
+    property key : UInt64
+    def initialize(@key : UInt64)
+    end
+  end
 
   @[Extern]
-  record EVENT_HEADER,
-    size : UInt16,
-    header_type : UInt16,
-    flags : UInt16,
-    event_property : UInt16,
-    thread_id : UInt32,
-    process_id : UInt32,
-    time_stamp : Win32cr::Foundation::LARGE_INTEGER,
-    provider_id : LibC::GUID,
-    event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR,
-    anonymous : Anonymous_e__Union_,
-    activity_id : LibC::GUID do
+  struct EVENT_HEADER
+    property size : UInt16
+    property header_type : UInt16
+    property flags : UInt16
+    property event_property : UInt16
+    property thread_id : UInt32
+    property process_id : UInt32
+    property time_stamp : Win32cr::Foundation::LARGE_INTEGER
+    property provider_id : LibC::GUID
+    property event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR
+    property anonymous : Anonymous_e__Union_
+    property activity_id : LibC::GUID
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      processor_time : UInt64 do
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property processor_time : UInt64
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        kernel_time : UInt32,
-        user_time : UInt32
+      struct Anonymous_e__Struct_
+    property kernel_time : UInt32
+    property user_time : UInt32
+    def initialize(@kernel_time : UInt32, @user_time : UInt32)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @processor_time : UInt64)
+    end
     end
 
+    def initialize(@size : UInt16, @header_type : UInt16, @flags : UInt16, @event_property : UInt16, @thread_id : UInt32, @process_id : UInt32, @time_stamp : Win32cr::Foundation::LARGE_INTEGER, @provider_id : LibC::GUID, @event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR, @anonymous : Anonymous_e__Union_, @activity_id : LibC::GUID)
+    end
   end
 
   @[Extern]
-  record EVENT_RECORD,
-    event_header : Win32cr::System::Diagnostics::Etw::EVENT_HEADER,
-    buffer_context : Win32cr::System::Diagnostics::Etw::ETW_BUFFER_CONTEXT,
-    extended_data_count : UInt16,
-    user_data_length : UInt16,
-    extended_data : Win32cr::System::Diagnostics::Etw::EVENT_HEADER_EXTENDED_DATA_ITEM*,
-    user_data : Void*,
-    user_context : Void*
+  struct EVENT_RECORD
+    property event_header : Win32cr::System::Diagnostics::Etw::EVENT_HEADER
+    property buffer_context : Win32cr::System::Diagnostics::Etw::ETW_BUFFER_CONTEXT
+    property extended_data_count : UInt16
+    property user_data_length : UInt16
+    property extended_data : Win32cr::System::Diagnostics::Etw::EVENT_HEADER_EXTENDED_DATA_ITEM*
+    property user_data : Void*
+    property user_context : Void*
+    def initialize(@event_header : Win32cr::System::Diagnostics::Etw::EVENT_HEADER, @buffer_context : Win32cr::System::Diagnostics::Etw::ETW_BUFFER_CONTEXT, @extended_data_count : UInt16, @user_data_length : UInt16, @extended_data : Win32cr::System::Diagnostics::Etw::EVENT_HEADER_EXTENDED_DATA_ITEM*, @user_data : Void*, @user_context : Void*)
+    end
+  end
 
   @[Extern]
-  record EVENT_MAP_ENTRY,
-    output_offset : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct EVENT_MAP_ENTRY
+    property output_offset : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      value : UInt32,
-      input_offset : UInt32
+    struct Anonymous_e__Union_
+    property value : UInt32
+    property input_offset : UInt32
+    def initialize(@value : UInt32, @input_offset : UInt32)
+    end
+    end
 
+    def initialize(@output_offset : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record EVENT_MAP_INFO,
-    name_offset : UInt32,
-    flag : Win32cr::System::Diagnostics::Etw::MAP_FLAGS,
-    entry_count : UInt32,
-    anonymous : Anonymous_e__Union_,
-    map_entry_array : Win32cr::System::Diagnostics::Etw::EVENT_MAP_ENTRY* do
+  struct EVENT_MAP_INFO
+    property name_offset : UInt32
+    property flag : Win32cr::System::Diagnostics::Etw::MAP_FLAGS
+    property entry_count : UInt32
+    property anonymous : Anonymous_e__Union_
+    property map_entry_array : Win32cr::System::Diagnostics::Etw::EVENT_MAP_ENTRY*
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      map_entry_value_type : Win32cr::System::Diagnostics::Etw::MAP_VALUETYPE,
-      format_string_offset : UInt32
+    struct Anonymous_e__Union_
+    property map_entry_value_type : Win32cr::System::Diagnostics::Etw::MAP_VALUETYPE
+    property format_string_offset : UInt32
+    def initialize(@map_entry_value_type : Win32cr::System::Diagnostics::Etw::MAP_VALUETYPE, @format_string_offset : UInt32)
+    end
+    end
 
+    def initialize(@name_offset : UInt32, @flag : Win32cr::System::Diagnostics::Etw::MAP_FLAGS, @entry_count : UInt32, @anonymous : Anonymous_e__Union_, @map_entry_array : Win32cr::System::Diagnostics::Etw::EVENT_MAP_ENTRY*)
+    end
   end
 
   @[Extern]
-  record EVENT_PROPERTY_INFO,
-    flags : Win32cr::System::Diagnostics::Etw::PROPERTY_FLAGS,
-    name_offset : UInt32,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    anonymous3 : Anonymous3_e__Union_,
-    anonymous4 : Anonymous4_e__Union_ do
+  struct EVENT_PROPERTY_INFO
+    property flags : Win32cr::System::Diagnostics::Etw::PROPERTY_FLAGS
+    property name_offset : UInt32
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property anonymous3 : Anonymous3_e__Union_
+    property anonymous4 : Anonymous4_e__Union_
 
     # Nested Type Anonymous4_e__Union_
     @[Extern(union: true)]
-    record Anonymous4_e__Union_,
-      reserved : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous4_e__Union_
+    property reserved : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@reserved : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      count : UInt16,
-      countPropertyIndex : UInt16
+    struct Anonymous2_e__Union_
+    property count : UInt16
+    property countPropertyIndex : UInt16
+    def initialize(@count : UInt16, @countPropertyIndex : UInt16)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      nonStructType : Nonstructtype_,
-      structType : Structtype_,
-      customSchemaType : Customschematype_ do
+    struct Anonymous1_e__Union_
+    property nonStructType : Nonstructtype_
+    property structType : Structtype_
+    property customSchemaType : Customschematype_
 
       # Nested Type Customschematype_
       @[Extern]
-      record Customschematype_,
-        in_type : UInt16,
-        out_type : UInt16,
-        custom_schema_offset : UInt32
+      struct Customschematype_
+    property in_type : UInt16
+    property out_type : UInt16
+    property custom_schema_offset : UInt32
+    def initialize(@in_type : UInt16, @out_type : UInt16, @custom_schema_offset : UInt32)
+    end
+      end
 
 
       # Nested Type Nonstructtype_
       @[Extern]
-      record Nonstructtype_,
-        in_type : UInt16,
-        out_type : UInt16,
-        map_name_offset : UInt32
+      struct Nonstructtype_
+    property in_type : UInt16
+    property out_type : UInt16
+    property map_name_offset : UInt32
+    def initialize(@in_type : UInt16, @out_type : UInt16, @map_name_offset : UInt32)
+    end
+      end
 
 
       # Nested Type Structtype_
       @[Extern]
-      record Structtype_,
-        struct_start_index : UInt16,
-        num_of_struct_members : UInt16,
-        padding : UInt32
+      struct Structtype_
+    property struct_start_index : UInt16
+    property num_of_struct_members : UInt16
+    property padding : UInt32
+    def initialize(@struct_start_index : UInt16, @num_of_struct_members : UInt16, @padding : UInt32)
+    end
+      end
 
+    def initialize(@nonStructType : Nonstructtype_, @structType : Structtype_, @customSchemaType : Customschematype_)
+    end
     end
 
 
     # Nested Type Anonymous3_e__Union_
     @[Extern(union: true)]
-    record Anonymous3_e__Union_,
-      length : UInt16,
-      lengthPropertyIndex : UInt16
+    struct Anonymous3_e__Union_
+    property length : UInt16
+    property lengthPropertyIndex : UInt16
+    def initialize(@length : UInt16, @lengthPropertyIndex : UInt16)
+    end
+    end
 
+    def initialize(@flags : Win32cr::System::Diagnostics::Etw::PROPERTY_FLAGS, @name_offset : UInt32, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @anonymous3 : Anonymous3_e__Union_, @anonymous4 : Anonymous4_e__Union_)
+    end
   end
 
   @[Extern]
-  record TRACE_EVENT_INFO,
-    provider_guid : LibC::GUID,
-    event_guid : LibC::GUID,
-    event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR,
-    decoding_source : Win32cr::System::Diagnostics::Etw::DECODING_SOURCE,
-    provider_name_offset : UInt32,
-    level_name_offset : UInt32,
-    channel_name_offset : UInt32,
-    keywords_name_offset : UInt32,
-    task_name_offset : UInt32,
-    opcode_name_offset : UInt32,
-    event_message_offset : UInt32,
-    provider_message_offset : UInt32,
-    binary_xml_offset : UInt32,
-    binary_xml_size : UInt32,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_,
-    property_count : UInt32,
-    top_level_property_count : UInt32,
-    anonymous3 : Anonymous3_e__Union_,
-    event_property_info_array : Win32cr::System::Diagnostics::Etw::EVENT_PROPERTY_INFO* do
+  struct TRACE_EVENT_INFO
+    property provider_guid : LibC::GUID
+    property event_guid : LibC::GUID
+    property event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR
+    property decoding_source : Win32cr::System::Diagnostics::Etw::DECODING_SOURCE
+    property provider_name_offset : UInt32
+    property level_name_offset : UInt32
+    property channel_name_offset : UInt32
+    property keywords_name_offset : UInt32
+    property task_name_offset : UInt32
+    property opcode_name_offset : UInt32
+    property event_message_offset : UInt32
+    property provider_message_offset : UInt32
+    property binary_xml_offset : UInt32
+    property binary_xml_size : UInt32
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property property_count : UInt32
+    property top_level_property_count : UInt32
+    property anonymous3 : Anonymous3_e__Union_
+    property event_property_info_array : Win32cr::System::Diagnostics::Etw::EVENT_PROPERTY_INFO*
 
     # Nested Type Anonymous3_e__Union_
     @[Extern(union: true)]
-    record Anonymous3_e__Union_,
-      flags : Win32cr::System::Diagnostics::Etw::TEMPLATE_FLAGS,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous3_e__Union_
+    property flags : Win32cr::System::Diagnostics::Etw::TEMPLATE_FLAGS
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@flags : Win32cr::System::Diagnostics::Etw::TEMPLATE_FLAGS, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      event_name_offset : UInt32,
-      activity_id_name_offset : UInt32
+    struct Anonymous1_e__Union_
+    property event_name_offset : UInt32
+    property activity_id_name_offset : UInt32
+    def initialize(@event_name_offset : UInt32, @activity_id_name_offset : UInt32)
+    end
+    end
 
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      event_attributes_offset : UInt32,
-      related_activity_id_name_offset : UInt32
+    struct Anonymous2_e__Union_
+    property event_attributes_offset : UInt32
+    property related_activity_id_name_offset : UInt32
+    def initialize(@event_attributes_offset : UInt32, @related_activity_id_name_offset : UInt32)
+    end
+    end
 
+    def initialize(@provider_guid : LibC::GUID, @event_guid : LibC::GUID, @event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR, @decoding_source : Win32cr::System::Diagnostics::Etw::DECODING_SOURCE, @provider_name_offset : UInt32, @level_name_offset : UInt32, @channel_name_offset : UInt32, @keywords_name_offset : UInt32, @task_name_offset : UInt32, @opcode_name_offset : UInt32, @event_message_offset : UInt32, @provider_message_offset : UInt32, @binary_xml_offset : UInt32, @binary_xml_size : UInt32, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @property_count : UInt32, @top_level_property_count : UInt32, @anonymous3 : Anonymous3_e__Union_, @event_property_info_array : Win32cr::System::Diagnostics::Etw::EVENT_PROPERTY_INFO*)
+    end
   end
 
   @[Extern]
-  record PROPERTY_DATA_DESCRIPTOR,
-    property_name : UInt64,
-    array_index : UInt32,
-    reserved : UInt32
+  struct PROPERTY_DATA_DESCRIPTOR
+    property property_name : UInt64
+    property array_index : UInt32
+    property reserved : UInt32
+    def initialize(@property_name : UInt64, @array_index : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record PAYLOAD_FILTER_PREDICATE,
-    field_name : Win32cr::Foundation::PWSTR,
-    compare_op : UInt16,
-    value : Win32cr::Foundation::PWSTR
+  struct PAYLOAD_FILTER_PREDICATE
+    property field_name : Win32cr::Foundation::PWSTR
+    property compare_op : UInt16
+    property value : Win32cr::Foundation::PWSTR
+    def initialize(@field_name : Win32cr::Foundation::PWSTR, @compare_op : UInt16, @value : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record PROVIDER_FILTER_INFO,
-    id : UInt8,
-    version : UInt8,
-    message_offset : UInt32,
-    reserved : UInt32,
-    property_count : UInt32,
-    event_property_info_array : Win32cr::System::Diagnostics::Etw::EVENT_PROPERTY_INFO*
+  struct PROVIDER_FILTER_INFO
+    property id : UInt8
+    property version : UInt8
+    property message_offset : UInt32
+    property reserved : UInt32
+    property property_count : UInt32
+    property event_property_info_array : Win32cr::System::Diagnostics::Etw::EVENT_PROPERTY_INFO*
+    def initialize(@id : UInt8, @version : UInt8, @message_offset : UInt32, @reserved : UInt32, @property_count : UInt32, @event_property_info_array : Win32cr::System::Diagnostics::Etw::EVENT_PROPERTY_INFO*)
+    end
+  end
 
   @[Extern]
-  record PROVIDER_FIELD_INFO,
-    name_offset : UInt32,
-    description_offset : UInt32,
-    value : UInt64
+  struct PROVIDER_FIELD_INFO
+    property name_offset : UInt32
+    property description_offset : UInt32
+    property value : UInt64
+    def initialize(@name_offset : UInt32, @description_offset : UInt32, @value : UInt64)
+    end
+  end
 
   @[Extern]
-  record PROVIDER_FIELD_INFOARRAY,
-    number_of_elements : UInt32,
-    field_type : Win32cr::System::Diagnostics::Etw::EVENT_FIELD_TYPE,
-    field_info_array : Win32cr::System::Diagnostics::Etw::PROVIDER_FIELD_INFO*
+  struct PROVIDER_FIELD_INFOARRAY
+    property number_of_elements : UInt32
+    property field_type : Win32cr::System::Diagnostics::Etw::EVENT_FIELD_TYPE
+    property field_info_array : Win32cr::System::Diagnostics::Etw::PROVIDER_FIELD_INFO*
+    def initialize(@number_of_elements : UInt32, @field_type : Win32cr::System::Diagnostics::Etw::EVENT_FIELD_TYPE, @field_info_array : Win32cr::System::Diagnostics::Etw::PROVIDER_FIELD_INFO*)
+    end
+  end
 
   @[Extern]
-  record TRACE_PROVIDER_INFO,
-    provider_guid : LibC::GUID,
-    schema_source : UInt32,
-    provider_name_offset : UInt32
+  struct TRACE_PROVIDER_INFO
+    property provider_guid : LibC::GUID
+    property schema_source : UInt32
+    property provider_name_offset : UInt32
+    def initialize(@provider_guid : LibC::GUID, @schema_source : UInt32, @provider_name_offset : UInt32)
+    end
+  end
 
   @[Extern]
-  record PROVIDER_ENUMERATION_INFO,
-    number_of_providers : UInt32,
-    reserved : UInt32,
-    trace_provider_info_array : Win32cr::System::Diagnostics::Etw::TRACE_PROVIDER_INFO*
+  struct PROVIDER_ENUMERATION_INFO
+    property number_of_providers : UInt32
+    property reserved : UInt32
+    property trace_provider_info_array : Win32cr::System::Diagnostics::Etw::TRACE_PROVIDER_INFO*
+    def initialize(@number_of_providers : UInt32, @reserved : UInt32, @trace_provider_info_array : Win32cr::System::Diagnostics::Etw::TRACE_PROVIDER_INFO*)
+    end
+  end
 
   @[Extern]
-  record PROVIDER_EVENT_INFO,
-    number_of_events : UInt32,
-    reserved : UInt32,
-    event_descriptors_array : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*
+  struct PROVIDER_EVENT_INFO
+    property number_of_events : UInt32
+    property reserved : UInt32
+    property event_descriptors_array : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*
+    def initialize(@number_of_events : UInt32, @reserved : UInt32, @event_descriptors_array : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*)
+    end
+  end
 
   @[Extern]
-  record TDH_CONTEXT,
-    parameter_value : UInt64,
-    parameter_type : Win32cr::System::Diagnostics::Etw::TDH_CONTEXT_TYPE,
-    parameter_size : UInt32
+  struct TDH_CONTEXT
+    property parameter_value : UInt64
+    property parameter_type : Win32cr::System::Diagnostics::Etw::TDH_CONTEXT_TYPE
+    property parameter_size : UInt32
+    def initialize(@parameter_value : UInt64, @parameter_type : Win32cr::System::Diagnostics::Etw::TDH_CONTEXT_TYPE, @parameter_size : UInt32)
+    end
+  end
 
   @[Extern]
   record ITraceEventVtbl,
@@ -1954,7 +2331,6 @@ module Win32cr::System::Diagnostics::Etw
 
 
   @[Extern]
-  #@[Com("8cc97f40-9028-4ff3-9b62-7d1f79ca7bcb")]
   record ITraceEvent, lpVtbl : ITraceEventVtbl* do
     GUID = LibC::GUID.new(0x8cc97f40_u32, 0x9028_u16, 0x4ff3_u16, StaticArray[0x9b_u8, 0x62_u8, 0x7d_u8, 0x1f_u8, 0x79_u8, 0xca_u8, 0x7b_u8, 0xcb_u8])
     def query_interface(this : ITraceEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2016,7 +2392,6 @@ module Win32cr::System::Diagnostics::Etw
 
 
   @[Extern]
-  #@[Com("3ed25501-593f-43e9-8f38-3ab46f5a4a52")]
   record ITraceEventCallback, lpVtbl : ITraceEventCallbackVtbl* do
     GUID = LibC::GUID.new(0x3ed25501_u32, 0x593f_u16, 0x43e9_u16, StaticArray[0x8f_u8, 0x38_u8, 0x3a_u8, 0xb4_u8, 0x6f_u8, 0x5a_u8, 0x4a_u8, 0x52_u8])
     def query_interface(this : ITraceEventCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2057,7 +2432,6 @@ module Win32cr::System::Diagnostics::Etw
 
 
   @[Extern]
-  #@[Com("f754ad43-3bcc-4286-8009-9c5da214e84e")]
   record ITraceRelogger, lpVtbl : ITraceReloggerVtbl* do
     GUID = LibC::GUID.new(0xf754ad43_u32, 0x3bcc_u16, 0x4286_u16, StaticArray[0x80_u8, 0x9_u8, 0x9c_u8, 0x5d_u8, 0xa2_u8, 0x14_u8, 0xe8_u8, 0x4e_u8])
     def query_interface(this : ITraceRelogger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

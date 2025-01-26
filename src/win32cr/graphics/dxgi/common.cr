@@ -190,56 +190,83 @@ module Win32cr::Graphics::Dxgi::Common
   end
 
   @[Extern]
-  record DXGI_RATIONAL,
-    numerator : UInt32,
-    denominator : UInt32
+  struct DXGI_RATIONAL
+    property numerator : UInt32
+    property denominator : UInt32
+    def initialize(@numerator : UInt32, @denominator : UInt32)
+    end
+  end
 
   @[Extern]
-  record DXGI_SAMPLE_DESC,
-    count : UInt32,
-    quality : UInt32
+  struct DXGI_SAMPLE_DESC
+    property count : UInt32
+    property quality : UInt32
+    def initialize(@count : UInt32, @quality : UInt32)
+    end
+  end
 
   @[Extern]
-  record DXGI_RGB,
-    red : Float32,
-    green : Float32,
-    blue : Float32
+  struct DXGI_RGB
+    property red : Float32
+    property green : Float32
+    property blue : Float32
+    def initialize(@red : Float32, @green : Float32, @blue : Float32)
+    end
+  end
 
   @[Extern]
-  record DXGI_GAMMA_CONTROL,
-    scale : Win32cr::Graphics::Dxgi::Common::DXGI_RGB,
-    offset : Win32cr::Graphics::Dxgi::Common::DXGI_RGB,
-    gamma_curve : Win32cr::Graphics::Dxgi::Common::DXGI_RGB[1025]
+  struct DXGI_GAMMA_CONTROL
+    property scale : Win32cr::Graphics::Dxgi::Common::DXGI_RGB
+    property offset : Win32cr::Graphics::Dxgi::Common::DXGI_RGB
+    property gamma_curve : Win32cr::Graphics::Dxgi::Common::DXGI_RGB[1025]
+    def initialize(@scale : Win32cr::Graphics::Dxgi::Common::DXGI_RGB, @offset : Win32cr::Graphics::Dxgi::Common::DXGI_RGB, @gamma_curve : Win32cr::Graphics::Dxgi::Common::DXGI_RGB[1025])
+    end
+  end
 
   @[Extern]
-  record DXGI_GAMMA_CONTROL_CAPABILITIES,
-    scale_and_offset_supported : Win32cr::Foundation::BOOL,
-    max_converted_value : Float32,
-    min_converted_value : Float32,
-    num_gamma_control_points : UInt32,
-    control_point_positions : Float32[1025]
+  struct DXGI_GAMMA_CONTROL_CAPABILITIES
+    property scale_and_offset_supported : Win32cr::Foundation::BOOL
+    property max_converted_value : Float32
+    property min_converted_value : Float32
+    property num_gamma_control_points : UInt32
+    property control_point_positions : Float32[1025]
+    def initialize(@scale_and_offset_supported : Win32cr::Foundation::BOOL, @max_converted_value : Float32, @min_converted_value : Float32, @num_gamma_control_points : UInt32, @control_point_positions : Float32[1025])
+    end
+  end
 
   @[Extern]
-  record DXGI_MODE_DESC,
-    width : UInt32,
-    height : UInt32,
-    refresh_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL,
-    format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
-    scanline_ordering : Win32cr::Graphics::Dxgi::Common::DXGI_MODE_SCANLINE_ORDER,
-    scaling : Win32cr::Graphics::Dxgi::Common::DXGI_MODE_SCALING
+  struct DXGI_MODE_DESC
+    property width : UInt32
+    property height : UInt32
+    property refresh_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL
+    property format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT
+    property scanline_ordering : Win32cr::Graphics::Dxgi::Common::DXGI_MODE_SCANLINE_ORDER
+    property scaling : Win32cr::Graphics::Dxgi::Common::DXGI_MODE_SCALING
+    def initialize(@width : UInt32, @height : UInt32, @refresh_rate : Win32cr::Graphics::Dxgi::Common::DXGI_RATIONAL, @format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT, @scanline_ordering : Win32cr::Graphics::Dxgi::Common::DXGI_MODE_SCANLINE_ORDER, @scaling : Win32cr::Graphics::Dxgi::Common::DXGI_MODE_SCALING)
+    end
+  end
 
   @[Extern]
-  record DXGI_JPEG_DC_HUFFMAN_TABLE,
-    code_counts : UInt8[12],
-    code_values : UInt8[12]
+  struct DXGI_JPEG_DC_HUFFMAN_TABLE
+    property code_counts : UInt8[12]
+    property code_values : UInt8[12]
+    def initialize(@code_counts : UInt8[12], @code_values : UInt8[12])
+    end
+  end
 
   @[Extern]
-  record DXGI_JPEG_AC_HUFFMAN_TABLE,
-    code_counts : UInt8[16],
-    code_values : UInt8[162]
+  struct DXGI_JPEG_AC_HUFFMAN_TABLE
+    property code_counts : UInt8[16]
+    property code_values : UInt8[162]
+    def initialize(@code_counts : UInt8[16], @code_values : UInt8[162])
+    end
+  end
 
   @[Extern]
-  record DXGI_JPEG_QUANTIZATION_TABLE,
-    elements : UInt8[64]
+  struct DXGI_JPEG_QUANTIZATION_TABLE
+    property elements : UInt8[64]
+    def initialize(@elements : UInt8[64])
+    end
+  end
 
 end

@@ -4,25 +4,25 @@ require "./registry.cr"
 
 module Win32cr::System::Services
   alias SERVICE_STATUS_HANDLE = LibC::IntPtrT
-  alias SERVICE_MAIN_FUNCTIONW = Proc(UInt32, Win32cr::Foundation::PWSTR*, Void)*
+  alias SERVICE_MAIN_FUNCTIONW = Proc(UInt32, Win32cr::Foundation::PWSTR*, Void)
 
-  alias SERVICE_MAIN_FUNCTIONA = Proc(UInt32, Int8**, Void)*
+  alias SERVICE_MAIN_FUNCTIONA = Proc(UInt32, Int8**, Void)
 
-  alias LPSERVICE_MAIN_FUNCTIONW = Proc(UInt32, Win32cr::Foundation::PWSTR*, Void)*
+  alias LPSERVICE_MAIN_FUNCTIONW = Proc(UInt32, Win32cr::Foundation::PWSTR*, Void)
 
-  alias LPSERVICE_MAIN_FUNCTIONA = Proc(UInt32, Win32cr::Foundation::PSTR*, Void)*
+  alias LPSERVICE_MAIN_FUNCTIONA = Proc(UInt32, Win32cr::Foundation::PSTR*, Void)
 
-  alias HANDLER_FUNCTION = Proc(UInt32, Void)*
+  alias HANDLER_FUNCTION = Proc(UInt32, Void)
 
-  alias HANDLER_FUNCTION_EX = Proc(UInt32, UInt32, Void*, Void*, UInt32)*
+  alias HANDLER_FUNCTION_EX = Proc(UInt32, UInt32, Void*, Void*, UInt32)
 
-  alias LPHANDLER_FUNCTION = Proc(UInt32, Void)*
+  alias LPHANDLER_FUNCTION = Proc(UInt32, Void)
 
-  alias LPHANDLER_FUNCTION_EX = Proc(UInt32, UInt32, Void*, Void*, UInt32)*
+  alias LPHANDLER_FUNCTION_EX = Proc(UInt32, UInt32, Void*, Void*, UInt32)
 
-  alias PFN_SC_NOTIFY_CALLBACK = Proc(Void*, Void)*
+  alias PFN_SC_NOTIFY_CALLBACK = Proc(Void*, Void)
 
-  alias PSC_NOTIFICATION_CALLBACK = Proc(UInt32, Void*, Void)*
+  alias PSC_NOTIFICATION_CALLBACK = Proc(UInt32, Void*, Void)
 
   SERVICE_ALL_ACCESS = 983551_u32
   SC_MANAGER_ALL_ACCESS = 983103_u32
@@ -280,258 +280,374 @@ module Win32cr::System::Services
   end
 
   @[Extern]
-  record SERVICE_TRIGGER_CUSTOM_STATE_ID,
-    data : UInt32[2]
-
-  @[Extern]
-  record SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM,
-    u : U_e__union_ do
-
-    # Nested Type U_e__union_
-    @[Extern(union: true)]
-    record U_e__union_,
-      custom_state_id : Win32cr::System::Services::SERVICE_TRIGGER_CUSTOM_STATE_ID,
-      s : S_e__struct_ do
-
-      # Nested Type S_e__struct_
-      @[Extern]
-      record S_e__struct_,
-        data_offset : UInt32,
-        data : UInt8*
-
+  struct SERVICE_TRIGGER_CUSTOM_STATE_ID
+    property data : UInt32[2]
+    def initialize(@data : UInt32[2])
     end
-
   end
 
   @[Extern]
-  record SERVICE_DESCRIPTIONA,
-    lpDescription : Win32cr::Foundation::PSTR
+  struct SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM
+    property u : U_e__union_
+
+    # Nested Type U_e__union_
+    @[Extern(union: true)]
+    struct U_e__union_
+    property custom_state_id : Win32cr::System::Services::SERVICE_TRIGGER_CUSTOM_STATE_ID
+    property s : S_e__struct_
+
+      # Nested Type S_e__struct_
+      @[Extern]
+      struct S_e__struct_
+    property data_offset : UInt32
+    property data : UInt8*
+    def initialize(@data_offset : UInt32, @data : UInt8*)
+    end
+      end
+
+    def initialize(@custom_state_id : Win32cr::System::Services::SERVICE_TRIGGER_CUSTOM_STATE_ID, @s : S_e__struct_)
+    end
+    end
+
+    def initialize(@u : U_e__union_)
+    end
+  end
 
   @[Extern]
-  record SERVICE_DESCRIPTIONW,
-    lpDescription : Win32cr::Foundation::PWSTR
+  struct SERVICE_DESCRIPTIONA
+    property lpDescription : Win32cr::Foundation::PSTR
+    def initialize(@lpDescription : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record SC_ACTION,
-    type__ : Win32cr::System::Services::SC_ACTION_TYPE,
-    delay : UInt32
+  struct SERVICE_DESCRIPTIONW
+    property lpDescription : Win32cr::Foundation::PWSTR
+    def initialize(@lpDescription : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record SERVICE_FAILURE_ACTIONSA,
-    dwResetPeriod : UInt32,
-    lpRebootMsg : Win32cr::Foundation::PSTR,
-    lpCommand : Win32cr::Foundation::PSTR,
-    cActions : UInt32,
-    lpsaActions : Win32cr::System::Services::SC_ACTION*
+  struct SC_ACTION
+    property type__ : Win32cr::System::Services::SC_ACTION_TYPE
+    property delay : UInt32
+    def initialize(@type__ : Win32cr::System::Services::SC_ACTION_TYPE, @delay : UInt32)
+    end
+  end
 
   @[Extern]
-  record SERVICE_FAILURE_ACTIONSW,
-    dwResetPeriod : UInt32,
-    lpRebootMsg : Win32cr::Foundation::PWSTR,
-    lpCommand : Win32cr::Foundation::PWSTR,
-    cActions : UInt32,
-    lpsaActions : Win32cr::System::Services::SC_ACTION*
+  struct SERVICE_FAILURE_ACTIONSA
+    property dwResetPeriod : UInt32
+    property lpRebootMsg : Win32cr::Foundation::PSTR
+    property lpCommand : Win32cr::Foundation::PSTR
+    property cActions : UInt32
+    property lpsaActions : Win32cr::System::Services::SC_ACTION*
+    def initialize(@dwResetPeriod : UInt32, @lpRebootMsg : Win32cr::Foundation::PSTR, @lpCommand : Win32cr::Foundation::PSTR, @cActions : UInt32, @lpsaActions : Win32cr::System::Services::SC_ACTION*)
+    end
+  end
 
   @[Extern]
-  record SERVICE_DELAYED_AUTO_START_INFO,
-    fDelayedAutostart : Win32cr::Foundation::BOOL
+  struct SERVICE_FAILURE_ACTIONSW
+    property dwResetPeriod : UInt32
+    property lpRebootMsg : Win32cr::Foundation::PWSTR
+    property lpCommand : Win32cr::Foundation::PWSTR
+    property cActions : UInt32
+    property lpsaActions : Win32cr::System::Services::SC_ACTION*
+    def initialize(@dwResetPeriod : UInt32, @lpRebootMsg : Win32cr::Foundation::PWSTR, @lpCommand : Win32cr::Foundation::PWSTR, @cActions : UInt32, @lpsaActions : Win32cr::System::Services::SC_ACTION*)
+    end
+  end
 
   @[Extern]
-  record SERVICE_FAILURE_ACTIONS_FLAG,
-    fFailureActionsOnNonCrashFailures : Win32cr::Foundation::BOOL
+  struct SERVICE_DELAYED_AUTO_START_INFO
+    property fDelayedAutostart : Win32cr::Foundation::BOOL
+    def initialize(@fDelayedAutostart : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record SERVICE_SID_INFO,
-    dwServiceSidType : UInt32
+  struct SERVICE_FAILURE_ACTIONS_FLAG
+    property fFailureActionsOnNonCrashFailures : Win32cr::Foundation::BOOL
+    def initialize(@fFailureActionsOnNonCrashFailures : Win32cr::Foundation::BOOL)
+    end
+  end
 
   @[Extern]
-  record SERVICE_REQUIRED_PRIVILEGES_INFOA,
-    pmszRequiredPrivileges : Win32cr::Foundation::PSTR
+  struct SERVICE_SID_INFO
+    property dwServiceSidType : UInt32
+    def initialize(@dwServiceSidType : UInt32)
+    end
+  end
 
   @[Extern]
-  record SERVICE_REQUIRED_PRIVILEGES_INFOW,
-    pmszRequiredPrivileges : Win32cr::Foundation::PWSTR
+  struct SERVICE_REQUIRED_PRIVILEGES_INFOA
+    property pmszRequiredPrivileges : Win32cr::Foundation::PSTR
+    def initialize(@pmszRequiredPrivileges : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record SERVICE_PRESHUTDOWN_INFO,
-    dwPreshutdownTimeout : UInt32
+  struct SERVICE_REQUIRED_PRIVILEGES_INFOW
+    property pmszRequiredPrivileges : Win32cr::Foundation::PWSTR
+    def initialize(@pmszRequiredPrivileges : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record SERVICE_TRIGGER_SPECIFIC_DATA_ITEM,
-    dwDataType : Win32cr::System::Services::SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE,
-    cbData : UInt32,
-    pData : UInt8*
+  struct SERVICE_PRESHUTDOWN_INFO
+    property dwPreshutdownTimeout : UInt32
+    def initialize(@dwPreshutdownTimeout : UInt32)
+    end
+  end
 
   @[Extern]
-  record SERVICE_TRIGGER,
-    dwTriggerType : Win32cr::System::Services::SERVICE_TRIGGER_TYPE,
-    dwAction : Win32cr::System::Services::SERVICE_TRIGGER_ACTION,
-    pTriggerSubtype : LibC::GUID*,
-    cDataItems : UInt32,
-    pDataItems : Win32cr::System::Services::SERVICE_TRIGGER_SPECIFIC_DATA_ITEM*
+  struct SERVICE_TRIGGER_SPECIFIC_DATA_ITEM
+    property dwDataType : Win32cr::System::Services::SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE
+    property cbData : UInt32
+    property pData : UInt8*
+    def initialize(@dwDataType : Win32cr::System::Services::SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE, @cbData : UInt32, @pData : UInt8*)
+    end
+  end
 
   @[Extern]
-  record SERVICE_TRIGGER_INFO,
-    cTriggers : UInt32,
-    pTriggers : Win32cr::System::Services::SERVICE_TRIGGER*,
-    pReserved : UInt8*
+  struct SERVICE_TRIGGER
+    property dwTriggerType : Win32cr::System::Services::SERVICE_TRIGGER_TYPE
+    property dwAction : Win32cr::System::Services::SERVICE_TRIGGER_ACTION
+    property pTriggerSubtype : LibC::GUID*
+    property cDataItems : UInt32
+    property pDataItems : Win32cr::System::Services::SERVICE_TRIGGER_SPECIFIC_DATA_ITEM*
+    def initialize(@dwTriggerType : Win32cr::System::Services::SERVICE_TRIGGER_TYPE, @dwAction : Win32cr::System::Services::SERVICE_TRIGGER_ACTION, @pTriggerSubtype : LibC::GUID*, @cDataItems : UInt32, @pDataItems : Win32cr::System::Services::SERVICE_TRIGGER_SPECIFIC_DATA_ITEM*)
+    end
+  end
 
   @[Extern]
-  record SERVICE_PREFERRED_NODE_INFO,
-    usPreferredNode : UInt16,
-    fDelete : Win32cr::Foundation::BOOLEAN
+  struct SERVICE_TRIGGER_INFO
+    property cTriggers : UInt32
+    property pTriggers : Win32cr::System::Services::SERVICE_TRIGGER*
+    property pReserved : UInt8*
+    def initialize(@cTriggers : UInt32, @pTriggers : Win32cr::System::Services::SERVICE_TRIGGER*, @pReserved : UInt8*)
+    end
+  end
 
   @[Extern]
-  record SERVICE_TIMECHANGE_INFO,
-    liNewTime : Win32cr::Foundation::LARGE_INTEGER,
-    liOldTime : Win32cr::Foundation::LARGE_INTEGER
+  struct SERVICE_PREFERRED_NODE_INFO
+    property usPreferredNode : UInt16
+    property fDelete : Win32cr::Foundation::BOOLEAN
+    def initialize(@usPreferredNode : UInt16, @fDelete : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record SERVICE_LAUNCH_PROTECTED_INFO,
-    dwLaunchProtected : UInt32
+  struct SERVICE_TIMECHANGE_INFO
+    property liNewTime : Win32cr::Foundation::LARGE_INTEGER
+    property liOldTime : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@liNewTime : Win32cr::Foundation::LARGE_INTEGER, @liOldTime : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
 
   @[Extern]
-  record SERVICE_STATUS,
-    dwServiceType : Win32cr::System::Services::ENUM_SERVICE_TYPE,
-    dwCurrentState : Win32cr::System::Services::SERVICE_STATUS_CURRENT_STATE,
-    dwControlsAccepted : UInt32,
-    dwWin32ExitCode : UInt32,
-    dwServiceSpecificExitCode : UInt32,
-    dwCheckPoint : UInt32,
-    dwWaitHint : UInt32
+  struct SERVICE_LAUNCH_PROTECTED_INFO
+    property dwLaunchProtected : UInt32
+    def initialize(@dwLaunchProtected : UInt32)
+    end
+  end
 
   @[Extern]
-  record SERVICE_STATUS_PROCESS,
-    dwServiceType : Win32cr::System::Services::ENUM_SERVICE_TYPE,
-    dwCurrentState : Win32cr::System::Services::SERVICE_STATUS_CURRENT_STATE,
-    dwControlsAccepted : UInt32,
-    dwWin32ExitCode : UInt32,
-    dwServiceSpecificExitCode : UInt32,
-    dwCheckPoint : UInt32,
-    dwWaitHint : UInt32,
-    dwProcessId : UInt32,
-    dwServiceFlags : Win32cr::System::Services::SERVICE_RUNS_IN_PROCESS
+  struct SERVICE_STATUS
+    property dwServiceType : Win32cr::System::Services::ENUM_SERVICE_TYPE
+    property dwCurrentState : Win32cr::System::Services::SERVICE_STATUS_CURRENT_STATE
+    property dwControlsAccepted : UInt32
+    property dwWin32ExitCode : UInt32
+    property dwServiceSpecificExitCode : UInt32
+    property dwCheckPoint : UInt32
+    property dwWaitHint : UInt32
+    def initialize(@dwServiceType : Win32cr::System::Services::ENUM_SERVICE_TYPE, @dwCurrentState : Win32cr::System::Services::SERVICE_STATUS_CURRENT_STATE, @dwControlsAccepted : UInt32, @dwWin32ExitCode : UInt32, @dwServiceSpecificExitCode : UInt32, @dwCheckPoint : UInt32, @dwWaitHint : UInt32)
+    end
+  end
 
   @[Extern]
-  record ENUM_SERVICE_STATUSA,
-    lpServiceName : Win32cr::Foundation::PSTR,
-    lpDisplayName : Win32cr::Foundation::PSTR,
-    service_status : Win32cr::System::Services::SERVICE_STATUS
+  struct SERVICE_STATUS_PROCESS
+    property dwServiceType : Win32cr::System::Services::ENUM_SERVICE_TYPE
+    property dwCurrentState : Win32cr::System::Services::SERVICE_STATUS_CURRENT_STATE
+    property dwControlsAccepted : UInt32
+    property dwWin32ExitCode : UInt32
+    property dwServiceSpecificExitCode : UInt32
+    property dwCheckPoint : UInt32
+    property dwWaitHint : UInt32
+    property dwProcessId : UInt32
+    property dwServiceFlags : Win32cr::System::Services::SERVICE_RUNS_IN_PROCESS
+    def initialize(@dwServiceType : Win32cr::System::Services::ENUM_SERVICE_TYPE, @dwCurrentState : Win32cr::System::Services::SERVICE_STATUS_CURRENT_STATE, @dwControlsAccepted : UInt32, @dwWin32ExitCode : UInt32, @dwServiceSpecificExitCode : UInt32, @dwCheckPoint : UInt32, @dwWaitHint : UInt32, @dwProcessId : UInt32, @dwServiceFlags : Win32cr::System::Services::SERVICE_RUNS_IN_PROCESS)
+    end
+  end
 
   @[Extern]
-  record ENUM_SERVICE_STATUSW,
-    lpServiceName : Win32cr::Foundation::PWSTR,
-    lpDisplayName : Win32cr::Foundation::PWSTR,
-    service_status : Win32cr::System::Services::SERVICE_STATUS
+  struct ENUM_SERVICE_STATUSA
+    property lpServiceName : Win32cr::Foundation::PSTR
+    property lpDisplayName : Win32cr::Foundation::PSTR
+    property service_status : Win32cr::System::Services::SERVICE_STATUS
+    def initialize(@lpServiceName : Win32cr::Foundation::PSTR, @lpDisplayName : Win32cr::Foundation::PSTR, @service_status : Win32cr::System::Services::SERVICE_STATUS)
+    end
+  end
 
   @[Extern]
-  record ENUM_SERVICE_STATUS_PROCESSA,
-    lpServiceName : Win32cr::Foundation::PSTR,
-    lpDisplayName : Win32cr::Foundation::PSTR,
-    service_status_process : Win32cr::System::Services::SERVICE_STATUS_PROCESS
+  struct ENUM_SERVICE_STATUSW
+    property lpServiceName : Win32cr::Foundation::PWSTR
+    property lpDisplayName : Win32cr::Foundation::PWSTR
+    property service_status : Win32cr::System::Services::SERVICE_STATUS
+    def initialize(@lpServiceName : Win32cr::Foundation::PWSTR, @lpDisplayName : Win32cr::Foundation::PWSTR, @service_status : Win32cr::System::Services::SERVICE_STATUS)
+    end
+  end
 
   @[Extern]
-  record ENUM_SERVICE_STATUS_PROCESSW,
-    lpServiceName : Win32cr::Foundation::PWSTR,
-    lpDisplayName : Win32cr::Foundation::PWSTR,
-    service_status_process : Win32cr::System::Services::SERVICE_STATUS_PROCESS
+  struct ENUM_SERVICE_STATUS_PROCESSA
+    property lpServiceName : Win32cr::Foundation::PSTR
+    property lpDisplayName : Win32cr::Foundation::PSTR
+    property service_status_process : Win32cr::System::Services::SERVICE_STATUS_PROCESS
+    def initialize(@lpServiceName : Win32cr::Foundation::PSTR, @lpDisplayName : Win32cr::Foundation::PSTR, @service_status_process : Win32cr::System::Services::SERVICE_STATUS_PROCESS)
+    end
+  end
 
   @[Extern]
-  record QUERY_SERVICE_LOCK_STATUSA,
-    fIsLocked : UInt32,
-    lpLockOwner : Win32cr::Foundation::PSTR,
-    dwLockDuration : UInt32
+  struct ENUM_SERVICE_STATUS_PROCESSW
+    property lpServiceName : Win32cr::Foundation::PWSTR
+    property lpDisplayName : Win32cr::Foundation::PWSTR
+    property service_status_process : Win32cr::System::Services::SERVICE_STATUS_PROCESS
+    def initialize(@lpServiceName : Win32cr::Foundation::PWSTR, @lpDisplayName : Win32cr::Foundation::PWSTR, @service_status_process : Win32cr::System::Services::SERVICE_STATUS_PROCESS)
+    end
+  end
 
   @[Extern]
-  record QUERY_SERVICE_LOCK_STATUSW,
-    fIsLocked : UInt32,
-    lpLockOwner : Win32cr::Foundation::PWSTR,
-    dwLockDuration : UInt32
+  struct QUERY_SERVICE_LOCK_STATUSA
+    property fIsLocked : UInt32
+    property lpLockOwner : Win32cr::Foundation::PSTR
+    property dwLockDuration : UInt32
+    def initialize(@fIsLocked : UInt32, @lpLockOwner : Win32cr::Foundation::PSTR, @dwLockDuration : UInt32)
+    end
+  end
 
   @[Extern]
-  record QUERY_SERVICE_CONFIGA,
-    dwServiceType : Win32cr::System::Services::ENUM_SERVICE_TYPE,
-    dwStartType : Win32cr::System::Services::SERVICE_START_TYPE,
-    dwErrorControl : Win32cr::System::Services::SERVICE_ERROR,
-    lpBinaryPathName : Win32cr::Foundation::PSTR,
-    lpLoadOrderGroup : Win32cr::Foundation::PSTR,
-    dwTagId : UInt32,
-    lpDependencies : Win32cr::Foundation::PSTR,
-    lpServiceStartName : Win32cr::Foundation::PSTR,
-    lpDisplayName : Win32cr::Foundation::PSTR
+  struct QUERY_SERVICE_LOCK_STATUSW
+    property fIsLocked : UInt32
+    property lpLockOwner : Win32cr::Foundation::PWSTR
+    property dwLockDuration : UInt32
+    def initialize(@fIsLocked : UInt32, @lpLockOwner : Win32cr::Foundation::PWSTR, @dwLockDuration : UInt32)
+    end
+  end
 
   @[Extern]
-  record QUERY_SERVICE_CONFIGW,
-    dwServiceType : Win32cr::System::Services::ENUM_SERVICE_TYPE,
-    dwStartType : Win32cr::System::Services::SERVICE_START_TYPE,
-    dwErrorControl : Win32cr::System::Services::SERVICE_ERROR,
-    lpBinaryPathName : Win32cr::Foundation::PWSTR,
-    lpLoadOrderGroup : Win32cr::Foundation::PWSTR,
-    dwTagId : UInt32,
-    lpDependencies : Win32cr::Foundation::PWSTR,
-    lpServiceStartName : Win32cr::Foundation::PWSTR,
-    lpDisplayName : Win32cr::Foundation::PWSTR
+  struct QUERY_SERVICE_CONFIGA
+    property dwServiceType : Win32cr::System::Services::ENUM_SERVICE_TYPE
+    property dwStartType : Win32cr::System::Services::SERVICE_START_TYPE
+    property dwErrorControl : Win32cr::System::Services::SERVICE_ERROR
+    property lpBinaryPathName : Win32cr::Foundation::PSTR
+    property lpLoadOrderGroup : Win32cr::Foundation::PSTR
+    property dwTagId : UInt32
+    property lpDependencies : Win32cr::Foundation::PSTR
+    property lpServiceStartName : Win32cr::Foundation::PSTR
+    property lpDisplayName : Win32cr::Foundation::PSTR
+    def initialize(@dwServiceType : Win32cr::System::Services::ENUM_SERVICE_TYPE, @dwStartType : Win32cr::System::Services::SERVICE_START_TYPE, @dwErrorControl : Win32cr::System::Services::SERVICE_ERROR, @lpBinaryPathName : Win32cr::Foundation::PSTR, @lpLoadOrderGroup : Win32cr::Foundation::PSTR, @dwTagId : UInt32, @lpDependencies : Win32cr::Foundation::PSTR, @lpServiceStartName : Win32cr::Foundation::PSTR, @lpDisplayName : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record SERVICE_TABLE_ENTRYA,
-    lpServiceName : Win32cr::Foundation::PSTR,
-    lpServiceProc : Win32cr::System::Services::LPSERVICE_MAIN_FUNCTIONA
+  struct QUERY_SERVICE_CONFIGW
+    property dwServiceType : Win32cr::System::Services::ENUM_SERVICE_TYPE
+    property dwStartType : Win32cr::System::Services::SERVICE_START_TYPE
+    property dwErrorControl : Win32cr::System::Services::SERVICE_ERROR
+    property lpBinaryPathName : Win32cr::Foundation::PWSTR
+    property lpLoadOrderGroup : Win32cr::Foundation::PWSTR
+    property dwTagId : UInt32
+    property lpDependencies : Win32cr::Foundation::PWSTR
+    property lpServiceStartName : Win32cr::Foundation::PWSTR
+    property lpDisplayName : Win32cr::Foundation::PWSTR
+    def initialize(@dwServiceType : Win32cr::System::Services::ENUM_SERVICE_TYPE, @dwStartType : Win32cr::System::Services::SERVICE_START_TYPE, @dwErrorControl : Win32cr::System::Services::SERVICE_ERROR, @lpBinaryPathName : Win32cr::Foundation::PWSTR, @lpLoadOrderGroup : Win32cr::Foundation::PWSTR, @dwTagId : UInt32, @lpDependencies : Win32cr::Foundation::PWSTR, @lpServiceStartName : Win32cr::Foundation::PWSTR, @lpDisplayName : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record SERVICE_TABLE_ENTRYW,
-    lpServiceName : Win32cr::Foundation::PWSTR,
-    lpServiceProc : Win32cr::System::Services::LPSERVICE_MAIN_FUNCTIONW
+  struct SERVICE_TABLE_ENTRYA
+    property lpServiceName : Win32cr::Foundation::PSTR
+    property lpServiceProc : Win32cr::System::Services::LPSERVICE_MAIN_FUNCTIONA
+    def initialize(@lpServiceName : Win32cr::Foundation::PSTR, @lpServiceProc : Win32cr::System::Services::LPSERVICE_MAIN_FUNCTIONA)
+    end
+  end
 
   @[Extern]
-  record SERVICE_NOTIFY_1,
-    dwVersion : UInt32,
-    pfnNotifyCallback : Win32cr::System::Services::PFN_SC_NOTIFY_CALLBACK,
-    pContext : Void*,
-    dwNotificationStatus : UInt32,
-    service_status : Win32cr::System::Services::SERVICE_STATUS_PROCESS
+  struct SERVICE_TABLE_ENTRYW
+    property lpServiceName : Win32cr::Foundation::PWSTR
+    property lpServiceProc : Win32cr::System::Services::LPSERVICE_MAIN_FUNCTIONW
+    def initialize(@lpServiceName : Win32cr::Foundation::PWSTR, @lpServiceProc : Win32cr::System::Services::LPSERVICE_MAIN_FUNCTIONW)
+    end
+  end
 
   @[Extern]
-  record SERVICE_NOTIFY_2A,
-    dwVersion : UInt32,
-    pfnNotifyCallback : Win32cr::System::Services::PFN_SC_NOTIFY_CALLBACK,
-    pContext : Void*,
-    dwNotificationStatus : UInt32,
-    service_status : Win32cr::System::Services::SERVICE_STATUS_PROCESS,
-    dwNotificationTriggered : UInt32,
-    pszServiceNames : Win32cr::Foundation::PSTR
+  struct SERVICE_NOTIFY_1
+    property dwVersion : UInt32
+    property pfnNotifyCallback : Win32cr::System::Services::PFN_SC_NOTIFY_CALLBACK
+    property pContext : Void*
+    property dwNotificationStatus : UInt32
+    property service_status : Win32cr::System::Services::SERVICE_STATUS_PROCESS
+    def initialize(@dwVersion : UInt32, @pfnNotifyCallback : Win32cr::System::Services::PFN_SC_NOTIFY_CALLBACK, @pContext : Void*, @dwNotificationStatus : UInt32, @service_status : Win32cr::System::Services::SERVICE_STATUS_PROCESS)
+    end
+  end
 
   @[Extern]
-  record SERVICE_NOTIFY_2W,
-    dwVersion : UInt32,
-    pfnNotifyCallback : Win32cr::System::Services::PFN_SC_NOTIFY_CALLBACK,
-    pContext : Void*,
-    dwNotificationStatus : UInt32,
-    service_status : Win32cr::System::Services::SERVICE_STATUS_PROCESS,
-    dwNotificationTriggered : UInt32,
-    pszServiceNames : Win32cr::Foundation::PWSTR
+  struct SERVICE_NOTIFY_2A
+    property dwVersion : UInt32
+    property pfnNotifyCallback : Win32cr::System::Services::PFN_SC_NOTIFY_CALLBACK
+    property pContext : Void*
+    property dwNotificationStatus : UInt32
+    property service_status : Win32cr::System::Services::SERVICE_STATUS_PROCESS
+    property dwNotificationTriggered : UInt32
+    property pszServiceNames : Win32cr::Foundation::PSTR
+    def initialize(@dwVersion : UInt32, @pfnNotifyCallback : Win32cr::System::Services::PFN_SC_NOTIFY_CALLBACK, @pContext : Void*, @dwNotificationStatus : UInt32, @service_status : Win32cr::System::Services::SERVICE_STATUS_PROCESS, @dwNotificationTriggered : UInt32, @pszServiceNames : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record SERVICE_CONTROL_STATUS_REASON_PARAMSA,
-    dwReason : UInt32,
-    pszComment : Win32cr::Foundation::PSTR,
-    service_status : Win32cr::System::Services::SERVICE_STATUS_PROCESS
+  struct SERVICE_NOTIFY_2W
+    property dwVersion : UInt32
+    property pfnNotifyCallback : Win32cr::System::Services::PFN_SC_NOTIFY_CALLBACK
+    property pContext : Void*
+    property dwNotificationStatus : UInt32
+    property service_status : Win32cr::System::Services::SERVICE_STATUS_PROCESS
+    property dwNotificationTriggered : UInt32
+    property pszServiceNames : Win32cr::Foundation::PWSTR
+    def initialize(@dwVersion : UInt32, @pfnNotifyCallback : Win32cr::System::Services::PFN_SC_NOTIFY_CALLBACK, @pContext : Void*, @dwNotificationStatus : UInt32, @service_status : Win32cr::System::Services::SERVICE_STATUS_PROCESS, @dwNotificationTriggered : UInt32, @pszServiceNames : Win32cr::Foundation::PWSTR)
+    end
+  end
 
   @[Extern]
-  record SERVICE_CONTROL_STATUS_REASON_PARAMSW,
-    dwReason : UInt32,
-    pszComment : Win32cr::Foundation::PWSTR,
-    service_status : Win32cr::System::Services::SERVICE_STATUS_PROCESS
+  struct SERVICE_CONTROL_STATUS_REASON_PARAMSA
+    property dwReason : UInt32
+    property pszComment : Win32cr::Foundation::PSTR
+    property service_status : Win32cr::System::Services::SERVICE_STATUS_PROCESS
+    def initialize(@dwReason : UInt32, @pszComment : Win32cr::Foundation::PSTR, @service_status : Win32cr::System::Services::SERVICE_STATUS_PROCESS)
+    end
+  end
 
   @[Extern]
-  record SERVICE_START_REASON,
-    dwReason : UInt32
+  struct SERVICE_CONTROL_STATUS_REASON_PARAMSW
+    property dwReason : UInt32
+    property pszComment : Win32cr::Foundation::PWSTR
+    property service_status : Win32cr::System::Services::SERVICE_STATUS_PROCESS
+    def initialize(@dwReason : UInt32, @pszComment : Win32cr::Foundation::PWSTR, @service_status : Win32cr::System::Services::SERVICE_STATUS_PROCESS)
+    end
+  end
 
   @[Extern]
-  record SC_NOTIFICATION_REGISTRATION_
+  struct SERVICE_START_REASON
+    property dwReason : UInt32
+    def initialize(@dwReason : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SC_NOTIFICATION_REGISTRATION_
+    def initialize()
+    end
+  end
+
   @[Link("advapi32")]
-  @[Link("api-ms-win-service-core-l1-1-3")]
-  @[Link("api-ms-win-service-core-l1-1-4")]
-  @[Link("api-ms-win-service-core-l1-1-5")]
   lib C
     fun SetServiceBits(hServiceStatus : Win32cr::System::Services::SERVICE_STATUS_HANDLE, dwServiceBits : UInt32, bSetBitsOn : Win32cr::Foundation::BOOL, bUpdateImmediately : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 

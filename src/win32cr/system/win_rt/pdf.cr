@@ -5,17 +5,20 @@ require "./../com.cr"
 require "./../../graphics/direct2_d.cr"
 
 module Win32cr::System::WinRT::Pdf
-  alias PFN_PDF_CREATE_RENDERER = Proc(Void*, Void**, Win32cr::Foundation::HRESULT)*
+  alias PFN_PDF_CREATE_RENDERER = Proc(Void*, Void**, Win32cr::Foundation::HRESULT)
 
 
 
   @[Extern]
-  record PDF_RENDER_PARAMS,
-    source_rect : Win32cr::Graphics::Direct2D::Common::D2D_RECT_F,
-    destination_width : UInt32,
-    destination_height : UInt32,
-    background_color : Win32cr::Graphics::Direct2D::Common::D2D_COLOR_F,
-    ignore_high_contrast : Win32cr::Foundation::BOOLEAN
+  struct PDF_RENDER_PARAMS
+    property source_rect : Win32cr::Graphics::Direct2D::Common::D2D_RECT_F
+    property destination_width : UInt32
+    property destination_height : UInt32
+    property background_color : Win32cr::Graphics::Direct2D::Common::D2D_COLOR_F
+    property ignore_high_contrast : Win32cr::Foundation::BOOLEAN
+    def initialize(@source_rect : Win32cr::Graphics::Direct2D::Common::D2D_RECT_F, @destination_width : UInt32, @destination_height : UInt32, @background_color : Win32cr::Graphics::Direct2D::Common::D2D_COLOR_F, @ignore_high_contrast : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
   record IPdfRendererNativeVtbl,
@@ -27,7 +30,6 @@ module Win32cr::System::WinRT::Pdf
 
 
   @[Extern]
-  #@[Com("7d9dcd91-d277-4947-8527-07a0daeda94a")]
   record IPdfRendererNative, lpVtbl : IPdfRendererNativeVtbl* do
     GUID = LibC::GUID.new(0x7d9dcd91_u32, 0xd277_u16, 0x4947_u16, StaticArray[0x85_u8, 0x27_u8, 0x7_u8, 0xa0_u8, 0xda_u8, 0xed_u8, 0xa9_u8, 0x4a_u8])
     def query_interface(this : IPdfRendererNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

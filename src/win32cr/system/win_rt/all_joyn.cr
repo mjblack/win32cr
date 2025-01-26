@@ -16,7 +16,6 @@ module Win32cr::System::WinRT::AllJoyn
 
 
   @[Extern]
-  #@[Com("fd89c65b-b50e-4a19-9d0c-b42b783281cd")]
   record IWindowsDevicesAllJoynBusAttachmentInterop, lpVtbl : IWindowsDevicesAllJoynBusAttachmentInteropVtbl* do
     GUID = LibC::GUID.new(0xfd89c65b_u32, 0xb50e_u16, 0x4a19_u16, StaticArray[0x9d_u8, 0xc_u8, 0xb4_u8, 0x2b_u8, 0x78_u8, 0x32_u8, 0x81_u8, 0xcd_u8])
     def query_interface(this : IWindowsDevicesAllJoynBusAttachmentInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -55,7 +54,6 @@ module Win32cr::System::WinRT::AllJoyn
 
 
   @[Extern]
-  #@[Com("4b8f7505-b239-4e7b-88af-f6682575d861")]
   record IWindowsDevicesAllJoynBusAttachmentFactoryInterop, lpVtbl : IWindowsDevicesAllJoynBusAttachmentFactoryInteropVtbl* do
     GUID = LibC::GUID.new(0x4b8f7505_u32, 0xb239_u16, 0x4e7b_u16, StaticArray[0x88_u8, 0xaf_u8, 0xf6_u8, 0x68_u8, 0x25_u8, 0x75_u8, 0xd8_u8, 0x61_u8])
     def query_interface(this : IWindowsDevicesAllJoynBusAttachmentFactoryInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -96,7 +94,6 @@ module Win32cr::System::WinRT::AllJoyn
 
 
   @[Extern]
-  #@[Com("d78aa3d5-5054-428f-99f2-ec3a5de3c3bc")]
   record IWindowsDevicesAllJoynBusObjectInterop, lpVtbl : IWindowsDevicesAllJoynBusObjectInteropVtbl* do
     GUID = LibC::GUID.new(0xd78aa3d5_u32, 0x5054_u16, 0x428f_u16, StaticArray[0x99_u8, 0xf2_u8, 0xec_u8, 0x3a_u8, 0x5d_u8, 0xe3_u8, 0xc3_u8, 0xbc_u8])
     def query_interface(this : IWindowsDevicesAllJoynBusObjectInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -141,7 +138,6 @@ module Win32cr::System::WinRT::AllJoyn
 
 
   @[Extern]
-  #@[Com("6174e506-8b95-4e36-95c0-b88fed34938c")]
   record IWindowsDevicesAllJoynBusObjectFactoryInterop, lpVtbl : IWindowsDevicesAllJoynBusObjectFactoryInteropVtbl* do
     GUID = LibC::GUID.new(0x6174e506_u32, 0x8b95_u16, 0x4e36_u16, StaticArray[0x95_u8, 0xc0_u8, 0xb8_u8, 0x8f_u8, 0xed_u8, 0x34_u8, 0x93_u8, 0x8c_u8])
     def query_interface(this : IWindowsDevicesAllJoynBusObjectFactoryInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

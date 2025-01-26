@@ -2231,1084 +2231,1454 @@ module Win32cr::NetworkManagement::Ndis
   end
 
   @[Extern]
-  record NET_IF_RCV_ADDRESS_LH,
-    ifRcvAddressType : Win32cr::NetworkManagement::Ndis::NET_IF_RCV_ADDRESS_TYPE,
-    ifRcvAddressLength : UInt16,
-    ifRcvAddressOffset : UInt16
+  struct NET_IF_RCV_ADDRESS_LH
+    property ifRcvAddressType : Win32cr::NetworkManagement::Ndis::NET_IF_RCV_ADDRESS_TYPE
+    property ifRcvAddressLength : UInt16
+    property ifRcvAddressOffset : UInt16
+    def initialize(@ifRcvAddressType : Win32cr::NetworkManagement::Ndis::NET_IF_RCV_ADDRESS_TYPE, @ifRcvAddressLength : UInt16, @ifRcvAddressOffset : UInt16)
+    end
+  end
 
   @[Extern]
-  record NET_IF_ALIAS_LH,
-    ifAliasLength : UInt16,
-    ifAliasOffset : UInt16
+  struct NET_IF_ALIAS_LH
+    property ifAliasLength : UInt16
+    property ifAliasOffset : UInt16
+    def initialize(@ifAliasLength : UInt16, @ifAliasOffset : UInt16)
+    end
+  end
 
   @[Extern(union: true)]
-  record NET_LUID_LH,
-    value : UInt64,
-    info : Info_e__Struct_ do
+  struct NET_LUID_LH
+    property value : UInt64
+    property info : Info_e__Struct_
 
     # Nested Type Info_e__Struct_
     @[Extern]
-    record Info_e__Struct_,
-      _bitfield : UInt64
+    struct Info_e__Struct_
+    property _bitfield : UInt64
+    def initialize(@_bitfield : UInt64)
+    end
+    end
 
+    def initialize(@value : UInt64, @info : Info_e__Struct_)
+    end
   end
 
   @[Extern]
-  record NET_PHYSICAL_LOCATION_LH,
-    bus_number : UInt32,
-    slot_number : UInt32,
-    function_number : UInt32
+  struct NET_PHYSICAL_LOCATION_LH
+    property bus_number : UInt32
+    property slot_number : UInt32
+    property function_number : UInt32
+    def initialize(@bus_number : UInt32, @slot_number : UInt32, @function_number : UInt32)
+    end
+  end
 
   @[Extern]
-  record IF_COUNTED_STRING_LH,
-    length : UInt16,
-    string : UInt16[257]
+  struct IF_COUNTED_STRING_LH
+    property length : UInt16
+    property string : UInt16[257]
+    def initialize(@length : UInt16, @string : UInt16[257])
+    end
+  end
 
   @[Extern]
-  record IF_PHYSICAL_ADDRESS_LH,
-    length : UInt16,
-    address : UInt8[32]
+  struct IF_PHYSICAL_ADDRESS_LH
+    property length : UInt16
+    property address : UInt8[32]
+    def initialize(@length : UInt16, @address : UInt8[32])
+    end
+  end
 
   @[Extern]
-  record NDIS_INTERFACE_INFORMATION,
-    ifOperStatus : Win32cr::NetworkManagement::Ndis::NET_IF_OPER_STATUS,
-    ifOperStatusFlags : UInt32,
-    media_connect_state : Win32cr::NetworkManagement::Ndis::NET_IF_MEDIA_CONNECT_STATE,
-    media_duplex_state : Win32cr::NetworkManagement::Ndis::NET_IF_MEDIA_DUPLEX_STATE,
-    ifMtu : UInt32,
-    ifPromiscuousMode : Win32cr::Foundation::BOOLEAN,
-    ifDeviceWakeUpEnable : Win32cr::Foundation::BOOLEAN,
-    xmit_link_speed : UInt64,
-    rcv_link_speed : UInt64,
-    ifLastChange : UInt64,
-    ifCounterDiscontinuityTime : UInt64,
-    ifInUnknownProtos : UInt64,
-    ifInDiscards : UInt64,
-    ifInErrors : UInt64,
-    ifHCInOctets : UInt64,
-    ifHCInUcastPkts : UInt64,
-    ifHCInMulticastPkts : UInt64,
-    ifHCInBroadcastPkts : UInt64,
-    ifHCOutOctets : UInt64,
-    ifHCOutUcastPkts : UInt64,
-    ifHCOutMulticastPkts : UInt64,
-    ifHCOutBroadcastPkts : UInt64,
-    ifOutErrors : UInt64,
-    ifOutDiscards : UInt64,
-    ifHCInUcastOctets : UInt64,
-    ifHCInMulticastOctets : UInt64,
-    ifHCInBroadcastOctets : UInt64,
-    ifHCOutUcastOctets : UInt64,
-    ifHCOutMulticastOctets : UInt64,
-    ifHCOutBroadcastOctets : UInt64,
-    compartment_id : UInt32,
-    supported_statistics : UInt32
+  struct NDIS_INTERFACE_INFORMATION
+    property ifOperStatus : Win32cr::NetworkManagement::Ndis::NET_IF_OPER_STATUS
+    property ifOperStatusFlags : UInt32
+    property media_connect_state : Win32cr::NetworkManagement::Ndis::NET_IF_MEDIA_CONNECT_STATE
+    property media_duplex_state : Win32cr::NetworkManagement::Ndis::NET_IF_MEDIA_DUPLEX_STATE
+    property ifMtu : UInt32
+    property ifPromiscuousMode : Win32cr::Foundation::BOOLEAN
+    property ifDeviceWakeUpEnable : Win32cr::Foundation::BOOLEAN
+    property xmit_link_speed : UInt64
+    property rcv_link_speed : UInt64
+    property ifLastChange : UInt64
+    property ifCounterDiscontinuityTime : UInt64
+    property ifInUnknownProtos : UInt64
+    property ifInDiscards : UInt64
+    property ifInErrors : UInt64
+    property ifHCInOctets : UInt64
+    property ifHCInUcastPkts : UInt64
+    property ifHCInMulticastPkts : UInt64
+    property ifHCInBroadcastPkts : UInt64
+    property ifHCOutOctets : UInt64
+    property ifHCOutUcastPkts : UInt64
+    property ifHCOutMulticastPkts : UInt64
+    property ifHCOutBroadcastPkts : UInt64
+    property ifOutErrors : UInt64
+    property ifOutDiscards : UInt64
+    property ifHCInUcastOctets : UInt64
+    property ifHCInMulticastOctets : UInt64
+    property ifHCInBroadcastOctets : UInt64
+    property ifHCOutUcastOctets : UInt64
+    property ifHCOutMulticastOctets : UInt64
+    property ifHCOutBroadcastOctets : UInt64
+    property compartment_id : UInt32
+    property supported_statistics : UInt32
+    def initialize(@ifOperStatus : Win32cr::NetworkManagement::Ndis::NET_IF_OPER_STATUS, @ifOperStatusFlags : UInt32, @media_connect_state : Win32cr::NetworkManagement::Ndis::NET_IF_MEDIA_CONNECT_STATE, @media_duplex_state : Win32cr::NetworkManagement::Ndis::NET_IF_MEDIA_DUPLEX_STATE, @ifMtu : UInt32, @ifPromiscuousMode : Win32cr::Foundation::BOOLEAN, @ifDeviceWakeUpEnable : Win32cr::Foundation::BOOLEAN, @xmit_link_speed : UInt64, @rcv_link_speed : UInt64, @ifLastChange : UInt64, @ifCounterDiscontinuityTime : UInt64, @ifInUnknownProtos : UInt64, @ifInDiscards : UInt64, @ifInErrors : UInt64, @ifHCInOctets : UInt64, @ifHCInUcastPkts : UInt64, @ifHCInMulticastPkts : UInt64, @ifHCInBroadcastPkts : UInt64, @ifHCOutOctets : UInt64, @ifHCOutUcastPkts : UInt64, @ifHCOutMulticastPkts : UInt64, @ifHCOutBroadcastPkts : UInt64, @ifOutErrors : UInt64, @ifOutDiscards : UInt64, @ifHCInUcastOctets : UInt64, @ifHCInMulticastOctets : UInt64, @ifHCInBroadcastOctets : UInt64, @ifHCOutUcastOctets : UInt64, @ifHCOutMulticastOctets : UInt64, @ifHCOutBroadcastOctets : UInt64, @compartment_id : UInt32, @supported_statistics : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDIS_STATISTICS_VALUE,
-    oid : UInt32,
-    data_length : UInt32,
-    data : UInt8*
+  struct NDIS_STATISTICS_VALUE
+    property oid : UInt32
+    property data_length : UInt32
+    property data : UInt8*
+    def initialize(@oid : UInt32, @data_length : UInt32, @data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record NDIS_STATISTICS_VALUE_EX,
-    oid : UInt32,
-    data_length : UInt32,
-    length : UInt32,
-    data : UInt8*
+  struct NDIS_STATISTICS_VALUE_EX
+    property oid : UInt32
+    property data_length : UInt32
+    property length : UInt32
+    property data : UInt8*
+    def initialize(@oid : UInt32, @data_length : UInt32, @length : UInt32, @data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record NDIS_VAR_DATA_DESC,
-    length : UInt16,
-    maximum_length : UInt16,
-    offset : LibC::UIntPtrT
+  struct NDIS_VAR_DATA_DESC
+    property length : UInt16
+    property maximum_length : UInt16
+    property offset : LibC::UIntPtrT
+    def initialize(@length : UInt16, @maximum_length : UInt16, @offset : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record NDIS_OBJECT_HEADER,
-    type__ : UInt8,
-    revision : UInt8,
-    size : UInt16
+  struct NDIS_OBJECT_HEADER
+    property type__ : UInt8
+    property revision : UInt8
+    property size : UInt16
+    def initialize(@type__ : UInt8, @revision : UInt8, @size : UInt16)
+    end
+  end
 
   @[Extern]
-  record NDIS_STATISTICS_INFO,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    supported_statistics : UInt32,
-    ifInDiscards : UInt64,
-    ifInErrors : UInt64,
-    ifHCInOctets : UInt64,
-    ifHCInUcastPkts : UInt64,
-    ifHCInMulticastPkts : UInt64,
-    ifHCInBroadcastPkts : UInt64,
-    ifHCOutOctets : UInt64,
-    ifHCOutUcastPkts : UInt64,
-    ifHCOutMulticastPkts : UInt64,
-    ifHCOutBroadcastPkts : UInt64,
-    ifOutErrors : UInt64,
-    ifOutDiscards : UInt64,
-    ifHCInUcastOctets : UInt64,
-    ifHCInMulticastOctets : UInt64,
-    ifHCInBroadcastOctets : UInt64,
-    ifHCOutUcastOctets : UInt64,
-    ifHCOutMulticastOctets : UInt64,
-    ifHCOutBroadcastOctets : UInt64
+  struct NDIS_STATISTICS_INFO
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property supported_statistics : UInt32
+    property ifInDiscards : UInt64
+    property ifInErrors : UInt64
+    property ifHCInOctets : UInt64
+    property ifHCInUcastPkts : UInt64
+    property ifHCInMulticastPkts : UInt64
+    property ifHCInBroadcastPkts : UInt64
+    property ifHCOutOctets : UInt64
+    property ifHCOutUcastPkts : UInt64
+    property ifHCOutMulticastPkts : UInt64
+    property ifHCOutBroadcastPkts : UInt64
+    property ifOutErrors : UInt64
+    property ifOutDiscards : UInt64
+    property ifHCInUcastOctets : UInt64
+    property ifHCInMulticastOctets : UInt64
+    property ifHCInBroadcastOctets : UInt64
+    property ifHCOutUcastOctets : UInt64
+    property ifHCOutMulticastOctets : UInt64
+    property ifHCOutBroadcastOctets : UInt64
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @supported_statistics : UInt32, @ifInDiscards : UInt64, @ifInErrors : UInt64, @ifHCInOctets : UInt64, @ifHCInUcastPkts : UInt64, @ifHCInMulticastPkts : UInt64, @ifHCInBroadcastPkts : UInt64, @ifHCOutOctets : UInt64, @ifHCOutUcastPkts : UInt64, @ifHCOutMulticastPkts : UInt64, @ifHCOutBroadcastPkts : UInt64, @ifOutErrors : UInt64, @ifOutDiscards : UInt64, @ifHCInUcastOctets : UInt64, @ifHCInMulticastOctets : UInt64, @ifHCInBroadcastOctets : UInt64, @ifHCOutUcastOctets : UInt64, @ifHCOutMulticastOctets : UInt64, @ifHCOutBroadcastOctets : UInt64)
+    end
+  end
 
   @[Extern]
-  record NDIS_INTERRUPT_MODERATION_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    flags : UInt32,
-    interrupt_moderation : Win32cr::NetworkManagement::Ndis::NDIS_INTERRUPT_MODERATION
+  struct NDIS_INTERRUPT_MODERATION_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property flags : UInt32
+    property interrupt_moderation : Win32cr::NetworkManagement::Ndis::NDIS_INTERRUPT_MODERATION
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @flags : UInt32, @interrupt_moderation : Win32cr::NetworkManagement::Ndis::NDIS_INTERRUPT_MODERATION)
+    end
+  end
 
   @[Extern]
-  record NDIS_TIMEOUT_DPC_REQUEST_CAPABILITIES,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    flags : UInt32,
-    timeout_array_length : UInt32,
-    timeout_array : UInt32*
+  struct NDIS_TIMEOUT_DPC_REQUEST_CAPABILITIES
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property flags : UInt32
+    property timeout_array_length : UInt32
+    property timeout_array : UInt32*
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @flags : UInt32, @timeout_array_length : UInt32, @timeout_array : UInt32*)
+    end
+  end
 
   @[Extern]
-  record NDIS_PCI_DEVICE_CUSTOM_PROPERTIES,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    device_type : UInt32,
-    current_speed_and_mode : UInt32,
-    current_payload_size : UInt32,
-    max_payload_size : UInt32,
-    max_read_request_size : UInt32,
-    current_link_speed : UInt32,
-    current_link_width : UInt32,
-    max_link_speed : UInt32,
-    max_link_width : UInt32,
-    pci_express_version : UInt32,
-    interrupt_type : UInt32,
-    max_interrupt_messages : UInt32
+  struct NDIS_PCI_DEVICE_CUSTOM_PROPERTIES
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property device_type : UInt32
+    property current_speed_and_mode : UInt32
+    property current_payload_size : UInt32
+    property max_payload_size : UInt32
+    property max_read_request_size : UInt32
+    property current_link_speed : UInt32
+    property current_link_width : UInt32
+    property max_link_speed : UInt32
+    property max_link_width : UInt32
+    property pci_express_version : UInt32
+    property interrupt_type : UInt32
+    property max_interrupt_messages : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @device_type : UInt32, @current_speed_and_mode : UInt32, @current_payload_size : UInt32, @max_payload_size : UInt32, @max_read_request_size : UInt32, @current_link_speed : UInt32, @current_link_width : UInt32, @max_link_speed : UInt32, @max_link_width : UInt32, @pci_express_version : UInt32, @interrupt_type : UInt32, @max_interrupt_messages : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDIS_802_11_STATUS_INDICATION,
-    status_type : Win32cr::NetworkManagement::Ndis::NDIS_802_11_STATUS_TYPE
+  struct NDIS_802_11_STATUS_INDICATION
+    property status_type : Win32cr::NetworkManagement::Ndis::NDIS_802_11_STATUS_TYPE
+    def initialize(@status_type : Win32cr::NetworkManagement::Ndis::NDIS_802_11_STATUS_TYPE)
+    end
+  end
 
   @[Extern]
-  record NDIS_802_11_AUTHENTICATION_REQUEST,
-    length : UInt32,
-    bssid : UInt8[6],
-    flags : UInt32
+  struct NDIS_802_11_AUTHENTICATION_REQUEST
+    property length : UInt32
+    property bssid : UInt8[6]
+    property flags : UInt32
+    def initialize(@length : UInt32, @bssid : UInt8[6], @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record PMKID_CANDIDATE,
-    bssid : UInt8[6],
-    flags : UInt32
+  struct PMKID_CANDIDATE
+    property bssid : UInt8[6]
+    property flags : UInt32
+    def initialize(@bssid : UInt8[6], @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDIS_802_11_PMKID_CANDIDATE_LIST,
-    version : UInt32,
-    num_candidates : UInt32,
-    candidate_list : Win32cr::NetworkManagement::Ndis::PMKID_CANDIDATE*
+  struct NDIS_802_11_PMKID_CANDIDATE_LIST
+    property version : UInt32
+    property num_candidates : UInt32
+    property candidate_list : Win32cr::NetworkManagement::Ndis::PMKID_CANDIDATE*
+    def initialize(@version : UInt32, @num_candidates : UInt32, @candidate_list : Win32cr::NetworkManagement::Ndis::PMKID_CANDIDATE*)
+    end
+  end
 
   @[Extern]
-  record NDIS_802_11_NETWORK_TYPE_LIST,
-    number_of_items : UInt32,
-    network_type : Win32cr::NetworkManagement::Ndis::NDIS_802_11_NETWORK_TYPE*
+  struct NDIS_802_11_NETWORK_TYPE_LIST
+    property number_of_items : UInt32
+    property network_type : Win32cr::NetworkManagement::Ndis::NDIS_802_11_NETWORK_TYPE*
+    def initialize(@number_of_items : UInt32, @network_type : Win32cr::NetworkManagement::Ndis::NDIS_802_11_NETWORK_TYPE*)
+    end
+  end
 
   @[Extern]
-  record NDIS_802_11_CONFIGURATION_FH,
-    length : UInt32,
-    hop_pattern : UInt32,
-    hop_set : UInt32,
-    dwell_time : UInt32
+  struct NDIS_802_11_CONFIGURATION_FH
+    property length : UInt32
+    property hop_pattern : UInt32
+    property hop_set : UInt32
+    property dwell_time : UInt32
+    def initialize(@length : UInt32, @hop_pattern : UInt32, @hop_set : UInt32, @dwell_time : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDIS_802_11_CONFIGURATION,
-    length : UInt32,
-    beacon_period : UInt32,
-    atim_window : UInt32,
-    ds_config : UInt32,
-    fh_config : Win32cr::NetworkManagement::Ndis::NDIS_802_11_CONFIGURATION_FH
+  struct NDIS_802_11_CONFIGURATION
+    property length : UInt32
+    property beacon_period : UInt32
+    property atim_window : UInt32
+    property ds_config : UInt32
+    property fh_config : Win32cr::NetworkManagement::Ndis::NDIS_802_11_CONFIGURATION_FH
+    def initialize(@length : UInt32, @beacon_period : UInt32, @atim_window : UInt32, @ds_config : UInt32, @fh_config : Win32cr::NetworkManagement::Ndis::NDIS_802_11_CONFIGURATION_FH)
+    end
+  end
 
   @[Extern]
-  record NDIS_802_11_STATISTICS,
-    length : UInt32,
-    transmitted_fragment_count : Win32cr::Foundation::LARGE_INTEGER,
-    multicast_transmitted_frame_count : Win32cr::Foundation::LARGE_INTEGER,
-    failed_count : Win32cr::Foundation::LARGE_INTEGER,
-    retry_count : Win32cr::Foundation::LARGE_INTEGER,
-    multiple_retry_count : Win32cr::Foundation::LARGE_INTEGER,
-    rts_success_count : Win32cr::Foundation::LARGE_INTEGER,
-    rts_failure_count : Win32cr::Foundation::LARGE_INTEGER,
-    ack_failure_count : Win32cr::Foundation::LARGE_INTEGER,
-    frame_duplicate_count : Win32cr::Foundation::LARGE_INTEGER,
-    received_fragment_count : Win32cr::Foundation::LARGE_INTEGER,
-    multicast_received_frame_count : Win32cr::Foundation::LARGE_INTEGER,
-    fcs_error_count : Win32cr::Foundation::LARGE_INTEGER,
-    tkip_local_mic_failures : Win32cr::Foundation::LARGE_INTEGER,
-    tkipicv_error_count : Win32cr::Foundation::LARGE_INTEGER,
-    tkip_counter_measures_invoked : Win32cr::Foundation::LARGE_INTEGER,
-    tkip_replays : Win32cr::Foundation::LARGE_INTEGER,
-    ccmp_format_errors : Win32cr::Foundation::LARGE_INTEGER,
-    ccmp_replays : Win32cr::Foundation::LARGE_INTEGER,
-    ccmp_decrypt_errors : Win32cr::Foundation::LARGE_INTEGER,
-    four_way_handshake_failures : Win32cr::Foundation::LARGE_INTEGER,
-    wep_undecryptable_count : Win32cr::Foundation::LARGE_INTEGER,
-    wepicv_error_count : Win32cr::Foundation::LARGE_INTEGER,
-    decrypt_success_count : Win32cr::Foundation::LARGE_INTEGER,
-    decrypt_failure_count : Win32cr::Foundation::LARGE_INTEGER
+  struct NDIS_802_11_STATISTICS
+    property length : UInt32
+    property transmitted_fragment_count : Win32cr::Foundation::LARGE_INTEGER
+    property multicast_transmitted_frame_count : Win32cr::Foundation::LARGE_INTEGER
+    property failed_count : Win32cr::Foundation::LARGE_INTEGER
+    property retry_count : Win32cr::Foundation::LARGE_INTEGER
+    property multiple_retry_count : Win32cr::Foundation::LARGE_INTEGER
+    property rts_success_count : Win32cr::Foundation::LARGE_INTEGER
+    property rts_failure_count : Win32cr::Foundation::LARGE_INTEGER
+    property ack_failure_count : Win32cr::Foundation::LARGE_INTEGER
+    property frame_duplicate_count : Win32cr::Foundation::LARGE_INTEGER
+    property received_fragment_count : Win32cr::Foundation::LARGE_INTEGER
+    property multicast_received_frame_count : Win32cr::Foundation::LARGE_INTEGER
+    property fcs_error_count : Win32cr::Foundation::LARGE_INTEGER
+    property tkip_local_mic_failures : Win32cr::Foundation::LARGE_INTEGER
+    property tkipicv_error_count : Win32cr::Foundation::LARGE_INTEGER
+    property tkip_counter_measures_invoked : Win32cr::Foundation::LARGE_INTEGER
+    property tkip_replays : Win32cr::Foundation::LARGE_INTEGER
+    property ccmp_format_errors : Win32cr::Foundation::LARGE_INTEGER
+    property ccmp_replays : Win32cr::Foundation::LARGE_INTEGER
+    property ccmp_decrypt_errors : Win32cr::Foundation::LARGE_INTEGER
+    property four_way_handshake_failures : Win32cr::Foundation::LARGE_INTEGER
+    property wep_undecryptable_count : Win32cr::Foundation::LARGE_INTEGER
+    property wepicv_error_count : Win32cr::Foundation::LARGE_INTEGER
+    property decrypt_success_count : Win32cr::Foundation::LARGE_INTEGER
+    property decrypt_failure_count : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@length : UInt32, @transmitted_fragment_count : Win32cr::Foundation::LARGE_INTEGER, @multicast_transmitted_frame_count : Win32cr::Foundation::LARGE_INTEGER, @failed_count : Win32cr::Foundation::LARGE_INTEGER, @retry_count : Win32cr::Foundation::LARGE_INTEGER, @multiple_retry_count : Win32cr::Foundation::LARGE_INTEGER, @rts_success_count : Win32cr::Foundation::LARGE_INTEGER, @rts_failure_count : Win32cr::Foundation::LARGE_INTEGER, @ack_failure_count : Win32cr::Foundation::LARGE_INTEGER, @frame_duplicate_count : Win32cr::Foundation::LARGE_INTEGER, @received_fragment_count : Win32cr::Foundation::LARGE_INTEGER, @multicast_received_frame_count : Win32cr::Foundation::LARGE_INTEGER, @fcs_error_count : Win32cr::Foundation::LARGE_INTEGER, @tkip_local_mic_failures : Win32cr::Foundation::LARGE_INTEGER, @tkipicv_error_count : Win32cr::Foundation::LARGE_INTEGER, @tkip_counter_measures_invoked : Win32cr::Foundation::LARGE_INTEGER, @tkip_replays : Win32cr::Foundation::LARGE_INTEGER, @ccmp_format_errors : Win32cr::Foundation::LARGE_INTEGER, @ccmp_replays : Win32cr::Foundation::LARGE_INTEGER, @ccmp_decrypt_errors : Win32cr::Foundation::LARGE_INTEGER, @four_way_handshake_failures : Win32cr::Foundation::LARGE_INTEGER, @wep_undecryptable_count : Win32cr::Foundation::LARGE_INTEGER, @wepicv_error_count : Win32cr::Foundation::LARGE_INTEGER, @decrypt_success_count : Win32cr::Foundation::LARGE_INTEGER, @decrypt_failure_count : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
 
   @[Extern]
-  record NDIS_802_11_KEY,
-    length : UInt32,
-    key_index : UInt32,
-    key_length : UInt32,
-    bssid : UInt8[6],
-    key_rsc : UInt64,
-    key_material : UInt8*
+  struct NDIS_802_11_KEY
+    property length : UInt32
+    property key_index : UInt32
+    property key_length : UInt32
+    property bssid : UInt8[6]
+    property key_rsc : UInt64
+    property key_material : UInt8*
+    def initialize(@length : UInt32, @key_index : UInt32, @key_length : UInt32, @bssid : UInt8[6], @key_rsc : UInt64, @key_material : UInt8*)
+    end
+  end
 
   @[Extern]
-  record NDIS_802_11_REMOVE_KEY,
-    length : UInt32,
-    key_index : UInt32,
-    bssid : UInt8[6]
+  struct NDIS_802_11_REMOVE_KEY
+    property length : UInt32
+    property key_index : UInt32
+    property bssid : UInt8[6]
+    def initialize(@length : UInt32, @key_index : UInt32, @bssid : UInt8[6])
+    end
+  end
 
   @[Extern]
-  record NDIS_802_11_WEP,
-    length : UInt32,
-    key_index : UInt32,
-    key_length : UInt32,
-    key_material : UInt8*
+  struct NDIS_802_11_WEP
+    property length : UInt32
+    property key_index : UInt32
+    property key_length : UInt32
+    property key_material : UInt8*
+    def initialize(@length : UInt32, @key_index : UInt32, @key_length : UInt32, @key_material : UInt8*)
+    end
+  end
 
   @[Extern]
-  record NDIS_802_11_SSID,
-    ssid_length : UInt32,
-    ssid : UInt8[32]
+  struct NDIS_802_11_SSID
+    property ssid_length : UInt32
+    property ssid : UInt8[32]
+    def initialize(@ssid_length : UInt32, @ssid : UInt8[32])
+    end
+  end
 
   @[Extern]
-  record NDIS_WLAN_BSSID,
-    length : UInt32,
-    mac_address : UInt8[6],
-    reserved : UInt8[2],
-    ssid : Win32cr::NetworkManagement::Ndis::NDIS_802_11_SSID,
-    privacy : UInt32,
-    rssi : Int32,
-    network_type_in_use : Win32cr::NetworkManagement::Ndis::NDIS_802_11_NETWORK_TYPE,
-    configuration : Win32cr::NetworkManagement::Ndis::NDIS_802_11_CONFIGURATION,
-    infrastructure_mode : Win32cr::NetworkManagement::Ndis::NDIS_802_11_NETWORK_INFRASTRUCTURE,
-    supported_rates : UInt8[8]
+  struct NDIS_WLAN_BSSID
+    property length : UInt32
+    property mac_address : UInt8[6]
+    property reserved : UInt8[2]
+    property ssid : Win32cr::NetworkManagement::Ndis::NDIS_802_11_SSID
+    property privacy : UInt32
+    property rssi : Int32
+    property network_type_in_use : Win32cr::NetworkManagement::Ndis::NDIS_802_11_NETWORK_TYPE
+    property configuration : Win32cr::NetworkManagement::Ndis::NDIS_802_11_CONFIGURATION
+    property infrastructure_mode : Win32cr::NetworkManagement::Ndis::NDIS_802_11_NETWORK_INFRASTRUCTURE
+    property supported_rates : UInt8[8]
+    def initialize(@length : UInt32, @mac_address : UInt8[6], @reserved : UInt8[2], @ssid : Win32cr::NetworkManagement::Ndis::NDIS_802_11_SSID, @privacy : UInt32, @rssi : Int32, @network_type_in_use : Win32cr::NetworkManagement::Ndis::NDIS_802_11_NETWORK_TYPE, @configuration : Win32cr::NetworkManagement::Ndis::NDIS_802_11_CONFIGURATION, @infrastructure_mode : Win32cr::NetworkManagement::Ndis::NDIS_802_11_NETWORK_INFRASTRUCTURE, @supported_rates : UInt8[8])
+    end
+  end
 
   @[Extern]
-  record NDIS_802_11_BSSID_LIST,
-    number_of_items : UInt32,
-    bssid : Win32cr::NetworkManagement::Ndis::NDIS_WLAN_BSSID*
+  struct NDIS_802_11_BSSID_LIST
+    property number_of_items : UInt32
+    property bssid : Win32cr::NetworkManagement::Ndis::NDIS_WLAN_BSSID*
+    def initialize(@number_of_items : UInt32, @bssid : Win32cr::NetworkManagement::Ndis::NDIS_WLAN_BSSID*)
+    end
+  end
 
   @[Extern]
-  record NDIS_WLAN_BSSID_EX,
-    length : UInt32,
-    mac_address : UInt8[6],
-    reserved : UInt8[2],
-    ssid : Win32cr::NetworkManagement::Ndis::NDIS_802_11_SSID,
-    privacy : UInt32,
-    rssi : Int32,
-    network_type_in_use : Win32cr::NetworkManagement::Ndis::NDIS_802_11_NETWORK_TYPE,
-    configuration : Win32cr::NetworkManagement::Ndis::NDIS_802_11_CONFIGURATION,
-    infrastructure_mode : Win32cr::NetworkManagement::Ndis::NDIS_802_11_NETWORK_INFRASTRUCTURE,
-    supported_rates : UInt8[16],
-    ie_length : UInt32,
-    i_es : UInt8*
+  struct NDIS_WLAN_BSSID_EX
+    property length : UInt32
+    property mac_address : UInt8[6]
+    property reserved : UInt8[2]
+    property ssid : Win32cr::NetworkManagement::Ndis::NDIS_802_11_SSID
+    property privacy : UInt32
+    property rssi : Int32
+    property network_type_in_use : Win32cr::NetworkManagement::Ndis::NDIS_802_11_NETWORK_TYPE
+    property configuration : Win32cr::NetworkManagement::Ndis::NDIS_802_11_CONFIGURATION
+    property infrastructure_mode : Win32cr::NetworkManagement::Ndis::NDIS_802_11_NETWORK_INFRASTRUCTURE
+    property supported_rates : UInt8[16]
+    property ie_length : UInt32
+    property i_es : UInt8*
+    def initialize(@length : UInt32, @mac_address : UInt8[6], @reserved : UInt8[2], @ssid : Win32cr::NetworkManagement::Ndis::NDIS_802_11_SSID, @privacy : UInt32, @rssi : Int32, @network_type_in_use : Win32cr::NetworkManagement::Ndis::NDIS_802_11_NETWORK_TYPE, @configuration : Win32cr::NetworkManagement::Ndis::NDIS_802_11_CONFIGURATION, @infrastructure_mode : Win32cr::NetworkManagement::Ndis::NDIS_802_11_NETWORK_INFRASTRUCTURE, @supported_rates : UInt8[16], @ie_length : UInt32, @i_es : UInt8*)
+    end
+  end
 
   @[Extern]
-  record NDIS_802_11_BSSID_LIST_EX,
-    number_of_items : UInt32,
-    bssid : Win32cr::NetworkManagement::Ndis::NDIS_WLAN_BSSID_EX*
+  struct NDIS_802_11_BSSID_LIST_EX
+    property number_of_items : UInt32
+    property bssid : Win32cr::NetworkManagement::Ndis::NDIS_WLAN_BSSID_EX*
+    def initialize(@number_of_items : UInt32, @bssid : Win32cr::NetworkManagement::Ndis::NDIS_WLAN_BSSID_EX*)
+    end
+  end
 
   @[Extern]
-  record NDIS_802_11_FIXED_IEs,
-    timestamp : UInt8[8],
-    beacon_interval : UInt16,
-    capabilities : UInt16
+  struct NDIS_802_11_FIXED_IEs
+    property timestamp : UInt8[8]
+    property beacon_interval : UInt16
+    property capabilities : UInt16
+    def initialize(@timestamp : UInt8[8], @beacon_interval : UInt16, @capabilities : UInt16)
+    end
+  end
 
   @[Extern]
-  record NDIS_802_11_VARIABLE_IEs,
-    element_id : UInt8,
-    length : UInt8,
-    data : UInt8*
+  struct NDIS_802_11_VARIABLE_IEs
+    property element_id : UInt8
+    property length : UInt8
+    property data : UInt8*
+    def initialize(@element_id : UInt8, @length : UInt8, @data : UInt8*)
+    end
+  end
 
   @[Extern]
-  record NDIS_802_11_AI_REQFI,
-    capabilities : UInt16,
-    listen_interval : UInt16,
-    current_ap_address : UInt8[6]
+  struct NDIS_802_11_AI_REQFI
+    property capabilities : UInt16
+    property listen_interval : UInt16
+    property current_ap_address : UInt8[6]
+    def initialize(@capabilities : UInt16, @listen_interval : UInt16, @current_ap_address : UInt8[6])
+    end
+  end
 
   @[Extern]
-  record NDIS_802_11_AI_RESFI,
-    capabilities : UInt16,
-    status_code : UInt16,
-    association_id : UInt16
+  struct NDIS_802_11_AI_RESFI
+    property capabilities : UInt16
+    property status_code : UInt16
+    property association_id : UInt16
+    def initialize(@capabilities : UInt16, @status_code : UInt16, @association_id : UInt16)
+    end
+  end
 
   @[Extern]
-  record NDIS_802_11_ASSOCIATION_INFORMATION,
-    length : UInt32,
-    available_request_fixed_i_es : UInt16,
-    request_fixed_i_es : Win32cr::NetworkManagement::Ndis::NDIS_802_11_AI_REQFI,
-    request_ie_length : UInt32,
-    offset_request_i_es : UInt32,
-    available_response_fixed_i_es : UInt16,
-    response_fixed_i_es : Win32cr::NetworkManagement::Ndis::NDIS_802_11_AI_RESFI,
-    response_ie_length : UInt32,
-    offset_response_i_es : UInt32
+  struct NDIS_802_11_ASSOCIATION_INFORMATION
+    property length : UInt32
+    property available_request_fixed_i_es : UInt16
+    property request_fixed_i_es : Win32cr::NetworkManagement::Ndis::NDIS_802_11_AI_REQFI
+    property request_ie_length : UInt32
+    property offset_request_i_es : UInt32
+    property available_response_fixed_i_es : UInt16
+    property response_fixed_i_es : Win32cr::NetworkManagement::Ndis::NDIS_802_11_AI_RESFI
+    property response_ie_length : UInt32
+    property offset_response_i_es : UInt32
+    def initialize(@length : UInt32, @available_request_fixed_i_es : UInt16, @request_fixed_i_es : Win32cr::NetworkManagement::Ndis::NDIS_802_11_AI_REQFI, @request_ie_length : UInt32, @offset_request_i_es : UInt32, @available_response_fixed_i_es : UInt16, @response_fixed_i_es : Win32cr::NetworkManagement::Ndis::NDIS_802_11_AI_RESFI, @response_ie_length : UInt32, @offset_response_i_es : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDIS_802_11_AUTHENTICATION_EVENT,
-    status : Win32cr::NetworkManagement::Ndis::NDIS_802_11_STATUS_INDICATION,
-    request : Win32cr::NetworkManagement::Ndis::NDIS_802_11_AUTHENTICATION_REQUEST*
+  struct NDIS_802_11_AUTHENTICATION_EVENT
+    property status : Win32cr::NetworkManagement::Ndis::NDIS_802_11_STATUS_INDICATION
+    property request : Win32cr::NetworkManagement::Ndis::NDIS_802_11_AUTHENTICATION_REQUEST*
+    def initialize(@status : Win32cr::NetworkManagement::Ndis::NDIS_802_11_STATUS_INDICATION, @request : Win32cr::NetworkManagement::Ndis::NDIS_802_11_AUTHENTICATION_REQUEST*)
+    end
+  end
 
   @[Extern]
-  record NDIS_802_11_TEST,
-    length : UInt32,
-    type__ : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct NDIS_802_11_TEST
+    property length : UInt32
+    property type__ : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      authentication_event : Win32cr::NetworkManagement::Ndis::NDIS_802_11_AUTHENTICATION_EVENT,
-      rssi_trigger : Int32
+    struct Anonymous_e__Union_
+    property authentication_event : Win32cr::NetworkManagement::Ndis::NDIS_802_11_AUTHENTICATION_EVENT
+    property rssi_trigger : Int32
+    def initialize(@authentication_event : Win32cr::NetworkManagement::Ndis::NDIS_802_11_AUTHENTICATION_EVENT, @rssi_trigger : Int32)
+    end
+    end
 
+    def initialize(@length : UInt32, @type__ : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record BSSID_INFO,
-    bssid : UInt8[6],
-    pmkid : UInt8[16]
+  struct BSSID_INFO
+    property bssid : UInt8[6]
+    property pmkid : UInt8[16]
+    def initialize(@bssid : UInt8[6], @pmkid : UInt8[16])
+    end
+  end
 
   @[Extern]
-  record NDIS_802_11_PMKID,
-    length : UInt32,
-    bssid_info_count : UInt32,
-    bssid_info : Win32cr::NetworkManagement::Ndis::BSSID_INFO*
+  struct NDIS_802_11_PMKID
+    property length : UInt32
+    property bssid_info_count : UInt32
+    property bssid_info : Win32cr::NetworkManagement::Ndis::BSSID_INFO*
+    def initialize(@length : UInt32, @bssid_info_count : UInt32, @bssid_info : Win32cr::NetworkManagement::Ndis::BSSID_INFO*)
+    end
+  end
 
   @[Extern]
-  record NDIS_802_11_AUTHENTICATION_ENCRYPTION,
-    auth_mode_supported : Win32cr::NetworkManagement::Ndis::NDIS_802_11_AUTHENTICATION_MODE,
-    encrypt_status_supported : Win32cr::NetworkManagement::Ndis::NDIS_802_11_WEP_STATUS
+  struct NDIS_802_11_AUTHENTICATION_ENCRYPTION
+    property auth_mode_supported : Win32cr::NetworkManagement::Ndis::NDIS_802_11_AUTHENTICATION_MODE
+    property encrypt_status_supported : Win32cr::NetworkManagement::Ndis::NDIS_802_11_WEP_STATUS
+    def initialize(@auth_mode_supported : Win32cr::NetworkManagement::Ndis::NDIS_802_11_AUTHENTICATION_MODE, @encrypt_status_supported : Win32cr::NetworkManagement::Ndis::NDIS_802_11_WEP_STATUS)
+    end
+  end
 
   @[Extern]
-  record NDIS_802_11_CAPABILITY,
-    length : UInt32,
-    version : UInt32,
-    no_of_pmki_ds : UInt32,
-    no_of_auth_encrypt_pairs_supported : UInt32,
-    authentication_encryption_supported : Win32cr::NetworkManagement::Ndis::NDIS_802_11_AUTHENTICATION_ENCRYPTION*
+  struct NDIS_802_11_CAPABILITY
+    property length : UInt32
+    property version : UInt32
+    property no_of_pmki_ds : UInt32
+    property no_of_auth_encrypt_pairs_supported : UInt32
+    property authentication_encryption_supported : Win32cr::NetworkManagement::Ndis::NDIS_802_11_AUTHENTICATION_ENCRYPTION*
+    def initialize(@length : UInt32, @version : UInt32, @no_of_pmki_ds : UInt32, @no_of_auth_encrypt_pairs_supported : UInt32, @authentication_encryption_supported : Win32cr::NetworkManagement::Ndis::NDIS_802_11_AUTHENTICATION_ENCRYPTION*)
+    end
+  end
 
   @[Extern]
-  record NDIS_802_11_NON_BCAST_SSID_LIST,
-    number_of_items : UInt32,
-    non_bcast_ssid : Win32cr::NetworkManagement::Ndis::NDIS_802_11_SSID*
+  struct NDIS_802_11_NON_BCAST_SSID_LIST
+    property number_of_items : UInt32
+    property non_bcast_ssid : Win32cr::NetworkManagement::Ndis::NDIS_802_11_SSID*
+    def initialize(@number_of_items : UInt32, @non_bcast_ssid : Win32cr::NetworkManagement::Ndis::NDIS_802_11_SSID*)
+    end
+  end
 
   @[Extern]
-  record NDIS_CO_DEVICE_PROFILE,
-    device_description : Win32cr::NetworkManagement::Ndis::NDIS_VAR_DATA_DESC,
-    dev_specific_info : Win32cr::NetworkManagement::Ndis::NDIS_VAR_DATA_DESC,
-    ulTAPISupplementaryPassThru : UInt32,
-    ulAddressModes : UInt32,
-    ulNumAddresses : UInt32,
-    ulBearerModes : UInt32,
-    ulMaxTxRate : UInt32,
-    ulMinTxRate : UInt32,
-    ulMaxRxRate : UInt32,
-    ulMinRxRate : UInt32,
-    ulMediaModes : UInt32,
-    ulGenerateToneModes : UInt32,
-    ulGenerateToneMaxNumFreq : UInt32,
-    ulGenerateDigitModes : UInt32,
-    ulMonitorToneMaxNumFreq : UInt32,
-    ulMonitorToneMaxNumEntries : UInt32,
-    ulMonitorDigitModes : UInt32,
-    ulGatherDigitsMinTimeout : UInt32,
-    ulGatherDigitsMaxTimeout : UInt32,
-    ulDevCapFlags : UInt32,
-    ulMaxNumActiveCalls : UInt32,
-    ulAnswerMode : UInt32,
-    ulUUIAcceptSize : UInt32,
-    ulUUIAnswerSize : UInt32,
-    ulUUIMakeCallSize : UInt32,
-    ulUUIDropSize : UInt32,
-    ulUUISendUserUserInfoSize : UInt32,
-    ulUUICallInfoSize : UInt32
+  struct NDIS_CO_DEVICE_PROFILE
+    property device_description : Win32cr::NetworkManagement::Ndis::NDIS_VAR_DATA_DESC
+    property dev_specific_info : Win32cr::NetworkManagement::Ndis::NDIS_VAR_DATA_DESC
+    property ulTAPISupplementaryPassThru : UInt32
+    property ulAddressModes : UInt32
+    property ulNumAddresses : UInt32
+    property ulBearerModes : UInt32
+    property ulMaxTxRate : UInt32
+    property ulMinTxRate : UInt32
+    property ulMaxRxRate : UInt32
+    property ulMinRxRate : UInt32
+    property ulMediaModes : UInt32
+    property ulGenerateToneModes : UInt32
+    property ulGenerateToneMaxNumFreq : UInt32
+    property ulGenerateDigitModes : UInt32
+    property ulMonitorToneMaxNumFreq : UInt32
+    property ulMonitorToneMaxNumEntries : UInt32
+    property ulMonitorDigitModes : UInt32
+    property ulGatherDigitsMinTimeout : UInt32
+    property ulGatherDigitsMaxTimeout : UInt32
+    property ulDevCapFlags : UInt32
+    property ulMaxNumActiveCalls : UInt32
+    property ulAnswerMode : UInt32
+    property ulUUIAcceptSize : UInt32
+    property ulUUIAnswerSize : UInt32
+    property ulUUIMakeCallSize : UInt32
+    property ulUUIDropSize : UInt32
+    property ulUUISendUserUserInfoSize : UInt32
+    property ulUUICallInfoSize : UInt32
+    def initialize(@device_description : Win32cr::NetworkManagement::Ndis::NDIS_VAR_DATA_DESC, @dev_specific_info : Win32cr::NetworkManagement::Ndis::NDIS_VAR_DATA_DESC, @ulTAPISupplementaryPassThru : UInt32, @ulAddressModes : UInt32, @ulNumAddresses : UInt32, @ulBearerModes : UInt32, @ulMaxTxRate : UInt32, @ulMinTxRate : UInt32, @ulMaxRxRate : UInt32, @ulMinRxRate : UInt32, @ulMediaModes : UInt32, @ulGenerateToneModes : UInt32, @ulGenerateToneMaxNumFreq : UInt32, @ulGenerateDigitModes : UInt32, @ulMonitorToneMaxNumFreq : UInt32, @ulMonitorToneMaxNumEntries : UInt32, @ulMonitorDigitModes : UInt32, @ulGatherDigitsMinTimeout : UInt32, @ulGatherDigitsMaxTimeout : UInt32, @ulDevCapFlags : UInt32, @ulMaxNumActiveCalls : UInt32, @ulAnswerMode : UInt32, @ulUUIAcceptSize : UInt32, @ulUUIAnswerSize : UInt32, @ulUUIMakeCallSize : UInt32, @ulUUIDropSize : UInt32, @ulUUISendUserUserInfoSize : UInt32, @ulUUICallInfoSize : UInt32)
+    end
+  end
 
   @[Extern]
-  record OFFLOAD_ALGO_INFO,
-    algoIdentifier : UInt32,
-    algoKeylen : UInt32,
-    algoRounds : UInt32
+  struct OFFLOAD_ALGO_INFO
+    property algoIdentifier : UInt32
+    property algoKeylen : UInt32
+    property algoRounds : UInt32
+    def initialize(@algoIdentifier : UInt32, @algoKeylen : UInt32, @algoRounds : UInt32)
+    end
+  end
 
   @[Extern]
-  record OFFLOAD_SECURITY_ASSOCIATION,
-    operation : Win32cr::NetworkManagement::Ndis::OFFLOAD_OPERATION_E,
-    spi : UInt32,
-    integrity_algo : Win32cr::NetworkManagement::Ndis::OFFLOAD_ALGO_INFO,
-    conf_algo : Win32cr::NetworkManagement::Ndis::OFFLOAD_ALGO_INFO,
-    reserved : Win32cr::NetworkManagement::Ndis::OFFLOAD_ALGO_INFO
+  struct OFFLOAD_SECURITY_ASSOCIATION
+    property operation : Win32cr::NetworkManagement::Ndis::OFFLOAD_OPERATION_E
+    property spi : UInt32
+    property integrity_algo : Win32cr::NetworkManagement::Ndis::OFFLOAD_ALGO_INFO
+    property conf_algo : Win32cr::NetworkManagement::Ndis::OFFLOAD_ALGO_INFO
+    property reserved : Win32cr::NetworkManagement::Ndis::OFFLOAD_ALGO_INFO
+    def initialize(@operation : Win32cr::NetworkManagement::Ndis::OFFLOAD_OPERATION_E, @spi : UInt32, @integrity_algo : Win32cr::NetworkManagement::Ndis::OFFLOAD_ALGO_INFO, @conf_algo : Win32cr::NetworkManagement::Ndis::OFFLOAD_ALGO_INFO, @reserved : Win32cr::NetworkManagement::Ndis::OFFLOAD_ALGO_INFO)
+    end
+  end
 
   @[Extern]
-  record OFFLOAD_IPSEC_ADD_SA,
-    src_addr : UInt32,
-    src_mask : UInt32,
-    dest_addr : UInt32,
-    dest_mask : UInt32,
-    protocol : UInt32,
-    src_port : UInt16,
-    dest_port : UInt16,
-    src_tunnel_addr : UInt32,
-    dest_tunnel_addr : UInt32,
-    flags : UInt16,
-    num_s_as : Int16,
-    sec_assoc : Win32cr::NetworkManagement::Ndis::OFFLOAD_SECURITY_ASSOCIATION[3],
-    offload_handle : Win32cr::Foundation::HANDLE,
-    key_len : UInt32,
-    key_mat : UInt8*
+  struct OFFLOAD_IPSEC_ADD_SA
+    property src_addr : UInt32
+    property src_mask : UInt32
+    property dest_addr : UInt32
+    property dest_mask : UInt32
+    property protocol : UInt32
+    property src_port : UInt16
+    property dest_port : UInt16
+    property src_tunnel_addr : UInt32
+    property dest_tunnel_addr : UInt32
+    property flags : UInt16
+    property num_s_as : Int16
+    property sec_assoc : Win32cr::NetworkManagement::Ndis::OFFLOAD_SECURITY_ASSOCIATION[3]
+    property offload_handle : Win32cr::Foundation::HANDLE
+    property key_len : UInt32
+    property key_mat : UInt8*
+    def initialize(@src_addr : UInt32, @src_mask : UInt32, @dest_addr : UInt32, @dest_mask : UInt32, @protocol : UInt32, @src_port : UInt16, @dest_port : UInt16, @src_tunnel_addr : UInt32, @dest_tunnel_addr : UInt32, @flags : UInt16, @num_s_as : Int16, @sec_assoc : Win32cr::NetworkManagement::Ndis::OFFLOAD_SECURITY_ASSOCIATION[3], @offload_handle : Win32cr::Foundation::HANDLE, @key_len : UInt32, @key_mat : UInt8*)
+    end
+  end
 
   @[Extern]
-  record OFFLOAD_IPSEC_DELETE_SA,
-    offload_handle : Win32cr::Foundation::HANDLE
+  struct OFFLOAD_IPSEC_DELETE_SA
+    property offload_handle : Win32cr::Foundation::HANDLE
+    def initialize(@offload_handle : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_ENTRY,
-    udp_encap_type : Win32cr::NetworkManagement::Ndis::UDP_ENCAP_TYPE,
-    dst_encap_port : UInt16
+  struct OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_ENTRY
+    property udp_encap_type : Win32cr::NetworkManagement::Ndis::UDP_ENCAP_TYPE
+    property dst_encap_port : UInt16
+    def initialize(@udp_encap_type : Win32cr::NetworkManagement::Ndis::UDP_ENCAP_TYPE, @dst_encap_port : UInt16)
+    end
+  end
 
   @[Extern]
-  record OFFLOAD_IPSEC_ADD_UDPESP_SA,
-    src_addr : UInt32,
-    src_mask : UInt32,
-    dst_addr : UInt32,
-    dst_mask : UInt32,
-    protocol : UInt32,
-    src_port : UInt16,
-    dst_port : UInt16,
-    src_tunnel_addr : UInt32,
-    dst_tunnel_addr : UInt32,
-    flags : UInt16,
-    num_s_as : Int16,
-    sec_assoc : Win32cr::NetworkManagement::Ndis::OFFLOAD_SECURITY_ASSOCIATION[3],
-    offload_handle : Win32cr::Foundation::HANDLE,
-    encap_type_entry : Win32cr::NetworkManagement::Ndis::OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_ENTRY,
-    encap_type_entry_offld_handle : Win32cr::Foundation::HANDLE,
-    key_len : UInt32,
-    key_mat : UInt8*
+  struct OFFLOAD_IPSEC_ADD_UDPESP_SA
+    property src_addr : UInt32
+    property src_mask : UInt32
+    property dst_addr : UInt32
+    property dst_mask : UInt32
+    property protocol : UInt32
+    property src_port : UInt16
+    property dst_port : UInt16
+    property src_tunnel_addr : UInt32
+    property dst_tunnel_addr : UInt32
+    property flags : UInt16
+    property num_s_as : Int16
+    property sec_assoc : Win32cr::NetworkManagement::Ndis::OFFLOAD_SECURITY_ASSOCIATION[3]
+    property offload_handle : Win32cr::Foundation::HANDLE
+    property encap_type_entry : Win32cr::NetworkManagement::Ndis::OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_ENTRY
+    property encap_type_entry_offld_handle : Win32cr::Foundation::HANDLE
+    property key_len : UInt32
+    property key_mat : UInt8*
+    def initialize(@src_addr : UInt32, @src_mask : UInt32, @dst_addr : UInt32, @dst_mask : UInt32, @protocol : UInt32, @src_port : UInt16, @dst_port : UInt16, @src_tunnel_addr : UInt32, @dst_tunnel_addr : UInt32, @flags : UInt16, @num_s_as : Int16, @sec_assoc : Win32cr::NetworkManagement::Ndis::OFFLOAD_SECURITY_ASSOCIATION[3], @offload_handle : Win32cr::Foundation::HANDLE, @encap_type_entry : Win32cr::NetworkManagement::Ndis::OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_ENTRY, @encap_type_entry_offld_handle : Win32cr::Foundation::HANDLE, @key_len : UInt32, @key_mat : UInt8*)
+    end
+  end
 
   @[Extern]
-  record OFFLOAD_IPSEC_DELETE_UDPESP_SA,
-    offload_handle : Win32cr::Foundation::HANDLE,
-    encap_type_entry_offld_handle : Win32cr::Foundation::HANDLE
+  struct OFFLOAD_IPSEC_DELETE_UDPESP_SA
+    property offload_handle : Win32cr::Foundation::HANDLE
+    property encap_type_entry_offld_handle : Win32cr::Foundation::HANDLE
+    def initialize(@offload_handle : Win32cr::Foundation::HANDLE, @encap_type_entry_offld_handle : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record TRANSPORT_HEADER_OFFSET,
-    protocol_type : UInt16,
-    header_offset : UInt16
+  struct TRANSPORT_HEADER_OFFSET
+    property protocol_type : UInt16
+    property header_offset : UInt16
+    def initialize(@protocol_type : UInt16, @header_offset : UInt16)
+    end
+  end
 
   @[Extern]
-  record NETWORK_ADDRESS,
-    address_length : UInt16,
-    address_type : UInt16,
-    address : UInt8*
+  struct NETWORK_ADDRESS
+    property address_length : UInt16
+    property address_type : UInt16
+    property address : UInt8*
+    def initialize(@address_length : UInt16, @address_type : UInt16, @address : UInt8*)
+    end
+  end
 
   @[Extern]
-  record NETWORK_ADDRESS_LIST,
-    address_count : Int32,
-    address_type : UInt16,
-    address : Win32cr::NetworkManagement::Ndis::NETWORK_ADDRESS*
+  struct NETWORK_ADDRESS_LIST
+    property address_count : Int32
+    property address_type : UInt16
+    property address : Win32cr::NetworkManagement::Ndis::NETWORK_ADDRESS*
+    def initialize(@address_count : Int32, @address_type : UInt16, @address : Win32cr::NetworkManagement::Ndis::NETWORK_ADDRESS*)
+    end
+  end
 
   @[Extern]
-  record NETWORK_ADDRESS_IP,
-    sin_port : UInt16,
-    in_addr : UInt32,
-    sin_zero : UInt8[8]
+  struct NETWORK_ADDRESS_IP
+    property sin_port : UInt16
+    property in_addr : UInt32
+    property sin_zero : UInt8[8]
+    def initialize(@sin_port : UInt16, @in_addr : UInt32, @sin_zero : UInt8[8])
+    end
+  end
 
   @[Extern]
-  record NETWORK_ADDRESS_IP6,
-    sin6_port : UInt16,
-    sin6_flowinfo : UInt32,
-    sin6_addr : UInt16[8],
-    sin6_scope_id : UInt32
+  struct NETWORK_ADDRESS_IP6
+    property sin6_port : UInt16
+    property sin6_flowinfo : UInt32
+    property sin6_addr : UInt16[8]
+    property sin6_scope_id : UInt32
+    def initialize(@sin6_port : UInt16, @sin6_flowinfo : UInt32, @sin6_addr : UInt16[8], @sin6_scope_id : UInt32)
+    end
+  end
 
   @[Extern]
-  record NETWORK_ADDRESS_IPX,
-    network_address : UInt32,
-    node_address : UInt8[6],
-    socket : UInt16
+  struct NETWORK_ADDRESS_IPX
+    property network_address : UInt32
+    property node_address : UInt8[6]
+    property socket : UInt16
+    def initialize(@network_address : UInt32, @node_address : UInt8[6], @socket : UInt16)
+    end
+  end
 
   @[Extern]
-  record GEN_GET_TIME_CAPS,
-    flags : UInt32,
-    clock_precision : UInt32
+  struct GEN_GET_TIME_CAPS
+    property flags : UInt32
+    property clock_precision : UInt32
+    def initialize(@flags : UInt32, @clock_precision : UInt32)
+    end
+  end
 
   @[Extern]
-  record GEN_GET_NETCARD_TIME,
-    read_time : UInt64
+  struct GEN_GET_NETCARD_TIME
+    property read_time : UInt64
+    def initialize(@read_time : UInt64)
+    end
+  end
 
   @[Extern]
-  record NDIS_PM_PACKET_PATTERN,
-    priority : UInt32,
-    reserved : UInt32,
-    mask_size : UInt32,
-    pattern_offset : UInt32,
-    pattern_size : UInt32,
-    pattern_flags : UInt32
+  struct NDIS_PM_PACKET_PATTERN
+    property priority : UInt32
+    property reserved : UInt32
+    property mask_size : UInt32
+    property pattern_offset : UInt32
+    property pattern_size : UInt32
+    property pattern_flags : UInt32
+    def initialize(@priority : UInt32, @reserved : UInt32, @mask_size : UInt32, @pattern_offset : UInt32, @pattern_size : UInt32, @pattern_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDIS_PM_WAKE_UP_CAPABILITIES,
-    min_magic_packet_wake_up : Win32cr::NetworkManagement::Ndis::NDIS_DEVICE_POWER_STATE,
-    min_pattern_wake_up : Win32cr::NetworkManagement::Ndis::NDIS_DEVICE_POWER_STATE,
-    min_link_change_wake_up : Win32cr::NetworkManagement::Ndis::NDIS_DEVICE_POWER_STATE
+  struct NDIS_PM_WAKE_UP_CAPABILITIES
+    property min_magic_packet_wake_up : Win32cr::NetworkManagement::Ndis::NDIS_DEVICE_POWER_STATE
+    property min_pattern_wake_up : Win32cr::NetworkManagement::Ndis::NDIS_DEVICE_POWER_STATE
+    property min_link_change_wake_up : Win32cr::NetworkManagement::Ndis::NDIS_DEVICE_POWER_STATE
+    def initialize(@min_magic_packet_wake_up : Win32cr::NetworkManagement::Ndis::NDIS_DEVICE_POWER_STATE, @min_pattern_wake_up : Win32cr::NetworkManagement::Ndis::NDIS_DEVICE_POWER_STATE, @min_link_change_wake_up : Win32cr::NetworkManagement::Ndis::NDIS_DEVICE_POWER_STATE)
+    end
+  end
 
   @[Extern]
-  record NDIS_PNP_CAPABILITIES,
-    flags : UInt32,
-    wake_up_capabilities : Win32cr::NetworkManagement::Ndis::NDIS_PM_WAKE_UP_CAPABILITIES
+  struct NDIS_PNP_CAPABILITIES
+    property flags : UInt32
+    property wake_up_capabilities : Win32cr::NetworkManagement::Ndis::NDIS_PM_WAKE_UP_CAPABILITIES
+    def initialize(@flags : UInt32, @wake_up_capabilities : Win32cr::NetworkManagement::Ndis::NDIS_PM_WAKE_UP_CAPABILITIES)
+    end
+  end
 
   @[Extern]
-  record NDIS_WAN_PROTOCOL_CAPS,
-    flags : UInt32,
-    reserved : UInt32
+  struct NDIS_WAN_PROTOCOL_CAPS
+    property flags : UInt32
+    property reserved : UInt32
+    def initialize(@flags : UInt32, @reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDIS_CO_LINK_SPEED,
-    outbound : UInt32,
-    inbound : UInt32
+  struct NDIS_CO_LINK_SPEED
+    property outbound : UInt32
+    property inbound : UInt32
+    def initialize(@outbound : UInt32, @inbound : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDIS_LINK_SPEED,
-    xmit_link_speed : UInt64,
-    rcv_link_speed : UInt64
+  struct NDIS_LINK_SPEED
+    property xmit_link_speed : UInt64
+    property rcv_link_speed : UInt64
+    def initialize(@xmit_link_speed : UInt64, @rcv_link_speed : UInt64)
+    end
+  end
 
   @[Extern]
-  record NDIS_GUID,
-    guid : LibC::GUID,
-    anonymous : Anonymous_e__Union_,
-    size : UInt32,
-    flags : UInt32 do
+  struct NDIS_GUID
+    property guid : LibC::GUID
+    property anonymous : Anonymous_e__Union_
+    property size : UInt32
+    property flags : UInt32
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      oid : UInt32,
-      status : Int32
+    struct Anonymous_e__Union_
+    property oid : UInt32
+    property status : Int32
+    def initialize(@oid : UInt32, @status : Int32)
+    end
+    end
 
+    def initialize(@guid : LibC::GUID, @anonymous : Anonymous_e__Union_, @size : UInt32, @flags : UInt32)
+    end
   end
 
   @[Extern]
-  record NDIS_IRDA_PACKET_INFO,
-    extra_bo_fs : UInt32,
-    min_turn_around_time : UInt32
+  struct NDIS_IRDA_PACKET_INFO
+    property extra_bo_fs : UInt32
+    property min_turn_around_time : UInt32
+    def initialize(@extra_bo_fs : UInt32, @min_turn_around_time : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDIS_LINK_STATE,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    media_connect_state : Win32cr::NetworkManagement::Ndis::NET_IF_MEDIA_CONNECT_STATE,
-    media_duplex_state : Win32cr::NetworkManagement::Ndis::NET_IF_MEDIA_DUPLEX_STATE,
-    xmit_link_speed : UInt64,
-    rcv_link_speed : UInt64,
-    pause_functions : Win32cr::NetworkManagement::Ndis::NDIS_SUPPORTED_PAUSE_FUNCTIONS,
-    auto_negotiation_flags : UInt32
+  struct NDIS_LINK_STATE
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property media_connect_state : Win32cr::NetworkManagement::Ndis::NET_IF_MEDIA_CONNECT_STATE
+    property media_duplex_state : Win32cr::NetworkManagement::Ndis::NET_IF_MEDIA_DUPLEX_STATE
+    property xmit_link_speed : UInt64
+    property rcv_link_speed : UInt64
+    property pause_functions : Win32cr::NetworkManagement::Ndis::NDIS_SUPPORTED_PAUSE_FUNCTIONS
+    property auto_negotiation_flags : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @media_connect_state : Win32cr::NetworkManagement::Ndis::NET_IF_MEDIA_CONNECT_STATE, @media_duplex_state : Win32cr::NetworkManagement::Ndis::NET_IF_MEDIA_DUPLEX_STATE, @xmit_link_speed : UInt64, @rcv_link_speed : UInt64, @pause_functions : Win32cr::NetworkManagement::Ndis::NDIS_SUPPORTED_PAUSE_FUNCTIONS, @auto_negotiation_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDIS_LINK_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    media_duplex_state : Win32cr::NetworkManagement::Ndis::NET_IF_MEDIA_DUPLEX_STATE,
-    xmit_link_speed : UInt64,
-    rcv_link_speed : UInt64,
-    pause_functions : Win32cr::NetworkManagement::Ndis::NDIS_SUPPORTED_PAUSE_FUNCTIONS,
-    auto_negotiation_flags : UInt32
+  struct NDIS_LINK_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property media_duplex_state : Win32cr::NetworkManagement::Ndis::NET_IF_MEDIA_DUPLEX_STATE
+    property xmit_link_speed : UInt64
+    property rcv_link_speed : UInt64
+    property pause_functions : Win32cr::NetworkManagement::Ndis::NDIS_SUPPORTED_PAUSE_FUNCTIONS
+    property auto_negotiation_flags : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @media_duplex_state : Win32cr::NetworkManagement::Ndis::NET_IF_MEDIA_DUPLEX_STATE, @xmit_link_speed : UInt64, @rcv_link_speed : UInt64, @pause_functions : Win32cr::NetworkManagement::Ndis::NDIS_SUPPORTED_PAUSE_FUNCTIONS, @auto_negotiation_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDIS_OPER_STATE,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    operational_status : Win32cr::NetworkManagement::Ndis::NET_IF_OPER_STATUS,
-    operational_status_flags : UInt32
+  struct NDIS_OPER_STATE
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property operational_status : Win32cr::NetworkManagement::Ndis::NET_IF_OPER_STATUS
+    property operational_status_flags : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @operational_status : Win32cr::NetworkManagement::Ndis::NET_IF_OPER_STATUS, @operational_status_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDIS_IP_OPER_STATUS,
-    address_family : UInt32,
-    operational_status : Win32cr::NetworkManagement::Ndis::NET_IF_OPER_STATUS,
-    operational_status_flags : UInt32
+  struct NDIS_IP_OPER_STATUS
+    property address_family : UInt32
+    property operational_status : Win32cr::NetworkManagement::Ndis::NET_IF_OPER_STATUS
+    property operational_status_flags : UInt32
+    def initialize(@address_family : UInt32, @operational_status : Win32cr::NetworkManagement::Ndis::NET_IF_OPER_STATUS, @operational_status_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDIS_IP_OPER_STATUS_INFO,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    flags : UInt32,
-    numberof_address_families_returned : UInt32,
-    ip_operational_status : Win32cr::NetworkManagement::Ndis::NDIS_IP_OPER_STATUS[32]
+  struct NDIS_IP_OPER_STATUS_INFO
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property flags : UInt32
+    property numberof_address_families_returned : UInt32
+    property ip_operational_status : Win32cr::NetworkManagement::Ndis::NDIS_IP_OPER_STATUS[32]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @flags : UInt32, @numberof_address_families_returned : UInt32, @ip_operational_status : Win32cr::NetworkManagement::Ndis::NDIS_IP_OPER_STATUS[32])
+    end
+  end
 
   @[Extern]
-  record NDIS_IP_OPER_STATE,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    flags : UInt32,
-    ip_operational_status : Win32cr::NetworkManagement::Ndis::NDIS_IP_OPER_STATUS
+  struct NDIS_IP_OPER_STATE
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property flags : UInt32
+    property ip_operational_status : Win32cr::NetworkManagement::Ndis::NDIS_IP_OPER_STATUS
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @flags : UInt32, @ip_operational_status : Win32cr::NetworkManagement::Ndis::NDIS_IP_OPER_STATUS)
+    end
+  end
 
   @[Extern]
-  record NDIS_OFFLOAD_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    i_pv4_checksum : UInt8,
-    tcpi_pv4_checksum : UInt8,
-    udpi_pv4_checksum : UInt8,
-    tcpi_pv6_checksum : UInt8,
-    udpi_pv6_checksum : UInt8,
-    lso_v1 : UInt8,
-    i_psec_v1 : UInt8,
-    lso_v2_i_pv4 : UInt8,
-    lso_v2_i_pv6 : UInt8,
-    tcp_connection_i_pv4 : UInt8,
-    tcp_connection_i_pv6 : UInt8,
-    flags : UInt32
+  struct NDIS_OFFLOAD_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property i_pv4_checksum : UInt8
+    property tcpi_pv4_checksum : UInt8
+    property udpi_pv4_checksum : UInt8
+    property tcpi_pv6_checksum : UInt8
+    property udpi_pv6_checksum : UInt8
+    property lso_v1 : UInt8
+    property i_psec_v1 : UInt8
+    property lso_v2_i_pv4 : UInt8
+    property lso_v2_i_pv6 : UInt8
+    property tcp_connection_i_pv4 : UInt8
+    property tcp_connection_i_pv6 : UInt8
+    property flags : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @i_pv4_checksum : UInt8, @tcpi_pv4_checksum : UInt8, @udpi_pv4_checksum : UInt8, @tcpi_pv6_checksum : UInt8, @udpi_pv6_checksum : UInt8, @lso_v1 : UInt8, @i_psec_v1 : UInt8, @lso_v2_i_pv4 : UInt8, @lso_v2_i_pv6 : UInt8, @tcp_connection_i_pv4 : UInt8, @tcp_connection_i_pv6 : UInt8, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDIS_TCP_LARGE_SEND_OFFLOAD_V1,
-    i_pv4 : IPv4_e__Struct_ do
+  struct NDIS_TCP_LARGE_SEND_OFFLOAD_V1
+    property i_pv4 : IPv4_e__Struct_
 
     # Nested Type IPv4_e__Struct_
     @[Extern]
-    record IPv4_e__Struct_,
-      encapsulation : UInt32,
-      max_off_load_size : UInt32,
-      min_segment_count : UInt32,
-      _bitfield : UInt32
+    struct IPv4_e__Struct_
+    property encapsulation : UInt32
+    property max_off_load_size : UInt32
+    property min_segment_count : UInt32
+    property _bitfield : UInt32
+    def initialize(@encapsulation : UInt32, @max_off_load_size : UInt32, @min_segment_count : UInt32, @_bitfield : UInt32)
+    end
+    end
 
+    def initialize(@i_pv4 : IPv4_e__Struct_)
+    end
   end
 
   @[Extern]
-  record NDIS_TCP_IP_CHECKSUM_OFFLOAD,
-    i_pv4_transmit : IPv4Transmit_e__Struct_,
-    i_pv4_receive : IPv4Receive_e__Struct_,
-    i_pv6_transmit : IPv6Transmit_e__Struct_,
-    i_pv6_receive : IPv6Receive_e__Struct_ do
+  struct NDIS_TCP_IP_CHECKSUM_OFFLOAD
+    property i_pv4_transmit : IPv4Transmit_e__Struct_
+    property i_pv4_receive : IPv4Receive_e__Struct_
+    property i_pv6_transmit : IPv6Transmit_e__Struct_
+    property i_pv6_receive : IPv6Receive_e__Struct_
 
     # Nested Type IPv6Receive_e__Struct_
     @[Extern]
-    record IPv6Receive_e__Struct_,
-      encapsulation : UInt32,
-      _bitfield : UInt32
+    struct IPv6Receive_e__Struct_
+    property encapsulation : UInt32
+    property _bitfield : UInt32
+    def initialize(@encapsulation : UInt32, @_bitfield : UInt32)
+    end
+    end
 
 
     # Nested Type IPv4Receive_e__Struct_
     @[Extern]
-    record IPv4Receive_e__Struct_,
-      encapsulation : UInt32,
-      _bitfield : UInt32
+    struct IPv4Receive_e__Struct_
+    property encapsulation : UInt32
+    property _bitfield : UInt32
+    def initialize(@encapsulation : UInt32, @_bitfield : UInt32)
+    end
+    end
 
 
     # Nested Type IPv6Transmit_e__Struct_
     @[Extern]
-    record IPv6Transmit_e__Struct_,
-      encapsulation : UInt32,
-      _bitfield : UInt32
+    struct IPv6Transmit_e__Struct_
+    property encapsulation : UInt32
+    property _bitfield : UInt32
+    def initialize(@encapsulation : UInt32, @_bitfield : UInt32)
+    end
+    end
 
 
     # Nested Type IPv4Transmit_e__Struct_
     @[Extern]
-    record IPv4Transmit_e__Struct_,
-      encapsulation : UInt32,
-      _bitfield : UInt32
+    struct IPv4Transmit_e__Struct_
+    property encapsulation : UInt32
+    property _bitfield : UInt32
+    def initialize(@encapsulation : UInt32, @_bitfield : UInt32)
+    end
+    end
 
+    def initialize(@i_pv4_transmit : IPv4Transmit_e__Struct_, @i_pv4_receive : IPv4Receive_e__Struct_, @i_pv6_transmit : IPv6Transmit_e__Struct_, @i_pv6_receive : IPv6Receive_e__Struct_)
+    end
   end
 
   @[Extern]
-  record NDIS_IPSEC_OFFLOAD_V1,
-    supported : Supported_e__Struct_,
-    i_pv4_ah : IPv4AH_e__Struct_,
-    i_pv4_esp : IPv4ESP_e__Struct_ do
+  struct NDIS_IPSEC_OFFLOAD_V1
+    property supported : Supported_e__Struct_
+    property i_pv4_ah : IPv4AH_e__Struct_
+    property i_pv4_esp : IPv4ESP_e__Struct_
 
     # Nested Type IPv4AH_e__Struct_
     @[Extern]
-    record IPv4AH_e__Struct_,
-      _bitfield : UInt32
+    struct IPv4AH_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
 
 
     # Nested Type IPv4ESP_e__Struct_
     @[Extern]
-    record IPv4ESP_e__Struct_,
-      _bitfield : UInt32
+    struct IPv4ESP_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
 
 
     # Nested Type Supported_e__Struct_
     @[Extern]
-    record Supported_e__Struct_,
-      encapsulation : UInt32,
-      ah_esp_combined : UInt32,
-      transport_tunnel_combined : UInt32,
-      i_pv4_options : UInt32,
-      flags : UInt32
+    struct Supported_e__Struct_
+    property encapsulation : UInt32
+    property ah_esp_combined : UInt32
+    property transport_tunnel_combined : UInt32
+    property i_pv4_options : UInt32
+    property flags : UInt32
+    def initialize(@encapsulation : UInt32, @ah_esp_combined : UInt32, @transport_tunnel_combined : UInt32, @i_pv4_options : UInt32, @flags : UInt32)
+    end
+    end
 
+    def initialize(@supported : Supported_e__Struct_, @i_pv4_ah : IPv4AH_e__Struct_, @i_pv4_esp : IPv4ESP_e__Struct_)
+    end
   end
 
   @[Extern]
-  record NDIS_TCP_LARGE_SEND_OFFLOAD_V2,
-    i_pv4 : IPv4_e__Struct_,
-    i_pv6 : IPv6_e__Struct_ do
+  struct NDIS_TCP_LARGE_SEND_OFFLOAD_V2
+    property i_pv4 : IPv4_e__Struct_
+    property i_pv6 : IPv6_e__Struct_
 
     # Nested Type IPv4_e__Struct_
     @[Extern]
-    record IPv4_e__Struct_,
-      encapsulation : UInt32,
-      max_off_load_size : UInt32,
-      min_segment_count : UInt32
+    struct IPv4_e__Struct_
+    property encapsulation : UInt32
+    property max_off_load_size : UInt32
+    property min_segment_count : UInt32
+    def initialize(@encapsulation : UInt32, @max_off_load_size : UInt32, @min_segment_count : UInt32)
+    end
+    end
 
 
     # Nested Type IPv6_e__Struct_
     @[Extern]
-    record IPv6_e__Struct_,
-      encapsulation : UInt32,
-      max_off_load_size : UInt32,
-      min_segment_count : UInt32,
-      _bitfield : UInt32
+    struct IPv6_e__Struct_
+    property encapsulation : UInt32
+    property max_off_load_size : UInt32
+    property min_segment_count : UInt32
+    property _bitfield : UInt32
+    def initialize(@encapsulation : UInt32, @max_off_load_size : UInt32, @min_segment_count : UInt32, @_bitfield : UInt32)
+    end
+    end
 
+    def initialize(@i_pv4 : IPv4_e__Struct_, @i_pv6 : IPv6_e__Struct_)
+    end
   end
 
   @[Extern]
-  record NDIS_OFFLOAD,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    checksum : Win32cr::NetworkManagement::Ndis::NDIS_TCP_IP_CHECKSUM_OFFLOAD,
-    lso_v1 : Win32cr::NetworkManagement::Ndis::NDIS_TCP_LARGE_SEND_OFFLOAD_V1,
-    i_psec_v1 : Win32cr::NetworkManagement::Ndis::NDIS_IPSEC_OFFLOAD_V1,
-    lso_v2 : Win32cr::NetworkManagement::Ndis::NDIS_TCP_LARGE_SEND_OFFLOAD_V2,
-    flags : UInt32
+  struct NDIS_OFFLOAD
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property checksum : Win32cr::NetworkManagement::Ndis::NDIS_TCP_IP_CHECKSUM_OFFLOAD
+    property lso_v1 : Win32cr::NetworkManagement::Ndis::NDIS_TCP_LARGE_SEND_OFFLOAD_V1
+    property i_psec_v1 : Win32cr::NetworkManagement::Ndis::NDIS_IPSEC_OFFLOAD_V1
+    property lso_v2 : Win32cr::NetworkManagement::Ndis::NDIS_TCP_LARGE_SEND_OFFLOAD_V2
+    property flags : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @checksum : Win32cr::NetworkManagement::Ndis::NDIS_TCP_IP_CHECKSUM_OFFLOAD, @lso_v1 : Win32cr::NetworkManagement::Ndis::NDIS_TCP_LARGE_SEND_OFFLOAD_V1, @i_psec_v1 : Win32cr::NetworkManagement::Ndis::NDIS_IPSEC_OFFLOAD_V1, @lso_v2 : Win32cr::NetworkManagement::Ndis::NDIS_TCP_LARGE_SEND_OFFLOAD_V2, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1,
-    i_pv4 : IPv4_e__Struct_ do
+  struct NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1
+    property i_pv4 : IPv4_e__Struct_
 
     # Nested Type IPv4_e__Struct_
     @[Extern]
-    record IPv4_e__Struct_,
-      encapsulation : UInt32,
-      max_off_load_size : UInt32,
-      min_segment_count : UInt32,
-      tcp_options : UInt32,
-      ip_options : UInt32
+    struct IPv4_e__Struct_
+    property encapsulation : UInt32
+    property max_off_load_size : UInt32
+    property min_segment_count : UInt32
+    property tcp_options : UInt32
+    property ip_options : UInt32
+    def initialize(@encapsulation : UInt32, @max_off_load_size : UInt32, @min_segment_count : UInt32, @tcp_options : UInt32, @ip_options : UInt32)
+    end
+    end
 
+    def initialize(@i_pv4 : IPv4_e__Struct_)
+    end
   end
 
   @[Extern]
-  record NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD,
-    i_pv4_transmit : IPv4Transmit_e__Struct_,
-    i_pv4_receive : IPv4Receive_e__Struct_,
-    i_pv6_transmit : IPv6Transmit_e__Struct_,
-    i_pv6_receive : IPv6Receive_e__Struct_ do
+  struct NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD
+    property i_pv4_transmit : IPv4Transmit_e__Struct_
+    property i_pv4_receive : IPv4Receive_e__Struct_
+    property i_pv6_transmit : IPv6Transmit_e__Struct_
+    property i_pv6_receive : IPv6Receive_e__Struct_
 
     # Nested Type IPv6Receive_e__Struct_
     @[Extern]
-    record IPv6Receive_e__Struct_,
-      encapsulation : UInt32,
-      ip_extension_headers_supported : UInt32,
-      tcp_options_supported : UInt32,
-      tcp_checksum : UInt32,
-      udp_checksum : UInt32
+    struct IPv6Receive_e__Struct_
+    property encapsulation : UInt32
+    property ip_extension_headers_supported : UInt32
+    property tcp_options_supported : UInt32
+    property tcp_checksum : UInt32
+    property udp_checksum : UInt32
+    def initialize(@encapsulation : UInt32, @ip_extension_headers_supported : UInt32, @tcp_options_supported : UInt32, @tcp_checksum : UInt32, @udp_checksum : UInt32)
+    end
+    end
 
 
     # Nested Type IPv4Receive_e__Struct_
     @[Extern]
-    record IPv4Receive_e__Struct_,
-      encapsulation : UInt32,
-      ip_options_supported : UInt32,
-      tcp_options_supported : UInt32,
-      tcp_checksum : UInt32,
-      udp_checksum : UInt32,
-      ip_checksum : UInt32
+    struct IPv4Receive_e__Struct_
+    property encapsulation : UInt32
+    property ip_options_supported : UInt32
+    property tcp_options_supported : UInt32
+    property tcp_checksum : UInt32
+    property udp_checksum : UInt32
+    property ip_checksum : UInt32
+    def initialize(@encapsulation : UInt32, @ip_options_supported : UInt32, @tcp_options_supported : UInt32, @tcp_checksum : UInt32, @udp_checksum : UInt32, @ip_checksum : UInt32)
+    end
+    end
 
 
     # Nested Type IPv4Transmit_e__Struct_
     @[Extern]
-    record IPv4Transmit_e__Struct_,
-      encapsulation : UInt32,
-      ip_options_supported : UInt32,
-      tcp_options_supported : UInt32,
-      tcp_checksum : UInt32,
-      udp_checksum : UInt32,
-      ip_checksum : UInt32
+    struct IPv4Transmit_e__Struct_
+    property encapsulation : UInt32
+    property ip_options_supported : UInt32
+    property tcp_options_supported : UInt32
+    property tcp_checksum : UInt32
+    property udp_checksum : UInt32
+    property ip_checksum : UInt32
+    def initialize(@encapsulation : UInt32, @ip_options_supported : UInt32, @tcp_options_supported : UInt32, @tcp_checksum : UInt32, @udp_checksum : UInt32, @ip_checksum : UInt32)
+    end
+    end
 
 
     # Nested Type IPv6Transmit_e__Struct_
     @[Extern]
-    record IPv6Transmit_e__Struct_,
-      encapsulation : UInt32,
-      ip_extension_headers_supported : UInt32,
-      tcp_options_supported : UInt32,
-      tcp_checksum : UInt32,
-      udp_checksum : UInt32
+    struct IPv6Transmit_e__Struct_
+    property encapsulation : UInt32
+    property ip_extension_headers_supported : UInt32
+    property tcp_options_supported : UInt32
+    property tcp_checksum : UInt32
+    property udp_checksum : UInt32
+    def initialize(@encapsulation : UInt32, @ip_extension_headers_supported : UInt32, @tcp_options_supported : UInt32, @tcp_checksum : UInt32, @udp_checksum : UInt32)
+    end
+    end
 
+    def initialize(@i_pv4_transmit : IPv4Transmit_e__Struct_, @i_pv4_receive : IPv4Receive_e__Struct_, @i_pv6_transmit : IPv6Transmit_e__Struct_, @i_pv6_receive : IPv6Receive_e__Struct_)
+    end
   end
 
   @[Extern]
-  record NDIS_WMI_IPSEC_OFFLOAD_V1,
-    supported : Supported_e__Struct_,
-    i_pv4_ah : IPv4AH_e__Struct_,
-    i_pv4_esp : IPv4ESP_e__Struct_ do
+  struct NDIS_WMI_IPSEC_OFFLOAD_V1
+    property supported : Supported_e__Struct_
+    property i_pv4_ah : IPv4AH_e__Struct_
+    property i_pv4_esp : IPv4ESP_e__Struct_
 
     # Nested Type IPv4AH_e__Struct_
     @[Extern]
-    record IPv4AH_e__Struct_,
-      md5 : UInt32,
-      sha_1 : UInt32,
-      transport : UInt32,
-      tunnel : UInt32,
-      send : UInt32,
-      receive : UInt32
+    struct IPv4AH_e__Struct_
+    property md5 : UInt32
+    property sha_1 : UInt32
+    property transport : UInt32
+    property tunnel : UInt32
+    property send : UInt32
+    property receive : UInt32
+    def initialize(@md5 : UInt32, @sha_1 : UInt32, @transport : UInt32, @tunnel : UInt32, @send : UInt32, @receive : UInt32)
+    end
+    end
 
 
     # Nested Type Supported_e__Struct_
     @[Extern]
-    record Supported_e__Struct_,
-      encapsulation : UInt32,
-      ah_esp_combined : UInt32,
-      transport_tunnel_combined : UInt32,
-      i_pv4_options : UInt32,
-      flags : UInt32
+    struct Supported_e__Struct_
+    property encapsulation : UInt32
+    property ah_esp_combined : UInt32
+    property transport_tunnel_combined : UInt32
+    property i_pv4_options : UInt32
+    property flags : UInt32
+    def initialize(@encapsulation : UInt32, @ah_esp_combined : UInt32, @transport_tunnel_combined : UInt32, @i_pv4_options : UInt32, @flags : UInt32)
+    end
+    end
 
 
     # Nested Type IPv4ESP_e__Struct_
     @[Extern]
-    record IPv4ESP_e__Struct_,
-      des : UInt32,
-      reserved : UInt32,
-      triple_des : UInt32,
-      null_esp : UInt32,
-      transport : UInt32,
-      tunnel : UInt32,
-      send : UInt32,
-      receive : UInt32
+    struct IPv4ESP_e__Struct_
+    property des : UInt32
+    property reserved : UInt32
+    property triple_des : UInt32
+    property null_esp : UInt32
+    property transport : UInt32
+    property tunnel : UInt32
+    property send : UInt32
+    property receive : UInt32
+    def initialize(@des : UInt32, @reserved : UInt32, @triple_des : UInt32, @null_esp : UInt32, @transport : UInt32, @tunnel : UInt32, @send : UInt32, @receive : UInt32)
+    end
+    end
 
+    def initialize(@supported : Supported_e__Struct_, @i_pv4_ah : IPv4AH_e__Struct_, @i_pv4_esp : IPv4ESP_e__Struct_)
+    end
   end
 
   @[Extern]
-  record NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2,
-    i_pv4 : IPv4_e__Struct_,
-    i_pv6 : IPv6_e__Struct_ do
+  struct NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2
+    property i_pv4 : IPv4_e__Struct_
+    property i_pv6 : IPv6_e__Struct_
 
     # Nested Type IPv4_e__Struct_
     @[Extern]
-    record IPv4_e__Struct_,
-      encapsulation : UInt32,
-      max_off_load_size : UInt32,
-      min_segment_count : UInt32
+    struct IPv4_e__Struct_
+    property encapsulation : UInt32
+    property max_off_load_size : UInt32
+    property min_segment_count : UInt32
+    def initialize(@encapsulation : UInt32, @max_off_load_size : UInt32, @min_segment_count : UInt32)
+    end
+    end
 
 
     # Nested Type IPv6_e__Struct_
     @[Extern]
-    record IPv6_e__Struct_,
-      encapsulation : UInt32,
-      max_off_load_size : UInt32,
-      min_segment_count : UInt32,
-      ip_extension_headers_supported : UInt32,
-      tcp_options_supported : UInt32
+    struct IPv6_e__Struct_
+    property encapsulation : UInt32
+    property max_off_load_size : UInt32
+    property min_segment_count : UInt32
+    property ip_extension_headers_supported : UInt32
+    property tcp_options_supported : UInt32
+    def initialize(@encapsulation : UInt32, @max_off_load_size : UInt32, @min_segment_count : UInt32, @ip_extension_headers_supported : UInt32, @tcp_options_supported : UInt32)
+    end
+    end
 
+    def initialize(@i_pv4 : IPv4_e__Struct_, @i_pv6 : IPv6_e__Struct_)
+    end
   end
 
   @[Extern]
-  record NDIS_WMI_OFFLOAD,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    checksum : Win32cr::NetworkManagement::Ndis::NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD,
-    lso_v1 : Win32cr::NetworkManagement::Ndis::NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1,
-    i_psec_v1 : Win32cr::NetworkManagement::Ndis::NDIS_WMI_IPSEC_OFFLOAD_V1,
-    lso_v2 : Win32cr::NetworkManagement::Ndis::NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2,
-    flags : UInt32
+  struct NDIS_WMI_OFFLOAD
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property checksum : Win32cr::NetworkManagement::Ndis::NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD
+    property lso_v1 : Win32cr::NetworkManagement::Ndis::NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1
+    property i_psec_v1 : Win32cr::NetworkManagement::Ndis::NDIS_WMI_IPSEC_OFFLOAD_V1
+    property lso_v2 : Win32cr::NetworkManagement::Ndis::NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2
+    property flags : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @checksum : Win32cr::NetworkManagement::Ndis::NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD, @lso_v1 : Win32cr::NetworkManagement::Ndis::NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1, @i_psec_v1 : Win32cr::NetworkManagement::Ndis::NDIS_WMI_IPSEC_OFFLOAD_V1, @lso_v2 : Win32cr::NetworkManagement::Ndis::NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDIS_TCP_CONNECTION_OFFLOAD,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    encapsulation : UInt32,
-    _bitfield : UInt32,
-    tcp_connection_offload_capacity : UInt32,
-    flags : UInt32
+  struct NDIS_TCP_CONNECTION_OFFLOAD
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property encapsulation : UInt32
+    property _bitfield : UInt32
+    property tcp_connection_offload_capacity : UInt32
+    property flags : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @encapsulation : UInt32, @_bitfield : UInt32, @tcp_connection_offload_capacity : UInt32, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDIS_WMI_TCP_CONNECTION_OFFLOAD,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    encapsulation : UInt32,
-    support_i_pv4 : UInt32,
-    support_i_pv6 : UInt32,
-    support_i_pv6_extension_headers : UInt32,
-    support_sack : UInt32,
-    tcp_connection_offload_capacity : UInt32,
-    flags : UInt32
+  struct NDIS_WMI_TCP_CONNECTION_OFFLOAD
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property encapsulation : UInt32
+    property support_i_pv4 : UInt32
+    property support_i_pv6 : UInt32
+    property support_i_pv6_extension_headers : UInt32
+    property support_sack : UInt32
+    property tcp_connection_offload_capacity : UInt32
+    property flags : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @encapsulation : UInt32, @support_i_pv4 : UInt32, @support_i_pv6 : UInt32, @support_i_pv6_extension_headers : UInt32, @support_sack : UInt32, @tcp_connection_offload_capacity : UInt32, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDIS_PORT_AUTHENTICATION_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    send_control_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_CONTROL_STATE,
-    rcv_control_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_CONTROL_STATE,
-    send_authorization_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_AUTHORIZATION_STATE,
-    rcv_authorization_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_AUTHORIZATION_STATE
+  struct NDIS_PORT_AUTHENTICATION_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property send_control_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_CONTROL_STATE
+    property rcv_control_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_CONTROL_STATE
+    property send_authorization_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_AUTHORIZATION_STATE
+    property rcv_authorization_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_AUTHORIZATION_STATE
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @send_control_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_CONTROL_STATE, @rcv_control_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_CONTROL_STATE, @send_authorization_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_AUTHORIZATION_STATE, @rcv_authorization_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_AUTHORIZATION_STATE)
+    end
+  end
 
   @[Extern]
-  record NDIS_WMI_METHOD_HEADER,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    port_number : UInt32,
-    net_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH,
-    request_id : UInt64,
-    timeout : UInt32,
-    padding : UInt8[4]
+  struct NDIS_WMI_METHOD_HEADER
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property port_number : UInt32
+    property net_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH
+    property request_id : UInt64
+    property timeout : UInt32
+    property padding : UInt8[4]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @port_number : UInt32, @net_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH, @request_id : UInt64, @timeout : UInt32, @padding : UInt8[4])
+    end
+  end
 
   @[Extern]
-  record NDIS_WMI_SET_HEADER,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    port_number : UInt32,
-    net_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH,
-    request_id : UInt64,
-    timeout : UInt32,
-    padding : UInt8[4]
+  struct NDIS_WMI_SET_HEADER
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property port_number : UInt32
+    property net_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH
+    property request_id : UInt64
+    property timeout : UInt32
+    property padding : UInt8[4]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @port_number : UInt32, @net_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH, @request_id : UInt64, @timeout : UInt32, @padding : UInt8[4])
+    end
+  end
 
   @[Extern]
-  record NDIS_WMI_EVENT_HEADER,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    if_index : UInt32,
-    net_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH,
-    request_id : UInt64,
-    port_number : UInt32,
-    device_name_length : UInt32,
-    device_name_offset : UInt32,
-    padding : UInt8[4]
+  struct NDIS_WMI_EVENT_HEADER
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property if_index : UInt32
+    property net_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH
+    property request_id : UInt64
+    property port_number : UInt32
+    property device_name_length : UInt32
+    property device_name_offset : UInt32
+    property padding : UInt8[4]
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @if_index : UInt32, @net_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH, @request_id : UInt64, @port_number : UInt32, @device_name_length : UInt32, @device_name_offset : UInt32, @padding : UInt8[4])
+    end
+  end
 
   @[Extern]
-  record NDIS_WMI_ENUM_ADAPTER,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    if_index : UInt32,
-    net_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH,
-    device_name_length : UInt16,
-    device_name : Win32cr::Foundation::CHAR*
+  struct NDIS_WMI_ENUM_ADAPTER
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property if_index : UInt32
+    property net_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH
+    property device_name_length : UInt16
+    property device_name : Win32cr::Foundation::CHAR*
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @if_index : UInt32, @net_luid : Win32cr::NetworkManagement::Ndis::NET_LUID_LH, @device_name_length : UInt16, @device_name : Win32cr::Foundation::CHAR*)
+    end
+  end
 
   @[Extern]
-  record NDIS_WMI_OUTPUT_INFO,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    flags : UInt32,
-    supported_revision : UInt8,
-    data_offset : UInt32
+  struct NDIS_WMI_OUTPUT_INFO
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property flags : UInt32
+    property supported_revision : UInt8
+    property data_offset : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @flags : UInt32, @supported_revision : UInt8, @data_offset : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDIS_RECEIVE_SCALE_CAPABILITIES,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    capabilities_flags : UInt32,
-    number_of_interrupt_messages : UInt32,
-    number_of_receive_queues : UInt32
+  struct NDIS_RECEIVE_SCALE_CAPABILITIES
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property capabilities_flags : UInt32
+    property number_of_interrupt_messages : UInt32
+    property number_of_receive_queues : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @capabilities_flags : UInt32, @number_of_interrupt_messages : UInt32, @number_of_receive_queues : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDIS_RECEIVE_SCALE_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    flags : UInt16,
-    base_cpu_number : UInt16,
-    hash_information : UInt32,
-    indirection_table_size : UInt16,
-    indirection_table_offset : UInt32,
-    hash_secret_key_size : UInt16,
-    hash_secret_key_offset : UInt32
+  struct NDIS_RECEIVE_SCALE_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property flags : UInt16
+    property base_cpu_number : UInt16
+    property hash_information : UInt32
+    property indirection_table_size : UInt16
+    property indirection_table_offset : UInt32
+    property hash_secret_key_size : UInt16
+    property hash_secret_key_offset : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @flags : UInt16, @base_cpu_number : UInt16, @hash_information : UInt32, @indirection_table_size : UInt16, @indirection_table_offset : UInt32, @hash_secret_key_size : UInt16, @hash_secret_key_offset : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDIS_RECEIVE_HASH_PARAMETERS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    flags : UInt32,
-    hash_information : UInt32,
-    hash_secret_key_size : UInt16,
-    hash_secret_key_offset : UInt32
+  struct NDIS_RECEIVE_HASH_PARAMETERS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property flags : UInt32
+    property hash_information : UInt32
+    property hash_secret_key_size : UInt16
+    property hash_secret_key_offset : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @flags : UInt32, @hash_information : UInt32, @hash_secret_key_size : UInt16, @hash_secret_key_offset : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDIS_PORT_STATE,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    media_connect_state : Win32cr::NetworkManagement::Ndis::NET_IF_MEDIA_CONNECT_STATE,
-    xmit_link_speed : UInt64,
-    rcv_link_speed : UInt64,
-    direction : Win32cr::NetworkManagement::Ndis::NET_IF_DIRECTION_TYPE,
-    send_control_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_CONTROL_STATE,
-    rcv_control_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_CONTROL_STATE,
-    send_authorization_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_AUTHORIZATION_STATE,
-    rcv_authorization_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_AUTHORIZATION_STATE,
-    flags : UInt32
+  struct NDIS_PORT_STATE
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property media_connect_state : Win32cr::NetworkManagement::Ndis::NET_IF_MEDIA_CONNECT_STATE
+    property xmit_link_speed : UInt64
+    property rcv_link_speed : UInt64
+    property direction : Win32cr::NetworkManagement::Ndis::NET_IF_DIRECTION_TYPE
+    property send_control_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_CONTROL_STATE
+    property rcv_control_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_CONTROL_STATE
+    property send_authorization_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_AUTHORIZATION_STATE
+    property rcv_authorization_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_AUTHORIZATION_STATE
+    property flags : UInt32
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @media_connect_state : Win32cr::NetworkManagement::Ndis::NET_IF_MEDIA_CONNECT_STATE, @xmit_link_speed : UInt64, @rcv_link_speed : UInt64, @direction : Win32cr::NetworkManagement::Ndis::NET_IF_DIRECTION_TYPE, @send_control_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_CONTROL_STATE, @rcv_control_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_CONTROL_STATE, @send_authorization_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_AUTHORIZATION_STATE, @rcv_authorization_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_AUTHORIZATION_STATE, @flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record NDIS_PORT_CHARACTERISTICS,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    port_number : UInt32,
-    flags : UInt32,
-    type__ : Win32cr::NetworkManagement::Ndis::NDIS_PORT_TYPE,
-    media_connect_state : Win32cr::NetworkManagement::Ndis::NET_IF_MEDIA_CONNECT_STATE,
-    xmit_link_speed : UInt64,
-    rcv_link_speed : UInt64,
-    direction : Win32cr::NetworkManagement::Ndis::NET_IF_DIRECTION_TYPE,
-    send_control_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_CONTROL_STATE,
-    rcv_control_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_CONTROL_STATE,
-    send_authorization_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_AUTHORIZATION_STATE,
-    rcv_authorization_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_AUTHORIZATION_STATE
+  struct NDIS_PORT_CHARACTERISTICS
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property port_number : UInt32
+    property flags : UInt32
+    property type__ : Win32cr::NetworkManagement::Ndis::NDIS_PORT_TYPE
+    property media_connect_state : Win32cr::NetworkManagement::Ndis::NET_IF_MEDIA_CONNECT_STATE
+    property xmit_link_speed : UInt64
+    property rcv_link_speed : UInt64
+    property direction : Win32cr::NetworkManagement::Ndis::NET_IF_DIRECTION_TYPE
+    property send_control_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_CONTROL_STATE
+    property rcv_control_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_CONTROL_STATE
+    property send_authorization_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_AUTHORIZATION_STATE
+    property rcv_authorization_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_AUTHORIZATION_STATE
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @port_number : UInt32, @flags : UInt32, @type__ : Win32cr::NetworkManagement::Ndis::NDIS_PORT_TYPE, @media_connect_state : Win32cr::NetworkManagement::Ndis::NET_IF_MEDIA_CONNECT_STATE, @xmit_link_speed : UInt64, @rcv_link_speed : UInt64, @direction : Win32cr::NetworkManagement::Ndis::NET_IF_DIRECTION_TYPE, @send_control_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_CONTROL_STATE, @rcv_control_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_CONTROL_STATE, @send_authorization_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_AUTHORIZATION_STATE, @rcv_authorization_state : Win32cr::NetworkManagement::Ndis::NDIS_PORT_AUTHORIZATION_STATE)
+    end
+  end
 
   @[Extern]
-  record NDIS_PORT,
-    next__ : Win32cr::NetworkManagement::Ndis::NDIS_PORT*,
-    ndis_reserved : Void*,
-    miniport_reserved : Void*,
-    protocol_reserved : Void*,
-    port_characteristics : Win32cr::NetworkManagement::Ndis::NDIS_PORT_CHARACTERISTICS
+  struct NDIS_PORT
+    property next__ : Win32cr::NetworkManagement::Ndis::NDIS_PORT*
+    property ndis_reserved : Void*
+    property miniport_reserved : Void*
+    property protocol_reserved : Void*
+    property port_characteristics : Win32cr::NetworkManagement::Ndis::NDIS_PORT_CHARACTERISTICS
+    def initialize(@next__ : Win32cr::NetworkManagement::Ndis::NDIS_PORT*, @ndis_reserved : Void*, @miniport_reserved : Void*, @protocol_reserved : Void*, @port_characteristics : Win32cr::NetworkManagement::Ndis::NDIS_PORT_CHARACTERISTICS)
+    end
+  end
 
   @[Extern]
-  record NDIS_PORT_ARRAY,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    number_of_ports : UInt32,
-    offset_first_port : UInt32,
-    element_size : UInt32,
-    ports : Win32cr::NetworkManagement::Ndis::NDIS_PORT_CHARACTERISTICS*
+  struct NDIS_PORT_ARRAY
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property number_of_ports : UInt32
+    property offset_first_port : UInt32
+    property element_size : UInt32
+    property ports : Win32cr::NetworkManagement::Ndis::NDIS_PORT_CHARACTERISTICS*
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @number_of_ports : UInt32, @offset_first_port : UInt32, @element_size : UInt32, @ports : Win32cr::NetworkManagement::Ndis::NDIS_PORT_CHARACTERISTICS*)
+    end
+  end
 
   @[Extern]
-  record NDIS_TIMESTAMP_CAPABILITY_FLAGS,
-    ptp_v2_over_udp_i_pv4_event_msg_receive_hw : Win32cr::Foundation::BOOLEAN,
-    ptp_v2_over_udp_i_pv4_all_msg_receive_hw : Win32cr::Foundation::BOOLEAN,
-    ptp_v2_over_udp_i_pv4_event_msg_transmit_hw : Win32cr::Foundation::BOOLEAN,
-    ptp_v2_over_udp_i_pv4_all_msg_transmit_hw : Win32cr::Foundation::BOOLEAN,
-    ptp_v2_over_udp_i_pv6_event_msg_receive_hw : Win32cr::Foundation::BOOLEAN,
-    ptp_v2_over_udp_i_pv6_all_msg_receive_hw : Win32cr::Foundation::BOOLEAN,
-    ptp_v2_over_udp_i_pv6_event_msg_transmit_hw : Win32cr::Foundation::BOOLEAN,
-    ptp_v2_over_udp_i_pv6_all_msg_transmit_hw : Win32cr::Foundation::BOOLEAN,
-    all_receive_hw : Win32cr::Foundation::BOOLEAN,
-    all_transmit_hw : Win32cr::Foundation::BOOLEAN,
-    tagged_transmit_hw : Win32cr::Foundation::BOOLEAN,
-    all_receive_sw : Win32cr::Foundation::BOOLEAN,
-    all_transmit_sw : Win32cr::Foundation::BOOLEAN,
-    tagged_transmit_sw : Win32cr::Foundation::BOOLEAN
+  struct NDIS_TIMESTAMP_CAPABILITY_FLAGS
+    property ptp_v2_over_udp_i_pv4_event_msg_receive_hw : Win32cr::Foundation::BOOLEAN
+    property ptp_v2_over_udp_i_pv4_all_msg_receive_hw : Win32cr::Foundation::BOOLEAN
+    property ptp_v2_over_udp_i_pv4_event_msg_transmit_hw : Win32cr::Foundation::BOOLEAN
+    property ptp_v2_over_udp_i_pv4_all_msg_transmit_hw : Win32cr::Foundation::BOOLEAN
+    property ptp_v2_over_udp_i_pv6_event_msg_receive_hw : Win32cr::Foundation::BOOLEAN
+    property ptp_v2_over_udp_i_pv6_all_msg_receive_hw : Win32cr::Foundation::BOOLEAN
+    property ptp_v2_over_udp_i_pv6_event_msg_transmit_hw : Win32cr::Foundation::BOOLEAN
+    property ptp_v2_over_udp_i_pv6_all_msg_transmit_hw : Win32cr::Foundation::BOOLEAN
+    property all_receive_hw : Win32cr::Foundation::BOOLEAN
+    property all_transmit_hw : Win32cr::Foundation::BOOLEAN
+    property tagged_transmit_hw : Win32cr::Foundation::BOOLEAN
+    property all_receive_sw : Win32cr::Foundation::BOOLEAN
+    property all_transmit_sw : Win32cr::Foundation::BOOLEAN
+    property tagged_transmit_sw : Win32cr::Foundation::BOOLEAN
+    def initialize(@ptp_v2_over_udp_i_pv4_event_msg_receive_hw : Win32cr::Foundation::BOOLEAN, @ptp_v2_over_udp_i_pv4_all_msg_receive_hw : Win32cr::Foundation::BOOLEAN, @ptp_v2_over_udp_i_pv4_event_msg_transmit_hw : Win32cr::Foundation::BOOLEAN, @ptp_v2_over_udp_i_pv4_all_msg_transmit_hw : Win32cr::Foundation::BOOLEAN, @ptp_v2_over_udp_i_pv6_event_msg_receive_hw : Win32cr::Foundation::BOOLEAN, @ptp_v2_over_udp_i_pv6_all_msg_receive_hw : Win32cr::Foundation::BOOLEAN, @ptp_v2_over_udp_i_pv6_event_msg_transmit_hw : Win32cr::Foundation::BOOLEAN, @ptp_v2_over_udp_i_pv6_all_msg_transmit_hw : Win32cr::Foundation::BOOLEAN, @all_receive_hw : Win32cr::Foundation::BOOLEAN, @all_transmit_hw : Win32cr::Foundation::BOOLEAN, @tagged_transmit_hw : Win32cr::Foundation::BOOLEAN, @all_receive_sw : Win32cr::Foundation::BOOLEAN, @all_transmit_sw : Win32cr::Foundation::BOOLEAN, @tagged_transmit_sw : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
-  record NDIS_TIMESTAMP_CAPABILITIES,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    hardware_clock_frequency_hz : UInt64,
-    cross_timestamp : Win32cr::Foundation::BOOLEAN,
-    reserved1 : UInt64,
-    reserved2 : UInt64,
-    timestamp_flags : Win32cr::NetworkManagement::Ndis::NDIS_TIMESTAMP_CAPABILITY_FLAGS
+  struct NDIS_TIMESTAMP_CAPABILITIES
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property hardware_clock_frequency_hz : UInt64
+    property cross_timestamp : Win32cr::Foundation::BOOLEAN
+    property reserved1 : UInt64
+    property reserved2 : UInt64
+    property timestamp_flags : Win32cr::NetworkManagement::Ndis::NDIS_TIMESTAMP_CAPABILITY_FLAGS
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @hardware_clock_frequency_hz : UInt64, @cross_timestamp : Win32cr::Foundation::BOOLEAN, @reserved1 : UInt64, @reserved2 : UInt64, @timestamp_flags : Win32cr::NetworkManagement::Ndis::NDIS_TIMESTAMP_CAPABILITY_FLAGS)
+    end
+  end
 
   @[Extern]
-  record NDIS_HARDWARE_CROSSTIMESTAMP,
-    header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER,
-    flags : UInt32,
-    system_timestamp1 : UInt64,
-    hardware_clock_timestamp : UInt64,
-    system_timestamp2 : UInt64
+  struct NDIS_HARDWARE_CROSSTIMESTAMP
+    property header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER
+    property flags : UInt32
+    property system_timestamp1 : UInt64
+    property hardware_clock_timestamp : UInt64
+    property system_timestamp2 : UInt64
+    def initialize(@header : Win32cr::NetworkManagement::Ndis::NDIS_OBJECT_HEADER, @flags : UInt32, @system_timestamp1 : UInt64, @hardware_clock_timestamp : UInt64, @system_timestamp2 : UInt64)
+    end
+  end
 
   @[Extern]
-  record NDK_VERSION,
-    major : UInt16,
-    minor : UInt16
+  struct NDK_VERSION
+    property major : UInt16
+    property minor : UInt16
+    def initialize(@major : UInt16, @minor : UInt16)
+    end
+  end
 
   @[Extern]
-  record NDK_ADAPTER_INFO,
-    version : Win32cr::NetworkManagement::Ndis::NDK_VERSION,
-    vendor_id : UInt32,
-    device_id : UInt32,
-    max_registration_size : LibC::UIntPtrT,
-    max_window_size : LibC::UIntPtrT,
-    frmr_page_count : UInt32,
-    max_initiator_request_sge : UInt32,
-    max_receive_request_sge : UInt32,
-    max_read_request_sge : UInt32,
-    max_transfer_length : UInt32,
-    max_inline_data_size : UInt32,
-    max_inbound_read_limit : UInt32,
-    max_outbound_read_limit : UInt32,
-    max_receive_queue_depth : UInt32,
-    max_initiator_queue_depth : UInt32,
-    max_srq_depth : UInt32,
-    max_cq_depth : UInt32,
-    large_request_threshold : UInt32,
-    max_caller_data : UInt32,
-    max_callee_data : UInt32,
-    adapter_flags : UInt32,
-    rdma_technology : Win32cr::NetworkManagement::Ndis::NDK_RDMA_TECHNOLOGY
+  struct NDK_ADAPTER_INFO
+    property version : Win32cr::NetworkManagement::Ndis::NDK_VERSION
+    property vendor_id : UInt32
+    property device_id : UInt32
+    property max_registration_size : LibC::UIntPtrT
+    property max_window_size : LibC::UIntPtrT
+    property frmr_page_count : UInt32
+    property max_initiator_request_sge : UInt32
+    property max_receive_request_sge : UInt32
+    property max_read_request_sge : UInt32
+    property max_transfer_length : UInt32
+    property max_inline_data_size : UInt32
+    property max_inbound_read_limit : UInt32
+    property max_outbound_read_limit : UInt32
+    property max_receive_queue_depth : UInt32
+    property max_initiator_queue_depth : UInt32
+    property max_srq_depth : UInt32
+    property max_cq_depth : UInt32
+    property large_request_threshold : UInt32
+    property max_caller_data : UInt32
+    property max_callee_data : UInt32
+    property adapter_flags : UInt32
+    property rdma_technology : Win32cr::NetworkManagement::Ndis::NDK_RDMA_TECHNOLOGY
+    def initialize(@version : Win32cr::NetworkManagement::Ndis::NDK_VERSION, @vendor_id : UInt32, @device_id : UInt32, @max_registration_size : LibC::UIntPtrT, @max_window_size : LibC::UIntPtrT, @frmr_page_count : UInt32, @max_initiator_request_sge : UInt32, @max_receive_request_sge : UInt32, @max_read_request_sge : UInt32, @max_transfer_length : UInt32, @max_inline_data_size : UInt32, @max_inbound_read_limit : UInt32, @max_outbound_read_limit : UInt32, @max_receive_queue_depth : UInt32, @max_initiator_queue_depth : UInt32, @max_srq_depth : UInt32, @max_cq_depth : UInt32, @large_request_threshold : UInt32, @max_caller_data : UInt32, @max_callee_data : UInt32, @adapter_flags : UInt32, @rdma_technology : Win32cr::NetworkManagement::Ndis::NDK_RDMA_TECHNOLOGY)
+    end
+  end
 
 end

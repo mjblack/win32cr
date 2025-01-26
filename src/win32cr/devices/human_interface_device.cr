@@ -3,35 +3,35 @@ require "./../system/com.cr"
 require "./../system/registry.cr"
 
 module Win32cr::Devices::HumanInterfaceDevice
-  alias LPDIENUMEFFECTSINFILECALLBACK = Proc(Win32cr::Devices::HumanInterfaceDevice::DIFILEEFFECT*, Void*, Win32cr::Foundation::BOOL)*
+  alias LPDIENUMEFFECTSINFILECALLBACK = Proc(Win32cr::Devices::HumanInterfaceDevice::DIFILEEFFECT*, Void*, Win32cr::Foundation::BOOL)
 
-  alias LPDIENUMDEVICEOBJECTSCALLBACKA = Proc(Win32cr::Devices::HumanInterfaceDevice::DIDEVICEOBJECTINSTANCEA*, Void*, Win32cr::Foundation::BOOL)*
+  alias LPDIENUMDEVICEOBJECTSCALLBACKA = Proc(Win32cr::Devices::HumanInterfaceDevice::DIDEVICEOBJECTINSTANCEA*, Void*, Win32cr::Foundation::BOOL)
 
-  alias LPDIENUMDEVICEOBJECTSCALLBACKW = Proc(Win32cr::Devices::HumanInterfaceDevice::DIDEVICEOBJECTINSTANCEW*, Void*, Win32cr::Foundation::BOOL)*
+  alias LPDIENUMDEVICEOBJECTSCALLBACKW = Proc(Win32cr::Devices::HumanInterfaceDevice::DIDEVICEOBJECTINSTANCEW*, Void*, Win32cr::Foundation::BOOL)
 
-  alias LPDIENUMEFFECTSCALLBACKA = Proc(Win32cr::Devices::HumanInterfaceDevice::DIEFFECTINFOA*, Void*, Win32cr::Foundation::BOOL)*
+  alias LPDIENUMEFFECTSCALLBACKA = Proc(Win32cr::Devices::HumanInterfaceDevice::DIEFFECTINFOA*, Void*, Win32cr::Foundation::BOOL)
 
-  alias LPDIENUMEFFECTSCALLBACKW = Proc(Win32cr::Devices::HumanInterfaceDevice::DIEFFECTINFOW*, Void*, Win32cr::Foundation::BOOL)*
+  alias LPDIENUMEFFECTSCALLBACKW = Proc(Win32cr::Devices::HumanInterfaceDevice::DIEFFECTINFOW*, Void*, Win32cr::Foundation::BOOL)
 
-  alias LPDIENUMCREATEDEFFECTOBJECTSCALLBACK = Proc(Void*, Void*, Win32cr::Foundation::BOOL)*
+  alias LPDIENUMCREATEDEFFECTOBJECTSCALLBACK = Proc(Void*, Void*, Win32cr::Foundation::BOOL)
 
-  alias LPDIENUMDEVICESCALLBACKA = Proc(Win32cr::Devices::HumanInterfaceDevice::DIDEVICEINSTANCEA*, Void*, Win32cr::Foundation::BOOL)*
+  alias LPDIENUMDEVICESCALLBACKA = Proc(Win32cr::Devices::HumanInterfaceDevice::DIDEVICEINSTANCEA*, Void*, Win32cr::Foundation::BOOL)
 
-  alias LPDIENUMDEVICESCALLBACKW = Proc(Win32cr::Devices::HumanInterfaceDevice::DIDEVICEINSTANCEW*, Void*, Win32cr::Foundation::BOOL)*
+  alias LPDIENUMDEVICESCALLBACKW = Proc(Win32cr::Devices::HumanInterfaceDevice::DIDEVICEINSTANCEW*, Void*, Win32cr::Foundation::BOOL)
 
-  alias LPDICONFIGUREDEVICESCALLBACK = Proc(Void*, Void*, Win32cr::Foundation::BOOL)*
+  alias LPDICONFIGUREDEVICESCALLBACK = Proc(Void*, Void*, Win32cr::Foundation::BOOL)
 
-  alias LPDIENUMDEVICESBYSEMANTICSCBA = Proc(Win32cr::Devices::HumanInterfaceDevice::DIDEVICEINSTANCEA*, Void*, UInt32, UInt32, Void*, Win32cr::Foundation::BOOL)*
+  alias LPDIENUMDEVICESBYSEMANTICSCBA = Proc(Win32cr::Devices::HumanInterfaceDevice::DIDEVICEINSTANCEA*, Void*, UInt32, UInt32, Void*, Win32cr::Foundation::BOOL)
 
-  alias LPDIENUMDEVICESBYSEMANTICSCBW = Proc(Win32cr::Devices::HumanInterfaceDevice::DIDEVICEINSTANCEW*, Void*, UInt32, UInt32, Void*, Win32cr::Foundation::BOOL)*
+  alias LPDIENUMDEVICESBYSEMANTICSCBW = Proc(Win32cr::Devices::HumanInterfaceDevice::DIDEVICEINSTANCEW*, Void*, UInt32, UInt32, Void*, Win32cr::Foundation::BOOL)
 
-  alias LPFNSHOWJOYCPL = Proc(Win32cr::Foundation::HWND, Void)*
+  alias LPFNSHOWJOYCPL = Proc(Win32cr::Foundation::HWND, Void)
 
-  alias LPDIJOYTYPECALLBACK = Proc(Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::BOOL)*
+  alias LPDIJOYTYPECALLBACK = Proc(Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::BOOL)
 
-  alias PHIDP_INSERT_SCANCODES = Proc(Void*, Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::BOOLEAN)*
+  alias PHIDP_INSERT_SCANCODES = Proc(Void*, Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::BOOLEAN)
 
-  alias PFN_HidP_GetVersionInternal = Proc(UInt32*, Win32cr::Foundation::NTSTATUS)*
+  alias PFN_HidP_GetVersionInternal = Proc(UInt32*, Win32cr::Foundation::NTSTATUS)
 
   DIRECTINPUT_VERSION = 2048_u32
   JOY_HW_NONE = 0_u32
@@ -2504,1032 +2504,1370 @@ module Win32cr::Devices::HumanInterfaceDevice
   end
 
   @[Extern]
-  record DICONSTANTFORCE,
-    lMagnitude : Int32
-
-  @[Extern]
-  record DIRAMPFORCE,
-    lStart : Int32,
-    lEnd : Int32
-
-  @[Extern]
-  record DIPERIODIC,
-    dwMagnitude : UInt32,
-    lOffset : Int32,
-    dwPhase : UInt32,
-    dwPeriod : UInt32
-
-  @[Extern]
-  record DICONDITION,
-    lOffset : Int32,
-    lPositiveCoefficient : Int32,
-    lNegativeCoefficient : Int32,
-    dwPositiveSaturation : UInt32,
-    dwNegativeSaturation : UInt32,
-    lDeadBand : Int32
-
-  @[Extern]
-  record DICUSTOMFORCE,
-    cChannels : UInt32,
-    dwSamplePeriod : UInt32,
-    cSamples : UInt32,
-    rglForceData : Int32*
-
-  @[Extern]
-  record DIENVELOPE,
-    dwSize : UInt32,
-    dwAttackLevel : UInt32,
-    dwAttackTime : UInt32,
-    dwFadeLevel : UInt32,
-    dwFadeTime : UInt32
-
-  @[Extern]
-  record DIEFFECT_DX5,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwDuration : UInt32,
-    dwSamplePeriod : UInt32,
-    dwGain : UInt32,
-    dwTriggerButton : UInt32,
-    dwTriggerRepeatInterval : UInt32,
-    cAxes : UInt32,
-    rgdwAxes : UInt32*,
-    rglDirection : Int32*,
-    lpEnvelope : Win32cr::Devices::HumanInterfaceDevice::DIENVELOPE*,
-    cbTypeSpecificParams : UInt32,
-    lpvTypeSpecificParams : Void*
-
-  @[Extern]
-  record DIEFFECT,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwDuration : UInt32,
-    dwSamplePeriod : UInt32,
-    dwGain : UInt32,
-    dwTriggerButton : UInt32,
-    dwTriggerRepeatInterval : UInt32,
-    cAxes : UInt32,
-    rgdwAxes : UInt32*,
-    rglDirection : Int32*,
-    lpEnvelope : Win32cr::Devices::HumanInterfaceDevice::DIENVELOPE*,
-    cbTypeSpecificParams : UInt32,
-    lpvTypeSpecificParams : Void*,
-    dwStartDelay : UInt32
-
-  @[Extern]
-  record DIFILEEFFECT,
-    dwSize : UInt32,
-    guid_effect : LibC::GUID,
-    lpDiEffect : Win32cr::Devices::HumanInterfaceDevice::DIEFFECT*,
-    szFriendlyName : Win32cr::Foundation::CHAR[260]
-
-  @[Extern]
-  record DIEFFESCAPE,
-    dwSize : UInt32,
-    dwCommand : UInt32,
-    lpvInBuffer : Void*,
-    cbInBuffer : UInt32,
-    lpvOutBuffer : Void*,
-    cbOutBuffer : UInt32
-
-  @[Extern]
-  record DIDEVCAPS_DX3,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwDevType : UInt32,
-    dwAxes : UInt32,
-    dwButtons : UInt32,
-    dwPOVs : UInt32
-
-  @[Extern]
-  record DIDEVCAPS,
-    dwSize : UInt32,
-    dwFlags : UInt32,
-    dwDevType : UInt32,
-    dwAxes : UInt32,
-    dwButtons : UInt32,
-    dwPOVs : UInt32,
-    dwFFSamplePeriod : UInt32,
-    dwFFMinTimeResolution : UInt32,
-    dwFirmwareRevision : UInt32,
-    dwHardwareRevision : UInt32,
-    dwFFDriverVersion : UInt32
-
-  @[Extern]
-  record DIOBJECTDATAFORMAT,
-    pguid : LibC::GUID*,
-    dwOfs : UInt32,
-    dwType : UInt32,
-    dwFlags : UInt32
-
-  @[Extern]
-  record DIDATAFORMAT,
-    dwSize : UInt32,
-    dwObjSize : UInt32,
-    dwFlags : UInt32,
-    dwDataSize : UInt32,
-    dwNumObjs : UInt32,
-    rgodf : Win32cr::Devices::HumanInterfaceDevice::DIOBJECTDATAFORMAT*
-
-  @[Extern]
-  record DIACTIONA,
-    uAppData : LibC::UIntPtrT,
-    dwSemantic : UInt32,
-    dwFlags : UInt32,
-    anonymous : Anonymous_e__Union_,
-    guidInstance : LibC::GUID,
-    dwObjID : UInt32,
-    dwHow : UInt32 do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      lptszActionName : Win32cr::Foundation::PSTR,
-      uResIdString : UInt32
-
+  struct DICONSTANTFORCE
+    property lMagnitude : Int32
+    def initialize(@lMagnitude : Int32)
+    end
   end
 
   @[Extern]
-  record DIACTIONW,
-    uAppData : LibC::UIntPtrT,
-    dwSemantic : UInt32,
-    dwFlags : UInt32,
-    anonymous : Anonymous_e__Union_,
-    guidInstance : LibC::GUID,
-    dwObjID : UInt32,
-    dwHow : UInt32 do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      lptszActionName : Win32cr::Foundation::PWSTR,
-      uResIdString : UInt32
-
+  struct DIRAMPFORCE
+    property lStart : Int32
+    property lEnd : Int32
+    def initialize(@lStart : Int32, @lEnd : Int32)
+    end
   end
 
   @[Extern]
-  record DIACTIONFORMATA,
-    dwSize : UInt32,
-    dwActionSize : UInt32,
-    dwDataSize : UInt32,
-    dwNumActions : UInt32,
-    rgoAction : Win32cr::Devices::HumanInterfaceDevice::DIACTIONA*,
-    guidActionMap : LibC::GUID,
-    dwGenre : UInt32,
-    dwBufferSize : UInt32,
-    lAxisMin : Int32,
-    lAxisMax : Int32,
-    hInstString : Win32cr::Foundation::HINSTANCE,
-    ftTimeStamp : Win32cr::Foundation::FILETIME,
-    dwCRC : UInt32,
-    tszActionMap : Win32cr::Foundation::CHAR[260]
-
-  @[Extern]
-  record DIACTIONFORMATW,
-    dwSize : UInt32,
-    dwActionSize : UInt32,
-    dwDataSize : UInt32,
-    dwNumActions : UInt32,
-    rgoAction : Win32cr::Devices::HumanInterfaceDevice::DIACTIONW*,
-    guidActionMap : LibC::GUID,
-    dwGenre : UInt32,
-    dwBufferSize : UInt32,
-    lAxisMin : Int32,
-    lAxisMax : Int32,
-    hInstString : Win32cr::Foundation::HINSTANCE,
-    ftTimeStamp : Win32cr::Foundation::FILETIME,
-    dwCRC : UInt32,
-    tszActionMap : UInt16[260]
-
-  @[Extern]
-  record DICOLORSET,
-    dwSize : UInt32,
-    cTextFore : UInt32,
-    cTextHighlight : UInt32,
-    cCalloutLine : UInt32,
-    cCalloutHighlight : UInt32,
-    cBorder : UInt32,
-    cControlFill : UInt32,
-    cHighlightFill : UInt32,
-    cAreaFill : UInt32
-
-  @[Extern]
-  record DICONFIGUREDEVICESPARAMSA,
-    dwSize : UInt32,
-    dwcUsers : UInt32,
-    lptszUserNames : Win32cr::Foundation::PSTR,
-    dwcFormats : UInt32,
-    lprgFormats : Win32cr::Devices::HumanInterfaceDevice::DIACTIONFORMATA*,
-    hwnd : Win32cr::Foundation::HWND,
-    dics : Win32cr::Devices::HumanInterfaceDevice::DICOLORSET,
-    lpUnkDDSTarget : Void*
-
-  @[Extern]
-  record DICONFIGUREDEVICESPARAMSW,
-    dwSize : UInt32,
-    dwcUsers : UInt32,
-    lptszUserNames : Win32cr::Foundation::PWSTR,
-    dwcFormats : UInt32,
-    lprgFormats : Win32cr::Devices::HumanInterfaceDevice::DIACTIONFORMATW*,
-    hwnd : Win32cr::Foundation::HWND,
-    dics : Win32cr::Devices::HumanInterfaceDevice::DICOLORSET,
-    lpUnkDDSTarget : Void*
-
-  @[Extern]
-  record DIDEVICEIMAGEINFOA,
-    tszImagePath : Win32cr::Foundation::CHAR[260],
-    dwFlags : UInt32,
-    dwViewID : UInt32,
-    rcOverlay : Win32cr::Foundation::RECT,
-    dwObjID : UInt32,
-    dwcValidPts : UInt32,
-    rgptCalloutLine : Win32cr::Foundation::POINT[5],
-    rcCalloutRect : Win32cr::Foundation::RECT,
-    dwTextAlign : UInt32
-
-  @[Extern]
-  record DIDEVICEIMAGEINFOW,
-    tszImagePath : UInt16[260],
-    dwFlags : UInt32,
-    dwViewID : UInt32,
-    rcOverlay : Win32cr::Foundation::RECT,
-    dwObjID : UInt32,
-    dwcValidPts : UInt32,
-    rgptCalloutLine : Win32cr::Foundation::POINT[5],
-    rcCalloutRect : Win32cr::Foundation::RECT,
-    dwTextAlign : UInt32
-
-  @[Extern]
-  record DIDEVICEIMAGEINFOHEADERA,
-    dwSize : UInt32,
-    dwSizeImageInfo : UInt32,
-    dwcViews : UInt32,
-    dwcButtons : UInt32,
-    dwcAxes : UInt32,
-    dwcPOVs : UInt32,
-    dwBufferSize : UInt32,
-    dwBufferUsed : UInt32,
-    lprgImageInfoArray : Win32cr::Devices::HumanInterfaceDevice::DIDEVICEIMAGEINFOA*
-
-  @[Extern]
-  record DIDEVICEIMAGEINFOHEADERW,
-    dwSize : UInt32,
-    dwSizeImageInfo : UInt32,
-    dwcViews : UInt32,
-    dwcButtons : UInt32,
-    dwcAxes : UInt32,
-    dwcPOVs : UInt32,
-    dwBufferSize : UInt32,
-    dwBufferUsed : UInt32,
-    lprgImageInfoArray : Win32cr::Devices::HumanInterfaceDevice::DIDEVICEIMAGEINFOW*
-
-  @[Extern]
-  record DIDEVICEOBJECTINSTANCE_DX3A,
-    dwSize : UInt32,
-    guidType : LibC::GUID,
-    dwOfs : UInt32,
-    dwType : UInt32,
-    dwFlags : UInt32,
-    tszName : Win32cr::Foundation::CHAR[260]
-
-  @[Extern]
-  record DIDEVICEOBJECTINSTANCE_DX3W,
-    dwSize : UInt32,
-    guidType : LibC::GUID,
-    dwOfs : UInt32,
-    dwType : UInt32,
-    dwFlags : UInt32,
-    tszName : UInt16[260]
-
-  @[Extern]
-  record DIDEVICEOBJECTINSTANCEA,
-    dwSize : UInt32,
-    guidType : LibC::GUID,
-    dwOfs : UInt32,
-    dwType : UInt32,
-    dwFlags : UInt32,
-    tszName : Win32cr::Foundation::CHAR[260],
-    dwFFMaxForce : UInt32,
-    dwFFForceResolution : UInt32,
-    wCollectionNumber : UInt16,
-    wDesignatorIndex : UInt16,
-    wUsagePage : UInt16,
-    wUsage : UInt16,
-    dwDimension : UInt32,
-    wExponent : UInt16,
-    wReportId : UInt16
-
-  @[Extern]
-  record DIDEVICEOBJECTINSTANCEW,
-    dwSize : UInt32,
-    guidType : LibC::GUID,
-    dwOfs : UInt32,
-    dwType : UInt32,
-    dwFlags : UInt32,
-    tszName : UInt16[260],
-    dwFFMaxForce : UInt32,
-    dwFFForceResolution : UInt32,
-    wCollectionNumber : UInt16,
-    wDesignatorIndex : UInt16,
-    wUsagePage : UInt16,
-    wUsage : UInt16,
-    dwDimension : UInt32,
-    wExponent : UInt16,
-    wReportId : UInt16
-
-  @[Extern]
-  record DIPROPHEADER,
-    dwSize : UInt32,
-    dwHeaderSize : UInt32,
-    dwObj : UInt32,
-    dwHow : UInt32
-
-  @[Extern]
-  record DIPROPDWORD,
-    diph : Win32cr::Devices::HumanInterfaceDevice::DIPROPHEADER,
-    dwData : UInt32
-
-  @[Extern]
-  record DIPROPPOINTER,
-    diph : Win32cr::Devices::HumanInterfaceDevice::DIPROPHEADER,
-    uData : LibC::UIntPtrT
-
-  @[Extern]
-  record DIPROPRANGE,
-    diph : Win32cr::Devices::HumanInterfaceDevice::DIPROPHEADER,
-    lMin : Int32,
-    lMax : Int32
-
-  @[Extern]
-  record DIPROPCAL,
-    diph : Win32cr::Devices::HumanInterfaceDevice::DIPROPHEADER,
-    lMin : Int32,
-    lCenter : Int32,
-    lMax : Int32
-
-  @[Extern]
-  record DIPROPCALPOV,
-    diph : Win32cr::Devices::HumanInterfaceDevice::DIPROPHEADER,
-    lMin : Int32[5],
-    lMax : Int32[5]
-
-  @[Extern]
-  record DIPROPGUIDANDPATH,
-    diph : Win32cr::Devices::HumanInterfaceDevice::DIPROPHEADER,
-    guidClass : LibC::GUID,
-    wszPath : UInt16[260]
-
-  @[Extern]
-  record DIPROPSTRING,
-    diph : Win32cr::Devices::HumanInterfaceDevice::DIPROPHEADER,
-    wsz : UInt16[260]
-
-  @[Extern]
-  record CPOINT,
-    lP : Int32,
-    dwLog : UInt32
-
-  @[Extern]
-  record DIPROPCPOINTS,
-    diph : Win32cr::Devices::HumanInterfaceDevice::DIPROPHEADER,
-    dwCPointsNum : UInt32,
-    cp : Win32cr::Devices::HumanInterfaceDevice::CPOINT[8]
-
-  @[Extern]
-  record DIDEVICEOBJECTDATA_DX3,
-    dwOfs : UInt32,
-    dwData : UInt32,
-    dwTimeStamp : UInt32,
-    dwSequence : UInt32
-
-  @[Extern]
-  record DIDEVICEOBJECTDATA,
-    dwOfs : UInt32,
-    dwData : UInt32,
-    dwTimeStamp : UInt32,
-    dwSequence : UInt32,
-    uAppData : LibC::UIntPtrT
-
-  @[Extern]
-  record DIDEVICEINSTANCE_DX3A,
-    dwSize : UInt32,
-    guidInstance : LibC::GUID,
-    guidProduct : LibC::GUID,
-    dwDevType : UInt32,
-    tszInstanceName : Win32cr::Foundation::CHAR[260],
-    tszProductName : Win32cr::Foundation::CHAR[260]
-
-  @[Extern]
-  record DIDEVICEINSTANCE_DX3W,
-    dwSize : UInt32,
-    guidInstance : LibC::GUID,
-    guidProduct : LibC::GUID,
-    dwDevType : UInt32,
-    tszInstanceName : UInt16[260],
-    tszProductName : UInt16[260]
-
-  @[Extern]
-  record DIDEVICEINSTANCEA,
-    dwSize : UInt32,
-    guidInstance : LibC::GUID,
-    guidProduct : LibC::GUID,
-    dwDevType : UInt32,
-    tszInstanceName : Win32cr::Foundation::CHAR[260],
-    tszProductName : Win32cr::Foundation::CHAR[260],
-    guidFFDriver : LibC::GUID,
-    wUsagePage : UInt16,
-    wUsage : UInt16
-
-  @[Extern]
-  record DIDEVICEINSTANCEW,
-    dwSize : UInt32,
-    guidInstance : LibC::GUID,
-    guidProduct : LibC::GUID,
-    dwDevType : UInt32,
-    tszInstanceName : UInt16[260],
-    tszProductName : UInt16[260],
-    guidFFDriver : LibC::GUID,
-    wUsagePage : UInt16,
-    wUsage : UInt16
-
-  @[Extern]
-  record DIEFFECTINFOA,
-    dwSize : UInt32,
-    guid : LibC::GUID,
-    dwEffType : UInt32,
-    dwStaticParams : UInt32,
-    dwDynamicParams : UInt32,
-    tszName : Win32cr::Foundation::CHAR[260]
-
-  @[Extern]
-  record DIEFFECTINFOW,
-    dwSize : UInt32,
-    guid : LibC::GUID,
-    dwEffType : UInt32,
-    dwStaticParams : UInt32,
-    dwDynamicParams : UInt32,
-    tszName : UInt16[260]
-
-  @[Extern]
-  record DIMOUSESTATE,
-    lX : Int32,
-    lY : Int32,
-    lZ : Int32,
-    rgbButtons : UInt8[4]
-
-  @[Extern]
-  record DIMOUSESTATE2,
-    lX : Int32,
-    lY : Int32,
-    lZ : Int32,
-    rgbButtons : UInt8[8]
-
-  @[Extern]
-  record DIJOYSTATE,
-    lX : Int32,
-    lY : Int32,
-    lZ : Int32,
-    lRx : Int32,
-    lRy : Int32,
-    lRz : Int32,
-    rglSlider : Int32[2],
-    rgdwPOV : UInt32[4],
-    rgbButtons : UInt8[32]
-
-  @[Extern]
-  record DIJOYSTATE2,
-    lX : Int32,
-    lY : Int32,
-    lZ : Int32,
-    lRx : Int32,
-    lRy : Int32,
-    lRz : Int32,
-    rglSlider : Int32[2],
-    rgdwPOV : UInt32[4],
-    rgbButtons : UInt8[128],
-    lVX : Int32,
-    lVY : Int32,
-    lVZ : Int32,
-    lVRx : Int32,
-    lVRy : Int32,
-    lVRz : Int32,
-    rglVSlider : Int32[2],
-    lAX : Int32,
-    lAY : Int32,
-    lAZ : Int32,
-    lARx : Int32,
-    lARy : Int32,
-    lARz : Int32,
-    rglASlider : Int32[2],
-    lFX : Int32,
-    lFY : Int32,
-    lFZ : Int32,
-    lFRx : Int32,
-    lFRy : Int32,
-    lFRz : Int32,
-    rglFSlider : Int32[2]
-
-  @[Extern]
-  record DIOBJECTATTRIBUTES,
-    dwFlags : UInt32,
-    wUsagePage : UInt16,
-    wUsage : UInt16
-
-  @[Extern]
-  record DIFFOBJECTATTRIBUTES,
-    dwFFMaxForce : UInt32,
-    dwFFForceResolution : UInt32
-
-  @[Extern]
-  record DIOBJECTCALIBRATION,
-    lMin : Int32,
-    lCenter : Int32,
-    lMax : Int32
-
-  @[Extern]
-  record DIPOVCALIBRATION,
-    lMin : Int32[5],
-    lMax : Int32[5]
-
-  @[Extern]
-  record DIEFFECTATTRIBUTES,
-    dwEffectId : UInt32,
-    dwEffType : UInt32,
-    dwStaticParams : UInt32,
-    dwDynamicParams : UInt32,
-    dwCoords : UInt32
-
-  @[Extern]
-  record DIFFDEVICEATTRIBUTES,
-    dwFlags : UInt32,
-    dwFFSamplePeriod : UInt32,
-    dwFFMinTimeResolution : UInt32
-
-  @[Extern]
-  record DIDRIVERVERSIONS,
-    dwSize : UInt32,
-    dwFirmwareRevision : UInt32,
-    dwHardwareRevision : UInt32,
-    dwFFDriverVersion : UInt32
-
-  @[Extern]
-  record DIDEVICESTATE,
-    dwSize : UInt32,
-    dwState : UInt32,
-    dwLoad : UInt32
-
-  @[Extern]
-  record DIHIDFFINITINFO,
-    dwSize : UInt32,
-    pwszDeviceInterface : Win32cr::Foundation::PWSTR,
-    guid_instance : LibC::GUID
-
-  @[Extern]
-  record JOYPOS,
-    dwX : UInt32,
-    dwY : UInt32,
-    dwZ : UInt32,
-    dwR : UInt32,
-    dwU : UInt32,
-    dwV : UInt32
-
-  @[Extern]
-  record JOYRANGE,
-    jpMin : Win32cr::Devices::HumanInterfaceDevice::JOYPOS,
-    jpMax : Win32cr::Devices::HumanInterfaceDevice::JOYPOS,
-    jpCenter : Win32cr::Devices::HumanInterfaceDevice::JOYPOS
-
-  @[Extern]
-  record JOYREGUSERVALUES,
-    dwTimeOut : UInt32,
-    jrvRanges : Win32cr::Devices::HumanInterfaceDevice::JOYRANGE,
-    jpDeadZone : Win32cr::Devices::HumanInterfaceDevice::JOYPOS
-
-  @[Extern]
-  record JOYREGHWSETTINGS,
-    dwFlags : UInt32,
-    dwNumButtons : UInt32
-
-  @[Extern]
-  record JOYREGHWVALUES,
-    jrvHardware : Win32cr::Devices::HumanInterfaceDevice::JOYRANGE,
-    dwPOVValues : UInt32[4],
-    dwCalFlags : UInt32
-
-  @[Extern]
-  record JOYREGHWCONFIG,
-    hws : Win32cr::Devices::HumanInterfaceDevice::JOYREGHWSETTINGS,
-    dwUsageSettings : UInt32,
-    hwv : Win32cr::Devices::HumanInterfaceDevice::JOYREGHWVALUES,
-    dwType : UInt32,
-    dwReserved : UInt32
-
-  @[Extern]
-  record JOYCALIBRATE,
-    wXbase : UInt32,
-    wXdelta : UInt32,
-    wYbase : UInt32,
-    wYdelta : UInt32,
-    wZbase : UInt32,
-    wZdelta : UInt32
-
-  @[Extern]
-  record DIJOYTYPEINFO_DX5,
-    dwSize : UInt32,
-    hws : Win32cr::Devices::HumanInterfaceDevice::JOYREGHWSETTINGS,
-    clsidConfig : LibC::GUID,
-    wszDisplayName : UInt16[256],
-    wszCallout : UInt16[260]
-
-  @[Extern]
-  record DIJOYTYPEINFO_DX6,
-    dwSize : UInt32,
-    hws : Win32cr::Devices::HumanInterfaceDevice::JOYREGHWSETTINGS,
-    clsidConfig : LibC::GUID,
-    wszDisplayName : UInt16[256],
-    wszCallout : UInt16[260],
-    wszHardwareId : UInt16[256],
-    dwFlags1 : UInt32
-
-  @[Extern]
-  record DIJOYTYPEINFO,
-    dwSize : UInt32,
-    hws : Win32cr::Devices::HumanInterfaceDevice::JOYREGHWSETTINGS,
-    clsidConfig : LibC::GUID,
-    wszDisplayName : UInt16[256],
-    wszCallout : UInt16[260],
-    wszHardwareId : UInt16[256],
-    dwFlags1 : UInt32,
-    dwFlags2 : UInt32,
-    wszMapFile : UInt16[256]
-
-  @[Extern]
-  record DIJOYCONFIG_DX5,
-    dwSize : UInt32,
-    guidInstance : LibC::GUID,
-    hwc : Win32cr::Devices::HumanInterfaceDevice::JOYREGHWCONFIG,
-    dwGain : UInt32,
-    wszType : UInt16[256],
-    wszCallout : UInt16[256]
-
-  @[Extern]
-  record DIJOYCONFIG,
-    dwSize : UInt32,
-    guidInstance : LibC::GUID,
-    hwc : Win32cr::Devices::HumanInterfaceDevice::JOYREGHWCONFIG,
-    dwGain : UInt32,
-    wszType : UInt16[256],
-    wszCallout : UInt16[256],
-    guidGameport : LibC::GUID
-
-  @[Extern]
-  record DIJOYUSERVALUES,
-    dwSize : UInt32,
-    ruv : Win32cr::Devices::HumanInterfaceDevice::JOYREGUSERVALUES,
-    wszGlobalDriver : UInt16[256],
-    wszGameportEmulator : UInt16[256]
-
-  @[Extern]
-  record KEYBOARD_INPUT_DATA,
-    unit_id : UInt16,
-    make_code : UInt16,
-    flags : UInt16,
-    reserved : UInt16,
-    extra_information : UInt32
-
-  @[Extern]
-  record KEYBOARD_TYPEMATIC_PARAMETERS,
-    unit_id : UInt16,
-    rate : UInt16,
-    delay : UInt16
-
-  @[Extern]
-  record KEYBOARD_ID,
-    type__ : UInt8,
-    subtype : UInt8
-
-  @[Extern]
-  record KEYBOARD_ATTRIBUTES,
-    keyboard_identifier : Win32cr::Devices::HumanInterfaceDevice::KEYBOARD_ID,
-    keyboard_mode : UInt16,
-    number_of_function_keys : UInt16,
-    number_of_indicators : UInt16,
-    number_of_keys_total : UInt16,
-    input_data_queue_length : UInt32,
-    key_repeat_minimum : Win32cr::Devices::HumanInterfaceDevice::KEYBOARD_TYPEMATIC_PARAMETERS,
-    key_repeat_maximum : Win32cr::Devices::HumanInterfaceDevice::KEYBOARD_TYPEMATIC_PARAMETERS
-
-  @[Extern]
-  record KEYBOARD_EXTENDED_ATTRIBUTES,
-    version : UInt8,
-    form_factor : UInt8,
-    key_type : UInt8,
-    physical_layout : UInt8,
-    vendor_specific_physical_layout : UInt8,
-    ietf_language_tag_index : UInt8,
-    implemented_input_assist_controls : UInt8
-
-  @[Extern]
-  record KEYBOARD_INDICATOR_PARAMETERS,
-    unit_id : UInt16,
-    led_flags : UInt16
-
-  @[Extern]
-  record INDICATOR_LIST,
-    make_code : UInt16,
-    indicator_flags : UInt16
-
-  @[Extern]
-  record KEYBOARD_INDICATOR_TRANSLATION,
-    number_of_indicator_keys : UInt16,
-    indicator_list : Win32cr::Devices::HumanInterfaceDevice::INDICATOR_LIST*
-
-  @[Extern]
-  record KEYBOARD_UNIT_ID_PARAMETER,
-    unit_id : UInt16
-
-  @[Extern]
-  record KEYBOARD_IME_STATUS,
-    unit_id : UInt16,
-    ime_open : UInt32,
-    ime_conv_mode : UInt32
-
-  @[Extern]
-  record MOUSE_INPUT_DATA,
-    unit_id : UInt16,
-    flags : UInt16,
-    anonymous : Anonymous_e__Union_,
-    raw_buttons : UInt32,
-    last_x : Int32,
-    last_y : Int32,
-    extra_information : UInt32 do
+  struct DIPERIODIC
+    property dwMagnitude : UInt32
+    property lOffset : Int32
+    property dwPhase : UInt32
+    property dwPeriod : UInt32
+    def initialize(@dwMagnitude : UInt32, @lOffset : Int32, @dwPhase : UInt32, @dwPeriod : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DICONDITION
+    property lOffset : Int32
+    property lPositiveCoefficient : Int32
+    property lNegativeCoefficient : Int32
+    property dwPositiveSaturation : UInt32
+    property dwNegativeSaturation : UInt32
+    property lDeadBand : Int32
+    def initialize(@lOffset : Int32, @lPositiveCoefficient : Int32, @lNegativeCoefficient : Int32, @dwPositiveSaturation : UInt32, @dwNegativeSaturation : UInt32, @lDeadBand : Int32)
+    end
+  end
+
+  @[Extern]
+  struct DICUSTOMFORCE
+    property cChannels : UInt32
+    property dwSamplePeriod : UInt32
+    property cSamples : UInt32
+    property rglForceData : Int32*
+    def initialize(@cChannels : UInt32, @dwSamplePeriod : UInt32, @cSamples : UInt32, @rglForceData : Int32*)
+    end
+  end
+
+  @[Extern]
+  struct DIENVELOPE
+    property dwSize : UInt32
+    property dwAttackLevel : UInt32
+    property dwAttackTime : UInt32
+    property dwFadeLevel : UInt32
+    property dwFadeTime : UInt32
+    def initialize(@dwSize : UInt32, @dwAttackLevel : UInt32, @dwAttackTime : UInt32, @dwFadeLevel : UInt32, @dwFadeTime : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DIEFFECT_DX5
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwDuration : UInt32
+    property dwSamplePeriod : UInt32
+    property dwGain : UInt32
+    property dwTriggerButton : UInt32
+    property dwTriggerRepeatInterval : UInt32
+    property cAxes : UInt32
+    property rgdwAxes : UInt32*
+    property rglDirection : Int32*
+    property lpEnvelope : Win32cr::Devices::HumanInterfaceDevice::DIENVELOPE*
+    property cbTypeSpecificParams : UInt32
+    property lpvTypeSpecificParams : Void*
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwDuration : UInt32, @dwSamplePeriod : UInt32, @dwGain : UInt32, @dwTriggerButton : UInt32, @dwTriggerRepeatInterval : UInt32, @cAxes : UInt32, @rgdwAxes : UInt32*, @rglDirection : Int32*, @lpEnvelope : Win32cr::Devices::HumanInterfaceDevice::DIENVELOPE*, @cbTypeSpecificParams : UInt32, @lpvTypeSpecificParams : Void*)
+    end
+  end
+
+  @[Extern]
+  struct DIEFFECT
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwDuration : UInt32
+    property dwSamplePeriod : UInt32
+    property dwGain : UInt32
+    property dwTriggerButton : UInt32
+    property dwTriggerRepeatInterval : UInt32
+    property cAxes : UInt32
+    property rgdwAxes : UInt32*
+    property rglDirection : Int32*
+    property lpEnvelope : Win32cr::Devices::HumanInterfaceDevice::DIENVELOPE*
+    property cbTypeSpecificParams : UInt32
+    property lpvTypeSpecificParams : Void*
+    property dwStartDelay : UInt32
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwDuration : UInt32, @dwSamplePeriod : UInt32, @dwGain : UInt32, @dwTriggerButton : UInt32, @dwTriggerRepeatInterval : UInt32, @cAxes : UInt32, @rgdwAxes : UInt32*, @rglDirection : Int32*, @lpEnvelope : Win32cr::Devices::HumanInterfaceDevice::DIENVELOPE*, @cbTypeSpecificParams : UInt32, @lpvTypeSpecificParams : Void*, @dwStartDelay : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DIFILEEFFECT
+    property dwSize : UInt32
+    property guid_effect : LibC::GUID
+    property lpDiEffect : Win32cr::Devices::HumanInterfaceDevice::DIEFFECT*
+    property szFriendlyName : Win32cr::Foundation::CHAR[260]
+    def initialize(@dwSize : UInt32, @guid_effect : LibC::GUID, @lpDiEffect : Win32cr::Devices::HumanInterfaceDevice::DIEFFECT*, @szFriendlyName : Win32cr::Foundation::CHAR[260])
+    end
+  end
+
+  @[Extern]
+  struct DIEFFESCAPE
+    property dwSize : UInt32
+    property dwCommand : UInt32
+    property lpvInBuffer : Void*
+    property cbInBuffer : UInt32
+    property lpvOutBuffer : Void*
+    property cbOutBuffer : UInt32
+    def initialize(@dwSize : UInt32, @dwCommand : UInt32, @lpvInBuffer : Void*, @cbInBuffer : UInt32, @lpvOutBuffer : Void*, @cbOutBuffer : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DIDEVCAPS_DX3
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwDevType : UInt32
+    property dwAxes : UInt32
+    property dwButtons : UInt32
+    property dwPOVs : UInt32
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwDevType : UInt32, @dwAxes : UInt32, @dwButtons : UInt32, @dwPOVs : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DIDEVCAPS
+    property dwSize : UInt32
+    property dwFlags : UInt32
+    property dwDevType : UInt32
+    property dwAxes : UInt32
+    property dwButtons : UInt32
+    property dwPOVs : UInt32
+    property dwFFSamplePeriod : UInt32
+    property dwFFMinTimeResolution : UInt32
+    property dwFirmwareRevision : UInt32
+    property dwHardwareRevision : UInt32
+    property dwFFDriverVersion : UInt32
+    def initialize(@dwSize : UInt32, @dwFlags : UInt32, @dwDevType : UInt32, @dwAxes : UInt32, @dwButtons : UInt32, @dwPOVs : UInt32, @dwFFSamplePeriod : UInt32, @dwFFMinTimeResolution : UInt32, @dwFirmwareRevision : UInt32, @dwHardwareRevision : UInt32, @dwFFDriverVersion : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DIOBJECTDATAFORMAT
+    property pguid : LibC::GUID*
+    property dwOfs : UInt32
+    property dwType : UInt32
+    property dwFlags : UInt32
+    def initialize(@pguid : LibC::GUID*, @dwOfs : UInt32, @dwType : UInt32, @dwFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DIDATAFORMAT
+    property dwSize : UInt32
+    property dwObjSize : UInt32
+    property dwFlags : UInt32
+    property dwDataSize : UInt32
+    property dwNumObjs : UInt32
+    property rgodf : Win32cr::Devices::HumanInterfaceDevice::DIOBJECTDATAFORMAT*
+    def initialize(@dwSize : UInt32, @dwObjSize : UInt32, @dwFlags : UInt32, @dwDataSize : UInt32, @dwNumObjs : UInt32, @rgodf : Win32cr::Devices::HumanInterfaceDevice::DIOBJECTDATAFORMAT*)
+    end
+  end
+
+  @[Extern]
+  struct DIACTIONA
+    property uAppData : LibC::UIntPtrT
+    property dwSemantic : UInt32
+    property dwFlags : UInt32
+    property anonymous : Anonymous_e__Union_
+    property guidInstance : LibC::GUID
+    property dwObjID : UInt32
+    property dwHow : UInt32
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      buttons : UInt32,
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous_e__Union_
+    property lptszActionName : Win32cr::Foundation::PSTR
+    property uResIdString : UInt32
+    def initialize(@lptszActionName : Win32cr::Foundation::PSTR, @uResIdString : UInt32)
+    end
+    end
+
+    def initialize(@uAppData : LibC::UIntPtrT, @dwSemantic : UInt32, @dwFlags : UInt32, @anonymous : Anonymous_e__Union_, @guidInstance : LibC::GUID, @dwObjID : UInt32, @dwHow : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DIACTIONW
+    property uAppData : LibC::UIntPtrT
+    property dwSemantic : UInt32
+    property dwFlags : UInt32
+    property anonymous : Anonymous_e__Union_
+    property guidInstance : LibC::GUID
+    property dwObjID : UInt32
+    property dwHow : UInt32
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property lptszActionName : Win32cr::Foundation::PWSTR
+    property uResIdString : UInt32
+    def initialize(@lptszActionName : Win32cr::Foundation::PWSTR, @uResIdString : UInt32)
+    end
+    end
+
+    def initialize(@uAppData : LibC::UIntPtrT, @dwSemantic : UInt32, @dwFlags : UInt32, @anonymous : Anonymous_e__Union_, @guidInstance : LibC::GUID, @dwObjID : UInt32, @dwHow : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DIACTIONFORMATA
+    property dwSize : UInt32
+    property dwActionSize : UInt32
+    property dwDataSize : UInt32
+    property dwNumActions : UInt32
+    property rgoAction : Win32cr::Devices::HumanInterfaceDevice::DIACTIONA*
+    property guidActionMap : LibC::GUID
+    property dwGenre : UInt32
+    property dwBufferSize : UInt32
+    property lAxisMin : Int32
+    property lAxisMax : Int32
+    property hInstString : Win32cr::Foundation::HINSTANCE
+    property ftTimeStamp : Win32cr::Foundation::FILETIME
+    property dwCRC : UInt32
+    property tszActionMap : Win32cr::Foundation::CHAR[260]
+    def initialize(@dwSize : UInt32, @dwActionSize : UInt32, @dwDataSize : UInt32, @dwNumActions : UInt32, @rgoAction : Win32cr::Devices::HumanInterfaceDevice::DIACTIONA*, @guidActionMap : LibC::GUID, @dwGenre : UInt32, @dwBufferSize : UInt32, @lAxisMin : Int32, @lAxisMax : Int32, @hInstString : Win32cr::Foundation::HINSTANCE, @ftTimeStamp : Win32cr::Foundation::FILETIME, @dwCRC : UInt32, @tszActionMap : Win32cr::Foundation::CHAR[260])
+    end
+  end
+
+  @[Extern]
+  struct DIACTIONFORMATW
+    property dwSize : UInt32
+    property dwActionSize : UInt32
+    property dwDataSize : UInt32
+    property dwNumActions : UInt32
+    property rgoAction : Win32cr::Devices::HumanInterfaceDevice::DIACTIONW*
+    property guidActionMap : LibC::GUID
+    property dwGenre : UInt32
+    property dwBufferSize : UInt32
+    property lAxisMin : Int32
+    property lAxisMax : Int32
+    property hInstString : Win32cr::Foundation::HINSTANCE
+    property ftTimeStamp : Win32cr::Foundation::FILETIME
+    property dwCRC : UInt32
+    property tszActionMap : UInt16[260]
+    def initialize(@dwSize : UInt32, @dwActionSize : UInt32, @dwDataSize : UInt32, @dwNumActions : UInt32, @rgoAction : Win32cr::Devices::HumanInterfaceDevice::DIACTIONW*, @guidActionMap : LibC::GUID, @dwGenre : UInt32, @dwBufferSize : UInt32, @lAxisMin : Int32, @lAxisMax : Int32, @hInstString : Win32cr::Foundation::HINSTANCE, @ftTimeStamp : Win32cr::Foundation::FILETIME, @dwCRC : UInt32, @tszActionMap : UInt16[260])
+    end
+  end
+
+  @[Extern]
+  struct DICOLORSET
+    property dwSize : UInt32
+    property cTextFore : UInt32
+    property cTextHighlight : UInt32
+    property cCalloutLine : UInt32
+    property cCalloutHighlight : UInt32
+    property cBorder : UInt32
+    property cControlFill : UInt32
+    property cHighlightFill : UInt32
+    property cAreaFill : UInt32
+    def initialize(@dwSize : UInt32, @cTextFore : UInt32, @cTextHighlight : UInt32, @cCalloutLine : UInt32, @cCalloutHighlight : UInt32, @cBorder : UInt32, @cControlFill : UInt32, @cHighlightFill : UInt32, @cAreaFill : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DICONFIGUREDEVICESPARAMSA
+    property dwSize : UInt32
+    property dwcUsers : UInt32
+    property lptszUserNames : Win32cr::Foundation::PSTR
+    property dwcFormats : UInt32
+    property lprgFormats : Win32cr::Devices::HumanInterfaceDevice::DIACTIONFORMATA*
+    property hwnd : Win32cr::Foundation::HWND
+    property dics : Win32cr::Devices::HumanInterfaceDevice::DICOLORSET
+    property lpUnkDDSTarget : Void*
+    def initialize(@dwSize : UInt32, @dwcUsers : UInt32, @lptszUserNames : Win32cr::Foundation::PSTR, @dwcFormats : UInt32, @lprgFormats : Win32cr::Devices::HumanInterfaceDevice::DIACTIONFORMATA*, @hwnd : Win32cr::Foundation::HWND, @dics : Win32cr::Devices::HumanInterfaceDevice::DICOLORSET, @lpUnkDDSTarget : Void*)
+    end
+  end
+
+  @[Extern]
+  struct DICONFIGUREDEVICESPARAMSW
+    property dwSize : UInt32
+    property dwcUsers : UInt32
+    property lptszUserNames : Win32cr::Foundation::PWSTR
+    property dwcFormats : UInt32
+    property lprgFormats : Win32cr::Devices::HumanInterfaceDevice::DIACTIONFORMATW*
+    property hwnd : Win32cr::Foundation::HWND
+    property dics : Win32cr::Devices::HumanInterfaceDevice::DICOLORSET
+    property lpUnkDDSTarget : Void*
+    def initialize(@dwSize : UInt32, @dwcUsers : UInt32, @lptszUserNames : Win32cr::Foundation::PWSTR, @dwcFormats : UInt32, @lprgFormats : Win32cr::Devices::HumanInterfaceDevice::DIACTIONFORMATW*, @hwnd : Win32cr::Foundation::HWND, @dics : Win32cr::Devices::HumanInterfaceDevice::DICOLORSET, @lpUnkDDSTarget : Void*)
+    end
+  end
+
+  @[Extern]
+  struct DIDEVICEIMAGEINFOA
+    property tszImagePath : Win32cr::Foundation::CHAR[260]
+    property dwFlags : UInt32
+    property dwViewID : UInt32
+    property rcOverlay : Win32cr::Foundation::RECT
+    property dwObjID : UInt32
+    property dwcValidPts : UInt32
+    property rgptCalloutLine : Win32cr::Foundation::POINT[5]
+    property rcCalloutRect : Win32cr::Foundation::RECT
+    property dwTextAlign : UInt32
+    def initialize(@tszImagePath : Win32cr::Foundation::CHAR[260], @dwFlags : UInt32, @dwViewID : UInt32, @rcOverlay : Win32cr::Foundation::RECT, @dwObjID : UInt32, @dwcValidPts : UInt32, @rgptCalloutLine : Win32cr::Foundation::POINT[5], @rcCalloutRect : Win32cr::Foundation::RECT, @dwTextAlign : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DIDEVICEIMAGEINFOW
+    property tszImagePath : UInt16[260]
+    property dwFlags : UInt32
+    property dwViewID : UInt32
+    property rcOverlay : Win32cr::Foundation::RECT
+    property dwObjID : UInt32
+    property dwcValidPts : UInt32
+    property rgptCalloutLine : Win32cr::Foundation::POINT[5]
+    property rcCalloutRect : Win32cr::Foundation::RECT
+    property dwTextAlign : UInt32
+    def initialize(@tszImagePath : UInt16[260], @dwFlags : UInt32, @dwViewID : UInt32, @rcOverlay : Win32cr::Foundation::RECT, @dwObjID : UInt32, @dwcValidPts : UInt32, @rgptCalloutLine : Win32cr::Foundation::POINT[5], @rcCalloutRect : Win32cr::Foundation::RECT, @dwTextAlign : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DIDEVICEIMAGEINFOHEADERA
+    property dwSize : UInt32
+    property dwSizeImageInfo : UInt32
+    property dwcViews : UInt32
+    property dwcButtons : UInt32
+    property dwcAxes : UInt32
+    property dwcPOVs : UInt32
+    property dwBufferSize : UInt32
+    property dwBufferUsed : UInt32
+    property lprgImageInfoArray : Win32cr::Devices::HumanInterfaceDevice::DIDEVICEIMAGEINFOA*
+    def initialize(@dwSize : UInt32, @dwSizeImageInfo : UInt32, @dwcViews : UInt32, @dwcButtons : UInt32, @dwcAxes : UInt32, @dwcPOVs : UInt32, @dwBufferSize : UInt32, @dwBufferUsed : UInt32, @lprgImageInfoArray : Win32cr::Devices::HumanInterfaceDevice::DIDEVICEIMAGEINFOA*)
+    end
+  end
+
+  @[Extern]
+  struct DIDEVICEIMAGEINFOHEADERW
+    property dwSize : UInt32
+    property dwSizeImageInfo : UInt32
+    property dwcViews : UInt32
+    property dwcButtons : UInt32
+    property dwcAxes : UInt32
+    property dwcPOVs : UInt32
+    property dwBufferSize : UInt32
+    property dwBufferUsed : UInt32
+    property lprgImageInfoArray : Win32cr::Devices::HumanInterfaceDevice::DIDEVICEIMAGEINFOW*
+    def initialize(@dwSize : UInt32, @dwSizeImageInfo : UInt32, @dwcViews : UInt32, @dwcButtons : UInt32, @dwcAxes : UInt32, @dwcPOVs : UInt32, @dwBufferSize : UInt32, @dwBufferUsed : UInt32, @lprgImageInfoArray : Win32cr::Devices::HumanInterfaceDevice::DIDEVICEIMAGEINFOW*)
+    end
+  end
+
+  @[Extern]
+  struct DIDEVICEOBJECTINSTANCE_DX3A
+    property dwSize : UInt32
+    property guidType : LibC::GUID
+    property dwOfs : UInt32
+    property dwType : UInt32
+    property dwFlags : UInt32
+    property tszName : Win32cr::Foundation::CHAR[260]
+    def initialize(@dwSize : UInt32, @guidType : LibC::GUID, @dwOfs : UInt32, @dwType : UInt32, @dwFlags : UInt32, @tszName : Win32cr::Foundation::CHAR[260])
+    end
+  end
+
+  @[Extern]
+  struct DIDEVICEOBJECTINSTANCE_DX3W
+    property dwSize : UInt32
+    property guidType : LibC::GUID
+    property dwOfs : UInt32
+    property dwType : UInt32
+    property dwFlags : UInt32
+    property tszName : UInt16[260]
+    def initialize(@dwSize : UInt32, @guidType : LibC::GUID, @dwOfs : UInt32, @dwType : UInt32, @dwFlags : UInt32, @tszName : UInt16[260])
+    end
+  end
+
+  @[Extern]
+  struct DIDEVICEOBJECTINSTANCEA
+    property dwSize : UInt32
+    property guidType : LibC::GUID
+    property dwOfs : UInt32
+    property dwType : UInt32
+    property dwFlags : UInt32
+    property tszName : Win32cr::Foundation::CHAR[260]
+    property dwFFMaxForce : UInt32
+    property dwFFForceResolution : UInt32
+    property wCollectionNumber : UInt16
+    property wDesignatorIndex : UInt16
+    property wUsagePage : UInt16
+    property wUsage : UInt16
+    property dwDimension : UInt32
+    property wExponent : UInt16
+    property wReportId : UInt16
+    def initialize(@dwSize : UInt32, @guidType : LibC::GUID, @dwOfs : UInt32, @dwType : UInt32, @dwFlags : UInt32, @tszName : Win32cr::Foundation::CHAR[260], @dwFFMaxForce : UInt32, @dwFFForceResolution : UInt32, @wCollectionNumber : UInt16, @wDesignatorIndex : UInt16, @wUsagePage : UInt16, @wUsage : UInt16, @dwDimension : UInt32, @wExponent : UInt16, @wReportId : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct DIDEVICEOBJECTINSTANCEW
+    property dwSize : UInt32
+    property guidType : LibC::GUID
+    property dwOfs : UInt32
+    property dwType : UInt32
+    property dwFlags : UInt32
+    property tszName : UInt16[260]
+    property dwFFMaxForce : UInt32
+    property dwFFForceResolution : UInt32
+    property wCollectionNumber : UInt16
+    property wDesignatorIndex : UInt16
+    property wUsagePage : UInt16
+    property wUsage : UInt16
+    property dwDimension : UInt32
+    property wExponent : UInt16
+    property wReportId : UInt16
+    def initialize(@dwSize : UInt32, @guidType : LibC::GUID, @dwOfs : UInt32, @dwType : UInt32, @dwFlags : UInt32, @tszName : UInt16[260], @dwFFMaxForce : UInt32, @dwFFForceResolution : UInt32, @wCollectionNumber : UInt16, @wDesignatorIndex : UInt16, @wUsagePage : UInt16, @wUsage : UInt16, @dwDimension : UInt32, @wExponent : UInt16, @wReportId : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct DIPROPHEADER
+    property dwSize : UInt32
+    property dwHeaderSize : UInt32
+    property dwObj : UInt32
+    property dwHow : UInt32
+    def initialize(@dwSize : UInt32, @dwHeaderSize : UInt32, @dwObj : UInt32, @dwHow : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DIPROPDWORD
+    property diph : Win32cr::Devices::HumanInterfaceDevice::DIPROPHEADER
+    property dwData : UInt32
+    def initialize(@diph : Win32cr::Devices::HumanInterfaceDevice::DIPROPHEADER, @dwData : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DIPROPPOINTER
+    property diph : Win32cr::Devices::HumanInterfaceDevice::DIPROPHEADER
+    property uData : LibC::UIntPtrT
+    def initialize(@diph : Win32cr::Devices::HumanInterfaceDevice::DIPROPHEADER, @uData : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct DIPROPRANGE
+    property diph : Win32cr::Devices::HumanInterfaceDevice::DIPROPHEADER
+    property lMin : Int32
+    property lMax : Int32
+    def initialize(@diph : Win32cr::Devices::HumanInterfaceDevice::DIPROPHEADER, @lMin : Int32, @lMax : Int32)
+    end
+  end
+
+  @[Extern]
+  struct DIPROPCAL
+    property diph : Win32cr::Devices::HumanInterfaceDevice::DIPROPHEADER
+    property lMin : Int32
+    property lCenter : Int32
+    property lMax : Int32
+    def initialize(@diph : Win32cr::Devices::HumanInterfaceDevice::DIPROPHEADER, @lMin : Int32, @lCenter : Int32, @lMax : Int32)
+    end
+  end
+
+  @[Extern]
+  struct DIPROPCALPOV
+    property diph : Win32cr::Devices::HumanInterfaceDevice::DIPROPHEADER
+    property lMin : Int32[5]
+    property lMax : Int32[5]
+    def initialize(@diph : Win32cr::Devices::HumanInterfaceDevice::DIPROPHEADER, @lMin : Int32[5], @lMax : Int32[5])
+    end
+  end
+
+  @[Extern]
+  struct DIPROPGUIDANDPATH
+    property diph : Win32cr::Devices::HumanInterfaceDevice::DIPROPHEADER
+    property guidClass : LibC::GUID
+    property wszPath : UInt16[260]
+    def initialize(@diph : Win32cr::Devices::HumanInterfaceDevice::DIPROPHEADER, @guidClass : LibC::GUID, @wszPath : UInt16[260])
+    end
+  end
+
+  @[Extern]
+  struct DIPROPSTRING
+    property diph : Win32cr::Devices::HumanInterfaceDevice::DIPROPHEADER
+    property wsz : UInt16[260]
+    def initialize(@diph : Win32cr::Devices::HumanInterfaceDevice::DIPROPHEADER, @wsz : UInt16[260])
+    end
+  end
+
+  @[Extern]
+  struct CPOINT
+    property lP : Int32
+    property dwLog : UInt32
+    def initialize(@lP : Int32, @dwLog : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DIPROPCPOINTS
+    property diph : Win32cr::Devices::HumanInterfaceDevice::DIPROPHEADER
+    property dwCPointsNum : UInt32
+    property cp : Win32cr::Devices::HumanInterfaceDevice::CPOINT[8]
+    def initialize(@diph : Win32cr::Devices::HumanInterfaceDevice::DIPROPHEADER, @dwCPointsNum : UInt32, @cp : Win32cr::Devices::HumanInterfaceDevice::CPOINT[8])
+    end
+  end
+
+  @[Extern]
+  struct DIDEVICEOBJECTDATA_DX3
+    property dwOfs : UInt32
+    property dwData : UInt32
+    property dwTimeStamp : UInt32
+    property dwSequence : UInt32
+    def initialize(@dwOfs : UInt32, @dwData : UInt32, @dwTimeStamp : UInt32, @dwSequence : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DIDEVICEOBJECTDATA
+    property dwOfs : UInt32
+    property dwData : UInt32
+    property dwTimeStamp : UInt32
+    property dwSequence : UInt32
+    property uAppData : LibC::UIntPtrT
+    def initialize(@dwOfs : UInt32, @dwData : UInt32, @dwTimeStamp : UInt32, @dwSequence : UInt32, @uAppData : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct DIDEVICEINSTANCE_DX3A
+    property dwSize : UInt32
+    property guidInstance : LibC::GUID
+    property guidProduct : LibC::GUID
+    property dwDevType : UInt32
+    property tszInstanceName : Win32cr::Foundation::CHAR[260]
+    property tszProductName : Win32cr::Foundation::CHAR[260]
+    def initialize(@dwSize : UInt32, @guidInstance : LibC::GUID, @guidProduct : LibC::GUID, @dwDevType : UInt32, @tszInstanceName : Win32cr::Foundation::CHAR[260], @tszProductName : Win32cr::Foundation::CHAR[260])
+    end
+  end
+
+  @[Extern]
+  struct DIDEVICEINSTANCE_DX3W
+    property dwSize : UInt32
+    property guidInstance : LibC::GUID
+    property guidProduct : LibC::GUID
+    property dwDevType : UInt32
+    property tszInstanceName : UInt16[260]
+    property tszProductName : UInt16[260]
+    def initialize(@dwSize : UInt32, @guidInstance : LibC::GUID, @guidProduct : LibC::GUID, @dwDevType : UInt32, @tszInstanceName : UInt16[260], @tszProductName : UInt16[260])
+    end
+  end
+
+  @[Extern]
+  struct DIDEVICEINSTANCEA
+    property dwSize : UInt32
+    property guidInstance : LibC::GUID
+    property guidProduct : LibC::GUID
+    property dwDevType : UInt32
+    property tszInstanceName : Win32cr::Foundation::CHAR[260]
+    property tszProductName : Win32cr::Foundation::CHAR[260]
+    property guidFFDriver : LibC::GUID
+    property wUsagePage : UInt16
+    property wUsage : UInt16
+    def initialize(@dwSize : UInt32, @guidInstance : LibC::GUID, @guidProduct : LibC::GUID, @dwDevType : UInt32, @tszInstanceName : Win32cr::Foundation::CHAR[260], @tszProductName : Win32cr::Foundation::CHAR[260], @guidFFDriver : LibC::GUID, @wUsagePage : UInt16, @wUsage : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct DIDEVICEINSTANCEW
+    property dwSize : UInt32
+    property guidInstance : LibC::GUID
+    property guidProduct : LibC::GUID
+    property dwDevType : UInt32
+    property tszInstanceName : UInt16[260]
+    property tszProductName : UInt16[260]
+    property guidFFDriver : LibC::GUID
+    property wUsagePage : UInt16
+    property wUsage : UInt16
+    def initialize(@dwSize : UInt32, @guidInstance : LibC::GUID, @guidProduct : LibC::GUID, @dwDevType : UInt32, @tszInstanceName : UInt16[260], @tszProductName : UInt16[260], @guidFFDriver : LibC::GUID, @wUsagePage : UInt16, @wUsage : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct DIEFFECTINFOA
+    property dwSize : UInt32
+    property guid : LibC::GUID
+    property dwEffType : UInt32
+    property dwStaticParams : UInt32
+    property dwDynamicParams : UInt32
+    property tszName : Win32cr::Foundation::CHAR[260]
+    def initialize(@dwSize : UInt32, @guid : LibC::GUID, @dwEffType : UInt32, @dwStaticParams : UInt32, @dwDynamicParams : UInt32, @tszName : Win32cr::Foundation::CHAR[260])
+    end
+  end
+
+  @[Extern]
+  struct DIEFFECTINFOW
+    property dwSize : UInt32
+    property guid : LibC::GUID
+    property dwEffType : UInt32
+    property dwStaticParams : UInt32
+    property dwDynamicParams : UInt32
+    property tszName : UInt16[260]
+    def initialize(@dwSize : UInt32, @guid : LibC::GUID, @dwEffType : UInt32, @dwStaticParams : UInt32, @dwDynamicParams : UInt32, @tszName : UInt16[260])
+    end
+  end
+
+  @[Extern]
+  struct DIMOUSESTATE
+    property lX : Int32
+    property lY : Int32
+    property lZ : Int32
+    property rgbButtons : UInt8[4]
+    def initialize(@lX : Int32, @lY : Int32, @lZ : Int32, @rgbButtons : UInt8[4])
+    end
+  end
+
+  @[Extern]
+  struct DIMOUSESTATE2
+    property lX : Int32
+    property lY : Int32
+    property lZ : Int32
+    property rgbButtons : UInt8[8]
+    def initialize(@lX : Int32, @lY : Int32, @lZ : Int32, @rgbButtons : UInt8[8])
+    end
+  end
+
+  @[Extern]
+  struct DIJOYSTATE
+    property lX : Int32
+    property lY : Int32
+    property lZ : Int32
+    property lRx : Int32
+    property lRy : Int32
+    property lRz : Int32
+    property rglSlider : Int32[2]
+    property rgdwPOV : UInt32[4]
+    property rgbButtons : UInt8[32]
+    def initialize(@lX : Int32, @lY : Int32, @lZ : Int32, @lRx : Int32, @lRy : Int32, @lRz : Int32, @rglSlider : Int32[2], @rgdwPOV : UInt32[4], @rgbButtons : UInt8[32])
+    end
+  end
+
+  @[Extern]
+  struct DIJOYSTATE2
+    property lX : Int32
+    property lY : Int32
+    property lZ : Int32
+    property lRx : Int32
+    property lRy : Int32
+    property lRz : Int32
+    property rglSlider : Int32[2]
+    property rgdwPOV : UInt32[4]
+    property rgbButtons : UInt8[128]
+    property lVX : Int32
+    property lVY : Int32
+    property lVZ : Int32
+    property lVRx : Int32
+    property lVRy : Int32
+    property lVRz : Int32
+    property rglVSlider : Int32[2]
+    property lAX : Int32
+    property lAY : Int32
+    property lAZ : Int32
+    property lARx : Int32
+    property lARy : Int32
+    property lARz : Int32
+    property rglASlider : Int32[2]
+    property lFX : Int32
+    property lFY : Int32
+    property lFZ : Int32
+    property lFRx : Int32
+    property lFRy : Int32
+    property lFRz : Int32
+    property rglFSlider : Int32[2]
+    def initialize(@lX : Int32, @lY : Int32, @lZ : Int32, @lRx : Int32, @lRy : Int32, @lRz : Int32, @rglSlider : Int32[2], @rgdwPOV : UInt32[4], @rgbButtons : UInt8[128], @lVX : Int32, @lVY : Int32, @lVZ : Int32, @lVRx : Int32, @lVRy : Int32, @lVRz : Int32, @rglVSlider : Int32[2], @lAX : Int32, @lAY : Int32, @lAZ : Int32, @lARx : Int32, @lARy : Int32, @lARz : Int32, @rglASlider : Int32[2], @lFX : Int32, @lFY : Int32, @lFZ : Int32, @lFRx : Int32, @lFRy : Int32, @lFRz : Int32, @rglFSlider : Int32[2])
+    end
+  end
+
+  @[Extern]
+  struct DIOBJECTATTRIBUTES
+    property dwFlags : UInt32
+    property wUsagePage : UInt16
+    property wUsage : UInt16
+    def initialize(@dwFlags : UInt32, @wUsagePage : UInt16, @wUsage : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct DIFFOBJECTATTRIBUTES
+    property dwFFMaxForce : UInt32
+    property dwFFForceResolution : UInt32
+    def initialize(@dwFFMaxForce : UInt32, @dwFFForceResolution : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DIOBJECTCALIBRATION
+    property lMin : Int32
+    property lCenter : Int32
+    property lMax : Int32
+    def initialize(@lMin : Int32, @lCenter : Int32, @lMax : Int32)
+    end
+  end
+
+  @[Extern]
+  struct DIPOVCALIBRATION
+    property lMin : Int32[5]
+    property lMax : Int32[5]
+    def initialize(@lMin : Int32[5], @lMax : Int32[5])
+    end
+  end
+
+  @[Extern]
+  struct DIEFFECTATTRIBUTES
+    property dwEffectId : UInt32
+    property dwEffType : UInt32
+    property dwStaticParams : UInt32
+    property dwDynamicParams : UInt32
+    property dwCoords : UInt32
+    def initialize(@dwEffectId : UInt32, @dwEffType : UInt32, @dwStaticParams : UInt32, @dwDynamicParams : UInt32, @dwCoords : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DIFFDEVICEATTRIBUTES
+    property dwFlags : UInt32
+    property dwFFSamplePeriod : UInt32
+    property dwFFMinTimeResolution : UInt32
+    def initialize(@dwFlags : UInt32, @dwFFSamplePeriod : UInt32, @dwFFMinTimeResolution : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DIDRIVERVERSIONS
+    property dwSize : UInt32
+    property dwFirmwareRevision : UInt32
+    property dwHardwareRevision : UInt32
+    property dwFFDriverVersion : UInt32
+    def initialize(@dwSize : UInt32, @dwFirmwareRevision : UInt32, @dwHardwareRevision : UInt32, @dwFFDriverVersion : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DIDEVICESTATE
+    property dwSize : UInt32
+    property dwState : UInt32
+    property dwLoad : UInt32
+    def initialize(@dwSize : UInt32, @dwState : UInt32, @dwLoad : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DIHIDFFINITINFO
+    property dwSize : UInt32
+    property pwszDeviceInterface : Win32cr::Foundation::PWSTR
+    property guid_instance : LibC::GUID
+    def initialize(@dwSize : UInt32, @pwszDeviceInterface : Win32cr::Foundation::PWSTR, @guid_instance : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct JOYPOS
+    property dwX : UInt32
+    property dwY : UInt32
+    property dwZ : UInt32
+    property dwR : UInt32
+    property dwU : UInt32
+    property dwV : UInt32
+    def initialize(@dwX : UInt32, @dwY : UInt32, @dwZ : UInt32, @dwR : UInt32, @dwU : UInt32, @dwV : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct JOYRANGE
+    property jpMin : Win32cr::Devices::HumanInterfaceDevice::JOYPOS
+    property jpMax : Win32cr::Devices::HumanInterfaceDevice::JOYPOS
+    property jpCenter : Win32cr::Devices::HumanInterfaceDevice::JOYPOS
+    def initialize(@jpMin : Win32cr::Devices::HumanInterfaceDevice::JOYPOS, @jpMax : Win32cr::Devices::HumanInterfaceDevice::JOYPOS, @jpCenter : Win32cr::Devices::HumanInterfaceDevice::JOYPOS)
+    end
+  end
+
+  @[Extern]
+  struct JOYREGUSERVALUES
+    property dwTimeOut : UInt32
+    property jrvRanges : Win32cr::Devices::HumanInterfaceDevice::JOYRANGE
+    property jpDeadZone : Win32cr::Devices::HumanInterfaceDevice::JOYPOS
+    def initialize(@dwTimeOut : UInt32, @jrvRanges : Win32cr::Devices::HumanInterfaceDevice::JOYRANGE, @jpDeadZone : Win32cr::Devices::HumanInterfaceDevice::JOYPOS)
+    end
+  end
+
+  @[Extern]
+  struct JOYREGHWSETTINGS
+    property dwFlags : UInt32
+    property dwNumButtons : UInt32
+    def initialize(@dwFlags : UInt32, @dwNumButtons : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct JOYREGHWVALUES
+    property jrvHardware : Win32cr::Devices::HumanInterfaceDevice::JOYRANGE
+    property dwPOVValues : UInt32[4]
+    property dwCalFlags : UInt32
+    def initialize(@jrvHardware : Win32cr::Devices::HumanInterfaceDevice::JOYRANGE, @dwPOVValues : UInt32[4], @dwCalFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct JOYREGHWCONFIG
+    property hws : Win32cr::Devices::HumanInterfaceDevice::JOYREGHWSETTINGS
+    property dwUsageSettings : UInt32
+    property hwv : Win32cr::Devices::HumanInterfaceDevice::JOYREGHWVALUES
+    property dwType : UInt32
+    property dwReserved : UInt32
+    def initialize(@hws : Win32cr::Devices::HumanInterfaceDevice::JOYREGHWSETTINGS, @dwUsageSettings : UInt32, @hwv : Win32cr::Devices::HumanInterfaceDevice::JOYREGHWVALUES, @dwType : UInt32, @dwReserved : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct JOYCALIBRATE
+    property wXbase : UInt32
+    property wXdelta : UInt32
+    property wYbase : UInt32
+    property wYdelta : UInt32
+    property wZbase : UInt32
+    property wZdelta : UInt32
+    def initialize(@wXbase : UInt32, @wXdelta : UInt32, @wYbase : UInt32, @wYdelta : UInt32, @wZbase : UInt32, @wZdelta : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DIJOYTYPEINFO_DX5
+    property dwSize : UInt32
+    property hws : Win32cr::Devices::HumanInterfaceDevice::JOYREGHWSETTINGS
+    property clsidConfig : LibC::GUID
+    property wszDisplayName : UInt16[256]
+    property wszCallout : UInt16[260]
+    def initialize(@dwSize : UInt32, @hws : Win32cr::Devices::HumanInterfaceDevice::JOYREGHWSETTINGS, @clsidConfig : LibC::GUID, @wszDisplayName : UInt16[256], @wszCallout : UInt16[260])
+    end
+  end
+
+  @[Extern]
+  struct DIJOYTYPEINFO_DX6
+    property dwSize : UInt32
+    property hws : Win32cr::Devices::HumanInterfaceDevice::JOYREGHWSETTINGS
+    property clsidConfig : LibC::GUID
+    property wszDisplayName : UInt16[256]
+    property wszCallout : UInt16[260]
+    property wszHardwareId : UInt16[256]
+    property dwFlags1 : UInt32
+    def initialize(@dwSize : UInt32, @hws : Win32cr::Devices::HumanInterfaceDevice::JOYREGHWSETTINGS, @clsidConfig : LibC::GUID, @wszDisplayName : UInt16[256], @wszCallout : UInt16[260], @wszHardwareId : UInt16[256], @dwFlags1 : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DIJOYTYPEINFO
+    property dwSize : UInt32
+    property hws : Win32cr::Devices::HumanInterfaceDevice::JOYREGHWSETTINGS
+    property clsidConfig : LibC::GUID
+    property wszDisplayName : UInt16[256]
+    property wszCallout : UInt16[260]
+    property wszHardwareId : UInt16[256]
+    property dwFlags1 : UInt32
+    property dwFlags2 : UInt32
+    property wszMapFile : UInt16[256]
+    def initialize(@dwSize : UInt32, @hws : Win32cr::Devices::HumanInterfaceDevice::JOYREGHWSETTINGS, @clsidConfig : LibC::GUID, @wszDisplayName : UInt16[256], @wszCallout : UInt16[260], @wszHardwareId : UInt16[256], @dwFlags1 : UInt32, @dwFlags2 : UInt32, @wszMapFile : UInt16[256])
+    end
+  end
+
+  @[Extern]
+  struct DIJOYCONFIG_DX5
+    property dwSize : UInt32
+    property guidInstance : LibC::GUID
+    property hwc : Win32cr::Devices::HumanInterfaceDevice::JOYREGHWCONFIG
+    property dwGain : UInt32
+    property wszType : UInt16[256]
+    property wszCallout : UInt16[256]
+    def initialize(@dwSize : UInt32, @guidInstance : LibC::GUID, @hwc : Win32cr::Devices::HumanInterfaceDevice::JOYREGHWCONFIG, @dwGain : UInt32, @wszType : UInt16[256], @wszCallout : UInt16[256])
+    end
+  end
+
+  @[Extern]
+  struct DIJOYCONFIG
+    property dwSize : UInt32
+    property guidInstance : LibC::GUID
+    property hwc : Win32cr::Devices::HumanInterfaceDevice::JOYREGHWCONFIG
+    property dwGain : UInt32
+    property wszType : UInt16[256]
+    property wszCallout : UInt16[256]
+    property guidGameport : LibC::GUID
+    def initialize(@dwSize : UInt32, @guidInstance : LibC::GUID, @hwc : Win32cr::Devices::HumanInterfaceDevice::JOYREGHWCONFIG, @dwGain : UInt32, @wszType : UInt16[256], @wszCallout : UInt16[256], @guidGameport : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct DIJOYUSERVALUES
+    property dwSize : UInt32
+    property ruv : Win32cr::Devices::HumanInterfaceDevice::JOYREGUSERVALUES
+    property wszGlobalDriver : UInt16[256]
+    property wszGameportEmulator : UInt16[256]
+    def initialize(@dwSize : UInt32, @ruv : Win32cr::Devices::HumanInterfaceDevice::JOYREGUSERVALUES, @wszGlobalDriver : UInt16[256], @wszGameportEmulator : UInt16[256])
+    end
+  end
+
+  @[Extern]
+  struct KEYBOARD_INPUT_DATA
+    property unit_id : UInt16
+    property make_code : UInt16
+    property flags : UInt16
+    property reserved : UInt16
+    property extra_information : UInt32
+    def initialize(@unit_id : UInt16, @make_code : UInt16, @flags : UInt16, @reserved : UInt16, @extra_information : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct KEYBOARD_TYPEMATIC_PARAMETERS
+    property unit_id : UInt16
+    property rate : UInt16
+    property delay : UInt16
+    def initialize(@unit_id : UInt16, @rate : UInt16, @delay : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct KEYBOARD_ID
+    property type__ : UInt8
+    property subtype : UInt8
+    def initialize(@type__ : UInt8, @subtype : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct KEYBOARD_ATTRIBUTES
+    property keyboard_identifier : Win32cr::Devices::HumanInterfaceDevice::KEYBOARD_ID
+    property keyboard_mode : UInt16
+    property number_of_function_keys : UInt16
+    property number_of_indicators : UInt16
+    property number_of_keys_total : UInt16
+    property input_data_queue_length : UInt32
+    property key_repeat_minimum : Win32cr::Devices::HumanInterfaceDevice::KEYBOARD_TYPEMATIC_PARAMETERS
+    property key_repeat_maximum : Win32cr::Devices::HumanInterfaceDevice::KEYBOARD_TYPEMATIC_PARAMETERS
+    def initialize(@keyboard_identifier : Win32cr::Devices::HumanInterfaceDevice::KEYBOARD_ID, @keyboard_mode : UInt16, @number_of_function_keys : UInt16, @number_of_indicators : UInt16, @number_of_keys_total : UInt16, @input_data_queue_length : UInt32, @key_repeat_minimum : Win32cr::Devices::HumanInterfaceDevice::KEYBOARD_TYPEMATIC_PARAMETERS, @key_repeat_maximum : Win32cr::Devices::HumanInterfaceDevice::KEYBOARD_TYPEMATIC_PARAMETERS)
+    end
+  end
+
+  @[Extern]
+  struct KEYBOARD_EXTENDED_ATTRIBUTES
+    property version : UInt8
+    property form_factor : UInt8
+    property key_type : UInt8
+    property physical_layout : UInt8
+    property vendor_specific_physical_layout : UInt8
+    property ietf_language_tag_index : UInt8
+    property implemented_input_assist_controls : UInt8
+    def initialize(@version : UInt8, @form_factor : UInt8, @key_type : UInt8, @physical_layout : UInt8, @vendor_specific_physical_layout : UInt8, @ietf_language_tag_index : UInt8, @implemented_input_assist_controls : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct KEYBOARD_INDICATOR_PARAMETERS
+    property unit_id : UInt16
+    property led_flags : UInt16
+    def initialize(@unit_id : UInt16, @led_flags : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct INDICATOR_LIST
+    property make_code : UInt16
+    property indicator_flags : UInt16
+    def initialize(@make_code : UInt16, @indicator_flags : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct KEYBOARD_INDICATOR_TRANSLATION
+    property number_of_indicator_keys : UInt16
+    property indicator_list : Win32cr::Devices::HumanInterfaceDevice::INDICATOR_LIST*
+    def initialize(@number_of_indicator_keys : UInt16, @indicator_list : Win32cr::Devices::HumanInterfaceDevice::INDICATOR_LIST*)
+    end
+  end
+
+  @[Extern]
+  struct KEYBOARD_UNIT_ID_PARAMETER
+    property unit_id : UInt16
+    def initialize(@unit_id : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct KEYBOARD_IME_STATUS
+    property unit_id : UInt16
+    property ime_open : UInt32
+    property ime_conv_mode : UInt32
+    def initialize(@unit_id : UInt16, @ime_open : UInt32, @ime_conv_mode : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MOUSE_INPUT_DATA
+    property unit_id : UInt16
+    property flags : UInt16
+    property anonymous : Anonymous_e__Union_
+    property raw_buttons : UInt32
+    property last_x : Int32
+    property last_y : Int32
+    property extra_information : UInt32
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property buttons : UInt32
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        button_flags : UInt16,
-        button_data : UInt16
+      struct Anonymous_e__Struct_
+    property button_flags : UInt16
+    property button_data : UInt16
+    def initialize(@button_flags : UInt16, @button_data : UInt16)
+    end
+      end
 
+    def initialize(@buttons : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@unit_id : UInt16, @flags : UInt16, @anonymous : Anonymous_e__Union_, @raw_buttons : UInt32, @last_x : Int32, @last_y : Int32, @extra_information : UInt32)
+    end
   end
 
   @[Extern]
-  record MOUSE_ATTRIBUTES,
-    mouse_identifier : UInt16,
-    number_of_buttons : UInt16,
-    sample_rate : UInt16,
-    input_data_queue_length : UInt32
+  struct MOUSE_ATTRIBUTES
+    property mouse_identifier : UInt16
+    property number_of_buttons : UInt16
+    property sample_rate : UInt16
+    property input_data_queue_length : UInt32
+    def initialize(@mouse_identifier : UInt16, @number_of_buttons : UInt16, @sample_rate : UInt16, @input_data_queue_length : UInt32)
+    end
+  end
 
   @[Extern]
-  record MOUSE_UNIT_ID_PARAMETER,
-    unit_id : UInt16
+  struct MOUSE_UNIT_ID_PARAMETER
+    property unit_id : UInt16
+    def initialize(@unit_id : UInt16)
+    end
+  end
 
   @[Extern]
-  record USAGE_AND_PAGE,
-    usage : UInt16,
-    usage_page : UInt16
+  struct USAGE_AND_PAGE
+    property usage : UInt16
+    property usage_page : UInt16
+    def initialize(@usage : UInt16, @usage_page : UInt16)
+    end
+  end
 
   @[Extern]
-  record HIDP_BUTTON_CAPS,
-    usage_page : UInt16,
-    report_id : UInt8,
-    is_alias : Win32cr::Foundation::BOOLEAN,
-    bit_field : UInt16,
-    link_collection : UInt16,
-    link_usage : UInt16,
-    link_usage_page : UInt16,
-    is_range : Win32cr::Foundation::BOOLEAN,
-    is_string_range : Win32cr::Foundation::BOOLEAN,
-    is_designator_range : Win32cr::Foundation::BOOLEAN,
-    is_absolute : Win32cr::Foundation::BOOLEAN,
-    report_count : UInt16,
-    reserved2 : UInt16,
-    reserved : UInt32[9],
-    anonymous : Anonymous_e__Union_ do
+  struct HIDP_BUTTON_CAPS
+    property usage_page : UInt16
+    property report_id : UInt8
+    property is_alias : Win32cr::Foundation::BOOLEAN
+    property bit_field : UInt16
+    property link_collection : UInt16
+    property link_usage : UInt16
+    property link_usage_page : UInt16
+    property is_range : Win32cr::Foundation::BOOLEAN
+    property is_string_range : Win32cr::Foundation::BOOLEAN
+    property is_designator_range : Win32cr::Foundation::BOOLEAN
+    property is_absolute : Win32cr::Foundation::BOOLEAN
+    property report_count : UInt16
+    property reserved2 : UInt16
+    property reserved : UInt32[9]
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      range : Range_e__Struct_,
-      not_range : NotRange_e__Struct_ do
+    struct Anonymous_e__Union_
+    property range : Range_e__Struct_
+    property not_range : NotRange_e__Struct_
 
       # Nested Type Range_e__Struct_
       @[Extern]
-      record Range_e__Struct_,
-        usage_min : UInt16,
-        usage_max : UInt16,
-        string_min : UInt16,
-        string_max : UInt16,
-        designator_min : UInt16,
-        designator_max : UInt16,
-        data_index_min : UInt16,
-        data_index_max : UInt16
+      struct Range_e__Struct_
+    property usage_min : UInt16
+    property usage_max : UInt16
+    property string_min : UInt16
+    property string_max : UInt16
+    property designator_min : UInt16
+    property designator_max : UInt16
+    property data_index_min : UInt16
+    property data_index_max : UInt16
+    def initialize(@usage_min : UInt16, @usage_max : UInt16, @string_min : UInt16, @string_max : UInt16, @designator_min : UInt16, @designator_max : UInt16, @data_index_min : UInt16, @data_index_max : UInt16)
+    end
+      end
 
 
       # Nested Type NotRange_e__Struct_
       @[Extern]
-      record NotRange_e__Struct_,
-        usage : UInt16,
-        reserved1 : UInt16,
-        string_index : UInt16,
-        reserved2 : UInt16,
-        designator_index : UInt16,
-        reserved3 : UInt16,
-        data_index : UInt16,
-        reserved4 : UInt16
+      struct NotRange_e__Struct_
+    property usage : UInt16
+    property reserved1 : UInt16
+    property string_index : UInt16
+    property reserved2 : UInt16
+    property designator_index : UInt16
+    property reserved3 : UInt16
+    property data_index : UInt16
+    property reserved4 : UInt16
+    def initialize(@usage : UInt16, @reserved1 : UInt16, @string_index : UInt16, @reserved2 : UInt16, @designator_index : UInt16, @reserved3 : UInt16, @data_index : UInt16, @reserved4 : UInt16)
+    end
+      end
 
+    def initialize(@range : Range_e__Struct_, @not_range : NotRange_e__Struct_)
+    end
     end
 
+    def initialize(@usage_page : UInt16, @report_id : UInt8, @is_alias : Win32cr::Foundation::BOOLEAN, @bit_field : UInt16, @link_collection : UInt16, @link_usage : UInt16, @link_usage_page : UInt16, @is_range : Win32cr::Foundation::BOOLEAN, @is_string_range : Win32cr::Foundation::BOOLEAN, @is_designator_range : Win32cr::Foundation::BOOLEAN, @is_absolute : Win32cr::Foundation::BOOLEAN, @report_count : UInt16, @reserved2 : UInt16, @reserved : UInt32[9], @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record HIDP_VALUE_CAPS,
-    usage_page : UInt16,
-    report_id : UInt8,
-    is_alias : Win32cr::Foundation::BOOLEAN,
-    bit_field : UInt16,
-    link_collection : UInt16,
-    link_usage : UInt16,
-    link_usage_page : UInt16,
-    is_range : Win32cr::Foundation::BOOLEAN,
-    is_string_range : Win32cr::Foundation::BOOLEAN,
-    is_designator_range : Win32cr::Foundation::BOOLEAN,
-    is_absolute : Win32cr::Foundation::BOOLEAN,
-    has_null : Win32cr::Foundation::BOOLEAN,
-    reserved : UInt8,
-    bit_size : UInt16,
-    report_count : UInt16,
-    reserved2 : UInt16[5],
-    units_exp : UInt32,
-    units : UInt32,
-    logical_min : Int32,
-    logical_max : Int32,
-    physical_min : Int32,
-    physical_max : Int32,
-    anonymous : Anonymous_e__Union_ do
+  struct HIDP_VALUE_CAPS
+    property usage_page : UInt16
+    property report_id : UInt8
+    property is_alias : Win32cr::Foundation::BOOLEAN
+    property bit_field : UInt16
+    property link_collection : UInt16
+    property link_usage : UInt16
+    property link_usage_page : UInt16
+    property is_range : Win32cr::Foundation::BOOLEAN
+    property is_string_range : Win32cr::Foundation::BOOLEAN
+    property is_designator_range : Win32cr::Foundation::BOOLEAN
+    property is_absolute : Win32cr::Foundation::BOOLEAN
+    property has_null : Win32cr::Foundation::BOOLEAN
+    property reserved : UInt8
+    property bit_size : UInt16
+    property report_count : UInt16
+    property reserved2 : UInt16[5]
+    property units_exp : UInt32
+    property units : UInt32
+    property logical_min : Int32
+    property logical_max : Int32
+    property physical_min : Int32
+    property physical_max : Int32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      range : Range_e__Struct_,
-      not_range : NotRange_e__Struct_ do
+    struct Anonymous_e__Union_
+    property range : Range_e__Struct_
+    property not_range : NotRange_e__Struct_
 
       # Nested Type Range_e__Struct_
       @[Extern]
-      record Range_e__Struct_,
-        usage_min : UInt16,
-        usage_max : UInt16,
-        string_min : UInt16,
-        string_max : UInt16,
-        designator_min : UInt16,
-        designator_max : UInt16,
-        data_index_min : UInt16,
-        data_index_max : UInt16
+      struct Range_e__Struct_
+    property usage_min : UInt16
+    property usage_max : UInt16
+    property string_min : UInt16
+    property string_max : UInt16
+    property designator_min : UInt16
+    property designator_max : UInt16
+    property data_index_min : UInt16
+    property data_index_max : UInt16
+    def initialize(@usage_min : UInt16, @usage_max : UInt16, @string_min : UInt16, @string_max : UInt16, @designator_min : UInt16, @designator_max : UInt16, @data_index_min : UInt16, @data_index_max : UInt16)
+    end
+      end
 
 
       # Nested Type NotRange_e__Struct_
       @[Extern]
-      record NotRange_e__Struct_,
-        usage : UInt16,
-        reserved1 : UInt16,
-        string_index : UInt16,
-        reserved2 : UInt16,
-        designator_index : UInt16,
-        reserved3 : UInt16,
-        data_index : UInt16,
-        reserved4 : UInt16
+      struct NotRange_e__Struct_
+    property usage : UInt16
+    property reserved1 : UInt16
+    property string_index : UInt16
+    property reserved2 : UInt16
+    property designator_index : UInt16
+    property reserved3 : UInt16
+    property data_index : UInt16
+    property reserved4 : UInt16
+    def initialize(@usage : UInt16, @reserved1 : UInt16, @string_index : UInt16, @reserved2 : UInt16, @designator_index : UInt16, @reserved3 : UInt16, @data_index : UInt16, @reserved4 : UInt16)
+    end
+      end
 
+    def initialize(@range : Range_e__Struct_, @not_range : NotRange_e__Struct_)
+    end
     end
 
+    def initialize(@usage_page : UInt16, @report_id : UInt8, @is_alias : Win32cr::Foundation::BOOLEAN, @bit_field : UInt16, @link_collection : UInt16, @link_usage : UInt16, @link_usage_page : UInt16, @is_range : Win32cr::Foundation::BOOLEAN, @is_string_range : Win32cr::Foundation::BOOLEAN, @is_designator_range : Win32cr::Foundation::BOOLEAN, @is_absolute : Win32cr::Foundation::BOOLEAN, @has_null : Win32cr::Foundation::BOOLEAN, @reserved : UInt8, @bit_size : UInt16, @report_count : UInt16, @reserved2 : UInt16[5], @units_exp : UInt32, @units : UInt32, @logical_min : Int32, @logical_max : Int32, @physical_min : Int32, @physical_max : Int32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record HIDP_LINK_COLLECTION_NODE,
-    link_usage : UInt16,
-    link_usage_page : UInt16,
-    parent : UInt16,
-    number_of_children : UInt16,
-    next_sibling : UInt16,
-    first_child : UInt16,
-    _bitfield : UInt32,
-    user_context : Void*
-
-  @[Extern]
-  record HIDP_PREPARSED_DATA_
-  @[Extern]
-  record HIDP_CAPS,
-    usage : UInt16,
-    usage_page : UInt16,
-    input_report_byte_length : UInt16,
-    output_report_byte_length : UInt16,
-    feature_report_byte_length : UInt16,
-    reserved : UInt16[17],
-    number_link_collection_nodes : UInt16,
-    number_input_button_caps : UInt16,
-    number_input_value_caps : UInt16,
-    number_input_data_indices : UInt16,
-    number_output_button_caps : UInt16,
-    number_output_value_caps : UInt16,
-    number_output_data_indices : UInt16,
-    number_feature_button_caps : UInt16,
-    number_feature_value_caps : UInt16,
-    number_feature_data_indices : UInt16
-
-  @[Extern]
-  record HIDP_DATA,
-    data_index : UInt16,
-    reserved : UInt16,
-    anonymous : Anonymous_e__Union_ do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      raw_value : UInt32,
-      on : Win32cr::Foundation::BOOLEAN
-
+  struct HIDP_LINK_COLLECTION_NODE
+    property link_usage : UInt16
+    property link_usage_page : UInt16
+    property parent : UInt16
+    property number_of_children : UInt16
+    property next_sibling : UInt16
+    property first_child : UInt16
+    property _bitfield : UInt32
+    property user_context : Void*
+    def initialize(@link_usage : UInt16, @link_usage_page : UInt16, @parent : UInt16, @number_of_children : UInt16, @next_sibling : UInt16, @first_child : UInt16, @_bitfield : UInt32, @user_context : Void*)
+    end
   end
 
   @[Extern]
-  record HIDP_UNKNOWN_TOKEN,
-    token : UInt8,
-    reserved : UInt8[3],
-    bit_field : UInt32
+  struct HIDP_PREPARSED_DATA_
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record HIDP_EXTENDED_ATTRIBUTES,
-    num_global_unknowns : UInt8,
-    reserved : UInt8[3],
-    global_unknowns : Win32cr::Devices::HumanInterfaceDevice::HIDP_UNKNOWN_TOKEN*,
-    data : UInt32*
+  struct HIDP_CAPS
+    property usage : UInt16
+    property usage_page : UInt16
+    property input_report_byte_length : UInt16
+    property output_report_byte_length : UInt16
+    property feature_report_byte_length : UInt16
+    property reserved : UInt16[17]
+    property number_link_collection_nodes : UInt16
+    property number_input_button_caps : UInt16
+    property number_input_value_caps : UInt16
+    property number_input_data_indices : UInt16
+    property number_output_button_caps : UInt16
+    property number_output_value_caps : UInt16
+    property number_output_data_indices : UInt16
+    property number_feature_button_caps : UInt16
+    property number_feature_value_caps : UInt16
+    property number_feature_data_indices : UInt16
+    def initialize(@usage : UInt16, @usage_page : UInt16, @input_report_byte_length : UInt16, @output_report_byte_length : UInt16, @feature_report_byte_length : UInt16, @reserved : UInt16[17], @number_link_collection_nodes : UInt16, @number_input_button_caps : UInt16, @number_input_value_caps : UInt16, @number_input_data_indices : UInt16, @number_output_button_caps : UInt16, @number_output_value_caps : UInt16, @number_output_data_indices : UInt16, @number_feature_button_caps : UInt16, @number_feature_value_caps : UInt16, @number_feature_data_indices : UInt16)
+    end
+  end
 
   @[Extern]
-  record HIDP_BUTTON_ARRAY_DATA,
-    array_index : UInt16,
-    on : Win32cr::Foundation::BOOLEAN
-
-  @[Extern]
-  record HIDP_KEYBOARD_MODIFIER_STATE,
-    anonymous : Anonymous_e__Union_ do
+  struct HIDP_DATA
+    property data_index : UInt16
+    property reserved : UInt16
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      ul : UInt32 do
+    struct Anonymous_e__Union_
+    property raw_value : UInt32
+    property on : Win32cr::Foundation::BOOLEAN
+    def initialize(@raw_value : UInt32, @on : Win32cr::Foundation::BOOLEAN)
+    end
+    end
+
+    def initialize(@data_index : UInt16, @reserved : UInt16, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct HIDP_UNKNOWN_TOKEN
+    property token : UInt8
+    property reserved : UInt8[3]
+    property bit_field : UInt32
+    def initialize(@token : UInt8, @reserved : UInt8[3], @bit_field : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct HIDP_EXTENDED_ATTRIBUTES
+    property num_global_unknowns : UInt8
+    property reserved : UInt8[3]
+    property global_unknowns : Win32cr::Devices::HumanInterfaceDevice::HIDP_UNKNOWN_TOKEN*
+    property data : UInt32*
+    def initialize(@num_global_unknowns : UInt8, @reserved : UInt8[3], @global_unknowns : Win32cr::Devices::HumanInterfaceDevice::HIDP_UNKNOWN_TOKEN*, @data : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct HIDP_BUTTON_ARRAY_DATA
+    property array_index : UInt16
+    property on : Win32cr::Foundation::BOOLEAN
+    def initialize(@array_index : UInt16, @on : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct HIDP_KEYBOARD_MODIFIER_STATE
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property ul : UInt32
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @ul : UInt32)
+    end
     end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record HIDD_CONFIGURATION,
-    cookie : Void*,
-    size : UInt32,
-    ring_buffer_size : UInt32
+  struct HIDD_CONFIGURATION
+    property cookie : Void*
+    property size : UInt32
+    property ring_buffer_size : UInt32
+    def initialize(@cookie : Void*, @size : UInt32, @ring_buffer_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record HIDD_ATTRIBUTES,
-    size : UInt32,
-    vendor_id : UInt16,
-    product_id : UInt16,
-    version_number : UInt16
+  struct HIDD_ATTRIBUTES
+    property size : UInt32
+    property vendor_id : UInt16
+    property product_id : UInt16
+    property version_number : UInt16
+    def initialize(@size : UInt32, @vendor_id : UInt16, @product_id : UInt16, @version_number : UInt16)
+    end
+  end
 
   @[Extern]
-  record HID_XFER_PACKET,
-    reportBuffer : UInt8*,
-    reportBufferLen : UInt32,
-    reportId : UInt8
+  struct HID_XFER_PACKET
+    property reportBuffer : UInt8*
+    property reportBufferLen : UInt32
+    property reportId : UInt8
+    def initialize(@reportBuffer : UInt8*, @reportBufferLen : UInt32, @reportId : UInt8)
+    end
+  end
 
   @[Extern]
-  record HID_COLLECTION_INFORMATION,
-    descriptor_size : UInt32,
-    polled : Win32cr::Foundation::BOOLEAN,
-    reserved1 : UInt8*,
-    vendor_id : UInt16,
-    product_id : UInt16,
-    version_number : UInt16
+  struct HID_COLLECTION_INFORMATION
+    property descriptor_size : UInt32
+    property polled : Win32cr::Foundation::BOOLEAN
+    property reserved1 : UInt8*
+    property vendor_id : UInt16
+    property product_id : UInt16
+    property version_number : UInt16
+    def initialize(@descriptor_size : UInt32, @polled : Win32cr::Foundation::BOOLEAN, @reserved1 : UInt8*, @vendor_id : UInt16, @product_id : UInt16, @version_number : UInt16)
+    end
+  end
 
   @[Extern]
-  record HID_DRIVER_CONFIG,
-    size : UInt32,
-    ring_buffer_size : UInt32
+  struct HID_DRIVER_CONFIG
+    property size : UInt32
+    property ring_buffer_size : UInt32
+    def initialize(@size : UInt32, @ring_buffer_size : UInt32)
+    end
+  end
 
   @[Extern]
-  record INPUT_BUTTON_ENABLE_INFO,
-    button_type : Win32cr::Devices::HumanInterfaceDevice::GPIOBUTTONS_BUTTON_TYPE,
-    enabled : Win32cr::Foundation::BOOLEAN
+  struct INPUT_BUTTON_ENABLE_INFO
+    property button_type : Win32cr::Devices::HumanInterfaceDevice::GPIOBUTTONS_BUTTON_TYPE
+    property enabled : Win32cr::Foundation::BOOLEAN
+    def initialize(@button_type : Win32cr::Devices::HumanInterfaceDevice::GPIOBUTTONS_BUTTON_TYPE, @enabled : Win32cr::Foundation::BOOLEAN)
+    end
+  end
 
   @[Extern]
   record IDirectInputEffectVtbl,
@@ -3549,7 +3887,6 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  #@[Com("e7e1f7c0-88d2-11d0-9ad0-00a0c9a06e35")]
   record IDirectInputEffect, lpVtbl : IDirectInputEffectVtbl* do
     GUID = LibC::GUID.new(0xe7e1f7c0_u32, 0x88d2_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0xd0_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa0_u8, 0x6e_u8, 0x35_u8])
     def query_interface(this : IDirectInputEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3617,7 +3954,6 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  #@[Com("5944e681-c92e-11cf-bfc7-444553540000")]
   record IDirectInputDeviceW, lpVtbl : IDirectInputDeviceWVtbl* do
     GUID = LibC::GUID.new(0x5944e681_u32, 0xc92e_u16, 0x11cf_u16, StaticArray[0xbf_u8, 0xc7_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IDirectInputDeviceW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3700,7 +4036,6 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  #@[Com("5944e680-c92e-11cf-bfc7-444553540000")]
   record IDirectInputDeviceA, lpVtbl : IDirectInputDeviceAVtbl* do
     GUID = LibC::GUID.new(0x5944e680_u32, 0xc92e_u16, 0x11cf_u16, StaticArray[0xbf_u8, 0xc7_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IDirectInputDeviceA*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3792,7 +4127,6 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  #@[Com("5944e683-c92e-11cf-bfc7-444553540000")]
   record IDirectInputDevice2W, lpVtbl : IDirectInputDevice2WVtbl* do
     GUID = LibC::GUID.new(0x5944e683_u32, 0xc92e_u16, 0x11cf_u16, StaticArray[0xbf_u8, 0xc7_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IDirectInputDevice2W*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -3911,7 +4245,6 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  #@[Com("5944e682-c92e-11cf-bfc7-444553540000")]
   record IDirectInputDevice2A, lpVtbl : IDirectInputDevice2AVtbl* do
     GUID = LibC::GUID.new(0x5944e682_u32, 0xc92e_u16, 0x11cf_u16, StaticArray[0xbf_u8, 0xc7_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IDirectInputDevice2A*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4032,7 +4365,6 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  #@[Com("57d7c6bd-2356-11d3-8e9d-00c04f6844ae")]
   record IDirectInputDevice7W, lpVtbl : IDirectInputDevice7WVtbl* do
     GUID = LibC::GUID.new(0x57d7c6bd_u32, 0x2356_u16, 0x11d3_u16, StaticArray[0x8e_u8, 0x9d_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x68_u8, 0x44_u8, 0xae_u8])
     def query_interface(this : IDirectInputDevice7W*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4159,7 +4491,6 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  #@[Com("57d7c6bc-2356-11d3-8e9d-00c04f6844ae")]
   record IDirectInputDevice7A, lpVtbl : IDirectInputDevice7AVtbl* do
     GUID = LibC::GUID.new(0x57d7c6bc_u32, 0x2356_u16, 0x11d3_u16, StaticArray[0x8e_u8, 0x9d_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x68_u8, 0x44_u8, 0xae_u8])
     def query_interface(this : IDirectInputDevice7A*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4289,7 +4620,6 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  #@[Com("54d41081-dc15-4833-a41b-748f73a38179")]
   record IDirectInputDevice8W, lpVtbl : IDirectInputDevice8WVtbl* do
     GUID = LibC::GUID.new(0x54d41081_u32, 0xdc15_u16, 0x4833_u16, StaticArray[0xa4_u8, 0x1b_u8, 0x74_u8, 0x8f_u8, 0x73_u8, 0xa3_u8, 0x81_u8, 0x79_u8])
     def query_interface(this : IDirectInputDevice8W*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4428,7 +4758,6 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  #@[Com("54d41080-dc15-4833-a41b-748f73a38179")]
   record IDirectInputDevice8A, lpVtbl : IDirectInputDevice8AVtbl* do
     GUID = LibC::GUID.new(0x54d41080_u32, 0xdc15_u16, 0x4833_u16, StaticArray[0xa4_u8, 0x1b_u8, 0x74_u8, 0x8f_u8, 0x73_u8, 0xa3_u8, 0x81_u8, 0x79_u8])
     def query_interface(this : IDirectInputDevice8A*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4543,7 +4872,6 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  #@[Com("89521361-aa8a-11cf-bfc7-444553540000")]
   record IDirectInputW, lpVtbl : IDirectInputWVtbl* do
     GUID = LibC::GUID.new(0x89521361_u32, 0xaa8a_u16, 0x11cf_u16, StaticArray[0xbf_u8, 0xc7_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IDirectInputW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4586,7 +4914,6 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  #@[Com("89521360-aa8a-11cf-bfc7-444553540000")]
   record IDirectInputA, lpVtbl : IDirectInputAVtbl* do
     GUID = LibC::GUID.new(0x89521360_u32, 0xaa8a_u16, 0x11cf_u16, StaticArray[0xbf_u8, 0xc7_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IDirectInputA*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4630,7 +4957,6 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  #@[Com("5944e663-aa8a-11cf-bfc7-444553540000")]
   record IDirectInput2W, lpVtbl : IDirectInput2WVtbl* do
     GUID = LibC::GUID.new(0x5944e663_u32, 0xaa8a_u16, 0x11cf_u16, StaticArray[0xbf_u8, 0xc7_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IDirectInput2W*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4677,7 +5003,6 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  #@[Com("5944e662-aa8a-11cf-bfc7-444553540000")]
   record IDirectInput2A, lpVtbl : IDirectInput2AVtbl* do
     GUID = LibC::GUID.new(0x5944e662_u32, 0xaa8a_u16, 0x11cf_u16, StaticArray[0xbf_u8, 0xc7_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IDirectInput2A*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4725,7 +5050,6 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  #@[Com("9a4cb685-236d-11d3-8e9d-00c04f6844ae")]
   record IDirectInput7W, lpVtbl : IDirectInput7WVtbl* do
     GUID = LibC::GUID.new(0x9a4cb685_u32, 0x236d_u16, 0x11d3_u16, StaticArray[0x8e_u8, 0x9d_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x68_u8, 0x44_u8, 0xae_u8])
     def query_interface(this : IDirectInput7W*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4776,7 +5100,6 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  #@[Com("9a4cb684-236d-11d3-8e9d-00c04f6844ae")]
   record IDirectInput7A, lpVtbl : IDirectInput7AVtbl* do
     GUID = LibC::GUID.new(0x9a4cb684_u32, 0x236d_u16, 0x11d3_u16, StaticArray[0x8e_u8, 0x9d_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x68_u8, 0x44_u8, 0xae_u8])
     def query_interface(this : IDirectInput7A*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4828,7 +5151,6 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  #@[Com("bf798031-483a-4da2-aa99-5d64ed369700")]
   record IDirectInput8W, lpVtbl : IDirectInput8WVtbl* do
     GUID = LibC::GUID.new(0xbf798031_u32, 0x483a_u16, 0x4da2_u16, StaticArray[0xaa_u8, 0x99_u8, 0x5d_u8, 0x64_u8, 0xed_u8, 0x36_u8, 0x97_u8, 0x0_u8])
     def query_interface(this : IDirectInput8W*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4883,7 +5205,6 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  #@[Com("bf798030-483a-4da2-aa99-5d64ed369700")]
   record IDirectInput8A, lpVtbl : IDirectInput8AVtbl* do
     GUID = LibC::GUID.new(0xbf798030_u32, 0x483a_u16, 0x4da2_u16, StaticArray[0xaa_u8, 0x99_u8, 0x5d_u8, 0x64_u8, 0xed_u8, 0x36_u8, 0x97_u8, 0x0_u8])
     def query_interface(this : IDirectInput8A*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -4941,7 +5262,6 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  #@[Com("02538130-898f-11d0-9ad0-00a0c9a06e35")]
   record IDirectInputEffectDriver, lpVtbl : IDirectInputEffectDriverVtbl* do
     GUID = LibC::GUID.new(0x2538130_u32, 0x898f_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0xd0_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa0_u8, 0x6e_u8, 0x35_u8])
     def query_interface(this : IDirectInputEffectDriver*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5013,7 +5333,6 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  #@[Com("1de12ab1-c9f5-11cf-bfc7-444553540000")]
   record IDirectInputJoyConfig, lpVtbl : IDirectInputJoyConfigVtbl* do
     GUID = LibC::GUID.new(0x1de12ab1_u32, 0xc9f5_u16, 0x11cf_u16, StaticArray[0xbf_u8, 0xc7_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IDirectInputJoyConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -5100,7 +5419,6 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  #@[Com("eb0d7dfa-1990-4f27-b4d6-edf2eec4a44c")]
   record IDirectInputJoyConfig8, lpVtbl : IDirectInputJoyConfig8Vtbl* do
     GUID = LibC::GUID.new(0xeb0d7dfa_u32, 0x1990_u16, 0x4f27_u16, StaticArray[0xb4_u8, 0xd6_u8, 0xed_u8, 0xf2_u8, 0xee_u8, 0xc4_u8, 0xa4_u8, 0x4c_u8])
     def query_interface(this : IDirectInputJoyConfig8*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

@@ -2,17 +2,17 @@ require "./../system/com.cr"
 require "./../foundation.cr"
 
 module Win32cr::NetworkManagement::NetworkPolicyServer
-  alias PRADIUS_EXTENSION_INIT = Proc(UInt32)*
+  alias PRADIUS_EXTENSION_INIT = Proc(UInt32)
 
-  alias PRADIUS_EXTENSION_TERM = Proc(Void)*
+  alias PRADIUS_EXTENSION_TERM = Proc(Void)
 
-  alias PRADIUS_EXTENSION_PROCESS = Proc(Win32cr::NetworkManagement::NetworkPolicyServer::RADIUS_ATTRIBUTE*, Win32cr::NetworkManagement::NetworkPolicyServer::RADIUS_ACTION*, UInt32)*
+  alias PRADIUS_EXTENSION_PROCESS = Proc(Win32cr::NetworkManagement::NetworkPolicyServer::RADIUS_ATTRIBUTE*, Win32cr::NetworkManagement::NetworkPolicyServer::RADIUS_ACTION*, UInt32)
 
-  alias PRADIUS_EXTENSION_PROCESS_EX = Proc(Win32cr::NetworkManagement::NetworkPolicyServer::RADIUS_ATTRIBUTE*, Win32cr::NetworkManagement::NetworkPolicyServer::RADIUS_ATTRIBUTE**, Win32cr::NetworkManagement::NetworkPolicyServer::RADIUS_ACTION*, UInt32)*
+  alias PRADIUS_EXTENSION_PROCESS_EX = Proc(Win32cr::NetworkManagement::NetworkPolicyServer::RADIUS_ATTRIBUTE*, Win32cr::NetworkManagement::NetworkPolicyServer::RADIUS_ATTRIBUTE**, Win32cr::NetworkManagement::NetworkPolicyServer::RADIUS_ACTION*, UInt32)
 
-  alias PRADIUS_EXTENSION_FREE_ATTRIBUTES = Proc(Win32cr::NetworkManagement::NetworkPolicyServer::RADIUS_ATTRIBUTE*, Void)*
+  alias PRADIUS_EXTENSION_FREE_ATTRIBUTES = Proc(Win32cr::NetworkManagement::NetworkPolicyServer::RADIUS_ATTRIBUTE*, Void)
 
-  alias PRADIUS_EXTENSION_PROCESS_2 = Proc(Win32cr::NetworkManagement::NetworkPolicyServer::RADIUS_EXTENSION_CONTROL_BLOCK*, UInt32)*
+  alias PRADIUS_EXTENSION_PROCESS_2 = Proc(Win32cr::NetworkManagement::NetworkPolicyServer::RADIUS_EXTENSION_CONTROL_BLOCK*, UInt32)
 
   RADIUS_EXTENSION_INIT = "RadiusExtensionInit"
   RADIUS_EXTENSION_TERM = "RadiusExtensionTerm"
@@ -698,47 +698,61 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
   end
 
   @[Extern]
-  record RADIUS_ATTRIBUTE,
-    dwAttrType : UInt32,
-    fDataType : Win32cr::NetworkManagement::NetworkPolicyServer::RADIUS_DATA_TYPE,
-    cbDataLength : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct RADIUS_ATTRIBUTE
+    property dwAttrType : UInt32
+    property fDataType : Win32cr::NetworkManagement::NetworkPolicyServer::RADIUS_DATA_TYPE
+    property cbDataLength : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      dwValue : UInt32,
-      lpValue : UInt8*
+    struct Anonymous_e__Union_
+    property dwValue : UInt32
+    property lpValue : UInt8*
+    def initialize(@dwValue : UInt32, @lpValue : UInt8*)
+    end
+    end
 
+    def initialize(@dwAttrType : UInt32, @fDataType : Win32cr::NetworkManagement::NetworkPolicyServer::RADIUS_DATA_TYPE, @cbDataLength : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record RADIUS_VSA_FORMAT,
-    vendor_id : UInt8[4],
-    vendor_type : UInt8,
-    vendor_length : UInt8,
-    attribute_specific : UInt8*
+  struct RADIUS_VSA_FORMAT
+    property vendor_id : UInt8[4]
+    property vendor_type : UInt8
+    property vendor_length : UInt8
+    property attribute_specific : UInt8*
+    def initialize(@vendor_id : UInt8[4], @vendor_type : UInt8, @vendor_length : UInt8, @attribute_specific : UInt8*)
+    end
+  end
 
   @[Extern]
-  record RADIUS_ATTRIBUTE_ARRAY,
-    cbSize : UInt32,
-    add : LibC::IntPtrT,
-    attribute_at : LibC::IntPtrT,
-    get_size : LibC::IntPtrT,
-    insert_at : LibC::IntPtrT,
-    remove_at : LibC::IntPtrT,
-    set_at : LibC::IntPtrT
+  struct RADIUS_ATTRIBUTE_ARRAY
+    property cbSize : UInt32
+    property add : LibC::IntPtrT
+    property attribute_at : LibC::IntPtrT
+    property get_size : LibC::IntPtrT
+    property insert_at : LibC::IntPtrT
+    property remove_at : LibC::IntPtrT
+    property set_at : LibC::IntPtrT
+    def initialize(@cbSize : UInt32, @add : LibC::IntPtrT, @attribute_at : LibC::IntPtrT, @get_size : LibC::IntPtrT, @insert_at : LibC::IntPtrT, @remove_at : LibC::IntPtrT, @set_at : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
-  record RADIUS_EXTENSION_CONTROL_BLOCK,
-    cbSize : UInt32,
-    dwVersion : UInt32,
-    repPoint : Win32cr::NetworkManagement::NetworkPolicyServer::RADIUS_EXTENSION_POINT,
-    rcRequestType : Win32cr::NetworkManagement::NetworkPolicyServer::RADIUS_CODE,
-    rcResponseType : Win32cr::NetworkManagement::NetworkPolicyServer::RADIUS_CODE,
-    get_request : LibC::IntPtrT,
-    get_response : LibC::IntPtrT,
-    set_response_type : LibC::IntPtrT
+  struct RADIUS_EXTENSION_CONTROL_BLOCK
+    property cbSize : UInt32
+    property dwVersion : UInt32
+    property repPoint : Win32cr::NetworkManagement::NetworkPolicyServer::RADIUS_EXTENSION_POINT
+    property rcRequestType : Win32cr::NetworkManagement::NetworkPolicyServer::RADIUS_CODE
+    property rcResponseType : Win32cr::NetworkManagement::NetworkPolicyServer::RADIUS_CODE
+    property get_request : LibC::IntPtrT
+    property get_response : LibC::IntPtrT
+    property set_response_type : LibC::IntPtrT
+    def initialize(@cbSize : UInt32, @dwVersion : UInt32, @repPoint : Win32cr::NetworkManagement::NetworkPolicyServer::RADIUS_EXTENSION_POINT, @rcRequestType : Win32cr::NetworkManagement::NetworkPolicyServer::RADIUS_CODE, @rcResponseType : Win32cr::NetworkManagement::NetworkPolicyServer::RADIUS_CODE, @get_request : LibC::IntPtrT, @get_response : LibC::IntPtrT, @set_response_type : LibC::IntPtrT)
+    end
+  end
 
   @[Extern]
   record ISdoMachineVtbl,
@@ -761,7 +775,6 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
 
 
   @[Extern]
-  #@[Com("479f6e75-49a2-11d2-8eca-00c04fc2f519")]
   record ISdoMachine, lpVtbl : ISdoMachineVtbl* do
     GUID = LibC::GUID.new(0x479f6e75_u32, 0x49a2_u16, 0x11d2_u16, StaticArray[0x8e_u8, 0xca_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xf5_u8, 0x19_u8])
     def query_interface(this : ISdoMachine*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -841,7 +854,6 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
 
 
   @[Extern]
-  #@[Com("518e5ffe-d8ce-4f7e-a5db-b40a35419d3b")]
   record ISdoMachine2, lpVtbl : ISdoMachine2Vtbl* do
     GUID = LibC::GUID.new(0x518e5ffe_u32, 0xd8ce_u16, 0x4f7e_u16, StaticArray[0xa5_u8, 0xdb_u8, 0xb4_u8, 0xa_u8, 0x35_u8, 0x41_u8, 0x9d_u8, 0x3b_u8])
     def query_interface(this : ISdoMachine2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -926,7 +938,6 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
 
 
   @[Extern]
-  #@[Com("479f6e74-49a2-11d2-8eca-00c04fc2f519")]
   record ISdoServiceControl, lpVtbl : ISdoServiceControlVtbl* do
     GUID = LibC::GUID.new(0x479f6e74_u32, 0x49a2_u16, 0x11d2_u16, StaticArray[0x8e_u8, 0xca_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xf5_u8, 0x19_u8])
     def query_interface(this : ISdoServiceControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -984,7 +995,6 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
 
 
   @[Extern]
-  #@[Com("56bc53de-96db-11d1-bf3f-000000000000")]
   record ISdo, lpVtbl : ISdoVtbl* do
     GUID = LibC::GUID.new(0x56bc53de_u32, 0x96db_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x3f_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : ISdo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1052,7 +1062,6 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
 
 
   @[Extern]
-  #@[Com("56bc53e2-96db-11d1-bf3f-000000000000")]
   record ISdoCollection, lpVtbl : ISdoCollectionVtbl* do
     GUID = LibC::GUID.new(0x56bc53e2_u32, 0x96db_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x3f_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : ISdoCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1125,7 +1134,6 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
 
 
   @[Extern]
-  #@[Com("8aa85302-d2e2-4e20-8b1f-a571e437d6c9")]
   record ITemplateSdo, lpVtbl : ITemplateSdoVtbl* do
     GUID = LibC::GUID.new(0x8aa85302_u32, 0xd2e2_u16, 0x4e20_u16, StaticArray[0x8b_u8, 0x1f_u8, 0xa5_u8, 0x71_u8, 0xe4_u8, 0x37_u8, 0xd6_u8, 0xc9_u8])
     def query_interface(this : ITemplateSdo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1199,7 +1207,6 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
 
 
   @[Extern]
-  #@[Com("d432e5f4-53d8-11d2-9a3a-00c04fb998ac")]
   record ISdoDictionaryOld, lpVtbl : ISdoDictionaryOldVtbl* do
     GUID = LibC::GUID.new(0xd432e5f4_u32, 0x53d8_u16, 0x11d2_u16, StaticArray[0x9a_u8, 0x3a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x98_u8, 0xac_u8])
     def query_interface(this : ISdoDictionaryOld*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

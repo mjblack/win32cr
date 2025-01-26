@@ -10,33 +10,33 @@ module Win32cr::System::Threading
   alias NamespaceHandle = LibC::IntPtrT
   alias BoundaryDescriptorHandle = LibC::IntPtrT
   alias LPPROC_THREAD_ATTRIBUTE_LIST = Void*
-  alias LPTHREAD_START_ROUTINE = Proc(Void*, UInt32)*
+  alias LPTHREAD_START_ROUTINE = Proc(Void*, UInt32)
 
-  alias PINIT_ONCE_FN = Proc(Win32cr::System::Threading::RTL_RUN_ONCE*, Void*, Void**, Win32cr::Foundation::BOOL)*
+  alias PINIT_ONCE_FN = Proc(Win32cr::System::Threading::RTL_RUN_ONCE*, Void*, Void**, Win32cr::Foundation::BOOL)
 
-  alias PTIMERAPCROUTINE = Proc(Void*, UInt32, UInt32, Void)*
+  alias PTIMERAPCROUTINE = Proc(Void*, UInt32, UInt32, Void)
 
-  alias PTP_WIN32_IO_CALLBACK = Proc(Win32cr::System::Threading::TP_CALLBACK_INSTANCE*, Void*, Void*, UInt32, LibC::UIntPtrT, Win32cr::System::Threading::TP_IO*, Void)*
+  alias PTP_WIN32_IO_CALLBACK = Proc(Win32cr::System::Threading::TP_CALLBACK_INSTANCE*, Void*, Void*, UInt32, LibC::UIntPtrT, Win32cr::System::Threading::TP_IO*, Void)
 
-  alias PRTL_UMS_SCHEDULER_ENTRY_POINT = Proc(Win32cr::System::SystemServices::RTL_UMS_SCHEDULER_REASON, LibC::UIntPtrT, Void*, Void)*
+  alias PRTL_UMS_SCHEDULER_ENTRY_POINT = Proc(Win32cr::System::SystemServices::RTL_UMS_SCHEDULER_REASON, LibC::UIntPtrT, Void*, Void)
 
-  alias WAITORTIMERCALLBACK = Proc(Void*, Win32cr::Foundation::BOOLEAN, Void)*
+  alias WAITORTIMERCALLBACK = Proc(Void*, Win32cr::Foundation::BOOLEAN, Void)
 
-  alias PFLS_CALLBACK_FUNCTION = Proc(Void*, Void)*
+  alias PFLS_CALLBACK_FUNCTION = Proc(Void*, Void)
 
-  alias PTP_SIMPLE_CALLBACK = Proc(Win32cr::System::Threading::TP_CALLBACK_INSTANCE*, Void*, Void)*
+  alias PTP_SIMPLE_CALLBACK = Proc(Win32cr::System::Threading::TP_CALLBACK_INSTANCE*, Void*, Void)
 
-  alias PTP_CLEANUP_GROUP_CANCEL_CALLBACK = Proc(Void*, Void*, Void)*
+  alias PTP_CLEANUP_GROUP_CANCEL_CALLBACK = Proc(Void*, Void*, Void)
 
-  alias PTP_WORK_CALLBACK = Proc(Win32cr::System::Threading::TP_CALLBACK_INSTANCE*, Void*, Win32cr::System::Threading::TP_WORK*, Void)*
+  alias PTP_WORK_CALLBACK = Proc(Win32cr::System::Threading::TP_CALLBACK_INSTANCE*, Void*, Win32cr::System::Threading::TP_WORK*, Void)
 
-  alias PTP_TIMER_CALLBACK = Proc(Win32cr::System::Threading::TP_CALLBACK_INSTANCE*, Void*, Win32cr::System::Threading::TP_TIMER*, Void)*
+  alias PTP_TIMER_CALLBACK = Proc(Win32cr::System::Threading::TP_CALLBACK_INSTANCE*, Void*, Win32cr::System::Threading::TP_TIMER*, Void)
 
-  alias PTP_WAIT_CALLBACK = Proc(Win32cr::System::Threading::TP_CALLBACK_INSTANCE*, Void*, Win32cr::System::Threading::TP_WAIT*, UInt32, Void)*
+  alias PTP_WAIT_CALLBACK = Proc(Win32cr::System::Threading::TP_CALLBACK_INSTANCE*, Void*, Win32cr::System::Threading::TP_WAIT*, UInt32, Void)
 
-  alias LPFIBER_START_ROUTINE = Proc(Void*, Void)*
+  alias LPFIBER_START_ROUTINE = Proc(Void*, Void)
 
-  alias PPS_POST_PROCESS_INIT_ROUTINE = Proc(Void)*
+  alias PPS_POST_PROCESS_INIT_ROUTINE = Proc(Void)
 
   PRIVATE_NAMESPACE_FLAG_DESTROY = 1_u32
   PROC_THREAD_ATTRIBUTE_REPLACE_VALUE = 1_u32
@@ -420,329 +420,463 @@ module Win32cr::System::Threading
   end
 
   @[Extern]
-  record TP_CALLBACK_INSTANCE
-  @[Extern]
-  record TP_WORK
-  @[Extern]
-  record TP_TIMER
-  @[Extern]
-  record TP_WAIT
-  @[Extern]
-  record TP_IO
-  @[Extern]
-  record REASON_CONTEXT,
-    version : UInt32,
-    flags : Win32cr::System::Threading::POWER_REQUEST_CONTEXT_FLAGS,
-    reason : Reason_e__Union_ do
-
-    # Nested Type Reason_e__Union_
-    @[Extern(union: true)]
-    record Reason_e__Union_,
-      detailed : Detailed_e__Struct_,
-      simple_reason_string : Win32cr::Foundation::PWSTR do
-
-      # Nested Type Detailed_e__Struct_
-      @[Extern]
-      record Detailed_e__Struct_,
-        localized_reason_module : Win32cr::Foundation::HINSTANCE,
-        localized_reason_id : UInt32,
-        reason_string_count : UInt32,
-        reason_strings : Win32cr::Foundation::PWSTR*
-
+  struct TP_CALLBACK_INSTANCE
+    def initialize()
     end
-
   end
 
   @[Extern]
-  record PROCESS_INFORMATION,
-    hProcess : Win32cr::Foundation::HANDLE,
-    hThread : Win32cr::Foundation::HANDLE,
-    dwProcessId : UInt32,
-    dwThreadId : UInt32
+  struct TP_WORK
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record STARTUPINFOA,
-    cb : UInt32,
-    lpReserved : Win32cr::Foundation::PSTR,
-    lpDesktop : Win32cr::Foundation::PSTR,
-    lpTitle : Win32cr::Foundation::PSTR,
-    dwX : UInt32,
-    dwY : UInt32,
-    dwXSize : UInt32,
-    dwYSize : UInt32,
-    dwXCountChars : UInt32,
-    dwYCountChars : UInt32,
-    dwFillAttribute : UInt32,
-    dwFlags : Win32cr::System::Threading::STARTUPINFOW_FLAGS,
-    wShowWindow : UInt16,
-    cbReserved2 : UInt16,
-    lpReserved2 : UInt8*,
-    hStdInput : Win32cr::Foundation::HANDLE,
-    hStdOutput : Win32cr::Foundation::HANDLE,
-    hStdError : Win32cr::Foundation::HANDLE
+  struct TP_TIMER
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record STARTUPINFOW,
-    cb : UInt32,
-    lpReserved : Win32cr::Foundation::PWSTR,
-    lpDesktop : Win32cr::Foundation::PWSTR,
-    lpTitle : Win32cr::Foundation::PWSTR,
-    dwX : UInt32,
-    dwY : UInt32,
-    dwXSize : UInt32,
-    dwYSize : UInt32,
-    dwXCountChars : UInt32,
-    dwYCountChars : UInt32,
-    dwFillAttribute : UInt32,
-    dwFlags : Win32cr::System::Threading::STARTUPINFOW_FLAGS,
-    wShowWindow : UInt16,
-    cbReserved2 : UInt16,
-    lpReserved2 : UInt8*,
-    hStdInput : Win32cr::Foundation::HANDLE,
-    hStdOutput : Win32cr::Foundation::HANDLE,
-    hStdError : Win32cr::Foundation::HANDLE
+  struct TP_WAIT
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record MEMORY_PRIORITY_INFORMATION,
-    memory_priority : Win32cr::System::Threading::MEMORY_PRIORITY
+  struct TP_IO
+    def initialize()
+    end
+  end
 
   @[Extern]
-  record THREAD_POWER_THROTTLING_STATE,
-    version : UInt32,
-    control_mask : UInt32,
-    state_mask : UInt32
+  struct REASON_CONTEXT
+    property version : UInt32
+    property flags : Win32cr::System::Threading::POWER_REQUEST_CONTEXT_FLAGS
+    property reason : Reason_e__Union_
+
+    # Nested Type Reason_e__Union_
+    @[Extern(union: true)]
+    struct Reason_e__Union_
+    property detailed : Detailed_e__Struct_
+    property simple_reason_string : Win32cr::Foundation::PWSTR
+
+      # Nested Type Detailed_e__Struct_
+      @[Extern]
+      struct Detailed_e__Struct_
+    property localized_reason_module : Win32cr::Foundation::HINSTANCE
+    property localized_reason_id : UInt32
+    property reason_string_count : UInt32
+    property reason_strings : Win32cr::Foundation::PWSTR*
+    def initialize(@localized_reason_module : Win32cr::Foundation::HINSTANCE, @localized_reason_id : UInt32, @reason_string_count : UInt32, @reason_strings : Win32cr::Foundation::PWSTR*)
+    end
+      end
+
+    def initialize(@detailed : Detailed_e__Struct_, @simple_reason_string : Win32cr::Foundation::PWSTR)
+    end
+    end
+
+    def initialize(@version : UInt32, @flags : Win32cr::System::Threading::POWER_REQUEST_CONTEXT_FLAGS, @reason : Reason_e__Union_)
+    end
+  end
 
   @[Extern]
-  record APP_MEMORY_INFORMATION,
-    available_commit : UInt64,
-    private_commit_usage : UInt64,
-    peak_private_commit_usage : UInt64,
-    total_commit_usage : UInt64
+  struct PROCESS_INFORMATION
+    property hProcess : Win32cr::Foundation::HANDLE
+    property hThread : Win32cr::Foundation::HANDLE
+    property dwProcessId : UInt32
+    property dwThreadId : UInt32
+    def initialize(@hProcess : Win32cr::Foundation::HANDLE, @hThread : Win32cr::Foundation::HANDLE, @dwProcessId : UInt32, @dwThreadId : UInt32)
+    end
+  end
 
   @[Extern]
-  record PROCESS_MACHINE_INFORMATION,
-    process_machine : Win32cr::System::SystemInformation::IMAGE_FILE_MACHINE,
-    res0 : UInt16,
-    machine_attributes : Win32cr::System::Threading::MACHINE_ATTRIBUTES
+  struct STARTUPINFOA
+    property cb : UInt32
+    property lpReserved : Win32cr::Foundation::PSTR
+    property lpDesktop : Win32cr::Foundation::PSTR
+    property lpTitle : Win32cr::Foundation::PSTR
+    property dwX : UInt32
+    property dwY : UInt32
+    property dwXSize : UInt32
+    property dwYSize : UInt32
+    property dwXCountChars : UInt32
+    property dwYCountChars : UInt32
+    property dwFillAttribute : UInt32
+    property dwFlags : Win32cr::System::Threading::STARTUPINFOW_FLAGS
+    property wShowWindow : UInt16
+    property cbReserved2 : UInt16
+    property lpReserved2 : UInt8*
+    property hStdInput : Win32cr::Foundation::HANDLE
+    property hStdOutput : Win32cr::Foundation::HANDLE
+    property hStdError : Win32cr::Foundation::HANDLE
+    def initialize(@cb : UInt32, @lpReserved : Win32cr::Foundation::PSTR, @lpDesktop : Win32cr::Foundation::PSTR, @lpTitle : Win32cr::Foundation::PSTR, @dwX : UInt32, @dwY : UInt32, @dwXSize : UInt32, @dwYSize : UInt32, @dwXCountChars : UInt32, @dwYCountChars : UInt32, @dwFillAttribute : UInt32, @dwFlags : Win32cr::System::Threading::STARTUPINFOW_FLAGS, @wShowWindow : UInt16, @cbReserved2 : UInt16, @lpReserved2 : UInt8*, @hStdInput : Win32cr::Foundation::HANDLE, @hStdOutput : Win32cr::Foundation::HANDLE, @hStdError : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record PROCESS_MEMORY_EXHAUSTION_INFO,
-    version : UInt16,
-    reserved : UInt16,
-    type__ : Win32cr::System::Threading::PROCESS_MEMORY_EXHAUSTION_TYPE,
-    value : LibC::UIntPtrT
+  struct STARTUPINFOW
+    property cb : UInt32
+    property lpReserved : Win32cr::Foundation::PWSTR
+    property lpDesktop : Win32cr::Foundation::PWSTR
+    property lpTitle : Win32cr::Foundation::PWSTR
+    property dwX : UInt32
+    property dwY : UInt32
+    property dwXSize : UInt32
+    property dwYSize : UInt32
+    property dwXCountChars : UInt32
+    property dwYCountChars : UInt32
+    property dwFillAttribute : UInt32
+    property dwFlags : Win32cr::System::Threading::STARTUPINFOW_FLAGS
+    property wShowWindow : UInt16
+    property cbReserved2 : UInt16
+    property lpReserved2 : UInt8*
+    property hStdInput : Win32cr::Foundation::HANDLE
+    property hStdOutput : Win32cr::Foundation::HANDLE
+    property hStdError : Win32cr::Foundation::HANDLE
+    def initialize(@cb : UInt32, @lpReserved : Win32cr::Foundation::PWSTR, @lpDesktop : Win32cr::Foundation::PWSTR, @lpTitle : Win32cr::Foundation::PWSTR, @dwX : UInt32, @dwY : UInt32, @dwXSize : UInt32, @dwYSize : UInt32, @dwXCountChars : UInt32, @dwYCountChars : UInt32, @dwFillAttribute : UInt32, @dwFlags : Win32cr::System::Threading::STARTUPINFOW_FLAGS, @wShowWindow : UInt16, @cbReserved2 : UInt16, @lpReserved2 : UInt8*, @hStdInput : Win32cr::Foundation::HANDLE, @hStdOutput : Win32cr::Foundation::HANDLE, @hStdError : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record PROCESS_POWER_THROTTLING_STATE,
-    version : UInt32,
-    control_mask : UInt32,
-    state_mask : UInt32
+  struct MEMORY_PRIORITY_INFORMATION
+    property memory_priority : Win32cr::System::Threading::MEMORY_PRIORITY
+    def initialize(@memory_priority : Win32cr::System::Threading::MEMORY_PRIORITY)
+    end
+  end
 
   @[Extern]
-  record PROCESS_PROTECTION_LEVEL_INFORMATION,
-    protection_level : Win32cr::System::Threading::PROCESS_PROTECTION_LEVEL
+  struct THREAD_POWER_THROTTLING_STATE
+    property version : UInt32
+    property control_mask : UInt32
+    property state_mask : UInt32
+    def initialize(@version : UInt32, @control_mask : UInt32, @state_mask : UInt32)
+    end
+  end
 
   @[Extern]
-  record PROCESS_LEAP_SECOND_INFO,
-    flags : UInt32,
-    reserved : UInt32
+  struct APP_MEMORY_INFORMATION
+    property available_commit : UInt64
+    property private_commit_usage : UInt64
+    property peak_private_commit_usage : UInt64
+    property total_commit_usage : UInt64
+    def initialize(@available_commit : UInt64, @private_commit_usage : UInt64, @peak_private_commit_usage : UInt64, @total_commit_usage : UInt64)
+    end
+  end
 
   @[Extern]
-  record PROCESS_DYNAMIC_EH_CONTINUATION_TARGET,
-    target_address : LibC::UIntPtrT,
-    flags : LibC::UIntPtrT
+  struct PROCESS_MACHINE_INFORMATION
+    property process_machine : Win32cr::System::SystemInformation::IMAGE_FILE_MACHINE
+    property res0 : UInt16
+    property machine_attributes : Win32cr::System::Threading::MACHINE_ATTRIBUTES
+    def initialize(@process_machine : Win32cr::System::SystemInformation::IMAGE_FILE_MACHINE, @res0 : UInt16, @machine_attributes : Win32cr::System::Threading::MACHINE_ATTRIBUTES)
+    end
+  end
 
   @[Extern]
-  record PROCESS_DYNAMIC_EH_CONTINUATION_TARGETS_INFORMATION,
-    number_of_targets : UInt16,
-    reserved : UInt16,
-    reserved2 : UInt32,
-    targets : Win32cr::System::Threading::PROCESS_DYNAMIC_EH_CONTINUATION_TARGET*
+  struct PROCESS_MEMORY_EXHAUSTION_INFO
+    property version : UInt16
+    property reserved : UInt16
+    property type__ : Win32cr::System::Threading::PROCESS_MEMORY_EXHAUSTION_TYPE
+    property value : LibC::UIntPtrT
+    def initialize(@version : UInt16, @reserved : UInt16, @type__ : Win32cr::System::Threading::PROCESS_MEMORY_EXHAUSTION_TYPE, @value : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGE,
-    base_address : LibC::UIntPtrT,
-    size : LibC::UIntPtrT,
-    flags : UInt32
+  struct PROCESS_POWER_THROTTLING_STATE
+    property version : UInt32
+    property control_mask : UInt32
+    property state_mask : UInt32
+    def initialize(@version : UInt32, @control_mask : UInt32, @state_mask : UInt32)
+    end
+  end
 
   @[Extern]
-  record PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGES_INFORMATION,
-    number_of_ranges : UInt16,
-    reserved : UInt16,
-    reserved2 : UInt32,
-    ranges : Win32cr::System::Threading::PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGE*
+  struct PROCESS_PROTECTION_LEVEL_INFORMATION
+    property protection_level : Win32cr::System::Threading::PROCESS_PROTECTION_LEVEL
+    def initialize(@protection_level : Win32cr::System::Threading::PROCESS_PROTECTION_LEVEL)
+    end
+  end
 
   @[Extern]
-  record IO_COUNTERS,
-    read_operation_count : UInt64,
-    write_operation_count : UInt64,
-    other_operation_count : UInt64,
-    read_transfer_count : UInt64,
-    write_transfer_count : UInt64,
-    other_transfer_count : UInt64
+  struct PROCESS_LEAP_SECOND_INFO
+    property flags : UInt32
+    property reserved : UInt32
+    def initialize(@flags : UInt32, @reserved : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PROCESS_DYNAMIC_EH_CONTINUATION_TARGET
+    property target_address : LibC::UIntPtrT
+    property flags : LibC::UIntPtrT
+    def initialize(@target_address : LibC::UIntPtrT, @flags : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct PROCESS_DYNAMIC_EH_CONTINUATION_TARGETS_INFORMATION
+    property number_of_targets : UInt16
+    property reserved : UInt16
+    property reserved2 : UInt32
+    property targets : Win32cr::System::Threading::PROCESS_DYNAMIC_EH_CONTINUATION_TARGET*
+    def initialize(@number_of_targets : UInt16, @reserved : UInt16, @reserved2 : UInt32, @targets : Win32cr::System::Threading::PROCESS_DYNAMIC_EH_CONTINUATION_TARGET*)
+    end
+  end
+
+  @[Extern]
+  struct PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGE
+    property base_address : LibC::UIntPtrT
+    property size : LibC::UIntPtrT
+    property flags : UInt32
+    def initialize(@base_address : LibC::UIntPtrT, @size : LibC::UIntPtrT, @flags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGES_INFORMATION
+    property number_of_ranges : UInt16
+    property reserved : UInt16
+    property reserved2 : UInt32
+    property ranges : Win32cr::System::Threading::PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGE*
+    def initialize(@number_of_ranges : UInt16, @reserved : UInt16, @reserved2 : UInt32, @ranges : Win32cr::System::Threading::PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGE*)
+    end
+  end
+
+  @[Extern]
+  struct IO_COUNTERS
+    property read_operation_count : UInt64
+    property write_operation_count : UInt64
+    property other_operation_count : UInt64
+    property read_transfer_count : UInt64
+    property write_transfer_count : UInt64
+    property other_transfer_count : UInt64
+    def initialize(@read_operation_count : UInt64, @write_operation_count : UInt64, @other_operation_count : UInt64, @read_transfer_count : UInt64, @write_transfer_count : UInt64, @other_transfer_count : UInt64)
+    end
+  end
 
   @[Extern(union: true)]
-  record RTL_RUN_ONCE,
-    ptr : Void*
+  struct RTL_RUN_ONCE
+    property ptr : Void*
+    def initialize(@ptr : Void*)
+    end
+  end
 
   @[Extern]
-  record RTL_BARRIER,
-    reserved1 : UInt32,
-    reserved2 : UInt32,
-    reserved3 : LibC::UIntPtrT[2],
-    reserved4 : UInt32,
-    reserved5 : UInt32
+  struct RTL_BARRIER
+    property reserved1 : UInt32
+    property reserved2 : UInt32
+    property reserved3 : LibC::UIntPtrT[2]
+    property reserved4 : UInt32
+    property reserved5 : UInt32
+    def initialize(@reserved1 : UInt32, @reserved2 : UInt32, @reserved3 : LibC::UIntPtrT[2], @reserved4 : UInt32, @reserved5 : UInt32)
+    end
+  end
 
   @[Extern]
-  record RTL_CRITICAL_SECTION_DEBUG,
-    type__ : UInt16,
-    creator_back_trace_index : UInt16,
-    critical_section : Win32cr::System::Threading::RTL_CRITICAL_SECTION*,
-    process_locks_list : Win32cr::System::Kernel::LIST_ENTRY,
-    entry_count : UInt32,
-    contention_count : UInt32,
-    flags : UInt32,
-    creator_back_trace_index_high : UInt16,
-    spare_word : UInt16
+  struct RTL_CRITICAL_SECTION_DEBUG
+    property type__ : UInt16
+    property creator_back_trace_index : UInt16
+    property critical_section : Win32cr::System::Threading::RTL_CRITICAL_SECTION*
+    property process_locks_list : Win32cr::System::Kernel::LIST_ENTRY
+    property entry_count : UInt32
+    property contention_count : UInt32
+    property flags : UInt32
+    property creator_back_trace_index_high : UInt16
+    property spare_word : UInt16
+    def initialize(@type__ : UInt16, @creator_back_trace_index : UInt16, @critical_section : Win32cr::System::Threading::RTL_CRITICAL_SECTION*, @process_locks_list : Win32cr::System::Kernel::LIST_ENTRY, @entry_count : UInt32, @contention_count : UInt32, @flags : UInt32, @creator_back_trace_index_high : UInt16, @spare_word : UInt16)
+    end
+  end
 
   @[Extern]
-  record RTL_CRITICAL_SECTION,
-    debug_info : Win32cr::System::Threading::RTL_CRITICAL_SECTION_DEBUG*,
-    lock_count : Int32,
-    recursion_count : Int32,
-    owning_thread : Win32cr::Foundation::HANDLE,
-    lock_semaphore : Win32cr::Foundation::HANDLE,
-    spin_count : LibC::UIntPtrT
+  struct RTL_CRITICAL_SECTION
+    property debug_info : Win32cr::System::Threading::RTL_CRITICAL_SECTION_DEBUG*
+    property lock_count : Int32
+    property recursion_count : Int32
+    property owning_thread : Win32cr::Foundation::HANDLE
+    property lock_semaphore : Win32cr::Foundation::HANDLE
+    property spin_count : LibC::UIntPtrT
+    def initialize(@debug_info : Win32cr::System::Threading::RTL_CRITICAL_SECTION_DEBUG*, @lock_count : Int32, @recursion_count : Int32, @owning_thread : Win32cr::Foundation::HANDLE, @lock_semaphore : Win32cr::Foundation::HANDLE, @spin_count : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record RTL_SRWLOCK,
-    ptr : Void*
+  struct RTL_SRWLOCK
+    property ptr : Void*
+    def initialize(@ptr : Void*)
+    end
+  end
 
   @[Extern]
-  record RTL_CONDITION_VARIABLE,
-    ptr : Void*
+  struct RTL_CONDITION_VARIABLE
+    property ptr : Void*
+    def initialize(@ptr : Void*)
+    end
+  end
 
   @[Extern]
-  record TP_POOL_STACK_INFORMATION,
-    stack_reserve : LibC::UIntPtrT,
-    stack_commit : LibC::UIntPtrT
+  struct TP_POOL_STACK_INFORMATION
+    property stack_reserve : LibC::UIntPtrT
+    property stack_commit : LibC::UIntPtrT
+    def initialize(@stack_reserve : LibC::UIntPtrT, @stack_commit : LibC::UIntPtrT)
+    end
+  end
 
   @[Extern]
-  record TP_CALLBACK_ENVIRON_V3,
-    version : UInt32,
-    pool : Win32cr::System::Threading::PTP_POOL,
-    cleanup_group : LibC::IntPtrT,
-    cleanup_group_cancel_callback : Win32cr::System::Threading::PTP_CLEANUP_GROUP_CANCEL_CALLBACK,
-    race_dll : Void*,
-    activation_context : LibC::IntPtrT,
-    finalization_callback : Win32cr::System::Threading::PTP_SIMPLE_CALLBACK,
-    u : U_e__union_,
-    callback_priority : Win32cr::System::Threading::TP_CALLBACK_PRIORITY,
-    size : UInt32 do
+  struct TP_CALLBACK_ENVIRON_V3
+    property version : UInt32
+    property pool : Win32cr::System::Threading::PTP_POOL
+    property cleanup_group : LibC::IntPtrT
+    property cleanup_group_cancel_callback : Win32cr::System::Threading::PTP_CLEANUP_GROUP_CANCEL_CALLBACK
+    property race_dll : Void*
+    property activation_context : LibC::IntPtrT
+    property finalization_callback : Win32cr::System::Threading::PTP_SIMPLE_CALLBACK
+    property u : U_e__union_
+    property callback_priority : Win32cr::System::Threading::TP_CALLBACK_PRIORITY
+    property size : UInt32
 
     # Nested Type U_e__union_
     @[Extern(union: true)]
-    record U_e__union_,
-      flags : UInt32,
-      s : S_e__struct_ do
+    struct U_e__union_
+    property flags : UInt32
+    property s : S_e__struct_
 
       # Nested Type S_e__struct_
       @[Extern]
-      record S_e__struct_,
-        _bitfield : UInt32
+      struct S_e__struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@flags : UInt32, @s : S_e__struct_)
+    end
     end
 
 
     # Nested Type ACTIVATION_CONTEXT_
     @[Extern]
-    record ACTIVATION_CONTEXT_
+    struct ACTIVATION_CONTEXT_
+    def initialize()
+    end
+    end
+
+    def initialize(@version : UInt32, @pool : Win32cr::System::Threading::PTP_POOL, @cleanup_group : LibC::IntPtrT, @cleanup_group_cancel_callback : Win32cr::System::Threading::PTP_CLEANUP_GROUP_CANCEL_CALLBACK, @race_dll : Void*, @activation_context : LibC::IntPtrT, @finalization_callback : Win32cr::System::Threading::PTP_SIMPLE_CALLBACK, @u : U_e__union_, @callback_priority : Win32cr::System::Threading::TP_CALLBACK_PRIORITY, @size : UInt32)
+    end
   end
 
   @[Extern]
-  record UMS_SCHEDULER_STARTUP_INFO,
-    ums_version : UInt32,
-    completion_list : Void*,
-    scheduler_proc : Win32cr::System::Threading::PRTL_UMS_SCHEDULER_ENTRY_POINT,
-    scheduler_param : Void*
+  struct UMS_SCHEDULER_STARTUP_INFO
+    property ums_version : UInt32
+    property completion_list : Void*
+    property scheduler_proc : Win32cr::System::Threading::PRTL_UMS_SCHEDULER_ENTRY_POINT
+    property scheduler_param : Void*
+    def initialize(@ums_version : UInt32, @completion_list : Void*, @scheduler_proc : Win32cr::System::Threading::PRTL_UMS_SCHEDULER_ENTRY_POINT, @scheduler_param : Void*)
+    end
+  end
 
   @[Extern]
-  record UMS_SYSTEM_THREAD_INFORMATION,
-    ums_version : UInt32,
-    anonymous : Anonymous_e__Union_ do
+  struct UMS_SYSTEM_THREAD_INFORMATION
+    property ums_version : UInt32
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      anonymous : Anonymous_e__Struct_,
-      thread_ums_flags : UInt32 do
+    struct Anonymous_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property thread_ums_flags : UInt32
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        _bitfield : UInt32
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @thread_ums_flags : UInt32)
+    end
     end
 
+    def initialize(@ums_version : UInt32, @anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record STARTUPINFOEXA,
-    startup_info : Win32cr::System::Threading::STARTUPINFOA,
-    lpAttributeList : Win32cr::System::Threading::LPPROC_THREAD_ATTRIBUTE_LIST
+  struct STARTUPINFOEXA
+    property startup_info : Win32cr::System::Threading::STARTUPINFOA
+    property lpAttributeList : Win32cr::System::Threading::LPPROC_THREAD_ATTRIBUTE_LIST
+    def initialize(@startup_info : Win32cr::System::Threading::STARTUPINFOA, @lpAttributeList : Win32cr::System::Threading::LPPROC_THREAD_ATTRIBUTE_LIST)
+    end
+  end
 
   @[Extern]
-  record STARTUPINFOEXW,
-    startup_info : Win32cr::System::Threading::STARTUPINFOW,
-    lpAttributeList : Win32cr::System::Threading::LPPROC_THREAD_ATTRIBUTE_LIST
+  struct STARTUPINFOEXW
+    property startup_info : Win32cr::System::Threading::STARTUPINFOW
+    property lpAttributeList : Win32cr::System::Threading::LPPROC_THREAD_ATTRIBUTE_LIST
+    def initialize(@startup_info : Win32cr::System::Threading::STARTUPINFOW, @lpAttributeList : Win32cr::System::Threading::LPPROC_THREAD_ATTRIBUTE_LIST)
+    end
+  end
 
   @[Extern]
-  record PEB_LDR_DATA,
-    reserved1 : UInt8[8],
-    reserved2 : Void*[3],
-    in_memory_order_module_list : Win32cr::System::Kernel::LIST_ENTRY
+  struct PEB_LDR_DATA
+    property reserved1 : UInt8[8]
+    property reserved2 : Void*[3]
+    property in_memory_order_module_list : Win32cr::System::Kernel::LIST_ENTRY
+    def initialize(@reserved1 : UInt8[8], @reserved2 : Void*[3], @in_memory_order_module_list : Win32cr::System::Kernel::LIST_ENTRY)
+    end
+  end
 
   @[Extern]
-  record RTL_USER_PROCESS_PARAMETERS,
-    reserved1 : UInt8[16],
-    reserved2 : Void*[10],
-    image_path_name : Win32cr::Foundation::UNICODE_STRING,
-    command_line : Win32cr::Foundation::UNICODE_STRING
+  struct RTL_USER_PROCESS_PARAMETERS
+    property reserved1 : UInt8[16]
+    property reserved2 : Void*[10]
+    property image_path_name : Win32cr::Foundation::UNICODE_STRING
+    property command_line : Win32cr::Foundation::UNICODE_STRING
+    def initialize(@reserved1 : UInt8[16], @reserved2 : Void*[10], @image_path_name : Win32cr::Foundation::UNICODE_STRING, @command_line : Win32cr::Foundation::UNICODE_STRING)
+    end
+  end
 
   @[Extern]
-  record PEB,
-    reserved1 : UInt8[2],
-    being_debugged : UInt8,
-    reserved2 : UInt8*,
-    reserved3 : Void*[2],
-    ldr : Win32cr::System::Threading::PEB_LDR_DATA*,
-    process_parameters : Win32cr::System::Threading::RTL_USER_PROCESS_PARAMETERS*,
-    reserved4 : Void*[3],
-    atl_thunk_s_list_ptr : Void*,
-    reserved5 : Void*,
-    reserved6 : UInt32,
-    reserved7 : Void*,
-    reserved8 : UInt32,
-    atl_thunk_s_list_ptr32 : UInt32,
-    reserved9 : Void*[45],
-    reserved10 : UInt8[96],
-    post_process_init_routine : Win32cr::System::Threading::PPS_POST_PROCESS_INIT_ROUTINE,
-    reserved11 : UInt8[128],
-    reserved12 : Void**,
-    session_id : UInt32
+  struct PEB
+    property reserved1 : UInt8[2]
+    property being_debugged : UInt8
+    property reserved2 : UInt8*
+    property reserved3 : Void*[2]
+    property ldr : Win32cr::System::Threading::PEB_LDR_DATA*
+    property process_parameters : Win32cr::System::Threading::RTL_USER_PROCESS_PARAMETERS*
+    property reserved4 : Void*[3]
+    property atl_thunk_s_list_ptr : Void*
+    property reserved5 : Void*
+    property reserved6 : UInt32
+    property reserved7 : Void*
+    property reserved8 : UInt32
+    property atl_thunk_s_list_ptr32 : UInt32
+    property reserved9 : Void*[45]
+    property reserved10 : UInt8[96]
+    property post_process_init_routine : Win32cr::System::Threading::PPS_POST_PROCESS_INIT_ROUTINE
+    property reserved11 : UInt8[128]
+    property reserved12 : Void**
+    property session_id : UInt32
+    def initialize(@reserved1 : UInt8[2], @being_debugged : UInt8, @reserved2 : UInt8*, @reserved3 : Void*[2], @ldr : Win32cr::System::Threading::PEB_LDR_DATA*, @process_parameters : Win32cr::System::Threading::RTL_USER_PROCESS_PARAMETERS*, @reserved4 : Void*[3], @atl_thunk_s_list_ptr : Void*, @reserved5 : Void*, @reserved6 : UInt32, @reserved7 : Void*, @reserved8 : UInt32, @atl_thunk_s_list_ptr32 : UInt32, @reserved9 : Void*[45], @reserved10 : UInt8[96], @post_process_init_routine : Win32cr::System::Threading::PPS_POST_PROCESS_INIT_ROUTINE, @reserved11 : UInt8[128], @reserved12 : Void**, @session_id : UInt32)
+    end
+  end
 
   @[Extern]
-  record PROCESS_BASIC_INFORMATION,
-    reserved1 : Void*,
-    peb_base_address : Win32cr::System::Threading::PEB*,
-    reserved2 : Void*[2],
-    unique_process_id : LibC::UIntPtrT,
-    reserved3 : Void*
+  struct PROCESS_BASIC_INFORMATION
+    property reserved1 : Void*
+    property peb_base_address : Win32cr::System::Threading::PEB*
+    property reserved2 : Void*[2]
+    property unique_process_id : LibC::UIntPtrT
+    property reserved3 : Void*
+    def initialize(@reserved1 : Void*, @peb_base_address : Win32cr::System::Threading::PEB*, @reserved2 : Void*[2], @unique_process_id : LibC::UIntPtrT, @reserved3 : Void*)
+    end
+  end
 
   @[Link("kernel32")]
   @[Link("vertdll")]
   @[Link("advapi32")]
-  @[Link("api-ms-win-core-wow64-l1-1-1")]
   @[Link("avrt")]
   @[Link("user32")]
   @[Link("ntdll")]

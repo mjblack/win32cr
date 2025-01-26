@@ -2,7 +2,7 @@ require "./../system/com.cr"
 require "./../foundation.cr"
 
 module Win32cr::Graphics::DXCore
-  alias PFN_DXCORE_NOTIFICATION_CALLBACK = Proc(Win32cr::Graphics::DXCore::DXCoreNotificationType, Void*, Void*, Void)*
+  alias PFN_DXCORE_NOTIFICATION_CALLBACK = Proc(Win32cr::Graphics::DXCore::DXCoreNotificationType, Void*, Void*, Void)
 
   FACDXCORE_ = 2176_u32
   DXCORE_ADAPTER_ATTRIBUTE_D3D11_GRAPHICS = "8c47866b-7583-450d-f0f0-6bada895af4b"
@@ -47,31 +47,43 @@ module Win32cr::Graphics::DXCore
   end
 
   @[Extern]
-  record DXCoreHardwareID,
-    vendorID : UInt32,
-    deviceID : UInt32,
-    subSysID : UInt32,
-    revision : UInt32
+  struct DXCoreHardwareID
+    property vendorID : UInt32
+    property deviceID : UInt32
+    property subSysID : UInt32
+    property revision : UInt32
+    def initialize(@vendorID : UInt32, @deviceID : UInt32, @subSysID : UInt32, @revision : UInt32)
+    end
+  end
 
   @[Extern]
-  record DXCoreHardwareIDParts,
-    vendorID : UInt32,
-    deviceID : UInt32,
-    subSystemID : UInt32,
-    subVendorID : UInt32,
-    revisionID : UInt32
+  struct DXCoreHardwareIDParts
+    property vendorID : UInt32
+    property deviceID : UInt32
+    property subSystemID : UInt32
+    property subVendorID : UInt32
+    property revisionID : UInt32
+    def initialize(@vendorID : UInt32, @deviceID : UInt32, @subSystemID : UInt32, @subVendorID : UInt32, @revisionID : UInt32)
+    end
+  end
 
   @[Extern]
-  record DXCoreAdapterMemoryBudgetNodeSegmentGroup,
-    nodeIndex : UInt32,
-    segmentGroup : Win32cr::Graphics::DXCore::DXCoreSegmentGroup
+  struct DXCoreAdapterMemoryBudgetNodeSegmentGroup
+    property nodeIndex : UInt32
+    property segmentGroup : Win32cr::Graphics::DXCore::DXCoreSegmentGroup
+    def initialize(@nodeIndex : UInt32, @segmentGroup : Win32cr::Graphics::DXCore::DXCoreSegmentGroup)
+    end
+  end
 
   @[Extern]
-  record DXCoreAdapterMemoryBudget,
-    budget : UInt64,
-    currentUsage : UInt64,
-    availableForReservation : UInt64,
-    currentReservation : UInt64
+  struct DXCoreAdapterMemoryBudget
+    property budget : UInt64
+    property currentUsage : UInt64
+    property availableForReservation : UInt64
+    property currentReservation : UInt64
+    def initialize(@budget : UInt64, @currentUsage : UInt64, @availableForReservation : UInt64, @currentReservation : UInt64)
+    end
+  end
 
   @[Extern]
   record IDXCoreAdapterVtbl,
@@ -91,7 +103,6 @@ module Win32cr::Graphics::DXCore
 
 
   @[Extern]
-  #@[Com("f0db4c7f-fe5a-42a2-bd62-f2a6cf6fc83e")]
   record IDXCoreAdapter, lpVtbl : IDXCoreAdapterVtbl* do
     GUID = LibC::GUID.new(0xf0db4c7f_u32, 0xfe5a_u16, 0x42a2_u16, StaticArray[0xbd_u8, 0x62_u8, 0xf2_u8, 0xa6_u8, 0xcf_u8, 0x6f_u8, 0xc8_u8, 0x3e_u8])
     def query_interface(this : IDXCoreAdapter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -150,7 +161,6 @@ module Win32cr::Graphics::DXCore
 
 
   @[Extern]
-  #@[Com("526c7776-40e9-459b-b711-f32ad76dfc28")]
   record IDXCoreAdapterList, lpVtbl : IDXCoreAdapterListVtbl* do
     GUID = LibC::GUID.new(0x526c7776_u32, 0x40e9_u16, 0x459b_u16, StaticArray[0xb7_u8, 0x11_u8, 0xf3_u8, 0x2a_u8, 0xd7_u8, 0x6d_u8, 0xfc_u8, 0x28_u8])
     def query_interface(this : IDXCoreAdapterList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -196,7 +206,6 @@ module Win32cr::Graphics::DXCore
 
 
   @[Extern]
-  #@[Com("78ee5945-c36e-4b13-a669-005dd11c0f06")]
   record IDXCoreAdapterFactory, lpVtbl : IDXCoreAdapterFactoryVtbl* do
     GUID = LibC::GUID.new(0x78ee5945_u32, 0xc36e_u16, 0x4b13_u16, StaticArray[0xa6_u8, 0x69_u8, 0x0_u8, 0x5d_u8, 0xd1_u8, 0x1c_u8, 0xf_u8, 0x6_u8])
     def query_interface(this : IDXCoreAdapterFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

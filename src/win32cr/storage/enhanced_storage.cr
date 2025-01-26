@@ -1375,47 +1375,56 @@ module Win32cr::Storage::EnhancedStorage
   end
 
   @[Extern]
-  record ENHANCED_STORAGE_PASSWORD_SILO_INFORMATION,
-    current_admin_failures : UInt8,
-    current_user_failures : UInt8,
-    total_user_authentication_count : UInt32,
-    total_admin_authentication_count : UInt32,
-    fips_compliant : Win32cr::Foundation::BOOL,
-    security_id_available : Win32cr::Foundation::BOOL,
-    initialize_in_progress : Win32cr::Foundation::BOOL,
-    itms_armed : Win32cr::Foundation::BOOL,
-    itms_armable : Win32cr::Foundation::BOOL,
-    user_created : Win32cr::Foundation::BOOL,
-    reset_on_por_default : Win32cr::Foundation::BOOL,
-    reset_on_por_current : Win32cr::Foundation::BOOL,
-    max_admin_failures : UInt8,
-    max_user_failures : UInt8,
-    time_to_complete_initialization : UInt32,
-    time_remaining_to_complete_initialization : UInt32,
-    min_time_to_authenticate : UInt32,
-    max_admin_password_size : UInt8,
-    min_admin_password_size : UInt8,
-    max_admin_hint_size : UInt8,
-    max_user_password_size : UInt8,
-    min_user_password_size : UInt8,
-    max_user_hint_size : UInt8,
-    max_user_name_size : UInt8,
-    max_silo_name_size : UInt8,
-    max_challenge_size : UInt16
+  struct ENHANCED_STORAGE_PASSWORD_SILO_INFORMATION
+    property current_admin_failures : UInt8
+    property current_user_failures : UInt8
+    property total_user_authentication_count : UInt32
+    property total_admin_authentication_count : UInt32
+    property fips_compliant : Win32cr::Foundation::BOOL
+    property security_id_available : Win32cr::Foundation::BOOL
+    property initialize_in_progress : Win32cr::Foundation::BOOL
+    property itms_armed : Win32cr::Foundation::BOOL
+    property itms_armable : Win32cr::Foundation::BOOL
+    property user_created : Win32cr::Foundation::BOOL
+    property reset_on_por_default : Win32cr::Foundation::BOOL
+    property reset_on_por_current : Win32cr::Foundation::BOOL
+    property max_admin_failures : UInt8
+    property max_user_failures : UInt8
+    property time_to_complete_initialization : UInt32
+    property time_remaining_to_complete_initialization : UInt32
+    property min_time_to_authenticate : UInt32
+    property max_admin_password_size : UInt8
+    property min_admin_password_size : UInt8
+    property max_admin_hint_size : UInt8
+    property max_user_password_size : UInt8
+    property min_user_password_size : UInt8
+    property max_user_hint_size : UInt8
+    property max_user_name_size : UInt8
+    property max_silo_name_size : UInt8
+    property max_challenge_size : UInt16
+    def initialize(@current_admin_failures : UInt8, @current_user_failures : UInt8, @total_user_authentication_count : UInt32, @total_admin_authentication_count : UInt32, @fips_compliant : Win32cr::Foundation::BOOL, @security_id_available : Win32cr::Foundation::BOOL, @initialize_in_progress : Win32cr::Foundation::BOOL, @itms_armed : Win32cr::Foundation::BOOL, @itms_armable : Win32cr::Foundation::BOOL, @user_created : Win32cr::Foundation::BOOL, @reset_on_por_default : Win32cr::Foundation::BOOL, @reset_on_por_current : Win32cr::Foundation::BOOL, @max_admin_failures : UInt8, @max_user_failures : UInt8, @time_to_complete_initialization : UInt32, @time_remaining_to_complete_initialization : UInt32, @min_time_to_authenticate : UInt32, @max_admin_password_size : UInt8, @min_admin_password_size : UInt8, @max_admin_hint_size : UInt8, @max_user_password_size : UInt8, @min_user_password_size : UInt8, @max_user_hint_size : UInt8, @max_user_name_size : UInt8, @max_silo_name_size : UInt8, @max_challenge_size : UInt16)
+    end
+  end
 
   @[Extern]
-  record ACT_AUTHORIZATION_STATE,
-    ulState : UInt32
+  struct ACT_AUTHORIZATION_STATE
+    property ulState : UInt32
+    def initialize(@ulState : UInt32)
+    end
+  end
 
   @[Extern]
-  record SILO_INFO,
-    ulSTID : UInt32,
-    specification_major : UInt8,
-    specification_minor : UInt8,
-    implementation_major : UInt8,
-    implementation_minor : UInt8,
-    type__ : UInt8,
-    capabilities : UInt8
+  struct SILO_INFO
+    property ulSTID : UInt32
+    property specification_major : UInt8
+    property specification_minor : UInt8
+    property implementation_major : UInt8
+    property implementation_minor : UInt8
+    property type__ : UInt8
+    property capabilities : UInt8
+    def initialize(@ulSTID : UInt32, @specification_major : UInt8, @specification_minor : UInt8, @implementation_major : UInt8, @implementation_minor : UInt8, @type__ : UInt8, @capabilities : UInt8)
+    end
+  end
 
   @[Extern]
   record IEnumEnhancedStorageACTVtbl,
@@ -1427,7 +1436,6 @@ module Win32cr::Storage::EnhancedStorage
 
 
   @[Extern]
-  #@[Com("09b224bd-1335-4631-a7ff-cfd3a92646d7")]
   record IEnumEnhancedStorageACT, lpVtbl : IEnumEnhancedStorageACTVtbl* do
     GUID = LibC::GUID.new(0x9b224bd_u32, 0x1335_u16, 0x4631_u16, StaticArray[0xa7_u8, 0xff_u8, 0xcf_u8, 0xd3_u8, 0xa9_u8, 0x26_u8, 0x46_u8, 0xd7_u8])
     def query_interface(this : IEnumEnhancedStorageACT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1462,7 +1470,6 @@ module Win32cr::Storage::EnhancedStorage
 
 
   @[Extern]
-  #@[Com("6e7781f4-e0f2-4239-b976-a01abab52930")]
   record IEnhancedStorageACT, lpVtbl : IEnhancedStorageACTVtbl* do
     GUID = LibC::GUID.new(0x6e7781f4_u32, 0xe0f2_u16, 0x4239_u16, StaticArray[0xb9_u8, 0x76_u8, 0xa0_u8, 0x1a_u8, 0xba_u8, 0xb5_u8, 0x29_u8, 0x30_u8])
     def query_interface(this : IEnhancedStorageACT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1511,7 +1518,6 @@ module Win32cr::Storage::EnhancedStorage
 
 
   @[Extern]
-  #@[Com("4da57d2e-8eb3-41f6-a07e-98b52b88242b")]
   record IEnhancedStorageACT2, lpVtbl : IEnhancedStorageACT2Vtbl* do
     GUID = LibC::GUID.new(0x4da57d2e_u32, 0x8eb3_u16, 0x41f6_u16, StaticArray[0xa0_u8, 0x7e_u8, 0x98_u8, 0xb5_u8, 0x2b_u8, 0x88_u8, 0x24_u8, 0x2b_u8])
     def query_interface(this : IEnhancedStorageACT2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1569,7 +1575,6 @@ module Win32cr::Storage::EnhancedStorage
 
 
   @[Extern]
-  #@[Com("022150a1-113d-11df-bb61-001aa01bbc58")]
   record IEnhancedStorageACT3, lpVtbl : IEnhancedStorageACT3Vtbl* do
     GUID = LibC::GUID.new(0x22150a1_u32, 0x113d_u16, 0x11df_u16, StaticArray[0xbb_u8, 0x61_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
     def query_interface(this : IEnhancedStorageACT3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1630,7 +1635,6 @@ module Win32cr::Storage::EnhancedStorage
 
 
   @[Extern]
-  #@[Com("5aef78c6-2242-4703-bf49-44b29357a359")]
   record IEnhancedStorageSilo, lpVtbl : IEnhancedStorageSiloVtbl* do
     GUID = LibC::GUID.new(0x5aef78c6_u32, 0x2242_u16, 0x4703_u16, StaticArray[0xbf_u8, 0x49_u8, 0x44_u8, 0xb2_u8, 0x93_u8, 0x57_u8, 0xa3_u8, 0x59_u8])
     def query_interface(this : IEnhancedStorageSilo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1671,7 +1675,6 @@ module Win32cr::Storage::EnhancedStorage
 
 
   @[Extern]
-  #@[Com("b6f7f311-206f-4ff8-9c4b-27efee77a86f")]
   record IEnhancedStorageSiloAction, lpVtbl : IEnhancedStorageSiloActionVtbl* do
     GUID = LibC::GUID.new(0xb6f7f311_u32, 0x206f_u16, 0x4ff8_u16, StaticArray[0x9c_u8, 0x4b_u8, 0x27_u8, 0xef_u8, 0xee_u8, 0x77_u8, 0xa8_u8, 0x6f_u8])
     def query_interface(this : IEnhancedStorageSiloAction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

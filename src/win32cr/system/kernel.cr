@@ -2,7 +2,7 @@ require "./../foundation.cr"
 require "./diagnostics/debug.cr"
 
 module Win32cr::System::Kernel
-  alias EXCEPTION_ROUTINE = Proc(Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD*, Void*, Win32cr::System::Diagnostics::Debug::CONTEXT*, Void*, Win32cr::System::Kernel::EXCEPTION_DISPOSITION)*
+  alias EXCEPTION_ROUTINE = Proc(Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD*, Void*, Win32cr::System::Diagnostics::Debug::CONTEXT*, Void*, Win32cr::System::Kernel::EXCEPTION_DISPOSITION)
 
   OBJ_HANDLE_TAGBITS = 3_i32
   RTL_BALANCED_NODE_RESERVED_PARENT_MASK = 3_u32
@@ -75,237 +75,332 @@ module Win32cr::System::Kernel
   end
 
   @[Extern]
-  record SLIST_ENTRY,
-    next__ : Win32cr::System::Kernel::SLIST_ENTRY*
+  struct SLIST_ENTRY
+    property next__ : Win32cr::System::Kernel::SLIST_ENTRY*
+    def initialize(@next__ : Win32cr::System::Kernel::SLIST_ENTRY*)
+    end
+  end
 
   {% if flag?(:arm) %}
   @[Extern(union: true)]
-  record SLIST_HEADER,
-    anonymous : Anonymous_e__Struct_,
-    header_arm64 : HeaderArm64_e__Struct_ do
+  struct SLIST_HEADER
+    property anonymous : Anonymous_e__Struct_
+    property header_arm64 : HeaderArm64_e__Struct_
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      alignment : UInt64,
-      region : UInt64
+    struct Anonymous_e__Struct_
+    property alignment : UInt64
+    property region : UInt64
+    def initialize(@alignment : UInt64, @region : UInt64)
+    end
+    end
 
 
     # Nested Type HeaderArm64_e__Struct_
     @[Extern]
-    record HeaderArm64_e__Struct_,
-      _bitfield1 : UInt64,
-      _bitfield2 : UInt64
+    struct HeaderArm64_e__Struct_
+    property _bitfield1 : UInt64
+    property _bitfield2 : UInt64
+    def initialize(@_bitfield1 : UInt64, @_bitfield2 : UInt64)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @header_arm64 : HeaderArm64_e__Struct_)
+    end
   end
   {% end %}
 
   @[Extern]
-  record QUAD,
-    anonymous : Anonymous_e__Union_ do
+  struct QUAD
+    property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      use_this_field_to_copy : Int64,
-      do_not_use_this_field : Float64
+    struct Anonymous_e__Union_
+    property use_this_field_to_copy : Int64
+    property do_not_use_this_field : Float64
+    def initialize(@use_this_field_to_copy : Int64, @do_not_use_this_field : Float64)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Union_)
+    end
   end
 
   @[Extern]
-  record PROCESSOR_NUMBER,
-    group : UInt16,
-    number : UInt8,
-    reserved : UInt8
+  struct PROCESSOR_NUMBER
+    property group : UInt16
+    property number : UInt8
+    property reserved : UInt8
+    def initialize(@group : UInt16, @number : UInt8, @reserved : UInt8)
+    end
+  end
 
   @[Extern]
-  record STRING,
-    length : UInt16,
-    maximum_length : UInt16,
-    buffer : Win32cr::Foundation::PSTR
+  struct STRING
+    property length : UInt16
+    property maximum_length : UInt16
+    property buffer : Win32cr::Foundation::PSTR
+    def initialize(@length : UInt16, @maximum_length : UInt16, @buffer : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record CSTRING,
-    length : UInt16,
-    maximum_length : UInt16,
-    buffer : Win32cr::Foundation::PSTR
+  struct CSTRING
+    property length : UInt16
+    property maximum_length : UInt16
+    property buffer : Win32cr::Foundation::PSTR
+    def initialize(@length : UInt16, @maximum_length : UInt16, @buffer : Win32cr::Foundation::PSTR)
+    end
+  end
 
   @[Extern]
-  record LIST_ENTRY,
-    flink : Win32cr::System::Kernel::LIST_ENTRY*,
-    blink : Win32cr::System::Kernel::LIST_ENTRY*
+  struct LIST_ENTRY
+    property flink : Win32cr::System::Kernel::LIST_ENTRY*
+    property blink : Win32cr::System::Kernel::LIST_ENTRY*
+    def initialize(@flink : Win32cr::System::Kernel::LIST_ENTRY*, @blink : Win32cr::System::Kernel::LIST_ENTRY*)
+    end
+  end
 
   @[Extern]
-  record SINGLE_LIST_ENTRY,
-    next__ : Win32cr::System::Kernel::SINGLE_LIST_ENTRY*
+  struct SINGLE_LIST_ENTRY
+    property next__ : Win32cr::System::Kernel::SINGLE_LIST_ENTRY*
+    def initialize(@next__ : Win32cr::System::Kernel::SINGLE_LIST_ENTRY*)
+    end
+  end
 
   @[Extern]
-  record RTL_BALANCED_NODE,
-    anonymous1 : Anonymous1_e__Union_,
-    anonymous2 : Anonymous2_e__Union_ do
+  struct RTL_BALANCED_NODE
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
-    record Anonymous2_e__Union_,
-      _bitfield : UInt8,
-      parent_value : LibC::UIntPtrT
+    struct Anonymous2_e__Union_
+    property _bitfield : UInt8
+    property parent_value : LibC::UIntPtrT
+    def initialize(@_bitfield : UInt8, @parent_value : LibC::UIntPtrT)
+    end
+    end
 
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    record Anonymous1_e__Union_,
-      children : Win32cr::System::Kernel::RTL_BALANCED_NODE*[2],
-      anonymous : Anonymous_e__Struct_ do
+    struct Anonymous1_e__Union_
+    property children : Win32cr::System::Kernel::RTL_BALANCED_NODE*[2]
+    property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
       @[Extern]
-      record Anonymous_e__Struct_,
-        left : Win32cr::System::Kernel::RTL_BALANCED_NODE*,
-        right : Win32cr::System::Kernel::RTL_BALANCED_NODE*
+      struct Anonymous_e__Struct_
+    property left : Win32cr::System::Kernel::RTL_BALANCED_NODE*
+    property right : Win32cr::System::Kernel::RTL_BALANCED_NODE*
+    def initialize(@left : Win32cr::System::Kernel::RTL_BALANCED_NODE*, @right : Win32cr::System::Kernel::RTL_BALANCED_NODE*)
+    end
+      end
 
+    def initialize(@children : Win32cr::System::Kernel::RTL_BALANCED_NODE*[2], @anonymous : Anonymous_e__Struct_)
+    end
     end
 
+    def initialize(@anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_)
+    end
   end
 
   @[Extern]
-  record LIST_ENTRY32,
-    flink : UInt32,
-    blink : UInt32
+  struct LIST_ENTRY32
+    property flink : UInt32
+    property blink : UInt32
+    def initialize(@flink : UInt32, @blink : UInt32)
+    end
+  end
 
   @[Extern]
-  record LIST_ENTRY64,
-    flink : UInt64,
-    blink : UInt64
+  struct LIST_ENTRY64
+    property flink : UInt64
+    property blink : UInt64
+    def initialize(@flink : UInt64, @blink : UInt64)
+    end
+  end
 
   @[Extern]
-  record SINGLE_LIST_ENTRY32,
-    next__ : UInt32
+  struct SINGLE_LIST_ENTRY32
+    property next__ : UInt32
+    def initialize(@next__ : UInt32)
+    end
+  end
 
   @[Extern]
-  record WNF_STATE_NAME,
-    data : UInt32[2]
+  struct WNF_STATE_NAME
+    property data : UInt32[2]
+    def initialize(@data : UInt32[2])
+    end
+  end
 
   @[Extern]
-  record STRING32,
-    length : UInt16,
-    maximum_length : UInt16,
-    buffer : UInt32
+  struct STRING32
+    property length : UInt16
+    property maximum_length : UInt16
+    property buffer : UInt32
+    def initialize(@length : UInt16, @maximum_length : UInt16, @buffer : UInt32)
+    end
+  end
 
   @[Extern]
-  record STRING64,
-    length : UInt16,
-    maximum_length : UInt16,
-    buffer : UInt64
+  struct STRING64
+    property length : UInt16
+    property maximum_length : UInt16
+    property buffer : UInt64
+    def initialize(@length : UInt16, @maximum_length : UInt16, @buffer : UInt64)
+    end
+  end
 
   @[Extern]
-  record OBJECT_ATTRIBUTES64,
-    length : UInt32,
-    root_directory : UInt64,
-    object_name : UInt64,
-    attributes : UInt32,
-    security_descriptor : UInt64,
-    security_quality_of_service : UInt64
+  struct OBJECT_ATTRIBUTES64
+    property length : UInt32
+    property root_directory : UInt64
+    property object_name : UInt64
+    property attributes : UInt32
+    property security_descriptor : UInt64
+    property security_quality_of_service : UInt64
+    def initialize(@length : UInt32, @root_directory : UInt64, @object_name : UInt64, @attributes : UInt32, @security_descriptor : UInt64, @security_quality_of_service : UInt64)
+    end
+  end
 
   @[Extern]
-  record OBJECT_ATTRIBUTES32,
-    length : UInt32,
-    root_directory : UInt32,
-    object_name : UInt32,
-    attributes : UInt32,
-    security_descriptor : UInt32,
-    security_quality_of_service : UInt32
+  struct OBJECT_ATTRIBUTES32
+    property length : UInt32
+    property root_directory : UInt32
+    property object_name : UInt32
+    property attributes : UInt32
+    property security_descriptor : UInt32
+    property security_quality_of_service : UInt32
+    def initialize(@length : UInt32, @root_directory : UInt32, @object_name : UInt32, @attributes : UInt32, @security_descriptor : UInt32, @security_quality_of_service : UInt32)
+    end
+  end
 
   @[Extern]
-  record OBJECTID,
-    lineage : LibC::GUID,
-    uniquifier : UInt32
+  struct OBJECTID
+    property lineage : LibC::GUID
+    property uniquifier : UInt32
+    def initialize(@lineage : LibC::GUID, @uniquifier : UInt32)
+    end
+  end
 
   @[Extern]
-  record EXCEPTION_REGISTRATION_RECORD,
-    next__ : Win32cr::System::Kernel::EXCEPTION_REGISTRATION_RECORD*,
-    handler : Win32cr::System::Kernel::EXCEPTION_ROUTINE
+  struct EXCEPTION_REGISTRATION_RECORD
+    property next__ : Win32cr::System::Kernel::EXCEPTION_REGISTRATION_RECORD*
+    property handler : Win32cr::System::Kernel::EXCEPTION_ROUTINE
+    def initialize(@next__ : Win32cr::System::Kernel::EXCEPTION_REGISTRATION_RECORD*, @handler : Win32cr::System::Kernel::EXCEPTION_ROUTINE)
+    end
+  end
 
   @[Extern]
-  record NT_TIB,
-    exception_list : Win32cr::System::Kernel::EXCEPTION_REGISTRATION_RECORD*,
-    stack_base : Void*,
-    stack_limit : Void*,
-    sub_system_tib : Void*,
-    anonymous : Anonymous_e__Union_,
-    arbitrary_user_pointer : Void*,
-    self__ : Win32cr::System::Kernel::NT_TIB* do
+  struct NT_TIB
+    property exception_list : Win32cr::System::Kernel::EXCEPTION_REGISTRATION_RECORD*
+    property stack_base : Void*
+    property stack_limit : Void*
+    property sub_system_tib : Void*
+    property anonymous : Anonymous_e__Union_
+    property arbitrary_user_pointer : Void*
+    property self__ : Win32cr::System::Kernel::NT_TIB*
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      fiber_data : Void*,
-      version : UInt32
+    struct Anonymous_e__Union_
+    property fiber_data : Void*
+    property version : UInt32
+    def initialize(@fiber_data : Void*, @version : UInt32)
+    end
+    end
 
+    def initialize(@exception_list : Win32cr::System::Kernel::EXCEPTION_REGISTRATION_RECORD*, @stack_base : Void*, @stack_limit : Void*, @sub_system_tib : Void*, @anonymous : Anonymous_e__Union_, @arbitrary_user_pointer : Void*, @self__ : Win32cr::System::Kernel::NT_TIB*)
+    end
   end
 
   {% if flag?(:x86_64) %}
   @[Extern(union: true)]
-  record SLIST_HEADER,
-    anonymous : Anonymous_e__Struct_,
-    header_x64 : HeaderX64_e__Struct_ do
+  struct SLIST_HEADER
+    property anonymous : Anonymous_e__Struct_
+    property header_x64 : HeaderX64_e__Struct_
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      alignment : UInt64,
-      region : UInt64
+    struct Anonymous_e__Struct_
+    property alignment : UInt64
+    property region : UInt64
+    def initialize(@alignment : UInt64, @region : UInt64)
+    end
+    end
 
 
     # Nested Type HeaderX64_e__Struct_
     @[Extern]
-    record HeaderX64_e__Struct_,
-      _bitfield1 : UInt64,
-      _bitfield2 : UInt64
+    struct HeaderX64_e__Struct_
+    property _bitfield1 : UInt64
+    property _bitfield2 : UInt64
+    def initialize(@_bitfield1 : UInt64, @_bitfield2 : UInt64)
+    end
+    end
 
+    def initialize(@anonymous : Anonymous_e__Struct_, @header_x64 : HeaderX64_e__Struct_)
+    end
   end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record FLOATING_SAVE_AREA,
-    control_word : UInt32,
-    status_word : UInt32,
-    tag_word : UInt32,
-    error_offset : UInt32,
-    error_selector : UInt32,
-    data_offset : UInt32,
-    data_selector : UInt32,
-    register_area : UInt8[80],
-    cr0_npx_state : UInt32
+  struct FLOATING_SAVE_AREA
+    property control_word : UInt32
+    property status_word : UInt32
+    property tag_word : UInt32
+    property error_offset : UInt32
+    property error_selector : UInt32
+    property data_offset : UInt32
+    property data_selector : UInt32
+    property register_area : UInt8[80]
+    property cr0_npx_state : UInt32
+    def initialize(@control_word : UInt32, @status_word : UInt32, @tag_word : UInt32, @error_offset : UInt32, @error_selector : UInt32, @data_offset : UInt32, @data_selector : UInt32, @register_area : UInt8[80], @cr0_npx_state : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record FLOATING_SAVE_AREA,
-    control_word : UInt32,
-    status_word : UInt32,
-    tag_word : UInt32,
-    error_offset : UInt32,
-    error_selector : UInt32,
-    data_offset : UInt32,
-    data_selector : UInt32,
-    register_area : UInt8[80],
-    spare0 : UInt32
+  struct FLOATING_SAVE_AREA
+    property control_word : UInt32
+    property status_word : UInt32
+    property tag_word : UInt32
+    property error_offset : UInt32
+    property error_selector : UInt32
+    property data_offset : UInt32
+    property data_selector : UInt32
+    property register_area : UInt8[80]
+    property spare0 : UInt32
+    def initialize(@control_word : UInt32, @status_word : UInt32, @tag_word : UInt32, @error_offset : UInt32, @error_selector : UInt32, @data_offset : UInt32, @data_selector : UInt32, @register_area : UInt8[80], @spare0 : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern(union: true)]
-  record SLIST_HEADER,
-    alignment : UInt64,
-    anonymous : Anonymous_e__Struct_ do
+  struct SLIST_HEADER
+    property alignment : UInt64
+    property anonymous : Anonymous_e__Struct_
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
-    record Anonymous_e__Struct_,
-      next__ : Win32cr::System::Kernel::SINGLE_LIST_ENTRY,
-      depth : UInt16,
-      cpu_id : UInt16
+    struct Anonymous_e__Struct_
+    property next__ : Win32cr::System::Kernel::SINGLE_LIST_ENTRY
+    property depth : UInt16
+    property cpu_id : UInt16
+    def initialize(@next__ : Win32cr::System::Kernel::SINGLE_LIST_ENTRY, @depth : UInt16, @cpu_id : UInt16)
+    end
+    end
 
+    def initialize(@alignment : UInt64, @anonymous : Anonymous_e__Struct_)
+    end
   end
   {% end %}
 

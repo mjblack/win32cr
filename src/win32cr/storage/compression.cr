@@ -2,9 +2,9 @@ require "./../foundation.cr"
 
 module Win32cr::Storage::Compression
   alias COMPRESSOR_HANDLE = LibC::IntPtrT
-  alias PFN_COMPRESS_ALLOCATE = Proc(Void*, LibC::UIntPtrT, Void*)*
+  alias PFN_COMPRESS_ALLOCATE = Proc(Void*, LibC::UIntPtrT, Void*)
 
-  alias PFN_COMPRESS_FREE = Proc(Void*, Void*, Void)*
+  alias PFN_COMPRESS_FREE = Proc(Void*, Void*, Void)
 
   COMPRESS_ALGORITHM_INVALID = 0_u32
   COMPRESS_ALGORITHM_NULL = 1_u32
@@ -24,10 +24,13 @@ module Win32cr::Storage::Compression
   end
 
   @[Extern]
-  record COMPRESS_ALLOCATION_ROUTINES,
-    allocate : Win32cr::Storage::Compression::PFN_COMPRESS_ALLOCATE,
-    free : Win32cr::Storage::Compression::PFN_COMPRESS_FREE,
-    user_context : Void*
+  struct COMPRESS_ALLOCATION_ROUTINES
+    property allocate : Win32cr::Storage::Compression::PFN_COMPRESS_ALLOCATE
+    property free : Win32cr::Storage::Compression::PFN_COMPRESS_FREE
+    property user_context : Void*
+    def initialize(@allocate : Win32cr::Storage::Compression::PFN_COMPRESS_ALLOCATE, @free : Win32cr::Storage::Compression::PFN_COMPRESS_FREE, @user_context : Void*)
+    end
+  end
 
   @[Link("cabinet")]
   lib C

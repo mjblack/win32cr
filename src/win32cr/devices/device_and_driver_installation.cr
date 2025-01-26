@@ -10,15 +10,15 @@ require "./../data/html_help.cr"
 module Win32cr::Devices::DeviceAndDriverInstallation
   alias HCMNOTIFICATION = LibC::IntPtrT
   alias HDEVINFO = LibC::IntPtrT
-  alias PSP_FILE_CALLBACK_A = Proc(Void*, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, UInt32)*
+  alias PSP_FILE_CALLBACK_A = Proc(Void*, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, UInt32)
 
-  alias PSP_FILE_CALLBACK_W = Proc(Void*, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, UInt32)*
+  alias PSP_FILE_CALLBACK_W = Proc(Void*, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, UInt32)
 
-  alias PDETECT_PROGRESS_NOTIFY = Proc(Void*, UInt32, Win32cr::Foundation::BOOL)*
+  alias PDETECT_PROGRESS_NOTIFY = Proc(Void*, UInt32, Win32cr::Foundation::BOOL)
 
-  alias PSP_DETSIG_CMPPROC = Proc(Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, Void*, UInt32)*
+  alias PSP_DETSIG_CMPPROC = Proc(Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*, Void*, UInt32)
 
-  alias PCM_NOTIFY_CALLBACK = Proc(Win32cr::Devices::DeviceAndDriverInstallation::HCMNOTIFICATION, Void*, Win32cr::Devices::DeviceAndDriverInstallation::CM_NOTIFY_ACTION, Win32cr::Devices::DeviceAndDriverInstallation::CM_NOTIFY_EVENT_DATA*, UInt32, UInt32)*
+  alias PCM_NOTIFY_CALLBACK = Proc(Win32cr::Devices::DeviceAndDriverInstallation::HCMNOTIFICATION, Void*, Win32cr::Devices::DeviceAndDriverInstallation::CM_NOTIFY_ACTION, Win32cr::Devices::DeviceAndDriverInstallation::CM_NOTIFY_EVENT_DATA*, UInt32, UInt32)
 
   CM_PROB_NOT_CONFIGURED = 1_u32
   CM_PROB_DEVLOADER_FAILED = 2_u32
@@ -1692,1558 +1692,2054 @@ module Win32cr::Devices::DeviceAndDriverInstallation
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record INFCONTEXT,
-    inf : Void*,
-    current_inf : Void*,
-    section : UInt32,
-    line : UInt32
-  {% end %}
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record SP_INF_INFORMATION,
-    inf_style : Win32cr::Devices::DeviceAndDriverInstallation::SP_INF_STYLE,
-    inf_count : UInt32,
-    version_data : UInt8*
-  {% end %}
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record SP_ALTPLATFORM_INFO_V3,
-    cbSize : UInt32,
-    platform : UInt32,
-    major_version : UInt32,
-    minor_version : UInt32,
-    processor_architecture : UInt16,
-    anonymous : Anonymous_e__Union_,
-    first_validated_major_version : UInt32,
-    first_validated_minor_version : UInt32,
-    product_type : UInt8,
-    suite_mask : UInt16,
-    build_number : UInt32 do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      reserved : UInt16,
-      flags : UInt16
-
+  struct INFCONTEXT
+    property inf : Void*
+    property current_inf : Void*
+    property section : UInt32
+    property line : UInt32
+    def initialize(@inf : Void*, @current_inf : Void*, @section : UInt32, @line : UInt32)
+    end
   end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_ALTPLATFORM_INFO_V2,
-    cbSize : UInt32,
-    platform : Win32cr::System::Diagnostics::Debug::VER_PLATFORM,
-    major_version : UInt32,
-    minor_version : UInt32,
-    processor_architecture : UInt16,
-    anonymous : Anonymous_e__Union_,
-    first_validated_major_version : UInt32,
-    first_validated_minor_version : UInt32 do
-
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      reserved : UInt16,
-      flags : UInt16
-
+  struct SP_INF_INFORMATION
+    property inf_style : Win32cr::Devices::DeviceAndDriverInstallation::SP_INF_STYLE
+    property inf_count : UInt32
+    property version_data : UInt8*
+    def initialize(@inf_style : Win32cr::Devices::DeviceAndDriverInstallation::SP_INF_STYLE, @inf_count : UInt32, @version_data : UInt8*)
+    end
   end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_ALTPLATFORM_INFO_V1,
-    cbSize : UInt32,
-    platform : Win32cr::System::Diagnostics::Debug::VER_PLATFORM,
-    major_version : UInt32,
-    minor_version : UInt32,
-    processor_architecture : UInt16,
-    reserved : UInt16
+  struct SP_ALTPLATFORM_INFO_V3
+    property cbSize : UInt32
+    property platform : UInt32
+    property major_version : UInt32
+    property minor_version : UInt32
+    property processor_architecture : UInt16
+    property anonymous : Anonymous_e__Union_
+    property first_validated_major_version : UInt32
+    property first_validated_minor_version : UInt32
+    property product_type : UInt8
+    property suite_mask : UInt16
+    property build_number : UInt32
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property reserved : UInt16
+    property flags : UInt16
+    def initialize(@reserved : UInt16, @flags : UInt16)
+    end
+    end
+
+    def initialize(@cbSize : UInt32, @platform : UInt32, @major_version : UInt32, @minor_version : UInt32, @processor_architecture : UInt16, @anonymous : Anonymous_e__Union_, @first_validated_major_version : UInt32, @first_validated_minor_version : UInt32, @product_type : UInt8, @suite_mask : UInt16, @build_number : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_ORIGINAL_FILE_INFO_A,
-    cbSize : UInt32,
-    original_inf_name : Win32cr::Foundation::CHAR[260],
-    original_catalog_name : Win32cr::Foundation::CHAR[260]
+  struct SP_ALTPLATFORM_INFO_V2
+    property cbSize : UInt32
+    property platform : Win32cr::System::Diagnostics::Debug::VER_PLATFORM
+    property major_version : UInt32
+    property minor_version : UInt32
+    property processor_architecture : UInt16
+    property anonymous : Anonymous_e__Union_
+    property first_validated_major_version : UInt32
+    property first_validated_minor_version : UInt32
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property reserved : UInt16
+    property flags : UInt16
+    def initialize(@reserved : UInt16, @flags : UInt16)
+    end
+    end
+
+    def initialize(@cbSize : UInt32, @platform : Win32cr::System::Diagnostics::Debug::VER_PLATFORM, @major_version : UInt32, @minor_version : UInt32, @processor_architecture : UInt16, @anonymous : Anonymous_e__Union_, @first_validated_major_version : UInt32, @first_validated_minor_version : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_ORIGINAL_FILE_INFO_W,
-    cbSize : UInt32,
-    original_inf_name : UInt16[260],
-    original_catalog_name : UInt16[260]
+  struct SP_ALTPLATFORM_INFO_V1
+    property cbSize : UInt32
+    property platform : Win32cr::System::Diagnostics::Debug::VER_PLATFORM
+    property major_version : UInt32
+    property minor_version : UInt32
+    property processor_architecture : UInt16
+    property reserved : UInt16
+    def initialize(@cbSize : UInt32, @platform : Win32cr::System::Diagnostics::Debug::VER_PLATFORM, @major_version : UInt32, @minor_version : UInt32, @processor_architecture : UInt16, @reserved : UInt16)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record FILEPATHS_A,
-    target : Win32cr::Foundation::PSTR,
-    source : Win32cr::Foundation::PSTR,
-    win32_error : UInt32,
-    flags : UInt32
+  struct SP_ORIGINAL_FILE_INFO_A
+    property cbSize : UInt32
+    property original_inf_name : Win32cr::Foundation::CHAR[260]
+    property original_catalog_name : Win32cr::Foundation::CHAR[260]
+    def initialize(@cbSize : UInt32, @original_inf_name : Win32cr::Foundation::CHAR[260], @original_catalog_name : Win32cr::Foundation::CHAR[260])
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record FILEPATHS_W,
-    target : Win32cr::Foundation::PWSTR,
-    source : Win32cr::Foundation::PWSTR,
-    win32_error : UInt32,
-    flags : UInt32
+  struct SP_ORIGINAL_FILE_INFO_W
+    property cbSize : UInt32
+    property original_inf_name : UInt16[260]
+    property original_catalog_name : UInt16[260]
+    def initialize(@cbSize : UInt32, @original_inf_name : UInt16[260], @original_catalog_name : UInt16[260])
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record FILEPATHS_SIGNERINFO_A,
-    target : Win32cr::Foundation::PSTR,
-    source : Win32cr::Foundation::PSTR,
-    win32_error : UInt32,
-    flags : UInt32,
-    digital_signer : Win32cr::Foundation::PSTR,
-    version : Win32cr::Foundation::PSTR,
-    catalog_file : Win32cr::Foundation::PSTR
+  struct FILEPATHS_A
+    property target : Win32cr::Foundation::PSTR
+    property source : Win32cr::Foundation::PSTR
+    property win32_error : UInt32
+    property flags : UInt32
+    def initialize(@target : Win32cr::Foundation::PSTR, @source : Win32cr::Foundation::PSTR, @win32_error : UInt32, @flags : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record FILEPATHS_SIGNERINFO_W,
-    target : Win32cr::Foundation::PWSTR,
-    source : Win32cr::Foundation::PWSTR,
-    win32_error : UInt32,
-    flags : UInt32,
-    digital_signer : Win32cr::Foundation::PWSTR,
-    version : Win32cr::Foundation::PWSTR,
-    catalog_file : Win32cr::Foundation::PWSTR
+  struct FILEPATHS_W
+    property target : Win32cr::Foundation::PWSTR
+    property source : Win32cr::Foundation::PWSTR
+    property win32_error : UInt32
+    property flags : UInt32
+    def initialize(@target : Win32cr::Foundation::PWSTR, @source : Win32cr::Foundation::PWSTR, @win32_error : UInt32, @flags : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SOURCE_MEDIA_A,
-    reserved : Win32cr::Foundation::PSTR,
-    tagfile : Win32cr::Foundation::PSTR,
-    description : Win32cr::Foundation::PSTR,
-    source_path : Win32cr::Foundation::PSTR,
-    source_file : Win32cr::Foundation::PSTR,
-    flags : UInt32
+  struct FILEPATHS_SIGNERINFO_A
+    property target : Win32cr::Foundation::PSTR
+    property source : Win32cr::Foundation::PSTR
+    property win32_error : UInt32
+    property flags : UInt32
+    property digital_signer : Win32cr::Foundation::PSTR
+    property version : Win32cr::Foundation::PSTR
+    property catalog_file : Win32cr::Foundation::PSTR
+    def initialize(@target : Win32cr::Foundation::PSTR, @source : Win32cr::Foundation::PSTR, @win32_error : UInt32, @flags : UInt32, @digital_signer : Win32cr::Foundation::PSTR, @version : Win32cr::Foundation::PSTR, @catalog_file : Win32cr::Foundation::PSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SOURCE_MEDIA_W,
-    reserved : Win32cr::Foundation::PWSTR,
-    tagfile : Win32cr::Foundation::PWSTR,
-    description : Win32cr::Foundation::PWSTR,
-    source_path : Win32cr::Foundation::PWSTR,
-    source_file : Win32cr::Foundation::PWSTR,
-    flags : UInt32
+  struct FILEPATHS_SIGNERINFO_W
+    property target : Win32cr::Foundation::PWSTR
+    property source : Win32cr::Foundation::PWSTR
+    property win32_error : UInt32
+    property flags : UInt32
+    property digital_signer : Win32cr::Foundation::PWSTR
+    property version : Win32cr::Foundation::PWSTR
+    property catalog_file : Win32cr::Foundation::PWSTR
+    def initialize(@target : Win32cr::Foundation::PWSTR, @source : Win32cr::Foundation::PWSTR, @win32_error : UInt32, @flags : UInt32, @digital_signer : Win32cr::Foundation::PWSTR, @version : Win32cr::Foundation::PWSTR, @catalog_file : Win32cr::Foundation::PWSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record CABINET_INFO_A,
-    cabinet_path : Win32cr::Foundation::PSTR,
-    cabinet_file : Win32cr::Foundation::PSTR,
-    disk_name : Win32cr::Foundation::PSTR,
-    set_id : UInt16,
-    cabinet_number : UInt16
+  struct SOURCE_MEDIA_A
+    property reserved : Win32cr::Foundation::PSTR
+    property tagfile : Win32cr::Foundation::PSTR
+    property description : Win32cr::Foundation::PSTR
+    property source_path : Win32cr::Foundation::PSTR
+    property source_file : Win32cr::Foundation::PSTR
+    property flags : UInt32
+    def initialize(@reserved : Win32cr::Foundation::PSTR, @tagfile : Win32cr::Foundation::PSTR, @description : Win32cr::Foundation::PSTR, @source_path : Win32cr::Foundation::PSTR, @source_file : Win32cr::Foundation::PSTR, @flags : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record CABINET_INFO_W,
-    cabinet_path : Win32cr::Foundation::PWSTR,
-    cabinet_file : Win32cr::Foundation::PWSTR,
-    disk_name : Win32cr::Foundation::PWSTR,
-    set_id : UInt16,
-    cabinet_number : UInt16
+  struct SOURCE_MEDIA_W
+    property reserved : Win32cr::Foundation::PWSTR
+    property tagfile : Win32cr::Foundation::PWSTR
+    property description : Win32cr::Foundation::PWSTR
+    property source_path : Win32cr::Foundation::PWSTR
+    property source_file : Win32cr::Foundation::PWSTR
+    property flags : UInt32
+    def initialize(@reserved : Win32cr::Foundation::PWSTR, @tagfile : Win32cr::Foundation::PWSTR, @description : Win32cr::Foundation::PWSTR, @source_path : Win32cr::Foundation::PWSTR, @source_file : Win32cr::Foundation::PWSTR, @flags : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record FILE_IN_CABINET_INFO_A,
-    name_in_cabinet : Win32cr::Foundation::PSTR,
-    file_size : UInt32,
-    win32_error : UInt32,
-    dos_date : UInt16,
-    dos_time : UInt16,
-    dos_attribs : UInt16,
-    full_target_name : Win32cr::Foundation::CHAR[260]
+  struct CABINET_INFO_A
+    property cabinet_path : Win32cr::Foundation::PSTR
+    property cabinet_file : Win32cr::Foundation::PSTR
+    property disk_name : Win32cr::Foundation::PSTR
+    property set_id : UInt16
+    property cabinet_number : UInt16
+    def initialize(@cabinet_path : Win32cr::Foundation::PSTR, @cabinet_file : Win32cr::Foundation::PSTR, @disk_name : Win32cr::Foundation::PSTR, @set_id : UInt16, @cabinet_number : UInt16)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record FILE_IN_CABINET_INFO_W,
-    name_in_cabinet : Win32cr::Foundation::PWSTR,
-    file_size : UInt32,
-    win32_error : UInt32,
-    dos_date : UInt16,
-    dos_time : UInt16,
-    dos_attribs : UInt16,
-    full_target_name : UInt16[260]
+  struct CABINET_INFO_W
+    property cabinet_path : Win32cr::Foundation::PWSTR
+    property cabinet_file : Win32cr::Foundation::PWSTR
+    property disk_name : Win32cr::Foundation::PWSTR
+    property set_id : UInt16
+    property cabinet_number : UInt16
+    def initialize(@cabinet_path : Win32cr::Foundation::PWSTR, @cabinet_file : Win32cr::Foundation::PWSTR, @disk_name : Win32cr::Foundation::PWSTR, @set_id : UInt16, @cabinet_number : UInt16)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_REGISTER_CONTROL_STATUSA,
-    cbSize : UInt32,
-    file_name : Win32cr::Foundation::PSTR,
-    win32_error : UInt32,
-    failure_code : UInt32
+  struct FILE_IN_CABINET_INFO_A
+    property name_in_cabinet : Win32cr::Foundation::PSTR
+    property file_size : UInt32
+    property win32_error : UInt32
+    property dos_date : UInt16
+    property dos_time : UInt16
+    property dos_attribs : UInt16
+    property full_target_name : Win32cr::Foundation::CHAR[260]
+    def initialize(@name_in_cabinet : Win32cr::Foundation::PSTR, @file_size : UInt32, @win32_error : UInt32, @dos_date : UInt16, @dos_time : UInt16, @dos_attribs : UInt16, @full_target_name : Win32cr::Foundation::CHAR[260])
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_REGISTER_CONTROL_STATUSW,
-    cbSize : UInt32,
-    file_name : Win32cr::Foundation::PWSTR,
-    win32_error : UInt32,
-    failure_code : UInt32
+  struct FILE_IN_CABINET_INFO_W
+    property name_in_cabinet : Win32cr::Foundation::PWSTR
+    property file_size : UInt32
+    property win32_error : UInt32
+    property dos_date : UInt16
+    property dos_time : UInt16
+    property dos_attribs : UInt16
+    property full_target_name : UInt16[260]
+    def initialize(@name_in_cabinet : Win32cr::Foundation::PWSTR, @file_size : UInt32, @win32_error : UInt32, @dos_date : UInt16, @dos_time : UInt16, @dos_attribs : UInt16, @full_target_name : UInt16[260])
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_FILE_COPY_PARAMS_A,
-    cbSize : UInt32,
-    queue_handle : Void*,
-    source_root_path : Win32cr::Foundation::PSTR,
-    source_path : Win32cr::Foundation::PSTR,
-    source_filename : Win32cr::Foundation::PSTR,
-    source_description : Win32cr::Foundation::PSTR,
-    source_tagfile : Win32cr::Foundation::PSTR,
-    target_directory : Win32cr::Foundation::PSTR,
-    target_filename : Win32cr::Foundation::PSTR,
-    copy_style : UInt32,
-    layout_inf : Void*,
-    security_descriptor : Win32cr::Foundation::PSTR
+  struct SP_REGISTER_CONTROL_STATUSA
+    property cbSize : UInt32
+    property file_name : Win32cr::Foundation::PSTR
+    property win32_error : UInt32
+    property failure_code : UInt32
+    def initialize(@cbSize : UInt32, @file_name : Win32cr::Foundation::PSTR, @win32_error : UInt32, @failure_code : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_FILE_COPY_PARAMS_W,
-    cbSize : UInt32,
-    queue_handle : Void*,
-    source_root_path : Win32cr::Foundation::PWSTR,
-    source_path : Win32cr::Foundation::PWSTR,
-    source_filename : Win32cr::Foundation::PWSTR,
-    source_description : Win32cr::Foundation::PWSTR,
-    source_tagfile : Win32cr::Foundation::PWSTR,
-    target_directory : Win32cr::Foundation::PWSTR,
-    target_filename : Win32cr::Foundation::PWSTR,
-    copy_style : UInt32,
-    layout_inf : Void*,
-    security_descriptor : Win32cr::Foundation::PWSTR
+  struct SP_REGISTER_CONTROL_STATUSW
+    property cbSize : UInt32
+    property file_name : Win32cr::Foundation::PWSTR
+    property win32_error : UInt32
+    property failure_code : UInt32
+    def initialize(@cbSize : UInt32, @file_name : Win32cr::Foundation::PWSTR, @win32_error : UInt32, @failure_code : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_DEVINFO_DATA,
-    cbSize : UInt32,
-    class_guid : LibC::GUID,
-    dev_inst : UInt32,
-    reserved : LibC::UIntPtrT
+  struct SP_FILE_COPY_PARAMS_A
+    property cbSize : UInt32
+    property queue_handle : Void*
+    property source_root_path : Win32cr::Foundation::PSTR
+    property source_path : Win32cr::Foundation::PSTR
+    property source_filename : Win32cr::Foundation::PSTR
+    property source_description : Win32cr::Foundation::PSTR
+    property source_tagfile : Win32cr::Foundation::PSTR
+    property target_directory : Win32cr::Foundation::PSTR
+    property target_filename : Win32cr::Foundation::PSTR
+    property copy_style : UInt32
+    property layout_inf : Void*
+    property security_descriptor : Win32cr::Foundation::PSTR
+    def initialize(@cbSize : UInt32, @queue_handle : Void*, @source_root_path : Win32cr::Foundation::PSTR, @source_path : Win32cr::Foundation::PSTR, @source_filename : Win32cr::Foundation::PSTR, @source_description : Win32cr::Foundation::PSTR, @source_tagfile : Win32cr::Foundation::PSTR, @target_directory : Win32cr::Foundation::PSTR, @target_filename : Win32cr::Foundation::PSTR, @copy_style : UInt32, @layout_inf : Void*, @security_descriptor : Win32cr::Foundation::PSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_DEVICE_INTERFACE_DATA,
-    cbSize : UInt32,
-    interface_class_guid : LibC::GUID,
-    flags : UInt32,
-    reserved : LibC::UIntPtrT
+  struct SP_FILE_COPY_PARAMS_W
+    property cbSize : UInt32
+    property queue_handle : Void*
+    property source_root_path : Win32cr::Foundation::PWSTR
+    property source_path : Win32cr::Foundation::PWSTR
+    property source_filename : Win32cr::Foundation::PWSTR
+    property source_description : Win32cr::Foundation::PWSTR
+    property source_tagfile : Win32cr::Foundation::PWSTR
+    property target_directory : Win32cr::Foundation::PWSTR
+    property target_filename : Win32cr::Foundation::PWSTR
+    property copy_style : UInt32
+    property layout_inf : Void*
+    property security_descriptor : Win32cr::Foundation::PWSTR
+    def initialize(@cbSize : UInt32, @queue_handle : Void*, @source_root_path : Win32cr::Foundation::PWSTR, @source_path : Win32cr::Foundation::PWSTR, @source_filename : Win32cr::Foundation::PWSTR, @source_description : Win32cr::Foundation::PWSTR, @source_tagfile : Win32cr::Foundation::PWSTR, @target_directory : Win32cr::Foundation::PWSTR, @target_filename : Win32cr::Foundation::PWSTR, @copy_style : UInt32, @layout_inf : Void*, @security_descriptor : Win32cr::Foundation::PWSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_DEVICE_INTERFACE_DETAIL_DATA_A,
-    cbSize : UInt32,
-    device_path : Win32cr::Foundation::CHAR*
+  struct SP_DEVINFO_DATA
+    property cbSize : UInt32
+    property class_guid : LibC::GUID
+    property dev_inst : UInt32
+    property reserved : LibC::UIntPtrT
+    def initialize(@cbSize : UInt32, @class_guid : LibC::GUID, @dev_inst : UInt32, @reserved : LibC::UIntPtrT)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_DEVICE_INTERFACE_DETAIL_DATA_W,
-    cbSize : UInt32,
-    device_path : UInt16*
+  struct SP_DEVICE_INTERFACE_DATA
+    property cbSize : UInt32
+    property interface_class_guid : LibC::GUID
+    property flags : UInt32
+    property reserved : LibC::UIntPtrT
+    def initialize(@cbSize : UInt32, @interface_class_guid : LibC::GUID, @flags : UInt32, @reserved : LibC::UIntPtrT)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_DEVINFO_LIST_DETAIL_DATA_A,
-    cbSize : UInt32,
-    class_guid : LibC::GUID,
-    remote_machine_handle : Win32cr::Foundation::HANDLE,
-    remote_machine_name : Win32cr::Foundation::CHAR[263]
+  struct SP_DEVICE_INTERFACE_DETAIL_DATA_A
+    property cbSize : UInt32
+    property device_path : Win32cr::Foundation::CHAR*
+    def initialize(@cbSize : UInt32, @device_path : Win32cr::Foundation::CHAR*)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_DEVINFO_LIST_DETAIL_DATA_W,
-    cbSize : UInt32,
-    class_guid : LibC::GUID,
-    remote_machine_handle : Win32cr::Foundation::HANDLE,
-    remote_machine_name : UInt16[263]
+  struct SP_DEVICE_INTERFACE_DETAIL_DATA_W
+    property cbSize : UInt32
+    property device_path : UInt16*
+    def initialize(@cbSize : UInt32, @device_path : UInt16*)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_DEVINSTALL_PARAMS_A,
-    cbSize : UInt32,
-    flags : UInt32,
-    flags_ex : UInt32,
-    hwndParent : Win32cr::Foundation::HWND,
-    install_msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_A,
-    install_msg_handler_context : Void*,
-    file_queue : Void*,
-    class_install_reserved : LibC::UIntPtrT,
-    reserved : UInt32,
-    driver_path : Win32cr::Foundation::CHAR[260]
+  struct SP_DEVINFO_LIST_DETAIL_DATA_A
+    property cbSize : UInt32
+    property class_guid : LibC::GUID
+    property remote_machine_handle : Win32cr::Foundation::HANDLE
+    property remote_machine_name : Win32cr::Foundation::CHAR[263]
+    def initialize(@cbSize : UInt32, @class_guid : LibC::GUID, @remote_machine_handle : Win32cr::Foundation::HANDLE, @remote_machine_name : Win32cr::Foundation::CHAR[263])
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_DEVINSTALL_PARAMS_W,
-    cbSize : UInt32,
-    flags : UInt32,
-    flags_ex : UInt32,
-    hwndParent : Win32cr::Foundation::HWND,
-    install_msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_A,
-    install_msg_handler_context : Void*,
-    file_queue : Void*,
-    class_install_reserved : LibC::UIntPtrT,
-    reserved : UInt32,
-    driver_path : UInt16[260]
+  struct SP_DEVINFO_LIST_DETAIL_DATA_W
+    property cbSize : UInt32
+    property class_guid : LibC::GUID
+    property remote_machine_handle : Win32cr::Foundation::HANDLE
+    property remote_machine_name : UInt16[263]
+    def initialize(@cbSize : UInt32, @class_guid : LibC::GUID, @remote_machine_handle : Win32cr::Foundation::HANDLE, @remote_machine_name : UInt16[263])
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_CLASSINSTALL_HEADER,
-    cbSize : UInt32,
-    install_function : UInt32
+  struct SP_DEVINSTALL_PARAMS_A
+    property cbSize : UInt32
+    property flags : UInt32
+    property flags_ex : UInt32
+    property hwndParent : Win32cr::Foundation::HWND
+    property install_msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_A
+    property install_msg_handler_context : Void*
+    property file_queue : Void*
+    property class_install_reserved : LibC::UIntPtrT
+    property reserved : UInt32
+    property driver_path : Win32cr::Foundation::CHAR[260]
+    def initialize(@cbSize : UInt32, @flags : UInt32, @flags_ex : UInt32, @hwndParent : Win32cr::Foundation::HWND, @install_msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_A, @install_msg_handler_context : Void*, @file_queue : Void*, @class_install_reserved : LibC::UIntPtrT, @reserved : UInt32, @driver_path : Win32cr::Foundation::CHAR[260])
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_ENABLECLASS_PARAMS,
-    class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER,
-    class_guid : LibC::GUID,
-    enable_message : UInt32
+  struct SP_DEVINSTALL_PARAMS_W
+    property cbSize : UInt32
+    property flags : UInt32
+    property flags_ex : UInt32
+    property hwndParent : Win32cr::Foundation::HWND
+    property install_msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_A
+    property install_msg_handler_context : Void*
+    property file_queue : Void*
+    property class_install_reserved : LibC::UIntPtrT
+    property reserved : UInt32
+    property driver_path : UInt16[260]
+    def initialize(@cbSize : UInt32, @flags : UInt32, @flags_ex : UInt32, @hwndParent : Win32cr::Foundation::HWND, @install_msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_A, @install_msg_handler_context : Void*, @file_queue : Void*, @class_install_reserved : LibC::UIntPtrT, @reserved : UInt32, @driver_path : UInt16[260])
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_PROPCHANGE_PARAMS,
-    class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER,
-    state_change : UInt32,
-    scope : UInt32,
-    hw_profile : UInt32
+  struct SP_CLASSINSTALL_HEADER
+    property cbSize : UInt32
+    property install_function : UInt32
+    def initialize(@cbSize : UInt32, @install_function : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_REMOVEDEVICE_PARAMS,
-    class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER,
-    scope : UInt32,
-    hw_profile : UInt32
+  struct SP_ENABLECLASS_PARAMS
+    property class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER
+    property class_guid : LibC::GUID
+    property enable_message : UInt32
+    def initialize(@class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER, @class_guid : LibC::GUID, @enable_message : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_UNREMOVEDEVICE_PARAMS,
-    class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER,
-    scope : UInt32,
-    hw_profile : UInt32
-  {% end %}
-
-  @[Extern]
-  record SP_SELECTDEVICE_PARAMS_A,
-    class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER,
-    title : Win32cr::Foundation::CHAR[60],
-    instructions : Win32cr::Foundation::CHAR[256],
-    list_label : Win32cr::Foundation::CHAR[30],
-    sub_title : Win32cr::Foundation::CHAR[256],
-    reserved : UInt8[2]
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record SP_SELECTDEVICE_PARAMS_W,
-    class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER,
-    title : UInt16[60],
-    instructions : UInt16[256],
-    list_label : UInt16[30],
-    sub_title : UInt16[256]
+  struct SP_PROPCHANGE_PARAMS
+    property class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER
+    property state_change : UInt32
+    property scope : UInt32
+    property hw_profile : UInt32
+    def initialize(@class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER, @state_change : UInt32, @scope : UInt32, @hw_profile : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_DETECTDEVICE_PARAMS,
-    class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER,
-    detect_progress_notify : Win32cr::Devices::DeviceAndDriverInstallation::PDETECT_PROGRESS_NOTIFY,
-    progress_notify_param : Void*
+  struct SP_REMOVEDEVICE_PARAMS
+    property class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER
+    property scope : UInt32
+    property hw_profile : UInt32
+    def initialize(@class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER, @scope : UInt32, @hw_profile : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_INSTALLWIZARD_DATA,
-    class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER,
-    flags : UInt32,
-    dynamic_pages : Win32cr::UI::Controls::HPROPSHEETPAGE[20],
-    num_dynamic_pages : UInt32,
-    dynamic_page_flags : UInt32,
-    private_flags : UInt32,
-    private_data : Win32cr::Foundation::LPARAM,
-    hwndWizardDlg : Win32cr::Foundation::HWND
+  struct SP_UNREMOVEDEVICE_PARAMS
+    property class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER
+    property scope : UInt32
+    property hw_profile : UInt32
+    def initialize(@class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER, @scope : UInt32, @hw_profile : UInt32)
+    end
+  end
+  {% end %}
+
+  @[Extern]
+  struct SP_SELECTDEVICE_PARAMS_A
+    property class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER
+    property title : Win32cr::Foundation::CHAR[60]
+    property instructions : Win32cr::Foundation::CHAR[256]
+    property list_label : Win32cr::Foundation::CHAR[30]
+    property sub_title : Win32cr::Foundation::CHAR[256]
+    property reserved : UInt8[2]
+    def initialize(@class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER, @title : Win32cr::Foundation::CHAR[60], @instructions : Win32cr::Foundation::CHAR[256], @list_label : Win32cr::Foundation::CHAR[30], @sub_title : Win32cr::Foundation::CHAR[256], @reserved : UInt8[2])
+    end
+  end
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct SP_SELECTDEVICE_PARAMS_W
+    property class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER
+    property title : UInt16[60]
+    property instructions : UInt16[256]
+    property list_label : UInt16[30]
+    property sub_title : UInt16[256]
+    def initialize(@class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER, @title : UInt16[60], @instructions : UInt16[256], @list_label : UInt16[30], @sub_title : UInt16[256])
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_NEWDEVICEWIZARD_DATA,
-    class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER,
-    flags : UInt32,
-    dynamic_pages : Win32cr::UI::Controls::HPROPSHEETPAGE[20],
-    num_dynamic_pages : UInt32,
-    hwndWizardDlg : Win32cr::Foundation::HWND
-  {% end %}
-
-  @[Extern]
-  record SP_TROUBLESHOOTER_PARAMS_A,
-    class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER,
-    chm_file : Win32cr::Foundation::CHAR[260],
-    html_trouble_shooter : Win32cr::Foundation::CHAR[260]
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record SP_TROUBLESHOOTER_PARAMS_W,
-    class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER,
-    chm_file : UInt16[260],
-    html_trouble_shooter : UInt16[260]
-  {% end %}
-
-  @[Extern]
-  record SP_POWERMESSAGEWAKE_PARAMS_A,
-    class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER,
-    power_message_wake : Win32cr::Foundation::CHAR[512]
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  record SP_POWERMESSAGEWAKE_PARAMS_W,
-    class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER,
-    power_message_wake : UInt16[512]
+  struct SP_DETECTDEVICE_PARAMS
+    property class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER
+    property detect_progress_notify : Win32cr::Devices::DeviceAndDriverInstallation::PDETECT_PROGRESS_NOTIFY
+    property progress_notify_param : Void*
+    def initialize(@class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER, @detect_progress_notify : Win32cr::Devices::DeviceAndDriverInstallation::PDETECT_PROGRESS_NOTIFY, @progress_notify_param : Void*)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_DRVINFO_DATA_V2_A,
-    cbSize : UInt32,
-    driver_type : UInt32,
-    reserved : LibC::UIntPtrT,
-    description : Win32cr::Foundation::CHAR[256],
-    mfg_name : Win32cr::Foundation::CHAR[256],
-    provider_name : Win32cr::Foundation::CHAR[256],
-    driver_date : Win32cr::Foundation::FILETIME,
-    driver_version : UInt64
+  struct SP_INSTALLWIZARD_DATA
+    property class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER
+    property flags : UInt32
+    property dynamic_pages : Win32cr::UI::Controls::HPROPSHEETPAGE[20]
+    property num_dynamic_pages : UInt32
+    property dynamic_page_flags : UInt32
+    property private_flags : UInt32
+    property private_data : Win32cr::Foundation::LPARAM
+    property hwndWizardDlg : Win32cr::Foundation::HWND
+    def initialize(@class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER, @flags : UInt32, @dynamic_pages : Win32cr::UI::Controls::HPROPSHEETPAGE[20], @num_dynamic_pages : UInt32, @dynamic_page_flags : UInt32, @private_flags : UInt32, @private_data : Win32cr::Foundation::LPARAM, @hwndWizardDlg : Win32cr::Foundation::HWND)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_DRVINFO_DATA_V2_W,
-    cbSize : UInt32,
-    driver_type : UInt32,
-    reserved : LibC::UIntPtrT,
-    description : UInt16[256],
-    mfg_name : UInt16[256],
-    provider_name : UInt16[256],
-    driver_date : Win32cr::Foundation::FILETIME,
-    driver_version : UInt64
+  struct SP_NEWDEVICEWIZARD_DATA
+    property class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER
+    property flags : UInt32
+    property dynamic_pages : Win32cr::UI::Controls::HPROPSHEETPAGE[20]
+    property num_dynamic_pages : UInt32
+    property hwndWizardDlg : Win32cr::Foundation::HWND
+    def initialize(@class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER, @flags : UInt32, @dynamic_pages : Win32cr::UI::Controls::HPROPSHEETPAGE[20], @num_dynamic_pages : UInt32, @hwndWizardDlg : Win32cr::Foundation::HWND)
+    end
+  end
+  {% end %}
+
+  @[Extern]
+  struct SP_TROUBLESHOOTER_PARAMS_A
+    property class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER
+    property chm_file : Win32cr::Foundation::CHAR[260]
+    property html_trouble_shooter : Win32cr::Foundation::CHAR[260]
+    def initialize(@class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER, @chm_file : Win32cr::Foundation::CHAR[260], @html_trouble_shooter : Win32cr::Foundation::CHAR[260])
+    end
+  end
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct SP_TROUBLESHOOTER_PARAMS_W
+    property class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER
+    property chm_file : UInt16[260]
+    property html_trouble_shooter : UInt16[260]
+    def initialize(@class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER, @chm_file : UInt16[260], @html_trouble_shooter : UInt16[260])
+    end
+  end
+  {% end %}
+
+  @[Extern]
+  struct SP_POWERMESSAGEWAKE_PARAMS_A
+    property class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER
+    property power_message_wake : Win32cr::Foundation::CHAR[512]
+    def initialize(@class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER, @power_message_wake : Win32cr::Foundation::CHAR[512])
+    end
+  end
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct SP_POWERMESSAGEWAKE_PARAMS_W
+    property class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER
+    property power_message_wake : UInt16[512]
+    def initialize(@class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER, @power_message_wake : UInt16[512])
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_DRVINFO_DATA_V1_A,
-    cbSize : UInt32,
-    driver_type : UInt32,
-    reserved : LibC::UIntPtrT,
-    description : Win32cr::Foundation::CHAR[256],
-    mfg_name : Win32cr::Foundation::CHAR[256],
-    provider_name : Win32cr::Foundation::CHAR[256]
+  struct SP_DRVINFO_DATA_V2_A
+    property cbSize : UInt32
+    property driver_type : UInt32
+    property reserved : LibC::UIntPtrT
+    property description : Win32cr::Foundation::CHAR[256]
+    property mfg_name : Win32cr::Foundation::CHAR[256]
+    property provider_name : Win32cr::Foundation::CHAR[256]
+    property driver_date : Win32cr::Foundation::FILETIME
+    property driver_version : UInt64
+    def initialize(@cbSize : UInt32, @driver_type : UInt32, @reserved : LibC::UIntPtrT, @description : Win32cr::Foundation::CHAR[256], @mfg_name : Win32cr::Foundation::CHAR[256], @provider_name : Win32cr::Foundation::CHAR[256], @driver_date : Win32cr::Foundation::FILETIME, @driver_version : UInt64)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_DRVINFO_DATA_V1_W,
-    cbSize : UInt32,
-    driver_type : UInt32,
-    reserved : LibC::UIntPtrT,
-    description : UInt16[256],
-    mfg_name : UInt16[256],
-    provider_name : UInt16[256]
+  struct SP_DRVINFO_DATA_V2_W
+    property cbSize : UInt32
+    property driver_type : UInt32
+    property reserved : LibC::UIntPtrT
+    property description : UInt16[256]
+    property mfg_name : UInt16[256]
+    property provider_name : UInt16[256]
+    property driver_date : Win32cr::Foundation::FILETIME
+    property driver_version : UInt64
+    def initialize(@cbSize : UInt32, @driver_type : UInt32, @reserved : LibC::UIntPtrT, @description : UInt16[256], @mfg_name : UInt16[256], @provider_name : UInt16[256], @driver_date : Win32cr::Foundation::FILETIME, @driver_version : UInt64)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_DRVINFO_DETAIL_DATA_A,
-    cbSize : UInt32,
-    inf_date : Win32cr::Foundation::FILETIME,
-    compat_i_ds_offset : UInt32,
-    compat_i_ds_length : UInt32,
-    reserved : LibC::UIntPtrT,
-    section_name : Win32cr::Foundation::CHAR[256],
-    inf_file_name : Win32cr::Foundation::CHAR[260],
-    drv_description : Win32cr::Foundation::CHAR[256],
-    hardware_id : Win32cr::Foundation::CHAR*
+  struct SP_DRVINFO_DATA_V1_A
+    property cbSize : UInt32
+    property driver_type : UInt32
+    property reserved : LibC::UIntPtrT
+    property description : Win32cr::Foundation::CHAR[256]
+    property mfg_name : Win32cr::Foundation::CHAR[256]
+    property provider_name : Win32cr::Foundation::CHAR[256]
+    def initialize(@cbSize : UInt32, @driver_type : UInt32, @reserved : LibC::UIntPtrT, @description : Win32cr::Foundation::CHAR[256], @mfg_name : Win32cr::Foundation::CHAR[256], @provider_name : Win32cr::Foundation::CHAR[256])
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_DRVINFO_DETAIL_DATA_W,
-    cbSize : UInt32,
-    inf_date : Win32cr::Foundation::FILETIME,
-    compat_i_ds_offset : UInt32,
-    compat_i_ds_length : UInt32,
-    reserved : LibC::UIntPtrT,
-    section_name : UInt16[256],
-    inf_file_name : UInt16[260],
-    drv_description : UInt16[256],
-    hardware_id : UInt16*
+  struct SP_DRVINFO_DATA_V1_W
+    property cbSize : UInt32
+    property driver_type : UInt32
+    property reserved : LibC::UIntPtrT
+    property description : UInt16[256]
+    property mfg_name : UInt16[256]
+    property provider_name : UInt16[256]
+    def initialize(@cbSize : UInt32, @driver_type : UInt32, @reserved : LibC::UIntPtrT, @description : UInt16[256], @mfg_name : UInt16[256], @provider_name : UInt16[256])
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_DRVINSTALL_PARAMS,
-    cbSize : UInt32,
-    rank : UInt32,
-    flags : UInt32,
-    private_data : LibC::UIntPtrT,
-    reserved : UInt32
+  struct SP_DRVINFO_DETAIL_DATA_A
+    property cbSize : UInt32
+    property inf_date : Win32cr::Foundation::FILETIME
+    property compat_i_ds_offset : UInt32
+    property compat_i_ds_length : UInt32
+    property reserved : LibC::UIntPtrT
+    property section_name : Win32cr::Foundation::CHAR[256]
+    property inf_file_name : Win32cr::Foundation::CHAR[260]
+    property drv_description : Win32cr::Foundation::CHAR[256]
+    property hardware_id : Win32cr::Foundation::CHAR*
+    def initialize(@cbSize : UInt32, @inf_date : Win32cr::Foundation::FILETIME, @compat_i_ds_offset : UInt32, @compat_i_ds_length : UInt32, @reserved : LibC::UIntPtrT, @section_name : Win32cr::Foundation::CHAR[256], @inf_file_name : Win32cr::Foundation::CHAR[260], @drv_description : Win32cr::Foundation::CHAR[256], @hardware_id : Win32cr::Foundation::CHAR*)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record COINSTALLER_CONTEXT_DATA,
-    post_processing : Win32cr::Foundation::BOOL,
-    install_result : UInt32,
-    private_data : Void*
+  struct SP_DRVINFO_DETAIL_DATA_W
+    property cbSize : UInt32
+    property inf_date : Win32cr::Foundation::FILETIME
+    property compat_i_ds_offset : UInt32
+    property compat_i_ds_length : UInt32
+    property reserved : LibC::UIntPtrT
+    property section_name : UInt16[256]
+    property inf_file_name : UInt16[260]
+    property drv_description : UInt16[256]
+    property hardware_id : UInt16*
+    def initialize(@cbSize : UInt32, @inf_date : Win32cr::Foundation::FILETIME, @compat_i_ds_offset : UInt32, @compat_i_ds_length : UInt32, @reserved : LibC::UIntPtrT, @section_name : UInt16[256], @inf_file_name : UInt16[260], @drv_description : UInt16[256], @hardware_id : UInt16*)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_CLASSIMAGELIST_DATA,
-    cbSize : UInt32,
-    image_list : Win32cr::UI::Controls::HIMAGELIST,
-    reserved : LibC::UIntPtrT
+  struct SP_DRVINSTALL_PARAMS
+    property cbSize : UInt32
+    property rank : UInt32
+    property flags : UInt32
+    property private_data : LibC::UIntPtrT
+    property reserved : UInt32
+    def initialize(@cbSize : UInt32, @rank : UInt32, @flags : UInt32, @private_data : LibC::UIntPtrT, @reserved : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_PROPSHEETPAGE_REQUEST,
-    cbSize : UInt32,
-    page_requested : UInt32,
-    device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO,
-    device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*
+  struct COINSTALLER_CONTEXT_DATA
+    property post_processing : Win32cr::Foundation::BOOL
+    property install_result : UInt32
+    property private_data : Void*
+    def initialize(@post_processing : Win32cr::Foundation::BOOL, @install_result : UInt32, @private_data : Void*)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_BACKUP_QUEUE_PARAMS_V2_A,
-    cbSize : UInt32,
-    full_inf_path : Win32cr::Foundation::CHAR[260],
-    filename_offset : Int32,
-    reinstall_instance : Win32cr::Foundation::CHAR[260]
+  struct SP_CLASSIMAGELIST_DATA
+    property cbSize : UInt32
+    property image_list : Win32cr::UI::Controls::HIMAGELIST
+    property reserved : LibC::UIntPtrT
+    def initialize(@cbSize : UInt32, @image_list : Win32cr::UI::Controls::HIMAGELIST, @reserved : LibC::UIntPtrT)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_BACKUP_QUEUE_PARAMS_V2_W,
-    cbSize : UInt32,
-    full_inf_path : UInt16[260],
-    filename_offset : Int32,
-    reinstall_instance : UInt16[260]
+  struct SP_PROPSHEETPAGE_REQUEST
+    property cbSize : UInt32
+    property page_requested : UInt32
+    property device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO
+    property device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*
+    def initialize(@cbSize : UInt32, @page_requested : UInt32, @device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, @device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_BACKUP_QUEUE_PARAMS_V1_A,
-    cbSize : UInt32,
-    full_inf_path : Win32cr::Foundation::CHAR[260],
-    filename_offset : Int32
+  struct SP_BACKUP_QUEUE_PARAMS_V2_A
+    property cbSize : UInt32
+    property full_inf_path : Win32cr::Foundation::CHAR[260]
+    property filename_offset : Int32
+    property reinstall_instance : Win32cr::Foundation::CHAR[260]
+    def initialize(@cbSize : UInt32, @full_inf_path : Win32cr::Foundation::CHAR[260], @filename_offset : Int32, @reinstall_instance : Win32cr::Foundation::CHAR[260])
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_BACKUP_QUEUE_PARAMS_V1_W,
-    cbSize : UInt32,
-    full_inf_path : UInt16[260],
-    filename_offset : Int32
+  struct SP_BACKUP_QUEUE_PARAMS_V2_W
+    property cbSize : UInt32
+    property full_inf_path : UInt16[260]
+    property filename_offset : Int32
+    property reinstall_instance : UInt16[260]
+    def initialize(@cbSize : UInt32, @full_inf_path : UInt16[260], @filename_offset : Int32, @reinstall_instance : UInt16[260])
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_INF_SIGNER_INFO_V1_A,
-    cbSize : UInt32,
-    catalog_file : Win32cr::Foundation::CHAR[260],
-    digital_signer : Win32cr::Foundation::CHAR[260],
-    digital_signer_version : Win32cr::Foundation::CHAR[260]
+  struct SP_BACKUP_QUEUE_PARAMS_V1_A
+    property cbSize : UInt32
+    property full_inf_path : Win32cr::Foundation::CHAR[260]
+    property filename_offset : Int32
+    def initialize(@cbSize : UInt32, @full_inf_path : Win32cr::Foundation::CHAR[260], @filename_offset : Int32)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_INF_SIGNER_INFO_V1_W,
-    cbSize : UInt32,
-    catalog_file : UInt16[260],
-    digital_signer : UInt16[260],
-    digital_signer_version : UInt16[260]
+  struct SP_BACKUP_QUEUE_PARAMS_V1_W
+    property cbSize : UInt32
+    property full_inf_path : UInt16[260]
+    property filename_offset : Int32
+    def initialize(@cbSize : UInt32, @full_inf_path : UInt16[260], @filename_offset : Int32)
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_INF_SIGNER_INFO_V2_A,
-    cbSize : UInt32,
-    catalog_file : Win32cr::Foundation::CHAR[260],
-    digital_signer : Win32cr::Foundation::CHAR[260],
-    digital_signer_version : Win32cr::Foundation::CHAR[260],
-    signer_score : UInt32
+  struct SP_INF_SIGNER_INFO_V1_A
+    property cbSize : UInt32
+    property catalog_file : Win32cr::Foundation::CHAR[260]
+    property digital_signer : Win32cr::Foundation::CHAR[260]
+    property digital_signer_version : Win32cr::Foundation::CHAR[260]
+    def initialize(@cbSize : UInt32, @catalog_file : Win32cr::Foundation::CHAR[260], @digital_signer : Win32cr::Foundation::CHAR[260], @digital_signer_version : Win32cr::Foundation::CHAR[260])
+    end
+  end
   {% end %}
 
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  record SP_INF_SIGNER_INFO_V2_W,
-    cbSize : UInt32,
-    catalog_file : UInt16[260],
-    digital_signer : UInt16[260],
-    digital_signer_version : UInt16[260],
-    signer_score : UInt32
+  struct SP_INF_SIGNER_INFO_V1_W
+    property cbSize : UInt32
+    property catalog_file : UInt16[260]
+    property digital_signer : UInt16[260]
+    property digital_signer_version : UInt16[260]
+    def initialize(@cbSize : UInt32, @catalog_file : UInt16[260], @digital_signer : UInt16[260], @digital_signer_version : UInt16[260])
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct SP_INF_SIGNER_INFO_V2_A
+    property cbSize : UInt32
+    property catalog_file : Win32cr::Foundation::CHAR[260]
+    property digital_signer : Win32cr::Foundation::CHAR[260]
+    property digital_signer_version : Win32cr::Foundation::CHAR[260]
+    property signer_score : UInt32
+    def initialize(@cbSize : UInt32, @catalog_file : Win32cr::Foundation::CHAR[260], @digital_signer : Win32cr::Foundation::CHAR[260], @digital_signer_version : Win32cr::Foundation::CHAR[260], @signer_score : UInt32)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct SP_INF_SIGNER_INFO_V2_W
+    property cbSize : UInt32
+    property catalog_file : UInt16[260]
+    property digital_signer : UInt16[260]
+    property digital_signer_version : UInt16[260]
+    property signer_score : UInt32
+    def initialize(@cbSize : UInt32, @catalog_file : UInt16[260], @digital_signer : UInt16[260], @digital_signer_version : UInt16[260], @signer_score : UInt32)
+    end
+  end
   {% end %}
 
   @[Extern]
-  record CONFLICT_DETAILS_A,
-    cd_ul_size : UInt32,
-    cd_ul_mask : UInt32,
-    cd_dn_dev_inst : UInt32,
-    cd_rd_res_des : LibC::UIntPtrT,
-    cd_ul_flags : UInt32,
-    cd_sz_description : Win32cr::Foundation::CHAR[260]
+  struct CONFLICT_DETAILS_A
+    property cd_ul_size : UInt32
+    property cd_ul_mask : UInt32
+    property cd_dn_dev_inst : UInt32
+    property cd_rd_res_des : LibC::UIntPtrT
+    property cd_ul_flags : UInt32
+    property cd_sz_description : Win32cr::Foundation::CHAR[260]
+    def initialize(@cd_ul_size : UInt32, @cd_ul_mask : UInt32, @cd_dn_dev_inst : UInt32, @cd_rd_res_des : LibC::UIntPtrT, @cd_ul_flags : UInt32, @cd_sz_description : Win32cr::Foundation::CHAR[260])
+    end
+  end
 
   @[Extern]
-  record CONFLICT_DETAILS_W,
-    cd_ul_size : UInt32,
-    cd_ul_mask : UInt32,
-    cd_dn_dev_inst : UInt32,
-    cd_rd_res_des : LibC::UIntPtrT,
-    cd_ul_flags : UInt32,
-    cd_sz_description : UInt16[260]
+  struct CONFLICT_DETAILS_W
+    property cd_ul_size : UInt32
+    property cd_ul_mask : UInt32
+    property cd_dn_dev_inst : UInt32
+    property cd_rd_res_des : LibC::UIntPtrT
+    property cd_ul_flags : UInt32
+    property cd_sz_description : UInt16[260]
+    def initialize(@cd_ul_size : UInt32, @cd_ul_mask : UInt32, @cd_dn_dev_inst : UInt32, @cd_rd_res_des : LibC::UIntPtrT, @cd_ul_flags : UInt32, @cd_sz_description : UInt16[260])
+    end
+  end
 
   @[Extern]
-  record MEM_RANGE,
-    mr_align : UInt64,
-    mr_n_bytes : UInt32,
-    mr_min : UInt64,
-    mr_max : UInt64,
-    mr_flags : UInt32,
-    mr_reserved : UInt32
+  struct MEM_RANGE
+    property mr_align : UInt64
+    property mr_n_bytes : UInt32
+    property mr_min : UInt64
+    property mr_max : UInt64
+    property mr_flags : UInt32
+    property mr_reserved : UInt32
+    def initialize(@mr_align : UInt64, @mr_n_bytes : UInt32, @mr_min : UInt64, @mr_max : UInt64, @mr_flags : UInt32, @mr_reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record MEM_DES,
-    md_count : UInt32,
-    md_type : UInt32,
-    md_alloc_base : UInt64,
-    md_alloc_end : UInt64,
-    md_flags : UInt32,
-    md_reserved : UInt32
+  struct MEM_DES
+    property md_count : UInt32
+    property md_type : UInt32
+    property md_alloc_base : UInt64
+    property md_alloc_end : UInt64
+    property md_flags : UInt32
+    property md_reserved : UInt32
+    def initialize(@md_count : UInt32, @md_type : UInt32, @md_alloc_base : UInt64, @md_alloc_end : UInt64, @md_flags : UInt32, @md_reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record MEM_RESOURCE,
-    mem_header : Win32cr::Devices::DeviceAndDriverInstallation::MEM_DES,
-    mem_data : Win32cr::Devices::DeviceAndDriverInstallation::MEM_RANGE*
+  struct MEM_RESOURCE
+    property mem_header : Win32cr::Devices::DeviceAndDriverInstallation::MEM_DES
+    property mem_data : Win32cr::Devices::DeviceAndDriverInstallation::MEM_RANGE*
+    def initialize(@mem_header : Win32cr::Devices::DeviceAndDriverInstallation::MEM_DES, @mem_data : Win32cr::Devices::DeviceAndDriverInstallation::MEM_RANGE*)
+    end
+  end
 
   @[Extern]
-  record Mem_Large_Range_s,
-    mlr_align : UInt64,
-    mlr_n_bytes : UInt64,
-    mlr_min : UInt64,
-    mlr_max : UInt64,
-    mlr_flags : UInt32,
-    mlr_reserved : UInt32
+  struct Mem_Large_Range_s
+    property mlr_align : UInt64
+    property mlr_n_bytes : UInt64
+    property mlr_min : UInt64
+    property mlr_max : UInt64
+    property mlr_flags : UInt32
+    property mlr_reserved : UInt32
+    def initialize(@mlr_align : UInt64, @mlr_n_bytes : UInt64, @mlr_min : UInt64, @mlr_max : UInt64, @mlr_flags : UInt32, @mlr_reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record Mem_Large_Des_s,
-    mld_count : UInt32,
-    mld_type : UInt32,
-    mld_alloc_base : UInt64,
-    mld_alloc_end : UInt64,
-    mld_flags : UInt32,
-    mld_reserved : UInt32
+  struct Mem_Large_Des_s
+    property mld_count : UInt32
+    property mld_type : UInt32
+    property mld_alloc_base : UInt64
+    property mld_alloc_end : UInt64
+    property mld_flags : UInt32
+    property mld_reserved : UInt32
+    def initialize(@mld_count : UInt32, @mld_type : UInt32, @mld_alloc_base : UInt64, @mld_alloc_end : UInt64, @mld_flags : UInt32, @mld_reserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record Mem_Large_Resource_s,
-    mem_large_header : Win32cr::Devices::DeviceAndDriverInstallation::Mem_Large_Des_s,
-    mem_large_data : Win32cr::Devices::DeviceAndDriverInstallation::Mem_Large_Range_s*
+  struct Mem_Large_Resource_s
+    property mem_large_header : Win32cr::Devices::DeviceAndDriverInstallation::Mem_Large_Des_s
+    property mem_large_data : Win32cr::Devices::DeviceAndDriverInstallation::Mem_Large_Range_s*
+    def initialize(@mem_large_header : Win32cr::Devices::DeviceAndDriverInstallation::Mem_Large_Des_s, @mem_large_data : Win32cr::Devices::DeviceAndDriverInstallation::Mem_Large_Range_s*)
+    end
+  end
 
   @[Extern]
-  record IO_RANGE,
-    ior_align : UInt64,
-    ior_n_ports : UInt32,
-    ior_min : UInt64,
-    ior_max : UInt64,
-    ior_range_flags : UInt32,
-    ior_alias : UInt64
+  struct IO_RANGE
+    property ior_align : UInt64
+    property ior_n_ports : UInt32
+    property ior_min : UInt64
+    property ior_max : UInt64
+    property ior_range_flags : UInt32
+    property ior_alias : UInt64
+    def initialize(@ior_align : UInt64, @ior_n_ports : UInt32, @ior_min : UInt64, @ior_max : UInt64, @ior_range_flags : UInt32, @ior_alias : UInt64)
+    end
+  end
 
   @[Extern]
-  record IO_DES,
-    iod_count : UInt32,
-    iod_type : UInt32,
-    iod_alloc_base : UInt64,
-    iod_alloc_end : UInt64,
-    iod_des_flags : UInt32
+  struct IO_DES
+    property iod_count : UInt32
+    property iod_type : UInt32
+    property iod_alloc_base : UInt64
+    property iod_alloc_end : UInt64
+    property iod_des_flags : UInt32
+    def initialize(@iod_count : UInt32, @iod_type : UInt32, @iod_alloc_base : UInt64, @iod_alloc_end : UInt64, @iod_des_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record IO_RESOURCE,
-    io_header : Win32cr::Devices::DeviceAndDriverInstallation::IO_DES,
-    io_data : Win32cr::Devices::DeviceAndDriverInstallation::IO_RANGE*
+  struct IO_RESOURCE
+    property io_header : Win32cr::Devices::DeviceAndDriverInstallation::IO_DES
+    property io_data : Win32cr::Devices::DeviceAndDriverInstallation::IO_RANGE*
+    def initialize(@io_header : Win32cr::Devices::DeviceAndDriverInstallation::IO_DES, @io_data : Win32cr::Devices::DeviceAndDriverInstallation::IO_RANGE*)
+    end
+  end
 
   @[Extern]
-  record DMA_RANGE,
-    dr_min : UInt32,
-    dr_max : UInt32,
-    dr_flags : UInt32
+  struct DMA_RANGE
+    property dr_min : UInt32
+    property dr_max : UInt32
+    property dr_flags : UInt32
+    def initialize(@dr_min : UInt32, @dr_max : UInt32, @dr_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record DMA_DES,
-    dd_count : UInt32,
-    dd_type : UInt32,
-    dd_flags : UInt32,
-    dd_alloc_chan : UInt32
+  struct DMA_DES
+    property dd_count : UInt32
+    property dd_type : UInt32
+    property dd_flags : UInt32
+    property dd_alloc_chan : UInt32
+    def initialize(@dd_count : UInt32, @dd_type : UInt32, @dd_flags : UInt32, @dd_alloc_chan : UInt32)
+    end
+  end
 
   @[Extern]
-  record DMA_RESOURCE,
-    dma_header : Win32cr::Devices::DeviceAndDriverInstallation::DMA_DES,
-    dma_data : Win32cr::Devices::DeviceAndDriverInstallation::DMA_RANGE*
+  struct DMA_RESOURCE
+    property dma_header : Win32cr::Devices::DeviceAndDriverInstallation::DMA_DES
+    property dma_data : Win32cr::Devices::DeviceAndDriverInstallation::DMA_RANGE*
+    def initialize(@dma_header : Win32cr::Devices::DeviceAndDriverInstallation::DMA_DES, @dma_data : Win32cr::Devices::DeviceAndDriverInstallation::DMA_RANGE*)
+    end
+  end
 
   @[Extern]
-  record IRQ_RANGE,
-    irqr_min : UInt32,
-    irqr_max : UInt32,
-    irqr_flags : UInt32
+  struct IRQ_RANGE
+    property irqr_min : UInt32
+    property irqr_max : UInt32
+    property irqr_flags : UInt32
+    def initialize(@irqr_min : UInt32, @irqr_max : UInt32, @irqr_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record IRQ_DES_32,
-    irqd_count : UInt32,
-    irqd_type : UInt32,
-    irqd_flags : UInt32,
-    irqd_alloc_num : UInt32,
-    irqd_affinity : UInt32
+  struct IRQ_DES_32
+    property irqd_count : UInt32
+    property irqd_type : UInt32
+    property irqd_flags : UInt32
+    property irqd_alloc_num : UInt32
+    property irqd_affinity : UInt32
+    def initialize(@irqd_count : UInt32, @irqd_type : UInt32, @irqd_flags : UInt32, @irqd_alloc_num : UInt32, @irqd_affinity : UInt32)
+    end
+  end
 
   @[Extern]
-  record IRQ_DES_64,
-    irqd_count : UInt32,
-    irqd_type : UInt32,
-    irqd_flags : UInt32,
-    irqd_alloc_num : UInt32,
-    irqd_affinity : UInt64
+  struct IRQ_DES_64
+    property irqd_count : UInt32
+    property irqd_type : UInt32
+    property irqd_flags : UInt32
+    property irqd_alloc_num : UInt32
+    property irqd_affinity : UInt64
+    def initialize(@irqd_count : UInt32, @irqd_type : UInt32, @irqd_flags : UInt32, @irqd_alloc_num : UInt32, @irqd_affinity : UInt64)
+    end
+  end
 
   @[Extern]
-  record IRQ_RESOURCE_32,
-    irq_header : Win32cr::Devices::DeviceAndDriverInstallation::IRQ_DES_32,
-    irq_data : Win32cr::Devices::DeviceAndDriverInstallation::IRQ_RANGE*
+  struct IRQ_RESOURCE_32
+    property irq_header : Win32cr::Devices::DeviceAndDriverInstallation::IRQ_DES_32
+    property irq_data : Win32cr::Devices::DeviceAndDriverInstallation::IRQ_RANGE*
+    def initialize(@irq_header : Win32cr::Devices::DeviceAndDriverInstallation::IRQ_DES_32, @irq_data : Win32cr::Devices::DeviceAndDriverInstallation::IRQ_RANGE*)
+    end
+  end
 
   @[Extern]
-  record IRQ_RESOURCE_64,
-    irq_header : Win32cr::Devices::DeviceAndDriverInstallation::IRQ_DES_64,
-    irq_data : Win32cr::Devices::DeviceAndDriverInstallation::IRQ_RANGE*
+  struct IRQ_RESOURCE_64
+    property irq_header : Win32cr::Devices::DeviceAndDriverInstallation::IRQ_DES_64
+    property irq_data : Win32cr::Devices::DeviceAndDriverInstallation::IRQ_RANGE*
+    def initialize(@irq_header : Win32cr::Devices::DeviceAndDriverInstallation::IRQ_DES_64, @irq_data : Win32cr::Devices::DeviceAndDriverInstallation::IRQ_RANGE*)
+    end
+  end
 
   @[Extern]
-  record DevPrivate_Range_s,
-    pr_data1 : UInt32,
-    pr_data2 : UInt32,
-    pr_data3 : UInt32
+  struct DevPrivate_Range_s
+    property pr_data1 : UInt32
+    property pr_data2 : UInt32
+    property pr_data3 : UInt32
+    def initialize(@pr_data1 : UInt32, @pr_data2 : UInt32, @pr_data3 : UInt32)
+    end
+  end
 
   @[Extern]
-  record DevPrivate_Des_s,
-    pd_count : UInt32,
-    pd_type : UInt32,
-    pd_data1 : UInt32,
-    pd_data2 : UInt32,
-    pd_data3 : UInt32,
-    pd_flags : UInt32
+  struct DevPrivate_Des_s
+    property pd_count : UInt32
+    property pd_type : UInt32
+    property pd_data1 : UInt32
+    property pd_data2 : UInt32
+    property pd_data3 : UInt32
+    property pd_flags : UInt32
+    def initialize(@pd_count : UInt32, @pd_type : UInt32, @pd_data1 : UInt32, @pd_data2 : UInt32, @pd_data3 : UInt32, @pd_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record DevPrivate_Resource_s,
-    prv_header : Win32cr::Devices::DeviceAndDriverInstallation::DevPrivate_Des_s,
-    prv_data : Win32cr::Devices::DeviceAndDriverInstallation::DevPrivate_Range_s*
+  struct DevPrivate_Resource_s
+    property prv_header : Win32cr::Devices::DeviceAndDriverInstallation::DevPrivate_Des_s
+    property prv_data : Win32cr::Devices::DeviceAndDriverInstallation::DevPrivate_Range_s*
+    def initialize(@prv_header : Win32cr::Devices::DeviceAndDriverInstallation::DevPrivate_Des_s, @prv_data : Win32cr::Devices::DeviceAndDriverInstallation::DevPrivate_Range_s*)
+    end
+  end
 
   @[Extern]
-  record CS_DES,
-    csd_signature_length : UInt32,
-    csd_legacy_data_offset : UInt32,
-    csd_legacy_data_size : UInt32,
-    csd_flags : UInt32,
-    csd_class_guid : LibC::GUID,
-    csd_signature : UInt8*
+  struct CS_DES
+    property csd_signature_length : UInt32
+    property csd_legacy_data_offset : UInt32
+    property csd_legacy_data_size : UInt32
+    property csd_flags : UInt32
+    property csd_class_guid : LibC::GUID
+    property csd_signature : UInt8*
+    def initialize(@csd_signature_length : UInt32, @csd_legacy_data_offset : UInt32, @csd_legacy_data_size : UInt32, @csd_flags : UInt32, @csd_class_guid : LibC::GUID, @csd_signature : UInt8*)
+    end
+  end
 
   @[Extern]
-  record CS_RESOURCE,
-    cs_header : Win32cr::Devices::DeviceAndDriverInstallation::CS_DES
+  struct CS_RESOURCE
+    property cs_header : Win32cr::Devices::DeviceAndDriverInstallation::CS_DES
+    def initialize(@cs_header : Win32cr::Devices::DeviceAndDriverInstallation::CS_DES)
+    end
+  end
 
   @[Extern]
-  record PCCARD_DES,
-    pcd_count : UInt32,
-    pcd_type : UInt32,
-    pcd_flags : UInt32,
-    pcd_config_index : UInt8,
-    pcd_reserved : UInt8[3],
-    pcd_memory_card_base1 : UInt32,
-    pcd_memory_card_base2 : UInt32,
-    pcd_memory_card_base : UInt32[2],
-    pcd_memory_flags : UInt16[2],
-    pcd_io_flags : UInt8[2]
+  struct PCCARD_DES
+    property pcd_count : UInt32
+    property pcd_type : UInt32
+    property pcd_flags : UInt32
+    property pcd_config_index : UInt8
+    property pcd_reserved : UInt8[3]
+    property pcd_memory_card_base1 : UInt32
+    property pcd_memory_card_base2 : UInt32
+    property pcd_memory_card_base : UInt32[2]
+    property pcd_memory_flags : UInt16[2]
+    property pcd_io_flags : UInt8[2]
+    def initialize(@pcd_count : UInt32, @pcd_type : UInt32, @pcd_flags : UInt32, @pcd_config_index : UInt8, @pcd_reserved : UInt8[3], @pcd_memory_card_base1 : UInt32, @pcd_memory_card_base2 : UInt32, @pcd_memory_card_base : UInt32[2], @pcd_memory_flags : UInt16[2], @pcd_io_flags : UInt8[2])
+    end
+  end
 
   @[Extern]
-  record PCCARD_RESOURCE,
-    pc_card_header : Win32cr::Devices::DeviceAndDriverInstallation::PCCARD_DES
+  struct PCCARD_RESOURCE
+    property pc_card_header : Win32cr::Devices::DeviceAndDriverInstallation::PCCARD_DES
+    def initialize(@pc_card_header : Win32cr::Devices::DeviceAndDriverInstallation::PCCARD_DES)
+    end
+  end
 
   @[Extern]
-  record MFCARD_DES,
-    pmf_count : UInt32,
-    pmf_type : UInt32,
-    pmf_flags : UInt32,
-    pmf_config_options : UInt8,
-    pmf_io_resource_index : UInt8,
-    pmf_reserved : UInt8[2],
-    pmf_config_register_base : UInt32
+  struct MFCARD_DES
+    property pmf_count : UInt32
+    property pmf_type : UInt32
+    property pmf_flags : UInt32
+    property pmf_config_options : UInt8
+    property pmf_io_resource_index : UInt8
+    property pmf_reserved : UInt8[2]
+    property pmf_config_register_base : UInt32
+    def initialize(@pmf_count : UInt32, @pmf_type : UInt32, @pmf_flags : UInt32, @pmf_config_options : UInt8, @pmf_io_resource_index : UInt8, @pmf_reserved : UInt8[2], @pmf_config_register_base : UInt32)
+    end
+  end
 
   @[Extern]
-  record MFCARD_RESOURCE,
-    mf_card_header : Win32cr::Devices::DeviceAndDriverInstallation::MFCARD_DES
+  struct MFCARD_RESOURCE
+    property mf_card_header : Win32cr::Devices::DeviceAndDriverInstallation::MFCARD_DES
+    def initialize(@mf_card_header : Win32cr::Devices::DeviceAndDriverInstallation::MFCARD_DES)
+    end
+  end
 
   @[Extern]
-  record BUSNUMBER_RANGE,
-    busr_min : UInt32,
-    busr_max : UInt32,
-    busr_n_bus_numbers : UInt32,
-    busr_flags : UInt32
+  struct BUSNUMBER_RANGE
+    property busr_min : UInt32
+    property busr_max : UInt32
+    property busr_n_bus_numbers : UInt32
+    property busr_flags : UInt32
+    def initialize(@busr_min : UInt32, @busr_max : UInt32, @busr_n_bus_numbers : UInt32, @busr_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record BUSNUMBER_DES,
-    busd_count : UInt32,
-    busd_type : UInt32,
-    busd_flags : UInt32,
-    busd_alloc_base : UInt32,
-    busd_alloc_end : UInt32
+  struct BUSNUMBER_DES
+    property busd_count : UInt32
+    property busd_type : UInt32
+    property busd_flags : UInt32
+    property busd_alloc_base : UInt32
+    property busd_alloc_end : UInt32
+    def initialize(@busd_count : UInt32, @busd_type : UInt32, @busd_flags : UInt32, @busd_alloc_base : UInt32, @busd_alloc_end : UInt32)
+    end
+  end
 
   @[Extern]
-  record BUSNUMBER_RESOURCE,
-    bus_number_header : Win32cr::Devices::DeviceAndDriverInstallation::BUSNUMBER_DES,
-    bus_number_data : Win32cr::Devices::DeviceAndDriverInstallation::BUSNUMBER_RANGE*
+  struct BUSNUMBER_RESOURCE
+    property bus_number_header : Win32cr::Devices::DeviceAndDriverInstallation::BUSNUMBER_DES
+    property bus_number_data : Win32cr::Devices::DeviceAndDriverInstallation::BUSNUMBER_RANGE*
+    def initialize(@bus_number_header : Win32cr::Devices::DeviceAndDriverInstallation::BUSNUMBER_DES, @bus_number_data : Win32cr::Devices::DeviceAndDriverInstallation::BUSNUMBER_RANGE*)
+    end
+  end
 
   @[Extern]
-  record Connection_Des_s,
-    cond_type : UInt32,
-    cond_flags : UInt32,
-    cond_class : UInt8,
-    cond_class_type : UInt8,
-    cond_reserved1 : UInt8,
-    cond_reserved2 : UInt8,
-    cond_id : Win32cr::Foundation::LARGE_INTEGER
+  struct Connection_Des_s
+    property cond_type : UInt32
+    property cond_flags : UInt32
+    property cond_class : UInt8
+    property cond_class_type : UInt8
+    property cond_reserved1 : UInt8
+    property cond_reserved2 : UInt8
+    property cond_id : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@cond_type : UInt32, @cond_flags : UInt32, @cond_class : UInt8, @cond_class_type : UInt8, @cond_reserved1 : UInt8, @cond_reserved2 : UInt8, @cond_id : Win32cr::Foundation::LARGE_INTEGER)
+    end
+  end
 
   @[Extern]
-  record Connection_Resource_s,
-    connection_header : Win32cr::Devices::DeviceAndDriverInstallation::Connection_Des_s
+  struct Connection_Resource_s
+    property connection_header : Win32cr::Devices::DeviceAndDriverInstallation::Connection_Des_s
+    def initialize(@connection_header : Win32cr::Devices::DeviceAndDriverInstallation::Connection_Des_s)
+    end
+  end
 
   @[Extern]
-  record HWProfileInfo_sA,
-    hwpi_ul_hw_profile : UInt32,
-    hwpi_sz_friendly_name : Win32cr::Foundation::CHAR[80],
-    hwpi_dw_flags : UInt32
+  struct HWProfileInfo_sA
+    property hwpi_ul_hw_profile : UInt32
+    property hwpi_sz_friendly_name : Win32cr::Foundation::CHAR[80]
+    property hwpi_dw_flags : UInt32
+    def initialize(@hwpi_ul_hw_profile : UInt32, @hwpi_sz_friendly_name : Win32cr::Foundation::CHAR[80], @hwpi_dw_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record HWProfileInfo_sW,
-    hwpi_ul_hw_profile : UInt32,
-    hwpi_sz_friendly_name : UInt16[80],
-    hwpi_dw_flags : UInt32
+  struct HWProfileInfo_sW
+    property hwpi_ul_hw_profile : UInt32
+    property hwpi_sz_friendly_name : UInt16[80]
+    property hwpi_dw_flags : UInt32
+    def initialize(@hwpi_ul_hw_profile : UInt32, @hwpi_sz_friendly_name : UInt16[80], @hwpi_dw_flags : UInt32)
+    end
+  end
 
   @[Extern]
-  record CM_NOTIFY_FILTER,
-    cbSize : UInt32,
-    flags : UInt32,
-    filter_type : Win32cr::Devices::DeviceAndDriverInstallation::CM_NOTIFY_FILTER_TYPE,
-    reserved : UInt32,
-    u : U_e__union_ do
+  struct CM_NOTIFY_FILTER
+    property cbSize : UInt32
+    property flags : UInt32
+    property filter_type : Win32cr::Devices::DeviceAndDriverInstallation::CM_NOTIFY_FILTER_TYPE
+    property reserved : UInt32
+    property u : U_e__union_
 
     # Nested Type U_e__union_
     @[Extern(union: true)]
-    record U_e__union_,
-      device_interface : DeviceInterface_e__Struct_,
-      device_handle : DeviceHandle_e__Struct_,
-      device_instance : DeviceInstance_e__Struct_ do
+    struct U_e__union_
+    property device_interface : DeviceInterface_e__Struct_
+    property device_handle : DeviceHandle_e__Struct_
+    property device_instance : DeviceInstance_e__Struct_
 
       # Nested Type DeviceHandle_e__Struct_
       @[Extern]
-      record DeviceHandle_e__Struct_,
-        hTarget : Win32cr::Foundation::HANDLE
+      struct DeviceHandle_e__Struct_
+    property hTarget : Win32cr::Foundation::HANDLE
+    def initialize(@hTarget : Win32cr::Foundation::HANDLE)
+    end
+      end
 
 
       # Nested Type DeviceInstance_e__Struct_
       @[Extern]
-      record DeviceInstance_e__Struct_,
-        instance_id : UInt16[200]
+      struct DeviceInstance_e__Struct_
+    property instance_id : UInt16[200]
+    def initialize(@instance_id : UInt16[200])
+    end
+      end
 
 
       # Nested Type DeviceInterface_e__Struct_
       @[Extern]
-      record DeviceInterface_e__Struct_,
-        class_guid : LibC::GUID
+      struct DeviceInterface_e__Struct_
+    property class_guid : LibC::GUID
+    def initialize(@class_guid : LibC::GUID)
+    end
+      end
 
+    def initialize(@device_interface : DeviceInterface_e__Struct_, @device_handle : DeviceHandle_e__Struct_, @device_instance : DeviceInstance_e__Struct_)
+    end
     end
 
+    def initialize(@cbSize : UInt32, @flags : UInt32, @filter_type : Win32cr::Devices::DeviceAndDriverInstallation::CM_NOTIFY_FILTER_TYPE, @reserved : UInt32, @u : U_e__union_)
+    end
   end
 
   @[Extern]
-  record CM_NOTIFY_EVENT_DATA,
-    filter_type : Win32cr::Devices::DeviceAndDriverInstallation::CM_NOTIFY_FILTER_TYPE,
-    reserved : UInt32,
-    u : U_e__union_ do
+  struct CM_NOTIFY_EVENT_DATA
+    property filter_type : Win32cr::Devices::DeviceAndDriverInstallation::CM_NOTIFY_FILTER_TYPE
+    property reserved : UInt32
+    property u : U_e__union_
 
     # Nested Type U_e__union_
     @[Extern(union: true)]
-    record U_e__union_,
-      device_interface : DeviceInterface_e__Struct_,
-      device_handle : DeviceHandle_e__Struct_,
-      device_instance : DeviceInstance_e__Struct_ do
+    struct U_e__union_
+    property device_interface : DeviceInterface_e__Struct_
+    property device_handle : DeviceHandle_e__Struct_
+    property device_instance : DeviceInstance_e__Struct_
 
       # Nested Type DeviceInstance_e__Struct_
       @[Extern]
-      record DeviceInstance_e__Struct_,
-        instance_id : UInt16*
+      struct DeviceInstance_e__Struct_
+    property instance_id : UInt16*
+    def initialize(@instance_id : UInt16*)
+    end
+      end
 
 
       # Nested Type DeviceInterface_e__Struct_
       @[Extern]
-      record DeviceInterface_e__Struct_,
-        class_guid : LibC::GUID,
-        symbolic_link : UInt16*
+      struct DeviceInterface_e__Struct_
+    property class_guid : LibC::GUID
+    property symbolic_link : UInt16*
+    def initialize(@class_guid : LibC::GUID, @symbolic_link : UInt16*)
+    end
+      end
 
 
       # Nested Type DeviceHandle_e__Struct_
       @[Extern]
-      record DeviceHandle_e__Struct_,
-        event_guid : LibC::GUID,
-        name_offset : Int32,
-        data_size : UInt32,
-        data : UInt8*
+      struct DeviceHandle_e__Struct_
+    property event_guid : LibC::GUID
+    property name_offset : Int32
+    property data_size : UInt32
+    property data : UInt8*
+    def initialize(@event_guid : LibC::GUID, @name_offset : Int32, @data_size : UInt32, @data : UInt8*)
+    end
+      end
 
+    def initialize(@device_interface : DeviceInterface_e__Struct_, @device_handle : DeviceHandle_e__Struct_, @device_instance : DeviceInstance_e__Struct_)
+    end
     end
 
+    def initialize(@filter_type : Win32cr::Devices::DeviceAndDriverInstallation::CM_NOTIFY_FILTER_TYPE, @reserved : UInt32, @u : U_e__union_)
+    end
   end
 
   {% if flag?(:i386) %}
   @[Extern]
-  record INFCONTEXT,
-    inf : Void*,
-    current_inf : Void*,
-    section : UInt32,
-    line : UInt32
+  struct INFCONTEXT
+    property inf : Void*
+    property current_inf : Void*
+    property section : UInt32
+    property line : UInt32
+    def initialize(@inf : Void*, @current_inf : Void*, @section : UInt32, @line : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_INF_INFORMATION,
-    inf_style : Win32cr::Devices::DeviceAndDriverInstallation::SP_INF_STYLE,
-    inf_count : UInt32,
-    version_data : UInt8*
+  struct SP_INF_INFORMATION
+    property inf_style : Win32cr::Devices::DeviceAndDriverInstallation::SP_INF_STYLE
+    property inf_count : UInt32
+    property version_data : UInt8*
+    def initialize(@inf_style : Win32cr::Devices::DeviceAndDriverInstallation::SP_INF_STYLE, @inf_count : UInt32, @version_data : UInt8*)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_ALTPLATFORM_INFO_V3,
-    cbSize : UInt32,
-    platform : UInt32,
-    major_version : UInt32,
-    minor_version : UInt32,
-    processor_architecture : UInt16,
-    anonymous : Anonymous_e__Union_,
-    first_validated_major_version : UInt32,
-    first_validated_minor_version : UInt32,
-    product_type : UInt8,
-    suite_mask : UInt16,
-    build_number : UInt32 do
+  struct SP_ALTPLATFORM_INFO_V3
+    property cbSize : UInt32
+    property platform : UInt32
+    property major_version : UInt32
+    property minor_version : UInt32
+    property processor_architecture : UInt16
+    property anonymous : Anonymous_e__Union_
+    property first_validated_major_version : UInt32
+    property first_validated_minor_version : UInt32
+    property product_type : UInt8
+    property suite_mask : UInt16
+    property build_number : UInt32
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      reserved : UInt16,
-      flags : UInt16
+    struct Anonymous_e__Union_
+    property reserved : UInt16
+    property flags : UInt16
+    def initialize(@reserved : UInt16, @flags : UInt16)
+    end
+    end
 
+    def initialize(@cbSize : UInt32, @platform : UInt32, @major_version : UInt32, @minor_version : UInt32, @processor_architecture : UInt16, @anonymous : Anonymous_e__Union_, @first_validated_major_version : UInt32, @first_validated_minor_version : UInt32, @product_type : UInt8, @suite_mask : UInt16, @build_number : UInt32)
+    end
   end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_ALTPLATFORM_INFO_V2,
-    cbSize : UInt32,
-    platform : Win32cr::System::Diagnostics::Debug::VER_PLATFORM,
-    major_version : UInt32,
-    minor_version : UInt32,
-    processor_architecture : UInt16,
-    anonymous : Anonymous_e__Union_,
-    first_validated_major_version : UInt32,
-    first_validated_minor_version : UInt32 do
+  struct SP_ALTPLATFORM_INFO_V2
+    property cbSize : UInt32
+    property platform : Win32cr::System::Diagnostics::Debug::VER_PLATFORM
+    property major_version : UInt32
+    property minor_version : UInt32
+    property processor_architecture : UInt16
+    property anonymous : Anonymous_e__Union_
+    property first_validated_major_version : UInt32
+    property first_validated_minor_version : UInt32
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
-    record Anonymous_e__Union_,
-      reserved : UInt16,
-      flags : UInt16
+    struct Anonymous_e__Union_
+    property reserved : UInt16
+    property flags : UInt16
+    def initialize(@reserved : UInt16, @flags : UInt16)
+    end
+    end
 
+    def initialize(@cbSize : UInt32, @platform : Win32cr::System::Diagnostics::Debug::VER_PLATFORM, @major_version : UInt32, @minor_version : UInt32, @processor_architecture : UInt16, @anonymous : Anonymous_e__Union_, @first_validated_major_version : UInt32, @first_validated_minor_version : UInt32)
+    end
   end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_ALTPLATFORM_INFO_V1,
-    cbSize : UInt32,
-    platform : Win32cr::System::Diagnostics::Debug::VER_PLATFORM,
-    major_version : UInt32,
-    minor_version : UInt32,
-    processor_architecture : UInt16,
-    reserved : UInt16
+  struct SP_ALTPLATFORM_INFO_V1
+    property cbSize : UInt32
+    property platform : Win32cr::System::Diagnostics::Debug::VER_PLATFORM
+    property major_version : UInt32
+    property minor_version : UInt32
+    property processor_architecture : UInt16
+    property reserved : UInt16
+    def initialize(@cbSize : UInt32, @platform : Win32cr::System::Diagnostics::Debug::VER_PLATFORM, @major_version : UInt32, @minor_version : UInt32, @processor_architecture : UInt16, @reserved : UInt16)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_ORIGINAL_FILE_INFO_A,
-    cbSize : UInt32,
-    original_inf_name : Win32cr::Foundation::CHAR[260],
-    original_catalog_name : Win32cr::Foundation::CHAR[260]
+  struct SP_ORIGINAL_FILE_INFO_A
+    property cbSize : UInt32
+    property original_inf_name : Win32cr::Foundation::CHAR[260]
+    property original_catalog_name : Win32cr::Foundation::CHAR[260]
+    def initialize(@cbSize : UInt32, @original_inf_name : Win32cr::Foundation::CHAR[260], @original_catalog_name : Win32cr::Foundation::CHAR[260])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_ORIGINAL_FILE_INFO_W,
-    cbSize : UInt32,
-    original_inf_name : UInt16[260],
-    original_catalog_name : UInt16[260]
+  struct SP_ORIGINAL_FILE_INFO_W
+    property cbSize : UInt32
+    property original_inf_name : UInt16[260]
+    property original_catalog_name : UInt16[260]
+    def initialize(@cbSize : UInt32, @original_inf_name : UInt16[260], @original_catalog_name : UInt16[260])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record FILEPATHS_A,
-    target : Win32cr::Foundation::PSTR,
-    source : Win32cr::Foundation::PSTR,
-    win32_error : UInt32,
-    flags : UInt32
+  struct FILEPATHS_A
+    property target : Win32cr::Foundation::PSTR
+    property source : Win32cr::Foundation::PSTR
+    property win32_error : UInt32
+    property flags : UInt32
+    def initialize(@target : Win32cr::Foundation::PSTR, @source : Win32cr::Foundation::PSTR, @win32_error : UInt32, @flags : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record FILEPATHS_W,
-    target : Win32cr::Foundation::PWSTR,
-    source : Win32cr::Foundation::PWSTR,
-    win32_error : UInt32,
-    flags : UInt32
+  struct FILEPATHS_W
+    property target : Win32cr::Foundation::PWSTR
+    property source : Win32cr::Foundation::PWSTR
+    property win32_error : UInt32
+    property flags : UInt32
+    def initialize(@target : Win32cr::Foundation::PWSTR, @source : Win32cr::Foundation::PWSTR, @win32_error : UInt32, @flags : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record FILEPATHS_SIGNERINFO_A,
-    target : Win32cr::Foundation::PSTR,
-    source : Win32cr::Foundation::PSTR,
-    win32_error : UInt32,
-    flags : UInt32,
-    digital_signer : Win32cr::Foundation::PSTR,
-    version : Win32cr::Foundation::PSTR,
-    catalog_file : Win32cr::Foundation::PSTR
+  struct FILEPATHS_SIGNERINFO_A
+    property target : Win32cr::Foundation::PSTR
+    property source : Win32cr::Foundation::PSTR
+    property win32_error : UInt32
+    property flags : UInt32
+    property digital_signer : Win32cr::Foundation::PSTR
+    property version : Win32cr::Foundation::PSTR
+    property catalog_file : Win32cr::Foundation::PSTR
+    def initialize(@target : Win32cr::Foundation::PSTR, @source : Win32cr::Foundation::PSTR, @win32_error : UInt32, @flags : UInt32, @digital_signer : Win32cr::Foundation::PSTR, @version : Win32cr::Foundation::PSTR, @catalog_file : Win32cr::Foundation::PSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record FILEPATHS_SIGNERINFO_W,
-    target : Win32cr::Foundation::PWSTR,
-    source : Win32cr::Foundation::PWSTR,
-    win32_error : UInt32,
-    flags : UInt32,
-    digital_signer : Win32cr::Foundation::PWSTR,
-    version : Win32cr::Foundation::PWSTR,
-    catalog_file : Win32cr::Foundation::PWSTR
+  struct FILEPATHS_SIGNERINFO_W
+    property target : Win32cr::Foundation::PWSTR
+    property source : Win32cr::Foundation::PWSTR
+    property win32_error : UInt32
+    property flags : UInt32
+    property digital_signer : Win32cr::Foundation::PWSTR
+    property version : Win32cr::Foundation::PWSTR
+    property catalog_file : Win32cr::Foundation::PWSTR
+    def initialize(@target : Win32cr::Foundation::PWSTR, @source : Win32cr::Foundation::PWSTR, @win32_error : UInt32, @flags : UInt32, @digital_signer : Win32cr::Foundation::PWSTR, @version : Win32cr::Foundation::PWSTR, @catalog_file : Win32cr::Foundation::PWSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SOURCE_MEDIA_A,
-    reserved : Win32cr::Foundation::PSTR,
-    tagfile : Win32cr::Foundation::PSTR,
-    description : Win32cr::Foundation::PSTR,
-    source_path : Win32cr::Foundation::PSTR,
-    source_file : Win32cr::Foundation::PSTR,
-    flags : UInt32
+  struct SOURCE_MEDIA_A
+    property reserved : Win32cr::Foundation::PSTR
+    property tagfile : Win32cr::Foundation::PSTR
+    property description : Win32cr::Foundation::PSTR
+    property source_path : Win32cr::Foundation::PSTR
+    property source_file : Win32cr::Foundation::PSTR
+    property flags : UInt32
+    def initialize(@reserved : Win32cr::Foundation::PSTR, @tagfile : Win32cr::Foundation::PSTR, @description : Win32cr::Foundation::PSTR, @source_path : Win32cr::Foundation::PSTR, @source_file : Win32cr::Foundation::PSTR, @flags : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SOURCE_MEDIA_W,
-    reserved : Win32cr::Foundation::PWSTR,
-    tagfile : Win32cr::Foundation::PWSTR,
-    description : Win32cr::Foundation::PWSTR,
-    source_path : Win32cr::Foundation::PWSTR,
-    source_file : Win32cr::Foundation::PWSTR,
-    flags : UInt32
+  struct SOURCE_MEDIA_W
+    property reserved : Win32cr::Foundation::PWSTR
+    property tagfile : Win32cr::Foundation::PWSTR
+    property description : Win32cr::Foundation::PWSTR
+    property source_path : Win32cr::Foundation::PWSTR
+    property source_file : Win32cr::Foundation::PWSTR
+    property flags : UInt32
+    def initialize(@reserved : Win32cr::Foundation::PWSTR, @tagfile : Win32cr::Foundation::PWSTR, @description : Win32cr::Foundation::PWSTR, @source_path : Win32cr::Foundation::PWSTR, @source_file : Win32cr::Foundation::PWSTR, @flags : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record CABINET_INFO_A,
-    cabinet_path : Win32cr::Foundation::PSTR,
-    cabinet_file : Win32cr::Foundation::PSTR,
-    disk_name : Win32cr::Foundation::PSTR,
-    set_id : UInt16,
-    cabinet_number : UInt16
+  struct CABINET_INFO_A
+    property cabinet_path : Win32cr::Foundation::PSTR
+    property cabinet_file : Win32cr::Foundation::PSTR
+    property disk_name : Win32cr::Foundation::PSTR
+    property set_id : UInt16
+    property cabinet_number : UInt16
+    def initialize(@cabinet_path : Win32cr::Foundation::PSTR, @cabinet_file : Win32cr::Foundation::PSTR, @disk_name : Win32cr::Foundation::PSTR, @set_id : UInt16, @cabinet_number : UInt16)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record CABINET_INFO_W,
-    cabinet_path : Win32cr::Foundation::PWSTR,
-    cabinet_file : Win32cr::Foundation::PWSTR,
-    disk_name : Win32cr::Foundation::PWSTR,
-    set_id : UInt16,
-    cabinet_number : UInt16
+  struct CABINET_INFO_W
+    property cabinet_path : Win32cr::Foundation::PWSTR
+    property cabinet_file : Win32cr::Foundation::PWSTR
+    property disk_name : Win32cr::Foundation::PWSTR
+    property set_id : UInt16
+    property cabinet_number : UInt16
+    def initialize(@cabinet_path : Win32cr::Foundation::PWSTR, @cabinet_file : Win32cr::Foundation::PWSTR, @disk_name : Win32cr::Foundation::PWSTR, @set_id : UInt16, @cabinet_number : UInt16)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record FILE_IN_CABINET_INFO_A,
-    name_in_cabinet : Win32cr::Foundation::PSTR,
-    file_size : UInt32,
-    win32_error : UInt32,
-    dos_date : UInt16,
-    dos_time : UInt16,
-    dos_attribs : UInt16,
-    full_target_name : Win32cr::Foundation::CHAR[260]
+  struct FILE_IN_CABINET_INFO_A
+    property name_in_cabinet : Win32cr::Foundation::PSTR
+    property file_size : UInt32
+    property win32_error : UInt32
+    property dos_date : UInt16
+    property dos_time : UInt16
+    property dos_attribs : UInt16
+    property full_target_name : Win32cr::Foundation::CHAR[260]
+    def initialize(@name_in_cabinet : Win32cr::Foundation::PSTR, @file_size : UInt32, @win32_error : UInt32, @dos_date : UInt16, @dos_time : UInt16, @dos_attribs : UInt16, @full_target_name : Win32cr::Foundation::CHAR[260])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record FILE_IN_CABINET_INFO_W,
-    name_in_cabinet : Win32cr::Foundation::PWSTR,
-    file_size : UInt32,
-    win32_error : UInt32,
-    dos_date : UInt16,
-    dos_time : UInt16,
-    dos_attribs : UInt16,
-    full_target_name : UInt16[260]
+  struct FILE_IN_CABINET_INFO_W
+    property name_in_cabinet : Win32cr::Foundation::PWSTR
+    property file_size : UInt32
+    property win32_error : UInt32
+    property dos_date : UInt16
+    property dos_time : UInt16
+    property dos_attribs : UInt16
+    property full_target_name : UInt16[260]
+    def initialize(@name_in_cabinet : Win32cr::Foundation::PWSTR, @file_size : UInt32, @win32_error : UInt32, @dos_date : UInt16, @dos_time : UInt16, @dos_attribs : UInt16, @full_target_name : UInt16[260])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_REGISTER_CONTROL_STATUSA,
-    cbSize : UInt32,
-    file_name : Win32cr::Foundation::PSTR,
-    win32_error : UInt32,
-    failure_code : UInt32
+  struct SP_REGISTER_CONTROL_STATUSA
+    property cbSize : UInt32
+    property file_name : Win32cr::Foundation::PSTR
+    property win32_error : UInt32
+    property failure_code : UInt32
+    def initialize(@cbSize : UInt32, @file_name : Win32cr::Foundation::PSTR, @win32_error : UInt32, @failure_code : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_REGISTER_CONTROL_STATUSW,
-    cbSize : UInt32,
-    file_name : Win32cr::Foundation::PWSTR,
-    win32_error : UInt32,
-    failure_code : UInt32
+  struct SP_REGISTER_CONTROL_STATUSW
+    property cbSize : UInt32
+    property file_name : Win32cr::Foundation::PWSTR
+    property win32_error : UInt32
+    property failure_code : UInt32
+    def initialize(@cbSize : UInt32, @file_name : Win32cr::Foundation::PWSTR, @win32_error : UInt32, @failure_code : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_FILE_COPY_PARAMS_A,
-    cbSize : UInt32,
-    queue_handle : Void*,
-    source_root_path : Win32cr::Foundation::PSTR,
-    source_path : Win32cr::Foundation::PSTR,
-    source_filename : Win32cr::Foundation::PSTR,
-    source_description : Win32cr::Foundation::PSTR,
-    source_tagfile : Win32cr::Foundation::PSTR,
-    target_directory : Win32cr::Foundation::PSTR,
-    target_filename : Win32cr::Foundation::PSTR,
-    copy_style : UInt32,
-    layout_inf : Void*,
-    security_descriptor : Win32cr::Foundation::PSTR
+  struct SP_FILE_COPY_PARAMS_A
+    property cbSize : UInt32
+    property queue_handle : Void*
+    property source_root_path : Win32cr::Foundation::PSTR
+    property source_path : Win32cr::Foundation::PSTR
+    property source_filename : Win32cr::Foundation::PSTR
+    property source_description : Win32cr::Foundation::PSTR
+    property source_tagfile : Win32cr::Foundation::PSTR
+    property target_directory : Win32cr::Foundation::PSTR
+    property target_filename : Win32cr::Foundation::PSTR
+    property copy_style : UInt32
+    property layout_inf : Void*
+    property security_descriptor : Win32cr::Foundation::PSTR
+    def initialize(@cbSize : UInt32, @queue_handle : Void*, @source_root_path : Win32cr::Foundation::PSTR, @source_path : Win32cr::Foundation::PSTR, @source_filename : Win32cr::Foundation::PSTR, @source_description : Win32cr::Foundation::PSTR, @source_tagfile : Win32cr::Foundation::PSTR, @target_directory : Win32cr::Foundation::PSTR, @target_filename : Win32cr::Foundation::PSTR, @copy_style : UInt32, @layout_inf : Void*, @security_descriptor : Win32cr::Foundation::PSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_FILE_COPY_PARAMS_W,
-    cbSize : UInt32,
-    queue_handle : Void*,
-    source_root_path : Win32cr::Foundation::PWSTR,
-    source_path : Win32cr::Foundation::PWSTR,
-    source_filename : Win32cr::Foundation::PWSTR,
-    source_description : Win32cr::Foundation::PWSTR,
-    source_tagfile : Win32cr::Foundation::PWSTR,
-    target_directory : Win32cr::Foundation::PWSTR,
-    target_filename : Win32cr::Foundation::PWSTR,
-    copy_style : UInt32,
-    layout_inf : Void*,
-    security_descriptor : Win32cr::Foundation::PWSTR
+  struct SP_FILE_COPY_PARAMS_W
+    property cbSize : UInt32
+    property queue_handle : Void*
+    property source_root_path : Win32cr::Foundation::PWSTR
+    property source_path : Win32cr::Foundation::PWSTR
+    property source_filename : Win32cr::Foundation::PWSTR
+    property source_description : Win32cr::Foundation::PWSTR
+    property source_tagfile : Win32cr::Foundation::PWSTR
+    property target_directory : Win32cr::Foundation::PWSTR
+    property target_filename : Win32cr::Foundation::PWSTR
+    property copy_style : UInt32
+    property layout_inf : Void*
+    property security_descriptor : Win32cr::Foundation::PWSTR
+    def initialize(@cbSize : UInt32, @queue_handle : Void*, @source_root_path : Win32cr::Foundation::PWSTR, @source_path : Win32cr::Foundation::PWSTR, @source_filename : Win32cr::Foundation::PWSTR, @source_description : Win32cr::Foundation::PWSTR, @source_tagfile : Win32cr::Foundation::PWSTR, @target_directory : Win32cr::Foundation::PWSTR, @target_filename : Win32cr::Foundation::PWSTR, @copy_style : UInt32, @layout_inf : Void*, @security_descriptor : Win32cr::Foundation::PWSTR)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_DEVINFO_DATA,
-    cbSize : UInt32,
-    class_guid : LibC::GUID,
-    dev_inst : UInt32,
-    reserved : LibC::UIntPtrT
+  struct SP_DEVINFO_DATA
+    property cbSize : UInt32
+    property class_guid : LibC::GUID
+    property dev_inst : UInt32
+    property reserved : LibC::UIntPtrT
+    def initialize(@cbSize : UInt32, @class_guid : LibC::GUID, @dev_inst : UInt32, @reserved : LibC::UIntPtrT)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_DEVICE_INTERFACE_DATA,
-    cbSize : UInt32,
-    interface_class_guid : LibC::GUID,
-    flags : UInt32,
-    reserved : LibC::UIntPtrT
+  struct SP_DEVICE_INTERFACE_DATA
+    property cbSize : UInt32
+    property interface_class_guid : LibC::GUID
+    property flags : UInt32
+    property reserved : LibC::UIntPtrT
+    def initialize(@cbSize : UInt32, @interface_class_guid : LibC::GUID, @flags : UInt32, @reserved : LibC::UIntPtrT)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_DEVICE_INTERFACE_DETAIL_DATA_A,
-    cbSize : UInt32,
-    device_path : Win32cr::Foundation::CHAR*
+  struct SP_DEVICE_INTERFACE_DETAIL_DATA_A
+    property cbSize : UInt32
+    property device_path : Win32cr::Foundation::CHAR*
+    def initialize(@cbSize : UInt32, @device_path : Win32cr::Foundation::CHAR*)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_DEVICE_INTERFACE_DETAIL_DATA_W,
-    cbSize : UInt32,
-    device_path : UInt16*
+  struct SP_DEVICE_INTERFACE_DETAIL_DATA_W
+    property cbSize : UInt32
+    property device_path : UInt16*
+    def initialize(@cbSize : UInt32, @device_path : UInt16*)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_DEVINFO_LIST_DETAIL_DATA_A,
-    cbSize : UInt32,
-    class_guid : LibC::GUID,
-    remote_machine_handle : Win32cr::Foundation::HANDLE,
-    remote_machine_name : Win32cr::Foundation::CHAR[263]
+  struct SP_DEVINFO_LIST_DETAIL_DATA_A
+    property cbSize : UInt32
+    property class_guid : LibC::GUID
+    property remote_machine_handle : Win32cr::Foundation::HANDLE
+    property remote_machine_name : Win32cr::Foundation::CHAR[263]
+    def initialize(@cbSize : UInt32, @class_guid : LibC::GUID, @remote_machine_handle : Win32cr::Foundation::HANDLE, @remote_machine_name : Win32cr::Foundation::CHAR[263])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_DEVINFO_LIST_DETAIL_DATA_W,
-    cbSize : UInt32,
-    class_guid : LibC::GUID,
-    remote_machine_handle : Win32cr::Foundation::HANDLE,
-    remote_machine_name : UInt16[263]
+  struct SP_DEVINFO_LIST_DETAIL_DATA_W
+    property cbSize : UInt32
+    property class_guid : LibC::GUID
+    property remote_machine_handle : Win32cr::Foundation::HANDLE
+    property remote_machine_name : UInt16[263]
+    def initialize(@cbSize : UInt32, @class_guid : LibC::GUID, @remote_machine_handle : Win32cr::Foundation::HANDLE, @remote_machine_name : UInt16[263])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_DEVINSTALL_PARAMS_A,
-    cbSize : UInt32,
-    flags : UInt32,
-    flags_ex : UInt32,
-    hwndParent : Win32cr::Foundation::HWND,
-    install_msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_A,
-    install_msg_handler_context : Void*,
-    file_queue : Void*,
-    class_install_reserved : LibC::UIntPtrT,
-    reserved : UInt32,
-    driver_path : Win32cr::Foundation::CHAR[260]
+  struct SP_DEVINSTALL_PARAMS_A
+    property cbSize : UInt32
+    property flags : UInt32
+    property flags_ex : UInt32
+    property hwndParent : Win32cr::Foundation::HWND
+    property install_msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_A
+    property install_msg_handler_context : Void*
+    property file_queue : Void*
+    property class_install_reserved : LibC::UIntPtrT
+    property reserved : UInt32
+    property driver_path : Win32cr::Foundation::CHAR[260]
+    def initialize(@cbSize : UInt32, @flags : UInt32, @flags_ex : UInt32, @hwndParent : Win32cr::Foundation::HWND, @install_msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_A, @install_msg_handler_context : Void*, @file_queue : Void*, @class_install_reserved : LibC::UIntPtrT, @reserved : UInt32, @driver_path : Win32cr::Foundation::CHAR[260])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_DEVINSTALL_PARAMS_W,
-    cbSize : UInt32,
-    flags : UInt32,
-    flags_ex : UInt32,
-    hwndParent : Win32cr::Foundation::HWND,
-    install_msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_A,
-    install_msg_handler_context : Void*,
-    file_queue : Void*,
-    class_install_reserved : LibC::UIntPtrT,
-    reserved : UInt32,
-    driver_path : UInt16[260]
+  struct SP_DEVINSTALL_PARAMS_W
+    property cbSize : UInt32
+    property flags : UInt32
+    property flags_ex : UInt32
+    property hwndParent : Win32cr::Foundation::HWND
+    property install_msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_A
+    property install_msg_handler_context : Void*
+    property file_queue : Void*
+    property class_install_reserved : LibC::UIntPtrT
+    property reserved : UInt32
+    property driver_path : UInt16[260]
+    def initialize(@cbSize : UInt32, @flags : UInt32, @flags_ex : UInt32, @hwndParent : Win32cr::Foundation::HWND, @install_msg_handler : Win32cr::Devices::DeviceAndDriverInstallation::PSP_FILE_CALLBACK_A, @install_msg_handler_context : Void*, @file_queue : Void*, @class_install_reserved : LibC::UIntPtrT, @reserved : UInt32, @driver_path : UInt16[260])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_CLASSINSTALL_HEADER,
-    cbSize : UInt32,
-    install_function : UInt32
+  struct SP_CLASSINSTALL_HEADER
+    property cbSize : UInt32
+    property install_function : UInt32
+    def initialize(@cbSize : UInt32, @install_function : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_ENABLECLASS_PARAMS,
-    class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER,
-    class_guid : LibC::GUID,
-    enable_message : UInt32
+  struct SP_ENABLECLASS_PARAMS
+    property class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER
+    property class_guid : LibC::GUID
+    property enable_message : UInt32
+    def initialize(@class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER, @class_guid : LibC::GUID, @enable_message : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_PROPCHANGE_PARAMS,
-    class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER,
-    state_change : UInt32,
-    scope : UInt32,
-    hw_profile : UInt32
+  struct SP_PROPCHANGE_PARAMS
+    property class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER
+    property state_change : UInt32
+    property scope : UInt32
+    property hw_profile : UInt32
+    def initialize(@class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER, @state_change : UInt32, @scope : UInt32, @hw_profile : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_REMOVEDEVICE_PARAMS,
-    class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER,
-    scope : UInt32,
-    hw_profile : UInt32
+  struct SP_REMOVEDEVICE_PARAMS
+    property class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER
+    property scope : UInt32
+    property hw_profile : UInt32
+    def initialize(@class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER, @scope : UInt32, @hw_profile : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_UNREMOVEDEVICE_PARAMS,
-    class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER,
-    scope : UInt32,
-    hw_profile : UInt32
+  struct SP_UNREMOVEDEVICE_PARAMS
+    property class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER
+    property scope : UInt32
+    property hw_profile : UInt32
+    def initialize(@class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER, @scope : UInt32, @hw_profile : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_SELECTDEVICE_PARAMS_W,
-    class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER,
-    title : UInt16[60],
-    instructions : UInt16[256],
-    list_label : UInt16[30],
-    sub_title : UInt16[256]
+  struct SP_SELECTDEVICE_PARAMS_W
+    property class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER
+    property title : UInt16[60]
+    property instructions : UInt16[256]
+    property list_label : UInt16[30]
+    property sub_title : UInt16[256]
+    def initialize(@class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER, @title : UInt16[60], @instructions : UInt16[256], @list_label : UInt16[30], @sub_title : UInt16[256])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_DETECTDEVICE_PARAMS,
-    class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER,
-    detect_progress_notify : Win32cr::Devices::DeviceAndDriverInstallation::PDETECT_PROGRESS_NOTIFY,
-    progress_notify_param : Void*
+  struct SP_DETECTDEVICE_PARAMS
+    property class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER
+    property detect_progress_notify : Win32cr::Devices::DeviceAndDriverInstallation::PDETECT_PROGRESS_NOTIFY
+    property progress_notify_param : Void*
+    def initialize(@class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER, @detect_progress_notify : Win32cr::Devices::DeviceAndDriverInstallation::PDETECT_PROGRESS_NOTIFY, @progress_notify_param : Void*)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_INSTALLWIZARD_DATA,
-    class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER,
-    flags : UInt32,
-    dynamic_pages : Win32cr::UI::Controls::HPROPSHEETPAGE[20],
-    num_dynamic_pages : UInt32,
-    dynamic_page_flags : UInt32,
-    private_flags : UInt32,
-    private_data : Win32cr::Foundation::LPARAM,
-    hwndWizardDlg : Win32cr::Foundation::HWND
+  struct SP_INSTALLWIZARD_DATA
+    property class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER
+    property flags : UInt32
+    property dynamic_pages : Win32cr::UI::Controls::HPROPSHEETPAGE[20]
+    property num_dynamic_pages : UInt32
+    property dynamic_page_flags : UInt32
+    property private_flags : UInt32
+    property private_data : Win32cr::Foundation::LPARAM
+    property hwndWizardDlg : Win32cr::Foundation::HWND
+    def initialize(@class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER, @flags : UInt32, @dynamic_pages : Win32cr::UI::Controls::HPROPSHEETPAGE[20], @num_dynamic_pages : UInt32, @dynamic_page_flags : UInt32, @private_flags : UInt32, @private_data : Win32cr::Foundation::LPARAM, @hwndWizardDlg : Win32cr::Foundation::HWND)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_NEWDEVICEWIZARD_DATA,
-    class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER,
-    flags : UInt32,
-    dynamic_pages : Win32cr::UI::Controls::HPROPSHEETPAGE[20],
-    num_dynamic_pages : UInt32,
-    hwndWizardDlg : Win32cr::Foundation::HWND
+  struct SP_NEWDEVICEWIZARD_DATA
+    property class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER
+    property flags : UInt32
+    property dynamic_pages : Win32cr::UI::Controls::HPROPSHEETPAGE[20]
+    property num_dynamic_pages : UInt32
+    property hwndWizardDlg : Win32cr::Foundation::HWND
+    def initialize(@class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER, @flags : UInt32, @dynamic_pages : Win32cr::UI::Controls::HPROPSHEETPAGE[20], @num_dynamic_pages : UInt32, @hwndWizardDlg : Win32cr::Foundation::HWND)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_TROUBLESHOOTER_PARAMS_W,
-    class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER,
-    chm_file : UInt16[260],
-    html_trouble_shooter : UInt16[260]
+  struct SP_TROUBLESHOOTER_PARAMS_W
+    property class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER
+    property chm_file : UInt16[260]
+    property html_trouble_shooter : UInt16[260]
+    def initialize(@class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER, @chm_file : UInt16[260], @html_trouble_shooter : UInt16[260])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_POWERMESSAGEWAKE_PARAMS_W,
-    class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER,
-    power_message_wake : UInt16[512]
+  struct SP_POWERMESSAGEWAKE_PARAMS_W
+    property class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER
+    property power_message_wake : UInt16[512]
+    def initialize(@class_install_header : Win32cr::Devices::DeviceAndDriverInstallation::SP_CLASSINSTALL_HEADER, @power_message_wake : UInt16[512])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_DRVINFO_DATA_V2_A,
-    cbSize : UInt32,
-    driver_type : UInt32,
-    reserved : LibC::UIntPtrT,
-    description : Win32cr::Foundation::CHAR[256],
-    mfg_name : Win32cr::Foundation::CHAR[256],
-    provider_name : Win32cr::Foundation::CHAR[256],
-    driver_date : Win32cr::Foundation::FILETIME,
-    driver_version : UInt64
+  struct SP_DRVINFO_DATA_V2_A
+    property cbSize : UInt32
+    property driver_type : UInt32
+    property reserved : LibC::UIntPtrT
+    property description : Win32cr::Foundation::CHAR[256]
+    property mfg_name : Win32cr::Foundation::CHAR[256]
+    property provider_name : Win32cr::Foundation::CHAR[256]
+    property driver_date : Win32cr::Foundation::FILETIME
+    property driver_version : UInt64
+    def initialize(@cbSize : UInt32, @driver_type : UInt32, @reserved : LibC::UIntPtrT, @description : Win32cr::Foundation::CHAR[256], @mfg_name : Win32cr::Foundation::CHAR[256], @provider_name : Win32cr::Foundation::CHAR[256], @driver_date : Win32cr::Foundation::FILETIME, @driver_version : UInt64)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_DRVINFO_DATA_V2_W,
-    cbSize : UInt32,
-    driver_type : UInt32,
-    reserved : LibC::UIntPtrT,
-    description : UInt16[256],
-    mfg_name : UInt16[256],
-    provider_name : UInt16[256],
-    driver_date : Win32cr::Foundation::FILETIME,
-    driver_version : UInt64
+  struct SP_DRVINFO_DATA_V2_W
+    property cbSize : UInt32
+    property driver_type : UInt32
+    property reserved : LibC::UIntPtrT
+    property description : UInt16[256]
+    property mfg_name : UInt16[256]
+    property provider_name : UInt16[256]
+    property driver_date : Win32cr::Foundation::FILETIME
+    property driver_version : UInt64
+    def initialize(@cbSize : UInt32, @driver_type : UInt32, @reserved : LibC::UIntPtrT, @description : UInt16[256], @mfg_name : UInt16[256], @provider_name : UInt16[256], @driver_date : Win32cr::Foundation::FILETIME, @driver_version : UInt64)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_DRVINFO_DATA_V1_A,
-    cbSize : UInt32,
-    driver_type : UInt32,
-    reserved : LibC::UIntPtrT,
-    description : Win32cr::Foundation::CHAR[256],
-    mfg_name : Win32cr::Foundation::CHAR[256],
-    provider_name : Win32cr::Foundation::CHAR[256]
+  struct SP_DRVINFO_DATA_V1_A
+    property cbSize : UInt32
+    property driver_type : UInt32
+    property reserved : LibC::UIntPtrT
+    property description : Win32cr::Foundation::CHAR[256]
+    property mfg_name : Win32cr::Foundation::CHAR[256]
+    property provider_name : Win32cr::Foundation::CHAR[256]
+    def initialize(@cbSize : UInt32, @driver_type : UInt32, @reserved : LibC::UIntPtrT, @description : Win32cr::Foundation::CHAR[256], @mfg_name : Win32cr::Foundation::CHAR[256], @provider_name : Win32cr::Foundation::CHAR[256])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_DRVINFO_DATA_V1_W,
-    cbSize : UInt32,
-    driver_type : UInt32,
-    reserved : LibC::UIntPtrT,
-    description : UInt16[256],
-    mfg_name : UInt16[256],
-    provider_name : UInt16[256]
+  struct SP_DRVINFO_DATA_V1_W
+    property cbSize : UInt32
+    property driver_type : UInt32
+    property reserved : LibC::UIntPtrT
+    property description : UInt16[256]
+    property mfg_name : UInt16[256]
+    property provider_name : UInt16[256]
+    def initialize(@cbSize : UInt32, @driver_type : UInt32, @reserved : LibC::UIntPtrT, @description : UInt16[256], @mfg_name : UInt16[256], @provider_name : UInt16[256])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_DRVINFO_DETAIL_DATA_A,
-    cbSize : UInt32,
-    inf_date : Win32cr::Foundation::FILETIME,
-    compat_i_ds_offset : UInt32,
-    compat_i_ds_length : UInt32,
-    reserved : LibC::UIntPtrT,
-    section_name : Win32cr::Foundation::CHAR[256],
-    inf_file_name : Win32cr::Foundation::CHAR[260],
-    drv_description : Win32cr::Foundation::CHAR[256],
-    hardware_id : Win32cr::Foundation::CHAR*
+  struct SP_DRVINFO_DETAIL_DATA_A
+    property cbSize : UInt32
+    property inf_date : Win32cr::Foundation::FILETIME
+    property compat_i_ds_offset : UInt32
+    property compat_i_ds_length : UInt32
+    property reserved : LibC::UIntPtrT
+    property section_name : Win32cr::Foundation::CHAR[256]
+    property inf_file_name : Win32cr::Foundation::CHAR[260]
+    property drv_description : Win32cr::Foundation::CHAR[256]
+    property hardware_id : Win32cr::Foundation::CHAR*
+    def initialize(@cbSize : UInt32, @inf_date : Win32cr::Foundation::FILETIME, @compat_i_ds_offset : UInt32, @compat_i_ds_length : UInt32, @reserved : LibC::UIntPtrT, @section_name : Win32cr::Foundation::CHAR[256], @inf_file_name : Win32cr::Foundation::CHAR[260], @drv_description : Win32cr::Foundation::CHAR[256], @hardware_id : Win32cr::Foundation::CHAR*)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_DRVINFO_DETAIL_DATA_W,
-    cbSize : UInt32,
-    inf_date : Win32cr::Foundation::FILETIME,
-    compat_i_ds_offset : UInt32,
-    compat_i_ds_length : UInt32,
-    reserved : LibC::UIntPtrT,
-    section_name : UInt16[256],
-    inf_file_name : UInt16[260],
-    drv_description : UInt16[256],
-    hardware_id : UInt16*
+  struct SP_DRVINFO_DETAIL_DATA_W
+    property cbSize : UInt32
+    property inf_date : Win32cr::Foundation::FILETIME
+    property compat_i_ds_offset : UInt32
+    property compat_i_ds_length : UInt32
+    property reserved : LibC::UIntPtrT
+    property section_name : UInt16[256]
+    property inf_file_name : UInt16[260]
+    property drv_description : UInt16[256]
+    property hardware_id : UInt16*
+    def initialize(@cbSize : UInt32, @inf_date : Win32cr::Foundation::FILETIME, @compat_i_ds_offset : UInt32, @compat_i_ds_length : UInt32, @reserved : LibC::UIntPtrT, @section_name : UInt16[256], @inf_file_name : UInt16[260], @drv_description : UInt16[256], @hardware_id : UInt16*)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_DRVINSTALL_PARAMS,
-    cbSize : UInt32,
-    rank : UInt32,
-    flags : UInt32,
-    private_data : LibC::UIntPtrT,
-    reserved : UInt32
+  struct SP_DRVINSTALL_PARAMS
+    property cbSize : UInt32
+    property rank : UInt32
+    property flags : UInt32
+    property private_data : LibC::UIntPtrT
+    property reserved : UInt32
+    def initialize(@cbSize : UInt32, @rank : UInt32, @flags : UInt32, @private_data : LibC::UIntPtrT, @reserved : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record COINSTALLER_CONTEXT_DATA,
-    post_processing : Win32cr::Foundation::BOOL,
-    install_result : UInt32,
-    private_data : Void*
+  struct COINSTALLER_CONTEXT_DATA
+    property post_processing : Win32cr::Foundation::BOOL
+    property install_result : UInt32
+    property private_data : Void*
+    def initialize(@post_processing : Win32cr::Foundation::BOOL, @install_result : UInt32, @private_data : Void*)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_CLASSIMAGELIST_DATA,
-    cbSize : UInt32,
-    image_list : Win32cr::UI::Controls::HIMAGELIST,
-    reserved : LibC::UIntPtrT
+  struct SP_CLASSIMAGELIST_DATA
+    property cbSize : UInt32
+    property image_list : Win32cr::UI::Controls::HIMAGELIST
+    property reserved : LibC::UIntPtrT
+    def initialize(@cbSize : UInt32, @image_list : Win32cr::UI::Controls::HIMAGELIST, @reserved : LibC::UIntPtrT)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_PROPSHEETPAGE_REQUEST,
-    cbSize : UInt32,
-    page_requested : UInt32,
-    device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO,
-    device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*
+  struct SP_PROPSHEETPAGE_REQUEST
+    property cbSize : UInt32
+    property page_requested : UInt32
+    property device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO
+    property device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*
+    def initialize(@cbSize : UInt32, @page_requested : UInt32, @device_info_set : Win32cr::Devices::DeviceAndDriverInstallation::HDEVINFO, @device_info_data : Win32cr::Devices::DeviceAndDriverInstallation::SP_DEVINFO_DATA*)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_BACKUP_QUEUE_PARAMS_V2_A,
-    cbSize : UInt32,
-    full_inf_path : Win32cr::Foundation::CHAR[260],
-    filename_offset : Int32,
-    reinstall_instance : Win32cr::Foundation::CHAR[260]
+  struct SP_BACKUP_QUEUE_PARAMS_V2_A
+    property cbSize : UInt32
+    property full_inf_path : Win32cr::Foundation::CHAR[260]
+    property filename_offset : Int32
+    property reinstall_instance : Win32cr::Foundation::CHAR[260]
+    def initialize(@cbSize : UInt32, @full_inf_path : Win32cr::Foundation::CHAR[260], @filename_offset : Int32, @reinstall_instance : Win32cr::Foundation::CHAR[260])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_BACKUP_QUEUE_PARAMS_V2_W,
-    cbSize : UInt32,
-    full_inf_path : UInt16[260],
-    filename_offset : Int32,
-    reinstall_instance : UInt16[260]
+  struct SP_BACKUP_QUEUE_PARAMS_V2_W
+    property cbSize : UInt32
+    property full_inf_path : UInt16[260]
+    property filename_offset : Int32
+    property reinstall_instance : UInt16[260]
+    def initialize(@cbSize : UInt32, @full_inf_path : UInt16[260], @filename_offset : Int32, @reinstall_instance : UInt16[260])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_BACKUP_QUEUE_PARAMS_V1_A,
-    cbSize : UInt32,
-    full_inf_path : Win32cr::Foundation::CHAR[260],
-    filename_offset : Int32
+  struct SP_BACKUP_QUEUE_PARAMS_V1_A
+    property cbSize : UInt32
+    property full_inf_path : Win32cr::Foundation::CHAR[260]
+    property filename_offset : Int32
+    def initialize(@cbSize : UInt32, @full_inf_path : Win32cr::Foundation::CHAR[260], @filename_offset : Int32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_BACKUP_QUEUE_PARAMS_V1_W,
-    cbSize : UInt32,
-    full_inf_path : UInt16[260],
-    filename_offset : Int32
+  struct SP_BACKUP_QUEUE_PARAMS_V1_W
+    property cbSize : UInt32
+    property full_inf_path : UInt16[260]
+    property filename_offset : Int32
+    def initialize(@cbSize : UInt32, @full_inf_path : UInt16[260], @filename_offset : Int32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_INF_SIGNER_INFO_V1_A,
-    cbSize : UInt32,
-    catalog_file : Win32cr::Foundation::CHAR[260],
-    digital_signer : Win32cr::Foundation::CHAR[260],
-    digital_signer_version : Win32cr::Foundation::CHAR[260]
+  struct SP_INF_SIGNER_INFO_V1_A
+    property cbSize : UInt32
+    property catalog_file : Win32cr::Foundation::CHAR[260]
+    property digital_signer : Win32cr::Foundation::CHAR[260]
+    property digital_signer_version : Win32cr::Foundation::CHAR[260]
+    def initialize(@cbSize : UInt32, @catalog_file : Win32cr::Foundation::CHAR[260], @digital_signer : Win32cr::Foundation::CHAR[260], @digital_signer_version : Win32cr::Foundation::CHAR[260])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_INF_SIGNER_INFO_V1_W,
-    cbSize : UInt32,
-    catalog_file : UInt16[260],
-    digital_signer : UInt16[260],
-    digital_signer_version : UInt16[260]
+  struct SP_INF_SIGNER_INFO_V1_W
+    property cbSize : UInt32
+    property catalog_file : UInt16[260]
+    property digital_signer : UInt16[260]
+    property digital_signer_version : UInt16[260]
+    def initialize(@cbSize : UInt32, @catalog_file : UInt16[260], @digital_signer : UInt16[260], @digital_signer_version : UInt16[260])
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_INF_SIGNER_INFO_V2_A,
-    cbSize : UInt32,
-    catalog_file : Win32cr::Foundation::CHAR[260],
-    digital_signer : Win32cr::Foundation::CHAR[260],
-    digital_signer_version : Win32cr::Foundation::CHAR[260],
-    signer_score : UInt32
+  struct SP_INF_SIGNER_INFO_V2_A
+    property cbSize : UInt32
+    property catalog_file : Win32cr::Foundation::CHAR[260]
+    property digital_signer : Win32cr::Foundation::CHAR[260]
+    property digital_signer_version : Win32cr::Foundation::CHAR[260]
+    property signer_score : UInt32
+    def initialize(@cbSize : UInt32, @catalog_file : Win32cr::Foundation::CHAR[260], @digital_signer : Win32cr::Foundation::CHAR[260], @digital_signer_version : Win32cr::Foundation::CHAR[260], @signer_score : UInt32)
+    end
+  end
   {% end %}
 
   {% if flag?(:i386) %}
   @[Extern]
-  record SP_INF_SIGNER_INFO_V2_W,
-    cbSize : UInt32,
-    catalog_file : UInt16[260],
-    digital_signer : UInt16[260],
-    digital_signer_version : UInt16[260],
-    signer_score : UInt32
+  struct SP_INF_SIGNER_INFO_V2_W
+    property cbSize : UInt32
+    property catalog_file : UInt16[260]
+    property digital_signer : UInt16[260]
+    property digital_signer_version : UInt16[260]
+    property signer_score : UInt32
+    def initialize(@cbSize : UInt32, @catalog_file : UInt16[260], @digital_signer : UInt16[260], @digital_signer_version : UInt16[260], @signer_score : UInt32)
+    end
+  end
   {% end %}
 
   @[Link("setupapi")]

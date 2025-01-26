@@ -198,110 +198,129 @@ module Win32cr::Devices::Communication
   end
 
   @[Extern]
-  record MODEMDEVCAPS,
-    dwActualSize : UInt32,
-    dwRequiredSize : UInt32,
-    dwDevSpecificOffset : UInt32,
-    dwDevSpecificSize : UInt32,
-    dwModemProviderVersion : UInt32,
-    dwModemManufacturerOffset : UInt32,
-    dwModemManufacturerSize : UInt32,
-    dwModemModelOffset : UInt32,
-    dwModemModelSize : UInt32,
-    dwModemVersionOffset : UInt32,
-    dwModemVersionSize : UInt32,
-    dwDialOptions : Win32cr::Devices::Communication::MODEMDEVCAPS_DIAL_OPTIONS,
-    dwCallSetupFailTimer : UInt32,
-    dwInactivityTimeout : UInt32,
-    dwSpeakerVolume : Win32cr::Devices::Communication::MODEMDEVCAPS_SPEAKER_VOLUME,
-    dwSpeakerMode : Win32cr::Devices::Communication::MODEMDEVCAPS_SPEAKER_MODE,
-    dwModemOptions : UInt32,
-    dwMaxDTERate : UInt32,
-    dwMaxDCERate : UInt32,
-    abVariablePortion : UInt8*
+  struct MODEMDEVCAPS
+    property dwActualSize : UInt32
+    property dwRequiredSize : UInt32
+    property dwDevSpecificOffset : UInt32
+    property dwDevSpecificSize : UInt32
+    property dwModemProviderVersion : UInt32
+    property dwModemManufacturerOffset : UInt32
+    property dwModemManufacturerSize : UInt32
+    property dwModemModelOffset : UInt32
+    property dwModemModelSize : UInt32
+    property dwModemVersionOffset : UInt32
+    property dwModemVersionSize : UInt32
+    property dwDialOptions : Win32cr::Devices::Communication::MODEMDEVCAPS_DIAL_OPTIONS
+    property dwCallSetupFailTimer : UInt32
+    property dwInactivityTimeout : UInt32
+    property dwSpeakerVolume : Win32cr::Devices::Communication::MODEMDEVCAPS_SPEAKER_VOLUME
+    property dwSpeakerMode : Win32cr::Devices::Communication::MODEMDEVCAPS_SPEAKER_MODE
+    property dwModemOptions : UInt32
+    property dwMaxDTERate : UInt32
+    property dwMaxDCERate : UInt32
+    property abVariablePortion : UInt8*
+    def initialize(@dwActualSize : UInt32, @dwRequiredSize : UInt32, @dwDevSpecificOffset : UInt32, @dwDevSpecificSize : UInt32, @dwModemProviderVersion : UInt32, @dwModemManufacturerOffset : UInt32, @dwModemManufacturerSize : UInt32, @dwModemModelOffset : UInt32, @dwModemModelSize : UInt32, @dwModemVersionOffset : UInt32, @dwModemVersionSize : UInt32, @dwDialOptions : Win32cr::Devices::Communication::MODEMDEVCAPS_DIAL_OPTIONS, @dwCallSetupFailTimer : UInt32, @dwInactivityTimeout : UInt32, @dwSpeakerVolume : Win32cr::Devices::Communication::MODEMDEVCAPS_SPEAKER_VOLUME, @dwSpeakerMode : Win32cr::Devices::Communication::MODEMDEVCAPS_SPEAKER_MODE, @dwModemOptions : UInt32, @dwMaxDTERate : UInt32, @dwMaxDCERate : UInt32, @abVariablePortion : UInt8*)
+    end
+  end
 
   @[Extern]
-  record MODEMSETTINGS,
-    dwActualSize : UInt32,
-    dwRequiredSize : UInt32,
-    dwDevSpecificOffset : UInt32,
-    dwDevSpecificSize : UInt32,
-    dwCallSetupFailTimer : UInt32,
-    dwInactivityTimeout : UInt32,
-    dwSpeakerVolume : Win32cr::Devices::Communication::MODEM_SPEAKER_VOLUME,
-    dwSpeakerMode : Win32cr::Devices::Communication::MODEMSETTINGS_SPEAKER_MODE,
-    dwPreferredModemOptions : UInt32,
-    dwNegotiatedModemOptions : UInt32,
-    dwNegotiatedDCERate : UInt32,
-    abVariablePortion : UInt8*
+  struct MODEMSETTINGS
+    property dwActualSize : UInt32
+    property dwRequiredSize : UInt32
+    property dwDevSpecificOffset : UInt32
+    property dwDevSpecificSize : UInt32
+    property dwCallSetupFailTimer : UInt32
+    property dwInactivityTimeout : UInt32
+    property dwSpeakerVolume : Win32cr::Devices::Communication::MODEM_SPEAKER_VOLUME
+    property dwSpeakerMode : Win32cr::Devices::Communication::MODEMSETTINGS_SPEAKER_MODE
+    property dwPreferredModemOptions : UInt32
+    property dwNegotiatedModemOptions : UInt32
+    property dwNegotiatedDCERate : UInt32
+    property abVariablePortion : UInt8*
+    def initialize(@dwActualSize : UInt32, @dwRequiredSize : UInt32, @dwDevSpecificOffset : UInt32, @dwDevSpecificSize : UInt32, @dwCallSetupFailTimer : UInt32, @dwInactivityTimeout : UInt32, @dwSpeakerVolume : Win32cr::Devices::Communication::MODEM_SPEAKER_VOLUME, @dwSpeakerMode : Win32cr::Devices::Communication::MODEMSETTINGS_SPEAKER_MODE, @dwPreferredModemOptions : UInt32, @dwNegotiatedModemOptions : UInt32, @dwNegotiatedDCERate : UInt32, @abVariablePortion : UInt8*)
+    end
+  end
 
   @[Extern]
-  record COMMPROP,
-    wPacketLength : UInt16,
-    wPacketVersion : UInt16,
-    dwServiceMask : UInt32,
-    dwReserved1 : UInt32,
-    dwMaxTxQueue : UInt32,
-    dwMaxRxQueue : UInt32,
-    dwMaxBaud : UInt32,
-    dwProvSubType : UInt32,
-    dwProvCapabilities : UInt32,
-    dwSettableParams : UInt32,
-    dwSettableBaud : UInt32,
-    wSettableData : UInt16,
-    wSettableStopParity : Win32cr::Devices::Communication::COMMPROP_STOP_PARITY,
-    dwCurrentTxQueue : UInt32,
-    dwCurrentRxQueue : UInt32,
-    dwProvSpec1 : UInt32,
-    dwProvSpec2 : UInt32,
-    wcProvChar : UInt16*
+  struct COMMPROP
+    property wPacketLength : UInt16
+    property wPacketVersion : UInt16
+    property dwServiceMask : UInt32
+    property dwReserved1 : UInt32
+    property dwMaxTxQueue : UInt32
+    property dwMaxRxQueue : UInt32
+    property dwMaxBaud : UInt32
+    property dwProvSubType : UInt32
+    property dwProvCapabilities : UInt32
+    property dwSettableParams : UInt32
+    property dwSettableBaud : UInt32
+    property wSettableData : UInt16
+    property wSettableStopParity : Win32cr::Devices::Communication::COMMPROP_STOP_PARITY
+    property dwCurrentTxQueue : UInt32
+    property dwCurrentRxQueue : UInt32
+    property dwProvSpec1 : UInt32
+    property dwProvSpec2 : UInt32
+    property wcProvChar : UInt16*
+    def initialize(@wPacketLength : UInt16, @wPacketVersion : UInt16, @dwServiceMask : UInt32, @dwReserved1 : UInt32, @dwMaxTxQueue : UInt32, @dwMaxRxQueue : UInt32, @dwMaxBaud : UInt32, @dwProvSubType : UInt32, @dwProvCapabilities : UInt32, @dwSettableParams : UInt32, @dwSettableBaud : UInt32, @wSettableData : UInt16, @wSettableStopParity : Win32cr::Devices::Communication::COMMPROP_STOP_PARITY, @dwCurrentTxQueue : UInt32, @dwCurrentRxQueue : UInt32, @dwProvSpec1 : UInt32, @dwProvSpec2 : UInt32, @wcProvChar : UInt16*)
+    end
+  end
 
   @[Extern]
-  record COMSTAT,
-    _bitfield : UInt32,
-    cbInQue : UInt32,
-    cbOutQue : UInt32
+  struct COMSTAT
+    property _bitfield : UInt32
+    property cbInQue : UInt32
+    property cbOutQue : UInt32
+    def initialize(@_bitfield : UInt32, @cbInQue : UInt32, @cbOutQue : UInt32)
+    end
+  end
 
   @[Extern]
-  record DCB,
-    dc_blength : UInt32,
-    baud_rate : UInt32,
-    _bitfield : UInt32,
-    wReserved : UInt16,
-    xon_lim : UInt16,
-    xoff_lim : UInt16,
-    byte_size : UInt8,
-    parity : Win32cr::Devices::Communication::DCB_PARITY,
-    stop_bits : Win32cr::Devices::Communication::DCB_STOP_BITS,
-    xon_char : Win32cr::Foundation::CHAR,
-    xoff_char : Win32cr::Foundation::CHAR,
-    error_char : Win32cr::Foundation::CHAR,
-    eof_char : Win32cr::Foundation::CHAR,
-    evt_char : Win32cr::Foundation::CHAR,
-    wReserved1 : UInt16
+  struct DCB
+    property dc_blength : UInt32
+    property baud_rate : UInt32
+    property _bitfield : UInt32
+    property wReserved : UInt16
+    property xon_lim : UInt16
+    property xoff_lim : UInt16
+    property byte_size : UInt8
+    property parity : Win32cr::Devices::Communication::DCB_PARITY
+    property stop_bits : Win32cr::Devices::Communication::DCB_STOP_BITS
+    property xon_char : Win32cr::Foundation::CHAR
+    property xoff_char : Win32cr::Foundation::CHAR
+    property error_char : Win32cr::Foundation::CHAR
+    property eof_char : Win32cr::Foundation::CHAR
+    property evt_char : Win32cr::Foundation::CHAR
+    property wReserved1 : UInt16
+    def initialize(@dc_blength : UInt32, @baud_rate : UInt32, @_bitfield : UInt32, @wReserved : UInt16, @xon_lim : UInt16, @xoff_lim : UInt16, @byte_size : UInt8, @parity : Win32cr::Devices::Communication::DCB_PARITY, @stop_bits : Win32cr::Devices::Communication::DCB_STOP_BITS, @xon_char : Win32cr::Foundation::CHAR, @xoff_char : Win32cr::Foundation::CHAR, @error_char : Win32cr::Foundation::CHAR, @eof_char : Win32cr::Foundation::CHAR, @evt_char : Win32cr::Foundation::CHAR, @wReserved1 : UInt16)
+    end
+  end
 
   @[Extern]
-  record COMMTIMEOUTS,
-    read_interval_timeout : UInt32,
-    read_total_timeout_multiplier : UInt32,
-    read_total_timeout_constant : UInt32,
-    write_total_timeout_multiplier : UInt32,
-    write_total_timeout_constant : UInt32
+  struct COMMTIMEOUTS
+    property read_interval_timeout : UInt32
+    property read_total_timeout_multiplier : UInt32
+    property read_total_timeout_constant : UInt32
+    property write_total_timeout_multiplier : UInt32
+    property write_total_timeout_constant : UInt32
+    def initialize(@read_interval_timeout : UInt32, @read_total_timeout_multiplier : UInt32, @read_total_timeout_constant : UInt32, @write_total_timeout_multiplier : UInt32, @write_total_timeout_constant : UInt32)
+    end
+  end
 
   @[Extern]
-  record COMMCONFIG,
-    dwSize : UInt32,
-    wVersion : UInt16,
-    wReserved : UInt16,
-    dcb : Win32cr::Devices::Communication::DCB,
-    dwProviderSubType : UInt32,
-    dwProviderOffset : UInt32,
-    dwProviderSize : UInt32,
-    wcProviderData : UInt16*
+  struct COMMCONFIG
+    property dwSize : UInt32
+    property wVersion : UInt16
+    property wReserved : UInt16
+    property dcb : Win32cr::Devices::Communication::DCB
+    property dwProviderSubType : UInt32
+    property dwProviderOffset : UInt32
+    property dwProviderSize : UInt32
+    property wcProviderData : UInt16*
+    def initialize(@dwSize : UInt32, @wVersion : UInt16, @wReserved : UInt16, @dcb : Win32cr::Devices::Communication::DCB, @dwProviderSubType : UInt32, @dwProviderOffset : UInt32, @dwProviderSize : UInt32, @wcProviderData : UInt16*)
+    end
+  end
 
   @[Link("kernel32")]
-  @[Link("api-ms-win-core-comm-l1-1-1")]
-  @[Link("api-ms-win-core-comm-l1-1-2")]
   lib C
     fun ClearCommBreak(hFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 

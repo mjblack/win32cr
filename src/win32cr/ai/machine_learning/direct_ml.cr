@@ -289,1288 +289,1801 @@ module Win32cr::AI::MachineLearning::DirectML
   end
 
   @[Extern]
-  record DML_BUFFER_TENSOR_DESC,
-    data_type : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DATA_TYPE,
-    flags : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_FLAGS,
-    dimension_count : UInt32,
-    sizes : UInt32*,
-    strides : UInt32*,
-    total_tensor_size_in_bytes : UInt64,
-    guaranteed_base_offset_alignment : UInt32
+  struct DML_BUFFER_TENSOR_DESC
+    property data_type : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DATA_TYPE
+    property flags : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_FLAGS
+    property dimension_count : UInt32
+    property sizes : UInt32*
+    property strides : UInt32*
+    property total_tensor_size_in_bytes : UInt64
+    property guaranteed_base_offset_alignment : UInt32
+    def initialize(@data_type : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DATA_TYPE, @flags : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_FLAGS, @dimension_count : UInt32, @sizes : UInt32*, @strides : UInt32*, @total_tensor_size_in_bytes : UInt64, @guaranteed_base_offset_alignment : UInt32)
+    end
+  end
 
   @[Extern]
-  record DML_TENSOR_DESC,
-    type__ : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_TYPE,
-    desc : Void*
+  struct DML_TENSOR_DESC
+    property type__ : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_TYPE
+    property desc : Void*
+    def initialize(@type__ : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_TYPE, @desc : Void*)
+    end
+  end
 
   @[Extern]
-  record DML_SCALE_BIAS,
-    scale : Float32,
-    bias : Float32
+  struct DML_SCALE_BIAS
+    property scale : Float32
+    property bias : Float32
+    def initialize(@scale : Float32, @bias : Float32)
+    end
+  end
 
   @[Extern]
-  record DML_SIZE_2D,
-    width : UInt32,
-    height : UInt32
+  struct DML_SIZE_2D
+    property width : UInt32
+    property height : UInt32
+    def initialize(@width : UInt32, @height : UInt32)
+    end
+  end
 
   @[Extern(union: true)]
-  record DML_SCALAR_UNION,
-    bytes : UInt8[8],
-    int8 : Int8,
-    u_int8 : UInt8,
-    int16 : Int16,
-    u_int16 : UInt16,
-    int32 : Int32,
-    u_int32 : UInt32,
-    int64 : Int64,
-    u_int64 : UInt64,
-    float32 : Float32,
-    float64 : Float64
-
-  @[Extern]
-  record DML_OPERATOR_DESC,
-    type__ : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_TYPE,
-    desc : Void*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_IDENTITY_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_ABS_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_ACOS_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_ADD_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_ADD1_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    fused_activation : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_ASIN_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_ATAN_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_CEIL_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_CLIP_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*,
-    min : Float32,
-    max : Float32
-
-  @[Extern]
-  record DML_ELEMENT_WISE_COS_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_DIVIDE_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_EXP_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_FLOOR_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_LOG_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_LOGICAL_AND_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_LOGICAL_EQUALS_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_LOGICAL_GREATER_THAN_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_LOGICAL_LESS_THAN_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_LOGICAL_NOT_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_LOGICAL_OR_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_LOGICAL_XOR_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_MAX_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_MEAN_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_MIN_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_MULTIPLY_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_POW_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    exponent_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_CONSTANT_POW_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*,
-    exponent : Float32
-
-  @[Extern]
-  record DML_ELEMENT_WISE_RECIP_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_SIN_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_SQRT_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_SUBTRACT_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_TAN_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_THRESHOLD_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*,
-    min : Float32
-
-  @[Extern]
-  record DML_ELEMENT_WISE_QUANTIZE_LINEAR_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_DEQUANTIZE_LINEAR_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ACTIVATION_ELU_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    alpha : Float32
-
-  @[Extern]
-  record DML_ACTIVATION_HARDMAX_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ACTIVATION_HARD_SIGMOID_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    alpha : Float32,
-    beta : Float32
-
-  @[Extern]
-  record DML_ACTIVATION_IDENTITY_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ACTIVATION_LEAKY_RELU_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    alpha : Float32
-
-  @[Extern]
-  record DML_ACTIVATION_LINEAR_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    alpha : Float32,
-    beta : Float32
-
-  @[Extern]
-  record DML_ACTIVATION_LOG_SOFTMAX_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ACTIVATION_PARAMETERIZED_RELU_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    slope_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ACTIVATION_PARAMETRIC_SOFTPLUS_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    alpha : Float32,
-    beta : Float32
-
-  @[Extern]
-  record DML_ACTIVATION_RELU_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ACTIVATION_SCALED_ELU_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    alpha : Float32,
-    gamma : Float32
-
-  @[Extern]
-  record DML_ACTIVATION_SCALED_TANH_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    alpha : Float32,
-    beta : Float32
-
-  @[Extern]
-  record DML_ACTIVATION_SIGMOID_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ACTIVATION_SOFTMAX_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ACTIVATION_SOFTPLUS_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    steepness : Float32
-
-  @[Extern]
-  record DML_ACTIVATION_SOFTSIGN_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ACTIVATION_TANH_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ACTIVATION_THRESHOLDED_RELU_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    alpha : Float32
-
-  @[Extern]
-  record DML_CONVOLUTION_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    filter_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    bias_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    mode : Win32cr::AI::MachineLearning::DirectML::DML_CONVOLUTION_MODE,
-    direction : Win32cr::AI::MachineLearning::DirectML::DML_CONVOLUTION_DIRECTION,
-    dimension_count : UInt32,
-    strides : UInt32*,
-    dilations : UInt32*,
-    start_padding : UInt32*,
-    end_padding : UInt32*,
-    output_padding : UInt32*,
-    group_count : UInt32,
-    fused_activation : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*
-
-  @[Extern]
-  record DML_GEMM_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    c_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    trans_a : Win32cr::AI::MachineLearning::DirectML::DML_MATRIX_TRANSFORM,
-    trans_b : Win32cr::AI::MachineLearning::DirectML::DML_MATRIX_TRANSFORM,
-    alpha : Float32,
-    beta : Float32,
-    fused_activation : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*
-
-  @[Extern]
-  record DML_REDUCE_OPERATOR_DESC,
-    function : Win32cr::AI::MachineLearning::DirectML::DML_REDUCE_FUNCTION,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    axis_count : UInt32,
-    axes : UInt32*
-
-  @[Extern]
-  record DML_AVERAGE_POOLING_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    dimension_count : UInt32,
-    strides : UInt32*,
-    window_size : UInt32*,
-    start_padding : UInt32*,
-    end_padding : UInt32*,
-    include_padding : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record DML_LP_POOLING_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    dimension_count : UInt32,
-    strides : UInt32*,
-    window_size : UInt32*,
-    start_padding : UInt32*,
-    end_padding : UInt32*,
-    p : UInt32
-
-  @[Extern]
-  record DML_MAX_POOLING_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    dimension_count : UInt32,
-    strides : UInt32*,
-    window_size : UInt32*,
-    start_padding : UInt32*,
-    end_padding : UInt32*
-
-  @[Extern]
-  record DML_ROI_POOLING_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    roi_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    spatial_scale : Float32,
-    pooled_size : Win32cr::AI::MachineLearning::DirectML::DML_SIZE_2D
-
-  @[Extern]
-  record DML_SLICE_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    dimension_count : UInt32,
-    offsets : UInt32*,
-    sizes : UInt32*,
-    strides : UInt32*
-
-  @[Extern]
-  record DML_CAST_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_SPLIT_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_count : UInt32,
-    output_tensors : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    axis : UInt32
-
-  @[Extern]
-  record DML_JOIN_OPERATOR_DESC,
-    input_count : UInt32,
-    input_tensors : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    axis : UInt32
-
-  @[Extern]
-  record DML_PADDING_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    padding_mode : Win32cr::AI::MachineLearning::DirectML::DML_PADDING_MODE,
-    padding_value : Float32,
-    dimension_count : UInt32,
-    start_padding : UInt32*,
-    end_padding : UInt32*
-
-  @[Extern]
-  record DML_VALUE_SCALE_2D_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale : Float32,
-    channel_count : UInt32,
-    bias : Float32*
-
-  @[Extern]
-  record DML_UPSAMPLE_2D_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_size : Win32cr::AI::MachineLearning::DirectML::DML_SIZE_2D,
-    interpolation_mode : Win32cr::AI::MachineLearning::DirectML::DML_INTERPOLATION_MODE
-
-  @[Extern]
-  record DML_GATHER_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    axis : UInt32,
-    index_dimensions : UInt32
-
-  @[Extern]
-  record DML_SPACE_TO_DEPTH_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    block_size : UInt32
-
-  @[Extern]
-  record DML_DEPTH_TO_SPACE_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    block_size : UInt32
-
-  @[Extern]
-  record DML_TILE_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    repeats_count : UInt32,
-    repeats : UInt32*
-
-  @[Extern]
-  record DML_TOP_K_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_value_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_index_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    axis : UInt32,
-    k : UInt32
-
-  @[Extern]
-  record DML_BATCH_NORMALIZATION_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    mean_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    variance_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    bias_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    spatial : Win32cr::Foundation::BOOL,
-    epsilon : Float32,
-    fused_activation : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*
-
-  @[Extern]
-  record DML_MEAN_VARIANCE_NORMALIZATION_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    bias_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    cross_channel : Win32cr::Foundation::BOOL,
-    normalize_variance : Win32cr::Foundation::BOOL,
-    epsilon : Float32,
-    fused_activation : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*
-
-  @[Extern]
-  record DML_LOCAL_RESPONSE_NORMALIZATION_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    cross_channel : Win32cr::Foundation::BOOL,
-    local_size : UInt32,
-    alpha : Float32,
-    beta : Float32,
-    bias : Float32
-
-  @[Extern]
-  record DML_LP_NORMALIZATION_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    axis : UInt32,
-    epsilon : Float32,
-    p : UInt32
-
-  @[Extern]
-  record DML_RNN_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    weight_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    recurrence_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    bias_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    hidden_init_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    sequence_lengths_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_sequence_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_single_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    activation_desc_count : UInt32,
-    activation_descs : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*,
-    direction : Win32cr::AI::MachineLearning::DirectML::DML_RECURRENT_NETWORK_DIRECTION
-
-  @[Extern]
-  record DML_LSTM_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    weight_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    recurrence_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    bias_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    hidden_init_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    cell_mem_init_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    sequence_lengths_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    peephole_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_sequence_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_single_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_cell_single_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    activation_desc_count : UInt32,
-    activation_descs : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*,
-    direction : Win32cr::AI::MachineLearning::DirectML::DML_RECURRENT_NETWORK_DIRECTION,
-    clip_threshold : Float32,
-    use_clip_threshold : Win32cr::Foundation::BOOL,
-    couple_input_forget : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record DML_GRU_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    weight_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    recurrence_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    bias_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    hidden_init_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    sequence_lengths_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_sequence_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_single_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    activation_desc_count : UInt32,
-    activation_descs : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*,
-    direction : Win32cr::AI::MachineLearning::DirectML::DML_RECURRENT_NETWORK_DIRECTION,
-    linear_before_reset : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record DML_ELEMENT_WISE_SIGN_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_IS_NAN_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_ERF_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_SINH_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_COSH_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_TANH_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_ASINH_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_ACOSH_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_ATANH_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_IF_OPERATOR_DESC,
-    condition_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ACTIVATION_SHRINK_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    bias : Float32,
-    threshold : Float32
-
-  @[Extern]
-  record DML_MAX_POOLING1_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    dimension_count : UInt32,
-    strides : UInt32*,
-    window_size : UInt32*,
-    start_padding : UInt32*,
-    end_padding : UInt32*
-
-  @[Extern]
-  record DML_MAX_UNPOOLING_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_DIAGONAL_MATRIX_OPERATOR_DESC,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    offset : Int32,
-    value : Float32
-
-  @[Extern]
-  record DML_SCATTER_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    updates_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    axis : UInt32
-
-  @[Extern]
-  record DML_ONE_HOT_OPERATOR_DESC,
-    indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    values_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    axis : UInt32
-
-  @[Extern]
-  record DML_RESAMPLE_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    interpolation_mode : Win32cr::AI::MachineLearning::DirectML::DML_INTERPOLATION_MODE,
-    scale_count : UInt32,
-    scales : Float32*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_BIT_SHIFT_LEFT_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_BIT_SHIFT_RIGHT_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_ROUND_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    rounding_mode : Win32cr::AI::MachineLearning::DirectML::DML_ROUNDING_MODE
-
-  @[Extern]
-  record DML_ELEMENT_WISE_IS_INFINITY_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    infinity_mode : Win32cr::AI::MachineLearning::DirectML::DML_IS_INFINITY_MODE
-
-  @[Extern]
-  record DML_ELEMENT_WISE_MODULUS_TRUNCATE_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_MODULUS_FLOOR_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_FILL_VALUE_CONSTANT_OPERATOR_DESC,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    value_data_type : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DATA_TYPE,
-    value : Win32cr::AI::MachineLearning::DirectML::DML_SCALAR_UNION
-
-  @[Extern]
-  record DML_FILL_VALUE_SEQUENCE_OPERATOR_DESC,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    value_data_type : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DATA_TYPE,
-    value_start : Win32cr::AI::MachineLearning::DirectML::DML_SCALAR_UNION,
-    value_delta : Win32cr::AI::MachineLearning::DirectML::DML_SCALAR_UNION
-
-  @[Extern]
-  record DML_CUMULATIVE_SUMMATION_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    axis : UInt32,
-    axis_direction : Win32cr::AI::MachineLearning::DirectML::DML_AXIS_DIRECTION,
-    has_exclusive_sum : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record DML_REVERSE_SUBSEQUENCES_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    sequence_lengths_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    axis : UInt32
-
-  @[Extern]
-  record DML_GATHER_ELEMENTS_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    axis : UInt32
-
-  @[Extern]
-  record DML_GATHER_ND_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    input_dimension_count : UInt32,
-    indices_dimension_count : UInt32
-
-  @[Extern]
-  record DML_SCATTER_ND_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    updates_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    input_dimension_count : UInt32,
-    indices_dimension_count : UInt32
-
-  @[Extern]
-  record DML_MAX_POOLING2_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    dimension_count : UInt32,
-    strides : UInt32*,
-    window_size : UInt32*,
-    start_padding : UInt32*,
-    end_padding : UInt32*,
-    dilations : UInt32*
-
-  @[Extern]
-  record DML_SLICE1_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    dimension_count : UInt32,
-    input_window_offsets : UInt32*,
-    input_window_sizes : UInt32*,
-    input_window_strides : Int32*
-
-  @[Extern]
-  record DML_TOP_K1_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_value_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_index_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    axis : UInt32,
-    k : UInt32,
-    axis_direction : Win32cr::AI::MachineLearning::DirectML::DML_AXIS_DIRECTION
-
-  @[Extern]
-  record DML_DEPTH_TO_SPACE1_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    block_size : UInt32,
-    order : Win32cr::AI::MachineLearning::DirectML::DML_DEPTH_SPACE_ORDER
-
-  @[Extern]
-  record DML_SPACE_TO_DEPTH1_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    block_size : UInt32,
-    order : Win32cr::AI::MachineLearning::DirectML::DML_DEPTH_SPACE_ORDER
-
-  @[Extern]
-  record DML_MEAN_VARIANCE_NORMALIZATION1_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    bias_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    axis_count : UInt32,
-    axes : UInt32*,
-    normalize_variance : Win32cr::Foundation::BOOL,
-    epsilon : Float32,
-    fused_activation : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*
-
-  @[Extern]
-  record DML_RESAMPLE1_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    interpolation_mode : Win32cr::AI::MachineLearning::DirectML::DML_INTERPOLATION_MODE,
-    dimension_count : UInt32,
-    scales : Float32*,
-    input_pixel_offsets : Float32*,
-    output_pixel_offsets : Float32*
-
-  @[Extern]
-  record DML_MATRIX_MULTIPLY_INTEGER_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    a_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_QUANTIZED_LINEAR_MATRIX_MULTIPLY_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    a_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    a_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_CONVOLUTION_INTEGER_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    input_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    filter_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    filter_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    dimension_count : UInt32,
-    strides : UInt32*,
-    dilations : UInt32*,
-    start_padding : UInt32*,
-    end_padding : UInt32*,
-    group_count : UInt32
-
-  @[Extern]
-  record DML_QUANTIZED_LINEAR_CONVOLUTION_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    input_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    input_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    filter_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    filter_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    filter_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    bias_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    dimension_count : UInt32,
-    strides : UInt32*,
-    dilations : UInt32*,
-    start_padding : UInt32*,
-    end_padding : UInt32*,
-    group_count : UInt32
-
-  @[Extern]
-  record DML_ELEMENT_WISE_BIT_AND_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_BIT_OR_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_BIT_XOR_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_BIT_NOT_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_BIT_COUNT_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_LOGICAL_GREATER_THAN_OR_EQUAL_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_LOGICAL_LESS_THAN_OR_EQUAL_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ACTIVATION_CELU_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    alpha : Float32
-
-  @[Extern]
-  record DML_ACTIVATION_RELU_GRAD_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_AVERAGE_POOLING_GRAD_OPERATOR_DESC,
-    input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    dimension_count : UInt32,
-    strides : UInt32*,
-    window_size : UInt32*,
-    start_padding : UInt32*,
-    end_padding : UInt32*,
-    include_padding : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record DML_MAX_POOLING_GRAD_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    dimension_count : UInt32,
-    strides : UInt32*,
-    window_size : UInt32*,
-    start_padding : UInt32*,
-    end_padding : UInt32*,
-    dilations : UInt32*
-
-  @[Extern]
-  record DML_RANDOM_GENERATOR_OPERATOR_DESC,
-    input_state_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_state_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    type__ : Win32cr::AI::MachineLearning::DirectML::DML_RANDOM_GENERATOR_TYPE
-
-  @[Extern]
-  record DML_NONZERO_COORDINATES_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_count_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_coordinates_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_RESAMPLE_GRAD_OPERATOR_DESC,
-    input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    interpolation_mode : Win32cr::AI::MachineLearning::DirectML::DML_INTERPOLATION_MODE,
-    dimension_count : UInt32,
-    scales : Float32*,
-    input_pixel_offsets : Float32*,
-    output_pixel_offsets : Float32*
-
-  @[Extern]
-  record DML_SLICE_GRAD_OPERATOR_DESC,
-    input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    dimension_count : UInt32,
-    input_window_offsets : UInt32*,
-    input_window_sizes : UInt32*,
-    input_window_strides : Int32*
-
-  @[Extern]
-  record DML_ADAM_OPTIMIZER_OPERATOR_DESC,
-    input_parameters_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    input_first_moment_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    input_second_moment_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    training_step_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_parameters_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_first_moment_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_second_moment_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    learning_rate : Float32,
-    beta1 : Float32,
-    beta2 : Float32,
-    epsilon : Float32
-
-  @[Extern]
-  record DML_ARGMIN_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    axis_count : UInt32,
-    axes : UInt32*,
-    axis_direction : Win32cr::AI::MachineLearning::DirectML::DML_AXIS_DIRECTION
-
-  @[Extern]
-  record DML_ARGMAX_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    axis_count : UInt32,
-    axes : UInt32*,
-    axis_direction : Win32cr::AI::MachineLearning::DirectML::DML_AXIS_DIRECTION
-
-  @[Extern]
-  record DML_ROI_ALIGN_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    roi_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    batch_indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    reduction_function : Win32cr::AI::MachineLearning::DirectML::DML_REDUCE_FUNCTION,
-    interpolation_mode : Win32cr::AI::MachineLearning::DirectML::DML_INTERPOLATION_MODE,
-    spatial_scale_x : Float32,
-    spatial_scale_y : Float32,
-    out_of_bounds_input_value : Float32,
-    minimum_samples_per_output : UInt32,
-    maximum_samples_per_output : UInt32
-
-  @[Extern]
-  record DML_GATHER_ND1_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    input_dimension_count : UInt32,
-    indices_dimension_count : UInt32,
-    batch_dimension_count : UInt32
-
-  @[Extern]
-  record DML_ELEMENT_WISE_ATAN_YX_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ELEMENT_WISE_CLIP_GRAD_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    min : Float32,
-    max : Float32
-
-  @[Extern]
-  record DML_ELEMENT_WISE_DIFFERENCE_SQUARE_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_LOCAL_RESPONSE_NORMALIZATION_GRAD_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    cross_channel : Win32cr::Foundation::BOOL,
-    local_size : UInt32,
-    alpha : Float32,
-    beta : Float32,
-    bias : Float32
-
-  @[Extern]
-  record DML_CUMULATIVE_PRODUCT_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    axis : UInt32,
-    axis_direction : Win32cr::AI::MachineLearning::DirectML::DML_AXIS_DIRECTION,
-    has_exclusive_product : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record DML_BATCH_NORMALIZATION_GRAD_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    mean_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    variance_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_scale_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_bias_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    epsilon : Float32
-
-  @[Extern]
-  record DML_ELEMENT_WISE_QUANTIZED_LINEAR_ADD_OPERATOR_DESC,
-    a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    a_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    a_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    b_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_DYNAMIC_QUANTIZE_LINEAR_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
-
-  @[Extern]
-  record DML_ROI_ALIGN1_OPERATOR_DESC,
-    input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    roi_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    batch_indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*,
-    reduction_function : Win32cr::AI::MachineLearning::DirectML::DML_REDUCE_FUNCTION,
-    interpolation_mode : Win32cr::AI::MachineLearning::DirectML::DML_INTERPOLATION_MODE,
-    spatial_scale_x : Float32,
-    spatial_scale_y : Float32,
-    input_pixel_offset : Float32,
-    output_pixel_offset : Float32,
-    out_of_bounds_input_value : Float32,
-    minimum_samples_per_output : UInt32,
-    maximum_samples_per_output : UInt32,
-    align_regions_to_corners : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record DML_FEATURE_QUERY_TENSOR_DATA_TYPE_SUPPORT,
-    data_type : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DATA_TYPE
-
-  @[Extern]
-  record DML_FEATURE_DATA_TENSOR_DATA_TYPE_SUPPORT,
-    is_supported : Win32cr::Foundation::BOOL
-
-  @[Extern]
-  record DML_FEATURE_QUERY_FEATURE_LEVELS,
-    requested_feature_level_count : UInt32,
-    requested_feature_levels : Win32cr::AI::MachineLearning::DirectML::DML_FEATURE_LEVEL*
-
-  @[Extern]
-  record DML_FEATURE_DATA_FEATURE_LEVELS,
-    max_supported_feature_level : Win32cr::AI::MachineLearning::DirectML::DML_FEATURE_LEVEL
-
-  @[Extern]
-  record DML_BINDING_TABLE_DESC,
-    dispatchable : Void*,
-    cpu_descriptor_handle : Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE,
-    gpu_descriptor_handle : Win32cr::Graphics::Direct3D12::D3D12_GPU_DESCRIPTOR_HANDLE,
-    size_in_descriptors : UInt32
-
-  @[Extern]
-  record DML_BINDING_PROPERTIES,
-    required_descriptor_count : UInt32,
-    temporary_resource_size : UInt64,
-    persistent_resource_size : UInt64
-
-  @[Extern]
-  record DML_BINDING_DESC,
-    type__ : Win32cr::AI::MachineLearning::DirectML::DML_BINDING_TYPE,
-    desc : Void*
-
-  @[Extern]
-  record DML_BUFFER_BINDING,
-    buffer : Void*,
-    offset : UInt64,
-    size_in_bytes : UInt64
-
-  @[Extern]
-  record DML_BUFFER_ARRAY_BINDING,
-    binding_count : UInt32,
-    bindings : Win32cr::AI::MachineLearning::DirectML::DML_BUFFER_BINDING*
-
-  @[Extern]
-  record DML_GRAPH_EDGE_DESC,
-    type__ : Win32cr::AI::MachineLearning::DirectML::DML_GRAPH_EDGE_TYPE,
-    desc : Void*
-
-  @[Extern]
-  record DML_INPUT_GRAPH_EDGE_DESC,
-    graph_input_index : UInt32,
-    to_node_index : UInt32,
-    to_node_input_index : UInt32,
-    name : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record DML_OUTPUT_GRAPH_EDGE_DESC,
-    from_node_index : UInt32,
-    from_node_output_index : UInt32,
-    graph_output_index : UInt32,
-    name : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record DML_INTERMEDIATE_GRAPH_EDGE_DESC,
-    from_node_index : UInt32,
-    from_node_output_index : UInt32,
-    to_node_index : UInt32,
-    to_node_input_index : UInt32,
-    name : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record DML_GRAPH_NODE_DESC,
-    type__ : Win32cr::AI::MachineLearning::DirectML::DML_GRAPH_NODE_TYPE,
-    desc : Void*
-
-  @[Extern]
-  record DML_OPERATOR_GRAPH_NODE_DESC,
-    operator : Void*,
-    name : Win32cr::Foundation::PSTR
-
-  @[Extern]
-  record DML_GRAPH_DESC,
-    input_count : UInt32,
-    output_count : UInt32,
-    node_count : UInt32,
-    nodes : Win32cr::AI::MachineLearning::DirectML::DML_GRAPH_NODE_DESC*,
-    input_edge_count : UInt32,
-    input_edges : Win32cr::AI::MachineLearning::DirectML::DML_GRAPH_EDGE_DESC*,
-    output_edge_count : UInt32,
-    output_edges : Win32cr::AI::MachineLearning::DirectML::DML_GRAPH_EDGE_DESC*,
-    intermediate_edge_count : UInt32,
-    intermediate_edges : Win32cr::AI::MachineLearning::DirectML::DML_GRAPH_EDGE_DESC*
+  struct DML_SCALAR_UNION
+    property bytes : UInt8[8]
+    property int8 : Int8
+    property u_int8 : UInt8
+    property int16 : Int16
+    property u_int16 : UInt16
+    property int32 : Int32
+    property u_int32 : UInt32
+    property int64 : Int64
+    property u_int64 : UInt64
+    property float32 : Float32
+    property float64 : Float64
+    def initialize(@bytes : UInt8[8], @int8 : Int8, @u_int8 : UInt8, @int16 : Int16, @u_int16 : UInt16, @int32 : Int32, @u_int32 : UInt32, @int64 : Int64, @u_int64 : UInt64, @float32 : Float32, @float64 : Float64)
+    end
+  end
+
+  @[Extern]
+  struct DML_OPERATOR_DESC
+    property type__ : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_TYPE
+    property desc : Void*
+    def initialize(@type__ : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_TYPE, @desc : Void*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_IDENTITY_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_ABS_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_ACOS_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_ADD_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_ADD1_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property fused_activation : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @fused_activation : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_ASIN_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_ATAN_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_CEIL_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_CLIP_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
+    property min : Float32
+    property max : Float32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*, @min : Float32, @max : Float32)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_COS_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_DIVIDE_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_EXP_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_FLOOR_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_LOG_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_LOGICAL_AND_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_LOGICAL_EQUALS_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_LOGICAL_GREATER_THAN_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_LOGICAL_LESS_THAN_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_LOGICAL_NOT_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_LOGICAL_OR_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_LOGICAL_XOR_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_MAX_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_MEAN_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_MIN_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_MULTIPLY_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_POW_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property exponent_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @exponent_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_CONSTANT_POW_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
+    property exponent : Float32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*, @exponent : Float32)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_RECIP_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_SIN_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_SQRT_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_SUBTRACT_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_TAN_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_THRESHOLD_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
+    property min : Float32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*, @min : Float32)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_QUANTIZE_LINEAR_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_DEQUANTIZE_LINEAR_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ACTIVATION_ELU_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property alpha : Float32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @alpha : Float32)
+    end
+  end
+
+  @[Extern]
+  struct DML_ACTIVATION_HARDMAX_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ACTIVATION_HARD_SIGMOID_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property alpha : Float32
+    property beta : Float32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @alpha : Float32, @beta : Float32)
+    end
+  end
+
+  @[Extern]
+  struct DML_ACTIVATION_IDENTITY_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ACTIVATION_LEAKY_RELU_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property alpha : Float32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @alpha : Float32)
+    end
+  end
+
+  @[Extern]
+  struct DML_ACTIVATION_LINEAR_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property alpha : Float32
+    property beta : Float32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @alpha : Float32, @beta : Float32)
+    end
+  end
+
+  @[Extern]
+  struct DML_ACTIVATION_LOG_SOFTMAX_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ACTIVATION_PARAMETERIZED_RELU_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property slope_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @slope_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ACTIVATION_PARAMETRIC_SOFTPLUS_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property alpha : Float32
+    property beta : Float32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @alpha : Float32, @beta : Float32)
+    end
+  end
+
+  @[Extern]
+  struct DML_ACTIVATION_RELU_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ACTIVATION_SCALED_ELU_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property alpha : Float32
+    property gamma : Float32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @alpha : Float32, @gamma : Float32)
+    end
+  end
+
+  @[Extern]
+  struct DML_ACTIVATION_SCALED_TANH_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property alpha : Float32
+    property beta : Float32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @alpha : Float32, @beta : Float32)
+    end
+  end
+
+  @[Extern]
+  struct DML_ACTIVATION_SIGMOID_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ACTIVATION_SOFTMAX_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ACTIVATION_SOFTPLUS_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property steepness : Float32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @steepness : Float32)
+    end
+  end
+
+  @[Extern]
+  struct DML_ACTIVATION_SOFTSIGN_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ACTIVATION_TANH_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ACTIVATION_THRESHOLDED_RELU_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property alpha : Float32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @alpha : Float32)
+    end
+  end
+
+  @[Extern]
+  struct DML_CONVOLUTION_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property filter_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property bias_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property mode : Win32cr::AI::MachineLearning::DirectML::DML_CONVOLUTION_MODE
+    property direction : Win32cr::AI::MachineLearning::DirectML::DML_CONVOLUTION_DIRECTION
+    property dimension_count : UInt32
+    property strides : UInt32*
+    property dilations : UInt32*
+    property start_padding : UInt32*
+    property end_padding : UInt32*
+    property output_padding : UInt32*
+    property group_count : UInt32
+    property fused_activation : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @filter_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @bias_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @mode : Win32cr::AI::MachineLearning::DirectML::DML_CONVOLUTION_MODE, @direction : Win32cr::AI::MachineLearning::DirectML::DML_CONVOLUTION_DIRECTION, @dimension_count : UInt32, @strides : UInt32*, @dilations : UInt32*, @start_padding : UInt32*, @end_padding : UInt32*, @output_padding : UInt32*, @group_count : UInt32, @fused_activation : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_GEMM_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property c_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property trans_a : Win32cr::AI::MachineLearning::DirectML::DML_MATRIX_TRANSFORM
+    property trans_b : Win32cr::AI::MachineLearning::DirectML::DML_MATRIX_TRANSFORM
+    property alpha : Float32
+    property beta : Float32
+    property fused_activation : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @c_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @trans_a : Win32cr::AI::MachineLearning::DirectML::DML_MATRIX_TRANSFORM, @trans_b : Win32cr::AI::MachineLearning::DirectML::DML_MATRIX_TRANSFORM, @alpha : Float32, @beta : Float32, @fused_activation : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_REDUCE_OPERATOR_DESC
+    property function : Win32cr::AI::MachineLearning::DirectML::DML_REDUCE_FUNCTION
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property axis_count : UInt32
+    property axes : UInt32*
+    def initialize(@function : Win32cr::AI::MachineLearning::DirectML::DML_REDUCE_FUNCTION, @input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @axis_count : UInt32, @axes : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct DML_AVERAGE_POOLING_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property dimension_count : UInt32
+    property strides : UInt32*
+    property window_size : UInt32*
+    property start_padding : UInt32*
+    property end_padding : UInt32*
+    property include_padding : Win32cr::Foundation::BOOL
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @dimension_count : UInt32, @strides : UInt32*, @window_size : UInt32*, @start_padding : UInt32*, @end_padding : UInt32*, @include_padding : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct DML_LP_POOLING_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property dimension_count : UInt32
+    property strides : UInt32*
+    property window_size : UInt32*
+    property start_padding : UInt32*
+    property end_padding : UInt32*
+    property p : UInt32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @dimension_count : UInt32, @strides : UInt32*, @window_size : UInt32*, @start_padding : UInt32*, @end_padding : UInt32*, @p : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DML_MAX_POOLING_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property dimension_count : UInt32
+    property strides : UInt32*
+    property window_size : UInt32*
+    property start_padding : UInt32*
+    property end_padding : UInt32*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @dimension_count : UInt32, @strides : UInt32*, @window_size : UInt32*, @start_padding : UInt32*, @end_padding : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ROI_POOLING_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property roi_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property spatial_scale : Float32
+    property pooled_size : Win32cr::AI::MachineLearning::DirectML::DML_SIZE_2D
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @roi_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @spatial_scale : Float32, @pooled_size : Win32cr::AI::MachineLearning::DirectML::DML_SIZE_2D)
+    end
+  end
+
+  @[Extern]
+  struct DML_SLICE_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property dimension_count : UInt32
+    property offsets : UInt32*
+    property sizes : UInt32*
+    property strides : UInt32*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @dimension_count : UInt32, @offsets : UInt32*, @sizes : UInt32*, @strides : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct DML_CAST_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_SPLIT_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_count : UInt32
+    property output_tensors : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property axis : UInt32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_count : UInt32, @output_tensors : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @axis : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DML_JOIN_OPERATOR_DESC
+    property input_count : UInt32
+    property input_tensors : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property axis : UInt32
+    def initialize(@input_count : UInt32, @input_tensors : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @axis : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DML_PADDING_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property padding_mode : Win32cr::AI::MachineLearning::DirectML::DML_PADDING_MODE
+    property padding_value : Float32
+    property dimension_count : UInt32
+    property start_padding : UInt32*
+    property end_padding : UInt32*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @padding_mode : Win32cr::AI::MachineLearning::DirectML::DML_PADDING_MODE, @padding_value : Float32, @dimension_count : UInt32, @start_padding : UInt32*, @end_padding : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct DML_VALUE_SCALE_2D_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale : Float32
+    property channel_count : UInt32
+    property bias : Float32*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale : Float32, @channel_count : UInt32, @bias : Float32*)
+    end
+  end
+
+  @[Extern]
+  struct DML_UPSAMPLE_2D_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_size : Win32cr::AI::MachineLearning::DirectML::DML_SIZE_2D
+    property interpolation_mode : Win32cr::AI::MachineLearning::DirectML::DML_INTERPOLATION_MODE
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_size : Win32cr::AI::MachineLearning::DirectML::DML_SIZE_2D, @interpolation_mode : Win32cr::AI::MachineLearning::DirectML::DML_INTERPOLATION_MODE)
+    end
+  end
+
+  @[Extern]
+  struct DML_GATHER_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property axis : UInt32
+    property index_dimensions : UInt32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @axis : UInt32, @index_dimensions : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DML_SPACE_TO_DEPTH_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property block_size : UInt32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @block_size : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DML_DEPTH_TO_SPACE_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property block_size : UInt32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @block_size : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DML_TILE_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property repeats_count : UInt32
+    property repeats : UInt32*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @repeats_count : UInt32, @repeats : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct DML_TOP_K_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_value_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_index_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property axis : UInt32
+    property k : UInt32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_value_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_index_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @axis : UInt32, @k : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DML_BATCH_NORMALIZATION_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property mean_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property variance_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property bias_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property spatial : Win32cr::Foundation::BOOL
+    property epsilon : Float32
+    property fused_activation : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @mean_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @variance_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @bias_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @spatial : Win32cr::Foundation::BOOL, @epsilon : Float32, @fused_activation : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_MEAN_VARIANCE_NORMALIZATION_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property bias_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property cross_channel : Win32cr::Foundation::BOOL
+    property normalize_variance : Win32cr::Foundation::BOOL
+    property epsilon : Float32
+    property fused_activation : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @bias_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @cross_channel : Win32cr::Foundation::BOOL, @normalize_variance : Win32cr::Foundation::BOOL, @epsilon : Float32, @fused_activation : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_LOCAL_RESPONSE_NORMALIZATION_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property cross_channel : Win32cr::Foundation::BOOL
+    property local_size : UInt32
+    property alpha : Float32
+    property beta : Float32
+    property bias : Float32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @cross_channel : Win32cr::Foundation::BOOL, @local_size : UInt32, @alpha : Float32, @beta : Float32, @bias : Float32)
+    end
+  end
+
+  @[Extern]
+  struct DML_LP_NORMALIZATION_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property axis : UInt32
+    property epsilon : Float32
+    property p : UInt32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @axis : UInt32, @epsilon : Float32, @p : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DML_RNN_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property weight_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property recurrence_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property bias_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property hidden_init_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property sequence_lengths_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_sequence_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_single_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property activation_desc_count : UInt32
+    property activation_descs : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*
+    property direction : Win32cr::AI::MachineLearning::DirectML::DML_RECURRENT_NETWORK_DIRECTION
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @weight_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @recurrence_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @bias_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @hidden_init_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @sequence_lengths_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_sequence_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_single_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @activation_desc_count : UInt32, @activation_descs : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*, @direction : Win32cr::AI::MachineLearning::DirectML::DML_RECURRENT_NETWORK_DIRECTION)
+    end
+  end
+
+  @[Extern]
+  struct DML_LSTM_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property weight_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property recurrence_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property bias_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property hidden_init_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property cell_mem_init_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property sequence_lengths_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property peephole_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_sequence_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_single_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_cell_single_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property activation_desc_count : UInt32
+    property activation_descs : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*
+    property direction : Win32cr::AI::MachineLearning::DirectML::DML_RECURRENT_NETWORK_DIRECTION
+    property clip_threshold : Float32
+    property use_clip_threshold : Win32cr::Foundation::BOOL
+    property couple_input_forget : Win32cr::Foundation::BOOL
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @weight_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @recurrence_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @bias_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @hidden_init_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @cell_mem_init_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @sequence_lengths_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @peephole_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_sequence_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_single_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_cell_single_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @activation_desc_count : UInt32, @activation_descs : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*, @direction : Win32cr::AI::MachineLearning::DirectML::DML_RECURRENT_NETWORK_DIRECTION, @clip_threshold : Float32, @use_clip_threshold : Win32cr::Foundation::BOOL, @couple_input_forget : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct DML_GRU_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property weight_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property recurrence_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property bias_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property hidden_init_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property sequence_lengths_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_sequence_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_single_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property activation_desc_count : UInt32
+    property activation_descs : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*
+    property direction : Win32cr::AI::MachineLearning::DirectML::DML_RECURRENT_NETWORK_DIRECTION
+    property linear_before_reset : Win32cr::Foundation::BOOL
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @weight_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @recurrence_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @bias_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @hidden_init_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @sequence_lengths_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_sequence_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_single_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @activation_desc_count : UInt32, @activation_descs : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*, @direction : Win32cr::AI::MachineLearning::DirectML::DML_RECURRENT_NETWORK_DIRECTION, @linear_before_reset : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_SIGN_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_IS_NAN_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_ERF_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_SINH_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_COSH_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_TANH_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_ASINH_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_ACOSH_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_ATANH_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_IF_OPERATOR_DESC
+    property condition_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@condition_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ACTIVATION_SHRINK_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property bias : Float32
+    property threshold : Float32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @bias : Float32, @threshold : Float32)
+    end
+  end
+
+  @[Extern]
+  struct DML_MAX_POOLING1_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property dimension_count : UInt32
+    property strides : UInt32*
+    property window_size : UInt32*
+    property start_padding : UInt32*
+    property end_padding : UInt32*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @dimension_count : UInt32, @strides : UInt32*, @window_size : UInt32*, @start_padding : UInt32*, @end_padding : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct DML_MAX_UNPOOLING_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_DIAGONAL_MATRIX_OPERATOR_DESC
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property offset : Int32
+    property value : Float32
+    def initialize(@output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @offset : Int32, @value : Float32)
+    end
+  end
+
+  @[Extern]
+  struct DML_SCATTER_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property updates_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property axis : UInt32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @updates_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @axis : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DML_ONE_HOT_OPERATOR_DESC
+    property indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property values_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property axis : UInt32
+    def initialize(@indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @values_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @axis : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DML_RESAMPLE_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property interpolation_mode : Win32cr::AI::MachineLearning::DirectML::DML_INTERPOLATION_MODE
+    property scale_count : UInt32
+    property scales : Float32*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @interpolation_mode : Win32cr::AI::MachineLearning::DirectML::DML_INTERPOLATION_MODE, @scale_count : UInt32, @scales : Float32*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_BIT_SHIFT_LEFT_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_BIT_SHIFT_RIGHT_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_ROUND_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property rounding_mode : Win32cr::AI::MachineLearning::DirectML::DML_ROUNDING_MODE
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @rounding_mode : Win32cr::AI::MachineLearning::DirectML::DML_ROUNDING_MODE)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_IS_INFINITY_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property infinity_mode : Win32cr::AI::MachineLearning::DirectML::DML_IS_INFINITY_MODE
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @infinity_mode : Win32cr::AI::MachineLearning::DirectML::DML_IS_INFINITY_MODE)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_MODULUS_TRUNCATE_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_MODULUS_FLOOR_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_FILL_VALUE_CONSTANT_OPERATOR_DESC
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property value_data_type : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DATA_TYPE
+    property value : Win32cr::AI::MachineLearning::DirectML::DML_SCALAR_UNION
+    def initialize(@output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @value_data_type : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DATA_TYPE, @value : Win32cr::AI::MachineLearning::DirectML::DML_SCALAR_UNION)
+    end
+  end
+
+  @[Extern]
+  struct DML_FILL_VALUE_SEQUENCE_OPERATOR_DESC
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property value_data_type : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DATA_TYPE
+    property value_start : Win32cr::AI::MachineLearning::DirectML::DML_SCALAR_UNION
+    property value_delta : Win32cr::AI::MachineLearning::DirectML::DML_SCALAR_UNION
+    def initialize(@output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @value_data_type : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DATA_TYPE, @value_start : Win32cr::AI::MachineLearning::DirectML::DML_SCALAR_UNION, @value_delta : Win32cr::AI::MachineLearning::DirectML::DML_SCALAR_UNION)
+    end
+  end
+
+  @[Extern]
+  struct DML_CUMULATIVE_SUMMATION_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property axis : UInt32
+    property axis_direction : Win32cr::AI::MachineLearning::DirectML::DML_AXIS_DIRECTION
+    property has_exclusive_sum : Win32cr::Foundation::BOOL
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @axis : UInt32, @axis_direction : Win32cr::AI::MachineLearning::DirectML::DML_AXIS_DIRECTION, @has_exclusive_sum : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct DML_REVERSE_SUBSEQUENCES_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property sequence_lengths_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property axis : UInt32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @sequence_lengths_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @axis : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DML_GATHER_ELEMENTS_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property axis : UInt32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @axis : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DML_GATHER_ND_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property input_dimension_count : UInt32
+    property indices_dimension_count : UInt32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @input_dimension_count : UInt32, @indices_dimension_count : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DML_SCATTER_ND_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property updates_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property input_dimension_count : UInt32
+    property indices_dimension_count : UInt32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @updates_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @input_dimension_count : UInt32, @indices_dimension_count : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DML_MAX_POOLING2_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property dimension_count : UInt32
+    property strides : UInt32*
+    property window_size : UInt32*
+    property start_padding : UInt32*
+    property end_padding : UInt32*
+    property dilations : UInt32*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @dimension_count : UInt32, @strides : UInt32*, @window_size : UInt32*, @start_padding : UInt32*, @end_padding : UInt32*, @dilations : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct DML_SLICE1_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property dimension_count : UInt32
+    property input_window_offsets : UInt32*
+    property input_window_sizes : UInt32*
+    property input_window_strides : Int32*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @dimension_count : UInt32, @input_window_offsets : UInt32*, @input_window_sizes : UInt32*, @input_window_strides : Int32*)
+    end
+  end
+
+  @[Extern]
+  struct DML_TOP_K1_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_value_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_index_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property axis : UInt32
+    property k : UInt32
+    property axis_direction : Win32cr::AI::MachineLearning::DirectML::DML_AXIS_DIRECTION
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_value_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_index_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @axis : UInt32, @k : UInt32, @axis_direction : Win32cr::AI::MachineLearning::DirectML::DML_AXIS_DIRECTION)
+    end
+  end
+
+  @[Extern]
+  struct DML_DEPTH_TO_SPACE1_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property block_size : UInt32
+    property order : Win32cr::AI::MachineLearning::DirectML::DML_DEPTH_SPACE_ORDER
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @block_size : UInt32, @order : Win32cr::AI::MachineLearning::DirectML::DML_DEPTH_SPACE_ORDER)
+    end
+  end
+
+  @[Extern]
+  struct DML_SPACE_TO_DEPTH1_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property block_size : UInt32
+    property order : Win32cr::AI::MachineLearning::DirectML::DML_DEPTH_SPACE_ORDER
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @block_size : UInt32, @order : Win32cr::AI::MachineLearning::DirectML::DML_DEPTH_SPACE_ORDER)
+    end
+  end
+
+  @[Extern]
+  struct DML_MEAN_VARIANCE_NORMALIZATION1_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property bias_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property axis_count : UInt32
+    property axes : UInt32*
+    property normalize_variance : Win32cr::Foundation::BOOL
+    property epsilon : Float32
+    property fused_activation : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @bias_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @axis_count : UInt32, @axes : UInt32*, @normalize_variance : Win32cr::Foundation::BOOL, @epsilon : Float32, @fused_activation : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_RESAMPLE1_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property interpolation_mode : Win32cr::AI::MachineLearning::DirectML::DML_INTERPOLATION_MODE
+    property dimension_count : UInt32
+    property scales : Float32*
+    property input_pixel_offsets : Float32*
+    property output_pixel_offsets : Float32*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @interpolation_mode : Win32cr::AI::MachineLearning::DirectML::DML_INTERPOLATION_MODE, @dimension_count : UInt32, @scales : Float32*, @input_pixel_offsets : Float32*, @output_pixel_offsets : Float32*)
+    end
+  end
+
+  @[Extern]
+  struct DML_MATRIX_MULTIPLY_INTEGER_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property a_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @a_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_QUANTIZED_LINEAR_MATRIX_MULTIPLY_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property a_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property a_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @a_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @a_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_CONVOLUTION_INTEGER_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property input_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property filter_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property filter_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property dimension_count : UInt32
+    property strides : UInt32*
+    property dilations : UInt32*
+    property start_padding : UInt32*
+    property end_padding : UInt32*
+    property group_count : UInt32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @input_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @filter_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @filter_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @dimension_count : UInt32, @strides : UInt32*, @dilations : UInt32*, @start_padding : UInt32*, @end_padding : UInt32*, @group_count : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DML_QUANTIZED_LINEAR_CONVOLUTION_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property input_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property input_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property filter_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property filter_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property filter_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property bias_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property dimension_count : UInt32
+    property strides : UInt32*
+    property dilations : UInt32*
+    property start_padding : UInt32*
+    property end_padding : UInt32*
+    property group_count : UInt32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @input_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @input_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @filter_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @filter_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @filter_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @bias_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @dimension_count : UInt32, @strides : UInt32*, @dilations : UInt32*, @start_padding : UInt32*, @end_padding : UInt32*, @group_count : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_BIT_AND_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_BIT_OR_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_BIT_XOR_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_BIT_NOT_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_BIT_COUNT_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_LOGICAL_GREATER_THAN_OR_EQUAL_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_LOGICAL_LESS_THAN_OR_EQUAL_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ACTIVATION_CELU_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property alpha : Float32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @alpha : Float32)
+    end
+  end
+
+  @[Extern]
+  struct DML_ACTIVATION_RELU_GRAD_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_AVERAGE_POOLING_GRAD_OPERATOR_DESC
+    property input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property dimension_count : UInt32
+    property strides : UInt32*
+    property window_size : UInt32*
+    property start_padding : UInt32*
+    property end_padding : UInt32*
+    property include_padding : Win32cr::Foundation::BOOL
+    def initialize(@input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @dimension_count : UInt32, @strides : UInt32*, @window_size : UInt32*, @start_padding : UInt32*, @end_padding : UInt32*, @include_padding : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct DML_MAX_POOLING_GRAD_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property dimension_count : UInt32
+    property strides : UInt32*
+    property window_size : UInt32*
+    property start_padding : UInt32*
+    property end_padding : UInt32*
+    property dilations : UInt32*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @dimension_count : UInt32, @strides : UInt32*, @window_size : UInt32*, @start_padding : UInt32*, @end_padding : UInt32*, @dilations : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct DML_RANDOM_GENERATOR_OPERATOR_DESC
+    property input_state_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_state_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property type__ : Win32cr::AI::MachineLearning::DirectML::DML_RANDOM_GENERATOR_TYPE
+    def initialize(@input_state_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_state_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @type__ : Win32cr::AI::MachineLearning::DirectML::DML_RANDOM_GENERATOR_TYPE)
+    end
+  end
+
+  @[Extern]
+  struct DML_NONZERO_COORDINATES_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_count_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_coordinates_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_count_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_coordinates_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_RESAMPLE_GRAD_OPERATOR_DESC
+    property input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property interpolation_mode : Win32cr::AI::MachineLearning::DirectML::DML_INTERPOLATION_MODE
+    property dimension_count : UInt32
+    property scales : Float32*
+    property input_pixel_offsets : Float32*
+    property output_pixel_offsets : Float32*
+    def initialize(@input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @interpolation_mode : Win32cr::AI::MachineLearning::DirectML::DML_INTERPOLATION_MODE, @dimension_count : UInt32, @scales : Float32*, @input_pixel_offsets : Float32*, @output_pixel_offsets : Float32*)
+    end
+  end
+
+  @[Extern]
+  struct DML_SLICE_GRAD_OPERATOR_DESC
+    property input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property dimension_count : UInt32
+    property input_window_offsets : UInt32*
+    property input_window_sizes : UInt32*
+    property input_window_strides : Int32*
+    def initialize(@input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @dimension_count : UInt32, @input_window_offsets : UInt32*, @input_window_sizes : UInt32*, @input_window_strides : Int32*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ADAM_OPTIMIZER_OPERATOR_DESC
+    property input_parameters_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property input_first_moment_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property input_second_moment_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property training_step_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_parameters_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_first_moment_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_second_moment_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property learning_rate : Float32
+    property beta1 : Float32
+    property beta2 : Float32
+    property epsilon : Float32
+    def initialize(@input_parameters_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @input_first_moment_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @input_second_moment_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @training_step_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_parameters_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_first_moment_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_second_moment_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @learning_rate : Float32, @beta1 : Float32, @beta2 : Float32, @epsilon : Float32)
+    end
+  end
+
+  @[Extern]
+  struct DML_ARGMIN_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property axis_count : UInt32
+    property axes : UInt32*
+    property axis_direction : Win32cr::AI::MachineLearning::DirectML::DML_AXIS_DIRECTION
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @axis_count : UInt32, @axes : UInt32*, @axis_direction : Win32cr::AI::MachineLearning::DirectML::DML_AXIS_DIRECTION)
+    end
+  end
+
+  @[Extern]
+  struct DML_ARGMAX_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property axis_count : UInt32
+    property axes : UInt32*
+    property axis_direction : Win32cr::AI::MachineLearning::DirectML::DML_AXIS_DIRECTION
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @axis_count : UInt32, @axes : UInt32*, @axis_direction : Win32cr::AI::MachineLearning::DirectML::DML_AXIS_DIRECTION)
+    end
+  end
+
+  @[Extern]
+  struct DML_ROI_ALIGN_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property roi_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property batch_indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property reduction_function : Win32cr::AI::MachineLearning::DirectML::DML_REDUCE_FUNCTION
+    property interpolation_mode : Win32cr::AI::MachineLearning::DirectML::DML_INTERPOLATION_MODE
+    property spatial_scale_x : Float32
+    property spatial_scale_y : Float32
+    property out_of_bounds_input_value : Float32
+    property minimum_samples_per_output : UInt32
+    property maximum_samples_per_output : UInt32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @roi_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @batch_indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @reduction_function : Win32cr::AI::MachineLearning::DirectML::DML_REDUCE_FUNCTION, @interpolation_mode : Win32cr::AI::MachineLearning::DirectML::DML_INTERPOLATION_MODE, @spatial_scale_x : Float32, @spatial_scale_y : Float32, @out_of_bounds_input_value : Float32, @minimum_samples_per_output : UInt32, @maximum_samples_per_output : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DML_GATHER_ND1_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property input_dimension_count : UInt32
+    property indices_dimension_count : UInt32
+    property batch_dimension_count : UInt32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @input_dimension_count : UInt32, @indices_dimension_count : UInt32, @batch_dimension_count : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_ATAN_YX_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_CLIP_GRAD_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property min : Float32
+    property max : Float32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @min : Float32, @max : Float32)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_DIFFERENCE_SQUARE_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_LOCAL_RESPONSE_NORMALIZATION_GRAD_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property cross_channel : Win32cr::Foundation::BOOL
+    property local_size : UInt32
+    property alpha : Float32
+    property beta : Float32
+    property bias : Float32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @cross_channel : Win32cr::Foundation::BOOL, @local_size : UInt32, @alpha : Float32, @beta : Float32, @bias : Float32)
+    end
+  end
+
+  @[Extern]
+  struct DML_CUMULATIVE_PRODUCT_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property axis : UInt32
+    property axis_direction : Win32cr::AI::MachineLearning::DirectML::DML_AXIS_DIRECTION
+    property has_exclusive_product : Win32cr::Foundation::BOOL
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @axis : UInt32, @axis_direction : Win32cr::AI::MachineLearning::DirectML::DML_AXIS_DIRECTION, @has_exclusive_product : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct DML_BATCH_NORMALIZATION_GRAD_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property mean_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property variance_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_scale_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_bias_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property epsilon : Float32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @mean_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @variance_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_scale_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_bias_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @epsilon : Float32)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_QUANTIZED_LINEAR_ADD_OPERATOR_DESC
+    property a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property a_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property a_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property b_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@a_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @a_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @a_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @b_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_DYNAMIC_QUANTIZE_LINEAR_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_zero_point_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ROI_ALIGN1_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property roi_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property batch_indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property reduction_function : Win32cr::AI::MachineLearning::DirectML::DML_REDUCE_FUNCTION
+    property interpolation_mode : Win32cr::AI::MachineLearning::DirectML::DML_INTERPOLATION_MODE
+    property spatial_scale_x : Float32
+    property spatial_scale_y : Float32
+    property input_pixel_offset : Float32
+    property output_pixel_offset : Float32
+    property out_of_bounds_input_value : Float32
+    property minimum_samples_per_output : UInt32
+    property maximum_samples_per_output : UInt32
+    property align_regions_to_corners : Win32cr::Foundation::BOOL
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @roi_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @batch_indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @reduction_function : Win32cr::AI::MachineLearning::DirectML::DML_REDUCE_FUNCTION, @interpolation_mode : Win32cr::AI::MachineLearning::DirectML::DML_INTERPOLATION_MODE, @spatial_scale_x : Float32, @spatial_scale_y : Float32, @input_pixel_offset : Float32, @output_pixel_offset : Float32, @out_of_bounds_input_value : Float32, @minimum_samples_per_output : UInt32, @maximum_samples_per_output : UInt32, @align_regions_to_corners : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct DML_FEATURE_QUERY_TENSOR_DATA_TYPE_SUPPORT
+    property data_type : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DATA_TYPE
+    def initialize(@data_type : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DATA_TYPE)
+    end
+  end
+
+  @[Extern]
+  struct DML_FEATURE_DATA_TENSOR_DATA_TYPE_SUPPORT
+    property is_supported : Win32cr::Foundation::BOOL
+    def initialize(@is_supported : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct DML_FEATURE_QUERY_FEATURE_LEVELS
+    property requested_feature_level_count : UInt32
+    property requested_feature_levels : Win32cr::AI::MachineLearning::DirectML::DML_FEATURE_LEVEL*
+    def initialize(@requested_feature_level_count : UInt32, @requested_feature_levels : Win32cr::AI::MachineLearning::DirectML::DML_FEATURE_LEVEL*)
+    end
+  end
+
+  @[Extern]
+  struct DML_FEATURE_DATA_FEATURE_LEVELS
+    property max_supported_feature_level : Win32cr::AI::MachineLearning::DirectML::DML_FEATURE_LEVEL
+    def initialize(@max_supported_feature_level : Win32cr::AI::MachineLearning::DirectML::DML_FEATURE_LEVEL)
+    end
+  end
+
+  @[Extern]
+  struct DML_BINDING_TABLE_DESC
+    property dispatchable : Void*
+    property cpu_descriptor_handle : Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE
+    property gpu_descriptor_handle : Win32cr::Graphics::Direct3D12::D3D12_GPU_DESCRIPTOR_HANDLE
+    property size_in_descriptors : UInt32
+    def initialize(@dispatchable : Void*, @cpu_descriptor_handle : Win32cr::Graphics::Direct3D12::D3D12_CPU_DESCRIPTOR_HANDLE, @gpu_descriptor_handle : Win32cr::Graphics::Direct3D12::D3D12_GPU_DESCRIPTOR_HANDLE, @size_in_descriptors : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct DML_BINDING_PROPERTIES
+    property required_descriptor_count : UInt32
+    property temporary_resource_size : UInt64
+    property persistent_resource_size : UInt64
+    def initialize(@required_descriptor_count : UInt32, @temporary_resource_size : UInt64, @persistent_resource_size : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct DML_BINDING_DESC
+    property type__ : Win32cr::AI::MachineLearning::DirectML::DML_BINDING_TYPE
+    property desc : Void*
+    def initialize(@type__ : Win32cr::AI::MachineLearning::DirectML::DML_BINDING_TYPE, @desc : Void*)
+    end
+  end
+
+  @[Extern]
+  struct DML_BUFFER_BINDING
+    property buffer : Void*
+    property offset : UInt64
+    property size_in_bytes : UInt64
+    def initialize(@buffer : Void*, @offset : UInt64, @size_in_bytes : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct DML_BUFFER_ARRAY_BINDING
+    property binding_count : UInt32
+    property bindings : Win32cr::AI::MachineLearning::DirectML::DML_BUFFER_BINDING*
+    def initialize(@binding_count : UInt32, @bindings : Win32cr::AI::MachineLearning::DirectML::DML_BUFFER_BINDING*)
+    end
+  end
+
+  @[Extern]
+  struct DML_GRAPH_EDGE_DESC
+    property type__ : Win32cr::AI::MachineLearning::DirectML::DML_GRAPH_EDGE_TYPE
+    property desc : Void*
+    def initialize(@type__ : Win32cr::AI::MachineLearning::DirectML::DML_GRAPH_EDGE_TYPE, @desc : Void*)
+    end
+  end
+
+  @[Extern]
+  struct DML_INPUT_GRAPH_EDGE_DESC
+    property graph_input_index : UInt32
+    property to_node_index : UInt32
+    property to_node_input_index : UInt32
+    property name : Win32cr::Foundation::PSTR
+    def initialize(@graph_input_index : UInt32, @to_node_index : UInt32, @to_node_input_index : UInt32, @name : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct DML_OUTPUT_GRAPH_EDGE_DESC
+    property from_node_index : UInt32
+    property from_node_output_index : UInt32
+    property graph_output_index : UInt32
+    property name : Win32cr::Foundation::PSTR
+    def initialize(@from_node_index : UInt32, @from_node_output_index : UInt32, @graph_output_index : UInt32, @name : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct DML_INTERMEDIATE_GRAPH_EDGE_DESC
+    property from_node_index : UInt32
+    property from_node_output_index : UInt32
+    property to_node_index : UInt32
+    property to_node_input_index : UInt32
+    property name : Win32cr::Foundation::PSTR
+    def initialize(@from_node_index : UInt32, @from_node_output_index : UInt32, @to_node_index : UInt32, @to_node_input_index : UInt32, @name : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct DML_GRAPH_NODE_DESC
+    property type__ : Win32cr::AI::MachineLearning::DirectML::DML_GRAPH_NODE_TYPE
+    property desc : Void*
+    def initialize(@type__ : Win32cr::AI::MachineLearning::DirectML::DML_GRAPH_NODE_TYPE, @desc : Void*)
+    end
+  end
+
+  @[Extern]
+  struct DML_OPERATOR_GRAPH_NODE_DESC
+    property operator : Void*
+    property name : Win32cr::Foundation::PSTR
+    def initialize(@operator : Void*, @name : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct DML_GRAPH_DESC
+    property input_count : UInt32
+    property output_count : UInt32
+    property node_count : UInt32
+    property nodes : Win32cr::AI::MachineLearning::DirectML::DML_GRAPH_NODE_DESC*
+    property input_edge_count : UInt32
+    property input_edges : Win32cr::AI::MachineLearning::DirectML::DML_GRAPH_EDGE_DESC*
+    property output_edge_count : UInt32
+    property output_edges : Win32cr::AI::MachineLearning::DirectML::DML_GRAPH_EDGE_DESC*
+    property intermediate_edge_count : UInt32
+    property intermediate_edges : Win32cr::AI::MachineLearning::DirectML::DML_GRAPH_EDGE_DESC*
+    def initialize(@input_count : UInt32, @output_count : UInt32, @node_count : UInt32, @nodes : Win32cr::AI::MachineLearning::DirectML::DML_GRAPH_NODE_DESC*, @input_edge_count : UInt32, @input_edges : Win32cr::AI::MachineLearning::DirectML::DML_GRAPH_EDGE_DESC*, @output_edge_count : UInt32, @output_edges : Win32cr::AI::MachineLearning::DirectML::DML_GRAPH_EDGE_DESC*, @intermediate_edge_count : UInt32, @intermediate_edges : Win32cr::AI::MachineLearning::DirectML::DML_GRAPH_EDGE_DESC*)
+    end
+  end
 
   @[Extern]
   record IDMLObjectVtbl,
@@ -1584,7 +2097,6 @@ module Win32cr::AI::MachineLearning::DirectML
 
 
   @[Extern]
-  #@[Com("c8263aac-9e0c-4a2d-9b8e-007521a3317c")]
   record IDMLObject, lpVtbl : IDMLObjectVtbl* do
     GUID = LibC::GUID.new(0xc8263aac_u32, 0x9e0c_u16, 0x4a2d_u16, StaticArray[0x9b_u8, 0x8e_u8, 0x0_u8, 0x75_u8, 0x21_u8, 0xa3_u8, 0x31_u8, 0x7c_u8])
     def query_interface(this : IDMLObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1633,7 +2145,6 @@ module Win32cr::AI::MachineLearning::DirectML
 
 
   @[Extern]
-  #@[Com("6dbd6437-96fd-423f-a98c-ae5e7c2a573f")]
   record IDMLDevice, lpVtbl : IDMLDeviceVtbl* do
     GUID = LibC::GUID.new(0x6dbd6437_u32, 0x96fd_u16, 0x423f_u16, StaticArray[0xa9_u8, 0x8c_u8, 0xae_u8, 0x5e_u8, 0x7c_u8, 0x2a_u8, 0x57_u8, 0x3f_u8])
     def query_interface(this : IDMLDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1703,7 +2214,6 @@ module Win32cr::AI::MachineLearning::DirectML
 
 
   @[Extern]
-  #@[Com("27e83142-8165-49e3-974e-2fd66e4cb69d")]
   record IDMLDeviceChild, lpVtbl : IDMLDeviceChildVtbl* do
     GUID = LibC::GUID.new(0x27e83142_u32, 0x8165_u16, 0x49e3_u16, StaticArray[0x97_u8, 0x4e_u8, 0x2f_u8, 0xd6_u8, 0x6e_u8, 0x4c_u8, 0xb6_u8, 0x9d_u8])
     def query_interface(this : IDMLDeviceChild*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1746,7 +2256,6 @@ module Win32cr::AI::MachineLearning::DirectML
 
 
   @[Extern]
-  #@[Com("b1ab0825-4542-4a4b-8617-6dde6e8f6201")]
   record IDMLPageable, lpVtbl : IDMLPageableVtbl* do
     GUID = LibC::GUID.new(0xb1ab0825_u32, 0x4542_u16, 0x4a4b_u16, StaticArray[0x86_u8, 0x17_u8, 0x6d_u8, 0xde_u8, 0x6e_u8, 0x8f_u8, 0x62_u8, 0x1_u8])
     def query_interface(this : IDMLPageable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1789,7 +2298,6 @@ module Win32cr::AI::MachineLearning::DirectML
 
 
   @[Extern]
-  #@[Com("26caae7a-3081-4633-9581-226fbe57695d")]
   record IDMLOperator, lpVtbl : IDMLOperatorVtbl* do
     GUID = LibC::GUID.new(0x26caae7a_u32, 0x3081_u16, 0x4633_u16, StaticArray[0x95_u8, 0x81_u8, 0x22_u8, 0x6f_u8, 0xbe_u8, 0x57_u8, 0x69_u8, 0x5d_u8])
     def query_interface(this : IDMLOperator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1833,7 +2341,6 @@ module Win32cr::AI::MachineLearning::DirectML
 
 
   @[Extern]
-  #@[Com("dcb821a8-1039-441e-9f1c-b1759c2f3cec")]
   record IDMLDispatchable, lpVtbl : IDMLDispatchableVtbl* do
     GUID = LibC::GUID.new(0xdcb821a8_u32, 0x1039_u16, 0x441e_u16, StaticArray[0x9f_u8, 0x1c_u8, 0xb1_u8, 0x75_u8, 0x9c_u8, 0x2f_u8, 0x3c_u8, 0xec_u8])
     def query_interface(this : IDMLDispatchable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1880,7 +2387,6 @@ module Win32cr::AI::MachineLearning::DirectML
 
 
   @[Extern]
-  #@[Com("6b15e56a-bf5c-4902-92d8-da3a650afea4")]
   record IDMLCompiledOperator, lpVtbl : IDMLCompiledOperatorVtbl* do
     GUID = LibC::GUID.new(0x6b15e56a_u32, 0xbf5c_u16, 0x4902_u16, StaticArray[0x92_u8, 0xd8_u8, 0xda_u8, 0x3a_u8, 0x65_u8, 0xa_u8, 0xfe_u8, 0xa4_u8])
     def query_interface(this : IDMLCompiledOperator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1928,7 +2434,6 @@ module Win32cr::AI::MachineLearning::DirectML
 
 
   @[Extern]
-  #@[Com("427c1113-435c-469c-8676-4d5dd072f813")]
   record IDMLOperatorInitializer, lpVtbl : IDMLOperatorInitializerVtbl* do
     GUID = LibC::GUID.new(0x427c1113_u32, 0x435c_u16, 0x469c_u16, StaticArray[0x86_u8, 0x76_u8, 0x4d_u8, 0x5d_u8, 0xd0_u8, 0x72_u8, 0xf8_u8, 0x13_u8])
     def query_interface(this : IDMLOperatorInitializer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -1982,7 +2487,6 @@ module Win32cr::AI::MachineLearning::DirectML
 
 
   @[Extern]
-  #@[Com("29c687dc-de74-4e3b-ab00-1168f2fc3cfc")]
   record IDMLBindingTable, lpVtbl : IDMLBindingTableVtbl* do
     GUID = LibC::GUID.new(0x29c687dc_u32, 0xde74_u16, 0x4e3b_u16, StaticArray[0xab_u8, 0x0_u8, 0x11_u8, 0x68_u8, 0xf2_u8, 0xfc_u8, 0x3c_u8, 0xfc_u8])
     def query_interface(this : IDMLBindingTable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2041,7 +2545,6 @@ module Win32cr::AI::MachineLearning::DirectML
 
 
   @[Extern]
-  #@[Com("e6857a76-2e3e-4fdd-bff4-5d2ba10fb453")]
   record IDMLCommandRecorder, lpVtbl : IDMLCommandRecorderVtbl* do
     GUID = LibC::GUID.new(0xe6857a76_u32, 0x2e3e_u16, 0x4fdd_u16, StaticArray[0xbf_u8, 0xf4_u8, 0x5d_u8, 0x2b_u8, 0xa1_u8, 0xf_u8, 0xb4_u8, 0x53_u8])
     def query_interface(this : IDMLCommandRecorder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2083,7 +2586,6 @@ module Win32cr::AI::MachineLearning::DirectML
 
 
   @[Extern]
-  #@[Com("7d6f3ac9-394a-4ac3-92a7-390cc57a8217")]
   record IDMLDebugDevice, lpVtbl : IDMLDebugDeviceVtbl* do
     GUID = LibC::GUID.new(0x7d6f3ac9_u32, 0x394a_u16, 0x4ac3_u16, StaticArray[0x92_u8, 0xa7_u8, 0x39_u8, 0xc_u8, 0xc5_u8, 0x7a_u8, 0x82_u8, 0x17_u8])
     def query_interface(this : IDMLDebugDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
@@ -2124,7 +2626,6 @@ module Win32cr::AI::MachineLearning::DirectML
 
 
   @[Extern]
-  #@[Com("a0884f9a-d2be-4355-aa5d-5901281ad1d2")]
   record IDMLDevice1, lpVtbl : IDMLDevice1Vtbl* do
     GUID = LibC::GUID.new(0xa0884f9a_u32, 0xd2be_u16, 0x4355_u16, StaticArray[0xaa_u8, 0x5d_u8, 0x59_u8, 0x1_u8, 0x28_u8, 0x1a_u8, 0xd1_u8, 0xd2_u8])
     def query_interface(this : IDMLDevice1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT

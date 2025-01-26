@@ -3,7 +3,7 @@ require "./sip.cr"
 require "./../cryptography.cr"
 
 module Win32cr::Security::Cryptography::Catalog
-  alias PFN_CDF_PARSE_ERROR_CALLBACK = Proc(UInt32, UInt32, Win32cr::Foundation::PWSTR, Void)*
+  alias PFN_CDF_PARSE_ERROR_CALLBACK = Proc(UInt32, UInt32, Win32cr::Foundation::PWSTR, Void)
 
   Szoid_catalog_list = "1.3.6.1.4.1.311.12.1.1"
   Szoid_catalog_list_member = "1.3.6.1.4.1.311.12.1.2"
@@ -52,61 +52,79 @@ module Win32cr::Security::Cryptography::Catalog
   end
 
   @[Extern]
-  record CRYPTCATSTORE,
-    cbStruct : UInt32,
-    dwPublicVersion : UInt32,
-    pwszP7File : Win32cr::Foundation::PWSTR,
-    hProv : LibC::UIntPtrT,
-    dwEncodingType : UInt32,
-    fdwStoreFlags : Win32cr::Security::Cryptography::Catalog::CRYPTCAT_OPEN_FLAGS,
-    hReserved : Win32cr::Foundation::HANDLE,
-    hAttrs : Win32cr::Foundation::HANDLE,
-    hCryptMsg : Void*,
-    hSorted : Win32cr::Foundation::HANDLE
+  struct CRYPTCATSTORE
+    property cbStruct : UInt32
+    property dwPublicVersion : UInt32
+    property pwszP7File : Win32cr::Foundation::PWSTR
+    property hProv : LibC::UIntPtrT
+    property dwEncodingType : UInt32
+    property fdwStoreFlags : Win32cr::Security::Cryptography::Catalog::CRYPTCAT_OPEN_FLAGS
+    property hReserved : Win32cr::Foundation::HANDLE
+    property hAttrs : Win32cr::Foundation::HANDLE
+    property hCryptMsg : Void*
+    property hSorted : Win32cr::Foundation::HANDLE
+    def initialize(@cbStruct : UInt32, @dwPublicVersion : UInt32, @pwszP7File : Win32cr::Foundation::PWSTR, @hProv : LibC::UIntPtrT, @dwEncodingType : UInt32, @fdwStoreFlags : Win32cr::Security::Cryptography::Catalog::CRYPTCAT_OPEN_FLAGS, @hReserved : Win32cr::Foundation::HANDLE, @hAttrs : Win32cr::Foundation::HANDLE, @hCryptMsg : Void*, @hSorted : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record CRYPTCATMEMBER,
-    cbStruct : UInt32,
-    pwszReferenceTag : Win32cr::Foundation::PWSTR,
-    pwszFileName : Win32cr::Foundation::PWSTR,
-    gSubjectType : LibC::GUID,
-    fdwMemberFlags : UInt32,
-    pIndirectData : Win32cr::Security::Cryptography::Sip::SIP_INDIRECT_DATA*,
-    dwCertVersion : UInt32,
-    dwReserved : UInt32,
-    hReserved : Win32cr::Foundation::HANDLE,
-    sEncodedIndirectData : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
-    sEncodedMemberInfo : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+  struct CRYPTCATMEMBER
+    property cbStruct : UInt32
+    property pwszReferenceTag : Win32cr::Foundation::PWSTR
+    property pwszFileName : Win32cr::Foundation::PWSTR
+    property gSubjectType : LibC::GUID
+    property fdwMemberFlags : UInt32
+    property pIndirectData : Win32cr::Security::Cryptography::Sip::SIP_INDIRECT_DATA*
+    property dwCertVersion : UInt32
+    property dwReserved : UInt32
+    property hReserved : Win32cr::Foundation::HANDLE
+    property sEncodedIndirectData : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property sEncodedMemberInfo : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    def initialize(@cbStruct : UInt32, @pwszReferenceTag : Win32cr::Foundation::PWSTR, @pwszFileName : Win32cr::Foundation::PWSTR, @gSubjectType : LibC::GUID, @fdwMemberFlags : UInt32, @pIndirectData : Win32cr::Security::Cryptography::Sip::SIP_INDIRECT_DATA*, @dwCertVersion : UInt32, @dwReserved : UInt32, @hReserved : Win32cr::Foundation::HANDLE, @sEncodedIndirectData : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @sEncodedMemberInfo : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    end
+  end
 
   @[Extern]
-  record CRYPTCATATTRIBUTE,
-    cbStruct : UInt32,
-    pwszReferenceTag : Win32cr::Foundation::PWSTR,
-    dwAttrTypeAndAction : UInt32,
-    cbValue : UInt32,
-    pbValue : UInt8*,
-    dwReserved : UInt32
+  struct CRYPTCATATTRIBUTE
+    property cbStruct : UInt32
+    property pwszReferenceTag : Win32cr::Foundation::PWSTR
+    property dwAttrTypeAndAction : UInt32
+    property cbValue : UInt32
+    property pbValue : UInt8*
+    property dwReserved : UInt32
+    def initialize(@cbStruct : UInt32, @pwszReferenceTag : Win32cr::Foundation::PWSTR, @dwAttrTypeAndAction : UInt32, @cbValue : UInt32, @pbValue : UInt8*, @dwReserved : UInt32)
+    end
+  end
 
   @[Extern]
-  record CRYPTCATCDF,
-    cbStruct : UInt32,
-    hFile : Win32cr::Foundation::HANDLE,
-    dwCurFilePos : UInt32,
-    dwLastMemberOffset : UInt32,
-    fEOF : Win32cr::Foundation::BOOL,
-    pwszResultDir : Win32cr::Foundation::PWSTR,
-    hCATStore : Win32cr::Foundation::HANDLE
+  struct CRYPTCATCDF
+    property cbStruct : UInt32
+    property hFile : Win32cr::Foundation::HANDLE
+    property dwCurFilePos : UInt32
+    property dwLastMemberOffset : UInt32
+    property fEOF : Win32cr::Foundation::BOOL
+    property pwszResultDir : Win32cr::Foundation::PWSTR
+    property hCATStore : Win32cr::Foundation::HANDLE
+    def initialize(@cbStruct : UInt32, @hFile : Win32cr::Foundation::HANDLE, @dwCurFilePos : UInt32, @dwLastMemberOffset : UInt32, @fEOF : Win32cr::Foundation::BOOL, @pwszResultDir : Win32cr::Foundation::PWSTR, @hCATStore : Win32cr::Foundation::HANDLE)
+    end
+  end
 
   @[Extern]
-  record CATALOG_INFO,
-    cbStruct : UInt32,
-    wszCatalogFile : UInt16[260]
+  struct CATALOG_INFO
+    property cbStruct : UInt32
+    property wszCatalogFile : UInt16[260]
+    def initialize(@cbStruct : UInt32, @wszCatalogFile : UInt16[260])
+    end
+  end
 
   @[Extern]
-  record MS_ADDINFO_CATALOGMEMBER,
-    cbStruct : UInt32,
-    pStore : Win32cr::Security::Cryptography::Catalog::CRYPTCATSTORE*,
-    pMember : Win32cr::Security::Cryptography::Catalog::CRYPTCATMEMBER*
+  struct MS_ADDINFO_CATALOGMEMBER
+    property cbStruct : UInt32
+    property pStore : Win32cr::Security::Cryptography::Catalog::CRYPTCATSTORE*
+    property pMember : Win32cr::Security::Cryptography::Catalog::CRYPTCATMEMBER*
+    def initialize(@cbStruct : UInt32, @pStore : Win32cr::Security::Cryptography::Catalog::CRYPTCATSTORE*, @pMember : Win32cr::Security::Cryptography::Catalog::CRYPTCATMEMBER*)
+    end
+  end
 
   @[Link("wintrust")]
   lib C
